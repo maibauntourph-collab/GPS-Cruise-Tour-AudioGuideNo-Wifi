@@ -53,10 +53,12 @@ export default function Home() {
   }, [position, audioEnabled, landmarks]);
 
   const handleLandmarkRoute = (landmark: Landmark) => {
-    if (!position) return;
+    const startPosition = position 
+      ? [position.latitude, position.longitude] as [number, number]
+      : [41.8902, 12.4922] as [number, number]; // Rome center as fallback
 
     setActiveRoute({
-      start: [position.latitude, position.longitude],
+      start: startPosition,
       end: [landmark.lat, landmark.lng],
     });
   };
