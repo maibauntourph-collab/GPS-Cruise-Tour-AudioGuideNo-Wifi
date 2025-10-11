@@ -33,7 +33,8 @@ This application provides an interactive map experience for tourists visiting ma
 - Photo gallery with 2-3 photos per landmark
 - Full-screen photo viewer with navigation
 - Architect, year built, and category information
-- Info button opens detailed modal view
+- Click landmark card or Info button to view detailed information
+- Detailed modal shows full description, historical info, and photos
 
 ### Visited Landmarks Tracking
 - PostgreSQL database persistence

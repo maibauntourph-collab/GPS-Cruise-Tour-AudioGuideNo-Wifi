@@ -53,7 +53,12 @@ export function LandmarkList({
         </div>
         <div className="divide-y">
           {sortedLandmarks.map(({ landmark, distance }) => (
-            <div key={landmark.id} className="p-4 hover-elevate" data-testid={`card-landmark-${landmark.id}`}>
+            <div 
+              key={landmark.id} 
+              className="p-4 hover-elevate cursor-pointer" 
+              data-testid={`card-landmark-${landmark.id}`}
+              onClick={() => setSelectedLandmark(landmark)}
+            >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
@@ -82,7 +87,10 @@ export function LandmarkList({
                   <Button
                     size="icon"
                     variant="outline"
-                    onClick={() => setSelectedLandmark(landmark)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedLandmark(landmark);
+                    }}
                     data-testid={`button-info-${landmark.id}`}
                   >
                     <Info className="w-4 h-4" />
@@ -90,7 +98,10 @@ export function LandmarkList({
                   <Button
                     size="icon"
                     variant="outline"
-                    onClick={() => onLandmarkRoute(landmark)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onLandmarkRoute(landmark);
+                    }}
                     data-testid={`button-navigate-${landmark.id}`}
                   >
                     <Navigation className="w-4 h-4" />
