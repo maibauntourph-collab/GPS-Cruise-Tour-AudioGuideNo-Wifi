@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarTrigger, SidebarInset } from '@/components/ui/sidebar';
 import { MapView } from '@/components/MapView';
 import { LandmarkList } from '@/components/LandmarkList';
 import { AppSidebar } from '@/components/AppSidebar';
@@ -147,7 +147,7 @@ export default function Home() {
         cityName={selectedCity?.name}
       />
       
-      <main className="flex-1 flex flex-col h-screen w-full">
+      <SidebarInset className="flex w-full flex-1 flex-col">
         <header className="flex items-center gap-2 p-2 border-b bg-background z-[1001]">
           <SidebarTrigger data-testid="button-sidebar-toggle" />
           <h1 className="font-serif font-semibold text-lg">GPS Audio Guide</h1>
@@ -176,7 +176,7 @@ export default function Home() {
           <OfflineIndicator />
           <InstallPrompt />
         </div>
-      </main>
+      </SidebarInset>
     </>
   );
 }
