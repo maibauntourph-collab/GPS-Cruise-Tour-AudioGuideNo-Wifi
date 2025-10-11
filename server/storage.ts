@@ -1,13 +1,44 @@
-import { type Landmark } from "@shared/schema";
+import { type Landmark, type City } from "@shared/schema";
 
 export interface IStorage {
-  getLandmarks(): Promise<Landmark[]>;
+  getCities(): Promise<City[]>;
+  getCity(id: string): Promise<City | undefined>;
+  getLandmarks(cityId?: string): Promise<Landmark[]>;
   getLandmark(id: string): Promise<Landmark | undefined>;
 }
 
-const ROME_LANDMARKS: Landmark[] = [
+const CITIES: City[] = [
+  {
+    id: 'rome',
+    name: 'Rome',
+    country: 'Italy',
+    lat: 41.8902,
+    lng: 12.4922,
+    zoom: 14
+  },
+  {
+    id: 'paris',
+    name: 'Paris',
+    country: 'France',
+    lat: 48.8566,
+    lng: 2.3522,
+    zoom: 13
+  },
+  {
+    id: 'london',
+    name: 'London',
+    country: 'United Kingdom',
+    lat: 51.5074,
+    lng: -0.1278,
+    zoom: 13
+  }
+];
+
+const LANDMARKS: Landmark[] = [
+  // Rome landmarks
   {
     id: 'colosseum',
+    cityId: 'rome',
     name: 'Colosseum',
     lat: 41.8902,
     lng: 12.4922,
@@ -18,6 +49,7 @@ const ROME_LANDMARKS: Landmark[] = [
   },
   {
     id: 'roman_forum',
+    cityId: 'rome',
     name: 'Roman Forum',
     lat: 41.8925,
     lng: 12.4853,
@@ -28,6 +60,7 @@ const ROME_LANDMARKS: Landmark[] = [
   },
   {
     id: 'trevi_fountain',
+    cityId: 'rome',
     name: 'Trevi Fountain',
     lat: 41.9009,
     lng: 12.4833,
@@ -38,6 +71,7 @@ const ROME_LANDMARKS: Landmark[] = [
   },
   {
     id: 'pantheon',
+    cityId: 'rome',
     name: 'Pantheon',
     lat: 41.8986,
     lng: 12.4768,
@@ -48,6 +82,7 @@ const ROME_LANDMARKS: Landmark[] = [
   },
   {
     id: 'spanish_steps',
+    cityId: 'rome',
     name: 'Spanish Steps',
     lat: 41.9059,
     lng: 12.4823,
@@ -55,16 +90,117 @@ const ROME_LANDMARKS: Landmark[] = [
     narration: 'Welcome to the Spanish Steps, famous as a filming location for the movie "Roman Holiday".',
     description: 'A monumental stairway of 135 steps',
     category: 'Landmark'
+  },
+  // Paris landmarks
+  {
+    id: 'eiffel_tower',
+    cityId: 'paris',
+    name: 'Eiffel Tower',
+    lat: 48.8584,
+    lng: 2.2945,
+    radius: 70,
+    narration: 'Welcome to the Eiffel Tower, the iron lady of Paris. Built for the 1889 World\'s Fair, it has become the global icon of France.',
+    description: 'The most-visited paid monument in the world',
+    category: 'Monument'
+  },
+  {
+    id: 'louvre',
+    cityId: 'paris',
+    name: 'Louvre Museum',
+    lat: 48.8606,
+    lng: 2.3376,
+    radius: 60,
+    narration: 'You are at the Louvre Museum, the world\'s largest art museum. Home to thousands of works including the Mona Lisa.',
+    description: 'The world\'s largest art museum and a historic monument',
+    category: 'Museum'
+  },
+  {
+    id: 'notre_dame',
+    cityId: 'paris',
+    name: 'Notre-Dame Cathedral',
+    lat: 48.8530,
+    lng: 2.3499,
+    radius: 50,
+    narration: 'This is Notre-Dame Cathedral, a masterpiece of French Gothic architecture dating back to the 12th century.',
+    description: 'A medieval Catholic cathedral and UNESCO World Heritage Site',
+    category: 'Cathedral'
+  },
+  {
+    id: 'arc_triomphe',
+    cityId: 'paris',
+    name: 'Arc de Triomphe',
+    lat: 48.8738,
+    lng: 2.2950,
+    radius: 50,
+    narration: 'The Arc de Triomphe honors those who fought for France. It stands at the center of Place Charles de Gaulle.',
+    description: 'One of the most famous monuments in Paris',
+    category: 'Monument'
+  },
+  // London landmarks
+  {
+    id: 'big_ben',
+    cityId: 'london',
+    name: 'Big Ben',
+    lat: 51.5007,
+    lng: -0.1246,
+    radius: 50,
+    narration: 'Welcome to Big Ben, the iconic clock tower of London. Officially known as Elizabeth Tower, its chimes are known worldwide.',
+    description: 'The Great Clock of Westminster',
+    category: 'Monument'
+  },
+  {
+    id: 'tower_bridge',
+    cityId: 'london',
+    name: 'Tower Bridge',
+    lat: 51.5055,
+    lng: -0.0754,
+    radius: 60,
+    narration: 'You are at Tower Bridge, one of London\'s most famous landmarks. This combined bascule and suspension bridge crosses the River Thames.',
+    description: 'An iconic symbol of London since 1894',
+    category: 'Bridge'
+  },
+  {
+    id: 'buckingham_palace',
+    cityId: 'london',
+    name: 'Buckingham Palace',
+    lat: 51.5014,
+    lng: -0.1419,
+    radius: 70,
+    narration: 'This is Buckingham Palace, the London residence of the British monarch. Watch the famous Changing of the Guard ceremony.',
+    description: 'The official residence of the British monarch',
+    category: 'Palace'
+  },
+  {
+    id: 'london_eye',
+    cityId: 'london',
+    name: 'London Eye',
+    lat: 51.5033,
+    lng: -0.1195,
+    radius: 50,
+    narration: 'The London Eye is a giant observation wheel offering spectacular views over the city.',
+    description: 'Europe\'s tallest cantilevered observation wheel',
+    category: 'Attraction'
   }
 ];
 
 export class MemStorage implements IStorage {
-  async getLandmarks(): Promise<Landmark[]> {
-    return ROME_LANDMARKS;
+  async getCities(): Promise<City[]> {
+    return CITIES;
+  }
+
+  async getCity(id: string): Promise<City | undefined> {
+    return CITIES.find(city => city.id === id);
+  }
+
+  async getLandmarks(cityId?: string): Promise<Landmark[]> {
+    if (cityId) {
+      return LANDMARKS.filter(landmark => landmark.cityId === cityId);
+    }
+    return LANDMARKS;
   }
 
   async getLandmark(id: string): Promise<Landmark | undefined> {
-    return ROME_LANDMARKS.find(landmark => landmark.id === id);
+    return LANDMARKS.find(landmark => landmark.id === id);
   }
 }
 

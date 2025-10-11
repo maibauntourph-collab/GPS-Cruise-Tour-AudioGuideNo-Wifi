@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from 'react-leaflet';
+import { useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
 import { Button } from '@/components/ui/button';
 import { Navigation } from 'lucide-react';
+import { getTranslatedContent } from '@/lib/translations';
 
 const ROME_CENTER: [number, number] = [41.8902, 12.4922];
 
@@ -155,6 +156,21 @@ interface MapViewProps {
   onLandmarkRoute: (landmark: Landmark) => void;
   activeRoute: { start: [number, number]; end: [number, number] } | null;
   onRouteFound?: (route: any) => void;
+  cityCenter?: [number, number];
+  cityZoom?: number;
+  selectedLanguage?: string;
+}
+
+function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (center && zoom) {
+      map.setView(center, zoom, { animate: true });
+    }
+  }, [center, zoom, map]);
+
+  return null;
 }
 
 export function MapView({
@@ -163,17 +179,21 @@ export function MapView({
   onLandmarkRoute,
   activeRoute,
   onRouteFound,
+  cityCenter,
+  cityZoom,
+  selectedLanguage = 'en',
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)');
 
   return (
     <MapContainer
-      center={ROME_CENTER}
-      zoom={14}
+      center={cityCenter || ROME_CENTER}
+      zoom={cityZoom || 14}
       className="h-full w-full"
       zoomControl={true}
     >
       <MapUpdater position={userPosition} />
+      <CityUpdater center={cityCenter} zoom={cityZoom} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -188,11 +208,11 @@ export function MapView({
           <Popup>
             <div className="p-2">
               <h3 className="font-serif font-semibold text-lg mb-1">
-                {landmark.name}
+                {getTranslatedContent(landmark, selectedLanguage, 'name')}
               </h3>
-              {landmark.description && (
+              {getTranslatedContent(landmark, selectedLanguage, 'description') && (
                 <p className="text-sm text-muted-foreground mb-3">
-                  {landmark.description}
+                  {getTranslatedContent(landmark, selectedLanguage, 'description')}
                 </p>
               )}
               <Button

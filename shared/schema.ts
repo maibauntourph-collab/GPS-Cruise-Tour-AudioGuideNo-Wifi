@@ -1,8 +1,51 @@
 import { z } from "zod";
 
+// City schema
+export const citySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  country: z.string(),
+  lat: z.number(),
+  lng: z.number(),
+  zoom: z.number().default(14),
+});
+
+export type City = z.infer<typeof citySchema>;
+
+// Language schema
+export const languageSchema = z.object({
+  code: z.string(),
+  name: z.string(),
+  flag: z.string(),
+});
+
+export type Language = z.infer<typeof languageSchema>;
+
+// Translations schema
+export const translationsSchema = z.object({
+  en: z.object({
+    name: z.string(),
+    narration: z.string(),
+    description: z.string().optional(),
+  }),
+  it: z.object({
+    name: z.string(),
+    narration: z.string(),
+    description: z.string().optional(),
+  }).optional(),
+  ko: z.object({
+    name: z.string(),
+    narration: z.string(),
+    description: z.string().optional(),
+  }).optional(),
+});
+
+export type Translations = z.infer<typeof translationsSchema>;
+
 // Landmark/POI schema
 export const landmarkSchema = z.object({
   id: z.string(),
+  cityId: z.string(),
   name: z.string(),
   lat: z.number(),
   lng: z.number(),
@@ -10,6 +53,7 @@ export const landmarkSchema = z.object({
   narration: z.string(),
   description: z.string().optional(),
   category: z.string().optional(),
+  translations: translationsSchema.optional(),
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;

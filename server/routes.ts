@@ -3,9 +3,31 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  app.get("/api/cities", async (req, res) => {
+    try {
+      const cities = await storage.getCities();
+      res.json(cities);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch cities" });
+    }
+  });
+
+  app.get("/api/cities/:id", async (req, res) => {
+    try {
+      const city = await storage.getCity(req.params.id);
+      if (!city) {
+        return res.status(404).json({ error: "City not found" });
+      }
+      res.json(city);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch city" });
+    }
+  });
+
   app.get("/api/landmarks", async (req, res) => {
     try {
-      const landmarks = await storage.getLandmarks();
+      const cityId = req.query.cityId as string | undefined;
+      const landmarks = await storage.getLandmarks(cityId);
       res.json(landmarks);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch landmarks" });

@@ -9,7 +9,7 @@ class AudioService {
     this.isEnabled = true;
   }
 
-  speak(text: string, landmarkId: string) {
+  speak(text: string, landmarkId: string, language: string = 'en') {
     if (!this.isEnabled || this.spokenLandmarks.has(landmarkId)) {
       return;
     }
@@ -17,7 +17,15 @@ class AudioService {
     this.synthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
+    
+    // Map language codes to speech synthesis language codes
+    const langMap: { [key: string]: string } = {
+      'en': 'en-US',
+      'it': 'it-IT',
+      'ko': 'ko-KR'
+    };
+    
+    utterance.lang = langMap[language] || 'en-US';
     utterance.rate = 0.9;
     utterance.pitch = 1.0;
     utterance.volume = 1.0;

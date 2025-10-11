@@ -4,12 +4,14 @@ import { Badge } from '@/components/ui/badge';
 import { Landmark, GpsPosition } from '@shared/schema';
 import { Navigation, MapPin, Volume2 } from 'lucide-react';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
+import { getTranslatedContent } from '@/lib/translations';
 
 interface LandmarkListProps {
   landmarks: Landmark[];
   userPosition: GpsPosition | null;
   onLandmarkRoute: (landmark: Landmark) => void;
   spokenLandmarks: Set<string>;
+  selectedLanguage?: string;
 }
 
 export function LandmarkList({
@@ -17,6 +19,7 @@ export function LandmarkList({
   userPosition,
   onLandmarkRoute,
   spokenLandmarks,
+  selectedLanguage = 'en',
 }: LandmarkListProps) {
   const landmarksWithDistance = landmarks.map((landmark) => {
     const distance = userPosition
@@ -52,7 +55,7 @@ export function LandmarkList({
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <h4 className="font-serif font-semibold truncate">
-                      {landmark.name}
+                      {getTranslatedContent(landmark, selectedLanguage, 'name')}
                     </h4>
                     {spokenLandmarks.has(landmark.id) && (
                       <Badge variant="secondary" className="gap-1 shrink-0">
@@ -61,9 +64,9 @@ export function LandmarkList({
                       </Badge>
                     )}
                   </div>
-                  {landmark.description && (
+                  {getTranslatedContent(landmark, selectedLanguage, 'description') && (
                     <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
-                      {landmark.description}
+                      {getTranslatedContent(landmark, selectedLanguage, 'description')}
                     </p>
                   )}
                   {distance !== null && (
