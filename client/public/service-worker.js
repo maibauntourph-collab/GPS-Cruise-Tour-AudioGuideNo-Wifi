@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'gps-audio-guide-v1';
+const CACHE_VERSION = 'gps-audio-guide-v2';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const MAP_TILES_CACHE = `${CACHE_VERSION}-map-tiles`;
@@ -24,12 +24,31 @@ self.addEventListener('install', (event) => {
   console.log('[Service Worker] Installing...');
   
   event.waitUntil(
-    caches.open(STATIC_CACHE)
-      .then((cache) => {
+    Promise.all([
+      caches.open(STATIC_CACHE).then((cache) => {
         console.log('[Service Worker] Caching static assets');
         return cache.addAll(STATIC_ASSETS);
+      }),
+      caches.open(API_CACHE).then(async (cache) => {
+        console.log('[Service Worker] Pre-caching API data');
+        const cities = ['rome', 'paris', 'london'];
+        
+        try {
+          await cache.add('/api/cities');
+          
+          for (const cityId of cities) {
+            try {
+              await cache.add(`/api/landmarks?cityId=${cityId}`);
+              console.log(`[Service Worker] Cached landmarks for ${cityId}`);
+            } catch (err) {
+              console.warn(`[Service Worker] Failed to cache ${cityId}:`, err.message);
+            }
+          }
+        } catch (err) {
+          console.warn('[Service Worker] Failed to pre-cache API data:', err.message);
+        }
       })
-      .then(() => self.skipWaiting())
+    ]).then(() => self.skipWaiting())
   );
 });
 
@@ -174,6 +193,7 @@ async function handleAPIRequest(request) {
     return response;
   } catch (error) {
     console.log('[Service Worker] API request failed, trying cache:', request.url);
+    console.log('[Service Worker] Error:', error.message);
     const cached = await caches.match(request);
     
     if (cached) {
@@ -181,12 +201,47 @@ async function handleAPIRequest(request) {
       return cached;
     }
     
+    console.log('[Service Worker] No cache found, using fallback data');
+    
     if (url.pathname.includes('/cities')) {
       return new Response(JSON.stringify([
-        { id: 'rome', name: 'Rome', country: 'Italy' },
-        { id: 'paris', name: 'Paris', country: 'France' },
-        { id: 'london', name: 'London', country: 'United Kingdom' }
+        { id: 'rome', name: 'Rome', country: 'Italy', lat: 41.8902, lng: 12.4922, zoom: 13 },
+        { id: 'paris', name: 'Paris', country: 'France', lat: 48.8566, lng: 2.3522, zoom: 13 },
+        { id: 'london', name: 'London', country: 'United Kingdom', lat: 51.5074, lng: -0.1278, zoom: 13 }
       ]), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
+    if (url.pathname.includes('/landmarks')) {
+      const searchParams = new URLSearchParams(url.search);
+      const cityId = searchParams.get('cityId') || 'rome';
+      
+      const fallbackLandmarks = {
+        rome: [
+          { id: 'colosseum', cityId: 'rome', name: 'Colosseum', lat: 41.8902, lng: 12.4922, radius: 70, category: 'Historical', description: 'The largest amphitheater ever built', narration: 'You are near the Colosseum, the largest amphitheater ever built.' },
+          { id: 'roman-forum', cityId: 'rome', name: 'Roman Forum', lat: 41.8925, lng: 12.4853, radius: 60, category: 'Historical', description: 'The center of ancient Roman public life', narration: 'You are near the Roman Forum.' },
+          { id: 'trevi-fountain', cityId: 'rome', name: 'Trevi Fountain', lat: 41.9009, lng: 12.4833, radius: 50, category: 'Monument', description: 'A stunning 18th-century Baroque fountain', narration: 'You are near the Trevi Fountain.' },
+          { id: 'pantheon', cityId: 'rome', name: 'Pantheon', lat: 41.8986, lng: 12.4768, radius: 50, category: 'Historical', description: 'A former Roman temple, now a church', narration: 'You are near the Pantheon.' },
+          { id: 'spanish-steps', cityId: 'rome', name: 'Spanish Steps', lat: 41.9059, lng: 12.4823, radius: 50, category: 'Monument', description: 'A monumental stairway of 135 steps', narration: 'You are near the Spanish Steps.' }
+        ],
+        paris: [
+          { id: 'eiffel-tower', cityId: 'paris', name: 'Eiffel Tower', lat: 48.8584, lng: 2.2945, radius: 70, category: 'Monument', description: 'The iconic iron lattice tower', narration: 'You are near the Eiffel Tower.' },
+          { id: 'louvre', cityId: 'paris', name: 'Louvre Museum', lat: 48.8606, lng: 2.3376, radius: 60, category: 'Museum', description: 'The world\'s largest art museum', narration: 'You are near the Louvre Museum.' },
+          { id: 'notre-dame', cityId: 'paris', name: 'Notre-Dame Cathedral', lat: 48.8530, lng: 2.3499, radius: 50, category: 'Historical', description: 'A medieval Catholic cathedral', narration: 'You are near Notre-Dame Cathedral.' },
+          { id: 'arc-de-triomphe', cityId: 'paris', name: 'Arc de Triomphe', lat: 48.8738, lng: 2.2950, radius: 50, category: 'Monument', description: 'A monumental arch', narration: 'You are near the Arc de Triomphe.' }
+        ],
+        london: [
+          { id: 'big-ben', cityId: 'london', name: 'Big Ben', lat: 51.5007, lng: -0.1246, radius: 50, category: 'Monument', description: 'The iconic clock tower', narration: 'You are near Big Ben.' },
+          { id: 'tower-bridge', cityId: 'london', name: 'Tower Bridge', lat: 51.5055, lng: -0.0754, radius: 60, category: 'Historical', description: 'A combined bascule and suspension bridge', narration: 'You are near Tower Bridge.' },
+          { id: 'buckingham-palace', cityId: 'london', name: 'Buckingham Palace', lat: 51.5014, lng: -0.1419, radius: 70, category: 'Historical', description: 'The official residence of the British monarch', narration: 'You are near Buckingham Palace.' },
+          { id: 'london-eye', cityId: 'london', name: 'London Eye', lat: 51.5033, lng: -0.1196, radius: 50, category: 'Monument', description: 'A giant Ferris wheel', narration: 'You are near the London Eye.' }
+        ]
+      };
+      
+      const landmarks = fallbackLandmarks[cityId] || fallbackLandmarks.rome;
+      
+      return new Response(JSON.stringify(landmarks), {
         headers: { 'Content-Type': 'application/json' }
       });
     }
