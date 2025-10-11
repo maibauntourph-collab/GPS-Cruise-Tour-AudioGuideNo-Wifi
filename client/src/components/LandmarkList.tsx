@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Landmark, GpsPosition } from '@shared/schema';
 import { Navigation, MapPin, Volume2, Info } from 'lucide-react';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
-import { getTranslatedContent } from '@/lib/translations';
+import { getTranslatedContent, t } from '@/lib/translations';
 
 interface LandmarkListProps {
   landmarks: Landmark[];
@@ -47,7 +47,7 @@ export function LandmarkList({
         <div className="p-4 border-b">
           <h3 className="font-serif font-semibold text-lg flex items-center gap-2">
             <MapPin className="w-5 h-5 text-primary" />
-            Landmarks
+            {t('landmarks', selectedLanguage)}
           </h3>
         </div>
         <div className="divide-y">
@@ -67,7 +67,7 @@ export function LandmarkList({
                     {spokenLandmarks.has(landmark.id) && (
                       <Badge variant="secondary" className="gap-1 shrink-0">
                         <Volume2 className="w-3 h-3" />
-                        Heard
+                        {t('heard', selectedLanguage)}
                       </Badge>
                     )}
                   </div>
@@ -78,7 +78,7 @@ export function LandmarkList({
                   )}
                   {distance !== null && (
                     <p className="text-sm font-medium text-primary">
-                      {formatDistance(distance)} away
+                      {formatDistance(distance)} {t('away', selectedLanguage)}
                     </p>
                   )}
                 </div>
