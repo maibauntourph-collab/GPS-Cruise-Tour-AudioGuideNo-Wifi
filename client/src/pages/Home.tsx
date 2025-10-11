@@ -6,8 +6,11 @@ import { LandmarkList } from '@/components/LandmarkList';
 import { CitySelector } from '@/components/CitySelector';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { ProgressStats } from '@/components/ProgressStats';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { InstallPrompt } from '@/components/InstallPrompt';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
+import { useServiceWorker } from '@/hooks/useServiceWorker';
 import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent } from '@/lib/translations';
@@ -18,6 +21,7 @@ export default function Home() {
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
   const { markVisited, isVisited } = useVisitedLandmarks();
+  useServiceWorker();
   
   const { data: cities = [], isLoading: citiesLoading } = useQuery<City[]>({
     queryKey: ['/api/cities'],
@@ -187,6 +191,9 @@ export default function Home() {
         spokenLandmarks={spokenLandmarks}
         selectedLanguage={selectedLanguage}
       />
+
+      <OfflineIndicator />
+      <InstallPrompt />
     </div>
   );
 }
