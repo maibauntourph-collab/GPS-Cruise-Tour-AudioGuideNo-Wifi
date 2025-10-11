@@ -200,22 +200,65 @@ export function LandmarkPanel({
                   )}
                 </Button>
                 <div className="flex-1">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs text-muted-foreground">Playback Speed</span>
-                    <span className="text-xs font-medium">{playbackRate.toFixed(1)}x</span>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs text-muted-foreground">Speed</span>
+                    <span className="text-xs font-medium" data-testid="text-playback-speed">{playbackRate.toFixed(1)}x</span>
                   </div>
-                  <Slider
-                    value={[playbackRate]}
-                    onValueChange={handleRateChange}
-                    min={0.5}
-                    max={2.0}
-                    step={0.1}
-                    className="cursor-pointer"
-                    data-testid="slider-playback-rate"
-                  />
-                  <div className="flex items-center justify-between mt-1">
-                    <span className="text-xs text-muted-foreground">0.5x</span>
-                    <span className="text-xs text-muted-foreground">2.0x</span>
+                  <div className="flex items-center gap-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleRateChange([0.5])}
+                      className={`text-xs px-2 h-7 ${playbackRate === 0.5 ? 'bg-primary text-primary-foreground' : ''}`}
+                      data-testid="button-speed-0.5"
+                    >
+                      0.5x
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleRateChange([0.75])}
+                      className={`text-xs px-2 h-7 ${playbackRate === 0.75 ? 'bg-primary text-primary-foreground' : ''}`}
+                      data-testid="button-speed-0.75"
+                    >
+                      0.75x
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleRateChange([1.0])}
+                      className={`text-xs px-2 h-7 ${playbackRate === 1.0 ? 'bg-primary text-primary-foreground' : ''}`}
+                      data-testid="button-speed-1.0"
+                    >
+                      1.0x
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleRateChange([1.25])}
+                      className={`text-xs px-2 h-7 ${playbackRate === 1.25 ? 'bg-primary text-primary-foreground' : ''}`}
+                      data-testid="button-speed-1.25"
+                    >
+                      1.25x
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleRateChange([1.5])}
+                      className={`text-xs px-2 h-7 ${playbackRate === 1.5 ? 'bg-primary text-primary-foreground' : ''}`}
+                      data-testid="button-speed-1.5"
+                    >
+                      1.5x
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleRateChange([2.0])}
+                      className={`text-xs px-2 h-7 ${playbackRate === 2.0 ? 'bg-primary text-primary-foreground' : ''}`}
+                      data-testid="button-speed-2.0"
+                    >
+                      2.0x
+                    </Button>
                   </div>
                 </div>
               </div>
