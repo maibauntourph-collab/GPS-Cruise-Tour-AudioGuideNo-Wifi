@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { SidebarTrigger, SidebarInset } from '@/components/ui/sidebar';
 import { MapView } from '@/components/MapView';
 import { LandmarkList } from '@/components/LandmarkList';
+import { LandmarkPanel } from '@/components/LandmarkPanel';
 import { AppSidebar } from '@/components/AppSidebar';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { InstallPrompt } from '@/components/InstallPrompt';
@@ -43,6 +44,7 @@ export default function Home() {
   const [routeInfo, setRouteInfo] = useState<any>(null);
   const [spokenLandmarks, setSpokenLandmarks] = useState<Set<string>>(new Set());
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -95,6 +97,7 @@ export default function Home() {
   
   const handleCityChange = (cityId: string) => {
     setSelectedCityId(cityId);
+    setSelectedLandmark(null);
     setActiveRoute(null);
     audioService.reset();
     setSpokenLandmarks(new Set());
@@ -169,28 +172,48 @@ export default function Home() {
           <h1 className="font-serif font-semibold text-lg">GPS Audio Guide</h1>
         </header>
         
-        <div className="relative flex-1 overflow-hidden">
-          <MapView
-            landmarks={landmarks}
-            userPosition={position}
-            onLandmarkRoute={handleLandmarkRoute}
-            activeRoute={activeRoute}
-            onRouteFound={setRouteInfo}
-            cityCenter={selectedCity ? [selectedCity.lat, selectedCity.lng] : undefined}
-            cityZoom={selectedCity?.zoom}
-            selectedLanguage={selectedLanguage}
-          />
+        <div className="relative flex-1 overflow-hidden flex flex-col">
+          {/* Map Section - shrinks when landmark is selected */}
+          <div className={`relative ${selectedLandmark ? 'h-1/2' : 'flex-1'} transition-all duration-300`}>
+            <MapView
+              landmarks={landmarks}
+              userPosition={position}
+              onLandmarkRoute={handleLandmarkRoute}
+              activeRoute={activeRoute}
+              onRouteFound={setRouteInfo}
+              cityCenter={selectedCity ? [selectedCity.lat, selectedCity.lng] : undefined}
+              cityZoom={selectedCity?.zoom}
+              selectedLanguage={selectedLanguage}
+              isCompact={!!selectedLandmark}
+            />
 
-          <LandmarkList
-            landmarks={landmarks}
-            userPosition={position}
-            onLandmarkRoute={handleLandmarkRoute}
-            spokenLandmarks={spokenLandmarks}
-            selectedLanguage={selectedLanguage}
-          />
+            {/* Show landmark list only when no landmark is selected */}
+            {!selectedLandmark && (
+              <LandmarkList
+                landmarks={landmarks}
+                userPosition={position}
+                onLandmarkRoute={handleLandmarkRoute}
+                spokenLandmarks={spokenLandmarks}
+                selectedLanguage={selectedLanguage}
+                onLandmarkSelect={setSelectedLandmark}
+              />
+            )}
 
-          <OfflineIndicator />
-          <InstallPrompt />
+            <OfflineIndicator />
+            <InstallPrompt />
+          </div>
+
+          {/* Landmark Details Panel - shows when landmark is selected */}
+          {selectedLandmark && (
+            <div className="h-1/2 border-t">
+              <LandmarkPanel
+                landmark={selectedLandmark}
+                onClose={() => setSelectedLandmark(null)}
+                onNavigate={handleLandmarkRoute}
+                selectedLanguage={selectedLanguage}
+              />
+            </div>
+          )}
         </div>
       </SidebarInset>
     </>

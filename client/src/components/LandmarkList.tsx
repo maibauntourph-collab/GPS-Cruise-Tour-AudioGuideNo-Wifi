@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -6,7 +5,6 @@ import { Landmark, GpsPosition } from '@shared/schema';
 import { Navigation, MapPin, Volume2, Info } from 'lucide-react';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
 import { getTranslatedContent } from '@/lib/translations';
-import { LandmarkDetails } from './LandmarkDetails';
 
 interface LandmarkListProps {
   landmarks: Landmark[];
@@ -14,6 +12,7 @@ interface LandmarkListProps {
   onLandmarkRoute: (landmark: Landmark) => void;
   spokenLandmarks: Set<string>;
   selectedLanguage?: string;
+  onLandmarkSelect?: (landmark: Landmark) => void;
 }
 
 export function LandmarkList({
@@ -22,8 +21,8 @@ export function LandmarkList({
   onLandmarkRoute,
   spokenLandmarks,
   selectedLanguage = 'en',
+  onLandmarkSelect,
 }: LandmarkListProps) {
-  const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const landmarksWithDistance = landmarks.map((landmark) => {
     const distance = userPosition
       ? calculateDistance(
@@ -57,7 +56,7 @@ export function LandmarkList({
               key={landmark.id} 
               className="p-4 hover-elevate cursor-pointer" 
               data-testid={`card-landmark-${landmark.id}`}
-              onClick={() => setSelectedLandmark(landmark)}
+              onClick={() => onLandmarkSelect?.(landmark)}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
@@ -89,7 +88,7 @@ export function LandmarkList({
                     variant="outline"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedLandmark(landmark);
+                      onLandmarkSelect?.(landmark);
                     }}
                     data-testid={`button-info-${landmark.id}`}
                   >
@@ -112,14 +111,6 @@ export function LandmarkList({
           ))}
         </div>
       </Card>
-      
-      <LandmarkDetails
-        landmark={selectedLandmark}
-        open={selectedLandmark !== null}
-        onClose={() => setSelectedLandmark(null)}
-        onNavigate={onLandmarkRoute}
-        selectedLanguage={selectedLanguage}
-      />
     </div>
   );
 }
