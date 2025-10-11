@@ -15,6 +15,7 @@ import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines } fr
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { City } from '@shared/schema';
+import { t } from '@/lib/translations';
 
 interface AppSidebarProps {
   audioEnabled: boolean;
@@ -59,7 +60,7 @@ export function AppSidebar({
           <SidebarGroupContent className="space-y-4 px-2">
             <div className="space-y-3">
               <div>
-                <Label className="text-xs text-muted-foreground mb-2 block">City</Label>
+                <Label className="text-xs text-muted-foreground mb-2 block">{t('city', selectedLanguage)}</Label>
                 <CitySelector 
                   cities={cities}
                   selectedCityId={selectedCityId}
@@ -68,7 +69,7 @@ export function AppSidebar({
               </div>
               
               <div>
-                <Label className="text-xs text-muted-foreground mb-2 block">Language</Label>
+                <Label className="text-xs text-muted-foreground mb-2 block">{t('language', selectedLanguage)}</Label>
                 <LanguageSelector
                   selectedLanguage={selectedLanguage}
                   onLanguageChange={onLanguageChange}
@@ -79,7 +80,7 @@ export function AppSidebar({
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Controls</SidebarGroupLabel>
+          <SidebarGroupLabel>{t('audioGuide', selectedLanguage)}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -87,7 +88,7 @@ export function AppSidebar({
                   <div className="flex items-center gap-2">
                     {audioEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
                     <Label htmlFor="audio-toggle" className="text-sm cursor-pointer">
-                      Audio Guide {isSpeaking && '(Speaking...)'}
+                      {t('audioGuide', selectedLanguage)} {isSpeaking && '(Speaking...)'}
                     </Label>
                   </div>
                   <Switch 
@@ -104,7 +105,7 @@ export function AppSidebar({
                   <div className="flex items-center gap-2">
                     {offlineMode ? <WifiOff className="w-4 h-4" /> : <Wifi className="w-4 h-4" />}
                     <Label htmlFor="offline-toggle" className="text-sm cursor-pointer">
-                      Offline Mode
+                      {t('offlineMode', selectedLanguage)}
                     </Label>
                   </div>
                   <Switch 
@@ -120,7 +121,7 @@ export function AppSidebar({
                 <SidebarMenuItem>
                   <SidebarMenuButton onClick={onClearRoute} data-testid="button-clear-route">
                     <NavIcon className="w-4 h-4" />
-                    <span>Clear Route</span>
+                    <span>{t('clearRoute', selectedLanguage)}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
@@ -129,7 +130,7 @@ export function AppSidebar({
                 <SidebarMenuItem>
                   <SidebarMenuButton onClick={onTestAudio} data-testid="button-test-audio">
                     <AudioLines className="w-4 h-4" />
-                    <span>Test Audio</span>
+                    <span>{t('testAudio', selectedLanguage)}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
@@ -138,9 +139,9 @@ export function AppSidebar({
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Progress</SidebarGroupLabel>
+          <SidebarGroupLabel>{t('progress', selectedLanguage)}</SidebarGroupLabel>
           <SidebarGroupContent className="px-2">
-            <ProgressStats totalLandmarks={totalLandmarks} cityName={cityName} />
+            <ProgressStats totalLandmarks={totalLandmarks} cityName={cityName} selectedLanguage={selectedLanguage} />
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

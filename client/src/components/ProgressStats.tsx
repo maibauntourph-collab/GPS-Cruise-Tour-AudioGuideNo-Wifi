@@ -2,13 +2,15 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, MapPin, TrendingUp } from 'lucide-react';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
+import { t } from '@/lib/translations';
 
 interface ProgressStatsProps {
   totalLandmarks: number;
   cityName?: string;
+  selectedLanguage?: string;
 }
 
-export function ProgressStats({ totalLandmarks, cityName }: ProgressStatsProps) {
+export function ProgressStats({ totalLandmarks, cityName, selectedLanguage = 'en' }: ProgressStatsProps) {
   const { visitedCount } = useVisitedLandmarks();
   const progress = totalLandmarks > 0 ? Math.round((visitedCount / totalLandmarks) * 100) : 0;
 
@@ -18,7 +20,7 @@ export function ProgressStats({ totalLandmarks, cityName }: ProgressStatsProps) 
         <div className="flex items-center justify-between">
           <h3 className="font-serif font-semibold flex items-center gap-2">
             <Trophy className="w-5 h-5 text-primary" />
-            Progress
+            {t('progress', selectedLanguage)}
           </h3>
           <Badge variant="secondary" data-testid="badge-progress-percentage">
             {progress}%
@@ -27,7 +29,7 @@ export function ProgressStats({ totalLandmarks, cityName }: ProgressStatsProps) 
 
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Landmarks Visited</span>
+            <span className="text-muted-foreground">{t('landmarksVisited', selectedLanguage)}</span>
             <span className="font-medium" data-testid="text-visited-count">
               {visitedCount} / {totalLandmarks}
             </span>
