@@ -31,6 +31,9 @@ const translationContentSchema = z.object({
   narration: z.string(),
   description: z.string().optional(),
   detailedDescription: z.string().optional(), // Long 5-minute reading content
+  historicalInfo: z.string().optional(), // Extended historical information
+  yearBuilt: z.string().optional(), // Construction year/period
+  architect: z.string().optional(), // Architect or creator name
 });
 
 // Dynamic translations schema - supports any language code

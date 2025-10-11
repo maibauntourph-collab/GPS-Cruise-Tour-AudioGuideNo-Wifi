@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { SidebarTrigger, SidebarInset } from '@/components/ui/sidebar';
+import { SidebarTrigger, SidebarInset, useSidebar } from '@/components/ui/sidebar';
 import { MapView } from '@/components/MapView';
 import { LandmarkList } from '@/components/LandmarkList';
 import { LandmarkPanel } from '@/components/LandmarkPanel';
@@ -16,6 +16,7 @@ import { getTranslatedContent } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
 
 export default function Home() {
+  const { open: sidebarOpen } = useSidebar();
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
@@ -173,7 +174,7 @@ export default function Home() {
         </header>
         
         <div className="relative flex-1 overflow-hidden flex flex-col">
-          {/* Map Section - shrinks when landmark is selected */}
+          {/* Map Section - shrinks when landmark is selected or sidebar is open */}
           <div className={`relative ${selectedLandmark ? 'h-1/2' : 'flex-1'} transition-all duration-300`}>
             <MapView
               landmarks={landmarks}
@@ -185,6 +186,7 @@ export default function Home() {
               cityZoom={selectedCity?.zoom}
               selectedLanguage={selectedLanguage}
               isCompact={!!selectedLandmark}
+              sidebarOpen={sidebarOpen}
             />
 
             {/* Show landmark list only when no landmark is selected */}

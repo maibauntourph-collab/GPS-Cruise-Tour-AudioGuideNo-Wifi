@@ -68,44 +68,84 @@ const LANDMARKS: Landmark[] = [
         name: 'Colosseum',
         narration: 'Welcome to the Colosseum, the iconic symbol of Rome. This ancient amphitheater once hosted gladiatorial contests and public spectacles.',
         description: 'The largest amphitheater ever built, a UNESCO World Heritage Site',
-        detailedDescription: 'The Colosseum, also known as the Flavian Amphitheatre, stands as one of the greatest architectural achievements of ancient Rome and remains the largest amphitheater ever constructed. Built between 70-80 AD under Emperors Vespasian and Titus, this magnificent elliptical structure could accommodate between 50,000 to 80,000 spectators who came to witness gladiatorial contests, animal hunts, mock naval battles, and public executions. The name "Colosseum" likely derives from the colossal bronze statue of Nero that once stood nearby. Constructed primarily of travertine limestone blocks, volcanic tuff, and brick-faced concrete, the Colosseum showcases the engineering brilliance of Roman architecture. Its innovative design featured a complex system of vaults and arches that distributed weight efficiently, allowing for its massive four-story facade. The exterior was adorned with Doric, Ionic, and Corinthian columns on successive levels, demonstrating the Romans mastery of classical architectural orders. The arena floor, once covered with wooden planking and sand, concealed an elaborate underground network called the hypogeum - a two-level subterranean complex of tunnels and chambers where gladiators, animals, and stage equipment were housed and prepared for the spectacles above. A sophisticated system of pulleys, ramps, and trapdoors allowed for dramatic entrances and special effects during performances. The Colosseum also featured a retractable awning system called the velarium, operated by sailors from the Roman navy, which provided shade for spectators during events. Despite suffering damage from earthquakes, stone-robbers who repurposed its materials for other buildings, and the general passage of time, the Colosseum has endured as a powerful symbol of Imperial Rome and ancient civilization. Today, it stands as one of Rome\'s most popular tourist attractions and a UNESCO World Heritage Site, drawing millions of visitors annually who come to marvel at this extraordinary monument to Roman engineering and entertainment.'
+        detailedDescription: 'The Colosseum, also known as the Flavian Amphitheatre, stands as one of the greatest architectural achievements of ancient Rome and remains the largest amphitheater ever constructed. Built between 70-80 AD under Emperors Vespasian and Titus, this magnificent elliptical structure could accommodate between 50,000 to 80,000 spectators who came to witness gladiatorial contests, animal hunts, mock naval battles, and public executions. The name "Colosseum" likely derives from the colossal bronze statue of Nero that once stood nearby. Constructed primarily of travertine limestone blocks, volcanic tuff, and brick-faced concrete, the Colosseum showcases the engineering brilliance of Roman architecture. Its innovative design featured a complex system of vaults and arches that distributed weight efficiently, allowing for its massive four-story facade. The exterior was adorned with Doric, Ionic, and Corinthian columns on successive levels, demonstrating the Romans mastery of classical architectural orders. The arena floor, once covered with wooden planking and sand, concealed an elaborate underground network called the hypogeum - a two-level subterranean complex of tunnels and chambers where gladiators, animals, and stage equipment were housed and prepared for the spectacles above. A sophisticated system of pulleys, ramps, and trapdoors allowed for dramatic entrances and special effects during performances. The Colosseum also featured a retractable awning system called the velarium, operated by sailors from the Roman navy, which provided shade for spectators during events. Despite suffering damage from earthquakes, stone-robbers who repurposed its materials for other buildings, and the general passage of time, the Colosseum has endured as a powerful symbol of Imperial Rome and ancient civilization. Today, it stands as one of Rome\'s most popular tourist attractions and a UNESCO World Heritage Site, drawing millions of visitors annually who come to marvel at this extraordinary monument to Roman engineering and entertainment.',
+        historicalInfo: 'The Colosseum, also known as the Flavian Amphitheatre, is an oval amphitheatre in the centre of Rome. Built of travertine limestone, tuff, and brick-faced concrete, it was the largest amphitheatre ever built at the time and held 50,000 to 80,000 spectators.',
+        yearBuilt: '70-80 AD',
+        architect: 'Emperors Vespasian and Titus'
       },
       it: {
         name: 'Colosseo',
         narration: 'Benvenuto al Colosseo, il simbolo iconico di Roma. Questo antico anfiteatro ospitava combattimenti tra gladiatori e spettacoli pubblici.',
         description: 'Il più grande anfiteatro mai costruito, patrimonio mondiale dell\'UNESCO',
-        detailedDescription: 'Il Colosseo, conosciuto anche come Anfiteatro Flavio, rappresenta uno dei più grandi risultati architettonici dell\'antica Roma e rimane il più grande anfiteatro mai costruito. Edificato tra il 70 e l\'80 d.C. sotto gli imperatori Vespasiano e Tito, questa magnifica struttura ellittica poteva ospitare tra 50.000 e 80.000 spettatori che venivano ad assistere a combattimenti tra gladiatori, cacce di animali, battaglie navali simulate ed esecuzioni pubbliche. Il nome "Colosseo" deriva probabilmente dalla colossale statua in bronzo di Nerone che un tempo si ergeva nelle vicinanze. Costruito principalmente con blocchi di pietra calcarea travertino, tufo vulcanico e cemento rivestito di mattoni, il Colosseo mostra la genialità ingegneristica dell\'architettura romana. Il suo design innovativo presentava un complesso sistema di volte e archi che distribuivano il peso in modo efficiente, consentendo la sua massiccia facciata a quattro piani. L\'esterno era adornato con colonne doriche, ioniche e corinzie su livelli successivi, dimostrando la padronanza romana degli ordini architettonici classici. Il pavimento dell\'arena, un tempo coperto da assi di legno e sabbia, nascondeva un\'elaborata rete sotterranea chiamata ipogeo - un complesso sotterraneo a due livelli di tunnel e camere dove gladiatori, animali e attrezzature sceniche venivano ospitati e preparati per gli spettacoli soprastanti. Un sofisticato sistema di carrucole, rampe e botole permetteva ingressi drammatici ed effetti speciali durante le rappresentazioni. Il Colosseo disponeva anche di un sistema di tende retrattili chiamato velarium, gestito da marinai della marina romana, che forniva ombra agli spettatori durante gli eventi. Nonostante i danni subiti da terremoti, saccheggiatori di pietra che ne hanno riutilizzato i materiali per altri edifici e il generale trascorrere del tempo, il Colosseo è rimasto un potente simbolo della Roma imperiale e della civiltà antica. Oggi si erge come una delle attrazioni turistiche più popolari di Roma e un sito patrimonio mondiale dell\'UNESCO, attirando milioni di visitatori ogni anno che vengono ad ammirare questo straordinario monumento all\'ingegneria e all\'intrattenimento romano.'
+        detailedDescription: 'Il Colosseo, conosciuto anche come Anfiteatro Flavio, rappresenta uno dei più grandi risultati architettonici dell\'antica Roma e rimane il più grande anfiteatro mai costruito. Edificato tra il 70 e l\'80 d.C. sotto gli imperatori Vespasiano e Tito, questa magnifica struttura ellittica poteva ospitare tra 50.000 e 80.000 spettatori che venivano ad assistere a combattimenti tra gladiatori, cacce di animali, battaglie navali simulate ed esecuzioni pubbliche. Il nome "Colosseo" deriva probabilmente dalla colossale statua in bronzo di Nerone che un tempo si ergeva nelle vicinanze. Costruito principalmente con blocchi di pietra calcarea travertino, tufo vulcanico e cemento rivestito di mattoni, il Colosseo mostra la genialità ingegneristica dell\'architettura romana. Il suo design innovativo presentava un complesso sistema di volte e archi che distribuivano il peso in modo efficiente, consentendo la sua massiccia facciata a quattro piani. L\'esterno era adornato con colonne doriche, ioniche e corinzie su livelli successivi, dimostrando la padronanza romana degli ordini architettonici classici. Il pavimento dell\'arena, un tempo coperto da assi di legno e sabbia, nascondeva un\'elaborata rete sotterranea chiamata ipogeo - un complesso sotterraneo a due livelli di tunnel e camere dove gladiatori, animali e attrezzature sceniche venivano ospitati e preparati per gli spettacoli soprastanti. Un sofisticato sistema di carrucole, rampe e botole permetteva ingressi drammatici ed effetti speciali durante le rappresentazioni. Il Colosseo disponeva anche di un sistema di tende retrattili chiamato velarium, gestito da marinai della marina romana, che forniva ombra agli spettatori durante gli eventi. Nonostante i danni subiti da terremoti, saccheggiatori di pietra che ne hanno riutilizzato i materiali per altri edifici e il generale trascorrere del tempo, il Colosseo è rimasto un potente simbolo della Roma imperiale e della civiltà antica. Oggi si erge come una delle attrazioni turistiche più popolari di Roma e un sito patrimonio mondiale dell\'UNESCO, attirando milioni di visitatori ogni anno che vengono ad ammirare questo straordinario monumento all\'ingegneria e all\'intrattenimento romano.',
+        historicalInfo: 'Il Colosseo, conosciuto anche come Anfiteatro Flavio, è un anfiteatro ovale nel centro di Roma. Costruito in pietra calcarea travertino, tufo e cemento rivestito di mattoni, era il più grande anfiteatro mai costruito all\'epoca e ospitava da 50.000 a 80.000 spettatori.',
+        yearBuilt: '70-80 d.C.',
+        architect: 'Imperatori Vespasiano e Tito'
       },
       ko: {
         name: '콜로세움',
         narration: '로마의 상징인 콜로세움에 오신 것을 환영합니다. 이 고대 원형 경기장은 한때 검투사 경기와 공개 행사를 개최했습니다.',
         description: '역사상 가장 큰 원형 경기장이자 유네스코 세계문화유산',
-        detailedDescription: '플라비우스 원형극장으로도 알려진 콜로세움은 고대 로마의 가장 위대한 건축적 성취 중 하나로 남아있으며, 지금까지 건설된 가장 큰 원형 경기장입니다. 서기 70-80년 베스파시아누스와 티투스 황제 치하에 건설된 이 웅장한 타원형 구조물은 검투사 경기, 동물 사냥, 모의 해전, 공개 처형을 관람하러 온 5만에서 8만 명의 관중을 수용할 수 있었습니다. "콜로세움"이라는 이름은 근처에 서 있던 네로의 거대한 청동 조각상에서 유래했을 가능성이 큽니다. 주로 석회암 블록, 화산 응회암, 벽돌로 된 콘크리트로 건설된 콜로세움은 로마 건축의 공학적 우수성을 보여줍니다. 혁신적인 설계는 무게를 효율적으로 분산시키는 복잡한 볼트와 아치 시스템을 특징으로 하여 거대한 4층 파사드를 가능하게 했습니다. 외부는 연속적인 층에 도리아식, 이오니아식, 코린트식 기둥으로 장식되어 로마인들의 고전 건축 양식 숙달을 보여줍니다. 한때 나무 판자와 모래로 덮여 있던 경기장 바닥은 하이포지움이라고 불리는 정교한 지하 네트워크를 숨기고 있었습니다 - 검투사, 동물, 무대 장비가 보관되고 위의 공연을 위해 준비되던 2층 지하 터널과 방으로 이루어진 복합 공간이었습니다. 정교한 도르래, 경사로, 함정문 시스템은 공연 중 극적인 등장과 특수 효과를 가능하게 했습니다. 콜로세움은 또한 로마 해군의 선원들이 작동하는 벨라리움이라는 개폐식 차양 시스템을 갖추고 있어 행사 중 관중에게 그늘을 제공했습니다. 지진, 다른 건물에 자재를 재사용한 약탈자들, 그리고 시간의 경과로 인한 피해에도 불구하고, 콜로세움은 로마 제국과 고대 문명의 강력한 상징으로 남아있습니다. 오늘날 로마에서 가장 인기 있는 관광 명소이자 유네스코 세계문화유산으로 서 있으며, 매년 수백만 명의 방문객이 로마 공학과 오락의 이 특별한 기념물을 감상하러 옵니다.'
+        detailedDescription: '플라비우스 원형극장으로도 알려진 콜로세움은 고대 로마의 가장 위대한 건축적 성취 중 하나로 남아있으며, 지금까지 건설된 가장 큰 원형 경기장입니다. 서기 70-80년 베스파시아누스와 티투스 황제 치하에 건설된 이 웅장한 타원형 구조물은 검투사 경기, 동물 사냥, 모의 해전, 공개 처형을 관람하러 온 5만에서 8만 명의 관중을 수용할 수 있었습니다. "콜로세움"이라는 이름은 근처에 서 있던 네로의 거대한 청동 조각상에서 유래했을 가능성이 큽니다. 주로 석회암 블록, 화산 응회암, 벽돌로 된 콘크리트로 건설된 콜로세움은 로마 건축의 공학적 우수성을 보여줍니다. 혁신적인 설계는 무게를 효율적으로 분산시키는 복잡한 볼트와 아치 시스템을 특징으로 하여 거대한 4층 파사드를 가능하게 했습니다. 외부는 연속적인 층에 도리아식, 이오니아식, 코린트식 기둥으로 장식되어 로마인들의 고전 건축 양식 숙달을 보여줍니다. 한때 나무 판자와 모래로 덮여 있던 경기장 바닥은 하이포지움이라고 불리는 정교한 지하 네트워크를 숨기고 있었습니다 - 검투사, 동물, 무대 장비가 보관되고 위의 공연을 위해 준비되던 2층 지하 터널과 방으로 이루어진 복합 공간이었습니다. 정교한 도르래, 경사로, 함정문 시스템은 공연 중 극적인 등장과 특수 효과를 가능하게 했습니다. 콜로세움은 또한 로마 해군의 선원들이 작동하는 벨라리움이라는 개폐식 차양 시스템을 갖추고 있어 행사 중 관중에게 그늘을 제공했습니다. 지진, 다른 건물에 자재를 재사용한 약탈자들, 그리고 시간의 경과로 인한 피해에도 불구하고, 콜로세움은 로마 제국과 고대 문명의 강력한 상징으로 남아있습니다. 오늘날 로마에서 가장 인기 있는 관광 명소이자 유네스코 세계문화유산으로 서 있으며, 매년 수백만 명의 방문객이 로마 공학과 오락의 이 특별한 기념물을 감상하러 옵니다.',
+        historicalInfo: '플라비우스 원형극장으로도 알려진 콜로세움은 로마 중심부에 위치한 타원형 원형 경기장입니다. 석회암, 응회암, 벽돌 콘크리트로 건설되었으며, 당시 건설된 가장 큰 원형 경기장으로 5만에서 8만 명의 관중을 수용했습니다.',
+        yearBuilt: '서기 70-80년',
+        architect: '베스파시아누스 황제와 티투스 황제'
       },
       es: {
         name: 'Coliseo',
         narration: 'Bienvenido al Coliseo, el símbolo icónico de Roma. Este antiguo anfiteatro albergó combates de gladiadores y espectáculos públicos.',
-        description: 'El anfiteatro más grande jamás construido, Patrimonio de la Humanidad de la UNESCO'
+        description: 'El anfiteatro más grande jamás construido, Patrimonio de la Humanidad de la UNESCO',
+        historicalInfo: 'El Coliseo, también conocido como Anfiteatro Flavio, es un anfiteatro ovalado en el centro de Roma. Construido con piedra caliza travertino, toba y hormigón revestido de ladrillos, fue el anfiteatro más grande jamás construido en su época y albergaba entre 50.000 y 80.000 espectadores.',
+        yearBuilt: '70-80 d.C.',
+        architect: 'Emperadores Vespasiano y Tito'
       },
       fr: {
         name: 'Colisée',
         narration: 'Bienvenue au Colisée, le symbole emblématique de Rome. Cet amphithéâtre antique accueillait des combats de gladiateurs et des spectacles publics.',
-        description: 'Le plus grand amphithéâtre jamais construit, site du patrimoine mondial de l\'UNESCO'
+        description: 'Le plus grand amphithéâtre jamais construit, site du patrimoine mondial de l\'UNESCO',
+        historicalInfo: 'Le Colisée, également connu sous le nom d\'Amphithéâtre Flavien, est un amphithéâtre ovale au centre de Rome. Construit en pierre calcaire travertin, tuf et béton revêtu de briques, c\'était le plus grand amphithéâtre jamais construit à l\'époque et pouvait accueillir de 50 000 à 80 000 spectateurs.',
+        yearBuilt: '70-80 apr. J.-C.',
+        architect: 'Empereurs Vespasien et Titus'
       },
       de: {
         name: 'Kolosseum',
         narration: 'Willkommen im Kolosseum, dem ikonischen Symbol Roms. Dieses antike Amphitheater war Schauplatz von Gladiatorenkämpfen und öffentlichen Spektakeln.',
-        description: 'Das größte jemals gebaute Amphitheater, UNESCO-Weltkulturerbe'
+        description: 'Das größte jemals gebaute Amphitheater, UNESCO-Weltkulturerbe',
+        historicalInfo: 'Das Kolosseum, auch als Flavisches Amphitheater bekannt, ist ein ovales Amphitheater im Zentrum Roms. Aus Travertin-Kalkstein, Tuffstein und ziegelverkleideten Beton gebaut, war es das größte jemals gebaute Amphitheater seiner Zeit und fasste 50.000 bis 80.000 Zuschauer.',
+        yearBuilt: '70-80 n. Chr.',
+        architect: 'Kaiser Vespasian und Titus'
       },
       zh: {
         name: '罗马斗兽场',
         narration: '欢迎来到罗马斗兽场，罗马的标志性象征。这座古老的圆形剧场曾举办角斗士比赛和公共表演。',
-        description: '有史以来最大的圆形剧场，联合国教科文组织世界遗产'
+        description: '有史以来最大的圆形剧场，联合国教科文组织世界遗产',
+        historicalInfo: '罗马斗兽场，也称为弗拉维圆形剧场，是位于罗马市中心的椭圆形圆形剧场。它由石灰华石灰岩、凝灰岩和砖面混凝土建造，是当时建造的最大的圆形剧场，可容纳5万至8万名观众。',
+        yearBuilt: '公元70-80年',
+        architect: '韦斯巴芗皇帝和提图斯皇帝'
       },
       ja: {
         name: 'コロッセオ',
         narration: 'ローマの象徴的シンボル、コロッセオへようこそ。この古代円形闘技場では剣闘士の戦いや公開スペクタクルが開催されました。',
-        description: '史上最大の円形闘技場、ユネスコ世界遺産'
+        description: '史上最大の円形闘技場、ユネスコ世界遺産',
+        historicalInfo: 'コロッセオは、フラウィウス円形闘技場とも呼ばれ、ローマ中心部にある楕円形の円形闘技場です。トラバーチン石灰岩、凝灰岩、レンガ張りコンクリートで建設され、当時建造された最大の円形闘技場で、5万から8万人の観客を収容しました。',
+        yearBuilt: '西暦70-80年',
+        architect: 'ウェスパシアヌス帝とティトゥス帝'
+      },
+      pt: {
+        name: 'Coliseu',
+        narration: 'Bem-vindo ao Coliseu, o símbolo icônico de Roma. Este antigo anfiteatro já abrigou combates de gladiadores e espetáculos públicos.',
+        description: 'O maior anfiteatro já construído, Patrimônio Mundial da UNESCO',
+        historicalInfo: 'O Coliseu, também conhecido como Anfiteatro Flaviano, é um anfiteatro oval no centro de Roma. Construído em calcário travertino, tufo e concreto revestido de tijolos, foi o maior anfiteatro já construído na época e comportava de 50.000 a 80.000 espectadores.',
+        yearBuilt: '70-80 d.C.',
+        architect: 'Imperadores Vespasiano e Tito'
+      },
+      ru: {
+        name: 'Колизей',
+        narration: 'Добро пожаловать в Колизей, знаковый символ Рима. Этот древний амфитеатр когда-то принимал гладиаторские бои и публичные зрелища.',
+        description: 'Самый большой амфитеатр из когда-либо построенных, объект Всемирного наследия ЮНЕСКО',
+        historicalInfo: 'Колизей, также известный как амфитеатр Флавиев, представляет собой овальный амфитеатр в центре Рима. Построенный из травертинового известняка, туфа и облицованного кирпичом бетона, он был самым большим амфитеатром, когда-либо построенным в то время, и вмещал от 50 000 до 80 000 зрителей.',
+        yearBuilt: '70-80 гг. н.э.',
+        architect: 'Императоры Веспасиан и Тит'
       }
     }
   },
@@ -132,17 +172,82 @@ const LANDMARKS: Landmark[] = [
         name: 'Roman Forum',
         narration: 'You are at the Roman Forum, the heart of ancient Rome. This was the center of political life during the Republic era, where historic buildings still stand.',
         description: 'The center of ancient Roman public life',
-        detailedDescription: 'The Roman Forum, known as Forum Romanum in Latin, represents the beating heart of ancient Rome and stands as one of the most important archaeological sites in the world. For over a thousand years, this rectangular plaza served as the center of Roman public life, witnessing the rise and fall of the Roman Republic and Empire. Originally a marshy burial ground between the Palatine and Capitoline Hills, the area was drained in the 7th century BC and transformed into Rome\'s central marketplace and gathering place. As Rome grew in power and prestige, the Forum evolved from a simple marketplace into a magnificent complex of temples, basilicas, and government buildings that showcased the architectural and political achievements of Roman civilization. The Forum was the site of triumphal processions celebrating military victories, where victorious generals would parade through the Via Sacra (Sacred Road) with their spoils of war and captive enemies. It hosted political assemblies where citizens debated the future of the Republic, criminal trials that determined justice, public speeches that swayed public opinion, and commercial activities that drove the Roman economy. Among its most significant structures was the Curia Julia, the senate house where Rome\'s most powerful political body met to debate legislation and policy. The Temple of Saturn, one of the Forum\'s oldest and most revered buildings, housed the state treasury and was the site of the annual Saturnalia festival. The Arch of Septimius Severus commemorated military victories in the East, while the Column of Phocas, erected in 608 AD, represents one of the last monuments added to the Forum. The Basilica Julia and Basilica Aemilia served as courts of law and commercial centers, their vast interiors bustling with lawyers, merchants, and citizens conducting business. The Temple of Vesta, home to the sacred flame tended by the Vestal Virgins, symbolized the eternal nature of Rome itself. After the fall of the Western Roman Empire, the Forum gradually fell into disrepair, its monuments stripped for building materials and its ground level rising as centuries of debris accumulated. During the Middle Ages, the area was known as "Campo Vaccino" (Cow Field) and was used for grazing cattle. Systematic excavations beginning in the 18th and 19th centuries revealed the Forum\'s magnificent past, uncovering temples, arches, and basilicas that had been buried for centuries. Today, walking through the Roman Forum is like stepping back in time, where every column, arch, and stone tells a story of ancient Rome\'s glory, power, and eventual decline.'
+        detailedDescription: 'The Roman Forum, known as Forum Romanum in Latin, represents the beating heart of ancient Rome and stands as one of the most important archaeological sites in the world. For over a thousand years, this rectangular plaza served as the center of Roman public life, witnessing the rise and fall of the Roman Republic and Empire. Originally a marshy burial ground between the Palatine and Capitoline Hills, the area was drained in the 7th century BC and transformed into Rome\'s central marketplace and gathering place. As Rome grew in power and prestige, the Forum evolved from a simple marketplace into a magnificent complex of temples, basilicas, and government buildings that showcased the architectural and political achievements of Roman civilization. The Forum was the site of triumphal processions celebrating military victories, where victorious generals would parade through the Via Sacra (Sacred Road) with their spoils of war and captive enemies. It hosted political assemblies where citizens debated the future of the Republic, criminal trials that determined justice, public speeches that swayed public opinion, and commercial activities that drove the Roman economy. Among its most significant structures was the Curia Julia, the senate house where Rome\'s most powerful political body met to debate legislation and policy. The Temple of Saturn, one of the Forum\'s oldest and most revered buildings, housed the state treasury and was the site of the annual Saturnalia festival. The Arch of Septimius Severus commemorated military victories in the East, while the Column of Phocas, erected in 608 AD, represents one of the last monuments added to the Forum. The Basilica Julia and Basilica Aemilia served as courts of law and commercial centers, their vast interiors bustling with lawyers, merchants, and citizens conducting business. The Temple of Vesta, home to the sacred flame tended by the Vestal Virgins, symbolized the eternal nature of Rome itself. After the fall of the Western Roman Empire, the Forum gradually fell into disrepair, its monuments stripped for building materials and its ground level rising as centuries of debris accumulated. During the Middle Ages, the area was known as "Campo Vaccino" (Cow Field) and was used for grazing cattle. Systematic excavations beginning in the 18th and 19th centuries revealed the Forum\'s magnificent past, uncovering temples, arches, and basilicas that had been buried for centuries. Today, walking through the Roman Forum is like stepping back in time, where every column, arch, and stone tells a story of ancient Rome\'s glory, power, and eventual decline.',
+        historicalInfo: 'The Roman Forum was the center of day-to-day life in Rome: the site of triumphal processions and elections, the venue for public speeches, criminal trials, and gladiatorial matches, and the nucleus of commercial affairs.',
+        yearBuilt: '7th century BC',
+        architect: 'Various Roman architects over centuries'
       },
       it: {
         name: 'Foro Romano',
         narration: 'Ti trovi al Foro Romano, il cuore dell\'antica Roma. Questo era il centro della vita politica durante l\'era della Repubblica, dove gli edifici storici sono ancora in piedi.',
-        description: 'Il centro della vita pubblica dell\'antica Roma'
+        description: 'Il centro della vita pubblica dell\'antica Roma',
+        historicalInfo: 'Il Foro Romano era il centro della vita quotidiana a Roma: sede di processioni trionfali ed elezioni, luogo di discorsi pubblici, processi penali e combattimenti tra gladiatori, e nucleo del commercio.',
+        yearBuilt: 'VII secolo a.C.',
+        architect: 'Vari architetti romani nel corso dei secoli'
       },
       ko: {
         name: '로마 포럼',
         narration: '고대 로마의 심장부인 로마 포럼에 오셨습니다. 이곳은 공화정 시대 정치 생활의 중심지였으며, 역사적인 건물들이 여전히 서 있습니다.',
-        description: '고대 로마 공공 생활의 중심지'
+        description: '고대 로마 공공 생활의 중심지',
+        historicalInfo: '로마 포럼은 로마의 일상생활의 중심지였습니다: 개선 행렬과 선거가 열렸고, 공개 연설, 형사 재판, 검투사 경기가 열렸으며, 상업 활동의 핵심이었습니다.',
+        yearBuilt: '기원전 7세기',
+        architect: '여러 세기에 걸친 다양한 로마 건축가들'
+      },
+      es: {
+        name: 'Foro Romano',
+        narration: 'Está en el Foro Romano, el corazón de la antigua Roma. Este fue el centro de la vida política durante la era de la República, donde aún se mantienen edificios históricos.',
+        description: 'El centro de la vida pública de la antigua Roma',
+        historicalInfo: 'El Foro Romano fue el centro de la vida cotidiana en Roma: el lugar de procesiones triunfales y elecciones, el escenario de discursos públicos, juicios penales y combates de gladiadores, y el núcleo de los asuntos comerciales.',
+        yearBuilt: 'Siglo VII a.C.',
+        architect: 'Varios arquitectos romanos a lo largo de los siglos'
+      },
+      fr: {
+        name: 'Forum Romain',
+        narration: 'Vous êtes au Forum Romain, le cœur de la Rome antique. C\'était le centre de la vie politique pendant l\'ère de la République, où se dressent encore des bâtiments historiques.',
+        description: 'Le centre de la vie publique de la Rome antique',
+        historicalInfo: 'Le Forum Romain était le centre de la vie quotidienne à Rome : lieu de processions triomphales et d\'élections, cadre de discours publics, de procès criminels et de combats de gladiateurs, et noyau des affaires commerciales.',
+        yearBuilt: 'VIIe siècle av. J.-C.',
+        architect: 'Divers architectes romains au fil des siècles'
+      },
+      de: {
+        name: 'Forum Romanum',
+        narration: 'Sie befinden sich am Forum Romanum, dem Herzen des antiken Roms. Dies war das Zentrum des politischen Lebens während der Republik, wo historische Gebäude noch stehen.',
+        description: 'Das Zentrum des öffentlichen Lebens im antiken Rom',
+        historicalInfo: 'Das Forum Romanum war das Zentrum des täglichen Lebens in Rom: Schauplatz von Triumphzügen und Wahlen, Austragungsort öffentlicher Reden, Gerichtsverhandlungen und Gladiatorenkämpfe sowie Mittelpunkt des Handels.',
+        yearBuilt: '7. Jahrhundert v. Chr.',
+        architect: 'Verschiedene römische Architekten über Jahrhunderte'
+      },
+      zh: {
+        name: '古罗马广场',
+        narration: '您在古罗马广场，古罗马的心脏。这里是共和国时代政治生活的中心，历史建筑仍然屹立。',
+        description: '古罗马公共生活的中心',
+        historicalInfo: '古罗马广场是罗马日常生活的中心：凯旋游行和选举的场所，公开演讲、刑事审判和角斗比赛的场地，以及商业事务的核心。',
+        yearBuilt: '公元前7世纪',
+        architect: '历代众多罗马建筑师'
+      },
+      ja: {
+        name: 'フォロ・ロマーノ',
+        narration: '古代ローマの中心、フォロ・ロマーノにいます。ここは共和政時代の政治生活の中心地で、歴史的建造物が今も立っています。',
+        description: '古代ローマの公共生活の中心',
+        historicalInfo: 'フォロ・ロマーノはローマの日常生活の中心でした：凱旋行進や選挙の場所、公開演説、刑事裁判、剣闘士試合の会場、そして商業活動の中核でした。',
+        yearBuilt: '紀元前7世紀',
+        architect: '数世紀にわたる様々なローマの建築家たち'
+      },
+      pt: {
+        name: 'Fórum Romano',
+        narration: 'Você está no Fórum Romano, o coração da Roma antiga. Este foi o centro da vida política durante a era da República, onde edifícios históricos ainda permanecem.',
+        description: 'O centro da vida pública da Roma antiga',
+        historicalInfo: 'O Fórum Romano foi o centro da vida cotidiana em Roma: local de procissões triunfais e eleições, palco de discursos públicos, julgamentos criminais e combates de gladiadores, e núcleo dos assuntos comerciais.',
+        yearBuilt: 'Século VII a.C.',
+        architect: 'Vários arquitetos romanos ao longo dos séculos'
+      },
+      ru: {
+        name: 'Римский форум',
+        narration: 'Вы находитесь на Римском форуме, в сердце древнего Рима. Это был центр политической жизни в эпоху Республики, где до сих пор стоят исторические здания.',
+        description: 'Центр общественной жизни древнего Рима',
+        historicalInfo: 'Римский форум был центром повседневной жизни в Риме: местом триумфальных шествий и выборов, площадкой для публичных выступлений, уголовных судов и гладиаторских боев, а также ядром коммерческой деятельности.',
+        yearBuilt: 'VII век до н.э.',
+        architect: 'Различные римские архитекторы на протяжении веков'
       }
     }
   },
@@ -169,42 +274,82 @@ const LANDMARKS: Landmark[] = [
         name: 'Trevi Fountain',
         narration: 'This is the Trevi Fountain. Legend says if you throw a coin over your shoulder into the fountain, you will return to Rome.',
         description: 'The most famous fountain in Rome',
-        detailedDescription: 'The Trevi Fountain, or Fontana di Trevi, stands as Rome\'s largest and most spectacular Baroque fountain, captivating millions of visitors each year with its grandeur, beauty, and legendary traditions. Measuring an impressive 26.3 meters (86 feet) high and 49.15 meters (161 feet) wide, this monumental masterpiece dominates the small Trevi square, creating a breathtaking spectacle of water, marble, and sculptural artistry. The fountain\'s history begins in ancient Rome, where it marked the terminal point of the Aqua Virgo aqueduct, one of the oldest water sources supplying the city. Legend tells of a young virgin who led thirsty Roman soldiers to this water source in 19 BC, giving the aqueduct its name. For centuries, a simple basin collected the aqueduct\'s waters until Pope Urban VIII commissioned Gian Lorenzo Bernini to create a more dramatic fountain in 1629. However, the project was abandoned when the Pope died, and it wasn\'t until 1732 that Pope Clement XII launched a competition to design a grand fountain worthy of the location. Nicola Salvi won the commission, and construction began in 1732, though Salvi would not live to see his masterpiece completed. The fountain was finally finished in 1762 by Giuseppe Pannini, thirty years after construction began. The fountain\'s design centers on a majestic depiction of Oceanus, the Titan god of the sea, riding a shell-shaped chariot pulled by two sea horses - one wild and one docile - representing the varying moods of the ocean. These magnificent creatures are guided by tritons, mythological sea gods depicted blowing conch shells. The central niche housing Oceanus is flanked by two allegorical figures: Abundance on the left, holding a horn of plenty, and Health on the right, holding a cup being drunk by a snake, symbolizing well-being and prosperity. Above these niches, relief sculptures depict the discovery of the spring by the virgin and Agrippa approving the aqueduct\'s construction. The fountain\'s elaborate facade rises from the Palazzo Poli behind it, creating a theatrical backdrop of Corinthian columns, ornate carvings, and flowing drapery sculpted in travertine stone. Water cascades dramatically over artificial rocks into the large basin below, creating a symphony of sound that echoes through the surrounding buildings. The fountain pumps approximately 2,824,800 cubic feet of water through its system daily, a testament to the ancient Roman engineering that still supplies it from the Aqua Virgo aqueduct. Perhaps the most famous tradition associated with the Trevi Fountain is the coin-tossing ritual. Legend holds that visitors who throw a coin over their left shoulder using their right hand will ensure their return to Rome. Throwing two coins will bring romance with a Roman, while three coins promise marriage. This tradition generates an estimated 3,000 euros worth of coins daily, all of which are collected and donated to charity, supporting various social programs in Rome. The fountain has captured imaginations worldwide through its appearances in cinema, most notably in Federico Fellini\'s "La Dolce Vita" (1960), where Anita Ekberg\'s iconic wade through its waters created one of film history\'s most memorable scenes. This moment cemented the fountain\'s status as a symbol of romance and Italian glamour. Throughout its history, the fountain has undergone several restorations to preserve its beauty and structural integrity. The most recent comprehensive restoration, funded by the Italian fashion house Fendi and completed in 2015, cleaned and repaired the monument, restoring its brilliant white travertine to its original splendor. Today, the Trevi Fountain remains one of Rome\'s most beloved landmarks and the world\'s most visited fountain. Visitors are no longer permitted to wade in its waters, as fines were instituted to protect the monument, but this has not diminished its appeal. The fountain continues to enchant with its baroque magnificence, the perpetual sound of flowing water, and the timeless hope embodied in each coin tossed into its sparkling basin.'
+        detailedDescription: 'The Trevi Fountain, or Fontana di Trevi, stands as Rome\'s largest and most spectacular Baroque fountain, captivating millions of visitors each year with its grandeur, beauty, and legendary traditions. Measuring an impressive 26.3 meters (86 feet) high and 49.15 meters (161 feet) wide, this monumental masterpiece dominates the small Trevi square, creating a breathtaking spectacle of water, marble, and sculptural artistry. The fountain\'s history begins in ancient Rome, where it marked the terminal point of the Aqua Virgo aqueduct, one of the oldest water sources supplying the city. Legend tells of a young virgin who led thirsty Roman soldiers to this water source in 19 BC, giving the aqueduct its name. For centuries, a simple basin collected the aqueduct\'s waters until Pope Urban VIII commissioned Gian Lorenzo Bernini to create a more dramatic fountain in 1629. However, the project was abandoned when the Pope died, and it wasn\'t until 1732 that Pope Clement XII launched a competition to design a grand fountain worthy of the location. Nicola Salvi won the commission, and construction began in 1732, though Salvi would not live to see his masterpiece completed. The fountain was finally finished in 1762 by Giuseppe Pannini, thirty years after construction began. The fountain\'s design centers on a majestic depiction of Oceanus, the Titan god of the sea, riding a shell-shaped chariot pulled by two sea horses - one wild and one docile - representing the varying moods of the ocean. These magnificent creatures are guided by tritons, mythological sea gods depicted blowing conch shells. The central niche housing Oceanus is flanked by two allegorical figures: Abundance on the left, holding a horn of plenty, and Health on the right, holding a cup being drunk by a snake, symbolizing well-being and prosperity. Above these niches, relief sculptures depict the discovery of the spring by the virgin and Agrippa approving the aqueduct\'s construction. The fountain\'s elaborate facade rises from the Palazzo Poli behind it, creating a theatrical backdrop of Corinthian columns, ornate carvings, and flowing drapery sculpted in travertine stone. Water cascades dramatically over artificial rocks into the large basin below, creating a symphony of sound that echoes through the surrounding buildings. The fountain pumps approximately 2,824,800 cubic feet of water through its system daily, a testament to the ancient Roman engineering that still supplies it from the Aqua Virgo aqueduct. Perhaps the most famous tradition associated with the Trevi Fountain is the coin-tossing ritual. Legend holds that visitors who throw a coin over their left shoulder using their right hand will ensure their return to Rome. Throwing two coins will bring romance with a Roman, while three coins promise marriage. This tradition generates an estimated 3,000 euros worth of coins daily, all of which are collected and donated to charity, supporting various social programs in Rome. The fountain has captured imaginations worldwide through its appearances in cinema, most notably in Federico Fellini\'s "La Dolce Vita" (1960), where Anita Ekberg\'s iconic wade through its waters created one of film history\'s most memorable scenes. This moment cemented the fountain\'s status as a symbol of romance and Italian glamour. Throughout its history, the fountain has undergone several restorations to preserve its beauty and structural integrity. The most recent comprehensive restoration, funded by the Italian fashion house Fendi and completed in 2015, cleaned and repaired the monument, restoring its brilliant white travertine to its original splendor. Today, the Trevi Fountain remains one of Rome\'s most beloved landmarks and the world\'s most visited fountain. Visitors are no longer permitted to wade in its waters, as fines were instituted to protect the monument, but this has not diminished its appeal. The fountain continues to enchant with its baroque magnificence, the perpetual sound of flowing water, and the timeless hope embodied in each coin tossed into its sparkling basin.',
+        historicalInfo: 'The Trevi Fountain is the largest Baroque fountain in the city and one of the most famous fountains in the world. Standing 26.3 metres (86 ft) high and 49.15 metres (161.3 ft) wide, it is the largest Baroque fountain in the city.',
+        yearBuilt: '1732-1762',
+        architect: 'Nicola Salvi'
       },
       it: {
         name: 'Fontana di Trevi',
         narration: 'Questa è la Fontana di Trevi. La leggenda dice che se getti una moneta oltre la spalla nella fontana, tornerai a Roma.',
-        description: 'La fontana più famosa di Roma'
+        description: 'La fontana più famosa di Roma',
+        historicalInfo: 'La Fontana di Trevi è la più grande fontana barocca della città e una delle fontane più famose del mondo. Alta 26,3 metri e larga 49,15 metri, è la fontana barocca più grande della città.',
+        yearBuilt: '1732-1762',
+        architect: 'Nicola Salvi'
       },
       ko: {
         name: '트레비 분수',
         narration: '이곳은 트레비 분수입니다. 전설에 따르면 분수에 어깨 너머로 동전을 던지면 로마로 다시 돌아온다고 합니다.',
-        description: '로마에서 가장 유명한 분수'
+        description: '로마에서 가장 유명한 분수',
+        historicalInfo: '트레비 분수는 도시에서 가장 큰 바로크 양식의 분수이자 세계에서 가장 유명한 분수 중 하나입니다. 높이 26.3미터, 너비 49.15미터로 도시에서 가장 큰 바로크 분수입니다.',
+        yearBuilt: '1732-1762년',
+        architect: '니콜라 살비'
       },
       es: {
         name: 'Fontana de Trevi',
         narration: 'Esta es la Fontana de Trevi. La leyenda dice que si lanzas una moneda por encima del hombro a la fuente, volverás a Roma.',
-        description: 'La fuente más famosa de Roma'
+        description: 'La fuente más famosa de Roma',
+        historicalInfo: 'La Fontana de Trevi es la fuente barroca más grande de la ciudad y una de las fuentes más famosas del mundo. Con 26,3 metros de altura y 49,15 metros de ancho, es la fuente barroca más grande de la ciudad.',
+        yearBuilt: '1732-1762',
+        architect: 'Nicola Salvi'
       },
       fr: {
         name: 'Fontaine de Trevi',
         narration: 'Voici la Fontaine de Trevi. La légende dit que si vous jetez une pièce par-dessus votre épaule dans la fontaine, vous reviendrez à Rome.',
-        description: 'La fontaine la plus célèbre de Rome'
+        description: 'La fontaine la plus célèbre de Rome',
+        historicalInfo: 'La Fontaine de Trevi est la plus grande fontaine baroque de la ville et l\'une des fontaines les plus célèbres du monde. Mesurant 26,3 mètres de haut et 49,15 mètres de large, c\'est la plus grande fontaine baroque de la ville.',
+        yearBuilt: '1732-1762',
+        architect: 'Nicola Salvi'
       },
       de: {
         name: 'Trevi-Brunnen',
         narration: 'Dies ist der Trevi-Brunnen. Die Legende besagt, dass Sie nach Rom zurückkehren werden, wenn Sie eine Münze über Ihre Schulter in den Brunnen werfen.',
-        description: 'Der berühmteste Brunnen Roms'
+        description: 'Der berühmteste Brunnen Roms',
+        historicalInfo: 'Der Trevi-Brunnen ist der größte Barockbrunnen der Stadt und einer der berühmtesten Brunnen der Welt. Mit 26,3 Metern Höhe und 49,15 Metern Breite ist er der größte Barockbrunnen der Stadt.',
+        yearBuilt: '1732-1762',
+        architect: 'Nicola Salvi'
       },
       zh: {
         name: '特莱维喷泉',
         narration: '这是特莱维喷泉。传说如果你把硬币从肩膀上扔进喷泉，你会重返罗马。',
-        description: '罗马最著名的喷泉'
+        description: '罗马最著名的喷泉',
+        historicalInfo: '特莱维喷泉是城市中最大的巴洛克喷泉，也是世界上最著名的喷泉之一。高26.3米，宽49.15米，是城市中最大的巴洛克喷泉。',
+        yearBuilt: '1732-1762年',
+        architect: '尼古拉·萨尔维'
       },
       ja: {
         name: 'トレビの泉',
         narration: 'これがトレビの泉です。伝説によれば、肩越しにコインを投げ入れるとローマに戻ってくることができます。',
-        description: 'ローマで最も有名な噴水'
+        description: 'ローマで最も有名な噴水',
+        historicalInfo: 'トレビの泉は市内最大のバロック様式の噴水であり、世界で最も有名な噴水の一つです。高さ26.3メートル、幅49.15メートルで、市内最大のバロック様式の噴水です。',
+        yearBuilt: '1732-1762年',
+        architect: 'ニコラ・サルヴィ'
+      },
+      pt: {
+        name: 'Fontana di Trevi',
+        narration: 'Esta é a Fontana di Trevi. A lenda diz que se você jogar uma moeda por cima do ombro na fonte, você retornará a Roma.',
+        description: 'A fonte mais famosa de Roma',
+        historicalInfo: 'A Fontana di Trevi é a maior fonte barroca da cidade e uma das fontes mais famosas do mundo. Com 26,3 metros de altura e 49,15 metros de largura, é a maior fonte barroca da cidade.',
+        yearBuilt: '1732-1762',
+        architect: 'Nicola Salvi'
+      },
+      ru: {
+        name: 'Фонтан Треви',
+        narration: 'Это фонтан Треви. Легенда гласит, что если бросить монету через плечо в фонтан, вы вернетесь в Рим.',
+        description: 'Самый знаменитый фонтан Рима',
+        historicalInfo: 'Фонтан Треви — самый большой фонтан в стиле барокко в городе и один из самых известных фонтанов в мире. Высотой 26,3 метра и шириной 49,15 метра, это самый большой фонтан в стиле барокко в городе.',
+        yearBuilt: '1732-1762 гг.',
+        architect: 'Никола Сальви'
       }
     }
   },
@@ -236,37 +381,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Pantheon',
         narration: 'Il Pantheon è un tempio dedicato a tutti gli dei. È un capolavoro dell\'architettura antica con la sua magnifica cupola.',
-        description: 'Una meraviglia architettonica con la più grande cupola in calcestruzzo non armato del mondo'
+        description: 'Una meraviglia architettonica con la più grande cupola in calcestruzzo non armato del mondo',
+        historicalInfo: 'Il Pantheon è un antico tempio romano e, dal 609 d.C., una chiesa cattolica. È il meglio conservato di tutti gli edifici dell\'antica Roma ed è stato in uso continuo per tutta la sua storia.',
+        yearBuilt: '126 d.C.',
+        architect: 'Imperatore Adriano'
       },
       ko: {
         name: '판테온',
         narration: '판테온은 모든 신들에게 헌정된 신전입니다. 웅장한 돔이 있는 고대 건축의 걸작입니다.',
-        description: '세계에서 가장 큰 무근 콘크리트 돔을 가진 건축의 경이'
+        description: '세계에서 가장 큰 무근 콘크리트 돔을 가진 건축의 경이',
+        historicalInfo: '판테온은 고대 로마 신전이었으며 서기 609년부터 가톨릭 교회로 사용되고 있습니다. 고대 로마 건축물 중 가장 잘 보존되어 있으며 역사 전체에 걸쳐 지속적으로 사용되어 왔습니다.',
+        yearBuilt: '서기 126년',
+        architect: '하드리아누스 황제'
       },
       es: {
         name: 'Panteón',
         narration: 'El Panteón es un templo dedicado a todos los dioses. Es una obra maestra de la arquitectura antigua con su magnífica cúpula.',
-        description: 'Una maravilla arquitectónica con la cúpula de hormigón sin refuerzo más grande del mundo'
+        description: 'Una maravilla arquitectónica con la cúpula de hormigón sin refuerzo más grande del mundo',
+        historicalInfo: 'El Panteón es un antiguo templo romano y, desde el 609 d.C., una iglesia católica. Es el mejor conservado de todos los edificios de la Antigua Roma y ha estado en uso continuo a lo largo de su historia.',
+        yearBuilt: '126 d.C.',
+        architect: 'Emperador Adriano'
       },
       fr: {
         name: 'Panthéon',
         narration: 'Le Panthéon est un temple dédié à tous les dieux. C\'est un chef-d\'œuvre de l\'architecture antique avec son magnifique dôme.',
-        description: 'Une merveille architecturale avec la plus grande coupole en béton non armé du monde'
+        description: 'Une merveille architecturale avec la plus grande coupole en béton non armé du monde',
+        historicalInfo: 'Le Panthéon est un ancien temple romain et, depuis 609 apr. J.-C., une église catholique. C\'est le mieux conservé de tous les bâtiments de la Rome antique et a été en usage continu tout au long de son histoire.',
+        yearBuilt: '126 apr. J.-C.',
+        architect: 'Empereur Hadrien'
       },
       de: {
         name: 'Pantheon',
         narration: 'Das Pantheon ist ein Tempel, der allen Göttern gewidmet ist. Es ist ein Meisterwerk antiker Architektur mit seiner prächtigen Kuppel.',
-        description: 'Ein architektonisches Wunderwerk mit der größten unbewehrten Betonkuppel der Welt'
+        description: 'Ein architektonisches Wunderwerk mit der größten unbewehrten Betonkuppel der Welt',
+        historicalInfo: 'Das Pantheon ist ein ehemaliger römischer Tempel und seit 609 n. Chr. eine katholische Kirche. Es ist das am besten erhaltene aller antiken römischen Gebäude und wird seit seiner Geschichte durchgehend genutzt.',
+        yearBuilt: '126 n. Chr.',
+        architect: 'Kaiser Hadrian'
       },
       zh: {
         name: '万神殿',
         narration: '万神殿是一座献给所有神灵的神殿。它是古代建筑的杰作，拥有宏伟的圆顶。',
-        description: '拥有世界上最大的无钢筋混凝土圆顶的建筑奇迹'
+        description: '拥有世界上最大的无钢筋混凝土圆顶的建筑奇迹',
+        historicalInfo: '万神殿是一座古罗马神殿，自公元609年起成为天主教堂。它是所有古罗马建筑中保存最完好的，并且在整个历史中一直被使用。',
+        yearBuilt: '公元126年',
+        architect: '哈德良皇帝'
       },
       ja: {
         name: 'パンテオン',
         narration: 'パンテオンは全ての神々に捧げられた神殿です。壮大なドームを持つ古代建築の傑作です。',
-        description: '世界最大の無筋コンクリートドームを持つ建築の驚異'
+        description: '世界最大の無筋コンクリートドームを持つ建築の驚異',
+        historicalInfo: 'パンテオンはかつてローマの神殿で、609年からはカトリック教会として使用されています。古代ローマ建築の中で最もよく保存されており、その歴史を通じて継続的に使用されてきました。',
+        yearBuilt: '紀元126年',
+        architect: 'ハドリアヌス帝'
+      },
+      pt: {
+        name: 'Panteão',
+        narration: 'O Panteão é um templo dedicado a todos os deuses. É uma obra-prima da arquitetura antiga com sua magnífica cúpula.',
+        description: 'Uma maravilha arquitetônica com a maior cúpula de concreto não reforçado do mundo',
+        historicalInfo: 'O Panteão é um antigo templo romano e, desde 609 d.C., uma igreja católica. É o mais bem preservado de todos os edifícios da Roma Antiga e está em uso contínuo ao longo de sua história.',
+        yearBuilt: '126 d.C.',
+        architect: 'Imperador Adriano'
+      },
+      ru: {
+        name: 'Пантеон',
+        narration: 'Пантеон — это храм, посвященный всем богам. Это шедевр древней архитектуры с великолепным куполом.',
+        description: 'Архитектурное чудо с самым большим неармированным бетонным куполом в мире',
+        historicalInfo: 'Пантеон — бывший римский храм, с 609 года нашей эры — католическая церковь. Это наиболее хорошо сохранившееся из всех зданий Древнего Рима, которое непрерывно используется на протяжении всей своей истории.',
+        yearBuilt: '126 г. н.э.',
+        architect: 'Император Адриан'
       }
     }
   },
@@ -298,37 +480,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Scalinata di Trinità dei Monti',
         narration: 'Benvenuti alla Scalinata di Trinità dei Monti, famosa come location del film "Vacanze Romane".',
-        description: 'Una monumentale scalinata di 135 gradini'
+        description: 'Una monumentale scalinata di 135 gradini',
+        historicalInfo: 'La Scalinata di Trinità dei Monti è una serie di scalini a Roma, che sale un ripido pendio tra Piazza di Spagna alla base e Piazza Trinità dei Monti, dominata dalla chiesa della Trinità dei Monti in cima.',
+        yearBuilt: '1723-1726',
+        architect: 'Francesco de Sanctis e Alessandro Specchi'
       },
       ko: {
         name: '스페인 계단',
         narration: '영화 "로마의 휴일"의 촬영 장소로 유명한 스페인 계단에 오신 것을 환영합니다.',
-        description: '135개의 계단으로 이루어진 기념비적인 계단'
+        description: '135개의 계단으로 이루어진 기념비적인 계단',
+        historicalInfo: '스페인 계단은 로마에 있는 계단으로, 아래의 스페인 광장과 위의 트리니타 데이 몬티 광장 사이의 가파른 경사면을 오르며, 꼭대기에는 트리니타 데이 몬티 교회가 자리잡고 있습니다.',
+        yearBuilt: '1723-1726년',
+        architect: '프란체스코 데 산크티스와 알레산드로 스페키'
       },
       es: {
         name: 'Escalinata de la Plaza de España',
         narration: 'Bienvenido a la Escalinata de la Plaza de España, famosa como lugar de rodaje de la película "Vacaciones en Roma".',
-        description: 'Una monumental escalinata de 135 escalones'
+        description: 'Una monumental escalinata de 135 escalones',
+        historicalInfo: 'La Escalinata de la Plaza de España es un conjunto de escalones en Roma que sube una empinada pendiente entre la Piazza di Spagna en la base y la Piazza Trinità dei Monti, dominada por la iglesia de Trinità dei Monti en la cima.',
+        yearBuilt: '1723-1726',
+        architect: 'Francesco de Sanctis y Alessandro Specchi'
       },
       fr: {
         name: 'Escalier de la Trinité-des-Monts',
         narration: 'Bienvenue à l\'Escalier de la Trinité-des-Monts, célèbre comme lieu de tournage du film "Vacances Romaines".',
-        description: 'Un escalier monumental de 135 marches'
+        description: 'Un escalier monumental de 135 marches',
+        historicalInfo: 'L\'Escalier de la Trinité-des-Monts est un ensemble de marches à Rome, gravissant une pente raide entre la Piazza di Spagna à la base et la Piazza Trinità dei Monti, dominée par l\'église de la Trinité-des-Monts au sommet.',
+        yearBuilt: '1723-1726',
+        architect: 'Francesco de Sanctis et Alessandro Specchi'
       },
       de: {
         name: 'Spanische Treppe',
         narration: 'Willkommen an der Spanischen Treppe, berühmt als Drehort des Films "Ein Herz und eine Krone".',
-        description: 'Eine monumentale Treppe mit 135 Stufen'
+        description: 'Eine monumentale Treppe mit 135 Stufen',
+        historicalInfo: 'Die Spanische Treppe ist eine Treppe in Rom, die einen steilen Hang zwischen der Piazza di Spagna am Fuß und der Piazza Trinità dei Monti erklimmt, die von der Kirche Trinità dei Monti an der Spitze dominiert wird.',
+        yearBuilt: '1723-1726',
+        architect: 'Francesco de Sanctis und Alessandro Specchi'
       },
       zh: {
         name: '西班牙台阶',
         narration: '欢迎来到西班牙台阶，以电影《罗马假日》的拍摄地而闻名。',
-        description: '由135级台阶组成的纪念性阶梯'
+        description: '由135级台阶组成的纪念性阶梯',
+        historicalInfo: '西班牙台阶是罗马的一组台阶，爬上西班牙广场和山上圣三一教堂广场之间的陡坡，顶部由山上圣三一教堂主导。',
+        yearBuilt: '1723-1726年',
+        architect: '弗朗切斯科·德·桑克蒂斯和亚历山德罗·斯佩基'
       },
       ja: {
         name: 'スペイン階段',
         narration: '映画「ローマの休日」の撮影場所として有名なスペイン階段へようこそ。',
-        description: '135段からなる記念碑的な階段'
+        description: '135段からなる記念碑的な階段',
+        historicalInfo: 'スペイン階段はローマにある階段で、麓のスペイン広場と山上のトリニタ・デイ・モンティ広場の間の急な坂を登り、頂上にはトリニタ・デイ・モンティ教会が建っています。',
+        yearBuilt: '1723-1726年',
+        architect: 'フランチェスコ・デ・サンクティスとアレッサンドロ・スペッキ'
+      },
+      pt: {
+        name: 'Escadaria da Piazza di Spagna',
+        narration: 'Bem-vindo à Escadaria da Piazza di Spagna, famosa como local de filmagem do filme "A Princesa e o Plebeu".',
+        description: 'Uma escadaria monumental de 135 degraus',
+        historicalInfo: 'A Escadaria da Piazza di Spagna é um conjunto de degraus em Roma, subindo uma ladeira íngreme entre a Piazza di Spagna na base e a Piazza Trinità dei Monti, dominada pela igreja da Trinità dei Monti no topo.',
+        yearBuilt: '1723-1726',
+        architect: 'Francesco de Sanctis e Alessandro Specchi'
+      },
+      ru: {
+        name: 'Испанская лестница',
+        narration: 'Добро пожаловать на Испанскую лестницу, известную как место съемок фильма «Римские каникулы».',
+        description: 'Монументальная лестница из 135 ступеней',
+        historicalInfo: 'Испанская лестница — это набор ступеней в Риме, поднимающихся по крутому склону между Пьяцца ди Спанья у подножия и Пьяцца Тринита деи Монти, на вершине которой доминирует церковь Тринита деи Монти.',
+        yearBuilt: '1723-1726 гг.',
+        architect: 'Франческо де Санктис и Алессандро Спекки'
       }
     }
   },
@@ -361,37 +580,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Torre Eiffel',
         narration: 'Benvenuto alla Torre Eiffel, la dama di ferro di Parigi. Costruita per l\'Esposizione Universale del 1889, è diventata l\'icona globale della Francia.',
-        description: 'Il monumento a pagamento più visitato al mondo'
+        description: 'Il monumento a pagamento più visitato al mondo',
+        historicalInfo: 'La Torre Eiffel fu costruita per l\'Esposizione Universale del 1889 e inizialmente fu criticata da alcuni dei principali artisti e intellettuali francesi. È diventata un\'icona culturale globale della Francia.',
+        yearBuilt: '1887-1889',
+        architect: 'Gustave Eiffel'
       },
       ko: {
         name: '에펠탑',
         narration: '파리의 철의 여인, 에펠탑에 오신 것을 환영합니다. 1889년 만국박람회를 위해 건설되어 프랑스의 세계적인 상징이 되었습니다.',
-        description: '세계에서 가장 많이 방문하는 유료 기념물'
+        description: '세계에서 가장 많이 방문하는 유료 기념물',
+        historicalInfo: '에펠탑은 1889년 만국박람회를 위해 건설되었으며 처음에는 프랑스의 주요 예술가와 지식인들로부터 비판을 받았습니다. 프랑스의 세계적인 문화 아이콘이 되었습니다.',
+        yearBuilt: '1887-1889년',
+        architect: '귀스타브 에펠'
       },
       es: {
         name: 'Torre Eiffel',
         narration: 'Bienvenido a la Torre Eiffel, la dama de hierro de París. Construida para la Exposición Universal de 1889, se ha convertido en el icono global de Francia.',
-        description: 'El monumento de pago más visitado del mundo'
+        description: 'El monumento de pago más visitado del mundo',
+        historicalInfo: 'La Torre Eiffel fue construida para la Exposición Universal de 1889 y fue inicialmente criticada por algunos de los principales artistas e intelectuales de Francia. Se ha convertido en un icono cultural global de Francia.',
+        yearBuilt: '1887-1889',
+        architect: 'Gustave Eiffel'
       },
       fr: {
         name: 'Tour Eiffel',
         narration: 'Bienvenue à la Tour Eiffel, la dame de fer de Paris. Construite pour l\'Exposition Universelle de 1889, elle est devenue l\'icône mondiale de la France.',
-        description: 'Le monument payant le plus visité au monde'
+        description: 'Le monument payant le plus visité au monde',
+        historicalInfo: 'La Tour Eiffel a été construite pour l\'Exposition Universelle de 1889 et a été initialement critiquée par certains des principaux artistes et intellectuels français. Elle est devenue une icône culturelle mondiale de la France.',
+        yearBuilt: '1887-1889',
+        architect: 'Gustave Eiffel'
       },
       de: {
         name: 'Eiffelturm',
         narration: 'Willkommen am Eiffelturm, der eisernen Dame von Paris. Erbaut für die Weltausstellung 1889, ist er zum globalen Symbol Frankreichs geworden.',
-        description: 'Das meistbesuchte kostenpflichtige Monument der Welt'
+        description: 'Das meistbesuchte kostenpflichtige Monument der Welt',
+        historicalInfo: 'Der Eiffelturm wurde für die Weltausstellung 1889 gebaut und wurde anfangs von einigen führenden französischen Künstlern und Intellektuellen kritisiert. Er ist zu einer globalen kulturellen Ikone Frankreichs geworden.',
+        yearBuilt: '1887-1889',
+        architect: 'Gustave Eiffel'
       },
       zh: {
         name: '埃菲尔铁塔',
         narration: '欢迎来到埃菲尔铁塔，巴黎的钢铁女士。为1889年世界博览会建造，已成为法国的全球象征。',
-        description: '世界上访问量最多的收费纪念碑'
+        description: '世界上访问量最多的收费纪念碑',
+        historicalInfo: '埃菲尔铁塔为1889年世界博览会而建，最初受到一些法国主要艺术家和知识分子的批评。它已成为法国的全球文化象征。',
+        yearBuilt: '1887-1889年',
+        architect: '古斯塔夫·埃菲尔'
       },
       ja: {
         name: 'エッフェル塔',
         narration: 'パリの鉄の貴婦人、エッフェル塔へようこそ。1889年の万国博覧会のために建設され、フランスの世界的象徴となりました。',
-        description: '世界で最も訪問者の多い有料モニュメント'
+        description: '世界で最も訪問者の多い有料モニュメント',
+        historicalInfo: 'エッフェル塔は1889年の万国博覧会のために建設され、当初はフランスの主要な芸術家や知識人から批判されました。フランスの世界的な文化的象徴となっています。',
+        yearBuilt: '1887-1889年',
+        architect: 'ギュスターヴ・エッフェル'
+      },
+      pt: {
+        name: 'Torre Eiffel',
+        narration: 'Bem-vindo à Torre Eiffel, a dama de ferro de Paris. Construída para a Exposição Universal de 1889, tornou-se o ícone global da França.',
+        description: 'O monumento pago mais visitado do mundo',
+        historicalInfo: 'A Torre Eiffel foi construída para a Exposição Universal de 1889 e foi inicialmente criticada por alguns dos principais artistas e intelectuais da França. Tornou-se um ícone cultural global da França.',
+        yearBuilt: '1887-1889',
+        architect: 'Gustave Eiffel'
+      },
+      ru: {
+        name: 'Эйфелева башня',
+        narration: 'Добро пожаловать на Эйфелеву башню, железную леди Парижа. Построенная для Всемирной выставки 1889 года, она стала мировым символом Франции.',
+        description: 'Самый посещаемый платный памятник в мире',
+        historicalInfo: 'Эйфелева башня была построена для Всемирной выставки 1889 года и первоначально подвергалась критике со стороны некоторых ведущих французских художников и интеллектуалов. Она стала глобальным культурным символом Франции.',
+        yearBuilt: '1887-1889 гг.',
+        architect: 'Гюстав Эйфель'
       }
     }
   },
@@ -423,37 +679,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Museo del Louvre',
         narration: 'Ti trovi al Museo del Louvre, il più grande museo d\'arte del mondo. Ospita migliaia di opere tra cui la Gioconda.',
-        description: 'Il più grande museo d\'arte del mondo e un monumento storico'
+        description: 'Il più grande museo d\'arte del mondo e un monumento storico',
+        historicalInfo: 'Il Louvre era originariamente un palazzo reale prima di diventare un museo pubblico durante la Rivoluzione francese nel 1793. Ospita circa 38.000 oggetti dalla preistoria al XXI secolo.',
+        yearBuilt: 'Palazzo: dal XII secolo in poi, Museo: 1793',
+        architect: 'Più architetti nel corso dei secoli, Piramide moderna: I.M. Pei'
       },
       ko: {
         name: '루브르 박물관',
         narration: '세계 최대의 미술관인 루브르 박물관에 오셨습니다. 모나리자를 포함한 수천 점의 작품이 소장되어 있습니다.',
-        description: '세계 최대의 미술관이자 역사적 기념물'
+        description: '세계 최대의 미술관이자 역사적 기념물',
+        historicalInfo: '루브르는 원래 왕궁이었으나 1793년 프랑스 혁명 중에 공공 박물관이 되었습니다. 선사시대부터 21세기까지 약 38,000점의 유물을 소장하고 있습니다.',
+        yearBuilt: '궁전: 12세기 이후, 박물관: 1793년',
+        architect: '여러 세기에 걸친 다양한 건축가들, 현대 피라미드: I.M. 페이'
       },
       es: {
         name: 'Museo del Louvre',
         narration: 'Está en el Museo del Louvre, el museo de arte más grande del mundo. Hogar de miles de obras, incluida la Mona Lisa.',
-        description: 'El museo de arte más grande del mundo y un monumento histórico'
+        description: 'El museo de arte más grande del mundo y un monumento histórico',
+        historicalInfo: 'El Louvre fue originalmente un palacio real antes de convertirse en museo público durante la Revolución Francesa en 1793. Alberga aproximadamente 38.000 objetos desde la prehistoria hasta el siglo XXI.',
+        yearBuilt: 'Palacio: desde el siglo XII en adelante, Museo: 1793',
+        architect: 'Múltiples arquitectos a lo largo de los siglos, Pirámide moderna: I.M. Pei'
       },
       fr: {
         name: 'Musée du Louvre',
         narration: 'Vous êtes au Musée du Louvre, le plus grand musée d\'art du monde. Il abrite des milliers d\'œuvres, dont la Joconde.',
-        description: 'Le plus grand musée d\'art du monde et un monument historique'
+        description: 'Le plus grand musée d\'art du monde et un monument historique',
+        historicalInfo: 'Le Louvre était à l\'origine un palais royal avant de devenir un musée public pendant la Révolution française en 1793. Il abrite environ 38 000 objets de la préhistoire au XXIe siècle.',
+        yearBuilt: 'Palais : à partir du XIIe siècle, Musée : 1793',
+        architect: 'Plusieurs architectes au fil des siècles, Pyramide moderne : I.M. Pei'
       },
       de: {
         name: 'Louvre-Museum',
         narration: 'Sie befinden sich im Louvre-Museum, dem größten Kunstmuseum der Welt. Heimat Tausender Werke, darunter die Mona Lisa.',
-        description: 'Das größte Kunstmuseum der Welt und ein historisches Denkmal'
+        description: 'Das größte Kunstmuseum der Welt und ein historisches Denkmal',
+        historicalInfo: 'Der Louvre war ursprünglich ein königlicher Palast, bevor er während der Französischen Revolution 1793 zu einem öffentlichen Museum wurde. Er beherbergt etwa 38.000 Objekte von der Vorgeschichte bis zum 21. Jahrhundert.',
+        yearBuilt: 'Palast: ab dem 12. Jahrhundert, Museum: 1793',
+        architect: 'Mehrere Architekten über Jahrhunderte, Moderne Pyramide: I.M. Pei'
       },
       zh: {
         name: '卢浮宫博物馆',
         narration: '您正在卢浮宫博物馆，世界上最大的艺术博物馆。收藏了包括蒙娜丽莎在内的数千件作品。',
-        description: '世界上最大的艺术博物馆和历史古迹'
+        description: '世界上最大的艺术博物馆和历史古迹',
+        historicalInfo: '卢浮宫最初是一座皇家宫殿，1793年法国大革命期间成为公共博物馆。它收藏了约38,000件从史前到21世纪的文物。',
+        yearBuilt: '宫殿：12世纪起，博物馆：1793年',
+        architect: '几个世纪以来的多位建筑师，现代金字塔：贝聿铭'
       },
       ja: {
         name: 'ルーヴル美術館',
         narration: 'ここは世界最大の美術館、ルーヴル美術館です。モナ・リザを含む数千の作品を所蔵しています。',
-        description: '世界最大の美術館であり歴史的建造物'
+        description: '世界最大の美術館であり歴史的建造物',
+        historicalInfo: 'ルーヴルは元々王宮でしたが、1793年のフランス革命中に公共美術館となりました。先史時代から21世紀までの約38,000点の作品を所蔵しています。',
+        yearBuilt: '宮殿：12世紀以降、美術館：1793年',
+        architect: '何世紀にもわたる複数の建築家、現代のピラミッド：I.M.ペイ'
+      },
+      pt: {
+        name: 'Museu do Louvre',
+        narration: 'Você está no Museu do Louvre, o maior museu de arte do mundo. Lar de milhares de obras, incluindo a Mona Lisa.',
+        description: 'O maior museu de arte do mundo e um monumento histórico',
+        historicalInfo: 'O Louvre foi originalmente um palácio real antes de se tornar um museu público durante a Revolução Francesa em 1793. Abriga aproximadamente 38.000 objetos da pré-história ao século XXI.',
+        yearBuilt: 'Palácio: do século XII em diante, Museu: 1793',
+        architect: 'Múltiplos arquitetos ao longo dos séculos, Pirâmide moderna: I.M. Pei'
+      },
+      ru: {
+        name: 'Музей Лувр',
+        narration: 'Вы находитесь в музее Лувр, крупнейшем художественном музее мира. Здесь хранятся тысячи произведений, включая Мону Лизу.',
+        description: 'Крупнейший художественный музей мира и исторический памятник',
+        historicalInfo: 'Лувр первоначально был королевским дворцом, прежде чем стать публичным музеем во время Французской революции в 1793 году. В нем хранится около 38 000 экспонатов от доисторических времен до XXI века.',
+        yearBuilt: 'Дворец: с XII века, Музей: 1793',
+        architect: 'Множество архитекторов на протяжении веков, Современная пирамида: И.М. Пей'
       }
     }
   },
@@ -485,37 +778,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Cattedrale di Notre-Dame',
         narration: 'Questa è la Cattedrale di Notre-Dame, un capolavoro dell\'architettura gotica francese risalente al XII secolo.',
-        description: 'Una cattedrale cattolica medievale e patrimonio mondiale dell\'UNESCO'
+        description: 'Una cattedrale cattolica medievale e patrimonio mondiale dell\'UNESCO',
+        historicalInfo: 'Notre-Dame de Paris è una cattedrale cattolica medievale dedicata alla Vergine Maria. È considerata uno dei migliori esempi di architettura gotica francese ed è stata gravemente danneggiata da un incendio nel 2019.',
+        yearBuilt: '1163-1345',
+        architect: 'Più architetti, restauro importante di Eugène Viollet-le-Duc'
       },
       ko: {
         name: '노트르담 대성당',
         narration: '이곳은 12세기로 거슬러 올라가는 프랑스 고딕 건축의 걸작, 노트르담 대성당입니다.',
-        description: '중세 가톨릭 대성당이자 유네스코 세계문화유산'
+        description: '중세 가톨릭 대성당이자 유네스코 세계문화유산',
+        historicalInfo: '노트르담 드 파리는 성모 마리아에게 봉헌된 중세 가톨릭 대성당입니다. 프랑스 고딕 건축의 가장 훌륭한 사례 중 하나로 여겨지며 2019년 화재로 심각한 피해를 입었습니다.',
+        yearBuilt: '1163-1345년',
+        architect: '여러 건축가들, 외젠 비올레르뒤크의 주요 복원'
       },
       es: {
         name: 'Catedral de Notre-Dame',
         narration: 'Esta es la Catedral de Notre-Dame, una obra maestra de la arquitectura gótica francesa que data del siglo XII.',
-        description: 'Una catedral católica medieval y Patrimonio de la Humanidad de la UNESCO'
+        description: 'Una catedral católica medieval y Patrimonio de la Humanidad de la UNESCO',
+        historicalInfo: 'Notre-Dame de París es una catedral católica medieval dedicada a la Virgen María. Se considera uno de los mejores ejemplos de arquitectura gótica francesa y fue gravemente dañada por un incendio en 2019.',
+        yearBuilt: '1163-1345',
+        architect: 'Múltiples arquitectos, restauración importante de Eugène Viollet-le-Duc'
       },
       fr: {
         name: 'Cathédrale Notre-Dame',
         narration: 'Voici la Cathédrale Notre-Dame, un chef-d\'œuvre de l\'architecture gothique française datant du XIIe siècle.',
-        description: 'Une cathédrale catholique médiévale et site du patrimoine mondial de l\'UNESCO'
+        description: 'Une cathédrale catholique médiévale et site du patrimoine mondial de l\'UNESCO',
+        historicalInfo: 'Notre-Dame de Paris est une cathédrale catholique médiévale dédiée à la Vierge Marie. Elle est considérée comme l\'un des plus beaux exemples d\'architecture gothique française et a été gravement endommagée par un incendie en 2019.',
+        yearBuilt: '1163-1345',
+        architect: 'Plusieurs architectes, restauration majeure par Eugène Viollet-le-Duc'
       },
       de: {
         name: 'Kathedrale Notre-Dame',
         narration: 'Dies ist die Kathedrale Notre-Dame, ein Meisterwerk französischer Gotik aus dem 12. Jahrhundert.',
-        description: 'Eine mittelalterliche katholische Kathedrale und UNESCO-Weltkulturerbe'
+        description: 'Eine mittelalterliche katholische Kathedrale und UNESCO-Weltkulturerbe',
+        historicalInfo: 'Notre-Dame de Paris ist eine mittelalterliche katholische Kathedrale, die der Jungfrau Maria gewidmet ist. Sie gilt als eines der schönsten Beispiele französischer Gotik und wurde 2019 durch einen Brand schwer beschädigt.',
+        yearBuilt: '1163-1345',
+        architect: 'Mehrere Architekten, große Restaurierung durch Eugène Viollet-le-Duc'
       },
       zh: {
         name: '巴黎圣母院',
         narration: '这是巴黎圣母院，可追溯至12世纪的法国哥特式建筑杰作。',
-        description: '中世纪天主教大教堂和联合国教科文组织世界遗产'
+        description: '中世纪天主教大教堂和联合国教科文组织世界遗产',
+        historicalInfo: '巴黎圣母院是一座献给圣母玛利亚的中世纪天主教大教堂。它被认为是法国哥特式建筑的最佳典范之一，在2019年的火灾中严重受损。',
+        yearBuilt: '1163-1345年',
+        architect: '多位建筑师，欧仁·维奥莱-勒-杜克的主要修复'
       },
       ja: {
         name: 'ノートルダム大聖堂',
         narration: 'これは12世紀にさかのぼるフランス・ゴシック建築の傑作、ノートルダム大聖堂です。',
-        description: '中世のカトリック大聖堂でユネスコ世界遺産'
+        description: '中世のカトリック大聖堂でユネスコ世界遺産',
+        historicalInfo: 'ノートルダム・ド・パリは聖母マリアに捧げられた中世のカトリック大聖堂です。フランス・ゴシック建築の最高傑作の一つとされ、2019年の火災で大きな被害を受けました。',
+        yearBuilt: '1163-1345年',
+        architect: '複数の建築家、ウジェーヌ・ヴィオレ＝ル＝デュクによる大規模修復'
+      },
+      pt: {
+        name: 'Catedral de Notre-Dame',
+        narration: 'Esta é a Catedral de Notre-Dame, uma obra-prima da arquitetura gótica francesa que remonta ao século XII.',
+        description: 'Uma catedral católica medieval e Patrimônio Mundial da UNESCO',
+        historicalInfo: 'Notre-Dame de Paris é uma catedral católica medieval dedicada à Virgem Maria. É considerada um dos melhores exemplos de arquitetura gótica francesa e foi gravemente danificada por um incêndio em 2019.',
+        yearBuilt: '1163-1345',
+        architect: 'Múltiplos arquitetos, grande restauração por Eugène Viollet-le-Duc'
+      },
+      ru: {
+        name: 'Собор Нотр-Дам',
+        narration: 'Это собор Нотр-Дам, шедевр французской готической архитектуры, датируемый XII веком.',
+        description: 'Средневековый католический собор и объект Всемирного наследия ЮНЕСКО',
+        historicalInfo: 'Собор Парижской Богоматери - средневековый католический собор, посвященный Деве Марии. Он считается одним из лучших образцов французской готической архитектуры и был серьезно поврежден пожаром в 2019 году.',
+        yearBuilt: '1163-1345',
+        architect: 'Несколько архитекторов, крупная реставрация Эжена Виолле-ле-Дюка'
       }
     }
   },
@@ -547,37 +877,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Arco di Trionfo',
         narration: 'L\'Arco di Trionfo onora coloro che hanno combattuto per la Francia. Si trova al centro di Place Charles de Gaulle.',
-        description: 'Uno dei monumenti più famosi di Parigi'
+        description: 'Uno dei monumenti più famosi di Parigi',
+        historicalInfo: 'L\'Arco di Trionfo fu commissionato da Napoleone nel 1806 per onorare l\'esercito francese. Si trova al centro di Place Charles de Gaulle e contiene la Tomba del Milite Ignoto.',
+        yearBuilt: '1806-1836',
+        architect: 'Jean Chalgrin'
       },
       ko: {
         name: '개선문',
         narration: '개선문은 프랑스를 위해 싸운 사람들을 기리는 곳입니다. 샤를 드골 광장 중앙에 위치해 있습니다.',
-        description: '파리에서 가장 유명한 기념물 중 하나'
+        description: '파리에서 가장 유명한 기념물 중 하나',
+        historicalInfo: '개선문은 1806년 나폴레옹이 프랑스 군대를 기리기 위해 의뢰했습니다. 샤를 드골 광장 중앙에 위치하며 무명용사의 묘가 있습니다.',
+        yearBuilt: '1806-1836년',
+        architect: '장 샬그랭'
       },
       es: {
         name: 'Arco del Triunfo',
         narration: 'El Arco del Triunfo honra a quienes lucharon por Francia. Se encuentra en el centro de la Place Charles de Gaulle.',
-        description: 'Uno de los monumentos más famosos de París'
+        description: 'Uno de los monumentos más famosos de París',
+        historicalInfo: 'El Arco del Triunfo fue encargado por Napoleón en 1806 para honrar al ejército francés. Se encuentra en el centro de la Place Charles de Gaulle y contiene la Tumba del Soldado Desconocido.',
+        yearBuilt: '1806-1836',
+        architect: 'Jean Chalgrin'
       },
       fr: {
         name: 'Arc de Triomphe',
         narration: 'L\'Arc de Triomphe rend hommage à ceux qui ont combattu pour la France. Il se dresse au centre de la Place Charles de Gaulle.',
-        description: 'L\'un des monuments les plus célèbres de Paris'
+        description: 'L\'un des monuments les plus célèbres de Paris',
+        historicalInfo: 'L\'Arc de Triomphe a été commandé par Napoléon en 1806 pour honorer l\'armée française. Il se trouve au centre de la Place Charles de Gaulle et contient la Tombe du Soldat Inconnu.',
+        yearBuilt: '1806-1836',
+        architect: 'Jean Chalgrin'
       },
       de: {
         name: 'Arc de Triomphe',
         narration: 'Der Arc de Triomphe ehrt diejenigen, die für Frankreich gekämpft haben. Er steht im Zentrum des Place Charles de Gaulle.',
-        description: 'Eines der berühmtesten Denkmäler in Paris'
+        description: 'Eines der berühmtesten Denkmäler in Paris',
+        historicalInfo: 'Der Arc de Triomphe wurde 1806 von Napoleon in Auftrag gegeben, um die französische Armee zu ehren. Er steht im Zentrum des Place Charles de Gaulle und enthält das Grab des Unbekannten Soldaten.',
+        yearBuilt: '1806-1836',
+        architect: 'Jean Chalgrin'
       },
       zh: {
         name: '凯旋门',
         narration: '凯旋门是为纪念为法国而战的人们而建。它位于戴高乐广场的中心。',
-        description: '巴黎最著名的纪念碑之一'
+        description: '巴黎最著名的纪念碑之一',
+        historicalInfo: '凯旋门由拿破仑于1806年委托建造，以纪念法国军队。它位于戴高乐广场的中心，内有无名战士墓。',
+        yearBuilt: '1806-1836年',
+        architect: '让·沙尔格兰'
       },
       ja: {
         name: '凱旋門',
         narration: '凱旋門はフランスのために戦った人々を称えます。シャルル・ド・ゴール広場の中心に立っています。',
-        description: 'パリで最も有名な記念碑の一つ'
+        description: 'パリで最も有名な記念碑の一つ',
+        historicalInfo: '凱旋門は1806年にナポレオンがフランス軍を称えるために委託しました。シャルル・ド・ゴール広場の中心にあり、無名戦士の墓があります。',
+        yearBuilt: '1806-1836年',
+        architect: 'ジャン・シャルグラン'
+      },
+      pt: {
+        name: 'Arco do Triunfo',
+        narration: 'O Arco do Triunfo homenageia aqueles que lutaram pela França. Está no centro da Place Charles de Gaulle.',
+        description: 'Um dos monumentos mais famosos de Paris',
+        historicalInfo: 'O Arco do Triunfo foi encomendado por Napoleão em 1806 para homenagear o exército francês. Está no centro da Place Charles de Gaulle e contém o Túmulo do Soldado Desconhecido.',
+        yearBuilt: '1806-1836',
+        architect: 'Jean Chalgrin'
+      },
+      ru: {
+        name: 'Триумфальная арка',
+        narration: 'Триумфальная арка чествует тех, кто сражался за Францию. Она стоит в центре площади Шарля де Голля.',
+        description: 'Один из самых известных памятников Парижа',
+        historicalInfo: 'Триумфальная арка была заказана Наполеоном в 1806 году в честь французской армии. Она находится в центре площади Шарля де Голля и содержит Могилу Неизвестного солдата.',
+        yearBuilt: '1806-1836',
+        architect: 'Жан Шальгрен'
       }
     }
   },
@@ -610,37 +977,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Big Ben',
         narration: 'Benvenuto al Big Ben, l\'iconica torre dell\'orologio di Londra. Ufficialmente conosciuta come Elizabeth Tower, i suoi rintocchi sono noti in tutto il mondo.',
-        description: 'Il Grande Orologio di Westminster'
+        description: 'Il Grande Orologio di Westminster',
+        historicalInfo: 'Big Ben è il soprannome della Grande Campana dell\'orologio del Palazzo di Westminster. La torre fu completata nel 1859 ed è diventata uno dei simboli più importanti del Regno Unito.',
+        yearBuilt: '1843-1859',
+        architect: 'Augustus Pugin'
       },
       ko: {
         name: '빅벤',
         narration: '런던의 상징적인 시계탑 빅벤에 오신 것을 환영합니다. 공식적으로 엘리자베스 타워로 알려져 있으며, 그 종소리는 전 세계적으로 유명합니다.',
-        description: '웨스트민스터의 대시계'
+        description: '웨스트민스터의 대시계',
+        historicalInfo: '빅벤은 웨스트민스터 궁전의 시계탑에 있는 대종의 별명입니다. 이 탑은 1859년에 완공되었으며 영국의 가장 중요한 상징 중 하나가 되었습니다.',
+        yearBuilt: '1843-1859',
+        architect: '아우구스투스 퓨진'
       },
       es: {
         name: 'Big Ben',
         narration: 'Bienvenido al Big Ben, la icónica torre del reloj de Londres. Conocida oficialmente como Elizabeth Tower, sus campanadas son conocidas en todo el mundo.',
-        description: 'El Gran Reloj de Westminster'
+        description: 'El Gran Reloj de Westminster',
+        historicalInfo: 'Big Ben es el apodo de la Gran Campana del reloj del Palacio de Westminster. La torre se completó en 1859 y se ha convertido en uno de los símbolos más destacados del Reino Unido.',
+        yearBuilt: '1843-1859',
+        architect: 'Augustus Pugin'
       },
       fr: {
         name: 'Big Ben',
         narration: 'Bienvenue à Big Ben, la tour de l\'horloge emblématique de Londres. Officiellement connue sous le nom d\'Elizabeth Tower, ses carillons sont connus dans le monde entier.',
-        description: 'La Grande Horloge de Westminster'
+        description: 'La Grande Horloge de Westminster',
+        historicalInfo: 'Big Ben est le surnom de la Grande Cloche de l\'horloge du Palais de Westminster. La tour a été achevée en 1859 et est devenue l\'un des symboles les plus importants du Royaume-Uni.',
+        yearBuilt: '1843-1859',
+        architect: 'Augustus Pugin'
       },
       de: {
         name: 'Big Ben',
         narration: 'Willkommen am Big Ben, dem ikonischen Glockenturm Londons. Offiziell als Elizabeth Tower bekannt, sind seine Glockenschläge weltweit bekannt.',
-        description: 'Die Große Uhr von Westminster'
+        description: 'Die Große Uhr von Westminster',
+        historicalInfo: 'Big Ben ist der Spitzname für die Große Glocke der Uhr im Palace of Westminster. Der Turm wurde 1859 fertiggestellt und ist zu einem der bekanntesten Symbole des Vereinigten Königreichs geworden.',
+        yearBuilt: '1843-1859',
+        architect: 'Augustus Pugin'
       },
       zh: {
         name: '大本钟',
         narration: '欢迎来到大本钟，伦敦标志性的钟楼。正式名称为伊丽莎白塔，其钟声享誉全球。',
-        description: '威斯敏斯特大钟'
+        description: '威斯敏斯特大钟',
+        historicalInfo: '大本钟是威斯敏斯特宫钟楼大钟的昵称。该塔于1859年完工，已成为英国最重要的象征之一。',
+        yearBuilt: '1843-1859',
+        architect: '奥古斯塔斯·普金'
       },
       ja: {
         name: 'ビッグ・ベン',
         narration: 'ロンドンの象徴的な時計塔、ビッグ・ベンへようこそ。正式にはエリザベス・タワーとして知られ、その鐘の音は世界中で知られています。',
-        description: 'ウェストミンスターの大時計'
+        description: 'ウェストミンスターの大時計',
+        historicalInfo: 'ビッグ・ベンはウェストミンスター宮殿の時計塔にある大鐘の愛称です。この塔は1859年に完成し、イギリスの最も重要なシンボルの一つとなりました。',
+        yearBuilt: '1843-1859',
+        architect: 'オーガスタス・ピュージン'
+      },
+      pt: {
+        name: 'Big Ben',
+        narration: 'Bem-vindo ao Big Ben, a icônica torre do relógio de Londres. Oficialmente conhecida como Torre Elizabeth, seus sinos são conhecidos mundialmente.',
+        description: 'O Grande Relógio de Westminster',
+        historicalInfo: 'Big Ben é o apelido do Grande Sino do relógio do Palácio de Westminster. A torre foi concluída em 1859 e se tornou um dos símbolos mais proeminentes do Reino Unido.',
+        yearBuilt: '1843-1859',
+        architect: 'Augustus Pugin'
+      },
+      ru: {
+        name: 'Биг-Бен',
+        narration: 'Добро пожаловать в Биг-Бен, знаковую часовую башню Лондона. Официально известная как башня Елизаветы, ее колокольные звоны известны во всем мире.',
+        description: 'Большие часы Вестминстера',
+        historicalInfo: 'Биг-Бен — это прозвище Большого колокола часов Вестминстерского дворца. Башня была завершена в 1859 году и стала одним из самых важных символов Соединенного Королевства.',
+        yearBuilt: '1843-1859',
+        architect: 'Огастес Пьюджин'
       }
     }
   },
@@ -672,37 +1076,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Tower Bridge',
         narration: 'Ti trovi al Tower Bridge, uno dei monumenti più famosi di Londra. Questo ponte basculante e sospeso attraversa il Tamigi.',
-        description: 'Un simbolo iconico di Londra dal 1894'
+        description: 'Un simbolo iconico di Londra dal 1894',
+        historicalInfo: 'Il Tower Bridge fu costruito tra il 1886 e il 1894 ed è uno dei monumenti più famosi di Londra. Il meccanismo del ponte basculante permette di sollevare la carreggiata per far passare il traffico fluviale.',
+        yearBuilt: '1886-1894',
+        architect: 'Horace Jones e John Wolfe Barry'
       },
       ko: {
         name: '타워 브리지',
         narration: '런던에서 가장 유명한 랜드마크 중 하나인 타워 브리지에 있습니다. 이 도개교와 현수교가 결합된 다리는 템스강을 가로지릅니다.',
-        description: '1894년부터 런던의 상징'
+        description: '1894년부터 런던의 상징',
+        historicalInfo: '타워 브리지는 1886년에서 1894년 사이에 건설되었으며 런던의 가장 유명한 랜드마크 중 하나입니다. 도개교 메커니즘은 강 교통이 아래를 통과할 수 있도록 도로를 들어 올릴 수 있게 합니다.',
+        yearBuilt: '1886-1894',
+        architect: '호레이스 존스와 존 울프 배리'
       },
       es: {
         name: 'Tower Bridge',
         narration: 'Está en Tower Bridge, uno de los monumentos más famosos de Londres. Este puente basculante y colgante cruza el río Támesis.',
-        description: 'Un símbolo icónico de Londres desde 1894'
+        description: 'Un símbolo icónico de Londres desde 1894',
+        historicalInfo: 'Tower Bridge fue construido entre 1886 y 1894 y es uno de los monumentos más famosos de Londres. El mecanismo del puente basculante permite que la calzada se eleve para dejar pasar el tráfico fluvial.',
+        yearBuilt: '1886-1894',
+        architect: 'Horace Jones y John Wolfe Barry'
       },
       fr: {
         name: 'Tower Bridge',
         narration: 'Vous êtes au Tower Bridge, l\'un des monuments les plus célèbres de Londres. Ce pont basculant et suspendu traverse la Tamise.',
-        description: 'Un symbole emblématique de Londres depuis 1894'
+        description: 'Un symbole emblématique de Londres depuis 1894',
+        historicalInfo: 'Le Tower Bridge a été construit entre 1886 et 1894 et est l\'un des monuments les plus célèbres de Londres. Le mécanisme du pont basculant permet de lever la chaussée pour laisser passer le trafic fluvial.',
+        yearBuilt: '1886-1894',
+        architect: 'Horace Jones et John Wolfe Barry'
       },
       de: {
         name: 'Tower Bridge',
         narration: 'Sie befinden sich an der Tower Bridge, einem der berühmtesten Wahrzeichen Londons. Diese kombinierte Klapp- und Hängebrücke überquert die Themse.',
-        description: 'Ein ikonisches Symbol Londons seit 1894'
+        description: 'Ein ikonisches Symbol Londons seit 1894',
+        historicalInfo: 'Die Tower Bridge wurde zwischen 1886 und 1894 erbaut und ist eines der berühmtesten Wahrzeichen Londons. Der Klappbrückenmechanismus ermöglicht es, die Fahrbahn anzuheben, um den Schiffsverkehr durchzulassen.',
+        yearBuilt: '1886-1894',
+        architect: 'Horace Jones und John Wolfe Barry'
       },
       zh: {
         name: '塔桥',
         narration: '您在伦敦最著名的地标之一塔桥。这座开合桥和悬索桥的组合横跨泰晤士河。',
-        description: '自1894年以来伦敦的标志性象征'
+        description: '自1894年以来伦敦的标志性象征',
+        historicalInfo: '塔桥建于1886年至1894年间，是伦敦最著名的地标之一。开合桥机制允许路面升起以让河道交通通过。',
+        yearBuilt: '1886-1894',
+        architect: '霍勒斯·琼斯和约翰·沃尔夫·巴里'
       },
       ja: {
         name: 'タワーブリッジ',
         narration: 'ロンドンで最も有名なランドマークの一つ、タワーブリッジにいます。この跳ね橋と吊り橋を組み合わせた橋はテムズ川に架かっています。',
-        description: '1894年以来のロンドンの象徴'
+        description: '1894年以来のロンドンの象徴',
+        historicalInfo: 'タワーブリッジは1886年から1894年にかけて建設され、ロンドンで最も有名なランドマークの一つです。跳ね橋機構により、河川交通を通過させるために道路を持ち上げることができます。',
+        yearBuilt: '1886-1894',
+        architect: 'ホレス・ジョーンズとジョン・ウルフ・バリー'
+      },
+      pt: {
+        name: 'Tower Bridge',
+        narration: 'Você está na Tower Bridge, um dos marcos mais famosos de Londres. Esta ponte basculante e suspensa cruza o Rio Tâmisa.',
+        description: 'Um símbolo icônico de Londres desde 1894',
+        historicalInfo: 'A Tower Bridge foi construída entre 1886 e 1894 e é um dos marcos mais famosos de Londres. O mecanismo da ponte basculante permite que a pista seja levantada para deixar o tráfego fluvial passar por baixo.',
+        yearBuilt: '1886-1894',
+        architect: 'Horace Jones e John Wolfe Barry'
+      },
+      ru: {
+        name: 'Тауэрский мост',
+        narration: 'Вы находитесь у Тауэрского моста, одной из самых известных достопримечательностей Лондона. Этот разводной и подвесной мост пересекает Темзу.',
+        description: 'Знаковый символ Лондона с 1894 года',
+        historicalInfo: 'Тауэрский мост был построен между 1886 и 1894 годами и является одной из самых известных достопримечательностей Лондона. Механизм разводного моста позволяет поднимать проезжую часть для пропуска речного транспорта.',
+        yearBuilt: '1886-1894',
+        architect: 'Гораций Джонс и Джон Вулф Барри'
       }
     }
   },
@@ -734,37 +1175,74 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Palazzo di Buckingham',
         narration: 'Questo è Buckingham Palace, la residenza londinese del monarca britannico. Osserva la famosa cerimonia del Cambio della Guardia.',
-        description: 'La residenza ufficiale del monarca britannico'
+        description: 'La residenza ufficiale del monarca britannico',
+        historicalInfo: 'Buckingham Palace è servito come residenza ufficiale londinese dei sovrani del Regno Unito dal 1837. Originariamente era una grande casa di città costruita per il Duca di Buckingham nel 1703.',
+        yearBuilt: 'Casa originale: 1703, Espansione del palazzo: 1826-1837',
+        architect: 'William Winde (originale), John Nash, Edward Blore, Aston Webb'
       },
       ko: {
         name: '버킹엄 궁전',
         narration: '영국 군주의 런던 거주지인 버킹엄 궁전입니다. 유명한 근위병 교대식을 관람하세요.',
-        description: '영국 군주의 공식 거주지'
+        description: '영국 군주의 공식 거주지',
+        historicalInfo: '버킹엄 궁전은 1837년부터 영국 군주의 공식 런던 거주지로 사용되었습니다. 원래는 1703년에 버킹엄 공작을 위해 건설된 큰 저택이었습니다.',
+        yearBuilt: '원래 저택: 1703년, 궁전 확장: 1826-1837년',
+        architect: '윌리엄 윈드 (원래), 존 내시, 에드워드 블로어, 애스턴 웹'
       },
       es: {
         name: 'Palacio de Buckingham',
         narration: 'Este es el Palacio de Buckingham, la residencia londinense del monarca británico. Observe la famosa ceremonia del Cambio de Guardia.',
-        description: 'La residencia oficial del monarca británico'
+        description: 'La residencia oficial del monarca británico',
+        historicalInfo: 'El Palacio de Buckingham ha servido como residencia oficial londinense de los soberanos del Reino Unido desde 1837. Originalmente era una gran casa señorial construida para el Duque de Buckingham en 1703.',
+        yearBuilt: 'Casa original: 1703, Expansión del palacio: 1826-1837',
+        architect: 'William Winde (original), John Nash, Edward Blore, Aston Webb'
       },
       fr: {
         name: 'Palais de Buckingham',
         narration: 'Voici le Palais de Buckingham, la résidence londonienne du monarque britannique. Assistez à la célèbre cérémonie de la relève de la garde.',
-        description: 'La résidence officielle du monarque britannique'
+        description: 'La résidence officielle du monarque britannique',
+        historicalInfo: 'Le Palais de Buckingham sert de résidence officielle londonienne des souverains du Royaume-Uni depuis 1837. À l\'origine, c\'était une grande maison de ville construite pour le duc de Buckingham en 1703.',
+        yearBuilt: 'Maison originale: 1703, Expansion du palais: 1826-1837',
+        architect: 'William Winde (original), John Nash, Edward Blore, Aston Webb'
       },
       de: {
         name: 'Buckingham Palace',
         narration: 'Dies ist der Buckingham Palace, die Londoner Residenz des britischen Monarchen. Beobachten Sie die berühmte Wachablösung.',
-        description: 'Die offizielle Residenz des britischen Monarchen'
+        description: 'Die offizielle Residenz des britischen Monarchen',
+        historicalInfo: 'Der Buckingham Palace dient seit 1837 als offizielle Londoner Residenz der britischen Monarchen. Ursprünglich war es ein großes Stadthaus, das 1703 für den Herzog von Buckingham gebaut wurde.',
+        yearBuilt: 'Ursprüngliches Haus: 1703, Palasterweiterung: 1826-1837',
+        architect: 'William Winde (ursprünglich), John Nash, Edward Blore, Aston Webb'
       },
       zh: {
         name: '白金汉宫',
         narration: '这是白金汉宫，英国君主的伦敦住所。观看著名的卫兵换岗仪式。',
-        description: '英国君主的官方住所'
+        description: '英国君主的官方住所',
+        historicalInfo: '白金汉宫自1837年以来一直担任英国君主的官方伦敦住所。它最初是1703年为白金汉公爵建造的一座大型城镇住宅。',
+        yearBuilt: '原建筑：1703年，宫殿扩建：1826-1837年',
+        architect: '威廉·温德（原建筑），约翰·纳什，爱德华·布洛尔，阿斯顿·韦伯'
       },
       ja: {
         name: 'バッキンガム宮殿',
         narration: 'これは英国君主のロンドン邸宅、バッキンガム宮殿です。有名な衛兵交代式をご覧ください。',
-        description: '英国君主の公式邸宅'
+        description: '英国君主の公式邸宅',
+        historicalInfo: 'バッキンガム宮殿は1837年以来、英国君主の公式ロンドン邸宅として使用されています。元々は1703年にバッキンガム公爵のために建てられた大きなタウンハウスでした。',
+        yearBuilt: '元の建物：1703年、宮殿拡張：1826-1837年',
+        architect: 'ウィリアム・ウィンド（元の建物）、ジョン・ナッシュ、エドワード・ブロア、アストン・ウェブ'
+      },
+      pt: {
+        name: 'Palácio de Buckingham',
+        narration: 'Este é o Palácio de Buckingham, a residência londrina do monarca britânico. Assista à famosa cerimônia da Troca da Guarda.',
+        description: 'A residência oficial do monarca britânico',
+        historicalInfo: 'O Palácio de Buckingham tem servido como residência oficial londrina dos soberanos do Reino Unido desde 1837. Originalmente era uma grande casa de cidade construída para o Duque de Buckingham em 1703.',
+        yearBuilt: 'Casa original: 1703, Expansão do palácio: 1826-1837',
+        architect: 'William Winde (original), John Nash, Edward Blore, Aston Webb'
+      },
+      ru: {
+        name: 'Букингемский дворец',
+        narration: 'Это Букингемский дворец, лондонская резиденция британского монарха. Посмотрите знаменитую церемонию смены караула.',
+        description: 'Официальная резиденция британского монарха',
+        historicalInfo: 'Букингемский дворец служит официальной лондонской резиденцией британских монархов с 1837 года. Первоначально это был большой особняк, построенный для герцога Бэкингема в 1703 году.',
+        yearBuilt: 'Оригинальный дом: 1703, Расширение дворца: 1826-1837',
+        architect: 'Уильям Уинд (оригинал), Джон Нэш, Эдвард Блор, Астон Уэбб'
       }
     }
   },
@@ -791,42 +1269,82 @@ const LANDMARKS: Landmark[] = [
         name: 'London Eye',
         narration: 'The London Eye is a giant observation wheel offering spectacular views over the city.',
         description: 'Europe\'s tallest cantilevered observation wheel',
-        detailedDescription: 'The London Eye, also known as the Millennium Wheel, stands as one of the world\'s most iconic observation wheels and London\'s most popular paid tourist attraction, welcoming over 3.5 million visitors annually to experience breathtaking 360-degree views of the British capital. Rising 135 meters (443 feet) above the South Bank of the River Thames, this engineering marvel has transformed London\'s skyline since its opening in 2000, becoming as synonymous with the city as Big Ben, Tower Bridge, and Buckingham Palace. The London Eye was conceived as part of the millennium celebrations, designed to be a temporary structure that would stand for just five years. However, its immediate popularity and iconic status led to it becoming a permanent fixture of London\'s landscape. The wheel was designed by architects David Marks and Julia Barfield, who won a competition organized by The Sunday Times and the Architecture Foundation to design a landmark to celebrate the new millennium. Their innovative design drew inspiration from the engineering principles of bicycle wheels, creating a cantilevered structure that appears to float effortlessly above the Thames. Construction of the London Eye was an engineering feat of remarkable complexity and ambition. The wheel was constructed in sections, with components manufactured across Europe and transported to London for assembly. The A-frame legs, which support the wheel\'s massive weight, were transported up the Thames on barges and lifted into position by some of Europe\'s largest floating cranes. The wheel itself was assembled horizontally on temporary platforms in the river, then slowly raised to its vertical position over the course of a week in October 1999 using a sophisticated jacking system. The process was so delicate and unprecedented that it captured worldwide attention, with thousands gathering to watch the dramatic tilting of the massive structure. The London Eye consists of 32 sealed and air-conditioned passenger capsules, representing the 32 London boroughs. Interestingly, the capsules are numbered 1 to 33, skipping number 13 for superstitious reasons. Each capsule weighs 10 tons, is built to carry 25 people, and provides unobstructed 360-degree views through its glass construction. The capsules are attached to the external circumference of the wheel and rotate in motorized fashion, maintaining a horizontal position as the wheel turns, ensuring passengers always have an upright viewing platform. A complete rotation takes approximately 30 minutes, moving at a stately pace of 0.9 kilometers per hour (0.6 mph), allowing the wheel to continue moving while passengers board and alight - though it can be stopped for disabled or elderly passengers who need more time. The wheel weighs approximately 2,100 tons, with the rim alone weighing 1,700 tons. It is supported by an A-frame on one side only, making it the world\'s tallest cantilevered observation wheel. This cantilever design, with the wheel supported from one side rather than both, creates the distinctive silhouette that has become so recognizable. The structure requires 1,700 tons of steel and took seven years from conception to completion, at a cost of £75 million. From the top of the London Eye, on a clear day, visitors can see up to 40 kilometers (25 miles) in all directions, encompassing Windsor Castle to the west and the hills of Kent to the south. The views include all of London\'s major landmarks: the Houses of Parliament and Big Ben directly across the river, St. Paul\'s Cathedral\'s distinctive dome, the Tower of London, Tower Bridge, the Shard piercing the sky, and countless other historic and modern buildings that tell the story of London\'s evolution from Roman settlement to global metropolis. The London Eye has become much more than an observation wheel - it serves as a cultural landmark and event venue. The capsules have hosted everything from weddings to business meetings, from yoga sessions to wine tastings. In 2005, one capsule was temporarily converted into a luxury apartment where two competition winners spent the night suspended 135 meters above London. The wheel has been illuminated in various colors to mark significant events: red for Chinese New Year, pink for breast cancer awareness, rainbow colors for Pride, and even the colors of national flags to welcome visiting dignitaries. The London Eye played a central role in London\'s millennium celebrations, with a spectacular fireworks display launched from the wheel itself at midnight on January 1, 2000 - though technical problems meant the wheel wasn\'t actually rotating for passengers until March 2000. Since then, it has become the focal point for London\'s New Year\'s Eve celebrations, with elaborate firework displays launched from the wheel and surrounding area, broadcast to millions worldwide. The wheel has also been featured in numerous films, television shows, and music videos, from the James Bond thriller "Spectre" to the romantic comedy "Bridget Jones\'s Diary," cementing its place in popular culture. Its distinctive circular form has become an instantly recognizable symbol of London, appearing in countless photographs, paintings, and promotional materials for the city. In 2015, the London Eye underwent a major refurbishment, with Coca-Cola becoming the title sponsor, leading to it being officially branded as the "Coca-Cola London Eye" - though most Londoners and visitors continue to call it simply "The London Eye." The refurbishment included new lighting systems using LED technology, creating more dynamic and energy-efficient illumination displays that can change color and pattern for special events. The London Eye pioneered the concept of large-scale observation wheels in major cities, inspiring similar structures worldwide, including the Singapore Flyer, the High Roller in Las Vegas, and the Dubai Eye. However, the London Eye remains unique in its cantilever design and its integration into the urban landscape, positioned to provide optimal views of one of the world\'s most historic cityscapes. The observation wheel has also contributed significantly to the regeneration of London\'s South Bank, which has transformed from an underutilized industrial area into one of London\'s most vibrant cultural quarters. The area now features theaters, galleries, restaurants, and public spaces, with the London Eye serving as the anchor attraction that draws millions of visitors who then explore the surrounding cultural offerings. During the COVID-19 pandemic, the London Eye stood silent for months, its empty capsules a poignant symbol of the tourism industry\'s challenges. However, upon reopening, it implemented new safety measures and private capsule bookings, demonstrating its adaptability and resilience. The pandemic period also saw the wheel illuminated in rainbow colors to honor NHS workers and in other meaningful displays of solidarity and hope. Today, the London Eye stands as a symbol of the turn of the millennium, a monument to engineering ingenuity, and a beloved London landmark that offers both residents and visitors a unique perspective on one of the world\'s great cities. It represents London\'s ability to embrace the new while honoring the old, to innovate while respecting tradition. From its capsules, suspended above the Thames, passengers gain not just a view of London but a new understanding of the city\'s layout, history, and evolution - a 30-minute journey that connects past, present, and future in the most literal and spectacular way possible. The London Eye reminds us that sometimes the best way to appreciate where we are is to step back, rise above, and see the bigger picture.'
+        detailedDescription: 'The London Eye, also known as the Millennium Wheel, stands as one of the world\'s most iconic observation wheels and London\'s most popular paid tourist attraction, welcoming over 3.5 million visitors annually to experience breathtaking 360-degree views of the British capital. Rising 135 meters (443 feet) above the South Bank of the River Thames, this engineering marvel has transformed London\'s skyline since its opening in 2000, becoming as synonymous with the city as Big Ben, Tower Bridge, and Buckingham Palace. The London Eye was conceived as part of the millennium celebrations, designed to be a temporary structure that would stand for just five years. However, its immediate popularity and iconic status led to it becoming a permanent fixture of London\'s landscape. The wheel was designed by architects David Marks and Julia Barfield, who won a competition organized by The Sunday Times and the Architecture Foundation to design a landmark to celebrate the new millennium. Their innovative design drew inspiration from the engineering principles of bicycle wheels, creating a cantilevered structure that appears to float effortlessly above the Thames. Construction of the London Eye was an engineering feat of remarkable complexity and ambition. The wheel was constructed in sections, with components manufactured across Europe and transported to London for assembly. The A-frame legs, which support the wheel\'s massive weight, were transported up the Thames on barges and lifted into position by some of Europe\'s largest floating cranes. The wheel itself was assembled horizontally on temporary platforms in the river, then slowly raised to its vertical position over the course of a week in October 1999 using a sophisticated jacking system. The process was so delicate and unprecedented that it captured worldwide attention, with thousands gathering to watch the dramatic tilting of the massive structure. The London Eye consists of 32 sealed and air-conditioned passenger capsules, representing the 32 London boroughs. Interestingly, the capsules are numbered 1 to 33, skipping number 13 for superstitious reasons. Each capsule weighs 10 tons, is built to carry 25 people, and provides unobstructed 360-degree views through its glass construction. The capsules are attached to the external circumference of the wheel and rotate in motorized fashion, maintaining a horizontal position as the wheel turns, ensuring passengers always have an upright viewing platform. A complete rotation takes approximately 30 minutes, moving at a stately pace of 0.9 kilometers per hour (0.6 mph), allowing the wheel to continue moving while passengers board and alight - though it can be stopped for disabled or elderly passengers who need more time. The wheel weighs approximately 2,100 tons, with the rim alone weighing 1,700 tons. It is supported by an A-frame on one side only, making it the world\'s tallest cantilevered observation wheel. This cantilever design, with the wheel supported from one side rather than both, creates the distinctive silhouette that has become so recognizable. The structure requires 1,700 tons of steel and took seven years from conception to completion, at a cost of £75 million. From the top of the London Eye, on a clear day, visitors can see up to 40 kilometers (25 miles) in all directions, encompassing Windsor Castle to the west and the hills of Kent to the south. The views include all of London\'s major landmarks: the Houses of Parliament and Big Ben directly across the river, St. Paul\'s Cathedral\'s distinctive dome, the Tower of London, Tower Bridge, the Shard piercing the sky, and countless other historic and modern buildings that tell the story of London\'s evolution from Roman settlement to global metropolis. The London Eye has become much more than an observation wheel - it serves as a cultural landmark and event venue. The capsules have hosted everything from weddings to business meetings, from yoga sessions to wine tastings. In 2005, one capsule was temporarily converted into a luxury apartment where two competition winners spent the night suspended 135 meters above London. The wheel has been illuminated in various colors to mark significant events: red for Chinese New Year, pink for breast cancer awareness, rainbow colors for Pride, and even the colors of national flags to welcome visiting dignitaries. The London Eye played a central role in London\'s millennium celebrations, with a spectacular fireworks display launched from the wheel itself at midnight on January 1, 2000 - though technical problems meant the wheel wasn\'t actually rotating for passengers until March 2000. Since then, it has become the focal point for London\'s New Year\'s Eve celebrations, with elaborate firework displays launched from the wheel and surrounding area, broadcast to millions worldwide. The wheel has also been featured in numerous films, television shows, and music videos, from the James Bond thriller "Spectre" to the romantic comedy "Bridget Jones\'s Diary," cementing its place in popular culture. Its distinctive circular form has become an instantly recognizable symbol of London, appearing in countless photographs, paintings, and promotional materials for the city. In 2015, the London Eye underwent a major refurbishment, with Coca-Cola becoming the title sponsor, leading to it being officially branded as the "Coca-Cola London Eye" - though most Londoners and visitors continue to call it simply "The London Eye." The refurbishment included new lighting systems using LED technology, creating more dynamic and energy-efficient illumination displays that can change color and pattern for special events. The London Eye pioneered the concept of large-scale observation wheels in major cities, inspiring similar structures worldwide, including the Singapore Flyer, the High Roller in Las Vegas, and the Dubai Eye. However, the London Eye remains unique in its cantilever design and its integration into the urban landscape, positioned to provide optimal views of one of the world\'s most historic cityscapes. The observation wheel has also contributed significantly to the regeneration of London\'s South Bank, which has transformed from an underutilized industrial area into one of London\'s most vibrant cultural quarters. The area now features theaters, galleries, restaurants, and public spaces, with the London Eye serving as the anchor attraction that draws millions of visitors who then explore the surrounding cultural offerings. During the COVID-19 pandemic, the London Eye stood silent for months, its empty capsules a poignant symbol of the tourism industry\'s challenges. However, upon reopening, it implemented new safety measures and private capsule bookings, demonstrating its adaptability and resilience. The pandemic period also saw the wheel illuminated in rainbow colors to honor NHS workers and in other meaningful displays of solidarity and hope. Today, the London Eye stands as a symbol of the turn of the millennium, a monument to engineering ingenuity, and a beloved London landmark that offers both residents and visitors a unique perspective on one of the world\'s great cities. It represents London\'s ability to embrace the new while honoring the old, to innovate while respecting tradition. From its capsules, suspended above the Thames, passengers gain not just a view of London but a new understanding of the city\'s layout, history, and evolution - a 30-minute journey that connects past, present, and future in the most literal and spectacular way possible. The London Eye reminds us that sometimes the best way to appreciate where we are is to step back, rise above, and see the bigger picture.',
+        historicalInfo: 'The London Eye was built to celebrate the millennium and opened to the public in March 2000. It was designed by architects David Marks and Julia Barfield and has become one of London\'s most iconic landmarks.',
+        yearBuilt: '1999-2000',
+        architect: 'David Marks and Julia Barfield'
       },
       it: {
         name: 'London Eye',
         narration: 'Il London Eye è una gigantesca ruota panoramica che offre viste spettacolari sulla città.',
-        description: 'La ruota panoramica a sbalzo più alta d\'Europa'
+        description: 'La ruota panoramica a sbalzo più alta d\'Europa',
+        historicalInfo: 'Il London Eye è stato costruito per celebrare il millennio e aperto al pubblico nel marzo 2000. È stato progettato dagli architetti David Marks e Julia Barfield ed è diventato uno dei monumenti più iconici di Londra.',
+        yearBuilt: '1999-2000',
+        architect: 'David Marks e Julia Barfield'
       },
       ko: {
         name: '런던 아이',
         narration: '런던 아이는 도시의 멋진 전망을 제공하는 거대한 관람차입니다.',
-        description: '유럽에서 가장 높은 캔틸레버 관람차'
+        description: '유럽에서 가장 높은 캔틸레버 관람차',
+        historicalInfo: '런던 아이는 밀레니엄을 기념하기 위해 건설되었으며 2000년 3월에 대중에게 개방되었습니다. 건축가 데이비드 마크스와 줄리아 바필드가 설계했으며 런던의 가장 상징적인 랜드마크 중 하나가 되었습니다.',
+        yearBuilt: '1999-2000',
+        architect: '데이비드 마크스와 줄리아 바필드'
       },
       es: {
         name: 'London Eye',
         narration: 'El London Eye es una noria gigante que ofrece vistas espectaculares de la ciudad.',
-        description: 'La noria en voladizo más alta de Europa'
+        description: 'La noria en voladizo más alta de Europa',
+        historicalInfo: 'El London Eye fue construido para celebrar el milenio y abierto al público en marzo de 2000. Fue diseñado por los arquitectos David Marks y Julia Barfield y se ha convertido en uno de los monumentos más icónicos de Londres.',
+        yearBuilt: '1999-2000',
+        architect: 'David Marks y Julia Barfield'
       },
       fr: {
         name: 'London Eye',
         narration: 'Le London Eye est une grande roue offrant des vues spectaculaires sur la ville.',
-        description: 'La plus haute grande roue en porte-à-faux d\'Europe'
+        description: 'La plus haute grande roue en porte-à-faux d\'Europe',
+        historicalInfo: 'Le London Eye a été construit pour célébrer le millénaire et ouvert au public en mars 2000. Il a été conçu par les architectes David Marks et Julia Barfield et est devenu l\'un des monuments les plus emblématiques de Londres.',
+        yearBuilt: '1999-2000',
+        architect: 'David Marks et Julia Barfield'
       },
       de: {
         name: 'London Eye',
         narration: 'Das London Eye ist ein riesiges Riesenrad, das spektakuläre Ausblicke über die Stadt bietet.',
-        description: 'Das höchste freitragende Riesenrad Europas'
+        description: 'Das höchste freitragende Riesenrad Europas',
+        historicalInfo: 'Das London Eye wurde zur Feier des Jahrtausendwechsels gebaut und im März 2000 für die Öffentlichkeit eröffnet. Es wurde von den Architekten David Marks und Julia Barfield entworfen und ist zu einem der ikonischsten Wahrzeichen Londons geworden.',
+        yearBuilt: '1999-2000',
+        architect: 'David Marks und Julia Barfield'
       },
       zh: {
         name: '伦敦眼',
         narration: '伦敦眼是一座巨型摩天轮，可欣赏城市壮观景色。',
-        description: '欧洲最高的悬臂式摩天轮'
+        description: '欧洲最高的悬臂式摩天轮',
+        historicalInfo: '伦敦眼是为庆祝千禧年而建，于2000年3月向公众开放。它由建筑师大卫·马克斯和朱莉娅·巴菲尔德设计，已成为伦敦最具标志性的地标之一。',
+        yearBuilt: '1999-2000',
+        architect: '大卫·马克斯和朱莉娅·巴菲尔德'
       },
       ja: {
         name: 'ロンドン・アイ',
         narration: 'ロンドン・アイは、街の素晴らしい景色を提供する巨大な観覧車です。',
-        description: 'ヨーロッパで最も高い片持ち式観覧車'
+        description: 'ヨーロッパで最も高い片持ち式観覧車',
+        historicalInfo: 'ロンドン・アイはミレニアムを祝うために建設され、2000年3月に一般公開されました。建築家デイビッド・マークスとジュリア・バーフィールドによって設計され、ロンドンで最も象徴的なランドマークの1つとなりました。',
+        yearBuilt: '1999-2000',
+        architect: 'デイビッド・マークスとジュリア・バーフィールド'
+      },
+      pt: {
+        name: 'London Eye',
+        narration: 'O London Eye é uma roda-gigante que oferece vistas espetaculares sobre a cidade.',
+        description: 'A roda-gigante em balanço mais alta da Europa',
+        historicalInfo: 'O London Eye foi construído para celebrar o milênio e aberto ao público em março de 2000. Foi projetado pelos arquitetos David Marks e Julia Barfield e se tornou um dos marcos mais icônicos de Londres.',
+        yearBuilt: '1999-2000',
+        architect: 'David Marks e Julia Barfield'
+      },
+      ru: {
+        name: 'Лондонский глаз',
+        narration: 'Лондонский глаз - это гигантское колесо обозрения, откуда открываются захватывающие виды на город.',
+        description: 'Самое высокое консольное колесо обозрения в Европе',
+        historicalInfo: 'Лондонский глаз был построен в честь празднования миллениума и открыт для публики в марте 2000 года. Он был спроектирован архитекторами Дэвидом Марксом и Джулией Барфилд и стал одной из самых знаковых достопримечательностей Лондона.',
+        yearBuilt: '1999-2000',
+        architect: 'Дэвид Маркс и Джулия Барфилд'
       }
     }
   }
