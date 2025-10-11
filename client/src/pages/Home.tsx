@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import { MapView } from '@/components/MapView';
-import { InfoPanel } from '@/components/InfoPanel';
 import { LandmarkList } from '@/components/LandmarkList';
-import { CitySelector } from '@/components/CitySelector';
-import { LanguageSelector } from '@/components/LanguageSelector';
-import { ProgressStats } from '@/components/ProgressStats';
+import { AppSidebar } from '@/components/AppSidebar';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { InstallPrompt } from '@/components/InstallPrompt';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
@@ -20,6 +18,7 @@ export default function Home() {
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
+  const [offlineMode, setOfflineMode] = useState(false);
   const { markVisited, isVisited } = useVisitedLandmarks();
   useServiceWorker();
   
@@ -66,7 +65,6 @@ export default function Home() {
         setSpokenLandmarks((prev) => new Set(prev).add(landmark.id));
         setIsSpeaking(true);
         
-        // Mark landmark as visited when within radius
         if (!isVisited(landmark.id)) {
           markVisited(landmark.id);
         }
@@ -115,17 +113,9 @@ export default function Home() {
     }
   };
 
-  const nearestLandmark = position && landmarks.length > 0
-    ? landmarks.map((landmark) => ({
-        landmark,
-        distance: calculateDistance(
-          position.latitude,
-          position.longitude,
-          landmark.lat,
-          landmark.lng
-        ),
-      })).sort((a, b) => a.distance - b.distance)[0]
-    : null;
+  const handleToggleOfflineMode = () => {
+    setOfflineMode((prev) => !prev);
+  };
 
   if (citiesLoading || landmarksLoading) {
     return (
@@ -139,61 +129,54 @@ export default function Home() {
   }
 
   return (
-    <div className="relative h-screen w-full">
-      <MapView
-        landmarks={landmarks}
-        userPosition={position}
-        onLandmarkRoute={handleLandmarkRoute}
-        activeRoute={activeRoute}
-        onRouteFound={setRouteInfo}
-        cityCenter={selectedCity ? [selectedCity.lat, selectedCity.lng] : undefined}
-        cityZoom={selectedCity?.zoom}
-        selectedLanguage={selectedLanguage}
-      />
-
-      <div className="absolute top-4 right-4 z-[1000] space-y-3">
-        <div className="bg-background/90 backdrop-blur-md border-2 rounded-lg p-3 shadow-xl space-y-3">
-          <CitySelector
-            cities={cities}
-            selectedCityId={selectedCityId}
-            onCityChange={handleCityChange}
-          />
-          <div className="border-t pt-3">
-            <LanguageSelector
-              selectedLanguage={selectedLanguage}
-              onLanguageChange={setSelectedLanguage}
-            />
-          </div>
-        </div>
-        
-        <ProgressStats 
-          totalLandmarks={landmarks.length}
-          cityName={selectedCity?.name}
-        />
-      </div>
-
-      <InfoPanel
-        userPosition={position}
-        isLoadingPosition={isLoading}
-        positionError={error}
+    <>
+      <AppSidebar
         audioEnabled={audioEnabled}
         onToggleAudio={handleToggleAudio}
-        onClearRoute={handleClearRoute}
-        hasActiveRoute={activeRoute !== null}
-        nearestLandmark={nearestLandmark}
-        isSpeaking={isSpeaking}
-      />
-
-      <LandmarkList
-        landmarks={landmarks}
-        userPosition={position}
-        onLandmarkRoute={handleLandmarkRoute}
-        spokenLandmarks={spokenLandmarks}
+        cities={cities}
+        selectedCityId={selectedCityId}
+        onCityChange={handleCityChange}
         selectedLanguage={selectedLanguage}
+        onLanguageChange={setSelectedLanguage}
+        isSpeaking={isSpeaking}
+        activeRoute={activeRoute}
+        onClearRoute={handleClearRoute}
+        offlineMode={offlineMode}
+        onToggleOfflineMode={handleToggleOfflineMode}
+        totalLandmarks={landmarks.length}
+        cityName={selectedCity?.name}
       />
+      
+      <main className="flex-1 flex flex-col h-screen w-full">
+        <header className="flex items-center gap-2 p-2 border-b bg-background z-[1001]">
+          <SidebarTrigger data-testid="button-sidebar-toggle" />
+          <h1 className="font-serif font-semibold text-lg">GPS Audio Guide</h1>
+        </header>
+        
+        <div className="relative flex-1 overflow-hidden">
+          <MapView
+            landmarks={landmarks}
+            userPosition={position}
+            onLandmarkRoute={handleLandmarkRoute}
+            activeRoute={activeRoute}
+            onRouteFound={setRouteInfo}
+            cityCenter={selectedCity ? [selectedCity.lat, selectedCity.lng] : undefined}
+            cityZoom={selectedCity?.zoom}
+            selectedLanguage={selectedLanguage}
+          />
 
-      <OfflineIndicator />
-      <InstallPrompt />
-    </div>
+          <LandmarkList
+            landmarks={landmarks}
+            userPosition={position}
+            onLandmarkRoute={handleLandmarkRoute}
+            spokenLandmarks={spokenLandmarks}
+            selectedLanguage={selectedLanguage}
+          />
+
+          <OfflineIndicator />
+          <InstallPrompt />
+        </div>
+      </main>
+    </>
   );
 }
