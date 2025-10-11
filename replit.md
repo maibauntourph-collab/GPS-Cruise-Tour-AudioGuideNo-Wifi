@@ -43,6 +43,14 @@ This application provides an interactive map experience for tourists visiting ma
 - Duplicate prevention with unique constraints
 - Progress persists across page refreshes
 
+### Progressive Web App (PWA) Features
+- **Offline Mode**: Full app functionality without internet connection
+- **Service Worker**: Pre-caches all city landmarks and static assets on install
+- **Install to Home Screen**: Add app to mobile home screen like a native app
+- **Network Status Indicators**: Visual feedback for online/offline status
+- **Cached Map Tiles**: OpenStreetMap tiles cached for offline viewing
+- **Offline-First API**: API responses cached with fallback to embedded data
+
 ## Technology Stack
 
 ### Frontend
@@ -73,6 +81,9 @@ This application provides an interactive map experience for tourists visiting ma
 
 ```
 client/
+├── public/
+│   ├── service-worker.js         # PWA service worker for offline mode
+│   └── manifest.json             # PWA manifest for install-to-home
 ├── src/
 │   ├── components/
 │   │   ├── MapView.tsx           # Main map with markers and routing
@@ -82,10 +93,14 @@ client/
 │   │   ├── PhotoGallery.tsx       # Photo grid and viewer
 │   │   ├── CitySelector.tsx       # City selection dropdown
 │   │   ├── LanguageSelector.tsx   # Language selection dropdown
-│   │   └── ProgressStats.tsx      # Visit progress visualization
+│   │   ├── ProgressStats.tsx      # Visit progress visualization
+│   │   ├── OfflineIndicator.tsx   # Network status indicator
+│   │   └── InstallPrompt.tsx      # PWA install prompt
 │   ├── hooks/
 │   │   ├── useGeoLocation.ts      # GPS tracking hook
-│   │   └── useVisitedLandmarks.ts # Visited landmarks management
+│   │   ├── useVisitedLandmarks.ts # Visited landmarks management
+│   │   ├── useServiceWorker.ts    # Service worker registration
+│   │   └── useOnlineStatus.ts     # Online/offline detection
 │   ├── lib/
 │   │   ├── audioService.ts        # Web Speech API wrapper
 │   │   ├── geoUtils.ts           # Distance calculations
@@ -216,6 +231,15 @@ npm run db:push --force # Force push (when conflicts occur)
    - Progress visualization with stats and bar
    - Persistent across page refreshes
 
+5. **Progressive Web App (PWA)**
+   - PWA manifest configuration with app metadata and icons
+   - Service worker with offline-first caching strategy (v2)
+   - Pre-caching of all city landmarks during SW installation
+   - Network status indicators for online/offline state
+   - Install-to-home-screen prompt with dismissible UI
+   - Cached map tiles and API responses for offline use
+   - Full offline functionality for all cities
+
 ## Testing
 
 End-to-end test coverage includes:
@@ -228,11 +252,14 @@ End-to-end test coverage includes:
 - Visited landmarks tracking
 - Duplicate prevention
 - Progress statistics
+- Offline mode functionality
+- Service worker caching
+- Network status indicators
+- PWA installation flow
 
 ## Future Enhancements
 
 Potential features:
-- Offline map caching with service workers
 - User accounts and authentication
 - Custom route creation and sharing
 - Push notifications for nearby landmarks
@@ -240,3 +267,5 @@ Potential features:
 - Augmented reality landmark views
 - More cities and landmarks
 - Audio tour packages
+- Enhanced offline map tile pre-caching
+- Background sync for visited landmarks
