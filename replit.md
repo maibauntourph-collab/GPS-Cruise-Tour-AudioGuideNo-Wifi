@@ -1,20 +1,47 @@
-# Rome GPS Audio Guide
+# GPS Audio Guide - Multi-City Travel Companion
 
-A React-based GPS audio guide application for exploring Rome's iconic landmarks with automatic audio narration and turn-by-turn navigation.
+A React-based GPS audio guide application for exploring world cities with automatic audio narration, turn-by-turn navigation, multi-language support, and progress tracking.
 
 ## Overview
 
-This application provides an interactive map experience for tourists visiting Rome. It automatically plays audio narrations when users get within 50 meters of famous landmarks and offers route navigation from the current location to any landmark.
+This application provides an interactive map experience for tourists visiting major cities worldwide. It automatically plays audio narrations when users get within range of famous landmarks, offers route navigation, displays photo galleries, and tracks visited landmarks with persistent progress visualization.
 
 ## Features
 
+### Core Features
 - **Interactive Map**: Full-screen map using React-Leaflet with OpenStreetMap tiles
 - **GPS Tracking**: Real-time location tracking with visual user position indicator
-- **Auto Audio Narration**: Speaks landmark information automatically when within 50m (uses Web Speech API)
+- **Auto Audio Narration**: Speaks landmark information automatically when within radius (uses Web Speech API)
 - **Turn-by-Turn Navigation**: Route planning from current location to any landmark using Leaflet Routing Machine
-- **Landmark Information**: Detailed cards for each landmark with descriptions and categories
 - **Audio Controls**: Toggle audio narration on/off
 - **Route Management**: Clear active routes with a single click
+
+### Multi-City Support
+- City selector with Rome, Paris, and London
+- City-specific landmarks and information
+- Automatic map centering on selected city
+- Dynamic landmark filtering by city
+
+### Multi-Language Support
+- Language selector for English, Italian, and Korean
+- Translated landmark names, descriptions, and audio narration
+- Language-specific audio playback using Web Speech API
+- Seamless language switching
+
+### Photo Galleries & Details
+- Rich landmark information with extended historical details
+- Photo gallery with 2-3 photos per landmark
+- Full-screen photo viewer with navigation
+- Architect, year built, and category information
+- Info button opens detailed modal view
+
+### Visited Landmarks Tracking
+- PostgreSQL database persistence
+- Session-based progress tracking
+- Progress statistics with percentage and visual bar
+- Automatic landmark marking when within radius
+- Duplicate prevention with unique constraints
+- Progress persists across page refreshes
 
 ## Technology Stack
 
@@ -22,15 +49,25 @@ This application provides an interactive map experience for tourists visiting Ro
 - React 18 with TypeScript
 - React-Leaflet 4.2.1 for map integration
 - Leaflet Routing Machine for navigation
-- TanStack React Query for data fetching
-- Tailwind CSS for styling
+- TanStack React Query v5 for data fetching
+- Tailwind CSS with Shadcn UI components
 - Web Speech API for audio narration
 - Wouter for routing
+- LocalStorage for session management
 
 ### Backend
 - Express.js server
-- In-memory storage for landmark data
+- PostgreSQL with Neon serverless
+- Drizzle ORM for database operations
+- In-memory storage for landmarks/cities (hybrid approach)
 - RESTful API endpoints
+- Zod for request validation
+
+### Database
+- PostgreSQL (Neon-backed)
+- Drizzle ORM with TypeScript
+- Tables: `visited_landmarks`
+- Unique constraint on (session_id, landmark_id) for duplicate prevention
 
 ## Project Structure
 
@@ -38,106 +75,168 @@ This application provides an interactive map experience for tourists visiting Ro
 client/
 ├── src/
 │   ├── components/
-│   │   ├── MapView.tsx          # Main map component with markers and routing
-│   │   ├── InfoPanel.tsx         # Control panel with GPS status and controls
-│   │   └── LandmarkList.tsx      # Landmark browsing panel
+│   │   ├── MapView.tsx           # Main map with markers and routing
+│   │   ├── InfoPanel.tsx          # Control panel with GPS status
+│   │   ├── LandmarkList.tsx       # Landmark browsing with details
+│   │   ├── LandmarkDetails.tsx    # Detailed landmark modal
+│   │   ├── PhotoGallery.tsx       # Photo grid and viewer
+│   │   ├── CitySelector.tsx       # City selection dropdown
+│   │   ├── LanguageSelector.tsx   # Language selection dropdown
+│   │   └── ProgressStats.tsx      # Visit progress visualization
 │   ├── hooks/
-│   │   └── useGeoLocation.ts     # Custom hook for GPS tracking
+│   │   ├── useGeoLocation.ts      # GPS tracking hook
+│   │   └── useVisitedLandmarks.ts # Visited landmarks management
 │   ├── lib/
-│   │   ├── audioService.ts       # Web Speech API wrapper
-│   │   └── geoUtils.ts          # Distance calculation utilities
-│   ├── pages/
-│   │   └── Home.tsx             # Main application page
-│   └── styles/
-│       └── leaflet-custom.css   # Custom Leaflet styling
+│   │   ├── audioService.ts        # Web Speech API wrapper
+│   │   ├── geoUtils.ts           # Distance calculations
+│   │   ├── translations.ts        # Translation utilities
+│   │   └── sessionUtils.ts        # Session ID management
+│   └── pages/
+│       └── Home.tsx              # Main application page
 server/
+├── db.ts                         # Database connection (Drizzle + Neon)
 ├── routes.ts                     # API route definitions
-└── storage.ts                    # Data storage layer
+└── storage.ts                    # Hybrid storage (DB + in-memory)
 shared/
-└── schema.ts                     # TypeScript types and Zod schemas
+└── schema.ts                     # TypeScript types, Zod schemas, Drizzle tables
 ```
 
 ## API Endpoints
 
-- `GET /api/landmarks` - Returns all Rome landmarks
+### Cities
+- `GET /api/cities` - Returns all cities
+- `GET /api/cities/:id` - Returns a specific city by ID
+
+### Landmarks
+- `GET /api/landmarks?cityId={cityId}` - Returns landmarks (filtered by city)
 - `GET /api/landmarks/:id` - Returns a specific landmark by ID
 
-## Rome Landmarks
+### Visited Landmarks (Database)
+- `POST /api/visited` - Mark landmark as visited (with deduplication)
+- `GET /api/visited?sessionId={id}` - Get all visited landmarks for session
+- `GET /api/visited/count?sessionId={id}` - Get visited count for session
+- `GET /api/visited/:landmarkId?sessionId={id}` - Check if landmark is visited
 
-The application includes 5 iconic Rome landmarks:
+## Cities & Landmarks
 
-1. **Colosseum** (41.8902, 12.4922) - 70m radius
-2. **Roman Forum** (41.8925, 12.4853) - 60m radius
-3. **Trevi Fountain** (41.9009, 12.4833) - 50m radius
-4. **Pantheon** (41.8986, 12.4768) - 50m radius
-5. **Spanish Steps** (41.9059, 12.4823) - 50m radius
+### Rome (5 landmarks)
+1. **Colosseum** - 70m radius, 3 photos
+2. **Roman Forum** - 60m radius, 2 photos
+3. **Trevi Fountain** - 50m radius, 2 photos
+4. **Pantheon** - 50m radius, 2 photos
+5. **Spanish Steps** - 50m radius, 2 photos
+
+### Paris (3 landmarks)
+1. **Eiffel Tower** - 70m radius
+2. **Louvre Museum** - 60m radius
+3. **Notre-Dame Cathedral** - 50m radius
+4. **Arc de Triomphe** - 50m radius
+
+### London (4 landmarks)
+1. **Big Ben** - 50m radius
+2. **Tower Bridge** - 60m radius
+3. **Buckingham Palace** - 70m radius
+4. **London Eye** - 50m radius
 
 ## Key Features Implementation
 
 ### GPS Location Tracking
-- Uses browser's Geolocation API with `watchPosition` for real-time updates
-- High accuracy mode enabled for precise location tracking
-- Map automatically centers on user location
-- Falls back to Rome center (41.8902, 12.4922) if GPS unavailable
+- Browser Geolocation API with `watchPosition`
+- High accuracy mode for precise tracking
+- Auto map centering on user position
+- Fallback to city center when GPS unavailable
 
 ### Audio Narration System
-- Automatically triggers when within landmark radius
-- Tracks spoken landmarks to avoid repetition
-- Toggle audio on/off functionality
-- Visual indicator when audio is playing
-- Reset capability when toggling audio
+- Auto-triggers when within landmark radius
+- Tracks spoken landmarks (no repetition)
+- Language-aware audio playback
+- Visual speaking indicator
+- Reset on audio toggle/language change
 
 ### Route Navigation
-- Creates routes using Leaflet Routing Machine
-- Custom orange/terracotta route styling (hsl(14, 85%, 55%))
-- Uses Rome center as fallback start point when GPS unavailable
+- Leaflet Routing Machine integration
+- Custom terracotta route styling (hsl(14, 85%, 55%))
+- Fallback start point when GPS unavailable
 - Clear route functionality
-- Visual route polylines on map
+
+### Visited Landmarks Tracking
+- Session ID generated and stored in localStorage
+- Automatic marking when within landmark radius
+- PostgreSQL persistence with unique constraint
+- ON CONFLICT DO NOTHING for duplicate prevention
+- Real-time progress statistics
+- Visual progress bar (0-100%)
 
 ### Design System
-- Primary color: Terracotta/Roman red-orange (hsl(14, 85%, 55%))
-- Success/GPS color: Green (hsl(142, 71%, 45%))
-- Custom marker icons with terracotta background
-- User location marker with pulse animation
+- Primary: Terracotta/Roman red-orange (hsl(14, 85%, 55%))
+- Success/GPS: Green (hsl(142, 71%, 45%))
 - Glass-morphic floating panels with backdrop blur
-- Responsive design with mobile-first approach
+- Custom landmark markers with terracotta background
+- User location marker with pulse animation
+- Responsive mobile-first design
+- Playfair Display (serif) + Inter (sans-serif) fonts
 
 ## Development
-
-The application runs on port 5000 with Vite for the frontend and Express for the backend.
 
 ### Running the Application
 ```bash
 npm run dev
 ```
 
-This starts both the Express server and Vite dev server.
+Starts Express server (backend) and Vite dev server (frontend) on port 5000.
 
-## Recent Changes (2025-10-10)
+### Database Management
+```bash
+npm run db:push        # Push schema changes to database
+npm run db:push --force # Force push (when conflicts occur)
+```
 
-- Converted original HTML/JavaScript GPS audio guide to React
-- Implemented backend API with Express and in-memory storage
-- Added React Query for data fetching
-- Fixed map GPS tracking with MapUpdater component
-- Added fallback position for routing when GPS unavailable
-- Implemented comprehensive test coverage
+## Recent Changes (2025-10-11)
+
+### Completed Features
+1. **Multi-City Support**
+   - Added Rome, Paris, London with city selector
+   - City-based landmark filtering
+   - Dynamic map centering
+
+2. **Multi-Language Support**
+   - English, Italian, Korean translations
+   - Language-specific audio narration
+   - Translated landmark content
+
+3. **Photo Galleries**
+   - Extended landmark schema with photos, history, architect
+   - Photo grid and full-screen viewer
+   - Detailed landmark modal with rich information
+
+4. **Visited Landmarks Tracking**
+   - PostgreSQL database with visited_landmarks table
+   - Session-based progress tracking
+   - Duplicate prevention with unique constraints
+   - Progress visualization with stats and bar
+   - Persistent across page refreshes
 
 ## Testing
 
-The application includes end-to-end tests covering:
+End-to-end test coverage includes:
 - Map loading and landmark display
-- Audio toggle functionality
+- Audio toggle and language switching
 - Route navigation and clearing
-- Landmark interaction
+- Landmark interaction and details
 - GPS status indicators
+- Photo gallery and viewer
+- Visited landmarks tracking
+- Duplicate prevention
+- Progress statistics
 
 ## Future Enhancements
 
-Potential features for future development:
-- Multiple city support with city selection
-- Multi-language audio narration
-- Landmark photo galleries
-- Visited landmarks tracking
-- Offline map caching
-- User accounts and custom routes
-- Database persistence (currently in-memory)
+Potential features:
+- Offline map caching with service workers
+- User accounts and authentication
+- Custom route creation and sharing
+- Push notifications for nearby landmarks
+- Social sharing of visited landmarks
+- Augmented reality landmark views
+- More cities and landmarks
+- Audio tour packages
