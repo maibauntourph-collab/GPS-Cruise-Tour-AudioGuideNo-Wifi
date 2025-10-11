@@ -31,7 +31,7 @@ export function LandmarkDetails({
   return (
     <Dialog open={open && landmark !== null} onOpenChange={(isOpen) => !isOpen && onClose()}>
       {landmark && (
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto" data-testid="dialog-landmark-details">
+        <DialogContent className="w-[95vw] max-w-3xl h-[90vh] overflow-y-auto" data-testid="dialog-landmark-details">
           <DialogHeader>
             <DialogTitle className="font-serif text-2xl" data-testid="text-landmark-name">
               {getTranslatedContent(landmark, selectedLanguage, 'name')}
