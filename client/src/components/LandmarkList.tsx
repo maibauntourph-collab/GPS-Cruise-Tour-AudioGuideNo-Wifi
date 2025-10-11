@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark, GpsPosition } from '@shared/schema';
-import { Navigation, MapPin, Volume2 } from 'lucide-react';
+import { Navigation, MapPin, Volume2, Info } from 'lucide-react';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
 import { getTranslatedContent } from '@/lib/translations';
+import { LandmarkDetails } from './LandmarkDetails';
 
 interface LandmarkListProps {
   landmarks: Landmark[];
@@ -21,6 +23,7 @@ export function LandmarkList({
   spokenLandmarks,
   selectedLanguage = 'en',
 }: LandmarkListProps) {
+  const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const landmarksWithDistance = landmarks.map((landmark) => {
     const distance = userPosition
       ? calculateDistance(
@@ -75,20 +78,37 @@ export function LandmarkList({
                     </p>
                   )}
                 </div>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  onClick={() => onLandmarkRoute(landmark)}
-                  className="shrink-0"
-                  data-testid={`button-navigate-${landmark.id}`}
-                >
-                  <Navigation className="w-4 h-4" />
-                </Button>
+                <div className="flex gap-2 shrink-0">
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    onClick={() => setSelectedLandmark(landmark)}
+                    data-testid={`button-info-${landmark.id}`}
+                  >
+                    <Info className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    onClick={() => onLandmarkRoute(landmark)}
+                    data-testid={`button-navigate-${landmark.id}`}
+                  >
+                    <Navigation className="w-4 h-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </Card>
+      
+      <LandmarkDetails
+        landmark={selectedLandmark}
+        open={selectedLandmark !== null}
+        onClose={() => setSelectedLandmark(null)}
+        onNavigate={onLandmarkRoute}
+        selectedLanguage={selectedLanguage}
+      />
     </div>
   );
 }

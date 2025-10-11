@@ -45,7 +45,15 @@ const LANDMARKS: Landmark[] = [
     radius: 70,
     narration: 'Welcome to the Colosseum, the iconic symbol of Rome. This ancient amphitheater once hosted gladiatorial contests and public spectacles.',
     description: 'The largest amphitheater ever built, a UNESCO World Heritage Site',
-    category: 'Ancient Rome'
+    category: 'Ancient Rome',
+    photos: [
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1548585744-6e2d7c1e1a21?w=800',
+      'https://images.unsplash.com/photo-1598559862042-31ebfe8e09f2?w=800'
+    ],
+    historicalInfo: 'The Colosseum, also known as the Flavian Amphitheatre, is an oval amphitheatre in the centre of Rome. Built of travertine limestone, tuff, and brick-faced concrete, it was the largest amphitheatre ever built at the time and held 50,000 to 80,000 spectators.',
+    yearBuilt: '70-80 AD',
+    architect: 'Emperors Vespasian and Titus'
   },
   {
     id: 'roman_forum',
@@ -56,7 +64,14 @@ const LANDMARKS: Landmark[] = [
     radius: 60,
     narration: 'You are at the Roman Forum, the heart of ancient Rome. This was the center of political life during the Republic era, where historic buildings still stand.',
     description: 'The center of ancient Roman public life',
-    category: 'Ancient Rome'
+    category: 'Ancient Rome',
+    photos: [
+      'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800',
+      'https://images.unsplash.com/photo-1525874684015-58379d421a52?w=800'
+    ],
+    historicalInfo: 'The Roman Forum was the center of day-to-day life in Rome: the site of triumphal processions and elections, the venue for public speeches, criminal trials, and gladiatorial matches, and the nucleus of commercial affairs.',
+    yearBuilt: '7th century BC',
+    architect: 'Various Roman architects over centuries'
   },
   {
     id: 'trevi_fountain',
@@ -67,7 +82,14 @@ const LANDMARKS: Landmark[] = [
     radius: 50,
     narration: 'This is the Trevi Fountain. Legend says if you throw a coin over your shoulder into the fountain, you will return to Rome.',
     description: 'The most famous fountain in Rome',
-    category: 'Fountain'
+    category: 'Fountain',
+    photos: [
+      'https://images.unsplash.com/photo-1548585744-6e2d7c1e1a21?w=800',
+      'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800'
+    ],
+    historicalInfo: 'The Trevi Fountain is the largest Baroque fountain in the city and one of the most famous fountains in the world. Standing 26.3 metres (86 ft) high and 49.15 metres (161.3 ft) wide, it is the largest Baroque fountain in the city.',
+    yearBuilt: '1732-1762',
+    architect: 'Nicola Salvi'
   },
   {
     id: 'pantheon',
@@ -78,7 +100,14 @@ const LANDMARKS: Landmark[] = [
     radius: 50,
     narration: 'The Pantheon is a temple dedicated to all the gods. It is a masterpiece of ancient architecture with its magnificent dome.',
     description: 'An architectural marvel with the world\'s largest unreinforced concrete dome',
-    category: 'Ancient Rome'
+    category: 'Ancient Rome',
+    photos: [
+      'https://images.unsplash.com/photo-1555992258-ecd66771df1c?w=800',
+      'https://images.unsplash.com/photo-1604924413347-a8c0e20e6635?w=800'
+    ],
+    historicalInfo: 'The Pantheon is a former Roman temple and, since 609 AD, a Catholic church. It is the best-preserved of all Ancient Roman buildings and has been in continuous use throughout its history.',
+    yearBuilt: '126 AD',
+    architect: 'Emperor Hadrian'
   },
   {
     id: 'spanish_steps',
@@ -89,7 +118,14 @@ const LANDMARKS: Landmark[] = [
     radius: 50,
     narration: 'Welcome to the Spanish Steps, famous as a filming location for the movie "Roman Holiday".',
     description: 'A monumental stairway of 135 steps',
-    category: 'Landmark'
+    category: 'Landmark',
+    photos: [
+      'https://images.unsplash.com/photo-1559564323-2598bc839f43?w=800',
+      'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800'
+    ],
+    historicalInfo: 'The Spanish Steps are a set of steps in Rome, climbing a steep slope between the Piazza di Spagna at the base and Piazza Trinità dei Monti, dominated by the Trinità dei Monti church at the top.',
+    yearBuilt: '1723-1726',
+    architect: 'Francesco de Sanctis and Alessandro Specchi'
   },
   // Paris landmarks
   {

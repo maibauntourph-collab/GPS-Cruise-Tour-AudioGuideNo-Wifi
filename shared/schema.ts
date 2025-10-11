@@ -54,6 +54,10 @@ export const landmarkSchema = z.object({
   description: z.string().optional(),
   category: z.string().optional(),
   translations: translationsSchema.optional(),
+  photos: z.array(z.string()).optional(), // Array of photo URLs
+  historicalInfo: z.string().optional(), // Extended historical information
+  yearBuilt: z.string().optional(), // Construction year/period
+  architect: z.string().optional(), // Architect or creator name
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;
