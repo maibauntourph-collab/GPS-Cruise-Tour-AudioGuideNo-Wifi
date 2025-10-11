@@ -5,7 +5,9 @@ import { InfoPanel } from '@/components/InfoPanel';
 import { LandmarkList } from '@/components/LandmarkList';
 import { CitySelector } from '@/components/CitySelector';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { ProgressStats } from '@/components/ProgressStats';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
+import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent } from '@/lib/translations';
@@ -15,6 +17,7 @@ export default function Home() {
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
+  const { markVisited, isVisited } = useVisitedLandmarks();
   
   const { data: cities = [], isLoading: citiesLoading } = useQuery<City[]>({
     queryKey: ['/api/cities'],
@@ -58,6 +61,11 @@ export default function Home() {
         audioService.speak(narration, landmark.id, selectedLanguage);
         setSpokenLandmarks((prev) => new Set(prev).add(landmark.id));
         setIsSpeaking(true);
+        
+        // Mark landmark as visited when within radius
+        if (!isVisited(landmark.id)) {
+          markVisited(landmark.id);
+        }
       }
     });
 
@@ -139,7 +147,7 @@ export default function Home() {
         selectedLanguage={selectedLanguage}
       />
 
-      <div className="absolute top-4 right-4 z-[1000]">
+      <div className="absolute top-4 right-4 z-[1000] space-y-3">
         <div className="bg-background/90 backdrop-blur-md border-2 rounded-lg p-3 shadow-xl space-y-3">
           <CitySelector
             cities={cities}
@@ -153,6 +161,11 @@ export default function Home() {
             />
           </div>
         </div>
+        
+        <ProgressStats 
+          totalLandmarks={landmarks.length}
+          cityName={selectedCity?.name}
+        />
       </div>
 
       <InfoPanel

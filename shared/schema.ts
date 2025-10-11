@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, json, unique } from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import { createInsertSchema } from "drizzle-zod";
 
 // City schema
 export const citySchema = z.object({
@@ -79,3 +82,27 @@ export const waypointSchema = z.object({
 });
 
 export type Waypoint = z.infer<typeof waypointSchema>;
+
+// Drizzle ORM Tables for Database
+
+// Visited Landmarks table
+export const visitedLandmarks = pgTable("visited_landmarks", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  landmarkId: varchar("landmark_id").notNull(),
+  visitedAt: timestamp("visited_at").notNull().defaultNow(),
+  sessionId: varchar("session_id"), // Optional: track user session
+}, (table) => ({
+  // Unique constraint to prevent duplicate visits for the same session+landmark
+  uniqueSessionLandmark: unique().on(table.sessionId, table.landmarkId),
+}));
+
+export const visitedLandmarksRelations = relations(visitedLandmarks, () => ({}));
+
+// Insert schemas
+export const insertVisitedLandmarkSchema = createInsertSchema(visitedLandmarks).omit({
+  id: true,
+  visitedAt: true,
+});
+
+export type InsertVisitedLandmark = z.infer<typeof insertVisitedLandmarkSchema>;
+export type VisitedLandmark = typeof visitedLandmarks.$inferSelect;

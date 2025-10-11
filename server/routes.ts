@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { insertVisitedLandmarkSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/cities", async (req, res) => {
@@ -43,6 +44,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(landmark);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch landmark" });
+    }
+  });
+
+  // Visited landmarks routes
+  app.post("/api/visited", async (req, res) => {
+    try {
+      const validatedData = insertVisitedLandmarkSchema.parse(req.body);
+      const visited = await storage.markLandmarkVisited(
+        validatedData.landmarkId,
+        validatedData.sessionId || undefined
+      );
+      res.json(visited);
+    } catch (error) {
+      if (error instanceof Error && error.name === 'ZodError') {
+        return res.status(400).json({ error: "Invalid request data" });
+      }
+      res.status(500).json({ error: "Failed to mark landmark as visited" });
+    }
+  });
+
+  app.get("/api/visited", async (req, res) => {
+    try {
+      const sessionId = req.query.sessionId as string | undefined;
+      const visited = await storage.getVisitedLandmarks(sessionId);
+      res.json(visited);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch visited landmarks" });
+    }
+  });
+
+  app.get("/api/visited/count", async (req, res) => {
+    try {
+      const sessionId = req.query.sessionId as string | undefined;
+      const count = await storage.getVisitedCount(sessionId);
+      res.json({ count });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to get visited count" });
+    }
+  });
+
+  app.get("/api/visited/:landmarkId", async (req, res) => {
+    try {
+      const sessionId = req.query.sessionId as string | undefined;
+      const isVisited = await storage.isLandmarkVisited(req.params.landmarkId, sessionId);
+      res.json({ visited: isVisited });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to check if landmark is visited" });
     }
   });
 

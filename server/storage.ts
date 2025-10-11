@@ -1,10 +1,18 @@
-import { type Landmark, type City } from "@shared/schema";
+import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark } from "@shared/schema";
+import { db } from "./db";
+import { visitedLandmarks } from "@shared/schema";
+import { eq, count, and } from "drizzle-orm";
 
 export interface IStorage {
   getCities(): Promise<City[]>;
   getCity(id: string): Promise<City | undefined>;
   getLandmarks(cityId?: string): Promise<Landmark[]>;
   getLandmark(id: string): Promise<Landmark | undefined>;
+  // Visited landmarks methods
+  markLandmarkVisited(landmarkId: string, sessionId?: string): Promise<VisitedLandmark>;
+  getVisitedLandmarks(sessionId?: string): Promise<VisitedLandmark[]>;
+  isLandmarkVisited(landmarkId: string, sessionId?: string): Promise<boolean>;
+  getVisitedCount(sessionId?: string): Promise<number>;
 }
 
 const CITIES: City[] = [
@@ -237,6 +245,69 @@ export class MemStorage implements IStorage {
 
   async getLandmark(id: string): Promise<Landmark | undefined> {
     return LANDMARKS.find(landmark => landmark.id === id);
+  }
+
+  // Visited landmarks methods - using database
+  async markLandmarkVisited(landmarkId: string, sessionId?: string): Promise<VisitedLandmark> {
+    // Use ON CONFLICT DO NOTHING to prevent duplicate visits
+    const [visited] = await db
+      .insert(visitedLandmarks)
+      .values({ landmarkId, sessionId })
+      .onConflictDoNothing()
+      .returning();
+    
+    // If no row returned (duplicate), fetch the existing one
+    if (!visited) {
+      const conditions = sessionId 
+        ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId))
+        : eq(visitedLandmarks.landmarkId, landmarkId);
+      
+      const [existing] = await db
+        .select()
+        .from(visitedLandmarks)
+        .where(conditions!);
+      return existing;
+    }
+    
+    return visited;
+  }
+
+  async getVisitedLandmarks(sessionId?: string): Promise<VisitedLandmark[]> {
+    if (sessionId) {
+      return await db
+        .select()
+        .from(visitedLandmarks)
+        .where(eq(visitedLandmarks.sessionId, sessionId));
+    }
+    return await db.select().from(visitedLandmarks);
+  }
+
+  async isLandmarkVisited(landmarkId: string, sessionId?: string): Promise<boolean> {
+    const conditions = sessionId
+      ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId))
+      : eq(visitedLandmarks.landmarkId, landmarkId);
+    
+    const results = await db
+      .select()
+      .from(visitedLandmarks)
+      .where(conditions!);
+    
+    return results.length > 0;
+  }
+
+  async getVisitedCount(sessionId?: string): Promise<number> {
+    if (sessionId) {
+      const result = await db
+        .select({ count: count() })
+        .from(visitedLandmarks)
+        .where(eq(visitedLandmarks.sessionId, sessionId));
+      return result[0]?.count || 0;
+    }
+    
+    const result = await db
+      .select({ count: count() })
+      .from(visitedLandmarks);
+    return result[0]?.count || 0;
   }
 }
 
