@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark } from '@shared/schema';
@@ -36,6 +36,12 @@ export function LandmarkDetails({
             <DialogTitle className="font-serif text-2xl" data-testid="text-landmark-name">
               {getTranslatedContent(landmark, selectedLanguage, 'name')}
             </DialogTitle>
+            <DialogDescription>
+              {landmark.category && `${landmark.category}`}
+              {landmark.category && getTranslatedContent(landmark, selectedLanguage, 'description') && ' - '}
+              {getTranslatedContent(landmark, selectedLanguage, 'description')?.slice(0, 100)}
+              {getTranslatedContent(landmark, selectedLanguage, 'description') && '...'}
+            </DialogDescription>
             <div className="flex items-center gap-2 mt-2">
               {landmark.category && (
                 <Badge variant="secondary" data-testid="badge-category">

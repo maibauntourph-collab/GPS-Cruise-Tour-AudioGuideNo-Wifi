@@ -117,6 +117,21 @@ export default function Home() {
     setOfflineMode((prev) => !prev);
   };
 
+  const handleTestAudio = () => {
+    const testMessages = {
+      en: "Welcome to GPS Audio Guide. This is a test of the audio narration system.",
+      it: "Benvenuti alla Guida Audio GPS. Questo è un test del sistema di narrazione audio.",
+      ko: "GPS 오디오 가이드에 오신 것을 환영합니다. 이것은 오디오 해설 시스템의 테스트입니다."
+    };
+    const message = testMessages[selectedLanguage as keyof typeof testMessages] || testMessages.en;
+    
+    if (audioEnabled) {
+      // Remove test-audio id so it can be played again
+      audioService.removeLandmark('test-audio');
+      audioService.speak(message, 'test-audio', selectedLanguage);
+    }
+  };
+
   if (citiesLoading || landmarksLoading) {
     return (
       <div className="h-screen w-full flex items-center justify-center bg-background">
@@ -145,6 +160,7 @@ export default function Home() {
         onToggleOfflineMode={handleToggleOfflineMode}
         totalLandmarks={landmarks.length}
         cityName={selectedCity?.name}
+        onTestAudio={handleTestAudio}
       />
       
       <SidebarInset className="flex w-full flex-1 flex-col">

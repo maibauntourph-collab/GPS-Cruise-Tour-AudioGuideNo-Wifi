@@ -11,7 +11,7 @@ import {
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
 import { ProgressStats } from './ProgressStats';
-import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon } from 'lucide-react';
+import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { City } from '@shared/schema';
@@ -31,6 +31,7 @@ interface AppSidebarProps {
   onToggleOfflineMode: () => void;
   totalLandmarks: number;
   cityName?: string;
+  onTestAudio?: () => void;
 }
 
 export function AppSidebar({
@@ -47,7 +48,8 @@ export function AppSidebar({
   offlineMode,
   onToggleOfflineMode,
   totalLandmarks,
-  cityName
+  cityName,
+  onTestAudio
 }: AppSidebarProps) {
   return (
     <Sidebar collapsible="offcanvas">
@@ -119,6 +121,15 @@ export function AppSidebar({
                   <SidebarMenuButton onClick={onClearRoute} data-testid="button-clear-route">
                     <NavIcon className="w-4 h-4" />
                     <span>Clear Route</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
+
+              {onTestAudio && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton onClick={onTestAudio} data-testid="button-test-audio">
+                    <AudioLines className="w-4 h-4" />
+                    <span>Test Audio</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}

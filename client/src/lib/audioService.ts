@@ -57,6 +57,10 @@ class AudioService {
   isSpeaking(): boolean {
     return this.synthesis.speaking;
   }
+
+  removeLandmark(landmarkId: string): void {
+    this.spokenLandmarks.delete(landmarkId);
+  }
 }
 
 export const audioService = new AudioService();
