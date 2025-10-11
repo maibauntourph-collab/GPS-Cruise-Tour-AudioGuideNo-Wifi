@@ -279,7 +279,7 @@ export function LandmarkPanel({
             data-testid="button-navigate-panel"
           >
             <Navigation className="w-4 h-4" />
-            Get Directions
+            {t('getDirections', selectedLanguage)}
           </Button>
         </div>
       </div>

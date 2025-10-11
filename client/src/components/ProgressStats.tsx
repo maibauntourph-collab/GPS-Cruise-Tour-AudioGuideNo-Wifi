@@ -53,7 +53,7 @@ export function ProgressStats({ totalLandmarks, cityName, selectedLanguage = 'en
           {progress === 100 && (
             <div className="flex items-center gap-2 text-sm font-medium text-primary pt-2">
               <TrendingUp className="w-4 h-4" />
-              <span data-testid="text-complete-message">All landmarks explored!</span>
+              <span data-testid="text-complete-message">{t('allExplored', selectedLanguage)}</span>
             </div>
           )}
         </div>

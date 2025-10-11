@@ -50,7 +50,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: 'Test Audio',
     clearRoute: 'Clear Route',
     progress: 'Progress',
-    landmarksVisited: 'Landmarks Visited'
+    landmarksVisited: 'Landmarks Visited',
+    getDirections: 'Get Directions',
+    allExplored: 'All landmarks explored!'
   },
   ko: {
     landmarks: '명소',
@@ -75,7 +77,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: '오디오 테스트',
     clearRoute: '경로 지우기',
     progress: '진행률',
-    landmarksVisited: '방문한 명소'
+    landmarksVisited: '방문한 명소',
+    getDirections: '길찾기',
+    allExplored: '모든 명소를 탐험했습니다!'
   },
   es: {
     landmarks: 'Monumentos',
@@ -100,7 +104,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: 'Probar Audio',
     clearRoute: 'Borrar Ruta',
     progress: 'Progreso',
-    landmarksVisited: 'Monumentos Visitados'
+    landmarksVisited: 'Monumentos Visitados',
+    getDirections: 'Obtener Direcciones',
+    allExplored: '¡Todos los monumentos explorados!'
   },
   fr: {
     landmarks: 'Monuments',
@@ -125,7 +131,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: 'Tester Audio',
     clearRoute: 'Effacer Itinéraire',
     progress: 'Progrès',
-    landmarksVisited: 'Monuments Visités'
+    landmarksVisited: 'Monuments Visités',
+    getDirections: "Obtenir l'itinéraire",
+    allExplored: 'Tous les monuments explorés!'
   },
   de: {
     landmarks: 'Sehenswürdigkeiten',
@@ -150,7 +158,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: 'Audio Testen',
     clearRoute: 'Route Löschen',
     progress: 'Fortschritt',
-    landmarksVisited: 'Besuchte Sehenswürdigkeiten'
+    landmarksVisited: 'Besuchte Sehenswürdigkeiten',
+    getDirections: 'Wegbeschreibung',
+    allExplored: 'Alle Sehenswürdigkeiten erkundet!'
   },
   it: {
     landmarks: 'Monumenti',
@@ -175,7 +185,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: 'Prova Audio',
     clearRoute: 'Cancella Percorso',
     progress: 'Progresso',
-    landmarksVisited: 'Monumenti Visitati'
+    landmarksVisited: 'Monumenti Visitati',
+    getDirections: 'Ottieni Indicazioni',
+    allExplored: 'Tutti i monumenti esplorati!'
   },
   zh: {
     landmarks: '地标',
@@ -200,7 +212,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: '测试音频',
     clearRoute: '清除路线',
     progress: '进度',
-    landmarksVisited: '已访问地标'
+    landmarksVisited: '已访问地标',
+    getDirections: '获取路线',
+    allExplored: '所有地标已探索!'
   },
   ja: {
     landmarks: 'ランドマーク',
@@ -225,7 +239,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: 'オーディオテスト',
     clearRoute: 'ルートをクリア',
     progress: '進捗',
-    landmarksVisited: '訪問したランドマーク'
+    landmarksVisited: '訪問したランドマーク',
+    getDirections: '道順を取得',
+    allExplored: 'すべてのランドマークを探索しました!'
   },
   pt: {
     landmarks: 'Monumentos',
@@ -250,7 +266,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: 'Testar Áudio',
     clearRoute: 'Limpar Rota',
     progress: 'Progresso',
-    landmarksVisited: 'Monumentos Visitados'
+    landmarksVisited: 'Monumentos Visitados',
+    getDirections: 'Obter Direções',
+    allExplored: 'Todos os monumentos explorados!'
   },
   ru: {
     landmarks: 'Достопримечательности',
@@ -275,7 +293,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     testAudio: 'Тест Аудио',
     clearRoute: 'Очистить Маршрут',
     progress: 'Прогресс',
-    landmarksVisited: 'Посещенные Достопримечательности'
+    landmarksVisited: 'Посещенные Достопримечательности',
+    getDirections: 'Получить Маршрут',
+    allExplored: 'Все достопримечательности изучены!'
   }
 };
 
