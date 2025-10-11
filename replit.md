@@ -12,8 +12,9 @@ This application provides an interactive map experience for tourists visiting ma
 - **Interactive Map**: Full-screen map using React-Leaflet with OpenStreetMap tiles
 - **GPS Tracking**: Real-time location tracking with visual user position indicator
 - **Auto Audio Narration**: Speaks landmark information automatically when within radius (uses Web Speech API)
+- **TTS Speed Control**: Adjustable speech rate (0.5x-2x) with localStorage persistence
 - **Turn-by-Turn Navigation**: Route planning from current location to any landmark using Leaflet Routing Machine
-- **Audio Controls**: Toggle audio narration on/off
+- **Audio Controls**: Toggle audio narration on/off, test audio playback, adjust speech speed
 - **Route Management**: Clear active routes with a single click
 
 ### Multi-City Support
@@ -209,7 +210,15 @@ npm run db:push --force # Force push (when conflicts occur)
 
 ## Recent Changes (2025-10-11)
 
-### Completed Features
+### Latest Update: TTS Speed Control (Today)
+- **Adjustable Speech Rate**: Slider control in AppSidebar (0.5x-2x, 0.1 step)
+- **Real-time Updates**: Speech rate display updates as slider moves
+- **Persistent Settings**: Rate saved to localStorage ('tts-speed' key)
+- **Applied Universally**: Rate applies to auto-narration and test audio
+- **Multi-language Labels**: 'speechSpeed' translation added (EN, KO)
+- **E2E Tested**: Verified slider interaction, localStorage persistence, audio playback
+
+### Previous Completed Features
 1. **Multi-City Support**
    - Added Rome, Paris, London with city selector
    - City-based landmark filtering
