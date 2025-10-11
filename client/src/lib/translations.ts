@@ -52,7 +52,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     progress: 'Progress',
     landmarksVisited: 'Landmarks Visited',
     getDirections: 'Get Directions',
-    allExplored: 'All landmarks explored!'
+    allExplored: 'All landmarks explored!',
+    speechSpeed: 'Speech Speed'
   },
   ko: {
     landmarks: '명소',
@@ -79,7 +80,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     progress: '진행률',
     landmarksVisited: '방문한 명소',
     getDirections: '길찾기',
-    allExplored: '모든 명소를 탐험했습니다!'
+    allExplored: '모든 명소를 탐험했습니다!',
+    speechSpeed: '음성 속도'
   },
   es: {
     landmarks: 'Monumentos',

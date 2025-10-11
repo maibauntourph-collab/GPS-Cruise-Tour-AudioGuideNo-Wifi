@@ -46,6 +46,7 @@ export default function Home() {
   const [spokenLandmarks, setSpokenLandmarks] = useState<Set<string>>(new Set());
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
+  const [speechRate, setSpeechRate] = useState<number>(audioService.getCurrentRate());
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -136,6 +137,11 @@ export default function Home() {
     }
   };
 
+  const handleSpeechRateChange = (rate: number) => {
+    setSpeechRate(rate);
+    audioService.setRate(rate);
+  };
+
   if (citiesLoading || landmarksLoading) {
     return (
       <div className="h-screen w-full flex items-center justify-center bg-background">
@@ -165,6 +171,8 @@ export default function Home() {
         totalLandmarks={landmarks.length}
         cityName={selectedCity?.name}
         onTestAudio={handleTestAudio}
+        speechRate={speechRate}
+        onSpeechRateChange={handleSpeechRateChange}
       />
       
       <SidebarInset className="flex w-full flex-1 flex-col">

@@ -1,6 +1,7 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Slider } from '@/components/ui/slider';
 import {
   MapPin,
   Navigation,
@@ -8,6 +9,7 @@ import {
   VolumeX,
   Loader2,
   AlertCircle,
+  Gauge,
 } from 'lucide-react';
 import { Landmark, GpsPosition } from '@shared/schema';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
@@ -22,6 +24,8 @@ interface InfoPanelProps {
   hasActiveRoute: boolean;
   nearestLandmark?: { landmark: Landmark; distance: number } | null;
   isSpeaking: boolean;
+  speechRate: number;
+  onSpeechRateChange: (rate: number) => void;
 }
 
 export function InfoPanel({
@@ -34,6 +38,8 @@ export function InfoPanel({
   hasActiveRoute,
   nearestLandmark,
   isSpeaking,
+  speechRate,
+  onSpeechRateChange,
 }: InfoPanelProps) {
   return (
     <Card className="absolute top-4 left-4 z-[1000] max-w-sm backdrop-blur-md bg-background/90 border-2 shadow-xl">
@@ -92,6 +98,27 @@ export function InfoPanel({
           <p className="text-sm text-muted-foreground">
             Audio guide plays automatically within 50m of landmarks
           </p>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Gauge className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium">Speech Speed</span>
+            </div>
+            <span className="text-sm text-muted-foreground" data-testid="text-speech-rate">
+              {speechRate.toFixed(1)}x
+            </span>
+          </div>
+          <Slider
+            value={[speechRate]}
+            onValueChange={(values) => onSpeechRateChange(values[0])}
+            min={0.5}
+            max={2.0}
+            step={0.1}
+            className="w-full"
+            data-testid="slider-speech-rate"
+          />
         </div>
 
         <div className="flex gap-2">

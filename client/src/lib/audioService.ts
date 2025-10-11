@@ -9,6 +9,12 @@ class AudioService {
     this.synthesis = window.speechSynthesis;
     this.spokenLandmarks = new Set();
     this.isEnabled = true;
+    
+    // Load saved rate from localStorage
+    const savedRate = localStorage.getItem('tts-speed');
+    if (savedRate) {
+      this.currentRate = parseFloat(savedRate);
+    }
   }
 
   // Language mapping for all supported languages
@@ -52,7 +58,7 @@ class AudioService {
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = this.getLangCode(language);
-    utterance.rate = 0.9;
+    utterance.rate = this.currentRate;
     utterance.pitch = 1.0;
     utterance.volume = 1.0;
 
@@ -92,6 +98,7 @@ class AudioService {
 
   setRate(rate: number) {
     this.currentRate = rate;
+    localStorage.setItem('tts-speed', rate.toString());
   }
 
   getCurrentRate(): number {
