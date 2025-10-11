@@ -1,9 +1,12 @@
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Slider } from '@/components/ui/slider';
 import { Landmark } from '@shared/schema';
-import { Navigation, MapPin, Calendar, User, X } from 'lucide-react';
+import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2 } from 'lucide-react';
 import { PhotoGallery } from './PhotoGallery';
 import { getTranslatedContent } from '@/lib/translations';
+import { audioService } from '@/lib/audioService';
 
 interface LandmarkPanelProps {
   landmark: Landmark | null;
@@ -18,10 +21,64 @@ export function LandmarkPanel({
   onNavigate,
   selectedLanguage = 'en'
 }: LandmarkPanelProps) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackRate, setPlaybackRate] = useState(1.0);
+
+  useEffect(() => {
+    // Stop audio when landmark changes or component unmounts
+    return () => {
+      audioService.stop();
+      setIsPlaying(false);
+    };
+  }, [landmark?.id]);
+
+  useEffect(() => {
+    // Stop audio when language changes
+    audioService.stop();
+    setIsPlaying(false);
+  }, [selectedLanguage]);
+
   if (!landmark) return null;
 
   const handleNavigate = () => {
     onNavigate(landmark);
+  };
+
+  const handlePlayPause = () => {
+    const detailedText = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
+    
+    if (!detailedText) {
+      return;
+    }
+
+    if (isPlaying) {
+      if (audioService.isPaused()) {
+        audioService.resumeSpeech();
+      } else {
+        audioService.pauseSpeech();
+      }
+    } else {
+      audioService.playText(detailedText, selectedLanguage, playbackRate, () => {
+        setIsPlaying(false);
+      });
+      setIsPlaying(true);
+    }
+  };
+
+  const handleRateChange = (value: number[]) => {
+    const newRate = value[0];
+    setPlaybackRate(newRate);
+    audioService.setRate(newRate);
+    
+    // If currently playing, restart with new rate
+    if (isPlaying && !audioService.isPaused()) {
+      const detailedText = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
+      if (detailedText) {
+        audioService.playText(detailedText, selectedLanguage, newRate, () => {
+          setIsPlaying(false);
+        });
+      }
+    }
   };
 
   return (
@@ -108,6 +165,65 @@ export function LandmarkPanel({
             </h3>
             <p className="text-muted-foreground" data-testid="text-architect">
               {landmark.architect}
+            </p>
+          </div>
+        )}
+
+        {/* Detailed Description with Audio */}
+        {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') && (
+          <div className="mb-4 p-4 bg-muted/30 rounded-lg">
+            <h3 className="font-semibold mb-3 flex items-center gap-2">
+              <Volume2 className="w-4 h-4 text-primary" />
+              Detailed Information
+            </h3>
+            
+            {/* Audio Controls */}
+            <div className="mb-3 p-3 bg-background rounded-md border">
+              <div className="flex items-center gap-3 mb-3">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePlayPause}
+                  className="gap-2"
+                  data-testid="button-audio-play"
+                >
+                  {isPlaying && !audioService.isPaused() ? (
+                    <>
+                      <Pause className="w-4 h-4" />
+                      Pause
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-4 h-4" />
+                      {audioService.isPaused() ? 'Resume' : 'Play Audio'}
+                    </>
+                  )}
+                </Button>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-muted-foreground">Playback Speed</span>
+                    <span className="text-xs font-medium">{playbackRate.toFixed(1)}x</span>
+                  </div>
+                  <Slider
+                    value={[playbackRate]}
+                    onValueChange={handleRateChange}
+                    min={0.5}
+                    max={2.0}
+                    step={0.1}
+                    className="cursor-pointer"
+                    data-testid="slider-playback-rate"
+                  />
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-xs text-muted-foreground">0.5x</span>
+                    <span className="text-xs text-muted-foreground">2.0x</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Detailed Text */}
+            <p className="text-sm text-muted-foreground leading-relaxed" data-testid="text-detailed-description">
+              {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}
             </p>
           </div>
         )}

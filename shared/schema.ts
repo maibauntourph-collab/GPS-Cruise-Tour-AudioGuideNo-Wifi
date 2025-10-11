@@ -20,28 +20,21 @@ export const languageSchema = z.object({
   code: z.string(),
   name: z.string(),
   flag: z.string(),
+  speechLang: z.string().optional(), // Web Speech API language code
 });
 
 export type Language = z.infer<typeof languageSchema>;
 
-// Translations schema
-export const translationsSchema = z.object({
-  en: z.object({
-    name: z.string(),
-    narration: z.string(),
-    description: z.string().optional(),
-  }),
-  it: z.object({
-    name: z.string(),
-    narration: z.string(),
-    description: z.string().optional(),
-  }).optional(),
-  ko: z.object({
-    name: z.string(),
-    narration: z.string(),
-    description: z.string().optional(),
-  }).optional(),
+// Translation content schema (used for each language)
+const translationContentSchema = z.object({
+  name: z.string(),
+  narration: z.string(),
+  description: z.string().optional(),
+  detailedDescription: z.string().optional(), // Long 5-minute reading content
 });
+
+// Dynamic translations schema - supports any language code
+export const translationsSchema = z.record(z.string(), translationContentSchema).optional();
 
 export type Translations = z.infer<typeof translationsSchema>;
 
@@ -56,7 +49,8 @@ export const landmarkSchema = z.object({
   narration: z.string(),
   description: z.string().optional(),
   category: z.string().optional(),
-  translations: translationsSchema.optional(),
+  translations: translationsSchema,
+  detailedDescription: z.string().optional(), // Long 5-minute reading content
   photos: z.array(z.string()).optional(), // Array of photo URLs
   historicalInfo: z.string().optional(), // Extended historical information
   yearBuilt: z.string().optional(), // Construction year/period
