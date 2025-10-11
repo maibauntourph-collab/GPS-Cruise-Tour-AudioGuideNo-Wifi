@@ -5,7 +5,7 @@ import { Slider } from '@/components/ui/slider';
 import { Landmark } from '@shared/schema';
 import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2 } from 'lucide-react';
 import { PhotoGallery } from './PhotoGallery';
-import { getTranslatedContent } from '@/lib/translations';
+import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
 
 interface LandmarkPanelProps {
@@ -127,7 +127,7 @@ export function LandmarkPanel({
           <div className="mb-4">
             <h3 className="font-semibold mb-3 flex items-center gap-2">
               <MapPin className="w-4 h-4 text-primary" />
-              Photo Gallery
+              {t('photos', selectedLanguage)}
             </h3>
             <PhotoGallery 
               photos={landmark.photos} 
@@ -139,7 +139,7 @@ export function LandmarkPanel({
         {/* About */}
         {getTranslatedContent(landmark, selectedLanguage, 'description') && (
           <div className="mb-4">
-            <h3 className="font-semibold mb-2">About</h3>
+            <h3 className="font-semibold mb-2">{t('category', selectedLanguage)}</h3>
             <p className="text-muted-foreground" data-testid="text-description">
               {getTranslatedContent(landmark, selectedLanguage, 'description')}
             </p>
@@ -149,7 +149,7 @@ export function LandmarkPanel({
         {/* Historical Information */}
         {landmark.historicalInfo && (
           <div className="mb-4">
-            <h3 className="font-semibold mb-2">Historical Information</h3>
+            <h3 className="font-semibold mb-2">{t('historicalInfo', selectedLanguage)}</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-historical-info">
               {landmark.historicalInfo}
             </p>
@@ -161,7 +161,7 @@ export function LandmarkPanel({
           <div className="mb-4">
             <h3 className="font-semibold mb-2 flex items-center gap-2">
               <User className="w-4 h-4 text-primary" />
-              Architect / Creator
+              {t('architect', selectedLanguage)}
             </h3>
             <p className="text-muted-foreground" data-testid="text-architect">
               {landmark.architect}
@@ -174,7 +174,7 @@ export function LandmarkPanel({
           <div className="mb-4 p-4 bg-muted/30 rounded-lg">
             <h3 className="font-semibold mb-3 flex items-center gap-2">
               <Volume2 className="w-4 h-4 text-primary" />
-              Detailed Information
+              {t('detailedInformation', selectedLanguage)}
             </h3>
             
             {/* Audio Controls */}
@@ -190,18 +190,18 @@ export function LandmarkPanel({
                   {isPlaying && !audioService.isPaused() ? (
                     <>
                       <Pause className="w-4 h-4" />
-                      Pause
+                      {t('pause', selectedLanguage)}
                     </>
                   ) : (
                     <>
                       <Play className="w-4 h-4" />
-                      {audioService.isPaused() ? 'Resume' : 'Play Audio'}
+                      {audioService.isPaused() ? t('resume', selectedLanguage) : t('playAudio', selectedLanguage)}
                     </>
                   )}
                 </Button>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs text-muted-foreground">Speed</span>
+                    <span className="text-xs text-muted-foreground">{t('speed', selectedLanguage)}</span>
                     <span className="text-xs font-medium" data-testid="text-playback-speed">{playbackRate.toFixed(1)}x</span>
                   </div>
                   <div className="flex items-center gap-1">
