@@ -39,6 +39,86 @@ const CITIES: City[] = [
     lat: 51.5074,
     lng: -0.1278,
     zoom: 13
+  },
+  {
+    id: 'anchorage',
+    name: 'Anchorage',
+    country: 'USA',
+    lat: 61.2181,
+    lng: -149.9003,
+    zoom: 13
+  },
+  {
+    id: 'amsterdam',
+    name: 'Amsterdam',
+    country: 'Netherlands',
+    lat: 52.3676,
+    lng: 4.9041,
+    zoom: 13
+  },
+  {
+    id: 'barcelona',
+    name: 'Barcelona',
+    country: 'Spain',
+    lat: 41.3851,
+    lng: 2.1734,
+    zoom: 13
+  },
+  {
+    id: 'brussels',
+    name: 'Brussels',
+    country: 'Belgium',
+    lat: 50.8503,
+    lng: 4.3517,
+    zoom: 13
+  },
+  {
+    id: 'prague',
+    name: 'Prague',
+    country: 'Czech Republic',
+    lat: 50.0755,
+    lng: 14.4378,
+    zoom: 13
+  },
+  {
+    id: 'budapest',
+    name: 'Budapest',
+    country: 'Hungary',
+    lat: 47.4979,
+    lng: 19.0402,
+    zoom: 13
+  },
+  {
+    id: 'warsaw',
+    name: 'Warsaw',
+    country: 'Poland',
+    lat: 52.2297,
+    lng: 21.0122,
+    zoom: 13
+  },
+  {
+    id: 'stockholm',
+    name: 'Stockholm',
+    country: 'Sweden',
+    lat: 59.3293,
+    lng: 18.0686,
+    zoom: 13
+  },
+  {
+    id: 'copenhagen',
+    name: 'Copenhagen',
+    country: 'Denmark',
+    lat: 55.6761,
+    lng: 12.5683,
+    zoom: 13
+  },
+  {
+    id: 'oslo',
+    name: 'Oslo',
+    country: 'Norway',
+    lat: 59.9139,
+    lng: 10.7522,
+    zoom: 13
   }
 ];
 
@@ -1466,6 +1546,1752 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: 'Лондонский глаз был построен в честь празднования миллениума и открыт для публики в марте 2000 года. Он был спроектирован архитекторами Дэвидом Марксом и Джулией Барфилд и стал одной из самых знаковых достопримечательностей Лондона.',
         yearBuilt: '1999-2000',
         architect: 'Дэвид Маркс и Джулия Барфилд'
+      }
+    }
+  },
+  // Alaska landmarks
+  {
+    id: 'denali_national_park',
+    cityId: 'anchorage',
+    name: 'Denali National Park',
+    lat: 63.1299,
+    lng: -151.1974,
+    radius: 100,
+    narration: 'Welcome to Denali National Park, home to North America\'s tallest peak. This vast wilderness showcases Alaska\'s stunning natural beauty.',
+    description: 'Six million acres of pristine wilderness surrounding North America\'s highest peak',
+    category: 'National Park',
+    detailedDescription: 'Denali National Park and Preserve encompasses six million acres of Alaska\'s most spectacular wilderness, dominated by the towering presence of Denali (formerly Mount McKinley), which at 20,310 feet is the highest peak in North America. The park offers an unparalleled opportunity to experience true wilderness, where grizzly bears roam freely, wolves hunt caribou, and Dall sheep navigate steep mountain terrain. Established in 1917, the park was originally created to protect the area\'s wildlife from overhunting. Today, it serves as one of the last great frontiers of the American wilderness. The park\'s diverse ecosystems range from low-elevation spruce and tamarack forests to high alpine tundra, supporting a remarkable variety of wildlife. Visitors can witness the midnight sun in summer, when daylight lasts nearly 24 hours, or the dancing Northern Lights in winter. The park\'s single road stretches 92 miles into its heart, offering stunning vistas of mountains, valleys, and wildlife. Only the first 15 miles are paved and accessible by private vehicles; beyond that, visitors must use shuttle buses, preserving the park\'s pristine character.',
+    photos: [
+      'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800',
+      'https://images.unsplash.com/photo-1564053489984-317bbd824340?w=800',
+      'https://images.unsplash.com/photo-1519575706483-221027bfbb31?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800',
+      'https://images.unsplash.com/photo-1465056836041-7f43ac27dcb7?w=800',
+      'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800'
+    ],
+    historicalInfo: 'Denali National Park was established in 1917 as Mount McKinley National Park to protect wildlife from commercial hunting. The park was designated an international biosphere reserve in 1976 and expanded to six million acres in 1980.',
+    yearBuilt: '1917',
+    architect: 'U.S. National Park Service',
+    translations: {
+      en: {
+        name: 'Denali National Park',
+        narration: 'Welcome to Denali National Park, home to North America\'s tallest peak. This vast wilderness showcases Alaska\'s stunning natural beauty.',
+        description: 'Six million acres of pristine wilderness surrounding North America\'s highest peak',
+        detailedDescription: 'Denali National Park and Preserve encompasses six million acres of Alaska\'s most spectacular wilderness, dominated by the towering presence of Denali (formerly Mount McKinley), which at 20,310 feet is the highest peak in North America. The park offers an unparalleled opportunity to experience true wilderness, where grizzly bears roam freely, wolves hunt caribou, and Dall sheep navigate steep mountain terrain. Established in 1917, the park was originally created to protect the area\'s wildlife from overhunting. Today, it serves as one of the last great frontiers of the American wilderness. The park\'s diverse ecosystems range from low-elevation spruce and tamarack forests to high alpine tundra, supporting a remarkable variety of wildlife. Visitors can witness the midnight sun in summer, when daylight lasts nearly 24 hours, or the dancing Northern Lights in winter. The park\'s single road stretches 92 miles into its heart, offering stunning vistas of mountains, valleys, and wildlife. Only the first 15 miles are paved and accessible by private vehicles; beyond that, visitors must use shuttle buses, preserving the park\'s pristine character.',
+        historicalInfo: 'Denali National Park was established in 1917 as Mount McKinley National Park to protect wildlife from commercial hunting. The park was designated an international biosphere reserve in 1976 and expanded to six million acres in 1980.',
+        yearBuilt: '1917',
+        architect: 'U.S. National Park Service'
+      },
+      ko: {
+        name: '데날리 국립공원',
+        narration: '북미에서 가장 높은 봉우리가 있는 데날리 국립공원에 오신 것을 환영합니다. 이 광활한 야생지대는 알래스카의 놀라운 자연미를 보여줍니다.',
+        description: '북미 최고봉을 둘러싼 600만 에이커의 원시 야생지대',
+        detailedDescription: '데날리 국립공원은 600만 에이커의 알래스카에서 가장 장관을 이루는 야생지대를 아우르며, 북미에서 가장 높은 20,310피트의 봉우리인 데날리(과거 맥킨리산)가 우뚝 솟아 있습니다. 이 공원은 그리즐리곰이 자유롭게 돌아다니고, 늑대가 순록을 사냥하며, 달양이 가파른 산악 지형을 누비는 진정한 야생을 경험할 수 있는 비할 데 없는 기회를 제공합니다. 1917년에 설립된 이 공원은 원래 이 지역의 야생동물을 과잉 사냥으로부터 보호하기 위해 만들어졌습니다. 오늘날 이곳은 미국 야생의 마지막 위대한 개척지 중 하나입니다. 공원의 다양한 생태계는 저지대 가문비나무와 낙엽송 숲에서 고산 툰드라에 이르기까지 다양하며 놀라운 다양성의 야생동물을 지원합니다. 방문객들은 여름에는 거의 24시간 지속되는 백야를, 겨울에는 춤추는 오로라를 목격할 수 있습니다. 공원의 유일한 도로는 92마일을 뻗어 산, 계곡, 야생동물의 멋진 전망을 제공합니다. 처음 15마일만 포장되어 개인 차량으로 접근할 수 있으며, 그 너머는 셔틀버스를 이용해야 공원의 원시적 특성을 보존할 수 있습니다.',
+        historicalInfo: '데날리 국립공원은 1917년 맥킨리산 국립공원으로 설립되어 야생동물을 상업적 사냥으로부터 보호했습니다. 1976년에 국제 생물권 보호구역으로 지정되었으며 1980년에 600만 에이커로 확장되었습니다.',
+        yearBuilt: '1917년',
+        architect: '미국 국립공원 관리청'
+      },
+      ja: {
+        name: 'デナリ国立公園',
+        narration: '北米最高峰を擁するデナリ国立公園へようこそ。この広大な原生地域はアラスカの見事な自然美を見せています。',
+        description: '北米最高峰を囲む600万エーカーの原生自然',
+        detailedDescription: 'デナリ国立公園は、北米最高峰である20,310フィートのデナリ(旧マッキンリー山)がそびえ立つ、アラスカで最も壮観な600万エーカーの原生地域を包含しています。この公園は、グリズリーベアが自由に歩き回り、オオカミがカリブーを狩り、ドールシープが急峻な山岳地形を移動する真の原生自然を体験する比類のない機会を提供します。1917年に設立されたこの公園は、元々この地域の野生生物を過剰狩猟から保護するために作られました。今日、ここはアメリカの原生地域の最後の偉大なフロンティアの一つです。公園の多様な生態系は、低地のトウヒとカラマツの森林から高山ツンドラまで及び、驚くべき多様な野生生物を支えています。訪問者は夏には昼間がほぼ24時間続く白夜を、冬には踊るオーロラを目撃できます。公園の唯一の道路は92マイル延びて、山、谷、野生生物の見事な景色を提供します。最初の15マイルだけが舗装され個人車両でアクセスできます。それ以降はシャトルバスを使用する必要があり、公園の原始的な特性を保存しています。',
+        historicalInfo: 'デナリ国立公園は1917年にマッキンリー山国立公園として設立され、野生生物を商業狩猟から保護しました。1976年に国際生物圏保護区に指定され、1980年に600万エーカーに拡大されました。',
+        yearBuilt: '1917年',
+        architect: '米国国立公園局'
+      },
+      zh: {
+        name: '德纳里国家公园',
+        narration: '欢迎来到德纳里国家公园,北美最高峰的所在地。这片广阔的荒野展示了阿拉斯加惊人的自然美景。',
+        description: '环绕北美最高峰的600万英亩原始荒野',
+        detailedDescription: '德纳里国家公园占地600万英亩,是阿拉斯加最壮观的荒野,以高达20,310英尺的北美最高峰德纳里(前称麦金利山)为主导。公园提供了体验真正荒野的无与伦比的机会,灰熊自由漫步,狼群狩猎驯鹿,戴尔羊在陡峭的山地穿行。该公园成立于1917年,最初是为了保护该地区的野生动物免受过度狩猎。今天,它是美国荒野最后的伟大边疆之一。公园的多样化生态系统从低海拔的云杉和落叶松林延伸到高山苔原,支持着种类繁多的野生动物。游客可以在夏季目睹几乎持续24小时的午夜阳光,或在冬季观赏舞动的北极光。公园唯一的道路延伸92英里进入腹地,提供山脉、峡谷和野生动物的壮丽景色。只有前15英里是铺装的,可供私人车辆通行;再往前必须使用班车,以保护公园的原始特性。',
+        historicalInfo: '德纳里国家公园于1917年作为麦金利山国家公园成立,以保护野生动物免受商业狩猎。该公园于1976年被指定为国际生物圈保护区,并于1980年扩大至600万英亩。',
+        yearBuilt: '1917年',
+        architect: '美国国家公园管理局'
+      }
+    }
+  },
+  {
+    id: 'mendenhall_glacier',
+    cityId: 'anchorage',
+    name: 'Mendenhall Glacier',
+    lat: 58.495833,
+    lng: -134.532222,
+    radius: 80,
+    narration: 'Behold the magnificent Mendenhall Glacier, a 13-mile river of ice flowing from the Juneau Icefield. Witness the stunning blue ice and majestic landscape.',
+    description: 'A stunning 13-mile glacier accessible by road in Southeast Alaska',
+    category: 'Natural Wonder',
+    detailedDescription: 'Mendenhall Glacier is one of Alaska\'s most accessible and spectacular glaciers, stretching approximately 13.6 miles from its source in the Juneau Icefield to its terminus at Mendenhall Lake. Located just 12 miles from downtown Juneau, it\'s the only glacier in Southeast Alaska accessible by road, making it a must-visit destination for thousands of visitors each year. The glacier showcases the dramatic power of ice, with its brilliant blue hues created by compressed ice that absorbs all colors of light except blue. The glacier is part of the Tongass National Forest and sits within the 5,815-acre Mendenhall Glacier Recreation Area. Visitors can explore numerous trails offering different perspectives of the glacier, from the easy Photo Point Trail to the more challenging West Glacier Trail that brings hikers to the glacier\'s edge. The visitor center provides educational exhibits about glacial formation, climate change, and local wildlife. Like many glaciers worldwide, Mendenhall has been retreating due to climate change, providing a visible reminder of our changing planet.',
+    photos: [
+      'https://images.unsplash.com/photo-1526114820144-f46fc958adf7?w=800',
+      'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800',
+      'https://images.unsplash.com/photo-1605965861107-8f0c99f90deb?w=800',
+      'https://images.unsplash.com/photo-1610296804104-dde5f34f7a4f?w=800',
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
+      'https://images.unsplash.com/photo-1483354483454-4cd359948304?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
+    ],
+    historicalInfo: 'Mendenhall Glacier was named after Thomas Corwin Mendenhall, who was the superintendent of the U.S. Coast and Geodetic Survey from 1889 to 1894. The glacier has been retreating since the mid-1700s and has retreated approximately 2.5 miles since 1929.',
+    yearBuilt: 'Formed thousands of years ago',
+    architect: 'Natural Formation',
+    translations: {
+      en: {
+        name: 'Mendenhall Glacier',
+        narration: 'Behold the magnificent Mendenhall Glacier, a 13-mile river of ice flowing from the Juneau Icefield. Witness the stunning blue ice and majestic landscape.',
+        description: 'A stunning 13-mile glacier accessible by road in Southeast Alaska',
+        detailedDescription: 'Mendenhall Glacier is one of Alaska\'s most accessible and spectacular glaciers, stretching approximately 13.6 miles from its source in the Juneau Icefield to its terminus at Mendenhall Lake. Located just 12 miles from downtown Juneau, it\'s the only glacier in Southeast Alaska accessible by road, making it a must-visit destination for thousands of visitors each year. The glacier showcases the dramatic power of ice, with its brilliant blue hues created by compressed ice that absorbs all colors of light except blue. The glacier is part of the Tongass National Forest and sits within the 5,815-acre Mendenhall Glacier Recreation Area. Visitors can explore numerous trails offering different perspectives of the glacier, from the easy Photo Point Trail to the more challenging West Glacier Trail that brings hikers to the glacier\'s edge. The visitor center provides educational exhibits about glacial formation, climate change, and local wildlife. Like many glaciers worldwide, Mendenhall has been retreating due to climate change, providing a visible reminder of our changing planet.',
+        historicalInfo: 'Mendenhall Glacier was named after Thomas Corwin Mendenhall, who was the superintendent of the U.S. Coast and Geodetic Survey from 1889 to 1894. The glacier has been retreating since the mid-1700s and has retreated approximately 2.5 miles since 1929.',
+        yearBuilt: 'Formed thousands of years ago',
+        architect: 'Natural Formation'
+      },
+      ko: {
+        name: '멘덴홀 빙하',
+        narration: '주노 빙원에서 흘러내리는 13마일의 얼음 강인 장엄한 멘덴홀 빙하를 목격하세요. 놀라운 푸른 얼음과 장엄한 풍경을 감상하세요.',
+        description: '동남 알래스카에서 도로로 접근 가능한 멋진 13마일 빙하',
+        detailedDescription: '멘덴홀 빙하는 알래스카에서 가장 접근하기 쉽고 장관을 이루는 빙하 중 하나로, 주노 빙원의 수원에서 멘덴홀 호수의 끝까지 약 13.6마일 뻗어 있습니다. 주노 시내에서 불과 12마일 떨어진 곳에 위치한 이곳은 동남 알래스카에서 도로로 접근 가능한 유일한 빙하로, 매년 수천 명의 방문객이 찾는 필수 방문지입니다. 빙하는 얼음의 극적인 힘을 보여주며, 파란색을 제외한 모든 빛의 색을 흡수하는 압축된 얼음으로 만들어진 찬란한 푸른 색조를 띠고 있습니다. 빙하는 통가스 국유림의 일부이며 5,815에이커의 멘덴홀 빙하 레크리에이션 지역 내에 위치합니다. 방문객들은 쉬운 포토 포인트 트레일부터 하이커들을 빙하 가장자리로 안내하는 더 도전적인 웨스트 글레이셔 트레일까지 빙하의 다양한 관점을 제공하는 수많은 트레일을 탐험할 수 있습니다. 방문자 센터는 빙하 형성, 기후 변화 및 지역 야생동물에 대한 교육 전시를 제공합니다. 전 세계의 많은 빙하와 마찬가지로 멘덴홀은 기후 변화로 인해 후퇴하고 있어 우리 행성의 변화를 가시적으로 상기시켜 줍니다.',
+        historicalInfo: '멘덴홀 빙하는 1889년부터 1894년까지 미국 해안 및 측지 조사국 국장이었던 토마스 코윈 멘덴홀의 이름을 따서 명명되었습니다. 빙하는 1700년대 중반부터 후퇴해 왔으며 1929년 이후 약 2.5마일 후퇴했습니다.',
+        yearBuilt: '수천 년 전 형성',
+        architect: '자연 형성물'
+      },
+      ja: {
+        name: 'メンデンホール氷河',
+        narration: 'ジュノー氷原から流れる13マイルの氷の川、壮大なメンデンホール氷河をご覧ください。見事な青い氷と雄大な景観を目撃してください。',
+        description: '南東アラスカで道路でアクセス可能な見事な13マイルの氷河',
+        detailedDescription: 'メンデンホール氷河はアラスカで最もアクセスしやすく壮観な氷河の一つで、ジュノー氷原の源から メンデンホール湖の終点まで約13.6マイル延びています。ジュノーのダウンタウンからわずか12マイルの場所に位置し、南東アラスカで道路でアクセスできる唯一の氷河であるため、毎年何千人もの訪問者にとって必見の目的地となっています。氷河は氷の劇的な力を示し、青以外のすべての光の色を吸収する圧縮された氷によって作り出される鮮やかな青色の色合いを特徴としています。氷河はトンガス国有林の一部であり、5,815エーカーのメンデンホール氷河レクリエーションエリア内に位置しています。訪問者は、簡単なフォトポイントトレイルから、ハイカーを氷河の端に連れて行くより困難なウェストグレイシャートレイルまで、氷河のさまざまな視点を提供する数多くのトレイルを探索できます。ビジターセンターは、氷河の形成、気候変動、地元の野生生物に関する教育展示を提供しています。世界中の多くの氷河と同様に、メンデンホールは気候変動のために後退しており、私たちの変化する地球の目に見える思い出させるものを提供しています。',
+        historicalInfo: 'メンデンホール氷河は、1889年から1894年まで米国沿岸測地調査所の監督官だったトーマス・コーウィン・メンデンホールにちなんで命名されました。氷河は1700年代半ばから後退しており、1929年以来約2.5マイル後退しています。',
+        yearBuilt: '数千年前に形成',
+        architect: '自然形成物'
+      },
+      zh: {
+        name: '门登霍尔冰川',
+        narration: '欣赏壮丽的门登霍尔冰川,一条从朱诺冰原流出的13英里冰河。见证令人惊叹的蓝色冰川和雄伟的景观。',
+        description: '东南阿拉斯加可通过公路到达的壮观13英里冰川',
+        detailedDescription: '门登霍尔冰川是阿拉斯加最易到达且最壮观的冰川之一,从朱诺冰原的源头延伸约13.6英里至门登霍尔湖的终点。它距朱诺市中心仅12英里,是东南阿拉斯加唯一可通过公路到达的冰川,成为每年数千名游客的必游目的地。冰川展示了冰的戏剧性力量,其璀璨的蓝色是由压缩冰吸收除蓝色外所有光色而产生的。冰川是通加斯国家森林的一部分,位于5,815英亩的门登霍尔冰川游憩区内。游客可以探索众多提供不同冰川视角的步道,从简单的照片点步道到更具挑战性的西冰川步道,后者将徒步者带到冰川边缘。游客中心提供关于冰川形成、气候变化和当地野生动物的教育展览。与世界上许多冰川一样,门登霍尔冰川由于气候变化而在后退,为我们不断变化的星球提供了可见的提醒。',
+        historicalInfo: '门登霍尔冰川以托马斯·科温·门登霍尔命名,他在1889年至1894年担任美国海岸和大地测量局局长。冰川自1700年代中期以来一直在后退,自1929年以来已后退约2.5英里。',
+        yearBuilt: '数千年前形成',
+        architect: '自然形成'
+      }
+    }
+  },
+  {
+    id: 'alaska_wildlife_center',
+    cityId: 'anchorage',
+    name: 'Alaska Wildlife Conservation Center',
+    lat: 60.821359,
+    lng: -148.978592,
+    radius: 70,
+    narration: 'Visit the Alaska Wildlife Conservation Center, a sanctuary dedicated to preserving Alaska\'s native wildlife through conservation, education, and quality animal care.',
+    description: 'A 200-acre wildlife sanctuary protecting Alaska\'s native species',
+    category: 'Wildlife Sanctuary',
+    detailedDescription: 'The Alaska Wildlife Conservation Center is a 200-acre non-profit sanctuary located in Portage Valley, dedicated to the conservation of Alaska\'s wildlife through education, research, and quality animal care. Founded in 1993, the center provides a safe haven for orphaned, injured, and ill animals that cannot be released back into the wild. Visitors can observe majestic Alaska brown bears, massive wood bison, elusive wolves, powerful moose, and many other native Alaskan species in spacious, naturalistic habitats. The center plays a crucial role in conservation efforts, including the successful reintroduction of wood bison to Alaska after their extinction in the state. The self-guided 1.5-mile loop allows visitors to experience wildlife viewing by foot, car, or bicycle, with educational signs providing fascinating insights into each species\' behavior, habitat, and conservation status. The center also participates in breeding programs for endangered species and provides educational programs for thousands of school children and visitors annually.',
+    photos: [
+      'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=800',
+      'https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=800',
+      'https://images.unsplash.com/photo-1613068687893-5e85b4638b56?w=800',
+      'https://images.unsplash.com/photo-1504006833117-8886a355efbf?w=800',
+      'https://images.unsplash.com/photo-1549366021-9f761d450615?w=800',
+      'https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800',
+      'https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=800'
+    ],
+    historicalInfo: 'The Alaska Wildlife Conservation Center was founded in 1993 by Mike Miller as a sanctuary for orphaned and injured wildlife. The center has since become a leader in wildlife conservation, successfully reintroducing wood bison to Alaska in 2015 after their local extinction.',
+    yearBuilt: '1993',
+    architect: 'Mike Miller (Founder)',
+    translations: {
+      en: {
+        name: 'Alaska Wildlife Conservation Center',
+        narration: 'Visit the Alaska Wildlife Conservation Center, a sanctuary dedicated to preserving Alaska\'s native wildlife through conservation, education, and quality animal care.',
+        description: 'A 200-acre wildlife sanctuary protecting Alaska\'s native species',
+        detailedDescription: 'The Alaska Wildlife Conservation Center is a 200-acre non-profit sanctuary located in Portage Valley, dedicated to the conservation of Alaska\'s wildlife through education, research, and quality animal care. Founded in 1993, the center provides a safe haven for orphaned, injured, and ill animals that cannot be released back into the wild. Visitors can observe majestic Alaska brown bears, massive wood bison, elusive wolves, powerful moose, and many other native Alaskan species in spacious, naturalistic habitats. The center plays a crucial role in conservation efforts, including the successful reintroduction of wood bison to Alaska after their extinction in the state. The self-guided 1.5-mile loop allows visitors to experience wildlife viewing by foot, car, or bicycle, with educational signs providing fascinating insights into each species\' behavior, habitat, and conservation status. The center also participates in breeding programs for endangered species and provides educational programs for thousands of school children and visitors annually.',
+        historicalInfo: 'The Alaska Wildlife Conservation Center was founded in 1993 by Mike Miller as a sanctuary for orphaned and injured wildlife. The center has since become a leader in wildlife conservation, successfully reintroducing wood bison to Alaska in 2015 after their local extinction.',
+        yearBuilt: '1993',
+        architect: 'Mike Miller (Founder)'
+      },
+      ko: {
+        name: '알래스카 야생동물 보호센터',
+        narration: '보존, 교육 및 양질의 동물 관리를 통해 알래스카의 토착 야생동물을 보호하는 데 전념하는 보호구역인 알래스카 야생동물 보호센터를 방문하세요.',
+        description: '알래스카 토착 종을 보호하는 200에이커 야생동물 보호구역',
+        detailedDescription: '알래스카 야생동물 보호센터는 포티지 밸리에 위치한 200에이커의 비영리 보호구역으로, 교육, 연구 및 양질의 동물 관리를 통해 알래스카 야생동물 보존에 전념하고 있습니다. 1993년에 설립된 이 센터는 야생으로 돌아갈 수 없는 고아, 부상 및 병든 동물들을 위한 안전한 피난처를 제공합니다. 방문객들은 웅장한 알래스카 갈색곰, 거대한 우드 들소, 포착하기 어려운 늑대, 강력한 무스 및 기타 많은 알래스카 토착 종들을 넓고 자연적인 서식지에서 관찰할 수 있습니다. 센터는 주에서 멸종된 후 알래스카에 우드 들소를 성공적으로 재도입하는 것을 포함하여 보존 노력에서 중요한 역할을 합니다. 셀프 가이드 1.5마일 루프를 통해 방문객들은 도보, 자동차 또는 자전거로 야생동물을 관찰할 수 있으며, 교육 표지판은 각 종의 행동, 서식지 및 보존 상태에 대한 매혹적인 통찰력을 제공합니다. 센터는 또한 멸종 위기종 번식 프로그램에 참여하고 매년 수천 명의 학생과 방문객을 위한 교육 프로그램을 제공합니다.',
+        historicalInfo: '알래스카 야생동물 보호센터는 1993년 마이크 밀러에 의해 고아 및 부상당한 야생동물을 위한 보호구역으로 설립되었습니다. 센터는 이후 야생동물 보존의 선두주자가 되어 2015년 지역 멸종 후 알래스카에 우드 들소를 성공적으로 재도입했습니다.',
+        yearBuilt: '1993년',
+        architect: '마이크 밀러 (설립자)'
+      },
+      ja: {
+        name: 'アラスカ野生動物保護センター',
+        narration: '保護、教育、質の高い動物ケアを通じてアラスカの在来野生動物の保護に専念する保護区、アラスカ野生動物保護センターを訪れてください。',
+        description: 'アラスカの在来種を保護する200エーカーの野生動物保護区',
+        detailedDescription: 'アラスカ野生動物保護センターは、ポーテージバレーに位置する200エーカーの非営利保護区で、教育、研究、質の高い動物ケアを通じてアラスカの野生動物の保護に専念しています。1993年に設立されたこのセンターは、野生に戻すことができない孤児、負傷、病気の動物のための安全な避難所を提供しています。訪問者は、雄大なアラスカヒグマ、巨大なウッドバイソン、とらえどころのないオオカミ、強力なヘラジカ、その他多くのアラスカ在来種を広々とした自然の生息地で観察できます。センターは、州で絶滅した後のアラスカへのウッドバイソンの成功した再導入を含む保護活動において重要な役割を果たしています。セルフガイド式の1.5マイルのループにより、訪問者は徒歩、車、または自転車で野生動物の観察を体験でき、教育標識は各種の行動、生息地、保護状況についての魅力的な洞察を提供します。センターはまた、絶滅危惧種の繁殖プログラムに参加し、毎年何千人もの学童や訪問者のための教育プログラムを提供しています。',
+        historicalInfo: 'アラスカ野生動物保護センターは1993年にマイク・ミラーによって孤児や負傷した野生動物のための保護区として設立されました。センターはその後、野生動物保護のリーダーとなり、2015年に地域絶滅後のアラスカへのウッドバイソンの再導入に成功しました。',
+        yearBuilt: '1993年',
+        architect: 'マイク・ミラー (設立者)'
+      },
+      zh: {
+        name: '阿拉斯加野生动物保护中心',
+        narration: '参观阿拉斯加野生动物保护中心,这是一个致力于通过保护、教育和优质动物护理来保护阿拉斯加本土野生动物的保护区。',
+        description: '保护阿拉斯加本土物种的200英亩野生动物保护区',
+        detailedDescription: '阿拉斯加野生动物保护中心是位于波蒂奇谷的一个200英亩的非营利保护区,致力于通过教育、研究和优质动物护理来保护阿拉斯加的野生动物。该中心成立于1993年,为无法放归野外的孤儿、受伤和生病的动物提供安全避风港。游客可以在宽敞的自然栖息地观察雄伟的阿拉斯加棕熊、巨大的森林野牛、难以捉摸的狼、强大的驼鹿以及许多其他阿拉斯加本土物种。该中心在保护工作中发挥着关键作用,包括在该州灭绝后成功将森林野牛重新引入阿拉斯加。自助式1.5英里环路允许游客步行、开车或骑自行车观察野生动物,教育标志提供关于每个物种行为、栖息地和保护状况的迷人见解。该中心还参与濒危物种繁殖计划,每年为数千名学生和游客提供教育项目。',
+        historicalInfo: '阿拉斯加野生动物保护中心由迈克·米勒于1993年创立,作为孤儿和受伤野生动物的保护区。该中心后来成为野生动物保护的领导者,在当地灭绝后于2015年成功将森林野牛重新引入阿拉斯加。',
+        yearBuilt: '1993年',
+        architect: '迈克·米勒 (创始人)'
+      }
+    }
+  },
+  {
+    id: 'anchorage_museum',
+    cityId: 'anchorage',
+    name: 'Anchorage Museum',
+    lat: 61.2176,
+    lng: -149.8892,
+    radius: 50,
+    narration: 'Explore the Anchorage Museum, Alaska\'s largest museum featuring world-class art, history, science, and Alaska Native culture in the heart of downtown.',
+    description: 'Alaska\'s largest museum showcasing art, history, and culture',
+    category: 'Museum',
+    detailedDescription: 'The Anchorage Museum is Alaska\'s premier cultural institution, offering a comprehensive exploration of the state\'s art, history, science, and Alaska Native heritage. Located in downtown Anchorage at 625 C Street, the museum features over 170,000 square feet of gallery space across multiple floors. The Smithsonian Arctic Studies Center houses one of the finest collections of Alaska Native artifacts in the world, while the art galleries showcase both historical and contemporary works from Alaska and circumpolar regions. The museum\'s innovative exhibitions blend traditional museum experiences with cutting-edge technology, including the Imaginarium Discovery Center where visitors can engage in hands-on science exploration. Special exhibits rotate throughout the year, covering topics from Arctic exploration to climate change, from traditional crafts to contemporary Indigenous art. The museum also features a planetarium, research library, and multiple dining options. As a cultural hub, it hosts concerts, lectures, and community events, making it a vital center for learning and cultural exchange in Alaska.',
+    photos: [
+      'https://images.unsplash.com/photo-1566127444979-b3d2b259e8d7?w=800',
+      'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800',
+      'https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=800',
+      'https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=800',
+      'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800',
+      'https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=800',
+      'https://images.unsplash.com/photo-1565626424178-c699f6601afd?w=800'
+    ],
+    historicalInfo: 'The Anchorage Museum was founded in 1968 with just 60 artifacts and 2,500 square feet of space. It has since grown into Alaska\'s largest museum, expanding multiple times with the most recent major renovation completed in 2017, adding the Smithsonian Arctic Studies Center.',
+    yearBuilt: '1968',
+    architect: 'Various architects through expansions',
+    translations: {
+      en: {
+        name: 'Anchorage Museum',
+        narration: 'Explore the Anchorage Museum, Alaska\'s largest museum featuring world-class art, history, science, and Alaska Native culture in the heart of downtown.',
+        description: 'Alaska\'s largest museum showcasing art, history, and culture',
+        detailedDescription: 'The Anchorage Museum is Alaska\'s premier cultural institution, offering a comprehensive exploration of the state\'s art, history, science, and Alaska Native heritage. Located in downtown Anchorage at 625 C Street, the museum features over 170,000 square feet of gallery space across multiple floors. The Smithsonian Arctic Studies Center houses one of the finest collections of Alaska Native artifacts in the world, while the art galleries showcase both historical and contemporary works from Alaska and circumpolar regions. The museum\'s innovative exhibitions blend traditional museum experiences with cutting-edge technology, including the Imaginarium Discovery Center where visitors can engage in hands-on science exploration. Special exhibits rotate throughout the year, covering topics from Arctic exploration to climate change, from traditional crafts to contemporary Indigenous art. The museum also features a planetarium, research library, and multiple dining options. As a cultural hub, it hosts concerts, lectures, and community events, making it a vital center for learning and cultural exchange in Alaska.',
+        historicalInfo: 'The Anchorage Museum was founded in 1968 with just 60 artifacts and 2,500 square feet of space. It has since grown into Alaska\'s largest museum, expanding multiple times with the most recent major renovation completed in 2017, adding the Smithsonian Arctic Studies Center.',
+        yearBuilt: '1968',
+        architect: 'Various architects through expansions'
+      },
+      ko: {
+        name: '앵커리지 박물관',
+        narration: '시내 중심부에서 세계적 수준의 예술, 역사, 과학 및 알래스카 원주민 문화를 선보이는 알래스카 최대 박물관인 앵커리지 박물관을 탐험하세요.',
+        description: '예술, 역사, 문화를 선보이는 알래스카 최대 박물관',
+        detailedDescription: '앵커리지 박물관은 알래스카의 주요 문화 기관으로, 주의 예술, 역사, 과학 및 알래스카 원주민 유산에 대한 포괄적인 탐험을 제공합니다. 앵커리지 시내 625 C 스트리트에 위치한 이 박물관은 여러 층에 걸쳐 170,000평방피트 이상의 갤러리 공간을 갖추고 있습니다. 스미소니언 북극 연구 센터는 세계에서 가장 훌륭한 알래스카 원주민 유물 컬렉션 중 하나를 보유하고 있으며, 미술 갤러리는 알래스카와 극지방 지역의 역사적 및 현대적 작품을 모두 전시합니다. 박물관의 혁신적인 전시는 전통적인 박물관 경험과 최첨단 기술을 혼합하며, 방문객들이 직접 체험하는 과학 탐험에 참여할 수 있는 이매지내리엄 디스커버리 센터를 포함합니다. 특별 전시는 일년 내내 순환되며, 북극 탐험에서 기후 변화, 전통 공예에서 현대 원주민 예술에 이르는 주제를 다룹니다. 박물관은 또한 플라네타륨, 연구 도서관 및 여러 식사 옵션을 갖추고 있습니다. 문화 허브로서 콘서트, 강연 및 커뮤니티 행사를 개최하여 알래스카에서 학습과 문화 교류를 위한 필수 센터가 되고 있습니다.',
+        historicalInfo: '앵커리지 박물관은 1968년 단지 60개의 유물과 2,500평방피트의 공간으로 설립되었습니다. 이후 알래스카 최대 박물관으로 성장했으며, 여러 차례 확장을 거쳐 2017년에 완료된 가장 최근의 주요 리노베이션으로 스미소니언 북극 연구 센터가 추가되었습니다.',
+        yearBuilt: '1968년',
+        architect: '확장을 통한 다양한 건축가'
+      },
+      ja: {
+        name: 'アンカレッジ博物館',
+        narration: 'ダウンタウンの中心部にある、世界クラスのアート、歴史、科学、アラスカ先住民文化を特集するアラスカ最大の博物館、アンカレッジ博物館を探索してください。',
+        description: 'アート、歴史、文化を展示するアラスカ最大の博物館',
+        detailedDescription: 'アンカレッジ博物館はアラスカの主要な文化機関であり、州のアート、歴史、科学、アラスカ先住民の遺産の包括的な探求を提供しています。ダウンタウンアンカレッジの625 Cストリートに位置し、複数階にわたって170,000平方フィート以上のギャラリースペースを備えています。スミソニアン北極研究センターは世界で最も優れたアラスカ先住民の遺物コレクションの一つを所蔵しており、アートギャラリーはアラスカと極地域からの歴史的および現代的作品の両方を展示しています。博物館の革新的な展示は、訪問者が実践的な科学探求に参加できるイマジナリウムディスカバリーセンターを含む、従来の博物館体験と最先端技術を融合させています。特別展示は年間を通じて入れ替わり、北極探検から気候変動、伝統工芸から現代先住民アートまでのトピックをカバーしています。博物館にはプラネタリウム、研究図書館、複数の食事オプションもあります。文化的ハブとして、コンサート、講演、コミュニティイベントを開催し、アラスカにおける学習と文化交流の重要なセンターとなっています。',
+        historicalInfo: 'アンカレッジ博物館は1968年にわずか60の遺物と2,500平方フィートのスペースで設立されました。その後、アラスカ最大の博物館に成長し、複数回の拡張を経て、2017年に完成した最新の大規模改修でスミソニアン北極研究センターが追加されました。',
+        yearBuilt: '1968年',
+        architect: '拡張を通じた様々な建築家'
+      },
+      zh: {
+        name: '安克雷奇博物馆',
+        narration: '探索安克雷奇博物馆,阿拉斯加最大的博物馆,在市中心展示世界级艺术、历史、科学和阿拉斯加原住民文化。',
+        description: '展示艺术、历史和文化的阿拉斯加最大博物馆',
+        detailedDescription: '安克雷奇博物馆是阿拉斯加首屈一指的文化机构,提供对该州艺术、历史、科学和阿拉斯加原住民遗产的全面探索。博物馆位于安克雷奇市中心C街625号,拥有超过170,000平方英尺的多层画廊空间。史密森尼北极研究中心收藏着世界上最精美的阿拉斯加原住民文物之一,而艺术画廊展示了来自阿拉斯加和环极地区的历史和当代作品。博物馆的创新展览将传统博物馆体验与尖端技术相结合,包括想象探索中心,游客可以在那里参与动手科学探索。特别展览全年轮换,涵盖从北极探险到气候变化,从传统工艺到当代原住民艺术等主题。博物馆还设有天文馆、研究图书馆和多个餐饮选择。作为文化中心,它举办音乐会、讲座和社区活动,使其成为阿拉斯加学习和文化交流的重要中心。',
+        historicalInfo: '安克雷奇博物馆成立于1968年,最初只有60件文物和2,500平方英尺的空间。此后发展成为阿拉斯加最大的博物馆,多次扩建,最近一次重大翻新于2017年完成,增加了史密森尼北极研究中心。',
+        yearBuilt: '1968年',
+        architect: '通过扩建的各种建筑师'
+      }
+    }
+  },
+  {
+    id: 'kenai_fjords',
+    cityId: 'anchorage',
+    name: 'Kenai Fjords National Park',
+    lat: 60.1043,
+    lng: -149.4422,
+    radius: 70,
+    narration: 'Discover Kenai Fjords National Park, where massive tidewater glaciers meet the sea, creating a dramatic landscape of ice, rock, and abundant marine wildlife.',
+    description: 'Spectacular coastal park featuring tidewater glaciers and marine wildlife',
+    category: 'National Park',
+    detailedDescription: 'Kenai Fjords National Park protects 669,984 acres of coastal wilderness on Alaska\'s Kenai Peninsula, where the Harding Icefield feeds nearly 40 glaciers that flow down to meet the sea. The park is named for the numerous fjords carved by these glaciers over thousands of years. Exit Glacier, the park\'s most accessible glacier, offers visitors a rare opportunity to walk right up to the face of a glacier and witness the dramatic effects of climate change as it continues to retreat. Boat tours through the fjords provide spectacular views of tidewater glaciers calving massive chunks of ice into the ocean, while also offering chances to see orcas, humpback whales, sea otters, puffins, and sea lions in their natural habitat. The park\'s coastal environment supports a rich diversity of marine and terrestrial wildlife. The Harding Icefield, one of only four remaining icefields in the United States, covers an area of approximately 700 square miles and can be reached via a challenging 8.2-mile round-trip hike that rewards visitors with breathtaking views of this vast expanse of ice.',
+    photos: [
+      'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800',
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
+      'https://images.unsplash.com/photo-1610296804104-dde5f34f7a4f?w=800',
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
+    ],
+    historicalInfo: 'Kenai Fjords National Park was established in 1980 as part of the Alaska National Interest Lands Conservation Act. The park\'s landscape has been shaped by glacial activity for thousands of years, with the Harding Icefield being a remnant of the last ice age.',
+    yearBuilt: '1980',
+    architect: 'U.S. National Park Service',
+    translations: {
+      en: {
+        name: 'Kenai Fjords National Park',
+        narration: 'Discover Kenai Fjords National Park, where massive tidewater glaciers meet the sea, creating a dramatic landscape of ice, rock, and abundant marine wildlife.',
+        description: 'Spectacular coastal park featuring tidewater glaciers and marine wildlife',
+        detailedDescription: 'Kenai Fjords National Park protects 669,984 acres of coastal wilderness on Alaska\'s Kenai Peninsula, where the Harding Icefield feeds nearly 40 glaciers that flow down to meet the sea. The park is named for the numerous fjords carved by these glaciers over thousands of years. Exit Glacier, the park\'s most accessible glacier, offers visitors a rare opportunity to walk right up to the face of a glacier and witness the dramatic effects of climate change as it continues to retreat. Boat tours through the fjords provide spectacular views of tidewater glaciers calving massive chunks of ice into the ocean, while also offering chances to see orcas, humpback whales, sea otters, puffins, and sea lions in their natural habitat. The park\'s coastal environment supports a rich diversity of marine and terrestrial wildlife. The Harding Icefield, one of only four remaining icefields in the United States, covers an area of approximately 700 square miles and can be reached via a challenging 8.2-mile round-trip hike that rewards visitors with breathtaking views of this vast expanse of ice.',
+        historicalInfo: 'Kenai Fjords National Park was established in 1980 as part of the Alaska National Interest Lands Conservation Act. The park\'s landscape has been shaped by glacial activity for thousands of years, with the Harding Icefield being a remnant of the last ice age.',
+        yearBuilt: '1980',
+        architect: 'U.S. National Park Service'
+      },
+      ko: {
+        name: '키나이 피오르드 국립공원',
+        narration: '거대한 조수 빙하가 바다와 만나 얼음, 바위, 풍부한 해양 야생동물의 극적인 풍경을 만드는 키나이 피오르드 국립공원을 발견하세요.',
+        description: '조수 빙하와 해양 야생동물을 특징으로 하는 장관을 이루는 해안 공원',
+        detailedDescription: '키나이 피오르드 국립공원은 알래스카 키나이 반도에서 669,984에이커의 해안 야생지대를 보호하며, 하딩 빙원이 바다로 흘러내리는 거의 40개의 빙하를 공급합니다. 공원은 수천 년에 걸쳐 이러한 빙하가 조각한 수많은 피오르드의 이름을 따서 명명되었습니다. 공원에서 가장 접근하기 쉬운 빙하인 엑시트 빙하는 방문객들에게 빙하의 전면까지 걸어갈 수 있는 드문 기회를 제공하며 계속 후퇴하면서 기후 변화의 극적인 영향을 목격할 수 있습니다. 피오르드를 통한 보트 투어는 조수 빙하가 거대한 얼음 덩어리를 바다로 떨어뜨리는 장관을 보여주며, 범고래, 혹등고래, 해달, 퍼핀, 바다사자를 자연 서식지에서 볼 수 있는 기회도 제공합니다. 공원의 해안 환경은 풍부한 다양성의 해양 및 육상 야생동물을 지원합니다. 미국에 남아있는 단 4개의 빙원 중 하나인 하딩 빙원은 약 700평방마일의 면적을 차지하며 방문객들에게 이 광대한 얼음 확장의 숨막히는 경치를 보상하는 도전적인 8.2마일 왕복 하이킹을 통해 도달할 수 있습니다.',
+        historicalInfo: '키나이 피오르드 국립공원은 1980년 알래스카 국가 이익 토지 보존법의 일부로 설립되었습니다. 공원의 풍경은 수천 년 동안 빙하 활동에 의해 형성되었으며, 하딩 빙원은 마지막 빙하기의 잔재입니다.',
+        yearBuilt: '1980년',
+        architect: '미국 국립공원 관리청'
+      },
+      ja: {
+        name: 'ケナイフィヨルド国立公園',
+        narration: '巨大な潮水氷河が海と出会い、氷、岩、豊富な海洋野生生物の劇的な景観を作り出すケナイフィヨルド国立公園を発見してください。',
+        description: '潮水氷河と海洋野生生物を特徴とする壮観な海岸公園',
+        detailedDescription: 'ケナイフィヨルド国立公園は、アラスカのケナイ半島で669,984エーカーの海岸荒野を保護しており、ハーディング氷原が海に流れ込む約40の氷河を供給しています。公園は、これらの氷河が数千年にわたって刻んだ多数のフィヨルドにちなんで名付けられました。公園で最もアクセスしやすい氷河であるイグジット氷河は、訪問者に氷河の前面まで歩いて行き、後退し続ける気候変動の劇的な影響を目撃する稀な機会を提供します。フィヨルドを通るボートツアーは、潮水氷河が巨大な氷の塊を海に落とす壮観な景色を提供し、シャチ、ザトウクジラ、ラッコ、パフィン、アシカを自然の生息地で見る機会も提供します。公園の海岸環境は、豊富な多様性の海洋および陸生野生生物を支えています。米国に残る4つの氷原の一つであるハーディング氷原は、約700平方マイルの面積をカバーし、訪問者にこの広大な氷の広がりの息をのむような景色を報酬として与える挑戦的な8.2マイルの往復ハイキングを通じて到達できます。',
+        historicalInfo: 'ケナイフィヨルド国立公園は1980年にアラスカ国家利益土地保全法の一部として設立されました。公園の景観は数千年にわたって氷河活動によって形成され、ハーディング氷原は最後の氷河期の名残です。',
+        yearBuilt: '1980年',
+        architect: '米国国立公園局'
+      },
+      zh: {
+        name: '基奈峡湾国家公园',
+        narration: '发现基奈峡湾国家公园,巨大的潮水冰川与海洋相遇,创造出冰、岩石和丰富海洋野生动物的壮观景观。',
+        description: '以潮水冰川和海洋野生动物为特色的壮观海岸公园',
+        detailedDescription: '基奈峡湾国家公园保护着阿拉斯加基奈半岛上669,984英亩的海岸荒野,哈丁冰原为近40条流入大海的冰川提供水源。公园以这些冰川数千年来雕刻的众多峡湾而得名。出口冰川是公园最易到达的冰川,为游客提供了罕见的机会,可以走到冰川前端,见证气候变化的戏剧性影响,因为它继续后退。通过峡湾的船游提供潮水冰川将巨大的冰块掉入海洋的壮观景色,同时也提供在自然栖息地观看虎鲸、座头鲸、海獭、海鹦和海狮的机会。公园的海岸环境支持丰富多样的海洋和陆地野生动物。哈丁冰原是美国仅存的四个冰原之一,覆盖约700平方英里的面积,可通过具有挑战性的8.2英里往返徒步到达,为游客提供这片广阔冰原的令人叹为观止的景色。',
+        historicalInfo: '基奈峡湾国家公园于1980年作为阿拉斯加国家利益土地保护法的一部分成立。公园的景观数千年来一直由冰川活动塑造,哈丁冰原是最后一个冰河时代的遗迹。',
+        yearBuilt: '1980年',
+        architect: '美国国家公园管理局'
+      }
+    }
+  },
+  {
+    id: 'northern_lights_point',
+    cityId: 'anchorage',
+    name: 'Northern Lights Viewing Area',
+    lat: 61.1888,
+    lng: -150.0139,
+    radius: 60,
+    narration: 'Experience the magical Aurora Borealis at one of Anchorage\'s premier viewing locations. Witness the dancing lights painting the Arctic sky in brilliant greens, purples, and reds.',
+    description: 'Prime location for witnessing the spectacular Northern Lights',
+    category: 'Natural Wonder',
+    detailedDescription: 'Point Woronzof offers one of the best Northern Lights viewing experiences near Anchorage, providing an unobstructed view of the northern sky from a 120-foot bluff overlooking Knik Arm. This location is particularly favored by aurora hunters due to its minimal light pollution and wide-open vistas. The Aurora Borealis, or Northern Lights, occurs when charged particles from the sun interact with Earth\'s magnetic field, creating luminous displays that dance across the night sky in shimmering curtains of green, purple, pink, and red. The best viewing season runs from late August through April, with peak activity typically occurring between 10 PM and 2 AM on clear, dark nights. Anchorage\'s location just below the auroral oval makes it an excellent spot for catching this celestial phenomenon. While displays are never guaranteed, checking aurora forecasts and choosing nights with clear skies and high geomagnetic activity significantly increases your chances. Bundle up warmly, as winter temperatures can drop well below freezing, and bring a camera with manual settings to capture this unforgettable natural light show.',
+    photos: [
+      'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800',
+      'https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=800',
+      'https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=800',
+      'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800',
+      'https://images.unsplash.com/photo-1545404968-173fa2a3f1b7?w=800',
+      'https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=800',
+      'https://images.unsplash.com/photo-1593642532973-d31b6557fa68?w=800'
+    ],
+    historicalInfo: 'The Aurora Borealis has been observed and revered by indigenous peoples of the Arctic for millennia. Point Woronzof was named after Ivan Woronzof, a Russian-American Company administrator in the early 1800s. The viewing area has become increasingly popular for aurora photography since the 1990s.',
+    yearBuilt: 'Natural phenomenon observed for millennia',
+    architect: 'Natural Formation',
+    translations: {
+      en: {
+        name: 'Northern Lights Viewing Area',
+        narration: 'Experience the magical Aurora Borealis at one of Anchorage\'s premier viewing locations. Witness the dancing lights painting the Arctic sky in brilliant greens, purples, and reds.',
+        description: 'Prime location for witnessing the spectacular Northern Lights',
+        detailedDescription: 'Point Woronzof offers one of the best Northern Lights viewing experiences near Anchorage, providing an unobstructed view of the northern sky from a 120-foot bluff overlooking Knik Arm. This location is particularly favored by aurora hunters due to its minimal light pollution and wide-open vistas. The Aurora Borealis, or Northern Lights, occurs when charged particles from the sun interact with Earth\'s magnetic field, creating luminous displays that dance across the night sky in shimmering curtains of green, purple, pink, and red. The best viewing season runs from late August through April, with peak activity typically occurring between 10 PM and 2 AM on clear, dark nights. Anchorage\'s location just below the auroral oval makes it an excellent spot for catching this celestial phenomenon. While displays are never guaranteed, checking aurora forecasts and choosing nights with clear skies and high geomagnetic activity significantly increases your chances. Bundle up warmly, as winter temperatures can drop well below freezing, and bring a camera with manual settings to capture this unforgettable natural light show.',
+        historicalInfo: 'The Aurora Borealis has been observed and revered by indigenous peoples of the Arctic for millennia. Point Woronzof was named after Ivan Woronzof, a Russian-American Company administrator in the early 1800s. The viewing area has become increasingly popular for aurora photography since the 1990s.',
+        yearBuilt: 'Natural phenomenon observed for millennia',
+        architect: 'Natural Formation'
+      },
+      ko: {
+        name: '오로라 관측 지역',
+        narration: '앵커리지 최고의 관측 장소 중 한 곳에서 마법 같은 오로라를 경험하세요. 찬란한 녹색, 보라색, 빨간색으로 북극 하늘을 물들이는 춤추는 빛을 목격하세요.',
+        description: '장관을 이루는 오로라를 목격하기 위한 최적의 장소',
+        detailedDescription: '포인트 워론조프는 앵커리지 근처에서 최고의 오로라 관측 경험을 제공하며, 니크 암을 내려다보는 120피트 절벽에서 북쪽 하늘의 막힘없는 전망을 제공합니다. 이 장소는 최소한의 광공해와 넓게 트인 전망 때문에 오로라 사냥꾼들이 특히 선호합니다. 오로라 또는 북극광은 태양에서 온 하전 입자가 지구의 자기장과 상호 작용할 때 발생하며, 녹색, 보라색, 분홍색, 빨간색의 반짝이는 커튼으로 밤하늘을 가로질러 춤추는 빛나는 디스플레이를 만듭니다. 최적의 관측 시즌은 8월 말부터 4월까지이며, 맑고 어두운 밤에 오후 10시부터 오전 2시 사이에 일반적으로 최고 활동이 발생합니다. 앵커리지의 오로라 타원 바로 아래 위치는 이 천체 현상을 포착하기에 훌륭한 장소입니다. 디스플레이가 보장되지는 않지만 오로라 예보를 확인하고 맑은 하늘과 높은 지자기 활동이 있는 밤을 선택하면 기회가 크게 증가합니다. 겨울 온도는 영하로 훨씬 떨어질 수 있으므로 따뜻하게 옷을 입고 이 잊을 수 없는 자연 광쇼를 촬영하기 위해 수동 설정이 있는 카메라를 가져오세요.',
+        historicalInfo: '오로라는 수천 년 동안 북극의 원주민들에 의해 관찰되고 존경받아 왔습니다. 포인트 워론조프는 1800년대 초 러시아-미국 회사 관리자였던 이반 워론조프의 이름을 따서 명명되었습니다. 관측 지역은 1990년대부터 오로라 사진 촬영으로 점점 더 인기를 얻고 있습니다.',
+        yearBuilt: '수천 년 동안 관찰된 자연 현상',
+        architect: '자연 형성물'
+      },
+      ja: {
+        name: 'オーロラ観測エリア',
+        narration: 'アンカレッジの主要な観測場所の一つで魔法のようなオーロラを体験してください。鮮やかな緑、紫、赤で北極の空を彩る踊る光を目撃してください。',
+        description: '壮観なオーロラを目撃するための最適な場所',
+        detailedDescription: 'ポイントウォロンゾフは、アンカレッジ近くで最高のオーロラ観測体験を提供し、ニックアームを見下ろす120フィートの崖から北の空の遮るもののない景色を提供します。この場所は、最小限の光害と広々とした展望のため、オーロラハンターに特に好まれています。オーロラまたは北極光は、太陽からの荷電粒子が地球の磁場と相互作用するときに発生し、緑、紫、ピンク、赤のきらめくカーテンで夜空を横切って踊る光る表示を作り出します。最適な観測シーズンは8月下旬から4月まで続き、晴れた暗い夜の午後10時から午前2時の間にピーク活動が通常発生します。アンカレッジのオーロラオーバルのすぐ下の位置は、この天体現象を捉えるのに優れたスポットです。表示が保証されることはありませんが、オーロラ予報を確認し、晴れた空と高い地磁気活動がある夜を選ぶことで、チャンスが大幅に増加します。冬の気温は氷点下をはるかに下回ることがあるので、暖かく着込み、この忘れられない自然の光のショーを撮影するために手動設定のカメラを持参してください。',
+        historicalInfo: 'オーロラは何千年もの間、北極の先住民族によって観察され崇拝されてきました。ポイントウォロンゾフは、1800年代初頭のロシア・アメリカ会社の管理者であったイワン・ウォロンゾフにちなんで名付けられました。観測エリアは1990年代以降、オーロラ写真撮影でますます人気が高まっています。',
+        yearBuilt: '何千年も観察されてきた自然現象',
+        architect: '自然形成物'
+      },
+      zh: {
+        name: '北极光观测区',
+        narration: '在安克雷奇最佳观测地点之一体验神奇的极光。见证用璀璨的绿色、紫色和红色描绘北极天空的舞动之光。',
+        description: '观赏壮观北极光的最佳位置',
+        detailedDescription: '沃龙佐夫角提供安克雷奇附近最佳的北极光观赏体验,从俯瞰尼克湾的120英尺悬崖提供北部天空的无遮挡视野。由于其最小的光污染和开阔的视野,这个位置特别受极光猎人青睐。极光或北极光发生在太阳的带电粒子与地球磁场相互作用时,创造出在夜空中舞动的绿色、紫色、粉色和红色闪烁幕帘的发光显示。最佳观赏季节从8月下旬持续到4月,在晴朗的黑暗夜晚,通常在晚上10点到凌晨2点之间出现高峰活动。安克雷奇位于极光椭圆正下方的位置使其成为捕捉这一天体现象的绝佳地点。虽然永远无法保证显示,但检查极光预报并选择晴朗天空和高地磁活动的夜晚可以显著增加您的机会。由于冬季温度可能降至冰点以下,请穿得暖和,并带上具有手动设置的相机来捕捉这一难忘的自然光秀。',
+        historicalInfo: '极光数千年来一直被北极原住民观察和崇敬。沃龙佐夫角以19世纪初俄美公司管理员伊万·沃龙佐夫的名字命名。自1990年代以来,观测区因极光摄影而越来越受欢迎。',
+        yearBuilt: '数千年来观察到的自然现象',
+        architect: '自然形成'
+      }
+    }
+  },
+  {
+    id: 'glacier_bay',
+    cityId: 'anchorage',
+    name: 'Glacier Bay National Park',
+    lat: 58.665806,
+    lng: -136.900208,
+    radius: 80,
+    narration: 'Explore Glacier Bay National Park, a UNESCO World Heritage Site showcasing the dynamic process of glacial retreat and a sanctuary for diverse marine wildlife.',
+    description: 'UNESCO World Heritage Site with stunning glaciers and abundant wildlife',
+    category: 'National Park',
+    detailedDescription: 'Glacier Bay National Park and Preserve encompasses 3.3 million acres of dramatic landscapes in Southeast Alaska, where massive tidewater glaciers meet the sea in thunderous displays of calving ice. Designated a UNESCO World Heritage Site in 1979, the park provides a living laboratory for studying glacial retreat and ecological succession. Just 200 years ago, the area was completely covered by a massive glacier; today, the ice has retreated over 65 miles, revealing a pristine wilderness being colonized by pioneering plants and wildlife. The park is accessible primarily by boat or plane, with no roads connecting it to the outside world, preserving its wilderness character. Visitors can witness up to 16 tidewater glaciers, including the spectacular Margerie Glacier and Grand Pacific Glacier. The nutrient-rich waters attract humpback whales that come to feed each summer, while orcas, sea otters, harbor seals, and Steller sea lions populate the fjords. Brown and black bears roam the forested shores, and mountain goats navigate the steep terrain. The park\'s headquarters at Bartlett Cove features a visitor center, lodge, and camping facilities. Glacier Bay represents one of the best places on Earth to witness the rapid changes occurring in glacial environments.',
+    photos: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800',
+      'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800',
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
+      'https://images.unsplash.com/photo-1526114820144-f46fc958adf7?w=800',
+      'https://images.unsplash.com/photo-1610296804104-dde5f34f7a4f?w=800',
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800'
+    ],
+    historicalInfo: 'Glacier Bay was first documented by European explorers in 1794 when Captain George Vancouver found a wall of ice 20 miles wide and 4,000 feet thick. The bay has since retreated over 65 miles. It was designated a National Monument in 1925 and became a National Park in 1980.',
+    yearBuilt: '1980 (National Park designation)',
+    architect: 'U.S. National Park Service',
+    translations: {
+      en: {
+        name: 'Glacier Bay National Park',
+        narration: 'Explore Glacier Bay National Park, a UNESCO World Heritage Site showcasing the dynamic process of glacial retreat and a sanctuary for diverse marine wildlife.',
+        description: 'UNESCO World Heritage Site with stunning glaciers and abundant wildlife',
+        detailedDescription: 'Glacier Bay National Park and Preserve encompasses 3.3 million acres of dramatic landscapes in Southeast Alaska, where massive tidewater glaciers meet the sea in thunderous displays of calving ice. Designated a UNESCO World Heritage Site in 1979, the park provides a living laboratory for studying glacial retreat and ecological succession. Just 200 years ago, the area was completely covered by a massive glacier; today, the ice has retreated over 65 miles, revealing a pristine wilderness being colonized by pioneering plants and wildlife. The park is accessible primarily by boat or plane, with no roads connecting it to the outside world, preserving its wilderness character. Visitors can witness up to 16 tidewater glaciers, including the spectacular Margerie Glacier and Grand Pacific Glacier. The nutrient-rich waters attract humpback whales that come to feed each summer, while orcas, sea otters, harbor seals, and Steller sea lions populate the fjords. Brown and black bears roam the forested shores, and mountain goats navigate the steep terrain. The park\'s headquarters at Bartlett Cove features a visitor center, lodge, and camping facilities. Glacier Bay represents one of the best places on Earth to witness the rapid changes occurring in glacial environments.',
+        historicalInfo: 'Glacier Bay was first documented by European explorers in 1794 when Captain George Vancouver found a wall of ice 20 miles wide and 4,000 feet thick. The bay has since retreated over 65 miles. It was designated a National Monument in 1925 and became a National Park in 1980.',
+        yearBuilt: '1980 (National Park designation)',
+        architect: 'U.S. National Park Service'
+      },
+      ko: {
+        name: '글레이셔 베이 국립공원',
+        narration: '빙하 후퇴의 역동적인 과정을 보여주고 다양한 해양 야생동물의 보호구역인 유네스코 세계문화유산인 글레이셔 베이 국립공원을 탐험하세요.',
+        description: '놀라운 빙하와 풍부한 야생동물이 있는 유네스코 세계문화유산',
+        detailedDescription: '글레이셔 베이 국립공원은 동남 알래스카에서 330만 에이커의 극적인 풍경을 아우르며, 거대한 조수 빙하가 바다와 만나 얼음이 떨어지는 천둥 같은 광경을 연출합니다. 1979년에 유네스코 세계문화유산으로 지정된 이 공원은 빙하 후퇴와 생태 천이를 연구하기 위한 살아있는 실험실을 제공합니다. 불과 200년 전, 이 지역은 거대한 빙하로 완전히 덮여 있었습니다. 오늘날 얼음은 65마일 이상 후퇴하여 개척 식물과 야생동물이 정착하는 원시 야생지대를 드러냈습니다. 공원은 주로 보트나 비행기로 접근할 수 있으며, 외부 세계와 연결하는 도로가 없어 야생 특성을 보존합니다. 방문객들은 장관을 이루는 마저리 빙하와 그랜드 퍼시픽 빙하를 포함하여 최대 16개의 조수 빙하를 목격할 수 있습니다. 영양이 풍부한 물은 매년 여름 먹이를 먹으러 오는 혹등고래를 끌어들이며, 범고래, 해달, 항만 물범, 스텔러 바다사자가 피오르드를 채웁니다. 갈색곰과 흑곰은 숲이 우거진 해안을 돌아다니고, 산양은 가파른 지형을 탐색합니다. 바틀렛 코브의 공원 본부에는 방문자 센터, 롯지 및 캠핑 시설이 있습니다. 글레이셔 베이는 빙하 환경에서 발생하는 급격한 변화를 목격할 수 있는 지구상 최고의 장소 중 하나를 나타냅니다.',
+        historicalInfo: '글레이셔 베이는 1794년 조지 밴쿠버 선장이 너비 20마일, 두께 4,000피트의 얼음 벽을 발견했을 때 유럽 탐험가들에 의해 처음 문서화되었습니다. 베이는 이후 65마일 이상 후퇴했습니다. 1925년에 국립기념물로 지정되었으며 1980년에 국립공원이 되었습니다.',
+        yearBuilt: '1980년 (국립공원 지정)',
+        architect: '미국 국립공원 관리청'
+      },
+      ja: {
+        name: 'グレーシャーベイ国立公園',
+        narration: '氷河の後退の動的なプロセスを示し、多様な海洋野生生物の保護区であるユネスコ世界遺産、グレーシャーベイ国立公園を探索してください。',
+        description: '見事な氷河と豊富な野生生物を持つユネスコ世界遺産',
+        detailedDescription: 'グレーシャーベイ国立公園は、南東アラスカで330万エーカーの劇的な景観を包含し、巨大な潮水氷河が海と出会い、氷が崩れ落ちる雷のような光景を演出します。1979年にユネスコ世界遺産に指定されたこの公園は、氷河の後退と生態系の遷移を研究するための生きた実験室を提供しています。わずか200年前、この地域は巨大な氷河で完全に覆われていました。今日、氷は65マイル以上後退し、先駆的な植物や野生生物が定着している原始的な荒野を明らかにしました。公園は主にボートまたは飛行機でアクセス可能で、外部世界とつながる道路がなく、その荒野の特性を保存しています。訪問者は、壮観なマージェリー氷河とグランドパシフィック氷河を含む最大16の潮水氷河を目撃できます。栄養豊富な水は毎年夏に餌を食べに来るザトウクジラを引き付け、シャチ、ラッコ、ゴマフアザラシ、ステラーアシカがフィヨルドに生息しています。ヒグマとツキノワグマは森林に覆われた海岸を歩き回り、マウンテンゴートは険しい地形を移動します。バートレットコーブの公園本部には、ビジターセンター、ロッジ、キャンプ施設があります。グレーシャーベイは、氷河環境で発生している急速な変化を目撃できる地球上で最高の場所の一つを表しています。',
+        historicalInfo: 'グレーシャーベイは1794年にジョージ・バンクーバー船長が幅20マイル、厚さ4,000フィートの氷の壁を発見したときにヨーロッパの探検家によって最初に文書化されました。湾はその後65マイル以上後退しました。1925年に国定記念物に指定され、1980年に国立公園になりました。',
+        yearBuilt: '1980年 (国立公園指定)',
+        architect: '米国国立公園局'
+      },
+      zh: {
+        name: '冰川湾国家公园',
+        narration: '探索冰川湾国家公园,这是一个联合国教科文组织世界遗产,展示了冰川退缩的动态过程和多样化海洋野生动物的保护区。',
+        description: '拥有壮观冰川和丰富野生动物的联合国教科文组织世界遗产',
+        detailedDescription: '冰川湾国家公园占地330万英亩,位于阿拉斯加东南部,巨大的潮水冰川与大海相遇,呈现出雷鸣般的崩解冰景象。1979年被指定为联合国教科文组织世界遗产,该公园为研究冰川退缩和生态演替提供了一个活的实验室。仅仅200年前,该地区完全被巨大的冰川覆盖;今天,冰川已退缩超过65英里,揭示了正在被先锋植物和野生动物定居的原始荒野。公园主要通过船只或飞机到达,没有道路连接外部世界,保持了其荒野特性。游客可以目睹多达16个潮水冰川,包括壮观的玛杰丽冰川和大太平洋冰川。营养丰富的水域吸引每年夏天前来觅食的座头鲸,而虎鲸、海獭、港海豹和斯特勒海狮则栖息在峡湾中。棕熊和黑熊在森林覆盖的海岸漫游,山羊在陡峭的地形中穿行。巴特利特湾的公园总部设有游客中心、旅馆和露营设施。冰川湾代表了地球上目睹冰川环境快速变化的最佳地点之一。',
+        historicalInfo: '冰川湾于1794年首次由欧洲探险家记录,当时乔治·温哥华船长发现了一堵宽20英里、厚4,000英尺的冰墙。海湾此后退缩了65英里以上。它于1925年被指定为国家纪念碑,并于1980年成为国家公园。',
+        yearBuilt: '1980年 (国家公园指定)',
+        architect: '美国国家公园管理局'
+      }
+    }
+  },
+  // Amsterdam landmarks
+  {
+    id: 'anne_frank_house',
+    cityId: 'amsterdam',
+    name: 'Anne Frank House',
+    lat: 52.3752,
+    lng: 4.8840,
+    radius: 50,
+    narration: 'Welcome to the Anne Frank House, where Anne Frank and her family hid during World War II. This historic house museum preserves the memory of one of the most famous victims of the Holocaust.',
+    description: 'Historic house museum and hiding place of Anne Frank',
+    category: 'Historical Site',
+    detailedDescription: 'The Anne Frank House is a historic house and biographical museum dedicated to Jewish wartime diarist Anne Frank. The building is located on a canal called the Prinsengracht, close to the Westerkerk, in central Amsterdam. During World War II, Anne Frank hid from Nazi persecution with her family and four other people in hidden rooms at the rear of the building. Anne Frank did not survive the war but her diary became one of the world\'s most read books. The museum opened in 1960 and preserves the hiding place, has a permanent exhibition on the life and times of Anne Frank, and has an exhibition space about all forms of persecution and discrimination.',
+    photos: [
+      'https://images.unsplash.com/photo-1534313314376-a0c4e3088314?w=800',
+      'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800',
+      'https://images.unsplash.com/photo-1568632234982-54ec1a3f9051?w=800',
+      'https://images.unsplash.com/photo-1534351450181-ea9f78427fe8?w=800',
+      'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?w=800',
+      'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800',
+      'https://images.unsplash.com/photo-1559564484-e48ca3e1b6e7?w=800'
+    ],
+    historicalInfo: 'Anne Frank and her family hid in this house from 1942 to 1944 before being discovered and deported to concentration camps. After the war, Otto Frank, Anne\'s father and the only family member to survive, published her diary. The house was saved from demolition and opened as a museum in 1960.',
+    yearBuilt: '1635 (house built), 1960 (museum opened)',
+    architect: 'Otto Frank (museum founder)',
+    translations: {
+      en: {
+        name: 'Anne Frank House',
+        narration: 'Welcome to the Anne Frank House, where Anne Frank and her family hid during World War II. This historic house museum preserves the memory of one of the most famous victims of the Holocaust.',
+        description: 'Historic house museum and hiding place of Anne Frank',
+        detailedDescription: 'The Anne Frank House is a historic house and biographical museum dedicated to Jewish wartime diarist Anne Frank. The building is located on a canal called the Prinsengracht, close to the Westerkerk, in central Amsterdam. During World War II, Anne Frank hid from Nazi persecution with her family and four other people in hidden rooms at the rear of the building. Anne Frank did not survive the war but her diary became one of the world\'s most read books. The museum opened in 1960 and preserves the hiding place, has a permanent exhibition on the life and times of Anne Frank, and has an exhibition space about all forms of persecution and discrimination.',
+        historicalInfo: 'Anne Frank and her family hid in this house from 1942 to 1944 before being discovered and deported to concentration camps. After the war, Otto Frank, Anne\'s father and the only family member to survive, published her diary. The house was saved from demolition and opened as a museum in 1960.',
+        yearBuilt: '1635 (house built), 1960 (museum opened)',
+        architect: 'Otto Frank (museum founder)'
+      },
+      ko: {
+        name: '안네 프랑크의 집',
+        narration: '제2차 세계대전 동안 안네 프랑크와 그녀의 가족이 숨어 지낸 안네 프랑크의 집에 오신 것을 환영합니다. 이 역사적인 주택 박물관은 홀로코스트의 가장 유명한 희생자 중 한 명의 기억을 보존합니다.',
+        description: '안네 프랑크의 역사적인 은신처이자 박물관',
+        detailedDescription: '안네 프랑크의 집은 유대인 전시 일기 작가 안네 프랑크를 기리는 역사적인 집이자 전기 박물관입니다. 건물은 암스테르담 중심부의 베스테르케르크 근처 프린센그라흐트라는 운하에 위치해 있습니다. 제2차 세계대전 동안 안네 프랑크는 나치 박해를 피해 가족과 네 명의 다른 사람들과 함께 건물 뒤편의 숨겨진 방에 숨어 지냈습니다. 안네 프랑크는 전쟁에서 살아남지 못했지만 그녀의 일기는 세계에서 가장 많이 읽힌 책 중 하나가 되었습니다. 박물관은 1960년에 개관했으며 은신처를 보존하고 안네 프랑크의 생애와 시대에 대한 상설 전시회와 모든 형태의 박해와 차별에 대한 전시 공간을 갖추고 있습니다.',
+        historicalInfo: '안네 프랑크와 그녀의 가족은 1942년부터 1944년까지 이 집에 숨어 지냈으며, 발견되어 강제 수용소로 이송되었습니다. 전쟁 후 유일하게 살아남은 가족 구성원인 안네의 아버지 오토 프랑크가 그녀의 일기를 출판했습니다. 이 집은 철거를 면하고 1960년에 박물관으로 개관했습니다.',
+        yearBuilt: '1635년 (주택 건축), 1960년 (박물관 개관)',
+        architect: '오토 프랑크 (박물관 설립자)'
+      },
+      ja: {
+        name: 'アンネ・フランクの家',
+        narration: '第二次世界大戦中にアンネ・フランクとその家族が隠れていたアンネ・フランクの家へようこそ。この歴史的な家屋博物館は、ホロコーストの最も有名な犠牲者の一人の記憶を保存しています。',
+        description: 'アンネ・フランクの歴史的な隠れ家であり博物館',
+        detailedDescription: 'アンネ・フランクの家は、ユダヤ人戦時日記作家アンネ・フランクに捧げられた歴史的な家屋および伝記博物館です。建物はアムステルダム中心部のウェステルケルク近くのプリンセングラハトという運河に位置しています。第二次世界大戦中、アンネ・フランクは家族と4人の他の人々とともにナチスの迫害を逃れて建物の裏側の隠し部屋に隠れていました。アンネ・フランクは戦争を生き延びることはできませんでしたが、彼女の日記は世界で最も読まれた本の一つになりました。博物館は1960年に開館し、隠れ家を保存し、アンネ・フランクの生涯と時代に関する常設展示、およびあらゆる形態の迫害と差別に関する展示スペースを備えています。',
+        historicalInfo: 'アンネ・フランクとその家族は1942年から1944年までこの家に隠れていましたが、発見されて強制収容所に送られました。戦後、唯一の生存家族であるアンネの父オットー・フランクが彼女の日記を出版しました。この家は取り壊しを免れ、1960年に博物館として開館しました。',
+        yearBuilt: '1635年 (家屋建築), 1960年 (博物館開館)',
+        architect: 'オットー・フランク (博物館創設者)'
+      },
+      zh: {
+        name: '安妮·弗兰克之家',
+        narration: '欢迎来到安妮·弗兰克之家,这里是安妮·弗兰克和她的家人在第二次世界大战期间的藏身之处。这座历史悠久的房屋博物馆保存着大屠杀最著名受害者之一的记忆。',
+        description: '安妮·弗兰克的历史藏身处和博物馆',
+        detailedDescription: '安妮·弗兰克之家是一座历史悠久的房屋和传记博物馆,致力于纪念犹太战时日记作家安妮·弗兰克。该建筑位于阿姆斯特丹市中心西教堂附近的王子运河上。第二次世界大战期间,安妮·弗兰克与家人和其他四人躲在建筑后部的隐蔽房间中,以逃避纳粹迫害。安妮·弗兰克没有在战争中幸存,但她的日记成为世界上阅读最多的书籍之一。博物馆于1960年开放,保存了藏身处,设有关于安妮·弗兰克生平和时代的常设展览,以及关于各种形式迫害和歧视的展览空间。',
+        historicalInfo: '安妮·弗兰克和她的家人从1942年到1944年躲藏在这所房子里,后来被发现并被驱逐到集中营。战后,安妮的父亲奥托·弗兰克作为唯一幸存的家庭成员出版了她的日记。这所房子免于拆除,并于1960年作为博物馆开放。',
+        yearBuilt: '1635年 (房屋建造), 1960年 (博物馆开放)',
+        architect: '奥托·弗兰克 (博物馆创始人)'
+      }
+    }
+  },
+  {
+    id: 'rijksmuseum',
+    cityId: 'amsterdam',
+    name: 'Rijksmuseum',
+    lat: 52.3600,
+    lng: 4.8852,
+    radius: 80,
+    narration: 'Welcome to the Rijksmuseum, the Netherlands\' national museum dedicated to arts and history. Home to masterpieces by Rembrandt, Vermeer, and countless other Dutch masters.',
+    description: 'National museum of the Netherlands with Dutch Golden Age masterpieces',
+    category: 'Art Museum',
+    detailedDescription: 'The Rijksmuseum is a Dutch national museum dedicated to arts and history in Amsterdam. The museum is located at the Museum Square in the borough Amsterdam South, close to the Van Gogh Museum and the Stedelijk Museum. The Rijksmuseum was founded in The Hague in 1800 and moved to Amsterdam in 1808. The current main building was designed by Pierre Cuypers and first opened in 1885. The museum has on display 8,000 objects of art and history, from their total collection of 1 million objects from the years 1200–2000, among which are some masterpieces by Rembrandt, Frans Hals, and Johannes Vermeer. The museum also has a small Asian collection which is on display in the Asian pavilion.',
+    photos: [
+      'https://images.unsplash.com/photo-1580996378007-c146c5818a78?w=800',
+      'https://images.unsplash.com/photo-1583251663725-9f47282f5f0c?w=800',
+      'https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=800',
+      'https://images.unsplash.com/photo-1566933293069-b55c7f0e4136?w=800',
+      'https://images.unsplash.com/photo-1555784559-f1b4da4b15e3?w=800',
+      'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800',
+      'https://images.unsplash.com/photo-1578663899664-27b62a0aa3bd?w=800'
+    ],
+    historicalInfo: 'The Rijksmuseum was founded in The Hague in 1800 and moved to Amsterdam in 1808, where it was first located in the Royal Palace and later in the Trippenhuis. The current main building was designed by Pierre Cuypers and first opened its doors in 1885. On 13 April 2013, after a ten-year renovation, the main building was reopened by Queen Beatrix.',
+    yearBuilt: '1800 (founded), 1885 (current building opened)',
+    architect: 'Pierre Cuypers',
+    translations: {
+      en: {
+        name: 'Rijksmuseum',
+        narration: 'Welcome to the Rijksmuseum, the Netherlands\' national museum dedicated to arts and history. Home to masterpieces by Rembrandt, Vermeer, and countless other Dutch masters.',
+        description: 'National museum of the Netherlands with Dutch Golden Age masterpieces',
+        detailedDescription: 'The Rijksmuseum is a Dutch national museum dedicated to arts and history in Amsterdam. The museum is located at the Museum Square in the borough Amsterdam South, close to the Van Gogh Museum and the Stedelijk Museum. The Rijksmuseum was founded in The Hague in 1800 and moved to Amsterdam in 1808. The current main building was designed by Pierre Cuypers and first opened in 1885. The museum has on display 8,000 objects of art and history, from their total collection of 1 million objects from the years 1200–2000, among which are some masterpieces by Rembrandt, Frans Hals, and Johannes Vermeer. The museum also has a small Asian collection which is on display in the Asian pavilion.',
+        historicalInfo: 'The Rijksmuseum was founded in The Hague in 1800 and moved to Amsterdam in 1808, where it was first located in the Royal Palace and later in the Trippenhuis. The current main building was designed by Pierre Cuypers and first opened its doors in 1885. On 13 April 2013, after a ten-year renovation, the main building was reopened by Queen Beatrix.',
+        yearBuilt: '1800 (founded), 1885 (current building opened)',
+        architect: 'Pierre Cuypers'
+      },
+      ko: {
+        name: '라익스뮤지엄',
+        narration: '예술과 역사에 전념하는 네덜란드 국립 박물관인 라익스뮤지엄에 오신 것을 환영합니다. 렘브란트, 베르메르 및 수많은 다른 네덜란드 거장들의 걸작이 있는 곳입니다.',
+        description: '네덜란드 황금시대 걸작이 있는 네덜란드 국립 박물관',
+        detailedDescription: '라익스뮤지엄은 암스테르담의 예술과 역사에 전념하는 네덜란드 국립 박물관입니다. 박물관은 반 고흐 박물관과 스테델릭 박물관 근처 암스테르담 남부 자치구의 뮤지엄 광장에 위치하고 있습니다. 라익스뮤지엄은 1800년 헤이그에 설립되었으며 1808년 암스테르담으로 이전했습니다. 현재 본관은 피에르 카위퍼스가 설계했으며 1885년에 처음 개관했습니다. 박물관은 1200년부터 2000년까지의 총 100만 점의 소장품 중 8,000점의 예술품과 역사적 유물을 전시하고 있으며, 그 중에는 렘브란트, 프란스 할스, 요하네스 베르메르의 걸작들이 포함되어 있습니다. 박물관에는 아시아 파빌리온에 전시된 소규모 아시아 컬렉션도 있습니다.',
+        historicalInfo: '라익스뮤지엄은 1800년 헤이그에 설립되었으며 1808년 암스테르담으로 이전했습니다. 처음에는 왕궁에, 나중에는 트리펜하우스에 위치했습니다. 현재 본관은 피에르 카위퍼스가 설계했으며 1885년에 처음 문을 열었습니다. 2013년 4월 13일, 10년간의 보수 공사 후 본관이 베아트릭스 여왕에 의해 재개관했습니다.',
+        yearBuilt: '1800년 (설립), 1885년 (현재 건물 개관)',
+        architect: '피에르 카위퍼스'
+      },
+      ja: {
+        name: 'ライクスミュージアム',
+        narration: 'オランダの芸術と歴史に捧げられた国立博物館、ライクスミュージアムへようこそ。レンブラント、フェルメール、そして数え切れないほどのオランダの巨匠たちの傑作が収蔵されています。',
+        description: 'オランダ黄金時代の傑作を所蔵するオランダ国立博物館',
+        detailedDescription: 'ライクスミュージアムはアムステルダムにある芸術と歴史に捧げられたオランダ国立博物館です。博物館はゴッホ美術館とステデライク美術館の近く、アムステルダム南区のミュージアム広場に位置しています。ライクスミュージアムは1800年にハーグで設立され、1808年にアムステルダムに移転しました。現在の本館はピエール・カイパースによって設計され、1885年に最初に開館しました。博物館には1200年から2000年までの総コレクション100万点の中から8,000点の芸術品と歴史的遺物が展示されており、その中にはレンブラント、フランス・ハルス、ヨハネス・フェルメールの傑作が含まれています。博物館にはアジアパビリオンに展示されている小規模なアジアコレクションもあります。',
+        historicalInfo: 'ライクスミュージアムは1800年にハーグで設立され、1808年にアムステルダムに移転しました。最初は王宮に、その後トリッペンハウスに位置していました。現在の本館はピエール・カイパースによって設計され、1885年に最初に扉を開きました。2013年4月13日、10年間の改修工事の後、本館はベアトリクス女王によって再開されました。',
+        yearBuilt: '1800年 (設立), 1885年 (現在の建物開館)',
+        architect: 'ピエール・カイパース'
+      },
+      zh: {
+        name: '国家博物馆',
+        narration: '欢迎来到荷兰国家博物馆,这是致力于艺术和历史的荷兰国家博物馆。这里收藏了伦勃朗、维米尔和无数其他荷兰大师的杰作。',
+        description: '拥有荷兰黄金时代杰作的荷兰国家博物馆',
+        detailedDescription: '国家博物馆是位于阿姆斯特丹的荷兰国家艺术和历史博物馆。博物馆位于阿姆斯特丹南区的博物馆广场,靠近梵高博物馆和市立博物馆。国家博物馆于1800年在海牙成立,并于1808年迁至阿姆斯特丹。目前的主建筑由皮埃尔·凯普斯设计,于1885年首次开放。博物馆展出了从1200年至2000年的总收藏100万件物品中的8,000件艺术品和历史文物,其中包括伦勃朗、弗朗斯·哈尔斯和约翰内斯·维米尔的一些杰作。博物馆还有一个在亚洲展馆展出的小型亚洲收藏。',
+        historicalInfo: '国家博物馆于1800年在海牙成立,并于1808年迁至阿姆斯特丹,最初位于皇宫,后来位于特里彭豪斯。目前的主建筑由皮埃尔·凯普斯设计,于1885年首次开放。2013年4月13日,经过十年的翻新,主建筑由贝娅特丽克丝女王重新开放。',
+        yearBuilt: '1800年 (成立), 1885年 (现建筑开放)',
+        architect: '皮埃尔·凯普斯'
+      }
+    }
+  },
+  // Barcelona landmarks
+  {
+    id: 'sagrada_familia',
+    cityId: 'barcelona',
+    name: 'Sagrada Familia',
+    lat: 41.4036,
+    lng: 2.1744,
+    radius: 80,
+    narration: 'Welcome to the Sagrada Familia, Antoni Gaudí\'s masterpiece and Barcelona\'s most iconic landmark. This breathtaking basilica has been under construction for over 140 years.',
+    description: 'Gaudí\'s magnificent unfinished basilica, a UNESCO World Heritage Site',
+    category: 'Architecture',
+    detailedDescription: 'The Basílica de la Sagrada Família, also known as the Sagrada Família, is a large unfinished Roman Catholic minor basilica in Barcelona, Catalonia, Spain. Designed by Catalan architect Antoni Gaudí (1852–1926), his work on the building is part of a UNESCO World Heritage Site. Construction began in 1882 and is projected to be completed in 2026, the centenary of Gaudí\'s death. Combining Gothic and Art Nouveau forms, the Sagrada Família is renowned for its unique architectural style featuring organic shapes inspired by nature. The basilica has three grand facades: the Nativity facade, the Passion facade, and the Glory facade, each telling a different part of the story of Jesus. The interior is equally spectacular, with towering columns designed to resemble trees in a forest, creating a stunning canopy effect.',
+    photos: [
+      'https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=800',
+      'https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?w=800',
+      'https://images.unsplash.com/photo-1542382156909-9ae37b3f56fd?w=800',
+      'https://images.unsplash.com/photo-1579282240050-352db0a14c21?w=800',
+      'https://images.unsplash.com/photo-1558642084-fd07fae5282e?w=800',
+      'https://images.unsplash.com/photo-1564221710304-0b37c8b9d729?w=800',
+      'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800'
+    ],
+    historicalInfo: 'Construction of the Sagrada Família started in 1882 under architect Francisco de Paula del Villar. In 1883, Antoni Gaudí took over the project and transformed it with his architectural vision. He worked on the church for 43 years until his death in 1926. Gaudí devoted his final years exclusively to the project, and at the time of his death, less than a quarter of the project was complete.',
+    yearBuilt: '1882-present (under construction)',
+    architect: 'Antoni Gaudí',
+    translations: {
+      en: {
+        name: 'Sagrada Familia',
+        narration: 'Welcome to the Sagrada Familia, Antoni Gaudí\'s masterpiece and Barcelona\'s most iconic landmark. This breathtaking basilica has been under construction for over 140 years.',
+        description: 'Gaudí\'s magnificent unfinished basilica, a UNESCO World Heritage Site',
+        detailedDescription: 'The Basílica de la Sagrada Família, also known as the Sagrada Família, is a large unfinished Roman Catholic minor basilica in Barcelona, Catalonia, Spain. Designed by Catalan architect Antoni Gaudí (1852–1926), his work on the building is part of a UNESCO World Heritage Site. Construction began in 1882 and is projected to be completed in 2026, the centenary of Gaudí\'s death. Combining Gothic and Art Nouveau forms, the Sagrada Família is renowned for its unique architectural style featuring organic shapes inspired by nature. The basilica has three grand facades: the Nativity facade, the Passion facade, and the Glory facade, each telling a different part of the story of Jesus. The interior is equally spectacular, with towering columns designed to resemble trees in a forest, creating a stunning canopy effect.',
+        historicalInfo: 'Construction of the Sagrada Família started in 1882 under architect Francisco de Paula del Villar. In 1883, Antoni Gaudí took over the project and transformed it with his architectural vision. He worked on the church for 43 years until his death in 1926. Gaudí devoted his final years exclusively to the project, and at the time of his death, less than a quarter of the project was complete.',
+        yearBuilt: '1882-present (under construction)',
+        architect: 'Antoni Gaudí'
+      },
+      ko: {
+        name: '사그라다 파밀리아',
+        narration: '안토니 가우디의 걸작이자 바르셀로나의 가장 상징적인 랜드마크인 사그라다 파밀리아에 오신 것을 환영합니다. 이 숨막히는 바실리카는 140년 넘게 건설 중입니다.',
+        description: '가우디의 장엄한 미완성 바실리카, 유네스코 세계문화유산',
+        detailedDescription: '사그라다 파밀리아 대성당은 스페인 카탈루냐 바르셀로나에 있는 대형 미완성 로마 가톨릭 소바실리카입니다. 카탈루냐 건축가 안토니 가우디(1852-1926)가 설계했으며, 그의 작업은 유네스코 세계문화유산의 일부입니다. 건설은 1882년에 시작되었으며 가우디 사망 100주년인 2026년에 완성될 것으로 예상됩니다. 고딕 양식과 아르누보 형식을 결합한 사그라다 파밀리아는 자연에서 영감을 받은 유기적 형태를 특징으로 하는 독특한 건축 양식으로 유명합니다. 바실리카에는 세 개의 웅장한 파사드가 있습니다: 탄생 파사드, 수난 파사드, 영광 파사드로, 각각 예수의 이야기의 다른 부분을 이야기합니다. 내부도 똑같이 장관으로, 숲속의 나무를 닮도록 설계된 우뚝 솟은 기둥이 놀라운 캐노피 효과를 만들어냅니다.',
+        historicalInfo: '사그라다 파밀리아 건설은 1882년 건축가 프란시스코 데 파울라 델 비야르의 지휘 하에 시작되었습니다. 1883년, 안토니 가우디가 프로젝트를 인수하고 그의 건축적 비전으로 변모시켰습니다. 그는 1926년 사망할 때까지 43년 동안 교회를 작업했습니다. 가우디는 말년을 오직 이 프로젝트에만 전념했으며, 그의 사망 당시 프로젝트의 1/4도 완성되지 않았습니다.',
+        yearBuilt: '1882년-현재 (건설 중)',
+        architect: '안토니 가우디'
+      },
+      ja: {
+        name: 'サグラダ・ファミリア',
+        narration: 'アントニ・ガウディの傑作であり、バルセロナで最も象徴的なランドマークであるサグラダ・ファミリアへようこそ。この息をのむようなバシリカは140年以上建設中です。',
+        description: 'ガウディの壮大な未完成バシリカ、ユネスコ世界遺産',
+        detailedDescription: 'サグラダ・ファミリア大聖堂は、スペインのカタルーニャ州バルセロナにある大型の未完成ローマカトリック小バシリカです。カタルーニャの建築家アントニ・ガウディ(1852-1926)によって設計され、建物に関する彼の作業はユネスコ世界遺産の一部です。建設は1882年に始まり、ガウディの死の100周年である2026年に完成すると予測されています。ゴシック様式とアールヌーヴォー様式を組み合わせたサグラダ・ファミリアは、自然に触発された有機的な形状を特徴とする独特の建築様式で有名です。バシリカには3つの壮大なファサードがあります:降誕のファサード、受難のファサード、栄光のファサードで、それぞれがイエスの物語の異なる部分を語っています。内部も同様に壮観で、森の木々に似せて設計された高くそびえる柱が、見事な天蓋効果を生み出しています。',
+        historicalInfo: 'サグラダ・ファミリアの建設は、建築家フランシスコ・デ・パウラ・デル・ビリャールの下で1882年に開始されました。1883年、アントニ・ガウディがプロジェクトを引き継ぎ、彼の建築ビジョンで変貌させました。彼は1926年に亡くなるまで43年間教会に取り組みました。ガウディは晩年をこのプロジェクトにのみ専念させ、彼の死の時点で、プロジェクトの4分の1も完成していませんでした。',
+        yearBuilt: '1882年-現在 (建設中)',
+        architect: 'アントニ・ガウディ'
+      },
+      zh: {
+        name: '圣家堂',
+        narration: '欢迎来到圣家堂,安东尼·高迪的杰作和巴塞罗那最具标志性的地标。这座令人叹为观止的大教堂已经建造了140多年。',
+        description: '高迪宏伟的未完成大教堂,联合国教科文组织世界遗产',
+        detailedDescription: '圣家堂大教堂是位于西班牙加泰罗尼亚巴塞罗那的一座大型未完成罗马天主教次级圣殿。由加泰罗尼亚建筑师安东尼·高迪(1852-1926)设计,他对这座建筑的工作是联合国教科文组织世界遗产的一部分。建设始于1882年,预计将在2026年,即高迪逝世100周年时完工。结合哥特式和新艺术风格,圣家堂以其独特的建筑风格而闻名,其特色是受自然启发的有机形状。大教堂有三个宏伟的立面:诞生立面、受难立面和荣耀立面,每个都讲述了耶稣故事的不同部分。内部同样壮观,设计成森林中树木的高耸柱子,创造出令人惊叹的树冠效果。',
+        historicalInfo: '圣家堂的建设于1882年在建筑师弗朗西斯科·德·保拉·德尔·比利亚尔的领导下开始。1883年,安东尼·高迪接管了这个项目,并用他的建筑愿景改造了它。他在1926年去世之前为这座教堂工作了43年。高迪将他的晚年完全奉献给了这个项目,在他去世时,项目还不到四分之一完成。',
+        yearBuilt: '1882年-至今 (建设中)',
+        architect: '安东尼·高迪'
+      }
+    }
+  },
+  {
+    id: 'park_guell',
+    cityId: 'barcelona',
+    name: 'Park Güell',
+    lat: 41.4145,
+    lng: 2.1527,
+    radius: 100,
+    narration: 'Welcome to Park Güell, Antoni Gaudí\'s whimsical park filled with colorful mosaics and organic architecture. This UNESCO World Heritage Site offers stunning views of Barcelona.',
+    description: 'Gaudí\'s colorful mosaic park with panoramic city views',
+    category: 'Park',
+    detailedDescription: 'Park Güell is a public park system composed of gardens and architectural elements located on Carmel Hill in Barcelona, Catalonia, Spain. Designed by Antoni Gaudí and built between 1900 and 1914, the park was originally developed as a housing site by Eusebi Güell. It was officially opened as a public park in 1926. The park showcases Gaudí\'s unique architectural and artistic style with colorful ceramic mosaics, undulating forms, and organic shapes inspired by nature. The famous serpentine bench covered in trencadís (broken ceramic tiles) offers panoramic views of Barcelona and the Mediterranean Sea. The park includes the famous dragon/lizard sculpture known as "El Drac" covered in colorful mosaic, which has become a symbol of Barcelona.',
+    photos: [
+      'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800',
+      'https://images.unsplash.com/photo-1560759818-4cb5f601fc0e?w=800',
+      'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800',
+      'https://images.unsplash.com/photo-1562883676-8c7feb83f09b?w=800',
+      'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800',
+      'https://images.unsplash.com/photo-1579282240050-352db0a14c21?w=800',
+      'https://images.unsplash.com/photo-1564221710304-0b37c8b9d729?w=800'
+    ],
+    historicalInfo: 'Park Güell was designed by Antoni Gaudí for Eusebi Güell as a garden city project between 1900 and 1914. The project was inspired by the English garden city movement. Only two houses were built, one of which was Gaudí\'s home from 1906 to 1925, now the Gaudí House Museum. In 1984, UNESCO designated Park Güell as a World Heritage Site.',
+    yearBuilt: '1900-1914',
+    architect: 'Antoni Gaudí',
+    translations: {
+      en: {
+        name: 'Park Güell',
+        narration: 'Welcome to Park Güell, Antoni Gaudí\'s whimsical park filled with colorful mosaics and organic architecture. This UNESCO World Heritage Site offers stunning views of Barcelona.',
+        description: 'Gaudí\'s colorful mosaic park with panoramic city views',
+        detailedDescription: 'Park Güell is a public park system composed of gardens and architectural elements located on Carmel Hill in Barcelona, Catalonia, Spain. Designed by Antoni Gaudí and built between 1900 and 1914, the park was originally developed as a housing site by Eusebi Güell. It was officially opened as a public park in 1926. The park showcases Gaudí\'s unique architectural and artistic style with colorful ceramic mosaics, undulating forms, and organic shapes inspired by nature. The famous serpentine bench covered in trencadís (broken ceramic tiles) offers panoramic views of Barcelona and the Mediterranean Sea. The park includes the famous dragon/lizard sculpture known as "El Drac" covered in colorful mosaic, which has become a symbol of Barcelona.',
+        historicalInfo: 'Park Güell was designed by Antoni Gaudí for Eusebi Güell as a garden city project between 1900 and 1914. The project was inspired by the English garden city movement. Only two houses were built, one of which was Gaudí\'s home from 1906 to 1925, now the Gaudí House Museum. In 1984, UNESCO designated Park Güell as a World Heritage Site.',
+        yearBuilt: '1900-1914',
+        architect: 'Antoni Gaudí'
+      },
+      ko: {
+        name: '구엘 공원',
+        narration: '화려한 모자이크와 유기적 건축물로 가득한 안토니 가우디의 기발한 공원인 구엘 공원에 오신 것을 환영합니다. 이 유네스코 세계문화유산은 바르셀로나의 멋진 전망을 제공합니다.',
+        description: '파노라마 도시 전망을 갖춘 가우디의 화려한 모자이크 공원',
+        detailedDescription: '구엘 공원은 스페인 카탈루냐 바르셀로나의 카르멜 언덕에 위치한 정원과 건축 요소로 구성된 공공 공원 시스템입니다. 안토니 가우디가 설계하고 1900년에서 1914년 사이에 건설된 이 공원은 원래 에우제비 구엘에 의해 주거지로 개발되었습니다. 1926년에 공식적으로 공공 공원으로 개장했습니다. 공원은 자연에서 영감을 받은 화려한 세라믹 모자이크, 물결 모양 형태 및 유기적 형태로 가우디의 독특한 건축 및 예술적 스타일을 선보입니다. 트렌카디스(깨진 세라믹 타일)로 덮인 유명한 뱀 모양 벤치는 바르셀로나와 지중해의 파노라마 전망을 제공합니다. 공원에는 바르셀로나의 상징이 된 화려한 모자이크로 덮인 "엘 드락"으로 알려진 유명한 용/도마뱀 조각상이 있습니다.',
+        historicalInfo: '구엘 공원은 1900년에서 1914년 사이에 에우제비 구엘을 위한 정원 도시 프로젝트로 안토니 가우디가 설계했습니다. 이 프로젝트는 영국 정원 도시 운동에서 영감을 받았습니다. 단 두 채의 주택만 지어졌으며, 그 중 하나는 1906년부터 1925년까지 가우디의 집으로, 현재 가우디 하우스 박물관입니다. 1984년, 유네스코는 구엘 공원을 세계문화유산으로 지정했습니다.',
+        yearBuilt: '1900-1914년',
+        architect: '안토니 가우디'
+      },
+      ja: {
+        name: 'グエル公園',
+        narration: 'アントニ・ガウディの色彩豊かなモザイクと有機的な建築で満たされた風変わりな公園、グエル公園へようこそ。このユネスコ世界遺産はバルセロナの素晴らしい景色を提供します。',
+        description: 'パノラマの都市景観を持つガウディのカラフルなモザイク公園',
+        detailedDescription: 'グエル公園は、スペインのカタルーニャ州バルセロナのカルメル丘に位置する庭園と建築要素で構成される公共公園システムです。アントニ・ガウディによって設計され、1900年から1914年の間に建設されました。公園は元々エウセビ・グエルによって住宅地として開発されました。1926年に公式に公共公園として開園しました。公園は、自然に触発されたカラフルなセラミックモザイク、うねる形、有機的な形でガウディ独特の建築的・芸術的スタイルを披露しています。トレンカディス(割れたセラミックタイル)で覆われた有名な蛇行するベンチは、バルセロナと地中海のパノラマビューを提供します。公園には、バルセロナのシンボルとなったカラフルなモザイクで覆われた「エル・ドラック」として知られる有名なドラゴン/トカゲの彫刻があります。',
+        historicalInfo: 'グエル公園は、1900年から1914年の間にエウセビ・グエルのための庭園都市プロジェクトとしてアントニ・ガウディによって設計されました。このプロジェクトはイギリスの田園都市運動に触発されました。わずか2軒の家が建てられ、そのうちの1軒は1906年から1925年までガウディの家で、現在はガウディハウス博物館です。1984年、ユネスコはグエル公園を世界遺産に指定しました。',
+        yearBuilt: '1900-1914年',
+        architect: 'アントニ・ガウディ'
+      },
+      zh: {
+        name: '奎尔公园',
+        narration: '欢迎来到奎尔公园,安东尼·高迪充满色彩马赛克和有机建筑的奇思妙想公园。这个联合国教科文组织世界遗产提供巴塞罗那的壮丽景色。',
+        description: '高迪的彩色马赛克公园,拥有全景城市景观',
+        detailedDescription: '奎尔公园是位于西班牙加泰罗尼亚巴塞罗那卡梅尔山上的公共公园系统,由花园和建筑元素组成。由安东尼·高迪设计,建于1900年至1914年间,该公园最初由尤塞比·奎尔开发为住宅区。它于1926年正式作为公共公园开放。公园展示了高迪独特的建筑和艺术风格,拥有受自然启发的彩色陶瓷马赛克、起伏的形式和有机形状。覆盖着碎瓷砖的著名蛇形长椅提供巴塞罗那和地中海的全景视野。公园包括著名的覆盖着彩色马赛克的龙/蜥蜴雕塑,被称为"埃尔·德拉克",已成为巴塞罗那的象征。',
+        historicalInfo: '奎尔公园是安东尼·高迪在1900年至1914年间为尤塞比·奎尔设计的花园城市项目。该项目受到英国花园城市运动的启发。只建造了两所房子,其中一所是高迪从1906年到1925年的家,现在是高迪故居博物馆。1984年,联合国教科文组织将奎尔公园指定为世界遗产。',
+        yearBuilt: '1900-1914年',
+        architect: '安东尼·高迪'
+      }
+    }
+  },
+  {
+    id: 'casa_batllo',
+    cityId: 'barcelona',
+    name: 'Casa Batlló',
+    lat: 41.3916,
+    lng: 2.1649,
+    radius: 50,
+    narration: 'Welcome to Casa Batlló, one of Gaudí\'s most imaginative buildings. This stunning modernist masterpiece resembles a living organism with its skeletal facade and dragon-like roof.',
+    description: 'Gaudí\'s fantastical modernist building with skeletal facade',
+    category: 'Architecture',
+    detailedDescription: 'Casa Batlló is a building in the center of Barcelona, renovated by Antoni Gaudí from 1904 to 1906. It is located on Passeig de Gràcia and is one of Gaudí\'s masterpieces. The building is part of a UNESCO World Heritage Site. The local name for the building is Casa dels ossos (House of Bones), as it has a visceral, skeletal organic quality. The facade is decorated with colorful mosaics and has balconies that resemble skulls or masks. The roof is arched and resembles the back of a dragon, with shingles that look like scales. Inside, Gaudí\'s organic design continues with curved walls, mushroom-shaped fireplaces, and a spectacular light well designed to distribute natural light throughout the building.',
+    photos: [
+      'https://images.unsplash.com/photo-1542376298-22e0b26e9f1b?w=800',
+      'https://images.unsplash.com/photo-1564221710304-0b37c8b9d729?w=800',
+      'https://images.unsplash.com/photo-1583251663725-9f47282f5f0c?w=800',
+      'https://images.unsplash.com/photo-1560759818-4cb5f601fc0e?w=800',
+      'https://images.unsplash.com/photo-1579282240050-352db0a14c21?w=800',
+      'https://images.unsplash.com/photo-1558642084-fd07fae5282e?w=800',
+      'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800'
+    ],
+    historicalInfo: 'Casa Batlló was originally built in 1877 by Emili Sala Cortés, one of Gaudí\'s architecture teachers. In 1904, Josep Batlló commissioned Gaudí to renovate the building. Gaudí completely transformed the building between 1904 and 1906. In 2005, Casa Batlló was designated a UNESCO World Heritage Site along with other works by Gaudí.',
+    yearBuilt: '1877 (original), 1904-1906 (Gaudí renovation)',
+    architect: 'Antoni Gaudí (renovation)',
+    translations: {
+      en: {
+        name: 'Casa Batlló',
+        narration: 'Welcome to Casa Batlló, one of Gaudí\'s most imaginative buildings. This stunning modernist masterpiece resembles a living organism with its skeletal facade and dragon-like roof.',
+        description: 'Gaudí\'s fantastical modernist building with skeletal facade',
+        detailedDescription: 'Casa Batlló is a building in the center of Barcelona, renovated by Antoni Gaudí from 1904 to 1906. It is located on Passeig de Gràcia and is one of Gaudí\'s masterpieces. The building is part of a UNESCO World Heritage Site. The local name for the building is Casa dels ossos (House of Bones), as it has a visceral, skeletal organic quality. The facade is decorated with colorful mosaics and has balconies that resemble skulls or masks. The roof is arched and resembles the back of a dragon, with shingles that look like scales. Inside, Gaudí\'s organic design continues with curved walls, mushroom-shaped fireplaces, and a spectacular light well designed to distribute natural light throughout the building.',
+        historicalInfo: 'Casa Batlló was originally built in 1877 by Emili Sala Cortés, one of Gaudí\'s architecture teachers. In 1904, Josep Batlló commissioned Gaudí to renovate the building. Gaudí completely transformed the building between 1904 and 1906. In 2005, Casa Batlló was designated a UNESCO World Heritage Site along with other works by Gaudí.',
+        yearBuilt: '1877 (original), 1904-1906 (Gaudí renovation)',
+        architect: 'Antoni Gaudí (renovation)'
+      },
+      ko: {
+        name: '카사 바트요',
+        narration: '가우디의 가장 상상력 넘치는 건물 중 하나인 카사 바트요에 오신 것을 환영합니다. 이 놀라운 모더니스트 걸작은 골격 같은 파사드와 용처럼 생긴 지붕으로 살아있는 유기체를 닮았습니다.',
+        description: '골격 같은 파사드를 가진 가우디의 환상적인 모더니스트 건물',
+        detailedDescription: '카사 바트요는 1904년부터 1906년까지 안토니 가우디가 개조한 바르셀로나 중심부의 건물입니다. 그라시아 거리에 위치하며 가우디의 걸작 중 하나입니다. 건물은 유네스코 세계문화유산의 일부입니다. 건물의 현지 이름은 카사 델스 오소스(뼈의 집)로, 내장 기관 같은 골격 유기적 특성을 가지고 있습니다. 파사드는 화려한 모자이크로 장식되어 있으며 두개골이나 가면을 닮은 발코니가 있습니다. 지붕은 아치형이며 용의 등을 닮았으며, 비늘처럼 보이는 지붕 널빤지가 있습니다. 내부에서는 가우디의 유기적 디자인이 곡선 벽, 버섯 모양 벽난로, 건물 전체에 자연광을 분산시키도록 설계된 장관의 채광정으로 계속됩니다.',
+        historicalInfo: '카사 바트요는 원래 가우디의 건축 선생님 중 한 명인 에밀리 살라 코르테스에 의해 1877년에 지어졌습니다. 1904년, 호세프 바트요가 가우디에게 건물 개조를 의뢰했습니다. 가우디는 1904년에서 1906년 사이에 건물을 완전히 변모시켰습니다. 2005년, 카사 바트요는 가우디의 다른 작품들과 함께 유네스코 세계문화유산으로 지정되었습니다.',
+        yearBuilt: '1877년 (원래), 1904-1906년 (가우디 개조)',
+        architect: '안토니 가우디 (개조)'
+      },
+      ja: {
+        name: 'カサ・バトリョ',
+        narration: 'ガウディの最も想像力豊かな建物の一つであるカサ・バトリョへようこそ。この見事なモダニズムの傑作は、骨格のようなファサードとドラゴンのような屋根で生きた有機体に似ています。',
+        description: '骨格のようなファサードを持つガウディの幻想的なモダニズム建築',
+        detailedDescription: 'カサ・バトリョは、1904年から1906年にアントニ・ガウディによって改装されたバルセロナ中心部の建物です。グラシア通りに位置し、ガウディの傑作の一つです。建物はユネスコ世界遺産の一部です。建物の地元名はカサ・デルス・オッソス(骨の家)で、内臓的で骨格的な有機的な特質を持っています。ファサードはカラフルなモザイクで装飾され、頭蓋骨や仮面に似たバルコニーがあります。屋根はアーチ型でドラゴンの背中に似ており、鱗のように見える帯状の屋根板があります。内部では、ガウディの有機的なデザインが曲線の壁、キノコ型の暖炉、建物全体に自然光を分散するように設計された壮大な光の井戸で続いています。',
+        historicalInfo: 'カサ・バトリョは元々1877年にガウディの建築教師の一人であるエミリ・サラ・コルテスによって建てられました。1904年、ジョゼップ・バトリョがガウディに建物の改装を依頼しました。ガウディは1904年から1906年の間に建物を完全に変貌させました。2005年、カサ・バトリョはガウディの他の作品とともにユネスコ世界遺産に指定されました。',
+        yearBuilt: '1877年 (オリジナル), 1904-1906年 (ガウディ改装)',
+        architect: 'アントニ・ガウディ (改装)'
+      },
+      zh: {
+        name: '巴特罗之家',
+        narration: '欢迎来到巴特罗之家,高迪最富想象力的建筑之一。这座令人惊叹的现代主义杰作以其骨骼般的立面和龙形屋顶类似于一个活的有机体。',
+        description: '高迪幻想的现代主义建筑,拥有骨骼立面',
+        detailedDescription: '巴特罗之家是位于巴塞罗那市中心的一座建筑,由安东尼·高迪于1904年至1906年进行翻新。它位于格拉西亚大道上,是高迪的杰作之一。该建筑是联合国教科文组织世界遗产的一部分。该建筑的当地名称是骨头之家(Casa dels ossos),因为它具有内脏的、骨骼的有机特质。立面装饰着彩色马赛克,阳台类似于头骨或面具。屋顶呈拱形,类似于龙的背部,屋瓦看起来像鳞片。在内部,高迪的有机设计继续着,有弯曲的墙壁、蘑菇形壁炉和一个壮观的天井,旨在将自然光分布到整个建筑。',
+        historicalInfo: '巴特罗之家最初由高迪的建筑老师之一埃米利·萨拉·科尔特斯于1877年建造。1904年,约瑟普·巴特罗委托高迪翻新这座建筑。高迪在1904年至1906年间彻底改造了这座建筑。2005年,巴特罗之家与高迪的其他作品一起被指定为联合国教科文组织世界遗产。',
+        yearBuilt: '1877年 (原建筑), 1904-1906年 (高迪翻新)',
+        architect: '安东尼·高迪 (翻新)'
+      }
+    }
+  },
+  // Brussels landmarks
+  {
+    id: 'atomium',
+    cityId: 'brussels',
+    name: 'Atomium',
+    lat: 50.8950,
+    lng: 4.3415,
+    radius: 70,
+    narration: 'Welcome to the Atomium, Brussels\' most iconic landmark. This unique building represents an iron crystal magnified 165 billion times, built for the 1958 World Expo.',
+    description: 'Iconic futuristic structure representing an iron atom',
+    category: 'Monument',
+    detailedDescription: 'The Atomium is a landmark building in Brussels, Belgium, originally constructed for the 1958 Brussels World\'s Fair (Expo 58). It is located on the Heysel/Heizel Plateau in Laeken (northern part of the City of Brussels), where the exhibition took place. Designed by engineer André Waterkeyn and architects André and Jean Polak, it stands 102 meters (335 feet) tall. Its nine 18-meter-diameter stainless steel clad spheres are connected so that the whole forms the shape of a unit cell of an iron crystal magnified 165 billion times. The structure was renovated between 2004 and 2006, and the outside sphere coating was replaced with stainless steel. The Atomium contains exhibition halls and other public spaces, and the top sphere provides a panoramic view of Brussels.',
+    photos: [
+      'https://images.unsplash.com/photo-1583251664702-1ef11bed1148?w=800',
+      'https://images.unsplash.com/photo-1559564484-e48ca3e1b6e7?w=800',
+      'https://images.unsplash.com/photo-1558642084-fd07fae5282e?w=800',
+      'https://images.unsplash.com/photo-1564221710304-0b37c8b9d729?w=800',
+      'https://images.unsplash.com/photo-1579282240050-352db0a14c21?w=800',
+      'https://images.unsplash.com/photo-1560759818-4cb5f601fc0e?w=800',
+      'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800'
+    ],
+    historicalInfo: 'The Atomium was designed for the 1958 Brussels World\'s Fair (Expo 58) by engineer André Waterkeyn. The structure symbolizes the democratic will to maintain peace among all the nations, faith in progress, and an optimistic vision of the future of a modern, new, super-technological world. It was intended to be a temporary structure but became so popular that it was preserved.',
+    yearBuilt: '1958',
+    architect: 'André Waterkeyn, André Polak, Jean Polak',
+    translations: {
+      en: {
+        name: 'Atomium',
+        narration: 'Welcome to the Atomium, Brussels\' most iconic landmark. This unique building represents an iron crystal magnified 165 billion times, built for the 1958 World Expo.',
+        description: 'Iconic futuristic structure representing an iron atom',
+        detailedDescription: 'The Atomium is a landmark building in Brussels, Belgium, originally constructed for the 1958 Brussels World\'s Fair (Expo 58). It is located on the Heysel/Heizel Plateau in Laeken (northern part of the City of Brussels), where the exhibition took place. Designed by engineer André Waterkeyn and architects André and Jean Polak, it stands 102 meters (335 feet) tall. Its nine 18-meter-diameter stainless steel clad spheres are connected so that the whole forms the shape of a unit cell of an iron crystal magnified 165 billion times. The structure was renovated between 2004 and 2006, and the outside sphere coating was replaced with stainless steel. The Atomium contains exhibition halls and other public spaces, and the top sphere provides a panoramic view of Brussels.',
+        historicalInfo: 'The Atomium was designed for the 1958 Brussels World\'s Fair (Expo 58) by engineer André Waterkeyn. The structure symbolizes the democratic will to maintain peace among all the nations, faith in progress, and an optimistic vision of the future of a modern, new, super-technological world. It was intended to be a temporary structure but became so popular that it was preserved.',
+        yearBuilt: '1958',
+        architect: 'André Waterkeyn, André Polak, Jean Polak'
+      },
+      ko: {
+        name: '아토미움',
+        narration: '브뤼셀의 가장 상징적인 랜드마크인 아토미움에 오신 것을 환영합니다. 이 독특한 건물은 1650억 배 확대된 철 결정을 나타내며, 1958년 세계 박람회를 위해 지어졌습니다.',
+        description: '철 원자를 나타내는 상징적인 미래지향적 구조물',
+        detailedDescription: '아토미움은 벨기에 브뤼셀의 랜드마크 건물로, 원래 1958년 브뤼셀 세계 박람회(Expo 58)를 위해 건설되었습니다. 전시회가 열렸던 브뤼셀시 북부 라켄의 헤이젤/하이젤 고원에 위치해 있습니다. 엔지니어 앙드레 워터케인과 건축가 앙드레 및 장 폴락이 설계했으며, 높이는 102미터(335피트)입니다. 직경 18미터의 스테인리스 스틸 코팅 구체 9개가 연결되어 전체가 1650억 배 확대된 철 결정의 단위 셀 형태를 형성합니다. 구조물은 2004년에서 2006년 사이에 개조되었으며, 외부 구체 코팅이 스테인리스 스틸로 교체되었습니다. 아토미움에는 전시 홀과 기타 공공 공간이 있으며, 최상층 구체에서는 브뤼셀의 파노라마 전망을 제공합니다.',
+        historicalInfo: '아토미움은 1958년 브뤼셀 세계 박람회(Expo 58)를 위해 엔지니어 앙드레 워터케인이 설계했습니다. 구조물은 모든 국가 간 평화를 유지하려는 민주적 의지, 진보에 대한 믿음, 현대적이고 새롭고 초기술적인 세계의 미래에 대한 낙관적 비전을 상징합니다. 임시 구조물로 의도되었지만 너무 인기가 있어서 보존되었습니다.',
+        yearBuilt: '1958년',
+        architect: '앙드레 워터케인, 앙드레 폴락, 장 폴락'
+      },
+      ja: {
+        name: 'アトミウム',
+        narration: 'ブリュッセルで最も象徴的なランドマークであるアトミウムへようこそ。この独特な建物は1650億倍に拡大された鉄の結晶を表しており、1958年の万国博覧会のために建てられました。',
+        description: '鉄原子を表す象徴的な未来的構造物',
+        detailedDescription: 'アトミウムはベルギーのブリュッセルにあるランドマーク建築物で、元々1958年ブリュッセル万国博覧会(Expo 58)のために建設されました。展示会が開催されたブリュッセル市北部のラーケンのヘイゼル/ハイゼル高原に位置しています。エンジニアのアンドレ・ウォーターキンと建築家のアンドレとジャン・ポラックによって設計され、高さは102メートル(335フィート)です。直径18メートルのステンレス鋼で覆われた9つの球体が接続され、全体が1650億倍に拡大された鉄の結晶の単位格子の形を形成しています。構造は2004年から2006年の間に改修され、外部球体のコーティングがステンレス鋼に置き換えられました。アトミウムには展示ホールやその他の公共スペースがあり、最上部の球体からはブリュッセルのパノラマビューを楽しめます。',
+        historicalInfo: 'アトミウムは、エンジニアのアンドレ・ウォーターキンによって1958年ブリュッセル万国博覧会(Expo 58)のために設計されました。この構造は、すべての国家間の平和を維持しようとする民主的意志、進歩への信念、そして現代的で新しい超技術的世界の未来に対する楽観的なビジョンを象徴しています。一時的な構造物として意図されましたが、非常に人気があったため保存されました。',
+        yearBuilt: '1958年',
+        architect: 'アンドレ・ウォーターキン、アンドレ・ポラック、ジャン・ポラック'
+      },
+      zh: {
+        name: '原子球塔',
+        narration: '欢迎来到原子球塔,布鲁塞尔最具标志性的地标。这座独特的建筑代表了放大1650亿倍的铁晶体,为1958年世界博览会而建。',
+        description: '代表铁原子的标志性未来主义结构',
+        detailedDescription: '原子球塔是比利时布鲁塞尔的标志性建筑,最初是为1958年布鲁塞尔世界博览会(Expo 58)建造的。它位于布鲁塞尔市北部拉肯的海塞尔/海泽尔高原,展览会就在那里举行。由工程师安德烈·沃特凯恩和建筑师安德烈和让·波拉克设计,高102米(335英尺)。其九个直径18米的不锈钢包覆球体相连,使整体形成放大1650亿倍的铁晶体单位细胞的形状。该结构在2004年至2006年间进行了翻新,外球体涂层被不锈钢取代。原子球塔包含展览厅和其他公共空间,顶部球体提供布鲁塞尔的全景视图。',
+        historicalInfo: '原子球塔是由工程师安德烈·沃特凯恩为1958年布鲁塞尔世界博览会(Expo 58)设计的。该结构象征着维护所有国家间和平的民主意愿、对进步的信念以及对现代、新的、超技术世界未来的乐观愿景。它原本是一个临时结构,但由于太受欢迎而被保留下来。',
+        yearBuilt: '1958年',
+        architect: '安德烈·沃特凯恩、安德烈·波拉克、让·波拉克'
+      }
+    }
+  },
+  {
+    id: 'grand_place',
+    cityId: 'brussels',
+    name: 'Grand Place',
+    lat: 50.8467,
+    lng: 4.3525,
+    radius: 100,
+    narration: 'Welcome to the Grand Place, the central square of Brussels and one of the most beautiful squares in Europe. This UNESCO World Heritage Site is surrounded by opulent guildhalls and the City Hall.',
+    description: 'Brussels\' magnificent central square with ornate guildhalls',
+    category: 'Historic Square',
+    detailedDescription: 'The Grand Place or Grote Markt is the central square of Brussels, Belgium. It is surrounded by opulent guildhalls and two larger edifices: the city\'s Town Hall and the King\'s House or Breadhouse building. The square measures 68 by 110 meters (223 by 361 feet) and is entirely paved. The Grand Place is the most important tourist destination and most memorable landmark in Brussels. It was named by UNESCO as a World Heritage Site in 1998. The buildings around the square are excellent examples of Belgian Baroque and Gothic architecture. The guildhalls, previously occupied by medieval craft guilds, feature ornate facades with gilded details. Every two years, the Grand Place hosts the Flower Carpet festival, where the square is covered with a spectacular carpet made of begonias.',
+    photos: [
+      'https://images.unsplash.com/photo-1559113202-59fc03511dea?w=800',
+      'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800',
+      'https://images.unsplash.com/photo-1564221710304-0b37c8b9d729?w=800',
+      'https://images.unsplash.com/photo-1558642084-fd07fae5282e?w=800',
+      'https://images.unsplash.com/photo-1579282240050-352db0a14c21?w=800',
+      'https://images.unsplash.com/photo-1560759818-4cb5f601fc0e?w=800',
+      'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800'
+    ],
+    historicalInfo: 'The Grand Place\'s construction began in the 11th century. Most of the buildings around the square were destroyed during the bombardment of Brussels by troops of Louis XIV of France in 1695. The square was rebuilt in a remarkably short time and most of the guildhalls were completed within four years. The Town Hall, which dominates the square, dates from the early 15th century.',
+    yearBuilt: '11th century (original), 1695-1699 (rebuilt)',
+    architect: 'Various architects over centuries',
+    translations: {
+      en: {
+        name: 'Grand Place',
+        narration: 'Welcome to the Grand Place, the central square of Brussels and one of the most beautiful squares in Europe. This UNESCO World Heritage Site is surrounded by opulent guildhalls and the City Hall.',
+        description: 'Brussels\' magnificent central square with ornate guildhalls',
+        detailedDescription: 'The Grand Place or Grote Markt is the central square of Brussels, Belgium. It is surrounded by opulent guildhalls and two larger edifices: the city\'s Town Hall and the King\'s House or Breadhouse building. The square measures 68 by 110 meters (223 by 361 feet) and is entirely paved. The Grand Place is the most important tourist destination and most memorable landmark in Brussels. It was named by UNESCO as a World Heritage Site in 1998. The buildings around the square are excellent examples of Belgian Baroque and Gothic architecture. The guildhalls, previously occupied by medieval craft guilds, feature ornate facades with gilded details. Every two years, the Grand Place hosts the Flower Carpet festival, where the square is covered with a spectacular carpet made of begonias.',
+        historicalInfo: 'The Grand Place\'s construction began in the 11th century. Most of the buildings around the square were destroyed during the bombardment of Brussels by troops of Louis XIV of France in 1695. The square was rebuilt in a remarkably short time and most of the guildhalls were completed within four years. The Town Hall, which dominates the square, dates from the early 15th century.',
+        yearBuilt: '11th century (original), 1695-1699 (rebuilt)',
+        architect: 'Various architects over centuries'
+      },
+      ko: {
+        name: '그랑 플라스',
+        narration: '브뤼셀의 중앙 광장이자 유럽에서 가장 아름다운 광장 중 하나인 그랑 플라스에 오신 것을 환영합니다. 이 유네스코 세계문화유산은 화려한 길드하우스와 시청으로 둘러싸여 있습니다.',
+        description: '화려한 길드하우스가 있는 브뤼셀의 장엄한 중앙 광장',
+        detailedDescription: '그랑 플라스 또는 흐로테 마르크트는 벨기에 브뤼셀의 중앙 광장입니다. 화려한 길드하우스와 두 개의 더 큰 건물인 시청과 왕의 집 또는 빵집 건물로 둘러싸여 있습니다. 광장의 크기는 68 x 110미터(223 x 361피트)이며 전체가 포장되어 있습니다. 그랑 플라스는 브뤼셀에서 가장 중요한 관광지이자 가장 기억에 남는 랜드마크입니다. 1998년 유네스코에 의해 세계문화유산으로 지정되었습니다. 광장 주변의 건물들은 벨기에 바로크 및 고딕 건축의 훌륭한 예입니다. 중세 공예 길드가 이전에 점유했던 길드하우스는 금박 세부 장식이 있는 화려한 파사드를 특징으로 합니다. 2년마다 그랑 플라스는 플라워 카펫 축제를 개최하며, 광장이 베고니아로 만든 장관의 카펫으로 덮입니다.',
+        historicalInfo: '그랑 플라스의 건설은 11세기에 시작되었습니다. 광장 주변의 대부분의 건물은 1695년 프랑스의 루이 14세 군대의 브뤼셀 포격 중에 파괴되었습니다. 광장은 놀랍도록 짧은 시간에 재건되었으며 대부분의 길드하우스는 4년 이내에 완성되었습니다. 광장을 지배하는 시청은 15세기 초로 거슬러 올라갑니다.',
+        yearBuilt: '11세기 (원래), 1695-1699년 (재건)',
+        architect: '여러 세기에 걸친 다양한 건축가'
+      },
+      ja: {
+        name: 'グラン・プラス',
+        narration: 'ブリュッセルの中央広場であり、ヨーロッパで最も美しい広場の一つであるグラン・プラスへようこそ。このユネスコ世界遺産は、豪華なギルドハウスと市庁舎に囲まれています。',
+        description: '華麗なギルドハウスを持つブリュッセルの壮大な中央広場',
+        detailedDescription: 'グラン・プラスまたはフロート・マルクトは、ベルギーのブリュッセルの中央広場です。豪華なギルドハウスと2つのより大きな建造物、市庁舎と王の家またはパン屋の建物に囲まれています。広場は68 x 110メートル(223 x 361フィート)の大きさで、完全に舗装されています。グラン・プラスはブリュッセルで最も重要な観光地であり、最も記憶に残るランドマークです。1998年にユネスコによって世界遺産に指定されました。広場周辺の建物はベルギーのバロックとゴシック建築の優れた例です。中世の職人ギルドが以前占拠していたギルドハウスは、金箔の詳細を備えた華麗なファサードを特徴としています。2年ごとに、グラン・プラスはフラワーカーペット祭りを開催し、広場はベゴニアで作られた壮観なカーペットで覆われます。',
+        historicalInfo: 'グラン・プラスの建設は11世紀に始まりました。広場周辺のほとんどの建物は、1695年のフランスのルイ14世の軍隊によるブリュッセル砲撃中に破壊されました。広場は驚くほど短い時間で再建され、ほとんどのギルドハウスは4年以内に完成しました。広場を支配する市庁舎は15世紀初頭にさかのぼります。',
+        yearBuilt: '11世紀 (オリジナル), 1695-1699年 (再建)',
+        architect: '数世紀にわたるさまざまな建築家'
+      },
+      zh: {
+        name: '大广场',
+        narration: '欢迎来到大广场,布鲁塞尔的中央广场,也是欧洲最美丽的广场之一。这个联合国教科文组织世界遗产被华丽的行会大厅和市政厅所环绕。',
+        description: '拥有华丽行会大厅的布鲁塞尔壮丽中央广场',
+        detailedDescription: '大广场或大市场是比利时布鲁塞尔的中央广场。它被华丽的行会大厅和两座更大的建筑所环绕:城市的市政厅和国王之家或面包房建筑。广场面积为68 x 110米(223 x 361英尺),全部铺砌。大广场是布鲁塞尔最重要的旅游目的地和最令人难忘的地标。它于1998年被联合国教科文组织列为世界遗产。广场周围的建筑是比利时巴洛克和哥特式建筑的优秀范例。以前由中世纪手工业行会占据的行会大厅,其立面装饰华丽,镀金细节。每两年,大广场举办花毯节,广场被由秋海棠制成的壮观地毯覆盖。',
+        historicalInfo: '大广场的建设始于11世纪。广场周围的大多数建筑在1695年法国路易十四的军队轰炸布鲁塞尔期间被摧毁。广场在极短的时间内重建,大多数行会大厅在四年内完成。主导广场的市政厅可追溯到15世纪初。',
+        yearBuilt: '11世纪 (原建筑), 1695-1699年 (重建)',
+        architect: '几个世纪以来的各种建筑师'
+      }
+    }
+  },
+  // Prague landmarks
+  {
+    id: 'charles_bridge',
+    cityId: 'prague',
+    name: 'Charles Bridge',
+    lat: 50.0865,
+    lng: 14.4114,
+    radius: 80,
+    narration: 'Welcome to Charles Bridge, one of Prague\'s most iconic landmarks. This historic stone bridge crosses the Vltava river and connects the Old Town with Lesser Town.',
+    description: 'Historic stone bridge adorned with 30 baroque statues',
+    category: 'Historic Bridge',
+    detailedDescription: 'Charles Bridge is a famous historic bridge that crosses the Vltava river in Prague, Czech Republic. Its construction started in 1357 under the auspices of King Charles IV and finished in the early 15th century. The bridge replaced the old Judith Bridge built 1158–1172 that had been badly damaged by a flood in 1342. This new bridge was originally called Stone Bridge or Prague Bridge but has been Charles Bridge since 1870. As the only means of crossing the river Vltava until 1841, Charles Bridge was the most important connection between Prague Castle and the city\'s Old Town and adjacent areas. The bridge is 516 meters long and nearly 10 meters wide, resting on 16 arches shielded by ice guards. It is protected by three bridge towers, two on the Lesser Quarter side and one on the Old Town side, the Old Town Bridge Tower being one of the most astonishing civil gothic-style buildings in the world. The bridge is decorated by a continuous alley of 30 statues and statuaries, most of them baroque-style, erected around 1700. Today, the Charles Bridge is one of the most visited sights in Prague with painters, street musicians, and other artists. It offers a stunning view of Prague Castle and is especially beautiful at sunrise or sunset.',
+    photos: [
+      'https://images.unsplash.com/photo-q0AtbGIOb5k?w=800',
+      'https://images.unsplash.com/photo-frx-gt8La2E?w=800',
+      'https://images.unsplash.com/photo-OyoaCpMCR0U?w=800',
+      'https://images.unsplash.com/photo-WAPFd4fMy2o?w=800',
+      'https://images.unsplash.com/photo-9-vzYxDbWv4?w=800',
+      'https://images.unsplash.com/photo-pTEX0wqQhJ4?w=800',
+      'https://images.unsplash.com/photo-N3hDuhoYWGY?w=800'
+    ],
+    historicalInfo: 'Charles Bridge was built to replace the Judith Bridge that had been badly damaged by floods in 1342. Construction began in 1357 under King Charles IV and was completed in the early 15th century. The bridge served as the only crossing over the Vltava River until 1841.',
+    yearBuilt: '1357-1402',
+    architect: 'Peter Parler',
+    translations: {
+      en: {
+        name: 'Charles Bridge',
+        narration: 'Welcome to Charles Bridge, one of Prague\'s most iconic landmarks. This historic stone bridge crosses the Vltava river and connects the Old Town with Lesser Town.',
+        description: 'Historic stone bridge adorned with 30 baroque statues',
+        detailedDescription: 'Charles Bridge is a famous historic bridge that crosses the Vltava river in Prague, Czech Republic. Its construction started in 1357 under the auspices of King Charles IV and finished in the early 15th century. The bridge replaced the old Judith Bridge built 1158–1172 that had been badly damaged by a flood in 1342. This new bridge was originally called Stone Bridge or Prague Bridge but has been Charles Bridge since 1870. As the only means of crossing the river Vltava until 1841, Charles Bridge was the most important connection between Prague Castle and the city\'s Old Town and adjacent areas. The bridge is 516 meters long and nearly 10 meters wide, resting on 16 arches shielded by ice guards. It is protected by three bridge towers, two on the Lesser Quarter side and one on the Old Town side, the Old Town Bridge Tower being one of the most astonishing civil gothic-style buildings in the world. The bridge is decorated by a continuous alley of 30 statues and statuaries, most of them baroque-style, erected around 1700. Today, the Charles Bridge is one of the most visited sights in Prague with painters, street musicians, and other artists. It offers a stunning view of Prague Castle and is especially beautiful at sunrise or sunset.',
+        historicalInfo: 'Charles Bridge was built to replace the Judith Bridge that had been badly damaged by floods in 1342. Construction began in 1357 under King Charles IV and was completed in the early 15th century. The bridge served as the only crossing over the Vltava River until 1841.',
+        yearBuilt: '1357-1402',
+        architect: 'Peter Parler'
+      },
+      ko: {
+        name: '카를교',
+        narration: '프라하에서 가장 상징적인 랜드마크 중 하나인 카를교에 오신 것을 환영합니다. 이 역사적인 석조 다리는 블타바 강을 가로지르며 구시가지와 소지구를 연결합니다.',
+        description: '30개의 바로크 조각상으로 장식된 역사적인 석조 다리',
+        detailedDescription: '카를교는 체코 프라하의 블타바 강을 가로지르는 유명한 역사적인 다리입니다. 건설은 1357년 카를 4세의 후원 하에 시작되어 15세기 초에 완공되었습니다. 이 다리는 1342년 홍수로 심하게 손상된 1158-1172년에 지어진 구 유디트 다리를 대체했습니다. 이 새로운 다리는 원래 석조 다리 또는 프라하 다리라고 불렸지만 1870년부터 카를교로 불리고 있습니다. 1841년까지 블타바 강을 건너는 유일한 수단으로서 카를교는 프라하 성과 도시의 구시가지 및 인접 지역 사이의 가장 중요한 연결고리였습니다. 다리는 길이 516미터, 폭 거의 10미터로 얼음 방호벽으로 보호되는 16개의 아치 위에 놓여 있습니다. 다리는 세 개의 다리 탑으로 보호되는데, 소지구 쪽에 두 개, 구시가지 쪽에 하나가 있으며, 구시가지 다리 탑은 세계에서 가장 놀라운 시민 고딕 양식 건물 중 하나입니다. 다리는 대부분 바로크 양식인 30개의 조각상과 조각품이 연속적인 골목을 장식하고 있으며, 대부분 1700년경에 세워졌습니다. 오늘날 카를교는 화가, 거리 음악가, 기타 예술가들과 함께 프라하에서 가장 많이 방문하는 명소 중 하나입니다. 프라하 성의 멋진 전망을 제공하며 일출이나 일몰 시 특히 아름답습니다.',
+        historicalInfo: '카를교는 1342년 홍수로 심하게 손상된 유디트 다리를 대체하기 위해 건설되었습니다. 건설은 1357년 카를 4세 치하에 시작되어 15세기 초에 완공되었습니다. 이 다리는 1841년까지 블타바 강을 건너는 유일한 통로였습니다.',
+        yearBuilt: '1357-1402년',
+        architect: '페터 파를러'
+      },
+      ja: {
+        name: 'カレル橋',
+        narration: 'プラハで最も象徴的なランドマークの一つであるカレル橋へようこそ。この歴史的な石橋はヴルタヴァ川を渡り、旧市街と小地区を結んでいます。',
+        description: '30体のバロック彫像で装飾された歴史的な石橋',
+        detailedDescription: 'カレル橋は、チェコのプラハでヴルタヴァ川を渡る有名な歴史的な橋です。建設は1357年にカレル4世の後援の下で始まり、15世紀初頭に完成しました。この橋は、1342年の洪水で大きな被害を受けた1158年から1172年に建設された旧ユディット橋を置き換えました。この新しい橋は当初、石橋またはプラハ橋と呼ばれていましたが、1870年からカレル橋と呼ばれています。1841年までヴルタヴァ川を渡る唯一の手段として、カレル橋はプラハ城と市の旧市街および隣接地域との間の最も重要な接続でした。橋の長さは516メートル、幅は約10メートルで、氷の防護柵で保護された16のアーチの上に置かれています。橋は3つの橋塔で保護されており、小地区側に2つ、旧市街側に1つあり、旧市街橋塔は世界で最も驚くべき市民ゴシック様式の建物の1つです。橋は、ほとんどがバロック様式の30体の彫像と彫刻で装飾された連続した路地で飾られており、ほとんどが1700年頃に建てられました。今日、カレル橋は画家、ストリートミュージシャン、その他のアーティストと共にプラハで最も訪問された名所の1つです。プラハ城の素晴らしい景色を提供し、日の出や日没時に特に美しいです。',
+        historicalInfo: 'カレル橋は、1342年の洪水で大きな被害を受けたユディット橋を置き換えるために建設されました。建設は1357年にカレル4世の下で始まり、15世紀初頭に完成しました。この橋は1841年までヴルタヴァ川を渡る唯一の通路でした。',
+        yearBuilt: '1357-1402年',
+        architect: 'ペーター・パルレーシュ'
+      },
+      zh: {
+        name: '查理大桥',
+        narration: '欢迎来到查理大桥,布拉格最具标志性的地标之一。这座历史悠久的石桥横跨伏尔塔瓦河,连接老城和小城区。',
+        description: '装饰有30座巴洛克雕像的历史石桥',
+        detailedDescription: '查理大桥是横跨捷克布拉格伏尔塔瓦河的著名历史桥梁。建设始于1357年,在查理四世的资助下开始,并于15世纪初完工。这座桥取代了1158-1172年建造、在1342年洪水中严重受损的旧朱迪特桥。这座新桥最初被称为石桥或布拉格桥,但自1870年以来一直被称为查理大桥。作为1841年之前唯一横跨伏尔塔瓦河的通道,查理大桥是布拉格城堡与城市老城及邻近地区之间最重要的连接。大桥长516米,宽近10米,坐落在由冰护栏保护的16个拱门上。它由三座桥塔保护,两座位于小城区一侧,一座位于老城一侧,老城桥塔是世界上最令人惊叹的哥特式民用建筑之一。大桥由30座雕像和雕塑的连续小巷装饰,大多数是巴洛克风格,建于1700年左右。今天,查理大桥是布拉格访问量最大的景点之一,有画家、街头音乐家和其他艺术家。它提供布拉格城堡的壮丽景色,在日出或日落时特别美丽。',
+        historicalInfo: '查理大桥是为了取代1342年洪水中严重受损的朱迪特桥而建造的。建设始于1357年查理四世治下,并于15世纪初完工。大桥在1841年之前一直是唯一横跨伏尔塔瓦河的通道。',
+        yearBuilt: '1357-1402年',
+        architect: '彼得·帕勒'
+      }
+    }
+  },
+  {
+    id: 'prague_castle',
+    cityId: 'prague',
+    name: 'Prague Castle',
+    lat: 50.0909,
+    lng: 14.4009,
+    radius: 100,
+    narration: 'Welcome to Prague Castle, one of the largest ancient castles in the world. This magnificent complex has been the seat of power for kings, emperors, and presidents for over a thousand years.',
+    description: 'The largest ancient castle complex in the world',
+    category: 'Historic Castle',
+    detailedDescription: 'Prague Castle is a castle complex in Prague, Czech Republic, built in the 9th century. It is the official office of the President of the Czech Republic and was once the seat of Bohemian kings and Holy Roman emperors. The castle is among the most visited tourist attractions in Prague attracting over 1.8 million visitors annually. The Bohemian Crown Jewels are kept within a hidden room inside it. According to the Guinness Book of Records, Prague Castle is the largest ancient castle in the world, occupying an area of almost 70,000 square meters. The castle includes Gothic St. Vitus Cathedral, Romanesque Basilica of St. George, a monastery, and several palaces, gardens and defense towers. Most of the castle\'s present appearance is a result of reconstruction in the second half of the 18th century. The castle houses the Czech Crown Jewels and is a UNESCO World Heritage Site. The changing of the guard takes place every hour and is a popular attraction.',
+    photos: [
+      'https://images.unsplash.com/photo-fuzPjmyGWaA?w=800',
+      'https://images.unsplash.com/photo-rujpx8L_5oo?w=800',
+      'https://images.unsplash.com/photo-u5h_u-IWQ9s?w=800',
+      'https://images.unsplash.com/photo-d6M_h2X3r3E?w=800',
+      'https://images.unsplash.com/photo-PJLPFwi5YlE?w=800',
+      'https://images.unsplash.com/photo-FQ6dk15mfBo?w=800',
+      'https://images.unsplash.com/photo-gYGDUdIEyO4?w=800'
+    ],
+    historicalInfo: 'Prague Castle was founded around 880 by Prince Bořivoj of the Přemyslid Dynasty. It has been rebuilt and expanded many times over the centuries. The castle has always been the seat of power for Czech rulers and is now the official residence of the President of the Czech Republic.',
+    yearBuilt: '880 AD',
+    architect: 'Various architects over centuries',
+    translations: {
+      en: {
+        name: 'Prague Castle',
+        narration: 'Welcome to Prague Castle, one of the largest ancient castles in the world. This magnificent complex has been the seat of power for kings, emperors, and presidents for over a thousand years.',
+        description: 'The largest ancient castle complex in the world',
+        detailedDescription: 'Prague Castle is a castle complex in Prague, Czech Republic, built in the 9th century. It is the official office of the President of the Czech Republic and was once the seat of Bohemian kings and Holy Roman emperors. The castle is among the most visited tourist attractions in Prague attracting over 1.8 million visitors annually. The Bohemian Crown Jewels are kept within a hidden room inside it. According to the Guinness Book of Records, Prague Castle is the largest ancient castle in the world, occupying an area of almost 70,000 square meters. The castle includes Gothic St. Vitus Cathedral, Romanesque Basilica of St. George, a monastery, and several palaces, gardens and defense towers. Most of the castle\'s present appearance is a result of reconstruction in the second half of the 18th century. The castle houses the Czech Crown Jewels and is a UNESCO World Heritage Site. The changing of the guard takes place every hour and is a popular attraction.',
+        historicalInfo: 'Prague Castle was founded around 880 by Prince Bořivoj of the Přemyslid Dynasty. It has been rebuilt and expanded many times over the centuries. The castle has always been the seat of power for Czech rulers and is now the official residence of the President of the Czech Republic.',
+        yearBuilt: '880 AD',
+        architect: 'Various architects over centuries'
+      },
+      ko: {
+        name: '프라하 성',
+        narration: '세계에서 가장 큰 고대 성 중 하나인 프라하 성에 오신 것을 환영합니다. 이 장엄한 복합 건물은 천년 이상 왕, 황제, 대통령의 권력의 자리였습니다.',
+        description: '세계에서 가장 큰 고대 성 복합 건물',
+        detailedDescription: '프라하 성은 9세기에 건축된 체코 프라하의 성 복합 건물입니다. 체코 공화국 대통령의 공식 집무실이며 한때 보헤미아 왕과 신성 로마 제국 황제의 자리였습니다. 이 성은 프라하에서 가장 많이 방문하는 관광 명소 중 하나로 연간 180만 명 이상의 방문객을 끌어들입니다. 보헤미아 왕관 보석은 성 내부의 숨겨진 방에 보관되어 있습니다. 기네스북에 따르면 프라하 성은 세계에서 가장 큰 고대 성으로 거의 70,000제곱미터의 면적을 차지합니다. 성에는 고딕 양식의 성 비투스 대성당, 로마네스크 양식의 성 조지 대성당, 수도원, 여러 궁전, 정원 및 방어 탑이 포함됩니다. 성의 현재 모습 대부분은 18세기 후반 재건의 결과입니다. 성에는 체코 왕관 보석이 보관되어 있으며 유네스코 세계문화유산입니다. 위병 교대식은 매시간 진행되며 인기 있는 명소입니다.',
+        historicalInfo: '프라하 성은 880년경 프르셰미슬 왕조의 보르지보이 공작에 의해 건립되었습니다. 수세기에 걸쳐 여러 차례 재건 및 확장되었습니다. 이 성은 항상 체코 통치자의 권력의 자리였으며 현재 체코 공화국 대통령의 공식 거주지입니다.',
+        yearBuilt: '서기 880년',
+        architect: '여러 세기에 걸친 다양한 건축가'
+      },
+      ja: {
+        name: 'プラハ城',
+        narration: '世界最大級の古代城の一つであるプラハ城へようこそ。この壮大な複合施設は、千年以上にわたり王、皇帝、大統領の権力の座でした。',
+        description: '世界最大の古代城郭複合体',
+        detailedDescription: 'プラハ城は、9世紀に建設されたチェコのプラハにある城郭複合体です。チェコ共和国大統領の公式執務室であり、かつてボヘミア王と神聖ローマ皇帝の座でした。この城はプラハで最も訪問された観光名所の一つで、年間180万人以上の訪問者を集めています。ボヘミア王冠宝石は城内の隠し部屋に保管されています。ギネスブックによると、プラハ城は世界最大の古代城で、約70,000平方メートルの面積を占めています。城にはゴシック様式の聖ヴィート大聖堂、ロマネスク様式の聖ジョージ教会、修道院、いくつかの宮殿、庭園、防衛塔が含まれます。城の現在の外観の大部分は、18世紀後半の再建の結果です。城にはチェコ王冠宝石が収蔵されており、ユネスコ世界遺産です。衛兵交代式は毎時行われ、人気のアトラクションです。',
+        historicalInfo: 'プラハ城は880年頃、プシェミスル朝のボジヴォイ公によって建設されました。何世紀にもわたって何度も再建され拡張されました。この城は常にチェコ統治者の権力の座であり、現在はチェコ共和国大統領の公式住居です。',
+        yearBuilt: '西暦880年',
+        architect: '数世紀にわたるさまざまな建築家'
+      },
+      zh: {
+        name: '布拉格城堡',
+        narration: '欢迎来到布拉格城堡,世界上最大的古代城堡之一。这座宏伟的建筑群一千多年来一直是国王、皇帝和总统的权力所在地。',
+        description: '世界上最大的古代城堡建筑群',
+        detailedDescription: '布拉格城堡是捷克布拉格的一座城堡建筑群,建于9世纪。它是捷克共和国总统的官方办公室,曾经是波希米亚国王和神圣罗马帝国皇帝的所在地。该城堡是布拉格访问量最大的旅游景点之一,每年吸引超过180万游客。波希米亚王冠珠宝保存在城堡内的一个隐藏房间中。根据吉尼斯世界纪录,布拉格城堡是世界上最大的古代城堡,占地面积近70,000平方米。城堡包括哥特式圣维特大教堂、罗马式圣乔治教堂、修道院以及几座宫殿、花园和防御塔。城堡目前的外观大部分是18世纪后半叶重建的结果。城堡收藏着捷克王冠珠宝,是联合国教科文组织世界遗产。卫兵换岗仪式每小时举行一次,是一个受欢迎的景点。',
+        historicalInfo: '布拉格城堡大约在880年由普热米斯尔王朝的博日沃伊王子建立。几个世纪以来,它被多次重建和扩建。这座城堡一直是捷克统治者的权力所在地,现在是捷克共和国总统的官方住所。',
+        yearBuilt: '公元880年',
+        architect: '几个世纪以来的各种建筑师'
+      }
+    }
+  },
+  {
+    id: 'old_town_square',
+    cityId: 'prague',
+    name: 'Old Town Square',
+    lat: 50.0875,
+    lng: 14.4208,
+    radius: 90,
+    narration: 'Welcome to Old Town Square, the historic heart of Prague. This beautiful square features the famous Astronomical Clock and stunning architecture spanning multiple centuries.',
+    description: 'Historic square with the famous Astronomical Clock',
+    category: 'Historic Square',
+    detailedDescription: 'The Old Town Square is a historic square in the Old Town quarter of Prague, the capital of the Czech Republic. It is located between Wenceslas Square and Charles Bridge. The square features various architectural styles including Gothic, Renaissance, Baroque, and Rococo. The centerpiece is the Church of Our Lady before Týn with its distinctive twin towers. The square also features the Old Town Hall with the famous Prague Astronomical Clock, which dates from 1410. This clock is one of the oldest and most elaborate astronomical clocks in the world. Every hour, crowds gather to watch the clock\'s hourly show of moving Apostle figures and other sculptures. The square has been a witness to many important events in Czech history. A memorial in the pavement marks the spot where 27 Czech nobles were executed in 1621 following the Battle of White Mountain. Today, Old Town Square is a vibrant gathering place with outdoor cafes, seasonal markets, and street performers.',
+    photos: [
+      'https://images.unsplash.com/photo-9Q1t_docbak?w=800',
+      'https://images.unsplash.com/photo-ZK_KZnT5z9U?w=800',
+      'https://images.unsplash.com/photo-abJXt7t6b58?w=800',
+      'https://images.unsplash.com/photo-BWtyq5fn6Ng?w=800',
+      'https://images.unsplash.com/photo-V1sbDrtBzMw?w=800',
+      'https://images.unsplash.com/photo-u5h_u-IWQ9s?w=800',
+      'https://images.unsplash.com/photo-9-vzYxDbWv4?w=800'
+    ],
+    historicalInfo: 'The Old Town Square has been Prague\'s principal public square since the 10th century. It has witnessed numerous historical events including demonstrations, celebrations, and public executions. The square became the center of Prague\'s economic and political life during the Middle Ages.',
+    yearBuilt: '10th century',
+    architect: 'Various architects over centuries',
+    translations: {
+      en: {
+        name: 'Old Town Square',
+        narration: 'Welcome to Old Town Square, the historic heart of Prague. This beautiful square features the famous Astronomical Clock and stunning architecture spanning multiple centuries.',
+        description: 'Historic square with the famous Astronomical Clock',
+        detailedDescription: 'The Old Town Square is a historic square in the Old Town quarter of Prague, the capital of the Czech Republic. It is located between Wenceslas Square and Charles Bridge. The square features various architectural styles including Gothic, Renaissance, Baroque, and Rococo. The centerpiece is the Church of Our Lady before Týn with its distinctive twin towers. The square also features the Old Town Hall with the famous Prague Astronomical Clock, which dates from 1410. This clock is one of the oldest and most elaborate astronomical clocks in the world. Every hour, crowds gather to watch the clock\'s hourly show of moving Apostle figures and other sculptures. The square has been a witness to many important events in Czech history. A memorial in the pavement marks the spot where 27 Czech nobles were executed in 1621 following the Battle of White Mountain. Today, Old Town Square is a vibrant gathering place with outdoor cafes, seasonal markets, and street performers.',
+        historicalInfo: 'The Old Town Square has been Prague\'s principal public square since the 10th century. It has witnessed numerous historical events including demonstrations, celebrations, and public executions. The square became the center of Prague\'s economic and political life during the Middle Ages.',
+        yearBuilt: '10th century',
+        architect: 'Various architects over centuries'
+      },
+      ko: {
+        name: '구시가지 광장',
+        narration: '프라하의 역사적 중심인 구시가지 광장에 오신 것을 환영합니다. 이 아름다운 광장에는 유명한 천문 시계와 여러 세기에 걸친 멋진 건축물이 있습니다.',
+        description: '유명한 천문 시계가 있는 역사적인 광장',
+        detailedDescription: '구시가지 광장은 체코 공화국의 수도 프라하의 구시가지 지구에 있는 역사적인 광장입니다. 바츨라프 광장과 카를교 사이에 위치합니다. 광장에는 고딕, 르네상스, 바로크, 로코코 등 다양한 건축 양식이 있습니다. 중심에는 독특한 쌍둥이 탑이 있는 틴 성모 교회가 있습니다. 광장에는 또한 1410년부터 있는 유명한 프라하 천문 시계가 있는 구시청사가 있습니다. 이 시계는 세계에서 가장 오래되고 정교한 천문 시계 중 하나입니다. 매시간 군중이 모여 움직이는 사도 인형과 기타 조각품의 시계 쇼를 봅니다. 광장은 체코 역사의 많은 중요한 사건의 증인이었습니다. 포장도로의 기념비는 백산 전투 이후 1621년에 27명의 체코 귀족이 처형된 장소를 표시합니다. 오늘날 구시가지 광장은 야외 카페, 계절 시장, 거리 공연자들이 있는 활기찬 모임 장소입니다.',
+        historicalInfo: '구시가지 광장은 10세기부터 프라하의 주요 공공 광장이었습니다. 시위, 축하 행사, 공개 처형을 포함한 수많은 역사적 사건을 목격했습니다. 광장은 중세 시대에 프라하의 경제 및 정치 생활의 중심이 되었습니다.',
+        yearBuilt: '10세기',
+        architect: '여러 세기에 걸친 다양한 건축가'
+      },
+      ja: {
+        name: '旧市街広場',
+        narration: 'プラハの歴史的中心である旧市街広場へようこそ。この美しい広場には有名な天文時計と数世紀にわたる素晴らしい建築があります。',
+        description: '有名な天文時計がある歴史的な広場',
+        detailedDescription: '旧市街広場は、チェコ共和国の首都プラハの旧市街地区にある歴史的な広場です。ヴァーツラフ広場とカレル橋の間に位置しています。広場にはゴシック、ルネサンス、バロック、ロココなど、さまざまな建築様式があります。中心には、特徴的な双塔を持つティーン教会があります。広場にはまた、1410年からある有名なプラハの天文時計がある旧市庁舎があります。この時計は世界で最も古く精巧な天文時計の一つです。毎時、群衆が集まって動く使徒の人形やその他の彫刻の時計のショーを見ます。広場はチェコの歴史の多くの重要な出来事の証人でした。舗装の記念碑は、白山の戦いの後の1621年に27人のチェコ貴族が処刑された場所を示しています。今日、旧市街広場は屋外カフェ、季節の市場、ストリートパフォーマーがいる活気のある集まりの場所です。',
+        historicalInfo: '旧市街広場は10世紀からプラハの主要な公共広場でした。デモ、祝賀、公開処刑を含む多くの歴史的出来事を目撃しました。広場は中世にプラハの経済的および政治的生活の中心になりました。',
+        yearBuilt: '10世紀',
+        architect: '数世紀にわたるさまざまな建築家'
+      },
+      zh: {
+        name: '老城广场',
+        narration: '欢迎来到老城广场,布拉格的历史中心。这个美丽的广场拥有著名的天文钟和横跨数个世纪的令人惊叹的建筑。',
+        description: '拥有著名天文钟的历史广场',
+        detailedDescription: '老城广场是捷克共和国首都布拉格老城区的一个历史广场。它位于瓦茨拉夫广场和查理大桥之间。广场展现了包括哥特式、文艺复兴、巴洛克和洛可可在内的各种建筑风格。中心是提恩教堂,其标志性的双塔。广场还有老市政厅,拥有著名的布拉格天文钟,可追溯到1410年。这座钟是世界上最古老和最精致的天文钟之一。每个小时,人群聚集观看钟表的移动使徒人物和其他雕塑的表演。广场见证了捷克历史上的许多重要事件。人行道上的纪念碑标志着白山战役后1621年27名捷克贵族被处决的地点。今天,老城广场是一个充满活力的聚会场所,有户外咖啡馆、季节性市场和街头表演者。',
+        historicalInfo: '老城广场自10世纪以来一直是布拉格的主要公共广场。它见证了包括示威、庆祝活动和公开处决在内的众多历史事件。广场在中世纪成为布拉格经济和政治生活的中心。',
+        yearBuilt: '10世纪',
+        architect: '几个世纪以来的各种建筑师'
+      }
+    }
+  },
+  // Budapest landmarks
+  {
+    id: 'parliament_building',
+    cityId: 'budapest',
+    name: 'Hungarian Parliament Building',
+    lat: 47.5071,
+    lng: 19.0455,
+    radius: 100,
+    narration: 'Welcome to the Hungarian Parliament Building, one of Europe\'s oldest legislative buildings and a stunning example of Neo-Gothic architecture on the banks of the Danube River.',
+    description: 'Magnificent Neo-Gothic parliament building on the Danube',
+    category: 'Government Building',
+    detailedDescription: 'The Hungarian Parliament Building, also known as the Parliament of Budapest, is the seat of the National Assembly of Hungary, a notable landmark of Hungary, and a popular tourist destination in Budapest. It is situated on Kossuth Square in the Pest side of the city, on the eastern bank of the Danube. It is currently the largest building in Hungary and the tallest building in Budapest. The building is in the Gothic Revival style and has a symmetrical facade and a central dome. It is 268 meters long and 123 meters wide, and has 691 rooms. The building was designed and built in the Gothic Revival style by the Hungarian architect Imre Steindl and was completed in 1904. The dome, along with several other parts of the building, was designed to be reminiscent of the British Houses of Parliament. The Hungarian Parliament Building houses the Hungarian Crown Jewels, including the Holy Crown of Hungary.',
+    photos: [
+      'https://images.unsplash.com/photo--9Ap357MJ8s?w=800',
+      'https://images.unsplash.com/photo-Dzv_m1LhcHc?w=800',
+      'https://images.unsplash.com/photo-SmMJx_BCtro?w=800',
+      'https://images.unsplash.com/photo-UusJneSQVL4?w=800',
+      'https://images.unsplash.com/photo-cKwxsSgbuX4?w=800',
+      'https://images.unsplash.com/photo-ciNvnoptI20?w=800',
+      'https://images.unsplash.com/photo-KFjZByheKT4?w=800'
+    ],
+    historicalInfo: 'The Hungarian Parliament Building was constructed from 1885 to 1904 during the time of the Austro-Hungarian Empire. The design was inspired by the Palace of Westminster in London and symbolized the Hungarian nation\'s aspirations for independence and self-governance.',
+    yearBuilt: '1885-1904',
+    architect: 'Imre Steindl',
+    translations: {
+      en: {
+        name: 'Hungarian Parliament Building',
+        narration: 'Welcome to the Hungarian Parliament Building, one of Europe\'s oldest legislative buildings and a stunning example of Neo-Gothic architecture on the banks of the Danube River.',
+        description: 'Magnificent Neo-Gothic parliament building on the Danube',
+        detailedDescription: 'The Hungarian Parliament Building, also known as the Parliament of Budapest, is the seat of the National Assembly of Hungary, a notable landmark of Hungary, and a popular tourist destination in Budapest. It is situated on Kossuth Square in the Pest side of the city, on the eastern bank of the Danube. It is currently the largest building in Hungary and the tallest building in Budapest. The building is in the Gothic Revival style and has a symmetrical facade and a central dome. It is 268 meters long and 123 meters wide, and has 691 rooms. The building was designed and built in the Gothic Revival style by the Hungarian architect Imre Steindl and was completed in 1904. The dome, along with several other parts of the building, was designed to be reminiscent of the British Houses of Parliament. The Hungarian Parliament Building houses the Hungarian Crown Jewels, including the Holy Crown of Hungary.',
+        historicalInfo: 'The Hungarian Parliament Building was constructed from 1885 to 1904 during the time of the Austro-Hungarian Empire. The design was inspired by the Palace of Westminster in London and symbolized the Hungarian nation\'s aspirations for independence and self-governance.',
+        yearBuilt: '1885-1904',
+        architect: 'Imre Steindl'
+      },
+      ko: {
+        name: '헝가리 국회의사당',
+        narration: '유럽에서 가장 오래된 입법 건물 중 하나이자 도나우 강변의 멋진 네오 고딕 건축의 예인 헝가리 국회의사당에 오신 것을 환영합니다.',
+        description: '도나우 강변의 장엄한 네오 고딕 국회의사당',
+        detailedDescription: '헝가리 국회의사당은 부다페스트 국회의사당으로도 알려져 있으며, 헝가리 국민의회의 소재지이자 헝가리의 주요 랜드마크이며 부다페스트의 인기 있는 관광지입니다. 도시의 페스트 쪽, 도나우 강의 동쪽 강둑에 있는 코슈트 광장에 위치하고 있습니다. 현재 헝가리에서 가장 큰 건물이자 부다페스트에서 가장 높은 건물입니다. 건물은 고딕 부흥 양식이며 대칭적인 파사드와 중앙 돔이 있습니다. 길이 268미터, 폭 123미터이며 691개의 방이 있습니다. 건물은 헝가리 건축가 임레 슈타인들에 의해 고딕 부흥 양식으로 설계 및 건축되었으며 1904년에 완공되었습니다. 돔은 건물의 다른 여러 부분과 함께 영국 국회의사당을 연상시키도록 설계되었습니다. 헝가리 국회의사당에는 헝가리의 성 왕관을 포함한 헝가리 왕관 보석이 보관되어 있습니다.',
+        historicalInfo: '헝가리 국회의사당은 오스트리아-헝가리 제국 시대인 1885년부터 1904년까지 건설되었습니다. 디자인은 런던의 웨스트민스터 궁전에서 영감을 받았으며 독립과 자치에 대한 헝가리 국가의 열망을 상징했습니다.',
+        yearBuilt: '1885-1904년',
+        architect: '임레 슈타인들'
+      },
+      ja: {
+        name: 'ハンガリー国会議事堂',
+        narration: 'ヨーロッパで最も古い立法建築の一つであり、ドナウ川沿いの見事なネオゴシック建築の例であるハンガリー国会議事堂へようこそ。',
+        description: 'ドナウ川沿いの壮大なネオゴシック国会議事堂',
+        detailedDescription: 'ハンガリー国会議事堂は、ブダペスト国会議事堂としても知られ、ハンガリー国民議会の議席であり、ハンガリーの注目すべきランドマークであり、ブダペストの人気の観光地です。市のペスト側、ドナウ川の東岸にあるコシュート広場に位置しています。現在、ハンガリーで最大の建物であり、ブダペストで最も高い建物です。建物はゴシック・リバイバル様式で、対称的なファサードと中央のドームがあります。長さ268メートル、幅123メートルで、691の部屋があります。建物はハンガリーの建築家イムレ・シュタインドルによってゴシック・リバイバル様式で設計・建設され、1904年に完成しました。ドームは建物の他のいくつかの部分とともに、英国国会議事堂を思い起こさせるように設計されました。ハンガリー国会議事堂には、ハンガリーの聖なる王冠を含むハンガリー王冠宝石が収蔵されています。',
+        historicalInfo: 'ハンガリー国会議事堂は、オーストリア・ハンガリー帝国時代の1885年から1904年にかけて建設されました。設計はロンドンのウェストミンスター宮殿に触発され、独立と自治に対するハンガリー国家の願望を象徴していました。',
+        yearBuilt: '1885-1904年',
+        architect: 'イムレ・シュタインドル'
+      },
+      zh: {
+        name: '匈牙利国会大厦',
+        narration: '欢迎来到匈牙利国会大厦,欧洲最古老的立法建筑之一,也是多瑙河畔新哥特式建筑的惊人典范。',
+        description: '多瑙河畔壮丽的新哥特式国会大厦',
+        detailedDescription: '匈牙利国会大厦,也被称为布达佩斯国会大厦,是匈牙利国民议会的所在地,匈牙利的著名地标,也是布达佩斯的热门旅游目的地。它位于城市佩斯一侧多瑙河东岸的科苏特广场。它目前是匈牙利最大的建筑,也是布达佩斯最高的建筑。该建筑采用哥特式复兴风格,具有对称的立面和中央圆顶。它长268米,宽123米,有691个房间。该建筑由匈牙利建筑师伊姆雷·施泰因德尔设计并以哥特式复兴风格建造,并于1904年完工。圆顶以及建筑的其他几个部分被设计成让人联想起英国国会大厦。匈牙利国会大厦收藏着匈牙利王冠珠宝,包括匈牙利神圣王冠。',
+        historicalInfo: '匈牙利国会大厦建于1885年至1904年奥匈帝国时期。设计灵感来自伦敦的威斯敏斯特宫,象征着匈牙利民族对独立和自治的渴望。',
+        yearBuilt: '1885-1904年',
+        architect: '伊姆雷·施泰因德尔'
+      }
+    }
+  },
+  {
+    id: 'chain_bridge',
+    cityId: 'budapest',
+    name: 'Chain Bridge',
+    lat: 47.4979,
+    lng: 19.0435,
+    radius: 70,
+    narration: 'Welcome to the Chain Bridge, the first permanent bridge across the Danube in Budapest. This iconic suspension bridge connects Buda and Pest, symbolizing the unity of the city.',
+    description: 'Historic suspension bridge connecting Buda and Pest',
+    category: 'Historic Bridge',
+    detailedDescription: 'The Széchenyi Chain Bridge is a suspension bridge that spans the River Danube between Buda and Pest, the western and eastern sides of Budapest, the capital of Hungary. Designed by English engineer William Tierney Clark and built by Scottish engineer Adam Clark, it was the first permanent bridge across the Danube in Budapest and was opened in 1849. The bridge is named after Count István Széchenyi, a major supporter of its construction. At the time of its construction, it was regarded as one of the modern world\'s engineering wonders. The bridge has a total length of 375 meters and a width of 14.8 meters. The two main supporting towers are 48 meters high and are built of stone. The bridge is decorated with stone lion sculptures at both ends. The Chain Bridge was destroyed during World War II and was rebuilt and reopened in 1949. It has become one of the most famous landmarks of Budapest.',
+    photos: [
+      'https://images.unsplash.com/photo-UM-aLTugEDQ?w=800',
+      'https://images.unsplash.com/photo-lOwmW55TgG4?w=800',
+      'https://images.unsplash.com/photo-7gTRRSPCCnw?w=800',
+      'https://images.unsplash.com/photo-sLpK9hi_M00?w=800',
+      'https://images.unsplash.com/photo-HyIIpyrLZXI?w=800',
+      'https://images.unsplash.com/photo-0Z13KwhFLQk?w=800',
+      'https://images.unsplash.com/photo-8zTLIkXmkKA?w=800'
+    ],
+    historicalInfo: 'The Chain Bridge was built between 1839 and 1849, designed by William Tierney Clark and constructed by Adam Clark. It was the first permanent bridge to connect Buda and Pest. The bridge was destroyed during World War II and was rebuilt for its 100th anniversary in 1949.',
+    yearBuilt: '1839-1849',
+    architect: 'William Tierney Clark (design), Adam Clark (construction)',
+    translations: {
+      en: {
+        name: 'Chain Bridge',
+        narration: 'Welcome to the Chain Bridge, the first permanent bridge across the Danube in Budapest. This iconic suspension bridge connects Buda and Pest, symbolizing the unity of the city.',
+        description: 'Historic suspension bridge connecting Buda and Pest',
+        detailedDescription: 'The Széchenyi Chain Bridge is a suspension bridge that spans the River Danube between Buda and Pest, the western and eastern sides of Budapest, the capital of Hungary. Designed by English engineer William Tierney Clark and built by Scottish engineer Adam Clark, it was the first permanent bridge across the Danube in Budapest and was opened in 1849. The bridge is named after Count István Széchenyi, a major supporter of its construction. At the time of its construction, it was regarded as one of the modern world\'s engineering wonders. The bridge has a total length of 375 meters and a width of 14.8 meters. The two main supporting towers are 48 meters high and are built of stone. The bridge is decorated with stone lion sculptures at both ends. The Chain Bridge was destroyed during World War II and was rebuilt and reopened in 1949. It has become one of the most famous landmarks of Budapest.',
+        historicalInfo: 'The Chain Bridge was built between 1839 and 1849, designed by William Tierney Clark and constructed by Adam Clark. It was the first permanent bridge to connect Buda and Pest. The bridge was destroyed during World War II and was rebuilt for its 100th anniversary in 1949.',
+        yearBuilt: '1839-1849',
+        architect: 'William Tierney Clark (design), Adam Clark (construction)'
+      },
+      ko: {
+        name: '세체니 다리',
+        narration: '부다페스트에서 도나우 강을 가로지르는 최초의 영구 다리인 세체니 다리에 오신 것을 환영합니다. 이 상징적인 현수교는 부다와 페스트를 연결하여 도시의 통합을 상징합니다.',
+        description: '부다와 페스트를 연결하는 역사적인 현수교',
+        detailedDescription: '세체니 다리는 헝가리 수도 부다페스트의 서쪽과 동쪽인 부다와 페스트 사이의 도나우 강을 가로지르는 현수교입니다. 영국 엔지니어 윌리엄 티어니 클라크가 설계하고 스코틀랜드 엔지니어 애덤 클라크가 건설했으며, 부다페스트에서 도나우 강을 가로지르는 최초의 영구 다리로 1849년에 개통되었습니다. 다리는 건설의 주요 후원자인 이슈트반 세체니 백작의 이름을 따서 명명되었습니다. 건설 당시 현대 세계의 공학적 경이로움 중 하나로 여겨졌습니다. 다리의 총 길이는 375미터이고 폭은 14.8미터입니다. 두 개의 주요 지지 탑은 높이가 48미터이며 돌로 만들어졌습니다. 다리는 양쪽 끝에 돌 사자 조각으로 장식되어 있습니다. 세체니 다리는 제2차 세계 대전 중에 파괴되었으며 1949년에 재건되어 재개통되었습니다. 부다페스트의 가장 유명한 랜드마크 중 하나가 되었습니다.',
+        historicalInfo: '세체니 다리는 1839년부터 1849년 사이에 건설되었으며, 윌리엄 티어니 클라크가 설계하고 애덤 클라크가 건설했습니다. 부다와 페스트를 연결하는 최초의 영구 다리였습니다. 다리는 제2차 세계 대전 중에 파괴되었으며 1949년 100주년을 기념하여 재건되었습니다.',
+        yearBuilt: '1839-1849년',
+        architect: '윌리엄 티어니 클라크 (설계), 애덤 클라크 (건설)'
+      },
+      ja: {
+        name: 'セーチェーニ鎖橋',
+        narration: 'ブダペストでドナウ川を渡る最初の恒久的な橋であるセーチェーニ鎖橋へようこそ。この象徴的な吊り橋はブダとペストを結び、都市の統一を象徴しています。',
+        description: 'ブダとペストを結ぶ歴史的な吊り橋',
+        detailedDescription: 'セーチェーニ鎖橋は、ハンガリーの首都ブダペストの西側と東側であるブダとペストの間のドナウ川にかかる吊り橋です。イギリスのエンジニア、ウィリアム・ティアニー・クラークが設計し、スコットランドのエンジニア、アダム・クラークが建設しました。ブダペストでドナウ川を渡る最初の恒久的な橋であり、1849年に開通しました。橋は建設の主要な支援者であるイシュトヴァーン・セーチェーニ伯爵にちなんで名付けられました。建設当時、近代世界の工学的驚異の一つと見なされていました。橋の全長は375メートル、幅は14.8メートルです。2つの主要な支持塔は高さ48メートルで、石で造られています。橋は両端に石のライオン彫刻で飾られています。セーチェーニ鎖橋は第二次世界大戦中に破壊され、1949年に再建されて再開されました。ブダペストの最も有名なランドマークの一つになっています。',
+        historicalInfo: 'セーチェーニ鎖橋は1839年から1849年の間に建設され、ウィリアム・ティアニー・クラークが設計し、アダム・クラークが建設しました。ブダとペストを結ぶ最初の恒久的な橋でした。橋は第二次世界大戦中に破壊され、1949年の100周年記念に再建されました。',
+        yearBuilt: '1839-1849年',
+        architect: 'ウィリアム・ティアニー・クラーク (設計)、アダム・クラーク (建設)'
+      },
+      zh: {
+        name: '塞切尼链桥',
+        narration: '欢迎来到塞切尼链桥,布达佩斯第一座横跨多瑙河的永久性桥梁。这座标志性的悬索桥连接布达和佩斯,象征着城市的统一。',
+        description: '连接布达和佩斯的历史悬索桥',
+        detailedDescription: '塞切尼链桥是横跨多瑙河、连接匈牙利首都布达佩斯西侧和东侧布达和佩斯的悬索桥。由英国工程师威廉·蒂尔尼·克拉克设计,苏格兰工程师亚当·克拉克建造,它是布达佩斯横跨多瑙河的第一座永久性桥梁,于1849年开通。该桥以其建设的主要支持者伊什特万·塞切尼伯爵的名字命名。在建造时,它被认为是现代世界的工程奇迹之一。大桥总长375米,宽14.8米。两座主要支撑塔高48米,由石头建造。大桥两端装饰有石狮雕塑。塞切尼链桥在第二次世界大战期间被摧毁,并于1949年重建和重新开放。它已成为布达佩斯最著名的地标之一。',
+        historicalInfo: '塞切尼链桥建于1839年至1849年之间,由威廉·蒂尔尼·克拉克设计,亚当·克拉克建造。它是连接布达和佩斯的第一座永久性桥梁。该桥在第二次世界大战期间被摧毁,并于1949年为其100周年纪念而重建。',
+        yearBuilt: '1839-1849年',
+        architect: '威廉·蒂尔尼·克拉克 (设计), 亚当·克拉克 (建造)'
+      }
+    }
+  },
+  // Warsaw landmarks
+  {
+    id: 'warsaw_old_town',
+    cityId: 'warsaw',
+    name: 'Warsaw Old Town',
+    lat: 52.2495,
+    lng: 21.0122,
+    radius: 100,
+    narration: 'Welcome to Warsaw\'s Old Town, a UNESCO World Heritage Site that was meticulously reconstructed after World War II. This historic district showcases the resilience and spirit of the Polish people.',
+    description: 'UNESCO World Heritage Site, meticulously reconstructed after WWII',
+    category: 'Historic District',
+    detailedDescription: 'Warsaw\'s Old Town is the oldest part of the capital city. It was established in the 13th century and was completely destroyed during the Warsaw Uprising in 1944. After World War II, the Old Town was meticulously reconstructed according to pre-war photographs and paintings, particularly those by 18th-century vedutist Bernardo Bellotto. The reconstruction was so thorough and authentic that UNESCO listed Warsaw\'s Old Town as a World Heritage Site in 1980, citing it as an outstanding example of a near-total reconstruction of a span of history covering the 13th to 20th century. The Old Town is centered on the Old Town Market Place (Rynek Starego Miasta), which teems with restaurants, cafés, and shops. Surrounding streets feature medieval architecture, the 17th-century Royal Castle, and numerous historical monuments. The area is a popular tourist destination and a symbol of Polish national identity and pride.',
+    photos: [
+      'https://images.unsplash.com/photo-sgr_7h6o3J8?w=800',
+      'https://images.unsplash.com/photo-oOHHxQ65dFE?w=800',
+      'https://images.unsplash.com/photo-p6gxHYb43v0?w=800',
+      'https://images.unsplash.com/photo-HSFmeiIVljA?w=800',
+      'https://images.unsplash.com/photo-VKE8Y5xY11k?w=800',
+      'https://images.unsplash.com/photo-HqQIArmZJ2w?w=800',
+      'https://images.unsplash.com/photo-6etLdb_G99w?w=800'
+    ],
+    historicalInfo: 'Warsaw\'s Old Town was founded in the 13th century and grew over the centuries. It was completely destroyed during the Warsaw Uprising in 1944. The meticulous reconstruction after WWII, based on historical documents and paintings, is considered one of the greatest achievements of post-war reconstruction.',
+    yearBuilt: '13th century (original), 1945-1966 (reconstruction)',
+    architect: 'Various architects (original), Post-war reconstruction teams',
+    translations: {
+      en: {
+        name: 'Warsaw Old Town',
+        narration: 'Welcome to Warsaw\'s Old Town, a UNESCO World Heritage Site that was meticulously reconstructed after World War II. This historic district showcases the resilience and spirit of the Polish people.',
+        description: 'UNESCO World Heritage Site, meticulously reconstructed after WWII',
+        detailedDescription: 'Warsaw\'s Old Town is the oldest part of the capital city. It was established in the 13th century and was completely destroyed during the Warsaw Uprising in 1944. After World War II, the Old Town was meticulously reconstructed according to pre-war photographs and paintings, particularly those by 18th-century vedutist Bernardo Bellotto. The reconstruction was so thorough and authentic that UNESCO listed Warsaw\'s Old Town as a World Heritage Site in 1980, citing it as an outstanding example of a near-total reconstruction of a span of history covering the 13th to 20th century. The Old Town is centered on the Old Town Market Place (Rynek Starego Miasta), which teems with restaurants, cafés, and shops. Surrounding streets feature medieval architecture, the 17th-century Royal Castle, and numerous historical monuments. The area is a popular tourist destination and a symbol of Polish national identity and pride.',
+        historicalInfo: 'Warsaw\'s Old Town was founded in the 13th century and grew over the centuries. It was completely destroyed during the Warsaw Uprising in 1944. The meticulous reconstruction after WWII, based on historical documents and paintings, is considered one of the greatest achievements of post-war reconstruction.',
+        yearBuilt: '13th century (original), 1945-1966 (reconstruction)',
+        architect: 'Various architects (original), Post-war reconstruction teams'
+      },
+      ko: {
+        name: '바르샤바 구시가지',
+        narration: '제2차 세계 대전 후 세심하게 재건된 유네스코 세계문화유산인 바르샤바 구시가지에 오신 것을 환영합니다. 이 역사적인 지구는 폴란드 국민의 회복력과 정신을 보여줍니다.',
+        description: '유네스코 세계문화유산, 제2차 세계 대전 후 세심하게 재건',
+        detailedDescription: '바르샤바 구시가지는 수도에서 가장 오래된 지역입니다. 13세기에 설립되었으며 1944년 바르샤바 봉기 중에 완전히 파괴되었습니다. 제2차 세계 대전 후 구시가지는 전쟁 전 사진과 그림, 특히 18세기 베두티스트 베르나르도 벨로토의 작품에 따라 세심하게 재건되었습니다. 재건이 너무나 철저하고 진정성 있게 이루어져 유네스코는 1980년 바르샤바 구시가지를 세계문화유산으로 지정했으며, 13세기부터 20세기까지의 역사를 거의 완전히 재건한 뛰어난 사례로 인용했습니다. 구시가지는 레스토랑, 카페, 상점으로 가득한 구시가지 시장 광장(리넥 스타레고 미아스타)을 중심으로 합니다. 주변 거리에는 중세 건축물, 17세기 왕궁, 수많은 역사적 기념물이 있습니다. 이 지역은 인기 있는 관광지이자 폴란드 국가 정체성과 자부심의 상징입니다.',
+        historicalInfo: '바르샤바 구시가지는 13세기에 설립되어 수세기에 걸쳐 성장했습니다. 1944년 바르샤바 봉기 중에 완전히 파괴되었습니다. 역사적 문서와 그림을 기반으로 한 제2차 세계 대전 후의 세심한 재건은 전후 재건의 가장 위대한 업적 중 하나로 여겨집니다.',
+        yearBuilt: '13세기 (원래), 1945-1966년 (재건)',
+        architect: '다양한 건축가 (원래), 전후 재건 팀'
+      },
+      ja: {
+        name: 'ワルシャワ旧市街',
+        narration: '第二次世界大戦後に細心の注意を払って再建されたユネスコ世界遺産、ワルシャワ旧市街へようこそ。この歴史的地区はポーランド人の回復力と精神を示しています。',
+        description: 'ユネスコ世界遺産、第二次世界大戦後に細心の注意を払って再建',
+        detailedDescription: 'ワルシャワ旧市街は首都の最も古い部分です。13世紀に設立され、1944年のワルシャワ蜂起中に完全に破壊されました。第二次世界大戦後、旧市街は戦前の写真と絵画、特に18世紀のヴェドゥティスタ、ベルナルド・ベロットの作品に従って細心の注意を払って再建されました。再建が非常に徹底的で本格的であったため、ユネスコは1980年にワルシャワ旧市街を世界遺産に登録し、13世紀から20世紀にかけての歴史のほぼ完全な再建の優れた例として引用しました。旧市街は、レストラン、カフェ、ショップで賑わう旧市街市場広場(リネク・スタレゴ・ミアスタ)を中心としています。周辺の通りには中世の建築、17世紀の王宮、多数の歴史的記念碑があります。この地域は人気の観光地であり、ポーランドの国家的アイデンティティと誇りの象徴です。',
+        historicalInfo: 'ワルシャワ旧市街は13世紀に設立され、何世紀にもわたって成長しました。1944年のワルシャワ蜂起中に完全に破壊されました。歴史的文書と絵画に基づく第二次世界大戦後の細心の再建は、戦後再建の最大の業績の一つと見なされています。',
+        yearBuilt: '13世紀 (オリジナル)、1945-1966年 (再建)',
+        architect: 'さまざまな建築家 (オリジナル)、戦後再建チーム'
+      },
+      zh: {
+        name: '华沙老城',
+        narration: '欢迎来到华沙老城,一个在第二次世界大战后精心重建的联合国教科文组织世界遗产。这个历史街区展示了波兰人民的韧性和精神。',
+        description: '联合国教科文组织世界遗产,二战后精心重建',
+        detailedDescription: '华沙老城是首都最古老的部分。它建立于13世纪,在1944年华沙起义期间被完全摧毁。第二次世界大战后,老城根据战前的照片和绘画,特别是18世纪风景画家贝尔纳多·贝洛托的作品,被精心重建。重建工作如此彻底和真实,以至于联合国教科文组织于1980年将华沙老城列为世界遗产,称其为13世纪至20世纪历史跨度近乎完全重建的杰出范例。老城以老城市场广场(Rynek Starego Miasta)为中心,那里到处都是餐馆、咖啡馆和商店。周围的街道有中世纪建筑、17世纪的皇家城堡和众多历史纪念碑。该地区是热门旅游目的地,也是波兰民族认同和自豪感的象征。',
+        historicalInfo: '华沙老城建立于13世纪,并在几个世纪中成长。它在1944年华沙起义期间被完全摧毁。基于历史文献和绘画的二战后精心重建被认为是战后重建的最伟大成就之一。',
+        yearBuilt: '13世纪 (原建筑), 1945-1966年 (重建)',
+        architect: '各种建筑师 (原建筑), 战后重建团队'
+      }
+    }
+  },
+  {
+    id: 'palace_of_culture',
+    cityId: 'warsaw',
+    name: 'Palace of Culture and Science',
+    lat: 52.2319,
+    lng: 21.0061,
+    radius: 80,
+    narration: 'Welcome to the Palace of Culture and Science, Warsaw\'s most iconic skyscraper. This towering structure is a symbol of the city and offers panoramic views from its observation deck.',
+    description: 'Warsaw\'s iconic skyscraper and cultural center',
+    category: 'Cultural Building',
+    detailedDescription: 'The Palace of Culture and Science is a notable high-rise building in central Warsaw, Poland. With a total height of 237 meters, it is the second tallest building in both Warsaw and Poland, as well as one of the tallest in the European Union. Constructed in 1955, it was originally known as the Joseph Stalin Palace of Culture and Science, but in the process of de-Stalinization the dedication to Stalin was revoked. The building was a gift from the Soviet Union to the people of Poland and was erected in three years by 3,500 Soviet workers. The building is home to four theaters, a multiplex cinema, two museums, offices, bookshops, a large congress hall for up to 3,000 people, an accredited university, and the Polish Academy of Sciences. The 30th floor features an observation terrace from which visitors can see Warsaw\'s cityscape. The Palace is the venue for many events and exhibitions and has become one of Warsaw\'s most recognizable landmarks.',
+    photos: [
+      'https://images.unsplash.com/photo-ZY6odPvaWo0?w=800',
+      'https://images.unsplash.com/photo-zpJakMEh0AQ?w=800',
+      'https://images.unsplash.com/photo-Vh8OGHV5_o8?w=800',
+      'https://images.unsplash.com/photo-KWcQ6_dk_OM?w=800',
+      'https://images.unsplash.com/photo-sgr_7h6o3J8?w=800',
+      'https://images.unsplash.com/photo-oOHHxQ65dFE?w=800',
+      'https://images.unsplash.com/photo-p6gxHYb43v0?w=800'
+    ],
+    historicalInfo: 'The Palace of Culture and Science was built between 1952 and 1955 as a gift from Joseph Stalin to the Polish people. It was designed by Soviet architect Lev Rudnev in the Stalinist neoclassical style. The building has become a controversial symbol due to its association with Soviet dominance, but it remains an important cultural center.',
+    yearBuilt: '1952-1955',
+    architect: 'Lev Rudnev',
+    translations: {
+      en: {
+        name: 'Palace of Culture and Science',
+        narration: 'Welcome to the Palace of Culture and Science, Warsaw\'s most iconic skyscraper. This towering structure is a symbol of the city and offers panoramic views from its observation deck.',
+        description: 'Warsaw\'s iconic skyscraper and cultural center',
+        detailedDescription: 'The Palace of Culture and Science is a notable high-rise building in central Warsaw, Poland. With a total height of 237 meters, it is the second tallest building in both Warsaw and Poland, as well as one of the tallest in the European Union. Constructed in 1955, it was originally known as the Joseph Stalin Palace of Culture and Science, but in the process of de-Stalinization the dedication to Stalin was revoked. The building was a gift from the Soviet Union to the people of Poland and was erected in three years by 3,500 Soviet workers. The building is home to four theaters, a multiplex cinema, two museums, offices, bookshops, a large congress hall for up to 3,000 people, an accredited university, and the Polish Academy of Sciences. The 30th floor features an observation terrace from which visitors can see Warsaw\'s cityscape. The Palace is the venue for many events and exhibitions and has become one of Warsaw\'s most recognizable landmarks.',
+        historicalInfo: 'The Palace of Culture and Science was built between 1952 and 1955 as a gift from Joseph Stalin to the Polish people. It was designed by Soviet architect Lev Rudnev in the Stalinist neoclassical style. The building has become a controversial symbol due to its association with Soviet dominance, but it remains an important cultural center.',
+        yearBuilt: '1952-1955',
+        architect: 'Lev Rudnev'
+      },
+      ko: {
+        name: '문화과학궁전',
+        narration: '바르샤바에서 가장 상징적인 고층 건물인 문화과학궁전에 오신 것을 환영합니다. 이 우뚝 솟은 건축물은 도시의 상징이며 전망대에서 파노라마 경치를 제공합니다.',
+        description: '바르샤바의 상징적인 고층 건물 및 문화 센터',
+        detailedDescription: '문화과학궁전은 폴란드 바르샤바 중심부에 있는 주목할 만한 고층 건물입니다. 총 높이 237미터로 바르샤바와 폴란드 모두에서 두 번째로 높은 건물이며 유럽 연합에서도 가장 높은 건물 중 하나입니다. 1955년에 건설되었으며 원래는 요제프 스탈린 문화과학궁전으로 알려졌지만 탈스탈린화 과정에서 스탈린에 대한 헌정이 철회되었습니다. 이 건물은 소련이 폴란드 국민에게 선물한 것으로 3,500명의 소련 노동자들이 3년 만에 건립했습니다. 건물에는 4개의 극장, 멀티플렉스 영화관, 2개의 박물관, 사무실, 서점, 최대 3,000명을 수용할 수 있는 대형 회의장, 인가된 대학교, 폴란드 과학 아카데미가 있습니다. 30층에는 방문객들이 바르샤바의 도시 풍경을 볼 수 있는 전망 테라스가 있습니다. 궁전은 많은 행사와 전시회의 장소이며 바르샤바에서 가장 잘 알려진 랜드마크 중 하나가 되었습니다.',
+        historicalInfo: '문화과학궁전은 1952년부터 1955년까지 요제프 스탈린이 폴란드 국민에게 선물로 건설되었습니다. 소련 건축가 레프 루드네프가 스탈린 신고전주의 양식으로 설계했습니다. 이 건물은 소련의 지배와 관련되어 논란의 여지가 있는 상징이 되었지만 중요한 문화 센터로 남아 있습니다.',
+        yearBuilt: '1952-1955년',
+        architect: '레프 루드네프'
+      },
+      ja: {
+        name: '文化科学宮殿',
+        narration: 'ワルシャワで最も象徴的な超高層ビル、文化科学宮殿へようこそ。この聳え立つ構造物は市のシンボルであり、展望デッキからパノラマビューを提供します。',
+        description: 'ワルシャワの象徴的な超高層ビルおよび文化センター',
+        detailedDescription: '文化科学宮殿は、ポーランドのワルシャワ中心部にある注目すべき高層ビルです。総高237メートルで、ワルシャワとポーランドの両方で2番目に高い建物であり、欧州連合でも最も高い建物の一つです。1955年に建設され、当初はヨシフ・スターリン文化科学宮殿として知られていましたが、脱スターリン化の過程でスターリンへの献呈は取り消されました。この建物はソビエト連邦からポーランド国民への贈り物であり、3,500人のソビエト労働者によって3年間で建てられました。建物には4つの劇場、マルチプレックス映画館、2つの博物館、オフィス、書店、最大3,000人を収容できる大規模な会議場、認定大学、ポーランド科学アカデミーがあります。30階には展望テラスがあり、訪問者はワルシャワの街並みを見ることができます。宮殿は多くのイベントや展覧会の会場であり、ワルシャワで最も認識可能なランドマークの一つになっています。',
+        historicalInfo: '文化科学宮殿は、ヨシフ・スターリンからポーランド国民への贈り物として1952年から1955年の間に建設されました。ソビエトの建築家レフ・ルドネフによってスターリン新古典主義様式で設計されました。この建物はソビエトの支配との関連から論争の的となるシンボルになっていますが、重要な文化センターのままです。',
+        yearBuilt: '1952-1955年',
+        architect: 'レフ・ルドネフ'
+      },
+      zh: {
+        name: '文化科学宫',
+        narration: '欢迎来到文化科学宫,华沙最具标志性的摩天大楼。这座高耸的建筑是城市的象征,从其观景台可以欣赏全景。',
+        description: '华沙标志性摩天大楼和文化中心',
+        detailedDescription: '文化科学宫是波兰华沙市中心的一座著名高层建筑。总高度为237米,是华沙和波兰第二高的建筑,也是欧盟最高的建筑之一。建于1955年,最初被称为约瑟夫·斯大林文化科学宫,但在去斯大林化过程中,对斯大林的题献被撤销。该建筑是苏联送给波兰人民的礼物,由3,500名苏联工人在三年内建成。该建筑拥有四个剧院、一个多厅电影院、两个博物馆、办公室、书店、可容纳多达3,000人的大型会议厅、一所认可的大学和波兰科学院。30楼设有观景台,游客可以从那里看到华沙的城市景观。该宫殿是许多活动和展览的场所,已成为华沙最知名的地标之一。',
+        historicalInfo: '文化科学宫建于1952年至1955年之间,是约瑟夫·斯大林送给波兰人民的礼物。它由苏联建筑师列夫·鲁德涅夫以斯大林新古典主义风格设计。由于与苏联统治的联系,该建筑已成为一个有争议的象征,但它仍然是一个重要的文化中心。',
+        yearBuilt: '1952-1955年',
+        architect: '列夫·鲁德涅夫'
+      }
+    }
+  },
+  // Stockholm landmarks
+  {
+    id: 'vasa_museum',
+    cityId: 'stockholm',
+    name: 'Vasa Museum',
+    lat: 59.3280,
+    lng: 18.0916,
+    radius: 60,
+    narration: 'Welcome to the Vasa Museum, home to the only preserved 17th-century ship in the world. This magnificent warship sank on its maiden voyage in 1628 and was salvaged 333 years later.',
+    description: 'Home to the only preserved 17th-century ship in the world',
+    category: 'Maritime Museum',
+    detailedDescription: 'The Vasa Museum is Sweden\'s most visited museum and houses the world\'s only preserved 17th-century warship. The 64-gun warship Vasa sank on its maiden voyage in Stockholm harbor in 1628, less than a nautical mile into its journey. After 333 years on the seabed, the ship was salvaged in 1961 with thousands of artifacts. The museum, which opened in 1990, displays the ship and over 14,000 wooden objects, 700 sculptures, textiles, coins, and skeletons. The Vasa is one of Sweden\'s most popular tourist attractions and has been seen by over 35 million visitors. The ship is 69 meters long and 48 meters tall, making it an awe-inspiring sight. The museum tells the story of the ship\'s construction, sinking, and recovery, as well as life aboard a 17th-century warship.',
+    photos: [
+      'https://images.unsplash.com/photo-vasa_museum_stockhol_e7f33b2f?w=800',
+      'https://images.unsplash.com/photo-vasa_museum_stockhol_82ce8374?w=800',
+      'https://images.unsplash.com/photo-vasa_museum_stockhol_e9e061c5?w=800',
+      'https://images.unsplash.com/photo-vasa_museum_stockhol_c4d04c85?w=800',
+      'https://images.unsplash.com/photo-vasa_museum_stockhol_67766676?w=800',
+      'https://images.unsplash.com/photo-vasa_museum_stockhol_c53a3e94?w=800',
+      'https://images.unsplash.com/photo-vasa_museum_stockhol_de4674a6?w=800'
+    ],
+    historicalInfo: 'The Vasa was built from 1626 to 1628 and was one of the most powerful warships ever built. It sank after sailing just 1,300 meters on its maiden voyage on August 10, 1628. The ship was rediscovered in 1956 and salvaged on April 24, 1961, remarkably well preserved in the cold, brackish waters of Stockholm harbor.',
+    yearBuilt: '1626-1628',
+    architect: 'Henrik Hybertsson',
+    translations: {
+      en: {
+        name: 'Vasa Museum',
+        narration: 'Welcome to the Vasa Museum, home to the only preserved 17th-century ship in the world. This magnificent warship sank on its maiden voyage in 1628 and was salvaged 333 years later.',
+        description: 'Home to the only preserved 17th-century ship in the world',
+        detailedDescription: 'The Vasa Museum is Sweden\'s most visited museum and houses the world\'s only preserved 17th-century warship. The 64-gun warship Vasa sank on its maiden voyage in Stockholm harbor in 1628, less than a nautical mile into its journey. After 333 years on the seabed, the ship was salvaged in 1961 with thousands of artifacts. The museum, which opened in 1990, displays the ship and over 14,000 wooden objects, 700 sculptures, textiles, coins, and skeletons. The Vasa is one of Sweden\'s most popular tourist attractions and has been seen by over 35 million visitors. The ship is 69 meters long and 48 meters tall, making it an awe-inspiring sight. The museum tells the story of the ship\'s construction, sinking, and recovery, as well as life aboard a 17th-century warship.',
+        historicalInfo: 'The Vasa was built from 1626 to 1628 and was one of the most powerful warships ever built. It sank after sailing just 1,300 meters on its maiden voyage on August 10, 1628. The ship was rediscovered in 1956 and salvaged on April 24, 1961, remarkably well preserved in the cold, brackish waters of Stockholm harbor.',
+        yearBuilt: '1626-1628',
+        architect: 'Henrik Hybertsson'
+      },
+      ko: {
+        name: '바사 박물관',
+        narration: '세계에서 유일하게 보존된 17세기 선박이 있는 바사 박물관에 오신 것을 환영합니다. 이 장엄한 군함은 1628년 첫 항해에서 침몰했고 333년 후에 인양되었습니다.',
+        description: '세계 유일의 보존된 17세기 선박이 있는 곳',
+        detailedDescription: '바사 박물관은 스웨덴에서 가장 많은 방문객이 찾는 박물관이며 세계에서 유일하게 보존된 17세기 군함을 소장하고 있습니다. 64문의 대포를 장착한 군함 바사는 1628년 스톡홀름 항구에서 첫 항해 중 1해리도 채 가지 못하고 침몰했습니다. 333년 동안 해저에 있다가 1961년 수천 개의 유물과 함께 인양되었습니다. 1990년에 개관한 박물관은 선박과 14,000개 이상의 목재 물품, 700개의 조각품, 직물, 동전, 해골을 전시하고 있습니다. 바사는 스웨덴에서 가장 인기 있는 관광 명소 중 하나로 3,500만 명 이상의 방문객이 다녀갔습니다. 선박은 길이 69미터, 높이 48미터로 경외감을 불러일으키는 광경입니다. 박물관은 선박의 건조, 침몰, 회수 이야기와 17세기 군함에서의 생활을 보여줍니다.',
+        historicalInfo: '바사는 1626년부터 1628년까지 건조되었으며 역사상 가장 강력한 군함 중 하나였습니다. 1628년 8월 10일 첫 항해에서 1,300미터만 항해한 후 침몰했습니다. 선박은 1956년에 재발견되었고 1961년 4월 24일에 인양되었으며, 스톡홀름 항구의 차갑고 기수성인 물에서 놀라울 정도로 잘 보존되어 있었습니다.',
+        yearBuilt: '1626-1628년',
+        architect: '헨리크 히베르트손'
+      },
+      ja: {
+        name: 'ヴァーサ号博物館',
+        narration: '世界で唯一保存されている17世紀の船があるヴァーサ号博物館へようこそ。この壮大な軍艦は1628年の処女航海で沈没し、333年後に引き揚げられました。',
+        description: '世界で唯一保存されている17世紀の船がある場所',
+        detailedDescription: 'ヴァーサ号博物館はスウェーデンで最も訪問者の多い博物館であり、世界で唯一保存されている17世紀の軍艦を収蔵しています。64門の大砲を装備した軍艦ヴァーサ号は、1628年にストックホルム港での処女航海中、1海里も進まないうちに沈没しました。333年間海底にあった後、1961年に数千点の遺物とともに引き揚げられました。1990年に開館した博物館には、船と14,000点以上の木製品、700点の彫刻、織物、硬貨、骸骨が展示されています。ヴァーサ号はスウェーデンで最も人気のある観光名所の一つであり、3,500万人以上の訪問者が訪れています。船は長さ69メートル、高さ48メートルで、畏敬の念を起こさせる光景です。博物館は、船の建造、沈没、回収の物語と、17世紀の軍艦での生活を伝えています。',
+        historicalInfo: 'ヴァーサ号は1626年から1628年にかけて建造され、これまでで最も強力な軍艦の一つでした。1628年8月10日の処女航海で1,300メートルしか航海せずに沈没しました。船は1956年に再発見され、1961年4月24日に引き揚げられ、ストックホルム港の冷たい汽水域で驚くほど良好な状態で保存されていました。',
+        yearBuilt: '1626-1628年',
+        architect: 'ヘンリク・ヒュベルトソン'
+      },
+      zh: {
+        name: '瓦萨博物馆',
+        narration: '欢迎来到瓦萨博物馆，这里是世界上唯一保存完好的17世纪船只的所在地。这艘宏伟的战舰在1628年的处女航中沉没，333年后被打捞上来。',
+        description: '世界上唯一保存完好的17世纪船只的所在地',
+        detailedDescription: '瓦萨博物馆是瑞典访问量最大的博物馆，收藏着世界上唯一保存完好的17世纪战舰。这艘装备64门大炮的战舰瓦萨号在1628年的斯德哥尔摩港处女航中沉没，航程不到1海里。在海底沉睡333年后，该船于1961年与数千件文物一起被打捞上来。博物馆于1990年开放，展示了这艘船以及14,000多件木制物品、700件雕塑、纺织品、硬币和骸骨。瓦萨号是瑞典最受欢迎的旅游景点之一，已有超过3,500万游客参观。这艘船长69米，高48米，令人叹为观止。博物馆讲述了船只建造、沉没和打捞的故事，以及17世纪战舰上的生活。',
+        historicalInfo: '瓦萨号建于1626年至1628年，是有史以来最强大的战舰之一。它在1628年8月10日的处女航中仅航行了1,300米后就沉没了。该船于1956年被重新发现，并于1961年4月24日被打捞上来，在斯德哥尔摩港冰冷的半咸水中保存得非常完好。',
+        yearBuilt: '1626-1628年',
+        architect: '亨里克·海贝特松'
+      }
+    }
+  },
+  {
+    id: 'gamla_stan',
+    cityId: 'stockholm',
+    name: 'Gamla Stan',
+    lat: 59.3258,
+    lng: 18.0717,
+    radius: 80,
+    narration: 'Welcome to Gamla Stan, Stockholm\'s Old Town. This charming medieval city center dates back to the 13th century and is one of Europe\'s best-preserved medieval city centers.',
+    description: 'Stockholm\'s charming medieval Old Town',
+    category: 'Historic District',
+    detailedDescription: 'Gamla Stan, Stockholm\'s Old Town, is one of the largest and best-preserved medieval city centers in Europe. Dating from the 13th century, this historic neighborhood sits on Stadsholmen island and is characterized by its narrow cobblestone streets, colorful 17th and 18th-century buildings, and authentic medieval architecture. The area is home to the Royal Palace, one of the largest palaces in Europe with over 600 rooms, Stockholm Cathedral, the Nobel Museum, and numerous restaurants, cafés, and shops selling everything from Swedish souvenirs to antiques. Stortorget, the oldest square in Stockholm, is the heart of Gamla Stan and was the site of the Stockholm Bloodbath in 1520. The narrow alley Mårten Trotzigs gränd, only 90 centimeters wide at its narrowest point, is a popular photo spot. Walking through Gamla Stan is like stepping back in time, with medieval cellars now housing atmospheric restaurants and the old merchants\' houses painted in traditional ochre colors creating a fairytale-like atmosphere.',
+    photos: [
+      'https://images.unsplash.com/photo-gamla_stan_old_town__23912784?w=800',
+      'https://images.unsplash.com/photo-gamla_stan_old_town__e54be22e?w=800',
+      'https://images.unsplash.com/photo-gamla_stan_old_town__6b7b908c?w=800',
+      'https://images.unsplash.com/photo-gamla_stan_old_town__48dc229b?w=800',
+      'https://images.unsplash.com/photo-gamla_stan_old_town__f7875383?w=800',
+      'https://images.unsplash.com/photo-gamla_stan_old_town__1a819d9e?w=800',
+      'https://images.unsplash.com/photo-gamla_stan_old_town__ff92783f?w=800'
+    ],
+    historicalInfo: 'Gamla Stan was established in the 13th century and served as the heart of Stockholm. The area preserved its medieval street layout, though most buildings date from the 17th and 18th centuries when they were rebuilt after fires. The Royal Palace was built in the 18th century after the old Tre Kronor castle burned down in 1697.',
+    yearBuilt: '13th century',
+    architect: 'Various medieval and baroque architects',
+    translations: {
+      en: {
+        name: 'Gamla Stan',
+        narration: 'Welcome to Gamla Stan, Stockholm\'s Old Town. This charming medieval city center dates back to the 13th century and is one of Europe\'s best-preserved medieval city centers.',
+        description: 'Stockholm\'s charming medieval Old Town',
+        detailedDescription: 'Gamla Stan, Stockholm\'s Old Town, is one of the largest and best-preserved medieval city centers in Europe. Dating from the 13th century, this historic neighborhood sits on Stadsholmen island and is characterized by its narrow cobblestone streets, colorful 17th and 18th-century buildings, and authentic medieval architecture. The area is home to the Royal Palace, one of the largest palaces in Europe with over 600 rooms, Stockholm Cathedral, the Nobel Museum, and numerous restaurants, cafés, and shops selling everything from Swedish souvenirs to antiques. Stortorget, the oldest square in Stockholm, is the heart of Gamla Stan and was the site of the Stockholm Bloodbath in 1520. The narrow alley Mårten Trotzigs gränd, only 90 centimeters wide at its narrowest point, is a popular photo spot. Walking through Gamla Stan is like stepping back in time, with medieval cellars now housing atmospheric restaurants and the old merchants\' houses painted in traditional ochre colors creating a fairytale-like atmosphere.',
+        historicalInfo: 'Gamla Stan was established in the 13th century and served as the heart of Stockholm. The area preserved its medieval street layout, though most buildings date from the 17th and 18th centuries when they were rebuilt after fires. The Royal Palace was built in the 18th century after the old Tre Kronor castle burned down in 1697.',
+        yearBuilt: '13th century',
+        architect: 'Various medieval and baroque architects'
+      },
+      ko: {
+        name: '감라 스탄',
+        narration: '스톡홀름의 구시가지 감라 스탄에 오신 것을 환영합니다. 이 매력적인 중세 도심은 13세기로 거슬러 올라가며 유럽에서 가장 잘 보존된 중세 도심 중 하나입니다.',
+        description: '스톡홀름의 매력적인 중세 구시가지',
+        detailedDescription: '스톡홀름의 구시가지인 감라 스탄은 유럽에서 가장 크고 잘 보존된 중세 도심 중 하나입니다. 13세기로 거슬러 올라가는 이 역사적인 지역은 스타드쉬올멘 섬에 위치하며 좁은 자갈길, 다채로운 17-18세기 건물, 진정한 중세 건축물이 특징입니다. 이 지역에는 600개 이상의 방을 갖춘 유럽 최대의 궁전 중 하나인 왕궁, 스톡홀름 대성당, 노벨 박물관, 그리고 스웨덴 기념품부터 골동품까지 판매하는 수많은 레스토랑, 카페, 상점이 있습니다. 스톡홀름에서 가장 오래된 광장인 스토르토르예트는 감라 스탄의 중심이며 1520년 스톡홀름 대학살의 현장이었습니다. 가장 좁은 지점이 90센티미터인 좁은 골목 모르텐 트로치그스 그렌드는 인기 있는 사진 촬영 장소입니다. 감라 스탄을 걷는 것은 시간을 거슬러 올라가는 것과 같으며, 중세 지하실은 현재 분위기 있는 레스토랑으로 사용되고 전통적인 황토색으로 칠해진 옛 상인의 집들은 동화 같은 분위기를 연출합니다.',
+        historicalInfo: '감라 스탄은 13세기에 설립되어 스톡홀름의 중심지 역할을 했습니다. 이 지역은 중세 거리 배치를 보존했지만 대부분의 건물은 화재 후 재건된 17-18세기에 지어졌습니다. 왕궁은 1697년 트레 크로노르 성이 불타버린 후 18세기에 지어졌습니다.',
+        yearBuilt: '13세기',
+        architect: '다양한 중세 및 바로크 건축가'
+      },
+      ja: {
+        name: 'ガムラスタン',
+        narration: 'ストックホルムの旧市街、ガムラスタンへようこそ。この魅力的な中世の都心は13世紀にさかのぼり、ヨーロッパで最も保存状態の良い中世都市の中心地の一つです。',
+        description: 'ストックホルムの魅力的な中世の旧市街',
+        detailedDescription: 'ストックホルムの旧市街であるガムラスタンは、ヨーロッパで最大かつ最も保存状態の良い中世都市の中心地の一つです。13世紀にさかのぼるこの歴史的な地区はスタッズホルメン島に位置し、狭い石畳の通り、カラフルな17-18世紀の建物、本格的な中世建築が特徴です。この地域には、600以上の部屋を持つヨーロッパ最大の宮殿の一つである王宮、ストックホルム大聖堂、ノーベル博物館、そしてスウェーデンの土産物から骨董品まで販売する多くのレストラン、カフェ、ショップがあります。ストックホルムで最も古い広場であるストートリエットはガムラスタンの中心であり、1520年のストックホルム大虐殺の現場でした。最も狭い地点で90センチメートルしかない狭い路地、モーテン・トロツィグス・グレンドは人気の写真スポットです。ガムラスタンを歩くことは時間を遡るようなもので、中世の地下室は現在雰囲気のあるレストランになっており、伝統的な黄土色に塗られた古い商人の家々がおとぎ話のような雰囲気を作り出しています。',
+        historicalInfo: 'ガムラスタンは13世紀に設立され、ストックホルムの中心地として機能しました。この地域は中世の街路配置を保存していますが、ほとんどの建物は火災後に再建された17-18世紀のものです。王宮は、1697年に古いトレ・クロノール城が焼失した後、18世紀に建てられました。',
+        yearBuilt: '13世紀',
+        architect: '様々な中世およびバロック建築家'
+      },
+      zh: {
+        name: '老城区',
+        narration: '欢迎来到斯德哥尔摩的老城区感拉斯坦。这个迷人的中世纪市中心可追溯到13世纪，是欧洲保存最完好的中世纪市中心之一。',
+        description: '斯德哥尔摩迷人的中世纪老城',
+        detailedDescription: '斯德哥尔摩的老城区感拉斯坦是欧洲最大、保存最完好的中世纪市中心之一。这个历史悠久的街区可追溯到13世纪，位于斯塔德霍尔门岛上，以其狭窄的鹅卵石街道、色彩缤纷的17-18世纪建筑和真正的中世纪建筑为特色。该地区拥有欧洲最大的宫殿之一——拥有600多个房间的王宫、斯德哥尔摩大教堂、诺贝尔博物馆，以及众多出售从瑞典纪念品到古董的餐厅、咖啡馆和商店。斯托托尔耶特是斯德哥尔摩最古老的广场，是感拉斯坦的中心，也是1520年斯德哥尔摩大屠杀的发生地。最窄处仅90厘米的狭窄小巷莫滕·特罗齐格斯格兰德是热门的拍照地点。漫步感拉斯坦就像回到过去，中世纪的地窖现在变成了氛围浓厚的餐厅，涂有传统赭石色的老商人房屋营造出童话般的氛围。',
+        historicalInfo: '感拉斯坦建于13世纪，曾是斯德哥尔摩的中心。该地区保留了中世纪的街道布局，但大多数建筑可追溯到火灾后重建的17-18世纪。王宫建于18世纪，是在1697年旧的特雷克鲁诺尔城堡被烧毁后建造的。',
+        yearBuilt: '13世纪',
+        architect: '各种中世纪和巴洛克建筑师'
+      }
+    }
+  },
+  // Copenhagen landmarks
+  {
+    id: 'little_mermaid',
+    cityId: 'copenhagen',
+    name: 'The Little Mermaid',
+    lat: 55.6929,
+    lng: 12.5993,
+    radius: 50,
+    narration: 'Welcome to The Little Mermaid, Copenhagen\'s iconic bronze statue. Based on Hans Christian Andersen\'s fairy tale, this beloved sculpture has been greeting visitors since 1913.',
+    description: 'Copenhagen\'s iconic bronze mermaid statue',
+    category: 'Monument',
+    detailedDescription: 'The Little Mermaid statue is one of Copenhagen\'s most famous landmarks and has become a symbol of Denmark itself. The bronze and granite statue sits on a rock by the waterside at Langelinie promenade and depicts a mermaid becoming human. Inspired by Hans Christian Andersen\'s fairy tale of the same name, the statue was commissioned in 1909 by Carl Jacobsen, son of the founder of Carlsberg, who was fascinated by a ballet performance based on the story. Sculptor Edvard Eriksen created the statue using his wife Eline as the model for the body and the face of ballerina Ellen Price as the model for the head. The statue measures 1.25 meters in height and weighs about 175 kilograms. Despite its modest size, it has become one of the world\'s most photographed statues. The statue has had an eventful history, suffering several acts of vandalism including decapitation and paint attacks, but has always been restored to its original glory.',
+    photos: [
+      'https://images.unsplash.com/photo-little_mermaid_statu_24f971cd?w=800',
+      'https://images.unsplash.com/photo-little_mermaid_statu_ab26f609?w=800',
+      'https://images.unsplash.com/photo-little_mermaid_statu_5b3ef9e5?w=800',
+      'https://images.unsplash.com/photo-little_mermaid_statu_68f27bea?w=800',
+      'https://images.unsplash.com/photo-little_mermaid_statu_4d1ee817?w=800',
+      'https://images.unsplash.com/photo-little_mermaid_statu_453262fa?w=800',
+      'https://images.unsplash.com/photo-little_mermaid_statu_7d8bcd29?w=800'
+    ],
+    historicalInfo: 'The Little Mermaid statue was unveiled on August 23, 1913. It was commissioned by Carl Jacobsen, the son of the founder of Carlsberg brewery, after he was captivated by a ballet performance of Hans Christian Andersen\'s fairy tale at the Royal Danish Theatre.',
+    yearBuilt: '1913',
+    architect: 'Edvard Eriksen',
+    translations: {
+      en: {
+        name: 'The Little Mermaid',
+        narration: 'Welcome to The Little Mermaid, Copenhagen\'s iconic bronze statue. Based on Hans Christian Andersen\'s fairy tale, this beloved sculpture has been greeting visitors since 1913.',
+        description: 'Copenhagen\'s iconic bronze mermaid statue',
+        detailedDescription: 'The Little Mermaid statue is one of Copenhagen\'s most famous landmarks and has become a symbol of Denmark itself. The bronze and granite statue sits on a rock by the waterside at Langelinie promenade and depicts a mermaid becoming human. Inspired by Hans Christian Andersen\'s fairy tale of the same name, the statue was commissioned in 1909 by Carl Jacobsen, son of the founder of Carlsberg, who was fascinated by a ballet performance based on the story. Sculptor Edvard Eriksen created the statue using his wife Eline as the model for the body and the face of ballerina Ellen Price as the model for the head. The statue measures 1.25 meters in height and weighs about 175 kilograms. Despite its modest size, it has become one of the world\'s most photographed statues. The statue has had an eventful history, suffering several acts of vandalism including decapitation and paint attacks, but has always been restored to its original glory.',
+        historicalInfo: 'The Little Mermaid statue was unveiled on August 23, 1913. It was commissioned by Carl Jacobsen, the son of the founder of Carlsberg brewery, after he was captivated by a ballet performance of Hans Christian Andersen\'s fairy tale at the Royal Danish Theatre.',
+        yearBuilt: '1913',
+        architect: 'Edvard Eriksen'
+      },
+      ko: {
+        name: '인어공주상',
+        narration: '코펜하겐의 상징적인 청동상 인어공주에 오신 것을 환영합니다. 한스 크리스티안 안데르센의 동화를 바탕으로 한 이 사랑받는 조각상은 1913년부터 방문객들을 맞이하고 있습니다.',
+        description: '코펜하겐의 상징적인 청동 인어공주상',
+        detailedDescription: '인어공주상은 코펜하겐에서 가장 유명한 랜드마크 중 하나이며 덴마크 자체의 상징이 되었습니다. 청동과 화강암 조각상은 랑겔리니에 산책로의 수변 바위 위에 앉아 있으며 인어가 인간이 되는 모습을 묘사합니다. 같은 이름의 한스 크리스티안 안데르센 동화에서 영감을 받아 이 조각상은 1909년 칼스버그 창립자의 아들 칼 야콥센이 이야기를 바탕으로 한 발레 공연에 매료되어 의뢰했습니다. 조각가 에드바르 에릭센은 아내 엘리네를 몸의 모델로, 발레리나 엘렌 프라이스의 얼굴을 머리의 모델로 사용하여 조각상을 만들었습니다. 조각상의 높이는 1.25미터이며 무게는 약 175킬로그램입니다. 크기는 작지만 세계에서 가장 많이 촬영된 조각상 중 하나가 되었습니다. 조각상은 참수와 페인트 공격을 포함한 여러 파손 행위를 겪었지만 항상 원래의 영광으로 복원되었습니다.',
+        historicalInfo: '인어공주상은 1913년 8월 23일에 공개되었습니다. 칼스버그 양조장 창립자의 아들 칼 야콥센이 덴마크 왕립극장에서 한스 크리스티안 안데르센의 동화 발레 공연에 매료된 후 의뢰했습니다.',
+        yearBuilt: '1913년',
+        architect: '에드바르 에릭센'
+      },
+      ja: {
+        name: '人魚姫の像',
+        narration: 'コペンハーゲンの象徴的なブロンズ像、人魚姫へようこそ。ハンス・クリスチャン・アンデルセンの童話に基づくこの愛される彫刻は、1913年以来訪問者を迎えています。',
+        description: 'コペンハーゲンの象徴的なブロンズ人魚像',
+        detailedDescription: '人魚姫の像はコペンハーゲンで最も有名なランドマークの一つであり、デンマーク自体の象徴となっています。ブロンズと花崗岩の像はランゲリニエ遊歩道の水辺の岩の上に座り、人魚が人間になる様子を描いています。同名のハンス・クリスチャン・アンデルセンの童話に触発され、この像は1909年にカールスバーグの創業者の息子カール・ヤコブセンによって委託されました。彼は物語に基づくバレエ公演に魅了されました。彫刻家エドヴァルド・エリクセンは、妻エリーネを体のモデルとし、バレリーナのエレン・プライスの顔を頭のモデルとして使用して像を作成しました。像の高さは1.25メートル、重さは約175キログラムです。控えめなサイズにもかかわらず、世界で最も撮影された像の一つになっています。像は斬首やペンキ攻撃を含むいくつかの破壊行為を受けましたが、常に元の栄光に復元されています。',
+        historicalInfo: '人魚姫の像は1913年8月23日に除幕されました。カールスバーグ醸造所の創業者の息子カール・ヤコブセンが、デンマーク王立劇場でハンス・クリスチャン・アンデルセンの童話のバレエ公演に魅了された後に委託しました。',
+        yearBuilt: '1913年',
+        architect: 'エドヴァルド・エリクセン'
+      },
+      zh: {
+        name: '小美人鱼雕像',
+        narration: '欢迎来到小美人鱼，哥本哈根的标志性青铜雕像。这座深受喜爱的雕塑以汉斯·克里斯蒂安·安徒生的童话为基础，自1913年以来一直迎接着游客。',
+        description: '哥本哈根的标志性青铜美人鱼雕像',
+        detailedDescription: '小美人鱼雕像是哥本哈根最著名的地标之一，已成为丹麦本身的象征。这座青铜和花岗岩雕像坐在朗厄里尼海滨长廊的水边岩石上，描绘了美人鱼变成人类的场景。受同名汉斯·克里斯蒂安·安徒生童话的启发，这座雕像由嘉士伯啤酒创始人的儿子卡尔·雅各布森于1909年委托制作，他被基于这个故事的芭蕾舞表演所吸引。雕塑家爱德华·埃里克森以他的妻子埃琳作为身体模特，以芭蕾舞演员艾伦·普赖斯的脸作为头部模特创作了这座雕像。雕像高1.25米，重约175公斤。尽管尺寸不大，它已成为世界上拍摄最多的雕像之一。雕像经历了多次破坏行为，包括斩首和油漆攻击，但总是被修复到原来的辉煌。',
+        historicalInfo: '小美人鱼雕像于1913年8月23日揭幕。它是由嘉士伯啤酒厂创始人的儿子卡尔·雅各布森委托制作的，他在丹麦皇家剧院观看了汉斯·克里斯蒂安·安徒生童话的芭蕾舞表演后深受吸引。',
+        yearBuilt: '1913年',
+        architect: '爱德华·埃里克森'
+      }
+    }
+  },
+  {
+    id: 'nyhavn',
+    cityId: 'copenhagen',
+    name: 'Nyhavn',
+    lat: 55.6796,
+    lng: 12.5912,
+    radius: 70,
+    narration: 'Welcome to Nyhavn, Copenhagen\'s picturesque waterfront district. This 17th-century harbor is famous for its colorful townhouses, historic wooden ships, and lively atmosphere.',
+    description: 'Copenhagen\'s colorful 17th-century waterfront district',
+    category: 'Historic District',
+    detailedDescription: 'Nyhavn, meaning "New Harbor," is a 17th-century waterfront, canal, and entertainment district in Copenhagen. Stretching from Kongens Nytorv to the harbor front, this iconic canal is lined with brightly colored 17th and 18th-century townhouses, bars, cafés, and restaurants. The north side of Nyhavn is particularly famous for its vibrant facades in shades of yellow, red, blue, and orange. Historically a busy commercial port where ships from around the world docked, Nyhavn is now a popular spot for both tourists and locals. The famous fairy tale author Hans Christian Andersen lived at Nyhavn for almost 20 years in three different houses: numbers 20, 67, and 18. He wrote his first fairy tales while living at number 20. The canal is home to many historic wooden ships, some of which are museum ships that offer tours. During summer, Nyhavn becomes especially lively with outdoor seating at restaurants and cafés, street performers, and boats offering canal tours. The atmosphere transforms in winter when the area hosts a charming Christmas market.',
+    photos: [
+      'https://images.unsplash.com/photo-nyhavn_copenhagen_de_dc0f383c?w=800',
+      'https://images.unsplash.com/photo-nyhavn_copenhagen_de_c936f163?w=800',
+      'https://images.unsplash.com/photo-nyhavn_copenhagen_de_3a200cf8?w=800',
+      'https://images.unsplash.com/photo-nyhavn_copenhagen_de_932cdebf?w=800',
+      'https://images.unsplash.com/photo-nyhavn_copenhagen_de_f7e2b243?w=800',
+      'https://images.unsplash.com/photo-nyhavn_copenhagen_de_6dd60ed5?w=800',
+      'https://images.unsplash.com/photo-nyhavn_copenhagen_de_84654595?w=800'
+    ],
+    historicalInfo: 'Nyhavn was constructed by King Christian V from 1670 to 1673, dug by Swedish prisoners of war. It was a gateway from the sea to the old inner city, allowing merchants to bring their goods directly to Kongens Nytorv square. The area was long known for its rowdy bars and brothels, but has been gentrified into a popular tourist attraction.',
+    yearBuilt: '1670-1673',
+    architect: 'King Christian V',
+    translations: {
+      en: {
+        name: 'Nyhavn',
+        narration: 'Welcome to Nyhavn, Copenhagen\'s picturesque waterfront district. This 17th-century harbor is famous for its colorful townhouses, historic wooden ships, and lively atmosphere.',
+        description: 'Copenhagen\'s colorful 17th-century waterfront district',
+        detailedDescription: 'Nyhavn, meaning "New Harbor," is a 17th-century waterfront, canal, and entertainment district in Copenhagen. Stretching from Kongens Nytorv to the harbor front, this iconic canal is lined with brightly colored 17th and 18th-century townhouses, bars, cafés, and restaurants. The north side of Nyhavn is particularly famous for its vibrant facades in shades of yellow, red, blue, and orange. Historically a busy commercial port where ships from around the world docked, Nyhavn is now a popular spot for both tourists and locals. The famous fairy tale author Hans Christian Andersen lived at Nyhavn for almost 20 years in three different houses: numbers 20, 67, and 18. He wrote his first fairy tales while living at number 20. The canal is home to many historic wooden ships, some of which are museum ships that offer tours. During summer, Nyhavn becomes especially lively with outdoor seating at restaurants and cafés, street performers, and boats offering canal tours. The atmosphere transforms in winter when the area hosts a charming Christmas market.',
+        historicalInfo: 'Nyhavn was constructed by King Christian V from 1670 to 1673, dug by Swedish prisoners of war. It was a gateway from the sea to the old inner city, allowing merchants to bring their goods directly to Kongens Nytorv square. The area was long known for its rowdy bars and brothels, but has been gentrified into a popular tourist attraction.',
+        yearBuilt: '1670-1673',
+        architect: 'King Christian V'
+      },
+      ko: {
+        name: '뉘하운',
+        narration: '코펜하겐의 그림 같은 수변 지역 뉘하운에 오신 것을 환영합니다. 이 17세기 항구는 화려한 타운하우스, 역사적인 목조 선박, 활기찬 분위기로 유명합니다.',
+        description: '코펜하겐의 다채로운 17세기 수변 지구',
+        detailedDescription: '"새로운 항구"를 의미하는 뉘하운은 코펜하겐의 17세기 수변, 운하, 오락 지구입니다. 콩엔스 뉘토르브에서 항구 정면까지 뻗어 있는 이 상징적인 운하는 밝은 색상의 17-18세기 타운하우스, 바, 카페, 레스토랑이 늘어서 있습니다. 뉘하운의 북쪽은 노란색, 빨간색, 파란색, 주황색의 생동감 있는 파사드로 특히 유명합니다. 역사적으로 전 세계의 선박이 정박하는 번잡한 상업 항구였던 뉘하운은 현재 관광객과 현지인 모두에게 인기 있는 장소입니다. 유명한 동화 작가 한스 크리스티안 안데르센은 뉘하운의 세 개의 다른 집(20번, 67번, 18번)에서 거의 20년을 살았습니다. 그는 20번지에 살면서 첫 동화를 썼습니다. 운하에는 많은 역사적인 목조 선박이 있으며, 그 중 일부는 투어를 제공하는 박물관 선박입니다. 여름 동안 뉘하운은 레스토랑과 카페의 야외 좌석, 거리 공연자, 운하 투어를 제공하는 보트로 특히 활기차게 됩니다. 이 지역이 매력적인 크리스마스 시장을 개최하는 겨울에는 분위기가 변합니다.',
+        historicalInfo: '뉘하운은 1670년부터 1673년까지 크리스티안 5세 왕이 건설했으며 스웨덴 전쟁 포로들이 굴착했습니다. 바다에서 구도심으로 가는 관문으로 상인들이 물품을 콩엔스 뉘토르브 광장으로 직접 가져올 수 있게 했습니다. 이 지역은 오랫동안 시끄러운 술집과 매춘 업소로 알려졌지만 인기 있는 관광 명소로 변모했습니다.',
+        yearBuilt: '1670-1673년',
+        architect: '크리스티안 5세 왕'
+      },
+      ja: {
+        name: 'ニューハウン',
+        narration: 'コペンハーゲンの絵のような水辺地区、ニューハウンへようこそ。この17世紀の港は、カラフルなタウンハウス、歴史的な木造船、活気ある雰囲気で有名です。',
+        description: 'コペンハーゲンのカラフルな17世紀の水辺地区',
+        detailedDescription: '「新しい港」を意味するニューハウンは、コペンハーゲンの17世紀の水辺、運河、娯楽地区です。コンゲンス・ニュートーから港の正面まで伸びるこの象徴的な運河は、明るい色の17-18世紀のタウンハウス、バー、カフェ、レストランが立ち並んでいます。ニューハウンの北側は、黄色、赤、青、オレンジの鮮やかなファサードで特に有名です。歴史的に世界中の船が停泊する忙しい商業港であったニューハウンは、現在観光客と地元の人々の両方に人気のスポットです。有名な童話作家ハンス・クリスチャン・アンデルセンは、20番、67番、18番の3つの異なる家でニューハウンに約20年間住んでいました。彼は20番地に住んでいる間に最初の童話を書きました。運河には多くの歴史的な木造船があり、そのいくつかはツアーを提供する博物館船です。夏の間、ニューハウンはレストランやカフェの屋外席、ストリートパフォーマー、運河ツアーを提供するボートで特に賑やかになります。冬になると、この地域が魅力的なクリスマスマーケットを開催し、雰囲気が変わります。',
+        historicalInfo: 'ニューハウンは1670年から1673年にかけてクリスチャン5世王によって建設され、スウェーデンの戦争捕虜によって掘削されました。海から旧内市への玄関口であり、商人が商品をコンゲンス・ニュートー広場に直接持ち込むことができました。この地域は長い間騒がしいバーや売春宿で知られていましたが、人気の観光名所に変貌しました。',
+        yearBuilt: '1670-1673年',
+        architect: 'クリスチャン5世王'
+      },
+      zh: {
+        name: '新港',
+        narration: '欢迎来到新港，哥本哈根风景如画的海滨区。这个17世纪的港口以其色彩缤纷的联排别墅、历史悠久的木船和热闹的氛围而闻名。',
+        description: '哥本哈根色彩缤纷的17世纪海滨区',
+        detailedDescription: '新港意为"新港口"，是哥本哈根的一个17世纪海滨、运河和娱乐区。从国王新广场一直延伸到港口前沿，这条标志性运河两旁排列着色彩鲜艳的17和18世纪联排别墅、酒吧、咖啡馆和餐厅。新港北侧以其黄色、红色、蓝色和橙色的鲜艳立面而闻名。历史上曾是世界各地船只停靠的繁忙商业港口，新港现在是游客和当地人都喜欢的热门景点。著名童话作家汉斯·克里斯蒂安·安徒生在新港的三座不同房屋（20号、67号和18号）中生活了近20年。他在20号居住时写下了他的第一批童话。运河上停泊着许多历史悠久的木船，其中一些是提供游览的博物馆船。夏季期间，新港变得特别热闹，有餐厅和咖啡馆的户外座位、街头表演者以及提供运河游览的船只。冬季时，该地区会举办迷人的圣诞市场，氛围焕然一新。',
+        historicalInfo: '新港由克里斯蒂安五世国王于1670年至1673年建造，由瑞典战俘挖掘。它是从海上通往旧内城的门户，使商人能够将货物直接运送到国王新广场。该地区长期以喧闹的酒吧和妓院而闻名，但已经被改造成一个受欢迎的旅游景点。',
+        yearBuilt: '1670-1673年',
+        architect: '克里斯蒂安五世国王'
+      }
+    }
+  },
+  {
+    id: 'tivoli_gardens',
+    cityId: 'copenhagen',
+    name: 'Tivoli Gardens',
+    lat: 55.6738,
+    lng: 12.5681,
+    radius: 100,
+    narration: 'Welcome to Tivoli Gardens, one of the world\'s oldest operating amusement parks. This enchanting garden has been delighting visitors since 1843 with its rides, beautiful gardens, and magical atmosphere.',
+    description: 'One of the world\'s oldest and most beautiful amusement parks',
+    category: 'Amusement Park',
+    detailedDescription: 'Tivoli Gardens is a world-famous amusement park and pleasure garden in Copenhagen. Opened in 1843, it is the third-oldest operating amusement park in the world and has inspired countless theme parks, including Disneyland. Walt Disney himself visited Tivoli several times and drew inspiration for his own parks. Tivoli combines traditional fairground rides with beautifully landscaped gardens, outdoor entertainment, and cultural attractions. The park features over 30 attractions including vintage wooden roller coasters, modern thrill rides, a carousel from 1943, and the famous Vertigo. Beyond the rides, Tivoli is renowned for its stunning gardens with thousands of flowers, illuminated at night by over 115,000 colored lights. The park hosts concerts at the open-air stage and concert hall, pantomime performances at the Peacock Theatre, and various cultural events throughout the year. During Halloween and Christmas, Tivoli transforms into a magical wonderland with special decorations and events. The park has become an integral part of Copenhagen culture and is visited by locals and tourists alike.',
+    photos: [
+      'https://images.unsplash.com/photo-tivoli_gardens_copen_ca515639?w=800',
+      'https://images.unsplash.com/photo-tivoli_gardens_copen_4503d6e5?w=800',
+      'https://images.unsplash.com/photo-tivoli_gardens_copen_8ddd1d26?w=800',
+      'https://images.unsplash.com/photo-tivoli_gardens_copen_eedad322?w=800',
+      'https://images.unsplash.com/photo-tivoli_gardens_copen_cb1f576c?w=800',
+      'https://images.unsplash.com/photo-tivoli_gardens_copen_58ba2c86?w=800',
+      'https://images.unsplash.com/photo-tivoli_gardens_copen_ef084534?w=800'
+    ],
+    historicalInfo: 'Tivoli Gardens was founded on August 15, 1843 by Georg Carstensen. He persuaded King Christian VIII to let him create the park, arguing that "when the people are amusing themselves, they do not think about politics." The park quickly became popular and has remained a beloved institution in Danish culture.',
+    yearBuilt: '1843',
+    architect: 'Georg Carstensen',
+    translations: {
+      en: {
+        name: 'Tivoli Gardens',
+        narration: 'Welcome to Tivoli Gardens, one of the world\'s oldest operating amusement parks. This enchanting garden has been delighting visitors since 1843 with its rides, beautiful gardens, and magical atmosphere.',
+        description: 'One of the world\'s oldest and most beautiful amusement parks',
+        detailedDescription: 'Tivoli Gardens is a world-famous amusement park and pleasure garden in Copenhagen. Opened in 1843, it is the third-oldest operating amusement park in the world and has inspired countless theme parks, including Disneyland. Walt Disney himself visited Tivoli several times and drew inspiration for his own parks. Tivoli combines traditional fairground rides with beautifully landscaped gardens, outdoor entertainment, and cultural attractions. The park features over 30 attractions including vintage wooden roller coasters, modern thrill rides, a carousel from 1943, and the famous Vertigo. Beyond the rides, Tivoli is renowned for its stunning gardens with thousands of flowers, illuminated at night by over 115,000 colored lights. The park hosts concerts at the open-air stage and concert hall, pantomime performances at the Peacock Theatre, and various cultural events throughout the year. During Halloween and Christmas, Tivoli transforms into a magical wonderland with special decorations and events. The park has become an integral part of Copenhagen culture and is visited by locals and tourists alike.',
+        historicalInfo: 'Tivoli Gardens was founded on August 15, 1843 by Georg Carstensen. He persuaded King Christian VIII to let him create the park, arguing that "when the people are amusing themselves, they do not think about politics." The park quickly became popular and has remained a beloved institution in Danish culture.',
+        yearBuilt: '1843',
+        architect: 'Georg Carstensen'
+      },
+      ko: {
+        name: '티볼리 공원',
+        narration: '세계에서 가장 오래된 놀이공원 중 하나인 티볼리 공원에 오신 것을 환영합니다. 이 매혹적인 정원은 1843년부터 놀이기구, 아름다운 정원, 마법 같은 분위기로 방문객들을 즐겁게 하고 있습니다.',
+        description: '세계에서 가장 오래되고 아름다운 놀이공원 중 하나',
+        detailedDescription: '티볼리 공원은 코펜하겐의 세계적으로 유명한 놀이공원이자 유원지입니다. 1843년에 개장한 이 공원은 세계에서 세 번째로 오래된 운영 중인 놀이공원이며 디즈니랜드를 포함한 수많은 테마파크에 영감을 주었습니다. 월트 디즈니 자신도 티볼리를 여러 번 방문했고 자신의 공원을 위한 영감을 얻었습니다. 티볼리는 전통적인 놀이기구를 아름답게 조경된 정원, 야외 엔터테인먼트, 문화 명소와 결합합니다. 공원에는 빈티지 목조 롤러코스터, 현대적인 스릴 놀이기구, 1943년 회전목마, 유명한 버티고를 포함한 30개 이상의 명소가 있습니다. 놀이기구 외에도 티볼리는 수천 송이의 꽃이 있는 멋진 정원으로 유명하며, 밤에는 115,000개 이상의 컬러 조명으로 조명됩니다. 공원은 야외 무대와 콘서트홀에서 콘서트, 피코크 극장에서 무언극 공연, 그리고 연중 다양한 문화 행사를 개최합니다. 할로윈과 크리스마스 기간에는 티볼리가 특별한 장식과 행사로 마법의 원더랜드로 변합니다. 공원은 코펜하겐 문화의 필수적인 부분이 되었으며 현지인과 관광객 모두가 방문합니다.',
+        historicalInfo: '티볼리 공원은 1843년 8월 15일 게오르그 카르스텐센에 의해 설립되었습니다. 그는 "사람들이 즐기고 있을 때 정치에 대해 생각하지 않는다"고 주장하며 크리스티안 8세 왕을 설득하여 공원을 만들도록 했습니다. 공원은 빠르게 인기를 얻었고 덴마크 문화에서 사랑받는 기관으로 남아 있습니다.',
+        yearBuilt: '1843년',
+        architect: '게오르그 카르스텐센'
+      },
+      ja: {
+        name: 'チボリ公園',
+        narration: '世界最古の遊園地の一つ、チボリ公園へようこそ。この魅惑的な庭園は1843年以来、乗り物、美しい庭園、魔法のような雰囲気で訪問者を楽しませてきました。',
+        description: '世界で最も古く美しい遊園地の一つ',
+        detailedDescription: 'チボリ公園は、コペンハーゲンにある世界的に有名な遊園地および遊園地です。1843年に開園し、世界で3番目に古い運営中の遊園地であり、ディズニーランドを含む無数のテーマパークにインスピレーションを与えてきました。ウォルト・ディズニー自身も何度かチボリを訪れ、自分のパークのインスピレーションを得ました。チボリは伝統的な遊園地の乗り物と美しく造園された庭園、屋外エンターテインメント、文化的アトラクションを組み合わせています。公園には、ビンテージの木製ジェットコースター、現代的なスリルライド、1943年のメリーゴーランド、有名なバーティゴを含む30以上のアトラクションがあります。乗り物以外にも、チボリは数千の花がある見事な庭園で有名であり、夜には115,000以上のカラーライトで照らされます。公園は野外ステージとコンサートホールでコンサート、ピーコックシアターでパントマイムパフォーマンス、年間を通じてさまざまな文化イベントを開催しています。ハロウィンとクリスマスの期間中、チボリは特別な装飾とイベントで魔法の国に変わります。公園はコペンハーゲン文化の不可欠な部分となり、地元の人々と観光客の両方が訪れています。',
+        historicalInfo: 'チボリ公園は1843年8月15日にゲオルグ・カールステンセンによって設立されました。彼は「人々が楽しんでいるとき、彼らは政治について考えない」と主張して、クリスチャン8世王を説得し、公園を作ることを許可させました。公園はすぐに人気を博し、デンマーク文化において愛される機関であり続けています。',
+        yearBuilt: '1843年',
+        architect: 'ゲオルグ・カールステンセン'
+      },
+      zh: {
+        name: '趣伏里公园',
+        narration: '欢迎来到趣伏里公园，世界上最古老的运营游乐园之一。这个迷人的花园自1843年以来一直以其游乐设施、美丽的花园和神奇的氛围让游客流连忘返。',
+        description: '世界上最古老、最美丽的游乐园之一',
+        detailedDescription: '趣伏里公园是哥本哈根世界著名的游乐园和游乐场。它于1843年开放，是世界上第三古老的运营游乐园，并激发了包括迪士尼乐园在内的无数主题公园的灵感。华特·迪士尼本人多次访问趣伏里，并从中获得了自己公园的灵感。趣伏里将传统的游乐场设施与美丽的景观花园、户外娱乐和文化景点相结合。公园拥有30多个景点，包括复古木制过山车、现代惊险游乐设施、1943年的旋转木马和著名的眩晕塔。除了游乐设施外，趣伏里还以其拥有数千朵鲜花的迷人花园而闻名，夜晚由115,000多盏彩灯照亮。公园在露天舞台和音乐厅举办音乐会，在孔雀剧院举办哑剧表演，全年举办各种文化活动。在万圣节和圣诞节期间，趣伏里会通过特殊的装饰和活动变成一个神奇的仙境。公园已成为哥本哈根文化不可分割的一部分，当地人和游客都会前来参观。',
+        historicalInfo: '趣伏里公园于1843年8月15日由乔治·卡斯滕森创立。他说服克里斯蒂安八世国王让他创建公园，理由是"当人们娱乐时，他们不会考虑政治。"公园迅速流行起来，并一直是丹麦文化中深受喜爱的机构。',
+        yearBuilt: '1843年',
+        architect: '乔治·卡斯滕森'
+      }
+    }
+  },
+  // Oslo landmarks
+  {
+    id: 'viking_ship_museum',
+    cityId: 'oslo',
+    name: 'Viking Ship Museum',
+    lat: 59.9045,
+    lng: 10.6836,
+    radius: 60,
+    narration: 'Welcome to the Viking Ship Museum, home to the world\'s best-preserved Viking ships. These magnificent vessels from the 9th century offer a unique glimpse into Viking culture and seafaring prowess.',
+    description: 'Home to the world\'s best-preserved Viking ships',
+    category: 'Maritime Museum',
+    detailedDescription: 'The Viking Ship Museum in Oslo houses some of the world\'s best-preserved Viking ships and artifacts from the Viking Age. The museum\'s centerpiece is three remarkable Viking longships: the Oseberg, Gokstad, and Tune ships, all dating from the 9th century. These ships were used as burial ships for high-ranking Vikings and were discovered in burial mounds around the Oslo Fjord. The Oseberg ship, discovered in 1904, is the most elaborately decorated and best preserved of the three, featuring intricate wood carvings on its prow and stern. It was used as a burial ship for two women, possibly a queen and her servant, and contained a wealth of grave goods including sleds, carts, beds, and textiles. The Gokstad ship, found in 1880, is a seaworthy ocean-going vessel that demonstrates the Vikings\' advanced shipbuilding techniques. A replica of this ship successfully crossed the Atlantic in 1893. The museum also displays artifacts from the burial mounds, providing insights into Viking daily life, craftsmanship, and burial customs. The ships represent the pinnacle of Viking Age engineering and showcase the maritime culture that enabled the Vikings to explore, trade, and raid across vast distances.',
+    photos: [
+      'https://images.unsplash.com/photo-viking_ship_museum_o_0d307fce?w=800',
+      'https://images.unsplash.com/photo-viking_ship_museum_o_92b39d0d?w=800',
+      'https://images.unsplash.com/photo-viking_ship_museum_o_7f8ef2ab?w=800',
+      'https://images.unsplash.com/photo-viking_ship_museum_o_38c70064?w=800',
+      'https://images.unsplash.com/photo-viking_ship_museum_o_01033c7f?w=800',
+      'https://images.unsplash.com/photo-viking_ship_museum_o_e12a105b?w=800',
+      'https://images.unsplash.com/photo-viking_ship_museum_o_44d0b9ce?w=800'
+    ],
+    historicalInfo: 'The Viking Ship Museum was built in 1926 specifically to house the Oseberg ship discovery. The three Viking ships on display - the Oseberg (discovered 1904), Gokstad (1880), and Tune (1867) - were all found in burial mounds around the Oslo Fjord. These ships date from the 9th century and are among the most important Viking Age archaeological finds.',
+    yearBuilt: '1926',
+    architect: 'Arnstein Arneberg',
+    translations: {
+      en: {
+        name: 'Viking Ship Museum',
+        narration: 'Welcome to the Viking Ship Museum, home to the world\'s best-preserved Viking ships. These magnificent vessels from the 9th century offer a unique glimpse into Viking culture and seafaring prowess.',
+        description: 'Home to the world\'s best-preserved Viking ships',
+        detailedDescription: 'The Viking Ship Museum in Oslo houses some of the world\'s best-preserved Viking ships and artifacts from the Viking Age. The museum\'s centerpiece is three remarkable Viking longships: the Oseberg, Gokstad, and Tune ships, all dating from the 9th century. These ships were used as burial ships for high-ranking Vikings and were discovered in burial mounds around the Oslo Fjord. The Oseberg ship, discovered in 1904, is the most elaborately decorated and best preserved of the three, featuring intricate wood carvings on its prow and stern. It was used as a burial ship for two women, possibly a queen and her servant, and contained a wealth of grave goods including sleds, carts, beds, and textiles. The Gokstad ship, found in 1880, is a seaworthy ocean-going vessel that demonstrates the Vikings\' advanced shipbuilding techniques. A replica of this ship successfully crossed the Atlantic in 1893. The museum also displays artifacts from the burial mounds, providing insights into Viking daily life, craftsmanship, and burial customs. The ships represent the pinnacle of Viking Age engineering and showcase the maritime culture that enabled the Vikings to explore, trade, and raid across vast distances.',
+        historicalInfo: 'The Viking Ship Museum was built in 1926 specifically to house the Oseberg ship discovery. The three Viking ships on display - the Oseberg (discovered 1904), Gokstad (1880), and Tune (1867) - were all found in burial mounds around the Oslo Fjord. These ships date from the 9th century and are among the most important Viking Age archaeological finds.',
+        yearBuilt: '1926',
+        architect: 'Arnstein Arneberg'
+      },
+      ko: {
+        name: '바이킹 선박 박물관',
+        narration: '세계에서 가장 잘 보존된 바이킹 선박이 있는 바이킹 선박 박물관에 오신 것을 환영합니다. 9세기의 이 장엄한 선박들은 바이킹 문화와 항해 기술에 대한 독특한 통찰을 제공합니다.',
+        description: '세계에서 가장 잘 보존된 바이킹 선박이 있는 곳',
+        detailedDescription: '오슬로의 바이킹 선박 박물관은 세계에서 가장 잘 보존된 바이킹 선박과 바이킹 시대의 유물을 소장하고 있습니다. 박물관의 중심은 9세기로 거슬러 올라가는 세 척의 놀라운 바이킹 롱십입니다: 오세베르그, 고크스타드, 투네 선박. 이 선박들은 고위 바이킹의 매장선으로 사용되었으며 오슬로 피요르드 주변의 고분에서 발견되었습니다. 1904년에 발견된 오세베르그 선박은 세 척 중 가장 정교하게 장식되고 가장 잘 보존되어 있으며, 선수와 선미에 복잡한 목각이 있습니다. 이 선박은 두 여성, 아마도 여왕과 그녀의 하인의 매장선으로 사용되었으며 썰매, 수레, 침대, 직물을 포함한 많은 부장품을 담고 있었습니다. 1880년에 발견된 고크스타드 선박은 바이킹의 진보된 조선 기술을 보여주는 항해 가능한 원양 선박입니다. 이 선박의 복제품은 1893년에 대서양을 성공적으로 횡단했습니다. 박물관은 또한 고분의 유물을 전시하여 바이킹의 일상생활, 장인 정신, 매장 관습에 대한 통찰을 제공합니다. 이 선박들은 바이킹 시대 공학의 정점을 나타내며 바이킹이 광대한 거리를 탐험하고 교역하고 약탈할 수 있게 한 해양 문화를 보여줍니다.',
+        historicalInfo: '바이킹 선박 박물관은 1926년에 오세베르그 선박 발견을 수용하기 위해 특별히 건설되었습니다. 전시된 세 척의 바이킹 선박 - 오세베르그(1904년 발견), 고크스타드(1880년), 투네(1867년) - 는 모두 오슬로 피요르드 주변의 고분에서 발견되었습니다. 이 선박들은 9세기로 거슬러 올라가며 가장 중요한 바이킹 시대 고고학 발견 중 하나입니다.',
+        yearBuilt: '1926년',
+        architect: '아른스타인 아르네베르그'
+      },
+      ja: {
+        name: 'ヴァイキング船博物館',
+        narration: '世界で最も保存状態の良いヴァイキング船がある、ヴァイキング船博物館へようこそ。9世紀のこれらの壮大な船は、ヴァイキング文化と航海技術への独特な洞察を提供します。',
+        description: '世界で最も保存状態の良いヴァイキング船がある場所',
+        detailedDescription: 'オスロのヴァイキング船博物館には、世界で最も保存状態の良いヴァイキング船とヴァイキング時代の遺物が収蔵されています。博物館の中心は、9世紀にさかのぼる3隻の注目すべきヴァイキングロングシップです:オーセベルグ号、ゴクスタッド号、トゥーネ号。これらの船は高位のヴァイキングの埋葬船として使用され、オスロフィヨルド周辺の古墳で発見されました。1904年に発見されたオーセベルグ号は、3隻の中で最も精巧に装飾され、最も保存状態が良く、船首と船尾に複雑な木彫りが施されています。この船は2人の女性、おそらく女王とその召使いの埋葬船として使用され、そり、荷車、ベッド、織物を含む豊富な副葬品が含まれていました。1880年に発見されたゴクスタッド号は、ヴァイキングの高度な造船技術を示す航海可能な遠洋船です。この船のレプリカは1893年に大西洋を横断することに成功しました。博物館はまた、古墳からの遺物を展示し、ヴァイキングの日常生活、職人技、埋葬習慣への洞察を提供しています。これらの船は、ヴァイキング時代の工学の頂点を表し、ヴァイキングが広大な距離を探検し、貿易し、襲撃することを可能にした海洋文化を示しています。',
+        historicalInfo: 'ヴァイキング船博物館は、オーセベルグ船の発見を収容するために1926年に特別に建設されました。展示されている3隻のヴァイキング船 - オーセベルグ号(1904年発見)、ゴクスタッド号(1880年)、トゥーネ号(1867年) - はすべてオスロフィヨルド周辺の古墳で発見されました。これらの船は9世紀にさかのぼり、最も重要なヴァイキング時代の考古学的発見の中にあります。',
+        yearBuilt: '1926年',
+        architect: 'アルンステイン・アルネベルグ'
+      },
+      zh: {
+        name: '维京船博物馆',
+        narration: '欢迎来到维京船博物馆，这里是世界上保存最完好的维京船的所在地。这些来自9世纪的宏伟船只为了解维京文化和航海技艺提供了独特的视角。',
+        description: '世界上保存最完好的维京船的所在地',
+        detailedDescription: '奥斯陆的维京船博物馆收藏着世界上保存最完好的维京船和维京时代的文物。博物馆的核心展品是三艘非凡的维京长船：奥塞贝格号、戈克斯塔号和图内号，都可追溯到9世纪。这些船被用作高级维京人的葬船，在奥斯陆峡湾周围的古墓中被发现。1904年发现的奥塞贝格号是三艘船中装饰最精美、保存最完好的，船头和船尾有复杂的木雕。它被用作两名女性（可能是女王和她的仆人）的葬船，包含了大量陪葬品，包括雪橇、马车、床和纺织品。1880年发现的戈克斯塔号是一艘适合航海的远洋船只，展示了维京人先进的造船技术。这艘船的复制品在1893年成功横渡了大西洋。博物馆还展示了古墓中的文物，提供了对维京人日常生活、工艺和葬礼习俗的洞察。这些船代表了维京时代工程的巅峰，展示了使维京人能够在广阔距离上探索、贸易和掠夺的海洋文化。',
+        historicalInfo: '维京船博物馆建于1926年，专门用于安置奥塞贝格号船的发现。展出的三艘维京船——奥塞贝格号（1904年发现）、戈克斯塔号（1880年）和图内号（1867年）——都是在奥斯陆峡湾周围的古墓中发现的。这些船可追溯到9世纪，是最重要的维京时代考古发现之一。',
+        yearBuilt: '1926年',
+        architect: '阿恩斯坦·阿内贝格'
+      }
+    }
+  },
+  {
+    id: 'oslo_opera_house',
+    cityId: 'oslo',
+    name: 'Oslo Opera House',
+    lat: 59.9075,
+    lng: 10.7533,
+    radius: 80,
+    narration: 'Welcome to the Oslo Opera House, a stunning architectural masterpiece rising from the Oslo Fjord. This modern landmark invites visitors to walk on its sloping roof for panoramic views of the city and fjord.',
+    description: 'Norway\'s architectural masterpiece with a walkable roof',
+    category: 'Opera House',
+    detailedDescription: 'The Oslo Opera House is the home of the Norwegian National Opera and Ballet and one of Norway\'s most visited architectural landmarks. Designed by the Norwegian architecture firm Snøhetta, the building opened in 2008 and has won numerous international architecture awards, including the EU Prize for Contemporary Architecture in 2009. The building\'s most distinctive feature is its sloping white marble roof that appears to rise from the waters of the Oslo Fjord. The roof is accessible to the public and has become one of Oslo\'s most popular gathering spots, offering stunning 360-degree views of the city, harbor, and surrounding mountains. The design concept was inspired by Norwegian nature, particularly glaciers and icebergs, with the building appearing to float on the water\'s edge. The opera house features three stages and can seat over 1,364 people in the main auditorium. The interior showcases Norwegian craftsmanship with oak walls and floors, while the wave wall in the main foyer is covered with handmade oak panels. The building uses sustainable design principles and houses state-of-the-art performance facilities, making it both an architectural icon and a world-class cultural venue.',
+    photos: [
+      'https://images.unsplash.com/photo-oslo_opera_house_nor_b6a9f9de?w=800',
+      'https://images.unsplash.com/photo-oslo_opera_house_nor_67d0125e?w=800',
+      'https://images.unsplash.com/photo-oslo_opera_house_nor_b6faa5c7?w=800',
+      'https://images.unsplash.com/photo-oslo_opera_house_nor_b993bc96?w=800',
+      'https://images.unsplash.com/photo-oslo_opera_house_nor_5509000c?w=800',
+      'https://images.unsplash.com/photo-oslo_opera_house_nor_8f70f15d?w=800',
+      'https://images.unsplash.com/photo-oslo_opera_house_nor_b53944c6?w=800'
+    ],
+    historicalInfo: 'The Oslo Opera House was designed by the Norwegian architectural firm Snøhetta and opened on April 12, 2008. It was the largest cultural building constructed in Norway since Nidaros Cathedral was completed around 1300. The building won the EU Prize for Contemporary Architecture (Mies van der Rohe Award) in 2009 and the World Architecture Festival Culture Award in 2008.',
+    yearBuilt: '2008',
+    architect: 'Snøhetta',
+    translations: {
+      en: {
+        name: 'Oslo Opera House',
+        narration: 'Welcome to the Oslo Opera House, a stunning architectural masterpiece rising from the Oslo Fjord. This modern landmark invites visitors to walk on its sloping roof for panoramic views of the city and fjord.',
+        description: 'Norway\'s architectural masterpiece with a walkable roof',
+        detailedDescription: 'The Oslo Opera House is the home of the Norwegian National Opera and Ballet and one of Norway\'s most visited architectural landmarks. Designed by the Norwegian architecture firm Snøhetta, the building opened in 2008 and has won numerous international architecture awards, including the EU Prize for Contemporary Architecture in 2009. The building\'s most distinctive feature is its sloping white marble roof that appears to rise from the waters of the Oslo Fjord. The roof is accessible to the public and has become one of Oslo\'s most popular gathering spots, offering stunning 360-degree views of the city, harbor, and surrounding mountains. The design concept was inspired by Norwegian nature, particularly glaciers and icebergs, with the building appearing to float on the water\'s edge. The opera house features three stages and can seat over 1,364 people in the main auditorium. The interior showcases Norwegian craftsmanship with oak walls and floors, while the wave wall in the main foyer is covered with handmade oak panels. The building uses sustainable design principles and houses state-of-the-art performance facilities, making it both an architectural icon and a world-class cultural venue.',
+        historicalInfo: 'The Oslo Opera House was designed by the Norwegian architectural firm Snøhetta and opened on April 12, 2008. It was the largest cultural building constructed in Norway since Nidaros Cathedral was completed around 1300. The building won the EU Prize for Contemporary Architecture (Mies van der Rohe Award) in 2009 and the World Architecture Festival Culture Award in 2008.',
+        yearBuilt: '2008',
+        architect: 'Snøhetta'
+      },
+      ko: {
+        name: '오슬로 오페라 하우스',
+        narration: '오슬로 피요르드에서 솟아오르는 놀라운 건축 걸작 오슬로 오페라 하우스에 오신 것을 환영합니다. 이 현대적인 랜드마크는 방문객들을 경사진 지붕 위를 걸으며 도시와 피요르드의 파노라마 전망을 즐길 수 있도록 초대합니다.',
+        description: '걸을 수 있는 지붕이 있는 노르웨이의 건축 걸작',
+        detailedDescription: '오슬로 오페라 하우스는 노르웨이 국립 오페라 발레단의 본거지이자 노르웨이에서 가장 많이 방문하는 건축 랜드마크 중 하나입니다. 노르웨이 건축 회사 스뇌헤타가 설계한 이 건물은 2008년에 개관했으며 2009년 EU 현대 건축상을 포함한 수많은 국제 건축상을 수상했습니다. 건물의 가장 독특한 특징은 오슬로 피요르드의 물에서 솟아오르는 것처럼 보이는 경사진 흰색 대리석 지붕입니다. 지붕은 대중에게 개방되어 있으며 오슬로에서 가장 인기 있는 모임 장소 중 하나가 되었으며, 도시, 항구, 주변 산의 멋진 360도 전망을 제공합니다. 디자인 개념은 특히 빙하와 빙산과 같은 노르웨이 자연에서 영감을 받았으며, 건물이 물가에 떠 있는 것처럼 보입니다. 오페라 하우스는 3개의 무대를 갖추고 있으며 메인 강당에는 1,364명 이상을 수용할 수 있습니다. 내부는 오크 벽과 바닥으로 노르웨이 장인 정신을 보여주며, 메인 로비의 웨이브 벽은 수제 오크 패널로 덮여 있습니다. 건물은 지속 가능한 디자인 원칙을 사용하고 최첨단 공연 시설을 갖추고 있어 건축 아이콘이자 세계적 수준의 문화 공연장입니다.',
+        historicalInfo: '오슬로 오페라 하우스는 노르웨이 건축 회사 스뇌헤타가 설계하여 2008년 4월 12일에 개관했습니다. 1300년경 니다로스 대성당이 완공된 이후 노르웨이에서 건설된 가장 큰 문화 건물이었습니다. 건물은 2009년 EU 현대 건축상(미스 반 데어 로에 상)과 2008년 세계 건축 페스티벌 문화상을 수상했습니다.',
+        yearBuilt: '2008년',
+        architect: '스뇌헤타'
+      },
+      ja: {
+        name: 'オスロオペラハウス',
+        narration: 'オスロフィヨルドから立ち上がる見事な建築の傑作、オスロオペラハウスへようこそ。この現代的なランドマークは、訪問者を傾斜した屋根の上を歩いて市内とフィヨルドのパノラマビューを楽しむよう招待します。',
+        description: '歩ける屋根を持つノルウェーの建築の傑作',
+        detailedDescription: 'オスロオペラハウスは、ノルウェー国立オペラバレエ団の本拠地であり、ノルウェーで最も訪問される建築的ランドマークの一つです。ノルウェーの建築事務所スノヘッタが設計したこの建物は、2008年に開館し、2009年のEU現代建築賞を含む数々の国際建築賞を受賞しています。建物の最も特徴的な特徴は、オスロフィヨルドの水面から立ち上がるように見える傾斜した白い大理石の屋根です。屋根は一般に公開されており、オスロで最も人気のある集まりスポットの一つとなり、市内、港、周辺の山々の見事な360度の景色を提供しています。デザインコンセプトは、特に氷河や氷山などのノルウェーの自然にインスピレーションを受けており、建物が水際に浮かんでいるように見えます。オペラハウスには3つのステージがあり、メインオーディトリアムには1,364人以上を収容できます。内部はオーク材の壁と床でノルウェーの職人技を披露し、メインロビーのウェーブウォールは手作りのオークパネルで覆われています。建物は持続可能なデザイン原則を使用し、最先端のパフォーマンス施設を備えているため、建築的アイコンであり世界クラスの文化会場でもあります。',
+        historicalInfo: 'オスロオペラハウスは、ノルウェーの建築事務所スノヘッタによって設計され、2008年4月12日に開館しました。1300年頃にニダロス大聖堂が完成して以来、ノルウェーで建設された最大の文化建築物でした。この建物は2009年にEU現代建築賞（ミース・ファン・デル・ローエ賞）と2008年の世界建築フェスティバル文化賞を受賞しました。',
+        yearBuilt: '2008年',
+        architect: 'スノヘッタ'
+      },
+      zh: {
+        name: '奥斯陆歌剧院',
+        narration: '欢迎来到奥斯陆歌剧院，这座从奥斯陆峡湾拔地而起的令人惊叹的建筑杰作。这个现代地标邀请游客在其倾斜的屋顶上行走，欣赏城市和峡湾的全景。',
+        description: '拥有可步行屋顶的挪威建筑杰作',
+        detailedDescription: '奥斯陆歌剧院是挪威国家歌剧院和芭蕾舞团的所在地，也是挪威访问量最大的建筑地标之一。由挪威建筑公司斯诺赫塔设计，该建筑于2008年开放，并获得了众多国际建筑奖项，包括2009年欧盟当代建筑奖。建筑最显著的特点是从奥斯陆峡湾水面升起的倾斜白色大理石屋顶。屋顶向公众开放，已成为奥斯陆最受欢迎的聚会场所之一，提供城市、港口和周围山脉的壮丽360度景观。设计理念受到挪威自然的启发，特别是冰川和冰山，建筑似乎漂浮在水边。歌剧院拥有三个舞台，主礼堂可容纳1,364多人。内部展示了挪威工艺，配有橡木墙壁和地板，主大厅的波浪墙覆盖着手工制作的橡木面板。建筑采用可持续设计原则，并设有最先进的表演设施，使其既是建筑标志，又是世界级的文化场所。',
+        historicalInfo: '奥斯陆歌剧院由挪威建筑公司斯诺赫塔设计，于2008年4月12日开放。这是自1300年左右尼达罗斯大教堂建成以来挪威建造的最大文化建筑。该建筑在2009年获得了欧盟当代建筑奖（密斯·凡德罗奖）和2008年世界建筑节文化奖。',
+        yearBuilt: '2008年',
+        architect: '斯诺赫塔'
       }
     }
   }
