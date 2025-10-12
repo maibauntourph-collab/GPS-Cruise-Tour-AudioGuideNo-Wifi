@@ -60,7 +60,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     useInAppMap: 'Use In-App Map',
     useGoogleMaps: 'Use Google Maps',
     location: 'Location',
-    clickToViewOnMap: 'Click to view on main map'
+    clickToViewOnMap: 'Click to view on main map',
+    bookTickets: 'Book Tickets & Tours',
+    bookOn: 'Book on'
   },
   ko: {
     landmarks: '명소',
@@ -95,7 +97,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     useInAppMap: '앱 내 지도 사용',
     useGoogleMaps: '구글 지도 사용',
     location: '위치',
-    clickToViewOnMap: '클릭하여 메인 지도에서 보기'
+    clickToViewOnMap: '클릭하여 메인 지도에서 보기',
+    bookTickets: '티켓 및 투어 예약',
+    bookOn: '예약하기'
   },
   es: {
     landmarks: 'Monumentos',
@@ -122,7 +126,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     progress: 'Progreso',
     landmarksVisited: 'Monumentos Visitados',
     getDirections: 'Obtener Direcciones',
-    allExplored: '¡Todos los monumentos explorados!'
+    allExplored: '¡Todos los monumentos explorados!',
+    bookTickets: 'Reservar Entradas y Tours',
+    bookOn: 'Reservar en'
   },
   fr: {
     landmarks: 'Monuments',
@@ -176,7 +182,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     progress: 'Fortschritt',
     landmarksVisited: 'Besuchte Sehenswürdigkeiten',
     getDirections: 'Wegbeschreibung',
-    allExplored: 'Alle Sehenswürdigkeiten erkundet!'
+    allExplored: 'Alle Sehenswürdigkeiten erkundet!',
+    bookTickets: 'Tickets & Touren Buchen',
+    bookOn: 'Buchen auf'
   },
   it: {
     landmarks: 'Monumenti',
@@ -203,7 +211,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     progress: 'Progresso',
     landmarksVisited: 'Monumenti Visitati',
     getDirections: 'Ottieni Indicazioni',
-    allExplored: 'Tutti i monumenti esplorati!'
+    allExplored: 'Tutti i monumenti esplorati!',
+    bookTickets: 'Prenota Biglietti e Tour',
+    bookOn: 'Prenota su'
   },
   zh: {
     landmarks: '地标',
@@ -230,7 +240,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     progress: '进度',
     landmarksVisited: '已访问地标',
     getDirections: '获取路线',
-    allExplored: '所有地标已探索!'
+    allExplored: '所有地标已探索!',
+    bookTickets: '预订门票和旅游',
+    bookOn: '预订于'
   },
   ja: {
     landmarks: 'ランドマーク',
@@ -261,7 +273,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     chooseNavigationApp: 'ナビゲーションアプリを選択',
     selectHowToNavigate: '目的地へのナビゲーション方法を選択:',
     useInAppMap: 'アプリ内マップを使用',
-    useGoogleMaps: 'Googleマップを使用'
+    useGoogleMaps: 'Googleマップを使用',
+    bookTickets: 'チケット・ツアー予約',
+    bookOn: '予約する'
   },
   pt: {
     landmarks: 'Monumentos',
