@@ -208,9 +208,20 @@ npm run db:push        # Push schema changes to database
 npm run db:push --force # Force push (when conflicts occur)
 ```
 
-## Recent Changes (2025-10-11)
+## Recent Changes (2025-10-12)
 
-### Latest Update: TTS Speed Control (Today)
+### Latest Update: Historical Info Translation & Language-Specific TTS Voices (Today)
+- **historicalInfo Translation**: Extended getTranslatedContent() to support 'historicalInfo' field
+- **Complete Localization**: Historical information now translates in LandmarkPanel and LandmarkDetails
+- **Language-Specific TTS Voices**: 
+  - audioService now explicitly selects voices by language
+  - Prefers local voices over remote for better quality
+  - Supports exact language match (ko-KR) with base language fallback (ko)
+  - Voices loaded dynamically with onvoiceschanged event handler
+- **Multi-language Support**: Verified translation and TTS for EN, KO, JA languages
+- **E2E Tested**: Confirmed historical info displays in correct language, screenshots verified
+
+### Previous Update: TTS Speed Control
 - **Adjustable Speech Rate**: Slider control in AppSidebar (0.5x-2x, 0.1 step)
 - **Real-time Updates**: Speech rate display updates as slider moves
 - **Persistent Settings**: Rate saved to localStorage ('tts-speed' key)
