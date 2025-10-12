@@ -25,7 +25,7 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Route, X } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Route, X, Ship } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -66,6 +66,7 @@ export default function Home() {
   const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
   const [showLandmarks, setShowLandmarks] = useState(true);
   const [showActivities, setShowActivities] = useState(true);
+  const [showCruisePort, setShowCruisePort] = useState(true);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
   const [tourRouteInfo, setTourRouteInfo] = useState<{ distance: number; duration: number } | null>(null);
 
@@ -323,6 +324,18 @@ export default function Home() {
               <Activity className="w-4 h-4" />
               <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
             </Button>
+            {selectedCity?.cruisePort && (
+              <Button
+                variant={showCruisePort ? "default" : "outline"}
+                size="sm"
+                onClick={() => setShowCruisePort(!showCruisePort)}
+                data-testid="button-toggle-cruise-port"
+                className="gap-1"
+              >
+                <Ship className="w-4 h-4" />
+                <span className="hidden sm:inline">{t('cruisePortInfo', selectedLanguage)}</span>
+              </Button>
+            )}
           </div>
         </header>
         
@@ -349,20 +362,19 @@ export default function Home() {
             {/* Show cruise port info and landmark list only when no landmark is selected */}
             {!selectedLandmark && (
               <>
-                {selectedCity && selectedCity.cruisePort && (
-                  <div className="absolute top-4 left-4 right-4 z-[1000] max-w-md">
-                    <CruisePortInfo
-                      city={selectedCity}
-                      landmarks={filteredLandmarks}
-                      selectedLanguage={selectedLanguage}
-                      onLandmarkClick={(landmarkId) => {
-                        const landmark = filteredLandmarks.find(l => l.id === landmarkId);
-                        if (landmark) {
-                          setSelectedLandmark(landmark);
-                        }
-                      }}
-                    />
-                  </div>
+                {selectedCity && selectedCity.cruisePort && showCruisePort && (
+                  <CruisePortInfo
+                    city={selectedCity}
+                    landmarks={filteredLandmarks}
+                    selectedLanguage={selectedLanguage}
+                    onLandmarkClick={(landmarkId) => {
+                      const landmark = filteredLandmarks.find(l => l.id === landmarkId);
+                      if (landmark) {
+                        setSelectedLandmark(landmark);
+                      }
+                    }}
+                    onClose={() => setShowCruisePort(false)}
+                  />
                 )}
                 <LandmarkList
                   landmarks={filteredLandmarks}

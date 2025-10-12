@@ -1,7 +1,8 @@
+import { useState, useRef, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Anchor, MapPin, Clock, Info, Ship } from 'lucide-react';
+import { Anchor, MapPin, Clock, Info, Ship, X } from 'lucide-react';
 import { City, Landmark, CruisePort } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
 
@@ -10,6 +11,7 @@ interface CruisePortInfoProps {
   landmarks: Landmark[];
   selectedLanguage: string;
   onLandmarkClick: (landmarkId: string) => void;
+  onClose?: () => void;
 }
 
 function getCruisePortTranslation(cruisePort: CruisePort, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
@@ -20,7 +22,13 @@ function getCruisePortTranslation(cruisePort: CruisePort, language: string, fiel
   return cruisePort[field] || '';
 }
 
-export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkClick }: CruisePortInfoProps) {
+export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkClick, onClose }: CruisePortInfoProps) {
+  const [isDragging, setIsDragging] = useState(false);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [zIndex, setZIndex] = useState(1000);
+  const cardRef = useRef<HTMLDivElement>(null);
+
   if (!city.cruisePort) {
     return null;
   }
@@ -34,14 +42,108 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   const recommendedDuration = getCruisePortTranslation(cruisePort, selectedLanguage, 'recommendedDuration');
   const tips = getCruisePortTranslation(cruisePort, selectedLanguage, 'tips');
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest('button')) {
+      return;
+    }
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX - translate.x,
+      y: e.clientY - translate.y
+    });
+    setZIndex(2000);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging || !cardRef.current) return;
+    
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
+    
+    // Get container bounds to clamp the drag
+    const container = cardRef.current.offsetParent as HTMLElement;
+    if (container) {
+      const cardRect = cardRef.current.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      
+      // Calculate max translate values (accounting for initial position of 16px)
+      const maxX = containerRect.width - cardRect.width - 32; // 16px left + 16px right
+      const maxY = containerRect.height - cardRect.height - 32;
+      
+      // Clamp translate to stay within bounds
+      const clampedX = Math.max(0, Math.min(newX, maxX));
+      const clampedY = Math.max(0, Math.min(newY, maxY));
+      
+      setTranslate({ x: clampedX, y: clampedY });
+    } else {
+      setTranslate({ x: newX, y: newY });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    // Reset z-index after a brief delay to allow click handlers to complete
+    setTimeout(() => setZIndex(1000), 100);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    } else {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, dragStart]);
+
+  const handleCardClick = () => {
+    setZIndex(2000);
+  };
+
   return (
-    <Card className="p-4 mb-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800" data-testid="card-cruise-port-info">
-      <div className="flex items-center gap-2 mb-3">
-        <Ship className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-        <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-100" data-testid="text-cruise-port-title">
-          {t('cruisePortInfo', selectedLanguage)}
-        </h3>
-      </div>
+    <div
+      ref={cardRef}
+      style={{
+        position: 'absolute',
+        left: '16px',
+        top: '16px',
+        right: '16px',
+        zIndex,
+        cursor: isDragging ? 'grabbing' : 'grab',
+        maxWidth: '24rem',
+        userSelect: 'none',
+        transform: `translate(${translate.x}px, ${translate.y}px)`
+      }}
+      onMouseDown={handleMouseDown}
+      onClick={handleCardClick}
+      data-testid="card-cruise-port-container"
+    >
+      <Card className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800" data-testid="card-cruise-port-info">
+        <div className="flex items-center gap-2 mb-3">
+          <Ship className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-100 flex-1" data-testid="text-cruise-port-title">
+            {t('cruisePortInfo', selectedLanguage)}
+          </h3>
+          {onClose && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
+              className="h-6 w-6 hover:bg-blue-200 dark:hover:bg-blue-800"
+              data-testid="button-close-cruise-port"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          )}
+        </div>
 
       <div className="space-y-3">
         {/* Port Name */}
@@ -110,7 +212,8 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
             </p>
           </div>
         )}
-      </div>
-    </Card>
+        </div>
+      </Card>
+    </div>
   );
 }
