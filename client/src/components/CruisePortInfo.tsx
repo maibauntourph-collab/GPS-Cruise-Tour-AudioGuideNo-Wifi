@@ -356,7 +356,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
             )}
           </TabsContent>
 
-          <TabsContent value="transport" className="space-y-3 mt-3">
+          <TabsContent value="transport" className="mt-3 max-h-[400px] overflow-y-auto pr-2">
             {cruisePort.transportOptions && cruisePort.transportOptions.length > 0 ? (
               <div className="space-y-3">
                 {cruisePort.transportOptions.map((transport, index) => {
