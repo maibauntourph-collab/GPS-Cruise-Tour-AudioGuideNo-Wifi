@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SidebarTrigger, SidebarInset, useSidebar } from '@/components/ui/sidebar';
+import { 
+  AlertDialog, 
+  AlertDialogAction, 
+  AlertDialogCancel, 
+  AlertDialogContent, 
+  AlertDialogDescription, 
+  AlertDialogFooter, 
+  AlertDialogHeader, 
+  AlertDialogTitle 
+} from '@/components/ui/alert-dialog';
 import { MapView } from '@/components/MapView';
 import { LandmarkList } from '@/components/LandmarkList';
 import { LandmarkPanel } from '@/components/LandmarkPanel';
@@ -12,7 +22,7 @@ import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
 import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
-import { getTranslatedContent } from '@/lib/translations';
+import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
 
 export default function Home() {
@@ -47,6 +57,8 @@ export default function Home() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [speechRate, setSpeechRate] = useState<number>(audioService.getCurrentRate());
+  const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
+  const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -85,6 +97,34 @@ export default function Home() {
   const selectedCity = cities.find(c => c.id === selectedCityId);
   
   const handleLandmarkRoute = (landmark: Landmark) => {
+    setPendingLandmark(landmark);
+    setShowDirectionsDialog(true);
+  };
+
+  const openGoogleMaps = () => {
+    if (!pendingLandmark) return;
+    
+    const destination = `${pendingLandmark.lat},${pendingLandmark.lng}`;
+    
+    let googleMapsUrl = '';
+    
+    if (position) {
+      // If we have user's position, set it as origin
+      const origin = `${position.latitude},${position.longitude}`;
+      googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
+    } else {
+      // If no position, just show the destination
+      googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
+    }
+    
+    window.open(googleMapsUrl, '_blank');
+    setShowDirectionsDialog(false);
+    setPendingLandmark(null);
+  };
+
+  const useInAppNavigation = () => {
+    if (!pendingLandmark) return;
+    
     const startPosition = position 
       ? [position.latitude, position.longitude] as [number, number]
       : selectedCity 
@@ -93,8 +133,11 @@ export default function Home() {
 
     setActiveRoute({
       start: startPosition,
-      end: [landmark.lat, landmark.lng],
+      end: [pendingLandmark.lat, pendingLandmark.lng],
     });
+    
+    setShowDirectionsDialog(false);
+    setPendingLandmark(null);
   };
   
   const handleCityChange = (cityId: string) => {
@@ -226,6 +269,31 @@ export default function Home() {
           )}
         </div>
       </SidebarInset>
+
+      {/* Google Maps Direction Choice Dialog */}
+      <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
+        <AlertDialogContent data-testid="dialog-directions-choice">
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('chooseNavigationApp', selectedLanguage)}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('selectHowToNavigate', selectedLanguage)}
+              {pendingLandmark && (
+                <span className="block mt-2 font-medium">
+                  {getTranslatedContent(pendingLandmark, selectedLanguage, 'name')}
+                </span>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={useInAppNavigation} data-testid="button-use-in-app">
+              {t('useInAppMap', selectedLanguage)}
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={openGoogleMaps} data-testid="button-use-google-maps">
+              {t('useGoogleMaps', selectedLanguage)}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }

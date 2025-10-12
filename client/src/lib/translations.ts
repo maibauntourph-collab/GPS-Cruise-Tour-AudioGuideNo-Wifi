@@ -53,7 +53,11 @@ const uiTranslations: Record<string, Record<string, string>> = {
     landmarksVisited: 'Landmarks Visited',
     getDirections: 'Get Directions',
     allExplored: 'All landmarks explored!',
-    speechSpeed: 'Speech Speed'
+    speechSpeed: 'Speech Speed',
+    chooseNavigationApp: 'Choose Navigation App',
+    selectHowToNavigate: 'Select how you would like to navigate to:',
+    useInAppMap: 'Use In-App Map',
+    useGoogleMaps: 'Use Google Maps'
   },
   ko: {
     landmarks: '명소',
@@ -81,7 +85,11 @@ const uiTranslations: Record<string, Record<string, string>> = {
     landmarksVisited: '방문한 명소',
     getDirections: '길찾기',
     allExplored: '모든 명소를 탐험했습니다!',
-    speechSpeed: '음성 속도'
+    speechSpeed: '음성 속도',
+    chooseNavigationApp: '내비게이션 앱 선택',
+    selectHowToNavigate: '다음 위치로 이동할 방법을 선택하세요:',
+    useInAppMap: '앱 내 지도 사용',
+    useGoogleMaps: '구글 지도 사용'
   },
   es: {
     landmarks: 'Monumentos',
@@ -243,7 +251,11 @@ const uiTranslations: Record<string, Record<string, string>> = {
     progress: '進捗',
     landmarksVisited: '訪問したランドマーク',
     getDirections: '道順を取得',
-    allExplored: 'すべてのランドマークを探索しました!'
+    allExplored: 'すべてのランドマークを探索しました!',
+    chooseNavigationApp: 'ナビゲーションアプリを選択',
+    selectHowToNavigate: '目的地へのナビゲーション方法を選択:',
+    useInAppMap: 'アプリ内マップを使用',
+    useGoogleMaps: 'Googleマップを使用'
   },
   pt: {
     landmarks: 'Monumentos',
