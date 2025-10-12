@@ -76,58 +76,98 @@ The application is built with a React frontend and an Express.js backend, commun
 
 ### Europe
 
-**Rome, Italy (5 landmarks)**
+**Rome, Italy (8 landmarks)**
 1. **Colosseum** - 70m radius, 7 photos
 2. **Roman Forum** - 60m radius
 3. **Trevi Fountain** - 50m radius
 4. **Pantheon** - 50m radius
 5. **Spanish Steps** - 50m radius
+6. **Vatican Museums** - World's largest art collection, 100m radius
+7. **St. Peter's Basilica** - Renaissance masterpiece, largest church in the world, 100m radius
+8. **Castel Sant'Angelo** - Ancient fortress and papal castle, 70m radius
 
-**Paris, France (4 landmarks)**
+**Paris, France (7 landmarks)**
 1. **Eiffel Tower** - 70m radius
 2. **Louvre Museum** - 60m radius
 3. **Notre-Dame Cathedral** - 50m radius
 4. **Arc de Triomphe** - 50m radius
+5. **Sacré-Cœur Basilica** - White-domed basilica atop Montmartre, 60m radius
+6. **Palace of Versailles** - Opulent royal palace and gardens, 100m radius
+7. **Musée d'Orsay** - Impressionist art museum in historic railway station, 60m radius
 
-**London, United Kingdom (4 landmarks)**
+**London, United Kingdom (7 landmarks)**
 1. **Big Ben** - 50m radius
 2. **Tower Bridge** - 60m radius
 3. **Buckingham Palace** - 70m radius
 4. **London Eye** - 50m radius
+5. **Westminster Abbey** - Historic coronation church, 60m radius
+6. **British Museum** - World's greatest museum of human history, 70m radius
+7. **St. Paul's Cathedral** - Iconic Baroque cathedral with massive dome, 60m radius
 
 ### Southeast Asia
 
-**Cebu, Philippines (4 landmarks)**
+**Cebu, Philippines (7 landmarks)**
 1. **Magellan's Cross** - Historic wooden cross from 1521, 50m radius
 2. **Basilica del Santo Niño** - Oldest Roman Catholic church in Philippines (1565), 60m radius
 3. **Fort San Pedro** - Oldest triangular Spanish colonial fortress, 60m radius
 4. **TOPS Lookout** - Mountain viewpoint with 360° views, 70m radius
+5. **Taoist Temple** - Chinese temple with traditional architecture, 60m radius
+6. **Cebu Heritage Monument** - Historical sculpture depicting Cebu's history, 50m radius
+7. **Sirao Flower Garden** - Colorful "Little Amsterdam" flower garden, 70m radius
 
-**Singapore (4 landmarks)**
+**Singapore (7 landmarks)**
 1. **Marina Bay Sands** - Iconic resort with rooftop infinity pool, 70m radius
 2. **Merlion Park** - Singapore's national icon statue, 50m radius
 3. **Gardens by the Bay** - Futuristic garden with Supertree Grove, 100m radius
 4. **Singapore Flyer** - Giant observation wheel (165m tall), 60m radius
+5. **Chinatown Heritage Centre** - Museum showcasing early Chinese immigrant life, 60m radius
+6. **National Museum of Singapore** - Oldest museum with rich collections, 70m radius
+7. **Sentosa Island** - Premier island resort destination, 100m radius
 
-**Penang, Malaysia (4 landmarks)**
+**Penang, Malaysia (7 landmarks)**
 1. **Kek Lok Si Temple** - Largest Buddhist temple in Southeast Asia, 70m radius
 2. **Fort Cornwallis** - Largest standing British fort in Malaysia (1786), 60m radius
 3. **Khoo Kongsi** - Ornate Chinese clan house and UNESCO heritage site, 50m radius
 4. **Penang Hill** - Hill station with funicular railway (821m elevation), 80m radius
+5. **George Town UNESCO Site** - World Heritage historic city center, 80m radius
+6. **Pinang Peranakan Mansion** - Museum of Peranakan heritage, 60m radius
+7. **Penang National Park** - Smallest national park with beaches and rainforest, 100m radius
 
-**Kuala Lumpur, Malaysia (2 landmarks)**
+**Kuala Lumpur, Malaysia (5 landmarks)**
 1. **Petronas Twin Towers** - World's tallest twin skyscrapers (452m), 80m radius
 2. **Batu Caves** - Sacred Hindu temple complex in limestone caves, 70m radius
+3. **Thean Hou Temple** - Six-tiered Chinese temple, 70m radius
+4. **KL Tower** - Iconic telecommunication tower with observation deck, 60m radius
+5. **Central Market** - Historic cultural market for arts and crafts, 60m radius
 
-**Phuket, Thailand (4 landmarks)**
+**Phuket, Thailand (7 landmarks)**
 1. **Big Buddha Phuket** - 45m white marble Buddha statue on hilltop, 70m radius
 2. **Patong Beach** - Most famous beach and entertainment hub (3km stretch), 100m radius
 3. **Wat Chalong** - Phuket's largest and most important Buddhist temple, 60m radius
 4. **Karon Viewpoint** - Panoramic viewpoint overlooking 3 bays, 50m radius
+5. **Old Phuket Town** - Historic district with Sino-Portuguese architecture, 70m radius
+6. **Phi Phi Islands** - Tropical island paradise with limestone cliffs, 100m radius
+7. **Similan Islands** - Premier diving destination with pristine coral reefs, 100m radius
 
 ## Recent Changes (2025-10-12)
 
-### Latest Update: Click Marker to Update Main Map (Today)
+### Latest Update: Expanded Landmark Collection - 24 New Attractions (Today)
+- **Major Content Expansion**: Added 24 new landmarks across 8 cities (3 per city)
+- **Europe Additions**:
+  - **Rome** (3 new): Vatican Museums, St. Peter's Basilica, Castel Sant'Angelo
+  - **Paris** (3 new): Sacré-Cœur Basilica, Palace of Versailles, Musée d'Orsay  
+  - **London** (3 new): Westminster Abbey, British Museum, St. Paul's Cathedral
+- **Southeast Asia Additions**:
+  - **Cebu** (3 new): Taoist Temple, Cebu Heritage Monument, Sirao Flower Garden
+  - **Singapore** (3 new): Chinatown Heritage Centre, National Museum, Sentosa Island
+  - **Penang** (3 new): George Town UNESCO Site, Pinang Peranakan Mansion, Penang National Park
+  - **Kuala Lumpur** (3 new): Thean Hou Temple, KL Tower, Central Market
+  - **Phuket** (3 new): Old Phuket Town, Phi Phi Islands, Similan Islands
+- **Translation Strategy**: All new landmarks include EN, IT, KO translations with auto-fallback to English for other languages (ES, FR, DE, ZH, JA, PT, RU)
+- **Complete Data**: Each landmark includes narration, detailed descriptions, historical info, 7 photos, GPS coordinates, and proper radii
+- **Total Landmarks**: Now 54 landmarks across 8 cities (was 30, now 54)
+
+### Previous Update: Click Marker to Update Main Map
 - **Interactive Map Synchronization**: Click the marker in landmark panel map to center main map on that location
 - **User Flow**:
   - Open landmark panel → see small map with location
