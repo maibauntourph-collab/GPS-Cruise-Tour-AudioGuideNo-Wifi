@@ -1,8 +1,9 @@
+import { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark, GpsPosition } from '@shared/schema';
-import { Navigation, MapPin, Volume2, Info, Activity, Landmark as LandmarkIcon } from 'lucide-react';
+import { Navigation, MapPin, Volume2, Info, Activity, Landmark as LandmarkIcon, Minus, List } from 'lucide-react';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 
@@ -23,6 +24,15 @@ export function LandmarkList({
   selectedLanguage = 'en',
   onLandmarkSelect,
 }: LandmarkListProps) {
+  const [isDragging, setIsDragging] = useState(false);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [zIndex, setZIndex] = useState(1000);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false);
+  const [lastCardHeight, setLastCardHeight] = useState(320); // Track card height before minimizing
+  const cardRef = useRef<HTMLDivElement>(null);
+
   const landmarksWithDistance = landmarks.map((landmark) => {
     const distance = userPosition
       ? calculateDistance(
@@ -41,14 +51,161 @@ export function LandmarkList({
     return a.distance - b.distance;
   });
 
-  return (
-    <div className="absolute bottom-4 left-4 right-4 md:left-auto md:w-96 z-[1000]">
+  // Clamp translate values to keep element within bounds
+  const clampTranslate = (x: number, y: number, elementWidth: number, elementHeight: number) => {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    const maxX = viewportWidth - elementWidth - 32;
+    const maxY = viewportHeight - elementHeight - 32;
+    
+    return {
+      x: Math.max(0, Math.min(x, maxX)),
+      y: Math.max(0, Math.min(y, maxY))
+    };
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    
+    if (target.closest('button') || !target.closest('[data-drag-handle]')) {
+      return;
+    }
+    
+    setIsDragging(true);
+    setHasMoved(false);
+    setDragStart({
+      x: e.clientX - translate.x,
+      y: e.clientY - translate.y
+    });
+    setZIndex(2000);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging || !cardRef.current) return;
+    
+    setHasMoved(true);
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
+    
+    const cardWidth = cardRef.current.offsetWidth;
+    const cardHeight = cardRef.current.offsetHeight;
+    
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    const maxX = viewportWidth - cardWidth - 32;
+    const maxY = viewportHeight - cardHeight - 32;
+    
+    const clampedX = Math.max(0, Math.min(newX, maxX));
+    const clampedY = Math.max(0, Math.min(newY, maxY));
+    
+    setTranslate({ x: clampedX, y: clampedY });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    } else {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, dragStart]);
+
+  const handleCardClick = () => {
+    setZIndex(2000);
+  };
+
+  // Render minimized floating icon
+  const renderMinimizedIcon = () => (
+    <div
+      ref={cardRef}
+      style={{
+        position: 'fixed',
+        left: '16px',
+        top: '16px',
+        zIndex,
+        cursor: isDragging ? 'grabbing' : 'pointer',
+        userSelect: 'none',
+        transform: `translate(${translate.x}px, ${translate.y}px)`
+      }}
+      onMouseDown={handleMouseDown}
+      onMouseUp={(e) => {
+        handleMouseUp();
+        if (!hasMoved) {
+          const fullCardWidth = 384;
+          const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 320);
+          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
+          setTranslate(clamped);
+          setIsMinimized(false);
+          setZIndex(2000);
+        }
+      }}
+      data-testid="icon-landmarklist-minimized"
+      data-drag-handle
+    >
+      <div className="relative">
+        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-orange-500 dark:from-primary dark:to-orange-600 flex items-center justify-center shadow-lg hover-elevate active-elevate-2 border-2 border-white dark:border-gray-800">
+          <List className="w-7 h-7 text-white" />
+        </div>
+        <div className="absolute inset-0 w-14 h-14 rounded-full bg-primary/40 animate-ping opacity-20"></div>
+      </div>
+    </div>
+  );
+
+  // Render full card
+  const renderFullCard = () => (
+    <div
+      ref={cardRef}
+      style={{
+        position: 'fixed',
+        left: '16px',
+        top: '16px',
+        zIndex,
+        width: '24rem',
+        maxHeight: 'calc(100vh - 32px)',
+        userSelect: 'none',
+        transform: `translate(${translate.x}px, ${translate.y}px)`
+      }}
+      onClick={handleCardClick}
+      data-testid="card-landmarklist-container"
+    >
       <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl max-h-80 overflow-y-auto">
-        <div className="p-4 border-b">
+        <div 
+          className="p-4 border-b flex items-center justify-between"
+          data-drag-handle
+          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+          onMouseDown={handleMouseDown}
+        >
           <h3 className="font-serif font-semibold text-lg flex items-center gap-2">
             <MapPin className="w-5 h-5 text-primary" />
             {t('landmarks', selectedLanguage)}
           </h3>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (cardRef.current) {
+                setLastCardHeight(cardRef.current.offsetHeight);
+              }
+              setIsMinimized(true);
+            }}
+            className="h-7 w-7 shrink-0"
+            data-testid="button-minimize-landmarklist"
+          >
+            <Minus className="w-4 h-4" />
+          </Button>
         </div>
         <div className="divide-y">
           {sortedLandmarks.map(({ landmark, distance }) => (
@@ -118,4 +275,6 @@ export function LandmarkList({
       </Card>
     </div>
   );
+
+  return isMinimized ? renderMinimizedIcon() : renderFullCard();
 }
