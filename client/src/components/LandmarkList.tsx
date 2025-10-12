@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -30,7 +30,7 @@ export function LandmarkList({
   const [zIndex, setZIndex] = useState(1000);
   const [isMinimized, setIsMinimized] = useState(false);
   const [hasMoved, setHasMoved] = useState(false);
-  const [lastCardHeight, setLastCardHeight] = useState(320); // Track card height before minimizing
+  const [lastCardHeight, setLastCardHeight] = useState(320);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const landmarksWithDistance = landmarks.map((landmark) => {
@@ -51,8 +51,7 @@ export function LandmarkList({
     return a.distance - b.distance;
   });
 
-  // Clamp translate values to keep element within bounds
-  const clampTranslate = (x: number, y: number, elementWidth: number, elementHeight: number) => {
+  const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     
@@ -63,30 +62,17 @@ export function LandmarkList({
       x: Math.max(0, Math.min(x, maxX)),
       y: Math.max(0, Math.min(y, maxY))
     };
-  };
+  }, []);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const target = e.target as HTMLElement;
+  const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
+    if (!cardRef.current) return;
     
-    if (target.closest('button') || !target.closest('[data-drag-handle]')) {
-      return;
-    }
-    
-    setIsDragging(true);
-    setHasMoved(false);
-    setDragStart({
-      x: e.clientX - translate.x,
-      y: e.clientY - translate.y
-    });
-    setZIndex(2000);
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !cardRef.current) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
     
     setHasMoved(true);
-    const newX = e.clientX - dragStart.x;
-    const newY = e.clientY - dragStart.y;
+    const newX = clientX - dragStart.x;
+    const newY = clientY - dragStart.y;
     
     const cardWidth = cardRef.current.offsetWidth;
     const cardHeight = cardRef.current.offsetHeight;
@@ -101,32 +87,51 @@ export function LandmarkList({
     const clampedY = Math.max(0, Math.min(newY, maxY));
     
     setTranslate({ x: clampedX, y: clampedY });
-  };
+  }, [dragStart.x, dragStart.y]);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     setIsDragging(false);
-  };
+  }, []);
 
   useEffect(() => {
     if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mousemove', handleMouseMove as EventListener);
       window.addEventListener('mouseup', handleMouseUp);
-    } else {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.addEventListener('touchmove', handleMouseMove as EventListener);
+      window.addEventListener('touchend', handleMouseUp);
     }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', handleMouseMove as EventListener);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleMouseMove as EventListener);
+      window.removeEventListener('touchend', handleMouseUp);
     };
-  }, [isDragging, dragStart]);
+  }, [isDragging, handleMouseMove, handleMouseUp]);
+
+  const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    
+    if (target.closest('button') || !target.closest('[data-drag-handle]')) {
+      return;
+    }
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    
+    setIsDragging(true);
+    setHasMoved(false);
+    setDragStart({
+      x: clientX - translate.x,
+      y: clientY - translate.y
+    });
+    setZIndex(2000);
+  };
 
   const handleCardClick = () => {
     setZIndex(2000);
   };
 
-  // Render minimized floating icon
   const renderMinimizedIcon = () => (
     <div
       ref={cardRef}
@@ -139,8 +144,20 @@ export function LandmarkList({
         userSelect: 'none',
         transform: `translate(${translate.x}px, ${translate.y}px)`
       }}
-      onMouseDown={handleMouseDown}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
       onMouseUp={(e) => {
+        handleMouseUp();
+        if (!hasMoved) {
+          const fullCardWidth = 384;
+          const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 320);
+          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
+          setTranslate(clamped);
+          setIsMinimized(false);
+          setZIndex(2000);
+        }
+      }}
+      onTouchEnd={(e) => {
         handleMouseUp();
         if (!hasMoved) {
           const fullCardWidth = 384;
@@ -163,7 +180,6 @@ export function LandmarkList({
     </div>
   );
 
-  // Render full card
   const renderFullCard = () => (
     <div
       ref={cardRef}
@@ -185,7 +201,8 @@ export function LandmarkList({
           className="p-4 border-b flex items-center justify-between"
           data-drag-handle
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-          onMouseDown={handleMouseDown}
+          onMouseDown={handleStart}
+          onTouchStart={handleStart}
         >
           <h3 className="font-serif font-semibold text-lg flex items-center gap-2">
             <MapPin className="w-5 h-5 text-primary" />

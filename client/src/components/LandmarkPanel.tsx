@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -55,88 +55,88 @@ export function LandmarkPanel({
   }, [selectedLanguage]);
 
   // Clamp translate values to keep element within bounds
-  const clampTranslate = (x: number, y: number, elementWidth: number, elementHeight: number) => {
-    // Use window dimensions for viewport bounds
+  const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     
-    // Account for initial 16px offset and ensure card stays fully within viewport
-    const maxX = viewportWidth - elementWidth - 32; // 16px initial left + 16px right margin
-    const maxY = viewportHeight - elementHeight - 32; // 16px initial top + 16px bottom margin
+    const maxX = viewportWidth - elementWidth - 32;
+    const maxY = viewportHeight - elementHeight - 32;
     
     return {
       x: Math.max(0, Math.min(x, maxX)),
       y: Math.max(0, Math.min(y, maxY))
     };
-  };
+  }, []);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
+    if (!cardRef.current) return;
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    
+    setHasMoved(true);
+    const newX = clientX - dragStart.x;
+    const newY = clientY - dragStart.y;
+    
+    const cardWidth = cardRef.current.offsetWidth;
+    const cardHeight = cardRef.current.offsetHeight;
+    
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    const maxX = viewportWidth - cardWidth - 32;
+    const maxY = viewportHeight - cardHeight - 32;
+    
+    const clampedX = Math.max(0, Math.min(newX, maxX));
+    const clampedY = Math.max(0, Math.min(newY, maxY));
+    
+    setTranslate({ x: clampedX, y: clampedY });
+  }, [dragStart.x, dragStart.y]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove as EventListener);
+      window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('touchmove', handleMouseMove as EventListener);
+      window.addEventListener('touchend', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove as EventListener);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleMouseMove as EventListener);
+      window.removeEventListener('touchend', handleMouseUp);
+    };
+  }, [isDragging, handleMouseMove, handleMouseUp]);
+
+  const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     const target = e.target as HTMLElement;
     
-    // Only start drag if clicking on the header area (not on buttons, maps, or galleries)
     if (target.closest('button') || 
         target.closest('[class*="leaflet"]') || 
         target.closest('[data-no-drag]')) {
       return;
     }
     
-    // Only allow drag from the header/title area
     if (!target.closest('[data-drag-handle]')) {
       return;
     }
     
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    
     setIsDragging(true);
     setHasMoved(false);
     setDragStart({
-      x: e.clientX - translate.x,
-      y: e.clientY - translate.y
+      x: clientX - translate.x,
+      y: clientY - translate.y
     });
     setZIndex(2000);
   };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !cardRef.current) return;
-    
-    setHasMoved(true);
-    const newX = e.clientX - dragStart.x;
-    const newY = e.clientY - dragStart.y;
-    
-    // Use offsetWidth/Height to get actual dimensions without transform
-    const cardWidth = cardRef.current.offsetWidth;
-    const cardHeight = cardRef.current.offsetHeight;
-    
-    // Use window dimensions for viewport bounds
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    // Account for initial 16px offset and ensure card stays fully within viewport
-    const maxX = viewportWidth - cardWidth - 32; // 16px initial left + 16px right margin
-    const maxY = viewportHeight - cardHeight - 32; // 16px initial top + 16px bottom margin
-    
-    const clampedX = Math.max(0, Math.min(newX, maxX));
-    const clampedY = Math.max(0, Math.min(newY, maxY));
-    
-    setTranslate({ x: clampedX, y: clampedY });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  useEffect(() => {
-    if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-    } else {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    }
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [isDragging, dragStart]);
 
   const handleCardClick = () => {
     setZIndex(2000);
@@ -197,12 +197,23 @@ export function LandmarkPanel({
         userSelect: 'none',
         transform: `translate(${translate.x}px, ${translate.y}px)`
       }}
-      onMouseDown={handleMouseDown}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
       onMouseUp={(e) => {
         handleMouseUp();
         if (!hasMoved) {
           const fullCardWidth = 384;
-          // Use saved card height or calculate max possible height
+          const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 688);
+          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
+          setTranslate(clamped);
+          setIsMinimized(false);
+          setZIndex(2000);
+        }
+      }}
+      onTouchEnd={(e) => {
+        handleMouseUp();
+        if (!hasMoved) {
+          const fullCardWidth = 384;
           const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 688);
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
@@ -245,7 +256,8 @@ export function LandmarkPanel({
           className="flex items-start justify-between mb-3"
           data-drag-handle
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-          onMouseDown={handleMouseDown}
+          onMouseDown={handleStart}
+          onTouchStart={handleStart}
         >
           <div className="flex-1 min-w-0">
             <h2 className="font-serif text-xl mb-1 truncate" data-testid="text-landmark-name">

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -63,37 +63,24 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
 
   const [hasMoved, setHasMoved] = useState(false);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest('button')) {
-      return;
-    }
-    setIsDragging(true);
-    setHasMoved(false);
-    setDragStart({
-      x: e.clientX - translate.x,
-      y: e.clientY - translate.y
-    });
-    setZIndex(2000);
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !cardRef.current) return;
+  const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
+    if (!cardRef.current) return;
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
     
     setHasMoved(true);
-    const newX = e.clientX - dragStart.x;
-    const newY = e.clientY - dragStart.y;
+    const newX = clientX - dragStart.x;
+    const newY = clientY - dragStart.y;
     
-    // Get container bounds to clamp the drag
     const container = cardRef.current.offsetParent as HTMLElement;
     if (container) {
       const cardRect = cardRef.current.getBoundingClientRect();
       const containerRect = container.getBoundingClientRect();
       
-      // Calculate max translate values (accounting for initial position of 16px)
-      const maxX = containerRect.width - cardRect.width - 32; // 16px left + 16px right
+      const maxX = containerRect.width - cardRect.width - 32;
       const maxY = containerRect.height - cardRect.height - 32;
       
-      // Clamp translate to stay within bounds
       const clampedX = Math.max(0, Math.min(newX, maxX));
       const clampedY = Math.max(0, Math.min(newY, maxY));
       
@@ -101,27 +88,44 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     } else {
       setTranslate({ x: newX, y: newY });
     }
-  };
+  }, [dragStart.x, dragStart.y]);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     setIsDragging(false);
-    // Keep z-index elevated after drag
-  };
+  }, []);
 
   useEffect(() => {
     if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mousemove', handleMouseMove as EventListener);
       window.addEventListener('mouseup', handleMouseUp);
-    } else {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.addEventListener('touchmove', handleMouseMove as EventListener);
+      window.addEventListener('touchend', handleMouseUp);
     }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', handleMouseMove as EventListener);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleMouseMove as EventListener);
+      window.removeEventListener('touchend', handleMouseUp);
     };
-  }, [isDragging, dragStart]);
+  }, [isDragging, handleMouseMove, handleMouseUp]);
+
+  const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
+    if ((e.target as HTMLElement).closest('button')) {
+      return;
+    }
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    
+    setIsDragging(true);
+    setHasMoved(false);
+    setDragStart({
+      x: clientX - translate.x,
+      y: clientY - translate.y
+    });
+    setZIndex(2000);
+  };
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -165,14 +169,24 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
         userSelect: 'none',
         transform: `translate(${translate.x}px, ${translate.y}px)`
       }}
-      onMouseDown={handleMouseDown}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
       onMouseUp={(e) => {
         handleMouseUp();
-        // Only restore if it was a click (not a drag)
         if (!hasMoved) {
-          // Clamp position for full card size before restoring
-          const fullCardWidth = 384; // 24rem ≈ 384px
-          const fullCardHeight = 500; // Approximate full card height
+          const fullCardWidth = 384;
+          const fullCardHeight = 500;
+          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
+          setTranslate(clamped);
+          setIsMinimized(false);
+          setZIndex(2000);
+        }
+      }}
+      onTouchEnd={(e) => {
+        handleMouseUp();
+        if (!hasMoved) {
+          const fullCardWidth = 384;
+          const fullCardHeight = 500;
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
@@ -206,7 +220,8 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
         userSelect: 'none',
         transform: `translate(${translate.x}px, ${translate.y}px)`
       }}
-      onMouseDown={handleMouseDown}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
       onClick={handleCardClick}
       data-testid="card-cruise-port-container"
     >
