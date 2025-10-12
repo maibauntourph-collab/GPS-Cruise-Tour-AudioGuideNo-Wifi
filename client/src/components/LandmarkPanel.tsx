@@ -255,7 +255,7 @@ export function LandmarkPanel({
       onClick={handleCardClick}
       data-testid="card-landmark-container"
     >
-      <Card className="bg-background border flex flex-col max-h-[calc(100vh-32px)] overflow-hidden" data-testid="panel-landmark-details">
+      <Card className="bg-background border flex flex-col max-h-[calc(100vh-32px)]" data-testid="panel-landmark-details">
         {/* Header */}
         <div 
           className="flex items-start justify-between p-4 pb-3 flex-shrink-0"
@@ -307,7 +307,10 @@ export function LandmarkPanel({
         </div>
 
         {/* Scrollable content */}
-        <div className="overflow-y-auto px-4 pb-4 flex-1 min-h-0" style={{ scrollbarWidth: 'thin' }}>
+        <div className="overflow-y-scroll px-4 pb-4 flex-1 min-h-0" style={{ 
+          scrollbarWidth: 'auto',
+          scrollbarColor: 'rgb(239 68 68 / 0.5) transparent'
+        }}>
           {/* Badges */}
           <div className="flex items-center gap-2 mb-3 flex-wrap">
             {landmark.category && (
