@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Slider } from '@/components/ui/slider';
 import { Landmark } from '@shared/schema';
-import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2, Ticket, ExternalLink } from 'lucide-react';
+import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2, Ticket, ExternalLink, Minus, MapPinned } from 'lucide-react';
 import { PhotoGallery } from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
@@ -31,6 +31,13 @@ export function LandmarkPanel({
 }: LandmarkPanelProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [zIndex, setZIndex] = useState(1000);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Stop audio when landmark changes or component unmounts
@@ -45,6 +52,83 @@ export function LandmarkPanel({
     audioService.stop();
     setIsPlaying(false);
   }, [selectedLanguage]);
+
+  // Clamp translate values to keep element within bounds
+  const clampTranslate = (x: number, y: number, elementWidth: number, elementHeight: number) => {
+    if (!cardRef.current) return { x, y };
+    
+    const container = cardRef.current.offsetParent as HTMLElement;
+    if (!container) return { x, y };
+    
+    const containerRect = container.getBoundingClientRect();
+    const maxX = containerRect.width - elementWidth - 32;
+    const maxY = containerRect.height - elementHeight - 32;
+    
+    return {
+      x: Math.max(0, Math.min(x, maxX)),
+      y: Math.max(0, Math.min(y, maxY))
+    };
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest('button')) {
+      return;
+    }
+    setIsDragging(true);
+    setHasMoved(false);
+    setDragStart({
+      x: e.clientX - translate.x,
+      y: e.clientY - translate.y
+    });
+    setZIndex(2000);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging || !cardRef.current) return;
+    
+    setHasMoved(true);
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
+    
+    const container = cardRef.current.offsetParent as HTMLElement;
+    if (container) {
+      const cardRect = cardRef.current.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      
+      const maxX = containerRect.width - cardRect.width - 32;
+      const maxY = containerRect.height - cardRect.height - 32;
+      
+      const clampedX = Math.max(0, Math.min(newX, maxX));
+      const clampedY = Math.max(0, Math.min(newY, maxY));
+      
+      setTranslate({ x: clampedX, y: clampedY });
+    } else {
+      setTranslate({ x: newX, y: newY });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    } else {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, dragStart]);
+
+  const handleCardClick = () => {
+    setZIndex(2000);
+  };
 
   if (!landmark) return null;
 
@@ -78,7 +162,6 @@ export function LandmarkPanel({
     setPlaybackRate(newRate);
     audioService.setRate(newRate);
     
-    // If currently playing, restart with new rate
     if (isPlaying && !audioService.isPaused()) {
       const detailedText = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
       if (detailedText) {
@@ -89,314 +172,327 @@ export function LandmarkPanel({
     }
   };
 
-  return (
-    <div className="bg-background border-t overflow-y-auto h-full" data-testid="panel-landmark-details">
-      <div className="max-w-4xl mx-auto p-4">
-        {/* Header with close button */}
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1">
-            <h2 className="font-serif text-2xl mb-1" data-testid="text-landmark-name">
+  // Render minimized floating icon
+  const renderMinimizedIcon = () => (
+    <div
+      ref={cardRef}
+      style={{
+        position: 'absolute',
+        right: '16px',
+        top: '16px',
+        zIndex,
+        cursor: isDragging ? 'grabbing' : 'pointer',
+        userSelect: 'none',
+        transform: `translate(${translate.x}px, ${translate.y}px)`
+      }}
+      onMouseDown={handleMouseDown}
+      onMouseUp={(e) => {
+        handleMouseUp();
+        if (!hasMoved) {
+          const fullCardWidth = 384;
+          const fullCardHeight = 600;
+          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
+          setTranslate(clamped);
+          setIsMinimized(false);
+          setZIndex(2000);
+        }
+      }}
+      data-testid="icon-landmark-minimized"
+    >
+      <div className="relative">
+        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-orange-500 dark:from-primary dark:to-orange-600 flex items-center justify-center shadow-lg hover-elevate active-elevate-2 border-2 border-white dark:border-gray-800">
+          <MapPinned className="w-7 h-7 text-white" />
+        </div>
+        <div className="absolute inset-0 w-14 h-14 rounded-full bg-primary/40 animate-ping opacity-20"></div>
+      </div>
+    </div>
+  );
+
+  // Render full card
+  const renderFullCard = () => (
+    <div
+      ref={cardRef}
+      style={{
+        position: 'absolute',
+        right: '16px',
+        top: '16px',
+        zIndex,
+        cursor: isDragging ? 'grabbing' : 'grab',
+        maxWidth: '24rem',
+        maxHeight: 'calc(100vh - 32px)',
+        userSelect: 'none',
+        transform: `translate(${translate.x}px, ${translate.y}px)`
+      }}
+      onMouseDown={handleMouseDown}
+      onClick={handleCardClick}
+      data-testid="card-landmark-container"
+    >
+      <Card className="p-4 bg-background border overflow-y-auto max-h-[calc(100vh-32px)]" data-testid="panel-landmark-details">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex-1 min-w-0">
+            <h2 className="font-serif text-xl mb-1 truncate" data-testid="text-landmark-name">
               {getTranslatedContent(landmark, selectedLanguage, 'name')}
             </h2>
-            <p className="text-sm text-muted-foreground">
-              {landmark.category && `${landmark.category}`}
-              {landmark.category && getTranslatedContent(landmark, selectedLanguage, 'description') && ' - '}
-              {getTranslatedContent(landmark, selectedLanguage, 'description')?.slice(0, 100)}
-              {getTranslatedContent(landmark, selectedLanguage, 'description') && '...'}
+            <p className="text-xs text-muted-foreground line-clamp-2">
+              {landmark.category}
+              {landmark.category && ' - '}
+              {getTranslatedContent(landmark, selectedLanguage, 'description')?.slice(0, 60)}...
             </p>
           </div>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={onClose}
-            data-testid="button-close-panel"
-          >
-            <X className="w-4 h-4" />
-          </Button>
+          <div className="flex gap-1 ml-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMinimized(true);
+              }}
+              className="h-7 w-7 shrink-0"
+              data-testid="button-minimize-landmark"
+            >
+              <Minus className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
+              className="h-7 w-7 shrink-0"
+              data-testid="button-close-panel"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
 
         {/* Badges */}
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
           {landmark.category && (
-            <Badge variant="secondary" data-testid="badge-category">
+            <Badge variant="secondary" data-testid="badge-category" className="text-xs">
               {landmark.category}
             </Badge>
           )}
           {landmark.yearBuilt && (
-            <Badge variant="outline" className="gap-1" data-testid="badge-year">
+            <Badge variant="outline" className="gap-1 text-xs" data-testid="badge-year">
               <Calendar className="w-3 h-3" />
               {landmark.yearBuilt}
             </Badge>
           )}
         </div>
 
-        {/* Photo Gallery */}
-        {landmark.photos && landmark.photos.length > 0 && (
-          <div className="mb-4">
-            <h3 className="font-semibold mb-3 flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-primary" />
-              {t('photos', selectedLanguage)}
-            </h3>
-            <PhotoGallery 
-              photos={landmark.photos} 
-              title={getTranslatedContent(landmark, selectedLanguage, 'name')} 
-            />
-          </div>
-        )}
-
-        {/* Map View */}
-        <div className="mb-4">
-          <h3 className="font-semibold mb-3 flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-primary" />
-            {t('location', selectedLanguage)}
-          </h3>
-          <div className="rounded-lg overflow-hidden border" data-testid="map-landmark-location">
-            <MapContainer
-              key={landmark.id}
-              center={[landmark.lat, landmark.lng]}
-              zoom={16}
-              style={{ height: '200px', width: '100%' }}
-              scrollWheelZoom={false}
-              zoomControl={true}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        <div className="space-y-3">
+          {/* Photo Gallery */}
+          {landmark.photos && landmark.photos.length > 0 && (
+            <div>
+              <h3 className="font-semibold text-sm mb-2 flex items-center gap-1">
+                <MapPin className="w-3 h-3 text-primary" />
+                {t('photos', selectedLanguage)}
+              </h3>
+              <PhotoGallery
+                photos={landmark.photos}
+                title={getTranslatedContent(landmark, selectedLanguage, 'name')}
               />
-              <Marker 
-                position={[landmark.lat, landmark.lng]}
-                icon={L.divIcon({
-                  className: 'custom-marker',
-                  html: `<div style="background: ${landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)'}; width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer;"></div>`,
-                  iconSize: [32, 32],
-                  iconAnchor: [16, 32],
-                })}
-                eventHandlers={{
-                  click: () => {
-                    if (onMapMarkerClick) {
-                      onMapMarkerClick(landmark.lat, landmark.lng);
-                    }
-                  }
-                }}
+            </div>
+          )}
+
+          {/* Map View */}
+          <div>
+            <h3 className="font-semibold text-sm mb-2 flex items-center gap-1">
+              <MapPin className="w-3 h-3 text-primary" />
+              {t('location', selectedLanguage)}
+            </h3>
+            <div className="rounded-md overflow-hidden border h-32" data-testid="map-landmark-location">
+              <MapContainer
+                key={landmark.id}
+                center={[landmark.lat, landmark.lng]}
+                zoom={16}
+                style={{ height: '100%', width: '100%' }}
+                scrollWheelZoom={false}
+                zoomControl={true}
+                dragging={!isDragging}
               >
-                <Popup>
-                  <strong>{getTranslatedContent(landmark, selectedLanguage, 'name')}</strong>
-                  <br />
-                  <small className="text-muted-foreground">{t('clickToViewOnMap', selectedLanguage)}</small>
-                </Popup>
-              </Marker>
-            </MapContainer>
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker
+                  position={[landmark.lat, landmark.lng]}
+                  icon={L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background: ${landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)'}; width: 24px; height: 24px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>`,
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 24],
+                  })}
+                  eventHandlers={{
+                    click: () => {
+                      if (onMapMarkerClick) {
+                        onMapMarkerClick(landmark.lat, landmark.lng);
+                      }
+                    }
+                  }}
+                >
+                  <Popup>
+                    <strong className="text-xs">{getTranslatedContent(landmark, selectedLanguage, 'name')}</strong>
+                  </Popup>
+                </Marker>
+              </MapContainer>
+            </div>
           </div>
-        </div>
 
-        {/* About */}
-        {getTranslatedContent(landmark, selectedLanguage, 'description') && (
-          <div className="mb-4">
-            <h3 className="font-semibold mb-2">{t('category', selectedLanguage)}</h3>
-            <p className="text-muted-foreground" data-testid="text-description">
-              {getTranslatedContent(landmark, selectedLanguage, 'description')}
-            </p>
-          </div>
-        )}
+          {/* Description */}
+          {getTranslatedContent(landmark, selectedLanguage, 'description') && (
+            <div>
+              <h3 className="font-semibold text-sm mb-1">{t('category', selectedLanguage)}</h3>
+              <p className="text-sm text-muted-foreground" data-testid="text-description">
+                {getTranslatedContent(landmark, selectedLanguage, 'description')}
+              </p>
+            </div>
+          )}
 
-        {/* Historical Information */}
-        {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo') && (
-          <div className="mb-4">
-            <h3 className="font-semibold mb-2">{t('historicalInfo', selectedLanguage)}</h3>
-            <p className="text-muted-foreground leading-relaxed" data-testid="text-historical-info">
-              {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo')}
-            </p>
-          </div>
-        )}
+          {/* Historical Info */}
+          {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo') && (
+            <div>
+              <h3 className="font-semibold text-sm mb-1">{t('historicalInfo', selectedLanguage)}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed" data-testid="text-historical-info">
+                {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo')}
+              </p>
+            </div>
+          )}
 
-        {/* Architect */}
-        {landmark.architect && (
-          <div className="mb-4">
-            <h3 className="font-semibold mb-2 flex items-center gap-2">
-              <User className="w-4 h-4 text-primary" />
-              {t('architect', selectedLanguage)}
-            </h3>
-            <p className="text-muted-foreground" data-testid="text-architect">
-              {landmark.architect}
-            </p>
-          </div>
-        )}
+          {/* Architect */}
+          {landmark.architect && (
+            <div>
+              <h3 className="font-semibold text-sm mb-1 flex items-center gap-1">
+                <User className="w-3 h-3 text-primary" />
+                {t('architect', selectedLanguage)}
+              </h3>
+              <p className="text-sm text-muted-foreground" data-testid="text-architect">
+                {landmark.architect}
+              </p>
+            </div>
+          )}
 
-        {/* Detailed Description with Audio */}
-        {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') && (
-          <div className="mb-4 p-4 bg-muted/30 rounded-lg">
-            <h3 className="font-semibold mb-3 flex items-center gap-2">
-              <Volume2 className="w-4 h-4 text-primary" />
-              {t('detailedInformation', selectedLanguage)}
-            </h3>
-            
-            {/* Audio Controls */}
-            <div className="mb-3 p-3 bg-background rounded-md border">
-              <div className="flex items-center gap-3 mb-3">
+          {/* Audio Controls */}
+          {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') && (
+            <div className="p-3 bg-muted/30 rounded-md">
+              <h3 className="font-semibold text-sm mb-2 flex items-center gap-1">
+                <Volume2 className="w-3 h-3 text-primary" />
+                {t('detailedInformation', selectedLanguage)}
+              </h3>
+              <div className="flex items-center gap-2 mb-2">
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={handlePlayPause}
-                  className="gap-2"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePlayPause();
+                  }}
+                  className="gap-1 text-xs h-8"
                   data-testid="button-audio-play"
                 >
                   {isPlaying && !audioService.isPaused() ? (
                     <>
-                      <Pause className="w-4 h-4" />
+                      <Pause className="w-3 h-3" />
                       {t('pause', selectedLanguage)}
                     </>
                   ) : (
                     <>
-                      <Play className="w-4 h-4" />
+                      <Play className="w-3 h-3" />
                       {audioService.isPaused() ? t('resume', selectedLanguage) : t('playAudio', selectedLanguage)}
                     </>
                   )}
                 </Button>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs text-muted-foreground">{t('speed', selectedLanguage)}</span>
-                    <span className="text-xs font-medium" data-testid="text-playback-speed">{playbackRate.toFixed(1)}x</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleRateChange([0.5])}
-                      className={`text-xs px-2 h-7 ${playbackRate === 0.5 ? 'bg-primary text-primary-foreground' : ''}`}
-                      data-testid="button-speed-0.5"
-                    >
-                      0.5x
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleRateChange([0.75])}
-                      className={`text-xs px-2 h-7 ${playbackRate === 0.75 ? 'bg-primary text-primary-foreground' : ''}`}
-                      data-testid="button-speed-0.75"
-                    >
-                      0.75x
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleRateChange([1.0])}
-                      className={`text-xs px-2 h-7 ${playbackRate === 1.0 ? 'bg-primary text-primary-foreground' : ''}`}
-                      data-testid="button-speed-1.0"
-                    >
-                      1.0x
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleRateChange([1.25])}
-                      className={`text-xs px-2 h-7 ${playbackRate === 1.25 ? 'bg-primary text-primary-foreground' : ''}`}
-                      data-testid="button-speed-1.25"
-                    >
-                      1.25x
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleRateChange([1.5])}
-                      className={`text-xs px-2 h-7 ${playbackRate === 1.5 ? 'bg-primary text-primary-foreground' : ''}`}
-                      data-testid="button-speed-1.5"
-                    >
-                      1.5x
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleRateChange([2.0])}
-                      className={`text-xs px-2 h-7 ${playbackRate === 2.0 ? 'bg-primary text-primary-foreground' : ''}`}
-                      data-testid="button-speed-2.0"
-                    >
-                      2.0x
-                    </Button>
-                  </div>
-                </div>
+                <span className="text-xs text-muted-foreground">{playbackRate.toFixed(1)}x</span>
               </div>
+              <div className="flex flex-wrap gap-1 mb-2">
+                {[0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map((rate) => (
+                  <Button
+                    key={rate}
+                    variant="outline"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRateChange([rate]);
+                    }}
+                    className={`text-xs px-2 h-6 ${playbackRate === rate ? 'bg-primary text-primary-foreground' : ''}`}
+                    data-testid={`button-speed-${rate}`}
+                  >
+                    {rate}x
+                  </Button>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed" data-testid="text-detailed-description">
+                {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}
+              </p>
             </div>
+          )}
 
-            {/* Detailed Text */}
-            <p className="text-sm text-muted-foreground leading-relaxed" data-testid="text-detailed-description">
-              {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}
-            </p>
+          {/* Booking */}
+          <div className="p-3 bg-muted/30 rounded-md">
+            <h3 className="font-semibold text-sm mb-2 flex items-center gap-1">
+              <Ticket className="w-3 h-3 text-primary" />
+              {t('bookTickets', selectedLanguage)}
+            </h3>
+            <div className="flex flex-col gap-1">
+              {['GetYourGuide', 'Viator', 'Klook'].map((platform) => (
+                <Button
+                  key={platform}
+                  variant="outline"
+                  size="sm"
+                  className="justify-start gap-1 text-xs h-8"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                    const urls = {
+                      'GetYourGuide': `https://www.getyourguide.com/s/?q=${searchQuery}`,
+                      'Viator': `https://www.viator.com/searchResults/all?text=${searchQuery}`,
+                      'Klook': `https://www.klook.com/en-US/search/?query=${searchQuery}`
+                    };
+                    window.open(urls[platform as keyof typeof urls], '_blank', 'noopener,noreferrer');
+                  }}
+                  data-testid={`button-book-${platform.toLowerCase()}`}
+                >
+                  <ExternalLink className="w-3 h-3" />
+                  {t('bookOn', selectedLanguage)} {platform}
+                </Button>
+              ))}
+            </div>
           </div>
-        )}
 
-        {/* Ticket Booking Platforms */}
-        <div className="mb-4 p-4 bg-muted/30 rounded-lg">
-          <h3 className="font-semibold mb-3 flex items-center gap-2">
-            <Ticket className="w-4 h-4 text-primary" />
-            {t('bookTickets', selectedLanguage)}
-          </h3>
-          <div className="flex flex-col gap-2">
+          {/* Actions */}
+          <div className="flex gap-2 pt-2">
             <Button
-              variant="outline"
-              size="sm"
-              className="justify-start gap-2"
-              onClick={() => {
-                const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                window.open(`https://www.getyourguide.com/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNavigate();
               }}
-              data-testid="button-book-getyourguide"
-            >
-              <ExternalLink className="w-4 h-4" />
-              {t('bookOn', selectedLanguage)} GetYourGuide
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="justify-start gap-2"
-              onClick={() => {
-                const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                window.open(`https://www.viator.com/searchResults/all?text=${searchQuery}`, '_blank', 'noopener,noreferrer');
-              }}
-              data-testid="button-book-viator"
-            >
-              <ExternalLink className="w-4 h-4" />
-              {t('bookOn', selectedLanguage)} Viator
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="justify-start gap-2"
-              onClick={() => {
-                const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                window.open(`https://www.klook.com/en-US/search/?query=${searchQuery}`, '_blank', 'noopener,noreferrer');
-              }}
-              data-testid="button-book-klook"
-            >
-              <ExternalLink className="w-4 h-4" />
-              {t('bookOn', selectedLanguage)} Klook
-            </Button>
-          </div>
-        </div>
-
-        {/* Navigation Button */}
-        <div className="pt-4 border-t">
-          <div className="flex gap-2">
-            <Button 
-              onClick={handleNavigate} 
-              className="flex-1 gap-2"
+              className="flex-1 gap-1 text-xs h-9"
               data-testid="button-navigate-panel"
             >
-              <Navigation className="w-4 h-4" />
+              <Navigation className="w-3 h-3" />
               {t('getDirections', selectedLanguage)}
             </Button>
             {onAddToTour && (
               <Button
-                onClick={() => onAddToTour(landmark)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAddToTour(landmark);
+                }}
                 variant={isInTour ? "secondary" : "outline"}
-                className="flex-1 gap-2"
+                className="flex-1 gap-1 text-xs h-9"
                 data-testid={`button-tour-panel-${landmark.id}`}
               >
-                {isInTour ? 'Remove from Tour' : 'Add to Tour'}
+                {isInTour ? 'Remove' : 'Add to Tour'}
               </Button>
             )}
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   );
+
+  return isMinimized ? renderMinimizedIcon() : renderFullCard();
 }
