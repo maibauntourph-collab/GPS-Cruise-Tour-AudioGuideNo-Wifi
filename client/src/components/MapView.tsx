@@ -161,6 +161,7 @@ interface MapViewProps {
   selectedLanguage?: string;
   isCompact?: boolean;
   sidebarOpen?: boolean;
+  focusLocation?: { lat: number; lng: number; zoom: number } | null;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -190,6 +191,21 @@ function MapResizer({ isCompact, sidebarOpen }: { isCompact?: boolean; sidebarOp
   return null;
 }
 
+function FocusUpdater({ focusLocation }: { focusLocation?: { lat: number; lng: number; zoom: number } | null }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (focusLocation) {
+      map.setView([focusLocation.lat, focusLocation.lng], focusLocation.zoom, {
+        animate: true,
+        duration: 0.5,
+      });
+    }
+  }, [focusLocation, map]);
+
+  return null;
+}
+
 export function MapView({
   landmarks,
   userPosition,
@@ -201,6 +217,7 @@ export function MapView({
   selectedLanguage = 'en',
   isCompact = false,
   sidebarOpen = false,
+  focusLocation,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)');
 
@@ -214,6 +231,7 @@ export function MapView({
       <MapUpdater position={userPosition} />
       <CityUpdater center={cityCenter} zoom={cityZoom} />
       <MapResizer isCompact={isCompact} sidebarOpen={sidebarOpen} />
+      <FocusUpdater focusLocation={focusLocation} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

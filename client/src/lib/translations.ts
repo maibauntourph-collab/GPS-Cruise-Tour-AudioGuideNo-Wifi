@@ -57,7 +57,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     chooseNavigationApp: 'Choose Navigation App',
     selectHowToNavigate: 'Select how you would like to navigate to:',
     useInAppMap: 'Use In-App Map',
-    useGoogleMaps: 'Use Google Maps'
+    useGoogleMaps: 'Use Google Maps',
+    location: 'Location',
+    clickToViewOnMap: 'Click to view on main map'
   },
   ko: {
     landmarks: '명소',
@@ -89,7 +91,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     chooseNavigationApp: '내비게이션 앱 선택',
     selectHowToNavigate: '다음 위치로 이동할 방법을 선택하세요:',
     useInAppMap: '앱 내 지도 사용',
-    useGoogleMaps: '구글 지도 사용'
+    useGoogleMaps: '구글 지도 사용',
+    location: '위치',
+    clickToViewOnMap: '클릭하여 메인 지도에서 보기'
   },
   es: {
     landmarks: 'Monumentos',

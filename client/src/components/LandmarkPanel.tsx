@@ -15,13 +15,15 @@ interface LandmarkPanelProps {
   onClose: () => void;
   onNavigate: (landmark: Landmark) => void;
   selectedLanguage?: string;
+  onMapMarkerClick?: (lat: number, lng: number) => void;
 }
 
 export function LandmarkPanel({
   landmark,
   onClose,
   onNavigate,
-  selectedLanguage = 'en'
+  selectedLanguage = 'en',
+  onMapMarkerClick
 }: LandmarkPanelProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
@@ -161,13 +163,22 @@ export function LandmarkPanel({
                 position={[landmark.lat, landmark.lng]}
                 icon={L.divIcon({
                   className: 'custom-marker',
-                  html: `<div style="background: hsl(14, 85%, 55%); width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>`,
+                  html: `<div style="background: hsl(14, 85%, 55%); width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer;"></div>`,
                   iconSize: [32, 32],
                   iconAnchor: [16, 32],
                 })}
+                eventHandlers={{
+                  click: () => {
+                    if (onMapMarkerClick) {
+                      onMapMarkerClick(landmark.lat, landmark.lng);
+                    }
+                  }
+                }}
               >
                 <Popup>
                   <strong>{getTranslatedContent(landmark, selectedLanguage, 'name')}</strong>
+                  <br />
+                  <small className="text-muted-foreground">{t('clickToViewOnMap', selectedLanguage)}</small>
                 </Popup>
               </Marker>
             </MapContainer>

@@ -127,7 +127,20 @@ The application is built with a React frontend and an Express.js backend, commun
 
 ## Recent Changes (2025-10-12)
 
-### Latest Update: Added Map View to Landmark Details Panel (Today)
+### Latest Update: Click Marker to Update Main Map (Today)
+- **Interactive Map Synchronization**: Click the marker in landmark panel map to center main map on that location
+- **User Flow**:
+  - Open landmark panel → see small map with location
+  - Click the marker → main map smoothly centers and zooms to landmark
+  - Popup hint: "Click to view on main map" (translated in all languages)
+- **Technical Implementation**:
+  - Zoom level 17 for detailed landmark view
+  - 0.5 second smooth animation transition
+  - Focus state clears after 1 second
+  - FocusUpdater component in MapView handles map centering
+- **E2E Tested**: Verified marker click updates main map, smooth animation, no errors
+
+### Previous Update: Added Map View to Landmark Details Panel
 - **Map Location Display**: Added interactive map below Photos section in landmark panel
 - **Implementation**: 200px height map showing exact landmark location with custom marker
 - **Features**:

@@ -59,6 +59,7 @@ export default function Home() {
   const [speechRate, setSpeechRate] = useState<number>(audioService.getCurrentRate());
   const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
   const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
+  const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -185,6 +186,12 @@ export default function Home() {
     audioService.setRate(rate);
   };
 
+  const handleMapMarkerClick = (lat: number, lng: number) => {
+    setFocusLocation({ lat, lng, zoom: 17 });
+    // Clear focus after animation completes
+    setTimeout(() => setFocusLocation(null), 1000);
+  };
+
   if (citiesLoading || landmarksLoading) {
     return (
       <div className="h-screen w-full flex items-center justify-center bg-background">
@@ -238,6 +245,7 @@ export default function Home() {
               selectedLanguage={selectedLanguage}
               isCompact={!!selectedLandmark}
               sidebarOpen={sidebarOpen}
+              focusLocation={focusLocation}
             />
 
             {/* Show landmark list only when no landmark is selected */}
@@ -264,6 +272,7 @@ export default function Home() {
                 onClose={() => setSelectedLandmark(null)}
                 onNavigate={handleLandmarkRoute}
                 selectedLanguage={selectedLanguage}
+                onMapMarkerClick={handleMapMarkerClick}
               />
             </div>
           )}
