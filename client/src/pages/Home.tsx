@@ -412,23 +412,21 @@ export default function Home() {
             <OfflineIndicator />
             <InstallPrompt />
           </div>
-
-          {/* Landmark Details Panel - shows when landmark is selected */}
-          {selectedLandmark && (
-            <div className="h-1/2 border-t">
-              <LandmarkPanel
-                landmark={selectedLandmark}
-                onClose={() => setSelectedLandmark(null)}
-                onNavigate={handleLandmarkRoute}
-                selectedLanguage={selectedLanguage}
-                onMapMarkerClick={handleMapMarkerClick}
-                onAddToTour={handleAddToTour}
-                isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
-              />
-            </div>
-          )}
         </div>
       </SidebarInset>
+
+      {/* Landmark Details Panel - floating card, rendered outside container */}
+      {selectedLandmark && (
+        <LandmarkPanel
+          landmark={selectedLandmark}
+          onClose={() => setSelectedLandmark(null)}
+          onNavigate={handleLandmarkRoute}
+          selectedLanguage={selectedLanguage}
+          onMapMarkerClick={handleMapMarkerClick}
+          onAddToTour={handleAddToTour}
+          isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
+        />
+      )}
 
       {/* Google Maps Direction Choice Dialog */}
       <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
