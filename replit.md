@@ -210,7 +210,15 @@ npm run db:push --force # Force push (when conflicts occur)
 
 ## Recent Changes (2025-10-12)
 
-### Latest Update: Google Maps Navigation Integration (Today)
+### Latest Update: Photo Gallery Accessibility Fix (Today)
+- **Fixed Radix UI Accessibility Errors**: Resolved DialogTitle and DialogDescription warnings
+- **Implementation**: Added required accessibility components with screen-reader-only visibility
+- **Always-Present Text**: DialogTitle and DialogDescription now always render text (never false/null)
+- **Fallback Labels**: Shows specific photo info when selected, generic labels otherwise
+- **Full Compliance**: Meets Radix UI accessibility requirements for screen readers
+- **E2E Tested**: Verified no console errors/warnings, photo navigation works correctly
+
+### Previous Update: Google Maps Navigation Integration
 - **Navigation Choice Dialog**: When clicking "Get Directions", users can choose between Google Maps or in-app navigation
 - **Google Maps Integration**: Opens Google Maps in new tab with proper directions URL
 - **Smart URL Generation**: 

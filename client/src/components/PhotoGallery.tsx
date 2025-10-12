@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
@@ -46,6 +46,12 @@ export function PhotoGallery({ photos, title }: PhotoGalleryProps) {
 
       <Dialog open={selectedIndex !== null} onOpenChange={(open) => !open && setSelectedIndex(null)}>
         <DialogContent className="max-w-4xl p-0" data-testid="dialog-photo-viewer">
+          <DialogTitle className="sr-only">
+            {selectedIndex !== null ? `${title} - Photo ${selectedIndex + 1}` : `${title} Photo Gallery`}
+          </DialogTitle>
+          <DialogDescription className="sr-only">
+            {selectedIndex !== null ? `Photo ${selectedIndex + 1} of ${photos.length}` : `View photos of ${title}`}
+          </DialogDescription>
           <div className="relative">
             <button
               onClick={() => setSelectedIndex(null)}
