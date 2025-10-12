@@ -3,7 +3,7 @@ import { Landmark } from '@shared/schema';
 export function getTranslatedContent(
   landmark: Landmark,
   language: string,
-  field: 'name' | 'narration' | 'description' | 'detailedDescription'
+  field: 'name' | 'narration' | 'description' | 'detailedDescription' | 'historicalInfo'
 ): string {
   // Check if translations exist
   if (landmark.translations && landmark.translations[language]) {

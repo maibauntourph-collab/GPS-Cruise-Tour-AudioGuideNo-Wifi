@@ -147,11 +147,11 @@ export function LandmarkPanel({
         )}
 
         {/* Historical Information */}
-        {landmark.historicalInfo && (
+        {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo') && (
           <div className="mb-4">
             <h3 className="font-semibold mb-2">{t('historicalInfo', selectedLanguage)}</h3>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-historical-info">
-              {landmark.historicalInfo}
+              {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo')}
             </p>
           </div>
         )}

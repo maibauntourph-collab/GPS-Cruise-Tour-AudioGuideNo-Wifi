@@ -4,6 +4,7 @@ class AudioService {
   private isEnabled: boolean;
   private currentUtterance: SpeechSynthesisUtterance | null = null;
   private currentRate: number = 1.0;
+  private voices: SpeechSynthesisVoice[] = [];
 
   constructor() {
     this.synthesis = window.speechSynthesis;
@@ -15,6 +16,16 @@ class AudioService {
     if (savedRate) {
       this.currentRate = parseFloat(savedRate);
     }
+
+    // Load voices when available
+    this.loadVoices();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = () => this.loadVoices();
+    }
+  }
+
+  private loadVoices() {
+    this.voices = this.synthesis.getVoices();
   }
 
   // Language mapping for all supported languages
@@ -49,6 +60,35 @@ class AudioService {
     return langMap[language] || 'en-US';
   }
 
+  // Find the best voice for the given language
+  private getVoiceForLanguage(langCode: string): SpeechSynthesisVoice | null {
+    // Refresh voices if empty
+    if (this.voices.length === 0) {
+      this.voices = this.synthesis.getVoices();
+    }
+
+    // Extract base language code (e.g., 'ko' from 'ko-KR')
+    const baseLang = langCode.split('-')[0];
+
+    // Try to find exact match first (e.g., 'ko-KR')
+    let voice = this.voices.find(v => v.lang === langCode);
+    
+    // If no exact match, find any voice with the same base language
+    if (!voice) {
+      voice = this.voices.find(v => v.lang.startsWith(baseLang));
+    }
+
+    // Prefer local voices over remote when available
+    if (voice) {
+      const localVoice = this.voices.find(v => 
+        (v.lang === langCode || v.lang.startsWith(baseLang)) && v.localService
+      );
+      return localVoice || voice;
+    }
+
+    return null;
+  }
+
   speak(text: string, landmarkId: string, language: string = 'en') {
     if (!this.isEnabled || this.spokenLandmarks.has(landmarkId)) {
       return;
@@ -57,10 +97,17 @@ class AudioService {
     this.synthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = this.getLangCode(language);
+    const langCode = this.getLangCode(language);
+    utterance.lang = langCode;
     utterance.rate = this.currentRate;
     utterance.pitch = 1.0;
     utterance.volume = 1.0;
+
+    // Set language-specific voice
+    const voice = this.getVoiceForLanguage(langCode);
+    if (voice) {
+      utterance.voice = voice;
+    }
 
     this.synthesis.speak(utterance);
     this.spokenLandmarks.add(landmarkId);
@@ -71,11 +118,18 @@ class AudioService {
     this.synthesis.cancel();
     
     this.currentUtterance = new SpeechSynthesisUtterance(text);
-    this.currentUtterance.lang = this.getLangCode(language);
+    const langCode = this.getLangCode(language);
+    this.currentUtterance.lang = langCode;
     this.currentUtterance.rate = rate;
     this.currentUtterance.pitch = 1.0;
     this.currentUtterance.volume = 1.0;
     this.currentRate = rate;
+
+    // Set language-specific voice
+    const voice = this.getVoiceForLanguage(langCode);
+    if (voice) {
+      this.currentUtterance.voice = voice;
+    }
 
     if (onEnd) {
       this.currentUtterance.onend = onEnd;

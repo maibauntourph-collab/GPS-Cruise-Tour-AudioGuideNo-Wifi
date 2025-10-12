@@ -80,11 +80,11 @@ export function LandmarkDetails({
               </div>
             )}
 
-            {landmark.historicalInfo && (
+            {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo') && (
               <div>
                 <h3 className="font-semibold mb-2">Historical Information</h3>
                 <p className="text-muted-foreground leading-relaxed" data-testid="text-historical-info">
-                  {landmark.historicalInfo}
+                  {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo')}
                 </p>
               </div>
             )}
