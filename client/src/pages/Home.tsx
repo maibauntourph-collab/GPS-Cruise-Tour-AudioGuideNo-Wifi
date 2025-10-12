@@ -26,7 +26,7 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Route, X, Ship } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Route, X, Ship, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -72,6 +72,8 @@ export default function Home() {
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
   const [tourRouteInfo, setTourRouteInfo] = useState<{ distance: number; duration: number } | null>(null);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [showHeaderMenu, setShowHeaderMenu] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -277,67 +279,97 @@ export default function Home() {
       />
       
       <SidebarInset className="flex w-full flex-1 flex-col">
-        <header className="flex items-center gap-2 p-2 border-b bg-background z-[1001]">
+        <header 
+          ref={headerRef}
+          className="flex items-center gap-2 p-2 border-b bg-background z-[1001]"
+          onTouchStart={(e) => {
+            const touch = e.touches[0];
+            headerRef.current?.setAttribute('data-touch-start-x', touch.clientX.toString());
+          }}
+          onTouchMove={(e) => {
+            const startX = parseFloat(headerRef.current?.getAttribute('data-touch-start-x') || '0');
+            const currentX = e.touches[0].clientX;
+            const deltaX = currentX - startX;
+            
+            if (deltaX > 50 && !showHeaderMenu) {
+              setShowHeaderMenu(true);
+            }
+          }}
+        >
           <SidebarTrigger data-testid="button-sidebar-toggle" />
           <h1 className="font-serif font-semibold text-lg">GPS Audio Guide</h1>
           
           <div className="ml-auto flex items-center gap-1">
-            {tourStops.length > 0 && (
+            <Button
+              variant={showHeaderMenu ? "default" : "ghost"}
+              size="icon"
+              onClick={() => setShowHeaderMenu(!showHeaderMenu)}
+              data-testid="button-toggle-header-menu"
+              className="h-8 w-8"
+            >
+              <Menu className="w-4 h-4" />
+            </Button>
+            
+            {showHeaderMenu && (
               <>
-                <Badge variant="secondary" className="gap-1" data-testid="tour-stops-count">
-                  <Route className="w-3 h-3" />
-                  <span>{tourStops.length} stops</span>
-                </Badge>
-                {tourRouteInfo && (
-                  <Badge variant="outline" className="gap-1" data-testid="tour-distance-time">
-                    <span>
-                      {(tourRouteInfo.distance / 1000).toFixed(1)}km • {Math.ceil(tourRouteInfo.duration / 60)}min
-                    </span>
-                  </Badge>
+                {tourStops.length > 0 && (
+                  <>
+                    <Badge variant="secondary" className="gap-1" data-testid="tour-stops-count">
+                      <Route className="w-3 h-3" />
+                      <span>{tourStops.length} stops</span>
+                    </Badge>
+                    {tourRouteInfo && (
+                      <Badge variant="outline" className="gap-1" data-testid="tour-distance-time">
+                        <span>
+                          {(tourRouteInfo.distance / 1000).toFixed(1)}km • {Math.ceil(tourRouteInfo.duration / 60)}min
+                        </span>
+                      </Badge>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleClearTour}
+                      data-testid="button-clear-tour"
+                      className="gap-1"
+                    >
+                      <X className="w-4 h-4" />
+                      <span className="hidden sm:inline">Clear Tour</span>
+                    </Button>
+                  </>
                 )}
                 <Button
-                  variant="ghost"
+                  variant={showLandmarks ? "default" : "outline"}
                   size="sm"
-                  onClick={handleClearTour}
-                  data-testid="button-clear-tour"
+                  onClick={() => setShowLandmarks(!showLandmarks)}
+                  data-testid="button-toggle-landmarks"
                   className="gap-1"
                 >
-                  <X className="w-4 h-4" />
-                  <span className="hidden sm:inline">Clear Tour</span>
+                  <LandmarkIcon className="w-4 h-4" />
+                  <span className="hidden sm:inline">{t('landmarks', selectedLanguage)}</span>
                 </Button>
+                <Button
+                  variant={showActivities ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setShowActivities(!showActivities)}
+                  data-testid="button-toggle-activities"
+                  className="gap-1"
+                >
+                  <Activity className="w-4 h-4" />
+                  <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
+                </Button>
+                {selectedCity?.cruisePort && (
+                  <Button
+                    variant={showCruisePort ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setShowCruisePort(!showCruisePort)}
+                    data-testid="button-toggle-cruise-port"
+                    className="gap-1"
+                  >
+                    <Ship className="w-4 h-4" />
+                    <span className="hidden sm:inline">{t('cruisePortInfo', selectedLanguage)}</span>
+                  </Button>
+                )}
               </>
-            )}
-            <Button
-              variant={showLandmarks ? "default" : "outline"}
-              size="sm"
-              onClick={() => setShowLandmarks(!showLandmarks)}
-              data-testid="button-toggle-landmarks"
-              className="gap-1"
-            >
-              <LandmarkIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('landmarks', selectedLanguage)}</span>
-            </Button>
-            <Button
-              variant={showActivities ? "default" : "outline"}
-              size="sm"
-              onClick={() => setShowActivities(!showActivities)}
-              data-testid="button-toggle-activities"
-              className="gap-1"
-            >
-              <Activity className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
-            </Button>
-            {selectedCity?.cruisePort && (
-              <Button
-                variant={showCruisePort ? "default" : "outline"}
-                size="sm"
-                onClick={() => setShowCruisePort(!showCruisePort)}
-                data-testid="button-toggle-cruise-port"
-                className="gap-1"
-              >
-                <Ship className="w-4 h-4" />
-                <span className="hidden sm:inline">{t('cruisePortInfo', selectedLanguage)}</span>
-              </Button>
             )}
           </div>
         </header>
