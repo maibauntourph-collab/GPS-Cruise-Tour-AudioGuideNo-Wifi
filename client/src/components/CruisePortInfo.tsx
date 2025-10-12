@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Anchor, MapPin, Clock, Info, Ship, X } from 'lucide-react';
+import { Anchor, MapPin, Clock, Info, Ship, X, Minus } from 'lucide-react';
 import { City, Landmark, CruisePort } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
 
@@ -27,6 +27,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
+  const [isMinimized, setIsMinimized] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -43,11 +44,14 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   const recommendedDuration = getCruisePortTranslation(cruisePort, selectedLanguage, 'recommendedDuration');
   const tips = getCruisePortTranslation(cruisePort, selectedLanguage, 'tips');
 
+  const [hasMoved, setHasMoved] = useState(false);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest('button')) {
       return;
     }
     setIsDragging(true);
+    setHasMoved(false);
     setDragStart({
       x: e.clientX - translate.x,
       y: e.clientY - translate.y
@@ -58,6 +62,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging || !cardRef.current) return;
     
+    setHasMoved(true);
     const newX = e.clientX - dragStart.x;
     const newY = e.clientY - dragStart.y;
     
@@ -130,6 +135,42 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     }, 2000);
   };
 
+  // Minimized floating icon
+  if (isMinimized) {
+    return (
+      <div
+        ref={cardRef}
+        style={{
+          position: 'absolute',
+          left: '16px',
+          bottom: '16px',
+          zIndex,
+          cursor: isDragging ? 'grabbing' : 'pointer',
+          userSelect: 'none',
+          transform: `translate(${translate.x}px, ${translate.y}px)`
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseUp={(e) => {
+          handleMouseUp();
+          // Only restore if it was a click (not a drag)
+          if (!hasMoved) {
+            setIsMinimized(false);
+            setZIndex(2000);
+          }
+        }}
+        data-testid="icon-cruise-port-minimized"
+      >
+        <div className="relative">
+          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 dark:from-blue-600 dark:to-cyan-600 flex items-center justify-center shadow-lg hover-elevate active-elevate-2 border-2 border-white dark:border-gray-800">
+            <Ship className="w-7 h-7 text-white" />
+          </div>
+          {/* Pulse animation */}
+          <div className="absolute inset-0 w-14 h-14 rounded-full bg-blue-400 dark:bg-blue-500 animate-ping opacity-20"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={cardRef}
@@ -154,6 +195,18 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
           <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-100 flex-1" data-testid="text-cruise-port-title">
             {t('cruisePortInfo', selectedLanguage)}
           </h3>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMinimized(true);
+            }}
+            className="h-6 w-6 hover:bg-blue-200 dark:hover:bg-blue-800"
+            data-testid="button-minimize-cruise-port"
+          >
+            <Minus className="w-4 h-4" />
+          </Button>
           {onClose && (
             <Button
               variant="ghost"
