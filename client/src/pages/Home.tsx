@@ -72,12 +72,28 @@ export default function Home() {
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
   const [tourRouteInfo, setTourRouteInfo] = useState<{ distance: number; duration: number } | null>(null);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const [showHeaderMenu, setShowHeaderMenu] = useState(false);
+  const [showHeaderMenu, setShowHeaderMenu] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768;
+    }
+    return true;
+  });
   const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
   }, [audioEnabled]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setShowHeaderMenu(true);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (tourStops.length < 2) {
