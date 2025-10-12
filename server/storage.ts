@@ -6418,17 +6418,20 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Island Hopping Tour',
         narration: 'Explore the stunning islands around Cebu on this full-day island hopping adventure. Visit pristine beaches, snorkel in crystal-clear waters, and enjoy a beach barbecue.',
-        description: 'Full-day island hopping tour to Cebu\'s beautiful islands'
+        description: 'Full-day island hopping tour to Cebu\'s beautiful islands',
+        detailedDescription: 'This island hopping tour takes you to some of Cebu\'s most beautiful islands including Nalusuan Island, Caohagan Island, and Hilutungan Island. Each stop offers unique experiences - from pristine white sand beaches perfect for sunbathing to vibrant coral reefs teeming with tropical fish ideal for snorkeling. The tour includes all equipment, lunch on the beach with fresh seafood barbecue, and experienced guides who know the best spots. Swim in crystal-clear turquoise waters, explore marine sanctuaries, and relax on secluded beaches. Transportation via traditional bancas (outrigger boats) adds to the authentic Filipino experience.'
       },
       it: {
         name: 'Tour Isola in Isola',
         narration: 'Esplora le splendide isole intorno a Cebu in questa avventura di un\'intera giornata. Visita spiagge incontaminate, fai snorkeling in acque cristalline e goditi un barbecue sulla spiaggia.',
-        description: 'Tour di un\'intera giornata alle bellissime isole di Cebu'
+        description: 'Tour di un\'intera giornata alle bellissime isole di Cebu',
+        detailedDescription: 'Questo tour isola in isola ti porta ad alcune delle isole più belle di Cebu tra cui Nalusuan Island, Caohagan Island e Hilutungan Island. Ogni tappa offre esperienze uniche - dalle spiagge di sabbia bianca incontaminate perfette per prendere il sole alle vivaci barriere coralline brulicanti di pesci tropicali ideali per lo snorkeling. Il tour include tutta l\'attrezzatura, pranzo sulla spiaggia con barbecue di pesce fresco e guide esperte che conoscono i posti migliori. Nuota in acque turchesi cristalline, esplora santuari marini e rilassati su spiagge isolate. Il trasporto tramite tradizionali bancas (barche con bilanciere) aggiunge all\'esperienza filippina autentica.'
       },
       ko: {
         name: '아일랜드 호핑 투어',
         narration: '이 하루 종일 아일랜드 호핑 모험에서 세부 주변의 멋진 섬들을 탐험하세요. 깨끗한 해변을 방문하고, 수정처럼 맑은 물에서 스노클링을 하고, 해변 바비큐를 즐기세요.',
-        description: '세부의 아름다운 섬들로의 하루 종일 아일랜드 호핑 투어'
+        description: '세부의 아름다운 섬들로의 하루 종일 아일랜드 호핑 투어',
+        detailedDescription: '이 아일랜드 호핑 투어는 날루수안 섬, 카오하간 섬, 힐루툰간 섬을 포함한 세부의 가장 아름다운 섬들로 여러분을 안내합니다. 각 정류장은 독특한 경험을 제공합니다 - 일광욕에 완벽한 깨끗한 백사장부터 스노클링에 이상적인 열대어가 가득한 활기찬 산호초까지. 투어에는 모든 장비, 신선한 해산물 바비큐와 함께하는 해변 점심, 그리고 최고의 장소를 아는 경험 많은 가이드가 포함됩니다. 수정처럼 맑은 청록색 바다에서 수영하고, 해양 보호구역을 탐험하고, 한적한 해변에서 휴식을 취하세요. 전통적인 방카(외지거 보트)를 통한 이동은 진정한 필리핀 경험을 더합니다.'
       }
     }
   },
@@ -6457,12 +6460,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Osservazione Squali Balena a Oslob',
         narration: 'Vivi l\'emozione di nuotare accanto ai gentili squali balena giganti a Oslob. Questa esperienza da lista dei desideri ti porta faccia a faccia con il pesce più grande del mondo.',
-        description: 'Nuota con gli squali balena nel loro habitat naturale'
+        description: 'Nuota con gli squali balena nel loro habitat naturale',
+        detailedDescription: 'Oslob offre uno degli incontri con squali balena più affidabili al mondo. Questi gentili giganti, i pesci più grandi dell\'oceano, si radunano nelle calde acque al largo di Oslob tutto l\'anno. L\'esperienza inizia di prima mattina quando l\'acqua è più calma e gli squali balena sono più attivi. Dopo un briefing sulla sicurezza, entrerai nelle acque poco profonde dove queste magnifiche creature si nutrono. Nuotare accanto a uno squalo balena di 6 metri è davvero maestoso - scivolano con grazia nell\'acqua, completamente indisturbati dalla presenza umana. Il tour include attrezzatura da snorkeling, giubbotti di salvataggio, guide esperte e opportunità di fotografia subacquea. Rigide regole di conservazione garantiscono sia la tua sicurezza che il benessere degli squali balena.'
       },
       ko: {
         name: '오슬롭 고래상어 관찰',
         narration: '오슬롭에서 온순한 거대 고래상어와 함께 수영하는 스릴을 경험하세요. 이 버킷리스트 경험은 세계에서 가장 큰 물고기와 대면하게 합니다.',
-        description: '자연 서식지에서 고래상어와 함께 수영'
+        description: '자연 서식지에서 고래상어와 함께 수영',
+        detailedDescription: '오슬롭은 세계에서 가장 신뢰할 수 있는 고래상어 만남 중 하나를 제공합니다. 바다에서 가장 큰 물고기인 이 온순한 거인들은 일년 내내 오슬롭의 따뜻한 바다에 모입니다. 경험은 물이 가장 잔잔하고 고래상어가 가장 활동적인 이른 아침에 시작됩니다. 안전 교육 후, 이 장엄한 생물들이 먹이를 먹는 얕은 물로 들어갑니다. 6미터 고래상어와 함께 수영하는 것은 정말 경외심을 불러일으킵니다 - 그들은 인간의 존재에 전혀 방해받지 않고 물속에서 우아하게 미끄러집니다. 투어에는 스노클링 장비, 구명 조끼, 경험 많은 가이드, 수중 사진 촬영 기회가 포함됩니다. 엄격한 보존 규칙은 여러분의 안전과 고래상어의 복지를 모두 보장합니다.'
       }
     }
   },
@@ -6491,12 +6496,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Avventura Canyoning alle Cascate Kawasan',
         narration: 'Inizia un\'avventura di canyoning piena di adrenalina attraverso le Cascate Kawasan. Salta dalle scogliere, nuota attraverso i canyon e scendi in corda doppia dalle cascate.',
-        description: 'Esperienza emozionante di canyoning alle Cascate Kawasan'
+        description: 'Esperienza emozionante di canyoning alle Cascate Kawasan',
+        detailedDescription: 'L\'avventura di canyoning a Kawasan è una delle attività all\'aperto più esaltanti di Cebu. Questa avventura di un\'intera giornata ti porta attraverso canyon spettacolari scolpiti da acque turchesi cristalline nel corso di milioni di anni. Il percorso include salti da scogliere di varie altezze (opzionale - puoi sempre aggirare a piedi), nuotate attraverso gole strette, arrampicate su rocce e discese in corda doppia lungo cascate scroscianti. Il culmine sono le spettacolari Cascate Kawasan con le loro cascate a più livelli e piscine blu vibranti. Tutta l\'attrezzatura necessaria inclusi caschi, giubbotti di salvataggio e corde è fornita. Guide esperte garantiscono la sicurezza mentre ti incoraggiano a superare i tuoi limiti. Non è richiesta esperienza precedente, ma sono raccomandate buone capacità di nuoto e forma fisica.'
       },
       ko: {
         name: '카와산 폭포 캐니어링 어드벤처',
         narration: '카와산 폭포를 통과하는 아드레날린이 솟구치는 캐니어링 모험을 시작하세요. 절벽에서 뛰어내리고, 협곡을 헤엄치고, 폭포를 따라 하강하세요.',
-        description: '카와산 폭포에서의 스릴 넘치는 캐니어링 경험'
+        description: '카와산 폭포에서의 스릴 넘치는 캐니어링 경험',
+        detailedDescription: '카와산 캐니어링 모험은 세부에서 가장 짜릿한 야외 활동 중 하나입니다. 이 하루 종일 모험은 수백만 년에 걸쳐 수정처럼 맑은 청록색 물이 조각한 멋진 협곡을 통과합니다. 여정에는 다양한 높이에서의 절벽 점프(선택 사항 - 언제든지 걸어서 우회 가능), 좁은 협곡을 헤엄치기, 바위를 오르기, 쏟아지는 폭포를 따라 하강하기가 포함됩니다. 하이라이트는 멋진 다단계 폭포와 생생한 푸른 웅덩이가 있는 장관인 카와산 폭포입니다. 헬멧, 구명 조끼, 로프를 포함한 모든 필요한 장비가 제공됩니다. 전문 가이드가 안전을 보장하면서 한계를 뛰어넘도록 격려합니다. 사전 경험은 필요하지 않지만 좋은 수영 능력과 체력이 권장됩니다.'
       }
     }
   },
@@ -6527,12 +6534,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Tour Notturno dei Gardens by the Bay',
         narration: 'Vivi i magici Gardens by the Bay dopo il tramonto. Guarda lo spettacolare spettacolo di luci e suoni al Supertree Grove ed esplora la Cloud Forest illuminata.',
-        description: 'Tour serale dei Gardens by the Bay con spettacolo di luci'
+        description: 'Tour serale dei Gardens by the Bay con spettacolo di luci',
+        detailedDescription: 'I Gardens by the Bay si trasformano in un magico paese delle meraviglie dopo il tramonto. Questo tour serale ti porta attraverso il futuristico Supertree Grove dove i giardini verticali torreggianti raggiungono i 50 metri di altezza. Il momento clou è il Garden Rhapsody - uno spettacolare spettacolo di luci e suoni che illumina i Supertree in una sinfonia di colori sincronizzata con la musica. Il tour include anche la Cloud Forest, dove la cascata interna più alta del mondo precipita per 35 metri circondata da vegetazione lussureggiante e nebbia eterea. Cammina lungo l\'OCBC Skyway, una passerella aerea di 128 metri che collega i Supertree a 22 metri dal suolo, offrendo viste mozzafiato di Marina Bay. Le temperature serali più fresche rendono l\'esplorazione più confortevole mentre l\'illuminazione drammatica crea perfette opportunità fotografiche.'
       },
       ko: {
         name: '가든스 바이 더 베이 야간 투어',
         narration: '어둠 속에서 마법 같은 가든스 바이 더 베이를 경험하세요. 슈퍼트리 그로브에서 멋진 빛과 소리 쇼를 보고 조명이 켜진 클라우드 포레스트를 탐험하세요.',
-        description: '라이트 쇼가 있는 가든스 바이 더 베이 저녁 투어'
+        description: '라이트 쇼가 있는 가든스 바이 더 베이 저녁 투어',
+        detailedDescription: '가든스 바이 더 베이는 일몰 후 마법의 원더랜드로 변신합니다. 이 저녁 투어는 높이 50미터에 달하는 수직 정원이 솟아 있는 미래적인 슈퍼트리 그로브를 안내합니다. 하이라이트는 가든 랩소디 - 음악에 맞춰 슈퍼트리를 색상의 교향곡으로 비추는 화려한 빛과 소리 쇼입니다. 투어에는 무성한 식물과 환상적인 안개에 둘러싸인 세계에서 가장 높은 실내 폭포가 35미터를 쏟아지는 클라우드 포레스트도 포함됩니다. 지상 22미터에서 슈퍼트리를 연결하는 128미터의 공중 산책로인 OCBC 스카이웨이를 따라 걸으며 마리나 베이의 멋진 전망을 즐기세요. 시원한 저녁 기온은 탐험을 더 편안하게 만들고 극적인 조명은 완벽한 사진 촬영 기회를 만듭니다.'
       }
     }
   },
@@ -6561,12 +6570,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Crociera in Bumboat sul Fiume Singapore',
         narration: 'Naviga lungo lo storico fiume Singapore su un tradizionale bumboat. Scopri il patrimonio della città mentre scivoli accanto a edifici coloniali, grattacieli moderni e banchine vivaci.',
-        description: 'Crociera tradizionale in bumboat lungo il fiume Singapore'
+        description: 'Crociera tradizionale in bumboat lungo il fiume Singapore',
+        detailedDescription: 'La crociera sul fiume Singapore offre una prospettiva unica sulla trasformazione della città da villaggio di pescatori a metropoli globale. Sali a bordo di un tradizionale bumboat - un tempo utilizzato per trasportare merci e passeggeri - e scivola lungo lo storico corso d\'acqua. La crociera attraversa tre banchine distinte: Boat Quay con le sue colorate shophouse e ristoranti vivaci, il moderno complesso di intrattenimento di Clarke Quay e il fascino residenziale più tranquillo di Robertson Quay. Lungo il percorso, ammira monumenti iconici tra cui il Merlion, l\'Esplanade, Marina Bay Sands e il Fullerton Hotel. Il commento audio in più lingue condivide storie affascinanti sulla storia, architettura e patrimonio culturale di Singapore. Le crociere serali sono particolarmente magiche quando le luci della città si riflettono sull\'acqua.'
       },
       ko: {
         name: '싱가포르 리버 범보트 크루즈',
         narration: '전통적인 범보트를 타고 역사적인 싱가포르 강을 따라 크루즈하세요. 식민지 건물, 현대적인 고층 빌딩, 활기찬 부두를 지나가며 도시의 유산을 발견하세요.',
-        description: '싱가포르 강을 따라 전통 범보트 크루즈'
+        description: '싱가포르 강을 따라 전통 범보트 크루즈',
+        detailedDescription: '싱가포르 리버 크루즈는 어촌 마을에서 글로벌 대도시로의 도시 변화에 대한 독특한 관점을 제공합니다. 한때 상품과 승객을 운송하는 데 사용되었던 전통적인 범보트에 탑승하여 역사적인 수로를 따라 미끄러지세요. 크루즈는 세 개의 구별된 부두를 통과합니다: 화려한 샵하우스와 활기찬 레스토랑이 있는 보트 키, 클라크 키의 현대적인 엔터테인먼트 단지, 그리고 로버트슨 키의 더 조용한 주거 매력. 길을 따라 멀라이언, 에스플러네이드, 마리나 베이 샌즈, 풀러턴 호텔을 포함한 상징적인 랜드마크를 볼 수 있습니다. 여러 언어로 제공되는 오디오 해설은 싱가포르의 역사, 건축, 문화 유산에 대한 매혹적인 이야기를 공유합니다. 도시의 불빛이 물에 반사될 때 저녁 크루즈는 특히 마법 같습니다.'
       }
     }
   },
@@ -6595,12 +6606,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Tour Gastronomico nei Hawker Center',
         narration: 'Inizia un viaggio culinario attraverso i famosi hawker center di Singapore. Assaggia piatti locali autentici e scopri il patrimonio gastronomico multiculturale.',
-        description: 'Tour gastronomico guidato per esplorare la cucina hawker di Singapore'
+        description: 'Tour gastronomico guidato per esplorare la cucina hawker di Singapore',
+        detailedDescription: 'I hawker center di Singapore sono il cuore e l\'anima della cultura gastronomica della città, riconosciuti dall\'UNESCO come Patrimonio Culturale Immateriale. Questo tour gastronomico guidato ti porta alle migliori bancarelle hawker per assaggiare piatti singaporiani iconici come il riso al pollo hainanese, laksa, char kway teow, satay e roti prata. La tua guida locale condivide la storia dietro ogni piatto e le storie degli hawker che hanno perfezionato le loro ricette nel corso di generazioni. Scopri le influenze multiculturali di Singapore - cinese, malese, indiana e Peranakan - tutte riflesse nella cucina diversificata. Il tour visita molteplici hawker center tra cui Maxwell Food Centre e Lau Pa Sat, assicurando che assaggi le offerte più autentiche e deliziose. Vieni affamato - assaggerai 8-10 piatti diversi!'
       },
       ko: {
         name: '호커 센터 푸드 투어',
         narration: '싱가포르의 유명한 호커 센터를 통한 요리 여행을 시작하세요. 정통 현지 요리를 맛보고 다문화 음식 유산에 대해 배우세요.',
-        description: '싱가포르 호커 요리를 탐험하는 가이드 푸드 투어'
+        description: '싱가포르 호커 요리를 탐험하는 가이드 푸드 투어',
+        detailedDescription: '싱가포르의 호커 센터는 도시 음식 문화의 심장과 영혼이며, 유네스코 무형 문화유산으로 인정받았습니다. 이 가이드 푸드 투어는 하이난식 치킨 라이스, 락사, 차 콰이 티오, 사테, 로티 프라타와 같은 상징적인 싱가포르 요리를 맛보기 위해 최고의 호커 가판대로 안내합니다. 현지 가이드가 각 요리 뒤의 역사와 여러 세대에 걸쳐 레시피를 완성한 호커들의 이야기를 공유합니다. 중국, 말레이, 인도, 페라나칸 등 다양한 요리에 반영된 싱가포르의 다문화 영향에 대해 배우세요. 투어는 맥스웰 푸드 센터와 라우 파 사트를 포함한 여러 호커 센터를 방문하여 가장 정통적이고 맛있는 음식을 맛볼 수 있도록 합니다. 배고픈 상태로 오세요 - 8-10가지 다른 요리를 맛보게 됩니다!'
       }
     }
   },
@@ -6631,12 +6644,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Tour della Street Art di Georgetown',
         narration: 'Scopri la vivace scena della street art di Georgetown in questo tour a piedi. Trova murales famosi, scopri le loro storie ed esplora la città Patrimonio dell\'Umanità UNESCO.',
-        description: 'Tour a piedi della famosa street art e murales di Georgetown'
+        description: 'Tour a piedi della famosa street art e murales di Georgetown',
+        detailedDescription: 'La street art di Georgetown ha trasformato la città Patrimonio dell\'Umanità UNESCO in una galleria a cielo aperto. Questo tour a piedi guidato ti porta ai murales più famosi dell\'artista lituano Ernest Zacharevic e di artisti locali. Ammira l\'iconico "Little Children on a Bicycle", "Boy on a Bike" e dozzine di altre opere creative che fondono l\'arte con l\'architettura storica della città. La tua guida condivide le storie dietro ogni opera d\'arte e la trasformazione di Georgetown nella capitale della street art del Sud-Est asiatico. Il tour esplora anche il patrimonio multiculturale della città, visitando templi, moschee, chiese e case dei clan lungo il percorso. Scoprirai vicoli nascosti, edifici coloniali e mercati locali mentre impari sulla ricca storia di Penang. Scarpe comode da passeggio raccomandate - il tour copre circa 3-4 chilometri.'
       },
       ko: {
         name: '조지타운 스트리트 아트 투어',
         narration: '이 도보 투어에서 조지타운의 활기찬 스트리트 아트 현장을 발견하세요. 유명한 벽화를 찾고, 그들의 이야기를 배우고, 유네스코 세계 문화유산 도시를 탐험하세요.',
-        description: '조지타운의 유명한 스트리트 아트와 벽화 도보 투어'
+        description: '조지타운의 유명한 스트리트 아트와 벽화 도보 투어',
+        detailedDescription: '조지타운의 스트리트 아트는 유네스코 세계 문화유산 도시를 야외 갤러리로 변모시켰습니다. 이 가이드 도보 투어는 리투아니아 예술가 어니스트 자카레빅과 지역 예술가들의 가장 유명한 벽화로 안내합니다. 상징적인 "자전거를 탄 어린이들", "자전거를 탄 소년", 그리고 도시의 역사적 건축물과 예술을 융합한 수십 개의 다른 창의적인 작품을 보세요. 가이드가 각 예술 작품 뒤의 이야기와 동남아시아의 스트리트 아트 수도로의 조지타운 변모에 대해 공유합니다. 투어는 또한 도시의 다문화 유산을 탐험하며 길을 따라 사원, 모스크, 교회, 씨족 가옥을 방문합니다. 페낭의 풍부한 역사에 대해 배우면서 숨겨진 골목길, 식민지 건물, 지역 시장을 발견하게 됩니다. 편안한 워킹화 권장 - 투어는 약 3-4킬로미터를 다룹니다.'
       }
     }
   },
@@ -6665,12 +6680,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Esperienza della Funicolare di Penang Hill',
         narration: 'Sali sulla storica funicolare fino alla cima di Penang Hill. Goditi viste panoramiche dell\'isola, esplora bungalow coloniali e sperimenta l\'aria fresca di montagna.',
-        description: 'Corsa in funicolare fino alla cima di Penang Hill'
+        description: 'Corsa in funicolare fino alla cima di Penang Hill',
+        detailedDescription: 'Penang Hill offre una fuga rinfrescante dal caldo tropicale e viste spettacolari dell\'isola. Il viaggio inizia con una corsa panoramica sulla funicolare, una delle più antiche d\'Asia, che sale 833 metri attraverso la lussureggiante foresta pluviale. In cima, le temperature sono tipicamente 5-7°C più fresche rispetto al livello del mare, offrendo un sollievo benvenuto. Esplora le attrazioni della collina tra cui The Habitat, un centro di scoperta della natura con passerelle tra le chiome degli alberi che offrono viste mozzafiato; bungalow dell\'epoca coloniale che mostrano il patrimonio britannico; santuari indù e musulmani; e la terrazza Love Lock dove le coppie attaccano lucchetti come simboli di amore eterno. Le viste panoramiche comprendono Georgetown, la terraferma e, nelle giornate limpide, persino la Thailandia. Visita al tramonto per le viste più mozzafiato mentre le luci della città iniziano a brillare sotto.'
       },
       ko: {
         name: '페낭 힐 케이블카 체험',
         narration: '역사적인 케이블카를 타고 페낭 힐 정상까지 올라가세요. 섬의 파노라마 전망을 즐기고, 식민지 시대 방갈로를 탐험하고, 시원한 산 공기를 경험하세요.',
-        description: '페낭 힐 정상까지 케이블카 타기'
+        description: '페낭 힐 정상까지 케이블카 타기',
+        detailedDescription: '페낭 힐은 열대 더위로부터의 상쾌한 탈출과 섬의 장관을 이루는 전망을 제공합니다. 여정은 아시아에서 가장 오래된 케이블카 중 하나를 타고 울창한 열대우림을 통과하며 833미터를 올라가는 경치 좋은 여행으로 시작됩니다. 정상에서는 기온이 일반적으로 해수면보다 5-7°C 더 시원하여 반가운 안도감을 제공합니다. 멋진 전망을 제공하는 캐노피 워크웨이가 있는 자연 발견 센터인 The Habitat, 영국 유산을 보여주는 식민지 시대 방갈로, 힌두교 및 이슬람 신전, 그리고 커플들이 영원한 사랑의 상징으로 자물쇠를 달아두는 러브 락 테라스를 포함한 언덕의 명소를 탐험하세요. 파노라마 전망은 조지타운, 본토, 그리고 맑은 날에는 태국까지 포함합니다. 도시의 불빛이 아래에서 반짝이기 시작하는 일몰 시간에 방문하여 가장 숨막히는 전망을 즐기세요.'
       }
     }
   },
@@ -6699,12 +6716,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Corso di Cucina Nyonya Tradizionale',
         narration: 'Impara a cucinare l\'autentica cucina Nyonya in questo corso di cucina pratico. Scopri le uniche tradizioni culinarie Peranakan che fondono sapori cinesi e malesi.',
-        description: 'Corso di cucina Nyonya pratico con visita al mercato'
+        description: 'Corso di cucina Nyonya pratico con visita al mercato',
+        detailedDescription: 'La cucina Nyonya, conosciuta anche come cibo Peranakan, rappresenta una fusione unica di tradizioni culinarie cinesi e malesi sviluppate nel corso di secoli a Penang. Questo corso di cucina immersivo inizia con una visita a un mercato locale dove il tuo istruttore spiega ingredienti esotici come bunga kantan (zenzero torcia), daun kesom (foglie di laksa) e belacan (pasta di gamberetti). Torna in una tradizionale casa Peranakan o scuola di cucina per preparare 3-4 piatti caratteristici che potrebbero includere laksa lemak, ayam pongteh (pollo brasato in pasta di fagioli fermentati) o kueh pie tee (gusci croccanti con verdure). Impara tecniche essenziali come pestare il rempah (pasta di spezie) in un mortaio tradizionale e raggiungere il perfetto equilibrio di sapori dolci, acidi, salati e piccanti. Il corso si conclude gustando insieme le tue creazioni. Schede ricette fornite così puoi ricreare i piatti a casa.'
       },
       ko: {
         name: '전통 뇨냐 요리 수업',
         narration: '이 실습 요리 수업에서 정통 뇨냐 요리를 배우세요. 중국과 말레이 풍미를 혼합한 독특한 페라나칸 요리 전통을 발견하세요.',
-        description: '시장 방문이 포함된 실습 뇨냐 요리 수업'
+        description: '시장 방문이 포함된 실습 뇨냐 요리 수업',
+        detailedDescription: '페라나칸 음식으로도 알려진 뇨냐 요리는 페낭에서 수세기에 걸쳐 발전한 중국과 말레이 요리 전통의 독특한 융합을 나타냅니다. 이 몰입형 요리 수업은 강사가 붕아 칸탄(토치 생강), 다운 케솜(락사 잎), 블라칸(새우 페이스트)과 같은 이국적인 재료를 설명하는 지역 시장 방문으로 시작됩니다. 전통적인 페라나칸 가정이나 요리 학교로 돌아와 락사 레막, 아얌 퐁테(발효 콩 페이스트에 조린 닭고기) 또는 쿠에 파이 티(야채를 넣은 바삭한 껍질)를 포함할 수 있는 3-4가지 대표 요리를 준비합니다. 전통 절구에서 렘파(향신료 페이스트)를 찧는 것과 단맛, 신맛, 짠맛, 매운맛의 완벽한 균형을 이루는 것과 같은 필수 기술을 배우세요. 수업은 함께 여러분의 창작물을 즐기며 마무리됩니다. 집에서 요리를 재현할 수 있도록 레시피 카드가 제공됩니다.'
       }
     }
   },
@@ -6735,12 +6754,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Tour del Tempio delle Grotte di Batu',
         narration: 'Scala gli iconici 272 gradini fino al sacro tempio indù delle Grotte di Batu. Ammira la gigantesca statua dorata ed esplora caverne calcaree piene di santuari.',
-        description: 'Tour di mezza giornata al famoso complesso del tempio delle Grotte di Batu'
+        description: 'Tour di mezza giornata al famoso complesso del tempio delle Grotte di Batu',
+        detailedDescription: 'Le Grotte di Batu sono una delle attrazioni più iconiche della Malesia, combinando meraviglie naturali con significato spirituale. Il viaggio inizia ai piedi della statua dorata di 43 metri di Lord Murugan, la più grande del suo genere al mondo. Scala i famosi 272 gradini color arcobaleno (recentemente dipinti in tonalità vivaci) per raggiungere la Grotta del Tempio principale, una massiccia caverna calcarea alta oltre 100 metri che ospita diversi santuari indù. Il lucernario naturale crea un\'atmosfera mistica mentre i raggi del sole illuminano l\'interno della grotta. Esplora la Grotta Oscura, un sito di conservazione che ospita ecosistemi cavernicoli unici, e la Grotta Galleria d\'Arte con i suoi colorati diorami indù. Attenzione alle birichine scimmie macaco che abitano l\'area. Il tour include trasporto da Kuala Lumpur, una guida esperta che spiega le tradizioni indù e le formazioni delle grotte, e tempo per sperimentare l\'atmosfera spirituale.'
       },
       ko: {
         name: '바투 동굴 사원 투어',
         narration: '신성한 바투 동굴 힌두 사원까지 상징적인 272개의 계단을 올라가세요. 거대한 황금 조각상을 감상하고 신전으로 가득 찬 석회암 동굴을 탐험하세요.',
-        description: '유명한 바투 동굴 사원 단지로의 반나절 투어'
+        description: '유명한 바투 동굴 사원 단지로의 반나절 투어',
+        detailedDescription: '바투 동굴은 자연의 경이로움과 영적 의미를 결합한 말레이시아에서 가장 상징적인 명소 중 하나입니다. 여정은 세계에서 가장 큰 규모인 43미터 높이의 무루간 신의 황금 조각상 아래에서 시작됩니다. 유명한 무지개색 272개 계단(최근 생생한 색조로 칠해짐)을 올라 높이 100미터가 넘는 거대한 석회암 동굴인 메인 사원 동굴에 도달하세요. 이곳에는 여러 힌두교 신전이 있습니다. 자연 채광창은 햇빛이 동굴 내부를 비추면서 신비로운 분위기를 만듭니다. 독특한 동굴 생태계를 보유한 보존 지역인 다크 케이브와 화려한 힌두교 디오라마가 있는 아트 갤러리 동굴을 탐험하세요. 이 지역에 서식하는 장난꾸러기 마카크 원숭이를 조심하세요. 투어에는 쿠알라룸푸르에서의 교통편, 힌두교 전통과 동굴 형성을 설명하는 지식 있는 가이드, 영적 분위기를 경험할 시간이 포함됩니다.'
       }
     }
   },
@@ -6769,12 +6790,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Tour dello Street Food di Kuala Lumpur',
         narration: 'Sperimenta l\'incredibile diversità del cibo di strada malese in questo tour a piedi serale. Assaggia specialità malesi, cinesi e indiane nei locali preferiti.',
-        description: 'Tour a piedi serale dello street food a Kuala Lumpur'
+        description: 'Tour a piedi serale dello street food a Kuala Lumpur',
+        detailedDescription: 'La scena dello street food di Kuala Lumpur è un delizioso riflesso della società multiculturale della Malesia. Questo tour gastronomico serale ti porta fuori dai sentieri turistici verso autentiche trattorie locali e bancarelle di strada dove i residenti di KL mangiano davvero. Assaggia piatti iconici come nasi lemak (riso al cocco con sambal), char kway teow (noodles saltati), roti canai con curry, satay (spiedini di carne alla griglia), cendol (dessert di ghiaccio tritato) e durian (se sei coraggioso!). La tua guida locale condivide approfondimenti sulla cultura gastronomica malese, tecniche di cucina e la storia dietro ogni piatto. Visita mercati notturni vivaci come Jalan Alor o Petaling Street Chinatown, sperimenta l\'energia della ristorazione all\'aperto e impara sulle spezie e ingredienti che rendono la cucina malese così distintiva. Il tour include 8-10 assaggi di cibo - abbastanza per una cena completa.'
       },
       ko: {
         name: '쿠알라룸푸르 스트리트 푸드 투어',
         narration: '이 저녁 도보 투어에서 말레이시아 길거리 음식의 놀라운 다양성을 경험하세요. 지역 인기 장소에서 말레이, 중국, 인도 특선 요리를 맛보세요.',
-        description: '쿠알라룸푸르의 저녁 스트리트 푸드 도보 투어'
+        description: '쿠알라룸푸르의 저녁 스트리트 푸드 도보 투어',
+        detailedDescription: '쿠알라룸푸르의 스트리트 푸드 현장은 말레이시아 다문화 사회의 맛있는 반영입니다. 이 저녁 푸드 투어는 KL 주민들이 실제로 먹는 정통 지역 식당과 길거리 가판대로 관광 코스를 벗어나 안내합니다. 나시 르막(삼발을 곁들인 코코넛 밥), 차 콰이 티오(볶은 국수), 커리를 곁들인 로티 차나이, 사테(구운 고기 꼬치), 첸돌(빙수 디저트), 그리고 두리안(용감하다면!)과 같은 상징적인 요리를 맛보세요. 현지 가이드가 말레이시아 음식 문화, 요리 기술, 각 요리 뒤의 역사에 대한 통찰력을 공유합니다. 잘란 알로르나 페탈링 스트리트 차이나타운과 같은 번화한 야시장을 방문하고, 야외 식사의 에너지를 경험하고, 말레이시아 요리를 독특하게 만드는 향신료와 재료에 대해 배우세요. 투어에는 8-10가지 음식 시식이 포함되어 있습니다 - 완전한 저녁 식사에 충분합니다.'
       }
     }
   },
@@ -6803,12 +6826,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Esperienza Subacquea Aquaria KLCC',
         narration: 'Viaggia attraverso Aquaria KLCC, uno dei più grandi acquari del Sud-Est asiatico. Cammina attraverso un tunnel sottomarino di 90 metri e vedi migliaia di creature marine.',
-        description: 'Visita all\'oceanario di classe mondiale Aquaria KLCC'
+        description: 'Visita all\'oceanario di classe mondiale Aquaria KLCC',
+        detailedDescription: 'Aquaria KLCC offre un viaggio immersivo attraverso gli ecosistemi acquatici della Malesia e oltre. Situato sotto il Kuala Lumpur Convention Centre, questo oceanario all\'avanguardia ospita oltre 5.000 creature marine e terrestri che rappresentano 150 specie. Il momento clou è il spettacolare tunnel sottomarino di 90 metri dove squali, cernie giganti e razze scivolano sopra la testa creando un\'esperienza surreale di camminata sul fondo dell\'oceano. Esplora mostre diverse tra cui barriere coralline malesi, foreste pluviali allagate, acque costiere e zone oceaniche profonde. Vasche tattili interattive ti permettono di toccare stelle marine e cetrioli di mare, mentre sessioni di alimentazione e spettacoli di immersione forniscono intrattenimento educativo. Il messaggio di conservazione dell\'acquario enfatizza la protezione della biodiversità marina della Malesia. Climatizzato e adatto alle famiglie, è una fuga perfetta dal caldo e dall\'umidità di KL.'
       },
       ko: {
         name: '아쿠아리아 KLCC 수중 체험',
         narration: '동남아시아에서 가장 큰 수족관 중 하나인 아쿠아리아 KLCC를 여행하세요. 90미터 수중 터널을 걸으며 수천 마리의 해양 생물을 보세요.',
-        description: '세계적 수준의 아쿠아리아 KLCC 해양관 방문'
+        description: '세계적 수준의 아쿠아리아 KLCC 해양관 방문',
+        detailedDescription: '아쿠아리아 KLCC는 말레이시아의 수생 생태계와 그 너머로의 몰입형 여행을 제공합니다. 쿠알라룸푸르 컨벤션 센터 아래에 위치한 이 최첨단 해양관은 150종을 대표하는 5,000마리 이상의 해양 및 육상 생물을 전시합니다. 하이라이트는 상어, 대형 농어, 가오리가 머리 위로 미끄러지며 해저를 걷는 듯한 초현실적인 경험을 만드는 90미터 수중 터널입니다. 말레이시아 산호초, 침수된 열대우림, 연안 해역, 심해 지역을 포함한 다양한 전시를 탐험하세요. 인터랙티브 터치 풀에서는 불가사리와 해삼을 만질 수 있고, 먹이 주기 세션과 다이빙 쇼는 교육적 오락을 제공합니다. 수족관의 보존 메시지는 말레이시아의 해양 생물 다양성 보호를 강조합니다. 에어컨이 설치되어 있고 가족 친화적이며 KL의 더위와 습도로부터의 완벽한 탈출구입니다.'
       }
     }
   },
@@ -6839,12 +6864,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Escursione Giornaliera alle Isole Phi Phi',
         narration: 'Esplora le splendide Isole Phi Phi in questo tour in barca di un\'intera giornata. Fai snorkeling in acque cristalline, visita Maya Bay e rilassati su spiagge incontaminate.',
-        description: 'Tour in motoscafo di un\'intera giornata alle Isole Phi Phi'
+        description: 'Tour in motoscafo di un\'intera giornata alle Isole Phi Phi',
+        detailedDescription: 'Le Isole Phi Phi sono tra le destinazioni più belle della Thailandia, e questo tour di un\'intera giornata mostra il meglio di questo paradiso tropicale. Parti da Phuket in motoscafo e arriva alle iconiche Isole Phi Phi, famose per le loro drammatiche scogliere calcaree che emergono da acque turchesi. Visita Maya Bay, resa famosa dal film "The Beach", con la sua splendida spiaggia a mezzaluna circondata da scogliere torreggianti. Fai snorkeling a Pileh Lagoon dove acque smeraldo cristalline ospitano pesci tropicali colorati e giardini di corallo. Esplora la Viking Cave con le sue antiche pitture murali e operazioni di raccolta di nidi di uccelli. Goditi un pranzo a buffet su Phi Phi Don, l\'isola più grande e abitata. Il tour include molteplici soste per snorkeling, tempo in spiaggia, opportunità fotografiche e tutta l\'attrezzatura. Trasferimenti dall\'hotel e guide esperte garantiscono un\'esperienza isolana sicura, confortevole e indimenticabile.'
       },
       ko: {
         name: '피피 섬 당일 여행',
         narration: '이 하루 종일 보트 투어에서 멋진 피피 섬을 탐험하세요. 수정처럼 맑은 물에서 스노클링하고, 마야 베이를 방문하고, 깨끗한 해변에서 휴식하세요.',
-        description: '피피 섬으로의 하루 종일 스피드보트 투어'
+        description: '피피 섬으로의 하루 종일 스피드보트 투어',
+        detailedDescription: '피피 섬은 태국에서 가장 아름다운 목적지 중 하나이며, 이 하루 종일 투어는 이 열대 낙원의 최고를 선보입니다. 푸켓에서 스피드보트로 출발하여 청록색 바다에서 솟아오른 극적인 석회암 절벽으로 유명한 상징적인 피피 섬에 도착하세요. 영화 "더 비치"로 유명해진 마야 베이를 방문하세요. 우뚝 솟은 절벽으로 둘러싸인 멋진 초승달 모양의 해변이 있습니다. 수정처럼 맑은 에메랄드 빛 물이 형형색색의 열대어와 산호 정원의 서식지인 필레 라군에서 스노클링하세요. 고대 벽화와 새 둥지 채취 작업이 있는 바이킹 동굴을 탐험하세요. 더 큰 거주 섬인 피피 돈에서 뷔페 점심을 즐기세요. 투어에는 여러 스노클링 정류장, 해변 시간, 사진 촬영 기회, 모든 장비가 포함됩니다. 호텔 교통편과 숙련된 가이드가 안전하고 편안하며 잊을 수 없는 섬 경험을 보장합니다.'
       }
     }
   },
@@ -6873,12 +6900,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Passeggiata Culturale nella Vecchia Città di Phuket',
         narration: 'Scopri il fascino della Vecchia Città di Phuket in questo tour a piedi. Esplora l\'architettura colorata sino-portoghese, visita mercati locali e scopri il patrimonio di Phuket.',
-        description: 'Tour a piedi guidato della storica Vecchia Città di Phuket'
+        description: 'Tour a piedi guidato della storica Vecchia Città di Phuket',
+        detailedDescription: 'La Vecchia Città di Phuket è un tesoro di storia, cultura e architettura che la maggior parte dei vacanzieri al mare si perde. Questo tour a piedi esplora le shophouse sino-portoghesi splendidamente conservate dipinte in colori vivaci - rosa, giallo, verde menta e turchese. Scopri l\'epoca del boom dello stagno di Phuket quando arrivarono immigrati cinesi e crearono questa miscela architettonica unica. Visita edifici storici come il Thai Hua Museum, ospitato in un\'ex scuola cinese, e la Chinpracha House, una dimora centenaria. Esplora il mercato della Thalang Road Sunday Walking Street (se visiti di domenica) pieno di artigianato locale, street food e spettacoli dal vivo. Scopri santuari nascosti, caffè vintage, gallerie d\'arte contemporanea e street art. La tua guida condivide storie affascinanti sul patrimonio multiculturale di Phuket, leggende locali e gli sforzi di conservazione che mantengono vivo questo quartiere storico. Il tour include soste presso venditori di cibo locali per autentici snack di Phuket.'
       },
       ko: {
         name: '올드 푸켓 타운 문화 산책',
         narration: '이 도보 투어에서 올드 푸켓 타운의 매력을 발견하세요. 화려한 중국-포르투갈 건축물을 탐험하고, 지역 시장을 방문하고, 푸켓의 유산에 대해 배우세요.',
-        description: '역사적인 올드 푸켓 타운의 가이드 도보 투어'
+        description: '역사적인 올드 푸켓 타운의 가이드 도보 투어',
+        detailedDescription: '올드 푸켓 타운은 대부분의 해변 여행객들이 놓치는 역사, 문화, 건축의 보고입니다. 이 도보 투어는 분홍색, 노란색, 민트 그린, 청록색과 같은 생생한 색상으로 칠해진 아름답게 보존된 중국-포르투갈 샵하우스를 탐험합니다. 중국 이민자들이 도착하여 이 독특한 건축 혼합을 만든 푸켓의 주석 채굴 붐 시대에 대해 배우세요. 이전 중국 학교에 자리한 타이 후아 박물관과 100년 된 저택인 친프라차 하우스와 같은 역사적 건물을 방문하세요. 지역 공예품, 길거리 음식, 라이브 공연으로 가득한 탈랑 로드 일요일 워킹 스트리트 시장을 탐험하세요(일요일 방문 시). 숨겨진 신전, 빈티지 카페, 현대 미술관, 스트리트 아트를 발견하세요. 가이드가 푸켓의 다문화 유산, 지역 전설, 이 역사적인 지역을 살아있게 유지하는 보존 노력에 대한 매혹적인 이야기를 공유합니다. 투어에는 정통 푸켓 스낵을 위한 지역 음식 판매상 방문이 포함됩니다.'
       }
     }
   },
@@ -6907,12 +6936,14 @@ const LANDMARKS: Landmark[] = [
       it: {
         name: 'Esperienza di Corso di Cucina Thailandese',
         narration: 'Padroneggia l\'arte della cucina thailandese in questo corso di cucina pratico. Impara a preparare piatti classici usando ingredienti locali freschi e tecniche tradizionali.',
-        description: 'Autentico corso di cucina thailandese con tour del mercato'
+        description: 'Autentico corso di cucina thailandese con tour del mercato',
+        detailedDescription: 'Questo corso di cucina thailandese immersivo offre molto più che ricette - è un\'esperienza culturale che rivela il cuore della cucina thailandese. Inizia con un tour guidato di un mercato locale dove il tuo istruttore spiega ingredienti esotici come galangal, foglie di lime kaffir, varietà di basilico thailandese e gradi di salsa di pesce. Impara a selezionare i prodotti più freschi e comprendi l\'importanza di ogni ingrediente. Torna in una cucina thailandese tradizionale o padiglione di cucina all\'aperto per preparare 4-5 piatti classici come zuppa tom yum, pad thai, curry verde, som tam (insalata di papaya) e riso appiccicoso al mango. Padroneggia tecniche essenziali come pestare la pasta di curry in un mortaio, raggiungere il perfetto equilibrio di dolce, acido, salato e piccante e corretta gestione del wok. Le dimensioni intime delle classi garantiscono attenzione personalizzata. Goditi le tue creazioni a pranzo o cena e porta a casa schede ricette e un certificato. Modifiche vegetariane e dietetiche disponibili.'
       },
       ko: {
         name: '태국 요리 수업 체험',
         narration: '이 실습 요리 수업에서 태국 요리의 예술을 마스터하세요. 신선한 지역 재료와 전통 기술을 사용하여 고전 요리를 준비하는 방법을 배우세요.',
-        description: '시장 투어가 포함된 정통 태국 요리 수업'
+        description: '시장 투어가 포함된 정통 태국 요리 수업',
+        detailedDescription: '이 몰입형 태국 요리 수업은 레시피 이상을 제공합니다 - 태국 요리의 핵심을 드러내는 문화 경험입니다. 강사가 갈랑갈, 카피르 라임 잎, 태국 바질 품종, 피시 소스 등급과 같은 이국적인 재료를 설명하는 지역 시장의 가이드 투어로 시작합니다. 가장 신선한 농산물을 선택하는 방법을 배우고 각 재료의 중요성을 이해하세요. 전통적인 태국 주방이나 야외 요리 파빌리온으로 돌아와 톰얌 수프, 팟타이, 그린 커리, 솜탐(파파야 샐러드), 망고 스티키 라이스와 같은 4-5가지 고전 요리를 준비합니다. 절구에서 커리 페이스트를 찧는 것, 단맛, 신맛, 짠맛, 매운맛의 완벽한 균형을 이루는 것, 적절한 웍 다루기와 같은 필수 기술을 마스터하세요. 소규모 수업 규모는 개인별 관심을 보장합니다. 점심이나 저녁으로 여러분의 창작물을 즐기고, 레시피 카드와 수료증을 가져가세요. 채식 및 식이 조절이 가능합니다.'
       }
     }
   }
