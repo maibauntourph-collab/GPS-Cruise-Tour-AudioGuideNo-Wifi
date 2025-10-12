@@ -66,10 +66,17 @@ export default function Home() {
   const [showLandmarks, setShowLandmarks] = useState(true);
   const [showActivities, setShowActivities] = useState(true);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
+  const [tourRouteInfo, setTourRouteInfo] = useState<{ distance: number; duration: number } | null>(null);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
   }, [audioEnabled]);
+
+  useEffect(() => {
+    if (tourStops.length < 2) {
+      setTourRouteInfo(null);
+    }
+  }, [tourStops]);
 
   useEffect(() => {
     if (!position || !audioEnabled || !landmarks.length) return;
@@ -142,6 +149,7 @@ export default function Home() {
       start: startPosition,
       end: [pendingLandmark.lat, pendingLandmark.lng],
     });
+    setTourRouteInfo(null);
     
     setShowDirectionsDialog(false);
     setPendingLandmark(null);
@@ -211,6 +219,16 @@ export default function Home() {
 
   const handleClearTour = () => {
     setTourStops([]);
+    setTourRouteInfo(null);
+  };
+
+  const handleTourRouteFound = (route: any) => {
+    if (route && route.summary) {
+      setTourRouteInfo({
+        distance: route.summary.totalDistance,
+        duration: route.summary.totalTime
+      });
+    }
   };
 
   // Filter landmarks based on category
@@ -265,6 +283,13 @@ export default function Home() {
                   <Route className="w-3 h-3" />
                   <span>{tourStops.length} stops</span>
                 </Badge>
+                {tourRouteInfo && (
+                  <Badge variant="outline" className="gap-1" data-testid="tour-distance-time">
+                    <span>
+                      {(tourRouteInfo.distance / 1000).toFixed(1)}km • {Math.ceil(tourRouteInfo.duration / 60)}min
+                    </span>
+                  </Badge>
+                )}
                 <Button
                   variant="ghost"
                   size="sm"
@@ -317,6 +342,7 @@ export default function Home() {
               focusLocation={focusLocation}
               tourStops={tourStops}
               onAddToTour={handleAddToTour}
+              onTourRouteFound={handleTourRouteFound}
             />
 
             {/* Show landmark list only when no landmark is selected */}
@@ -344,6 +370,8 @@ export default function Home() {
                 onNavigate={handleLandmarkRoute}
                 selectedLanguage={selectedLanguage}
                 onMapMarkerClick={handleMapMarkerClick}
+                onAddToTour={handleAddToTour}
+                isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
               />
             </div>
           )}

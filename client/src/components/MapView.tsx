@@ -164,6 +164,7 @@ interface MapViewProps {
   focusLocation?: { lat: number; lng: number; zoom: number } | null;
   tourStops?: Landmark[];
   onAddToTour?: (landmark: Landmark) => void;
+  onTourRouteFound?: (route: any) => void;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -208,6 +209,67 @@ function FocusUpdater({ focusLocation }: { focusLocation?: { lat: number; lng: n
   return null;
 }
 
+interface TourRoutingMachineProps {
+  tourStops: Landmark[];
+  onTourRouteFound?: (route: any) => void;
+  activeRoute: { start: [number, number]; end: [number, number] } | null;
+}
+
+function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRoutingMachineProps) {
+  const map = useMap();
+  const routingControlRef = useRef<L.Routing.Control | null>(null);
+
+  useEffect(() => {
+    // Don't show tour routing when there's an active navigation route
+    if (!map || tourStops.length < 2 || activeRoute) {
+      if (routingControlRef.current) {
+        map.removeControl(routingControlRef.current);
+        routingControlRef.current = null;
+      }
+      return;
+    }
+
+    if (routingControlRef.current) {
+      map.removeControl(routingControlRef.current);
+    }
+
+    const waypoints = tourStops.map(stop => L.latLng(stop.lat, stop.lng));
+
+    const control = L.Routing.control({
+      waypoints: waypoints,
+      routeWhileDragging: false,
+      addWaypoints: false,
+      fitSelectedRoutes: true,
+      showAlternatives: false,
+      lineOptions: {
+        styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 0.7, weight: 4, dashArray: '10, 10' }],
+        extendToWaypoints: true,
+        missingRouteTolerance: 0
+      },
+      show: false,
+    } as any);
+
+    control.on('routesfound', function (e) {
+      const routes = e.routes;
+      if (routes && routes[0] && onTourRouteFound) {
+        onTourRouteFound(routes[0]);
+      }
+    });
+
+    control.addTo(map);
+    routingControlRef.current = control;
+
+    return () => {
+      if (routingControlRef.current && map) {
+        map.removeControl(routingControlRef.current);
+        routingControlRef.current = null;
+      }
+    };
+  }, [map, tourStops, onTourRouteFound, activeRoute]);
+
+  return null;
+}
+
 export function MapView({
   landmarks,
   userPosition,
@@ -222,6 +284,7 @@ export function MapView({
   focusLocation,
   tourStops = [],
   onAddToTour,
+  onTourRouteFound,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(195, 85%, 50%)'); // Blue for activities
@@ -315,18 +378,12 @@ export function MapView({
         />
       )}
 
-      {/* Tour route visualization */}
-      {tourStops.length > 1 && (
-        <Polyline
-          positions={tourStops.map(stop => [stop.lat, stop.lng])}
-          pathOptions={{
-            color: 'hsl(14, 85%, 55%)',
-            weight: 4,
-            opacity: 0.7,
-            dashArray: '10, 10'
-          }}
-        />
-      )}
+      {/* Tour route with actual road routing */}
+      <TourRoutingMachine
+        tourStops={tourStops}
+        onTourRouteFound={onTourRouteFound}
+        activeRoute={activeRoute}
+      />
     </MapContainer>
   );
 }

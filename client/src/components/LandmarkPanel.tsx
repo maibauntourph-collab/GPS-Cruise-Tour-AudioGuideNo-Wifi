@@ -16,6 +16,8 @@ interface LandmarkPanelProps {
   onNavigate: (landmark: Landmark) => void;
   selectedLanguage?: string;
   onMapMarkerClick?: (lat: number, lng: number) => void;
+  onAddToTour?: (landmark: Landmark) => void;
+  isInTour?: boolean;
 }
 
 export function LandmarkPanel({
@@ -23,7 +25,9 @@ export function LandmarkPanel({
   onClose,
   onNavigate,
   selectedLanguage = 'en',
-  onMapMarkerClick
+  onMapMarkerClick,
+  onAddToTour,
+  isInTour = false
 }: LandmarkPanelProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
@@ -322,14 +326,26 @@ export function LandmarkPanel({
 
         {/* Navigation Button */}
         <div className="pt-4 border-t">
-          <Button 
-            onClick={handleNavigate} 
-            className="w-full gap-2"
-            data-testid="button-navigate-panel"
-          >
-            <Navigation className="w-4 h-4" />
-            {t('getDirections', selectedLanguage)}
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              onClick={handleNavigate} 
+              className="flex-1 gap-2"
+              data-testid="button-navigate-panel"
+            >
+              <Navigation className="w-4 h-4" />
+              {t('getDirections', selectedLanguage)}
+            </Button>
+            {onAddToTour && (
+              <Button
+                onClick={() => onAddToTour(landmark)}
+                variant={isInTour ? "secondary" : "outline"}
+                className="flex-1 gap-2"
+                data-testid={`button-tour-panel-${landmark.id}`}
+              >
+                {isInTour ? 'Remove from Tour' : 'Add to Tour'}
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </div>
