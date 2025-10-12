@@ -190,7 +190,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     to: 'Hasta',
     duration: 'Duración',
     frequency: 'Frecuencia',
-    price: 'Precio'
+    price: 'Precio',
+    overview: 'Resumen',
+    transport: 'Transporte',
+    tipsTab: 'Consejos'
   },
   fr: {
     landmarks: 'Monuments',
@@ -234,7 +237,19 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: 'Distance',
     recommendedDuration: 'Durée Recommandée',
     tips: 'Conseils pour les Passagers de Croisière',
-    recommendedSites: 'Sites Recommandés'
+    recommendedSites: 'Sites Recommandés',
+    transportOptions: 'Options de Transport',
+    openInUber: 'Ouvrir dans Uber',
+    openInBolt: 'Ouvrir dans Bolt',
+    bookTransport: 'Réserver Transport',
+    from: 'De',
+    to: 'À',
+    duration: 'Durée',
+    frequency: 'Fréquence',
+    price: 'Prix',
+    overview: 'Aperçu',
+    transport: 'Transport',
+    tipsTab: 'Conseils'
   },
   de: {
     landmarks: 'Sehenswürdigkeiten',
@@ -278,7 +293,19 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: 'Entfernung',
     recommendedDuration: 'Empfohlene Dauer',
     tips: 'Tipps für Kreuzfahrtpassagiere',
-    recommendedSites: 'Empfohlene Sehenswürdigkeiten'
+    recommendedSites: 'Empfohlene Sehenswürdigkeiten',
+    transportOptions: 'Transportmöglichkeiten',
+    openInUber: 'In Uber Öffnen',
+    openInBolt: 'In Bolt Öffnen',
+    bookTransport: 'Transport Buchen',
+    from: 'Von',
+    to: 'Nach',
+    duration: 'Dauer',
+    frequency: 'Häufigkeit',
+    price: 'Preis',
+    overview: 'Übersicht',
+    transport: 'Transport',
+    tipsTab: 'Tipps'
   },
   it: {
     landmarks: 'Monumenti',
@@ -370,7 +397,19 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: '距离',
     recommendedDuration: '推荐时长',
     tips: '游轮乘客提示',
-    recommendedSites: '推荐景点'
+    recommendedSites: '推荐景点',
+    transportOptions: '交通选项',
+    openInUber: '在Uber中打开',
+    openInBolt: '在Bolt中打开',
+    bookTransport: '预订交通',
+    from: '从',
+    to: '到',
+    duration: '时长',
+    frequency: '频率',
+    price: '价格',
+    overview: '概览',
+    transport: '交通',
+    tipsTab: '提示'
   },
   ja: {
     landmarks: 'ランドマーク',
@@ -414,7 +453,19 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: '距離',
     recommendedDuration: '推奨滞在時間',
     tips: 'クルーズ乗客へのヒント',
-    recommendedSites: 'おすすめスポット'
+    recommendedSites: 'おすすめスポット',
+    transportOptions: '交通オプション',
+    openInUber: 'Uberで開く',
+    openInBolt: 'Boltで開く',
+    bookTransport: '交通を予約',
+    from: 'から',
+    to: 'まで',
+    duration: '所要時間',
+    frequency: '頻度',
+    price: '料金',
+    overview: '概要',
+    transport: '交通',
+    tipsTab: 'ヒント'
   },
   pt: {
     landmarks: 'Monumentos',
@@ -458,7 +509,19 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: 'Distância',
     recommendedDuration: 'Duração Recomendada',
     tips: 'Dicas para Passageiros de Cruzeiros',
-    recommendedSites: 'Locais Recomendados'
+    recommendedSites: 'Locais Recomendados',
+    transportOptions: 'Opções de Transporte',
+    openInUber: 'Abrir no Uber',
+    openInBolt: 'Abrir no Bolt',
+    bookTransport: 'Reservar Transporte',
+    from: 'De',
+    to: 'Para',
+    duration: 'Duração',
+    frequency: 'Frequência',
+    price: 'Preço',
+    overview: 'Visão Geral',
+    transport: 'Transporte',
+    tipsTab: 'Dicas'
   },
   ru: {
     landmarks: 'Достопримечательности',
@@ -502,7 +565,19 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: 'Расстояние',
     recommendedDuration: 'Рекомендуемая Продолжительность',
     tips: 'Советы для Круизных Пассажиров',
-    recommendedSites: 'Рекомендуемые Места'
+    recommendedSites: 'Рекомендуемые Места',
+    transportOptions: 'Варианты Транспорта',
+    openInUber: 'Открыть в Uber',
+    openInBolt: 'Открыть в Bolt',
+    bookTransport: 'Забронировать Транспорт',
+    from: 'От',
+    to: 'До',
+    duration: 'Продолжительность',
+    frequency: 'Частота',
+    price: 'Цена',
+    overview: 'Обзор',
+    transport: 'Транспорт',
+    tipsTab: 'Советы'
   }
 };
 
