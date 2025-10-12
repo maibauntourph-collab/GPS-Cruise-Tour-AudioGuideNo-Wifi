@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Landmark } from '@shared/schema';
-import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2 } from 'lucide-react';
+import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2, Ticket, ExternalLink } from 'lucide-react';
 import { PhotoGallery } from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
@@ -323,6 +323,55 @@ export function LandmarkPanel({
             </p>
           </div>
         )}
+
+        {/* Ticket Booking Platforms */}
+        <div className="mb-4 p-4 bg-muted/30 rounded-lg">
+          <h3 className="font-semibold mb-3 flex items-center gap-2">
+            <Ticket className="w-4 h-4 text-primary" />
+            {t('bookTickets', selectedLanguage)}
+          </h3>
+          <div className="flex flex-col gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="justify-start gap-2"
+              onClick={() => {
+                const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                window.open(`https://www.getyourguide.com/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+              }}
+              data-testid="button-book-getyourguide"
+            >
+              <ExternalLink className="w-4 h-4" />
+              {t('bookOn', selectedLanguage)} GetYourGuide
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="justify-start gap-2"
+              onClick={() => {
+                const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                window.open(`https://www.viator.com/searchResults/all?text=${searchQuery}`, '_blank', 'noopener,noreferrer');
+              }}
+              data-testid="button-book-viator"
+            >
+              <ExternalLink className="w-4 h-4" />
+              {t('bookOn', selectedLanguage)} Viator
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="justify-start gap-2"
+              onClick={() => {
+                const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                window.open(`https://www.klook.com/en-US/search/?query=${searchQuery}`, '_blank', 'noopener,noreferrer');
+              }}
+              data-testid="button-book-klook"
+            >
+              <ExternalLink className="w-4 h-4" />
+              {t('bookOn', selectedLanguage)} Klook
+            </Button>
+          </div>
+        </div>
 
         {/* Navigation Button */}
         <div className="pt-4 border-t">
