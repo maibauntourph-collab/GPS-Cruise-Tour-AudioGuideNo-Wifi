@@ -210,7 +210,14 @@ npm run db:push --force # Force push (when conflicts occur)
 
 ## Recent Changes (2025-10-12)
 
-### Latest Update: Photo Gallery Accessibility Fix (Today)
+### Latest Update: Critical Runtime Error Fix (Today)
+- **Fixed "Cannot read properties of null (reading 'useRef')" Error**: Removed Next.js-specific directives
+- **Root Cause**: UI components had "use client" directives incompatible with Vite/React
+- **Solution**: Removed "use client" from 15 UI component files (dialog, tooltip, sidebar, form, etc.)
+- **Impact**: Restored full app functionality - all components now work correctly
+- **E2E Tested**: Verified clean console, photo gallery works, no runtime errors
+
+### Previous Update: Photo Gallery Accessibility Fix
 - **Fixed Radix UI Accessibility Errors**: Resolved DialogTitle and DialogDescription warnings
 - **Implementation**: Added required accessibility components with screen-reader-only visibility
 - **Always-Present Text**: DialogTitle and DialogDescription now always render text (never false/null)
