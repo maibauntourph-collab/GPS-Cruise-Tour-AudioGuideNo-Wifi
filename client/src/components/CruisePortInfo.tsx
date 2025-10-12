@@ -2,8 +2,8 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Anchor, MapPin, Clock, Info, Ship, X, Minus } from 'lucide-react';
-import { City, Landmark, CruisePort } from '@shared/schema';
+import { Anchor, MapPin, Clock, Info, Ship, X, Minus, Train, Bus, Car, ExternalLink } from 'lucide-react';
+import { City, Landmark, CruisePort, TransportOption } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
 
 interface CruisePortInfoProps {
@@ -20,6 +20,30 @@ function getCruisePortTranslation(cruisePort: CruisePort, language: string, fiel
   }
   // Fallback to default
   return cruisePort[field] || '';
+}
+
+function getTransportTranslation(transport: TransportOption, language: string, field: 'name' | 'from' | 'to' | 'duration' | 'frequency' | 'price' | 'tips'): string {
+  if (transport.translations?.[language]?.[field]) {
+    return transport.translations[language][field] as string;
+  }
+  // Fallback to default
+  return transport[field] || '';
+}
+
+function getTransportIcon(type: string) {
+  switch (type) {
+    case 'train':
+      return Train;
+    case 'bus':
+    case 'shuttle':
+      return Bus;
+    case 'taxi':
+      return Car;
+    case 'rideshare':
+      return Car;
+    default:
+      return Car;
+  }
 }
 
 export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkClick, onClose }: CruisePortInfoProps) {
@@ -332,6 +356,131 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
             <p className="text-sm text-blue-800 dark:text-blue-200" data-testid="text-port-tips">
               {tips}
             </p>
+          </div>
+        )}
+
+        {/* Transportation Options */}
+        {cruisePort.transportOptions && cruisePort.transportOptions.length > 0 && (
+          <div className="mt-4">
+            <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
+              <Car className="w-4 h-4" />
+              {t('transportOptions', selectedLanguage)}
+            </h4>
+            <div className="space-y-3">
+              {cruisePort.transportOptions.map((transport, index) => {
+                const Icon = getTransportIcon(transport.type);
+                const transportName = getTransportTranslation(transport, selectedLanguage, 'name');
+                const transportFrom = getTransportTranslation(transport, selectedLanguage, 'from');
+                const transportTo = getTransportTranslation(transport, selectedLanguage, 'to');
+                const transportDuration = getTransportTranslation(transport, selectedLanguage, 'duration');
+                const transportFrequency = getTransportTranslation(transport, selectedLanguage, 'frequency');
+                const transportPrice = getTransportTranslation(transport, selectedLanguage, 'price');
+                const transportTips = getTransportTranslation(transport, selectedLanguage, 'tips');
+
+                return (
+                  <Card key={index} className="p-3 bg-white/50 dark:bg-gray-800/50">
+                    <div className="flex items-start gap-3">
+                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                        <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <div>
+                          <p className="font-semibold text-sm">{transportName}</p>
+                          {transportFrom && transportTo && (
+                            <p className="text-xs text-muted-foreground">
+                              {transportFrom} → {transportTo}
+                            </p>
+                          )}
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          {transportDuration && (
+                            <div>
+                              <span className="text-muted-foreground">{t('duration', selectedLanguage)}:</span>
+                              <span className="ml-1 font-medium">{transportDuration}</span>
+                            </div>
+                          )}
+                          {transportPrice && (
+                            <div>
+                              <span className="text-muted-foreground">{t('price', selectedLanguage)}:</span>
+                              <span className="ml-1 font-medium">{transportPrice}</span>
+                            </div>
+                          )}
+                          {transportFrequency && (
+                            <div className="col-span-2">
+                              <span className="text-muted-foreground">{t('frequency', selectedLanguage)}:</span>
+                              <span className="ml-1">{transportFrequency}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {transportTips && (
+                          <p className="text-xs text-muted-foreground italic">{transportTips}</p>
+                        )}
+
+                        <div className="flex gap-2 pt-1">
+                          {transport.type === 'rideshare' && cruisePort.portCoordinates && (
+                            <>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${city.lat}&dropoff[longitude]=${city.lng}`;
+                                  const fallbackUrl = `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${city.lat}&dropoff[longitude]=${city.lng}`;
+                                  window.open(uberUrl, '_blank', 'noopener,noreferrer');
+                                  setTimeout(() => {
+                                    window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+                                  }, 1000);
+                                }}
+                                className="text-xs flex items-center gap-1"
+                                data-testid="button-open-uber"
+                              >
+                                <Car className="w-3 h-3" />
+                                {t('openInUber', selectedLanguage)}
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const boltUrl = `bolt://riderequest?pickup=my_location&destination=${city.lat},${city.lng}`;
+                                  const fallbackUrl = `https://bolt.eu`;
+                                  window.open(boltUrl, '_blank', 'noopener,noreferrer');
+                                  setTimeout(() => {
+                                    window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+                                  }, 1000);
+                                }}
+                                className="text-xs flex items-center gap-1"
+                                data-testid="button-open-bolt"
+                              >
+                                <Car className="w-3 h-3" />
+                                {t('openInBolt', selectedLanguage)}
+                              </Button>
+                            </>
+                          )}
+                          {transport.bookingUrl && (
+                            <Button
+                              size="sm"
+                              variant="default"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer');
+                              }}
+                              className="text-xs flex items-center gap-1"
+                              data-testid={`button-book-transport-${index}`}
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                              {t('bookTransport', selectedLanguage)}
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         )}
         </div>

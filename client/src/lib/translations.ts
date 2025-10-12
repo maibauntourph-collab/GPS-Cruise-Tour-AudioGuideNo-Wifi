@@ -69,7 +69,16 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: 'Distance',
     recommendedDuration: 'Recommended Duration',
     tips: 'Tips for Cruise Passengers',
-    recommendedSites: 'Recommended Sites'
+    recommendedSites: 'Recommended Sites',
+    transportOptions: 'Transportation Options',
+    openInUber: 'Open in Uber',
+    openInBolt: 'Open in Bolt',
+    bookTransport: 'Book Transport',
+    from: 'From',
+    to: 'To',
+    duration: 'Duration',
+    frequency: 'Frequency',
+    price: 'Price'
   },
   ko: {
     landmarks: '명소',
@@ -113,7 +122,16 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: '거리',
     recommendedDuration: '추천 시간',
     tips: '크루즈 승객을 위한 팁',
-    recommendedSites: '추천 명소'
+    recommendedSites: '추천 명소',
+    transportOptions: '교통편 옵션',
+    openInUber: 'Uber에서 열기',
+    openInBolt: 'Bolt에서 열기',
+    bookTransport: '교통편 예약',
+    from: '출발',
+    to: '도착',
+    duration: '소요 시간',
+    frequency: '운행 간격',
+    price: '요금'
   },
   es: {
     landmarks: 'Monumentos',
@@ -157,7 +175,16 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: 'Distancia',
     recommendedDuration: 'Duración Recomendada',
     tips: 'Consejos para Pasajeros de Cruceros',
-    recommendedSites: 'Sitios Recomendados'
+    recommendedSites: 'Sitios Recomendados',
+    transportOptions: 'Opciones de Transporte',
+    openInUber: 'Abrir en Uber',
+    openInBolt: 'Abrir en Bolt',
+    bookTransport: 'Reservar Transporte',
+    from: 'Desde',
+    to: 'Hasta',
+    duration: 'Duración',
+    frequency: 'Frecuencia',
+    price: 'Precio'
   },
   fr: {
     landmarks: 'Monuments',
@@ -281,7 +308,16 @@ const uiTranslations: Record<string, Record<string, string>> = {
     distanceFromCity: 'Distanza',
     recommendedDuration: 'Durata Consigliata',
     tips: 'Consigli per i Passeggeri delle Crociere',
-    recommendedSites: 'Siti Raccomandati'
+    recommendedSites: 'Siti Raccomandati',
+    transportOptions: 'Opzioni di Trasporto',
+    openInUber: 'Apri in Uber',
+    openInBolt: 'Apri in Bolt',
+    bookTransport: 'Prenota Trasporto',
+    from: 'Da',
+    to: 'A',
+    duration: 'Durata',
+    frequency: 'Frequenza',
+    price: 'Prezzo'
   },
   zh: {
     landmarks: '地标',

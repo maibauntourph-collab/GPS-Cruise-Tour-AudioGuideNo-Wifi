@@ -29,6 +29,134 @@ const CITIES: City[] = [
       recommendedDuration: '8-10 hours',
       recommendedLandmarks: ['colosseum', 'vatican_museums', 'trevi-fountain', 'pantheon', 'roman-forum'],
       tips: 'Book a shore excursion in advance or take the train from Civitavecchia to Rome (80 minutes). Start early to see the main attractions. Consider skip-the-line tickets for the Vatican and Colosseum.',
+      portCoordinates: {
+        lat: 42.0943,
+        lng: 11.7967
+      },
+      transportOptions: [
+        {
+          type: 'train',
+          name: 'Trenitalia Regional Train',
+          from: 'Civitavecchia Station',
+          to: 'Roma Termini / Roma San Pietro',
+          duration: '60-80 minutes',
+          frequency: 'Every 30-60 minutes',
+          price: '€5-15',
+          bookingUrl: 'https://www.trenitalia.com',
+          tips: 'Station is 700m from port (10min walk or free shuttle). Buy tickets at station or online. Validate ticket before boarding.',
+          translations: {
+            ko: {
+              name: 'Trenitalia 지역 기차',
+              from: '치비타베키아역',
+              to: '로마 테르미니 / 로마 산 피에트로',
+              duration: '60-80분',
+              frequency: '30-60분마다',
+              price: '€5-15',
+              tips: '역은 항구에서 700m (도보 10분 또는 무료 셔틀). 역이나 온라인에서 티켓 구매. 탑승 전 티켓 검증 필수.'
+            },
+            it: {
+              name: 'Treno Regionale Trenitalia',
+              from: 'Stazione di Civitavecchia',
+              to: 'Roma Termini / Roma San Pietro',
+              duration: '60-80 minuti',
+              frequency: 'Ogni 30-60 minuti',
+              price: '€5-15',
+              tips: 'La stazione dista 700m dal porto (10min a piedi o navetta gratuita). Acquista i biglietti in stazione o online. Convalida il biglietto prima di salire.'
+            }
+          }
+        },
+        {
+          type: 'shuttle',
+          name: 'Shore Excursion Shuttle',
+          from: 'Civitavecchia Port',
+          to: 'Rome City Center',
+          duration: '90 minutes',
+          frequency: 'Based on cruise schedule',
+          price: '€20-40 per person',
+          bookingUrl: 'https://www.getyourguide.com',
+          tips: 'Book through your cruise line or GetYourGuide. Includes round-trip transportation.',
+          translations: {
+            ko: {
+              name: '기항지 투어 셔틀',
+              from: '치비타베키아 항구',
+              to: '로마 시내',
+              duration: '90분',
+              frequency: '크루즈 일정에 따라',
+              price: '1인당 €20-40',
+              tips: '크루즈 라인이나 GetYourGuide를 통해 예약. 왕복 교통 포함.'
+            },
+            it: {
+              name: 'Navetta Escursione a Terra',
+              from: 'Porto di Civitavecchia',
+              to: 'Centro di Roma',
+              duration: '90 minuti',
+              frequency: 'In base al programma della crociera',
+              price: '€20-40 a persona',
+              tips: 'Prenota tramite la tua compagnia di crociera o GetYourGuide. Include trasporto andata e ritorno.'
+            }
+          }
+        },
+        {
+          type: 'taxi',
+          name: 'Private Taxi',
+          from: 'Civitavecchia Port',
+          to: 'Rome City Center',
+          duration: '60-75 minutes',
+          frequency: 'On demand',
+          price: '€120-150 (fixed rate)',
+          tips: 'Official white taxis available at port exit. Agree on price before departure. Fits 4 passengers + luggage.',
+          translations: {
+            ko: {
+              name: '개인 택시',
+              from: '치비타베키아 항구',
+              to: '로마 시내',
+              duration: '60-75분',
+              frequency: '수시',
+              price: '€120-150 (고정 요금)',
+              tips: '항구 출구에서 공식 흰색 택시 이용 가능. 출발 전 요금 합의. 승객 4명 + 짐 탑승 가능.'
+            },
+            it: {
+              name: 'Taxi Privato',
+              from: 'Porto di Civitavecchia',
+              to: 'Centro di Roma',
+              duration: '60-75 minuti',
+              frequency: 'Su richiesta',
+              price: '€120-150 (tariffa fissa)',
+              tips: 'Taxi bianchi ufficiali disponibili all\'uscita del porto. Concordare il prezzo prima della partenza. Può ospitare 4 passeggeri + bagagli.'
+            }
+          }
+        },
+        {
+          type: 'rideshare',
+          name: 'Uber / Bolt',
+          from: 'Civitavecchia Port',
+          to: 'Rome City Center',
+          duration: '60-75 minutes',
+          frequency: 'On demand via app',
+          price: '€80-120',
+          tips: 'Use Uber or Bolt app to request ride from port. Price varies by demand. Payment handled through app.',
+          translations: {
+            ko: {
+              name: '우버 / 볼트',
+              from: '치비타베키아 항구',
+              to: '로마 시내',
+              duration: '60-75분',
+              frequency: '앱을 통한 수시',
+              price: '€80-120',
+              tips: 'Uber 또는 Bolt 앱으로 항구에서 차량 요청. 수요에 따라 가격 변동. 앱으로 결제 처리.'
+            },
+            it: {
+              name: 'Uber / Bolt',
+              from: 'Porto di Civitavecchia',
+              to: 'Centro di Roma',
+              duration: '60-75 minuti',
+              frequency: 'Su richiesta tramite app',
+              price: '€80-120',
+              tips: 'Usa l\'app Uber o Bolt per richiedere una corsa dal porto. Il prezzo varia in base alla domanda. Pagamento gestito tramite app.'
+            }
+          }
+        }
+      ],
       translations: {
         ko: {
           portName: '치비타베키아 항구',

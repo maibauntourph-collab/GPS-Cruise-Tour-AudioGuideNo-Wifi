@@ -3,6 +3,30 @@ import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, j
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 
+// Transport option schema
+export const transportOptionSchema = z.object({
+  type: z.enum(['train', 'bus', 'taxi', 'rideshare', 'shuttle']),
+  name: z.string(),
+  from: z.string().optional(),
+  to: z.string().optional(),
+  duration: z.string().optional(),
+  frequency: z.string().optional(),
+  price: z.string().optional(),
+  bookingUrl: z.string().optional(),
+  tips: z.string().optional(),
+  translations: z.record(z.string(), z.object({
+    name: z.string().optional(),
+    from: z.string().optional(),
+    to: z.string().optional(),
+    duration: z.string().optional(),
+    frequency: z.string().optional(),
+    price: z.string().optional(),
+    tips: z.string().optional(),
+  })).optional(),
+});
+
+export type TransportOption = z.infer<typeof transportOptionSchema>;
+
 // Cruise port schema for shore excursions
 export const cruisePortSchema = z.object({
   portName: z.string(),
@@ -10,6 +34,11 @@ export const cruisePortSchema = z.object({
   recommendedDuration: z.string().optional(), // e.g., "6-8 hours"
   recommendedLandmarks: z.array(z.string()), // Array of landmark IDs
   tips: z.string().optional(), // Travel tips for cruise passengers
+  transportOptions: z.array(transportOptionSchema).optional(), // Transport options from port to city
+  portCoordinates: z.object({
+    lat: z.number(),
+    lng: z.number(),
+  }).optional(), // Port location for ride-hailing services
   translations: z.record(z.string(), z.object({
     portName: z.string().optional(),
     distanceFromCity: z.string().optional(),
