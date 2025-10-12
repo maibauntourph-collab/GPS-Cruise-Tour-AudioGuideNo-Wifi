@@ -101,7 +101,7 @@ export function LandmarkPanel({
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove as EventListener);
       window.addEventListener('mouseup', handleMouseUp);
-      window.addEventListener('touchmove', handleMouseMove as EventListener);
+      window.addEventListener('touchmove', handleMouseMove as EventListener, { passive: false });
       window.addEventListener('touchend', handleMouseUp);
     }
 
@@ -124,6 +124,11 @@ export function LandmarkPanel({
     
     if (!target.closest('[data-drag-handle]')) {
       return;
+    }
+    
+    // Prevent default to avoid ghost click on mobile
+    if ('touches' in e) {
+      e.preventDefault();
     }
     
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;

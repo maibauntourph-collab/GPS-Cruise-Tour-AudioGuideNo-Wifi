@@ -98,7 +98,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove as EventListener);
       window.addEventListener('mouseup', handleMouseUp);
-      window.addEventListener('touchmove', handleMouseMove as EventListener);
+      window.addEventListener('touchmove', handleMouseMove as EventListener, { passive: false });
       window.addEventListener('touchend', handleMouseUp);
     }
 
@@ -113,6 +113,11 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     if ((e.target as HTMLElement).closest('button')) {
       return;
+    }
+    
+    // Prevent default to avoid ghost click on mobile
+    if ('touches' in e) {
+      e.preventDefault();
     }
     
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
