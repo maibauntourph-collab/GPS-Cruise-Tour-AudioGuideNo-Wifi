@@ -31,6 +31,23 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   const cardRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Clamp translate values to keep element within bounds
+  const clampTranslate = (x: number, y: number, elementWidth: number, elementHeight: number) => {
+    if (!cardRef.current) return { x, y };
+    
+    const container = cardRef.current.offsetParent as HTMLElement;
+    if (!container) return { x, y };
+    
+    const containerRect = container.getBoundingClientRect();
+    const maxX = containerRect.width - elementWidth - 32; // 16px left + 16px right
+    const maxY = containerRect.height - elementHeight - 32;
+    
+    return {
+      x: Math.max(0, Math.min(x, maxX)),
+      y: Math.max(0, Math.min(y, maxY))
+    };
+  };
+
   if (!city.cruisePort) {
     return null;
   }
@@ -135,43 +152,47 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     }, 2000);
   };
 
-  // Minimized floating icon
-  if (isMinimized) {
-    return (
-      <div
-        ref={cardRef}
-        style={{
-          position: 'absolute',
-          left: '16px',
-          bottom: '16px',
-          zIndex,
-          cursor: isDragging ? 'grabbing' : 'pointer',
-          userSelect: 'none',
-          transform: `translate(${translate.x}px, ${translate.y}px)`
-        }}
-        onMouseDown={handleMouseDown}
-        onMouseUp={(e) => {
-          handleMouseUp();
-          // Only restore if it was a click (not a drag)
-          if (!hasMoved) {
-            setIsMinimized(false);
-            setZIndex(2000);
-          }
-        }}
-        data-testid="icon-cruise-port-minimized"
-      >
-        <div className="relative">
-          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 dark:from-blue-600 dark:to-cyan-600 flex items-center justify-center shadow-lg hover-elevate active-elevate-2 border-2 border-white dark:border-gray-800">
-            <Ship className="w-7 h-7 text-white" />
-          </div>
-          {/* Pulse animation */}
-          <div className="absolute inset-0 w-14 h-14 rounded-full bg-blue-400 dark:bg-blue-500 animate-ping opacity-20"></div>
+  // Render minimized floating icon
+  const renderMinimizedIcon = () => (
+    <div
+      ref={cardRef}
+      style={{
+        position: 'absolute',
+        left: '16px',
+        top: '16px',
+        zIndex,
+        cursor: isDragging ? 'grabbing' : 'pointer',
+        userSelect: 'none',
+        transform: `translate(${translate.x}px, ${translate.y}px)`
+      }}
+      onMouseDown={handleMouseDown}
+      onMouseUp={(e) => {
+        handleMouseUp();
+        // Only restore if it was a click (not a drag)
+        if (!hasMoved) {
+          // Clamp position for full card size before restoring
+          const fullCardWidth = 384; // 24rem ≈ 384px
+          const fullCardHeight = 500; // Approximate full card height
+          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
+          setTranslate(clamped);
+          setIsMinimized(false);
+          setZIndex(2000);
+        }
+      }}
+      data-testid="icon-cruise-port-minimized"
+    >
+      <div className="relative">
+        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 dark:from-blue-600 dark:to-cyan-600 flex items-center justify-center shadow-lg hover-elevate active-elevate-2 border-2 border-white dark:border-gray-800">
+          <Ship className="w-7 h-7 text-white" />
         </div>
+        {/* Pulse animation */}
+        <div className="absolute inset-0 w-14 h-14 rounded-full bg-blue-400 dark:bg-blue-500 animate-ping opacity-20"></div>
       </div>
-    );
-  }
+    </div>
+  );
 
-  return (
+  // Render full card
+  const renderFullCard = () => (
     <div
       ref={cardRef}
       style={{
@@ -297,4 +318,6 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
       </Card>
     </div>
   );
+
+  return isMinimized ? renderMinimizedIcon() : renderFullCard();
 }
