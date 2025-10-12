@@ -1889,6 +1889,156 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
+  {
+    id: 'westminster_abbey',
+    cityId: 'london',
+    name: 'Westminster Abbey',
+    lat: 51.4994,
+    lng: -0.1273,
+    radius: 60,
+    narration: 'Welcome to Westminster Abbey, the coronation church since 1066. This Gothic masterpiece has witnessed the crowning of 40 monarchs.',
+    description: 'Historic coronation church and burial place of British monarchs',
+    category: 'Religious Site',
+    detailedDescription: 'Westminster Abbey stands as one of the most important religious buildings in the United Kingdom and a UNESCO World Heritage Site. For over a thousand years, this magnificent Gothic church has been the coronation venue for British monarchs, and it continues to serve as the site for royal weddings and state funerals. The Abbey contains the tombs of 17 monarchs and numerous famous Britons, including Charles Darwin, Isaac Newton, and Charles Dickens in Poets\' Corner.',
+    photos: [
+      'https://images.unsplash.com/photo-1555400082-97c746a60a13?w=800',
+      'https://images.unsplash.com/photo-1584563454165-dd6f71c3e82f?w=800',
+      'https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800',
+      'https://images.unsplash.com/photo-1557862921-37829c790f19?w=800',
+      'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800',
+      'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800',
+      'https://images.unsplash.com/photo-1560174038-da43ac56f5b8?w=800'
+    ],
+    historicalInfo: 'Westminster Abbey was founded in 960 AD and has been the coronation church since 1066. It is the final resting place of 17 monarchs and numerous famous Britons.',
+    yearBuilt: '960 AD (rebuilt 1245-1517)',
+    architect: 'Various architects, notably Henry Yevele',
+    translations: {
+      en: {
+        name: 'Westminster Abbey',
+        narration: 'Welcome to Westminster Abbey, the coronation church since 1066. This Gothic masterpiece has witnessed the crowning of 40 monarchs.',
+        description: 'Historic coronation church and burial place of British monarchs',
+        historicalInfo: 'Westminster Abbey was founded in 960 AD and has been the coronation church since 1066.',
+        yearBuilt: '960 AD (rebuilt 1245-1517)',
+        architect: 'Various architects, notably Henry Yevele'
+      },
+      it: {
+        name: 'Abbazia di Westminster',
+        narration: 'Benvenuti all\'Abbazia di Westminster, la chiesa dell\'incoronazione dal 1066. Questo capolavoro gotico ha assistito all\'incoronazione di 40 monarchi.',
+        description: 'Storica chiesa dell\'incoronazione e luogo di sepoltura dei monarchi britannici',
+        historicalInfo: 'L\'Abbazia di Westminster fu fondata nel 960 d.C. ed è stata la chiesa dell\'incoronazione dal 1066.',
+        yearBuilt: '960 d.C. (ricostruita 1245-1517)',
+        architect: 'Vari architetti, in particolare Henry Yevele'
+      },
+      ko: {
+        name: '웨스트민스터 사원',
+        narration: '1066년부터 대관식 교회로 사용된 웨스트민스터 사원에 오신 것을 환영합니다. 이 고딕 양식의 걸작은 40명의 군주의 대관식을 목격했습니다.',
+        description: '영국 군주들의 역사적인 대관식 교회이자 안식처',
+        historicalInfo: '웨스트민스터 사원은 서기 960년에 설립되었으며 1066년부터 대관식 교회로 사용되었습니다.',
+        yearBuilt: '960년 (1245-1517년 재건축)',
+        architect: '여러 건축가들, 특히 헨리 예벨'
+      }
+    }
+  },
+  {
+    id: 'british_museum',
+    cityId: 'london',
+    name: 'British Museum',
+    lat: 51.5194,
+    lng: -0.1270,
+    radius: 70,
+    narration: 'Welcome to the British Museum, one of the world\'s greatest museums of human history and culture. It houses over 8 million works spanning two million years.',
+    description: 'World-renowned museum of human history and culture',
+    category: 'Museum',
+    detailedDescription: 'The British Museum, founded in 1753, is the world\'s first national public museum and remains one of the most comprehensive museums dedicated to human history, art, and culture. Its permanent collection of approximately eight million works is among the largest and most comprehensive in existence, documenting the story of human culture from its beginnings to the present. The museum is famous for treasures such as the Rosetta Stone, Egyptian mummies, the Elgin Marbles, and the Lewis Chessmen.',
+    photos: [
+      'https://images.unsplash.com/photo-1555425423-76c5b82d4f28?w=800',
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800',
+      'https://images.unsplash.com/photo-1630568823992-51f3cd4d46ae?w=800',
+      'https://images.unsplash.com/photo-1575456987130-c1f0a2e4f926?w=800',
+      'https://images.unsplash.com/photo-1596414063259-b7f5f5c1a498?w=800',
+      'https://images.unsplash.com/photo-1575456987130-c1f0a2e4f926?w=800',
+      'https://images.unsplash.com/photo-1604175287072-b5e71423060c?w=800'
+    ],
+    historicalInfo: 'The British Museum was founded in 1753 and was the world\'s first national public museum. It opened to visitors in 1759 and has since become one of the most visited museums globally.',
+    yearBuilt: '1753 (current building: 1823-1852)',
+    architect: 'Sir Robert Smirke (main building), Norman Foster (Great Court roof)',
+    translations: {
+      en: {
+        name: 'British Museum',
+        narration: 'Welcome to the British Museum, one of the world\'s greatest museums of human history and culture. It houses over 8 million works spanning two million years.',
+        description: 'World-renowned museum of human history and culture',
+        historicalInfo: 'The British Museum was founded in 1753 and was the world\'s first national public museum.',
+        yearBuilt: '1753 (current building: 1823-1852)',
+        architect: 'Sir Robert Smirke (main building), Norman Foster (Great Court roof)'
+      },
+      it: {
+        name: 'British Museum',
+        narration: 'Benvenuti al British Museum, uno dei più grandi musei di storia e cultura dell\'umanità al mondo. Ospita oltre 8 milioni di opere che coprono due milioni di anni.',
+        description: 'Museo di fama mondiale di storia e cultura umana',
+        historicalInfo: 'Il British Museum fu fondato nel 1753 e fu il primo museo pubblico nazionale al mondo.',
+        yearBuilt: '1753 (edificio attuale: 1823-1852)',
+        architect: 'Sir Robert Smirke (edificio principale), Norman Foster (tetto Great Court)'
+      },
+      ko: {
+        name: '대영박물관',
+        narration: '인류 역사와 문화의 세계 최고의 박물관 중 하나인 대영박물관에 오신 것을 환영합니다. 200만 년에 걸친 800만 점 이상의 작품을 소장하고 있습니다.',
+        description: '세계적으로 유명한 인류 역사 및 문화 박물관',
+        historicalInfo: '대영박물관은 1753년에 설립되었으며 세계 최초의 국립 공공 박물관입니다.',
+        yearBuilt: '1753년 (현재 건물: 1823-1852년)',
+        architect: '로버트 스머크 경 (본관), 노먼 포스터 (그레이트 코트 지붕)'
+      }
+    }
+  },
+  {
+    id: 'st_pauls_cathedral',
+    cityId: 'london',
+    name: 'St. Paul\'s Cathedral',
+    lat: 51.5138,
+    lng: -0.0984,
+    radius: 60,
+    narration: 'Welcome to St. Paul\'s Cathedral, Sir Christopher Wren\'s Baroque masterpiece. Its iconic dome has dominated London\'s skyline for over 300 years.',
+    description: 'Iconic Baroque cathedral with one of the world\'s largest domes',
+    category: 'Cathedral',
+    detailedDescription: 'St. Paul\'s Cathedral stands as one of London\'s most iconic buildings and a masterpiece of English Baroque architecture. Designed by Sir Christopher Wren after the Great Fire of London in 1666, the cathedral took 35 years to complete and was finished in 1710. Its magnificent dome, inspired by St. Peter\'s Basilica in Rome, rises 365 feet and remains one of the largest cathedral domes in the world. The cathedral has been the site of many significant events, including the funerals of Lord Nelson and Sir Winston Churchill, and the wedding of Prince Charles and Lady Diana Spencer.',
+    photos: [
+      'https://images.unsplash.com/photo-1555881677-7e0e1c56e9a6?w=800',
+      'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800',
+      'https://images.unsplash.com/photo-1584043204475-8c08db03c8a1?w=800',
+      'https://images.unsplash.com/photo-1599059758191-2e7e85cf0d9d?w=800',
+      'https://images.unsplash.com/photo-1560174038-da43ac56f5b8?w=800',
+      'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800',
+      'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800'
+    ],
+    historicalInfo: 'St. Paul\'s Cathedral was designed by Sir Christopher Wren after the Great Fire of London in 1666 and completed in 1710. It has been the site of many historic events including royal weddings and state funerals.',
+    yearBuilt: '1675-1710',
+    architect: 'Sir Christopher Wren',
+    translations: {
+      en: {
+        name: 'St. Paul\'s Cathedral',
+        narration: 'Welcome to St. Paul\'s Cathedral, Sir Christopher Wren\'s Baroque masterpiece. Its iconic dome has dominated London\'s skyline for over 300 years.',
+        description: 'Iconic Baroque cathedral with one of the world\'s largest domes',
+        historicalInfo: 'St. Paul\'s Cathedral was designed by Sir Christopher Wren after the Great Fire of London in 1666 and completed in 1710.',
+        yearBuilt: '1675-1710',
+        architect: 'Sir Christopher Wren'
+      },
+      it: {
+        name: 'Cattedrale di St. Paul',
+        narration: 'Benvenuti alla Cattedrale di St. Paul, il capolavoro barocco di Sir Christopher Wren. La sua iconica cupola domina lo skyline di Londra da oltre 300 anni.',
+        description: 'Iconica cattedrale barocca con una delle cupole più grandi del mondo',
+        historicalInfo: 'La Cattedrale di St. Paul fu progettata da Sir Christopher Wren dopo il Grande Incendio di Londra del 1666 e completata nel 1710.',
+        yearBuilt: '1675-1710',
+        architect: 'Sir Christopher Wren'
+      },
+      ko: {
+        name: '세인트 폴 대성당',
+        narration: '크리스토퍼 렌 경의 바로크 걸작 세인트 폴 대성당에 오신 것을 환영합니다. 그 상징적인 돔은 300년 넘게 런던의 스카이라인을 지배해 왔습니다.',
+        description: '세계에서 가장 큰 돔 중 하나를 가진 상징적인 바로크 대성당',
+        historicalInfo: '세인트 폴 대성당은 1666년 런던 대화재 이후 크리스토퍼 렌 경이 설계하여 1710년에 완공되었습니다.',
+        yearBuilt: '1675-1710년',
+        architect: '크리스토퍼 렌 경'
+      }
+    }
+  },
   // Alaska landmarks
   {
     id: 'denali_national_park',
