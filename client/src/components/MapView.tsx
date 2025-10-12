@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
@@ -162,6 +162,8 @@ interface MapViewProps {
   isCompact?: boolean;
   sidebarOpen?: boolean;
   focusLocation?: { lat: number; lng: number; zoom: number } | null;
+  tourStops?: Landmark[];
+  onAddToTour?: (landmark: Landmark) => void;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -218,6 +220,8 @@ export function MapView({
   isCompact = false,
   sidebarOpen = false,
   focusLocation,
+  tourStops = [],
+  onAddToTour,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(195, 85%, 50%)'); // Blue for activities
@@ -241,6 +245,7 @@ export function MapView({
       {landmarks.map((landmark) => {
         const isActivity = landmark.category === 'Activity';
         const icon = isActivity ? activityIcon : landmarkIcon;
+        const isInTour = tourStops.some(stop => stop.id === landmark.id);
         
         return (
           <Marker
@@ -258,15 +263,28 @@ export function MapView({
                     {getTranslatedContent(landmark, selectedLanguage, 'description')}
                   </p>
                 )}
-                <Button
-                  size="sm"
-                  onClick={() => onLandmarkRoute(landmark)}
-                  className="w-full"
-                  data-testid={`button-route-${landmark.id}`}
-                >
-                  <Navigation className="w-4 h-4 mr-2" />
-                  Get Directions
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    onClick={() => onLandmarkRoute(landmark)}
+                    className="flex-1"
+                    data-testid={`button-route-${landmark.id}`}
+                  >
+                    <Navigation className="w-4 h-4 mr-2" />
+                    Directions
+                  </Button>
+                  {onAddToTour && (
+                    <Button
+                      size="sm"
+                      variant={isInTour ? "secondary" : "outline"}
+                      onClick={() => onAddToTour(landmark)}
+                      className="flex-1"
+                      data-testid={`button-tour-${landmark.id}`}
+                    >
+                      {isInTour ? 'Remove' : 'Add to Tour'}
+                    </Button>
+                  )}
+                </div>
               </div>
             </Popup>
           </Marker>
@@ -294,6 +312,19 @@ export function MapView({
           start={activeRoute.start}
           end={activeRoute.end}
           onRouteFound={onRouteFound}
+        />
+      )}
+
+      {/* Tour route visualization */}
+      {tourStops.length > 1 && (
+        <Polyline
+          positions={tourStops.map(stop => [stop.lat, stop.lng])}
+          pathOptions={{
+            color: 'hsl(14, 85%, 55%)',
+            weight: 4,
+            opacity: 0.7,
+            dashArray: '10, 10'
+          }}
         />
       )}
     </MapContainer>

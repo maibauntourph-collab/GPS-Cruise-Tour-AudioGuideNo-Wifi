@@ -24,8 +24,9 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Route, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 export default function Home() {
   const { open: sidebarOpen } = useSidebar();
@@ -64,6 +65,7 @@ export default function Home() {
   const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
   const [showLandmarks, setShowLandmarks] = useState(true);
   const [showActivities, setShowActivities] = useState(true);
+  const [tourStops, setTourStops] = useState<Landmark[]>([]);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -196,6 +198,21 @@ export default function Home() {
     setTimeout(() => setFocusLocation(null), 1000);
   };
 
+  const handleAddToTour = (landmark: Landmark) => {
+    // Check if landmark is already in tour
+    if (tourStops.some(stop => stop.id === landmark.id)) {
+      // Remove from tour if already added
+      setTourStops(tourStops.filter(stop => stop.id !== landmark.id));
+    } else {
+      // Add to tour
+      setTourStops([...tourStops, landmark]);
+    }
+  };
+
+  const handleClearTour = () => {
+    setTourStops([]);
+  };
+
   // Filter landmarks based on category
   const filteredLandmarks = landmarks.filter(landmark => {
     const isActivity = landmark.category === 'Activity';
@@ -242,6 +259,24 @@ export default function Home() {
           <h1 className="font-serif font-semibold text-lg">GPS Audio Guide</h1>
           
           <div className="ml-auto flex items-center gap-1">
+            {tourStops.length > 0 && (
+              <>
+                <Badge variant="secondary" className="gap-1" data-testid="tour-stops-count">
+                  <Route className="w-3 h-3" />
+                  <span>{tourStops.length} stops</span>
+                </Badge>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleClearTour}
+                  data-testid="button-clear-tour"
+                  className="gap-1"
+                >
+                  <X className="w-4 h-4" />
+                  <span className="hidden sm:inline">Clear Tour</span>
+                </Button>
+              </>
+            )}
             <Button
               variant={showLandmarks ? "default" : "outline"}
               size="sm"
@@ -280,6 +315,8 @@ export default function Home() {
               isCompact={!!selectedLandmark}
               sidebarOpen={sidebarOpen}
               focusLocation={focusLocation}
+              tourStops={tourStops}
+              onAddToTour={handleAddToTour}
             />
 
             {/* Show landmark list only when no landmark is selected */}

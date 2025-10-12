@@ -5942,6 +5942,979 @@ const LANDMARKS: Landmark[] = [
         architect: '수백만 년의 자연 형성'
       }
     }
+  },
+  // Additional Rome Activities
+  {
+    id: 'colosseum-underground-tour',
+    cityId: 'rome',
+    name: 'Colosseum Underground Tour',
+    lat: 41.8902,
+    lng: 12.4922,
+    radius: 70,
+    narration: 'Explore the hidden underground chambers of the Colosseum where gladiators once prepared for battle. This exclusive tour takes you beneath the arena floor.',
+    description: 'Exclusive underground tour of Colosseum chambers and arena floor',
+    category: 'Activity',
+    detailedDescription: 'This special access tour takes you into the normally restricted underground hypogeum of the Colosseum, where gladiators and wild animals waited before entering the arena. Walk on the reconstructed arena floor for a gladiator\'s-eye view of the amphitheater, then descend into the underground chambers to see the complex system of tunnels, rooms, and mechanical lifts that created the spectacular shows. Your expert guide brings ancient Rome to life with stories of gladiatorial combat, exotic animal hunts, and the engineering marvels that made it all possible. The tour also includes access to the upper tiers for panoramic views of the Roman Forum.',
+    photos: [
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800',
+      'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800',
+      'https://images.unsplash.com/photo-1529260830199-42c24126f198?w=800',
+      'https://images.unsplash.com/photo-1548585744-4e87a0e84c88?w=800'
+    ],
+    historicalInfo: 'The Colosseum underground was covered with sand during events to absorb blood and provide traction for fighters.',
+    yearBuilt: '70-80 AD',
+    architect: 'Roman engineers',
+    translations: {
+      en: {
+        name: 'Colosseum Underground Tour',
+        narration: 'Explore the hidden underground chambers of the Colosseum where gladiators once prepared for battle. This exclusive tour takes you beneath the arena floor.',
+        description: 'Exclusive underground tour of Colosseum chambers and arena floor',
+        historicalInfo: 'The Colosseum underground was covered with sand during events to absorb blood and provide traction for fighters.',
+        yearBuilt: '70-80 AD',
+        architect: 'Roman engineers'
+      },
+      it: {
+        name: 'Tour del Colosseo Sotterraneo',
+        narration: 'Esplora le camere sotterranee nascoste del Colosseo dove i gladiatori si preparavano per la battaglia. Questo tour esclusivo ti porta sotto il pavimento dell\'arena.',
+        description: 'Tour esclusivo sotterraneo delle camere del Colosseo e del pavimento dell\'arena',
+        historicalInfo: 'Il sotterraneo del Colosseo era coperto di sabbia durante gli eventi per assorbire il sangue e fornire trazione ai combattenti.',
+        yearBuilt: '70-80 d.C.',
+        architect: 'Ingegneri romani'
+      },
+      ko: {
+        name: '콜로세움 지하 투어',
+        narration: '검투사들이 전투를 준비했던 콜로세움의 숨겨진 지하 방을 탐험하세요. 이 독점 투어는 아레나 바닥 아래로 안내합니다.',
+        description: '콜로세움 지하 및 아레나 바닥 독점 투어',
+        historicalInfo: '콜로세움 지하는 행사 중 피를 흡수하고 전사들에게 견인력을 제공하기 위해 모래로 덮였습니다.',
+        yearBuilt: '서기 70-80년',
+        architect: '로마 엔지니어'
+      }
+    }
+  },
+  {
+    id: 'rome-vespa-tour',
+    cityId: 'rome',
+    name: 'Vespa Tour of Rome',
+    lat: 41.9028,
+    lng: 12.4964,
+    radius: 80,
+    narration: 'Experience Rome like a local on a vintage Vespa scooter. Cruise through historic streets and discover hidden gems with an expert guide.',
+    description: 'Guided Vespa tour through Rome\'s historic streets',
+    category: 'Activity',
+    detailedDescription: 'Feel the thrill of riding a classic Italian Vespa through the Eternal City on this unforgettable tour. Your adventure begins with a safety briefing and Vespa orientation before you set off to explore Rome\'s most iconic landmarks and hidden corners. Ride past the Colosseum, through charming cobblestone streets, around Piazza Navona, and up to panoramic viewpoints like the Aventine Hill keyhole. Your local guide leads the way on their own Vespa, stopping at scenic spots for photos and fascinating stories about Roman history and culture. The tour includes visits to local neighborhoods rarely seen by tourists, authentic gelato stops, and plenty of opportunities to soak in the Italian dolce vita lifestyle.',
+    photos: [
+      'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800',
+      'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800',
+      'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800',
+      'https://images.unsplash.com/photo-1525874684015-58379d421a52?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800',
+      'https://images.unsplash.com/photo-1529260830199-42c24126f198?w=800'
+    ],
+    historicalInfo: 'Vespa scooters have been an iconic symbol of Italian culture since 1946.',
+    yearBuilt: 'Modern activity',
+    architect: 'Italian transportation heritage',
+    translations: {
+      en: {
+        name: 'Vespa Tour of Rome',
+        narration: 'Experience Rome like a local on a vintage Vespa scooter. Cruise through historic streets and discover hidden gems with an expert guide.',
+        description: 'Guided Vespa tour through Rome\'s historic streets',
+        historicalInfo: 'Vespa scooters have been an iconic symbol of Italian culture since 1946.',
+        yearBuilt: 'Modern activity',
+        architect: 'Italian transportation heritage'
+      },
+      it: {
+        name: 'Tour di Roma in Vespa',
+        narration: 'Vivi Roma come un locale su una Vespa d\'epoca. Percorri le strade storiche e scopri gemme nascoste con una guida esperta.',
+        description: 'Tour guidato in Vespa attraverso le strade storiche di Roma',
+        historicalInfo: 'Le Vespa sono un simbolo iconico della cultura italiana dal 1946.',
+        yearBuilt: 'Attività moderna',
+        architect: 'Patrimonio dei trasporti italiani'
+      },
+      ko: {
+        name: '로마 베스파 투어',
+        narration: '빈티지 베스파 스쿠터를 타고 현지인처럼 로마를 경험하세요. 역사적인 거리를 달리고 전문 가이드와 함께 숨겨진 보석을 발견하세요.',
+        description: '로마 역사적 거리를 통한 가이드 베스파 투어',
+        historicalInfo: '베스파 스쿠터는 1946년부터 이탈리아 문화의 상징적인 상징이었습니다.',
+        yearBuilt: '현대 활동',
+        architect: '이탈리아 교통 유산'
+      }
+    }
+  },
+  {
+    id: 'rome-cooking-class',
+    cityId: 'rome',
+    name: 'Roman Cuisine Cooking Class',
+    lat: 41.8967,
+    lng: 12.4822,
+    radius: 60,
+    narration: 'Learn to cook authentic Roman dishes from a local chef. Master traditional recipes like carbonara and cacio e pepe in a hands-on class.',
+    description: 'Hands-on cooking class for traditional Roman cuisine',
+    category: 'Activity',
+    detailedDescription: 'Immerse yourself in Roman culinary tradition with this hands-on cooking class led by a local chef. Start with a visit to a traditional Roman market to select fresh ingredients while learning about Italian food culture. Then head to a professional kitchen or charming home setting to prepare a complete Roman meal. Learn the secrets of authentic carbonara (no cream!), perfect cacio e pepe, handmade fettuccine, and classic tiramisu. Your chef shares family recipes, cooking techniques, and the history behind each dish. The class includes wine pairings and culminates in a leisurely meal where you enjoy your creations together. Take home recipes and newfound skills to recreate Roman magic in your own kitchen.',
+    photos: [
+      'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800',
+      'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800',
+      'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800',
+      'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800',
+      'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=800',
+      'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800',
+      'https://images.unsplash.com/photo-1476124369491-c2f4d4f2f895?w=800'
+    ],
+    historicalInfo: 'Traditional Roman recipes have been passed down through generations since ancient times.',
+    yearBuilt: 'Ancient culinary tradition',
+    architect: 'Roman culinary heritage',
+    translations: {
+      en: {
+        name: 'Roman Cuisine Cooking Class',
+        narration: 'Learn to cook authentic Roman dishes from a local chef. Master traditional recipes like carbonara and cacio e pepe in a hands-on class.',
+        description: 'Hands-on cooking class for traditional Roman cuisine',
+        historicalInfo: 'Traditional Roman recipes have been passed down through generations since ancient times.',
+        yearBuilt: 'Ancient culinary tradition',
+        architect: 'Roman culinary heritage'
+      },
+      it: {
+        name: 'Corso di Cucina Romana',
+        narration: 'Impara a cucinare piatti romani autentici da uno chef locale. Padroneggia ricette tradizionali come carbonara e cacio e pepe in una lezione pratica.',
+        description: 'Corso di cucina pratico per la cucina tradizionale romana',
+        historicalInfo: 'Le ricette romane tradizionali sono state tramandate di generazione in generazione fin dai tempi antichi.',
+        yearBuilt: 'Tradizione culinaria antica',
+        architect: 'Patrimonio culinario romano'
+      },
+      ko: {
+        name: '로마 요리 클래스',
+        narration: '현지 셰프로부터 정통 로마 요리를 배우세요. 카르보나라와 카치오 에 페페 같은 전통 레시피를 실습 수업에서 마스터하세요.',
+        description: '전통 로마 요리를 위한 실습 요리 클래스',
+        historicalInfo: '전통 로마 레시피는 고대부터 세대를 거쳐 전해져 내려왔습니다.',
+        yearBuilt: '고대 요리 전통',
+        architect: '로마 요리 유산'
+      }
+    }
+  },
+  // Additional Paris Activities
+  {
+    id: 'moulin-rouge-show',
+    cityId: 'paris',
+    name: 'Moulin Rouge Cabaret Show',
+    lat: 48.8841,
+    lng: 2.3324,
+    radius: 50,
+    narration: 'Experience the legendary Moulin Rouge cabaret show in the heart of Montmartre. Enjoy world-class performers, dazzling costumes, and the famous can-can dance.',
+    description: 'Iconic Parisian cabaret show with dinner option',
+    category: 'Activity',
+    detailedDescription: 'The Moulin Rouge is the world\'s most famous cabaret, offering a spectacular evening of entertainment since 1889. The current show "Féerie" features 100 performers including 60 Doriss Girls recruited worldwide, elaborate sets, 1,000 costumes covered in feathers, rhinestones and sequins created in the Moulin Rouge workshops, stunning choreography, and the legendary French Cancan finale. Choose from show-only tickets or upgrade to include a gourmet dinner prepared by chef David Le Quellec. The venue\'s Belle Époque décor, with its red velvet, mirrors, and glittering chandeliers, creates an unforgettable atmosphere. Arrive early to soak in the ambiance and enjoy champagne before the show begins.',
+    photos: [
+      'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800',
+      'https://images.unsplash.com/photo-1431274172761-fca41d930114?w=800',
+      'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800',
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800',
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800',
+      'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800',
+      'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=800'
+    ],
+    historicalInfo: 'The Moulin Rouge opened in 1889 and quickly became the birthplace of the modern can-can dance.',
+    yearBuilt: '1889',
+    architect: 'Joseph Oller and Charles Zidler',
+    translations: {
+      en: {
+        name: 'Moulin Rouge Cabaret Show',
+        narration: 'Experience the legendary Moulin Rouge cabaret show in the heart of Montmartre. Enjoy world-class performers, dazzling costumes, and the famous can-can dance.',
+        description: 'Iconic Parisian cabaret show with dinner option',
+        historicalInfo: 'The Moulin Rouge opened in 1889 and quickly became the birthplace of the modern can-can dance.',
+        yearBuilt: '1889',
+        architect: 'Joseph Oller and Charles Zidler'
+      },
+      it: {
+        name: 'Spettacolo Cabaret Moulin Rouge',
+        narration: 'Vivi il leggendario spettacolo di cabaret del Moulin Rouge nel cuore di Montmartre. Goditi artisti di classe mondiale, costumi abbaglianti e la famosa danza can-can.',
+        description: 'Iconico spettacolo di cabaret parigino con opzione cena',
+        historicalInfo: 'Il Moulin Rouge ha aperto nel 1889 ed è rapidamente diventato la culla della moderna danza can-can.',
+        yearBuilt: '1889',
+        architect: 'Joseph Oller e Charles Zidler'
+      },
+      ko: {
+        name: '물랭루즈 카바레 쇼',
+        narration: '몽마르트 중심부에서 전설적인 물랭루즈 카바레 쇼를 경험하세요. 세계적인 공연자, 눈부신 의상, 유명한 캉캉 댄스를 즐기세요.',
+        description: '저녁 식사 옵션이 있는 상징적인 파리 카바레 쇼',
+        historicalInfo: '물랭루즈는 1889년에 열렸고 빠르게 현대 캉캉 댄스의 발상지가 되었습니다.',
+        yearBuilt: '1889년',
+        architect: '조셉 올러와 샤를 지들러'
+      }
+    }
+  },
+  {
+    id: 'louvre-skip-line-tour',
+    cityId: 'paris',
+    name: 'Louvre Skip-the-Line Guided Tour',
+    lat: 48.8606,
+    lng: 2.3376,
+    radius: 70,
+    narration: 'Bypass the long queues and explore the Louvre\'s masterpieces with an expert guide. See the Mona Lisa, Venus de Milo, and other iconic artworks.',
+    description: 'Skip-the-line guided tour of Louvre Museum highlights',
+    category: 'Activity',
+    detailedDescription: 'Skip the notoriously long Louvre lines with priority access and make the most of your visit with an expert art historian guide. This comprehensive tour covers the museum\'s greatest masterpieces including Leonardo da Vinci\'s Mona Lisa, the ancient Greek Venus de Milo, the Winged Victory of Samothrace, and works by Michelangelo, Raphael, and Delacroix. Your guide provides fascinating context about each artwork, the artists who created them, and the historical periods they represent. Learn insider secrets about the artworks and navigate the massive museum efficiently. The tour typically lasts 2-3 hours, covering the essential highlights while allowing time for questions and photo opportunities. Small group sizes ensure an intimate experience.',
+    photos: [
+      'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800',
+      'https://images.unsplash.com/photo-1511882150382-421056c89033?w=800',
+      'https://images.unsplash.com/photo-1566740933430-b5e70b06d2d5?w=800',
+      'https://images.unsplash.com/photo-1550340499-a6c60fc8287c?w=800',
+      'https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=800',
+      'https://images.unsplash.com/photo-1550432163-9cb326104944?w=800',
+      'https://images.unsplash.com/photo-1585159812596-fcd94c2be419?w=800'
+    ],
+    historicalInfo: 'The Louvre holds over 380,000 objects and displays 35,000 works of art in eight curatorial departments.',
+    yearBuilt: 'Museum opened 1793',
+    architect: 'Originally royal palace, various architects',
+    translations: {
+      en: {
+        name: 'Louvre Skip-the-Line Guided Tour',
+        narration: 'Bypass the long queues and explore the Louvre\'s masterpieces with an expert guide. See the Mona Lisa, Venus de Milo, and other iconic artworks.',
+        description: 'Skip-the-line guided tour of Louvre Museum highlights',
+        historicalInfo: 'The Louvre holds over 380,000 objects and displays 35,000 works of art.',
+        yearBuilt: 'Museum opened 1793',
+        architect: 'Originally royal palace, various architects'
+      },
+      it: {
+        name: 'Tour Guidato Louvre Salta la Coda',
+        narration: 'Salta le lunghe code ed esplora i capolavori del Louvre con una guida esperta. Vedi la Gioconda, la Venere di Milo e altre opere iconiche.',
+        description: 'Tour guidato salta la coda dei punti salienti del Museo del Louvre',
+        historicalInfo: 'Il Louvre ospita oltre 380.000 oggetti ed espone 35.000 opere d\'arte.',
+        yearBuilt: 'Museo aperto nel 1793',
+        architect: 'Originariamente palazzo reale, vari architetti'
+      },
+      ko: {
+        name: '루브르 우선 입장 가이드 투어',
+        narration: '긴 줄을 건너뛰고 전문 가이드와 함께 루브르의 걸작을 탐험하세요. 모나리자, 밀로의 비너스 및 기타 상징적인 예술 작품을 보세요.',
+        description: '루브르 박물관 하이라이트 우선 입장 가이드 투어',
+        historicalInfo: '루브르는 380,000개 이상의 물건을 보유하고 있으며 35,000개의 예술 작품을 전시합니다.',
+        yearBuilt: '박물관 개관 1793년',
+        architect: '원래 왕궁, 다양한 건축가'
+      }
+    }
+  },
+  {
+    id: 'paris-catacombs-tour',
+    cityId: 'paris',
+    name: 'Paris Catacombs Tour',
+    lat: 48.8338,
+    lng: 2.3324,
+    radius: 50,
+    narration: 'Descend into Paris\'s mysterious underground ossuary. Explore tunnels lined with millions of bones and learn about this haunting piece of Parisian history.',
+    description: 'Guided tour of the underground Paris Catacombs',
+    category: 'Activity',
+    detailedDescription: 'Venture 20 meters below the streets of Paris into the world\'s largest underground ossuary. The Catacombs hold the remains of over 6 million Parisians, transferred here from overflowing city cemeteries in the late 18th and early 19th centuries. Your guide leads you through the eerie tunnels lined with carefully arranged bones and skulls, explaining the history of this unique site. Learn about the former limestone quarries that became the solution to Paris\'s cemetery crisis, the painstaking process of transferring the remains, and the symbolic arrangements of bones that create macabre works of art. The tour includes skip-the-line access to avoid the notoriously long queues. Temperature is 14°C year-round, so bring a jacket. Not recommended for those with claustrophobia or mobility issues due to 130 steps down and narrow passages.',
+    photos: [
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+      'https://images.unsplash.com/photo-1583416750470-965b2707b355?w=800',
+      'https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=800',
+      'https://images.unsplash.com/photo-1519225420449-5e0297e79c19?w=800',
+      'https://images.unsplash.com/photo-1590578936270-e1d68582affe?w=800',
+      'https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800',
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800'
+    ],
+    historicalInfo: 'The Catacombs were created in the late 1700s when overflowing cemeteries became a public health hazard.',
+    yearBuilt: '1786-1788',
+    architect: 'Charles-Axel Guillaumot',
+    translations: {
+      en: {
+        name: 'Paris Catacombs Tour',
+        narration: 'Descend into Paris\'s mysterious underground ossuary. Explore tunnels lined with millions of bones and learn about this haunting piece of Parisian history.',
+        description: 'Guided tour of the underground Paris Catacombs',
+        historicalInfo: 'The Catacombs were created in the late 1700s when overflowing cemeteries became a public health hazard.',
+        yearBuilt: '1786-1788',
+        architect: 'Charles-Axel Guillaumot'
+      },
+      it: {
+        name: 'Tour delle Catacombe di Parigi',
+        narration: 'Scendi nell\'ossario sotterraneo misterioso di Parigi. Esplora tunnel rivestiti di milioni di ossa e scopri questo pezzo inquietante della storia parigina.',
+        description: 'Tour guidato delle Catacombe sotterranee di Parigi',
+        historicalInfo: 'Le Catacombe furono create alla fine del 1700 quando i cimiteri traboccanti divennero un rischio per la salute pubblica.',
+        yearBuilt: '1786-1788',
+        architect: 'Charles-Axel Guillaumot'
+      },
+      ko: {
+        name: '파리 카타콤 투어',
+        narration: '파리의 신비로운 지하 납골당으로 내려가세요. 수백만 개의 뼈가 늘어선 터널을 탐험하고 파리 역사의 이 으스스한 부분에 대해 배우세요.',
+        description: '지하 파리 카타콤 가이드 투어',
+        historicalInfo: '카타콤은 1700년대 후반 넘치는 묘지가 공중 보건 위험이 되었을 때 만들어졌습니다.',
+        yearBuilt: '1786-1788년',
+        architect: '샤를-악셀 기요모'
+      }
+    }
+  },
+  // Additional London Activities  
+  {
+    id: 'harry-potter-studio-tour',
+    cityId: 'london',
+    name: 'Warner Bros. Studio Tour London - Harry Potter',
+    lat: 51.6903,
+    lng: -0.4180,
+    radius: 100,
+    narration: 'Step into the magical world of Harry Potter at Warner Bros. Studio Tour. Explore authentic sets, props, and costumes from the films.',
+    description: 'Behind-the-scenes tour of Harry Potter film sets',
+    category: 'Activity',
+    detailedDescription: 'Experience the magic of Harry Potter like never before at the Warner Bros. Studio Tour London. Walk through the actual Great Hall, explore Diagon Alley, and see Hogwarts castle like the filmmakers intended. Discover original props, animatronics, and stunning sets that brought J.K. Rowling\'s wizarding world to life. Learn filmmaking secrets, see how special effects were created, and explore Platform 9¾ where you can board the actual Hogwarts Express. The tour includes Dumbledore\'s office, Hagrid\'s hut, the Forbidden Forest, and concludes with a breathtaking 1:24 scale model of Hogwarts castle. Perfect for fans of all ages.',
+    photos: [
+      'https://images.unsplash.com/photo-1551269901-5c5e14c25df7?w=800',
+      'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800',
+      'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800',
+      'https://images.unsplash.com/photo-1604999333679-b86d54738315?w=800',
+      'https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800'
+    ],
+    historicalInfo: 'The Warner Bros. Studio Tour opened in 2012, built on the actual sets where Harry Potter films were made.',
+    yearBuilt: '2012',
+    architect: 'Warner Bros.',
+    translations: {
+      en: {
+        name: 'Warner Bros. Studio Tour London - Harry Potter',
+        narration: 'Step into the magical world of Harry Potter at Warner Bros. Studio Tour. Explore authentic sets, props, and costumes from the films.',
+        description: 'Behind-the-scenes tour of Harry Potter film sets',
+        historicalInfo: 'The Warner Bros. Studio Tour opened in 2012, built on the actual sets where Harry Potter films were made.',
+        yearBuilt: '2012',
+        architect: 'Warner Bros.'
+      },
+      it: {
+        name: 'Warner Bros. Studio Tour London - Harry Potter',
+        narration: 'Entra nel mondo magico di Harry Potter al Warner Bros. Studio Tour. Esplora set autentici, oggetti di scena e costumi dei film.',
+        description: 'Tour dietro le quinte dei set cinematografici di Harry Potter',
+        historicalInfo: 'Il Warner Bros. Studio Tour ha aperto nel 2012, costruito sui set reali dove sono stati girati i film di Harry Potter.',
+        yearBuilt: '2012',
+        architect: 'Warner Bros.'
+      },
+      ko: {
+        name: '워너 브라더스 스튜디오 투어 런던 - 해리 포터',
+        narration: '워너 브라더스 스튜디오 투어에서 해리 포터의 마법 세계로 들어가세요. 영화의 진짜 세트, 소품, 의상을 탐험하세요.',
+        description: '해리 포터 영화 세트 비하인드 투어',
+        historicalInfo: '워너 브라더스 스튜디오 투어는 2012년에 열렸으며, 해리 포터 영화가 제작된 실제 세트에 건설되었습니다.',
+        yearBuilt: '2012년',
+        architect: '워너 브라더스'
+      }
+    }
+  },
+  {
+    id: 'london-eye-fast-track',
+    cityId: 'london',
+    name: 'London Eye Fast-Track Experience',
+    lat: 51.5033,
+    lng: -0.1195,
+    radius: 60,
+    narration: 'Skip the queues and soar 135 meters above London on the iconic London Eye. Enjoy breathtaking 360-degree views of the city.',
+    description: 'Fast-track access to the London Eye observation wheel',
+    category: 'Activity',
+    detailedDescription: 'Experience London from above with fast-track access to the London Eye, one of the world\'s most famous observation wheels. Skip the standard queues and board your climate-controlled capsule for a 30-minute rotation offering spectacular panoramic views. On clear days, see up to 40 kilometers across the city, spotting landmarks like Buckingham Palace, St. Paul\'s Cathedral, Big Ben, and the Tower of London. Learn about the city\'s history and architecture through the interactive guide on the 4D Cinema Experience (optional upgrade). The London Eye is particularly magical at sunset or after dark when the city lights sparkle below. Each capsule holds up to 25 people with ample space to move around and take photos from every angle.',
+    photos: [
+      'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800',
+      'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800',
+      'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=800',
+      'https://images.unsplash.com/photo-1543832923-44667a44c804?w=800',
+      'https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800',
+      'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800',
+      'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800'
+    ],
+    historicalInfo: 'The London Eye opened in 2000 as the world\'s tallest observation wheel, standing at 135 meters.',
+    yearBuilt: '2000',
+    architect: 'Marks Barfield Architects',
+    translations: {
+      en: {
+        name: 'London Eye Fast-Track Experience',
+        narration: 'Skip the queues and soar 135 meters above London on the iconic London Eye. Enjoy breathtaking 360-degree views of the city.',
+        description: 'Fast-track access to the London Eye observation wheel',
+        historicalInfo: 'The London Eye opened in 2000 as the world\'s tallest observation wheel.',
+        yearBuilt: '2000',
+        architect: 'Marks Barfield Architects'
+      },
+      it: {
+        name: 'London Eye Esperienza Fast-Track',
+        narration: 'Salta le code e vola a 135 metri sopra Londra sull\'iconico London Eye. Goditi viste mozzafiato a 360 gradi della città.',
+        description: 'Accesso fast-track alla ruota panoramica London Eye',
+        historicalInfo: 'Il London Eye ha aperto nel 2000 come la ruota panoramica più alta del mondo.',
+        yearBuilt: '2000',
+        architect: 'Marks Barfield Architects'
+      },
+      ko: {
+        name: '런던 아이 패스트 트랙 체험',
+        narration: '줄을 건너뛰고 상징적인 런던 아이를 타고 런던 위 135미터로 날아오르세요. 도시의 숨막히는 360도 전망을 즐기세요.',
+        description: '런던 아이 관람차 패스트 트랙 입장',
+        historicalInfo: '런던 아이는 2000년에 세계에서 가장 높은 관람차로 열렸습니다.',
+        yearBuilt: '2000년',
+        architect: '마크스 바필드 건축가'
+      }
+    }
+  },
+  {
+    id: 'west-end-theatre-show',
+    cityId: 'london',
+    name: 'West End Theatre Show',
+    lat: 51.5114,
+    lng: -0.1281,
+    radius: 50,
+    narration: 'Experience world-class theatre in London\'s West End. Choose from spectacular musicals and acclaimed plays in historic venues.',
+    description: 'Premium tickets to top West End theatre productions',
+    category: 'Activity',
+    detailedDescription: 'London\'s West End is the heart of British theatre, rivaling New York\'s Broadway for world-class productions. Choose from spectacular long-running musicals like The Phantom of the Opera, Les Misérables, Wicked, and The Lion King, or catch acclaimed new plays and revivals featuring top British and international talent. West End theatres are architectural gems, many dating back to the Victorian and Edwardian eras, offering an atmospheric setting that adds to the magic of live performance. Premium ticket packages often include best-available seating, interval drinks, and sometimes backstage tours or meet-and-greet opportunities. Shows typically run 2-3 hours with one interval. Book in advance for popular productions, especially during holiday seasons.',
+    photos: [
+      'https://images.unsplash.com/photo-1503095396549-807759245b35?w=800',
+      'https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=800',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800',
+      'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800',
+      'https://images.unsplash.com/photo-1478147427282-58a87a120781?w=800',
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800',
+      'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800'
+    ],
+    historicalInfo: 'London\'s West End theatre district has been the center of British theatre since the 17th century.',
+    yearBuilt: 'Historic tradition',
+    architect: 'Various historic theatres',
+    translations: {
+      en: {
+        name: 'West End Theatre Show',
+        narration: 'Experience world-class theatre in London\'s West End. Choose from spectacular musicals and acclaimed plays in historic venues.',
+        description: 'Premium tickets to top West End theatre productions',
+        historicalInfo: 'London\'s West End has been the center of British theatre since the 17th century.',
+        yearBuilt: 'Historic tradition',
+        architect: 'Various historic theatres'
+      },
+      it: {
+        name: 'Spettacolo Teatrale del West End',
+        narration: 'Vivi il teatro di classe mondiale nel West End di Londra. Scegli tra spettacolari musical e acclamati spettacoli teatrali in luoghi storici.',
+        description: 'Biglietti premium per le migliori produzioni teatrali del West End',
+        historicalInfo: 'Il West End di Londra è stato il centro del teatro britannico dal XVII secolo.',
+        yearBuilt: 'Tradizione storica',
+        architect: 'Vari teatri storici'
+      },
+      ko: {
+        name: '웨스트 엔드 연극 쇼',
+        narration: '런던 웨스트 엔드에서 세계적인 연극을 경험하세요. 역사적인 장소에서 화려한 뮤지컬과 찬사를 받는 연극 중에서 선택하세요.',
+        description: '최고의 웨스트 엔드 연극 프로덕션 프리미엄 티켓',
+        historicalInfo: '런던 웨스트 엔드는 17세기부터 영국 연극의 중심지였습니다.',
+        yearBuilt: '역사적 전통',
+        architect: '다양한 역사적 극장'
+      }
+    }
+  },
+  
+  // Cebu Activities
+  {
+    id: 'cebu-island-hopping',
+    cityId: 'cebu',
+    name: 'Island Hopping Tour',
+    lat: 10.3157,
+    lng: 123.8854,
+    radius: 100,
+    narration: 'Explore the stunning islands around Cebu on this full-day island hopping adventure. Visit pristine beaches, snorkel in crystal-clear waters, and enjoy a beach barbecue.',
+    description: 'Full-day island hopping tour to Cebu\'s beautiful islands',
+    category: 'Activity',
+    detailedDescription: 'This island hopping tour takes you to some of Cebu\'s most beautiful islands including Nalusuan Island, Caohagan Island, and Hilutungan Island. Each stop offers unique experiences - from pristine white sand beaches perfect for sunbathing to vibrant coral reefs teeming with tropical fish ideal for snorkeling. The tour includes all equipment, lunch on the beach with fresh seafood barbecue, and experienced guides who know the best spots. Swim in crystal-clear turquoise waters, explore marine sanctuaries, and relax on secluded beaches. Transportation via traditional bancas (outrigger boats) adds to the authentic Filipino experience.',
+    photos: [
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800',
+      'https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Island Hopping Tour',
+        narration: 'Explore the stunning islands around Cebu on this full-day island hopping adventure. Visit pristine beaches, snorkel in crystal-clear waters, and enjoy a beach barbecue.',
+        description: 'Full-day island hopping tour to Cebu\'s beautiful islands'
+      },
+      it: {
+        name: 'Tour Isola in Isola',
+        narration: 'Esplora le splendide isole intorno a Cebu in questa avventura di un\'intera giornata. Visita spiagge incontaminate, fai snorkeling in acque cristalline e goditi un barbecue sulla spiaggia.',
+        description: 'Tour di un\'intera giornata alle bellissime isole di Cebu'
+      },
+      ko: {
+        name: '아일랜드 호핑 투어',
+        narration: '이 하루 종일 아일랜드 호핑 모험에서 세부 주변의 멋진 섬들을 탐험하세요. 깨끗한 해변을 방문하고, 수정처럼 맑은 물에서 스노클링을 하고, 해변 바비큐를 즐기세요.',
+        description: '세부의 아름다운 섬들로의 하루 종일 아일랜드 호핑 투어'
+      }
+    }
+  },
+  {
+    id: 'oslob-whale-shark',
+    cityId: 'cebu',
+    name: 'Oslob Whale Shark Watching',
+    lat: 9.5000,
+    lng: 123.4000,
+    radius: 80,
+    narration: 'Experience the thrill of swimming alongside gentle giant whale sharks in Oslob. This bucket-list experience brings you face-to-face with the world\'s largest fish.',
+    description: 'Swim with whale sharks in their natural habitat',
+    category: 'Activity',
+    detailedDescription: 'Oslob offers one of the most reliable whale shark encounters in the world. These gentle giants, the largest fish in the ocean, gather in the warm waters off Oslob year-round. The experience begins early morning when the water is calmest and the whale sharks are most active. After a safety briefing, you\'ll wade into the shallow waters where these magnificent creatures feed. Swimming alongside a 20-foot whale shark is truly awe-inspiring - they glide gracefully through the water, completely unbothered by human presence. The tour includes snorkeling equipment, life jackets, experienced guides, and underwater photography opportunities. Strict conservation rules ensure both your safety and the whale sharks\' wellbeing.',
+    photos: [
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800',
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Oslob Whale Shark Watching',
+        narration: 'Experience the thrill of swimming alongside gentle giant whale sharks in Oslob. This bucket-list experience brings you face-to-face with the world\'s largest fish.',
+        description: 'Swim with whale sharks in their natural habitat'
+      },
+      it: {
+        name: 'Osservazione Squali Balena a Oslob',
+        narration: 'Vivi l\'emozione di nuotare accanto ai gentili squali balena giganti a Oslob. Questa esperienza da lista dei desideri ti porta faccia a faccia con il pesce più grande del mondo.',
+        description: 'Nuota con gli squali balena nel loro habitat naturale'
+      },
+      ko: {
+        name: '오슬롭 고래상어 관찰',
+        narration: '오슬롭에서 온순한 거대 고래상어와 함께 수영하는 스릴을 경험하세요. 이 버킷리스트 경험은 세계에서 가장 큰 물고기와 대면하게 합니다.',
+        description: '자연 서식지에서 고래상어와 함께 수영'
+      }
+    }
+  },
+  {
+    id: 'kawasan-canyoneering',
+    cityId: 'cebu',
+    name: 'Canyoneering Adventure at Kawasan Falls',
+    lat: 9.8167,
+    lng: 123.3667,
+    radius: 70,
+    narration: 'Embark on an adrenaline-pumping canyoneering adventure through Kawasan Falls. Jump off cliffs, swim through canyons, and rappel down waterfalls.',
+    description: 'Thrilling canyoneering experience at Kawasan Falls',
+    category: 'Activity',
+    detailedDescription: 'The Kawasan Canyoneering adventure is one of Cebu\'s most exhilarating outdoor activities. This full-day adventure takes you through stunning canyons carved by crystal-clear turquoise waters over millions of years. The journey includes cliff jumping from various heights (optional - you can always walk around), swimming through narrow gorges, scrambling over rocks, and rappelling down cascading waterfalls. The highlight is the spectacular Kawasan Falls with its stunning multi-tiered cascades and vibrant blue pools. All necessary equipment including helmets, life jackets, and ropes are provided. Expert guides ensure safety while encouraging you to push your limits. No prior experience needed, but good swimming skills and physical fitness are recommended.',
+    photos: [
+      'https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1484291470158-b8f8d608850d?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Canyoneering Adventure at Kawasan Falls',
+        narration: 'Embark on an adrenaline-pumping canyoneering adventure through Kawasan Falls. Jump off cliffs, swim through canyons, and rappel down waterfalls.',
+        description: 'Thrilling canyoneering experience at Kawasan Falls'
+      },
+      it: {
+        name: 'Avventura Canyoning alle Cascate Kawasan',
+        narration: 'Inizia un\'avventura di canyoning piena di adrenalina attraverso le Cascate Kawasan. Salta dalle scogliere, nuota attraverso i canyon e scendi in corda doppia dalle cascate.',
+        description: 'Esperienza emozionante di canyoning alle Cascate Kawasan'
+      },
+      ko: {
+        name: '카와산 폭포 캐니어링 어드벤처',
+        narration: '카와산 폭포를 통과하는 아드레날린이 솟구치는 캐니어링 모험을 시작하세요. 절벽에서 뛰어내리고, 협곡을 헤엄치고, 폭포를 따라 하강하세요.',
+        description: '카와산 폭포에서의 스릴 넘치는 캐니어링 경험'
+      }
+    }
+  },
+  
+  // Singapore Activities
+  {
+    id: 'gardens-by-the-bay-night',
+    cityId: 'singapore',
+    name: 'Gardens by the Bay Night Tour',
+    lat: 1.2816,
+    lng: 103.8636,
+    radius: 60,
+    narration: 'Experience the magical Gardens by the Bay after dark. Watch the stunning light and sound show at the Supertree Grove and explore the illuminated Cloud Forest.',
+    description: 'Evening tour of Gardens by the Bay with light show',
+    category: 'Activity',
+    detailedDescription: 'Gardens by the Bay transforms into a magical wonderland after sunset. This evening tour takes you through the futuristic Supertree Grove where towering vertical gardens reach up to 50 meters high. The highlight is the Garden Rhapsody - a spectacular light and sound show that illuminates the Supertrees in a symphony of colors synchronized to music. The tour also includes the Cloud Forest, where the world\'s tallest indoor waterfall cascades 35 meters surrounded by lush vegetation and ethereal mist. Walk along the OCBC Skyway, a 128-meter aerial walkway connecting the Supertrees 22 meters above ground, offering stunning views of Marina Bay. The cooler evening temperatures make exploring more comfortable while the dramatic lighting creates perfect photo opportunities.',
+    photos: [
+      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800',
+      'https://images.unsplash.com/photo-1562992468-ccf2c7f0c09d?w=800',
+      'https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Gardens by the Bay Night Tour',
+        narration: 'Experience the magical Gardens by the Bay after dark. Watch the stunning light and sound show at the Supertree Grove and explore the illuminated Cloud Forest.',
+        description: 'Evening tour of Gardens by the Bay with light show'
+      },
+      it: {
+        name: 'Tour Notturno dei Gardens by the Bay',
+        narration: 'Vivi i magici Gardens by the Bay dopo il tramonto. Guarda lo spettacolare spettacolo di luci e suoni al Supertree Grove ed esplora la Cloud Forest illuminata.',
+        description: 'Tour serale dei Gardens by the Bay con spettacolo di luci'
+      },
+      ko: {
+        name: '가든스 바이 더 베이 야간 투어',
+        narration: '어둠 속에서 마법 같은 가든스 바이 더 베이를 경험하세요. 슈퍼트리 그로브에서 멋진 빛과 소리 쇼를 보고 조명이 켜진 클라우드 포레스트를 탐험하세요.',
+        description: '라이트 쇼가 있는 가든스 바이 더 베이 저녁 투어'
+      }
+    }
+  },
+  {
+    id: 'singapore-river-cruise',
+    cityId: 'singapore',
+    name: 'Singapore River Bumboat Cruise',
+    lat: 1.2875,
+    lng: 103.8511,
+    radius: 50,
+    narration: 'Cruise along the historic Singapore River on a traditional bumboat. Discover the city\'s heritage as you glide past colonial buildings, modern skyscrapers, and vibrant quaysides.',
+    description: 'Traditional bumboat cruise along Singapore River',
+    category: 'Activity',
+    detailedDescription: 'The Singapore River Cruise offers a unique perspective on the city\'s transformation from fishing village to global metropolis. Board a traditional bumboat - once used to transport goods and passengers - and glide along the historic waterway. The cruise passes through three distinct quays: Boat Quay with its colorful shophouses and lively restaurants, Clarke Quay\'s modern entertainment complex, and Robertson Quay\'s quieter residential charm. Along the way, see iconic landmarks including the Merlion, Esplanade, Marina Bay Sands, and Fullerton Hotel. Audio commentary in multiple languages shares fascinating stories about Singapore\'s history, architecture, and cultural heritage. Evening cruises are particularly magical when the city lights reflect on the water.',
+    photos: [
+      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800',
+      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800',
+      'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Singapore River Bumboat Cruise',
+        narration: 'Cruise along the historic Singapore River on a traditional bumboat. Discover the city\'s heritage as you glide past colonial buildings, modern skyscrapers, and vibrant quaysides.',
+        description: 'Traditional bumboat cruise along Singapore River'
+      },
+      it: {
+        name: 'Crociera in Bumboat sul Fiume Singapore',
+        narration: 'Naviga lungo lo storico fiume Singapore su un tradizionale bumboat. Scopri il patrimonio della città mentre scivoli accanto a edifici coloniali, grattacieli moderni e banchine vivaci.',
+        description: 'Crociera tradizionale in bumboat lungo il fiume Singapore'
+      },
+      ko: {
+        name: '싱가포르 리버 범보트 크루즈',
+        narration: '전통적인 범보트를 타고 역사적인 싱가포르 강을 따라 크루즈하세요. 식민지 건물, 현대적인 고층 빌딩, 활기찬 부두를 지나가며 도시의 유산을 발견하세요.',
+        description: '싱가포르 강을 따라 전통 범보트 크루즈'
+      }
+    }
+  },
+  {
+    id: 'singapore-hawker-food-tour',
+    cityId: 'singapore',
+    name: 'Hawker Center Food Tour',
+    lat: 1.2884,
+    lng: 103.8478,
+    radius: 70,
+    narration: 'Embark on a culinary journey through Singapore\'s famous hawker centers. Taste authentic local dishes and learn about the multicultural food heritage.',
+    description: 'Guided food tour exploring Singapore\'s hawker cuisine',
+    category: 'Activity',
+    detailedDescription: 'Singapore\'s hawker centers are the heart and soul of the city\'s food culture, recognized by UNESCO as an Intangible Cultural Heritage. This guided food tour takes you to the best hawker stalls to sample iconic Singaporean dishes like Hainanese chicken rice, laksa, char kway teow, satay, and roti prata. Your local guide shares the history behind each dish and the stories of the hawkers who have perfected their recipes over generations. Learn about Singapore\'s multicultural influences - Chinese, Malay, Indian, and Peranakan - all reflected in the diverse cuisine. The tour visits multiple hawker centers including Maxwell Food Centre and Lau Pa Sat, ensuring you taste the most authentic and delicious offerings. Come hungry - you\'ll sample 8-10 different dishes!',
+    photos: [
+      'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800',
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+      'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Hawker Center Food Tour',
+        narration: 'Embark on a culinary journey through Singapore\'s famous hawker centers. Taste authentic local dishes and learn about the multicultural food heritage.',
+        description: 'Guided food tour exploring Singapore\'s hawker cuisine'
+      },
+      it: {
+        name: 'Tour Gastronomico nei Hawker Center',
+        narration: 'Inizia un viaggio culinario attraverso i famosi hawker center di Singapore. Assaggia piatti locali autentici e scopri il patrimonio gastronomico multiculturale.',
+        description: 'Tour gastronomico guidato per esplorare la cucina hawker di Singapore'
+      },
+      ko: {
+        name: '호커 센터 푸드 투어',
+        narration: '싱가포르의 유명한 호커 센터를 통한 요리 여행을 시작하세요. 정통 현지 요리를 맛보고 다문화 음식 유산에 대해 배우세요.',
+        description: '싱가포르 호커 요리를 탐험하는 가이드 푸드 투어'
+      }
+    }
+  },
+  
+  // Penang Activities
+  {
+    id: 'georgetown-street-art',
+    cityId: 'penang',
+    name: 'Georgetown Street Art Tour',
+    lat: 5.4141,
+    lng: 100.3288,
+    radius: 60,
+    narration: 'Discover Georgetown\'s vibrant street art scene on this walking tour. Find famous murals, learn their stories, and explore the UNESCO World Heritage city.',
+    description: 'Walking tour of Georgetown\'s famous street art and murals',
+    category: 'Activity',
+    detailedDescription: 'Georgetown\'s street art has transformed the UNESCO World Heritage city into an open-air gallery. This guided walking tour takes you to the most famous murals by Lithuanian artist Ernest Zacharevic and local artists. See the iconic "Little Children on a Bicycle," "Boy on a Bike," and dozens of other creative works that blend art with the city\'s historic architecture. Your guide shares the stories behind each artwork and Georgetown\'s transformation into Southeast Asia\'s street art capital. The tour also explores the city\'s multicultural heritage, visiting temples, mosques, churches, and clan houses along the way. You\'ll discover hidden alleyways, colonial buildings, and local markets while learning about Penang\'s rich history. Comfortable walking shoes recommended - the tour covers about 3-4 kilometers.',
+    photos: [
+      'https://images.unsplash.com/photo-1583209343135-9848e8e9eb0d?w=800',
+      'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800',
+      'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Georgetown Street Art Tour',
+        narration: 'Discover Georgetown\'s vibrant street art scene on this walking tour. Find famous murals, learn their stories, and explore the UNESCO World Heritage city.',
+        description: 'Walking tour of Georgetown\'s famous street art and murals'
+      },
+      it: {
+        name: 'Tour della Street Art di Georgetown',
+        narration: 'Scopri la vivace scena della street art di Georgetown in questo tour a piedi. Trova murales famosi, scopri le loro storie ed esplora la città Patrimonio dell\'Umanità UNESCO.',
+        description: 'Tour a piedi della famosa street art e murales di Georgetown'
+      },
+      ko: {
+        name: '조지타운 스트리트 아트 투어',
+        narration: '이 도보 투어에서 조지타운의 활기찬 스트리트 아트 현장을 발견하세요. 유명한 벽화를 찾고, 그들의 이야기를 배우고, 유네스코 세계 문화유산 도시를 탐험하세요.',
+        description: '조지타운의 유명한 스트리트 아트와 벽화 도보 투어'
+      }
+    }
+  },
+  {
+    id: 'penang-hill-cable-car',
+    cityId: 'penang',
+    name: 'Penang Hill Funicular Railway Experience',
+    lat: 5.4239,
+    lng: 100.2733,
+    radius: 50,
+    narration: 'Ride the historic funicular railway to the top of Penang Hill. Enjoy panoramic views of the island, explore colonial bungalows, and experience cooler mountain air.',
+    description: 'Funicular railway ride to Penang Hill summit',
+    category: 'Activity',
+    detailedDescription: 'Penang Hill offers a refreshing escape from the tropical heat and spectacular views of the island. The journey begins with a scenic ride on the funicular railway, one of the oldest in Asia, climbing 833 meters through lush rainforest. At the summit, temperatures are typically 5-7°C cooler than sea level, providing welcome relief. Explore the hill\'s attractions including The Habitat, a nature discovery center with canopy walkways offering stunning views; colonial-era bungalows showcasing British heritage; Hindu and Muslim shrines; and the Love Lock terrace where couples attach padlocks as symbols of eternal love. The panoramic vistas encompass Georgetown, the mainland, and on clear days, even Thailand. Visit at sunset for the most breathtaking views as the city lights begin to twinkle below.',
+    photos: [
+      'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800',
+      'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Penang Hill Funicular Railway Experience',
+        narration: 'Ride the historic funicular railway to the top of Penang Hill. Enjoy panoramic views of the island, explore colonial bungalows, and experience cooler mountain air.',
+        description: 'Funicular railway ride to Penang Hill summit'
+      },
+      it: {
+        name: 'Esperienza della Funicolare di Penang Hill',
+        narration: 'Sali sulla storica funicolare fino alla cima di Penang Hill. Goditi viste panoramiche dell\'isola, esplora bungalow coloniali e sperimenta l\'aria fresca di montagna.',
+        description: 'Corsa in funicolare fino alla cima di Penang Hill'
+      },
+      ko: {
+        name: '페낭 힐 케이블카 체험',
+        narration: '역사적인 케이블카를 타고 페낭 힐 정상까지 올라가세요. 섬의 파노라마 전망을 즐기고, 식민지 시대 방갈로를 탐험하고, 시원한 산 공기를 경험하세요.',
+        description: '페낭 힐 정상까지 케이블카 타기'
+      }
+    }
+  },
+  {
+    id: 'nyonya-cooking-class',
+    cityId: 'penang',
+    name: 'Traditional Nyonya Cooking Class',
+    lat: 5.4164,
+    lng: 100.3400,
+    radius: 40,
+    narration: 'Learn to cook authentic Nyonya cuisine in this hands-on cooking class. Discover the unique Peranakan culinary traditions blending Chinese and Malay flavors.',
+    description: 'Hands-on Nyonya cooking class with market visit',
+    category: 'Activity',
+    detailedDescription: 'Nyonya cuisine, also known as Peranakan food, represents a unique fusion of Chinese and Malay culinary traditions developed over centuries in Penang. This immersive cooking class begins with a visit to a local market where your instructor explains exotic ingredients like bunga kantan (torch ginger), daun kesom (laksa leaves), and belacan (shrimp paste). Return to a traditional Peranakan home or cooking school to prepare 3-4 signature dishes which might include laksa lemak, ayam pongteh (chicken braised in fermented bean paste), or kueh pie tee (crispy shells with vegetables). Learn essential techniques like pounding rempah (spice paste) in a traditional mortar and achieving the perfect balance of sweet, sour, salty, and spicy flavors. The class concludes with enjoying your creations together. Recipe cards provided so you can recreate the dishes at home.',
+    photos: [
+      'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800',
+      'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Traditional Nyonya Cooking Class',
+        narration: 'Learn to cook authentic Nyonya cuisine in this hands-on cooking class. Discover the unique Peranakan culinary traditions blending Chinese and Malay flavors.',
+        description: 'Hands-on Nyonya cooking class with market visit'
+      },
+      it: {
+        name: 'Corso di Cucina Nyonya Tradizionale',
+        narration: 'Impara a cucinare l\'autentica cucina Nyonya in questo corso di cucina pratico. Scopri le uniche tradizioni culinarie Peranakan che fondono sapori cinesi e malesi.',
+        description: 'Corso di cucina Nyonya pratico con visita al mercato'
+      },
+      ko: {
+        name: '전통 뇨냐 요리 수업',
+        narration: '이 실습 요리 수업에서 정통 뇨냐 요리를 배우세요. 중국과 말레이 풍미를 혼합한 독특한 페라나칸 요리 전통을 발견하세요.',
+        description: '시장 방문이 포함된 실습 뇨냐 요리 수업'
+      }
+    }
+  },
+  
+  // Kuala Lumpur Activities
+  {
+    id: 'batu-caves-tour',
+    cityId: 'kuala-lumpur',
+    name: 'Batu Caves Temple Tour',
+    lat: 3.2379,
+    lng: 101.6841,
+    radius: 80,
+    narration: 'Climb the iconic 272 steps to the sacred Batu Caves Hindu temple. Marvel at the giant golden statue and explore limestone caverns filled with shrines.',
+    description: 'Half-day tour to the famous Batu Caves temple complex',
+    category: 'Activity',
+    detailedDescription: 'Batu Caves is one of Malaysia\'s most iconic attractions, combining natural wonders with spiritual significance. The journey begins at the foot of the 140-foot golden statue of Lord Murugan, the largest of its kind in the world. Climb the famous rainbow-colored 272 steps (recently painted in vibrant hues) to reach the main Temple Cave, a massive limestone cavern over 100 meters high housing several Hindu shrines. The natural skylight creates a mystical atmosphere as sunbeams illuminate the cave interior. Explore the Dark Cave, a conservation site housing unique cave ecosystems, and Art Gallery Cave with its colorful Hindu dioramas. Watch for the cheeky macaque monkeys that inhabit the area. The tour includes transportation from Kuala Lumpur, a knowledgeable guide explaining Hindu traditions and cave formations, and time to experience the spiritual atmosphere.',
+    photos: [
+      'https://images.unsplash.com/photo-1549318228-1070e5b31c0a?w=800',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1583209343135-9848e8e9eb0d?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Batu Caves Temple Tour',
+        narration: 'Climb the iconic 272 steps to the sacred Batu Caves Hindu temple. Marvel at the giant golden statue and explore limestone caverns filled with shrines.',
+        description: 'Half-day tour to the famous Batu Caves temple complex'
+      },
+      it: {
+        name: 'Tour del Tempio delle Grotte di Batu',
+        narration: 'Scala gli iconici 272 gradini fino al sacro tempio indù delle Grotte di Batu. Ammira la gigantesca statua dorata ed esplora caverne calcaree piene di santuari.',
+        description: 'Tour di mezza giornata al famoso complesso del tempio delle Grotte di Batu'
+      },
+      ko: {
+        name: '바투 동굴 사원 투어',
+        narration: '신성한 바투 동굴 힌두 사원까지 상징적인 272개의 계단을 올라가세요. 거대한 황금 조각상을 감상하고 신전으로 가득 찬 석회암 동굴을 탐험하세요.',
+        description: '유명한 바투 동굴 사원 단지로의 반나절 투어'
+      }
+    }
+  },
+  {
+    id: 'kl-food-street-tour',
+    cityId: 'kuala-lumpur',
+    name: 'Kuala Lumpur Street Food Tour',
+    lat: 3.1478,
+    lng: 101.6953,
+    radius: 60,
+    narration: 'Experience the incredible diversity of Malaysian street food on this evening walking tour. Taste Malay, Chinese, and Indian specialties at local favorites.',
+    description: 'Evening street food walking tour in Kuala Lumpur',
+    category: 'Activity',
+    detailedDescription: 'Kuala Lumpur\'s street food scene is a delicious reflection of Malaysia\'s multicultural society. This evening food tour takes you off the tourist trail to authentic local eateries and street stalls where KL residents actually eat. Sample iconic dishes like nasi lemak (coconut rice with sambal), char kway teow (stir-fried noodles), roti canai with curry, satay (grilled meat skewers), cendol (shaved ice dessert), and durian (if you\'re brave!). Your local guide shares insights into Malaysian food culture, cooking techniques, and the history behind each dish. Visit bustling night markets like Jalan Alor or Petaling Street Chinatown, experience the energy of outdoor dining, and learn about the spices and ingredients that make Malaysian cuisine so distinctive. The tour includes 8-10 food tastings - enough for a full dinner.',
+    photos: [
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+      'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800',
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Kuala Lumpur Street Food Tour',
+        narration: 'Experience the incredible diversity of Malaysian street food on this evening walking tour. Taste Malay, Chinese, and Indian specialties at local favorites.',
+        description: 'Evening street food walking tour in Kuala Lumpur'
+      },
+      it: {
+        name: 'Tour dello Street Food di Kuala Lumpur',
+        narration: 'Sperimenta l\'incredibile diversità del cibo di strada malese in questo tour a piedi serale. Assaggia specialità malesi, cinesi e indiane nei locali preferiti.',
+        description: 'Tour a piedi serale dello street food a Kuala Lumpur'
+      },
+      ko: {
+        name: '쿠알라룸푸르 스트리트 푸드 투어',
+        narration: '이 저녁 도보 투어에서 말레이시아 길거리 음식의 놀라운 다양성을 경험하세요. 지역 인기 장소에서 말레이, 중국, 인도 특선 요리를 맛보세요.',
+        description: '쿠알라룸푸르의 저녁 스트리트 푸드 도보 투어'
+      }
+    }
+  },
+  {
+    id: 'klcc-aquarium',
+    cityId: 'kuala-lumpur',
+    name: 'Aquaria KLCC Underwater Experience',
+    lat: 3.1542,
+    lng: 101.7123,
+    radius: 50,
+    narration: 'Journey through Aquaria KLCC, one of Southeast Asia\'s largest aquariums. Walk through a 90-meter underwater tunnel and see thousands of marine creatures.',
+    description: 'Visit to Aquaria KLCC world-class oceanarium',
+    category: 'Activity',
+    detailedDescription: 'Aquaria KLCC offers an immersive journey through Malaysia\'s aquatic ecosystems and beyond. Located beneath the Kuala Lumpur Convention Centre, this state-of-the-art oceanarium showcases over 5,000 marine and land-bound creatures representing 150 species. The highlight is the spectacular 90-meter underwater tunnel where sharks, giant groupers, and rays glide overhead creating a surreal walking-on-the-ocean-floor experience. Explore diverse exhibits including Malaysian coral reefs, flooded rainforests, coastal waters, and deep ocean zones. Interactive touch pools let you feel starfish and sea cucumbers, while feeding sessions and dive shows provide educational entertainment. The aquarium\'s conservation message emphasizes protecting Malaysia\'s marine biodiversity. Climate-controlled and family-friendly, it\'s a perfect escape from KL\'s heat and humidity.',
+    photos: [
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
+      'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Aquaria KLCC Underwater Experience',
+        narration: 'Journey through Aquaria KLCC, one of Southeast Asia\'s largest aquariums. Walk through a 90-meter underwater tunnel and see thousands of marine creatures.',
+        description: 'Visit to Aquaria KLCC world-class oceanarium'
+      },
+      it: {
+        name: 'Esperienza Subacquea Aquaria KLCC',
+        narration: 'Viaggia attraverso Aquaria KLCC, uno dei più grandi acquari del Sud-Est asiatico. Cammina attraverso un tunnel sottomarino di 90 metri e vedi migliaia di creature marine.',
+        description: 'Visita all\'oceanario di classe mondiale Aquaria KLCC'
+      },
+      ko: {
+        name: '아쿠아리아 KLCC 수중 체험',
+        narration: '동남아시아에서 가장 큰 수족관 중 하나인 아쿠아리아 KLCC를 여행하세요. 90미터 수중 터널을 걸으며 수천 마리의 해양 생물을 보세요.',
+        description: '세계적 수준의 아쿠아리아 KLCC 해양관 방문'
+      }
+    }
+  },
+  
+  // Phuket Activities
+  {
+    id: 'phi-phi-island-tour',
+    cityId: 'phuket',
+    name: 'Phi Phi Islands Day Trip',
+    lat: 7.7407,
+    lng: 98.7784,
+    radius: 100,
+    narration: 'Explore the stunning Phi Phi Islands on this full-day boat tour. Snorkel in crystal-clear waters, visit Maya Bay, and relax on pristine beaches.',
+    description: 'Full-day speedboat tour to Phi Phi Islands',
+    category: 'Activity',
+    detailedDescription: 'The Phi Phi Islands are among Thailand\'s most beautiful destinations, and this full-day tour showcases the best of this tropical paradise. Depart Phuket by speedboat and arrive at the iconic Phi Phi Islands, famous for their dramatic limestone cliffs rising from turquoise waters. Visit Maya Bay, made famous by the movie "The Beach," with its stunning crescent beach surrounded by towering cliffs. Snorkel at Pileh Lagoon where crystal-clear emerald waters are home to colorful tropical fish and coral gardens. Explore Viking Cave with its ancient wall paintings and bird nest harvesting operations. Enjoy a buffet lunch on Phi Phi Don, the larger inhabited island. The tour includes multiple snorkeling stops, beach time, photo opportunities, and all equipment. Hotel transfers and experienced guides ensure a safe, comfortable, and unforgettable island experience.',
+    photos: [
+      'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Phi Phi Islands Day Trip',
+        narration: 'Explore the stunning Phi Phi Islands on this full-day boat tour. Snorkel in crystal-clear waters, visit Maya Bay, and relax on pristine beaches.',
+        description: 'Full-day speedboat tour to Phi Phi Islands'
+      },
+      it: {
+        name: 'Escursione Giornaliera alle Isole Phi Phi',
+        narration: 'Esplora le splendide Isole Phi Phi in questo tour in barca di un\'intera giornata. Fai snorkeling in acque cristalline, visita Maya Bay e rilassati su spiagge incontaminate.',
+        description: 'Tour in motoscafo di un\'intera giornata alle Isole Phi Phi'
+      },
+      ko: {
+        name: '피피 섬 당일 여행',
+        narration: '이 하루 종일 보트 투어에서 멋진 피피 섬을 탐험하세요. 수정처럼 맑은 물에서 스노클링하고, 마야 베이를 방문하고, 깨끗한 해변에서 휴식하세요.',
+        description: '피피 섬으로의 하루 종일 스피드보트 투어'
+      }
+    }
+  },
+  {
+    id: 'old-phuket-town-walk',
+    cityId: 'phuket',
+    name: 'Old Phuket Town Cultural Walk',
+    lat: 7.8804,
+    lng: 98.3923,
+    radius: 60,
+    narration: 'Discover the charm of Old Phuket Town on this walking tour. Explore colorful Sino-Portuguese architecture, visit local markets, and learn about Phuket\'s heritage.',
+    description: 'Guided walking tour of historic Old Phuket Town',
+    category: 'Activity',
+    detailedDescription: 'Old Phuket Town is a treasure trove of history, culture, and architecture that most beach-goers miss. This walking tour explores the beautifully preserved Sino-Portuguese shophouses painted in vibrant colors - pink, yellow, mint green, and turquoise. Learn about Phuket\'s tin mining boom era when Chinese immigrants arrived and created this unique architectural blend. Visit historic buildings like the Thai Hua Museum, housed in a former Chinese school, and the Chinpracha House, a 100-year-old mansion. Explore Thalang Road\'s Sunday Walking Street market (if visiting Sunday) filled with local crafts, street food, and live performances. Discover hidden shrines, vintage cafes, contemporary art galleries, and street art. Your guide shares fascinating stories about Phuket\'s multicultural heritage, local legends, and the preservation efforts keeping this historic quarter alive. The tour includes stops at local food vendors for authentic Phuket snacks.',
+    photos: [
+      'https://images.unsplash.com/photo-1583209343135-9848e8e9eb0d?w=800',
+      'https://images.unsplash.com/photo-1528127269322-539801943592?w=800',
+      'https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Old Phuket Town Cultural Walk',
+        narration: 'Discover the charm of Old Phuket Town on this walking tour. Explore colorful Sino-Portuguese architecture, visit local markets, and learn about Phuket\'s heritage.',
+        description: 'Guided walking tour of historic Old Phuket Town'
+      },
+      it: {
+        name: 'Passeggiata Culturale nella Vecchia Città di Phuket',
+        narration: 'Scopri il fascino della Vecchia Città di Phuket in questo tour a piedi. Esplora l\'architettura colorata sino-portoghese, visita mercati locali e scopri il patrimonio di Phuket.',
+        description: 'Tour a piedi guidato della storica Vecchia Città di Phuket'
+      },
+      ko: {
+        name: '올드 푸켓 타운 문화 산책',
+        narration: '이 도보 투어에서 올드 푸켓 타운의 매력을 발견하세요. 화려한 중국-포르투갈 건축물을 탐험하고, 지역 시장을 방문하고, 푸켓의 유산에 대해 배우세요.',
+        description: '역사적인 올드 푸켓 타운의 가이드 도보 투어'
+      }
+    }
+  },
+  {
+    id: 'phuket-cooking-class',
+    cityId: 'phuket',
+    name: 'Thai Cooking Class Experience',
+    lat: 7.8936,
+    lng: 98.3969,
+    radius: 50,
+    narration: 'Master the art of Thai cuisine in this hands-on cooking class. Learn to prepare classic dishes using fresh local ingredients and traditional techniques.',
+    description: 'Authentic Thai cooking class with market tour',
+    category: 'Activity',
+    detailedDescription: 'This immersive Thai cooking class offers much more than recipes - it\'s a cultural experience that reveals the heart of Thai cuisine. Begin with a guided tour of a local market where your instructor explains exotic ingredients like galangal, kaffir lime leaves, Thai basil varieties, and fish sauce grades. Learn to select the freshest produce and understand the importance of each ingredient. Return to a traditional Thai kitchen or outdoor cooking pavilion to prepare 4-5 classic dishes such as tom yum soup, pad thai, green curry, som tam (papaya salad), and mango sticky rice. Master essential techniques like pounding curry paste in a mortar, achieving the perfect balance of sweet, sour, salty, and spicy, and proper wok handling. The intimate class sizes ensure personalized attention. Enjoy your creations for lunch or dinner, and take home recipe cards and a certificate. Vegetarian and dietary modifications available.',
+    photos: [
+      'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800',
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+      'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800'
+    ],
+    translations: {
+      en: {
+        name: 'Thai Cooking Class Experience',
+        narration: 'Master the art of Thai cuisine in this hands-on cooking class. Learn to prepare classic dishes using fresh local ingredients and traditional techniques.',
+        description: 'Authentic Thai cooking class with market tour'
+      },
+      it: {
+        name: 'Esperienza di Corso di Cucina Thailandese',
+        narration: 'Padroneggia l\'arte della cucina thailandese in questo corso di cucina pratico. Impara a preparare piatti classici usando ingredienti locali freschi e tecniche tradizionali.',
+        description: 'Autentico corso di cucina thailandese con tour del mercato'
+      },
+      ko: {
+        name: '태국 요리 수업 체험',
+        narration: '이 실습 요리 수업에서 태국 요리의 예술을 마스터하세요. 신선한 지역 재료와 전통 기술을 사용하여 고전 요리를 준비하는 방법을 배우세요.',
+        description: '시장 투어가 포함된 정통 태국 요리 수업'
+      }
+    }
   }
 ];
 

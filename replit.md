@@ -30,6 +30,7 @@ The application is built with a React frontend and an Express.js backend, commun
 - **Visited Landmarks Tracking:** Progress is tracked per session, stored in a PostgreSQL database (via Drizzle ORM), and visualized with a progress bar and statistics.
 - **Offline Functionality:** A service worker pre-caches static assets, all city landmarks, activities, and map tiles, allowing full application functionality offline with cached API responses.
 - **Content Filtering:** Independent filter buttons allow toggling the visibility of Landmarks (terracotta) and Activities (blue) on both the map and in the list, with support for various activity categories (cruises, food tours, etc.).
+- **Tour Route Planning:** Users can create custom tour routes by clicking markers to add/remove landmarks and activities. The map visualizes the tour with a dashed terracotta polyline connecting stops in sequence. Tour progress is displayed in the header with a stop counter, and a Clear Tour button allows resetting the route. Tour stops are managed locally in component state.
 - **API Endpoints:**
     - `GET /api/cities`, `GET /api/cities/:id`
     - `GET /api/landmarks?cityId={cityId}`, `GET /api/landmarks/:id`
