@@ -27,7 +27,7 @@ const CITIES: City[] = [
       portName: 'Civitavecchia Port',
       distanceFromCity: '80km from Rome',
       recommendedDuration: '8-10 hours',
-      recommendedLandmarks: ['colosseum', 'vatican', 'trevi-fountain', 'pantheon', 'roman-forum'],
+      recommendedLandmarks: ['colosseum', 'vatican_museums', 'trevi-fountain', 'pantheon', 'roman-forum'],
       tips: 'Book a shore excursion in advance or take the train from Civitavecchia to Rome (80 minutes). Start early to see the main attractions. Consider skip-the-line tickets for the Vatican and Colosseum.',
       translations: {
         ko: {

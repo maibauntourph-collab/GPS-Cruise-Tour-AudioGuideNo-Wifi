@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import { useQuery } from '@tanstack/react-query';
 import { SidebarTrigger, SidebarInset, useSidebar } from '@/components/ui/sidebar';
 import { 
@@ -67,8 +68,10 @@ export default function Home() {
   const [showLandmarks, setShowLandmarks] = useState(true);
   const [showActivities, setShowActivities] = useState(true);
   const [showCruisePort, setShowCruisePort] = useState(true);
+  const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
   const [tourRouteInfo, setTourRouteInfo] = useState<{ distance: number; duration: number } | null>(null);
+  const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -360,7 +363,7 @@ export default function Home() {
             />
 
             {/* Show cruise port info and landmark list only when no landmark is selected */}
-            {!selectedLandmark && (
+            {(!selectedLandmark || keepCruisePortVisible) && (
               <>
                 {selectedCity && selectedCity.cruisePort && showCruisePort && (
                   <CruisePortInfo
@@ -370,20 +373,39 @@ export default function Home() {
                     onLandmarkClick={(landmarkId) => {
                       const landmark = filteredLandmarks.find(l => l.id === landmarkId);
                       if (landmark) {
+                        // Clear any existing timeout
+                        if (cruisePortTimeoutRef.current) {
+                          clearTimeout(cruisePortTimeoutRef.current);
+                        }
+                        
+                        // Use flushSync to immediately update state before rendering
+                        flushSync(() => {
+                          setKeepCruisePortVisible(true);
+                        });
+                        
+                        // Now set selected landmark
                         setSelectedLandmark(landmark);
+                        
+                        // Start the 2-second countdown
+                        cruisePortTimeoutRef.current = setTimeout(() => {
+                          setKeepCruisePortVisible(false);
+                          cruisePortTimeoutRef.current = null;
+                        }, 2000);
                       }
                     }}
                     onClose={() => setShowCruisePort(false)}
                   />
                 )}
-                <LandmarkList
-                  landmarks={filteredLandmarks}
-                  userPosition={position}
-                  onLandmarkRoute={handleLandmarkRoute}
-                  spokenLandmarks={spokenLandmarks}
-                  selectedLanguage={selectedLanguage}
-                  onLandmarkSelect={setSelectedLandmark}
-                />
+                {!selectedLandmark && (
+                  <LandmarkList
+                    landmarks={filteredLandmarks}
+                    userPosition={position}
+                    onLandmarkRoute={handleLandmarkRoute}
+                    spokenLandmarks={spokenLandmarks}
+                    selectedLanguage={selectedLanguage}
+                    onLandmarkSelect={setSelectedLandmark}
+                  />
+                )}
               </>
             )}
 

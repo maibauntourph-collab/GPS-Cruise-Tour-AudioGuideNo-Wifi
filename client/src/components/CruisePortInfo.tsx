@@ -28,6 +28,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
   const cardRef = useRef<HTMLDivElement>(null);
+  const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   if (!city.cruisePort) {
     return null;
@@ -82,8 +83,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    // Reset z-index after a brief delay to allow click handlers to complete
-    setTimeout(() => setZIndex(1000), 100);
+    // Keep z-index elevated after drag
   };
 
   useEffect(() => {
@@ -101,8 +101,33 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     };
   }, [isDragging, dragStart]);
 
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (zIndexTimeoutRef.current) {
+        clearTimeout(zIndexTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleCardClick = () => {
     setZIndex(2000);
+  };
+
+  const handleLandmarkClick = (landmarkId: string) => {
+    // Clear any existing timeout
+    if (zIndexTimeoutRef.current) {
+      clearTimeout(zIndexTimeoutRef.current);
+    }
+    
+    // Keep z-index elevated for 2 seconds after marker click
+    setZIndex(2000);
+    onLandmarkClick(landmarkId);
+    
+    zIndexTimeoutRef.current = setTimeout(() => {
+      setZIndex(1000);
+      zIndexTimeoutRef.current = null;
+    }, 2000);
   };
 
   return (
@@ -190,7 +215,10 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
                   key={landmark.id}
                   variant="outline"
                   size="sm"
-                  onClick={() => onLandmarkClick(landmark.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleLandmarkClick(landmark.id);
+                  }}
                   className="text-xs hover-elevate"
                   data-testid={`button-recommended-${landmark.id}`}
                 >
