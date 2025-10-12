@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Anchor, MapPin, Clock, Info, Ship, X, Minus, Train, Bus, Car, ExternalLink } from 'lucide-react';
 import { City, Landmark, CruisePort, TransportOption } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
@@ -288,202 +289,210 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
           )}
         </div>
 
-      <div className="space-y-3">
-        {/* Port Name */}
-        <div className="flex items-start gap-2">
-          <Anchor className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">{t('portName', selectedLanguage)}</p>
-            <p className="text-sm font-semibold" data-testid="text-port-name">{portName}</p>
-          </div>
-        </div>
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="overview" data-testid="tab-overview">{t('overview', selectedLanguage)}</TabsTrigger>
+            <TabsTrigger value="transport" data-testid="tab-transport">{t('transport', selectedLanguage)}</TabsTrigger>
+            <TabsTrigger value="tips" data-testid="tab-tips">{t('tipsTab', selectedLanguage)}</TabsTrigger>
+          </TabsList>
 
-        {/* Distance */}
-        {distanceFromCity && (
-          <div className="flex items-start gap-2">
-            <MapPin className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">{t('distanceFromCity', selectedLanguage)}</p>
-              <p className="text-sm" data-testid="text-port-distance">{distanceFromCity}</p>
+          <TabsContent value="overview" className="space-y-3 mt-3">
+            {/* Port Name */}
+            <div className="flex items-start gap-2">
+              <Anchor className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">{t('portName', selectedLanguage)}</p>
+                <p className="text-sm font-semibold" data-testid="text-port-name">{portName}</p>
+              </div>
             </div>
-          </div>
-        )}
 
-        {/* Recommended Duration */}
-        {recommendedDuration && (
-          <div className="flex items-start gap-2">
-            <Clock className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">{t('recommendedDuration', selectedLanguage)}</p>
-              <p className="text-sm" data-testid="text-port-duration">{recommendedDuration}</p>
-            </div>
-          </div>
-        )}
+            {/* Distance */}
+            {distanceFromCity && (
+              <div className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">{t('distanceFromCity', selectedLanguage)}</p>
+                  <p className="text-sm" data-testid="text-port-distance">{distanceFromCity}</p>
+                </div>
+              </div>
+            )}
 
-        {/* Recommended Sites */}
-        {recommendedLandmarks.length > 0 && (
-          <div>
-            <p className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-1">
-              <Info className="w-4 h-4" />
-              {t('recommendedSites', selectedLanguage)}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {recommendedLandmarks.map(landmark => (
-                <Button
-                  key={landmark.id}
-                  variant="outline"
-                  size="sm"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleLandmarkClick(landmark.id);
-                  }}
-                  className="text-xs hover-elevate"
-                  data-testid={`button-recommended-${landmark.id}`}
-                >
-                  {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                </Button>
-              ))}
-            </div>
-          </div>
-        )}
+            {/* Recommended Duration */}
+            {recommendedDuration && (
+              <div className="flex items-start gap-2">
+                <Clock className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">{t('recommendedDuration', selectedLanguage)}</p>
+                  <p className="text-sm" data-testid="text-port-duration">{recommendedDuration}</p>
+                </div>
+              </div>
+            )}
 
-        {/* Tips */}
-        {tips && (
-          <div className="mt-3 p-3 bg-blue-100/50 dark:bg-blue-900/20 rounded-md">
-            <p className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-1">
-              {t('tips', selectedLanguage)}
-            </p>
-            <p className="text-sm text-blue-800 dark:text-blue-200" data-testid="text-port-tips">
-              {tips}
-            </p>
-          </div>
-        )}
+            {/* Recommended Sites */}
+            {recommendedLandmarks.length > 0 && (
+              <div>
+                <p className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-1">
+                  <Info className="w-4 h-4" />
+                  {t('recommendedSites', selectedLanguage)}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {recommendedLandmarks.map(landmark => (
+                    <Button
+                      key={landmark.id}
+                      variant="outline"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLandmarkClick(landmark.id);
+                      }}
+                      className="text-xs hover-elevate"
+                      data-testid={`button-recommended-${landmark.id}`}
+                    >
+                      {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </TabsContent>
 
-        {/* Transportation Options */}
-        {cruisePort.transportOptions && cruisePort.transportOptions.length > 0 && (
-          <div className="mt-4">
-            <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-              <Car className="w-4 h-4" />
-              {t('transportOptions', selectedLanguage)}
-            </h4>
-            <div className="space-y-3">
-              {cruisePort.transportOptions.map((transport, index) => {
-                const Icon = getTransportIcon(transport.type);
-                const transportName = getTransportTranslation(transport, selectedLanguage, 'name');
-                const transportFrom = getTransportTranslation(transport, selectedLanguage, 'from');
-                const transportTo = getTransportTranslation(transport, selectedLanguage, 'to');
-                const transportDuration = getTransportTranslation(transport, selectedLanguage, 'duration');
-                const transportFrequency = getTransportTranslation(transport, selectedLanguage, 'frequency');
-                const transportPrice = getTransportTranslation(transport, selectedLanguage, 'price');
-                const transportTips = getTransportTranslation(transport, selectedLanguage, 'tips');
+          <TabsContent value="transport" className="space-y-3 mt-3">
+            {cruisePort.transportOptions && cruisePort.transportOptions.length > 0 ? (
+              <div className="space-y-3">
+                {cruisePort.transportOptions.map((transport, index) => {
+                  const Icon = getTransportIcon(transport.type);
+                  const transportName = getTransportTranslation(transport, selectedLanguage, 'name');
+                  const transportFrom = getTransportTranslation(transport, selectedLanguage, 'from');
+                  const transportTo = getTransportTranslation(transport, selectedLanguage, 'to');
+                  const transportDuration = getTransportTranslation(transport, selectedLanguage, 'duration');
+                  const transportFrequency = getTransportTranslation(transport, selectedLanguage, 'frequency');
+                  const transportPrice = getTransportTranslation(transport, selectedLanguage, 'price');
+                  const transportTips = getTransportTranslation(transport, selectedLanguage, 'tips');
 
-                return (
-                  <Card key={index} className="p-3 bg-white/50 dark:bg-gray-800/50">
-                    <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
-                        <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <div className="flex-1 space-y-2">
-                        <div>
-                          <p className="font-semibold text-sm">{transportName}</p>
-                          {transportFrom && transportTo && (
-                            <p className="text-xs text-muted-foreground">
-                              {transportFrom} → {transportTo}
-                            </p>
-                          )}
+                  return (
+                    <Card key={index} className="p-3 bg-white/50 dark:bg-gray-800/50">
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                          <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                         </div>
-                        
-                        <div className="grid grid-cols-2 gap-2 text-xs">
-                          {transportDuration && (
-                            <div>
-                              <span className="text-muted-foreground">{t('duration', selectedLanguage)}:</span>
-                              <span className="ml-1 font-medium">{transportDuration}</span>
-                            </div>
-                          )}
-                          {transportPrice && (
-                            <div>
-                              <span className="text-muted-foreground">{t('price', selectedLanguage)}:</span>
-                              <span className="ml-1 font-medium">{transportPrice}</span>
-                            </div>
-                          )}
-                          {transportFrequency && (
-                            <div className="col-span-2">
-                              <span className="text-muted-foreground">{t('frequency', selectedLanguage)}:</span>
-                              <span className="ml-1">{transportFrequency}</span>
-                            </div>
-                          )}
-                        </div>
+                        <div className="flex-1 space-y-2">
+                          <div>
+                            <p className="font-semibold text-sm">{transportName}</p>
+                            {transportFrom && transportTo && (
+                              <p className="text-xs text-muted-foreground">
+                                {transportFrom} → {transportTo}
+                              </p>
+                            )}
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-2 text-xs">
+                            {transportDuration && (
+                              <div>
+                                <span className="text-muted-foreground">{t('duration', selectedLanguage)}:</span>
+                                <span className="ml-1 font-medium">{transportDuration}</span>
+                              </div>
+                            )}
+                            {transportPrice && (
+                              <div>
+                                <span className="text-muted-foreground">{t('price', selectedLanguage)}:</span>
+                                <span className="ml-1 font-medium">{transportPrice}</span>
+                              </div>
+                            )}
+                            {transportFrequency && (
+                              <div className="col-span-2">
+                                <span className="text-muted-foreground">{t('frequency', selectedLanguage)}:</span>
+                                <span className="ml-1">{transportFrequency}</span>
+                              </div>
+                            )}
+                          </div>
 
-                        {transportTips && (
-                          <p className="text-xs text-muted-foreground italic">{transportTips}</p>
-                        )}
+                          {transportTips && (
+                            <p className="text-xs text-muted-foreground italic">{transportTips}</p>
+                          )}
 
-                        <div className="flex gap-2 pt-1">
-                          {transport.type === 'rideshare' && cruisePort.portCoordinates && (
-                            <>
+                          <div className="flex gap-2 pt-1">
+                            {transport.type === 'rideshare' && cruisePort.portCoordinates && (
+                              <>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${city.lat}&dropoff[longitude]=${city.lng}`;
+                                    const fallbackUrl = `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${city.lat}&dropoff[longitude]=${city.lng}`;
+                                    window.open(uberUrl, '_blank', 'noopener,noreferrer');
+                                    setTimeout(() => {
+                                      window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+                                    }, 1000);
+                                  }}
+                                  className="text-xs flex items-center gap-1"
+                                  data-testid="button-open-uber"
+                                >
+                                  <Car className="w-3 h-3" />
+                                  {t('openInUber', selectedLanguage)}
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    const boltUrl = `bolt://riderequest?pickup=my_location&destination=${city.lat},${city.lng}`;
+                                    const fallbackUrl = `https://bolt.eu`;
+                                    window.open(boltUrl, '_blank', 'noopener,noreferrer');
+                                    setTimeout(() => {
+                                      window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+                                    }, 1000);
+                                  }}
+                                  className="text-xs flex items-center gap-1"
+                                  data-testid="button-open-bolt"
+                                >
+                                  <Car className="w-3 h-3" />
+                                  {t('openInBolt', selectedLanguage)}
+                                </Button>
+                              </>
+                            )}
+                            {transport.bookingUrl && (
                               <Button
                                 size="sm"
-                                variant="outline"
+                                variant="default"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${city.lat}&dropoff[longitude]=${city.lng}`;
-                                  const fallbackUrl = `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${city.lat}&dropoff[longitude]=${city.lng}`;
-                                  window.open(uberUrl, '_blank', 'noopener,noreferrer');
-                                  setTimeout(() => {
-                                    window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
-                                  }, 1000);
+                                  window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer');
                                 }}
                                 className="text-xs flex items-center gap-1"
-                                data-testid="button-open-uber"
+                                data-testid={`button-book-transport-${index}`}
                               >
-                                <Car className="w-3 h-3" />
-                                {t('openInUber', selectedLanguage)}
+                                <ExternalLink className="w-3 h-3" />
+                                {t('bookTransport', selectedLanguage)}
                               </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  const boltUrl = `bolt://riderequest?pickup=my_location&destination=${city.lat},${city.lng}`;
-                                  const fallbackUrl = `https://bolt.eu`;
-                                  window.open(boltUrl, '_blank', 'noopener,noreferrer');
-                                  setTimeout(() => {
-                                    window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
-                                  }, 1000);
-                                }}
-                                className="text-xs flex items-center gap-1"
-                                data-testid="button-open-bolt"
-                              >
-                                <Car className="w-3 h-3" />
-                                {t('openInBolt', selectedLanguage)}
-                              </Button>
-                            </>
-                          )}
-                          {transport.bookingUrl && (
-                            <Button
-                              size="sm"
-                              variant="default"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer');
-                              }}
-                              className="text-xs flex items-center gap-1"
-                              data-testid={`button-book-transport-${index}`}
-                            >
-                              <ExternalLink className="w-3 h-3" />
-                              {t('bookTransport', selectedLanguage)}
-                            </Button>
-                          )}
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        )}
-        </div>
+                    </Card>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">{t('transportOptions', selectedLanguage)}</p>
+            )}
+          </TabsContent>
+
+          <TabsContent value="tips" className="mt-3">
+            {tips ? (
+              <div className="p-3 bg-blue-100/50 dark:bg-blue-900/20 rounded-md">
+                <p className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-1">
+                  {t('tips', selectedLanguage)}
+                </p>
+                <p className="text-sm text-blue-800 dark:text-blue-200" data-testid="text-port-tips">
+                  {tips}
+                </p>
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">{t('tips', selectedLanguage)}</p>
+            )}
+          </TabsContent>
+        </Tabs>
       </Card>
     </div>
   );

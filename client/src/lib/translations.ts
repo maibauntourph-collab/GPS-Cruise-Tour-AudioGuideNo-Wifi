@@ -78,7 +78,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     to: 'To',
     duration: 'Duration',
     frequency: 'Frequency',
-    price: 'Price'
+    price: 'Price',
+    overview: 'Overview',
+    transport: 'Transport',
+    tipsTab: 'Tips'
   },
   ko: {
     landmarks: '명소',
@@ -131,7 +134,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     to: '도착',
     duration: '소요 시간',
     frequency: '운행 간격',
-    price: '요금'
+    price: '요금',
+    overview: '개요',
+    transport: '교통편',
+    tipsTab: '팁'
   },
   es: {
     landmarks: 'Monumentos',
@@ -317,7 +323,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     to: 'A',
     duration: 'Durata',
     frequency: 'Frequenza',
-    price: 'Prezzo'
+    price: 'Prezzo',
+    overview: 'Panoramica',
+    transport: 'Trasporto',
+    tipsTab: 'Consigli'
   },
   zh: {
     landmarks: '地标',
