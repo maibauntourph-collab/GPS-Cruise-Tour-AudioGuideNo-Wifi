@@ -244,21 +244,18 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
         top: '16px',
         right: '16px',
         zIndex,
+        cursor: isDragging ? 'grabbing' : 'grab',
         maxWidth: '24rem',
         userSelect: 'none',
         transform: `translate(${translate.x}px, ${translate.y}px)`
       }}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
       onClick={handleCardClick}
       data-testid="card-cruise-port-container"
     >
-      <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800 flex flex-col max-h-[calc(100vh-4rem)]" data-testid="card-cruise-port-info">
-        <div 
-          className="flex items-center gap-2 p-4 pb-3 flex-shrink-0" 
-          data-drag-handle
-          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-          onMouseDown={handleStart}
-          onTouchStart={handleStart}
-        >
+      <Card className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800" data-testid="card-cruise-port-info">
+        <div className="flex items-center gap-2 mb-3">
           <Ship className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           <h3 className="font-semibold text-lg text-blue-900 dark:text-blue-100 flex-1" data-testid="text-cruise-port-title">
             {t('cruisePortInfo', selectedLanguage)}
@@ -291,10 +288,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
           )}
         </div>
 
-      <div className="space-y-3 overflow-y-scroll flex-1 px-4 pb-4 min-h-0" style={{ 
-        scrollbarWidth: 'auto',
-        scrollbarColor: 'rgb(59 130 246 / 0.5) transparent'
-      }}>
+      <div className="space-y-3">
         {/* Port Name */}
         <div className="flex items-start gap-2">
           <Anchor className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />

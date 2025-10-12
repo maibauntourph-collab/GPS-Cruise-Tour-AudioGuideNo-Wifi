@@ -201,9 +201,9 @@ export function LandmarkList({
       onClick={handleCardClick}
       data-testid="card-landmarklist-container"
     >
-      <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl flex flex-col max-h-[calc(100vh-32px)]">
+      <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl max-h-80 overflow-y-auto">
         <div 
-          className="p-4 border-b flex items-center justify-between flex-shrink-0"
+          className="p-4 border-b flex items-center justify-between"
           data-drag-handle
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={handleStart}
@@ -229,10 +229,7 @@ export function LandmarkList({
             <Minus className="w-4 h-4" />
           </Button>
         </div>
-        <div className="divide-y overflow-y-scroll flex-1 min-h-0" style={{ 
-          scrollbarWidth: 'auto',
-          scrollbarColor: 'rgb(239 68 68 / 0.5) transparent'
-        }}>
+        <div className="divide-y">
           {sortedLandmarks.map(({ landmark, distance }) => (
             <div 
               key={landmark.id} 
