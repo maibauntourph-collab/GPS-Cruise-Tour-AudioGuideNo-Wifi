@@ -3,6 +3,23 @@ import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, j
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 
+// Cruise port schema for shore excursions
+export const cruisePortSchema = z.object({
+  portName: z.string(),
+  distanceFromCity: z.string().optional(), // e.g., "80km from Rome"
+  recommendedDuration: z.string().optional(), // e.g., "6-8 hours"
+  recommendedLandmarks: z.array(z.string()), // Array of landmark IDs
+  tips: z.string().optional(), // Travel tips for cruise passengers
+  translations: z.record(z.string(), z.object({
+    portName: z.string().optional(),
+    distanceFromCity: z.string().optional(),
+    recommendedDuration: z.string().optional(),
+    tips: z.string().optional(),
+  })).optional(),
+});
+
+export type CruisePort = z.infer<typeof cruisePortSchema>;
+
 // City schema
 export const citySchema = z.object({
   id: z.string(),
@@ -11,6 +28,7 @@ export const citySchema = z.object({
   lat: z.number(),
   lng: z.number(),
   zoom: z.number().default(14),
+  cruisePort: cruisePortSchema.optional(), // Optional cruise port information
 });
 
 export type City = z.infer<typeof citySchema>;

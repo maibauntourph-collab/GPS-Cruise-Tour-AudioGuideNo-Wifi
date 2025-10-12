@@ -22,7 +22,28 @@ const CITIES: City[] = [
     country: 'Italy',
     lat: 41.8902,
     lng: 12.4922,
-    zoom: 14
+    zoom: 14,
+    cruisePort: {
+      portName: 'Civitavecchia Port',
+      distanceFromCity: '80km from Rome',
+      recommendedDuration: '8-10 hours',
+      recommendedLandmarks: ['colosseum', 'vatican', 'trevi-fountain', 'pantheon', 'roman-forum'],
+      tips: 'Book a shore excursion in advance or take the train from Civitavecchia to Rome (80 minutes). Start early to see the main attractions. Consider skip-the-line tickets for the Vatican and Colosseum.',
+      translations: {
+        ko: {
+          portName: '치비타베키아 항구',
+          distanceFromCity: '로마에서 80km',
+          recommendedDuration: '8-10시간',
+          tips: '미리 기항지 관광을 예약하거나 치비타베키아에서 로마까지 기차를 이용하세요 (80분 소요). 주요 명소를 보려면 일찍 출발하세요. 바티칸과 콜로세움은 줄서기 패스 티켓을 고려하세요.'
+        },
+        it: {
+          portName: 'Porto di Civitavecchia',
+          distanceFromCity: '80km da Roma',
+          recommendedDuration: '8-10 ore',
+          tips: 'Prenota un\'escursione in anticipo o prendi il treno da Civitavecchia a Roma (80 minuti). Parti presto per vedere le principali attrazioni. Considera i biglietti salta fila per il Vaticano e il Colosseo.'
+        }
+      }
+    }
   },
   {
     id: 'paris',
@@ -62,7 +83,28 @@ const CITIES: City[] = [
     country: 'Spain',
     lat: 41.3851,
     lng: 2.1734,
-    zoom: 13
+    zoom: 13,
+    cruisePort: {
+      portName: 'Port of Barcelona',
+      distanceFromCity: 'Right in the city center',
+      recommendedDuration: '6-8 hours',
+      recommendedLandmarks: ['sagrada-familia', 'park-guell', 'gothic-quarter'],
+      tips: 'The cruise port is very close to Las Ramblas and the Gothic Quarter. Use the shuttle bus or taxi to reach Sagrada Familia. Buy tickets online in advance to avoid long queues.',
+      translations: {
+        ko: {
+          portName: '바르셀로나 항구',
+          distanceFromCity: '도심 바로 근처',
+          recommendedDuration: '6-8시간',
+          tips: '크루즈 항구는 람블라스 거리와 고딕 지구에서 매우 가깝습니다. 셔틀버스나 택시를 이용하여 사그라다 파밀리아에 도달하세요. 긴 줄을 피하려면 온라인으로 미리 티켓을 구매하세요.'
+        },
+        it: {
+          portName: 'Porto di Barcellona',
+          distanceFromCity: 'Proprio nel centro città',
+          recommendedDuration: '6-8 ore',
+          tips: 'Il porto delle crociere è molto vicino a Las Ramblas e al Quartiere Gotico. Usa il bus navetta o il taxi per raggiungere la Sagrada Familia. Acquista i biglietti online in anticipo per evitare lunghe code.'
+        }
+      }
+    }
   },
   {
     id: 'brussels',
@@ -102,7 +144,28 @@ const CITIES: City[] = [
     country: 'Sweden',
     lat: 59.3293,
     lng: 18.0686,
-    zoom: 13
+    zoom: 13,
+    cruisePort: {
+      portName: 'Stockholm Cruise Terminal',
+      distanceFromCity: 'In the city center',
+      recommendedDuration: '6-8 hours',
+      recommendedLandmarks: ['vasa-museum', 'gamla-stan', 'royal-palace-stockholm'],
+      tips: 'The cruise port is centrally located. Walk to Gamla Stan (Old Town) or take a short ferry to visit museums. The hop-on-hop-off boat tour is a great option for cruise passengers.',
+      translations: {
+        ko: {
+          portName: '스톡홀름 크루즈 터미널',
+          distanceFromCity: '도심',
+          recommendedDuration: '6-8시간',
+          tips: '크루즈 항구는 중심부에 위치해 있습니다. 감라 스탄(구시가지)까지 걸어가거나 박물관 방문을 위해 짧은 페리를 이용하세요. 홉온홉오프 보트 투어는 크루즈 승객에게 훌륭한 옵션입니다.'
+        },
+        it: {
+          portName: 'Terminal Crociere di Stoccolma',
+          distanceFromCity: 'Nel centro città',
+          recommendedDuration: '6-8 ore',
+          tips: 'Il porto delle crociere è situato centralmente. Cammina fino a Gamla Stan (Città Vecchia) o prendi un breve traghetto per visitare i musei. Il tour in barca hop-on-hop-off è un\'ottima opzione per i passeggeri delle crociere.'
+        }
+      }
+    }
   },
   {
     id: 'copenhagen',
@@ -110,7 +173,28 @@ const CITIES: City[] = [
     country: 'Denmark',
     lat: 55.6761,
     lng: 12.5683,
-    zoom: 13
+    zoom: 13,
+    cruisePort: {
+      portName: 'Copenhagen Cruise Terminal',
+      distanceFromCity: 'Walking distance to city center',
+      recommendedDuration: '6-8 hours',
+      recommendedLandmarks: ['tivoli-gardens', 'nyhavn', 'little-mermaid'],
+      tips: 'The cruise terminal is within walking distance of Nyhavn and the Little Mermaid. Rent a bike to explore like a local or take a canal tour to see the city from the water.',
+      translations: {
+        ko: {
+          portName: '코펜하겐 크루즈 터미널',
+          distanceFromCity: '도심까지 도보 거리',
+          recommendedDuration: '6-8시간',
+          tips: '크루즈 터미널은 뉘하운과 인어공주 동상까지 도보 거리에 있습니다. 현지인처럼 자전거를 빌려 탐험하거나 운하 투어를 통해 물에서 도시를 보세요.'
+        },
+        it: {
+          portName: 'Terminal Crociere di Copenaghen',
+          distanceFromCity: 'A piedi dal centro città',
+          recommendedDuration: '6-8 ore',
+          tips: 'Il terminal delle crociere è a poca distanza a piedi da Nyhavn e dalla Sirenetta. Noleggia una bici per esplorare come un locale o fai un tour dei canali per vedere la città dall\'acqua.'
+        }
+      }
+    }
   },
   {
     id: 'oslo',
@@ -134,7 +218,28 @@ const CITIES: City[] = [
     country: 'Singapore',
     lat: 1.2897,
     lng: 103.8501,
-    zoom: 13
+    zoom: 13,
+    cruisePort: {
+      portName: 'Marina Bay Cruise Centre',
+      distanceFromCity: 'In the city',
+      recommendedDuration: '6-8 hours',
+      recommendedLandmarks: ['merlion', 'marina-bay-sands', 'gardens-by-the-bay', 'singapore-flyer', 'chinatown-sg'],
+      tips: 'The cruise terminal is near Marina Bay. Gardens by the Bay and the Merlion are within walking distance. Use the MRT (subway) for efficient travel. Visit Chinatown or Little India for cultural experiences.',
+      translations: {
+        ko: {
+          portName: '마리나 베이 크루즈 센터',
+          distanceFromCity: '도심',
+          recommendedDuration: '6-8시간',
+          tips: '크루즈 터미널은 마리나 베이 근처에 있습니다. 가든스 바이 더 베이와 멀라이언은 도보 거리에 있습니다. 효율적인 이동을 위해 MRT(지하철)를 이용하세요. 문화 체험을 위해 차이나타운이나 리틀 인디아를 방문하세요.'
+        },
+        it: {
+          portName: 'Marina Bay Cruise Centre',
+          distanceFromCity: 'In città',
+          recommendedDuration: '6-8 ore',
+          tips: 'Il terminal delle crociere è vicino a Marina Bay. Gardens by the Bay e il Merlion sono raggiungibili a piedi. Usa la MRT (metropolitana) per viaggiare in modo efficiente. Visita Chinatown o Little India per esperienze culturali.'
+        }
+      }
+    }
   },
   {
     id: 'penang',
@@ -739,6 +844,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Vatican Museums',
         narration: 'Welcome to the Vatican Museums, one of the greatest art collections in the world. Founded by Pope Julius II in the 16th century, these museums display works from the immense collection amassed by the Catholic Church and the papacy throughout the centuries.',
         description: 'One of the largest and most impressive art museums in the world',
+        detailedDescription: 'The Vatican Museums represent one of humanity\'s greatest treasure troves of art and history, housing an incomparable collection that spans over 5,000 years of human creativity. Located within Vatican City, the world\'s smallest independent state, these museums comprise 54 separate galleries containing approximately 70,000 works, of which 20,000 are on display. The museums attract over 6 million visitors annually, making them one of the most visited museum complexes in the world. The origins of the Vatican Museums date to 1506, when Pope Julius II purchased the ancient marble sculpture "Laocoön and His Sons," discovered in a Roman vineyard. This acquisition marked the beginning of what would become one of the world\'s most extraordinary art collections. Over the centuries, successive popes continued to expand the collection, commissioning new works and acquiring existing masterpieces, transforming the papal palaces into a vast repository of human artistic achievement. The museums\' most famous attraction is undoubtedly the Sistine Chapel, featuring Michelangelo\'s breathtaking ceiling frescoes (1508-1512) and his monumental "Last Judgment" (1536-1541) on the altar wall. The ceiling\'s iconic "Creation of Adam," with God\'s finger nearly touching Adam\'s, has become one of the most recognizable images in art history. Michelangelo painted the ceiling while lying on his back on scaffolding, a physically grueling task that took four years to complete and left him with permanent neck problems. The Raphael Rooms (Stanze di Raffaello) represent another highlight, featuring four rooms decorated with frescoes by Raphael and his students between 1508 and 1524. The "School of Athens" in the Stanza della Segnatura is particularly celebrated, depicting the greatest philosophers and scientists of antiquity in an idealized architectural setting. Raphael cleverly included portraits of his contemporaries: Plato bears the features of Leonardo da Vinci, while the brooding figure of Heraclitus is believed to be Michelangelo.',
         historicalInfo: 'The Vatican Museums originated from a sculpture collection begun by Pope Julius II in the 16th century and have grown to include works from the Renaissance masters and ancient civilizations.',
         yearBuilt: '1506',
         architect: 'Various popes and architects'
@@ -747,6 +853,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Musei Vaticani',
         narration: 'Benvenuti ai Musei Vaticani, una delle più grandi collezioni d\'arte del mondo. Fondati da Papa Giulio II nel XVI secolo, questi musei espongono opere dell\'immensa collezione accumulata dalla Chiesa cattolica e dal papato nel corso dei secoli.',
         description: 'Uno dei musei d\'arte più grandi e impressionanti del mondo',
+        detailedDescription: 'I Musei Vaticani rappresentano uno dei più grandi tesori d\'arte e storia dell\'umanità, ospitando una collezione incomparabile che abbraccia oltre 5.000 anni di creatività umana. Situati all\'interno della Città del Vaticano, lo stato indipendente più piccolo del mondo, questi musei comprendono 54 gallerie separate contenenti circa 70.000 opere, di cui 20.000 sono esposte. I musei attraggono oltre 6 milioni di visitatori all\'anno, rendendoli uno dei complessi museali più visitati al mondo. Le origini dei Musei Vaticani risalgono al 1506, quando Papa Giulio II acquistò l\'antica scultura in marmo "Laocoonte e i suoi figli," scoperta in un vigneto romano. Questa acquisizione segnò l\'inizio di quella che sarebbe diventata una delle collezioni d\'arte più straordinarie del mondo. Nei secoli, i successivi papi continuarono ad espandere la collezione, commissionando nuove opere e acquisendo capolavori esistenti, trasformando i palazzi papali in un vasto deposito del patrimonio artistico umano. L\'attrazione più famosa dei musei è indubbiamente la Cappella Sistina, con gli affreschi mozzafiato del soffitto di Michelangelo (1508-1512) e il suo monumentale "Giudizio Universale" (1536-1541) sulla parete dell\'altare. L\'iconica "Creazione di Adamo" del soffitto, con il dito di Dio che quasi tocca quello di Adamo, è diventata una delle immagini più riconoscibili nella storia dell\'arte. Michelangelo dipinse il soffitto sdraiato sulla schiena su un\'impalcatura, un compito fisicamente estenuante che richiese quattro anni per essere completato e gli lasciò problemi permanenti al collo. Le Stanze di Raffaello rappresentano un altro punto culminante, con quattro stanze decorate con affreschi di Raffaello e dei suoi studenti tra il 1508 e il 1524. "La Scuola di Atene" nella Stanza della Segnatura è particolarmente celebrata, raffigurando i più grandi filosofi e scienziati dell\'antichità in un ambiente architettonico idealizzato. Raffaello includeva astutamente ritratti dei suoi contemporanei: Platone porta le fattezze di Leonardo da Vinci, mentre la figura meditabonda di Eraclito si ritiene sia Michelangelo.',
         historicalInfo: 'I Musei Vaticani hanno origine da una collezione di sculture iniziata da Papa Giulio II nel XVI secolo e sono cresciuti fino a includere opere dei maestri del Rinascimento e delle civiltà antiche.',
         yearBuilt: '1506',
         architect: 'Vari papi e architetti'
@@ -755,6 +862,7 @@ const LANDMARKS: Landmark[] = [
         name: '바티칸 박물관',
         narration: '세계에서 가장 위대한 미술 컬렉션 중 하나인 바티칸 박물관에 오신 것을 환영합니다. 16세기 교황 율리오 2세에 의해 설립된 이 박물관들은 수세기에 걸쳐 가톨릭 교회와 교황청이 수집한 방대한 컬렉션의 작품들을 전시하고 있습니다.',
         description: '세계에서 가장 크고 인상적인 미술관 중 하나',
+        detailedDescription: '바티칸 박물관은 5,000년 이상의 인류 창의성을 아우르는 비할 데 없는 컬렉션을 보유한 인류 최고의 예술과 역사의 보고입니다. 세계에서 가장 작은 독립 국가인 바티칸 시국 내에 위치한 이 박물관은 약 70,000점의 작품을 보유한 54개의 개별 갤러리로 구성되어 있으며, 그 중 20,000점이 전시되어 있습니다. 박물관은 연간 600만 명 이상의 방문객을 끌어들이며 세계에서 가장 많이 방문하는 박물관 복합체 중 하나입니다. 바티칸 박물관의 기원은 1506년 교황 율리오 2세가 로마 포도밭에서 발견된 고대 대리석 조각 "라오콘과 그의 아들들"을 구입한 때로 거슬러 올라갑니다. 이 획득은 세계에서 가장 특별한 미술 컬렉션이 될 것의 시작을 알렸습니다. 수세기 동안 역대 교황들은 새로운 작품을 의뢰하고 기존 걸작을 수집하면서 컬렉션을 계속 확장하여 교황청 궁전을 인류 예술적 성취의 방대한 보고로 변모시켰습니다. 박물관의 가장 유명한 명소는 의심할 여지 없이 미켈란젤로의 숨막히는 천장 프레스코화(1508-1512)와 제단 벽의 기념비적인 "최후의 심판"(1536-1541)을 특징으로 하는 시스티나 성당입니다. 천장의 상징적인 "아담의 창조"는 하나님의 손가락이 아담의 손가락에 거의 닿는 모습으로 미술사에서 가장 잘 알려진 이미지 중 하나가 되었습니다. 미켈란젤로는 비계 위에 등을 대고 누워서 천장을 그렸는데, 이는 4년이 걸린 육체적으로 고된 작업이었고 그에게 영구적인 목 문제를 남겼습니다. 라파엘로의 방(Stanze di Raffaello)은 1508년과 1524년 사이에 라파엘로와 그의 제자들이 프레스코화로 장식한 4개의 방을 특징으로 하는 또 다른 하이라이트입니다. Stanza della Segnatura의 "아테네 학당"은 고대의 가장 위대한 철학자와 과학자들을 이상화된 건축 환경에 묘사한 것으로 특히 유명합니다. 라파엘로는 영리하게 동시대인들의 초상화를 포함시켰습니다: 플라톤은 레오나르도 다 빈치의 모습을 하고 있으며, 명상에 잠긴 헤라클레이토스의 모습은 미켈란젤로로 여겨집니다.',
         historicalInfo: '바티칸 박물관은 16세기 교황 율리오 2세가 시작한 조각 컬렉션에서 유래했으며, 르네상스 거장들과 고대 문명의 작품들을 포함하도록 성장했습니다.',
         yearBuilt: '1506년',
         architect: '다양한 교황과 건축가들'
@@ -5171,6 +5279,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Vatican Museums Night Tour',
         narration: 'Experience the Vatican Museums like never before on this exclusive after-hours tour. Explore the galleries and Sistine Chapel without the daytime crowds.',
         description: 'Exclusive after-hours tour of Vatican Museums',
+        detailedDescription: 'The Vatican Museums Night Tour offers a once-in-a-lifetime opportunity to explore one of the world\'s greatest art collections in an intimate setting. Available on select Friday evenings, this exclusive experience allows visitors to wander through the magnificent galleries, marvel at the Raphael Rooms, and stand in awe beneath Michelangelo\'s Sistine Chapel ceiling without the usual crowds. The tour includes expert guides who bring the artworks to life with fascinating stories and historical insights. The atmospheric evening lighting creates a magical ambiance, transforming familiar masterpieces and revealing details often missed during busy daytime visits.',
         historicalInfo: 'Night tours began in 2000 to offer visitors a more intimate experience of the Vatican\'s treasures.',
         yearBuilt: '2000',
         architect: 'Vatican Museums Administration'
@@ -5179,6 +5288,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Tour Notturno dei Musei Vaticani',
         narration: 'Vivi i Musei Vaticani come mai prima d\'ora con questo tour esclusivo dopo l\'orario di chiusura. Esplora le gallerie e la Cappella Sistina senza le folle diurne.',
         description: 'Tour esclusivo dopo l\'orario dei Musei Vaticani',
+        detailedDescription: 'Il Tour Notturno dei Musei Vaticani offre un\'opportunità unica di esplorare una delle più grandi collezioni d\'arte del mondo in un ambiente intimo. Disponibile in selezionate serate del venerdì, questa esperienza esclusiva permette ai visitatori di passeggiare attraverso le magnifiche gallerie, ammirare le Stanze di Raffaello e rimanere in ammirazione sotto il soffitto della Cappella Sistina di Michelangelo senza le solite folle. Il tour include guide esperte che danno vita alle opere d\'arte con storie affascinanti e approfondimenti storici. L\'illuminazione serale atmosferica crea un\'atmosfera magica, trasformando capolavori familiari e rivelando dettagli spesso persi durante le visite diurne affollate.',
         historicalInfo: 'I tour notturni sono iniziati nel 2000 per offrire ai visitatori un\'esperienza più intima dei tesori del Vaticano.',
         yearBuilt: '2000',
         architect: 'Amministrazione dei Musei Vaticani'
@@ -5187,6 +5297,7 @@ const LANDMARKS: Landmark[] = [
         name: '바티칸 박물관 야간 투어',
         narration: '이 독점 야간 투어로 바티칸 박물관을 전혀 새로운 방식으로 경험하세요. 낮의 인파 없이 갤러리와 시스티나 성당을 탐험하세요.',
         description: '바티칸 박물관 독점 야간 투어',
+        detailedDescription: '바티칸 박물관 야간 투어는 세계 최고의 예술 컬렉션 중 하나를 친밀한 환경에서 탐험할 수 있는 일생일대의 기회를 제공합니다. 특정 금요일 저녁에 제공되는 이 독점 경험을 통해 방문객들은 화려한 갤러리를 산책하고, 라파엘로의 방을 감상하며, 평소 인파 없이 미켈란젤로의 시스티나 성당 천장 아래에서 경외감을 느낄 수 있습니다. 투어에는 매혹적인 이야기와 역사적 통찰력으로 예술 작품을 생생하게 전달하는 전문 가이드가 포함됩니다. 분위기 있는 저녁 조명은 마법 같은 분위기를 조성하여 익숙한 걸작을 변화시키고 혼잡한 낮 방문 시 자주 놓치는 세부 사항을 드러냅니다.',
         historicalInfo: '야간 투어는 2000년부터 시작되어 방문객들에게 바티칸 보물에 대한 보다 친밀한 경험을 제공합니다.',
         yearBuilt: '2000',
         architect: '바티칸 박물관 관리국'
@@ -5221,6 +5332,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Traditional Roman Food Tour',
         narration: 'Discover the authentic flavors of Rome on this guided food tour through Trastevere and Jewish Ghetto. Taste traditional dishes and learn about Roman culinary history.',
         description: 'Guided tour of Rome\'s traditional cuisine and food culture',
+        detailedDescription: 'This immersive food tour takes you through Rome\'s most authentic neighborhoods to discover the city\'s rich culinary traditions. Led by local food experts, you\'ll visit family-run trattorias, historic bakeries, and artisan food shops in Trastevere and the Jewish Ghetto. Sample traditional Roman dishes like carbonara, cacio e pepe, supplì, and Jewish-Roman specialties like carciofi alla giudia (Jewish-style artichokes). Learn about the history behind each dish, meet passionate local producers, and discover hidden culinary gems that most tourists never find. The tour includes tastings at 5-6 venues, enough food for a full meal.',
         historicalInfo: 'Roman cuisine has roots dating back to ancient times, with many traditional recipes passed down through generations.',
         yearBuilt: 'Ancient tradition',
         architect: 'Roman culinary heritage'
@@ -5229,6 +5341,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Tour Gastronomico Tradizionale Romano',
         narration: 'Scopri i sapori autentici di Roma in questo tour gastronomico guidato attraverso Trastevere e il Ghetto Ebraico. Assaggia piatti tradizionali e impara la storia culinaria romana.',
         description: 'Tour guidato della cucina tradizionale e della cultura gastronomica romana',
+        detailedDescription: 'Questo tour gastronomico immersivo ti porta attraverso i quartieri più autentici di Roma per scoprire le ricche tradizioni culinarie della città. Guidato da esperti gastronomici locali, visiterai trattorie a conduzione familiare, panifici storici e negozi di alimentari artigianali a Trastevere e nel Ghetto Ebraico. Assaggia piatti tradizionali romani come carbonara, cacio e pepe, supplì e specialità giudaico-romane come i carciofi alla giudia. Scopri la storia dietro ogni piatto, incontra produttori locali appassionati e scopri gemme culinarie nascoste che la maggior parte dei turisti non trova mai. Il tour include degustazioni in 5-6 locali, cibo sufficiente per un pasto completo.',
         historicalInfo: 'La cucina romana ha radici che risalgono ai tempi antichi, con molte ricette tradizionali tramandate di generazione in generazione.',
         yearBuilt: 'Tradizione antica',
         architect: 'Patrimonio culinario romano'
@@ -5237,6 +5350,7 @@ const LANDMARKS: Landmark[] = [
         name: '전통 로마 음식 투어',
         narration: '트라스테베레와 유대인 게토를 통한 이 가이드 음식 투어에서 로마의 진정한 맛을 발견하세요. 전통 요리를 맛보고 로마 요리 역사를 배우세요.',
         description: '로마의 전통 요리와 음식 문화 가이드 투어',
+        detailedDescription: '이 몰입형 음식 투어는 로마의 가장 진정한 동네를 통해 도시의 풍부한 요리 전통을 발견합니다. 현지 음식 전문가가 이끄는 이 투어에서 트라스테베레와 유대인 게토의 가족 운영 트라토리아, 역사적인 베이커리, 장인 식품 가게를 방문합니다. 카르보나라, 카치오 에 페페, 수플리와 같은 전통 로마 요리와 카르치오피 알라 주디아(유대식 아티초크)와 같은 유대-로마 특선 요리를 맛보세요. 각 요리의 역사를 배우고, 열정적인 현지 생산자를 만나며, 대부분의 관광객이 찾지 못하는 숨겨진 요리 보석을 발견하세요. 투어에는 5-6개 장소에서의 시식이 포함되어 있으며, 한 끼 식사로 충분한 양입니다.',
         historicalInfo: '로마 요리는 고대 시대로 거슬러 올라가는 뿌리를 가지고 있으며, 많은 전통 레시피가 세대를 거쳐 전해져 내려옵니다.',
         yearBuilt: '고대 전통',
         architect: '로마 요리 유산'
@@ -5271,6 +5385,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Seine River Dinner Cruise',
         narration: 'Experience Paris from the water on this romantic Seine River dinner cruise. Enjoy gourmet French cuisine while gliding past illuminated landmarks.',
         description: 'Romantic dinner cruise along the Seine River',
+        detailedDescription: 'A Seine River dinner cruise offers one of the most romantic and memorable ways to experience Paris. Glide along the historic river aboard an elegant glass-enclosed boat, enjoying a multi-course gourmet French meal prepared by skilled chefs. As you dine, watch the City of Light\'s most famous landmarks pass by - the Eiffel Tower sparkling on the hour, Notre-Dame Cathedral, the Louvre, and charming riverside buildings bathed in golden light. Live music creates an enchanting atmosphere as the boat travels from the Eiffel Tower to Île Saint-Louis and back. Choose from lunch, afternoon, or evening cruises, with the sunset and nighttime departures being particularly magical.',
         historicalInfo: 'Seine River cruises have been a Parisian tradition since the 1860s, offering unique perspectives of the city.',
         yearBuilt: '1860s',
         architect: 'Various cruise operators'
@@ -5279,6 +5394,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Crociera con Cena sulla Senna',
         narration: 'Vivi Parigi dall\'acqua in questa romantica crociera con cena sulla Senna. Gusta la cucina francese gourmet mentre scivoli accanto ai monumenti illuminati.',
         description: 'Romantica crociera con cena lungo la Senna',
+        detailedDescription: 'Una crociera con cena sulla Senna offre uno dei modi più romantici e memorabili per vivere Parigi. Scivola lungo il fiume storico a bordo di un\'elegante barca chiusa in vetro, gustando un pasto gourmet francese multi-portata preparato da chef esperti. Mentre ceni, guarda i monumenti più famosi della Città della Luce passare - la Torre Eiffel che brilla ogni ora, la Cattedrale di Notre-Dame, il Louvre e affascinanti edifici lungo il fiume immersi nella luce dorata. La musica dal vivo crea un\'atmosfera incantevole mentre la barca viaggia dalla Torre Eiffel all\'Île Saint-Louis e ritorno. Scegli tra crociere a pranzo, pomeriggio o sera, con le partenze al tramonto e notturne particolarmente magiche.',
         historicalInfo: 'Le crociere sulla Senna sono una tradizione parigina dal 1860, offrendo prospettive uniche della città.',
         yearBuilt: '1860',
         architect: 'Vari operatori di crociera'
@@ -5287,6 +5403,7 @@ const LANDMARKS: Landmark[] = [
         name: '센 강 디너 크루즈',
         narration: '이 낭만적인 센 강 디너 크루즈에서 물 위에서 파리를 경험하세요. 조명이 켜진 랜드마크를 지나며 프랑스 고급 요리를 즐기세요.',
         description: '센 강을 따라 낭만적인 디너 크루즈',
+        detailedDescription: '센 강 디너 크루즈는 파리를 경험하는 가장 낭만적이고 기억에 남는 방법 중 하나입니다. 우아한 유리로 둘러싸인 보트를 타고 역사적인 강을 따라 미끄러지며, 숙련된 셰프가 준비한 여러 코스의 프랑스 고급 식사를 즐기세요. 식사를 하는 동안 빛의 도시의 가장 유명한 랜드마크가 지나가는 것을 지켜보세요 - 매시간 반짝이는 에펠탑, 노트르담 대성당, 루브르 박물관, 그리고 황금빛에 물든 매력적인 강변 건물들. 라이브 음악이 매혹적인 분위기를 조성하며 보트는 에펠탑에서 생루이 섬까지 왕복합니다. 점심, 오후 또는 저녁 크루즈 중에서 선택할 수 있으며, 일몰과 야간 출발이 특히 마법 같습니다.',
         historicalInfo: '센 강 크루즈는 1860년대부터 파리의 전통이 되어 왔으며 도시의 독특한 전망을 제공합니다.',
         yearBuilt: '1860년대',
         architect: '다양한 크루즈 운영사'
@@ -5321,6 +5438,7 @@ const LANDMARKS: Landmark[] = [
         name: 'French Wine Tasting Experience',
         narration: 'Discover the art of French wine at this guided tasting experience. Learn about different regions and varietals while sampling premium wines.',
         description: 'Guided French wine tasting with expert sommelier',
+        detailedDescription: 'This sophisticated wine tasting experience introduces you to the rich diversity of French wines. Led by a certified sommelier, you\'ll learn to identify different grape varieties, understand terroir, and develop your palate. The session typically includes 5-7 carefully selected wines from major French regions including Bordeaux, Burgundy, Champagne, Loire Valley, and Rhône. Your expert guide will teach you proper tasting techniques, discuss the history and characteristics of each region, and pair the wines with French cheeses and charcuterie. Whether you\'re a beginner or enthusiast, this experience provides valuable insights into French wine culture. Held in intimate wine cellars or elegant tasting rooms in central Paris.',
         historicalInfo: 'France has over 2000 years of winemaking history and produces some of the world\'s finest wines.',
         yearBuilt: 'Ancient tradition',
         architect: 'French viticulture'
@@ -5329,6 +5447,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Esperienza di Degustazione Vini Francesi',
         narration: 'Scopri l\'arte del vino francese in questa esperienza di degustazione guidata. Impara le diverse regioni e varietà mentre assaggi vini premium.',
         description: 'Degustazione guidata di vini francesi con sommelier esperto',
+        detailedDescription: 'Questa sofisticata esperienza di degustazione di vini ti introduce alla ricca diversità dei vini francesi. Guidato da un sommelier certificato, imparerai a identificare diverse varietà di uve, comprendere il terroir e sviluppare il tuo palato. La sessione include tipicamente 5-7 vini accuratamente selezionati dalle principali regioni francesi tra cui Bordeaux, Borgogna, Champagne, Valle della Loira e Rodano. La tua guida esperta ti insegnerà le tecniche di degustazione corrette, discuterà la storia e le caratteristiche di ogni regione e abbinerà i vini con formaggi francesi e salumi. Che tu sia un principiante o un appassionato, questa esperienza fornisce preziose intuizioni sulla cultura del vino francese. Si svolge in cantine intime o eleganti sale di degustazione nel centro di Parigi.',
         historicalInfo: 'La Francia ha oltre 2000 anni di storia vinicola e produce alcuni dei migliori vini del mondo.',
         yearBuilt: 'Tradizione antica',
         architect: 'Viticoltura francese'
@@ -5337,6 +5456,7 @@ const LANDMARKS: Landmark[] = [
         name: '프랑스 와인 시음 체험',
         narration: '이 가이드 시음 체험에서 프랑스 와인의 예술을 발견하세요. 프리미엄 와인을 맛보며 다양한 지역과 품종에 대해 배우세요.',
         description: '전문 소믈리에와 함께하는 프랑스 와인 가이드 시음',
+        detailedDescription: '이 세련된 와인 시음 체험은 프랑스 와인의 풍부한 다양성을 소개합니다. 공인 소믈리에가 이끄는 이 체험에서 다양한 포도 품종을 식별하고, 테루아를 이해하며, 입맛을 개발하는 방법을 배웁니다. 세션에는 일반적으로 보르도, 부르고뉴, 샴페인, 루아르 밸리, 론 등 주요 프랑스 지역에서 신중하게 선택된 5-7가지 와인이 포함됩니다. 전문 가이드가 적절한 시음 기술을 가르치고, 각 지역의 역사와 특성을 논의하며, 프랑스 치즈와 샤퀴테리와 와인을 페어링합니다. 초보자든 애호가든, 이 체험은 프랑스 와인 문화에 대한 귀중한 통찰력을 제공합니다. 파리 중심부의 친밀한 와인 셀러 또는 우아한 시음실에서 개최됩니다.',
         historicalInfo: '프랑스는 2000년 이상의 와인 제조 역사를 가지고 있으며 세계 최고급 와인을 생산합니다.',
         yearBuilt: '고대 전통',
         architect: '프랑스 포도 재배'
@@ -5371,6 +5491,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Thames River Sightseeing Cruise',
         narration: 'See London\'s iconic landmarks from the Thames on this relaxing sightseeing cruise. Pass Tower Bridge, the London Eye, and historic riverside attractions.',
         description: 'Scenic cruise along the River Thames',
+        detailedDescription: 'A Thames River cruise offers a unique perspective on London\'s most famous landmarks. Glide along the historic waterway that has been the lifeblood of the city for over 2000 years. Your journey takes you past iconic sights including the Tower of London, Tower Bridge, Shakespeare\'s Globe Theatre, the London Eye, Houses of Parliament, and Westminster Abbey. Most cruises offer live or recorded commentary in multiple languages, providing fascinating historical insights and architectural details. Choose from various options: hop-on-hop-off services that let you explore attractions at your own pace, circular cruises for comprehensive sightseeing, or themed experiences like afternoon tea cruises or evening jazz cruises. The open-air upper deck provides perfect photo opportunities and fresh river breezes.',
         historicalInfo: 'Thames cruises have been popular since Victorian times when steamboats first offered public river transport.',
         yearBuilt: '19th century',
         architect: 'Various cruise operators'
@@ -5379,6 +5500,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Crociera Turistica sul Tamigi',
         narration: 'Ammira i monumenti iconici di Londra dal Tamigi in questa rilassante crociera turistica. Passa il Tower Bridge, il London Eye e le storiche attrazioni lungo il fiume.',
         description: 'Crociera panoramica lungo il fiume Tamigi',
+        detailedDescription: 'Una crociera sul fiume Tamigi offre una prospettiva unica sui monumenti più famosi di Londra. Scivola lungo la storica via d\'acqua che è stata la linfa vitale della città per oltre 2000 anni. Il tuo viaggio ti porta davanti a luoghi iconici tra cui la Torre di Londra, il Tower Bridge, il Globe Theatre di Shakespeare, il London Eye, il Parlamento e l\'Abbazia di Westminster. La maggior parte delle crociere offre commenti dal vivo o registrati in più lingue, fornendo affascinanti approfondimenti storici e dettagli architettonici. Scegli tra varie opzioni: servizi hop-on-hop-off che ti permettono di esplorare le attrazioni al tuo ritmo, crociere circolari per un turismo completo o esperienze a tema come crociere con tè pomeridiano o crociere jazz serali. Il ponte superiore all\'aperto offre perfette opportunità fotografiche e fresche brezze fluviali.',
         historicalInfo: 'Le crociere sul Tamigi sono popolari dall\'epoca vittoriana quando i battelli a vapore iniziarono a offrire trasporti fluviali pubblici.',
         yearBuilt: 'XIX secolo',
         architect: 'Vari operatori di crociera'
@@ -5387,6 +5509,7 @@ const LANDMARKS: Landmark[] = [
         name: '템스 강 관광 크루즈',
         narration: '이 편안한 관광 크루즈에서 템스 강에서 런던의 상징적인 랜드마크를 보세요. 타워 브리지, 런던 아이, 역사적인 강변 명소를 지나갑니다.',
         description: '템스 강을 따라 경치 좋은 크루즈',
+        detailedDescription: '템스 강 크루즈는 런던의 가장 유명한 랜드마크에 대한 독특한 관점을 제공합니다. 2000년 이상 도시의 생명선이 되어온 역사적인 수로를 따라 미끄러지세요. 여정은 런던 타워, 타워 브리지, 셰익스피어 글로브 극장, 런던 아이, 국회의사당, 웨스트민스터 사원을 포함한 상징적인 명소를 지나갑니다. 대부분의 크루즈는 여러 언어로 라이브 또는 녹음된 해설을 제공하여 매혹적인 역사적 통찰력과 건축적 세부 사항을 제공합니다. 다양한 옵션 중에서 선택하세요: 자신의 속도로 명소를 탐험할 수 있는 홉온홉오프 서비스, 포괄적인 관광을 위한 순환 크루즈, 또는 애프터눈 티 크루즈나 저녁 재즈 크루즈와 같은 테마 체험. 야외 상부 갑판은 완벽한 사진 촬영 기회와 신선한 강바람을 제공합니다.',
         historicalInfo: '템스 강 크루즈는 증기선이 처음 공공 강 운송을 제공한 빅토리아 시대부터 인기를 끌고 있습니다.',
         yearBuilt: '19세기',
         architect: '다양한 크루즈 운영사'
@@ -5421,6 +5544,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Traditional Afternoon Tea Experience',
         narration: 'Indulge in a quintessentially British tradition with afternoon tea at a historic London venue. Enjoy delicate sandwiches, scones, and pastries with premium teas.',
         description: 'Classic British afternoon tea at prestigious venue',
+        detailedDescription: 'Experience one of Britain\'s most beloved traditions with afternoon tea at a prestigious London establishment. This elegant ritual, popularized by Anna, the Duchess of Bedford in the 1840s, has become synonymous with British culture. Savor a tiered selection of finger sandwiches (cucumber, smoked salmon, egg mayonnaise), freshly baked scones served warm with clotted cream and jam, and an array of delicate pastries and cakes. Your experience includes a choice of premium loose-leaf teas or, for a special occasion, champagne tea. Venues range from historic hotels like The Ritz and Claridge\'s to charming tea rooms and modern establishments. Dress smartly as most venues enforce a dress code. Booking in advance is essential for popular locations.',
         historicalInfo: 'Afternoon tea was introduced by Anna, Duchess of Bedford in 1840 as a way to curb hunger between lunch and dinner.',
         yearBuilt: '1840',
         architect: 'British culinary tradition'
@@ -5429,6 +5553,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Esperienza di Tè Pomeridiano Tradizionale',
         narration: 'Concediti una tradizione tipicamente britannica con il tè pomeridiano in una storica sede londinese. Gusta delicati sandwich, scones e pasticcini con tè premium.',
         description: 'Classico tè pomeridiano britannico in una sede prestigiosa',
+        detailedDescription: 'Vivi una delle tradizioni più amate della Gran Bretagna con il tè pomeridiano in un prestigioso locale londinese. Questo elegante rituale, reso popolare da Anna, la Duchessa di Bedford negli anni 1840, è diventato sinonimo di cultura britannica. Assapora una selezione a piani di sandwich finger (cetriolo, salmone affumicato, maionese di uova), scones appena sfornati serviti caldi con clotted cream e marmellata, e una varietà di delicati pasticcini e torte. La tua esperienza include una scelta di tè premium in foglie sfuse o, per un\'occasione speciale, tè con champagne. I locali spaziano da hotel storici come The Ritz e Claridge\'s a incantevoli sale da tè e strutture moderne. Vestiti in modo elegante poiché la maggior parte dei locali applica un codice di abbigliamento. La prenotazione anticipata è essenziale per le località più popolari.',
         historicalInfo: 'Il tè pomeridiano fu introdotto da Anna, Duchessa di Bedford nel 1840 come modo per placare la fame tra pranzo e cena.',
         yearBuilt: '1840',
         architect: 'Tradizione culinaria britannica'
@@ -5437,6 +5562,7 @@ const LANDMARKS: Landmark[] = [
         name: '전통 애프터눈 티 체험',
         narration: '역사적인 런던 장소에서 애프터눈 티로 전형적인 영국 전통을 즐기세요. 프리미엄 차와 함께 섬세한 샌드위치, 스콘, 페이스트리를 즐기세요.',
         description: '명문 장소에서의 클래식 영국 애프터눈 티',
+        detailedDescription: '명망 있는 런던 시설에서 애프터눈 티로 영국의 가장 사랑받는 전통 중 하나를 경험하세요. 1840년대 베드포드 공작 부인 애나에 의해 대중화된 이 우아한 의식은 영국 문화의 대명사가 되었습니다. 핑거 샌드위치(오이, 훈제 연어, 달걀 마요네즈)의 계층형 선택, 클로티드 크림과 잼과 함께 따뜻하게 제공되는 갓 구운 스콘, 그리고 섬세한 페이스트리와 케이크의 배열을 맛보세요. 체험에는 프리미엄 잎차 선택 또는 특별한 경우를 위한 샴페인 티가 포함됩니다. 장소는 The Ritz와 Claridge\'s와 같은 역사적인 호텔부터 매력적인 티 룸과 현대적인 시설까지 다양합니다. 대부분의 장소가 드레스 코드를 적용하므로 단정하게 옷을 입으세요. 인기 있는 장소는 사전 예약이 필수입니다.',
         historicalInfo: '애프터눈 티는 1840년 베드포드 공작 부인 애나가 점심과 저녁 사이의 배고픔을 달래기 위한 방법으로 소개했습니다.',
         yearBuilt: '1840',
         architect: '영국 요리 전통'
@@ -5471,6 +5597,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Island Hopping Adventure',
         narration: 'Explore the stunning islands around Cebu on this full-day island hopping adventure. Visit pristine beaches, snorkel in crystal-clear waters, and discover hidden coves.',
         description: 'Full-day island hopping tour to pristine beaches',
+        detailedDescription: 'Embark on an unforgettable island hopping adventure around Cebu\'s beautiful surrounding islands. This full-day tour typically includes visits to 3-4 islands, each offering unique attractions. Popular destinations include Hilutungan Island with its vibrant marine sanctuary perfect for snorkeling, Nalusuan Island with its long wooden pier and clear waters, and Pandanon Island featuring white sand beaches and shallow turquoise lagoons. Your package usually includes boat transfers, snorkeling equipment, lunch on the beach (fresh grilled seafood and local dishes), and island entrance fees. Expert guides ensure your safety and point out the best spots for swimming, snorkeling, and photography. Witness diverse marine life including colorful tropical fish, sea turtles, and coral reefs.',
         historicalInfo: 'Island hopping has been a traditional activity in the Philippines for centuries, now a popular tourist experience.',
         yearBuilt: 'Traditional practice',
         architect: 'Philippine maritime culture'
@@ -5479,6 +5606,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Avventura Island Hopping',
         narration: 'Esplora le splendide isole intorno a Cebu in questa avventura di island hopping di un\'intera giornata. Visita spiagge incontaminate, fai snorkeling in acque cristalline e scopri calette nascoste.',
         description: 'Tour di island hopping di un\'intera giornata verso spiagge incontaminate',
+        detailedDescription: 'Intraprendi un\'indimenticabile avventura di island hopping intorno alle bellissime isole circostanti di Cebu. Questo tour di un\'intera giornata include tipicamente visite a 3-4 isole, ognuna con attrazioni uniche. Le destinazioni popolari includono l\'isola di Hilutungan con il suo vivace santuario marino perfetto per lo snorkeling, l\'isola di Nalusuan con il suo lungo molo di legno e acque limpide, e l\'isola di Pandanon con spiagge di sabbia bianca e lagune turchesi poco profonde. Il tuo pacchetto include solitamente trasferimenti in barca, attrezzatura per lo snorkeling, pranzo sulla spiaggia (pesce fresco alla griglia e piatti locali) e tariffe d\'ingresso alle isole. Guide esperte garantiscono la tua sicurezza e indicano i migliori luoghi per nuotare, fare snorkeling e fotografare. Ammira la vita marina diversificata tra cui pesci tropicali colorati, tartarughe marine e barriere coralline.',
         historicalInfo: 'L\'island hopping è un\'attività tradizionale nelle Filippine da secoli, ora un\'esperienza turistica popolare.',
         yearBuilt: 'Pratica tradizionale',
         architect: 'Cultura marittima filippina'
@@ -5487,6 +5615,7 @@ const LANDMARKS: Landmark[] = [
         name: '아일랜드 호핑 어드벤처',
         narration: '이 종일 아일랜드 호핑 어드벤처에서 세부 주변의 멋진 섬들을 탐험하세요. 깨끗한 해변을 방문하고, 수정처럼 맑은 물에서 스노클링하며, 숨겨진 만을 발견하세요.',
         description: '깨끗한 해변으로의 종일 아일랜드 호핑 투어',
+        detailedDescription: '세부의 아름다운 주변 섬들을 둘러보는 잊을 수 없는 아일랜드 호핑 어드벤처를 떠나세요. 이 종일 투어는 일반적으로 각각 독특한 명소를 제공하는 3-4개의 섬 방문을 포함합니다. 인기 있는 목적지로는 스노클링에 완벽한 활기찬 해양 보호구역이 있는 힐루툰간 섬, 긴 나무 부두와 맑은 물이 있는 날루수안 섬, 그리고 백사장 해변과 얕은 청록색 석호가 특징인 판다논 섬이 있습니다. 패키지에는 일반적으로 보트 이동, 스노클링 장비, 해변에서의 점심 식사(신선한 구운 해산물과 현지 요리), 섬 입장료가 포함됩니다. 전문 가이드가 안전을 보장하고 수영, 스노클링, 사진 촬영을 위한 최고의 장소를 알려줍니다. 형형색색의 열대어, 바다거북, 산호초를 포함한 다양한 해양 생물을 목격하세요.',
         historicalInfo: '아일랜드 호핑은 수세기 동안 필리핀의 전통 활동이었으며, 이제 인기 있는 관광 체험입니다.',
         yearBuilt: '전통 관행',
         architect: '필리핀 해양 문화'
@@ -5521,6 +5650,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Whale Shark Watching in Oslob',
         narration: 'Swim with gentle giants in Oslob, one of the few places in the world where you can reliably encounter whale sharks year-round.',
         description: 'Once-in-a-lifetime whale shark swimming experience',
+        detailedDescription: 'Experience the thrill of swimming alongside the world\'s largest fish - the gentle whale shark - in the waters of Oslob, southern Cebu. This unique wildlife encounter allows you to snorkel just meters away from these magnificent creatures, some reaching lengths of over 10 meters. Local fishermen have been feeding whale sharks in these waters since 2011, creating a reliable opportunity to see them year-round. Tours begin early morning (starting around 6 AM) when the whale sharks are most active. The experience includes a safety briefing, snorkeling equipment, and a 30-minute session in the water with the whale sharks. Strict regulations protect both visitors and the animals - no touching, flash photography, or sunscreen is allowed. Most tours can be combined with visits to nearby attractions like Tumalog Falls or Sumilon Island.',
         historicalInfo: 'Whale shark watching in Oslob began in 2011 and has become one of the Philippines\' most popular wildlife encounters.',
         yearBuilt: '2011',
         architect: 'Oslob local community'
@@ -5529,6 +5659,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Osservazione Squali Balena a Oslob',
         narration: 'Nuota con i giganti gentili a Oslob, uno dei pochi posti al mondo dove puoi incontrare squali balena tutto l\'anno in modo affidabile.',
         description: 'Esperienza unica di nuoto con squali balena',
+        detailedDescription: 'Vivi l\'emozione di nuotare accanto al pesce più grande del mondo - il gentile squalo balena - nelle acque di Oslob, nel sud di Cebu. Questo unico incontro con la fauna selvatica ti permette di fare snorkeling a pochi metri da queste magnifiche creature, alcune delle quali raggiungono lunghezze superiori ai 10 metri. I pescatori locali alimentano gli squali balena in queste acque dal 2011, creando un\'opportunità affidabile per vederli tutto l\'anno. I tour iniziano al mattino presto (a partire dalle 6 del mattino) quando gli squali balena sono più attivi. L\'esperienza include un briefing sulla sicurezza, attrezzatura per lo snorkeling e una sessione di 30 minuti in acqua con gli squali balena. Regolamenti rigorosi proteggono sia i visitatori che gli animali - non è consentito toccare, fotografare con flash o usare crema solare. La maggior parte dei tour può essere combinata con visite ad attrazioni vicine come le Cascate di Tumalog o l\'isola di Sumilon.',
         historicalInfo: 'L\'osservazione degli squali balena a Oslob è iniziata nel 2011 ed è diventata uno degli incontri con la fauna selvatica più popolari delle Filippine.',
         yearBuilt: '2011',
         architect: 'Comunità locale di Oslob'
@@ -5537,6 +5668,7 @@ const LANDMARKS: Landmark[] = [
         name: '오슬롭 고래상어 관찰',
         narration: '연중 내내 고래상어를 안정적으로 만날 수 있는 세계에서 몇 안 되는 장소 중 하나인 오슬롭에서 온순한 거인들과 함께 수영하세요.',
         description: '일생일대의 고래상어 수영 체험',
+        detailedDescription: '세부 남부 오슬롭의 바다에서 세계에서 가장 큰 물고기인 온순한 고래상어와 함께 수영하는 스릴을 경험하세요. 이 독특한 야생 동물 만남은 10미터가 넘는 길이의 웅장한 생물들로부터 불과 몇 미터 떨어진 곳에서 스노클링할 수 있게 해줍니다. 지역 어부들은 2011년부터 이 바다에서 고래상어에게 먹이를 주고 있어 연중 내내 고래상어를 볼 수 있는 안정적인 기회를 제공합니다. 투어는 고래상어가 가장 활발한 이른 아침(오전 6시경 시작)에 시작됩니다. 체험에는 안전 브리핑, 스노클링 장비, 고래상어와 함께 물속에서 보내는 30분 세션이 포함됩니다. 방문객과 동물 모두를 보호하기 위한 엄격한 규정이 있습니다 - 만지기, 플래시 촬영, 선크림 사용이 금지됩니다. 대부분의 투어는 투말록 폭포나 수밀론 섬과 같은 인근 명소 방문과 결합될 수 있습니다.',
         historicalInfo: '오슬롭의 고래상어 관찰은 2011년에 시작되어 필리핀에서 가장 인기 있는 야생 동물 만남 중 하나가 되었습니다.',
         yearBuilt: '2011',
         architect: '오슬롭 지역 사회'
@@ -5571,6 +5703,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Night Safari Experience',
         narration: 'Discover nocturnal wildlife at the world\'s first night safari. Explore themed trails and see over 2,500 animals in their natural nighttime habitat.',
         description: 'World\'s first nocturnal wildlife park experience',
+        detailedDescription: 'The Night Safari offers a unique opportunity to observe nocturnal animals in naturalistic habitats designed to replicate their native environments. Opened in 1994, it was the world\'s first nocturnal zoo and remains one of Singapore\'s most popular attractions. The 35-hectare park houses over 2,500 animals representing more than 130 species, including many threatened and endangered species. Explore via tram ride that takes you through seven geographical zones from the Himalayan Foothills to the jungles of Southeast Asia, or walk along four themed trails for closer encounters. Watch entertaining shows featuring talented animals, and learn about conservation efforts. Special lighting creates an atmospheric moonlit ambiance without disturbing the animals\' natural behaviors. The park opens at 7:15 PM, with the tram rides and walking trails offering different perspectives on wildlife after dark.',
         historicalInfo: 'Opened in 1994 as the world\'s first nocturnal zoo, the Night Safari pioneered the concept of observing wildlife after dark.',
         yearBuilt: '1994',
         architect: 'Bernard Harrison (concept), various wildlife experts'
@@ -5579,6 +5712,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Esperienza Night Safari',
         narration: 'Scopri la fauna notturna nel primo safari notturno del mondo. Esplora sentieri a tema e osserva oltre 2.500 animali nel loro habitat notturno naturale.',
         description: 'Esperienza del primo parco faunistico notturno del mondo',
+        detailedDescription: 'Il Night Safari offre un\'opportunità unica di osservare animali notturni in habitat naturalistici progettati per replicare i loro ambienti nativi. Aperto nel 1994, è stato il primo zoo notturno del mondo e rimane una delle attrazioni più popolari di Singapore. Il parco di 35 ettari ospita oltre 2.500 animali che rappresentano più di 130 specie, comprese molte specie minacciate ed in pericolo. Esplora tramite un giro in tram che ti porta attraverso sette zone geografiche dai piedi dell\'Himalaya alle giungle del Sud-Est asiatico, oppure cammina lungo quattro sentieri tematici per incontri ravvicinati. Guarda spettacoli divertenti con animali talentuosi e scopri gli sforzi di conservazione. L\'illuminazione speciale crea un\'atmosfera lunare suggestiva senza disturbare i comportamenti naturali degli animali. Il parco apre alle 19:15, con i giri in tram e i sentieri a piedi che offrono diverse prospettive sulla fauna selvatica dopo il tramonto.',
         historicalInfo: 'Aperto nel 1994 come primo zoo notturno del mondo, il Night Safari ha aperto la strada al concetto di osservare la fauna selvatica dopo il tramonto.',
         yearBuilt: '1994',
         architect: 'Bernard Harrison (concept), vari esperti di fauna selvatica'
@@ -5587,6 +5721,7 @@ const LANDMARKS: Landmark[] = [
         name: '나이트 사파리 체험',
         narration: '세계 최초의 야간 사파리에서 야행성 야생동물을 발견하세요. 테마별 산책로를 탐험하고 자연적인 야간 서식지에서 2,500마리 이상의 동물을 관찰하세요.',
         description: '세계 최초의 야행성 야생동물 공원 체험',
+        detailedDescription: '나이트 사파리는 자연 환경을 재현하도록 설계된 자연주의적 서식지에서 야행성 동물을 관찰할 수 있는 독특한 기회를 제공합니다. 1994년에 개장한 세계 최초의 야간 동물원이며 여전히 싱가포르에서 가장 인기 있는 명소 중 하나입니다. 35헥타르의 공원에는 멸종 위기에 처한 많은 종을 포함하여 130종 이상을 대표하는 2,500마리 이상의 동물이 서식하고 있습니다. 히말라야 산기슭부터 동남아시아 정글까지 7개의 지리적 구역을 통과하는 트램을 타거나, 4개의 테마별 산책로를 따라 걸으며 더 가까이서 만날 수 있습니다. 재능 있는 동물들이 등장하는 재미있는 쇼를 관람하고 보존 노력에 대해 배우세요. 특별한 조명이 동물의 자연스러운 행동을 방해하지 않으면서 분위기 있는 달빛 분위기를 연출합니다. 공원은 오후 7시 15분에 개장하며, 트램 라이드와 도보 산책로는 어두워진 후 야생동물에 대한 다양한 관점을 제공합니다.',
         historicalInfo: '1994년 세계 최초의 야간 동물원으로 개장한 나이트 사파리는 어두워진 후 야생동물을 관찰하는 개념의 선구자입니다.',
         yearBuilt: '1994',
         architect: '버나드 해리슨 (컨셉), 다양한 야생동물 전문가'
@@ -5621,6 +5756,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Gardens by the Bay Light Show',
         narration: 'Experience the spectacular Garden Rhapsody light and sound show at the Supertree Grove. Watch the iconic Supertrees come alive with dazzling lights and music.',
         description: 'Free nightly light and sound show at Supertree Grove',
+        detailedDescription: 'The Garden Rhapsody is a spectacular multimedia show that transforms the iconic Supertree Grove into a mesmerizing display of lights and sound. This free nightly show occurs twice every evening (7:45 PM and 8:45 PM) and lasts about 10-15 minutes. The 16 Supertrees, ranging from 25 to 50 meters tall, are illuminated with a choreographed light display synchronized to music ranging from classical to contemporary. The vertical gardens covering the Supertrees create a stunning backdrop as colors pulse and flow to the rhythm. For the best viewing experience, arrive early to secure a good spot on the grass beneath the Supertrees. You can also watch from the OCBC Skyway, a 128-meter aerial walkway suspended between two Supertrees, offering a unique elevated perspective (separate admission fee applies). The show is family-friendly and completely free, making it one of Singapore\'s most popular evening attractions.',
         historicalInfo: 'The Garden Rhapsody show has been entertaining visitors since Gardens by the Bay opened in 2012.',
         yearBuilt: '2012',
         architect: 'Grant Associates (Supertrees design)'
@@ -5629,6 +5765,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Spettacolo di Luci ai Gardens by the Bay',
         narration: 'Vivi lo spettacolare spettacolo di luci e suoni Garden Rhapsody al Supertree Grove. Guarda gli iconici Supertree prendere vita con luci e musica abbaglianti.',
         description: 'Spettacolo gratuito serale di luci e suoni al Supertree Grove',
+        detailedDescription: 'Il Garden Rhapsody è uno spettacolo multimediale spettacolare che trasforma l\'iconico Supertree Grove in un affascinante display di luci e suoni. Questo spettacolo serale gratuito si svolge due volte ogni sera (alle 19:45 e alle 20:45) e dura circa 10-15 minuti. I 16 Supertree, alti da 25 a 50 metri, sono illuminati con un display luminoso coreografato sincronizzato con musica che varia dal classico al contemporaneo. I giardini verticali che ricoprono i Supertree creano uno sfondo stupendo mentre i colori pulsano e fluiscono al ritmo. Per la migliore esperienza visiva, arriva presto per assicurarti un buon posto sull\'erba sotto i Supertree. Puoi anche guardare dall\'OCBC Skyway, una passerella aerea di 128 metri sospesa tra due Supertree, che offre una prospettiva elevata unica (si applica una tariffa d\'ingresso separata). Lo spettacolo è adatto alle famiglie e completamente gratuito, rendendolo una delle attrazioni serali più popolari di Singapore.',
         historicalInfo: 'Lo spettacolo Garden Rhapsody intrattiene i visitatori dall\'apertura di Gardens by the Bay nel 2012.',
         yearBuilt: '2012',
         architect: 'Grant Associates (design Supertrees)'
@@ -5637,6 +5774,7 @@ const LANDMARKS: Landmark[] = [
         name: '가든스 바이 더 베이 라이트 쇼',
         narration: '슈퍼트리 그로브에서 장관을 이루는 가든 랩소디 빛과 소리 쇼를 경험하세요. 상징적인 슈퍼트리가 눈부신 조명과 음악으로 생동감 있게 살아나는 것을 보세요.',
         description: '슈퍼트리 그로브의 무료 야간 빛과 소리 쇼',
+        detailedDescription: '가든 랩소디는 상징적인 슈퍼트리 그로브를 황홀한 빛과 소리의 디스플레이로 변모시키는 장관을 이루는 멀티미디어 쇼입니다. 이 무료 야간 쇼는 매일 저녁 두 번(오후 7시 45분과 8시 45분)에 열리며 약 10-15분 동안 진행됩니다. 높이가 25~50미터에 달하는 16개의 슈퍼트리는 클래식에서 현대 음악까지 다양한 음악에 맞춰 안무된 조명 디스플레이로 빛납니다. 슈퍼트리를 덮고 있는 수직 정원은 색상이 리듬에 맞춰 맥동하고 흐르는 동안 멋진 배경을 만듭니다. 최고의 감상 경험을 위해 일찍 도착하여 슈퍼트리 아래 잔디밭에서 좋은 자리를 확보하세요. 두 슈퍼트리 사이에 매달린 128미터 공중 보도인 OCBC 스카이웨이에서도 감상할 수 있으며, 독특한 높이의 관점을 제공합니다(별도 입장료 적용). 쇼는 가족 친화적이며 완전히 무료로, 싱가포르에서 가장 인기 있는 저녁 명소 중 하나입니다.',
         historicalInfo: '가든 랩소디 쇼는 2012년 가든스 바이 더 베이가 개장한 이래 방문객들을 즐겁게 해왔습니다.',
         yearBuilt: '2012',
         architect: '그랜트 어소시에이츠 (슈퍼트리 디자인)'
@@ -5671,6 +5809,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Penang Street Food Tour',
         narration: 'Discover Penang\'s legendary street food scene on this guided culinary adventure. Taste iconic dishes and learn about the island\'s unique food heritage.',
         description: 'Guided tour of Penang\'s famous street food',
+        detailedDescription: 'Penang is widely regarded as Malaysia\'s food capital, and this guided street food tour is the best way to experience its incredible culinary diversity. Led by knowledgeable local food experts, you\'ll navigate bustling hawker centers, historic coffee shops, and hidden street stalls to sample Penang\'s most iconic dishes. Taste char kway teow (stir-fried flat rice noodles), assam laksa (spicy-sour fish noodle soup), Hokkien mee, rojak, and countless other specialties. Learn about the unique blend of Malay, Chinese, Indian, and Peranakan influences that created Penang\'s distinctive cuisine. Your guide will explain the history behind each dish, recommend the best stalls, and help you navigate ordering like a local. Tours typically include 8-10 food stops and last 3-4 hours. Come hungry and ready to discover why UNESCO recognized George Town for its exceptional food heritage.',
         historicalInfo: 'Penang\'s food culture developed over centuries through the mixing of diverse ethnic communities and trading influences.',
         yearBuilt: 'Centuries-old tradition',
         architect: 'Multicultural culinary heritage'
@@ -5679,6 +5818,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Tour dello Street Food di Penang',
         narration: 'Scopri la leggendaria scena dello street food di Penang in questa avventura culinaria guidata. Assaggia piatti iconici e impara l\'eredità alimentare unica dell\'isola.',
         description: 'Tour guidato del famoso street food di Penang',
+        detailedDescription: 'Penang è ampiamente considerata la capitale gastronomica della Malesia, e questo tour guidato dello street food è il modo migliore per sperimentare la sua incredibile diversità culinaria. Guidati da esperti di cibo locali ben informati, navigherai tra centri di venditori ambulanti affollati, caffetterie storiche e bancarelle di strada nascoste per assaggiare i piatti più iconici di Penang. Assapora char kway teow (tagliatelle di riso piatte saltate in padella), assam laksa (zuppa di noodles di pesce piccante-acida), Hokkien mee, rojak e innumerevoli altre specialità. Impara la miscela unica di influenze malesi, cinesi, indiane e Peranakan che ha creato la cucina distintiva di Penang. La tua guida spiegherà la storia dietro ogni piatto, consiglierà le migliori bancarelle e ti aiuterà a ordinare come un locale. I tour includono tipicamente 8-10 tappe gastronomiche e durano 3-4 ore. Vieni affamato e pronto a scoprire perché l\'UNESCO ha riconosciuto George Town per il suo eccezionale patrimonio gastronomico.',
         historicalInfo: 'La cultura alimentare di Penang si è sviluppata nel corso dei secoli attraverso la mescolanza di diverse comunità etniche e influenze commerciali.',
         yearBuilt: 'Tradizione secolare',
         architect: 'Patrimonio culinario multiculturale'
@@ -5687,6 +5827,7 @@ const LANDMARKS: Landmark[] = [
         name: '페낭 스트리트 푸드 투어',
         narration: '이 가이드 요리 모험에서 페낭의 전설적인 스트리트 푸드 장면을 발견하세요. 상징적인 요리를 맛보고 섬의 독특한 음식 유산에 대해 배우세요.',
         description: '페낭의 유명한 스트리트 푸드 가이드 투어',
+        detailedDescription: '페낭은 말레이시아의 음식 수도로 널리 알려져 있으며, 이 가이드 스트리트 푸드 투어는 놀라운 요리 다양성을 경험할 수 있는 최고의 방법입니다. 지식이 풍부한 현지 음식 전문가가 이끄는 이 투어에서 붐비는 호커 센터, 역사적인 커피숍, 숨겨진 거리 노점을 탐색하며 페낭의 가장 상징적인 요리를 맛볼 수 있습니다. 차 퀘이 티오(볶은 납작 쌀국수), 아삼 락사(매콤하고 신 생선 국수 수프), 호키엔 미, 로작 및 수많은 다른 특선 요리를 맛보세요. 페낭의 독특한 요리를 만든 말레이, 중국, 인도, 페라나칸 영향의 독특한 혼합에 대해 배우세요. 가이드가 각 요리의 역사를 설명하고, 최고의 노점을 추천하며, 현지인처럼 주문하는 방법을 도와줍니다. 투어는 일반적으로 8-10개의 음식 정거장을 포함하며 3-4시간 동안 진행됩니다. 배고픈 상태로 와서 유네스코가 조지타운을 탁월한 음식 유산으로 인정한 이유를 발견할 준비를 하세요.',
         historicalInfo: '페낭의 음식 문화는 다양한 민족 공동체와 무역 영향의 혼합을 통해 수세기에 걸쳐 발전했습니다.',
         yearBuilt: '수세기 된 전통',
         architect: '다문화 요리 유산'
@@ -5721,6 +5862,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Heritage Trishaw Tour',
         narration: 'Explore George Town\'s UNESCO heritage sites on a traditional trishaw ride. Discover colorful street art, historic architecture, and cultural landmarks.',
         description: 'Traditional trishaw tour of George Town heritage sites',
+        detailedDescription: 'Experience George Town\'s UNESCO World Heritage Site in the most charming way possible - aboard a traditional trishaw. These three-wheeled bicycle taxis have been a Penang icon for decades and offer a leisurely, eco-friendly way to explore the historic city center. Your trishaw rider, often a knowledgeable local, will pedal you through narrow lanes and bustling streets, stopping at key heritage sites, clan houses, temples, and the famous street art murals that have made Penang Instagram-famous. Tours typically last 30 minutes to 2 hours and can be customized to your interests. Many trishaws are decorated with colorful flowers, flags, and lights, creating a festive atmosphere. This is particularly magical in the evening when the heritage buildings are lit up. Learn about Penang\'s Peranakan culture, colonial history, and multicultural heritage while enjoying the breeze and unique street-level perspectives.',
         historicalInfo: 'Trishaws have been operating in Penang since the 1940s and remain an iconic mode of transport and tourism.',
         yearBuilt: '1940s',
         architect: 'Traditional Penang transport heritage'
@@ -5729,6 +5871,7 @@ const LANDMARKS: Landmark[] = [
         name: 'Tour Heritage in Trishaw',
         narration: 'Esplora i siti del patrimonio UNESCO di George Town su un tradizionale giro in trishaw. Scopri colorata street art, architettura storica e punti di riferimento culturali.',
         description: 'Tour tradizionale in trishaw dei siti del patrimonio di George Town',
+        detailedDescription: 'Vivi il sito del Patrimonio Mondiale UNESCO di George Town nel modo più affascinante possibile - a bordo di un trishaw tradizionale. Questi taxi bicicletta a tre ruote sono stati un\'icona di Penang per decenni e offrono un modo piacevole ed ecologico per esplorare il centro storico della città. Il tuo conducente di trishaw, spesso un locale ben informato, ti porterà attraverso vicoli stretti e strade affollate, fermandosi nei principali siti del patrimonio, case di clan, templi e i famosi murales di street art che hanno reso Penang famosa su Instagram. I tour durano tipicamente da 30 minuti a 2 ore e possono essere personalizzati secondo i tuoi interessi. Molti trishaw sono decorati con fiori colorati, bandiere e luci, creando un\'atmosfera festiva. Questo è particolarmente magico la sera quando gli edifici del patrimonio sono illuminati. Impara la cultura Peranakan di Penang, la storia coloniale e il patrimonio multiculturale mentre godi della brezza e delle prospettive uniche a livello della strada.',
         historicalInfo: 'I trishaw operano a Penang dagli anni \'40 e rimangono un mezzo di trasporto e turismo iconico.',
         yearBuilt: 'Anni \'40',
         architect: 'Patrimonio del trasporto tradizionale di Penang'
@@ -5737,6 +5880,7 @@ const LANDMARKS: Landmark[] = [
         name: '헤리티지 트라이쇼 투어',
         narration: '전통 트라이쇼를 타고 조지타운의 유네스코 유산 지역을 탐험하세요. 화려한 거리 예술, 역사적 건축물, 문화 랜드마크를 발견하세요.',
         description: '조지타운 유산 지역의 전통 트라이쇼 투어',
+        detailedDescription: '가능한 가장 매력적인 방법으로 조지타운의 유네스코 세계 유산 지역을 경험하세요 - 전통 트라이쇼를 타고. 이 세 바퀴 자전거 택시는 수십 년 동안 페낭의 아이콘이었으며 역사적인 도심을 탐험할 수 있는 여유롭고 친환경적인 방법을 제공합니다. 종종 지식이 풍부한 현지인인 트라이쇼 운전사가 좁은 골목과 붐비는 거리를 통해 당신을 페달로 이동시키며, 주요 유산 지역, 씨족 가옥, 사원, 그리고 페낭을 인스타그램으로 유명하게 만든 유명한 거리 예술 벽화에서 멈춥니다. 투어는 일반적으로 30분에서 2시간 동안 진행되며 관심사에 맞게 맞춤화할 수 있습니다. 많은 트라이쇼는 화려한 꽃, 깃발, 조명으로 장식되어 축제 분위기를 조성합니다. 유산 건물이 조명을 받는 저녁에는 특히 마법 같습니다. 바람을 즐기고 독특한 거리 수준의 관점을 즐기면서 페낭의 페라나칸 문화, 식민지 역사, 다문화 유산에 대해 배우세요.',
         historicalInfo: '트라이쇼는 1940년대부터 페낭에서 운영되어 왔으며 여전히 상징적인 교통 및 관광 수단입니다.',
         yearBuilt: '1940년대',
         architect: '페낭 전통 운송 유산'
@@ -6639,7 +6783,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Georgetown Street Art Tour',
         narration: 'Discover Georgetown\'s vibrant street art scene on this walking tour. Find famous murals, learn their stories, and explore the UNESCO World Heritage city.',
-        description: 'Walking tour of Georgetown\'s famous street art and murals'
+        description: 'Walking tour of Georgetown\'s famous street art and murals',
+        detailedDescription: 'Georgetown\'s street art has transformed the UNESCO World Heritage city into an open-air gallery. This guided walking tour takes you to the most famous murals by Lithuanian artist Ernest Zacharevic and local artists. See the iconic "Little Children on a Bicycle," "Boy on a Bike," and dozens of other creative works that blend art with the city\'s historic architecture. Your guide shares the stories behind each artwork and Georgetown\'s transformation into Southeast Asia\'s street art capital. The tour also explores the city\'s multicultural heritage, visiting temples, mosques, churches, and clan houses along the way. You\'ll discover hidden alleyways, colonial buildings, and local markets while learning about Penang\'s rich history. Comfortable walking shoes recommended - the tour covers about 3-4 kilometers.'
       },
       it: {
         name: 'Tour della Street Art di Georgetown',
@@ -6675,7 +6820,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Penang Hill Funicular Railway Experience',
         narration: 'Ride the historic funicular railway to the top of Penang Hill. Enjoy panoramic views of the island, explore colonial bungalows, and experience cooler mountain air.',
-        description: 'Funicular railway ride to Penang Hill summit'
+        description: 'Funicular railway ride to Penang Hill summit',
+        detailedDescription: 'Penang Hill offers a refreshing escape from the tropical heat and spectacular views of the island. The journey begins with a scenic ride on the funicular railway, one of the oldest in Asia, climbing 833 meters through lush rainforest. At the summit, temperatures are typically 5-7°C cooler than sea level, providing welcome relief. Explore the hill\'s attractions including The Habitat, a nature discovery center with canopy walkways offering stunning views; colonial-era bungalows showcasing British heritage; Hindu and Muslim shrines; and the Love Lock terrace where couples attach padlocks as symbols of eternal love. The panoramic vistas encompass Georgetown, the mainland, and on clear days, even Thailand. Visit at sunset for the most breathtaking views as the city lights begin to twinkle below.'
       },
       it: {
         name: 'Esperienza della Funicolare di Penang Hill',
@@ -6711,7 +6857,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Traditional Nyonya Cooking Class',
         narration: 'Learn to cook authentic Nyonya cuisine in this hands-on cooking class. Discover the unique Peranakan culinary traditions blending Chinese and Malay flavors.',
-        description: 'Hands-on Nyonya cooking class with market visit'
+        description: 'Hands-on Nyonya cooking class with market visit',
+        detailedDescription: 'Nyonya cuisine, also known as Peranakan food, represents a unique fusion of Chinese and Malay culinary traditions developed over centuries in Penang. This immersive cooking class begins with a visit to a local market where your instructor explains exotic ingredients like bunga kantan (torch ginger), daun kesom (laksa leaves), and belacan (shrimp paste). Return to a traditional Peranakan home or cooking school to prepare 3-4 signature dishes which might include laksa lemak, ayam pongteh (chicken braised in fermented bean paste), or kueh pie tee (crispy shells with vegetables). Learn essential techniques like pounding rempah (spice paste) in a traditional mortar and achieving the perfect balance of sweet, sour, salty, and spicy flavors. The class concludes with enjoying your creations together. Recipe cards provided so you can recreate the dishes at home.'
       },
       it: {
         name: 'Corso di Cucina Nyonya Tradizionale',
@@ -6749,7 +6896,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Batu Caves Temple Tour',
         narration: 'Climb the iconic 272 steps to the sacred Batu Caves Hindu temple. Marvel at the giant golden statue and explore limestone caverns filled with shrines.',
-        description: 'Half-day tour to the famous Batu Caves temple complex'
+        description: 'Half-day tour to the famous Batu Caves temple complex',
+        detailedDescription: 'Batu Caves is one of Malaysia\'s most iconic attractions, combining natural wonders with spiritual significance. The journey begins at the foot of the 140-foot golden statue of Lord Murugan, the largest of its kind in the world. Climb the famous rainbow-colored 272 steps (recently painted in vibrant hues) to reach the main Temple Cave, a massive limestone cavern over 100 meters high housing several Hindu shrines. The natural skylight creates a mystical atmosphere as sunbeams illuminate the cave interior. Explore the Dark Cave, a conservation site housing unique cave ecosystems, and Art Gallery Cave with its colorful Hindu dioramas. Watch for the cheeky macaque monkeys that inhabit the area. The tour includes transportation from Kuala Lumpur, a knowledgeable guide explaining Hindu traditions and cave formations, and time to experience the spiritual atmosphere.'
       },
       it: {
         name: 'Tour del Tempio delle Grotte di Batu',
@@ -6785,7 +6933,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Kuala Lumpur Street Food Tour',
         narration: 'Experience the incredible diversity of Malaysian street food on this evening walking tour. Taste Malay, Chinese, and Indian specialties at local favorites.',
-        description: 'Evening street food walking tour in Kuala Lumpur'
+        description: 'Evening street food walking tour in Kuala Lumpur',
+        detailedDescription: 'Kuala Lumpur\'s street food scene is a delicious reflection of Malaysia\'s multicultural society. This evening food tour takes you off the tourist trail to authentic local eateries and street stalls where KL residents actually eat. Sample iconic dishes like nasi lemak (coconut rice with sambal), char kway teow (stir-fried noodles), roti canai with curry, satay (grilled meat skewers), cendol (shaved ice dessert), and durian (if you\'re brave!). Your local guide shares insights into Malaysian food culture, cooking techniques, and the history behind each dish. Visit bustling night markets like Jalan Alor or Petaling Street Chinatown, experience the energy of outdoor dining, and learn about the spices and ingredients that make Malaysian cuisine so distinctive. The tour includes 8-10 food tastings - enough for a full dinner.'
       },
       it: {
         name: 'Tour dello Street Food di Kuala Lumpur',
@@ -6821,7 +6970,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Aquaria KLCC Underwater Experience',
         narration: 'Journey through Aquaria KLCC, one of Southeast Asia\'s largest aquariums. Walk through a 90-meter underwater tunnel and see thousands of marine creatures.',
-        description: 'Visit to Aquaria KLCC world-class oceanarium'
+        description: 'Visit to Aquaria KLCC world-class oceanarium',
+        detailedDescription: 'Aquaria KLCC offers an immersive journey through Malaysia\'s aquatic ecosystems and beyond. Located beneath the Kuala Lumpur Convention Centre, this state-of-the-art oceanarium showcases over 5,000 marine and land-bound creatures representing 150 species. The highlight is the spectacular 90-meter underwater tunnel where sharks, giant groupers, and rays glide overhead creating a surreal walking-on-the-ocean-floor experience. Explore diverse exhibits including Malaysian coral reefs, flooded rainforests, coastal waters, and deep ocean zones. Interactive touch pools let you feel starfish and sea cucumbers, while feeding sessions and dive shows provide educational entertainment. The aquarium\'s conservation message emphasizes protecting Malaysia\'s marine biodiversity. Climate-controlled and family-friendly, it\'s a perfect escape from KL\'s heat and humidity.'
       },
       it: {
         name: 'Esperienza Subacquea Aquaria KLCC',
@@ -6859,7 +7009,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Phi Phi Islands Day Trip',
         narration: 'Explore the stunning Phi Phi Islands on this full-day boat tour. Snorkel in crystal-clear waters, visit Maya Bay, and relax on pristine beaches.',
-        description: 'Full-day speedboat tour to Phi Phi Islands'
+        description: 'Full-day speedboat tour to Phi Phi Islands',
+        detailedDescription: 'The Phi Phi Islands are among Thailand\'s most beautiful destinations, and this full-day tour showcases the best of this tropical paradise. Depart Phuket by speedboat and arrive at the iconic Phi Phi Islands, famous for their dramatic limestone cliffs rising from turquoise waters. Visit Maya Bay, made famous by the movie "The Beach," with its stunning crescent beach surrounded by towering cliffs. Snorkel at Pileh Lagoon where crystal-clear emerald waters are home to colorful tropical fish and coral gardens. Explore Viking Cave with its ancient wall paintings and bird nest harvesting operations. Enjoy a buffet lunch on Phi Phi Don, the larger inhabited island. The tour includes multiple snorkeling stops, beach time, photo opportunities, and all equipment. Hotel transfers and experienced guides ensure a safe, comfortable, and unforgettable island experience.'
       },
       it: {
         name: 'Escursione Giornaliera alle Isole Phi Phi',
@@ -6895,7 +7046,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Old Phuket Town Cultural Walk',
         narration: 'Discover the charm of Old Phuket Town on this walking tour. Explore colorful Sino-Portuguese architecture, visit local markets, and learn about Phuket\'s heritage.',
-        description: 'Guided walking tour of historic Old Phuket Town'
+        description: 'Guided walking tour of historic Old Phuket Town',
+        detailedDescription: 'Old Phuket Town is a treasure trove of history, culture, and architecture that most beach-goers miss. This walking tour explores the beautifully preserved Sino-Portuguese shophouses painted in vibrant colors - pink, yellow, mint green, and turquoise. Learn about Phuket\'s tin mining boom era when Chinese immigrants arrived and created this unique architectural blend. Visit historic buildings like the Thai Hua Museum, housed in a former Chinese school, and the Chinpracha House, a 100-year-old mansion. Explore Thalang Road\'s Sunday Walking Street market (if visiting Sunday) filled with local crafts, street food, and live performances. Discover hidden shrines, vintage cafes, contemporary art galleries, and street art. Your guide shares fascinating stories about Phuket\'s multicultural heritage, local legends, and the preservation efforts keeping this historic quarter alive. The tour includes stops at local food vendors for authentic Phuket snacks.'
       },
       it: {
         name: 'Passeggiata Culturale nella Vecchia Città di Phuket',
@@ -6931,7 +7083,8 @@ const LANDMARKS: Landmark[] = [
       en: {
         name: 'Thai Cooking Class Experience',
         narration: 'Master the art of Thai cuisine in this hands-on cooking class. Learn to prepare classic dishes using fresh local ingredients and traditional techniques.',
-        description: 'Authentic Thai cooking class with market tour'
+        description: 'Authentic Thai cooking class with market tour',
+        detailedDescription: 'This immersive Thai cooking class offers much more than recipes - it\'s a cultural experience that reveals the heart of Thai cuisine. Begin with a guided tour of a local market where your instructor explains exotic ingredients like galangal, kaffir lime leaves, Thai basil varieties, and fish sauce grades. Learn to select the freshest produce and understand the importance of each ingredient. Return to a traditional Thai kitchen or outdoor cooking pavilion to prepare 4-5 classic dishes such as tom yum soup, pad thai, green curry, som tam (papaya salad), and mango sticky rice. Master essential techniques like pounding curry paste in a mortar, achieving the perfect balance of sweet, sour, salty, and spicy, and proper wok handling. The intimate class sizes ensure personalized attention. Enjoy your creations for lunch or dinner, and take home recipe cards and a certificate. Vegetarian and dietary modifications available.'
       },
       it: {
         name: 'Esperienza di Corso di Cucina Thailandese',

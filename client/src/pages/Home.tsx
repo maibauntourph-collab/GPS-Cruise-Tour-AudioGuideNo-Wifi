@@ -17,6 +17,7 @@ import { LandmarkPanel } from '@/components/LandmarkPanel';
 import { AppSidebar } from '@/components/AppSidebar';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { InstallPrompt } from '@/components/InstallPrompt';
+import { CruisePortInfo } from '@/components/CruisePortInfo';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
@@ -345,16 +346,33 @@ export default function Home() {
               onTourRouteFound={handleTourRouteFound}
             />
 
-            {/* Show landmark list only when no landmark is selected */}
+            {/* Show cruise port info and landmark list only when no landmark is selected */}
             {!selectedLandmark && (
-              <LandmarkList
-                landmarks={filteredLandmarks}
-                userPosition={position}
-                onLandmarkRoute={handleLandmarkRoute}
-                spokenLandmarks={spokenLandmarks}
-                selectedLanguage={selectedLanguage}
-                onLandmarkSelect={setSelectedLandmark}
-              />
+              <>
+                {selectedCity && selectedCity.cruisePort && (
+                  <div className="absolute top-4 left-4 right-4 z-[1000] max-w-md">
+                    <CruisePortInfo
+                      city={selectedCity}
+                      landmarks={filteredLandmarks}
+                      selectedLanguage={selectedLanguage}
+                      onLandmarkClick={(landmarkId) => {
+                        const landmark = filteredLandmarks.find(l => l.id === landmarkId);
+                        if (landmark) {
+                          setSelectedLandmark(landmark);
+                        }
+                      }}
+                    />
+                  </div>
+                )}
+                <LandmarkList
+                  landmarks={filteredLandmarks}
+                  userPosition={position}
+                  onLandmarkRoute={handleLandmarkRoute}
+                  spokenLandmarks={spokenLandmarks}
+                  selectedLanguage={selectedLanguage}
+                  onLandmarkSelect={setSelectedLandmark}
+                />
+              </>
             )}
 
             <OfflineIndicator />
