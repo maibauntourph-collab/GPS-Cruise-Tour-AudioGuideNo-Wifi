@@ -1,216 +1,147 @@
 # GPS Audio Guide - Multi-City Travel Companion
 
-A React-based GPS audio guide application for exploring world cities with automatic audio narration, turn-by-turn navigation, multi-language support, and progress tracking.
-
 ## Overview
 
-This application provides an interactive map experience for tourists visiting major cities worldwide. It automatically plays audio narrations when users get within range of famous landmarks, offers route navigation, displays photo galleries, and tracks visited landmarks with persistent progress visualization.
+This project is a React-based GPS audio guide application designed to enhance urban exploration for tourists. It provides an interactive map experience with automatic audio narration for landmarks, turn-by-turn navigation, multi-language support, and persistent progress tracking. The application aims to offer a seamless, immersive, and informative travel companion experience across various global cities, with a strong focus on offline capabilities through PWA features.
 
-## Features
+## User Preferences
 
-### Core Features
-- **Interactive Map**: Full-screen map using React-Leaflet with OpenStreetMap tiles
-- **GPS Tracking**: Real-time location tracking with visual user position indicator
-- **Auto Audio Narration**: Speaks landmark information automatically when within radius (uses Web Speech API)
-- **TTS Speed Control**: Adjustable speech rate (0.5x-2x) with localStorage persistence
-- **Turn-by-Turn Navigation**: Route planning from current location to any landmark using Leaflet Routing Machine
-- **Audio Controls**: Toggle audio narration on/off, test audio playback, adjust speech speed
-- **Route Management**: Clear active routes with a single click
+I prefer detailed explanations.
+I want iterative development.
+Ask before making major changes.
+I prefer simple language.
 
-### Multi-City Support
-- City selector with Rome, Paris, and London
-- City-specific landmarks and information
-- Automatic map centering on selected city
-- Dynamic landmark filtering by city
+## System Architecture
 
-### Multi-Language Support
-- Language selector for English, Italian, and Korean
-- Translated landmark names, descriptions, and audio narration
-- Language-specific audio playback using Web Speech API
-- Seamless language switching
+The application is built with a React frontend and an Express.js backend, communicating via RESTful API endpoints.
 
-### Photo Galleries & Details
-- Rich landmark information with extended historical details
-- Photo gallery with 2-3 photos per landmark
-- Full-screen photo viewer with navigation
-- Architect, year built, and category information
-- Click landmark card or Info button to view detailed information
-- Detailed modal shows full description, historical info, and photos
+**UI/UX Decisions:**
+- **Design System:** Uses a primary terracotta/Roman red-orange (hsl(14, 85%, 55%)) color scheme, with green for success/GPS indicators (hsl(142, 71%, 45%)).
+- **Visuals:** Features glass-morphic floating panels with backdrop blur, custom landmark markers, and a pulse animation for the user's location.
+- **Typography:** Employs Playfair Display (serif) and Inter (sans-serif) fonts.
+- **Responsiveness:** Designed with a mobile-first approach.
+- **PWA Integration:** Includes a PWA manifest for install-to-home-screen functionality and a service worker for offline capabilities, network status indicators, and an install prompt.
 
-### Visited Landmarks Tracking
-- PostgreSQL database persistence
-- Session-based progress tracking
-- Progress statistics with percentage and visual bar
-- Automatic landmark marking when within radius
-- Duplicate prevention with unique constraints
-- Progress persists across page refreshes
+**Technical Implementations & Feature Specifications:**
+- **Interactive Map & Navigation:** Implemented using React-Leaflet and Leaflet Routing Machine for map display, GPS tracking, automatic map centering, and turn-by-turn directions. Custom terracotta route styling is applied.
+- **Audio Narration:** Utilizes the Web Speech API for auto-triggered, language-aware audio narration within landmark radii. It supports adjustable speech rates (0.5x-2x) with persistence via LocalStorage and handles audio playback without repetition.
+- **Multi-City & Multi-Language Support:** Offers city and language selectors (English, Italian, Korean) to dynamically load city-specific landmarks, provide translated content, and use language-specific TTS voices.
+- **Landmark Details:** Each landmark includes rich information, a photo gallery with a full-screen viewer, and historical details, accessible via a detailed modal.
+- **Visited Landmarks Tracking:** Progress is tracked per session, stored in a PostgreSQL database (via Drizzle ORM), and visualized with a progress bar and statistics. Automatic marking within radius prevents duplicates.
+- **Offline Functionality:** A service worker pre-caches static assets, all city landmarks, and map tiles, allowing full application functionality offline with cached API responses.
+- **API Endpoints:**
+    - `GET /api/cities`, `GET /api/cities/:id`
+    - `GET /api/landmarks?cityId={cityId}`, `GET /api/landmarks/:id`
+    - `POST /api/visited`, `GET /api/visited?sessionId={id}`, `GET /api/visited/count?sessionId={id}`, `GET /api/visited/:landmarkId?sessionId={id}`
 
-### Progressive Web App (PWA) Features
-- **Offline Mode**: Full app functionality without internet connection
-- **Service Worker**: Pre-caches all city landmarks and static assets on install
-- **Install to Home Screen**: Add app to mobile home screen like a native app
-- **Network Status Indicators**: Visual feedback for online/offline status
-- **Cached Map Tiles**: OpenStreetMap tiles cached for offline viewing
-- **Offline-First API**: API responses cached with fallback to embedded data
+**System Design Choices:**
+- **Frontend Framework:** React 18 with TypeScript.
+- **Data Fetching:** TanStack React Query v5.
+- **Styling:** Tailwind CSS with Shadcn UI components.
+- **Routing:** Wouter for client-side routing.
+- **Backend Framework:** Express.js.
+- **Database:** PostgreSQL (Neon serverless) with Drizzle ORM for type-safe database interactions.
+- **Data Storage:** A hybrid approach using both PostgreSQL for persistent data (e.g., visited landmarks) and in-memory storage for landmark and city data.
+- **Validation:** Zod for request validation on the backend.
+- **Session Management:** LocalStorage is used for storing session IDs and user preferences like TTS speed.
 
-## Technology Stack
+## External Dependencies
 
-### Frontend
-- React 18 with TypeScript
-- React-Leaflet 4.2.1 for map integration
-- Leaflet Routing Machine for navigation
-- TanStack React Query v5 for data fetching
-- Tailwind CSS with Shadcn UI components
-- Web Speech API for audio narration
-- Wouter for routing
-- LocalStorage for session management
-
-### Backend
-- Express.js server
-- PostgreSQL with Neon serverless
-- Drizzle ORM for database operations
-- In-memory storage for landmarks/cities (hybrid approach)
-- RESTful API endpoints
-- Zod for request validation
-
-### Database
-- PostgreSQL (Neon-backed)
-- Drizzle ORM with TypeScript
-- Tables: `visited_landmarks`
-- Unique constraint on (session_id, landmark_id) for duplicate prevention
-
-## Project Structure
-
-```
-client/
-├── public/
-│   ├── service-worker.js         # PWA service worker for offline mode
-│   └── manifest.json             # PWA manifest for install-to-home
-├── src/
-│   ├── components/
-│   │   ├── MapView.tsx           # Main map with markers and routing
-│   │   ├── InfoPanel.tsx          # Control panel with GPS status
-│   │   ├── LandmarkList.tsx       # Landmark browsing with details
-│   │   ├── LandmarkDetails.tsx    # Detailed landmark modal
-│   │   ├── PhotoGallery.tsx       # Photo grid and viewer
-│   │   ├── CitySelector.tsx       # City selection dropdown
-│   │   ├── LanguageSelector.tsx   # Language selection dropdown
-│   │   ├── ProgressStats.tsx      # Visit progress visualization
-│   │   ├── OfflineIndicator.tsx   # Network status indicator
-│   │   └── InstallPrompt.tsx      # PWA install prompt
-│   ├── hooks/
-│   │   ├── useGeoLocation.ts      # GPS tracking hook
-│   │   ├── useVisitedLandmarks.ts # Visited landmarks management
-│   │   ├── useServiceWorker.ts    # Service worker registration
-│   │   └── useOnlineStatus.ts     # Online/offline detection
-│   ├── lib/
-│   │   ├── audioService.ts        # Web Speech API wrapper
-│   │   ├── geoUtils.ts           # Distance calculations
-│   │   ├── translations.ts        # Translation utilities
-│   │   └── sessionUtils.ts        # Session ID management
-│   └── pages/
-│       └── Home.tsx              # Main application page
-server/
-├── db.ts                         # Database connection (Drizzle + Neon)
-├── routes.ts                     # API route definitions
-└── storage.ts                    # Hybrid storage (DB + in-memory)
-shared/
-└── schema.ts                     # TypeScript types, Zod schemas, Drizzle tables
-```
-
-## API Endpoints
-
-### Cities
-- `GET /api/cities` - Returns all cities
-- `GET /api/cities/:id` - Returns a specific city by ID
-
-### Landmarks
-- `GET /api/landmarks?cityId={cityId}` - Returns landmarks (filtered by city)
-- `GET /api/landmarks/:id` - Returns a specific landmark by ID
-
-### Visited Landmarks (Database)
-- `POST /api/visited` - Mark landmark as visited (with deduplication)
-- `GET /api/visited?sessionId={id}` - Get all visited landmarks for session
-- `GET /api/visited/count?sessionId={id}` - Get visited count for session
-- `GET /api/visited/:landmarkId?sessionId={id}` - Check if landmark is visited
+- **Mapping:**
+    - React-Leaflet (for React integration with Leaflet)
+    - Leaflet (interactive maps)
+    - OpenStreetMap (map tiles)
+    - Leaflet Routing Machine (turn-by-turn navigation)
+    - Google Maps (external navigation option)
+- **Database:**
+    - PostgreSQL (via Neon serverless)
+    - Drizzle ORM (TypeScript ORM for PostgreSQL)
+- **Frontend Libraries:**
+    - React (UI library)
+    - TypeScript (language)
+    - TanStack React Query (data fetching)
+    - Tailwind CSS (utility-first CSS framework)
+    - Shadcn UI (UI component library)
+    - Wouter (small routing library)
+- **Backend Libraries:**
+    - Express.js (web framework)
+    - Zod (schema validation)
+- **Browser APIs:**
+    - Web Speech API (text-to-speech)
+    - Geolocation API (GPS tracking)
+    - Service Worker API (PWA offline capabilities)
+    - LocalStorage API (client-side data persistence)
 
 ## Cities & Landmarks
 
-### Rome (5 landmarks)
-1. **Colosseum** - 70m radius, 3 photos
-2. **Roman Forum** - 60m radius, 2 photos
-3. **Trevi Fountain** - 50m radius, 2 photos
-4. **Pantheon** - 50m radius, 2 photos
-5. **Spanish Steps** - 50m radius, 2 photos
+### Europe
 
-### Paris (3 landmarks)
+**Rome, Italy (5 landmarks)**
+1. **Colosseum** - 70m radius, 7 photos
+2. **Roman Forum** - 60m radius
+3. **Trevi Fountain** - 50m radius
+4. **Pantheon** - 50m radius
+5. **Spanish Steps** - 50m radius
+
+**Paris, France (4 landmarks)**
 1. **Eiffel Tower** - 70m radius
 2. **Louvre Museum** - 60m radius
 3. **Notre-Dame Cathedral** - 50m radius
 4. **Arc de Triomphe** - 50m radius
 
-### London (4 landmarks)
+**London, United Kingdom (4 landmarks)**
 1. **Big Ben** - 50m radius
 2. **Tower Bridge** - 60m radius
 3. **Buckingham Palace** - 70m radius
 4. **London Eye** - 50m radius
 
-## Key Features Implementation
+### Southeast Asia
 
-### GPS Location Tracking
-- Browser Geolocation API with `watchPosition`
-- High accuracy mode for precise tracking
-- Auto map centering on user position
-- Fallback to city center when GPS unavailable
+**Cebu, Philippines (4 landmarks)**
+1. **Magellan's Cross** - Historic wooden cross from 1521, 50m radius
+2. **Basilica del Santo Niño** - Oldest Roman Catholic church in Philippines (1565), 60m radius
+3. **Fort San Pedro** - Oldest triangular Spanish colonial fortress, 60m radius
+4. **TOPS Lookout** - Mountain viewpoint with 360° views, 70m radius
 
-### Audio Narration System
-- Auto-triggers when within landmark radius
-- Tracks spoken landmarks (no repetition)
-- Language-aware audio playback
-- Visual speaking indicator
-- Reset on audio toggle/language change
+**Singapore (4 landmarks)**
+1. **Marina Bay Sands** - Iconic resort with rooftop infinity pool, 70m radius
+2. **Merlion Park** - Singapore's national icon statue, 50m radius
+3. **Gardens by the Bay** - Futuristic garden with Supertree Grove, 100m radius
+4. **Singapore Flyer** - Giant observation wheel (165m tall), 60m radius
 
-### Route Navigation
-- Leaflet Routing Machine integration
-- Custom terracotta route styling (hsl(14, 85%, 55%))
-- Fallback start point when GPS unavailable
-- Clear route functionality
+**Penang, Malaysia (4 landmarks)**
+1. **Kek Lok Si Temple** - Largest Buddhist temple in Southeast Asia, 70m radius
+2. **Fort Cornwallis** - Largest standing British fort in Malaysia (1786), 60m radius
+3. **Khoo Kongsi** - Ornate Chinese clan house and UNESCO heritage site, 50m radius
+4. **Penang Hill** - Hill station with funicular railway (821m elevation), 80m radius
 
-### Visited Landmarks Tracking
-- Session ID generated and stored in localStorage
-- Automatic marking when within landmark radius
-- PostgreSQL persistence with unique constraint
-- ON CONFLICT DO NOTHING for duplicate prevention
-- Real-time progress statistics
-- Visual progress bar (0-100%)
+**Kuala Lumpur, Malaysia (2 landmarks)**
+1. **Petronas Twin Towers** - World's tallest twin skyscrapers (452m), 80m radius
+2. **Batu Caves** - Sacred Hindu temple complex in limestone caves, 70m radius
 
-### Design System
-- Primary: Terracotta/Roman red-orange (hsl(14, 85%, 55%))
-- Success/GPS: Green (hsl(142, 71%, 45%))
-- Glass-morphic floating panels with backdrop blur
-- Custom landmark markers with terracotta background
-- User location marker with pulse animation
-- Responsive mobile-first design
-- Playfair Display (serif) + Inter (sans-serif) fonts
-
-## Development
-
-### Running the Application
-```bash
-npm run dev
-```
-
-Starts Express server (backend) and Vite dev server (frontend) on port 5000.
-
-### Database Management
-```bash
-npm run db:push        # Push schema changes to database
-npm run db:push --force # Force push (when conflicts occur)
-```
+**Phuket, Thailand (4 landmarks)**
+1. **Big Buddha Phuket** - 45m white marble Buddha statue on hilltop, 70m radius
+2. **Patong Beach** - Most famous beach and entertainment hub (3km stretch), 100m radius
+3. **Wat Chalong** - Phuket's largest and most important Buddhist temple, 60m radius
+4. **Karon Viewpoint** - Panoramic viewpoint overlooking 3 bays, 50m radius
 
 ## Recent Changes (2025-10-12)
 
-### Latest Update: Critical Runtime Error Fix (Today)
+### Latest Update: Added 5 New Cities with 18 Landmarks (Today)
+- **New Southeast Asian Destinations**: Added Cebu (Philippines), Singapore, Penang (Malaysia), Kuala Lumpur (Malaysia), and Phuket (Thailand)
+- **18 New Landmarks**: Each city features 2-4 major tourist attractions with complete information
+- **Complete Information**: All landmarks include detailed descriptions, GPS coordinates, photos, historical context
+- **Multi-language Support**: English and Korean translations for all new content
+- **Diverse Categories**: Historical sites, modern architecture, beaches, viewpoints, temples, cultural heritage
+- **Notable Additions**:
+  - Petronas Twin Towers (world's tallest twin skyscrapers, 452m)
+  - Marina Bay Sands (iconic Singapore resort with infinity pool)
+  - Big Buddha Phuket (45m white marble statue)
+  - Magellan's Cross (historic 1521 landmark)
+  - Kek Lok Si Temple (largest Buddhist temple in SE Asia)
+- **E2E Tested**: Verified all cities appear in selector, landmarks load correctly, details display properly
+
+### Previous Update: Critical Runtime Error Fix
 - **Fixed "Cannot read properties of null (reading 'useRef')" Error**: Removed Next.js-specific directives
 - **Root Cause**: UI components had "use client" directives incompatible with Vite/React
 - **Solution**: Removed "use client" from 15 UI component files (dialog, tooltip, sidebar, form, etc.)
@@ -224,104 +155,3 @@ npm run db:push --force # Force push (when conflicts occur)
 - **Fallback Labels**: Shows specific photo info when selected, generic labels otherwise
 - **Full Compliance**: Meets Radix UI accessibility requirements for screen readers
 - **E2E Tested**: Verified no console errors/warnings, photo navigation works correctly
-
-### Previous Update: Google Maps Navigation Integration
-- **Navigation Choice Dialog**: When clicking "Get Directions", users can choose between Google Maps or in-app navigation
-- **Google Maps Integration**: Opens Google Maps in new tab with proper directions URL
-- **Smart URL Generation**: 
-  - Includes user's current location as origin (if available)
-  - Uses landmark coordinates as destination
-  - Follows Google Maps Directions API format
-- **In-App Navigation Option**: Falls back to Leaflet routing on the map
-- **Multi-language Support**: Added translations for EN, KO, JA
-- **E2E Tested**: Verified dialog flow, Google Maps URL generation, and both navigation options
-
-### Previous Update: Mobile Menu Card Styling
-- **Mobile Menu Enhancement**: Wrapped mobile sidebar menu in Card component for better visual elevation
-- **Responsive Design**: 
-  - Mobile: Card visible with border, background, and shadow
-  - Desktop (md+): Card transparent with no border/shadow (original design maintained)
-- **Improved UX**: Mobile menu now has clear visual separation from map background
-- **Padding Adjustments**: Optimized spacing for mobile and desktop views
-- **E2E Tested**: Verified on mobile viewport (375x667px), all controls accessible
-
-### Previous Update: Historical Info Translation & Language-Specific TTS Voices
-- **historicalInfo Translation**: Extended getTranslatedContent() to support 'historicalInfo' field
-- **Complete Localization**: Historical information now translates in LandmarkPanel and LandmarkDetails
-- **Language-Specific TTS Voices**: 
-  - audioService now explicitly selects voices by language
-  - Prefers local voices over remote for better quality
-  - Supports exact language match (ko-KR) with base language fallback (ko)
-  - Voices loaded dynamically with onvoiceschanged event handler
-- **Multi-language Support**: Verified translation and TTS for EN, KO, JA languages
-- **E2E Tested**: Confirmed historical info displays in correct language, screenshots verified
-
-### Previous Update: TTS Speed Control
-- **Adjustable Speech Rate**: Slider control in AppSidebar (0.5x-2x, 0.1 step)
-- **Real-time Updates**: Speech rate display updates as slider moves
-- **Persistent Settings**: Rate saved to localStorage ('tts-speed' key)
-- **Applied Universally**: Rate applies to auto-narration and test audio
-- **Multi-language Labels**: 'speechSpeed' translation added (EN, KO)
-- **E2E Tested**: Verified slider interaction, localStorage persistence, audio playback
-
-### Previous Completed Features
-1. **Multi-City Support**
-   - Added Rome, Paris, London with city selector
-   - City-based landmark filtering
-   - Dynamic map centering
-
-2. **Multi-Language Support**
-   - English, Italian, Korean translations
-   - Language-specific audio narration
-   - Translated landmark content
-
-3. **Photo Galleries**
-   - Extended landmark schema with photos, history, architect
-   - Photo grid and full-screen viewer
-   - Detailed landmark modal with rich information
-
-4. **Visited Landmarks Tracking**
-   - PostgreSQL database with visited_landmarks table
-   - Session-based progress tracking
-   - Duplicate prevention with unique constraints
-   - Progress visualization with stats and bar
-   - Persistent across page refreshes
-
-5. **Progressive Web App (PWA)**
-   - PWA manifest configuration with app metadata and icons
-   - Service worker with offline-first caching strategy (v2)
-   - Pre-caching of all city landmarks during SW installation
-   - Network status indicators for online/offline state
-   - Install-to-home-screen prompt with dismissible UI
-   - Cached map tiles and API responses for offline use
-   - Full offline functionality for all cities
-
-## Testing
-
-End-to-end test coverage includes:
-- Map loading and landmark display
-- Audio toggle and language switching
-- Route navigation and clearing
-- Landmark interaction and details
-- GPS status indicators
-- Photo gallery and viewer
-- Visited landmarks tracking
-- Duplicate prevention
-- Progress statistics
-- Offline mode functionality
-- Service worker caching
-- Network status indicators
-- PWA installation flow
-
-## Future Enhancements
-
-Potential features:
-- User accounts and authentication
-- Custom route creation and sharing
-- Push notifications for nearby landmarks
-- Social sharing of visited landmarks
-- Augmented reality landmark views
-- More cities and landmarks
-- Audio tour packages
-- Enhanced offline map tile pre-caching
-- Background sync for visited landmarks

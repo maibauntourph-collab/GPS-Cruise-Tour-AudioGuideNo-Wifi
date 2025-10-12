@@ -119,6 +119,46 @@ const CITIES: City[] = [
     lat: 59.9139,
     lng: 10.7522,
     zoom: 13
+  },
+  {
+    id: 'cebu',
+    name: 'Cebu',
+    country: 'Philippines',
+    lat: 10.3157,
+    lng: 123.8854,
+    zoom: 13
+  },
+  {
+    id: 'singapore',
+    name: 'Singapore',
+    country: 'Singapore',
+    lat: 1.2897,
+    lng: 103.8501,
+    zoom: 13
+  },
+  {
+    id: 'penang',
+    name: 'Penang',
+    country: 'Malaysia',
+    lat: 5.4164,
+    lng: 100.3327,
+    zoom: 13
+  },
+  {
+    id: 'kuala-lumpur',
+    name: 'Kuala Lumpur',
+    country: 'Malaysia',
+    lat: 3.1390,
+    lng: 101.6869,
+    zoom: 13
+  },
+  {
+    id: 'phuket',
+    name: 'Phuket',
+    country: 'Thailand',
+    lat: 7.8804,
+    lng: 98.3923,
+    zoom: 13
   }
 ];
 
@@ -3292,6 +3332,613 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '奥斯陆歌剧院由挪威建筑公司斯诺赫塔设计，于2008年4月12日开放。这是自1300年左右尼达罗斯大教堂建成以来挪威建造的最大文化建筑。该建筑在2009年获得了欧盟当代建筑奖（密斯·凡德罗奖）和2008年世界建筑节文化奖。',
         yearBuilt: '2008年',
         architect: '斯诺赫塔'
+      }
+    }
+  },
+  
+  // Cebu, Philippines landmarks
+  {
+    id: 'magellans-cross',
+    cityId: 'cebu',
+    name: 'Magellan\'s Cross',
+    lat: 10.2934,
+    lng: 123.9011,
+    radius: 50,
+    narration: 'Welcome to Magellan\'s Cross, a historic landmark that marks the birth of Christianity in the Philippines. This wooden cross was planted by Ferdinand Magellan in 1521.',
+    description: 'Historic wooden cross planted by Ferdinand Magellan in 1521',
+    category: 'Historical',
+    detailedDescription: 'Magellan\'s Cross is a Christian cross planted by Portuguese and Spanish explorers as ordered by Ferdinand Magellan upon arriving in Cebu in the Philippines on April 21, 1521. This cross is housed in a chapel next to the Basilica del Santo Niño on Magallanes Street, just in front of the Cebu City Hall. The original wooden cross is encased in tindalo wood to protect it from souvenir hunters who were chipping away pieces of the cross. A sign below the cross claims it was the original cross planted by Magellan, while others claim the original cross has been destroyed and that the cross is a replica. The ceiling of the pavilion is decorated with paintings depicting the story of how Magellan brought Christianity to the Philippines. The cross is a revered relic and one of the most visited spots in Cebu City.',
+    photos: [
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1528127269322-539801943592?w=800'
+    ],
+    historicalInfo: 'The cross was planted by Portuguese explorer Ferdinand Magellan on April 21, 1521, when he arrived in Cebu and baptized the island\'s first Catholic converts.',
+    yearBuilt: '1521',
+    architect: 'Ferdinand Magellan',
+    translations: {
+      en: {
+        name: 'Magellan\'s Cross',
+        narration: 'Welcome to Magellan\'s Cross, a historic landmark that marks the birth of Christianity in the Philippines. This wooden cross was planted by Ferdinand Magellan in 1521.',
+        description: 'Historic wooden cross planted by Ferdinand Magellan in 1521',
+        historicalInfo: 'The cross was planted by Portuguese explorer Ferdinand Magellan on April 21, 1521, when he arrived in Cebu and baptized the island\'s first Catholic converts.'
+      },
+      ko: {
+        name: '마젤란의 십자가',
+        narration: '필리핀 기독교의 탄생을 상징하는 역사적인 랜드마크, 마젤란의 십자가에 오신 것을 환영합니다. 이 나무 십자가는 1521년 페르디난드 마젤란이 세웠습니다.',
+        description: '1521년 페르디난드 마젤란이 세운 역사적인 나무 십자가',
+        historicalInfo: '이 십자가는 1521년 4월 21일 포르투갈 탐험가 페르디난드 마젤란이 세부에 도착하여 섬의 첫 가톨릭 신자들에게 세례를 주었을 때 세워졌습니다.'
+      }
+    }
+  },
+  {
+    id: 'basilica-santo-nino',
+    cityId: 'cebu',
+    name: 'Basilica del Santo Niño',
+    lat: 10.2945,
+    lng: 123.9017,
+    radius: 60,
+    narration: 'Welcome to the Basilica del Santo Niño, the oldest Roman Catholic church in the Philippines. This sacred site houses the miraculous statue of the Child Jesus.',
+    description: 'Oldest Roman Catholic church in the Philippines, established in 1565',
+    category: 'Religious',
+    detailedDescription: 'The Basilica Minore del Santo Niño de Cebú is a minor basilica in Cebu City in the Philippines that was founded in 1565 by Fray Andrés de Urdaneta and Fray Diego de Herrera. It is the oldest Roman Catholic church in the country, built on the spot where the image of the Santo Niño de Cebú was found during the expedition of Miguel López de Legazpi. The church was initially made of bamboo and palm leaves and was destroyed by fire. The present-day stone church was completed in 1735. The church has been rebuilt several times over the centuries due to fire and the ravages of war. The Basilica houses the Santo Niño, a statue of the Child Jesus believed to be left behind by Ferdinand Magellan in 1521 and miraculously found intact 44 years later despite a fire. The image is the oldest Christian relic in the Philippines and is believed to be miraculous by devotees. Every third Sunday of January, the Basilica is the center of the Sinulog Festival, one of the country\'s biggest religious and cultural celebrations.',
+    photos: [
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800'
+    ],
+    historicalInfo: 'Founded in 1565, it is the oldest Roman Catholic church in the Philippines. The church houses the Santo Niño statue, believed to be left by Magellan in 1521.',
+    yearBuilt: '1565',
+    architect: 'Fray Andrés de Urdaneta',
+    translations: {
+      en: {
+        name: 'Basilica del Santo Niño',
+        narration: 'Welcome to the Basilica del Santo Niño, the oldest Roman Catholic church in the Philippines. This sacred site houses the miraculous statue of the Child Jesus.',
+        description: 'Oldest Roman Catholic church in the Philippines, established in 1565',
+        historicalInfo: 'Founded in 1565, it is the oldest Roman Catholic church in the Philippines. The church houses the Santo Niño statue, believed to be left by Magellan in 1521.'
+      },
+      ko: {
+        name: '산토 니뇨 성당',
+        narration: '필리핀에서 가장 오래된 로마 가톨릭 교회인 산토 니뇨 성당에 오신 것을 환영합니다. 이 성스러운 장소에는 기적적인 아기 예수 상이 보관되어 있습니다.',
+        description: '1565년에 설립된 필리핀에서 가장 오래된 로마 가톨릭 교회',
+        historicalInfo: '1565년에 설립되어 필리핀에서 가장 오래된 로마 가톨릭 교회입니다. 교회에는 1521년 마젤란이 남긴 것으로 여겨지는 산토 니뇨 상이 보관되어 있습니다.'
+      }
+    }
+  },
+  {
+    id: 'fort-san-pedro',
+    cityId: 'cebu',
+    name: 'Fort San Pedro',
+    lat: 10.2929,
+    lng: 123.9015,
+    radius: 60,
+    narration: 'Welcome to Fort San Pedro, the oldest triangular fort in the Philippines. This Spanish colonial fortress was built in the 16th century and stands as a testament to Cebu\'s rich history.',
+    description: 'Oldest triangular Spanish colonial fortress in the Philippines',
+    category: 'Historical',
+    detailedDescription: 'Fort San Pedro is a military defense structure in Cebu City, built by Spanish and indigenous Cebuano laborers under the command of Spanish conquistador Miguel López de Legazpi and the city\'s first Spanish governor. The fort is triangular in shape with two sides facing the sea and one facing land. It was initially made of wood and later reconstructed with stone in the 17th century. The fort has served many purposes throughout history - from a Spanish citadel to an American army garrison, and during World War II, it was used by the Japanese as a prisoner of war camp. Today, it has been restored and serves as a tourist attraction and museum. The fort contains several relics and artifacts from the Spanish period, including cannons, sculptures, and paintings. The peaceful gardens and historic atmosphere make it a popular spot for both tourists and locals.',
+    photos: [
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+      'https://images.unsplash.com/photo-1523509433743-6f42a58221df?w=800'
+    ],
+    historicalInfo: 'Built in 1565 under the command of Miguel López de Legazpi, it is the oldest triangular fort in the Philippines and one of the oldest Spanish colonial fortifications in the country.',
+    yearBuilt: '1565',
+    architect: 'Miguel López de Legazpi',
+    translations: {
+      en: {
+        name: 'Fort San Pedro',
+        narration: 'Welcome to Fort San Pedro, the oldest triangular fort in the Philippines. This Spanish colonial fortress was built in the 16th century and stands as a testament to Cebu\'s rich history.',
+        description: 'Oldest triangular Spanish colonial fortress in the Philippines',
+        historicalInfo: 'Built in 1565 under the command of Miguel López de Legazpi, it is the oldest triangular fort in the Philippines and one of the oldest Spanish colonial fortifications in the country.'
+      },
+      ko: {
+        name: '산 페드로 요새',
+        narration: '필리핀에서 가장 오래된 삼각형 요새인 산 페드로 요새에 오신 것을 환영합니다. 이 스페인 식민지 요새는 16세기에 건설되었으며 세부의 풍부한 역사를 증명합니다.',
+        description: '필리핀에서 가장 오래된 삼각형 스페인 식민지 요새',
+        historicalInfo: '1565년 미구엘 로페스 데 레가스피의 지휘 하에 건설되었으며, 필리핀에서 가장 오래된 삼각형 요새이자 스페인 식민지 시대 최고(最古)의 요새 중 하나입니다.'
+      }
+    }
+  },
+  {
+    id: 'tops-lookout',
+    cityId: 'cebu',
+    name: 'TOPS Lookout',
+    lat: 10.3320,
+    lng: 123.9580,
+    radius: 70,
+    narration: 'Welcome to TOPS Lookout, offering breathtaking panoramic views of Cebu City and the surrounding islands. This scenic viewpoint sits 2,000 feet above sea level.',
+    description: 'Scenic mountain viewpoint with 360-degree views of Cebu',
+    category: 'Viewpoint',
+    detailedDescription: 'TOPS, which stands for Transcentral Highway Observation Park, is a popular mountain viewpoint located in the Busay Hills of Cebu City. Situated 2,000 feet above sea level, it offers spectacular 360-degree panoramic views of Metro Cebu, Mactan Island, Bohol, and neighboring islands. The lookout is especially famous for its stunning views during sunrise and sunset, and the glittering city lights at night create a romantic atmosphere. The area features several viewing decks, benches, and open spaces perfect for picnics and photo opportunities. Local vendors sell snacks, drinks, and souvenirs. The cool mountain breeze provides a refreshing escape from the tropical heat of the city below. TOPS has become a must-visit destination for both locals and tourists seeking Instagram-worthy photos and a peaceful retreat.',
+    photos: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800'
+    ],
+    historicalInfo: 'TOPS Lookout was developed as a scenic viewpoint along the Transcentral Highway and has become one of Cebu\'s most popular tourist destinations for its stunning panoramic views.',
+    yearBuilt: '1990s',
+    architect: 'Local Government',
+    translations: {
+      en: {
+        name: 'TOPS Lookout',
+        narration: 'Welcome to TOPS Lookout, offering breathtaking panoramic views of Cebu City and the surrounding islands. This scenic viewpoint sits 2,000 feet above sea level.',
+        description: 'Scenic mountain viewpoint with 360-degree views of Cebu',
+        historicalInfo: 'TOPS Lookout was developed as a scenic viewpoint along the Transcentral Highway and has become one of Cebu\'s most popular tourist destinations for its stunning panoramic views.'
+      },
+      ko: {
+        name: 'TOPS 전망대',
+        narration: '세부시와 주변 섬들의 숨막히는 파노라마 전망을 제공하는 TOPS 전망대에 오신 것을 환영합니다. 이 경치 좋은 전망대는 해발 2,000피트에 위치해 있습니다.',
+        description: '세부의 360도 전망을 제공하는 경치 좋은 산악 전망대',
+        historicalInfo: 'TOPS 전망대는 트랜스센트럴 하이웨이를 따라 경치 좋은 전망대로 개발되었으며 놀라운 파노라마 전망으로 세부의 가장 인기있는 관광지 중 하나가 되었습니다.'
+      }
+    }
+  },
+
+  // Singapore landmarks
+  {
+    id: 'marina-bay-sands',
+    cityId: 'singapore',
+    name: 'Marina Bay Sands',
+    lat: 1.2832,
+    lng: 103.8607,
+    radius: 70,
+    narration: 'Welcome to Marina Bay Sands, Singapore\'s most iconic landmark. This integrated resort features a stunning rooftop infinity pool with spectacular views of the city skyline.',
+    description: 'Iconic integrated resort with rooftop infinity pool',
+    category: 'Modern Architecture',
+    detailedDescription: 'Marina Bay Sands is an integrated resort fronting Marina Bay in Singapore. Developed by Las Vegas Sands at a cost of $5.88 billion, it opened in 2010 and is the world\'s most expensive standalone casino property. The resort includes a 2,561-room hotel, a 120,000-square-meter convention-exhibition center, a mall with a canal running through it, two theaters, museums, restaurants by celebrity chefs, two floating pavilions, and the world-famous SkyPark. The SkyPark, a ship-shaped structure atop the three hotel towers, features a 150-meter infinity pool, the world\'s largest rooftop infinity pool, offering breathtaking 360-degree views of Singapore. The resort has become an architectural icon and a symbol of modern Singapore, featured in countless movies, TV shows, and photographs. The design by architect Moshe Safdie was inspired by stacked decks of cards.',
+    photos: [
+      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800',
+      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800',
+      'https://images.unsplash.com/photo-1506351421178-63b52a2d2562?w=800'
+    ],
+    historicalInfo: 'Opened in 2010, Marina Bay Sands was developed by Las Vegas Sands at a cost of $5.88 billion, making it the world\'s most expensive standalone casino property.',
+    yearBuilt: '2010',
+    architect: 'Moshe Safdie',
+    translations: {
+      en: {
+        name: 'Marina Bay Sands',
+        narration: 'Welcome to Marina Bay Sands, Singapore\'s most iconic landmark. This integrated resort features a stunning rooftop infinity pool with spectacular views of the city skyline.',
+        description: 'Iconic integrated resort with rooftop infinity pool',
+        historicalInfo: 'Opened in 2010, Marina Bay Sands was developed by Las Vegas Sands at a cost of $5.88 billion, making it the world\'s most expensive standalone casino property.'
+      },
+      ko: {
+        name: '마리나 베이 샌즈',
+        narration: '싱가포르의 가장 상징적인 랜드마크인 마리나 베이 샌즈에 오신 것을 환영합니다. 이 통합 리조트는 도시 스카이라인의 장관을 이루는 전망을 제공하는 멋진 옥상 인피니티 풀을 특징으로 합니다.',
+        description: '옥상 인피니티 풀이 있는 상징적인 통합 리조트',
+        historicalInfo: '2010년에 개장한 마리나 베이 샌즈는 라스베이거스 샌즈가 58억 8천만 달러를 들여 개발하여 세계에서 가장 비싼 독립형 카지노 부동산이 되었습니다.'
+      }
+    }
+  },
+  {
+    id: 'merlion-park',
+    cityId: 'singapore',
+    name: 'Merlion Park',
+    lat: 1.2868,
+    lng: 103.8545,
+    radius: 50,
+    narration: 'Welcome to Merlion Park, home to Singapore\'s national icon. The Merlion statue, with the head of a lion and the body of a fish, symbolizes Singapore\'s origins as a fishing village.',
+    description: 'Singapore\'s national icon and symbol',
+    category: 'Monument',
+    detailedDescription: 'The Merlion is the official mascot of Singapore, depicted as a mythical creature with a lion\'s head and a fish\'s body. The original Merlion structure measures 8.6 meters tall and spouts water from its mouth. Designed by Fraser Brunner and sculpted by Lim Nang Seng, it was unveiled in 1972 by Prime Minister Lee Kuan Yew. The fish body represents Singapore\'s origin as a fishing village when it was called Temasek, meaning "sea town" in Old Javanese. The lion head represents Singapura, meaning "lion city" in Sanskrit, as according to legend, a Sumatran prince saw a lion on the island and named it Singapura. The park offers stunning views of Marina Bay Sands, the ArtScience Museum, and the Singapore skyline. It\'s one of Singapore\'s most visited attractions and a popular photo spot.',
+    photos: [
+      'https://images.unsplash.com/photo-1505555210347-3ea3dc6702c0?w=800',
+      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800'
+    ],
+    historicalInfo: 'The Merlion was designed by Fraser Brunner for the Singapore Tourism Board in 1964 and unveiled by Prime Minister Lee Kuan Yew on September 15, 1972.',
+    yearBuilt: '1972',
+    architect: 'Fraser Brunner (designer), Lim Nang Seng (sculptor)',
+    translations: {
+      en: {
+        name: 'Merlion Park',
+        narration: 'Welcome to Merlion Park, home to Singapore\'s national icon. The Merlion statue, with the head of a lion and the body of a fish, symbolizes Singapore\'s origins as a fishing village.',
+        description: 'Singapore\'s national icon and symbol',
+        historicalInfo: 'The Merlion was designed by Fraser Brunner for the Singapore Tourism Board in 1964 and unveiled by Prime Minister Lee Kuan Yew on September 15, 1972.'
+      },
+      ko: {
+        name: '멀라이언 공원',
+        narration: '싱가포르의 국가 상징인 멀라이언의 본거지인 멀라이언 공원에 오신 것을 환영합니다. 사자의 머리와 물고기의 몸을 가진 멀라이언 상은 어촌 마을로서의 싱가포르의 기원을 상징합니다.',
+        description: '싱가포르의 국가 아이콘이자 상징',
+        historicalInfo: '멀라이언은 1964년 프레이저 브루너가 싱가포르 관광청을 위해 디자인했으며 1972년 9월 15일 리콴유 총리에 의해 공개되었습니다.'
+      }
+    }
+  },
+  {
+    id: 'gardens-by-the-bay',
+    cityId: 'singapore',
+    name: 'Gardens by the Bay',
+    lat: 1.2816,
+    lng: 103.8636,
+    radius: 100,
+    narration: 'Welcome to Gardens by the Bay, a futuristic garden featuring the iconic Supertree Grove. These vertical gardens are a stunning blend of nature and technology.',
+    description: 'Futuristic garden with iconic Supertree Grove',
+    category: 'Park & Garden',
+    detailedDescription: 'Gardens by the Bay is a nature park spanning 101 hectares in the heart of Singapore, adjacent to the Marina Reservoir. The park consists of three waterfront gardens: Bay South Garden, Bay East Garden, and Bay Central Garden. The most famous attraction is the Supertree Grove, featuring 18 tree-like vertical gardens ranging from 25 to 50 meters tall. Eleven Supertrees are embedded with solar panels to harness solar energy. The park also features two cooled conservatories - the Flower Dome and Cloud Forest - both among the world\'s largest climate-controlled greenhouses. The Flower Dome replicates a cool-dry Mediterranean climate, while the Cloud Forest showcases plants from tropical mountain regions. At night, the Garden Rhapsody light and sound show illuminates the Supertrees. Opened in 2012, Gardens by the Bay has won numerous international awards for its innovative design and sustainability features.',
+    photos: [
+      'https://images.unsplash.com/photo-1506351421178-63b52a2d2562?w=800',
+      'https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800',
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800'
+    ],
+    historicalInfo: 'Opened in 2012, Gardens by the Bay was developed at a cost of over $1 billion to transform Singapore into a "City in a Garden". It has won numerous international horticulture and design awards.',
+    yearBuilt: '2012',
+    architect: 'Grant Associates, Wilkinson Eyre',
+    translations: {
+      en: {
+        name: 'Gardens by the Bay',
+        narration: 'Welcome to Gardens by the Bay, a futuristic garden featuring the iconic Supertree Grove. These vertical gardens are a stunning blend of nature and technology.',
+        description: 'Futuristic garden with iconic Supertree Grove',
+        historicalInfo: 'Opened in 2012, Gardens by the Bay was developed at a cost of over $1 billion to transform Singapore into a "City in a Garden". It has won numerous international horticulture and design awards.'
+      },
+      ko: {
+        name: '가든스 바이 더 베이',
+        narration: '상징적인 슈퍼트리 그로브를 특징으로 하는 미래지향적인 정원인 가든스 바이 더 베이에 오신 것을 환영합니다. 이 수직 정원은 자연과 기술의 놀라운 조화입니다.',
+        description: '상징적인 슈퍼트리 그로브가 있는 미래지향적인 정원',
+        historicalInfo: '2012년에 개장한 가든스 바이 더 베이는 싱가포르를 "정원 속의 도시"로 변모시키기 위해 10억 달러 이상의 비용으로 개발되었습니다. 수많은 국제 원예 및 디자인 상을 수상했습니다.'
+      }
+    }
+  },
+  {
+    id: 'singapore-flyer',
+    cityId: 'singapore',
+    name: 'Singapore Flyer',
+    lat: 1.2894,
+    lng: 103.8632,
+    radius: 60,
+    narration: 'Welcome to the Singapore Flyer, one of the world\'s largest observation wheels. Enjoy breathtaking 360-degree views of Singapore and beyond from 165 meters above ground.',
+    description: 'Giant observation wheel with panoramic city views',
+    category: 'Observation',
+    detailedDescription: 'The Singapore Flyer is a giant observation wheel and a prominent landmark of Singapore. Standing at 165 meters tall, it was the world\'s tallest Ferris wheel when it opened in 2008, a title it held until 2014. The wheel features 28 air-conditioned capsules, each able to accommodate up to 28 passengers. A complete rotation takes approximately 30 minutes, offering stunning panoramic views of the Marina Bay area, the Singapore River, and on clear days, parts of Malaysia and Indonesia. The Singapore Flyer was designed by Arup Australia and DP Architects. The structure\'s design was inspired by the Buddhist prayer wheel and the Chinese philosophy of yin and yang. The observation wheel has become an iconic part of Singapore\'s skyline and a popular tourist attraction, offering dining experiences and special event packages within its capsules.',
+    photos: [
+      'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800',
+      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800'
+    ],
+    historicalInfo: 'Opened in 2008, the Singapore Flyer stood at 165 meters and was the world\'s tallest Ferris wheel until 2014. It offers spectacular views of the city and surrounding regions.',
+    yearBuilt: '2008',
+    architect: 'DP Architects, Arup Australia',
+    translations: {
+      en: {
+        name: 'Singapore Flyer',
+        narration: 'Welcome to the Singapore Flyer, one of the world\'s largest observation wheels. Enjoy breathtaking 360-degree views of Singapore and beyond from 165 meters above ground.',
+        description: 'Giant observation wheel with panoramic city views',
+        historicalInfo: 'Opened in 2008, the Singapore Flyer stood at 165 meters and was the world\'s tallest Ferris wheel until 2014. It offers spectacular views of the city and surrounding regions.'
+      },
+      ko: {
+        name: '싱가포르 플라이어',
+        narration: '세계에서 가장 큰 관람차 중 하나인 싱가포르 플라이어에 오신 것을 환영합니다. 지상 165미터 높이에서 싱가포르와 그 너머의 숨막히는 360도 전망을 즐기세요.',
+        description: '파노라마 도시 전망을 제공하는 거대한 관람차',
+        historicalInfo: '2008년에 개장한 싱가포르 플라이어는 높이 165미터로 2014년까지 세계에서 가장 높은 관람차였습니다. 도시와 주변 지역의 장관을 이루는 전망을 제공합니다.'
+      }
+    }
+  },
+  
+  // Penang, Malaysia landmarks
+  {
+    id: 'kek-lok-si-temple',
+    cityId: 'penang',
+    name: 'Kek Lok Si Temple',
+    lat: 5.397,
+    lng: 100.272,
+    radius: 70,
+    narration: 'Welcome to Kek Lok Si Temple, the largest Buddhist temple in Southeast Asia. This magnificent temple complex features stunning architecture and offers panoramic views of Penang.',
+    description: 'Largest Buddhist temple in Southeast Asia',
+    category: 'Religious',
+    detailedDescription: 'Kek Lok Si Temple, or the Temple of Supreme Bliss, is a Buddhist temple complex located in Air Itam, Penang. It is the largest Buddhist temple in Southeast Asia and one of the key attractions in Penang. Construction began in 1891 and took over 20 years to complete. The temple complex features a seven-tier pagoda called the Pagoda of Rama VI, which combines Chinese, Thai, and Burmese architectural styles. The temple sits on a hill, offering breathtaking views of Georgetown and Penang Island. The main attraction is the towering 36.5-meter bronze statue of Kuan Yin, the Goddess of Mercy, completed in 2002. The temple is especially beautiful during Chinese New Year when it is decorated with thousands of lanterns and lights. The complex includes multiple halls, pavilions, and ponds filled with tortoises.',
+    photos: [
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800'
+    ],
+    historicalInfo: 'Construction began in 1891 and took over 20 years to complete. It is the largest Buddhist temple in Southeast Asia and features a blend of Chinese, Thai, and Burmese architectural styles.',
+    yearBuilt: '1891-1911',
+    architect: 'Beow Lean',
+    translations: {
+      en: {
+        name: 'Kek Lok Si Temple',
+        narration: 'Welcome to Kek Lok Si Temple, the largest Buddhist temple in Southeast Asia. This magnificent temple complex features stunning architecture and offers panoramic views of Penang.',
+        description: 'Largest Buddhist temple in Southeast Asia',
+        historicalInfo: 'Construction began in 1891 and took over 20 years to complete. It is the largest Buddhist temple in Southeast Asia and features a blend of Chinese, Thai, and Burmese architectural styles.'
+      },
+      ko: {
+        name: '켁 록 시 사원',
+        narration: '동남아시아에서 가장 큰 불교 사원인 켁 록 시 사원에 오신 것을 환영합니다. 이 웅장한 사원 복합체는 놀라운 건축물을 특징으로 하며 페낭의 파노라마 전망을 제공합니다.',
+        description: '동남아시아 최대의 불교 사원',
+        historicalInfo: '1891년에 건설이 시작되어 완공까지 20년 이상이 걸렸습니다. 중국, 태국, 미얀마 건축 양식이 혼합된 동남아시아 최대의 불교 사원입니다.'
+      }
+    }
+  },
+  {
+    id: 'fort-cornwallis',
+    cityId: 'penang',
+    name: 'Fort Cornwallis',
+    lat: 5.41667,
+    lng: 100.35,
+    radius: 60,
+    narration: 'Welcome to Fort Cornwallis, the largest standing fort in Malaysia. Built in the 18th century, this historic fortress marks the spot where Captain Francis Light first landed in Penang.',
+    description: 'Largest standing British fort in Malaysia',
+    category: 'Historical',
+    detailedDescription: 'Fort Cornwallis is a star-shaped fort located in Georgetown, Penang. Built by the British East India Company in the late 18th century, it is the largest standing fort in Malaysia. The fort was named after Charles Cornwallis, the Governor-General of Bengal. Captain Francis Light landed at this site in 1786 and established the British colony on Penang Island. The fort was originally built with wood and nibong palms but was later rebuilt with convict labor using bricks between 1808 and 1810. Today, the fort houses several historical artifacts including cannons, ammunition storage, a chapel, and living quarters. The most famous cannon is Seri Rambai, a Dutch cannon captured in the 18th century. Visitors can explore the fort grounds, view historical exhibits, and enjoy the waterfront location with views of the harbor.',
+    photos: [
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+      'https://images.unsplash.com/photo-1580880783408-b8d56c12bbfd?w=800'
+    ],
+    historicalInfo: 'Built in 1786 by Captain Francis Light, Fort Cornwallis marks the birthplace of British Penang. It was originally constructed with wood and later rebuilt with brick between 1808-1810.',
+    yearBuilt: '1786',
+    architect: 'British East India Company',
+    translations: {
+      en: {
+        name: 'Fort Cornwallis',
+        narration: 'Welcome to Fort Cornwallis, the largest standing fort in Malaysia. Built in the 18th century, this historic fortress marks the spot where Captain Francis Light first landed in Penang.',
+        description: 'Largest standing British fort in Malaysia',
+        historicalInfo: 'Built in 1786 by Captain Francis Light, Fort Cornwallis marks the birthplace of British Penang. It was originally constructed with wood and later rebuilt with brick between 1808-1810.'
+      },
+      ko: {
+        name: '포트 콘월리스',
+        narration: '말레이시아에서 가장 큰 현존하는 요새인 포트 콘월리스에 오신 것을 환영합니다. 18세기에 건설된 이 역사적인 요새는 프랜시스 라이트 선장이 페낭에 처음 상륙한 장소를 표시합니다.',
+        description: '말레이시아에서 가장 큰 현존하는 영국 요새',
+        historicalInfo: '1786년 프랜시스 라이트 선장이 건설한 포트 콘월리스는 영국령 페낭의 탄생지를 표시합니다. 원래 나무로 건설되었으며 1808-1810년 사이에 벽돌로 재건되었습니다.'
+      }
+    }
+  },
+  {
+    id: 'khoo-kongsi',
+    cityId: 'penang',
+    name: 'Khoo Kongsi',
+    lat: 5.416,
+    lng: 100.331,
+    radius: 50,
+    narration: 'Welcome to Khoo Kongsi, one of the most ornate Chinese clan houses in Southeast Asia. This magnificent temple showcases exquisite craftsmanship and rich Chinese heritage.',
+    description: 'Ornate Chinese clan house and temple',
+    category: 'Cultural Heritage',
+    detailedDescription: 'Khoo Kongsi is an ornate Chinese clan house temple located in Georgetown, Penang. It is one of the most distinctive Chinese clan associations in Malaysia and Southeast Asia. Built by the Khoo clan in 1851 and completed in 1906, the kongsi is renowned for its elaborate architecture, intricate carvings, and detailed paintings. The main building features a dragon-adorned roof, colorful murals, and gold-leaf decorations. The temple was built to honor the Khoo ancestors and served as a meeting place for clan members. The complex includes the main temple, an opera stage, administrative offices, and rows of terrace houses where clan members once lived. Khoo Kongsi is part of the UNESCO World Heritage Site of Georgetown and represents the peak of Chinese architectural craftsmanship outside of China.',
+    photos: [
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800'
+    ],
+    historicalInfo: 'Built in 1851 and completed in 1906, Khoo Kongsi is one of the most elaborate Chinese clan houses in Southeast Asia, featuring intricate carvings and exquisite architectural details.',
+    yearBuilt: '1851-1906',
+    architect: 'Khoo Clan',
+    translations: {
+      en: {
+        name: 'Khoo Kongsi',
+        narration: 'Welcome to Khoo Kongsi, one of the most ornate Chinese clan houses in Southeast Asia. This magnificent temple showcases exquisite craftsmanship and rich Chinese heritage.',
+        description: 'Ornate Chinese clan house and temple',
+        historicalInfo: 'Built in 1851 and completed in 1906, Khoo Kongsi is one of the most elaborate Chinese clan houses in Southeast Asia, featuring intricate carvings and exquisite architectural details.'
+      },
+      ko: {
+        name: '쿠 콩시',
+        narration: '동남아시아에서 가장 화려한 중국 씨족 회관 중 하나인 쿠 콩시에 오신 것을 환영합니다. 이 웅장한 사원은 정교한 장인 정신과 풍부한 중국 유산을 보여줍니다.',
+        description: '화려한 중국 씨족 회관 및 사원',
+        historicalInfo: '1851년에 건설되어 1906년에 완공된 쿠 콩시는 복잡한 조각과 정교한 건축적 세부 사항을 특징으로 하는 동남아시아에서 가장 정교한 중국 씨족 회관 중 하나입니다.'
+      }
+    }
+  },
+  {
+    id: 'penang-hill',
+    cityId: 'penang',
+    name: 'Penang Hill',
+    lat: 5.423,
+    lng: 100.267,
+    radius: 80,
+    narration: 'Welcome to Penang Hill, a cool retreat offering spectacular views of Penang Island. Take the funicular railway to the summit and enjoy the refreshing mountain air.',
+    description: 'Scenic hilltop retreat with funicular railway',
+    category: 'Nature & Viewpoint',
+    detailedDescription: 'Penang Hill, also known as Bukit Bendera, is a hill resort located in the Air Itam area of Penang. Standing at 821 meters above sea level, it is the oldest British hill station in Southeast Asia, established in the late 18th century. The hill provides a cool escape from the tropical heat, with temperatures about 5°C cooler than at sea level. Visitors reach the summit via the Penang Hill Funicular Railway, one of the steepest and longest funicular systems in the world. At the top, visitors can enjoy panoramic views of Georgetown, the coastline, and on clear days, mainland Malaysia. The summit features colonial bungalows, gardens, a mosque, a Hindu temple, a bird park, and various restaurants. The hill is also home to diverse flora and fauna, including rare plants and bird species. The cool climate makes it a popular spot for hiking and nature walks.',
+    photos: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800'
+    ],
+    historicalInfo: 'Established in the late 18th century, Penang Hill is the oldest British hill station in Southeast Asia. The funicular railway was opened in 1923 and modernized in 2011.',
+    yearBuilt: '1790s',
+    architect: 'British Colonial Administration',
+    translations: {
+      en: {
+        name: 'Penang Hill',
+        narration: 'Welcome to Penang Hill, a cool retreat offering spectacular views of Penang Island. Take the funicular railway to the summit and enjoy the refreshing mountain air.',
+        description: 'Scenic hilltop retreat with funicular railway',
+        historicalInfo: 'Established in the late 18th century, Penang Hill is the oldest British hill station in Southeast Asia. The funicular railway was opened in 1923 and modernized in 2011.'
+      },
+      ko: {
+        name: '페낭 힐',
+        narration: '페낭 섬의 장관을 이루는 전망을 제공하는 시원한 휴양지인 페낭 힐에 오신 것을 환영합니다. 푸니쿨라 철도를 타고 정상에 올라 상쾌한 산악 공기를 즐기세요.',
+        description: '푸니쿨라 철도가 있는 경치 좋은 언덕 휴양지',
+        historicalInfo: '18세기 후반에 설립된 페낭 힐은 동남아시아에서 가장 오래된 영국 언덕 휴양지입니다. 푸니쿨라 철도는 1923년에 개통되어 2011년에 현대화되었습니다.'
+      }
+    }
+  },
+
+  // Kuala Lumpur, Malaysia landmarks
+  {
+    id: 'petronas-towers',
+    cityId: 'kuala-lumpur',
+    name: 'Petronas Twin Towers',
+    lat: 3.1578,
+    lng: 101.7119,
+    radius: 80,
+    narration: 'Welcome to the Petronas Twin Towers, the iconic symbol of Malaysia. These magnificent twin skyscrapers stand at 452 meters tall and were the world\'s tallest buildings from 1998 to 2004.',
+    description: 'World\'s tallest twin skyscrapers',
+    category: 'Modern Architecture',
+    detailedDescription: 'The Petronas Twin Towers, also known as Menara Berkembar Petronas, are twin skyscrapers in Kuala Lumpur that were the tallest buildings in the world from 1998 to 2004 and remain the world\'s tallest twin skyscrapers. Designed by Argentine-American architect César Pelli, the 88-story towers stand 451.9 meters tall. The towers feature a postmodern architectural style with Islamic art motifs that reflect Malaysia\'s Muslim heritage. Each tower floor plan is based on an eight-pointed star pattern created from overlapping squares and circles. The towers are connected by the Skybridge on the 41st and 42nd floors, the world\'s highest two-story bridge at the time. The 86th floor observation deck offers spectacular views of the city. The towers house the headquarters of Petronas, Malaysia\'s national petroleum corporation, as well as offices, a shopping mall (Suria KLCC), art gallery, concert hall, and a mosque.',
+    photos: [
+      'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800',
+      'https://images.unsplash.com/photo-1508062878650-88b52897f298?w=800',
+      'https://images.unsplash.com/photo-1508004680771-708b02aabdc0?w=800'
+    ],
+    historicalInfo: 'Completed in 1998, the Petronas Towers were designed by César Pelli and held the title of world\'s tallest buildings until 2004. They remain the world\'s tallest twin towers.',
+    yearBuilt: '1998',
+    architect: 'César Pelli',
+    translations: {
+      en: {
+        name: 'Petronas Twin Towers',
+        narration: 'Welcome to the Petronas Twin Towers, the iconic symbol of Malaysia. These magnificent twin skyscrapers stand at 452 meters tall and were the world\'s tallest buildings from 1998 to 2004.',
+        description: 'World\'s tallest twin skyscrapers',
+        historicalInfo: 'Completed in 1998, the Petronas Towers were designed by César Pelli and held the title of world\'s tallest buildings until 2004. They remain the world\'s tallest twin towers.'
+      },
+      ko: {
+        name: '페트로나스 트윈 타워',
+        narration: '말레이시아의 상징적인 심볼인 페트로나스 트윈 타워에 오신 것을 환영합니다. 이 웅장한 쌍둥이 마천루는 높이 452미터로 1998년부터 2004년까지 세계에서 가장 높은 건물이었습니다.',
+        description: '세계에서 가장 높은 쌍둥이 마천루',
+        historicalInfo: '1998년에 완공된 페트로나스 타워는 세사르 펠리가 설계했으며 2004년까지 세계에서 가장 높은 건물의 타이틀을 보유했습니다. 여전히 세계에서 가장 높은 쌍둥이 타워입니다.'
+      }
+    }
+  },
+  {
+    id: 'batu-caves',
+    cityId: 'kuala-lumpur',
+    name: 'Batu Caves',
+    lat: 3.2379,
+    lng: 101.6841,
+    radius: 70,
+    narration: 'Welcome to Batu Caves, a limestone hill with a series of caves and cave temples. The site is dominated by the massive golden statue of Lord Murugan and features 272 colorful steps.',
+    description: 'Sacred Hindu temple complex in limestone caves',
+    category: 'Religious & Natural',
+    detailedDescription: 'Batu Caves is a limestone hill with a series of caves and cave temples located in Gombak, Selangor, just north of Kuala Lumpur. The cave complex is one of the most popular Hindu shrines outside India and is dedicated to Lord Murugan. The site features a 42.7-meter tall golden statue of Lord Murugan at the entrance, the tallest statue of a Hindu deity in Malaysia and the third tallest statue of a Hindu deity in the world. Visitors must climb 272 colorful steps to reach the main Temple Cave, also known as Cathedral Cave, which is 100 meters high. The cave complex consists of three main caves and several smaller ones. The largest cave, the Temple Cave, houses several Hindu shrines beneath its high dome. During the annual Thaipusam festival, over 1.5 million pilgrims gather at Batu Caves. The caves are also home to a large colony of macaque monkeys that interact with visitors.',
+    photos: [
+      'https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?w=800',
+      'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800'
+    ],
+    historicalInfo: 'The caves have been used as a Hindu shrine for over 120 years. The golden statue of Lord Murugan was unveiled in 2006 and stands 42.7 meters tall.',
+    yearBuilt: '1892',
+    architect: 'Natural Formation, Hindu Temple by K. Thamboosamy Pillai',
+    translations: {
+      en: {
+        name: 'Batu Caves',
+        narration: 'Welcome to Batu Caves, a limestone hill with a series of caves and cave temples. The site is dominated by the massive golden statue of Lord Murugan and features 272 colorful steps.',
+        description: 'Sacred Hindu temple complex in limestone caves',
+        historicalInfo: 'The caves have been used as a Hindu shrine for over 120 years. The golden statue of Lord Murugan was unveiled in 2006 and stands 42.7 meters tall.'
+      },
+      ko: {
+        name: '바투 동굴',
+        narration: '일련의 동굴과 동굴 사원이 있는 석회암 언덕인 바투 동굴에 오신 것을 환영합니다. 이 장소는 거대한 금색 무루간 신 동상이 지배하고 있으며 272개의 다채로운 계단이 특징입니다.',
+        description: '석회암 동굴의 신성한 힌두 사원 복합체',
+        historicalInfo: '동굴은 120년 이상 힌두 신전으로 사용되어 왔습니다. 금색 무루간 신 동상은 2006년에 공개되었으며 높이 42.7미터입니다.'
+      }
+    }
+  },
+
+  // Phuket, Thailand landmarks
+  {
+    id: 'big-buddha-phuket',
+    cityId: 'phuket',
+    name: 'Big Buddha Phuket',
+    lat: 7.8318,
+    lng: 98.3081,
+    radius: 70,
+    narration: 'Welcome to the Big Buddha, one of Phuket\'s most iconic landmarks. This 45-meter tall white marble statue sits atop the Nakkerd Hills and offers breathtaking 360-degree views.',
+    description: '45-meter white marble Buddha statue on hilltop',
+    category: 'Religious & Viewpoint',
+    detailedDescription: 'The Big Buddha Phuket is one of the island\'s most important and revered landmarks. The massive image sits atop the Nakkerd Hills between Chalong and Kata and at 45 meters tall can be seen from far away. The statue is made of white Burmese marble and construction began in 2004, with ongoing additions and improvements. The Big Buddha sits in the Maravija pose, a traditional pose in which Buddha subdued the evil demon Mara. Visitors can walk around the base of the statue and enjoy spectacular 360-degree panoramic views of Phuket Town, Kata, Karon beaches, Chalong Bay, and on clear days, the Phi Phi Islands. The site is a place of worship and visitors are expected to dress respectfully. Around the main statue, there are smaller Buddha images, bells that visitors can ring for good luck, and donation boxes where proceeds go toward completing the Big Buddha project. The peaceful atmosphere, cool hilltop breezes, and stunning views make it a must-visit destination.',
+    photos: [
+      'https://images.unsplash.com/photo-1537519646386-f9e5573c1c94?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800'
+    ],
+    historicalInfo: 'Construction began in 2004 and is still ongoing. The 45-meter tall statue is made of white Burmese marble and has become one of Phuket\'s most visited landmarks.',
+    yearBuilt: '2004-present',
+    architect: 'Local Buddhist Community',
+    translations: {
+      en: {
+        name: 'Big Buddha Phuket',
+        narration: 'Welcome to the Big Buddha, one of Phuket\'s most iconic landmarks. This 45-meter tall white marble statue sits atop the Nakkerd Hills and offers breathtaking 360-degree views.',
+        description: '45-meter white marble Buddha statue on hilltop',
+        historicalInfo: 'Construction began in 2004 and is still ongoing. The 45-meter tall statue is made of white Burmese marble and has become one of Phuket\'s most visited landmarks.'
+      },
+      ko: {
+        name: '푸켓 빅 붓다',
+        narration: '푸켓의 가장 상징적인 랜드마크 중 하나인 빅 붓다에 오신 것을 환영합니다. 높이 45미터의 백색 대리석 동상이 나케르드 힐 꼭대기에 자리잡고 있으며 숨막히는 360도 전망을 제공합니다.',
+        description: '언덕 꼭대기의 45미터 높이 백색 대리석 부처 동상',
+        historicalInfo: '2004년에 건설이 시작되어 현재도 진행 중입니다. 높이 45미터의 동상은 백색 버마 대리석으로 만들어졌으며 푸켓에서 가장 많이 방문하는 랜드마크 중 하나가 되었습니다.'
+      }
+    }
+  },
+  {
+    id: 'patong-beach',
+    cityId: 'phuket',
+    name: 'Patong Beach',
+    lat: 7.8968,
+    lng: 98.2966,
+    radius: 100,
+    narration: 'Welcome to Patong Beach, Phuket\'s most famous and bustling beach. This 3-kilometer stretch of white sand offers water sports, restaurants, and vibrant nightlife.',
+    description: 'Phuket\'s most popular beach and entertainment hub',
+    category: 'Beach & Entertainment',
+    detailedDescription: 'Patong Beach is the most famous and developed beach in Phuket, located on the west coast of the island. The 3-kilometer crescent-shaped beach is lined with hotels, restaurants, bars, and shops. Patong is known for its vibrant atmosphere, offering everything from water sports like jet skiing, parasailing, and banana boat rides during the day to bustling nightlife centered around Bangla Walking Street at night. The beach itself features soft white sand and clear turquoise water, though it can get crowded during peak tourist season. Patong has evolved from a quiet fishing village to Phuket\'s entertainment capital, offering shopping at Jungceylon mall, beachfront dining, massage parlors, and cultural shows. While it lacks the tranquility of other Phuket beaches, Patong\'s energy and variety of activities make it popular with travelers seeking excitement and convenience.',
+    photos: [
+      'https://images.unsplash.com/photo-1527934111143-f2c94c664e50?w=800',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800'
+    ],
+    historicalInfo: 'Patong Beach transformed from a quiet tin-mining and fishing village in the 1980s to become Phuket\'s premier tourist destination and entertainment center.',
+    yearBuilt: 'Natural Formation',
+    architect: 'N/A',
+    translations: {
+      en: {
+        name: 'Patong Beach',
+        narration: 'Welcome to Patong Beach, Phuket\'s most famous and bustling beach. This 3-kilometer stretch of white sand offers water sports, restaurants, and vibrant nightlife.',
+        description: 'Phuket\'s most popular beach and entertainment hub',
+        historicalInfo: 'Patong Beach transformed from a quiet tin-mining and fishing village in the 1980s to become Phuket\'s premier tourist destination and entertainment center.'
+      },
+      ko: {
+        name: '파통 비치',
+        narration: '푸켓에서 가장 유명하고 번화한 해변인 파통 비치에 오신 것을 환영합니다. 3킬로미터 길이의 백사장은 수상 스포츠, 레스토랑, 활기찬 나이트라이프를 제공합니다.',
+        description: '푸켓에서 가장 인기 있는 해변이자 엔터테인먼트 허브',
+        historicalInfo: '파통 비치는 1980년대 조용한 주석 광산과 어촌 마을에서 푸켓의 주요 관광지이자 엔터테인먼트 중심지로 변모했습니다.'
+      }
+    }
+  },
+  {
+    id: 'wat-chalong',
+    cityId: 'phuket',
+    name: 'Wat Chalong',
+    lat: 7.8482,
+    lng: 98.3530,
+    radius: 60,
+    narration: 'Welcome to Wat Chalong, Phuket\'s most important Buddhist temple. This ornate temple complex honors two revered monks and features beautiful traditional Thai architecture.',
+    description: 'Phuket\'s largest and most visited Buddhist temple',
+    category: 'Religious',
+    detailedDescription: 'Wat Chalong, officially named Wat Chaithararam, is the largest and most visited Buddhist temple in Phuket. The temple was built in the early 19th century and is dedicated to two highly venerated monks, Luang Pho Chaem and Luang Pho Chuang, who helped suppress a Chinese rebellion in 1876 using their skills in herbal medicine and Thai martial arts. The temple complex features several buildings including the Grand Pagoda (Phra Mahathat Chedi), which houses a splinter of bone from Lord Buddha, the main ordination hall (ubosot), and statues of the revered monks. The architecture showcases traditional Thai design with ornate decorations, colorful murals depicting Buddha\'s life, and gilded details. Visitors come to pay respects, seek blessings, and participate in traditional merit-making activities. The temple grounds are peaceful and well-maintained, offering a cultural and spiritual experience.',
+    photos: [
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800'
+    ],
+    historicalInfo: 'Built in the early 19th century, Wat Chalong honors two revered monks who helped suppress a Chinese rebellion in 1876. It is Phuket\'s most important Buddhist temple.',
+    yearBuilt: 'Early 1800s',
+    architect: 'Traditional Thai Buddhist Architects',
+    translations: {
+      en: {
+        name: 'Wat Chalong',
+        narration: 'Welcome to Wat Chalong, Phuket\'s most important Buddhist temple. This ornate temple complex honors two revered monks and features beautiful traditional Thai architecture.',
+        description: 'Phuket\'s largest and most visited Buddhist temple',
+        historicalInfo: 'Built in the early 19th century, Wat Chalong honors two revered monks who helped suppress a Chinese rebellion in 1876. It is Phuket\'s most important Buddhist temple.'
+      },
+      ko: {
+        name: '왓 찰롱',
+        narration: '푸켓에서 가장 중요한 불교 사원인 왓 찰롱에 오신 것을 환영합니다. 이 화려한 사원 복합체는 두 명의 존경받는 승려를 기리며 아름다운 전통 태국 건축을 특징으로 합니다.',
+        description: '푸켓에서 가장 크고 가장 많이 방문하는 불교 사원',
+        historicalInfo: '19세기 초에 건설된 왓 찰롱은 1876년 중국인 반란을 진압하는 데 도움을 준 두 명의 존경받는 승려를 기립니다. 푸켓에서 가장 중요한 불교 사원입니다.'
+      }
+    }
+  },
+  {
+    id: 'karon-viewpoint',
+    cityId: 'phuket',
+    name: 'Karon Viewpoint',
+    lat: 7.8132,
+    lng: 98.2983,
+    radius: 50,
+    narration: 'Welcome to Karon Viewpoint, offering one of the most photographed views in Phuket. This scenic spot provides panoramic vistas of three bays: Kata Noi, Kata, and Karon.',
+    description: 'Panoramic viewpoint overlooking three stunning bays',
+    category: 'Viewpoint',
+    detailedDescription: 'Karon Viewpoint, also known as Kata Viewpoint or Three Beaches Hill, is one of the most visited viewpoints in Phuket. Located on the road between Nai Harn and Kata beaches, the viewpoint sits on a hill offering spectacular panoramic views of three beautiful bays: Kata Noi Beach, Kata Beach, and Karon Beach. The turquoise waters contrasting with white sand beaches and lush green headlands create a postcard-perfect scene. The viewpoint is especially popular during sunset when the sky turns shades of orange and pink. There\'s a platform with benches where visitors can relax and take photos, and vendors sell refreshments and souvenirs. The site is easily accessible by car or scooter and is free to visit. It\'s a must-stop location for anyone traveling along Phuket\'s west coast.',
+    photos: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800'
+    ],
+    historicalInfo: 'Karon Viewpoint has become one of Phuket\'s most iconic photo locations, offering unobstructed views of the island\'s west coast beaches.',
+    yearBuilt: 'Natural Formation',
+    architect: 'N/A',
+    translations: {
+      en: {
+        name: 'Karon Viewpoint',
+        narration: 'Welcome to Karon Viewpoint, offering one of the most photographed views in Phuket. This scenic spot provides panoramic vistas of three bays: Kata Noi, Kata, and Karon.',
+        description: 'Panoramic viewpoint overlooking three stunning bays',
+        historicalInfo: 'Karon Viewpoint has become one of Phuket\'s most iconic photo locations, offering unobstructed views of the island\'s west coast beaches.'
+      },
+      ko: {
+        name: '카론 전망대',
+        narration: '푸켓에서 가장 사진이 많이 찍히는 전망 중 하나를 제공하는 카론 전망대에 오신 것을 환영합니다. 이 경치 좋은 장소는 세 개의 만을 파노라마로 조망합니다: 카타 노이, 카타, 카론.',
+        description: '세 개의 멋진 만이 내려다보이는 파노라마 전망대',
+        historicalInfo: '카론 전망대는 섬 서해안 해변의 장애물 없는 전망을 제공하며 푸켓에서 가장 상징적인 사진 촬영 장소 중 하나가 되었습니다.'
       }
     }
   }
