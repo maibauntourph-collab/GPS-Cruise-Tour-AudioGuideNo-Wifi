@@ -218,6 +218,195 @@ const CITIES: City[] = [
       recommendedDuration: '6-8 hours',
       recommendedLandmarks: ['sagrada-familia', 'park-guell', 'gothic-quarter'],
       tips: 'The cruise port is very close to Las Ramblas and the Gothic Quarter. Use the shuttle bus or taxi to reach Sagrada Familia. Buy tickets online in advance to avoid long queues.',
+      portCoordinates: {
+        lat: 41.3652,
+        lng: 2.1774
+      },
+      transportOptions: [
+        {
+          type: 'shuttle',
+          name: 'Port Shuttle Bus (Blue Bus)',
+          from: 'Cruise Terminal',
+          to: 'Columbus Monument (Las Ramblas)',
+          duration: '15 minutes',
+          frequency: 'Every 20-30 minutes',
+          price: '€3 per person',
+          tips: 'Free shuttle often provided by cruise lines. Otherwise use the Blue Bus (Porta Bus). Runs when ships are in port.',
+          translations: {
+            ko: {
+              name: '항구 셔틀버스 (블루 버스)',
+              from: '크루즈 터미널',
+              to: '콜럼버스 기념비 (람블라스 거리)',
+              duration: '15분',
+              frequency: '20-30분마다',
+              price: '1인당 €3',
+              tips: '크루즈 라인이 무료 셔틀을 제공하는 경우가 많습니다. 그렇지 않으면 블루 버스(Porta Bus) 이용. 배가 정박할 때만 운행.'
+            },
+            it: {
+              name: 'Navetta del Porto (Bus Blu)',
+              from: 'Terminal Crociere',
+              to: 'Monumento a Colombo (Las Ramblas)',
+              duration: '15 minuti',
+              frequency: 'Ogni 20-30 minuti',
+              price: '€3 a persona',
+              tips: 'Navetta gratuita spesso fornita dalle compagnie di crociera. Altrimenti usa il Bus Blu (Porta Bus). Funziona quando le navi sono in porto.'
+            }
+          }
+        },
+        {
+          type: 'bus',
+          name: 'Hop-on Hop-off Barcelona Bus Turístic',
+          from: 'Port (World Trade Center)',
+          to: 'Sagrada Familia, Park Güell, Gothic Quarter',
+          duration: 'Full day pass',
+          frequency: 'Every 10-15 minutes',
+          price: '€32-35 per day',
+          bookingUrl: 'https://www.barcelona-tourist-guide.com/en/bus-tourist/barcelona-bus-turistic.html',
+          tips: 'Best option for cruise passengers. Covers all major attractions. Buy tickets online for discount. Audio guide in 15 languages.',
+          translations: {
+            ko: {
+              name: 'Hop-on Hop-off 바르셀로나 버스 투리스틱',
+              from: '항구 (월드 트레이드 센터)',
+              to: '사그라다 파밀리아, 구엘 공원, 고딕 지구',
+              duration: '1일 패스',
+              frequency: '10-15분마다',
+              price: '1일 €32-35',
+              tips: '크루즈 승객에게 최고의 옵션. 모든 주요 명소 포함. 온라인 티켓 구매 시 할인. 15개 언어 오디오 가이드.'
+            },
+            it: {
+              name: 'Hop-on Hop-off Barcelona Bus Turístic',
+              from: 'Porto (World Trade Center)',
+              to: 'Sagrada Familia, Park Güell, Quartiere Gotico',
+              duration: 'Pass giornaliero',
+              frequency: 'Ogni 10-15 minuti',
+              price: '€32-35 al giorno',
+              tips: 'Opzione migliore per i passeggeri delle crociere. Copre tutte le attrazioni principali. Acquista i biglietti online per lo sconto. Audioguida in 15 lingue.'
+            }
+          }
+        },
+        {
+          type: 'bus',
+          name: 'Metro L3 (Green Line)',
+          from: 'Drassanes Station (15min walk from port)',
+          to: 'Sagrada Familia, Passeig de Gràcia',
+          duration: '20-30 minutes',
+          frequency: 'Every 5-10 minutes',
+          price: '€2.40 single / €11.35 for 10 trips',
+          bookingUrl: 'https://www.tmb.cat/en/home',
+          tips: 'Most economical option. Walk to Drassanes station or take shuttle bus first. Buy T-10 ticket for multiple trips.',
+          translations: {
+            ko: {
+              name: '메트로 L3 (녹색 라인)',
+              from: 'Drassanes 역 (항구에서 도보 15분)',
+              to: '사그라다 파밀리아, 그라시아 거리',
+              duration: '20-30분',
+              frequency: '5-10분마다',
+              price: '편도 €2.40 / 10회권 €11.35',
+              tips: '가장 경제적인 옵션. Drassanes 역까지 걸어가거나 먼저 셔틀버스 이용. 여러 번 이용 시 T-10 티켓 구매.'
+            },
+            it: {
+              name: 'Metro L3 (Linea Verde)',
+              from: 'Stazione Drassanes (15min a piedi dal porto)',
+              to: 'Sagrada Familia, Passeig de Gràcia',
+              duration: '20-30 minuti',
+              frequency: 'Ogni 5-10 minuti',
+              price: '€2.40 singolo / €11.35 per 10 viaggi',
+              tips: 'Opzione più economica. Cammina fino alla stazione Drassanes o prendi prima la navetta. Acquista il biglietto T-10 per più viaggi.'
+            }
+          }
+        },
+        {
+          type: 'shuttle',
+          name: 'GetYourGuide Shore Excursion',
+          from: 'Barcelona Cruise Port',
+          to: 'Guided City Tour (Sagrada Familia, Gothic Quarter, etc.)',
+          duration: '4-8 hours',
+          frequency: 'Based on booking',
+          price: '€45-150 per person',
+          bookingUrl: 'https://www.getyourguide.com/barcelona-l45/shore-excursions-tc147/',
+          tips: 'Pre-arranged tours guarantee return to ship on time. Includes skip-the-line tickets. Book 48 hours in advance.',
+          translations: {
+            ko: {
+              name: 'GetYourGuide 기항지 투어',
+              from: '바르셀로나 크루즈 포트',
+              to: '가이드 시티 투어 (사그라다 파밀리아, 고딕 지구 등)',
+              duration: '4-8시간',
+              frequency: '예약에 따라',
+              price: '1인당 €45-150',
+              tips: '사전 예약 투어로 정시 복귀 보장. 줄서기 패스 티켓 포함. 48시간 전 예약.'
+            },
+            it: {
+              name: 'GetYourGuide Escursione a Terra',
+              from: 'Porto Crociere di Barcellona',
+              to: 'Tour Guidato della Città (Sagrada Familia, Quartiere Gotico, ecc.)',
+              duration: '4-8 ore',
+              frequency: 'In base alla prenotazione',
+              price: '€45-150 a persona',
+              tips: 'I tour preordinati garantiscono il rientro in nave in tempo. Include biglietti salta fila. Prenota 48 ore prima.'
+            }
+          }
+        },
+        {
+          type: 'taxi',
+          name: 'Official Taxi',
+          from: 'Cruise Terminal',
+          to: 'Any city destination',
+          duration: '10-30 minutes depending on destination',
+          frequency: 'On demand',
+          price: '€15-30 to city center',
+          tips: 'Official yellow and black taxis available at terminal exit. Meter-based pricing. Ask for receipt.',
+          translations: {
+            ko: {
+              name: '공식 택시',
+              from: '크루즈 터미널',
+              to: '모든 도시 목적지',
+              duration: '목적지에 따라 10-30분',
+              frequency: '수시',
+              price: '시내까지 €15-30',
+              tips: '터미널 출구에서 공식 노란색과 검은색 택시 이용 가능. 미터기 요금. 영수증 요청.'
+            },
+            it: {
+              name: 'Taxi Ufficiale',
+              from: 'Terminal Crociere',
+              to: 'Qualsiasi destinazione in città',
+              duration: '10-30 minuti a seconda della destinazione',
+              frequency: 'Su richiesta',
+              price: '€15-30 per il centro città',
+              tips: 'Taxi ufficiali gialli e neri disponibili all\'uscita del terminal. Prezzo al tassametro. Chiedi la ricevuta.'
+            }
+          }
+        },
+        {
+          type: 'rideshare',
+          name: 'Uber / Cabify',
+          from: 'Barcelona Cruise Port',
+          to: 'City Center',
+          duration: '15-25 minutes',
+          frequency: 'On demand via app',
+          price: '€12-25',
+          tips: 'Use Uber or Cabify app. Cabify is popular in Barcelona. Price varies by demand. Pickup at designated area.',
+          translations: {
+            ko: {
+              name: '우버 / 캐비파이',
+              from: '바르셀로나 크루즈 포트',
+              to: '시내',
+              duration: '15-25분',
+              frequency: '앱을 통한 수시',
+              price: '€12-25',
+              tips: 'Uber 또는 Cabify 앱 사용. Cabify가 바르셀로나에서 인기. 수요에 따라 가격 변동. 지정된 구역에서 픽업.'
+            },
+            it: {
+              name: 'Uber / Cabify',
+              from: 'Porto Crociere di Barcellona',
+              to: 'Centro Città',
+              duration: '15-25 minuti',
+              frequency: 'Su richiesta tramite app',
+              price: '€12-25',
+              tips: 'Usa l\'app Uber o Cabify. Cabify è popolare a Barcellona. Il prezzo varia in base alla domanda. Ritiro nell\'area designata.'
+            }
+          }
+        }
+      ],
       translations: {
         ko: {
           portName: '바르셀로나 항구',
