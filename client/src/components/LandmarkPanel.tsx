@@ -55,14 +55,13 @@ export function LandmarkPanel({
 
   // Clamp translate values to keep element within bounds
   const clampTranslate = (x: number, y: number, elementWidth: number, elementHeight: number) => {
-    if (!cardRef.current) return { x, y };
+    // Use window dimensions for viewport bounds
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
     
-    const container = cardRef.current.offsetParent as HTMLElement;
-    if (!container) return { x, y };
-    
-    const containerRect = container.getBoundingClientRect();
-    const maxX = containerRect.width - elementWidth - 32;
-    const maxY = containerRect.height - elementHeight - 32;
+    // Account for initial 16px offset and ensure card stays fully within viewport
+    const maxX = viewportWidth - elementWidth - 32; // 16px initial left + 16px right margin
+    const maxY = viewportHeight - elementHeight - 32; // 16px initial top + 16px bottom margin
     
     return {
       x: Math.max(0, Math.min(x, maxX)),
@@ -71,9 +70,20 @@ export function LandmarkPanel({
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest('button')) {
+    const target = e.target as HTMLElement;
+    
+    // Only start drag if clicking on the header area (not on buttons, maps, or galleries)
+    if (target.closest('button') || 
+        target.closest('[class*="leaflet"]') || 
+        target.closest('[data-no-drag]')) {
       return;
     }
+    
+    // Only allow drag from the header/title area
+    if (!target.closest('[data-drag-handle]')) {
+      return;
+    }
+    
     setIsDragging(true);
     setHasMoved(false);
     setDragStart({
@@ -90,21 +100,22 @@ export function LandmarkPanel({
     const newX = e.clientX - dragStart.x;
     const newY = e.clientY - dragStart.y;
     
-    const container = cardRef.current.offsetParent as HTMLElement;
-    if (container) {
-      const cardRect = cardRef.current.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
-      
-      const maxX = containerRect.width - cardRect.width - 32;
-      const maxY = containerRect.height - cardRect.height - 32;
-      
-      const clampedX = Math.max(0, Math.min(newX, maxX));
-      const clampedY = Math.max(0, Math.min(newY, maxY));
-      
-      setTranslate({ x: clampedX, y: clampedY });
-    } else {
-      setTranslate({ x: newX, y: newY });
-    }
+    // Use offsetWidth/Height to get actual dimensions without transform
+    const cardWidth = cardRef.current.offsetWidth;
+    const cardHeight = cardRef.current.offsetHeight;
+    
+    // Use window dimensions for viewport bounds
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Account for initial 16px offset and ensure card stays fully within viewport
+    const maxX = viewportWidth - cardWidth - 32; // 16px initial left + 16px right margin
+    const maxY = viewportHeight - cardHeight - 32; // 16px initial top + 16px bottom margin
+    
+    const clampedX = Math.max(0, Math.min(newX, maxX));
+    const clampedY = Math.max(0, Math.min(newY, maxY));
+    
+    setTranslate({ x: clampedX, y: clampedY });
   };
 
   const handleMouseUp = () => {
@@ -177,8 +188,8 @@ export function LandmarkPanel({
     <div
       ref={cardRef}
       style={{
-        position: 'absolute',
-        right: '16px',
+        position: 'fixed',
+        left: '16px',
         top: '16px',
         zIndex,
         cursor: isDragging ? 'grabbing' : 'pointer',
@@ -198,6 +209,7 @@ export function LandmarkPanel({
         }
       }}
       data-testid="icon-landmark-minimized"
+      data-drag-handle
     >
       <div className="relative">
         <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-orange-500 dark:from-primary dark:to-orange-600 flex items-center justify-center shadow-lg hover-elevate active-elevate-2 border-2 border-white dark:border-gray-800">
@@ -213,23 +225,26 @@ export function LandmarkPanel({
     <div
       ref={cardRef}
       style={{
-        position: 'absolute',
-        right: '16px',
+        position: 'fixed',
+        left: '16px',
         top: '16px',
         zIndex,
-        cursor: isDragging ? 'grabbing' : 'grab',
-        maxWidth: '24rem',
+        width: '24rem',
         maxHeight: 'calc(100vh - 32px)',
         userSelect: 'none',
         transform: `translate(${translate.x}px, ${translate.y}px)`
       }}
-      onMouseDown={handleMouseDown}
       onClick={handleCardClick}
       data-testid="card-landmark-container"
     >
       <Card className="p-4 bg-background border overflow-y-auto max-h-[calc(100vh-32px)]" data-testid="panel-landmark-details">
         {/* Header */}
-        <div className="flex items-start justify-between mb-3">
+        <div 
+          className="flex items-start justify-between mb-3"
+          data-drag-handle
+          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+          onMouseDown={handleMouseDown}
+        >
           <div className="flex-1 min-w-0">
             <h2 className="font-serif text-xl mb-1 truncate" data-testid="text-landmark-name">
               {getTranslatedContent(landmark, selectedLanguage, 'name')}
@@ -286,7 +301,7 @@ export function LandmarkPanel({
         <div className="space-y-3">
           {/* Photo Gallery */}
           {landmark.photos && landmark.photos.length > 0 && (
-            <div>
+            <div data-no-drag>
               <h3 className="font-semibold text-sm mb-2 flex items-center gap-1">
                 <MapPin className="w-3 h-3 text-primary" />
                 {t('photos', selectedLanguage)}
@@ -304,7 +319,7 @@ export function LandmarkPanel({
               <MapPin className="w-3 h-3 text-primary" />
               {t('location', selectedLanguage)}
             </h3>
-            <div className="rounded-md overflow-hidden border h-32" data-testid="map-landmark-location">
+            <div className="rounded-md overflow-hidden border h-32" data-testid="map-landmark-location" data-no-drag>
               <MapContainer
                 key={landmark.id}
                 center={[landmark.lat, landmark.lng]}
