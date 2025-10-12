@@ -2,7 +2,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark, GpsPosition } from '@shared/schema';
-import { Navigation, MapPin, Volume2, Info } from 'lucide-react';
+import { Navigation, MapPin, Volume2, Info, Activity, Landmark as LandmarkIcon } from 'lucide-react';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 
@@ -61,6 +61,11 @@ export function LandmarkList({
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
+                    {landmark.category === 'Activity' ? (
+                      <Activity className="w-4 h-4 shrink-0" style={{ color: 'hsl(195, 85%, 50%)' }} />
+                    ) : (
+                      <LandmarkIcon className="w-4 h-4 shrink-0" style={{ color: 'hsl(14, 85%, 55%)' }} />
+                    )}
                     <h4 className="font-serif font-semibold truncate">
                       {getTranslatedContent(landmark, selectedLanguage, 'name')}
                     </h4>

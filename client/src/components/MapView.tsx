@@ -219,7 +219,8 @@ export function MapView({
   sidebarOpen = false,
   focusLocation,
 }: MapViewProps) {
-  const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)');
+  const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
+  const activityIcon = createCustomIcon('hsl(195, 85%, 50%)'); // Blue for activities
 
   return (
     <MapContainer
@@ -237,35 +238,40 @@ export function MapView({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {landmarks.map((landmark) => (
-        <Marker
-          key={landmark.id}
-          position={[landmark.lat, landmark.lng]}
-          icon={landmarkIcon}
-        >
-          <Popup>
-            <div className="p-2">
-              <h3 className="font-serif font-semibold text-lg mb-1">
-                {getTranslatedContent(landmark, selectedLanguage, 'name')}
-              </h3>
-              {getTranslatedContent(landmark, selectedLanguage, 'description') && (
-                <p className="text-sm text-muted-foreground mb-3">
-                  {getTranslatedContent(landmark, selectedLanguage, 'description')}
-                </p>
-              )}
-              <Button
-                size="sm"
-                onClick={() => onLandmarkRoute(landmark)}
-                className="w-full"
-                data-testid={`button-route-${landmark.id}`}
-              >
-                <Navigation className="w-4 h-4 mr-2" />
-                Get Directions
-              </Button>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+      {landmarks.map((landmark) => {
+        const isActivity = landmark.category === 'Activity';
+        const icon = isActivity ? activityIcon : landmarkIcon;
+        
+        return (
+          <Marker
+            key={landmark.id}
+            position={[landmark.lat, landmark.lng]}
+            icon={icon}
+          >
+            <Popup>
+              <div className="p-2">
+                <h3 className="font-serif font-semibold text-lg mb-1">
+                  {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                </h3>
+                {getTranslatedContent(landmark, selectedLanguage, 'description') && (
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {getTranslatedContent(landmark, selectedLanguage, 'description')}
+                  </p>
+                )}
+                <Button
+                  size="sm"
+                  onClick={() => onLandmarkRoute(landmark)}
+                  className="w-full"
+                  data-testid={`button-route-${landmark.id}`}
+                >
+                  <Navigation className="w-4 h-4 mr-2" />
+                  Get Directions
+                </Button>
+              </div>
+            </Popup>
+          </Marker>
+        );
+      })}
 
       {userPosition && (
         <Marker

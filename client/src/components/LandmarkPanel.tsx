@@ -163,7 +163,7 @@ export function LandmarkPanel({
                 position={[landmark.lat, landmark.lng]}
                 icon={L.divIcon({
                   className: 'custom-marker',
-                  html: `<div style="background: hsl(14, 85%, 55%); width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer;"></div>`,
+                  html: `<div style="background: ${landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)'}; width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer;"></div>`,
                   iconSize: [32, 32],
                   iconAnchor: [16, 32],
                 })}

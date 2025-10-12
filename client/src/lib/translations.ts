@@ -29,6 +29,7 @@ export function getTranslatedContent(
 const uiTranslations: Record<string, Record<string, string>> = {
   en: {
     landmarks: 'Landmarks',
+    activities: 'Activities',
     heard: 'Heard',
     away: 'away',
     playAudio: 'Play Audio',
@@ -63,6 +64,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
   },
   ko: {
     landmarks: '명소',
+    activities: '액티비티',
     heard: '들음',
     away: '거리',
     playAudio: '오디오 재생',

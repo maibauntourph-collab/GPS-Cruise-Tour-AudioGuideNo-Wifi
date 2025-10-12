@@ -24,6 +24,8 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
+import { Landmark as LandmarkIcon, Activity } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
   const { open: sidebarOpen } = useSidebar();
@@ -60,6 +62,8 @@ export default function Home() {
   const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
   const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
   const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
+  const [showLandmarks, setShowLandmarks] = useState(true);
+  const [showActivities, setShowActivities] = useState(true);
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -192,6 +196,13 @@ export default function Home() {
     setTimeout(() => setFocusLocation(null), 1000);
   };
 
+  // Filter landmarks based on category
+  const filteredLandmarks = landmarks.filter(landmark => {
+    const isActivity = landmark.category === 'Activity';
+    if (isActivity) return showActivities;
+    return showLandmarks;
+  });
+
   if (citiesLoading || landmarksLoading) {
     return (
       <div className="h-screen w-full flex items-center justify-center bg-background">
@@ -229,13 +240,36 @@ export default function Home() {
         <header className="flex items-center gap-2 p-2 border-b bg-background z-[1001]">
           <SidebarTrigger data-testid="button-sidebar-toggle" />
           <h1 className="font-serif font-semibold text-lg">GPS Audio Guide</h1>
+          
+          <div className="ml-auto flex items-center gap-1">
+            <Button
+              variant={showLandmarks ? "default" : "outline"}
+              size="sm"
+              onClick={() => setShowLandmarks(!showLandmarks)}
+              data-testid="button-toggle-landmarks"
+              className="gap-1"
+            >
+              <LandmarkIcon className="w-4 h-4" />
+              <span className="hidden sm:inline">{t('landmarks', selectedLanguage)}</span>
+            </Button>
+            <Button
+              variant={showActivities ? "default" : "outline"}
+              size="sm"
+              onClick={() => setShowActivities(!showActivities)}
+              data-testid="button-toggle-activities"
+              className="gap-1"
+            >
+              <Activity className="w-4 h-4" />
+              <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
+            </Button>
+          </div>
         </header>
         
         <div className="relative flex-1 overflow-hidden flex flex-col">
           {/* Map Section - shrinks when landmark is selected or sidebar is open */}
           <div className={`relative ${selectedLandmark ? 'h-1/2' : 'flex-1'} transition-all duration-300`}>
             <MapView
-              landmarks={landmarks}
+              landmarks={filteredLandmarks}
               userPosition={position}
               onLandmarkRoute={handleLandmarkRoute}
               activeRoute={activeRoute}
@@ -251,7 +285,7 @@ export default function Home() {
             {/* Show landmark list only when no landmark is selected */}
             {!selectedLandmark && (
               <LandmarkList
-                landmarks={landmarks}
+                landmarks={filteredLandmarks}
                 userPosition={position}
                 onLandmarkRoute={handleLandmarkRoute}
                 spokenLandmarks={spokenLandmarks}
