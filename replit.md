@@ -127,7 +127,19 @@ The application is built with a React frontend and an Express.js backend, commun
 
 ## Recent Changes (2025-10-12)
 
-### Latest Update: Added 5 New Cities with 18 Landmarks (Today)
+### Latest Update: Added Map View to Landmark Details Panel (Today)
+- **Map Location Display**: Added interactive map below Photos section in landmark panel
+- **Implementation**: 200px height map showing exact landmark location with custom marker
+- **Features**:
+  - OpenStreetMap tiles for detailed street view
+  - Custom terracotta marker matching app color scheme
+  - Popup showing landmark name on marker click
+  - Zoom level 16 for detailed view
+  - Auto-updates when switching between landmarks
+- **Technical Fix**: Used `key={landmark.id}` and explicit height to resolve Leaflet sizing conflicts
+- **E2E Tested**: Verified map displays correctly, updates on landmark change, proper marker positioning
+
+### Previous Update: Added 5 New Cities with 18 Landmarks
 - **New Southeast Asian Destinations**: Added Cebu (Philippines), Singapore, Penang (Malaysia), Kuala Lumpur (Malaysia), and Phuket (Thailand)
 - **18 New Landmarks**: Each city features 2-4 major tourist attractions with complete information
 - **Complete Information**: All landmarks include detailed descriptions, GPS coordinates, photos, historical context

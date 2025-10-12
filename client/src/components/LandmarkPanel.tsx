@@ -7,6 +7,8 @@ import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2 } from 'luc
 import { PhotoGallery } from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 
 interface LandmarkPanelProps {
   landmark: Landmark | null;
@@ -135,6 +137,42 @@ export function LandmarkPanel({
             />
           </div>
         )}
+
+        {/* Map View */}
+        <div className="mb-4">
+          <h3 className="font-semibold mb-3 flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-primary" />
+            {t('location', selectedLanguage)}
+          </h3>
+          <div className="rounded-lg overflow-hidden border" data-testid="map-landmark-location">
+            <MapContainer
+              key={landmark.id}
+              center={[landmark.lat, landmark.lng]}
+              zoom={16}
+              style={{ height: '200px', width: '100%' }}
+              scrollWheelZoom={false}
+              zoomControl={true}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker 
+                position={[landmark.lat, landmark.lng]}
+                icon={L.divIcon({
+                  className: 'custom-marker',
+                  html: `<div style="background: hsl(14, 85%, 55%); width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>`,
+                  iconSize: [32, 32],
+                  iconAnchor: [16, 32],
+                })}
+              >
+                <Popup>
+                  <strong>{getTranslatedContent(landmark, selectedLanguage, 'name')}</strong>
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
+        </div>
 
         {/* About */}
         {getTranslatedContent(landmark, selectedLanguage, 'description') && (
