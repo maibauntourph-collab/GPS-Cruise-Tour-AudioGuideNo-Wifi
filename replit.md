@@ -210,7 +210,18 @@ npm run db:push --force # Force push (when conflicts occur)
 
 ## Recent Changes (2025-10-12)
 
-### Latest Update: Mobile Menu Card Styling (Today)
+### Latest Update: Google Maps Navigation Integration (Today)
+- **Navigation Choice Dialog**: When clicking "Get Directions", users can choose between Google Maps or in-app navigation
+- **Google Maps Integration**: Opens Google Maps in new tab with proper directions URL
+- **Smart URL Generation**: 
+  - Includes user's current location as origin (if available)
+  - Uses landmark coordinates as destination
+  - Follows Google Maps Directions API format
+- **In-App Navigation Option**: Falls back to Leaflet routing on the map
+- **Multi-language Support**: Added translations for EN, KO, JA
+- **E2E Tested**: Verified dialog flow, Google Maps URL generation, and both navigation options
+
+### Previous Update: Mobile Menu Card Styling
 - **Mobile Menu Enhancement**: Wrapped mobile sidebar menu in Card component for better visual elevation
 - **Responsive Design**: 
   - Mobile: Card visible with border, background, and shadow
