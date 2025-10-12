@@ -711,6 +711,156 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
+  {
+    id: 'vatican_museums',
+    cityId: 'rome',
+    name: 'Vatican Museums',
+    lat: 41.9065,
+    lng: 12.4536,
+    radius: 80,
+    narration: 'Welcome to the Vatican Museums, one of the greatest art collections in the world. Founded by Pope Julius II in the 16th century, these museums display works from the immense collection amassed by the Catholic Church and the papacy throughout the centuries.',
+    description: 'One of the largest and most impressive art museums in the world',
+    category: 'Museum',
+    detailedDescription: 'The Vatican Museums represent one of humanity\'s greatest treasure troves of art and history, housing an incomparable collection that spans over 5,000 years of human creativity. Located within Vatican City, the world\'s smallest independent state, these museums comprise 54 separate galleries containing approximately 70,000 works, of which 20,000 are on display. The museums attract over 6 million visitors annually, making them one of the most visited museum complexes in the world. The origins of the Vatican Museums date to 1506, when Pope Julius II purchased the ancient marble sculpture "Laocoön and His Sons," discovered in a Roman vineyard. This acquisition marked the beginning of what would become one of the world\'s most extraordinary art collections. Over the centuries, successive popes continued to expand the collection, commissioning new works and acquiring existing masterpieces, transforming the papal palaces into a vast repository of human artistic achievement. The museums\' most famous attraction is undoubtedly the Sistine Chapel, featuring Michelangelo\'s breathtaking ceiling frescoes (1508-1512) and his monumental "Last Judgment" (1536-1541) on the altar wall. The ceiling\'s iconic "Creation of Adam," with God\'s finger nearly touching Adam\'s, has become one of the most recognizable images in art history. Michelangelo painted the ceiling while lying on his back on scaffolding, a physically grueling task that took four years to complete and left him with permanent neck problems. The Raphael Rooms (Stanze di Raffaello) represent another highlight, featuring four rooms decorated with frescoes by Raphael and his students between 1508 and 1524. The "School of Athens" in the Stanza della Segnatura is particularly celebrated, depicting the greatest philosophers and scientists of antiquity in an idealized architectural setting. Raphael cleverly included portraits of his contemporaries: Plato bears the features of Leonardo da Vinci, while the brooding figure of Heraclitus is believed to be Michelangelo.',
+    photos: [
+      'https://images.unsplash.com/photo-1583424223556-bb53f4362c65?w=800',
+      'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800',
+      'https://images.unsplash.com/photo-1555992336-fb0d29498b13?w=800',
+      'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800',
+      'https://images.unsplash.com/photo-1521123845560-8f8999c3d0f5?w=800',
+      'https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800',
+      'https://images.unsplash.com/photo-1599143374429-4aeed29e9c0e?w=800'
+    ],
+    historicalInfo: 'The Vatican Museums originated from a sculpture collection begun by Pope Julius II in the 16th century and have grown to include works from the Renaissance masters and ancient civilizations.',
+    yearBuilt: '1506',
+    architect: 'Various popes and architects',
+    translations: {
+      en: {
+        name: 'Vatican Museums',
+        narration: 'Welcome to the Vatican Museums, one of the greatest art collections in the world. Founded by Pope Julius II in the 16th century, these museums display works from the immense collection amassed by the Catholic Church and the papacy throughout the centuries.',
+        description: 'One of the largest and most impressive art museums in the world',
+        historicalInfo: 'The Vatican Museums originated from a sculpture collection begun by Pope Julius II in the 16th century and have grown to include works from the Renaissance masters and ancient civilizations.',
+        yearBuilt: '1506',
+        architect: 'Various popes and architects'
+      },
+      it: {
+        name: 'Musei Vaticani',
+        narration: 'Benvenuti ai Musei Vaticani, una delle più grandi collezioni d\'arte del mondo. Fondati da Papa Giulio II nel XVI secolo, questi musei espongono opere dell\'immensa collezione accumulata dalla Chiesa cattolica e dal papato nel corso dei secoli.',
+        description: 'Uno dei musei d\'arte più grandi e impressionanti del mondo',
+        historicalInfo: 'I Musei Vaticani hanno origine da una collezione di sculture iniziata da Papa Giulio II nel XVI secolo e sono cresciuti fino a includere opere dei maestri del Rinascimento e delle civiltà antiche.',
+        yearBuilt: '1506',
+        architect: 'Vari papi e architetti'
+      },
+      ko: {
+        name: '바티칸 박물관',
+        narration: '세계에서 가장 위대한 미술 컬렉션 중 하나인 바티칸 박물관에 오신 것을 환영합니다. 16세기 교황 율리오 2세에 의해 설립된 이 박물관들은 수세기에 걸쳐 가톨릭 교회와 교황청이 수집한 방대한 컬렉션의 작품들을 전시하고 있습니다.',
+        description: '세계에서 가장 크고 인상적인 미술관 중 하나',
+        historicalInfo: '바티칸 박물관은 16세기 교황 율리오 2세가 시작한 조각 컬렉션에서 유래했으며, 르네상스 거장들과 고대 문명의 작품들을 포함하도록 성장했습니다.',
+        yearBuilt: '1506년',
+        architect: '다양한 교황과 건축가들'
+      }
+    }
+  },
+  {
+    id: 'st_peters_basilica',
+    cityId: 'rome',
+    name: 'St. Peter\'s Basilica',
+    lat: 41.9022,
+    lng: 12.4539,
+    radius: 75,
+    narration: 'Welcome to St. Peter\'s Basilica, the heart of the Catholic world and one of the largest churches ever built. This Renaissance masterpiece stands on the traditional site where Saint Peter, the first Pope, was crucified and buried.',
+    description: 'The largest church in the world and center of Catholicism',
+    category: 'Religious Site',
+    detailedDescription: 'St. Peter\'s Basilica, known in Italian as "Basilica di San Pietro," stands as the spiritual and architectural heart of the Catholic Church and one of the most magnificent examples of Renaissance and Baroque architecture in the world. This massive church, covering 23,000 square meters (5.7 acres), can accommodate over 60,000 people and took more than 120 years to complete, involving some of history\'s greatest artists and architects including Bramante, Michelangelo, and Bernini. The current basilica, completed in 1626, was built on the site believed to be Saint Peter\'s tomb. According to tradition, Peter, one of Jesus\'s twelve apostles and the first Pope, was crucified upside down in Nero\'s Circus around 64 AD and buried nearby. The first church on this site, Old St. Peter\'s Basilica, was commissioned by Emperor Constantine in the 4th century. By the 15th century, the ancient basilica was in a state of disrepair, prompting Pope Julius II to commission its demolition and the construction of a new, grander structure. The basilica\'s iconic dome, designed by Michelangelo, dominates the Roman skyline and remains one of the largest domes in the world, measuring 42 meters in diameter and rising to a total height of 136 meters. Michelangelo took over the project in 1547 at age 72 and worked on it until his death in 1564, though he did not live to see the dome completed. The dome\'s interior features stunning mosaics and a Latin inscription from Matthew 16:18-19, where Jesus names Peter as the rock upon which the church will be built. Inside the basilica, visitors encounter an overwhelming display of artistic treasures. Michelangelo\'s Pietà (1498-1499), created when he was just 24 years old, shows the Virgin Mary cradling the dead body of Jesus with extraordinary tenderness and technical mastery. This is the only work Michelangelo ever signed, after overhearing visitors attribute it to another sculptor.',
+    photos: [
+      'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1583992876959-af90c2dcf744?w=800',
+      'https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=800',
+      'https://images.unsplash.com/photo-1604175287072-b5e71423060c?w=800',
+      'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800'
+    ],
+    historicalInfo: 'St. Peter\'s Basilica was built between 1506 and 1626 on the traditional site of Saint Peter\'s tomb. It is regarded as one of the holiest Catholic shrines and has been described as holding a unique position in the Christian world.',
+    yearBuilt: '1506-1626',
+    architect: 'Bramante, Michelangelo, Bernini',
+    translations: {
+      en: {
+        name: 'St. Peter\'s Basilica',
+        narration: 'Welcome to St. Peter\'s Basilica, the heart of the Catholic world and one of the largest churches ever built. This Renaissance masterpiece stands on the traditional site where Saint Peter, the first Pope, was crucified and buried.',
+        description: 'The largest church in the world and center of Catholicism',
+        historicalInfo: 'St. Peter\'s Basilica was built between 1506 and 1626 on the traditional site of Saint Peter\'s tomb. It is regarded as one of the holiest Catholic shrines.',
+        yearBuilt: '1506-1626',
+        architect: 'Bramante, Michelangelo, Bernini'
+      },
+      it: {
+        name: 'Basilica di San Pietro',
+        narration: 'Benvenuti alla Basilica di San Pietro, il cuore del mondo cattolico e una delle chiese più grandi mai costruite. Questo capolavoro rinascimentale sorge sul sito tradizionale dove San Pietro, il primo Papa, fu crocifisso e sepolto.',
+        description: 'La chiesa più grande del mondo e centro del cattolicesimo',
+        historicalInfo: 'La Basilica di San Pietro fu costruita tra il 1506 e il 1626 sul sito tradizionale della tomba di San Pietro. È considerata uno dei santuari cattolici più sacri.',
+        yearBuilt: '1506-1626',
+        architect: 'Bramante, Michelangelo, Bernini'
+      },
+      ko: {
+        name: '성 베드로 대성당',
+        narration: '가톨릭 세계의 중심이자 역대 가장 큰 교회 중 하나인 성 베드로 대성당에 오신 것을 환영합니다. 이 르네상스 걸작은 첫 번째 교황인 성 베드로가 십자가에 못 박히고 묻힌 전통적인 장소에 세워져 있습니다.',
+        description: '세계에서 가장 큰 교회이자 가톨릭의 중심지',
+        historicalInfo: '성 베드로 대성당은 1506년부터 1626년 사이에 성 베드로의 무덤이 있는 전통적인 장소에 건설되었습니다. 가장 신성한 가톨릭 성지 중 하나로 여겨집니다.',
+        yearBuilt: '1506-1626년',
+        architect: '브라만테, 미켈란젤로, 베르니니'
+      }
+    }
+  },
+  {
+    id: 'castel_santangelo',
+    cityId: 'rome',
+    name: 'Castel Sant\'Angelo',
+    lat: 41.9031,
+    lng: 12.4663,
+    radius: 60,
+    narration: 'Welcome to Castel Sant\'Angelo, the towering cylindrical fortress on the banks of the Tiber River. Originally built as a mausoleum for Emperor Hadrian, it has served as a papal fortress, prison, and now a museum.',
+    description: 'Ancient mausoleum turned fortress and papal residence',
+    category: 'Fortress',
+    detailedDescription: 'Castel Sant\'Angelo, originally known as the Mausoleum of Hadrian, stands as one of Rome\'s most distinctive landmarks with its imposing cylindrical structure dominating the western bank of the Tiber River. This remarkable building has served many purposes over its 1,900-year history: imperial mausoleum, fortress, prison, and papal residence, each phase adding layers to its fascinating story. The castle was commissioned by Emperor Hadrian as a mausoleum for himself and his family around 123 AD and completed in 139 AD, one year after his death. The original structure consisted of a massive square base topped by a cylindrical drum, crowned with a garden and a golden quadriga (four-horse chariot) statue of Hadrian. The emperor\'s ashes were placed in a golden urn in the central chamber, and subsequent emperors up to Caracalla (217 AD) were also interred here. The monument\'s transformation into a military fortress began in 403 AD when Emperor Honorius incorporated it into the Aurelian Walls. Its strategic location made it an ideal defensive position, and it was successfully used to repel various barbarian invasions. The building acquired its current name in 590 AD, according to legend, when Pope Gregory the Great, leading a procession to pray for the end of a plague, had a vision of Archangel Michael atop the mausoleum sheathing his sword, signaling the end of the epidemic. A statue of the angel was subsequently placed on top of the building. During the medieval period, the castle became a papal fortress and was connected to Vatican City by a fortified corridor called the Passetto di Borgo, built in 1277. This secret passage allowed popes to flee to the safety of the castle during times of danger. Pope Clement VII famously used this escape route during the Sack of Rome in 1527, when troops of the Holy Roman Emperor besieged the city.',
+    photos: [
+      'https://images.unsplash.com/photo-1544508618-f6927bc85146?w=800',
+      'https://images.unsplash.com/photo-1548585744-6e2d7c1e1a21?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1525874684015-58379d421a52?w=800',
+      'https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=800',
+      'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800',
+      'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800'
+    ],
+    historicalInfo: 'Originally commissioned by Emperor Hadrian as a mausoleum, Castel Sant\'Angelo has served as a fortress, prison, and papal residence throughout its history. The castle was named after Archangel Michael following a legendary vision in 590 AD.',
+    yearBuilt: '123-139 AD',
+    architect: 'Emperor Hadrian',
+    translations: {
+      en: {
+        name: 'Castel Sant\'Angelo',
+        narration: 'Welcome to Castel Sant\'Angelo, the towering cylindrical fortress on the banks of the Tiber River. Originally built as a mausoleum for Emperor Hadrian, it has served as a papal fortress, prison, and now a museum.',
+        description: 'Ancient mausoleum turned fortress and papal residence',
+        historicalInfo: 'Originally commissioned by Emperor Hadrian as a mausoleum, it has served as a fortress, prison, and papal residence. Named after Archangel Michael following a legendary vision in 590 AD.',
+        yearBuilt: '123-139 AD',
+        architect: 'Emperor Hadrian'
+      },
+      it: {
+        name: 'Castel Sant\'Angelo',
+        narration: 'Benvenuti a Castel Sant\'Angelo, l\'imponente fortezza cilindrica sulle rive del Tevere. Originariamente costruito come mausoleo per l\'imperatore Adriano, ha servito come fortezza papale, prigione e ora museo.',
+        description: 'Antico mausoleo trasformato in fortezza e residenza papale',
+        historicalInfo: 'Originariamente commissionato dall\'imperatore Adriano come mausoleo, ha servito come fortezza, prigione e residenza papale. Prende il nome dall\'Arcangelo Michele a seguito di una visione leggendaria nel 590 d.C.',
+        yearBuilt: '123-139 d.C.',
+        architect: 'Imperatore Adriano'
+      },
+      ko: {
+        name: '산탄젤로 성',
+        narration: '티베르 강변에 우뚝 솟은 원형 요새 산탄젤로 성에 오신 것을 환영합니다. 원래 하드리아누스 황제의 영묘로 건설되었으며, 교황의 요새, 감옥, 그리고 현재는 박물관으로 사용되어 왔습니다.',
+        description: '고대 영묘에서 요새와 교황 거주지로 변모한 건축물',
+        historicalInfo: '원래 하드리아누스 황제가 영묘로 의뢰했으며, 요새, 감옥, 교황 거주지로 사용되었습니다. 590년 전설적인 환상 이후 대천사 미카엘의 이름을 따서 명명되었습니다.',
+        yearBuilt: '123-139년',
+        architect: '하드리아누스 황제'
+      }
+    }
+  },
   // Paris landmarks
   {
     id: 'eiffel_tower',
@@ -1145,6 +1295,156 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: 'Триумфальная арка была заказана Наполеоном в 1806 году в честь французской армии. Она находится в центре площади Шарля де Голля и содержит Могилу Неизвестного солдата.',
         yearBuilt: '1806-1836',
         architect: 'Жан Шальгрен'
+      }
+    }
+  },
+  {
+    id: 'sacre_coeur',
+    cityId: 'paris',
+    name: 'Sacré-Cœur Basilica',
+    lat: 48.8867,
+    lng: 2.3431,
+    radius: 60,
+    narration: 'Welcome to the Sacré-Cœur Basilica, the white-domed church atop Montmartre hill. This Romano-Byzantine basilica offers stunning panoramic views of Paris.',
+    description: 'Iconic white basilica atop Montmartre with panoramic city views',
+    category: 'Religious Site',
+    detailedDescription: 'The Basilica of the Sacred Heart of Paris, commonly known as Sacré-Cœur Basilica, stands as one of Paris\'s most recognizable landmarks, its brilliant white Romano-Byzantine domes crowning the summit of Montmartre, the highest point in the city. Perched 130 meters above sea level, the basilica offers breathtaking panoramic views across Paris, making it both a spiritual destination and a beloved viewpoint for millions of visitors annually. The origins of Sacré-Cœur are deeply intertwined with France\'s tumultuous history of the late 19th century. Following France\'s defeat in the Franco-Prussian War (1870-1871) and the bloody Paris Commune uprising, Catholic groups proposed building a church dedicated to the Sacred Heart of Jesus as an act of penance and national reconciliation. The basilica\'s construction was funded entirely by public subscription, with millions of French Catholics contributing to what they saw as a monument of moral and spiritual renewal for France.',
+    photos: [
+      'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800',
+      'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800',
+      'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800',
+      'https://images.unsplash.com/photo-1549144511-f099e773c147?w=800',
+      'https://images.unsplash.com/photo-1560174038-da43ac56f5b8?w=800',
+      'https://images.unsplash.com/photo-1550340499-a6c60fc8287c?w=800',
+      'https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=800'
+    ],
+    historicalInfo: 'The Sacré-Cœur Basilica was built between 1875 and 1914 as a symbol of hope and penance after the Franco-Prussian War. Its distinctive white travertine stone perpetually maintains its brilliant appearance.',
+    yearBuilt: '1875-1914',
+    architect: 'Paul Abadie',
+    translations: {
+      en: {
+        name: 'Sacré-Cœur Basilica',
+        narration: 'Welcome to the Sacré-Cœur Basilica, the white-domed church atop Montmartre hill. This Romano-Byzantine basilica offers stunning panoramic views of Paris.',
+        description: 'Iconic white basilica atop Montmartre with panoramic city views',
+        historicalInfo: 'The Sacré-Cœur Basilica was built between 1875 and 1914 as a symbol of hope and penance after the Franco-Prussian War.',
+        yearBuilt: '1875-1914',
+        architect: 'Paul Abadie'
+      },
+      it: {
+        name: 'Basilica del Sacro Cuore',
+        narration: 'Benvenuti alla Basilica del Sacro Cuore, la chiesa dalla cupola bianca in cima alla collina di Montmartre. Questa basilica romano-bizantina offre una vista panoramica mozzafiato di Parigi.',
+        description: 'Iconica basilica bianca in cima a Montmartre con vista panoramica sulla città',
+        historicalInfo: 'La Basilica del Sacro Cuore fu costruita tra il 1875 e il 1914 come simbolo di speranza e penitenza dopo la guerra franco-prussiana.',
+        yearBuilt: '1875-1914',
+        architect: 'Paul Abadie'
+      },
+      ko: {
+        name: '사크레쾨르 대성당',
+        narration: '몽마르트르 언덕 꼭대기에 있는 하얀 돔의 교회, 사크레쾨르 대성당에 오신 것을 환영합니다. 이 로마-비잔틴 양식의 대성당은 파리의 멋진 파노라마 전망을 제공합니다.',
+        description: '파리 시내 전망을 제공하는 몽마르트르 정상의 상징적인 하얀 대성당',
+        historicalInfo: '사크레쾨르 대성당은 프랑스-프로이센 전쟁 이후 희망과 참회의 상징으로 1875년부터 1914년 사이에 건설되었습니다.',
+        yearBuilt: '1875-1914년',
+        architect: '폴 아바디'
+      }
+    }
+  },
+  {
+    id: 'versailles',
+    cityId: 'paris',
+    name: 'Palace of Versailles',
+    lat: 48.8049,
+    lng: 2.1204,
+    radius: 100,
+    narration: 'Welcome to the Palace of Versailles, the opulent royal château that epitomizes the absolute power of French monarchy. This UNESCO World Heritage site was the principal residence of Louis XIV.',
+    description: 'Magnificent royal palace and gardens, symbol of absolute monarchy',
+    category: 'Palace',
+    detailedDescription: 'The Palace of Versailles stands as perhaps the most magnificent symbol of absolute monarchy in European history, a sprawling testament to the power, wealth, and artistic ambition of France\'s ancien régime. Located approximately 20 kilometers southwest of Paris, this colossal palace complex encompasses the main château, extensive gardens, smaller palaces including the Grand and Petit Trianon, and the famous Hall of Mirrors, all set within an estate covering 800 hectares (2,000 acres). What began as a modest hunting lodge built by Louis XIII in 1623 was transformed by his son, Louis XIV (the Sun King), into the most spectacular palace in Europe and the seat of political power in France from 1682 until the French Revolution in 1789.',
+    photos: [
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+      'https://images.unsplash.com/photo-1627813460904-7ea7ba5c87e0?w=800',
+      'https://images.unsplash.com/photo-1600093476480-7e38e68f8219?w=800',
+      'https://images.unsplash.com/photo-1614509042560-95f33a79cce8?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      'https://images.unsplash.com/photo-1600093476448-45bc0e1e0e3c?w=800',
+      'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800'
+    ],
+    historicalInfo: 'The Palace of Versailles was the principal royal residence of France from 1682 under Louis XIV until the start of the French Revolution in 1789. It became a symbol of the absolute monarchy of the Ancien Régime.',
+    yearBuilt: '1623-1710',
+    architect: 'Louis Le Vau, Jules Hardouin-Mansart, André Le Nôtre (gardens)',
+    translations: {
+      en: {
+        name: 'Palace of Versailles',
+        narration: 'Welcome to the Palace of Versailles, the opulent royal château that epitomizes the absolute power of French monarchy. This UNESCO World Heritage site was the principal residence of Louis XIV.',
+        description: 'Magnificent royal palace and gardens, symbol of absolute monarchy',
+        historicalInfo: 'The Palace of Versailles was the principal royal residence of France from 1682 under Louis XIV until the start of the French Revolution in 1789.',
+        yearBuilt: '1623-1710',
+        architect: 'Louis Le Vau, Jules Hardouin-Mansart, André Le Nôtre (gardens)'
+      },
+      it: {
+        name: 'Reggia di Versailles',
+        narration: 'Benvenuti alla Reggia di Versailles, lo sfarzoso castello reale che incarna il potere assoluto della monarchia francese. Questo sito UNESCO fu la residenza principale di Luigi XIV.',
+        description: 'Magnifico palazzo reale e giardini, simbolo della monarchia assoluta',
+        historicalInfo: 'La Reggia di Versailles fu la residenza reale principale della Francia dal 1682 sotto Luigi XIV fino all\'inizio della Rivoluzione francese nel 1789.',
+        yearBuilt: '1623-1710',
+        architect: 'Louis Le Vau, Jules Hardouin-Mansart, André Le Nôtre (giardini)'
+      },
+      ko: {
+        name: '베르사유 궁전',
+        narration: '프랑스 군주제의 절대 권력을 상징하는 호화로운 왕궁, 베르사유 궁전에 오신 것을 환영합니다. 이 유네스코 세계문화유산은 루이 14세의 주요 거주지였습니다.',
+        description: '절대 군주제의 상징인 웅장한 왕궁과 정원',
+        historicalInfo: '베르사유 궁전은 1682년 루이 14세 치하부터 1789년 프랑스 혁명이 시작될 때까지 프랑스의 주요 왕실 거주지였습니다.',
+        yearBuilt: '1623-1710년',
+        architect: '루이 르 보, 줄 아르두앵-망사르, 앙드레 르 노트르 (정원)'
+      }
+    }
+  },
+  {
+    id: 'musee_dorsay',
+    cityId: 'paris',
+    name: 'Musée d\'Orsay',
+    lat: 48.8600,
+    lng: 2.3266,
+    radius: 60,
+    narration: 'Welcome to the Musée d\'Orsay, housed in a stunning Beaux-Arts railway station. This museum holds the world\'s finest collection of Impressionist and Post-Impressionist masterpieces.',
+    description: 'World-renowned museum of Impressionist and Post-Impressionist art',
+    category: 'Museum',
+    detailedDescription: 'The Musée d\'Orsay stands as one of the world\'s greatest art museums, housed in the spectacular former Gare d\'Orsay railway station on the Left Bank of the Seine. This magnificent Beaux-Arts building, with its soaring glass-roofed hall and ornate façade, provides a breathtaking setting for what is widely considered the world\'s finest collection of Impressionist and Post-Impressionist art. The museum\'s collection spans the years 1848 to 1914, bridging the gap between the Louvre\'s classical collections and the Centre Pompidou\'s modern art, and includes masterworks by Monet, Renoir, Degas, Van Gogh, Cézanne, and countless other luminaries of 19th and early 20th-century art.',
+    photos: [
+      'https://images.unsplash.com/photo-1555424681-0459ad1dd23e?w=800',
+      'https://images.unsplash.com/photo-1549887534-1541e9326642?w=800',
+      'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800',
+      'https://images.unsplash.com/photo-1566232392379-afd9298e6a46?w=800',
+      'https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800',
+      'https://images.unsplash.com/photo-1604175287072-b5e71423060c?w=800',
+      'https://images.unsplash.com/photo-1560174038-da43ac56f5b8?w=800'
+    ],
+    historicalInfo: 'Originally built as a railway station for the 1900 Exposition Universelle, the Gare d\'Orsay was converted into a museum in 1986, showcasing French art from 1848 to 1914.',
+    yearBuilt: 'Station: 1900, Museum: 1986',
+    architect: 'Victor Laloux (station), Gae Aulenti (museum conversion)',
+    translations: {
+      en: {
+        name: 'Musée d\'Orsay',
+        narration: 'Welcome to the Musée d\'Orsay, housed in a stunning Beaux-Arts railway station. This museum holds the world\'s finest collection of Impressionist and Post-Impressionist masterpieces.',
+        description: 'World-renowned museum of Impressionist and Post-Impressionist art',
+        historicalInfo: 'Originally built as a railway station for the 1900 Exposition Universelle, the Gare d\'Orsay was converted into a museum in 1986.',
+        yearBuilt: 'Station: 1900, Museum: 1986',
+        architect: 'Victor Laloux (station), Gae Aulenti (museum conversion)'
+      },
+      it: {
+        name: 'Museo d\'Orsay',
+        narration: 'Benvenuti al Museo d\'Orsay, ospitato in una splendida stazione ferroviaria Beaux-Arts. Questo museo custodisce la più bella collezione al mondo di capolavori impressionisti e post-impressionisti.',
+        description: 'Museo di fama mondiale di arte impressionista e post-impressionista',
+        historicalInfo: 'Originariamente costruita come stazione ferroviaria per l\'Esposizione Universale del 1900, la Gare d\'Orsay fu convertita in museo nel 1986.',
+        yearBuilt: 'Stazione: 1900, Museo: 1986',
+        architect: 'Victor Laloux (stazione), Gae Aulenti (conversione museo)'
+      },
+      ko: {
+        name: '오르세 미술관',
+        narration: '멋진 보자르 양식 기차역에 자리한 오르세 미술관에 오신 것을 환영합니다. 이 박물관은 세계 최고의 인상파 및 후기 인상파 걸작 컬렉션을 보유하고 있습니다.',
+        description: '인상파 및 후기 인상파 미술의 세계적으로 유명한 박물관',
+        historicalInfo: '1900년 만국박람회를 위해 기차역으로 건설된 가르 도르세는 1986년에 박물관으로 전환되었습니다.',
+        yearBuilt: '역사: 1900년, 박물관: 1986년',
+        architect: '빅토르 랄루 (역사), 가에 아울렌티 (박물관 개조)'
       }
     }
   },
