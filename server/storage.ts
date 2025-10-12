@@ -3919,6 +3919,156 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
+  {
+    id: 'taoist-temple-cebu',
+    cityId: 'cebu',
+    name: 'Taoist Temple',
+    lat: 10.3237,
+    lng: 123.9003,
+    radius: 60,
+    narration: 'Welcome to the Cebu Taoist Temple, a beautiful place of worship located in Beverly Hills. This ornate temple offers stunning architecture and panoramic views of Cebu City.',
+    description: 'Chinese Taoist temple with intricate architecture',
+    category: 'Religious',
+    detailedDescription: 'The Cebu Taoist Temple is located in the upscale Beverly Hills subdivision of Cebu City, standing 300 meters above sea level. Built in 1972 by the city\'s substantial Chinese community, this magnificent temple serves as a center of worship for Taoism, one of China\'s oldest religions. The temple features ornate Chinese architecture with multi-tiered roofs, red pillars, and intricate dragon designs. Visitors must climb 81 steps (representing 81 chapters of Taoism scriptures) to reach the main temple area. Inside, devotees light joss sticks and have their fortune told. The temple grounds offer spectacular panoramic views of downtown Cebu and the surrounding areas. The architecture showcases traditional Chinese design elements including elaborate carvings, colorful decorations, and symbolic representations of Taoist beliefs. The peaceful atmosphere and beautiful surroundings make it a popular destination for both worshippers and tourists.',
+    photos: [
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1548585744-6e2d7c1e1a21?w=800',
+      'https://images.unsplash.com/photo-1590498380394-8db1bf58af6e?w=800'
+    ],
+    historicalInfo: 'Built in 1972 by Cebu\'s Chinese community, the Taoist Temple serves as a center of worship for Taoism and showcases traditional Chinese architectural design.',
+    yearBuilt: '1972',
+    architect: 'Chinese Community of Cebu',
+    translations: {
+      en: {
+        name: 'Taoist Temple',
+        narration: 'Welcome to the Cebu Taoist Temple, a beautiful place of worship located in Beverly Hills. This ornate temple offers stunning architecture and panoramic views of Cebu City.',
+        description: 'Chinese Taoist temple with intricate architecture',
+        historicalInfo: 'Built in 1972 by Cebu\'s Chinese community, the Taoist Temple serves as a center of worship for Taoism and showcases traditional Chinese architectural design.',
+        yearBuilt: '1972',
+        architect: 'Chinese Community of Cebu'
+      },
+      it: {
+        name: 'Tempio Taoista',
+        narration: 'Benvenuto al Tempio Taoista di Cebu, un bellissimo luogo di culto situato a Beverly Hills. Questo tempio ornato offre un\'architettura stupenda e viste panoramiche della città di Cebu.',
+        description: 'Tempio taoista cinese con architettura intricata',
+        historicalInfo: 'Costruito nel 1972 dalla comunità cinese di Cebu, il Tempio Taoista serve come centro di culto per il Taoismo e mostra il design architettonico cinese tradizionale.',
+        yearBuilt: '1972',
+        architect: 'Comunità Cinese di Cebu'
+      },
+      ko: {
+        name: '타오이스트 사원',
+        narration: '베벌리 힐스에 위치한 아름다운 예배 장소인 세부 타오이스트 사원에 오신 것을 환영합니다. 이 화려한 사원은 멋진 건축물과 세부시의 파노라마 전망을 제공합니다.',
+        description: '복잡한 건축물을 가진 중국 도교 사원',
+        historicalInfo: '1972년 세부의 중국 공동체에 의해 건설된 타오이스트 사원은 도교의 예배 센터 역할을 하며 전통적인 중국 건축 디자인을 보여줍니다.',
+        yearBuilt: '1972',
+        architect: '세부 중국 공동체'
+      }
+    }
+  },
+  {
+    id: 'cebu-heritage-monument',
+    cityId: 'cebu',
+    name: 'Cebu Heritage Monument',
+    lat: 10.2983,
+    lng: 123.9024,
+    radius: 50,
+    narration: 'Welcome to the Cebu Heritage Monument, a stunning tableau that depicts significant events in Cebu\'s history. This massive sculpture tells the story of the Philippines through intricate bronze and concrete artworks.',
+    description: 'Monumental sculpture depicting Cebu\'s history',
+    category: 'Cultural Heritage',
+    detailedDescription: 'The Heritage of Cebu Monument is a historical landmark located in Colon Street, Cebu City. Created by Cebuano sculptor Eduardo Castrillo, this grand monument was inaugurated in December 2000 to commemorate significant moments and people in Cebu\'s history. The sculpture is a massive tableau made of brass, bronze, concrete, and steel, depicting major historical events including Magellan\'s arrival, the first Catholic baptism in the Philippines, the Battle of Mactan, and the revolution against Spain. The monument stands as a centerpiece in the Parian district, which was historically the Chinese trading area. The intricate details capture the essence of Filipino heritage, featuring local heroes, religious figures, and ordinary citizens who shaped Cebu\'s identity. At night, the monument is beautifully illuminated, making it a popular photo spot. The surrounding area has been developed into a heritage park, making it an important cultural and tourist destination.',
+    photos: [
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+      'https://images.unsplash.com/photo-1523509433743-6f42a58221df?w=800',
+      'https://images.unsplash.com/photo-1590498380394-8db1bf58af6e?w=800',
+      'https://images.unsplash.com/photo-1548585744-6e2d7c1e1a21?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1598559862042-31ebfe8e09f2?w=800',
+      'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800'
+    ],
+    historicalInfo: 'Created by Eduardo Castrillo and inaugurated in December 2000, this monument depicts major events in Cebu\'s history including Magellan\'s arrival and the Battle of Mactan.',
+    yearBuilt: '2000',
+    architect: 'Eduardo Castrillo',
+    translations: {
+      en: {
+        name: 'Cebu Heritage Monument',
+        narration: 'Welcome to the Cebu Heritage Monument, a stunning tableau that depicts significant events in Cebu\'s history. This massive sculpture tells the story of the Philippines through intricate bronze and concrete artworks.',
+        description: 'Monumental sculpture depicting Cebu\'s history',
+        historicalInfo: 'Created by Eduardo Castrillo and inaugurated in December 2000, this monument depicts major events in Cebu\'s history including Magellan\'s arrival and the Battle of Mactan.',
+        yearBuilt: '2000',
+        architect: 'Eduardo Castrillo'
+      },
+      it: {
+        name: 'Monumento del Patrimonio di Cebu',
+        narration: 'Benvenuto al Monumento del Patrimonio di Cebu, uno splendido tableau che raffigura eventi significativi nella storia di Cebu. Questa massiccia scultura racconta la storia delle Filippine attraverso intricate opere d\'arte in bronzo e cemento.',
+        description: 'Scultura monumentale che raffigura la storia di Cebu',
+        historicalInfo: 'Creato da Eduardo Castrillo e inaugurato nel dicembre 2000, questo monumento raffigura eventi importanti nella storia di Cebu tra cui l\'arrivo di Magellano e la Battaglia di Mactan.',
+        yearBuilt: '2000',
+        architect: 'Eduardo Castrillo'
+      },
+      ko: {
+        name: '세부 문화유산 기념비',
+        narration: '세부 역사의 중요한 사건들을 묘사한 멋진 장면인 세부 문화유산 기념비에 오신 것을 환영합니다. 이 거대한 조각품은 복잡한 청동과 콘크리트 예술 작품을 통해 필리핀의 이야기를 전합니다.',
+        description: '세부의 역사를 묘사한 기념비적 조각품',
+        historicalInfo: '에두아르도 카스트리요가 만들고 2000년 12월에 제막된 이 기념비는 마젤란의 도착과 막탄 전투를 포함한 세부 역사의 주요 사건을 묘사합니다.',
+        yearBuilt: '2000',
+        architect: '에두아르도 카스트리요'
+      }
+    }
+  },
+  {
+    id: 'sirao-flower-garden',
+    cityId: 'cebu',
+    name: 'Sirao Flower Garden',
+    lat: 10.3635,
+    lng: 123.9384,
+    radius: 80,
+    narration: 'Welcome to Sirao Flower Garden, Cebu\'s colorful "Little Amsterdam". This vibrant garden features beautiful flower fields, especially the iconic celosia flowers that bloom year-round.',
+    description: 'Colorful flower garden known as Cebu\'s Little Amsterdam',
+    category: 'Garden & Nature',
+    detailedDescription: 'Sirao Flower Garden, affectionately called "Little Amsterdam" by locals, is a picturesque flower farm located in the highlands of Cebu City. Situated in Barangay Sirao, about 2,000 feet above sea level, the garden offers cool mountain air and stunning views. The garden is famous for its vibrant celosia flowers, which bloom in brilliant shades of red, pink, orange, and yellow throughout the year. The colorful flower beds are arranged in neat rows, creating a stunning visual spectacle reminiscent of Dutch tulip fields. Beyond celosia, the garden also features other flowers and plants including sunflowers, zinnias, and various ornamental plants. The site has become increasingly popular on social media, attracting photographers and nature lovers. Various photo installations and viewing decks have been added to enhance the visitor experience. The garden is family-owned and operated, representing the entrepreneurial spirit of local farmers who transformed their vegetable farm into a tourist attraction.',
+    photos: [
+      'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800',
+      'https://images.unsplash.com/photo-1464699908537-0954e50791ee?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800',
+      'https://images.unsplash.com/photo-1592422746942-44e05e70a8bc?w=800',
+      'https://images.unsplash.com/photo-1563784462041-5f97ac9523dd?w=800',
+      'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800'
+    ],
+    historicalInfo: 'Originally a vegetable farm, Sirao Flower Garden was transformed into a tourist attraction by local farmers and has become famous on social media as Cebu\'s "Little Amsterdam".',
+    yearBuilt: '2015',
+    architect: 'Local Farmers',
+    translations: {
+      en: {
+        name: 'Sirao Flower Garden',
+        narration: 'Welcome to Sirao Flower Garden, Cebu\'s colorful "Little Amsterdam". This vibrant garden features beautiful flower fields, especially the iconic celosia flowers that bloom year-round.',
+        description: 'Colorful flower garden known as Cebu\'s Little Amsterdam',
+        historicalInfo: 'Originally a vegetable farm, Sirao Flower Garden was transformed into a tourist attraction by local farmers and has become famous on social media as Cebu\'s "Little Amsterdam".',
+        yearBuilt: '2015',
+        architect: 'Local Farmers'
+      },
+      it: {
+        name: 'Giardino dei Fiori di Sirao',
+        narration: 'Benvenuto al Giardino dei Fiori di Sirao, la colorata "Piccola Amsterdam" di Cebu. Questo giardino vibrante presenta bellissimi campi di fiori, specialmente gli iconici fiori di celosia che sbocciano tutto l\'anno.',
+        description: 'Giardino di fiori colorato conosciuto come la Piccola Amsterdam di Cebu',
+        historicalInfo: 'Originariamente una fattoria di verdure, il Giardino dei Fiori di Sirao è stato trasformato in un\'attrazione turistica dagli agricoltori locali ed è diventato famoso sui social media come la "Piccola Amsterdam" di Cebu.',
+        yearBuilt: '2015',
+        architect: 'Agricoltori Locali'
+      },
+      ko: {
+        name: '시라오 플라워 가든',
+        narration: '세부의 화려한 "리틀 암스테르담"인 시라오 플라워 가든에 오신 것을 환영합니다. 이 활기찬 정원은 일년 내내 피는 상징적인 셀로시아 꽃을 특징으로 아름다운 꽃밭을 선보입니다.',
+        description: '세부의 리틀 암스테르담으로 알려진 화려한 꽃 정원',
+        historicalInfo: '원래 채소 농장이었던 시라오 플라워 가든은 지역 농부들에 의해 관광 명소로 변모했으며 소셜 미디어에서 세부의 "리틀 암스테르담"으로 유명해졌습니다.',
+        yearBuilt: '2015',
+        architect: '지역 농부들'
+      }
+    }
+  },
 
   // Singapore landmarks
   {
@@ -4052,6 +4202,156 @@ const LANDMARKS: Landmark[] = [
         narration: '세계에서 가장 큰 관람차 중 하나인 싱가포르 플라이어에 오신 것을 환영합니다. 지상 165미터 높이에서 싱가포르와 그 너머의 숨막히는 360도 전망을 즐기세요.',
         description: '파노라마 도시 전망을 제공하는 거대한 관람차',
         historicalInfo: '2008년에 개장한 싱가포르 플라이어는 높이 165미터로 2014년까지 세계에서 가장 높은 관람차였습니다. 도시와 주변 지역의 장관을 이루는 전망을 제공합니다.'
+      }
+    }
+  },
+  {
+    id: 'chinatown-heritage-centre',
+    cityId: 'singapore',
+    name: 'Chinatown Heritage Centre',
+    lat: 1.2837,
+    lng: 103.8446,
+    radius: 50,
+    narration: 'Welcome to the Chinatown Heritage Centre, a museum that brings to life the immigrant experience of early Chinese settlers in Singapore. Step back in time and discover the stories of hardship and triumph.',
+    description: 'Museum showcasing early Chinese immigrant life',
+    category: 'Museum & Heritage',
+    detailedDescription: 'The Chinatown Heritage Centre is located in three beautifully restored shophouses along Pagoda Street in the heart of Singapore\'s Chinatown. The museum offers an intimate glimpse into the lives of early Chinese immigrants who came to Singapore in the 19th and early 20th centuries. Through meticulously recreated living spaces, authentic artifacts, and interactive exhibits, visitors can experience the cramped living conditions, toilets shared by multiple families, and the daily struggles faced by these pioneers. The centre showcases traditional trades such as tailor shops, provision stores, and Chinese medicine halls. Personal stories and oral histories bring to life the experiences of coolies, samsui women, and families who built Singapore\'s Chinatown. The museum spans three levels, each depicting different aspects of immigrant life from arrival to settlement and community building. It provides valuable historical context for understanding Singapore\'s multicultural heritage and the resilience of its founding communities.',
+    photos: [
+      'https://images.unsplash.com/photo-1555217851-85fd5a8fa4cf?w=800',
+      'https://images.unsplash.com/photo-1523428096881-5c6f16d8915b?w=800',
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800'
+    ],
+    historicalInfo: 'Opened in 2008, the Chinatown Heritage Centre is housed in three restored shophouses and documents the lives of early Chinese immigrants to Singapore during the colonial period.',
+    yearBuilt: '2008',
+    architect: 'Restoration by Singapore Tourism Board',
+    translations: {
+      en: {
+        name: 'Chinatown Heritage Centre',
+        narration: 'Welcome to the Chinatown Heritage Centre, a museum that brings to life the immigrant experience of early Chinese settlers in Singapore. Step back in time and discover the stories of hardship and triumph.',
+        description: 'Museum showcasing early Chinese immigrant life',
+        historicalInfo: 'Opened in 2008, the Chinatown Heritage Centre is housed in three restored shophouses and documents the lives of early Chinese immigrants to Singapore during the colonial period.',
+        yearBuilt: '2008',
+        architect: 'Restoration by Singapore Tourism Board'
+      },
+      it: {
+        name: 'Centro del Patrimonio di Chinatown',
+        narration: 'Benvenuto al Centro del Patrimonio di Chinatown, un museo che dà vita all\'esperienza degli immigrati dei primi coloni cinesi a Singapore. Fai un passo indietro nel tempo e scopri le storie di difficoltà e trionfo.',
+        description: 'Museo che mostra la vita dei primi immigrati cinesi',
+        historicalInfo: 'Aperto nel 2008, il Centro del Patrimonio di Chinatown è ospitato in tre shophouse restaurate e documenta la vita dei primi immigrati cinesi a Singapore durante il periodo coloniale.',
+        yearBuilt: '2008',
+        architect: 'Restauro dell\'Ente del Turismo di Singapore'
+      },
+      ko: {
+        name: '차이나타운 헤리티지 센터',
+        narration: '초기 중국인 정착민들의 이민 경험을 생생하게 재현한 박물관인 차이나타운 헤리티지 센터에 오신 것을 환영합니다. 시간을 거슬러 올라가 고난과 승리의 이야기를 발견하세요.',
+        description: '초기 중국 이민자 생활을 보여주는 박물관',
+        historicalInfo: '2008년에 개관한 차이나타운 헤리티지 센터는 복원된 세 개의 샵하우스에 자리하고 있으며 식민지 시대 싱가포르의 초기 중국 이민자들의 삶을 기록합니다.',
+        yearBuilt: '2008',
+        architect: '싱가포르 관광청 복원'
+      }
+    }
+  },
+  {
+    id: 'national-museum-singapore',
+    cityId: 'singapore',
+    name: 'National Museum of Singapore',
+    lat: 1.2966,
+    lng: 103.8486,
+    radius: 70,
+    narration: 'Welcome to the National Museum of Singapore, the country\'s oldest museum. This iconic institution houses extensive collections that tell the story of Singapore\'s history and culture.',
+    description: 'Singapore\'s oldest museum with rich historical collections',
+    category: 'Museum',
+    detailedDescription: 'The National Museum of Singapore is the oldest museum in the country, with its history dating back to 1887 when it was established as the Raffles Library and Museum. The museum building itself is an architectural landmark, blending Neo-Classical and Modern architectural elements, with its distinctive glass rotunda being a striking modern addition to the classical structure. The museum\'s permanent galleries are divided into two sections: the Singapore History Gallery, which traces 700 years of Singapore\'s history through multimedia presentations and rare artifacts, and the Singapore Living Galleries, which explore Singaporean identity through food, fashion, film, and photography. The museum houses significant collections including the William Farquhar Collection of Natural History Drawings, jade artifacts from the Tang Shipwreck, and the Singapore Stone fragment. The museum regularly hosts special exhibitions, performances, and cultural programs, making it a vibrant cultural hub in the heart of Singapore.',
+    photos: [
+      'https://images.unsplash.com/photo-1566127444979-b3d2b64d1b23?w=800',
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800',
+      'https://images.unsplash.com/photo-1555217851-85fd5a8fa4cf?w=800',
+      'https://images.unsplash.com/photo-1523428096881-5c6f16d8915b?w=800',
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+      'https://images.unsplash.com/photo-1523509433743-6f42a58221df?w=800'
+    ],
+    historicalInfo: 'Established in 1887 as the Raffles Library and Museum, it is Singapore\'s oldest museum. The building underwent major renovation and reopened in 2006 with modern exhibition spaces.',
+    yearBuilt: '1887',
+    architect: 'Original: Henry McCallum, Renovation: W Architects',
+    translations: {
+      en: {
+        name: 'National Museum of Singapore',
+        narration: 'Welcome to the National Museum of Singapore, the country\'s oldest museum. This iconic institution houses extensive collections that tell the story of Singapore\'s history and culture.',
+        description: 'Singapore\'s oldest museum with rich historical collections',
+        historicalInfo: 'Established in 1887 as the Raffles Library and Museum, it is Singapore\'s oldest museum. The building underwent major renovation and reopened in 2006 with modern exhibition spaces.',
+        yearBuilt: '1887',
+        architect: 'Original: Henry McCallum, Renovation: W Architects'
+      },
+      it: {
+        name: 'Museo Nazionale di Singapore',
+        narration: 'Benvenuto al Museo Nazionale di Singapore, il museo più antico del paese. Questa istituzione iconica ospita vaste collezioni che raccontano la storia e la cultura di Singapore.',
+        description: 'Il museo più antico di Singapore con ricche collezioni storiche',
+        historicalInfo: 'Fondato nel 1887 come Raffles Library and Museum, è il museo più antico di Singapore. L\'edificio ha subito una grande ristrutturazione ed è stato riaperto nel 2006 con spazi espositivi moderni.',
+        yearBuilt: '1887',
+        architect: 'Originale: Henry McCallum, Ristrutturazione: W Architects'
+      },
+      ko: {
+        name: '싱가포르 국립 박물관',
+        narration: '싱가포르에서 가장 오래된 박물관인 싱가포르 국립 박물관에 오신 것을 환영합니다. 이 상징적인 기관은 싱가포르의 역사와 문화를 이야기하는 광범위한 컬렉션을 소장하고 있습니다.',
+        description: '풍부한 역사 컬렉션을 가진 싱가포르에서 가장 오래된 박물관',
+        historicalInfo: '1887년 래플스 도서관 및 박물관으로 설립되어 싱가포르에서 가장 오래된 박물관입니다. 건물은 대대적인 개보수를 거쳐 2006년 현대적인 전시 공간으로 재개관했습니다.',
+        yearBuilt: '1887',
+        architect: '원작: 헨리 맥칼럼, 리노베이션: W Architects'
+      }
+    }
+  },
+  {
+    id: 'sentosa-island',
+    cityId: 'singapore',
+    name: 'Sentosa Island',
+    lat: 1.2494,
+    lng: 103.8303,
+    radius: 100,
+    narration: 'Welcome to Sentosa Island, Singapore\'s premier island resort destination. This tropical paradise offers beaches, theme parks, attractions, and entertainment for the whole family.',
+    description: 'Island resort with beaches, attractions, and entertainment',
+    category: 'Island Resort',
+    detailedDescription: 'Sentosa Island, meaning "peace and tranquility" in Malay, is a resort island located off Singapore\'s southern coast. Once a British military fortress called Pulau Blakang Mati (meaning "island of death from behind"), it was transformed into a tourism destination in the 1970s. The 500-hectare island is connected to the mainland by a causeway and accessible by monorail, cable car, or road. Sentosa features pristine beaches including Siloso, Palawan, and Tanjong Beach, each offering water sports and beachfront dining. Major attractions include Universal Studios Singapore, S.E.A. Aquarium, Adventure Cove Waterpark, and the iconic Merlion statue. The island also houses luxury resorts, golf courses, a casino, and historical sites like Fort Siloso. The Sentosa Boardwalk offers scenic waterfront views, while the Imbiah Lookout area provides attractions like the Sentosa 4D AdventureLand and Madame Tussauds. The island hosts various events and shows, making it a year-round entertainment destination.',
+    photos: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800',
+      'https://images.unsplash.com/photo-1527934111143-f2c94c664e50?w=800',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800',
+      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800',
+      'https://images.unsplash.com/photo-1506351421178-63b52a2d2562?w=800'
+    ],
+    historicalInfo: 'Once a military fortress, Sentosa was redeveloped as a tourist destination in the 1970s. It has since become Singapore\'s premier integrated resort island with world-class attractions.',
+    yearBuilt: '1972',
+    architect: 'Sentosa Development Corporation',
+    translations: {
+      en: {
+        name: 'Sentosa Island',
+        narration: 'Welcome to Sentosa Island, Singapore\'s premier island resort destination. This tropical paradise offers beaches, theme parks, attractions, and entertainment for the whole family.',
+        description: 'Island resort with beaches, attractions, and entertainment',
+        historicalInfo: 'Once a military fortress, Sentosa was redeveloped as a tourist destination in the 1970s. It has since become Singapore\'s premier integrated resort island with world-class attractions.',
+        yearBuilt: '1972',
+        architect: 'Sentosa Development Corporation'
+      },
+      it: {
+        name: 'Isola di Sentosa',
+        narration: 'Benvenuto all\'Isola di Sentosa, la principale destinazione resort di Singapore. Questo paradiso tropicale offre spiagge, parchi a tema, attrazioni e intrattenimento per tutta la famiglia.',
+        description: 'Resort insulare con spiagge, attrazioni e intrattenimento',
+        historicalInfo: 'Un tempo fortezza militare, Sentosa è stata riconvertita come destinazione turistica negli anni \'70. Da allora è diventata la principale isola resort integrata di Singapore con attrazioni di livello mondiale.',
+        yearBuilt: '1972',
+        architect: 'Sentosa Development Corporation'
+      },
+      ko: {
+        name: '센토사 섬',
+        narration: '싱가포르 최고의 섬 리조트 목적지인 센토사 섬에 오신 것을 환영합니다. 이 열대 낙원은 온 가족을 위한 해변, 테마파크, 명소, 엔터테인먼트를 제공합니다.',
+        description: '해변, 명소, 엔터테인먼트를 갖춘 섬 리조트',
+        historicalInfo: '한때 군사 요새였던 센토사는 1970년대에 관광지로 재개발되었습니다. 이후 세계적인 수준의 명소를 갖춘 싱가포르 최고의 통합 리조트 섬이 되었습니다.',
+        yearBuilt: '1972',
+        architect: '센토사 개발 공사'
       }
     }
   },
@@ -4189,6 +4489,156 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
+  {
+    id: 'george-town-unesco-site',
+    cityId: 'penang',
+    name: 'George Town UNESCO Site',
+    lat: 5.4164,
+    lng: 100.3327,
+    radius: 100,
+    narration: 'Welcome to George Town UNESCO World Heritage Site, a living testimony to the multicultural heritage of Asia and Europe. This historic city showcases exceptional colonial and Asian architecture.',
+    description: 'UNESCO World Heritage historic city center',
+    category: 'UNESCO Heritage',
+    detailedDescription: 'George Town was inscribed as a UNESCO World Heritage Site in 2008, recognized for its unique architectural and cultural townscape without parallel anywhere in East and Southeast Asia. The historic city reflects the coming together of British colonial architecture and traditional Chinese and Indian influences, creating a distinct cultural and architectural character. The site encompasses over 1,700 heritage buildings, including pre-war shophouses, temples, mosques, churches, and clan houses. Notable areas include the Armenian Street heritage zone, Little India, and the Clan Jetties - unique waterfront settlements built on stilts. The city is famous for its vibrant street art, including works by Lithuanian artist Ernest Zacharevic. George Town\'s culinary scene is equally celebrated, representing a fusion of Malay, Chinese, Indian, and Peranakan cuisines. The UNESCO recognition has helped preserve the city\'s unique character while promoting sustainable tourism and cultural conservation.',
+    photos: [
+      'https://images.unsplash.com/photo-1555217851-85fd5a8fa4cf?w=800',
+      'https://images.unsplash.com/photo-1523428096881-5c6f16d8915b?w=800',
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800'
+    ],
+    historicalInfo: 'George Town was inscribed as a UNESCO World Heritage Site in 2008 for its unique blend of British colonial and Asian architecture, representing a multicultural trading town in East and Southeast Asia.',
+    yearBuilt: '1786',
+    architect: 'Captain Francis Light and various colonial architects',
+    translations: {
+      en: {
+        name: 'George Town UNESCO Site',
+        narration: 'Welcome to George Town UNESCO World Heritage Site, a living testimony to the multicultural heritage of Asia and Europe. This historic city showcases exceptional colonial and Asian architecture.',
+        description: 'UNESCO World Heritage historic city center',
+        historicalInfo: 'George Town was inscribed as a UNESCO World Heritage Site in 2008 for its unique blend of British colonial and Asian architecture, representing a multicultural trading town in East and Southeast Asia.',
+        yearBuilt: '1786',
+        architect: 'Captain Francis Light and various colonial architects'
+      },
+      it: {
+        name: 'Sito UNESCO di George Town',
+        narration: 'Benvenuto al Sito Patrimonio Mondiale dell\'UNESCO di George Town, una testimonianza vivente del patrimonio multiculturale dell\'Asia e dell\'Europa. Questa città storica presenta un\'eccezionale architettura coloniale e asiatica.',
+        description: 'Centro storico cittadino patrimonio mondiale UNESCO',
+        historicalInfo: 'George Town è stata iscritta come Sito Patrimonio Mondiale dell\'UNESCO nel 2008 per la sua miscela unica di architettura coloniale britannica e asiatica, rappresentando una città commerciale multiculturale nell\'Asia orientale e sud-orientale.',
+        yearBuilt: '1786',
+        architect: 'Capitano Francis Light e vari architetti coloniali'
+      },
+      ko: {
+        name: '조지타운 유네스코 유적지',
+        narration: '아시아와 유럽의 다문화 유산을 보여주는 살아있는 증거인 조지타운 유네스코 세계유산에 오신 것을 환영합니다. 이 역사적인 도시는 뛰어난 식민지 및 아시아 건축을 선보입니다.',
+        description: '유네스코 세계유산 역사적 도심',
+        historicalInfo: '조지타운은 영국 식민지와 아시아 건축의 독특한 혼합으로 동아시아와 동남아시아의 다문화 무역 도시를 대표하여 2008년 유네스코 세계유산으로 등재되었습니다.',
+        yearBuilt: '1786',
+        architect: '프랜시스 라이트 대위와 여러 식민지 건축가'
+      }
+    }
+  },
+  {
+    id: 'pinang-peranakan-mansion',
+    cityId: 'penang',
+    name: 'Pinang Peranakan Mansion',
+    lat: 5.4175,
+    lng: 100.3353,
+    radius: 50,
+    narration: 'Welcome to the Pinang Peranakan Mansion, a museum showcasing the opulent lifestyle of the Peranakan community. This restored mansion displays exquisite antiques and cultural treasures.',
+    description: 'Museum of Peranakan heritage and culture',
+    category: 'Museum & Heritage',
+    detailedDescription: 'The Pinang Peranakan Mansion is a museum that provides an insight into the unique Peranakan culture, also known as Straits Chinese or Baba-Nyonya culture. Housed in a restored 19th-century mansion, the museum showcases over 1,000 pieces of antiques and collectibles, including intricate Chinese carved wooden panels, mother-of-pearl inlaid furniture, gold-embroidered textiles, and Italian floor tiles. The Peranakan community emerged from marriages between Chinese immigrants and local Malays, creating a distinct culture that blends Chinese, Malay, and European influences. The mansion recreates the lavish lifestyle of a wealthy Peranakan family, with beautifully furnished rooms including a reception hall, ancestral altar, bridal chamber, and dining area. The collection includes rare Peranakan porcelain, jewelry, traditional costumes, and household items. The mansion serves as an important cultural institution preserving and promoting the rich heritage of Penang\'s Peranakan community.',
+    photos: [
+      'https://images.unsplash.com/photo-1566127444979-b3d2b64d1b23?w=800',
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800',
+      'https://images.unsplash.com/photo-1555217851-85fd5a8fa4cf?w=800',
+      'https://images.unsplash.com/photo-1523428096881-5c6f16d8915b?w=800',
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+      'https://images.unsplash.com/photo-1523509433743-6f42a58221df?w=800'
+    ],
+    historicalInfo: 'Built in the late 19th century and restored as a museum, the mansion showcases the lavish lifestyle and unique cultural heritage of Penang\'s Peranakan community.',
+    yearBuilt: '1890s',
+    architect: 'Traditional Peranakan architecture',
+    translations: {
+      en: {
+        name: 'Pinang Peranakan Mansion',
+        narration: 'Welcome to the Pinang Peranakan Mansion, a museum showcasing the opulent lifestyle of the Peranakan community. This restored mansion displays exquisite antiques and cultural treasures.',
+        description: 'Museum of Peranakan heritage and culture',
+        historicalInfo: 'Built in the late 19th century and restored as a museum, the mansion showcases the lavish lifestyle and unique cultural heritage of Penang\'s Peranakan community.',
+        yearBuilt: '1890s',
+        architect: 'Traditional Peranakan architecture'
+      },
+      it: {
+        name: 'Pinang Peranakan Mansion',
+        narration: 'Benvenuto alla Pinang Peranakan Mansion, un museo che mostra lo stile di vita opulento della comunità Peranakan. Questa villa restaurata espone squisiti oggetti d\'antiquariato e tesori culturali.',
+        description: 'Museo del patrimonio e della cultura Peranakan',
+        historicalInfo: 'Costruita alla fine del XIX secolo e restaurata come museo, la villa mostra lo stile di vita sontuoso e l\'unico patrimonio culturale della comunità Peranakan di Penang.',
+        yearBuilt: '1890',
+        architect: 'Architettura tradizionale Peranakan'
+      },
+      ko: {
+        name: '피낭 페라나칸 맨션',
+        narration: '페라나칸 공동체의 호화로운 생활 방식을 보여주는 박물관인 피낭 페라나칸 맨션에 오신 것을 환영합니다. 이 복원된 저택은 정교한 골동품과 문화 유산을 전시합니다.',
+        description: '페라나칸 유산과 문화 박물관',
+        historicalInfo: '19세기 후반에 건설되어 박물관으로 복원된 이 저택은 페낭 페라나칸 공동체의 사치스러운 생활 방식과 독특한 문화 유산을 보여줍니다.',
+        yearBuilt: '1890년대',
+        architect: '전통 페라나칸 건축'
+      }
+    }
+  },
+  {
+    id: 'penang-national-park',
+    cityId: 'penang',
+    name: 'Penang National Park',
+    lat: 5.4453,
+    lng: 100.1981,
+    radius: 100,
+    narration: 'Welcome to Penang National Park, the smallest national park in the world yet rich in biodiversity. This protected area features pristine beaches, jungle trails, and diverse wildlife.',
+    description: 'Smallest national park with beaches and rainforest',
+    category: 'Nature & Park',
+    detailedDescription: 'Penang National Park, established in 2003, is the smallest national park in the world, covering only 2,562 hectares. Despite its compact size, the park boasts remarkable biodiversity with over 417 flora species and 143 fauna species, including the critically endangered green sea turtle and hawksbill turtle. The park features diverse ecosystems including dipterocarp forest, mangrove forest, coastal hill forest, and coral reefs. Popular trails lead to pristine beaches such as Monkey Beach (Teluk Duyung) and Turtle Beach (Pantai Kerachut), where turtle conservation efforts are ongoing. The Canopy Walkway, suspended 15 meters above ground, offers spectacular views of the forest and coastline. The park also houses Meromictic Lake, a rare natural phenomenon where fresh and saltwater layers don\'t mix. Visitors can engage in activities like hiking, wildlife watching, swimming, and participating in turtle conservation programs. The park represents an important conservation area protecting Penang\'s natural heritage.',
+    photos: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
+      'https://images.unsplash.com/photo-1511497584788-876760111969?w=800',
+      'https://images.unsplash.com/photo-1527934111143-f2c94c664e50?w=800',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800'
+    ],
+    historicalInfo: 'Established in 2003, Penang National Park is the smallest national park in the world but features rich biodiversity and important turtle conservation programs.',
+    yearBuilt: '2003',
+    architect: 'Department of Wildlife and National Parks',
+    translations: {
+      en: {
+        name: 'Penang National Park',
+        narration: 'Welcome to Penang National Park, the smallest national park in the world yet rich in biodiversity. This protected area features pristine beaches, jungle trails, and diverse wildlife.',
+        description: 'Smallest national park with beaches and rainforest',
+        historicalInfo: 'Established in 2003, Penang National Park is the smallest national park in the world but features rich biodiversity and important turtle conservation programs.',
+        yearBuilt: '2003',
+        architect: 'Department of Wildlife and National Parks'
+      },
+      it: {
+        name: 'Parco Nazionale di Penang',
+        narration: 'Benvenuto al Parco Nazionale di Penang, il parco nazionale più piccolo del mondo ma ricco di biodiversità. Quest\'area protetta presenta spiagge incontaminate, sentieri nella giungla e fauna diversificata.',
+        description: 'Parco nazionale più piccolo con spiagge e foresta pluviale',
+        historicalInfo: 'Istituito nel 2003, il Parco Nazionale di Penang è il parco nazionale più piccolo del mondo ma presenta una ricca biodiversità e importanti programmi di conservazione delle tartarughe.',
+        yearBuilt: '2003',
+        architect: 'Dipartimento della Fauna Selvatica e dei Parchi Nazionali'
+      },
+      ko: {
+        name: '페낭 국립공원',
+        narration: '세계에서 가장 작지만 생물 다양성이 풍부한 페낭 국립공원에 오신 것을 환영합니다. 이 보호 구역은 깨끗한 해변, 정글 트레일, 다양한 야생 동물을 특징으로 합니다.',
+        description: '해변과 열대우림이 있는 가장 작은 국립공원',
+        historicalInfo: '2003년에 설립된 페낭 국립공원은 세계에서 가장 작은 국립공원이지만 풍부한 생물 다양성과 중요한 거북이 보존 프로그램을 갖추고 있습니다.',
+        yearBuilt: '2003',
+        architect: '야생동물 및 국립공원부'
+      }
+    }
+  },
 
   // Kuala Lumpur, Malaysia landmarks
   {
@@ -4255,6 +4705,156 @@ const LANDMARKS: Landmark[] = [
         narration: '일련의 동굴과 동굴 사원이 있는 석회암 언덕인 바투 동굴에 오신 것을 환영합니다. 이 장소는 거대한 금색 무루간 신 동상이 지배하고 있으며 272개의 다채로운 계단이 특징입니다.',
         description: '석회암 동굴의 신성한 힌두 사원 복합체',
         historicalInfo: '동굴은 120년 이상 힌두 신전으로 사용되어 왔습니다. 금색 무루간 신 동상은 2006년에 공개되었으며 높이 42.7미터입니다.'
+      }
+    }
+  },
+  {
+    id: 'thean-hou-temple',
+    cityId: 'kuala-lumpur',
+    name: 'Thean Hou Temple',
+    lat: 3.1208,
+    lng: 101.6864,
+    radius: 70,
+    narration: 'Welcome to Thean Hou Temple, one of the oldest and largest Chinese temples in Southeast Asia. This six-tiered temple is dedicated to the Chinese sea goddess Mazu and showcases traditional Chinese architecture.',
+    description: 'Six-tiered Chinese temple dedicated to goddess Mazu',
+    category: 'Religious',
+    detailedDescription: 'The Thean Hou Temple, completed in 1987, is one of the oldest and largest temples in Southeast Asia. Perched atop Robson Heights, the temple is dedicated to Thean Hou, the Heavenly Mother and goddess of the sea. The temple was built by the Hainanese community of Kuala Lumpur and covers 1.67 acres. The six-tiered temple combines elements of Buddhism, Taoism, and Confucianism, reflecting the syncretic nature of Chinese folk religion. The main prayer hall features ornate pillars, intricate carvings, and beautiful murals depicting Chinese legends. The temple complex includes a medicinal herb garden, souvenir shop, and a tortoise pond believed to bring longevity. The rooftop offers panoramic views of Kuala Lumpur cityscape. The temple is especially vibrant during Chinese festivals, particularly during Chinese New Year and the Mid-Autumn Festival, when it is decorated with thousands of lanterns. The architectural beauty, spiritual significance, and cultural importance make Thean Hou Temple a must-visit landmark.',
+    photos: [
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1548585744-6e2d7c1e1a21?w=800',
+      'https://images.unsplash.com/photo-1590498380394-8db1bf58af6e?w=800'
+    ],
+    historicalInfo: 'Completed in 1987 by the Hainanese community, Thean Hou Temple is one of the oldest and largest Chinese temples in Southeast Asia, dedicated to the sea goddess Mazu.',
+    yearBuilt: '1987',
+    architect: 'Hainanese Community of Kuala Lumpur',
+    translations: {
+      en: {
+        name: 'Thean Hou Temple',
+        narration: 'Welcome to Thean Hou Temple, one of the oldest and largest Chinese temples in Southeast Asia. This six-tiered temple is dedicated to the Chinese sea goddess Mazu and showcases traditional Chinese architecture.',
+        description: 'Six-tiered Chinese temple dedicated to goddess Mazu',
+        historicalInfo: 'Completed in 1987 by the Hainanese community, Thean Hou Temple is one of the oldest and largest Chinese temples in Southeast Asia, dedicated to the sea goddess Mazu.',
+        yearBuilt: '1987',
+        architect: 'Hainanese Community of Kuala Lumpur'
+      },
+      it: {
+        name: 'Tempio Thean Hou',
+        narration: 'Benvenuto al Tempio Thean Hou, uno dei templi cinesi più antichi e grandi del Sud-est asiatico. Questo tempio a sei livelli è dedicato alla dea del mare cinese Mazu e mostra l\'architettura tradizionale cinese.',
+        description: 'Tempio cinese a sei livelli dedicato alla dea Mazu',
+        historicalInfo: 'Completato nel 1987 dalla comunità Hainanese, il Tempio Thean Hou è uno dei templi cinesi più antichi e grandi del Sud-est asiatico, dedicato alla dea del mare Mazu.',
+        yearBuilt: '1987',
+        architect: 'Comunità Hainanese di Kuala Lumpur'
+      },
+      ko: {
+        name: '티안 호우 사원',
+        narration: '동남아시아에서 가장 오래되고 큰 중국 사원 중 하나인 티안 호우 사원에 오신 것을 환영합니다. 이 6층 사원은 중국 바다의 여신 마조에게 헌정되었으며 전통적인 중국 건축을 보여줍니다.',
+        description: '여신 마조에게 헌정된 6층 중국 사원',
+        historicalInfo: '1987년 하이난 공동체에 의해 완공된 티안 호우 사원은 바다의 여신 마조에게 헌정된 동남아시아에서 가장 오래되고 큰 중국 사원 중 하나입니다.',
+        yearBuilt: '1987',
+        architect: '쿠알라룸푸르 하이난 공동체'
+      }
+    }
+  },
+  {
+    id: 'kl-tower',
+    cityId: 'kuala-lumpur',
+    name: 'KL Tower',
+    lat: 3.1529,
+    lng: 101.7038,
+    radius: 60,
+    narration: 'Welcome to KL Tower, the seventh tallest telecommunication tower in the world. Rising 421 meters above sea level, this iconic tower offers spectacular 360-degree views of Kuala Lumpur.',
+    description: 'Iconic telecommunication tower with observation deck',
+    category: 'Observation & Modern Architecture',
+    detailedDescription: 'The Kuala Lumpur Tower, officially known as Menara Kuala Lumpur, was completed in 1996 and stands as the seventh tallest telecommunication tower in the world at 421 meters. Built on Bukit Nanas (Pineapple Hill), the tower\'s base sits 93 meters above sea level, giving it a total height of 421 meters. The tower was designed by architect Kumpulan Senireka Sdn Bhd and constructed over four years. The tower serves as a telecommunications hub for the city and features an observation deck at 276 meters that offers breathtaking panoramic views of Kuala Lumpur and beyond. The Sky Deck at 300 meters provides an even more spectacular viewing experience with an open-air platform. The tower also houses a revolving restaurant, Atmosphere 360, which completes a full rotation every hour. At the base of the tower is an amphitheater, upside-down house attraction, and mini zoo. The tower is built within the oldest gazetted forest reserve in Malaysia, the Bukit Nanas Forest Reserve. At night, the tower is beautifully illuminated and serves as a prominent landmark in the city\'s skyline.',
+    photos: [
+      'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800',
+      'https://images.unsplash.com/photo-1508062878650-88b52897f298?w=800',
+      'https://images.unsplash.com/photo-1508004680771-708b02aabdc0?w=800',
+      'https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?w=800',
+      'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800',
+      'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800',
+      'https://images.unsplash.com/photo-1506351421178-63b52a2d2562?w=800'
+    ],
+    historicalInfo: 'Completed in 1996, KL Tower stands at 421 meters and is the seventh tallest telecommunication tower in the world. It serves as both a telecommunications hub and tourist attraction.',
+    yearBuilt: '1996',
+    architect: 'Kumpulan Senireka Sdn Bhd',
+    translations: {
+      en: {
+        name: 'KL Tower',
+        narration: 'Welcome to KL Tower, the seventh tallest telecommunication tower in the world. Rising 421 meters above sea level, this iconic tower offers spectacular 360-degree views of Kuala Lumpur.',
+        description: 'Iconic telecommunication tower with observation deck',
+        historicalInfo: 'Completed in 1996, KL Tower stands at 421 meters and is the seventh tallest telecommunication tower in the world. It serves as both a telecommunications hub and tourist attraction.',
+        yearBuilt: '1996',
+        architect: 'Kumpulan Senireka Sdn Bhd'
+      },
+      it: {
+        name: 'Torre KL',
+        narration: 'Benvenuto alla Torre KL, la settima torre per telecomunicazioni più alta del mondo. Con un\'altezza di 421 metri sul livello del mare, questa torre iconica offre viste spettacolari a 360 gradi di Kuala Lumpur.',
+        description: 'Torre per telecomunicazioni iconica con piattaforma di osservazione',
+        historicalInfo: 'Completata nel 1996, la Torre KL è alta 421 metri ed è la settima torre per telecomunicazioni più alta del mondo. Serve sia come hub per telecomunicazioni che come attrazione turistica.',
+        yearBuilt: '1996',
+        architect: 'Kumpulan Senireka Sdn Bhd'
+      },
+      ko: {
+        name: 'KL 타워',
+        narration: '세계에서 일곱 번째로 높은 통신 타워인 KL 타워에 오신 것을 환영합니다. 해발 421미터 높이로 솟아있는 이 상징적인 타워는 쿠알라룸푸르의 장관을 이루는 360도 전망을 제공합니다.',
+        description: '전망대가 있는 상징적인 통신 타워',
+        historicalInfo: '1996년에 완공된 KL 타워는 높이 421미터로 세계에서 일곱 번째로 높은 통신 타워입니다. 통신 허브이자 관광 명소로 기능합니다.',
+        yearBuilt: '1996',
+        architect: 'Kumpulan Senireka Sdn Bhd'
+      }
+    }
+  },
+  {
+    id: 'central-market-kl',
+    cityId: 'kuala-lumpur',
+    name: 'Central Market',
+    lat: 3.1460,
+    lng: 101.6958,
+    radius: 80,
+    narration: 'Welcome to Central Market, a cultural landmark in the heart of Kuala Lumpur. This historic market has been a hub for Malaysian arts, crafts, and culture since 1888.',
+    description: 'Historic cultural market for arts and crafts',
+    category: 'Cultural & Shopping',
+    detailedDescription: 'Central Market, also known as Pasar Seni, is a cultural landmark located in the heart of Kuala Lumpur. Originally built in 1888 as a wet market, the Art Deco style building was saved from demolition in 1980 and repurposed as a cultural and craft center. The market was gazetted as a Heritage Site by the Malaysian Heritage Society in 1986. The two-story building now houses over 300 stalls selling traditional handicrafts, batik, paintings, sculptures, jewelry, and souvenirs representing Malaysia\'s multicultural heritage. The market is divided into sections representing the three main ethnic groups: Malay, Chinese, and Indian, showcasing their respective crafts and cultural items. The Annexe Gallery on the second floor hosts art exhibitions and cultural performances. Central Market is also famous for its street food court offering authentic Malaysian cuisine. The building\'s distinctive blue and white Art Deco facade has become an iconic landmark. The market serves as an important cultural center promoting Malaysian arts and crafts while preserving the country\'s heritage.',
+    photos: [
+      'https://images.unsplash.com/photo-1555217851-85fd5a8fa4cf?w=800',
+      'https://images.unsplash.com/photo-1523428096881-5c6f16d8915b?w=800',
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800'
+    ],
+    historicalInfo: 'Originally built in 1888 as a wet market, Central Market was saved from demolition and designated a Heritage Site in 1986. It now serves as a cultural center for Malaysian arts and crafts.',
+    yearBuilt: '1888',
+    architect: 'Art Deco restoration in 1980s',
+    translations: {
+      en: {
+        name: 'Central Market',
+        narration: 'Welcome to Central Market, a cultural landmark in the heart of Kuala Lumpur. This historic market has been a hub for Malaysian arts, crafts, and culture since 1888.',
+        description: 'Historic cultural market for arts and crafts',
+        historicalInfo: 'Originally built in 1888 as a wet market, Central Market was saved from demolition and designated a Heritage Site in 1986. It now serves as a cultural center for Malaysian arts and crafts.',
+        yearBuilt: '1888',
+        architect: 'Art Deco restoration in 1980s'
+      },
+      it: {
+        name: 'Mercato Centrale',
+        narration: 'Benvenuto al Mercato Centrale, un punto di riferimento culturale nel cuore di Kuala Lumpur. Questo mercato storico è stato un centro per le arti, l\'artigianato e la cultura malese dal 1888.',
+        description: 'Mercato culturale storico per arti e artigianato',
+        historicalInfo: 'Originariamente costruito nel 1888 come mercato umido, il Mercato Centrale è stato salvato dalla demolizione e designato Sito del Patrimonio nel 1986. Ora funge da centro culturale per le arti e l\'artigianato malese.',
+        yearBuilt: '1888',
+        architect: 'Restauro Art Deco negli anni \'80'
+      },
+      ko: {
+        name: '중앙 시장',
+        narration: '쿠알라룸푸르 중심부의 문화적 랜드마크인 중앙 시장에 오신 것을 환영합니다. 이 역사적인 시장은 1888년부터 말레이시아 예술, 공예, 문화의 중심지였습니다.',
+        description: '예술과 공예를 위한 역사적 문화 시장',
+        historicalInfo: '원래 1888년에 재래시장으로 건설된 중앙 시장은 철거로부터 구해져 1986년 유산지로 지정되었습니다. 현재 말레이시아 예술과 공예의 문화 센터로 기능합니다.',
+        yearBuilt: '1888',
+        architect: '1980년대 아르데코 복원'
       }
     }
   },
@@ -4389,6 +4989,156 @@ const LANDMARKS: Landmark[] = [
         narration: '푸켓에서 가장 사진이 많이 찍히는 전망 중 하나를 제공하는 카론 전망대에 오신 것을 환영합니다. 이 경치 좋은 장소는 세 개의 만을 파노라마로 조망합니다: 카타 노이, 카타, 카론.',
         description: '세 개의 멋진 만이 내려다보이는 파노라마 전망대',
         historicalInfo: '카론 전망대는 섬 서해안 해변의 장애물 없는 전망을 제공하며 푸켓에서 가장 상징적인 사진 촬영 장소 중 하나가 되었습니다.'
+      }
+    }
+  },
+  {
+    id: 'old-phuket-town',
+    cityId: 'phuket',
+    name: 'Old Phuket Town',
+    lat: 7.8818,
+    lng: 98.3879,
+    radius: 100,
+    narration: 'Welcome to Old Phuket Town, a charming historic district showcasing Sino-Portuguese architecture. This colorful neighborhood reflects Phuket\'s rich multicultural heritage and trading history.',
+    description: 'Historic district with Sino-Portuguese architecture',
+    category: 'Cultural Heritage',
+    detailedDescription: 'Old Phuket Town is the historic heart of Phuket, showcasing beautifully preserved Sino-Portuguese architecture from the tin mining boom era of the late 19th and early 20th centuries. The district features colorful shophouses with ornate facades, reflecting the fusion of Chinese and European architectural styles. Major streets like Thalang Road, Dibuk Road, and Yaowarat Road are lined with heritage buildings that now house museums, art galleries, boutique hotels, cafes, and restaurants. The architecture reflects Phuket\'s prosperous past when Chinese immigrants came to work in the tin mines and settled in the area. Many buildings feature distinctive elements such as arched colonnades, decorative tiles, shuttered windows, and painted stucco facades. The Thai Hua Museum, housed in a former Chinese language school, tells the story of Phuket\'s Chinese heritage. Old Phuket Town is designated as a conservation area, and walking tours reveal hidden gems including Chinese shrines, old mansions, and traditional coffee shops. The Sunday Walking Street market brings the area to life with street food, crafts, and cultural performances.',
+    photos: [
+      'https://images.unsplash.com/photo-1555217851-85fd5a8fa4cf?w=800',
+      'https://images.unsplash.com/photo-1523428096881-5c6f16d8915b?w=800',
+      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',
+      'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800',
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800'
+    ],
+    historicalInfo: 'Old Phuket Town developed during the tin mining boom of the late 19th century, when Chinese immigrants settled and built Sino-Portuguese shophouses that now define the historic district.',
+    yearBuilt: '1890s-1930s',
+    architect: 'Various Chinese and European architects',
+    translations: {
+      en: {
+        name: 'Old Phuket Town',
+        narration: 'Welcome to Old Phuket Town, a charming historic district showcasing Sino-Portuguese architecture. This colorful neighborhood reflects Phuket\'s rich multicultural heritage and trading history.',
+        description: 'Historic district with Sino-Portuguese architecture',
+        historicalInfo: 'Old Phuket Town developed during the tin mining boom of the late 19th century, when Chinese immigrants settled and built Sino-Portuguese shophouses that now define the historic district.',
+        yearBuilt: '1890s-1930s',
+        architect: 'Various Chinese and European architects'
+      },
+      it: {
+        name: 'Città Vecchia di Phuket',
+        narration: 'Benvenuto alla Città Vecchia di Phuket, un affascinante quartiere storico che mostra l\'architettura sino-portoghese. Questo colorato quartiere riflette il ricco patrimonio multiculturale e la storia commerciale di Phuket.',
+        description: 'Distretto storico con architettura sino-portoghese',
+        historicalInfo: 'La Città Vecchia di Phuket si è sviluppata durante il boom dell\'estrazione dello stagno alla fine del XIX secolo, quando gli immigrati cinesi si stabilirono e costruirono shophouse sino-portoghesi che ora definiscono il distretto storico.',
+        yearBuilt: '1890-1930',
+        architect: 'Vari architetti cinesi ed europei'
+      },
+      ko: {
+        name: '올드 푸켓 타운',
+        narration: '중국-포르투갈 건축을 보여주는 매력적인 역사 지구인 올드 푸켓 타운에 오신 것을 환영합니다. 이 다채로운 지역은 푸켓의 풍부한 다문화 유산과 무역 역사를 반영합니다.',
+        description: '중국-포르투갈 건축의 역사 지구',
+        historicalInfo: '올드 푸켓 타운은 19세기 후반 주석 광산 붐 기간 동안 발전했으며, 중국 이민자들이 정착하여 현재 역사 지구를 정의하는 중국-포르투갈 샵하우스를 지었습니다.',
+        yearBuilt: '1890년대-1930년대',
+        architect: '다양한 중국 및 유럽 건축가'
+      }
+    }
+  },
+  {
+    id: 'phi-phi-islands',
+    cityId: 'phuket',
+    name: 'Phi Phi Islands',
+    lat: 7.7407,
+    lng: 98.7784,
+    radius: 100,
+    narration: 'Welcome to the Phi Phi Islands, a tropical paradise featuring stunning limestone cliffs, crystal-clear waters, and pristine beaches. These iconic islands are among Thailand\'s most beautiful destinations.',
+    description: 'Tropical island paradise with limestone cliffs',
+    category: 'Island & Beach',
+    detailedDescription: 'The Phi Phi Islands are an archipelago located in the Andaman Sea, about 45 kilometers southeast of Phuket. The group consists of six islands, with Phi Phi Don and Phi Phi Leh being the largest and most famous. Phi Phi Don is the only inhabited island and features a unique geography with two crescent-shaped bays connected by a narrow isthmus. The island offers stunning viewpoints, diving sites, and vibrant nightlife. Phi Phi Leh is uninhabited and famous for Maya Bay, which gained international fame as the filming location for the movie "The Beach" starring Leonardo DiCaprio. The islands feature dramatic limestone cliffs rising from turquoise waters, coral reefs teeming with marine life, and white sand beaches. Popular activities include snorkeling, diving, rock climbing, and island hopping. The waters around the islands are home to diverse marine species including tropical fish, sea turtles, and reef sharks. Maya Bay underwent a restoration period to recover from tourism impact and now operates with strict visitor limits to preserve its natural beauty.',
+    photos: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800',
+      'https://images.unsplash.com/photo-1527934111143-f2c94c664e50?w=800',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
+      'https://images.unsplash.com/photo-1511497584788-876760111969?w=800'
+    ],
+    historicalInfo: 'The Phi Phi Islands have been inhabited by Muslim fishermen for centuries. They gained international fame after the 2000 film "The Beach" and are now protected as part of Thailand\'s marine conservation efforts.',
+    yearBuilt: 'Natural formation',
+    architect: 'N/A',
+    translations: {
+      en: {
+        name: 'Phi Phi Islands',
+        narration: 'Welcome to the Phi Phi Islands, a tropical paradise featuring stunning limestone cliffs, crystal-clear waters, and pristine beaches. These iconic islands are among Thailand\'s most beautiful destinations.',
+        description: 'Tropical island paradise with limestone cliffs',
+        historicalInfo: 'The Phi Phi Islands have been inhabited by Muslim fishermen for centuries. They gained international fame after the 2000 film "The Beach" and are now protected as part of Thailand\'s marine conservation efforts.',
+        yearBuilt: 'Natural formation',
+        architect: 'N/A'
+      },
+      it: {
+        name: 'Isole Phi Phi',
+        narration: 'Benvenuto alle Isole Phi Phi, un paradiso tropicale caratterizzato da splendide scogliere calcaree, acque cristalline e spiagge incontaminate. Queste isole iconiche sono tra le destinazioni più belle della Thailandia.',
+        description: 'Paradiso tropicale insulare con scogliere calcaree',
+        historicalInfo: 'Le Isole Phi Phi sono state abitate da pescatori musulmani per secoli. Hanno acquisito fama internazionale dopo il film del 2000 "The Beach" e ora sono protette come parte degli sforzi di conservazione marina della Thailandia.',
+        yearBuilt: 'Formazione naturale',
+        architect: 'N/A'
+      },
+      ko: {
+        name: '피피 섬',
+        narration: '멋진 석회암 절벽, 수정처럼 맑은 물, 깨끗한 해변을 특징으로 하는 열대 낙원인 피피 섬에 오신 것을 환영합니다. 이 상징적인 섬들은 태국에서 가장 아름다운 목적지 중 하나입니다.',
+        description: '석회암 절벽이 있는 열대 섬 낙원',
+        historicalInfo: '피피 섬은 수세기 동안 무슬림 어부들이 거주해 왔습니다. 2000년 영화 "더 비치" 이후 국제적인 명성을 얻었으며 현재 태국의 해양 보존 노력의 일환으로 보호받고 있습니다.',
+        yearBuilt: '자연 형성',
+        architect: 'N/A'
+      }
+    }
+  },
+  {
+    id: 'similan-islands',
+    cityId: 'phuket',
+    name: 'Similan Islands',
+    lat: 8.6494,
+    lng: 97.6425,
+    radius: 100,
+    narration: 'Welcome to the Similan Islands, one of the world\'s top diving destinations. This pristine archipelago features crystal-clear waters, vibrant coral reefs, and diverse marine life.',
+    description: 'Premier diving destination with pristine coral reefs',
+    category: 'Island & Marine Park',
+    detailedDescription: 'The Similan Islands are an archipelago of 11 islands located in the Andaman Sea, about 84 kilometers northwest of Phuket. Designated as a national park in 1982, the Similan Islands Marine National Park protects one of Thailand\'s most pristine marine ecosystems. The islands are renowned worldwide as a premier diving and snorkeling destination, featuring crystal-clear waters with visibility often exceeding 30 meters, diverse coral reefs, and abundant marine life including manta rays, whale sharks, sea turtles, and countless tropical fish species. The name "Similan" comes from the Malay word "sembilan," meaning nine, referring to the original nine islands. Each island has unique characteristics - Island 8 (Koh Similan) features the iconic Sailing Rock formation and pristine white sand beaches, while Island 4 (Koh Miang) serves as the park headquarters. The islands feature giant granite boulders both above and below water, creating spectacular underwater landscapes and dive sites. The park is open seasonally (typically November to May) to protect the ecosystem during monsoon season. Strict regulations limit visitor numbers and activities to preserve this natural wonder.',
+    photos: [
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800',
+      'https://images.unsplash.com/photo-1527934111143-f2c94c664e50?w=800',
+      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+      'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
+      'https://images.unsplash.com/photo-1511497584788-876760111969?w=800'
+    ],
+    historicalInfo: 'Designated as a national park in 1982, the Similan Islands are recognized as one of the world\'s top ten diving destinations and are protected to preserve their pristine marine ecosystem.',
+    yearBuilt: '1982',
+    architect: 'Thailand Department of National Parks',
+    translations: {
+      en: {
+        name: 'Similan Islands',
+        narration: 'Welcome to the Similan Islands, one of the world\'s top diving destinations. This pristine archipelago features crystal-clear waters, vibrant coral reefs, and diverse marine life.',
+        description: 'Premier diving destination with pristine coral reefs',
+        historicalInfo: 'Designated as a national park in 1982, the Similan Islands are recognized as one of the world\'s top ten diving destinations and are protected to preserve their pristine marine ecosystem.',
+        yearBuilt: '1982',
+        architect: 'Thailand Department of National Parks'
+      },
+      it: {
+        name: 'Isole Similan',
+        narration: 'Benvenuto alle Isole Similan, una delle migliori destinazioni subacquee del mondo. Questo arcipelago incontaminato presenta acque cristalline, barriere coralline vibranti e una vita marina diversificata.',
+        description: 'Destinazione subacquea di prima classe con barriere coralline incontaminate',
+        historicalInfo: 'Designate come parco nazionale nel 1982, le Isole Similan sono riconosciute come una delle dieci migliori destinazioni subacquee del mondo e sono protette per preservare il loro ecosistema marino incontaminato.',
+        yearBuilt: '1982',
+        architect: 'Dipartimento dei Parchi Nazionali della Thailandia'
+      },
+      ko: {
+        name: '시밀란 제도',
+        narration: '세계 최고의 다이빙 목적지 중 하나인 시밀란 제도에 오신 것을 환영합니다. 이 깨끗한 군도는 수정처럼 맑은 물, 생동감 넘치는 산호초, 다양한 해양 생물을 특징으로 합니다.',
+        description: '깨끗한 산호초가 있는 최고의 다이빙 목적지',
+        historicalInfo: '1982년 국립공원으로 지정된 시밀란 제도는 세계 10대 다이빙 목적지 중 하나로 인정받고 있으며 깨끗한 해양 생태계를 보존하기 위해 보호받고 있습니다.',
+        yearBuilt: '1982',
+        architect: '태국 국립공원부'
       }
     }
   }
