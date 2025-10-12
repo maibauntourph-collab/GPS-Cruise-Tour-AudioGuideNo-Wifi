@@ -210,7 +210,16 @@ npm run db:push --force # Force push (when conflicts occur)
 
 ## Recent Changes (2025-10-12)
 
-### Latest Update: Historical Info Translation & Language-Specific TTS Voices (Today)
+### Latest Update: Mobile Menu Card Styling (Today)
+- **Mobile Menu Enhancement**: Wrapped mobile sidebar menu in Card component for better visual elevation
+- **Responsive Design**: 
+  - Mobile: Card visible with border, background, and shadow
+  - Desktop (md+): Card transparent with no border/shadow (original design maintained)
+- **Improved UX**: Mobile menu now has clear visual separation from map background
+- **Padding Adjustments**: Optimized spacing for mobile and desktop views
+- **E2E Tested**: Verified on mobile viewport (375x667px), all controls accessible
+
+### Previous Update: Historical Info Translation & Language-Specific TTS Voices
 - **historicalInfo Translation**: Extended getTranslatedContent() to support 'historicalInfo' field
 - **Complete Localization**: Historical information now translates in LandmarkPanel and LandmarkDetails
 - **Language-Specific TTS Voices**: 
