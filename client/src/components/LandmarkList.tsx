@@ -201,7 +201,7 @@ export function LandmarkList({
       onClick={handleCardClick}
       data-testid="card-landmarklist-container"
     >
-      <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl flex flex-col max-h-[calc(100vh-32px)]">
+      <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl flex flex-col max-h-[calc(100vh-32px)] overflow-hidden">
         <div 
           className="p-4 border-b flex items-center justify-between flex-shrink-0"
           data-drag-handle

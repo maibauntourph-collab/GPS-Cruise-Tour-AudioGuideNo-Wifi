@@ -251,9 +251,9 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
       onClick={handleCardClick}
       data-testid="card-cruise-port-container"
     >
-      <Card className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800 flex flex-col max-h-[calc(100vh-4rem)]" data-testid="card-cruise-port-info">
+      <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-blue-200 dark:border-blue-800 flex flex-col max-h-[calc(100vh-4rem)] overflow-hidden" data-testid="card-cruise-port-info">
         <div 
-          className="flex items-center gap-2 mb-3 flex-shrink-0" 
+          className="flex items-center gap-2 p-4 pb-3 flex-shrink-0" 
           data-drag-handle
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={handleStart}
@@ -291,7 +291,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
           )}
         </div>
 
-      <div className="space-y-3 overflow-y-auto flex-1 pr-2 min-h-0" style={{ scrollbarWidth: 'thin' }}>
+      <div className="space-y-3 overflow-y-auto flex-1 px-4 pb-4 min-h-0" style={{ scrollbarWidth: 'thin' }}>
         {/* Port Name */}
         <div className="flex items-start gap-2">
           <Anchor className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
