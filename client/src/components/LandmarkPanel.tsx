@@ -37,6 +37,7 @@ export function LandmarkPanel({
   const [zIndex, setZIndex] = useState(1000);
   const [isMinimized, setIsMinimized] = useState(false);
   const [hasMoved, setHasMoved] = useState(false);
+  const [lastCardHeight, setLastCardHeight] = useState(600); // Track card height before minimizing
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -201,7 +202,8 @@ export function LandmarkPanel({
         handleMouseUp();
         if (!hasMoved) {
           const fullCardWidth = 384;
-          const fullCardHeight = 600;
+          // Use saved card height or calculate max possible height
+          const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 688);
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
@@ -261,6 +263,10 @@ export function LandmarkPanel({
               size="icon"
               onClick={(e) => {
                 e.stopPropagation();
+                // Save current card height before minimizing
+                if (cardRef.current) {
+                  setLastCardHeight(cardRef.current.offsetHeight);
+                }
                 setIsMinimized(true);
               }}
               className="h-7 w-7 shrink-0"
