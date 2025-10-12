@@ -201,7 +201,7 @@ export function LandmarkList({
       onClick={handleCardClick}
       data-testid="card-landmarklist-container"
     >
-      <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl max-h-80 overflow-y-auto">
+      <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl flex flex-col max-h-[calc(100vh-32px)]">
         <div 
           className="p-4 border-b flex items-center justify-between"
           data-drag-handle
@@ -229,7 +229,7 @@ export function LandmarkList({
             <Minus className="w-4 h-4" />
           </Button>
         </div>
-        <div className="divide-y">
+        <div className="divide-y overflow-y-auto flex-1" style={{ scrollbarWidth: 'thin' }}>
           {sortedLandmarks.map(({ landmark, distance }) => (
             <div 
               key={landmark.id} 

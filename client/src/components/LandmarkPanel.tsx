@@ -255,7 +255,7 @@ export function LandmarkPanel({
       onClick={handleCardClick}
       data-testid="card-landmark-container"
     >
-      <Card className="p-4 bg-background border overflow-y-auto max-h-[calc(100vh-32px)]" data-testid="panel-landmark-details">
+      <Card className="p-4 bg-background border flex flex-col max-h-[calc(100vh-32px)]" data-testid="panel-landmark-details">
         {/* Header */}
         <div 
           className="flex items-start justify-between mb-3"
@@ -306,22 +306,24 @@ export function LandmarkPanel({
           </div>
         </div>
 
-        {/* Badges */}
-        <div className="flex items-center gap-2 mb-3 flex-wrap">
-          {landmark.category && (
-            <Badge variant="secondary" data-testid="badge-category" className="text-xs">
-              {landmark.category}
-            </Badge>
-          )}
-          {landmark.yearBuilt && (
-            <Badge variant="outline" className="gap-1 text-xs" data-testid="badge-year">
-              <Calendar className="w-3 h-3" />
-              {landmark.yearBuilt}
-            </Badge>
-          )}
-        </div>
+        {/* Scrollable content */}
+        <div className="overflow-y-auto pr-2 flex-1" style={{ scrollbarWidth: 'thin' }}>
+          {/* Badges */}
+          <div className="flex items-center gap-2 mb-3 flex-wrap">
+            {landmark.category && (
+              <Badge variant="secondary" data-testid="badge-category" className="text-xs">
+                {landmark.category}
+              </Badge>
+            )}
+            {landmark.yearBuilt && (
+              <Badge variant="outline" className="gap-1 text-xs" data-testid="badge-year">
+                <Calendar className="w-3 h-3" />
+                {landmark.yearBuilt}
+              </Badge>
+            )}
+          </div>
 
-        <div className="space-y-3">
+          <div className="space-y-3">
           {/* Photo Gallery */}
           {landmark.photos && landmark.photos.length > 0 && (
             <div data-no-drag>
@@ -526,6 +528,7 @@ export function LandmarkPanel({
                 {isInTour ? 'Remove' : 'Add to Tour'}
               </Button>
             )}
+          </div>
           </div>
         </div>
       </Card>
