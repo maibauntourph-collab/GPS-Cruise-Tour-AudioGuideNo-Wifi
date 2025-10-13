@@ -3,22 +3,12 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark } from '@shared/schema';
-import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2, Ticket, ExternalLink, Minus, MapPinned } from 'lucide-react';
+import { MapPin, Calendar, User, X, Play, Pause, Volume2, Ticket, ExternalLink, Minus, MapPinned } from 'lucide-react';
 import { PhotoGallery } from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
 
 interface LandmarkPanelProps {
   landmark: Landmark | null;
@@ -57,7 +47,6 @@ export function LandmarkPanel({
   const [hasMoved, setHasMoved] = useState(false);
   const [lastCardHeight, setLastCardHeight] = useState(600); // Track card height before minimizing
   const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 }); // Track position before minimizing
-  const [showTourDialog, setShowTourDialog] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -525,71 +514,10 @@ export function LandmarkPanel({
             </div>
           </div>
 
-          {/* Actions */}
-          <div className="flex gap-2 pt-2">
-            <Button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNavigate();
-              }}
-              className="flex-1 gap-1 text-xs h-9"
-              data-testid="button-navigate-panel"
-            >
-              <Navigation className="w-3 h-3" />
-              {t('getDirections', selectedLanguage)}
-            </Button>
-            {onAddToTour && (
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowTourDialog(true);
-                }}
-                variant={isInTour ? "secondary" : "outline"}
-                className="flex-1 gap-1 text-xs h-9"
-                data-testid={`button-tour-panel-${landmark.id}`}
-              >
-                {isInTour ? t('removeFromTour', selectedLanguage) : t('addToTour', selectedLanguage)}
-              </Button>
-            )}
-          </div>
         </div>
       </Card>
     </div>
   );
 
-  return (
-    <>
-      {isMinimized ? renderMinimizedIcon() : renderFullCard()}
-      
-      {/* Tour Confirmation Dialog */}
-      <AlertDialog open={showTourDialog} onOpenChange={setShowTourDialog}>
-        <AlertDialogContent data-testid="dialog-tour-confirmation">
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              {isInTour ? t('removeLandmarkFromTour', selectedLanguage) : t('addLandmarkToTour', selectedLanguage)}
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              {!isInTour && t('tourDescription', selectedLanguage)}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setShowTourDialog(false)} data-testid="button-tour-cancel">
-              {t('cancel', selectedLanguage)}
-            </AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={() => {
-                if (onAddToTour) {
-                  onAddToTour(landmark);
-                }
-                setShowTourDialog(false);
-              }}
-              data-testid="button-tour-confirm"
-            >
-              {isInTour ? t('removeFromTour', selectedLanguage) : t('add', selectedLanguage)}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </>
-  );
+  return isMinimized ? renderMinimizedIcon() : renderFullCard();
 }
