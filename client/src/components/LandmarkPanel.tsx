@@ -9,6 +9,16 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 interface LandmarkPanelProps {
   landmark: Landmark | null;
@@ -47,6 +57,7 @@ export function LandmarkPanel({
   const [hasMoved, setHasMoved] = useState(false);
   const [lastCardHeight, setLastCardHeight] = useState(600); // Track card height before minimizing
   const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 }); // Track position before minimizing
+  const [showTourDialog, setShowTourDialog] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -531,13 +542,13 @@ export function LandmarkPanel({
               <Button
                 onClick={(e) => {
                   e.stopPropagation();
-                  onAddToTour(landmark);
+                  setShowTourDialog(true);
                 }}
                 variant={isInTour ? "secondary" : "outline"}
                 className="flex-1 gap-1 text-xs h-9"
                 data-testid={`button-tour-panel-${landmark.id}`}
               >
-                {isInTour ? 'Remove' : 'Add to Tour'}
+                {isInTour ? t('removeFromTour', selectedLanguage) : t('addToTour', selectedLanguage)}
               </Button>
             )}
           </div>
@@ -546,5 +557,39 @@ export function LandmarkPanel({
     </div>
   );
 
-  return isMinimized ? renderMinimizedIcon() : renderFullCard();
+  return (
+    <>
+      {isMinimized ? renderMinimizedIcon() : renderFullCard()}
+      
+      {/* Tour Confirmation Dialog */}
+      <AlertDialog open={showTourDialog} onOpenChange={setShowTourDialog}>
+        <AlertDialogContent data-testid="dialog-tour-confirmation">
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {isInTour ? t('removeLandmarkFromTour', selectedLanguage) : t('addLandmarkToTour', selectedLanguage)}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {!isInTour && t('tourDescription', selectedLanguage)}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setShowTourDialog(false)} data-testid="button-tour-cancel">
+              {t('cancel', selectedLanguage)}
+            </AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={() => {
+                if (onAddToTour) {
+                  onAddToTour(landmark);
+                }
+                setShowTourDialog(false);
+              }}
+              data-testid="button-tour-confirm"
+            >
+              {isInTour ? t('removeFromTour', selectedLanguage) : t('add', selectedLanguage)}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
+  );
 }

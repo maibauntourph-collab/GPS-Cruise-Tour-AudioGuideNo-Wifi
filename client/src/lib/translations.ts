@@ -83,7 +83,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: 'Transport',
     tipsTab: 'Tips',
     tourRoute: 'Tour Route',
-    stops: 'stops'
+    stops: 'stops',
+    addToTour: 'Add to Tour',
+    removeFromTour: 'Remove from Tour',
+    addLandmarkToTour: 'Add this landmark to your tour?',
+    tourDescription: 'You can create a custom route by adding multiple landmarks',
+    add: 'Add',
+    cancel: 'Cancel',
+    removeLandmarkFromTour: 'Remove this landmark from your tour?'
   },
   ko: {
     landmarks: '명소',
@@ -141,7 +148,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: '교통편',
     tipsTab: '팁',
     tourRoute: '투어 경로',
-    stops: '정류장'
+    stops: '정류장',
+    addToTour: '투어에 추가',
+    removeFromTour: '투어에서 제거',
+    addLandmarkToTour: '이 명소를 투어에 추가하시겠습니까?',
+    tourDescription: '여러 명소를 추가하여 맞춤 경로를 만들 수 있습니다',
+    add: '추가',
+    cancel: '취소',
+    removeLandmarkFromTour: '이 명소를 투어에서 제거하시겠습니까?'
   },
   es: {
     landmarks: 'Monumentos',
@@ -199,7 +213,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: 'Transporte',
     tipsTab: 'Consejos',
     tourRoute: 'Ruta del Tour',
-    stops: 'paradas'
+    stops: 'paradas',
+    addToTour: 'Añadir al Tour',
+    removeFromTour: 'Eliminar del Tour',
+    addLandmarkToTour: '¿Añadir este lugar a tu tour?',
+    tourDescription: 'Puedes crear una ruta personalizada añadiendo múltiples lugares',
+    add: 'Añadir',
+    cancel: 'Cancelar',
+    removeLandmarkFromTour: '¿Eliminar este lugar de tu tour?'
   },
   fr: {
     landmarks: 'Monuments',
@@ -257,7 +278,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: 'Transport',
     tipsTab: 'Conseils',
     tourRoute: 'Itinéraire du Tour',
-    stops: 'arrêts'
+    stops: 'arrêts',
+    addToTour: 'Ajouter au Tour',
+    removeFromTour: 'Retirer du Tour',
+    addLandmarkToTour: 'Ajouter ce lieu à votre tour?',
+    tourDescription: 'Vous pouvez créer un itinéraire personnalisé en ajoutant plusieurs lieux',
+    add: 'Ajouter',
+    cancel: 'Annuler',
+    removeLandmarkFromTour: 'Retirer ce lieu de votre tour?'
   },
   de: {
     landmarks: 'Sehenswürdigkeiten',
@@ -315,7 +343,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: 'Transport',
     tipsTab: 'Tipps',
     tourRoute: 'Tour Route',
-    stops: 'Stopps'
+    stops: 'Stopps',
+    addToTour: 'Zur Tour hinzufügen',
+    removeFromTour: 'Von Tour entfernen',
+    addLandmarkToTour: 'Diesen Ort zur Tour hinzufügen?',
+    tourDescription: 'Sie können eine individuelle Route erstellen, indem Sie mehrere Orte hinzufügen',
+    add: 'Hinzufügen',
+    cancel: 'Abbrechen',
+    removeLandmarkFromTour: 'Diesen Ort von der Tour entfernen?'
   },
   it: {
     landmarks: 'Monumenti',
@@ -365,7 +400,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: 'Trasporto',
     tipsTab: 'Consigli',
     tourRoute: 'Percorso del Tour',
-    stops: 'fermate'
+    stops: 'fermate',
+    addToTour: 'Aggiungi al Tour',
+    removeFromTour: 'Rimuovi dal Tour',
+    addLandmarkToTour: 'Aggiungere questo luogo al tuo tour?',
+    tourDescription: 'Puoi creare un itinerario personalizzato aggiungendo più luoghi',
+    add: 'Aggiungi',
+    cancel: 'Annulla',
+    removeLandmarkFromTour: 'Rimuovere questo luogo dal tuo tour?'
   },
   zh: {
     landmarks: '地标',
@@ -423,7 +465,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: '交通',
     tipsTab: '提示',
     tourRoute: '旅游路线',
-    stops: '站点'
+    stops: '站点',
+    addToTour: '添加到行程',
+    removeFromTour: '从行程中移除',
+    addLandmarkToTour: '将此地点添加到您的行程？',
+    tourDescription: '您可以通过添加多个地点来创建自定义路线',
+    add: '添加',
+    cancel: '取消',
+    removeLandmarkFromTour: '从行程中移除此地点？'
   },
   ja: {
     landmarks: 'ランドマーク',
@@ -481,7 +530,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: '交通',
     tipsTab: 'ヒント',
     tourRoute: 'ツアールート',
-    stops: '停留所'
+    stops: '停留所',
+    addToTour: 'ツアーに追加',
+    removeFromTour: 'ツアーから削除',
+    addLandmarkToTour: 'この場所をツアーに追加しますか？',
+    tourDescription: '複数の場所を追加してカスタムルートを作成できます',
+    add: '追加',
+    cancel: 'キャンセル',
+    removeLandmarkFromTour: 'この場所をツアーから削除しますか？'
   },
   pt: {
     landmarks: 'Monumentos',
@@ -539,7 +595,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: 'Transporte',
     tipsTab: 'Dicas',
     tourRoute: 'Rota do Tour',
-    stops: 'paradas'
+    stops: 'paradas',
+    addToTour: 'Adicionar ao Tour',
+    removeFromTour: 'Remover do Tour',
+    addLandmarkToTour: 'Adicionar este local ao seu tour?',
+    tourDescription: 'Você pode criar uma rota personalizada adicionando vários locais',
+    add: 'Adicionar',
+    cancel: 'Cancelar',
+    removeLandmarkFromTour: 'Remover este local do seu tour?'
   },
   ru: {
     landmarks: 'Достопримечательности',
@@ -597,7 +660,14 @@ const uiTranslations: Record<string, Record<string, string>> = {
     transport: 'Транспорт',
     tipsTab: 'Советы',
     tourRoute: 'Маршрут Тура',
-    stops: 'остановки'
+    stops: 'остановки',
+    addToTour: 'Добавить в тур',
+    removeFromTour: 'Удалить из тура',
+    addLandmarkToTour: 'Добавить это место в ваш тур?',
+    tourDescription: 'Вы можете создать индивидуальный маршрут, добавив несколько мест',
+    add: 'Добавить',
+    cancel: 'Отмена',
+    removeLandmarkFromTour: 'Удалить это место из вашего тура?'
   }
 };
 
