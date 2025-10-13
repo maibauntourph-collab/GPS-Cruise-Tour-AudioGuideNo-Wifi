@@ -13,12 +13,13 @@ import { Badge } from '@/components/ui/badge';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
 import { ProgressStats } from './ProgressStats';
-import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines, Gauge, Route as RouteIcon } from 'lucide-react';
+import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines, Gauge, Route as RouteIcon, X, Trash2, MapPin } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { City, Landmark } from '@shared/schema';
-import { t } from '@/lib/translations';
+import { t, getTranslatedContent } from '@/lib/translations';
+import { Button } from '@/components/ui/button';
 
 interface AppSidebarProps {
   audioEnabled: boolean;
@@ -40,6 +41,8 @@ interface AppSidebarProps {
   onSpeechRateChange: (rate: number) => void;
   tourStops?: Landmark[];
   tourRouteInfo?: { distance: number; duration: number } | null;
+  onClearTour?: () => void;
+  onRemoveStop?: (stopId: string) => void;
 }
 
 export function AppSidebar({
@@ -61,7 +64,9 @@ export function AppSidebar({
   speechRate,
   onSpeechRateChange,
   tourStops = [],
-  tourRouteInfo = null
+  tourRouteInfo = null,
+  onClearTour,
+  onRemoveStop
 }: AppSidebarProps) {
   return (
     <Sidebar collapsible="offcanvas">
@@ -184,7 +189,7 @@ export function AppSidebar({
             {tourStops.length > 0 && (
               <SidebarGroup>
                 <SidebarGroupContent className="px-2">
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <RouteIcon className="w-4 h-4 text-primary" />
@@ -194,6 +199,7 @@ export function AppSidebar({
                         {tourStops.length} {t('stops', selectedLanguage)}
                       </Badge>
                     </div>
+                    
                     {tourRouteInfo && (
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Badge variant="outline" className="gap-1" data-testid="sidebar-tour-info">
@@ -201,6 +207,52 @@ export function AppSidebar({
                         </Badge>
                       </div>
                     )}
+
+                    <div className="space-y-1">
+                      {tourStops.map((stop, index) => (
+                        <div 
+                          key={stop.id}
+                          className="flex items-center gap-2 p-2 rounded-md bg-muted/50 hover-elevate"
+                          data-testid={`tour-stop-${stop.id}`}
+                        >
+                          <div className="flex items-center gap-2 flex-1 min-w-0">
+                            <span className="text-xs text-muted-foreground font-medium shrink-0">
+                              {index + 1}
+                            </span>
+                            <MapPin className="w-3 h-3 text-primary shrink-0" />
+                            <span className="text-sm truncate">
+                              {getTranslatedContent(stop, selectedLanguage, 'name')}
+                            </span>
+                          </div>
+                          {onRemoveStop && (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => onRemoveStop(stop.id)}
+                              className="h-6 w-6 shrink-0"
+                              data-testid={`button-remove-stop-${stop.id}`}
+                            >
+                              <X className="w-3 h-3" />
+                            </Button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-2 pt-1">
+                      {onClearTour && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={onClearTour}
+                          className="gap-2 flex-1"
+                          data-testid="button-clear-tour"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                          <span>{t('clearTour', selectedLanguage)}</span>
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </SidebarGroupContent>
               </SidebarGroup>

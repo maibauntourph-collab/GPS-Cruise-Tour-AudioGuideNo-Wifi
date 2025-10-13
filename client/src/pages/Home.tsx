@@ -245,6 +245,10 @@ export default function Home() {
     setTourRouteInfo(null);
   };
 
+  const handleRemoveStop = (stopId: string) => {
+    setTourStops(tourStops.filter(stop => stop.id !== stopId));
+  };
+
   const handleTourRouteFound = (route: any) => {
     if (route && route.summary) {
       setTourRouteInfo({
@@ -294,6 +298,8 @@ export default function Home() {
         onSpeechRateChange={handleSpeechRateChange}
         tourStops={tourStops}
         tourRouteInfo={tourRouteInfo}
+        onClearTour={handleClearTour}
+        onRemoveStop={handleRemoveStop}
       />
       
       <SidebarInset className="flex w-full flex-1 flex-col">
