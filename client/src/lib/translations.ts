@@ -81,7 +81,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Price',
     overview: 'Overview',
     transport: 'Transport',
-    tipsTab: 'Tips'
+    tipsTab: 'Tips',
+    tourRoute: 'Tour Route',
+    stops: 'stops'
   },
   ko: {
     landmarks: '명소',
@@ -137,7 +139,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '요금',
     overview: '개요',
     transport: '교통편',
-    tipsTab: '팁'
+    tipsTab: '팁',
+    tourRoute: '투어 경로',
+    stops: '정류장'
   },
   es: {
     landmarks: 'Monumentos',
@@ -193,7 +197,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Precio',
     overview: 'Resumen',
     transport: 'Transporte',
-    tipsTab: 'Consejos'
+    tipsTab: 'Consejos',
+    tourRoute: 'Ruta del Tour',
+    stops: 'paradas'
   },
   fr: {
     landmarks: 'Monuments',
@@ -249,7 +255,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Prix',
     overview: 'Aperçu',
     transport: 'Transport',
-    tipsTab: 'Conseils'
+    tipsTab: 'Conseils',
+    tourRoute: 'Itinéraire du Tour',
+    stops: 'arrêts'
   },
   de: {
     landmarks: 'Sehenswürdigkeiten',
@@ -305,7 +313,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Preis',
     overview: 'Übersicht',
     transport: 'Transport',
-    tipsTab: 'Tipps'
+    tipsTab: 'Tipps',
+    tourRoute: 'Tour Route',
+    stops: 'Stopps'
   },
   it: {
     landmarks: 'Monumenti',
@@ -353,7 +363,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Prezzo',
     overview: 'Panoramica',
     transport: 'Trasporto',
-    tipsTab: 'Consigli'
+    tipsTab: 'Consigli',
+    tourRoute: 'Percorso del Tour',
+    stops: 'fermate'
   },
   zh: {
     landmarks: '地标',
@@ -409,7 +421,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '价格',
     overview: '概览',
     transport: '交通',
-    tipsTab: '提示'
+    tipsTab: '提示',
+    tourRoute: '旅游路线',
+    stops: '站点'
   },
   ja: {
     landmarks: 'ランドマーク',
@@ -465,7 +479,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '料金',
     overview: '概要',
     transport: '交通',
-    tipsTab: 'ヒント'
+    tipsTab: 'ヒント',
+    tourRoute: 'ツアールート',
+    stops: '停留所'
   },
   pt: {
     landmarks: 'Monumentos',
@@ -521,7 +537,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Preço',
     overview: 'Visão Geral',
     transport: 'Transporte',
-    tipsTab: 'Dicas'
+    tipsTab: 'Dicas',
+    tourRoute: 'Rota do Tour',
+    stops: 'paradas'
   },
   ru: {
     landmarks: 'Достопримечательности',
@@ -577,7 +595,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Цена',
     overview: 'Обзор',
     transport: 'Транспорт',
-    tipsTab: 'Советы'
+    tipsTab: 'Советы',
+    tourRoute: 'Маршрут Тура',
+    stops: 'остановки'
   }
 };
 

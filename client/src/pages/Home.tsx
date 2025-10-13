@@ -292,6 +292,8 @@ export default function Home() {
         onTestAudio={handleTestAudio}
         speechRate={speechRate}
         onSpeechRateChange={handleSpeechRateChange}
+        tourStops={tourStops}
+        tourRouteInfo={tourRouteInfo}
       />
       
       <SidebarInset className="flex w-full flex-1 flex-col">

@@ -188,10 +188,10 @@ export function AppSidebar({
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <RouteIcon className="w-4 h-4 text-primary" />
-                        <span className="text-sm font-medium">Tour Route</span>
+                        <span className="text-sm font-medium">{t('tourRoute', selectedLanguage)}</span>
                       </div>
                       <Badge variant="secondary" className="gap-1" data-testid="sidebar-tour-stops">
-                        {tourStops.length} stops
+                        {tourStops.length} {t('stops', selectedLanguage)}
                       </Badge>
                     </div>
                     {tourRouteInfo && (
