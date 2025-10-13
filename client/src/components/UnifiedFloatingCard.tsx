@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils } from 'lucide-react';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
@@ -36,8 +36,10 @@ interface UnifiedFloatingCardProps {
   // Filter props (synced with Home)
   showLandmarks: boolean;
   showActivities: boolean;
+  showRestaurants: boolean;
   onToggleLandmarks: () => void;
   onToggleActivities: () => void;
+  onToggleRestaurants: () => void;
   
   // Common props
   selectedLanguage?: string;
@@ -90,8 +92,10 @@ export function UnifiedFloatingCard({
   onLandmarkSelect,
   showLandmarks,
   showActivities,
+  showRestaurants,
   onToggleLandmarks,
   onToggleActivities,
+  onToggleRestaurants,
   selectedLanguage = 'en',
   onMapMarkerClick
 }: UnifiedFloatingCardProps) {
@@ -266,7 +270,9 @@ export function UnifiedFloatingCard({
   // Filter landmarks in List tab based on category (synced with Home filter state)
   const filteredListLandmarks = sortedLandmarks.filter(({ landmark }) => {
     const isActivity = landmark.category === 'Activity';
+    const isRestaurant = landmark.category === 'Restaurant';
     if (isActivity) return showActivities;
+    if (isRestaurant) return showRestaurants;
     return showLandmarks;
   });
 
@@ -355,7 +361,7 @@ export function UnifiedFloatingCard({
               data-testid="tab-landmark"
             >
               <MapPin className="w-4 h-4 mr-1" />
-              {t('landmark', selectedLanguage)}
+              {t('tour', selectedLanguage)}
             </TabsTrigger>
             <TabsTrigger 
               value="cruise" 
@@ -604,6 +610,16 @@ export function UnifiedFloatingCard({
                 <Activity className="w-4 h-4" />
                 {t('activities', selectedLanguage)}
               </Button>
+              <Button
+                variant={showRestaurants ? "default" : "outline"}
+                size="sm"
+                onClick={onToggleRestaurants}
+                className={`gap-1 ${showRestaurants ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+                data-testid="button-filter-restaurants"
+              >
+                <Utensils className="w-4 h-4" />
+                {t('restaurants', selectedLanguage)}
+              </Button>
             </div>
             
             {/* Scrollable list - Takes remaining space */}
@@ -620,6 +636,8 @@ export function UnifiedFloatingCard({
                       <div className="flex items-center gap-2 mb-1">
                         {landmark.category === 'Activity' ? (
                           <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />
+                        ) : landmark.category === 'Restaurant' ? (
+                          <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />
                         ) : (
                           <LandmarkIcon className="w-4 h-4 text-primary" />
                         )}

@@ -24,7 +24,7 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
@@ -64,6 +64,7 @@ export default function Home() {
   const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
   const [showLandmarks, setShowLandmarks] = useState(true);
   const [showActivities, setShowActivities] = useState(true);
+  const [showRestaurants, setShowRestaurants] = useState(true);
   const [showCruisePort, setShowCruisePort] = useState(true);
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
@@ -236,7 +237,9 @@ export default function Home() {
   // Filter landmarks based on category
   const filteredLandmarks = landmarks.filter(landmark => {
     const isActivity = landmark.category === 'Activity';
+    const isRestaurant = landmark.category === 'Restaurant';
     if (isActivity) return showActivities;
+    if (isRestaurant) return showRestaurants;
     return showLandmarks;
   });
 
@@ -308,6 +311,16 @@ export default function Home() {
             >
               <Activity className="w-4 h-4" />
               <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
+            </Button>
+            <Button
+              variant={showRestaurants ? "default" : "outline"}
+              size="sm"
+              onClick={() => setShowRestaurants(!showRestaurants)}
+              data-testid="button-toggle-restaurants"
+              className={`gap-1 ${showRestaurants ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+            >
+              <Utensils className="w-4 h-4" />
+              <span className="hidden sm:inline">{t('restaurants', selectedLanguage)}</span>
             </Button>
             {selectedCity?.cruisePort && (
               <Button
@@ -390,8 +403,10 @@ export default function Home() {
         onLandmarkSelect={setSelectedLandmark}
         showLandmarks={showLandmarks}
         showActivities={showActivities}
+        showRestaurants={showRestaurants}
         onToggleLandmarks={() => setShowLandmarks(!showLandmarks)}
         onToggleActivities={() => setShowActivities(!showActivities)}
+        onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
         selectedLanguage={selectedLanguage}
         onMapMarkerClick={handleMapMarkerClick}
       />
