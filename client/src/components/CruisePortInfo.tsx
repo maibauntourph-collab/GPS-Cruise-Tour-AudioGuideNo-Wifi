@@ -154,7 +154,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
       x: clientX - translate.x,
       y: clientY - translate.y
     });
-    setZIndex(2000);
+    setZIndex(3000);
   };
 
   // Cleanup timeout on unmount
@@ -167,7 +167,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   }, []);
 
   const handleCardClick = () => {
-    setZIndex(2000);
+    setZIndex(3000);
   };
 
   const handleLandmarkClick = (landmarkId: string) => {
@@ -177,7 +177,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     }
     
     // Keep z-index elevated for 2 seconds after marker click
-    setZIndex(2000);
+    setZIndex(3000);
     onLandmarkClick(landmarkId);
     
     zIndexTimeoutRef.current = setTimeout(() => {
@@ -209,7 +209,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
-          setZIndex(2000);
+          setZIndex(3000);
         }
       }}
       onTouchEnd={(e) => {
@@ -220,7 +220,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
-          setZIndex(2000);
+          setZIndex(3000);
         }
       }}
       data-testid="icon-cruise-port-minimized"

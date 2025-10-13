@@ -140,11 +140,11 @@ export function LandmarkPanel({
       x: clientX - translate.x,
       y: clientY - translate.y
     });
-    setZIndex(2000);
+    setZIndex(3000);
   };
 
   const handleCardClick = () => {
-    setZIndex(2000);
+    setZIndex(3000);
   };
 
   if (!landmark) return null;
@@ -212,7 +212,7 @@ export function LandmarkPanel({
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
-          setZIndex(2000);
+          setZIndex(3000);
         }
       }}
       onTouchEnd={(e) => {
@@ -223,7 +223,7 @@ export function LandmarkPanel({
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
-          setZIndex(2000);
+          setZIndex(3000);
         }
       }}
       data-testid="icon-landmark-minimized"

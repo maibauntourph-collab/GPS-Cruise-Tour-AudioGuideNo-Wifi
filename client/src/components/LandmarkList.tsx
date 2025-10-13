@@ -25,7 +25,13 @@ export function LandmarkList({
   onLandmarkSelect,
 }: LandmarkListProps) {
   const [isDragging, setIsDragging] = useState(false);
-  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [translate, setTranslate] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 768;
+      return { x: isMobile ? 0 : window.innerWidth - 400, y: 0 };
+    }
+    return { x: 0, y: 0 };
+  });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -130,11 +136,11 @@ export function LandmarkList({
       x: clientX - translate.x,
       y: clientY - translate.y
     });
-    setZIndex(2000);
+    setZIndex(3000);
   };
 
   const handleCardClick = () => {
-    setZIndex(2000);
+    setZIndex(3000);
   };
 
   const renderMinimizedIcon = () => (
@@ -159,7 +165,7 @@ export function LandmarkList({
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
-          setZIndex(2000);
+          setZIndex(3000);
         }
       }}
       onTouchEnd={(e) => {
@@ -170,7 +176,7 @@ export function LandmarkList({
           const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
-          setZIndex(2000);
+          setZIndex(3000);
         }
       }}
       data-testid="icon-landmarklist-minimized"

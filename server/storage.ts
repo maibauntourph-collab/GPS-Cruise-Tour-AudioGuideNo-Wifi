@@ -28,7 +28,7 @@ const CITIES: City[] = [
       distanceFromCity: '80km from Rome',
       recommendedDuration: '8-10 hours',
       recommendedLandmarks: ['colosseum', 'vatican_museums', 'trevi-fountain', 'pantheon', 'roman-forum'],
-      tips: 'Book a shore excursion in advance or take the train from Civitavecchia to Rome (80 minutes). Start early to see the main attractions. Consider skip-the-line tickets for the Vatican and Colosseum.',
+      tips: '⚠️ IMPORTANT: Always check your ship\'s boarding time and plan to return 1-2 hours early. Book a shore excursion in advance or take the train from Civitavecchia to Rome (80 minutes). Start early to see the main attractions. Consider skip-the-line tickets for the Vatican and Colosseum. If using a tender boat to reach port, get your tender ticket from the cruise ship in advance.',
       portCoordinates: {
         lat: 42.0943,
         lng: 11.7967
@@ -162,13 +162,13 @@ const CITIES: City[] = [
           portName: '치비타베키아 항구',
           distanceFromCity: '로마에서 80km',
           recommendedDuration: '8-10시간',
-          tips: '미리 기항지 관광을 예약하거나 치비타베키아에서 로마까지 기차를 이용하세요 (80분 소요). 주요 명소를 보려면 일찍 출발하세요. 바티칸과 콜로세움은 줄서기 패스 티켓을 고려하세요.'
+          tips: '⚠️ 중요: 항상 선박 승선 시간을 확인하고 1-2시간 일찍 돌아올 계획을 세우세요. 미리 기항지 관광을 예약하거나 치비타베키아에서 로마까지 기차를 이용하세요 (80분 소요). 주요 명소를 보려면 일찍 출발하세요. 바티칸과 콜로세움은 줄서기 패스 티켓을 고려하세요. 텐더보트를 이용해 항구로 나가야 하는 경우, 크루즈에서 미리 텐더티켓을 받아 준비하세요.'
         },
         it: {
           portName: 'Porto di Civitavecchia',
           distanceFromCity: '80km da Roma',
           recommendedDuration: '8-10 ore',
-          tips: 'Prenota un\'escursione in anticipo o prendi il treno da Civitavecchia a Roma (80 minuti). Parti presto per vedere le principali attrazioni. Considera i biglietti salta fila per il Vaticano e il Colosseo.'
+          tips: '⚠️ IMPORTANTE: Controlla sempre l\'orario di imbarco della nave e pianifica di tornare 1-2 ore prima. Prenota un\'escursione in anticipo o prendi il treno da Civitavecchia a Roma (80 minuti). Parti presto per vedere le principali attrazioni. Considera i biglietti salta fila per il Vaticano e il Colosseo. Se usi una tender boat per raggiungere il porto, ottieni il biglietto tender dalla nave in anticipo.'
         }
       }
     }
@@ -217,7 +217,7 @@ const CITIES: City[] = [
       distanceFromCity: 'Right in the city center',
       recommendedDuration: '6-8 hours',
       recommendedLandmarks: ['sagrada-familia', 'park-guell', 'gothic-quarter'],
-      tips: 'The cruise port is very close to Las Ramblas and the Gothic Quarter. Use the shuttle bus or taxi to reach Sagrada Familia. Buy tickets online in advance to avoid long queues.',
+      tips: '⚠️ IMPORTANT: Always check your ship\'s boarding time and plan to return 1-2 hours early. The cruise port is very close to Las Ramblas and the Gothic Quarter. Use the shuttle bus or taxi to reach Sagrada Familia. Buy tickets online in advance to avoid long queues. If using a tender boat to reach port, get your tender ticket from the cruise ship in advance.',
       portCoordinates: {
         lat: 41.3652,
         lng: 2.1774
@@ -412,13 +412,13 @@ const CITIES: City[] = [
           portName: '바르셀로나 항구',
           distanceFromCity: '도심 바로 근처',
           recommendedDuration: '6-8시간',
-          tips: '크루즈 항구는 람블라스 거리와 고딕 지구에서 매우 가깝습니다. 셔틀버스나 택시를 이용하여 사그라다 파밀리아에 도달하세요. 긴 줄을 피하려면 온라인으로 미리 티켓을 구매하세요.'
+          tips: '⚠️ 중요: 항상 선박 승선 시간을 확인하고 1-2시간 일찍 돌아올 계획을 세우세요. 크루즈 항구는 람블라스 거리와 고딕 지구에서 매우 가깝습니다. 셔틀버스나 택시를 이용하여 사그라다 파밀리아에 도달하세요. 긴 줄을 피하려면 온라인으로 미리 티켓을 구매하세요. 텐더보트를 이용해 항구로 나가야 하는 경우, 크루즈에서 미리 텐더티켓을 받아 준비하세요.'
         },
         it: {
           portName: 'Porto di Barcellona',
           distanceFromCity: 'Proprio nel centro città',
           recommendedDuration: '6-8 ore',
-          tips: 'Il porto delle crociere è molto vicino a Las Ramblas e al Quartiere Gotico. Usa il bus navetta o il taxi per raggiungere la Sagrada Familia. Acquista i biglietti online in anticipo per evitare lunghe code.'
+          tips: '⚠️ IMPORTANTE: Controlla sempre l\'orario di imbarco della nave e pianifica di tornare 1-2 ore prima. Il porto delle crociere è molto vicino a Las Ramblas e al Quartiere Gotico. Usa il bus navetta o il taxi per raggiungere la Sagrada Familia. Acquista i biglietti online in anticipo per evitare lunghe code. Se usi una tender boat per raggiungere il porto, ottieni il biglietto tender dalla nave in anticipo.'
         }
       }
     }
