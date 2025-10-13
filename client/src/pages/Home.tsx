@@ -317,7 +317,7 @@ export default function Home() {
                 size="sm"
                 onClick={() => setShowCruisePort(!showCruisePort)}
                 data-testid="button-toggle-cruise-port"
-                className="gap-1"
+                className={`gap-1 ${showCruisePort ? 'bg-blue-500 hover:bg-blue-600 border-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700' : ''}`}
               >
                 <Ship className="w-4 h-4" />
                 <span className="hidden sm:inline">{t('cruisePortInfo', selectedLanguage)}</span>
