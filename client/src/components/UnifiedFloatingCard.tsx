@@ -41,6 +41,11 @@ interface UnifiedFloatingCardProps {
   onToggleActivities: () => void;
   onToggleRestaurants: () => void;
   
+  // Tour Route props
+  tourStops?: Landmark[];
+  tourRouteInfo?: { distance: number; duration: number } | null;
+  onRemoveTourStop?: (landmarkId: string) => void;
+  
   // Common props
   selectedLanguage?: string;
   onMapMarkerClick?: (lat: number, lng: number) => void;
@@ -96,6 +101,9 @@ export function UnifiedFloatingCard({
   onToggleLandmarks,
   onToggleActivities,
   onToggleRestaurants,
+  tourStops = [],
+  tourRouteInfo = null,
+  onRemoveTourStop,
   selectedLanguage = 'en',
   onMapMarkerClick
 }: UnifiedFloatingCardProps) {
@@ -700,7 +708,62 @@ export function UnifiedFloatingCard({
 
           {/* Landmark List Tab */}
           <TabsContent value="list" className="mt-4 flex flex-col h-[calc(100vh-200px)]">
-            {/* Filter buttons - Fixed at top */}
+            {/* Tour Route Section - Fixed at top */}
+            {tourStops.length > 0 && (
+              <div className="pb-3 mb-3 border-b flex-shrink-0">
+                <div className="flex items-center justify-between mb-2">
+                  <h5 className="font-semibold flex items-center gap-2">
+                    <MapPinned className="w-4 h-4 text-primary" />
+                    {t('tourRoute', selectedLanguage)} ({tourStops.length})
+                  </h5>
+                  {tourRouteInfo && (
+                    <Badge variant="outline" className="text-xs">
+                      {tourRouteInfo.distance.toFixed(1)}km • {Math.round(tourRouteInfo.duration)}min
+                    </Badge>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  {tourStops.map((stop, index) => (
+                    <div
+                      key={stop.id}
+                      className="p-2 bg-primary/5 rounded-lg flex items-center gap-2"
+                      data-testid={`tour-stop-${stop.id}`}
+                    >
+                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                        {index + 1}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">
+                          {getTranslatedContent(stop, selectedLanguage, 'name')}
+                        </p>
+                      </div>
+                      <div className="flex gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7"
+                          onClick={() => onLandmarkSelect?.(stop)}
+                          data-testid={`button-tour-stop-info-${stop.id}`}
+                        >
+                          <Info className="w-3 h-3" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7"
+                          onClick={() => onRemoveTourStop?.(stop.id)}
+                          data-testid={`button-tour-stop-remove-${stop.id}`}
+                        >
+                          <X className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Filter buttons */}
             <div className="flex gap-2 flex-wrap pb-3 flex-shrink-0">
               <Button
                 variant={showLandmarks ? "default" : "outline"}

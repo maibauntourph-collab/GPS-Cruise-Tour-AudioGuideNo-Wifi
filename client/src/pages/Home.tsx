@@ -373,6 +373,9 @@ export default function Home() {
         city={selectedCity || null}
         showCruisePort={showCruisePort}
         onCruisePortClose={() => setShowCruisePort(false)}
+        tourStops={tourStops}
+        tourRouteInfo={tourRouteInfo}
+        onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
         onLandmarkClick={(landmarkId) => {
           const landmark = filteredLandmarks.find(l => l.id === landmarkId);
           if (landmark) {
