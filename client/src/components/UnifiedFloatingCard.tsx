@@ -749,17 +749,18 @@ export function UnifiedFloatingCard({
                 </TabsContent>
 
                 <TabsContent value="transport" className="mt-4 overflow-y-auto flex-1">
-                  {city.cruisePort.transportOptions && city.cruisePort.transportOptions.length > 0 && (
+                  {city?.cruisePort?.transportOptions && city.cruisePort.transportOptions.length > 0 && (
                     <div className="space-y-4">
                       {(() => {
-                        const transportsByType = city.cruisePort.transportOptions.reduce((acc, transport) => {
+                        const transportOptions = city.cruisePort.transportOptions;
+                        const transportsByType = transportOptions.reduce((acc, transport) => {
                           const type = transport.type;
                           if (!acc[type]) acc[type] = [];
                           acc[type].push(transport);
                           return acc;
-                        }, {} as Record<string, typeof city.cruisePort.transportOptions>);
+                        }, {} as Record<string, TransportOption[]>);
 
-                        const renderTransportSection = (type: string, transports: typeof city.cruisePort.transportOptions, title: string) => {
+                        const renderTransportSection = (type: string, transports: TransportOption[], title: string) => {
                           if (transports.length === 0) return null;
                           const Icon = getTransportIcon(type as 'train' | 'bus' | 'taxi' | 'rideshare' | 'shuttle');
                           
