@@ -32,7 +32,15 @@ export function LandmarkPanel({
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [isDragging, setIsDragging] = useState(false);
-  const [translate, setTranslate] = useState({ x: 20, y: 80 }); // Start below header (80px down)
+  const [translate, setTranslate] = useState(() => {
+    // Position in bottom-right corner initially
+    const cardWidth = 384; // 24rem
+    const cardHeight = 600;
+    return {
+      x: Math.max(0, window.innerWidth - cardWidth - 80),
+      y: Math.max(0, window.innerHeight - cardHeight - 120)
+    };
+  });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
   const [isMinimized, setIsMinimized] = useState(false);

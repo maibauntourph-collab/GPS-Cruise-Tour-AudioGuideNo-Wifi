@@ -26,7 +26,7 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Route, X, Ship, Menu } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, X, Ship, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -330,31 +330,6 @@ export default function Home() {
             
             {showHeaderMenu && (
               <>
-                {tourStops.length > 0 && (
-                  <>
-                    <Badge variant="secondary" className="gap-1" data-testid="tour-stops-count">
-                      <Route className="w-3 h-3" />
-                      <span>{tourStops.length} stops</span>
-                    </Badge>
-                    {tourRouteInfo && (
-                      <Badge variant="outline" className="gap-1" data-testid="tour-distance-time">
-                        <span>
-                          {(tourRouteInfo.distance / 1000).toFixed(1)}km • {Math.ceil(tourRouteInfo.duration / 60)}min
-                        </span>
-                      </Badge>
-                    )}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={handleClearTour}
-                      data-testid="button-clear-tour"
-                      className="gap-1"
-                    >
-                      <X className="w-4 h-4" />
-                      <span className="hidden sm:inline">Clear Tour</span>
-                    </Button>
-                  </>
-                )}
                 <Button
                   variant={showLandmarks ? "default" : "outline"}
                   size="sm"
