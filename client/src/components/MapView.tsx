@@ -359,41 +359,15 @@ export function MapView({
             key={landmark.id}
             position={[landmark.lat, landmark.lng]}
             icon={icon}
+            eventHandlers={{
+              click: () => {
+                if (onAddToTour) {
+                  onAddToTour(landmark);
+                }
+              }
+            }}
+            data-testid={`marker-${landmark.id}`}
           >
-            <Popup>
-              <div className="p-2">
-                <h3 className="font-serif font-semibold text-lg mb-1">
-                  {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                </h3>
-                {getTranslatedContent(landmark, selectedLanguage, 'description') && (
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {getTranslatedContent(landmark, selectedLanguage, 'description')}
-                  </p>
-                )}
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    onClick={() => onLandmarkRoute(landmark)}
-                    className="flex-1"
-                    data-testid={`button-route-${landmark.id}`}
-                  >
-                    <Navigation className="w-4 h-4 mr-2" />
-                    Directions
-                  </Button>
-                  {onAddToTour && (
-                    <Button
-                      size="sm"
-                      variant={isInTour ? "secondary" : "outline"}
-                      onClick={() => onAddToTour(landmark)}
-                      className="flex-1"
-                      data-testid={`button-tour-${landmark.id}`}
-                    >
-                      {isInTour ? 'Remove' : 'Add to Tour'}
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </Popup>
           </Marker>
         );
       })}
