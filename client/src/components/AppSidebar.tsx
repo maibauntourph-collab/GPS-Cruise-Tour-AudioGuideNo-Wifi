@@ -200,7 +200,7 @@ export function AppSidebar({
                       </Badge>
                     </div>
                     
-                    {tourRouteInfo && tourStops.length >= 2 && (
+                    {tourRouteInfo && (
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Badge variant="outline" className="gap-1" data-testid="sidebar-tour-info">
                           {(tourRouteInfo.distance / 1000).toFixed(1)}km • {Math.ceil(tourRouteInfo.duration / 60)}min
