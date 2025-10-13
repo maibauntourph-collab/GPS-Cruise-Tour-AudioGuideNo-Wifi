@@ -86,22 +86,14 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
   useEffect(() => {
     if (!map || !start || !end) {
       if (routingControlRef.current && map) {
-        try {
-          map.removeControl(routingControlRef.current);
-        } catch (err) {
-          console.error('Error removing routing control (early return):', err);
-        }
+        map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
       return;
     }
 
     if (routingControlRef.current && map) {
-      try {
-        map.removeControl(routingControlRef.current);
-      } catch (err) {
-        console.error('Error removing previous routing control:', err);
-      }
+      map.removeControl(routingControlRef.current);
     }
 
     const control = L.Routing.control({
@@ -123,7 +115,7 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
       },
       show: false,
       createMarker: () => null as any,
-    } as any);
+    } as any).addTo(map);
 
     if (onRouteFound) {
       control.on('routesfound', (e) => {
@@ -131,23 +123,11 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
       });
     }
 
-    // Double-check map is still valid before adding control
-    if (map) {
-      try {
-        control.addTo(map);
-        routingControlRef.current = control;
-      } catch (err) {
-        console.error('Error adding routing control:', err);
-      }
-    }
+    routingControlRef.current = control;
 
     return () => {
       if (routingControlRef.current && map) {
-        try {
-          map.removeControl(routingControlRef.current);
-        } catch (err) {
-          console.error('Error removing routing control:', err);
-        }
+        map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
     };
@@ -244,11 +224,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
     // Show tour routing even when there's an active navigation route
     if (!map || tourStops.length < 2) {
       if (routingControlRef.current && map) {
-        try {
-          map.removeControl(routingControlRef.current);
-        } catch (err) {
-          console.error('Error removing tour routing control (early return):', err);
-        }
+        map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
       setRouteInfo(null);
@@ -256,11 +232,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
     }
 
     if (routingControlRef.current && map) {
-      try {
-        map.removeControl(routingControlRef.current);
-      } catch (err) {
-        console.error('Error removing previous tour routing control:', err);
-      }
+      map.removeControl(routingControlRef.current);
     }
 
     const waypoints = tourStops.map(stop => L.latLng(stop.lat, stop.lng));
@@ -300,23 +272,12 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
       }
     });
 
-    // Double-check map is still valid before adding control
-    if (map) {
-      try {
-        control.addTo(map);
-        routingControlRef.current = control;
-      } catch (err) {
-        console.error('Error adding tour routing control:', err);
-      }
-    }
+    control.addTo(map);
+    routingControlRef.current = control;
 
     return () => {
       if (routingControlRef.current && map) {
-        try {
-          map.removeControl(routingControlRef.current);
-        } catch (err) {
-          console.error('Error removing tour routing control:', err);
-        }
+        map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
       // Clear route info when cleaning up to prevent marker leak
@@ -398,7 +359,6 @@ export function MapView({
             key={landmark.id}
             position={[landmark.lat, landmark.lng]}
             icon={icon}
-            draggable={false}
             eventHandlers={{
               click: () => {
                 if (onAddToTour) {
@@ -416,7 +376,6 @@ export function MapView({
         <Marker
           position={[userPosition.latitude, userPosition.longitude]}
           icon={userLocationIcon}
-          draggable={false}
         >
           <Popup>
             <div className="p-2">
