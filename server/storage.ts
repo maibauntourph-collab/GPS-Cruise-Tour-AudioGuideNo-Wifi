@@ -2,6 +2,7 @@ import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandm
 import { db } from "./db";
 import { visitedLandmarks } from "@shared/schema";
 import { eq, count, and } from "drizzle-orm";
+import { RESTAURANTS } from "./data/restaurants";
 
 export interface IStorage {
   getCities(): Promise<City[]>;
@@ -7429,14 +7430,16 @@ export class MemStorage implements IStorage {
   }
 
   async getLandmarks(cityId?: string): Promise<Landmark[]> {
+    const allLandmarks = [...LANDMARKS, ...RESTAURANTS];
     if (cityId) {
-      return LANDMARKS.filter(landmark => landmark.cityId === cityId);
+      return allLandmarks.filter(landmark => landmark.cityId === cityId);
     }
-    return LANDMARKS;
+    return allLandmarks;
   }
 
   async getLandmark(id: string): Promise<Landmark | undefined> {
-    return LANDMARKS.find(landmark => landmark.id === id);
+    const allLandmarks = [...LANDMARKS, ...RESTAURANTS];
+    return allLandmarks.find(landmark => landmark.id === id);
   }
 
   // Visited landmarks methods - using database

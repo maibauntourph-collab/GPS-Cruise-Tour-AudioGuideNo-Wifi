@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat } from 'lucide-react';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
@@ -540,6 +540,71 @@ export function UnifiedFloatingCard({
                         <ExternalLink className="w-4 h-4" />
                         {t('bookOnViator', selectedLanguage)}
                       </Button>
+                    </div>
+                  </div>
+                )}
+
+                {selectedLandmark.category === 'Restaurant' && (
+                  <div className="pt-3 border-t">
+                    <h5 className="font-semibold mb-3 flex items-center gap-2">
+                      <Utensils className="w-4 h-4" />
+                      {t('restaurantInfo', selectedLanguage)}
+                    </h5>
+                    <div className="space-y-3">
+                      {selectedLandmark.openingHours && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <Clock className="w-4 h-4 text-muted-foreground mt-0.5" />
+                          <div>
+                            <p className="font-medium">{t('openingHours', selectedLanguage)}</p>
+                            <p className="text-muted-foreground">{selectedLandmark.openingHours}</p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {selectedLandmark.priceRange && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <Euro className="w-4 h-4 text-muted-foreground mt-0.5" />
+                          <div>
+                            <p className="font-medium">{t('priceRange', selectedLanguage)}</p>
+                            <p className="text-muted-foreground">{selectedLandmark.priceRange}</p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {selectedLandmark.cuisine && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <ChefHat className="w-4 h-4 text-muted-foreground mt-0.5" />
+                          <div>
+                            <p className="font-medium">{t('cuisine', selectedLanguage)}</p>
+                            <p className="text-muted-foreground">{selectedLandmark.cuisine}</p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {selectedLandmark.menuHighlights && selectedLandmark.menuHighlights.length > 0 && (
+                        <div className="text-sm">
+                          <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
+                          <div className="flex flex-wrap gap-1">
+                            {selectedLandmark.menuHighlights.map((dish, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs">
+                                {dish}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {selectedLandmark.reservationUrl && (
+                        <Button
+                          variant="default"
+                          className="w-full gap-2"
+                          onClick={() => window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
+                          data-testid="button-make-reservation"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          {t('makeReservation', selectedLanguage)}
+                        </Button>
+                      )}
                     </div>
                   </div>
                 )}

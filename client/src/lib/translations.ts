@@ -98,7 +98,13 @@ const uiTranslations: Record<string, Record<string, string>> = {
     bookOnGetYourGuide: 'Book on GetYourGuide',
     bookOnViator: 'Book on Viator',
     bookNow: 'Book Now',
-    tourEmptyState: 'Select a landmark from the map or use the list tab below'
+    tourEmptyState: 'Select a landmark from the map or use the list tab below',
+    openingHours: 'Opening Hours',
+    priceRange: 'Price Range',
+    cuisine: 'Cuisine',
+    menuHighlights: 'Menu Highlights',
+    makeReservation: 'Make Reservation',
+    restaurantInfo: 'Restaurant Information'
   },
   ko: {
     landmarks: '명소',
@@ -171,7 +177,13 @@ const uiTranslations: Record<string, Record<string, string>> = {
     bookOnGetYourGuide: 'GetYourGuide 예약',
     bookOnViator: 'Viator 예약',
     bookNow: '지금 예약',
-    tourEmptyState: '지도에서 랜드마크를 선택하거나 아래 목록 탭을 사용하세요'
+    tourEmptyState: '지도에서 랜드마크를 선택하거나 아래 목록 탭을 사용하세요',
+    openingHours: '영업시간',
+    priceRange: '가격대',
+    cuisine: '요리 스타일',
+    menuHighlights: '추천 메뉴',
+    makeReservation: '예약하기',
+    restaurantInfo: '레스토랑 정보'
   },
   es: {
     landmarks: 'Monumentos',
@@ -455,7 +467,13 @@ const uiTranslations: Record<string, Record<string, string>> = {
     bookOnGetYourGuide: 'Prenota su GetYourGuide',
     bookOnViator: 'Prenota su Viator',
     bookNow: 'Prenota Ora',
-    tourEmptyState: 'Seleziona un punto di interesse dalla mappa o usa la scheda elenco qui sotto'
+    tourEmptyState: 'Seleziona un punto di interesse dalla mappa o usa la scheda elenco qui sotto',
+    openingHours: 'Orari di Apertura',
+    priceRange: 'Fascia di Prezzo',
+    cuisine: 'Cucina',
+    menuHighlights: 'Piatti Consigliati',
+    makeReservation: 'Prenota Tavolo',
+    restaurantInfo: 'Informazioni Ristorante'
   },
   zh: {
     landmarks: '地标',

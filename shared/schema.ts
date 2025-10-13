@@ -105,6 +105,12 @@ export const landmarkSchema = z.object({
   historicalInfo: z.string().optional(), // Extended historical information
   yearBuilt: z.string().optional(), // Construction year/period
   architect: z.string().optional(), // Architect or creator name
+  // Restaurant-specific fields
+  openingHours: z.string().optional(), // e.g., "Mon-Sat: 12:00-15:00, 19:00-23:00"
+  priceRange: z.string().optional(), // e.g., "€€€" or "$50-80 per person"
+  cuisine: z.string().optional(), // e.g., "Traditional Roman", "French Fine Dining"
+  reservationUrl: z.string().optional(), // Direct reservation link (OpenTable, TheFork, etc.)
+  menuHighlights: z.array(z.string()).optional(), // Key dishes: ["Cacio e Pepe", "Carbonara"]
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;

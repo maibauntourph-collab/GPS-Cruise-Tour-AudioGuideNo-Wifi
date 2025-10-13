@@ -21,6 +21,11 @@ export const RESTAURANTS: Landmark[] = [
     historicalInfo: 'Founded in 1961 by Armando Gargioli, this restaurant has become a landmark of Roman culinary tradition.',
     yearBuilt: '1961',
     architect: 'Gargioli family',
+    openingHours: 'Tue-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun-Mon',
+    priceRange: '€€€ (€40-60 per person)',
+    cuisine: 'Traditional Roman',
+    reservationUrl: 'https://www.thefork.com/restaurant/armando-al-pantheon-r44759',
+    menuHighlights: ['Cacio e Pepe', 'Carbonara', 'Amatriciana', 'Carciofi alla Romana', 'Saltimbocca'],
     translations: {
       en: {
         name: 'Armando al Pantheon',
@@ -40,3 +45,15 @@ export const RESTAURANTS: Landmark[] = [
         yearBuilt: '1961년',
         architect: '가르지올리 가족'
       },
+      it: {
+        name: 'Armando al Pantheon',
+        narration: 'Vivi la cucina romana autentica da Armando al Pantheon, una trattoria a conduzione familiare che serve piatti tradizionali dal 1961.',
+        description: 'Storica trattoria familiare vicino al Pantheon',
+        detailedDescription: 'Situata a pochi passi dal Pantheon, Armando al Pantheon è un\'istituzione romana amata che serve cucina romana autentica dal 1961. Questa trattoria a conduzione familiare è famosa per i suoi piatti classici come cacio e pepe, carbonara e amatriciana, tutti preparati secondo ricette tradizionali tramandate di generazione in generazione. La sala da pranzo intima presenta tovaglie a quadretti e pareti adornate con foto di ospiti famosi. Il menu cambia quotidianamente in base agli ingredienti stagionali dei mercati locali. Le prenotazioni sono essenziali poiché questa piccola trattoria si riempie rapidamente sia con i locali che con gli appassionati di cibo che apprezzano la vera cucina romana.',
+        historicalInfo: 'Fondata nel 1961 da Armando Gargioli, questo ristorante è diventato un punto di riferimento della tradizione culinaria romana.',
+        yearBuilt: '1961',
+        architect: 'Famiglia Gargioli'
+      }
+    }
+  },
+];
