@@ -26,9 +26,8 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Route, X, Ship } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 
 export default function Home() {
   const { open: sidebarOpen, toggleSidebar } = useSidebar();
@@ -274,6 +273,10 @@ export default function Home() {
         onTestAudio={handleTestAudio}
         speechRate={speechRate}
         onSpeechRateChange={handleSpeechRateChange}
+        tourStops={tourStops}
+        tourRouteInfo={tourRouteInfo}
+        onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
+        onClearTour={handleClearTour}
       />
       
       <SidebarInset className="flex w-full flex-1 flex-col">
@@ -288,31 +291,6 @@ export default function Home() {
           </h1>
           
           <div className="ml-auto flex items-center gap-1 flex-wrap">
-            {tourStops.length > 0 && (
-              <>
-                <Badge variant="secondary" className="gap-1" data-testid="tour-stops-count">
-                  <Route className="w-3 h-3" />
-                  <span>{tourStops.length} stops</span>
-                </Badge>
-                {tourRouteInfo && (
-                  <Badge variant="outline" className="gap-1" data-testid="tour-distance-time">
-                    <span>
-                      {(tourRouteInfo.distance / 1000).toFixed(1)}km • {Math.ceil(tourRouteInfo.duration / 60)}min
-                    </span>
-                  </Badge>
-                )}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleClearTour}
-                  data-testid="button-clear-tour"
-                  className="gap-1"
-                >
-                  <X className="w-4 h-4" />
-                  <span className="hidden sm:inline">Clear Tour</span>
-                </Button>
-              </>
-            )}
             <Button
               variant={showLandmarks ? "default" : "outline"}
               size="sm"
@@ -328,7 +306,7 @@ export default function Home() {
               size="sm"
               onClick={() => setShowActivities(!showActivities)}
               data-testid="button-toggle-activities"
-              className="gap-1"
+              className={`gap-1 ${showActivities ? 'bg-[hsl(195,85%,50%)] hover:bg-[hsl(195,85%,45%)] border-[hsl(195,85%,50%)]' : ''}`}
             >
               <Activity className="w-4 h-4" />
               <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>

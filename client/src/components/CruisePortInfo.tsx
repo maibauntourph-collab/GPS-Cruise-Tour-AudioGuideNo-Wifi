@@ -53,25 +53,32 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isCentered, setIsCentered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Clamp translate values to keep element within bounds
-  const clampTranslate = (x: number, y: number, elementWidth: number, elementHeight: number) => {
-    if (!cardRef.current) return { x, y };
+  const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
     
-    const container = cardRef.current.offsetParent as HTMLElement;
-    if (!container) return { x, y };
-    
-    const containerRect = container.getBoundingClientRect();
-    const maxX = containerRect.width - elementWidth - 32; // 16px left + 16px right
-    const maxY = containerRect.height - elementHeight - 32;
+    // Calculate max offsets from center (50%)
+    const maxX = (viewportWidth - elementWidth) / 2;
+    const maxY = (viewportHeight - elementHeight) / 2;
     
     return {
-      x: Math.max(0, Math.min(x, maxX)),
-      y: Math.max(0, Math.min(y, maxY))
+      x: Math.max(-maxX, Math.min(x, maxX)),
+      y: Math.max(-maxY, Math.min(y, maxY))
     };
-  };
+  }, []);
+
+  // Center card on initial mount - already centered with left/top: 50% and transform: -50%
+  useEffect(() => {
+    if (!isCentered && city.cruisePort) {
+      setTranslate({ x: 0, y: 0 });
+      setIsCentered(true);
+    }
+  }, [city.cruisePort, isCentered]);
 
   if (!city.cruisePort) {
     return null;
@@ -98,22 +105,12 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     const newX = clientX - dragStart.x;
     const newY = clientY - dragStart.y;
     
-    const container = cardRef.current.offsetParent as HTMLElement;
-    if (container) {
-      const cardRect = cardRef.current.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
-      
-      const maxX = containerRect.width - cardRect.width - 32;
-      const maxY = containerRect.height - cardRect.height - 32;
-      
-      const clampedX = Math.max(0, Math.min(newX, maxX));
-      const clampedY = Math.max(0, Math.min(newY, maxY));
-      
-      setTranslate({ x: clampedX, y: clampedY });
-    } else {
-      setTranslate({ x: newX, y: newY });
-    }
-  }, [dragStart.x, dragStart.y]);
+    const cardWidth = cardRef.current.offsetWidth;
+    const cardHeight = cardRef.current.offsetHeight;
+    
+    const clamped = clampTranslate(newX, newY, cardWidth, cardHeight);
+    setTranslate(clamped);
+  }, [dragStart.x, dragStart.y, clampTranslate]);
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
@@ -191,13 +188,13 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     <div
       ref={cardRef}
       style={{
-        position: 'absolute',
-        left: '16px',
-        top: '16px',
+        position: 'fixed',
+        left: '50%',
+        top: '50%',
         zIndex,
         cursor: isDragging ? 'grabbing' : 'pointer',
         userSelect: 'none',
-        transform: `translate(${translate.x}px, ${translate.y}px)`
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
       }}
       onMouseDown={handleStart}
       onTouchStart={handleStart}
@@ -240,15 +237,15 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     <div
       ref={cardRef}
       style={{
-        position: 'absolute',
-        left: '16px',
-        top: '16px',
-        right: '16px',
+        position: 'fixed',
+        left: '50%',
+        top: '50%',
         zIndex,
         cursor: isDragging ? 'grabbing' : 'grab',
-        maxWidth: '24rem',
+        width: '24rem',
+        maxHeight: 'calc(100vh - 32px)',
         userSelect: 'none',
-        transform: `translate(${translate.x}px, ${translate.y}px)`
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
       }}
       onMouseDown={handleStart}
       onTouchStart={handleStart}

@@ -1,11 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
-import { Button } from '@/components/ui/button';
-import { Navigation } from 'lucide-react';
-import { getTranslatedContent } from '@/lib/translations';
 
 const ROME_CENTER: [number, number] = [41.8902, 12.4922];
 
@@ -84,16 +81,30 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
   const routingControlRef = useRef<L.Routing.Control | null>(null);
 
   useEffect(() => {
-    if (!map || !start || !end) {
+    if (!map) return;
+    
+    if (!start || !end) {
       if (routingControlRef.current) {
-        map.removeControl(routingControlRef.current);
+        try {
+          map.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn('Failed to remove routing control:', e);
+        }
         routingControlRef.current = null;
       }
       return;
     }
 
     if (routingControlRef.current) {
-      map.removeControl(routingControlRef.current);
+      try {
+        // Check if control is still on the map before removing
+        if (map.hasLayer && (routingControlRef.current as any)._map) {
+          map.removeControl(routingControlRef.current);
+        }
+      } catch (e) {
+        console.warn('Failed to remove previous routing control:', e);
+      }
+      routingControlRef.current = null;
     }
 
     const control = L.Routing.control({
@@ -126,8 +137,12 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
     routingControlRef.current = control;
 
     return () => {
-      if (routingControlRef.current) {
-        map.removeControl(routingControlRef.current);
+      if (routingControlRef.current && map) {
+        try {
+          map.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn('Failed to cleanup routing control:', e);
+        }
         routingControlRef.current = null;
       }
     };
@@ -220,17 +235,31 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
   const routingControlRef = useRef<L.Routing.Control | null>(null);
 
   useEffect(() => {
+    if (!map) return;
+    
     // Don't show tour routing when there's an active navigation route
-    if (!map || tourStops.length < 2 || activeRoute) {
+    if (tourStops.length < 2 || activeRoute) {
       if (routingControlRef.current) {
-        map.removeControl(routingControlRef.current);
+        try {
+          map.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn('Failed to remove tour routing control:', e);
+        }
         routingControlRef.current = null;
       }
       return;
     }
 
     if (routingControlRef.current) {
-      map.removeControl(routingControlRef.current);
+      try {
+        // Check if control is still on the map before removing
+        if (map.hasLayer && (routingControlRef.current as any)._map) {
+          map.removeControl(routingControlRef.current);
+        }
+      } catch (e) {
+        console.warn('Failed to remove previous tour routing control:', e);
+      }
+      routingControlRef.current = null;
     }
 
     const waypoints = tourStops.map(stop => L.latLng(stop.lat, stop.lng));
@@ -261,7 +290,11 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
 
     return () => {
       if (routingControlRef.current && map) {
-        map.removeControl(routingControlRef.current);
+        try {
+          map.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn('Failed to cleanup tour routing control:', e);
+        }
         routingControlRef.current = null;
       }
     };
@@ -315,42 +348,15 @@ export function MapView({
             key={landmark.id}
             position={[landmark.lat, landmark.lng]}
             icon={icon}
-          >
-            <Popup>
-              <div className="p-2">
-                <h3 className="font-serif font-semibold text-lg mb-1">
-                  {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                </h3>
-                {getTranslatedContent(landmark, selectedLanguage, 'description') && (
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {getTranslatedContent(landmark, selectedLanguage, 'description')}
-                  </p>
-                )}
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    onClick={() => onLandmarkRoute(landmark)}
-                    className="flex-1"
-                    data-testid={`button-route-${landmark.id}`}
-                  >
-                    <Navigation className="w-4 h-4 mr-2" />
-                    Directions
-                  </Button>
-                  {onAddToTour && (
-                    <Button
-                      size="sm"
-                      variant={isInTour ? "secondary" : "outline"}
-                      onClick={() => onAddToTour(landmark)}
-                      className="flex-1"
-                      data-testid={`button-tour-${landmark.id}`}
-                    >
-                      {isInTour ? 'Remove' : 'Add to Tour'}
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </Popup>
-          </Marker>
+            draggable={false}
+            eventHandlers={{
+              click: () => {
+                if (onAddToTour) {
+                  onAddToTour(landmark);
+                }
+              }
+            }}
+          />
         );
       })}
 
@@ -358,16 +364,7 @@ export function MapView({
         <Marker
           position={[userPosition.latitude, userPosition.longitude]}
           icon={userLocationIcon}
-        >
-          <Popup>
-            <div className="p-2">
-              <p className="font-medium">Your Location</p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Accuracy: ±{Math.round(userPosition.accuracy || 0)}m
-              </p>
-            </div>
-          </Popup>
-        </Marker>
+        />
       )}
 
       {activeRoute && (

@@ -12,12 +12,14 @@ import { Card } from '@/components/ui/card';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
 import { ProgressStats } from './ProgressStats';
-import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines, Gauge } from 'lucide-react';
+import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines, Gauge, Route, X, MapPin } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
-import { City } from '@shared/schema';
-import { t } from '@/lib/translations';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { City, Landmark } from '@shared/schema';
+import { t, getTranslatedContent } from '@/lib/translations';
 
 interface AppSidebarProps {
   audioEnabled: boolean;
@@ -37,6 +39,10 @@ interface AppSidebarProps {
   onTestAudio?: () => void;
   speechRate: number;
   onSpeechRateChange: (rate: number) => void;
+  tourStops: Landmark[];
+  tourRouteInfo: { distance: number; duration: number } | null;
+  onRemoveTourStop: (landmarkId: string) => void;
+  onClearTour: () => void;
 }
 
 export function AppSidebar({
@@ -56,7 +62,11 @@ export function AppSidebar({
   cityName,
   onTestAudio,
   speechRate,
-  onSpeechRateChange
+  onSpeechRateChange,
+  tourStops,
+  tourRouteInfo,
+  onRemoveTourStop,
+  onClearTour
 }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon">
@@ -175,6 +185,63 @@ export function AppSidebar({
                 <ProgressStats totalLandmarks={totalLandmarks} cityName={cityName} selectedLanguage={selectedLanguage} />
               </SidebarGroupContent>
             </SidebarGroup>
+
+            {tourStops.length > 0 && (
+              <SidebarGroup>
+                <SidebarGroupLabel className="flex items-center justify-between">
+                  <span className="flex items-center gap-2">
+                    <Route className="w-4 h-4" />
+                    {t('tourRoute', selectedLanguage)}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={onClearTour}
+                    data-testid="button-sidebar-clear-tour"
+                    className="h-6 px-2"
+                  >
+                    <X className="w-3 h-3" />
+                  </Button>
+                </SidebarGroupLabel>
+                <SidebarGroupContent className="px-2 space-y-2">
+                  {tourRouteInfo && (
+                    <div className="flex gap-2 mb-2">
+                      <Badge variant="outline" className="gap-1 text-xs">
+                        <span>{(tourRouteInfo.distance / 1000).toFixed(1)}km</span>
+                      </Badge>
+                      <Badge variant="outline" className="gap-1 text-xs">
+                        <span>{Math.ceil(tourRouteInfo.duration / 60)}min</span>
+                      </Badge>
+                    </div>
+                  )}
+                  <div className="space-y-1">
+                    {tourStops.map((landmark, index) => (
+                      <div
+                        key={landmark.id}
+                        className="flex items-center justify-between p-2 rounded-md bg-muted/50 group hover-elevate"
+                      >
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                          <span className="text-xs font-medium text-muted-foreground">{index + 1}</span>
+                          <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)' }} />
+                          <span className="text-sm truncate">
+                            {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                          </span>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => onRemoveTourStop(landmark.id)}
+                          className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                          data-testid={`button-remove-tour-${landmark.id}`}
+                        >
+                          <X className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </SidebarGroupContent>
+              </SidebarGroup>
+            )}
           </div>
         </Card>
       </SidebarContent>

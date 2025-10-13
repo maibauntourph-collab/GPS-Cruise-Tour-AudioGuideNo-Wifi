@@ -38,6 +38,7 @@ export function LandmarkPanel({
   const [isMinimized, setIsMinimized] = useState(false);
   const [hasMoved, setHasMoved] = useState(false);
   const [lastCardHeight, setLastCardHeight] = useState(600); // Track card height before minimizing
+  const [isCentered, setIsCentered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -59,14 +60,23 @@ export function LandmarkPanel({
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     
-    const maxX = viewportWidth - elementWidth - 32;
-    const maxY = viewportHeight - elementHeight - 32;
+    // Calculate max offsets from center (50%)
+    const maxX = (viewportWidth - elementWidth) / 2;
+    const maxY = (viewportHeight - elementHeight) / 2;
     
     return {
-      x: Math.max(0, Math.min(x, maxX)),
-      y: Math.max(0, Math.min(y, maxY))
+      x: Math.max(-maxX, Math.min(x, maxX)),
+      y: Math.max(-maxY, Math.min(y, maxY))
     };
   }, []);
+
+  // Center card on initial mount - already centered with left/top: 50% and transform: -50%
+  useEffect(() => {
+    if (!isCentered && landmark) {
+      setTranslate({ x: 0, y: 0 });
+      setIsCentered(true);
+    }
+  }, [landmark, isCentered]);
 
   const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
     if (!cardRef.current) return;
@@ -81,17 +91,9 @@ export function LandmarkPanel({
     const cardWidth = cardRef.current.offsetWidth;
     const cardHeight = cardRef.current.offsetHeight;
     
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    const maxX = viewportWidth - cardWidth - 32;
-    const maxY = viewportHeight - cardHeight - 32;
-    
-    const clampedX = Math.max(0, Math.min(newX, maxX));
-    const clampedY = Math.max(0, Math.min(newY, maxY));
-    
-    setTranslate({ x: clampedX, y: clampedY });
-  }, [dragStart.x, dragStart.y]);
+    const clamped = clampTranslate(newX, newY, cardWidth, cardHeight);
+    setTranslate(clamped);
+  }, [dragStart.x, dragStart.y, clampTranslate]);
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
@@ -195,12 +197,12 @@ export function LandmarkPanel({
       ref={cardRef}
       style={{
         position: 'fixed',
-        left: '16px',
-        top: '16px',
+        left: '50%',
+        top: '50%',
         zIndex,
         cursor: isDragging ? 'grabbing' : 'pointer',
         userSelect: 'none',
-        transform: `translate(${translate.x}px, ${translate.y}px)`
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
       }}
       onMouseDown={handleStart}
       onTouchStart={handleStart}
@@ -244,13 +246,13 @@ export function LandmarkPanel({
       ref={cardRef}
       style={{
         position: 'fixed',
-        left: '16px',
-        top: '16px',
+        left: '50%',
+        top: '50%',
         zIndex,
         width: '24rem',
         maxHeight: 'calc(100vh - 32px)',
         userSelect: 'none',
-        transform: `translate(${translate.x}px, ${translate.y}px)`
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
       }}
       onClick={handleCardClick}
       data-testid="card-landmark-container"
