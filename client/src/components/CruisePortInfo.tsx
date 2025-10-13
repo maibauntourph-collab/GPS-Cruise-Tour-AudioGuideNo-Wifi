@@ -192,7 +192,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
       ref={cardRef}
       style={{
         position: 'absolute',
-        left: '16px',
+        right: '16px',
         top: '16px',
         zIndex,
         cursor: isDragging ? 'grabbing' : 'pointer',

@@ -148,7 +148,7 @@ export function LandmarkList({
       ref={cardRef}
       style={{
         position: 'fixed',
-        left: '16px',
+        right: '16px',
         top: '16px',
         zIndex,
         cursor: isDragging ? 'grabbing' : 'pointer',
