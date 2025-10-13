@@ -398,6 +398,7 @@ export function MapView({
             key={landmark.id}
             position={[landmark.lat, landmark.lng]}
             icon={icon}
+            draggable={false}
             eventHandlers={{
               click: () => {
                 if (onAddToTour) {
@@ -415,6 +416,7 @@ export function MapView({
         <Marker
           position={[userPosition.latitude, userPosition.longitude]}
           icon={userLocationIcon}
+          draggable={false}
         >
           <Popup>
             <div className="p-2">
