@@ -33,6 +33,12 @@ interface UnifiedFloatingCardProps {
   spokenLandmarks: Set<string>;
   onLandmarkSelect?: (landmark: Landmark) => void;
   
+  // Filter props (synced with Home)
+  showLandmarks: boolean;
+  showActivities: boolean;
+  onToggleLandmarks: () => void;
+  onToggleActivities: () => void;
+  
   // Common props
   selectedLanguage?: string;
   onMapMarkerClick?: (lat: number, lng: number) => void;
@@ -82,6 +88,10 @@ export function UnifiedFloatingCard({
   onLandmarkRoute,
   spokenLandmarks,
   onLandmarkSelect,
+  showLandmarks,
+  showActivities,
+  onToggleLandmarks,
+  onToggleActivities,
   selectedLanguage = 'en',
   onMapMarkerClick
 }: UnifiedFloatingCardProps) {
@@ -94,8 +104,6 @@ export function UnifiedFloatingCard({
   const [activeTab, setActiveTab] = useState<string>('landmark');
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
-  const [showListLandmarks, setShowListLandmarks] = useState(true);
-  const [showListActivities, setShowListActivities] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -255,11 +263,11 @@ export function UnifiedFloatingCard({
     return a.distance - b.distance;
   });
 
-  // Filter landmarks in List tab based on category
+  // Filter landmarks in List tab based on category (synced with Home filter state)
   const filteredListLandmarks = sortedLandmarks.filter(({ landmark }) => {
     const isActivity = landmark.category === 'Activity';
-    if (isActivity) return showListActivities;
-    return showListLandmarks;
+    if (isActivity) return showActivities;
+    return showLandmarks;
   });
 
   // Render minimized icon
@@ -577,9 +585,9 @@ export function UnifiedFloatingCard({
             {/* Filter buttons */}
             <div className="flex gap-2 flex-wrap">
               <Button
-                variant={showListLandmarks ? "default" : "outline"}
+                variant={showLandmarks ? "default" : "outline"}
                 size="sm"
-                onClick={() => setShowListLandmarks(!showListLandmarks)}
+                onClick={onToggleLandmarks}
                 className="gap-1"
                 data-testid="button-filter-landmarks"
               >
@@ -587,10 +595,10 @@ export function UnifiedFloatingCard({
                 {t('landmarks', selectedLanguage)}
               </Button>
               <Button
-                variant={showListActivities ? "default" : "outline"}
+                variant={showActivities ? "default" : "outline"}
                 size="sm"
-                onClick={() => setShowListActivities(!showListActivities)}
-                className={`gap-1 ${showListActivities ? 'bg-[hsl(195,85%,50%)] hover:bg-[hsl(195,85%,45%)] border-[hsl(195,85%,50%)]' : ''}`}
+                onClick={onToggleActivities}
+                className={`gap-1 ${showActivities ? 'bg-[hsl(195,85%,50%)] hover:bg-[hsl(195,85%,45%)] border-[hsl(195,85%,50%)]' : ''}`}
                 data-testid="button-filter-activities"
               >
                 <Activity className="w-4 h-4" />

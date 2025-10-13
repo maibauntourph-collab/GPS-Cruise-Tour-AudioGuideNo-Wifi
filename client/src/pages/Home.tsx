@@ -388,6 +388,10 @@ export default function Home() {
         onLandmarkRoute={handleLandmarkRoute}
         spokenLandmarks={spokenLandmarks}
         onLandmarkSelect={setSelectedLandmark}
+        showLandmarks={showLandmarks}
+        showActivities={showActivities}
+        onToggleLandmarks={() => setShowLandmarks(!showLandmarks)}
+        onToggleActivities={() => setShowActivities(!showActivities)}
         selectedLanguage={selectedLanguage}
         onMapMarkerClick={handleMapMarkerClick}
       />
