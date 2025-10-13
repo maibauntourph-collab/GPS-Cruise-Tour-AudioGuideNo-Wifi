@@ -9,14 +9,15 @@ import {
   SidebarMenuButton 
 } from '@/components/ui/sidebar';
 import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
 import { ProgressStats } from './ProgressStats';
-import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines, Gauge } from 'lucide-react';
+import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines, Gauge, Route as RouteIcon } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
-import { City } from '@shared/schema';
+import { City, Landmark } from '@shared/schema';
 import { t } from '@/lib/translations';
 
 interface AppSidebarProps {
@@ -37,6 +38,8 @@ interface AppSidebarProps {
   onTestAudio?: () => void;
   speechRate: number;
   onSpeechRateChange: (rate: number) => void;
+  tourStops?: Landmark[];
+  tourRouteInfo?: { distance: number; duration: number } | null;
 }
 
 export function AppSidebar({
@@ -56,7 +59,9 @@ export function AppSidebar({
   cityName,
   onTestAudio,
   speechRate,
-  onSpeechRateChange
+  onSpeechRateChange,
+  tourStops = [],
+  tourRouteInfo = null
 }: AppSidebarProps) {
   return (
     <Sidebar collapsible="offcanvas">
@@ -175,6 +180,31 @@ export function AppSidebar({
                 <ProgressStats totalLandmarks={totalLandmarks} cityName={cityName} selectedLanguage={selectedLanguage} />
               </SidebarGroupContent>
             </SidebarGroup>
+
+            {tourStops.length > 0 && (
+              <SidebarGroup>
+                <SidebarGroupContent className="px-2">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <RouteIcon className="w-4 h-4 text-primary" />
+                        <span className="text-sm font-medium">Tour Route</span>
+                      </div>
+                      <Badge variant="secondary" className="gap-1" data-testid="sidebar-tour-stops">
+                        {tourStops.length} stops
+                      </Badge>
+                    </div>
+                    {tourRouteInfo && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Badge variant="outline" className="gap-1" data-testid="sidebar-tour-info">
+                          {(tourRouteInfo.distance / 1000).toFixed(1)}km • {Math.ceil(tourRouteInfo.duration / 60)}min
+                        </Badge>
+                      </div>
+                    )}
+                  </div>
+                </SidebarGroupContent>
+              </SidebarGroup>
+            )}
           </div>
         </Card>
       </SidebarContent>
