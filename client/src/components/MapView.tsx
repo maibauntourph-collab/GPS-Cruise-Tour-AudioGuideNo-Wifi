@@ -223,7 +223,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
   useEffect(() => {
     // Show tour routing even when there's an active navigation route
     if (!map || tourStops.length < 2) {
-      if (routingControlRef.current) {
+      if (routingControlRef.current && map) {
         map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
