@@ -26,7 +26,7 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, X, Ship, Menu } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, X, Ship, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -66,6 +66,7 @@ export default function Home() {
   const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
   const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
   const [showLandmarks, setShowLandmarks] = useState(true);
+  const [showActivities, setShowActivities] = useState(true);
   const [showCruisePort, setShowCruisePort] = useState(true);
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
@@ -256,7 +257,7 @@ export default function Home() {
   // Filter landmarks based on category
   const filteredLandmarks = landmarks.filter(landmark => {
     const isActivity = landmark.category === 'Activity';
-    if (isActivity) return true; // Always show activities
+    if (isActivity) return showActivities;
     return showLandmarks;
   });
 
@@ -338,6 +339,16 @@ export default function Home() {
                 >
                   <LandmarkIcon className="w-4 h-4" />
                   <span className="hidden sm:inline">{t('landmarks', selectedLanguage)}</span>
+                </Button>
+                <Button
+                  variant={showActivities ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setShowActivities(!showActivities)}
+                  data-testid="button-toggle-activities"
+                  className="gap-1"
+                >
+                  <Activity className="w-4 h-4" />
+                  <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
                 </Button>
                 {selectedCity?.cruisePort && (
                   <Button
