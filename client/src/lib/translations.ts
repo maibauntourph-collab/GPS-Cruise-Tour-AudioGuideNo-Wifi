@@ -105,7 +105,12 @@ const uiTranslations: Record<string, Record<string, string>> = {
     menuHighlights: 'Menu Highlights',
     makeReservation: 'Make Reservation',
     restaurantInfo: 'Restaurant Information',
-    nearbyLandmarks: 'Nearby Landmarks'
+    nearbyLandmarks: 'Nearby Landmarks',
+    phoneNumber: 'Phone',
+    callRestaurant: 'Call Restaurant',
+    landmarksSection: 'Landmarks',
+    activitiesSection: 'Activities',
+    restaurantsSection: 'Restaurants'
   },
   ko: {
     landmarks: '명소',
@@ -185,7 +190,12 @@ const uiTranslations: Record<string, Record<string, string>> = {
     menuHighlights: '추천 메뉴',
     makeReservation: '예약하기',
     restaurantInfo: '레스토랑 정보',
-    nearbyLandmarks: '주변 명소'
+    nearbyLandmarks: '주변 명소',
+    phoneNumber: '전화',
+    callRestaurant: '전화하기',
+    landmarksSection: '명소',
+    activitiesSection: '액티비티',
+    restaurantsSection: '레스토랑'
   },
   es: {
     landmarks: 'Monumentos',
@@ -476,7 +486,12 @@ const uiTranslations: Record<string, Record<string, string>> = {
     menuHighlights: 'Piatti Consigliati',
     makeReservation: 'Prenota Tavolo',
     restaurantInfo: 'Informazioni Ristorante',
-    nearbyLandmarks: 'Luoghi Vicini'
+    nearbyLandmarks: 'Luoghi Vicini',
+    phoneNumber: 'Telefono',
+    callRestaurant: 'Chiama Ristorante',
+    landmarksSection: 'Luoghi',
+    activitiesSection: 'Attività',
+    restaurantsSection: 'Ristoranti'
   },
   zh: {
     landmarks: '地标',

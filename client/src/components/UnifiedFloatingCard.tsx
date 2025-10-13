@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone } from 'lucide-react';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
@@ -589,6 +589,22 @@ export function UnifiedFloatingCard({
                         </div>
                       )}
                       
+                      {selectedLandmark.phoneNumber && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <Phone className="w-4 h-4 text-muted-foreground mt-0.5" />
+                          <div>
+                            <p className="font-medium">{t('phoneNumber', selectedLanguage)}</p>
+                            <a 
+                              href={`tel:${selectedLandmark.phoneNumber}`}
+                              className="text-primary hover:underline"
+                              data-testid="link-restaurant-phone"
+                            >
+                              {selectedLandmark.phoneNumber}
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                      
                       {selectedLandmark.menuHighlights && selectedLandmark.menuHighlights.length > 0 && (
                         <div className="text-sm">
                           <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
@@ -602,73 +618,104 @@ export function UnifiedFloatingCard({
                         </div>
                       )}
                       
-                      {selectedLandmark.reservationUrl && (
-                        <Button
-                          variant="default"
-                          className="w-full gap-2"
-                          onClick={() => window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
-                          data-testid="button-make-reservation"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          {t('makeReservation', selectedLanguage)}
-                        </Button>
-                      )}
+                      <div className="flex gap-2">
+                        {selectedLandmark.phoneNumber && (
+                          <Button
+                            variant="outline"
+                            className="flex-1 gap-2"
+                            onClick={() => window.open(`tel:${selectedLandmark.phoneNumber}`, '_self')}
+                            data-testid="button-call-restaurant"
+                          >
+                            <Phone className="w-4 h-4" />
+                            {t('callRestaurant', selectedLanguage)}
+                          </Button>
+                        )}
+                        {selectedLandmark.reservationUrl && (
+                          <Button
+                            variant="default"
+                            className="flex-1 gap-2"
+                            onClick={() => window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
+                            data-testid="button-make-reservation"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            {t('makeReservation', selectedLanguage)}
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )}
               </div>
             )}
 
-            {/* Landmark List - Always visible */}
-            <div className="space-y-2">
-              <h5 className="font-semibold text-sm text-muted-foreground">
-                {t('nearbyLandmarks', selectedLanguage)}
-              </h5>
-              {filteredListLandmarks.map(({ landmark, distance }) => (
-                <div
-                  key={landmark.id}
-                  className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
-                  onClick={() => onLandmarkSelect?.(landmark)}
-                  data-testid={`card-landmark-${landmark.id}`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        {landmark.category === 'Activity' ? (
-                          <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />
-                        ) : landmark.category === 'Restaurant' ? (
-                          <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />
-                        ) : (
-                          <LandmarkIcon className="w-4 h-4 text-primary" />
-                        )}
-                        <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
-                          {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                        </h4>
-                        {spokenLandmarks.has(landmark.id) && (
-                          <Volume2 className="w-3 h-3 text-green-600" />
-                        )}
-                      </div>
-                      {distance !== null && (
-                        <p className="text-xs text-muted-foreground">
-                          {formatDistance(distance)}
-                        </p>
-                      )}
+            {/* Landmark List - Category-based sections */}
+            <div className="space-y-4">
+              {(() => {
+                const landmarksByCategory = filteredListLandmarks.reduce((acc, item) => {
+                  const category = item.landmark.category || 'Landmark';
+                  if (!acc[category]) acc[category] = [];
+                  acc[category].push(item);
+                  return acc;
+                }, {} as Record<string, typeof filteredListLandmarks>);
+
+                const renderSection = (category: string, items: typeof filteredListLandmarks, title: string, icon: React.ReactNode) => {
+                  if (items.length === 0) return null;
+                  return (
+                    <div key={category} className="space-y-2">
+                      <h5 className="font-semibold text-sm text-muted-foreground flex items-center gap-2">
+                        {icon}
+                        {title}
+                      </h5>
+                      {items.map(({ landmark, distance }) => (
+                        <div
+                          key={landmark.id}
+                          className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
+                          onClick={() => onLandmarkSelect?.(landmark)}
+                          data-testid={`card-landmark-${landmark.id}`}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
+                                  {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                                </h4>
+                                {spokenLandmarks.has(landmark.id) && (
+                                  <Volume2 className="w-3 h-3 text-green-600" />
+                                )}
+                              </div>
+                              {distance !== null && (
+                                <p className="text-xs text-muted-foreground">
+                                  {formatDistance(distance)}
+                                </p>
+                              )}
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onLandmarkRoute(landmark);
+                              }}
+                              className="h-8 w-8"
+                              data-testid={`button-navigate-${landmark.id}`}
+                            >
+                              <Navigation className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onLandmarkRoute(landmark);
-                      }}
-                      className="h-8 w-8"
-                      data-testid={`button-navigate-${landmark.id}`}
-                    >
-                      <Navigation className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-              ))}
+                  );
+                };
+
+                return (
+                  <>
+                    {renderSection('Landmark', landmarksByCategory['Landmark'] || [], t('landmarksSection', selectedLanguage), <LandmarkIcon className="w-4 h-4 text-primary" />)}
+                    {renderSection('Activity', landmarksByCategory['Activity'] || [], t('activitiesSection', selectedLanguage), <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
+                    {renderSection('Restaurant', landmarksByCategory['Restaurant'] || [], t('restaurantsSection', selectedLanguage), <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
+                  </>
+                );
+              })()}
             </div>
             </div>
           </TabsContent>

@@ -110,6 +110,7 @@ export const landmarkSchema = z.object({
   priceRange: z.string().optional(), // e.g., "€€€" or "$50-80 per person"
   cuisine: z.string().optional(), // e.g., "Traditional Roman", "French Fine Dining"
   reservationUrl: z.string().optional(), // Direct reservation link (OpenTable, TheFork, etc.)
+  phoneNumber: z.string().optional(), // Restaurant phone number
   menuHighlights: z.array(z.string()).optional(), // Key dishes: ["Cacio e Pepe", "Carbonara"]
 });
 
