@@ -414,7 +414,7 @@ export default function Home() {
 
       {/* Google Maps Direction Choice Dialog */}
       <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
-        <AlertDialogContent data-testid="dialog-directions-choice">
+        <AlertDialogContent data-testid="dialog-directions-choice" className="z-[9999]">
           <AlertDialogHeader>
             <AlertDialogTitle>{t('chooseNavigationApp', selectedLanguage)}</AlertDialogTitle>
             <AlertDialogDescription>
