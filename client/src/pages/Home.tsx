@@ -304,7 +304,7 @@ export default function Home() {
               size="sm"
               onClick={() => setShowActivities(!showActivities)}
               data-testid="button-toggle-activities"
-              className={`gap-1 ${showActivities ? 'bg-[hsl(195,85%,50%)] hover:bg-[hsl(195,85%,45%)] border-[hsl(195,85%,50%)]' : ''}`}
+              className={`gap-1 ${showActivities ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
             >
               <Activity className="w-4 h-4" />
               <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
@@ -315,7 +315,7 @@ export default function Home() {
                 size="sm"
                 onClick={() => setShowCruisePort(!showCruisePort)}
                 data-testid="button-toggle-cruise-port"
-                className={`gap-1 ${showCruisePort ? 'bg-[hsl(195,85%,50%)] hover:bg-[hsl(195,85%,45%)] border-[hsl(195,85%,50%)]' : ''}`}
+                className={`gap-1 ${showCruisePort ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
               >
                 <Ship className="w-4 h-4" />
                 <span className="hidden sm:inline">{t('cruisePortInfo', selectedLanguage)}</span>

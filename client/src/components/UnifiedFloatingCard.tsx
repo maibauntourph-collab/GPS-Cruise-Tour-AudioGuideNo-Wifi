@@ -581,9 +581,9 @@ export function UnifiedFloatingCard({
           </TabsContent>
 
           {/* Landmark List Tab */}
-          <TabsContent value="list" className="mt-4 space-y-3">
-            {/* Filter buttons */}
-            <div className="flex gap-2 flex-wrap">
+          <TabsContent value="list" className="mt-4 flex flex-col h-[calc(100vh-200px)]">
+            {/* Filter buttons - Fixed at top */}
+            <div className="flex gap-2 flex-wrap pb-3 flex-shrink-0">
               <Button
                 variant={showLandmarks ? "default" : "outline"}
                 size="sm"
@@ -598,7 +598,7 @@ export function UnifiedFloatingCard({
                 variant={showActivities ? "default" : "outline"}
                 size="sm"
                 onClick={onToggleActivities}
-                className={`gap-1 ${showActivities ? 'bg-[hsl(195,85%,50%)] hover:bg-[hsl(195,85%,45%)] border-[hsl(195,85%,50%)]' : ''}`}
+                className={`gap-1 ${showActivities ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
                 data-testid="button-filter-activities"
               >
                 <Activity className="w-4 h-4" />
@@ -606,8 +606,8 @@ export function UnifiedFloatingCard({
               </Button>
             </div>
             
-            {/* Scrollable list */}
-            <div className="max-h-[calc(100vh-280px)] overflow-y-auto space-y-2 pr-1">
+            {/* Scrollable list - Takes remaining space */}
+            <div className="flex-1 overflow-y-auto space-y-2 pr-1">
               {filteredListLandmarks.map(({ landmark, distance }) => (
                 <div
                   key={landmark.id}
