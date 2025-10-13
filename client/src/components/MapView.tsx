@@ -97,10 +97,7 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
 
     if (routingControlRef.current) {
       try {
-        // Check if control is still on the map before removing
-        if (map.hasLayer && (routingControlRef.current as any)._map) {
-          map.removeControl(routingControlRef.current);
-        }
+        map.removeControl(routingControlRef.current);
       } catch (e) {
         console.warn('Failed to remove previous routing control:', e);
       }
@@ -137,9 +134,11 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
     routingControlRef.current = control;
 
     return () => {
-      if (routingControlRef.current && map) {
+      if (routingControlRef.current) {
         try {
-          map.removeControl(routingControlRef.current);
+          if (map) {
+            map.removeControl(routingControlRef.current);
+          }
         } catch (e) {
           console.warn('Failed to cleanup routing control:', e);
         }
@@ -252,10 +251,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
 
     if (routingControlRef.current) {
       try {
-        // Check if control is still on the map before removing
-        if (map.hasLayer && (routingControlRef.current as any)._map) {
-          map.removeControl(routingControlRef.current);
-        }
+        map.removeControl(routingControlRef.current);
       } catch (e) {
         console.warn('Failed to remove previous tour routing control:', e);
       }
@@ -289,9 +285,11 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
     routingControlRef.current = control;
 
     return () => {
-      if (routingControlRef.current && map) {
+      if (routingControlRef.current) {
         try {
-          map.removeControl(routingControlRef.current);
+          if (map) {
+            map.removeControl(routingControlRef.current);
+          }
         } catch (e) {
           console.warn('Failed to cleanup tour routing control:', e);
         }

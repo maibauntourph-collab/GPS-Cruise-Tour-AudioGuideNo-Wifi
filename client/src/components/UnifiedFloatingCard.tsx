@@ -420,10 +420,10 @@ export function UnifiedFloatingCard({
               </Button>
             </div>
 
-            {/* Scrollable content */}
-            <div className="flex-1 overflow-y-auto">
-            {selectedLandmark ? (
-              <div className="space-y-4">
+            {/* Scrollable content - Contains both selected landmark and list */}
+            <div className="flex-1 overflow-y-auto space-y-4">
+            {selectedLandmark && (
+              <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
                 <div>
                   <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
                     {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
@@ -617,13 +617,59 @@ export function UnifiedFloatingCard({
                   </div>
                 )}
               </div>
-            ) : (
-              <div className="flex items-center justify-center h-full text-center p-6">
-                <p className="text-sm text-muted-foreground">
-                  {t('tourEmptyState', selectedLanguage)}
-                </p>
-              </div>
             )}
+
+            {/* Landmark List - Always visible */}
+            <div className="space-y-2">
+              <h5 className="font-semibold text-sm text-muted-foreground">
+                {t('nearbyLandmarks', selectedLanguage)}
+              </h5>
+              {filteredListLandmarks.map(({ landmark, distance }) => (
+                <div
+                  key={landmark.id}
+                  className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
+                  onClick={() => onLandmarkSelect?.(landmark)}
+                  data-testid={`card-landmark-${landmark.id}`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        {landmark.category === 'Activity' ? (
+                          <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />
+                        ) : landmark.category === 'Restaurant' ? (
+                          <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />
+                        ) : (
+                          <LandmarkIcon className="w-4 h-4 text-primary" />
+                        )}
+                        <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
+                          {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                        </h4>
+                        {spokenLandmarks.has(landmark.id) && (
+                          <Volume2 className="w-3 h-3 text-green-600" />
+                        )}
+                      </div>
+                      {distance !== null && (
+                        <p className="text-xs text-muted-foreground">
+                          {formatDistance(distance)}
+                        </p>
+                      )}
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onLandmarkRoute(landmark);
+                      }}
+                      className="h-8 w-8"
+                      data-testid={`button-navigate-${landmark.id}`}
+                    >
+                      <Navigation className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
             </div>
           </TabsContent>
 
