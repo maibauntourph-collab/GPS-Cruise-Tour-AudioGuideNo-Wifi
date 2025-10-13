@@ -85,14 +85,14 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
 
   useEffect(() => {
     if (!map || !start || !end) {
-      if (routingControlRef.current) {
+      if (routingControlRef.current && map) {
         map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
       return;
     }
 
-    if (routingControlRef.current) {
+    if (routingControlRef.current && map) {
       map.removeControl(routingControlRef.current);
     }
 
@@ -126,7 +126,7 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
     routingControlRef.current = control;
 
     return () => {
-      if (routingControlRef.current) {
+      if (routingControlRef.current && map) {
         map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
@@ -231,7 +231,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
       return;
     }
 
-    if (routingControlRef.current) {
+    if (routingControlRef.current && map) {
       map.removeControl(routingControlRef.current);
     }
 
