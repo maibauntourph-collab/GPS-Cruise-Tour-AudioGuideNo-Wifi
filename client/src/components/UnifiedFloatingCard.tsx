@@ -750,38 +750,66 @@ export function UnifiedFloatingCard({
 
                 <TabsContent value="transport" className="mt-4 overflow-y-auto flex-1">
                   {city.cruisePort.transportOptions && city.cruisePort.transportOptions.length > 0 && (
-                    <div className="space-y-3">
-                      {city.cruisePort.transportOptions.map((transport, idx) => {
-                        const Icon = getTransportIcon(transport.type);
-                        return (
-                          <div key={idx} className="p-3 bg-muted/50 rounded-lg">
-                            <div className="flex items-start gap-3">
-                              <Icon className="w-5 h-5 text-primary mt-0.5" />
-                              <div className="flex-1">
-                                <h6 className="font-medium">{getTransportTranslation(transport, selectedLanguage, 'name')}</h6>
-                                <div className="text-sm text-muted-foreground space-y-1 mt-1">
-                                  <p>{getTransportTranslation(transport, selectedLanguage, 'from')} → {getTransportTranslation(transport, selectedLanguage, 'to')}</p>
-                                  <p>{getTransportTranslation(transport, selectedLanguage, 'duration')} • {getTransportTranslation(transport, selectedLanguage, 'price')}</p>
-                                  {transport.tips && (
-                                    <p className="text-xs mt-2 italic">{getTransportTranslation(transport, selectedLanguage, 'tips')}</p>
-                                  )}
+                    <div className="space-y-4">
+                      {(() => {
+                        const transportsByType = city.cruisePort.transportOptions.reduce((acc, transport) => {
+                          const type = transport.type;
+                          if (!acc[type]) acc[type] = [];
+                          acc[type].push(transport);
+                          return acc;
+                        }, {} as Record<string, typeof city.cruisePort.transportOptions>);
+
+                        const renderTransportSection = (type: string, transports: typeof city.cruisePort.transportOptions, title: string) => {
+                          if (transports.length === 0) return null;
+                          const Icon = getTransportIcon(type as 'train' | 'bus' | 'taxi' | 'rideshare' | 'shuttle');
+                          
+                          return (
+                            <div key={type} className="space-y-2">
+                              <h5 className="font-semibold text-sm text-muted-foreground flex items-center gap-2">
+                                <Icon className="w-4 h-4 text-primary" />
+                                {title}
+                              </h5>
+                              {transports.map((transport, idx) => (
+                                <div key={idx} className="p-3 bg-muted/50 rounded-lg">
+                                  <div className="flex items-start gap-3">
+                                    <div className="flex-1">
+                                      <h6 className="font-medium">{getTransportTranslation(transport, selectedLanguage, 'name')}</h6>
+                                      <div className="text-sm text-muted-foreground space-y-1 mt-1">
+                                        <p>{getTransportTranslation(transport, selectedLanguage, 'from')} → {getTransportTranslation(transport, selectedLanguage, 'to')}</p>
+                                        <p>{getTransportTranslation(transport, selectedLanguage, 'duration')} • {getTransportTranslation(transport, selectedLanguage, 'price')}</p>
+                                        {transport.tips && (
+                                          <p className="text-xs mt-2 italic">{getTransportTranslation(transport, selectedLanguage, 'tips')}</p>
+                                        )}
+                                      </div>
+                                      {transport.bookingUrl && (
+                                        <Button
+                                          variant="outline"
+                                          size="sm"
+                                          className="mt-2 gap-2"
+                                          onClick={() => window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer')}
+                                        >
+                                          <ExternalLink className="w-3 h-3" />
+                                          {t('bookNow', selectedLanguage)}
+                                        </Button>
+                                      )}
+                                    </div>
+                                  </div>
                                 </div>
-                                {transport.bookingUrl && (
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="mt-2 gap-2"
-                                    onClick={() => window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer')}
-                                  >
-                                    <ExternalLink className="w-3 h-3" />
-                                    {t('bookNow', selectedLanguage)}
-                                  </Button>
-                                )}
-                              </div>
+                              ))}
                             </div>
-                          </div>
+                          );
+                        };
+
+                        return (
+                          <>
+                            {renderTransportSection('train', transportsByType['train'] || [], t('trainSection', selectedLanguage))}
+                            {renderTransportSection('bus', transportsByType['bus'] || [], t('busSection', selectedLanguage))}
+                            {renderTransportSection('shuttle', transportsByType['shuttle'] || [], t('shuttleSection', selectedLanguage))}
+                            {renderTransportSection('rideshare', transportsByType['rideshare'] || [], t('rideshareSection', selectedLanguage))}
+                            {renderTransportSection('taxi', transportsByType['taxi'] || [], t('taxiSection', selectedLanguage))}
+                          </>
                         );
-                      })}
+                      })()}
                     </div>
                   )}
                 </TabsContent>

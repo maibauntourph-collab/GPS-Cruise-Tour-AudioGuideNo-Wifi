@@ -110,7 +110,12 @@ const uiTranslations: Record<string, Record<string, string>> = {
     callRestaurant: 'Call Restaurant',
     landmarksSection: 'Landmarks',
     activitiesSection: 'Activities',
-    restaurantsSection: 'Restaurants'
+    restaurantsSection: 'Restaurants',
+    trainSection: 'Trains',
+    busSection: 'Buses',
+    taxiSection: 'Taxis',
+    rideshareSection: 'Rideshare Services',
+    shuttleSection: 'Shuttle Services'
   },
   ko: {
     landmarks: '명소',
@@ -195,7 +200,12 @@ const uiTranslations: Record<string, Record<string, string>> = {
     callRestaurant: '전화하기',
     landmarksSection: '명소',
     activitiesSection: '액티비티',
-    restaurantsSection: '레스토랑'
+    restaurantsSection: '레스토랑',
+    trainSection: '기차',
+    busSection: '버스',
+    taxiSection: '택시',
+    rideshareSection: '라이드셰어',
+    shuttleSection: '셔틀 서비스'
   },
   es: {
     landmarks: 'Monumentos',
@@ -491,7 +501,12 @@ const uiTranslations: Record<string, Record<string, string>> = {
     callRestaurant: 'Chiama Ristorante',
     landmarksSection: 'Luoghi',
     activitiesSection: 'Attività',
-    restaurantsSection: 'Ristoranti'
+    restaurantsSection: 'Ristoranti',
+    trainSection: 'Treni',
+    busSection: 'Autobus',
+    taxiSection: 'Taxi',
+    rideshareSection: 'Servizi di Rideshare',
+    shuttleSection: 'Servizi Navetta'
   },
   zh: {
     landmarks: '地标',
