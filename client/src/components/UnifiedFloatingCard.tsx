@@ -1,0 +1,638 @@
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor } from 'lucide-react';
+import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
+import { getTranslatedContent, t } from '@/lib/translations';
+import { calculateDistance, formatDistance } from '@/lib/geoUtils';
+import { audioService } from '@/lib/audioService';
+import { PhotoGallery } from './PhotoGallery';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+
+interface UnifiedFloatingCardProps {
+  // Landmark Panel props
+  selectedLandmark: Landmark | null;
+  onLandmarkClose: () => void;
+  onNavigate: (landmark: Landmark) => void;
+  onAddToTour?: (landmark: Landmark) => void;
+  isInTour?: boolean;
+  
+  // Cruise Port props
+  city: City | null;
+  showCruisePort: boolean;
+  onCruisePortClose?: () => void;
+  onLandmarkClick?: (landmarkId: string) => void;
+  
+  // Landmark List props
+  landmarks: Landmark[];
+  userPosition: GpsPosition | null;
+  onLandmarkRoute: (landmark: Landmark) => void;
+  spokenLandmarks: Set<string>;
+  onLandmarkSelect?: (landmark: Landmark) => void;
+  
+  // Common props
+  selectedLanguage?: string;
+  onMapMarkerClick?: (lat: number, lng: number) => void;
+}
+
+function getCruisePortTranslation(cruisePort: CruisePort, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
+  if (cruisePort.translations?.[language]?.[field]) {
+    return cruisePort.translations[language][field] as string;
+  }
+  return cruisePort[field] || '';
+}
+
+function getTransportTranslation(transport: TransportOption, language: string, field: 'name' | 'from' | 'to' | 'duration' | 'frequency' | 'price' | 'tips'): string {
+  if (transport.translations?.[language]?.[field]) {
+    return transport.translations[language][field] as string;
+  }
+  return transport[field] || '';
+}
+
+function getTransportIcon(type: string) {
+  switch (type) {
+    case 'train':
+      return Train;
+    case 'bus':
+    case 'shuttle':
+      return Bus;
+    case 'taxi':
+    case 'rideshare':
+      return Car;
+    default:
+      return Car;
+  }
+}
+
+export function UnifiedFloatingCard({
+  selectedLandmark,
+  onLandmarkClose,
+  onNavigate,
+  onAddToTour,
+  isInTour = false,
+  city,
+  showCruisePort,
+  onCruisePortClose,
+  onLandmarkClick,
+  landmarks,
+  userPosition,
+  onLandmarkRoute,
+  spokenLandmarks,
+  onLandmarkSelect,
+  selectedLanguage = 'en',
+  onMapMarkerClick
+}: UnifiedFloatingCardProps) {
+  const [isDragging, setIsDragging] = useState(false);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [zIndex, setZIndex] = useState(1000);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isCentered, setIsCentered] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>('landmark');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackRate, setPlaybackRate] = useState(1.0);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Determine which tab to show
+  useEffect(() => {
+    if (selectedLandmark) {
+      setActiveTab('landmark');
+    } else if (showCruisePort && city?.cruisePort) {
+      setActiveTab('cruise');
+    } else {
+      setActiveTab('list');
+    }
+  }, [selectedLandmark, showCruisePort, city]);
+
+  // Stop audio when landmark changes or component unmounts
+  useEffect(() => {
+    return () => {
+      audioService.stop();
+      setIsPlaying(false);
+    };
+  }, [selectedLandmark?.id]);
+
+  useEffect(() => {
+    audioService.stop();
+    setIsPlaying(false);
+  }, [selectedLanguage]);
+
+  // Clamp translate values to keep element within bounds
+  const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    const maxX = (viewportWidth - elementWidth) / 2;
+    const maxY = (viewportHeight - elementHeight) / 2;
+    
+    return {
+      x: Math.max(-maxX, Math.min(x, maxX)),
+      y: Math.max(-maxY, Math.min(y, maxY))
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isCentered) {
+      setTranslate({ x: 0, y: 0 });
+      setIsCentered(true);
+    }
+  }, [isCentered]);
+
+  const handleStart = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    if ((e.target as HTMLElement).closest('button, a, input, textarea, select, [role="button"]')) {
+      return;
+    }
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    
+    setIsDragging(true);
+    setDragStart({ x: clientX - translate.x, y: clientY - translate.y });
+    
+    if (zIndexTimeoutRef.current) {
+      clearTimeout(zIndexTimeoutRef.current);
+    }
+    setZIndex(1001);
+  }, [translate]);
+
+  const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
+    if (!cardRef.current) return;
+    
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    
+    const newX = clientX - dragStart.x;
+    const newY = clientY - dragStart.y;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const clamped = clampTranslate(newX, newY, rect.width, rect.height);
+    
+    setTranslate(clamped);
+  }, [dragStart, clampTranslate]);
+
+  const handleEnd = useCallback(() => {
+    setIsDragging(false);
+    
+    if (zIndexTimeoutRef.current) {
+      clearTimeout(zIndexTimeoutRef.current);
+    }
+    zIndexTimeoutRef.current = setTimeout(() => {
+      setZIndex(1000);
+    }, 100);
+  }, []);
+
+  useEffect(() => {
+    if (isDragging) {
+      const moveHandler = (e: MouseEvent | TouchEvent) => handleMouseMove(e);
+      const endHandler = () => handleEnd();
+      
+      window.addEventListener('mousemove', moveHandler);
+      window.addEventListener('mouseup', endHandler);
+      window.addEventListener('touchmove', moveHandler);
+      window.addEventListener('touchend', endHandler);
+      
+      return () => {
+        window.removeEventListener('mousemove', moveHandler);
+        window.removeEventListener('mouseup', endHandler);
+        window.removeEventListener('touchmove', moveHandler);
+        window.removeEventListener('touchend', endHandler);
+      };
+    }
+  }, [isDragging, handleMouseMove, handleEnd]);
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (zIndexTimeoutRef.current) {
+      clearTimeout(zIndexTimeoutRef.current);
+    }
+    setZIndex(1001);
+    
+    zIndexTimeoutRef.current = setTimeout(() => {
+      setZIndex(1000);
+    }, 100);
+  };
+
+  const handlePlayAudio = () => {
+    if (!selectedLandmark) return;
+    
+    if (isPlaying) {
+      audioService.stop();
+      setIsPlaying(false);
+    } else {
+      const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') || 
+                   getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
+      
+      audioService.playText(text, selectedLanguage, playbackRate, () => {
+        setIsPlaying(false);
+      });
+      setIsPlaying(true);
+    }
+  };
+
+  const landmarksWithDistance = landmarks.map((landmark) => {
+    const distance = userPosition
+      ? calculateDistance(
+          userPosition.latitude,
+          userPosition.longitude,
+          landmark.lat,
+          landmark.lng
+        )
+      : null;
+    return { landmark, distance };
+  });
+
+  const sortedLandmarks = [...landmarksWithDistance].sort((a, b) => {
+    if (a.distance === null) return 1;
+    if (b.distance === null) return -1;
+    return a.distance - b.distance;
+  });
+
+  // Render minimized icon
+  const renderMinimizedIcon = () => (
+    <div
+      style={{
+        position: 'fixed',
+        left: '50%',
+        top: '50%',
+        zIndex,
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
+      }}
+      onClick={() => setIsMinimized(false)}
+      data-testid="button-restore-unified-card"
+    >
+      <div className="w-14 h-14 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center cursor-pointer shadow-lg animate-pulse">
+        {activeTab === 'landmark' && <MapPin className="w-6 h-6 text-primary-foreground" />}
+        {activeTab === 'cruise' && <Ship className="w-6 h-6 text-primary-foreground" />}
+        {activeTab === 'list' && <List className="w-6 h-6 text-primary-foreground" />}
+      </div>
+    </div>
+  );
+
+  // Render full card
+  const renderFullCard = () => (
+    <div
+      ref={cardRef}
+      style={{
+        position: 'fixed',
+        left: '50%',
+        top: '50%',
+        zIndex,
+        cursor: isDragging ? 'grabbing' : 'grab',
+        width: '28rem',
+        maxWidth: 'calc(100vw - 32px)',
+        maxHeight: 'calc(100vh - 32px)',
+        userSelect: 'none',
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
+      }}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
+      onClick={handleCardClick}
+      data-testid="card-unified-floating-container"
+    >
+      <Card className="p-4 overflow-hidden" data-testid="card-unified-floating">
+        <div className="flex items-center gap-2 mb-3">
+          <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
+            {t('infoPanel', selectedLanguage)}
+          </h3>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMinimized(true);
+            }}
+            className="h-6 w-6"
+            data-testid="button-minimize-unified"
+          >
+            <Minus className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (selectedLandmark) {
+                onLandmarkClose();
+              } else if (showCruisePort && onCruisePortClose) {
+                onCruisePortClose();
+              }
+            }}
+            className="h-6 w-6"
+            data-testid="button-close-unified"
+          >
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
+
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger 
+              value="landmark" 
+              disabled={!selectedLandmark}
+              data-testid="tab-landmark"
+            >
+              <MapPin className="w-4 h-4 mr-1" />
+              {t('landmark', selectedLanguage)}
+            </TabsTrigger>
+            <TabsTrigger 
+              value="cruise" 
+              disabled={!city?.cruisePort}
+              data-testid="tab-cruise"
+            >
+              <Ship className="w-4 h-4 mr-1" />
+              {t('cruisePort', selectedLanguage)}
+            </TabsTrigger>
+            <TabsTrigger value="list" data-testid="tab-list">
+              <List className="w-4 h-4 mr-1" />
+              {t('list', selectedLanguage)}
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Landmark Details Tab */}
+          <TabsContent value="landmark" className="mt-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+            {selectedLandmark && (
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
+                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                  </h4>
+                  <div className="flex items-center gap-2 flex-wrap mb-3">
+                    <Badge variant={selectedLandmark.category === 'Activity' ? 'default' : 'secondary'}>
+                      {selectedLandmark.category === 'Activity' ? <Activity className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
+                      {selectedLandmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
+                    </Badge>
+                    {selectedLandmark.category && selectedLandmark.category !== 'Activity' && (
+                      <Badge variant="outline">{selectedLandmark.category}</Badge>
+                    )}
+                  </div>
+                </div>
+
+                {selectedLandmark.photos && selectedLandmark.photos.length > 0 && (
+                  <PhotoGallery 
+                    photos={selectedLandmark.photos} 
+                    title={getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                  />
+                )}
+
+                <div>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
+                  </p>
+                  
+                  {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') && (
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={handlePlayAudio}
+                          className="gap-2"
+                          data-testid="button-play-audio"
+                        >
+                          {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                          {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
+                        </Button>
+                        {isPlaying && (
+                          <select
+                            value={playbackRate}
+                            onChange={(e) => {
+                              const rate = parseFloat(e.target.value);
+                              setPlaybackRate(rate);
+                              audioService.setRate(rate);
+                            }}
+                            className="px-2 py-1 text-sm border rounded"
+                            data-testid="select-playback-rate"
+                          >
+                            <option value="0.5">0.5x</option>
+                            <option value="0.75">0.75x</option>
+                            <option value="1.0">1.0x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2.0">2.0x</option>
+                          </select>
+                        )}
+                      </div>
+                      <p className="text-sm leading-relaxed">
+                        {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription')}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="pt-3 border-t space-y-2">
+                  <Button
+                    onClick={() => onNavigate(selectedLandmark)}
+                    className="w-full gap-2"
+                    data-testid="button-get-directions"
+                  >
+                    <Navigation className="w-4 h-4" />
+                    {t('getDirections', selectedLanguage)}
+                  </Button>
+                  
+                  {onAddToTour && (
+                    <Button
+                      onClick={() => onAddToTour(selectedLandmark)}
+                      variant="outline"
+                      className="w-full gap-2"
+                      disabled={isInTour}
+                      data-testid="button-add-to-tour"
+                    >
+                      <MapPinned className="w-4 h-4" />
+                      {isInTour ? t('inTour', selectedLanguage) : t('addToTour', selectedLanguage)}
+                    </Button>
+                  )}
+                </div>
+
+                {selectedLandmark.category === 'Activity' && (
+                  <div className="pt-3 border-t">
+                    <h5 className="font-semibold mb-2 flex items-center gap-2">
+                      <Ticket className="w-4 h-4" />
+                      {t('bookTicketsTours', selectedLanguage)}
+                    </h5>
+                    <div className="space-y-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full justify-start gap-2"
+                        onClick={() => {
+                          const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                          window.open(`https://www.getyourguide.com/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                        }}
+                        data-testid="button-book-getyourguide"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        {t('bookOnGetYourGuide', selectedLanguage)}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full justify-start gap-2"
+                        onClick={() => {
+                          const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                          window.open(`https://www.viator.com/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                        }}
+                        data-testid="button-book-viator"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        {t('bookOnViator', selectedLanguage)}
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </TabsContent>
+
+          {/* Cruise Port Tab */}
+          <TabsContent value="cruise" className="mt-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+            {city?.cruisePort && (
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-lg mb-2">
+                    {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'portName')}
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-muted-foreground" />
+                      <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'distanceFromCity')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-muted-foreground" />
+                      <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'recommendedDuration')}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {city.cruisePort.transportOptions && city.cruisePort.transportOptions.length > 0 && (
+                  <div>
+                    <h5 className="font-semibold mb-3">{t('transportOptions', selectedLanguage)}</h5>
+                    <div className="space-y-3">
+                      {city.cruisePort.transportOptions.map((transport, idx) => {
+                        const Icon = getTransportIcon(transport.type);
+                        return (
+                          <div key={idx} className="p-3 bg-muted/50 rounded-lg">
+                            <div className="flex items-start gap-3">
+                              <Icon className="w-5 h-5 text-primary mt-0.5" />
+                              <div className="flex-1">
+                                <h6 className="font-medium">{getTransportTranslation(transport, selectedLanguage, 'name')}</h6>
+                                <div className="text-sm text-muted-foreground space-y-1 mt-1">
+                                  <p>{getTransportTranslation(transport, selectedLanguage, 'from')} → {getTransportTranslation(transport, selectedLanguage, 'to')}</p>
+                                  <p>{getTransportTranslation(transport, selectedLanguage, 'duration')} • {getTransportTranslation(transport, selectedLanguage, 'price')}</p>
+                                  {transport.tips && (
+                                    <p className="text-xs mt-2 italic">{getTransportTranslation(transport, selectedLanguage, 'tips')}</p>
+                                  )}
+                                </div>
+                                {transport.bookingUrl && (
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="mt-2 gap-2"
+                                    onClick={() => window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer')}
+                                  >
+                                    <ExternalLink className="w-3 h-3" />
+                                    {t('bookNow', selectedLanguage)}
+                                  </Button>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {city.cruisePort.tips && (
+                  <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                    <h5 className="font-semibold mb-2 flex items-center gap-2">
+                      <Info className="w-4 h-4" />
+                      {t('tips', selectedLanguage)}
+                    </h5>
+                    <p className="text-sm text-muted-foreground">
+                      {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'tips')}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </TabsContent>
+
+          {/* Landmark List Tab */}
+          <TabsContent value="list" className="mt-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+            <div className="space-y-2">
+              {sortedLandmarks.map(({ landmark, distance }) => (
+                <div
+                  key={landmark.id}
+                  className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
+                  onClick={() => onLandmarkSelect?.(landmark)}
+                  data-testid={`card-landmark-${landmark.id}`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        {landmark.category === 'Activity' ? (
+                          <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />
+                        ) : (
+                          <LandmarkIcon className="w-4 h-4 text-primary" />
+                        )}
+                        <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
+                          {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                        </h4>
+                        {spokenLandmarks.has(landmark.id) && (
+                          <Volume2 className="w-3 h-3 text-green-600" />
+                        )}
+                      </div>
+                      {distance !== null && (
+                        <p className="text-xs text-muted-foreground">
+                          {formatDistance(distance)}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex gap-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onLandmarkSelect?.(landmark);
+                        }}
+                        className="h-8 w-8"
+                        data-testid={`button-info-${landmark.id}`}
+                      >
+                        <Info className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onLandmarkRoute(landmark);
+                        }}
+                        className="h-8 w-8"
+                        data-testid={`button-navigate-${landmark.id}`}
+                      >
+                        <Navigation className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </Card>
+    </div>
+  );
+
+  if (!selectedLandmark && !showCruisePort && landmarks.length === 0) {
+    return null;
+  }
+
+  return isMinimized ? renderMinimizedIcon() : renderFullCard();
+}
