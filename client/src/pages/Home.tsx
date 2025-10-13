@@ -29,10 +29,8 @@ import { Landmark, City } from '@shared/schema';
 import { Landmark as LandmarkIcon, Activity, X, Ship, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useToast } from '@/hooks/use-toast';
 
 export default function Home() {
-  const { toast } = useToast();
   const { open: sidebarOpen } = useSidebar();
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
@@ -232,25 +230,13 @@ export default function Home() {
   };
 
   const handleAddToTour = (landmark: Landmark) => {
-    const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name');
-    
     // Check if landmark is already in tour
     if (tourStops.some(stop => stop.id === landmark.id)) {
       // Remove from tour if already added
       setTourStops(tourStops.filter(stop => stop.id !== landmark.id));
-      toast({
-        title: t('removedFromTour', selectedLanguage),
-        description: landmarkName,
-        duration: 2000,
-      });
     } else {
       // Add to tour
       setTourStops([...tourStops, landmark]);
-      toast({
-        title: t('addedToTour', selectedLanguage),
-        description: landmarkName,
-        duration: 2000,
-      });
     }
   };
 
