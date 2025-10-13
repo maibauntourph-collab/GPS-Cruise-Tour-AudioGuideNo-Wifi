@@ -246,7 +246,12 @@ export default function Home() {
   };
 
   const handleRemoveStop = (stopId: string) => {
-    setTourStops(tourStops.filter(stop => stop.id !== stopId));
+    const updatedStops = tourStops.filter(stop => stop.id !== stopId);
+    setTourStops(updatedStops);
+    // Clear route info if less than 2 stops remain
+    if (updatedStops.length < 2) {
+      setTourRouteInfo(null);
+    }
   };
 
   const handleTourRouteFound = (route: any) => {
