@@ -46,6 +46,7 @@ export function LandmarkPanel({
   const [isMinimized, setIsMinimized] = useState(false);
   const [hasMoved, setHasMoved] = useState(false);
   const [lastCardHeight, setLastCardHeight] = useState(600); // Track card height before minimizing
+  const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 }); // Track position before minimizing
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -217,7 +218,8 @@ export function LandmarkPanel({
         if (!hasMoved) {
           const fullCardWidth = 384;
           const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 688);
-          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
+          // Restore to previous position
+          const clamped = clampTranslate(lastTranslate.x, lastTranslate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
           setZIndex(3000);
@@ -228,7 +230,8 @@ export function LandmarkPanel({
         if (!hasMoved) {
           const fullCardWidth = 384;
           const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 688);
-          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
+          // Restore to previous position
+          const clamped = clampTranslate(lastTranslate.x, lastTranslate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
           setZIndex(3000);
@@ -288,10 +291,13 @@ export function LandmarkPanel({
               size="icon"
               onClick={(e) => {
                 e.stopPropagation();
-                // Save current card height before minimizing
+                // Save current card height and position before minimizing
                 if (cardRef.current) {
                   setLastCardHeight(cardRef.current.offsetHeight);
                 }
+                setLastTranslate(translate);
+                // Reset translate to prevent icon from going off-screen
+                setTranslate({ x: 0, y: 0 });
                 setIsMinimized(true);
               }}
               className="h-7 w-7 shrink-0"
