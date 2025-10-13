@@ -296,64 +296,69 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
             <TabsTrigger value="tips" data-testid="tab-tips">{t('tipsTab', selectedLanguage)}</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="space-y-3 mt-3">
-            {/* Port Name */}
-            <div className="flex items-start gap-2">
-              <Anchor className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">{t('portName', selectedLanguage)}</p>
-                <p className="text-sm font-semibold" data-testid="text-port-name">{portName}</p>
+          <TabsContent value="overview" className="mt-3">
+            <div className="flex flex-col sm:flex-row gap-4">
+              {/* Left side: Port Information */}
+              <div className="flex-1 space-y-3">
+                {/* Port Name */}
+                <div className="flex items-start gap-2">
+                  <Anchor className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">{t('portName', selectedLanguage)}</p>
+                    <p className="text-sm font-semibold" data-testid="text-port-name">{portName}</p>
+                  </div>
+                </div>
+
+                {/* Distance */}
+                {distanceFromCity && (
+                  <div className="flex items-start gap-2">
+                    <MapPin className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
+                    <div>
+                      <p className="text-sm font-medium text-muted-foreground">{t('distanceFromCity', selectedLanguage)}</p>
+                      <p className="text-sm" data-testid="text-port-distance">{distanceFromCity}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Recommended Duration */}
+                {recommendedDuration && (
+                  <div className="flex items-start gap-2">
+                    <Clock className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
+                    <div>
+                      <p className="text-sm font-medium text-muted-foreground">{t('recommendedDuration', selectedLanguage)}</p>
+                      <p className="text-sm" data-testid="text-port-duration">{recommendedDuration}</p>
+                    </div>
+                  </div>
+                )}
               </div>
+
+              {/* Right side: Recommended Sites (vertical layout) */}
+              {recommendedLandmarks.length > 0 && (
+                <div className="border-t sm:border-t-0 sm:border-l pt-3 sm:pt-0 sm:pl-4 min-w-[140px]">
+                  <p className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-1">
+                    <Info className="w-4 h-4" />
+                    {t('recommendedSites', selectedLanguage)}
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    {recommendedLandmarks.map(landmark => (
+                      <Button
+                        key={landmark.id}
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleLandmarkClick(landmark.id);
+                        }}
+                        className="text-xs hover-elevate justify-start w-full"
+                        data-testid={`button-recommended-${landmark.id}`}
+                      >
+                        {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-
-            {/* Distance */}
-            {distanceFromCity && (
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">{t('distanceFromCity', selectedLanguage)}</p>
-                  <p className="text-sm" data-testid="text-port-distance">{distanceFromCity}</p>
-                </div>
-              </div>
-            )}
-
-            {/* Recommended Duration */}
-            {recommendedDuration && (
-              <div className="flex items-start gap-2">
-                <Clock className="w-4 h-4 mt-1 text-blue-600 dark:text-blue-400" />
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">{t('recommendedDuration', selectedLanguage)}</p>
-                  <p className="text-sm" data-testid="text-port-duration">{recommendedDuration}</p>
-                </div>
-              </div>
-            )}
-
-            {/* Recommended Sites */}
-            {recommendedLandmarks.length > 0 && (
-              <div>
-                <p className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-1">
-                  <Info className="w-4 h-4" />
-                  {t('recommendedSites', selectedLanguage)}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {recommendedLandmarks.map(landmark => (
-                    <Button
-                      key={landmark.id}
-                      variant="outline"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleLandmarkClick(landmark.id);
-                      }}
-                      className="text-xs hover-elevate"
-                      data-testid={`button-recommended-${landmark.id}`}
-                    >
-                      {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            )}
           </TabsContent>
 
           <TabsContent value="transport" className="mt-3 max-h-[400px] overflow-y-auto pr-2">
