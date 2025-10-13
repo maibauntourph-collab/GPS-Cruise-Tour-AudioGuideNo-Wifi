@@ -82,7 +82,18 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Price',
     overview: 'Overview',
     transport: 'Transport',
-    tipsTab: 'Tips'
+    tipsTab: 'Tips',
+    infoPanel: 'Information',
+    landmark: 'Landmark',
+    cruisePort: 'Cruise Port',
+    list: 'List',
+    bookTicketsTours: 'Book Tickets & Tours',
+    addToTour: 'Add to Tour',
+    inTour: 'In Tour',
+    activity: 'Activity',
+    bookOnGetYourGuide: 'Book on GetYourGuide',
+    bookOnViator: 'Book on Viator',
+    bookNow: 'Book Now'
   },
   ko: {
     landmarks: '명소',
@@ -139,7 +150,18 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '요금',
     overview: '개요',
     transport: '교통편',
-    tipsTab: '팁'
+    tipsTab: '팁',
+    infoPanel: '정보',
+    landmark: '명소',
+    cruisePort: '크루즈 항구',
+    list: '목록',
+    bookTicketsTours: '티켓 & 투어 예약',
+    addToTour: '투어에 추가',
+    inTour: '투어에 포함됨',
+    activity: '액티비티',
+    bookOnGetYourGuide: 'GetYourGuide 예약',
+    bookOnViator: 'Viator 예약',
+    bookNow: '지금 예약'
   },
   es: {
     landmarks: 'Monumentos',
@@ -359,7 +381,18 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Prezzo',
     overview: 'Panoramica',
     transport: 'Trasporto',
-    tipsTab: 'Consigli'
+    tipsTab: 'Consigli',
+    infoPanel: 'Informazioni',
+    landmark: 'Monumento',
+    cruisePort: 'Porto Crociere',
+    list: 'Elenco',
+    bookTicketsTours: 'Prenota Biglietti e Tour',
+    addToTour: 'Aggiungi al Tour',
+    inTour: 'Nel Tour',
+    activity: 'Attività',
+    bookOnGetYourGuide: 'Prenota su GetYourGuide',
+    bookOnViator: 'Prenota su Viator',
+    bookNow: 'Prenota Ora'
   },
   zh: {
     landmarks: '地标',

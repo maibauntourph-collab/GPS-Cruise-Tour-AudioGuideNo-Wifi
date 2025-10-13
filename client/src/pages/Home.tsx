@@ -13,12 +13,10 @@ import {
   AlertDialogTitle 
 } from '@/components/ui/alert-dialog';
 import { MapView } from '@/components/MapView';
-import { LandmarkList } from '@/components/LandmarkList';
-import { LandmarkPanel } from '@/components/LandmarkPanel';
+import { UnifiedFloatingCard } from '@/components/UnifiedFloatingCard';
 import { AppSidebar } from '@/components/AppSidebar';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { InstallPrompt } from '@/components/InstallPrompt';
-import { CruisePortInfo } from '@/components/CruisePortInfo';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
@@ -346,71 +344,53 @@ export default function Home() {
               onTourRouteFound={handleTourRouteFound}
             />
 
-            {/* Show cruise port info and landmark list only when no landmark is selected */}
-            {(!selectedLandmark || keepCruisePortVisible) && (
-              <>
-                {selectedCity && selectedCity.cruisePort && showCruisePort && (
-                  <CruisePortInfo
-                    city={selectedCity}
-                    landmarks={filteredLandmarks}
-                    selectedLanguage={selectedLanguage}
-                    onLandmarkClick={(landmarkId) => {
-                      const landmark = filteredLandmarks.find(l => l.id === landmarkId);
-                      if (landmark) {
-                        // Clear any existing timeout
-                        if (cruisePortTimeoutRef.current) {
-                          clearTimeout(cruisePortTimeoutRef.current);
-                        }
-                        
-                        // Use flushSync to immediately update state before rendering
-                        flushSync(() => {
-                          setKeepCruisePortVisible(true);
-                        });
-                        
-                        // Now set selected landmark
-                        setSelectedLandmark(landmark);
-                        
-                        // Start the 2-second countdown
-                        cruisePortTimeoutRef.current = setTimeout(() => {
-                          setKeepCruisePortVisible(false);
-                          cruisePortTimeoutRef.current = null;
-                        }, 2000);
-                      }
-                    }}
-                    onClose={() => setShowCruisePort(false)}
-                  />
-                )}
-                {!selectedLandmark && (
-                  <LandmarkList
-                    landmarks={filteredLandmarks}
-                    userPosition={position}
-                    onLandmarkRoute={handleLandmarkRoute}
-                    spokenLandmarks={spokenLandmarks}
-                    selectedLanguage={selectedLanguage}
-                    onLandmarkSelect={setSelectedLandmark}
-                  />
-                )}
-              </>
-            )}
-
             <OfflineIndicator />
             <InstallPrompt />
           </div>
         </div>
       </SidebarInset>
 
-      {/* Landmark Details Panel - floating card, rendered outside container */}
-      {selectedLandmark && (
-        <LandmarkPanel
-          landmark={selectedLandmark}
-          onClose={() => setSelectedLandmark(null)}
-          onNavigate={handleLandmarkRoute}
-          selectedLanguage={selectedLanguage}
-          onMapMarkerClick={handleMapMarkerClick}
-          onAddToTour={handleAddToTour}
-          isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
-        />
-      )}
+      {/* Unified Floating Card - combines Landmark Panel, Cruise Port Info, and Landmark List */}
+      <UnifiedFloatingCard
+        selectedLandmark={selectedLandmark}
+        onLandmarkClose={() => setSelectedLandmark(null)}
+        onNavigate={handleLandmarkRoute}
+        onAddToTour={handleAddToTour}
+        isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
+        city={selectedCity || null}
+        showCruisePort={showCruisePort}
+        onCruisePortClose={() => setShowCruisePort(false)}
+        onLandmarkClick={(landmarkId) => {
+          const landmark = filteredLandmarks.find(l => l.id === landmarkId);
+          if (landmark) {
+            // Clear any existing timeout
+            if (cruisePortTimeoutRef.current) {
+              clearTimeout(cruisePortTimeoutRef.current);
+            }
+            
+            // Use flushSync to immediately update state before rendering
+            flushSync(() => {
+              setKeepCruisePortVisible(true);
+            });
+            
+            // Now set selected landmark
+            setSelectedLandmark(landmark);
+            
+            // Start the 2-second countdown
+            cruisePortTimeoutRef.current = setTimeout(() => {
+              setKeepCruisePortVisible(false);
+              cruisePortTimeoutRef.current = null;
+            }, 2000);
+          }
+        }}
+        landmarks={filteredLandmarks}
+        userPosition={position}
+        onLandmarkRoute={handleLandmarkRoute}
+        spokenLandmarks={spokenLandmarks}
+        onLandmarkSelect={setSelectedLandmark}
+        selectedLanguage={selectedLanguage}
+        onMapMarkerClick={handleMapMarkerClick}
+      />
 
       {/* Google Maps Direction Choice Dialog */}
       <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
