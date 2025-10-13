@@ -377,8 +377,44 @@ export function UnifiedFloatingCard({
             </TabsTrigger>
           </TabsList>
 
-          {/* Landmark Details Tab */}
-          <TabsContent value="landmark" className="mt-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+          {/* Tour Tab with filters */}
+          <TabsContent value="landmark" className="mt-4 flex flex-col h-[calc(100vh-200px)]">
+            {/* Filter buttons - Fixed at top */}
+            <div className="flex gap-2 flex-wrap pb-3 flex-shrink-0">
+              <Button
+                variant={showLandmarks ? "default" : "outline"}
+                size="sm"
+                onClick={onToggleLandmarks}
+                className="gap-1"
+                data-testid="button-tour-filter-landmarks"
+              >
+                <LandmarkIcon className="w-4 h-4" />
+                {t('landmarks', selectedLanguage)}
+              </Button>
+              <Button
+                variant={showActivities ? "default" : "outline"}
+                size="sm"
+                onClick={onToggleActivities}
+                className={`gap-1 ${showActivities ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+                data-testid="button-tour-filter-activities"
+              >
+                <Activity className="w-4 h-4" />
+                {t('activities', selectedLanguage)}
+              </Button>
+              <Button
+                variant={showRestaurants ? "default" : "outline"}
+                size="sm"
+                onClick={onToggleRestaurants}
+                className={`gap-1 ${showRestaurants ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+                data-testid="button-tour-filter-restaurants"
+              >
+                <Utensils className="w-4 h-4" />
+                {t('restaurants', selectedLanguage)}
+              </Button>
+            </div>
+
+            {/* Scrollable content */}
+            <div className="flex-1 overflow-y-auto">
             {selectedLandmark && (
               <div className="space-y-4">
                 <div>
@@ -510,31 +546,39 @@ export function UnifiedFloatingCard({
                 )}
               </div>
             )}
+            </div>
           </TabsContent>
 
-          {/* Cruise Port Tab */}
-          <TabsContent value="cruise" className="mt-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+          {/* Cruise Port Tab with sub-tabs */}
+          <TabsContent value="cruise" className="mt-4 max-h-[calc(100vh-200px)] overflow-hidden flex flex-col">
             {city?.cruisePort && (
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-bold text-lg mb-2">
-                    {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'portName')}
-                  </h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-muted-foreground" />
-                      <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'distanceFromCity')}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-muted-foreground" />
-                      <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'recommendedDuration')}</span>
+              <Tabs defaultValue="info" className="w-full flex flex-col flex-1">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="info">{t('cruiseInfo', selectedLanguage)}</TabsTrigger>
+                  <TabsTrigger value="transport">{t('transportation', selectedLanguage)}</TabsTrigger>
+                  <TabsTrigger value="tips">{t('tips', selectedLanguage)}</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="info" className="mt-4 overflow-y-auto flex-1">
+                  <div>
+                    <h4 className="font-bold text-lg mb-2">
+                      {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'portName')}
+                    </h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-muted-foreground" />
+                        <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'distanceFromCity')}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-muted-foreground" />
+                        <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'recommendedDuration')}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </TabsContent>
 
-                {city.cruisePort.transportOptions && city.cruisePort.transportOptions.length > 0 && (
-                  <div>
-                    <h5 className="font-semibold mb-3">{t('transportOptions', selectedLanguage)}</h5>
+                <TabsContent value="transport" className="mt-4 overflow-y-auto flex-1">
+                  {city.cruisePort.transportOptions && city.cruisePort.transportOptions.length > 0 && (
                     <div className="space-y-3">
                       {city.cruisePort.transportOptions.map((transport, idx) => {
                         const Icon = getTransportIcon(transport.type);
@@ -568,21 +612,19 @@ export function UnifiedFloatingCard({
                         );
                       })}
                     </div>
-                  </div>
-                )}
+                  )}
+                </TabsContent>
 
-                {city.cruisePort.tips && (
-                  <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
-                    <h5 className="font-semibold mb-2 flex items-center gap-2">
-                      <Info className="w-4 h-4" />
-                      {t('tips', selectedLanguage)}
-                    </h5>
-                    <p className="text-sm text-muted-foreground">
-                      {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'tips')}
-                    </p>
-                  </div>
-                )}
-              </div>
+                <TabsContent value="tips" className="mt-4 overflow-y-auto flex-1">
+                  {city.cruisePort.tips && (
+                    <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                      <p className="text-sm text-muted-foreground">
+                        {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'tips')}
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+              </Tabs>
             )}
           </TabsContent>
 
