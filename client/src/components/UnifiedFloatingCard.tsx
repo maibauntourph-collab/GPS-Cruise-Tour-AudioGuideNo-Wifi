@@ -357,7 +357,6 @@ export function UnifiedFloatingCard({
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger 
               value="landmark" 
-              disabled={!selectedLandmark}
               data-testid="tab-landmark"
             >
               <MapPin className="w-4 h-4 mr-1" />
@@ -415,7 +414,7 @@ export function UnifiedFloatingCard({
 
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto">
-            {selectedLandmark && (
+            {selectedLandmark ? (
               <div className="space-y-4">
                 <div>
                   <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
@@ -544,6 +543,12 @@ export function UnifiedFloatingCard({
                     </div>
                   </div>
                 )}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center h-full text-center p-6">
+                <p className="text-sm text-muted-foreground">
+                  {t('tourEmptyState', selectedLanguage)}
+                </p>
               </div>
             )}
             </div>

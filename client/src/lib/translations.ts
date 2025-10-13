@@ -97,7 +97,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     activity: 'Activity',
     bookOnGetYourGuide: 'Book on GetYourGuide',
     bookOnViator: 'Book on Viator',
-    bookNow: 'Book Now'
+    bookNow: 'Book Now',
+    tourEmptyState: 'Select a landmark from the map or use the list tab below'
   },
   ko: {
     landmarks: '명소',
@@ -169,7 +170,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     activity: '액티비티',
     bookOnGetYourGuide: 'GetYourGuide 예약',
     bookOnViator: 'Viator 예약',
-    bookNow: '지금 예약'
+    bookNow: '지금 예약',
+    tourEmptyState: '지도에서 랜드마크를 선택하거나 아래 목록 탭을 사용하세요'
   },
   es: {
     landmarks: 'Monumentos',
@@ -226,7 +228,23 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Precio',
     overview: 'Resumen',
     transport: 'Transporte',
-    tipsTab: 'Consejos'
+    tipsTab: 'Consejos',
+    infoPanel: 'Información',
+    landmark: 'Monumento',
+    tour: 'Tour',
+    cruisePort: 'Puerto de Cruceros',
+    cruiseInfo: 'Info del Crucero',
+    transportation: 'Transporte',
+    list: 'Lista',
+    restaurants: 'Restaurantes',
+    bookTicketsTours: 'Reservar Tickets & Tours',
+    addToTour: 'Añadir al Tour',
+    inTour: 'En el Tour',
+    activity: 'Actividad',
+    bookOnGetYourGuide: 'Reservar en GetYourGuide',
+    bookOnViator: 'Reservar en Viator',
+    bookNow: 'Reservar Ahora',
+    tourEmptyState: 'Selecciona un monumento del mapa o usa la pestaña de lista abajo'
   },
   fr: {
     landmarks: 'Monuments',
@@ -283,7 +301,23 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Prix',
     overview: 'Aperçu',
     transport: 'Transport',
-    tipsTab: 'Conseils'
+    tipsTab: 'Conseils',
+    infoPanel: 'Informations',
+    landmark: 'Monument',
+    tour: 'Tour',
+    cruisePort: 'Port de Croisière',
+    cruiseInfo: 'Info Croisière',
+    transportation: 'Transport',
+    list: 'Liste',
+    restaurants: 'Restaurants',
+    bookTicketsTours: 'Réserver Billets & Tours',
+    addToTour: 'Ajouter au Tour',
+    inTour: 'Dans le Tour',
+    activity: 'Activité',
+    bookOnGetYourGuide: 'Réserver sur GetYourGuide',
+    bookOnViator: 'Réserver sur Viator',
+    bookNow: 'Réserver Maintenant',
+    tourEmptyState: 'Sélectionnez un monument sur la carte ou utilisez l\'onglet liste ci-dessous'
   },
   de: {
     landmarks: 'Sehenswürdigkeiten',
@@ -340,7 +374,23 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Preis',
     overview: 'Übersicht',
     transport: 'Transport',
-    tipsTab: 'Tipps'
+    tipsTab: 'Tipps',
+    infoPanel: 'Informationen',
+    landmark: 'Sehenswürdigkeit',
+    tour: 'Tour',
+    cruisePort: 'Kreuzfahrthafen',
+    cruiseInfo: 'Kreuzfahrt-Info',
+    transportation: 'Transport',
+    list: 'Liste',
+    restaurants: 'Restaurants',
+    bookTicketsTours: 'Tickets & Touren Buchen',
+    addToTour: 'Zur Tour Hinzufügen',
+    inTour: 'In der Tour',
+    activity: 'Aktivität',
+    bookOnGetYourGuide: 'Auf GetYourGuide Buchen',
+    bookOnViator: 'Auf Viator Buchen',
+    bookNow: 'Jetzt Buchen',
+    tourEmptyState: 'Wählen Sie eine Sehenswürdigkeit auf der Karte oder verwenden Sie die Liste unten'
   },
   it: {
     landmarks: 'Monumenti',
@@ -404,7 +454,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     activity: 'Attività',
     bookOnGetYourGuide: 'Prenota su GetYourGuide',
     bookOnViator: 'Prenota su Viator',
-    bookNow: 'Prenota Ora'
+    bookNow: 'Prenota Ora',
+    tourEmptyState: 'Seleziona un punto di interesse dalla mappa o usa la scheda elenco qui sotto'
   },
   zh: {
     landmarks: '地标',
@@ -460,7 +511,23 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '价格',
     overview: '概览',
     transport: '交通',
-    tipsTab: '提示'
+    tipsTab: '提示',
+    infoPanel: '信息',
+    landmark: '地标',
+    tour: '旅游',
+    cruisePort: '游轮港口',
+    cruiseInfo: '游轮信息',
+    transportation: '交通',
+    list: '列表',
+    restaurants: '餐厅',
+    bookTicketsTours: '预订门票和旅游',
+    addToTour: '添加到旅游',
+    inTour: '在旅游中',
+    activity: '活动',
+    bookOnGetYourGuide: '在GetYourGuide预订',
+    bookOnViator: '在Viator预订',
+    bookNow: '立即预订',
+    tourEmptyState: '从地图中选择地标或使用下方的列表选项卡'
   },
   ja: {
     landmarks: 'ランドマーク',
@@ -516,7 +583,23 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '料金',
     overview: '概要',
     transport: '交通',
-    tipsTab: 'ヒント'
+    tipsTab: 'ヒント',
+    infoPanel: '情報',
+    landmark: 'ランドマーク',
+    tour: 'ツアー',
+    cruisePort: 'クルーズ港',
+    cruiseInfo: 'クルーズ情報',
+    transportation: '交通',
+    list: 'リスト',
+    restaurants: 'レストラン',
+    bookTicketsTours: 'チケット＆ツアー予約',
+    addToTour: 'ツアーに追加',
+    inTour: 'ツアー中',
+    activity: 'アクティビティ',
+    bookOnGetYourGuide: 'GetYourGuideで予約',
+    bookOnViator: 'Viatorで予約',
+    bookNow: '今すぐ予約',
+    tourEmptyState: '地図からランドマークを選択するか、下のリストタブを使用してください'
   },
   pt: {
     landmarks: 'Monumentos',
@@ -572,7 +655,23 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Preço',
     overview: 'Visão Geral',
     transport: 'Transporte',
-    tipsTab: 'Dicas'
+    tipsTab: 'Dicas',
+    infoPanel: 'Informações',
+    landmark: 'Monumento',
+    tour: 'Tour',
+    cruisePort: 'Porto de Cruzeiros',
+    cruiseInfo: 'Info de Cruzeiro',
+    transportation: 'Transporte',
+    list: 'Lista',
+    restaurants: 'Restaurantes',
+    bookTicketsTours: 'Reservar Ingressos & Tours',
+    addToTour: 'Adicionar ao Tour',
+    inTour: 'No Tour',
+    activity: 'Atividade',
+    bookOnGetYourGuide: 'Reservar no GetYourGuide',
+    bookOnViator: 'Reservar no Viator',
+    bookNow: 'Reservar Agora',
+    tourEmptyState: 'Selecione um monumento no mapa ou use a aba de lista abaixo'
   },
   ru: {
     landmarks: 'Достопримечательности',
@@ -628,7 +727,23 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Цена',
     overview: 'Обзор',
     transport: 'Транспорт',
-    tipsTab: 'Советы'
+    tipsTab: 'Советы',
+    infoPanel: 'Информация',
+    landmark: 'Достопримечательность',
+    tour: 'Тур',
+    cruisePort: 'Круизный Порт',
+    cruiseInfo: 'Информация о Круизе',
+    transportation: 'Транспорт',
+    list: 'Список',
+    restaurants: 'Рестораны',
+    bookTicketsTours: 'Забронировать Билеты и Туры',
+    addToTour: 'Добавить в Тур',
+    inTour: 'В Туре',
+    activity: 'Мероприятие',
+    bookOnGetYourGuide: 'Забронировать на GetYourGuide',
+    bookOnViator: 'Забронировать на Viator',
+    bookNow: 'Забронировать Сейчас',
+    tourEmptyState: 'Выберите достопримечательность на карте или используйте вкладку списка ниже'
   }
 };
 
