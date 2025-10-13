@@ -121,10 +121,11 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
 
   useEffect(() => {
     if (isDragging) {
+      const options = { passive: false };
       window.addEventListener('mousemove', handleMouseMove as EventListener);
       window.addEventListener('mouseup', handleMouseUp);
-      window.addEventListener('touchmove', handleMouseMove as EventListener, { passive: false });
-      window.addEventListener('touchend', handleMouseUp);
+      window.addEventListener('touchmove', handleMouseMove as EventListener, options);
+      window.addEventListener('touchend', handleMouseUp, options);
     }
 
     return () => {
