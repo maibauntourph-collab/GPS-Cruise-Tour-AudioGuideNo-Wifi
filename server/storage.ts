@@ -7439,93 +7439,67 @@ export class MemStorage implements IStorage {
     return LANDMARKS.find(landmark => landmark.id === id);
   }
 
-  // Visited landmarks methods - using database (with fallback for DB errors)
+  // Visited landmarks methods - using database
   async markLandmarkVisited(landmarkId: string, sessionId?: string): Promise<VisitedLandmark> {
-    try {
-      // Use ON CONFLICT DO NOTHING to prevent duplicate visits
-      const [visited] = await db
-        .insert(visitedLandmarks)
-        .values({ landmarkId, sessionId })
-        .onConflictDoNothing()
-        .returning();
-      
-      // If no row returned (duplicate), fetch the existing one
-      if (!visited) {
-        const conditions = sessionId 
-          ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId))
-          : eq(visitedLandmarks.landmarkId, landmarkId);
-        
-        const [existing] = await db
-          .select()
-          .from(visitedLandmarks)
-          .where(conditions!);
-        return existing;
-      }
-      
-      return visited;
-    } catch (error) {
-      console.error('Database error in markLandmarkVisited:', error);
-      // Return a mock visited landmark when DB is unavailable
-      return {
-        id: 'temp-' + Date.now(),
-        landmarkId,
-        visitedAt: new Date(),
-        sessionId: sessionId || null
-      };
-    }
-  }
-
-  async getVisitedLandmarks(sessionId?: string): Promise<VisitedLandmark[]> {
-    try {
-      if (sessionId) {
-        return await db
-          .select()
-          .from(visitedLandmarks)
-          .where(eq(visitedLandmarks.sessionId, sessionId));
-      }
-      return await db.select().from(visitedLandmarks);
-    } catch (error) {
-      console.error('Database error in getVisitedLandmarks:', error);
-      return []; // Return empty array when DB is unavailable
-    }
-  }
-
-  async isLandmarkVisited(landmarkId: string, sessionId?: string): Promise<boolean> {
-    try {
-      const conditions = sessionId
+    // Use ON CONFLICT DO NOTHING to prevent duplicate visits
+    const [visited] = await db
+      .insert(visitedLandmarks)
+      .values({ landmarkId, sessionId })
+      .onConflictDoNothing()
+      .returning();
+    
+    // If no row returned (duplicate), fetch the existing one
+    if (!visited) {
+      const conditions = sessionId 
         ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId))
         : eq(visitedLandmarks.landmarkId, landmarkId);
       
-      const results = await db
+      const [existing] = await db
         .select()
         .from(visitedLandmarks)
         .where(conditions!);
-      
-      return results.length > 0;
-    } catch (error) {
-      console.error('Database error in isLandmarkVisited:', error);
-      return false; // Return false when DB is unavailable
+      return existing;
     }
+    
+    return visited;
+  }
+
+  async getVisitedLandmarks(sessionId?: string): Promise<VisitedLandmark[]> {
+    if (sessionId) {
+      return await db
+        .select()
+        .from(visitedLandmarks)
+        .where(eq(visitedLandmarks.sessionId, sessionId));
+    }
+    return await db.select().from(visitedLandmarks);
+  }
+
+  async isLandmarkVisited(landmarkId: string, sessionId?: string): Promise<boolean> {
+    const conditions = sessionId
+      ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId))
+      : eq(visitedLandmarks.landmarkId, landmarkId);
+    
+    const results = await db
+      .select()
+      .from(visitedLandmarks)
+      .where(conditions!);
+    
+    return results.length > 0;
   }
 
   async getVisitedCount(sessionId?: string): Promise<number> {
-    try {
-      if (sessionId) {
-        const result = await db
-          .select({ count: count() })
-          .from(visitedLandmarks)
-          .where(eq(visitedLandmarks.sessionId, sessionId));
-        return result[0]?.count || 0;
-      }
-      
+    if (sessionId) {
       const result = await db
         .select({ count: count() })
-        .from(visitedLandmarks);
+        .from(visitedLandmarks)
+        .where(eq(visitedLandmarks.sessionId, sessionId));
       return result[0]?.count || 0;
-    } catch (error) {
-      console.error('Database error in getVisitedCount:', error);
-      return 0; // Return 0 when DB is unavailable
     }
+    
+    const result = await db
+      .select({ count: count() })
+      .from(visitedLandmarks);
+    return result[0]?.count || 0;
   }
 }
 

@@ -13,28 +13,6 @@ export function useGeoLocation() {
       return;
     }
 
-    // Try to get initial position first with lower accuracy for faster response
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setPosition({
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude,
-          accuracy: pos.coords.accuracy,
-          timestamp: pos.timestamp,
-        });
-        setError(null);
-        setIsLoading(false);
-      },
-      () => {
-        // Ignore initial error, watchPosition will handle it
-      },
-      {
-        enableHighAccuracy: false,
-        timeout: 30000,
-        maximumAge: 10000,
-      }
-    );
-
     const watchId = navigator.geolocation.watchPosition(
       (pos) => {
         setPosition({
@@ -47,14 +25,13 @@ export function useGeoLocation() {
         setIsLoading(false);
       },
       (err) => {
-        console.error('Geolocation error:', err);
         setError(err.message);
         setIsLoading(false);
       },
       {
-        enableHighAccuracy: false,
-        timeout: 30000,
-        maximumAge: 10000,
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
       }
     );
 

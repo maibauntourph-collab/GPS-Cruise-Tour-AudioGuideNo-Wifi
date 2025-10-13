@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -218,16 +218,14 @@ interface TourRoutingMachineProps {
 function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRoutingMachineProps) {
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
-  const [routeInfo, setRouteInfo] = useState<{ distance: number; duration: number; midpoint: L.LatLng } | null>(null);
 
   useEffect(() => {
-    // Show tour routing even when there's an active navigation route
-    if (!map || tourStops.length < 2) {
+    // Don't show tour routing when there's an active navigation route
+    if (!map || tourStops.length < 2 || activeRoute) {
       if (routingControlRef.current) {
         map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
-      setRouteInfo(null);
       return;
     }
 
@@ -244,7 +242,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
       fitSelectedRoutes: true,
       showAlternatives: false,
       lineOptions: {
-        styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 0.8, weight: 5, dashArray: '12, 8' }],
+        styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 0.7, weight: 4, dashArray: '10, 10' }],
         extendToWaypoints: true,
         missingRouteTolerance: 0
       },
@@ -253,22 +251,8 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
 
     control.on('routesfound', function (e) {
       const routes = e.routes;
-      if (routes && routes[0]) {
-        const route = routes[0];
-        if (onTourRouteFound) {
-          onTourRouteFound(route);
-        }
-        
-        // Calculate midpoint for label placement
-        const coords = route.coordinates;
-        const midIndex = Math.floor(coords.length / 2);
-        const midpoint = coords[midIndex];
-        
-        setRouteInfo({
-          distance: route.summary.totalDistance,
-          duration: route.summary.totalTime,
-          midpoint: midpoint
-        });
+      if (routes && routes[0] && onTourRouteFound) {
+        onTourRouteFound(routes[0]);
       }
     });
 
@@ -280,38 +264,10 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
         map.removeControl(routingControlRef.current);
         routingControlRef.current = null;
       }
-      // Clear route info when cleaning up to prevent marker leak
-      setRouteInfo(null);
     };
   }, [map, tourStops, onTourRouteFound, activeRoute]);
 
-  // Render route info label on the map
-  return routeInfo ? (
-    <Marker
-      position={[routeInfo.midpoint.lat, routeInfo.midpoint.lng]}
-      zIndexOffset={10000}
-      icon={L.divIcon({
-        className: 'tour-route-label',
-        html: `
-          <div style="
-            background: hsl(14, 85%, 55%);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            white-space: nowrap;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            border: 2px solid white;
-          ">
-            ${(routeInfo.distance / 1000).toFixed(1)}km • ${Math.ceil(routeInfo.duration / 60)}min
-          </div>
-        `,
-        iconSize: [120, 40],
-        iconAnchor: [60, 20]
-      })}
-    />
-  ) : null;
+  return null;
 }
 
 export function MapView({

@@ -70,8 +70,3 @@
 .leaflet-popup-close-button:hover {
   color: hsl(var(--foreground)) !important;
 }
-
-/* Tour route label - ensure it's on top layer */
-.tour-route-label {
-  z-index: 10000 !important;
-}

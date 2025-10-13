@@ -50,7 +50,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: 'Offline Mode',
     testAudio: 'Test Audio',
     clearRoute: 'Clear Route',
-    clearTour: 'Clear Tour',
     progress: 'Progress',
     landmarksVisited: 'Landmarks Visited',
     getDirections: 'Get Directions',
@@ -82,16 +81,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Price',
     overview: 'Overview',
     transport: 'Transport',
-    tipsTab: 'Tips',
-    tourRoute: 'Tour Route',
-    stops: 'stops',
-    addToTour: 'Add to Tour',
-    removeFromTour: 'Remove from Tour',
-    addLandmarkToTour: 'Add this landmark to your tour?',
-    tourDescription: 'You can create a custom route by adding multiple landmarks',
-    add: 'Add',
-    cancel: 'Cancel',
-    removeLandmarkFromTour: 'Remove this landmark from your tour?'
+    tipsTab: 'Tips'
   },
   ko: {
     landmarks: '명소',
@@ -116,7 +106,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: '오프라인 모드',
     testAudio: '오디오 테스트',
     clearRoute: '경로 지우기',
-    clearTour: '투어 초기화',
     progress: '진행률',
     landmarksVisited: '방문한 명소',
     getDirections: '길찾기',
@@ -148,16 +137,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '요금',
     overview: '개요',
     transport: '교통편',
-    tipsTab: '팁',
-    tourRoute: '투어 경로',
-    stops: '정류장',
-    addToTour: '투어에 추가',
-    removeFromTour: '투어에서 제거',
-    addLandmarkToTour: '이 명소를 투어에 추가하시겠습니까?',
-    tourDescription: '여러 명소를 추가하여 맞춤 경로를 만들 수 있습니다',
-    add: '추가',
-    cancel: '취소',
-    removeLandmarkFromTour: '이 명소를 투어에서 제거하시겠습니까?'
+    tipsTab: '팁'
   },
   es: {
     landmarks: 'Monumentos',
@@ -182,7 +162,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: 'Modo Sin Conexión',
     testAudio: 'Probar Audio',
     clearRoute: 'Borrar Ruta',
-    clearTour: 'Borrar Tour',
     progress: 'Progreso',
     landmarksVisited: 'Monumentos Visitados',
     getDirections: 'Obtener Direcciones',
@@ -214,16 +193,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Precio',
     overview: 'Resumen',
     transport: 'Transporte',
-    tipsTab: 'Consejos',
-    tourRoute: 'Ruta del Tour',
-    stops: 'paradas',
-    addToTour: 'Añadir al Tour',
-    removeFromTour: 'Eliminar del Tour',
-    addLandmarkToTour: '¿Añadir este lugar a tu tour?',
-    tourDescription: 'Puedes crear una ruta personalizada añadiendo múltiples lugares',
-    add: 'Añadir',
-    cancel: 'Cancelar',
-    removeLandmarkFromTour: '¿Eliminar este lugar de tu tour?'
+    tipsTab: 'Consejos'
   },
   fr: {
     landmarks: 'Monuments',
@@ -248,7 +218,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: 'Mode Hors Ligne',
     testAudio: 'Tester Audio',
     clearRoute: 'Effacer Itinéraire',
-    clearTour: 'Effacer Tour',
     progress: 'Progrès',
     landmarksVisited: 'Monuments Visités',
     getDirections: "Obtenir l'itinéraire",
@@ -280,16 +249,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Prix',
     overview: 'Aperçu',
     transport: 'Transport',
-    tipsTab: 'Conseils',
-    tourRoute: 'Itinéraire du Tour',
-    stops: 'arrêts',
-    addToTour: 'Ajouter au Tour',
-    removeFromTour: 'Retirer du Tour',
-    addLandmarkToTour: 'Ajouter ce lieu à votre tour?',
-    tourDescription: 'Vous pouvez créer un itinéraire personnalisé en ajoutant plusieurs lieux',
-    add: 'Ajouter',
-    cancel: 'Annuler',
-    removeLandmarkFromTour: 'Retirer ce lieu de votre tour?'
+    tipsTab: 'Conseils'
   },
   de: {
     landmarks: 'Sehenswürdigkeiten',
@@ -314,7 +274,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: 'Offline-Modus',
     testAudio: 'Audio Testen',
     clearRoute: 'Route Löschen',
-    clearTour: 'Tour Löschen',
     progress: 'Fortschritt',
     landmarksVisited: 'Besuchte Sehenswürdigkeiten',
     getDirections: 'Wegbeschreibung',
@@ -346,16 +305,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Preis',
     overview: 'Übersicht',
     transport: 'Transport',
-    tipsTab: 'Tipps',
-    tourRoute: 'Tour Route',
-    stops: 'Stopps',
-    addToTour: 'Zur Tour hinzufügen',
-    removeFromTour: 'Von Tour entfernen',
-    addLandmarkToTour: 'Diesen Ort zur Tour hinzufügen?',
-    tourDescription: 'Sie können eine individuelle Route erstellen, indem Sie mehrere Orte hinzufügen',
-    add: 'Hinzufügen',
-    cancel: 'Abbrechen',
-    removeLandmarkFromTour: 'Diesen Ort von der Tour entfernen?'
+    tipsTab: 'Tipps'
   },
   it: {
     landmarks: 'Monumenti',
@@ -379,7 +329,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: 'Modalità Offline',
     testAudio: 'Prova Audio',
     clearRoute: 'Cancella Percorso',
-    clearTour: 'Cancella Tour',
     progress: 'Progresso',
     landmarksVisited: 'Monumenti Visitati',
     getDirections: 'Ottieni Indicazioni',
@@ -404,16 +353,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Prezzo',
     overview: 'Panoramica',
     transport: 'Trasporto',
-    tipsTab: 'Consigli',
-    tourRoute: 'Percorso del Tour',
-    stops: 'fermate',
-    addToTour: 'Aggiungi al Tour',
-    removeFromTour: 'Rimuovi dal Tour',
-    addLandmarkToTour: 'Aggiungere questo luogo al tuo tour?',
-    tourDescription: 'Puoi creare un itinerario personalizzato aggiungendo più luoghi',
-    add: 'Aggiungi',
-    cancel: 'Annulla',
-    removeLandmarkFromTour: 'Rimuovere questo luogo dal tuo tour?'
+    tipsTab: 'Consigli'
   },
   zh: {
     landmarks: '地标',
@@ -438,7 +378,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: '离线模式',
     testAudio: '测试音频',
     clearRoute: '清除路线',
-    clearTour: '清除行程',
     progress: '进度',
     landmarksVisited: '已访问地标',
     getDirections: '获取路线',
@@ -470,16 +409,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '价格',
     overview: '概览',
     transport: '交通',
-    tipsTab: '提示',
-    tourRoute: '旅游路线',
-    stops: '站点',
-    addToTour: '添加到行程',
-    removeFromTour: '从行程中移除',
-    addLandmarkToTour: '将此地点添加到您的行程？',
-    tourDescription: '您可以通过添加多个地点来创建自定义路线',
-    add: '添加',
-    cancel: '取消',
-    removeLandmarkFromTour: '从行程中移除此地点？'
+    tipsTab: '提示'
   },
   ja: {
     landmarks: 'ランドマーク',
@@ -504,7 +434,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: 'オフラインモード',
     testAudio: 'オーディオテスト',
     clearRoute: 'ルートをクリア',
-    clearTour: 'ツアーをクリア',
     progress: '進捗',
     landmarksVisited: '訪問したランドマーク',
     getDirections: '道順を取得',
@@ -536,16 +465,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: '料金',
     overview: '概要',
     transport: '交通',
-    tipsTab: 'ヒント',
-    tourRoute: 'ツアールート',
-    stops: '停留所',
-    addToTour: 'ツアーに追加',
-    removeFromTour: 'ツアーから削除',
-    addLandmarkToTour: 'この場所をツアーに追加しますか？',
-    tourDescription: '複数の場所を追加してカスタムルートを作成できます',
-    add: '追加',
-    cancel: 'キャンセル',
-    removeLandmarkFromTour: 'この場所をツアーから削除しますか？'
+    tipsTab: 'ヒント'
   },
   pt: {
     landmarks: 'Monumentos',
@@ -570,7 +490,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: 'Modo Offline',
     testAudio: 'Testar Áudio',
     clearRoute: 'Limpar Rota',
-    clearTour: 'Limpar Tour',
     progress: 'Progresso',
     landmarksVisited: 'Monumentos Visitados',
     getDirections: 'Obter Direções',
@@ -602,16 +521,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Preço',
     overview: 'Visão Geral',
     transport: 'Transporte',
-    tipsTab: 'Dicas',
-    tourRoute: 'Rota do Tour',
-    stops: 'paradas',
-    addToTour: 'Adicionar ao Tour',
-    removeFromTour: 'Remover do Tour',
-    addLandmarkToTour: 'Adicionar este local ao seu tour?',
-    tourDescription: 'Você pode criar uma rota personalizada adicionando vários locais',
-    add: 'Adicionar',
-    cancel: 'Cancelar',
-    removeLandmarkFromTour: 'Remover este local do seu tour?'
+    tipsTab: 'Dicas'
   },
   ru: {
     landmarks: 'Достопримечательности',
@@ -636,7 +546,6 @@ const uiTranslations: Record<string, Record<string, string>> = {
     offlineMode: 'Офлайн Режим',
     testAudio: 'Тест Аудио',
     clearRoute: 'Очистить Маршрут',
-    clearTour: 'Очистить Тур',
     progress: 'Прогресс',
     landmarksVisited: 'Посещенные Достопримечательности',
     getDirections: 'Получить Маршрут',
@@ -668,16 +577,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     price: 'Цена',
     overview: 'Обзор',
     transport: 'Транспорт',
-    tipsTab: 'Советы',
-    tourRoute: 'Маршрут Тура',
-    stops: 'остановки',
-    addToTour: 'Добавить в тур',
-    removeFromTour: 'Удалить из тура',
-    addLandmarkToTour: 'Добавить это место в ваш тур?',
-    tourDescription: 'Вы можете создать индивидуальный маршрут, добавив несколько мест',
-    add: 'Добавить',
-    cancel: 'Отмена',
-    removeLandmarkFromTour: 'Удалить это место из вашего тура?'
+    tipsTab: 'Советы'
   }
 };
 

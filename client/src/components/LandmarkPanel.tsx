@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark } from '@shared/schema';
-import { MapPin, Calendar, User, X, Play, Pause, Volume2, Ticket, ExternalLink, Minus, MapPinned } from 'lucide-react';
+import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2, Ticket, ExternalLink, Minus, MapPinned } from 'lucide-react';
 import { PhotoGallery } from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
@@ -32,21 +32,12 @@ export function LandmarkPanel({
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [isDragging, setIsDragging] = useState(false);
-  const [translate, setTranslate] = useState(() => {
-    // Position in bottom-right corner initially
-    const cardWidth = 384; // 24rem
-    const cardHeight = 600;
-    return {
-      x: Math.max(0, window.innerWidth - cardWidth - 80),
-      y: Math.max(0, window.innerHeight - cardHeight - 120)
-    };
-  });
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
   const [isMinimized, setIsMinimized] = useState(false);
   const [hasMoved, setHasMoved] = useState(false);
   const [lastCardHeight, setLastCardHeight] = useState(600); // Track card height before minimizing
-  const [lastTranslate, setLastTranslate] = useState({ x: 0, y: 0 }); // Track position before minimizing
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -108,11 +99,10 @@ export function LandmarkPanel({
 
   useEffect(() => {
     if (isDragging) {
-      const options = { passive: false };
       window.addEventListener('mousemove', handleMouseMove as EventListener);
       window.addEventListener('mouseup', handleMouseUp);
-      window.addEventListener('touchmove', handleMouseMove as EventListener, options);
-      window.addEventListener('touchend', handleMouseUp, options);
+      window.addEventListener('touchmove', handleMouseMove as EventListener, { passive: false });
+      window.addEventListener('touchend', handleMouseUp);
     }
 
     return () => {
@@ -205,7 +195,7 @@ export function LandmarkPanel({
       ref={cardRef}
       style={{
         position: 'fixed',
-        right: '16px',
+        left: '16px',
         top: '16px',
         zIndex,
         cursor: isDragging ? 'grabbing' : 'pointer',
@@ -219,8 +209,7 @@ export function LandmarkPanel({
         if (!hasMoved) {
           const fullCardWidth = 384;
           const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 688);
-          // Restore to previous position
-          const clamped = clampTranslate(lastTranslate.x, lastTranslate.y, fullCardWidth, fullCardHeight);
+          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
           setZIndex(3000);
@@ -231,8 +220,7 @@ export function LandmarkPanel({
         if (!hasMoved) {
           const fullCardWidth = 384;
           const fullCardHeight = lastCardHeight || Math.min(window.innerHeight - 32, 688);
-          // Restore to previous position
-          const clamped = clampTranslate(lastTranslate.x, lastTranslate.y, fullCardWidth, fullCardHeight);
+          const clamped = clampTranslate(translate.x, translate.y, fullCardWidth, fullCardHeight);
           setTranslate(clamped);
           setIsMinimized(false);
           setZIndex(3000);
@@ -292,13 +280,10 @@ export function LandmarkPanel({
               size="icon"
               onClick={(e) => {
                 e.stopPropagation();
-                // Save current card height and position before minimizing
+                // Save current card height before minimizing
                 if (cardRef.current) {
                   setLastCardHeight(cardRef.current.offsetHeight);
                 }
-                setLastTranslate(translate);
-                // Reset translate to prevent icon from going off-screen
-                setTranslate({ x: 0, y: 0 });
                 setIsMinimized(true);
               }}
               className="h-7 w-7 shrink-0"
@@ -515,6 +500,33 @@ export function LandmarkPanel({
             </div>
           </div>
 
+          {/* Actions */}
+          <div className="flex gap-2 pt-2">
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNavigate();
+              }}
+              className="flex-1 gap-1 text-xs h-9"
+              data-testid="button-navigate-panel"
+            >
+              <Navigation className="w-3 h-3" />
+              {t('getDirections', selectedLanguage)}
+            </Button>
+            {onAddToTour && (
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAddToTour(landmark);
+                }}
+                variant={isInTour ? "secondary" : "outline"}
+                className="flex-1 gap-1 text-xs h-9"
+                data-testid={`button-tour-panel-${landmark.id}`}
+              >
+                {isInTour ? 'Remove' : 'Add to Tour'}
+              </Button>
+            )}
+          </div>
         </div>
       </Card>
     </div>
