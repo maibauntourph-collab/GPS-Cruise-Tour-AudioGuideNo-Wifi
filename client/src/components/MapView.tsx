@@ -269,7 +269,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
       waypoints: waypoints,
       routeWhileDragging: false,
       addWaypoints: false,
-      fitSelectedRoutes: false,
+      fitSelectedRoutes: true,
       showAlternatives: false,
       lineOptions: {
         styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 0.8, weight: 5, dashArray: '12, 8' }],
