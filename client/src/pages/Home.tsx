@@ -26,7 +26,7 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Activity, X, Ship, Menu } from 'lucide-react';
+import { Landmark as LandmarkIcon, X, Ship, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -65,7 +65,7 @@ export default function Home() {
   const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
   const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
   const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
-  const [showActivities, setShowActivities] = useState(true);
+  const [showLandmarks, setShowLandmarks] = useState(true);
   const [showCruisePort, setShowCruisePort] = useState(true);
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
@@ -256,8 +256,8 @@ export default function Home() {
   // Filter landmarks based on category
   const filteredLandmarks = landmarks.filter(landmark => {
     const isActivity = landmark.category === 'Activity';
-    if (isActivity) return showActivities;
-    return true; // Always show landmarks
+    if (isActivity) return true; // Always show activities
+    return showLandmarks;
   });
 
   if (citiesLoading || landmarksLoading) {
@@ -330,14 +330,14 @@ export default function Home() {
             {showHeaderMenu && (
               <>
                 <Button
-                  variant={showActivities ? "default" : "outline"}
+                  variant={showLandmarks ? "default" : "outline"}
                   size="sm"
-                  onClick={() => setShowActivities(!showActivities)}
-                  data-testid="button-toggle-activities"
+                  onClick={() => setShowLandmarks(!showLandmarks)}
+                  data-testid="button-toggle-landmarks"
                   className="gap-1"
                 >
-                  <Activity className="w-4 h-4" />
-                  <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
+                  <LandmarkIcon className="w-4 h-4" />
+                  <span className="hidden sm:inline">{t('landmarks', selectedLanguage)}</span>
                 </Button>
                 {selectedCity?.cruisePort && (
                   <Button
