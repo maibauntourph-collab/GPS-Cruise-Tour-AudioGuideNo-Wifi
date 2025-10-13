@@ -94,6 +94,8 @@ export function UnifiedFloatingCard({
   const [activeTab, setActiveTab] = useState<string>('landmark');
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [showListLandmarks, setShowListLandmarks] = useState(true);
+  const [showListActivities, setShowListActivities] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -251,6 +253,13 @@ export function UnifiedFloatingCard({
     if (a.distance === null) return 1;
     if (b.distance === null) return -1;
     return a.distance - b.distance;
+  });
+
+  // Filter landmarks in List tab based on category
+  const filteredListLandmarks = sortedLandmarks.filter(({ landmark }) => {
+    const isActivity = landmark.category === 'Activity';
+    if (isActivity) return showListActivities;
+    return showListLandmarks;
   });
 
   // Render minimized icon
@@ -564,9 +573,34 @@ export function UnifiedFloatingCard({
           </TabsContent>
 
           {/* Landmark List Tab */}
-          <TabsContent value="list" className="mt-4 max-h-[calc(100vh-200px)] overflow-y-auto">
-            <div className="space-y-2">
-              {sortedLandmarks.map(({ landmark, distance }) => (
+          <TabsContent value="list" className="mt-4 space-y-3">
+            {/* Filter buttons */}
+            <div className="flex gap-2 flex-wrap">
+              <Button
+                variant={showListLandmarks ? "default" : "outline"}
+                size="sm"
+                onClick={() => setShowListLandmarks(!showListLandmarks)}
+                className="gap-1"
+                data-testid="button-filter-landmarks"
+              >
+                <LandmarkIcon className="w-4 h-4" />
+                {t('landmarks', selectedLanguage)}
+              </Button>
+              <Button
+                variant={showListActivities ? "default" : "outline"}
+                size="sm"
+                onClick={() => setShowListActivities(!showListActivities)}
+                className={`gap-1 ${showListActivities ? 'bg-[hsl(195,85%,50%)] hover:bg-[hsl(195,85%,45%)] border-[hsl(195,85%,50%)]' : ''}`}
+                data-testid="button-filter-activities"
+              >
+                <Activity className="w-4 h-4" />
+                {t('activities', selectedLanguage)}
+              </Button>
+            </div>
+            
+            {/* Scrollable list */}
+            <div className="max-h-[calc(100vh-280px)] overflow-y-auto space-y-2 pr-1">
+              {filteredListLandmarks.map(({ landmark, distance }) => (
                 <div
                   key={landmark.id}
                   className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
