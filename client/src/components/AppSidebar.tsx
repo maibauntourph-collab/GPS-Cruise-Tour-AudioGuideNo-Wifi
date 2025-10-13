@@ -59,7 +59,7 @@ export function AppSidebar({
   onSpeechRateChange
 }: AppSidebarProps) {
   return (
-    <Sidebar collapsible="offcanvas">
+    <Sidebar collapsible="icon">
       <SidebarContent className="p-4 md:p-0">
         <Card className="md:border-0 md:bg-transparent md:shadow-none">
           <div className="p-4 md:p-0">

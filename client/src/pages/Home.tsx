@@ -31,7 +31,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
 export default function Home() {
-  const { open: sidebarOpen } = useSidebar();
+  const { open: sidebarOpen, toggleSidebar } = useSidebar();
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
@@ -313,7 +313,13 @@ export default function Home() {
           }}
         >
           <SidebarTrigger data-testid="button-sidebar-toggle" />
-          <h1 className="font-serif font-semibold text-lg">GPS Audio Guide</h1>
+          <h1 
+            className="font-serif font-semibold text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-1 rounded-md transition-colors" 
+            onClick={toggleSidebar}
+            data-testid="h1-title-toggle-sidebar"
+          >
+            GPS Audio Guide
+          </h1>
           
           <div className="ml-auto flex items-center gap-1">
             <Button
