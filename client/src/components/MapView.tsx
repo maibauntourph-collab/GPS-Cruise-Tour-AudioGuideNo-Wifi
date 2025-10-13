@@ -289,6 +289,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
   return routeInfo ? (
     <Marker
       position={[routeInfo.midpoint.lat, routeInfo.midpoint.lng]}
+      zIndexOffset={10000}
       icon={L.divIcon({
         className: 'tour-route-label',
         html: `
