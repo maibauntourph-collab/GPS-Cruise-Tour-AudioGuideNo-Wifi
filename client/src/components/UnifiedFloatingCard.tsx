@@ -161,6 +161,13 @@ export function UnifiedFloatingCard({
     }
   }, [selectedLandmark]);
 
+  // Auto-switch to list tab when cruise port is closed
+  useEffect(() => {
+    if (!showCruisePort && activeTab === 'cruise') {
+      setActiveTab('list');
+    }
+  }, [showCruisePort]);
+
   // Wrapper handlers for list tab filters with scroll functionality
   const handleListToggleLandmarks = () => {
     const wasOff = !showLandmarks;
