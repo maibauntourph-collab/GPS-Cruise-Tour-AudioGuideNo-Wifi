@@ -349,7 +349,7 @@ export default function Home() {
               size="icon"
               onClick={handleToggleLandmarks}
               data-testid="button-toggle-landmarks"
-              className="h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1"
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : ''}`}
               title={t('landmarks', selectedLanguage)}
             >
               <LandmarkIcon className="w-4 h-4" />

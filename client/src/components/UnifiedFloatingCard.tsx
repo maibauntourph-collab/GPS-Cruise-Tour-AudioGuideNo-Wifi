@@ -520,7 +520,7 @@ export function UnifiedFloatingCard({
                 variant={showLandmarks ? "default" : "outline"}
                 size="sm"
                 onClick={handleListToggleLandmarks}
-                className="gap-1"
+                className={`gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : ''}`}
                 data-testid="button-tour-filter-landmarks"
               >
                 <LandmarkIcon className="w-4 h-4" />
@@ -1050,7 +1050,7 @@ export function UnifiedFloatingCard({
                 variant={showLandmarks ? "default" : "outline"}
                 size="sm"
                 onClick={handleListToggleLandmarks}
-                className="gap-1"
+                className={`gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : ''}`}
                 data-testid="button-filter-landmarks"
               >
                 <LandmarkIcon className="w-4 h-4" />
