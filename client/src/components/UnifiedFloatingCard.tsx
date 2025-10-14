@@ -1017,7 +1017,8 @@ export function UnifiedFloatingCard({
                   {tourStops.map((stop, index) => (
                     <div key={stop.id}>
                       <div
-                        className="p-2 bg-primary/5 rounded-lg flex items-center gap-2"
+                        className="p-2 bg-primary/5 rounded-lg flex items-center gap-2 cursor-pointer hover-elevate"
+                        onClick={() => onLandmarkSelect?.(stop)}
                         data-testid={`tour-stop-${stop.id}`}
                       >
                         <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">
@@ -1033,7 +1034,10 @@ export function UnifiedFloatingCard({
                             variant="ghost"
                             size="icon"
                             className="h-7 w-7"
-                            onClick={() => onLandmarkSelect?.(stop)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onLandmarkSelect?.(stop);
+                            }}
                             data-testid={`button-tour-stop-info-${stop.id}`}
                           >
                             <Info className="w-3 h-3" />
@@ -1042,7 +1046,10 @@ export function UnifiedFloatingCard({
                             variant="ghost"
                             size="icon"
                             className="h-7 w-7"
-                            onClick={() => onRemoveTourStop?.(stop.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onRemoveTourStop?.(stop.id);
+                            }}
                             data-testid={`button-tour-stop-remove-${stop.id}`}
                           >
                             <X className="w-3 h-3" />
