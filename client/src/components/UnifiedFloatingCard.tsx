@@ -132,7 +132,7 @@ export function UnifiedFloatingCard({
   const [tourPage, setTourPage] = useState(1);
   const itemsPerPage = 5;
   const transportItemsPerPage = 3;
-  const tourItemsPerPage = 3;
+  const tourItemsPerPage = 4;
   const cardRef = useRef<HTMLDivElement>(null);
   const listScrollRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
