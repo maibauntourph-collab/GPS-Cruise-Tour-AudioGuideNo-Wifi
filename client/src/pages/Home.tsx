@@ -24,7 +24,7 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
@@ -65,6 +65,7 @@ export default function Home() {
   const [showLandmarks, setShowLandmarks] = useState(true);
   const [showActivities, setShowActivities] = useState(true);
   const [showRestaurants, setShowRestaurants] = useState(true);
+  const [showGiftShops, setShowGiftShops] = useState(true);
   const [showCruisePort, setShowCruisePort] = useState(true);
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
@@ -281,8 +282,10 @@ export default function Home() {
   const filteredLandmarks = landmarks.filter(landmark => {
     const isActivity = landmark.category === 'Activity';
     const isRestaurant = landmark.category === 'Restaurant';
+    const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
     if (isActivity) return showActivities;
     if (isRestaurant) return showRestaurants;
+    if (isGiftShop) return showGiftShops;
     return showLandmarks;
   });
 
@@ -368,6 +371,17 @@ export default function Home() {
             >
               <Utensils className="w-4 h-4" />
               <span className="hidden sm:inline">{t('restaurants', selectedLanguage)}</span>
+            </Button>
+            <Button
+              variant={showGiftShops ? "default" : "outline"}
+              size="icon"
+              onClick={() => setShowGiftShops(!showGiftShops)}
+              data-testid="button-toggle-giftshops"
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showGiftShops ? '!bg-[hsl(280,65%,55%)] hover:!bg-[hsl(280,65%,50%)] !border-[hsl(280,65%,55%)] text-white' : ''}`}
+              title={t('giftShops', selectedLanguage)}
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span className="hidden sm:inline">{t('giftShops', selectedLanguage)}</span>
             </Button>
             {selectedCity?.cruisePort && (
               <Button

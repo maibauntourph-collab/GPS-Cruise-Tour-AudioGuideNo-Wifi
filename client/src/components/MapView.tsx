@@ -84,12 +84,22 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
     if (!control || !map) return;
     
     try {
-      // Check if map is still valid and loaded
-      if ((map as any)._loaded) {
-        map.removeControl(control);
+      // Clear waypoints first to prevent routing errors
+      try {
+        control.setWaypoints([]);
+      } catch (e) {
+        console.debug('Waypoint clearing handled:', e);
+      }
+      
+      // Remove the control from the map
+      try {
+        if ((map as any)._loaded && (control as any)._map) {
+          map.removeControl(control);
+        }
+      } catch (e) {
+        console.debug('Control removal handled:', e);
       }
     } catch (e) {
-      // Silently handle removal errors
       console.debug('Routing control removal handled:', e);
     }
   }, [map]);
@@ -241,12 +251,22 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
     if (!control || !map) return;
     
     try {
-      // Check if map is still valid and loaded
-      if ((map as any)._loaded) {
-        map.removeControl(control);
+      // Clear waypoints first to prevent routing errors
+      try {
+        control.setWaypoints([]);
+      } catch (e) {
+        console.debug('Waypoint clearing handled:', e);
+      }
+      
+      // Remove the control from the map
+      try {
+        if ((map as any)._loaded && (control as any)._map) {
+          map.removeControl(control);
+        }
+      } catch (e) {
+        console.debug('Control removal handled:', e);
       }
     } catch (e) {
-      // Silently handle removal errors
       console.debug('Tour routing control removal handled:', e);
     }
   }, [map]);
