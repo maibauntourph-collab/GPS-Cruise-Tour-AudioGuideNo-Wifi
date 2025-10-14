@@ -121,7 +121,6 @@ export function UnifiedFloatingCard({
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [isCentered, setIsCentered] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('list');
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
@@ -301,12 +300,6 @@ export function UnifiedFloatingCard({
     };
   }, []);
 
-  useEffect(() => {
-    if (!isCentered) {
-      setTranslate({ x: 0, y: 0 });
-      setIsCentered(true);
-    }
-  }, [isCentered]);
 
   const handleStart = useCallback((e: ReactMouseEvent | ReactTouchEvent) => {
     if ((e.target as HTMLElement).closest('button, a, input, textarea, select, [role="button"]')) {
@@ -1097,16 +1090,42 @@ export function UnifiedFloatingCard({
             {/* Tour Route Section - Scrollable */}
             {tourStops.length > 0 && (
               <div className="pb-3 mb-3 border-b flex-shrink-0">
-                <div className="mb-2">
-                  <h5 className="font-semibold flex items-center gap-2">
+                <div className="mb-3">
+                  <h5 className="font-semibold flex items-center gap-2 mb-2">
                     <MapPinned className="w-4 h-4 text-primary" />
                     {t('tourRoute', selectedLanguage)} ({tourStops.length})
-                    {tourRouteInfo && (
-                      <span className="text-xs font-normal text-muted-foreground">
-                        [{tourRouteInfo.distance.toFixed(1)}km • {Math.round(tourRouteInfo.duration)}min]
-                      </span>
-                    )}
                   </h5>
+                  {tourRouteInfo && (
+                    <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs text-muted-foreground">이동</span>
+                            <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
+                              {tourRouteInfo.distance.toFixed(1)}km
+                            </span>
+                          </div>
+                          <div className="w-px h-4 bg-border"></div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs text-muted-foreground">소요</span>
+                            <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
+                              {Math.round(tourRouteInfo.duration)}min
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1.5 bg-[hsl(14,85%,55%)] text-white px-2.5 py-1 rounded-md">
+                          <Clock className="w-3.5 h-3.5" />
+                          <span className="text-xs font-medium">전체</span>
+                          <span className="text-sm font-bold">
+                            {Math.round(tourRouteInfo.duration + (tourStops.length * 30))}min
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mt-1.5 text-xs text-muted-foreground">
+                        * 각 장소 약 30분 체류 포함
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="space-y-2">
                   {(() => {
@@ -1174,11 +1193,17 @@ export function UnifiedFloatingCard({
                                 </div>
                               </div>
                               {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
-                                <div className="flex items-center gap-1.5 pl-9 py-1 text-xs text-muted-foreground">
-                                  <span>→</span>
-                                  <span>{(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km</span>
-                                  <span>•</span>
-                                  <span>{Math.ceil(tourRouteInfo.segments[index].duration / 60)}min</span>
+                                <div className="flex items-center gap-2 pl-9 py-1.5">
+                                  <div className="flex items-center gap-1.5 text-xs bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/20 rounded-md px-2 py-0.5">
+                                    <span className="text-[hsl(14,85%,55%)] font-bold text-sm">↓</span>
+                                    <span className="font-medium text-[hsl(14,85%,55%)]">
+                                      {(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km
+                                    </span>
+                                    <span className="text-muted-foreground">•</span>
+                                    <span className="font-medium text-[hsl(14,85%,55%)]">
+                                      {Math.ceil(tourRouteInfo.segments[index].duration / 60)}min
+                                    </span>
+                                  </div>
                                 </div>
                               )}
                             </div>
