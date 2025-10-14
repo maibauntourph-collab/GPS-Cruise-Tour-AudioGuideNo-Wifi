@@ -125,6 +125,20 @@ export function UnifiedFloatingCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const listScrollRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isMobile, setIsMobile] = useState(() => 
+    typeof window !== 'undefined' && window.innerWidth < 640
+  );
+
+  // Check mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Wrapper handlers for list tab filters with scroll functionality
   const handleListToggleLandmarks = () => {
@@ -400,9 +414,9 @@ export function UnifiedFloatingCard({
         top: '50%',
         zIndex,
         cursor: isDragging ? 'grabbing' : 'grab',
-        width: '28rem',
-        maxWidth: 'calc(100vw - 32px)',
-        maxHeight: 'calc(100vh - 32px)',
+        width: isMobile ? 'calc(100vw - 16px)' : '28rem',
+        maxWidth: 'calc(100vw - 16px)',
+        maxHeight: isMobile ? 'calc(100vh - 80px)' : 'calc(100vh - 32px)',
         userSelect: 'none',
         transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`,
         display: 'flex',
@@ -413,7 +427,7 @@ export function UnifiedFloatingCard({
       onClick={handleCardClick}
       data-testid="card-unified-floating-container"
     >
-      <Card className="p-4 flex flex-col flex-1 min-h-0" data-testid="card-unified-floating">
+      <Card className="p-3 sm:p-4 flex flex-col flex-1 min-h-0" data-testid="card-unified-floating">
         <div className="flex items-center gap-2 mb-3 flex-shrink-0">
           <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
             {t('infoPanel', selectedLanguage)}

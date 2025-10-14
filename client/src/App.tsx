@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -17,15 +18,29 @@ function Router() {
 }
 
 function App() {
+  const [isMobile, setIsMobile] = useState(() => 
+    typeof window !== 'undefined' && window.innerWidth < 640
+  );
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const style = {
-    "--sidebar-width": "20rem",
+    "--sidebar-width": isMobile ? "85vw" : "20rem",
     "--sidebar-width-icon": "3rem",
   };
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <SidebarProvider style={style as React.CSSProperties}>
+        <SidebarProvider style={style as React.CSSProperties} defaultOpen={!isMobile}>
           <div className="flex h-screen w-full">
             <Router />
           </div>

@@ -325,7 +325,7 @@ export default function Home() {
       
       <SidebarInset className="flex w-full flex-1 flex-col">
         <header className="flex items-center gap-1 sm:gap-2 p-2 border-b bg-background z-[1001]">
-          <SidebarTrigger data-testid="button-sidebar-toggle" />
+          <SidebarTrigger data-testid="button-sidebar-toggle" className="h-9 w-9" />
           <h1 
             className="font-serif font-semibold text-base sm:text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-1 rounded-md transition-colors truncate" 
             onClick={toggleSidebar}

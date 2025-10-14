@@ -70,12 +70,12 @@ export function AppSidebar({
 }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="p-4 md:p-0">
+      <SidebarContent className="p-3 sm:p-4 md:p-0">
         <Card className="md:border-0 md:bg-transparent md:shadow-none">
-          <div className="p-4 md:p-0">
+          <div className="p-3 sm:p-4 md:p-0">
             <SidebarGroup>
-              <SidebarGroupLabel>GPS Audio Guide</SidebarGroupLabel>
-              <SidebarGroupContent className="space-y-4 px-2">
+              <SidebarGroupLabel className="text-sm sm:text-base">GPS Audio Guide</SidebarGroupLabel>
+              <SidebarGroupContent className="space-y-3 sm:space-y-4 px-2">
                 <div className="space-y-3">
                   <div>
                     <Label className="text-xs text-muted-foreground mb-2 block">{t('city', selectedLanguage)}</Label>
