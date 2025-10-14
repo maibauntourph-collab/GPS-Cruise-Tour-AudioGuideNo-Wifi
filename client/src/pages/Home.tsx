@@ -76,7 +76,11 @@ export default function Home() {
   const [showCruisePort, setShowCruisePort] = useState(true);
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
-  const [tourRouteInfo, setTourRouteInfo] = useState<{ distance: number; duration: number } | null>(null);
+  const [tourRouteInfo, setTourRouteInfo] = useState<{ 
+    distance: number; 
+    duration: number;
+    segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
+  } | null>(null);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -235,9 +239,25 @@ export default function Home() {
 
   const handleTourRouteFound = (route: any) => {
     if (route && route.summary) {
+      const segments: Array<{ from: string; to: string; distance: number; duration: number }> = [];
+      
+      // Use route.legs for accurate per-segment distance and duration
+      if (route.legs && route.legs.length > 0 && tourStops.length >= 2) {
+        for (let i = 0; i < route.legs.length && i < tourStops.length - 1; i++) {
+          const leg = route.legs[i];
+          segments.push({
+            from: getTranslatedContent(tourStops[i], selectedLanguage, 'name'),
+            to: getTranslatedContent(tourStops[i + 1], selectedLanguage, 'name'),
+            distance: leg.summary?.totalDistance || leg.distance || 0,
+            duration: leg.summary?.totalTime || leg.duration || 0
+          });
+        }
+      }
+      
       setTourRouteInfo({
         distance: route.summary.totalDistance,
-        duration: route.summary.totalTime
+        duration: route.summary.totalTime,
+        segments
       });
     }
   };

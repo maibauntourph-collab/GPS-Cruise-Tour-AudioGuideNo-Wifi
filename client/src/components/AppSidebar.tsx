@@ -40,7 +40,11 @@ interface AppSidebarProps {
   speechRate: number;
   onSpeechRateChange: (rate: number) => void;
   tourStops: Landmark[];
-  tourRouteInfo: { distance: number; duration: number } | null;
+  tourRouteInfo: { 
+    distance: number; 
+    duration: number;
+    segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
+  } | null;
   onRemoveTourStop: (landmarkId: string) => void;
   onClearTour: () => void;
 }
@@ -216,26 +220,33 @@ export function AppSidebar({
                   )}
                   <div className="space-y-1">
                     {tourStops.map((landmark, index) => (
-                      <div
-                        key={landmark.id}
-                        className="flex items-center justify-between p-2 rounded-md bg-muted/50 group hover-elevate"
-                      >
-                        <div className="flex items-center gap-2 flex-1 min-w-0">
-                          <span className="text-xs font-medium text-muted-foreground">{index + 1}</span>
-                          <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)' }} />
-                          <span className="text-sm truncate">
-                            {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                          </span>
+                      <div key={landmark.id}>
+                        <div className="flex items-center justify-between p-2 rounded-md bg-muted/50 group hover-elevate">
+                          <div className="flex items-center gap-2 flex-1 min-w-0">
+                            <span className="text-xs font-medium text-muted-foreground">{index + 1}</span>
+                            <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)' }} />
+                            <span className="text-sm truncate">
+                              {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                            </span>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => onRemoveTourStop(landmark.id)}
+                            className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                            data-testid={`button-remove-tour-${landmark.id}`}
+                          >
+                            <X className="w-3 h-3" />
+                          </Button>
                         </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => onRemoveTourStop(landmark.id)}
-                          className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                          data-testid={`button-remove-tour-${landmark.id}`}
-                        >
-                          <X className="w-3 h-3" />
-                        </Button>
+                        {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
+                          <div className="flex items-center gap-1.5 pl-8 py-1 text-xs text-muted-foreground">
+                            <span>→</span>
+                            <span>{(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km</span>
+                            <span>•</span>
+                            <span>{Math.ceil(tourRouteInfo.segments[index].duration / 60)}min</span>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

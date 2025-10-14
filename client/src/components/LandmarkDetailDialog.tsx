@@ -226,6 +226,58 @@ export function LandmarkDetailDialog({
                       <ExternalLink className="w-3.5 h-3.5" />
                       {t('bookOnViator', selectedLanguage)}
                     </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-start gap-2 text-xs h-8"
+                      onClick={() => {
+                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                        window.open(`https://www.klook.com/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                      }}
+                      data-testid="button-book-klook-dialog"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      {t('bookOnKlook', selectedLanguage)}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-start gap-2 text-xs h-8"
+                      onClick={() => {
+                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                        window.open(`https://www.kkday.com/en/search/activity?keyword=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                      }}
+                      data-testid="button-book-kkday-dialog"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      {t('bookOnKKday', selectedLanguage)}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-start gap-2 text-xs h-8"
+                      onClick={() => {
+                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                        window.open(`https://www.myrealtrip.com/search?keyword=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                      }}
+                      data-testid="button-book-myrealtrip-dialog"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      {t('bookOnMyRealTrip', selectedLanguage)}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-start gap-2 text-xs h-8"
+                      onClick={() => {
+                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                        window.open(`https://us.trip.com/things-to-do/search?keyword=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                      }}
+                      data-testid="button-book-tripcom-dialog"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      {t('bookOnTripCom', selectedLanguage)}
+                    </Button>
                   </div>
                 </div>
               ) : landmark.category === 'Restaurant' ? (

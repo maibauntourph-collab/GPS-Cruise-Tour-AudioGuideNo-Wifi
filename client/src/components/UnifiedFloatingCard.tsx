@@ -46,7 +46,11 @@ interface UnifiedFloatingCardProps {
   
   // Tour Route props
   tourStops?: Landmark[];
-  tourRouteInfo?: { distance: number; duration: number } | null;
+  tourRouteInfo?: { 
+    distance: number; 
+    duration: number;
+    segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
+  } | null;
   onRemoveTourStop?: (landmarkId: string) => void;
   
   // Common props
@@ -1005,39 +1009,48 @@ export function UnifiedFloatingCard({
                 </div>
                 <div className="space-y-2">
                   {tourStops.map((stop, index) => (
-                    <div
-                      key={stop.id}
-                      className="p-2 bg-primary/5 rounded-lg flex items-center gap-2"
-                      data-testid={`tour-stop-${stop.id}`}
-                    >
-                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                        {index + 1}
+                    <div key={stop.id}>
+                      <div
+                        className="p-2 bg-primary/5 rounded-lg flex items-center gap-2"
+                        data-testid={`tour-stop-${stop.id}`}
+                      >
+                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                          {index + 1}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium truncate">
+                            {getTranslatedContent(stop, selectedLanguage, 'name')}
+                          </p>
+                        </div>
+                        <div className="flex gap-1">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => onLandmarkSelect?.(stop)}
+                            data-testid={`button-tour-stop-info-${stop.id}`}
+                          >
+                            <Info className="w-3 h-3" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => onRemoveTourStop?.(stop.id)}
+                            data-testid={`button-tour-stop-remove-${stop.id}`}
+                          >
+                            <X className="w-3 h-3" />
+                          </Button>
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">
-                          {getTranslatedContent(stop, selectedLanguage, 'name')}
-                        </p>
-                      </div>
-                      <div className="flex gap-1">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-7 w-7"
-                          onClick={() => onLandmarkSelect?.(stop)}
-                          data-testid={`button-tour-stop-info-${stop.id}`}
-                        >
-                          <Info className="w-3 h-3" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-7 w-7"
-                          onClick={() => onRemoveTourStop?.(stop.id)}
-                          data-testid={`button-tour-stop-remove-${stop.id}`}
-                        >
-                          <X className="w-3 h-3" />
-                        </Button>
-                      </div>
+                      {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
+                        <div className="flex items-center gap-1.5 pl-9 py-1 text-xs text-muted-foreground">
+                          <span>→</span>
+                          <span>{(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km</span>
+                          <span>•</span>
+                          <span>{Math.ceil(tourRouteInfo.segments[index].duration / 60)}분</span>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
