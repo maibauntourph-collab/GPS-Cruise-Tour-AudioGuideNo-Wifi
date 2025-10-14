@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -132,7 +132,7 @@ export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkCl
     };
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
-  const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleStart = (e: ReactMouseEvent | ReactTouchEvent) => {
     if ((e.target as HTMLElement).closest('button')) {
       return;
     }

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent, ReactNode } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -280,7 +280,7 @@ export function UnifiedFloatingCard({
     }
   }, [isCentered]);
 
-  const handleStart = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+  const handleStart = useCallback((e: ReactMouseEvent | ReactTouchEvent) => {
     if ((e.target as HTMLElement).closest('button, a, input, textarea, select, [role="button"]')) {
       return;
     }
@@ -345,7 +345,7 @@ export function UnifiedFloatingCard({
     }
   }, [isDragging, handleMouseMove, handleEnd]);
 
-  const handleCardClick = (e: React.MouseEvent) => {
+  const handleCardClick = (e: ReactMouseEvent) => {
     if (zIndexTimeoutRef.current) {
       clearTimeout(zIndexTimeoutRef.current);
     }
@@ -796,7 +796,7 @@ export function UnifiedFloatingCard({
                   return acc;
                 }, {} as Record<string, typeof filteredListLandmarks>);
 
-                const renderSection = (category: string, items: typeof filteredListLandmarks, title: string, icon: React.ReactNode) => {
+                const renderSection = (category: string, items: typeof filteredListLandmarks, title: string, icon: ReactNode) => {
                   if (items.length === 0) return null;
                   return (
                     <div key={category} className="space-y-2">

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, ReactNode, TouchEvent } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MapPin, List, Settings } from 'lucide-react';
 
@@ -9,9 +9,9 @@ interface BottomSheetProps {
     details: string;
     settings: string;
   };
-  listContent: React.ReactNode;
-  detailsContent: React.ReactNode;
-  settingsContent: React.ReactNode;
+  listContent: ReactNode;
+  detailsContent: ReactNode;
+  settingsContent: ReactNode;
 }
 
 const SNAP_POINTS = {
@@ -27,20 +27,20 @@ export function BottomSheet({
   detailsContent,
   settingsContent
 }: BottomSheetProps) {
-  const [activeTab, setActiveTab] = React.useState(defaultTab);
-  const [height, setHeight] = React.useState(SNAP_POINTS.min);
-  const [isDragging, setIsDragging] = React.useState(false);
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const startY = React.useRef(0);
-  const startHeight = React.useRef(0);
+  const [activeTab, setActiveTab] = useState(defaultTab);
+  const [height, setHeight] = useState(SNAP_POINTS.min);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const startY = useRef(0);
+  const startHeight = useRef(0);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e: TouchEvent) => {
     setIsDragging(true);
     startY.current = e.touches[0].clientY;
     startHeight.current = height;
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: TouchEvent) => {
     if (!isDragging) return;
     
     const currentY = e.touches[0].clientY;

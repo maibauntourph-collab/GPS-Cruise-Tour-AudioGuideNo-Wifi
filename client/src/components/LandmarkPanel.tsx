@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -115,7 +115,7 @@ export function LandmarkPanel({
     };
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
-  const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleStart = (e: ReactMouseEvent | ReactTouchEvent) => {
     const target = e.target as HTMLElement;
     
     if (target.closest('button') || 

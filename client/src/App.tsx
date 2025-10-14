@@ -40,7 +40,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <SidebarProvider style={style as React.CSSProperties} defaultOpen={!isMobile}>
+        <SidebarProvider style={style as any} defaultOpen={!isMobile}>
           <div className="flex h-screen w-full">
             <Router />
           </div>
