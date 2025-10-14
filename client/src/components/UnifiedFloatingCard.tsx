@@ -129,8 +129,10 @@ export function UnifiedFloatingCard({
   const [tourAddedInDialog, setTourAddedInDialog] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [transportPage, setTransportPage] = useState(1);
+  const [tourPage, setTourPage] = useState(1);
   const itemsPerPage = 5;
   const transportItemsPerPage = 3;
+  const tourItemsPerPage = 3;
   const cardRef = useRef<HTMLDivElement>(null);
   const listScrollRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -1013,59 +1015,106 @@ export function UnifiedFloatingCard({
                     </Badge>
                   )}
                 </div>
-                <div className="space-y-2 max-h-[200px] overflow-y-auto pr-1">
-                  {tourStops.map((stop, index) => (
-                    <div key={stop.id}>
-                      <div
-                        className="p-2 bg-primary/5 rounded-lg flex items-center gap-2 cursor-pointer hover-elevate"
-                        onClick={() => onLandmarkSelect?.(stop)}
-                        data-testid={`tour-stop-${stop.id}`}
-                      >
-                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                          {index + 1}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium truncate">
-                            {getTranslatedContent(stop, selectedLanguage, 'name')}
-                          </p>
-                        </div>
-                        <div className="flex gap-1">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onLandmarkSelect?.(stop);
-                            }}
-                            data-testid={`button-tour-stop-info-${stop.id}`}
-                          >
-                            <Info className="w-3 h-3" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onRemoveTourStop?.(stop.id);
-                            }}
-                            data-testid={`button-tour-stop-remove-${stop.id}`}
-                          >
-                            <X className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      </div>
-                      {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
-                        <div className="flex items-center gap-1.5 pl-9 py-1 text-xs text-muted-foreground">
-                          <span>→</span>
-                          <span>{(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km</span>
-                          <span>•</span>
-                          <span>{Math.ceil(tourRouteInfo.segments[index].duration / 60)}분</span>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                <div className="space-y-2">
+                  {(() => {
+                    const totalPages = Math.ceil(tourStops.length / tourItemsPerPage);
+                    const startIndex = (tourPage - 1) * tourItemsPerPage;
+                    const endIndex = startIndex + tourItemsPerPage;
+                    const currentTourStops = tourStops.slice(startIndex, endIndex);
+                    
+                    return (
+                      <>
+                        {currentTourStops.map((stop, idx) => {
+                          const index = startIndex + idx;
+                          return (
+                            <div key={stop.id}>
+                              <div
+                                className="p-2 bg-primary/5 rounded-lg flex items-center gap-2 cursor-pointer hover-elevate"
+                                onClick={() => onLandmarkSelect?.(stop)}
+                                data-testid={`tour-stop-${stop.id}`}
+                              >
+                                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                                  {index + 1}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium truncate">
+                                    {getTranslatedContent(stop, selectedLanguage, 'name')}
+                                  </p>
+                                </div>
+                                <div className="flex gap-1">
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-7 w-7"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onLandmarkSelect?.(stop);
+                                    }}
+                                    data-testid={`button-tour-stop-info-${stop.id}`}
+                                  >
+                                    <Info className="w-3 h-3" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-7 w-7"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onRemoveTourStop?.(stop.id);
+                                    }}
+                                    data-testid={`button-tour-stop-remove-${stop.id}`}
+                                  >
+                                    <X className="w-3 h-3" />
+                                  </Button>
+                                </div>
+                              </div>
+                              {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
+                                <div className="flex items-center gap-1.5 pl-9 py-1 text-xs text-muted-foreground">
+                                  <span>→</span>
+                                  <span>{(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km</span>
+                                  <span>•</span>
+                                  <span>{Math.ceil(tourRouteInfo.segments[index].duration / 60)}분</span>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                        
+                        {/* Tour Pagination */}
+                        {tourStops.length > tourItemsPerPage && (
+                          <div className="flex items-center justify-between pt-2 border-t">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => setTourPage(prev => Math.max(1, prev - 1))}
+                              disabled={tourPage === 1}
+                              className="gap-1 h-7 text-xs"
+                              data-testid="button-tour-prev-page"
+                            >
+                              <ChevronLeft className="w-3 h-3" />
+                              Prev
+                            </Button>
+                            
+                            <span className="text-xs text-muted-foreground" data-testid="text-tour-page-info">
+                              {tourPage} / {totalPages}
+                            </span>
+
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => setTourPage(prev => Math.min(totalPages, prev + 1))}
+                              disabled={tourPage === totalPages}
+                              className="gap-1 h-7 text-xs"
+                              data-testid="button-tour-next-page"
+                            >
+                              Next
+                              <ChevronRight className="w-3 h-3" />
+                            </Button>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
             )}
