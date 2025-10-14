@@ -12,10 +12,13 @@ class AudioService {
     this.spokenLandmarks = new Set();
     this.isEnabled = true;
     
-    // Load saved rate from localStorage
+    // Load saved rate from localStorage, default to 1.0
     const savedRate = localStorage.getItem('tts-speed');
     if (savedRate) {
       this.currentRate = parseFloat(savedRate);
+    } else {
+      this.currentRate = 1.0;
+      localStorage.setItem('tts-speed', '1.0');
     }
 
     // Load voices when available
