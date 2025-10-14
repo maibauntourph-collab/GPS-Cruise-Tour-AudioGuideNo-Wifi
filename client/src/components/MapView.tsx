@@ -193,6 +193,7 @@ interface MapViewProps {
   tourStops?: Landmark[];
   onAddToTour?: (landmark: Landmark) => void;
   onTourRouteFound?: (route: any) => void;
+  onTourRouteClick?: () => void;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -241,9 +242,10 @@ interface TourRoutingMachineProps {
   tourStops: Landmark[];
   onTourRouteFound?: (route: any) => void;
   activeRoute: { start: [number, number]; end: [number, number] } | null;
+  onTourRouteClick?: () => void;
 }
 
-function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRoutingMachineProps) {
+function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick }: TourRoutingMachineProps) {
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
 
@@ -306,8 +308,17 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
 
     control.on('routesfound', function (e) {
       const routes = e.routes;
-      if (routes && routes[0] && onTourRouteFound) {
-        onTourRouteFound(routes[0]);
+      if (routes && routes[0]) {
+        if (onTourRouteFound) {
+          onTourRouteFound(routes[0]);
+        }
+        
+        // Add click event to the route line
+        if (onTourRouteClick && (control as any)._line) {
+          (control as any)._line.on('click', () => {
+            onTourRouteClick();
+          });
+        }
       }
     });
 
@@ -344,6 +355,7 @@ export function MapView({
   tourStops = [],
   onAddToTour,
   onTourRouteFound,
+  onTourRouteClick,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
@@ -410,6 +422,7 @@ export function MapView({
         tourStops={tourStops}
         onTourRouteFound={onTourRouteFound}
         activeRoute={activeRoute}
+        onTourRouteClick={onTourRouteClick}
       />
     </MapContainer>
   );

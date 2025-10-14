@@ -262,6 +262,13 @@ export default function Home() {
     }
   };
 
+  const handleTourRouteClick = () => {
+    // Show tour info by selecting the first tour stop
+    if (tourStops.length > 0) {
+      setSelectedLandmark(tourStops[0]);
+    }
+  };
+
   // Handler for toggle with scroll to first item
   const handleToggleLandmarks = () => {
     const newState = !showLandmarks;
@@ -460,6 +467,7 @@ export default function Home() {
               tourStops={tourStops}
               onAddToTour={handleAddToTour}
               onTourRouteFound={handleTourRouteFound}
+              onTourRouteClick={handleTourRouteClick}
             />
 
             <OfflineIndicator />
