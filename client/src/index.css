@@ -382,3 +382,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Leaflet tooltip smooth transitions - prevent blinking */
+.leaflet-tooltip {
+  transition: opacity 0.2s ease-in-out !important;
+  pointer-events: none !important;
+}
+
+.leaflet-tooltip-stable {
+  animation: tooltipFadeIn 0.2s ease-in-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+}

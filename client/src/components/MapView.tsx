@@ -402,10 +402,11 @@ export function MapView({
           >
             <Tooltip 
               direction="top" 
-              offset={[0, -35]} 
+              offset={[0, -40]} 
               opacity={0.95}
               permanent={false}
-              sticky={true}
+              sticky={false}
+              className="leaflet-tooltip-stable"
             >
               <div className="text-sm font-medium whitespace-nowrap">
                 {getTranslatedContent(landmark, selectedLanguage || 'en', 'name')}

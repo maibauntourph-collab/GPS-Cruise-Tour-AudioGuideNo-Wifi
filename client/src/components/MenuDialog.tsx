@@ -107,15 +107,15 @@ export function MenuDialog({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto" data-testid="dialog-menu">
-          <DialogHeader>
+        <DialogContent className="max-w-2xl max-h-[90vh] p-0 overflow-hidden" data-testid="dialog-menu">
+          <DialogHeader className="px-6 pt-6 pb-4 border-b sticky top-0 bg-background z-10">
             <DialogTitle className="flex items-center gap-2">
               <Settings className="w-5 h-5" />
               {t('settings', selectedLanguage)}
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-6 py-4">
+          <div className="space-y-6 py-4 px-6 overflow-y-auto max-h-[calc(90vh-120px)]">
             {/* City Selection */}
             <div className="space-y-2">
               <Label className="flex items-center gap-2 text-sm">
