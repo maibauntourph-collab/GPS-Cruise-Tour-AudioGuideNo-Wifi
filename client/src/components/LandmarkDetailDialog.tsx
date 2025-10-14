@@ -80,15 +80,15 @@ export function LandmarkDetailDialog({
           <TabsList className="mx-4 mt-4 grid w-auto grid-cols-3 flex-shrink-0">
             <TabsTrigger value="overview" className="gap-2">
               <Info className="w-4 h-4" />
-              Overview
+              {t('overview', selectedLanguage)}
             </TabsTrigger>
             <TabsTrigger value="photos" className="gap-2">
               <ImageIcon className="w-4 h-4" />
-              Photos
+              {t('photos', selectedLanguage)}
             </TabsTrigger>
             <TabsTrigger value="details" className="gap-2">
               <Calendar className="w-4 h-4" />
-              Details
+              {t('details', selectedLanguage)}
             </TabsTrigger>
           </TabsList>
 
@@ -189,11 +189,11 @@ export function LandmarkDetailDialog({
             </div>
           </TabsContent>
 
-          {/* Details Tab */}
+          {/* Details Tab - Booking & Additional Info */}
           <TabsContent value="details" className="flex-1 overflow-y-auto p-4 m-0">
             <div className="max-w-2xl mx-auto space-y-3">
               {/* Activity Booking */}
-              {landmark.category === 'Activity' && (
+              {landmark.category === 'Activity' ? (
                 <div className="p-3 border rounded-lg">
                   <h5 className="font-semibold text-sm mb-2 flex items-center gap-2">
                     <Ticket className="w-3.5 h-3.5" />
@@ -228,10 +228,7 @@ export function LandmarkDetailDialog({
                     </Button>
                   </div>
                 </div>
-              )}
-
-              {/* Restaurant Info */}
-              {landmark.category === 'Restaurant' && (
+              ) : landmark.category === 'Restaurant' ? (
                 <div className="p-3 border rounded-lg">
                   <h5 className="font-semibold text-sm mb-2 flex items-center gap-2">
                     <Utensils className="w-3.5 h-3.5" />
@@ -323,6 +320,11 @@ export function LandmarkDetailDialog({
                       )}
                     </div>
                   </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center p-8 text-center text-muted-foreground">
+                  <Info className="w-12 h-12 mb-3 opacity-50" />
+                  <p className="text-sm">{t('noBookingInfo', selectedLanguage)}</p>
                 </div>
               )}
             </div>

@@ -115,7 +115,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     busSection: 'Buses',
     taxiSection: 'Taxis',
     rideshareSection: 'Rideshare Services',
-    shuttleSection: 'Shuttle Services'
+    shuttleSection: 'Shuttle Services',
+    noBookingInfo: 'Booking options not available for this landmark',
+    details: 'Details'
   },
   ko: {
     landmarks: '명소',
@@ -205,7 +207,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     busSection: '버스',
     taxiSection: '택시',
     rideshareSection: '라이드셰어',
-    shuttleSection: '셔틀 서비스'
+    shuttleSection: '셔틀 서비스',
+    noBookingInfo: '이 명소는 예약 옵션이 없습니다',
+    details: '상세 정보'
   },
   es: {
     landmarks: 'Monumentos',
@@ -506,7 +510,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     busSection: 'Autobus',
     taxiSection: 'Taxi',
     rideshareSection: 'Servizi di Rideshare',
-    shuttleSection: 'Servizi Navetta'
+    shuttleSection: 'Servizi Navetta',
+    noBookingInfo: 'Opzioni di prenotazione non disponibili per questo punto di interesse',
+    details: 'Dettagli'
   },
   zh: {
     landmarks: '地标',
