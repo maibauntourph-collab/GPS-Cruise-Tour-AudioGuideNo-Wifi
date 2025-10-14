@@ -480,6 +480,7 @@ export function UnifiedFloatingCard({
                 onClick={(e) => {
                   e.stopPropagation();
                   onNavigate?.(selectedLandmark);
+                  setIsMinimized(true);
                 }}
                 className="h-8 w-8"
                 data-testid="button-header-navigate"
@@ -922,6 +923,7 @@ export function UnifiedFloatingCard({
                               onClick={(e) => {
                                 e.stopPropagation();
                                 onLandmarkRoute(landmark);
+                                setIsMinimized(true);
                               }}
                               className="h-8 w-8"
                               data-testid={`button-navigate-${landmark.id}`}
@@ -1273,6 +1275,7 @@ export function UnifiedFloatingCard({
                             onClick={(e) => {
                               e.stopPropagation();
                               onLandmarkRoute(landmark);
+                              setIsMinimized(true);
                             }}
                             className="h-8 w-8"
                             data-testid={`button-navigate-${landmark.id}`}
