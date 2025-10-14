@@ -484,7 +484,7 @@ export default function Home() {
               size="icon"
               onClick={handleToggleLandmarks}
               data-testid="button-toggle-landmarks"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : ''}`}
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : 'animate-blink'}`}
               title={t('landmarks', selectedLanguage)}
             >
               <LandmarkIcon className="w-4 h-4" />
@@ -495,7 +495,7 @@ export default function Home() {
               size="icon"
               onClick={handleToggleActivities}
               data-testid="button-toggle-activities"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : 'animate-blink'}`}
               title={t('activities', selectedLanguage)}
             >
               <Activity className="w-4 h-4" />
@@ -506,7 +506,7 @@ export default function Home() {
               size="icon"
               onClick={handleToggleRestaurants}
               data-testid="button-toggle-restaurants"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : ''}`}
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : 'animate-blink'}`}
               title={t('restaurants', selectedLanguage)}
             >
               <Utensils className="w-4 h-4" />
@@ -517,7 +517,7 @@ export default function Home() {
               size="icon"
               onClick={() => setShowGiftShops(!showGiftShops)}
               data-testid="button-toggle-giftshops"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : ''}`}
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
               title={t('giftShops', selectedLanguage)}
             >
               <ShoppingBag className="w-4 h-4" />
@@ -529,7 +529,7 @@ export default function Home() {
                 size="icon"
                 onClick={() => setShowCruisePort(!showCruisePort)}
                 data-testid="button-toggle-cruise-port"
-                className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : ''}`}
+                className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
                 title={t('cruisePortInfo', selectedLanguage)}
               >
                 <Ship className="w-4 h-4" />
