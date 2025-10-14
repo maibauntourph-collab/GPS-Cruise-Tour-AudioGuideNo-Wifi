@@ -347,7 +347,8 @@ export function MapView({
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
-  const restaurantIcon = createCustomIcon('hsl(142, 71%, 45%)'); // Green for restaurants
+  const restaurantIcon = createCustomIcon('hsl(25, 95%, 55%)'); // Orange for restaurants
+  const giftShopIcon = createCustomIcon('hsl(45, 90%, 55%)'); // Gold for gift shops
 
   return (
     <MapContainer
@@ -368,7 +369,8 @@ export function MapView({
       {landmarks.map((landmark) => {
         const isActivity = landmark.category === 'Activity';
         const isRestaurant = landmark.category === 'Restaurant';
-        const icon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : landmarkIcon;
+        const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
+        const icon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon;
         const isInTour = tourStops.some(stop => stop.id === landmark.id);
         
         return (

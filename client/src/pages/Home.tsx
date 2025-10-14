@@ -242,7 +242,12 @@ export default function Home() {
     
     // If turning on, focus on first landmark
     if (newState) {
-      const firstLandmark = landmarks.find(l => l.category !== 'Activity' && l.category !== 'Restaurant');
+      const firstLandmark = landmarks.find(l => 
+        l.category !== 'Activity' && 
+        l.category !== 'Restaurant' && 
+        l.category !== 'Gift Shop' && 
+        l.category !== 'Shop'
+      );
       if (firstLandmark) {
         setFocusLocation({ lat: firstLandmark.lat, lng: firstLandmark.lng, zoom: 16 });
         setTimeout(() => setFocusLocation(null), 1000);
@@ -366,7 +371,7 @@ export default function Home() {
               size="icon"
               onClick={handleToggleRestaurants}
               data-testid="button-toggle-restaurants"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : ''}`}
               title={t('restaurants', selectedLanguage)}
             >
               <Utensils className="w-4 h-4" />
@@ -377,7 +382,7 @@ export default function Home() {
               size="icon"
               onClick={() => setShowGiftShops(!showGiftShops)}
               data-testid="button-toggle-giftshops"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showGiftShops ? '!bg-[hsl(280,65%,55%)] hover:!bg-[hsl(280,65%,50%)] !border-[hsl(280,65%,55%)] text-white' : ''}`}
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : ''}`}
               title={t('giftShops', selectedLanguage)}
             >
               <ShoppingBag className="w-4 h-4" />
@@ -389,7 +394,7 @@ export default function Home() {
                 size="icon"
                 onClick={() => setShowCruisePort(!showCruisePort)}
                 data-testid="button-toggle-cruise-port"
-                className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showCruisePort ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
+                className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : ''}`}
                 title={t('cruisePortInfo', selectedLanguage)}
               >
                 <Ship className="w-4 h-4" />

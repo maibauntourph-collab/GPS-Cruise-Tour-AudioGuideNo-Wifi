@@ -152,7 +152,12 @@ export function UnifiedFloatingCard({
     // If turning on and in List tab, scroll to first landmark
     if (wasOff && activeTab === 'list') {
       setTimeout(() => {
-        const firstLandmark = landmarks.find(l => l.category !== 'Activity' && l.category !== 'Restaurant');
+        const firstLandmark = landmarks.find(l => 
+          l.category !== 'Activity' && 
+          l.category !== 'Restaurant' && 
+          l.category !== 'Gift Shop' && 
+          l.category !== 'Shop'
+        );
         if (firstLandmark && listScrollRef.current) {
           const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstLandmark.id}"]`);
           element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -535,7 +540,7 @@ export function UnifiedFloatingCard({
                 variant={showRestaurants ? "default" : "outline"}
                 size="sm"
                 onClick={handleListToggleRestaurants}
-                className={`gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
+                className={`gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : ''}`}
                 data-testid="button-tour-filter-restaurants"
               >
                 <Utensils className="w-4 h-4" />
@@ -545,7 +550,7 @@ export function UnifiedFloatingCard({
                 variant={showGiftShops ? "default" : "outline"}
                 size="sm"
                 onClick={handleListToggleGiftShops}
-                className={`gap-1 ${showGiftShops ? '!bg-[hsl(280,65%,55%)] hover:!bg-[hsl(280,65%,50%)] !border-[hsl(280,65%,55%)] text-white' : ''}`}
+                className={`gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : ''}`}
                 data-testid="button-tour-filter-giftshops"
               >
                 <ShoppingBag className="w-4 h-4" />
@@ -1065,7 +1070,7 @@ export function UnifiedFloatingCard({
                 variant={showRestaurants ? "default" : "outline"}
                 size="sm"
                 onClick={handleListToggleRestaurants}
-                className={`gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
+                className={`gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : ''}`}
                 data-testid="button-filter-restaurants"
               >
                 <Utensils className="w-4 h-4" />
@@ -1075,7 +1080,7 @@ export function UnifiedFloatingCard({
                 variant={showGiftShops ? "default" : "outline"}
                 size="sm"
                 onClick={handleListToggleGiftShops}
-                className={`gap-1 ${showGiftShops ? '!bg-[hsl(280,65%,55%)] hover:!bg-[hsl(280,65%,50%)] !border-[hsl(280,65%,55%)] text-white' : ''}`}
+                className={`gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : ''}`}
                 data-testid="button-filter-giftshops"
               >
                 <ShoppingBag className="w-4 h-4" />
