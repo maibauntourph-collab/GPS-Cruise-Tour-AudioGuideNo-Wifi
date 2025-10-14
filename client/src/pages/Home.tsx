@@ -24,8 +24,10 @@ import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, Map as MapIcon, List, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
+type TabView = 'map' | 'list' | 'settings';
 
 export default function Home() {
   const { open: sidebarOpen, openMobile: sidebarOpenMobile, isMobile, toggleSidebar } = useSidebar();
@@ -33,6 +35,7 @@ export default function Home() {
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
   const [offlineMode, setOfflineMode] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabView>('map');
   const { markVisited, isVisited } = useVisitedLandmarks();
   useServiceWorker();
   
@@ -484,6 +487,44 @@ export default function Home() {
           selectedLanguage={selectedLanguage}
           onMapMarkerClick={handleMapMarkerClick}
         />
+      )}
+
+      {/* Bottom Tab Bar - Mobile Only */}
+      {isMobile && (
+        <div className="fixed bottom-0 left-0 right-0 bg-background border-t z-[1002] safe-area-inset-bottom">
+          <div className="flex items-center justify-around h-16">
+            <button
+              onClick={() => setActiveTab('map')}
+              className={`flex flex-col items-center justify-center flex-1 h-full gap-1 transition-colors ${
+                activeTab === 'map' ? 'text-primary' : 'text-muted-foreground'
+              }`}
+              data-testid="tab-map"
+            >
+              <MapIcon className="w-5 h-5" />
+              <span className="text-xs">{t('map', selectedLanguage)}</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('list')}
+              className={`flex flex-col items-center justify-center flex-1 h-full gap-1 transition-colors ${
+                activeTab === 'list' ? 'text-primary' : 'text-muted-foreground'
+              }`}
+              data-testid="tab-list"
+            >
+              <List className="w-5 h-5" />
+              <span className="text-xs">{t('list', selectedLanguage)}</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('settings')}
+              className={`flex flex-col items-center justify-center flex-1 h-full gap-1 transition-colors ${
+                activeTab === 'settings' ? 'text-primary' : 'text-muted-foreground'
+              }`}
+              data-testid="tab-settings"
+            >
+              <Settings className="w-5 h-5" />
+              <span className="text-xs">{t('settings', selectedLanguage)}</span>
+            </button>
+          </div>
+        </div>
       )}
 
       {/* Google Maps Direction Choice Dialog */}
