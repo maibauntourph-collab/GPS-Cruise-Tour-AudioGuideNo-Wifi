@@ -469,9 +469,11 @@ export default function Home() {
         showLandmarks={showLandmarks}
         showActivities={showActivities}
         showRestaurants={showRestaurants}
+        showGiftShops={showGiftShops}
         onToggleLandmarks={handleToggleLandmarks}
         onToggleActivities={handleToggleActivities}
         onToggleRestaurants={handleToggleRestaurants}
+        onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
         selectedLanguage={selectedLanguage}
         onMapMarkerClick={handleMapMarkerClick}
       />

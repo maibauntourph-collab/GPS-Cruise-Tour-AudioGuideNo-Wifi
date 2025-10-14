@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
@@ -38,9 +38,11 @@ interface UnifiedFloatingCardProps {
   showLandmarks: boolean;
   showActivities: boolean;
   showRestaurants: boolean;
+  showGiftShops: boolean;
   onToggleLandmarks: () => void;
   onToggleActivities: () => void;
   onToggleRestaurants: () => void;
+  onToggleGiftShops: () => void;
   
   // Tour Route props
   tourStops?: Landmark[];
@@ -99,9 +101,11 @@ export function UnifiedFloatingCard({
   showLandmarks,
   showActivities,
   showRestaurants,
+  showGiftShops,
   onToggleLandmarks,
   onToggleActivities,
   onToggleRestaurants,
+  onToggleGiftShops,
   tourStops = [],
   tourRouteInfo = null,
   onRemoveTourStop,
@@ -189,6 +193,22 @@ export function UnifiedFloatingCard({
     }
   };
 
+  const handleListToggleGiftShops = () => {
+    const wasOff = !showGiftShops;
+    onToggleGiftShops();
+    
+    // If turning on and in List tab, scroll to first gift shop
+    if (wasOff && activeTab === 'list') {
+      setTimeout(() => {
+        const firstGiftShop = landmarks.find(l => l.category === 'Gift Shop' || l.category === 'Shop');
+        if (firstGiftShop && listScrollRef.current) {
+          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstGiftShop.id}"]`);
+          element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    }
+  };
+
   // Determine which tab to show
   useEffect(() => {
     if (selectedLandmark) {
@@ -217,7 +237,7 @@ export function UnifiedFloatingCard({
   // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [showLandmarks, showActivities, showRestaurants]);
+  }, [showLandmarks, showActivities, showRestaurants, showGiftShops]);
 
   // Reset transport page when city changes
   useEffect(() => {
@@ -370,8 +390,10 @@ export function UnifiedFloatingCard({
   const filteredListLandmarks = sortedLandmarks.filter(({ landmark }) => {
     const isActivity = landmark.category === 'Activity';
     const isRestaurant = landmark.category === 'Restaurant';
+    const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
     if (isActivity) return showActivities;
     if (isRestaurant) return showRestaurants;
+    if (isGiftShop) return showGiftShops;
     return showLandmarks;
   });
 
@@ -518,6 +540,16 @@ export function UnifiedFloatingCard({
               >
                 <Utensils className="w-4 h-4" />
                 {t('restaurants', selectedLanguage)}
+              </Button>
+              <Button
+                variant={showGiftShops ? "default" : "outline"}
+                size="sm"
+                onClick={handleListToggleGiftShops}
+                className={`gap-1 ${showGiftShops ? '!bg-[hsl(280,65%,55%)] hover:!bg-[hsl(280,65%,50%)] !border-[hsl(280,65%,55%)] text-white' : ''}`}
+                data-testid="button-tour-filter-giftshops"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                {t('giftShops', selectedLanguage)}
               </Button>
             </div>
 
@@ -1038,6 +1070,16 @@ export function UnifiedFloatingCard({
               >
                 <Utensils className="w-4 h-4" />
                 {t('restaurants', selectedLanguage)}
+              </Button>
+              <Button
+                variant={showGiftShops ? "default" : "outline"}
+                size="sm"
+                onClick={handleListToggleGiftShops}
+                className={`gap-1 ${showGiftShops ? '!bg-[hsl(280,65%,55%)] hover:!bg-[hsl(280,65%,50%)] !border-[hsl(280,65%,55%)] text-white' : ''}`}
+                data-testid="button-filter-giftshops"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                {t('giftShops', selectedLanguage)}
               </Button>
             </div>
             
