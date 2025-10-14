@@ -566,6 +566,7 @@ export function UnifiedFloatingCard({
                 }
                 onLandmarkClose();
               } else if (showCruisePort && onCruisePortClose) {
+                setActiveTab('list');
                 onCruisePortClose();
               }
             }}
