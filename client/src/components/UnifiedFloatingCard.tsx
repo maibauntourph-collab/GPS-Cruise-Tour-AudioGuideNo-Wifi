@@ -385,7 +385,7 @@ export function UnifiedFloatingCard({
           </TabsList>
 
           {/* Tour Tab with filters */}
-          <TabsContent value="landmark" className="mt-4 flex flex-col flex-1 overflow-hidden">
+          <TabsContent value="landmark" className="mt-4 flex flex-col flex-1">
             {/* Filter buttons - Fixed at top */}
             <div className="flex gap-2 flex-wrap pb-3 flex-shrink-0">
               <Button
@@ -721,9 +721,9 @@ export function UnifiedFloatingCard({
           </TabsContent>
 
           {/* Cruise Port Tab with sub-tabs */}
-          <TabsContent value="cruise" className="mt-4 flex flex-col flex-1 overflow-hidden">
+          <TabsContent value="cruise" className="mt-4 flex flex-col flex-1">
             {city?.cruisePort && (
-              <Tabs defaultValue="info" className="w-full flex flex-col flex-1 overflow-hidden">
+              <Tabs defaultValue="info" className="w-full flex flex-col flex-1">
                 <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
                   <TabsTrigger value="info">{t('cruiseInfo', selectedLanguage)}</TabsTrigger>
                   <TabsTrigger value="transport">{t('transportation', selectedLanguage)}</TabsTrigger>
@@ -829,7 +829,7 @@ export function UnifiedFloatingCard({
           </TabsContent>
 
           {/* Landmark List Tab */}
-          <TabsContent value="list" className="mt-4 flex flex-col flex-1 overflow-hidden">
+          <TabsContent value="list" className="mt-4 flex flex-col flex-1">
             {/* Tour Route Section - Fixed at top */}
             {tourStops.length > 0 && (
               <div className="pb-3 mb-3 border-b flex-shrink-0">
