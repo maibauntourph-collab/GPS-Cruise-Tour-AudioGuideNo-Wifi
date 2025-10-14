@@ -11,6 +11,7 @@ import { audioService } from '@/lib/audioService';
 import { PhotoGallery } from './PhotoGallery';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import { LandmarkDetailDialog } from './LandmarkDetailDialog';
 
 interface UnifiedFloatingCardProps {
   // Landmark Panel props
@@ -116,6 +117,7 @@ export function UnifiedFloatingCard({
   const [activeTab, setActiveTab] = useState<string>('landmark');
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [showDetailDialog, setShowDetailDialog] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -123,6 +125,7 @@ export function UnifiedFloatingCard({
   useEffect(() => {
     if (selectedLandmark) {
       setActiveTab('landmark');
+      setShowDetailDialog(true);
     } else if (showCruisePort && city?.cruisePort) {
       setActiveTab('cruise');
     } else {
@@ -986,6 +989,19 @@ export function UnifiedFloatingCard({
           </TabsContent>
         </Tabs>
       </Card>
+
+      <LandmarkDetailDialog
+        landmark={selectedLandmark}
+        isOpen={showDetailDialog}
+        onClose={() => {
+          setShowDetailDialog(false);
+          onLandmarkClose();
+        }}
+        onNavigate={onNavigate}
+        onAddToTour={onAddToTour}
+        isInTour={isInTour}
+        selectedLanguage={selectedLanguage}
+      />
     </div>
   );
 
