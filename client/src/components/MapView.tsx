@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, Tooltip, useMap, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
@@ -398,25 +398,7 @@ export function MapView({
                 }
               }
             }}
-          >
-            <Tooltip 
-              direction="top" 
-              offset={[0, -40]} 
-              opacity={0.95}
-              permanent={false}
-              sticky={false}
-              className="leaflet-tooltip-stable"
-            >
-              <div className="text-sm font-medium whitespace-nowrap">
-                {getTranslatedContent(landmark, selectedLanguage || 'en', 'name')}
-              </div>
-              {landmark.category && (
-                <div className="text-xs text-muted-foreground mt-1 whitespace-nowrap">
-                  {landmark.category}
-                </div>
-              )}
-            </Tooltip>
-          </Marker>
+          />
         );
       })}
 

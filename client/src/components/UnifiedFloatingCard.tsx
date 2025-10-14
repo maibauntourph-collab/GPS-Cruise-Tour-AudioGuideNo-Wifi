@@ -645,7 +645,11 @@ export function UnifiedFloatingCard({
                   
                   {onAddToTour && (
                     <Button
-                      onClick={() => onAddToTour(selectedLandmark)}
+                      onClick={() => {
+                        onAddToTour(selectedLandmark);
+                        // 투어에 추가 후 리스트 탭으로 돌아가기
+                        setActiveTab('list');
+                      }}
                       variant="outline"
                       className="w-full gap-2"
                       disabled={isInTour}

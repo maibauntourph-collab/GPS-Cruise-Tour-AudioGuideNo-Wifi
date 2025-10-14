@@ -1,10 +1,3 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Globe } from 'lucide-react';
 
 interface LanguageSelectorProps {
@@ -43,21 +36,18 @@ export function LanguageSelector({ selectedLanguage, onLanguageChange }: Languag
   return (
     <div className="flex items-center gap-2">
       <Globe className="w-4 h-4 text-primary shrink-0" />
-      <Select value={selectedLanguage} onValueChange={onLanguageChange}>
-        <SelectTrigger className="w-full" data-testid="select-language">
-          <SelectValue placeholder="Language" />
-        </SelectTrigger>
-        <SelectContent position="popper" sideOffset={5} className="z-[10000] max-h-[300px]">
-          {LANGUAGES.map((lang) => (
-            <SelectItem key={lang.code} value={lang.code} data-testid={`option-lang-${lang.code}`}>
-              <span className="flex items-center gap-2">
-                <span>{lang.flag}</span>
-                <span>{lang.name}</span>
-              </span>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <select
+        value={selectedLanguage}
+        onChange={(e) => onLanguageChange(e.target.value)}
+        className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+        data-testid="select-language"
+      >
+        {LANGUAGES.map((lang) => (
+          <option key={lang.code} value={lang.code} data-testid={`option-lang-${lang.code}`}>
+            {lang.flag} {lang.name}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
