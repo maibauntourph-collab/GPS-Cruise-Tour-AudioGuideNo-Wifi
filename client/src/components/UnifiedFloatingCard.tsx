@@ -155,6 +155,21 @@ export function UnifiedFloatingCard({
     setCurrentPage(1);
   }, [showLandmarks, showActivities, showRestaurants]);
 
+  // Reset transport page when city changes
+  useEffect(() => {
+    setTransportPage(1);
+  }, [city?.id]);
+
+  // Clamp transport page when transport options change
+  useEffect(() => {
+    if (city?.cruisePort?.transportOptions) {
+      const totalPages = Math.ceil(city.cruisePort.transportOptions.length / transportItemsPerPage);
+      if (transportPage > totalPages && totalPages > 0) {
+        setTransportPage(totalPages);
+      }
+    }
+  }, [city?.cruisePort?.transportOptions?.length, transportPage, transportItemsPerPage]);
+
   // Clamp translate values to keep element within bounds
   const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
     const viewportWidth = window.innerWidth;

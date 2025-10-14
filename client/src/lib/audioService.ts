@@ -5,6 +5,7 @@ class AudioService {
   private currentUtterance: SpeechSynthesisUtterance | null = null;
   private currentRate: number = 1.0;
   private voices: SpeechSynthesisVoice[] = [];
+  private playbackTimer: NodeJS.Timeout | null = null;
 
   constructor() {
     this.synthesis = window.speechSynthesis;
@@ -115,27 +116,36 @@ class AudioService {
 
   // Play text with speed control (for panel TTS)
   playText(text: string, language: string = 'en', rate: number = 1.0, onEnd?: () => void) {
-    this.synthesis.cancel();
+    if (this.playbackTimer) {
+      clearTimeout(this.playbackTimer);
+      this.playbackTimer = null;
+    }
     
-    this.currentUtterance = new SpeechSynthesisUtterance(text);
-    const langCode = this.getLangCode(language);
-    this.currentUtterance.lang = langCode;
-    this.currentUtterance.rate = rate;
-    this.currentUtterance.pitch = 1.0;
-    this.currentUtterance.volume = 1.0;
-    this.currentRate = rate;
+    this.synthesis.cancel();
+    this.currentUtterance = null;
+    
+    this.playbackTimer = setTimeout(() => {
+      this.currentUtterance = new SpeechSynthesisUtterance(text);
+      const langCode = this.getLangCode(language);
+      this.currentUtterance.lang = langCode;
+      this.currentUtterance.rate = rate;
+      this.currentUtterance.pitch = 1.0;
+      this.currentUtterance.volume = 1.0;
+      this.currentRate = rate;
 
-    // Set language-specific voice
-    const voice = this.getVoiceForLanguage(langCode);
-    if (voice) {
-      this.currentUtterance.voice = voice;
-    }
+      // Set language-specific voice
+      const voice = this.getVoiceForLanguage(langCode);
+      if (voice) {
+        this.currentUtterance.voice = voice;
+      }
 
-    if (onEnd) {
-      this.currentUtterance.onend = onEnd;
-    }
+      if (onEnd) {
+        this.currentUtterance.onend = onEnd;
+      }
 
-    this.synthesis.speak(this.currentUtterance);
+      this.synthesis.speak(this.currentUtterance);
+      this.playbackTimer = null;
+    }, 50);
   }
 
   pauseSpeech() {
@@ -160,6 +170,10 @@ class AudioService {
   }
 
   stop() {
+    if (this.playbackTimer) {
+      clearTimeout(this.playbackTimer);
+      this.playbackTimer = null;
+    }
     this.synthesis.cancel();
     this.currentUtterance = null;
   }
