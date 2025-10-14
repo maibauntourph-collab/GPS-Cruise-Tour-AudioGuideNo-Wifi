@@ -541,12 +541,14 @@ export function UnifiedFloatingCard({
                   setTourAddedInDialog(false);
                 }
                 onLandmarkClose();
-                setIsMinimized(true);
               } else if (showCruisePort && onCruisePortClose) {
                 setActiveTab('list');
                 onCruisePortClose();
-                setIsMinimized(true);
+              } else {
+                setActiveTab('list');
               }
+              // 항상 카드 숨기기
+              setIsMinimized(true);
             }}
             className="h-6 w-6"
             data-testid="button-close-unified"
