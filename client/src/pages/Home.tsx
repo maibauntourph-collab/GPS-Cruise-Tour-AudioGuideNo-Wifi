@@ -834,11 +834,28 @@ export default function Home() {
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={useInAppNavigation} data-testid="button-use-in-app">
-              {t('useInAppMap', selectedLanguage)}
+          <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+            <AlertDialogCancel 
+              onClick={() => {
+                setShowDirectionsDialog(false);
+                setPendingLandmark(null);
+              }} 
+              data-testid="button-cancel-navigation"
+            >
+              {t('cancel', selectedLanguage)}
             </AlertDialogCancel>
-            <AlertDialogAction onClick={openGoogleMaps} data-testid="button-use-google-maps">
+            <AlertDialogAction 
+              onClick={useInAppNavigation} 
+              data-testid="button-use-in-app"
+              className="bg-primary hover:bg-primary/90"
+            >
+              {t('useInAppMap', selectedLanguage)}
+            </AlertDialogAction>
+            <AlertDialogAction 
+              onClick={openGoogleMaps} 
+              data-testid="button-use-google-maps"
+              className="bg-primary hover:bg-primary/90"
+            >
               {t('useGoogleMaps', selectedLanguage)}
             </AlertDialogAction>
           </AlertDialogFooter>
