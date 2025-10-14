@@ -515,20 +515,6 @@ export function UnifiedFloatingCard({
             </Button>
           )}
           
-          {/* List button in header */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveTab('list');
-            }}
-            className="h-8 w-8"
-            data-testid="button-header-list"
-          >
-            <List className="w-4 h-4" />
-          </Button>
-          
           <Button
             variant="ghost"
             size="icon"
@@ -563,8 +549,21 @@ export function UnifiedFloatingCard({
           </Button>
         </div>
 
-        {/* Filter buttons - Fixed below header */}
+        {/* Navigation buttons - Fixed below header */}
         <div className="flex gap-2 flex-wrap pb-3 flex-shrink-0 border-b">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveTab('list');
+            }}
+            className="gap-1"
+            data-testid="button-header-list"
+          >
+            <List className="w-4 h-4" />
+            {t('list', selectedLanguage)}
+          </Button>
           <Button
             variant={showLandmarks ? "default" : "outline"}
             size="sm"
@@ -574,36 +573,6 @@ export function UnifiedFloatingCard({
           >
             <LandmarkIcon className="w-4 h-4" />
             {t('landmarks', selectedLanguage)}
-          </Button>
-          <Button
-            variant={showActivities ? "default" : "outline"}
-            size="sm"
-            onClick={handleListToggleActivities}
-            className={`gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
-            data-testid="button-tour-filter-activities"
-          >
-            <Activity className="w-4 h-4" />
-            {t('activities', selectedLanguage)}
-          </Button>
-          <Button
-            variant={showRestaurants ? "default" : "outline"}
-            size="sm"
-            onClick={handleListToggleRestaurants}
-            className={`gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : ''}`}
-            data-testid="button-tour-filter-restaurants"
-          >
-            <Utensils className="w-4 h-4" />
-            {t('restaurants', selectedLanguage)}
-          </Button>
-          <Button
-            variant={showGiftShops ? "default" : "outline"}
-            size="sm"
-            onClick={handleListToggleGiftShops}
-            className={`gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : ''}`}
-            data-testid="button-tour-filter-giftshops"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            {t('giftShops', selectedLanguage)}
           </Button>
         </div>
 
