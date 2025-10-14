@@ -31,10 +31,26 @@ import { Landmark, City } from '@shared/schema';
 import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+// Detect browser language and map to supported language
+const detectBrowserLanguage = (): string => {
+  const browserLang = navigator.language || navigator.languages?.[0] || 'en';
+  const langCode = browserLang.split('-')[0].toLowerCase();
+  
+  // Supported languages
+  const supportedLanguages = ['en', 'ko', 'es', 'fr', 'de', 'it', 'zh', 'ja', 'pt', 'ru'];
+  
+  // Return matched language or default to English
+  return supportedLanguages.includes(langCode) ? langCode : 'en';
+};
+
 export default function Home() {
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
+    // Check localStorage first, then browser language
+    const savedLanguage = localStorage.getItem('selected-language');
+    return savedLanguage || detectBrowserLanguage();
+  });
   const [offlineMode, setOfflineMode] = useState(false);
   const [isMobile, setIsMobile] = useState(() => 
     typeof window !== 'undefined' && window.innerWidth < 640
@@ -92,6 +108,11 @@ export default function Home() {
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
   }, [audioEnabled]);
+
+  // Save selected language to localStorage
+  useEffect(() => {
+    localStorage.setItem('selected-language', selectedLanguage);
+  }, [selectedLanguage]);
 
   useEffect(() => {
     const checkMobile = () => {
