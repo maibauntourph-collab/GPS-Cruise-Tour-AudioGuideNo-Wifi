@@ -459,18 +459,18 @@ export default function Home() {
       />
       
       <div className="flex w-full flex-1 flex-col h-screen">
-        <header className="flex items-center gap-1 sm:gap-2 p-2 border-b bg-background z-[1001]">
+        <header className="flex items-center gap-1 sm:gap-2 px-2 py-1 border-b bg-background z-[1001]">
           <Button 
             variant="ghost" 
             size="icon"
             onClick={() => setShowMenu(true)}
             data-testid="button-menu-toggle" 
-            className="h-9 w-9"
+            className="h-8 w-8"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-4 w-4" />
           </Button>
           <h1 
-            className="font-serif font-semibold text-base sm:text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-1 rounded-md transition-colors truncate" 
+            className="font-serif font-semibold text-base sm:text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-0.5 rounded-md transition-colors truncate" 
             onClick={() => setShowMenu(true)}
             data-testid="h1-title-toggle-menu"
           >
@@ -484,44 +484,44 @@ export default function Home() {
               size="icon"
               onClick={handleToggleLandmarks}
               data-testid="button-toggle-landmarks"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : 'animate-blink'}`}
+              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : 'animate-blink'}`}
               title={t('landmarks', selectedLanguage)}
             >
-              <LandmarkIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('landmarks', selectedLanguage)}</span>
+              <LandmarkIcon className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline text-xs">{t('landmarks', selectedLanguage)}</span>
             </Button>
             <Button
               variant={showActivities ? "default" : "outline"}
               size="icon"
               onClick={handleToggleActivities}
               data-testid="button-toggle-activities"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : 'animate-blink'}`}
+              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : 'animate-blink'}`}
               title={t('activities', selectedLanguage)}
             >
-              <Activity className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
+              <Activity className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline text-xs">{t('activities', selectedLanguage)}</span>
             </Button>
             <Button
               variant={showRestaurants ? "default" : "outline"}
               size="icon"
               onClick={handleToggleRestaurants}
               data-testid="button-toggle-restaurants"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : 'animate-blink'}`}
+              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : 'animate-blink'}`}
               title={t('restaurants', selectedLanguage)}
             >
-              <Utensils className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('restaurants', selectedLanguage)}</span>
+              <Utensils className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline text-xs">{t('restaurants', selectedLanguage)}</span>
             </Button>
             <Button
               variant={showGiftShops ? "default" : "outline"}
               size="icon"
               onClick={() => setShowGiftShops(!showGiftShops)}
               data-testid="button-toggle-giftshops"
-              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
+              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
               title={t('giftShops', selectedLanguage)}
             >
-              <ShoppingBag className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('giftShops', selectedLanguage)}</span>
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline text-xs">{t('giftShops', selectedLanguage)}</span>
             </Button>
             {selectedCity?.cruisePort && (
               <Button
@@ -529,11 +529,11 @@ export default function Home() {
                 size="icon"
                 onClick={() => setShowCruisePort(!showCruisePort)}
                 data-testid="button-toggle-cruise-port"
-                className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
+                className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
                 title={t('cruisePortInfo', selectedLanguage)}
               >
-                <Ship className="w-4 h-4" />
-                <span className="hidden sm:inline">{t('cruisePortInfo', selectedLanguage)}</span>
+                <Ship className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-xs">{t('cruisePortInfo', selectedLanguage)}</span>
               </Button>
             )}
           </div>
