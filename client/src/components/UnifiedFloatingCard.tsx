@@ -319,14 +319,16 @@ export function UnifiedFloatingCard({
         maxWidth: 'calc(100vw - 32px)',
         maxHeight: 'calc(100vh - 32px)',
         userSelect: 'none',
-        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`,
+        display: 'flex',
+        flexDirection: 'column'
       }}
       onMouseDown={handleStart}
       onTouchStart={handleStart}
       onClick={handleCardClick}
       data-testid="card-unified-floating-container"
     >
-      <Card className="p-4 flex flex-col h-full" data-testid="card-unified-floating">
+      <Card className="p-4 flex flex-col flex-1 min-h-0 overflow-hidden" data-testid="card-unified-floating">
         <div className="flex items-center gap-2 mb-3 flex-shrink-0">
           <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
             {t('infoPanel', selectedLanguage)}
