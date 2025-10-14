@@ -19,10 +19,10 @@ export function CitySelector({ cities, selectedCityId, onCityChange }: CitySelec
     <div className="flex items-center gap-2">
       <MapPin className="w-4 h-4 text-primary shrink-0" />
       <Select value={selectedCityId} onValueChange={onCityChange}>
-        <SelectTrigger className="w-[180px]" data-testid="select-city">
+        <SelectTrigger className="w-full" data-testid="select-city">
           <SelectValue placeholder="Select a city" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent position="popper" sideOffset={5} className="z-[10000]">
           {cities.map((city) => (
             <SelectItem key={city.id} value={city.id} data-testid={`option-city-${city.id}`}>
               {city.name}, {city.country}
