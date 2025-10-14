@@ -328,7 +328,7 @@ export function UnifiedFloatingCard({
       onClick={handleCardClick}
       data-testid="card-unified-floating-container"
     >
-      <Card className="p-4 flex flex-col flex-1 min-h-0 overflow-hidden" data-testid="card-unified-floating">
+      <Card className="p-4 flex flex-col flex-1 min-h-0" data-testid="card-unified-floating">
         <div className="flex items-center gap-2 mb-3 flex-shrink-0">
           <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
             {t('infoPanel', selectedLanguage)}
@@ -363,7 +363,7 @@ export function UnifiedFloatingCard({
           </Button>
         </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col flex-1 overflow-hidden">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col flex-1 min-h-0">
           <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
             <TabsTrigger 
               value="landmark" 
@@ -423,7 +423,7 @@ export function UnifiedFloatingCard({
             </div>
 
             {/* Scrollable content - Contains both selected landmark and list */}
-            <div className="flex-1 overflow-y-auto space-y-4">
+            <div className="flex-1 min-h-0 overflow-y-auto space-y-4">
             {selectedLandmark && (
               <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
                 <div>
@@ -725,7 +725,7 @@ export function UnifiedFloatingCard({
           {/* Cruise Port Tab with sub-tabs */}
           <TabsContent value="cruise" className="mt-4 flex flex-col flex-1">
             {city?.cruisePort && (
-              <Tabs defaultValue="info" className="w-full flex flex-col flex-1">
+              <Tabs defaultValue="info" className="w-full flex flex-col flex-1 min-h-0">
                 <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
                   <TabsTrigger value="info">{t('cruiseInfo', selectedLanguage)}</TabsTrigger>
                   <TabsTrigger value="transport">{t('transportation', selectedLanguage)}</TabsTrigger>
@@ -922,7 +922,7 @@ export function UnifiedFloatingCard({
             </div>
             
             {/* Scrollable list - Takes remaining space */}
-            <div className="flex-1 overflow-y-auto space-y-2 pr-1">
+            <div className="flex-1 min-h-0 overflow-y-auto space-y-2 pr-1">
               {filteredListLandmarks.map(({ landmark, distance }) => (
                 <div
                   key={landmark.id}
