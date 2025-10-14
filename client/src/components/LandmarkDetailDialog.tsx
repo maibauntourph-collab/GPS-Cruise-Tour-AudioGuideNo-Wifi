@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { PhotoGallery } from './PhotoGallery';
-import { X, Navigation, MapPinned, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar } from 'lucide-react';
+import { X, Navigation, MapPinned, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard } from 'lucide-react';
 import { useState } from 'react';
 import { audioService } from '@/lib/audioService';
 
@@ -176,7 +176,51 @@ export function LandmarkDetailDialog({
           {/* Photos Tab */}
           <TabsContent value="photos" className="flex-1 overflow-y-auto p-4 m-0">
             <div className="max-w-2xl mx-auto">
-              {landmark.photos && landmark.photos.length > 0 ? (
+              {landmark.category === 'Restaurant' && landmark.restaurantPhotos ? (
+                <Tabs defaultValue="exterior" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="exterior">{t('exteriorPhotos', selectedLanguage)}</TabsTrigger>
+                    <TabsTrigger value="interior">{t('interiorPhotos', selectedLanguage)}</TabsTrigger>
+                    <TabsTrigger value="menu">{t('menuPhotos', selectedLanguage)}</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="exterior" className="mt-4">
+                    {landmark.restaurantPhotos.exterior && landmark.restaurantPhotos.exterior.length > 0 ? (
+                      <PhotoGallery 
+                        photos={landmark.restaurantPhotos.exterior} 
+                        title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('exteriorPhotos', selectedLanguage)}`}
+                      />
+                    ) : (
+                      <p className="text-sm text-muted-foreground text-center py-8">
+                        No exterior photos available
+                      </p>
+                    )}
+                  </TabsContent>
+                  <TabsContent value="interior" className="mt-4">
+                    {landmark.restaurantPhotos.interior && landmark.restaurantPhotos.interior.length > 0 ? (
+                      <PhotoGallery 
+                        photos={landmark.restaurantPhotos.interior} 
+                        title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('interiorPhotos', selectedLanguage)}`}
+                      />
+                    ) : (
+                      <p className="text-sm text-muted-foreground text-center py-8">
+                        No interior photos available
+                      </p>
+                    )}
+                  </TabsContent>
+                  <TabsContent value="menu" className="mt-4">
+                    {landmark.restaurantPhotos.menu && landmark.restaurantPhotos.menu.length > 0 ? (
+                      <PhotoGallery 
+                        photos={landmark.restaurantPhotos.menu} 
+                        title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('menuPhotos', selectedLanguage)}`}
+                      />
+                    ) : (
+                      <p className="text-sm text-muted-foreground text-center py-8">
+                        No menu photos available
+                      </p>
+                    )}
+                  </TabsContent>
+                </Tabs>
+              ) : landmark.photos && landmark.photos.length > 0 ? (
                 <PhotoGallery 
                   photos={landmark.photos} 
                   title={getTranslatedContent(landmark, selectedLanguage, 'name')}
@@ -192,8 +236,8 @@ export function LandmarkDetailDialog({
           {/* Details Tab - Booking & Additional Info */}
           <TabsContent value="details" className="flex-1 overflow-y-auto p-4 m-0">
             <div className="max-w-2xl mx-auto space-y-3">
-              {/* Activity Booking */}
-              {landmark.category === 'Activity' ? (
+              {/* Ticket & Tour Booking - for Activities and Landmarks */}
+              {(landmark.category === 'Activity' || (landmark.category !== 'Restaurant' && landmark.category !== 'Gift Shop' && landmark.category !== 'Shop')) ? (
                 <div className="p-3 border rounded-lg">
                   <h5 className="font-semibold text-sm mb-2 flex items-center gap-2">
                     <Ticket className="w-3.5 h-3.5" />
@@ -317,6 +361,16 @@ export function LandmarkDetailDialog({
                       </div>
                     )}
                     
+                    {landmark.paymentMethods && landmark.paymentMethods.length > 0 && (
+                      <div className="flex items-start gap-1.5 text-xs">
+                        <CreditCard className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium">{t('paymentMethods', selectedLanguage)}</p>
+                          <p className="text-muted-foreground">{landmark.paymentMethods.join(', ')}</p>
+                        </div>
+                      </div>
+                    )}
+                    
                     {landmark.phoneNumber && (
                       <div className="flex items-start gap-1.5 text-xs">
                         <Phone className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
@@ -336,13 +390,33 @@ export function LandmarkDetailDialog({
                     {landmark.menuHighlights && landmark.menuHighlights.length > 0 && (
                       <div className="text-xs">
                         <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
-                        <div className="flex flex-wrap gap-1">
+                        <div className="flex flex-wrap gap-1 mb-2">
                           {landmark.menuHighlights.slice(0, 4).map((dish, idx) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {dish}
                             </Badge>
                           ))}
                         </div>
+                        {landmark.restaurantPhotos?.menu && landmark.restaurantPhotos.menu.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2 mt-2">
+                            {landmark.restaurantPhotos.menu.slice(0, 3).map((photo, idx) => (
+                              <img 
+                                key={idx}
+                                src={photo} 
+                                alt={`Menu ${idx + 1}`}
+                                className="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity"
+                                onClick={() => {
+                                  // Open photo gallery at this index
+                                  const event = new CustomEvent('openPhotoGallery', { 
+                                    detail: { photos: landmark.restaurantPhotos?.menu || [], startIndex: idx }
+                                  });
+                                  window.dispatchEvent(event);
+                                }}
+                                data-testid={`menu-photo-${idx}`}
+                              />
+                            ))}
+                          </div>
+                        )}
                       </div>
                     )}
                     

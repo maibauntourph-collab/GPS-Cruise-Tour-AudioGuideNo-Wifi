@@ -112,6 +112,12 @@ export const landmarkSchema = z.object({
   reservationUrl: z.string().optional(), // Direct reservation link (OpenTable, TheFork, etc.)
   phoneNumber: z.string().optional(), // Restaurant phone number
   menuHighlights: z.array(z.string()).optional(), // Key dishes: ["Cacio e Pepe", "Carbonara"]
+  restaurantPhotos: z.object({
+    exterior: z.array(z.string()).optional(), // Exterior photos
+    interior: z.array(z.string()).optional(), // Interior photos
+    menu: z.array(z.string()).optional(), // Menu photos
+  }).optional(),
+  paymentMethods: z.array(z.string()).optional(), // e.g., ["Card", "Cash", "Mobile Payment"]
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;
