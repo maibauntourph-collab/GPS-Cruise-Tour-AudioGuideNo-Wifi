@@ -123,7 +123,57 @@ export function UnifiedFloatingCard({
   const itemsPerPage = 5;
   const transportItemsPerPage = 3;
   const cardRef = useRef<HTMLDivElement>(null);
+  const listScrollRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Wrapper handlers for list tab filters with scroll functionality
+  const handleListToggleLandmarks = () => {
+    const wasOff = !showLandmarks;
+    onToggleLandmarks();
+    
+    // If turning on and in List tab, scroll to first landmark
+    if (wasOff && activeTab === 'list') {
+      setTimeout(() => {
+        const firstLandmark = landmarks.find(l => l.category !== 'Activity' && l.category !== 'Restaurant');
+        if (firstLandmark && listScrollRef.current) {
+          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstLandmark.id}"]`);
+          element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleListToggleActivities = () => {
+    const wasOff = !showActivities;
+    onToggleActivities();
+    
+    // If turning on and in List tab, scroll to first activity
+    if (wasOff && activeTab === 'list') {
+      setTimeout(() => {
+        const firstActivity = landmarks.find(l => l.category === 'Activity');
+        if (firstActivity && listScrollRef.current) {
+          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstActivity.id}"]`);
+          element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleListToggleRestaurants = () => {
+    const wasOff = !showRestaurants;
+    onToggleRestaurants();
+    
+    // If turning on and in List tab, scroll to first restaurant
+    if (wasOff && activeTab === 'list') {
+      setTimeout(() => {
+        const firstRestaurant = landmarks.find(l => l.category === 'Restaurant');
+        if (firstRestaurant && listScrollRef.current) {
+          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstRestaurant.id}"]`);
+          element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    }
+  };
 
   // Determine which tab to show
   useEffect(() => {
@@ -428,7 +478,7 @@ export function UnifiedFloatingCard({
               <Button
                 variant={showLandmarks ? "default" : "outline"}
                 size="sm"
-                onClick={onToggleLandmarks}
+                onClick={handleListToggleLandmarks}
                 className="gap-1"
                 data-testid="button-tour-filter-landmarks"
               >
@@ -438,7 +488,7 @@ export function UnifiedFloatingCard({
               <Button
                 variant={showActivities ? "default" : "outline"}
                 size="sm"
-                onClick={onToggleActivities}
+                onClick={handleListToggleActivities}
                 className={`gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
                 data-testid="button-tour-filter-activities"
               >
@@ -448,7 +498,7 @@ export function UnifiedFloatingCard({
               <Button
                 variant={showRestaurants ? "default" : "outline"}
                 size="sm"
-                onClick={onToggleRestaurants}
+                onClick={handleListToggleRestaurants}
                 className={`gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
                 data-testid="button-tour-filter-restaurants"
               >
@@ -948,7 +998,7 @@ export function UnifiedFloatingCard({
               <Button
                 variant={showLandmarks ? "default" : "outline"}
                 size="sm"
-                onClick={onToggleLandmarks}
+                onClick={handleListToggleLandmarks}
                 className="gap-1"
                 data-testid="button-filter-landmarks"
               >
@@ -958,7 +1008,7 @@ export function UnifiedFloatingCard({
               <Button
                 variant={showActivities ? "default" : "outline"}
                 size="sm"
-                onClick={onToggleActivities}
+                onClick={handleListToggleActivities}
                 className={`gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
                 data-testid="button-filter-activities"
               >
@@ -968,7 +1018,7 @@ export function UnifiedFloatingCard({
               <Button
                 variant={showRestaurants ? "default" : "outline"}
                 size="sm"
-                onClick={onToggleRestaurants}
+                onClick={handleListToggleRestaurants}
                 className={`gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
                 data-testid="button-filter-restaurants"
               >
@@ -979,7 +1029,7 @@ export function UnifiedFloatingCard({
             
             {/* Paginated list - Takes remaining space */}
             <div className="flex-1 min-h-0 flex flex-col">
-              <div className="flex-1 overflow-y-auto space-y-2 pr-1">
+              <div ref={listScrollRef} className="flex-1 overflow-y-auto space-y-2 pr-1">
                 {filteredListLandmarks.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-full p-8 text-center">
                     <List className="w-12 h-12 mb-3 opacity-50 text-muted-foreground" />

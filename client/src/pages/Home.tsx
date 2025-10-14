@@ -234,6 +234,49 @@ export default function Home() {
     }
   };
 
+  // Handler for toggle with scroll to first item
+  const handleToggleLandmarks = () => {
+    const newState = !showLandmarks;
+    setShowLandmarks(newState);
+    
+    // If turning on, focus on first landmark
+    if (newState) {
+      const firstLandmark = landmarks.find(l => l.category !== 'Activity' && l.category !== 'Restaurant');
+      if (firstLandmark) {
+        setFocusLocation({ lat: firstLandmark.lat, lng: firstLandmark.lng, zoom: 16 });
+        setTimeout(() => setFocusLocation(null), 1000);
+      }
+    }
+  };
+
+  const handleToggleActivities = () => {
+    const newState = !showActivities;
+    setShowActivities(newState);
+    
+    // If turning on, focus on first activity
+    if (newState) {
+      const firstActivity = landmarks.find(l => l.category === 'Activity');
+      if (firstActivity) {
+        setFocusLocation({ lat: firstActivity.lat, lng: firstActivity.lng, zoom: 16 });
+        setTimeout(() => setFocusLocation(null), 1000);
+      }
+    }
+  };
+
+  const handleToggleRestaurants = () => {
+    const newState = !showRestaurants;
+    setShowRestaurants(newState);
+    
+    // If turning on, focus on first restaurant
+    if (newState) {
+      const firstRestaurant = landmarks.find(l => l.category === 'Restaurant');
+      if (firstRestaurant) {
+        setFocusLocation({ lat: firstRestaurant.lat, lng: firstRestaurant.lng, zoom: 16 });
+        setTimeout(() => setFocusLocation(null), 1000);
+      }
+    }
+  };
+
   // Filter landmarks based on category
   const filteredLandmarks = landmarks.filter(landmark => {
     const isActivity = landmark.category === 'Activity';
@@ -281,43 +324,47 @@ export default function Home() {
       />
       
       <SidebarInset className="flex w-full flex-1 flex-col">
-        <header className="flex items-center gap-2 p-2 border-b bg-background z-[1001]">
+        <header className="flex items-center gap-1 sm:gap-2 p-2 border-b bg-background z-[1001]">
           <SidebarTrigger data-testid="button-sidebar-toggle" />
           <h1 
-            className="font-serif font-semibold text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-1 rounded-md transition-colors" 
+            className="font-serif font-semibold text-base sm:text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-1 rounded-md transition-colors truncate" 
             onClick={toggleSidebar}
             data-testid="h1-title-toggle-sidebar"
           >
-            GPS Audio Guide
+            <span className="hidden xs:inline">GPS Audio Guide</span>
+            <span className="xs:hidden">GPS Guide</span>
           </h1>
           
-          <div className="ml-auto flex items-center gap-1 flex-wrap">
+          <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
             <Button
               variant={showLandmarks ? "default" : "outline"}
-              size="sm"
-              onClick={() => setShowLandmarks(!showLandmarks)}
+              size="icon"
+              onClick={handleToggleLandmarks}
               data-testid="button-toggle-landmarks"
-              className="gap-1"
+              className="h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1"
+              title={t('landmarks', selectedLanguage)}
             >
               <LandmarkIcon className="w-4 h-4" />
               <span className="hidden sm:inline">{t('landmarks', selectedLanguage)}</span>
             </Button>
             <Button
               variant={showActivities ? "default" : "outline"}
-              size="sm"
-              onClick={() => setShowActivities(!showActivities)}
+              size="icon"
+              onClick={handleToggleActivities}
               data-testid="button-toggle-activities"
-              className={`gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
+              title={t('activities', selectedLanguage)}
             >
               <Activity className="w-4 h-4" />
               <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
             </Button>
             <Button
               variant={showRestaurants ? "default" : "outline"}
-              size="sm"
-              onClick={() => setShowRestaurants(!showRestaurants)}
+              size="icon"
+              onClick={handleToggleRestaurants}
               data-testid="button-toggle-restaurants"
-              className={`gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
+              className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
+              title={t('restaurants', selectedLanguage)}
             >
               <Utensils className="w-4 h-4" />
               <span className="hidden sm:inline">{t('restaurants', selectedLanguage)}</span>
@@ -325,10 +372,11 @@ export default function Home() {
             {selectedCity?.cruisePort && (
               <Button
                 variant={showCruisePort ? "default" : "outline"}
-                size="sm"
+                size="icon"
                 onClick={() => setShowCruisePort(!showCruisePort)}
                 data-testid="button-toggle-cruise-port"
-                className={`gap-1 ${showCruisePort ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
+                className={`h-8 w-8 sm:h-9 sm:w-auto sm:px-3 sm:gap-1 ${showCruisePort ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
+                title={t('cruisePortInfo', selectedLanguage)}
               >
                 <Ship className="w-4 h-4" />
                 <span className="hidden sm:inline">{t('cruisePortInfo', selectedLanguage)}</span>
@@ -407,9 +455,9 @@ export default function Home() {
         showLandmarks={showLandmarks}
         showActivities={showActivities}
         showRestaurants={showRestaurants}
-        onToggleLandmarks={() => setShowLandmarks(!showLandmarks)}
-        onToggleActivities={() => setShowActivities(!showActivities)}
-        onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
+        onToggleLandmarks={handleToggleLandmarks}
+        onToggleActivities={handleToggleActivities}
+        onToggleRestaurants={handleToggleRestaurants}
         selectedLanguage={selectedLanguage}
         onMapMarkerClick={handleMapMarkerClick}
       />
