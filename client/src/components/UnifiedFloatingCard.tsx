@@ -122,7 +122,7 @@ export function UnifiedFloatingCard({
   const [zIndex, setZIndex] = useState(1000);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isCentered, setIsCentered] = useState(false);
-  const [activeTab, setActiveTab] = useState<string>('landmark');
+  const [activeTab, setActiveTab] = useState<string>('list');
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
@@ -150,6 +150,16 @@ export function UnifiedFloatingCard({
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Auto-switch to landmark tab when landmark is selected
+  useEffect(() => {
+    if (selectedLandmark) {
+      setActiveTab('landmark');
+    } else if (activeTab === 'landmark') {
+      // If landmark tab was active and landmark is closed, switch to list
+      setActiveTab('list');
+    }
+  }, [selectedLandmark]);
 
   // Wrapper handlers for list tab filters with scroll functionality
   const handleListToggleLandmarks = () => {
@@ -488,8 +498,12 @@ export function UnifiedFloatingCard({
                   onClick={(e) => {
                     e.stopPropagation();
                     onAddToTour(selectedLandmark);
-                    onLandmarkClose();
+                    // List 탭으로 먼저 전환
                     setActiveTab('list');
+                    // 그 다음 랜드마크 닫기
+                    setTimeout(() => {
+                      onLandmarkClose();
+                    }, 100);
                   }}
                   disabled={isInTour || tourStops.some(stop => stop.id === selectedLandmark.id)}
                   className="h-8 w-8"

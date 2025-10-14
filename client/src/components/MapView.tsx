@@ -300,7 +300,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       fitSelectedRoutes: false,
       showAlternatives: false,
       lineOptions: {
-        styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 0.7, weight: 4, dashArray: '10, 10' }],
+        styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 1.0, weight: 6, dashArray: '10, 10' }],
         extendToWaypoints: true,
         missingRouteTolerance: 0
       },
