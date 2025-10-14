@@ -1,10 +1,11 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { PhotoGallery } from './PhotoGallery';
-import { X, Navigation, MapPinned, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon } from 'lucide-react';
+import { X, Navigation, MapPinned, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar } from 'lucide-react';
 import { useState } from 'react';
 import { audioService } from '@/lib/audioService';
 
@@ -47,20 +48,20 @@ export function LandmarkDetailDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl w-[95vw] h-[95vh] p-0 gap-0">
-        <DialogHeader className="p-6 pb-4 border-b flex-shrink-0">
+      <DialogContent className="max-w-6xl w-[90vw] h-[90vh] p-0 gap-0 overflow-hidden">
+        <DialogHeader className="p-4 pb-3 border-b flex-shrink-0">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <DialogTitle className="text-2xl mb-2" data-testid="text-landmark-detail-name">
+              <DialogTitle className="text-xl mb-1" data-testid="text-landmark-detail-name">
                 {getTranslatedContent(landmark, selectedLanguage, 'name')}
               </DialogTitle>
               <div className="flex items-center gap-2 flex-wrap">
-                <Badge variant={landmark.category === 'Activity' ? 'default' : 'secondary'}>
+                <Badge variant={landmark.category === 'Activity' ? 'default' : 'secondary'} className="text-xs">
                   {landmark.category === 'Activity' ? <ActivityIcon className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
                   {landmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
                 </Badge>
                 {landmark.category && landmark.category !== 'Activity' && (
-                  <Badge variant="outline">{landmark.category}</Badge>
+                  <Badge variant="outline" className="text-xs">{landmark.category}</Badge>
                 )}
               </div>
             </div>
@@ -75,70 +76,32 @@ export function LandmarkDetailDialog({
           </div>
         </DialogHeader>
 
-        <div className="flex-1 overflow-y-auto p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Left Column */}
-            <div className="space-y-6">
-              {landmark.photos && landmark.photos.length > 0 && (
-                <PhotoGallery 
-                  photos={landmark.photos} 
-                  title={getTranslatedContent(landmark, selectedLanguage, 'name')}
-                />
-              )}
+        <Tabs defaultValue="overview" className="flex-1 flex flex-col min-h-0">
+          <TabsList className="mx-4 mt-4 grid w-auto grid-cols-3 flex-shrink-0">
+            <TabsTrigger value="overview" className="gap-2">
+              <Info className="w-4 h-4" />
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="photos" className="gap-2">
+              <ImageIcon className="w-4 h-4" />
+              Photos
+            </TabsTrigger>
+            <TabsTrigger value="details" className="gap-2">
+              <Calendar className="w-4 h-4" />
+              Details
+            </TabsTrigger>
+          </TabsList>
 
+          {/* Overview Tab */}
+          <TabsContent value="overview" className="flex-1 overflow-y-auto p-4 m-0">
+            <div className="max-w-2xl mx-auto space-y-4">
+              {/* Description */}
               <div>
-                <p className="text-base text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground">
                   {getTranslatedContent(landmark, selectedLanguage, 'description')}
                 </p>
-                
-                {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') && (
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handlePlayAudio}
-                        className="gap-2"
-                        data-testid="button-play-audio-dialog"
-                      >
-                        {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                        {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
-                      </Button>
-                      {isPlaying && (
-                        <select
-                          value={playbackRate}
-                          onChange={(e) => {
-                            const rate = parseFloat(e.target.value);
-                            setPlaybackRate(rate);
-                            audioService.setRate(rate);
-                            // Restart audio with new rate
-                            const detailedDescription = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
-                            if (detailedDescription) {
-                              audioService.playText(detailedDescription, selectedLanguage, rate, () => setIsPlaying(false));
-                            }
-                          }}
-                          className="px-2 py-1 text-sm border rounded"
-                          data-testid="select-playback-rate-dialog"
-                        >
-                          <option value="0.5">0.5x</option>
-                          <option value="0.75">0.75x</option>
-                          <option value="1.0">1.0x</option>
-                          <option value="1.25">1.25x</option>
-                          <option value="1.5">1.5x</option>
-                          <option value="2.0">2.0x</option>
-                        </select>
-                      )}
-                    </div>
-                    <p className="text-sm leading-relaxed">
-                      {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}
-                    </p>
-                  </div>
-                )}
               </div>
-            </div>
 
-            {/* Right Column */}
-            <div className="space-y-6">
               {/* Action Buttons */}
               <div className="space-y-2">
                 <Button
@@ -164,38 +127,103 @@ export function LandmarkDetailDialog({
                 )}
               </div>
 
-              {/* Activity Booking */}
-              {landmark.category === 'Activity' && (
-                <div className="p-4 border rounded-lg">
-                  <h5 className="font-semibold mb-3 flex items-center gap-2">
-                    <Ticket className="w-4 h-4" />
-                    {t('bookTicketsTours', selectedLanguage)}
-                  </h5>
-                  <div className="space-y-2">
+              {/* Audio Section */}
+              {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') && (
+                <div className="p-3 border rounded-lg space-y-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full justify-start gap-2"
+                      onClick={handlePlayAudio}
+                      className="gap-2"
+                      data-testid="button-play-audio-dialog"
+                    >
+                      {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                      {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
+                    </Button>
+                    {isPlaying && (
+                      <select
+                        value={playbackRate}
+                        onChange={(e) => {
+                          const rate = parseFloat(e.target.value);
+                          setPlaybackRate(rate);
+                          audioService.setRate(rate);
+                          const detailedDescription = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
+                          if (detailedDescription) {
+                            audioService.playText(detailedDescription, selectedLanguage, rate, () => setIsPlaying(false));
+                          }
+                        }}
+                        className="px-2 py-1 text-sm border rounded"
+                        data-testid="select-playback-rate-dialog"
+                      >
+                        <option value="0.5">0.5x</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1.0">1.0x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2.0">2.0x</option>
+                      </select>
+                    )}
+                  </div>
+                  <p className="text-sm leading-relaxed">
+                    {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}
+                  </p>
+                </div>
+              )}
+            </div>
+          </TabsContent>
+
+          {/* Photos Tab */}
+          <TabsContent value="photos" className="flex-1 overflow-y-auto p-4 m-0">
+            <div className="max-w-2xl mx-auto">
+              {landmark.photos && landmark.photos.length > 0 ? (
+                <PhotoGallery 
+                  photos={landmark.photos} 
+                  title={getTranslatedContent(landmark, selectedLanguage, 'name')}
+                />
+              ) : (
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  No photos available
+                </p>
+              )}
+            </div>
+          </TabsContent>
+
+          {/* Details Tab */}
+          <TabsContent value="details" className="flex-1 overflow-y-auto p-4 m-0">
+            <div className="max-w-2xl mx-auto space-y-3">
+              {/* Activity Booking */}
+              {landmark.category === 'Activity' && (
+                <div className="p-3 border rounded-lg">
+                  <h5 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                    <Ticket className="w-3.5 h-3.5" />
+                    {t('bookTicketsTours', selectedLanguage)}
+                  </h5>
+                  <div className="space-y-1.5">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-start gap-2 text-xs h-8"
                       onClick={() => {
                         const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
                         window.open(`https://www.getyourguide.com/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
                       }}
                       data-testid="button-book-getyourguide-dialog"
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                       {t('bookOnGetYourGuide', selectedLanguage)}
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full justify-start gap-2"
+                      className="w-full justify-start gap-2 text-xs h-8"
                       onClick={() => {
                         const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
                         window.open(`https://www.viator.com/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
                       }}
                       data-testid="button-book-viator-dialog"
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                       {t('bookOnViator', selectedLanguage)}
                     </Button>
                   </div>
@@ -204,15 +232,15 @@ export function LandmarkDetailDialog({
 
               {/* Restaurant Info */}
               {landmark.category === 'Restaurant' && (
-                <div className="p-4 border rounded-lg">
-                  <h5 className="font-semibold mb-3 flex items-center gap-2">
-                    <Utensils className="w-4 h-4" />
+                <div className="p-3 border rounded-lg">
+                  <h5 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                    <Utensils className="w-3.5 h-3.5" />
                     {t('restaurantInfo', selectedLanguage)}
                   </h5>
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {landmark.openingHours && (
-                      <div className="flex items-start gap-2 text-sm">
-                        <Clock className="w-4 h-4 text-muted-foreground mt-0.5" />
+                      <div className="flex items-start gap-1.5 text-xs">
+                        <Clock className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
                         <div>
                           <p className="font-medium">{t('openingHours', selectedLanguage)}</p>
                           <p className="text-muted-foreground">{landmark.openingHours}</p>
@@ -221,8 +249,8 @@ export function LandmarkDetailDialog({
                     )}
                     
                     {landmark.priceRange && (
-                      <div className="flex items-start gap-2 text-sm">
-                        <Euro className="w-4 h-4 text-muted-foreground mt-0.5" />
+                      <div className="flex items-start gap-1.5 text-xs">
+                        <Euro className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
                         <div>
                           <p className="font-medium">{t('priceRange', selectedLanguage)}</p>
                           <p className="text-muted-foreground">{landmark.priceRange}</p>
@@ -231,8 +259,8 @@ export function LandmarkDetailDialog({
                     )}
                     
                     {landmark.cuisine && (
-                      <div className="flex items-start gap-2 text-sm">
-                        <ChefHat className="w-4 h-4 text-muted-foreground mt-0.5" />
+                      <div className="flex items-start gap-1.5 text-xs">
+                        <ChefHat className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
                         <div>
                           <p className="font-medium">{t('cuisine', selectedLanguage)}</p>
                           <p className="text-muted-foreground">{landmark.cuisine}</p>
@@ -241,8 +269,8 @@ export function LandmarkDetailDialog({
                     )}
                     
                     {landmark.phoneNumber && (
-                      <div className="flex items-start gap-2 text-sm">
-                        <Phone className="w-4 h-4 text-muted-foreground mt-0.5" />
+                      <div className="flex items-start gap-1.5 text-xs">
+                        <Phone className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
                         <div>
                           <p className="font-medium">{t('phoneNumber', selectedLanguage)}</p>
                           <a 
@@ -257,10 +285,10 @@ export function LandmarkDetailDialog({
                     )}
                     
                     {landmark.menuHighlights && landmark.menuHighlights.length > 0 && (
-                      <div className="text-sm">
+                      <div className="text-xs">
                         <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
                         <div className="flex flex-wrap gap-1">
-                          {landmark.menuHighlights.map((dish, idx) => (
+                          {landmark.menuHighlights.slice(0, 4).map((dish, idx) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {dish}
                             </Badge>
@@ -269,26 +297,27 @@ export function LandmarkDetailDialog({
                       </div>
                     )}
                     
-                    <div className="flex gap-2 pt-2">
+                    <div className="flex gap-1.5 pt-1">
                       {landmark.phoneNumber && (
                         <Button
                           variant="outline"
-                          className="flex-1 gap-2"
+                          size="sm"
+                          className="flex-1 gap-1.5 text-xs h-8"
                           onClick={() => window.open(`tel:${landmark.phoneNumber}`, '_self')}
                           data-testid="button-call-restaurant-dialog"
                         >
-                          <Phone className="w-4 h-4" />
+                          <Phone className="w-3.5 h-3.5" />
                           {t('callRestaurant', selectedLanguage)}
                         </Button>
                       )}
                       {landmark.reservationUrl && (
                         <Button
-                          variant="default"
-                          className="flex-1 gap-2"
+                          size="sm"
+                          className="flex-1 gap-1.5 text-xs h-8"
                           onClick={() => window.open(landmark.reservationUrl, '_blank', 'noopener,noreferrer')}
                           data-testid="button-make-reservation-dialog"
                         >
-                          <ExternalLink className="w-4 h-4" />
+                          <ExternalLink className="w-3.5 h-3.5" />
                           {t('makeReservation', selectedLanguage)}
                         </Button>
                       )}
@@ -297,8 +326,8 @@ export function LandmarkDetailDialog({
                 </div>
               )}
             </div>
-          </div>
-        </div>
+          </TabsContent>
+        </Tabs>
       </DialogContent>
     </Dialog>
   );
