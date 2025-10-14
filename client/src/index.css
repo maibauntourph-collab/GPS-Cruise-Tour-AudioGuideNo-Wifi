@@ -403,3 +403,24 @@
     transform: translateY(0);
   }
 }
+
+/* Leaflet marker cursor - pointer only, no grab/grabbing */
+.leaflet-marker-icon {
+  cursor: pointer !important;
+}
+
+.leaflet-marker-icon:active {
+  cursor: pointer !important;
+}
+
+.leaflet-draggable {
+  cursor: pointer !important;
+}
+
+.leaflet-grab {
+  cursor: pointer !important;
+}
+
+.leaflet-grabbing {
+  cursor: pointer !important;
+}
