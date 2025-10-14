@@ -1104,16 +1104,16 @@ export function UnifiedFloatingCard({
             {/* Tour Route Section - Scrollable */}
             {tourStops.length > 0 && (
               <div className="pb-3 mb-3 border-b flex-shrink-0">
-                <div className="flex items-center justify-between mb-2">
+                <div className="mb-2">
                   <h5 className="font-semibold flex items-center gap-2">
                     <MapPinned className="w-4 h-4 text-primary" />
                     {t('tourRoute', selectedLanguage)} ({tourStops.length})
+                    {tourRouteInfo && (
+                      <span className="text-xs font-normal text-muted-foreground">
+                        [{tourRouteInfo.distance.toFixed(1)}km • {Math.round(tourRouteInfo.duration)}min]
+                      </span>
+                    )}
                   </h5>
-                  {tourRouteInfo && (
-                    <Badge variant="outline" className="text-xs">
-                      {tourRouteInfo.distance.toFixed(1)}km • {Math.round(tourRouteInfo.duration)}min
-                    </Badge>
-                  )}
                 </div>
                 <div className="space-y-2">
                   {(() => {
@@ -1173,7 +1173,7 @@ export function UnifiedFloatingCard({
                                   <span>→</span>
                                   <span>{(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km</span>
                                   <span>•</span>
-                                  <span>{Math.ceil(tourRouteInfo.segments[index].duration / 60)}분</span>
+                                  <span>{Math.ceil(tourRouteInfo.segments[index].duration / 60)}min</span>
                                 </div>
                               )}
                             </div>
