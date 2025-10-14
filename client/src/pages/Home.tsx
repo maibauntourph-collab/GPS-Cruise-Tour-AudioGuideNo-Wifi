@@ -409,33 +409,208 @@ export default function Home() {
         
         <div className="relative flex-1 overflow-hidden flex flex-col">
           {/* Map Section - shrinks when landmark is selected or sidebar is open */}
-          <div className={`relative ${selectedLandmark ? 'h-1/2' : 'flex-1'} transition-all duration-300`}>
-            <MapView
-              landmarks={filteredLandmarks}
-              userPosition={position}
-              onLandmarkRoute={handleLandmarkRoute}
-              activeRoute={activeRoute}
-              onRouteFound={setRouteInfo}
-              cityCenter={selectedCity ? [selectedCity.lat, selectedCity.lng] : undefined}
-              cityZoom={selectedCity?.zoom}
-              selectedLanguage={selectedLanguage}
-              isCompact={!!selectedLandmark}
-              sidebarOpen={sidebarOpen}
-              focusLocation={focusLocation}
-              tourStops={tourStops}
-              onAddToTour={handleAddToTour}
-              onTourRouteFound={handleTourRouteFound}
-            />
+          {/* Desktop: always show. Mobile: show only on 'map' tab */}
+          {(!isMobile || activeTab === 'map') && (
+            <div className={`relative ${selectedLandmark ? 'h-1/2' : 'flex-1'} transition-all duration-300`}>
+              <MapView
+                landmarks={filteredLandmarks}
+                userPosition={position}
+                onLandmarkRoute={handleLandmarkRoute}
+                activeRoute={activeRoute}
+                onRouteFound={setRouteInfo}
+                cityCenter={selectedCity ? [selectedCity.lat, selectedCity.lng] : undefined}
+                cityZoom={selectedCity?.zoom}
+                selectedLanguage={selectedLanguage}
+                isCompact={!!selectedLandmark}
+                sidebarOpen={sidebarOpen}
+                focusLocation={focusLocation}
+                tourStops={tourStops}
+                onAddToTour={handleAddToTour}
+                onTourRouteFound={handleTourRouteFound}
+              />
 
-            <OfflineIndicator />
-            <InstallPrompt />
-          </div>
+              <OfflineIndicator />
+              <InstallPrompt />
+            </div>
+          )}
+
+          {/* List View - Mobile Only, shown on 'list' tab */}
+          {isMobile && activeTab === 'list' && (
+            <div className="flex-1 overflow-auto pb-20">
+              <div className="p-4">
+                <h2 className="text-2xl font-bold mb-4">{t('landmarks', selectedLanguage)}</h2>
+                <div className="space-y-3">
+                  {filteredLandmarks.length === 0 ? (
+                    <p className="text-muted-foreground text-center py-8">
+                      {t('noLandmarksFound', selectedLanguage)}
+                    </p>
+                  ) : (
+                    filteredLandmarks.map((landmark) => {
+                      const distance = position
+                        ? calculateDistance(position.lat, position.lng, landmark.lat, landmark.lng)
+                        : null;
+                      const isVisitedLandmark = isVisited(landmark.id);
+                      
+                      return (
+                        <button
+                          key={landmark.id}
+                          onClick={() => {
+                            setSelectedLandmark(landmark);
+                            setActiveTab('map');
+                          }}
+                          className="w-full text-left p-4 rounded-lg border bg-card hover-elevate active-elevate-2 transition-all"
+                          data-testid={`landmark-item-${landmark.id}`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
+                              landmark.category === 'landmark' 
+                                ? 'bg-[hsl(14,85%,55%)]/20 text-[hsl(14,85%,55%)]' 
+                                : landmark.category === 'activity'
+                                ? 'bg-[hsl(210,85%,55%)]/20 text-[hsl(210,85%,55%)]'
+                                : landmark.category === 'restaurant'
+                                ? 'bg-[hsl(25,95%,55%)]/20 text-[hsl(25,95%,55%)]'
+                                : 'bg-[hsl(45,90%,55%)]/20 text-[hsl(45,90%,55%)]'
+                            }`}>
+                              {landmark.category === 'landmark' ? (
+                                <LandmarkIcon className="w-5 h-5" />
+                              ) : landmark.category === 'activity' ? (
+                                <Activity className="w-5 h-5" />
+                              ) : landmark.category === 'restaurant' ? (
+                                <Utensils className="w-5 h-5" />
+                              ) : (
+                                <ShoppingBag className="w-5 h-5" />
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-base">
+                                {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                              </h3>
+                              {distance !== null && (
+                                <p className="text-sm text-muted-foreground mt-1">
+                                  {distance.toFixed(1)} km {t('away', selectedLanguage)}
+                                </p>
+                              )}
+                              {isVisitedLandmark && (
+                                <span className="inline-block mt-2 text-xs text-primary font-medium">
+                                  ✓ {t('heard', selectedLanguage)}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Settings View - Mobile Only, shown on 'settings' tab */}
+          {isMobile && activeTab === 'settings' && (
+            <div className="flex-1 overflow-auto pb-20">
+              <div className="p-4 space-y-6">
+                <div>
+                  <h2 className="text-2xl font-bold mb-4">{t('settings', selectedLanguage)}</h2>
+                </div>
+
+                {/* City Selection */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">{t('city', selectedLanguage)}</label>
+                  <select
+                    value={selectedCityId}
+                    onChange={(e) => setSelectedCityId(e.target.value)}
+                    className="w-full h-10 px-3 rounded-md border bg-background"
+                    data-testid="select-city-mobile"
+                  >
+                    {cities.map((city) => (
+                      <option key={city.id} value={city.id}>
+                        {city.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Language Selection */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">{t('language', selectedLanguage)}</label>
+                  <select
+                    value={selectedLanguage}
+                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                    className="w-full h-10 px-3 rounded-md border bg-background"
+                    data-testid="select-language-mobile"
+                  >
+                    <option value="en">English</option>
+                    <option value="ko">한국어</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                    <option value="zh">中文</option>
+                    <option value="ja">日本語</option>
+                    <option value="pt">Português</option>
+                    <option value="ru">Русский</option>
+                  </select>
+                </div>
+
+                {/* Audio Settings */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <label className="text-sm font-medium">{t('audioGuide', selectedLanguage)}</label>
+                    <button
+                      onClick={() => setAudioEnabled(!audioEnabled)}
+                      className={`relative w-11 h-6 rounded-full transition-colors ${
+                        audioEnabled ? 'bg-primary' : 'bg-muted'
+                      }`}
+                      data-testid="toggle-audio-mobile"
+                    >
+                      <span
+                        className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${
+                          audioEnabled ? 'translate-x-5' : ''
+                        }`}
+                      />
+                    </button>
+                  </div>
+
+                  {audioEnabled && (
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">
+                        {t('speechSpeed', selectedLanguage)}: {speechRate}x
+                      </label>
+                      <input
+                        type="range"
+                        min="0.5"
+                        max="2"
+                        step="0.1"
+                        value={speechRate}
+                        onChange={(e) => {
+                          const newRate = parseFloat(e.target.value);
+                          setSpeechRate(newRate);
+                          audioService.setRate(newRate);
+                        }}
+                        className="w-full"
+                        data-testid="slider-speech-rate-mobile"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Progress */}
+                <div className="space-y-2 pt-4 border-t">
+                  <h3 className="text-sm font-medium">{t('progress', selectedLanguage)}</h3>
+                  <p className="text-2xl font-bold">
+                    {filteredLandmarks.filter(l => isVisited(l.id)).length} / {filteredLandmarks.length}
+                  </p>
+                  <p className="text-sm text-muted-foreground">{t('landmarksVisited', selectedLanguage)}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </SidebarInset>
 
-      {/* Unified Floating Card - combines Landmark Panel, Cruise Port Info, and Landmark List */}
-      {/* Hide card when mobile sidebar is open */}
-      {!(isMobile && sidebarOpenMobile) && (
+      {/* Unified Floating Card - Desktop only, or mobile on 'map' tab */}
+      {!(isMobile && sidebarOpenMobile) && (!isMobile || activeTab === 'map') && (
         <UnifiedFloatingCard
           selectedLandmark={selectedLandmark}
           onLandmarkClose={() => setSelectedLandmark(null)}

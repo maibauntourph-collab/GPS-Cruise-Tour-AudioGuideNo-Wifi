@@ -39,6 +39,7 @@ export function PhotoGallery({ photos, title }: PhotoGalleryProps) {
               src={photo}
               alt={`${title} - Photo ${index + 1}`}
               className="h-full w-full object-cover"
+              loading="lazy"
             />
           </button>
         ))}
