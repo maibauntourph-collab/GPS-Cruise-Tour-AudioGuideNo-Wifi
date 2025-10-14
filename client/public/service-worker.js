@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'gps-audio-guide-v2';
+const CACHE_VERSION = 'gps-audio-guide-v3';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const MAP_TILES_CACHE = `${CACHE_VERSION}-map-tiles`;
