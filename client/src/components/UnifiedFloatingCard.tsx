@@ -570,9 +570,9 @@ export function UnifiedFloatingCard({
             </div>
 
             {/* Scrollable content - Contains both selected landmark and list */}
-            <div className="flex-1 min-h-0 overflow-y-auto space-y-4">
+            <div className="flex-1 min-h-0 overflow-y-auto space-y-4 pr-2">
             {selectedLandmark && (
-              <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
+              <div className="space-y-4 pb-4 border-b max-h-[60vh] overflow-y-auto pr-1">{/* Selected landmark details */}
                 <div>
                   <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
                     {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
@@ -654,8 +654,8 @@ export function UnifiedFloatingCard({
                     <Button
                       onClick={() => {
                         onAddToTour(selectedLandmark);
-                        setTourAddedInDialog(true);
-                        // 투어에 추가 후 리스트 탭으로 돌아가기
+                        // 투어에 추가 후 랜드마크 정보 닫고 리스트 탭으로 전환
+                        onLandmarkClose();
                         setActiveTab('list');
                       }}
                       variant="outline"
