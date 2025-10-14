@@ -484,6 +484,10 @@ export function UnifiedFloatingCard({
             onClick={(e) => {
               e.stopPropagation();
               if (selectedLandmark) {
+                if (tourAddedInDialog) {
+                  setActiveTab('list');
+                  setTourAddedInDialog(false);
+                }
                 onLandmarkClose();
               } else if (showCruisePort && onCruisePortClose) {
                 onCruisePortClose();
