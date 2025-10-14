@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
@@ -118,6 +118,8 @@ export function UnifiedFloatingCard({
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
   const cardRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -145,6 +147,11 @@ export function UnifiedFloatingCard({
     audioService.stop();
     setIsPlaying(false);
   }, [selectedLanguage]);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [showLandmarks, showActivities, showRestaurants]);
 
   // Clamp translate values to keep element within bounds
   const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
@@ -286,6 +293,14 @@ export function UnifiedFloatingCard({
     if (isRestaurant) return showRestaurants;
     return showLandmarks;
   });
+
+  // Clamp currentPage when filtered list length changes
+  useEffect(() => {
+    const totalPages = Math.ceil(filteredListLandmarks.length / itemsPerPage);
+    if (totalPages > 0 && currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [filteredListLandmarks.length, currentPage, itemsPerPage]);
 
   // Render minimized icon
   const renderMinimizedIcon = () => (
@@ -924,67 +939,116 @@ export function UnifiedFloatingCard({
               </Button>
             </div>
             
-            {/* Scrollable list - Takes remaining space */}
-            <div className="flex-1 min-h-0 overflow-y-auto space-y-2 pr-1">
-              {filteredListLandmarks.map(({ landmark, distance }) => (
-                <div
-                  key={landmark.id}
-                  className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
-                  onClick={() => onLandmarkSelect?.(landmark)}
-                  data-testid={`card-landmark-${landmark.id}`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        {landmark.category === 'Activity' ? (
-                          <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />
-                        ) : landmark.category === 'Restaurant' ? (
-                          <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />
-                        ) : (
-                          <LandmarkIcon className="w-4 h-4 text-primary" />
-                        )}
-                        <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
-                          {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                        </h4>
-                        {spokenLandmarks.has(landmark.id) && (
-                          <Volume2 className="w-3 h-3 text-green-600" />
-                        )}
-                      </div>
-                      {distance !== null && (
-                        <p className="text-xs text-muted-foreground">
-                          {formatDistance(distance)}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex gap-1">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onLandmarkSelect?.(landmark);
-                        }}
-                        className="h-8 w-8"
-                        data-testid={`button-info-${landmark.id}`}
-                      >
-                        <Info className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onLandmarkRoute(landmark);
-                        }}
-                        className="h-8 w-8"
-                        data-testid={`button-navigate-${landmark.id}`}
-                      >
-                        <Navigation className="w-4 h-4" />
-                      </Button>
-                    </div>
+            {/* Paginated list - Takes remaining space */}
+            <div className="flex-1 min-h-0 flex flex-col">
+              <div className="flex-1 overflow-y-auto space-y-2 pr-1">
+                {filteredListLandmarks.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+                    <List className="w-12 h-12 mb-3 opacity-50 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground">
+                      {t('noLandmarksFound', selectedLanguage)}
+                    </p>
                   </div>
+                ) : (() => {
+                  const totalPages = Math.ceil(filteredListLandmarks.length / itemsPerPage);
+                  const startIndex = (currentPage - 1) * itemsPerPage;
+                  const endIndex = startIndex + itemsPerPage;
+                  const currentItems = filteredListLandmarks.slice(startIndex, endIndex);
+
+                  return currentItems.map(({ landmark, distance }) => (
+                    <div
+                      key={landmark.id}
+                      className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
+                      onClick={() => onLandmarkSelect?.(landmark)}
+                      data-testid={`card-landmark-${landmark.id}`}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            {landmark.category === 'Activity' ? (
+                              <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />
+                            ) : landmark.category === 'Restaurant' ? (
+                              <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />
+                            ) : (
+                              <LandmarkIcon className="w-4 h-4 text-primary" />
+                            )}
+                            <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
+                              {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                            </h4>
+                            {spokenLandmarks.has(landmark.id) && (
+                              <Volume2 className="w-3 h-3 text-green-600" />
+                            )}
+                          </div>
+                          {distance !== null && (
+                            <p className="text-xs text-muted-foreground">
+                              {formatDistance(distance)}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex gap-1">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onLandmarkSelect?.(landmark);
+                            }}
+                            className="h-8 w-8"
+                            data-testid={`button-info-${landmark.id}`}
+                          >
+                            <Info className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onLandmarkRoute(landmark);
+                            }}
+                            className="h-8 w-8"
+                            data-testid={`button-navigate-${landmark.id}`}
+                          >
+                            <Navigation className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ));
+                })()}
+              </div>
+
+              {/* Pagination Controls */}
+              {filteredListLandmarks.length > itemsPerPage && (
+                <div className="flex items-center justify-between pt-3 border-t mt-3 flex-shrink-0">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                    disabled={currentPage === 1}
+                    className="gap-1"
+                    data-testid="button-prev-page"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    {t('previous', selectedLanguage)}
+                  </Button>
+                  
+                  <span className="text-sm text-muted-foreground" data-testid="text-page-info">
+                    {currentPage} / {Math.ceil(filteredListLandmarks.length / itemsPerPage)}
+                  </span>
+
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage(prev => Math.min(Math.ceil(filteredListLandmarks.length / itemsPerPage), prev + 1))}
+                    disabled={currentPage === Math.ceil(filteredListLandmarks.length / itemsPerPage)}
+                    className="gap-1"
+                    data-testid="button-next-page"
+                  >
+                    {t('next', selectedLanguage)}
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
                 </div>
-              ))}
+              )}
             </div>
           </TabsContent>
         </Tabs>
