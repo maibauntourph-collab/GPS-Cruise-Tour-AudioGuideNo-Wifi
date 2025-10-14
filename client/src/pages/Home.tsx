@@ -39,8 +39,17 @@ const detectBrowserLanguage = (): string => {
   // Supported languages
   const supportedLanguages = ['en', 'ko', 'es', 'fr', 'de', 'it', 'zh', 'ja', 'pt', 'ru'];
   
+  const detectedLang = supportedLanguages.includes(langCode) ? langCode : 'en';
+  
+  console.log('🌐 Browser language detection:', {
+    browserLang,
+    langCode,
+    detectedLang,
+    supportedLanguages
+  });
+  
   // Return matched language or default to English
-  return supportedLanguages.includes(langCode) ? langCode : 'en';
+  return detectedLang;
 };
 
 export default function Home() {
@@ -49,7 +58,15 @@ export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
     // Check localStorage first, then browser language
     const savedLanguage = localStorage.getItem('selected-language');
-    return savedLanguage || detectBrowserLanguage();
+    const finalLanguage = savedLanguage || detectBrowserLanguage();
+    
+    console.log('📝 Language initialization:', {
+      savedLanguage,
+      finalLanguage,
+      source: savedLanguage ? 'localStorage' : 'browser detection'
+    });
+    
+    return finalLanguage;
   });
   const [offlineMode, setOfflineMode] = useState(false);
   const [isMobile, setIsMobile] = useState(() => 
