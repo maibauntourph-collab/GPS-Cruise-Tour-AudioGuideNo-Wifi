@@ -14,6 +14,9 @@ import L from 'leaflet';
 import { LandmarkDetailDialog } from './LandmarkDetailDialog';
 
 interface UnifiedFloatingCardProps {
+  // Control props
+  forceShowList?: boolean;
+  
   // Landmark Panel props
   selectedLandmark: Landmark | null;
   onLandmarkClose: () => void;
@@ -88,6 +91,7 @@ function getTransportIcon(type: string) {
 }
 
 export function UnifiedFloatingCard({
+  forceShowList = false,
   selectedLandmark,
   onLandmarkClose,
   onNavigate,
@@ -170,6 +174,14 @@ export function UnifiedFloatingCard({
       setActiveTab('list');
     }
   }, [showCruisePort, activeTab]);
+
+  // Handle forceShowList - show card and switch to list tab
+  useEffect(() => {
+    if (forceShowList) {
+      setIsMinimized(false);
+      setActiveTab('list');
+    }
+  }, [forceShowList]);
 
   // Wrapper handlers for list tab filters with scroll functionality
   const handleListToggleLandmarks = () => {

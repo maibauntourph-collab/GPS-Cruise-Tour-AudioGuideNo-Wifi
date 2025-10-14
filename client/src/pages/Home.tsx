@@ -119,6 +119,7 @@ export default function Home() {
     segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
   } | null>(null);
   const [showMenu, setShowMenu] = useState(false);
+  const [forceShowCard, setForceShowCard] = useState(false);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
 
@@ -606,6 +607,7 @@ export default function Home() {
 
       {/* Unified Floating Card */}
       <UnifiedFloatingCard
+          forceShowList={forceShowCard}
           selectedLandmark={selectedLandmark}
           onLandmarkClose={() => setSelectedLandmark(null)}
           onNavigate={handleLandmarkRoute}
@@ -877,6 +879,9 @@ export default function Home() {
               onClick={() => {
                 setShowDirectionsDialog(false);
                 setPendingLandmark(null);
+                // 리스트를 다시 표시
+                setForceShowCard(true);
+                setTimeout(() => setForceShowCard(false), 100);
               }} 
               data-testid="button-cancel-navigation"
             >
