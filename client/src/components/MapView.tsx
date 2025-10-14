@@ -391,7 +391,6 @@ export function MapView({
             key={landmark.id}
             position={[landmark.lat, landmark.lng]}
             icon={icon}
-            draggable={false}
             eventHandlers={{
               click: () => {
                 if (onAddToTour) {
