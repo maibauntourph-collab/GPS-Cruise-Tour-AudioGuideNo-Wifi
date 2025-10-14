@@ -228,9 +228,9 @@ export function UnifiedFloatingCard({
       setShowDetailDialog(true);
     } else if (showCruisePort && city?.cruisePort) {
       setActiveTab('cruise');
-    } else {
-      setActiveTab('list');
     }
+    // Note: Don't change activeTab when selectedLandmark is null
+    // This allows Info icon to show in Tour tab when no landmark is selected
   }, [selectedLandmark, showCruisePort, city]);
 
   // Stop audio when landmark changes or component unmounts
@@ -466,6 +466,55 @@ export function UnifiedFloatingCard({
           <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
             {t('infoPanel', selectedLanguage)}
           </h3>
+          
+          {/* Action buttons - Only show when landmark is selected */}
+          {selectedLandmark && (
+            <>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onNavigate?.(selectedLandmark);
+                }}
+                className="h-8 w-8"
+                data-testid="button-header-navigate"
+              >
+                <Navigation className="w-4 h-4" />
+              </Button>
+              {onAddToTour && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddToTour(selectedLandmark);
+                    onLandmarkClose();
+                    setActiveTab('list');
+                  }}
+                  disabled={isInTour || tourStops.some(stop => stop.id === selectedLandmark.id)}
+                  className="h-8 w-8"
+                  data-testid="button-header-add-to-tour"
+                >
+                  <MapPinned className="w-4 h-4" />
+                </Button>
+              )}
+            </>
+          )}
+          
+          {/* Info icon - Only show when no landmark selected */}
+          {!selectedLandmark && activeTab === 'landmark' && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8"
+              disabled
+              data-testid="button-header-info-icon"
+            >
+              <Info className="w-4 h-4 opacity-50" />
+            </Button>
+          )}
+          
           <Button
             variant="ghost"
             size="icon"
@@ -637,35 +686,6 @@ export function UnifiedFloatingCard({
                         {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription')}
                       </p>
                     </div>
-                  )}
-                </div>
-
-                <div className="pt-3 border-t space-y-2">
-                  <Button
-                    onClick={() => onNavigate(selectedLandmark)}
-                    className="w-full gap-2"
-                    data-testid="button-get-directions"
-                  >
-                    <Navigation className="w-4 h-4" />
-                    {t('getDirections', selectedLanguage)}
-                  </Button>
-                  
-                  {onAddToTour && (
-                    <Button
-                      onClick={() => {
-                        onAddToTour(selectedLandmark);
-                        // 투어에 추가 후 랜드마크 정보 닫고 리스트 탭으로 전환
-                        onLandmarkClose();
-                        setActiveTab('list');
-                      }}
-                      variant="outline"
-                      className="w-full gap-2"
-                      disabled={isInTour}
-                      data-testid="button-add-to-tour"
-                    >
-                      <MapPinned className="w-4 h-4" />
-                      {isInTour ? t('inTour', selectedLanguage) : t('addToTour', selectedLanguage)}
-                    </Button>
                   )}
                 </div>
 
