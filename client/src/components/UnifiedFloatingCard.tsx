@@ -1346,7 +1346,14 @@ export function UnifiedFloatingCard({
           transform: 'translateX(calc(-50% - 20px))',
           zIndex: 1002
         }}
-        onClick={() => setIsMinimized(!isMinimized)}
+        onClick={() => {
+          if (isMinimized) {
+            setActiveTab('list');
+            setIsMinimized(false);
+          } else {
+            setIsMinimized(true);
+          }
+        }}
         data-testid="button-floating-schedule"
       >
         <div className="w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center cursor-pointer shadow-lg">
