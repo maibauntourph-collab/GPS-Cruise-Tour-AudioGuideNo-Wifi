@@ -1028,7 +1028,7 @@ export function UnifiedFloatingCard({
                             size="sm"
                             onClick={() => setTransportPage(prev => Math.max(1, prev - 1))}
                             disabled={transportPage === 1}
-                            className="gap-1"
+                            className={`gap-1 ${transportPage > 1 ? 'animate-pulse' : ''}`}
                             data-testid="button-transport-prev-page"
                           >
                             <ChevronLeft className="w-4 h-4" />
@@ -1044,7 +1044,7 @@ export function UnifiedFloatingCard({
                             size="sm"
                             onClick={() => setTransportPage(prev => Math.min(Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage), prev + 1))}
                             disabled={transportPage === Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage)}
-                            className="gap-1"
+                            className={`gap-1 ${transportPage < Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage) ? 'animate-pulse' : ''}`}
                             data-testid="button-transport-next-page"
                           >
                             {t('next', selectedLanguage)}
@@ -1103,18 +1103,30 @@ export function UnifiedFloatingCard({
                       <>
                         {currentTourStops.map((stop, idx) => {
                           const index = startIndex + idx;
+                          // Determine category color
+                          const getCategoryColor = (category: string) => {
+                            if (category === 'Activity') return 'hsl(210, 85%, 55%)'; // Blue
+                            if (category === 'Restaurant') return 'hsl(25, 95%, 55%)'; // Orange
+                            if (category === 'Gift Shop') return 'hsl(45, 90%, 55%)'; // Gold
+                            return 'hsl(14, 85%, 55%)'; // Terracotta (default for landmarks)
+                          };
+                          
+                          const categoryColor = getCategoryColor(stop.category || '');
+                          
                           return (
                             <div key={stop.id}>
                               <div
-                                className="p-2 bg-primary/5 rounded-lg flex items-center gap-2 cursor-pointer hover-elevate"
+                                className="p-2 rounded-lg flex items-center gap-2 cursor-pointer hover-elevate"
+                                style={{ backgroundColor: categoryColor }}
                                 onClick={() => onLandmarkSelect?.(stop)}
                                 data-testid={`tour-stop-${stop.id}`}
                               >
-                                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[hsl(14,85%,55%)] text-white text-xs font-bold">
+                                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/90 text-xs font-bold"
+                                  style={{ color: categoryColor }}>
                                   {index + 1}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-medium truncate">
+                                  <p className="text-sm font-medium truncate text-white">
                                     {getTranslatedContent(stop, selectedLanguage, 'name')}
                                   </p>
                                 </div>
@@ -1122,7 +1134,7 @@ export function UnifiedFloatingCard({
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-7 w-7"
+                                    className="h-7 w-7 text-white hover:bg-white/20"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       onLandmarkSelect?.(stop);
@@ -1134,7 +1146,7 @@ export function UnifiedFloatingCard({
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-7 w-7"
+                                    className="h-7 w-7 text-white hover:bg-white/20"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       onRemoveTourStop?.(stop.id);
@@ -1165,7 +1177,7 @@ export function UnifiedFloatingCard({
                               size="sm"
                               onClick={() => setTourPage(prev => Math.max(1, prev - 1))}
                               disabled={tourPage === 1}
-                              className="gap-1 h-7 text-xs"
+                              className={`gap-1 h-7 text-xs ${tourPage > 1 ? 'animate-pulse' : ''}`}
                               data-testid="button-tour-prev-page"
                             >
                               <ChevronLeft className="w-3 h-3" />
@@ -1181,7 +1193,7 @@ export function UnifiedFloatingCard({
                               size="sm"
                               onClick={() => setTourPage(prev => Math.min(totalPages, prev + 1))}
                               disabled={tourPage === totalPages}
-                              className="gap-1 h-7 text-xs"
+                              className={`gap-1 h-7 text-xs ${tourPage < totalPages ? 'animate-pulse' : ''}`}
                               data-testid="button-tour-next-page"
                             >
                               Next
@@ -1282,7 +1294,7 @@ export function UnifiedFloatingCard({
                     size="sm"
                     onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                     disabled={currentPage === 1}
-                    className="gap-1"
+                    className={`gap-1 ${currentPage > 1 ? 'animate-pulse' : ''}`}
                     data-testid="button-prev-page"
                   >
                     <ChevronLeft className="w-4 h-4" />
@@ -1298,7 +1310,7 @@ export function UnifiedFloatingCard({
                     size="sm"
                     onClick={() => setCurrentPage(prev => Math.min(Math.ceil(filteredListLandmarks.length / itemsPerPage), prev + 1))}
                     disabled={currentPage === Math.ceil(filteredListLandmarks.length / itemsPerPage)}
-                    className="gap-1"
+                    className={`gap-1 ${currentPage < Math.ceil(filteredListLandmarks.length / itemsPerPage) ? 'animate-pulse' : ''}`}
                     data-testid="button-next-page"
                   >
                     {t('next', selectedLanguage)}
