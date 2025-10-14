@@ -420,7 +420,12 @@ export function UnifiedFloatingCard({
   });
 
   // Filter landmarks in List tab based on category (synced with Home filter state)
+  // Also exclude landmarks that are already in tour stops
   const filteredListLandmarks = sortedLandmarks.filter(({ landmark }) => {
+    // Hide landmarks that are already in tour stops
+    const isInTour = tourStops.some(stop => stop.id === landmark.id);
+    if (isInTour) return false;
+    
     const isActivity = landmark.category === 'Activity';
     const isRestaurant = landmark.category === 'Restaurant';
     const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
