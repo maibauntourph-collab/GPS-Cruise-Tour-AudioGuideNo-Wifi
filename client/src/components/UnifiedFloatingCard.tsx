@@ -446,15 +446,12 @@ export function UnifiedFloatingCard({
         left: '50%',
         top: '50%',
         zIndex,
-        cursor: isDragging ? 'grabbing' : 'grab',
+        cursor: 'default',
         width: isMobile ? 'calc(100vw - 16px)' : '28rem',
         maxWidth: 'calc(100vw - 16px)',
         maxHeight: isMobile ? 'calc(100vh - 80px)' : 'calc(100vh - 32px)',
-        userSelect: 'none',
-        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
+        transform: 'translate(-50%, -50%)'
       }}
-      onMouseDown={handleStart}
-      onTouchStart={handleStart}
       onClick={handleCardClick}
       data-testid="card-unified-floating-container"
     >
@@ -1097,7 +1094,7 @@ export function UnifiedFloatingCard({
                     <MapPinned className="w-4 h-4 text-primary" />
                     {t('tourRoute', selectedLanguage)} ({tourStops.length})
                   </h5>
-                  {tourRouteInfo && (
+                  {tourStops.length >= 2 && tourRouteInfo && (
                     <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
                       <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
