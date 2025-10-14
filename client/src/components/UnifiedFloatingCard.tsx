@@ -126,6 +126,7 @@ export function UnifiedFloatingCard({
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
+  const [tourAddedInDialog, setTourAddedInDialog] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [transportPage, setTransportPage] = useState(1);
   const itemsPerPage = 5;
@@ -647,6 +648,7 @@ export function UnifiedFloatingCard({
                     <Button
                       onClick={() => {
                         onAddToTour(selectedLandmark);
+                        setTourAddedInDialog(true);
                         // 투어에 추가 후 리스트 탭으로 돌아가기
                         setActiveTab('list');
                       }}
@@ -1225,13 +1227,16 @@ export function UnifiedFloatingCard({
         isOpen={showDetailDialog}
         onClose={() => {
           setShowDetailDialog(false);
+          if (tourAddedInDialog) {
+            setActiveTab('list');
+            setTourAddedInDialog(false);
+          }
           onLandmarkClose();
         }}
         onNavigate={onNavigate}
         onAddToTour={onAddToTour ? (landmark) => {
           onAddToTour(landmark);
-          setShowDetailDialog(false);
-          setActiveTab('list');
+          setTourAddedInDialog(true);
         } : undefined}
         isInTour={isInTour}
         selectedLanguage={selectedLanguage}
