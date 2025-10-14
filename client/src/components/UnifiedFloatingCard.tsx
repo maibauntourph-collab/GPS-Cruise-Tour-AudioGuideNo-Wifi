@@ -515,6 +515,20 @@ export function UnifiedFloatingCard({
             </Button>
           )}
           
+          {/* List button in header */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveTab('list');
+            }}
+            className="h-8 w-8"
+            data-testid="button-header-list"
+          >
+            <List className="w-4 h-4" />
+          </Button>
+          
           <Button
             variant="ghost"
             size="icon"
@@ -550,27 +564,6 @@ export function UnifiedFloatingCard({
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col flex-1 min-h-0">
-          <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
-            <TabsTrigger 
-              value="landmark" 
-              data-testid="tab-landmark"
-            >
-              <MapPin className="w-4 h-4 mr-1" />
-              {t('tour', selectedLanguage)}
-            </TabsTrigger>
-            <TabsTrigger 
-              value="cruise" 
-              disabled={!city?.cruisePort}
-              data-testid="tab-cruise"
-            >
-              <Ship className="w-4 h-4 mr-1" />
-              {t('cruisePort', selectedLanguage)}
-            </TabsTrigger>
-            <TabsTrigger value="list" data-testid="tab-list">
-              <List className="w-4 h-4 mr-1" />
-              {t('list', selectedLanguage)}
-            </TabsTrigger>
-          </TabsList>
 
           {/* Tour Tab with filters */}
           <TabsContent value="landmark" className="mt-4 flex flex-col flex-1">
