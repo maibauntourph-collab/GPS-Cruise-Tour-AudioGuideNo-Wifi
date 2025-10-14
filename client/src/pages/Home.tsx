@@ -23,6 +23,7 @@ import { useServiceWorker } from '@/hooks/useServiceWorker';
 import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
+import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
 import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, Map as MapIcon, List, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -38,6 +39,11 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<TabView>('map');
   const { markVisited, isVisited } = useVisitedLandmarks();
   useServiceWorker();
+  
+  // Detect device capabilities for performance optimization
+  const [deviceCapabilities] = useState(() => detectDeviceCapabilities());
+  const maxMarkers = getMaxMarkersToRender(deviceCapabilities.isLowEnd);
+  const reduceAnimations = shouldReduceAnimations(deviceCapabilities.isLowEnd);
   
   const { data: cities = [], isLoading: citiesLoading } = useQuery<City[]>({
     queryKey: ['/api/cities'],
@@ -287,7 +293,7 @@ export default function Home() {
   };
 
   // Filter landmarks based on category
-  const filteredLandmarks = landmarks.filter(landmark => {
+  const filteredByCategory = landmarks.filter(landmark => {
     const isActivity = landmark.category === 'Activity';
     const isRestaurant = landmark.category === 'Restaurant';
     const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
@@ -296,6 +302,17 @@ export default function Home() {
     if (isGiftShop) return showGiftShops;
     return showLandmarks;
   });
+
+  // Optimize for low-end devices: limit markers and prioritize by distance
+  const filteredLandmarks = deviceCapabilities.isLowEnd && position
+    ? filteredByCategory
+        .map(landmark => ({
+          ...landmark,
+          distance: calculateDistance(position.latitude, position.longitude, landmark.lat, landmark.lng)
+        }))
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, maxMarkers)
+    : filteredByCategory;
 
   if (citiesLoading || landmarksLoading) {
     return (
