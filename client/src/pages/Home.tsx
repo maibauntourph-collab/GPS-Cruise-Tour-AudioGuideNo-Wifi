@@ -28,7 +28,7 @@ import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag } from 
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
-  const { open: sidebarOpen, toggleSidebar } = useSidebar();
+  const { open: sidebarOpen, openMobile: sidebarOpenMobile, isMobile, toggleSidebar } = useSidebar();
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
@@ -431,57 +431,60 @@ export default function Home() {
       </SidebarInset>
 
       {/* Unified Floating Card - combines Landmark Panel, Cruise Port Info, and Landmark List */}
-      <UnifiedFloatingCard
-        selectedLandmark={selectedLandmark}
-        onLandmarkClose={() => setSelectedLandmark(null)}
-        onNavigate={handleLandmarkRoute}
-        onAddToTour={handleAddToTour}
-        isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
-        city={selectedCity || null}
-        showCruisePort={showCruisePort}
-        onCruisePortClose={() => setShowCruisePort(false)}
-        tourStops={tourStops}
-        tourRouteInfo={tourRouteInfo}
-        onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
-        onLandmarkClick={(landmarkId) => {
-          const landmark = filteredLandmarks.find(l => l.id === landmarkId);
-          if (landmark) {
-            // Clear any existing timeout
-            if (cruisePortTimeoutRef.current) {
-              clearTimeout(cruisePortTimeoutRef.current);
+      {/* Hide card when mobile sidebar is open */}
+      {!(isMobile && sidebarOpenMobile) && (
+        <UnifiedFloatingCard
+          selectedLandmark={selectedLandmark}
+          onLandmarkClose={() => setSelectedLandmark(null)}
+          onNavigate={handleLandmarkRoute}
+          onAddToTour={handleAddToTour}
+          isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
+          city={selectedCity || null}
+          showCruisePort={showCruisePort}
+          onCruisePortClose={() => setShowCruisePort(false)}
+          tourStops={tourStops}
+          tourRouteInfo={tourRouteInfo}
+          onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
+          onLandmarkClick={(landmarkId) => {
+            const landmark = filteredLandmarks.find(l => l.id === landmarkId);
+            if (landmark) {
+              // Clear any existing timeout
+              if (cruisePortTimeoutRef.current) {
+                clearTimeout(cruisePortTimeoutRef.current);
+              }
+              
+              // Use flushSync to immediately update state before rendering
+              flushSync(() => {
+                setKeepCruisePortVisible(true);
+              });
+              
+              // Now set selected landmark
+              setSelectedLandmark(landmark);
+              
+              // Start the 2-second countdown
+              cruisePortTimeoutRef.current = setTimeout(() => {
+                setKeepCruisePortVisible(false);
+                cruisePortTimeoutRef.current = null;
+              }, 2000);
             }
-            
-            // Use flushSync to immediately update state before rendering
-            flushSync(() => {
-              setKeepCruisePortVisible(true);
-            });
-            
-            // Now set selected landmark
-            setSelectedLandmark(landmark);
-            
-            // Start the 2-second countdown
-            cruisePortTimeoutRef.current = setTimeout(() => {
-              setKeepCruisePortVisible(false);
-              cruisePortTimeoutRef.current = null;
-            }, 2000);
-          }
-        }}
-        landmarks={filteredLandmarks}
-        userPosition={position}
-        onLandmarkRoute={handleLandmarkRoute}
-        spokenLandmarks={spokenLandmarks}
-        onLandmarkSelect={setSelectedLandmark}
-        showLandmarks={showLandmarks}
-        showActivities={showActivities}
-        showRestaurants={showRestaurants}
-        showGiftShops={showGiftShops}
-        onToggleLandmarks={handleToggleLandmarks}
-        onToggleActivities={handleToggleActivities}
-        onToggleRestaurants={handleToggleRestaurants}
-        onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
-        selectedLanguage={selectedLanguage}
-        onMapMarkerClick={handleMapMarkerClick}
-      />
+          }}
+          landmarks={filteredLandmarks}
+          userPosition={position}
+          onLandmarkRoute={handleLandmarkRoute}
+          spokenLandmarks={spokenLandmarks}
+          onLandmarkSelect={setSelectedLandmark}
+          showLandmarks={showLandmarks}
+          showActivities={showActivities}
+          showRestaurants={showRestaurants}
+          showGiftShops={showGiftShops}
+          onToggleLandmarks={handleToggleLandmarks}
+          onToggleActivities={handleToggleActivities}
+          onToggleRestaurants={handleToggleRestaurants}
+          onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
+          selectedLanguage={selectedLanguage}
+          onMapMarkerClick={handleMapMarkerClick}
+        />
+      )}
 
       {/* Google Maps Direction Choice Dialog */}
       <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
