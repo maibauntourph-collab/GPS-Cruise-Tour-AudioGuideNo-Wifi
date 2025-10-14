@@ -434,13 +434,14 @@ export function UnifiedFloatingCard({
     }
   }, [filteredListLandmarks.length, currentPage, itemsPerPage]);
 
-  // Render minimized icon - Fixed to top right of header
+  // Render minimized icon - Fixed between title and landmark button
   const renderMinimizedIcon = () => (
     <div
       style={{
         position: 'fixed',
-        right: '16px',
-        top: '8px',
+        left: '50%',
+        top: '12px',
+        transform: 'translateX(-50%)',
         zIndex: 1002
       }}
       onClick={() => setIsMinimized(false)}
