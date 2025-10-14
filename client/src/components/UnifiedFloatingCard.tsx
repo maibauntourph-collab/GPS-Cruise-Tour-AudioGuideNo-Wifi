@@ -1028,7 +1028,7 @@ export function UnifiedFloatingCard({
                             size="sm"
                             onClick={() => setTransportPage(prev => Math.max(1, prev - 1))}
                             disabled={transportPage === 1}
-                            className={`gap-1 ${transportPage > 1 ? 'animate-pulse' : ''}`}
+                            className={`gap-1 ${transportPage > 1 ? 'animate-blink' : ''}`}
                             data-testid="button-transport-prev-page"
                           >
                             <ChevronLeft className="w-4 h-4" />
@@ -1044,7 +1044,7 @@ export function UnifiedFloatingCard({
                             size="sm"
                             onClick={() => setTransportPage(prev => Math.min(Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage), prev + 1))}
                             disabled={transportPage === Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage)}
-                            className={`gap-1 ${transportPage < Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage) ? 'animate-pulse' : ''}`}
+                            className={`gap-1 ${transportPage < Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage) ? 'animate-blink' : ''}`}
                             data-testid="button-transport-next-page"
                           >
                             {t('next', selectedLanguage)}
@@ -1177,7 +1177,7 @@ export function UnifiedFloatingCard({
                               size="sm"
                               onClick={() => setTourPage(prev => Math.max(1, prev - 1))}
                               disabled={tourPage === 1}
-                              className={`gap-1 h-7 text-xs ${tourPage > 1 ? 'animate-pulse' : ''}`}
+                              className={`gap-1 h-7 text-xs ${tourPage > 1 ? 'animate-blink' : ''}`}
                               data-testid="button-tour-prev-page"
                             >
                               <ChevronLeft className="w-3 h-3" />
@@ -1193,7 +1193,7 @@ export function UnifiedFloatingCard({
                               size="sm"
                               onClick={() => setTourPage(prev => Math.min(totalPages, prev + 1))}
                               disabled={tourPage === totalPages}
-                              className={`gap-1 h-7 text-xs ${tourPage < totalPages ? 'animate-pulse' : ''}`}
+                              className={`gap-1 h-7 text-xs ${tourPage < totalPages ? 'animate-blink' : ''}`}
                               data-testid="button-tour-next-page"
                             >
                               Next
@@ -1294,7 +1294,7 @@ export function UnifiedFloatingCard({
                     size="sm"
                     onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                     disabled={currentPage === 1}
-                    className={`gap-1 ${currentPage > 1 ? 'animate-pulse' : ''}`}
+                    className={`gap-1 ${currentPage > 1 ? 'animate-blink' : ''}`}
                     data-testid="button-prev-page"
                   >
                     <ChevronLeft className="w-4 h-4" />
@@ -1310,7 +1310,7 @@ export function UnifiedFloatingCard({
                     size="sm"
                     onClick={() => setCurrentPage(prev => Math.min(Math.ceil(filteredListLandmarks.length / itemsPerPage), prev + 1))}
                     disabled={currentPage === Math.ceil(filteredListLandmarks.length / itemsPerPage)}
-                    className={`gap-1 ${currentPage < Math.ceil(filteredListLandmarks.length / itemsPerPage) ? 'animate-pulse' : ''}`}
+                    className={`gap-1 ${currentPage < Math.ceil(filteredListLandmarks.length / itemsPerPage) ? 'animate-blink' : ''}`}
                     data-testid="button-next-page"
                   >
                     {t('next', selectedLanguage)}

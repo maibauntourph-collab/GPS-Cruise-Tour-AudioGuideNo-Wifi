@@ -602,16 +602,9 @@ const LANDMARKS: Landmark[] = [
       'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
       'https://images.unsplash.com/photo-1548585744-6e2d7c1e1a21?w=800',
       'https://images.unsplash.com/photo-1598559862042-31ebfe8e09f2?w=800',
-      'https://images.unsplash.com/photo-nAb-SFzL1GM?w=800',
-      'https://images.unsplash.com/photo-TC73XlNiDeM?w=800',
-      'https://images.unsplash.com/photo-VFRTXGw1VjU?w=800',
-      'https://images.unsplash.com/photo-_TA9AoKd2j4?w=800',
-      'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800',
-      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
+      'https://images.unsplash.com/photo-1604999333679-b86d54738315?w=800',
       'https://images.unsplash.com/photo-1555992336-fb0d29498b13?w=800',
-      'https://images.unsplash.com/photo-1525874684015-58379d421a52?w=800',
-      'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800',
-      'https://images.unsplash.com/photo-1529260830199-42c24126f198?w=800'
+      'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800'
     ],
     historicalInfo: 'The Colosseum, also known as the Flavian Amphitheatre, is an oval amphitheatre in the centre of Rome. Built of travertine limestone, tuff, and brick-faced concrete, it was the largest amphitheatre ever built at the time and held 50,000 to 80,000 spectators.',
     yearBuilt: '70-80 AD',
