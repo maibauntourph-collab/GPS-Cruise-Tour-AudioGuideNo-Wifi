@@ -443,27 +443,6 @@ export function UnifiedFloatingCard({
     }
   }, [filteredListLandmarks.length, currentPage, itemsPerPage]);
 
-  // Render minimized icon - Fixed between title and landmark button
-  const renderMinimizedIcon = () => (
-    <div
-      style={{
-        position: 'fixed',
-        left: '50%',
-        top: '29px',
-        transform: 'translateX(-50%)',
-        zIndex: 1002
-      }}
-      onClick={() => setIsMinimized(false)}
-      data-testid="button-restore-unified-card"
-    >
-      <div className="w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center cursor-pointer shadow-lg animate-pulse">
-        {activeTab === 'landmark' && <MapPin className="w-5 h-5 text-primary-foreground" />}
-        {activeTab === 'cruise' && <Ship className="w-5 h-5 text-primary-foreground" />}
-        {activeTab === 'list' && <List className="w-5 h-5 text-primary-foreground" />}
-      </div>
-    </div>
-  );
-
   // Render full card
   const renderFullCard = () => (
     <div
@@ -556,19 +535,6 @@ export function UnifiedFloatingCard({
             data-testid="button-header-list"
           >
             <List className="w-4 h-4" />
-          </Button>
-          
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsMinimized(true);
-            }}
-            className="h-6 w-6"
-            data-testid="button-minimize-unified"
-          >
-            <Minus className="w-4 h-4" />
           </Button>
           <Button
             variant="ghost"
@@ -1369,5 +1335,27 @@ export function UnifiedFloatingCard({
     return null;
   }
 
-  return isMinimized ? renderMinimizedIcon() : renderFullCard();
+  return (
+    <>
+      {/* Floating Schedule Button - Always visible */}
+      <div
+        style={{
+          position: 'fixed',
+          left: '50%',
+          top: '29px',
+          transform: 'translateX(-50%)',
+          zIndex: 1002
+        }}
+        onClick={() => setIsMinimized(!isMinimized)}
+        data-testid="button-floating-schedule"
+      >
+        <div className="w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center cursor-pointer shadow-lg">
+          <MapPinned className="w-5 h-5 text-primary-foreground" />
+        </div>
+      </div>
+      
+      {/* Main Card */}
+      {isMinimized ? null : renderFullCard()}
+    </>
+  );
 }
