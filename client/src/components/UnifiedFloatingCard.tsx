@@ -1228,7 +1228,11 @@ export function UnifiedFloatingCard({
           onLandmarkClose();
         }}
         onNavigate={onNavigate}
-        onAddToTour={onAddToTour}
+        onAddToTour={onAddToTour ? (landmark) => {
+          onAddToTour(landmark);
+          setShowDetailDialog(false);
+          setActiveTab('list');
+        } : undefined}
         isInTour={isInTour}
         selectedLanguage={selectedLanguage}
       />
