@@ -997,7 +997,7 @@ export function UnifiedFloatingCard({
 
           {/* Landmark List Tab */}
           <TabsContent value="list" className="mt-4 flex flex-col flex-1">
-            {/* Tour Route Section - Fixed at top */}
+            {/* Tour Route Section - Scrollable */}
             {tourStops.length > 0 && (
               <div className="pb-3 mb-3 border-b flex-shrink-0">
                 <div className="flex items-center justify-between mb-2">
@@ -1011,7 +1011,7 @@ export function UnifiedFloatingCard({
                     </Badge>
                   )}
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 max-h-[200px] overflow-y-auto pr-1">
                   {tourStops.map((stop, index) => (
                     <div key={stop.id}>
                       <div
