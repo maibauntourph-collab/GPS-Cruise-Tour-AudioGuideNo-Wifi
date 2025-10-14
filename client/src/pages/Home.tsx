@@ -307,7 +307,7 @@ export default function Home() {
               size="sm"
               onClick={() => setShowActivities(!showActivities)}
               data-testid="button-toggle-activities"
-              className={`gap-1 ${showActivities ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+              className={`gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
             >
               <Activity className="w-4 h-4" />
               <span className="hidden sm:inline">{t('activities', selectedLanguage)}</span>
@@ -317,7 +317,7 @@ export default function Home() {
               size="sm"
               onClick={() => setShowRestaurants(!showRestaurants)}
               data-testid="button-toggle-restaurants"
-              className={`gap-1 ${showRestaurants ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+              className={`gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
             >
               <Utensils className="w-4 h-4" />
               <span className="hidden sm:inline">{t('restaurants', selectedLanguage)}</span>
@@ -328,7 +328,7 @@ export default function Home() {
                 size="sm"
                 onClick={() => setShowCruisePort(!showCruisePort)}
                 data-testid="button-toggle-cruise-port"
-                className={`gap-1 ${showCruisePort ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+                className={`gap-1 ${showCruisePort ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
               >
                 <Ship className="w-4 h-4" />
                 <span className="hidden sm:inline">{t('cruisePortInfo', selectedLanguage)}</span>

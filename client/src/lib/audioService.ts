@@ -61,7 +61,7 @@ class AudioService {
     return langMap[language] || 'en-US';
   }
 
-  // Find the best voice for the given language
+  // Find the best voice for the given language (prioritize natural/premium voices)
   private getVoiceForLanguage(langCode: string): SpeechSynthesisVoice | null {
     // Refresh voices if empty
     if (this.voices.length === 0) {
@@ -71,23 +71,46 @@ class AudioService {
     // Extract base language code (e.g., 'ko' from 'ko-KR')
     const baseLang = langCode.split('-')[0];
 
-    // Try to find exact match first (e.g., 'ko-KR')
-    let voice = this.voices.find(v => v.lang === langCode);
-    
-    // If no exact match, find any voice with the same base language
-    if (!voice) {
-      voice = this.voices.find(v => v.lang.startsWith(baseLang));
-    }
+    // Filter voices for the target language
+    const matchingVoices = this.voices.filter(v => 
+      v.lang === langCode || v.lang.startsWith(baseLang)
+    );
 
-    // Prefer local voices over remote when available
-    if (voice) {
-      const localVoice = this.voices.find(v => 
-        (v.lang === langCode || v.lang.startsWith(baseLang)) && v.localService
-      );
-      return localVoice || voice;
-    }
+    if (matchingVoices.length === 0) return null;
 
-    return null;
+    // Quality indicators (order matters - higher priority first)
+    const qualityKeywords = [
+      'premium', 'enhanced', 'neural', 'natural', 'high-quality',
+      'google', 'wavenet', 'standard', 'female', 'male'
+    ];
+
+    // Score each voice based on quality indicators
+    const scoredVoices = matchingVoices.map(voice => {
+      let score = 0;
+      const nameLower = voice.name.toLowerCase();
+      
+      // Check for quality keywords in voice name
+      qualityKeywords.forEach((keyword, index) => {
+        if (nameLower.includes(keyword)) {
+          score += (qualityKeywords.length - index) * 10;
+        }
+      });
+
+      // Prefer exact language match over base language match
+      if (voice.lang === langCode) score += 50;
+      
+      // Remote voices often have better quality (Google, Microsoft neural voices)
+      if (!voice.localService) score += 20;
+      
+      // Local voices as fallback (lower priority but still considered)
+      if (voice.localService) score += 5;
+
+      return { voice, score };
+    });
+
+    // Sort by score (highest first) and return the best voice
+    scoredVoices.sort((a, b) => b.score - a.score);
+    return scoredVoices[0].voice;
   }
 
   speak(text: string, landmarkId: string, language: string = 'en') {

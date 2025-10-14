@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -80,72 +80,76 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
 
+  const safeRemoveControl = useCallback((control: L.Routing.Control) => {
+    if (!control || !map) return;
+    
+    try {
+      // Check if map is still valid and loaded
+      if ((map as any)._loaded) {
+        map.removeControl(control);
+      }
+    } catch (e) {
+      // Silently handle removal errors
+      console.debug('Routing control removal handled:', e);
+    }
+  }, [map]);
+
   useEffect(() => {
     if (!map) return;
     
     if (!start || !end) {
       if (routingControlRef.current) {
-        try {
-          map.removeControl(routingControlRef.current);
-        } catch (e) {
-          console.warn('Failed to remove routing control:', e);
-        }
+        safeRemoveControl(routingControlRef.current);
         routingControlRef.current = null;
       }
       return;
     }
 
     if (routingControlRef.current) {
-      try {
-        map.removeControl(routingControlRef.current);
-      } catch (e) {
-        console.warn('Failed to remove previous routing control:', e);
-      }
+      safeRemoveControl(routingControlRef.current);
       routingControlRef.current = null;
     }
 
-    const control = L.Routing.control({
-      waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
-      routeWhileDragging: false,
-      addWaypoints: false,
-      fitSelectedRoutes: true,
-      showAlternatives: false,
-      lineOptions: {
-        styles: [
-          {
-            color: 'hsl(14, 85%, 55%)',
-            opacity: 0.8,
-            weight: 6,
-          },
-        ],
-        extendToWaypoints: true,
-        missingRouteTolerance: 0,
-      },
-      show: false,
-      createMarker: () => null as any,
-    } as any).addTo(map);
+    try {
+      const control = L.Routing.control({
+        waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
+        routeWhileDragging: false,
+        addWaypoints: false,
+        fitSelectedRoutes: true,
+        showAlternatives: false,
+        lineOptions: {
+          styles: [
+            {
+              color: 'hsl(14, 85%, 55%)',
+              opacity: 0.8,
+              weight: 6,
+            },
+          ],
+          extendToWaypoints: true,
+          missingRouteTolerance: 0,
+        },
+        show: false,
+        createMarker: () => null as any,
+      } as any).addTo(map);
 
-    if (onRouteFound) {
-      control.on('routesfound', (e) => {
-        onRouteFound(e.routes[0]);
-      });
+      if (onRouteFound) {
+        control.on('routesfound', (e) => {
+          onRouteFound(e.routes[0]);
+        });
+      }
+
+      routingControlRef.current = control;
+    } catch (e) {
+      console.warn('Failed to create routing control:', e);
     }
-
-    routingControlRef.current = control;
 
     return () => {
       if (routingControlRef.current) {
-        try {
-          if (map) {
-            map.removeControl(routingControlRef.current);
-          }
-        } catch (e) {
-          console.warn('Failed to cleanup routing control:', e);
-        }
+        safeRemoveControl(routingControlRef.current);
         routingControlRef.current = null;
       }
     };
-  }, [map, start, end, onRouteFound]);
+  }, [map, start, end, onRouteFound, safeRemoveControl]);
 
   return null;
 }
@@ -233,28 +237,34 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
 
+  const safeRemoveControl = useCallback((control: L.Routing.Control) => {
+    if (!control || !map) return;
+    
+    try {
+      // Check if map is still valid and loaded
+      if ((map as any)._loaded) {
+        map.removeControl(control);
+      }
+    } catch (e) {
+      // Silently handle removal errors
+      console.debug('Tour routing control removal handled:', e);
+    }
+  }, [map]);
+
   useEffect(() => {
     if (!map) return;
     
     // Don't show tour routing when there's an active navigation route
     if (tourStops.length < 2 || activeRoute) {
       if (routingControlRef.current) {
-        try {
-          map.removeControl(routingControlRef.current);
-        } catch (e) {
-          console.warn('Failed to remove tour routing control:', e);
-        }
+        safeRemoveControl(routingControlRef.current);
         routingControlRef.current = null;
       }
       return;
     }
 
     if (routingControlRef.current) {
-      try {
-        map.removeControl(routingControlRef.current);
-      } catch (e) {
-        console.warn('Failed to remove previous tour routing control:', e);
-      }
+      safeRemoveControl(routingControlRef.current);
       routingControlRef.current = null;
     }
 
@@ -281,22 +291,20 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute }: TourRo
       }
     });
 
-    control.addTo(map);
-    routingControlRef.current = control;
+    try {
+      control.addTo(map);
+      routingControlRef.current = control;
+    } catch (e) {
+      console.warn('Failed to add tour routing control:', e);
+    }
 
     return () => {
       if (routingControlRef.current) {
-        try {
-          if (map) {
-            map.removeControl(routingControlRef.current);
-          }
-        } catch (e) {
-          console.warn('Failed to cleanup tour routing control:', e);
-        }
+        safeRemoveControl(routingControlRef.current);
         routingControlRef.current = null;
       }
     };
-  }, [map, tourStops, onTourRouteFound, activeRoute]);
+  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl]);
 
   return null;
 }
@@ -318,7 +326,8 @@ export function MapView({
   onTourRouteFound,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
-  const activityIcon = createCustomIcon('hsl(195, 85%, 50%)'); // Blue for activities
+  const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
+  const restaurantIcon = createCustomIcon('hsl(142, 71%, 45%)'); // Green for restaurants
 
   return (
     <MapContainer
@@ -338,7 +347,8 @@ export function MapView({
 
       {landmarks.map((landmark) => {
         const isActivity = landmark.category === 'Activity';
-        const icon = isActivity ? activityIcon : landmarkIcon;
+        const isRestaurant = landmark.category === 'Restaurant';
+        const icon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : landmarkIcon;
         const isInTour = tourStops.some(stop => stop.id === landmark.id);
         
         return (
