@@ -442,6 +442,7 @@ export function UnifiedFloatingCard({
   const renderFullCard = () => (
     <div
       ref={cardRef}
+      className="bg-card border border-border rounded-lg shadow-lg flex flex-col"
       style={{
         position: 'fixed',
         left: '50%',
@@ -452,17 +453,15 @@ export function UnifiedFloatingCard({
         maxWidth: 'calc(100vw - 16px)',
         maxHeight: isMobile ? 'calc(100vh - 80px)' : 'calc(100vh - 32px)',
         userSelect: 'none',
-        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`,
-        display: 'flex',
-        flexDirection: 'column'
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
       }}
       onMouseDown={handleStart}
       onTouchStart={handleStart}
       onClick={handleCardClick}
       data-testid="card-unified-floating-container"
     >
-      <Card className="p-3 sm:p-4 flex flex-col flex-1 min-h-0" data-testid="card-unified-floating">
-        <div className="flex items-center gap-2 mb-3 flex-shrink-0">
+      {/* Header */}
+      <div className="flex items-center gap-2 p-3 sm:p-4 border-b flex-shrink-0">
           <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
             {t('infoPanel', selectedLanguage)}
           </h3>
@@ -561,14 +560,16 @@ export function UnifiedFloatingCard({
           >
             <X className="w-4 h-4" />
           </Button>
-        </div>
+      </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col flex-1 min-h-0">
+      {/* Content area with scroll */}
+      <div className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-4">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full">
 
           {/* Tour Tab with filters */}
-          <TabsContent value="landmark" className="mt-4 flex flex-col flex-1">
+          <TabsContent value="landmark" className="mt-4 flex flex-col">
             {/* Scrollable content - Contains both selected landmark and list */}
-            <div className="flex-1 min-h-0 overflow-y-auto space-y-4 pr-2">
+            <div className="space-y-4">
             {selectedLandmark && (
               <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
                 <div>
@@ -1309,7 +1310,7 @@ export function UnifiedFloatingCard({
             </div>
           </TabsContent>
         </Tabs>
-      </Card>
+      </div>
 
       <LandmarkDetailDialog
         landmark={selectedLandmark}
