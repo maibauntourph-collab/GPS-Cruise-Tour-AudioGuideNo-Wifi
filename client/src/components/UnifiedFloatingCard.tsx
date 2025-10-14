@@ -954,9 +954,9 @@ export function UnifiedFloatingCard({
             {city?.cruisePort && (
               <Tabs defaultValue="info" className="w-full flex flex-col flex-1 min-h-0">
                 <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
-                  <TabsTrigger value="info">{t('cruiseInfo', selectedLanguage)}</TabsTrigger>
-                  <TabsTrigger value="transport">{t('transportation', selectedLanguage)}</TabsTrigger>
-                  <TabsTrigger value="tips">{t('tips', selectedLanguage)}</TabsTrigger>
+                  <TabsTrigger value="info" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('cruiseInfo', selectedLanguage)}</TabsTrigger>
+                  <TabsTrigger value="transport" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('transportation', selectedLanguage)}</TabsTrigger>
+                  <TabsTrigger value="tips" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('tips', selectedLanguage)}</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="info" className="mt-4 overflow-y-auto flex-1">
