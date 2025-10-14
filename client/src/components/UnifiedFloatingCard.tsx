@@ -434,23 +434,22 @@ export function UnifiedFloatingCard({
     }
   }, [filteredListLandmarks.length, currentPage, itemsPerPage]);
 
-  // Render minimized icon
+  // Render minimized icon - Fixed to top right of header
   const renderMinimizedIcon = () => (
     <div
       style={{
         position: 'fixed',
-        left: '50%',
-        top: '50%',
-        zIndex,
-        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
+        right: '16px',
+        top: '8px',
+        zIndex: 1002
       }}
       onClick={() => setIsMinimized(false)}
       data-testid="button-restore-unified-card"
     >
-      <div className="w-14 h-14 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center cursor-pointer shadow-lg animate-pulse">
-        {activeTab === 'landmark' && <MapPin className="w-6 h-6 text-primary-foreground" />}
-        {activeTab === 'cruise' && <Ship className="w-6 h-6 text-primary-foreground" />}
-        {activeTab === 'list' && <List className="w-6 h-6 text-primary-foreground" />}
+      <div className="w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center cursor-pointer shadow-lg animate-pulse">
+        {activeTab === 'landmark' && <MapPin className="w-5 h-5 text-primary-foreground" />}
+        {activeTab === 'cruise' && <Ship className="w-5 h-5 text-primary-foreground" />}
+        {activeTab === 'list' && <List className="w-5 h-5 text-primary-foreground" />}
       </div>
     </div>
   );
