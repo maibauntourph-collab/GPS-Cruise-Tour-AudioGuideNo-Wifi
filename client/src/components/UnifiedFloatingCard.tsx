@@ -439,7 +439,7 @@ export function UnifiedFloatingCard({
                 variant={showActivities ? "default" : "outline"}
                 size="sm"
                 onClick={onToggleActivities}
-                className={`gap-1 ${showActivities ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+                className={`gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
                 data-testid="button-tour-filter-activities"
               >
                 <Activity className="w-4 h-4" />
@@ -449,7 +449,7 @@ export function UnifiedFloatingCard({
                 variant={showRestaurants ? "default" : "outline"}
                 size="sm"
                 onClick={onToggleRestaurants}
-                className={`gap-1 ${showRestaurants ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+                className={`gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
                 data-testid="button-tour-filter-restaurants"
               >
                 <Utensils className="w-4 h-4" />
@@ -959,7 +959,7 @@ export function UnifiedFloatingCard({
                 variant={showActivities ? "default" : "outline"}
                 size="sm"
                 onClick={onToggleActivities}
-                className={`gap-1 ${showActivities ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+                className={`gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
                 data-testid="button-filter-activities"
               >
                 <Activity className="w-4 h-4" />
@@ -969,7 +969,7 @@ export function UnifiedFloatingCard({
                 variant={showRestaurants ? "default" : "outline"}
                 size="sm"
                 onClick={onToggleRestaurants}
-                className={`gap-1 ${showRestaurants ? '!bg-[hsl(195,85%,50%)] hover:!bg-[hsl(195,85%,45%)] !border-[hsl(195,85%,50%)] text-white' : ''}`}
+                className={`gap-1 ${showRestaurants ? '!bg-[hsl(142,71%,45%)] hover:!bg-[hsl(142,71%,40%)] !border-[hsl(142,71%,45%)] text-white' : ''}`}
                 data-testid="button-filter-restaurants"
               >
                 <Utensils className="w-4 h-4" />
