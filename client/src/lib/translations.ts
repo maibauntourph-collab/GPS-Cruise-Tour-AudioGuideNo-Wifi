@@ -120,7 +120,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     details: 'Details',
     previous: 'Previous',
     next: 'Next',
-    noLandmarksFound: 'No landmarks found with current filters'
+    noLandmarksFound: 'No landmarks found with current filters',
+    noTransportOptions: 'No transportation options available'
   },
   ko: {
     landmarks: '명소',
@@ -215,7 +216,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     details: '상세 정보',
     previous: '이전',
     next: '다음',
-    noLandmarksFound: '현재 필터로 찾은 명소가 없습니다'
+    noLandmarksFound: '현재 필터로 찾은 명소가 없습니다',
+    noTransportOptions: '이용 가능한 교통편이 없습니다'
   },
   es: {
     landmarks: 'Monumentos',
@@ -521,7 +523,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     details: 'Dettagli',
     previous: 'Precedente',
     next: 'Successivo',
-    noLandmarksFound: 'Nessun punto di interesse trovato con i filtri attuali'
+    noLandmarksFound: 'Nessun punto di interesse trovato con i filtri attuali',
+    noTransportOptions: 'Nessuna opzione di trasporto disponibile'
   },
   zh: {
     landmarks: '地标',
