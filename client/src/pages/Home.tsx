@@ -36,6 +36,9 @@ export default function Home() {
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
   const [offlineMode, setOfflineMode] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => 
+    typeof window !== 'undefined' && window.innerWidth < 640
+  );
   const { markVisited, isVisited } = useVisitedLandmarks();
   useServiceWorker();
   
@@ -89,6 +92,15 @@ export default function Home() {
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
   }, [audioEnabled]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (tourStops.length < 2) {
