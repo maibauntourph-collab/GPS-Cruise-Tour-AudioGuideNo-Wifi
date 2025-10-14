@@ -1,8 +1,9 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, useMap, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Tooltip, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
+import { getTranslatedContent } from '@/lib/translations';
 
 const ROME_CENTER: [number, number] = [41.8902, 12.4922];
 
@@ -398,7 +399,24 @@ export function MapView({
                 }
               }
             }}
-          />
+          >
+            <Tooltip 
+              direction="top" 
+              offset={[0, -35]} 
+              opacity={0.95}
+              permanent={false}
+              sticky={true}
+            >
+              <div className="text-sm font-medium whitespace-nowrap">
+                {getTranslatedContent(landmark, selectedLanguage || 'en', 'name')}
+              </div>
+              {landmark.category && (
+                <div className="text-xs text-muted-foreground mt-1 whitespace-nowrap">
+                  {landmark.category}
+                </div>
+              )}
+            </Tooltip>
+          </Marker>
         );
       })}
 

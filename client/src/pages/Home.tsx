@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { flushSync } from 'react-dom';
 import { useQuery } from '@tanstack/react-query';
-import { SidebarTrigger, SidebarInset, useSidebar } from '@/components/ui/sidebar';
 import { 
   AlertDialog, 
   AlertDialogAction, 
@@ -14,10 +13,13 @@ import {
 } from '@/components/ui/alert-dialog';
 import { MapView } from '@/components/MapView';
 import { UnifiedFloatingCard } from '@/components/UnifiedFloatingCard';
-import { AppSidebar } from '@/components/AppSidebar';
+import { MenuDialog } from '@/components/MenuDialog';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { InstallPrompt } from '@/components/InstallPrompt';
 import { BottomSheet } from '@/components/BottomSheet';
+import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
+import { useToast } from '@/hooks/use-toast';
+import { Menu } from 'lucide-react';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
@@ -30,7 +32,6 @@ import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag } from 
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
-  const { open: sidebarOpen, openMobile: sidebarOpenMobile, isMobile, toggleSidebar } = useSidebar();
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
@@ -81,7 +82,9 @@ export default function Home() {
     duration: number;
     segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
   } | null>(null);
+  const [showMenu, setShowMenu] = useState(false);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -195,6 +198,70 @@ export default function Home() {
     setOfflineMode((prev) => !prev);
   };
 
+  const handleDownloadData = async (password: string) => {
+    try {
+      const dataToExport = {
+        landmarks,
+        cities,
+        selectedCityId,
+        selectedLanguage,
+        tourStops: tourStops.map(stop => stop.id),
+        timestamp: new Date().toISOString()
+      };
+      
+      const encryptedData = await encryptData(dataToExport, password);
+      const filename = `gps-tour-${selectedCityId}-${Date.now()}.gpstour`;
+      downloadEncryptedData(encryptedData, filename);
+      
+      toast({
+        title: t('dataDownloadedSuccessfully', selectedLanguage),
+        description: `File: ${filename}`
+      });
+    } catch (error) {
+      console.error('Download error:', error);
+      toast({
+        title: 'Error',
+        description: t('invalidPasswordOrFile', selectedLanguage),
+        variant: 'destructive'
+      });
+      throw error;
+    }
+  };
+
+  const handleUploadData = async (file: File, password: string) => {
+    try {
+      const encryptedContent = await readEncryptedFile(file);
+      const decryptedData = await decryptData(encryptedContent, password);
+      
+      // Restore data
+      if (decryptedData.selectedCityId) {
+        setSelectedCityId(decryptedData.selectedCityId);
+      }
+      if (decryptedData.selectedLanguage) {
+        setSelectedLanguage(decryptedData.selectedLanguage);
+      }
+      if (decryptedData.tourStops && landmarks.length > 0) {
+        const restoredStops = decryptedData.tourStops
+          .map((id: string) => landmarks.find(l => l.id === id))
+          .filter(Boolean);
+        setTourStops(restoredStops);
+      }
+      
+      toast({
+        title: t('dataLoadedSuccessfully', selectedLanguage),
+        description: `Restored from ${file.name}`
+      });
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast({
+        title: 'Error',
+        description: t('invalidPasswordOrFile', selectedLanguage),
+        variant: 'destructive'
+      });
+      throw error;
+    }
+  };
+
   const handleTestAudio = () => {
     const testMessages = {
       en: "Welcome to GPS Audio Guide. This is a test of the audio narration system.",
@@ -263,10 +330,9 @@ export default function Home() {
   };
 
   const handleTourRouteClick = () => {
-    // Show tour info by selecting the first tour stop
-    if (tourStops.length > 0) {
-      setSelectedLandmark(tourStops[0]);
-    }
+    // Tour route info is already displayed in AppSidebar and UnifiedFloatingCard
+    // No state change needed - just maintain current state
+    // This prevents any UI flicker or unwanted changes
   };
 
   // Handler for toggle with scroll to first item
@@ -352,37 +418,49 @@ export default function Home() {
 
   return (
     <>
-      <AppSidebar
+      <MenuDialog
+        isOpen={showMenu}
+        onClose={() => setShowMenu(false)}
         audioEnabled={audioEnabled}
         onToggleAudio={handleToggleAudio}
+        isSpeaking={isSpeaking}
+        speechRate={speechRate}
+        onSpeechRateChange={handleSpeechRateChange}
+        onTestAudio={handleTestAudio}
         cities={cities}
         selectedCityId={selectedCityId}
         onCityChange={handleCityChange}
         selectedLanguage={selectedLanguage}
         onLanguageChange={setSelectedLanguage}
-        isSpeaking={isSpeaking}
         activeRoute={activeRoute}
         onClearRoute={handleClearRoute}
         offlineMode={offlineMode}
         onToggleOfflineMode={handleToggleOfflineMode}
         totalLandmarks={landmarks.length}
         cityName={selectedCity?.name}
-        onTestAudio={handleTestAudio}
-        speechRate={speechRate}
-        onSpeechRateChange={handleSpeechRateChange}
         tourStops={tourStops}
         tourRouteInfo={tourRouteInfo}
         onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
         onClearTour={handleClearTour}
+        onDownloadData={handleDownloadData}
+        onUploadData={handleUploadData}
       />
       
-      <SidebarInset className="flex w-full flex-1 flex-col">
+      <div className="flex w-full flex-1 flex-col h-screen">
         <header className="flex items-center gap-1 sm:gap-2 p-2 border-b bg-background z-[1001]">
-          <SidebarTrigger data-testid="button-sidebar-toggle" className="h-9 w-9" />
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={() => setShowMenu(true)}
+            data-testid="button-menu-toggle" 
+            className="h-9 w-9"
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
           <h1 
             className="font-serif font-semibold text-base sm:text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-1 rounded-md transition-colors truncate" 
-            onClick={toggleSidebar}
-            data-testid="h1-title-toggle-sidebar"
+            onClick={() => setShowMenu(true)}
+            data-testid="h1-title-toggle-menu"
           >
             <span className="hidden xs:inline">GPS Audio Guide</span>
             <span className="xs:hidden">GPS Guide</span>
@@ -461,8 +539,8 @@ export default function Home() {
               cityCenter={selectedCity ? [selectedCity.lat, selectedCity.lng] : undefined}
               cityZoom={selectedCity?.zoom}
               selectedLanguage={selectedLanguage}
-              isCompact={!!selectedLandmark && !isMobile}
-              sidebarOpen={sidebarOpen}
+              isCompact={false}
+              sidebarOpen={false}
               focusLocation={focusLocation}
               tourStops={tourStops}
               onAddToTour={handleAddToTour}
@@ -474,11 +552,10 @@ export default function Home() {
             <InstallPrompt />
           </div>
         </div>
-      </SidebarInset>
+      </div>
 
-      {/* Unified Floating Card - Desktop only */}
-      {!isMobile && !(isMobile && sidebarOpenMobile) && (
-        <UnifiedFloatingCard
+      {/* Unified Floating Card */}
+      <UnifiedFloatingCard
           selectedLandmark={selectedLandmark}
           onLandmarkClose={() => setSelectedLandmark(null)}
           onNavigate={handleLandmarkRoute}
@@ -529,7 +606,6 @@ export default function Home() {
           selectedLanguage={selectedLanguage}
           onMapMarkerClick={handleMapMarkerClick}
         />
-      )}
 
       {/* Bottom Sheet - Mobile Only */}
       {isMobile && (

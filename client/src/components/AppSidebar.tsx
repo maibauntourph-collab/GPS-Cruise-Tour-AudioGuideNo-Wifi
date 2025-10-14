@@ -12,7 +12,7 @@ import { Card } from '@/components/ui/card';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
 import { ProgressStats } from './ProgressStats';
-import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, AudioLines, Gauge, Route, X, MapPin } from 'lucide-react';
+import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, Route, X, MapPin, Settings } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -36,9 +36,6 @@ interface AppSidebarProps {
   onToggleOfflineMode: () => void;
   totalLandmarks: number;
   cityName?: string;
-  onTestAudio?: () => void;
-  speechRate: number;
-  onSpeechRateChange: (rate: number) => void;
   tourStops: Landmark[];
   tourRouteInfo: { 
     distance: number; 
@@ -47,6 +44,7 @@ interface AppSidebarProps {
   } | null;
   onRemoveTourStop: (landmarkId: string) => void;
   onClearTour: () => void;
+  onOpenSettings: () => void;
 }
 
 export function AppSidebar({
@@ -64,13 +62,11 @@ export function AppSidebar({
   onToggleOfflineMode,
   totalLandmarks,
   cityName,
-  onTestAudio,
-  speechRate,
-  onSpeechRateChange,
   tourStops,
   tourRouteInfo,
   onRemoveTourStop,
-  onClearTour
+  onClearTour,
+  onOpenSettings
 }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon">
@@ -148,36 +144,11 @@ export function AppSidebar({
                     </SidebarMenuItem>
                   )}
 
-                  {onTestAudio && (
-                    <SidebarMenuItem>
-                      <SidebarMenuButton onClick={onTestAudio} data-testid="button-test-audio">
-                        <AudioLines className="w-4 h-4" />
-                        <span>{t('testAudio', selectedLanguage)}</span>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
-
                   <SidebarMenuItem>
-                    <div className="space-y-2 px-2 py-2">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Gauge className="w-4 h-4" />
-                          <Label className="text-sm">{t('speechSpeed', selectedLanguage)}</Label>
-                        </div>
-                        <span className="text-sm text-muted-foreground" data-testid="text-speech-rate">
-                          {speechRate.toFixed(1)}x
-                        </span>
-                      </div>
-                      <Slider
-                        value={[speechRate]}
-                        onValueChange={(values) => onSpeechRateChange(values[0])}
-                        min={0.5}
-                        max={2.0}
-                        step={0.1}
-                        className="w-full"
-                        data-testid="slider-speech-rate"
-                      />
-                    </div>
+                    <SidebarMenuButton onClick={onOpenSettings} data-testid="button-open-settings">
+                      <Settings className="w-4 h-4" />
+                      <span>{t('settings', selectedLanguage)}</span>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
