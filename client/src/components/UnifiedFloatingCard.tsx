@@ -515,6 +515,20 @@ export function UnifiedFloatingCard({
             </Button>
           )}
           
+          {/* List button in header */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveTab('list');
+            }}
+            className="h-8 w-8"
+            data-testid="button-header-list"
+          >
+            <List className="w-4 h-4" />
+          </Button>
+          
           <Button
             variant="ghost"
             size="icon"
@@ -546,33 +560,6 @@ export function UnifiedFloatingCard({
             data-testid="button-close-unified"
           >
             <X className="w-4 h-4" />
-          </Button>
-        </div>
-
-        {/* Navigation buttons - Fixed below header */}
-        <div className="flex gap-2 flex-wrap pb-3 flex-shrink-0 border-b">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveTab('list');
-            }}
-            className="gap-1"
-            data-testid="button-header-list"
-          >
-            <List className="w-4 h-4" />
-            {t('list', selectedLanguage)}
-          </Button>
-          <Button
-            variant={showLandmarks ? "default" : "outline"}
-            size="sm"
-            onClick={handleListToggleLandmarks}
-            className={`gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : ''}`}
-            data-testid="button-tour-filter-landmarks"
-          >
-            <LandmarkIcon className="w-4 h-4" />
-            {t('landmarks', selectedLanguage)}
           </Button>
         </div>
 
