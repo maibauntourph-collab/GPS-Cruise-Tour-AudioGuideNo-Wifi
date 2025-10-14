@@ -449,7 +449,7 @@ export function UnifiedFloatingCard({
       style={{
         position: 'fixed',
         left: '50%',
-        top: '62px',
+        top: '42px',
         transform: 'translateX(-50%)',
         zIndex: 1002
       }}
