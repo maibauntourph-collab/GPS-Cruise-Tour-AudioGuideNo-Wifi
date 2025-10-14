@@ -154,19 +154,23 @@ export function UnifiedFloatingCard({
   // Auto-switch to landmark tab when landmark is selected
   useEffect(() => {
     if (selectedLandmark) {
-      setActiveTab('landmark');
-    } else if (activeTab === 'landmark') {
-      // If landmark tab was active and landmark is closed, switch to list
-      setActiveTab('list');
+      if (activeTab !== 'landmark') {
+        setActiveTab('landmark');
+      }
+    } else {
+      if (activeTab === 'landmark') {
+        // If landmark tab was active and landmark is closed, switch to list
+        setActiveTab('list');
+      }
     }
-  }, [selectedLandmark]);
+  }, [selectedLandmark, activeTab]);
 
   // Auto-switch to list tab when cruise port is closed
   useEffect(() => {
     if (!showCruisePort && activeTab === 'cruise') {
       setActiveTab('list');
     }
-  }, [showCruisePort]);
+  }, [showCruisePort, activeTab]);
 
   // Wrapper handlers for list tab filters with scroll functionality
   const handleListToggleLandmarks = () => {
