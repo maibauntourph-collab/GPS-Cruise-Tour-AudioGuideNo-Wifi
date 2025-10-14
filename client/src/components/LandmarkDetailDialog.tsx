@@ -244,84 +244,136 @@ export function LandmarkDetailDialog({
                     {t('bookTicketsTours', selectedLanguage)}
                   </h5>
                   <div className="space-y-1.5">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full justify-start gap-2 text-xs h-8"
-                      onClick={() => {
-                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                        window.open(`https://www.getyourguide.com/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                      }}
-                      data-testid="button-book-getyourguide-dialog"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      {t('bookOnGetYourGuide', selectedLanguage)}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full justify-start gap-2 text-xs h-8"
-                      onClick={() => {
-                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                        window.open(`https://www.viator.com/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                      }}
-                      data-testid="button-book-viator-dialog"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      {t('bookOnViator', selectedLanguage)}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full justify-start gap-2 text-xs h-8"
-                      onClick={() => {
-                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                        window.open(`https://www.klook.com/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                      }}
-                      data-testid="button-book-klook-dialog"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      {t('bookOnKlook', selectedLanguage)}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full justify-start gap-2 text-xs h-8"
-                      onClick={() => {
-                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                        window.open(`https://www.kkday.com/en/search/activity?keyword=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                      }}
-                      data-testid="button-book-kkday-dialog"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      {t('bookOnKKday', selectedLanguage)}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full justify-start gap-2 text-xs h-8"
-                      onClick={() => {
-                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                        window.open(`https://www.myrealtrip.com/search?keyword=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                      }}
-                      data-testid="button-book-myrealtrip-dialog"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      {t('bookOnMyRealTrip', selectedLanguage)}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full justify-start gap-2 text-xs h-8"
-                      onClick={() => {
-                        const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                        window.open(`https://us.trip.com/things-to-do/search?keyword=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                      }}
-                      data-testid="button-book-tripcom-dialog"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      {t('bookOnTripCom', selectedLanguage)}
-                    </Button>
+                    {/* 한국어: Klook */}
+                    {selectedLanguage === 'ko' && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full justify-start gap-2 text-xs h-8"
+                        onClick={() => {
+                          const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                          window.open(`https://www.klook.com/ko/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                        }}
+                        data-testid="button-book-klook-dialog"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        Klook에서 예약
+                      </Button>
+                    )}
+                    
+                    {/* 일본어: Klook, Viator */}
+                    {selectedLanguage === 'ja' && (
+                      <>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full justify-start gap-2 text-xs h-8"
+                          onClick={() => {
+                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                            window.open(`https://www.klook.com/ja/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                          }}
+                          data-testid="button-book-klook-dialog"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          Klookで予約
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full justify-start gap-2 text-xs h-8"
+                          onClick={() => {
+                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                            window.open(`https://www.viator.com/ja-JP/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                          }}
+                          data-testid="button-book-viator-dialog"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          Viatorで予約
+                        </Button>
+                      </>
+                    )}
+                    
+                    {/* 중국어: Klook, Trip.com */}
+                    {selectedLanguage === 'zh' && (
+                      <>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full justify-start gap-2 text-xs h-8"
+                          onClick={() => {
+                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                            window.open(`https://www.klook.com/zh-CN/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                          }}
+                          data-testid="button-book-klook-dialog"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          Klook预订
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full justify-start gap-2 text-xs h-8"
+                          onClick={() => {
+                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                            window.open(`https://cn.trip.com/search/things-to-do?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                          }}
+                          data-testid="button-book-trip-dialog"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          Trip.com预订
+                        </Button>
+                      </>
+                    )}
+                    
+                    {/* 동남아시아 언어: Klook */}
+                    {(selectedLanguage === 'th' || selectedLanguage === 'vi' || selectedLanguage === 'id') && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full justify-start gap-2 text-xs h-8"
+                        onClick={() => {
+                          const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                          const langCode = selectedLanguage === 'th' ? 'th-TH' : selectedLanguage === 'vi' ? 'vi-VN' : 'id-ID';
+                          window.open(`https://www.klook.com/${langCode}/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                        }}
+                        data-testid="button-book-klook-dialog"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        {selectedLanguage === 'th' ? 'จองกับ Klook' : selectedLanguage === 'vi' ? 'Đặt trên Klook' : 'Pesan di Klook'}
+                      </Button>
+                    )}
+                    
+                    {/* 영어/유럽 언어: GetYourGuide, Viator */}
+                    {['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar', 'hi', 'tr', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs'].includes(selectedLanguage) && (
+                      <>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full justify-start gap-2 text-xs h-8"
+                          onClick={() => {
+                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                            window.open(`https://www.getyourguide.com/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                          }}
+                          data-testid="button-book-getyourguide-dialog"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          {t('bookOnGetYourGuide', selectedLanguage)}
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full justify-start gap-2 text-xs h-8"
+                          onClick={() => {
+                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                            window.open(`https://www.viator.com/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                          }}
+                          data-testid="button-book-viator-dialog"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          {t('bookOnViator', selectedLanguage)}
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               ) : landmark.category === 'Restaurant' ? (
