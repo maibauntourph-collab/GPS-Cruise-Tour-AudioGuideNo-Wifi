@@ -572,19 +572,33 @@ export function UnifiedFloatingCard({
             <div className="space-y-4">
             {selectedLandmark && (
               <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
-                <div>
-                  <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
-                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                  </h4>
-                  <div className="flex items-center gap-2 flex-wrap mb-3">
-                    <Badge variant={selectedLandmark.category === 'Activity' ? 'default' : 'secondary'}>
-                      {selectedLandmark.category === 'Activity' ? <Activity className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
-                      {selectedLandmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
-                    </Badge>
-                    {selectedLandmark.category && selectedLandmark.category !== 'Activity' && (
-                      <Badge variant="outline">{selectedLandmark.category}</Badge>
-                    )}
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex-1">
+                    <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
+                      {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                    </h4>
+                    <div className="flex items-center gap-2 flex-wrap mb-3">
+                      <Badge variant={selectedLandmark.category === 'Activity' ? 'default' : 'secondary'}>
+                        {selectedLandmark.category === 'Activity' ? <Activity className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
+                        {selectedLandmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
+                      </Badge>
+                      {selectedLandmark.category && selectedLandmark.category !== 'Activity' && (
+                        <Badge variant="outline">{selectedLandmark.category}</Badge>
+                      )}
+                    </div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => {
+                      onLandmarkClose();
+                      setIsMinimized(true);
+                    }}
+                    className="h-8 w-8 flex-shrink-0"
+                    data-testid="button-close-landmark-info"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
                 </div>
 
                 {selectedLandmark.photos && selectedLandmark.photos.length > 0 && (
