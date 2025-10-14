@@ -1161,7 +1161,7 @@ export function UnifiedFloatingCard({
                                 onClick={() => onLandmarkSelect?.(stop)}
                                 data-testid={`tour-stop-${stop.id}`}
                               >
-                                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[hsl(14,85%,55%)] text-white text-xs font-bold">
                                   {index + 1}
                                 </div>
                                 <div className="flex-1 min-w-0">
