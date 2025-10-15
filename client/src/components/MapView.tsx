@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, useMap, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap, Polyline, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
@@ -398,7 +398,13 @@ export function MapView({
                 }
               }
             }}
-          />
+          >
+            <Popup>
+              <div className="text-sm font-medium">
+                {getTranslatedContent(landmark, selectedLanguage, 'name')}
+              </div>
+            </Popup>
+          </Marker>
         );
       })}
 
