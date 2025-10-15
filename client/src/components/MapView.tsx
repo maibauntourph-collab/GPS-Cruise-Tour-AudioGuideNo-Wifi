@@ -363,6 +363,61 @@ export function MapView({
   const restaurantIcon = createCustomIcon('hsl(25, 95%, 55%)'); // Orange for restaurants
   const giftShopIcon = createCustomIcon('hsl(45, 90%, 55%)'); // Gold for gift shops
   const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const markerRefs = useRef<Map<string, L.Marker>>(new Map());
+
+  // Add touch event listeners to markers
+  useEffect(() => {
+    const cleanupFunctions: (() => void)[] = [];
+
+    markerRefs.current.forEach((marker, landmarkId) => {
+      const element = marker.getElement();
+      if (!element) return;
+
+      const landmark = landmarks.find(l => l.id === landmarkId);
+      if (!landmark) return;
+
+      let touchTimer: NodeJS.Timeout | null = null;
+
+      const handleTouchStart = (e: TouchEvent) => {
+        e.preventDefault();
+        touchTimer = setTimeout(() => {
+          if (onAddToTour) {
+            onAddToTour(landmark);
+            // Close popup
+            marker.closePopup();
+          }
+        }, 1000);
+      };
+
+      const handleTouchEnd = (e: TouchEvent) => {
+        if (touchTimer) {
+          clearTimeout(touchTimer);
+          touchTimer = null;
+        }
+      };
+
+      const handleTouchMove = (e: TouchEvent) => {
+        if (touchTimer) {
+          clearTimeout(touchTimer);
+          touchTimer = null;
+        }
+      };
+
+      element.addEventListener('touchstart', handleTouchStart, { passive: false });
+      element.addEventListener('touchend', handleTouchEnd);
+      element.addEventListener('touchmove', handleTouchMove);
+
+      cleanupFunctions.push(() => {
+        element.removeEventListener('touchstart', handleTouchStart);
+        element.removeEventListener('touchend', handleTouchEnd);
+        element.removeEventListener('touchmove', handleTouchMove);
+      });
+    });
+
+    return () => {
+      cleanupFunctions.forEach(cleanup => cleanup());
+    };
+  }, [landmarks, onAddToTour]);
 
   return (
     <MapContainer
@@ -392,6 +447,11 @@ export function MapView({
             key={landmark.id}
             position={[landmark.lat, landmark.lng]}
             icon={icon}
+            ref={(marker) => {
+              if (marker) {
+                markerRefs.current.set(landmark.id, marker);
+              }
+            }}
             eventHandlers={{
               mousedown: () => {
                 // Start long press timer
@@ -419,26 +479,6 @@ export function MapView({
                   clearTimeout(longPressTimerRef.current);
                   longPressTimerRef.current = null;
                 }
-              },
-              touchstart: () => {
-                // Start long press timer for mobile
-                longPressTimerRef.current = setTimeout(() => {
-                  if (onAddToTour) {
-                    onAddToTour(landmark);
-                    // Close popup quickly
-                    setTimeout(() => {
-                      const popup = document.querySelector('.leaflet-popup-close-button') as HTMLElement;
-                      if (popup) popup.click();
-                    }, 100);
-                  }
-                }, 1000); // 1 second
-              },
-              touchend: () => {
-                // Cancel long press timer for mobile
-                if (longPressTimerRef.current) {
-                  clearTimeout(longPressTimerRef.current);
-                  longPressTimerRef.current = null;
-                }
               }
             }}
           >
@@ -446,7 +486,7 @@ export function MapView({
               <div className="text-sm font-medium">
                 {getTranslatedContent(landmark, selectedLanguage, 'name')}
                 <div className="text-xs text-muted-foreground mt-1">
-                  {selectedLanguage === 'ko' ? '1초 클릭 → 투어 추가' :
+                  {selectedLanguage === 'ko' ? '1초 꾹 누르기 → 투어 추가' :
                    selectedLanguage === 'es' ? 'Mantén 1s → Añadir al tour' :
                    selectedLanguage === 'fr' ? 'Maintenir 1s → Ajouter' :
                    selectedLanguage === 'de' ? '1s halten → Tour hinzufügen' :
