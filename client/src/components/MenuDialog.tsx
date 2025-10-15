@@ -24,7 +24,7 @@ import {
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
 import { ProgressStats } from './ProgressStats';
-import { OfflineDataDialog } from './OfflineDataDialog';
+import OfflineDataDialog from './OfflineDataDialog';
 import { City, Landmark } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
 import { useState } from 'react';
