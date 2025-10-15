@@ -362,6 +362,7 @@ export function MapView({
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
   const restaurantIcon = createCustomIcon('hsl(25, 95%, 55%)'); // Orange for restaurants
   const giftShopIcon = createCustomIcon('hsl(45, 90%, 55%)'); // Gold for gift shops
+  const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   return (
     <MapContainer
@@ -392,9 +393,51 @@ export function MapView({
             position={[landmark.lat, landmark.lng]}
             icon={icon}
             eventHandlers={{
-              dblclick: () => {
-                if (onAddToTour) {
-                  onAddToTour(landmark);
+              mousedown: () => {
+                // Start long press timer
+                longPressTimerRef.current = setTimeout(() => {
+                  if (onAddToTour) {
+                    onAddToTour(landmark);
+                    // Close popup quickly
+                    setTimeout(() => {
+                      const popup = document.querySelector('.leaflet-popup-close-button') as HTMLElement;
+                      if (popup) popup.click();
+                    }, 100);
+                  }
+                }, 1000); // 1 second
+              },
+              mouseup: () => {
+                // Cancel long press timer
+                if (longPressTimerRef.current) {
+                  clearTimeout(longPressTimerRef.current);
+                  longPressTimerRef.current = null;
+                }
+              },
+              mouseout: () => {
+                // Cancel long press timer when mouse leaves
+                if (longPressTimerRef.current) {
+                  clearTimeout(longPressTimerRef.current);
+                  longPressTimerRef.current = null;
+                }
+              },
+              touchstart: () => {
+                // Start long press timer for mobile
+                longPressTimerRef.current = setTimeout(() => {
+                  if (onAddToTour) {
+                    onAddToTour(landmark);
+                    // Close popup quickly
+                    setTimeout(() => {
+                      const popup = document.querySelector('.leaflet-popup-close-button') as HTMLElement;
+                      if (popup) popup.click();
+                    }, 100);
+                  }
+                }, 1000); // 1 second
+              },
+              touchend: () => {
+                // Cancel long press timer for mobile
+                if (longPressTimerRef.current) {
+                  clearTimeout(longPressTimerRef.current);
+                  longPressTimerRef.current = null;
                 }
               }
             }}
@@ -402,6 +445,18 @@ export function MapView({
             <Popup>
               <div className="text-sm font-medium">
                 {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                <div className="text-xs text-muted-foreground mt-1">
+                  {selectedLanguage === 'ko' ? '1초 클릭 → 투어 추가' :
+                   selectedLanguage === 'es' ? 'Mantén 1s → Añadir al tour' :
+                   selectedLanguage === 'fr' ? 'Maintenir 1s → Ajouter' :
+                   selectedLanguage === 'de' ? '1s halten → Tour hinzufügen' :
+                   selectedLanguage === 'it' ? 'Tieni 1s → Aggiungi al tour' :
+                   selectedLanguage === 'zh' ? '长按1秒 → 添加到旅程' :
+                   selectedLanguage === 'ja' ? '1秒押す → ツアー追加' :
+                   selectedLanguage === 'pt' ? 'Segurar 1s → Adicionar ao tour' :
+                   selectedLanguage === 'ru' ? 'Удерживать 1с → В тур' :
+                   'Hold 1s → Add to Tour'}
+                </div>
               </div>
             </Popup>
           </Marker>
