@@ -97,7 +97,7 @@ function getTransportIcon(type: string) {
   }
 }
 
-export function UnifiedFloatingCard({
+export default function UnifiedFloatingCard({
   forceShowList = false,
   selectedLandmark,
   onLandmarkClose,
