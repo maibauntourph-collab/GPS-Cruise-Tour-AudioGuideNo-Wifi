@@ -339,6 +339,30 @@ export default function Home() {
     setTimeout(() => setFocusLocation(null), 1000);
   };
 
+  // Play click sound effect
+  const playClickSound = () => {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Create a short click sound
+      oscillator.frequency.value = 800; // Higher frequency for click
+      oscillator.type = 'sine';
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.1);
+    } catch (error) {
+      console.error('Failed to play click sound:', error);
+    }
+  };
+
   const handleAddToTour = (landmark: Landmark) => {
     // Check if landmark is already in tour
     if (tourStops.some(stop => stop.id === landmark.id)) {
@@ -347,6 +371,27 @@ export default function Home() {
     } else {
       // Add to tour
       setTourStops([...tourStops, landmark]);
+      
+      // Play click sound
+      playClickSound();
+      
+      // Show toast message
+      const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name');
+      const message = selectedLanguage === 'ko' ? `${landmarkName} 투어에 추가됨` :
+                     selectedLanguage === 'es' ? `${landmarkName} añadido al tour` :
+                     selectedLanguage === 'fr' ? `${landmarkName} ajouté au tour` :
+                     selectedLanguage === 'de' ? `${landmarkName} zur Tour hinzugefügt` :
+                     selectedLanguage === 'it' ? `${landmarkName} aggiunto al tour` :
+                     selectedLanguage === 'zh' ? `${landmarkName} 已添加到旅程` :
+                     selectedLanguage === 'ja' ? `${landmarkName} ツアーに追加` :
+                     selectedLanguage === 'pt' ? `${landmarkName} adicionado ao tour` :
+                     selectedLanguage === 'ru' ? `${landmarkName} добавлено в тур` :
+                     `${landmarkName} added to tour`;
+      
+      toast({
+        description: message,
+        duration: 2000,
+      });
     }
   };
 
