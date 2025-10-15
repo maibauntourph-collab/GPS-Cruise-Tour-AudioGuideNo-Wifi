@@ -93,8 +93,18 @@ Respond in this exact JSON format:
       explanation: result.explanation || "",
       totalEstimatedTime: result.totalEstimatedTime || 180
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to get AI recommendation:', error);
+    
+    // Check for specific OpenAI errors
+    if (error?.status === 429 || error?.code === 'rate_limit_exceeded' || error?.code === 'insufficient_quota') {
+      throw new Error('AI service quota exceeded. Please try again later.');
+    }
+    
+    if (error?.status === 401 || error?.code === 'invalid_api_key') {
+      throw new Error('AI service authentication failed.');
+    }
+    
     throw new Error('Failed to generate tour recommendation');
   }
 }

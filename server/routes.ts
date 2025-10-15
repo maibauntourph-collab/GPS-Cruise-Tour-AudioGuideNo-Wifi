@@ -131,9 +131,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       res.json(recommendation);
-    } catch (error) {
+    } catch (error: any) {
       console.error('AI recommendation error:', error);
-      res.status(500).json({ error: "Failed to generate AI recommendation" });
+      
+      // Pass through specific error messages from OpenAI service
+      const errorMessage = error.message || "Failed to generate AI recommendation";
+      res.status(500).json({ error: errorMessage });
     }
   });
 

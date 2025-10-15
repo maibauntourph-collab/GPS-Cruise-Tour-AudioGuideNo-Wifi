@@ -456,7 +456,8 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get AI recommendation');
+        const errorData = await response.json().catch(() => ({ error: 'Failed to get AI recommendation' }));
+        throw new Error(errorData.error || 'Failed to get AI recommendation');
       }
 
       const recommendation = await response.json();
@@ -514,16 +515,43 @@ export default function Home() {
         description: message,
         duration: 3000,
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('AI recommendation error:', error);
-      const errorMessage = selectedLanguage === 'ko'
-        ? 'AI 추천을 가져오는데 실패했습니다'
-        : 'Failed to get AI recommendation';
+      
+      let errorMessage: string;
+      
+      // Check if it's a quota error or rate limit error
+      const errorText = error.message || JSON.stringify(error);
+      if (errorText.includes('quota') || errorText.includes('rate limit') || errorText.includes('429')) {
+        errorMessage = selectedLanguage === 'ko'
+          ? 'AI 서비스 한도에 도달했습니다. 나중에 다시 시도해주세요.'
+          : selectedLanguage === 'es'
+          ? 'Límite del servicio de IA alcanzado. Inténtelo más tarde.'
+          : selectedLanguage === 'fr'
+          ? 'Limite du service IA atteinte. Réessayez plus tard.'
+          : selectedLanguage === 'de'
+          ? 'KI-Dienstlimit erreicht. Versuchen Sie es später erneut.'
+          : selectedLanguage === 'it'
+          ? 'Limite del servizio IA raggiunto. Riprova più tardi.'
+          : selectedLanguage === 'zh'
+          ? 'AI服务已达限额。请稍后重试。'
+          : selectedLanguage === 'ja'
+          ? 'AIサービスの制限に達しました。後でもう一度お試しください。'
+          : selectedLanguage === 'pt'
+          ? 'Limite do serviço de IA atingido. Tente novamente mais tarde.'
+          : selectedLanguage === 'ru'
+          ? 'Достигнут лимит сервиса ИИ. Попробуйте позже.'
+          : 'AI service limit reached. Please try again later.';
+      } else {
+        errorMessage = selectedLanguage === 'ko'
+          ? 'AI 추천을 가져오는데 실패했습니다'
+          : 'Failed to get AI recommendation';
+      }
       
       toast({
         description: errorMessage,
         variant: 'destructive',
-        duration: 3000,
+        duration: 4000,
       });
     } finally {
       setIsLoadingAi(false);
