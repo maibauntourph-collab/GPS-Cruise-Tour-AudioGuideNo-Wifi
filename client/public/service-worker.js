@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'gps-audio-guide-v4';
+const CACHE_VERSION = 'gps-audio-guide-v5-fresh';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const MAP_TILES_CACHE = `${CACHE_VERSION}-map-tiles`;
@@ -124,6 +124,23 @@ async function handleStaticRequest(request) {
 }
 
 async function handleDynamicRequest(request) {
+  const url = new URL(request.url);
+  
+  // NEVER cache JavaScript/TypeScript files - they need HMR to work properly
+  const isJavaScriptFile = url.pathname.endsWith('.js') || 
+                           url.pathname.endsWith('.jsx') || 
+                           url.pathname.endsWith('.ts') || 
+                           url.pathname.endsWith('.tsx') ||
+                           url.pathname.includes('/src/') ||
+                           url.pathname.includes('/@vite/') ||
+                           url.pathname.includes('/@fs/') ||
+                           url.pathname.includes('/node_modules/');
+  
+  if (isJavaScriptFile) {
+    // Always fetch fresh for JS files - no caching!
+    return fetch(request);
+  }
+  
   try {
     const response = await fetch(request);
     
