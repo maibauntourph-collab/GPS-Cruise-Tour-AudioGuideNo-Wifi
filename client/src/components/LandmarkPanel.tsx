@@ -486,10 +486,16 @@ export default function LandmarkPanel({
                   onClick={(e) => {
                     e.stopPropagation();
                     const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                    
+                    // Language mapping for each platform
+                    const gygLang = selectedLanguage === 'es' ? 'es' : selectedLanguage === 'fr' ? 'fr' : selectedLanguage === 'de' ? 'de' : selectedLanguage === 'it' ? 'it' : selectedLanguage === 'pt' ? 'pt-BR' : selectedLanguage === 'ko' ? 'ko' : selectedLanguage === 'ja' ? 'ja' : selectedLanguage === 'zh' ? 'zh' : 'en';
+                    const viatorLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-BR' : selectedLanguage === 'ja' ? 'ja-JP' : 'en-US';
+                    const klookLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-PT' : selectedLanguage === 'ko' ? 'ko' : selectedLanguage === 'ja' ? 'ja' : selectedLanguage === 'zh' ? 'zh-CN' : selectedLanguage === 'th' ? 'th-TH' : selectedLanguage === 'vi' ? 'vi-VN' : selectedLanguage === 'id' ? 'id-ID' : 'en-US';
+                    
                     const urls = {
-                      'GetYourGuide': `https://www.getyourguide.com/s/?q=${searchQuery}`,
-                      'Viator': `https://www.viator.com/searchResults/all?text=${searchQuery}`,
-                      'Klook': `https://www.klook.com/en-US/search/?query=${searchQuery}`
+                      'GetYourGuide': `https://www.getyourguide.com/${gygLang}/s/?q=${searchQuery}`,
+                      'Viator': `https://www.viator.com/${viatorLang}/search?q=${searchQuery}`,
+                      'Klook': `https://www.klook.com/${klookLang}/search/?query=${searchQuery}`
                     };
                     window.open(urls[platform as keyof typeof urls], '_blank', 'noopener,noreferrer');
                   }}

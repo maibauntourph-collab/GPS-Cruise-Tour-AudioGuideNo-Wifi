@@ -352,7 +352,9 @@ export default function LandmarkDetailDialog({
                           className="w-full justify-start gap-2 text-xs h-8"
                           onClick={() => {
                             const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                            window.open(`https://www.getyourguide.com/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            // Language mapping for GetYourGuide
+                            const gygLang = selectedLanguage === 'es' ? 'es' : selectedLanguage === 'fr' ? 'fr' : selectedLanguage === 'de' ? 'de' : selectedLanguage === 'it' ? 'it' : selectedLanguage === 'pt' ? 'pt-BR' : 'en';
+                            window.open(`https://www.getyourguide.com/${gygLang}/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
                           }}
                           data-testid="button-book-getyourguide-dialog"
                         >
@@ -365,7 +367,9 @@ export default function LandmarkDetailDialog({
                           className="w-full justify-start gap-2 text-xs h-8"
                           onClick={() => {
                             const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                            window.open(`https://www.viator.com/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            // Language mapping for Viator
+                            const viatorLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-BR' : 'en-US';
+                            window.open(`https://www.viator.com/${viatorLang}/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
                           }}
                           data-testid="button-book-viator-dialog"
                         >
