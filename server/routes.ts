@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVisitedLandmarkSchema } from "@shared/schema";
+import { recommendTourItinerary } from "./lib/openai";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/cities", async (req, res) => {
@@ -91,6 +92,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ visited: isVisited });
     } catch (error) {
       res.status(500).json({ error: "Failed to check if landmark is visited" });
+    }
+  });
+
+  // AI tour recommendation route
+  app.post("/api/ai/recommend-tour", async (req, res) => {
+    try {
+      const { cityId, language, userPosition } = req.body;
+      
+      if (!cityId) {
+        return res.status(400).json({ error: "City ID is required" });
+      }
+
+      const landmarks = await storage.getLandmarks(cityId);
+      
+      if (landmarks.length === 0) {
+        return res.status(404).json({ error: "No landmarks found for this city" });
+      }
+
+      const recommendation = await recommendTourItinerary(
+        landmarks,
+        userPosition,
+        language || 'en'
+      );
+
+      // Validate that all recommended landmark IDs exist in the database
+      const validLandmarkIds = new Set(landmarks.map(l => l.id));
+      const invalidIds = recommendation.itinerary
+        .map(item => item.landmarkId)
+        .filter(id => !validLandmarkIds.has(id));
+
+      if (invalidIds.length > 0) {
+        console.error('AI recommended invalid landmark IDs:', invalidIds);
+        return res.status(500).json({ 
+          error: "AI recommendation contains invalid landmarks",
+          details: invalidIds
+        });
+      }
+
+      res.json(recommendation);
+    } catch (error) {
+      console.error('AI recommendation error:', error);
+      res.status(500).json({ error: "Failed to generate AI recommendation" });
     }
   });
 

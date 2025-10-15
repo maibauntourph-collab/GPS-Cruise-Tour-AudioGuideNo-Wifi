@@ -56,6 +56,13 @@ interface UnifiedFloatingCardProps {
   } | null;
   onRemoveTourStop?: (landmarkId: string) => void;
   
+  // AI Recommendation props
+  aiRecommendation?: {
+    itinerary: Array<{ landmarkId: string; order: number }>;
+    explanation: string;
+    totalEstimatedTime: number;
+  } | null;
+  
   // Common props
   selectedLanguage?: string;
   onMapMarkerClick?: (lat: number, lng: number) => void;
@@ -117,6 +124,7 @@ export function UnifiedFloatingCard({
   tourStops = [],
   tourRouteInfo = null,
   onRemoveTourStop,
+  aiRecommendation = null,
   selectedLanguage = 'en',
   onMapMarkerClick
 }: UnifiedFloatingCardProps) {
@@ -572,6 +580,31 @@ export function UnifiedFloatingCard({
 
           {/* Tour Tab with filters */}
           <TabsContent value="landmark" className="mt-4 flex flex-col">
+            {/* AI Recommendation Box */}
+            {aiRecommendation && (
+              <div className="mb-4 p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
+                <div className="flex items-start gap-2 mb-2">
+                  <svg className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  <div className="flex-1">
+                    <h5 className="font-semibold text-purple-900 dark:text-purple-100 mb-1">
+                      {selectedLanguage === 'ko' ? 'AI 추천 이유' : 'AI Recommendation'}
+                    </h5>
+                    <p className="text-sm text-purple-800 dark:text-purple-200 leading-relaxed">
+                      {aiRecommendation.explanation}
+                    </p>
+                    <div className="mt-2 text-xs text-purple-700 dark:text-purple-300">
+                      {selectedLanguage === 'ko' 
+                        ? `예상 소요 시간: ${aiRecommendation.totalEstimatedTime}분`
+                        : `Estimated time: ${aiRecommendation.totalEstimatedTime} min`
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Scrollable content - Contains both selected landmark and list */}
             <div className="space-y-4">
             {selectedLandmark && (
