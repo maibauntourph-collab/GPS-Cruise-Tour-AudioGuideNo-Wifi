@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark } from '@shared/schema';
 import { Navigation, MapPin, Calendar, User, X, Play, Pause, Volume2, Ticket, ExternalLink, Minus, MapPinned } from 'lucide-react';
-import { PhotoGallery } from './PhotoGallery';
+import PhotoGallery from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -20,7 +20,7 @@ interface LandmarkPanelProps {
   isInTour?: boolean;
 }
 
-export function LandmarkPanel({
+export default function LandmarkPanel({
   landmark,
   onClose,
   onNavigate,

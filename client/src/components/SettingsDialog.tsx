@@ -6,7 +6,7 @@ import { Slider } from '@/components/ui/slider';
 import { Settings, Download, Upload, AudioLines, Gauge, Globe, Volume2 } from 'lucide-react';
 import { t } from '@/lib/translations';
 import { LanguageSelector } from './LanguageSelector';
-import { OfflineDataDialog } from './OfflineDataDialog';
+import OfflineDataDialog from './OfflineDataDialog';
 
 interface SettingsDialogProps {
   isOpen: boolean;
@@ -20,7 +20,7 @@ interface SettingsDialogProps {
   onUploadData: (file: File, password: string) => Promise<void>;
 }
 
-export function SettingsDialog({
+export default function SettingsDialog({
   isOpen,
   onClose,
   selectedLanguage,

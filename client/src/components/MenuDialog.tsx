@@ -75,7 +75,7 @@ interface MenuDialogProps {
   onUploadData: (file: File, password: string) => Promise<void>;
 }
 
-export function MenuDialog({
+export default function MenuDialog({
   isOpen,
   onClose,
   audioEnabled,

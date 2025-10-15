@@ -13,10 +13,10 @@ import {
 } from '@/components/ui/alert-dialog';
 import MapView from '@/components/MapView';
 import UnifiedFloatingCard from '@/components/UnifiedFloatingCard';
-import { MenuDialog } from '@/components/MenuDialog';
-import { OfflineIndicator } from '@/components/OfflineIndicator';
-import { InstallPrompt } from '@/components/InstallPrompt';
-import { BottomSheet } from '@/components/BottomSheet';
+import MenuDialog from '@/components/MenuDialog';
+import OfflineIndicator from '@/components/OfflineIndicator';
+import InstallPrompt from '@/components/InstallPrompt';
+import BottomSheet from '@/components/BottomSheet';
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';

@@ -16,7 +16,7 @@ interface LandmarkListProps {
   onLandmarkSelect?: (landmark: Landmark) => void;
 }
 
-export function LandmarkList({
+export default function LandmarkList({
   landmarks,
   userPosition,
   onLandmarkRoute,

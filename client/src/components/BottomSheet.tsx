@@ -20,7 +20,7 @@ const SNAP_POINTS = {
   max: 0.9,
 };
 
-export function BottomSheet({ 
+export default function BottomSheet({ 
   defaultTab = 'list', 
   translations,
   listContent,

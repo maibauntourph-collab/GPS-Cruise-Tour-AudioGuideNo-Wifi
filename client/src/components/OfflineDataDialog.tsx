@@ -15,7 +15,7 @@ interface OfflineDataDialogProps {
   selectedLanguage?: string;
 }
 
-export function OfflineDataDialog({
+export default function OfflineDataDialog({
   isOpen,
   onClose,
   mode,

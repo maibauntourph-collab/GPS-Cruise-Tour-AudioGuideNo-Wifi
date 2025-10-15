@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
-import { PhotoGallery } from './PhotoGallery';
+import PhotoGallery from './PhotoGallery';
 import { X, Navigation, MapPinned, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard } from 'lucide-react';
 import { useState } from 'react';
 import { audioService } from '@/lib/audioService';
@@ -19,7 +19,7 @@ interface LandmarkDetailDialogProps {
   selectedLanguage?: string;
 }
 
-export function LandmarkDetailDialog({
+export default function LandmarkDetailDialog({
   landmark,
   isOpen,
   onClose,

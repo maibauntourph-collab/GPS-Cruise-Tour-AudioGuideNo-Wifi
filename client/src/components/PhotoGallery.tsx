@@ -8,7 +8,7 @@ interface PhotoGalleryProps {
   title: string;
 }
 
-export function PhotoGallery({ photos, title }: PhotoGalleryProps) {
+export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   if (!photos || photos.length === 0) return null;

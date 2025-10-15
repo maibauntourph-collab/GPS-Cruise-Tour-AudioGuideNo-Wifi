@@ -2,7 +2,7 @@ import { useOnlineStatus } from '@/hooks/useOnlineStatus';
 import { WifiOff, Wifi } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-export function OfflineIndicator() {
+export default function OfflineIndicator() {
   const isOnline = useOnlineStatus();
   const [showIndicator, setShowIndicator] = useState(false);
 

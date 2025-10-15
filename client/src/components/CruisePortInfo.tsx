@@ -47,7 +47,7 @@ function getTransportIcon(type: string) {
   }
 }
 
-export function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkClick, onClose }: CruisePortInfoProps) {
+export default function CruisePortInfo({ city, landmarks, selectedLanguage, onLandmarkClick, onClose }: CruisePortInfoProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });

@@ -8,10 +8,10 @@ import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@share
 import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
 import { audioService } from '@/lib/audioService';
-import { PhotoGallery } from './PhotoGallery';
+import PhotoGallery from './PhotoGallery';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import { LandmarkDetailDialog } from './LandmarkDetailDialog';
+import LandmarkDetailDialog from './LandmarkDetailDialog';
 
 interface UnifiedFloatingCardProps {
   // Control props

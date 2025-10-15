@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark } from '@shared/schema';
 import { Navigation, MapPin, Calendar, User } from 'lucide-react';
-import { PhotoGallery } from './PhotoGallery';
+import PhotoGallery from './PhotoGallery';
 import { getTranslatedContent } from '@/lib/translations';
 
 interface LandmarkDetailsProps {
