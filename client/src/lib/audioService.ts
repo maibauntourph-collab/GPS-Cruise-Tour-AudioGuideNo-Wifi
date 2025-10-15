@@ -36,7 +36,7 @@ class AudioService {
   private getLangCode(language: string): string {
     const langMap: { [key: string]: string } = {
       'en': 'en-US',
-      'es': 'es-ES',
+      'es': 'es-ES',  // Spanish - Spain (prioritize European Spanish for quality)
       'fr': 'fr-FR',
       'de': 'de-DE',
       'it': 'it-IT',
@@ -64,6 +64,25 @@ class AudioService {
     return langMap[language] || 'en-US';
   }
 
+  // Get all possible language codes for broader voice selection (especially for Spanish)
+  private getLanguageVariants(langCode: string): string[] {
+    const baseLang = langCode.split('-')[0];
+    
+    // Spanish has many regional variants with high-quality voices
+    if (baseLang === 'es') {
+      return [
+        'es-ES',  // Spain (Castilian) - often highest quality
+        'es-MX',  // Mexico - very natural neural voices
+        'es-US',  // US Spanish - good quality
+        'es-AR',  // Argentina
+        'es-CO',  // Colombia
+        langCode  // Original requested code
+      ];
+    }
+    
+    return [langCode];
+  }
+
   // Find the best voice for the given language (prioritize natural/premium voices)
   private getVoiceForLanguage(langCode: string): SpeechSynthesisVoice | null {
     // Refresh voices if empty
@@ -71,26 +90,43 @@ class AudioService {
       this.voices = this.synthesis.getVoices();
     }
 
-    // Extract base language code (e.g., 'ko' from 'ko-KR')
+    // Get all language variants to search (especially important for Spanish)
+    const langVariants = this.getLanguageVariants(langCode);
     const baseLang = langCode.split('-')[0];
 
-    // Filter voices for the target language
-    const matchingVoices = this.voices.filter(v => 
-      v.lang === langCode || v.lang.startsWith(baseLang)
-    );
+    // Filter voices for the target language (including all variants)
+    const matchingVoices = this.voices.filter(v => {
+      const voiceBaseLang = v.lang.split('-')[0];
+      return langVariants.some(variant => v.lang === variant) || voiceBaseLang === baseLang;
+    });
 
     if (matchingVoices.length === 0) return null;
 
     // Quality indicators (order matters - higher priority first)
+    // Added more Spanish-specific quality indicators
     const qualityKeywords = [
-      'premium', 'enhanced', 'neural', 'natural', 'high-quality',
-      'google', 'wavenet', 'standard', 'female', 'male'
+      'neural',      // Microsoft Neural voices (highest quality)
+      'wavenet',     // Google WaveNet (highest quality)
+      'premium',     // Premium voices
+      'enhanced',    // Enhanced quality
+      'natural',     // Natural sounding
+      'high-quality',
+      'google',      // Google voices (generally good)
+      'microsoft',   // Microsoft voices (generally good)
+      'lucía',       // Spanish female voice (often high quality)
+      'jorge',       // Spanish male voice (often high quality)
+      'mónica',      // Spanish female name
+      'paulina',     // Latin American female
+      'female',
+      'male',
+      'standard'
     ];
 
     // Score each voice based on quality indicators
     const scoredVoices = matchingVoices.map(voice => {
       let score = 0;
       const nameLower = voice.name.toLowerCase();
+      const voiceLang = voice.lang.toLowerCase();
       
       // Check for quality keywords in voice name
       qualityKeywords.forEach((keyword, index) => {
@@ -100,19 +136,30 @@ class AudioService {
       });
 
       // Prefer exact language match over base language match
-      if (voice.lang === langCode) score += 50;
+      if (voice.lang === langCode) score += 100;
       
-      // Remote voices often have better quality (Google, Microsoft neural voices)
-      if (!voice.localService) score += 20;
+      // For Spanish, prefer es-ES and es-MX (often have best quality)
+      if (baseLang === 'es') {
+        if (voiceLang === 'es-es') score += 80;
+        if (voiceLang === 'es-mx') score += 75;
+        if (voiceLang === 'es-us') score += 60;
+      }
+      
+      // Remote/online voices often have better quality (Google, Microsoft neural)
+      if (!voice.localService) score += 50;
       
       // Local voices as fallback (lower priority but still considered)
-      if (voice.localService) score += 5;
+      if (voice.localService) score += 10;
 
       return { voice, score };
     });
 
     // Sort by score (highest first) and return the best voice
     scoredVoices.sort((a, b) => b.score - a.score);
+    
+    // Log the selected voice for debugging
+    console.log(`[AudioService] Selected voice for ${langCode}:`, scoredVoices[0].voice.name, `(score: ${scoredVoices[0].score})`);
+    
     return scoredVoices[0].voice;
   }
 
