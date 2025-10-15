@@ -11,7 +11,7 @@ import {
   AlertDialogHeader, 
   AlertDialogTitle 
 } from '@/components/ui/alert-dialog';
-import { MapView } from '@/components/MapView';
+import MapView from '@/components/MapView';
 import UnifiedFloatingCard from '@/components/UnifiedFloatingCard';
 import { MenuDialog } from '@/components/MenuDialog';
 import { OfflineIndicator } from '@/components/OfflineIndicator';

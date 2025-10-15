@@ -341,7 +341,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
   return null;
 }
 
-export function MapView({
+export default function MapView({
   landmarks,
   userPosition,
   onLandmarkRoute,
