@@ -392,7 +392,7 @@ export function MapView({
             position={[landmark.lat, landmark.lng]}
             icon={icon}
             eventHandlers={{
-              click: () => {
+              dblclick: () => {
                 if (onAddToTour) {
                   onAddToTour(landmark);
                 }
