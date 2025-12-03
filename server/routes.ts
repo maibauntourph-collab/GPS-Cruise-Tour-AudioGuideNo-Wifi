@@ -205,6 +205,250 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ===============================
+  // Admin API Routes
+  // ===============================
+
+  // Admin: Get all cities from database
+  app.get("/api/admin/cities", async (req, res) => {
+    try {
+      const allCities = await db.select().from(cities).orderBy(cities.name);
+      res.json(allCities);
+    } catch (error) {
+      console.error('Admin get cities error:', error);
+      res.status(500).json({ error: "Failed to fetch cities" });
+    }
+  });
+
+  // Admin: Create a new city
+  app.post("/api/admin/cities", async (req, res) => {
+    try {
+      const { id, name, country, lat, lng, zoom, cruisePort } = req.body;
+      
+      if (!id || !name || !country || lat === undefined || lng === undefined) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      const [newCity] = await db.insert(cities).values({
+        id,
+        name,
+        country,
+        lat,
+        lng,
+        zoom: zoom || 14,
+        cruisePort: cruisePort || null
+      }).returning();
+
+      res.status(201).json(newCity);
+    } catch (error: any) {
+      console.error('Admin create city error:', error);
+      if (error.code === '23505') {
+        return res.status(409).json({ error: "City with this ID already exists" });
+      }
+      res.status(500).json({ error: "Failed to create city" });
+    }
+  });
+
+  // Admin: Update a city
+  app.put("/api/admin/cities/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name, country, lat, lng, zoom, cruisePort } = req.body;
+
+      const [updated] = await db.update(cities)
+        .set({
+          name,
+          country,
+          lat,
+          lng,
+          zoom: zoom || 14,
+          cruisePort: cruisePort || null,
+          updatedAt: new Date()
+        })
+        .where(eq(cities.id, id))
+        .returning();
+
+      if (!updated) {
+        return res.status(404).json({ error: "City not found" });
+      }
+
+      res.json(updated);
+    } catch (error) {
+      console.error('Admin update city error:', error);
+      res.status(500).json({ error: "Failed to update city" });
+    }
+  });
+
+  // Admin: Delete a city
+  app.delete("/api/admin/cities/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      
+      // Check if city has landmarks
+      const cityLandmarks = await db.select().from(landmarks).where(eq(landmarks.cityId, id));
+      if (cityLandmarks.length > 0) {
+        return res.status(400).json({ 
+          error: `Cannot delete city with ${cityLandmarks.length} landmarks. Delete landmarks first.` 
+        });
+      }
+
+      const [deleted] = await db.delete(cities).where(eq(cities.id, id)).returning();
+      
+      if (!deleted) {
+        return res.status(404).json({ error: "City not found" });
+      }
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Admin delete city error:', error);
+      res.status(500).json({ error: "Failed to delete city" });
+    }
+  });
+
+  // Admin: Get all landmarks from database
+  app.get("/api/admin/landmarks", async (req, res) => {
+    try {
+      const allLandmarks = await db.select().from(landmarks).orderBy(landmarks.name);
+      res.json(allLandmarks);
+    } catch (error) {
+      console.error('Admin get landmarks error:', error);
+      res.status(500).json({ error: "Failed to fetch landmarks" });
+    }
+  });
+
+  // Admin: Create a new landmark
+  app.post("/api/admin/landmarks", async (req, res) => {
+    try {
+      const data = req.body;
+      
+      if (!data.id || !data.cityId || !data.name || data.lat === undefined || data.lng === undefined || !data.narration) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      const [newLandmark] = await db.insert(landmarks).values({
+        id: data.id,
+        cityId: data.cityId,
+        name: data.name,
+        lat: data.lat,
+        lng: data.lng,
+        radius: data.radius || 50,
+        narration: data.narration,
+        description: data.description || null,
+        category: data.category || null,
+        detailedDescription: data.detailedDescription || null,
+        photos: data.photos || null,
+        historicalInfo: data.historicalInfo || null,
+        yearBuilt: data.yearBuilt || null,
+        architect: data.architect || null,
+        translations: data.translations || null,
+        openingHours: data.openingHours || null,
+        priceRange: data.priceRange || null,
+        cuisine: data.cuisine || null,
+        reservationUrl: data.reservationUrl || null,
+        phoneNumber: data.phoneNumber || null,
+        menuHighlights: data.menuHighlights || null,
+        restaurantPhotos: data.restaurantPhotos || null,
+        paymentMethods: data.paymentMethods || null
+      }).returning();
+
+      res.status(201).json(newLandmark);
+    } catch (error: any) {
+      console.error('Admin create landmark error:', error);
+      if (error.code === '23505') {
+        return res.status(409).json({ error: "Landmark with this ID already exists" });
+      }
+      res.status(500).json({ error: "Failed to create landmark" });
+    }
+  });
+
+  // Admin: Update a landmark
+  app.put("/api/admin/landmarks/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = req.body;
+
+      const [updated] = await db.update(landmarks)
+        .set({
+          cityId: data.cityId,
+          name: data.name,
+          lat: data.lat,
+          lng: data.lng,
+          radius: data.radius || 50,
+          narration: data.narration,
+          description: data.description || null,
+          category: data.category || null,
+          detailedDescription: data.detailedDescription || null,
+          photos: data.photos || null,
+          historicalInfo: data.historicalInfo || null,
+          yearBuilt: data.yearBuilt || null,
+          architect: data.architect || null,
+          translations: data.translations || null,
+          openingHours: data.openingHours || null,
+          priceRange: data.priceRange || null,
+          cuisine: data.cuisine || null,
+          reservationUrl: data.reservationUrl || null,
+          phoneNumber: data.phoneNumber || null,
+          menuHighlights: data.menuHighlights || null,
+          restaurantPhotos: data.restaurantPhotos || null,
+          paymentMethods: data.paymentMethods || null,
+          updatedAt: new Date()
+        })
+        .where(eq(landmarks.id, id))
+        .returning();
+
+      if (!updated) {
+        return res.status(404).json({ error: "Landmark not found" });
+      }
+
+      res.json(updated);
+    } catch (error) {
+      console.error('Admin update landmark error:', error);
+      res.status(500).json({ error: "Failed to update landmark" });
+    }
+  });
+
+  // Admin: Delete a landmark
+  app.delete("/api/admin/landmarks/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      
+      const [deleted] = await db.delete(landmarks).where(eq(landmarks.id, id)).returning();
+      
+      if (!deleted) {
+        return res.status(404).json({ error: "Landmark not found" });
+      }
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Admin delete landmark error:', error);
+      res.status(500).json({ error: "Failed to delete landmark" });
+    }
+  });
+
+  // Admin: Get statistics
+  app.get("/api/admin/stats", async (req, res) => {
+    try {
+      const allCities = await db.select().from(cities);
+      const allLandmarks = await db.select().from(landmarks);
+      
+      // Group by category
+      const categories: Record<string, number> = {};
+      for (const l of allLandmarks) {
+        const cat = l.category || 'Uncategorized';
+        categories[cat] = (categories[cat] || 0) + 1;
+      }
+
+      res.json({
+        cities: allCities.length,
+        landmarks: allLandmarks.length,
+        categories
+      });
+    } catch (error) {
+      console.error('Admin stats error:', error);
+      res.status(500).json({ error: "Failed to fetch stats" });
+    }
+  });
+
   // AI tour recommendation route
   app.post("/api/ai/recommend-tour", async (req, res) => {
     try {
