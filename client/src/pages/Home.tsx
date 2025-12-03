@@ -1014,6 +1014,22 @@ export default function Home() {
               onAddToTour={handleAddToTour}
               onTourRouteFound={handleTourRouteFound}
               onTourRouteClick={handleTourRouteClick}
+              startingPoint={startingPoint}
+              isSelectingHotelOnMap={isSelectingHotelOnMap}
+              onHotelLocationSelected={(lat, lng) => {
+                setStartingPoint({
+                  id: 'hotel',
+                  type: 'hotel',
+                  name: t('hotel', selectedLanguage),
+                  lat,
+                  lng
+                });
+                setIsSelectingHotelOnMap(false);
+                toast({
+                  title: t('startingPointSet', selectedLanguage),
+                  description: t('hotel', selectedLanguage)
+                });
+              }}
             />
 
             <OfflineIndicator />

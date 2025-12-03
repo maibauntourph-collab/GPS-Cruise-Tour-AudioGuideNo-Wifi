@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, useMap, Polyline, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap, Polyline, Popup, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
@@ -242,14 +242,33 @@ function FocusUpdater({ focusLocation }: { focusLocation?: { lat: number; lng: n
   return null;
 }
 
+function MapClickHandler({ 
+  isSelectingHotelOnMap, 
+  onHotelLocationSelected 
+}: { 
+  isSelectingHotelOnMap: boolean; 
+  onHotelLocationSelected?: (lat: number, lng: number) => void;
+}) {
+  useMapEvents({
+    click(e) {
+      if (isSelectingHotelOnMap && onHotelLocationSelected) {
+        onHotelLocationSelected(e.latlng.lat, e.latlng.lng);
+      }
+    },
+  });
+
+  return null;
+}
+
 interface TourRoutingMachineProps {
   tourStops: Landmark[];
   onTourRouteFound?: (route: any) => void;
   activeRoute: { start: [number, number]; end: [number, number] } | null;
   onTourRouteClick?: () => void;
+  startingPoint?: { lat: number; lng: number; type: string } | null;
 }
 
-function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick }: TourRoutingMachineProps) {
+function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick, startingPoint }: TourRoutingMachineProps) {
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
 
@@ -280,8 +299,12 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
   useEffect(() => {
     if (!map) return;
     
+    // Need at least 1 tour stop (or starting point + 1 stop) to show route
+    const hasStartingPoint = startingPoint && startingPoint.lat && startingPoint.lng;
+    const minStopsNeeded = hasStartingPoint ? 1 : 2;
+    
     // Don't show tour routing when there's an active navigation route
-    if (tourStops.length < 2 || activeRoute) {
+    if (tourStops.length < minStopsNeeded || activeRoute) {
       if (routingControlRef.current) {
         safeRemoveControl(routingControlRef.current);
         routingControlRef.current = null;
@@ -294,7 +317,12 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       routingControlRef.current = null;
     }
 
-    const waypoints = tourStops.map(stop => L.latLng(stop.lat, stop.lng));
+    // Build waypoints: starting point first (if set), then tour stops
+    const waypoints: L.LatLng[] = [];
+    if (hasStartingPoint) {
+      waypoints.push(L.latLng(startingPoint.lat, startingPoint.lng));
+    }
+    tourStops.forEach(stop => waypoints.push(L.latLng(stop.lat, stop.lng)));
 
     const control = L.Routing.control({
       waypoints: waypoints,
@@ -339,7 +367,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
         routingControlRef.current = null;
       }
     };
-  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl]);
+  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl, startingPoint]);
 
   return null;
 }
@@ -436,6 +464,10 @@ export default function MapView({
       <CityUpdater center={cityCenter} zoom={cityZoom} />
       <MapResizer isCompact={isCompact} sidebarOpen={sidebarOpen} />
       <FocusUpdater focusLocation={focusLocation} />
+      <MapClickHandler 
+        isSelectingHotelOnMap={isSelectingHotelOnMap} 
+        onHotelLocationSelected={onHotelLocationSelected} 
+      />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -524,12 +556,53 @@ export default function MapView({
         />
       )}
 
+      {/* Starting Point Marker */}
+      {startingPoint && startingPoint.lat && startingPoint.lng && (
+        <Marker
+          position={[startingPoint.lat, startingPoint.lng]}
+          icon={L.divIcon({
+            html: `<div style="
+              background: ${startingPoint.type === 'airport' ? '#0ea5e9' : startingPoint.type === 'cruise_terminal' ? '#14b8a6' : startingPoint.type === 'hotel' ? '#a855f7' : '#22c55e'};
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              border: 3px solid white;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              font-size: 14px;
+              font-weight: bold;
+            ">S</div>`,
+            className: 'starting-point-marker',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+          })}
+        >
+          <Popup>
+            <div className="text-sm font-medium">
+              {selectedLanguage === 'ko' ? '출발지' : 'Starting Point'}
+              <div className="text-xs text-muted-foreground mt-1">
+                {startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                 startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
+                 startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                 startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                 startingPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
+                 (selectedLanguage === 'ko' ? '출발지' : 'Start')}
+              </div>
+            </div>
+          </Popup>
+        </Marker>
+      )}
+
       {/* Tour route with actual road routing */}
       <TourRoutingMachine
         tourStops={tourStops}
         onTourRouteFound={onTourRouteFound}
         activeRoute={activeRoute}
         onTourRouteClick={onTourRouteClick}
+        startingPoint={startingPoint}
       />
     </MapContainer>
   );
