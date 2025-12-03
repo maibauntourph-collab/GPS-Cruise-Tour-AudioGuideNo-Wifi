@@ -908,7 +908,8 @@ export default function MapView({
         
         // Alternate tooltip direction based on index to reduce overlap
         const tooltipDirection = index % 2 === 0 ? 'top' : 'bottom';
-        const baseOffset = isSelected ? 45 : 35;
+        const isHighlighted = isSelected || isInTour; // Highlight if selected OR in tour
+        const baseOffset = isHighlighted ? 45 : 35;
         const tooltipOffset: [number, number] = tooltipDirection === 'top' 
           ? [0, -baseOffset] 
           : [0, baseOffset];
@@ -920,7 +921,7 @@ export default function MapView({
         
         return (
           <Marker
-            key={`${landmark.id}-${isSelected ? 'selected' : 'normal'}`}
+            key={`${landmark.id}-${isSelected ? 'selected' : isInTour ? 'intour' : 'normal'}`}
             position={[landmark.lat, landmark.lng]}
             icon={icon}
             ref={(marker) => {
@@ -964,7 +965,7 @@ export default function MapView({
               permanent={true}
               direction={tooltipDirection as "top" | "bottom"}
               offset={tooltipOffset}
-              className={`clickable-tooltip ${isSelected ? 'selected-landmark-tooltip' : 'landmark-tooltip'}`}
+              className={`clickable-tooltip ${isHighlighted ? 'selected-landmark-tooltip' : 'landmark-tooltip'}`}
               interactive={true}
             >
               <div 
@@ -981,18 +982,21 @@ export default function MapView({
                 onTouchStart={(e) => {
                   e.stopPropagation();
                 }}
-                className={isSelected ? 'selected-tooltip-content' : ''}
+                className={isHighlighted ? 'selected-tooltip-content' : ''}
                 style={{ 
                   cursor: 'pointer',
-                  fontWeight: isSelected ? 700 : 500,
-                  fontSize: isSelected ? '13px' : '11px',
-                  color: isSelected ? '#FFD700' : undefined,
-                  backgroundColor: isSelected ? '#000000' : undefined,
-                  padding: isSelected ? '4px 8px' : undefined,
-                  borderRadius: isSelected ? '4px' : undefined,
+                  fontWeight: isHighlighted ? 700 : 500,
+                  fontSize: isHighlighted ? '13px' : '11px',
+                  color: isHighlighted ? '#FFD700' : undefined,
+                  backgroundColor: isHighlighted ? '#000000' : undefined,
+                  padding: isHighlighted ? '4px 8px' : undefined,
+                  borderRadius: isHighlighted ? '4px' : undefined,
                 }}
                 data-testid={`tooltip-landmark-${landmark.id}`}
               >
+                {isInTour && (
+                  <span style={{ marginRight: '4px' }}>#{tourStops.findIndex(s => s.id === landmark.id) + 1}</span>
+                )}
                 {getTranslatedContent(landmark, selectedLanguage, 'name')}
               </div>
             </Tooltip>
