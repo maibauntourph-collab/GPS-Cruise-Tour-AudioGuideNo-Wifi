@@ -171,79 +171,79 @@ export default function AIRecommendDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="p-4 space-y-4">
-          {/* Category Filter Tabs */}
-          <Tabs value={recommendationType} onValueChange={(v) => setRecommendationType(v as RecommendationType)}>
-            <TabsList className="grid w-full grid-cols-4 h-9">
-              <TabsTrigger value="all" className="text-xs" data-testid="tab-recommend-all">
-                {t('all', selectedLanguage)}
-              </TabsTrigger>
-              <TabsTrigger value="landmarks" className="text-xs" data-testid="tab-recommend-landmarks">
-                <LandmarkIcon className="w-3 h-3 mr-1" />
-                {t('landmarks', selectedLanguage)}
-              </TabsTrigger>
-              <TabsTrigger value="restaurants" className="text-xs" data-testid="tab-recommend-restaurants">
-                <Utensils className="w-3 h-3 mr-1" />
-                {t('restaurants', selectedLanguage)}
-              </TabsTrigger>
-              <TabsTrigger value="activities" className="text-xs" data-testid="tab-recommend-activities">
-                <Activity className="w-3 h-3 mr-1" />
-                {t('activities', selectedLanguage)}
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
+        <ScrollArea className="max-h-[calc(85vh-80px)]">
+          <div className="p-4 space-y-4">
+            {/* Category Filter Tabs */}
+            <Tabs value={recommendationType} onValueChange={(v) => setRecommendationType(v as RecommendationType)}>
+              <TabsList className="grid w-full grid-cols-4 h-9">
+                <TabsTrigger value="all" className="text-xs" data-testid="tab-recommend-all">
+                  {t('all', selectedLanguage)}
+                </TabsTrigger>
+                <TabsTrigger value="landmarks" className="text-xs" data-testid="tab-recommend-landmarks">
+                  <LandmarkIcon className="w-3 h-3 mr-1" />
+                  {t('landmarks', selectedLanguage)}
+                </TabsTrigger>
+                <TabsTrigger value="restaurants" className="text-xs" data-testid="tab-recommend-restaurants">
+                  <Utensils className="w-3 h-3 mr-1" />
+                  {t('restaurants', selectedLanguage)}
+                </TabsTrigger>
+                <TabsTrigger value="activities" className="text-xs" data-testid="tab-recommend-activities">
+                  <Activity className="w-3 h-3 mr-1" />
+                  {t('activities', selectedLanguage)}
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
 
-          {/* Get Recommendation Button */}
-          <Button 
-            onClick={handleGetRecommendation} 
-            disabled={isLoading}
-            className="w-full gap-2"
-            data-testid="button-get-ai-recommendation"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                {t('generatingRecommendation', selectedLanguage)}
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4" />
-                {t('getAIRecommendation', selectedLanguage)}
-              </>
+            {/* Get Recommendation Button */}
+            <Button 
+              onClick={handleGetRecommendation} 
+              disabled={isLoading}
+              className="w-full gap-2"
+              data-testid="button-get-ai-recommendation"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  {t('generatingRecommendation', selectedLanguage)}
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4" />
+                  {t('getAIRecommendation', selectedLanguage)}
+                </>
+              )}
+            </Button>
+
+            {/* Error State */}
+            {error && (
+              <div className="flex items-center gap-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                <span>{error}</span>
+              </div>
             )}
-          </Button>
 
-          {/* Error State */}
-          {error && (
-            <div className="flex items-center gap-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
-              <span>{error}</span>
-            </div>
-          )}
-
-          {/* Recommendation Results */}
-          {recommendation && recommendedLandmarks.length > 0 && (
-            <div className="space-y-3">
-              {/* Summary */}
-              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <div className="flex items-center gap-2 text-sm">
-                  <Route className="w-4 h-4 text-muted-foreground" />
-                  <span className="font-medium">{recommendedLandmarks.length} {t('stops', selectedLanguage)}</span>
+            {/* Recommendation Results */}
+            {recommendation && recommendedLandmarks.length > 0 && (
+              <div className="space-y-3">
+                {/* Summary */}
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="flex items-center gap-2 text-sm">
+                    <Route className="w-4 h-4 text-muted-foreground" />
+                    <span className="font-medium">{recommendedLandmarks.length} {t('stops', selectedLanguage)}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Clock className="w-4 h-4" />
+                    <span>{recommendation.totalEstimatedTime} {t('minutes', selectedLanguage)}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4" />
-                  <span>{recommendation.totalEstimatedTime} {t('minutes', selectedLanguage)}</span>
+
+                {/* Explanation */}
+                <div className="p-3 bg-primary/5 border border-primary/10 rounded-lg">
+                  <p className="text-sm leading-relaxed">{recommendation.explanation}</p>
                 </div>
-              </div>
 
-              {/* Explanation */}
-              <div className="p-3 bg-primary/5 border border-primary/10 rounded-lg">
-                <p className="text-sm leading-relaxed">{recommendation.explanation}</p>
-              </div>
-
-              {/* Itinerary List */}
-              <ScrollArea className="h-[200px]">
-                <div className="space-y-2 pr-3">
+                {/* Itinerary List */}
+                <div className="space-y-2">
                   {recommendedLandmarks.map((landmark, index) => (
                     <div 
                       key={landmark.id}
@@ -269,29 +269,29 @@ export default function AIRecommendDialog({
                     </div>
                   ))}
                 </div>
-              </ScrollArea>
 
-              {/* Add All to Tour Button */}
-              <Button 
-                onClick={handleAddAllToTour}
-                variant="outline"
-                className="w-full gap-2"
-                data-testid="button-add-all-to-tour"
-              >
-                <Plus className="w-4 h-4" />
-                {t('addAllToTour', selectedLanguage)}
-              </Button>
-            </div>
-          )}
+                {/* Add All to Tour Button */}
+                <Button 
+                  onClick={handleAddAllToTour}
+                  variant="outline"
+                  className="w-full gap-2"
+                  data-testid="button-add-all-to-tour"
+                >
+                  <Plus className="w-4 h-4" />
+                  {t('addAllToTour', selectedLanguage)}
+                </Button>
+              </div>
+            )}
 
-          {/* Empty State - Before First Request */}
-          {!isLoading && !recommendation && !error && (
-            <div className="text-center py-6 text-muted-foreground">
-              <Sparkles className="w-10 h-10 mx-auto mb-3 opacity-30" />
-              <p className="text-sm">{t('aiRecommendationHint', selectedLanguage)}</p>
-            </div>
-          )}
-        </div>
+            {/* Empty State - Before First Request */}
+            {!isLoading && !recommendation && !error && (
+              <div className="text-center py-6 text-muted-foreground">
+                <Sparkles className="w-10 h-10 mx-auto mb-3 opacity-30" />
+                <p className="text-sm">{t('aiRecommendationHint', selectedLanguage)}</p>
+              </div>
+            )}
+          </div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );
