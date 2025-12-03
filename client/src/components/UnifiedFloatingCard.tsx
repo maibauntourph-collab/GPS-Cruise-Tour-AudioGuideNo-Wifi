@@ -1589,6 +1589,12 @@ export default function UnifiedFloatingCard({
                                     {formatDistance(distance)}
                                   </span>
                                 )}
+                                {tourStops.some(s => s.id === landmark.id) && (
+                                  <span className="text-[10px] text-[hsl(14,85%,55%)] flex items-center gap-0.5 font-medium">
+                                    <Clock className="w-2.5 h-2.5" />
+                                    {tourStopDurations[landmark.id] || tourTimePerStop}{selectedLanguage === 'ko' ? '분' : 'min'}
+                                  </span>
+                                )}
                               </div>
                               <div className="flex gap-0.5">
                                 <Button
