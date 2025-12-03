@@ -4,7 +4,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
 
-// Using gpt-4o-mini for cost-effective AI recommendations
+// Using gpt-4o for high-quality AI recommendations
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Available OpenAI TTS voices with descriptions
@@ -184,7 +184,7 @@ Respond in this exact JSON format:
 }`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4o",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
