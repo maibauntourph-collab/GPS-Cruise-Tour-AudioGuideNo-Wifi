@@ -1,26 +1,30 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import "./styles/leaflet-custom.css";
 
-// Fix HMR React instance issues by ensuring single React instance globally
+declare global {
+  interface Window {
+    React: typeof React;
+    ReactDOM: any;
+    __REACT_INSTANCE_SET__: boolean;
+    __REACT_ROOT__: ReactDOM.Root | null;
+  }
+}
+
 if (typeof window !== 'undefined') {
-  // Prevent React instance duplication
-  if (!(window as any).__REACT_INSTANCE_SET__) {
-    (window as any).React = React;
-    (window as any).ReactDOM = ReactDOM;
-    (window as any).__REACT_INSTANCE_SET__ = true;
+  if (!window.__REACT_INSTANCE_SET__) {
+    window.React = React;
+    window.ReactDOM = ReactDOM;
+    window.__REACT_INSTANCE_SET__ = true;
   }
   
-  // Clean up service workers and caches in development mode
   const isDev = import.meta.env.DEV || window.location.hostname.includes('.replit.dev');
   if (isDev && 'serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then((registrations) => {
       registrations.forEach((registration) => {
         registration.unregister();
-        console.log('[Main] Unregistered service worker for HMR compatibility');
       });
     });
     
@@ -29,7 +33,6 @@ if (typeof window !== 'undefined') {
         cacheNames.forEach((cacheName) => {
           if (cacheName.includes('gps-audio-guide')) {
             caches.delete(cacheName);
-            console.log('[Main] Cleared cache:', cacheName);
           }
         });
       });
@@ -39,8 +42,12 @@ if (typeof window !== 'undefined') {
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
-  const root = createRoot(rootElement);
-  root.render(<App />);
-} else {
-  console.error('[Main] Root element not found');
+  if (!window.__REACT_ROOT__) {
+    window.__REACT_ROOT__ = ReactDOM.createRoot(rootElement);
+  }
+  window.__REACT_ROOT__.render(<App />);
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept();
 }
