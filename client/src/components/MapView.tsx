@@ -780,6 +780,48 @@ export default function MapView({
   const blinkingGiftShopIcon = createBlinkingIcon('hsl(45, 90%, 55%)');
   const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
   const markerRefs = useRef<Map<string, L.Marker>>(new Map());
+  const previousSelectedRef = useRef<string | null>(null);
+  
+  // Update marker icons when selectedLandmark changes
+  useEffect(() => {
+    const previousId = previousSelectedRef.current;
+    const currentId = selectedLandmark?.id || null;
+    
+    // If selection changed
+    if (previousId !== currentId) {
+      // Reset previous marker to normal icon
+      if (previousId) {
+        const prevMarker = markerRefs.current.get(previousId);
+        if (prevMarker) {
+          const prevLandmark = landmarks.find(l => l.id === previousId);
+          if (prevLandmark) {
+            const isActivity = prevLandmark.category === 'Activity';
+            const isRestaurant = prevLandmark.category === 'Restaurant';
+            const isGiftShop = prevLandmark.category === 'Gift Shop' || prevLandmark.category === 'Shop';
+            const normalIcon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon;
+            prevMarker.setIcon(normalIcon);
+          }
+        }
+      }
+      
+      // Set current marker to blinking icon
+      if (currentId) {
+        const currMarker = markerRefs.current.get(currentId);
+        if (currMarker) {
+          const currLandmark = landmarks.find(l => l.id === currentId);
+          if (currLandmark) {
+            const isActivity = currLandmark.category === 'Activity';
+            const isRestaurant = currLandmark.category === 'Restaurant';
+            const isGiftShop = currLandmark.category === 'Gift Shop' || currLandmark.category === 'Shop';
+            const blinkIcon = isActivity ? blinkingActivityIcon : isRestaurant ? blinkingRestaurantIcon : isGiftShop ? blinkingGiftShopIcon : blinkingLandmarkIcon;
+            currMarker.setIcon(blinkIcon);
+          }
+        }
+      }
+      
+      previousSelectedRef.current = currentId;
+    }
+  }, [selectedLandmark, landmarks, landmarkIcon, activityIcon, restaurantIcon, giftShopIcon, blinkingLandmarkIcon, blinkingActivityIcon, blinkingRestaurantIcon, blinkingGiftShopIcon]);
 
   // Add touch event listeners to markers
   useEffect(() => {
