@@ -480,8 +480,7 @@ export default function MenuDialog({
                   </div>
                   
                   {voiceInfoList.length > 0 ? (
-                    <div className="max-h-[200px] overflow-y-auto">
-                      <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2">
                         {voiceInfoList.map((info) => {
                           const isSelected = selectedSystemVoice === info.voice.name;
                           const voiceSlug = info.voice.name.replace(/\s+/g, '-').toLowerCase();
@@ -557,7 +556,6 @@ export default function MenuDialog({
                             </button>
                           );
                         })}
-                      </div>
                     </div>
                   ) : (
                     <div className="text-center py-4 space-y-2">
