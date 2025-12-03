@@ -1646,6 +1646,50 @@ export default function UnifiedFloatingCard({
               </div>
             )}
             
+            {/* Category Filter Buttons */}
+            <div className="flex flex-wrap gap-1.5 pb-3 mb-3 border-b flex-shrink-0">
+              <Button
+                variant={showLandmarks ? "default" : "outline"}
+                size="sm"
+                onClick={() => onToggleLandmarks()}
+                className={`h-7 gap-1 text-xs ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : ''}`}
+                data-testid="button-filter-landmarks-list"
+              >
+                <LandmarkIcon className="w-3 h-3" />
+                {selectedLanguage === 'ko' ? '명소' : 'Landmarks'}
+              </Button>
+              <Button
+                variant={showActivities ? "default" : "outline"}
+                size="sm"
+                onClick={() => onToggleActivities()}
+                className={`h-7 gap-1 text-xs ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
+                data-testid="button-filter-activities-list"
+              >
+                <Activity className="w-3 h-3" />
+                {selectedLanguage === 'ko' ? '액티비티' : 'Activities'}
+              </Button>
+              <Button
+                variant={showRestaurants ? "default" : "outline"}
+                size="sm"
+                onClick={() => onToggleRestaurants()}
+                className={`h-7 gap-1 text-xs ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : ''}`}
+                data-testid="button-filter-restaurants-list"
+              >
+                <Utensils className="w-3 h-3" />
+                {selectedLanguage === 'ko' ? '맛집' : 'Restaurants'}
+              </Button>
+              <Button
+                variant={showGiftShops ? "default" : "outline"}
+                size="sm"
+                onClick={() => onToggleGiftShops()}
+                className={`h-7 gap-1 text-xs ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-black' : ''}`}
+                data-testid="button-filter-giftshops-list"
+              >
+                <ShoppingBag className="w-3 h-3" />
+                {selectedLanguage === 'ko' ? '기념품' : 'Gift Shops'}
+              </Button>
+            </div>
+            
             {/* Paginated list - Takes remaining space */}
             <div className="flex-1 min-h-0 flex flex-col">
               <div ref={listScrollRef} className="flex-1 overflow-y-auto space-y-2 pr-1">
