@@ -542,20 +542,9 @@ export default function UnifiedFloatingCard({
     }
   };
 
-  // Check if start/end points are set before selecting landmark
+  // Click on landmark card opens detail dialog directly
   const handleLandmarkClick = (landmark: Landmark) => {
-    const hasStartPoint = startingPoint && startingPoint.lat && startingPoint.lng;
-    const hasEndPoint = endPoint && endPoint.lat && endPoint.lng;
-    
-    if (!hasStartPoint || !hasEndPoint) {
-      // Open start/end point dialog first
-      if (onOpenStartEndPointDialog) {
-        onOpenStartEndPointDialog();
-      }
-      return;
-    }
-    
-    // Both points set, proceed with landmark selection
+    // Open landmark detail dialog via parent's onLandmarkSelect
     onLandmarkSelect?.(landmark);
   };
 
