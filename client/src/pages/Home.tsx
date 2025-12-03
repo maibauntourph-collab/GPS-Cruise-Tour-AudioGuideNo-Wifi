@@ -1917,6 +1917,7 @@ export default function Home() {
                   description: selectedLanguage === 'ko' ? '지도에서 선택됨' : 'Selected on map'
                 });
               }}
+              selectedLandmark={selectedLandmark}
             />
             
             {/* Route View Button - next to zoom controls */}

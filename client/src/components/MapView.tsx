@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, useMap, Polyline, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap, Polyline, Popup, useMapEvents, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
@@ -31,6 +31,66 @@ const createCustomIcon = (color: string) => {
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],
+  });
+};
+
+const createBlinkingIcon = (color: string) => {
+  return L.divIcon({
+    className: 'blinking-marker',
+    html: `
+      <div class="blinking-pin" style="
+        background-color: ${color};
+        width: 40px;
+        height: 40px;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        border: 4px solid white;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: blink 1s ease-in-out infinite;
+      ">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style="transform: rotate(45deg);">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+      </div>
+      <div class="pulse-ring" style="
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border: 3px solid ${color};
+        border-radius: 50%;
+        top: -8px;
+        left: -5px;
+        animation: pulse-ring 1s ease-out infinite;
+      "></div>
+      <style>
+        @keyframes blink {
+          0%, 100% {
+            opacity: 1;
+            transform: rotate(-45deg) scale(1);
+          }
+          50% {
+            opacity: 0.6;
+            transform: rotate(-45deg) scale(1.1);
+          }
+        }
+        @keyframes pulse-ring {
+          0% {
+            transform: scale(0.8);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1.8);
+            opacity: 0;
+          }
+        }
+      </style>
+    `,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
   });
 };
 
@@ -201,6 +261,7 @@ interface MapViewProps {
   onEndPointLocationSelected?: (lat: number, lng: number) => void;
   startingPoint?: { lat: number; lng: number; type: string } | null;
   endPoint?: { lat: number; lng: number; type: string } | null;
+  selectedLandmark?: Landmark | null;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -701,11 +762,18 @@ export default function MapView({
   onEndPointLocationSelected,
   startingPoint,
   endPoint,
+  selectedLandmark,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
   const restaurantIcon = createCustomIcon('hsl(25, 95%, 55%)'); // Orange for restaurants
   const giftShopIcon = createCustomIcon('hsl(45, 90%, 55%)'); // Gold for gift shops
+  
+  // Blinking icons for selected landmark
+  const blinkingLandmarkIcon = createBlinkingIcon('hsl(14, 85%, 55%)');
+  const blinkingActivityIcon = createBlinkingIcon('hsl(210, 85%, 55%)');
+  const blinkingRestaurantIcon = createBlinkingIcon('hsl(25, 95%, 55%)');
+  const blinkingGiftShopIcon = createBlinkingIcon('hsl(45, 90%, 55%)');
   const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
   const markerRefs = useRef<Map<string, L.Marker>>(new Map());
 
@@ -789,8 +857,13 @@ export default function MapView({
         const isActivity = landmark.category === 'Activity';
         const isRestaurant = landmark.category === 'Restaurant';
         const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
-        const icon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon;
+        const isSelected = selectedLandmark?.id === landmark.id;
         const isInTour = tourStops.some(stop => stop.id === landmark.id);
+        
+        // Use blinking icon for selected landmark
+        const icon = isSelected 
+          ? (isActivity ? blinkingActivityIcon : isRestaurant ? blinkingRestaurantIcon : isGiftShop ? blinkingGiftShopIcon : blinkingLandmarkIcon)
+          : (isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon);
         
         return (
           <Marker
@@ -832,6 +905,20 @@ export default function MapView({
               }
             }}
           >
+            {/* Tooltip - always visible for selected landmark, hover for others */}
+            <Tooltip 
+              permanent={isSelected}
+              direction="top" 
+              offset={[0, isSelected ? -45 : -35]}
+              className={isSelected ? 'selected-landmark-tooltip' : ''}
+            >
+              <span style={{ 
+                fontWeight: isSelected ? 600 : 500,
+                fontSize: isSelected ? '13px' : '12px',
+              }}>
+                {getTranslatedContent(landmark, selectedLanguage, 'name')}
+              </span>
+            </Tooltip>
             <Popup>
               <div className="text-sm font-medium">
                 {getTranslatedContent(landmark, selectedLanguage, 'name')}
