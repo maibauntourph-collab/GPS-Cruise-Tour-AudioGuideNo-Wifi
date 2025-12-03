@@ -14,6 +14,7 @@ export interface CityStartingPoints {
   airports: StartingPoint[];
   cruiseTerminals: StartingPoint[];
   trainStations: StartingPoint[];
+  hotels: StartingPoint[];
 }
 
 // City starting points data
@@ -81,6 +82,52 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           ja: { name: 'ローマ・テルミニ駅' }
         }
       }
+    ],
+    hotels: [
+      {
+        id: 'rome_marriott',
+        type: 'hotel',
+        name: 'Rome Marriott Grand Hotel Flora',
+        lat: 41.9079,
+        lng: 12.4893,
+        translations: {
+          ko: { name: '로마 메리어트 그랜드 호텔 플로라' },
+          it: { name: 'Rome Marriott Grand Hotel Flora' }
+        }
+      },
+      {
+        id: 'rome_hilton',
+        type: 'hotel',
+        name: 'Rome Cavalieri, A Waldorf Astoria Hotel',
+        lat: 41.9214,
+        lng: 12.4456,
+        translations: {
+          ko: { name: '로마 카발리에리 월도프 아스토리아' },
+          it: { name: 'Rome Cavalieri Waldorf Astoria' }
+        }
+      },
+      {
+        id: 'hotel_eden',
+        type: 'hotel',
+        name: 'Hotel Eden Rome',
+        lat: 41.9064,
+        lng: 12.4876,
+        translations: {
+          ko: { name: '호텔 에덴 로마' },
+          it: { name: 'Hotel Eden Roma' }
+        }
+      },
+      {
+        id: 'st_regis_rome',
+        type: 'hotel',
+        name: 'The St. Regis Rome',
+        lat: 41.9044,
+        lng: 12.4956,
+        translations: {
+          ko: { name: '더 세인트 레지스 로마' },
+          it: { name: 'The St. Regis Roma' }
+        }
+      }
     ]
   },
   barcelona: {
@@ -129,6 +176,32 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           ja: { name: 'バルセロナ・サンツ駅' }
         }
       }
+    ],
+    hotels: [
+      {
+        id: 'hotel_arts',
+        type: 'hotel',
+        name: 'Hotel Arts Barcelona',
+        lat: 41.3875,
+        lng: 2.1935,
+        translations: { ko: { name: '호텔 아츠 바르셀로나' } }
+      },
+      {
+        id: 'w_barcelona',
+        type: 'hotel',
+        name: 'W Barcelona',
+        lat: 41.3684,
+        lng: 2.1890,
+        translations: { ko: { name: 'W 바르셀로나' } }
+      },
+      {
+        id: 'mandarin_oriental_bcn',
+        type: 'hotel',
+        name: 'Mandarin Oriental Barcelona',
+        lat: 41.3896,
+        lng: 2.1654,
+        translations: { ko: { name: '만다린 오리엔탈 바르셀로나' } }
+      }
     ]
   },
   paris: {
@@ -175,6 +248,32 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           zh: { name: '巴黎北站' },
           ja: { name: 'パリ北駅' }
         }
+      }
+    ],
+    hotels: [
+      {
+        id: 'ritz_paris',
+        type: 'hotel',
+        name: 'Ritz Paris',
+        lat: 48.8683,
+        lng: 2.3281,
+        translations: { ko: { name: '리츠 파리' } }
+      },
+      {
+        id: 'le_meurice',
+        type: 'hotel',
+        name: 'Le Meurice',
+        lat: 48.8654,
+        lng: 2.3282,
+        translations: { ko: { name: '르 뫼리스' } }
+      },
+      {
+        id: 'four_seasons_paris',
+        type: 'hotel',
+        name: 'Four Seasons Hotel George V Paris',
+        lat: 48.8699,
+        lng: 2.3009,
+        translations: { ko: { name: '포시즌스 파리 조르주 생크' } }
       }
     ]
   },
@@ -233,6 +332,32 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           ja: { name: 'キングス・クロス駅' }
         }
       }
+    ],
+    hotels: [
+      {
+        id: 'the_savoy',
+        type: 'hotel',
+        name: 'The Savoy',
+        lat: 51.5102,
+        lng: -0.1204,
+        translations: { ko: { name: '더 사보이' } }
+      },
+      {
+        id: 'claridges',
+        type: 'hotel',
+        name: "Claridge's",
+        lat: 51.5127,
+        lng: -0.1465,
+        translations: { ko: { name: '클라리지스' } }
+      },
+      {
+        id: 'the_ritz_london',
+        type: 'hotel',
+        name: 'The Ritz London',
+        lat: 51.5069,
+        lng: -0.1419,
+        translations: { ko: { name: '더 리츠 런던' } }
+      }
     ]
   },
   amsterdam: {
@@ -280,6 +405,24 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           zh: { name: '阿姆斯特丹中央车站' },
           ja: { name: 'アムステルダム中央駅' }
         }
+      }
+    ],
+    hotels: [
+      {
+        id: 'hotel_pulitzer',
+        type: 'hotel',
+        name: 'Hotel Pulitzer Amsterdam',
+        lat: 52.3749,
+        lng: 4.8841,
+        translations: { ko: { name: '호텔 풀리처 암스테르담' } }
+      },
+      {
+        id: 'waldorf_amsterdam',
+        type: 'hotel',
+        name: 'Waldorf Astoria Amsterdam',
+        lat: 52.3635,
+        lng: 4.8963,
+        translations: { ko: { name: '월도프 아스토리아 암스테르담' } }
       }
     ]
   },
@@ -338,6 +481,32 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           zh: { name: '东京站' }
         }
       }
+    ],
+    hotels: [
+      {
+        id: 'park_hyatt_tokyo',
+        type: 'hotel',
+        name: 'Park Hyatt Tokyo',
+        lat: 35.6855,
+        lng: 139.6903,
+        translations: { ko: { name: '파크 하얏트 도쿄' }, ja: { name: 'パークハイアット東京' } }
+      },
+      {
+        id: 'aman_tokyo',
+        type: 'hotel',
+        name: 'Aman Tokyo',
+        lat: 35.6854,
+        lng: 139.7639,
+        translations: { ko: { name: '아만 도쿄' }, ja: { name: 'アマン東京' } }
+      },
+      {
+        id: 'mandarin_oriental_tokyo',
+        type: 'hotel',
+        name: 'Mandarin Oriental Tokyo',
+        lat: 35.6864,
+        lng: 139.7730,
+        translations: { ko: { name: '만다린 오리엔탈 도쿄' }, ja: { name: 'マンダリン・オリエンタル東京' } }
+      }
     ]
   },
   singapore: {
@@ -370,7 +539,33 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
         }
       }
     ],
-    trainStations: []
+    trainStations: [],
+    hotels: [
+      {
+        id: 'marina_bay_sands',
+        type: 'hotel',
+        name: 'Marina Bay Sands',
+        lat: 1.2834,
+        lng: 103.8607,
+        translations: { ko: { name: '마리나 베이 샌즈' } }
+      },
+      {
+        id: 'raffles_singapore',
+        type: 'hotel',
+        name: 'Raffles Singapore',
+        lat: 1.2949,
+        lng: 103.8545,
+        translations: { ko: { name: '래플스 싱가포르' } }
+      },
+      {
+        id: 'fullerton_hotel',
+        type: 'hotel',
+        name: 'The Fullerton Hotel Singapore',
+        lat: 1.2863,
+        lng: 103.8524,
+        translations: { ko: { name: '더 풀러튼 호텔 싱가포르' } }
+      }
+    ]
   },
   stockholm: {
     cityId: 'stockholm',
@@ -417,6 +612,24 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           zh: { name: '斯德哥尔摩中央车站' },
           ja: { name: 'ストックホルム中央駅' }
         }
+      }
+    ],
+    hotels: [
+      {
+        id: 'grand_hotel_stockholm',
+        type: 'hotel',
+        name: 'Grand Hôtel Stockholm',
+        lat: 59.3297,
+        lng: 18.0753,
+        translations: { ko: { name: '그랜드 호텔 스톡홀름' } }
+      },
+      {
+        id: 'hotel_diplomat',
+        type: 'hotel',
+        name: 'Hotel Diplomat',
+        lat: 59.3326,
+        lng: 18.0778,
+        translations: { ko: { name: '호텔 디플로맛' } }
       }
     ]
   },
@@ -466,6 +679,24 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           ja: { name: 'コペンハーゲン中央駅' }
         }
       }
+    ],
+    hotels: [
+      {
+        id: 'hotel_dangleterre',
+        type: 'hotel',
+        name: "Hotel d'Angleterre",
+        lat: 55.6797,
+        lng: 12.5864,
+        translations: { ko: { name: "호텔 당글레테르" } }
+      },
+      {
+        id: 'nimb_hotel',
+        type: 'hotel',
+        name: 'Nimb Hotel',
+        lat: 55.6736,
+        lng: 12.5666,
+        translations: { ko: { name: '닌브 호텔' } }
+      }
     ]
   },
   sydney: {
@@ -510,6 +741,32 @@ export const cityStartingPoints: Record<string, CityStartingPoints> = {
           zh: { name: '悉尼中央车站' },
           ja: { name: 'シドニー中央駅' }
         }
+      }
+    ],
+    hotels: [
+      {
+        id: 'park_hyatt_sydney',
+        type: 'hotel',
+        name: 'Park Hyatt Sydney',
+        lat: -33.8568,
+        lng: 151.2099,
+        translations: { ko: { name: '파크 하얏트 시드니' } }
+      },
+      {
+        id: 'intercontinental_sydney',
+        type: 'hotel',
+        name: 'InterContinental Sydney',
+        lat: -33.8614,
+        lng: 151.2100,
+        translations: { ko: { name: '인터컨티넨탈 시드니' } }
+      },
+      {
+        id: 'four_seasons_sydney',
+        type: 'hotel',
+        name: 'Four Seasons Hotel Sydney',
+        lat: -33.8611,
+        lng: 151.2099,
+        translations: { ko: { name: '포시즌스 호텔 시드니' } }
       }
     ]
   }
