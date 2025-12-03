@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { queryClient, apiRequest } from '@/lib/queryClient';
 import { Button } from '@/components/ui/button';
@@ -441,20 +441,22 @@ function CityFormDialog({ isOpen, onClose, city, onSave, isPending }: CityFormDi
     zoom: 14
   });
 
-  useState(() => {
-    if (city) {
-      setFormData({
-        id: city.id,
-        name: city.name,
-        country: city.country,
-        lat: city.lat,
-        lng: city.lng,
-        zoom: city.zoom || 14
-      });
-    } else {
-      setFormData({ id: '', name: '', country: '', lat: 0, lng: 0, zoom: 14 });
+  useEffect(() => {
+    if (isOpen) {
+      if (city) {
+        setFormData({
+          id: city.id,
+          name: city.name,
+          country: city.country,
+          lat: city.lat,
+          lng: city.lng,
+          zoom: city.zoom || 14
+        });
+      } else {
+        setFormData({ id: '', name: '', country: '', lat: 0, lng: 0, zoom: 14 });
+      }
     }
-  });
+  }, [isOpen, city]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -567,30 +569,32 @@ function LandmarkFormDialog({ isOpen, onClose, landmark, cities, onSave, isPendi
     architect: ''
   });
 
-  useState(() => {
-    if (landmark) {
-      setFormData({
-        id: landmark.id,
-        cityId: landmark.cityId,
-        name: landmark.name,
-        lat: landmark.lat,
-        lng: landmark.lng,
-        radius: landmark.radius,
-        narration: landmark.narration,
-        description: landmark.description || '',
-        category: landmark.category || '',
-        detailedDescription: landmark.detailedDescription || '',
-        yearBuilt: landmark.yearBuilt || '',
-        architect: landmark.architect || ''
-      });
-    } else {
-      setFormData({
-        id: '', cityId: cities[0]?.id || '', name: '', lat: 0, lng: 0,
-        radius: 50, narration: '', description: '', category: '',
-        detailedDescription: '', yearBuilt: '', architect: ''
-      });
+  useEffect(() => {
+    if (isOpen) {
+      if (landmark) {
+        setFormData({
+          id: landmark.id,
+          cityId: landmark.cityId,
+          name: landmark.name,
+          lat: landmark.lat,
+          lng: landmark.lng,
+          radius: landmark.radius,
+          narration: landmark.narration,
+          description: landmark.description || '',
+          category: landmark.category || '',
+          detailedDescription: landmark.detailedDescription || '',
+          yearBuilt: landmark.yearBuilt || '',
+          architect: landmark.architect || ''
+        });
+      } else {
+        setFormData({
+          id: '', cityId: cities[0]?.id || '', name: '', lat: 0, lng: 0,
+          radius: 50, narration: '', description: '', category: '',
+          detailedDescription: '', yearBuilt: '', architect: ''
+        });
+      }
     }
-  });
+  }, [isOpen, landmark, cities]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
