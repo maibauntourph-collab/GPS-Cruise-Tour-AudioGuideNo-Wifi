@@ -1378,19 +1378,49 @@ export default function UnifiedFloatingCard({
                             )}
                             
                             {isModeratelyLong && !isLateEnd && !isVeryLong && (
-                              <div className="flex items-center gap-2 p-2 mb-2 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
-                                <Clock className="w-4 h-4 flex-shrink-0" />
-                                <div className="text-xs">
-                                  <p className="font-medium">
-                                    {selectedLanguage === 'ko' ? '💡 긴 투어입니다' : '💡 Long Tour'}
-                                  </p>
-                                  <p className="text-[10px] opacity-80">
-                                    {selectedLanguage === 'ko' 
-                                      ? `예상 종료: ${formatTime(endTime)} - 휴식을 권장합니다`
-                                      : `Est. end: ${formatTime(endTime)} - consider breaks`
-                                    }
-                                  </p>
+                              <div className="flex items-center justify-between gap-2 p-2 mb-2 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+                                <div className="flex items-center gap-2">
+                                  <Clock className="w-4 h-4 flex-shrink-0" />
+                                  <div className="text-xs">
+                                    <p className="font-medium">
+                                      {selectedLanguage === 'ko' ? '💡 긴 투어입니다' : '💡 Long Tour'}
+                                    </p>
+                                    <p className="text-[10px] opacity-80">
+                                      {selectedLanguage === 'ko' 
+                                        ? `예상 종료: ${formatTime(endTime)} - 휴식을 권장합니다`
+                                        : `Est. end: ${formatTime(endTime)} - consider breaks`
+                                      }
+                                    </p>
+                                  </div>
                                 </div>
+                                {(startingPoint || endPoint) && (
+                                  <div className="flex flex-col gap-0.5 text-[9px] text-right">
+                                    {startingPoint && (
+                                      <div className="flex items-center gap-1 justify-end">
+                                        <span className="opacity-70">{selectedLanguage === 'ko' ? '출발' : 'From'}:</span>
+                                        <span className="font-medium text-green-600 dark:text-green-400 truncate max-w-[60px]">
+                                          {startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') : 
+                                           startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                           startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                           startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
+                                           (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
+                                        </span>
+                                      </div>
+                                    )}
+                                    {endPoint && (
+                                      <div className="flex items-center gap-1 justify-end">
+                                        <span className="opacity-70">{selectedLanguage === 'ko' ? '도착' : 'To'}:</span>
+                                        <span className="font-medium text-red-600 dark:text-red-400 truncate max-w-[60px]">
+                                          {endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') : 
+                                           endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                           endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                           endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
+                                           (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
+                                        </span>
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
                               </div>
                             )}
                             
@@ -1725,6 +1755,19 @@ export default function UnifiedFloatingCard({
                                   <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
                                     <MapPin className="w-2.5 h-2.5" />
                                     {formatDistance(distance)}
+                                    <span className="text-muted-foreground/70 ml-0.5">
+                                      ({(() => {
+                                        const walkingMinutes = Math.round((distance / 1000) / 5 * 60);
+                                        if (walkingMinutes >= 60) {
+                                          const hours = Math.floor(walkingMinutes / 60);
+                                          const mins = walkingMinutes % 60;
+                                          return selectedLanguage === 'ko' 
+                                            ? `${hours}시간 ${mins}분` 
+                                            : `${hours}h ${mins}m`;
+                                        }
+                                        return selectedLanguage === 'ko' ? `${walkingMinutes}분` : `${walkingMinutes}min`;
+                                      })()})
+                                    </span>
                                   </span>
                                 )}
                                 {tourStops.some(s => s.id === landmark.id) && (
