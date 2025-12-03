@@ -1270,6 +1270,27 @@ export default function UnifiedFloatingCard({
                         const hours = Math.floor(totalMinutes / 60);
                         const mins = totalMinutes % 60;
                         
+                        // Calculate estimated end time
+                        const startTime = departureTime || new Date();
+                        const endTime = new Date(startTime.getTime() + totalMinutes * 60 * 1000);
+                        const endHour = endTime.getHours();
+                        const endMinute = endTime.getMinutes();
+                        
+                        // Check if tour ends late (after 8 PM / 20:00)
+                        const isLateEnd = endHour >= 20;
+                        // Check if tour is very long (over 6 hours)
+                        const isVeryLong = totalMinutes > 360;
+                        // Check if tour is moderately long (over 4 hours)
+                        const isModeratelyLong = totalMinutes > 240 && totalMinutes <= 360;
+                        
+                        const formatTime = (date: Date) => {
+                          return date.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: selectedLanguage !== 'ko'
+                          });
+                        };
+                        
                         return (
                           <>
                             {/* Traffic Status Badge */}
@@ -1288,9 +1309,51 @@ export default function UnifiedFloatingCard({
                                 )}
                               </div>
                               <span className="text-[10px] text-muted-foreground">
-                                {selectedLanguage === 'ko' ? '현재 교통상황' : 'Current traffic'}
+                                {departureTime 
+                                  ? `${selectedLanguage === 'ko' ? '출발' : 'Depart'}: ${formatTime(departureTime)}`
+                                  : (selectedLanguage === 'ko' ? '현재 교통상황' : 'Current traffic')
+                                }
                               </span>
                             </div>
+                            
+                            {/* Time Warning Alert */}
+                            {(isLateEnd || isVeryLong) && (
+                              <div className="flex items-center gap-2 p-2 mb-2 rounded-md bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400">
+                                <Clock className="w-4 h-4 flex-shrink-0" />
+                                <div className="text-xs">
+                                  <p className="font-medium">
+                                    {selectedLanguage === 'ko' ? '⚠️ 시간 초과 주의!' : '⚠️ Time Warning!'}
+                                  </p>
+                                  <p className="text-[10px] opacity-80">
+                                    {isLateEnd 
+                                      ? (selectedLanguage === 'ko' 
+                                          ? `예상 종료: ${formatTime(endTime)} (늦은 시간)` 
+                                          : `Est. end: ${formatTime(endTime)} (late evening)`)
+                                      : (selectedLanguage === 'ko'
+                                          ? `총 ${hours}시간 ${mins}분 - 투어가 매우 깁니다`
+                                          : `${hours}h ${mins}m total - very long tour`)
+                                    }
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {isModeratelyLong && !isLateEnd && !isVeryLong && (
+                              <div className="flex items-center gap-2 p-2 mb-2 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+                                <Clock className="w-4 h-4 flex-shrink-0" />
+                                <div className="text-xs">
+                                  <p className="font-medium">
+                                    {selectedLanguage === 'ko' ? '💡 긴 투어입니다' : '💡 Long Tour'}
+                                  </p>
+                                  <p className="text-[10px] opacity-80">
+                                    {selectedLanguage === 'ko' 
+                                      ? `예상 종료: ${formatTime(endTime)} - 휴식을 권장합니다`
+                                      : `Est. end: ${formatTime(endTime)} - consider breaks`
+                                    }
+                                  </p>
+                                </div>
+                              </div>
+                            )}
                             
                             <div className="flex items-center justify-between gap-4">
                               <div className="flex items-center gap-3">
@@ -1316,8 +1379,15 @@ export default function UnifiedFloatingCard({
                                 </span>
                               </div>
                             </div>
-                            <div className="mt-1.5 text-xs text-muted-foreground">
-                              * {selectedLanguage === 'ko' ? '장소별 체류시간 조정 가능' : 'Stay time adjustable per stop'}
+                            
+                            {/* Estimated End Time */}
+                            <div className="mt-1.5 flex items-center justify-between">
+                              <span className="text-xs text-muted-foreground">
+                                * {selectedLanguage === 'ko' ? '장소별 체류시간 조정 가능' : 'Stay time adjustable per stop'}
+                              </span>
+                              <span className={`text-xs font-medium ${isLateEnd ? 'text-red-500' : 'text-muted-foreground'}`}>
+                                {selectedLanguage === 'ko' ? '종료' : 'End'}: {formatTime(endTime)}
+                              </span>
                             </div>
                           </>
                         );
