@@ -58,6 +58,8 @@ interface UnifiedFloatingCardProps {
   } | null;
   onRemoveTourStop?: (landmarkId: string) => void;
   tourTimePerStop?: number;
+  tourStopDurations?: Record<string, number>;
+  onUpdateStopDuration?: (landmarkId: string, duration: number) => void;
   
   // AI Recommendation props
   aiRecommendation?: {
@@ -130,6 +132,8 @@ export default function UnifiedFloatingCard({
   tourRouteInfo = null,
   onRemoveTourStop,
   tourTimePerStop = 45,
+  tourStopDurations = {},
+  onUpdateStopDuration,
   aiRecommendation = null,
   selectedLanguage = 'en',
   onMapMarkerClick
@@ -1185,7 +1189,9 @@ export default function UnifiedFloatingCard({
                           <span className="text-sm font-bold">
                             {(() => {
                               const travelMinutes = Math.round(tourRouteInfo.duration / 60);
-                              const totalMinutes = travelMinutes + (tourStops.length * tourTimePerStop);
+                              const stayMinutes = tourStops.reduce((sum, stop) => 
+                                sum + (tourStopDurations[stop.id] || tourTimePerStop), 0);
+                              const totalMinutes = travelMinutes + stayMinutes;
                               const hours = Math.floor(totalMinutes / 60);
                               const mins = totalMinutes % 60;
                               return hours > 0 ? `${hours}h ${mins}m` : `${totalMinutes}min`;
@@ -1194,7 +1200,7 @@ export default function UnifiedFloatingCard({
                         </div>
                       </div>
                       <div className="mt-1.5 text-xs text-muted-foreground">
-                        * {selectedLanguage === 'ko' ? `각 장소 약 ${tourTimePerStop}분 체류 포함` : `Includes ${tourTimePerStop}min per stop`}
+                        * {selectedLanguage === 'ko' ? '장소별 체류시간 조정 가능' : 'Stay time adjustable per stop'}
                       </div>
                     </div>
                   )}
@@ -1220,6 +1226,8 @@ export default function UnifiedFloatingCard({
                           
                           const categoryColor = getCategoryColor(stop.category || '');
                           
+                          const stopDuration = tourStopDurations[stop.id] || tourTimePerStop;
+                          
                           return (
                             <div key={stop.id}>
                               <div
@@ -1237,7 +1245,41 @@ export default function UnifiedFloatingCard({
                                     {getTranslatedContent(stop, selectedLanguage, 'name')}
                                   </p>
                                 </div>
-                                <div className="flex gap-1">
+                                <div className="flex items-center gap-1">
+                                  <div 
+                                    className="flex items-center bg-white/20 rounded-md"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      className="h-6 w-6 text-white hover:bg-white/30 rounded-r-none"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        const newDuration = Math.max(15, stopDuration - 15);
+                                        onUpdateStopDuration?.(stop.id, newDuration);
+                                      }}
+                                      data-testid={`button-tour-stop-time-minus-${stop.id}`}
+                                    >
+                                      <span className="text-sm font-bold">-</span>
+                                    </Button>
+                                    <span className="text-xs font-medium text-white px-1 min-w-[40px] text-center">
+                                      {stopDuration}m
+                                    </span>
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      className="h-6 w-6 text-white hover:bg-white/30 rounded-l-none"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        const newDuration = Math.min(180, stopDuration + 15);
+                                        onUpdateStopDuration?.(stop.id, newDuration);
+                                      }}
+                                      data-testid={`button-tour-stop-time-plus-${stop.id}`}
+                                    >
+                                      <span className="text-sm font-bold">+</span>
+                                    </Button>
+                                  </div>
                                   <Button
                                     variant="ghost"
                                     size="icon"

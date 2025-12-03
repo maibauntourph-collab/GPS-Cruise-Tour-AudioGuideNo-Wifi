@@ -196,8 +196,11 @@ interface MapViewProps {
   onTourRouteFound?: (route: any) => void;
   onTourRouteClick?: () => void;
   isSelectingHotelOnMap?: boolean;
+  isSelectingEndPointOnMap?: boolean;
   onHotelLocationSelected?: (lat: number, lng: number) => void;
+  onEndPointLocationSelected?: (lat: number, lng: number) => void;
   startingPoint?: { lat: number; lng: number; type: string } | null;
+  endPoint?: { lat: number; lng: number; type: string } | null;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -243,16 +246,22 @@ function FocusUpdater({ focusLocation }: { focusLocation?: { lat: number; lng: n
 }
 
 function MapClickHandler({ 
-  isSelectingHotelOnMap, 
-  onHotelLocationSelected 
+  isSelectingHotelOnMap,
+  isSelectingEndPointOnMap,
+  onHotelLocationSelected,
+  onEndPointLocationSelected,
 }: { 
-  isSelectingHotelOnMap: boolean; 
+  isSelectingHotelOnMap: boolean;
+  isSelectingEndPointOnMap: boolean;
   onHotelLocationSelected?: (lat: number, lng: number) => void;
+  onEndPointLocationSelected?: (lat: number, lng: number) => void;
 }) {
   useMapEvents({
     click(e) {
       if (isSelectingHotelOnMap && onHotelLocationSelected) {
         onHotelLocationSelected(e.latlng.lat, e.latlng.lng);
+      } else if (isSelectingEndPointOnMap && onEndPointLocationSelected) {
+        onEndPointLocationSelected(e.latlng.lat, e.latlng.lng);
       }
     },
   });
@@ -266,9 +275,10 @@ interface TourRoutingMachineProps {
   activeRoute: { start: [number, number]; end: [number, number] } | null;
   onTourRouteClick?: () => void;
   startingPoint?: { lat: number; lng: number; type: string } | null;
+  endPoint?: { lat: number; lng: number; type: string } | null;
 }
 
-function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick, startingPoint }: TourRoutingMachineProps) {
+function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick, startingPoint, endPoint }: TourRoutingMachineProps) {
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
 
@@ -317,12 +327,18 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       routingControlRef.current = null;
     }
 
-    // Build waypoints: starting point first (if set), then tour stops
+    // Build waypoints: starting point first (if set), then tour stops, then end point (if set)
     const waypoints: L.LatLng[] = [];
     if (hasStartingPoint) {
       waypoints.push(L.latLng(startingPoint.lat, startingPoint.lng));
     }
     tourStops.forEach(stop => waypoints.push(L.latLng(stop.lat, stop.lng)));
+    
+    // Add end point if set
+    const hasEndPoint = endPoint && endPoint.lat && endPoint.lng;
+    if (hasEndPoint) {
+      waypoints.push(L.latLng(endPoint.lat, endPoint.lng));
+    }
 
     const control = L.Routing.control({
       waypoints: waypoints,
@@ -367,7 +383,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
         routingControlRef.current = null;
       }
     };
-  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl, startingPoint]);
+  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl, startingPoint, endPoint]);
 
   return null;
 }
@@ -389,8 +405,11 @@ export default function MapView({
   onTourRouteFound,
   onTourRouteClick,
   isSelectingHotelOnMap = false,
+  isSelectingEndPointOnMap = false,
   onHotelLocationSelected,
+  onEndPointLocationSelected,
   startingPoint,
+  endPoint,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
@@ -465,8 +484,10 @@ export default function MapView({
       <MapResizer isCompact={isCompact} sidebarOpen={sidebarOpen} />
       <FocusUpdater focusLocation={focusLocation} />
       <MapClickHandler 
-        isSelectingHotelOnMap={isSelectingHotelOnMap} 
-        onHotelLocationSelected={onHotelLocationSelected} 
+        isSelectingHotelOnMap={isSelectingHotelOnMap}
+        isSelectingEndPointOnMap={isSelectingEndPointOnMap}
+        onHotelLocationSelected={onHotelLocationSelected}
+        onEndPointLocationSelected={onEndPointLocationSelected}
       />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -596,6 +617,46 @@ export default function MapView({
         </Marker>
       )}
 
+      {/* End Point Marker */}
+      {endPoint && endPoint.lat && endPoint.lng && (
+        <Marker
+          position={[endPoint.lat, endPoint.lng]}
+          icon={L.divIcon({
+            html: `<div style="
+              background: ${endPoint.type === 'airport' ? '#0ea5e9' : endPoint.type === 'cruise_terminal' ? '#14b8a6' : endPoint.type === 'hotel' ? '#a855f7' : '#ef4444'};
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              border: 3px solid white;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              font-size: 14px;
+              font-weight: bold;
+            ">E</div>`,
+            className: 'end-point-marker',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+          })}
+        >
+          <Popup>
+            <div className="text-sm font-medium">
+              {selectedLanguage === 'ko' ? '도착지' : 'End Point'}
+              <div className="text-xs text-muted-foreground mt-1">
+                {endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                 endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
+                 endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                 endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                 endPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
+                 (selectedLanguage === 'ko' ? '도착지' : 'End')}
+              </div>
+            </div>
+          </Popup>
+        </Marker>
+      )}
+
       {/* Tour route with actual road routing */}
       <TourRoutingMachine
         tourStops={tourStops}
@@ -603,6 +664,7 @@ export default function MapView({
         activeRoute={activeRoute}
         onTourRouteClick={onTourRouteClick}
         startingPoint={startingPoint}
+        endPoint={endPoint}
       />
     </MapContainer>
   );

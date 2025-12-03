@@ -32,7 +32,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2 } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -40,6 +40,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Detect browser language and map to supported language
 const detectBrowserLanguage = (): string => {
@@ -140,9 +141,16 @@ export default function Home() {
     const saved = localStorage.getItem('tour-time-per-stop');
     return saved ? parseInt(saved, 10) : 45;
   });
+  const [tourStopDurations, setTourStopDurations] = useState<Record<string, number>>(() => {
+    const saved = localStorage.getItem('tour-stop-durations');
+    return saved ? JSON.parse(saved) : {};
+  });
   const [startingPoint, setStartingPoint] = useState<StartingPoint | null>(null);
+  const [endPoint, setEndPoint] = useState<StartingPoint | null>(null);
   const [isSelectingHotelOnMap, setIsSelectingHotelOnMap] = useState(false);
+  const [isSelectingEndPointOnMap, setIsSelectingEndPointOnMap] = useState(false);
   const [isStartingPointPopoverOpen, setIsStartingPointPopoverOpen] = useState(false);
+  const [pointSelectionMode, setPointSelectionMode] = useState<'start' | 'end'>('start');
   const [locationSearchQuery, setLocationSearchQuery] = useState('');
   const [locationSearchResults, setLocationSearchResults] = useState<Array<{ name: string; lat: number; lng: number }>>([]);
   const [isSearchingLocation, setIsSearchingLocation] = useState(false);
@@ -179,6 +187,11 @@ export default function Home() {
   useEffect(() => {
     localStorage.setItem('tour-time-per-stop', tourTimePerStop.toString());
   }, [tourTimePerStop]);
+
+  // Save individual tour stop durations to localStorage
+  useEffect(() => {
+    localStorage.setItem('tour-stop-durations', JSON.stringify(tourStopDurations));
+  }, [tourStopDurations]);
 
   // Save tour data when it changes (for restoration on next visit)
   useEffect(() => {
@@ -481,9 +494,20 @@ export default function Home() {
     if (tourStops.some(stop => stop.id === landmark.id)) {
       // Remove from tour if already added
       setTourStops(tourStops.filter(stop => stop.id !== landmark.id));
+      // Remove individual duration
+      setTourStopDurations(prev => {
+        const updated = { ...prev };
+        delete updated[landmark.id];
+        return updated;
+      });
     } else {
       // Add to tour
       setTourStops([...tourStops, landmark]);
+      // Set default individual duration
+      setTourStopDurations(prev => ({
+        ...prev,
+        [landmark.id]: tourTimePerStop
+      }));
       
       // Play click sound
       playClickSound();
@@ -508,9 +532,17 @@ export default function Home() {
     }
   };
 
+  const handleUpdateStopDuration = (landmarkId: string, duration: number) => {
+    setTourStopDurations(prev => ({
+      ...prev,
+      [landmarkId]: duration
+    }));
+  };
+
   const handleClearTour = () => {
     setTourStops([]);
     setTourRouteInfo(null);
+    setTourStopDurations({});
     clearSavedTourData();
   };
 
@@ -803,268 +835,548 @@ export default function Home() {
             </span>
           </Button>
           
-          {/* Starting Point Selector */}
-          <Popover open={isStartingPointPopoverOpen} onOpenChange={setIsStartingPointPopoverOpen}>
+          {/* Starting/End Point Selector */}
+          <Popover open={isStartingPointPopoverOpen} onOpenChange={(open) => {
+            setIsStartingPointPopoverOpen(open);
+            if (!open) {
+              setLocationSearchQuery('');
+              setLocationSearchResults([]);
+            }
+          }}>
             <PopoverTrigger asChild>
               <Button
-                variant={startingPoint ? "default" : "outline"}
+                variant={(startingPoint || endPoint) ? "default" : "outline"}
                 size="sm"
-                className={`h-7 gap-1 px-2 ${startingPoint ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' : ''}`}
+                className={`h-7 gap-1 px-2 ${(startingPoint || endPoint) ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' : ''}`}
                 data-testid="button-starting-point"
               >
-                {startingPoint?.type === 'airport' ? (
-                  <Plane className="w-3.5 h-3.5" />
-                ) : startingPoint?.type === 'cruise_terminal' ? (
-                  <Ship className="w-3.5 h-3.5" />
-                ) : startingPoint?.type === 'hotel' ? (
-                  <Hotel className="w-3.5 h-3.5" />
-                ) : startingPoint?.type === 'my_location' ? (
-                  <Navigation2 className="w-3.5 h-3.5" />
-                ) : (
-                  <MapPin className="w-3.5 h-3.5" />
-                )}
+                <div className="flex items-center gap-0.5">
+                  <Circle className={`w-2.5 h-2.5 ${startingPoint ? 'fill-white' : ''}`} />
+                  <span className="text-[10px]">→</span>
+                  <Flag className={`w-2.5 h-2.5 ${endPoint ? 'fill-white' : ''}`} />
+                </div>
                 <span className="hidden sm:inline text-xs">
-                  {startingPoint 
-                    ? getStartingPointName(startingPoint, selectedLanguage).split(' ')[0]
-                    : t('startingPoint', selectedLanguage)}
+                  {selectedLanguage === 'ko' ? '출발/도착' : 'Start/End'}
                 </span>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-80 p-2 z-[9999] max-h-[70vh] overflow-y-auto" align="start">
-              <div className="space-y-2">
-                <h4 className="font-medium text-sm">{t('selectStartingPoint', selectedLanguage)}</h4>
+              <Tabs defaultValue="start" value={pointSelectionMode} onValueChange={(v) => setPointSelectionMode(v as 'start' | 'end')}>
+                <TabsList className="grid w-full grid-cols-2 mb-2">
+                  <TabsTrigger value="start" className="gap-1.5" data-testid="tab-start-point">
+                    <Circle className={`w-3 h-3 ${startingPoint ? 'fill-green-500 text-green-500' : ''}`} />
+                    <span>{selectedLanguage === 'ko' ? '출발지' : 'Start'}</span>
+                    {startingPoint && <span className="text-[10px] text-green-500">✓</span>}
+                  </TabsTrigger>
+                  <TabsTrigger value="end" className="gap-1.5" data-testid="tab-end-point">
+                    <Flag className={`w-3 h-3 ${endPoint ? 'fill-red-500 text-red-500' : ''}`} />
+                    <span>{selectedLanguage === 'ko' ? '도착지' : 'End'}</span>
+                    {endPoint && <span className="text-[10px] text-red-500">✓</span>}
+                  </TabsTrigger>
+                </TabsList>
                 
-                {/* Location Search */}
-                <div className="flex gap-1">
-                  <Input
-                    placeholder={selectedLanguage === 'ko' ? '호텔, 주소 검색...' : 'Search hotel, address...'}
-                    value={locationSearchQuery}
-                    onChange={(e) => setLocationSearchQuery(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleLocationSearch();
+                {/* Start Point Content */}
+                <TabsContent value="start" className="space-y-2 mt-0">
+                  {/* Current Selection */}
+                  {startingPoint && (
+                    <div className="flex items-center gap-2 p-2 bg-green-50 dark:bg-green-950 rounded-md border border-green-200 dark:border-green-800">
+                      <Circle className="w-4 h-4 fill-green-500 text-green-500" />
+                      <span className="text-sm flex-1 truncate">{getStartingPointName(startingPoint, selectedLanguage)}</span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6 text-red-500 hover:bg-red-100"
+                        onClick={() => {
+                          setStartingPoint(null);
+                          setIsSelectingHotelOnMap(false);
+                        }}
+                      >
+                        <span className="text-lg">×</span>
+                      </Button>
+                    </div>
+                  )}
+                  
+                  {/* Location Search */}
+                  <div className="flex gap-1">
+                    <Input
+                      placeholder={selectedLanguage === 'ko' ? '호텔, 주소 검색...' : 'Search hotel, address...'}
+                      value={locationSearchQuery}
+                      onChange={(e) => setLocationSearchQuery(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleLocationSearch();
+                        }
+                      }}
+                      className="h-8 text-sm"
+                      data-testid="input-location-search"
+                    />
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={handleLocationSearch}
+                      disabled={isSearchingLocation || !locationSearchQuery.trim()}
+                      className="h-8 px-2"
+                      data-testid="button-location-search"
+                    >
+                      {isSearchingLocation ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Search className="w-4 h-4" />
+                      )}
+                    </Button>
+                  </div>
+                  
+                  {/* Search Results */}
+                  {locationSearchResults.length > 0 && (
+                    <div className="space-y-1 border-b pb-2">
+                      <p className="text-xs text-muted-foreground font-medium">
+                        {selectedLanguage === 'ko' ? '검색 결과' : 'Search Results'}
+                      </p>
+                      {locationSearchResults.map((result, index) => (
+                        <Button
+                          key={index}
+                          variant="outline"
+                          size="sm"
+                          className="w-full justify-start gap-2 h-auto py-1.5"
+                          onClick={() => {
+                            setStartingPoint({
+                              id: `search_${index}`,
+                              type: 'hotel',
+                              name: result.name,
+                              lat: result.lat,
+                              lng: result.lng
+                            });
+                            setLocationSearchQuery('');
+                            setLocationSearchResults([]);
+                            toast({
+                              title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                              description: result.name
+                            });
+                          }}
+                          data-testid={`button-search-result-${index}`}
+                        >
+                          <MapPin className="w-4 h-4 text-green-500 flex-shrink-0" />
+                          <span className="text-xs text-left line-clamp-2">{result.name}</span>
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {/* My Location Option */}
+                  <Button
+                    variant={startingPoint?.type === 'my_location' ? "default" : "outline"}
+                    size="sm"
+                    className="w-full justify-start gap-2"
+                    onClick={() => {
+                      if (position) {
+                        setStartingPoint({
+                          id: 'my_location',
+                          type: 'my_location',
+                          name: t('myLocation', selectedLanguage),
+                          lat: position.latitude,
+                          lng: position.longitude
+                        });
+                        toast({
+                          title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                          description: t('myLocation', selectedLanguage)
+                        });
+                      } else {
+                        toast({
+                          title: selectedLanguage === 'ko' ? '위치 정보 필요' : 'Location Required',
+                          description: selectedLanguage === 'ko' ? 'GPS 위치를 확인할 수 없습니다' : 'GPS location not available',
+                          variant: 'destructive'
+                        });
                       }
                     }}
-                    className="h-8 text-sm"
-                    data-testid="input-location-search"
-                  />
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={handleLocationSearch}
-                    disabled={isSearchingLocation || !locationSearchQuery.trim()}
-                    className="h-8 px-2"
-                    data-testid="button-location-search"
+                    data-testid="button-starting-my-location"
                   >
-                    {isSearchingLocation ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <Search className="w-4 h-4" />
-                    )}
+                    <Navigation2 className="w-4 h-4 text-blue-500" />
+                    {t('myLocation', selectedLanguage)}
+                    {!position && <span className="text-xs text-muted-foreground ml-auto">(GPS)</span>}
                   </Button>
-                </div>
-                
-                {/* Search Results */}
-                {locationSearchResults.length > 0 && (
-                  <div className="space-y-1 border-b pb-2">
-                    <p className="text-xs text-muted-foreground font-medium">
-                      {selectedLanguage === 'ko' ? '검색 결과' : 'Search Results'}
-                    </p>
-                    {locationSearchResults.map((result, index) => (
-                      <Button
-                        key={index}
-                        variant="outline"
-                        size="sm"
-                        className="w-full justify-start gap-2 h-auto py-1.5"
-                        onClick={() => {
-                          setStartingPoint({
-                            id: `search_${index}`,
-                            type: 'hotel',
-                            name: result.name,
-                            lat: result.lat,
-                            lng: result.lng
-                          });
-                          setIsStartingPointPopoverOpen(false);
-                          setLocationSearchQuery('');
-                          setLocationSearchResults([]);
-                          toast({
-                            title: t('startingPointSet', selectedLanguage),
-                            description: result.name
-                          });
-                        }}
-                        data-testid={`button-search-result-${index}`}
-                      >
-                        <MapPin className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        <span className="text-xs text-left line-clamp-2">{result.name}</span>
-                      </Button>
-                    ))}
-                  </div>
-                )}
-                
-                {/* My Location Option */}
-                <Button
-                  variant={startingPoint?.type === 'my_location' ? "default" : "outline"}
-                  size="sm"
-                  className="w-full justify-start gap-2"
-                  onClick={() => {
-                    if (position) {
-                      setStartingPoint({
-                        id: 'my_location',
-                        type: 'my_location',
-                        name: t('myLocation', selectedLanguage),
-                        lat: position.latitude,
-                        lng: position.longitude
-                      });
+
+                  {/* Hotel Option */}
+                  <Button
+                    variant={startingPoint?.type === 'hotel' ? "default" : "outline"}
+                    size="sm"
+                    className="w-full justify-start gap-2"
+                    onClick={() => {
+                      setIsSelectingHotelOnMap(true);
+                      setIsSelectingEndPointOnMap(false);
                       setIsStartingPointPopoverOpen(false);
                       toast({
-                        title: t('startingPointSet', selectedLanguage),
-                        description: t('myLocation', selectedLanguage)
+                        title: selectedLanguage === 'ko' ? '출발지 선택' : 'Select Start Point',
+                        description: selectedLanguage === 'ko' ? '지도에서 위치를 탭하세요' : 'Tap on map to set location'
                       });
-                    } else {
-                      toast({
-                        title: selectedLanguage === 'ko' ? '위치 정보 필요' : 'Location Required',
-                        description: selectedLanguage === 'ko' ? 'GPS 위치를 확인할 수 없습니다' : 'GPS location not available',
-                        variant: 'destructive'
-                      });
-                    }
-                  }}
-                  data-testid="button-starting-my-location"
-                >
-                  <Navigation2 className="w-4 h-4 text-blue-500" />
-                  {t('myLocation', selectedLanguage)}
-                  {!position && <span className="text-xs text-muted-foreground ml-auto">(GPS)</span>}
-                </Button>
+                    }}
+                    data-testid="button-starting-hotel"
+                  >
+                    <Hotel className="w-4 h-4 text-purple-500" />
+                    {t('hotel', selectedLanguage)} - {t('selectOnMap', selectedLanguage)}
+                  </Button>
 
-                {/* Hotel Option */}
-                <Button
-                  variant={startingPoint?.type === 'hotel' ? "default" : "outline"}
-                  size="sm"
-                  className="w-full justify-start gap-2"
-                  onClick={() => {
-                    setIsSelectingHotelOnMap(true);
-                    setIsStartingPointPopoverOpen(false);
-                    toast({
-                      title: t('hotel', selectedLanguage),
-                      description: t('tapMapToSetHotel', selectedLanguage)
-                    });
-                  }}
-                  data-testid="button-starting-hotel"
-                >
-                  <Hotel className="w-4 h-4 text-purple-500" />
-                  {t('hotel', selectedLanguage)} - {t('selectOnMap', selectedLanguage)}
-                </Button>
-
-                {/* City-specific starting points */}
-                {(() => {
-                  const cityPoints = getCityStartingPoints(selectedCityId);
-                  if (!cityPoints) return null;
+                  {/* City-specific starting points */}
+                  {(() => {
+                    const cityPoints = getCityStartingPoints(selectedCityId);
+                    if (!cityPoints) return null;
+                    
+                    return (
+                      <>
+                        {/* Airports */}
+                        {cityPoints.airports.length > 0 && (
+                          <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground font-medium">{t('airport', selectedLanguage)}</p>
+                            {cityPoints.airports.map((airport) => (
+                              <Button
+                                key={airport.id}
+                                variant={startingPoint?.id === airport.id ? "default" : "outline"}
+                                size="sm"
+                                className="w-full justify-start gap-2"
+                                onClick={() => {
+                                  setStartingPoint(airport);
+                                  toast({
+                                    title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                                    description: getStartingPointName(airport, selectedLanguage)
+                                  });
+                                }}
+                                data-testid={`button-starting-airport-${airport.id}`}
+                              >
+                                <Plane className="w-4 h-4 text-sky-500" />
+                                <span className="truncate">{getStartingPointName(airport, selectedLanguage)}</span>
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* Cruise Terminals */}
+                        {cityPoints.cruiseTerminals.length > 0 && (
+                          <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground font-medium">{t('cruiseTerminal', selectedLanguage)}</p>
+                            {cityPoints.cruiseTerminals.map((terminal) => (
+                              <Button
+                                key={terminal.id}
+                                variant={startingPoint?.id === terminal.id ? "default" : "outline"}
+                                size="sm"
+                                className="w-full justify-start gap-2"
+                                onClick={() => {
+                                  setStartingPoint(terminal);
+                                  toast({
+                                    title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                                    description: getStartingPointName(terminal, selectedLanguage)
+                                  });
+                                }}
+                                data-testid={`button-starting-terminal-${terminal.id}`}
+                              >
+                                <Ship className="w-4 h-4 text-teal-500" />
+                                <span className="truncate">{getStartingPointName(terminal, selectedLanguage)}</span>
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* Train Stations */}
+                        {cityPoints.trainStations.length > 0 && (
+                          <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground font-medium">
+                              {selectedLanguage === 'ko' ? '기차역' : 'Train Station'}
+                            </p>
+                            {cityPoints.trainStations.map((station) => (
+                              <Button
+                                key={station.id}
+                                variant={startingPoint?.id === station.id ? "default" : "outline"}
+                                size="sm"
+                                className="w-full justify-start gap-2"
+                                onClick={() => {
+                                  setStartingPoint(station);
+                                  toast({
+                                    title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                                    description: getStartingPointName(station, selectedLanguage)
+                                  });
+                                }}
+                                data-testid={`button-starting-station-${station.id}`}
+                              >
+                                <MapPin className="w-4 h-4 text-orange-500" />
+                                <span className="truncate">{getStartingPointName(station, selectedLanguage)}</span>
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
+                </TabsContent>
+                
+                {/* End Point Content */}
+                <TabsContent value="end" className="space-y-2 mt-0">
+                  {/* Current Selection */}
+                  {endPoint && (
+                    <div className="flex items-center gap-2 p-2 bg-red-50 dark:bg-red-950 rounded-md border border-red-200 dark:border-red-800">
+                      <Flag className="w-4 h-4 fill-red-500 text-red-500" />
+                      <span className="text-sm flex-1 truncate">{getStartingPointName(endPoint, selectedLanguage)}</span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6 text-red-500 hover:bg-red-100"
+                        onClick={() => {
+                          setEndPoint(null);
+                          setIsSelectingEndPointOnMap(false);
+                        }}
+                      >
+                        <span className="text-lg">×</span>
+                      </Button>
+                    </div>
+                  )}
                   
-                  return (
-                    <>
-                      {/* Airports */}
-                      {cityPoints.airports.length > 0 && (
-                        <div className="space-y-1">
-                          <p className="text-xs text-muted-foreground font-medium">{t('airport', selectedLanguage)}</p>
-                          {cityPoints.airports.map((airport) => (
-                            <Button
-                              key={airport.id}
-                              variant={startingPoint?.id === airport.id ? "default" : "outline"}
-                              size="sm"
-                              className="w-full justify-start gap-2"
-                              onClick={() => {
-                                setStartingPoint(airport);
-                                setIsStartingPointPopoverOpen(false);
-                                toast({
-                                  title: t('startingPointSet', selectedLanguage),
-                                  description: getStartingPointName(airport, selectedLanguage)
-                                });
-                              }}
-                              data-testid={`button-starting-airport-${airport.id}`}
-                            >
-                              <Plane className="w-4 h-4 text-sky-500" />
-                              <span className="truncate">{getStartingPointName(airport, selectedLanguage)}</span>
-                            </Button>
-                          ))}
-                        </div>
+                  {/* Same as start option */}
+                  {startingPoint && (
+                    <Button
+                      variant={endPoint?.id === startingPoint.id ? "default" : "outline"}
+                      size="sm"
+                      className="w-full justify-start gap-2 border-dashed"
+                      onClick={() => {
+                        setEndPoint(startingPoint);
+                        toast({
+                          title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
+                          description: selectedLanguage === 'ko' ? '출발지와 동일' : 'Same as start point'
+                        });
+                      }}
+                      data-testid="button-end-same-as-start"
+                    >
+                      <Circle className="w-4 h-4 text-green-500" />
+                      {selectedLanguage === 'ko' ? '출발지와 동일' : 'Same as start'}
+                    </Button>
+                  )}
+                  
+                  {/* Location Search */}
+                  <div className="flex gap-1">
+                    <Input
+                      placeholder={selectedLanguage === 'ko' ? '호텔, 주소 검색...' : 'Search hotel, address...'}
+                      value={locationSearchQuery}
+                      onChange={(e) => setLocationSearchQuery(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleLocationSearch();
+                        }
+                      }}
+                      className="h-8 text-sm"
+                      data-testid="input-end-location-search"
+                    />
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={handleLocationSearch}
+                      disabled={isSearchingLocation || !locationSearchQuery.trim()}
+                      className="h-8 px-2"
+                      data-testid="button-end-location-search"
+                    >
+                      {isSearchingLocation ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Search className="w-4 h-4" />
                       )}
-                      
-                      {/* Cruise Terminals */}
-                      {cityPoints.cruiseTerminals.length > 0 && (
-                        <div className="space-y-1">
-                          <p className="text-xs text-muted-foreground font-medium">{t('cruiseTerminal', selectedLanguage)}</p>
-                          {cityPoints.cruiseTerminals.map((terminal) => (
-                            <Button
-                              key={terminal.id}
-                              variant={startingPoint?.id === terminal.id ? "default" : "outline"}
-                              size="sm"
-                              className="w-full justify-start gap-2"
-                              onClick={() => {
-                                setStartingPoint(terminal);
-                                setIsStartingPointPopoverOpen(false);
-                                toast({
-                                  title: t('startingPointSet', selectedLanguage),
-                                  description: getStartingPointName(terminal, selectedLanguage)
-                                });
-                              }}
-                              data-testid={`button-starting-terminal-${terminal.id}`}
-                            >
-                              <Ship className="w-4 h-4 text-teal-500" />
-                              <span className="truncate">{getStartingPointName(terminal, selectedLanguage)}</span>
-                            </Button>
-                          ))}
-                        </div>
-                      )}
-                      
-                      {/* Train Stations */}
-                      {cityPoints.trainStations.length > 0 && (
-                        <div className="space-y-1">
-                          <p className="text-xs text-muted-foreground font-medium">
-                            {selectedLanguage === 'ko' ? '기차역' : 'Train Station'}
-                          </p>
-                          {cityPoints.trainStations.map((station) => (
-                            <Button
-                              key={station.id}
-                              variant={startingPoint?.id === station.id ? "default" : "outline"}
-                              size="sm"
-                              className="w-full justify-start gap-2"
-                              onClick={() => {
-                                setStartingPoint(station);
-                                setIsStartingPointPopoverOpen(false);
-                                toast({
-                                  title: t('startingPointSet', selectedLanguage),
-                                  description: getStartingPointName(station, selectedLanguage)
-                                });
-                              }}
-                              data-testid={`button-starting-station-${station.id}`}
-                            >
-                              <MapPin className="w-4 h-4 text-orange-500" />
-                              <span className="truncate">{getStartingPointName(station, selectedLanguage)}</span>
-                            </Button>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  );
-                })()}
-
-                {/* Clear Starting Point */}
-                {startingPoint && (
+                    </Button>
+                  </div>
+                  
+                  {/* Search Results */}
+                  {locationSearchResults.length > 0 && (
+                    <div className="space-y-1 border-b pb-2">
+                      <p className="text-xs text-muted-foreground font-medium">
+                        {selectedLanguage === 'ko' ? '검색 결과' : 'Search Results'}
+                      </p>
+                      {locationSearchResults.map((result, index) => (
+                        <Button
+                          key={index}
+                          variant="outline"
+                          size="sm"
+                          className="w-full justify-start gap-2 h-auto py-1.5"
+                          onClick={() => {
+                            setEndPoint({
+                              id: `end_search_${index}`,
+                              type: 'hotel',
+                              name: result.name,
+                              lat: result.lat,
+                              lng: result.lng
+                            });
+                            setLocationSearchQuery('');
+                            setLocationSearchResults([]);
+                            toast({
+                              title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
+                              description: result.name
+                            });
+                          }}
+                          data-testid={`button-end-search-result-${index}`}
+                        >
+                          <Flag className="w-4 h-4 text-red-500 flex-shrink-0" />
+                          <span className="text-xs text-left line-clamp-2">{result.name}</span>
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {/* My Location Option */}
                   <Button
-                    variant="ghost"
+                    variant={endPoint?.type === 'my_location' ? "default" : "outline"}
                     size="sm"
-                    className="w-full justify-center text-red-500 hover:text-red-600 hover:bg-red-50"
+                    className="w-full justify-start gap-2"
                     onClick={() => {
-                      setStartingPoint(null);
+                      if (position) {
+                        setEndPoint({
+                          id: 'end_my_location',
+                          type: 'my_location',
+                          name: t('myLocation', selectedLanguage),
+                          lat: position.latitude,
+                          lng: position.longitude
+                        });
+                        toast({
+                          title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
+                          description: t('myLocation', selectedLanguage)
+                        });
+                      } else {
+                        toast({
+                          title: selectedLanguage === 'ko' ? '위치 정보 필요' : 'Location Required',
+                          description: selectedLanguage === 'ko' ? 'GPS 위치를 확인할 수 없습니다' : 'GPS location not available',
+                          variant: 'destructive'
+                        });
+                      }
+                    }}
+                    data-testid="button-end-my-location"
+                  >
+                    <Navigation2 className="w-4 h-4 text-blue-500" />
+                    {t('myLocation', selectedLanguage)}
+                    {!position && <span className="text-xs text-muted-foreground ml-auto">(GPS)</span>}
+                  </Button>
+
+                  {/* Select on Map Option */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full justify-start gap-2"
+                    onClick={() => {
+                      setIsSelectingEndPointOnMap(true);
                       setIsSelectingHotelOnMap(false);
                       setIsStartingPointPopoverOpen(false);
+                      toast({
+                        title: selectedLanguage === 'ko' ? '도착지 선택' : 'Select End Point',
+                        description: selectedLanguage === 'ko' ? '지도에서 위치를 탭하세요' : 'Tap on map to set location'
+                      });
                     }}
-                    data-testid="button-clear-starting-point"
+                    data-testid="button-end-select-map"
                   >
-                    {selectedLanguage === 'ko' ? '출발지 초기화' : 'Clear Starting Point'}
+                    <MapPin className="w-4 h-4 text-red-500" />
+                    {selectedLanguage === 'ko' ? '지도에서 선택' : 'Select on map'}
                   </Button>
-                )}
-              </div>
+
+                  {/* City-specific end points */}
+                  {(() => {
+                    const cityPoints = getCityStartingPoints(selectedCityId);
+                    if (!cityPoints) return null;
+                    
+                    return (
+                      <>
+                        {/* Airports */}
+                        {cityPoints.airports.length > 0 && (
+                          <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground font-medium">{t('airport', selectedLanguage)}</p>
+                            {cityPoints.airports.map((airport) => (
+                              <Button
+                                key={airport.id}
+                                variant={endPoint?.id === `end_${airport.id}` ? "default" : "outline"}
+                                size="sm"
+                                className="w-full justify-start gap-2"
+                                onClick={() => {
+                                  setEndPoint({ ...airport, id: `end_${airport.id}` });
+                                  toast({
+                                    title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
+                                    description: getStartingPointName(airport, selectedLanguage)
+                                  });
+                                }}
+                                data-testid={`button-end-airport-${airport.id}`}
+                              >
+                                <Plane className="w-4 h-4 text-sky-500" />
+                                <span className="truncate">{getStartingPointName(airport, selectedLanguage)}</span>
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* Cruise Terminals */}
+                        {cityPoints.cruiseTerminals.length > 0 && (
+                          <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground font-medium">{t('cruiseTerminal', selectedLanguage)}</p>
+                            {cityPoints.cruiseTerminals.map((terminal) => (
+                              <Button
+                                key={terminal.id}
+                                variant={endPoint?.id === `end_${terminal.id}` ? "default" : "outline"}
+                                size="sm"
+                                className="w-full justify-start gap-2"
+                                onClick={() => {
+                                  setEndPoint({ ...terminal, id: `end_${terminal.id}` });
+                                  toast({
+                                    title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
+                                    description: getStartingPointName(terminal, selectedLanguage)
+                                  });
+                                }}
+                                data-testid={`button-end-terminal-${terminal.id}`}
+                              >
+                                <Ship className="w-4 h-4 text-teal-500" />
+                                <span className="truncate">{getStartingPointName(terminal, selectedLanguage)}</span>
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* Train Stations */}
+                        {cityPoints.trainStations.length > 0 && (
+                          <div className="space-y-1">
+                            <p className="text-xs text-muted-foreground font-medium">
+                              {selectedLanguage === 'ko' ? '기차역' : 'Train Station'}
+                            </p>
+                            {cityPoints.trainStations.map((station) => (
+                              <Button
+                                key={station.id}
+                                variant={endPoint?.id === `end_${station.id}` ? "default" : "outline"}
+                                size="sm"
+                                className="w-full justify-start gap-2"
+                                onClick={() => {
+                                  setEndPoint({ ...station, id: `end_${station.id}` });
+                                  toast({
+                                    title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
+                                    description: getStartingPointName(station, selectedLanguage)
+                                  });
+                                }}
+                                data-testid={`button-end-station-${station.id}`}
+                              >
+                                <MapPin className="w-4 h-4 text-orange-500" />
+                                <span className="truncate">{getStartingPointName(station, selectedLanguage)}</span>
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
+                </TabsContent>
+              </Tabs>
+              
+              {/* Clear All Button */}
+              {(startingPoint || endPoint) && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full justify-center text-red-500 hover:text-red-600 hover:bg-red-50 mt-2"
+                  onClick={() => {
+                    setStartingPoint(null);
+                    setEndPoint(null);
+                    setIsSelectingHotelOnMap(false);
+                    setIsSelectingEndPointOnMap(false);
+                  }}
+                  data-testid="button-clear-all-points"
+                >
+                  {selectedLanguage === 'ko' ? '모두 초기화' : 'Clear All'}
+                </Button>
+              )}
             </PopoverContent>
           </Popover>
           
@@ -1164,7 +1476,9 @@ export default function Home() {
               onTourRouteFound={handleTourRouteFound}
               onTourRouteClick={handleTourRouteClick}
               startingPoint={startingPoint}
+              endPoint={endPoint}
               isSelectingHotelOnMap={isSelectingHotelOnMap}
+              isSelectingEndPointOnMap={isSelectingEndPointOnMap}
               onHotelLocationSelected={(lat, lng) => {
                 setStartingPoint({
                   id: 'hotel',
@@ -1175,8 +1489,22 @@ export default function Home() {
                 });
                 setIsSelectingHotelOnMap(false);
                 toast({
-                  title: t('startingPointSet', selectedLanguage),
+                  title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
                   description: t('hotel', selectedLanguage)
+                });
+              }}
+              onEndPointLocationSelected={(lat, lng) => {
+                setEndPoint({
+                  id: 'end_location',
+                  type: 'hotel',
+                  name: selectedLanguage === 'ko' ? '도착지' : 'End Point',
+                  lat,
+                  lng
+                });
+                setIsSelectingEndPointOnMap(false);
+                toast({
+                  title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
+                  description: selectedLanguage === 'ko' ? '지도에서 선택됨' : 'Selected on map'
                 });
               }}
             />
@@ -1211,8 +1539,17 @@ export default function Home() {
           onCruisePortClose={() => setShowCruisePort(false)}
           tourStops={tourStops}
           tourRouteInfo={tourRouteInfo}
-          onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
+          onRemoveTourStop={(landmarkId) => {
+            setTourStops(tourStops.filter(stop => stop.id !== landmarkId));
+            setTourStopDurations(prev => {
+              const updated = { ...prev };
+              delete updated[landmarkId];
+              return updated;
+            });
+          }}
           tourTimePerStop={tourTimePerStop}
+          tourStopDurations={tourStopDurations}
+          onUpdateStopDuration={handleUpdateStopDuration}
           aiRecommendation={aiRecommendation}
           onLandmarkClick={(landmarkId) => {
             const landmark = filteredLandmarks.find(l => l.id === landmarkId);
