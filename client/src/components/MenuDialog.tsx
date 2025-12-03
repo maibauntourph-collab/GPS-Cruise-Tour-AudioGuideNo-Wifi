@@ -5,6 +5,7 @@ import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
   Volume2, 
   VolumeX, 
@@ -22,7 +23,11 @@ import {
   TrendingUp,
   Clock,
   Plus,
-  Minus
+  Minus,
+  Mic,
+  Headphones,
+  User,
+  Users
 } from 'lucide-react';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
@@ -30,7 +35,8 @@ import { ProgressStats } from './ProgressStats';
 import OfflineDataDialog from './OfflineDataDialog';
 import { City, Landmark } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { TTS_VOICES, VoiceId, getVoiceForLanguage, getSavedVoice, saveVoice } from '@/lib/voiceSettings';
 
 interface MenuDialogProps {
   isOpen: boolean;
@@ -78,6 +84,13 @@ interface MenuDialogProps {
   // Offline Data
   onDownloadData: (password: string) => Promise<void>;
   onUploadData: (file: File, password: string) => Promise<void>;
+  
+  // Voice selection
+  selectedVoice?: VoiceId;
+  onVoiceChange?: (voice: VoiceId) => void;
+  
+  // MP3 Audio Download
+  onOpenAudioDownload?: () => void;
 }
 
 export default function MenuDialog({
@@ -107,10 +120,37 @@ export default function MenuDialog({
   tourTimePerStop,
   onTourTimePerStopChange,
   onDownloadData,
-  onUploadData
+  onUploadData,
+  selectedVoice,
+  onVoiceChange,
+  onOpenAudioDownload
 }: MenuDialogProps) {
   const [showOfflineDialog, setShowOfflineDialog] = useState(false);
   const [offlineMode2, setOfflineMode2] = useState<'download' | 'upload'>('download');
+  
+  const [currentVoice, setCurrentVoice] = useState<VoiceId>(() => {
+    return getSavedVoice() || getVoiceForLanguage(selectedLanguage);
+  });
+
+  useEffect(() => {
+    if (selectedVoice) {
+      setCurrentVoice(selectedVoice);
+    }
+  }, [selectedVoice]);
+
+  const handleVoiceChange = (voiceId: VoiceId) => {
+    setCurrentVoice(voiceId);
+    saveVoice(voiceId);
+    onVoiceChange?.(voiceId);
+  };
+
+  const getGenderIcon = (gender: string) => {
+    switch (gender) {
+      case 'male': return <User className="w-3 h-3" />;
+      case 'female': return <User className="w-3 h-3 text-pink-500" />;
+      default: return <Users className="w-3 h-3" />;
+    }
+  };
 
   return (
     <>

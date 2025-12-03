@@ -971,33 +971,6 @@ export default function Home() {
                         </div>
                       )}
                       
-                      {/* Cruise Terminals */}
-                      {cityPoints.cruiseTerminals.length > 0 && (
-                        <div className="space-y-1">
-                          <p className="text-xs text-muted-foreground font-medium">{t('cruiseTerminal', selectedLanguage)}</p>
-                          {cityPoints.cruiseTerminals.map((terminal) => (
-                            <Button
-                              key={terminal.id}
-                              variant={startingPoint?.id === terminal.id ? "default" : "outline"}
-                              size="sm"
-                              className="w-full justify-start gap-2"
-                              onClick={() => {
-                                setStartingPoint(terminal);
-                                setIsStartingPointPopoverOpen(false);
-                                toast({
-                                  title: t('startingPointSet', selectedLanguage),
-                                  description: getStartingPointName(terminal, selectedLanguage)
-                                });
-                              }}
-                              data-testid={`button-starting-terminal-${terminal.id}`}
-                            >
-                              <Ship className="w-4 h-4 text-teal-500" />
-                              <span className="truncate">{getStartingPointName(terminal, selectedLanguage)}</span>
-                            </Button>
-                          ))}
-                        </div>
-                      )}
-                      
                       {/* Train Stations */}
                       {cityPoints.trainStations.length > 0 && (
                         <div className="space-y-1">
@@ -1110,19 +1083,6 @@ export default function Home() {
               <ShoppingBag className="w-3.5 h-3.5" />
               <span className="hidden sm:inline text-xs">{t('giftShops', selectedLanguage)}</span>
             </Button>
-            {selectedCity?.cruisePort && (
-              <Button
-                variant={showCruisePort ? "default" : "outline"}
-                size="icon"
-                onClick={() => setShowCruisePort(!showCruisePort)}
-                data-testid="button-toggle-cruise-port"
-                className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
-                title={t('cruisePortInfo', selectedLanguage)}
-              >
-                <Ship className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline text-xs">{t('cruisePortInfo', selectedLanguage)}</span>
-              </Button>
-            )}
           </div>
         </header>
         

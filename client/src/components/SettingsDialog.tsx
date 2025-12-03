@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
-import { Settings, Download, Upload, AudioLines, Gauge, Globe, Volume2 } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Settings, Download, Upload, AudioLines, Gauge, Globe, Volume2, Mic, User, Users, Headphones } from 'lucide-react';
 import { t } from '@/lib/translations';
 import { LanguageSelector } from './LanguageSelector';
 import OfflineDataDialog from './OfflineDataDialog';
+import { TTS_VOICES, VoiceId, getVoiceForLanguage, getSavedVoice, saveVoice, getVoiceName, getVoiceDescription } from '@/lib/voiceSettings';
 
 interface SettingsDialogProps {
   isOpen: boolean;
@@ -18,6 +20,9 @@ interface SettingsDialogProps {
   onTestAudio?: () => void;
   onDownloadData: (password: string) => Promise<void>;
   onUploadData: (file: File, password: string) => Promise<void>;
+  selectedVoice?: VoiceId;
+  onVoiceChange?: (voice: VoiceId) => void;
+  onOpenAudioDownload?: () => void;
 }
 
 export default function SettingsDialog({
@@ -29,10 +34,37 @@ export default function SettingsDialog({
   onSpeechRateChange,
   onTestAudio,
   onDownloadData,
-  onUploadData
+  onUploadData,
+  selectedVoice,
+  onVoiceChange,
+  onOpenAudioDownload
 }: SettingsDialogProps) {
   const [showOfflineDialog, setShowOfflineDialog] = useState(false);
   const [offlineMode, setOfflineMode] = useState<'download' | 'upload'>('download');
+  
+  const [currentVoice, setCurrentVoice] = useState<VoiceId>(() => {
+    return getSavedVoice() || getVoiceForLanguage(selectedLanguage);
+  });
+
+  useEffect(() => {
+    if (selectedVoice) {
+      setCurrentVoice(selectedVoice);
+    }
+  }, [selectedVoice]);
+
+  const handleVoiceChange = (voiceId: VoiceId) => {
+    setCurrentVoice(voiceId);
+    saveVoice(voiceId);
+    onVoiceChange?.(voiceId);
+  };
+
+  const getGenderIcon = (gender: string) => {
+    switch (gender) {
+      case 'male': return <User className="w-3 h-3" />;
+      case 'female': return <User className="w-3 h-3 text-pink-500" />;
+      default: return <Users className="w-3 h-3" />;
+    }
+  };
 
   const handleDownloadClick = () => {
     setOfflineMode('download');
@@ -90,6 +122,43 @@ export default function SettingsDialog({
               />
             </div>
 
+            {/* Voice Selection */}
+            <div className="space-y-2">
+              <Label className="flex items-center gap-2 text-sm">
+                <Mic className="w-4 h-4" />
+                {selectedLanguage === 'ko' ? '음성 스타일' : 'Voice Style'}
+              </Label>
+              <Select value={currentVoice} onValueChange={(value) => handleVoiceChange(value as VoiceId)}>
+                <SelectTrigger className="w-full" data-testid="select-voice">
+                  <SelectValue placeholder={selectedLanguage === 'ko' ? '음성 선택' : 'Select Voice'} />
+                </SelectTrigger>
+                <SelectContent>
+                  {(Object.keys(TTS_VOICES) as VoiceId[]).map((voiceId) => {
+                    const voice = TTS_VOICES[voiceId];
+                    return (
+                      <SelectItem key={voiceId} value={voiceId} data-testid={`select-voice-${voiceId}`}>
+                        <div className="flex items-center gap-2">
+                          {getGenderIcon(voice.gender)}
+                          <span className="font-medium">
+                            {selectedLanguage === 'ko' ? voice.nameKo : voice.name}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            - {selectedLanguage === 'ko' ? voice.descriptionKo : voice.description}
+                          </span>
+                        </div>
+                      </SelectItem>
+                    );
+                  })}
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-muted-foreground">
+                {selectedLanguage === 'ko' 
+                  ? `현재 언어(${selectedLanguage.toUpperCase()}) 기본: ${TTS_VOICES[getVoiceForLanguage(selectedLanguage)].nameKo}`
+                  : `Default for ${selectedLanguage.toUpperCase()}: ${TTS_VOICES[getVoiceForLanguage(selectedLanguage)].name}`
+                }
+              </p>
+            </div>
+
             {/* Test Audio */}
             {onTestAudio && (
               <Button
@@ -100,6 +169,19 @@ export default function SettingsDialog({
               >
                 <AudioLines className="w-4 h-4" />
                 {t('testAudio', selectedLanguage)}
+              </Button>
+            )}
+
+            {/* MP3 Audio Download for Offline */}
+            {onOpenAudioDownload && (
+              <Button
+                variant="outline"
+                className="w-full justify-start gap-2"
+                onClick={onOpenAudioDownload}
+                data-testid="button-open-audio-download"
+              >
+                <Headphones className="w-4 h-4" />
+                {selectedLanguage === 'ko' ? 'MP3 오디오 다운로드 (오프라인용)' : 'Download MP3 Audio (Offline)'}
               </Button>
             )}
 
