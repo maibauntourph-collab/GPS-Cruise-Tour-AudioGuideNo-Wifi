@@ -341,8 +341,8 @@ export default function MenuDialog({
                   </div>
                   
                   {voiceInfoList.length > 0 ? (
-                    <ScrollArea className="w-full whitespace-nowrap">
-                      <div className="flex gap-2 pb-2">
+                    <div className="max-h-[200px] overflow-y-auto">
+                      <div className="grid grid-cols-2 gap-2">
                         {voiceInfoList.map((info) => {
                           const isSelected = selectedSystemVoice === info.voice.name;
                           const voiceSlug = info.voice.name.replace(/\s+/g, '-').toLowerCase();
@@ -352,7 +352,7 @@ export default function MenuDialog({
                               key={info.voice.name}
                               onClick={() => handleSystemVoiceChange(info.voice.name)}
                               className={`
-                                relative flex flex-col min-w-[140px] p-2 rounded-md border transition-all
+                                relative flex flex-col w-full p-2 rounded-md border transition-all
                                 text-left cursor-pointer
                                 ${isSelected 
                                   ? 'border-primary bg-primary/5' 
@@ -369,12 +369,12 @@ export default function MenuDialog({
                               )}
                               
                               <div className="flex items-center gap-1.5 mb-1.5">
-                                <User className={`w-3 h-3 ${
+                                <User className={`w-3 h-3 flex-shrink-0 ${
                                   info.gender === 'female' ? 'text-pink-500' : 
                                   info.gender === 'male' ? 'text-blue-500' : 
                                   'text-muted-foreground'
                                 }`} />
-                                <span className="font-medium text-xs truncate max-w-[90px]" title={info.voice.name}>
+                                <span className="font-medium text-xs truncate" title={info.voice.name}>
                                   {info.voice.name.split(' ').slice(0, 2).join(' ')}
                                 </span>
                               </div>
@@ -419,8 +419,7 @@ export default function MenuDialog({
                           );
                         })}
                       </div>
-                      <ScrollBar orientation="horizontal" />
-                    </ScrollArea>
+                    </div>
                   ) : (
                     <p className="text-xs text-muted-foreground text-center py-2">
                       {selectedLanguage === 'ko' ? '사용 가능한 음성이 없습니다' : 'No voices available'}
