@@ -729,12 +729,6 @@ export default function Home() {
     }
   };
 
-  const handleTourRouteClick = () => {
-    // Tour route info is already displayed in AppSidebar and UnifiedFloatingCard
-    // No state change needed - just maintain current state
-    // This prevents any UI flicker or unwanted changes
-  };
-
   const handleAiRecommendation = () => {
     // Open AI recommendation dialog using GPT-5.1 Thinking with database landmarks
     setShowAIRecommend(true);
@@ -1837,7 +1831,6 @@ export default function Home() {
               tourStops={tourStops}
               onAddToTour={handleAddToTour}
               onTourRouteFound={handleTourRouteFound}
-              onTourRouteClick={handleTourRouteClick}
               startingPoint={startingPoint}
               endPoint={endPoint}
               isSelectingHotelOnMap={isSelectingHotelOnMap}

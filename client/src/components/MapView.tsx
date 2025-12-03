@@ -253,7 +253,6 @@ interface MapViewProps {
   tourStops?: Landmark[];
   onAddToTour?: (landmark: Landmark) => void;
   onTourRouteFound?: (route: any) => void;
-  onTourRouteClick?: () => void;
   isSelectingHotelOnMap?: boolean;
   isSelectingEndPointOnMap?: boolean;
   onHotelLocationSelected?: (lat: number, lng: number) => void;
@@ -322,7 +321,6 @@ interface TourRoutingMachineProps {
   tourStops: Landmark[];
   onTourRouteFound?: (route: any) => void;
   activeRoute: { start: [number, number]; end: [number, number] } | null;
-  onTourRouteClick?: () => void;
   startingPoint?: { lat: number; lng: number; type: string } | null;
   endPoint?: { lat: number; lng: number; type: string } | null;
   selectedLanguage?: string;
@@ -356,76 +354,36 @@ function estimateWalkingTime(distanceMeters: number): number {
   return (distanceMeters / walkingSpeedMperMin) * 1.2; // in minutes
 }
 
-function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick, startingPoint, endPoint, selectedLanguage = 'en', onSegmentInfoUpdate }: TourRoutingMachineProps) {
-  const map = useMap();
-  const routingControlRef = useRef<L.Routing.Control | null>(null);
-  const segmentMarkersRef = useRef<L.Marker[]>([]);
-  const fallbackPolylineRef = useRef<L.Polyline | null>(null);
-  const osrmFailedRef = useRef<boolean>(false);
-  const osrmTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const safeRemoveControl = useCallback((control: L.Routing.Control) => {
-    if (!control || !map) return;
+function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, startingPoint, endPoint, selectedLanguage = 'en', onSegmentInfoUpdate }: TourRoutingMachineProps) {
+  // Simple local calculation - no map controls added, no event interference
+  useEffect(() => {
+    const hasStartingPoint = startingPoint && startingPoint.lat && startingPoint.lng;
+    const minStopsNeeded = hasStartingPoint ? 1 : 2;
     
-    try {
-      try {
-        control.setWaypoints([]);
-      } catch (e) {
-        console.debug('Waypoint clearing handled:', e);
+    // Don't calculate when there's an active navigation route or not enough stops
+    if (tourStops.length < minStopsNeeded || activeRoute) {
+      if (onSegmentInfoUpdate) {
+        onSegmentInfoUpdate([]);
       }
-      
-      try {
-        if ((map as any)._loaded && (control as any)._map) {
-          map.removeControl(control);
-        }
-      } catch (e) {
-        console.debug('Control removal handled:', e);
+      if (onTourRouteFound) {
+        onTourRouteFound(null);
       }
-    } catch (e) {
-      console.debug('Tour routing control removal handled:', e);
+      return;
     }
-  }, [map]);
 
-  const clearSegmentMarkers = useCallback(() => {
-    segmentMarkersRef.current.forEach(marker => {
-      try {
-        marker.remove();
-      } catch (e) {
-        console.debug('Segment marker removal handled:', e);
-      }
-    });
-    segmentMarkersRef.current = [];
-  }, []);
-
-  const clearFallbackPolyline = useCallback(() => {
-    if (fallbackPolylineRef.current) {
-      try {
-        fallbackPolylineRef.current.remove();
-      } catch (e) {
-        console.debug('Fallback polyline removal handled:', e);
-      }
-      fallbackPolylineRef.current = null;
+    // Build waypoint coordinates
+    const waypoints: { lat: number; lng: number }[] = [];
+    if (hasStartingPoint) {
+      waypoints.push({ lat: startingPoint.lat, lng: startingPoint.lng });
     }
-  }, []);
-
-  // Create fallback route with straight lines when OSRM fails
-  const createFallbackRoute = useCallback((waypoints: L.LatLng[]) => {
-    if (!map || waypoints.length < 2) return;
+    tourStops.forEach(stop => waypoints.push({ lat: stop.lat, lng: stop.lng }));
     
-    clearFallbackPolyline();
-    clearSegmentMarkers();
+    const hasEndPoint = endPoint && endPoint.lat && endPoint.lng;
+    if (hasEndPoint) {
+      waypoints.push({ lat: endPoint.lat, lng: endPoint.lng });
+    }
 
-    // Create polyline connecting all waypoints (hidden - only for route calculation)
-    const polyline = L.polyline(waypoints, {
-      color: 'hsl(14, 85%, 55%)',
-      weight: 0,
-      opacity: 0,
-      interactive: false,
-    });
-    // Don't add polyline to map - route line is hidden
-    fallbackPolylineRef.current = polyline;
-
-    // Calculate segments and create markers
+    // Calculate segments locally (no map controls)
     const segments: SegmentInfo[] = [];
     let totalDistance = 0;
     let totalDuration = 0;
@@ -440,7 +398,6 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       totalDistance += distance;
       totalDuration += duration;
 
-      // Calculate midpoint
       const midLat = (start.lat + end.lat) / 2;
       const midLng = (start.lng + end.lng) / 2;
 
@@ -451,7 +408,6 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
         duration: duration,
         midpoint: [midLat, midLng]
       });
-      // Segment markers are hidden - route info shown in UI panel
     }
 
     // Notify parent components
@@ -462,7 +418,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
     if (onTourRouteFound) {
       onTourRouteFound({
         summary: { totalDistance, totalTime: totalDuration },
-        coordinates: waypoints.map(wp => ({ lat: wp.lat, lng: wp.lng })),
+        coordinates: waypoints,
         legs: segments.map(seg => ({
           distance: seg.distance,
           time: seg.duration
@@ -470,180 +426,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
         isFallback: true
       });
     }
-
-    // Add click event to polyline
-    if (onTourRouteClick) {
-      polyline.on('click', () => {
-        onTourRouteClick();
-      });
-    }
-  }, [map, selectedLanguage, onSegmentInfoUpdate, onTourRouteFound, onTourRouteClick, clearFallbackPolyline, clearSegmentMarkers]);
-
-  useEffect(() => {
-    if (!map) return;
-    
-    const hasStartingPoint = startingPoint && startingPoint.lat && startingPoint.lng;
-    const minStopsNeeded = hasStartingPoint ? 1 : 2;
-    
-    // Clear timeout on cleanup
-    if (osrmTimeoutRef.current) {
-      clearTimeout(osrmTimeoutRef.current);
-      osrmTimeoutRef.current = null;
-    }
-    
-    // Don't show tour routing when there's an active navigation route
-    if (tourStops.length < minStopsNeeded || activeRoute) {
-      if (routingControlRef.current) {
-        safeRemoveControl(routingControlRef.current);
-        routingControlRef.current = null;
-      }
-      clearSegmentMarkers();
-      clearFallbackPolyline();
-      if (onSegmentInfoUpdate) {
-        onSegmentInfoUpdate([]);
-      }
-      return;
-    }
-
-    if (routingControlRef.current) {
-      safeRemoveControl(routingControlRef.current);
-      routingControlRef.current = null;
-    }
-    clearSegmentMarkers();
-    clearFallbackPolyline();
-
-    // Build waypoints
-    const waypoints: L.LatLng[] = [];
-    if (hasStartingPoint) {
-      waypoints.push(L.latLng(startingPoint.lat, startingPoint.lng));
-    }
-    tourStops.forEach(stop => waypoints.push(L.latLng(stop.lat, stop.lng)));
-    
-    const hasEndPoint = endPoint && endPoint.lat && endPoint.lng;
-    if (hasEndPoint) {
-      waypoints.push(L.latLng(endPoint.lat, endPoint.lng));
-    }
-
-    // Set a timeout for OSRM - if it doesn't respond in 5 seconds, use fallback
-    osrmTimeoutRef.current = setTimeout(() => {
-      if (!osrmFailedRef.current) {
-        console.log('OSRM timeout - using fallback route');
-        osrmFailedRef.current = true;
-        createFallbackRoute(waypoints);
-      }
-    }, 5000);
-
-    const control = L.Routing.control({
-      waypoints: waypoints,
-      routeWhileDragging: false,
-      addWaypoints: false,
-      fitSelectedRoutes: false,
-      showAlternatives: false,
-      lineOptions: {
-        styles: [{ color: 'transparent', opacity: 0, weight: 0 }],
-        extendToWaypoints: false,
-        missingRouteTolerance: 0
-      },
-      show: false,
-    } as any);
-
-    control.on('routesfound', function (e) {
-      // Clear timeout since we got a response
-      if (osrmTimeoutRef.current) {
-        clearTimeout(osrmTimeoutRef.current);
-        osrmTimeoutRef.current = null;
-      }
-      osrmFailedRef.current = false;
-      clearFallbackPolyline();
-
-      const routes = e.routes;
-      if (routes && routes[0]) {
-        const route = routes[0];
-        
-        if (onTourRouteFound) {
-          onTourRouteFound(route);
-        }
-        
-        if (route.instructions && route.coordinates) {
-          const segments: SegmentInfo[] = [];
-          const waypointIndices = route.waypointIndices || [];
-          
-          for (let i = 0; i < waypointIndices.length - 1; i++) {
-            const startIdx = waypointIndices[i];
-            const endIdx = waypointIndices[i + 1];
-            
-            const midIdx = Math.floor((startIdx + endIdx) / 2);
-            const midCoord = route.coordinates[midIdx];
-            
-            let segDistance = 0;
-            let segDuration = 0;
-            
-            route.instructions.forEach((inst: any) => {
-              if (inst.index >= startIdx && inst.index < endIdx) {
-                segDistance += inst.distance || 0;
-                segDuration += inst.time || 0;
-              }
-            });
-            
-            if (midCoord) {
-              segments.push({
-                fromIndex: i,
-                toIndex: i + 1,
-                distance: segDistance,
-                duration: segDuration,
-                midpoint: [midCoord.lat, midCoord.lng]
-              });
-            }
-          }
-          
-          // Segment markers are hidden - route info shown in UI panel
-          clearSegmentMarkers();
-          
-          if (onSegmentInfoUpdate) {
-            onSegmentInfoUpdate(segments);
-          }
-        }
-        
-        if (onTourRouteClick && (control as any)._line) {
-          (control as any)._line.on('click', () => {
-            onTourRouteClick();
-          });
-        }
-      }
-    });
-
-    // Handle routing errors - use fallback
-    control.on('routingerror', function (e: any) {
-      console.log('OSRM routing error, using fallback:', e.error?.message || 'Unknown error');
-      if (osrmTimeoutRef.current) {
-        clearTimeout(osrmTimeoutRef.current);
-        osrmTimeoutRef.current = null;
-      }
-      osrmFailedRef.current = true;
-      createFallbackRoute(waypoints);
-    });
-
-    try {
-      control.addTo(map);
-      routingControlRef.current = control;
-    } catch (e) {
-      console.warn('Failed to add tour routing control, using fallback:', e);
-      createFallbackRoute(waypoints);
-    }
-
-    return () => {
-      if (osrmTimeoutRef.current) {
-        clearTimeout(osrmTimeoutRef.current);
-        osrmTimeoutRef.current = null;
-      }
-      if (routingControlRef.current) {
-        safeRemoveControl(routingControlRef.current);
-        routingControlRef.current = null;
-      }
-      clearSegmentMarkers();
-      clearFallbackPolyline();
-    };
-  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl, startingPoint, endPoint, selectedLanguage, clearSegmentMarkers, onSegmentInfoUpdate, createFallbackRoute, clearFallbackPolyline]);
+  }, [tourStops, onTourRouteFound, activeRoute, startingPoint, endPoint, selectedLanguage, onSegmentInfoUpdate]);
 
   return null;
 }
@@ -662,7 +445,6 @@ export default function MapView({
   tourStops = [],
   onAddToTour,
   onTourRouteFound,
-  onTourRouteClick,
   isSelectingHotelOnMap = false,
   isSelectingEndPointOnMap = false,
   onHotelLocationSelected,
@@ -942,7 +724,6 @@ export default function MapView({
         tourStops={tourStops}
         onTourRouteFound={onTourRouteFound}
         activeRoute={activeRoute}
-        onTourRouteClick={onTourRouteClick}
         startingPoint={startingPoint}
         endPoint={endPoint}
         selectedLanguage={selectedLanguage}
