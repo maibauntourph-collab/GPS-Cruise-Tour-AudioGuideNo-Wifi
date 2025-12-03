@@ -905,16 +905,16 @@ export default function MapView({
               }
             }}
           >
-            {/* Tooltip - always visible for selected landmark, hover for others */}
+            {/* Tooltip - always visible for all landmarks */}
             <Tooltip 
-              permanent={isSelected}
+              permanent={true}
               direction="top" 
               offset={[0, isSelected ? -45 : -35]}
-              className={isSelected ? 'selected-landmark-tooltip' : ''}
+              className={isSelected ? 'selected-landmark-tooltip' : 'landmark-tooltip'}
             >
               <span style={{ 
                 fontWeight: isSelected ? 600 : 500,
-                fontSize: isSelected ? '13px' : '12px',
+                fontSize: isSelected ? '13px' : '11px',
               }}>
                 {getTranslatedContent(landmark, selectedLanguage, 'name')}
               </span>

@@ -471,3 +471,23 @@
   position: relative;
   z-index: 1000 !important;
 }
+
+/* Normal landmark tooltip styling */
+.landmark-tooltip {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #333 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  white-space: nowrap !important;
+  max-width: 150px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.landmark-tooltip::before {
+  border-top-color: rgba(255, 255, 255, 0.95) !important;
+}
