@@ -75,6 +75,9 @@ interface UnifiedFloatingCardProps {
   
   // Departure time for traffic estimation
   departureTime?: Date | null;
+  
+  // Starting point for distance calculation
+  startingPoint?: { lat: number; lng: number; type: string } | null;
 }
 
 function getCruisePortTranslation(cruisePort: CruisePort, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
@@ -230,7 +233,8 @@ export default function UnifiedFloatingCard({
   aiRecommendation = null,
   selectedLanguage = 'en',
   onMapMarkerClick,
-  departureTime = null
+  departureTime = null,
+  startingPoint = null
 }: UnifiedFloatingCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -531,14 +535,23 @@ export default function UnifiedFloatingCard({
   };
 
   const landmarksWithDistance = landmarks.map((landmark) => {
-    const distance = userPosition
-      ? calculateDistance(
-          userPosition.latitude,
-          userPosition.longitude,
-          landmark.lat,
-          landmark.lng
-        )
-      : null;
+    // Calculate distance from starting point if set, otherwise from user position
+    let distance: number | null = null;
+    if (startingPoint && startingPoint.lat && startingPoint.lng) {
+      distance = calculateDistance(
+        startingPoint.lat,
+        startingPoint.lng,
+        landmark.lat,
+        landmark.lng
+      );
+    } else if (userPosition) {
+      distance = calculateDistance(
+        userPosition.latitude,
+        userPosition.longitude,
+        landmark.lat,
+        landmark.lng
+      );
+    }
     return { landmark, distance };
   });
 

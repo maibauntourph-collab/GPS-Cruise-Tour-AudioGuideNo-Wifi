@@ -1793,6 +1793,7 @@ export default function Home() {
           selectedLanguage={selectedLanguage}
           onMapMarkerClick={handleMapMarkerClick}
           departureTime={departureTime}
+          startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type } : null}
         />
 
       {/* Bottom Sheet - Mobile Only */}
