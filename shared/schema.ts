@@ -142,6 +142,57 @@ export type Waypoint = z.infer<typeof waypointSchema>;
 
 // Drizzle ORM Tables for Database
 
+// Cities table
+export const cities = pgTable("cities", {
+  id: varchar("id").primaryKey(),
+  name: varchar("name").notNull(),
+  country: varchar("country").notNull(),
+  lat: doublePrecision("lat").notNull(),
+  lng: doublePrecision("lng").notNull(),
+  zoom: integer("zoom").default(14),
+  cruisePort: json("cruise_port"), // JSON for cruise port data
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// Landmarks table (includes landmarks, activities, restaurants, gift shops)
+export const landmarks = pgTable("landmarks", {
+  id: varchar("id").primaryKey(),
+  cityId: varchar("city_id").notNull(),
+  name: varchar("name").notNull(),
+  lat: doublePrecision("lat").notNull(),
+  lng: doublePrecision("lng").notNull(),
+  radius: integer("radius").notNull(),
+  narration: text("narration").notNull(),
+  description: text("description"),
+  category: varchar("category"), // 'Ancient Rome', 'Activity', 'Restaurant', 'Gift Shop', etc.
+  detailedDescription: text("detailed_description"),
+  photos: json("photos"), // Array of photo URLs
+  historicalInfo: text("historical_info"),
+  yearBuilt: varchar("year_built"),
+  architect: varchar("architect"),
+  translations: json("translations"), // JSONB for all language translations
+  // Restaurant-specific fields
+  openingHours: varchar("opening_hours"),
+  priceRange: varchar("price_range"),
+  cuisine: varchar("cuisine"),
+  reservationUrl: varchar("reservation_url"),
+  phoneNumber: varchar("phone_number"),
+  menuHighlights: json("menu_highlights"), // Array of strings
+  restaurantPhotos: json("restaurant_photos"), // { exterior, interior, menu }
+  paymentMethods: json("payment_methods"), // Array of strings
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// Data version table for offline sync
+export const dataVersions = pgTable("data_versions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  entityType: varchar("entity_type").notNull(), // 'cities', 'landmarks', 'all'
+  version: integer("version").notNull().default(1),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
 // Visited Landmarks table
 export const visitedLandmarks = pgTable("visited_landmarks", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -153,13 +204,39 @@ export const visitedLandmarks = pgTable("visited_landmarks", {
   uniqueSessionLandmark: unique().on(table.sessionId, table.landmarkId),
 }));
 
+// Relations
+export const citiesRelations = relations(cities, ({ many }) => ({
+  landmarks: many(landmarks),
+}));
+
+export const landmarksRelations = relations(landmarks, ({ one }) => ({
+  city: one(cities, {
+    fields: [landmarks.cityId],
+    references: [cities.id],
+  }),
+}));
+
 export const visitedLandmarksRelations = relations(visitedLandmarks, () => ({}));
 
 // Insert schemas
+export const insertCitySchema = createInsertSchema(cities).omit({
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertLandmarkSchema = createInsertSchema(landmarks).omit({
+  createdAt: true,
+  updatedAt: true,
+});
+
 export const insertVisitedLandmarkSchema = createInsertSchema(visitedLandmarks).omit({
   id: true,
   visitedAt: true,
 });
 
+export type InsertCity = z.infer<typeof insertCitySchema>;
+export type InsertLandmark = z.infer<typeof insertLandmarkSchema>;
 export type InsertVisitedLandmark = z.infer<typeof insertVisitedLandmarkSchema>;
 export type VisitedLandmark = typeof visitedLandmarks.$inferSelect;
+export type DbCity = typeof cities.$inferSelect;
+export type DbLandmark = typeof landmarks.$inferSelect;
