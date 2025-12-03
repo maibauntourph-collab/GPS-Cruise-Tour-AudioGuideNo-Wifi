@@ -77,7 +77,7 @@ Respond in this exact JSON format:
 }`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-5.1-thinking",
+      model: "gpt-4o-mini",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }

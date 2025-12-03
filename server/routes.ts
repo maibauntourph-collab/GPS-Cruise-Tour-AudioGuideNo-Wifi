@@ -807,16 +807,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // AI tour recommendation route
   app.post("/api/ai/recommend-tour", async (req, res) => {
     try {
-      const { cityId, language, userPosition } = req.body;
+      const { cityId, language, userPosition, filterType } = req.body;
       
       if (!cityId) {
         return res.status(400).json({ error: "City ID is required" });
       }
 
-      const landmarks = await storage.getLandmarks(cityId);
+      let landmarks = await storage.getLandmarks(cityId);
+      
+      // Apply category filter if specified
+      if (filterType && filterType !== 'all') {
+        switch (filterType) {
+          case 'landmarks':
+            landmarks = landmarks.filter(l => 
+              l.category !== 'Activity' && 
+              l.category !== 'Restaurant' && 
+              l.category !== 'Gift Shop'
+            );
+            break;
+          case 'restaurants':
+            landmarks = landmarks.filter(l => l.category === 'Restaurant');
+            break;
+          case 'activities':
+            landmarks = landmarks.filter(l => l.category === 'Activity');
+            break;
+        }
+      }
       
       if (landmarks.length === 0) {
-        return res.status(404).json({ error: "No landmarks found for this city" });
+        return res.status(404).json({ error: "No landmarks found for this city with the selected filter" });
       }
 
       const recommendation = await recommendTourItinerary(

@@ -18,6 +18,7 @@ import OfflineIndicator from '@/components/OfflineIndicator';
 import InstallPrompt from '@/components/InstallPrompt';
 import BottomSheet from '@/components/BottomSheet';
 import StartupDialog, { getSavedTourData, saveTourData, clearSavedTourData } from '@/components/StartupDialog';
+import AIRecommendDialog from '@/components/AIRecommendDialog';
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';
@@ -124,13 +125,13 @@ export default function Home() {
     return saved ? parseInt(saved, 10) : 45;
   });
   const [showMenu, setShowMenu] = useState(false);
+  const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<{
     itinerary: Array<{ landmarkId: string; order: number }>;
     explanation: string;
     totalEstimatedTime: number;
   } | null>(null);
-  const [isLoadingAi, setIsLoadingAi] = useState(false);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
   
@@ -551,125 +552,9 @@ export default function Home() {
     // This prevents any UI flicker or unwanted changes
   };
 
-  const handleAiRecommendation = async () => {
-    setIsLoadingAi(true);
-    try {
-      const response = await fetch('/api/ai/recommend-tour', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          cityId: selectedCityId,
-          language: selectedLanguage,
-          userPosition: position ? {
-            latitude: position.latitude,
-            longitude: position.longitude
-          } : undefined
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Failed to get AI recommendation' }));
-        throw new Error(errorData.error || 'Failed to get AI recommendation');
-      }
-
-      const recommendation = await response.json();
-      setAiRecommendation(recommendation);
-
-      // Apply recommended itinerary to tour
-      const recommendedLandmarks = recommendation.itinerary
-        .sort((a: any, b: any) => a.order - b.order)
-        .map((item: any) => landmarks.find(l => l.id === item.landmarkId))
-        .filter((l: any) => l !== undefined);
-
-      // Check if all landmarks were resolved
-      if (recommendedLandmarks.length !== recommendation.itinerary.length) {
-        const missingCount = recommendation.itinerary.length - recommendedLandmarks.length;
-        console.warn(`${missingCount} recommended landmarks were not found in the current landmark list`);
-        
-        const warningMessage = selectedLanguage === 'ko'
-          ? `AI 추천 중 ${missingCount}개 장소를 찾을 수 없습니다. ${recommendedLandmarks.length}개 장소만 추가되었습니다.`
-          : `Could not find ${missingCount} recommended locations. Only ${recommendedLandmarks.length} added.`;
-        
-        toast({
-          description: warningMessage,
-          variant: 'destructive',
-          duration: 4000,
-        });
-      }
-
-      if (recommendedLandmarks.length === 0) {
-        throw new Error('No valid landmarks in recommendation');
-      }
-
-      setTourStops(recommendedLandmarks);
-
-      const message = selectedLanguage === 'ko' 
-        ? `AI 추천 일정 ${recommendedLandmarks.length}개 장소가 투어에 추가되었습니다`
-        : selectedLanguage === 'es'
-        ? `${recommendedLandmarks.length} lugares recomendados por IA añadidos al tour`
-        : selectedLanguage === 'fr'
-        ? `${recommendedLandmarks.length} lieux recommandés par IA ajoutés au tour`
-        : selectedLanguage === 'de'
-        ? `${recommendedLandmarks.length} KI-empfohlene Orte zur Tour hinzugefügt`
-        : selectedLanguage === 'it'
-        ? `${recommendedLandmarks.length} luoghi consigliati dall'IA aggiunti al tour`
-        : selectedLanguage === 'zh'
-        ? `${recommendedLandmarks.length}个AI推荐地点已添加到旅程`
-        : selectedLanguage === 'ja'
-        ? `${recommendedLandmarks.length}個のAI推奨地点がツアーに追加されました`
-        : selectedLanguage === 'pt'
-        ? `${recommendedLandmarks.length} locais recomendados por IA adicionados ao tour`
-        : selectedLanguage === 'ru'
-        ? `${recommendedLandmarks.length} мест, рекомендованных ИИ, добавлено в тур`
-        : `${recommendedLandmarks.length} AI recommended locations added to tour`;
-
-      toast({
-        description: message,
-        duration: 3000,
-      });
-    } catch (error: any) {
-      console.error('AI recommendation error:', error);
-      
-      let errorMessage: string;
-      
-      // Check if it's a quota error or rate limit error
-      const errorText = error.message || JSON.stringify(error);
-      if (errorText.includes('quota') || errorText.includes('rate limit') || errorText.includes('429')) {
-        errorMessage = selectedLanguage === 'ko'
-          ? 'AI 서비스 한도에 도달했습니다. 나중에 다시 시도해주세요.'
-          : selectedLanguage === 'es'
-          ? 'Límite del servicio de IA alcanzado. Inténtelo más tarde.'
-          : selectedLanguage === 'fr'
-          ? 'Limite du service IA atteinte. Réessayez plus tard.'
-          : selectedLanguage === 'de'
-          ? 'KI-Dienstlimit erreicht. Versuchen Sie es später erneut.'
-          : selectedLanguage === 'it'
-          ? 'Limite del servizio IA raggiunto. Riprova più tardi.'
-          : selectedLanguage === 'zh'
-          ? 'AI服务已达限额。请稍后重试。'
-          : selectedLanguage === 'ja'
-          ? 'AIサービスの制限に達しました。後でもう一度お試しください。'
-          : selectedLanguage === 'pt'
-          ? 'Limite do serviço de IA atingido. Tente novamente mais tarde.'
-          : selectedLanguage === 'ru'
-          ? 'Достигнут лимит сервиса ИИ. Попробуйте позже.'
-          : 'AI service limit reached. Please try again later.';
-      } else {
-        errorMessage = selectedLanguage === 'ko'
-          ? 'AI 추천을 가져오는데 실패했습니다'
-          : 'Failed to get AI recommendation';
-      }
-      
-      toast({
-        description: errorMessage,
-        variant: 'destructive',
-        duration: 4000,
-      });
-    } finally {
-      setIsLoadingAi(false);
-    }
+  const handleAiRecommendation = () => {
+    // Open the AI Recommendation dialog
+    setShowAIRecommend(true);
   };
 
   // Handler for toggle with scroll to first item
@@ -822,23 +707,16 @@ export default function Home() {
               variant="outline"
               size="icon"
               onClick={handleAiRecommendation}
-              disabled={isLoadingAi}
               data-testid="button-ai-recommend"
               className="h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600"
               title={selectedLanguage === 'ko' ? 'AI 추천 일정' : 'AI Recommend'}
             >
-              {isLoadingAi ? (
-                <div className="animate-spin rounded-full h-3.5 w-3.5 border-b-2 border-white" />
-              ) : (
-                <>
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                  <span className="hidden sm:inline text-xs">
-                    {selectedLanguage === 'ko' ? 'AI 추천' : 'AI'}
-                  </span>
-                </>
-              )}
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <span className="hidden sm:inline text-xs">
+                {selectedLanguage === 'ko' ? 'AI 추천' : 'AI'}
+              </span>
             </Button>
             <Button
               variant={showLandmarks ? "default" : "outline"}
@@ -1235,6 +1113,31 @@ export default function Home() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* AI Recommendation Dialog */}
+      <AIRecommendDialog
+        isOpen={showAIRecommend}
+        onClose={() => setShowAIRecommend(false)}
+        cityId={selectedCityId}
+        cityName={selectedCity?.name || ''}
+        landmarks={landmarks}
+        selectedLanguage={selectedLanguage}
+        userPosition={position}
+        onAddToTour={(recommendedLandmarks) => {
+          // Add all recommended landmarks to tour
+          const newStops = recommendedLandmarks.filter(
+            l => !tourStops.some(s => s.id === l.id)
+          );
+          if (newStops.length > 0) {
+            setTourStops(prev => [...prev, ...newStops]);
+          }
+        }}
+        onSelectLandmark={(landmark) => {
+          setSelectedLandmark(landmark);
+          setFocusLocation({ lat: landmark.lat, lng: landmark.lng, zoom: 17 });
+          setShowAIRecommend(false);
+        }}
+      />
     </>
   );
 }
