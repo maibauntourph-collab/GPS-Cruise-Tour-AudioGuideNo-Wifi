@@ -29,8 +29,9 @@ import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 // Detect browser language and map to supported language
 const detectBrowserLanguage = (): string => {
@@ -107,11 +108,14 @@ export default function Home() {
   const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
   const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
   const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
-  const [showLandmarks, setShowLandmarks] = useState(true);
-  const [showActivities, setShowActivities] = useState(true);
-  const [showRestaurants, setShowRestaurants] = useState(true);
-  const [showGiftShops, setShowGiftShops] = useState(true);
-  const [showCruisePort, setShowCruisePort] = useState(true);
+  // Single category selection: 'all', 'landmarks', 'activities', 'restaurants', 'giftshops', 'cruiseport'
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  // Derived show states from selectedCategory
+  const showLandmarks = selectedCategory === 'all' || selectedCategory === 'landmarks';
+  const showActivities = selectedCategory === 'all' || selectedCategory === 'activities';
+  const showRestaurants = selectedCategory === 'all' || selectedCategory === 'restaurants';
+  const showGiftShops = selectedCategory === 'all' || selectedCategory === 'giftshops';
+  const showCruisePort = selectedCategory === 'all' || selectedCategory === 'cruiseport';
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
   const [tourRouteInfo, setTourRouteInfo] = useState<{ 
@@ -672,51 +676,40 @@ export default function Home() {
     }
   };
 
-  // Handler for toggle with scroll to first item
-  const handleToggleLandmarks = () => {
-    const newState = !showLandmarks;
-    setShowLandmarks(newState);
+  // Handler for category selection change
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
     
-    // If turning on, focus on first landmark
-    if (newState) {
-      const firstLandmark = landmarks.find(l => 
-        l.category !== 'Activity' && 
-        l.category !== 'Restaurant' && 
-        l.category !== 'Gift Shop' && 
-        l.category !== 'Shop'
-      );
-      if (firstLandmark) {
-        setFocusLocation({ lat: firstLandmark.lat, lng: firstLandmark.lng, zoom: 16 });
+    // Focus on first item of selected category
+    if (category !== 'all' && category !== 'cruiseport') {
+      let firstItem: Landmark | undefined;
+      
+      if (category === 'landmarks') {
+        firstItem = landmarks.find(l => 
+          l.category !== 'Activity' && 
+          l.category !== 'Restaurant' && 
+          l.category !== 'Gift Shop' && 
+          l.category !== 'Shop'
+        );
+      } else if (category === 'activities') {
+        firstItem = landmarks.find(l => l.category === 'Activity');
+      } else if (category === 'restaurants') {
+        firstItem = landmarks.find(l => l.category === 'Restaurant');
+      } else if (category === 'giftshops') {
+        firstItem = landmarks.find(l => l.category === 'Gift Shop' || l.category === 'Shop');
+      }
+      
+      if (firstItem) {
+        setFocusLocation({ lat: firstItem.lat, lng: firstItem.lng, zoom: 16 });
         setTimeout(() => setFocusLocation(null), 1000);
       }
-    }
-  };
-
-  const handleToggleActivities = () => {
-    const newState = !showActivities;
-    setShowActivities(newState);
-    
-    // If turning on, focus on first activity
-    if (newState) {
-      const firstActivity = landmarks.find(l => l.category === 'Activity');
-      if (firstActivity) {
-        setFocusLocation({ lat: firstActivity.lat, lng: firstActivity.lng, zoom: 16 });
-        setTimeout(() => setFocusLocation(null), 1000);
-      }
-    }
-  };
-
-  const handleToggleRestaurants = () => {
-    const newState = !showRestaurants;
-    setShowRestaurants(newState);
-    
-    // If turning on, focus on first restaurant
-    if (newState) {
-      const firstRestaurant = landmarks.find(l => l.category === 'Restaurant');
-      if (firstRestaurant) {
-        setFocusLocation({ lat: firstRestaurant.lat, lng: firstRestaurant.lng, zoom: 16 });
-        setTimeout(() => setFocusLocation(null), 1000);
-      }
+    } else if (category === 'cruiseport' && selectedCity?.cruisePort) {
+      setFocusLocation({ 
+        lat: selectedCity.cruisePort.lat, 
+        lng: selectedCity.cruisePort.lng, 
+        zoom: 15 
+      });
+      setTimeout(() => setFocusLocation(null), 1000);
     }
   };
 
@@ -817,7 +810,7 @@ export default function Home() {
             <span className="xs:hidden">GPS Guide</span>
           </h1>
           
-          <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
+          <div className="ml-auto flex items-center gap-1 sm:gap-2">
             <Button
               variant="outline"
               size="icon"
@@ -840,63 +833,64 @@ export default function Home() {
                 </>
               )}
             </Button>
-            <Button
-              variant={showLandmarks ? "default" : "outline"}
-              size="icon"
-              onClick={handleToggleLandmarks}
-              data-testid="button-toggle-landmarks"
-              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : 'animate-blink'}`}
-              title={t('landmarks', selectedLanguage)}
-            >
-              <LandmarkIcon className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs">{t('landmarks', selectedLanguage)}</span>
-            </Button>
-            <Button
-              variant={showActivities ? "default" : "outline"}
-              size="icon"
-              onClick={handleToggleActivities}
-              data-testid="button-toggle-activities"
-              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : 'animate-blink'}`}
-              title={t('activities', selectedLanguage)}
-            >
-              <Activity className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs">{t('activities', selectedLanguage)}</span>
-            </Button>
-            <Button
-              variant={showRestaurants ? "default" : "outline"}
-              size="icon"
-              onClick={handleToggleRestaurants}
-              data-testid="button-toggle-restaurants"
-              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : 'animate-blink'}`}
-              title={t('restaurants', selectedLanguage)}
-            >
-              <Utensils className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs">{t('restaurants', selectedLanguage)}</span>
-            </Button>
-            <Button
-              variant={showGiftShops ? "default" : "outline"}
-              size="icon"
-              onClick={() => setShowGiftShops(!showGiftShops)}
-              data-testid="button-toggle-giftshops"
-              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
-              title={t('giftShops', selectedLanguage)}
-            >
-              <ShoppingBag className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs">{t('giftShops', selectedLanguage)}</span>
-            </Button>
-            {selectedCity?.cruisePort && (
-              <Button
-                variant={showCruisePort ? "default" : "outline"}
-                size="icon"
-                onClick={() => setShowCruisePort(!showCruisePort)}
-                data-testid="button-toggle-cruise-port"
-                className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
-                title={t('cruisePortInfo', selectedLanguage)}
+            
+            {/* Category Selection Menu */}
+            <Select value={selectedCategory} onValueChange={handleCategoryChange}>
+              <SelectTrigger 
+                className="h-8 w-auto min-w-[120px] sm:min-w-[140px] text-xs gap-1"
+                data-testid="select-category"
               >
-                <Ship className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline text-xs">{t('cruisePortInfo', selectedLanguage)}</span>
-              </Button>
-            )}
+                <div className="flex items-center gap-1.5">
+                  {selectedCategory === 'all' && <LandmarkIcon className="w-3.5 h-3.5" />}
+                  {selectedCategory === 'landmarks' && <LandmarkIcon className="w-3.5 h-3.5 text-[hsl(14,85%,55%)]" />}
+                  {selectedCategory === 'activities' && <Activity className="w-3.5 h-3.5 text-[hsl(210,85%,55%)]" />}
+                  {selectedCategory === 'restaurants' && <Utensils className="w-3.5 h-3.5 text-[hsl(25,95%,55%)]" />}
+                  {selectedCategory === 'giftshops' && <ShoppingBag className="w-3.5 h-3.5 text-[hsl(45,90%,55%)]" />}
+                  {selectedCategory === 'cruiseport' && <Ship className="w-3.5 h-3.5 text-[hsl(200,15%,55%)]" />}
+                  <SelectValue />
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">
+                  <div className="flex items-center gap-2">
+                    <LandmarkIcon className="w-4 h-4" />
+                    <span>{selectedLanguage === 'ko' ? '전체 보기' : 'All'}</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="landmarks">
+                  <div className="flex items-center gap-2">
+                    <LandmarkIcon className="w-4 h-4 text-[hsl(14,85%,55%)]" />
+                    <span>{t('landmarks', selectedLanguage)}</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="activities">
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-[hsl(210,85%,55%)]" />
+                    <span>{t('activities', selectedLanguage)}</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="restaurants">
+                  <div className="flex items-center gap-2">
+                    <Utensils className="w-4 h-4 text-[hsl(25,95%,55%)]" />
+                    <span>{t('restaurants', selectedLanguage)}</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="giftshops">
+                  <div className="flex items-center gap-2">
+                    <ShoppingBag className="w-4 h-4 text-[hsl(45,90%,55%)]" />
+                    <span>{t('giftShops', selectedLanguage)}</span>
+                  </div>
+                </SelectItem>
+                {selectedCity?.cruisePort && (
+                  <SelectItem value="cruiseport">
+                    <div className="flex items-center gap-2">
+                      <Ship className="w-4 h-4 text-[hsl(200,15%,55%)]" />
+                      <span>{t('cruisePortInfo', selectedLanguage)}</span>
+                    </div>
+                  </SelectItem>
+                )}
+              </SelectContent>
+            </Select>
           </div>
         </header>
         
@@ -975,10 +969,8 @@ export default function Home() {
           showActivities={showActivities}
           showRestaurants={showRestaurants}
           showGiftShops={showGiftShops}
-          onToggleLandmarks={handleToggleLandmarks}
-          onToggleActivities={handleToggleActivities}
-          onToggleRestaurants={handleToggleRestaurants}
-          onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
           selectedLanguage={selectedLanguage}
           onMapMarkerClick={handleMapMarkerClick}
         />
