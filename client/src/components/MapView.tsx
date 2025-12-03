@@ -909,7 +909,7 @@ export default function MapView({
         // Alternate tooltip direction based on index to reduce overlap
         const tooltipDirection = index % 2 === 0 ? 'top' : 'bottom';
         const isHighlighted = isSelected || isInTour; // Highlight if selected OR in tour
-        const baseOffset = isHighlighted ? 45 : 35;
+        const baseOffset = 35; // Same offset for all tooltips
         const tooltipOffset: [number, number] = tooltipDirection === 'top' 
           ? [0, -baseOffset] 
           : [0, baseOffset];
@@ -985,12 +985,12 @@ export default function MapView({
                 className={isHighlighted ? 'selected-tooltip-content' : ''}
                 style={{ 
                   cursor: 'pointer',
-                  fontWeight: isHighlighted ? 700 : 500,
-                  fontSize: isHighlighted ? '13px' : '11px',
+                  fontWeight: isHighlighted ? 600 : 500,
+                  fontSize: '11px', // Same size for all tooltips
                   color: isHighlighted ? '#FFD700' : undefined,
                   backgroundColor: isHighlighted ? '#000000' : undefined,
-                  padding: isHighlighted ? '4px 8px' : undefined,
-                  borderRadius: isHighlighted ? '4px' : undefined,
+                  padding: '4px 8px',
+                  borderRadius: '4px',
                 }}
                 data-testid={`tooltip-landmark-${landmark.id}`}
               >
