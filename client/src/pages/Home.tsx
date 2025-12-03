@@ -1033,7 +1033,7 @@ export default function Home() {
               )}
               
               <Tabs defaultValue="start" value={pointSelectionMode} onValueChange={(v) => setPointSelectionMode(v as 'start' | 'end' | 'time')}>
-                <TabsList className="grid w-full grid-cols-3 mb-2">
+                <TabsList className="grid w-full grid-cols-3 mb-2 sticky top-0 z-10 bg-popover">
                   <TabsTrigger value="start" className="gap-1 px-2" data-testid="tab-start-point">
                     <Circle className={`w-3 h-3 ${startingPoint ? 'fill-green-500 text-green-500' : ''}`} />
                     <span className="text-xs">{selectedLanguage === 'ko' ? '출발지' : 'Start'}</span>
