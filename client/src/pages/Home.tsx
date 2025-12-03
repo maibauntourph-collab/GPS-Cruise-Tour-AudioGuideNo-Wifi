@@ -32,7 +32,8 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
   Popover,
@@ -142,6 +143,9 @@ export default function Home() {
   const [startingPoint, setStartingPoint] = useState<StartingPoint | null>(null);
   const [isSelectingHotelOnMap, setIsSelectingHotelOnMap] = useState(false);
   const [isStartingPointPopoverOpen, setIsStartingPointPopoverOpen] = useState(false);
+  const [locationSearchQuery, setLocationSearchQuery] = useState('');
+  const [locationSearchResults, setLocationSearchResults] = useState<Array<{ name: string; lat: number; lng: number }>>([]);
+  const [isSearchingLocation, setIsSearchingLocation] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
@@ -423,6 +427,52 @@ export default function Home() {
       oscillator.stop(audioContext.currentTime + 0.1);
     } catch (error) {
       console.error('Failed to play click sound:', error);
+    }
+  };
+
+  // Location search using OpenStreetMap Nominatim API
+  const handleLocationSearch = async () => {
+    if (!locationSearchQuery.trim() || !selectedCity) return;
+    
+    setIsSearchingLocation(true);
+    try {
+      // Search within city bounds using viewbox parameter
+      const cityLat = selectedCity.lat;
+      const cityLng = selectedCity.lng;
+      const viewbox = `${cityLng - 0.5},${cityLat + 0.5},${cityLng + 0.5},${cityLat - 0.5}`;
+      
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?` +
+        `q=${encodeURIComponent(locationSearchQuery)}&` +
+        `format=json&` +
+        `limit=5&` +
+        `viewbox=${viewbox}&` +
+        `bounded=1`,
+        {
+          headers: {
+            'Accept-Language': selectedLanguage
+          }
+        }
+      );
+      
+      if (response.ok) {
+        const data = await response.json();
+        const results = data.map((item: any) => ({
+          name: item.display_name.split(',').slice(0, 2).join(', '),
+          lat: parseFloat(item.lat),
+          lng: parseFloat(item.lon)
+        }));
+        setLocationSearchResults(results);
+      }
+    } catch (error) {
+      console.error('Location search error:', error);
+      toast({
+        title: selectedLanguage === 'ko' ? '검색 오류' : 'Search Error',
+        description: selectedLanguage === 'ko' ? '위치를 검색할 수 없습니다' : 'Could not search location',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsSearchingLocation(false);
     }
   };
 
@@ -762,9 +812,77 @@ export default function Home() {
                 </span>
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-72 p-2 z-[9999]" align="start">
+            <PopoverContent className="w-80 p-2 z-[9999] max-h-[70vh] overflow-y-auto" align="start">
               <div className="space-y-2">
                 <h4 className="font-medium text-sm">{t('selectStartingPoint', selectedLanguage)}</h4>
+                
+                {/* Location Search */}
+                <div className="flex gap-1">
+                  <Input
+                    placeholder={selectedLanguage === 'ko' ? '호텔, 주소 검색...' : 'Search hotel, address...'}
+                    value={locationSearchQuery}
+                    onChange={(e) => setLocationSearchQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleLocationSearch();
+                      }
+                    }}
+                    className="h-8 text-sm"
+                    data-testid="input-location-search"
+                  />
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={handleLocationSearch}
+                    disabled={isSearchingLocation || !locationSearchQuery.trim()}
+                    className="h-8 px-2"
+                    data-testid="button-location-search"
+                  >
+                    {isSearchingLocation ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Search className="w-4 h-4" />
+                    )}
+                  </Button>
+                </div>
+                
+                {/* Search Results */}
+                {locationSearchResults.length > 0 && (
+                  <div className="space-y-1 border-b pb-2">
+                    <p className="text-xs text-muted-foreground font-medium">
+                      {selectedLanguage === 'ko' ? '검색 결과' : 'Search Results'}
+                    </p>
+                    {locationSearchResults.map((result, index) => (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        size="sm"
+                        className="w-full justify-start gap-2 h-auto py-1.5"
+                        onClick={() => {
+                          setStartingPoint({
+                            id: `search_${index}`,
+                            type: 'hotel',
+                            name: result.name,
+                            lat: result.lat,
+                            lng: result.lng
+                          });
+                          setIsStartingPointPopoverOpen(false);
+                          setLocationSearchQuery('');
+                          setLocationSearchResults([]);
+                          toast({
+                            title: t('startingPointSet', selectedLanguage),
+                            description: result.name
+                          });
+                        }}
+                        data-testid={`button-search-result-${index}`}
+                      >
+                        <MapPin className="w-4 h-4 text-green-500 flex-shrink-0" />
+                        <span className="text-xs text-left line-clamp-2">{result.name}</span>
+                      </Button>
+                    ))}
+                  </div>
+                )}
                 
                 {/* My Location Option */}
                 <Button
