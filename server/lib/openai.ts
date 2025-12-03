@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { Landmark } from "@shared/schema";
 
-// the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+// Using gpt-4o-mini for cost-effective AI recommendations
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export interface TourRecommendation {
@@ -77,13 +77,13 @@ Respond in this exact JSON format:
 }`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-5", // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+      model: "gpt-5.1-thinking",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
       ],
       response_format: { type: "json_object" },
-      max_completion_tokens: 2048
+      max_tokens: 2048
     });
 
     const result = JSON.parse(response.choices[0].message.content || "{}");
