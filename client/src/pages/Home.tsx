@@ -118,6 +118,10 @@ export default function Home() {
     duration: number;
     segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
   } | null>(null);
+  const [tourTimePerStop, setTourTimePerStop] = useState<number>(() => {
+    const saved = localStorage.getItem('tour-time-per-stop');
+    return saved ? parseInt(saved, 10) : 45;
+  });
   const [showMenu, setShowMenu] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<{
@@ -137,6 +141,11 @@ export default function Home() {
   useEffect(() => {
     localStorage.setItem('selected-language', selectedLanguage);
   }, [selectedLanguage]);
+
+  // Save tour time per stop to localStorage
+  useEffect(() => {
+    localStorage.setItem('tour-time-per-stop', tourTimePerStop.toString());
+  }, [tourTimePerStop]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -665,6 +674,8 @@ export default function Home() {
         tourRouteInfo={tourRouteInfo}
         onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
         onClearTour={handleClearTour}
+        tourTimePerStop={tourTimePerStop}
+        onTourTimePerStopChange={setTourTimePerStop}
         onDownloadData={handleDownloadData}
         onUploadData={handleUploadData}
       />
@@ -813,6 +824,7 @@ export default function Home() {
           tourStops={tourStops}
           tourRouteInfo={tourRouteInfo}
           onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
+          tourTimePerStop={tourTimePerStop}
           aiRecommendation={aiRecommendation}
           onLandmarkClick={(landmarkId) => {
             const landmark = filteredLandmarks.find(l => l.id === landmarkId);

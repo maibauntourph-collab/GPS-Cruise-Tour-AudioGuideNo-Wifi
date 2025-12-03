@@ -55,6 +55,7 @@ interface UnifiedFloatingCardProps {
     segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
   } | null;
   onRemoveTourStop?: (landmarkId: string) => void;
+  tourTimePerStop?: number;
   
   // AI Recommendation props
   aiRecommendation?: {
@@ -124,6 +125,7 @@ export default function UnifiedFloatingCard({
   tourStops = [],
   tourRouteInfo = null,
   onRemoveTourStop,
+  tourTimePerStop = 45,
   aiRecommendation = null,
   selectedLanguage = 'en',
   onMapMarkerClick
@@ -1148,14 +1150,14 @@ export default function UnifiedFloatingCard({
                       <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
                           <div className="flex items-center gap-1.5">
-                            <span className="text-xs text-muted-foreground">이동</span>
+                            <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '이동' : 'Travel'}</span>
                             <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
                               {tourRouteInfo.distance.toFixed(1)}km
                             </span>
                           </div>
                           <div className="w-px h-4 bg-border"></div>
                           <div className="flex items-center gap-1.5">
-                            <span className="text-xs text-muted-foreground">소요</span>
+                            <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '소요' : 'Time'}</span>
                             <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
                               {Math.round(tourRouteInfo.duration)}min
                             </span>
@@ -1163,14 +1165,19 @@ export default function UnifiedFloatingCard({
                         </div>
                         <div className="flex items-center gap-1.5 bg-[hsl(14,85%,55%)] text-white px-2.5 py-1 rounded-md">
                           <Clock className="w-3.5 h-3.5" />
-                          <span className="text-xs font-medium">전체</span>
+                          <span className="text-xs font-medium">{selectedLanguage === 'ko' ? '전체' : 'Total'}</span>
                           <span className="text-sm font-bold">
-                            {Math.round(tourRouteInfo.duration + (tourStops.length * 30))}min
+                            {(() => {
+                              const totalMinutes = Math.round(tourRouteInfo.duration + (tourStops.length * tourTimePerStop));
+                              const hours = Math.floor(totalMinutes / 60);
+                              const mins = totalMinutes % 60;
+                              return hours > 0 ? `${hours}h ${mins}m` : `${totalMinutes}min`;
+                            })()}
                           </span>
                         </div>
                       </div>
                       <div className="mt-1.5 text-xs text-muted-foreground">
-                        * 각 장소 약 30분 체류 포함
+                        * {selectedLanguage === 'ko' ? `각 장소 약 ${tourTimePerStop}분 체류 포함` : `Includes ${tourTimePerStop}min per stop`}
                       </div>
                     </div>
                   )}

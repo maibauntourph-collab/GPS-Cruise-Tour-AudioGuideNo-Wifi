@@ -19,7 +19,10 @@ import {
   Gauge,
   Globe,
   MapPinned,
-  TrendingUp
+  TrendingUp,
+  Clock,
+  Plus,
+  Minus
 } from 'lucide-react';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
@@ -69,6 +72,8 @@ interface MenuDialogProps {
   } | null;
   onRemoveTourStop: (landmarkId: string) => void;
   onClearTour: () => void;
+  tourTimePerStop: number;
+  onTourTimePerStopChange: (time: number) => void;
   
   // Offline Data
   onDownloadData: (password: string) => Promise<void>;
@@ -99,6 +104,8 @@ export default function MenuDialog({
   tourRouteInfo,
   onRemoveTourStop,
   onClearTour,
+  tourTimePerStop,
+  onTourTimePerStopChange,
   onDownloadData,
   onUploadData
 }: MenuDialogProps) {
@@ -266,18 +273,70 @@ export default function MenuDialog({
                       </Button>
                     </div>
 
-                    {tourRouteInfo && (
-                      <div className="flex gap-2">
+                    {/* Time per stop adjustment */}
+                    <div className="flex items-center justify-between p-2 rounded-md bg-muted/30 border">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+                        <span className="text-xs">
+                          {selectedLanguage === 'ko' ? '장소당 관광시간' : 'Time per stop'}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => onTourTimePerStopChange(Math.max(15, tourTimePerStop - 15))}
+                          className="h-6 w-6"
+                          data-testid="button-time-decrease"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </Button>
+                        <span className="text-xs font-medium w-12 text-center">
+                          {tourTimePerStop}{selectedLanguage === 'ko' ? '분' : 'min'}
+                        </span>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => onTourTimePerStopChange(Math.min(120, tourTimePerStop + 15))}
+                          className="h-6 w-6"
+                          data-testid="button-time-increase"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Tour summary badges */}
+                    <div className="flex flex-wrap gap-2">
+                      {tourRouteInfo && (
                         <Badge variant="outline" className="gap-1 text-xs">
+                          <Route className="w-3 h-3" />
                           {(tourRouteInfo.distance / 1000).toFixed(1)}km
                         </Badge>
+                      )}
+                      {tourRouteInfo && (
                         <Badge variant="outline" className="gap-1 text-xs">
-                          {Math.ceil(tourRouteInfo.duration / 60)}min
+                          <NavIcon className="w-3 h-3" />
+                          {Math.ceil(tourRouteInfo.duration / 60)}{selectedLanguage === 'ko' ? '분 이동' : 'min travel'}
                         </Badge>
-                      </div>
-                    )}
+                      )}
+                      <Badge variant="secondary" className="gap-1 text-xs">
+                        <Clock className="w-3 h-3" />
+                        {(() => {
+                          const visitTime = tourStops.length * tourTimePerStop;
+                          const travelTime = tourRouteInfo ? Math.ceil(tourRouteInfo.duration / 60) : 0;
+                          const totalMinutes = visitTime + travelTime;
+                          const hours = Math.floor(totalMinutes / 60);
+                          const mins = totalMinutes % 60;
+                          if (selectedLanguage === 'ko') {
+                            return hours > 0 ? `총 ${hours}시간 ${mins}분` : `총 ${mins}분`;
+                          }
+                          return hours > 0 ? `Total ${hours}h ${mins}m` : `Total ${mins}min`;
+                        })()}
+                      </Badge>
+                    </div>
 
-                    <div className="space-y-1 max-h-[50vh] overflow-y-auto">
+                    <div className="space-y-1 max-h-[40vh] overflow-y-auto">
                       {tourStops.map((landmark, index) => (
                         <div key={landmark.id} className="flex items-center justify-between p-2 rounded-md bg-muted/50 group hover-elevate">
                           <div className="flex items-center gap-2 flex-1 min-w-0">
