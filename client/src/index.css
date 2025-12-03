@@ -439,21 +439,41 @@
   animation: blink-button 1.5s ease-in-out infinite;
 }
 
-/* Selected landmark tooltip styling with blink animation */
-.selected-landmark-tooltip {
-  background: linear-gradient(135deg, hsl(14, 85%, 55%), hsl(14, 85%, 45%)) !important;
-  color: white !important;
-  border: none !important;
+/* Selected landmark tooltip styling with blink animation - black background, yellow text */
+.leaflet-tooltip.selected-landmark-tooltip {
+  background: #000000 !important;
+  color: #FFD700 !important;
+  border: 2px solid #FFD700 !important;
   border-radius: 8px !important;
   padding: 6px 12px !important;
-  font-weight: 600 !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
   animation: tooltipBlink 1s ease-in-out infinite !important;
 }
 
-.selected-landmark-tooltip::before {
-  border-top-color: hsl(14, 85%, 55%) !important;
+.leaflet-tooltip.selected-landmark-tooltip::before {
+  border-top-color: #000000 !important;
+  border-bottom-color: transparent !important;
   animation: tooltipArrowBlink 1s ease-in-out infinite !important;
+}
+
+.leaflet-tooltip.selected-landmark-tooltip::after {
+  border-bottom-color: #000000 !important;
+  border-top-color: transparent !important;
+  animation: tooltipArrowBlink 1s ease-in-out infinite !important;
+}
+
+/* For bottom-positioned selected tooltips */
+.leaflet-tooltip-bottom.selected-landmark-tooltip::before {
+  border-bottom-color: #000000 !important;
+  border-top-color: transparent !important;
+}
+
+/* For top-positioned selected tooltips */
+.leaflet-tooltip-top.selected-landmark-tooltip::before {
+  border-top-color: #000000 !important;
+  border-bottom-color: transparent !important;
 }
 
 @keyframes tooltipBlink {
@@ -494,7 +514,7 @@
 }
 
 /* Normal landmark tooltip styling */
-.landmark-tooltip {
+.leaflet-tooltip.landmark-tooltip {
   background: rgba(255, 255, 255, 0.95) !important;
   color: #333 !important;
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
@@ -510,10 +530,20 @@
   transition: transform 0.15s ease !important;
 }
 
-.landmark-tooltip::before {
+.leaflet-tooltip.landmark-tooltip::before {
   border-top-color: rgba(255, 255, 255, 0.95) !important;
 }
 
-.landmark-tooltip::after {
+.leaflet-tooltip.landmark-tooltip::after {
   border-bottom-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.leaflet-tooltip-bottom.landmark-tooltip::before {
+  border-bottom-color: rgba(255, 255, 255, 0.95) !important;
+  border-top-color: transparent !important;
+}
+
+.leaflet-tooltip-top.landmark-tooltip::before {
+  border-top-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom-color: transparent !important;
 }

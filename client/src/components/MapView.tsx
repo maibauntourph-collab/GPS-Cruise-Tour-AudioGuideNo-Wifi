@@ -920,7 +920,7 @@ export default function MapView({
         
         return (
           <Marker
-            key={landmark.id}
+            key={`${landmark.id}-${isSelected ? 'selected' : 'normal'}`}
             position={[landmark.lat, landmark.lng]}
             icon={icon}
             ref={(marker) => {
@@ -970,14 +970,26 @@ export default function MapView({
               <div 
                 onClick={(e) => {
                   e.stopPropagation();
+                  e.preventDefault();
                   if (onLandmarkSelect) {
                     onLandmarkSelect(landmark);
                   }
                 }}
+                onMouseDown={(e) => {
+                  e.stopPropagation();
+                }}
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                }}
+                className={isSelected ? 'selected-tooltip-content' : ''}
                 style={{ 
                   cursor: 'pointer',
-                  fontWeight: isSelected ? 600 : 500,
+                  fontWeight: isSelected ? 700 : 500,
                   fontSize: isSelected ? '13px' : '11px',
+                  color: isSelected ? '#FFD700' : undefined,
+                  backgroundColor: isSelected ? '#000000' : undefined,
+                  padding: isSelected ? '4px 8px' : undefined,
+                  borderRadius: isSelected ? '4px' : undefined,
                 }}
                 data-testid={`tooltip-landmark-${landmark.id}`}
               >
