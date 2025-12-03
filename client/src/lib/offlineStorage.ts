@@ -1,7 +1,7 @@
 import type { City, Landmark } from "@shared/schema";
 
 const DB_NAME = 'gps-audio-guide-offline';
-const DB_VERSION = 1;
+const DB_VERSION = 2; // Bumped version for numeric synced index
 
 interface OfflinePackage {
   city: City;
