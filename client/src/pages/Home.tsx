@@ -165,6 +165,7 @@ export default function Home() {
   const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [capturedRouteImage, setCapturedRouteImage] = useState<string | null>(null);
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
+  const [showTourOnly, setShowTourOnly] = useState(false);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [aiRecommendation, setAiRecommendation] = useState<{
     itinerary: Array<{ landmarkId: string; order: number }>;
@@ -1924,6 +1925,8 @@ export default function Home() {
                 setIsCardMinimized(false);
                 setShowCruisePort(false);
               }}
+              showTourOnly={showTourOnly}
+              tourStopIds={tourStops.map(s => s.id)}
             />
             
             {/* Route View Button - next to zoom controls */}
@@ -1937,20 +1940,21 @@ export default function Home() {
                     <Button
                       variant="outline"
                       size="icon"
-                      onClick={captureRouteImage}
-                      disabled={isCapturingRoute}
-                      className="h-[30px] w-[30px] bg-white hover:bg-gray-100 border-2 border-gray-400 rounded-sm shadow-md"
+                      onClick={() => setShowTourOnly(!showTourOnly)}
+                      className={`h-[30px] w-[30px] border-2 rounded-sm shadow-md ${
+                        showTourOnly 
+                          ? 'bg-[hsl(14,85%,55%)] hover:bg-[hsl(14,85%,45%)] border-[hsl(14,85%,55%)]' 
+                          : 'bg-white hover:bg-gray-100 border-gray-400'
+                      }`}
                       data-testid="button-show-route"
                     >
-                      {isCapturingRoute ? (
-                        <Loader2 className="w-4 h-4 text-[hsl(14,85%,55%)] animate-spin" />
-                      ) : (
-                        <Route className="w-4 h-4 text-[hsl(14,85%,55%)]" />
-                      )}
+                      <Route className={`w-4 h-4 ${showTourOnly ? 'text-white' : 'text-[hsl(14,85%,55%)]'}`} />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="right">
-                    <p>{selectedLanguage === 'ko' ? '투어 경로 보기' : 'View Tour Route'}</p>
+                    <p>{selectedLanguage === 'ko' 
+                      ? (showTourOnly ? '모든 장소 보기' : '투어 장소만 보기') 
+                      : (showTourOnly ? 'Show All Places' : 'Show Tour Only')}</p>
                   </TooltipContent>
                 </Tooltip>
               </div>

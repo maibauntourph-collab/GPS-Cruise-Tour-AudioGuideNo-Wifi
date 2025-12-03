@@ -264,6 +264,8 @@ interface MapViewProps {
   selectedLandmark?: Landmark | null;
   onLandmarkSelect?: (landmark: Landmark) => void;
   onShowList?: () => void;
+  showTourOnly?: boolean;
+  tourStopIds?: string[];
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -767,6 +769,8 @@ export default function MapView({
   selectedLandmark,
   onLandmarkSelect,
   onShowList,
+  showTourOnly = false,
+  tourStopIds = [] as string[],
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
@@ -899,7 +903,9 @@ export default function MapView({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {landmarks.map((landmark, index) => {
+      {landmarks
+        .filter(landmark => !showTourOnly || tourStopIds.includes(landmark.id))
+        .map((landmark, index) => {
         const isActivity = landmark.category === 'Activity';
         const isRestaurant = landmark.category === 'Restaurant';
         const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
