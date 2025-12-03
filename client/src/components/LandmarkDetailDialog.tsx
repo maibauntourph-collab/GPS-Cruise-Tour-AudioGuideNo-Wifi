@@ -6,7 +6,7 @@ import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
 import { X, Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { audioService } from '@/lib/audioService';
 
 interface LandmarkDetailDialogProps {
@@ -30,6 +30,24 @@ export default function LandmarkDetailDialog({
 }: LandmarkDetailDialogProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
+
+  // Split text into sentences for highlighting
+  const sentences = useMemo(() => {
+    if (!landmark) return [];
+    const description = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
+    if (!description) return [];
+    return audioService.splitIntoSentences(description);
+  }, [landmark, selectedLanguage]);
+
+  // Reset sentence index when dialog closes or landmark changes
+  useEffect(() => {
+    if (!isOpen) {
+      setCurrentSentenceIndex(-1);
+      setIsPlaying(false);
+      audioService.stopSentences();
+    }
+  }, [isOpen, landmark]);
 
   if (!landmark) return null;
 
@@ -38,10 +56,21 @@ export default function LandmarkDetailDialog({
     if (!detailedDescription) return;
 
     if (isPlaying) {
-      audioService.stop();
+      audioService.stopSentences();
       setIsPlaying(false);
+      setCurrentSentenceIndex(-1);
     } else {
-      audioService.playText(detailedDescription, selectedLanguage, playbackRate, () => setIsPlaying(false));
+      // Use sentence-by-sentence playback with highlighting
+      audioService.playSentences(
+        detailedDescription, 
+        selectedLanguage, 
+        playbackRate, 
+        (index) => setCurrentSentenceIndex(index),
+        () => {
+          setIsPlaying(false);
+          setCurrentSentenceIndex(-1);
+        }
+      );
       setIsPlaying(true);
     }
   };
@@ -165,9 +194,37 @@ export default function LandmarkDetailDialog({
                       </select>
                     )}
                   </div>
-                  <p className="text-sm leading-relaxed">
-                    {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}
-                  </p>
+                  {/* Sentence-by-sentence text with memory pen highlighting */}
+                  <div className="text-sm leading-relaxed" data-testid="audio-text-container">
+                    {sentences.length > 0 ? (
+                      sentences.map((sentence, index) => {
+                        const isCurrentSentence = currentSentenceIndex === index;
+                        const isReadSentence = currentSentenceIndex > index && isPlaying;
+                        
+                        return (
+                          <span
+                            key={index}
+                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${
+                              isCurrentSentence 
+                                ? 'bg-yellow-300/50 font-medium shadow-sm dark:bg-yellow-400/40' 
+                                : isReadSentence
+                                ? 'bg-green-300/30 dark:bg-green-400/20'
+                                : 'bg-transparent'
+                            }`}
+                            style={{
+                              boxDecorationBreak: 'clone',
+                              WebkitBoxDecorationBreak: 'clone'
+                            }}
+                            data-testid={`sentence-${index}`}
+                          >
+                            {sentence}{' '}
+                          </span>
+                        );
+                      })
+                    ) : (
+                      <span>{getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}</span>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

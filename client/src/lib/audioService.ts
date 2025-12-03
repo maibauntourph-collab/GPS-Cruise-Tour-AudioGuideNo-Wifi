@@ -6,6 +6,11 @@ class AudioService {
   private currentRate: number = 1.0;
   private voices: SpeechSynthesisVoice[] = [];
   private playbackTimer: NodeJS.Timeout | null = null;
+  private sentenceIndex: number = 0;
+  private sentences: string[] = [];
+  private onSentenceChange: ((index: number) => void) | null = null;
+  private onSentenceEnd: (() => void) | null = null;
+  private isSentenceMode: boolean = false;
 
   constructor() {
     this.synthesis = window.speechSynthesis;
@@ -278,6 +283,119 @@ class AudioService {
 
   removeLandmark(landmarkId: string): void {
     this.spokenLandmarks.delete(landmarkId);
+  }
+
+  // Split text into sentences for sentence-by-sentence highlighting
+  splitIntoSentences(text: string): string[] {
+    // Split by common sentence-ending punctuation, keeping the punctuation
+    const sentenceRegex = /[^.!?。！？]+[.!?。！？]+/g;
+    const matches = text.match(sentenceRegex);
+    
+    if (!matches || matches.length === 0) {
+      // If no sentence endings found, return the whole text as one sentence
+      return [text.trim()];
+    }
+    
+    return matches.map(s => s.trim()).filter(s => s.length > 0);
+  }
+
+  // Play text sentence by sentence with highlighting callback
+  playSentences(
+    text: string, 
+    language: string = 'en', 
+    rate: number = 1.0, 
+    onSentenceChange?: (index: number) => void,
+    onEnd?: () => void
+  ) {
+    if (this.playbackTimer) {
+      clearTimeout(this.playbackTimer);
+      this.playbackTimer = null;
+    }
+    
+    this.synthesis.cancel();
+    this.currentUtterance = null;
+    
+    this.sentences = this.splitIntoSentences(text);
+    this.sentenceIndex = 0;
+    this.onSentenceChange = onSentenceChange || null;
+    this.onSentenceEnd = onEnd || null;
+    this.isSentenceMode = true;
+    this.currentRate = rate;
+    
+    // Notify first sentence
+    if (this.onSentenceChange) {
+      this.onSentenceChange(0);
+    }
+    
+    this.playNextSentence(language, rate);
+  }
+
+  private playNextSentence(language: string, rate: number) {
+    if (!this.isSentenceMode || this.sentenceIndex >= this.sentences.length) {
+      // All sentences done
+      this.isSentenceMode = false;
+      if (this.onSentenceEnd) {
+        this.onSentenceEnd();
+      }
+      this.onSentenceChange = null;
+      this.onSentenceEnd = null;
+      return;
+    }
+
+    const sentence = this.sentences[this.sentenceIndex];
+    const langCode = this.getLangCode(language);
+    
+    this.currentUtterance = new SpeechSynthesisUtterance(sentence);
+    this.currentUtterance.lang = langCode;
+    this.currentUtterance.rate = rate;
+    this.currentUtterance.pitch = 1.0;
+    this.currentUtterance.volume = 1.0;
+
+    // Set language-specific voice
+    const voice = this.getVoiceForLanguage(langCode);
+    if (voice) {
+      this.currentUtterance.voice = voice;
+    }
+
+    this.currentUtterance.onend = () => {
+      this.sentenceIndex++;
+      
+      // Notify next sentence if available
+      if (this.onSentenceChange && this.sentenceIndex < this.sentences.length) {
+        this.onSentenceChange(this.sentenceIndex);
+      }
+      
+      // Small delay between sentences for natural pacing
+      this.playbackTimer = setTimeout(() => {
+        this.playNextSentence(language, rate);
+      }, 150);
+    };
+
+    this.synthesis.speak(this.currentUtterance);
+  }
+
+  // Get current sentence index for highlighting
+  getCurrentSentenceIndex(): number {
+    return this.sentenceIndex;
+  }
+
+  // Get all sentences
+  getSentences(): string[] {
+    return this.sentences;
+  }
+
+  // Check if in sentence mode
+  isInSentenceMode(): boolean {
+    return this.isSentenceMode;
+  }
+
+  stopSentences() {
+    this.isSentenceMode = false;
+    this.sentences = [];
+    this.sentenceIndex = 0;
+    this.onSentenceChange = null;
+    this.onSentenceEnd = null;
+    this.stop();
   }
 }
 
