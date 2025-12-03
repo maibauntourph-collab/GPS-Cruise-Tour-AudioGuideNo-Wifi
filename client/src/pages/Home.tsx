@@ -19,7 +19,7 @@ import InstallPrompt from '@/components/InstallPrompt';
 import UpdatePrompt from '@/components/UpdatePrompt';
 import BottomSheet from '@/components/BottomSheet';
 import StartupDialog, { getSavedTourData, saveTourData, clearSavedTourData } from '@/components/StartupDialog';
-// AI Recommendation now opens ChatGPT website directly
+import AIRecommendDialog from '@/components/AIRecommendDialog';
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';
@@ -144,6 +144,7 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
+  const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<{
     itinerary: Array<{ landmarkId: string; order: number }>;
     explanation: string;
@@ -1341,7 +1342,29 @@ export default function Home() {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* AI Recommendation - Now opens ChatGPT website */}
+      {/* AI Recommendation Dialog - Using GPT-5.1 Thinking */}
+      <AIRecommendDialog
+        isOpen={showAIRecommend}
+        onClose={() => setShowAIRecommend(false)}
+        cityId={selectedCityId}
+        cityName={selectedCity?.name || ''}
+        landmarks={landmarks}
+        selectedLanguage={selectedLanguage}
+        userPosition={position}
+        onAddToTour={(recommendedLandmarks) => {
+          const newStops = recommendedLandmarks.filter(
+            l => !tourStops.some(s => s.id === l.id)
+          );
+          if (newStops.length > 0) {
+            setTourStops(prev => [...prev, ...newStops]);
+          }
+        }}
+        onSelectLandmark={(landmark) => {
+          setSelectedLandmark(landmark);
+          setFocusLocation({ lat: landmark.lat, lng: landmark.lng, zoom: 17 });
+          setShowAIRecommend(false);
+        }}
+      />
     </>
   );
 }

@@ -4,7 +4,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
 
-// Using gpt-4o for high-quality AI recommendations
+// Using gpt-5.1-thinking for advanced AI recommendations (released Nov 2025)
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Available OpenAI TTS voices with descriptions
@@ -184,13 +184,13 @@ Respond in this exact JSON format:
 }`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-5.1-thinking",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
       ],
       response_format: { type: "json_object" },
-      max_tokens: 2048
+      max_tokens: 4096
     });
 
     const result = JSON.parse(response.choices[0].message.content || "{}");
