@@ -571,8 +571,8 @@ export default function Home() {
   };
 
   const handleAiRecommendation = () => {
-    // Open ChatGPT website for AI tour recommendations
-    window.open('https://chatgpt.com/', '_blank', 'noopener,noreferrer');
+    // Open AI recommendation dialog using GPT-5.1 Thinking with database landmarks
+    setShowAIRecommend(true);
   };
 
   // Handler for toggle with scroll to first item
