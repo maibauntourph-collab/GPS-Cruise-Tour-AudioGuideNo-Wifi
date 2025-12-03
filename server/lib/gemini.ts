@@ -1,14 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 import { Landmark } from "@shared/schema";
 
-// Using Replit's AI Integrations for Gemini - no API key required
-// Charges are billed to your Replit credits
+// Using user's own Gemini API key for Gemini Pro
 const ai = new GoogleGenAI({
-  apiKey: process.env.AI_INTEGRATIONS_GEMINI_API_KEY,
-  httpOptions: {
-    apiVersion: "",
-    baseUrl: process.env.AI_INTEGRATIONS_GEMINI_BASE_URL,
-  },
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
 export interface TourRecommendation {
@@ -88,7 +83,7 @@ Respond with ONLY this exact JSON format (no other text):
 }`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-1.5-pro",
       contents: userPrompt,
     });
 
