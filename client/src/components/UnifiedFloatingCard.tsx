@@ -1394,6 +1394,23 @@ export default function UnifiedFloatingCard({
                               </div>
                             )}
                             
+                            {/* Start/End Point Info */}
+                            <div className="flex items-center justify-between gap-2 mb-2 text-xs">
+                              <div className="flex items-center gap-1.5 bg-green-500/10 border border-green-500/30 rounded-md px-2 py-1">
+                                <div className="w-2 h-2 rounded-full bg-green-500" />
+                                <span className="text-green-700 dark:text-green-400 font-medium">
+                                  {selectedLanguage === 'ko' ? '출발' : 'Start'}: {formatTime(startTime)}
+                                </span>
+                              </div>
+                              <div className="flex-1 border-t border-dashed border-muted-foreground/30 mx-1" />
+                              <div className={`flex items-center gap-1.5 rounded-md px-2 py-1 ${isLateEnd ? 'bg-red-500/10 border border-red-500/30' : 'bg-blue-500/10 border border-blue-500/30'}`}>
+                                <div className={`w-2 h-2 rounded-full ${isLateEnd ? 'bg-red-500' : 'bg-blue-500'}`} />
+                                <span className={`font-medium ${isLateEnd ? 'text-red-600 dark:text-red-400' : 'text-blue-700 dark:text-blue-400'}`}>
+                                  {selectedLanguage === 'ko' ? '도착' : 'End'}: {formatTime(endTime)}
+                                </span>
+                              </div>
+                            </div>
+                            
                             <div className="flex items-center justify-between gap-4">
                               <div className="flex items-center gap-3">
                                 <div className="flex items-center gap-1.5">
@@ -1406,7 +1423,12 @@ export default function UnifiedFloatingCard({
                                 <div className="flex items-center gap-1.5">
                                   <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '소요' : 'Time'}</span>
                                   <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
-                                    {travelMinutes}min
+                                    {travelMinutes >= 60 
+                                      ? (selectedLanguage === 'ko' 
+                                          ? `${Math.floor(travelMinutes / 60)}시간 ${travelMinutes % 60}분`
+                                          : `${Math.floor(travelMinutes / 60)}h ${travelMinutes % 60}m`)
+                                      : (selectedLanguage === 'ko' ? `${travelMinutes}분` : `${travelMinutes}min`)
+                                    }
                                   </span>
                                 </div>
                               </div>
@@ -1414,18 +1436,18 @@ export default function UnifiedFloatingCard({
                                 <Clock className="w-3.5 h-3.5" />
                                 <span className="text-xs font-medium">{selectedLanguage === 'ko' ? '전체' : 'Total'}</span>
                                 <span className="text-sm font-bold">
-                                  {hours > 0 ? `${hours}h ${mins}m` : `${totalMinutes}min`}
+                                  {hours > 0 
+                                    ? (selectedLanguage === 'ko' ? `${hours}시간 ${mins}분` : `${hours}h ${mins}m`)
+                                    : (selectedLanguage === 'ko' ? `${totalMinutes}분` : `${totalMinutes}min`)
+                                  }
                                 </span>
                               </div>
                             </div>
                             
-                            {/* Estimated End Time */}
-                            <div className="mt-1.5 flex items-center justify-between">
-                              <span className="text-xs text-muted-foreground">
+                            {/* Adjustable stay time note */}
+                            <div className="mt-1.5 text-center">
+                              <span className="text-[10px] text-muted-foreground">
                                 * {selectedLanguage === 'ko' ? '장소별 체류시간 조정 가능' : 'Stay time adjustable per stop'}
-                              </span>
-                              <span className={`text-xs font-medium ${isLateEnd ? 'text-red-500' : 'text-muted-foreground'}`}>
-                                {selectedLanguage === 'ko' ? '종료' : 'End'}: {formatTime(endTime)}
                               </span>
                             </div>
                           </>
@@ -1540,6 +1562,13 @@ export default function UnifiedFloatingCard({
                                   {(() => {
                                     const segmentTrafficInfo = getTrafficInfo(selectedLanguage, departureTime);
                                     const adjustedSegmentDuration = Math.ceil(tourRouteInfo.segments[index].duration * segmentTrafficInfo.multiplier / 60);
+                                    const segHours = Math.floor(adjustedSegmentDuration / 60);
+                                    const segMins = adjustedSegmentDuration % 60;
+                                    const timeDisplay = adjustedSegmentDuration >= 60
+                                      ? (selectedLanguage === 'ko' 
+                                          ? `${segHours}시간 ${segMins}분`
+                                          : `${segHours}h ${segMins}m`)
+                                      : (selectedLanguage === 'ko' ? `${adjustedSegmentDuration}분` : `${adjustedSegmentDuration}min`);
                                     return (
                                       <div className="flex items-center gap-1.5 text-xs bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/20 rounded-md px-2 py-0.5">
                                         <span className="text-[hsl(14,85%,55%)] font-bold text-sm">↓</span>
@@ -1548,7 +1577,7 @@ export default function UnifiedFloatingCard({
                                         </span>
                                         <span className="text-muted-foreground">•</span>
                                         <span className="font-medium text-[hsl(14,85%,55%)]">
-                                          {adjustedSegmentDuration}min
+                                          {timeDisplay}
                                         </span>
                                       </div>
                                     );

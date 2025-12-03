@@ -884,6 +884,65 @@ export default function Home() {
               </TooltipContent>
             </Tooltip>
             <PopoverContent className="w-80 p-2 z-[9999] max-h-[70vh] overflow-y-auto" align="start">
+              {/* All Settings Complete Banner */}
+              {startingPoint && endPoint && departureTime && (
+                <div className="mb-3 p-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                      <span className="text-white text-sm">✓</span>
+                    </div>
+                    <span className="font-semibold text-green-700 dark:text-green-400">
+                      {selectedLanguage === 'ko' ? '설정 완료!' : 'Setup Complete!'}
+                    </span>
+                  </div>
+                  <div className="space-y-1 text-xs mb-3">
+                    <div className="flex items-center gap-2">
+                      <Circle className="w-3 h-3 fill-green-500 text-green-500" />
+                      <span className="text-muted-foreground truncate">{getStartingPointName(startingPoint, selectedLanguage)}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Flag className="w-3 h-3 fill-red-500 text-red-500" />
+                      <span className="text-muted-foreground truncate">{getStartingPointName(endPoint, selectedLanguage)}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-3 h-3 text-amber-500" />
+                      <span className="text-muted-foreground">
+                        {departureTime.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', { 
+                          hour: '2-digit', 
+                          minute: '2-digit',
+                          weekday: 'short'
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      className="flex-1 bg-green-500 hover:bg-green-600 text-white"
+                      onClick={() => setIsStartingPointPopoverOpen(false)}
+                      data-testid="button-setup-done"
+                    >
+                      {selectedLanguage === 'ko' ? '완료' : 'Done'}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 text-red-500 border-red-300 hover:bg-red-50"
+                      onClick={() => {
+                        setStartingPoint(null);
+                        setEndPoint(null);
+                        setDepartureTime(null);
+                        setIsSelectingHotelOnMap(false);
+                        setIsSelectingEndPointOnMap(false);
+                      }}
+                      data-testid="button-setup-reset"
+                    >
+                      {selectedLanguage === 'ko' ? '초기화' : 'Reset'}
+                    </Button>
+                  </div>
+                </div>
+              )}
+              
               <Tabs defaultValue="start" value={pointSelectionMode} onValueChange={(v) => setPointSelectionMode(v as 'start' | 'end' | 'time')}>
                 <TabsList className="grid w-full grid-cols-3 mb-2">
                   <TabsTrigger value="start" className="gap-1 px-2" data-testid="tab-start-point">

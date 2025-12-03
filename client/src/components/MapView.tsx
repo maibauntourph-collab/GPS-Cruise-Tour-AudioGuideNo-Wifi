@@ -288,23 +288,43 @@ export interface SegmentInfo {
   midpoint: [number, number];
 }
 
+// Calculate distance between two coordinates using Haversine formula
+function calculateDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371000; // Earth's radius in meters
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c; // Distance in meters
+}
+
+// Estimate walking time (average walking speed ~5 km/h = 83.33 m/min)
+// Add 20% for realistic urban walking (stops, crossings, etc.)
+function estimateWalkingTime(distanceMeters: number): number {
+  const walkingSpeedMperMin = 83.33;
+  return (distanceMeters / walkingSpeedMperMin) * 1.2; // in minutes
+}
+
 function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick, startingPoint, endPoint, selectedLanguage = 'en', onSegmentInfoUpdate }: TourRoutingMachineProps) {
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
   const segmentMarkersRef = useRef<L.Marker[]>([]);
+  const fallbackPolylineRef = useRef<L.Polyline | null>(null);
+  const osrmFailedRef = useRef<boolean>(false);
+  const osrmTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const safeRemoveControl = useCallback((control: L.Routing.Control) => {
     if (!control || !map) return;
     
     try {
-      // Clear waypoints first to prevent routing errors
       try {
         control.setWaypoints([]);
       } catch (e) {
         console.debug('Waypoint clearing handled:', e);
       }
       
-      // Remove the control from the map
       try {
         if ((map as any)._loaded && (control as any)._map) {
           map.removeControl(control);
@@ -317,7 +337,6 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
     }
   }, [map]);
 
-  // Clear segment markers
   const clearSegmentMarkers = useCallback(() => {
     segmentMarkersRef.current.forEach(marker => {
       try {
@@ -329,12 +348,139 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
     segmentMarkersRef.current = [];
   }, []);
 
+  const clearFallbackPolyline = useCallback(() => {
+    if (fallbackPolylineRef.current) {
+      try {
+        fallbackPolylineRef.current.remove();
+      } catch (e) {
+        console.debug('Fallback polyline removal handled:', e);
+      }
+      fallbackPolylineRef.current = null;
+    }
+  }, []);
+
+  // Create fallback route with straight lines when OSRM fails
+  const createFallbackRoute = useCallback((waypoints: L.LatLng[]) => {
+    if (!map || waypoints.length < 2) return;
+    
+    clearFallbackPolyline();
+    clearSegmentMarkers();
+
+    // Create polyline connecting all waypoints
+    const polyline = L.polyline(waypoints, {
+      color: 'hsl(14, 85%, 55%)',
+      weight: 4,
+      opacity: 0.8,
+      dashArray: '10, 10', // Dashed line to indicate it's an estimate
+    });
+    polyline.addTo(map);
+    fallbackPolylineRef.current = polyline;
+
+    // Calculate segments and create markers
+    const segments: SegmentInfo[] = [];
+    let totalDistance = 0;
+    let totalDuration = 0;
+
+    for (let i = 0; i < waypoints.length - 1; i++) {
+      const start = waypoints[i];
+      const end = waypoints[i + 1];
+      
+      const distance = calculateDistance(start.lat, start.lng, end.lat, end.lng);
+      const duration = estimateWalkingTime(distance) * 60; // Convert to seconds
+      
+      totalDistance += distance;
+      totalDuration += duration;
+
+      // Calculate midpoint for marker
+      const midLat = (start.lat + end.lat) / 2;
+      const midLng = (start.lng + end.lng) / 2;
+
+      segments.push({
+        fromIndex: i,
+        toIndex: i + 1,
+        distance: distance,
+        duration: duration,
+        midpoint: [midLat, midLng]
+      });
+
+      // Create segment info marker
+      const distKm = (distance / 1000).toFixed(1);
+      const durMin = Math.round(duration / 60);
+      const durHours = Math.floor(durMin / 60);
+      const durMinsRemainder = durMin % 60;
+      const timeDisplay = durMin >= 60
+        ? (selectedLanguage === 'ko' 
+            ? `${durHours}시간 ${durMinsRemainder}분`
+            : `${durHours}h ${durMinsRemainder}m`)
+        : (selectedLanguage === 'ko' ? `${durMin}분` : `${durMin}min`);
+
+      const marker = L.marker([midLat, midLng], {
+        icon: L.divIcon({
+          className: 'segment-info-marker',
+          html: `<div style="
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid hsl(14, 85%, 55%);
+            border-radius: 8px;
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: hsl(14, 85%, 45%);
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          ">
+            <span>${distKm}km</span>
+            <span style="color: #666;">•</span>
+            <span>${timeDisplay}</span>
+          </div>`,
+          iconSize: [100, 28],
+          iconAnchor: [50, 14],
+        }),
+        interactive: false,
+      });
+
+      marker.addTo(map);
+      segmentMarkersRef.current.push(marker);
+    }
+
+    // Notify parent components
+    if (onSegmentInfoUpdate) {
+      onSegmentInfoUpdate(segments);
+    }
+
+    if (onTourRouteFound) {
+      onTourRouteFound({
+        summary: { totalDistance, totalTime: totalDuration },
+        coordinates: waypoints.map(wp => ({ lat: wp.lat, lng: wp.lng })),
+        legs: segments.map(seg => ({
+          distance: seg.distance,
+          time: seg.duration
+        })),
+        isFallback: true
+      });
+    }
+
+    // Add click event to polyline
+    if (onTourRouteClick) {
+      polyline.on('click', () => {
+        onTourRouteClick();
+      });
+    }
+  }, [map, selectedLanguage, onSegmentInfoUpdate, onTourRouteFound, onTourRouteClick, clearFallbackPolyline, clearSegmentMarkers]);
+
   useEffect(() => {
     if (!map) return;
     
-    // Need at least 1 tour stop (or starting point + 1 stop) to show route
     const hasStartingPoint = startingPoint && startingPoint.lat && startingPoint.lng;
     const minStopsNeeded = hasStartingPoint ? 1 : 2;
+    
+    // Clear timeout on cleanup
+    if (osrmTimeoutRef.current) {
+      clearTimeout(osrmTimeoutRef.current);
+      osrmTimeoutRef.current = null;
+    }
     
     // Don't show tour routing when there's an active navigation route
     if (tourStops.length < minStopsNeeded || activeRoute) {
@@ -343,6 +489,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
         routingControlRef.current = null;
       }
       clearSegmentMarkers();
+      clearFallbackPolyline();
       if (onSegmentInfoUpdate) {
         onSegmentInfoUpdate([]);
       }
@@ -354,19 +501,28 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       routingControlRef.current = null;
     }
     clearSegmentMarkers();
+    clearFallbackPolyline();
 
-    // Build waypoints: starting point first (if set), then tour stops, then end point (if set)
+    // Build waypoints
     const waypoints: L.LatLng[] = [];
     if (hasStartingPoint) {
       waypoints.push(L.latLng(startingPoint.lat, startingPoint.lng));
     }
     tourStops.forEach(stop => waypoints.push(L.latLng(stop.lat, stop.lng)));
     
-    // Add end point if set
     const hasEndPoint = endPoint && endPoint.lat && endPoint.lng;
     if (hasEndPoint) {
       waypoints.push(L.latLng(endPoint.lat, endPoint.lng));
     }
+
+    // Set a timeout for OSRM - if it doesn't respond in 5 seconds, use fallback
+    osrmTimeoutRef.current = setTimeout(() => {
+      if (!osrmFailedRef.current) {
+        console.log('OSRM timeout - using fallback route');
+        osrmFailedRef.current = true;
+        createFallbackRoute(waypoints);
+      }
+    }, 5000);
 
     const control = L.Routing.control({
       waypoints: waypoints,
@@ -383,6 +539,14 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
     } as any);
 
     control.on('routesfound', function (e) {
+      // Clear timeout since we got a response
+      if (osrmTimeoutRef.current) {
+        clearTimeout(osrmTimeoutRef.current);
+        osrmTimeoutRef.current = null;
+      }
+      osrmFailedRef.current = false;
+      clearFallbackPolyline();
+
       const routes = e.routes;
       if (routes && routes[0]) {
         const route = routes[0];
@@ -391,21 +555,17 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
           onTourRouteFound(route);
         }
         
-        // Extract segment info from route legs
         if (route.instructions && route.coordinates) {
           const segments: SegmentInfo[] = [];
           const waypointIndices = route.waypointIndices || [];
           
-          // Calculate segments between waypoints
           for (let i = 0; i < waypointIndices.length - 1; i++) {
             const startIdx = waypointIndices[i];
             const endIdx = waypointIndices[i + 1];
             
-            // Get midpoint of this segment
             const midIdx = Math.floor((startIdx + endIdx) / 2);
             const midCoord = route.coordinates[midIdx];
             
-            // Calculate segment distance and duration from instructions
             let segDistance = 0;
             let segDuration = 0;
             
@@ -427,11 +587,17 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
             }
           }
           
-          // Create segment info markers on the map
           clearSegmentMarkers();
-          segments.forEach((seg, idx) => {
+          segments.forEach((seg) => {
             const distKm = (seg.distance / 1000).toFixed(1);
             const durMin = Math.round(seg.duration / 60);
+            const durHours = Math.floor(durMin / 60);
+            const durMinsRemainder = durMin % 60;
+            const timeDisplay = durMin >= 60
+              ? (selectedLanguage === 'ko' 
+                  ? `${durHours}시간 ${durMinsRemainder}분`
+                  : `${durHours}h ${durMinsRemainder}m`)
+              : (selectedLanguage === 'ko' ? `${durMin}분` : `${durMin}min`);
             
             const marker = L.marker(seg.midpoint, {
               icon: L.divIcon({
@@ -452,10 +618,10 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
                 ">
                   <span>${distKm}km</span>
                   <span style="color: #666;">•</span>
-                  <span>${durMin}${selectedLanguage === 'ko' ? '분' : 'min'}</span>
+                  <span>${timeDisplay}</span>
                 </div>`,
-                iconSize: [80, 28],
-                iconAnchor: [40, 14],
+                iconSize: [100, 28],
+                iconAnchor: [50, 14],
               }),
               interactive: false,
             });
@@ -469,7 +635,6 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
           }
         }
         
-        // Add click event to the route line
         if (onTourRouteClick && (control as any)._line) {
           (control as any)._line.on('click', () => {
             onTourRouteClick();
@@ -478,21 +643,38 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       }
     });
 
+    // Handle routing errors - use fallback
+    control.on('routingerror', function (e: any) {
+      console.log('OSRM routing error, using fallback:', e.error?.message || 'Unknown error');
+      if (osrmTimeoutRef.current) {
+        clearTimeout(osrmTimeoutRef.current);
+        osrmTimeoutRef.current = null;
+      }
+      osrmFailedRef.current = true;
+      createFallbackRoute(waypoints);
+    });
+
     try {
       control.addTo(map);
       routingControlRef.current = control;
     } catch (e) {
-      console.warn('Failed to add tour routing control:', e);
+      console.warn('Failed to add tour routing control, using fallback:', e);
+      createFallbackRoute(waypoints);
     }
 
     return () => {
+      if (osrmTimeoutRef.current) {
+        clearTimeout(osrmTimeoutRef.current);
+        osrmTimeoutRef.current = null;
+      }
       if (routingControlRef.current) {
         safeRemoveControl(routingControlRef.current);
         routingControlRef.current = null;
       }
       clearSegmentMarkers();
+      clearFallbackPolyline();
     };
-  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl, startingPoint, endPoint, selectedLanguage, clearSegmentMarkers, onSegmentInfoUpdate]);
+  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl, startingPoint, endPoint, selectedLanguage, clearSegmentMarkers, onSegmentInfoUpdate, createFallbackRoute, clearFallbackPolyline]);
 
   return null;
 }
