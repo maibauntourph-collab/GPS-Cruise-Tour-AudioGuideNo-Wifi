@@ -971,6 +971,33 @@ export default function Home() {
                         </div>
                       )}
                       
+                      {/* Cruise Terminals */}
+                      {cityPoints.cruiseTerminals.length > 0 && (
+                        <div className="space-y-1">
+                          <p className="text-xs text-muted-foreground font-medium">{t('cruiseTerminal', selectedLanguage)}</p>
+                          {cityPoints.cruiseTerminals.map((terminal) => (
+                            <Button
+                              key={terminal.id}
+                              variant={startingPoint?.id === terminal.id ? "default" : "outline"}
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                setStartingPoint(terminal);
+                                setIsStartingPointPopoverOpen(false);
+                                toast({
+                                  title: t('startingPointSet', selectedLanguage),
+                                  description: getStartingPointName(terminal, selectedLanguage)
+                                });
+                              }}
+                              data-testid={`button-starting-terminal-${terminal.id}`}
+                            >
+                              <Ship className="w-4 h-4 text-teal-500" />
+                              <span className="truncate">{getStartingPointName(terminal, selectedLanguage)}</span>
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+                      
                       {/* Train Stations */}
                       {cityPoints.trainStations.length > 0 && (
                         <div className="space-y-1">
