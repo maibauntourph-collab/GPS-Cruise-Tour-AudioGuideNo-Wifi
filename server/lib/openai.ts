@@ -1,8 +1,94 @@
 import OpenAI from "openai";
 import { Landmark } from "@shared/schema";
+import * as fs from "fs";
+import * as path from "path";
+import * as crypto from "crypto";
 
 // Using gpt-4o-mini for cost-effective AI recommendations
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// Voice mappings for different languages
+const VOICE_MAP: { [key: string]: string } = {
+  'en': 'alloy',     // Neutral English voice
+  'ko': 'nova',      // Soft, natural voice good for Korean
+  'es': 'shimmer',   // Warm voice for Spanish
+  'fr': 'nova',      // Natural French voice
+  'de': 'onyx',      // Clear German voice
+  'it': 'shimmer',   // Warm Italian voice
+  'zh': 'nova',      // Soft Chinese voice
+  'ja': 'alloy',     // Neutral Japanese voice
+  'pt': 'shimmer',   // Warm Portuguese voice
+  'ru': 'onyx',      // Deep Russian voice
+};
+
+export interface AudioGenerationResult {
+  audioUrl: string;
+  duration: number;
+  sizeBytes: number;
+  checksum: string;
+  voiceId: string;
+}
+
+// Generate MP3 audio using OpenAI TTS
+export async function generateLandmarkAudio(
+  landmarkId: string,
+  text: string,
+  language: string = 'en'
+): Promise<AudioGenerationResult> {
+  try {
+    // Select voice based on language
+    const voice = VOICE_MAP[language] || 'alloy';
+    
+    // Generate audio using OpenAI TTS
+    const mp3Response = await openai.audio.speech.create({
+      model: "tts-1",  // Use tts-1 for speed, tts-1-hd for quality
+      voice: voice as any,
+      input: text,
+      response_format: "mp3",
+      speed: 1.0
+    });
+
+    // Get audio buffer
+    const buffer = Buffer.from(await mp3Response.arrayBuffer());
+    
+    // Calculate checksum
+    const checksum = crypto.createHash('md5').update(buffer).digest('hex');
+    
+    // Create uploads directory if it doesn't exist
+    const uploadsDir = path.join(process.cwd(), 'uploads', 'audio');
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+    
+    // Save file with unique name
+    const fileName = `${landmarkId}-${language}-${checksum.slice(0, 8)}.mp3`;
+    const filePath = path.join(uploadsDir, fileName);
+    fs.writeFileSync(filePath, buffer);
+    
+    // Estimate duration (rough estimate: ~150 chars per second for speech)
+    const duration = Math.ceil(text.length / 15); // seconds
+    
+    return {
+      audioUrl: `/uploads/audio/${fileName}`,
+      duration,
+      sizeBytes: buffer.length,
+      checksum,
+      voiceId: voice
+    };
+  } catch (error: any) {
+    console.error('Failed to generate audio:', error);
+    
+    if (error?.status === 429 || error?.code === 'rate_limit_exceeded') {
+      throw new Error('Audio generation rate limit exceeded. Please try again later.');
+    }
+    
+    if (error?.status === 401 || error?.code === 'invalid_api_key') {
+      throw new Error('Audio service authentication failed.');
+    }
+    
+    throw new Error('Failed to generate audio');
+  }
+}
 
 export interface TourRecommendation {
   itinerary: Array<{

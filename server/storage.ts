@@ -1,7 +1,7 @@
-import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark } from "@shared/schema";
+import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio } from "@shared/schema";
 import { db } from "./db";
-import { visitedLandmarks } from "@shared/schema";
-import { eq, count, and } from "drizzle-orm";
+import { visitedLandmarks, landmarkAudio as landmarkAudioTable } from "@shared/schema";
+import { eq, count, and, sql } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
 
 export interface IStorage {
@@ -14,6 +14,11 @@ export interface IStorage {
   getVisitedLandmarks(sessionId?: string): Promise<VisitedLandmark[]>;
   isLandmarkVisited(landmarkId: string, sessionId?: string): Promise<boolean>;
   getVisitedCount(sessionId?: string): Promise<number>;
+  // Audio methods
+  getAudio(landmarkId: string, language: string): Promise<LandmarkAudio | undefined>;
+  getAudioByCity(cityId: string): Promise<LandmarkAudio[]>;
+  saveAudio(audio: InsertLandmarkAudio): Promise<LandmarkAudio>;
+  deleteAudio(landmarkId: string, language: string): Promise<void>;
 }
 
 const CITIES: City[] = [
@@ -7799,6 +7804,60 @@ export class MemStorage implements IStorage {
       .select({ count: count() })
       .from(visitedLandmarks);
     return result[0]?.count || 0;
+  }
+
+  // Audio methods - using database
+  async getAudio(landmarkId: string, language: string): Promise<LandmarkAudio | undefined> {
+    const [audio] = await db
+      .select()
+      .from(landmarkAudioTable)
+      .where(and(
+        eq(landmarkAudioTable.landmarkId, landmarkId),
+        eq(landmarkAudioTable.language, language)
+      ));
+    return audio;
+  }
+
+  async getAudioByCity(cityId: string): Promise<LandmarkAudio[]> {
+    const landmarks = await this.getLandmarks(cityId);
+    const landmarkIds = landmarks.map(l => l.id);
+    
+    if (landmarkIds.length === 0) return [];
+    
+    const audioList = await db
+      .select()
+      .from(landmarkAudioTable)
+      .where(sql`${landmarkAudioTable.landmarkId} = ANY(${landmarkIds})`);
+    
+    return audioList;
+  }
+
+  async saveAudio(audio: InsertLandmarkAudio): Promise<LandmarkAudio> {
+    const [saved] = await db
+      .insert(landmarkAudioTable)
+      .values(audio)
+      .onConflictDoUpdate({
+        target: [landmarkAudioTable.landmarkId, landmarkAudioTable.language],
+        set: {
+          audioUrl: audio.audioUrl,
+          duration: audio.duration,
+          sizeBytes: audio.sizeBytes,
+          checksum: audio.checksum,
+          voiceId: audio.voiceId,
+          updatedAt: new Date()
+        }
+      })
+      .returning();
+    return saved;
+  }
+
+  async deleteAudio(landmarkId: string, language: string): Promise<void> {
+    await db
+      .delete(landmarkAudioTable)
+      .where(and(
+        eq(landmarkAudioTable.landmarkId, landmarkId),
+        eq(landmarkAudioTable.language, language)
+      ));
   }
 }
 

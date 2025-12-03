@@ -204,6 +204,24 @@ export const visitedLandmarks = pgTable("visited_landmarks", {
   uniqueSessionLandmark: unique().on(table.sessionId, table.landmarkId),
 }));
 
+// Landmark Audio table for offline MP3 files
+export const landmarkAudio = pgTable("landmark_audio", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  landmarkId: varchar("landmark_id").notNull(),
+  language: varchar("language", { length: 10 }).notNull(), // 'en', 'ko', 'es', etc.
+  audioUrl: varchar("audio_url").notNull(), // Path to MP3 file
+  duration: integer("duration"), // Duration in seconds
+  sizeBytes: integer("size_bytes"), // File size in bytes
+  format: varchar("format", { length: 20 }).default("audio/mpeg"),
+  checksum: varchar("checksum", { length: 64 }), // MD5 or SHA256 for cache validation
+  voiceId: varchar("voice_id", { length: 50 }), // OpenAI voice used (alloy, echo, etc.)
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  // Unique constraint: one audio per landmark per language
+  uniqueLandmarkLanguage: unique().on(table.landmarkId, table.language),
+}));
+
 // Relations
 export const citiesRelations = relations(cities, ({ many }) => ({
   landmarks: many(landmarks),
@@ -217,6 +235,13 @@ export const landmarksRelations = relations(landmarks, ({ one }) => ({
 }));
 
 export const visitedLandmarksRelations = relations(visitedLandmarks, () => ({}));
+
+export const landmarkAudioRelations = relations(landmarkAudio, ({ one }) => ({
+  landmark: one(landmarks, {
+    fields: [landmarkAudio.landmarkId],
+    references: [landmarks.id],
+  }),
+}));
 
 // Insert schemas
 export const insertCitySchema = createInsertSchema(cities).omit({
@@ -234,9 +259,17 @@ export const insertVisitedLandmarkSchema = createInsertSchema(visitedLandmarks).
   visitedAt: true,
 });
 
+export const insertLandmarkAudioSchema = createInsertSchema(landmarkAudio).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type InsertCity = z.infer<typeof insertCitySchema>;
 export type InsertLandmark = z.infer<typeof insertLandmarkSchema>;
 export type InsertVisitedLandmark = z.infer<typeof insertVisitedLandmarkSchema>;
+export type InsertLandmarkAudio = z.infer<typeof insertLandmarkAudioSchema>;
 export type VisitedLandmark = typeof visitedLandmarks.$inferSelect;
+export type LandmarkAudio = typeof landmarkAudio.$inferSelect;
 export type DbCity = typeof cities.$inferSelect;
 export type DbLandmark = typeof landmarks.$inferSelect;
