@@ -144,7 +144,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     previous: 'Previous',
     next: 'Next',
     noLandmarksFound: 'No landmarks found with current filters',
-    noTransportOptions: 'No transportation options available'
+    noTransportOptions: 'No transportation options available',
+    latitude: 'Latitude',
+    longitude: 'Longitude',
+    openInGoogleMaps: 'Open in Google Maps'
   },
   ko: {
     landmarks: '명소',
@@ -263,7 +266,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     previous: '이전',
     next: '다음',
     noLandmarksFound: '현재 필터로 찾은 명소가 없습니다',
-    noTransportOptions: '이용 가능한 교통편이 없습니다'
+    noTransportOptions: '이용 가능한 교통편이 없습니다',
+    latitude: '위도',
+    longitude: '경도',
+    openInGoogleMaps: '구글 지도에서 열기'
   },
   es: {
     landmarks: 'Monumentos',
@@ -602,7 +608,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     previous: 'Precedente',
     next: 'Successivo',
     noLandmarksFound: 'Nessun punto di interesse trovato con i filtri attuali',
-    noTransportOptions: 'Nessuna opzione di trasporto disponibile'
+    noTransportOptions: 'Nessuna opzione di trasporto disponibile',
+    latitude: 'Latitudine',
+    longitude: 'Longitudine',
+    openInGoogleMaps: 'Apri in Google Maps'
   },
   zh: {
     landmarks: '地标',
@@ -681,7 +690,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     bookOnMyRealTrip: '在MyRealTrip预订',
     bookOnTripCom: '在Trip.com预订',
     bookNow: '立即预订',
-    tourEmptyState: '从地图中选择地标或使用下方的列表选项卡'
+    tourEmptyState: '从地图中选择地标或使用下方的列表选项卡',
+    latitude: '纬度',
+    longitude: '经度',
+    openInGoogleMaps: '在谷歌地图中打开'
   },
   ja: {
     landmarks: 'ランドマーク',
@@ -760,7 +772,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     bookOnMyRealTrip: 'MyRealTripで予約',
     bookOnTripCom: 'Trip.comで予約',
     bookNow: '今すぐ予約',
-    tourEmptyState: '地図からランドマークを選択するか、下のリストタブを使用してください'
+    tourEmptyState: '地図からランドマークを選択するか、下のリストタブを使用してください',
+    latitude: '緯度',
+    longitude: '経度',
+    openInGoogleMaps: 'Googleマップで開く'
   },
   pt: {
     landmarks: 'Monumentos',

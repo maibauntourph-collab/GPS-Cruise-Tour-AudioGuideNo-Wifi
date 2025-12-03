@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { X, Navigation, MapPinned, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard } from 'lucide-react';
+import { X, Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard } from 'lucide-react';
 import { useState } from 'react';
 import { audioService } from '@/lib/audioService';
 
@@ -236,6 +236,36 @@ export default function LandmarkDetailDialog({
           {/* Details Tab - Booking & Additional Info */}
           <TabsContent value="details" className="flex-1 overflow-y-auto p-4 m-0">
             <div className="max-w-2xl mx-auto space-y-3">
+              {/* GPS Coordinates Section */}
+              <div className="p-3 border rounded-lg">
+                <h5 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5" />
+                  {t('location', selectedLanguage)}
+                </h5>
+                <div className="space-y-1.5 text-xs">
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground">{t('latitude', selectedLanguage)}:</span>
+                    <span className="font-mono" data-testid="text-landmark-latitude">{landmark.lat.toFixed(6)}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground">{t('longitude', selectedLanguage)}:</span>
+                    <span className="font-mono" data-testid="text-landmark-longitude">{landmark.lng.toFixed(6)}</span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full mt-2 gap-2 text-xs h-8"
+                    onClick={() => {
+                      window.open(`https://www.google.com/maps?q=${landmark.lat},${landmark.lng}`, '_blank', 'noopener,noreferrer');
+                    }}
+                    data-testid="button-open-google-maps"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    {t('openInGoogleMaps', selectedLanguage)}
+                  </Button>
+                </div>
+              </div>
+
               {/* Ticket & Tour Booking - for Activities and Landmarks */}
               {(landmark.category === 'Activity' || (landmark.category !== 'Restaurant' && landmark.category !== 'Gift Shop' && landmark.category !== 'Shop')) ? (
                 <div className="p-3 border rounded-lg">
