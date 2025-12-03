@@ -125,10 +125,28 @@ export default function AIRecommendDialog({
   const getRecommendedLandmarks = (): Landmark[] => {
     if (!recommendation) return [];
     
-    return recommendation.itinerary
+    const allRecommended = recommendation.itinerary
       .sort((a, b) => a.order - b.order)
       .map(item => landmarks.find(l => l.id === item.landmarkId))
       .filter((l): l is Landmark => l !== undefined);
+    
+    // Apply category filter to results
+    if (recommendationType === 'all') {
+      return allRecommended;
+    }
+    
+    return allRecommended.filter(l => {
+      switch (recommendationType) {
+        case 'landmarks':
+          return l.category !== 'Activity' && l.category !== 'Restaurant' && l.category !== 'Gift Shop';
+        case 'restaurants':
+          return l.category === 'Restaurant';
+        case 'activities':
+          return l.category === 'Activity';
+        default:
+          return true;
+      }
+    });
   };
 
   const handleAddAllToTour = () => {
