@@ -23,6 +23,7 @@ class AudioService {
   private onSentenceChange: ((index: number) => void) | null = null;
   private onSentenceEnd: (() => void) | null = null;
   private isSentenceMode: boolean = false;
+  private selectedVoicesByLanguage: Map<string, string> = new Map(); // language -> voice name
   
   // MP3 Audio properties
   private audioElement: HTMLAudioElement | null = null;
@@ -50,6 +51,9 @@ class AudioService {
       this.audioMode = savedMode;
     }
 
+    // Load saved voice selections per language
+    this.loadSelectedVoices();
+    
     // Load voices when available
     this.loadVoices();
     if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -59,6 +63,67 @@ class AudioService {
 
   private loadVoices() {
     this.voices = this.synthesis.getVoices();
+  }
+  
+  private loadSelectedVoices() {
+    try {
+      const saved = localStorage.getItem('tts-voices-by-language');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        Object.entries(parsed).forEach(([lang, voiceName]) => {
+          this.selectedVoicesByLanguage.set(lang, voiceName as string);
+        });
+      }
+    } catch (e) {
+      console.error('[AudioService] Failed to load saved voices:', e);
+    }
+  }
+  
+  private saveSelectedVoices() {
+    try {
+      const obj: Record<string, string> = {};
+      this.selectedVoicesByLanguage.forEach((voiceName, lang) => {
+        obj[lang] = voiceName;
+      });
+      localStorage.setItem('tts-voices-by-language', JSON.stringify(obj));
+    } catch (e) {
+      console.error('[AudioService] Failed to save voices:', e);
+    }
+  }
+  
+  // Get all available voices
+  getAllVoices(): SpeechSynthesisVoice[] {
+    if (this.voices.length === 0) {
+      this.voices = this.synthesis.getVoices();
+    }
+    return this.voices;
+  }
+  
+  // Get available voices for a specific language
+  getVoicesForLanguage(language: string): SpeechSynthesisVoice[] {
+    const langCode = this.getLangCode(language);
+    const baseLang = langCode.split('-')[0];
+    
+    if (this.voices.length === 0) {
+      this.voices = this.synthesis.getVoices();
+    }
+    
+    return this.voices.filter(v => {
+      const voiceBaseLang = v.lang.split('-')[0];
+      return v.lang === langCode || voiceBaseLang === baseLang;
+    });
+  }
+  
+  // Set selected voice for a language
+  setVoiceForLanguage(language: string, voiceName: string) {
+    this.selectedVoicesByLanguage.set(language, voiceName);
+    this.saveSelectedVoices();
+    console.log(`[AudioService] Set voice for ${language}: ${voiceName}`);
+  }
+  
+  // Get selected voice name for a language
+  getSelectedVoiceName(language: string): string | null {
+    return this.selectedVoicesByLanguage.get(language) || null;
   }
 
   // Language mapping for all supported languages
@@ -119,9 +184,20 @@ class AudioService {
       this.voices = this.synthesis.getVoices();
     }
 
+    const baseLang = langCode.split('-')[0];
+    
+    // Check if user has selected a specific voice for this language
+    const selectedVoiceName = this.selectedVoicesByLanguage.get(baseLang);
+    if (selectedVoiceName) {
+      const selectedVoice = this.voices.find(v => v.name === selectedVoiceName);
+      if (selectedVoice) {
+        console.log(`[AudioService] Using user-selected voice for ${langCode}: ${selectedVoice.name}`);
+        return selectedVoice;
+      }
+    }
+
     // Get all language variants to search (especially important for Spanish)
     const langVariants = this.getLanguageVariants(langCode);
-    const baseLang = langCode.split('-')[0];
 
     // Filter voices for the target language (including all variants)
     const matchingVoices = this.voices.filter(v => {

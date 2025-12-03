@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Settings, Download, Upload, AudioLines, Gauge, Globe, Volume2, Mic, User, Users, Headphones } from 'lucide-react';
+import { Settings, Download, Upload, AudioLines, Gauge, Globe, Mic, Headphones, Play } from 'lucide-react';
 import { t } from '@/lib/translations';
 import { LanguageSelector } from './LanguageSelector';
 import OfflineDataDialog from './OfflineDataDialog';
-import { TTS_VOICES, VoiceId, getVoiceForLanguage, getSavedVoice, saveVoice, getVoiceName, getVoiceDescription } from '@/lib/voiceSettings';
+import { audioService } from '@/lib/audioService';
 
 interface SettingsDialogProps {
   isOpen: boolean;
@@ -20,8 +20,6 @@ interface SettingsDialogProps {
   onTestAudio?: () => void;
   onDownloadData: (password: string) => Promise<void>;
   onUploadData: (file: File, password: string) => Promise<void>;
-  selectedVoice?: VoiceId;
-  onVoiceChange?: (voice: VoiceId) => void;
   onOpenAudioDownload?: () => void;
 }
 
@@ -35,35 +33,64 @@ export default function SettingsDialog({
   onTestAudio,
   onDownloadData,
   onUploadData,
-  selectedVoice,
-  onVoiceChange,
   onOpenAudioDownload
 }: SettingsDialogProps) {
   const [showOfflineDialog, setShowOfflineDialog] = useState(false);
   const [offlineMode, setOfflineMode] = useState<'download' | 'upload'>('download');
-  
-  const [currentVoice, setCurrentVoice] = useState<VoiceId>(() => {
-    return getSavedVoice() || getVoiceForLanguage(selectedLanguage);
-  });
+  const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [selectedSystemVoice, setSelectedSystemVoice] = useState<string>('');
 
+  // Load system voices when dialog opens or language changes
   useEffect(() => {
-    if (selectedVoice) {
-      setCurrentVoice(selectedVoice);
+    if (isOpen) {
+      const loadVoices = () => {
+        const voices = audioService.getVoicesForLanguage(selectedLanguage);
+        setSystemVoices(voices);
+        
+        // Get saved voice for this language
+        const savedVoice = audioService.getSelectedVoiceName(selectedLanguage);
+        if (savedVoice) {
+          setSelectedSystemVoice(savedVoice);
+        } else if (voices.length > 0) {
+          setSelectedSystemVoice(voices[0].name);
+        }
+      };
+      
+      // Load immediately
+      loadVoices();
+      
+      // Also listen for voices changed event
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+      }
+      
+      // Retry after a short delay (voices may not be immediately available)
+      const timer = setTimeout(loadVoices, 500);
+      return () => clearTimeout(timer);
     }
-  }, [selectedVoice]);
-
-  const handleVoiceChange = (voiceId: VoiceId) => {
-    setCurrentVoice(voiceId);
-    saveVoice(voiceId);
-    onVoiceChange?.(voiceId);
+  }, [isOpen, selectedLanguage]);
+  
+  const handleSystemVoiceChange = (voiceName: string) => {
+    setSelectedSystemVoice(voiceName);
+    audioService.setVoiceForLanguage(selectedLanguage, voiceName);
   };
-
-  const getGenderIcon = (gender: string) => {
-    switch (gender) {
-      case 'male': return <User className="w-3 h-3" />;
-      case 'female': return <User className="w-3 h-3 text-pink-500" />;
-      default: return <Users className="w-3 h-3" />;
-    }
+  
+  const testSystemVoice = () => {
+    const testTexts: Record<string, string> = {
+      'en': 'Hello! This is a test of the voice.',
+      'ko': '안녕하세요! 음성 테스트입니다.',
+      'es': '¡Hola! Esta es una prueba de voz.',
+      'fr': 'Bonjour! Ceci est un test vocal.',
+      'de': 'Hallo! Dies ist ein Sprachtest.',
+      'it': 'Ciao! Questo è un test vocale.',
+      'zh': '你好！这是语音测试。',
+      'ja': 'こんにちは！音声テストです。',
+      'pt': 'Olá! Este é um teste de voz.',
+      'ru': 'Привет! Это тест голоса.'
+    };
+    
+    const text = testTexts[selectedLanguage] || testTexts['en'];
+    audioService.playText(text, selectedLanguage, speechRate);
   };
 
   const handleDownloadClick = () => {
@@ -122,39 +149,56 @@ export default function SettingsDialog({
               />
             </div>
 
-            {/* Voice Selection */}
+            {/* System TTS Voice Selection */}
             <div className="space-y-2">
               <Label className="flex items-center gap-2 text-sm">
                 <Mic className="w-4 h-4" />
-                {selectedLanguage === 'ko' ? '음성 스타일' : 'Voice Style'}
+                {selectedLanguage === 'ko' ? 'TTS 음성 선택' : 'TTS Voice Selection'}
+                <span className="text-xs text-muted-foreground">
+                  ({systemVoices.length} {selectedLanguage === 'ko' ? '개 사용 가능' : 'available'})
+                </span>
               </Label>
-              <Select value={currentVoice} onValueChange={(value) => handleVoiceChange(value as VoiceId)}>
-                <SelectTrigger className="w-full" data-testid="select-voice">
-                  <SelectValue placeholder={selectedLanguage === 'ko' ? '음성 선택' : 'Select Voice'} />
-                </SelectTrigger>
-                <SelectContent>
-                  {(Object.keys(TTS_VOICES) as VoiceId[]).map((voiceId) => {
-                    const voice = TTS_VOICES[voiceId];
-                    return (
-                      <SelectItem key={voiceId} value={voiceId} data-testid={`select-voice-${voiceId}`}>
-                        <div className="flex items-center gap-2">
-                          {getGenderIcon(voice.gender)}
-                          <span className="font-medium">
-                            {selectedLanguage === 'ko' ? voice.nameKo : voice.name}
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            - {selectedLanguage === 'ko' ? voice.descriptionKo : voice.description}
-                          </span>
-                        </div>
-                      </SelectItem>
-                    );
-                  })}
-                </SelectContent>
-              </Select>
+              {systemVoices.length > 0 ? (
+                <div className="flex gap-2">
+                  <Select value={selectedSystemVoice} onValueChange={handleSystemVoiceChange}>
+                    <SelectTrigger className="flex-1" data-testid="select-system-voice">
+                      <SelectValue placeholder={selectedLanguage === 'ko' ? '음성 선택' : 'Select Voice'} />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[300px]">
+                      {systemVoices.map((voice) => (
+                        <SelectItem key={voice.name} value={voice.name} data-testid={`select-system-voice-${voice.name}`}>
+                          <div className="flex flex-col">
+                            <span className="font-medium text-sm truncate max-w-[280px]">{voice.name}</span>
+                            <span className="text-xs text-muted-foreground">
+                              {voice.lang} {voice.localService ? '(Local)' : '(Online)'}
+                            </span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={testSystemVoice}
+                    title={selectedLanguage === 'ko' ? '테스트' : 'Test'}
+                    data-testid="button-test-system-voice"
+                  >
+                    <Play className="w-4 h-4" />
+                  </Button>
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  {selectedLanguage === 'ko' 
+                    ? `${selectedLanguage.toUpperCase()} 언어에 사용 가능한 음성이 없습니다.`
+                    : `No voices available for ${selectedLanguage.toUpperCase()} language.`
+                  }
+                </p>
+              )}
               <p className="text-xs text-muted-foreground">
                 {selectedLanguage === 'ko' 
-                  ? `현재 언어(${selectedLanguage.toUpperCase()}) 기본: ${TTS_VOICES[getVoiceForLanguage(selectedLanguage)].nameKo}`
-                  : `Default for ${selectedLanguage.toUpperCase()}: ${TTS_VOICES[getVoiceForLanguage(selectedLanguage)].name}`
+                  ? '현재 선택된 언어에 대한 시스템 TTS 음성을 선택하세요.'
+                  : 'Select system TTS voice for the current language.'
                 }
               </p>
             </div>
