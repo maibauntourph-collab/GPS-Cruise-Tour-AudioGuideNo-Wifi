@@ -514,10 +514,15 @@
   z-index: 1000 !important;
 }
 
-/* Clickable tooltip base styling */
+/* Clickable tooltip base styling - tooltip itself doesn't capture events */
 .clickable-tooltip {
-  pointer-events: auto !important;
+  pointer-events: none !important;
   cursor: pointer !important;
+}
+
+/* Only the inner content div should capture click events */
+.clickable-tooltip > div {
+  pointer-events: auto !important;
 }
 
 .clickable-tooltip:hover {
