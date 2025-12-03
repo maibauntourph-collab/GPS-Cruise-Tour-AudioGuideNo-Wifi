@@ -2,13 +2,15 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVisitedLandmarkSchema } from "@shared/schema";
-import { recommendTourItinerary } from "./lib/openai";
+import { recommendTourItinerary, generateLandmarkAudio, TTS_VOICES, VOICE_STYLES } from "./lib/openai";
 import { db } from "./db";
 import { cities, landmarks, dataVersions } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
 import multer from "multer";
 import * as XLSX from "xlsx";
+import * as path from "path";
+import express from "express";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/cities", async (req, res) => {
@@ -865,6 +867,158 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Pass through specific error messages from OpenAI service
       const errorMessage = error.message || "Failed to generate AI recommendation";
       res.status(500).json({ error: errorMessage });
+    }
+  });
+
+  // ========== Audio TTS Routes ==========
+  
+  // Serve static audio files
+  app.use('/uploads/audio', express.static(path.join(process.cwd(), 'uploads', 'audio')));
+
+  // Get available TTS voices
+  app.get("/api/audio/voices", (req, res) => {
+    res.json({
+      voices: TTS_VOICES,
+      styles: VOICE_STYLES
+    });
+  });
+
+  // Generate audio for a landmark
+  app.post("/api/audio/generate", async (req, res) => {
+    try {
+      const { landmarkId, language, voice } = req.body;
+      
+      if (!landmarkId) {
+        return res.status(400).json({ error: "Landmark ID is required" });
+      }
+
+      // Get landmark to fetch narration text
+      const landmark = await storage.getLandmark(landmarkId);
+      if (!landmark) {
+        return res.status(404).json({ error: "Landmark not found" });
+      }
+
+      // Get text in the requested language
+      const lang = language || 'en';
+      let text = landmark.narration;
+      
+      // Check for translated narration
+      if (landmark.translations && landmark.translations[lang]) {
+        text = landmark.translations[lang].narration || text;
+      }
+
+      // Check if audio already exists
+      const existingAudio = await storage.getAudio(landmarkId, lang);
+      if (existingAudio && existingAudio.voiceId === (voice || 'fable')) {
+        return res.json(existingAudio);
+      }
+
+      // Generate new audio
+      const audioResult = await generateLandmarkAudio(landmarkId, text, lang, voice);
+      
+      // Save to database
+      const savedAudio = await storage.saveAudio({
+        landmarkId,
+        language: lang,
+        audioUrl: audioResult.audioUrl,
+        duration: audioResult.duration,
+        sizeBytes: audioResult.sizeBytes,
+        checksum: audioResult.checksum,
+        voiceId: audioResult.voiceId
+      });
+
+      res.json(savedAudio);
+    } catch (error: any) {
+      console.error('Audio generation error:', error);
+      res.status(500).json({ error: error.message || "Failed to generate audio" });
+    }
+  });
+
+  // Get audio for a landmark
+  app.get("/api/audio/:landmarkId", async (req, res) => {
+    try {
+      const { landmarkId } = req.params;
+      const language = (req.query.language as string) || 'en';
+      
+      const audio = await storage.getAudio(landmarkId, language);
+      if (!audio) {
+        return res.status(404).json({ error: "Audio not found" });
+      }
+      
+      res.json(audio);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch audio" });
+    }
+  });
+
+  // Get all audio for a city (for offline download)
+  app.get("/api/audio/city/:cityId", async (req, res) => {
+    try {
+      const { cityId } = req.params;
+      const audioList = await storage.getAudioByCity(cityId);
+      res.json(audioList);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch city audio" });
+    }
+  });
+
+  // Batch generate audio for all landmarks in a city
+  app.post("/api/audio/batch-generate", async (req, res) => {
+    try {
+      const { cityId, language, voice } = req.body;
+      
+      if (!cityId) {
+        return res.status(400).json({ error: "City ID is required" });
+      }
+
+      const landmarks = await storage.getLandmarks(cityId);
+      const lang = language || 'en';
+      const results: any[] = [];
+      const errors: any[] = [];
+
+      for (const landmark of landmarks) {
+        try {
+          // Check if already exists
+          const existing = await storage.getAudio(landmark.id, lang);
+          if (existing) {
+            results.push({ landmarkId: landmark.id, status: 'exists', audio: existing });
+            continue;
+          }
+
+          // Get text
+          let text = landmark.narration;
+          if (landmark.translations && landmark.translations[lang]) {
+            text = landmark.translations[lang].narration || text;
+          }
+
+          // Generate
+          const audioResult = await generateLandmarkAudio(landmark.id, text, lang, voice);
+          const saved = await storage.saveAudio({
+            landmarkId: landmark.id,
+            language: lang,
+            audioUrl: audioResult.audioUrl,
+            duration: audioResult.duration,
+            sizeBytes: audioResult.sizeBytes,
+            checksum: audioResult.checksum,
+            voiceId: audioResult.voiceId
+          });
+
+          results.push({ landmarkId: landmark.id, status: 'generated', audio: saved });
+        } catch (err: any) {
+          errors.push({ landmarkId: landmark.id, error: err.message });
+        }
+      }
+
+      res.json({
+        total: landmarks.length,
+        generated: results.filter(r => r.status === 'generated').length,
+        existing: results.filter(r => r.status === 'exists').length,
+        errors: errors.length,
+        results,
+        errorDetails: errors.length > 0 ? errors : undefined
+      });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || "Failed to batch generate audio" });
     }
   });
 

@@ -7,18 +7,36 @@ import * as crypto from "crypto";
 // Using gpt-4o-mini for cost-effective AI recommendations
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Voice mappings for different languages
-const VOICE_MAP: { [key: string]: string } = {
-  'en': 'alloy',     // Neutral English voice
-  'ko': 'nova',      // Soft, natural voice good for Korean
-  'es': 'shimmer',   // Warm voice for Spanish
-  'fr': 'nova',      // Natural French voice
-  'de': 'onyx',      // Clear German voice
-  'it': 'shimmer',   // Warm Italian voice
-  'zh': 'nova',      // Soft Chinese voice
-  'ja': 'alloy',     // Neutral Japanese voice
-  'pt': 'shimmer',   // Warm Portuguese voice
-  'ru': 'onyx',      // Deep Russian voice
+// Available OpenAI TTS voices with descriptions
+export const TTS_VOICES = {
+  alloy: { name: 'Alloy', description: '중성적이고 균형잡힌 목소리', style: 'neutral' },
+  echo: { name: 'Echo', description: '남성적이고 깊은 목소리', style: 'deep' },
+  fable: { name: 'Fable', description: '재밌고 표현력 풍부한 스토리텔러', style: 'storyteller' },
+  onyx: { name: 'Onyx', description: '권위있고 깊은 목소리', style: 'authoritative' },
+  nova: { name: 'Nova', description: '부드럽고 따뜻한 여성 목소리', style: 'warm' },
+  shimmer: { name: 'Shimmer', description: '밝고 친근한 여성 목소리', style: 'friendly' },
+};
+
+// Voice style presets
+export const VOICE_STYLES = {
+  guide: 'alloy',      // 🎙️ 투어 가이드 - 차분한 설명
+  storyteller: 'fable', // 🎭 스토리텔러 - 재밌고 생동감 있는
+  friendly: 'shimmer', // 😊 친근한 - 밝고 따뜻한
+  professional: 'onyx', // 📰 전문적 - 명확한 전달
+};
+
+// Default voice mappings for different languages (can be overridden by user preference)
+const DEFAULT_VOICE_MAP: { [key: string]: string } = {
+  'en': 'fable',      // Expressive storyteller voice
+  'ko': 'nova',       // Soft, natural voice good for Korean
+  'es': 'shimmer',    // Warm voice for Spanish
+  'fr': 'fable',      // Expressive French voice
+  'de': 'onyx',       // Clear German voice
+  'it': 'shimmer',    // Warm Italian voice
+  'zh': 'nova',       // Soft Chinese voice
+  'ja': 'alloy',      // Neutral Japanese voice
+  'pt': 'shimmer',    // Warm Portuguese voice
+  'ru': 'onyx',       // Deep Russian voice
 };
 
 export interface AudioGenerationResult {
@@ -33,11 +51,14 @@ export interface AudioGenerationResult {
 export async function generateLandmarkAudio(
   landmarkId: string,
   text: string,
-  language: string = 'en'
+  language: string = 'en',
+  preferredVoice?: string  // Optional: user can specify voice (alloy, echo, fable, onyx, nova, shimmer)
 ): Promise<AudioGenerationResult> {
   try {
-    // Select voice based on language
-    const voice = VOICE_MAP[language] || 'alloy';
+    // Select voice: user preference > language default > fallback
+    const voice = preferredVoice && TTS_VOICES[preferredVoice as keyof typeof TTS_VOICES] 
+      ? preferredVoice 
+      : (DEFAULT_VOICE_MAP[language] || 'fable');
     
     // Generate audio using OpenAI TTS
     const mp3Response = await openai.audio.speech.create({

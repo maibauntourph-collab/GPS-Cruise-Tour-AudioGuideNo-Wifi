@@ -1453,7 +1453,7 @@ export default function UnifiedFloatingCard({
         style={{
           position: 'fixed',
           left: '50%',
-          top: '9px',
+          top: '52px',
           transform: 'translateX(calc(-50% - 20px))',
           zIndex: 1002
         }}

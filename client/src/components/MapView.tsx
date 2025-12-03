@@ -195,6 +195,9 @@ interface MapViewProps {
   onAddToTour?: (landmark: Landmark) => void;
   onTourRouteFound?: (route: any) => void;
   onTourRouteClick?: () => void;
+  isSelectingHotelOnMap?: boolean;
+  onHotelLocationSelected?: (lat: number, lng: number) => void;
+  startingPoint?: { lat: number; lng: number; type: string } | null;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -357,6 +360,9 @@ export default function MapView({
   onAddToTour,
   onTourRouteFound,
   onTourRouteClick,
+  isSelectingHotelOnMap = false,
+  onHotelLocationSelected,
+  startingPoint,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities

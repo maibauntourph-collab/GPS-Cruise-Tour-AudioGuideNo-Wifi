@@ -16,6 +16,7 @@ import UnifiedFloatingCard from '@/components/UnifiedFloatingCard';
 import MenuDialog from '@/components/MenuDialog';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import InstallPrompt from '@/components/InstallPrompt';
+import UpdatePrompt from '@/components/UpdatePrompt';
 import BottomSheet from '@/components/BottomSheet';
 import StartupDialog, { getSavedTourData, saveTourData, clearSavedTourData } from '@/components/StartupDialog';
 import AIRecommendDialog from '@/components/AIRecommendDialog';
@@ -28,10 +29,16 @@ import { useServiceWorker } from '@/hooks/useServiceWorker';
 import { audioService } from '@/lib/audioService';
 import { calculateDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
+import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 // Detect browser language and map to supported language
 const detectBrowserLanguage = (): string => {
@@ -75,7 +82,15 @@ export default function Home() {
     typeof window !== 'undefined' && window.innerWidth < 640
   );
   const { markVisited, isVisited } = useVisitedLandmarks();
-  useServiceWorker();
+  const { isUpdateAvailable, updateServiceWorker } = useServiceWorker();
+  const [showUpdatePrompt, setShowUpdatePrompt] = useState(false);
+  
+  // Show update prompt when update is available
+  useEffect(() => {
+    if (isUpdateAvailable) {
+      setShowUpdatePrompt(true);
+    }
+  }, [isUpdateAvailable]);
   
   // Detect device capabilities for performance optimization
   const [deviceCapabilities] = useState(() => detectDeviceCapabilities());
@@ -124,6 +139,8 @@ export default function Home() {
     const saved = localStorage.getItem('tour-time-per-stop');
     return saved ? parseInt(saved, 10) : 45;
   });
+  const [startingPoint, setStartingPoint] = useState<StartingPoint | null>(null);
+  const [isSelectingHotelOnMap, setIsSelectingHotelOnMap] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
@@ -702,6 +719,191 @@ export default function Home() {
             <span className="xs:hidden">GPS Guide</span>
           </h1>
           
+          {/* Starting Point Selector */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={startingPoint ? "default" : "outline"}
+                size="sm"
+                className={`h-7 gap-1 px-2 ${startingPoint ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' : ''}`}
+                data-testid="button-starting-point"
+              >
+                {startingPoint?.type === 'airport' ? (
+                  <Plane className="w-3.5 h-3.5" />
+                ) : startingPoint?.type === 'cruise_terminal' ? (
+                  <Ship className="w-3.5 h-3.5" />
+                ) : startingPoint?.type === 'hotel' ? (
+                  <Hotel className="w-3.5 h-3.5" />
+                ) : startingPoint?.type === 'my_location' ? (
+                  <Navigation2 className="w-3.5 h-3.5" />
+                ) : (
+                  <MapPin className="w-3.5 h-3.5" />
+                )}
+                <span className="hidden sm:inline text-xs">
+                  {startingPoint 
+                    ? getStartingPointName(startingPoint, selectedLanguage).split(' ')[0]
+                    : t('startingPoint', selectedLanguage)}
+                </span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-72 p-2" align="start">
+              <div className="space-y-2">
+                <h4 className="font-medium text-sm">{t('selectStartingPoint', selectedLanguage)}</h4>
+                
+                {/* My Location Option */}
+                <Button
+                  variant={startingPoint?.type === 'my_location' ? "default" : "outline"}
+                  size="sm"
+                  className="w-full justify-start gap-2"
+                  onClick={() => {
+                    if (position) {
+                      setStartingPoint({
+                        id: 'my_location',
+                        type: 'my_location',
+                        name: t('myLocation', selectedLanguage),
+                        lat: position.lat,
+                        lng: position.lng
+                      });
+                      toast({
+                        title: t('startingPointSet', selectedLanguage),
+                        description: t('myLocation', selectedLanguage)
+                      });
+                    }
+                  }}
+                  disabled={!position}
+                  data-testid="button-starting-my-location"
+                >
+                  <Navigation2 className="w-4 h-4 text-blue-500" />
+                  {t('myLocation', selectedLanguage)}
+                </Button>
+
+                {/* Hotel Option */}
+                <Button
+                  variant={startingPoint?.type === 'hotel' ? "default" : "outline"}
+                  size="sm"
+                  className="w-full justify-start gap-2"
+                  onClick={() => {
+                    setIsSelectingHotelOnMap(true);
+                    toast({
+                      title: t('hotel', selectedLanguage),
+                      description: t('tapMapToSetHotel', selectedLanguage)
+                    });
+                  }}
+                  data-testid="button-starting-hotel"
+                >
+                  <Hotel className="w-4 h-4 text-purple-500" />
+                  {t('hotel', selectedLanguage)} - {t('selectOnMap', selectedLanguage)}
+                </Button>
+
+                {/* City-specific starting points */}
+                {(() => {
+                  const cityPoints = getCityStartingPoints(selectedCityId);
+                  if (!cityPoints) return null;
+                  
+                  return (
+                    <>
+                      {/* Airports */}
+                      {cityPoints.airports.length > 0 && (
+                        <div className="space-y-1">
+                          <p className="text-xs text-muted-foreground font-medium">{t('airport', selectedLanguage)}</p>
+                          {cityPoints.airports.map((airport) => (
+                            <Button
+                              key={airport.id}
+                              variant={startingPoint?.id === airport.id ? "default" : "outline"}
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                setStartingPoint(airport);
+                                toast({
+                                  title: t('startingPointSet', selectedLanguage),
+                                  description: getStartingPointName(airport, selectedLanguage)
+                                });
+                              }}
+                              data-testid={`button-starting-airport-${airport.id}`}
+                            >
+                              <Plane className="w-4 h-4 text-sky-500" />
+                              <span className="truncate">{getStartingPointName(airport, selectedLanguage)}</span>
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Cruise Terminals */}
+                      {cityPoints.cruiseTerminals.length > 0 && (
+                        <div className="space-y-1">
+                          <p className="text-xs text-muted-foreground font-medium">{t('cruiseTerminal', selectedLanguage)}</p>
+                          {cityPoints.cruiseTerminals.map((terminal) => (
+                            <Button
+                              key={terminal.id}
+                              variant={startingPoint?.id === terminal.id ? "default" : "outline"}
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                setStartingPoint(terminal);
+                                toast({
+                                  title: t('startingPointSet', selectedLanguage),
+                                  description: getStartingPointName(terminal, selectedLanguage)
+                                });
+                              }}
+                              data-testid={`button-starting-terminal-${terminal.id}`}
+                            >
+                              <Ship className="w-4 h-4 text-teal-500" />
+                              <span className="truncate">{getStartingPointName(terminal, selectedLanguage)}</span>
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Train Stations */}
+                      {cityPoints.trainStations.length > 0 && (
+                        <div className="space-y-1">
+                          <p className="text-xs text-muted-foreground font-medium">
+                            {selectedLanguage === 'ko' ? '기차역' : 'Train Station'}
+                          </p>
+                          {cityPoints.trainStations.map((station) => (
+                            <Button
+                              key={station.id}
+                              variant={startingPoint?.id === station.id ? "default" : "outline"}
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                setStartingPoint(station);
+                                toast({
+                                  title: t('startingPointSet', selectedLanguage),
+                                  description: getStartingPointName(station, selectedLanguage)
+                                });
+                              }}
+                              data-testid={`button-starting-station-${station.id}`}
+                            >
+                              <MapPin className="w-4 h-4 text-orange-500" />
+                              <span className="truncate">{getStartingPointName(station, selectedLanguage)}</span>
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
+
+                {/* Clear Starting Point */}
+                {startingPoint && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="w-full justify-center text-red-500 hover:text-red-600 hover:bg-red-50"
+                    onClick={() => {
+                      setStartingPoint(null);
+                      setIsSelectingHotelOnMap(false);
+                    }}
+                    data-testid="button-clear-starting-point"
+                  >
+                    {selectedLanguage === 'ko' ? '출발지 초기화' : 'Clear Starting Point'}
+                  </Button>
+                )}
+              </div>
+            </PopoverContent>
+          </Popover>
+          
           <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
             <Button
               variant="outline"
@@ -801,6 +1003,15 @@ export default function Home() {
 
             <OfflineIndicator />
             <InstallPrompt />
+            <UpdatePrompt 
+              isVisible={showUpdatePrompt}
+              onUpdate={() => {
+                updateServiceWorker();
+                setShowUpdatePrompt(false);
+              }}
+              onDismiss={() => setShowUpdatePrompt(false)}
+              selectedLanguage={selectedLanguage}
+            />
           </div>
         </div>
       </div>

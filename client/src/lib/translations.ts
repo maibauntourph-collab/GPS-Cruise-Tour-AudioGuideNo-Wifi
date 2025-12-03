@@ -167,7 +167,18 @@ const uiTranslations: Record<string, Record<string, string>> = {
     error: 'Error',
     recommendRestaurants: 'Recommend Restaurants',
     recommendActivities: 'Recommend Activities',
-    recommendLandmarks: 'Recommend Landmarks'
+    recommendLandmarks: 'Recommend Landmarks',
+    // Starting Point
+    startingPoint: 'Starting Point',
+    selectStartingPoint: 'Select Starting Point',
+    hotel: 'Hotel',
+    airport: 'Airport',
+    cruiseTerminal: 'Cruise Terminal',
+    myLocation: 'My Location',
+    useCurrentLocation: 'Use Current GPS Location',
+    selectOnMap: 'Select on Map',
+    startingPointSet: 'Starting point set',
+    tapMapToSetHotel: 'Tap on the map to set your hotel location'
   },
   ko: {
     landmarks: '명소',
@@ -309,7 +320,18 @@ const uiTranslations: Record<string, Record<string, string>> = {
     error: '오류',
     recommendRestaurants: '맛집 추천',
     recommendActivities: '액티비티 추천',
-    recommendLandmarks: '명소 추천'
+    recommendLandmarks: '명소 추천',
+    // 출발지
+    startingPoint: '출발지',
+    selectStartingPoint: '출발지 선택',
+    hotel: '호텔',
+    airport: '공항',
+    cruiseTerminal: '크루즈 터미널',
+    myLocation: '현재 위치',
+    useCurrentLocation: '현재 GPS 위치 사용',
+    selectOnMap: '지도에서 선택',
+    startingPointSet: '출발지가 설정되었습니다',
+    tapMapToSetHotel: '지도를 탭하여 호텔 위치를 설정하세요'
   },
   es: {
     landmarks: 'Monumentos',

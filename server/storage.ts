@@ -32,7 +32,7 @@ const CITIES: City[] = [
     cruisePort: {
       portName: 'Civitavecchia Port',
       distanceFromCity: '80km from Rome',
-      recommendedDuration: '8-10 hours',
+      recommendedDuration: '7-8 hours',
       recommendedLandmarks: ['colosseum', 'vatican_museums', 'trevi-fountain', 'pantheon', 'roman-forum'],
       tips: '⚠️ IMPORTANT: Always check your ship\'s boarding time and plan to return 1-2 hours early. Book a shore excursion in advance or take the train from Civitavecchia to Rome (80 minutes). Start early to see the main attractions. Consider skip-the-line tickets for the Vatican and Colosseum. If using a tender boat to reach port, get your tender ticket from the cruise ship in advance.',
       portCoordinates: {
@@ -167,13 +167,13 @@ const CITIES: City[] = [
         ko: {
           portName: '치비타베키아 항구',
           distanceFromCity: '로마에서 80km',
-          recommendedDuration: '8-10시간',
+          recommendedDuration: '7-8시간',
           tips: '⚠️ 중요: 항상 선박 승선 시간을 확인하고 1-2시간 일찍 돌아올 계획을 세우세요. 미리 기항지 관광을 예약하거나 치비타베키아에서 로마까지 기차를 이용하세요 (80분 소요). 주요 명소를 보려면 일찍 출발하세요. 바티칸과 콜로세움은 줄서기 패스 티켓을 고려하세요. 텐더보트를 이용해 항구로 나가야 하는 경우, 크루즈에서 미리 텐더티켓을 받아 준비하세요.'
         },
         it: {
           portName: 'Porto di Civitavecchia',
           distanceFromCity: '80km da Roma',
-          recommendedDuration: '8-10 ore',
+          recommendedDuration: '7-8 ore',
           tips: '⚠️ IMPORTANTE: Controlla sempre l\'orario di imbarco della nave e pianifica di tornare 1-2 ore prima. Prenota un\'escursione in anticipo o prendi il treno da Civitavecchia a Roma (80 minuti). Parti presto per vedere le principali attrazioni. Considera i biglietti salta fila per il Vaticano e il Colosseo. Se usi una tender boat per raggiungere il porto, ottieni il biglietto tender dalla nave in anticipo.'
         }
       }
