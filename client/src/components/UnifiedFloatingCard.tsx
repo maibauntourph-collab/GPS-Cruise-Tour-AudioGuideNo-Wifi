@@ -1168,14 +1168,14 @@ export default function UnifiedFloatingCard({
                           <div className="flex items-center gap-1.5">
                             <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '이동' : 'Travel'}</span>
                             <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
-                              {tourRouteInfo.distance.toFixed(1)}km
+                              {(tourRouteInfo.distance / 1000).toFixed(1)}km
                             </span>
                           </div>
                           <div className="w-px h-4 bg-border"></div>
                           <div className="flex items-center gap-1.5">
                             <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '소요' : 'Time'}</span>
                             <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
-                              {Math.round(tourRouteInfo.duration)}min
+                              {Math.round(tourRouteInfo.duration / 60)}min
                             </span>
                           </div>
                         </div>
@@ -1184,7 +1184,8 @@ export default function UnifiedFloatingCard({
                           <span className="text-xs font-medium">{selectedLanguage === 'ko' ? '전체' : 'Total'}</span>
                           <span className="text-sm font-bold">
                             {(() => {
-                              const totalMinutes = Math.round(tourRouteInfo.duration + (tourStops.length * tourTimePerStop));
+                              const travelMinutes = Math.round(tourRouteInfo.duration / 60);
+                              const totalMinutes = travelMinutes + (tourStops.length * tourTimePerStop);
                               const hours = Math.floor(totalMinutes / 60);
                               const mins = totalMinutes % 60;
                               return hours > 0 ? `${hours}h ${mins}m` : `${totalMinutes}min`;
