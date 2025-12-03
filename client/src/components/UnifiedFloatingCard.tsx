@@ -1415,18 +1415,40 @@ export default function UnifiedFloatingCard({
                             
                             {/* Start/End Point Info */}
                             <div className="flex items-center justify-between gap-2 mb-2 text-xs">
-                              <div className="flex items-center gap-1.5 bg-green-500/10 border border-green-500/30 rounded-md px-2 py-1">
-                                <div className="w-2 h-2 rounded-full bg-green-500" />
-                                <span className="text-green-700 dark:text-green-400 font-medium">
-                                  {selectedLanguage === 'ko' ? '출발' : 'Start'}: {formatTime(startTime)}
-                                </span>
+                              <div className="flex flex-col gap-0.5 bg-green-500/10 border border-green-500/30 rounded-md px-2 py-1">
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-2 h-2 rounded-full bg-green-500" />
+                                  <span className="text-green-700 dark:text-green-400 font-medium">
+                                    {selectedLanguage === 'ko' ? '출발' : 'Start'}: {formatTime(startTime)}
+                                  </span>
+                                </div>
+                                {startingPoint && (
+                                  <span className="text-[10px] text-green-600 dark:text-green-500 pl-3.5 truncate max-w-[100px]">
+                                    {startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '📍 내 위치' : '📍 My Location') : 
+                                     startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '🏨 호텔' : '🏨 Hotel') :
+                                     startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '✈️ 공항' : '✈️ Airport') :
+                                     startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '🚢 크루즈 항구' : '🚢 Cruise Port') :
+                                     (selectedLanguage === 'ko' ? '📍 지정 위치' : '📍 Custom')}
+                                  </span>
+                                )}
                               </div>
                               <div className="flex-1 border-t border-dashed border-muted-foreground/30 mx-1" />
-                              <div className={`flex items-center gap-1.5 rounded-md px-2 py-1 ${isLateEnd ? 'bg-red-500/10 border border-red-500/30' : 'bg-blue-500/10 border border-blue-500/30'}`}>
-                                <div className={`w-2 h-2 rounded-full ${isLateEnd ? 'bg-red-500' : 'bg-blue-500'}`} />
-                                <span className={`font-medium ${isLateEnd ? 'text-red-600 dark:text-red-400' : 'text-blue-700 dark:text-blue-400'}`}>
-                                  {selectedLanguage === 'ko' ? '도착' : 'End'}: {formatTime(endTime)}
-                                </span>
+                              <div className={`flex flex-col gap-0.5 rounded-md px-2 py-1 ${isLateEnd ? 'bg-red-500/10 border border-red-500/30' : 'bg-blue-500/10 border border-blue-500/30'}`}>
+                                <div className="flex items-center gap-1.5">
+                                  <div className={`w-2 h-2 rounded-full ${isLateEnd ? 'bg-red-500' : 'bg-blue-500'}`} />
+                                  <span className={`font-medium ${isLateEnd ? 'text-red-600 dark:text-red-400' : 'text-blue-700 dark:text-blue-400'}`}>
+                                    {selectedLanguage === 'ko' ? '도착' : 'End'}: {formatTime(endTime)}
+                                  </span>
+                                </div>
+                                {endPoint && (
+                                  <span className={`text-[10px] pl-3.5 truncate max-w-[100px] ${isLateEnd ? 'text-red-500 dark:text-red-400' : 'text-blue-600 dark:text-blue-500'}`}>
+                                    {endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '📍 내 위치' : '📍 My Location') : 
+                                     endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '🏨 호텔' : '🏨 Hotel') :
+                                     endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '✈️ 공항' : '✈️ Airport') :
+                                     endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '🚢 크루즈 항구' : '🚢 Cruise Port') :
+                                     (selectedLanguage === 'ko' ? '📍 지정 위치' : '📍 Custom')}
+                                  </span>
+                                )}
                               </div>
                             </div>
                             
