@@ -17,6 +17,7 @@ import MenuDialog from '@/components/MenuDialog';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import InstallPrompt from '@/components/InstallPrompt';
 import BottomSheet from '@/components/BottomSheet';
+import StartupDialog, { getSavedTourData, saveTourData, clearSavedTourData } from '@/components/StartupDialog';
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';
@@ -132,6 +133,14 @@ export default function Home() {
   const [isLoadingAi, setIsLoadingAi] = useState(false);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
+  
+  // Startup dialog state
+  const [showStartupDialog, setShowStartupDialog] = useState<boolean>(() => {
+    // Show dialog only if not shown in this session
+    const shownThisSession = sessionStorage.getItem('startup-dialog-shown');
+    return !shownThisSession;
+  });
+  const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
 
   useEffect(() => {
     audioService.setEnabled(audioEnabled);
@@ -146,6 +155,14 @@ export default function Home() {
   useEffect(() => {
     localStorage.setItem('tour-time-per-stop', tourTimePerStop.toString());
   }, [tourTimePerStop]);
+
+  // Save tour data when it changes (for restoration on next visit)
+  useEffect(() => {
+    const city = cities.find(c => c.id === selectedCityId);
+    if (tourStops.length > 0 && city) {
+      saveTourData(selectedCityId, city.name, tourStops, tourTimePerStop, selectedLanguage);
+    }
+  }, [tourStops, selectedCityId, cities, tourTimePerStop, selectedLanguage]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -413,6 +430,83 @@ export default function Home() {
   const handleClearTour = () => {
     setTourStops([]);
     setTourRouteInfo(null);
+    clearSavedTourData();
+  };
+
+  // Startup dialog handlers
+  const handleStartupClose = () => {
+    setShowStartupDialog(false);
+    sessionStorage.setItem('startup-dialog-shown', 'true');
+  };
+
+  const handleSelectGPS = () => {
+    handleStartupClose();
+    // If GPS position is available and we have cities data, try to find nearest city
+    if (position && cities.length > 0) {
+      let nearestCity = cities[0];
+      let minDistance = Infinity;
+      
+      cities.forEach(city => {
+        const distance = calculateDistance(position.latitude, position.longitude, city.lat, city.lng);
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestCity = city;
+        }
+      });
+      
+      setSelectedCityId(nearestCity.id);
+      setFocusLocation({ lat: position.latitude, lng: position.longitude, zoom: 15 });
+      
+      toast({
+        description: selectedLanguage === 'ko' 
+          ? `📍 ${nearestCity.name} 근처에서 시작합니다`
+          : `📍 Starting near ${nearestCity.name}`,
+        duration: 3000,
+      });
+    }
+  };
+
+  const handleRestoreTour = (data: { cityId: string; tourStops: string[]; tourTimePerStop: number }) => {
+    handleStartupClose();
+    
+    // Set city first
+    setSelectedCityId(data.cityId);
+    setTourTimePerStop(data.tourTimePerStop);
+    
+    // We need to wait for landmarks to load, so we'll use a flag
+    const restoreTourStopsWhenReady = () => {
+      if (landmarks.length > 0) {
+        const restoredStops = data.tourStops
+          .map(id => landmarks.find(l => l.id === id))
+          .filter((l): l is Landmark => l !== undefined);
+        
+        if (restoredStops.length > 0) {
+          setTourStops(restoredStops);
+          
+          // Focus on first stop
+          const firstStop = restoredStops[0];
+          setFocusLocation({ lat: firstStop.lat, lng: firstStop.lng, zoom: 14 });
+          
+          toast({
+            description: selectedLanguage === 'ko' 
+              ? `✨ ${restoredStops.length}개 장소가 복원되었습니다`
+              : `✨ Restored ${restoredStops.length} tour stops`,
+            duration: 3000,
+          });
+        }
+      } else {
+        // Landmarks not loaded yet, try again
+        setTimeout(restoreTourStopsWhenReady, 500);
+      }
+    };
+    
+    // If landmarks for the restored city need to be fetched, wait for them
+    if (data.cityId === selectedCityId && landmarks.length > 0) {
+      restoreTourStopsWhenReady();
+    } else {
+      // City change will trigger landmarks fetch, wait a bit
+      setTimeout(restoreTourStopsWhenReady, 1000);
+    }
   };
 
   const handleTourRouteFound = (route: any) => {
@@ -650,6 +744,18 @@ export default function Home() {
 
   return (
     <>
+      {/* Startup Dialog */}
+      <StartupDialog
+        isOpen={showStartupDialog}
+        onClose={handleStartupClose}
+        onSelectGPS={handleSelectGPS}
+        onRestoreTour={handleRestoreTour}
+        savedTourData={savedTourData}
+        selectedLanguage={selectedLanguage}
+        isGpsAvailable={!!position}
+        isGpsLoading={isLoading}
+      />
+
       <MenuDialog
         isOpen={showMenu}
         onClose={() => setShowMenu(false)}
