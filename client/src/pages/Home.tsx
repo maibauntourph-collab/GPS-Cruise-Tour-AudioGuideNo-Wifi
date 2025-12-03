@@ -1110,6 +1110,19 @@ export default function Home() {
               <ShoppingBag className="w-3.5 h-3.5" />
               <span className="hidden sm:inline text-xs">{t('giftShops', selectedLanguage)}</span>
             </Button>
+            {selectedCity?.cruisePort && (
+              <Button
+                variant={showCruisePort ? "default" : "outline"}
+                size="icon"
+                onClick={() => setShowCruisePort(!showCruisePort)}
+                data-testid="button-toggle-cruise-port"
+                className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
+                title={t('cruisePortInfo', selectedLanguage)}
+              >
+                <Ship className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-xs">{t('cruisePortInfo', selectedLanguage)}</span>
+              </Button>
+            )}
           </div>
         </header>
         
