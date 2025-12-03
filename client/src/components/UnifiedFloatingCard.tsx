@@ -1098,10 +1098,16 @@ export default function UnifiedFloatingCard({
                         {icon}
                         {title}
                       </h5>
-                      {items.map(({ landmark, distance }) => (
+                      {items.map(({ landmark, distance }) => {
+                        const isSelected = selectedLandmark?.id === landmark.id;
+                        return (
                         <div
                           key={landmark.id}
-                          className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
+                          className={`p-3 rounded-lg cursor-pointer transition-all ${
+                            isSelected 
+                              ? 'bg-primary/20 ring-2 ring-primary animate-pulse' 
+                              : 'bg-muted/30 hover-elevate'
+                          }`}
                           onClick={() => onLandmarkSelect?.(landmark)}
                           data-testid={`card-landmark-${landmark.id}`}
                         >
@@ -1136,7 +1142,8 @@ export default function UnifiedFloatingCard({
                             </Button>
                           </div>
                         </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   );
                 };
