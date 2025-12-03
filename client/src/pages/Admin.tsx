@@ -21,8 +21,15 @@ import {
   Globe,
   Save,
   Loader2,
-  LayoutDashboard
+  LayoutDashboard,
+  Upload,
+  Download,
+  FileSpreadsheet,
+  AlertCircle,
+  CheckCircle2,
+  FileDown
 } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import type { City, Landmark } from '@shared/schema';
 
 interface DbCity {
@@ -76,6 +83,12 @@ export default function Admin() {
   const [isCreateCityOpen, setIsCreateCityOpen] = useState(false);
   const [isCreateLandmarkOpen, setIsCreateLandmarkOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'city' | 'landmark'; id: string; name: string } | null>(null);
+  
+  // Import/Export state
+  const [importType, setImportType] = useState<'cities' | 'landmarks'>('cities');
+  const [importFile, setImportFile] = useState<File | null>(null);
+  const [importing, setImporting] = useState(false);
+  const [importResult, setImportResult] = useState<{ success: boolean; imported: number; total: number; errors?: { row: number; message: string }[] } | null>(null);
 
   const { data: cities = [], isLoading: loadingCities } = useQuery<DbCity[]>({
     queryKey: ['/api/admin/cities']
@@ -194,6 +207,10 @@ export default function Admin() {
             <TabsTrigger value="landmarks" data-testid="tab-landmarks">
               <MapPin className="h-4 w-4 mr-2" />
               Landmarks ({landmarks.length})
+            </TabsTrigger>
+            <TabsTrigger value="import-export" data-testid="tab-import-export">
+              <FileSpreadsheet className="h-4 w-4 mr-2" />
+              Import/Export
             </TabsTrigger>
           </TabsList>
 
@@ -368,6 +385,223 @@ export default function Admin() {
                 ))}
               </div>
             )}
+          </TabsContent>
+
+          <TabsContent value="import-export">
+            <div className="grid gap-6 md:grid-cols-2">
+              {/* Import Section */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Upload className="h-5 w-5" />
+                    Import Data
+                  </CardTitle>
+                  <CardDescription>
+                    Upload Excel (.xlsx) or CSV files to bulk import cities or landmarks
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <Label>Data Type</Label>
+                    <Select value={importType} onValueChange={(v: 'cities' | 'landmarks') => setImportType(v)}>
+                      <SelectTrigger data-testid="select-import-type">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="cities">Cities</SelectItem>
+                        <SelectItem value="landmarks">Landmarks</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Select File</Label>
+                    <Input
+                      type="file"
+                      accept=".xlsx,.csv"
+                      onChange={(e) => {
+                        setImportFile(e.target.files?.[0] || null);
+                        setImportResult(null);
+                      }}
+                      data-testid="input-import-file"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Supports .xlsx and .csv files up to 5MB (max 5,000 rows)
+                    </p>
+                  </div>
+
+                  <Button
+                    onClick={async () => {
+                      if (!importFile) return;
+                      setImporting(true);
+                      setImportResult(null);
+                      
+                      const formData = new FormData();
+                      formData.append('file', importFile);
+                      formData.append('type', importType);
+                      
+                      try {
+                        const response = await fetch('/api/admin/import', {
+                          method: 'POST',
+                          body: formData
+                        });
+                        const result = await response.json();
+                        
+                        if (!response.ok) {
+                          setImportResult({ success: false, imported: 0, total: 0, errors: [{ row: 0, message: result.error }] });
+                        } else {
+                          setImportResult(result);
+                          queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
+                          queryClient.invalidateQueries({ queryKey: ['/api/admin/landmarks'] });
+                          queryClient.invalidateQueries({ queryKey: ['/api/admin/stats'] });
+                        }
+                      } catch (error) {
+                        setImportResult({ success: false, imported: 0, total: 0, errors: [{ row: 0, message: 'Failed to upload file' }] });
+                      }
+                      setImporting(false);
+                    }}
+                    disabled={!importFile || importing}
+                    className="w-full"
+                    data-testid="button-import"
+                  >
+                    {importing ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Importing...
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="h-4 w-4 mr-2" />
+                        Import {importType === 'cities' ? 'Cities' : 'Landmarks'}
+                      </>
+                    )}
+                  </Button>
+
+                  {importResult && (
+                    <Alert variant={importResult.errors?.length ? 'destructive' : 'default'}>
+                      {importResult.errors?.length ? (
+                        <AlertCircle className="h-4 w-4" />
+                      ) : (
+                        <CheckCircle2 className="h-4 w-4" />
+                      )}
+                      <AlertTitle>
+                        {importResult.errors?.length ? 'Import completed with errors' : 'Import successful'}
+                      </AlertTitle>
+                      <AlertDescription>
+                        <p>Imported {importResult.imported} of {importResult.total} rows</p>
+                        {importResult.errors && importResult.errors.length > 0 && (
+                          <div className="mt-2 max-h-32 overflow-auto text-xs space-y-1">
+                            {importResult.errors.slice(0, 10).map((err, i) => (
+                              <p key={i}>Row {err.row}: {err.message}</p>
+                            ))}
+                            {importResult.errors.length > 10 && (
+                              <p className="text-muted-foreground">...and {importResult.errors.length - 10} more errors</p>
+                            )}
+                          </div>
+                        )}
+                      </AlertDescription>
+                    </Alert>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Export & Templates Section */}
+              <div className="space-y-6">
+                {/* Download Templates */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <FileDown className="h-5 w-5" />
+                      Download Templates
+                    </CardTitle>
+                    <CardDescription>
+                      Download sample files with the correct format for importing
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <Button
+                        variant="outline"
+                        onClick={() => window.open('/api/admin/template?type=cities&format=xlsx', '_blank')}
+                        data-testid="button-template-cities-xlsx"
+                      >
+                        <FileSpreadsheet className="h-4 w-4 mr-2" />
+                        Cities Template (.xlsx)
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => window.open('/api/admin/template?type=cities&format=csv', '_blank')}
+                        data-testid="button-template-cities-csv"
+                      >
+                        <FileSpreadsheet className="h-4 w-4 mr-2" />
+                        Cities Template (.csv)
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => window.open('/api/admin/template?type=landmarks&format=xlsx', '_blank')}
+                        data-testid="button-template-landmarks-xlsx"
+                      >
+                        <FileSpreadsheet className="h-4 w-4 mr-2" />
+                        Landmarks Template (.xlsx)
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => window.open('/api/admin/template?type=landmarks&format=csv', '_blank')}
+                        data-testid="button-template-landmarks-csv"
+                      >
+                        <FileSpreadsheet className="h-4 w-4 mr-2" />
+                        Landmarks Template (.csv)
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Export Current Data */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Download className="h-5 w-5" />
+                      Export Current Data
+                    </CardTitle>
+                    <CardDescription>
+                      Download all existing cities or landmarks data
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <Button
+                        onClick={() => window.open('/api/admin/export?type=cities&format=xlsx', '_blank')}
+                        data-testid="button-export-cities-xlsx"
+                      >
+                        <Download className="h-4 w-4 mr-2" />
+                        Export Cities (.xlsx)
+                      </Button>
+                      <Button
+                        onClick={() => window.open('/api/admin/export?type=cities&format=csv', '_blank')}
+                        data-testid="button-export-cities-csv"
+                      >
+                        <Download className="h-4 w-4 mr-2" />
+                        Export Cities (.csv)
+                      </Button>
+                      <Button
+                        onClick={() => window.open('/api/admin/export?type=landmarks&format=xlsx', '_blank')}
+                        data-testid="button-export-landmarks-xlsx"
+                      >
+                        <Download className="h-4 w-4 mr-2" />
+                        Export Landmarks (.xlsx)
+                      </Button>
+                      <Button
+                        onClick={() => window.open('/api/admin/export?type=landmarks&format=csv', '_blank')}
+                        data-testid="button-export-landmarks-csv"
+                      >
+                        <Download className="h-4 w-4 mr-2" />
+                        Export Landmarks (.csv)
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
       </main>
