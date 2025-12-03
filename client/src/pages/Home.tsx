@@ -1919,6 +1919,11 @@ export default function Home() {
               }}
               selectedLandmark={selectedLandmark}
               onLandmarkSelect={setSelectedLandmark}
+              onShowList={() => {
+                // Show the list panel when tooltip is clicked
+                setIsCardMinimized(false);
+                setShowCruisePort(false);
+              }}
             />
             
             {/* Route View Button - next to zoom controls */}

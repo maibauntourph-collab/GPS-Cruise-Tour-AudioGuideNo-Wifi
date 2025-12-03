@@ -40,29 +40,29 @@ const createBlinkingIcon = (color: string) => {
     html: `
       <div class="blinking-pin" style="
         background-color: ${color};
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         border-radius: 50% 50% 50% 0;
         transform: rotate(-45deg);
-        border: 4px solid white;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        border: 3px solid white;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         display: flex;
         align-items: center;
         justify-content: center;
         animation: pinBlink 1s ease-in-out infinite;
       ">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style="transform: rotate(45deg);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="transform: rotate(45deg);">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
         </svg>
       </div>
       <div class="pulse-ring" style="
         position: absolute;
-        width: 60px;
-        height: 60px;
-        border: 3px solid ${color};
+        width: 48px;
+        height: 48px;
+        border: 2px solid ${color};
         border-radius: 50%;
-        top: -12px;
-        left: -10px;
+        top: -8px;
+        left: -8px;
         animation: pulse-ring 1s ease-out infinite;
       "></div>
       <style>
@@ -70,12 +70,10 @@ const createBlinkingIcon = (color: string) => {
           0%, 100% {
             opacity: 1;
             transform: rotate(-45deg) scale(1);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
           }
           50% {
-            opacity: 0.4;
-            transform: rotate(-45deg) scale(1.15);
-            box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+            opacity: 0.6;
+            transform: rotate(-45deg) scale(1.1);
           }
         }
         @keyframes pulse-ring {
@@ -84,15 +82,15 @@ const createBlinkingIcon = (color: string) => {
             opacity: 0.8;
           }
           100% {
-            transform: scale(2);
+            transform: scale(1.8);
             opacity: 0;
           }
         }
       </style>
     `,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-    popupAnchor: [0, -40],
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
   });
 };
 
@@ -265,6 +263,7 @@ interface MapViewProps {
   endPoint?: { lat: number; lng: number; type: string } | null;
   selectedLandmark?: Landmark | null;
   onLandmarkSelect?: (landmark: Landmark) => void;
+  onShowList?: () => void;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -767,6 +766,7 @@ export default function MapView({
   endPoint,
   selectedLandmark,
   onLandmarkSelect,
+  onShowList,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
@@ -909,7 +909,7 @@ export default function MapView({
         // Alternate tooltip direction based on index to reduce overlap
         const tooltipDirection = index % 2 === 0 ? 'top' : 'bottom';
         const isHighlighted = isSelected || isInTour; // Highlight if selected OR in tour
-        const baseOffset = 35; // Same offset for all tooltips
+        const baseOffset = isHighlighted ? 30 : 35; // Slightly closer for smaller tour tooltips
         const tooltipOffset: [number, number] = tooltipDirection === 'top' 
           ? [0, -baseOffset] 
           : [0, baseOffset];
@@ -972,6 +972,11 @@ export default function MapView({
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
+                  // Show the list panel first
+                  if (onShowList) {
+                    onShowList();
+                  }
+                  // Then select the landmark to show details
                   if (onLandmarkSelect) {
                     onLandmarkSelect(landmark);
                   }
@@ -986,11 +991,12 @@ export default function MapView({
                 style={{ 
                   cursor: 'pointer',
                   fontWeight: isHighlighted ? 600 : 500,
-                  fontSize: '11px', // Same size for all tooltips
+                  fontSize: isHighlighted ? '9px' : '11px', // Smaller for tour items
                   color: isHighlighted ? '#FFD700' : undefined,
                   backgroundColor: isHighlighted ? '#000000' : undefined,
-                  padding: '4px 8px',
+                  padding: isHighlighted ? '2px 6px' : '4px 8px', // Smaller padding for tour items
                   borderRadius: '4px',
+                  whiteSpace: 'nowrap',
                 }}
                 data-testid={`tooltip-landmark-${landmark.id}`}
               >
