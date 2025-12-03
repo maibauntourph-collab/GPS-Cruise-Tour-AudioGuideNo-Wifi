@@ -915,15 +915,14 @@ export default function MapView({
         // Alternate tooltip direction based on index to reduce overlap
         const tooltipDirection = index % 2 === 0 ? 'top' : 'bottom';
         const isHighlighted = isSelected || isInTour; // Highlight if selected OR in tour
-        const baseOffset = isHighlighted ? 30 : 35; // Slightly closer for smaller tour tooltips
+        // Tour items: tooltip at pin position (offset 0), others: offset away
+        const baseOffset = isHighlighted ? 0 : 35;
         const tooltipOffset: [number, number] = tooltipDirection === 'top' 
           ? [0, -baseOffset] 
           : [0, baseOffset];
         
-        // Use blinking icon for selected landmark
-        const icon = isSelected 
-          ? (isActivity ? blinkingActivityIcon : isRestaurant ? blinkingRestaurantIcon : isGiftShop ? blinkingGiftShopIcon : blinkingLandmarkIcon)
-          : (isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon);
+        // Use normal icon for all (tooltip will blink for tour items instead of pin)
+        const icon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon;
         
         return (
           <Marker
@@ -971,7 +970,7 @@ export default function MapView({
               permanent={true}
               direction={tooltipDirection as "top" | "bottom"}
               offset={tooltipOffset}
-              className={`clickable-tooltip ${isHighlighted ? 'selected-landmark-tooltip' : 'landmark-tooltip'}`}
+              className={`clickable-tooltip ${isHighlighted ? 'selected-landmark-tooltip blinking-tooltip' : 'landmark-tooltip'}`}
               interactive={true}
             >
               <div 
