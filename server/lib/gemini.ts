@@ -83,7 +83,7 @@ Respond with ONLY this exact JSON format (no other text):
 }`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.0-pro",
       contents: userPrompt,
     });
 
