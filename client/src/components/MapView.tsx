@@ -415,14 +415,14 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
     clearFallbackPolyline();
     clearSegmentMarkers();
 
-    // Create polyline connecting all waypoints
+    // Create polyline connecting all waypoints (hidden - only for route calculation)
     const polyline = L.polyline(waypoints, {
       color: 'hsl(14, 85%, 55%)',
-      weight: 4,
-      opacity: 0.8,
-      dashArray: '10, 10', // Dashed line to indicate it's an estimate
+      weight: 0,
+      opacity: 0,
+      interactive: false,
     });
-    polyline.addTo(map);
+    // Don't add polyline to map - route line is hidden
     fallbackPolylineRef.current = polyline;
 
     // Calculate segments and create markers
@@ -440,7 +440,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       totalDistance += distance;
       totalDuration += duration;
 
-      // Calculate midpoint for marker
+      // Calculate midpoint
       const midLat = (start.lat + end.lat) / 2;
       const midLng = (start.lng + end.lng) / 2;
 
@@ -451,47 +451,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
         duration: duration,
         midpoint: [midLat, midLng]
       });
-
-      // Create segment info marker
-      const distKm = (distance / 1000).toFixed(1);
-      const durMin = Math.round(duration / 60);
-      const durHours = Math.floor(durMin / 60);
-      const durMinsRemainder = durMin % 60;
-      const timeDisplay = durMin >= 60
-        ? (selectedLanguage === 'ko' 
-            ? `${durHours}시간 ${durMinsRemainder}분`
-            : `${durHours}h ${durMinsRemainder}m`)
-        : (selectedLanguage === 'ko' ? `${durMin}분` : `${durMin}min`);
-
-      const marker = L.marker([midLat, midLng], {
-        icon: L.divIcon({
-          className: 'segment-info-marker',
-          html: `<div style="
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid hsl(14, 85%, 55%);
-            border-radius: 8px;
-            padding: 4px 8px;
-            font-size: 11px;
-            font-weight: 600;
-            color: hsl(14, 85%, 45%);
-            white-space: nowrap;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          ">
-            <span>${distKm}km</span>
-            <span style="color: #666;">•</span>
-            <span>${timeDisplay}</span>
-          </div>`,
-          iconSize: [100, 28],
-          iconAnchor: [50, 14],
-        }),
-        interactive: false,
-      });
-
-      marker.addTo(map);
-      segmentMarkersRef.current.push(marker);
+      // Segment markers are hidden - route info shown in UI panel
     }
 
     // Notify parent components
@@ -580,8 +540,8 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       fitSelectedRoutes: false,
       showAlternatives: false,
       lineOptions: {
-        styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 0.9, weight: 5 }],
-        extendToWaypoints: true,
+        styles: [{ color: 'transparent', opacity: 0, weight: 0 }],
+        extendToWaypoints: false,
         missingRouteTolerance: 0
       },
       show: false,
@@ -636,48 +596,8 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
             }
           }
           
+          // Segment markers are hidden - route info shown in UI panel
           clearSegmentMarkers();
-          segments.forEach((seg) => {
-            const distKm = (seg.distance / 1000).toFixed(1);
-            const durMin = Math.round(seg.duration / 60);
-            const durHours = Math.floor(durMin / 60);
-            const durMinsRemainder = durMin % 60;
-            const timeDisplay = durMin >= 60
-              ? (selectedLanguage === 'ko' 
-                  ? `${durHours}시간 ${durMinsRemainder}분`
-                  : `${durHours}h ${durMinsRemainder}m`)
-              : (selectedLanguage === 'ko' ? `${durMin}분` : `${durMin}min`);
-            
-            const marker = L.marker(seg.midpoint, {
-              icon: L.divIcon({
-                className: 'segment-info-marker',
-                html: `<div style="
-                  background: rgba(255, 255, 255, 0.95);
-                  border: 2px solid hsl(14, 85%, 55%);
-                  border-radius: 8px;
-                  padding: 4px 8px;
-                  font-size: 11px;
-                  font-weight: 600;
-                  color: hsl(14, 85%, 45%);
-                  white-space: nowrap;
-                  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-                  display: flex;
-                  align-items: center;
-                  gap: 6px;
-                ">
-                  <span>${distKm}km</span>
-                  <span style="color: #666;">•</span>
-                  <span>${timeDisplay}</span>
-                </div>`,
-                iconSize: [100, 28],
-                iconAnchor: [50, 14],
-              }),
-              interactive: false,
-            });
-            
-            marker.addTo(map);
-            segmentMarkersRef.current.push(marker);
-          });
           
           if (onSegmentInfoUpdate) {
             onSegmentInfoUpdate(segments);
