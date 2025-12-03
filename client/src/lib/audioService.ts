@@ -1,3 +1,15 @@
+import { offlineStorage } from './offlineStorage';
+
+export type AudioMode = 'auto' | 'mp3' | 'tts';
+
+interface AudioDownloadProgress {
+  landmarkId: string;
+  language: string;
+  progress: number; // 0-100
+  status: 'pending' | 'downloading' | 'complete' | 'error';
+  error?: string;
+}
+
 class AudioService {
   private synthesis: SpeechSynthesis;
   private spokenLandmarks: Set<string>;
@@ -11,6 +23,12 @@ class AudioService {
   private onSentenceChange: ((index: number) => void) | null = null;
   private onSentenceEnd: (() => void) | null = null;
   private isSentenceMode: boolean = false;
+  
+  // MP3 Audio properties
+  private audioElement: HTMLAudioElement | null = null;
+  private audioMode: AudioMode = 'auto';
+  private downloadProgress: Map<string, AudioDownloadProgress> = new Map();
+  private onDownloadProgressChange: ((progress: Map<string, AudioDownloadProgress>) => void) | null = null;
 
   constructor() {
     this.synthesis = window.speechSynthesis;
@@ -24,6 +42,12 @@ class AudioService {
     } else {
       this.currentRate = 1.0;
       localStorage.setItem('tts-speed', '1.0');
+    }
+    
+    // Load saved audio mode
+    const savedMode = localStorage.getItem('audio-mode') as AudioMode;
+    if (savedMode && ['auto', 'mp3', 'tts'].includes(savedMode)) {
+      this.audioMode = savedMode;
     }
 
     // Load voices when available
@@ -395,6 +419,334 @@ class AudioService {
     this.sentenceIndex = 0;
     this.onSentenceChange = null;
     this.onSentenceEnd = null;
+    this.stop();
+  }
+
+  // ==================== MP3 Audio Methods ====================
+
+  // Set audio mode preference
+  setAudioMode(mode: AudioMode) {
+    this.audioMode = mode;
+    localStorage.setItem('audio-mode', mode);
+  }
+
+  getAudioMode(): AudioMode {
+    return this.audioMode;
+  }
+
+  // Check if cached MP3 audio exists for a landmark
+  async hasCachedAudio(landmarkId: string, language: string): Promise<boolean> {
+    try {
+      return await offlineStorage.hasAudio(landmarkId, language);
+    } catch {
+      return false;
+    }
+  }
+
+  // Play MP3 audio from cache or URL
+  async playMP3(
+    landmarkId: string,
+    language: string,
+    audioUrl?: string,
+    onEnd?: () => void
+  ): Promise<boolean> {
+    try {
+      // Stop any current playback
+      this.stopMP3();
+      this.stop();
+
+      // Check for cached audio first
+      const cachedAudio = await offlineStorage.getAudio(landmarkId, language);
+      
+      if (cachedAudio) {
+        // Play from IndexedDB cache
+        const objectUrl = URL.createObjectURL(cachedAudio.audioBlob);
+        this.audioElement = new Audio(objectUrl);
+        
+        this.audioElement.onended = () => {
+          URL.revokeObjectURL(objectUrl);
+          onEnd?.();
+        };
+        
+        this.audioElement.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          console.error('Error playing cached audio');
+        };
+        
+        this.audioElement.playbackRate = this.currentRate;
+        await this.audioElement.play();
+        console.log(`[AudioService] Playing cached MP3 for ${landmarkId} (${language})`);
+        return true;
+      }
+      
+      // If no cached audio, try to play from URL
+      if (audioUrl) {
+        this.audioElement = new Audio(audioUrl);
+        
+        this.audioElement.onended = () => {
+          onEnd?.();
+        };
+        
+        this.audioElement.playbackRate = this.currentRate;
+        await this.audioElement.play();
+        console.log(`[AudioService] Playing MP3 from URL for ${landmarkId}`);
+        return true;
+      }
+      
+      return false;
+    } catch (error) {
+      console.error('[AudioService] Error playing MP3:', error);
+      return false;
+    }
+  }
+
+  // Play audio with automatic fallback (MP3 -> TTS)
+  async playAuto(
+    landmarkId: string,
+    text: string,
+    language: string = 'en',
+    audioUrl?: string,
+    onEnd?: () => void
+  ): Promise<void> {
+    if (this.audioMode === 'tts') {
+      // Force TTS mode
+      this.playText(text, language, this.currentRate, onEnd);
+      return;
+    }
+
+    if (this.audioMode === 'mp3' || this.audioMode === 'auto') {
+      // Try MP3 first
+      const success = await this.playMP3(landmarkId, language, audioUrl, onEnd);
+      
+      if (success) {
+        this.spokenLandmarks.add(landmarkId);
+        return;
+      }
+      
+      // Fallback to TTS if MP3 mode is 'auto'
+      if (this.audioMode === 'auto') {
+        console.log(`[AudioService] MP3 not available, falling back to TTS for ${landmarkId}`);
+        this.playText(text, language, this.currentRate, onEnd);
+        this.spokenLandmarks.add(landmarkId);
+      }
+    }
+  }
+
+  // Download and cache audio from server
+  async downloadAndCacheAudio(
+    landmarkId: string,
+    language: string,
+    text: string,
+    voiceId?: string
+  ): Promise<boolean> {
+    const progressKey = `${landmarkId}-${language}`;
+    
+    try {
+      // Update progress
+      this.updateDownloadProgress(progressKey, {
+        landmarkId,
+        language,
+        progress: 0,
+        status: 'downloading'
+      });
+
+      // Request audio generation from server
+      const response = await fetch('/api/audio/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          landmarkId,
+          language,
+          text,
+          voiceId
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      this.updateDownloadProgress(progressKey, {
+        landmarkId,
+        language,
+        progress: 50,
+        status: 'downloading'
+      });
+
+      // Fetch the MP3 file
+      const audioResponse = await fetch(result.audioUrl);
+      if (!audioResponse.ok) {
+        throw new Error('Failed to download audio file');
+      }
+
+      const audioBlob = await audioResponse.blob();
+      
+      this.updateDownloadProgress(progressKey, {
+        landmarkId,
+        language,
+        progress: 80,
+        status: 'downloading'
+      });
+
+      // Save to IndexedDB
+      await offlineStorage.saveAudio({
+        landmarkId,
+        language,
+        audioBlob,
+        duration: result.duration,
+        sizeBytes: result.sizeBytes,
+        checksum: result.checksum,
+        voiceId: result.voiceId
+      });
+
+      this.updateDownloadProgress(progressKey, {
+        landmarkId,
+        language,
+        progress: 100,
+        status: 'complete'
+      });
+
+      console.log(`[AudioService] Downloaded and cached audio for ${landmarkId} (${language})`);
+      return true;
+    } catch (error: any) {
+      console.error(`[AudioService] Failed to download audio for ${landmarkId}:`, error);
+      
+      this.updateDownloadProgress(progressKey, {
+        landmarkId,
+        language,
+        progress: 0,
+        status: 'error',
+        error: error.message
+      });
+      
+      return false;
+    }
+  }
+
+  // Download audio for multiple landmarks (batch)
+  async downloadBatchAudio(
+    items: Array<{ landmarkId: string; language: string; text: string; voiceId?: string }>
+  ): Promise<{ success: number; failed: number }> {
+    let success = 0;
+    let failed = 0;
+
+    for (const item of items) {
+      const result = await this.downloadAndCacheAudio(
+        item.landmarkId,
+        item.language,
+        item.text,
+        item.voiceId
+      );
+      
+      if (result) {
+        success++;
+      } else {
+        failed++;
+      }
+      
+      // Small delay to avoid overwhelming the server
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    return { success, failed };
+  }
+
+  // Update download progress
+  private updateDownloadProgress(key: string, progress: AudioDownloadProgress) {
+    this.downloadProgress.set(key, progress);
+    this.onDownloadProgressChange?.(new Map(this.downloadProgress));
+  }
+
+  // Set download progress callback
+  setOnDownloadProgressChange(callback: ((progress: Map<string, AudioDownloadProgress>) => void) | null) {
+    this.onDownloadProgressChange = callback;
+  }
+
+  // Get download progress
+  getDownloadProgress(): Map<string, AudioDownloadProgress> {
+    return new Map(this.downloadProgress);
+  }
+
+  // Clear completed downloads from progress
+  clearCompletedDownloads() {
+    const keysToDelete: string[] = [];
+    this.downloadProgress.forEach((progress, key) => {
+      if (progress.status === 'complete' || progress.status === 'error') {
+        keysToDelete.push(key);
+      }
+    });
+    keysToDelete.forEach(key => this.downloadProgress.delete(key));
+    this.onDownloadProgressChange?.(new Map(this.downloadProgress));
+  }
+
+  // Stop MP3 playback
+  stopMP3() {
+    if (this.audioElement) {
+      this.audioElement.pause();
+      this.audioElement.src = '';
+      this.audioElement = null;
+    }
+  }
+
+  // Pause MP3
+  pauseMP3() {
+    if (this.audioElement && !this.audioElement.paused) {
+      this.audioElement.pause();
+    }
+  }
+
+  // Resume MP3
+  resumeMP3() {
+    if (this.audioElement && this.audioElement.paused) {
+      this.audioElement.play();
+    }
+  }
+
+  // Check if MP3 is playing
+  isMP3Playing(): boolean {
+    return this.audioElement !== null && !this.audioElement.paused;
+  }
+
+  // Check if MP3 is paused
+  isMP3Paused(): boolean {
+    return this.audioElement !== null && this.audioElement.paused;
+  }
+
+  // Set MP3 playback rate
+  setMP3Rate(rate: number) {
+    if (this.audioElement) {
+      this.audioElement.playbackRate = rate;
+    }
+    this.currentRate = rate;
+    localStorage.setItem('tts-speed', rate.toString());
+  }
+
+  // Get cached audio stats
+  async getAudioCacheStats(): Promise<{ count: number; totalSizeBytes: number; sizeMB: string }> {
+    const stats = await offlineStorage.getAudioStorageStats();
+    return {
+      ...stats,
+      sizeMB: (stats.totalSizeBytes / (1024 * 1024)).toFixed(2)
+    };
+  }
+
+  // Clear all cached audio
+  async clearAudioCache(): Promise<void> {
+    await offlineStorage.clearAllAudio();
+    console.log('[AudioService] Audio cache cleared');
+  }
+
+  // Delete cached audio for a specific landmark/language
+  async deleteCachedAudio(landmarkId: string, language: string): Promise<void> {
+    await offlineStorage.deleteAudio(landmarkId, language);
+  }
+
+  // Stop all audio (both MP3 and TTS)
+  stopAll() {
+    this.stopMP3();
+    this.stopSentences();
     this.stop();
   }
 }
