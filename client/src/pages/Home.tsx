@@ -128,7 +128,6 @@ export default function Home() {
   const [speechRate, setSpeechRate] = useState<number>(audioService.getCurrentRate());
   const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
   const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
-  const [focusLocation, setFocusLocation] = useState<{ lat: number; lng: number; zoom: number } | null>(null);
   const [showLandmarks, setShowLandmarks] = useState(true);
   const [showActivities, setShowActivities] = useState(true);
   const [showRestaurants, setShowRestaurants] = useState(true);
@@ -422,12 +421,6 @@ export default function Home() {
     audioService.setRate(rate);
   };
 
-  const handleMapMarkerClick = (lat: number, lng: number) => {
-    setFocusLocation({ lat, lng, zoom: 17 });
-    // Clear focus after animation completes
-    setTimeout(() => setFocusLocation(null), 1000);
-  };
-
   // Play click sound effect
   const playClickSound = () => {
     try {
@@ -662,7 +655,6 @@ export default function Home() {
       });
       
       setSelectedCityId(nearestCity.id);
-      setFocusLocation({ lat: position.latitude, lng: position.longitude, zoom: 15 });
       
       toast({
         description: selectedLanguage === 'ko' 
@@ -689,10 +681,6 @@ export default function Home() {
         
         if (restoredStops.length > 0) {
           setTourStops(restoredStops);
-          
-          // Focus on first stop
-          const firstStop = restoredStops[0];
-          setFocusLocation({ lat: firstStop.lat, lng: firstStop.lng, zoom: 14 });
           
           toast({
             description: selectedLanguage === 'ko' 
@@ -752,52 +740,17 @@ export default function Home() {
     setShowAIRecommend(true);
   };
 
-  // Handler for toggle with scroll to first item
+  // Handler for toggle
   const handleToggleLandmarks = () => {
-    const newState = !showLandmarks;
-    setShowLandmarks(newState);
-    
-    // If turning on, focus on first landmark
-    if (newState) {
-      const firstLandmark = landmarks.find(l => 
-        l.category !== 'Activity' && 
-        l.category !== 'Restaurant' && 
-        l.category !== 'Gift Shop' && 
-        l.category !== 'Shop'
-      );
-      if (firstLandmark) {
-        setFocusLocation({ lat: firstLandmark.lat, lng: firstLandmark.lng, zoom: 16 });
-        setTimeout(() => setFocusLocation(null), 1000);
-      }
-    }
+    setShowLandmarks(!showLandmarks);
   };
 
   const handleToggleActivities = () => {
-    const newState = !showActivities;
-    setShowActivities(newState);
-    
-    // If turning on, focus on first activity
-    if (newState) {
-      const firstActivity = landmarks.find(l => l.category === 'Activity');
-      if (firstActivity) {
-        setFocusLocation({ lat: firstActivity.lat, lng: firstActivity.lng, zoom: 16 });
-        setTimeout(() => setFocusLocation(null), 1000);
-      }
-    }
+    setShowActivities(!showActivities);
   };
 
   const handleToggleRestaurants = () => {
-    const newState = !showRestaurants;
-    setShowRestaurants(newState);
-    
-    // If turning on, focus on first restaurant
-    if (newState) {
-      const firstRestaurant = landmarks.find(l => l.category === 'Restaurant');
-      if (firstRestaurant) {
-        setFocusLocation({ lat: firstRestaurant.lat, lng: firstRestaurant.lng, zoom: 16 });
-        setTimeout(() => setFocusLocation(null), 1000);
-      }
-    }
+    setShowRestaurants(!showRestaurants);
   };
 
   // Filter landmarks based on category
@@ -1881,7 +1834,6 @@ export default function Home() {
               selectedLanguage={selectedLanguage}
               isCompact={false}
               sidebarOpen={false}
-              focusLocation={focusLocation}
               tourStops={tourStops}
               onAddToTour={handleAddToTour}
               onTourRouteFound={handleTourRouteFound}
@@ -2039,7 +1991,6 @@ export default function Home() {
           onToggleRestaurants={handleToggleRestaurants}
           onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
           selectedLanguage={selectedLanguage}
-          onMapMarkerClick={handleMapMarkerClick}
           departureTime={departureTime}
           startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type, name: startingPoint.name } : null}
           endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type, name: endPoint.name } : null}
@@ -2328,7 +2279,6 @@ export default function Home() {
         }}
         onSelectLandmark={(landmark) => {
           setSelectedLandmark(landmark);
-          setFocusLocation({ lat: landmark.lat, lng: landmark.lng, zoom: 17 });
           setShowAIRecommend(false);
         }}
       />

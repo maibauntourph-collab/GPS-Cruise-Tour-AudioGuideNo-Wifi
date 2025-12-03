@@ -15,7 +15,6 @@ interface LandmarkPanelProps {
   onClose: () => void;
   onNavigate: (landmark: Landmark) => void;
   selectedLanguage?: string;
-  onMapMarkerClick?: (lat: number, lng: number) => void;
   onAddToTour?: (landmark: Landmark) => void;
   isInTour?: boolean;
 }
@@ -25,7 +24,6 @@ export default function LandmarkPanel({
   onClose,
   onNavigate,
   selectedLanguage = 'en',
-  onMapMarkerClick,
   onAddToTour,
   isInTour = false
 }: LandmarkPanelProps) {
@@ -366,13 +364,6 @@ export default function LandmarkPanel({
                     iconSize: [24, 24],
                     iconAnchor: [12, 24],
                   })}
-                  eventHandlers={{
-                    click: () => {
-                      if (onMapMarkerClick) {
-                        onMapMarkerClick(landmark.lat, landmark.lng);
-                      }
-                    }
-                  }}
                 >
                   <Popup>
                     <strong className="text-xs">{getTranslatedContent(landmark, selectedLanguage, 'name')}</strong>

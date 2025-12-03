@@ -250,7 +250,6 @@ interface MapViewProps {
   selectedLanguage?: string;
   isCompact?: boolean;
   sidebarOpen?: boolean;
-  focusLocation?: { lat: number; lng: number; zoom: number } | null;
   tourStops?: Landmark[];
   onAddToTour?: (landmark: Landmark) => void;
   onTourRouteFound?: (route: any) => void;
@@ -291,21 +290,6 @@ function MapResizer({ isCompact, sidebarOpen }: { isCompact?: boolean; sidebarOp
 
     return () => clearTimeout(timer);
   }, [isCompact, sidebarOpen, map]);
-
-  return null;
-}
-
-function FocusUpdater({ focusLocation }: { focusLocation?: { lat: number; lng: number; zoom: number } | null }) {
-  const map = useMap();
-
-  useEffect(() => {
-    if (focusLocation) {
-      map.setView([focusLocation.lat, focusLocation.lng], focusLocation.zoom, {
-        animate: true,
-        duration: 0.5,
-      });
-    }
-  }, [focusLocation, map]);
 
   return null;
 }
@@ -755,7 +739,6 @@ export default function MapView({
   selectedLanguage = 'en',
   isCompact = false,
   sidebarOpen = false,
-  focusLocation,
   tourStops = [],
   onAddToTour,
   onTourRouteFound,
@@ -887,11 +870,14 @@ export default function MapView({
       zoom={cityZoom || 14}
       className="h-full w-full"
       zoomControl={true}
+      scrollWheelZoom={true}
+      doubleClickZoom={true}
+      touchZoom={true}
+      dragging={true}
     >
       <MapUpdater position={userPosition} />
       <CityUpdater center={cityCenter} zoom={cityZoom} />
       <MapResizer isCompact={isCompact} sidebarOpen={sidebarOpen} />
-      <FocusUpdater focusLocation={focusLocation} />
       <MapClickHandler 
         isSelectingHotelOnMap={isSelectingHotelOnMap}
         isSelectingEndPointOnMap={isSelectingEndPointOnMap}
@@ -1030,6 +1016,17 @@ export default function MapView({
           onRouteFound={onRouteFound}
         />
       )}
+
+      {/* Tour Routing Machine - for calculating tour route */}
+      <TourRoutingMachine
+        tourStops={tourStops}
+        onTourRouteFound={onTourRouteFound}
+        activeRoute={activeRoute}
+        onTourRouteClick={onTourRouteClick}
+        startingPoint={startingPoint}
+        endPoint={endPoint}
+        selectedLanguage={selectedLanguage}
+      />
 
       {/* Starting Point Marker */}
       {startingPoint && startingPoint.lat && startingPoint.lng && (

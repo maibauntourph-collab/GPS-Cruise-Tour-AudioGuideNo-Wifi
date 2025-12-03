@@ -23,7 +23,7 @@ The application is built with a React frontend and an Express.js backend, commun
 - **PWA Integration:** Includes a PWA manifest for install-to-home-screen functionality and a service worker for offline capabilities, network status indicators, and an install prompt.
 
 **Technical Implementations & Feature Specifications:**
-- **Interactive Map & Navigation:** Implemented using React-Leaflet and Leaflet Routing Machine for map display, GPS tracking, automatic map centering, and turn-by-turn directions with custom terracotta route styling.
+- **Interactive Map & Navigation:** Implemented using React-Leaflet and Leaflet Routing Machine for map display, GPS tracking, and turn-by-turn directions with custom terracotta route styling. Map supports scroll wheel zoom, double-click zoom, touch zoom, and dragging.
 - **Audio Narration:** Utilizes the Web Speech API for auto-triggered, language-aware audio narration within landmark radii. It supports adjustable speech rates (0.5x-2x) with persistence via LocalStorage and handles audio playback without repetition.
 - **Per-Language TTS Voice Selection:** Users can select their preferred TTS voice for each language from a horizontal scrolling card-based UI in Settings. Voice cards display:
   - Voice name and language code (e.g., en-US, ko-KR)

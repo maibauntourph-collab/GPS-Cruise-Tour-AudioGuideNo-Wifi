@@ -71,7 +71,6 @@ interface UnifiedFloatingCardProps {
   
   // Common props
   selectedLanguage?: string;
-  onMapMarkerClick?: (lat: number, lng: number) => void;
   
   // Departure time for traffic estimation
   departureTime?: Date | null;
@@ -242,7 +241,6 @@ export default function UnifiedFloatingCard({
   onUpdateStopDuration,
   aiRecommendation = null,
   selectedLanguage = 'en',
-  onMapMarkerClick,
   departureTime = null,
   startingPoint = null,
   endPoint = null,
