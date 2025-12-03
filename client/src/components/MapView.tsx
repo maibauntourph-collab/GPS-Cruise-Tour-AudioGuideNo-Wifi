@@ -526,11 +526,12 @@ export default function MapView({
       let touchTimer: NodeJS.Timeout | null = null;
 
       const handleTouchStart = (e: TouchEvent) => {
-        e.preventDefault();
+        // Only handle single-finger touch (long press), allow multi-touch for zoom
+        if (e.touches.length > 1) return;
+        
         touchTimer = setTimeout(() => {
           if (onAddToTour) {
             onAddToTour(landmark);
-            // Close popup
             marker.closePopup();
           }
         }, 1000);
@@ -676,10 +677,10 @@ export default function MapView({
                   }
                 }}
                 onMouseDown={(e) => {
-                  e.stopPropagation();
+                  // Don't stop propagation - allow map zoom
                 }}
                 onTouchStart={(e) => {
-                  e.stopPropagation();
+                  // Don't stop propagation - allow map zoom
                 }}
                 className={isHighlighted ? 'selected-tooltip-content' : ''}
                 style={{ 

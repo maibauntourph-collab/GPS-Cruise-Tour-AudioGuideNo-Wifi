@@ -383,6 +383,19 @@
   }
 }
 
+/* Leaflet map interaction - ensure zoom and pan work */
+.leaflet-container {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+}
+
+.leaflet-pane,
+.leaflet-map-pane,
+.leaflet-tile-pane,
+.leaflet-overlay-pane {
+  pointer-events: auto !important;
+}
+
 /* Leaflet tooltip smooth transitions - prevent blinking */
 .leaflet-tooltip {
   transition: opacity 0.2s ease-in-out !important;
