@@ -42,6 +42,7 @@ import {
 } from '@/components/ui/popover';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { ChevronDown } from 'lucide-react';
 
 // Detect browser language and map to supported language
@@ -788,15 +789,22 @@ export default function Home() {
       
       <div className="flex w-full flex-1 flex-col h-screen">
         <header className="flex items-center gap-1 sm:gap-2 px-2 py-1 border-b bg-background z-[1001]">
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={() => setShowMenu(true)}
-            data-testid="button-menu-toggle" 
-            className="h-8 w-8"
-          >
-            <Menu className="h-4 w-4" />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setShowMenu(true)}
+                data-testid="button-menu-toggle" 
+                className="h-8 w-8"
+              >
+                <Menu className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{selectedLanguage === 'ko' ? '설정 메뉴 열기' : 'Open Settings Menu'}</p>
+            </TooltipContent>
+          </Tooltip>
           <h1 
             className="font-serif font-semibold text-base sm:text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-0.5 rounded-md transition-colors truncate" 
             onClick={() => setShowMenu(true)}
@@ -807,36 +815,43 @@ export default function Home() {
           </h1>
           
           {/* List Toggle Button */}
-          <Button
-            variant={isCardMinimized ? "outline" : "default"}
-            size="sm"
-            className="h-7 gap-1 px-2"
-            onClick={() => {
-              // 카드가 최소화되어 있을 때
-              if (isCardMinimized) {
-                // 도시에 크루즈 항구가 있으면 먼저 항구 정보 표시
-                if (selectedCity?.cruisePort) {
-                  setShowCruisePort(true);
-                }
-                setIsCardMinimized(false);
-              } else {
-                // 카드가 펼쳐져 있을 때
-                if (showCruisePort && selectedCity?.cruisePort) {
-                  // 크루즈 항구 정보가 표시 중이면 끄고 목록만 표시
-                  setShowCruisePort(false);
-                } else {
-                  // 목록만 표시 중이면 카드 최소화
-                  setIsCardMinimized(true);
-                }
-              }
-            }}
-            data-testid="button-toggle-list"
-          >
-            <List className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline text-xs">
-              {t('list', selectedLanguage)}
-            </span>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant={isCardMinimized ? "outline" : "default"}
+                size="sm"
+                className="h-7 gap-1 px-2"
+                onClick={() => {
+                  // 카드가 최소화되어 있을 때
+                  if (isCardMinimized) {
+                    // 도시에 크루즈 항구가 있으면 먼저 항구 정보 표시
+                    if (selectedCity?.cruisePort) {
+                      setShowCruisePort(true);
+                    }
+                    setIsCardMinimized(false);
+                  } else {
+                    // 카드가 펼쳐져 있을 때
+                    if (showCruisePort && selectedCity?.cruisePort) {
+                      // 크루즈 항구 정보가 표시 중이면 끄고 목록만 표시
+                      setShowCruisePort(false);
+                    } else {
+                      // 목록만 표시 중이면 카드 최소화
+                      setIsCardMinimized(true);
+                    }
+                  }
+                }}
+                data-testid="button-toggle-list"
+              >
+                <List className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-xs">
+                  {t('list', selectedLanguage)}
+                </span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{selectedLanguage === 'ko' ? '명소 목록 표시/숨기기' : 'Show/Hide Landmark List'}</p>
+            </TooltipContent>
+          </Tooltip>
           
           {/* Starting/End Point Selector */}
           <Popover open={isStartingPointPopoverOpen} onOpenChange={(open) => {
@@ -846,23 +861,30 @@ export default function Home() {
               setLocationSearchResults([]);
             }
           }}>
-            <PopoverTrigger asChild>
-              <Button
-                variant={(startingPoint || endPoint) ? "default" : "outline"}
-                size="sm"
-                className={`h-7 gap-1 px-2 ${(startingPoint || endPoint) ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' : ''}`}
-                data-testid="button-starting-point"
-              >
-                <div className="flex items-center gap-0.5">
-                  <Circle className={`w-2.5 h-2.5 ${startingPoint ? 'fill-white' : ''}`} />
-                  <span className="text-[10px]">→</span>
-                  <Flag className={`w-2.5 h-2.5 ${endPoint ? 'fill-white' : ''}`} />
-                </div>
-                <span className="hidden sm:inline text-xs">
-                  {selectedLanguage === 'ko' ? '출발/도착' : 'Start/End'}
-                </span>
-              </Button>
-            </PopoverTrigger>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={(startingPoint || endPoint) ? "default" : "outline"}
+                    size="sm"
+                    className={`h-7 gap-1 px-2 ${(startingPoint || endPoint) ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' : ''}`}
+                    data-testid="button-starting-point"
+                  >
+                    <div className="flex items-center gap-0.5">
+                      <Circle className={`w-2.5 h-2.5 ${startingPoint ? 'fill-white' : ''}`} />
+                      <span className="text-[10px]">→</span>
+                      <Flag className={`w-2.5 h-2.5 ${endPoint ? 'fill-white' : ''}`} />
+                    </div>
+                    <span className="hidden sm:inline text-xs">
+                      {selectedLanguage === 'ko' ? '출발/도착' : 'Start/End'}
+                    </span>
+                  </Button>
+                </PopoverTrigger>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '출발지/도착지 및 출발 시간 설정' : 'Set Start/End Points & Departure Time'}</p>
+              </TooltipContent>
+            </Tooltip>
             <PopoverContent className="w-80 p-2 z-[9999] max-h-[70vh] overflow-y-auto" align="start">
               <Tabs defaultValue="start" value={pointSelectionMode} onValueChange={(v) => setPointSelectionMode(v as 'start' | 'end' | 'time')}>
                 <TabsList className="grid w-full grid-cols-3 mb-2">
@@ -1584,77 +1606,113 @@ export default function Home() {
           </Popover>
           
           <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handleAiRecommendation}
-              data-testid="button-ai-recommend"
-              className="h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600"
-              title={selectedLanguage === 'ko' ? 'AI 추천 일정' : 'AI Recommend'}
-            >
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-              <span className="hidden sm:inline text-xs">
-                {selectedLanguage === 'ko' ? 'AI 추천' : 'AI'}
-              </span>
-            </Button>
-            <Button
-              variant={showLandmarks ? "default" : "outline"}
-              size="icon"
-              onClick={handleToggleLandmarks}
-              data-testid="button-toggle-landmarks"
-              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : 'animate-blink'}`}
-              title={t('landmarks', selectedLanguage)}
-            >
-              <LandmarkIcon className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs">{t('landmarks', selectedLanguage)}</span>
-            </Button>
-            <Button
-              variant={showActivities ? "default" : "outline"}
-              size="icon"
-              onClick={handleToggleActivities}
-              data-testid="button-toggle-activities"
-              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : 'animate-blink'}`}
-              title={t('activities', selectedLanguage)}
-            >
-              <Activity className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs">{t('activities', selectedLanguage)}</span>
-            </Button>
-            <Button
-              variant={showRestaurants ? "default" : "outline"}
-              size="icon"
-              onClick={handleToggleRestaurants}
-              data-testid="button-toggle-restaurants"
-              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : 'animate-blink'}`}
-              title={t('restaurants', selectedLanguage)}
-            >
-              <Utensils className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs">{t('restaurants', selectedLanguage)}</span>
-            </Button>
-            <Button
-              variant={showGiftShops ? "default" : "outline"}
-              size="icon"
-              onClick={() => setShowGiftShops(!showGiftShops)}
-              data-testid="button-toggle-giftshops"
-              className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
-              title={t('giftShops', selectedLanguage)}
-            >
-              <ShoppingBag className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs">{t('giftShops', selectedLanguage)}</span>
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleAiRecommendation}
+                  data-testid="button-ai-recommend"
+                  className="h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  <span className="hidden sm:inline text-xs">
+                    {selectedLanguage === 'ko' ? 'AI 추천' : 'AI'}
+                  </span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? 'AI가 최적의 관광 일정을 추천합니다' : 'AI recommends optimal tour itinerary'}</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={showLandmarks ? "default" : "outline"}
+                  size="icon"
+                  onClick={handleToggleLandmarks}
+                  data-testid="button-toggle-landmarks"
+                  className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : 'animate-blink'}`}
+                >
+                  <LandmarkIcon className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline text-xs">{t('landmarks', selectedLanguage)}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '유명 관광 명소 표시/숨기기' : 'Show/Hide Famous Landmarks'}</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={showActivities ? "default" : "outline"}
+                  size="icon"
+                  onClick={handleToggleActivities}
+                  data-testid="button-toggle-activities"
+                  className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : 'animate-blink'}`}
+                >
+                  <Activity className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline text-xs">{t('activities', selectedLanguage)}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '체험/액티비티 표시/숨기기' : 'Show/Hide Activities & Experiences'}</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={showRestaurants ? "default" : "outline"}
+                  size="icon"
+                  onClick={handleToggleRestaurants}
+                  data-testid="button-toggle-restaurants"
+                  className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : 'animate-blink'}`}
+                >
+                  <Utensils className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline text-xs">{t('restaurants', selectedLanguage)}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '추천 맛집 표시/숨기기' : 'Show/Hide Recommended Restaurants'}</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={showGiftShops ? "default" : "outline"}
+                  size="icon"
+                  onClick={() => setShowGiftShops(!showGiftShops)}
+                  data-testid="button-toggle-giftshops"
+                  className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
+                >
+                  <ShoppingBag className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline text-xs">{t('giftShops', selectedLanguage)}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '기념품 가게 표시/숨기기' : 'Show/Hide Gift Shops'}</p>
+              </TooltipContent>
+            </Tooltip>
             {selectedCity?.cruisePort && (
-              <Button
-                variant={showCruisePort ? "default" : "outline"}
-                size="icon"
-                onClick={() => setShowCruisePort(!showCruisePort)}
-                data-testid="button-toggle-cruise-port"
-                className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
-                title={t('cruisePortInfo', selectedLanguage)}
-              >
-                <Ship className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline text-xs">{t('cruisePortInfo', selectedLanguage)}</span>
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant={showCruisePort ? "default" : "outline"}
+                    size="icon"
+                    onClick={() => setShowCruisePort(!showCruisePort)}
+                    data-testid="button-toggle-cruise-port"
+                    className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
+                  >
+                    <Ship className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline text-xs">{t('cruisePortInfo', selectedLanguage)}</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{selectedLanguage === 'ko' ? '크루즈 항구 정보 및 교통편 보기' : 'View Cruise Port Info & Transport'}</p>
+                </TooltipContent>
+              </Tooltip>
             )}
           </div>
         </header>
