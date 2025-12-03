@@ -28,7 +28,12 @@ The application is built with a React frontend and an Express.js backend, commun
 - **Multi-City & Multi-Language Support:** Offers city and language selectors with 10 supported languages (English, Korean, Spanish, French, German, Italian, Chinese, Japanese, Portuguese, Russian) to dynamically load city-specific landmarks and activities, provide translated content including detailedDescription fields, and use language-specific TTS voices. All activities and UI elements include complete translations.
 - **Landmark & Activity Details:** Each point of interest includes rich information, a photo gallery with a full-screen viewer, historical details, and an embedded map for precise location, accessible via a detailed modal.
 - **Visited Landmarks Tracking:** Progress is tracked per session, stored in a PostgreSQL database (via Drizzle ORM), and visualized with a progress bar and statistics.
-- **Offline Functionality:** A service worker pre-caches static assets, all city landmarks, activities, and map tiles, allowing full application functionality offline with cached API responses.
+- **Offline Functionality:** Comprehensive offline support with multiple layers:
+  - Service Worker: Pre-caches static assets, city landmarks, activities, and map tiles
+  - IndexedDB Storage: Client-side database for offline city data with visited landmarks queue
+  - Offline Package API: `/api/offline-package` and `/api/offline-package/:cityId` endpoints with ETag-based versioning for efficient delta sync
+  - Automatic Data Source Switching: `useOfflineMode` hook detects network status and automatically falls back to IndexedDB when offline
+  - Queue-based Sync: Visited landmarks are queued locally when offline and synced when connection is restored
 - **Content Filtering:** Independent filter buttons allow toggling the visibility of Landmarks (terracotta), Activities (blue), Restaurants (orange), and Gift Shops (gold) on both the map and in the list. Filter state is synchronized between the header and unified floating card for consistent user experience. Each category uses distinct colors for easy identification.
 - **Tour Route Planning:** Users can create custom tour routes by clicking markers or using the "Add to Tour" button in the landmark detail panel. The system uses Leaflet Routing Machine to calculate actual road routes between tour stops, displaying total distance (km) and estimated travel time (minutes) in the header badge (e.g., "4.0km • 11min"). The map visualizes the tour with a terracotta dashed polyline following real roads. When adding tour stops, the map maintains the user's current zoom level and position (does not auto-fit the route), allowing users to stay focused on their area of interest while the route is calculated and displayed. Tour route info automatically clears when stops are removed or turn-by-turn navigation is activated. A Clear Tour button allows resetting the entire route. The routing system uses defensive cleanup to prevent errors when reconfiguring routes by clearing waypoints before removing controls.
 - **Ticket & Tour Booking:** Integrated booking platform links (GetYourGuide, Viator, Klook) in the landmark detail panel for both landmarks and activities. Search URLs are dynamically generated using translated landmark names. All window.open calls include 'noopener,noreferrer' security features to prevent reverse tabnabbing attacks. UI translations for booking labels are available in all supported languages (en, ko, it, es, de, zh, ja).
@@ -38,6 +43,7 @@ The application is built with a React frontend and an Express.js backend, commun
     - `GET /api/cities`, `GET /api/cities/:id`
     - `GET /api/landmarks?cityId={cityId}`, `GET /api/landmarks/:id`
     - `POST /api/visited`, `GET /api/visited?sessionId={id}`, `GET /api/visited/count?sessionId={id}`, `GET /api/visited/:landmarkId?sessionId={id}`
+    - `GET /api/offline-package` (list all cities for offline download), `GET /api/offline-package/:cityId` (download city package with ETag support)
 
 **System Design Choices:**
 - **Frontend Framework:** React 18 with TypeScript.
