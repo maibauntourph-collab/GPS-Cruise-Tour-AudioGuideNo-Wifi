@@ -232,7 +232,18 @@ export default function Home() {
       googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
     }
     
-    window.open(googleMapsUrl, '_blank');
+    window.open(googleMapsUrl, '_blank', 'noopener,noreferrer');
+    setShowDirectionsDialog(false);
+    setPendingLandmark(null);
+  };
+
+  const openWaze = () => {
+    if (!pendingLandmark) return;
+    
+    // Waze deep link format: https://waze.com/ul?ll=LAT,LNG&navigate=yes
+    const wazeUrl = `https://waze.com/ul?ll=${pendingLandmark.lat},${pendingLandmark.lng}&navigate=yes`;
+    
+    window.open(wazeUrl, '_blank', 'noopener,noreferrer');
     setShowDirectionsDialog(false);
     setPendingLandmark(null);
   };
@@ -1213,6 +1224,13 @@ export default function Home() {
               className="bg-primary hover:bg-primary/90"
             >
               {t('useGoogleMaps', selectedLanguage)}
+            </AlertDialogAction>
+            <AlertDialogAction 
+              onClick={openWaze} 
+              data-testid="button-use-waze"
+              className="bg-[#33ccff] hover:bg-[#33ccff]/90 text-black"
+            >
+              {t('useWaze', selectedLanguage)}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
