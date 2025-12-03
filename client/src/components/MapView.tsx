@@ -913,10 +913,11 @@ export default function MapView({
         const isInTour = tourStops.some(stop => stop.id === landmark.id);
         
         // Alternate tooltip direction based on index to reduce overlap
-        const tooltipDirection = index % 2 === 0 ? 'top' : 'bottom';
         const isHighlighted = isSelected || isInTour; // Highlight if selected OR in tour
-        // Tour items: tooltip at pin position (offset 0), others: offset away
-        const baseOffset = isHighlighted ? 0 : 35;
+        // Tour items: always show tooltip above the pin
+        const tooltipDirection = isHighlighted ? 'top' : (index % 2 === 0 ? 'top' : 'bottom');
+        // Tour items: position just above the pin (offset -38 to be above 32px pin)
+        const baseOffset = isHighlighted ? 38 : 35;
         const tooltipOffset: [number, number] = tooltipDirection === 'top' 
           ? [0, -baseOffset] 
           : [0, baseOffset];
