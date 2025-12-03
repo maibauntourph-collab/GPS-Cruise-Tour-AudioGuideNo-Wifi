@@ -1183,6 +1183,62 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '바티칸 박물관은 16세기 교황 율리오 2세가 시작한 조각 컬렉션에서 유래했으며, 르네상스 거장들과 고대 문명의 작품들을 포함하도록 성장했습니다.',
         yearBuilt: '1506년',
         architect: '다양한 교황과 건축가들'
+      },
+      es: {
+        name: 'Museos Vaticanos',
+        narration: 'Bienvenido a los Museos Vaticanos, una de las mayores colecciones de arte del mundo. Fundados por el Papa Julio II en el siglo XVI, estos museos exhiben obras de la inmensa colección acumulada por la Iglesia Católica y el papado a lo largo de los siglos.',
+        description: 'Uno de los museos de arte más grandes e impresionantes del mundo',
+        historicalInfo: 'Los Museos Vaticanos se originaron a partir de una colección de esculturas iniciada por el Papa Julio II en el siglo XVI y han crecido hasta incluir obras de los maestros del Renacimiento y civilizaciones antiguas.',
+        yearBuilt: '1506',
+        architect: 'Varios papas y arquitectos'
+      },
+      fr: {
+        name: 'Musées du Vatican',
+        narration: 'Bienvenue aux Musées du Vatican, l\'une des plus grandes collections d\'art au monde. Fondés par le pape Jules II au XVIe siècle, ces musées présentent des œuvres de l\'immense collection amassée par l\'Église catholique et la papauté au fil des siècles.',
+        description: 'L\'un des plus grands et des plus impressionnants musées d\'art au monde',
+        historicalInfo: 'Les Musées du Vatican sont issus d\'une collection de sculptures commencée par le pape Jules II au XVIe siècle et ont grandi pour inclure des œuvres des maîtres de la Renaissance et des civilisations anciennes.',
+        yearBuilt: '1506',
+        architect: 'Divers papes et architectes'
+      },
+      de: {
+        name: 'Vatikanische Museen',
+        narration: 'Willkommen in den Vatikanischen Museen, einer der größten Kunstsammlungen der Welt. Gegründet von Papst Julius II. im 16. Jahrhundert, zeigen diese Museen Werke aus der immensen Sammlung, die die katholische Kirche und das Papsttum über Jahrhunderte angesammelt haben.',
+        description: 'Eines der größten und beeindruckendsten Kunstmuseen der Welt',
+        historicalInfo: 'Die Vatikanischen Museen entstanden aus einer Skulpturensammlung, die Papst Julius II. im 16. Jahrhundert begann, und sind gewachsen, um Werke der Renaissance-Meister und antiker Zivilisationen einzuschließen.',
+        yearBuilt: '1506',
+        architect: 'Verschiedene Päpste und Architekten'
+      },
+      zh: {
+        name: '梵蒂冈博物馆',
+        narration: '欢迎来到梵蒂冈博物馆，世界上最伟大的艺术收藏之一。由教皇儒略二世于16世纪创立，这些博物馆展示了天主教会和教廷几个世纪以来积累的大量收藏品。',
+        description: '世界上最大、最令人印象深刻的艺术博物馆之一',
+        historicalInfo: '梵蒂冈博物馆起源于教皇儒略二世在16世纪开始的雕塑收藏，并已发展到包括文艺复兴大师和古代文明的作品。',
+        yearBuilt: '1506年',
+        architect: '多位教皇和建筑师'
+      },
+      ja: {
+        name: 'バチカン美術館',
+        narration: '世界最大級の美術コレクションの一つであるバチカン美術館へようこそ。16世紀に教皇ユリウス2世によって設立されたこれらの美術館は、カトリック教会と教皇庁が何世紀にもわたって収集した膨大なコレクションの作品を展示しています。',
+        description: '世界で最も大きく印象的な美術館の一つ',
+        historicalInfo: 'バチカン美術館は、16世紀に教皇ユリウス2世が始めた彫刻コレクションから始まり、ルネサンスの巨匠や古代文明の作品を含むまでに成長しました。',
+        yearBuilt: '1506年',
+        architect: '歴代の教皇と建築家たち'
+      },
+      pt: {
+        name: 'Museus Vaticanos',
+        narration: 'Bem-vindo aos Museus Vaticanos, uma das maiores coleções de arte do mundo. Fundados pelo Papa Júlio II no século XVI, estes museus exibem obras da imensa coleção acumulada pela Igreja Católica e pelo papado ao longo dos séculos.',
+        description: 'Um dos maiores e mais impressionantes museus de arte do mundo',
+        historicalInfo: 'Os Museus Vaticanos originaram-se de uma coleção de esculturas iniciada pelo Papa Júlio II no século XVI e cresceram para incluir obras dos mestres do Renascimento e civilizações antigas.',
+        yearBuilt: '1506',
+        architect: 'Vários papas e arquitetos'
+      },
+      ru: {
+        name: 'Музеи Ватикана',
+        narration: 'Добро пожаловать в Музеи Ватикана, одну из величайших коллекций искусства в мире. Основанные папой Юлием II в XVI веке, эти музеи демонстрируют произведения из огромной коллекции, собранной Католической церковью и папством на протяжении веков.',
+        description: 'Один из крупнейших и впечатляющих художественных музеев мира',
+        historicalInfo: 'Музеи Ватикана возникли из коллекции скульптур, начатой папой Юлием II в XVI веке, и выросли до включения работ мастеров Возрождения и древних цивилизаций.',
+        yearBuilt: '1506 г.',
+        architect: 'Различные папы и архитекторы'
       }
     }
   },
@@ -1233,6 +1289,62 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '성 베드로 대성당은 1506년부터 1626년 사이에 성 베드로의 무덤이 있는 전통적인 장소에 건설되었습니다. 가장 신성한 가톨릭 성지 중 하나로 여겨집니다.',
         yearBuilt: '1506-1626년',
         architect: '브라만테, 미켈란젤로, 베르니니'
+      },
+      es: {
+        name: 'Basílica de San Pedro',
+        narration: 'Bienvenido a la Basílica de San Pedro, el corazón del mundo católico y una de las iglesias más grandes jamás construidas. Esta obra maestra del Renacimiento se levanta en el lugar tradicional donde San Pedro, el primer Papa, fue crucificado y enterrado.',
+        description: 'La iglesia más grande del mundo y centro del catolicismo',
+        historicalInfo: 'La Basílica de San Pedro fue construida entre 1506 y 1626 en el lugar tradicional de la tumba de San Pedro. Es considerada uno de los santuarios católicos más sagrados.',
+        yearBuilt: '1506-1626',
+        architect: 'Bramante, Miguel Ángel, Bernini'
+      },
+      fr: {
+        name: 'Basilique Saint-Pierre',
+        narration: 'Bienvenue à la Basilique Saint-Pierre, le cœur du monde catholique et l\'une des plus grandes églises jamais construites. Ce chef-d\'œuvre de la Renaissance s\'élève sur le site traditionnel où Saint Pierre, le premier pape, a été crucifié et enterré.',
+        description: 'La plus grande église du monde et centre du catholicisme',
+        historicalInfo: 'La Basilique Saint-Pierre a été construite entre 1506 et 1626 sur le site traditionnel du tombeau de Saint Pierre. Elle est considérée comme l\'un des sanctuaires catholiques les plus sacrés.',
+        yearBuilt: '1506-1626',
+        architect: 'Bramante, Michel-Ange, Le Bernin'
+      },
+      de: {
+        name: 'Petersdom',
+        narration: 'Willkommen im Petersdom, dem Herzen der katholischen Welt und einer der größten Kirchen, die je gebaut wurden. Dieses Renaissance-Meisterwerk steht an der traditionellen Stelle, wo der Heilige Petrus, der erste Papst, gekreuzigt und begraben wurde.',
+        description: 'Die größte Kirche der Welt und Zentrum des Katholizismus',
+        historicalInfo: 'Der Petersdom wurde zwischen 1506 und 1626 an der traditionellen Grabstätte des Heiligen Petrus erbaut. Er gilt als eines der heiligsten katholischen Heiligtümer.',
+        yearBuilt: '1506-1626',
+        architect: 'Bramante, Michelangelo, Bernini'
+      },
+      zh: {
+        name: '圣彼得大教堂',
+        narration: '欢迎来到圣彼得大教堂，天主教世界的中心，也是有史以来建造的最大教堂之一。这座文艺复兴杰作矗立在传统上圣彼得——第一任教皇——被钉十字架和埋葬的地方。',
+        description: '世界上最大的教堂，天主教的中心',
+        historicalInfo: '圣彼得大教堂于1506年至1626年间建造在圣彼得墓的传统地点上。它被视为最神圣的天主教圣殿之一。',
+        yearBuilt: '1506-1626年',
+        architect: '布拉曼特、米开朗基罗、贝尔尼尼'
+      },
+      ja: {
+        name: 'サン・ピエトロ大聖堂',
+        narration: 'カトリック世界の中心であり、史上最大の教会の一つであるサン・ピエトロ大聖堂へようこそ。このルネサンスの傑作は、初代教皇である聖ペトロが十字架にかけられ埋葬された伝統的な場所に建っています。',
+        description: '世界最大の教会であり、カトリックの中心地',
+        historicalInfo: 'サン・ピエトロ大聖堂は1506年から1626年にかけて聖ペトロの墓がある伝統的な場所に建設されました。最も神聖なカトリックの聖地の一つとされています。',
+        yearBuilt: '1506-1626年',
+        architect: 'ブラマンテ、ミケランジェロ、ベルニーニ'
+      },
+      pt: {
+        name: 'Basílica de São Pedro',
+        narration: 'Bem-vindo à Basílica de São Pedro, o coração do mundo católico e uma das maiores igrejas já construídas. Esta obra-prima do Renascimento ergue-se no local tradicional onde São Pedro, o primeiro Papa, foi crucificado e enterrado.',
+        description: 'A maior igreja do mundo e centro do catolicismo',
+        historicalInfo: 'A Basílica de São Pedro foi construída entre 1506 e 1626 no local tradicional do túmulo de São Pedro. É considerada um dos santuários católicos mais sagrados.',
+        yearBuilt: '1506-1626',
+        architect: 'Bramante, Michelangelo, Bernini'
+      },
+      ru: {
+        name: 'Собор Святого Петра',
+        narration: 'Добро пожаловать в Собор Святого Петра, сердце католического мира и одну из крупнейших церквей, когда-либо построенных. Этот шедевр эпохи Возрождения стоит на традиционном месте, где Святой Пётр, первый Папа, был распят и погребён.',
+        description: 'Крупнейшая церковь в мире и центр католицизма',
+        historicalInfo: 'Собор Святого Петра был построен между 1506 и 1626 годами на традиционном месте гробницы Святого Петра. Он считается одной из самых священных католических святынь.',
+        yearBuilt: '1506-1626 гг.',
+        architect: 'Браманте, Микеланджело, Бернини'
       }
     }
   },
@@ -1283,6 +1395,62 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '원래 하드리아누스 황제가 영묘로 의뢰했으며, 요새, 감옥, 교황 거주지로 사용되었습니다. 590년 전설적인 환상 이후 대천사 미카엘의 이름을 따서 명명되었습니다.',
         yearBuilt: '123-139년',
         architect: '하드리아누스 황제'
+      },
+      es: {
+        name: 'Castillo de Sant\'Angelo',
+        narration: 'Bienvenido al Castillo de Sant\'Angelo, la imponente fortaleza cilíndrica a orillas del río Tíber. Originalmente construido como mausoleo para el emperador Adriano, ha servido como fortaleza papal, prisión y ahora museo.',
+        description: 'Antiguo mausoleo convertido en fortaleza y residencia papal',
+        historicalInfo: 'Originalmente encargado por el emperador Adriano como mausoleo, ha servido como fortaleza, prisión y residencia papal. Recibe su nombre del Arcángel Miguel tras una visión legendaria en el año 590 d.C.',
+        yearBuilt: '123-139 d.C.',
+        architect: 'Emperador Adriano'
+      },
+      fr: {
+        name: 'Château Saint-Ange',
+        narration: 'Bienvenue au Château Saint-Ange, l\'imposante forteresse cylindrique sur les rives du Tibre. Construit à l\'origine comme mausolée pour l\'empereur Hadrien, il a servi de forteresse papale, de prison et maintenant de musée.',
+        description: 'Ancien mausolée transformé en forteresse et résidence papale',
+        historicalInfo: 'Commandé à l\'origine par l\'empereur Hadrien comme mausolée, il a servi de forteresse, de prison et de résidence papale. Il porte le nom de l\'Archange Michel suite à une vision légendaire en 590 après J.-C.',
+        yearBuilt: '123-139 apr. J.-C.',
+        architect: 'Empereur Hadrien'
+      },
+      de: {
+        name: 'Engelsburg',
+        narration: 'Willkommen in der Engelsburg, der imposanten zylindrischen Festung am Ufer des Tibers. Ursprünglich als Mausoleum für Kaiser Hadrian erbaut, diente sie als päpstliche Festung, Gefängnis und heute als Museum.',
+        description: 'Antikes Mausoleum, umgewandelt in Festung und päpstliche Residenz',
+        historicalInfo: 'Ursprünglich von Kaiser Hadrian als Mausoleum in Auftrag gegeben, diente es als Festung, Gefängnis und päpstliche Residenz. Benannt nach dem Erzengel Michael nach einer legendären Vision im Jahr 590 n. Chr.',
+        yearBuilt: '123-139 n. Chr.',
+        architect: 'Kaiser Hadrian'
+      },
+      zh: {
+        name: '圣天使城堡',
+        narration: '欢迎来到圣天使城堡，这座雄伟的圆柱形堡垒矗立在台伯河畔。最初作为哈德良皇帝的陵墓建造，后来曾作为教皇堡垒、监狱，现在是一座博物馆。',
+        description: '从古代陵墓转变为堡垒和教皇居所',
+        historicalInfo: '最初由哈德良皇帝委托建造作为陵墓，后来曾作为堡垒、监狱和教皇居所。590年传说中的异象后以大天使米迦勒命名。',
+        yearBuilt: '公元123-139年',
+        architect: '哈德良皇帝'
+      },
+      ja: {
+        name: 'サンタンジェロ城',
+        narration: 'テベレ川のほとりにそびえ立つ円筒形の要塞、サンタンジェロ城へようこそ。もともとハドリアヌス帝の霊廟として建設され、教皇の要塞、牢獄、そして現在は博物館として使用されてきました。',
+        description: '古代の霊廟から要塞と教皇の居所に変貌した建築物',
+        historicalInfo: 'もともとハドリアヌス帝が霊廟として建設を依頼し、要塞、牢獄、教皇の居所として使用されました。590年の伝説的な幻視の後、大天使ミカエルにちなんで命名されました。',
+        yearBuilt: '123-139年',
+        architect: 'ハドリアヌス帝'
+      },
+      pt: {
+        name: 'Castelo de Sant\'Angelo',
+        narration: 'Bem-vindo ao Castelo de Sant\'Angelo, a imponente fortaleza cilíndrica às margens do rio Tibre. Originalmente construído como mausoléu para o imperador Adriano, serviu como fortaleza papal, prisão e agora museu.',
+        description: 'Antigo mausoléu transformado em fortaleza e residência papal',
+        historicalInfo: 'Originalmente encomendado pelo imperador Adriano como mausoléu, serviu como fortaleza, prisão e residência papal. Recebeu o nome do Arcanjo Miguel após uma visão lendária em 590 d.C.',
+        yearBuilt: '123-139 d.C.',
+        architect: 'Imperador Adriano'
+      },
+      ru: {
+        name: 'Замок Святого Ангела',
+        narration: 'Добро пожаловать в Замок Святого Ангела, величественную цилиндрическую крепость на берегу реки Тибр. Первоначально построенный как мавзолей императора Адриана, он служил папской крепостью, тюрьмой, а теперь музеем.',
+        description: 'Древний мавзолей, превращённый в крепость и папскую резиденцию',
+        historicalInfo: 'Первоначально заказанный императором Адрианом как мавзолей, он служил крепостью, тюрьмой и папской резиденцией. Назван в честь Архангела Михаила после легендарного видения в 590 году н.э.',
+        yearBuilt: '123-139 гг. н.э.',
+        architect: 'Император Адриан'
       }
     }
   },
