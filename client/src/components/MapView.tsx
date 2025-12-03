@@ -276,11 +276,22 @@ interface TourRoutingMachineProps {
   onTourRouteClick?: () => void;
   startingPoint?: { lat: number; lng: number; type: string } | null;
   endPoint?: { lat: number; lng: number; type: string } | null;
+  selectedLanguage?: string;
+  onSegmentInfoUpdate?: (segments: SegmentInfo[]) => void;
 }
 
-function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick, startingPoint, endPoint }: TourRoutingMachineProps) {
+export interface SegmentInfo {
+  fromIndex: number;
+  toIndex: number;
+  distance: number;
+  duration: number;
+  midpoint: [number, number];
+}
+
+function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRouteClick, startingPoint, endPoint, selectedLanguage = 'en', onSegmentInfoUpdate }: TourRoutingMachineProps) {
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
+  const segmentMarkersRef = useRef<L.Marker[]>([]);
 
   const safeRemoveControl = useCallback((control: L.Routing.Control) => {
     if (!control || !map) return;
@@ -306,6 +317,18 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
     }
   }, [map]);
 
+  // Clear segment markers
+  const clearSegmentMarkers = useCallback(() => {
+    segmentMarkersRef.current.forEach(marker => {
+      try {
+        marker.remove();
+      } catch (e) {
+        console.debug('Segment marker removal handled:', e);
+      }
+    });
+    segmentMarkersRef.current = [];
+  }, []);
+
   useEffect(() => {
     if (!map) return;
     
@@ -319,6 +342,10 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
         safeRemoveControl(routingControlRef.current);
         routingControlRef.current = null;
       }
+      clearSegmentMarkers();
+      if (onSegmentInfoUpdate) {
+        onSegmentInfoUpdate([]);
+      }
       return;
     }
 
@@ -326,6 +353,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       safeRemoveControl(routingControlRef.current);
       routingControlRef.current = null;
     }
+    clearSegmentMarkers();
 
     // Build waypoints: starting point first (if set), then tour stops, then end point (if set)
     const waypoints: L.LatLng[] = [];
@@ -347,7 +375,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
       fitSelectedRoutes: false,
       showAlternatives: false,
       lineOptions: {
-        styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 1.0, weight: 6, dashArray: '10, 10' }],
+        styles: [{ color: 'hsl(14, 85%, 55%)', opacity: 0.9, weight: 5 }],
         extendToWaypoints: true,
         missingRouteTolerance: 0
       },
@@ -357,8 +385,88 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
     control.on('routesfound', function (e) {
       const routes = e.routes;
       if (routes && routes[0]) {
+        const route = routes[0];
+        
         if (onTourRouteFound) {
-          onTourRouteFound(routes[0]);
+          onTourRouteFound(route);
+        }
+        
+        // Extract segment info from route legs
+        if (route.instructions && route.coordinates) {
+          const segments: SegmentInfo[] = [];
+          const waypointIndices = route.waypointIndices || [];
+          
+          // Calculate segments between waypoints
+          for (let i = 0; i < waypointIndices.length - 1; i++) {
+            const startIdx = waypointIndices[i];
+            const endIdx = waypointIndices[i + 1];
+            
+            // Get midpoint of this segment
+            const midIdx = Math.floor((startIdx + endIdx) / 2);
+            const midCoord = route.coordinates[midIdx];
+            
+            // Calculate segment distance and duration from instructions
+            let segDistance = 0;
+            let segDuration = 0;
+            
+            route.instructions.forEach((inst: any) => {
+              if (inst.index >= startIdx && inst.index < endIdx) {
+                segDistance += inst.distance || 0;
+                segDuration += inst.time || 0;
+              }
+            });
+            
+            if (midCoord) {
+              segments.push({
+                fromIndex: i,
+                toIndex: i + 1,
+                distance: segDistance,
+                duration: segDuration,
+                midpoint: [midCoord.lat, midCoord.lng]
+              });
+            }
+          }
+          
+          // Create segment info markers on the map
+          clearSegmentMarkers();
+          segments.forEach((seg, idx) => {
+            const distKm = (seg.distance / 1000).toFixed(1);
+            const durMin = Math.round(seg.duration / 60);
+            
+            const marker = L.marker(seg.midpoint, {
+              icon: L.divIcon({
+                className: 'segment-info-marker',
+                html: `<div style="
+                  background: rgba(255, 255, 255, 0.95);
+                  border: 2px solid hsl(14, 85%, 55%);
+                  border-radius: 8px;
+                  padding: 4px 8px;
+                  font-size: 11px;
+                  font-weight: 600;
+                  color: hsl(14, 85%, 45%);
+                  white-space: nowrap;
+                  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+                  display: flex;
+                  align-items: center;
+                  gap: 6px;
+                ">
+                  <span>${distKm}km</span>
+                  <span style="color: #666;">•</span>
+                  <span>${durMin}${selectedLanguage === 'ko' ? '분' : 'min'}</span>
+                </div>`,
+                iconSize: [80, 28],
+                iconAnchor: [40, 14],
+              }),
+              interactive: false,
+            });
+            
+            marker.addTo(map);
+            segmentMarkersRef.current.push(marker);
+          });
+          
+          if (onSegmentInfoUpdate) {
+            onSegmentInfoUpdate(segments);
+          }
         }
         
         // Add click event to the route line
@@ -382,8 +490,9 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, onTourRo
         safeRemoveControl(routingControlRef.current);
         routingControlRef.current = null;
       }
+      clearSegmentMarkers();
     };
-  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl, startingPoint, endPoint]);
+  }, [map, tourStops, onTourRouteFound, activeRoute, safeRemoveControl, startingPoint, endPoint, selectedLanguage, clearSegmentMarkers, onSegmentInfoUpdate]);
 
   return null;
 }
@@ -665,6 +774,7 @@ export default function MapView({
         onTourRouteClick={onTourRouteClick}
         startingPoint={startingPoint}
         endPoint={endPoint}
+        selectedLanguage={selectedLanguage}
       />
     </MapContainer>
   );
