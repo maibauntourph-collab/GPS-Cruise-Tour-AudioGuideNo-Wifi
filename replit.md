@@ -82,3 +82,23 @@ The application is built with a React frontend and an Express.js backend, commun
     - Geolocation API (GPS tracking)
     - Service Worker API (PWA offline capabilities)
     - LocalStorage API (client-side data persistence)
+    - IndexedDB API (offline data storage)
+
+## Offline Functionality Notes
+
+**Important: Service Worker Environment Configuration**
+- Service Worker is **ONLY enabled** in production (published apps on `.replit.app` domain)
+- Service Worker is **DISABLED** in development (`localhost`, `.replit.dev` preview) to avoid HMR conflicts
+- To test offline functionality, you must **publish the app** first
+
+**How Offline Mode Works:**
+1. **Service Worker Registration** (`useServiceWorker.ts`): Automatically registers in production, caches static assets and API data
+2. **IndexedDB Storage** (`offlineStorage.ts`): Stores city/landmark data locally for offline access
+3. **Offline Mode Hook** (`useOfflineMode.ts`): Detects network status and falls back to IndexedDB when offline
+4. **Offline Package Download**: Users must download city data while online to use offline
+
+**Testing Offline Mode:**
+1. Publish the app to `.replit.app` domain
+2. Open the published app and download offline packages for desired cities
+3. Enable airplane mode or disable network
+4. The app should continue working with cached data
