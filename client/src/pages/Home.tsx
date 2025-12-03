@@ -41,6 +41,8 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { ChevronDown } from 'lucide-react';
 
 // Detect browser language and map to supported language
 const detectBrowserLanguage = (): string => {
@@ -996,25 +998,84 @@ export default function Home() {
                     {!position && <span className="text-xs text-muted-foreground ml-auto">(GPS)</span>}
                   </Button>
 
-                  {/* Hotel Option */}
-                  <Button
-                    variant={startingPoint?.type === 'hotel' ? "default" : "outline"}
-                    size="sm"
-                    className="w-full justify-start gap-2"
-                    onClick={() => {
-                      setIsSelectingHotelOnMap(true);
-                      setIsSelectingEndPointOnMap(false);
-                      setIsStartingPointPopoverOpen(false);
-                      toast({
-                        title: selectedLanguage === 'ko' ? '출발지 선택' : 'Select Start Point',
-                        description: selectedLanguage === 'ko' ? '지도에서 위치를 탭하세요' : 'Tap on map to set location'
-                      });
-                    }}
-                    data-testid="button-starting-hotel"
-                  >
-                    <Hotel className="w-4 h-4 text-purple-500" />
-                    {t('hotel', selectedLanguage)} - {t('selectOnMap', selectedLanguage)}
-                  </Button>
+                  {/* Hotel Option - Collapsible Dropdown */}
+                  {(() => {
+                    const cityPoints = getCityStartingPoints(selectedCityId);
+                    const hotels = cityPoints?.hotels || [];
+                    
+                    return (
+                      <Collapsible className="w-full">
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant={startingPoint?.type === 'hotel' ? "default" : "outline"}
+                            size="sm"
+                            className="w-full justify-between gap-2"
+                            data-testid="button-starting-hotel-dropdown"
+                          >
+                            <div className="flex items-center gap-2">
+                              <Hotel className="w-4 h-4 text-purple-500" />
+                              <span>{t('hotel', selectedLanguage)}</span>
+                              {startingPoint?.type === 'hotel' && (
+                                <span className="text-xs opacity-80 truncate max-w-[120px]">
+                                  ({startingPoint.name?.split(' ').slice(0, 2).join(' ')}...)
+                                </span>
+                              )}
+                            </div>
+                            <ChevronDown className="w-4 h-4 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="mt-1 space-y-1 pl-4 border-l-2 border-purple-200 dark:border-purple-800">
+                          {/* Select on Map Option */}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start gap-2 h-8"
+                            onClick={() => {
+                              setIsSelectingHotelOnMap(true);
+                              setIsSelectingEndPointOnMap(false);
+                              setIsStartingPointPopoverOpen(false);
+                              toast({
+                                title: selectedLanguage === 'ko' ? '출발지 선택' : 'Select Start Point',
+                                description: selectedLanguage === 'ko' ? '지도에서 위치를 탭하세요' : 'Tap on map to set location'
+                              });
+                            }}
+                            data-testid="button-starting-hotel-map"
+                          >
+                            <MapPin className="w-3.5 h-3.5 text-purple-400" />
+                            <span className="text-xs">{selectedLanguage === 'ko' ? '지도에서 선택' : 'Select on map'}</span>
+                          </Button>
+                          
+                          {/* Hotel List */}
+                          {hotels.length > 0 && (
+                            <>
+                              <div className="text-[10px] text-muted-foreground px-2 pt-1">
+                                {selectedLanguage === 'ko' ? '추천 호텔' : 'Recommended Hotels'}
+                              </div>
+                              {hotels.map((hotel) => (
+                                <Button
+                                  key={hotel.id}
+                                  variant={startingPoint?.id === hotel.id ? "secondary" : "ghost"}
+                                  size="sm"
+                                  className="w-full justify-start gap-2 h-8"
+                                  onClick={() => {
+                                    setStartingPoint(hotel);
+                                    toast({
+                                      title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                                      description: getStartingPointName(hotel, selectedLanguage)
+                                    });
+                                  }}
+                                  data-testid={`button-starting-hotel-${hotel.id}`}
+                                >
+                                  <Hotel className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" />
+                                  <span className="text-xs truncate">{getStartingPointName(hotel, selectedLanguage)}</span>
+                                </Button>
+                              ))}
+                            </>
+                          )}
+                        </CollapsibleContent>
+                      </Collapsible>
+                    );
+                  })()}
 
                   {/* City-specific starting points */}
                   {(() => {

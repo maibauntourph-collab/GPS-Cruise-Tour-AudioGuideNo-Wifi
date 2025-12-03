@@ -102,6 +102,95 @@ function getTransportIcon(type: string) {
   }
 }
 
+// Traffic estimation based on time of day
+function getTrafficInfo(language: string = 'en'): { multiplier: number; status: 'rush' | 'busy' | 'normal' | 'light'; label: string; color: string } {
+  const now = new Date();
+  const hour = now.getHours();
+  const dayOfWeek = now.getDay(); // 0 = Sunday, 6 = Saturday
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+  
+  // Traffic status labels by language
+  const labels: Record<string, Record<string, string>> = {
+    rush: {
+      en: 'Rush Hour', ko: '러시아워', es: 'Hora punta', fr: 'Heure de pointe',
+      de: 'Stoßzeit', it: 'Ora di punta', zh: '高峰时段', ja: 'ラッシュアワー',
+      pt: 'Hora de pico', ru: 'Час пик'
+    },
+    busy: {
+      en: 'Busy', ko: '혼잡', es: 'Ocupado', fr: 'Chargé',
+      de: 'Beschäftigt', it: 'Affollato', zh: '繁忙', ja: '混雑',
+      pt: 'Movimentado', ru: 'Загружено'
+    },
+    normal: {
+      en: 'Normal', ko: '보통', es: 'Normal', fr: 'Normal',
+      de: 'Normal', it: 'Normale', zh: '正常', ja: '通常',
+      pt: 'Normal', ru: 'Обычно'
+    },
+    light: {
+      en: 'Light', ko: '원활', es: 'Fluido', fr: 'Fluide',
+      de: 'Leicht', it: 'Scorrevole', zh: '畅通', ja: '空いている',
+      pt: 'Leve', ru: 'Свободно'
+    }
+  };
+
+  // Night time (22:00 - 06:00): Light traffic
+  if (hour >= 22 || hour < 6) {
+    return {
+      multiplier: 0.8,
+      status: 'light',
+      label: labels.light[language] || labels.light.en,
+      color: 'hsl(142, 76%, 36%)' // Green
+    };
+  }
+
+  // Weekend adjustments
+  if (isWeekend) {
+    // Weekend rush hours are milder (10:00-12:00, 17:00-19:00)
+    if ((hour >= 10 && hour < 12) || (hour >= 17 && hour < 19)) {
+      return {
+        multiplier: 1.2,
+        status: 'busy',
+        label: labels.busy[language] || labels.busy.en,
+        color: 'hsl(38, 92%, 50%)' // Orange
+      };
+    }
+    return {
+      multiplier: 1.0,
+      status: 'normal',
+      label: labels.normal[language] || labels.normal.en,
+      color: 'hsl(210, 85%, 55%)' // Blue
+    };
+  }
+
+  // Weekday rush hours (07:00-09:00, 17:00-19:00)
+  if ((hour >= 7 && hour < 9) || (hour >= 17 && hour < 19)) {
+    return {
+      multiplier: 1.5,
+      status: 'rush',
+      label: labels.rush[language] || labels.rush.en,
+      color: 'hsl(0, 84%, 60%)' // Red
+    };
+  }
+
+  // Lunch time (12:00-13:00)
+  if (hour >= 12 && hour < 13) {
+    return {
+      multiplier: 1.2,
+      status: 'busy',
+      label: labels.busy[language] || labels.busy.en,
+      color: 'hsl(38, 92%, 50%)' // Orange
+    };
+  }
+
+  // Normal hours
+  return {
+    multiplier: 1.0,
+    status: 'normal',
+    label: labels.normal[language] || labels.normal.en,
+    color: 'hsl(210, 85%, 55%)' // Blue
+  };
+}
+
 export default function UnifiedFloatingCard({
   forceShowList = false,
   isCardMinimized,
@@ -1167,41 +1256,68 @@ export default function UnifiedFloatingCard({
                   </h5>
                   {tourStops.length >= 2 && tourRouteInfo && (
                     <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '이동' : 'Travel'}</span>
-                            <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
-                              {(tourRouteInfo.distance / 1000).toFixed(1)}km
-                            </span>
-                          </div>
-                          <div className="w-px h-4 bg-border"></div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '소요' : 'Time'}</span>
-                            <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
-                              {Math.round(tourRouteInfo.duration / 60)}min
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-1.5 bg-[hsl(14,85%,55%)] text-white px-2.5 py-1 rounded-md">
-                          <Clock className="w-3.5 h-3.5" />
-                          <span className="text-xs font-medium">{selectedLanguage === 'ko' ? '전체' : 'Total'}</span>
-                          <span className="text-sm font-bold">
-                            {(() => {
-                              const travelMinutes = Math.round(tourRouteInfo.duration / 60);
-                              const stayMinutes = tourStops.reduce((sum, stop) => 
-                                sum + (tourStopDurations[stop.id] || tourTimePerStop), 0);
-                              const totalMinutes = travelMinutes + stayMinutes;
-                              const hours = Math.floor(totalMinutes / 60);
-                              const mins = totalMinutes % 60;
-                              return hours > 0 ? `${hours}h ${mins}m` : `${totalMinutes}min`;
-                            })()}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="mt-1.5 text-xs text-muted-foreground">
-                        * {selectedLanguage === 'ko' ? '장소별 체류시간 조정 가능' : 'Stay time adjustable per stop'}
-                      </div>
+                      {(() => {
+                        const trafficInfo = getTrafficInfo(selectedLanguage);
+                        const adjustedDuration = Math.round(tourRouteInfo.duration * trafficInfo.multiplier);
+                        const travelMinutes = Math.round(adjustedDuration / 60);
+                        const stayMinutes = tourStops.reduce((sum, stop) => 
+                          sum + (tourStopDurations[stop.id] || tourTimePerStop), 0);
+                        const totalMinutes = travelMinutes + stayMinutes;
+                        const hours = Math.floor(totalMinutes / 60);
+                        const mins = totalMinutes % 60;
+                        
+                        return (
+                          <>
+                            {/* Traffic Status Badge */}
+                            <div className="flex items-center justify-between mb-2">
+                              <div 
+                                className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-white text-xs font-medium"
+                                style={{ backgroundColor: trafficInfo.color }}
+                                data-testid="badge-traffic-status"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                                {trafficInfo.label}
+                                {trafficInfo.multiplier !== 1.0 && (
+                                  <span className="opacity-80">
+                                    (×{trafficInfo.multiplier.toFixed(1)})
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-[10px] text-muted-foreground">
+                                {selectedLanguage === 'ko' ? '현재 교통상황' : 'Current traffic'}
+                              </span>
+                            </div>
+                            
+                            <div className="flex items-center justify-between gap-4">
+                              <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '이동' : 'Travel'}</span>
+                                  <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
+                                    {(tourRouteInfo.distance / 1000).toFixed(1)}km
+                                  </span>
+                                </div>
+                                <div className="w-px h-4 bg-border"></div>
+                                <div className="flex items-center gap-1.5">
+                                  <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '소요' : 'Time'}</span>
+                                  <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
+                                    {travelMinutes}min
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-1.5 bg-[hsl(14,85%,55%)] text-white px-2.5 py-1 rounded-md">
+                                <Clock className="w-3.5 h-3.5" />
+                                <span className="text-xs font-medium">{selectedLanguage === 'ko' ? '전체' : 'Total'}</span>
+                                <span className="text-sm font-bold">
+                                  {hours > 0 ? `${hours}h ${mins}m` : `${totalMinutes}min`}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="mt-1.5 text-xs text-muted-foreground">
+                              * {selectedLanguage === 'ko' ? '장소별 체류시간 조정 가능' : 'Stay time adjustable per stop'}
+                            </div>
+                          </>
+                        );
+                      })()}
                     </div>
                   )}
                 </div>
@@ -1308,16 +1424,22 @@ export default function UnifiedFloatingCard({
                               </div>
                               {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
                                 <div className="flex items-center gap-2 pl-9 py-1.5">
-                                  <div className="flex items-center gap-1.5 text-xs bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/20 rounded-md px-2 py-0.5">
-                                    <span className="text-[hsl(14,85%,55%)] font-bold text-sm">↓</span>
-                                    <span className="font-medium text-[hsl(14,85%,55%)]">
-                                      {(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km
-                                    </span>
-                                    <span className="text-muted-foreground">•</span>
-                                    <span className="font-medium text-[hsl(14,85%,55%)]">
-                                      {Math.ceil(tourRouteInfo.segments[index].duration / 60)}min
-                                    </span>
-                                  </div>
+                                  {(() => {
+                                    const segmentTrafficInfo = getTrafficInfo(selectedLanguage);
+                                    const adjustedSegmentDuration = Math.ceil(tourRouteInfo.segments[index].duration * segmentTrafficInfo.multiplier / 60);
+                                    return (
+                                      <div className="flex items-center gap-1.5 text-xs bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/20 rounded-md px-2 py-0.5">
+                                        <span className="text-[hsl(14,85%,55%)] font-bold text-sm">↓</span>
+                                        <span className="font-medium text-[hsl(14,85%,55%)]">
+                                          {(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km
+                                        </span>
+                                        <span className="text-muted-foreground">•</span>
+                                        <span className="font-medium text-[hsl(14,85%,55%)]">
+                                          {adjustedSegmentDuration}min
+                                        </span>
+                                      </div>
+                                    );
+                                  })()}
                                 </div>
                               )}
                             </div>
