@@ -33,7 +33,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -1929,12 +1929,36 @@ export default function Home() {
               tourStopIds={tourStops.map(s => s.id)}
             />
             
-            {/* Route View Button - next to zoom controls */}
+            {/* Map Control Buttons - next to zoom controls */}
             {tourStops.length >= 2 && (
               <div 
-                className="absolute left-[10px] top-[90px] z-[1000]"
+                className="absolute left-[10px] top-[90px] z-[1000] flex flex-col gap-1"
                 style={{ pointerEvents: 'auto' }}
               >
+                {/* Route Capture Button - Original functionality */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={captureRouteImage}
+                      disabled={isCapturingRoute}
+                      className="h-[30px] w-[30px] bg-white hover:bg-gray-100 border-2 border-gray-400 rounded-sm shadow-md"
+                      data-testid="button-capture-route"
+                    >
+                      {isCapturingRoute ? (
+                        <Loader2 className="w-4 h-4 text-[hsl(14,85%,55%)] animate-spin" />
+                      ) : (
+                        <Camera className="w-4 h-4 text-[hsl(14,85%,55%)]" />
+                      )}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="right">
+                    <p>{selectedLanguage === 'ko' ? '경로 이미지 캡처' : 'Capture Route Image'}</p>
+                  </TooltipContent>
+                </Tooltip>
+                
+                {/* Tour Filter Button - Show only tour stops */}
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -1946,7 +1970,7 @@ export default function Home() {
                           ? 'bg-[hsl(14,85%,55%)] hover:bg-[hsl(14,85%,45%)] border-[hsl(14,85%,55%)]' 
                           : 'bg-white hover:bg-gray-100 border-gray-400'
                       }`}
-                      data-testid="button-show-route"
+                      data-testid="button-show-tour-only"
                     >
                       <Route className={`w-4 h-4 ${showTourOnly ? 'text-white' : 'text-[hsl(14,85%,55%)]'}`} />
                     </Button>
