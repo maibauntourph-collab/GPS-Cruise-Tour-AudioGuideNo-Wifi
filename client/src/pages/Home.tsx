@@ -19,7 +19,7 @@ import InstallPrompt from '@/components/InstallPrompt';
 import UpdatePrompt from '@/components/UpdatePrompt';
 import BottomSheet from '@/components/BottomSheet';
 import StartupDialog, { getSavedTourData, saveTourData, clearSavedTourData } from '@/components/StartupDialog';
-import AIRecommendDialog from '@/components/AIRecommendDialog';
+// AI Recommendation now opens ChatGPT website directly
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';
@@ -142,7 +142,6 @@ export default function Home() {
   const [startingPoint, setStartingPoint] = useState<StartingPoint | null>(null);
   const [isSelectingHotelOnMap, setIsSelectingHotelOnMap] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<{
@@ -571,8 +570,8 @@ export default function Home() {
   };
 
   const handleAiRecommendation = () => {
-    // Open the AI Recommendation dialog
-    setShowAIRecommend(true);
+    // Open ChatGPT website for AI tour recommendations
+    window.open('https://chatgpt.com/', '_blank', 'noopener,noreferrer');
   };
 
   // Handler for toggle with scroll to first item
@@ -1342,30 +1341,7 @@ export default function Home() {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* AI Recommendation Dialog */}
-      <AIRecommendDialog
-        isOpen={showAIRecommend}
-        onClose={() => setShowAIRecommend(false)}
-        cityId={selectedCityId}
-        cityName={selectedCity?.name || ''}
-        landmarks={landmarks}
-        selectedLanguage={selectedLanguage}
-        userPosition={position}
-        onAddToTour={(recommendedLandmarks) => {
-          // Add all recommended landmarks to tour
-          const newStops = recommendedLandmarks.filter(
-            l => !tourStops.some(s => s.id === l.id)
-          );
-          if (newStops.length > 0) {
-            setTourStops(prev => [...prev, ...newStops]);
-          }
-        }}
-        onSelectLandmark={(landmark) => {
-          setSelectedLandmark(landmark);
-          setFocusLocation({ lat: landmark.lat, lng: landmark.lng, zoom: 17 });
-          setShowAIRecommend(false);
-        }}
-      />
+      {/* AI Recommendation - Now opens ChatGPT website */}
     </>
   );
 }
