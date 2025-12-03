@@ -1936,8 +1936,8 @@ export default function Home() {
           selectedLanguage={selectedLanguage}
           onMapMarkerClick={handleMapMarkerClick}
           departureTime={departureTime}
-          startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type } : null}
-          endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type } : null}
+          startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type, name: startingPoint.name } : null}
+          endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type, name: endPoint.name } : null}
           onOpenStartEndPointDialog={() => {
             toast({
               title: selectedLanguage === 'ko' ? '출발/도착 설정 필요' : 'Start/End Point Required',
