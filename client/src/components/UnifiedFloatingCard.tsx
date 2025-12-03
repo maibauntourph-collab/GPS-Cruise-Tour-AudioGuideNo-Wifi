@@ -71,6 +71,9 @@ interface UnifiedFloatingCardProps {
   // Common props
   selectedLanguage?: string;
   onMapMarkerClick?: (lat: number, lng: number) => void;
+  
+  // Departure time for traffic estimation
+  departureTime?: Date | null;
 }
 
 function getCruisePortTranslation(cruisePort: CruisePort, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
@@ -102,11 +105,11 @@ function getTransportIcon(type: string) {
   }
 }
 
-// Traffic estimation based on time of day
-function getTrafficInfo(language: string = 'en'): { multiplier: number; status: 'rush' | 'busy' | 'normal' | 'light'; label: string; color: string } {
-  const now = new Date();
-  const hour = now.getHours();
-  const dayOfWeek = now.getDay(); // 0 = Sunday, 6 = Saturday
+// Traffic estimation based on time of day (uses departureTime if provided, otherwise current time)
+export function getTrafficInfo(language: string = 'en', departureTime?: Date | null): { multiplier: number; status: 'rush' | 'busy' | 'normal' | 'light'; label: string; color: string } {
+  const targetTime = departureTime || new Date();
+  const hour = targetTime.getHours();
+  const dayOfWeek = targetTime.getDay(); // 0 = Sunday, 6 = Saturday
   const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
   
   // Traffic status labels by language
@@ -225,7 +228,8 @@ export default function UnifiedFloatingCard({
   onUpdateStopDuration,
   aiRecommendation = null,
   selectedLanguage = 'en',
-  onMapMarkerClick
+  onMapMarkerClick,
+  departureTime = null
 }: UnifiedFloatingCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -1257,7 +1261,7 @@ export default function UnifiedFloatingCard({
                   {tourStops.length >= 2 && tourRouteInfo && (
                     <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
                       {(() => {
-                        const trafficInfo = getTrafficInfo(selectedLanguage);
+                        const trafficInfo = getTrafficInfo(selectedLanguage, departureTime);
                         const adjustedDuration = Math.round(tourRouteInfo.duration * trafficInfo.multiplier);
                         const travelMinutes = Math.round(adjustedDuration / 60);
                         const stayMinutes = tourStops.reduce((sum, stop) => 
@@ -1425,7 +1429,7 @@ export default function UnifiedFloatingCard({
                               {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
                                 <div className="flex items-center gap-2 pl-9 py-1.5">
                                   {(() => {
-                                    const segmentTrafficInfo = getTrafficInfo(selectedLanguage);
+                                    const segmentTrafficInfo = getTrafficInfo(selectedLanguage, departureTime);
                                     const adjustedSegmentDuration = Math.ceil(tourRouteInfo.segments[index].duration * segmentTrafficInfo.multiplier / 60);
                                     return (
                                       <div className="flex items-center gap-1.5 text-xs bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/20 rounded-md px-2 py-0.5">

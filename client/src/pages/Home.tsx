@@ -32,7 +32,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -149,10 +149,11 @@ export default function Home() {
   });
   const [startingPoint, setStartingPoint] = useState<StartingPoint | null>(null);
   const [endPoint, setEndPoint] = useState<StartingPoint | null>(null);
+  const [departureTime, setDepartureTime] = useState<Date | null>(null);
   const [isSelectingHotelOnMap, setIsSelectingHotelOnMap] = useState(false);
   const [isSelectingEndPointOnMap, setIsSelectingEndPointOnMap] = useState(false);
   const [isStartingPointPopoverOpen, setIsStartingPointPopoverOpen] = useState(false);
-  const [pointSelectionMode, setPointSelectionMode] = useState<'start' | 'end'>('start');
+  const [pointSelectionMode, setPointSelectionMode] = useState<'start' | 'end' | 'time'>('start');
   const [locationSearchQuery, setLocationSearchQuery] = useState('');
   const [locationSearchResults, setLocationSearchResults] = useState<Array<{ name: string; lat: number; lng: number }>>([]);
   const [isSearchingLocation, setIsSearchingLocation] = useState(false);
@@ -863,17 +864,22 @@ export default function Home() {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-80 p-2 z-[9999] max-h-[70vh] overflow-y-auto" align="start">
-              <Tabs defaultValue="start" value={pointSelectionMode} onValueChange={(v) => setPointSelectionMode(v as 'start' | 'end')}>
-                <TabsList className="grid w-full grid-cols-2 mb-2">
-                  <TabsTrigger value="start" className="gap-1.5" data-testid="tab-start-point">
+              <Tabs defaultValue="start" value={pointSelectionMode} onValueChange={(v) => setPointSelectionMode(v as 'start' | 'end' | 'time')}>
+                <TabsList className="grid w-full grid-cols-3 mb-2">
+                  <TabsTrigger value="start" className="gap-1 px-2" data-testid="tab-start-point">
                     <Circle className={`w-3 h-3 ${startingPoint ? 'fill-green-500 text-green-500' : ''}`} />
-                    <span>{selectedLanguage === 'ko' ? '출발지' : 'Start'}</span>
+                    <span className="text-xs">{selectedLanguage === 'ko' ? '출발지' : 'Start'}</span>
                     {startingPoint && <span className="text-[10px] text-green-500">✓</span>}
                   </TabsTrigger>
-                  <TabsTrigger value="end" className="gap-1.5" data-testid="tab-end-point">
+                  <TabsTrigger value="end" className="gap-1 px-2" data-testid="tab-end-point">
                     <Flag className={`w-3 h-3 ${endPoint ? 'fill-red-500 text-red-500' : ''}`} />
-                    <span>{selectedLanguage === 'ko' ? '도착지' : 'End'}</span>
+                    <span className="text-xs">{selectedLanguage === 'ko' ? '도착지' : 'End'}</span>
                     {endPoint && <span className="text-[10px] text-red-500">✓</span>}
+                  </TabsTrigger>
+                  <TabsTrigger value="time" className="gap-1 px-2" data-testid="tab-departure-time">
+                    <Clock className={`w-3 h-3 ${departureTime ? 'text-amber-500' : ''}`} />
+                    <span className="text-xs">{selectedLanguage === 'ko' ? '시간' : 'Time'}</span>
+                    {departureTime && <span className="text-[10px] text-amber-500">✓</span>}
                   </TabsTrigger>
                 </TabsList>
                 
@@ -1419,6 +1425,142 @@ export default function Home() {
                     );
                   })()}
                 </TabsContent>
+                
+                {/* Departure Time Content */}
+                <TabsContent value="time" className="space-y-3 mt-0">
+                  {/* Current Selection */}
+                  {departureTime && (
+                    <div className="flex items-center gap-2 p-2 bg-amber-50 dark:bg-amber-950 rounded-md border border-amber-200 dark:border-amber-800">
+                      <Clock className="w-4 h-4 text-amber-500" />
+                      <span className="text-sm flex-1">
+                        {departureTime.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', { 
+                          hour: '2-digit', 
+                          minute: '2-digit',
+                          weekday: 'short'
+                        })}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6 text-red-500 hover:bg-red-100"
+                        onClick={() => setDepartureTime(null)}
+                      >
+                        <span className="text-lg">×</span>
+                      </Button>
+                    </div>
+                  )}
+                  
+                  <div className="space-y-2">
+                    <p className="text-xs text-muted-foreground">
+                      {selectedLanguage === 'ko' ? '출발 예정 시간을 선택하면 해당 시간대의 교통상황이 예측됩니다.' : 'Select departure time to estimate traffic conditions.'}
+                    </p>
+                    
+                    {/* Use Current Time */}
+                    <Button
+                      variant={!departureTime ? "default" : "outline"}
+                      size="sm"
+                      className="w-full justify-start gap-2"
+                      onClick={() => setDepartureTime(null)}
+                      data-testid="button-time-now"
+                    >
+                      <Clock className="w-4 h-4 text-blue-500" />
+                      {selectedLanguage === 'ko' ? '현재 시간 사용' : 'Use current time'}
+                    </Button>
+                    
+                    {/* Quick Time Presets */}
+                    <div className="grid grid-cols-3 gap-1">
+                      {[
+                        { hour: 7, label: { ko: '오전 7시', en: '7 AM' } },
+                        { hour: 9, label: { ko: '오전 9시', en: '9 AM' } },
+                        { hour: 12, label: { ko: '정오', en: 'Noon' } },
+                        { hour: 14, label: { ko: '오후 2시', en: '2 PM' } },
+                        { hour: 17, label: { ko: '오후 5시', en: '5 PM' } },
+                        { hour: 20, label: { ko: '오후 8시', en: '8 PM' } },
+                      ].map(({ hour, label }) => {
+                        const presetTime = new Date();
+                        presetTime.setHours(hour, 0, 0, 0);
+                        const isSelected = departureTime?.getHours() === hour && departureTime?.getMinutes() === 0;
+                        
+                        return (
+                          <Button
+                            key={hour}
+                            variant={isSelected ? "secondary" : "outline"}
+                            size="sm"
+                            className="h-8 text-xs"
+                            onClick={() => setDepartureTime(presetTime)}
+                            data-testid={`button-time-${hour}`}
+                          >
+                            {selectedLanguage === 'ko' ? label.ko : label.en}
+                          </Button>
+                        );
+                      })}
+                    </div>
+                    
+                    {/* Custom Time Input */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-muted-foreground w-16">
+                        {selectedLanguage === 'ko' ? '직접 입력' : 'Custom'}
+                      </span>
+                      <input
+                        type="time"
+                        className="flex-1 h-8 px-2 text-sm border rounded-md bg-background"
+                        value={departureTime ? 
+                          `${String(departureTime.getHours()).padStart(2, '0')}:${String(departureTime.getMinutes()).padStart(2, '0')}` : 
+                          ''
+                        }
+                        onChange={(e) => {
+                          if (e.target.value) {
+                            const [hours, minutes] = e.target.value.split(':').map(Number);
+                            const newTime = new Date();
+                            newTime.setHours(hours, minutes, 0, 0);
+                            setDepartureTime(newTime);
+                          }
+                        }}
+                        data-testid="input-custom-time"
+                      />
+                    </div>
+                    
+                    {/* Day of Week Selection */}
+                    <div className="space-y-1">
+                      <p className="text-[10px] text-muted-foreground">
+                        {selectedLanguage === 'ko' ? '요일 선택 (주말은 교통량이 다릅니다)' : 'Select day (weekends have different traffic)'}
+                      </p>
+                      <div className="flex gap-1">
+                        {[
+                          { day: 0, label: { ko: '일', en: 'Sun' } },
+                          { day: 1, label: { ko: '월', en: 'Mon' } },
+                          { day: 2, label: { ko: '화', en: 'Tue' } },
+                          { day: 3, label: { ko: '수', en: 'Wed' } },
+                          { day: 4, label: { ko: '목', en: 'Thu' } },
+                          { day: 5, label: { ko: '금', en: 'Fri' } },
+                          { day: 6, label: { ko: '토', en: 'Sat' } },
+                        ].map(({ day, label }) => {
+                          const isWeekend = day === 0 || day === 6;
+                          const currentDay = departureTime?.getDay() ?? new Date().getDay();
+                          const isSelected = departureTime && currentDay === day;
+                          
+                          return (
+                            <Button
+                              key={day}
+                              variant={isSelected ? "default" : "ghost"}
+                              size="sm"
+                              className={`h-7 w-8 p-0 text-xs ${isWeekend ? 'text-red-500' : ''} ${isSelected ? 'bg-amber-500 hover:bg-amber-600 text-white' : ''}`}
+                              onClick={() => {
+                                const newTime = departureTime ? new Date(departureTime) : new Date();
+                                const diff = day - newTime.getDay();
+                                newTime.setDate(newTime.getDate() + diff);
+                                setDepartureTime(newTime);
+                              }}
+                              data-testid={`button-day-${day}`}
+                            >
+                              {selectedLanguage === 'ko' ? label.ko : label.en}
+                            </Button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
               </Tabs>
               
               {/* Clear All Button */}
@@ -1650,6 +1792,7 @@ export default function Home() {
           onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
           selectedLanguage={selectedLanguage}
           onMapMarkerClick={handleMapMarkerClick}
+          departureTime={departureTime}
         />
 
       {/* Bottom Sheet - Mobile Only */}
