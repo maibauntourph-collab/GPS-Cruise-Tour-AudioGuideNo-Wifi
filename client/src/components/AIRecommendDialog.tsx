@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { 
   Sparkles, 
@@ -160,8 +159,8 @@ export default function AIRecommendDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg max-h-[85vh] p-0 overflow-hidden">
-        <DialogHeader className="px-4 pt-4 pb-3 border-b">
+      <DialogContent className="max-w-lg max-h-[85vh] p-0 overflow-hidden flex flex-col">
+        <DialogHeader className="px-4 pt-4 pb-3 border-b flex-shrink-0">
           <DialogTitle className="flex items-center gap-2 text-base">
             <Sparkles className="w-4 h-4 text-primary" />
             {t('aiTourRecommendation', selectedLanguage)}
@@ -171,7 +170,7 @@ export default function AIRecommendDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="max-h-[calc(85vh-80px)]">
+        <div className="flex-1 overflow-y-auto">
           <div className="p-4 space-y-4">
             {/* Category Filter Tabs */}
             <Tabs value={recommendationType} onValueChange={(v) => setRecommendationType(v as RecommendationType)}>
@@ -291,7 +290,7 @@ export default function AIRecommendDialog({
               </div>
             )}
           </div>
-        </ScrollArea>
+        </div>
       </DialogContent>
     </Dialog>
   );
