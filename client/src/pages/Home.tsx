@@ -510,28 +510,77 @@ export default function Home() {
         return;
       }
       
-      // Use html2canvas to capture the map
+      // Wait for all tiles and route to be fully rendered
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Convert SVG elements to inline data URLs for better capture
+      // This helps html2canvas capture SVG route lines properly
+      const svgElements = mapElement.querySelectorAll('svg');
+      svgElements.forEach(svg => {
+        // Ensure SVG has proper dimensions
+        if (!svg.getAttribute('width')) {
+          const rect = svg.getBoundingClientRect();
+          svg.setAttribute('width', String(rect.width));
+          svg.setAttribute('height', String(rect.height));
+        }
+      });
+      
+      // Add crossorigin to tile images for CORS
+      const tileImages = mapElement.querySelectorAll('.leaflet-tile') as NodeListOf<HTMLImageElement>;
+      tileImages.forEach(img => {
+        if (!img.crossOrigin) {
+          img.crossOrigin = 'anonymous';
+        }
+      });
+      
+      // Use html2canvas with enhanced options for SVG support
       const canvas = await html2canvas(mapElement, {
         useCORS: true,
         allowTaint: true,
         logging: false,
-        scale: 1,
-        backgroundColor: null,
+        scale: 2, // Higher resolution for better quality
+        backgroundColor: '#f5f5f5',
+        foreignObjectRendering: true, // Enable SVG foreignObject rendering
+        imageTimeout: 15000, // Wait longer for images
+        onclone: (clonedDoc) => {
+          // Ensure SVG path elements have proper stroke attributes
+          const clonedSvgs = clonedDoc.querySelectorAll('svg path');
+          clonedSvgs.forEach((path) => {
+            const pathElement = path as SVGPathElement;
+            const computedStyle = window.getComputedStyle(pathElement);
+            // Apply computed styles inline for better capture
+            if (computedStyle.stroke && computedStyle.stroke !== 'none') {
+              pathElement.setAttribute('stroke', computedStyle.stroke);
+              pathElement.setAttribute('stroke-width', computedStyle.strokeWidth || '4');
+              pathElement.setAttribute('stroke-opacity', computedStyle.strokeOpacity || '1');
+            }
+          });
+        }
       });
       
       // Convert to base64 image
-      const imageData = canvas.toDataURL('image/png');
+      const imageData = canvas.toDataURL('image/png', 0.9);
       setCapturedRouteImage(imageData);
       
       // Show the card with the captured image
       setForceShowCard(true);
       setIsCardMinimized(false);
+      
+      toast({
+        title: selectedLanguage === 'ko' ? '경로 캡쳐 완료' : 'Route Captured',
+        description: selectedLanguage === 'ko' ? '투어 경로가 저장되었습니다' : 'Tour route has been saved',
+      });
     } catch (error) {
       console.error('Failed to capture route:', error);
+      toast({
+        title: selectedLanguage === 'ko' ? '캡쳐 실패' : 'Capture Failed',
+        description: selectedLanguage === 'ko' ? '경로를 캡쳐할 수 없습니다' : 'Could not capture the route',
+        variant: 'destructive'
+      });
     } finally {
       setIsCapturingRoute(false);
     }
-  }, [tourStops.length]);
+  }, [tourStops.length, selectedLanguage, toast]);
 
   const handleAddToTour = (landmark: Landmark) => {
     // Check if landmark is already in tour
