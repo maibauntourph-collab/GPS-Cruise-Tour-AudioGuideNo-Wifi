@@ -78,6 +78,12 @@ interface UnifiedFloatingCardProps {
   
   // Starting point for distance calculation
   startingPoint?: { lat: number; lng: number; type: string } | null;
+  
+  // End point for tour
+  endPoint?: { lat: number; lng: number; type: string } | null;
+  
+  // Callback to open start/end point setup dialog
+  onOpenStartEndPointDialog?: () => void;
 }
 
 function getCruisePortTranslation(cruisePort: CruisePort, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
@@ -234,7 +240,9 @@ export default function UnifiedFloatingCard({
   selectedLanguage = 'en',
   onMapMarkerClick,
   departureTime = null,
-  startingPoint = null
+  startingPoint = null,
+  endPoint = null,
+  onOpenStartEndPointDialog
 }: UnifiedFloatingCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -532,6 +540,23 @@ export default function UnifiedFloatingCard({
       });
       setIsPlaying(true);
     }
+  };
+
+  // Check if start/end points are set before selecting landmark
+  const handleLandmarkClick = (landmark: Landmark) => {
+    const hasStartPoint = startingPoint && startingPoint.lat && startingPoint.lng;
+    const hasEndPoint = endPoint && endPoint.lat && endPoint.lng;
+    
+    if (!hasStartPoint || !hasEndPoint) {
+      // Open start/end point dialog first
+      if (onOpenStartEndPointDialog) {
+        onOpenStartEndPointDialog();
+      }
+      return;
+    }
+    
+    // Both points set, proceed with landmark selection
+    onLandmarkSelect?.(landmark);
   };
 
   const landmarksWithDistance = landmarks.map((landmark) => {
@@ -1618,7 +1643,7 @@ export default function UnifiedFloatingCard({
                       <div
                         key={landmark.id}
                         className="rounded-xl border bg-card overflow-hidden hover-elevate cursor-pointer transition-all"
-                        onClick={() => onLandmarkSelect?.(landmark)}
+                        onClick={() => handleLandmarkClick(landmark)}
                         data-testid={`card-landmark-${landmark.id}`}
                       >
                         <div className="flex">

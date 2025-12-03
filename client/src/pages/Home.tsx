@@ -1794,6 +1794,16 @@ export default function Home() {
           onMapMarkerClick={handleMapMarkerClick}
           departureTime={departureTime}
           startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type } : null}
+          endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type } : null}
+          onOpenStartEndPointDialog={() => {
+            toast({
+              title: selectedLanguage === 'ko' ? '출발/도착 설정 필요' : 'Start/End Point Required',
+              description: selectedLanguage === 'ko' 
+                ? '사이드바에서 출발지와 도착지를 먼저 설정해주세요' 
+                : 'Please set your start and end points in the sidebar first',
+              variant: 'destructive'
+            });
+          }}
         />
 
       {/* Bottom Sheet - Mobile Only */}
