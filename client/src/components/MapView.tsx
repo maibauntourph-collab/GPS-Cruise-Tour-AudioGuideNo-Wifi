@@ -49,7 +49,7 @@ const createBlinkingIcon = (color: string) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        animation: blink 1s ease-in-out infinite;
+        animation: pinBlink 1s ease-in-out infinite;
       ">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style="transform: rotate(45deg);">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -57,32 +57,34 @@ const createBlinkingIcon = (color: string) => {
       </div>
       <div class="pulse-ring" style="
         position: absolute;
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         border: 3px solid ${color};
         border-radius: 50%;
-        top: -8px;
-        left: -5px;
+        top: -12px;
+        left: -10px;
         animation: pulse-ring 1s ease-out infinite;
       "></div>
       <style>
-        @keyframes blink {
+        @keyframes pinBlink {
           0%, 100% {
             opacity: 1;
             transform: rotate(-45deg) scale(1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
           }
           50% {
-            opacity: 0.6;
-            transform: rotate(-45deg) scale(1.1);
+            opacity: 0.4;
+            transform: rotate(-45deg) scale(1.15);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.5);
           }
         }
         @keyframes pulse-ring {
           0% {
-            transform: scale(0.8);
-            opacity: 1;
+            transform: scale(0.6);
+            opacity: 0.8;
           }
           100% {
-            transform: scale(1.8);
+            transform: scale(2);
             opacity: 0;
           }
         }
