@@ -5786,6 +5786,48 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '야간 투어는 2000년부터 시작되어 방문객들에게 바티칸 보물에 대한 보다 친밀한 경험을 제공합니다.',
         yearBuilt: '2000',
         architect: '바티칸 박물관 관리국'
+      },
+      es: {
+        name: 'Tour Nocturno de los Museos Vaticanos',
+        narration: 'Experimente los Museos Vaticanos como nunca antes en este exclusivo tour nocturno. Explore las galerías y la Capilla Sixtina sin las multitudes del día.',
+        description: 'Tour exclusivo nocturno de los Museos Vaticanos',
+        detailedDescription: 'El Tour Nocturno de los Museos Vaticanos ofrece una oportunidad única para explorar una de las mayores colecciones de arte del mundo en un ambiente íntimo. Disponible en viernes selectos por la noche, esta experiencia exclusiva permite a los visitantes pasear por las magníficas galerías, admirar las Estancias de Rafael y contemplar el techo de la Capilla Sixtina de Miguel Ángel sin las multitudes habituales.'
+      },
+      fr: {
+        name: 'Visite Nocturne des Musées du Vatican',
+        narration: 'Vivez les Musées du Vatican comme jamais auparavant lors de cette visite exclusive en soirée. Explorez les galeries et la Chapelle Sixtine sans la foule de la journée.',
+        description: 'Visite exclusive en soirée des Musées du Vatican',
+        detailedDescription: 'La Visite Nocturne des Musées du Vatican offre une opportunité unique d\'explorer l\'une des plus grandes collections d\'art au monde dans un cadre intime. Disponible certains vendredis soirs, cette expérience exclusive permet aux visiteurs de déambuler dans les magnifiques galeries, d\'admirer les Chambres de Raphaël et de contempler le plafond de la Chapelle Sixtine de Michel-Ange sans la foule habituelle.'
+      },
+      de: {
+        name: 'Vatikanische Museen Nacht-Tour',
+        narration: 'Erleben Sie die Vatikanischen Museen wie nie zuvor bei dieser exklusiven Abendführung. Erkunden Sie die Galerien und die Sixtinische Kapelle ohne die Menschenmassen des Tages.',
+        description: 'Exklusive Abendführung durch die Vatikanischen Museen',
+        detailedDescription: 'Die Nacht-Tour durch die Vatikanischen Museen bietet eine einmalige Gelegenheit, eine der größten Kunstsammlungen der Welt in intimem Rahmen zu erkunden. An ausgewählten Freitagabenden ermöglicht dieses exklusive Erlebnis den Besuchern, durch die prächtigen Galerien zu wandeln, die Raffael-Säle zu bewundern und unter Michelangelos Decke der Sixtinischen Kapelle zu staunen.'
+      },
+      zh: {
+        name: '梵蒂冈博物馆夜间之旅',
+        narration: '在这次独家夜间之旅中以前所未有的方式体验梵蒂冈博物馆。无需白天的人潮，探索画廊和西斯廷教堂。',
+        description: '梵蒂冈博物馆独家夜间之旅',
+        detailedDescription: '梵蒂冈博物馆夜间之旅提供了一个千载难逢的机会，在私密的环境中探索世界上最伟大的艺术收藏之一。这种独家体验在特定的周五晚间提供，让游客可以漫步于宏伟的画廊，欣赏拉斐尔画室，并在没有通常人群的情况下仰望米开朗基罗的西斯廷教堂天花板。'
+      },
+      ja: {
+        name: 'バチカン美術館ナイトツアー',
+        narration: 'この独占的な夜間ツアーで、これまでにない方法でバチカン美術館を体験してください。日中の混雑なしにギャラリーとシスティーナ礼拝堂を探索できます。',
+        description: 'バチカン美術館独占夜間ツアー',
+        detailedDescription: 'バチカン美術館ナイトツアーは、世界最高の芸術コレクションの一つを親密な環境で探索する一生に一度の機会を提供します。特定の金曜日の夜に利用可能なこの独占体験では、壮大なギャラリーを散策し、ラファエロの間を鑑賞し、通常の人混みなしにミケランジェロのシスティーナ礼拝堂の天井に畏敬の念を抱くことができます。'
+      },
+      pt: {
+        name: 'Tour Noturno dos Museus do Vaticano',
+        narration: 'Experimente os Museus do Vaticano como nunca antes neste tour exclusivo noturno. Explore as galerias e a Capela Sistina sem as multidões do dia.',
+        description: 'Tour exclusivo noturno dos Museus do Vaticano',
+        detailedDescription: 'O Tour Noturno dos Museus do Vaticano oferece uma oportunidade única de explorar uma das maiores coleções de arte do mundo em um ambiente íntimo. Disponível em sextas-feiras selecionadas à noite, esta experiência exclusiva permite que os visitantes passeiem pelas magníficas galerias, admirem as Salas de Rafael e contemplem o teto da Capela Sistina de Michelangelo sem as multidões habituais.'
+      },
+      ru: {
+        name: 'Ночной тур по Музеям Ватикана',
+        narration: 'Ощутите Музеи Ватикана как никогда раньше во время этого эксклюзивного вечернего тура. Исследуйте галереи и Сикстинскую капеллу без дневных толп.',
+        description: 'Эксклюзивный вечерний тур по Музеям Ватикана',
+        detailedDescription: 'Ночной тур по Музеям Ватикана предлагает уникальную возможность исследовать одну из величайших художественных коллекций мира в интимной обстановке. Доступный по избранным пятницам вечером, этот эксклюзивный опыт позволяет посетителям прогуляться по великолепным галереям, полюбоваться Станцами Рафаэля и благоговеть перед потолком Сикстинской капеллы Микеланджело.'
       }
     }
   },
@@ -5839,6 +5881,48 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '로마 요리는 고대 시대로 거슬러 올라가는 뿌리를 가지고 있으며, 많은 전통 레시피가 세대를 거쳐 전해져 내려옵니다.',
         yearBuilt: '고대 전통',
         architect: '로마 요리 유산'
+      },
+      es: {
+        name: 'Tour Gastronómico Romano Tradicional',
+        narration: 'Descubra los sabores auténticos de Roma en este tour gastronómico guiado por Trastevere y el Gueto Judío. Pruebe platos tradicionales y aprenda sobre la historia culinaria romana.',
+        description: 'Tour guiado de la cocina tradicional y cultura gastronómica romana',
+        detailedDescription: 'Este tour gastronómico inmersivo le lleva por los barrios más auténticos de Roma para descubrir las ricas tradiciones culinarias de la ciudad. Guiado por expertos gastronómicos locales, visitará trattorias familiares, panaderías históricas y tiendas de artesanías alimentarias en Trastevere y el Gueto Judío. Pruebe platos romanos tradicionales como carbonara, cacio e pepe, supplì y especialidades judeo-romanas como carciofi alla giudia.'
+      },
+      fr: {
+        name: 'Tour Gastronomique Romain Traditionnel',
+        narration: 'Découvrez les saveurs authentiques de Rome lors de cette visite gastronomique guidée à travers Trastevere et le Ghetto Juif. Goûtez aux plats traditionnels et apprenez l\'histoire culinaire romaine.',
+        description: 'Visite guidée de la cuisine traditionnelle et de la culture gastronomique romaine',
+        detailedDescription: 'Cette visite gastronomique immersive vous emmène à travers les quartiers les plus authentiques de Rome pour découvrir les riches traditions culinaires de la ville. Guidé par des experts gastronomiques locaux, vous visiterez des trattorias familiales, des boulangeries historiques et des boutiques d\'artisans alimentaires à Trastevere et dans le Ghetto Juif. Goûtez aux plats romains traditionnels comme la carbonara, le cacio e pepe, les supplì et les spécialités judéo-romaines comme les carciofi alla giudia.'
+      },
+      de: {
+        name: 'Traditionelle Römische Food-Tour',
+        narration: 'Entdecken Sie die authentischen Aromen Roms bei dieser geführten Food-Tour durch Trastevere und das Jüdische Ghetto. Probieren Sie traditionelle Gerichte und lernen Sie die römische Kochgeschichte kennen.',
+        description: 'Geführte Tour durch die traditionelle römische Küche und Esskultur',
+        detailedDescription: 'Diese immersive Food-Tour führt Sie durch Roms authentischste Viertel, um die reichen kulinarischen Traditionen der Stadt zu entdecken. Unter der Führung lokaler Gastronomiexperten besuchen Sie familiengeführte Trattorias, historische Bäckereien und handwerkliche Lebensmittelgeschäfte in Trastevere und dem Jüdischen Ghetto. Probieren Sie traditionelle römische Gerichte wie Carbonara, Cacio e Pepe, Supplì und jüdisch-römische Spezialitäten wie Carciofi alla Giudia.'
+      },
+      zh: {
+        name: '传统罗马美食之旅',
+        narration: '在这次穿越特拉斯提弗列和犹太区的导览美食之旅中发现罗马的正宗风味。品尝传统菜肴，了解罗马烹饪历史。',
+        description: '罗马传统美食和饮食文化导览',
+        detailedDescription: '这次沉浸式美食之旅带您穿越罗马最正宗的街区，发现这座城市丰富的烹饪传统。在当地美食专家的带领下，您将参观特拉斯提弗列和犹太区的家族经营餐馆、历史悠久的面包店和手工食品店。品尝传统罗马菜肴如培根蛋面、奶酪胡椒面、炸米球，以及犹太罗马特色菜如犹太式洋蓟。'
+      },
+      ja: {
+        name: '伝統的ローマ料理ツアー',
+        narration: 'トラステヴェレとユダヤ人地区を巡るこのガイド付きフードツアーで、ローマの本格的な味を発見してください。伝統料理を味わい、ローマの料理の歴史を学びましょう。',
+        description: 'ローマの伝統料理と食文化のガイドツアー',
+        detailedDescription: 'この没入型フードツアーでは、ローマで最も本格的な地区を巡り、この街の豊かな料理の伝統を発見します。地元の食の専門家に案内され、トラステヴェレとユダヤ人地区の家族経営のトラットリア、歴史的なベーカリー、職人の食品店を訪れます。カルボナーラ、カチョエペペ、スップリなどの伝統的なローマ料理や、カルチョーフィ・アッラ・ジュディアなどのユダヤ・ローマ料理を味わいます。'
+      },
+      pt: {
+        name: 'Tour Gastronômico Romano Tradicional',
+        narration: 'Descubra os sabores autênticos de Roma neste tour gastronômico guiado por Trastevere e o Gueto Judaico. Prove pratos tradicionais e aprenda sobre a história culinária romana.',
+        description: 'Tour guiado pela culinária tradicional e cultura gastronômica romana',
+        detailedDescription: 'Este tour gastronômico imersivo leva você pelos bairros mais autênticos de Roma para descobrir as ricas tradições culinárias da cidade. Guiado por especialistas gastronômicos locais, você visitará trattorias familiares, padarias históricas e lojas de alimentos artesanais em Trastevere e no Gueto Judaico. Prove pratos romanos tradicionais como carbonara, cacio e pepe, supplì e especialidades judaico-romanas como carciofi alla giudia.'
+      },
+      ru: {
+        name: 'Традиционный Римский Гастрономический Тур',
+        narration: 'Откройте для себя подлинные вкусы Рима в этом гастрономическом туре по Трастевере и Еврейскому гетто. Попробуйте традиционные блюда и узнайте о римской кулинарной истории.',
+        description: 'Экскурсия по традиционной римской кухне и гастрономической культуре',
+        detailedDescription: 'Этот иммерсивный гастрономический тур проведет вас по самым аутентичным районам Рима, чтобы открыть богатые кулинарные традиции города. Под руководством местных гастрономических экспертов вы посетите семейные траттории, исторические пекарни и ремесленные продуктовые магазины в Трастевере и Еврейском гетто. Попробуйте традиционные римские блюда, такие как карбонара, качо э пепе, суппли и иудейско-римские деликатесы.'
       }
     }
   },
@@ -6620,7 +6704,49 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '콜로세움 지하는 행사 중 피를 흡수하고 전사들에게 견인력을 제공하기 위해 모래로 덮였습니다.',
         yearBuilt: '서기 70-80년',
         architect: '로마 엔지니어'
-      }
+      },
+      es: {
+        name: 'Tour Subterráneo del Coliseo',
+        narration: 'Explore las cámaras subterráneas ocultas del Coliseo donde los gladiadores se preparaban para la batalla. Este tour exclusivo le lleva bajo el suelo de la arena.',
+        description: 'Tour exclusivo de las cámaras subterráneas del Coliseo y el suelo de la arena',
+        detailedDescription: 'Este tour de acceso especial le lleva al hipogeo subterráneo normalmente restringido del Coliseo, donde gladiadores y animales salvajes esperaban antes de entrar a la arena. Camine por el suelo reconstruido de la arena para ver el anfiteatro desde la perspectiva de un gladiador, luego descienda a las cámaras subterráneas para ver el complejo sistema de túneles, salas y elevadores mecánicos que creaban los espectáculos.'
+      },
+      fr: {
+        name: 'Visite Souterraine du Colisée',
+        narration: 'Explorez les chambres souterraines cachées du Colisée où les gladiateurs se préparaient au combat. Cette visite exclusive vous emmène sous le sol de l\'arène.',
+        description: 'Visite exclusive des chambres souterraines du Colisée et du sol de l\'arène',
+        detailedDescription: 'Cette visite à accès spécial vous emmène dans l\'hypogée souterrain normalement interdit du Colisée, où gladiateurs et animaux sauvages attendaient avant d\'entrer dans l\'arène. Marchez sur le sol reconstitué de l\'arène pour une vue de gladiateur de l\'amphithéâtre, puis descendez dans les chambres souterraines pour voir le système complexe de tunnels, de salles et d\'ascenseurs mécaniques qui créaient les spectacles.'
+      },
+      de: {
+        name: 'Kolosseum Untergrund-Tour',
+        narration: 'Erkunden Sie die verborgenen unterirdischen Kammern des Kolosseums, wo Gladiatoren sich auf den Kampf vorbereiteten. Diese exklusive Tour führt Sie unter den Arenaboden.',
+        description: 'Exklusive Tour durch die unterirdischen Kammern des Kolosseums und den Arenaboden',
+        detailedDescription: 'Diese Sonderzugangs-Tour führt Sie in das normalerweise gesperrte unterirdische Hypogäum des Kolosseums, wo Gladiatoren und wilde Tiere warteten, bevor sie die Arena betraten. Gehen Sie über den rekonstruierten Arenaboden für einen Gladiatorenblick auf das Amphitheater, dann steigen Sie in die unterirdischen Kammern hinab, um das komplexe System aus Tunneln, Räumen und mechanischen Aufzügen zu sehen.'
+      },
+      zh: {
+        name: '斗兽场地下之旅',
+        narration: '探索斗兽场隐藏的地下房间，这里曾是角斗士准备战斗的地方。这次独家之旅将带您进入竞技场地板下方。',
+        description: '斗兽场地下室和竞技场地板独家之旅',
+        detailedDescription: '这次特别通道之旅将带您进入通常禁止进入的斗兽场地下区域，角斗士和野生动物曾在这里等待进入竞技场。走在重建的竞技场地板上，从角斗士的视角观看圆形剧场，然后进入地下房间，观看创造壮观表演的复杂隧道、房间和机械升降机系统。'
+      },
+      ja: {
+        name: 'コロッセオ地下ツアー',
+        narration: '剣闘士が戦いの準備をしていたコロッセオの隠された地下室を探検してください。この独占ツアーでは、アリーナの床の下へご案内します。',
+        description: 'コロッセオの地下室とアリーナフロアの独占ツアー',
+        detailedDescription: 'この特別アクセスツアーでは、通常は立入禁止のコロッセオの地下ヒポゲウムに入ります。ここでは剣闘士や野生動物がアリーナに入る前に待機していました。再建されたアリーナフロアを歩いて剣闘士の視点から円形闘技場を見渡し、その後地下室に降りて、壮大なショーを生み出した複雑なトンネル、部屋、機械式リフトのシステムを見学します。'
+      },
+      pt: {
+        name: 'Tour Subterrâneo do Coliseu',
+        narration: 'Explore as câmaras subterrâneas escondidas do Coliseu onde os gladiadores se preparavam para a batalha. Este tour exclusivo leva você sob o chão da arena.',
+        description: 'Tour exclusivo das câmaras subterrâneas do Coliseu e do chão da arena',
+        detailedDescription: 'Este tour de acesso especial leva você ao hipogeu subterrâneo normalmente restrito do Coliseu, onde gladiadores e animais selvagens esperavam antes de entrar na arena. Caminhe pelo chão reconstruído da arena para uma visão de gladiador do anfiteatro, depois desça às câmaras subterrâneas para ver o complexo sistema de túneis, salas e elevadores mecânicos que criavam os espetáculos.'
+      },
+      ru: {
+        name: 'Подземный Тур по Колизею',
+        narration: 'Исследуйте скрытые подземные камеры Колизея, где гладиаторы готовились к бою. Этот эксклюзивный тур проведет вас под пол арены.',
+        description: 'Эксклюзивный тур по подземным камерам Колизея и полу арены',
+        detailedDescription: 'Этот тур со специальным доступом проведет вас в обычно закрытый подземный гипогей Колизея, где гладиаторы и дикие животные ждали перед выходом на арену. Пройдите по реконструированному полу арены, чтобы увидеть амфитеатр глазами гладиатора, затем спуститесь в подземные камеры, чтобы увидеть сложную систему туннелей, комнат и механических лифтов.'
+      },
     }
   },
   {
@@ -6670,7 +6796,49 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '베스파 스쿠터는 1946년부터 이탈리아 문화의 상징적인 상징이었습니다.',
         yearBuilt: '현대 활동',
         architect: '이탈리아 교통 유산'
-      }
+      },
+      es: {
+        name: 'Tour en Vespa por Roma',
+        narration: 'Experimente Roma como un local en una Vespa vintage. Recorra las calles históricas y descubra joyas ocultas con un guía experto.',
+        description: 'Tour guiado en Vespa por las calles históricas de Roma',
+        detailedDescription: 'Sienta la emoción de conducir una clásica Vespa italiana por la Ciudad Eterna en este inolvidable tour. Su aventura comienza con una instrucción de seguridad y orientación sobre la Vespa antes de partir para explorar los monumentos más icónicos y rincones ocultos de Roma. Pase por el Coliseo, por encantadoras calles empedradas, alrededor de Piazza Navona y suba a miradores panorámicos como el ojo de cerradura del Aventino.'
+      },
+      fr: {
+        name: 'Tour de Rome en Vespa',
+        narration: 'Découvrez Rome comme un local sur une Vespa vintage. Parcourez les rues historiques et découvrez des trésors cachés avec un guide expert.',
+        description: 'Visite guidée en Vespa à travers les rues historiques de Rome',
+        detailedDescription: 'Ressentez le frisson de conduire une Vespa italienne classique à travers la Ville Éternelle lors de cette visite inoubliable. Votre aventure commence par un briefing de sécurité et une orientation Vespa avant de partir explorer les monuments les plus emblématiques et les coins cachés de Rome. Passez devant le Colisée, dans les charmantes rues pavées, autour de la Piazza Navona et montez vers des points de vue panoramiques comme le trou de la serrure de l\'Aventin.'
+      },
+      de: {
+        name: 'Vespa-Tour durch Rom',
+        narration: 'Erleben Sie Rom wie ein Einheimischer auf einer Vintage-Vespa. Fahren Sie durch historische Straßen und entdecken Sie versteckte Juwelen mit einem erfahrenen Führer.',
+        description: 'Geführte Vespa-Tour durch Roms historische Straßen',
+        detailedDescription: 'Spüren Sie den Nervenkitzel, eine klassische italienische Vespa durch die Ewige Stadt zu fahren bei dieser unvergesslichen Tour. Ihr Abenteuer beginnt mit einer Sicherheitseinweisung und Vespa-Orientierung, bevor Sie aufbrechen, um Roms ikonischste Sehenswürdigkeiten und versteckte Ecken zu erkunden. Fahren Sie am Kolosseum vorbei, durch charmante Kopfsteinpflasterstraßen, um die Piazza Navona und hinauf zu Panoramapunkten wie dem Schlüsselloch auf dem Aventin.'
+      },
+      zh: {
+        name: '罗马韦士柏之旅',
+        narration: '骑着复古韦士柏摩托车像当地人一样体验罗马。穿越历史街道，与专业导游一起发现隐藏的宝藏。',
+        description: '穿越罗马历史街道的导览韦士柏之旅',
+        detailedDescription: '在这次难忘的旅程中，感受骑着经典意大利韦士柏摩托车穿越永恒之城的刺激。您的冒险从安全简报和韦士柏入门开始，然后出发探索罗马最标志性的地标和隐藏角落。经过斗兽场，穿过迷人的鹅卵石街道，环绕纳沃纳广场，登上阿文丁山钥匙孔等全景观景点。'
+      },
+      ja: {
+        name: 'ローマ・ベスパツアー',
+        narration: 'ヴィンテージベスパに乗って地元の人のようにローマを体験してください。歴史的な通りを走り、専門ガイドと一緒に隠れた宝石を発見しましょう。',
+        description: 'ローマの歴史的な通りを巡るガイド付きベスパツアー',
+        detailedDescription: 'この忘れられないツアーで、クラシックなイタリアン・ベスパで永遠の都を走るスリルを味わってください。安全説明とベスパの使い方から始まり、ローマで最も象徴的なランドマークと隠れた場所を探索します。コロッセオを通り、魅力的な石畳の通りを抜け、ナヴォーナ広場を回り、アヴェンティーノの丘の鍵穴のようなパノラマスポットへ。'
+      },
+      pt: {
+        name: 'Tour de Vespa por Roma',
+        narration: 'Experimente Roma como um local em uma Vespa vintage. Percorra as ruas históricas e descubra joias escondidas com um guia especializado.',
+        description: 'Tour guiado de Vespa pelas ruas históricas de Roma',
+        detailedDescription: 'Sinta a emoção de pilotar uma clássica Vespa italiana pela Cidade Eterna neste tour inesquecível. Sua aventura começa com uma instrução de segurança e orientação sobre a Vespa antes de partir para explorar os monumentos mais icônicos e cantos escondidos de Roma. Passe pelo Coliseu, por charmosas ruas de paralelepípedos, ao redor da Piazza Navona e suba para mirantes panorâmicos como o buraco da fechadura do Aventino.'
+      },
+      ru: {
+        name: 'Тур по Риму на Веспе',
+        narration: 'Ощутите Рим как местный житель на винтажной Веспе. Прокатитесь по историческим улицам и откройте скрытые жемчужины с опытным гидом.',
+        description: 'Экскурсия на Веспе по историческим улицам Рима',
+        detailedDescription: 'Почувствуйте острые ощущения от езды на классической итальянской Веспе по Вечному городу в этом незабываемом туре. Ваше приключение начинается с инструктажа по безопасности и ознакомления с Веспой, прежде чем отправиться исследовать самые знаковые достопримечательности и скрытые уголки Рима. Проедьте мимо Колизея, по очаровательным мощеным улочкам, вокруг площади Навона и поднимитесь к панорамным точкам, таким как замочная скважина Авентина.'
+      },
     }
   },
   {
@@ -6720,7 +6888,49 @@ const LANDMARKS: Landmark[] = [
         historicalInfo: '전통 로마 레시피는 고대부터 세대를 거쳐 전해져 내려왔습니다.',
         yearBuilt: '고대 요리 전통',
         architect: '로마 요리 유산'
-      }
+      },
+      es: {
+        name: 'Clase de Cocina Romana',
+        narration: 'Aprenda a cocinar platos romanos auténticos con un chef local. Domine recetas tradicionales como carbonara y cacio e pepe en una clase práctica.',
+        description: 'Clase práctica de cocina tradicional romana',
+        detailedDescription: 'Sumérjase en la tradición culinaria romana con esta clase práctica de cocina dirigida por un chef local. Comience con una visita a un mercado romano tradicional para seleccionar ingredientes frescos mientras aprende sobre la cultura gastronómica italiana. Luego diríjase a una cocina profesional o un encantador entorno hogareño para preparar una comida romana completa. Aprenda los secretos de la auténtica carbonara, el perfecto cacio e pepe, fettuccine caseros y tiramisú clásico.'
+      },
+      fr: {
+        name: 'Cours de Cuisine Romaine',
+        narration: 'Apprenez à cuisiner des plats romains authentiques avec un chef local. Maîtrisez des recettes traditionnelles comme la carbonara et le cacio e pepe lors d\'un cours pratique.',
+        description: 'Cours de cuisine pratique de cuisine romaine traditionnelle',
+        detailedDescription: 'Plongez dans la tradition culinaire romaine avec ce cours de cuisine pratique dirigé par un chef local. Commencez par une visite d\'un marché romain traditionnel pour sélectionner des ingrédients frais tout en découvrant la culture gastronomique italienne. Puis rendez-vous dans une cuisine professionnelle ou un charmant cadre domestique pour préparer un repas romain complet. Apprenez les secrets de l\'authentique carbonara, du parfait cacio e pepe, des fettuccine maison et du tiramisu classique.'
+      },
+      de: {
+        name: 'Römischer Kochkurs',
+        narration: 'Lernen Sie, authentische römische Gerichte von einem lokalen Koch zu kochen. Meistern Sie traditionelle Rezepte wie Carbonara und Cacio e Pepe in einem praktischen Kurs.',
+        description: 'Praktischer Kochkurs für traditionelle römische Küche',
+        detailedDescription: 'Tauchen Sie ein in die römische Kochtradition mit diesem praktischen Kochkurs unter der Leitung eines lokalen Kochs. Beginnen Sie mit einem Besuch auf einem traditionellen römischen Markt, um frische Zutaten auszuwählen und dabei die italienische Esskultur kennenzulernen. Dann geht es in eine professionelle Küche oder ein charmantes häusliches Ambiente, um ein komplettes römisches Mahl zuzubereiten. Lernen Sie die Geheimnisse der authentischen Carbonara, des perfekten Cacio e Pepe, hausgemachter Fettuccine und klassischem Tiramisu.'
+      },
+      zh: {
+        name: '罗马烹饪课程',
+        narration: '向当地厨师学习烹饪正宗罗马菜肴。在实践课程中掌握培根蛋面和奶酪胡椒面等传统食谱。',
+        description: '传统罗马美食实践烹饪课程',
+        detailedDescription: '通过这个由当地厨师带领的实践烹饪课程，沉浸在罗马烹饪传统中。从参观传统罗马市场开始，选择新鲜食材，同时了解意大利饮食文化。然后前往专业厨房或温馨的家庭环境准备一顿完整的罗马餐。学习正宗培根蛋面、完美奶酪胡椒面、手工意面和经典提拉米苏的秘诀。'
+      },
+      ja: {
+        name: 'ローマ料理教室',
+        narration: '地元のシェフから本格的なローマ料理を学びましょう。カルボナーラやカチョエペペなどの伝統的なレシピを実践クラスでマスターします。',
+        description: '伝統的なローマ料理の実践料理教室',
+        detailedDescription: '地元シェフが指導するこの実践的な料理教室で、ローマの料理伝統に浸ってください。まず伝統的なローマの市場を訪れ、新鲜な食材を選びながらイタリアの食文化を学びます。その後、プロのキッチンや家庭的な雰囲気の中で完全なローマの食事を準備します。本格的なカルボナーラ、完璧なカチョエペペ、手打ちフェットチーネ、クラシックなティラミスの秘密を学びましょう。'
+      },
+      pt: {
+        name: 'Aula de Culinária Romana',
+        narration: 'Aprenda a cozinhar pratos romanos autênticos com um chef local. Domine receitas tradicionais como carbonara e cacio e pepe em uma aula prática.',
+        description: 'Aula prática de culinária romana tradicional',
+        detailedDescription: 'Mergulhe na tradição culinária romana com esta aula de culinária prática liderada por um chef local. Comece com uma visita a um mercado romano tradicional para selecionar ingredientes frescos enquanto aprende sobre a cultura gastronômica italiana. Depois vá para uma cozinha profissional ou um charmoso ambiente doméstico para preparar uma refeição romana completa. Aprenda os segredos da autêntica carbonara, do perfeito cacio e pepe, fettuccine feito à mão e tiramisù clássico.'
+      },
+      ru: {
+        name: 'Кулинарный Класс Римской Кухни',
+        narration: 'Научитесь готовить аутентичные римские блюда у местного шеф-повара. Освойте традиционные рецепты, такие как карбонара и качо э пепе, на практическом занятии.',
+        description: 'Практический кулинарный класс традиционной римской кухни',
+        detailedDescription: 'Погрузитесь в римские кулинарные традиции на этом практическом кулинарном занятии под руководством местного шеф-повара. Начните с посещения традиционного римского рынка, чтобы выбрать свежие ингредиенты, узнавая об итальянской гастрономической культуре. Затем отправляйтесь на профессиональную кухню или в уютную домашнюю обстановку, чтобы приготовить полноценный римский обед. Узнайте секреты аутентичной карбонары, идеального качо э пепе, домашних феттучине и классического тирамису.'
+      },
     }
   },
   // Rome Gift Shops
