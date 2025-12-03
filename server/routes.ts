@@ -3,6 +3,10 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVisitedLandmarkSchema } from "@shared/schema";
 import { recommendTourItinerary } from "./lib/openai";
+import { db } from "./db";
+import { cities, landmarks, dataVersions } from "@shared/schema";
+import { eq } from "drizzle-orm";
+import crypto from "crypto";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/cities", async (req, res) => {
@@ -92,6 +96,112 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ visited: isVisited });
     } catch (error) {
       res.status(500).json({ error: "Failed to check if landmark is visited" });
+    }
+  });
+
+  // Offline package API - download city data for offline use
+  app.get("/api/offline-package/:cityId", async (req, res) => {
+    try {
+      const { cityId } = req.params;
+      const clientEtag = req.headers['if-none-match'];
+
+      // Fetch city data from database
+      const [cityData] = await db.select().from(cities).where(eq(cities.id, cityId));
+      if (!cityData) {
+        return res.status(404).json({ error: "City not found" });
+      }
+
+      // Fetch all landmarks for this city from database
+      const cityLandmarks = await db.select().from(landmarks).where(eq(landmarks.cityId, cityId));
+
+      // Get current data version
+      const [versionRecord] = await db.select().from(dataVersions).where(eq(dataVersions.entityType, 'all'));
+      const version = versionRecord?.version || 1;
+
+      // Create package data
+      const packageData = {
+        city: {
+          id: cityData.id,
+          name: cityData.name,
+          country: cityData.country,
+          lat: cityData.lat,
+          lng: cityData.lng,
+          zoom: cityData.zoom || 14,
+          cruisePort: cityData.cruisePort
+        },
+        landmarks: cityLandmarks.map(l => ({
+          id: l.id,
+          cityId: l.cityId,
+          name: l.name,
+          lat: l.lat,
+          lng: l.lng,
+          radius: l.radius,
+          narration: l.narration,
+          description: l.description,
+          category: l.category,
+          detailedDescription: l.detailedDescription,
+          photos: l.photos,
+          historicalInfo: l.historicalInfo,
+          yearBuilt: l.yearBuilt,
+          architect: l.architect,
+          translations: l.translations,
+          openingHours: l.openingHours,
+          priceRange: l.priceRange,
+          cuisine: l.cuisine,
+          reservationUrl: l.reservationUrl,
+          phoneNumber: l.phoneNumber,
+          menuHighlights: l.menuHighlights,
+          restaurantPhotos: l.restaurantPhotos,
+          paymentMethods: l.paymentMethods
+        })),
+        version,
+        downloadedAt: new Date().toISOString()
+      };
+
+      // Generate ETag based on content hash
+      const contentHash = crypto
+        .createHash('md5')
+        .update(JSON.stringify({ version, cityId, count: cityLandmarks.length }))
+        .digest('hex');
+      const etag = `"${contentHash}"`;
+
+      // Check if client has latest version
+      if (clientEtag === etag) {
+        return res.status(304).end();
+      }
+
+      res.setHeader('ETag', etag);
+      res.setHeader('Cache-Control', 'private, max-age=3600');
+      res.json(packageData);
+    } catch (error) {
+      console.error('Offline package error:', error);
+      res.status(500).json({ error: "Failed to generate offline package" });
+    }
+  });
+
+  // Get all available cities for offline download
+  app.get("/api/offline-package", async (req, res) => {
+    try {
+      const allCities = await db.select({
+        id: cities.id,
+        name: cities.name,
+        country: cities.country
+      }).from(cities);
+
+      // Get landmark counts per city
+      const citiesWithStats = await Promise.all(
+        allCities.map(async (city) => {
+          const cityLandmarks = await db.select().from(landmarks).where(eq(landmarks.cityId, city.id));
+          return {
+            ...city,
+            landmarkCount: cityLandmarks.length
+          };
+        })
+      );
+
+      res.json(citiesWithStats);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch available cities" });
     }
   });
 
