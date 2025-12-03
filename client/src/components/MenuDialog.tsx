@@ -5,7 +5,7 @@ import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { 
   Volume2, 
   VolumeX, 
@@ -27,7 +27,10 @@ import {
   Mic,
   Headphones,
   User,
-  Users
+  Users,
+  Check,
+  Sparkles,
+  Play
 } from 'lucide-react';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
@@ -36,7 +39,36 @@ import OfflineDataDialog from './OfflineDataDialog';
 import { City, Landmark } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
 import { useState, useEffect } from 'react';
-import { TTS_VOICES, VoiceId, getVoiceForLanguage, getSavedVoice, saveVoice } from '@/lib/voiceSettings';
+import { audioService } from '@/lib/audioService';
+
+interface VoiceInfo {
+  voice: SpeechSynthesisVoice;
+  quality: 'premium' | 'standard';
+  gender: 'male' | 'female' | 'unknown';
+}
+
+function analyzeVoice(voice: SpeechSynthesisVoice): VoiceInfo {
+  const nameLower = voice.name.toLowerCase();
+  
+  const premiumKeywords = ['neural', 'wavenet', 'premium', 'enhanced', 'natural', 'high-quality', 'google'];
+  const isPremium = premiumKeywords.some(keyword => nameLower.includes(keyword));
+  
+  const femaleKeywords = ['female', 'woman', 'girl', 'zira', 'hazel', 'susan', 'heera', 'hedda', 'helia', 'lucia', 'paulina', 'sabina', 'monica', 'laura', 'elsa', 'cosette', 'caroline', 'julie', 'amelie', 'kyoko', 'o-ren', 'mei-jia', 'yuna', 'sora'];
+  const maleKeywords = ['male', 'man', 'david', 'mark', 'richard', 'george', 'daniel', 'sean', 'james', 'rishi', 'pablo', 'jorge', 'luca', 'thomas', 'guillaume', 'otoya', 'ting-ting'];
+  
+  let gender: 'male' | 'female' | 'unknown' = 'unknown';
+  if (femaleKeywords.some(k => nameLower.includes(k))) {
+    gender = 'female';
+  } else if (maleKeywords.some(k => nameLower.includes(k))) {
+    gender = 'male';
+  }
+  
+  return {
+    voice,
+    quality: isPremium ? 'premium' : 'standard',
+    gender
+  };
+}
 
 interface MenuDialogProps {
   isOpen: boolean;
@@ -85,10 +117,6 @@ interface MenuDialogProps {
   onDownloadData: (password: string) => Promise<void>;
   onUploadData: (file: File, password: string) => Promise<void>;
   
-  // Voice selection
-  selectedVoice?: VoiceId;
-  onVoiceChange?: (voice: VoiceId) => void;
-  
   // MP3 Audio Download
   onOpenAudioDownload?: () => void;
 }
@@ -121,36 +149,71 @@ export default function MenuDialog({
   onTourTimePerStopChange,
   onDownloadData,
   onUploadData,
-  selectedVoice,
-  onVoiceChange,
   onOpenAudioDownload
 }: MenuDialogProps) {
   const [showOfflineDialog, setShowOfflineDialog] = useState(false);
   const [offlineMode2, setOfflineMode2] = useState<'download' | 'upload'>('download');
+  const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [selectedSystemVoice, setSelectedSystemVoice] = useState<string>('');
   
-  const [currentVoice, setCurrentVoice] = useState<VoiceId>(() => {
-    return getSavedVoice() || getVoiceForLanguage(selectedLanguage);
-  });
-
   useEffect(() => {
-    if (selectedVoice) {
-      setCurrentVoice(selectedVoice);
+    if (isOpen) {
+      const loadVoices = () => {
+        const voices = audioService.getVoicesForLanguage(selectedLanguage);
+        setSystemVoices(voices);
+        
+        const savedVoice = audioService.getSelectedVoiceName(selectedLanguage);
+        if (savedVoice) {
+          setSelectedSystemVoice(savedVoice);
+        } else if (voices.length > 0) {
+          setSelectedSystemVoice(voices[0].name);
+        }
+      };
+      
+      loadVoices();
+      
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+      }
+      
+      const timer = setTimeout(loadVoices, 500);
+      return () => clearTimeout(timer);
     }
-  }, [selectedVoice]);
-
-  const handleVoiceChange = (voiceId: VoiceId) => {
-    setCurrentVoice(voiceId);
-    saveVoice(voiceId);
-    onVoiceChange?.(voiceId);
+  }, [isOpen, selectedLanguage]);
+  
+  const handleSystemVoiceChange = (voiceName: string) => {
+    setSelectedSystemVoice(voiceName);
+    audioService.setVoiceForLanguage(selectedLanguage, voiceName);
   };
-
-  const getGenderIcon = (gender: string) => {
-    switch (gender) {
-      case 'male': return <User className="w-3 h-3" />;
-      case 'female': return <User className="w-3 h-3 text-pink-500" />;
-      default: return <Users className="w-3 h-3" />;
+  
+  const testTexts: Record<string, string> = {
+    'en': 'Hello! This is a test.',
+    'ko': '안녕하세요! 테스트입니다.',
+    'es': '¡Hola! Es una prueba.',
+    'fr': 'Bonjour! Test vocal.',
+    'de': 'Hallo! Sprachtest.',
+    'it': 'Ciao! Test vocale.',
+    'zh': '你好！测试。',
+    'ja': 'こんにちは！テスト。',
+    'pt': 'Olá! Teste de voz.',
+    'ru': 'Привет! Тест.'
+  };
+  
+  const previewVoice = (voiceName: string) => {
+    const text = testTexts[selectedLanguage] || testTexts['en'];
+    audioService.stop();
+    
+    const voice = systemVoices.find(v => v.name === voiceName);
+    if (voice) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = speechRate;
+      utterance.lang = voice.lang;
+      speechSynthesis.speak(utterance);
     }
   };
+  
+  const voiceInfoList = systemVoices.map(analyzeVoice);
 
   return (
     <>
@@ -263,6 +326,106 @@ export default function MenuDialog({
                     className="w-full"
                     data-testid="slider-speech-rate"
                   />
+                </div>
+
+                {/* TTS Voice Selection Cards */}
+                <div className="space-y-2 pt-2 border-t">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-xs font-medium flex items-center gap-1">
+                      <Mic className="w-3 h-3" />
+                      {selectedLanguage === 'ko' ? 'TTS 음성' : 'TTS Voice'}
+                    </Label>
+                    <Badge variant="secondary" className="text-[10px]">
+                      {systemVoices.length}
+                    </Badge>
+                  </div>
+                  
+                  {voiceInfoList.length > 0 ? (
+                    <ScrollArea className="w-full whitespace-nowrap">
+                      <div className="flex gap-2 pb-2">
+                        {voiceInfoList.map((info) => {
+                          const isSelected = selectedSystemVoice === info.voice.name;
+                          const voiceSlug = info.voice.name.replace(/\s+/g, '-').toLowerCase();
+                          
+                          return (
+                            <button
+                              key={info.voice.name}
+                              onClick={() => handleSystemVoiceChange(info.voice.name)}
+                              className={`
+                                relative flex flex-col min-w-[140px] p-2 rounded-md border transition-all
+                                text-left cursor-pointer
+                                ${isSelected 
+                                  ? 'border-primary bg-primary/5' 
+                                  : 'border-border bg-card hover:border-primary/50'
+                                }
+                              `}
+                              aria-pressed={isSelected}
+                              data-testid={`card-voice-${voiceSlug}`}
+                            >
+                              {isSelected && (
+                                <div className="absolute top-1.5 right-1.5">
+                                  <Check className="w-3 h-3 text-primary" />
+                                </div>
+                              )}
+                              
+                              <div className="flex items-center gap-1.5 mb-1.5">
+                                <User className={`w-3 h-3 ${
+                                  info.gender === 'female' ? 'text-pink-500' : 
+                                  info.gender === 'male' ? 'text-blue-500' : 
+                                  'text-muted-foreground'
+                                }`} />
+                                <span className="font-medium text-xs truncate max-w-[90px]" title={info.voice.name}>
+                                  {info.voice.name.split(' ').slice(0, 2).join(' ')}
+                                </span>
+                              </div>
+                              
+                              <div className="flex flex-wrap gap-0.5 mb-1.5">
+                                <Badge variant="outline" className="text-[9px] px-1 py-0 h-4">
+                                  {info.voice.lang}
+                                </Badge>
+                                <Badge 
+                                  variant={info.quality === 'premium' ? 'default' : 'secondary'} 
+                                  className="text-[9px] px-1 py-0 h-4 gap-0.5"
+                                >
+                                  {info.quality === 'premium' && <Sparkles className="w-2 h-2" />}
+                                  {info.quality === 'premium' ? 'P' : 'S'}
+                                </Badge>
+                              </div>
+                              
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-0.5 text-[9px] text-muted-foreground">
+                                  {info.voice.localService ? (
+                                    <WifiOff className="w-2.5 h-2.5" />
+                                  ) : (
+                                    <Wifi className="w-2.5 h-2.5" />
+                                  )}
+                                </div>
+                                
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-5 w-5 p-0"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    previewVoice(info.voice.name);
+                                  }}
+                                  title={selectedLanguage === 'ko' ? '미리듣기' : 'Preview'}
+                                  data-testid={`button-voice-preview-${voiceSlug}`}
+                                >
+                                  <Play className="w-3 h-3" />
+                                </Button>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <ScrollBar orientation="horizontal" />
+                    </ScrollArea>
+                  ) : (
+                    <p className="text-xs text-muted-foreground text-center py-2">
+                      {selectedLanguage === 'ko' ? '사용 가능한 음성이 없습니다' : 'No voices available'}
+                    </p>
+                  )}
                 </div>
 
                 {onTestAudio && (
