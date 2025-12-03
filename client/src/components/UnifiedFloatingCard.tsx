@@ -1336,66 +1336,138 @@ export default function UnifiedFloatingCard({
                   const endIndex = startIndex + itemsPerPage;
                   const currentItems = filteredListLandmarks.slice(startIndex, endIndex);
 
-                  return currentItems.map(({ landmark, distance }) => (
-                    <div
-                      key={landmark.id}
-                      className="p-3 bg-muted/30 rounded-lg hover-elevate cursor-pointer"
-                      onClick={() => onLandmarkSelect?.(landmark)}
-                      data-testid={`card-landmark-${landmark.id}`}
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            {landmark.category === 'Activity' ? (
-                              <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />
-                            ) : landmark.category === 'Restaurant' ? (
-                              <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />
-                            ) : (
-                              <LandmarkIcon className="w-4 h-4 text-primary" />
-                            )}
-                            <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
-                              {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                            </h4>
-                            {spokenLandmarks.has(landmark.id) && (
-                              <Volume2 className="w-3 h-3 text-green-600" />
-                            )}
-                          </div>
-                          {distance !== null && (
-                            <p className="text-xs text-muted-foreground">
-                              {formatDistance(distance)}
-                            </p>
+                  return currentItems.map(({ landmark, distance }) => {
+                    const getCategoryStyles = (category: string | null | undefined) => {
+                      if (category === 'Activity') return { bg: 'bg-[hsl(210,85%,55%)]', text: 'text-white', border: 'border-[hsl(210,85%,55%)]' };
+                      if (category === 'Restaurant') return { bg: 'bg-[hsl(25,95%,55%)]', text: 'text-white', border: 'border-[hsl(25,95%,55%)]' };
+                      if (category === 'Gift Shop') return { bg: 'bg-[hsl(45,90%,55%)]', text: 'text-black', border: 'border-[hsl(45,90%,55%)]' };
+                      return { bg: 'bg-[hsl(14,85%,55%)]', text: 'text-white', border: 'border-[hsl(14,85%,55%)]' };
+                    };
+                    
+                    const getCategoryIcon = (category: string | null | undefined) => {
+                      if (category === 'Activity') return <Activity className="w-3 h-3" />;
+                      if (category === 'Restaurant') return <Utensils className="w-3 h-3" />;
+                      if (category === 'Gift Shop') return <ShoppingBag className="w-3 h-3" />;
+                      return <LandmarkIcon className="w-3 h-3" />;
+                    };
+                    
+                    const getCategoryLabel = (category: string | null | undefined, lang: string = 'en') => {
+                      if (category === 'Activity') return lang === 'ko' ? '액티비티' : 'Activity';
+                      if (category === 'Restaurant') return lang === 'ko' ? '레스토랑' : 'Restaurant';
+                      if (category === 'Gift Shop') return lang === 'ko' ? '기프트샵' : 'Gift Shop';
+                      return lang === 'ko' ? '명소' : 'Landmark';
+                    };
+                    
+                    const styles = getCategoryStyles(landmark.category);
+                    const hasPhoto = landmark.photos && landmark.photos.length > 0;
+                    
+                    return (
+                      <div
+                        key={landmark.id}
+                        className="rounded-xl border bg-card overflow-hidden hover-elevate cursor-pointer transition-all"
+                        onClick={() => onLandmarkSelect?.(landmark)}
+                        data-testid={`card-landmark-${landmark.id}`}
+                      >
+                        <div className="flex">
+                          {/* Photo Thumbnail */}
+                          {hasPhoto && (
+                            <div className="w-20 h-20 flex-shrink-0 relative overflow-hidden">
+                              <img 
+                                src={landmark.photos![0]} 
+                                alt={getTranslatedContent(landmark, selectedLanguage, 'name')}
+                                className="w-full h-full object-cover"
+                              />
+                              <div className={`absolute top-1 left-1 ${styles.bg} ${styles.text} rounded-full p-1`}>
+                                {getCategoryIcon(landmark.category)}
+                              </div>
+                            </div>
                           )}
-                        </div>
-                        <div className="flex gap-1">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onLandmarkSelect?.(landmark);
-                            }}
-                            className="h-8 w-8"
-                            data-testid={`button-info-${landmark.id}`}
-                          >
-                            <Info className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onLandmarkRoute(landmark);
-                              setIsMinimized(true);
-                            }}
-                            className="h-8 w-8"
-                            data-testid={`button-navigate-${landmark.id}`}
-                          >
-                            <Navigation className="w-4 h-4" />
-                          </Button>
+                          
+                          {/* Content */}
+                          <div className={`flex-1 p-2.5 flex flex-col justify-between ${!hasPhoto ? 'pl-3' : ''}`}>
+                            <div>
+                              <div className="flex items-start justify-between gap-2">
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-1.5 mb-0.5">
+                                    {!hasPhoto && (
+                                      <div className={`${styles.bg} ${styles.text} rounded-full p-1`}>
+                                        {getCategoryIcon(landmark.category)}
+                                      </div>
+                                    )}
+                                    <h4 className="font-semibold text-sm truncate" data-testid={`text-landmark-name-${landmark.id}`}>
+                                      {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                                    </h4>
+                                    {spokenLandmarks.has(landmark.id) && (
+                                      <Volume2 className="w-3 h-3 text-green-600 flex-shrink-0" />
+                                    )}
+                                  </div>
+                                  <p className="text-xs text-muted-foreground line-clamp-1">
+                                    {getTranslatedContent(landmark, selectedLanguage, 'description')}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            {/* Footer: Distance + Actions */}
+                            <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/50">
+                              <div className="flex items-center gap-2">
+                                <Badge variant="outline" className={`text-[10px] px-1.5 py-0 h-5 ${styles.border} ${styles.bg} ${styles.text}`}>
+                                  {getCategoryLabel(landmark.category, selectedLanguage)}
+                                </Badge>
+                                {distance !== null && (
+                                  <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
+                                    <MapPin className="w-2.5 h-2.5" />
+                                    {formatDistance(distance)}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="flex gap-0.5">
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    onLandmarkSelect?.(landmark);
+                                  }}
+                                  className="h-6 w-6"
+                                  data-testid={`button-info-${landmark.id}`}
+                                >
+                                  <Info className="w-3 h-3" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    onLandmarkRoute(landmark);
+                                    setIsMinimized(true);
+                                  }}
+                                  className="h-6 w-6"
+                                  data-testid={`button-navigate-${landmark.id}`}
+                                >
+                                  <Navigation className="w-3 h-3" />
+                                </Button>
+                                {onAddToTour && (
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onAddToTour(landmark);
+                                    }}
+                                    className={`h-6 w-6 ${tourStops.some(s => s.id === landmark.id) ? 'text-[hsl(14,85%,55%)]' : ''}`}
+                                    data-testid={`button-add-tour-${landmark.id}`}
+                                  >
+                                    <MapPinned className="w-3 h-3" />
+                                  </Button>
+                                )}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ));
+                    );
+                  });
                 })()}
               </div>
 
