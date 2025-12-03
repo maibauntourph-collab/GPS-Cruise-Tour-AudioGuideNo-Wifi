@@ -264,6 +264,7 @@ interface MapViewProps {
   startingPoint?: { lat: number; lng: number; type: string } | null;
   endPoint?: { lat: number; lng: number; type: string } | null;
   selectedLandmark?: Landmark | null;
+  onLandmarkSelect?: (landmark: Landmark) => void;
 }
 
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
@@ -765,6 +766,7 @@ export default function MapView({
   startingPoint,
   endPoint,
   selectedLandmark,
+  onLandmarkSelect,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
@@ -855,12 +857,19 @@ export default function MapView({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {landmarks.map((landmark) => {
+      {landmarks.map((landmark, index) => {
         const isActivity = landmark.category === 'Activity';
         const isRestaurant = landmark.category === 'Restaurant';
         const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
         const isSelected = selectedLandmark?.id === landmark.id;
         const isInTour = tourStops.some(stop => stop.id === landmark.id);
+        
+        // Alternate tooltip direction based on index to reduce overlap
+        const tooltipDirection = index % 2 === 0 ? 'top' : 'bottom';
+        const baseOffset = isSelected ? 45 : 35;
+        const tooltipOffset: [number, number] = tooltipDirection === 'top' 
+          ? [0, -baseOffset] 
+          : [0, baseOffset];
         
         // Use blinking icon for selected landmark
         const icon = isSelected 
@@ -878,16 +887,17 @@ export default function MapView({
               }
             }}
             eventHandlers={{
+              click: () => {
+                // Select landmark when clicked
+                if (onLandmarkSelect) {
+                  onLandmarkSelect(landmark);
+                }
+              },
               mousedown: () => {
                 // Start long press timer
                 longPressTimerRef.current = setTimeout(() => {
                   if (onAddToTour) {
                     onAddToTour(landmark);
-                    // Close popup quickly
-                    setTimeout(() => {
-                      const popup = document.querySelector('.leaflet-popup-close-button') as HTMLElement;
-                      if (popup) popup.click();
-                    }, 100);
                   }
                 }, 1000); // 1 second
               },
@@ -907,37 +917,31 @@ export default function MapView({
               }
             }}
           >
-            {/* Tooltip - always visible for all landmarks */}
+            {/* Tooltip - always visible, clickable for details */}
             <Tooltip 
               permanent={true}
-              direction="top" 
-              offset={[0, isSelected ? -45 : -35]}
-              className={isSelected ? 'selected-landmark-tooltip' : 'landmark-tooltip'}
+              direction={tooltipDirection as "top" | "bottom"}
+              offset={tooltipOffset}
+              className={`clickable-tooltip ${isSelected ? 'selected-landmark-tooltip' : 'landmark-tooltip'}`}
+              interactive={true}
             >
-              <span style={{ 
-                fontWeight: isSelected ? 600 : 500,
-                fontSize: isSelected ? '13px' : '11px',
-              }}>
+              <div 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (onLandmarkSelect) {
+                    onLandmarkSelect(landmark);
+                  }
+                }}
+                style={{ 
+                  cursor: 'pointer',
+                  fontWeight: isSelected ? 600 : 500,
+                  fontSize: isSelected ? '13px' : '11px',
+                }}
+                data-testid={`tooltip-landmark-${landmark.id}`}
+              >
                 {getTranslatedContent(landmark, selectedLanguage, 'name')}
-              </span>
-            </Tooltip>
-            <Popup>
-              <div className="text-sm font-medium">
-                {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                <div className="text-xs text-muted-foreground mt-1">
-                  {selectedLanguage === 'ko' ? '1초 꾹 누르기 → 투어 추가' :
-                   selectedLanguage === 'es' ? 'Mantén 1s → Añadir al tour' :
-                   selectedLanguage === 'fr' ? 'Maintenir 1s → Ajouter' :
-                   selectedLanguage === 'de' ? '1s halten → Tour hinzufügen' :
-                   selectedLanguage === 'it' ? 'Tieni 1s → Aggiungi al tour' :
-                   selectedLanguage === 'zh' ? '长按1秒 → 添加到旅程' :
-                   selectedLanguage === 'ja' ? '1秒押す → ツアー追加' :
-                   selectedLanguage === 'pt' ? 'Segurar 1s → Adicionar ao tour' :
-                   selectedLanguage === 'ru' ? 'Удерживать 1с → В тур' :
-                   'Hold 1s → Add to Tour'}
-                </div>
               </div>
-            </Popup>
+            </Tooltip>
           </Marker>
         );
       })}

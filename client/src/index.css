@@ -482,6 +482,17 @@
   z-index: 1000 !important;
 }
 
+/* Clickable tooltip base styling */
+.clickable-tooltip {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.clickable-tooltip:hover {
+  transform: scale(1.05);
+  z-index: 10000 !important;
+}
+
 /* Normal landmark tooltip styling */
 .landmark-tooltip {
   background: rgba(255, 255, 255, 0.95) !important;
@@ -496,8 +507,13 @@
   max-width: 150px !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  transition: transform 0.15s ease !important;
 }
 
 .landmark-tooltip::before {
   border-top-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.landmark-tooltip::after {
+  border-bottom-color: rgba(255, 255, 255, 0.95) !important;
 }

@@ -1918,6 +1918,7 @@ export default function Home() {
                 });
               }}
               selectedLandmark={selectedLandmark}
+              onLandmarkSelect={setSelectedLandmark}
             />
             
             {/* Route View Button - next to zoom controls */}
