@@ -42,8 +42,10 @@ interface UnifiedFloatingCardProps {
   showActivities: boolean;
   showRestaurants: boolean;
   showGiftShops: boolean;
-  selectedCategory: string;
-  onCategoryChange: (category: string) => void;
+  onToggleLandmarks: () => void;
+  onToggleActivities: () => void;
+  onToggleRestaurants: () => void;
+  onToggleGiftShops: () => void;
   
   // Tour Route props
   tourStops?: Landmark[];
@@ -116,8 +118,10 @@ export default function UnifiedFloatingCard({
   showActivities,
   showRestaurants,
   showGiftShops,
-  selectedCategory,
-  onCategoryChange,
+  onToggleLandmarks,
+  onToggleActivities,
+  onToggleRestaurants,
+  onToggleGiftShops,
   tourStops = [],
   tourRouteInfo = null,
   onRemoveTourStop,
@@ -189,32 +193,70 @@ export default function UnifiedFloatingCard({
     }
   }, [forceShowList]);
 
-  // Handler for category selection change with scroll functionality
-  const handleListCategoryChange = (category: string) => {
-    onCategoryChange(category);
+  // Wrapper handlers for list tab filters with scroll functionality
+  const handleListToggleLandmarks = () => {
+    const wasOff = !showLandmarks;
+    onToggleLandmarks();
     
-    // If selecting a specific category and in List tab, scroll to first item
-    if (category !== 'all' && category !== 'cruiseport' && activeTab === 'list') {
+    // If turning on and in List tab, scroll to first landmark
+    if (wasOff && activeTab === 'list') {
       setTimeout(() => {
-        let firstItem: Landmark | undefined;
-        
-        if (category === 'landmarks') {
-          firstItem = landmarks.find(l => 
-            l.category !== 'Activity' && 
-            l.category !== 'Restaurant' && 
-            l.category !== 'Gift Shop' && 
-            l.category !== 'Shop'
-          );
-        } else if (category === 'activities') {
-          firstItem = landmarks.find(l => l.category === 'Activity');
-        } else if (category === 'restaurants') {
-          firstItem = landmarks.find(l => l.category === 'Restaurant');
-        } else if (category === 'giftshops') {
-          firstItem = landmarks.find(l => l.category === 'Gift Shop' || l.category === 'Shop');
+        const firstLandmark = landmarks.find(l => 
+          l.category !== 'Activity' && 
+          l.category !== 'Restaurant' && 
+          l.category !== 'Gift Shop' && 
+          l.category !== 'Shop'
+        );
+        if (firstLandmark && listScrollRef.current) {
+          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstLandmark.id}"]`);
+          element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
-        
-        if (firstItem && listScrollRef.current) {
-          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstItem.id}"]`);
+      }, 100);
+    }
+  };
+
+  const handleListToggleActivities = () => {
+    const wasOff = !showActivities;
+    onToggleActivities();
+    
+    // If turning on and in List tab, scroll to first activity
+    if (wasOff && activeTab === 'list') {
+      setTimeout(() => {
+        const firstActivity = landmarks.find(l => l.category === 'Activity');
+        if (firstActivity && listScrollRef.current) {
+          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstActivity.id}"]`);
+          element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleListToggleRestaurants = () => {
+    const wasOff = !showRestaurants;
+    onToggleRestaurants();
+    
+    // If turning on and in List tab, scroll to first restaurant
+    if (wasOff && activeTab === 'list') {
+      setTimeout(() => {
+        const firstRestaurant = landmarks.find(l => l.category === 'Restaurant');
+        if (firstRestaurant && listScrollRef.current) {
+          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstRestaurant.id}"]`);
+          element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleListToggleGiftShops = () => {
+    const wasOff = !showGiftShops;
+    onToggleGiftShops();
+    
+    // If turning on and in List tab, scroll to first gift shop
+    if (wasOff && activeTab === 'list') {
+      setTimeout(() => {
+        const firstGiftShop = landmarks.find(l => l.category === 'Gift Shop' || l.category === 'Shop');
+        if (firstGiftShop && listScrollRef.current) {
+          const element = listScrollRef.current.querySelector(`[data-testid="card-landmark-${firstGiftShop.id}"]`);
           element?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       }, 100);
