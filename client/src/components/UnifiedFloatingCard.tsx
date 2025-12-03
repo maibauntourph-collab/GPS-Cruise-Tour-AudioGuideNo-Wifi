@@ -1840,34 +1840,6 @@ export default function UnifiedFloatingCard({
                                       size="icon"
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        onLandmarkSelect?.(landmark);
-                                      }}
-                                      className="h-7 w-7"
-                                      data-testid={`button-info-${landmark.id}`}
-                                    >
-                                      <Info className="w-4 h-4" />
-                                    </Button>
-                                  </TooltipTrigger>
-                                  <TooltipContent side="top" className="text-xs">
-                                    {selectedLanguage === 'ko' ? '상세정보' :
-                                     selectedLanguage === 'es' ? 'Detalles' :
-                                     selectedLanguage === 'fr' ? 'Détails' :
-                                     selectedLanguage === 'de' ? 'Details' :
-                                     selectedLanguage === 'it' ? 'Dettagli' :
-                                     selectedLanguage === 'zh' ? '详情' :
-                                     selectedLanguage === 'ja' ? '詳細' :
-                                     selectedLanguage === 'pt' ? 'Detalhes' :
-                                     selectedLanguage === 'ru' ? 'Подробности' :
-                                     'Details'}
-                                  </TooltipContent>
-                                </Tooltip>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <Button
-                                      variant="ghost"
-                                      size="icon"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
                                         onLandmarkRoute(landmark);
                                         setIsMinimized(true);
                                       }}
