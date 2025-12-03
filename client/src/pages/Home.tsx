@@ -32,7 +32,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -1826,6 +1826,34 @@ export default function Home() {
                 });
               }}
             />
+            
+            {/* Route View Button - next to zoom controls */}
+            {tourStops.length >= 2 && (
+              <div 
+                className="absolute left-[10px] top-[90px] z-[1000]"
+                style={{ pointerEvents: 'auto' }}
+              >
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => {
+                        setForceShowCard(true);
+                        setIsCardMinimized(false);
+                      }}
+                      className="h-[30px] w-[30px] bg-white hover:bg-gray-100 border-2 border-gray-400 rounded-sm shadow-md"
+                      data-testid="button-show-route"
+                    >
+                      <Route className="w-4 h-4 text-[hsl(14,85%,55%)]" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="right">
+                    <p>{selectedLanguage === 'ko' ? '투어 경로 보기' : 'View Tour Route'}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            )}
 
             <OfflineIndicator />
             <InstallPrompt />
