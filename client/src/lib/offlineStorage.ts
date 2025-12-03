@@ -1,7 +1,7 @@
 import type { City, Landmark } from "@shared/schema";
 
 const DB_NAME = 'gps-audio-guide-offline';
-const DB_VERSION = 2; // Bumped version for numeric synced index
+const DB_VERSION = 3; // Bumped version for audio files store
 
 interface OfflinePackage {
   city: City;
@@ -19,6 +19,18 @@ interface CityMetadata {
   downloadedAt: string;
   version: number;
   etag?: string;
+}
+
+interface CachedAudio {
+  id: string; // landmarkId-language
+  landmarkId: string;
+  language: string;
+  audioBlob: Blob;
+  duration: number;
+  sizeBytes: number;
+  checksum?: string;
+  voiceId?: string;
+  cachedAt: string;
 }
 
 class OfflineStorage {
@@ -64,6 +76,12 @@ class OfflineStorage {
         if (!db.objectStoreNames.contains('visitedQueue')) {
           const queueStore = db.createObjectStore('visitedQueue', { keyPath: 'id', autoIncrement: true });
           queueStore.createIndex('synced', 'synced', { unique: false });
+        }
+
+        if (!db.objectStoreNames.contains('audioFiles')) {
+          const audioStore = db.createObjectStore('audioFiles', { keyPath: 'id' });
+          audioStore.createIndex('landmarkId', 'landmarkId', { unique: false });
+          audioStore.createIndex('language', 'language', { unique: false });
         }
 
         console.log('IndexedDB schema created');
@@ -347,12 +365,13 @@ class OfflineStorage {
     const db = await this.ensureDb();
 
     return new Promise((resolve, reject) => {
-      const transaction = db.transaction(['cities', 'landmarks', 'metadata', 'visitedQueue'], 'readwrite');
+      const transaction = db.transaction(['cities', 'landmarks', 'metadata', 'visitedQueue', 'audioFiles'], 'readwrite');
       
       transaction.objectStore('cities').clear();
       transaction.objectStore('landmarks').clear();
       transaction.objectStore('metadata').clear();
       transaction.objectStore('visitedQueue').clear();
+      transaction.objectStore('audioFiles').clear();
 
       transaction.onerror = () => reject(transaction.error);
       transaction.oncomplete = () => {
@@ -361,7 +380,147 @@ class OfflineStorage {
       };
     });
   }
+
+  async saveAudio(audio: Omit<CachedAudio, 'id' | 'cachedAt'>): Promise<void> {
+    const db = await this.ensureDb();
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['audioFiles'], 'readwrite');
+      const store = transaction.objectStore('audioFiles');
+
+      const id = `${audio.landmarkId}-${audio.language}`;
+      const data: CachedAudio = {
+        ...audio,
+        id,
+        cachedAt: new Date().toISOString()
+      };
+
+      const request = store.put(data);
+
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        console.log(`Cached audio for ${audio.landmarkId} (${audio.language})`);
+        resolve();
+      };
+    });
+  }
+
+  async getAudio(landmarkId: string, language: string): Promise<CachedAudio | null> {
+    const db = await this.ensureDb();
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['audioFiles'], 'readonly');
+      const store = transaction.objectStore('audioFiles');
+      const request = store.get(`${landmarkId}-${language}`);
+
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve(request.result || null);
+    });
+  }
+
+  async hasAudio(landmarkId: string, language: string): Promise<boolean> {
+    const audio = await this.getAudio(landmarkId, language);
+    return audio !== null;
+  }
+
+  async getAudioByLandmark(landmarkId: string): Promise<CachedAudio[]> {
+    const db = await this.ensureDb();
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['audioFiles'], 'readonly');
+      const store = transaction.objectStore('audioFiles');
+      const index = store.index('landmarkId');
+      const request = index.getAll(landmarkId);
+
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve(request.result);
+    });
+  }
+
+  async getAllCachedAudio(): Promise<CachedAudio[]> {
+    const db = await this.ensureDb();
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['audioFiles'], 'readonly');
+      const store = transaction.objectStore('audioFiles');
+      const request = store.getAll();
+
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve(request.result);
+    });
+  }
+
+  async deleteAudio(landmarkId: string, language: string): Promise<void> {
+    const db = await this.ensureDb();
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['audioFiles'], 'readwrite');
+      const store = transaction.objectStore('audioFiles');
+      const request = store.delete(`${landmarkId}-${language}`);
+
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve();
+    });
+  }
+
+  async deleteAllAudioForLandmark(landmarkId: string): Promise<void> {
+    const db = await this.ensureDb();
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['audioFiles'], 'readwrite');
+      const store = transaction.objectStore('audioFiles');
+      const index = store.index('landmarkId');
+      const cursorRequest = index.openCursor(IDBKeyRange.only(landmarkId));
+
+      cursorRequest.onsuccess = (event) => {
+        const cursor = (event.target as IDBRequest).result;
+        if (cursor) {
+          store.delete(cursor.primaryKey);
+          cursor.continue();
+        }
+      };
+
+      transaction.onerror = () => reject(transaction.error);
+      transaction.oncomplete = () => resolve();
+    });
+  }
+
+  async getAudioStorageStats(): Promise<{ count: number; totalSizeBytes: number }> {
+    const db = await this.ensureDb();
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['audioFiles'], 'readonly');
+      const store = transaction.objectStore('audioFiles');
+      const request = store.getAll();
+
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        const audioFiles = request.result as CachedAudio[];
+        const totalSizeBytes = audioFiles.reduce((sum, f) => sum + (f.sizeBytes || 0), 0);
+        resolve({
+          count: audioFiles.length,
+          totalSizeBytes
+        });
+      };
+    });
+  }
+
+  async clearAllAudio(): Promise<void> {
+    const db = await this.ensureDb();
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['audioFiles'], 'readwrite');
+      const store = transaction.objectStore('audioFiles');
+      const request = store.clear();
+
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        console.log('All cached audio cleared');
+        resolve();
+      };
+    });
+  }
 }
 
 export const offlineStorage = new OfflineStorage();
-export type { OfflinePackage, CityMetadata };
+export type { OfflinePackage, CityMetadata, CachedAudio };
