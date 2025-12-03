@@ -776,7 +776,25 @@ export default function Home() {
             variant={isCardMinimized ? "outline" : "default"}
             size="sm"
             className="h-7 gap-1 px-2"
-            onClick={() => setIsCardMinimized(!isCardMinimized)}
+            onClick={() => {
+              // 카드가 최소화되어 있을 때
+              if (isCardMinimized) {
+                // 도시에 크루즈 항구가 있으면 먼저 항구 정보 표시
+                if (selectedCity?.cruisePort) {
+                  setShowCruisePort(true);
+                }
+                setIsCardMinimized(false);
+              } else {
+                // 카드가 펼쳐져 있을 때
+                if (showCruisePort && selectedCity?.cruisePort) {
+                  // 크루즈 항구 정보가 표시 중이면 끄고 목록만 표시
+                  setShowCruisePort(false);
+                } else {
+                  // 목록만 표시 중이면 카드 최소화
+                  setIsCardMinimized(true);
+                }
+              }
+            }}
             data-testid="button-toggle-list"
           >
             <List className="w-3.5 h-3.5" />
