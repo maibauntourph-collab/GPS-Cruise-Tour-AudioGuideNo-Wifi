@@ -84,6 +84,10 @@ interface UnifiedFloatingCardProps {
   
   // Callback to open start/end point setup dialog
   onOpenStartEndPointDialog?: () => void;
+  
+  // Captured route image
+  capturedRouteImage?: string | null;
+  onClearCapturedImage?: () => void;
 }
 
 function getCruisePortTranslation(cruisePort: CruisePort, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
@@ -242,7 +246,9 @@ export default function UnifiedFloatingCard({
   departureTime = null,
   startingPoint = null,
   endPoint = null,
-  onOpenStartEndPointDialog
+  onOpenStartEndPointDialog,
+  capturedRouteImage = null,
+  onClearCapturedImage
 }: UnifiedFloatingCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -1278,6 +1284,29 @@ export default function UnifiedFloatingCard({
 
           {/* Landmark List Tab */}
           <TabsContent value="list" className="mt-4 flex flex-col flex-1">
+            {/* Captured Route Image */}
+            {capturedRouteImage && (
+              <div className="mb-3 relative">
+                <img 
+                  src={capturedRouteImage} 
+                  alt="Tour Route" 
+                  className="w-full h-32 object-cover rounded-lg border border-[hsl(14,85%,55%)]/30"
+                />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => onClearCapturedImage?.()}
+                  className="absolute top-1 right-1 h-6 w-6 bg-black/50 hover:bg-black/70 text-white rounded-full"
+                  data-testid="button-clear-route-image"
+                >
+                  <X className="w-3 h-3" />
+                </Button>
+                <div className="absolute bottom-1 left-1 px-2 py-0.5 bg-black/60 text-white text-[10px] rounded">
+                  {selectedLanguage === 'ko' ? '투어 경로' : 'Tour Route'}
+                </div>
+              </div>
+            )}
+            
             {/* Tour Route Section - Scrollable */}
             {tourStops.length > 0 && (
               <div className="pb-3 mb-3 border-b flex-shrink-0">

@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import { useQuery } from '@tanstack/react-query';
+import html2canvas from 'html2canvas';
 import { 
   AlertDialog, 
   AlertDialogAction, 
@@ -162,6 +163,9 @@ export default function Home() {
   const [forceShowCard, setForceShowCard] = useState(false);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
   const [showAIRecommend, setShowAIRecommend] = useState(false);
+  const [capturedRouteImage, setCapturedRouteImage] = useState<string | null>(null);
+  const [isCapturingRoute, setIsCapturingRoute] = useState(false);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
   const [aiRecommendation, setAiRecommendation] = useState<{
     itinerary: Array<{ landmarkId: string; order: number }>;
     explanation: string;
@@ -492,6 +496,42 @@ export default function Home() {
       setIsSearchingLocation(false);
     }
   };
+
+  // Capture map route as image
+  const captureRouteImage = useCallback(async () => {
+    if (!mapContainerRef.current || tourStops.length < 2) return;
+    
+    setIsCapturingRoute(true);
+    try {
+      // Find the map container (leaflet-container class)
+      const mapElement = mapContainerRef.current.querySelector('.leaflet-container') as HTMLElement;
+      if (!mapElement) {
+        console.error('Map container not found');
+        return;
+      }
+      
+      // Use html2canvas to capture the map
+      const canvas = await html2canvas(mapElement, {
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        scale: 1,
+        backgroundColor: null,
+      });
+      
+      // Convert to base64 image
+      const imageData = canvas.toDataURL('image/png');
+      setCapturedRouteImage(imageData);
+      
+      // Show the card with the captured image
+      setForceShowCard(true);
+      setIsCardMinimized(false);
+    } catch (error) {
+      console.error('Failed to capture route:', error);
+    } finally {
+      setIsCapturingRoute(false);
+    }
+  }, [tourStops.length]);
 
   const handleAddToTour = (landmark: Landmark) => {
     // Check if landmark is already in tour
@@ -1776,7 +1816,10 @@ export default function Home() {
         
         <div className="relative flex-1 overflow-hidden flex flex-col">
           {/* Map Section - always show, full screen on mobile */}
-          <div className={`relative ${!isMobile && selectedLandmark ? 'h-1/2' : 'flex-1'} transition-all duration-300`}>
+          <div 
+            ref={mapContainerRef}
+            className={`relative ${!isMobile && selectedLandmark ? 'h-1/2' : 'flex-1'} transition-all duration-300`}
+          >
             <MapView
               landmarks={filteredLandmarks}
               userPosition={position}
@@ -1838,14 +1881,16 @@ export default function Home() {
                     <Button
                       variant="outline"
                       size="icon"
-                      onClick={() => {
-                        setForceShowCard(true);
-                        setIsCardMinimized(false);
-                      }}
+                      onClick={captureRouteImage}
+                      disabled={isCapturingRoute}
                       className="h-[30px] w-[30px] bg-white hover:bg-gray-100 border-2 border-gray-400 rounded-sm shadow-md"
                       data-testid="button-show-route"
                     >
-                      <Route className="w-4 h-4 text-[hsl(14,85%,55%)]" />
+                      {isCapturingRoute ? (
+                        <Loader2 className="w-4 h-4 text-[hsl(14,85%,55%)] animate-spin" />
+                      ) : (
+                        <Route className="w-4 h-4 text-[hsl(14,85%,55%)]" />
+                      )}
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="right">
@@ -1947,6 +1992,8 @@ export default function Home() {
               variant: 'destructive'
             });
           }}
+          capturedRouteImage={capturedRouteImage}
+          onClearCapturedImage={() => setCapturedRouteImage(null)}
         />
 
       {/* Bottom Sheet - Mobile Only */}
