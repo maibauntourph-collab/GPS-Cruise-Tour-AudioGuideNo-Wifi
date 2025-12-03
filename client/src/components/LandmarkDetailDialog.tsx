@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { X, Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard } from 'lucide-react';
+import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard } from 'lucide-react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService } from '@/lib/audioService';
 
@@ -79,29 +79,19 @@ export default function LandmarkDetailDialog({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-6xl w-[90vw] h-[90vh] p-0 gap-0 overflow-hidden">
         <DialogHeader className="p-4 pb-3 border-b flex-shrink-0">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              <DialogTitle className="text-xl mb-1" data-testid="text-landmark-detail-name">
-                {getTranslatedContent(landmark, selectedLanguage, 'name')}
-              </DialogTitle>
-              <div className="flex items-center gap-2 flex-wrap">
-                <Badge variant={landmark.category === 'Activity' ? 'default' : 'secondary'} className="text-xs">
-                  {landmark.category === 'Activity' ? <ActivityIcon className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
-                  {landmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
-                </Badge>
-                {landmark.category && landmark.category !== 'Activity' && (
-                  <Badge variant="outline" className="text-xs">{landmark.category}</Badge>
-                )}
-              </div>
+          <div>
+            <DialogTitle className="text-xl mb-1" data-testid="text-landmark-detail-name">
+              {getTranslatedContent(landmark, selectedLanguage, 'name')}
+            </DialogTitle>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Badge variant={landmark.category === 'Activity' ? 'default' : 'secondary'} className="text-xs">
+                {landmark.category === 'Activity' ? <ActivityIcon className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
+                {landmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
+              </Badge>
+              {landmark.category && landmark.category !== 'Activity' && (
+                <Badge variant="outline" className="text-xs">{landmark.category}</Badge>
+              )}
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              data-testid="button-close-detail-dialog"
-            >
-              <X className="w-5 h-5" />
-            </Button>
           </div>
         </DialogHeader>
 
