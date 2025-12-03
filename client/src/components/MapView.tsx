@@ -971,7 +971,7 @@ export default function MapView({
               permanent={true}
               direction={tooltipDirection as "top" | "bottom"}
               offset={tooltipOffset}
-              className={`clickable-tooltip ${isHighlighted ? 'selected-landmark-tooltip blinking-tooltip' : 'landmark-tooltip'}`}
+              className={`clickable-tooltip ${isHighlighted ? 'selected-landmark-tooltip' : 'landmark-tooltip'}`}
               interactive={true}
             >
               <div 

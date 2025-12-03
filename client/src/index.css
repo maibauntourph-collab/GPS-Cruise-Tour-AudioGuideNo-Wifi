@@ -449,19 +449,16 @@
   font-weight: 700 !important;
   font-size: 13px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-  animation: tooltipBlink 1s ease-in-out infinite !important;
 }
 
 .leaflet-tooltip.selected-landmark-tooltip::before {
   border-top-color: #000000 !important;
   border-bottom-color: transparent !important;
-  animation: tooltipArrowBlink 1s ease-in-out infinite !important;
 }
 
 .leaflet-tooltip.selected-landmark-tooltip::after {
   border-bottom-color: #000000 !important;
   border-top-color: transparent !important;
-  animation: tooltipArrowBlink 1s ease-in-out infinite !important;
 }
 
 /* For bottom-positioned selected tooltips */
