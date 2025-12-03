@@ -25,6 +25,13 @@ The application is built with a React frontend and an Express.js backend, commun
 **Technical Implementations & Feature Specifications:**
 - **Interactive Map & Navigation:** Implemented using React-Leaflet and Leaflet Routing Machine for map display, GPS tracking, automatic map centering, and turn-by-turn directions with custom terracotta route styling.
 - **Audio Narration:** Utilizes the Web Speech API for auto-triggered, language-aware audio narration within landmark radii. It supports adjustable speech rates (0.5x-2x) with persistence via LocalStorage and handles audio playback without repetition.
+- **Per-Language TTS Voice Selection:** Users can select their preferred TTS voice for each language from a horizontal scrolling card-based UI in Settings. Voice cards display:
+  - Voice name and language code (e.g., en-US, ko-KR)
+  - Quality indicator (Premium for neural/wavenet voices, Standard for others)
+  - Gender icon (blue for male, pink for female, gray for unknown)
+  - Connection type (Online or Local)
+  - Preview button to test each voice before selecting
+  Selected voices are saved per language in localStorage and automatically used for all TTS playback. The audioService analyzes voice names to determine quality (premium keywords: neural, wavenet, premium, enhanced, natural, high-quality, google) and gender heuristics.
 - **Multi-City & Multi-Language Support:** Offers city and language selectors with 10 supported languages (English, Korean, Spanish, French, German, Italian, Chinese, Japanese, Portuguese, Russian) to dynamically load city-specific landmarks and activities, provide translated content including detailedDescription fields, and use language-specific TTS voices. All activities and UI elements include complete translations.
 - **Landmark & Activity Details:** Each point of interest includes rich information, a photo gallery with a full-screen viewer, historical details, and an embedded map for precise location, accessible via a detailed modal.
 - **Visited Landmarks Tracking:** Progress is tracked per session, stored in a PostgreSQL database (via Drizzle ORM), and visualized with a progress bar and statistics.
