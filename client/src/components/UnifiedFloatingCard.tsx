@@ -16,6 +16,8 @@ import LandmarkDetailDialog from './LandmarkDetailDialog';
 interface UnifiedFloatingCardProps {
   // Control props
   forceShowList?: boolean;
+  isCardMinimized?: boolean;
+  onToggleMinimized?: () => void;
   
   // Landmark Panel props
   selectedLandmark: Landmark | null;
@@ -100,6 +102,8 @@ function getTransportIcon(type: string) {
 
 export default function UnifiedFloatingCard({
   forceShowList = false,
+  isCardMinimized,
+  onToggleMinimized,
   selectedLandmark,
   onLandmarkClose,
   onNavigate,
@@ -134,7 +138,19 @@ export default function UnifiedFloatingCard({
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [internalMinimized, setInternalMinimized] = useState(false);
+  
+  // Use external control if provided, otherwise use internal state
+  const isMinimized = isCardMinimized !== undefined ? isCardMinimized : internalMinimized;
+  const setIsMinimized = onToggleMinimized 
+    ? () => onToggleMinimized() 
+    : (value: boolean | ((prev: boolean) => boolean)) => {
+        if (typeof value === 'function') {
+          setInternalMinimized(value);
+        } else {
+          setInternalMinimized(value);
+        }
+      };
   const [activeTab, setActiveTab] = useState<string>('list');
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
@@ -1446,34 +1462,5 @@ export default function UnifiedFloatingCard({
     return null;
   }
 
-  return (
-    <>
-      {/* Floating Schedule Button - Always visible */}
-      <div
-        style={{
-          position: 'fixed',
-          left: '50%',
-          top: '52px',
-          transform: 'translateX(calc(-50% - 20px))',
-          zIndex: 1002
-        }}
-        onClick={() => {
-          if (isMinimized) {
-            setActiveTab('list');
-            setIsMinimized(false);
-          } else {
-            setIsMinimized(true);
-          }
-        }}
-        data-testid="button-floating-schedule"
-      >
-        <div className="w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center cursor-pointer shadow-lg">
-          <MapPinned className="w-5 h-5 text-primary-foreground" />
-        </div>
-      </div>
-      
-      {/* Main Card */}
-      {isMinimized ? null : renderFullCard()}
-    </>
-  );
+  return isMinimized ? null : renderFullCard();
 }

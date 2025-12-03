@@ -32,7 +32,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2 } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Popover,
@@ -144,6 +144,7 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false);
   const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
+  const [isCardMinimized, setIsCardMinimized] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<{
     itinerary: Array<{ landmarkId: string; order: number }>;
     explanation: string;
@@ -719,6 +720,20 @@ export default function Home() {
             <span className="xs:hidden">GPS Guide</span>
           </h1>
           
+          {/* List Toggle Button */}
+          <Button
+            variant={isCardMinimized ? "outline" : "default"}
+            size="sm"
+            className="h-7 gap-1 px-2"
+            onClick={() => setIsCardMinimized(!isCardMinimized)}
+            data-testid="button-toggle-list"
+          >
+            <List className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline text-xs">
+              {t('list', selectedLanguage)}
+            </span>
+          </Button>
+          
           {/* Starting Point Selector */}
           <Popover>
             <PopoverTrigger asChild>
@@ -761,8 +776,8 @@ export default function Home() {
                         id: 'my_location',
                         type: 'my_location',
                         name: t('myLocation', selectedLanguage),
-                        lat: position.lat,
-                        lng: position.lng
+                        lat: position.latitude,
+                        lng: position.longitude
                       });
                       toast({
                         title: t('startingPointSet', selectedLanguage),
@@ -1019,6 +1034,8 @@ export default function Home() {
       {/* Unified Floating Card */}
       <UnifiedFloatingCard
           forceShowList={forceShowCard}
+          isCardMinimized={isCardMinimized}
+          onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
           selectedLandmark={selectedLandmark}
           onLandmarkClose={() => setSelectedLandmark(null)}
           onNavigate={handleLandmarkRoute}
