@@ -7,6 +7,8 @@ import { db } from "./db";
 import { cities, landmarks, dataVersions } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
+import multer from "multer";
+import * as XLSX from "xlsx";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/cities", async (req, res) => {
@@ -446,6 +448,359 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Admin stats error:', error);
       res.status(500).json({ error: "Failed to fetch stats" });
+    }
+  });
+
+  // ===============================
+  // Admin Import/Export Routes
+  // ===============================
+  
+  const upload = multer({ 
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+  });
+
+  // Helper: Convert array to comma-separated string
+  const arrayToString = (arr: any[] | null | undefined): string => {
+    if (!arr || !Array.isArray(arr)) return '';
+    return arr.join(', ');
+  };
+
+  // Helper: Convert comma-separated string to array
+  const stringToArray = (str: string | null | undefined): string[] | null => {
+    if (!str || typeof str !== 'string') return null;
+    const trimmed = str.trim();
+    if (!trimmed) return null;
+    return trimmed.split(',').map(s => s.trim()).filter(Boolean);
+  };
+
+  // Helper: Safe JSON parse
+  const safeJsonParse = (str: string | null | undefined): any => {
+    if (!str || typeof str !== 'string') return null;
+    try {
+      return JSON.parse(str);
+    } catch {
+      return null;
+    }
+  };
+
+  // Admin: Download template
+  app.get("/api/admin/template", async (req, res) => {
+    try {
+      const type = req.query.type as string || 'cities';
+      const format = req.query.format as string || 'xlsx';
+
+      let data: any[] = [];
+      let filename = '';
+
+      if (type === 'cities') {
+        filename = `cities_template.${format}`;
+        data = [{
+          id: 'example_city',
+          name: 'Example City',
+          country: 'Country Name',
+          lat: 41.9028,
+          lng: 12.4964,
+          zoom: 14,
+          cruisePort: ''
+        }];
+      } else {
+        filename = `landmarks_template.${format}`;
+        data = [{
+          id: 'example_landmark',
+          cityId: 'example_city',
+          name: 'Example Landmark',
+          lat: 41.9028,
+          lng: 12.4964,
+          radius: 50,
+          narration: 'Audio narration text that will be spoken when user approaches',
+          description: 'Short description',
+          category: 'Monument',
+          detailedDescription: 'Detailed description for the info panel',
+          photos: 'https://example.com/photo1.jpg, https://example.com/photo2.jpg',
+          historicalInfo: 'Historical information',
+          yearBuilt: '1900',
+          architect: 'Architect Name',
+          openingHours: 'Mon-Sun: 9:00-18:00',
+          priceRange: '€€',
+          cuisine: '',
+          reservationUrl: '',
+          phoneNumber: '',
+          menuHighlights: '',
+          paymentMethods: 'Card, Cash',
+          translations: ''
+        }];
+      }
+
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, type === 'cities' ? 'Cities' : 'Landmarks');
+
+      if (format === 'csv') {
+        const csv = XLSX.utils.sheet_to_csv(ws);
+        res.setHeader('Content-Type', 'text/csv');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.send(csv);
+      } else {
+        const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.send(buffer);
+      }
+    } catch (error) {
+      console.error('Template download error:', error);
+      res.status(500).json({ error: "Failed to generate template" });
+    }
+  });
+
+  // Admin: Export existing data
+  app.get("/api/admin/export", async (req, res) => {
+    try {
+      const type = req.query.type as string || 'cities';
+      const format = req.query.format as string || 'xlsx';
+
+      let data: any[] = [];
+      let filename = '';
+
+      if (type === 'cities') {
+        const allCities = await db.select().from(cities);
+        filename = `cities_export_${Date.now()}.${format}`;
+        data = allCities.map(c => ({
+          id: c.id,
+          name: c.name,
+          country: c.country,
+          lat: c.lat,
+          lng: c.lng,
+          zoom: c.zoom || 14,
+          cruisePort: c.cruisePort ? JSON.stringify(c.cruisePort) : ''
+        }));
+      } else {
+        const allLandmarks = await db.select().from(landmarks);
+        filename = `landmarks_export_${Date.now()}.${format}`;
+        data = allLandmarks.map(l => ({
+          id: l.id,
+          cityId: l.cityId,
+          name: l.name,
+          lat: l.lat,
+          lng: l.lng,
+          radius: l.radius,
+          narration: l.narration,
+          description: l.description || '',
+          category: l.category || '',
+          detailedDescription: l.detailedDescription || '',
+          photos: arrayToString(l.photos),
+          historicalInfo: l.historicalInfo || '',
+          yearBuilt: l.yearBuilt || '',
+          architect: l.architect || '',
+          openingHours: l.openingHours || '',
+          priceRange: l.priceRange || '',
+          cuisine: l.cuisine || '',
+          reservationUrl: l.reservationUrl || '',
+          phoneNumber: l.phoneNumber || '',
+          menuHighlights: arrayToString(l.menuHighlights),
+          paymentMethods: arrayToString(l.paymentMethods),
+          translations: l.translations ? JSON.stringify(l.translations) : ''
+        }));
+      }
+
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, type === 'cities' ? 'Cities' : 'Landmarks');
+
+      if (format === 'csv') {
+        const csv = XLSX.utils.sheet_to_csv(ws);
+        res.setHeader('Content-Type', 'text/csv');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.send(csv);
+      } else {
+        const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.send(buffer);
+      }
+    } catch (error) {
+      console.error('Export error:', error);
+      res.status(500).json({ error: "Failed to export data" });
+    }
+  });
+
+  // Admin: Import data from file
+  app.post("/api/admin/import", upload.single('file'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      const type = req.body.type as string;
+      if (!type || !['cities', 'landmarks'].includes(type)) {
+        return res.status(400).json({ error: "Invalid type. Must be 'cities' or 'landmarks'" });
+      }
+
+      const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+      const sheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[sheetName];
+      const rows: any[] = XLSX.utils.sheet_to_json(sheet);
+
+      if (rows.length === 0) {
+        return res.status(400).json({ error: "File is empty or has no valid data" });
+      }
+
+      if (rows.length > 5000) {
+        return res.status(400).json({ error: "Too many rows. Maximum 5000 rows allowed" });
+      }
+
+      const errors: { row: number; message: string }[] = [];
+      let successCount = 0;
+
+      if (type === 'cities') {
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          const rowNum = i + 2; // Excel row (1-indexed + header)
+
+          // Validate required fields
+          if (!row.id || typeof row.id !== 'string') {
+            errors.push({ row: rowNum, message: 'Missing or invalid id' });
+            continue;
+          }
+          if (!row.name || typeof row.name !== 'string') {
+            errors.push({ row: rowNum, message: 'Missing or invalid name' });
+            continue;
+          }
+          if (!row.country || typeof row.country !== 'string') {
+            errors.push({ row: rowNum, message: 'Missing or invalid country' });
+            continue;
+          }
+
+          const lat = parseFloat(row.lat);
+          const lng = parseFloat(row.lng);
+          if (isNaN(lat) || lat < -90 || lat > 90) {
+            errors.push({ row: rowNum, message: 'Invalid latitude (must be -90 to 90)' });
+            continue;
+          }
+          if (isNaN(lng) || lng < -180 || lng > 180) {
+            errors.push({ row: rowNum, message: 'Invalid longitude (must be -180 to 180)' });
+            continue;
+          }
+
+          try {
+            // Upsert: try insert, update on conflict
+            const existing = await db.select().from(cities).where(eq(cities.id, row.id.toString().trim()));
+            const cityData = {
+              id: row.id.toString().trim(),
+              name: row.name.toString().trim(),
+              country: row.country.toString().trim(),
+              lat,
+              lng,
+              zoom: parseInt(row.zoom) || 14,
+              cruisePort: safeJsonParse(row.cruisePort)
+            };
+
+            if (existing.length > 0) {
+              await db.update(cities).set({ ...cityData, updatedAt: new Date() }).where(eq(cities.id, cityData.id));
+            } else {
+              await db.insert(cities).values(cityData);
+            }
+            successCount++;
+          } catch (dbError: any) {
+            errors.push({ row: rowNum, message: `Database error: ${dbError.message}` });
+          }
+        }
+      } else {
+        // Landmarks import
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          const rowNum = i + 2;
+
+          // Validate required fields
+          if (!row.id || typeof row.id !== 'string') {
+            errors.push({ row: rowNum, message: 'Missing or invalid id' });
+            continue;
+          }
+          if (!row.cityId) {
+            errors.push({ row: rowNum, message: 'Missing cityId' });
+            continue;
+          }
+          if (!row.name) {
+            errors.push({ row: rowNum, message: 'Missing name' });
+            continue;
+          }
+          if (!row.narration) {
+            errors.push({ row: rowNum, message: 'Missing narration' });
+            continue;
+          }
+
+          const lat = parseFloat(row.lat);
+          const lng = parseFloat(row.lng);
+          const radius = parseInt(row.radius) || 50;
+
+          if (isNaN(lat) || lat < -90 || lat > 90) {
+            errors.push({ row: rowNum, message: 'Invalid latitude' });
+            continue;
+          }
+          if (isNaN(lng) || lng < -180 || lng > 180) {
+            errors.push({ row: rowNum, message: 'Invalid longitude' });
+            continue;
+          }
+          if (radius <= 0) {
+            errors.push({ row: rowNum, message: 'Radius must be positive' });
+            continue;
+          }
+
+          // Check if cityId exists
+          const cityExists = await db.select().from(cities).where(eq(cities.id, row.cityId.toString().trim()));
+          if (cityExists.length === 0) {
+            errors.push({ row: rowNum, message: `City '${row.cityId}' does not exist` });
+            continue;
+          }
+
+          try {
+            const existing = await db.select().from(landmarks).where(eq(landmarks.id, row.id.toString().trim()));
+            const landmarkData = {
+              id: row.id.toString().trim(),
+              cityId: row.cityId.toString().trim(),
+              name: row.name.toString().trim(),
+              lat,
+              lng,
+              radius,
+              narration: row.narration.toString(),
+              description: row.description?.toString() || null,
+              category: row.category?.toString() || null,
+              detailedDescription: row.detailedDescription?.toString() || null,
+              photos: stringToArray(row.photos?.toString()),
+              historicalInfo: row.historicalInfo?.toString() || null,
+              yearBuilt: row.yearBuilt?.toString() || null,
+              architect: row.architect?.toString() || null,
+              openingHours: row.openingHours?.toString() || null,
+              priceRange: row.priceRange?.toString() || null,
+              cuisine: row.cuisine?.toString() || null,
+              reservationUrl: row.reservationUrl?.toString() || null,
+              phoneNumber: row.phoneNumber?.toString() || null,
+              menuHighlights: stringToArray(row.menuHighlights?.toString()),
+              paymentMethods: stringToArray(row.paymentMethods?.toString()),
+              translations: safeJsonParse(row.translations?.toString())
+            };
+
+            if (existing.length > 0) {
+              await db.update(landmarks).set({ ...landmarkData, updatedAt: new Date() }).where(eq(landmarks.id, landmarkData.id));
+            } else {
+              await db.insert(landmarks).values(landmarkData);
+            }
+            successCount++;
+          } catch (dbError: any) {
+            errors.push({ row: rowNum, message: `Database error: ${dbError.message}` });
+          }
+        }
+      }
+
+      res.json({
+        success: true,
+        imported: successCount,
+        total: rows.length,
+        errors: errors.length > 0 ? errors : undefined
+      });
+    } catch (error: any) {
+      console.error('Import error:', error);
+      res.status(500).json({ error: error.message || "Failed to import data" });
     }
   });
 
