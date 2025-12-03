@@ -948,16 +948,6 @@ export default function MapView({
         </Marker>
       )}
 
-      {/* Tour route with actual road routing */}
-      <TourRoutingMachine
-        tourStops={tourStops}
-        onTourRouteFound={onTourRouteFound}
-        activeRoute={activeRoute}
-        onTourRouteClick={onTourRouteClick}
-        startingPoint={startingPoint}
-        endPoint={endPoint}
-        selectedLanguage={selectedLanguage}
-      />
     </MapContainer>
   );
 }
