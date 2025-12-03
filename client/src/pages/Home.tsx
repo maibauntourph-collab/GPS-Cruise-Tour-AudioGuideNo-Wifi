@@ -141,6 +141,7 @@ export default function Home() {
   });
   const [startingPoint, setStartingPoint] = useState<StartingPoint | null>(null);
   const [isSelectingHotelOnMap, setIsSelectingHotelOnMap] = useState(false);
+  const [isStartingPointPopoverOpen, setIsStartingPointPopoverOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
@@ -735,7 +736,7 @@ export default function Home() {
           </Button>
           
           {/* Starting Point Selector */}
-          <Popover>
+          <Popover open={isStartingPointPopoverOpen} onOpenChange={setIsStartingPointPopoverOpen}>
             <PopoverTrigger asChild>
               <Button
                 variant={startingPoint ? "default" : "outline"}
@@ -761,7 +762,7 @@ export default function Home() {
                 </span>
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-72 p-2" align="start">
+            <PopoverContent className="w-72 p-2 z-[9999]" align="start">
               <div className="space-y-2">
                 <h4 className="font-medium text-sm">{t('selectStartingPoint', selectedLanguage)}</h4>
                 
@@ -779,17 +780,24 @@ export default function Home() {
                         lat: position.latitude,
                         lng: position.longitude
                       });
+                      setIsStartingPointPopoverOpen(false);
                       toast({
                         title: t('startingPointSet', selectedLanguage),
                         description: t('myLocation', selectedLanguage)
                       });
+                    } else {
+                      toast({
+                        title: selectedLanguage === 'ko' ? '위치 정보 필요' : 'Location Required',
+                        description: selectedLanguage === 'ko' ? 'GPS 위치를 확인할 수 없습니다' : 'GPS location not available',
+                        variant: 'destructive'
+                      });
                     }
                   }}
-                  disabled={!position}
                   data-testid="button-starting-my-location"
                 >
                   <Navigation2 className="w-4 h-4 text-blue-500" />
                   {t('myLocation', selectedLanguage)}
+                  {!position && <span className="text-xs text-muted-foreground ml-auto">(GPS)</span>}
                 </Button>
 
                 {/* Hotel Option */}
@@ -799,6 +807,7 @@ export default function Home() {
                   className="w-full justify-start gap-2"
                   onClick={() => {
                     setIsSelectingHotelOnMap(true);
+                    setIsStartingPointPopoverOpen(false);
                     toast({
                       title: t('hotel', selectedLanguage),
                       description: t('tapMapToSetHotel', selectedLanguage)
@@ -829,6 +838,7 @@ export default function Home() {
                               className="w-full justify-start gap-2"
                               onClick={() => {
                                 setStartingPoint(airport);
+                                setIsStartingPointPopoverOpen(false);
                                 toast({
                                   title: t('startingPointSet', selectedLanguage),
                                   description: getStartingPointName(airport, selectedLanguage)
@@ -855,6 +865,7 @@ export default function Home() {
                               className="w-full justify-start gap-2"
                               onClick={() => {
                                 setStartingPoint(terminal);
+                                setIsStartingPointPopoverOpen(false);
                                 toast({
                                   title: t('startingPointSet', selectedLanguage),
                                   description: getStartingPointName(terminal, selectedLanguage)
@@ -883,6 +894,7 @@ export default function Home() {
                               className="w-full justify-start gap-2"
                               onClick={() => {
                                 setStartingPoint(station);
+                                setIsStartingPointPopoverOpen(false);
                                 toast({
                                   title: t('startingPointSet', selectedLanguage),
                                   description: getStartingPointName(station, selectedLanguage)
@@ -909,6 +921,7 @@ export default function Home() {
                     onClick={() => {
                       setStartingPoint(null);
                       setIsSelectingHotelOnMap(false);
+                      setIsStartingPointPopoverOpen(false);
                     }}
                     data-testid="button-clear-starting-point"
                   >
