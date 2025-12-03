@@ -156,6 +156,11 @@ export default function MenuDialog({
   const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedSystemVoice, setSelectedSystemVoice] = useState<string>('');
   
+  // Voice filter states
+  const [qualityFilter, setQualityFilter] = useState<'all' | 'premium' | 'standard'>('all');
+  const [genderFilter, setGenderFilter] = useState<'all' | 'male' | 'female'>('all');
+  const [connectionFilter, setConnectionFilter] = useState<'all' | 'online' | 'local'>('all');
+  
   useEffect(() => {
     if (isOpen) {
       const loadVoices = () => {
@@ -213,7 +218,29 @@ export default function MenuDialog({
     }
   };
   
-  const voiceInfoList = systemVoices.map(analyzeVoice);
+  // Apply filters to voice list
+  const voiceInfoList = systemVoices.map(analyzeVoice).filter(info => {
+    // Quality filter
+    if (qualityFilter !== 'all' && info.quality !== qualityFilter) return false;
+    // Gender filter
+    if (genderFilter !== 'all' && info.gender !== genderFilter) return false;
+    // Connection filter
+    if (connectionFilter === 'online' && info.voice.localService) return false;
+    if (connectionFilter === 'local' && !info.voice.localService) return false;
+    return true;
+  });
+  
+  // Count voices by category for filter badges
+  const allVoiceInfo = systemVoices.map(analyzeVoice);
+  const voiceCounts = {
+    total: allVoiceInfo.length,
+    premium: allVoiceInfo.filter(v => v.quality === 'premium').length,
+    standard: allVoiceInfo.filter(v => v.quality === 'standard').length,
+    male: allVoiceInfo.filter(v => v.gender === 'male').length,
+    female: allVoiceInfo.filter(v => v.gender === 'female').length,
+    online: allVoiceInfo.filter(v => !v.voice.localService).length,
+    local: allVoiceInfo.filter(v => v.voice.localService).length,
+  };
 
   return (
     <>
@@ -335,9 +362,121 @@ export default function MenuDialog({
                       <Mic className="w-3 h-3" />
                       {selectedLanguage === 'ko' ? 'TTS 음성' : 'TTS Voice'}
                     </Label>
-                    <Badge variant="secondary" className="text-[10px]">
-                      {systemVoices.length}
-                    </Badge>
+                    <div className="flex items-center gap-1">
+                      <Badge variant="outline" className="text-[10px]">
+                        {voiceInfoList.length}/{voiceCounts.total}
+                      </Badge>
+                    </div>
+                  </div>
+                  
+                  {/* Voice Filters */}
+                  <div className="space-y-1.5">
+                    {/* Quality Filter */}
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <span className="text-[10px] text-muted-foreground w-10">
+                        {selectedLanguage === 'ko' ? '품질' : 'Quality'}
+                      </span>
+                      <Button
+                        variant={qualityFilter === 'all' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px]"
+                        onClick={() => setQualityFilter('all')}
+                        data-testid="filter-quality-all"
+                      >
+                        {selectedLanguage === 'ko' ? '전체' : 'All'}
+                      </Button>
+                      <Button
+                        variant={qualityFilter === 'premium' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px] gap-0.5"
+                        onClick={() => setQualityFilter('premium')}
+                        data-testid="filter-quality-premium"
+                      >
+                        <Sparkles className="w-2.5 h-2.5" />
+                        Premium ({voiceCounts.premium})
+                      </Button>
+                      <Button
+                        variant={qualityFilter === 'standard' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px]"
+                        onClick={() => setQualityFilter('standard')}
+                        data-testid="filter-quality-standard"
+                      >
+                        Standard ({voiceCounts.standard})
+                      </Button>
+                    </div>
+                    
+                    {/* Gender Filter */}
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <span className="text-[10px] text-muted-foreground w-10">
+                        {selectedLanguage === 'ko' ? '성별' : 'Gender'}
+                      </span>
+                      <Button
+                        variant={genderFilter === 'all' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px]"
+                        onClick={() => setGenderFilter('all')}
+                        data-testid="filter-gender-all"
+                      >
+                        {selectedLanguage === 'ko' ? '전체' : 'All'}
+                      </Button>
+                      <Button
+                        variant={genderFilter === 'male' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px] gap-0.5"
+                        onClick={() => setGenderFilter('male')}
+                        data-testid="filter-gender-male"
+                      >
+                        <User className="w-2.5 h-2.5 text-blue-500" />
+                        {selectedLanguage === 'ko' ? '남성' : 'Male'} ({voiceCounts.male})
+                      </Button>
+                      <Button
+                        variant={genderFilter === 'female' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px] gap-0.5"
+                        onClick={() => setGenderFilter('female')}
+                        data-testid="filter-gender-female"
+                      >
+                        <User className="w-2.5 h-2.5 text-pink-500" />
+                        {selectedLanguage === 'ko' ? '여성' : 'Female'} ({voiceCounts.female})
+                      </Button>
+                    </div>
+                    
+                    {/* Connection Filter */}
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <span className="text-[10px] text-muted-foreground w-10">
+                        {selectedLanguage === 'ko' ? '연결' : 'Type'}
+                      </span>
+                      <Button
+                        variant={connectionFilter === 'all' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px]"
+                        onClick={() => setConnectionFilter('all')}
+                        data-testid="filter-connection-all"
+                      >
+                        {selectedLanguage === 'ko' ? '전체' : 'All'}
+                      </Button>
+                      <Button
+                        variant={connectionFilter === 'online' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px] gap-0.5"
+                        onClick={() => setConnectionFilter('online')}
+                        data-testid="filter-connection-online"
+                      >
+                        <Wifi className="w-2.5 h-2.5" />
+                        Online ({voiceCounts.online})
+                      </Button>
+                      <Button
+                        variant={connectionFilter === 'local' ? 'default' : 'outline'}
+                        size="sm"
+                        className="h-5 px-2 text-[10px] gap-0.5"
+                        onClick={() => setConnectionFilter('local')}
+                        data-testid="filter-connection-local"
+                      >
+                        <WifiOff className="w-2.5 h-2.5" />
+                        Local ({voiceCounts.local})
+                      </Button>
+                    </div>
                   </div>
                   
                   {voiceInfoList.length > 0 ? (
@@ -421,9 +560,29 @@ export default function MenuDialog({
                       </div>
                     </div>
                   ) : (
-                    <p className="text-xs text-muted-foreground text-center py-2">
-                      {selectedLanguage === 'ko' ? '사용 가능한 음성이 없습니다' : 'No voices available'}
-                    </p>
+                    <div className="text-center py-4 space-y-2">
+                      <p className="text-xs text-muted-foreground">
+                        {voiceCounts.total === 0 
+                          ? (selectedLanguage === 'ko' ? '사용 가능한 음성이 없습니다' : 'No voices available for this language')
+                          : (selectedLanguage === 'ko' ? '필터 조건에 맞는 음성이 없습니다' : 'No voices match the current filters')
+                        }
+                      </p>
+                      {voiceCounts.total > 0 && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-[10px] h-6"
+                          onClick={() => {
+                            setQualityFilter('all');
+                            setGenderFilter('all');
+                            setConnectionFilter('all');
+                          }}
+                          data-testid="button-reset-filters"
+                        >
+                          {selectedLanguage === 'ko' ? '필터 초기화' : 'Reset Filters'}
+                        </Button>
+                      )}
+                    </div>
                   )}
                 </div>
 
