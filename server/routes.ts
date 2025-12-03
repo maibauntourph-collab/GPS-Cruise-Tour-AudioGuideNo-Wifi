@@ -588,7 +588,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           description: l.description || '',
           category: l.category || '',
           detailedDescription: l.detailedDescription || '',
-          photos: arrayToString(l.photos),
+          photos: arrayToString(l.photos as string[] | null),
           historicalInfo: l.historicalInfo || '',
           yearBuilt: l.yearBuilt || '',
           architect: l.architect || '',
@@ -597,8 +597,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           cuisine: l.cuisine || '',
           reservationUrl: l.reservationUrl || '',
           phoneNumber: l.phoneNumber || '',
-          menuHighlights: arrayToString(l.menuHighlights),
-          paymentMethods: arrayToString(l.paymentMethods),
+          menuHighlights: arrayToString(l.menuHighlights as string[] | null),
+          paymentMethods: arrayToString(l.paymentMethods as string[] | null),
           translations: l.translations ? JSON.stringify(l.translations) : ''
         }));
       }
