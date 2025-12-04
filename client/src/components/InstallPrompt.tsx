@@ -275,8 +275,8 @@ export default function InstallPrompt({ selectedLanguage = 'ko' }: InstallPrompt
       data-testid="prompt-install-pwa"
       className="fixed inset-0 z-[9999] bg-gradient-to-b from-primary/95 via-primary/90 to-primary/85 backdrop-blur-sm flex items-center justify-center p-4"
     >
-      <div className="w-full max-w-md bg-card rounded-2xl shadow-2xl overflow-hidden">
-        <div className="relative bg-gradient-to-br from-primary to-primary/80 p-6 text-center">
+      <div className="w-full max-w-md max-h-[90vh] bg-card rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+        <div className="relative bg-gradient-to-br from-primary to-primary/80 p-6 text-center flex-shrink-0">
           <button
             onClick={handleDismiss}
             className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
@@ -299,7 +299,7 @@ export default function InstallPrompt({ selectedLanguage = 'ko' }: InstallPrompt
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-6 overflow-y-auto flex-1">
           <p className="text-center text-foreground font-medium mb-6">
             {t.description}
           </p>
