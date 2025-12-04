@@ -96,9 +96,16 @@ The application is built with a React frontend and an Express.js backend, commun
 ## Offline Functionality Notes
 
 **Important: Service Worker Environment Configuration**
-- Service Worker is **ONLY enabled** in production (published apps on `.replit.app` domain)
+- Service Worker is **ONLY enabled** in production (published apps on `.replit.app` domain or custom domains)
 - Service Worker is **DISABLED** in development (`localhost`, `.replit.dev` preview) to avoid HMR conflicts
 - To test offline functionality, you must **publish the app** first
+
+**Service Worker Caching Strategies (v6):**
+- **Navigation (/, /index.html)**: Network-First - Always fetches fresh content from server, falls back to cache when offline. Prevents stale HTML issues on app updates.
+- **Static Assets (icons, manifest)**: Cache-First - Serves from cache for speed, updates in background
+- **Dynamic Assets (JS bundles)**: Network-First with exclusions for Vite HMR files
+- **Map Tiles**: Cache-First - Stores OpenStreetMap tiles for offline map viewing
+- **API Data**: Network-First with Cache Fallback - Ensures fresh data while supporting offline mode
 
 **How Offline Mode Works:**
 1. **Service Worker Registration** (`useServiceWorker.ts`): Automatically registers in production, caches static assets and API data
@@ -107,7 +114,7 @@ The application is built with a React frontend and an Express.js backend, commun
 4. **Offline Package Download**: Users must download city data while online to use offline
 
 **Testing Offline Mode:**
-1. Publish the app to `.replit.app` domain
+1. Publish the app to `.replit.app` domain or custom domain
 2. Open the published app and download offline packages for desired cities
 3. Enable airplane mode or disable network
 4. The app should continue working with cached data

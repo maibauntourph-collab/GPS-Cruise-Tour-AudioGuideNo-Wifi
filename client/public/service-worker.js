@@ -1,16 +1,19 @@
-const CACHE_VERSION = 'gps-audio-guide-v5-fresh';
+const CACHE_VERSION = 'gps-audio-guide-v6';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const MAP_TILES_CACHE = `${CACHE_VERSION}-map-tiles`;
 const API_CACHE = `${CACHE_VERSION}-api`;
 
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
   '/manifest.json',
   '/icon.svg',
   '/icon-192.jpg',
   '/icon-512.jpg'
+];
+
+const NAVIGATION_ASSETS = [
+  '/',
+  '/index.html'
 ];
 
 const MAP_TILE_ORIGINS = [
@@ -89,6 +92,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  if (NAVIGATION_ASSETS.some(asset => url.pathname === asset) || request.mode === 'navigate') {
+    event.respondWith(handleNavigationRequest(request));
+    return;
+  }
+
   if (STATIC_ASSETS.some(asset => url.pathname === asset)) {
     event.respondWith(handleStaticRequest(request));
     return;
@@ -96,6 +104,33 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(handleDynamicRequest(request));
 });
+
+async function handleNavigationRequest(request) {
+  try {
+    const response = await fetch(request);
+    
+    if (response.ok) {
+      const cache = await caches.open(STATIC_CACHE);
+      cache.put(request, response.clone());
+      console.log('[Service Worker] Navigation: fetched fresh and cached');
+    }
+    
+    return response;
+  } catch (error) {
+    console.log('[Service Worker] Navigation: network failed, trying cache');
+    const cached = await caches.match(request);
+    
+    if (cached) {
+      console.log('[Service Worker] Navigation: serving from cache');
+      return cached;
+    }
+    
+    return new Response('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>GPS Audio Guide - Offline</title><style>body{font-family:system-ui;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#1a1a2e;color:#fff;text-align:center}div{padding:20px}h1{margin-bottom:10px}button{margin-top:20px;padding:12px 24px;font-size:16px;border:none;border-radius:8px;background:#e94560;color:#fff;cursor:pointer}</style></head><body><div><h1>GPS Audio Guide</h1><p>You are currently offline.</p><p>Please check your internet connection and try again.</p><button onclick="location.reload()">Retry</button></div></body></html>', {
+      headers: { 'Content-Type': 'text/html' },
+      status: 503
+    });
+  }
+}
 
 async function handleStaticRequest(request) {
   try {

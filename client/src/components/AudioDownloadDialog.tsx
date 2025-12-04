@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Download, Headphones, Loader2, Check, X, Volume2, Trash2, HardDrive } from 'lucide-react';
 import { TTS_VOICES, VoiceId, getSavedVoice, getVoiceForLanguage } from '@/lib/voiceSettings';
 import { offlineStorage } from '@/lib/offlineStorage';
+import { getTranslatedContent } from '@/lib/translations';
 import type { Landmark } from '@shared/schema';
 
 interface AudioDownloadDialogProps {
@@ -75,7 +76,7 @@ export default function AudioDownloadDialog({
     
     const statuses: DownloadStatus[] = landmarksToDownload.map(l => ({
       landmarkId: l.id,
-      landmarkName: l.name,
+      landmarkName: getTranslatedContent(l, selectedLanguage, 'name') || l.name,
       status: 'pending' as const
     }));
     setDownloadStatuses(statuses);
@@ -91,9 +92,11 @@ export default function AudioDownloadDialog({
       ));
 
       try {
-        const text = landmark.narration || landmark.description || '';
+        const translatedNarration = getTranslatedContent(landmark, selectedLanguage, 'narration');
+        const translatedDescription = getTranslatedContent(landmark, selectedLanguage, 'description');
+        const text = translatedNarration || translatedDescription || '';
         if (!text) {
-          throw new Error('No text available');
+          throw new Error('No text available for this language');
         }
 
         const response = await fetch('/api/audio/generate', {

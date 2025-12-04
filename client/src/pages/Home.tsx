@@ -46,27 +46,6 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { ChevronDown } from 'lucide-react';
 
-// Detect browser language and map to supported language
-const detectBrowserLanguage = (): string => {
-  const browserLang = navigator.language || navigator.languages?.[0] || 'en';
-  const langCode = browserLang.split('-')[0].toLowerCase();
-  
-  // Supported languages
-  const supportedLanguages = ['en', 'ko', 'es', 'fr', 'de', 'it', 'zh', 'ja', 'pt', 'ru'];
-  
-  const detectedLang = supportedLanguages.includes(langCode) ? langCode : 'en';
-  
-  console.log('🌐 Browser language detection:', {
-    browserLang,
-    langCode,
-    detectedLang,
-    supportedLanguages
-  });
-  
-  // Return matched language or default to English
-  return detectedLang;
-};
-
 export default function Home() {
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
