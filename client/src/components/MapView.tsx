@@ -186,7 +186,7 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
         waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
         routeWhileDragging: false,
         addWaypoints: false,
-        fitSelectedRoutes: true,
+        fitSelectedRoutes: false,
         showAlternatives: false,
         lineOptions: {
           styles: [
@@ -225,11 +225,28 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
   return null;
 }
 
+// 전역 플래그: 사용자가 맵을 직접 조작했는지 추적
+let userHasInteracted = false;
+
+// 사용자 인터랙션 추적 컴포넌트
+function UserInteractionTracker() {
+  useMapEvents({
+    zoomstart: () => {
+      userHasInteracted = true;
+    },
+    dragstart: () => {
+      userHasInteracted = true;
+    },
+  });
+  return null;
+}
+
 function MapUpdater({ position }: { position: GpsPosition | null }) {
   const map = useMap();
 
   useEffect(() => {
-    if (position) {
+    // 사용자가 맵을 조작한 후에는 자동 이동하지 않음
+    if (position && !userHasInteracted) {
       map.setView([position.latitude, position.longitude], map.getZoom(), {
         animate: true,
       });
@@ -266,12 +283,21 @@ interface MapViewProps {
   tourStopIds?: string[];
 }
 
+// 이전 도시 중심 좌표를 저장하여 실제 도시 변경 시에만 뷰 업데이트
+let previousCityCenter: string | null = null;
+
 function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: number }) {
   const map = useMap();
 
   useEffect(() => {
     if (center && zoom) {
-      map.setView(center, zoom, { animate: true });
+      const centerKey = `${center[0]},${center[1]}`;
+      // 도시가 실제로 변경되었을 때만 뷰 업데이트
+      if (centerKey !== previousCityCenter) {
+        previousCityCenter = centerKey;
+        userHasInteracted = false; // 도시 변경 시 인터랙션 플래그 리셋
+        map.setView(center, zoom, { animate: true });
+      }
     }
   }, [center, zoom, map]);
 
@@ -578,6 +604,7 @@ export default function MapView({
       touchZoom={true}
       dragging={true}
     >
+      <UserInteractionTracker />
       <MapUpdater position={userPosition} />
       <CityUpdater center={cityCenter} zoom={cityZoom} />
       <MapResizer isCompact={isCompact} sidebarOpen={sidebarOpen} />
