@@ -1906,7 +1906,7 @@ export default function Home() {
             )}
 
             <OfflineIndicator />
-            <InstallPrompt />
+            <InstallPrompt selectedLanguage={selectedLanguage} />
             <UpdatePrompt 
               isVisible={showUpdatePrompt}
               onUpdate={() => {
