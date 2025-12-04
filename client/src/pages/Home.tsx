@@ -71,14 +71,14 @@ export default function Home() {
   const { position, error, isLoading } = useGeoLocation();
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
-    // Check localStorage first, then browser language
+    // Check localStorage first, then default to Korean
     const savedLanguage = localStorage.getItem('selected-language');
-    const finalLanguage = savedLanguage || detectBrowserLanguage();
+    const finalLanguage = savedLanguage || 'ko'; // 기본값: 한국어
     
     console.log('📝 Language initialization:', {
       savedLanguage,
       finalLanguage,
-      source: savedLanguage ? 'localStorage' : 'browser detection'
+      source: savedLanguage ? 'localStorage' : 'default (Korean)'
     });
     
     return finalLanguage;
