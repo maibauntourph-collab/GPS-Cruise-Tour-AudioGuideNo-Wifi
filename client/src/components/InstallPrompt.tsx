@@ -299,7 +299,7 @@ export default function InstallPrompt({ selectedLanguage = 'ko' }: InstallPrompt
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-6 max-h-[60vh] overflow-y-auto">
           <p className="text-center text-foreground font-medium mb-6">
             {t.description}
           </p>
