@@ -2273,6 +2273,7 @@ export default function Home() {
         onClose={() => setShowAudioDownloadDialog(false)}
         cityId={selectedCityId}
         cityName={selectedCity?.name || ''}
+        country={selectedCity?.country}
         landmarks={landmarks}
         selectedLanguage={audioDownloadLanguage}
       />

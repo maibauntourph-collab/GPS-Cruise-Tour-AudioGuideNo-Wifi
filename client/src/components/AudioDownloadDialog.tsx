@@ -5,10 +5,11 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Download, Headphones, Loader2, Check, X, Volume2, Trash2, HardDrive } from 'lucide-react';
+import { Download, Headphones, Loader2, Check, X, Volume2, Trash2, HardDrive, Package } from 'lucide-react';
 import { TTS_VOICES, VoiceId, getSavedVoice, getVoiceForLanguage } from '@/lib/voiceSettings';
 import { offlineStorage } from '@/lib/offlineStorage';
 import { getTranslatedContent } from '@/lib/translations';
+import JSZip from 'jszip';
 import type { Landmark } from '@shared/schema';
 
 interface AudioDownloadDialogProps {
@@ -16,6 +17,7 @@ interface AudioDownloadDialogProps {
   onClose: () => void;
   cityId: string;
   cityName: string;
+  country?: string;
   landmarks: Landmark[];
   selectedLanguage: string;
 }
@@ -32,6 +34,7 @@ export default function AudioDownloadDialog({
   onClose,
   cityId,
   cityName,
+  country = 'Unknown',
   landmarks,
   selectedLanguage
 }: AudioDownloadDialogProps) {
@@ -39,10 +42,25 @@ export default function AudioDownloadDialog({
     getSavedVoice() || getVoiceForLanguage(selectedLanguage)
   );
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isZipDownloading, setIsZipDownloading] = useState(false);
   const [downloadStatuses, setDownloadStatuses] = useState<DownloadStatus[]>([]);
   const [overallProgress, setOverallProgress] = useState(0);
   const [audioStats, setAudioStats] = useState<{ count: number; sizeMB: string } | null>(null);
   const [cachedLandmarks, setCachedLandmarks] = useState<Set<string>>(new Set());
+
+  // Language name mapping
+  const languageNames: Record<string, string> = {
+    en: 'English',
+    ko: '한국어',
+    es: 'Español',
+    fr: 'Français',
+    de: 'Deutsch',
+    it: 'Italiano',
+    zh: '中文',
+    ja: '日本語',
+    pt: 'Português',
+    ru: 'Русский'
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -160,6 +178,49 @@ export default function AudioDownloadDialog({
     setCachedLandmarks(new Set());
     setDownloadStatuses([]);
     loadAudioStats();
+  };
+
+  const downloadAllAsZip = async () => {
+    setIsZipDownloading(true);
+    try {
+      const zip = new JSZip();
+      const landmarksToDl = landmarks.filter(l => cachedLandmarks.has(l.id));
+      
+      if (landmarksToDl.length === 0) {
+        alert(selectedLanguage === 'ko' ? '먼저 오디오를 다운로드하세요' : 'Please download audio files first');
+        setIsZipDownloading(false);
+        return;
+      }
+
+      // 폴더 구조: Country/City/Language/
+      const languageName = languageNames[selectedLanguage] || selectedLanguage;
+      const folderPath = `${country}/${cityName}/${languageName}`;
+      
+      for (const landmark of landmarksToDl) {
+        const audio = await offlineStorage.getAudio(landmark.id, selectedLanguage);
+        if (audio && audio.audioBlob) {
+          const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name') || landmark.name;
+          const safeFilename = landmarkName.replace(/[/\\?*:|"<>]/g, '_');
+          zip.file(`${folderPath}/${safeFilename}.mp3`, audio.audioBlob);
+        }
+      }
+
+      // ZIP 생성 및 다운로드
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${country}_${cityName}_${languageName}_AudioGuide.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error: any) {
+      console.error('ZIP 생성 실패:', error);
+      alert(selectedLanguage === 'ko' ? 'ZIP 생성 실패' : 'Failed to create ZIP file');
+    } finally {
+      setIsZipDownloading(false);
+    }
   };
 
   const uncachedCount = landmarks.length - cachedLandmarks.size;
@@ -291,7 +352,7 @@ export default function AudioDownloadDialog({
           <div className="flex flex-col gap-2 pt-2">
             <Button
               onClick={downloadAllAudio}
-              disabled={isDownloading || uncachedCount === 0}
+              disabled={isDownloading || isZipDownloading || uncachedCount === 0}
               className="w-full"
               data-testid="button-download-all-audio"
             >
@@ -315,12 +376,37 @@ export default function AudioDownloadDialog({
                 </>
               )}
             </Button>
+
+            {cachedLandmarks.size > 0 && (
+              <Button
+                onClick={downloadAllAsZip}
+                disabled={isDownloading || isZipDownloading}
+                variant="secondary"
+                className="w-full"
+                data-testid="button-download-zip"
+              >
+                {isZipDownloading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    {selectedLanguage === 'ko' ? 'ZIP 생성 중...' : 'Creating ZIP...'}
+                  </>
+                ) : (
+                  <>
+                    <Package className="w-4 h-4 mr-2" />
+                    {selectedLanguage === 'ko' 
+                      ? `ZIP 다운로드 (${country}/${cityName})`
+                      : `Download ZIP (${country}/${cityName})`
+                    }
+                  </>
+                )}
+              </Button>
+            )}
             
             {cachedLandmarks.size > 0 && (
               <Button
                 variant="outline"
                 onClick={clearAllAudio}
-                disabled={isDownloading}
+                disabled={isDownloading || isZipDownloading}
                 className="w-full text-destructive hover:text-destructive"
                 data-testid="button-clear-audio"
               >
