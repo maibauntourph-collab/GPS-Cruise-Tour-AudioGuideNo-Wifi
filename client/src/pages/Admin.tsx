@@ -788,9 +788,24 @@ interface LandmarkFormDialogProps {
 }
 
 function LandmarkFormDialog({ isOpen, onClose, landmark, cities, onSave, isPending }: LandmarkFormDialogProps) {
-  const [formData, setFormData] = useState({
+  type LandmarkFormData = {
+    id: string;
+    cityId: string;
+    name: string;
+    lat: number;
+    lng: number;
+    radius: number;
+    narration: string;
+    description: string;
+    category: string;
+    detailedDescription: string;
+    yearBuilt: string;
+    architect: string;
+  };
+
+  const [formData, setFormData] = useState<LandmarkFormData>({
     id: '',
-    cityId: '',
+    cityId: cities.length > 0 ? cities[0].id : '',
     name: '',
     lat: 0,
     lng: 0,
@@ -821,10 +836,21 @@ function LandmarkFormDialog({ isOpen, onClose, landmark, cities, onSave, isPendi
           architect: landmark.architect || ''
         });
       } else {
+        // Use first city or empty string if no cities exist
+        const defaultCityId = cities.length > 0 ? cities[0].id : '';
         setFormData({
-          id: '', cityId: cities[0]?.id || '', name: '', lat: 0, lng: 0,
-          radius: 50, narration: '', description: '', category: '',
-          detailedDescription: '', yearBuilt: '', architect: ''
+          id: '', 
+          cityId: defaultCityId, 
+          name: '', 
+          lat: 0, 
+          lng: 0,
+          radius: 50, 
+          narration: '', 
+          description: '', 
+          category: '',
+          detailedDescription: '', 
+          yearBuilt: '', 
+          architect: ''
         });
       }
     }
@@ -832,6 +858,18 @@ function LandmarkFormDialog({ isOpen, onClose, landmark, cities, onSave, isPendi
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields before submission
+    if (!formData.id || !formData.cityId || !formData.name || !formData.narration) {
+      alert('Please fill in all required fields: ID, City, Name, and Narration');
+      return;
+    }
+    
+    if (formData.lat === undefined || formData.lng === undefined) {
+      alert('Please provide valid latitude and longitude');
+      return;
+    }
+    
     onSave(formData);
   };
 
