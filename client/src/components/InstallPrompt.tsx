@@ -9,7 +9,10 @@ interface BeforeInstallPromptEvent extends Event {
 
 interface InstallPromptProps {
   selectedLanguage?: string;
+  onDownloadClick?: (language: string) => void;
 }
+
+const SUPPORTED_LANGUAGES = ['ko', 'en', 'ja', 'zh', 'es', 'fr', 'de', 'it', 'pt', 'ru'];
 
 const translations: Record<string, {
   title: string;
@@ -27,6 +30,11 @@ const translations: Record<string, {
   feature3: string;
   welcomeTitle: string;
   continueWeb: string;
+  installTab: string;
+  downloadTab: string;
+  selectLanguage: string;
+  downloadAudio: string;
+  selectCityFirst: string;
 }> = {
   ko: {
     title: '앱 설치하기',
@@ -43,7 +51,12 @@ const translations: Record<string, {
     feature2: '10개 언어 음성 안내',
     feature3: '18개 도시 투어 가이드',
     welcomeTitle: 'GPS 오디오 가이드에 오신 것을 환영합니다',
-    continueWeb: '웹에서 계속하기'
+    continueWeb: '웹에서 계속하기',
+    installTab: '앱 설치',
+    downloadTab: '오프라인 다운로드',
+    selectLanguage: '언어 선택',
+    downloadAudio: '오디오 다운로드',
+    selectCityFirst: '계속하기를 눌러 도시를 선택한 후 다운로드하세요'
   },
   en: {
     title: 'Install App',
@@ -60,7 +73,12 @@ const translations: Record<string, {
     feature2: 'Voice Guide in 10 Languages',
     feature3: 'Tour Guide for 18 Cities',
     welcomeTitle: 'Welcome to GPS Audio Guide',
-    continueWeb: 'Continue on Web'
+    continueWeb: 'Continue on Web',
+    installTab: 'Install App',
+    downloadTab: 'Download Offline',
+    selectLanguage: 'Select Language',
+    downloadAudio: 'Download Audio',
+    selectCityFirst: 'Click Continue to select a city and download audio'
   },
   ja: {
     title: 'アプリをインストール',
@@ -77,7 +95,12 @@ const translations: Record<string, {
     feature2: '10言語の音声ガイド',
     feature3: '18都市のツアーガイド',
     welcomeTitle: 'GPSオーディオガイドへようこそ',
-    continueWeb: 'ウェブで続ける'
+    continueWeb: 'ウェブで続ける',
+    installTab: 'アプリをインストール',
+    downloadTab: 'オフラインをダウンロード',
+    selectLanguage: '言語を選択',
+    downloadAudio: 'オーディオをダウンロード',
+    selectCityFirst: 'ウェブで続くをクリックして、都市を選択してからダウンロードしてください'
   },
   zh: {
     title: '安装应用',
@@ -94,7 +117,12 @@ const translations: Record<string, {
     feature2: '10种语言语音导览',
     feature3: '18个城市导览',
     welcomeTitle: '欢迎使用GPS音频导游',
-    continueWeb: '在网页继续'
+    continueWeb: '在网页继续',
+    installTab: '安装应用',
+    downloadTab: '离线下载',
+    selectLanguage: '选择语言',
+    downloadAudio: '下载音频',
+    selectCityFirst: '点击"在网页继续"选择城市后下载'
   },
   es: {
     title: 'Instalar App',
@@ -111,7 +139,12 @@ const translations: Record<string, {
     feature2: 'Guía de Voz en 10 Idiomas',
     feature3: 'Guía Turística para 18 Ciudades',
     welcomeTitle: 'Bienvenido a GPS Audio Guide',
-    continueWeb: 'Continuar en Web'
+    continueWeb: 'Continuar en Web',
+    installTab: 'Instalar App',
+    downloadTab: 'Descargar Offline',
+    selectLanguage: 'Seleccionar Idioma',
+    downloadAudio: 'Descargar Audio',
+    selectCityFirst: 'Haz clic en Continuar para seleccionar una ciudad y descargar'
   },
   fr: {
     title: 'Installer l\'App',
@@ -128,7 +161,12 @@ const translations: Record<string, {
     feature2: 'Guide Vocal en 10 Langues',
     feature3: 'Guide Touristique pour 18 Villes',
     welcomeTitle: 'Bienvenue sur GPS Audio Guide',
-    continueWeb: 'Continuer sur le Web'
+    continueWeb: 'Continuer sur le Web',
+    installTab: 'Installer App',
+    downloadTab: 'Télécharger Offline',
+    selectLanguage: 'Sélectionner Langue',
+    downloadAudio: 'Télécharger Audio',
+    selectCityFirst: 'Cliquez sur Continuer pour sélectionner une ville et télécharger'
   },
   de: {
     title: 'App Installieren',
@@ -145,7 +183,12 @@ const translations: Record<string, {
     feature2: 'Sprachführer in 10 Sprachen',
     feature3: 'Reiseführer für 18 Städte',
     welcomeTitle: 'Willkommen bei GPS Audio Guide',
-    continueWeb: 'Im Web Fortfahren'
+    continueWeb: 'Im Web Fortfahren',
+    installTab: 'App Installieren',
+    downloadTab: 'Offline Herunterladen',
+    selectLanguage: 'Sprache Wählen',
+    downloadAudio: 'Audio Herunterladen',
+    selectCityFirst: 'Klicken Sie auf Fortfahren, um eine Stadt auszuwählen'
   },
   it: {
     title: 'Installa App',
@@ -162,7 +205,12 @@ const translations: Record<string, {
     feature2: 'Guida Vocale in 10 Lingue',
     feature3: 'Guida Turistica per 18 Città',
     welcomeTitle: 'Benvenuto su GPS Audio Guide',
-    continueWeb: 'Continua sul Web'
+    continueWeb: 'Continua sul Web',
+    installTab: 'Installa App',
+    downloadTab: 'Scarica Offline',
+    selectLanguage: 'Seleziona Lingua',
+    downloadAudio: 'Scarica Audio',
+    selectCityFirst: 'Clicca Continua per selezionare una città e scaricare'
   },
   pt: {
     title: 'Instalar App',
@@ -179,7 +227,12 @@ const translations: Record<string, {
     feature2: 'Guia de Voz em 10 Idiomas',
     feature3: 'Guia Turístico para 18 Cidades',
     welcomeTitle: 'Bem-vindo ao GPS Audio Guide',
-    continueWeb: 'Continuar na Web'
+    continueWeb: 'Continuar na Web',
+    installTab: 'Instalar App',
+    downloadTab: 'Baixar Offline',
+    selectLanguage: 'Selecionar Idioma',
+    downloadAudio: 'Baixar Áudio',
+    selectCityFirst: 'Clique em Continuar para selecionar uma cidade'
   },
   ru: {
     title: 'Установить приложение',
@@ -196,15 +249,22 @@ const translations: Record<string, {
     feature2: 'Голосовой гид на 10 языках',
     feature3: 'Гид по 18 городам',
     welcomeTitle: 'Добро пожаловать в GPS Audio Guide',
-    continueWeb: 'Продолжить в браузере'
+    continueWeb: 'Продолжить в браузере',
+    installTab: 'Установить App',
+    downloadTab: 'Загрузить Offline',
+    selectLanguage: 'Выбрать Язык',
+    downloadAudio: 'Загрузить Аудио',
+    selectCityFirst: 'Нажмите "Продолжить", чтобы выбрать город'
   }
 };
 
-export default function InstallPrompt({ selectedLanguage = 'ko' }: InstallPromptProps) {
+export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick }: InstallPromptProps) {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [activeTab, setActiveTab] = useState<'install' | 'download'>('install');
+  const [selectedDownloadLanguage, setSelectedDownloadLanguage] = useState(selectedLanguage || 'ko');
 
   const t = translations[selectedLanguage] || translations.ko;
 
@@ -297,83 +357,164 @@ export default function InstallPrompt({ selectedLanguage = 'ko' }: InstallPrompt
             <WifiOff className="w-4 h-4 text-green-200" />
             <span className="text-sm font-medium text-green-100">{t.subtitle}</span>
           </div>
+          
+          <div className="flex gap-2 mt-4 justify-center">
+            <button
+              onClick={() => setActiveTab('install')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeTab === 'install'
+                  ? 'bg-white text-primary'
+                  : 'bg-white/20 text-white hover:bg-white/30'
+              }`}
+            >
+              {t.installTab}
+            </button>
+            <button
+              onClick={() => setActiveTab('download')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
+                activeTab === 'download'
+                  ? 'bg-white text-primary'
+                  : 'bg-white/20 text-white hover:bg-white/30'
+              }`}
+            >
+              <Download className="w-4 h-4" />
+              {t.downloadTab}
+            </button>
+          </div>
         </div>
 
         <div className="p-6 overflow-y-auto flex-1">
-          <p className="text-center text-foreground font-medium mb-6">
-            {t.description}
-          </p>
+          {activeTab === 'install' ? (
+            <>
+              <p className="text-center text-foreground font-medium mb-6">
+                {t.description}
+              </p>
 
-          <div className="space-y-3 mb-6">
-            <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-              <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              </div>
-              <span className="text-sm text-foreground">{t.feature1}</span>
-            </div>
-            <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-              <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                <Volume2 className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-              </div>
-              <span className="text-sm text-foreground">{t.feature2}</span>
-            </div>
-            <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-              <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center flex-shrink-0">
-                <Navigation className="w-5 h-5 text-orange-600 dark:text-orange-400" />
-              </div>
-              <span className="text-sm text-foreground">{t.feature3}</span>
-            </div>
-          </div>
-
-          {isIOS ? (
-            <div className="mb-6">
-              <h3 className="text-sm font-semibold text-foreground mb-3 text-center">
-                {t.iosTitle}
-              </h3>
-              <div className="space-y-2">
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">1</div>
-                  <Share className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                  <span className="text-muted-foreground">{t.iosStep1}</span>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
+                  <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <span className="text-sm text-foreground">{t.feature1}</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">2</div>
-                  <PlusSquare className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                  <span className="text-muted-foreground">{t.iosStep2}</span>
+                <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
+                  <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                    <Volume2 className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <span className="text-sm text-foreground">{t.feature2}</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">3</div>
-                  <span className="text-muted-foreground">{t.iosStep3}</span>
+                <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
+                  <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center flex-shrink-0">
+                    <Navigation className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                  </div>
+                  <span className="text-sm text-foreground">{t.feature3}</span>
                 </div>
               </div>
-            </div>
-          ) : null}
 
-          <div className="space-y-3">
-            {deferredPrompt && !isIOS ? (
-              <Button
-                onClick={handleInstall}
-                className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90"
-                data-testid="button-install-pwa"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                {t.install}
-              </Button>
-            ) : null}
-            
-            <Button
-              variant="outline"
-              onClick={handleDismiss}
-              className="w-full h-12 text-base"
-              data-testid="button-dismiss-install"
-            >
-              {isIOS ? t.continueWeb : (deferredPrompt ? t.notNow : t.continueWeb)}
-            </Button>
-          </div>
+              {isIOS ? (
+                <div className="mb-6">
+                  <h3 className="text-sm font-semibold text-foreground mb-3 text-center">
+                    {t.iosTitle}
+                  </h3>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">1</div>
+                      <Share className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                      <span className="text-muted-foreground">{t.iosStep1}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">2</div>
+                      <PlusSquare className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                      <span className="text-muted-foreground">{t.iosStep2}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold flex-shrink-0">3</div>
+                      <span className="text-muted-foreground">{t.iosStep3}</span>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
 
-          <p className="text-xs text-muted-foreground text-center mt-4">
-            {t.offlineBenefit}
-          </p>
+              <div className="space-y-3">
+                {deferredPrompt && !isIOS ? (
+                  <Button
+                    onClick={handleInstall}
+                    className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90"
+                    data-testid="button-install-pwa"
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    {t.install}
+                  </Button>
+                ) : null}
+                
+                <Button
+                  variant="outline"
+                  onClick={handleDismiss}
+                  className="w-full h-12 text-base"
+                  data-testid="button-dismiss-install"
+                >
+                  {isIOS ? t.continueWeb : (deferredPrompt ? t.notNow : t.continueWeb)}
+                </Button>
+              </div>
+
+              <p className="text-xs text-muted-foreground text-center mt-4">
+                {t.offlineBenefit}
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="text-center mb-6">
+                <h2 className="text-lg font-semibold text-foreground mb-2">{t.downloadTab}</h2>
+                <p className="text-sm text-muted-foreground">{t.selectLanguage}</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 mb-6">
+                {SUPPORTED_LANGUAGES.map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => setSelectedDownloadLanguage(lang)}
+                    className={`p-3 rounded-lg text-sm font-medium transition-colors ${
+                      selectedDownloadLanguage === lang
+                        ? 'bg-primary text-white'
+                        : 'bg-muted text-foreground hover:bg-muted/80'
+                    }`}
+                    data-testid={`button-language-${lang}`}
+                  >
+                    {translations[lang]?.title.split(' ')[0] || lang}
+                  </button>
+                ))}
+              </div>
+
+              <div className="space-y-3">
+                <Button
+                  onClick={() => {
+                    if (onDownloadClick) {
+                      onDownloadClick(selectedDownloadLanguage);
+                      handleDismiss();
+                    }
+                  }}
+                  className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90"
+                  data-testid="button-start-download"
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  {t.downloadAudio}
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  onClick={handleDismiss}
+                  className="w-full h-12 text-base"
+                  data-testid="button-skip-download"
+                >
+                  {t.continueWeb}
+                </Button>
+              </div>
+
+              <p className="text-xs text-muted-foreground text-center mt-4">
+                {t.selectCityFirst}
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>

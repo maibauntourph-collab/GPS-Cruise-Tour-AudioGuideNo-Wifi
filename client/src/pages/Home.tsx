@@ -21,6 +21,7 @@ import UpdatePrompt from '@/components/UpdatePrompt';
 import BottomSheet from '@/components/BottomSheet';
 import StartupDialog, { getSavedTourData, saveTourData, clearSavedTourData } from '@/components/StartupDialog';
 import AIRecommendDialog from '@/components/AIRecommendDialog';
+import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';
@@ -69,6 +70,8 @@ export default function Home() {
   const { markVisited, isVisited } = useVisitedLandmarks();
   const { isUpdateAvailable, updateServiceWorker } = useServiceWorker();
   const [showUpdatePrompt, setShowUpdatePrompt] = useState(false);
+  const [showAudioDownloadDialog, setShowAudioDownloadDialog] = useState(false);
+  const [audioDownloadLanguage, setAudioDownloadLanguage] = useState<string>('ko');
   
   // Show update prompt when update is available
   useEffect(() => {
@@ -2253,6 +2256,25 @@ export default function Home() {
           setSelectedLandmark(landmark);
           setShowAIRecommend(false);
         }}
+      />
+
+      {/* Install Prompt with Download Option */}
+      <InstallPrompt 
+        selectedLanguage={selectedLanguage}
+        onDownloadClick={(language) => {
+          setAudioDownloadLanguage(language);
+          setShowAudioDownloadDialog(true);
+        }}
+      />
+
+      {/* Audio Download Dialog */}
+      <AudioDownloadDialog
+        isOpen={showAudioDownloadDialog}
+        onClose={() => setShowAudioDownloadDialog(false)}
+        cityId={selectedCityId}
+        cityName={selectedCity?.name || ''}
+        landmarks={landmarks}
+        selectedLanguage={audioDownloadLanguage}
       />
     </>
   );
