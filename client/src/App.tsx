@@ -7,11 +7,17 @@ import { useServiceWorker } from "@/hooks/useServiceWorker";
 import Home from "@/pages/Home";
 import Admin from "@/pages/Admin";
 import NotFound from "@/pages/not-found";
+import RoleSelection from "@/pages/RoleSelection";
+import GuideView from "@/pages/GuideView";
+import TourLeaderView from "@/pages/TourLeaderView";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home}/>
+      <Route path="/" component={RoleSelection}/>
+      <Route path="/home" component={Home}/>
+      <Route path="/guide" component={GuideView}/>
+      <Route path="/tour-leader" component={TourLeaderView}/>
       <Route path="/admin" component={Admin}/>
       <Route component={NotFound} />
     </Switch>
