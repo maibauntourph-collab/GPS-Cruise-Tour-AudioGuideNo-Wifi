@@ -24,6 +24,7 @@ class AudioService {
   private onSentenceEnd: (() => void) | null = null;
   private isSentenceMode: boolean = false;
   private selectedVoicesByLanguage: Map<string, string> = new Map(); // language -> voice name
+  private selectedClovaVoicesByLanguage: Map<string, string> = new Map(); // language -> CLOVA voice id
   
   // MP3 Audio properties
   private audioElement: HTMLAudioElement | null = null;
@@ -53,6 +54,7 @@ class AudioService {
 
     // Load saved voice selections per language
     this.loadSelectedVoices();
+    this.loadSelectedClovaVoices();
     
     // Load voices when available
     this.loadVoices();
@@ -89,6 +91,44 @@ class AudioService {
     } catch (e) {
       console.error('[AudioService] Failed to save voices:', e);
     }
+  }
+  
+  private loadSelectedClovaVoices() {
+    try {
+      const saved = localStorage.getItem('clova-voices-by-language');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        Object.entries(parsed).forEach(([lang, voiceId]) => {
+          this.selectedClovaVoicesByLanguage.set(lang, voiceId as string);
+        });
+      }
+    } catch (e) {
+      console.error('[AudioService] Failed to load saved CLOVA voices:', e);
+    }
+  }
+  
+  private saveSelectedClovaVoices() {
+    try {
+      const obj: Record<string, string> = {};
+      this.selectedClovaVoicesByLanguage.forEach((voiceId, lang) => {
+        obj[lang] = voiceId;
+      });
+      localStorage.setItem('clova-voices-by-language', JSON.stringify(obj));
+    } catch (e) {
+      console.error('[AudioService] Failed to save CLOVA voices:', e);
+    }
+  }
+  
+  // Get saved CLOVA voice for language
+  getSelectedClovaVoice(language: string): string | undefined {
+    return this.selectedClovaVoicesByLanguage.get(language);
+  }
+  
+  // Set CLOVA voice for language
+  setClovaVoiceForLanguage(language: string, voiceId: string) {
+    this.selectedClovaVoicesByLanguage.set(language, voiceId);
+    this.saveSelectedClovaVoices();
+    console.log(`[AudioService] Saved CLOVA voice for ${language}: ${voiceId}`);
   }
   
   // Get all available voices
@@ -628,13 +668,16 @@ class AudioService {
       this.stopMP3();
       this.stop();
 
+      // Use provided voiceId or fall back to saved voice for this language
+      const effectiveVoiceId = voiceId || this.getSelectedClovaVoice(language);
+
       const response = await fetch('/api/tts/clova/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           text,
           language,
-          voice: voiceId,
+          voice: effectiveVoiceId,
           speed: 0,
           pitch: 0,
           volume: 0

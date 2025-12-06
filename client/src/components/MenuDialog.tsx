@@ -6,6 +6,7 @@ import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { 
   Volume2, 
   VolumeX, 
@@ -30,7 +31,8 @@ import {
   Users,
   Check,
   Sparkles,
-  Play
+  Play,
+  Cloud
 } from 'lucide-react';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
@@ -39,7 +41,16 @@ import OfflineDataDialog from './OfflineDataDialog';
 import { City, Landmark } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
 import { useState, useEffect } from 'react';
-import { audioService } from '@/lib/audioService';
+import { audioService, type AudioMode } from '@/lib/audioService';
+
+interface ClovaVoice {
+  id: string;
+  name: string;
+  nameKo: string;
+  gender: string;
+  language: string;
+  description: string;
+}
 
 interface VoiceInfo {
   voice: SpeechSynthesisVoice;
@@ -155,6 +166,10 @@ export default function MenuDialog({
   const [offlineMode2, setOfflineMode2] = useState<'download' | 'upload'>('download');
   const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedSystemVoice, setSelectedSystemVoice] = useState<string>('');
+  const [audioMode, setAudioMode] = useState<AudioMode>(audioService.getAudioMode());
+  const [clovaVoices, setClovaVoices] = useState<ClovaVoice[]>([]);
+  const [selectedClovaVoice, setSelectedClovaVoice] = useState<string>('');
+  const [loadingClovaVoices, setLoadingClovaVoices] = useState(false);
   
   // Voice filter states
   const [qualityFilter, setQualityFilter] = useState<'all' | 'premium' | 'standard'>('all');
@@ -185,6 +200,52 @@ export default function MenuDialog({
       return () => clearTimeout(timer);
     }
   }, [isOpen, selectedLanguage]);
+  
+  const loadClovaVoices = async () => {
+    setLoadingClovaVoices(true);
+    try {
+      const response = await fetch(`/api/tts/clova/voices?language=${selectedLanguage}`);
+      if (response.ok) {
+        const data = await response.json();
+        setClovaVoices(data.voices || []);
+        // Load saved voice or use default
+        const savedClovaVoice = audioService.getSelectedClovaVoice(selectedLanguage);
+        if (savedClovaVoice) {
+          setSelectedClovaVoice(savedClovaVoice);
+        } else if (data.default) {
+          setSelectedClovaVoice(data.default);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load CLOVA voices:', error);
+    } finally {
+      setLoadingClovaVoices(false);
+    }
+  };
+  
+  const handleClovaVoiceChange = (voiceId: string) => {
+    setSelectedClovaVoice(voiceId);
+    audioService.setClovaVoiceForLanguage(selectedLanguage, voiceId);
+  };
+  
+  useEffect(() => {
+    if (isOpen && audioMode === 'clova') {
+      loadClovaVoices();
+    }
+  }, [isOpen, selectedLanguage, audioMode]);
+  
+  const handleAudioModeChange = (mode: AudioMode) => {
+    setAudioMode(mode);
+    audioService.setAudioMode(mode);
+    if (mode === 'clova' && clovaVoices.length === 0) {
+      loadClovaVoices();
+    }
+  };
+  
+  const testClovaVoice = async (voiceId?: string) => {
+    const text = selectedLanguage === 'ko' ? '안녕하세요! CLOVA 음성 테스트입니다.' : 'Hello! This is a CLOVA voice test.';
+    await audioService.playClovaTTS(text, selectedLanguage, undefined, voiceId || selectedClovaVoice);
+  };
   
   const handleSystemVoiceChange = (voiceName: string) => {
     setSelectedSystemVoice(voiceName);
@@ -355,7 +416,130 @@ export default function MenuDialog({
                   />
                 </div>
 
-                {/* TTS Voice Selection Cards */}
+                {/* TTS Mode Selection */}
+                <div className="space-y-2 pt-2 border-t">
+                  <Label className="text-xs font-medium flex items-center gap-1">
+                    <AudioLines className="w-3 h-3" />
+                    {selectedLanguage === 'ko' ? 'TTS 모드' : 'TTS Mode'}
+                  </Label>
+                  <RadioGroup
+                    value={audioMode}
+                    onValueChange={(value) => handleAudioModeChange(value as AudioMode)}
+                    className="flex flex-wrap gap-2"
+                  >
+                    <div className="flex items-center space-x-1">
+                      <RadioGroupItem value="auto" id="menu-mode-auto" data-testid="radio-mode-auto" />
+                      <Label htmlFor="menu-mode-auto" className="text-[10px] cursor-pointer">
+                        {selectedLanguage === 'ko' ? '자동' : 'Auto'}
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <RadioGroupItem value="tts" id="menu-mode-tts" data-testid="radio-mode-tts" />
+                      <Label htmlFor="menu-mode-tts" className="text-[10px] cursor-pointer">
+                        {selectedLanguage === 'ko' ? '시스템' : 'System'}
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <RadioGroupItem value="clova" id="menu-mode-clova" data-testid="radio-mode-clova" />
+                      <Label htmlFor="menu-mode-clova" className="text-[10px] cursor-pointer flex items-center gap-0.5">
+                        <Cloud className="w-2.5 h-2.5" />
+                        CLOVA
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <RadioGroupItem value="mp3" id="menu-mode-mp3" data-testid="radio-mode-mp3" />
+                      <Label htmlFor="menu-mode-mp3" className="text-[10px] cursor-pointer">MP3</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {/* CLOVA Voice Selection - Show only when CLOVA mode is selected */}
+                {audioMode === 'clova' && (
+                  <div className="space-y-2 pt-2 border-t">
+                    <div className="flex items-center justify-between">
+                      <Label className="text-xs font-medium flex items-center gap-1">
+                        <Cloud className="w-3 h-3" />
+                        {selectedLanguage === 'ko' ? 'CLOVA 음성' : 'CLOVA Voice'}
+                      </Label>
+                      <Badge variant="secondary" className="text-[10px]">
+                        {loadingClovaVoices ? '...' : `${clovaVoices.length}`}
+                      </Badge>
+                    </div>
+                    
+                    {loadingClovaVoices ? (
+                      <div className="text-center py-2 text-muted-foreground text-xs">
+                        {selectedLanguage === 'ko' ? '로딩 중...' : 'Loading...'}
+                      </div>
+                    ) : clovaVoices.length > 0 ? (
+                      <div className="grid grid-cols-2 gap-2">
+                        {clovaVoices.map((voice) => {
+                          const isSelected = selectedClovaVoice === voice.id;
+                          
+                          return (
+                            <button
+                              key={voice.id}
+                              onClick={() => handleClovaVoiceChange(voice.id)}
+                              className={`
+                                relative flex flex-col w-full p-2 rounded-md border transition-all
+                                text-left cursor-pointer
+                                ${isSelected 
+                                  ? 'border-primary bg-primary/5' 
+                                  : 'border-border bg-card hover:border-primary/50'
+                                }
+                              `}
+                              aria-pressed={isSelected}
+                              data-testid={`card-clova-voice-${voice.id}`}
+                            >
+                              {isSelected && (
+                                <div className="absolute top-1 right-1">
+                                  <Check className="w-2.5 h-2.5 text-primary" />
+                                </div>
+                              )}
+                              
+                              <div className="flex items-center gap-1 mb-1">
+                                <User className={`w-2.5 h-2.5 flex-shrink-0 ${
+                                  voice.gender === 'female' ? 'text-pink-500' : 
+                                  voice.gender === 'male' ? 'text-blue-500' : 
+                                  'text-muted-foreground'
+                                }`} />
+                                <span className="font-medium text-[10px] truncate">
+                                  {selectedLanguage === 'ko' ? voice.nameKo : voice.name}
+                                </span>
+                              </div>
+                              
+                              <div className="flex items-center justify-between">
+                                <Badge variant="outline" className="text-[8px] px-1 py-0 h-3">
+                                  {voice.language.toUpperCase()}
+                                </Badge>
+                                
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-4 w-4 p-0"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    testClovaVoice(voice.id);
+                                  }}
+                                  title={selectedLanguage === 'ko' ? '미리듣기' : 'Preview'}
+                                  data-testid={`button-clova-preview-${voice.id}`}
+                                >
+                                  <Play className="w-2.5 h-2.5" />
+                                </Button>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="text-center py-2 text-muted-foreground text-xs">
+                        {selectedLanguage === 'ko' ? '사용 가능한 CLOVA 음성이 없습니다' : 'No CLOVA voices available'}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* System TTS Voice Selection Cards - Show only when TTS mode is selected */}
+                {audioMode === 'tts' && (
                 <div className="space-y-2 pt-2 border-t">
                   <div className="flex items-center justify-between">
                     <Label className="text-xs font-medium flex items-center gap-1">
@@ -583,6 +767,7 @@ export default function MenuDialog({
                     </div>
                   )}
                 </div>
+                )}
 
                 {onTestAudio && (
                   <Button

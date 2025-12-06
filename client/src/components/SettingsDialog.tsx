@@ -128,7 +128,11 @@ export default function SettingsDialog({
       if (response.ok) {
         const data = await response.json();
         setClovaVoices(data.voices || []);
-        if (data.default && !selectedClovaVoice) {
+        // Load saved voice or use default
+        const savedClovaVoice = audioService.getSelectedClovaVoice(selectedLanguage);
+        if (savedClovaVoice) {
+          setSelectedClovaVoice(savedClovaVoice);
+        } else if (data.default) {
           setSelectedClovaVoice(data.default);
         }
       }
@@ -137,6 +141,11 @@ export default function SettingsDialog({
     } finally {
       setLoadingClovaVoices(false);
     }
+  };
+  
+  const handleClovaVoiceChange = (voiceId: string) => {
+    setSelectedClovaVoice(voiceId);
+    audioService.setClovaVoiceForLanguage(selectedLanguage, voiceId);
   };
 
   const handleAudioModeChange = (mode: AudioMode) => {
@@ -311,7 +320,7 @@ export default function SettingsDialog({
                           return (
                             <button
                               key={voice.id}
-                              onClick={() => setSelectedClovaVoice(voice.id)}
+                              onClick={() => handleClovaVoiceChange(voice.id)}
                               className={`
                                 relative flex flex-col min-w-[160px] p-3 rounded-lg border-2 transition-all
                                 text-left cursor-pointer
