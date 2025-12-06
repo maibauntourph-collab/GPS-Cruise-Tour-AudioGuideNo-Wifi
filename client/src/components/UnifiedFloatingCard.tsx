@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
@@ -273,6 +274,7 @@ export default function UnifiedFloatingCard({
   const [currentPage, setCurrentPage] = useState(1);
   const [transportPage, setTransportPage] = useState(1);
   const [tourPage, setTourPage] = useState(1);
+  const [landmarkSearchQuery, setLandmarkSearchQuery] = useState('');
   const itemsPerPage = 5;
   const transportItemsPerPage = 3;
   const tourItemsPerPage = 4;
@@ -597,10 +599,21 @@ export default function UnifiedFloatingCard({
 
   // Filter landmarks in List tab based on category (synced with Home filter state)
   // Also exclude landmarks that are already in tour stops
+  // And filter by search query if provided
   const filteredListLandmarks = sortedLandmarks.filter(({ landmark }) => {
     // Hide landmarks that are already in tour stops
     const isInTour = tourStops.some(stop => stop.id === landmark.id);
     if (isInTour) return false;
+    
+    // Filter by search query (case-insensitive, matches translated name)
+    if (landmarkSearchQuery.trim()) {
+      const searchLower = landmarkSearchQuery.toLowerCase().trim();
+      const translatedName = getTranslatedContent(landmark, selectedLanguage, 'name').toLowerCase();
+      const originalName = (landmark.name || '').toLowerCase();
+      if (!translatedName.includes(searchLower) && !originalName.includes(searchLower)) {
+        return false;
+      }
+    }
     
     const isActivity = landmark.category === 'Activity';
     const isRestaurant = landmark.category === 'Restaurant';
@@ -1739,6 +1752,36 @@ export default function UnifiedFloatingCard({
                 </div>
               </div>
             )}
+            
+            {/* Landmark Search Input */}
+            <div className="relative mb-3 flex-shrink-0">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder={selectedLanguage === 'ko' ? '랜드마크 검색...' : 'Search landmarks...'}
+                value={landmarkSearchQuery}
+                onChange={(e) => {
+                  setLandmarkSearchQuery(e.target.value);
+                  setCurrentPage(1); // Reset to first page when searching
+                }}
+                className="pl-8 h-8 text-sm"
+                data-testid="input-landmark-search"
+              />
+              {landmarkSearchQuery && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 h-6 w-6"
+                  onClick={() => {
+                    setLandmarkSearchQuery('');
+                    setCurrentPage(1);
+                  }}
+                  data-testid="button-clear-search"
+                >
+                  <X className="w-3 h-3" />
+                </Button>
+              )}
+            </div>
             
             {/* Category Filter Buttons */}
             <div className="flex flex-wrap gap-1.5 pb-3 mb-3 border-b flex-shrink-0">
