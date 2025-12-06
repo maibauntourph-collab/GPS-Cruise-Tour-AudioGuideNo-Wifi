@@ -27,7 +27,10 @@ import {
   FileSpreadsheet,
   AlertCircle,
   CheckCircle2,
-  FileDown
+  FileDown,
+  Volume2,
+  Play,
+  RefreshCw
 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import type { City, Landmark } from '@shared/schema';
@@ -211,6 +214,10 @@ export default function Admin() {
             <TabsTrigger value="import-export" data-testid="tab-import-export">
               <FileSpreadsheet className="h-4 w-4 mr-2" />
               Import/Export
+            </TabsTrigger>
+            <TabsTrigger value="audio" data-testid="tab-audio">
+              <Volume2 className="h-4 w-4 mr-2" />
+              오디오 생성
             </TabsTrigger>
           </TabsList>
 
@@ -602,6 +609,10 @@ export default function Admin() {
                 </Card>
               </div>
             </div>
+          </TabsContent>
+
+          <TabsContent value="audio">
+            <AudioGenerationTab cities={cities} landmarks={landmarks} />
           </TabsContent>
         </Tabs>
       </main>
@@ -1048,5 +1059,259 @@ function LandmarkFormDialog({ isOpen, onClose, landmark, cities, onSave, isPendi
         </form>
       </DialogContent>
     </Dialog>
+  );
+}
+
+// Audio Generation Tab Component
+interface AudioStatusItem {
+  landmarkId: string;
+  landmarkName: string;
+  category: string;
+  language: string;
+  hasAudio: boolean;
+  audioUrl: string | null;
+}
+
+interface AudioStatusResponse {
+  total: number;
+  generated: number;
+  pending: number;
+  landmarks: AudioStatusItem[];
+}
+
+function AudioGenerationTab({ cities, landmarks }: { cities: DbCity[]; landmarks: DbLandmark[] }) {
+  const { toast } = useToast();
+  const [selectedCity, setSelectedCity] = useState<string>('all');
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('ko');
+  const [selectedLandmarks, setSelectedLandmarks] = useState<string[]>([]);
+  const [generating, setGenerating] = useState(false);
+
+  const languages = [
+    { code: 'ko', name: '한국어' },
+    { code: 'en', name: 'English' },
+    { code: 'ja', name: '日本語' },
+    { code: 'zh', name: '中文' },
+    { code: 'es', name: 'Español' },
+  ];
+
+  const { data: audioStatus, isLoading: loadingStatus, refetch: refetchStatus } = useQuery<AudioStatusResponse>({
+    queryKey: ['/api/admin/audio-status', selectedCity, selectedLanguage],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (selectedCity !== 'all') params.set('cityId', selectedCity);
+      params.set('language', selectedLanguage);
+      const res = await fetch(`/api/admin/audio-status?${params}`);
+      if (!res.ok) throw new Error('Failed to fetch audio status');
+      return res.json();
+    }
+  });
+
+  const filteredLandmarks = audioStatus?.landmarks || [];
+  const pendingLandmarks = filteredLandmarks.filter(l => !l.hasAudio);
+
+  const toggleLandmarkSelection = (landmarkId: string) => {
+    setSelectedLandmarks(prev => 
+      prev.includes(landmarkId) 
+        ? prev.filter(id => id !== landmarkId)
+        : [...prev, landmarkId]
+    );
+  };
+
+  const selectAllPending = () => {
+    setSelectedLandmarks(pendingLandmarks.map(l => l.landmarkId));
+  };
+
+  const clearSelection = () => {
+    setSelectedLandmarks([]);
+  };
+
+  const generateAudio = async () => {
+    if (selectedLandmarks.length === 0) {
+      toast({ title: '생성할 랜드마크를 선택하세요', variant: 'destructive' });
+      return;
+    }
+
+    setGenerating(true);
+
+    try {
+      const response = await fetch('/api/admin/generate-audio-batch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          landmarkIds: selectedLandmarks,
+          languages: [selectedLanguage]
+        })
+      });
+
+      const result = await response.json();
+      
+      if (response.ok) {
+        toast({ 
+          title: `오디오 생성 완료`,
+          description: `${result.generated}개 성공, ${result.failed}개 실패`
+        });
+        setSelectedLandmarks([]);
+        refetchStatus();
+      } else {
+        toast({ title: result.error || '오디오 생성 실패', variant: 'destructive' });
+      }
+    } catch (error: any) {
+      toast({ title: error.message || '오디오 생성 중 오류', variant: 'destructive' });
+    }
+
+    setGenerating(false);
+  };
+
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Volume2 className="h-5 w-5" />
+            MP3 오디오 사전 생성
+          </CardTitle>
+          <CardDescription>
+            CLOVA TTS를 사용하여 랜드마크 설명 오디오를 미리 생성합니다.
+            생성된 오디오는 오프라인에서도 사용할 수 있습니다.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex flex-wrap gap-4">
+            <div className="space-y-2">
+              <Label>도시 선택</Label>
+              <Select value={selectedCity} onValueChange={setSelectedCity}>
+                <SelectTrigger className="w-48" data-testid="select-audio-city">
+                  <SelectValue placeholder="도시 선택" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">모든 도시</SelectItem>
+                  {cities.map(city => (
+                    <SelectItem key={city.id} value={city.id}>{city.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label>언어 선택</Label>
+              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                <SelectTrigger className="w-48" data-testid="select-audio-language">
+                  <SelectValue placeholder="언어 선택" />
+                </SelectTrigger>
+                <SelectContent>
+                  {languages.map(lang => (
+                    <SelectItem key={lang.code} value={lang.code}>{lang.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="flex items-end gap-2">
+              <Button variant="outline" onClick={() => refetchStatus()} data-testid="button-refresh-status">
+                <RefreshCw className="h-4 w-4 mr-2" />
+                새로고침
+              </Button>
+            </div>
+          </div>
+
+          {loadingStatus ? (
+            <div className="flex justify-center py-8">
+              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            </div>
+          ) : audioStatus && (
+            <>
+              <div className="grid grid-cols-3 gap-4">
+                <Card>
+                  <CardContent className="pt-4">
+                    <div className="text-2xl font-bold">{audioStatus.total}</div>
+                    <div className="text-sm text-muted-foreground">전체 랜드마크</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-4">
+                    <div className="text-2xl font-bold text-green-600">{audioStatus.generated}</div>
+                    <div className="text-sm text-muted-foreground">생성 완료</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-4">
+                    <div className="text-2xl font-bold text-orange-600">{audioStatus.pending}</div>
+                    <div className="text-sm text-muted-foreground">미생성</div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={selectAllPending} data-testid="button-select-all-pending">
+                    미생성 전체 선택 ({pendingLandmarks.length})
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={clearSelection} data-testid="button-clear-selection">
+                    선택 해제
+                  </Button>
+                </div>
+                <Button 
+                  onClick={generateAudio} 
+                  disabled={generating || selectedLandmarks.length === 0}
+                  data-testid="button-generate-audio"
+                >
+                  {generating ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      생성 중...
+                    </>
+                  ) : (
+                    <>
+                      <Play className="h-4 w-4 mr-2" />
+                      선택 항목 생성 ({selectedLandmarks.length})
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              <div className="border rounded-lg divide-y max-h-96 overflow-auto">
+                {filteredLandmarks.map(item => (
+                  <div 
+                    key={item.landmarkId} 
+                    className={`flex items-center justify-between p-3 hover:bg-muted/50 cursor-pointer ${
+                      selectedLandmarks.includes(item.landmarkId) ? 'bg-primary/10' : ''
+                    }`}
+                    onClick={() => toggleLandmarkSelection(item.landmarkId)}
+                    data-testid={`audio-item-${item.landmarkId}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <input 
+                        type="checkbox" 
+                        checked={selectedLandmarks.includes(item.landmarkId)}
+                        onChange={() => toggleLandmarkSelection(item.landmarkId)}
+                        className="h-4 w-4"
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                      <div>
+                        <div className="font-medium">{item.landmarkName}</div>
+                        <div className="text-sm text-muted-foreground">{item.category}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {item.hasAudio ? (
+                        <span className="flex items-center gap-1 text-green-600 text-sm">
+                          <CheckCircle2 className="h-4 w-4" />
+                          생성됨
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-1 text-orange-600 text-sm">
+                          <AlertCircle className="h-4 w-4" />
+                          미생성
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   );
 }

@@ -11,6 +11,7 @@ import crypto from "crypto";
 import multer from "multer";
 import * as XLSX from "xlsx";
 import * as path from "path";
+import * as fs from "fs";
 import express from "express";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -1115,6 +1116,124 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error('CLOVA landmark TTS error:', error);
       res.status(500).json({ error: error.message || "Failed to generate CLOVA TTS for landmark" });
+    }
+  });
+
+  // Batch generate CLOVA TTS for multiple landmarks
+  app.post("/api/admin/generate-audio-batch", async (req, res) => {
+    try {
+      const { generateAndSaveClovaTTS, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
+      const { landmarkIds, languages, voice } = req.body;
+      
+      if (!landmarkIds || !Array.isArray(landmarkIds) || landmarkIds.length === 0) {
+        return res.status(400).json({ error: "landmarkIds array is required" });
+      }
+
+      const targetLanguages = languages && Array.isArray(languages) ? languages : ['ko'];
+      const results: any[] = [];
+      const errors: any[] = [];
+
+      for (const landmarkId of landmarkIds) {
+        const landmark = await storage.getLandmark(landmarkId);
+        if (!landmark) {
+          errors.push({ landmarkId, error: "Landmark not found" });
+          continue;
+        }
+
+        for (const lang of targetLanguages) {
+          try {
+            let text = landmark.detailedDescription || landmark.narration || landmark.description || '';
+            
+            if (landmark.translations && landmark.translations[lang]) {
+              const trans = landmark.translations[lang];
+              text = trans.detailedDescription || trans.narration || trans.description || text;
+            }
+
+            if (!text || text.trim().length === 0) {
+              errors.push({ landmarkId, language: lang, error: "No text available" });
+              continue;
+            }
+
+            const selectedVoice = voice || DEFAULT_CLOVA_VOICE_BY_LANGUAGE[lang] || "nara";
+            const result = await generateAndSaveClovaTTS(landmarkId, text, lang, selectedVoice);
+            
+            results.push({
+              landmarkId,
+              landmarkName: landmark.name,
+              language: lang,
+              ...result
+            });
+          } catch (err: any) {
+            errors.push({ landmarkId, language: lang, error: err.message });
+          }
+        }
+      }
+
+      res.json({
+        success: true,
+        generated: results.length,
+        failed: errors.length,
+        results,
+        errors
+      });
+    } catch (error: any) {
+      console.error('Batch CLOVA TTS error:', error);
+      res.status(500).json({ error: error.message || "Failed to generate batch audio" });
+    }
+  });
+
+  // Get audio generation status for landmarks
+  app.get("/api/admin/audio-status", async (req, res) => {
+    try {
+      const { cityId, language } = req.query;
+      const audioDir = path.join(process.cwd(), "public", "audio", "clova");
+      
+      const allLandmarks = await storage.getLandmarks(cityId as string);
+      const targetLang = (language as string) || 'ko';
+      
+      const status = allLandmarks.map(landmark => {
+        const possibleFiles = [
+          `${landmark.id}_${targetLang}_nara.mp3`,
+          `${landmark.id}_${targetLang}_clara.mp3`,
+          `${landmark.id}_${targetLang}_ntomoko.mp3`,
+          `${landmark.id}_${targetLang}_meimei.mp3`,
+          `${landmark.id}_${targetLang}_carmen.mp3`,
+        ];
+        
+        let hasAudio = false;
+        let audioUrl = null;
+        
+        for (const filename of possibleFiles) {
+          const filePath = path.join(audioDir, filename);
+          if (fs.existsSync(filePath)) {
+            hasAudio = true;
+            audioUrl = `/audio/clova/${filename}`;
+            break;
+          }
+        }
+        
+        return {
+          landmarkId: landmark.id,
+          landmarkName: landmark.name,
+          category: landmark.category,
+          language: targetLang,
+          hasAudio,
+          audioUrl
+        };
+      });
+
+      const generated = status.filter(s => s.hasAudio).length;
+      const pending = status.filter(s => !s.hasAudio).length;
+
+      res.json({
+        total: status.length,
+        generated,
+        pending,
+        landmarks: status
+      });
+    } catch (error: any) {
+      console.error('Audio status error:', error);
+      res.status(500).json({ error: error.message || "Failed to get audio status" });
     }
   });
 
