@@ -338,6 +338,7 @@ export default function MenuDialog({
                     cities={cities}
                     selectedCityId={selectedCityId}
                     onCityChange={onCityChange}
+                    selectedLanguage={selectedLanguage}
                   />
                 </div>
 

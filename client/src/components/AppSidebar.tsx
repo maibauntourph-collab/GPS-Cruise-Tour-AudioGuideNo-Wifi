@@ -83,6 +83,7 @@ export function AppSidebar({
                       cities={cities}
                       selectedCityId={selectedCityId}
                       onCityChange={onCityChange}
+                      selectedLanguage={selectedLanguage}
                     />
                   </div>
                   
