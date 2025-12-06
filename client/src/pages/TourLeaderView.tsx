@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { 
   ArrowLeft, Users, Clock, CheckCircle, MapPin, Plus, Pencil, Trash2, 
-  Download, Upload, FileSpreadsheet, Loader2, Phone, Mail, Home
+  Download, Upload, FileSpreadsheet, Loader2, Phone, Mail, Home, Share2, Copy, MessageCircle
 } from "lucide-react";
 import type { TourSchedule, GroupMember } from "@shared/schema";
 
@@ -460,6 +460,90 @@ export default function TourLeaderView() {
                   </div>
                 </Card>
               )}
+
+              {/* Share Report */}
+              <Card className="p-6 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border-green-200 dark:border-green-800">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Share2 className="w-5 h-5 text-green-600" />
+                  진행상황 리포트 공유
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  카카오톡, WhatsApp, LINE, Messenger 등 원하는 앱으로 투어 진행상황을 공유하세요.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <Button
+                    variant="default"
+                    className="w-full"
+                    onClick={() => {
+                      const now = new Date();
+                      const timeStr = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+                      const dateStr = now.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric' });
+                      
+                      const reportText = `📋 투어 진행상황 리포트
+📅 ${dateStr} ${timeStr}
+
+👥 참가자 현황
+• 총 인원: ${members.length}명
+• 정시 도착: ${onTimeCount}명 ✅
+• 지연: ${lateCount}명 ⏰
+• 결석: ${absentCount}명 ❌
+• 참석률: ${members.length > 0 ? Math.round(onTimeCount / members.length * 100) : 0}%
+
+${schedules.length > 0 ? `📍 다음 일정
+• ${schedules[0].time} - ${schedules[0].location}${schedules[0].duration ? ` (${schedules[0].duration})` : ''}` : ''}
+
+${lateCount > 0 || absentCount > 0 ? `⚠️ 미도착 명단
+${members.filter(m => m.status !== 'on-time').map(m => `• ${m.name} (${statusLabels[m.status]})`).join('\n')}` : '✨ 전원 정시 도착!'}`;
+                      
+                      if (navigator.share) {
+                        navigator.share({
+                          title: '투어 진행상황 리포트',
+                          text: reportText
+                        }).catch(() => {});
+                      } else {
+                        navigator.clipboard.writeText(reportText);
+                        toast({ title: '리포트가 클립보드에 복사되었습니다' });
+                      }
+                    }}
+                    data-testid="button-share-report"
+                  >
+                    <Share2 className="w-4 h-4 mr-2" />
+                    앱으로 공유하기
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => {
+                      const now = new Date();
+                      const timeStr = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+                      const dateStr = now.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric' });
+                      
+                      const reportText = `📋 투어 진행상황 리포트
+📅 ${dateStr} ${timeStr}
+
+👥 참가자 현황
+• 총 인원: ${members.length}명
+• 정시 도착: ${onTimeCount}명 ✅
+• 지연: ${lateCount}명 ⏰
+• 결석: ${absentCount}명 ❌
+• 참석률: ${members.length > 0 ? Math.round(onTimeCount / members.length * 100) : 0}%
+
+${schedules.length > 0 ? `📍 다음 일정
+• ${schedules[0].time} - ${schedules[0].location}${schedules[0].duration ? ` (${schedules[0].duration})` : ''}` : ''}
+
+${lateCount > 0 || absentCount > 0 ? `⚠️ 미도착 명단
+${members.filter(m => m.status !== 'on-time').map(m => `• ${m.name} (${statusLabels[m.status]})`).join('\n')}` : '✨ 전원 정시 도착!'}`;
+                      
+                      navigator.clipboard.writeText(reportText);
+                      toast({ title: '리포트가 클립보드에 복사되었습니다' });
+                    }}
+                    data-testid="button-copy-report"
+                  >
+                    <Copy className="w-4 h-4 mr-2" />
+                    클립보드 복사
+                  </Button>
+                </div>
+              </Card>
             </div>
           </TabsContent>
 
