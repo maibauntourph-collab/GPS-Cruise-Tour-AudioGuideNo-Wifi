@@ -46,6 +46,7 @@ The application is built with a React frontend and an Express.js backend, commun
 
 **System Design Choices:**
 - **Frontend Framework:** React 18 with TypeScript, TanStack React Query, Tailwind CSS with Shadcn UI, and Wouter for routing.
+- **Code Splitting:** Uses React.lazy() for route-based code splitting. Heavy components (Home, Admin, GuideView, TourLeaderView) are lazy loaded to reduce initial bundle size. Users accessing `/tour-leader` only download the necessary code.
 - **Backend Framework:** Express.js with Zod for validation.
 - **Database:** PostgreSQL (Neon serverless) with Drizzle ORM.
 - **Data Storage:** Hybrid approach using PostgreSQL for persistent data and in-memory storage for dynamic content.
