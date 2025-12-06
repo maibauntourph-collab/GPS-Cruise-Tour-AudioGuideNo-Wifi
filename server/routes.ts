@@ -5,7 +5,7 @@ import { insertVisitedLandmarkSchema } from "@shared/schema";
 import { generateLandmarkAudio, TTS_VOICES, VOICE_STYLES } from "./lib/openai";
 import { recommendTourItinerary } from "./lib/gemini";
 import { db } from "./db";
-import { cities, landmarks, dataVersions } from "@shared/schema";
+import { cities, landmarks, dataVersions, tourSchedules, groupMembers } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
 import multer from "multer";
@@ -1020,6 +1020,410 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error: any) {
       res.status(500).json({ error: error.message || "Failed to batch generate audio" });
+    }
+  });
+
+  // =====================================================
+  // Tour Leader API - Schedules and Group Members CRUD
+  // =====================================================
+
+  // Get all schedules for a tour
+  app.get("/api/tour-leader/schedules", async (req, res) => {
+    try {
+      const tourId = (req.query.tourId as string) || 'default';
+      const schedules = await db.select()
+        .from(tourSchedules)
+        .where(eq(tourSchedules.tourId, tourId))
+        .orderBy(tourSchedules.orderIndex);
+      res.json(schedules);
+    } catch (error) {
+      console.error('Get schedules error:', error);
+      res.status(500).json({ error: "Failed to fetch schedules" });
+    }
+  });
+
+  // Create a new schedule
+  app.post("/api/tour-leader/schedules", async (req, res) => {
+    try {
+      const { tourId, time, location, duration, notes, orderIndex } = req.body;
+      
+      if (!time || !location) {
+        return res.status(400).json({ error: "Time and location are required" });
+      }
+
+      const [newSchedule] = await db.insert(tourSchedules).values({
+        tourId: tourId || 'default',
+        time,
+        location,
+        duration: duration || null,
+        notes: notes || null,
+        orderIndex: orderIndex || 0
+      }).returning();
+
+      res.status(201).json(newSchedule);
+    } catch (error) {
+      console.error('Create schedule error:', error);
+      res.status(500).json({ error: "Failed to create schedule" });
+    }
+  });
+
+  // Update a schedule
+  app.put("/api/tour-leader/schedules/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { time, location, duration, notes, orderIndex } = req.body;
+
+      const [updated] = await db.update(tourSchedules)
+        .set({
+          time,
+          location,
+          duration: duration || null,
+          notes: notes || null,
+          orderIndex: orderIndex ?? 0,
+          updatedAt: new Date()
+        })
+        .where(eq(tourSchedules.id, id))
+        .returning();
+
+      if (!updated) {
+        return res.status(404).json({ error: "Schedule not found" });
+      }
+
+      res.json(updated);
+    } catch (error) {
+      console.error('Update schedule error:', error);
+      res.status(500).json({ error: "Failed to update schedule" });
+    }
+  });
+
+  // Delete a schedule
+  app.delete("/api/tour-leader/schedules/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const [deleted] = await db.delete(tourSchedules).where(eq(tourSchedules.id, id)).returning();
+      
+      if (!deleted) {
+        return res.status(404).json({ error: "Schedule not found" });
+      }
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Delete schedule error:', error);
+      res.status(500).json({ error: "Failed to delete schedule" });
+    }
+  });
+
+  // Get all members for a tour
+  app.get("/api/tour-leader/members", async (req, res) => {
+    try {
+      const tourId = (req.query.tourId as string) || 'default';
+      const members = await db.select()
+        .from(groupMembers)
+        .where(eq(groupMembers.tourId, tourId))
+        .orderBy(groupMembers.name);
+      res.json(members);
+    } catch (error) {
+      console.error('Get members error:', error);
+      res.status(500).json({ error: "Failed to fetch members" });
+    }
+  });
+
+  // Create a new member
+  app.post("/api/tour-leader/members", async (req, res) => {
+    try {
+      const { tourId, name, phone, email, roomNumber, status, notes } = req.body;
+      
+      if (!name) {
+        return res.status(400).json({ error: "Name is required" });
+      }
+
+      const [newMember] = await db.insert(groupMembers).values({
+        tourId: tourId || 'default',
+        name,
+        phone: phone || null,
+        email: email || null,
+        roomNumber: roomNumber || null,
+        status: status || 'on-time',
+        notes: notes || null
+      }).returning();
+
+      res.status(201).json(newMember);
+    } catch (error) {
+      console.error('Create member error:', error);
+      res.status(500).json({ error: "Failed to create member" });
+    }
+  });
+
+  // Update a member
+  app.put("/api/tour-leader/members/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name, phone, email, roomNumber, status, notes } = req.body;
+
+      const [updated] = await db.update(groupMembers)
+        .set({
+          name,
+          phone: phone || null,
+          email: email || null,
+          roomNumber: roomNumber || null,
+          status: status || 'on-time',
+          notes: notes || null,
+          updatedAt: new Date()
+        })
+        .where(eq(groupMembers.id, id))
+        .returning();
+
+      if (!updated) {
+        return res.status(404).json({ error: "Member not found" });
+      }
+
+      res.json(updated);
+    } catch (error) {
+      console.error('Update member error:', error);
+      res.status(500).json({ error: "Failed to update member" });
+    }
+  });
+
+  // Update member status only
+  app.patch("/api/tour-leader/members/:id/status", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+
+      if (!status || !['on-time', 'late', 'absent'].includes(status)) {
+        return res.status(400).json({ error: "Valid status is required (on-time, late, absent)" });
+      }
+
+      const [updated] = await db.update(groupMembers)
+        .set({
+          status,
+          updatedAt: new Date()
+        })
+        .where(eq(groupMembers.id, id))
+        .returning();
+
+      if (!updated) {
+        return res.status(404).json({ error: "Member not found" });
+      }
+
+      res.json(updated);
+    } catch (error) {
+      console.error('Update member status error:', error);
+      res.status(500).json({ error: "Failed to update member status" });
+    }
+  });
+
+  // Delete a member
+  app.delete("/api/tour-leader/members/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const [deleted] = await db.delete(groupMembers).where(eq(groupMembers.id, id)).returning();
+      
+      if (!deleted) {
+        return res.status(404).json({ error: "Member not found" });
+      }
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Delete member error:', error);
+      res.status(500).json({ error: "Failed to delete member" });
+    }
+  });
+
+  // Export schedules to Excel
+  app.get("/api/tour-leader/export/schedules", async (req, res) => {
+    try {
+      const tourId = (req.query.tourId as string) || 'default';
+      const format = (req.query.format as string) || 'xlsx';
+      
+      const schedules = await db.select()
+        .from(tourSchedules)
+        .where(eq(tourSchedules.tourId, tourId))
+        .orderBy(tourSchedules.orderIndex);
+
+      const data = schedules.map((s, idx) => ({
+        '순서': idx + 1,
+        '시간': s.time,
+        '장소': s.location,
+        '소요시간': s.duration || '',
+        '메모': s.notes || ''
+      }));
+
+      if (format === 'csv') {
+        const header = Object.keys(data[0] || {}).join(',');
+        const rows = data.map(row => Object.values(row).map(v => `"${v}"`).join(','));
+        const csv = [header, ...rows].join('\n');
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', `attachment; filename="tour_schedule_${tourId}.csv"`);
+        res.send('\uFEFF' + csv); // BOM for Korean Excel
+      } else {
+        const XLSX = await import('xlsx');
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Schedule');
+        const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', `attachment; filename="tour_schedule_${tourId}.xlsx"`);
+        res.send(buffer);
+      }
+    } catch (error) {
+      console.error('Export schedules error:', error);
+      res.status(500).json({ error: "Failed to export schedules" });
+    }
+  });
+
+  // Export members to Excel
+  app.get("/api/tour-leader/export/members", async (req, res) => {
+    try {
+      const tourId = (req.query.tourId as string) || 'default';
+      const format = (req.query.format as string) || 'xlsx';
+      
+      const members = await db.select()
+        .from(groupMembers)
+        .where(eq(groupMembers.tourId, tourId))
+        .orderBy(groupMembers.name);
+
+      const statusMap: Record<string, string> = { 'on-time': '정시', 'late': '지연', 'absent': '결석' };
+      const data = members.map((m, idx) => ({
+        '번호': idx + 1,
+        '이름': m.name,
+        '전화번호': m.phone || '',
+        '이메일': m.email || '',
+        '객실번호': m.roomNumber || '',
+        '상태': statusMap[m.status] || m.status,
+        '메모': m.notes || ''
+      }));
+
+      if (format === 'csv') {
+        const header = Object.keys(data[0] || {}).join(',');
+        const rows = data.map(row => Object.values(row).map(v => `"${v}"`).join(','));
+        const csv = [header, ...rows].join('\n');
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', `attachment; filename="group_members_${tourId}.csv"`);
+        res.send('\uFEFF' + csv);
+      } else {
+        const XLSX = await import('xlsx');
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Members');
+        const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', `attachment; filename="group_members_${tourId}.xlsx"`);
+        res.send(buffer);
+      }
+    } catch (error) {
+      console.error('Export members error:', error);
+      res.status(500).json({ error: "Failed to export members" });
+    }
+  });
+
+  // Import schedules from Excel/CSV
+  app.post("/api/tour-leader/import/schedules", upload.single('file'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      const tourId = (req.body.tourId as string) || 'default';
+      const XLSX = await import('xlsx');
+      const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+      const sheetName = workbook.SheetNames[0];
+      const data: any[] = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+      let imported = 0;
+      const errors: { row: number; message: string }[] = [];
+
+      for (let i = 0; i < data.length; i++) {
+        const row = data[i];
+        try {
+          const time = row['시간'] || row['time'] || row['Time'];
+          const location = row['장소'] || row['location'] || row['Location'];
+          
+          if (!time || !location) {
+            errors.push({ row: i + 2, message: 'Missing time or location' });
+            continue;
+          }
+
+          await db.insert(tourSchedules).values({
+            tourId,
+            time: String(time),
+            location: String(location),
+            duration: row['소요시간'] || row['duration'] || null,
+            notes: row['메모'] || row['notes'] || null,
+            orderIndex: i
+          });
+          imported++;
+        } catch (err: any) {
+          errors.push({ row: i + 2, message: err.message });
+        }
+      }
+
+      res.json({
+        success: true,
+        imported,
+        total: data.length,
+        errors: errors.length > 0 ? errors : undefined
+      });
+    } catch (error) {
+      console.error('Import schedules error:', error);
+      res.status(500).json({ error: "Failed to import schedules" });
+    }
+  });
+
+  // Import members from Excel/CSV
+  app.post("/api/tour-leader/import/members", upload.single('file'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      const tourId = (req.body.tourId as string) || 'default';
+      const XLSX = await import('xlsx');
+      const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+      const sheetName = workbook.SheetNames[0];
+      const data: any[] = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+      const statusMap: Record<string, string> = { '정시': 'on-time', '지연': 'late', '결석': 'absent' };
+      let imported = 0;
+      const errors: { row: number; message: string }[] = [];
+
+      for (let i = 0; i < data.length; i++) {
+        const row = data[i];
+        try {
+          const name = row['이름'] || row['name'] || row['Name'];
+          
+          if (!name) {
+            errors.push({ row: i + 2, message: 'Missing name' });
+            continue;
+          }
+
+          const statusValue = row['상태'] || row['status'] || 'on-time';
+          const mappedStatus = statusMap[statusValue] || statusValue;
+
+          await db.insert(groupMembers).values({
+            tourId,
+            name: String(name),
+            phone: row['전화번호'] || row['phone'] || null,
+            email: row['이메일'] || row['email'] || null,
+            roomNumber: row['객실번호'] || row['roomNumber'] || null,
+            status: ['on-time', 'late', 'absent'].includes(mappedStatus) ? mappedStatus : 'on-time',
+            notes: row['메모'] || row['notes'] || null
+          });
+          imported++;
+        } catch (err: any) {
+          errors.push({ row: i + 2, message: err.message });
+        }
+      }
+
+      res.json({
+        success: true,
+        imported,
+        total: data.length,
+        errors: errors.length > 0 ? errors : undefined
+      });
+    } catch (error) {
+      console.error('Import members error:', error);
+      res.status(500).json({ error: "Failed to import members" });
     }
   });
 
