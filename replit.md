@@ -37,6 +37,7 @@ The application is built with a React frontend and an Express.js backend, commun
 - **Cruise Port Transportation Options:** For cities with cruise Ports, detailed transportation information with deep links for booking and rideshare apps is provided.
 - **AI Tour Recommendations:** Integrates OpenAI gpt-4o-mini for intelligent, category-based tour itinerary suggestions based on geographical proximity and variety.
 - **Tour Leader Mode:** Dedicated interface for managing group tours with schedule and member CRUD, status dashboard, Excel import/export, and progress report sharing via Web Share API.
+- **Landmark Creation (Guide & Tour Leader):** Both Guide (/guide) and Tour Leader (/tour-leader) views have the ability to add new landmarks, activities, restaurants, and gift shops. Uses shared LandmarkFormDialog component with Korean UI. Data persists to PostgreSQL via POST /api/admin/landmarks endpoint. MemStorage.getLandmarks() merges hardcoded data with DB records for real-time visibility.
 
 **API Endpoints:**
 - `/api/cities`, `/api/landmarks`, `/api/visited`
