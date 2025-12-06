@@ -77,12 +77,13 @@ export default function LandmarkDetailDialog({
     } else {
       const audioMode = audioService.getAudioMode();
       
-      // For CLOVA mode, use CLOVA TTS (no sentence highlighting)
+      // For CLOVA mode, use CLOVA TTS with sentence-by-sentence highlighting
       if (audioMode === 'clova') {
         setIsPlaying(true);
-        const success = await audioService.playClovaTTS(
+        const success = await audioService.playClovaSentences(
           detailedDescription,
           selectedLanguage,
+          (index) => setCurrentSentenceIndex(index),
           () => {
             setIsPlaying(false);
             setCurrentSentenceIndex(-1);

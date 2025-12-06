@@ -535,7 +535,199 @@ class AudioService {
     this.sentenceIndex = 0;
     this.onSentenceChange = null;
     this.onSentenceEnd = null;
+    this.stopClovaSentences();
     this.stop();
+  }
+
+  // ==================== CLOVA Sentence-by-Sentence Methods ====================
+  
+  private clovaSentenceMode: boolean = false;
+  private clovaSentences: string[] = [];
+  private clovaSentenceIndex: number = 0;
+  private clovaSentenceLanguage: string = 'ko';
+  private onClovaSentenceChange: ((index: number) => void) | null = null;
+  private onClovaSentenceEnd: (() => void) | null = null;
+  private clovaAbortController: AbortController | null = null;
+  private clovaSessionId: number = 0;
+
+  async playClovaSentences(
+    text: string,
+    language: string = 'ko',
+    onSentenceChange?: (index: number) => void,
+    onEnd?: () => void
+  ): Promise<boolean> {
+    // Stop any existing playback
+    this.stopClovaSentences();
+    this.stopMP3();
+    this.stop();
+
+    // Split into sentences
+    this.clovaSentences = this.splitIntoSentences(text);
+    if (this.clovaSentences.length === 0) {
+      return false;
+    }
+
+    this.clovaSentenceIndex = 0;
+    this.clovaSentenceLanguage = language;
+    this.clovaSentenceMode = true;
+    this.onClovaSentenceChange = onSentenceChange || null;
+    this.onClovaSentenceEnd = onEnd || null;
+    this.clovaSessionId++;
+
+    // Notify first sentence
+    if (this.onClovaSentenceChange) {
+      this.onClovaSentenceChange(0);
+    }
+
+    // Start playing first sentence
+    this.playNextClovaSentence(this.clovaSessionId);
+    return true;
+  }
+
+  private async playNextClovaSentence(sessionId: number): Promise<void> {
+    // Guard: check if session is still valid
+    if (sessionId !== this.clovaSessionId || !this.clovaSentenceMode) {
+      return;
+    }
+
+    if (this.clovaSentenceIndex >= this.clovaSentences.length) {
+      // All sentences done
+      this.clovaSentenceMode = false;
+      if (this.onClovaSentenceEnd) {
+        this.onClovaSentenceEnd();
+      }
+      this.onClovaSentenceChange = null;
+      this.onClovaSentenceEnd = null;
+      return;
+    }
+
+    const sentence = this.clovaSentences[this.clovaSentenceIndex];
+    const voiceId = this.getSelectedClovaVoice(this.clovaSentenceLanguage);
+    const currentSessionId = this.clovaSessionId;
+
+    try {
+      // Create abort controller for this fetch
+      this.clovaAbortController = new AbortController();
+
+      const response = await fetch('/api/tts/clova/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: sentence,
+          language: this.clovaSentenceLanguage,
+          voice: voiceId,
+          speed: 0,
+          pitch: 0,
+          volume: 0
+        }),
+        signal: this.clovaAbortController.signal
+      });
+
+      // Check if still valid after async operation
+      if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) {
+        return;
+      }
+
+      if (!response.ok) {
+        console.error('[AudioService] CLOVA sentence TTS error:', response.status);
+        // Try next sentence anyway
+        this.clovaSentenceIndex++;
+        if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
+          this.onClovaSentenceChange(this.clovaSentenceIndex);
+        }
+        this.playNextClovaSentence(currentSessionId);
+        return;
+      }
+
+      const audioBlob = await response.blob();
+      
+      // Check again after getting blob
+      if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) {
+        return;
+      }
+
+      const objectUrl = URL.createObjectURL(audioBlob);
+
+      // Stop previous audio element if exists
+      if (this.audioElement) {
+        this.audioElement.pause();
+        this.audioElement.onended = null;
+        this.audioElement.onerror = null;
+        this.audioElement.src = '';
+      }
+
+      this.audioElement = new Audio(objectUrl);
+      
+      this.audioElement.onended = () => {
+        URL.revokeObjectURL(objectUrl);
+        // Guard against stale callbacks
+        if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
+        
+        this.clovaSentenceIndex++;
+        if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
+          this.onClovaSentenceChange(this.clovaSentenceIndex);
+        }
+        this.playNextClovaSentence(currentSessionId);
+      };
+
+      this.audioElement.onerror = () => {
+        URL.revokeObjectURL(objectUrl);
+        console.error('[AudioService] Error playing CLOVA sentence');
+        // Guard against stale callbacks
+        if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
+        
+        // Try next sentence
+        this.clovaSentenceIndex++;
+        if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
+          this.onClovaSentenceChange(this.clovaSentenceIndex);
+        }
+        this.playNextClovaSentence(currentSessionId);
+      };
+
+      await this.audioElement.play();
+      console.log(`[AudioService] Playing CLOVA sentence ${this.clovaSentenceIndex + 1}/${this.clovaSentences.length}`);
+    } catch (error: any) {
+      // Ignore abort errors
+      if (error?.name === 'AbortError') {
+        return;
+      }
+      console.error('[AudioService] CLOVA sentence error:', error);
+      
+      // Guard against stale callbacks
+      if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
+      
+      // Try next sentence
+      this.clovaSentenceIndex++;
+      if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
+        this.onClovaSentenceChange(this.clovaSentenceIndex);
+      }
+      this.playNextClovaSentence(currentSessionId);
+    }
+  }
+
+  stopClovaSentences() {
+    // Increment session ID to invalidate any pending operations
+    this.clovaSessionId++;
+    this.clovaSentenceMode = false;
+    this.clovaSentences = [];
+    this.clovaSentenceIndex = 0;
+    this.onClovaSentenceChange = null;
+    this.onClovaSentenceEnd = null;
+    
+    // Abort any pending fetch
+    if (this.clovaAbortController) {
+      this.clovaAbortController.abort();
+      this.clovaAbortController = null;
+    }
+    
+    // Stop and cleanup audio element
+    if (this.audioElement) {
+      this.audioElement.pause();
+      this.audioElement.onended = null;
+      this.audioElement.onerror = null;
+      this.audioElement.src = '';
+      this.audioElement = null;
+    }
   }
 
   // ==================== MP3 Audio Methods ====================
