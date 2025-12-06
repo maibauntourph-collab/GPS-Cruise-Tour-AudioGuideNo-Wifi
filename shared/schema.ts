@@ -243,6 +243,33 @@ export const landmarkAudioRelations = relations(landmarkAudio, ({ one }) => ({
   }),
 }));
 
+// Tour Leader: Schedule table for tour itineraries
+export const tourSchedules = pgTable("tour_schedules", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  tourId: varchar("tour_id").notNull(), // Group tour identifier
+  time: varchar("time").notNull(), // e.g., "09:00"
+  location: varchar("location").notNull(),
+  duration: varchar("duration"), // e.g., "30분", "1 hour"
+  notes: text("notes"),
+  orderIndex: integer("order_index").notNull().default(0), // For ordering
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// Tour Leader: Group members table
+export const groupMembers = pgTable("group_members", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  tourId: varchar("tour_id").notNull(), // Group tour identifier
+  name: varchar("name").notNull(),
+  phone: varchar("phone"),
+  email: varchar("email"),
+  roomNumber: varchar("room_number"), // Hotel room number
+  status: varchar("status").notNull().default("on-time"), // 'on-time', 'late', 'absent'
+  notes: text("notes"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
 // Insert schemas
 export const insertCitySchema = createInsertSchema(cities).omit({
   createdAt: true,
@@ -265,11 +292,27 @@ export const insertLandmarkAudioSchema = createInsertSchema(landmarkAudio).omit(
   updatedAt: true,
 });
 
+export const insertTourScheduleSchema = createInsertSchema(tourSchedules).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertGroupMemberSchema = createInsertSchema(groupMembers).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type InsertCity = z.infer<typeof insertCitySchema>;
 export type InsertLandmark = z.infer<typeof insertLandmarkSchema>;
 export type InsertVisitedLandmark = z.infer<typeof insertVisitedLandmarkSchema>;
 export type InsertLandmarkAudio = z.infer<typeof insertLandmarkAudioSchema>;
+export type InsertTourSchedule = z.infer<typeof insertTourScheduleSchema>;
+export type InsertGroupMember = z.infer<typeof insertGroupMemberSchema>;
 export type VisitedLandmark = typeof visitedLandmarks.$inferSelect;
 export type LandmarkAudio = typeof landmarkAudio.$inferSelect;
+export type TourSchedule = typeof tourSchedules.$inferSelect;
+export type GroupMember = typeof groupMembers.$inferSelect;
 export type DbCity = typeof cities.$inferSelect;
 export type DbLandmark = typeof landmarks.$inferSelect;
