@@ -13,9 +13,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { 
   ArrowLeft, Users, Clock, CheckCircle, MapPin, Plus, Pencil, Trash2, 
-  Download, Upload, FileSpreadsheet, Loader2, Phone, Mail, Home, Share2, Copy, MessageCircle
+  Download, Upload, FileSpreadsheet, Loader2, Phone, Mail, Home, Share2, Copy, MessageCircle,
+  Utensils, Gift, Activity
 } from "lucide-react";
-import type { TourSchedule, GroupMember } from "@shared/schema";
+import { LandmarkFormDialog } from "@/components/LandmarkFormDialog";
+import type { TourSchedule, GroupMember, DbCity, DbLandmark } from "@shared/schema";
 
 export default function TourLeaderView() {
   const [, setLocation] = useLocation();
@@ -39,6 +41,10 @@ export default function TourLeaderView() {
 
   // Delete confirmation
   const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'schedule' | 'member'; id: string; name: string } | null>(null);
+
+  // Landmark add state
+  const [isLandmarkDialogOpen, setIsLandmarkDialogOpen] = useState(false);
+  const [selectedLandmarkCategory, setSelectedLandmarkCategory] = useState<string>("");
 
   // Fetch schedules
   const { data: schedules = [], isLoading: loadingSchedules, error: schedulesError } = useQuery<TourSchedule[]>({
@@ -65,6 +71,32 @@ export default function TourLeaderView() {
       return res.json();
     }
   });
+
+  // Fetch cities for landmark creation
+  const { data: cities = [] } = useQuery<DbCity[]>({
+    queryKey: ['/api/cities'],
+    queryFn: async () => {
+      const res = await fetch('/api/cities');
+      if (!res.ok) throw new Error('Failed to fetch cities');
+      return res.json();
+    }
+  });
+
+  // Landmark creation mutation
+  const createLandmarkMutation = useMutation({
+    mutationFn: (data: Partial<DbLandmark>) => apiRequest('POST', '/api/landmarks', data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/landmarks'] });
+      setIsLandmarkDialogOpen(false);
+      toast({ title: '장소가 추가되었습니다' });
+    },
+    onError: () => toast({ title: '장소 추가 실패', variant: 'destructive' })
+  });
+
+  const openLandmarkDialog = (category: string) => {
+    setSelectedLandmarkCategory(category);
+    setIsLandmarkDialogOpen(true);
+  };
 
   // Schedule mutations
   const createScheduleMutation = useMutation({
@@ -250,14 +282,18 @@ export default function TourLeaderView() {
       {/* Main Content */}
       <div className="flex-1 overflow-auto p-4">
         <Tabs defaultValue="members" className="w-full">
-          <TabsList className="grid w-full grid-cols-4" data-testid="tabs-leader-navigation">
+          <TabsList className="grid w-full grid-cols-5" data-testid="tabs-leader-navigation">
             <TabsTrigger value="members" data-testid="tab-members">
               <Users className="w-4 h-4 mr-2" />
-              그룹 멤버 ({members.length})
+              멤버 ({members.length})
             </TabsTrigger>
             <TabsTrigger value="schedule" data-testid="tab-schedule">
               <Clock className="w-4 h-4 mr-2" />
               일정표 ({schedules.length})
+            </TabsTrigger>
+            <TabsTrigger value="add-place" data-testid="tab-add-place">
+              <MapPin className="w-4 h-4 mr-2" />
+              장소 추가
             </TabsTrigger>
             <TabsTrigger value="status" data-testid="tab-status">
               <CheckCircle className="w-4 h-4 mr-2" />
@@ -406,6 +442,59 @@ export default function TourLeaderView() {
                 ))}
               </div>
             )}
+          </TabsContent>
+
+          {/* Add Place Tab */}
+          <TabsContent value="add-place" className="mt-4">
+            <Card className="p-6">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                새로운 장소 추가하기
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                관광 코스에 명소, 액티비티, 식당, 기념품 가게를 직접 추가할 수 있습니다.
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Card 
+                  className="p-6 text-center hover-elevate cursor-pointer border-2 border-terracotta-200 dark:border-terracotta-800"
+                  onClick={() => openLandmarkDialog("Monuments")}
+                  data-testid="button-add-landmark-leader"
+                >
+                  <MapPin className="w-8 h-8 mx-auto mb-2 text-terracotta-600" />
+                  <p className="font-semibold text-gray-900 dark:text-white">명소</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">관광 명소 추가</p>
+                </Card>
+                <Card 
+                  className="p-6 text-center hover-elevate cursor-pointer border-2 border-blue-200 dark:border-blue-800"
+                  onClick={() => openLandmarkDialog("Activity")}
+                  data-testid="button-add-activity-leader"
+                >
+                  <Activity className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+                  <p className="font-semibold text-gray-900 dark:text-white">액티비티</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">체험 활동 추가</p>
+                </Card>
+                <Card 
+                  className="p-6 text-center hover-elevate cursor-pointer border-2 border-orange-200 dark:border-orange-800"
+                  onClick={() => openLandmarkDialog("Restaurant")}
+                  data-testid="button-add-restaurant-leader"
+                >
+                  <Utensils className="w-8 h-8 mx-auto mb-2 text-orange-600" />
+                  <p className="font-semibold text-gray-900 dark:text-white">식당</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">맛집 추가</p>
+                </Card>
+                <Card 
+                  className="p-6 text-center hover-elevate cursor-pointer border-2 border-yellow-200 dark:border-yellow-800"
+                  onClick={() => openLandmarkDialog("Gift Shop")}
+                  data-testid="button-add-giftshop-leader"
+                >
+                  <Gift className="w-8 h-8 mx-auto mb-2 text-yellow-600" />
+                  <p className="font-semibold text-gray-900 dark:text-white">기념품 가게</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">쇼핑 장소 추가</p>
+                </Card>
+              </div>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 text-center">
+                추가된 장소는 지도에 바로 표시됩니다
+              </p>
+            </Card>
           </TabsContent>
 
           {/* Status Tab */}
@@ -811,6 +900,17 @@ ${members.filter(m => m.status !== 'on-time').map(m => `• ${m.name} (${statusL
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Landmark Form Dialog */}
+      <LandmarkFormDialog
+        isOpen={isLandmarkDialogOpen}
+        onClose={() => setIsLandmarkDialogOpen(false)}
+        landmark={null}
+        cities={cities}
+        onSave={(data) => createLandmarkMutation.mutate(data)}
+        isPending={createLandmarkMutation.isPending}
+        defaultCategory={selectedLandmarkCategory}
+      />
     </div>
   );
 }
