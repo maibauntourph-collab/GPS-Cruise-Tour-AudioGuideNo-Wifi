@@ -84,7 +84,7 @@ export default function TourLeaderView() {
 
   // Landmark creation mutation
   const createLandmarkMutation = useMutation({
-    mutationFn: (data: Partial<DbLandmark>) => apiRequest('POST', '/api/landmarks', data),
+    mutationFn: (data: Partial<DbLandmark>) => apiRequest('POST', '/api/admin/landmarks', data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/landmarks'] });
       setIsLandmarkDialogOpen(false);

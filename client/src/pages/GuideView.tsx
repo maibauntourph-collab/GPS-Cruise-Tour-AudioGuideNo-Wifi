@@ -27,7 +27,7 @@ export default function GuideView() {
 
   const createMutation = useMutation({
     mutationFn: async (data: Partial<DbLandmark>) => {
-      return apiRequest('POST', '/api/landmarks', data);
+      return apiRequest('POST', '/api/admin/landmarks', data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/landmarks'] });

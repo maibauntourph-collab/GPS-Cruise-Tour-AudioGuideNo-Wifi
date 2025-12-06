@@ -1,7 +1,7 @@
 import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio } from "@shared/schema";
 import { db } from "./db";
-import { visitedLandmarks, landmarkAudio as landmarkAudioTable } from "@shared/schema";
-import { eq, count, and, sql } from "drizzle-orm";
+import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable } from "@shared/schema";
+import { eq, count, and, sql, notInArray } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
 
 export interface IStorage {
@@ -7800,16 +7800,48 @@ export class MemStorage implements IStorage {
   }
 
   async getLandmarks(cityId?: string): Promise<Landmark[]> {
-    const allLandmarks = [...LANDMARKS, ...RESTAURANTS];
-    if (cityId) {
-      return allLandmarks.filter(landmark => landmark.cityId === cityId);
+    // Get hardcoded landmarks and restaurants
+    const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
+    const hardcodedIds = hardcodedLandmarks.map(l => l.id);
+    
+    // Get additional landmarks from database (ones not in hardcoded data)
+    try {
+      let dbLandmarks: Landmark[] = [];
+      if (hardcodedIds.length > 0) {
+        dbLandmarks = await db.select().from(landmarksTable).where(notInArray(landmarksTable.id, hardcodedIds)) as Landmark[];
+      } else {
+        dbLandmarks = await db.select().from(landmarksTable) as Landmark[];
+      }
+      
+      // Combine both sources
+      const allLandmarks = [...hardcodedLandmarks, ...dbLandmarks];
+      
+      if (cityId) {
+        return allLandmarks.filter(landmark => landmark.cityId === cityId);
+      }
+      return allLandmarks;
+    } catch (error) {
+      // If DB query fails, fall back to hardcoded data
+      if (cityId) {
+        return hardcodedLandmarks.filter(landmark => landmark.cityId === cityId);
+      }
+      return hardcodedLandmarks;
     }
-    return allLandmarks;
   }
 
   async getLandmark(id: string): Promise<Landmark | undefined> {
-    const allLandmarks = [...LANDMARKS, ...RESTAURANTS];
-    return allLandmarks.find(landmark => landmark.id === id);
+    // First check hardcoded data
+    const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
+    const found = hardcodedLandmarks.find(landmark => landmark.id === id);
+    if (found) return found;
+    
+    // If not found, check database
+    try {
+      const [dbLandmark] = await db.select().from(landmarksTable).where(eq(landmarksTable.id, id));
+      return dbLandmark as Landmark;
+    } catch {
+      return undefined;
+    }
   }
 
   // Visited landmarks methods - using database
