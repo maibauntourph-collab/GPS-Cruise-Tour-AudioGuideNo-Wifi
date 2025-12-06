@@ -40,14 +40,27 @@ export default function LandmarkDetailDialog({
     return audioService.splitIntoSentences(description);
   }, [landmark, selectedLanguage]);
 
-  // Reset sentence index when dialog closes or landmark changes
+  // Stop all audio and reset state when dialog closes or landmark changes
   useEffect(() => {
     if (!isOpen) {
       setCurrentSentenceIndex(-1);
       setIsPlaying(false);
+      // Stop all types of audio
       audioService.stopSentences();
+      audioService.stop();
+      audioService.stopMP3();
     }
   }, [isOpen, landmark]);
+
+  // Handle dialog close - stop all audio first
+  const handleDialogClose = () => {
+    setCurrentSentenceIndex(-1);
+    setIsPlaying(false);
+    audioService.stopSentences();
+    audioService.stop();
+    audioService.stopMP3();
+    onClose();
+  };
 
   if (!landmark) return null;
 
@@ -106,7 +119,7 @@ export default function LandmarkDetailDialog({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleDialogClose}>
       <DialogContent className="max-w-6xl w-[90vw] h-[90vh] p-0 gap-0 overflow-hidden">
         <DialogHeader className="p-4 pb-3 border-b flex-shrink-0">
           <div>

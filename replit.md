@@ -51,6 +51,30 @@ The application is built with a React frontend and an Express.js backend, commun
 - **Data Storage:** Hybrid approach using PostgreSQL for persistent data and in-memory storage for dynamic content.
 - **Session Management:** LocalStorage for session IDs and user preferences.
 
+## Deployment Safety (배포 시 데이터 보호)
+
+**중요: 배포 시 데이터베이스 데이터는 자동으로 보존됩니다.**
+
+**데이터 아키텍처:**
+- **하드코딩된 데이터** (storage.ts): 기본 CITIES, LANDMARKS, RESTAURANTS - 메모리에 항상 로드
+- **데이터베이스 데이터** (PostgreSQL): 관리자가 추가한 도시/랜드마크 - 배포 시에도 보존됨
+
+**보호 메커니즘:**
+1. `npm run db:push` - 스키마만 동기화, 기존 데이터 삭제 안 함
+2. `getLandmarks()` - 하드코딩 + DB 데이터 병합 (덮어쓰기 없음)
+3. Admin API - 중복 ID 시 409 에러 반환 (자동 덮어쓰기 방지)
+4. 서버 시작 시 자동 시딩 없음 - 데이터 삽입 로직 없음
+
+**배포 절차:**
+1. `npm run build` - 프론트엔드/백엔드 빌드
+2. `npm run db:push` - 스키마 변경 시에만 실행 (데이터 보존)
+3. `npm start` - 프로덕션 서버 시작
+
+**주의사항:**
+- 하드코딩된 데이터를 수정하면 모든 환경에 영향
+- DB에 추가한 랜드마크는 ID가 하드코딩 ID와 겹치지 않는 한 안전함
+- 백업: 정기적으로 `/api/admin/export` 엔드포인트로 데이터 백업 권장
+
 ## External Dependencies
 
 - **Mapping:** React-Leaflet, Leaflet, OpenStreetMap, Leaflet Routing Machine, Google Maps (external navigation).
