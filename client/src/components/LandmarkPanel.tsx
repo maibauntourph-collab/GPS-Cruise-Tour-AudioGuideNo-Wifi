@@ -153,7 +153,7 @@ export default function LandmarkPanel({
     onNavigate(landmark);
   };
 
-  const handlePlayPause = () => {
+  const handlePlayPause = async () => {
     const detailedText = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
     
     if (!detailedText) {
@@ -165,12 +165,30 @@ export default function LandmarkPanel({
         audioService.resumeSpeech();
       } else {
         audioService.pauseSpeech();
+        audioService.stop();
+        audioService.stopMP3();
+        setIsPlaying(false);
       }
     } else {
-      audioService.playText(detailedText, selectedLanguage, playbackRate, () => {
-        setIsPlaying(false);
-      });
-      setIsPlaying(true);
+      const audioMode = audioService.getAudioMode();
+      
+      if (audioMode === 'clova') {
+        setIsPlaying(true);
+        const success = await audioService.playClovaTTS(detailedText, selectedLanguage, () => {
+          setIsPlaying(false);
+        });
+        if (!success) {
+          // Fallback to system TTS
+          audioService.playText(detailedText, selectedLanguage, playbackRate, () => {
+            setIsPlaying(false);
+          });
+        }
+      } else {
+        audioService.playText(detailedText, selectedLanguage, playbackRate, () => {
+          setIsPlaying(false);
+        });
+        setIsPlaying(true);
+      }
     }
   };
 
@@ -179,7 +197,9 @@ export default function LandmarkPanel({
     setPlaybackRate(newRate);
     audioService.setRate(newRate);
     
-    if (isPlaying && !audioService.isPaused()) {
+    // Rate change only works for non-CLOVA modes
+    const audioMode = audioService.getAudioMode();
+    if (audioMode !== 'clova' && isPlaying && !audioService.isPaused()) {
       const detailedText = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
       if (detailedText) {
         audioService.playText(detailedText, selectedLanguage, newRate, () => {

@@ -51,27 +51,57 @@ export default function LandmarkDetailDialog({
 
   if (!landmark) return null;
 
-  const handlePlayAudio = () => {
+  const handlePlayAudio = async () => {
     const detailedDescription = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
     if (!detailedDescription) return;
 
     if (isPlaying) {
       audioService.stopSentences();
+      audioService.stop();
+      audioService.stopMP3();
       setIsPlaying(false);
       setCurrentSentenceIndex(-1);
     } else {
-      // Use sentence-by-sentence playback with highlighting
-      audioService.playSentences(
-        detailedDescription, 
-        selectedLanguage, 
-        playbackRate, 
-        (index) => setCurrentSentenceIndex(index),
-        () => {
-          setIsPlaying(false);
-          setCurrentSentenceIndex(-1);
+      const audioMode = audioService.getAudioMode();
+      
+      // For CLOVA mode, use CLOVA TTS (no sentence highlighting)
+      if (audioMode === 'clova') {
+        setIsPlaying(true);
+        const success = await audioService.playClovaTTS(
+          detailedDescription,
+          selectedLanguage,
+          () => {
+            setIsPlaying(false);
+            setCurrentSentenceIndex(-1);
+          }
+        );
+        if (!success) {
+          // Fallback to system TTS if CLOVA fails
+          audioService.playSentences(
+            detailedDescription, 
+            selectedLanguage, 
+            playbackRate, 
+            (index) => setCurrentSentenceIndex(index),
+            () => {
+              setIsPlaying(false);
+              setCurrentSentenceIndex(-1);
+            }
+          );
         }
-      );
-      setIsPlaying(true);
+      } else {
+        // Use sentence-by-sentence playback with highlighting for TTS/Auto/MP3 modes
+        audioService.playSentences(
+          detailedDescription, 
+          selectedLanguage, 
+          playbackRate, 
+          (index) => setCurrentSentenceIndex(index),
+          () => {
+            setIsPlaying(false);
+            setCurrentSentenceIndex(-1);
+          }
+        );
+        setIsPlaying(true);
+      }
     }
   };
 
@@ -160,7 +190,7 @@ export default function LandmarkDetailDialog({
                       {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                       {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
                     </Button>
-                    {isPlaying && (
+                    {isPlaying && audioService.getAudioMode() !== 'clova' && (
                       <select
                         value={playbackRate}
                         onChange={(e) => {
@@ -169,7 +199,16 @@ export default function LandmarkDetailDialog({
                           audioService.setRate(rate);
                           const detailedDescription = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
                           if (detailedDescription) {
-                            audioService.playText(detailedDescription, selectedLanguage, rate, () => setIsPlaying(false));
+                            audioService.playSentences(
+                              detailedDescription, 
+                              selectedLanguage, 
+                              rate, 
+                              (index) => setCurrentSentenceIndex(index),
+                              () => {
+                                setIsPlaying(false);
+                                setCurrentSentenceIndex(-1);
+                              }
+                            );
                           }
                         }}
                         className="px-2 py-1 text-sm border rounded"

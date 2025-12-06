@@ -529,20 +529,36 @@ export default function UnifiedFloatingCard({
     }, 100);
   };
 
-  const handlePlayAudio = () => {
+  const handlePlayAudio = async () => {
     if (!selectedLandmark) return;
     
     if (isPlaying) {
       audioService.stop();
+      audioService.stopMP3();
       setIsPlaying(false);
     } else {
       const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') || 
                    getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
       
-      audioService.playText(text, selectedLanguage, playbackRate, () => {
-        setIsPlaying(false);
-      });
-      setIsPlaying(true);
+      const audioMode = audioService.getAudioMode();
+      
+      if (audioMode === 'clova') {
+        setIsPlaying(true);
+        const success = await audioService.playClovaTTS(text, selectedLanguage, () => {
+          setIsPlaying(false);
+        });
+        if (!success) {
+          // Fallback to system TTS
+          audioService.playText(text, selectedLanguage, playbackRate, () => {
+            setIsPlaying(false);
+          });
+        }
+      } else {
+        audioService.playText(text, selectedLanguage, playbackRate, () => {
+          setIsPlaying(false);
+        });
+        setIsPlaying(true);
+      }
     }
   };
 
