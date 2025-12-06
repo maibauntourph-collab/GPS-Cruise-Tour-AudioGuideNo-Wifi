@@ -605,12 +605,16 @@ export default function UnifiedFloatingCard({
     const isInTour = tourStops.some(stop => stop.id === landmark.id);
     if (isInTour) return false;
     
-    // Filter by search query (case-insensitive, matches translated name)
+    // Filter by search query (case-insensitive, OR condition between words)
     if (landmarkSearchQuery.trim()) {
-      const searchLower = landmarkSearchQuery.toLowerCase().trim();
+      const searchWords = landmarkSearchQuery.toLowerCase().trim().split(/\s+/).filter(word => word.length > 0);
       const translatedName = getTranslatedContent(landmark, selectedLanguage, 'name').toLowerCase();
       const originalName = (landmark.name || '').toLowerCase();
-      if (!translatedName.includes(searchLower) && !originalName.includes(searchLower)) {
+      // OR condition: match if ANY word is found in either name
+      const hasMatch = searchWords.some(word => 
+        translatedName.includes(word) || originalName.includes(word)
+      );
+      if (!hasMatch) {
         return false;
       }
     }
