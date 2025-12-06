@@ -564,3 +564,42 @@
   border-top-color: rgba(255, 255, 255, 0.95) !important;
   border-bottom-color: transparent !important;
 }
+
+/* Starting Point and End Point Markers - High visibility */
+.starting-point-marker,
+.end-point-marker {
+  z-index: 2000 !important;
+  pointer-events: auto !important;
+}
+
+.starting-point-marker > div,
+.end-point-marker > div {
+  animation: markerPulse 2s ease-in-out infinite;
+}
+
+@keyframes markerPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Selected landmark flag marker */
+.selected-landmark-flag {
+  z-index: 2500 !important;
+  pointer-events: none !important;
+  animation: flagWave 1s ease-in-out infinite;
+}
+
+@keyframes flagWave {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}

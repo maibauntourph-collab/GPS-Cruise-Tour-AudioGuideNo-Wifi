@@ -131,6 +131,54 @@ const userLocationIcon = L.divIcon({
   iconAnchor: [10, 10],
 });
 
+// Flag icon for selected landmark
+const selectedFlagIcon = L.divIcon({
+  className: 'selected-landmark-flag',
+  html: `
+    <div data-testid="marker-selected-flag" style="
+      position: relative;
+      width: 40px;
+      height: 50px;
+    ">
+      <div style="
+        position: absolute;
+        left: 2px;
+        top: 0;
+        width: 4px;
+        height: 50px;
+        background: linear-gradient(180deg, #333 0%, #666 100%);
+        border-radius: 2px;
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      "></div>
+      <div style="
+        position: absolute;
+        left: 6px;
+        top: 0;
+        width: 30px;
+        height: 20px;
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        border-radius: 0 4px 4px 0;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+        animation: flagWave 1s ease-in-out infinite;
+        transform-origin: left center;
+      ">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin: 2px 7px;">
+          <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+        </svg>
+      </div>
+    </div>
+    <style>
+      @keyframes flagWave {
+        0%, 100% { transform: rotate(0deg) skewX(0deg); }
+        25% { transform: rotate(2deg) skewX(-2deg); }
+        75% { transform: rotate(-2deg) skewX(2deg); }
+      }
+    </style>
+  `,
+  iconSize: [40, 50],
+  iconAnchor: [4, 50],
+});
+
 interface RoutingMachineProps {
   start: [number, number] | null;
   end: [number, number] | null;
@@ -762,7 +810,7 @@ export default function MapView({
         <Marker
           position={[startingPoint.lat, startingPoint.lng]}
           icon={L.divIcon({
-            html: `<div style="
+            html: `<div data-testid="marker-starting-point" style="
               background: ${startingPoint.type === 'airport' ? '#0ea5e9' : startingPoint.type === 'cruise_terminal' ? '#14b8a6' : startingPoint.type === 'hotel' ? '#a855f7' : '#22c55e'};
               width: 32px;
               height: 32px;
@@ -802,7 +850,7 @@ export default function MapView({
         <Marker
           position={[endPoint.lat, endPoint.lng]}
           icon={L.divIcon({
-            html: `<div style="
+            html: `<div data-testid="marker-end-point" style="
               background: ${endPoint.type === 'airport' ? '#0ea5e9' : endPoint.type === 'cruise_terminal' ? '#14b8a6' : endPoint.type === 'hotel' ? '#a855f7' : '#ef4444'};
               width: 32px;
               height: 32px;
@@ -835,6 +883,15 @@ export default function MapView({
             </div>
           </Popup>
         </Marker>
+      )}
+
+      {/* Selected Landmark Flag Marker */}
+      {selectedLandmark && (
+        <Marker
+          position={[selectedLandmark.lat, selectedLandmark.lng]}
+          icon={selectedFlagIcon}
+          interactive={false}
+        />
       )}
 
     </MapContainer>
