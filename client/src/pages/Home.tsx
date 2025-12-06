@@ -219,7 +219,14 @@ export default function Home() {
 
       if (distance < landmark.radius && !audioService.isLandmarkSpoken(landmark.id)) {
         const narration = getTranslatedContent(landmark, selectedLanguage, 'narration');
-        audioService.speak(narration, landmark.id, selectedLanguage);
+        // Use playAuto to respect audio mode (CLOVA, MP3, TTS, Auto)
+        audioService.playAuto(
+          landmark.id,
+          narration,
+          selectedLanguage,
+          undefined, // audioUrl - not available in this context
+          () => setIsSpeaking(false)
+        );
         setSpokenLandmarks((prev) => new Set(prev).add(landmark.id));
         setIsSpeaking(true);
         
@@ -394,7 +401,8 @@ export default function Home() {
     if (audioEnabled) {
       // Remove test-audio id so it can be played again
       audioService.removeLandmark('test-audio');
-      audioService.speak(message, 'test-audio', selectedLanguage);
+      // Use playAuto to respect audio mode (CLOVA, MP3, TTS, Auto)
+      audioService.playAuto('test-audio', message, selectedLanguage);
     }
   };
 
