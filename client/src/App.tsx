@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import { Loader2 } from "lucide-react";
+import RoleSelection from "@/pages/RoleSelection";
 import NotFound from "@/pages/not-found";
 
 // Lazy load heavy components for code splitting
@@ -30,7 +31,8 @@ function Router() {
   return (
     <Suspense fallback={<PageLoader />}>
       <Switch>
-        <Route path="/" component={Home}/>
+        <Route path="/" component={RoleSelection}/>
+        <Route path="/home" component={Home}/>
         <Route path="/guide" component={GuideView}/>
         <Route path="/tour-leader" component={TourLeaderView}/>
         <Route path="/admin" component={Admin}/>

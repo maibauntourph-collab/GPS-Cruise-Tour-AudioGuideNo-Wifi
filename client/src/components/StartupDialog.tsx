@@ -5,7 +5,7 @@ import { MapPin, History, Navigation, Clock, Route } from 'lucide-react';
 import { Landmark, City } from '@shared/schema';
 import { getTranslatedContent } from '@/lib/translations';
 
-interface SavedTourData {
+export interface SavedTourData {
   cityId: string;
   cityName: string;
   tourStops: string[];
