@@ -41,19 +41,27 @@ export default function TourLeaderView() {
   const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'schedule' | 'member'; id: string; name: string } | null>(null);
 
   // Fetch schedules
-  const { data: schedules = [], isLoading: loadingSchedules } = useQuery<TourSchedule[]>({
+  const { data: schedules = [], isLoading: loadingSchedules, error: schedulesError } = useQuery<TourSchedule[]>({
     queryKey: ['/api/tour-leader/schedules', tourId],
     queryFn: async () => {
       const res = await fetch(`/api/tour-leader/schedules?tourId=${tourId}`);
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ error: 'Failed to fetch schedules' }));
+        throw new Error(errorData.error || 'Failed to fetch schedules');
+      }
       return res.json();
     }
   });
 
   // Fetch members
-  const { data: members = [], isLoading: loadingMembers } = useQuery<GroupMember[]>({
+  const { data: members = [], isLoading: loadingMembers, error: membersError } = useQuery<GroupMember[]>({
     queryKey: ['/api/tour-leader/members', tourId],
     queryFn: async () => {
       const res = await fetch(`/api/tour-leader/members?tourId=${tourId}`);
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ error: 'Failed to fetch members' }));
+        throw new Error(errorData.error || 'Failed to fetch members');
+      }
       return res.json();
     }
   });
