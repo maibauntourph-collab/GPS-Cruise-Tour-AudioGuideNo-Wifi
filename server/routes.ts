@@ -1023,6 +1023,101 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ========== CLOVA Voice TTS Routes ==========
+  
+  // Serve CLOVA audio files
+  app.use('/audio/clova', express.static(path.join(process.cwd(), 'public', 'audio', 'clova')));
+
+  // Get available CLOVA voices
+  app.get("/api/tts/clova/voices", async (req, res) => {
+    try {
+      const { CLOVA_VOICES, getClovaVoicesForLanguage, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
+      const language = req.query.language as string;
+      
+      if (language) {
+        const voicesForLang = getClovaVoicesForLanguage(language);
+        const voiceDetails = voicesForLang.map(id => ({
+          id,
+          ...CLOVA_VOICES[id]
+        }));
+        return res.json({ voices: voiceDetails, default: DEFAULT_CLOVA_VOICE_BY_LANGUAGE[language] || "nara" });
+      }
+      
+      res.json({ 
+        voices: CLOVA_VOICES, 
+        defaults: DEFAULT_CLOVA_VOICE_BY_LANGUAGE 
+      });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || "Failed to get CLOVA voices" });
+    }
+  });
+
+  // Generate CLOVA TTS audio (streaming)
+  app.post("/api/tts/clova/generate", async (req, res) => {
+    try {
+      const { generateClovaTTS, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
+      const { text, voice, language, speed, pitch, volume } = req.body;
+      
+      if (!text) {
+        return res.status(400).json({ error: "Text is required" });
+      }
+      
+      const selectedVoice = voice || DEFAULT_CLOVA_VOICE_BY_LANGUAGE[language || 'ko'] || 'nara';
+      const result = await generateClovaTTS(
+        text, 
+        selectedVoice,
+        speed || 0,
+        pitch || 0,
+        volume || 0
+      );
+      
+      res.set({
+        'Content-Type': result.contentType,
+        'Content-Length': result.audioBuffer.length,
+        'X-Voice-Id': result.voiceId
+      });
+      res.send(result.audioBuffer);
+    } catch (error: any) {
+      console.error('CLOVA TTS error:', error);
+      res.status(500).json({ error: error.message || "Failed to generate CLOVA TTS" });
+    }
+  });
+
+  // Generate and save CLOVA TTS for a landmark
+  app.post("/api/tts/clova/landmark", async (req, res) => {
+    try {
+      const { generateAndSaveClovaTTS, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
+      const { landmarkId, language, voice } = req.body;
+      
+      if (!landmarkId) {
+        return res.status(400).json({ error: "Landmark ID is required" });
+      }
+
+      const landmark = await storage.getLandmark(landmarkId);
+      if (!landmark) {
+        return res.status(404).json({ error: "Landmark not found" });
+      }
+
+      const lang = language || 'ko';
+      let text = landmark.narration;
+      
+      if (landmark.translations && landmark.translations[lang]) {
+        text = landmark.translations[lang].narration || text;
+      }
+
+      const result = await generateAndSaveClovaTTS(landmarkId, text, lang, voice);
+      
+      res.json({
+        landmarkId,
+        language: lang,
+        ...result
+      });
+    } catch (error: any) {
+      console.error('CLOVA landmark TTS error:', error);
+      res.status(500).json({ error: error.message || "Failed to generate CLOVA TTS for landmark" });
+    }
+  });
+
   // =====================================================
   // Tour Leader API - Schedules and Group Members CRUD
   // =====================================================
