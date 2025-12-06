@@ -1,6 +1,6 @@
 import { offlineStorage } from './offlineStorage';
 
-export type AudioMode = 'auto' | 'mp3' | 'tts';
+export type AudioMode = 'auto' | 'mp3' | 'tts' | 'clova';
 
 interface AudioDownloadProgress {
   landmarkId: string;
@@ -47,7 +47,7 @@ class AudioService {
     
     // Load saved audio mode
     const savedMode = localStorage.getItem('audio-mode') as AudioMode;
-    if (savedMode && ['auto', 'mp3', 'tts'].includes(savedMode)) {
+    if (savedMode && ['auto', 'mp3', 'tts', 'clova'].includes(savedMode)) {
       this.audioMode = savedMode;
     }
 
@@ -590,6 +590,15 @@ class AudioService {
       return;
     }
 
+    if (this.audioMode === 'clova') {
+      // Force CLOVA TTS mode
+      const success = await this.playClovaTTS(text, language, onEnd);
+      if (success) {
+        this.spokenLandmarks.add(landmarkId);
+      }
+      return;
+    }
+
     if (this.audioMode === 'mp3' || this.audioMode === 'auto') {
       // Try MP3 first
       const success = await this.playMP3(landmarkId, language, audioUrl, onEnd);
@@ -605,6 +614,59 @@ class AudioService {
         this.playText(text, language, this.currentRate, onEnd);
         this.spokenLandmarks.add(landmarkId);
       }
+    }
+  }
+
+  // Play CLOVA Voice TTS
+  async playClovaTTS(
+    text: string,
+    language: string = 'ko',
+    onEnd?: () => void,
+    voiceId?: string
+  ): Promise<boolean> {
+    try {
+      this.stopMP3();
+      this.stop();
+
+      const response = await fetch('/api/tts/clova/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text,
+          language,
+          voice: voiceId,
+          speed: 0,
+          pitch: 0,
+          volume: 0
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`CLOVA TTS error: ${response.status}`);
+      }
+
+      const audioBlob = await response.blob();
+      const objectUrl = URL.createObjectURL(audioBlob);
+      
+      this.audioElement = new Audio(objectUrl);
+      
+      this.audioElement.onended = () => {
+        URL.revokeObjectURL(objectUrl);
+        onEnd?.();
+      };
+      
+      this.audioElement.onerror = () => {
+        URL.revokeObjectURL(objectUrl);
+        console.error('[AudioService] Error playing CLOVA TTS');
+      };
+      
+      this.audioElement.playbackRate = this.currentRate;
+      await this.audioElement.play();
+      console.log(`[AudioService] Playing CLOVA TTS (${language})`);
+      return true;
+    } catch (error) {
+      console.error('[AudioService] CLOVA TTS error:', error);
+      return false;
     }
   }
 
