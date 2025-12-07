@@ -2,8 +2,9 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVisitedLandmarkSchema } from "@shared/schema";
-import { generateLandmarkAudio, TTS_VOICES, VOICE_STYLES } from "./lib/openai";
+import { TTS_VOICES, VOICE_STYLES } from "./lib/openai";
 import { recommendTourItinerary } from "./lib/gemini";
+import { generateAndSaveClovaTTS, CLOVA_VOICES, DEFAULT_CLOVA_VOICE_BY_LANGUAGE, ClovaVoiceId } from "./lib/clova";
 import { db } from "./db";
 import { cities, landmarks, dataVersions, tourSchedules, groupMembers } from "@shared/schema";
 import { eq } from "drizzle-orm";
@@ -885,10 +886,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Generate audio for a landmark
+  // Generate audio for a landmark using CLOVA Voice TTS
   app.post("/api/audio/generate", async (req, res) => {
     try {
-      const { landmarkId, language, voice } = req.body;
+      const { landmarkId, language, voiceId, text: providedText } = req.body;
       
       if (!landmarkId) {
         return res.status(400).json({ error: "Landmark ID is required" });
@@ -902,28 +903,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Get text in the requested language
       const lang = language || 'en';
-      let text = landmark.narration;
+      let text = providedText || landmark.narration || '';
       
-      // Check for translated narration
-      if (landmark.translations && landmark.translations[lang]) {
-        text = landmark.translations[lang].narration || text;
+      // Check for translated narration if no text provided
+      if (!providedText && landmark.translations && landmark.translations[lang]) {
+        text = landmark.translations[lang].narration || landmark.translations[lang].description || text;
+      }
+      
+      if (!text) {
+        return res.status(400).json({ error: "No narration text available for this landmark" });
       }
 
-      // Check if audio already exists
+      // Determine voice: user preference or language default
+      const selectedVoice = (voiceId && CLOVA_VOICES[voiceId as ClovaVoiceId]) 
+        ? voiceId as ClovaVoiceId
+        : DEFAULT_CLOVA_VOICE_BY_LANGUAGE[lang] || 'clara';
+
+      // Check if audio already exists with same voice
       const existingAudio = await storage.getAudio(landmarkId, lang);
-      if (existingAudio && existingAudio.voiceId === (voice || 'fable')) {
+      if (existingAudio && existingAudio.voiceId === selectedVoice) {
         return res.json(existingAudio);
       }
 
-      // Generate new audio
-      const audioResult = await generateLandmarkAudio(landmarkId, text, lang, voice);
+      // Generate new audio using CLOVA Voice TTS
+      const audioResult = await generateAndSaveClovaTTS(landmarkId, text, lang, selectedVoice);
+      
+      // Estimate duration (rough estimate: ~150 chars per second for speech)
+      const duration = Math.ceil(text.length / 15);
       
       // Save to database
       const savedAudio = await storage.saveAudio({
         landmarkId,
         language: lang,
         audioUrl: audioResult.audioUrl,
-        duration: audioResult.duration,
+        duration,
         sizeBytes: audioResult.sizeBytes,
         checksum: audioResult.checksum,
         voiceId: audioResult.voiceId
@@ -931,8 +944,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.json(savedAudio);
     } catch (error: any) {
-      console.error('Audio generation error:', error);
-      res.status(500).json({ error: error.message || "Failed to generate audio" });
+      console.error('CLOVA Audio generation error:', error);
+      res.status(500).json({ error: error.message || "Failed to generate audio with CLOVA Voice" });
     }
   });
 
@@ -964,42 +977,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Batch generate audio for all landmarks in a city
+  // Batch generate audio for all landmarks in a city using CLOVA Voice
   app.post("/api/audio/batch-generate", async (req, res) => {
     try {
-      const { cityId, language, voice } = req.body;
+      const { cityId, language, voiceId } = req.body;
       
       if (!cityId) {
         return res.status(400).json({ error: "City ID is required" });
       }
 
-      const landmarks = await storage.getLandmarks(cityId);
+      const landmarkList = await storage.getLandmarks(cityId);
       const lang = language || 'en';
       const results: any[] = [];
       const errors: any[] = [];
+      
+      // Determine voice for this batch
+      const selectedVoice = (voiceId && CLOVA_VOICES[voiceId as ClovaVoiceId]) 
+        ? voiceId as ClovaVoiceId
+        : DEFAULT_CLOVA_VOICE_BY_LANGUAGE[lang] || 'clara';
 
-      for (const landmark of landmarks) {
+      for (const landmark of landmarkList) {
         try {
-          // Check if already exists
+          // Check if already exists with same voice
           const existing = await storage.getAudio(landmark.id, lang);
-          if (existing) {
+          if (existing && existing.voiceId === selectedVoice) {
             results.push({ landmarkId: landmark.id, status: 'exists', audio: existing });
             continue;
           }
 
           // Get text
-          let text = landmark.narration;
+          let text = landmark.narration || '';
           if (landmark.translations && landmark.translations[lang]) {
-            text = landmark.translations[lang].narration || text;
+            text = landmark.translations[lang].narration || landmark.translations[lang].description || text;
+          }
+          
+          if (!text) {
+            errors.push({ landmarkId: landmark.id, error: 'No narration text available' });
+            continue;
           }
 
-          // Generate
-          const audioResult = await generateLandmarkAudio(landmark.id, text, lang, voice);
+          // Generate using CLOVA Voice
+          const audioResult = await generateAndSaveClovaTTS(landmark.id, text, lang, selectedVoice);
+          const duration = Math.ceil(text.length / 15);
+          
           const saved = await storage.saveAudio({
             landmarkId: landmark.id,
             language: lang,
             audioUrl: audioResult.audioUrl,
-            duration: audioResult.duration,
+            duration,
             sizeBytes: audioResult.sizeBytes,
             checksum: audioResult.checksum,
             voiceId: audioResult.voiceId
@@ -1012,7 +1037,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       res.json({
-        total: landmarks.length,
+        total: landmarkList.length,
         generated: results.filter(r => r.status === 'generated').length,
         existing: results.filter(r => r.status === 'exists').length,
         errors: errors.length,
@@ -1020,7 +1045,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         errorDetails: errors.length > 0 ? errors : undefined
       });
     } catch (error: any) {
-      res.status(500).json({ error: error.message || "Failed to batch generate audio" });
+      res.status(500).json({ error: error.message || "Failed to batch generate audio with CLOVA Voice" });
     }
   });
 

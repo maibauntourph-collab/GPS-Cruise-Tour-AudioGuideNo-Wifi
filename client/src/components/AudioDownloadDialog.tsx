@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Download, Headphones, Loader2, Check, X, Volume2, Trash2, HardDrive, Package } from 'lucide-react';
-import { TTS_VOICES, VoiceId, getSavedVoice, getVoiceForLanguage } from '@/lib/voiceSettings';
+import { TTS_VOICES, VoiceId, getSavedVoice, getVoiceForLanguage, getVoicesForLanguage } from '@/lib/voiceSettings';
 import { offlineStorage } from '@/lib/offlineStorage';
 import { getTranslatedContent } from '@/lib/translations';
 import JSZip from 'jszip';
@@ -268,7 +268,7 @@ export default function AudioDownloadDialog({
 
           <div className="space-y-2">
             <label className="text-sm font-medium">
-              {selectedLanguage === 'ko' ? '음성 스타일 선택' : 'Select Voice Style'}
+              {selectedLanguage === 'ko' ? 'CLOVA Voice 선택' : 'Select CLOVA Voice'}
             </label>
             <Select 
               value={selectedVoice} 
@@ -279,26 +279,30 @@ export default function AudioDownloadDialog({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {(Object.keys(TTS_VOICES) as VoiceId[]).map((voiceId) => {
-                  const voice = TTS_VOICES[voiceId];
-                  return (
-                    <SelectItem key={voiceId} value={voiceId}>
-                      <div className="flex items-center gap-2">
-                        <Volume2 className="w-3 h-3" />
-                        <span>{selectedLanguage === 'ko' ? voice.nameKo : voice.name}</span>
-                        <span className="text-xs text-muted-foreground">
-                          - {selectedLanguage === 'ko' ? voice.descriptionKo : voice.description}
-                        </span>
-                      </div>
-                    </SelectItem>
-                  );
-                })}
+                {(() => {
+                  const voicesForLang = getVoicesForLanguage(selectedLanguage);
+                  const voicesToShow = voicesForLang.length > 0 ? voicesForLang : (Object.keys(TTS_VOICES) as VoiceId[]);
+                  return voicesToShow.map((voiceId) => {
+                    const voice = TTS_VOICES[voiceId];
+                    return (
+                      <SelectItem key={voiceId} value={voiceId}>
+                        <div className="flex items-center gap-2">
+                          <Volume2 className="w-3 h-3" />
+                          <span>{selectedLanguage === 'ko' ? voice.nameKo : voice.name}</span>
+                          <span className="text-xs text-muted-foreground">
+                            - {selectedLanguage === 'ko' ? voice.descriptionKo : voice.description}
+                          </span>
+                        </div>
+                      </SelectItem>
+                    );
+                  });
+                })()}
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
               {selectedLanguage === 'ko' 
-                ? `선택된 음성: ${voiceInfo.nameKo} (${voiceInfo.descriptionKo})`
-                : `Selected: ${voiceInfo.name} (${voiceInfo.description})`
+                ? `CLOVA Voice: ${voiceInfo.nameKo} (${voiceInfo.descriptionKo})`
+                : `CLOVA Voice: ${voiceInfo.name} (${voiceInfo.description})`
               }
             </p>
           </div>
