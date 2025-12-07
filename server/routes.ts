@@ -2,7 +2,6 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVisitedLandmarkSchema } from "@shared/schema";
-import { TTS_VOICES, VOICE_STYLES } from "./lib/openai";
 import { recommendTourItinerary } from "./lib/gemini";
 import { generateAndSaveClovaTTS, CLOVA_VOICES, DEFAULT_CLOVA_VOICE_BY_LANGUAGE, ClovaVoiceId } from "./lib/clova";
 import { db } from "./db";
@@ -878,11 +877,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static audio files
   app.use('/uploads/audio', express.static(path.join(process.cwd(), 'uploads', 'audio')));
 
-  // Get available TTS voices
+  // Get available TTS voices (CLOVA Voice)
   app.get("/api/audio/voices", (req, res) => {
     res.json({
-      voices: TTS_VOICES,
-      styles: VOICE_STYLES
+      voices: CLOVA_VOICES,
+      defaults: DEFAULT_CLOVA_VOICE_BY_LANGUAGE
     });
   });
 
