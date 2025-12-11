@@ -106,7 +106,11 @@ interface MenuDialogProps {
   
   // Offline
   offlineMode: boolean;
-  onToggleOfflineMode: () => void;
+  onToggleOfflineMode: (checked: boolean) => void;
+  
+  // GPS
+  gpsEnabled: boolean;
+  onToggleGps: (checked: boolean) => void;
   
   // Progress
   totalLandmarks: number;
@@ -150,6 +154,8 @@ export default function MenuDialog({
   onClearRoute,
   offlineMode,
   onToggleOfflineMode,
+  gpsEnabled,
+  onToggleGps,
   totalLandmarks,
   cityName,
   tourStops,
@@ -354,6 +360,13 @@ export default function MenuDialog({
                   <div className="flex items-center justify-between">
                     <Label className="text-xs font-medium">{t('offlineMode', selectedLanguage)}</Label>
                     <Switch checked={offlineMode} onCheckedChange={onToggleOfflineMode} data-testid="switch-offline" />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <Label className="text-xs font-medium flex items-center gap-1.5">
+                      <MapPin className="w-3 h-3" />
+                      {selectedLanguage === 'ko' ? 'GPS 추적' : 'GPS Tracking'}
+                    </Label>
+                    <Switch checked={gpsEnabled} onCheckedChange={onToggleGps} data-testid="switch-gps" />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <Button

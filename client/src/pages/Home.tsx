@@ -48,7 +48,13 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { ChevronDown } from 'lucide-react';
 
 export default function Home() {
-  const { position, error, isLoading } = useGeoLocation();
+  // GPS enabled state (persisted to localStorage)
+  const [gpsEnabled, setGpsEnabled] = useState(() => {
+    const saved = localStorage.getItem('gps-enabled');
+    return saved !== 'false'; // Default to true
+  });
+  
+  const { position, error, isLoading } = useGeoLocation(gpsEnabled);
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
     // Check localStorage first, then default to Korean
@@ -322,8 +328,13 @@ export default function Home() {
     }
   };
 
-  const handleToggleOfflineMode = () => {
-    setOfflineMode((prev) => !prev);
+  const handleToggleOfflineMode = (checked: boolean) => {
+    setOfflineMode(checked);
+  };
+
+  const handleToggleGps = (checked: boolean) => {
+    setGpsEnabled(checked);
+    localStorage.setItem('gps-enabled', String(checked));
   };
 
   const handleDownloadData = async (password: string) => {
@@ -803,6 +814,8 @@ export default function Home() {
         onClearRoute={handleClearRoute}
         offlineMode={offlineMode}
         onToggleOfflineMode={handleToggleOfflineMode}
+        gpsEnabled={gpsEnabled}
+        onToggleGps={handleToggleGps}
         totalLandmarks={landmarks.length}
         cityName={selectedCity?.name}
         tourStops={tourStops}
