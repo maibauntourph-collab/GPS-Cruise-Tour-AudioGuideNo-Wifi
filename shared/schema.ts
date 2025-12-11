@@ -222,25 +222,37 @@ export const landmarkAudio = pgTable("landmark_audio", {
   uniqueLandmarkLanguage: unique().on(table.landmarkId, table.language),
 }));
 
-// Relations
-export const citiesRelations = relations(cities, ({ many }) => ({
-  landmarks: many(landmarks),
-}));
+// Users table for authentication
+export const users = pgTable("users", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: varchar("email"), // May be null for some providers
+  displayName: varchar("display_name"),
+  avatar: varchar("avatar"), // Profile picture URL
+  locale: varchar("locale", { length: 10 }).default("en"), // User's preferred language
+  role: varchar("role", { length: 20 }).default("user"), // 'user', 'guide', 'tour_leader', 'admin'
+  lastLoginAt: timestamp("last_login_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
 
-export const landmarksRelations = relations(landmarks, ({ one }) => ({
-  city: one(cities, {
-    fields: [landmarks.cityId],
-    references: [cities.id],
-  }),
-}));
-
-export const visitedLandmarksRelations = relations(visitedLandmarks, () => ({}));
-
-export const landmarkAudioRelations = relations(landmarkAudio, ({ one }) => ({
-  landmark: one(landmarks, {
-    fields: [landmarkAudio.landmarkId],
-    references: [landmarks.id],
-  }),
+// User Social Identities table - links SNS accounts to users
+export const userIdentities = pgTable("user_identities", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  provider: varchar("provider", { length: 50 }).notNull(), // 'google', 'facebook', 'kakao', 'naver', 'apple', 'line', 'wechat'
+  providerUserId: varchar("provider_user_id").notNull(), // The user's ID from the provider
+  email: varchar("email"), // Email from provider (if available)
+  displayName: varchar("display_name"), // Display name from provider
+  avatar: varchar("avatar"), // Avatar URL from provider
+  accessToken: text("access_token"), // OAuth access token (encrypted)
+  refreshToken: text("refresh_token"), // OAuth refresh token (encrypted)
+  tokenExpiresAt: timestamp("token_expires_at"),
+  rawProfile: json("raw_profile"), // Full profile data from provider
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  // Unique constraint: one identity per provider per user
+  uniqueProviderUserId: unique().on(table.provider, table.providerUserId),
 }));
 
 // Tour Leader: Schedule table for tour itineraries
@@ -255,6 +267,38 @@ export const tourSchedules = pgTable("tour_schedules", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+// Relations
+export const citiesRelations = relations(cities, ({ many }) => ({
+  landmarks: many(landmarks),
+}));
+
+export const landmarksRelations = relations(landmarks, ({ one }) => ({
+  city: one(cities, {
+    fields: [landmarks.cityId],
+    references: [cities.id],
+  }),
+}));
+
+export const visitedLandmarksRelations = relations(visitedLandmarks, () => ({}));
+
+export const usersRelations = relations(users, ({ many }) => ({
+  identities: many(userIdentities),
+}));
+
+export const userIdentitiesRelations = relations(userIdentities, ({ one }) => ({
+  user: one(users, {
+    fields: [userIdentities.userId],
+    references: [users.id],
+  }),
+}));
+
+export const landmarkAudioRelations = relations(landmarkAudio, ({ one }) => ({
+  landmark: one(landmarks, {
+    fields: [landmarkAudio.landmarkId],
+    references: [landmarks.id],
+  }),
+}));
 
 // Tour Leader: Group members table
 export const groupMembers = pgTable("group_members", {
@@ -304,15 +348,31 @@ export const insertGroupMemberSchema = createInsertSchema(groupMembers).omit({
   updatedAt: true,
 });
 
+export const insertUserSchema = createInsertSchema(users).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertUserIdentitySchema = createInsertSchema(userIdentities).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type InsertCity = z.infer<typeof insertCitySchema>;
 export type InsertLandmark = z.infer<typeof insertLandmarkSchema>;
 export type InsertVisitedLandmark = z.infer<typeof insertVisitedLandmarkSchema>;
 export type InsertLandmarkAudio = z.infer<typeof insertLandmarkAudioSchema>;
 export type InsertTourSchedule = z.infer<typeof insertTourScheduleSchema>;
 export type InsertGroupMember = z.infer<typeof insertGroupMemberSchema>;
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type InsertUserIdentity = z.infer<typeof insertUserIdentitySchema>;
 export type VisitedLandmark = typeof visitedLandmarks.$inferSelect;
 export type LandmarkAudio = typeof landmarkAudio.$inferSelect;
 export type TourSchedule = typeof tourSchedules.$inferSelect;
 export type GroupMember = typeof groupMembers.$inferSelect;
+export type User = typeof users.$inferSelect;
+export type UserIdentity = typeof userIdentities.$inferSelect;
 export type DbCity = typeof cities.$inferSelect;
 export type DbLandmark = typeof landmarks.$inferSelect;
