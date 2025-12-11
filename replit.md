@@ -43,6 +43,7 @@ The application is built with a React frontend and an Express.js backend, commun
 - `/api/cities`, `/api/landmarks`, `/api/visited`
 - `/api/offline-package`, `/api/ai/recommend-tour`
 - `/api/tour-leader/schedules`, `/api/tour-leader/members` (with import/export)
+- `/api/auth/providers`, `/api/auth/me`, `/api/auth/:provider`, `/api/auth/:provider/callback`, `/api/auth/logout`
 
 **System Design Choices:**
 - **Frontend Framework:** React 18 with TypeScript, TanStack React Query, Tailwind CSS with Shadcn UI, and Wouter for routing.
@@ -50,7 +51,8 @@ The application is built with a React frontend and an Express.js backend, commun
 - **Backend Framework:** Express.js with Zod for validation.
 - **Database:** PostgreSQL (Neon serverless) with Drizzle ORM.
 - **Data Storage:** Hybrid approach using PostgreSQL for persistent data and in-memory storage for dynamic content.
-- **Session Management:** LocalStorage for session IDs and user preferences.
+- **Session Management:** Express-session for user authentication, LocalStorage for session IDs and user preferences.
+- **Social Login Authentication:** Provider-agnostic OAuth implementation with support for Google, Facebook, Kakao, Naver. Uses users table for core user data and user_identities table for linked SNS accounts. Requires SESSION_SECRET environment variable.
 
 ## Deployment Safety (배포 시 데이터 보호)
 

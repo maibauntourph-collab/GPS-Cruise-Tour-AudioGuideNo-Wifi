@@ -22,6 +22,7 @@ import BottomSheet from '@/components/BottomSheet';
 import StartupDialog, { getSavedTourData, saveTourData, clearSavedTourData } from '@/components/StartupDialog';
 import AIRecommendDialog from '@/components/AIRecommendDialog';
 import AudioDownloadDialog from '@/components/AudioDownloadDialog';
+import LoginDialog from '@/components/LoginDialog';
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';
@@ -34,7 +35,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -158,6 +159,7 @@ export default function Home() {
   const [forceShowCard, setForceShowCard] = useState(false);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
   const [showAIRecommend, setShowAIRecommend] = useState(false);
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [capturedRouteImage, setCapturedRouteImage] = useState<string | null>(null);
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
   const [showTourOnly, setShowTourOnly] = useState(false);
@@ -1851,6 +1853,22 @@ export default function Home() {
                 </TooltipContent>
               </Tooltip>
             )}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setShowLoginDialog(true)}
+                  data-testid="button-user-account"
+                  className="h-7 w-7 sm:h-8 sm:w-8"
+                >
+                  <User className="w-3.5 h-3.5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '로그인 / 계정' : 'Login / Account'}</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </header>
         
@@ -2337,6 +2355,13 @@ export default function Home() {
         country={selectedCity?.country}
         landmarks={landmarks}
         selectedLanguage={audioDownloadLanguage}
+      />
+
+      {/* Login Dialog */}
+      <LoginDialog
+        isOpen={showLoginDialog}
+        onClose={() => setShowLoginDialog(false)}
+        language={selectedLanguage}
       />
     </>
   );

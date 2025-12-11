@@ -9,8 +9,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const sessionSecret = process.env.SESSION_SECRET;
+if (!sessionSecret) {
+  console.error("FATAL: SESSION_SECRET environment variable is required");
+  process.exit(1);
+}
+
 app.use(session({
-  secret: process.env.SESSION_SECRET || "gps-audio-guide-secret-key-dev",
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
   cookie: {
