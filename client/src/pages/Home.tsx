@@ -855,6 +855,8 @@ export default function Home() {
         onToggleGps={handleToggleGps}
         totalLandmarks={landmarks.length}
         cityName={selectedCity?.name}
+        landmarks={landmarks}
+        onLandmarkClick={(landmark) => setSelectedLandmark(landmark)}
         tourStops={tourStops}
         tourRouteInfo={tourRouteInfo}
         onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}

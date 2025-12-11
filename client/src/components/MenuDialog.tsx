@@ -115,6 +115,8 @@ interface MenuDialogProps {
   // Progress
   totalLandmarks: number;
   cityName?: string;
+  landmarks?: Landmark[];
+  onLandmarkClick?: (landmark: Landmark) => void;
   
   // Tour
   tourStops: Landmark[];
@@ -158,6 +160,8 @@ export default function MenuDialog({
   onToggleGps,
   totalLandmarks,
   cityName,
+  landmarks,
+  onLandmarkClick,
   tourStops,
   tourRouteInfo,
   onRemoveTourStop,
@@ -401,7 +405,13 @@ export default function MenuDialog({
                   <ProgressStats 
                     totalLandmarks={totalLandmarks} 
                     cityName={cityName} 
-                    selectedLanguage={selectedLanguage} 
+                    selectedLanguage={selectedLanguage}
+                    landmarks={landmarks}
+                    tourStops={tourStops}
+                    onLandmarkClick={(landmark) => {
+                      onLandmarkClick?.(landmark);
+                      onClose();
+                    }}
                   />
                 </div>
               </TabsContent>

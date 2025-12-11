@@ -36,6 +36,8 @@ interface AppSidebarProps {
   onToggleOfflineMode: () => void;
   totalLandmarks: number;
   cityName?: string;
+  landmarks?: Landmark[];
+  onLandmarkClick?: (landmark: Landmark) => void;
   tourStops: Landmark[];
   tourRouteInfo: { 
     distance: number; 
@@ -62,6 +64,8 @@ export function AppSidebar({
   onToggleOfflineMode,
   totalLandmarks,
   cityName,
+  landmarks,
+  onLandmarkClick,
   tourStops,
   tourRouteInfo,
   onRemoveTourStop,
@@ -158,7 +162,14 @@ export function AppSidebar({
             <SidebarGroup>
               <SidebarGroupLabel>{t('progress', selectedLanguage)}</SidebarGroupLabel>
               <SidebarGroupContent className="px-2">
-                <ProgressStats totalLandmarks={totalLandmarks} cityName={cityName} selectedLanguage={selectedLanguage} />
+                <ProgressStats 
+                  totalLandmarks={totalLandmarks} 
+                  cityName={cityName} 
+                  selectedLanguage={selectedLanguage}
+                  landmarks={landmarks}
+                  tourStops={tourStops}
+                  onLandmarkClick={onLandmarkClick}
+                />
               </SidebarGroupContent>
             </SidebarGroup>
 
