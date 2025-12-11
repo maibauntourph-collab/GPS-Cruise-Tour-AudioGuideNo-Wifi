@@ -650,13 +650,18 @@ export default function UnifiedFloatingCard({
         width: isMobile ? 'calc(100vw - 16px)' : '28rem',
         maxWidth: 'calc(100vw - 16px)',
         maxHeight: isMobile ? 'calc(100vh - 80px)' : 'calc(100vh - 32px)',
-        transform: 'translate(-50%, -50%)'
+        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
       }}
       onClick={handleCardClick}
       data-testid="card-unified-floating-container"
     >
-      {/* Header */}
-      <div className="flex items-center gap-2 p-3 sm:p-4 border-b flex-shrink-0">
+      {/* Header - Draggable */}
+      <div 
+        className="flex items-center gap-2 p-3 sm:p-4 border-b flex-shrink-0"
+        style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+        onMouseDown={handleStart}
+        onTouchStart={handleStart}
+      >
           <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
             {t('infoPanel', selectedLanguage)}
           </h3>
