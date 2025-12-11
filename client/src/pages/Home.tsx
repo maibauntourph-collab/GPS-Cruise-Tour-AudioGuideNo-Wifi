@@ -699,6 +699,7 @@ export default function Home() {
       const segments: Array<{ from: string; to: string; distance: number; duration: number }> = [];
       
       // Use route.legs for accurate per-segment distance and duration
+      // Note: leg.time is in seconds (from MapView's estimateWalkingTime * 60)
       if (route.legs && route.legs.length > 0 && tourStops.length >= 2) {
         for (let i = 0; i < route.legs.length && i < tourStops.length - 1; i++) {
           const leg = route.legs[i];
@@ -706,7 +707,7 @@ export default function Home() {
             from: getTranslatedContent(tourStops[i], selectedLanguage, 'name'),
             to: getTranslatedContent(tourStops[i + 1], selectedLanguage, 'name'),
             distance: leg.summary?.totalDistance || leg.distance || 0,
-            duration: leg.summary?.totalTime || leg.duration || 0
+            duration: leg.summary?.totalTime || leg.time || leg.duration || 0
           });
         }
       }
