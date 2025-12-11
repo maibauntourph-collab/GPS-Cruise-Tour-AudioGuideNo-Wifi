@@ -663,7 +663,7 @@ export default function UnifiedFloatingCard({
         onTouchStart={handleStart}
       >
           <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
-            {t('infoPanel', selectedLanguage)}
+            {t('cruisePortInfo', selectedLanguage)}
           </h3>
           
           {/* Action buttons - Only show when landmark is selected */}

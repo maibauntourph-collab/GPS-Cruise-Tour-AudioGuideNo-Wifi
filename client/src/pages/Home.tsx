@@ -120,7 +120,15 @@ export default function Home() {
   const [showActivities, setShowActivities] = useState(true);
   const [showRestaurants, setShowRestaurants] = useState(true);
   const [showGiftShops, setShowGiftShops] = useState(true);
-  const [showCruisePort, setShowCruisePort] = useState(true);
+  const [showCruisePort, setShowCruisePort] = useState(() => {
+    // Only show cruise port info on first load (once per session)
+    const hasShownCruisePort = localStorage.getItem('cruise-port-info-shown');
+    if (!hasShownCruisePort) {
+      localStorage.setItem('cruise-port-info-shown', 'true');
+      return true;
+    }
+    return false;
+  });
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
   const [tourRouteInfo, setTourRouteInfo] = useState<{ 
