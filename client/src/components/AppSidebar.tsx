@@ -38,6 +38,8 @@ interface AppSidebarProps {
   cityName?: string;
   landmarks?: Landmark[];
   onLandmarkClick?: (landmark: Landmark) => void;
+  searchedLocations?: Array<{ id: string; name: string; lat: number; lng: number }>;
+  onSearchedLocationClick?: (location: { id: string; name: string; lat: number; lng: number }) => void;
   tourStops: Landmark[];
   tourRouteInfo: { 
     distance: number; 
@@ -66,6 +68,8 @@ export function AppSidebar({
   cityName,
   landmarks,
   onLandmarkClick,
+  searchedLocations,
+  onSearchedLocationClick,
   tourStops,
   tourRouteInfo,
   onRemoveTourStop,
@@ -168,7 +172,9 @@ export function AppSidebar({
                   selectedLanguage={selectedLanguage}
                   landmarks={landmarks}
                   tourStops={tourStops}
+                  searchedLocations={searchedLocations}
                   onLandmarkClick={onLandmarkClick}
+                  onSearchedLocationClick={onSearchedLocationClick}
                 />
               </SidebarGroupContent>
             </SidebarGroup>

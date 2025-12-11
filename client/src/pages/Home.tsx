@@ -155,6 +155,7 @@ export default function Home() {
   const [locationSearchQuery, setLocationSearchQuery] = useState('');
   const [locationSearchResults, setLocationSearchResults] = useState<Array<{ name: string; lat: number; lng: number }>>([]);
   const [isSearchingLocation, setIsSearchingLocation] = useState(false);
+  const [searchedLocations, setSearchedLocations] = useState<Array<{ id: string; name: string; lat: number; lng: number }>>([]);
   const [showMenu, setShowMenu] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(false);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
@@ -859,6 +860,20 @@ export default function Home() {
         cityName={selectedCity?.name}
         landmarks={landmarks}
         onLandmarkClick={(landmark) => setSelectedLandmark(landmark)}
+        searchedLocations={searchedLocations}
+        onSearchedLocationClick={(location) => {
+          setStartingPoint({
+            id: location.id,
+            type: 'hotel',
+            name: location.name,
+            lat: location.lat,
+            lng: location.lng
+          });
+          toast({
+            title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+            description: location.name
+          });
+        }}
         tourStops={tourStops}
         tourRouteInfo={tourRouteInfo}
         onRemoveTourStop={(landmarkId) => setTourStops(tourStops.filter(stop => stop.id !== landmarkId))}
@@ -1109,12 +1124,22 @@ export default function Home() {
                           size="sm"
                           className="w-full justify-start gap-2 h-auto py-1.5"
                           onClick={() => {
+                            const searchedLocation = {
+                              id: `search_${Date.now()}_${index}`,
+                              name: result.name,
+                              lat: result.lat,
+                              lng: result.lng
+                            };
                             setStartingPoint({
-                              id: `search_${index}`,
+                              id: searchedLocation.id,
                               type: 'hotel',
                               name: result.name,
                               lat: result.lat,
                               lng: result.lng
+                            });
+                            setSearchedLocations(prev => {
+                              if (prev.some(loc => loc.name === result.name)) return prev;
+                              return [...prev, searchedLocation];
                             });
                             setLocationSearchQuery('');
                             setLocationSearchResults([]);
@@ -1420,12 +1445,22 @@ export default function Home() {
                           size="sm"
                           className="w-full justify-start gap-2 h-auto py-1.5"
                           onClick={() => {
+                            const searchedLocation = {
+                              id: `search_${Date.now()}_${index}`,
+                              name: result.name,
+                              lat: result.lat,
+                              lng: result.lng
+                            };
                             setEndPoint({
-                              id: `end_search_${index}`,
+                              id: searchedLocation.id,
                               type: 'hotel',
                               name: result.name,
                               lat: result.lat,
                               lng: result.lng
+                            });
+                            setSearchedLocations(prev => {
+                              if (prev.some(loc => loc.name === result.name)) return prev;
+                              return [...prev, searchedLocation];
                             });
                             setLocationSearchQuery('');
                             setLocationSearchResults([]);

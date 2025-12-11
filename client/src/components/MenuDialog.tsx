@@ -117,6 +117,8 @@ interface MenuDialogProps {
   cityName?: string;
   landmarks?: Landmark[];
   onLandmarkClick?: (landmark: Landmark) => void;
+  searchedLocations?: Array<{ id: string; name: string; lat: number; lng: number }>;
+  onSearchedLocationClick?: (location: { id: string; name: string; lat: number; lng: number }) => void;
   
   // Tour
   tourStops: Landmark[];
@@ -162,6 +164,8 @@ export default function MenuDialog({
   cityName,
   landmarks,
   onLandmarkClick,
+  searchedLocations,
+  onSearchedLocationClick,
   tourStops,
   tourRouteInfo,
   onRemoveTourStop,
@@ -408,8 +412,13 @@ export default function MenuDialog({
                     selectedLanguage={selectedLanguage}
                     landmarks={landmarks}
                     tourStops={tourStops}
+                    searchedLocations={searchedLocations}
                     onLandmarkClick={(landmark) => {
                       onLandmarkClick?.(landmark);
+                      onClose();
+                    }}
+                    onSearchedLocationClick={(location) => {
+                      onSearchedLocationClick?.(location);
                       onClose();
                     }}
                   />

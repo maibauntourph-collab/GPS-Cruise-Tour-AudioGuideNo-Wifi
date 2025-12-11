@@ -3,10 +3,17 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Trophy, MapPin, TrendingUp, CheckCircle2, Clock, ChevronRight } from 'lucide-react';
+import { Trophy, MapPin, TrendingUp, CheckCircle2, Clock, ChevronRight, Search } from 'lucide-react';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { t } from '@/lib/translations';
 import type { Landmark } from '@shared/schema';
+
+interface SearchedLocation {
+  id: string;
+  name: string;
+  lat: number;
+  lng: number;
+}
 
 interface ProgressStatsProps {
   totalLandmarks: number;
@@ -14,7 +21,9 @@ interface ProgressStatsProps {
   selectedLanguage?: string;
   landmarks?: Landmark[];
   tourStops?: Landmark[];
+  searchedLocations?: SearchedLocation[];
   onLandmarkClick?: (landmark: Landmark) => void;
+  onSearchedLocationClick?: (location: SearchedLocation) => void;
 }
 
 export function ProgressStats({ 
@@ -23,7 +32,9 @@ export function ProgressStats({
   selectedLanguage = 'en',
   landmarks = [],
   tourStops = [],
-  onLandmarkClick
+  searchedLocations = [],
+  onLandmarkClick,
+  onSearchedLocationClick
 }: ProgressStatsProps) {
   const { visitedCount, visitedLandmarks } = useVisitedLandmarks();
   const [showListDialog, setShowListDialog] = useState(false);
@@ -48,9 +59,16 @@ export function ProgressStats({
 
   const visitedLabel = selectedLanguage === 'ko' ? '방문한 곳' : 'Visited';
   const plannedLabel = selectedLanguage === 'ko' ? '방문 예정' : 'Planned';
+  const searchedLabel = selectedLanguage === 'ko' ? '검색한 장소' : 'Searched';
   const dialogTitle = selectedLanguage === 'ko' ? '장소 목록' : 'Places List';
   const noVisitedText = selectedLanguage === 'ko' ? '아직 방문한 곳이 없습니다' : 'No places visited yet';
   const noPlannedText = selectedLanguage === 'ko' ? '방문 예정 장소가 없습니다' : 'No planned visits';
+  const noSearchedText = selectedLanguage === 'ko' ? '검색한 장소가 없습니다' : 'No searched places';
+
+  const handleSearchedLocationClick = (location: SearchedLocation) => {
+    setShowListDialog(false);
+    onSearchedLocationClick?.(location);
+  };
 
   return (
     <>
@@ -160,6 +178,32 @@ export function ProgressStats({
                   </div>
                 ) : (
                   <p className="text-sm text-muted-foreground italic">{noPlannedText}</p>
+                )}
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-medium text-purple-600 dark:text-purple-400">
+                  <Search className="w-4 h-4" />
+                  {searchedLabel} ({searchedLocations.length})
+                </div>
+                {searchedLocations.length > 0 ? (
+                  <div className="space-y-2">
+                    {searchedLocations.map((location) => (
+                      <div
+                        key={location.id}
+                        className="p-3 rounded-lg bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 cursor-pointer hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-colors"
+                        onClick={() => handleSearchedLocationClick(location)}
+                        data-testid={`searched-location-${location.id}`}
+                      >
+                        <div className="font-medium text-sm">{location.name}</div>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          {location.lat.toFixed(5)}, {location.lng.toFixed(5)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground italic">{noSearchedText}</p>
                 )}
               </div>
             </div>
