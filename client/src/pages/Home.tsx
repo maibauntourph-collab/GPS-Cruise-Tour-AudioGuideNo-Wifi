@@ -316,11 +316,40 @@ export default function Home() {
   };
   
   const handleCityChange = (cityId: string) => {
+    // Save current tour history before switching cities
+    if (tourStops.length > 0 && selectedCityId) {
+      const tourHistory = {
+        cityId: selectedCityId,
+        tourStops: tourStops.map(stop => stop.id),
+        tourRouteInfo,
+        startingPoint,
+        endPoint,
+        departureTime: departureTime?.toISOString(),
+        savedAt: new Date().toISOString()
+      };
+      localStorage.setItem(`tour-history-${selectedCityId}`, JSON.stringify(tourHistory));
+    }
+    
+    // Reset all state for new city
     setSelectedCityId(cityId);
     setSelectedLandmark(null);
     setActiveRoute(null);
+    setRouteInfo(null);
     audioService.reset();
     setSpokenLandmarks(new Set());
+    
+    // Reset tour state
+    setTourStops([]);
+    setTourRouteInfo(null);
+    setStartingPoint(null);
+    setEndPoint(null);
+    setDepartureTime(null);
+    setAiRecommendation(null);
+    
+    // Reset UI state
+    setShowCruisePort(false);
+    setIsCardMinimized(true);
+    setShowMenu(false);
   };
 
   const handleClearRoute = () => {
