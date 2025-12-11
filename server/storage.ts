@@ -1,6 +1,6 @@
-import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio } from "@shared/schema";
+import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio, type User, type InsertUser, type UserIdentity, type InsertUserIdentity } from "@shared/schema";
 import { db } from "./db";
-import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable } from "@shared/schema";
+import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, users, userIdentities } from "@shared/schema";
 import { eq, count, and, sql, notInArray } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
 
@@ -19,6 +19,17 @@ export interface IStorage {
   getAudioByCity(cityId: string): Promise<LandmarkAudio[]>;
   saveAudio(audio: InsertLandmarkAudio): Promise<LandmarkAudio>;
   deleteAudio(landmarkId: string, language: string): Promise<void>;
+  // User methods
+  getUserById(id: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
+  createUser(user: InsertUser): Promise<User>;
+  updateUser(id: string, updates: Partial<InsertUser>): Promise<User | undefined>;
+  // User Identity methods
+  getUserIdentity(provider: string, providerUserId: string): Promise<UserIdentity | undefined>;
+  getUserIdentitiesByUserId(userId: string): Promise<UserIdentity[]>;
+  createUserIdentity(identity: InsertUserIdentity): Promise<UserIdentity>;
+  updateUserIdentity(id: string, updates: Partial<InsertUserIdentity>): Promise<UserIdentity | undefined>;
+  findOrCreateUserByIdentity(provider: string, providerUserId: string, profileData: { email?: string; displayName?: string; avatar?: string; rawProfile?: any }): Promise<User>;
 }
 
 const CITIES: City[] = [
@@ -7959,6 +7970,117 @@ export class MemStorage implements IStorage {
         eq(landmarkAudioTable.landmarkId, landmarkId),
         eq(landmarkAudioTable.language, language)
       ));
+  }
+
+  // User methods
+  async getUserById(id: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user;
+  }
+
+  async createUser(user: InsertUser): Promise<User> {
+    const [created] = await db.insert(users).values(user).returning();
+    return created;
+  }
+
+  async updateUser(id: string, updates: Partial<InsertUser>): Promise<User | undefined> {
+    const [updated] = await db
+      .update(users)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(users.id, id))
+      .returning();
+    return updated;
+  }
+
+  // User Identity methods
+  async getUserIdentity(provider: string, providerUserId: string): Promise<UserIdentity | undefined> {
+    const [identity] = await db
+      .select()
+      .from(userIdentities)
+      .where(and(
+        eq(userIdentities.provider, provider),
+        eq(userIdentities.providerUserId, providerUserId)
+      ));
+    return identity;
+  }
+
+  async getUserIdentitiesByUserId(userId: string): Promise<UserIdentity[]> {
+    return db.select().from(userIdentities).where(eq(userIdentities.userId, userId));
+  }
+
+  async createUserIdentity(identity: InsertUserIdentity): Promise<UserIdentity> {
+    const [created] = await db.insert(userIdentities).values(identity).returning();
+    return created;
+  }
+
+  async updateUserIdentity(id: string, updates: Partial<InsertUserIdentity>): Promise<UserIdentity | undefined> {
+    const [updated] = await db
+      .update(userIdentities)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(userIdentities.id, id))
+      .returning();
+    return updated;
+  }
+
+  async findOrCreateUserByIdentity(
+    provider: string,
+    providerUserId: string,
+    profileData: { email?: string; displayName?: string; avatar?: string; rawProfile?: any }
+  ): Promise<User> {
+    // Check if identity exists
+    const existingIdentity = await this.getUserIdentity(provider, providerUserId);
+    
+    if (existingIdentity) {
+      // Update identity with new profile data
+      await this.updateUserIdentity(existingIdentity.id, {
+        email: profileData.email,
+        displayName: profileData.displayName,
+        avatar: profileData.avatar,
+        rawProfile: profileData.rawProfile
+      });
+      
+      // Update user's last login
+      const user = await this.getUserById(existingIdentity.userId);
+      if (user) {
+        await this.updateUser(user.id, { lastLoginAt: new Date() });
+        return { ...user, lastLoginAt: new Date() };
+      }
+      throw new Error('User not found for existing identity');
+    }
+    
+    // Check if user with same email exists (for account linking)
+    let user: User | undefined;
+    if (profileData.email) {
+      user = await this.getUserByEmail(profileData.email);
+    }
+    
+    // Create new user if not found
+    if (!user) {
+      user = await this.createUser({
+        email: profileData.email,
+        displayName: profileData.displayName,
+        avatar: profileData.avatar,
+        lastLoginAt: new Date()
+      });
+    }
+    
+    // Create identity link
+    await this.createUserIdentity({
+      userId: user.id,
+      provider,
+      providerUserId,
+      email: profileData.email,
+      displayName: profileData.displayName,
+      avatar: profileData.avatar,
+      rawProfile: profileData.rawProfile
+    });
+    
+    return user;
   }
 }
 
