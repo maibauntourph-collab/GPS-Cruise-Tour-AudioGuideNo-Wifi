@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Trophy, MapPin, TrendingUp, CheckCircle2, Clock, ChevronRight, Search } from 'lucide-react';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
@@ -129,6 +129,9 @@ export function ProgressStats({
               <MapPin className="w-5 h-5" />
               {dialogTitle} - {cityName}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              View visited places, planned visits, and searched locations
+            </DialogDescription>
           </DialogHeader>
           
           <ScrollArea className="max-h-[60vh] pr-4">

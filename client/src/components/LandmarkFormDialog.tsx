@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -131,6 +131,9 @@ export function LandmarkFormDialog({
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="dialog-landmark-form">
         <DialogHeader>
           <DialogTitle>{landmark ? '장소 수정' : '새 장소 추가'}</DialogTitle>
+          <DialogDescription className="sr-only">
+            {landmark ? '기존 장소의 정보를 수정합니다' : '새로운 장소를 추가합니다'}
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">

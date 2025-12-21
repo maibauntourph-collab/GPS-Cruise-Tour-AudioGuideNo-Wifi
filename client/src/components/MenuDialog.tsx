@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -326,6 +326,9 @@ export default function MenuDialog({
               <Settings className="w-4 h-4" />
               {t('settings', selectedLanguage)}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              Configure audio, city, language, and navigation settings
+            </DialogDescription>
           </DialogHeader>
 
           <Tabs defaultValue="general" className="w-full">

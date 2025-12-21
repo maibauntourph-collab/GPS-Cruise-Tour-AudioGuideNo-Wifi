@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -123,6 +123,9 @@ export default function LandmarkDetailDialog({
     <Dialog open={isOpen} onOpenChange={handleDialogClose}>
       <DialogContent className="max-w-6xl w-[90vw] h-[90vh] p-0 gap-0 overflow-hidden">
         <DialogHeader className="p-4 pb-3 border-b flex-shrink-0">
+          <DialogDescription className="sr-only">
+            Detailed information about this landmark including photos, history, and navigation options
+          </DialogDescription>
           <div>
             <DialogTitle className="text-xl mb-1" data-testid="text-landmark-detail-name">
               {getTranslatedContent(landmark, selectedLanguage, 'name')}

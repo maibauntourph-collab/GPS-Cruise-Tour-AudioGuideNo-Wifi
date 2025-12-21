@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -219,6 +219,9 @@ export default function SettingsDialog({
               <Settings className="w-5 h-5" />
               {t('settings', selectedLanguage)}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              Configure language, audio, and offline data settings
+            </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-6 py-4">
