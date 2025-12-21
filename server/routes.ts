@@ -1665,6 +1665,160 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ===== Saved Routes API =====
+  
+  // Create a new saved route
+  app.post("/api/routes", async (req, res) => {
+    try {
+      const { title, countryCode, cityId, stops, description, totalDistance, totalDuration, coverPhotoUrl } = req.body;
+      const sessionId = req.headers['x-session-id'] as string;
+      const userId = (req.session as any)?.userId;
+      
+      if (!title || !countryCode || !cityId || !stops || stops.length === 0) {
+        return res.status(400).json({ error: "Title, country code, city ID, and stops are required" });
+      }
+      
+      const route = await storage.createSavedRoute({
+        userId: userId || null,
+        sessionId: sessionId || null,
+        title,
+        countryCode,
+        cityId,
+        stops,
+        description: description || null,
+        totalDistance: totalDistance || null,
+        totalDuration: totalDuration || null,
+        coverPhotoUrl: coverPhotoUrl || null
+      });
+      
+      res.status(201).json(route);
+    } catch (error) {
+      console.error('Create route error:', error);
+      res.status(500).json({ error: "Failed to create route" });
+    }
+  });
+
+  // Get saved routes (by user/session and optionally by country)
+  app.get("/api/routes", async (req, res) => {
+    try {
+      const sessionId = req.headers['x-session-id'] as string;
+      const userId = (req.session as any)?.userId;
+      const countryCode = req.query.countryCode as string;
+      
+      const routes = await storage.getSavedRoutes(userId, sessionId, countryCode);
+      res.json(routes);
+    } catch (error) {
+      console.error('Get routes error:', error);
+      res.status(500).json({ error: "Failed to get routes" });
+    }
+  });
+
+  // Get a specific route by ID
+  app.get("/api/routes/:id", async (req, res) => {
+    try {
+      const route = await storage.getSavedRouteById(req.params.id);
+      if (!route) {
+        return res.status(404).json({ error: "Route not found" });
+      }
+      res.json(route);
+    } catch (error) {
+      console.error('Get route error:', error);
+      res.status(500).json({ error: "Failed to get route" });
+    }
+  });
+
+  // Update a saved route
+  app.put("/api/routes/:id", async (req, res) => {
+    try {
+      const { title, description, stops, totalDistance, totalDuration, coverPhotoUrl } = req.body;
+      
+      const route = await storage.updateSavedRoute(req.params.id, {
+        title,
+        description,
+        stops,
+        totalDistance,
+        totalDuration,
+        coverPhotoUrl
+      });
+      
+      if (!route) {
+        return res.status(404).json({ error: "Route not found" });
+      }
+      
+      res.json(route);
+    } catch (error) {
+      console.error('Update route error:', error);
+      res.status(500).json({ error: "Failed to update route" });
+    }
+  });
+
+  // Delete a saved route
+  app.delete("/api/routes/:id", async (req, res) => {
+    try {
+      await storage.deleteSavedRoute(req.params.id);
+      res.status(204).send();
+    } catch (error) {
+      console.error('Delete route error:', error);
+      res.status(500).json({ error: "Failed to delete route" });
+    }
+  });
+
+  // ===== Route Photos API =====
+  
+  // Add photo to a route
+  app.post("/api/routes/:routeId/photos", upload.single('photo'), async (req, res) => {
+    try {
+      const { routeId } = req.params;
+      const file = req.file;
+      const userId = (req.session as any)?.userId;
+      
+      if (!file) {
+        return res.status(400).json({ error: "Photo file is required" });
+      }
+      
+      // Get GPS coordinates from body (extracted by frontend from EXIF)
+      const { latitude, longitude, takenAt, source, metadata } = req.body;
+      
+      const photo = await storage.addRoutePhoto({
+        routeId,
+        userId: userId || null,
+        storageUrl: `/uploads/${file.filename}`,
+        latitude: latitude ? parseFloat(latitude) : null,
+        longitude: longitude ? parseFloat(longitude) : null,
+        takenAt: takenAt ? new Date(takenAt) : null,
+        source: source || 'upload',
+        metadata: metadata ? JSON.parse(metadata) : null
+      });
+      
+      res.status(201).json(photo);
+    } catch (error) {
+      console.error('Add photo error:', error);
+      res.status(500).json({ error: "Failed to add photo" });
+    }
+  });
+
+  // Get photos for a route
+  app.get("/api/routes/:routeId/photos", async (req, res) => {
+    try {
+      const photos = await storage.getRoutePhotos(req.params.routeId);
+      res.json(photos);
+    } catch (error) {
+      console.error('Get photos error:', error);
+      res.status(500).json({ error: "Failed to get photos" });
+    }
+  });
+
+  // Delete a photo
+  app.delete("/api/routes/photos/:id", async (req, res) => {
+    try {
+      await storage.deleteRoutePhoto(req.params.id);
+      res.status(204).send();
+    } catch (error) {
+      console.error('Delete photo error:', error);
+      res.status(500).json({ error: "Failed to delete photo" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
