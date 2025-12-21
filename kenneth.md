@@ -528,7 +528,28 @@ try {
 - 프롬프트 기록 시스템 (이 문서)
 - 버그 수정 및 안정화
 
+### ✅ 최근 완료 (2024-12-21)
+**경로 저장 기능** - 사용자가 투어 경로를 저장하고 관리할 수 있는 기능
+
+1. **데이터베이스 스키마** (shared/schema.ts)
+   - `savedRoutes` 테이블: 경로 정보 (제목, 설명, 정류장, 거리, 시간)
+   - `routePhotos` 테이블: 경로 사진 (GPS 좌표, 저장소 URL)
+   - UUID 기반 ID, 사용자/세션 ID 지원
+
+2. **API 엔드포인트** (server/routes.ts)
+   - `GET /api/routes` - 국가별 경로 목록 조회
+   - `POST /api/routes` - 새 경로 저장
+   - `PUT /api/routes/:id` - 경로 수정
+   - `DELETE /api/routes/:id` - 경로 삭제
+   - `POST /api/routes/:id/photos` - 사진 추가
+
+3. **프론트엔드 컴포넌트**
+   - `SaveRouteDialog`: 경로 저장 다이얼로그 (제목, 설명 입력)
+   - `MyRoutes`: 저장된 경로 관리 페이지 (/my-routes)
+   - UnifiedFloatingCard에 저장/MyRoutes 아이콘 추가
+
 ### 📅 향후 계획 (예상)
+- [ ] 사진 업로드 기능 (GPS EXIF 추출)
 - [ ] 추가 OAuth 제공자 (Apple, WeChat, Line)
 - [ ] 음성 다운로드 기능 최적화
 - [ ] 오프라인 맵 타일 캐싱

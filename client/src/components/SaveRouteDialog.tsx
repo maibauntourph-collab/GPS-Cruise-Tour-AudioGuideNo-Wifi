@@ -20,6 +20,15 @@ interface SaveRouteDialogProps {
   selectedLanguage: string;
 }
 
+function getOrCreateSessionId(): string {
+  let sessionId = localStorage.getItem('gps-audio-guide-session-id');
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem('gps-audio-guide-session-id', sessionId);
+  }
+  return sessionId;
+}
+
 export default function SaveRouteDialog({
   open,
   onOpenChange,
@@ -33,6 +42,7 @@ export default function SaveRouteDialog({
   const [description, setDescription] = useState('');
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const sessionId = getOrCreateSessionId();
 
   const saveRouteMutation = useMutation({
     mutationFn: async (data: { 
@@ -40,6 +50,7 @@ export default function SaveRouteDialog({
       description: string; 
       countryCode: string;
       cityId: string;
+      sessionId: string;
       stops: Array<{ landmarkId: string; name: string; lat: number; lng: number; order: number }>;
       totalDistance?: number;
       totalDuration?: number;
@@ -48,7 +59,7 @@ export default function SaveRouteDialog({
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/routes'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/routes', { sessionId }] });
       toast({
         title: selectedLanguage === 'ko' ? '경로가 저장되었습니다' : 'Route saved successfully',
         description: selectedLanguage === 'ko' ? '내 경로에서 확인할 수 있습니다' : 'You can view it in My Routes',
@@ -88,6 +99,7 @@ export default function SaveRouteDialog({
       description: description.trim(),
       countryCode,
       cityId,
+      sessionId,
       stops,
       totalDistance: tourRouteInfo?.distance,
       totalDuration: tourRouteInfo ? Math.round(tourRouteInfo.duration / 60) : undefined

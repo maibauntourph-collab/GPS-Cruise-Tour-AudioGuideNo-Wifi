@@ -20,22 +20,37 @@ import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
 import type { SavedRoute } from '@shared/schema';
 
+function getOrCreateSessionId(): string {
+  let sessionId = localStorage.getItem('gps-audio-guide-session-id');
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem('gps-audio-guide-session-id', sessionId);
+  }
+  return sessionId;
+}
+
 export default function MyRoutes() {
   const [selectedLanguage] = useState(() => localStorage.getItem('selected-language') || 'ko');
   const [deleteRouteId, setDeleteRouteId] = useState<string | null>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const sessionId = getOrCreateSessionId();
 
   const { data: routes, isLoading } = useQuery<SavedRoute[]>({
-    queryKey: ['/api/routes'],
+    queryKey: ['/api/routes', { sessionId }],
+    queryFn: async () => {
+      const res = await fetch(`/api/routes?sessionId=${sessionId}`);
+      if (!res.ok) throw new Error('Failed to fetch routes');
+      return res.json();
+    }
   });
 
   const deleteRouteMutation = useMutation({
     mutationFn: async (routeId: string) => {
-      await apiRequest('DELETE', `/api/routes/${routeId}`);
+      await apiRequest('DELETE', `/api/routes/${routeId}?sessionId=${sessionId}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/routes'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/routes', { sessionId }] });
       toast({
         title: selectedLanguage === 'ko' ? '경로가 삭제되었습니다' : 'Route deleted',
       });

@@ -1701,9 +1701,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get saved routes (by user/session and optionally by country)
   app.get("/api/routes", async (req, res) => {
     try {
-      const sessionId = req.headers['x-session-id'] as string;
+      const sessionId = (req.query.sessionId as string) || (req.headers['x-session-id'] as string);
       const userId = (req.session as any)?.userId;
       const countryCode = req.query.countryCode as string;
+      
+      if (!userId && !sessionId) {
+        return res.status(400).json({ error: "Session ID or authentication required" });
+      }
       
       const routes = await storage.getSavedRoutes(userId, sessionId, countryCode);
       res.json(routes);
