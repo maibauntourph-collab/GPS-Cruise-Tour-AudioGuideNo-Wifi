@@ -5,8 +5,8 @@ import { insertVisitedLandmarkSchema } from "@shared/schema";
 import { recommendTourItinerary } from "./lib/gemini";
 import { generateAndSaveClovaTTS, CLOVA_VOICES, DEFAULT_CLOVA_VOICE_BY_LANGUAGE, ClovaVoiceId } from "./lib/clova";
 import { db } from "./db";
-import { cities, landmarks, dataVersions, tourSchedules, groupMembers } from "@shared/schema";
-import { eq } from "drizzle-orm";
+import { cities, landmarks, dataVersions, tourSchedules, groupMembers, users, userIdentities } from "@shared/schema";
+import { eq, desc, or, ilike, sql, count } from "drizzle-orm";
 import crypto from "crypto";
 import multer from "multer";
 import * as XLSX from "xlsx";
@@ -1820,6 +1820,259 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Delete photo error:', error);
       res.status(500).json({ error: "Failed to delete photo" });
+    }
+  });
+
+  // ===============================
+  // ADMIN: User Management API
+  // ===============================
+
+  // Get all users with pagination and search
+  app.get("/api/admin/users", async (req, res) => {
+    try {
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 20;
+      const search = (req.query.search as string) || '';
+      const role = req.query.role as string;
+      const offset = (page - 1) * limit;
+
+      let query = db.select().from(users);
+      
+      // Build where conditions
+      const conditions: any[] = [];
+      if (search) {
+        conditions.push(
+          or(
+            ilike(users.email, `%${search}%`),
+            ilike(users.displayName, `%${search}%`)
+          )
+        );
+      }
+      if (role && role !== 'all') {
+        conditions.push(eq(users.role, role));
+      }
+
+      // Get total count
+      const countResult = await db.select({ count: count() }).from(users);
+      const total = countResult[0]?.count || 0;
+
+      // Get users with conditions
+      let usersQuery = db.select().from(users).orderBy(desc(users.createdAt)).limit(limit).offset(offset);
+      
+      const allUsers = await usersQuery;
+
+      // Filter in memory for now (simpler approach)
+      let filteredUsers = allUsers;
+      if (search) {
+        const searchLower = search.toLowerCase();
+        filteredUsers = filteredUsers.filter(u => 
+          u.email?.toLowerCase().includes(searchLower) ||
+          u.displayName?.toLowerCase().includes(searchLower)
+        );
+      }
+      if (role && role !== 'all') {
+        filteredUsers = filteredUsers.filter(u => u.role === role);
+      }
+
+      res.json({
+        users: filteredUsers,
+        pagination: {
+          page,
+          limit,
+          total: Number(total),
+          pages: Math.ceil(Number(total) / limit)
+        }
+      });
+    } catch (error) {
+      console.error('Admin get users error:', error);
+      res.status(500).json({ error: "Failed to fetch users" });
+    }
+  });
+
+  // Get user statistics
+  app.get("/api/admin/users/stats", async (req, res) => {
+    try {
+      const totalResult = await db.select({ count: count() }).from(users);
+      const total = Number(totalResult[0]?.count || 0);
+
+      // Get role distribution
+      const roleStats = await db.select({
+        role: users.role,
+        count: count()
+      }).from(users).groupBy(users.role);
+
+      // Get provider distribution from identities
+      const providerStats = await db.select({
+        provider: userIdentities.provider,
+        count: count()
+      }).from(userIdentities).groupBy(userIdentities.provider);
+
+      // Get recent signups (last 7 days)
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      
+      const recentSignups = await db.select({ count: count() })
+        .from(users)
+        .where(sql`${users.createdAt} > ${sevenDaysAgo}`);
+
+      res.json({
+        total,
+        roles: Object.fromEntries(roleStats.map(r => [r.role || 'user', Number(r.count)])),
+        providers: Object.fromEntries(providerStats.map(p => [p.provider, Number(p.count)])),
+        recentSignups: Number(recentSignups[0]?.count || 0)
+      });
+    } catch (error) {
+      console.error('Admin get user stats error:', error);
+      res.status(500).json({ error: "Failed to fetch user statistics" });
+    }
+  });
+
+  // Get single user with identities
+  app.get("/api/admin/users/:id", async (req, res) => {
+    try {
+      const userId = req.params.id;
+      
+      const [user] = await db.select().from(users).where(eq(users.id, userId));
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      // Get user's linked identities
+      const identities = await db.select({
+        id: userIdentities.id,
+        provider: userIdentities.provider,
+        providerUserId: userIdentities.providerUserId,
+        email: userIdentities.email,
+        displayName: userIdentities.displayName,
+        avatar: userIdentities.avatar,
+        createdAt: userIdentities.createdAt,
+        updatedAt: userIdentities.updatedAt
+      }).from(userIdentities).where(eq(userIdentities.userId, userId));
+
+      res.json({
+        ...user,
+        identities
+      });
+    } catch (error) {
+      console.error('Admin get user error:', error);
+      res.status(500).json({ error: "Failed to fetch user" });
+    }
+  });
+
+  // Update user role
+  app.patch("/api/admin/users/:id/role", async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const { role } = req.body;
+
+      const validRoles = ['user', 'guide', 'tour_leader', 'admin'];
+      if (!validRoles.includes(role)) {
+        return res.status(400).json({ error: "Invalid role" });
+      }
+
+      const [updated] = await db.update(users)
+        .set({ role, updatedAt: new Date() })
+        .where(eq(users.id, userId))
+        .returning();
+
+      if (!updated) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      res.json(updated);
+    } catch (error) {
+      console.error('Admin update user role error:', error);
+      res.status(500).json({ error: "Failed to update user role" });
+    }
+  });
+
+  // Update user details
+  app.put("/api/admin/users/:id", async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const { displayName, email, locale, role } = req.body;
+
+      const updateData: any = { updatedAt: new Date() };
+      if (displayName !== undefined) updateData.displayName = displayName;
+      if (email !== undefined) updateData.email = email;
+      if (locale !== undefined) updateData.locale = locale;
+      if (role !== undefined) {
+        const validRoles = ['user', 'guide', 'tour_leader', 'admin'];
+        if (!validRoles.includes(role)) {
+          return res.status(400).json({ error: "Invalid role" });
+        }
+        updateData.role = role;
+      }
+
+      const [updated] = await db.update(users)
+        .set(updateData)
+        .where(eq(users.id, userId))
+        .returning();
+
+      if (!updated) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      res.json(updated);
+    } catch (error) {
+      console.error('Admin update user error:', error);
+      res.status(500).json({ error: "Failed to update user" });
+    }
+  });
+
+  // Delete user (and their identities cascade)
+  app.delete("/api/admin/users/:id", async (req, res) => {
+    try {
+      const userId = req.params.id;
+
+      const [deleted] = await db.delete(users)
+        .where(eq(users.id, userId))
+        .returning();
+
+      if (!deleted) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      res.status(204).send();
+    } catch (error) {
+      console.error('Admin delete user error:', error);
+      res.status(500).json({ error: "Failed to delete user" });
+    }
+  });
+
+  // Get all user identities (login history by provider)
+  app.get("/api/admin/identities", async (req, res) => {
+    try {
+      const provider = req.query.provider as string;
+      
+      let query = db.select({
+        id: userIdentities.id,
+        userId: userIdentities.userId,
+        provider: userIdentities.provider,
+        providerUserId: userIdentities.providerUserId,
+        email: userIdentities.email,
+        displayName: userIdentities.displayName,
+        avatar: userIdentities.avatar,
+        createdAt: userIdentities.createdAt,
+        updatedAt: userIdentities.updatedAt,
+        userName: users.displayName,
+        userEmail: users.email
+      })
+      .from(userIdentities)
+      .leftJoin(users, eq(userIdentities.userId, users.id))
+      .orderBy(desc(userIdentities.createdAt));
+
+      const identities = await query;
+
+      // Filter by provider if specified
+      const filtered = provider && provider !== 'all' 
+        ? identities.filter(i => i.provider === provider)
+        : identities;
+
+      res.json(filtered);
+    } catch (error) {
+      console.error('Admin get identities error:', error);
+      res.status(500).json({ error: "Failed to fetch identities" });
     }
   });
 
