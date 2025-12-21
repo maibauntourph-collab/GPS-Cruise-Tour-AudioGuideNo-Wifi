@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
@@ -62,6 +62,8 @@ interface UnifiedFloatingCardProps {
   tourTimePerStop?: number;
   tourStopDurations?: Record<string, number>;
   onUpdateStopDuration?: (landmarkId: string, duration: number) => void;
+  onSaveRoute?: () => void;
+  onOpenMyRoutes?: () => void;
   
   // AI Recommendation props
   aiRecommendation?: {
@@ -240,6 +242,8 @@ export default function UnifiedFloatingCard({
   tourTimePerStop = 45,
   tourStopDurations = {},
   onUpdateStopDuration,
+  onSaveRoute,
+  onOpenMyRoutes,
   aiRecommendation = null,
   selectedLanguage = 'en',
   departureTime = null,
@@ -1354,10 +1358,47 @@ export default function UnifiedFloatingCard({
             {tourStops.length > 0 && (
               <div className="pb-3 mb-3 border-b flex-shrink-0">
                 <div className="mb-3">
-                  <h5 className="font-semibold flex items-center gap-2 mb-2">
-                    <MapPinned className="w-4 h-4 text-primary" />
-                    {t('tourRoute', selectedLanguage)} ({tourStops.length})
-                  </h5>
+                  <div className="flex items-center justify-between mb-2">
+                    <h5 className="font-semibold flex items-center gap-2">
+                      <MapPinned className="w-4 h-4 text-primary" />
+                      {t('tourRoute', selectedLanguage)} ({tourStops.length})
+                    </h5>
+                    <div className="flex items-center gap-1">
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => onSaveRoute?.()}
+                            disabled={tourStops.length < 2}
+                            data-testid="button-save-route"
+                          >
+                            <Save className="w-4 h-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {selectedLanguage === 'ko' ? '경로 저장' : 'Save Route'}
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => onOpenMyRoutes?.()}
+                            data-testid="button-my-routes"
+                          >
+                            <FolderOpen className="w-4 h-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {selectedLanguage === 'ko' ? '저장된 경로' : 'My Routes'}
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
+                  </div>
                   {tourStops.length >= 2 && tourRouteInfo && (
                     <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
                       {(() => {

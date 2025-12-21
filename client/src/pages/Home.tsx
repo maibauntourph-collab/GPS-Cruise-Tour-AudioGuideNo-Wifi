@@ -23,6 +23,7 @@ import StartupDialog, { getSavedTourData, saveTourData, clearSavedTourData } fro
 import AIRecommendDialog from '@/components/AIRecommendDialog';
 import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import LoginDialog from '@/components/LoginDialog';
+import SaveRouteDialog from '@/components/SaveRouteDialog';
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';
@@ -161,6 +162,7 @@ export default function Home() {
   const [isCardMinimized, setIsCardMinimized] = useState(false);
   const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
+  const [showSaveRouteDialog, setShowSaveRouteDialog] = useState(false);
   const [capturedRouteImage, setCapturedRouteImage] = useState<string | null>(null);
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
   const [showTourOnly, setShowTourOnly] = useState(false);
@@ -2044,6 +2046,8 @@ export default function Home() {
           tourTimePerStop={tourTimePerStop}
           tourStopDurations={tourStopDurations}
           onUpdateStopDuration={handleUpdateStopDuration}
+          onSaveRoute={() => setShowSaveRouteDialog(true)}
+          onOpenMyRoutes={() => window.location.href = '/my-routes'}
           aiRecommendation={aiRecommendation}
           onLandmarkClick={(landmarkId) => {
             const landmark = filteredLandmarks.find(l => l.id === landmarkId);
@@ -2399,6 +2403,28 @@ export default function Home() {
         isOpen={showLoginDialog}
         onClose={() => setShowLoginDialog(false)}
         language={selectedLanguage}
+      />
+
+      {/* Save Route Dialog */}
+      <SaveRouteDialog
+        open={showSaveRouteDialog}
+        onOpenChange={setShowSaveRouteDialog}
+        tourStops={tourStops}
+        tourRouteInfo={tourRouteInfo}
+        cityId={selectedCityId}
+        countryCode={selectedCity?.country === 'Italy' ? 'IT' : 
+                     selectedCity?.country === 'Philippines' ? 'PH' :
+                     selectedCity?.country === 'France' ? 'FR' :
+                     selectedCity?.country === 'Spain' ? 'ES' :
+                     selectedCity?.country === 'Germany' ? 'DE' :
+                     selectedCity?.country === 'Japan' ? 'JP' :
+                     selectedCity?.country === 'South Korea' ? 'KR' :
+                     selectedCity?.country === 'China' ? 'CN' :
+                     selectedCity?.country === 'United Kingdom' ? 'GB' :
+                     selectedCity?.country === 'Greece' ? 'GR' :
+                     selectedCity?.country === 'Thailand' ? 'TH' :
+                     selectedCity?.country === 'Vietnam' ? 'VN' : 'XX'}
+        selectedLanguage={selectedLanguage}
       />
     </>
   );
