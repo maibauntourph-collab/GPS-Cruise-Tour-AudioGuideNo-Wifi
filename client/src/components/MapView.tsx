@@ -344,7 +344,21 @@ function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: numbe
       if (centerKey !== previousCityCenter) {
         previousCityCenter = centerKey;
         userHasInteracted = false; // 도시 변경 시 인터랙션 플래그 리셋
-        map.setView(center, zoom, { animate: true });
+        
+        try {
+          // Ensure map is properly loaded before updating view
+          if (map && (map as any)._loaded) {
+            map.setView(center, zoom, { animate: true });
+          }
+        } catch (error) {
+          console.warn('Failed to update map view:', error);
+          // Retry with non-animated view as fallback
+          try {
+            map.setView(center, zoom, { animate: false });
+          } catch (retryError) {
+            console.debug('Map view update failed, will retry on next update');
+          }
+        }
       }
     }
   }, [center, zoom, map]);
