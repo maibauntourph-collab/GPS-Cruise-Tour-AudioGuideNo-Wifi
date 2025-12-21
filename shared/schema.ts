@@ -314,6 +314,38 @@ export const groupMembers = pgTable("group_members", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
+// Saved Routes table - User's saved tour routes per country
+export const savedRoutes = pgTable("saved_routes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id, { onDelete: 'cascade' }),
+  sessionId: varchar("session_id"), // For non-logged-in users
+  countryCode: varchar("country_code", { length: 10 }).notNull(), // 'IT', 'PH', 'FR', etc.
+  cityId: varchar("city_id").notNull(),
+  title: varchar("title").notNull(),
+  description: text("description"),
+  totalDistance: doublePrecision("total_distance"), // In meters
+  totalDuration: integer("total_duration"), // In minutes
+  stops: json("stops").notNull(), // Array of { landmarkId, name, lat, lng, duration, order }
+  coverPhotoUrl: varchar("cover_photo_url"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// Route Photos table - Photos associated with saved routes
+export const routePhotos = pgTable("route_photos", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  routeId: varchar("route_id").notNull().references(() => savedRoutes.id, { onDelete: 'cascade' }),
+  userId: varchar("user_id").references(() => users.id, { onDelete: 'set null' }),
+  storageUrl: varchar("storage_url").notNull(), // Path to uploaded photo
+  thumbnailUrl: varchar("thumbnail_url"), // Path to thumbnail
+  latitude: doublePrecision("latitude"),
+  longitude: doublePrecision("longitude"),
+  takenAt: timestamp("taken_at"), // EXIF date taken
+  source: varchar("source", { length: 20 }).default("upload"), // 'upload', 'gps_auto'
+  metadata: json("metadata"), // Additional EXIF data
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 // Insert schemas
 export const insertCitySchema = createInsertSchema(cities).omit({
   createdAt: true,
@@ -360,6 +392,49 @@ export const insertUserIdentitySchema = createInsertSchema(userIdentities).omit(
   updatedAt: true,
 });
 
+export const insertSavedRouteSchema = createInsertSchema(savedRoutes).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertRoutePhotoSchema = createInsertSchema(routePhotos).omit({
+  id: true,
+  createdAt: true,
+});
+
+// Saved Routes relations
+export const savedRoutesRelations = relations(savedRoutes, ({ one, many }) => ({
+  user: one(users, {
+    fields: [savedRoutes.userId],
+    references: [users.id],
+  }),
+  photos: many(routePhotos),
+}));
+
+export const routePhotosRelations = relations(routePhotos, ({ one }) => ({
+  route: one(savedRoutes, {
+    fields: [routePhotos.routeId],
+    references: [savedRoutes.id],
+  }),
+  user: one(users, {
+    fields: [routePhotos.userId],
+    references: [users.id],
+  }),
+}));
+
+// Route stop schema for validation
+export const routeStopSchema = z.object({
+  landmarkId: z.string(),
+  name: z.string(),
+  lat: z.number(),
+  lng: z.number(),
+  duration: z.number().optional(), // Stay duration in minutes
+  order: z.number(),
+});
+
+export type RouteStop = z.infer<typeof routeStopSchema>;
+
 export type InsertCity = z.infer<typeof insertCitySchema>;
 export type InsertLandmark = z.infer<typeof insertLandmarkSchema>;
 export type InsertVisitedLandmark = z.infer<typeof insertVisitedLandmarkSchema>;
@@ -376,3 +451,7 @@ export type User = typeof users.$inferSelect;
 export type UserIdentity = typeof userIdentities.$inferSelect;
 export type DbCity = typeof cities.$inferSelect;
 export type DbLandmark = typeof landmarks.$inferSelect;
+export type InsertSavedRoute = z.infer<typeof insertSavedRouteSchema>;
+export type InsertRoutePhoto = z.infer<typeof insertRoutePhotoSchema>;
+export type SavedRoute = typeof savedRoutes.$inferSelect;
+export type RoutePhoto = typeof routePhotos.$inferSelect;
