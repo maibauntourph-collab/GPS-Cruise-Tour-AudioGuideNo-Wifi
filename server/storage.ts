@@ -1,6 +1,6 @@
-import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio, type User, type InsertUser, type UserIdentity, type InsertUserIdentity } from "@shared/schema";
+import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio, type User, type InsertUser, type UserIdentity, type InsertUserIdentity, type SavedRoute, type InsertSavedRoute, type RoutePhoto, type InsertRoutePhoto } from "@shared/schema";
 import { db } from "./db";
-import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, users, userIdentities } from "@shared/schema";
+import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, users, userIdentities, savedRoutes, routePhotos } from "@shared/schema";
 import { eq, count, and, sql, notInArray } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
 
@@ -30,6 +30,16 @@ export interface IStorage {
   createUserIdentity(identity: InsertUserIdentity): Promise<UserIdentity>;
   updateUserIdentity(id: string, updates: Partial<InsertUserIdentity>): Promise<UserIdentity | undefined>;
   findOrCreateUserByIdentity(provider: string, providerUserId: string, profileData: { email?: string; displayName?: string; avatar?: string; rawProfile?: any }): Promise<User>;
+  // Saved Routes methods
+  createSavedRoute(route: InsertSavedRoute): Promise<SavedRoute>;
+  getSavedRoutes(userId?: string, sessionId?: string, countryCode?: string): Promise<SavedRoute[]>;
+  getSavedRouteById(id: string): Promise<SavedRoute | undefined>;
+  updateSavedRoute(id: string, updates: Partial<InsertSavedRoute>): Promise<SavedRoute | undefined>;
+  deleteSavedRoute(id: string): Promise<void>;
+  // Route Photos methods
+  addRoutePhoto(photo: InsertRoutePhoto): Promise<RoutePhoto>;
+  getRoutePhotos(routeId: string): Promise<RoutePhoto[]>;
+  deleteRoutePhoto(id: string): Promise<void>;
 }
 
 const CITIES: City[] = [
@@ -8081,6 +8091,82 @@ export class MemStorage implements IStorage {
     });
     
     return user;
+  }
+
+  // Saved Routes methods
+  async createSavedRoute(route: InsertSavedRoute): Promise<SavedRoute> {
+    const [created] = await db.insert(savedRoutes).values(route).returning();
+    return created;
+  }
+
+  async getSavedRoutes(userId?: string, sessionId?: string, countryCode?: string): Promise<SavedRoute[]> {
+    let conditions = [];
+    
+    if (userId) {
+      conditions.push(eq(savedRoutes.userId, userId));
+    }
+    if (sessionId) {
+      conditions.push(eq(savedRoutes.sessionId, sessionId));
+    }
+    if (countryCode) {
+      conditions.push(eq(savedRoutes.countryCode, countryCode));
+    }
+    
+    if (conditions.length === 0) {
+      return db.select().from(savedRoutes).orderBy(savedRoutes.createdAt);
+    }
+    
+    // Use OR for userId/sessionId, AND for countryCode
+    if (userId && sessionId && !countryCode) {
+      return db.select().from(savedRoutes)
+        .where(sql`(${savedRoutes.userId} = ${userId} OR ${savedRoutes.sessionId} = ${sessionId})`)
+        .orderBy(savedRoutes.createdAt);
+    }
+    
+    if (countryCode && (userId || sessionId)) {
+      const userCondition = userId ? eq(savedRoutes.userId, userId) : eq(savedRoutes.sessionId, sessionId || '');
+      return db.select().from(savedRoutes)
+        .where(and(userCondition, eq(savedRoutes.countryCode, countryCode)))
+        .orderBy(savedRoutes.createdAt);
+    }
+    
+    return db.select().from(savedRoutes)
+      .where(conditions[0])
+      .orderBy(savedRoutes.createdAt);
+  }
+
+  async getSavedRouteById(id: string): Promise<SavedRoute | undefined> {
+    const [route] = await db.select().from(savedRoutes).where(eq(savedRoutes.id, id));
+    return route;
+  }
+
+  async updateSavedRoute(id: string, updates: Partial<InsertSavedRoute>): Promise<SavedRoute | undefined> {
+    const [updated] = await db
+      .update(savedRoutes)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(savedRoutes.id, id))
+      .returning();
+    return updated;
+  }
+
+  async deleteSavedRoute(id: string): Promise<void> {
+    await db.delete(savedRoutes).where(eq(savedRoutes.id, id));
+  }
+
+  // Route Photos methods
+  async addRoutePhoto(photo: InsertRoutePhoto): Promise<RoutePhoto> {
+    const [created] = await db.insert(routePhotos).values(photo).returning();
+    return created;
+  }
+
+  async getRoutePhotos(routeId: string): Promise<RoutePhoto[]> {
+    return db.select().from(routePhotos)
+      .where(eq(routePhotos.routeId, routeId))
+      .orderBy(routePhotos.takenAt);
+  }
+
+  async deleteRoutePhoto(id: string): Promise<void> {
+    await db.delete(routePhotos).where(eq(routePhotos.id, id));
   }
 }
 
