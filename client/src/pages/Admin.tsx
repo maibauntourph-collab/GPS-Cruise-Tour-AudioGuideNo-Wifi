@@ -30,10 +30,40 @@ import {
   FileDown,
   Volume2,
   Play,
-  RefreshCw
+  RefreshCw,
+  Users,
+  User,
+  Shield,
+  Mail,
+  Calendar,
+  ExternalLink
 } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { SiFacebook, SiGoogle, SiNaver, SiKakaotalk } from 'react-icons/si';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import type { City, Landmark } from '@shared/schema';
+import type { City, Landmark, UserIdentity } from '@shared/schema';
+
+// User interface for admin
+interface AdminUser {
+  id: string;
+  email: string | null;
+  displayName: string | null;
+  avatar: string | null;
+  locale: string | null;
+  role: string | null;
+  lastLoginAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  identities?: UserIdentity[];
+}
+
+interface UserStats {
+  total: number;
+  roles: Record<string, number>;
+  providers: Record<string, number>;
+  recentSignups: number;
+}
 
 interface DbCity {
   id: string;
@@ -92,6 +122,12 @@ export default function Admin() {
   const [importFile, setImportFile] = useState<File | null>(null);
   const [importing, setImporting] = useState(false);
   const [importResult, setImportResult] = useState<{ success: boolean; imported: number; total: number; errors?: { row: number; message: string }[] } | null>(null);
+  
+  // User management state
+  const [userSearch, setUserSearch] = useState('');
+  const [userRoleFilter, setUserRoleFilter] = useState<string>('all');
+  const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
+  const [userDetailOpen, setUserDetailOpen] = useState(false);
 
   const { data: cities = [], isLoading: loadingCities } = useQuery<DbCity[]>({
     queryKey: ['/api/admin/cities']
@@ -103,6 +139,55 @@ export default function Admin() {
 
   const { data: stats } = useQuery<{ cities: number; landmarks: number; categories: Record<string, number> }>({
     queryKey: ['/api/admin/stats']
+  });
+
+  // User management queries
+  const { data: usersData, isLoading: loadingUsers } = useQuery<{ users: AdminUser[]; pagination: { total: number } }>({
+    queryKey: ['/api/admin/users', userSearch, userRoleFilter],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (userSearch) params.set('search', userSearch);
+      if (userRoleFilter !== 'all') params.set('role', userRoleFilter);
+      const res = await fetch(`/api/admin/users?${params}`);
+      if (!res.ok) throw new Error('Failed to fetch users');
+      return res.json();
+    }
+  });
+
+  const { data: userStats } = useQuery<UserStats>({
+    queryKey: ['/api/admin/users/stats']
+  });
+
+  const updateUserRoleMutation = useMutation({
+    mutationFn: async ({ userId, role }: { userId: string; role: string }) => {
+      const res = await fetch(`/api/admin/users/${userId}/role`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role })
+      });
+      if (!res.ok) throw new Error('Failed to update role');
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/users'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/users/stats'] });
+      toast({ title: '역할이 변경되었습니다' });
+    },
+    onError: () => toast({ title: '역할 변경 실패', variant: 'destructive' })
+  });
+
+  const deleteUserMutation = useMutation({
+    mutationFn: async (userId: string) => {
+      const res = await fetch(`/api/admin/users/${userId}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete user');
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/users'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/users/stats'] });
+      setUserDetailOpen(false);
+      toast({ title: '사용자가 삭제되었습니다' });
+    },
+    onError: () => toast({ title: '사용자 삭제 실패', variant: 'destructive' })
   });
 
   const createCityMutation = useMutation({
@@ -218,6 +303,10 @@ export default function Admin() {
             <TabsTrigger value="audio" data-testid="tab-audio">
               <Volume2 className="h-4 w-4 mr-2" />
               오디오 생성
+            </TabsTrigger>
+            <TabsTrigger value="users" data-testid="tab-users">
+              <Users className="h-4 w-4 mr-2" />
+              고객 ({userStats?.total || 0})
             </TabsTrigger>
           </TabsList>
 
@@ -614,8 +703,156 @@ export default function Admin() {
           <TabsContent value="audio">
             <AudioGenerationTab cities={cities} landmarks={landmarks} />
           </TabsContent>
+
+          {/* Users Tab */}
+          <TabsContent value="users">
+            {/* User Stats Cards */}
+            <div className="grid gap-4 md:grid-cols-4 mb-6">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">전체 고객</CardTitle>
+                  <Users className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold" data-testid="stats-total-users">{userStats?.total || 0}</div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">최근 7일 가입</CardTitle>
+                  <Calendar className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-green-600" data-testid="stats-recent-signups">{userStats?.recentSignups || 0}</div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">역할별 분포</CardTitle>
+                  <Shield className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-1">
+                    {userStats?.roles && Object.entries(userStats.roles).map(([role, count]) => (
+                      <Badge key={role} variant="secondary" className="text-xs">
+                        {role}: {count}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">로그인 제공자</CardTitle>
+                  <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-1">
+                    {userStats?.providers && Object.entries(userStats.providers).map(([provider, count]) => (
+                      <Badge key={provider} variant="outline" className="text-xs">
+                        {provider}: {count}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Search and Filter */}
+            <div className="flex flex-wrap items-center gap-4 mb-4">
+              <div className="relative w-64">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="이름 또는 이메일 검색..."
+                  value={userSearch}
+                  onChange={(e) => setUserSearch(e.target.value)}
+                  className="pl-9"
+                  data-testid="input-search-users"
+                />
+              </div>
+              <Select value={userRoleFilter} onValueChange={setUserRoleFilter}>
+                <SelectTrigger className="w-40" data-testid="select-role-filter">
+                  <SelectValue placeholder="역할 필터" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">전체</SelectItem>
+                  <SelectItem value="user">일반 사용자</SelectItem>
+                  <SelectItem value="guide">가이드</SelectItem>
+                  <SelectItem value="tour_leader">투어 리더</SelectItem>
+                  <SelectItem value="admin">관리자</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Users List */}
+            {loadingUsers ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {usersData?.users && usersData.users.length > 0 ? (
+                  usersData.users.map((user) => (
+                    <Card key={user.id} className="p-4 hover-elevate cursor-pointer" onClick={() => { setSelectedUser(user); setUserDetailOpen(true); }} data-testid={`user-card-${user.id}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-10 w-10">
+                            <AvatarImage src={user.avatar || undefined} />
+                            <AvatarFallback>
+                              {user.displayName?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium">{user.displayName || '이름 없음'}</span>
+                              <Badge variant={user.role === 'admin' ? 'default' : user.role === 'guide' ? 'secondary' : 'outline'} className="text-xs">
+                                {user.role || 'user'}
+                              </Badge>
+                            </div>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Mail className="h-3 w-3" />
+                              <span>{user.email || '이메일 없음'}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right text-sm text-muted-foreground">
+                          <div>가입: {new Date(user.createdAt).toLocaleDateString('ko-KR')}</div>
+                          {user.lastLoginAt && (
+                            <div>마지막 로그인: {new Date(user.lastLoginAt).toLocaleDateString('ko-KR')}</div>
+                          )}
+                        </div>
+                      </div>
+                    </Card>
+                  ))
+                ) : (
+                  <div className="text-center py-12 text-muted-foreground">
+                    등록된 고객이 없습니다
+                  </div>
+                )}
+              </div>
+            )}
+          </TabsContent>
         </Tabs>
       </main>
+
+      {/* User Detail Dialog */}
+      <UserDetailDialog
+        user={selectedUser}
+        isOpen={userDetailOpen}
+        onClose={() => { setUserDetailOpen(false); setSelectedUser(null); }}
+        onRoleChange={(role) => {
+          if (selectedUser) {
+            updateUserRoleMutation.mutate({ userId: selectedUser.id, role });
+          }
+        }}
+        onDelete={() => {
+          if (selectedUser) {
+            deleteUserMutation.mutate(selectedUser.id);
+          }
+        }}
+        isUpdating={updateUserRoleMutation.isPending}
+        isDeleting={deleteUserMutation.isPending}
+      />
 
       <CityFormDialog
         isOpen={isCreateCityOpen || !!editingCity}
@@ -1313,5 +1550,203 @@ function AudioGenerationTab({ cities, landmarks }: { cities: DbCity[]; landmarks
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+// User Detail Dialog Component
+interface UserDetailDialogProps {
+  user: AdminUser | null;
+  isOpen: boolean;
+  onClose: () => void;
+  onRoleChange: (role: string) => void;
+  onDelete: () => void;
+  isUpdating: boolean;
+  isDeleting: boolean;
+}
+
+function UserDetailDialog({ user, isOpen, onClose, onRoleChange, onDelete, isUpdating, isDeleting }: UserDetailDialogProps) {
+  const [identities, setIdentities] = useState<any[]>([]);
+  const [loadingIdentities, setLoadingIdentities] = useState(false);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen && user) {
+      setLoadingIdentities(true);
+      fetch(`/api/admin/users/${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+          setIdentities(data.identities || []);
+          setLoadingIdentities(false);
+        })
+        .catch(() => setLoadingIdentities(false));
+    }
+  }, [isOpen, user]);
+
+  const getProviderIcon = (provider: string) => {
+    switch (provider) {
+      case 'google': return <SiGoogle className="h-4 w-4" />;
+      case 'facebook': return <SiFacebook className="h-4 w-4" />;
+      case 'kakao': return <SiKakaotalk className="h-4 w-4" />;
+      case 'naver': return <SiNaver className="h-4 w-4" />;
+      default: return <ExternalLink className="h-4 w-4" />;
+    }
+  };
+
+  const getRoleBadgeVariant = (role: string): "default" | "secondary" | "destructive" | "outline" => {
+    switch (role) {
+      case 'admin': return 'destructive';
+      case 'guide': return 'default';
+      case 'tour_leader': return 'secondary';
+      default: return 'outline';
+    }
+  };
+
+  if (!user) return null;
+
+  return (
+    <>
+      <Dialog open={isOpen} onOpenChange={onClose}>
+        <DialogContent className="max-w-lg" data-testid="dialog-user-detail">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3">
+              <Avatar className="h-12 w-12">
+                <AvatarImage src={user.avatar || undefined} />
+                <AvatarFallback className="text-lg">
+                  {user.displayName?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <div className="text-lg">{user.displayName || '이름 없음'}</div>
+                <div className="text-sm font-normal text-muted-foreground">{user.email || '이메일 없음'}</div>
+              </div>
+            </DialogTitle>
+            <DialogDescription className="sr-only">
+              고객 상세 정보 및 역할 관리
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {/* User Info */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">기본 정보</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">ID</span>
+                  <span className="font-mono text-xs">{user.id}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">언어 설정</span>
+                  <span>{user.locale || 'en'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">가입일</span>
+                  <span>{new Date(user.createdAt).toLocaleString('ko-KR')}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">마지막 로그인</span>
+                  <span>{user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString('ko-KR') : '없음'}</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Role Management */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Shield className="h-4 w-4" />
+                  역할 관리
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">현재 역할:</span>
+                  <Badge variant={getRoleBadgeVariant(user.role || 'user')}>
+                    {user.role || 'user'}
+                  </Badge>
+                </div>
+                <div className="flex gap-2 mt-3">
+                  <Select 
+                    defaultValue={user.role || 'user'} 
+                    onValueChange={(value) => onRoleChange(value)}
+                    disabled={isUpdating}
+                  >
+                    <SelectTrigger className="w-full" data-testid="select-user-role">
+                      <SelectValue placeholder="역할 선택" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="user">일반 사용자</SelectItem>
+                      <SelectItem value="guide">가이드</SelectItem>
+                      <SelectItem value="tour_leader">투어 리더</SelectItem>
+                      <SelectItem value="admin">관리자</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {isUpdating && <Loader2 className="h-4 w-4 animate-spin" />}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Connected Accounts */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <ExternalLink className="h-4 w-4" />
+                  연결된 SNS 계정
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {loadingIdentities ? (
+                  <div className="flex justify-center py-4">
+                    <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+                  </div>
+                ) : identities.length > 0 ? (
+                  <div className="space-y-2">
+                    {identities.map((identity) => (
+                      <div key={identity.id} className="flex items-center justify-between p-2 rounded bg-muted">
+                        <div className="flex items-center gap-2">
+                          {getProviderIcon(identity.provider)}
+                          <span className="font-medium capitalize">{identity.provider}</span>
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {identity.email || identity.displayName || identity.providerUserId}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-sm text-muted-foreground text-center py-2">
+                    연결된 계정이 없습니다
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          <DialogFooter>
+            <Button variant="destructive" onClick={() => setDeleteConfirmOpen(true)} disabled={isDeleting} data-testid="button-delete-user">
+              {isDeleting ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Trash2 className="h-4 w-4 mr-2" />}
+              사용자 삭제
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>사용자 삭제 확인</DialogTitle>
+            <DialogDescription>
+              정말 이 사용자를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={() => setDeleteConfirmOpen(false)}>취소</Button>
+            <Button variant="destructive" onClick={() => { setDeleteConfirmOpen(false); onDelete(); }}>삭제</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
