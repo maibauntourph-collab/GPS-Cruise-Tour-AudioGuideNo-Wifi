@@ -1568,6 +1568,14 @@ function UserDetailDialog({ user, isOpen, onClose, onRoleChange, onDelete, isUpd
   const [identities, setIdentities] = useState<any[]>([]);
   const [loadingIdentities, setLoadingIdentities] = useState(false);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [currentRole, setCurrentRole] = useState(user?.role || 'user');
+
+  // Sync currentRole when user changes
+  useEffect(() => {
+    if (user) {
+      setCurrentRole(user.role || 'user');
+    }
+  }, [user]);
 
   useEffect(() => {
     if (isOpen && user) {
@@ -1662,14 +1670,17 @@ function UserDetailDialog({ user, isOpen, onClose, onRoleChange, onDelete, isUpd
               <CardContent>
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-muted-foreground">현재 역할:</span>
-                  <Badge variant={getRoleBadgeVariant(user.role || 'user')}>
-                    {user.role || 'user'}
+                  <Badge variant={getRoleBadgeVariant(currentRole)}>
+                    {currentRole}
                   </Badge>
                 </div>
                 <div className="flex gap-2 mt-3">
                   <Select 
-                    defaultValue={user.role || 'user'} 
-                    onValueChange={(value) => onRoleChange(value)}
+                    value={currentRole} 
+                    onValueChange={(value) => {
+                      setCurrentRole(value);
+                      onRoleChange(value);
+                    }}
                     disabled={isUpdating}
                   >
                     <SelectTrigger className="w-full" data-testid="select-user-role">
