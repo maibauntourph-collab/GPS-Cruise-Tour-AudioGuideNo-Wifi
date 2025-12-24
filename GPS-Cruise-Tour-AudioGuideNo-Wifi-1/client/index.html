@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <title>GPS Audio Guide - Multi-City Travel Companion</title>
+    <meta name="description" content="Explore world cities with GPS-guided audio narration, turn-by-turn navigation, and offline maps. Visit Rome, Paris, and London with automatic audio guides.">
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#e8633f" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="GPS Audio Guide" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Fix React HMR: Ensure single React instance before module loading -->
+    <script>
+      window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || { isDisabled: true };
+      window.__vite_plugin_react_preamble_installed__ = true;
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
