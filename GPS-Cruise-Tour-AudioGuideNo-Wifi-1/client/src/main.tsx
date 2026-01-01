@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import "./styles/leaflet-custom.css";
+import "./pwa";
 
 declare global {
   interface Window {
@@ -19,7 +20,7 @@ if (typeof window !== 'undefined') {
     window.ReactDOM = ReactDOM;
     window.__REACT_INSTANCE_SET__ = true;
   }
-  
+
   const isDev = import.meta.env.DEV || window.location.hostname.includes('.replit.dev');
   if (isDev && 'serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then((registrations) => {
@@ -27,7 +28,7 @@ if (typeof window !== 'undefined') {
         registration.unregister();
       });
     });
-    
+
     if ('caches' in window) {
       caches.keys().then((cacheNames) => {
         cacheNames.forEach((cacheName) => {

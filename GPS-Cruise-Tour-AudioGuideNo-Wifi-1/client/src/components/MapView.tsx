@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, useMap, Polyline, Popup, useMapEvents, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -191,7 +191,7 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
 
   const safeRemoveControl = useCallback((control: L.Routing.Control) => {
     if (!control || !map) return;
-    
+
     try {
       // Clear waypoints first to prevent routing errors
       try {
@@ -199,7 +199,7 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
       } catch (e) {
         console.debug('Waypoint clearing handled:', e);
       }
-      
+
       // Remove the control from the map
       try {
         if ((map as any)._loaded && (control as any)._map) {
@@ -215,7 +215,7 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
 
   useEffect(() => {
     if (!map) return;
-    
+
     if (!start || !end) {
       if (routingControlRef.current) {
         safeRemoveControl(routingControlRef.current);
@@ -304,6 +304,102 @@ function MapUpdater({ position }: { position: GpsPosition | null }) {
   return null;
 }
 
+function SelectedLandmarkUpdater({ landmark, isMobile }: { landmark: Landmark | null; isMobile: boolean }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (landmark) {
+      const latlng = L.latLng(landmark.lat, landmark.lng);
+
+      if (!isMobile) {
+        // Desktop: Card is on the left (20px margin + 448px width = 468px total)
+        // We want the landmark to be centered in the remaining width (window.innerWidth - 468)
+        // The offset to shift the marker to the right is: (468 / 2) = 234px
+        const offset = 234;
+
+        // Project latlng to point at current zoom
+        const point = map.project(latlng, map.getZoom());
+        // Apply offset (moving the center left moves the point right)
+        const offsetPoint = L.point(point.x - offset, point.y);
+        // Unproject back to latlng
+        const offsetLatLng = map.unproject(offsetPoint, map.getZoom());
+
+        map.setView(offsetLatLng, map.getZoom(), { animate: true });
+      } else {
+        // Mobile: Bottom sheet, keep it centered horizontally
+        map.setView(latlng, map.getZoom(), { animate: true });
+      }
+    }
+  }, [landmark, isMobile, map]);
+
+  return null;
+}
+
+function GestureHandling({ selectedLanguage }: { selectedLanguage: string }) {
+  const map = useMap();
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  useEffect(() => {
+    if (!map) return;
+
+    const container = map.getContainer();
+
+    const onTouchStart = (e: TouchEvent) => {
+      // If 2+ fingers, enable dragging. If 1 finger, disable it.
+      if (e.touches.length >= 2) {
+        map.dragging.enable();
+        setShowOverlay(false);
+      } else {
+        map.dragging.disable();
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        // Show overlay only if they are actually trying to move (one finger)
+        setShowOverlay(true);
+      } else {
+        setShowOverlay(false);
+      }
+    };
+
+    const onTouchEnd = () => {
+      // Re-enable dragging so mouse dragging still works 
+      // And next touch sequence starts fresh
+      map.dragging.enable();
+      setShowOverlay(false);
+    };
+
+    container.addEventListener('touchstart', onTouchStart, { passive: false });
+    container.addEventListener('touchmove', onTouchMove, { passive: false });
+    container.addEventListener('touchend', onTouchEnd);
+
+    return () => {
+      container.removeEventListener('touchstart', onTouchStart);
+      container.removeEventListener('touchmove', onTouchMove);
+      container.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [map]);
+
+  if (!showOverlay) return null;
+
+  return (
+    <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-[2000] pointer-events-none animate-in fade-in duration-300">
+      <div className="bg-background/95 px-6 py-4 rounded-2xl shadow-2xl border border-border flex flex-col items-center gap-3 max-w-[80%] text-center">
+        <div className="flex gap-2">
+          <div className="w-3 h-3 bg-primary rounded-full animate-bounce [animation-duration:1s]" />
+          <div className="w-3 h-3 bg-primary rounded-full animate-bounce [animation-duration:1s] [animation-delay:0.2s]" />
+        </div>
+        <p className="text-base font-semibold text-foreground">
+          {selectedLanguage === 'ko'
+            ? '지도를 이동하려면 두 손가락을 사용하세요'
+            : 'Use two fingers to move the map'}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 interface MapViewProps {
   landmarks: Landmark[];
   userPosition: GpsPosition | null;
@@ -329,6 +425,7 @@ interface MapViewProps {
   onShowList?: () => void;
   showTourOnly?: boolean;
   tourStopIds?: string[];
+  isMobile?: boolean;
 }
 
 // 이전 도시 중심 좌표를 저장하여 실제 도시 변경 시에만 뷰 업데이트
@@ -344,7 +441,7 @@ function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: numbe
       if (centerKey !== previousCityCenter) {
         previousCityCenter = centerKey;
         userHasInteracted = false; // 도시 변경 시 인터랙션 플래그 리셋
-        
+
         try {
           // Ensure map is properly loaded before updating view
           if (map && (map as any)._loaded) {
@@ -381,12 +478,12 @@ function MapResizer({ isCompact, sidebarOpen }: { isCompact?: boolean; sidebarOp
   return null;
 }
 
-function MapClickHandler({ 
+function MapClickHandler({
   isSelectingHotelOnMap,
   isSelectingEndPointOnMap,
   onHotelLocationSelected,
   onEndPointLocationSelected,
-}: { 
+}: {
   isSelectingHotelOnMap: boolean;
   isSelectingEndPointOnMap: boolean;
   onHotelLocationSelected?: (lat: number, lng: number) => void;
@@ -447,7 +544,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, starting
   useEffect(() => {
     const hasStartingPoint = startingPoint && startingPoint.lat && startingPoint.lng;
     const minStopsNeeded = hasStartingPoint ? 1 : 2;
-    
+
     // Don't calculate when there's an active navigation route or not enough stops
     if (tourStops.length < minStopsNeeded || activeRoute) {
       if (onSegmentInfoUpdate) {
@@ -465,7 +562,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, starting
       waypoints.push({ lat: startingPoint.lat, lng: startingPoint.lng });
     }
     tourStops.forEach(stop => waypoints.push({ lat: stop.lat, lng: stop.lng }));
-    
+
     const hasEndPoint = endPoint && endPoint.lat && endPoint.lng;
     if (hasEndPoint) {
       waypoints.push({ lat: endPoint.lat, lng: endPoint.lng });
@@ -479,10 +576,10 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, starting
     for (let i = 0; i < waypoints.length - 1; i++) {
       const start = waypoints[i];
       const end = waypoints[i + 1];
-      
+
       const distance = calculateDistance(start.lat, start.lng, end.lat, end.lng);
       const duration = estimateWalkingTime(distance) * 60; // Convert to seconds
-      
+
       totalDistance += distance;
       totalDuration += duration;
 
@@ -544,12 +641,13 @@ export default function MapView({
   onShowList,
   showTourOnly = false,
   tourStopIds = [] as string[],
+  isMobile = false,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
   const restaurantIcon = createCustomIcon('hsl(25, 95%, 55%)'); // Orange for restaurants
   const giftShopIcon = createCustomIcon('hsl(45, 90%, 55%)'); // Gold for gift shops
-  
+
   // Blinking icons for selected landmark
   const blinkingLandmarkIcon = createBlinkingIcon('hsl(14, 85%, 55%)');
   const blinkingActivityIcon = createBlinkingIcon('hsl(210, 85%, 55%)');
@@ -558,12 +656,12 @@ export default function MapView({
   const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
   const markerRefs = useRef<Map<string, L.Marker>>(new Map());
   const previousSelectedRef = useRef<string | null>(null);
-  
+
   // Update marker icons when selectedLandmark changes
   useEffect(() => {
     const previousId = previousSelectedRef.current;
     const currentId = selectedLandmark?.id || null;
-    
+
     // If selection changed
     if (previousId !== currentId) {
       // Reset previous marker to normal icon
@@ -580,7 +678,7 @@ export default function MapView({
           }
         }
       }
-      
+
       // Set current marker to blinking icon
       if (currentId) {
         const currMarker = markerRefs.current.get(currentId);
@@ -595,7 +693,7 @@ export default function MapView({
           }
         }
       }
-      
+
       previousSelectedRef.current = currentId;
     }
   }, [selectedLandmark, landmarks, landmarkIcon, activityIcon, restaurantIcon, giftShopIcon, blinkingLandmarkIcon, blinkingActivityIcon, blinkingRestaurantIcon, blinkingGiftShopIcon]);
@@ -616,7 +714,7 @@ export default function MapView({
       const handleTouchStart = (e: TouchEvent) => {
         // Only handle single-finger touch (long press), allow multi-touch for zoom
         if (e.touches.length > 1) return;
-        
+
         touchTimer = setTimeout(() => {
           if (onAddToTour) {
             onAddToTour(landmark);
@@ -670,7 +768,9 @@ export default function MapView({
       <MapUpdater position={userPosition} />
       <CityUpdater center={cityCenter} zoom={cityZoom} />
       <MapResizer isCompact={isCompact} sidebarOpen={sidebarOpen} />
-      <MapClickHandler 
+      <SelectedLandmarkUpdater landmark={selectedLandmark || null} isMobile={!!isMobile} />
+      <GestureHandling selectedLanguage={selectedLanguage} />
+      <MapClickHandler
         isSelectingHotelOnMap={isSelectingHotelOnMap}
         isSelectingEndPointOnMap={isSelectingEndPointOnMap}
         onHotelLocationSelected={onHotelLocationSelected}
@@ -684,115 +784,115 @@ export default function MapView({
       {landmarks
         .filter(landmark => !showTourOnly || tourStopIds.includes(landmark.id))
         .map((landmark, index) => {
-        const isActivity = landmark.category === 'Activity';
-        const isRestaurant = landmark.category === 'Restaurant';
-        const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
-        const isSelected = selectedLandmark?.id === landmark.id;
-        const isInTour = tourStops.some(stop => stop.id === landmark.id);
-        
-        // Alternate tooltip direction based on index to reduce overlap
-        const isHighlighted = isSelected || isInTour; // Highlight if selected OR in tour
-        // Tour items: always show tooltip above the pin
-        const tooltipDirection = isHighlighted ? 'top' : (index % 2 === 0 ? 'top' : 'bottom');
-        // Tour items: position just above the pin (offset -38 to be above 32px pin)
-        const baseOffset = isHighlighted ? 38 : 35;
-        const tooltipOffset: [number, number] = tooltipDirection === 'top' 
-          ? [0, -baseOffset] 
-          : [0, baseOffset];
-        
-        // Use normal icon for all (tooltip will blink for tour items instead of pin)
-        const icon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon;
-        
-        return (
-          <Marker
-            key={`${landmark.id}-${isSelected ? 'selected' : isInTour ? 'intour' : 'normal'}`}
-            position={[landmark.lat, landmark.lng]}
-            icon={icon}
-            ref={(marker) => {
-              if (marker) {
-                markerRefs.current.set(landmark.id, marker);
-              }
-            }}
-            eventHandlers={{
-              click: () => {
-                // Select landmark when clicked
-                if (onLandmarkSelect) {
-                  onLandmarkSelect(landmark);
+          const isActivity = landmark.category === 'Activity';
+          const isRestaurant = landmark.category === 'Restaurant';
+          const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
+          const isSelected = selectedLandmark?.id === landmark.id;
+          const isInTour = tourStops.some(stop => stop.id === landmark.id);
+
+          // Alternate tooltip direction based on index to reduce overlap
+          const isHighlighted = isSelected || isInTour; // Highlight if selected OR in tour
+          // Tour items: always show tooltip above the pin
+          const tooltipDirection = isHighlighted ? 'top' : (index % 2 === 0 ? 'top' : 'bottom');
+          // Tour items: position just above the pin (offset -38 to be above 32px pin)
+          const baseOffset = isHighlighted ? 38 : 35;
+          const tooltipOffset: [number, number] = tooltipDirection === 'top'
+            ? [0, -baseOffset]
+            : [0, baseOffset];
+
+          // Use normal icon for all (tooltip will blink for tour items instead of pin)
+          const icon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon;
+
+          return (
+            <Marker
+              key={`${landmark.id}-${isSelected ? 'selected' : isInTour ? 'intour' : 'normal'}`}
+              position={[landmark.lat, landmark.lng]}
+              icon={icon}
+              ref={(marker) => {
+                if (marker) {
+                  markerRefs.current.set(landmark.id, marker);
                 }
-              },
-              mousedown: () => {
-                // Start long press timer
-                longPressTimerRef.current = setTimeout(() => {
-                  if (onAddToTour) {
-                    onAddToTour(landmark);
-                  }
-                }, 1000); // 1 second
-              },
-              mouseup: () => {
-                // Cancel long press timer
-                if (longPressTimerRef.current) {
-                  clearTimeout(longPressTimerRef.current);
-                  longPressTimerRef.current = null;
-                }
-              },
-              mouseout: () => {
-                // Cancel long press timer when mouse leaves
-                if (longPressTimerRef.current) {
-                  clearTimeout(longPressTimerRef.current);
-                  longPressTimerRef.current = null;
-                }
-              }
-            }}
-          >
-            {/* Tooltip - always visible, clickable for details */}
-            <Tooltip 
-              permanent={true}
-              direction={tooltipDirection as "top" | "bottom"}
-              offset={tooltipOffset}
-              className={`clickable-tooltip ${isHighlighted ? 'selected-landmark-tooltip' : 'landmark-tooltip'}`}
-              interactive={true}
-            >
-              <div 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  // Show the list panel first
-                  if (onShowList) {
-                    onShowList();
-                  }
-                  // Then select the landmark to show details
+              }}
+              eventHandlers={{
+                click: () => {
+                  // Select landmark when clicked
                   if (onLandmarkSelect) {
                     onLandmarkSelect(landmark);
                   }
-                }}
-                onMouseDown={(e) => {
-                  // Don't stop propagation - allow map zoom
-                }}
-                onTouchStart={(e) => {
-                  // Don't stop propagation - allow map zoom
-                }}
-                className={isHighlighted ? 'selected-tooltip-content' : ''}
-                style={{ 
-                  cursor: 'pointer',
-                  fontWeight: isHighlighted ? 600 : 500,
-                  fontSize: isHighlighted ? '9px' : '11px', // Smaller for tour items
-                  color: isHighlighted ? '#FFD700' : undefined,
-                  backgroundColor: isHighlighted ? '#000000' : undefined,
-                  padding: isHighlighted ? '2px 6px' : '4px 8px', // Smaller padding for tour items
-                  borderRadius: '4px',
-                  whiteSpace: 'nowrap',
-                }}
-                data-testid={`tooltip-landmark-${landmark.id}`}
+                },
+                mousedown: () => {
+                  // Start long press timer
+                  longPressTimerRef.current = setTimeout(() => {
+                    if (onAddToTour) {
+                      onAddToTour(landmark);
+                    }
+                  }, 1000); // 1 second
+                },
+                mouseup: () => {
+                  // Cancel long press timer
+                  if (longPressTimerRef.current) {
+                    clearTimeout(longPressTimerRef.current);
+                    longPressTimerRef.current = null;
+                  }
+                },
+                mouseout: () => {
+                  // Cancel long press timer when mouse leaves
+                  if (longPressTimerRef.current) {
+                    clearTimeout(longPressTimerRef.current);
+                    longPressTimerRef.current = null;
+                  }
+                }
+              }}
+            >
+              {/* Tooltip - always visible, clickable for details */}
+              <Tooltip
+                permanent={true}
+                direction={tooltipDirection as "top" | "bottom"}
+                offset={tooltipOffset}
+                className={`clickable-tooltip ${isHighlighted ? 'selected-landmark-tooltip' : 'landmark-tooltip'}`}
+                interactive={true}
               >
-                {isInTour && (
-                  <span style={{ marginRight: '4px' }}>#{tourStops.findIndex(s => s.id === landmark.id) + 1}</span>
-                )}
-                {getTranslatedContent(landmark, selectedLanguage, 'name')}
-              </div>
-            </Tooltip>
-          </Marker>
-        );
-      })}
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    // Show the list panel first
+                    if (onShowList) {
+                      onShowList();
+                    }
+                    // Then select the landmark to show details
+                    if (onLandmarkSelect) {
+                      onLandmarkSelect(landmark);
+                    }
+                  }}
+                  onMouseDown={(e) => {
+                    // Don't stop propagation - allow map zoom
+                  }}
+                  onTouchStart={(e) => {
+                    // Don't stop propagation - allow map zoom
+                  }}
+                  className={isHighlighted ? 'selected-tooltip-content' : ''}
+                  style={{
+                    cursor: 'pointer',
+                    fontWeight: isHighlighted ? 600 : 500,
+                    fontSize: isHighlighted ? '9px' : '11px', // Smaller for tour items
+                    color: isHighlighted ? '#FFD700' : undefined,
+                    backgroundColor: isHighlighted ? '#000000' : undefined,
+                    padding: isHighlighted ? '2px 6px' : '4px 8px', // Smaller padding for tour items
+                    borderRadius: '4px',
+                    whiteSpace: 'nowrap',
+                  }}
+                  data-testid={`tooltip-landmark-${landmark.id}`}
+                >
+                  {isInTour && (
+                    <span style={{ marginRight: '4px' }}>#{tourStops.findIndex(s => s.id === landmark.id) + 1}</span>
+                  )}
+                  {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                </div>
+              </Tooltip>
+            </Marker>
+          );
+        })}
 
       {userPosition && (
         <Marker
@@ -848,11 +948,11 @@ export default function MapView({
               {selectedLanguage === 'ko' ? '출발지' : 'Starting Point'}
               <div className="text-xs text-muted-foreground mt-1">
                 {startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                 startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
-                 startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                 startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
-                 startingPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
-                 (selectedLanguage === 'ko' ? '출발지' : 'Start')}
+                  startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
+                    startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                      startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                        startingPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
+                          (selectedLanguage === 'ko' ? '출발지' : 'Start')}
               </div>
             </div>
           </Popup>
@@ -888,11 +988,11 @@ export default function MapView({
               {selectedLanguage === 'ko' ? '도착지' : 'End Point'}
               <div className="text-xs text-muted-foreground mt-1">
                 {endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                 endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
-                 endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                 endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
-                 endPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
-                 (selectedLanguage === 'ko' ? '도착지' : 'End')}
+                  endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
+                    endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                      endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                        endPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
+                          (selectedLanguage === 'ko' ? '도착지' : 'End')}
               </div>
             </div>
           </Popup>

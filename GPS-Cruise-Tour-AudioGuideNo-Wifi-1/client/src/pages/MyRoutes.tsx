@@ -5,20 +5,21 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { 
-  AlertDialog, 
-  AlertDialogAction, 
-  AlertDialogCancel, 
-  AlertDialogContent, 
-  AlertDialogDescription, 
-  AlertDialogFooter, 
-  AlertDialogHeader, 
-  AlertDialogTitle 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
 } from '@/components/ui/alert-dialog';
 import { ArrowLeft, MapPin, Clock, Route, Trash2, Calendar, Globe } from 'lucide-react';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
 import type { SavedRoute } from '@shared/schema';
+import { t } from '@/lib/translations';
 
 function getOrCreateSessionId(): string {
   let sessionId = localStorage.getItem('gps-audio-guide-session-id');
@@ -52,13 +53,13 @@ export default function MyRoutes() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/routes', { sessionId }] });
       toast({
-        title: selectedLanguage === 'ko' ? '경로가 삭제되었습니다' : 'Route deleted',
+        title: t('routeDeleted', selectedLanguage),
       });
       setDeleteRouteId(null);
     },
     onError: (error) => {
       toast({
-        title: selectedLanguage === 'ko' ? '삭제 실패' : 'Failed to delete',
+        title: t('deleteFailed', selectedLanguage),
         description: error.message,
         variant: 'destructive',
       });
@@ -78,11 +79,9 @@ export default function MyRoutes() {
     if (minutes >= 60) {
       const hours = Math.floor(minutes / 60);
       const mins = minutes % 60;
-      return selectedLanguage === 'ko' 
-        ? `${hours}시간 ${mins}분` 
-        : `${hours}h ${mins}min`;
+      return `${hours}${t('timeHours', selectedLanguage)} ${mins}${t('timeMinutes', selectedLanguage)}`;
     }
-    return selectedLanguage === 'ko' ? `${minutes}분` : `${minutes}min`;
+    return `${minutes}${t('timeMinutes', selectedLanguage)}`;
   };
 
   const formatDate = (date: string | Date) => {
@@ -93,21 +92,22 @@ export default function MyRoutes() {
   };
 
   const getCountryName = (code: string) => {
-    const countries: Record<string, { ko: string; en: string }> = {
-      IT: { ko: '이탈리아', en: 'Italy' },
-      PH: { ko: '필리핀', en: 'Philippines' },
-      FR: { ko: '프랑스', en: 'France' },
-      ES: { ko: '스페인', en: 'Spain' },
-      DE: { ko: '독일', en: 'Germany' },
-      JP: { ko: '일본', en: 'Japan' },
-      KR: { ko: '한국', en: 'South Korea' },
-      CN: { ko: '중국', en: 'China' },
-      GB: { ko: '영국', en: 'United Kingdom' },
-      GR: { ko: '그리스', en: 'Greece' },
-      TH: { ko: '태국', en: 'Thailand' },
-      VN: { ko: '베트남', en: 'Vietnam' },
+    const countryMap: Record<string, string> = {
+      IT: 'countryItaly',
+      PH: 'countryPhilippines',
+      FR: 'countryFrance',
+      ES: 'countrySpain',
+      DE: 'countryGermany',
+      JP: 'countryJapan',
+      KR: 'countrySouthKorea',
+      CN: 'countryChina',
+      GB: 'countryUK',
+      GR: 'countryGreece',
+      TH: 'countryThailand',
+      VN: 'countryVietnam',
     };
-    return countries[code]?.[selectedLanguage === 'ko' ? 'ko' : 'en'] || code;
+    const key = countryMap[code];
+    return key ? t(key, selectedLanguage) : code;
   };
 
   return (
@@ -121,7 +121,7 @@ export default function MyRoutes() {
               </Button>
             </Link>
             <h1 className="text-xl font-bold">
-              {selectedLanguage === 'ko' ? '저장된 경로' : 'My Routes'}
+              {t('myRoutes', selectedLanguage)}
             </h1>
           </div>
         </div>
@@ -146,16 +146,14 @@ export default function MyRoutes() {
           <div className="text-center py-12">
             <Route className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
             <h2 className="text-xl font-semibold mb-2">
-              {selectedLanguage === 'ko' ? '저장된 경로가 없습니다' : 'No saved routes'}
+              {t('noSavedRoutes', selectedLanguage)}
             </h2>
             <p className="text-muted-foreground mb-4">
-              {selectedLanguage === 'ko' 
-                ? '지도에서 투어 경로를 만들고 저장해보세요'
-                : 'Create a tour route on the map and save it'}
+              {t('createRoutePrompt', selectedLanguage)}
             </p>
             <Link href="/">
               <Button data-testid="button-go-to-map">
-                {selectedLanguage === 'ko' ? '지도로 이동' : 'Go to Map'}
+                {t('goToMap', selectedLanguage)}
               </Button>
             </Link>
           </div>
@@ -163,9 +161,27 @@ export default function MyRoutes() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {routes.map((route) => {
               const stops = Array.isArray(route.stops) ? route.stops : [];
-              
+
+              const handleRestore = () => {
+                const tourData = {
+                  cityId: route.cityId,
+                  tourStops: stops.map((s: any) => s.landmarkId),
+                  tourTimePerStop: 45, // default
+                  restoredAt: new Date().toISOString()
+                };
+                localStorage.setItem('restored-tour-data', JSON.stringify(tourData));
+
+                toast({
+                  title: t('restoringRoute', selectedLanguage),
+                  description: t('redirectingToMap', selectedLanguage),
+                });
+
+                // Navigate to home page
+                window.location.href = '/';
+              };
+
               return (
-                <Card key={route.id} className="hover-elevate" data-testid={`card-route-${route.id}`}>
+                <Card key={route.id} className="hover-elevate transition-all duration-200" data-testid={`card-route-${route.id}`}>
                   <CardHeader className="pb-2">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1 min-w-0">
@@ -175,22 +191,27 @@ export default function MyRoutes() {
                           {getCountryName(route.countryCode)}
                         </CardDescription>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-destructive hover:text-destructive"
-                        onClick={() => setDeleteRouteId(route.id)}
-                        data-testid={`button-delete-route-${route.id}`}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
+                      <div className="flex gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setDeleteRouteId(route.id);
+                          }}
+                          data-testid={`button-delete-route-${route.id}`}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary" className="flex items-center gap-1">
                         <MapPin className="w-3 h-3" />
-                        {stops.length} {selectedLanguage === 'ko' ? '정류장' : 'stops'}
+                        {stops.length} {t('stopUnit', selectedLanguage)}
                       </Badge>
                       {route.totalDistance && (
                         <Badge variant="outline" className="flex items-center gap-1">
@@ -205,7 +226,7 @@ export default function MyRoutes() {
                         </Badge>
                       )}
                     </div>
-                    
+
                     {route.description && (
                       <p className="text-sm text-muted-foreground line-clamp-2">
                         {route.description}
@@ -217,11 +238,19 @@ export default function MyRoutes() {
                       {stops.length > 3 && ` → +${stops.length - 3}`}
                     </div>
                   </CardContent>
-                  <CardFooter className="pt-0">
+                  <CardFooter className="pt-0 flex justify-between items-center">
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
                       <Calendar className="w-3 h-3" />
                       {formatDate(route.createdAt)}
                     </div>
+                    <Button
+                      size="sm"
+                      onClick={handleRestore}
+                      className="bg-primary hover:bg-primary/90"
+                      data-testid={`button-restore-route-${route.id}`}
+                    >
+                      {t('startRoute', selectedLanguage)}
+                    </Button>
                   </CardFooter>
                 </Card>
               );
@@ -234,23 +263,21 @@ export default function MyRoutes() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {selectedLanguage === 'ko' ? '경로 삭제' : 'Delete Route'}
+              {t('deleteRoute', selectedLanguage)}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              {selectedLanguage === 'ko' 
-                ? '이 경로를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.'
-                : 'Are you sure you want to delete this route? This action cannot be undone.'}
+              {t('deleteRouteConfirm', selectedLanguage)}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>
-              {selectedLanguage === 'ko' ? '취소' : 'Cancel'}
+              {t('cancel', selectedLanguage)}
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deleteRouteId && deleteRouteMutation.mutate(deleteRouteId)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {selectedLanguage === 'ko' ? '삭제' : 'Delete'}
+              {t('delete', selectedLanguage)}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

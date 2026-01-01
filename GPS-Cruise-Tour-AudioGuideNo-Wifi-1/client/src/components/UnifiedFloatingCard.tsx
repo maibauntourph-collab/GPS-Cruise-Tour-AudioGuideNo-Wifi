@@ -20,27 +20,27 @@ interface UnifiedFloatingCardProps {
   forceShowList?: boolean;
   isCardMinimized?: boolean;
   onToggleMinimized?: () => void;
-  
+
   // Landmark Panel props
   selectedLandmark: Landmark | null;
   onLandmarkClose: () => void;
   onNavigate: (landmark: Landmark) => void;
   onAddToTour?: (landmark: Landmark) => void;
   isInTour?: boolean;
-  
+
   // Cruise Port props
   city: City | null;
   showCruisePort: boolean;
   onCruisePortClose?: () => void;
   onLandmarkClick?: (landmarkId: string) => void;
-  
+
   // Landmark List props
   landmarks: Landmark[];
   userPosition: GpsPosition | null;
   onLandmarkRoute: (landmark: Landmark) => void;
   spokenLandmarks: Set<string>;
   onLandmarkSelect?: (landmark: Landmark) => void;
-  
+
   // Filter props (synced with Home)
   showLandmarks: boolean;
   showActivities: boolean;
@@ -50,11 +50,11 @@ interface UnifiedFloatingCardProps {
   onToggleActivities: () => void;
   onToggleRestaurants: () => void;
   onToggleGiftShops: () => void;
-  
+
   // Tour Route props
   tourStops?: Landmark[];
-  tourRouteInfo?: { 
-    distance: number; 
+  tourRouteInfo?: {
+    distance: number;
     duration: number;
     segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
   } | null;
@@ -64,29 +64,29 @@ interface UnifiedFloatingCardProps {
   onUpdateStopDuration?: (landmarkId: string, duration: number) => void;
   onSaveRoute?: () => void;
   onOpenMyRoutes?: () => void;
-  
+
   // AI Recommendation props
   aiRecommendation?: {
     itinerary: Array<{ landmarkId: string; order: number }>;
     explanation: string;
     totalEstimatedTime: number;
   } | null;
-  
+
   // Common props
   selectedLanguage?: string;
-  
+
   // Departure time for traffic estimation
   departureTime?: Date | null;
-  
+
   // Starting point for distance calculation
   startingPoint?: { lat: number; lng: number; type: string; name?: string } | null;
-  
+
   // End point for tour
   endPoint?: { lat: number; lng: number; type: string; name?: string } | null;
-  
+
   // Callback to open start/end point setup dialog
   onOpenStartEndPointDialog?: () => void;
-  
+
   // Captured route image
   capturedRouteImage?: string | null;
   onClearCapturedImage?: () => void;
@@ -127,7 +127,7 @@ export function getTrafficInfo(language: string = 'en', departureTime?: Date | n
   const hour = targetTime.getHours();
   const dayOfWeek = targetTime.getDay(); // 0 = Sunday, 6 = Saturday
   const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-  
+
   // Traffic status labels by language
   const labels: Record<string, Record<string, string>> = {
     rush: {
@@ -258,18 +258,18 @@ export default function UnifiedFloatingCard({
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1000);
   const [internalMinimized, setInternalMinimized] = useState(false);
-  
+
   // Use external control if provided, otherwise use internal state
   const isMinimized = isCardMinimized !== undefined ? isCardMinimized : internalMinimized;
-  const setIsMinimized = onToggleMinimized 
-    ? () => onToggleMinimized() 
+  const setIsMinimized = onToggleMinimized
+    ? () => onToggleMinimized()
     : (value: boolean | ((prev: boolean) => boolean)) => {
-        if (typeof value === 'function') {
-          setInternalMinimized(value);
-        } else {
-          setInternalMinimized(value);
-        }
-      };
+      if (typeof value === 'function') {
+        setInternalMinimized(value);
+      } else {
+        setInternalMinimized(value);
+      }
+    };
   const [activeTab, setActiveTab] = useState<string>('list');
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
@@ -285,7 +285,7 @@ export default function UnifiedFloatingCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const listScrollRef = useRef<HTMLDivElement>(null);
   const zIndexTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const [isMobile, setIsMobile] = useState(() => 
+  const [isMobile, setIsMobile] = useState(() =>
     typeof window !== 'undefined' && window.innerWidth < 640
   );
 
@@ -294,7 +294,7 @@ export default function UnifiedFloatingCard({
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -333,14 +333,14 @@ export default function UnifiedFloatingCard({
   const handleListToggleLandmarks = () => {
     const wasOff = !showLandmarks;
     onToggleLandmarks();
-    
+
     // If turning on and in List tab, scroll to first landmark
     if (wasOff && activeTab === 'list') {
       setTimeout(() => {
-        const firstLandmark = landmarks.find(l => 
-          l.category !== 'Activity' && 
-          l.category !== 'Restaurant' && 
-          l.category !== 'Gift Shop' && 
+        const firstLandmark = landmarks.find(l =>
+          l.category !== 'Activity' &&
+          l.category !== 'Restaurant' &&
+          l.category !== 'Gift Shop' &&
           l.category !== 'Shop'
         );
         if (firstLandmark && listScrollRef.current) {
@@ -354,7 +354,7 @@ export default function UnifiedFloatingCard({
   const handleListToggleActivities = () => {
     const wasOff = !showActivities;
     onToggleActivities();
-    
+
     // If turning on and in List tab, scroll to first activity
     if (wasOff && activeTab === 'list') {
       setTimeout(() => {
@@ -370,7 +370,7 @@ export default function UnifiedFloatingCard({
   const handleListToggleRestaurants = () => {
     const wasOff = !showRestaurants;
     onToggleRestaurants();
-    
+
     // If turning on and in List tab, scroll to first restaurant
     if (wasOff && activeTab === 'list') {
       setTimeout(() => {
@@ -386,7 +386,7 @@ export default function UnifiedFloatingCard({
   const handleListToggleGiftShops = () => {
     const wasOff = !showGiftShops;
     onToggleGiftShops();
-    
+
     // If turning on and in List tab, scroll to first gift shop
     if (wasOff && activeTab === 'list') {
       setTimeout(() => {
@@ -448,10 +448,10 @@ export default function UnifiedFloatingCard({
   const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    
+
     const maxX = (viewportWidth - elementWidth) / 2;
     const maxY = (viewportHeight - elementHeight) / 2;
-    
+
     return {
       x: Math.max(-maxX, Math.min(x, maxX)),
       y: Math.max(-maxY, Math.min(y, maxY))
@@ -463,16 +463,16 @@ export default function UnifiedFloatingCard({
     if ((e.target as HTMLElement).closest('button, a, input, textarea, select, [role="button"]')) {
       return;
     }
-    
+
     e.preventDefault();
     e.stopPropagation();
-    
+
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    
+
     setIsDragging(true);
     setDragStart({ x: clientX - translate.x, y: clientY - translate.y });
-    
+
     if (zIndexTimeoutRef.current) {
       clearTimeout(zIndexTimeoutRef.current);
     }
@@ -481,22 +481,22 @@ export default function UnifiedFloatingCard({
 
   const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
     if (!cardRef.current) return;
-    
+
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    
+
     const newX = clientX - dragStart.x;
     const newY = clientY - dragStart.y;
-    
+
     const rect = cardRef.current.getBoundingClientRect();
     const clamped = clampTranslate(newX, newY, rect.width, rect.height);
-    
+
     setTranslate(clamped);
   }, [dragStart, clampTranslate]);
 
   const handleEnd = useCallback(() => {
     setIsDragging(false);
-    
+
     if (zIndexTimeoutRef.current) {
       clearTimeout(zIndexTimeoutRef.current);
     }
@@ -509,12 +509,12 @@ export default function UnifiedFloatingCard({
     if (isDragging) {
       const moveHandler = (e: MouseEvent | TouchEvent) => handleMouseMove(e);
       const endHandler = () => handleEnd();
-      
+
       window.addEventListener('mousemove', moveHandler);
       window.addEventListener('mouseup', endHandler);
       window.addEventListener('touchmove', moveHandler);
       window.addEventListener('touchend', endHandler);
-      
+
       return () => {
         window.removeEventListener('mousemove', moveHandler);
         window.removeEventListener('mouseup', endHandler);
@@ -529,7 +529,7 @@ export default function UnifiedFloatingCard({
       clearTimeout(zIndexTimeoutRef.current);
     }
     setZIndex(1001);
-    
+
     zIndexTimeoutRef.current = setTimeout(() => {
       setZIndex(1000);
     }, 100);
@@ -537,17 +537,17 @@ export default function UnifiedFloatingCard({
 
   const handlePlayAudio = async () => {
     if (!selectedLandmark) return;
-    
+
     if (isPlaying) {
       audioService.stop();
       audioService.stopMP3();
       setIsPlaying(false);
     } else {
-      const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') || 
-                   getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
-      
+      const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
+        getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
+
       const audioMode = audioService.getAudioMode();
-      
+
       if (audioMode === 'clova') {
         setIsPlaying(true);
         const success = await audioService.playClovaTTS(text, selectedLanguage, () => {
@@ -608,21 +608,21 @@ export default function UnifiedFloatingCard({
     // Hide landmarks that are already in tour stops
     const isInTour = tourStops.some(stop => stop.id === landmark.id);
     if (isInTour) return false;
-    
+
     // Filter by search query (case-insensitive, OR condition between words)
     if (landmarkSearchQuery.trim()) {
       const searchWords = landmarkSearchQuery.toLowerCase().trim().split(/\s+/).filter(word => word.length > 0);
       const translatedName = getTranslatedContent(landmark, selectedLanguage, 'name').toLowerCase();
       const originalName = (landmark.name || '').toLowerCase();
       // OR condition: match if ANY word is found in either name
-      const hasMatch = searchWords.some(word => 
+      const hasMatch = searchWords.some(word =>
         translatedName.includes(word) || originalName.includes(word)
       );
       if (!hasMatch) {
         return false;
       }
     }
-    
+
     const isActivity = landmark.category === 'Activity';
     const isRestaurant = landmark.category === 'Restaurant';
     const isGiftShop = landmark.category === 'Gift Shop' || landmark.category === 'Shop';
@@ -647,120 +647,122 @@ export default function UnifiedFloatingCard({
       className="bg-card border border-border rounded-lg shadow-lg flex flex-col"
       style={{
         position: 'fixed',
-        left: '50%',
+        left: isMobile ? '50%' : '20px',
         top: '50%',
         zIndex,
         cursor: 'default',
         width: isMobile ? 'calc(100vw - 16px)' : '28rem',
         maxWidth: 'calc(100vw - 16px)',
         maxHeight: isMobile ? 'calc(100vh - 80px)' : 'calc(100vh - 32px)',
-        transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
+        transform: isMobile
+          ? `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
+          : `translate(${translate.x}px, calc(-50% + ${translate.y}px))`
       }}
       onClick={handleCardClick}
       data-testid="card-unified-floating-container"
     >
       {/* Header - Draggable */}
-      <div 
+      <div
         className="flex items-center gap-2 p-3 sm:p-4 border-b flex-shrink-0"
         style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         onMouseDown={handleStart}
         onTouchStart={handleStart}
       >
-          <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
-            {t('cruisePortInfo', selectedLanguage)}
-          </h3>
-          
-          {/* Action buttons - Only show when landmark is selected */}
-          {selectedLandmark && (
-            <>
+        <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
+          {t('cruisePortInfo', selectedLanguage)}
+        </h3>
+
+        {/* Action buttons - Only show when landmark is selected */}
+        {selectedLandmark && (
+          <>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                onNavigate?.(selectedLandmark);
+                setIsMinimized(true);
+              }}
+              className="h-8 w-8"
+              data-testid="button-header-navigate"
+            >
+              <Navigation className="w-4 h-4" />
+            </Button>
+            {onAddToTour && (
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={(e) => {
                   e.stopPropagation();
-                  onNavigate?.(selectedLandmark);
-                  setIsMinimized(true);
-                }}
-                className="h-8 w-8"
-                data-testid="button-header-navigate"
-              >
-                <Navigation className="w-4 h-4" />
-              </Button>
-              {onAddToTour && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onAddToTour(selectedLandmark);
-                    // List 탭으로 먼저 전환
-                    setActiveTab('list');
-                    // 그 다음 랜드마크 닫기
-                    setTimeout(() => {
-                      onLandmarkClose();
-                    }, 100);
-                  }}
-                  disabled={isInTour || tourStops.some(stop => stop.id === selectedLandmark.id)}
-                  className="h-8 w-8"
-                  data-testid="button-header-add-to-tour"
-                >
-                  <MapPinned className="w-4 h-4" />
-                </Button>
-              )}
-            </>
-          )}
-          
-          {/* Info icon - Only show when no landmark selected */}
-          {!selectedLandmark && activeTab === 'landmark' && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-8 w-8"
-              disabled
-              data-testid="button-header-info-icon"
-            >
-              <Info className="w-4 h-4 opacity-50" />
-            </Button>
-          )}
-          
-          {/* List button in header */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveTab('list');
-            }}
-            className="h-8 w-8"
-            data-testid="button-header-list"
-          >
-            <List className="w-4 h-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (selectedLandmark) {
-                if (tourAddedInDialog) {
+                  onAddToTour(selectedLandmark);
+                  // List 탭으로 먼저 전환
                   setActiveTab('list');
-                  setTourAddedInDialog(false);
-                }
-                onLandmarkClose();
-              } else if (showCruisePort && onCruisePortClose) {
-                setActiveTab('list');
-                onCruisePortClose();
-              } else {
-                setActiveTab('list');
-              }
-              // 항상 카드 숨기기
-              setIsMinimized(true);
-            }}
-            className="h-6 w-6"
-            data-testid="button-close-unified"
+                  // 그 다음 랜드마크 닫기
+                  setTimeout(() => {
+                    onLandmarkClose();
+                  }, 100);
+                }}
+                disabled={isInTour || tourStops.some(stop => stop.id === selectedLandmark.id)}
+                className="h-8 w-8"
+                data-testid="button-header-add-to-tour"
+              >
+                <MapPinned className="w-4 h-4" />
+              </Button>
+            )}
+          </>
+        )}
+
+        {/* Info icon - Only show when no landmark selected */}
+        {!selectedLandmark && activeTab === 'landmark' && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            disabled
+            data-testid="button-header-info-icon"
           >
-            <X className="w-4 h-4" />
+            <Info className="w-4 h-4 opacity-50" />
           </Button>
+        )}
+
+        {/* List button in header */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={(e) => {
+            e.stopPropagation();
+            setActiveTab('list');
+          }}
+          className="h-8 w-8"
+          data-testid="button-header-list"
+        >
+          <List className="w-4 h-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (selectedLandmark) {
+              if (tourAddedInDialog) {
+                setActiveTab('list');
+                setTourAddedInDialog(false);
+              }
+              onLandmarkClose();
+            } else if (showCruisePort && onCruisePortClose) {
+              setActiveTab('list');
+              onCruisePortClose();
+            } else {
+              setActiveTab('list');
+            }
+            // 항상 카드 숨기기
+            setIsMinimized(true);
+          }}
+          className="h-6 w-6"
+          data-testid="button-close-unified"
+        >
+          <X className="w-4 h-4" />
+        </Button>
       </div>
 
       {/* Content area with scroll */}
@@ -784,7 +786,7 @@ export default function UnifiedFloatingCard({
                       {aiRecommendation.explanation}
                     </p>
                     <div className="mt-2 text-xs text-purple-700 dark:text-purple-300">
-                      {selectedLanguage === 'ko' 
+                      {selectedLanguage === 'ko'
                         ? `예상 소요 시간: ${aiRecommendation.totalEstimatedTime}분`
                         : `Estimated time: ${aiRecommendation.totalEstimatedTime} min`
                       }
@@ -796,407 +798,406 @@ export default function UnifiedFloatingCard({
 
             {/* Scrollable content - Contains both selected landmark and list */}
             <div className="space-y-4">
-            {selectedLandmark && (
-              <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1">
-                    <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
-                      {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                    </h4>
-                    <div className="flex items-center gap-2 flex-wrap mb-3">
-                      <Badge variant={selectedLandmark.category === 'Activity' ? 'default' : 'secondary'}>
-                        {selectedLandmark.category === 'Activity' ? <Activity className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
-                        {selectedLandmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
-                      </Badge>
-                      {selectedLandmark.category && selectedLandmark.category !== 'Activity' && (
-                        <Badge variant="outline">{selectedLandmark.category}</Badge>
-                      )}
-                    </div>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => {
-                      onLandmarkClose();
-                      setIsMinimized(true);
-                    }}
-                    className="h-8 w-8 flex-shrink-0"
-                    data-testid="button-close-landmark-info"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </div>
-
-                {selectedLandmark.photos && selectedLandmark.photos.length > 0 && (
-                  <PhotoGallery 
-                    photos={selectedLandmark.photos} 
-                    title={getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                  />
-                )}
-
-                <div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
-                  </p>
-                  
-                  {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') && (
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={handlePlayAudio}
-                          className="gap-2"
-                          data-testid="button-play-audio"
-                        >
-                          {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                          {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
-                        </Button>
-                        {isPlaying && (
-                          <select
-                            value={playbackRate}
-                            onChange={(e) => {
-                              const rate = parseFloat(e.target.value);
-                              setPlaybackRate(rate);
-                              audioService.setRate(rate);
-                            }}
-                            className="px-2 py-1 text-sm border rounded"
-                            data-testid="select-playback-rate"
-                          >
-                            <option value="0.5">0.5x</option>
-                            <option value="0.75">0.75x</option>
-                            <option value="1.0">1.0x</option>
-                            <option value="1.25">1.25x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="2.0">2.0x</option>
-                          </select>
+              {selectedLandmark && (
+                <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1">
+                      <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
+                        {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                      </h4>
+                      <div className="flex items-center gap-2 flex-wrap mb-3">
+                        <Badge variant={selectedLandmark.category === 'Activity' ? 'default' : 'secondary'}>
+                          {selectedLandmark.category === 'Activity' ? <Activity className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
+                          {selectedLandmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
+                        </Badge>
+                        {selectedLandmark.category && selectedLandmark.category !== 'Activity' && (
+                          <Badge variant="outline">{selectedLandmark.category}</Badge>
                         )}
                       </div>
-                      <p className="text-sm leading-relaxed">
-                        {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription')}
-                      </p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        onLandmarkClose();
+                        setIsMinimized(true);
+                      }}
+                      className="h-8 w-8 flex-shrink-0"
+                      data-testid="button-close-landmark-info"
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+
+                  {selectedLandmark.photos && selectedLandmark.photos.length > 0 && (
+                    <PhotoGallery
+                      photos={selectedLandmark.photos}
+                      title={getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                    />
+                  )}
+
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
+                    </p>
+
+                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') && (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handlePlayAudio}
+                            className="gap-2"
+                            data-testid="button-play-audio"
+                          >
+                            {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                            {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
+                          </Button>
+                          {isPlaying && (
+                            <select
+                              value={playbackRate}
+                              onChange={(e) => {
+                                const rate = parseFloat(e.target.value);
+                                setPlaybackRate(rate);
+                                audioService.setRate(rate);
+                              }}
+                              className="px-2 py-1 text-sm border rounded"
+                              data-testid="select-playback-rate"
+                            >
+                              <option value="0.5">0.5x</option>
+                              <option value="0.75">0.75x</option>
+                              <option value="1.0">1.0x</option>
+                              <option value="1.25">1.25x</option>
+                              <option value="1.5">1.5x</option>
+                              <option value="2.0">2.0x</option>
+                            </select>
+                          )}
+                        </div>
+                        <p className="text-sm leading-relaxed">
+                          {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription')}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {selectedLandmark.category === 'Activity' && (
+                    <div className="pt-3 border-t">
+                      <h5 className="font-semibold mb-2 flex items-center gap-2">
+                        <Ticket className="w-4 h-4" />
+                        {t('bookTicketsTours', selectedLanguage)}
+                      </h5>
+                      <div className="space-y-2">
+                        {/* 한국어: Klook */}
+                        {selectedLanguage === 'ko' && (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full justify-start gap-2"
+                            onClick={() => {
+                              const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                              window.open(`https://www.klook.com/ko/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            }}
+                            data-testid="button-book-klook"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Klook에서 예약
+                          </Button>
+                        )}
+
+                        {/* 일본어: Klook, Viator */}
+                        {selectedLanguage === 'ja' && (
+                          <>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                window.open(`https://www.klook.com/ja/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                              }}
+                              data-testid="button-book-klook"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              Klookで予約
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                window.open(`https://www.viator.com/ja-JP/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                              }}
+                              data-testid="button-book-viator"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              Viatorで予約
+                            </Button>
+                          </>
+                        )}
+
+                        {/* 중국어: Klook, Trip.com */}
+                        {selectedLanguage === 'zh' && (
+                          <>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                window.open(`https://www.klook.com/zh-CN/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                              }}
+                              data-testid="button-book-klook"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              Klook预订
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                window.open(`https://cn.trip.com/search/things-to-do?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                              }}
+                              data-testid="button-book-trip"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              Trip.com预订
+                            </Button>
+                          </>
+                        )}
+
+                        {/* 동남아시아 언어: Klook */}
+                        {(selectedLanguage === 'th' || selectedLanguage === 'vi' || selectedLanguage === 'id') && (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full justify-start gap-2"
+                            onClick={() => {
+                              const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                              const langCode = selectedLanguage === 'th' ? 'th-TH' : selectedLanguage === 'vi' ? 'vi-VN' : 'id-ID';
+                              window.open(`https://www.klook.com/${langCode}/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            }}
+                            data-testid="button-book-klook"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            {selectedLanguage === 'th' ? 'จองกับ Klook' : selectedLanguage === 'vi' ? 'Đặt trên Klook' : 'Pesan di Klook'}
+                          </Button>
+                        )}
+
+                        {/* 영어/유럽 언어: GetYourGuide, Viator */}
+                        {['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar', 'hi', 'tr', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs'].includes(selectedLanguage) && (
+                          <>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                // Language mapping for GetYourGuide
+                                const gygLang = selectedLanguage === 'es' ? 'es' : selectedLanguage === 'fr' ? 'fr' : selectedLanguage === 'de' ? 'de' : selectedLanguage === 'it' ? 'it' : selectedLanguage === 'pt' ? 'pt-BR' : 'en';
+                                window.open(`https://www.getyourguide.com/${gygLang}/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                              }}
+                              data-testid="button-book-getyourguide"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              {t('bookOnGetYourGuide', selectedLanguage)}
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => {
+                                const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                // Language mapping for Viator
+                                const viatorLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-BR' : 'en-US';
+                                window.open(`https://www.viator.com/${viatorLang}/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                              }}
+                              data-testid="button-book-viator"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              {t('bookOnViator', selectedLanguage)}
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedLandmark.category === 'Restaurant' && (
+                    <div className="pt-3 border-t">
+                      <h5 className="font-semibold mb-3 flex items-center gap-2">
+                        <Utensils className="w-4 h-4" />
+                        {t('restaurantInfo', selectedLanguage)}
+                      </h5>
+                      <div className="space-y-3">
+                        {selectedLandmark.openingHours && (
+                          <div className="flex items-start gap-2 text-sm">
+                            <Clock className="w-4 h-4 text-muted-foreground mt-0.5" />
+                            <div>
+                              <p className="font-medium">{t('openingHours', selectedLanguage)}</p>
+                              <p className="text-muted-foreground">{selectedLandmark.openingHours}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        {selectedLandmark.priceRange && (
+                          <div className="flex items-start gap-2 text-sm">
+                            <Euro className="w-4 h-4 text-muted-foreground mt-0.5" />
+                            <div>
+                              <p className="font-medium">{t('priceRange', selectedLanguage)}</p>
+                              <p className="text-muted-foreground">{selectedLandmark.priceRange}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        {selectedLandmark.cuisine && (
+                          <div className="flex items-start gap-2 text-sm">
+                            <ChefHat className="w-4 h-4 text-muted-foreground mt-0.5" />
+                            <div>
+                              <p className="font-medium">{t('cuisine', selectedLanguage)}</p>
+                              <p className="text-muted-foreground">{selectedLandmark.cuisine}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        {selectedLandmark.phoneNumber && (
+                          <div className="flex items-start gap-2 text-sm">
+                            <Phone className="w-4 h-4 text-muted-foreground mt-0.5" />
+                            <div>
+                              <p className="font-medium">{t('phoneNumber', selectedLanguage)}</p>
+                              <a
+                                href={`tel:${selectedLandmark.phoneNumber}`}
+                                className="text-primary hover:underline"
+                                data-testid="link-restaurant-phone"
+                              >
+                                {selectedLandmark.phoneNumber}
+                              </a>
+                            </div>
+                          </div>
+                        )}
+
+                        {selectedLandmark.menuHighlights && selectedLandmark.menuHighlights.length > 0 && (
+                          <div className="text-sm">
+                            <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
+                            <div className="flex flex-wrap gap-1">
+                              {selectedLandmark.menuHighlights.map((dish, idx) => (
+                                <Badge key={idx} variant="outline" className="text-xs">
+                                  {dish}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="flex gap-2">
+                          {selectedLandmark.phoneNumber && (
+                            <Button
+                              variant="outline"
+                              className="flex-1 gap-2"
+                              onClick={() => window.open(`tel:${selectedLandmark.phoneNumber}`, '_self')}
+                              data-testid="button-call-restaurant"
+                            >
+                              <Phone className="w-4 h-4" />
+                              {t('callRestaurant', selectedLanguage)}
+                            </Button>
+                          )}
+                          {selectedLandmark.reservationUrl && (
+                            <Button
+                              variant="default"
+                              className="flex-1 gap-2"
+                              onClick={() => window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
+                              data-testid="button-make-reservation"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              {t('makeReservation', selectedLanguage)}
+                            </Button>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
+              )}
 
-                {selectedLandmark.category === 'Activity' && (
-                  <div className="pt-3 border-t">
-                    <h5 className="font-semibold mb-2 flex items-center gap-2">
-                      <Ticket className="w-4 h-4" />
-                      {t('bookTicketsTours', selectedLanguage)}
-                    </h5>
-                    <div className="space-y-2">
-                      {/* 한국어: Klook */}
-                      {selectedLanguage === 'ko' && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full justify-start gap-2"
-                          onClick={() => {
-                            const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                            window.open(`https://www.klook.com/ko/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                          }}
-                          data-testid="button-book-klook"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          Klook에서 예약
-                        </Button>
-                      )}
-                      
-                      {/* 일본어: Klook, Viator */}
-                      {selectedLanguage === 'ja' && (
-                        <>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start gap-2"
-                            onClick={() => {
-                              const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                              window.open(`https://www.klook.com/ja/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                            }}
-                            data-testid="button-book-klook"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            Klookで予約
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start gap-2"
-                            onClick={() => {
-                              const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                              window.open(`https://www.viator.com/ja-JP/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                            }}
-                            data-testid="button-book-viator"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            Viatorで予約
-                          </Button>
-                        </>
-                      )}
-                      
-                      {/* 중국어: Klook, Trip.com */}
-                      {selectedLanguage === 'zh' && (
-                        <>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start gap-2"
-                            onClick={() => {
-                              const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                              window.open(`https://www.klook.com/zh-CN/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                            }}
-                            data-testid="button-book-klook"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            Klook预订
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start gap-2"
-                            onClick={() => {
-                              const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                              window.open(`https://cn.trip.com/search/things-to-do?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                            }}
-                            data-testid="button-book-trip"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            Trip.com预订
-                          </Button>
-                        </>
-                      )}
-                      
-                      {/* 동남아시아 언어: Klook */}
-                      {(selectedLanguage === 'th' || selectedLanguage === 'vi' || selectedLanguage === 'id') && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full justify-start gap-2"
-                          onClick={() => {
-                            const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                            const langCode = selectedLanguage === 'th' ? 'th-TH' : selectedLanguage === 'vi' ? 'vi-VN' : 'id-ID';
-                            window.open(`https://www.klook.com/${langCode}/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                          }}
-                          data-testid="button-book-klook"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          {selectedLanguage === 'th' ? 'จองกับ Klook' : selectedLanguage === 'vi' ? 'Đặt trên Klook' : 'Pesan di Klook'}
-                        </Button>
-                      )}
-                      
-                      {/* 영어/유럽 언어: GetYourGuide, Viator */}
-                      {['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar', 'hi', 'tr', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs'].includes(selectedLanguage) && (
-                        <>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start gap-2"
-                            onClick={() => {
-                              const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                              // Language mapping for GetYourGuide
-                              const gygLang = selectedLanguage === 'es' ? 'es' : selectedLanguage === 'fr' ? 'fr' : selectedLanguage === 'de' ? 'de' : selectedLanguage === 'it' ? 'it' : selectedLanguage === 'pt' ? 'pt-BR' : 'en';
-                              window.open(`https://www.getyourguide.com/${gygLang}/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                            }}
-                            data-testid="button-book-getyourguide"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            {t('bookOnGetYourGuide', selectedLanguage)}
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start gap-2"
-                            onClick={() => {
-                              const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                              // Language mapping for Viator
-                              const viatorLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-BR' : 'en-US';
-                              window.open(`https://www.viator.com/${viatorLang}/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                            }}
-                            data-testid="button-book-viator"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            {t('bookOnViator', selectedLanguage)}
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                )}
+              {/* Landmark List - Category-based sections */}
+              <div className="space-y-4">
+                {(() => {
+                  const landmarksByCategory = filteredListLandmarks.reduce((acc, item) => {
+                    const category = item.landmark.category || 'Landmark';
+                    if (!acc[category]) acc[category] = [];
+                    acc[category].push(item);
+                    return acc;
+                  }, {} as Record<string, typeof filteredListLandmarks>);
 
-                {selectedLandmark.category === 'Restaurant' && (
-                  <div className="pt-3 border-t">
-                    <h5 className="font-semibold mb-3 flex items-center gap-2">
-                      <Utensils className="w-4 h-4" />
-                      {t('restaurantInfo', selectedLanguage)}
-                    </h5>
-                    <div className="space-y-3">
-                      {selectedLandmark.openingHours && (
-                        <div className="flex items-start gap-2 text-sm">
-                          <Clock className="w-4 h-4 text-muted-foreground mt-0.5" />
-                          <div>
-                            <p className="font-medium">{t('openingHours', selectedLanguage)}</p>
-                            <p className="text-muted-foreground">{selectedLandmark.openingHours}</p>
-                          </div>
-                        </div>
-                      )}
-                      
-                      {selectedLandmark.priceRange && (
-                        <div className="flex items-start gap-2 text-sm">
-                          <Euro className="w-4 h-4 text-muted-foreground mt-0.5" />
-                          <div>
-                            <p className="font-medium">{t('priceRange', selectedLanguage)}</p>
-                            <p className="text-muted-foreground">{selectedLandmark.priceRange}</p>
-                          </div>
-                        </div>
-                      )}
-                      
-                      {selectedLandmark.cuisine && (
-                        <div className="flex items-start gap-2 text-sm">
-                          <ChefHat className="w-4 h-4 text-muted-foreground mt-0.5" />
-                          <div>
-                            <p className="font-medium">{t('cuisine', selectedLanguage)}</p>
-                            <p className="text-muted-foreground">{selectedLandmark.cuisine}</p>
-                          </div>
-                        </div>
-                      )}
-                      
-                      {selectedLandmark.phoneNumber && (
-                        <div className="flex items-start gap-2 text-sm">
-                          <Phone className="w-4 h-4 text-muted-foreground mt-0.5" />
-                          <div>
-                            <p className="font-medium">{t('phoneNumber', selectedLanguage)}</p>
-                            <a 
-                              href={`tel:${selectedLandmark.phoneNumber}`}
-                              className="text-primary hover:underline"
-                              data-testid="link-restaurant-phone"
+                  const renderSection = (category: string, items: typeof filteredListLandmarks, title: string, icon: ReactNode) => {
+                    if (items.length === 0) return null;
+                    return (
+                      <div key={category} className="space-y-2">
+                        <h5 className="font-semibold text-sm text-muted-foreground flex items-center gap-2">
+                          {icon}
+                          {title}
+                        </h5>
+                        {items.map(({ landmark, distance }) => {
+                          const isSelected = selectedLandmark?.id === landmark.id;
+                          return (
+                            <div
+                              key={landmark.id}
+                              className={`p-3 rounded-lg cursor-pointer transition-all ${isSelected
+                                  ? 'bg-primary/20 ring-2 ring-primary animate-pulse'
+                                  : 'bg-muted/30 hover-elevate'
+                                }`}
+                              onClick={() => onLandmarkSelect?.(landmark)}
+                              data-testid={`card-landmark-${landmark.id}`}
                             >
-                              {selectedLandmark.phoneNumber}
-                            </a>
-                          </div>
-                        </div>
-                      )}
-                      
-                      {selectedLandmark.menuHighlights && selectedLandmark.menuHighlights.length > 0 && (
-                        <div className="text-sm">
-                          <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
-                          <div className="flex flex-wrap gap-1">
-                            {selectedLandmark.menuHighlights.map((dish, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs">
-                                {dish}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      
-                      <div className="flex gap-2">
-                        {selectedLandmark.phoneNumber && (
-                          <Button
-                            variant="outline"
-                            className="flex-1 gap-2"
-                            onClick={() => window.open(`tel:${selectedLandmark.phoneNumber}`, '_self')}
-                            data-testid="button-call-restaurant"
-                          >
-                            <Phone className="w-4 h-4" />
-                            {t('callRestaurant', selectedLanguage)}
-                          </Button>
-                        )}
-                        {selectedLandmark.reservationUrl && (
-                          <Button
-                            variant="default"
-                            className="flex-1 gap-2"
-                            onClick={() => window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
-                            data-testid="button-make-reservation"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            {t('makeReservation', selectedLanguage)}
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Landmark List - Category-based sections */}
-            <div className="space-y-4">
-              {(() => {
-                const landmarksByCategory = filteredListLandmarks.reduce((acc, item) => {
-                  const category = item.landmark.category || 'Landmark';
-                  if (!acc[category]) acc[category] = [];
-                  acc[category].push(item);
-                  return acc;
-                }, {} as Record<string, typeof filteredListLandmarks>);
-
-                const renderSection = (category: string, items: typeof filteredListLandmarks, title: string, icon: ReactNode) => {
-                  if (items.length === 0) return null;
-                  return (
-                    <div key={category} className="space-y-2">
-                      <h5 className="font-semibold text-sm text-muted-foreground flex items-center gap-2">
-                        {icon}
-                        {title}
-                      </h5>
-                      {items.map(({ landmark, distance }) => {
-                        const isSelected = selectedLandmark?.id === landmark.id;
-                        return (
-                        <div
-                          key={landmark.id}
-                          className={`p-3 rounded-lg cursor-pointer transition-all ${
-                            isSelected 
-                              ? 'bg-primary/20 ring-2 ring-primary animate-pulse' 
-                              : 'bg-muted/30 hover-elevate'
-                          }`}
-                          onClick={() => onLandmarkSelect?.(landmark)}
-                          data-testid={`card-landmark-${landmark.id}`}
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2 mb-1">
-                                <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
-                                  {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                                </h4>
-                                {spokenLandmarks.has(landmark.id) && (
-                                  <Volume2 className="w-3 h-3 text-green-600" />
-                                )}
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
+                                      {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                                    </h4>
+                                    {spokenLandmarks.has(landmark.id) && (
+                                      <Volume2 className="w-3 h-3 text-green-600" />
+                                    )}
+                                  </div>
+                                  {distance !== null && (
+                                    <p className="text-xs text-muted-foreground">
+                                      {formatDistance(distance)}
+                                    </p>
+                                  )}
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    onLandmarkRoute(landmark);
+                                    setIsMinimized(true);
+                                  }}
+                                  className="h-8 w-8"
+                                  data-testid={`button-navigate-${landmark.id}`}
+                                >
+                                  <Navigation className="w-4 h-4" />
+                                </Button>
                               </div>
-                              {distance !== null && (
-                                <p className="text-xs text-muted-foreground">
-                                  {formatDistance(distance)}
-                                </p>
-                              )}
                             </div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                onLandmarkRoute(landmark);
-                                setIsMinimized(true);
-                              }}
-                              className="h-8 w-8"
-                              data-testid={`button-navigate-${landmark.id}`}
-                            >
-                              <Navigation className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </div>
-                        );
-                      })}
-                    </div>
-                  );
-                };
+                          );
+                        })}
+                      </div>
+                    );
+                  };
 
-                return (
-                  <>
-                    {renderSection('Landmark', landmarksByCategory['Landmark'] || [], t('landmarksSection', selectedLanguage), <LandmarkIcon className="w-4 h-4 text-primary" />)}
-                    {renderSection('Activity', landmarksByCategory['Activity'] || [], t('activitiesSection', selectedLanguage), <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
-                    {renderSection('Restaurant', landmarksByCategory['Restaurant'] || [], t('restaurantsSection', selectedLanguage), <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
-                  </>
-                );
-              })()}
-            </div>
+                  return (
+                    <>
+                      {renderSection('Landmark', landmarksByCategory['Landmark'] || [], t('landmarksSection', selectedLanguage), <LandmarkIcon className="w-4 h-4 text-primary" />)}
+                      {renderSection('Activity', landmarksByCategory['Activity'] || [], t('activitiesSection', selectedLanguage), <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
+                      {renderSection('Restaurant', landmarksByCategory['Restaurant'] || [], t('restaurantsSection', selectedLanguage), <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
+                    </>
+                  );
+                })()}
+              </div>
             </div>
           </TabsContent>
 
@@ -1287,7 +1288,7 @@ export default function UnifiedFloatingCard({
                             <ChevronLeft className="w-4 h-4" />
                             {t('previous', selectedLanguage)}
                           </Button>
-                          
+
                           <span className="text-sm text-muted-foreground" data-testid="text-transport-page-info">
                             {transportPage} / {Math.ceil(city.cruisePort.transportOptions.length / transportItemsPerPage)}
                           </span>
@@ -1334,9 +1335,9 @@ export default function UnifiedFloatingCard({
             {/* Captured Route Image */}
             {capturedRouteImage && (
               <div className="mb-3 relative">
-                <img 
-                  src={capturedRouteImage} 
-                  alt="Tour Route" 
+                <img
+                  src={capturedRouteImage}
+                  alt="Tour Route"
                   className="w-full h-32 object-cover rounded-lg border border-[hsl(14,85%,55%)]/30"
                 />
                 <Button
@@ -1353,7 +1354,7 @@ export default function UnifiedFloatingCard({
                 </div>
               </div>
             )}
-            
+
             {/* Tour Route Section - Scrollable */}
             {tourStops.length > 0 && (
               <div className="pb-3 mb-3 border-b flex-shrink-0">
@@ -1405,25 +1406,25 @@ export default function UnifiedFloatingCard({
                         const trafficInfo = getTrafficInfo(selectedLanguage, departureTime);
                         const adjustedDuration = Math.round(tourRouteInfo.duration * trafficInfo.multiplier);
                         const travelMinutes = Math.round(adjustedDuration / 60);
-                        const stayMinutes = tourStops.reduce((sum, stop) => 
+                        const stayMinutes = tourStops.reduce((sum, stop) =>
                           sum + (tourStopDurations[stop.id] || tourTimePerStop), 0);
                         const totalMinutes = travelMinutes + stayMinutes;
                         const hours = Math.floor(totalMinutes / 60);
                         const mins = totalMinutes % 60;
-                        
+
                         // Calculate estimated end time
                         const startTime = departureTime || new Date();
                         const endTime = new Date(startTime.getTime() + totalMinutes * 60 * 1000);
                         const endHour = endTime.getHours();
                         const endMinute = endTime.getMinutes();
-                        
+
                         // Check if tour ends late (after 8 PM / 20:00)
                         const isLateEnd = endHour >= 20;
                         // Check if tour is very long (over 6 hours)
                         const isVeryLong = totalMinutes > 360;
                         // Check if tour is moderately long (over 4 hours)
                         const isModeratelyLong = totalMinutes > 240 && totalMinutes <= 360;
-                        
+
                         const formatTime = (date: Date) => {
                           return date.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', {
                             hour: '2-digit',
@@ -1431,12 +1432,12 @@ export default function UnifiedFloatingCard({
                             hour12: selectedLanguage !== 'ko'
                           });
                         };
-                        
+
                         return (
                           <>
                             {/* Traffic Status Badge */}
                             <div className="flex items-center justify-between mb-2">
-                              <div 
+                              <div
                                 className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-white text-xs font-medium"
                                 style={{ backgroundColor: trafficInfo.color }}
                                 data-testid="badge-traffic-status"
@@ -1450,13 +1451,13 @@ export default function UnifiedFloatingCard({
                                 )}
                               </div>
                               <span className="text-[10px] text-muted-foreground">
-                                {departureTime 
+                                {departureTime
                                   ? `${selectedLanguage === 'ko' ? '출발' : 'Depart'}: ${formatTime(departureTime)}`
                                   : (selectedLanguage === 'ko' ? '현재 교통상황' : 'Current traffic')
                                 }
                               </span>
                             </div>
-                            
+
                             {/* Time Warning Alert */}
                             {(isLateEnd || isVeryLong) && (
                               <div className="flex items-center gap-2 p-2 mb-2 rounded-md bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400">
@@ -1466,19 +1467,19 @@ export default function UnifiedFloatingCard({
                                     {selectedLanguage === 'ko' ? '⚠️ 시간 초과 주의!' : '⚠️ Time Warning!'}
                                   </p>
                                   <p className="text-[10px] opacity-80">
-                                    {isLateEnd 
-                                      ? (selectedLanguage === 'ko' 
-                                          ? `예상 종료: ${formatTime(endTime)} (늦은 시간)` 
-                                          : `Est. end: ${formatTime(endTime)} (late evening)`)
+                                    {isLateEnd
+                                      ? (selectedLanguage === 'ko'
+                                        ? `예상 종료: ${formatTime(endTime)} (늦은 시간)`
+                                        : `Est. end: ${formatTime(endTime)} (late evening)`)
                                       : (selectedLanguage === 'ko'
-                                          ? `총 ${hours}시간 ${mins}분 - 투어가 매우 깁니다`
-                                          : `${hours}h ${mins}m total - very long tour`)
+                                        ? `총 ${hours}시간 ${mins}분 - 투어가 매우 깁니다`
+                                        : `${hours}h ${mins}m total - very long tour`)
                                     }
                                   </p>
                                 </div>
                               </div>
                             )}
-                            
+
                             {isModeratelyLong && !isLateEnd && !isVeryLong && (
                               <div className="flex items-center justify-between gap-2 p-2 mb-2 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
                                 <div className="flex items-center gap-2">
@@ -1488,7 +1489,7 @@ export default function UnifiedFloatingCard({
                                       {selectedLanguage === 'ko' ? '💡 긴 투어입니다' : '💡 Long Tour'}
                                     </p>
                                     <p className="text-[10px] opacity-80">
-                                      {selectedLanguage === 'ko' 
+                                      {selectedLanguage === 'ko'
                                         ? `예상 종료: ${formatTime(endTime)} - 휴식을 권장합니다`
                                         : `Est. end: ${formatTime(endTime)} - consider breaks`
                                       }
@@ -1501,11 +1502,11 @@ export default function UnifiedFloatingCard({
                                       <div className="flex items-center gap-1 justify-end">
                                         <span className="opacity-70">{selectedLanguage === 'ko' ? '출발' : 'From'}:</span>
                                         <span className="font-medium text-green-600 dark:text-green-400 truncate max-w-[60px]">
-                                          {startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') : 
-                                           startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                                           startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                                           startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
-                                           (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
+                                          {startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') :
+                                            startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                              startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                                startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
+                                                  (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
                                         </span>
                                       </div>
                                     )}
@@ -1513,11 +1514,11 @@ export default function UnifiedFloatingCard({
                                       <div className="flex items-center gap-1 justify-end">
                                         <span className="opacity-70">{selectedLanguage === 'ko' ? '도착' : 'To'}:</span>
                                         <span className="font-medium text-red-600 dark:text-red-400 truncate max-w-[60px]">
-                                          {endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') : 
-                                           endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                                           endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                                           endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
-                                           (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
+                                          {endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') :
+                                            endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                              endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                                endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
+                                                  (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
                                         </span>
                                       </div>
                                     )}
@@ -1525,7 +1526,7 @@ export default function UnifiedFloatingCard({
                                 )}
                               </div>
                             )}
-                            
+
                             {/* Start/End Point Info */}
                             <div className="flex items-center justify-between gap-2 mb-2 text-xs">
                               <div className="flex flex-col gap-0.5 bg-green-500/10 border border-green-500/30 rounded-md px-2 py-1 max-w-[48%]">
@@ -1538,19 +1539,19 @@ export default function UnifiedFloatingCard({
                                 {startingPoint && (
                                   <div className="text-[10px] text-green-600 dark:text-green-500 pl-3.5">
                                     <span className="flex-shrink-0">
-                                      {startingPoint.type === 'my_location' ? '📍' : 
-                                       startingPoint.type === 'hotel' ? '🏨' :
-                                       startingPoint.type === 'airport' ? '✈️' :
-                                       startingPoint.type === 'cruise_terminal' ? '🚢' :
-                                       startingPoint.type === 'train_station' ? '🚂' : '📍'}
+                                      {startingPoint.type === 'my_location' ? '📍' :
+                                        startingPoint.type === 'hotel' ? '🏨' :
+                                          startingPoint.type === 'airport' ? '✈️' :
+                                            startingPoint.type === 'cruise_terminal' ? '🚢' :
+                                              startingPoint.type === 'train_station' ? '🚂' : '📍'}
                                     </span>
                                     <span className="truncate block" title={startingPoint.name || ''}>
                                       {startingPoint.name || (
-                                        startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') : 
-                                        startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                                        startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                                        startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 항구' : 'Cruise Port') :
-                                        (selectedLanguage === 'ko' ? '지정 위치' : 'Custom')
+                                        startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                                          startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                            startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                              startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 항구' : 'Cruise Port') :
+                                                (selectedLanguage === 'ko' ? '지정 위치' : 'Custom')
                                       )}
                                     </span>
                                   </div>
@@ -1567,26 +1568,26 @@ export default function UnifiedFloatingCard({
                                 {endPoint && (
                                   <div className={`text-[10px] pl-3.5 ${isLateEnd ? 'text-red-500 dark:text-red-400' : 'text-blue-600 dark:text-blue-500'}`}>
                                     <span className="flex-shrink-0">
-                                      {endPoint.type === 'my_location' ? '📍' : 
-                                       endPoint.type === 'hotel' ? '🏨' :
-                                       endPoint.type === 'airport' ? '✈️' :
-                                       endPoint.type === 'cruise_terminal' ? '🚢' :
-                                       endPoint.type === 'train_station' ? '🚂' : '📍'}
+                                      {endPoint.type === 'my_location' ? '📍' :
+                                        endPoint.type === 'hotel' ? '🏨' :
+                                          endPoint.type === 'airport' ? '✈️' :
+                                            endPoint.type === 'cruise_terminal' ? '🚢' :
+                                              endPoint.type === 'train_station' ? '🚂' : '📍'}
                                     </span>
                                     <span className="truncate block" title={endPoint.name || ''}>
                                       {endPoint.name || (
-                                        endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') : 
-                                        endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                                        endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                                        endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 항구' : 'Cruise Port') :
-                                        (selectedLanguage === 'ko' ? '지정 위치' : 'Custom')
+                                        endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                                          endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                            endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                              endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 항구' : 'Cruise Port') :
+                                                (selectedLanguage === 'ko' ? '지정 위치' : 'Custom')
                                       )}
                                     </span>
                                   </div>
                                 )}
                               </div>
                             </div>
-                            
+
                             <div className="flex items-center justify-between gap-4">
                               <div className="flex items-center gap-3">
                                 <div className="flex items-center gap-1.5">
@@ -1599,10 +1600,10 @@ export default function UnifiedFloatingCard({
                                 <div className="flex items-center gap-1.5">
                                   <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '소요' : 'Time'}</span>
                                   <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
-                                    {travelMinutes >= 60 
-                                      ? (selectedLanguage === 'ko' 
-                                          ? `${Math.floor(travelMinutes / 60)}시간 ${travelMinutes % 60}분`
-                                          : `${Math.floor(travelMinutes / 60)}h ${travelMinutes % 60}m`)
+                                    {travelMinutes >= 60
+                                      ? (selectedLanguage === 'ko'
+                                        ? `${Math.floor(travelMinutes / 60)}시간 ${travelMinutes % 60}분`
+                                        : `${Math.floor(travelMinutes / 60)}h ${travelMinutes % 60}m`)
                                       : (selectedLanguage === 'ko' ? `${travelMinutes}분` : `${travelMinutes}min`)
                                     }
                                   </span>
@@ -1612,14 +1613,14 @@ export default function UnifiedFloatingCard({
                                 <Clock className="w-3.5 h-3.5" />
                                 <span className="text-xs font-medium">{selectedLanguage === 'ko' ? '전체' : 'Total'}</span>
                                 <span className="text-sm font-bold">
-                                  {hours > 0 
+                                  {hours > 0
                                     ? (selectedLanguage === 'ko' ? `${hours}시간 ${mins}분` : `${hours}h ${mins}m`)
                                     : (selectedLanguage === 'ko' ? `${totalMinutes}분` : `${totalMinutes}min`)
                                   }
                                 </span>
                               </div>
                             </div>
-                            
+
                             {/* Adjustable stay time note */}
                             <div className="mt-1.5 text-center">
                               <span className="text-[10px] text-muted-foreground">
@@ -1638,7 +1639,7 @@ export default function UnifiedFloatingCard({
                     const startIndex = (tourPage - 1) * tourItemsPerPage;
                     const endIndex = startIndex + tourItemsPerPage;
                     const currentTourStops = tourStops.slice(startIndex, endIndex);
-                    
+
                     return (
                       <>
                         {currentTourStops.map((stop, idx) => {
@@ -1650,11 +1651,11 @@ export default function UnifiedFloatingCard({
                             if (category === 'Gift Shop') return 'hsl(45, 90%, 55%)'; // Gold
                             return 'hsl(14, 85%, 55%)'; // Terracotta (default for landmarks)
                           };
-                          
+
                           const categoryColor = getCategoryColor(stop.category || '');
-                          
+
                           const stopDuration = tourStopDurations[stop.id] || tourTimePerStop;
-                          
+
                           return (
                             <div key={stop.id}>
                               <div
@@ -1673,7 +1674,7 @@ export default function UnifiedFloatingCard({
                                   </p>
                                 </div>
                                 <div className="flex items-center gap-1">
-                                  <div 
+                                  <div
                                     className="flex items-center bg-white/20 rounded-md"
                                     onClick={(e) => e.stopPropagation()}
                                   >
@@ -1741,9 +1742,9 @@ export default function UnifiedFloatingCard({
                                     const segHours = Math.floor(adjustedSegmentDuration / 60);
                                     const segMins = adjustedSegmentDuration % 60;
                                     const timeDisplay = adjustedSegmentDuration >= 60
-                                      ? (selectedLanguage === 'ko' 
-                                          ? `${segHours}시간 ${segMins}분`
-                                          : `${segHours}h ${segMins}m`)
+                                      ? (selectedLanguage === 'ko'
+                                        ? `${segHours}시간 ${segMins}분`
+                                        : `${segHours}h ${segMins}m`)
                                       : (selectedLanguage === 'ko' ? `${adjustedSegmentDuration}분` : `${adjustedSegmentDuration}min`);
                                     return (
                                       <div className="flex items-center gap-1.5 text-xs bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/20 rounded-md px-2 py-0.5">
@@ -1763,7 +1764,7 @@ export default function UnifiedFloatingCard({
                             </div>
                           );
                         })}
-                        
+
                         {/* Tour Pagination */}
                         {tourStops.length > tourItemsPerPage && (
                           <div className="flex items-center justify-between pt-2 border-t">
@@ -1778,7 +1779,7 @@ export default function UnifiedFloatingCard({
                               <ChevronLeft className="w-3 h-3" />
                               Prev
                             </Button>
-                            
+
                             <span className="text-xs text-muted-foreground" data-testid="text-tour-page-info">
                               {tourPage} / {totalPages}
                             </span>
@@ -1802,7 +1803,7 @@ export default function UnifiedFloatingCard({
                 </div>
               </div>
             )}
-            
+
             {/* Landmark Search Input */}
             <div className="relative mb-3 flex-shrink-0">
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -1832,7 +1833,7 @@ export default function UnifiedFloatingCard({
                 </Button>
               )}
             </div>
-            
+
             {/* Category Filter Buttons */}
             <div className="flex flex-wrap gap-1.5 pb-3 mb-3 border-b flex-shrink-0">
               <Button
@@ -1876,7 +1877,7 @@ export default function UnifiedFloatingCard({
                 {selectedLanguage === 'ko' ? '기념품' : 'Gift Shops'}
               </Button>
             </div>
-            
+
             {/* Paginated list - Takes remaining space */}
             <div className="flex-1 min-h-0 flex flex-col">
               <div ref={listScrollRef} className="flex-1 overflow-y-auto space-y-2 pr-1">
@@ -1900,24 +1901,24 @@ export default function UnifiedFloatingCard({
                       if (category === 'Gift Shop') return { bg: 'bg-[hsl(45,90%,55%)]', text: 'text-black', border: 'border-[hsl(45,90%,55%)]' };
                       return { bg: 'bg-[hsl(14,85%,55%)]', text: 'text-white', border: 'border-[hsl(14,85%,55%)]' };
                     };
-                    
+
                     const getCategoryIcon = (category: string | null | undefined) => {
                       if (category === 'Activity') return <Activity className="w-3 h-3" />;
                       if (category === 'Restaurant') return <Utensils className="w-3 h-3" />;
                       if (category === 'Gift Shop') return <ShoppingBag className="w-3 h-3" />;
                       return <LandmarkIcon className="w-3 h-3" />;
                     };
-                    
+
                     const getCategoryLabel = (category: string | null | undefined, lang: string = 'en') => {
                       if (category === 'Activity') return lang === 'ko' ? '액티비티' : 'Activity';
                       if (category === 'Restaurant') return lang === 'ko' ? '레스토랑' : 'Restaurant';
                       if (category === 'Gift Shop') return lang === 'ko' ? '기프트샵' : 'Gift Shop';
                       return lang === 'ko' ? '명소' : 'Landmark';
                     };
-                    
+
                     const styles = getCategoryStyles(landmark.category);
                     const hasPhoto = landmark.photos && landmark.photos.length > 0;
-                    
+
                     return (
                       <div
                         key={landmark.id}
@@ -1929,8 +1930,8 @@ export default function UnifiedFloatingCard({
                           {/* Photo Thumbnail */}
                           {hasPhoto && (
                             <div className="w-20 h-20 flex-shrink-0 relative overflow-hidden">
-                              <img 
-                                src={landmark.photos![0]} 
+                              <img
+                                src={landmark.photos![0]}
                                 alt={getTranslatedContent(landmark, selectedLanguage, 'name')}
                                 className="w-full h-full object-cover"
                               />
@@ -1939,7 +1940,7 @@ export default function UnifiedFloatingCard({
                               </div>
                             </div>
                           )}
-                          
+
                           {/* Content */}
                           <div className={`flex-1 p-2.5 flex flex-col justify-between ${!hasPhoto ? 'pl-3' : ''}`}>
                             <div>
@@ -1964,7 +1965,7 @@ export default function UnifiedFloatingCard({
                                 </div>
                               </div>
                             </div>
-                            
+
                             {/* Footer: Distance + Actions */}
                             <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/50">
                               <div className="flex items-center gap-2">
@@ -1981,8 +1982,8 @@ export default function UnifiedFloatingCard({
                                         if (walkingMinutes >= 60) {
                                           const hours = Math.floor(walkingMinutes / 60);
                                           const mins = walkingMinutes % 60;
-                                          return selectedLanguage === 'ko' 
-                                            ? `${hours}시간 ${mins}분` 
+                                          return selectedLanguage === 'ko'
+                                            ? `${hours}시간 ${mins}분`
                                             : `${hours}h ${mins}m`;
                                         }
                                         return selectedLanguage === 'ko' ? `${walkingMinutes}분` : `${walkingMinutes}min`;
@@ -2016,15 +2017,15 @@ export default function UnifiedFloatingCard({
                                   </TooltipTrigger>
                                   <TooltipContent side="top" className="text-xs">
                                     {selectedLanguage === 'ko' ? '길찾기' :
-                                     selectedLanguage === 'es' ? 'Navegar' :
-                                     selectedLanguage === 'fr' ? 'Naviguer' :
-                                     selectedLanguage === 'de' ? 'Navigation' :
-                                     selectedLanguage === 'it' ? 'Naviga' :
-                                     selectedLanguage === 'zh' ? '导航' :
-                                     selectedLanguage === 'ja' ? 'ナビ' :
-                                     selectedLanguage === 'pt' ? 'Navegar' :
-                                     selectedLanguage === 'ru' ? 'Навигация' :
-                                     'Navigate'}
+                                      selectedLanguage === 'es' ? 'Navegar' :
+                                        selectedLanguage === 'fr' ? 'Naviguer' :
+                                          selectedLanguage === 'de' ? 'Navigation' :
+                                            selectedLanguage === 'it' ? 'Naviga' :
+                                              selectedLanguage === 'zh' ? '导航' :
+                                                selectedLanguage === 'ja' ? 'ナビ' :
+                                                  selectedLanguage === 'pt' ? 'Navegar' :
+                                                    selectedLanguage === 'ru' ? 'Навигация' :
+                                                      'Navigate'}
                                   </TooltipContent>
                                 </Tooltip>
                                 {onAddToTour && (
@@ -2044,27 +2045,27 @@ export default function UnifiedFloatingCard({
                                       </Button>
                                     </TooltipTrigger>
                                     <TooltipContent side="top" className="text-xs">
-                                      {tourStops.some(s => s.id === landmark.id) 
+                                      {tourStops.some(s => s.id === landmark.id)
                                         ? (selectedLanguage === 'ko' ? '투어에서 제거' :
-                                           selectedLanguage === 'es' ? 'Quitar del tour' :
-                                           selectedLanguage === 'fr' ? 'Retirer du tour' :
-                                           selectedLanguage === 'de' ? 'Aus Tour entfernen' :
-                                           selectedLanguage === 'it' ? 'Rimuovi dal tour' :
-                                           selectedLanguage === 'zh' ? '从行程中移除' :
-                                           selectedLanguage === 'ja' ? 'ツアーから削除' :
-                                           selectedLanguage === 'pt' ? 'Remover do tour' :
-                                           selectedLanguage === 'ru' ? 'Удалить из тура' :
-                                           'Remove from Tour')
+                                          selectedLanguage === 'es' ? 'Quitar del tour' :
+                                            selectedLanguage === 'fr' ? 'Retirer du tour' :
+                                              selectedLanguage === 'de' ? 'Aus Tour entfernen' :
+                                                selectedLanguage === 'it' ? 'Rimuovi dal tour' :
+                                                  selectedLanguage === 'zh' ? '从行程中移除' :
+                                                    selectedLanguage === 'ja' ? 'ツアーから削除' :
+                                                      selectedLanguage === 'pt' ? 'Remover do tour' :
+                                                        selectedLanguage === 'ru' ? 'Удалить из тура' :
+                                                          'Remove from Tour')
                                         : (selectedLanguage === 'ko' ? '투어에 추가' :
-                                           selectedLanguage === 'es' ? 'Añadir al tour' :
-                                           selectedLanguage === 'fr' ? 'Ajouter au tour' :
-                                           selectedLanguage === 'de' ? 'Zur Tour hinzufügen' :
-                                           selectedLanguage === 'it' ? 'Aggiungi al tour' :
-                                           selectedLanguage === 'zh' ? '添加到行程' :
-                                           selectedLanguage === 'ja' ? 'ツアーに追加' :
-                                           selectedLanguage === 'pt' ? 'Adicionar ao tour' :
-                                           selectedLanguage === 'ru' ? 'Добавить в тур' :
-                                           'Add to Tour')}
+                                          selectedLanguage === 'es' ? 'Añadir al tour' :
+                                            selectedLanguage === 'fr' ? 'Ajouter au tour' :
+                                              selectedLanguage === 'de' ? 'Zur Tour hinzufügen' :
+                                                selectedLanguage === 'it' ? 'Aggiungi al tour' :
+                                                  selectedLanguage === 'zh' ? '添加到行程' :
+                                                    selectedLanguage === 'ja' ? 'ツアーに追加' :
+                                                      selectedLanguage === 'pt' ? 'Adicionar ao tour' :
+                                                        selectedLanguage === 'ru' ? 'Добавить в тур' :
+                                                          'Add to Tour')}
                                     </TooltipContent>
                                   </Tooltip>
                                 )}
@@ -2092,7 +2093,7 @@ export default function UnifiedFloatingCard({
                     <ChevronLeft className="w-4 h-4" />
                     {t('previous', selectedLanguage)}
                   </Button>
-                  
+
                   <span className="text-sm text-muted-foreground" data-testid="text-page-info">
                     {currentPage} / {Math.ceil(filteredListLandmarks.length / itemsPerPage)}
                   </span>

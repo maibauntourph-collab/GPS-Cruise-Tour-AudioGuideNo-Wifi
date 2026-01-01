@@ -2,15 +2,15 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import { useQuery } from '@tanstack/react-query';
 import html2canvas from 'html2canvas';
-import { 
-  AlertDialog, 
-  AlertDialogAction, 
-  AlertDialogCancel, 
-  AlertDialogContent, 
-  AlertDialogDescription, 
-  AlertDialogFooter, 
-  AlertDialogHeader, 
-  AlertDialogTitle 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
 } from '@/components/ui/alert-dialog';
 import MapView from '@/components/MapView';
 import UnifiedFloatingCard from '@/components/UnifiedFloatingCard';
@@ -55,24 +55,24 @@ export default function Home() {
     const saved = localStorage.getItem('gps-enabled');
     return saved !== 'false'; // Default to true
   });
-  
+
   const { position, error, isLoading } = useGeoLocation(gpsEnabled);
   const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
     // Check localStorage first, then default to Korean
     const savedLanguage = localStorage.getItem('selected-language');
     const finalLanguage = savedLanguage || 'ko'; // 기본값: 한국어
-    
+
     console.log('📝 Language initialization:', {
       savedLanguage,
       finalLanguage,
       source: savedLanguage ? 'localStorage' : 'default (Korean)'
     });
-    
+
     return finalLanguage;
   });
   const [offlineMode, setOfflineMode] = useState(false);
-  const [isMobile, setIsMobile] = useState(() => 
+  const [isMobile, setIsMobile] = useState(() =>
     typeof window !== 'undefined' && window.innerWidth < 640
   );
   const { markVisited, isVisited } = useVisitedLandmarks();
@@ -80,19 +80,19 @@ export default function Home() {
   const [showUpdatePrompt, setShowUpdatePrompt] = useState(false);
   const [showAudioDownloadDialog, setShowAudioDownloadDialog] = useState(false);
   const [audioDownloadLanguage, setAudioDownloadLanguage] = useState<string>('ko');
-  
+
   // Show update prompt when update is available
   useEffect(() => {
     if (isUpdateAvailable) {
       setShowUpdatePrompt(true);
     }
   }, [isUpdateAvailable]);
-  
+
   // Detect device capabilities for performance optimization
   const [deviceCapabilities] = useState(() => detectDeviceCapabilities());
   const maxMarkers = getMaxMarkersToRender(deviceCapabilities.isLowEnd);
   const reduceAnimations = shouldReduceAnimations(deviceCapabilities.isLowEnd);
-  
+
   const { data: cities = [], isLoading: citiesLoading } = useQuery<City[]>({
     queryKey: ['/api/cities'],
   });
@@ -105,7 +105,7 @@ export default function Home() {
       return response.json();
     },
   });
-  
+
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [activeRoute, setActiveRoute] = useState<{
     start: [number, number];
@@ -133,8 +133,8 @@ export default function Home() {
   });
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
-  const [tourRouteInfo, setTourRouteInfo] = useState<{ 
-    distance: number; 
+  const [tourRouteInfo, setTourRouteInfo] = useState<{
+    distance: number;
     duration: number;
     segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
   } | null>(null);
@@ -174,7 +174,7 @@ export default function Home() {
   } | null>(null);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
-  
+
   // Startup dialog state
   const [showStartupDialog, setShowStartupDialog] = useState<boolean>(() => {
     // Show dialog only if not shown in this session
@@ -190,7 +190,38 @@ export default function Home() {
   // Save selected language to localStorage
   useEffect(() => {
     localStorage.setItem('selected-language', selectedLanguage);
-  }, [selectedLanguage]);
+
+    // Check if native voice for the selected language is available
+    if (selectedLanguage !== 'en' && !audioService.hasNativeVoice(selectedLanguage)) {
+      const langNames: Record<string, string> = {
+        'ko': '한국어',
+        'ja': '日本語',
+        'zh': '中文',
+        'es': 'Español'
+      };
+
+      const langDisplay = langNames[selectedLanguage] || selectedLanguage;
+
+      toast({
+        title: t('nativeVoiceMissing', selectedLanguage).replace('{lang}', langDisplay),
+        description: t('suggestHighQualityVoice', selectedLanguage),
+        action: (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              // Open audio download dialog
+              setAudioDownloadLanguage(selectedLanguage);
+              setShowAudioDownloadDialog(true);
+            }}
+          >
+            {selectedLanguage === 'ko' ? '확인하기' : 'Switch'}
+          </Button>
+        ),
+        duration: 8000
+      });
+    }
+  }, [selectedLanguage, toast]);
 
   // Save tour time per stop to localStorage
   useEffect(() => {
@@ -210,11 +241,26 @@ export default function Home() {
     }
   }, [tourStops, selectedCityId, cities, tourTimePerStop, selectedLanguage]);
 
+  // Check for restored route from MyRoutes page
+  useEffect(() => {
+    const restoredData = localStorage.getItem('restored-tour-data');
+    if (restoredData) {
+      try {
+        const data = JSON.parse(restoredData);
+        // Clean up immediately so we don't restore again on refresh unless intended
+        localStorage.removeItem('restored-tour-data');
+        handleRestoreTour(data);
+      } catch (e) {
+        console.error('Failed to parse restored tour data', e);
+      }
+    }
+  }, [cities, landmarks]); // Dependencies ensure we have data loaded before restoring
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
     };
-    
+
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
@@ -248,7 +294,7 @@ export default function Home() {
         );
         setSpokenLandmarks((prev) => new Set(prev).add(landmark.id));
         setIsSpeaking(true);
-        
+
         if (!isVisited(landmark.id)) {
           markVisited(landmark.id);
         }
@@ -263,7 +309,7 @@ export default function Home() {
   }, [position, audioEnabled, landmarks, selectedLanguage]);
 
   const selectedCity = cities.find(c => c.id === selectedCityId);
-  
+
   const handleLandmarkRoute = (landmark: Landmark) => {
     setPendingLandmark(landmark);
     setShowDirectionsDialog(true);
@@ -271,11 +317,11 @@ export default function Home() {
 
   const openGoogleMaps = () => {
     if (!pendingLandmark) return;
-    
+
     const destination = `${pendingLandmark.lat},${pendingLandmark.lng}`;
-    
+
     let googleMapsUrl = '';
-    
+
     if (position) {
       // If we have user's position, set it as origin
       const origin = `${position.latitude},${position.longitude}`;
@@ -284,7 +330,7 @@ export default function Home() {
       // If no position, just show the destination
       googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
     }
-    
+
     window.open(googleMapsUrl, '_blank', 'noopener,noreferrer');
     setShowDirectionsDialog(false);
     setPendingLandmark(null);
@@ -292,10 +338,10 @@ export default function Home() {
 
   const openWaze = () => {
     if (!pendingLandmark) return;
-    
+
     // Waze deep link format: https://waze.com/ul?ll=LAT,LNG&navigate=yes
     const wazeUrl = `https://waze.com/ul?ll=${pendingLandmark.lat},${pendingLandmark.lng}&navigate=yes`;
-    
+
     window.open(wazeUrl, '_blank', 'noopener,noreferrer');
     setShowDirectionsDialog(false);
     setPendingLandmark(null);
@@ -303,10 +349,10 @@ export default function Home() {
 
   const useInAppNavigation = () => {
     if (!pendingLandmark) return;
-    
-    const startPosition = position 
+
+    const startPosition = position
       ? [position.latitude, position.longitude] as [number, number]
-      : selectedCity 
+      : selectedCity
         ? [selectedCity.lat, selectedCity.lng] as [number, number]
         : [41.8902, 12.4922] as [number, number];
 
@@ -315,11 +361,11 @@ export default function Home() {
       end: [pendingLandmark.lat, pendingLandmark.lng],
     });
     setTourRouteInfo(null);
-    
+
     setShowDirectionsDialog(false);
     setPendingLandmark(null);
   };
-  
+
   const handleCityChange = (cityId: string) => {
     // Save current tour history before switching cities
     if (tourStops.length > 0 && selectedCityId) {
@@ -334,7 +380,7 @@ export default function Home() {
       };
       localStorage.setItem(`tour-history-${selectedCityId}`, JSON.stringify(tourHistory));
     }
-    
+
     // Reset all state for new city
     setSelectedCityId(cityId);
     setSelectedLandmark(null);
@@ -342,7 +388,7 @@ export default function Home() {
     setRouteInfo(null);
     audioService.reset();
     setSpokenLandmarks(new Set());
-    
+
     // Reset tour state
     setTourStops([]);
     setTourRouteInfo(null);
@@ -350,7 +396,7 @@ export default function Home() {
     setEndPoint(null);
     setDepartureTime(null);
     setAiRecommendation(null);
-    
+
     // Reset UI state
     setShowCruisePort(false);
     setIsCardMinimized(true);
@@ -389,11 +435,11 @@ export default function Home() {
         tourStops: tourStops.map(stop => stop.id),
         timestamp: new Date().toISOString()
       };
-      
+
       const encryptedData = await encryptData(dataToExport, password);
       const filename = `gps-tour-${selectedCityId}-${Date.now()}.gpstour`;
       downloadEncryptedData(encryptedData, filename);
-      
+
       toast({
         title: t('dataDownloadedSuccessfully', selectedLanguage),
         description: `File: ${filename}`
@@ -413,7 +459,7 @@ export default function Home() {
     try {
       const encryptedContent = await readEncryptedFile(file);
       const decryptedData = await decryptData(encryptedContent, password);
-      
+
       // Restore data
       if (decryptedData.selectedCityId) {
         setSelectedCityId(decryptedData.selectedCityId);
@@ -427,7 +473,7 @@ export default function Home() {
           .filter(Boolean);
         setTourStops(restoredStops);
       }
-      
+
       toast({
         title: t('dataLoadedSuccessfully', selectedLanguage),
         description: `Restored from ${file.name}`
@@ -450,7 +496,7 @@ export default function Home() {
       ko: "GPS 오디오 가이드에 오신 것을 환영합니다. 이것은 오디오 해설 시스템의 테스트입니다."
     };
     const message = testMessages[selectedLanguage as keyof typeof testMessages] || testMessages.en;
-    
+
     if (audioEnabled) {
       // Remove test-audio id so it can be played again
       audioService.removeLandmark('test-audio');
@@ -470,17 +516,17 @@ export default function Home() {
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
-      
+
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
-      
+
       // Create a short click sound
       oscillator.frequency.value = 800; // Higher frequency for click
       oscillator.type = 'sine';
-      
+
       gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-      
+
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 0.1);
     } catch (error) {
@@ -491,14 +537,14 @@ export default function Home() {
   // Location search using OpenStreetMap Nominatim API
   const handleLocationSearch = async () => {
     if (!locationSearchQuery.trim() || !selectedCity) return;
-    
+
     setIsSearchingLocation(true);
     try {
       // Search within city bounds using viewbox parameter
       const cityLat = selectedCity.lat;
       const cityLng = selectedCity.lng;
       const viewbox = `${cityLng - 0.5},${cityLat + 0.5},${cityLng + 0.5},${cityLat - 0.5}`;
-      
+
       const response = await fetch(
         `https://nominatim.openstreetmap.org/search?` +
         `q=${encodeURIComponent(locationSearchQuery)}&` +
@@ -512,7 +558,7 @@ export default function Home() {
           }
         }
       );
-      
+
       if (response.ok) {
         const data = await response.json();
         const results = data.map((item: any) => ({
@@ -537,7 +583,7 @@ export default function Home() {
   // Capture map route as image
   const captureRouteImage = useCallback(async () => {
     if (!mapContainerRef.current || tourStops.length < 2) return;
-    
+
     setIsCapturingRoute(true);
     try {
       // Find the map container (leaflet-container class)
@@ -546,10 +592,10 @@ export default function Home() {
         console.error('Map container not found');
         return;
       }
-      
+
       // Wait for all tiles and route to be fully rendered
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       // Convert SVG elements to inline data URLs for better capture
       // This helps html2canvas capture SVG route lines properly
       const svgElements = mapElement.querySelectorAll('svg');
@@ -561,7 +607,7 @@ export default function Home() {
           svg.setAttribute('height', String(rect.height));
         }
       });
-      
+
       // Add crossorigin to tile images for CORS
       const tileImages = mapElement.querySelectorAll('.leaflet-tile') as NodeListOf<HTMLImageElement>;
       tileImages.forEach(img => {
@@ -569,7 +615,7 @@ export default function Home() {
           img.crossOrigin = 'anonymous';
         }
       });
-      
+
       // Use html2canvas with enhanced options for SVG support
       const canvas = await html2canvas(mapElement, {
         useCORS: true,
@@ -594,15 +640,15 @@ export default function Home() {
           });
         }
       });
-      
+
       // Convert to base64 image
       const imageData = canvas.toDataURL('image/png', 0.9);
       setCapturedRouteImage(imageData);
-      
+
       // Show the card with the captured image
       setForceShowCard(true);
       setIsCardMinimized(false);
-      
+
       toast({
         title: selectedLanguage === 'ko' ? '경로 캡쳐 완료' : 'Route Captured',
         description: selectedLanguage === 'ko' ? '투어 경로가 저장되었습니다' : 'Tour route has been saved',
@@ -638,23 +684,23 @@ export default function Home() {
         ...prev,
         [landmark.id]: tourTimePerStop
       }));
-      
+
       // Play click sound
       playClickSound();
-      
+
       // Show toast message
       const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name');
       const message = selectedLanguage === 'ko' ? `${landmarkName} 투어에 추가됨` :
-                     selectedLanguage === 'es' ? `${landmarkName} añadido al tour` :
-                     selectedLanguage === 'fr' ? `${landmarkName} ajouté au tour` :
-                     selectedLanguage === 'de' ? `${landmarkName} zur Tour hinzugefügt` :
-                     selectedLanguage === 'it' ? `${landmarkName} aggiunto al tour` :
-                     selectedLanguage === 'zh' ? `${landmarkName} 已添加到旅程` :
-                     selectedLanguage === 'ja' ? `${landmarkName} ツアーに追加` :
-                     selectedLanguage === 'pt' ? `${landmarkName} adicionado ao tour` :
-                     selectedLanguage === 'ru' ? `${landmarkName} добавлено в тур` :
-                     `${landmarkName} added to tour`;
-      
+        selectedLanguage === 'es' ? `${landmarkName} añadido al tour` :
+          selectedLanguage === 'fr' ? `${landmarkName} ajouté au tour` :
+            selectedLanguage === 'de' ? `${landmarkName} zur Tour hinzugefügt` :
+              selectedLanguage === 'it' ? `${landmarkName} aggiunto al tour` :
+                selectedLanguage === 'zh' ? `${landmarkName} 已添加到旅程` :
+                  selectedLanguage === 'ja' ? `${landmarkName} ツアーに追加` :
+                    selectedLanguage === 'pt' ? `${landmarkName} adicionado ao tour` :
+                      selectedLanguage === 'ru' ? `${landmarkName} добавлено в тур` :
+                        `${landmarkName} added to tour`;
+
       toast({
         description: message,
         duration: 2000,
@@ -688,7 +734,7 @@ export default function Home() {
     if (position && cities.length > 0) {
       let nearestCity = cities[0];
       let minDistance = Infinity;
-      
+
       cities.forEach(city => {
         const distance = calculateDistance(position.latitude, position.longitude, city.lat, city.lng);
         if (distance < minDistance) {
@@ -696,11 +742,11 @@ export default function Home() {
           nearestCity = city;
         }
       });
-      
+
       setSelectedCityId(nearestCity.id);
-      
+
       toast({
-        description: selectedLanguage === 'ko' 
+        description: selectedLanguage === 'ko'
           ? `📍 ${nearestCity.name} 근처에서 시작합니다`
           : `📍 Starting near ${nearestCity.name}`,
         duration: 3000,
@@ -710,23 +756,23 @@ export default function Home() {
 
   const handleRestoreTour = (data: { cityId: string; tourStops: string[]; tourTimePerStop: number }) => {
     handleStartupClose();
-    
+
     // Set city first
     setSelectedCityId(data.cityId);
     setTourTimePerStop(data.tourTimePerStop);
-    
+
     // We need to wait for landmarks to load, so we'll use a flag
     const restoreTourStopsWhenReady = () => {
       if (landmarks.length > 0) {
         const restoredStops = data.tourStops
           .map(id => landmarks.find(l => l.id === id))
           .filter((l): l is Landmark => l !== undefined);
-        
+
         if (restoredStops.length > 0) {
           setTourStops(restoredStops);
-          
+
           toast({
-            description: selectedLanguage === 'ko' 
+            description: selectedLanguage === 'ko'
               ? `✨ ${restoredStops.length}개 장소가 복원되었습니다`
               : `✨ Restored ${restoredStops.length} tour stops`,
             duration: 3000,
@@ -737,7 +783,7 @@ export default function Home() {
         setTimeout(restoreTourStopsWhenReady, 500);
       }
     };
-    
+
     // If landmarks for the restored city need to be fetched, wait for them
     if (data.cityId === selectedCityId && landmarks.length > 0) {
       restoreTourStopsWhenReady();
@@ -750,7 +796,7 @@ export default function Home() {
   const handleTourRouteFound = (route: any) => {
     if (route && route.summary) {
       const segments: Array<{ from: string; to: string; distance: number; duration: number }> = [];
-      
+
       // Use route.legs for accurate per-segment distance and duration
       // Note: leg.time is in seconds (from MapView's estimateWalkingTime * 60)
       if (route.legs && route.legs.length > 0 && tourStops.length >= 2) {
@@ -764,7 +810,7 @@ export default function Home() {
           });
         }
       }
-      
+
       setTourRouteInfo({
         distance: route.summary.totalDistance,
         duration: route.summary.totalTime,
@@ -805,12 +851,12 @@ export default function Home() {
   // Optimize for low-end devices: limit markers and prioritize by distance
   const filteredLandmarks = deviceCapabilities.isLowEnd && position
     ? filteredByCategory
-        .map(landmark => ({
-          ...landmark,
-          distance: calculateDistance(position.latitude, position.longitude, landmark.lat, landmark.lng)
-        }))
-        .sort((a, b) => a.distance - b.distance)
-        .slice(0, maxMarkers)
+      .map(landmark => ({
+        ...landmark,
+        distance: calculateDistance(position.latitude, position.longitude, landmark.lat, landmark.lng)
+      }))
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, maxMarkers)
     : filteredByCategory;
 
   // Only show loading screen if cities haven't loaded yet
@@ -887,16 +933,16 @@ export default function Home() {
         onDownloadData={handleDownloadData}
         onUploadData={handleUploadData}
       />
-      
+
       <div className="flex w-full flex-1 flex-col h-screen">
         <header className="flex items-center gap-1 sm:gap-2 px-2 py-1 border-b bg-background z-[1001]">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="icon"
                 onClick={() => setShowMenu(true)}
-                data-testid="button-menu-toggle" 
+                data-testid="button-menu-toggle"
                 className="h-8 w-8"
               >
                 <Menu className="h-4 w-4" />
@@ -906,15 +952,15 @@ export default function Home() {
               <p>{selectedLanguage === 'ko' ? '설정 메뉴 열기' : 'Open Settings Menu'}</p>
             </TooltipContent>
           </Tooltip>
-          <h1 
-            className="font-serif font-semibold text-base sm:text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-0.5 rounded-md transition-colors truncate" 
+          <h1
+            className="font-serif font-semibold text-base sm:text-lg cursor-pointer hover-elevate active-elevate-2 px-2 py-0.5 rounded-md transition-colors truncate"
             onClick={() => setShowMenu(true)}
             data-testid="h1-title-toggle-menu"
           >
             <span className="hidden xs:inline">GPS Audio Guide</span>
             <span className="xs:hidden">GPS Guide</span>
           </h1>
-          
+
           {/* List Toggle Button */}
           <Tooltip>
             <TooltipTrigger asChild>
@@ -951,7 +997,7 @@ export default function Home() {
               <p>{selectedLanguage === 'ko' ? '명소 목록 표시/숨기기' : 'Show/Hide Landmark List'}</p>
             </TooltipContent>
           </Tooltip>
-          
+
           {/* Starting/End Point Selector */}
           <Popover open={isStartingPointPopoverOpen} onOpenChange={(open) => {
             setIsStartingPointPopoverOpen(open);
@@ -993,7 +1039,7 @@ export default function Home() {
                       <span className="text-white text-sm">✓</span>
                     </div>
                     <span className="font-semibold text-green-700 dark:text-green-400">
-                      {selectedLanguage === 'ko' ? '설정 완료!' : 'Setup Complete!'}
+                      {t('setupComplete', selectedLanguage)}
                     </span>
                   </div>
                   <div className="space-y-1 text-xs mb-3">
@@ -1008,8 +1054,8 @@ export default function Home() {
                     <div className="flex items-center gap-2">
                       <Clock className="w-3 h-3 text-amber-500" />
                       <span className="text-muted-foreground">
-                        {departureTime.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', { 
-                          hour: '2-digit', 
+                        {departureTime.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', {
+                          hour: '2-digit',
                           minute: '2-digit',
                           weekday: 'short'
                         })}
@@ -1023,7 +1069,7 @@ export default function Home() {
                       onClick={() => setIsStartingPointPopoverOpen(false)}
                       data-testid="button-setup-done"
                     >
-                      {selectedLanguage === 'ko' ? '완료' : 'Done'}
+                      {t('done', selectedLanguage)}
                     </Button>
                     <Button
                       variant="outline"
@@ -1038,31 +1084,31 @@ export default function Home() {
                       }}
                       data-testid="button-setup-reset"
                     >
-                      {selectedLanguage === 'ko' ? '초기화' : 'Reset'}
+                      {t('reset', selectedLanguage)}
                     </Button>
                   </div>
                 </div>
               )}
-              
+
               <Tabs defaultValue="start" value={pointSelectionMode} onValueChange={(v) => setPointSelectionMode(v as 'start' | 'end' | 'time')}>
                 <TabsList className="grid w-full grid-cols-3 mb-2 sticky top-0 z-10 bg-popover">
                   <TabsTrigger value="start" className="gap-1 px-2" data-testid="tab-start-point">
                     <Circle className={`w-3 h-3 ${startingPoint ? 'fill-green-500 text-green-500' : ''}`} />
-                    <span className="text-xs">{selectedLanguage === 'ko' ? '출발지' : 'Start'}</span>
+                    <span className="text-xs">{t('startLabel', selectedLanguage)}</span>
                     {startingPoint && <span className="text-[10px] text-green-500">✓</span>}
                   </TabsTrigger>
                   <TabsTrigger value="end" className="gap-1 px-2" data-testid="tab-end-point">
                     <Flag className={`w-3 h-3 ${endPoint ? 'fill-red-500 text-red-500' : ''}`} />
-                    <span className="text-xs">{selectedLanguage === 'ko' ? '도착지' : 'End'}</span>
+                    <span className="text-xs">{t('endLabel', selectedLanguage)}</span>
                     {endPoint && <span className="text-[10px] text-red-500">✓</span>}
                   </TabsTrigger>
                   <TabsTrigger value="time" className="gap-1 px-2" data-testid="tab-departure-time">
                     <Clock className={`w-3 h-3 ${departureTime ? 'text-amber-500' : ''}`} />
-                    <span className="text-xs">{selectedLanguage === 'ko' ? '시간' : 'Time'}</span>
+                    <span className="text-xs">{t('timeLabel', selectedLanguage)}</span>
                     {departureTime && <span className="text-[10px] text-amber-500">✓</span>}
                   </TabsTrigger>
                 </TabsList>
-                
+
                 {/* Start Point Content */}
                 <TabsContent value="start" className="space-y-2 mt-0">
                   {/* Current Selection */}
@@ -1083,11 +1129,11 @@ export default function Home() {
                       </Button>
                     </div>
                   )}
-                  
+
                   {/* Location Search */}
                   <div className="flex gap-1">
                     <Input
-                      placeholder={selectedLanguage === 'ko' ? '호텔, 주소 검색...' : 'Search hotel, address...'}
+                      placeholder={t('searchPlaceholder', selectedLanguage)}
                       value={locationSearchQuery}
                       onChange={(e) => setLocationSearchQuery(e.target.value)}
                       onKeyDown={(e) => {
@@ -1114,7 +1160,7 @@ export default function Home() {
                       )}
                     </Button>
                   </div>
-                  
+
                   {/* Search Results */}
                   {locationSearchResults.length > 0 && (
                     <div className="space-y-1 border-b pb-2">
@@ -1148,7 +1194,7 @@ export default function Home() {
                             setLocationSearchQuery('');
                             setLocationSearchResults([]);
                             toast({
-                              title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                              title: t('startingPointSet', selectedLanguage),
                               description: result.name
                             });
                           }}
@@ -1160,7 +1206,7 @@ export default function Home() {
                       ))}
                     </div>
                   )}
-                  
+
                   {/* My Location Option */}
                   <Button
                     variant={startingPoint?.type === 'my_location' ? "default" : "outline"}
@@ -1176,13 +1222,13 @@ export default function Home() {
                           lng: position.longitude
                         });
                         toast({
-                          title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                          title: t('startingPointSet', selectedLanguage),
                           description: t('myLocation', selectedLanguage)
                         });
                       } else {
                         toast({
-                          title: selectedLanguage === 'ko' ? '위치 정보 필요' : 'Location Required',
-                          description: selectedLanguage === 'ko' ? 'GPS 위치를 확인할 수 없습니다' : 'GPS location not available',
+                          title: t('locationRequired', selectedLanguage),
+                          description: t('gpsRequired', selectedLanguage),
                           variant: 'destructive'
                         });
                       }
@@ -1198,7 +1244,7 @@ export default function Home() {
                   {(() => {
                     const cityPoints = getCityStartingPoints(selectedCityId);
                     const hotels = cityPoints?.hotels || [];
-                    
+
                     return (
                       <Collapsible className="w-full">
                         <CollapsibleTrigger asChild>
@@ -1231,21 +1277,21 @@ export default function Home() {
                               setIsSelectingEndPointOnMap(false);
                               setIsStartingPointPopoverOpen(false);
                               toast({
-                                title: selectedLanguage === 'ko' ? '출발지 선택' : 'Select Start Point',
-                                description: selectedLanguage === 'ko' ? '지도에서 위치를 탭하세요' : 'Tap on map to set location'
+                                title: t('selectStartPointTitle', selectedLanguage),
+                                description: t('tapMapDesc', selectedLanguage)
                               });
                             }}
                             data-testid="button-starting-hotel-map"
                           >
                             <MapPin className="w-3.5 h-3.5 text-purple-400" />
-                            <span className="text-xs">{selectedLanguage === 'ko' ? '지도에서 선택' : 'Select on map'}</span>
+                            <span className="text-xs">{t('selectOnMap', selectedLanguage)}</span>
                           </Button>
-                          
+
                           {/* Hotel List */}
                           {hotels.length > 0 && (
                             <>
                               <div className="text-[10px] text-muted-foreground px-2 pt-1">
-                                {selectedLanguage === 'ko' ? '추천 호텔' : 'Recommended Hotels'}
+                                {t('recommendedHotels', selectedLanguage)}
                               </div>
                               {hotels.map((hotel) => (
                                 <Button
@@ -1256,7 +1302,7 @@ export default function Home() {
                                   onClick={() => {
                                     setStartingPoint(hotel);
                                     toast({
-                                      title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                                      title: t('startingPointSet', selectedLanguage),
                                       description: getStartingPointName(hotel, selectedLanguage)
                                     });
                                   }}
@@ -1277,7 +1323,7 @@ export default function Home() {
                   {(() => {
                     const cityPoints = getCityStartingPoints(selectedCityId);
                     if (!cityPoints) return null;
-                    
+
                     return (
                       <>
                         {/* Airports */}
@@ -1293,7 +1339,7 @@ export default function Home() {
                                 onClick={() => {
                                   setStartingPoint(airport);
                                   toast({
-                                    title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                                    title: t('startingPointSet', selectedLanguage),
                                     description: getStartingPointName(airport, selectedLanguage)
                                   });
                                 }}
@@ -1305,7 +1351,7 @@ export default function Home() {
                             ))}
                           </div>
                         )}
-                        
+
                         {/* Cruise Terminals */}
                         {cityPoints.cruiseTerminals.length > 0 && (
                           <div className="space-y-1">
@@ -1319,7 +1365,7 @@ export default function Home() {
                                 onClick={() => {
                                   setStartingPoint(terminal);
                                   toast({
-                                    title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                                    title: t('startingPointSet', selectedLanguage),
                                     description: getStartingPointName(terminal, selectedLanguage)
                                   });
                                 }}
@@ -1331,12 +1377,12 @@ export default function Home() {
                             ))}
                           </div>
                         )}
-                        
+
                         {/* Train Stations */}
                         {cityPoints.trainStations.length > 0 && (
                           <div className="space-y-1">
                             <p className="text-xs text-muted-foreground font-medium">
-                              {selectedLanguage === 'ko' ? '기차역' : 'Train Station'}
+                              {t('trainStation', selectedLanguage)}
                             </p>
                             {cityPoints.trainStations.map((station) => (
                               <Button
@@ -1347,7 +1393,7 @@ export default function Home() {
                                 onClick={() => {
                                   setStartingPoint(station);
                                   toast({
-                                    title: selectedLanguage === 'ko' ? '출발지 설정됨' : 'Start point set',
+                                    title: t('startingPointSet', selectedLanguage),
                                     description: getStartingPointName(station, selectedLanguage)
                                   });
                                 }}
@@ -1363,7 +1409,7 @@ export default function Home() {
                     );
                   })()}
                 </TabsContent>
-                
+
                 {/* End Point Content */}
                 <TabsContent value="end" className="space-y-2 mt-0">
                   {/* Current Selection */}
@@ -1384,7 +1430,7 @@ export default function Home() {
                       </Button>
                     </div>
                   )}
-                  
+
                   {/* Same as start option */}
                   {startingPoint && (
                     <Button
@@ -1394,21 +1440,21 @@ export default function Home() {
                       onClick={() => {
                         setEndPoint(startingPoint);
                         toast({
-                          title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
-                          description: selectedLanguage === 'ko' ? '출발지와 동일' : 'Same as start point'
+                          title: t('endPointSet', selectedLanguage),
+                          description: t('sameAsStartDesc', selectedLanguage)
                         });
                       }}
                       data-testid="button-end-same-as-start"
                     >
                       <Circle className="w-4 h-4 text-green-500" />
-                      {selectedLanguage === 'ko' ? '출발지와 동일' : 'Same as start'}
+                      {t('sameAsStart', selectedLanguage)}
                     </Button>
                   )}
-                  
+
                   {/* Location Search */}
                   <div className="flex gap-1">
                     <Input
-                      placeholder={selectedLanguage === 'ko' ? '호텔, 주소 검색...' : 'Search hotel, address...'}
+                      placeholder={t('searchPlaceholder', selectedLanguage)}
                       value={locationSearchQuery}
                       onChange={(e) => setLocationSearchQuery(e.target.value)}
                       onKeyDown={(e) => {
@@ -1435,12 +1481,12 @@ export default function Home() {
                       )}
                     </Button>
                   </div>
-                  
+
                   {/* Search Results */}
                   {locationSearchResults.length > 0 && (
                     <div className="space-y-1 border-b pb-2">
                       <p className="text-xs text-muted-foreground font-medium">
-                        {selectedLanguage === 'ko' ? '검색 결과' : 'Search Results'}
+                        {t('searchResults', selectedLanguage)}
                       </p>
                       {locationSearchResults.map((result, index) => (
                         <Button
@@ -1469,7 +1515,7 @@ export default function Home() {
                             setLocationSearchQuery('');
                             setLocationSearchResults([]);
                             toast({
-                              title: selectedLanguage === 'ko' ? '도착지 설정됨' : 'End point set',
+                              title: t('endPointSet', selectedLanguage),
                               description: result.name
                             });
                           }}
@@ -1481,7 +1527,7 @@ export default function Home() {
                       ))}
                     </div>
                   )}
-                  
+
                   {/* My Location Option */}
                   <Button
                     variant={endPoint?.type === 'my_location' ? "default" : "outline"}
@@ -1539,7 +1585,7 @@ export default function Home() {
                   {(() => {
                     const cityPoints = getCityStartingPoints(selectedCityId);
                     if (!cityPoints) return null;
-                    
+
                     return (
                       <>
                         {/* Airports */}
@@ -1567,7 +1613,7 @@ export default function Home() {
                             ))}
                           </div>
                         )}
-                        
+
                         {/* Cruise Terminals */}
                         {cityPoints.cruiseTerminals.length > 0 && (
                           <div className="space-y-1">
@@ -1593,7 +1639,7 @@ export default function Home() {
                             ))}
                           </div>
                         )}
-                        
+
                         {/* Train Stations */}
                         {cityPoints.trainStations.length > 0 && (
                           <div className="space-y-1">
@@ -1625,7 +1671,7 @@ export default function Home() {
                     );
                   })()}
                 </TabsContent>
-                
+
                 {/* Departure Time Content */}
                 <TabsContent value="time" className="space-y-3 mt-0">
                   {/* Current Selection */}
@@ -1633,8 +1679,8 @@ export default function Home() {
                     <div className="flex items-center gap-2 p-2 bg-amber-50 dark:bg-amber-950 rounded-md border border-amber-200 dark:border-amber-800">
                       <Clock className="w-4 h-4 text-amber-500" />
                       <span className="text-sm flex-1">
-                        {departureTime.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', { 
-                          hour: '2-digit', 
+                        {departureTime.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', {
+                          hour: '2-digit',
                           minute: '2-digit',
                           weekday: 'short'
                         })}
@@ -1649,12 +1695,12 @@ export default function Home() {
                       </Button>
                     </div>
                   )}
-                  
+
                   <div className="space-y-2">
                     <p className="text-xs text-muted-foreground">
                       {selectedLanguage === 'ko' ? '출발 예정 시간을 선택하면 해당 시간대의 교통상황이 예측됩니다.' : 'Select departure time to estimate traffic conditions.'}
                     </p>
-                    
+
                     {/* Use Current Time */}
                     <Button
                       variant={!departureTime ? "default" : "outline"}
@@ -1666,7 +1712,7 @@ export default function Home() {
                       <Clock className="w-4 h-4 text-blue-500" />
                       {selectedLanguage === 'ko' ? '현재 시간 사용' : 'Use current time'}
                     </Button>
-                    
+
                     {/* Quick Time Presets */}
                     <div className="grid grid-cols-3 gap-1">
                       {[
@@ -1680,7 +1726,7 @@ export default function Home() {
                         const presetTime = new Date();
                         presetTime.setHours(hour, 0, 0, 0);
                         const isSelected = departureTime?.getHours() === hour && departureTime?.getMinutes() === 0;
-                        
+
                         return (
                           <Button
                             key={hour}
@@ -1695,7 +1741,7 @@ export default function Home() {
                         );
                       })}
                     </div>
-                    
+
                     {/* Custom Time Input */}
                     <div className="flex items-center gap-2">
                       <span className="text-xs text-muted-foreground w-16">
@@ -1704,8 +1750,8 @@ export default function Home() {
                       <input
                         type="time"
                         className="flex-1 h-8 px-2 text-sm border rounded-md bg-background"
-                        value={departureTime ? 
-                          `${String(departureTime.getHours()).padStart(2, '0')}:${String(departureTime.getMinutes()).padStart(2, '0')}` : 
+                        value={departureTime ?
+                          `${String(departureTime.getHours()).padStart(2, '0')}:${String(departureTime.getMinutes()).padStart(2, '0')}` :
                           ''
                         }
                         onChange={(e) => {
@@ -1719,7 +1765,7 @@ export default function Home() {
                         data-testid="input-custom-time"
                       />
                     </div>
-                    
+
                     {/* Day of Week Selection */}
                     <div className="space-y-1">
                       <p className="text-[10px] text-muted-foreground">
@@ -1738,7 +1784,7 @@ export default function Home() {
                           const isWeekend = day === 0 || day === 6;
                           const currentDay = departureTime?.getDay() ?? new Date().getDay();
                           const isSelected = departureTime && currentDay === day;
-                          
+
                           return (
                             <Button
                               key={day}
@@ -1762,7 +1808,7 @@ export default function Home() {
                   </div>
                 </TabsContent>
               </Tabs>
-              
+
               {/* Clear All Button */}
               {(startingPoint || endPoint) && (
                 <Button
@@ -1782,7 +1828,7 @@ export default function Home() {
               )}
             </PopoverContent>
           </Popover>
-          
+
           <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -1910,10 +1956,10 @@ export default function Home() {
             </Tooltip>
           </div>
         </header>
-        
+
         <div className="relative flex-1 overflow-hidden flex flex-col">
           {/* Map Section - always show, full screen on mobile */}
-          <div 
+          <div
             ref={mapContainerRef}
             className={`relative ${!isMobile && selectedLandmark ? 'h-1/2' : 'flex-1'} transition-all duration-300`}
           >
@@ -1972,11 +2018,12 @@ export default function Home() {
               }}
               showTourOnly={showTourOnly}
               tourStopIds={tourStops.map(s => s.id)}
+              isMobile={isMobile}
             />
-            
+
             {/* Tour Filter Button - next to zoom controls */}
             {tourStops.length >= 2 && (
-              <div 
+              <div
                 className="absolute left-[10px] top-[90px] z-[1000]"
                 style={{ pointerEvents: 'auto' }}
               >
@@ -1986,19 +2033,18 @@ export default function Home() {
                       variant="outline"
                       size="icon"
                       onClick={() => setShowTourOnly(!showTourOnly)}
-                      className={`h-[30px] w-[30px] border-2 rounded-sm shadow-md ${
-                        showTourOnly 
-                          ? 'bg-[hsl(14,85%,55%)] hover:bg-[hsl(14,85%,45%)] border-[hsl(14,85%,55%)]' 
-                          : 'bg-white hover:bg-gray-100 border-gray-400'
-                      }`}
+                      className={`h-[30px] w-[30px] border-2 rounded-sm shadow-md ${showTourOnly
+                        ? 'bg-[hsl(14,85%,55%)] hover:bg-[hsl(14,85%,45%)] border-[hsl(14,85%,55%)]'
+                        : 'bg-white hover:bg-gray-100 border-gray-400'
+                        }`}
                       data-testid="button-show-tour-only"
                     >
                       <Route className={`w-4 h-4 ${showTourOnly ? 'text-white' : 'text-[hsl(14,85%,55%)]'}`} />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="right">
-                    <p>{selectedLanguage === 'ko' 
-                      ? (showTourOnly ? '모든 장소 보기' : '투어 장소만 보기') 
+                    <p>{selectedLanguage === 'ko'
+                      ? (showTourOnly ? '모든 장소 보기' : '투어 장소만 보기')
                       : (showTourOnly ? 'Show All Places' : 'Show Tour Only')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -2007,7 +2053,7 @@ export default function Home() {
 
             <OfflineIndicator />
             <InstallPrompt selectedLanguage={selectedLanguage} />
-            <UpdatePrompt 
+            <UpdatePrompt
               isVisible={showUpdatePrompt}
               onUpdate={() => {
                 updateServiceWorker();
@@ -2022,85 +2068,85 @@ export default function Home() {
 
       {/* Unified Floating Card */}
       <UnifiedFloatingCard
-          forceShowList={forceShowCard}
-          isCardMinimized={isCardMinimized}
-          onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
-          selectedLandmark={selectedLandmark}
-          onLandmarkClose={() => setSelectedLandmark(null)}
-          onNavigate={handleLandmarkRoute}
-          onAddToTour={handleAddToTour}
-          isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
-          city={selectedCity || null}
-          showCruisePort={showCruisePort}
-          onCruisePortClose={() => setShowCruisePort(false)}
-          tourStops={tourStops}
-          tourRouteInfo={tourRouteInfo}
-          onRemoveTourStop={(landmarkId) => {
-            setTourStops(tourStops.filter(stop => stop.id !== landmarkId));
-            setTourStopDurations(prev => {
-              const updated = { ...prev };
-              delete updated[landmarkId];
-              return updated;
-            });
-          }}
-          tourTimePerStop={tourTimePerStop}
-          tourStopDurations={tourStopDurations}
-          onUpdateStopDuration={handleUpdateStopDuration}
-          onSaveRoute={() => setShowSaveRouteDialog(true)}
-          onOpenMyRoutes={() => window.location.href = '/my-routes'}
-          aiRecommendation={aiRecommendation}
-          onLandmarkClick={(landmarkId) => {
-            const landmark = filteredLandmarks.find(l => l.id === landmarkId);
-            if (landmark) {
-              // Clear any existing timeout
-              if (cruisePortTimeoutRef.current) {
-                clearTimeout(cruisePortTimeoutRef.current);
-              }
-              
-              // Use flushSync to immediately update state before rendering
-              flushSync(() => {
-                setKeepCruisePortVisible(true);
-              });
-              
-              // Now set selected landmark
-              setSelectedLandmark(landmark);
-              
-              // Start the 2-second countdown
-              cruisePortTimeoutRef.current = setTimeout(() => {
-                setKeepCruisePortVisible(false);
-                cruisePortTimeoutRef.current = null;
-              }, 2000);
+        forceShowList={forceShowCard}
+        isCardMinimized={isCardMinimized}
+        onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
+        selectedLandmark={selectedLandmark}
+        onLandmarkClose={() => setSelectedLandmark(null)}
+        onNavigate={handleLandmarkRoute}
+        onAddToTour={handleAddToTour}
+        isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
+        city={selectedCity || null}
+        showCruisePort={showCruisePort}
+        onCruisePortClose={() => setShowCruisePort(false)}
+        tourStops={tourStops}
+        tourRouteInfo={tourRouteInfo}
+        onRemoveTourStop={(landmarkId) => {
+          setTourStops(tourStops.filter(stop => stop.id !== landmarkId));
+          setTourStopDurations(prev => {
+            const updated = { ...prev };
+            delete updated[landmarkId];
+            return updated;
+          });
+        }}
+        tourTimePerStop={tourTimePerStop}
+        tourStopDurations={tourStopDurations}
+        onUpdateStopDuration={handleUpdateStopDuration}
+        onSaveRoute={() => setShowSaveRouteDialog(true)}
+        onOpenMyRoutes={() => window.location.href = '/my-routes'}
+        aiRecommendation={aiRecommendation}
+        onLandmarkClick={(landmarkId) => {
+          const landmark = filteredLandmarks.find(l => l.id === landmarkId);
+          if (landmark) {
+            // Clear any existing timeout
+            if (cruisePortTimeoutRef.current) {
+              clearTimeout(cruisePortTimeoutRef.current);
             }
-          }}
-          landmarks={filteredLandmarks}
-          userPosition={position}
-          onLandmarkRoute={handleLandmarkRoute}
-          spokenLandmarks={spokenLandmarks}
-          onLandmarkSelect={setSelectedLandmark}
-          showLandmarks={showLandmarks}
-          showActivities={showActivities}
-          showRestaurants={showRestaurants}
-          showGiftShops={showGiftShops}
-          onToggleLandmarks={handleToggleLandmarks}
-          onToggleActivities={handleToggleActivities}
-          onToggleRestaurants={handleToggleRestaurants}
-          onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
-          selectedLanguage={selectedLanguage}
-          departureTime={departureTime}
-          startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type, name: startingPoint.name } : null}
-          endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type, name: endPoint.name } : null}
-          onOpenStartEndPointDialog={() => {
-            toast({
-              title: selectedLanguage === 'ko' ? '출발/도착 설정 필요' : 'Start/End Point Required',
-              description: selectedLanguage === 'ko' 
-                ? '사이드바에서 출발지와 도착지를 먼저 설정해주세요' 
-                : 'Please set your start and end points in the sidebar first',
-              variant: 'destructive'
+
+            // Use flushSync to immediately update state before rendering
+            flushSync(() => {
+              setKeepCruisePortVisible(true);
             });
-          }}
-          capturedRouteImage={capturedRouteImage}
-          onClearCapturedImage={() => setCapturedRouteImage(null)}
-        />
+
+            // Now set selected landmark
+            setSelectedLandmark(landmark);
+
+            // Start the 2-second countdown
+            cruisePortTimeoutRef.current = setTimeout(() => {
+              setKeepCruisePortVisible(false);
+              cruisePortTimeoutRef.current = null;
+            }, 2000);
+          }
+        }}
+        landmarks={filteredLandmarks}
+        userPosition={position}
+        onLandmarkRoute={handleLandmarkRoute}
+        spokenLandmarks={spokenLandmarks}
+        onLandmarkSelect={setSelectedLandmark}
+        showLandmarks={showLandmarks}
+        showActivities={showActivities}
+        showRestaurants={showRestaurants}
+        showGiftShops={showGiftShops}
+        onToggleLandmarks={handleToggleLandmarks}
+        onToggleActivities={handleToggleActivities}
+        onToggleRestaurants={handleToggleRestaurants}
+        onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
+        selectedLanguage={selectedLanguage}
+        departureTime={departureTime}
+        startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type, name: startingPoint.name } : null}
+        endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type, name: endPoint.name } : null}
+        onOpenStartEndPointDialog={() => {
+          toast({
+            title: selectedLanguage === 'ko' ? '출발/도착 설정 필요' : 'Start/End Point Required',
+            description: selectedLanguage === 'ko'
+              ? '사이드바에서 출발지와 도착지를 먼저 설정해주세요'
+              : 'Please set your start and end points in the sidebar first',
+            variant: 'destructive'
+          });
+        }}
+        capturedRouteImage={capturedRouteImage}
+        onClearCapturedImage={() => setCapturedRouteImage(null)}
+      />
 
       {/* Bottom Sheet - Mobile Only */}
       {isMobile && (
@@ -2125,7 +2171,7 @@ export default function Home() {
                       ? calculateDistance(position.latitude, position.longitude, landmark.lat, landmark.lng)
                       : null;
                     const isVisitedLandmark = isVisited(landmark.id);
-                    
+
                     return (
                       <button
                         key={landmark.id}
@@ -2134,15 +2180,14 @@ export default function Home() {
                         data-testid={`landmark-item-${landmark.id}`}
                       >
                         <div className="flex items-start gap-3">
-                          <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
-                            landmark.category === 'landmark' 
-                              ? 'bg-[hsl(14,85%,55%)]/20 text-[hsl(14,85%,55%)]' 
-                              : landmark.category === 'activity'
+                          <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${landmark.category === 'landmark'
+                            ? 'bg-[hsl(14,85%,55%)]/20 text-[hsl(14,85%,55%)]'
+                            : landmark.category === 'activity'
                               ? 'bg-[hsl(210,85%,55%)]/20 text-[hsl(210,85%,55%)]'
                               : landmark.category === 'restaurant'
-                              ? 'bg-[hsl(25,95%,55%)]/20 text-[hsl(25,95%,55%)]'
-                              : 'bg-[hsl(45,90%,55%)]/20 text-[hsl(45,90%,55%)]'
-                          }`}>
+                                ? 'bg-[hsl(25,95%,55%)]/20 text-[hsl(25,95%,55%)]'
+                                : 'bg-[hsl(45,90%,55%)]/20 text-[hsl(45,90%,55%)]'
+                            }`}>
                             {landmark.category === 'landmark' ? (
                               <LandmarkIcon className="w-5 h-5" />
                             ) : landmark.category === 'activity' ? (
@@ -2192,8 +2237,8 @@ export default function Home() {
                   <Button onClick={() => handleLandmarkRoute(selectedLandmark)} data-testid="button-navigate-bottom-sheet">
                     Navigate
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     onClick={() => {
                       if (tourStops.some(stop => stop.id === selectedLandmark.id)) {
                         setTourStops(tourStops.filter(stop => stop.id !== selectedLandmark.id));
@@ -2255,15 +2300,13 @@ export default function Home() {
                   <label className="text-sm font-medium">{t('audioGuide', selectedLanguage)}</label>
                   <button
                     onClick={() => setAudioEnabled(!audioEnabled)}
-                    className={`relative w-11 h-6 rounded-full transition-colors ${
-                      audioEnabled ? 'bg-primary' : 'bg-muted'
-                    }`}
+                    className={`relative w-11 h-6 rounded-full transition-colors ${audioEnabled ? 'bg-primary' : 'bg-muted'
+                      }`}
                     data-testid="toggle-audio-mobile"
                   >
                     <span
-                      className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${
-                        audioEnabled ? 'translate-x-5' : ''
-                      }`}
+                      className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${audioEnabled ? 'translate-x-5' : ''
+                        }`}
                     />
                   </button>
                 </div>
@@ -2318,34 +2361,34 @@ export default function Home() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="flex-col sm:flex-row gap-2">
-            <AlertDialogCancel 
+            <AlertDialogCancel
               onClick={() => {
                 setShowDirectionsDialog(false);
                 setPendingLandmark(null);
                 // 리스트를 다시 표시
                 setForceShowCard(true);
                 setTimeout(() => setForceShowCard(false), 100);
-              }} 
+              }}
               data-testid="button-cancel-navigation"
             >
               {t('cancel', selectedLanguage)}
             </AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={useInAppNavigation} 
+            <AlertDialogAction
+              onClick={useInAppNavigation}
               data-testid="button-use-in-app"
               className="bg-primary hover:bg-primary/90"
             >
               {t('useInAppMap', selectedLanguage)}
             </AlertDialogAction>
-            <AlertDialogAction 
-              onClick={openGoogleMaps} 
+            <AlertDialogAction
+              onClick={openGoogleMaps}
               data-testid="button-use-google-maps"
               className="bg-primary hover:bg-primary/90"
             >
               {t('useGoogleMaps', selectedLanguage)}
             </AlertDialogAction>
-            <AlertDialogAction 
-              onClick={openWaze} 
+            <AlertDialogAction
+              onClick={openWaze}
               data-testid="button-use-waze"
               className="bg-[#33ccff] hover:bg-[#33ccff]/90 text-black"
             >
@@ -2379,7 +2422,7 @@ export default function Home() {
       />
 
       {/* Install Prompt with Download Option */}
-      <InstallPrompt 
+      <InstallPrompt
         selectedLanguage={selectedLanguage}
         onDownloadClick={(language) => {
           setAudioDownloadLanguage(language);
@@ -2412,18 +2455,18 @@ export default function Home() {
         tourStops={tourStops}
         tourRouteInfo={tourRouteInfo}
         cityId={selectedCityId}
-        countryCode={selectedCity?.country === 'Italy' ? 'IT' : 
-                     selectedCity?.country === 'Philippines' ? 'PH' :
-                     selectedCity?.country === 'France' ? 'FR' :
-                     selectedCity?.country === 'Spain' ? 'ES' :
-                     selectedCity?.country === 'Germany' ? 'DE' :
-                     selectedCity?.country === 'Japan' ? 'JP' :
-                     selectedCity?.country === 'South Korea' ? 'KR' :
-                     selectedCity?.country === 'China' ? 'CN' :
-                     selectedCity?.country === 'United Kingdom' ? 'GB' :
-                     selectedCity?.country === 'Greece' ? 'GR' :
-                     selectedCity?.country === 'Thailand' ? 'TH' :
-                     selectedCity?.country === 'Vietnam' ? 'VN' : 'XX'}
+        countryCode={selectedCity?.country === 'Italy' ? 'IT' :
+          selectedCity?.country === 'Philippines' ? 'PH' :
+            selectedCity?.country === 'France' ? 'FR' :
+              selectedCity?.country === 'Spain' ? 'ES' :
+                selectedCity?.country === 'Germany' ? 'DE' :
+                  selectedCity?.country === 'Japan' ? 'JP' :
+                    selectedCity?.country === 'South Korea' ? 'KR' :
+                      selectedCity?.country === 'China' ? 'CN' :
+                        selectedCity?.country === 'United Kingdom' ? 'GB' :
+                          selectedCity?.country === 'Greece' ? 'GR' :
+                            selectedCity?.country === 'Thailand' ? 'TH' :
+                              selectedCity?.country === 'Vietnam' ? 'VN' : 'XX'}
         selectedLanguage={selectedLanguage}
       />
     </>

@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { MapPin, History, Route, Clock, Navigation, Loader2 } from 'lucide-react';
 import InstallPrompt from '@/components/InstallPrompt';
 import { getSavedTourData, SavedTourData } from '@/components/StartupDialog';
+import { t } from '@/lib/translations';
 
 export default function RoleSelection() {
   const [, setLocation] = useLocation();
@@ -44,13 +45,13 @@ export default function RoleSelection() {
       const diffMs = now.getTime() - date.getTime();
       const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
       const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-      
+
       if (diffHours < 1) {
-        return selectedLanguage === 'ko' ? '방금 전' : 'Just now';
+        return t('justNow', selectedLanguage);
       } else if (diffHours < 24) {
-        return selectedLanguage === 'ko' ? `${diffHours}시간 전` : `${diffHours}h ago`;
+        return `${diffHours}${t('hoursAgo', selectedLanguage)}`;
       } else if (diffDays < 7) {
-        return selectedLanguage === 'ko' ? `${diffDays}일 전` : `${diffDays}d ago`;
+        return `${diffDays}${t('daysAgo', selectedLanguage)}`;
       } else {
         return date.toLocaleDateString();
       }
@@ -86,12 +87,10 @@ export default function RoleSelection() {
               <Navigation className="w-10 h-10 text-primary" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              {selectedLanguage === 'ko' ? 'GPS 오디오 가이드' : 'GPS Audio Guide'}
+              {t('gpsAudioGuide', selectedLanguage)}
             </h1>
             <p className="text-gray-600 dark:text-gray-300">
-              {selectedLanguage === 'ko' 
-                ? '여행을 시작할 방법을 선택하세요' 
-                : 'Choose how to start your journey'}
+              {t('chooseStartMethod', selectedLanguage)}
             </p>
           </div>
 
@@ -110,28 +109,28 @@ export default function RoleSelection() {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold mb-1 text-gray-900 dark:text-white">
-                    {selectedLanguage === 'ko' ? '현재 위치에서 시작' : 'Start from Current Location'}
+                    {t('startFromGPS', selectedLanguage)}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isGpsLoading 
-                      ? (selectedLanguage === 'ko' ? 'GPS 위치 확인 중...' : 'Getting GPS location...')
+                    {isGpsLoading
+                      ? t('gettingGPS', selectedLanguage)
                       : isGpsAvailable
-                        ? (selectedLanguage === 'ko' ? 'GPS로 현재 위치를 탐색하고 근처 관광지를 찾습니다' : 'Use GPS to find nearby attractions')
-                        : (selectedLanguage === 'ko' ? 'GPS를 사용할 수 없습니다. 도시를 수동으로 선택합니다' : 'GPS unavailable. Select city manually')
+                        ? t('gpsSearch', selectedLanguage)
+                        : t('gpsUnavailable', selectedLanguage)
                     }
                   </p>
                   {isGpsLoading && (
                     <div className="mt-2 flex items-center gap-2">
                       <Loader2 className="w-4 h-4 animate-spin text-primary" />
                       <span className="text-xs text-muted-foreground">
-                        {selectedLanguage === 'ko' ? '확인 중...' : 'Checking...'}
+                        {t('checking', selectedLanguage)}
                       </span>
                     </div>
                   )}
                   {isGpsAvailable && !isGpsLoading && (
                     <Badge variant="secondary" className="mt-2 gap-1">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                      {selectedLanguage === 'ko' ? 'GPS 사용 가능' : 'GPS Available'}
+                      {t('gpsAvailable', selectedLanguage)}
                     </Badge>
                   )}
                 </div>
@@ -151,7 +150,7 @@ export default function RoleSelection() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="font-semibold text-gray-900 dark:text-white">
-                        {selectedLanguage === 'ko' ? '이전 투어 이어하기' : 'Continue Previous Tour'}
+                        {t('continuePreviousTour', selectedLanguage)}
                       </h3>
                       <Badge variant="outline" className="text-xs">
                         {formatDate(savedTourData.savedAt)}
@@ -163,11 +162,11 @@ export default function RoleSelection() {
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary" className="gap-1 text-xs">
                         <Route className="w-3 h-3" />
-                        {savedTourData.tourStops.length} {selectedLanguage === 'ko' ? '개 장소' : 'stops'}
+                        {savedTourData.tourStops.length} {t('stopsCount', selectedLanguage)}
                       </Badge>
                       <Badge variant="secondary" className="gap-1 text-xs">
                         <Clock className="w-3 h-3" />
-                        {savedTourData.tourTimePerStop}{selectedLanguage === 'ko' ? '분/장소' : 'min/stop'}
+                        {savedTourData.tourTimePerStop}{t('minPerStop', selectedLanguage)}
                       </Badge>
                     </div>
                     {savedTourData.tourStopNames && savedTourData.tourStopNames.length > 0 && (
@@ -187,7 +186,7 @@ export default function RoleSelection() {
               onClick={handleSkip}
               data-testid="button-skip-startup"
             >
-              {selectedLanguage === 'ko' ? '도시 직접 선택하기' : 'Select City Manually'}
+              {t('selectCityManually', selectedLanguage)}
             </Button>
           </div>
         </div>

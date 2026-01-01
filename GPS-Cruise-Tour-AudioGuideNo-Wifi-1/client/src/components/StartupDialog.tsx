@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { MapPin, History, Navigation, Clock, Route } from 'lucide-react';
 import { Landmark, City } from '@shared/schema';
 import { getTranslatedContent } from '@/lib/translations';
+import { audioService } from '@/lib/audioService';
 
 export interface SavedTourData {
   cityId: string;
@@ -76,7 +77,7 @@ export default function StartupDialog({
       const diffMs = now.getTime() - date.getTime();
       const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
       const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-      
+
       if (diffHours < 1) {
         return selectedLanguage === 'ko' ? '방금 전' : 'Just now';
       } else if (diffHours < 24) {
@@ -100,8 +101,8 @@ export default function StartupDialog({
             {selectedLanguage === 'ko' ? 'GPS Audio Guide' : 'GPS Audio Guide'}
           </DialogTitle>
           <DialogDescription>
-            {selectedLanguage === 'ko' 
-              ? '어떻게 시작하시겠습니까?' 
+            {selectedLanguage === 'ko'
+              ? '어떻게 시작하시겠습니까?'
               : 'How would you like to start?'}
           </DialogDescription>
         </DialogHeader>
@@ -109,7 +110,10 @@ export default function StartupDialog({
         <div className="space-y-3 mt-4">
           {/* GPS Option */}
           <button
-            onClick={onSelectGPS}
+            onClick={() => {
+              onSelectGPS();
+              audioService.unlockAudio();
+            }}
             disabled={isGpsLoading}
             className="w-full p-4 rounded-lg border-2 border-primary/20 hover:border-primary/50 hover:bg-primary/5 transition-all text-left group"
             data-testid="button-start-gps"
@@ -123,7 +127,7 @@ export default function StartupDialog({
                   {selectedLanguage === 'ko' ? '현재 위치에서 시작' : 'Start from Current Location'}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {isGpsLoading 
+                  {isGpsLoading
                     ? (selectedLanguage === 'ko' ? 'GPS 위치 확인 중...' : 'Getting GPS location...')
                     : isGpsAvailable
                       ? (selectedLanguage === 'ko' ? 'GPS로 현재 위치를 탐색하고 근처 관광지를 찾습니다' : 'Use GPS to find nearby attractions')
@@ -143,7 +147,10 @@ export default function StartupDialog({
           {/* Restore Tour Option */}
           {savedTourData && savedTourData.tourStops.length > 0 && (
             <button
-              onClick={() => onRestoreTour(savedTourData)}
+              onClick={() => {
+                onRestoreTour(savedTourData);
+                audioService.unlockAudio();
+              }}
               className="w-full p-4 rounded-lg border-2 border-orange-200 dark:border-orange-800/50 hover:border-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all text-left group"
               data-testid="button-restore-tour"
             >
@@ -188,7 +195,10 @@ export default function StartupDialog({
           <Button
             variant="ghost"
             className="w-full"
-            onClick={onClose}
+            onClick={() => {
+              onClose();
+              audioService.unlockAudio();
+            }}
             data-testid="button-skip-startup"
           >
             {selectedLanguage === 'ko' ? '건너뛰기' : 'Skip'}

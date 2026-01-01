@@ -25,7 +25,8 @@ class AudioService {
   private isSentenceMode: boolean = false;
   private selectedVoicesByLanguage: Map<string, string> = new Map(); // language -> voice name
   private selectedClovaVoicesByLanguage: Map<string, string> = new Map(); // language -> CLOVA voice id
-  
+  private isUnlocked: boolean = false;
+
   // MP3 Audio properties
   private audioElement: HTMLAudioElement | null = null;
   private audioMode: AudioMode = 'auto';
@@ -36,7 +37,7 @@ class AudioService {
     this.synthesis = window.speechSynthesis;
     this.spokenLandmarks = new Set();
     this.isEnabled = true;
-    
+
     // Load saved rate from localStorage, default to 1.0
     const savedRate = localStorage.getItem('tts-speed');
     if (savedRate) {
@@ -45,7 +46,7 @@ class AudioService {
       this.currentRate = 1.0;
       localStorage.setItem('tts-speed', '1.0');
     }
-    
+
     // Load saved audio mode
     const savedMode = localStorage.getItem('audio-mode') as AudioMode;
     if (savedMode && ['auto', 'mp3', 'tts', 'clova'].includes(savedMode)) {
@@ -55,7 +56,7 @@ class AudioService {
     // Load saved voice selections per language
     this.loadSelectedVoices();
     this.loadSelectedClovaVoices();
-    
+
     // Load voices when available
     this.loadVoices();
     if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -66,7 +67,7 @@ class AudioService {
   private loadVoices() {
     this.voices = this.synthesis.getVoices();
   }
-  
+
   private loadSelectedVoices() {
     try {
       const saved = localStorage.getItem('tts-voices-by-language');
@@ -80,7 +81,7 @@ class AudioService {
       console.error('[AudioService] Failed to load saved voices:', e);
     }
   }
-  
+
   private saveSelectedVoices() {
     try {
       const obj: Record<string, string> = {};
@@ -92,7 +93,7 @@ class AudioService {
       console.error('[AudioService] Failed to save voices:', e);
     }
   }
-  
+
   private loadSelectedClovaVoices() {
     try {
       const saved = localStorage.getItem('clova-voices-by-language');
@@ -106,7 +107,7 @@ class AudioService {
       console.error('[AudioService] Failed to load saved CLOVA voices:', e);
     }
   }
-  
+
   private saveSelectedClovaVoices() {
     try {
       const obj: Record<string, string> = {};
@@ -118,19 +119,19 @@ class AudioService {
       console.error('[AudioService] Failed to save CLOVA voices:', e);
     }
   }
-  
+
   // Get saved CLOVA voice for language
   getSelectedClovaVoice(language: string): string | undefined {
     return this.selectedClovaVoicesByLanguage.get(language);
   }
-  
+
   // Set CLOVA voice for language
   setClovaVoiceForLanguage(language: string, voiceId: string) {
     this.selectedClovaVoicesByLanguage.set(language, voiceId);
     this.saveSelectedClovaVoices();
     console.log(`[AudioService] Saved CLOVA voice for ${language}: ${voiceId}`);
   }
-  
+
   // Get all available voices
   getAllVoices(): SpeechSynthesisVoice[] {
     if (this.voices.length === 0) {
@@ -138,29 +139,29 @@ class AudioService {
     }
     return this.voices;
   }
-  
+
   // Get available voices for a specific language
   getVoicesForLanguage(language: string): SpeechSynthesisVoice[] {
     const langCode = this.getLangCode(language);
     const baseLang = langCode.split('-')[0];
-    
+
     if (this.voices.length === 0) {
       this.voices = this.synthesis.getVoices();
     }
-    
+
     return this.voices.filter(v => {
       const voiceBaseLang = v.lang.split('-')[0];
       return v.lang === langCode || voiceBaseLang === baseLang;
     });
   }
-  
+
   // Set selected voice for a language
   setVoiceForLanguage(language: string, voiceName: string) {
     this.selectedVoicesByLanguage.set(language, voiceName);
     this.saveSelectedVoices();
     console.log(`[AudioService] Set voice for ${language}: ${voiceName}`);
   }
-  
+
   // Get selected voice name for a language
   getSelectedVoiceName(language: string): string | null {
     return this.selectedVoicesByLanguage.get(language) || null;
@@ -194,14 +195,14 @@ class AudioService {
       'vi': 'vi-VN',
       'id': 'id-ID'
     };
-    
+
     return langMap[language] || 'en-US';
   }
 
   // Get all possible language codes for broader voice selection (especially for Spanish)
   private getLanguageVariants(langCode: string): string[] {
     const baseLang = langCode.split('-')[0];
-    
+
     // Spanish has many regional variants with high-quality voices
     if (baseLang === 'es') {
       return [
@@ -213,7 +214,7 @@ class AudioService {
         langCode  // Original requested code
       ];
     }
-    
+
     return [langCode];
   }
 
@@ -225,7 +226,7 @@ class AudioService {
     }
 
     const baseLang = langCode.split('-')[0];
-    
+
     // Check if user has selected a specific voice for this language
     const selectedVoiceName = this.selectedVoicesByLanguage.get(baseLang);
     if (selectedVoiceName) {
@@ -245,7 +246,12 @@ class AudioService {
       return langVariants.some(variant => v.lang === variant) || voiceBaseLang === baseLang;
     });
 
-    if (matchingVoices.length === 0) return null;
+    if (matchingVoices.length === 0) {
+      // LAST RESORT FALLBACK: If no matching voice for target language,
+      // return the best English voice instead of null (better than silence)
+      console.warn(`[AudioService] No voices found for ${langCode}, falling back to English`);
+      return this.getVoiceForLanguage('en-US');
+    }
 
     // Quality indicators (order matters - higher priority first)
     // Added more Spanish-specific quality indicators
@@ -272,7 +278,7 @@ class AudioService {
       let score = 0;
       const nameLower = voice.name.toLowerCase();
       const voiceLang = voice.lang.toLowerCase();
-      
+
       // Check for quality keywords in voice name
       qualityKeywords.forEach((keyword, index) => {
         if (nameLower.includes(keyword)) {
@@ -282,17 +288,17 @@ class AudioService {
 
       // Prefer exact language match over base language match
       if (voice.lang === langCode) score += 100;
-      
+
       // For Spanish, prefer es-ES and es-MX (often have best quality)
       if (baseLang === 'es') {
         if (voiceLang === 'es-es') score += 80;
         if (voiceLang === 'es-mx') score += 75;
         if (voiceLang === 'es-us') score += 60;
       }
-      
+
       // Remote/online voices often have better quality (Google, Microsoft neural)
       if (!voice.localService) score += 50;
-      
+
       // Local voices as fallback (lower priority but still considered)
       if (voice.localService) score += 10;
 
@@ -301,11 +307,23 @@ class AudioService {
 
     // Sort by score (highest first) and return the best voice
     scoredVoices.sort((a, b) => b.score - a.score);
-    
+
     // Log the selected voice for debugging
     console.log(`[AudioService] Selected voice for ${langCode}:`, scoredVoices[0].voice.name, `(score: ${scoredVoices[0].score})`);
-    
+
     return scoredVoices[0].voice;
+  }
+
+  // Check if a native voice exists for the language on this device
+  hasNativeVoice(language: string): boolean {
+    const langCode = this.getLangCode(language);
+    const baseLang = langCode.split('-')[0];
+
+    if (this.voices.length === 0) {
+      this.voices = this.synthesis.getVoices();
+    }
+
+    return this.voices.some(v => v.lang.startsWith(baseLang));
   }
 
   speak(text: string, landmarkId: string, language: string = 'en') {
@@ -338,10 +356,10 @@ class AudioService {
       clearTimeout(this.playbackTimer);
       this.playbackTimer = null;
     }
-    
+
     this.synthesis.cancel();
     this.currentUtterance = null;
-    
+
     this.playbackTimer = setTimeout(() => {
       this.currentUtterance = new SpeechSynthesisUtterance(text);
       const langCode = this.getLangCode(language);
@@ -425,25 +443,57 @@ class AudioService {
     this.spokenLandmarks.delete(landmarkId);
   }
 
+  // Unlock audio engine (call from user gesture)
+  unlockAudio() {
+    if (this.isUnlocked) return;
+
+    console.log('[AudioService] Unlocking audio engine...');
+
+    // 1. Try to unlock Web Speech API
+    const utterance = new SpeechSynthesisUtterance('');
+    utterance.volume = 0;
+    this.synthesis.speak(utterance);
+
+    // 2. Try to unlock HTML Audio if element exists
+    if (this.audioElement) {
+      this.audioElement.play().then(() => {
+        this.audioElement?.pause();
+      }).catch(() => { });
+    } else {
+      // Create a temporary silent audio to unlock
+      const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
+      silentAudio.play().then(() => {
+        this.isUnlocked = true;
+        console.log('[AudioService] Audio engine unlocked successfully');
+      }).catch(err => {
+        console.warn('[AudioService] Audio engine unlock failed:', err);
+      });
+    }
+  }
+
+  getIsUnlocked(): boolean {
+    return this.isUnlocked;
+  }
+
   // Split text into sentences for sentence-by-sentence highlighting
   splitIntoSentences(text: string): string[] {
     // Split by common sentence-ending punctuation, keeping the punctuation
     const sentenceRegex = /[^.!?。！？]+[.!?。！？]+/g;
     const matches = text.match(sentenceRegex);
-    
+
     if (!matches || matches.length === 0) {
       // If no sentence endings found, return the whole text as one sentence
       return [text.trim()];
     }
-    
+
     return matches.map(s => s.trim()).filter(s => s.length > 0);
   }
 
   // Play text sentence by sentence with highlighting callback
   playSentences(
-    text: string, 
-    language: string = 'en', 
-    rate: number = 1.0, 
+    text: string,
+    language: string = 'en',
+    rate: number = 1.0,
     onSentenceChange?: (index: number) => void,
     onEnd?: () => void
   ) {
@@ -451,22 +501,22 @@ class AudioService {
       clearTimeout(this.playbackTimer);
       this.playbackTimer = null;
     }
-    
+
     this.synthesis.cancel();
     this.currentUtterance = null;
-    
+
     this.sentences = this.splitIntoSentences(text);
     this.sentenceIndex = 0;
     this.onSentenceChange = onSentenceChange || null;
     this.onSentenceEnd = onEnd || null;
     this.isSentenceMode = true;
     this.currentRate = rate;
-    
+
     // Notify first sentence
     if (this.onSentenceChange) {
       this.onSentenceChange(0);
     }
-    
+
     this.playNextSentence(language, rate);
   }
 
@@ -484,7 +534,7 @@ class AudioService {
 
     const sentence = this.sentences[this.sentenceIndex];
     const langCode = this.getLangCode(language);
-    
+
     this.currentUtterance = new SpeechSynthesisUtterance(sentence);
     this.currentUtterance.lang = langCode;
     this.currentUtterance.rate = rate;
@@ -499,12 +549,12 @@ class AudioService {
 
     this.currentUtterance.onend = () => {
       this.sentenceIndex++;
-      
+
       // Notify next sentence if available
       if (this.onSentenceChange && this.sentenceIndex < this.sentences.length) {
         this.onSentenceChange(this.sentenceIndex);
       }
-      
+
       // Small delay between sentences for natural pacing
       this.playbackTimer = setTimeout(() => {
         this.playNextSentence(language, rate);
@@ -540,7 +590,7 @@ class AudioService {
   }
 
   // ==================== CLOVA Sentence-by-Sentence Methods ====================
-  
+
   private clovaSentenceMode: boolean = false;
   private clovaSentences: string[] = [];
   private clovaSentenceIndex: number = 0;
@@ -640,7 +690,7 @@ class AudioService {
       }
 
       const audioBlob = await response.blob();
-      
+
       // Check again after getting blob
       if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) {
         return;
@@ -657,12 +707,12 @@ class AudioService {
       }
 
       this.audioElement = new Audio(objectUrl);
-      
+
       this.audioElement.onended = () => {
         URL.revokeObjectURL(objectUrl);
         // Guard against stale callbacks
         if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
-        
+
         this.clovaSentenceIndex++;
         if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
           this.onClovaSentenceChange(this.clovaSentenceIndex);
@@ -675,7 +725,7 @@ class AudioService {
         console.error('[AudioService] Error playing CLOVA sentence');
         // Guard against stale callbacks
         if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
-        
+
         // Try next sentence
         this.clovaSentenceIndex++;
         if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
@@ -692,10 +742,10 @@ class AudioService {
         return;
       }
       console.error('[AudioService] CLOVA sentence error:', error);
-      
+
       // Guard against stale callbacks
       if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
-      
+
       // Try next sentence
       this.clovaSentenceIndex++;
       if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
@@ -713,13 +763,13 @@ class AudioService {
     this.clovaSentenceIndex = 0;
     this.onClovaSentenceChange = null;
     this.onClovaSentenceEnd = null;
-    
+
     // Abort any pending fetch
     if (this.clovaAbortController) {
       this.clovaAbortController.abort();
       this.clovaAbortController = null;
     }
-    
+
     // Stop and cleanup audio element
     if (this.audioElement) {
       this.audioElement.pause();
@@ -765,42 +815,42 @@ class AudioService {
 
       // Check for cached audio first
       const cachedAudio = await offlineStorage.getAudio(landmarkId, language);
-      
+
       if (cachedAudio) {
         // Play from IndexedDB cache
         const objectUrl = URL.createObjectURL(cachedAudio.audioBlob);
         this.audioElement = new Audio(objectUrl);
-        
+
         this.audioElement.onended = () => {
           URL.revokeObjectURL(objectUrl);
           onEnd?.();
         };
-        
+
         this.audioElement.onerror = () => {
           URL.revokeObjectURL(objectUrl);
           console.error('Error playing cached audio');
         };
-        
+
         this.audioElement.playbackRate = this.currentRate;
         await this.audioElement.play();
         console.log(`[AudioService] Playing cached MP3 for ${landmarkId} (${language})`);
         return true;
       }
-      
+
       // If no cached audio, try to play from URL
       if (audioUrl) {
         this.audioElement = new Audio(audioUrl);
-        
+
         this.audioElement.onended = () => {
           onEnd?.();
         };
-        
+
         this.audioElement.playbackRate = this.currentRate;
         await this.audioElement.play();
         console.log(`[AudioService] Playing MP3 from URL for ${landmarkId}`);
         return true;
       }
-      
+
       return false;
     } catch (error) {
       console.error('[AudioService] Error playing MP3:', error);
@@ -834,12 +884,12 @@ class AudioService {
     if (this.audioMode === 'mp3' || this.audioMode === 'auto') {
       // Try MP3 first
       const success = await this.playMP3(landmarkId, language, audioUrl, onEnd);
-      
+
       if (success) {
         this.spokenLandmarks.add(landmarkId);
         return;
       }
-      
+
       // Fallback to TTS if MP3 mode is 'auto'
       if (this.audioMode === 'auto') {
         console.log(`[AudioService] MP3 not available, falling back to TTS for ${landmarkId}`);
@@ -882,19 +932,19 @@ class AudioService {
 
       const audioBlob = await response.blob();
       const objectUrl = URL.createObjectURL(audioBlob);
-      
+
       this.audioElement = new Audio(objectUrl);
-      
+
       this.audioElement.onended = () => {
         URL.revokeObjectURL(objectUrl);
         onEnd?.();
       };
-      
+
       this.audioElement.onerror = () => {
         URL.revokeObjectURL(objectUrl);
         console.error('[AudioService] Error playing CLOVA TTS');
       };
-      
+
       this.audioElement.playbackRate = this.currentRate;
       await this.audioElement.play();
       console.log(`[AudioService] Playing CLOVA TTS (${language})`);
@@ -913,7 +963,7 @@ class AudioService {
     voiceId?: string
   ): Promise<boolean> {
     const progressKey = `${landmarkId}-${language}`;
-    
+
     try {
       // Update progress
       this.updateDownloadProgress(progressKey, {
@@ -940,7 +990,7 @@ class AudioService {
       }
 
       const result = await response.json();
-      
+
       this.updateDownloadProgress(progressKey, {
         landmarkId,
         language,
@@ -955,7 +1005,7 @@ class AudioService {
       }
 
       const audioBlob = await audioResponse.blob();
-      
+
       this.updateDownloadProgress(progressKey, {
         landmarkId,
         language,
@@ -985,7 +1035,7 @@ class AudioService {
       return true;
     } catch (error: any) {
       console.error(`[AudioService] Failed to download audio for ${landmarkId}:`, error);
-      
+
       this.updateDownloadProgress(progressKey, {
         landmarkId,
         language,
@@ -993,7 +1043,7 @@ class AudioService {
         status: 'error',
         error: error.message
       });
-      
+
       return false;
     }
   }
@@ -1012,13 +1062,13 @@ class AudioService {
         item.text,
         item.voiceId
       );
-      
+
       if (result) {
         success++;
       } else {
         failed++;
       }
-      
+
       // Small delay to avoid overwhelming the server
       await new Promise(resolve => setTimeout(resolve, 500));
     }

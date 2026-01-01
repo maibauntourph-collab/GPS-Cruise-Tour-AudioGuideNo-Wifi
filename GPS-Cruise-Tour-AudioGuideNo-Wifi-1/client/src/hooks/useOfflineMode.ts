@@ -20,7 +20,7 @@ export function useOfflineMode() {
       setIsOnline(true);
       syncQueuedVisits();
     };
-    
+
     const handleOffline = () => {
       console.log('Network status: Offline');
       setIsOnline(false);
@@ -55,7 +55,7 @@ export function useOfflineMode() {
     try {
       const existingMetadata = await offlineStorage.getCityMetadata(cityId);
       const headers: HeadersInit = {};
-      
+
       if (existingMetadata?.etag) {
         headers['If-None-Match'] = existingMetadata.etag;
       }
@@ -76,23 +76,31 @@ export function useOfflineMode() {
       const etag = response.headers.get('ETag') || undefined;
 
       await offlineStorage.saveOfflinePackage(packageData, etag);
-      
+
       setDownloadProgress({ cityId, status: 'complete', message: `Downloaded ${packageData.landmarks.length} items` });
       await loadDownloadedCities();
-      
+
       setTimeout(() => setDownloadProgress(null), 2000);
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Download failed:', error);
-      setDownloadProgress({ 
-        cityId, 
-        status: 'error', 
-        message: error instanceof Error ? error.message : 'Download failed' 
+
+      let message = 'Download failed';
+      if (error.message === 'STORAGE_QUOTA_EXCEEDED') {
+        message = 'STORAGE_QUOTA_EXCEEDED';
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
+
+      setDownloadProgress({
+        cityId,
+        status: 'error',
+        message: message
       });
       setTimeout(() => setDownloadProgress(null), 3000);
       return false;
     }
-  }, []);
+  }, [loadDownloadedCities]);
 
   const deleteCity = useCallback(async (cityId: string): Promise<void> => {
     await offlineStorage.deleteCityData(cityId);
@@ -181,7 +189,7 @@ export function useOfflineMode() {
 
     try {
       const unsynced = await offlineStorage.getUnsynkedVisits();
-      
+
       for (const visit of unsynced) {
         try {
           const response = await fetch('/api/visited', {
@@ -192,7 +200,7 @@ export function useOfflineMode() {
               sessionId: visit.sessionId
             })
           });
-          
+
           if (response.ok) {
             await offlineStorage.markVisitSynced(visit.id);
           }

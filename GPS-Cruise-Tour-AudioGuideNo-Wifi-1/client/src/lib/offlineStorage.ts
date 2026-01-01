@@ -57,7 +57,7 @@ class OfflineStorage {
 
       request.onupgradeneeded = (event) => {
         const db = (event.target as IDBOpenDBRequest).result;
-        
+
         if (!db.objectStoreNames.contains('cities')) {
           const citiesStore = db.createObjectStore('cities', { keyPath: 'id' });
           citiesStore.createIndex('name', 'name', { unique: false });
@@ -100,7 +100,7 @@ class OfflineStorage {
   async saveOfflinePackage(packageData: OfflinePackage, etag?: string): Promise<void> {
     const db = await this.ensureDb();
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const transaction = db.transaction(['cities', 'landmarks', 'metadata'], 'readwrite');
 
       transaction.onerror = () => reject(transaction.error);
@@ -128,6 +128,11 @@ class OfflineStorage {
         etag
       };
       metadataStore.put({ cityId: packageData.city.id, ...metadata });
+    }).catch(error => {
+      if (error.name === 'QuotaExceededError') {
+        throw new Error('STORAGE_QUOTA_EXCEEDED');
+      }
+      throw error;
     });
   }
 
@@ -253,7 +258,7 @@ class OfflineStorage {
       const landmarksStore = transaction.objectStore('landmarks');
       const index = landmarksStore.index('cityId');
       const cursorRequest = index.openCursor(IDBKeyRange.only(cityId));
-      
+
       cursorRequest.onsuccess = (event) => {
         const cursor = (event.target as IDBRequest).result;
         if (cursor) {
@@ -366,7 +371,7 @@ class OfflineStorage {
 
     return new Promise((resolve, reject) => {
       const transaction = db.transaction(['cities', 'landmarks', 'metadata', 'visitedQueue', 'audioFiles'], 'readwrite');
-      
+
       transaction.objectStore('cities').clear();
       transaction.objectStore('landmarks').clear();
       transaction.objectStore('metadata').clear();
@@ -384,7 +389,7 @@ class OfflineStorage {
   async saveAudio(audio: Omit<CachedAudio, 'id' | 'cachedAt'>): Promise<void> {
     const db = await this.ensureDb();
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const transaction = db.transaction(['audioFiles'], 'readwrite');
       const store = transaction.objectStore('audioFiles');
 
@@ -402,6 +407,11 @@ class OfflineStorage {
         console.log(`Cached audio for ${audio.landmarkId} (${audio.language})`);
         resolve();
       };
+    }).catch(error => {
+      if (error.name === 'QuotaExceededError') {
+        throw new Error('STORAGE_QUOTA_EXCEEDED');
+      }
+      throw error;
     });
   }
 
@@ -519,6 +529,17 @@ class OfflineStorage {
         resolve();
       };
     });
+  }
+
+  async getStorageEstimate(): Promise<{ quota: number; usage: number; percent: number }> {
+    if (navigator.storage && navigator.storage.estimate) {
+      const estimate = await navigator.storage.estimate();
+      const quota = estimate.quota || 0;
+      const usage = estimate.usage || 0;
+      const percent = quota > 0 ? (usage / quota) * 100 : 0;
+      return { quota, usage, percent };
+    }
+    return { quota: 0, usage: 0, percent: 0 };
   }
 }
 
