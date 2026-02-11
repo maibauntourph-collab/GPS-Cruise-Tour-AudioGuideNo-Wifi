@@ -10,12 +10,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  MapPin, 
-  Building2, 
-  Plus, 
-  Pencil, 
-  Trash2, 
+import {
+  MapPin,
+  Building2,
+  Plus,
+  Pencil,
+  Trash2,
   Search,
   ArrowLeft,
   Globe,
@@ -36,7 +36,9 @@ import {
   Shield,
   Mail,
   Calendar,
-  ExternalLink
+  ExternalLink,
+  Megaphone,
+  Copy
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -63,6 +65,19 @@ interface UserStats {
   roles: Record<string, number>;
   providers: Record<string, number>;
   recentSignups: number;
+}
+
+interface MarketingContent {
+  id: string;
+  landmarkId: string;
+  landmarkName: string;
+  content: {
+    blog: string;
+    instagram: string;
+    tiktok: string;
+    twitter: string;
+  };
+  updatedAt: string;
 }
 
 interface DbCity {
@@ -110,19 +125,19 @@ export default function Admin() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCityFilter, setSelectedCityFilter] = useState<string>('all');
-  
+
   const [editingCity, setEditingCity] = useState<DbCity | null>(null);
   const [editingLandmark, setEditingLandmark] = useState<DbLandmark | null>(null);
   const [isCreateCityOpen, setIsCreateCityOpen] = useState(false);
   const [isCreateLandmarkOpen, setIsCreateLandmarkOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'city' | 'landmark'; id: string; name: string } | null>(null);
-  
+
   // Import/Export state
   const [importType, setImportType] = useState<'cities' | 'landmarks'>('cities');
   const [importFile, setImportFile] = useState<File | null>(null);
   const [importing, setImporting] = useState(false);
   const [importResult, setImportResult] = useState<{ success: boolean; imported: number; total: number; errors?: { row: number; message: string }[] } | null>(null);
-  
+
   // User management state
   const [userSearch, setUserSearch] = useState('');
   const [userRoleFilter, setUserRoleFilter] = useState<string>('all');
@@ -156,6 +171,10 @@ export default function Admin() {
 
   const { data: userStats } = useQuery<UserStats>({
     queryKey: ['/api/admin/users/stats']
+  });
+
+  const { data: marketingContents = [], isLoading: loadingMarketing } = useQuery<MarketingContent[]>({
+    queryKey: ['/api/admin/marketing-contents']
   });
 
   const updateUserRoleMutation = useMutation({
@@ -256,12 +275,12 @@ export default function Admin() {
 
   const filteredLandmarks = landmarks.filter(l => {
     const matchesSearch = l.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          l.id.toLowerCase().includes(searchTerm.toLowerCase());
+      l.id.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCity = selectedCityFilter === 'all' || l.cityId === selectedCityFilter;
     return matchesSearch && matchesCity;
   });
 
-  const filteredCities = cities.filter(c => 
+  const filteredCities = cities.filter(c =>
     c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     c.country.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -307,6 +326,10 @@ export default function Admin() {
             <TabsTrigger value="users" data-testid="tab-users">
               <Users className="h-4 w-4 mr-2" />
               고객 ({userStats?.total || 0})
+            </TabsTrigger>
+            <TabsTrigger value="marketing" data-testid="tab-marketing">
+              <Megaphone className="h-4 w-4 mr-2" />
+              마케팅 대시보드
             </TabsTrigger>
           </TabsList>
 
@@ -464,7 +487,7 @@ export default function Admin() {
                           )}
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          {cities.find(c => c.id === landmark.cityId)?.name || landmark.cityId} • 
+                          {cities.find(c => c.id === landmark.cityId)?.name || landmark.cityId} •
                           {landmark.lat.toFixed(4)}, {landmark.lng.toFixed(4)}
                         </p>
                       </div>
@@ -531,18 +554,18 @@ export default function Admin() {
                       if (!importFile) return;
                       setImporting(true);
                       setImportResult(null);
-                      
+
                       const formData = new FormData();
                       formData.append('file', importFile);
                       formData.append('type', importType);
-                      
+
                       try {
                         const response = await fetch('/api/admin/import', {
                           method: 'POST',
                           body: formData
                         });
                         const result = await response.json();
-                        
+
                         if (!response.ok) {
                           setImportResult({ success: false, imported: 0, total: 0, errors: [{ row: 0, message: result.error }] });
                         } else {
@@ -702,6 +725,10 @@ export default function Admin() {
 
           <TabsContent value="audio">
             <AudioGenerationTab cities={cities} landmarks={landmarks} />
+          </TabsContent>
+
+          <TabsContent value="marketing">
+            <MarketingDashboardTab contents={marketingContents} isLoading={loadingMarketing} />
           </TabsContent>
 
           {/* Users Tab */}
@@ -881,8 +908,8 @@ export default function Admin() {
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeleteConfirm(null)}>Cancel</Button>
-            <Button 
-              variant="destructive" 
+            <Button
+              variant="destructive"
               onClick={() => {
                 if (deleteConfirm?.type === 'city') {
                   deleteCityMutation.mutate(deleteConfirm.id);
@@ -1087,17 +1114,17 @@ function LandmarkFormDialog({ isOpen, onClose, landmark, cities, onSave, isPendi
         // Use first city or empty string if no cities exist
         const defaultCityId = cities.length > 0 ? cities[0].id : '';
         setFormData({
-          id: '', 
-          cityId: defaultCityId, 
-          name: '', 
-          lat: 0, 
+          id: '',
+          cityId: defaultCityId,
+          name: '',
+          lat: 0,
           lng: 0,
-          radius: 50, 
-          narration: '', 
-          description: '', 
+          radius: 50,
+          narration: '',
+          description: '',
           category: '',
-          detailedDescription: '', 
-          yearBuilt: '', 
+          detailedDescription: '',
+          yearBuilt: '',
           architect: ''
         });
       }
@@ -1106,18 +1133,18 @@ function LandmarkFormDialog({ isOpen, onClose, landmark, cities, onSave, isPendi
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate required fields before submission
     if (!formData.id || !formData.cityId || !formData.name || !formData.narration) {
       alert('Please fill in all required fields: ID, City, Name, and Narration');
       return;
     }
-    
+
     if (formData.lat === undefined || formData.lng === undefined) {
       alert('Please provide valid latitude and longitude');
       return;
     }
-    
+
     onSave(formData);
   };
 
@@ -1347,8 +1374,8 @@ function AudioGenerationTab({ cities, landmarks }: { cities: DbCity[]; landmarks
   const pendingLandmarks = filteredLandmarks.filter(l => !l.hasAudio);
 
   const toggleLandmarkSelection = (landmarkId: string) => {
-    setSelectedLandmarks(prev => 
-      prev.includes(landmarkId) 
+    setSelectedLandmarks(prev =>
+      prev.includes(landmarkId)
         ? prev.filter(id => id !== landmarkId)
         : [...prev, landmarkId]
     );
@@ -1381,9 +1408,9 @@ function AudioGenerationTab({ cities, landmarks }: { cities: DbCity[]; landmarks
       });
 
       const result = await response.json();
-      
+
       if (response.ok) {
-        toast({ 
+        toast({
           title: `오디오 생성 완료`,
           description: `${result.generated}개 성공, ${result.failed}개 실패`
         });
@@ -1487,8 +1514,8 @@ function AudioGenerationTab({ cities, landmarks }: { cities: DbCity[]; landmarks
                     선택 해제
                   </Button>
                 </div>
-                <Button 
-                  onClick={generateAudio} 
+                <Button
+                  onClick={generateAudio}
                   disabled={generating || selectedLandmarks.length === 0}
                   data-testid="button-generate-audio"
                 >
@@ -1508,17 +1535,16 @@ function AudioGenerationTab({ cities, landmarks }: { cities: DbCity[]; landmarks
 
               <div className="border rounded-lg divide-y max-h-96 overflow-auto">
                 {filteredLandmarks.map(item => (
-                  <div 
-                    key={item.landmarkId} 
-                    className={`flex items-center justify-between p-3 hover:bg-muted/50 cursor-pointer ${
-                      selectedLandmarks.includes(item.landmarkId) ? 'bg-primary/10' : ''
-                    }`}
+                  <div
+                    key={item.landmarkId}
+                    className={`flex items-center justify-between p-3 hover:bg-muted/50 cursor-pointer ${selectedLandmarks.includes(item.landmarkId) ? 'bg-primary/10' : ''
+                      }`}
                     onClick={() => toggleLandmarkSelection(item.landmarkId)}
                     data-testid={`audio-item-${item.landmarkId}`}
                   >
                     <div className="flex items-center gap-3">
-                      <input 
-                        type="checkbox" 
+                      <input
+                        type="checkbox"
                         checked={selectedLandmarks.includes(item.landmarkId)}
                         onChange={() => toggleLandmarkSelection(item.landmarkId)}
                         className="h-4 w-4"
@@ -1675,8 +1701,8 @@ function UserDetailDialog({ user, isOpen, onClose, onRoleChange, onDelete, isUpd
                   </Badge>
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <Select 
-                    value={currentRole} 
+                  <Select
+                    value={currentRole}
                     onValueChange={(value) => {
                       setCurrentRole(value);
                       onRoleChange(value);

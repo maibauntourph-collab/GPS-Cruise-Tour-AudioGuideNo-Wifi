@@ -346,6 +346,77 @@ export const routePhotos = pgTable("route_photos", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+/**
+ * [강의 노트: 크리에이터 수익 관리]
+ * 학생 여러분, 플랫폼 비즈니스의 핵심은 '누가 얼마나 벌었는가'를 정확히 기록하는 것입니다.
+ * 이 ‘creator_earnings’ 테이블은 크리에이터 각자의 '지갑' 역할을 합니다.
+ * 단순히 숫자를 적는 것이 아니라, 출금 가능한 잔액과 총 누적액을 분리하여 관리함으로써
+ * 회계적 투명성을 확보하는 것이 이 설계의 핵심입니다.
+ */
+export const creatorEarnings = pgTable("creator_earnings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  // 어떤 크리에이터의 지갑인지 식별합니다 (users 테이블 참조)
+  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  // 현재 시점에서 크리에이터가 실제로 현금화할 수 있는 금액입니다.
+  totalBalance: doublePrecision("total_balance").notNull().default(0),
+  // 플랫폼 가입 이후 지금까지 벌어들인 총 금액으로, 성과 지표로 활용됩니다.
+  totalEarned: doublePrecision("total_earned").notNull().default(0),
+  // 마지막으로 수익이 업데이트된 시점입니다. 소수점 단위의 오차를 방지하기 위해 doublePrecision을 사용했습니다.
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+/**
+ * [강의 노트: 결제 및 트랜잭션의 무결성]
+ * 여러분, 돈이 오가는 모든 행위는 '증거'가 남아야 합니다. 이를 '트레일(Trail)'이라고 하죠.
+ * 'transactions' 테이블은 개별 결제가 발생할 때마다 그 상세 내역과 PG사(결제대행사)의 응답을 기록합니다.
+ * 결제 상태가 'pending'에서 'completed'로 변하는 과정을 추적하여 이중 결제를 방지하는 핵심 로직이 여기서 시작됩니다.
+ */
+export const transactions = pgTable("transactions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  // 결제를 시도한 사용자입니다. 비로그인 결제도 고려하여 nullable 할 수 있으나, 여기서는 회원 중심 설계를 따릅니다.
+  userId: varchar("user_id").notNull().references(() => users.id),
+  // 구매 대상인 랜드마크나 특정 루트의 ID입니다.
+  targetId: varchar("target_id").notNull(),
+  // 결제 금액입니다. 통화(Currency)는 현재 기본 설정을 따르지만, 글로벌 확장을 위해 필드를 분리할 수도 있습니다.
+  amount: doublePrecision("amount").notNull(),
+  // 결제의 현재 상태를 나타내는 지시자입니다. (시도 중, 완료, 실패, 환불 등)
+  status: varchar("status", { length: 20 }).notNull().default("pending"),
+  // PG사에서 발급해준 고유 승인 번호나 결과 데이터(JSON)를 저장하여 추후 분쟁 시 증거로 활용합니다.
+  providerData: json("provider_data"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+/**
+ * [강의 노트: 정산과 데이터 확정]
+ * 자, 수익이 발생했다면 이제 약속한 날짜에 크리에이터에게 일괄적으로 '월급'을 줘야겠죠?
+ * 'settlements' 테이블은 바로 그 '지급' 행위를 기록합니다.
+ * 정산이 완료된 데이터는 '확정'된 데이터이므로 가급적 수정을 지양하고 로그로서의 가치를 보존해야 합니다.
+ */
+export const settlements = pgTable("settlements", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  amount: doublePrecision("amount").notNull(),
+  status: varchar("status", { length: 20 }).notNull().default("pending"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+/**
+ * [마케터 쏭의 강의 노트: 마케팅 자산의 보관]
+ * 학생 여러분, AI가 만든 홍보 문구는 우리 플랫폼의 소중한 '디지털 자산'입니다.
+ * 이 ‘marketing_contents’ 테이블은 생성된 문구를 영구적으로 보관하여,
+ * 언제든 관리자가 확인하고 수정하여 SNS에 올릴 수 있도록 도와줍니다.
+ */
+export const marketingContents = pgTable("marketing_contents", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  // 어떤 명소에 대한 홍보 문구인지 연결합니다.
+  landmarkId: varchar("landmark_id").notNull().references(() => landmarks.id, { onDelete: 'cascade' }),
+  // AI가 생성한 JSON 형태의 콘텐츠 (blog, instagram, tiktok, twitter 등)
+  content: json("content").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
 // Insert schemas
 export const insertCitySchema = createInsertSchema(cities).omit({
   createdAt: true,
@@ -403,7 +474,48 @@ export const insertRoutePhotoSchema = createInsertSchema(routePhotos).omit({
   createdAt: true,
 });
 
-// Saved Routes relations
+// [교수님 노트] 방금 만든 신규 테이블들을 위한 Insert 스키마들입니다. 데이터 입력 시 자동 검증 도구 역할을 하죠.
+export const insertCreatorEarningsSchema = createInsertSchema(creatorEarnings).omit({ id: true, updatedAt: true });
+export const insertTransactionSchema = createInsertSchema(transactions).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertSettlementSchema = createInsertSchema(settlements).omit({ id: true, createdAt: true });
+export const insertMarketingContentSchema = createInsertSchema(marketingContents).omit({ id: true, createdAt: true, updatedAt: true });
+
+// [강의 노트: 관계형 데이터베이스의 꽃, Relations]
+// 여러분, 테이블들이 각자 따로 놀면 안 됩니다. 
+// 유저가 누구인지, 결제가 어떤 유저의 것인지 서로 '연결'되어 있어야 진정한 시스템이 됩니다.
+export const creatorEarningsRelations = relations(creatorEarnings, ({ one }) => ({
+  // 각 수익 레코드는 하나의 유저(크리에이터)에게 귀속됩니다.
+  user: one(users, {
+    fields: [creatorEarnings.userId],
+    references: [users.id],
+  }),
+}));
+
+export const transactionsRelations = relations(transactions, ({ one }) => ({
+  // 결제 내역은 이를 실행한 유저와 연결됩니다. 1:N 관계의 전형이죠.
+  user: one(users, {
+    fields: [transactions.userId],
+    references: [users.id],
+  }),
+}));
+
+export const settlementsRelations = relations(settlements, ({ one }) => ({
+  // 정산 기록 또한 수혜자인 유저와 연결되어야 합니다.
+  user: one(users, {
+    fields: [settlements.userId],
+    references: [users.id],
+  }),
+}));
+
+export const marketingContentsRelations = relations(marketingContents, ({ one }) => ({
+  // 각 마케팅 콘텐츠는 하나의 명소에 귀속됩니다.
+  landmark: one(landmarks, {
+    fields: [marketingContents.landmarkId],
+    references: [landmarks.id],
+  }),
+}));
+
+// [교수님 노트] 아래는 기존 테이블들과의 통합을 위한 관계 정의입니다.
 export const savedRoutesRelations = relations(savedRoutes, ({ one, many }) => ({
   user: one(users, {
     fields: [savedRoutes.userId],
@@ -443,6 +555,11 @@ export type InsertTourSchedule = z.infer<typeof insertTourScheduleSchema>;
 export type InsertGroupMember = z.infer<typeof insertGroupMemberSchema>;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertUserIdentity = z.infer<typeof insertUserIdentitySchema>;
+export type InsertCreatorEarnings = z.infer<typeof insertCreatorEarningsSchema>;
+export type InsertTransaction = z.infer<typeof insertTransactionSchema>;
+export type InsertSettlement = z.infer<typeof insertSettlementSchema>;
+export type InsertMarketingContent = z.infer<typeof insertMarketingContentSchema>;
+
 export type VisitedLandmark = typeof visitedLandmarks.$inferSelect;
 export type LandmarkAudio = typeof landmarkAudio.$inferSelect;
 export type TourSchedule = typeof tourSchedules.$inferSelect;
@@ -455,3 +572,7 @@ export type InsertSavedRoute = z.infer<typeof insertSavedRouteSchema>;
 export type InsertRoutePhoto = z.infer<typeof insertRoutePhotoSchema>;
 export type SavedRoute = typeof savedRoutes.$inferSelect;
 export type RoutePhoto = typeof routePhotos.$inferSelect;
+export type CreatorEarnings = typeof creatorEarnings.$inferSelect;
+export type Transaction = typeof transactions.$inferSelect;
+export type Settlement = typeof settlements.$inferSelect;
+export type MarketingContent = typeof marketingContents.$inferSelect;

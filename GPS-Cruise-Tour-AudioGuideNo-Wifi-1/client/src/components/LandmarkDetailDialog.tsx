@@ -5,9 +5,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard } from 'lucide-react';
+import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2 } from 'lucide-react';
+import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
-import { audioService } from '@/lib/audioService';
+import { audioService, AudioService } from '@/lib/audioService';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl } from '@/lib/affiliateConfig';
 
 interface LandmarkDetailDialogProps {
   landmark: Landmark | null;
@@ -37,7 +39,7 @@ export default function LandmarkDetailDialog({
     if (!landmark) return [];
     const description = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
     if (!description) return [];
-    return audioService.splitIntoSentences(description);
+    return AudioService.splitIntoSentences(description);
   }, [landmark, selectedLanguage]);
 
   // Stop all audio and reset state when dialog closes or landmark changes
@@ -62,6 +64,38 @@ export default function LandmarkDetailDialog({
     onClose();
   };
 
+  /**
+   * [코다리부장 & 회계부장 합동 브리핑]
+   * 대표님, 이 함수가 바로 '돈을 벌어다 주는' 핵심 로직입니다.
+   * 1. 우리가 만든 서버 API에 결제 세션 생성을 요청하고,
+   * 2. Stripe가 준 안전한 결제 주소(URL)로 고객을 보내면 끝!
+   */
+  const handleStripeCheckout = async () => {
+    try {
+      const response = await fetch('/api/payments/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          landmarkId: landmark.id,
+          creatorId: 'default-creator', // 실제로는 콘텐츠 제작자 ID
+          userId: 'test-user', // 실제로는 현재 로그인한 사용자 ID
+          amount: 4.99, // 기본 패키지 가격 (€)
+          name: `${getTranslatedContent(landmark, selectedLanguage, 'name')} 프리미엄 가이드`
+        }),
+      });
+
+      const { url, error } = await response.json();
+      if (url) {
+        window.location.href = url; // [코다리부장] 고객을 안전한 Stripe 결제창으로 이동시킵니다!
+      } else {
+        throw new Error(error || '세션 생성 실패');
+      }
+    } catch (error) {
+      console.error('[회계부장 긴급] 결제 시작 중 오류 발생:', error);
+      alert('결제 창을 열지 못했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  };
+
   if (!landmark) return null;
 
   const handlePlayAudio = async () => {
@@ -76,8 +110,7 @@ export default function LandmarkDetailDialog({
       setCurrentSentenceIndex(-1);
     } else {
       const audioMode = audioService.getAudioMode();
-      
-      // For CLOVA mode, use CLOVA TTS with sentence-by-sentence highlighting
+
       if (audioMode === 'clova') {
         setIsPlaying(true);
         const success = await audioService.playClovaSentences(
@@ -92,9 +125,33 @@ export default function LandmarkDetailDialog({
         if (!success) {
           // Fallback to system TTS if CLOVA fails
           audioService.playSentences(
-            detailedDescription, 
-            selectedLanguage, 
-            playbackRate, 
+            detailedDescription,
+            selectedLanguage,
+            playbackRate,
+            (index) => setCurrentSentenceIndex(index),
+            () => {
+              setIsPlaying(false);
+              setCurrentSentenceIndex(-1);
+            }
+          );
+        }
+      } else if (audioMode === 'openai') {
+        setIsPlaying(true);
+        const success = await audioService.playOpenAISentences(
+          detailedDescription,
+          selectedLanguage,
+          (index) => setCurrentSentenceIndex(index),
+          () => {
+            setIsPlaying(false);
+            setCurrentSentenceIndex(-1);
+          }
+        );
+        if (!success) {
+          // Fallback to system TTS if OpenAI fails
+          audioService.playSentences(
+            detailedDescription,
+            selectedLanguage,
+            playbackRate,
             (index) => setCurrentSentenceIndex(index),
             () => {
               setIsPlaying(false);
@@ -105,9 +162,9 @@ export default function LandmarkDetailDialog({
       } else {
         // Use sentence-by-sentence playback with highlighting for TTS/Auto/MP3 modes
         audioService.playSentences(
-          detailedDescription, 
-          selectedLanguage, 
-          playbackRate, 
+          detailedDescription,
+          selectedLanguage,
+          playbackRate,
           (index) => setCurrentSentenceIndex(index),
           () => {
             setIsPlaying(false);
@@ -178,7 +235,7 @@ export default function LandmarkDetailDialog({
                   <Navigation className="w-4 h-4" />
                   {t('getDirections', selectedLanguage)}
                 </Button>
-                
+
                 {onAddToTour && (
                   <Button
                     onClick={() => onAddToTour(landmark)}
@@ -188,9 +245,22 @@ export default function LandmarkDetailDialog({
                     data-testid="button-add-to-tour-dialog"
                   >
                     <MapPinned className="w-4 h-4" />
-                    {isInTour ? t('inTour', selectedLanguage) : t('addToTour', selectedLanguage)}
                   </Button>
                 )}
+
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    const url = window.location.href;
+                    navigator.clipboard.writeText(url);
+                    alert(selectedLanguage === 'ko' ? '링크가 복사되었습니다! SNS에 공유해보세요.' : 'Link copied! Share it on SNS.');
+                  }}
+                  className="w-full gap-2"
+                  data-testid="button-share-landmark"
+                >
+                  <Share2 className="w-4 h-4" />
+                  {selectedLanguage === 'ko' ? '이 명소 공유하기' : 'Share this Landmark'}
+                </Button>
               </div>
 
               {/* Audio Section */}
@@ -210,16 +280,16 @@ export default function LandmarkDetailDialog({
                     {isPlaying && audioService.getAudioMode() !== 'clova' && (
                       <select
                         value={playbackRate}
-                        onChange={(e) => {
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                           const rate = parseFloat(e.target.value);
                           setPlaybackRate(rate);
                           audioService.setRate(rate);
                           const detailedDescription = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
                           if (detailedDescription) {
                             audioService.playSentences(
-                              detailedDescription, 
-                              selectedLanguage, 
-                              rate, 
+                              detailedDescription,
+                              selectedLanguage,
+                              rate,
                               (index) => setCurrentSentenceIndex(index),
                               () => {
                                 setIsPlaying(false);
@@ -243,20 +313,19 @@ export default function LandmarkDetailDialog({
                   {/* Sentence-by-sentence text with memory pen highlighting */}
                   <div className="text-sm leading-relaxed" data-testid="audio-text-container">
                     {sentences.length > 0 ? (
-                      sentences.map((sentence, index) => {
+                      sentences.map((sentence: string, index: number) => {
                         const isCurrentSentence = currentSentenceIndex === index;
                         const isReadSentence = currentSentenceIndex > index && isPlaying;
-                        
+
                         return (
                           <span
                             key={index}
-                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${
-                              isCurrentSentence 
-                                ? 'bg-yellow-300/50 font-medium shadow-sm dark:bg-yellow-400/40' 
-                                : isReadSentence
+                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${isCurrentSentence
+                              ? 'bg-yellow-300/50 font-medium shadow-sm dark:bg-yellow-400/40'
+                              : isReadSentence
                                 ? 'bg-green-300/30 dark:bg-green-400/20'
                                 : 'bg-transparent'
-                            }`}
+                              }`}
                             style={{
                               boxDecorationBreak: 'clone',
                               WebkitBoxDecorationBreak: 'clone'
@@ -288,8 +357,8 @@ export default function LandmarkDetailDialog({
                   </TabsList>
                   <TabsContent value="exterior" className="mt-4">
                     {landmark.restaurantPhotos.exterior && landmark.restaurantPhotos.exterior.length > 0 ? (
-                      <PhotoGallery 
-                        photos={landmark.restaurantPhotos.exterior} 
+                      <PhotoGallery
+                        photos={landmark.restaurantPhotos.exterior}
                         title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('exteriorPhotos', selectedLanguage)}`}
                       />
                     ) : (
@@ -300,8 +369,8 @@ export default function LandmarkDetailDialog({
                   </TabsContent>
                   <TabsContent value="interior" className="mt-4">
                     {landmark.restaurantPhotos.interior && landmark.restaurantPhotos.interior.length > 0 ? (
-                      <PhotoGallery 
-                        photos={landmark.restaurantPhotos.interior} 
+                      <PhotoGallery
+                        photos={landmark.restaurantPhotos.interior}
                         title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('interiorPhotos', selectedLanguage)}`}
                       />
                     ) : (
@@ -312,8 +381,8 @@ export default function LandmarkDetailDialog({
                   </TabsContent>
                   <TabsContent value="menu" className="mt-4">
                     {landmark.restaurantPhotos.menu && landmark.restaurantPhotos.menu.length > 0 ? (
-                      <PhotoGallery 
-                        photos={landmark.restaurantPhotos.menu} 
+                      <PhotoGallery
+                        photos={landmark.restaurantPhotos.menu}
                         title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('menuPhotos', selectedLanguage)}`}
                       />
                     ) : (
@@ -324,8 +393,8 @@ export default function LandmarkDetailDialog({
                   </TabsContent>
                 </Tabs>
               ) : landmark.photos && landmark.photos.length > 0 ? (
-                <PhotoGallery 
-                  photos={landmark.photos} 
+                <PhotoGallery
+                  photos={landmark.photos}
                   title={getTranslatedContent(landmark, selectedLanguage, 'name')}
                 />
               ) : (
@@ -377,6 +446,25 @@ export default function LandmarkDetailDialog({
                     {t('bookTicketsTours', selectedLanguage)}
                   </h5>
                   <div className="space-y-1.5">
+                    {/* [마케터 쏭: 수익 떡상 포인트! 🚀]
+                        대표님!! 외부 사이트로 보내는 것도 좋지만, 우리 자체 가이드를 파는 게 마진이 제일 높아요!
+                        색깔을 번쩍번쩍하게 넣어서 고객들의 시선을 확 뺏어보겠습니다!! */}
+                    <Button
+                      onClick={handleStripeCheckout}
+                      className="w-full justify-start gap-2 text-xs h-9 bg-gradient-to-r from-primary to-amber-500 hover:from-primary/90 hover:to-amber-600 border-none text-white font-bold"
+                      data-testid="button-stripe-checkout"
+                    >
+                      <CreditCard className="w-4 h-4 shadow-sm" />
+                      {selectedLanguage === 'ko' ? '프리미엄 가이드 구매 (Stripe 결제)' : 'Buy Premium Guide (Stripe)'}
+                      <Badge variant="secondary" className="ml-auto bg-white/20 text-white border-none text-[10px]">SAVE 20%</Badge>
+                    </Button>
+
+                    <div className="flex items-center gap-2 py-1">
+                      <div className="h-[1px] flex-1 bg-border"></div>
+                      <span className="text-[10px] text-muted-foreground uppercase">{selectedLanguage === 'ko' ? '또는 외부 예약' : 'or external booking'}</span>
+                      <div className="h-[1px] flex-1 bg-border"></div>
+                    </div>
+
                     {/* 한국어: Klook */}
                     {selectedLanguage === 'ko' && (
                       <Button
@@ -384,8 +472,8 @@ export default function LandmarkDetailDialog({
                         size="sm"
                         className="w-full justify-start gap-2 text-xs h-8"
                         onClick={() => {
-                          const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                          window.open(`https://www.klook.com/ko/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                          const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                          window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
                         }}
                         data-testid="button-book-klook-dialog"
                       >
@@ -393,7 +481,7 @@ export default function LandmarkDetailDialog({
                         Klook에서 예약
                       </Button>
                     )}
-                    
+
                     {/* 일본어: Klook, Viator */}
                     {selectedLanguage === 'ja' && (
                       <>
@@ -402,8 +490,8 @@ export default function LandmarkDetailDialog({
                           size="sm"
                           className="w-full justify-start gap-2 text-xs h-8"
                           onClick={() => {
-                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                            window.open(`https://www.klook.com/ja/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
                           }}
                           data-testid="button-book-klook-dialog"
                         >
@@ -415,8 +503,8 @@ export default function LandmarkDetailDialog({
                           size="sm"
                           className="w-full justify-start gap-2 text-xs h-8"
                           onClick={() => {
-                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                            window.open(`https://www.viator.com/ja-JP/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            window.open(getViatorUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
                           }}
                           data-testid="button-book-viator-dialog"
                         >
@@ -425,7 +513,7 @@ export default function LandmarkDetailDialog({
                         </Button>
                       </>
                     )}
-                    
+
                     {/* 중국어: Klook, Trip.com */}
                     {selectedLanguage === 'zh' && (
                       <>
@@ -434,8 +522,8 @@ export default function LandmarkDetailDialog({
                           size="sm"
                           className="w-full justify-start gap-2 text-xs h-8"
                           onClick={() => {
-                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                            window.open(`https://www.klook.com/zh-CN/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
                           }}
                           data-testid="button-book-klook-dialog"
                         >
@@ -447,8 +535,8 @@ export default function LandmarkDetailDialog({
                           size="sm"
                           className="w-full justify-start gap-2 text-xs h-8"
                           onClick={() => {
-                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                            window.open(`https://cn.trip.com/search/things-to-do?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            window.open(getTripUrl(searchQuery), '_blank', 'noopener,noreferrer');
                           }}
                           data-testid="button-book-trip-dialog"
                         >
@@ -457,7 +545,7 @@ export default function LandmarkDetailDialog({
                         </Button>
                       </>
                     )}
-                    
+
                     {/* 동남아시아 언어: Klook */}
                     {(selectedLanguage === 'th' || selectedLanguage === 'vi' || selectedLanguage === 'id') && (
                       <Button
@@ -465,9 +553,8 @@ export default function LandmarkDetailDialog({
                         size="sm"
                         className="w-full justify-start gap-2 text-xs h-8"
                         onClick={() => {
-                          const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                          const langCode = selectedLanguage === 'th' ? 'th-TH' : selectedLanguage === 'vi' ? 'vi-VN' : 'id-ID';
-                          window.open(`https://www.klook.com/${langCode}/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                          const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                          window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
                         }}
                         data-testid="button-book-klook-dialog"
                       >
@@ -475,7 +562,7 @@ export default function LandmarkDetailDialog({
                         {selectedLanguage === 'th' ? 'จองกับ Klook' : selectedLanguage === 'vi' ? 'Đặt trên Klook' : 'Pesan di Klook'}
                       </Button>
                     )}
-                    
+
                     {/* 영어/유럽 언어: GetYourGuide, Viator */}
                     {['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar', 'hi', 'tr', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs'].includes(selectedLanguage) && (
                       <>
@@ -484,10 +571,8 @@ export default function LandmarkDetailDialog({
                           size="sm"
                           className="w-full justify-start gap-2 text-xs h-8"
                           onClick={() => {
-                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                            // Language mapping for GetYourGuide
-                            const gygLang = selectedLanguage === 'es' ? 'es' : selectedLanguage === 'fr' ? 'fr' : selectedLanguage === 'de' ? 'de' : selectedLanguage === 'it' ? 'it' : selectedLanguage === 'pt' ? 'pt-BR' : 'en';
-                            window.open(`https://www.getyourguide.com/${gygLang}/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            window.open(getGYGUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
                           }}
                           data-testid="button-book-getyourguide-dialog"
                         >
@@ -499,10 +584,8 @@ export default function LandmarkDetailDialog({
                           size="sm"
                           className="w-full justify-start gap-2 text-xs h-8"
                           onClick={() => {
-                            const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                            // Language mapping for Viator
-                            const viatorLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-BR' : 'en-US';
-                            window.open(`https://www.viator.com/${viatorLang}/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                            const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            window.open(getViatorUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
                           }}
                           data-testid="button-book-viator-dialog"
                         >
@@ -529,7 +612,7 @@ export default function LandmarkDetailDialog({
                         </div>
                       </div>
                     )}
-                    
+
                     {landmark.priceRange && (
                       <div className="flex items-start gap-1.5 text-xs">
                         <Euro className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
@@ -539,7 +622,7 @@ export default function LandmarkDetailDialog({
                         </div>
                       </div>
                     )}
-                    
+
                     {landmark.cuisine && (
                       <div className="flex items-start gap-1.5 text-xs">
                         <ChefHat className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
@@ -549,7 +632,7 @@ export default function LandmarkDetailDialog({
                         </div>
                       </div>
                     )}
-                    
+
                     {landmark.paymentMethods && landmark.paymentMethods.length > 0 && (
                       <div className="flex items-start gap-1.5 text-xs">
                         <CreditCard className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
@@ -559,13 +642,13 @@ export default function LandmarkDetailDialog({
                         </div>
                       </div>
                     )}
-                    
+
                     {landmark.phoneNumber && (
                       <div className="flex items-start gap-1.5 text-xs">
                         <Phone className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
                         <div>
                           <p className="font-medium">{t('phoneNumber', selectedLanguage)}</p>
-                          <a 
+                          <a
                             href={`tel:${landmark.phoneNumber}`}
                             className="text-primary hover:underline"
                             data-testid="link-restaurant-phone-dialog"
@@ -575,12 +658,12 @@ export default function LandmarkDetailDialog({
                         </div>
                       </div>
                     )}
-                    
+
                     {landmark.menuHighlights && landmark.menuHighlights.length > 0 && (
                       <div className="text-xs">
                         <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
                         <div className="flex flex-wrap gap-1 mb-2">
-                          {landmark.menuHighlights.slice(0, 4).map((dish, idx) => (
+                          {landmark.menuHighlights.slice(0, 4).map((dish: string, idx: number) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {dish}
                             </Badge>
@@ -588,15 +671,15 @@ export default function LandmarkDetailDialog({
                         </div>
                         {landmark.restaurantPhotos?.menu && landmark.restaurantPhotos.menu.length > 0 && (
                           <div className="grid grid-cols-3 gap-2 mt-2">
-                            {landmark.restaurantPhotos.menu.slice(0, 3).map((photo, idx) => (
-                              <img 
+                            {landmark.restaurantPhotos.menu.slice(0, 3).map((photo: string, idx: number) => (
+                              <img
                                 key={idx}
-                                src={photo} 
+                                src={photo}
                                 alt={`Menu ${idx + 1}`}
                                 className="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity"
                                 onClick={() => {
                                   // Open photo gallery at this index
-                                  const event = new CustomEvent('openPhotoGallery', { 
+                                  const event = new CustomEvent('openPhotoGallery', {
                                     detail: { photos: landmark.restaurantPhotos?.menu || [], startIndex: idx }
                                   });
                                   window.dispatchEvent(event);
@@ -608,7 +691,7 @@ export default function LandmarkDetailDialog({
                         )}
                       </div>
                     )}
-                    
+
                     <div className="flex gap-1.5 pt-1">
                       {landmark.phoneNumber && (
                         <Button

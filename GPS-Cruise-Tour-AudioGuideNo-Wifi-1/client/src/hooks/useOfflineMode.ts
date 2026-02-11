@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { offlineStorage, type OfflinePackage, type CityMetadata } from '@/lib/offlineStorage';
 import type { City, Landmark } from '@shared/schema';
+import { audioService, AudioService } from '@/lib/audioService';
 
 interface DownloadProgress {
   cityId: string;
@@ -77,7 +78,24 @@ export function useOfflineMode() {
 
       await offlineStorage.saveOfflinePackage(packageData, etag);
 
-      setDownloadProgress({ cityId, status: 'complete', message: `Downloaded ${packageData.landmarks.length} items` });
+      // --- Bulk OpenAI Audio Pre-download ---
+      setDownloadProgress({ cityId, status: 'downloading', message: 'Downloading audio matches...' });
+      const currentLanguage = localStorage.getItem('selected-language') || 'ko';
+
+      try {
+        await preDownloadOpenAIAudio(packageData.landmarks, currentLanguage, (progress) => {
+          setDownloadProgress({
+            cityId,
+            status: 'downloading',
+            message: `Downloading audio: ${progress}%`
+          });
+        });
+      } catch (audioError) {
+        console.warn('Audio pre-download failed, but city data is saved:', audioError);
+      }
+      // --------------------------------------
+
+      setDownloadProgress({ cityId, status: 'complete', message: `Downloaded ${packageData.landmarks.length} items & audio` });
       await loadDownloadedCities();
 
       setTimeout(() => setDownloadProgress(null), 2000);
@@ -224,6 +242,57 @@ export function useOfflineMode() {
     await offlineStorage.clearAll();
     setDownloadedCities([]);
   }, []);
+
+  // Internal helper for bulk downloading audio
+  const preDownloadOpenAIAudio = async (
+    landmarks: Landmark[],
+    language: string,
+    onProgress: (p: number) => void
+  ) => {
+    const totalLandmarks = landmarks.length;
+    let completed = 0;
+
+    for (const landmark of landmarks) {
+      const text = landmark.detailedDescription || landmark.description || landmark.narration;
+      if (!text) {
+        completed++;
+        continue;
+      }
+
+      const sentences = AudioService.splitIntoSentences(text);
+      for (const sentence of sentences) {
+        const cacheKey = `openai-${language}-${sentence.slice(0, 50)}`;
+
+        // Skip if already cached
+        const existing = await offlineStorage.getAudio(cacheKey, language);
+        if (existing) continue;
+
+        try {
+          const response = await fetch('/api/tts/openai/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: sentence, language })
+          });
+
+          if (response.ok) {
+            const audioBlob = await response.blob();
+            await offlineStorage.saveAudio({
+              landmarkId: cacheKey,
+              language: language,
+              audioBlob: audioBlob,
+              duration: Math.ceil(sentence.length / 15),
+              sizeBytes: audioBlob.size,
+              voiceId: 'openai'
+            });
+          }
+        } catch (e) {
+          console.error(`Failed to pre-download sentence for ${landmark.id}:`, e);
+        }
+      }
+      completed++;
+      onProgress(Math.round((completed / totalLandmarks) * 100));
+    }
+  };
 
   return {
     isOnline,

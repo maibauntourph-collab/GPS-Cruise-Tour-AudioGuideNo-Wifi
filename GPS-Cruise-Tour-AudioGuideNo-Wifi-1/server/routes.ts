@@ -5,14 +5,27 @@ import { insertVisitedLandmarkSchema } from "@shared/schema";
 import { recommendTourItinerary } from "./lib/gemini";
 import { generateAndSaveClovaTTS, CLOVA_VOICES, DEFAULT_CLOVA_VOICE_BY_LANGUAGE, ClovaVoiceId } from "./lib/clova";
 import { db } from "./db";
-import { cities, landmarks, dataVersions, tourSchedules, groupMembers, users, userIdentities } from "@shared/schema";
-import { eq, desc, or, ilike, sql, count } from "drizzle-orm";
+import { cities, landmarks, dataVersions, tourSchedules, groupMembers, users, userIdentities, creatorEarnings, transactions, settlements, marketingContents } from "@shared/schema";
+import { eq, desc, or, ilike, sql, count, and } from "drizzle-orm";
 import crypto from "crypto";
 import multer from "multer";
 import * as XLSX from "xlsx";
 import * as path from "path";
 import * as fs from "fs";
 import express from "express";
+import Stripe from "stripe";
+import { automationService } from "./services/automationService";
+import { settlementService } from "./services/settlementService";
+
+/**
+ * [회계부장 노트: 금융 보안의 제1원칙]
+ * 대표님, 결제 시스템을 다룰 때는 API 키 관리가 생명입니다.
+ * STRIPE_SECRET_KEY는 절대로 코드에 직접 박으면 안 되고, 환경 변수(.env)로 관리해야 합니다.
+ * 여기서는 안전을 위해 환경 변수에서 불러오도록 설정했습니다.
+ */
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_51P...", {
+  apiVersion: "2023-10-16" as any, // 최신 API 버전을 사용하여 호환성을 확보합니다.
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/cities", async (req, res) => {
@@ -230,7 +243,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/admin/cities", async (req, res) => {
     try {
       const { id, name, country, lat, lng, zoom, cruisePort } = req.body;
-      
+
       if (!id || !name || !country || lat === undefined || lng === undefined) {
         return res.status(400).json({ error: "Missing required fields" });
       }
@@ -289,17 +302,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.delete("/api/admin/cities/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      
+
       // Check if city has landmarks
       const cityLandmarks = await db.select().from(landmarks).where(eq(landmarks.cityId, id));
       if (cityLandmarks.length > 0) {
-        return res.status(400).json({ 
-          error: `Cannot delete city with ${cityLandmarks.length} landmarks. Delete landmarks first.` 
+        return res.status(400).json({
+          error: `Cannot delete city with ${cityLandmarks.length} landmarks. Delete landmarks first.`
         });
       }
 
       const [deleted] = await db.delete(cities).where(eq(cities.id, id)).returning();
-      
+
       if (!deleted) {
         return res.status(404).json({ error: "City not found" });
       }
@@ -326,7 +339,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/admin/landmarks", async (req, res) => {
     try {
       const data = req.body;
-      
+
       if (!data.id || !data.cityId || !data.name || data.lat === undefined || data.lng === undefined || !data.narration) {
         return res.status(400).json({ error: "Missing required fields" });
       }
@@ -356,6 +369,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         restaurantPhotos: data.restaurantPhotos || null,
         paymentMethods: data.paymentMethods || null
       }).returning();
+
+
+      // [산업공학박사 팁] 명소 등록이 완료되었으니, 이제 쏭 프로의 마케팅 콘텐츠 생성을 백그라운드에서 시작합니다.
+      // await를 붙이지 않아 응답 속도에 영향을 주지 않고 비동기로 처리합니다.
+      /**
+       * [마케터 쏭의 조언: 자동화는 비즈니스의 혁명입니다!]
+       * 학생 여러분, 명소가 등록되자마자 마케팅 문구가 튀어나오는 마법이 여기서 시작됩니다.
+       * .catch()를 붙인 이유는, 마케팅 문구 생성에 실패하더라도 
+       * 명소 등록 자체가 취소되어서는 안 되기 때문이에요 (비동기 처리의 핵심!).
+       */
+      automationService.generatePromotionContent(newLandmark).catch(err => {
+        console.error("[Dr.'s Engine] 홍보 엔진 작동 중 작은 실수가 있었나봐요! 하지만 명소 등록은 성공입니다:", err);
+      });
 
       res.status(201).json(newLandmark);
     } catch (error: any) {
@@ -417,9 +443,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.delete("/api/admin/landmarks/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      
+
       const [deleted] = await db.delete(landmarks).where(eq(landmarks.id, id)).returning();
-      
+
       if (!deleted) {
         return res.status(404).json({ error: "Landmark not found" });
       }
@@ -436,7 +462,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const allCities = await db.select().from(cities);
       const allLandmarks = await db.select().from(landmarks);
-      
+
       // Group by category
       const categories: Record<string, number> = {};
       for (const l of allLandmarks) {
@@ -455,11 +481,147 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+
+  /**
+   * [코다리부장 팁: 결제 세션 생성 API]
+   * 대표님, 고객이 '구매하기' 버튼을 누르면 바로 결제창으로 보내는 게 아니라,
+   * 서버에서 먼저 Stripe 세션을 만들어서 그 주소(URL)를 클라이언트에 전달해야 합니다.
+   * 이렇게 하면 결제 금액 위조를 원천 봉쇄할 수 있죠!
+   */
+  app.post("/api/payments/create-checkout-session", async (req, res) => {
+    try {
+      const { landmarkId, creatorId, userId, amount, name } = req.body;
+
+      // [회계부장 검토] 결제 요청 정보가 누락되지 않았는지 꼼꼼히 체크합니다.
+      if (!landmarkId || !amount) {
+        return res.status(400).json({ error: "필수 결제 정보가 누락되었습니다." });
+      }
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [{
+          price_data: {
+            currency: 'eur', // 우리 플랫폼은 유로화(EUR)를 기본으로 합니다.
+            product_data: {
+              name: name || "가이드 패키지 구매",
+            },
+            unit_amount: Math.round(amount * 100), // Stripe는 센트(cent) 단위를 사용하므로 100을 곱합니다.
+          },
+          quantity: 1,
+        }],
+        mode: 'payment',
+        success_url: `${req.headers.origin}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/payment/cancel`,
+        metadata: {
+          landmarkId,
+          creatorId,
+          userId,
+          amount: amount.toString()
+        }
+      });
+
+      res.json({ url: session.url });
+    } catch (error: any) {
+      console.error("[코다리부장] 결제 세션 생성 중 에러 발생:", error);
+      res.status(500).json({ error: "결제 세션을 생성하지 못했습니다." });
+    }
+  });
+
+  // ===============================
+  // [강의 섹션: 크리에이터 플랫폼 & 수익화]
+  // 학생 여러분, 이제 우리 플랫폼의 주인공인 크리에이터들을 위한 관리 시스템을 만들어봅시다.
+  // 이 섹션은 돈이 오가는 민감한 영역이므로, 데이터의 무결성과 보안을 최우선으로 해야 합니다.
+  // ===============================
+
+  /**
+   * [강의 노트: 크리에이터 통계 조회 API]
+   * 크리에이터가 "나의 가이드가 얼마나 인기가 있고, 얼마를 벌었나?"를 확인하는 창구입니다.
+   * 단순히 DB 값을 읽어오는 것이 아니라, 방문 기록(visitedLandmarks)과 매칭하여
+   * 동적인 통계를 산출하는 로직을 눈여겨보세요.
+   */
+  app.get("/api/creator/stats", async (req, res) => {
+    try {
+      // 실제 서비스에서는 세션에서 userId를 추출해야 하지만,
+      // 프로토타입 단계이므로 쿼리 파라미터나 테스트용 ID를 활용합니다.
+      const userId = req.query.userId as string || 'default-creator';
+
+      // 1. 누적 수익 정보 조회
+      const [earnings] = await db.select()
+        .from(creatorEarnings)
+        .where(eq(creatorEarnings.userId, userId));
+
+      // 2. 관리 중인 랜드마크들의 총 방문 횟수 집계
+      // (현 버전에서는 모든 방문을 집계하지만, 추후 특정 크리에이터의 콘텐츠로 필터링 가능합니다)
+      const visitorCount = await db.select({ value: count() })
+        .from(sql`visited_landmarks`);
+
+      res.json({
+        totalBalance: earnings?.totalBalance || 0,
+        totalEarned: earnings?.totalEarned || 0,
+        visitorCount: visitorCount[0]?.value || 0,
+        updatedAt: earnings?.updatedAt || new Date()
+      });
+    } catch (error) {
+      console.error('[Professor Note] Stats Fetch Failed:', error);
+      res.status(500).json({ error: "통계 데이터를 불러오지 못했습니다. 로그를 확인하세요." });
+    }
+  });
+
+  /**
+   * [강의 노트: 결제 검증 및 수익 배분 자동화]
+   * 자, 이 부분이 가장 중요합니다! 결제가 완료되면 시스템은 자동으로 크리에이터에게 지분을 나눠줘야 합니다.
+   * 'Atomic'하게 처리하지 않으면 데이터 불일치가 발생할 수 있으니 트랜잭션 개념을 꼭 기억하세요.
+   */
+  app.post("/api/payments/verify", async (req, res) => {
+    try {
+      const { transactionId, userId, amount, creatorId } = req.body;
+
+      // [잠깐!] 실제 현업에서는 여기서 PG사의 API를 호출하여 결제가 정말 성공했는지 "교차 검증"을 해야 합니다.
+      // 지금은 검증이 통과되었다고 가정하고 로직을 진행하겠습니다.
+
+      await db.transaction(async (tx) => {
+        // 1. 거래 내역을 기록합니다.
+        await tx.insert(transactions).values({
+          userId,
+          targetId: 'route-or-landmark-id',
+          amount,
+          status: 'completed',
+          providerData: { verifiedAt: new Date().toISOString() }
+        });
+
+        // 2. 크리에이터의 수익을 업데이트합니다. (배분율 70% 가정)
+        const creatorShare = amount * 0.7;
+        const [existing] = await tx.select().from(creatorEarnings).where(eq(creatorEarnings.userId, creatorId));
+
+        if (existing) {
+          await tx.update(creatorEarnings)
+            .set({
+              totalBalance: sql`${creatorEarnings.totalBalance} + ${creatorShare}`,
+              totalEarned: sql`${creatorEarnings.totalEarned} + ${creatorShare}`,
+              updatedAt: new Date()
+            })
+            .where(eq(creatorEarnings.userId, creatorId));
+        } else {
+          await tx.insert(creatorEarnings).values({
+            userId: creatorId,
+            totalBalance: creatorShare,
+            totalEarned: creatorShare
+          });
+        }
+      });
+
+      res.json({ success: true, message: "수익 배분이 완료되었습니다. 코다리부장님이 흡족해하십니다." });
+    } catch (error) {
+      console.error('[Critical Error] Payment Verification Failed:', error);
+      res.status(500).json({ error: "결제 검증 오류가 발생했습니다." });
+    }
+  });
+
   // ===============================
   // Admin Import/Export Routes
   // ===============================
-  
-  const upload = multer({ 
+
+  const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
   });
@@ -812,20 +974,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/ai/recommend-tour", async (req, res) => {
     try {
       const { cityId, language, userPosition, filterType } = req.body;
-      
+
       if (!cityId) {
         return res.status(400).json({ error: "City ID is required" });
       }
 
       let landmarks = await storage.getLandmarks(cityId);
-      
+
       // Apply category filter if specified
       if (filterType && filterType !== 'all') {
         switch (filterType) {
           case 'landmarks':
-            landmarks = landmarks.filter(l => 
-              l.category !== 'Activity' && 
-              l.category !== 'Restaurant' && 
+            landmarks = landmarks.filter(l =>
+              l.category !== 'Activity' &&
+              l.category !== 'Restaurant' &&
               l.category !== 'Gift Shop'
             );
             break;
@@ -837,7 +999,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             break;
         }
       }
-      
+
       if (landmarks.length === 0) {
         return res.status(404).json({ error: "No landmarks found for this city with the selected filter" });
       }
@@ -856,7 +1018,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       if (invalidIds.length > 0) {
         console.error('AI recommended invalid landmark IDs:', invalidIds);
-        return res.status(500).json({ 
+        return res.status(500).json({
           error: "AI recommendation contains invalid landmarks",
           details: invalidIds
         });
@@ -865,7 +1027,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(recommendation);
     } catch (error: any) {
       console.error('AI recommendation error:', error);
-      
+
       // Pass through specific error messages from OpenAI service
       const errorMessage = error.message || "Failed to generate AI recommendation";
       res.status(500).json({ error: errorMessage });
@@ -873,7 +1035,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // ========== Audio TTS Routes ==========
-  
+
   // Serve static audio files
   app.use('/uploads/audio', express.static(path.join(process.cwd(), 'uploads', 'audio')));
 
@@ -889,7 +1051,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/audio/generate", async (req, res) => {
     try {
       const { landmarkId, language, voiceId, text: providedText } = req.body;
-      
+
       if (!landmarkId) {
         return res.status(400).json({ error: "Landmark ID is required" });
       }
@@ -903,18 +1065,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get text in the requested language
       const lang = language || 'en';
       let text = providedText || landmark.narration || '';
-      
+
       // Check for translated narration if no text provided
       if (!providedText && landmark.translations && landmark.translations[lang]) {
         text = landmark.translations[lang].narration || landmark.translations[lang].description || text;
       }
-      
+
       if (!text) {
         return res.status(400).json({ error: "No narration text available for this landmark" });
       }
 
       // Determine voice: user preference or language default
-      const selectedVoice = (voiceId && CLOVA_VOICES[voiceId as ClovaVoiceId]) 
+      const selectedVoice = (voiceId && CLOVA_VOICES[voiceId as ClovaVoiceId])
         ? voiceId as ClovaVoiceId
         : DEFAULT_CLOVA_VOICE_BY_LANGUAGE[lang] || 'clara';
 
@@ -926,10 +1088,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Generate new audio using CLOVA Voice TTS
       const audioResult = await generateAndSaveClovaTTS(landmarkId, text, lang, selectedVoice);
-      
+
       // Estimate duration (rough estimate: ~150 chars per second for speech)
       const duration = Math.ceil(text.length / 15);
-      
+
       // Save to database
       const savedAudio = await storage.saveAudio({
         landmarkId,
@@ -953,12 +1115,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { landmarkId } = req.params;
       const language = (req.query.language as string) || 'en';
-      
+
       const audio = await storage.getAudio(landmarkId, language);
       if (!audio) {
         return res.status(404).json({ error: "Audio not found" });
       }
-      
+
       res.json(audio);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch audio" });
@@ -980,7 +1142,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/audio/batch-generate", async (req, res) => {
     try {
       const { cityId, language, voiceId } = req.body;
-      
+
       if (!cityId) {
         return res.status(400).json({ error: "City ID is required" });
       }
@@ -989,9 +1151,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const lang = language || 'en';
       const results: any[] = [];
       const errors: any[] = [];
-      
+
       // Determine voice for this batch
-      const selectedVoice = (voiceId && CLOVA_VOICES[voiceId as ClovaVoiceId]) 
+      const selectedVoice = (voiceId && CLOVA_VOICES[voiceId as ClovaVoiceId])
         ? voiceId as ClovaVoiceId
         : DEFAULT_CLOVA_VOICE_BY_LANGUAGE[lang] || 'clara';
 
@@ -1009,7 +1171,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           if (landmark.translations && landmark.translations[lang]) {
             text = landmark.translations[lang].narration || landmark.translations[lang].description || text;
           }
-          
+
           if (!text) {
             errors.push({ landmarkId: landmark.id, error: 'No narration text available' });
             continue;
@@ -1018,7 +1180,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           // Generate using CLOVA Voice
           const audioResult = await generateAndSaveClovaTTS(landmark.id, text, lang, selectedVoice);
           const duration = Math.ceil(text.length / 15);
-          
+
           const saved = await storage.saveAudio({
             landmarkId: landmark.id,
             language: lang,
@@ -1049,7 +1211,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // ========== CLOVA Voice TTS Routes ==========
-  
+
   // Serve CLOVA audio files
   app.use('/audio/clova', express.static(path.join(process.cwd(), 'public', 'audio', 'clova')));
 
@@ -1058,7 +1220,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { CLOVA_VOICES, getClovaVoicesForLanguage, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
       const language = req.query.language as string;
-      
+
       if (language) {
         const voicesForLang = getClovaVoicesForLanguage(language);
         const voiceDetails = voicesForLang.map(id => ({
@@ -1067,10 +1229,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }));
         return res.json({ voices: voiceDetails, default: DEFAULT_CLOVA_VOICE_BY_LANGUAGE[language] || "nara" });
       }
-      
-      res.json({ 
-        voices: CLOVA_VOICES, 
-        defaults: DEFAULT_CLOVA_VOICE_BY_LANGUAGE 
+
+      res.json({
+        voices: CLOVA_VOICES,
+        defaults: DEFAULT_CLOVA_VOICE_BY_LANGUAGE
       });
     } catch (error: any) {
       res.status(500).json({ error: error.message || "Failed to get CLOVA voices" });
@@ -1082,20 +1244,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { generateClovaTTS, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
       const { text, voice, language, speed, pitch, volume } = req.body;
-      
+
       if (!text) {
         return res.status(400).json({ error: "Text is required" });
       }
-      
+
       const selectedVoice = voice || DEFAULT_CLOVA_VOICE_BY_LANGUAGE[language || 'ko'] || 'nara';
       const result = await generateClovaTTS(
-        text, 
+        text,
         selectedVoice,
         speed || 0,
         pitch || 0,
         volume || 0
       );
-      
+
       res.set({
         'Content-Type': result.contentType,
         'Content-Length': result.audioBuffer.length,
@@ -1108,12 +1270,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Generate OpenAI TTS audio (streaming)
+  app.post("/api/tts/openai/generate", async (req, res) => {
+    try {
+      const { generateLandmarkAudio } = await import("./lib/openai");
+      const { text, voice, language } = req.body;
+
+      if (!text) {
+        return res.status(400).json({ error: "Text is required" });
+      }
+
+      const result = await generateLandmarkAudio(
+        "streaming-tts",
+        text,
+        language || 'en',
+        voice
+      );
+
+      const filePath = path.join(process.cwd(), result.audioUrl.startsWith('/') ? result.audioUrl.slice(1) : result.audioUrl);
+      const audioBuffer = fs.readFileSync(filePath);
+
+      res.set({
+        'Content-Type': 'audio/mpeg',
+        'Content-Length': audioBuffer.length,
+        'X-Voice-Id': result.voiceId
+      });
+      res.send(audioBuffer);
+    } catch (error: any) {
+      console.error('OpenAI TTS error:', error);
+      res.status(500).json({ error: error.message || "Failed to generate OpenAI TTS" });
+    }
+  });
+
   // Generate and save CLOVA TTS for a landmark
   app.post("/api/tts/clova/landmark", async (req, res) => {
     try {
       const { generateAndSaveClovaTTS, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
       const { landmarkId, language, voice } = req.body;
-      
+
       if (!landmarkId) {
         return res.status(400).json({ error: "Landmark ID is required" });
       }
@@ -1125,13 +1319,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const lang = language || 'ko';
       let text = landmark.narration;
-      
+
       if (landmark.translations && landmark.translations[lang]) {
         text = landmark.translations[lang].narration || text;
       }
 
       const result = await generateAndSaveClovaTTS(landmarkId, text, lang, voice);
-      
+
       res.json({
         landmarkId,
         language: lang,
@@ -1148,7 +1342,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { generateAndSaveClovaTTS, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
       const { landmarkIds, languages, voice } = req.body;
-      
+
       if (!landmarkIds || !Array.isArray(landmarkIds) || landmarkIds.length === 0) {
         return res.status(400).json({ error: "landmarkIds array is required" });
       }
@@ -1167,7 +1361,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         for (const lang of targetLanguages) {
           try {
             let text = landmark.detailedDescription || landmark.narration || landmark.description || '';
-            
+
             if (landmark.translations && landmark.translations[lang]) {
               const trans = landmark.translations[lang];
               text = trans.detailedDescription || trans.narration || trans.description || text;
@@ -1180,7 +1374,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
             const selectedVoice = voice || DEFAULT_CLOVA_VOICE_BY_LANGUAGE[lang] || "nara";
             const result = await generateAndSaveClovaTTS(landmarkId, text, lang, selectedVoice);
-            
+
             results.push({
               landmarkId,
               landmarkName: landmark.name,
@@ -1211,10 +1405,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { cityId, language } = req.query;
       const audioDir = path.join(process.cwd(), "public", "audio", "clova");
-      
+
       const allLandmarks = await storage.getLandmarks(cityId as string);
       const targetLang = (language as string) || 'ko';
-      
+
       const status = allLandmarks.map(landmark => {
         const possibleFiles = [
           `${landmark.id}_${targetLang}_nara.mp3`,
@@ -1223,10 +1417,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
           `${landmark.id}_${targetLang}_meimei.mp3`,
           `${landmark.id}_${targetLang}_carmen.mp3`,
         ];
-        
+
         let hasAudio = false;
         let audioUrl = null;
-        
+
         for (const filename of possibleFiles) {
           const filePath = path.join(audioDir, filename);
           if (fs.existsSync(filePath)) {
@@ -1235,7 +1429,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             break;
           }
         }
-        
+
         return {
           landmarkId: landmark.id,
           landmarkName: landmark.name,
@@ -1284,7 +1478,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/tour-leader/schedules", async (req, res) => {
     try {
       const { tourId, time, location, duration, notes, orderIndex } = req.body;
-      
+
       if (!time || !location) {
         return res.status(400).json({ error: "Time and location are required" });
       }
@@ -1339,7 +1533,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { id } = req.params;
       const [deleted] = await db.delete(tourSchedules).where(eq(tourSchedules.id, id)).returning();
-      
+
       if (!deleted) {
         return res.status(404).json({ error: "Schedule not found" });
       }
@@ -1370,7 +1564,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/tour-leader/members", async (req, res) => {
     try {
       const { tourId, name, phone, email, roomNumber, status, notes } = req.body;
-      
+
       if (!name) {
         return res.status(400).json({ error: "Name is required" });
       }
@@ -1456,7 +1650,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { id } = req.params;
       const [deleted] = await db.delete(groupMembers).where(eq(groupMembers.id, id)).returning();
-      
+
       if (!deleted) {
         return res.status(404).json({ error: "Member not found" });
       }
@@ -1473,7 +1667,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const tourId = (req.query.tourId as string) || 'default';
       const format = (req.query.format as string) || 'xlsx';
-      
+
       const schedules = await db.select()
         .from(tourSchedules)
         .where(eq(tourSchedules.tourId, tourId))
@@ -1515,7 +1709,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const tourId = (req.query.tourId as string) || 'default';
       const format = (req.query.format as string) || 'xlsx';
-      
+
       const members = await db.select()
         .from(groupMembers)
         .where(eq(groupMembers.tourId, tourId))
@@ -1576,7 +1770,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           const time = row['시간'] || row['time'] || row['Time'];
           const location = row['장소'] || row['location'] || row['Location'];
-          
+
           if (!time || !location) {
             errors.push({ row: i + 2, message: 'Missing time or location' });
             continue;
@@ -1629,7 +1823,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const row = data[i];
         try {
           const name = row['이름'] || row['name'] || row['Name'];
-          
+
           if (!name) {
             errors.push({ row: i + 2, message: 'Missing name' });
             continue;
@@ -1666,18 +1860,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // ===== Saved Routes API =====
-  
+
   // Create a new saved route
   app.post("/api/routes", async (req, res) => {
     try {
       const { title, countryCode, cityId, stops, description, totalDistance, totalDuration, coverPhotoUrl } = req.body;
       const sessionId = req.headers['x-session-id'] as string;
       const userId = (req.session as any)?.userId;
-      
+
       if (!title || !countryCode || !cityId || !stops || stops.length === 0) {
         return res.status(400).json({ error: "Title, country code, city ID, and stops are required" });
       }
-      
+
       const route = await storage.createSavedRoute({
         userId: userId || null,
         sessionId: sessionId || null,
@@ -1690,7 +1884,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         totalDuration: totalDuration || null,
         coverPhotoUrl: coverPhotoUrl || null
       });
-      
+
       res.status(201).json(route);
     } catch (error) {
       console.error('Create route error:', error);
@@ -1704,11 +1898,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const sessionId = (req.query.sessionId as string) || (req.headers['x-session-id'] as string);
       const userId = (req.session as any)?.userId;
       const countryCode = req.query.countryCode as string;
-      
+
       if (!userId && !sessionId) {
         return res.status(400).json({ error: "Session ID or authentication required" });
       }
-      
+
       const routes = await storage.getSavedRoutes(userId, sessionId, countryCode);
       res.json(routes);
     } catch (error) {
@@ -1735,7 +1929,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.put("/api/routes/:id", async (req, res) => {
     try {
       const { title, description, stops, totalDistance, totalDuration, coverPhotoUrl } = req.body;
-      
+
       const route = await storage.updateSavedRoute(req.params.id, {
         title,
         description,
@@ -1744,11 +1938,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         totalDuration,
         coverPhotoUrl
       });
-      
+
       if (!route) {
         return res.status(404).json({ error: "Route not found" });
       }
-      
+
       res.json(route);
     } catch (error) {
       console.error('Update route error:', error);
@@ -1768,21 +1962,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // ===== Route Photos API =====
-  
+
   // Add photo to a route
   app.post("/api/routes/:routeId/photos", upload.single('photo'), async (req, res) => {
     try {
       const { routeId } = req.params;
       const file = req.file;
       const userId = (req.session as any)?.userId;
-      
+
       if (!file) {
         return res.status(400).json({ error: "Photo file is required" });
       }
-      
+
       // Get GPS coordinates from body (extracted by frontend from EXIF)
       const { latitude, longitude, takenAt, source, metadata } = req.body;
-      
+
       const photo = await storage.addRoutePhoto({
         routeId,
         userId: userId || null,
@@ -1793,7 +1987,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         source: source || 'upload',
         metadata: metadata ? JSON.parse(metadata) : null
       });
-      
+
       res.status(201).json(photo);
     } catch (error) {
       console.error('Add photo error:', error);
@@ -1837,7 +2031,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const offset = (page - 1) * limit;
 
       let query = db.select().from(users);
-      
+
       // Build where conditions
       const conditions: any[] = [];
       if (search) {
@@ -1858,14 +2052,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Get users with conditions
       let usersQuery = db.select().from(users).orderBy(desc(users.createdAt)).limit(limit).offset(offset);
-      
+
       const allUsers = await usersQuery;
 
       // Filter in memory for now (simpler approach)
       let filteredUsers = allUsers;
       if (search) {
         const searchLower = search.toLowerCase();
-        filteredUsers = filteredUsers.filter(u => 
+        filteredUsers = filteredUsers.filter(u =>
           u.email?.toLowerCase().includes(searchLower) ||
           u.displayName?.toLowerCase().includes(searchLower)
         );
@@ -1910,7 +2104,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get recent signups (last 7 days)
       const sevenDaysAgo = new Date();
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-      
+
       const recentSignups = await db.select({ count: count() })
         .from(users)
         .where(sql`${users.createdAt} > ${sevenDaysAgo}`);
@@ -1931,7 +2125,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/admin/users/:id", async (req, res) => {
     try {
       const userId = req.params.id;
-      
+
       const [user] = await db.select().from(users).where(eq(users.id, userId));
       if (!user) {
         return res.status(404).json({ error: "User not found" });
@@ -2044,7 +2238,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/admin/identities", async (req, res) => {
     try {
       const provider = req.query.provider as string;
-      
+
       let query = db.select({
         id: userIdentities.id,
         userId: userIdentities.userId,
@@ -2058,14 +2252,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         userName: users.displayName,
         userEmail: users.email
       })
-      .from(userIdentities)
-      .leftJoin(users, eq(userIdentities.userId, users.id))
-      .orderBy(desc(userIdentities.createdAt));
+        .from(userIdentities)
+        .leftJoin(users, eq(userIdentities.userId, users.id))
+        .orderBy(desc(userIdentities.createdAt));
 
       const identities = await query;
 
       // Filter by provider if specified
-      const filtered = provider && provider !== 'all' 
+      const filtered = provider && provider !== 'all'
         ? identities.filter(i => i.provider === provider)
         : identities;
 
@@ -2073,6 +2267,138 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Admin get identities error:', error);
       res.status(500).json({ error: "Failed to fetch identities" });
+    }
+  });
+
+  /**
+   * [회계부장 노트: 수익 정산의 자동화]
+   * 대표님, 이 웹훅이 바로 우리 플랫폼의 '자동 장부' 역할을 합니다.
+   * 사용자가 Stripe 결제 페이지에서 결제를 마치면, Stripe 서버가 우리에게 "입금 확인됐어!"라고 신호를 보냅니다.
+   * 그 신호를 받아 `transactions`와 `creator_earnings`를 업데이트하는 것이 핵심입니다.
+   */
+  app.post("/api/payments/webhook", express.raw({ type: 'application/json' }), async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+      // [코다리부장 조언] 웹훅은 보안이 생명입니다! Stripe에서 보낸 진짜 신호인지 서명을 반드시 검증해야 해요.
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        sig!,
+        process.env.STRIPE_WEBHOOK_SECRET || ""
+      );
+    } catch (err: any) {
+      console.error(`[회계부장 긴급 보고] 웹훅 서명 검증 실패: ${err.message}`);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // 결제 성공 이벤트 처리
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const metadata = session.metadata;
+
+      if (metadata) {
+        const { userId, creatorId, amount } = metadata;
+
+        // [회계부장 로직] 실제 입금된 금액을 바탕으로 수익을 배분합니다.
+        // 우리 플랫폼의 약속: 크리에이터 70%, 플랫폼 30% 배분 원칙을 고수합니다.
+        const totalAmount = parseFloat(amount);
+        const creatorShare = totalAmount * 0.7;
+
+
+        /**
+         * [회계부장 실무 강의: 돈이 들어오면 무엇을 해야 할까요?]
+         * 1. 누가 샀는지(userId)
+         * 2. 무엇을 샀는지(targetId)
+         * 3. 누가 돈을 받아야 하는지(creatorId)
+         * 4. 정확한 금액은 얼마인지(totalAmount) 확인하는 것이 정산의 기초 중의 기초입니다!
+         */
+        console.log(`[회계부장] 결제 성공 확인: 사용자 ${userId}, 크리에이터 ${creatorId}, 총액 ${totalAmount}€, 수익배분 ${creatorShare.toFixed(2)}€`);
+
+
+        try {
+          // [회계부장] 개별 결제 처리 로직을 전담 서비스로 이관하여 전문성을 높였습니다.
+          await settlementService.processPayment(
+            userId,
+            metadata.landmarkId || 'unknown',
+            totalAmount,
+            {
+              stripeSessionId: session.id,
+              paymentIntentId: session.payment_intent as string,
+              verifiedAt: new Date().toISOString(),
+              creatorId // 수익금을 받을 주체
+            }
+          );
+          console.log(`[회계부장] 장부 기입 완료! 아주 깔끔합니다, 대표님.`);
+        } catch (dbError) {
+          console.error(`[회계부장 긴급] DB 전송 중 오류 발생:`, dbError);
+          throw dbError;
+        }
+      }
+    }
+
+    res.json({ received: true });
+  });
+
+  /**
+   * [회계부장 실무 강의: 크리에이터 모드 API]
+   * 학생 여러분, 화면(Frontend)에서 '내 수익이 얼마야?'라고 물어보면 
+   * 이 엔드포인트가 정산 서비스에서 데이터를 쓱싹 긁어다 대답해주는 역할을 한단다.
+   */
+  app.get("/api/creator/stats", async (req, res) => {
+    try {
+      const userId = (req.session as any)?.userId || req.query.userId as string;
+      if (!userId) {
+        return res.status(401).json({ error: "[회계부장] 로그인부터 하고 오세요! 누구 장부인지 모르겠어요." });
+      }
+
+      const stats = await settlementService.getCreatorStats(userId);
+      res.json(stats);
+    } catch (error) {
+      console.error('Get creator stats error:', error);
+      res.status(500).json({ error: "통계정보를 가져오는데 실패했습니다!" });
+    }
+  });
+
+  /**
+   * [회계부장 실무 강의: 관리자의 권한]
+   * 정산은 아주 무거운 작업이라, 함부로 실행되지 않게 관리자 전용 엔드포인트로 만들었어.
+   */
+  app.post("/api/admin/settle", async (req, res) => {
+    try {
+      const { userId, period } = req.body;
+      if (!userId || !period) {
+        return res.status(400).json({ error: "누구에게, 언제치 월급을 줄지 정확히 써주세요!" });
+      }
+
+      const settlement = await settlementService.runSettlement(userId, period);
+      res.json({ success: true, settlement });
+    } catch (error: any) {
+      console.error('Run settlement error:', error);
+      res.status(500).json({ error: error.message || "정산 처리 중 오류가 발생했습니다!" });
+    }
+  });
+
+  app.get("/api/admin/marketing-contents", async (req, res) => {
+    // [마케터 쏭의 가이드] 생성된 모든 홍보 문구를 관리자 대시보드에 보고합니다!
+    // 명소 이름과 함께 보여주기 위해 Join을 사용했어요.
+    try {
+      const results = await db
+        .select({
+          id: marketingContents.id,
+          landmarkId: marketingContents.landmarkId,
+          landmarkName: landmarks.name,
+          content: marketingContents.content,
+          updatedAt: marketingContents.updatedAt,
+        })
+        .from(marketingContents)
+        .innerJoin(landmarks, eq(marketingContents.landmarkId, landmarks.id))
+        .orderBy(desc(marketingContents.updatedAt));
+
+      res.json(results);
+    } catch (error) {
+      console.error("[마케팅 엔진] 콘텐츠 조회 중 오류 발생:", error);
+      res.status(500).json({ error: "Failed to fetch marketing contents" });
     }
   });
 

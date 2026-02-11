@@ -24,6 +24,14 @@ import AIRecommendDialog from '@/components/AIRecommendDialog';
 import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import LoginDialog from '@/components/LoginDialog';
 import SaveRouteDialog from '@/components/SaveRouteDialog';
+import CreatorDashboard from '@/components/CreatorDashboard';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+
+/**
+ * [강의 노트: Phase 2 확장의 핵심]
+ * 학생 여러분, 새로운 기능을 추가할 때는 관련된 컴포넌트를 먼저 정확히 불러오는 것이 기본입니다.
+ * 우리가 만든 CreatorDashboard와 이를 감쌀 레이어인 Dialog를 여기서 임포트했습니다.
+ */
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
 import { Menu } from 'lucide-react';
@@ -36,7 +44,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -57,7 +65,7 @@ export default function Home() {
   });
 
   const { position, error, isLoading } = useGeoLocation(gpsEnabled);
-  const [selectedCityId, setSelectedCityId] = useState<string>('rome');
+  const [selectedCityId, setSelectedCityId] = useState<string>('cebu');
   const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
     // Check localStorage first, then default to Korean
     const savedLanguage = localStorage.getItem('selected-language');
@@ -163,6 +171,11 @@ export default function Home() {
   const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showSaveRouteDialog, setShowSaveRouteDialog] = useState(false);
+
+  // [강의 노트: 새로운 도메인의 등장]
+  // 여러분, 크리에이터 모드를 켜고 끌 수 있는 '스위치'가 하나 더 필요하겠죠?
+  // showCreatorDashboard 상태를 통해 대시보드 다이얼로그의 가시성을 제어합니다.
+  const [showCreatorDashboard, setShowCreatorDashboard] = useState(false);
   const [capturedRouteImage, setCapturedRouteImage] = useState<string | null>(null);
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
   const [showTourOnly, setShowTourOnly] = useState(false);
@@ -1830,6 +1843,26 @@ export default function Home() {
           </Popover>
 
           <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
+            {/* [강의 노트: 상단 툴바 확장]
+                학생 여러분, 이곳이 바로 플랫폼의 주요 기능을 모아놓은 '유틸리티 섹션'입니다.
+                크리에이터들이 자주 확인해야 하는 통계 페이지로의 입구를 여기에 배치했습니다.
+                TrendingUp 아이콘을 사용하여 '수익과 성장'의 의미를 담았죠. */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-8 w-8 sm:h-9 sm:w-9 border-primary/20 bg-primary/5 hover:bg-primary/10"
+                  onClick={() => setShowCreatorDashboard(true)}
+                  data-testid="button-creator-center"
+                >
+                  <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '크리에이터 센터 (수익 확인)' : 'Creator Center (Earnings)'}</p>
+              </TooltipContent>
+            </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -2469,6 +2502,16 @@ export default function Home() {
                               selectedCity?.country === 'Vietnam' ? 'VN' : 'XX'}
         selectedLanguage={selectedLanguage}
       />
+
+      {/* [강의 노트: 크리에이터 전용 창구]
+          학생 여러분, 이제 우리가 만든 대시보드를 실제 화면에 붙여봅시다.
+          DialogContent 안에 CreatorDashboard 컴포넌트를 배치하여
+          사용자가 버튼을 눌렀을 때만 나타나도록 설계했습니다. */}
+      <Dialog open={showCreatorDashboard} onOpenChange={setShowCreatorDashboard}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden">
+          <CreatorDashboard />
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

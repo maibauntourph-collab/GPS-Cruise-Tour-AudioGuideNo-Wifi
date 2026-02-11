@@ -1,6 +1,6 @@
 import { offlineStorage } from './offlineStorage';
 
-export type AudioMode = 'auto' | 'mp3' | 'tts' | 'clova';
+export type AudioMode = 'auto' | 'mp3' | 'tts' | 'clova' | 'openai';
 
 interface AudioDownloadProgress {
   landmarkId: string;
@@ -10,14 +10,14 @@ interface AudioDownloadProgress {
   error?: string;
 }
 
-class AudioService {
+export class AudioService {
   private synthesis: SpeechSynthesis;
   private spokenLandmarks: Set<string>;
   private isEnabled: boolean;
   private currentUtterance: SpeechSynthesisUtterance | null = null;
   private currentRate: number = 1.0;
   private voices: SpeechSynthesisVoice[] = [];
-  private playbackTimer: NodeJS.Timeout | null = null;
+  private playbackTimer: any | null = null;
   private sentenceIndex: number = 0;
   private sentences: string[] = [];
   private onSentenceChange: ((index: number) => void) | null = null;
@@ -49,7 +49,7 @@ class AudioService {
 
     // Load saved audio mode
     const savedMode = localStorage.getItem('audio-mode') as AudioMode;
-    if (savedMode && ['auto', 'mp3', 'tts', 'clova'].includes(savedMode)) {
+    if (savedMode && ['auto', 'mp3', 'tts', 'clova', 'openai'].includes(savedMode)) {
       this.audioMode = savedMode;
     }
 
@@ -476,7 +476,7 @@ class AudioService {
   }
 
   // Split text into sentences for sentence-by-sentence highlighting
-  splitIntoSentences(text: string): string[] {
+  public static splitIntoSentences(text: string): string[] {
     // Split by common sentence-ending punctuation, keeping the punctuation
     const sentenceRegex = /[^.!?。！？]+[.!?。！？]+/g;
     const matches = text.match(sentenceRegex);
@@ -505,7 +505,7 @@ class AudioService {
     this.synthesis.cancel();
     this.currentUtterance = null;
 
-    this.sentences = this.splitIntoSentences(text);
+    this.sentences = AudioService.splitIntoSentences(text);
     this.sentenceIndex = 0;
     this.onSentenceChange = onSentenceChange || null;
     this.onSentenceEnd = onEnd || null;
@@ -586,7 +586,175 @@ class AudioService {
     this.onSentenceChange = null;
     this.onSentenceEnd = null;
     this.stopClovaSentences();
+    this.stopOpenAISentences();
     this.stop();
+  }
+
+  // ==================== OpenAI Sentence-by-Sentence Methods ====================
+
+  private openaiSentenceMode: boolean = false;
+  private openaiSentences: string[] = [];
+  private openaiSentenceIndex: number = 0;
+  private openaiSentenceLanguage: string = 'en';
+  private onOpenAISentenceChange: ((index: number) => void) | null = null;
+  private onOpenAISentenceEnd: (() => void) | null = null;
+  private openaiAbortController: AbortController | null = null;
+  private openaiSessionId: number = 0;
+
+  async playOpenAISentences(
+    text: string,
+    language: string = 'en',
+    onSentenceChange?: (index: number) => void,
+    onEnd?: () => void
+  ): Promise<boolean> {
+    this.stopOpenAISentences();
+    this.stopClovaSentences();
+    this.stopMP3();
+    this.stop();
+
+    this.openaiSentences = AudioService.splitIntoSentences(text);
+    if (this.openaiSentences.length === 0) return false;
+
+    this.openaiSentenceIndex = 0;
+    this.openaiSentenceLanguage = language;
+    this.openaiSentenceMode = true;
+    this.onOpenAISentenceChange = onSentenceChange || null;
+    this.onOpenAISentenceEnd = onEnd || null;
+    this.openaiSessionId++;
+
+    if (this.onOpenAISentenceChange) {
+      this.onOpenAISentenceChange(0);
+    }
+
+    this.playNextOpenAISentence(this.openaiSessionId);
+    return true;
+  }
+
+  private async playNextOpenAISentence(sessionId: number): Promise<void> {
+    if (sessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+
+    if (this.openaiSentenceIndex >= this.openaiSentences.length) {
+      this.openaiSentenceMode = false;
+      if (this.onOpenAISentenceEnd) this.onOpenAISentenceEnd();
+      this.onOpenAISentenceChange = null;
+      this.onOpenAISentenceEnd = null;
+      return;
+    }
+
+    const sentence = this.openaiSentences[this.openaiSentenceIndex];
+    const currentSessionId = this.openaiSessionId;
+    const cacheKey = `openai-${this.openaiSentenceLanguage}-${sentence.slice(0, 50)}`; // Unique key for sentence cache
+
+    try {
+      // 1. Check Offline Cache First
+      const cached = await offlineStorage.getAudio(cacheKey, this.openaiSentenceLanguage);
+      if (sessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+
+      if (cached) {
+        console.log('[AudioService] Using cached OpenAI sentence audio');
+        this.playAudioBlob(cached.audioBlob, currentSessionId, () => {
+          this.openaiSentenceIndex++;
+          if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
+            this.onOpenAISentenceChange(this.openaiSentenceIndex);
+          }
+          this.playNextOpenAISentence(currentSessionId);
+        });
+        return;
+      }
+
+      // 2. Fetch from API if not cached
+      this.openaiAbortController = new AbortController();
+      const response = await fetch('/api/tts/openai/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: sentence,
+          language: this.openaiSentenceLanguage
+        }),
+        signal: this.openaiAbortController.signal
+      });
+
+      if (currentSessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+
+      if (!response.ok) {
+        console.error('[AudioService] OpenAI sentence TTS error:', response.status);
+        this.openaiSentenceIndex++;
+        if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
+          this.onOpenAISentenceChange(this.openaiSentenceIndex);
+        }
+        this.playNextOpenAISentence(currentSessionId);
+        return;
+      }
+
+      const audioBlob = await response.blob();
+      if (currentSessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+
+      // 3. Save to Offline Cache
+      try {
+        await offlineStorage.saveAudio({
+          landmarkId: cacheKey,
+          language: this.openaiSentenceLanguage,
+          audioBlob: audioBlob,
+          duration: Math.ceil(sentence.length / 15),
+          sizeBytes: audioBlob.size,
+          voiceId: 'openai'
+        });
+      } catch (e) {
+        console.warn('[AudioService] Failed to cache OpenAI audio:', e);
+      }
+
+      // 4. Play
+      this.playAudioBlob(audioBlob, currentSessionId, () => {
+        this.openaiSentenceIndex++;
+        if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
+          this.onOpenAISentenceChange(this.openaiSentenceIndex);
+        }
+        this.playNextOpenAISentence(currentSessionId);
+      });
+    } catch (error: any) {
+      if (error?.name === 'AbortError') return;
+      console.error('[AudioService] OpenAI sentence error:', error);
+      if (currentSessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+      this.openaiSentenceIndex++;
+      this.playNextOpenAISentence(currentSessionId);
+    }
+  }
+
+  private playAudioBlob(blob: Blob, sessionId: number, onEnded: () => void) {
+    const objectUrl = URL.createObjectURL(blob);
+    if (this.audioElement) {
+      this.audioElement.pause();
+      this.audioElement.src = '';
+    }
+
+    this.audioElement = new Audio(objectUrl);
+    this.audioElement.onended = () => {
+      URL.revokeObjectURL(objectUrl);
+      if (sessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+      onEnded();
+    };
+
+    this.audioElement.play().catch(e => {
+      console.error('[AudioService] Playback error:', e);
+      URL.revokeObjectURL(objectUrl);
+      onEnded();
+    });
+  }
+
+  stopOpenAISentences() {
+    this.openaiSessionId++;
+    this.openaiSentenceMode = false;
+    this.openaiSentences = [];
+    this.openaiSentenceIndex = 0;
+    if (this.openaiAbortController) {
+      this.openaiAbortController.abort();
+      this.openaiAbortController = null;
+    }
+    if (this.audioElement) {
+      this.audioElement.pause();
+      this.audioElement.src = '';
+      this.audioElement = null;
+    }
   }
 
   // ==================== CLOVA Sentence-by-Sentence Methods ====================
@@ -612,7 +780,7 @@ class AudioService {
     this.stop();
 
     // Split into sentences
-    this.clovaSentences = this.splitIntoSentences(text);
+    this.clovaSentences = AudioService.splitIntoSentences(text);
     if (this.clovaSentences.length === 0) {
       return false;
     }

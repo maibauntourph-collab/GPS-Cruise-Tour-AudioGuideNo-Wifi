@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -29,20 +30,20 @@ interface VoiceInfo {
 
 function analyzeVoice(voice: SpeechSynthesisVoice): VoiceInfo {
   const nameLower = voice.name.toLowerCase();
-  
+
   const premiumKeywords = ['neural', 'wavenet', 'premium', 'enhanced', 'natural', 'high-quality', 'google'];
   const isPremium = premiumKeywords.some(keyword => nameLower.includes(keyword));
-  
+
   const femaleKeywords = ['female', 'woman', 'girl', 'zira', 'hazel', 'susan', 'heera', 'hedda', 'helia', 'lucia', 'paulina', 'sabina', 'monica', 'laura', 'elsa', 'cosette', 'caroline', 'julie', 'amelie', 'kyoko', 'o-ren', 'mei-jia', 'yuna', 'sora'];
   const maleKeywords = ['male', 'man', 'david', 'mark', 'richard', 'george', 'daniel', 'sean', 'james', 'rishi', 'pablo', 'jorge', 'luca', 'thomas', 'guillaume', 'otoya', 'ting-ting'];
-  
+
   let gender: 'male' | 'female' | 'unknown' = 'unknown';
   if (femaleKeywords.some(k => nameLower.includes(k))) {
     gender = 'female';
   } else if (maleKeywords.some(k => nameLower.includes(k))) {
     gender = 'male';
   }
-  
+
   return {
     voice,
     quality: isPremium ? 'premium' : 'standard',
@@ -90,7 +91,7 @@ export default function SettingsDialog({
       const loadVoices = () => {
         const voices = audioService.getVoicesForLanguage(selectedLanguage);
         setSystemVoices(voices);
-        
+
         // Get saved voice for this language
         const savedVoice = audioService.getSelectedVoiceName(selectedLanguage);
         if (savedVoice) {
@@ -99,15 +100,15 @@ export default function SettingsDialog({
           setSelectedSystemVoice(voices[0].name);
         }
       };
-      
+
       // Load immediately
       loadVoices();
-      
+
       // Also listen for voices changed event
       if (speechSynthesis.onvoiceschanged !== undefined) {
         speechSynthesis.onvoiceschanged = loadVoices;
       }
-      
+
       // Retry after a short delay (voices may not be immediately available)
       const timer = setTimeout(loadVoices, 500);
       return () => clearTimeout(timer);
@@ -142,7 +143,7 @@ export default function SettingsDialog({
       setLoadingClovaVoices(false);
     }
   };
-  
+
   const handleClovaVoiceChange = (voiceId: string) => {
     setSelectedClovaVoice(voiceId);
     audioService.setClovaVoiceForLanguage(selectedLanguage, voiceId);
@@ -155,12 +156,12 @@ export default function SettingsDialog({
       loadClovaVoices();
     }
   };
-  
+
   const handleSystemVoiceChange = (voiceName: string) => {
     setSelectedSystemVoice(voiceName);
     audioService.setVoiceForLanguage(selectedLanguage, voiceName);
   };
-  
+
   const testTexts: Record<string, string> = {
     'en': 'Hello! This is a test of the voice.',
     'ko': '안녕하세요! 음성 테스트입니다.',
@@ -173,7 +174,7 @@ export default function SettingsDialog({
     'pt': 'Olá! Este é um teste de voz.',
     'ru': 'Привет! Это тест голоса.'
   };
-  
+
   const testSystemVoice = () => {
     const text = testTexts[selectedLanguage] || testTexts['en'];
     audioService.playText(text, selectedLanguage, speechRate);
@@ -183,12 +184,17 @@ export default function SettingsDialog({
     const text = testTexts[selectedLanguage] || testTexts['ko'];
     await audioService.playClovaTTS(text, selectedLanguage, undefined, voiceId || selectedClovaVoice);
   };
-  
+
+  const testOpenAIVoice = async () => {
+    const text = testTexts[selectedLanguage] || testTexts['en'];
+    await audioService.playOpenAISentences(text, selectedLanguage);
+  };
+
   const previewVoice = (voiceName: string) => {
     const text = testTexts[selectedLanguage] || testTexts['en'];
     audioService.stop();
-    
-    const voice = systemVoices.find(v => v.name === voiceName);
+
+    const voice = systemVoices.find((v: SpeechSynthesisVoice) => v.name === voiceName);
     if (voice) {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.voice = voice;
@@ -197,7 +203,7 @@ export default function SettingsDialog({
       speechSynthesis.speak(utterance);
     }
   };
-  
+
   const voiceInfoList = systemVoices.map(analyzeVoice);
 
   const handleDownloadClick = () => {
@@ -250,7 +256,7 @@ export default function SettingsDialog({
               </div>
               <Slider
                 value={[speechRate]}
-                onValueChange={(values) => onSpeechRateChange(values[0])}
+                onValueChange={(values: number[]) => onSpeechRateChange(values[0])}
                 min={0.5}
                 max={2.0}
                 step={0.1}
@@ -286,7 +292,14 @@ export default function SettingsDialog({
                   <RadioGroupItem value="clova" id="mode-clova" data-testid="radio-mode-clova" />
                   <Label htmlFor="mode-clova" className="text-sm cursor-pointer flex items-center gap-1">
                     <Cloud className="w-3 h-3" />
-                    CLOVA Voice
+                    CLOVA
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="openai" id="mode-openai" data-testid="radio-mode-openai" />
+                  <Label htmlFor="mode-openai" className="text-sm cursor-pointer flex items-center gap-1">
+                    <Sparkles className="w-3 h-3" />
+                    OpenAI
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -304,11 +317,11 @@ export default function SettingsDialog({
                 <Label className="flex items-center gap-2 text-sm">
                   <Cloud className="w-4 h-4" />
                   {selectedLanguage === 'ko' ? 'CLOVA 음성 선택' : 'CLOVA Voice Selection'}
-                  <Badge variant="secondary" className="text-xs">
+                  <Badge variant="outline" className="text-xs">
                     {loadingClovaVoices ? '...' : `${clovaVoices.length} ${selectedLanguage === 'ko' ? '개' : 'voices'}`}
                   </Badge>
                 </Label>
-                
+
                 {loadingClovaVoices ? (
                   <div className="text-center py-4 text-muted-foreground text-sm">
                     {selectedLanguage === 'ko' ? '음성 로딩 중...' : 'Loading voices...'}
@@ -319,7 +332,7 @@ export default function SettingsDialog({
                       <div className="flex gap-3 pb-3">
                         {clovaVoices.map((voice) => {
                           const isSelected = selectedClovaVoice === voice.id;
-                          
+
                           return (
                             <button
                               key={voice.id}
@@ -327,8 +340,8 @@ export default function SettingsDialog({
                               className={`
                                 relative flex flex-col min-w-[160px] p-3 rounded-lg border-2 transition-all
                                 text-left cursor-pointer
-                                ${isSelected 
-                                  ? 'border-primary bg-primary/5' 
+                                ${isSelected
+                                  ? 'border-primary bg-primary/5'
                                   : 'border-border bg-card hover:border-primary/50'
                                 }
                               `}
@@ -340,28 +353,27 @@ export default function SettingsDialog({
                                   <Check className="w-4 h-4 text-primary" />
                                 </div>
                               )}
-                              
+
                               <div className="flex items-center gap-2 mb-2">
-                                <User className={`w-4 h-4 ${
-                                  voice.gender === 'female' ? 'text-pink-500' : 'text-blue-500'
-                                }`} />
+                                <User className={`w-4 h-4 ${voice.gender === 'female' ? 'text-pink-500' : 'text-blue-500'
+                                  }`} />
                                 <span className="font-medium text-sm">
                                   {selectedLanguage === 'ko' ? voice.nameKo : voice.name}
                                 </span>
                               </div>
-                              
+
                               <div className="flex flex-wrap gap-1 mb-2">
                                 <Badge variant="outline" className="text-[10px] px-1.5 py-0">
                                   {voice.language.toUpperCase()}
                                 </Badge>
                                 <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
-                                  {voice.gender === 'female' 
+                                  {voice.gender === 'female'
                                     ? (selectedLanguage === 'ko' ? '여성' : 'Female')
                                     : (selectedLanguage === 'ko' ? '남성' : 'Male')
                                   }
                                 </Badge>
                               </div>
-                              
+
                               <Button
                                 variant="ghost"
                                 size="sm"
@@ -381,7 +393,7 @@ export default function SettingsDialog({
                       </div>
                       <ScrollBar orientation="horizontal" />
                     </ScrollArea>
-                    
+
                     <Button
                       variant="outline"
                       className="w-full text-sm"
@@ -396,13 +408,37 @@ export default function SettingsDialog({
                   <div className="text-center py-4 text-muted-foreground">
                     <Cloud className="w-8 h-8 mx-auto mb-2 opacity-50" />
                     <p className="text-sm">
-                      {selectedLanguage === 'ko' 
+                      {selectedLanguage === 'ko'
                         ? `${selectedLanguage.toUpperCase()} 언어에 사용 가능한 CLOVA 음성이 없습니다.`
                         : `No CLOVA voices available for ${selectedLanguage.toUpperCase()} language.`
                       }
                     </p>
                   </div>
                 )}
+              </div>
+            )}
+
+            {/* OpenAI TTS Info */}
+            {audioMode === 'openai' && (
+              <div className="space-y-3 p-3 bg-primary/5 rounded-lg border border-primary/20">
+                <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                  <Sparkles className="w-4 h-4" />
+                  OpenAI High-Quality TTS
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {selectedLanguage === 'ko'
+                    ? '가장 자연스러운 AI 음성을 제공합니다. 한 번 재생된 문장은 자동으로 저장되어 오프라인(No-Wifi)에서도 들으실 수 있습니다.'
+                    : 'Provides the most natural AI voice. Played sentences are automatically cached for offline (No-Wifi) use.'}
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full text-xs"
+                  onClick={testOpenAIVoice}
+                >
+                  <Play className="w-3 h-3 mr-2" />
+                  {selectedLanguage === 'ko' ? 'OpenAI 음성 테스트' : 'Test OpenAI Voice'}
+                </Button>
               </div>
             )}
 
@@ -415,7 +451,7 @@ export default function SettingsDialog({
                   {systemVoices.length} {selectedLanguage === 'ko' ? '개' : 'voices'}
                 </Badge>
               </Label>
-              
+
               {voiceInfoList.length > 0 ? (
                 <>
                   <ScrollArea className="w-full whitespace-nowrap">
@@ -423,7 +459,7 @@ export default function SettingsDialog({
                       {voiceInfoList.map((info) => {
                         const isSelected = selectedSystemVoice === info.voice.name;
                         const voiceSlug = info.voice.name.replace(/\s+/g, '-').toLowerCase();
-                        
+
                         return (
                           <button
                             key={info.voice.name}
@@ -431,8 +467,8 @@ export default function SettingsDialog({
                             className={`
                               relative flex flex-col min-w-[180px] p-3 rounded-lg border-2 transition-all
                               text-left cursor-pointer
-                              ${isSelected 
-                                ? 'border-primary bg-primary/5' 
+                              ${isSelected
+                                ? 'border-primary bg-primary/5'
                                 : 'border-border bg-card hover:border-primary/50'
                               }
                             `}
@@ -444,34 +480,33 @@ export default function SettingsDialog({
                                 <Check className="w-4 h-4 text-primary" />
                               </div>
                             )}
-                            
+
                             <div className="flex items-center gap-2 mb-2">
-                              <User className={`w-4 h-4 ${
-                                info.gender === 'female' ? 'text-pink-500' : 
-                                info.gender === 'male' ? 'text-blue-500' : 
-                                'text-muted-foreground'
-                              }`} />
+                              <User className={`w-4 h-4 ${info.gender === 'female' ? 'text-pink-500' :
+                                info.gender === 'male' ? 'text-blue-500' :
+                                  'text-muted-foreground'
+                                }`} />
                               <span className="font-medium text-sm truncate max-w-[120px]" title={info.voice.name}>
                                 {info.voice.name.split(' ').slice(0, 2).join(' ')}
                               </span>
                             </div>
-                            
+
                             <div className="flex flex-wrap gap-1 mb-2">
                               <Badge variant="outline" className="text-[10px] px-1.5 py-0">
                                 {info.voice.lang}
                               </Badge>
-                              <Badge 
-                                variant={info.quality === 'premium' ? 'default' : 'secondary'} 
+                              <Badge
+                                variant={info.quality === 'premium' ? 'default' : 'secondary'}
                                 className="text-[10px] px-1.5 py-0 gap-0.5"
                               >
                                 {info.quality === 'premium' && <Sparkles className="w-2.5 h-2.5" />}
-                                {info.quality === 'premium' 
-                                  ? (selectedLanguage === 'ko' ? '프리미엄' : 'Premium') 
+                                {info.quality === 'premium'
+                                  ? (selectedLanguage === 'ko' ? '프리미엄' : 'Premium')
                                   : (selectedLanguage === 'ko' ? '표준' : 'Standard')
                                 }
                               </Badge>
                             </div>
-                            
+
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
                                 {info.voice.localService ? (
@@ -486,7 +521,7 @@ export default function SettingsDialog({
                                   </>
                                 )}
                               </div>
-                              
+
                               <Button
                                 variant="ghost"
                                 size="sm"
@@ -507,7 +542,7 @@ export default function SettingsDialog({
                     </div>
                     <ScrollBar orientation="horizontal" />
                   </ScrollArea>
-                  
+
                   <Button
                     variant="outline"
                     className="w-full text-sm"
@@ -522,7 +557,7 @@ export default function SettingsDialog({
                 <div className="text-center py-6 text-muted-foreground">
                   <Volume2 className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p className="text-sm">
-                    {selectedLanguage === 'ko' 
+                    {selectedLanguage === 'ko'
                       ? `${selectedLanguage.toUpperCase()} 언어에 사용 가능한 음성이 없습니다.`
                       : `No voices available for ${selectedLanguage.toUpperCase()} language.`
                     }

@@ -395,4 +395,9 @@ cmd /c "set SESSION_SECRET=devsecret123 && npx tsx server/index.ts"
 
 ---
 
+---
+
+## 개발 도우미
+- **Antigravity 가이드**: [antigravity_guide.md](file:///f:/nowifigps.tours/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/antigravity_guide.md) - AI 어시스턴트 활용 방법
+
 *이 문서는 프로젝트의 전체 개요를 제공합니다. 최신 변경사항은 Git 커밋 히스토리와 replit.md를 참조하세요.*
