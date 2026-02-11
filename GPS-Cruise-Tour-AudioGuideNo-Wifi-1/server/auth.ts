@@ -3,6 +3,14 @@ import type { Session } from "express-session";
 import { storage } from "./storage";
 import type { User } from "@shared/schema";
 
+// [문지기 부장의 보안 훈수: 통합 로그인 아키텍처]
+// "에헴! 여러분, 로그인은 단순히 문을 여는 게 아닙니다. 
+// 사용자가 누구인지, 어떤 열쇠(구글, 카카오, 왓츠앱 등)를 들고 왔는지 정확히 파악해야 하죠.
+// 이 코드는 향후 10가지 이상의 소셜 로그인을 수용할 수 있는 Passport.js 기반의 확장형 구조를 목표로 설계되었습니다."
+
+// [학습 가이드: 세션 및 인증 데이터 구조]
+// 1. AuthSession: Express 서버 세션에 저장될 사용자 정보 정의
+// 2. AuthRequest: Express 요청(Request) 객체에 세션 정보를 포함하도록 확장
 interface AuthSession extends Session {
   userId?: string;
   user?: User;
@@ -59,6 +67,62 @@ function generateState(): string {
 }
 
 export function setupAuthRoutes(app: Express) {
+  // [학습 가이드: 개발용 우회 로그인(Dev Bypass) API]
+  // 실제 소셜 로그인(구글 등) 없이도 특정 권한(admin, guide 등)으로 즉시 로그인할 수 있게 해줍니다.
+  // 실제 상용 서비스에서는 보안을 위해 이 라우트를 제거하거나 보호해야 합니다.
+  app.get("/api/auth/dev-login/:role?", async (req, res: Response) => {
+    const role = req.params.role || "admin";
+    console.log(`[Dr.'s Engine] 개발용 ${role} 로그인 요청 감지!`);
+
+    const authReq = req as unknown as AuthRequest;
+    try {
+      // Find or create a default user for development based on role
+      const providerUserId = `dev-${role}-id`;
+      const displayName = `개발용 ${role.toUpperCase()}`;
+
+      const user = await storage.findOrCreateUserByIdentity(
+        "dev",
+        providerUserId,
+        {
+          email: `${role}@example.com`,
+          displayName: displayName,
+          avatar: undefined,
+          rawProfile: { role }
+        }
+      );
+
+      // Ensure the user has the requested role
+      user.role = role;
+      await storage.updateUser(user.id, { role }); // DB에도 반영
+
+      authReq.session.userId = user.id;
+      authReq.session.user = user;
+
+      authReq.session.save((err: Error | null) => {
+        if (err) {
+          console.error("[Auth] 세션 저장 실패:", err);
+          return res.status(500).json({ error: "Session error" });
+        }
+
+        // [학습 가이드: 역할별 자동 리다이렉트]
+        // 로그인 성공 후, 각 사용자의 전용 페이지로 자동으로 보내줍니다.
+        let redirectPath = "/";
+        if (role === "admin") redirectPath = "/admin";
+        else if (role === "creator") redirectPath = "/admin"; // 크리에이터도 어드민 대시보드 사용
+        else if (role === "guide") redirectPath = "/guide"; // 가이드 뷰
+        else if (role === "tour_leader") redirectPath = "/tour-leader"; // 투어 리더 뷰
+        else if (role === "shop_owner") redirectPath = "/admin"; // 코다리부장(상점주)도 어드민 결제/마케팅 확인
+
+        const personaName = role === "shop_owner" ? "코다리부장" : role.toUpperCase();
+        console.log(`[Auth] ${personaName} 세션 부여 완료! ${redirectPath}로 이동합니다.`);
+        res.redirect(redirectPath);
+      });
+    } catch (error) {
+      console.error("[Auth] 개발용 로그인 실패:", error);
+      res.status(500).json({ error: "Dev login failed" });
+    }
+  });
+
   app.get("/api/auth/providers", (_req, res: Response) => {
     res.json({ providers: getEnabledProviders() });
   });
@@ -68,18 +132,18 @@ export function setupAuthRoutes(app: Express) {
     if (!authReq.session.userId) {
       return res.json({ user: null });
     }
-    
+
     try {
       const user = await storage.getUserById(authReq.session.userId);
       if (!user) {
-        authReq.session.destroy(() => {});
+        authReq.session.destroy(() => { });
         return res.json({ user: null });
       }
-      
+
       const identities = await storage.getUserIdentitiesByUserId(user.id);
       const linkedProviders = identities.map(i => i.provider);
-      
-      res.json({ 
+
+      res.json({
         user: {
           id: user.id,
           email: user.email,
@@ -100,11 +164,11 @@ export function setupAuthRoutes(app: Express) {
     const authReq = req as unknown as AuthRequest;
     const { provider: providerName } = req.params;
     const provider = getProvider(providerName);
-    
+
     if (!provider) {
       return res.status(400).json({ error: `Provider ${providerName} not configured` });
     }
-    
+
     const state = generateState();
     authReq.session.oauthState = state;
     authReq.session.save((err: Error | null) => {
@@ -112,7 +176,7 @@ export function setupAuthRoutes(app: Express) {
         console.error("Session save error:", err);
         return res.status(500).json({ error: "Session error" });
       }
-      
+
       const authUrl = provider.getAuthUrl(state);
       res.redirect(authUrl);
     });
@@ -122,27 +186,27 @@ export function setupAuthRoutes(app: Express) {
     const authReq = req as unknown as AuthRequest;
     const { provider: providerName } = req.params;
     const { code, state, error } = req.query;
-    
+
     if (error) {
       console.error(`OAuth error from ${providerName}:`, error);
       return res.redirect(`/?auth_error=${encodeURIComponent(String(error))}`);
     }
-    
+
     const provider = getProvider(providerName);
     if (!provider) {
       return res.redirect(`/?auth_error=provider_not_found`);
     }
-    
+
     const savedState = authReq.session.oauthState;
     if (state !== savedState) {
       console.error("State mismatch:", { received: state, saved: savedState });
       return res.redirect(`/?auth_error=state_mismatch`);
     }
-    
+
     try {
       const tokens = await provider.exchangeCodeForToken(String(code));
       const profile = await provider.getUserProfile(tokens.accessToken);
-      
+
       const user = await storage.findOrCreateUserByIdentity(
         providerName,
         profile.id,
@@ -153,11 +217,11 @@ export function setupAuthRoutes(app: Express) {
           rawProfile: profile.raw
         }
       );
-      
+
       authReq.session.userId = user.id;
       authReq.session.user = user;
       delete authReq.session.oauthState;
-      
+
       authReq.session.save((err: Error | null) => {
         if (err) {
           console.error("Session save error:", err);
@@ -198,12 +262,12 @@ export function requireRole(...roles: string[]) {
     if (!authReq.session.userId) {
       return res.status(401).json({ error: "Authentication required" });
     }
-    
+
     const user = await storage.getUserById(authReq.session.userId);
     if (!user || !roles.includes(user.role || "user")) {
       return res.status(403).json({ error: "Insufficient permissions" });
     }
-    
+
     next();
   };
 }

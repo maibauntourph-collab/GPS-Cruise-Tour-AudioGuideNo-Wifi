@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, Plus, MapPin, Utensils, Gift, Activity } from "lucide-react";
+import { ArrowLeft, Plus, MapPin, Utensils, Gift, Activity, Home as HomeIcon, Shield } from "lucide-react";
 import { LandmarkFormDialog } from "@/components/LandmarkFormDialog";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -59,15 +59,35 @@ export default function GuideView() {
             가이드 모드
           </div>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setLocation("/")}
-          data-testid="button-back-to-role-selection"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          역할 변경
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setLocation("/")}
+            data-testid="button-back-to-role-selection"
+          >
+            <ArrowLeft className="w-4 h-4 mr-1" />
+            역할 변경
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setLocation("/admin")}
+            className="hover:bg-indigo-50 hover:text-indigo-600"
+          >
+            <Shield className="w-4 h-4 mr-1" />
+            어드민
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setLocation("/home")}
+            className="hover:bg-emerald-50 hover:text-emerald-600"
+          >
+            <HomeIcon className="w-4 h-4 mr-1" />
+            메인
+          </Button>
+        </div>
       </div>
 
       <div className="h-full">

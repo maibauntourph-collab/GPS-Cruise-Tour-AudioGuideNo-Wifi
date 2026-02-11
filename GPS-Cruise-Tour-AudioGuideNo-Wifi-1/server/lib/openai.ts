@@ -4,8 +4,14 @@ import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
 
-// Using gpt-4o for AI recommendations (gpt-5.1 not yet available via API)
-export const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+// Initialize OpenAI client only if API key is provided
+export const openai = process.env.OPENAI_API_KEY
+  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  : null;
+
+if (!openai) {
+  console.warn("WARNING: OPENAI_API_KEY not set. AI features (audio, recommendations) will be limited or unavailable.");
+}
 
 // Available OpenAI TTS voices with descriptions
 export const TTS_VOICES = {
@@ -61,16 +67,23 @@ export async function generateLandmarkAudio(
       : (DEFAULT_VOICE_MAP[language] || 'fable');
 
     // Generate audio using OpenAI TTS
-    const mp3Response = await openai.audio.speech.create({
-      model: "tts-1",  // Use tts-1 for speed, tts-1-hd for quality
-      voice: voice as any,
-      input: text,
-      response_format: "mp3",
-      speed: 1.0
-    });
+    let buffer: Buffer;
 
-    // Get audio buffer
-    const buffer = Buffer.from(await mp3Response.arrayBuffer());
+    if (!openai) {
+      console.warn(`[Mock] Generating mock audio for: ${text.slice(0, 20)}...`);
+      // Return a very small empty MP3 buffer as a mock
+      buffer = Buffer.alloc(100);
+    } else {
+      const mp3Response = await openai.audio.speech.create({
+        model: "tts-1",  // Use tts-1 for speed, tts-1-hd for quality
+        voice: voice as any,
+        input: text,
+        response_format: "mp3",
+        speed: 1.0
+      });
+      // Get audio buffer
+      buffer = Buffer.from(await mp3Response.arrayBuffer());
+    }
 
     // Calculate checksum
     const checksum = crypto.createHash('md5').update(buffer).digest('hex');
@@ -183,17 +196,21 @@ Respond in this exact JSON format:
   "totalEstimatedTime": number (in minutes)
 }`;
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt }
-      ],
-      response_format: { type: "json_object" },
-      max_tokens: 2048
-    });
-
-    const result = JSON.parse(response.choices[0].message.content || "{}");
+    const result = !openai
+      ? {
+        itinerary: landmarks.slice(0, 3).map((l, i) => ({ landmarkId: l.id, order: i + 1 })),
+        explanation: "[Mock] OpenAI 키가 없어 기본 순서로 추천되었습니다.",
+        totalEstimatedTime: 120
+      }
+      : JSON.parse((await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt }
+        ],
+        response_format: { type: "json_object" },
+        max_tokens: 2048
+      })).choices[0].message.content || "{}");
 
     return {
       itinerary: result.itinerary || [],

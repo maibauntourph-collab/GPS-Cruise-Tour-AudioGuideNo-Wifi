@@ -1,6 +1,7 @@
 import { db } from "../db";
-import { Landmark, marketingContents } from "@shared/schema";
+import { Landmark, marketingContents, Translations } from "@shared/schema";
 import { eq } from "drizzle-orm";
+import { openai } from "../lib/openai";
 
 /**
  * [마케터 쏭의 마케팅 특강: AI를 활용한 자동 홍보 시스템]
@@ -28,8 +29,8 @@ export class AutomationService {
       아주 활기차고 에너지가 넘치며, 사람들을 당장 여행 떠나고 싶게 만드는 능력이 있어.
       
       새로운 여행 명소가 등록되었으니, 이를 홍보할 4가지 플랫폼용 콘텐츠를 만들어줘.
-      명소 이름: ${landmark.name.ko || landmark.name.en}
-      명소 설명: ${landmark.description.ko || landmark.description.en}
+      명소 이름: ${landmark.name}
+      명소 설명: ${landmark.description || ''}
       
       각 플랫폼별 특징:
       1. Naver Blog: 정보 위주로 풍부하게, '내돈내산' 느낌의 친근한 말투
@@ -47,10 +48,15 @@ export class AutomationService {
     `;
 
         try {
-            console.log(`[Dr.'s Engine] '${landmark.name.en}' 명소에 대한 홍보 마케팅 캠페인을 시작합니다!`);
+            console.log(`[Dr.'s Engine] '${landmark.name}' 명소에 대한 홍보 마케팅 캠페인을 시작합니다!`);
 
             // 2. OpenAI API 호출
             // response_format: { type: "json_object" } 를 사용하면 AI가 항상 객체 형태로만 대답하게 돼. (아주 편리한 기술!)
+            if (!openai) {
+                console.warn("[Dr.'s Engine] OpenAI가 설정되지 않아 홍보 콘텐츠 생성을 건너뜁니다.");
+                return;
+            }
+
             const response = await openai.chat.completions.create({
                 model: "gpt-4o",
                 messages: [
@@ -78,6 +84,109 @@ export class AutomationService {
             // 오류 처리도 교육적으로! AI 호출 시 API 키가 틀렸거나 네트워크 문제가 생길 수 있어.
             console.error("[Dr.'s Engine] 아차! 마케터 쏭이 글을 쓰는 중에 연필이 부러졌나봐요(OpenAI 오류):", error);
         }
+    }
+
+    /**
+     * [박사님의 연구 노트: AI 기반 도시 자동 탐사]
+     * 특정 도시의 명소를 AI가 스스로 찾아내고, 300자 이상의 재미있는 스토리를 입히는 핵심 기능이야.
+     */
+    async discoverLandmarks(cityName: string) {
+        const prompt = `
+      너는 전 세계를 여행하는 전문 가이드이자 스토리텔러야.
+      '${cityName}' 도시에 대해 다음 4가지 카테고리의 장소를 각각 적어도 3개씩(총 12개 이상) 추천해줘.
+      1. Landmark (역사적 명소, 유적지)
+      2. Activity (할 일, 체험, 액티비티)
+      3. Restaurant (식당, 카페)
+      4. Shopping (쇼핑몰, 시장)
+
+      각 장소에 대해 반드시 다음 정보를 포함해야 해:
+      - name: 장소 이름
+      - category: 위의 4가지 중 하나
+      - lat: 위도 (숫자)
+      - lng: 경도 (숫자)
+      - narration: 해당 장소에 얽힌 '재미있고 흥미진진한' 스토리. 반드시 **300자 이상**으로 작성할 것. (청취자가 몰입할 수 있도록 생생하게 기술)
+      - description: 한 줄 요약
+      - detailed_description: 장소에 대한 상세 정보
+      - historical_info: 역사적 배경 (Landmark인 경우 특히 중요)
+
+      결과는 반드시 다음 JSON 형식을 지켜야 해:
+      {
+        "landmarks": [
+          {
+            "id": "slug-style-id",
+            "name": "장소명",
+            "category": "Landmark",
+            "lat": 0.0,
+            "lng": 0.0,
+            "narration": "300자 이상의 스토리...",
+            "description": "요약",
+            "detailedDescription": "상세",
+            "historicalInfo": "역사"
+          }
+        ]
+      }
+    `;
+
+        try {
+            console.log(`[Dr.'s Engine] '${cityName}' 도시에 대한 AI 자동 탐사를 시작합니다...`);
+
+            // OpenAI API 키가 없는 경우 로컬 데모 데이터를 반환합니다.
+            if (!process.env.OPENAI_API_KEY) {
+                console.warn("[Dr.'s Engine] OPENAI_API_KEY가 설정되지 않았습니다. 데모 데이터를 반환합니다.");
+                return this.getMockLandmarks(cityName);
+            }
+
+            const response = await openai?.chat.completions.create({
+                model: "gpt-4o",
+                messages: [
+                    {
+                        role: "system",
+                        content: "너는 최고의 여행 가이드이자 이야기꾼이야. 항상 흥미진진하고 생생한 이야기를 들려줘."
+                    },
+                    { role: "user", content: prompt }
+                ],
+                response_format: { type: "json_object" }
+            });
+
+            const content = response?.choices[0].message.content;
+            if (content) {
+                return JSON.parse(content).landmarks;
+            }
+            return [];
+        } catch (error) {
+            console.error("[Dr.'s Engine] AI 탐사 중 오류 발생, 데모 데이터로 전환합니다:", error);
+            return this.getMockLandmarks(cityName);
+        }
+    }
+
+    /**
+     * [박사님의 비밀 가이드] API 키가 없을 때를 대비한 가상 탐사 데이터 생성기란다.
+     */
+    private getMockLandmarks(cityName: string) {
+        return [
+            {
+                id: `${cityName.toLowerCase()}-demo-1`,
+                name: `${cityName}의 숨겨진 보석`,
+                category: "Landmark",
+                lat: 0.0,
+                lng: 0.0,
+                narration: "AI API 키가 설정되지 않아 생성된 데모 내레이션입니다. 실제 서비스를 이용하시려면 OPENAI_API_KEY를 설정해주세요. 이 장소는 수천 년의 역사를 간직한 곳으로, 사실 이 글은 박사님이 미리 써둔 샘플이란다. 하지만 UI 구성과 흐름을 테스트하기에는 충분할 거야!",
+                description: "로컬 테스트용 데모 장소",
+                detailedDescription: "상세 정보가 준비 중입니다.",
+                historicalInfo: "데모 데이터입니다."
+            },
+            {
+                id: `${cityName.toLowerCase()}-demo-2`,
+                name: `${cityName}의 맛집 골목`,
+                category: "Restaurant",
+                lat: 0.1,
+                lng: 0.1,
+                narration: "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?",
+                description: "로컬 테스트용 맛집 거리",
+                detailedDescription: "다양한 현지 음식을 맛볼 수 있습니다.",
+                historicalInfo: "역사적 배경이 존재하지 않는 현대식 구역입니다."
+            }
+        ];
     }
 
     /**

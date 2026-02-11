@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'wouter';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { queryClient, apiRequest } from '@/lib/queryClient';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -38,8 +39,11 @@ import {
   Calendar,
   ExternalLink,
   Megaphone,
-  Copy
+  Copy,
+  Sparkles,
+  Store
 } from 'lucide-react';
+import { AIDiscoveryDialog } from '@/components/AIDiscoveryDialog';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { SiFacebook, SiGoogle, SiNaver, SiKakaotalk } from 'react-icons/si';
@@ -120,19 +124,32 @@ interface DbLandmark {
   updatedAt: string;
 }
 
+/**
+ * [학습 가이드: 관리자(Admin) 페이지 대시보드]
+ * 이 컴포넌트는 모든 마스터 데이터를 관리하고 통계를 확인하는 '관제 센터'입니다.
+ * 
+ * 학습 포인트:
+ * 1. TanStack Query(React Query): 서버 데이터를 캐싱하고 로딩/에러 상태를 우아하게 처리합니다.
+ * 2. 복합 상태 관리: 탭 전환, 검색 필터, 모달(Dialog) 열림/닫힘 등 다양한 UI 상태를 useState로 제어합니다.
+ * 3. 엑셀 임포트/익스포트: XLSX 라이브러리를 이용해 대량의 데이터를 파일로 주고받는 기법을 사용합니다.
+ */
 export default function Admin() {
   const { toast } = useToast();
+  // [코다리부장의 운영 팁: 탭 전환 및 검색]
+  // "어드민 사이트는 운영자의 눈입니다. 내가 지금 무엇을 관리하고 있는지(activeTab) 명확히 알아야 하죠. 
+  // 특히 수천 개의 명소 중 내가 찾는 걸 빨리 찾으려는 노력(searchTerm, selectedCityFilter)이 필수입니다!"
   const [activeTab, setActiveTab] = useState('dashboard');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCityFilter, setSelectedCityFilter] = useState<string>('all');
 
+  // [적요: CRUD 상태] 현재 수정 중인 데이터 정보와 등록 모달의 열림 상태를 관리합니다.
   const [editingCity, setEditingCity] = useState<DbCity | null>(null);
   const [editingLandmark, setEditingLandmark] = useState<DbLandmark | null>(null);
   const [isCreateCityOpen, setIsCreateCityOpen] = useState(false);
   const [isCreateLandmarkOpen, setIsCreateLandmarkOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'city' | 'landmark'; id: string; name: string } | null>(null);
 
-  // Import/Export state
+  // [적요: 엑셀 파일 처리 상태] 대량 등록을 위한 파일 업로드 및 결과 리포트 상태입니다.
   const [importType, setImportType] = useState<'cities' | 'landmarks'>('cities');
   const [importFile, setImportFile] = useState<File | null>(null);
   const [importing, setImporting] = useState(false);
@@ -143,17 +160,35 @@ export default function Admin() {
   const [userRoleFilter, setUserRoleFilter] = useState<string>('all');
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   const [userDetailOpen, setUserDetailOpen] = useState(false);
+  const [isAIDiscoveryOpen, setIsAIDiscoveryOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
+  // [적요: 인증 확인 쿼리]
+  // 현재 접속한 사용자의 정보를 실시간으로 확인합니다.
+  // staleTime: 0 설정을 통해 관리자 페이지 진입 시마다 항상 최신 정보를 유지하도록 했습니다.
+  const { data: authData, isLoading: loadingAuth } = useQuery<{
+    user: { id: string; role: string } | null;
+  }>({
+    queryKey: ['/api/auth/me'],
+    staleTime: 0 // Always check auth for admin page
+  });
+
+  // [쿼리 마스터의 데이터 로딩 비법]
+  // "데이터를 부를 때는 '누구인가?'를 먼저 물어야 합니다. 
+  // 'admin'은 물론, 우리 'shop_owner(코다리부장)'와 'creator' 동료들도 각자의 권한에 맞는 데이터를 볼 수 있어야 하죠."
   const { data: cities = [], isLoading: loadingCities } = useQuery<DbCity[]>({
-    queryKey: ['/api/admin/cities']
+    queryKey: ['/api/admin/cities'],
+    enabled: !!authData?.user && ['admin', 'shop_owner', 'creator'].includes(authData.user.role || '')
   });
 
   const { data: landmarks = [], isLoading: loadingLandmarks } = useQuery<DbLandmark[]>({
-    queryKey: ['/api/admin/landmarks']
+    queryKey: ['/api/admin/landmarks'],
+    enabled: !!authData?.user && ['admin', 'shop_owner', 'creator'].includes(authData.user.role || '')
   });
 
   const { data: stats } = useQuery<{ cities: number; landmarks: number; categories: Record<string, number> }>({
-    queryKey: ['/api/admin/stats']
+    queryKey: ['/api/admin/stats'],
+    enabled: !!authData?.user && ['admin', 'shop_owner'].includes(authData.user.role || '')
   });
 
   // User management queries
@@ -174,9 +209,13 @@ export default function Admin() {
   });
 
   const { data: marketingContents = [], isLoading: loadingMarketing } = useQuery<MarketingContent[]>({
-    queryKey: ['/api/admin/marketing-contents']
+    queryKey: ['/api/admin/marketing-contents'],
+    enabled: !!authData?.user && authData.user.role === 'admin'
   });
 
+  // [적요: 데이터 변경(Mutation) 로직]
+  // useMutation을 사용하여 데이터 수정 후, invalidateQueries를 호출해 
+  // 화면상의 데이터를 자동으로 새로고침(Refetch)하게 만듭니다.
   const updateUserRoleMutation = useMutation({
     mutationFn: async ({ userId, role }: { userId: string; role: string }) => {
       const res = await fetch(`/api/admin/users/${userId}/role`, {
@@ -188,6 +227,7 @@ export default function Admin() {
       return res.json();
     },
     onSuccess: () => {
+      // 역할 변경 성공 시, 사용자 목록과 통계 데이터를 무효화하여 다시 불러오게 합니다.
       queryClient.invalidateQueries({ queryKey: ['/api/admin/users'] });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/users/stats'] });
       toast({ title: '역할이 변경되었습니다' });
@@ -284,6 +324,91 @@ export default function Admin() {
     c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     c.country.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (loadingAuth) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  const isAuthorized = authData?.user && ['admin', 'shop_owner', 'creator'].includes(authData.user.role || '');
+
+  if (!authData?.user || !isAuthorized) {
+    return (
+      <div className="flex items-center justify-center min-h-screen p-4 bg-muted/30">
+        <Card className="w-full max-w-md shadow-lg border-destructive/20 transition-all hover:shadow-xl">
+          <CardHeader className="text-center">
+            <div className="mx-auto w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
+              <Shield className="h-8 w-8 text-destructive" />
+            </div>
+            <CardTitle className="text-2xl font-bold text-destructive">관제 센터 출입 제한</CardTitle>
+            <CardDescription className="text-base mt-2">
+              이 페이지는 어벤져스 요원(관리자/상점주/크리에이터)만 접근할 수 있습니다.
+              신분증(로그인 상태)을 확인하시거나 문지기 부장에게 문의하세요.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="p-4 rounded-lg bg-muted flex items-center gap-3">
+              <User className="h-5 w-5 text-muted-foreground" />
+              <div className="text-sm">
+                <p className="font-medium">현재 접속 계정</p>
+                <p className="text-muted-foreground overflow-hidden text-ellipsis">
+                  {authData?.user ? `ID: ${authData.user.id}` : '로그인되지 않음'}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="flex flex-col gap-2">
+            <Button
+              variant="default"
+              className="w-full h-11 text-base font-semibold"
+              onClick={() => setLocation('/')}
+            >
+              메인 화면으로 돌아가기
+            </Button>
+
+            <div className="grid grid-cols-2 gap-2 w-full mt-2">
+              <Button
+                variant="outline"
+                className="h-10 text-xs border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-900"
+                onClick={() => window.location.href = '/api/auth/dev-login/shop_owner'}
+              >
+                <Store className="h-3 w-3 mr-1" />
+                코다리부장 로그인
+              </Button>
+              <Button
+                variant="outline"
+                className="h-10 text-xs border-purple-200 bg-purple-50 hover:bg-purple-100 text-purple-900"
+                onClick={() => window.location.href = '/api/auth/dev-login/creator'}
+              >
+                <Sparkles className="h-3 w-3 mr-1" />
+                크리에이터 로그인
+              </Button>
+              <Button
+                variant="outline"
+                className="h-10 text-xs col-span-2 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-900"
+                onClick={() => window.location.href = '/api/auth/dev-login/admin'}
+              >
+                <Shield className="h-3 w-3 mr-1" />
+                마스터 어드민 로그인
+              </Button>
+            </div>
+
+            <Button
+              variant="ghost"
+              className="w-full h-9 text-xs mt-2"
+              onClick={() => window.location.href = '/api/auth/google'}
+            >
+              <Globe className="h-3 w-3 mr-1" />
+              구글 OAuth 로그인 (정규식)
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background w-full">
@@ -464,10 +589,25 @@ export default function Admin() {
                 </SelectContent>
               </Select>
               <div className="flex-1" />
-              <Button onClick={() => setIsCreateLandmarkOpen(true)} data-testid="button-add-landmark">
-                <Plus className="h-4 w-4 mr-2" />
-                Add Landmark
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                <AIDiscoveryDialog
+                  isOpen={isAIDiscoveryOpen}
+                  onClose={() => setIsAIDiscoveryOpen(false)}
+                  cities={cities}
+                />
+                <Button
+                  variant="outline"
+                  className="h-10 border-primary/20 hover:border-primary/50 hover:bg-primary/5 transition-colors"
+                  onClick={() => setIsAIDiscoveryOpen(true)}
+                >
+                  <Sparkles className="w-4 h-4 mr-2 text-primary animate-pulse" />
+                  AI 자동 탐사
+                </Button>
+                <Button onClick={() => setIsCreateLandmarkOpen(true)} data-testid="button-add-landmark">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Landmark
+                </Button>
+              </div>
             </div>
 
             {loadingLandmarks ? (
@@ -1785,5 +1925,121 @@ function UserDetailDialog({ user, isOpen, onClose, onRoleChange, onDelete, isUpd
         </DialogContent>
       </Dialog>
     </>
+  );
+}
+
+// Marketing Dashboard Tab Component
+function MarketingDashboardTab({ contents, isLoading }: { contents: MarketingContent[], isLoading: boolean }) {
+  const { toast } = useToast();
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({ title: '복사되었습니다' });
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-xl font-bold flex items-center gap-2">
+            <Megaphone className="h-5 w-5 text-primary" />
+            AI 자동 홍보 콘텐츠 대시보드
+          </h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            명소 등록 시 Dr.'s Engine이 생성한 SNS 마케팅 문구들을 관리합니다.
+          </p>
+        </div>
+        <div className="text-sm bg-muted px-3 py-1 rounded-full text-muted-foreground">
+          총 {contents.length}건의 자산 보관 중
+        </div>
+      </div>
+
+      <div className="grid gap-6">
+        {contents.length > 0 ? (
+          contents.map((item) => (
+            <Card key={item.id} className="overflow-hidden border-primary/10 transition-all hover:shadow-md">
+              <CardHeader className="bg-muted/30 pb-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-lg">{item.landmarkName}</CardTitle>
+                    <CardDescription className="text-xs mt-1">
+                      마지막 업데이트: {new Date(item.updatedAt).toLocaleString('ko-KR')}
+                    </CardDescription>
+                  </div>
+                  <Badge variant="secondary" className="bg-primary/5 text-primary border-primary/20">
+                    AI Generated
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Naver Blog</span>
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => copyToClipboard(item.content.blog)}>
+                      <Copy className="h-3 w-3" />
+                    </Button>
+                  </div>
+                  <div className="p-3 rounded bg-blue-50/50 text-sm line-clamp-6 min-h-[120px]">
+                    {item.content.blog}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Instagram</span>
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => copyToClipboard(item.content.instagram)}>
+                      <Copy className="h-3 w-3" />
+                    </Button>
+                  </div>
+                  <div className="p-3 rounded bg-pink-50/50 text-sm line-clamp-6 min-h-[120px]">
+                    {item.content.instagram}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">TikTok</span>
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => copyToClipboard(item.content.tiktok)}>
+                      <Copy className="h-3 w-3" />
+                    </Button>
+                  </div>
+                  <div className="p-3 rounded bg-slate-900/5 text-sm line-clamp-6 min-h-[120px]">
+                    {item.content.tiktok}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Twitter (X)</span>
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => copyToClipboard(item.content.twitter)}>
+                      <Copy className="h-3 w-3" />
+                    </Button>
+                  </div>
+                  <div className="p-3 rounded bg-sky-50/50 text-sm line-clamp-6 min-h-[120px]">
+                    {item.content.twitter}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <div className="text-center py-20 bg-muted/20 rounded-xl border-2 border-dashed">
+            <Megaphone className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-20" />
+            <h3 className="text-lg font-medium text-muted-foreground">생성된 마케팅 콘텐츠가 없습니다</h3>
+            <p className="text-sm text-muted-foreground mt-2">
+              새로운 명소를 등록하면 Dr.'s Engine이 자동으로 문구를 만들어 드립니다.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

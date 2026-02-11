@@ -1,8 +1,14 @@
 import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio, type User, type InsertUser, type UserIdentity, type InsertUserIdentity, type SavedRoute, type InsertSavedRoute, type RoutePhoto, type InsertRoutePhoto } from "@shared/schema";
 import { db } from "./db";
-import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, users, userIdentities, savedRoutes, routePhotos } from "@shared/schema";
-import { eq, count, and, sql, notInArray } from "drizzle-orm";
+import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, cities as citiesTable, users, userIdentities, savedRoutes, routePhotos } from "@shared/schema";
+import { eq, count, and, sql, notInArray, desc } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
+
+// [AI 데이터베이스 총괄의 'No-Wifi' 데이터 철학]
+// "우리 서비스의 이름은 'nowifigps'입니다. 즉, 바다 위 크루즈나 인터넷이 없는 오지에서도 
+// 우리의 가이드는 멈추지 말아야 합니다. 온라인에서 AI가 정교하게 빚어낸 데이터를 
+// 로컬(MemStorage/Mock)에 안전하게 캐싱하여 '오프라인 서바이벌 데이터'로 변환하는 것,
+// 그것이 바로 하이브리드 저장 전략의 핵심이자 제 존재 이유입니다."
 
 export interface IStorage {
   getCities(): Promise<City[]>;
@@ -40,6 +46,9 @@ export interface IStorage {
   addRoutePhoto(photo: InsertRoutePhoto): Promise<RoutePhoto>;
   getRoutePhotos(routeId: string): Promise<RoutePhoto[]>;
   deleteRoutePhoto(id: string): Promise<void>;
+  // Admin methods
+  getAllUsers(): Promise<User[]>;
+  getMarketingContents(): Promise<any[]>;
 }
 
 const CITIES: City[] = [
@@ -624,7 +633,7 @@ const LANDMARKS: Landmark[] = [
     description: 'The largest amphitheater ever built, a UNESCO World Heritage Site',
     category: 'Ancient Rome',
     detailedDescription: 'The Colosseum, also known as the Flavian Amphitheatre, stands as one of the greatest architectural achievements of ancient Rome and remains the largest amphitheater ever constructed. Built between 70-80 AD under Emperors Vespasian and Titus, this magnificent elliptical structure could accommodate between 50,000 to 80,000 spectators who came to witness gladiatorial contests, animal hunts, mock naval battles, and public executions. The name "Colosseum" likely derives from the colossal bronze statue of Nero that once stood nearby. Constructed primarily of travertine limestone blocks, volcanic tuff, and brick-faced concrete, the Colosseum showcases the engineering brilliance of Roman architecture. Its innovative design featured a complex system of vaults and arches that distributed weight efficiently, allowing for its massive four-story facade. The exterior was adorned with Doric, Ionic, and Corinthian columns on successive levels, demonstrating the Romans mastery of classical architectural orders. The arena floor, once covered with wooden planking and sand, concealed an elaborate underground network called the hypogeum - a two-level subterranean complex of tunnels and chambers where gladiators, animals, and stage equipment were housed and prepared for the spectacles above. A sophisticated system of pulleys, ramps, and trapdoors allowed for dramatic entrances and special effects during performances. The Colosseum also featured a retractable awning system called the velarium, operated by sailors from the Roman navy, which provided shade for spectators during events. Despite suffering damage from earthquakes, stone-robbers who repurposed its materials for other buildings, and the general passage of time, the Colosseum has endured as a powerful symbol of Imperial Rome and ancient civilization. Today, it stands as one of Rome\'s most popular tourist attractions and a UNESCO World Heritage Site, drawing millions of visitors annually who come to marvel at this extraordinary monument to Roman engineering and entertainment.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
       'https://images.unsplash.com/photo-1555992336-fb0d29498b13?w=800',
       'https://images.unsplash.com/photo-1604580864964-0462f5d5b1a8?w=800',
@@ -741,7 +750,7 @@ const LANDMARKS: Landmark[] = [
     description: 'The center of ancient Roman public life',
     category: 'Ancient Rome',
     detailedDescription: 'The Roman Forum, known as Forum Romanum in Latin, represents the beating heart of ancient Rome and stands as one of the most important archaeological sites in the world. For over a thousand years, this rectangular plaza served as the center of Roman public life, witnessing the rise and fall of the Roman Republic and Empire. Originally a marshy burial ground between the Palatine and Capitoline Hills, the area was drained in the 7th century BC and transformed into Rome\'s central marketplace and gathering place. As Rome grew in power and prestige, the Forum evolved from a simple marketplace into a magnificent complex of temples, basilicas, and government buildings that showcased the architectural and political achievements of Roman civilization. The Forum was the site of triumphal processions celebrating military victories, where victorious generals would parade through the Via Sacra (Sacred Road) with their spoils of war and captive enemies. It hosted political assemblies where citizens debated the future of the Republic, criminal trials that determined justice, public speeches that swayed public opinion, and commercial activities that drove the Roman economy. Among its most significant structures was the Curia Julia, the senate house where Rome\'s most powerful political body met to debate legislation and policy. The Temple of Saturn, one of the Forum\'s oldest and most revered buildings, housed the state treasury and was the site of the annual Saturnalia festival. The Arch of Septimius Severus commemorated military victories in the East, while the Column of Phocas, erected in 608 AD, represents one of the last monuments added to the Forum. The Basilica Julia and Basilica Aemilia served as courts of law and commercial centers, their vast interiors bustling with lawyers, merchants, and citizens conducting business. The Temple of Vesta, home to the sacred flame tended by the Vestal Virgins, symbolized the eternal nature of Rome itself. After the fall of the Western Roman Empire, the Forum gradually fell into disrepair, its monuments stripped for building materials and its ground level rising as centuries of debris accumulated. During the Middle Ages, the area was known as "Campo Vaccino" (Cow Field) and was used for grazing cattle. Systematic excavations beginning in the 18th and 19th centuries revealed the Forum\'s magnificent past, uncovering temples, arches, and basilicas that had been buried for centuries. Today, walking through the Roman Forum is like stepping back in time, where every column, arch, and stone tells a story of ancient Rome\'s glory, power, and eventual decline.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800',
       'https://images.unsplash.com/photo-1525874684015-58379d421a52?w=800',
       'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800',
@@ -856,7 +865,7 @@ const LANDMARKS: Landmark[] = [
     description: 'The most famous fountain in Rome',
     category: 'Fountain',
     detailedDescription: 'The Trevi Fountain, or Fontana di Trevi, stands as Rome\'s largest and most spectacular Baroque fountain, captivating millions of visitors each year with its grandeur, beauty, and legendary traditions. Measuring an impressive 26.3 meters (86 feet) high and 49.15 meters (161 feet) wide, this monumental masterpiece dominates the small Trevi square, creating a breathtaking spectacle of water, marble, and sculptural artistry. The fountain\'s history begins in ancient Rome, where it marked the terminal point of the Aqua Virgo aqueduct, one of the oldest water sources supplying the city. Legend tells of a young virgin who led thirsty Roman soldiers to this water source in 19 BC, giving the aqueduct its name. For centuries, a simple basin collected the aqueduct\'s waters until Pope Urban VIII commissioned Gian Lorenzo Bernini to create a more dramatic fountain in 1629. However, the project was abandoned when the Pope died, and it wasn\'t until 1732 that Pope Clement XII launched a competition to design a grand fountain worthy of the location. Nicola Salvi won the commission, and construction began in 1732, though Salvi would not live to see his masterpiece completed. The fountain was finally finished in 1762 by Giuseppe Pannini, thirty years after construction began. The fountain\'s design centers on a majestic depiction of Oceanus, the Titan god of the sea, riding a shell-shaped chariot pulled by two sea horses - one wild and one docile - representing the varying moods of the ocean. These magnificent creatures are guided by tritons, mythological sea gods depicted blowing conch shells. The central niche housing Oceanus is flanked by two allegorical figures: Abundance on the left, holding a horn of plenty, and Health on the right, holding a cup being drunk by a snake, symbolizing well-being and prosperity. Above these niches, relief sculptures depict the discovery of the spring by the virgin and Agrippa approving the aqueduct\'s construction. The fountain\'s elaborate facade rises from the Palazzo Poli behind it, creating a theatrical backdrop of Corinthian columns, ornate carvings, and flowing drapery sculpted in travertine stone. Water cascades dramatically over artificial rocks into the large basin below, creating a symphony of sound that echoes through the surrounding buildings. The fountain pumps approximately 2,824,800 cubic feet of water through its system daily, a testament to the ancient Roman engineering that still supplies it from the Aqua Virgo aqueduct. Perhaps the most famous tradition associated with the Trevi Fountain is the coin-tossing ritual. Legend holds that visitors who throw a coin over their left shoulder using their right hand will ensure their return to Rome. Throwing two coins will bring romance with a Roman, while three coins promise marriage. This tradition generates an estimated 3,000 euros worth of coins daily, all of which are collected and donated to charity, supporting various social programs in Rome. The fountain has captured imaginations worldwide through its appearances in cinema, most notably in Federico Fellini\'s "La Dolce Vita" (1960), where Anita Ekberg\'s iconic wade through its waters created one of film history\'s most memorable scenes. This moment cemented the fountain\'s status as a symbol of romance and Italian glamour. Throughout its history, the fountain has undergone several restorations to preserve its beauty and structural integrity. The most recent comprehensive restoration, funded by the Italian fashion house Fendi and completed in 2015, cleaned and repaired the monument, restoring its brilliant white travertine to its original splendor. Today, the Trevi Fountain remains one of Rome\'s most beloved landmarks and the world\'s most visited fountain. Visitors are no longer permitted to wade in its waters, as fines were instituted to protect the monument, but this has not diminished its appeal. The fountain continues to enchant with its baroque magnificence, the perpetual sound of flowing water, and the timeless hope embodied in each coin tossed into its sparkling basin.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1525874684015-58379d421a52?w=800',
       'https://images.unsplash.com/photo-1529260830199-42c24126f198?w=800',
       'https://images.unsplash.com/photo-1548585744-4e87a0e84c88?w=800',
@@ -971,7 +980,7 @@ const LANDMARKS: Landmark[] = [
     description: 'An architectural marvel with the world\'s largest unreinforced concrete dome',
     category: 'Ancient Rome',
     detailedDescription: 'The Pantheon stands as one of the best-preserved monuments of ancient Rome and represents one of the most influential buildings in the history of architecture. This remarkable structure, whose name derives from the Greek words "pan" (all) and "theos" (gods), meaning "temple to all gods," continues to inspire architects and visitors nearly two millennia after its construction. The building we see today was commissioned by Emperor Hadrian around 126 AD, though it replaced an earlier temple built by Marcus Agrippa in 27 BC, whose name still appears in the inscription on the portico. What makes the Pantheon truly extraordinary is its massive dome, which remains the world\'s largest unreinforced concrete dome even after nearly 2,000 years. Measuring 43.3 meters (142 feet) in both diameter and height from the floor to the oculus, the dome creates a perfect hemisphere, embodying the Roman architectural ideal of geometric harmony. This architectural marvel was achieved through ingenious engineering techniques that modern builders still study and admire. The concrete used in construction varies in composition throughout the dome\'s height, with heavier aggregates like travertine and brick at the base transitioning to lighter materials like pumice at the apex, reducing the overall weight while maintaining structural integrity. The thickness of the dome also decreases from 6.4 meters at the base to just 1.2 meters at the oculus, further optimizing its weight distribution. The most striking feature of the Pantheon\'s interior is the oculus, a circular opening 8.2 meters (27 feet) in diameter at the dome\'s apex. This remarkable architectural element serves as the building\'s only source of natural light, creating a dramatic beam of sunlight that moves across the interior throughout the day, illuminating different architectural features and creating an ever-changing interplay of light and shadow. The oculus is open to the elements, allowing rain to enter the building, but the floor is slightly convex with drainage holes to channel water away. The symbolic significance of this opening extends beyond its practical purpose - it represents the connection between the temple and the heavens, the dwelling place of the gods to whom the building was dedicated. The Pantheon\'s portico features sixteen massive Corinthian columns, each carved from a single piece of Egyptian granite, standing 11.8 meters (39 feet) tall and weighing approximately 60 tons each. These columns support a triangular pediment that once contained bronze sculptures, though these were removed over the centuries. The bronze that once covered the portico ceiling beams was also stripped away, reportedly taken by Byzantine Emperor Constans II in 663 AD. The building\'s perfect proportions and harmonious design influenced countless structures throughout history. During the Renaissance, artists and architects like Michelangelo, Raphael, and Brunelleschi studied the Pantheon intensively, drawing inspiration from its perfect geometry and innovative construction techniques. Raphael himself is buried here, along with several Italian kings and other notable figures. In 609 AD, Byzantine Emperor Phocas gave the Pantheon to Pope Boniface IV, who converted it into a Christian church dedicated to "St. Mary and the Martyrs," a transformation that ultimately saved the building from the destruction and plundering that befell many other Roman temples. This conversion to a church ensured its continuous maintenance and preservation through the medieval period and beyond. The building has witnessed numerous historical events and transformations. During the Renaissance, it briefly served as a fortress, and in the 17th century, Pope Urban VIII controversially removed the bronze from the portico to make cannons for Castel Sant\'Angelo and to create Bernini\'s baldachin in St. Peter\'s Basilica, an act that gave rise to the saying "What the barbarians didn\'t do, the Barberini did" - a play on the Pope\'s family name. Today, the Pantheon remains an active church where Mass is celebrated, particularly on important occasions, while simultaneously serving as one of Rome\'s most visited tourist attractions and a burial place for distinguished Italians. The building stands as a testament to Roman engineering genius, religious continuity, and architectural perfection, continuing to inspire wonder and admiration in all who enter its sacred space and gaze up at the magnificent dome with its oculus open to the sky.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1548585744-4e87a0e84c88?w=800',
       'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800',
       'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800',
@@ -1083,7 +1092,7 @@ const LANDMARKS: Landmark[] = [
     description: 'A monumental stairway of 135 steps',
     category: 'Landmark',
     detailedDescription: 'The Spanish Steps, known in Italian as "Scalinata di Trinità dei Monti," represent one of Rome\'s most beloved and photographed landmarks, gracefully connecting the Piazza di Spagna at the base with the Trinità dei Monti church and the Pincian Hill above. This monumental Baroque stairway consists of 135 steps divided into twelve flights, creating a theatrical cascade of travertine stone that has captivated visitors for three centuries. The steps take their English name from the Piazza di Spagna (Spanish Square) at their base, which in turn was named after the Spanish Embassy to the Holy See, located in the square since the 17th century. However, the steps were actually funded by French diplomacy, creating an amusing international confusion that persists to this day. The history of the Spanish Steps begins in the early 17th century when the steep slope between the Spanish Square and the church above proved difficult to navigate. Various proposals were put forward over the decades to create a grand stairway worthy of connecting these two important locations. The project languished for years due to disagreements between the French, who wanted to glorify the French monarchy, and the papacy, which sought to emphasize religious authority. Finally, French diplomat Étienne Gueffier bequeathed a substantial sum of money in his will for the construction of the steps, though it took until 1717 for Pope Clement XI to approve the project. The design competition was won by Francesco de Sanctis, whose elegant proposal drew inspiration from earlier sketches by Alessandro Specchi. Construction began in 1723 and was completed in 1725, creating the magnificent structure we see today. The steps\' design is a masterpiece of Baroque urban planning, featuring a butterfly or fan-like configuration that widens and narrows as it ascends, creating visual interest and accommodating the irregular terrain. The stairway is not merely functional but transforms the steep hillside into a theatrical space where Romans and visitors alike gather, rest, and socialize. At the base, the steps open onto Piazza di Spagna, home to the famous Barcaccia fountain, designed by Pietro Bernini and his more famous son Gian Lorenzo Bernini. This fountain, shaped like a half-sunken boat, provides a whimsical counterpoint to the grandeur of the steps above. At the summit, the twin-towered façade of the Trinità dei Monti church provides a commanding visual terminus, while offering spectacular views over Rome\'s rooftops. The steps have long been a gathering place for artists, writers, and travelers. During the 18th and 19th centuries, artists\' models would congregate on the steps, hoping to be hired by painters and sculptors working in the area. The adjacent houses where poets John Keats and Percy Bysshe Shelley once lived have become museums, adding literary significance to the location\'s artistic heritage. The Spanish Steps achieved immortal fame in cinema through their appearance in the 1953 film "Roman Holiday," where Audrey Hepburn\'s character enjoys gelato on the steps, creating one of cinema\'s most iconic moments and establishing the steps as a symbol of romance and la dolce vita. This scene helped cement the Spanish Steps as an essential stop on any Roman itinerary. In spring, the steps are adorned with magnificent displays of azaleas, transforming the white travertine into a cascade of pink and red blooms, a tradition that dates back centuries and creates one of Rome\'s most spectacular seasonal displays. Throughout the year, the steps serve as an impromptu theater, hosting fashion shows, concerts, and celebrations. The area surrounding the Spanish Steps has evolved into one of Rome\'s most fashionable shopping districts, with luxury boutiques lining the nearby streets, particularly Via Condotti, making it a destination for both culture and commerce. Recent restoration efforts have focused on preserving the steps for future generations. In 2015-2016, the monument underwent a comprehensive €1.5 million restoration sponsored by the jewelry house Bulgari, cleaning and repairing the travertine steps and strengthening their structural integrity. New regulations prohibit sitting on the steps and eating or drinking in the area, measures designed to protect this treasured monument from wear and damage. Despite these restrictions, the Spanish Steps remain one of Rome\'s most vibrant gathering places, where locals meet friends, tourists rest weary feet, and everyone pauses to admire the view and soak in the timeless beauty of this Baroque masterpiece that has graced the Roman landscape for three centuries.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1529260830199-42c24126f198?w=800',
       'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800',
       'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800',
@@ -1195,7 +1204,7 @@ const LANDMARKS: Landmark[] = [
     description: 'One of the largest and most impressive art museums in the world',
     category: 'Museum',
     detailedDescription: 'The Vatican Museums represent one of humanity\'s greatest treasure troves of art and history, housing an incomparable collection that spans over 5,000 years of human creativity. Located within Vatican City, the world\'s smallest independent state, these museums comprise 54 separate galleries containing approximately 70,000 works, of which 20,000 are on display. The museums attract over 6 million visitors annually, making them one of the most visited museum complexes in the world. The origins of the Vatican Museums date to 1506, when Pope Julius II purchased the ancient marble sculpture "Laocoön and His Sons," discovered in a Roman vineyard. This acquisition marked the beginning of what would become one of the world\'s most extraordinary art collections. Over the centuries, successive popes continued to expand the collection, commissioning new works and acquiring existing masterpieces, transforming the papal palaces into a vast repository of human artistic achievement. The museums\' most famous attraction is undoubtedly the Sistine Chapel, featuring Michelangelo\'s breathtaking ceiling frescoes (1508-1512) and his monumental "Last Judgment" (1536-1541) on the altar wall. The ceiling\'s iconic "Creation of Adam," with God\'s finger nearly touching Adam\'s, has become one of the most recognizable images in art history. Michelangelo painted the ceiling while lying on his back on scaffolding, a physically grueling task that took four years to complete and left him with permanent neck problems. The Raphael Rooms (Stanze di Raffaello) represent another highlight, featuring four rooms decorated with frescoes by Raphael and his students between 1508 and 1524. The "School of Athens" in the Stanza della Segnatura is particularly celebrated, depicting the greatest philosophers and scientists of antiquity in an idealized architectural setting. Raphael cleverly included portraits of his contemporaries: Plato bears the features of Leonardo da Vinci, while the brooding figure of Heraclitus is believed to be Michelangelo.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1583424223556-bb53f4362c65?w=800',
       'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800',
       'https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=800',
@@ -1309,7 +1318,7 @@ const LANDMARKS: Landmark[] = [
     description: 'The largest church in the world and center of Catholicism',
     category: 'Religious Site',
     detailedDescription: 'St. Peter\'s Basilica, known in Italian as "Basilica di San Pietro," stands as the spiritual and architectural heart of the Catholic Church and one of the most magnificent examples of Renaissance and Baroque architecture in the world. This massive church, covering 23,000 square meters (5.7 acres), can accommodate over 60,000 people and took more than 120 years to complete, involving some of history\'s greatest artists and architects including Bramante, Michelangelo, and Bernini. The current basilica, completed in 1626, was built on the site believed to be Saint Peter\'s tomb. According to tradition, Peter, one of Jesus\'s twelve apostles and the first Pope, was crucified upside down in Nero\'s Circus around 64 AD and buried nearby. The first church on this site, Old St. Peter\'s Basilica, was commissioned by Emperor Constantine in the 4th century. By the 15th century, the ancient basilica was in a state of disrepair, prompting Pope Julius II to commission its demolition and the construction of a new, grander structure. The basilica\'s iconic dome, designed by Michelangelo, dominates the Roman skyline and remains one of the largest domes in the world, measuring 42 meters in diameter and rising to a total height of 136 meters. Michelangelo took over the project in 1547 at age 72 and worked on it until his death in 1564, though he did not live to see the dome completed. The dome\'s interior features stunning mosaics and a Latin inscription from Matthew 16:18-19, where Jesus names Peter as the rock upon which the church will be built. Inside the basilica, visitors encounter an overwhelming display of artistic treasures. Michelangelo\'s Pietà (1498-1499), created when he was just 24 years old, shows the Virgin Mary cradling the dead body of Jesus with extraordinary tenderness and technical mastery. This is the only work Michelangelo ever signed, after overhearing visitors attribute it to another sculptor.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800',
       'https://images.unsplash.com/photo-1583992876959-af90c2dcf744?w=800',
       'https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=800',
@@ -1420,7 +1429,7 @@ const LANDMARKS: Landmark[] = [
     description: 'Ancient mausoleum turned fortress and papal residence',
     category: 'Fortress',
     detailedDescription: 'Castel Sant\'Angelo, originally known as the Mausoleum of Hadrian, stands as one of Rome\'s most distinctive landmarks with its imposing cylindrical structure dominating the western bank of the Tiber River. This remarkable building has served many purposes over its 1,900-year history: imperial mausoleum, fortress, prison, and papal residence, each phase adding layers to its fascinating story. The castle was commissioned by Emperor Hadrian as a mausoleum for himself and his family around 123 AD and completed in 139 AD, one year after his death. The original structure consisted of a massive square base topped by a cylindrical drum, crowned with a garden and a golden quadriga (four-horse chariot) statue of Hadrian. The emperor\'s ashes were placed in a golden urn in the central chamber, and subsequent emperors up to Caracalla (217 AD) were also interred here. The monument\'s transformation into a military fortress began in 403 AD when Emperor Honorius incorporated it into the Aurelian Walls. Its strategic location made it an ideal defensive position, and it was successfully used to repel various barbarian invasions. The building acquired its current name in 590 AD, according to legend, when Pope Gregory the Great, leading a procession to pray for the end of a plague, had a vision of Archangel Michael atop the mausoleum sheathing his sword, signaling the end of the epidemic. A statue of the angel was subsequently placed on top of the building. During the medieval period, the castle became a papal fortress and was connected to Vatican City by a fortified corridor called the Passetto di Borgo, built in 1277. This secret passage allowed popes to flee to the safety of the castle during times of danger. Pope Clement VII famously used this escape route during the Sack of Rome in 1527, when troops of the Holy Roman Emperor besieged the city.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1544508618-f6927bc85146?w=800',
       'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800',
       'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800',
@@ -4260,7 +4269,7 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
-  
+
   // Cebu, Philippines landmarks
   {
     id: 'magellans-cross',
@@ -4816,7 +4825,7 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
-  
+
   // Penang, Malaysia landmarks
   {
     id: 'kek-lok-si-temple',
@@ -6785,7 +6794,7 @@ const LANDMARKS: Landmark[] = [
     openingHours: 'Mon-Sun: 9:00-20:00',
     priceRange: '€€-€€€ (€15-150)',
     detailedDescription: 'Located steps from the Spanish Steps, Borghese Souvenir Gallery offers premium Italian souvenirs and gifts. Specialties include genuine Italian leather bags and wallets, official Vatican City merchandise, handcrafted Murano glass jewelry, religious artifacts and rosaries, Roman-themed home décor, and authentic Italian food products. Payment accepted: Visa, Mastercard, Amex, UnionPay, Alipay, WeChat Pay, and cash (EUR/USD). Tax-free shopping available for non-EU tourists. Current promotion: 15% off on leather goods (valid until Dec 2025). Summer sale: 20-30% off selected items (June-August).',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800',
       'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800',
       'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
@@ -6794,7 +6803,7 @@ const LANDMARKS: Landmark[] = [
       'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800',
       'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800'
     ],
-        translations: {
+    translations: {
       en: { name: 'Borghese Souvenir Gallery', narration: 'Premium gift shop near Spanish Steps featuring Italian leather goods, Vatican souvenirs, and handcrafted jewelry. Credit cards accepted, tax-free shopping available.', description: 'Upscale gift shop specializing in Italian leather, Vatican memorabilia, and artisan jewelry', detailedDescription: 'Located steps from the Spanish Steps, Borghese Souvenir Gallery offers premium Italian souvenirs and gifts. Specialties include genuine Italian leather bags and wallets, official Vatican City merchandise, handcrafted Murano glass jewelry, religious artifacts and rosaries, Roman-themed home décor, and authentic Italian food products. Payment accepted: Visa, Mastercard, Amex, UnionPay, Alipay, WeChat Pay, and cash (EUR/USD). Tax-free shopping available for non-EU tourists.' },
       ko: { name: '보르게세 기념품 갤러리', narration: '스페인 계단 근처의 프리미엄 선물 가게로 이탈리아 가죽 제품, 바티칸 기념품, 수제 보석을 판매합니다. 신용카드 가능, 면세 쇼핑 가능.', description: '이탈리아 가죽, 바티칸 기념품, 장인 보석 전문 고급 선물 가게', detailedDescription: '스페인 계단에서 몇 발자국 거리에 위치한 보르게세 기념품 갤러리는 프리미엄 이탈리아 기념품과 선물을 제공합니다. 정품 이탈리아 가죽 가방과 지갑, 공식 바티칸 시국 상품, 수공예 무라노 유리 보석, 종교 유물과 묵주, 로마 테마 홈 데코, 정통 이탈리아 식품을 전문으로 합니다. Visa, Mastercard, Amex, UnionPay, Alipay, WeChat Pay 및 현금(EUR/USD) 결제 가능. 비EU 관광객을 위한 면세 쇼핑 가능.' },
       it: { name: 'Galleria Souvenir Borghese', narration: 'Negozio di souvenir premium vicino a Piazza di Spagna con articoli in pelle italiana, souvenir vaticani e gioielli artigianali. Carte di credito accettate, shopping tax-free disponibile.', description: 'Negozio di souvenir di lusso specializzato in pelletteria italiana, memorabilia vaticana e gioielli artigianali', detailedDescription: 'Situata a pochi passi da Piazza di Spagna, la Galleria Souvenir Borghese offre souvenir e regali italiani di alta qualità. Le specialità includono borse e portafogli in vera pelle italiana, merchandising ufficiale della Città del Vaticano, gioielli artigianali in vetro di Murano, manufatti religiosi e rosari, decorazioni per la casa a tema romano e prodotti alimentari italiani autentici. Pagamento accettato: Visa, Mastercard, Amex, UnionPay, Alipay, WeChat Pay e contanti (EUR/USD). Shopping tax-free disponibile per turisti non UE.' },
@@ -6820,7 +6829,7 @@ const LANDMARKS: Landmark[] = [
     openingHours: 'Mon-Sun: 8:30-19:00',
     priceRange: '€-€€€ (€5-200)',
     detailedDescription: 'Vatican Treasures Shop, located 100m from St. Peter\'s Basilica, offers authentic Vatican City merchandise. Featured items: blessed rosaries and crucifixes, papal blessing certificates, Vatican stamps and coins, religious books in 25 languages, Vatican Museums replicas, sacred art prints, and ecclesiastical vestments. Payment methods: all major credit cards, Alipay, WeChat Pay, Apple Pay, Google Pay, cash. Special services: gift wrapping, worldwide shipping, tax refund assistance. Black Friday promotion: 25% off all items (Nov 2025). Easter sale: Buy 2 get 1 free on rosaries (March-April).',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800',
       'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800',
       'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800',
@@ -6829,7 +6838,7 @@ const LANDMARKS: Landmark[] = [
       'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800',
       'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800'
     ],
-        translations: {
+    translations: {
       en: { name: 'Vatican Treasures Shop', narration: 'Official Vatican souvenir shop offering blessed rosaries, papal memorabilia, and religious art. Multi-currency payments accepted. Exclusive items blessed by the Pope.', description: 'Religious souvenirs, papal gifts, and Vatican-blessed items', detailedDescription: 'Vatican Treasures Shop offers authentic Vatican and religious souvenirs. Our collection includes Pope-blessed rosaries and crosses, Vatican City commemorative medals, religious artwork and icon reproductions, Sistine Chapel merchandise, Saint statues and figurines, and papal blessings and certificates. All items come with certificates of authenticity. Accepts all major credit cards and PayPal. Official partner of Vatican City souvenir program.' },
       ko: { name: '바티칸 보물 상점', narration: '축복받은 묵주, 교황 기념품, 종교 예술품을 제공하는 공식 바티칸 기념품 가게. 다중 통화 결제 가능. 교황이 축복한 독점 상품.', description: '종교 기념품, 교황 선물, 바티칸 축복 상품', detailedDescription: '바티칸 보물 상점은 정품 바티칸 및 종교 기념품을 제공합니다. 교황 축복 묵주와 십자가, 바티칸 시국 기념 메달, 종교 예술품과 성화 복제품, 시스티나 성당 상품, 성인 동상과 피규어, 교황 축복서와 증명서 등을 판매합니다. 모든 상품에는 정품 인증서가 함께 제공됩니다. 모든 주요 신용카드와 PayPal 결제 가능. 바티칸 시국 기념품 프로그램 공식 파트너.' },
       it: { name: 'Negozio Tesori Vaticani', narration: 'Negozio ufficiale di souvenir vaticani che offre rosari benedetti, memorabilia papale e arte religiosa. Pagamenti multivaluta accettati. Articoli esclusivi benedetti dal Papa.', description: 'Souvenir religiosi, regali papali e articoli benedetti dal Vaticano', detailedDescription: 'Il Negozio Tesori Vaticani offre autentici souvenir vaticani e religiosi. La nostra collezione include rosari e croci benedetti dal Papa, medaglie commemorative della Città del Vaticano, riproduzioni di opere d\'arte religiose e icone, merchandising della Cappella Sistina, statue e figurine di santi, e benedizioni papali e certificati. Tutti gli articoli sono accompagnati da certificati di autenticità. Accettiamo tutte le principali carte di credito e PayPal. Partner ufficiale del programma souvenir della Città del Vaticano.' },
@@ -6855,7 +6864,7 @@ const LANDMARKS: Landmark[] = [
     openingHours: 'Mon-Sun: 8:00-21:00',
     priceRange: '€-€€ (€3-80)',
     detailedDescription: 'Colosseum Memories is the closest souvenir shop to the ancient amphitheater. Popular items: gladiator helmets and armor replicas, ancient Roman coin reproductions, Colosseum miniatures (various sizes), Italian hand-painted ceramics, "SPQR" t-shirts and caps, Roman Empire history books, and fridge magnets. Payment: Visa, Mastercard, Amex, Discover, JCB, cash (multiple currencies). Tourist benefits: multilingual staff (EN/IT/ES/FR/ZH/JA/KO), free gift wrapping, package storage while touring. Winter promotion: 20% off ceramic items (Nov-Feb). Group discount: 10% off for groups of 6+ people.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
       'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800',
       'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800',
@@ -6864,7 +6873,7 @@ const LANDMARKS: Landmark[] = [
       'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800',
       'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800'
     ],
-        translations: {
+    translations: {
       en: { name: 'Colosseum Memories', narration: 'Iconic Roman souvenirs next to the Colosseum. Gladiator helmets, Roman coins replicas, and Italian ceramics. Visa, Mastercard, Amex accepted. Special winter discounts available.', description: 'Colosseum-themed souvenirs, Roman replicas, and Italian ceramics', detailedDescription: 'Colosseum Memories offers authentic Roman-themed souvenirs and gifts located right next to the ancient amphitheater. Our collection includes high-quality gladiator helmet replicas, Roman coin reproductions, authentic Italian ceramics, ancient Rome-inspired jewelry, historical books and guides, and Colosseum miniatures and models. All replicas are museum-quality with detailed craftsmanship. We ship worldwide and offer gift wrapping services. Special group discounts available for tours.' },
       ko: { name: '콜로세움 메모리즈', narration: '콜로세움 옆 상징적인 로마 기념품점. 검투사 투구, 로마 동전 복제품, 이탈리아 도자기. Visa, Mastercard, Amex 사용 가능. 겨울 특별 할인 제공.', description: '콜로세움 테마 기념품, 로마 복제품, 이탈리아 도자기', detailedDescription: '콜로세움 메모리즈는 고대 원형경기장 바로 옆에 위치하여 정통 로마 테마 기념품과 선물을 제공합니다. 고품질 검투사 투구 복제품, 로마 동전 재현품, 정품 이탈리아 도자기, 고대 로마에서 영감을 받은 보석류, 역사 서적과 가이드북, 콜로세움 미니어처와 모형 등을 판매합니다. 모든 복제품은 박물관 품질의 정교한 장인정신으로 제작됩니다. 전 세계 배송과 선물 포장 서비스를 제공합니다. 단체 투어 특별 할인 가능.' },
       it: { name: 'Memorie del Colosseo', narration: 'Souvenir romani iconici accanto al Colosseo. Elmi da gladiatore, repliche di monete romane e ceramiche italiane. Visa, Mastercard, Amex accettate. Sconti invernali speciali disponibili.', description: 'Souvenir a tema Colosseo, repliche romane e ceramiche italiane', detailedDescription: 'Memorie del Colosseo offre autentici souvenir e regali a tema romano, situato proprio accanto all\'antico anfiteatro. La nostra collezione include repliche di alta qualità di elmi da gladiatore, riproduzioni di monete romane, autentiche ceramiche italiane, gioielli ispirati all\'antica Roma, libri storici e guide, miniature e modelli del Colosseo. Tutte le repliche sono di qualità museale con artigianato dettagliato. Spediamo in tutto il mondo e offriamo servizi di confezione regalo. Sconti speciali per gruppi turistici disponibili.' },
@@ -6890,7 +6899,7 @@ const LANDMARKS: Landmark[] = [
     openingHours: 'Tue-Sun: 10:00-20:00, Mon: Closed',
     priceRange: '€€-€€€ (€20-120)',
     detailedDescription: 'Nestled in the heart of Trastevere, this boutique showcases authentic Roman craftsmanship. Products: handmade leather journals and photo albums, local Lazio wines and olive oils, artisan ceramics and pottery, hand-painted silk scarves, traditional Roman recipe books, natural soap and cosmetics, vintage Italian posters. Payment methods: cash (EUR preferred), all major credit cards, contactless payments. Artisan meet-and-greets every Saturday 15:00-17:00. Summer Artisan Fair (July): 30% off pottery items. Christmas Market Special (Dec): complimentary gift wrapping and wine tasting.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800',
       'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800',
       'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800',
@@ -6899,7 +6908,7 @@ const LANDMARKS: Landmark[] = [
       'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
       'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800'
     ],
-        translations: {
+    translations: {
       en: { name: 'Trastevere Artisan Treasures', narration: 'Authentic local crafts in the heart of Trastevere. Handmade leather goods, artisan pottery, and local olive oils. Cash preferred, cards accepted. Support local artisans!', description: 'Handcrafted leather, artisan pottery, and traditional Roman crafts', detailedDescription: 'Trastevere Artisan Treasures showcases the best of Roman craftsmanship in the charming Trastevere neighborhood. Our carefully curated collection features handmade Italian leather accessories, traditional Roman pottery and ceramics, locally produced olive oils and balsamic vinegars, artisan soaps and fragrances, hand-painted tiles and decorations, and vintage Roman-style jewelry. We work directly with local artisans to bring you authentic, one-of-a-kind pieces. Gift certificates available. Support local Italian craftspeople with every purchase.' },
       ko: { name: '트라스테베레 장인 보물', narration: '트라스테베레 중심부의 정통 현지 공예품. 수제 가죽 제품, 장인 도자기, 현지 올리브 오일. 현금 선호, 카드 가능. 현지 장인을 응원하세요!', description: '수공예 가죽, 장인 도자기, 전통 로마 공예품', detailedDescription: '트라스테베레 장인 보물은 매력적인 트라스테베레 지역에서 최고의 로마 장인정신을 선보입니다. 엄선된 컬렉션에는 수제 이탈리아 가죽 액세서리, 전통 로마 도자기와 세라믹, 현지 생산 올리브 오일과 발사믹 식초, 장인 비누와 향수, 수작업 타일과 장식, 빈티지 로마 스타일 주얼리가 있습니다. 현지 장인들과 직접 협력하여 정품이자 유일한 작품들을 선보입니다. 상품권 이용 가능. 모든 구매로 이탈리아 현지 장인을 지원하세요.' },
       it: { name: 'Tesori Artigianali di Trastevere', narration: 'Artigianato locale autentico nel cuore di Trastevere. Pelletteria fatta a mano, ceramiche artigianali e oli d\'oliva locali. Contanti preferiti, carte accettate. Sostieni gli artigiani locali!', description: 'Pelletteria artigianale, ceramiche e artigianato tradizionale romano', detailedDescription: 'Tesori Artigianali di Trastevere presenta il meglio dell\'artigianato romano nel caratteristico quartiere di Trastevere. La nostra collezione curata include accessori in pelle italiana fatti a mano, ceramiche e terrecotte romane tradizionali, oli d\'oliva e aceti balsamici prodotti localmente, saponi e fragranze artigianali, piastrelle e decorazioni dipinte a mano, e gioielli in stile romano vintage. Lavoriamo direttamente con artigiani locali per offrirti pezzi autentici e unici. Buoni regalo disponibili. Sostieni gli artigiani italiani locali con ogni acquisto.' },
@@ -6925,7 +6934,7 @@ const LANDMARKS: Landmark[] = [
     openingHours: 'Mon-Sun: 9:30-21:00',
     priceRange: '€€€-€€€€ (€50-500)',
     detailedDescription: 'Piazza Navona Craft Gallery is Rome\'s premier destination for luxury Italian crafts. Exclusive collections: Carrara marble sculptures and busts, authentic Murano glass vases and chandeliers, Renaissance and Baroque art reproductions, handwoven tapestries, Italian gold and silver jewelry, antique map reproductions, limited edition prints by Italian artists. Payment: all credit cards, digital wallets (Apple Pay, Google Pay, Samsung Pay), bank transfers for large purchases, cash. VIP services: personal shopper, worldwide insured shipping, certificate of authenticity. Spring Collection Launch (April): 15% off new arrivals. Art Appreciation Month (October): free art history tours with purchase over €200.',
-        photos: [
+    photos: [
       'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800',
       'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800',
       'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800',
@@ -6934,7 +6943,7 @@ const LANDMARKS: Landmark[] = [
       'https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800',
       'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800'
     ],
-        translations: {
+    translations: {
       en: { name: 'Piazza Navona Craft Gallery', narration: 'Premium craft gallery at Piazza Navona featuring Italian marble sculptures, Murano glass, and renaissance art prints. All payment methods accepted. Year-round cultural promotions.', description: 'Italian marble art, Murano glass masterpieces, and Renaissance reproductions', detailedDescription: 'Piazza Navona Craft Gallery showcases exceptional Italian artistry in the heart of historic Rome. Our gallery features authentic Italian marble sculptures and carvings, genuine Murano glass art and jewelry, museum-quality Renaissance art reproductions, handcrafted mosaics and decorative objects, Italian master artist prints and lithographs, and custom commissions available. Located on the beautiful Piazza Navona, we offer worldwide shipping and white-glove delivery service. Art consultation services available. Member of the Italian Art Dealers Association.' },
       ko: { name: '피아차 나보나 공예 갤러리', narration: '피아차 나보나의 프리미엄 공예 갤러리로 이탈리아 대리석 조각품, 무라노 유리, 르네상스 미술 인쇄물을 선보입니다. 모든 결제 수단 가능. 연중 문화 프로모션.', description: '이탈리아 대리석 예술, 무라노 유리 걸작, 르네상스 복제품', detailedDescription: '피아차 나보나 공예 갤러리는 역사적인 로마 중심부에서 뛰어난 이탈리아 예술성을 선보입니다. 갤러리에는 정품 이탈리아 대리석 조각과 조각품, 정품 무라노 유리 예술과 보석류, 박물관 수준의 르네상스 예술 복제품, 수공예 모자이크와 장식품, 이탈리아 마스터 아티스트 판화와 석판화, 맞춤 제작이 가능합니다. 아름다운 피아차 나보나에 위치하며 전 세계 배송과 화이트 글러브 배달 서비스를 제공합니다. 미술 상담 서비스 이용 가능. 이탈리아 미술상 협회 회원.' },
       it: { name: 'Galleria Artigianale Piazza Navona', narration: 'Galleria artigianale premium a Piazza Navona con sculture in marmo italiano, vetro di Murano e stampe d\'arte rinascimentale. Tutti i metodi di pagamento accettati. Promozioni culturali tutto l\'anno.', description: 'Arte in marmo italiano, capolavori in vetro di Murano e riproduzioni rinascimentali', detailedDescription: 'La Galleria Artigianale Piazza Navona espone l\'eccezionale maestria artistica italiana nel cuore della Roma storica. La nostra galleria presenta autentiche sculture e intagli in marmo italiano, vera arte e gioielleria in vetro di Murano, riproduzioni d\'arte rinascimentale di qualità museale, mosaici e oggetti decorativi artigianali, stampe e litografie di maestri artisti italiani, e commissioni personalizzate disponibili. Situata sulla bellissima Piazza Navona, offriamo spedizioni in tutto il mondo e servizio di consegna con guanti bianchi. Servizi di consulenza artistica disponibili. Membro dell\'Associazione Italiana Commercianti d\'Arte.' },
@@ -7249,7 +7258,7 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
-  
+
   // Cebu Activities
   {
     id: 'cebu-island-hopping',
@@ -7360,7 +7369,7 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
-  
+
   // Singapore Activities
   {
     id: 'gardens-by-the-bay-night',
@@ -7470,7 +7479,7 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
-  
+
   // Penang Activities
   {
     id: 'georgetown-street-art',
@@ -7583,7 +7592,7 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
-  
+
   // Kuala Lumpur Activities
   {
     id: 'batu-caves-tour',
@@ -7696,7 +7705,7 @@ const LANDMARKS: Landmark[] = [
       }
     }
   },
-  
+
   // Phuket Activities
   {
     id: 'phi-phi-island-tour',
@@ -7812,19 +7821,44 @@ const LANDMARKS: Landmark[] = [
 ];
 
 export class MemStorage implements IStorage {
+  private usersMap: Map<string, User> = new Map();
+  private userIdentitiesMap: Map<string, UserIdentity> = new Map();
+  private nextUserId: number = 1;
+  private nextIdentityId: number = 1;
   async getCities(): Promise<City[]> {
-    return CITIES;
+    const hardcodedIds = CITIES.map(c => c.id);
+    try {
+      let dbCities: City[] = [];
+      if (hardcodedIds.length > 0) {
+        dbCities = await db.select().from(citiesTable).where(notInArray(citiesTable.id, hardcodedIds)) as City[];
+      } else {
+        dbCities = await db.select().from(citiesTable) as City[];
+      }
+      return [...CITIES, ...dbCities];
+    } catch (error) {
+      console.error('Error fetching cities from DB:', error);
+      return CITIES;
+    }
   }
 
   async getCity(id: string): Promise<City | undefined> {
-    return CITIES.find(city => city.id === id);
+    const found = CITIES.find(city => city.id === id);
+    if (found) return found;
+
+    try {
+      const [dbCity] = await db.select().from(citiesTable).where(eq(citiesTable.id, id));
+      return dbCity as City;
+    } catch (error) {
+      console.error(`Error fetching city ${id} from DB:`, error);
+      return undefined;
+    }
   }
 
   async getLandmarks(cityId?: string): Promise<Landmark[]> {
     // Get hardcoded landmarks and restaurants
     const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
     const hardcodedIds = hardcodedLandmarks.map(l => l.id);
-    
+
     // Get additional landmarks from database (ones not in hardcoded data)
     try {
       let dbLandmarks: Landmark[] = [];
@@ -7833,10 +7867,10 @@ export class MemStorage implements IStorage {
       } else {
         dbLandmarks = await db.select().from(landmarksTable) as Landmark[];
       }
-      
+
       // Combine both sources
       const allLandmarks = [...hardcodedLandmarks, ...dbLandmarks];
-      
+
       if (cityId) {
         return allLandmarks.filter(landmark => landmark.cityId === cityId);
       }
@@ -7855,7 +7889,7 @@ export class MemStorage implements IStorage {
     const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
     const found = hardcodedLandmarks.find(landmark => landmark.id === id);
     if (found) return found;
-    
+
     // If not found, check database
     try {
       const [dbLandmark] = await db.select().from(landmarksTable).where(eq(landmarksTable.id, id));
@@ -7873,20 +7907,20 @@ export class MemStorage implements IStorage {
       .values({ landmarkId, sessionId })
       .onConflictDoNothing()
       .returning();
-    
+
     // If no row returned (duplicate), fetch the existing one
     if (!visited) {
-      const conditions = sessionId 
+      const conditions = sessionId
         ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId))
         : eq(visitedLandmarks.landmarkId, landmarkId);
-      
+
       const [existing] = await db
         .select()
         .from(visitedLandmarks)
         .where(conditions!);
       return existing;
     }
-    
+
     return visited;
   }
 
@@ -7904,12 +7938,12 @@ export class MemStorage implements IStorage {
     const conditions = sessionId
       ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId))
       : eq(visitedLandmarks.landmarkId, landmarkId);
-    
+
     const results = await db
       .select()
       .from(visitedLandmarks)
       .where(conditions!);
-    
+
     return results.length > 0;
   }
 
@@ -7921,7 +7955,7 @@ export class MemStorage implements IStorage {
         .where(eq(visitedLandmarks.sessionId, sessionId));
       return result[0]?.count || 0;
     }
-    
+
     const result = await db
       .select({ count: count() })
       .from(visitedLandmarks);
@@ -7943,14 +7977,14 @@ export class MemStorage implements IStorage {
   async getAudioByCity(cityId: string): Promise<LandmarkAudio[]> {
     const landmarks = await this.getLandmarks(cityId);
     const landmarkIds = landmarks.map(l => l.id);
-    
+
     if (landmarkIds.length === 0) return [];
-    
+
     const audioList = await db
       .select()
       .from(landmarkAudioTable)
       .where(sql`${landmarkAudioTable.landmarkId} = ANY(${landmarkIds})`);
-    
+
     return audioList;
   }
 
@@ -7984,57 +8018,164 @@ export class MemStorage implements IStorage {
 
   // User methods
   async getUserById(id: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user;
+    if (!process.env.DATABASE_URL) {
+      return Array.from(this.usersMap.values()).find(u => u.id === id);
+    }
+    try {
+      const [user] = await db.select().from(users).where(eq(users.id, id));
+      return user;
+    } catch (e) {
+      console.warn("[Storage] DB access failed, falling back to memory for getUserById");
+      return Array.from(this.usersMap.values()).find(u => u.id === id);
+    }
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.email, email));
-    return user;
+    if (!process.env.DATABASE_URL) {
+      return Array.from(this.usersMap.values()).find(u => u.email === email);
+    }
+    try {
+      const [user] = await db.select().from(users).where(eq(users.email, email));
+      return user;
+    } catch (e) {
+      console.warn("[Storage] DB access failed, falling back to memory for getUserByEmail");
+      return Array.from(this.usersMap.values()).find(u => u.email === email);
+    }
   }
 
   async createUser(user: InsertUser): Promise<User> {
-    const [created] = await db.insert(users).values(user).returning();
-    return created;
+    if (!process.env.DATABASE_URL) {
+      console.warn("[Storage] No DATABASE_URL, using memory for createUser");
+      const id = String(this.nextUserId++);
+      const newUser: User = {
+        ...user,
+        id,
+        role: user.role || "user",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        email: user.email || null,
+        displayName: user.displayName || null,
+        avatar: user.avatar || null,
+        locale: user.locale || null,
+        lastLoginAt: user.lastLoginAt || null
+      };
+      this.usersMap.set(id, newUser);
+      return newUser;
+    }
+    try {
+      const [created] = await db.insert(users).values(user).returning();
+      return created;
+    } catch (e) {
+      console.warn("[Storage] DB access failed, falling back to memory for createUser");
+      const id = String(this.nextUserId++);
+      const newUser: User = {
+        ...user,
+        id,
+        role: user.role || "user",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        email: user.email || null,
+        displayName: user.displayName || null,
+        avatar: user.avatar || null,
+        locale: user.locale || null,
+        lastLoginAt: user.lastLoginAt || null
+      };
+      this.usersMap.set(id, newUser);
+      return newUser;
+    }
   }
 
   async updateUser(id: string, updates: Partial<InsertUser>): Promise<User | undefined> {
-    const [updated] = await db
-      .update(users)
-      .set({ ...updates, updatedAt: new Date() })
-      .where(eq(users.id, id))
-      .returning();
-    return updated;
+    try {
+      const [updated] = await db
+        .update(users)
+        .set({ ...updates, updatedAt: new Date() })
+        .where(eq(users.id, id))
+        .returning();
+      return updated;
+    } catch (e) {
+      console.warn("[Storage] DB access failed, falling back to memory for updateUser");
+      const user = this.usersMap.get(id);
+      if (user) {
+        const updatedUser = { ...user, ...updates, updatedAt: new Date() };
+        this.usersMap.set(id, updatedUser);
+        return updatedUser;
+      }
+      return undefined;
+    }
   }
 
   // User Identity methods
   async getUserIdentity(provider: string, providerUserId: string): Promise<UserIdentity | undefined> {
-    const [identity] = await db
-      .select()
-      .from(userIdentities)
-      .where(and(
-        eq(userIdentities.provider, provider),
-        eq(userIdentities.providerUserId, providerUserId)
-      ));
-    return identity;
+    try {
+      const [identity] = await db
+        .select()
+        .from(userIdentities)
+        .where(and(
+          eq(userIdentities.provider, provider),
+          eq(userIdentities.providerUserId, providerUserId)
+        ));
+      return identity;
+    } catch (e) {
+      console.warn("[Storage] DB access failed, falling back to memory for getUserIdentity");
+      return Array.from(this.userIdentitiesMap.values()).find(
+        i => i.provider === provider && i.providerUserId === providerUserId
+      );
+    }
   }
 
   async getUserIdentitiesByUserId(userId: string): Promise<UserIdentity[]> {
-    return db.select().from(userIdentities).where(eq(userIdentities.userId, userId));
+    try {
+      return await db.select().from(userIdentities).where(eq(userIdentities.userId, userId));
+    } catch (e) {
+      console.warn("[Storage] DB access failed, falling back to memory for getUserIdentitiesByUserId");
+      return Array.from(this.userIdentitiesMap.values()).filter(i => i.userId === userId);
+    }
   }
 
   async createUserIdentity(identity: InsertUserIdentity): Promise<UserIdentity> {
-    const [created] = await db.insert(userIdentities).values(identity).returning();
-    return created;
+    try {
+      const [created] = await db.insert(userIdentities).values(identity).returning();
+      return created;
+    } catch (e) {
+      console.warn("[Storage] DB access failed, falling back to memory for createUserIdentity");
+      const id = String(this.nextIdentityId++);
+      const newIdentity: UserIdentity = {
+        ...identity,
+        id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        email: identity.email || null,
+        displayName: identity.displayName || null,
+        avatar: identity.avatar || null,
+        rawProfile: identity.rawProfile || null,
+        accessToken: identity.accessToken || null,
+        refreshToken: identity.refreshToken || null,
+        tokenExpiresAt: identity.tokenExpiresAt || null
+      };
+      this.userIdentitiesMap.set(id, newIdentity);
+      return newIdentity;
+    }
   }
 
   async updateUserIdentity(id: string, updates: Partial<InsertUserIdentity>): Promise<UserIdentity | undefined> {
-    const [updated] = await db
-      .update(userIdentities)
-      .set({ ...updates, updatedAt: new Date() })
-      .where(eq(userIdentities.id, id))
-      .returning();
-    return updated;
+    try {
+      const [updated] = await db
+        .update(userIdentities)
+        .set({ ...updates, updatedAt: new Date() })
+        .where(eq(userIdentities.id, id))
+        .returning();
+      return updated;
+    } catch (e) {
+      console.warn("[Storage] DB access failed, falling back to memory for updateUserIdentity");
+      const identity = this.userIdentitiesMap.get(id);
+      if (identity) {
+        const updatedIdentity = { ...identity, ...updates, updatedAt: new Date() };
+        this.userIdentitiesMap.set(id, updatedIdentity);
+        return updatedIdentity;
+      }
+      return undefined;
+    }
   }
 
   async findOrCreateUserByIdentity(
@@ -8044,7 +8185,7 @@ export class MemStorage implements IStorage {
   ): Promise<User> {
     // Check if identity exists
     const existingIdentity = await this.getUserIdentity(provider, providerUserId);
-    
+
     if (existingIdentity) {
       // Update identity with new profile data
       await this.updateUserIdentity(existingIdentity.id, {
@@ -8053,7 +8194,7 @@ export class MemStorage implements IStorage {
         avatar: profileData.avatar,
         rawProfile: profileData.rawProfile
       });
-      
+
       // Update user's last login
       const user = await this.getUserById(existingIdentity.userId);
       if (user) {
@@ -8062,13 +8203,13 @@ export class MemStorage implements IStorage {
       }
       throw new Error('User not found for existing identity');
     }
-    
+
     // Check if user with same email exists (for account linking)
     let user: User | undefined;
     if (profileData.email) {
       user = await this.getUserByEmail(profileData.email);
     }
-    
+
     // Create new user if not found
     if (!user) {
       user = await this.createUser({
@@ -8078,7 +8219,7 @@ export class MemStorage implements IStorage {
         lastLoginAt: new Date()
       });
     }
-    
+
     // Create identity link
     await this.createUserIdentity({
       userId: user.id,
@@ -8089,7 +8230,7 @@ export class MemStorage implements IStorage {
       avatar: profileData.avatar,
       rawProfile: profileData.rawProfile
     });
-    
+
     return user;
   }
 
@@ -8101,7 +8242,7 @@ export class MemStorage implements IStorage {
 
   async getSavedRoutes(userId?: string, sessionId?: string, countryCode?: string): Promise<SavedRoute[]> {
     let conditions = [];
-    
+
     if (userId) {
       conditions.push(eq(savedRoutes.userId, userId));
     }
@@ -8111,25 +8252,25 @@ export class MemStorage implements IStorage {
     if (countryCode) {
       conditions.push(eq(savedRoutes.countryCode, countryCode));
     }
-    
+
     if (conditions.length === 0) {
       return db.select().from(savedRoutes).orderBy(savedRoutes.createdAt);
     }
-    
+
     // Use OR for userId/sessionId, AND for countryCode
     if (userId && sessionId && !countryCode) {
       return db.select().from(savedRoutes)
         .where(sql`(${savedRoutes.userId} = ${userId} OR ${savedRoutes.sessionId} = ${sessionId})`)
         .orderBy(savedRoutes.createdAt);
     }
-    
+
     if (countryCode && (userId || sessionId)) {
       const userCondition = userId ? eq(savedRoutes.userId, userId) : eq(savedRoutes.sessionId, sessionId || '');
       return db.select().from(savedRoutes)
         .where(and(userCondition, eq(savedRoutes.countryCode, countryCode)))
         .orderBy(savedRoutes.createdAt);
     }
-    
+
     return db.select().from(savedRoutes)
       .where(conditions[0])
       .orderBy(savedRoutes.createdAt);
@@ -8167,6 +8308,50 @@ export class MemStorage implements IStorage {
 
   async deleteRoutePhoto(id: string): Promise<void> {
     await db.delete(routePhotos).where(eq(routePhotos.id, id));
+  }
+
+  /**
+   * [AI DB 총괄 특강: 어드민 사용자 목록 조회]
+   * "회원 관리의 생명은 최신성입니다. 방금 가입한 분들이 맨 위에 나와야 하죠."
+   * - orderBy(desc(users.createdAt)): 가입일 기준 내림차순 정렬의 정석입니다.
+   * - catch(error): DB가 잠시 쉬고 있다면(연결 오류), 제가 미리 메모리에 저장해둔 지도로 안내합니다.
+   */
+  async getAllUsers(): Promise<User[]> {
+    try {
+      return await db.select().from(users).orderBy(desc(users.createdAt));
+    } catch (error) {
+      console.warn('[AI DB Manager] DB fetch failed for all users, falling back to memory:', error);
+      return Array.from(this.usersMap.values()).sort((a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    }
+  }
+
+  /**
+   * [AI DB 총괄 특강: 마케팅 콘텐츠 통합 조회]
+   * "데이터는 엮어야 제맛입니다. 콘텐츠만 보여주면 어디에 쓰는지 모르니까요."
+   * - innerJoin: 명소(Landmarks) 테이블과 결합하여 '장소 이름'을 함께 가져옵니다.
+   * - AI DB Manager's Tip: 복잡한 쿼리는 성능을 위해 인덱스 설계를 병행해야 합니다.
+   */
+  async getMarketingContents(): Promise<any[]> {
+    try {
+      // [적요] 마케팅 테이블과 명소 테이블을 결합하여 가독성 높은 리스트를 만듭니다.
+      const { marketingContents: marketingTable, landmarks: landmarksTable } = await import("@shared/schema");
+      return await db
+        .select({
+          id: marketingTable.id,
+          landmarkId: marketingTable.landmarkId,
+          landmarkName: landmarksTable.name,
+          content: marketingTable.content,
+          updatedAt: marketingTable.updatedAt,
+        })
+        .from(marketingTable)
+        .innerJoin(landmarksTable, eq(marketingTable.landmarkId, landmarksTable.id))
+        .orderBy(desc(marketingTable.updatedAt));
+    } catch (error) {
+      console.warn('[AI DB Manager] DB fetch failed for marketing contents, falling back to empty list:', error);
+      return [];
+    }
   }
 }
 

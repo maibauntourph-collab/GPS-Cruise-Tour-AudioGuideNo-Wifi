@@ -1,3 +1,7 @@
+// [학습 가이드: 데이터 모델링의 두 기둥]
+// 1. Zod (z): 프론트엔드와 백엔드 사이의 데이터 '유효성 검사'를 담당합니다.
+// 2. Drizzle (pgTable...): 실제 데이터베이스(PostgreSQL)의 '테이블 구조'를 정의합니다.
+// 이 둘을 하나로 합쳐서(createInsertSchema) 관리하면 코드 중복 없이 안전한 코딩이 가능해요!
 import { z } from "zod";
 import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, json, unique } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
@@ -27,7 +31,8 @@ export const transportOptionSchema = z.object({
 
 export type TransportOption = z.infer<typeof transportOptionSchema>;
 
-// Cruise port schema for shore excursions
+// [학습 가이드: 도시 및 크루즈 항구 스키마]
+// 오프라인 모드에서도 동작해야 하므로 좌표(lat, lng)와 추천 코스 정보가 중요합니다.
 export const cruisePortSchema = z.object({
   portName: z.string(),
   distanceFromCity: z.string().optional(), // e.g., "80km from Rome"
@@ -142,7 +147,12 @@ export type Waypoint = z.infer<typeof waypointSchema>;
 
 // Drizzle ORM Tables for Database
 
-// Cities table
+/**
+ * [연구소장 노트: 도시 데이터 설계]
+ * 서비스의 기본 단위인 '도시' 정보입니다. 
+ * GPS 기반 서비스이므로 위도(lat)와 경도(lng)가 필수이며, 
+ * 크루즈 승객을 위해 항구 정보(cruisePort)를 JSON 형태로 담고 있습니다.
+ */
 export const cities = pgTable("cities", {
   id: varchar("id").primaryKey(),
   name: varchar("name").notNull(),
@@ -155,7 +165,13 @@ export const cities = pgTable("cities", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
-// Landmarks table (includes landmarks, activities, restaurants, gift shops)
+/**
+ * [연구소장 노트: 지능형 랜드마크(명소) 설계]
+ * 단순한 명소가 아니라, 식당, 쇼핑몰, 액티비티를 모두 포함하는 포괄적인 장소 데이터입니다.
+ * - radius: GPS 인식 범위를 미터(m) 단위로 설정합니다. 이 범위 안에 들어오면 오디오 가이드가 나옵니다.
+ * - narration: AI가 생성한 생생한 이야기 본문입니다.
+ * - translations: 다국어 지원을 위해 번역 데이터를 JSONB 형식으로 통째로 보관합니다.
+ */
 export const landmarks = pgTable("landmarks", {
   id: varchar("id").primaryKey(),
   cityId: varchar("city_id").notNull(),
@@ -172,7 +188,8 @@ export const landmarks = pgTable("landmarks", {
   yearBuilt: varchar("year_built"),
   architect: varchar("architect"),
   translations: json("translations"), // JSONB for all language translations
-  // Restaurant-specific fields
+  // [교육용 주석] 식당/카페 전용 필드들입니다. 
+  // 장소의 유형에 따라 일부 필드만 사용될 수도 있는 '유연한 설계' 패턴입니다.
   openingHours: varchar("opening_hours"),
   priceRange: varchar("price_range"),
   cuisine: varchar("cuisine"),
@@ -222,7 +239,12 @@ export const landmarkAudio = pgTable("landmark_audio", {
   uniqueLandmarkLanguage: unique().on(table.landmarkId, table.language),
 }));
 
-// Users table for authentication
+/**
+ * [연구소장 노트: 통합 사용자(Users) 개체 설계]
+ * 서비스 내의 모든 인간 행위자(관리자, 크리에이터, 가이드, 일반 사용자)의 공통 정보입니다.
+ * - role: 권한 시스템의 핵심입니다. ('admin', 'guide', 'creator', 'user')
+ * - locale: 다국어 서비스이므로 사용자가 선호하는 언어 설정이 중요합니다.
+ */
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   email: varchar("email"), // May be null for some providers
@@ -235,7 +257,10 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
-// User Social Identities table - links SNS accounts to users
+/**
+ * [연구소장 노트: 소셜 Identity 연동 설계]
+ * 한 명의 사용자(User)가 여러 소셜 계정(구글, 카카오 등)을 연결할 수 있는 구조입니다.
+ */
 export const userIdentities = pgTable("user_identities", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),

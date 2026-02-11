@@ -3,11 +3,20 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, History, Route, Clock, Navigation, Loader2 } from 'lucide-react';
+import { MapPin, History, Route, Clock, Navigation, Loader2, Sparkles, Shield, User, Store } from 'lucide-react';
 import InstallPrompt from '@/components/InstallPrompt';
 import { getSavedTourData, SavedTourData } from '@/components/StartupDialog';
 import { t } from '@/lib/translations';
 
+/**
+ * [학습 가이드: 역할 및 시작 모드 선택 페이지]
+ * 앱이 처음 실행될 때 사용자가 어떤 방식으로 여정을 시작할지 결정하는 '관문'입니다.
+ * 
+ * 학습 포인트:
+ * 1. navigator.geolocation: 브라우저의 전역 객체를 이용해 GPS 사용 가능 여부를 미리 체크합니다.
+ * 2. localStorage: 사용자가 선택한 시작 언어와 모드를 브라우저에 저장하여 다음 접속 시 기억하게 합니다.
+ * 3. 기획적 유연성: 'GPS 기반', '수동 복원', '둘러보기' 등 다양한 진입 경로를 제공하는 설계입니다.
+ */
 export default function RoleSelection() {
   const [, setLocation] = useLocation();
   const [savedTourData, setSavedTourData] = useState<SavedTourData | null>(null);
@@ -19,9 +28,12 @@ export default function RoleSelection() {
   });
 
   useEffect(() => {
+    // [적요: 이전 데이터 복원] 기존에 진행 중이던 투어 데이터가 있는지 확인합니다.
     const saved = getSavedTourData();
     setSavedTourData(saved);
 
+    // [적요: GPS 가용성 체크] 
+    // 사용자의 기기가 현재 GPS 신호를 줄 수 있는지 확인하여 UI(버튼 등)를 제어합니다.
     if ('geolocation' in navigator) {
       setIsGpsLoading(true);
       navigator.geolocation.getCurrentPosition(
@@ -188,6 +200,49 @@ export default function RoleSelection() {
             >
               {t('selectCityManually', selectedLanguage)}
             </Button>
+          </div>
+
+          {/* 개발자용 빠른 역할 전환 섹션 */}
+          <div className="mt-12 pt-8 border-t border-primary/10">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+                Avengers Dev Quick Login
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <a
+                href="/api/auth/dev-login/shop_owner"
+                className="flex items-center gap-2 p-3 rounded-lg bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 dark:hover:bg-amber-900/20 transition-colors group"
+              >
+                <Store className="w-4 h-4 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs font-semibold text-amber-900 dark:text-amber-100">코다리부장</span>
+              </a>
+              <a
+                href="/api/auth/dev-login/admin"
+                className="flex items-center gap-2 p-3 rounded-lg bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-200 dark:border-indigo-800/50 hover:bg-indigo-100 dark:hover:bg-indigo-900/20 transition-colors group"
+              >
+                <Shield className="w-4 h-4 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs font-semibold text-indigo-900 dark:text-indigo-100">마스터어드민</span>
+              </a>
+              <a
+                href="/api/auth/dev-login/creator"
+                className="flex items-center gap-2 p-3 rounded-lg bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-800/50 hover:bg-purple-100 dark:hover:bg-purple-900/20 transition-colors group"
+              >
+                <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs font-semibold text-purple-900 dark:text-purple-100">크리에이터</span>
+              </a>
+              <div
+                className="flex items-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-gray-900/10 border border-gray-200 dark:border-gray-800/50 opacity-60 cursor-not-allowed group"
+                title="문지기 부장이 카카오톡, 왓츠앱, 토스 등 통합 로그인 연동을 준비 중입니다!"
+              >
+                <div className="w-4 h-4 flex items-center justify-center text-gray-500">💬</div>
+                <span className="text-[10px] font-medium text-gray-500">통합로그인(준비중)</span>
+              </div>
+            </div>
+            <p className="text-[10px] text-center text-gray-400 mt-4 italic">
+              "문지기 부장: 카카오, 왓츠앱, X, 구글, 네이버, 토스 등 모든 문을 열기 위해 공사 중입니다!"
+            </p>
           </div>
         </div>
       </div>

@@ -1,7 +1,11 @@
+// [학습 가이드: 외부 라이브러리 및 모듈 임포트]
+// Express: 웹 서버 프레임워크
+// Drizzle-ORM: 데이터베이스 SQL 쿼리를 자바스크립트/타입스크립트 객체처럼 다루게 해주는 도구
+// shared/schema: DB 테이블 정의 및 데이터 검증(Zod) 스키마를 프로젝트 전반에서 공유
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertVisitedLandmarkSchema } from "@shared/schema";
+import { insertVisitedLandmarkSchema, Landmark } from "@shared/schema";
 import { recommendTourItinerary } from "./lib/gemini";
 import { generateAndSaveClovaTTS, CLOVA_VOICES, DEFAULT_CLOVA_VOICE_BY_LANGUAGE, ClovaVoiceId } from "./lib/clova";
 import { db } from "./db";
@@ -16,6 +20,7 @@ import express from "express";
 import Stripe from "stripe";
 import { automationService } from "./services/automationService";
 import { settlementService } from "./services/settlementService";
+import { requireRole } from "./auth";
 
 /**
  * [회계부장 노트: 금융 보안의 제1원칙]
@@ -28,6 +33,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_51P...", {
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // [적요: 도시 목록 조회 API]
+  // 데이터베이스에 저장된 모든 도시 정보를 배열로 반환합니다.
   app.get("/api/cities", async (req, res) => {
     try {
       const cities = await storage.getCities();
@@ -49,6 +56,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // [적요: 특정 도시의 랜드마크(명소) 목록 조회 API]
+  // 쿼리 파라미터(?cityId=...)가 있으면 해당 도시의 명소만 필터링합니다.
   app.get("/api/landmarks", async (req, res) => {
     try {
       const cityId = req.query.cityId as string | undefined;
@@ -108,6 +117,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // [적요: 특정 장소 방문 여부 확인 API]
+  // 특정 랜드마크를 방문했는지 세션 ID를 기준으로 확인합니다.
   app.get("/api/visited/:landmarkId", async (req, res) => {
     try {
       const sessionId = req.query.sessionId as string | undefined;
@@ -118,7 +129,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Offline package API - download city data for offline use
+  // [학습 가이드: 오프라인 패키지 API]
+  // 이 시스템의 핵심 기능 중 하나인 '인터넷 없는 GPS 안내'를 위해
+  // 특정 도시의 모든 명소와 버전 정보를 하나의 JSON 패키지로 만들어 다운로드하게 해줍니다.
   app.get("/api/offline-package/:cityId", async (req, res) => {
     try {
       const { cityId } = req.params;
@@ -177,14 +190,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         downloadedAt: new Date().toISOString()
       };
 
-      // Generate ETag based on content hash
+      // [교육용 주석: 콘텐츠의 고유 해시(ETag) 생성]
+      // 데이터 버전, 도시 ID, 랜드마크 개수 등을 조합하여 데이터 부피를 나타내는 해시를 만듭니다.
       const contentHash = crypto
         .createHash('md5')
         .update(JSON.stringify({ version, cityId, count: cityLandmarks.length }))
         .digest('hex');
       const etag = `"${contentHash}"`;
 
-      // Check if client has latest version
+      // [교육용 주석: ETag를 이용한 캐시 제어]
+      // 서버 부하를 줄이기 위해, 데이터 내용이 바뀌지 않았다면 304 Not Modified를 반환하여
+      // 클라이언트가 이미 가지고 있는 데이터를 그대로 쓰게 합니다.
       if (clientEtag === etag) {
         return res.status(304).end();
       }
@@ -193,7 +209,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.setHeader('Cache-Control', 'private, max-age=3600');
       res.json(packageData);
     } catch (error) {
-      console.error('Offline package error:', error);
+      console.error("[Offline Package Error]", error);
       res.status(500).json({ error: "Failed to generate offline package" });
     }
   });
@@ -224,9 +240,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // ===============================
-  // Admin API Routes
-  // ===============================
+  // Admin API Routes protected by admin role
+  app.use("/api/admin", requireRole("admin"));
 
   // Admin: Get all cities from database
   app.get("/api/admin/cities", async (req, res) => {
@@ -234,8 +249,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const allCities = await db.select().from(cities).orderBy(cities.name);
       res.json(allCities);
     } catch (error) {
-      console.error('Admin get cities error:', error);
-      res.status(500).json({ error: "Failed to fetch cities" });
+      console.warn('[Admin] DB fetch failed for cities, falling back to storage:', error);
+      try {
+        const fallbackCities = await storage.getCities();
+        res.json(fallbackCities);
+      } catch (storageError) {
+        res.status(500).json({ error: "Failed to fetch cities" });
+      }
     }
   });
 
@@ -330,8 +350,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const allLandmarks = await db.select().from(landmarks).orderBy(landmarks.name);
       res.json(allLandmarks);
     } catch (error) {
-      console.error('Admin get landmarks error:', error);
-      res.status(500).json({ error: "Failed to fetch landmarks" });
+      console.warn('[Admin] DB fetch failed for landmarks, falling back to storage:', error);
+      try {
+        const cityId = req.query.cityId as string | undefined;
+        const fallbackLandmarks = await storage.getLandmarks(cityId);
+        res.json(fallbackLandmarks);
+      } catch (storageError) {
+        res.status(500).json({ error: "Failed to fetch landmarks" });
+      }
     }
   });
 
@@ -379,7 +405,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
        * .catch()를 붙인 이유는, 마케팅 문구 생성에 실패하더라도 
        * 명소 등록 자체가 취소되어서는 안 되기 때문이에요 (비동기 처리의 핵심!).
        */
-      automationService.generatePromotionContent(newLandmark).catch(err => {
+      automationService.generatePromotionContent(newLandmark as unknown as Landmark).catch(err => {
         console.error("[Dr.'s Engine] 홍보 엔진 작동 중 작은 실수가 있었나봐요! 하지만 명소 등록은 성공입니다:", err);
       });
 
@@ -460,8 +486,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin: Get statistics
   app.get("/api/admin/stats", async (req, res) => {
     try {
-      const allCities = await db.select().from(cities);
-      const allLandmarks = await db.select().from(landmarks);
+      let allCities, allLandmarks;
+      try {
+        allCities = await db.select().from(cities);
+        allLandmarks = await db.select().from(landmarks);
+      } catch (dbError) {
+        console.warn('[Admin] DB fetch failed for stats, falling back to storage:', dbError);
+        allCities = await storage.getCities();
+        allLandmarks = await storage.getLandmarks();
+      }
 
       // Group by category
       const categories: Record<string, number> = {};
@@ -478,6 +511,124 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Admin stats error:', error);
       res.status(500).json({ error: "Failed to fetch stats" });
+    }
+  });
+
+  // Admin: AI Discover Landmarks
+  // [학습 가이드: AI 장소 탐사(Discover) API]
+  // 특정 도시 ID를 받아서 OpenAI(GPT)에게 그 도시의 명소와 생생한 이야기를 요청합니다.
+  app.get("/api/admin/ai/discover", async (req, res) => {
+    try {
+      const { cityId } = req.query;
+      if (!cityId || typeof cityId !== 'string') {
+        return res.status(400).json({ error: "도시 ID(cityId)가 필요합니다." });
+      }
+
+      // 1. [쿼리 마스터/AI DB 총괄] 도시 정보 조회
+      let city;
+      try {
+        const [dbCity] = await db.select().from(cities).where(eq(cities.id, cityId));
+        city = dbCity;
+      } catch (dbError) {
+        console.warn(`[AI DB Manager] DB 연결 불안정, storage에서 도시 정보를 찾습니다: ${cityId}`);
+        city = await storage.getCity(cityId);
+      }
+
+      if (!city) {
+        return res.status(404).json({ error: "해당 도시를 찾을 수 없습니다." });
+      }
+
+      // 2. [오토메이션 박사] AI 자동 탐사 실행
+      // AI는 좌표 정보와 함께 300자 이상의 풍부한 역사/문화 이야기를 생성합니다.
+      console.log(`[Automation Doctor] Discovering landmarks for ${city.name}...`);
+      const discoveredLandmarks = await automationService.discoverLandmarks(city.name);
+
+      // 3. [AI DB 총괄] 중복 검사 로직 및 데이터 필터링
+      let existingLandmarks;
+      try {
+        existingLandmarks = await db.select().from(landmarks).where(eq(landmarks.cityId, cityId));
+      } catch (dbError) {
+        console.warn(`[AI DB Manager] DB 연결 불안정, storage에서 기존 명소를 조회합니다.`);
+        existingLandmarks = await storage.getLandmarks(cityId);
+      }
+
+      const result = discoveredLandmarks.map((discovered: any) => {
+        const duplicate = existingLandmarks.find(existing =>
+          existing.name.toLowerCase().includes(discovered.name.toLowerCase()) ||
+          discovered.name.toLowerCase().includes(existing.name.toLowerCase())
+        );
+
+        return {
+          ...discovered,
+          isDuplicate: !!duplicate,
+          existingLandmark: duplicate || null
+        };
+      });
+
+      res.json(result);
+    } catch (error) {
+      console.error('[Automation Doctor] AI 탐사 중 오류:', error);
+      res.status(500).json({ error: "AI 탐사 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요." });
+    }
+  });
+
+  // [학습 가이드: AI 생성 데이터 실제 반영(Apply) API]
+  // 사용자가 AI 추천 목록 중 선택한 항목들을 실제 DB에 저장('확정')하는 단계입니다.
+  app.post("/api/admin/ai/apply", async (req, res) => {
+    try {
+      const { cityId, selectedLandmarks } = req.body;
+      if (!cityId || !selectedLandmarks || !Array.isArray(selectedLandmarks)) {
+        return res.status(400).json({ error: "Invalid request data" });
+      }
+
+      const results = [];
+      for (const data of selectedLandmarks) {
+        // Generate a unique ID if not provided or to avoid conflicts
+        const id = data.id || `${cityId}_${data.name.toLowerCase().replace(/\s+/g, '_')}_${Date.now()}`;
+
+        const [upserted] = await db.insert(landmarks).values({
+          id,
+          cityId,
+          name: data.name,
+          lat: data.lat,
+          lng: data.lng,
+          radius: 50,
+          narration: data.narration,
+          description: data.description || null,
+          category: data.category || null,
+          detailedDescription: data.detailedDescription || null,
+          historicalInfo: data.historicalInfo || null
+        })
+          .onConflictDoUpdate({
+            target: landmarks.id,
+            set: {
+              name: data.name,
+              lat: data.lat,
+              lng: data.lng,
+              narration: data.narration,
+              description: data.description || null,
+              category: data.category || null,
+              detailedDescription: data.detailedDescription || null,
+              historicalInfo: data.historicalInfo || null,
+              updatedAt: new Date()
+            }
+          })
+          .returning();
+
+        // 3. [교육용 주석: 리턴된 데이터 저장]
+        results.push(upserted);
+
+        // 4. [비동기 백그라운드 작업] 마케팅 문구(마케터 쏭) 생성을 별도로 트리거합니다.
+        // await를 쓰지 않음으로써 사용자가 홍보 문구 생성을 기다리지 않게 처리했습니다.
+        automationService.generatePromotionContent(upserted as any).catch(err => {
+          console.error("[Admin AI] Background marketing generation failed:", err);
+        });
+      }
+
+      res.json({ success: true, count: results.length, data: results });
+    } catch (error) {
+      console.error('Admin AI apply error:', error);
+      res.status(500).json({ error: "데이터 적용 중 오류가 발생했습니다." });
     }
   });
 
@@ -2078,8 +2229,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       });
     } catch (error) {
-      console.error('Admin get users error:', error);
-      res.status(500).json({ error: "Failed to fetch users" });
+      console.warn('[Admin] DB fetch failed for users, falling back to storage:', error);
+      try {
+        const allUsers = await storage.getAllUsers();
+        // Simple search/role filter on fallback data
+        let filtered = allUsers;
+        const search = (req.query.search as string) || '';
+        const role = req.query.role as string;
+        if (search) {
+          const s = search.toLowerCase();
+          filtered = filtered.filter(u => u.email?.toLowerCase().includes(s) || u.displayName?.toLowerCase().includes(s));
+        }
+        if (role && role !== 'all') {
+          filtered = filtered.filter(u => u.role === role);
+        }
+        res.json({
+          users: filtered,
+          pagination: { page: 1, limit: filtered.length, total: filtered.length, pages: 1 }
+        });
+      } catch (storageError) {
+        res.status(500).json({ error: "Failed to fetch users" });
+      }
     }
   });
 
@@ -2116,8 +2286,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
         recentSignups: Number(recentSignups[0]?.count || 0)
       });
     } catch (error) {
-      console.error('Admin get user stats error:', error);
-      res.status(500).json({ error: "Failed to fetch user statistics" });
+      console.warn('[Admin] DB fetch failed for user stats, falling back to storage:', error);
+      try {
+        const allUsers = await storage.getAllUsers();
+        const roleDist: Record<string, number> = {};
+        allUsers.forEach(u => {
+          const r = u.role || 'user';
+          roleDist[r] = (roleDist[r] || 0) + 1;
+        });
+        res.json({
+          total: allUsers.length,
+          roles: roleDist,
+          providers: {}, // Hard to get providers without identity join in fallback
+          recentSignups: 0
+        });
+      } catch (storageError) {
+        res.status(500).json({ error: "Failed to fetch user stats" });
+      }
     }
   });
 
@@ -2397,8 +2582,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.json(results);
     } catch (error) {
-      console.error("[마케팅 엔진] 콘텐츠 조회 중 오류 발생:", error);
-      res.status(500).json({ error: "Failed to fetch marketing contents" });
+      console.warn('[Admin] DB fetch failed for marketing contents, falling back to storage:', error);
+      try {
+        const fallbackContents = await storage.getMarketingContents();
+        res.json(fallbackContents);
+      } catch (storageError) {
+        res.status(500).json({ error: "Failed to fetch marketing contents" });
+      }
     }
   });
 
