@@ -422,6 +422,7 @@ export const settlements = pgTable("settlements", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   userId: varchar("user_id").notNull().references(() => users.id),
   amount: doublePrecision("amount").notNull(),
+  period: varchar("period", { length: 20 }).notNull(), // Added period column (e.g. "2024-02")
   status: varchar("status", { length: 20 }).notNull().default("pending"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });

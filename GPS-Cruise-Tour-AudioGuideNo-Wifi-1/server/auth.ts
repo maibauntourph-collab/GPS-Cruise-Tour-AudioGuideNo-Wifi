@@ -2,6 +2,7 @@ import type { Express, Request, Response, NextFunction } from "express";
 import type { Session } from "express-session";
 import { storage } from "./storage";
 import type { User } from "@shared/schema";
+import crypto from "crypto";
 
 // [문지기 부장의 보안 훈수: 통합 로그인 아키텍처]
 // "에헴! 여러분, 로그인은 단순히 문을 여는 게 아닙니다. 
@@ -63,65 +64,74 @@ export function getEnabledProviders(): string[] {
 }
 
 function generateState(): string {
-  return Math.random().toString(36).substring(2) + Date.now().toString(36);
+  return crypto.randomBytes(16).toString("hex");
 }
 
 export function setupAuthRoutes(app: Express) {
-  // [학습 가이드: 개발용 우회 로그인(Dev Bypass) API]
-  // 실제 소셜 로그인(구글 등) 없이도 특정 권한(admin, guide 등)으로 즉시 로그인할 수 있게 해줍니다.
-  // 실제 상용 서비스에서는 보안을 위해 이 라우트를 제거하거나 보호해야 합니다.
-  app.get("/api/auth/dev-login/:role?", async (req, res: Response) => {
-    const role = req.params.role || "admin";
-    console.log(`[Dr.'s Engine] 개발용 ${role} 로그인 요청 감지!`);
+  // [문지기 부장 감사 수정] ⚠️ 개발 전용 로그인 환경 가드 추가
+  // 프로덕션에서는 이 엔드포인트가 완전히 비활성화됩니다.
+  // 기존에는 환경 체크 없이 누구나 admin 등 모든 역할로 로그인 가능했던 치명적 보안 허점이 있었습니다.
+  if (process.env.NODE_ENV === 'production') {
+    app.get("/api/auth/dev-login/:role?", (_req, res: Response) => {
+      res.status(404).json({ error: "[문지기 부장] 프로덕션 환경에서는 개발용 로그인이 허용되지 않습니다." });
+    });
+  } else {
+    // [학습 가이드: 개발용 우회 로그인(Dev Bypass) API]
+    // 실제 소셜 로그인(구글 등) 없이도 특정 권한(admin, guide 등)으로 즉시 로그인할 수 있게 해줍니다.
+    // ⚠️ 이 라우트는 NODE_ENV !== 'production'일 때만 활성화됩니다.
+    app.get("/api/auth/dev-login/:role?", async (req, res: Response) => {
+      const role = req.params.role || "admin";
+      console.log(`[Dr.'s Engine] 개발용 ${role} 로그인 요청 감지!`);
 
-    const authReq = req as unknown as AuthRequest;
-    try {
-      // Find or create a default user for development based on role
-      const providerUserId = `dev-${role}-id`;
-      const displayName = `개발용 ${role.toUpperCase()}`;
+      const authReq = req as unknown as AuthRequest;
+      try {
+        // Find or create a default user for development based on role
+        const providerUserId = `dev-${role}-id`;
+        const displayName = `개발용 ${role.toUpperCase()}`;
 
-      const user = await storage.findOrCreateUserByIdentity(
-        "dev",
-        providerUserId,
-        {
-          email: `${role}@example.com`,
-          displayName: displayName,
-          avatar: undefined,
-          rawProfile: { role }
-        }
-      );
+        const user = await storage.findOrCreateUserByIdentity(
+          "dev",
+          providerUserId,
+          {
+            email: `${role}@example.com`,
+            displayName: displayName,
+            avatar: undefined,
+            rawProfile: { role }
+          }
+        );
 
-      // Ensure the user has the requested role
-      user.role = role;
-      await storage.updateUser(user.id, { role }); // DB에도 반영
+        // Ensure the user has the requested role
+        user.role = role;
+        await storage.updateUser(user.id, { role }); // DB에도 반영
 
-      authReq.session.userId = user.id;
-      authReq.session.user = user;
+        authReq.session.userId = user.id;
+        authReq.session.user = user;
 
-      authReq.session.save((err: Error | null) => {
-        if (err) {
-          console.error("[Auth] 세션 저장 실패:", err);
-          return res.status(500).json({ error: "Session error" });
-        }
+        authReq.session.save((err: Error | null) => {
+          if (err) {
+            console.error("[Auth] 세션 저장 실패:", err);
+            return res.status(500).json({ error: "Session error" });
+          }
 
-        // [학습 가이드: 역할별 자동 리다이렉트]
-        // 로그인 성공 후, 각 사용자의 전용 페이지로 자동으로 보내줍니다.
-        let redirectPath = "/";
-        if (role === "admin") redirectPath = "/admin";
-        else if (role === "creator") redirectPath = "/admin"; // 크리에이터도 어드민 대시보드 사용
-        else if (role === "guide") redirectPath = "/guide"; // 가이드 뷰
-        else if (role === "tour_leader") redirectPath = "/tour-leader"; // 투어 리더 뷰
-        else if (role === "shop_owner") redirectPath = "/admin"; // 코다리부장(상점주)도 어드민 결제/마케팅 확인
+          // [학습 가이드: 역할별 자동 리다이렉트]
+          // 로그인 성공 후, 각 사용자의 전용 페이지로 자동으로 보내줍니다.
+          let redirectPath = "/";
+          if (role === "admin") redirectPath = "/admin";
+          else if (role === "creator") redirectPath = "/admin"; // 크리에이터도 어드민 대시보드 사용
+          else if (role === "guide") redirectPath = "/guide"; // 가이드 뷰
+          else if (role === "tour_leader") redirectPath = "/tour-leader"; // 투어 리더 뷰
+          else if (role === "shop_owner") redirectPath = "/admin"; // 코다리부장(상점주)도 어드민 결제/마케팅 확인
 
-        const personaName = role === "shop_owner" ? "코다리부장" : role.toUpperCase();
-        console.log(`[Auth] ${personaName} 세션 부여 완료! ${redirectPath}로 이동합니다.`);
-        res.redirect(redirectPath);
-      });
-    } catch (error) {
-      console.error("[Auth] 개발용 로그인 실패:", error);
-      res.status(500).json({ error: "Dev login failed" });
-    }
-  });
+          const personaName = role === "shop_owner" ? "코다리부장" : role.toUpperCase();
+          console.log(`[Auth] ${personaName} 세션 부여 완료! ${redirectPath}로 이동합니다.`);
+          res.redirect(redirectPath);
+        });
+      } catch (error) {
+        console.error("[Auth] 개발용 로그인 실패:", error);
+        res.status(500).json({ error: "Dev login failed" });
+      }
+    });
+  } // else 블록 종료 — dev-login만 개발 환경 전용, 아래 라우트들은 전 환경에서 사용
 
   app.get("/api/auth/providers", (_req, res: Response) => {
     res.json({ providers: getEnabledProviders() });

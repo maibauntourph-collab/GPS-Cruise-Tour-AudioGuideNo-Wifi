@@ -314,8 +314,14 @@ export default function Admin() {
   });
 
   const filteredLandmarks = landmarks.filter(l => {
-    const matchesSearch = l.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      l.id.toLowerCase().includes(searchTerm.toLowerCase());
+    const searchLower = searchTerm.toLowerCase();
+    const matchesSearch = l.name.toLowerCase().includes(searchLower) ||
+      l.id.toLowerCase().includes(searchLower);
+
+    // [AI DB Manager FIX] If searching, prioritize the search term and allow global discovery.
+    // If not searching, strictly respect the city filter.
+    if (searchTerm) return matchesSearch;
+
     const matchesCity = selectedCityFilter === 'all' || l.cityId === selectedCityFilter;
     return matchesSearch && matchesCity;
   });
@@ -572,7 +578,13 @@ export default function Admin() {
                 <Input
                   placeholder="Search landmarks..."
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    // [UX Improvement] If user starts searching, implicitly expand to global search
+                    if (e.target.value && selectedCityFilter !== 'all') {
+                      setSelectedCityFilter('all');
+                    }
+                  }}
                   className="pl-9"
                   data-testid="input-search-landmarks"
                 />
@@ -1090,6 +1102,9 @@ function CityFormDialog({ isOpen, onClose, city, onSave, isPending }: CityFormDi
     zoom: 14
   });
 
+  const [isGenerating, setIsGenerating] = useState(false);
+  const { toast } = useToast();
+
   useEffect(() => {
     if (isOpen) {
       if (city) {
@@ -1112,6 +1127,41 @@ function CityFormDialog({ isOpen, onClose, city, onSave, isPending }: CityFormDi
     onSave(formData);
   };
 
+  const handleAutoFill = async () => {
+    if (!formData.id && !formData.name) {
+      toast({ title: "City ID or Name is required for AI Auto Fill", variant: "destructive" });
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const query = formData.id || formData.name;
+      const res = await fetch('/api/admin/generate-city-info', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+
+      if (!res.ok) throw new Error('Failed to generate city info');
+
+      const data = await res.json();
+      setFormData(prev => ({
+        ...prev,
+        name: data.name,
+        country: data.country,
+        lat: data.lat,
+        lng: data.lng,
+        zoom: data.zoom || 14
+      }));
+
+      toast({ title: "AI Auto Fill Completed", description: `Found info for ${data.name}` });
+    } catch (error) {
+      toast({ title: "AI Auto Fill Failed", variant: "destructive" });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md" data-testid="dialog-city-form">
@@ -1121,15 +1171,29 @@ function CityFormDialog({ isOpen, onClose, city, onSave, isPending }: CityFormDi
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="city-id">City ID</Label>
-            <Input
-              id="city-id"
-              value={formData.id}
-              onChange={(e) => setFormData(prev => ({ ...prev, id: e.target.value }))}
-              placeholder="e.g., tokyo"
-              disabled={!!city}
-              required
-              data-testid="input-city-id"
-            />
+            <div className="flex gap-2">
+              <Input
+                id="city-id"
+                value={formData.id}
+                onChange={(e) => setFormData(prev => ({ ...prev, id: e.target.value }))}
+                placeholder="e.g., tokyo"
+                disabled={!!city}
+                required
+                data-testid="input-city-id"
+              />
+              {!city && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleAutoFill}
+                  disabled={isGenerating}
+                  className="whitespace-nowrap"
+                >
+                  {isGenerating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4 mr-2" />}
+                  AI Auto Fill
+                </Button>
+              )}
+            </div>
           </div>
           <div className="space-y-2">
             <Label htmlFor="city-name">Name</Label>

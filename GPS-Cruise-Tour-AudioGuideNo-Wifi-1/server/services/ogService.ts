@@ -12,11 +12,24 @@ import { eq } from "drizzle-orm";
  * 이 `OgService`는 링크 주소가 바뀔 때마다 그 주소에 딱 맞는(명소 이름, 명소 사진 등)
  * 메타 태그를 실시간으로 만들어서 HTML 페이지에 심어주는 역할을 해.
  * 
- * 학습 포인트:
- * 1. 서버 사이드 렌더링(SSR) 기초: 클라이언트가 페이지를 받기 전에 서버에서 HTML 내용을 살짝 수정하는 기술이야.
- * 2. 정규표현식(Regex): URL 주소에서 `/landmark/123` 같은 ID만 골라내는 마법의 문법을 사용했어.
- * 3. 첫인상 최적화: SNS 플랫폼의 크롤러(로봇)가 우리 사이트를 방문했을 때 '아, 여긴 이런 곳이구나!'라고 바로 알게 해준단다.
+ * ⚠️ [마케터 쏭 감사 수정] XSS 방어를 위한 HTML 이스케이프 함수 추가
  */
+
+/**
+ * [마케터 쏭 감사 수정] HTML 특수문자 이스케이프 함수
+ * DB에서 가져온 문자열에 `"`, `<`, `>` 등이 포함되면
+ * 메타 태그 속성을 깨뜨려 XSS 공격에 노출될 수 있습니다.
+ * 이 함수로 모든 동적 값을 안전하게 인코딩합니다.
+ */
+function escapeHtml(str: string): string {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
 export class OgService {
     /**
      * 접속한 URL 주소를 분석해서 맞춤형 메타 태그를 생성합니다.
@@ -39,10 +52,23 @@ export class OgService {
             const [landmark] = await db.select().from(landmarks).where(eq(landmarks.id, landmarkId));
 
             if (landmark) {
-                // AI가 뽑아낸 멋진 이름과 설명을 메타 태그로 활용해!
-                title = `${landmark.name.ko || landmark.name.en} | GPS Cruise Tour`;
-                description = landmark.description.ko || landmark.description.en || description;
-                if (landmark.imageUrl) imageUrl = landmark.imageUrl;
+                // [마케터 쏭 감사 수정] name은 varchar(string)이므로 직접 사용
+                // 기존: landmark.name.ko || landmark.name.en (오류 — name은 객체가 아님)
+                // 수정: landmark.name 직접 사용 + translations에서 한국어 가져오기
+                const translations = landmark.translations as Record<string, any> | null;
+                const localizedName = translations?.ko?.name || landmark.name;
+                const localizedDesc = translations?.ko?.description || landmark.description || description;
+
+                title = `${localizedName} | GPS Cruise Tour`;
+                description = localizedDesc;
+
+                // [마케터 쏭 감사 수정] imageUrl 대신 photos 배열의 첫 번째 사용
+                // 기존: landmark.imageUrl (스키마에 해당 컬럼 없음)
+                // 수정: photos JSON 배열에서 가져오기
+                const photos = landmark.photos as string[] | null;
+                if (photos && photos.length > 0) {
+                    imageUrl = photos[0];
+                }
             }
         } else if (cityIdMatch) {
             // 도시 주소인 경우 (예: /city/cebu)
@@ -52,25 +78,30 @@ export class OgService {
             if (city) {
                 title = `${city.name} 여행 가이드 | GPS Cruise Tour`;
                 description = `${city.name}의 숨은 재미를 오디오 가이드로 발견해보세요.`;
-                if (city.imageUrl) imageUrl = city.imageUrl;
+                // 도시에는 imageUrl이 없으므로 기본 이미지 유지
             }
         }
 
+        // [마케터 쏭 감사 수정] 모든 동적 값을 HTML 이스케이프 처리!
+        const safeTitle = escapeHtml(title);
+        const safeDescription = escapeHtml(description);
+        const safeImageUrl = escapeHtml(imageUrl);
+        const safeUrl = escapeHtml(url);
+
         // 3. SNS 로봇들이 읽기 좋아하는 형식(HTML Meta Tags)으로 결과물 반환!
-        // og:title, og:image 등 'og'가 붙은 건 'Open Graph'라는 프로토콜 약속이란다.
         return `
       <!-- Dr.'s Engine이 실시간으로 생성한 멋진 메타 태그들이야! -->
-      <title>${title}</title>
-      <meta name="description" content="${description}">
-      <meta property="og:title" content="${title}">
-      <meta property="og:description" content="${description}">
-      <meta property="og:image" content="${imageUrl}">
-      <meta property="og:url" content="https://nowifigps.tours${url}">
+      <title>${safeTitle}</title>
+      <meta name="description" content="${safeDescription}">
+      <meta property="og:title" content="${safeTitle}">
+      <meta property="og:description" content="${safeDescription}">
+      <meta property="og:image" content="${safeImageUrl}">
+      <meta property="og:url" content="https://nowifigps.tours${safeUrl}">
       <meta property="og:type" content="website">
       <meta name="twitter:card" content="summary_large_image">
-      <meta name="twitter:title" content="${title}">
-      <meta name="twitter:description" content="${description}">
-      <meta name="twitter:image" content="${imageUrl}">
+      <meta name="twitter:title" content="${safeTitle}">
+      <meta name="twitter:description" content="${safeDescription}">
+      <meta name="twitter:image" content="${safeImageUrl}">
     `;
     }
 

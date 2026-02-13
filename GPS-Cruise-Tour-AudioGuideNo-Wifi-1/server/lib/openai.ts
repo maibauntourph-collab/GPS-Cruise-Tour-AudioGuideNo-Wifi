@@ -229,6 +229,32 @@ Respond in this exact JSON format:
       throw new Error('AI service authentication failed.');
     }
 
+
     throw new Error('Failed to generate tour recommendation');
+  }
+}
+
+export async function generateImage(prompt: string): Promise<string> {
+  if (!openai) {
+    throw new Error("OpenAI API key not configured");
+  }
+
+  try {
+    const response = await openai.images.generate({
+      model: "dall-e-3",
+      prompt: prompt,
+      n: 1,
+      size: "1024x1024",
+      quality: "standard",
+      response_format: "b64_json",
+    });
+
+    const b64 = response.data?.[0]?.b64_json;
+    if (!b64) throw new Error("No image data received");
+
+    return b64;
+  } catch (error) {
+    console.error("Image generation failed:", error);
+    throw error;
   }
 }

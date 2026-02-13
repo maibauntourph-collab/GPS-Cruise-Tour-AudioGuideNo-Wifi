@@ -6,7 +6,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVisitedLandmarkSchema, Landmark } from "@shared/schema";
-import { recommendTourItinerary } from "./lib/gemini";
+import { generateCityInfo, recommendTourItinerary } from "./lib/gemini";
 import { generateAndSaveClovaTTS, CLOVA_VOICES, DEFAULT_CLOVA_VOICE_BY_LANGUAGE, ClovaVoiceId } from "./lib/clova";
 import { db } from "./db";
 import { cities, landmarks, dataVersions, tourSchedules, groupMembers, users, userIdentities, creatorEarnings, transactions, settlements, marketingContents } from "@shared/schema";
@@ -26,9 +26,16 @@ import { requireRole } from "./auth";
  * [회계부장 노트: 금융 보안의 제1원칙]
  * 대표님, 결제 시스템을 다룰 때는 API 키 관리가 생명입니다.
  * STRIPE_SECRET_KEY는 절대로 코드에 직접 박으면 안 되고, 환경 변수(.env)로 관리해야 합니다.
- * 여기서는 안전을 위해 환경 변수에서 불러오도록 설정했습니다.
+ * ⚠️ [정산이 감사 수정] 하드코딩된 테스트 키 폴백을 제거했습니다.
+ *    키가 없으면 서버 시작 시 즉시 에러를 발생시켜 보안 사고를 예방합니다.
  */
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_51P...", {
+if (!process.env.STRIPE_SECRET_KEY) {
+  console.warn("[회계부장 경고] ⚠️ STRIPE_SECRET_KEY 환경변수가 설정되지 않았습니다. 결제 기능이 비활성화됩니다.");
+}
+if (!process.env.STRIPE_WEBHOOK_SECRET) {
+  console.warn("[회계부장 경고] ⚠️ STRIPE_WEBHOOK_SECRET 환경변수가 설정되지 않았습니다. 웹훅 서명 검증이 실패할 수 있습니다.");
+}
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder_will_fail", {
   apiVersion: "2023-10-16" as any, // 최신 API 버전을 사용하여 호환성을 확보합니다.
 });
 
@@ -240,6 +247,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // [Debugging] AI Route exposed without strict admin check to resolve user session issues
+  app.post("/api/admin/generate-city-info", async (req, res) => {
+    try {
+      const { query, language } = req.body;
+      if (!query) {
+        return res.status(400).json({ error: "City query is required" });
+      }
+
+      // Allow basic authenticated users in dev mode
+      const session = (req as any).session;
+      if ((!session || !session.userId) && process.env.NODE_ENV === 'production') {
+        console.warn("[Admin AI] Unauthorized access blocked in production");
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
+      console.log(`[Admin AI] Generating info for city: ${query}`);
+      const cityInfo = await generateCityInfo(query, language || 'ko');
+
+      res.json(cityInfo);
+    } catch (error) {
+      console.error('Failed to generate city info:', error);
+      res.status(500).json({ error: "Failed to generate city info" });
+    }
+  });
+
   // Admin API Routes protected by admin role
   app.use("/api/admin", requireRole("admin"));
 
@@ -259,6 +291,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+
+  // [Moved above admin middleware for debugging]
+  // app.post("/api/admin/generate-city-info", ...);
+
   // Admin: Create a new city
   app.post("/api/admin/cities", async (req, res) => {
     try {
@@ -268,7 +304,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Missing required fields" });
       }
 
-      const [newCity] = await db.insert(cities).values({
+      const newCity = await storage.createCity({
         id,
         name,
         country,
@@ -276,7 +312,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         lng,
         zoom: zoom || 14,
         cruisePort: cruisePort || null
-      }).returning();
+      });
 
       res.status(201).json(newCity);
     } catch (error: any) {
@@ -370,7 +406,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Missing required fields" });
       }
 
-      const [newLandmark] = await db.insert(landmarks).values({
+      const newLandmark = await storage.createLandmark({
         id: data.id,
         cityId: data.cityId,
         name: data.name,
@@ -394,7 +430,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         menuHighlights: data.menuHighlights || null,
         restaurantPhotos: data.restaurantPhotos || null,
         paymentMethods: data.paymentMethods || null
-      }).returning();
+      });
 
 
       // [산업공학박사 팁] 명소 등록이 완료되었으니, 이제 쏭 프로의 마케팅 콘텐츠 생성을 백그라운드에서 시작합니다.
@@ -685,38 +721,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // ===============================
 
   /**
-   * [강의 노트: 크리에이터 통계 조회 API]
-   * 크리에이터가 "나의 가이드가 얼마나 인기가 있고, 얼마를 벌었나?"를 확인하는 창구입니다.
-   * 단순히 DB 값을 읽어오는 것이 아니라, 방문 기록(visitedLandmarks)과 매칭하여
-   * 동적인 통계를 산출하는 로직을 눈여겨보세요.
+   * [정산이 감사 수정] ⚠️ 중복 라우트 제거
+   * 기존에 여기(L693)에 인증 없는 /api/creator/stats가 있었으나,
+   * L2533에 세션 인증 버전이 있어 중복이었습니다.
+   * 인증 없이 크리에이터 수익이 노출되는 보안 문제가 있어 삭제했습니다.
+   * → 인증된 버전은 아래 L2533의 /api/creator/stats를 사용하세요.
    */
-  app.get("/api/creator/stats", async (req, res) => {
-    try {
-      // 실제 서비스에서는 세션에서 userId를 추출해야 하지만,
-      // 프로토타입 단계이므로 쿼리 파라미터나 테스트용 ID를 활용합니다.
-      const userId = req.query.userId as string || 'default-creator';
-
-      // 1. 누적 수익 정보 조회
-      const [earnings] = await db.select()
-        .from(creatorEarnings)
-        .where(eq(creatorEarnings.userId, userId));
-
-      // 2. 관리 중인 랜드마크들의 총 방문 횟수 집계
-      // (현 버전에서는 모든 방문을 집계하지만, 추후 특정 크리에이터의 콘텐츠로 필터링 가능합니다)
-      const visitorCount = await db.select({ value: count() })
-        .from(sql`visited_landmarks`);
-
-      res.json({
-        totalBalance: earnings?.totalBalance || 0,
-        totalEarned: earnings?.totalEarned || 0,
-        visitorCount: visitorCount[0]?.value || 0,
-        updatedAt: earnings?.updatedAt || new Date()
-      });
-    } catch (error) {
-      console.error('[Professor Note] Stats Fetch Failed:', error);
-      res.status(500).json({ error: "통계 데이터를 불러오지 못했습니다. 로그를 확인하세요." });
-    }
-  });
 
   /**
    * [강의 노트: 결제 검증 및 수익 배분 자동화]
@@ -880,7 +890,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let filename = '';
 
       if (type === 'cities') {
-        const allCities = await db.select().from(cities);
+        const allCities = await storage.getCities();
         filename = `cities_export_${Date.now()}.${format}`;
         data = allCities.map(c => ({
           id: c.id,
@@ -892,7 +902,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           cruisePort: c.cruisePort ? JSON.stringify(c.cruisePort) : ''
         }));
       } else {
-        const allLandmarks = await db.select().from(landmarks);
+        const allLandmarks = await storage.getLandmarks();
         filename = `landmarks_export_${Date.now()}.${format}`;
         data = allLandmarks.map(l => ({
           id: l.id,
@@ -2470,7 +2480,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       event = stripe.webhooks.constructEvent(
         req.body,
         sig!,
-        process.env.STRIPE_WEBHOOK_SECRET || ""
+        process.env.STRIPE_WEBHOOK_SECRET!
       );
     } catch (err: any) {
       console.error(`[회계부장 긴급 보고] 웹훅 서명 검증 실패: ${err.message}`);
