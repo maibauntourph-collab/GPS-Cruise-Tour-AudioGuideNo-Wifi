@@ -1,10 +1,11 @@
 import { Landmark } from '@shared/schema';
 
 export function getTranslatedContent(
-  landmark: Landmark,
+  landmark: Landmark | null | undefined,
   language: string,
   field: 'name' | 'narration' | 'description' | 'detailedDescription' | 'historicalInfo'
 ): string {
+  if (!landmark) return '';
   // Check if translations exist
   if (landmark.translations && landmark.translations[language]) {
     const translation = landmark.translations[language];
@@ -248,7 +249,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     storageFullDesc: 'Not enough disk space to download offline data. Please free up some space and try again.',
     downloadError: 'Download Error',
     nativeVoiceMissing: 'Native voice for {lang} is missing on this device.',
-    suggestHighQualityVoice: 'Would you like to switch to high-quality (Clova) mode for better guidance?'
+    suggestHighQualityVoice: 'Would you like to switch to high-quality (Clova) mode for better guidance?',
+    booking: 'Booking'
   },
   ko: {
     landmarks: '명소',
@@ -471,7 +473,8 @@ const uiTranslations: Record<string, Record<string, string>> = {
     storageFullDesc: '오프라인 데이터를 다운로드할 저장 공간이 부족합니다. 공간을 확보한 후 다시 시도해 주세요.',
     downloadError: '다운로드 오류',
     nativeVoiceMissing: '현재 기기에 {lang} 음성이 설치되어 있지 않습니다.',
-    suggestHighQualityVoice: '더 자연스러운 안내를 위해 고품질(Clova) 모드로 전환하시겠습니까?'
+    suggestHighQualityVoice: '더 자연스러운 안내를 위해 고품질(Clova) 모드로 전환하시겠습니까?',
+    booking: '예약하기'
   },
   es: {
     landmarks: 'Monumentos',

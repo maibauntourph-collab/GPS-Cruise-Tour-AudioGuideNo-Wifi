@@ -142,8 +142,9 @@ export class SettlementService {
             .limit(10);
 
         return {
-            balance: earnings?.totalBalance || 0,
-            totalEarned: earnings?.totalEarned || 0,
+            totalBalance: Number(earnings?.totalBalance || 0),
+            totalEarned: Number(earnings?.totalEarned || 0),
+            visitorCount: 0, // [회계부장] 차후 가문 목록이나 트랜잭션 수로 실제 집계 로직 추가 예정
             recentTransactions
         };
     }

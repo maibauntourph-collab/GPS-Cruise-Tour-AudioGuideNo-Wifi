@@ -63,6 +63,7 @@ export const citySchema = z.object({
   lng: z.number(),
   zoom: z.number().default(14),
   cruisePort: cruisePortSchema.optional(), // Optional cruise port information
+  defaultGuideId: z.string().optional(), // Default guide (creator) for this city
 });
 
 export type City = z.infer<typeof citySchema>;
@@ -123,6 +124,9 @@ export const landmarkSchema = z.object({
     menu: z.array(z.string()).optional(), // Menu photos
   }).optional(),
   paymentMethods: z.array(z.string()).optional(), // e.g., ["Card", "Cash", "Mobile Payment"]
+  // Premium fields
+  isPremium: z.boolean().default(false),
+  price: z.number().optional(), // Price in EUR for the premium guide
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;
@@ -161,6 +165,7 @@ export const cities = pgTable("cities", {
   lng: doublePrecision("lng").notNull(),
   zoom: integer("zoom").default(14),
   cruisePort: json("cruise_port"), // JSON for cruise port data
+  defaultGuideId: varchar("default_guide_id"), // Global instructor ID for this city
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
@@ -198,9 +203,31 @@ export const landmarks = pgTable("landmarks", {
   menuHighlights: json("menu_highlights"), // Array of strings
   restaurantPhotos: json("restaurant_photos"), // { exterior, interior, menu }
   paymentMethods: json("payment_methods"), // Array of strings
+  isPremium: boolean("is_premium").notNull().default(false),
+  price: doublePrecision("price"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+/**
+ * [연구소장 노트: 다중 가이드 해설 설계]
+ * 하나의 랜드마크에 대해 여러 명의 크리에이터(가이드)가 제공하는 다양한 버전의 해설입니다.
+ * 사용자는 취향에 맞는 가이드의 목소리와 내용을 선택하여 들을 수 있습니다.
+ */
+export const landmarkGuides = pgTable("landmark_guides", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  landmarkId: varchar("landmark_id").notNull().references(() => landmarks.id, { onDelete: 'cascade' }),
+  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  narration: text("narration").notNull(),
+  description: text("description"),
+  detailedDescription: text("detailed_description"),
+  translations: json("translations"), // Translation specific to this guide's content
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  // 명소 하나당 한 명의 크리에이터는 하나의 가이드만 등록할 수 있음
+  uniqueLandmarkUser: unique().on(table.landmarkId, table.userId),
+}));
 
 // Data version table for offline sync
 export const dataVersions = pgTable("data_versions", {
@@ -505,6 +532,9 @@ export const insertCreatorEarningsSchema = createInsertSchema(creatorEarnings).o
 export const insertTransactionSchema = createInsertSchema(transactions).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertSettlementSchema = createInsertSchema(settlements).omit({ id: true, createdAt: true });
 export const insertMarketingContentSchema = createInsertSchema(marketingContents).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertLandmarkGuideSchema = createInsertSchema(landmarkGuides).omit({ id: true, createdAt: true, updatedAt: true });
+
+export type InsertLandmarkGuide = z.infer<typeof insertLandmarkGuideSchema>;
 
 // [강의 노트: 관계형 데이터베이스의 꽃, Relations]
 // 여러분, 테이블들이 각자 따로 놀면 안 됩니다. 
@@ -538,6 +568,17 @@ export const marketingContentsRelations = relations(marketingContents, ({ one })
   landmark: one(landmarks, {
     fields: [marketingContents.landmarkId],
     references: [landmarks.id],
+  }),
+}));
+
+export const landmarkGuidesRelations = relations(landmarkGuides, ({ one }) => ({
+  landmark: one(landmarks, {
+    fields: [landmarkGuides.landmarkId],
+    references: [landmarks.id],
+  }),
+  user: one(users, {
+    fields: [landmarkGuides.userId],
+    references: [users.id],
   }),
 }));
 
@@ -602,3 +643,5 @@ export type CreatorEarnings = typeof creatorEarnings.$inferSelect;
 export type Transaction = typeof transactions.$inferSelect;
 export type Settlement = typeof settlements.$inferSelect;
 export type MarketingContent = typeof marketingContents.$inferSelect;
+export const LandmarkGuide = typeof landmarkGuides.$inferSelect;
+export type DbLandmarkGuide = typeof landmarkGuides.$inferSelect;

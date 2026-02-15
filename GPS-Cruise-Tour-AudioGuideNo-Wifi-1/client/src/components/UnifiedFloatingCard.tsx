@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect, useCallback, MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent, ReactNode } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo, MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent, ReactNode } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity as ActivityIcon, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen, User as UserIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
@@ -90,16 +90,25 @@ interface UnifiedFloatingCardProps {
   // Captured route image
   capturedRouteImage?: string | null;
   onClearCapturedImage?: () => void;
+
+  // Regional Guide props
+  selectedRegionalGuideId?: string | null;
+  onRegionalGuideChange?: (guideId: string | null) => void;
 }
 
-function getCruisePortTranslation(cruisePort: CruisePort, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
+import { useQuery } from '@tanstack/react-query';
+import { User } from '@shared/schema';
+
+function getCruisePortTranslation(cruisePort: CruisePort | null | undefined, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
+  if (!cruisePort) return '';
   if (cruisePort.translations?.[language]?.[field]) {
     return cruisePort.translations[language][field] as string;
   }
   return cruisePort[field] || '';
 }
 
-function getTransportTranslation(transport: TransportOption, language: string, field: 'name' | 'from' | 'to' | 'duration' | 'frequency' | 'price' | 'tips'): string {
+function getTransportTranslation(transport: TransportOption | null | undefined, language: string, field: 'name' | 'from' | 'to' | 'duration' | 'frequency' | 'price' | 'tips'): string {
+  if (!transport) return '';
   if (transport.translations?.[language]?.[field]) {
     return transport.translations[language][field] as string;
   }
@@ -251,7 +260,9 @@ export default function UnifiedFloatingCard({
   endPoint = null,
   onOpenStartEndPointDialog,
   capturedRouteImage = null,
-  onClearCapturedImage
+  onClearCapturedImage,
+  selectedRegionalGuideId = null,
+  onRegionalGuideChange
 }: UnifiedFloatingCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -273,6 +284,21 @@ export default function UnifiedFloatingCard({
   const [activeTab, setActiveTab] = useState<string>('list');
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
+
+  const { data: regionalGuides = [] } = useQuery<User[]>({
+    queryKey: ['/api/users', 'creators'],
+    queryFn: async () => {
+      const response = await fetch('/api/users?role=creator');
+      if (!response.ok) return [];
+      return response.json();
+    },
+    enabled: !!city
+  });
+
+  const selectedRegionalGuide = useMemo(() => {
+    return regionalGuides.find(u => u.id === (selectedRegionalGuideId || city?.defaultGuideId)) || null;
+  }, [regionalGuides, selectedRegionalGuideId, city?.defaultGuideId]);
+
   const [showDetailDialog, setShowDetailDialog] = useState(false);
   const [tourAddedInDialog, setTourAddedInDialog] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -807,7 +833,7 @@ export default function UnifiedFloatingCard({
                       </h4>
                       <div className="flex items-center gap-2 flex-wrap mb-3">
                         <Badge variant={selectedLandmark.category === 'Activity' ? 'default' : 'secondary'}>
-                          {selectedLandmark.category === 'Activity' ? <Activity className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
+                          {selectedLandmark.category === 'Activity' ? <ActivityIcon className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
                           {selectedLandmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
                         </Badge>
                         {selectedLandmark.category && selectedLandmark.category !== 'Activity' && (
@@ -1146,8 +1172,8 @@ export default function UnifiedFloatingCard({
                             <div
                               key={landmark.id}
                               className={`p-3 rounded-lg cursor-pointer transition-all ${isSelected
-                                  ? 'bg-primary/20 ring-2 ring-primary animate-pulse'
-                                  : 'bg-muted/30 hover-elevate'
+                                ? 'bg-primary/20 ring-2 ring-primary animate-pulse'
+                                : 'bg-muted/30 hover-elevate'
                                 }`}
                               onClick={() => onLandmarkSelect?.(landmark)}
                               data-testid={`card-landmark-${landmark.id}`}
@@ -1192,7 +1218,7 @@ export default function UnifiedFloatingCard({
                   return (
                     <>
                       {renderSection('Landmark', landmarksByCategory['Landmark'] || [], t('landmarksSection', selectedLanguage), <LandmarkIcon className="w-4 h-4 text-primary" />)}
-                      {renderSection('Activity', landmarksByCategory['Activity'] || [], t('activitiesSection', selectedLanguage), <Activity className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
+                      {renderSection('Activity', landmarksByCategory['Activity'] || [], t('activitiesSection', selectedLanguage), <ActivityIcon className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
                       {renderSection('Restaurant', landmarksByCategory['Restaurant'] || [], t('restaurantsSection', selectedLanguage), <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
                     </>
                   );
@@ -1319,11 +1345,85 @@ export default function UnifiedFloatingCard({
 
                 <TabsContent value="tips" className="mt-4 overflow-y-auto flex-1">
                   {city.cruisePort.tips && (
-                    <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                    <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg mb-4">
                       <p className="text-sm text-muted-foreground">
                         {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'tips')}
                       </p>
                     </div>
+                  )}
+
+                  {/* Regional Guide (Instructor) Selection */}
+                  {(selectedRegionalGuide || regionalGuides.length > 0) && (
+                    <Card className="p-3 bg-amber-50/50 border-amber-100 mb-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2 text-amber-900">
+                          <UserIcon className="w-4 h-4" />
+                          <span className="text-sm font-semibold">
+                            {selectedLanguage === 'ko' ? '도시 대표 가이드' : 'City Main Guide'}
+                          </span>
+                        </div>
+                        {regionalGuides.length > 1 && (
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button variant="ghost" size="sm" className="h-7 text-xs gap-1 text-amber-700 hover:text-amber-800 hover:bg-amber-100">
+                                {selectedLanguage === 'ko' ? '변경' : 'Switch'}
+                                <ChevronRight className="w-3 h-3" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-56 p-2">
+                              <div className="space-y-1">
+                                {regionalGuides.map(guide => (
+                                  <Button
+                                    key={guide.id}
+                                    variant={guide.id === selectedRegionalGuide?.id ? 'secondary' : 'ghost'}
+                                    size="sm"
+                                    className="w-full justify-start gap-2 h-auto py-2 px-2"
+                                    onClick={() => onRegionalGuideChange?.(guide.id)}
+                                  >
+                                    <div className="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+                                      {guide.avatarUrl ? (
+                                        <img src={guide.avatarUrl} alt={guide.username} className="w-full h-full object-cover" />
+                                      ) : (
+                                        <UserIcon className="w-4 h-4 m-2 text-slate-400" />
+                                      )}
+                                    </div>
+                                    <div className="text-left overflow-hidden">
+                                      <div className="text-xs font-medium truncate">{guide.username}</div>
+                                      <div className="text-[10px] text-muted-foreground truncate">{guide.roles?.join(', ')}</div>
+                                    </div>
+                                  </Button>
+                                ))}
+                              </div>
+                            </PopoverContent>
+                          </Popover>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-200 overflow-hidden flex-shrink-0">
+                          {selectedRegionalGuide?.avatarUrl ? (
+                            <img src={selectedRegionalGuide.avatarUrl} alt={selectedRegionalGuide.username} className="w-full h-full object-cover" />
+                          ) : (
+                            <UserIcon className="w-6 h-6 m-3 text-amber-400" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-slate-900 truncate">
+                              {selectedRegionalGuide?.username || (selectedLanguage === 'ko' ? 'AI 가이드' : 'AI Guide')}
+                            </span>
+                            <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100 border-none px-1.5 py-0 h-4 text-[10px]">
+                              Instructor
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-slate-600 line-clamp-2 mt-0.5">
+                            {selectedLanguage === 'ko'
+                              ? `${city?.name}의 모든 명소에 대한 프리미엄 해설을 제공합니다.`
+                              : `Providing premium commentary for all landmarks in ${city?.name}.`}
+                          </p>
+                        </div>
+                      </div>
+                    </Card>
                   )}
                 </TabsContent>
               </Tabs>
@@ -1853,7 +1953,7 @@ export default function UnifiedFloatingCard({
                 className={`h-7 gap-1 text-xs ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
                 data-testid="button-filter-activities-list"
               >
-                <Activity className="w-3 h-3" />
+                <ActivityIcon className="w-3 h-3" />
                 {selectedLanguage === 'ko' ? '액티비티' : 'Activities'}
               </Button>
               <Button
@@ -1903,7 +2003,7 @@ export default function UnifiedFloatingCard({
                     };
 
                     const getCategoryIcon = (category: string | null | undefined) => {
-                      if (category === 'Activity') return <Activity className="w-3 h-3" />;
+                      if (category === 'Activity') return <ActivityIcon className="w-3 h-3" />;
                       if (category === 'Restaurant') return <Utensils className="w-3 h-3" />;
                       if (category === 'Gift Shop') return <ShoppingBag className="w-3 h-3" />;
                       return <LandmarkIcon className="w-3 h-3" />;

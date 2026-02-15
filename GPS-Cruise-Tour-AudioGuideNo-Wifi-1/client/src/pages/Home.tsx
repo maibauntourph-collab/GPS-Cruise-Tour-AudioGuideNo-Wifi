@@ -176,6 +176,7 @@ export default function Home() {
   // 여러분, 크리에이터 모드를 켜고 끌 수 있는 '스위치'가 하나 더 필요하겠죠?
   // showCreatorDashboard 상태를 통해 대시보드 다이얼로그의 가시성을 제어합니다.
   const [showCreatorDashboard, setShowCreatorDashboard] = useState(false);
+  const [selectedRegionalGuideId, setSelectedRegionalGuideId] = useState<string | null>(null);
   const [capturedRouteImage, setCapturedRouteImage] = useState<string | null>(null);
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
   const [showTourOnly, setShowTourOnly] = useState(false);
@@ -414,6 +415,7 @@ export default function Home() {
     setShowCruisePort(false);
     setIsCardMinimized(true);
     setShowMenu(false);
+    setSelectedRegionalGuideId(null);
   };
 
   const handleClearRoute = () => {

@@ -1,5 +1,5 @@
 // [학습 가이드: 외부 라이브러리 및 모듈 임포트]
-// Express: 웹 서버 프레임워크
+// Express: 웹 서버 프레임워크 (V3 Stability Path)
 // Drizzle-ORM: 데이터베이스 SQL 쿼리를 자바스크립트/타입스크립트 객체처럼 다루게 해주는 도구
 // shared/schema: DB 테이블 정의 및 데이터 검증(Zod) 스키마를 프로젝트 전반에서 공유
 import type { Express } from "express";
@@ -81,9 +81,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!landmark) {
         return res.status(404).json({ error: "Landmark not found" });
       }
-      res.json(landmark);
+
+      // [적요: 명소 상세와 함께 가이드 리스트 정보도 반환합니다]
+      const guides = await storage.getLandmarkGuides(req.params.id);
+
+      res.json({
+        ...landmark,
+        guides: guides.map(g => ({
+          id: g.id,
+          userId: g.userId,
+          narration: g.narration,
+          description: g.description,
+          detailedDescription: g.detailedDescription,
+          translations: g.translations,
+          updatedAt: g.updatedAt
+        }))
+      });
     } catch (error) {
+      console.error("[Landmark Detail Error]", error);
       res.status(500).json({ error: "Failed to fetch landmark" });
+    }
+  });
+
+  // [적요: 특정 명소의 가이드 목록만 별도 조회]
+  app.get("/api/landmarks/:id/guides", async (req, res) => {
+    try {
+      const guides = await storage.getLandmarkGuides(req.params.id);
+      res.json(guides);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch guides" });
     }
   });
 
@@ -191,7 +217,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           phoneNumber: l.phoneNumber,
           menuHighlights: l.menuHighlights,
           restaurantPhotos: l.restaurantPhotos,
-          paymentMethods: l.paymentMethods
+          paymentMethods: l.paymentMethods,
+          isPremium: l.isPremium,
+          price: l.price
         })),
         version,
         downloadedAt: new Date().toISOString()
@@ -485,6 +513,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           menuHighlights: data.menuHighlights || null,
           restaurantPhotos: data.restaurantPhotos || null,
           paymentMethods: data.paymentMethods || null,
+          isPremium: data.isPremium !== undefined ? data.isPremium : false,
+          price: data.price || null,
           updatedAt: new Date()
         })
         .where(eq(landmarks.id, id))

@@ -4,18 +4,20 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  Sparkles, 
-  Loader2, 
-  MapPin, 
-  Clock, 
-  Utensils, 
-  Activity, 
+import {
+  Sparkles,
+  Loader2,
+  MapPin,
+  Clock,
+  Utensils,
+  Activity,
   Landmark as LandmarkIcon,
   ChevronRight,
   AlertCircle,
   Route,
-  Plus
+  Plus,
+  Crown,
+  Zap
 } from 'lucide-react';
 import { Landmark } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
@@ -64,9 +66,9 @@ export default function AIRecommendDialog({
   const getFilteredLandmarks = (type: RecommendationType): Landmark[] => {
     switch (type) {
       case 'landmarks':
-        return landmarks.filter(l => 
-          l.category !== 'Activity' && 
-          l.category !== 'Restaurant' && 
+        return landmarks.filter(l =>
+          l.category !== 'Activity' &&
+          l.category !== 'Restaurant' &&
           l.category !== 'Gift Shop'
         );
       case 'restaurants':
@@ -85,7 +87,7 @@ export default function AIRecommendDialog({
 
     try {
       const filteredLandmarks = getFilteredLandmarks(recommendationType);
-      
+
       if (filteredLandmarks.length === 0) {
         setError(t('noLandmarksFound', selectedLanguage));
         setIsLoading(false);
@@ -104,7 +106,7 @@ export default function AIRecommendDialog({
 
       const data = await response.json() as TourRecommendation;
       setRecommendation(data);
-      
+
       toast({
         title: t('aiRecommendationReady', selectedLanguage),
         description: t('aiRecommendationSuccess', selectedLanguage),
@@ -124,17 +126,17 @@ export default function AIRecommendDialog({
 
   const getRecommendedLandmarks = (): Landmark[] => {
     if (!recommendation) return [];
-    
+
     const allRecommended = recommendation.itinerary
       .sort((a, b) => a.order - b.order)
       .map(item => landmarks.find(l => l.id === item.landmarkId))
       .filter((l): l is Landmark => l !== undefined);
-    
+
     // Apply category filter to results
     if (recommendationType === 'all') {
       return allRecommended;
     }
-    
+
     return allRecommended.filter(l => {
       switch (recommendationType) {
         case 'landmarks':
@@ -212,8 +214,8 @@ export default function AIRecommendDialog({
             </Tabs>
 
             {/* Get Recommendation Button */}
-            <Button 
-              onClick={handleGetRecommendation} 
+            <Button
+              onClick={handleGetRecommendation}
               disabled={isLoading}
               className="w-full gap-2"
               data-testid="button-get-ai-recommendation"
@@ -262,7 +264,7 @@ export default function AIRecommendDialog({
                 {/* Itinerary List */}
                 <div className="space-y-2">
                   {recommendedLandmarks.map((landmark, index) => (
-                    <div 
+                    <div
                       key={landmark.id}
                       className="flex items-center gap-3 p-2 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer"
                       onClick={() => onSelectLandmark(landmark)}
@@ -280,6 +282,12 @@ export default function AIRecommendDialog({
                             {getCategoryIcon(landmark.category)}
                             <span className="ml-1">{landmark.category || t('landmark', selectedLanguage)}</span>
                           </Badge>
+                          {landmark.isPremium && (
+                            <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-5 bg-amber-100 text-amber-700 border-amber-200 gap-1">
+                              <Crown className="w-2.5 h-2.5" />
+                              {selectedLanguage === 'ko' ? '프리미엄' : 'Premium'}
+                            </Badge>
+                          )}
                         </div>
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
@@ -288,7 +296,7 @@ export default function AIRecommendDialog({
                 </div>
 
                 {/* Add All to Tour Button */}
-                <Button 
+                <Button
                   onClick={handleAddAllToTour}
                   variant="outline"
                   className="w-full gap-2"

@@ -2,13 +2,10 @@ import { GoogleGenAI } from "@google/genai";
 import { Landmark } from "@shared/schema";
 
 // Using user's own Gemini API key for Gemini Pro
-// Using user's own Gemini API key for Gemini Pro
-// The @google/genai library might try to use ADC if not configured correctly.
-// We are using the API key from AI Studio, so we set it explicitly.
 // Lazy initialization to ensure env vars are loaded
 let aiInstance: GoogleGenAI | null = null;
 
-function getAI() {
+export function getAI() {
   if (!aiInstance) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
@@ -42,33 +39,18 @@ export async function recommendTourItinerary(
       category: l.category,
       lat: l.lat,
       lng: l.lng,
-      description: l.description
+      description: l.description,
+      isPremium: l.isPremium
     }));
 
     const systemPrompt = language === 'ko'
-      ? "당신은 여행 전문가입니다. 주어진 관광지 정보를 분석하여 최적의 투어 일정을 추천하세요."
-      : language === 'es'
-        ? "Eres un experto en viajes. Analiza los lugares turísticos dados y recomienda el mejor itinerario de tour."
-        : language === 'fr'
-          ? "Vous êtes un expert en voyages. Analysez les lieux touristiques donnés et recommandez le meilleur itinéraire de visite."
-          : language === 'de'
-            ? "Sie sind ein Reiseexperte. Analysieren Sie die gegebenen Sehenswürdigkeiten und empfehlen Sie die beste Reiseroute."
-            : language === 'it'
-              ? "Sei un esperto di viaggi. Analizza i luoghi turistici dati e consiglia il miglior itinerario di tour."
-              : language === 'zh'
-                ? "您是旅行专家。分析给定的旅游景点并推荐最佳旅游行程。"
-                : language === 'ja'
-                  ? "あなたは旅行の専門家です。与えられた観光地情報を分析し、最適なツアー行程を推薦してください。"
-                  : language === 'pt'
-                    ? "Você é um especialista em viagens. Analise os pontos turísticos dados e recomende o melhor itinerário de tour."
-                    : language === 'ru'
-                      ? "Вы эксперт по путешествиям. Проанализируйте данные туристические места и порекомендуйте лучший маршрут тура."
-                      : "You are a travel expert. Analyze the given tourist attractions and recommend the best tour itinerary.";
+      ? "당신은 세계적인 여행 가이드 전문가입니다. 제공된 명소 정보를 분석하여 최적의 투어 일정을 추천하세요. 프리미엄(Premium) 가이드가 있는 장소는 더 깊이 있는 정보를 제공하므로 우선적으로 고려할 수 있습니다."
+      : "You are a world-class travel guide expert. Analyze the provided landmark information and recommend the best tour itinerary. Landmarks with Premium guides offer more in-depth information and can be prioritized.";
 
     const userPrompt = language === 'ko'
       ? `${systemPrompt}
 
-다음 관광지들을 기반으로 최적의 투어 일정을 추천해주세요. 지리적 위치, 카테고리, 역사적 중요도를 고려하여 효율적인 순서를 제안하세요.
+다음 관광지들을 기반으로 최적의 투어 일정을 추천해주세요. 지리적 위치, 카테고리, 역사적 중요도를 고려하여 효율적인 순서를 제안하세요. \`isPremium\`이 \`true\`인 장소는 고품질 오디오 가이드가 포함되어 있음을 참고하세요.
 
 관광지 목록:
 ${JSON.stringify(landmarkInfo, null, 2)}
@@ -78,12 +60,12 @@ ${userPosition ? `사용자 현재 위치: 위도 ${userPosition.latitude}, 경�
 응답은 반드시 다음 JSON 형식으로 해주세요 (다른 텍스트 없이 JSON만):
 {
   "itinerary": [{"landmarkId": "string", "order": number}],
-  "explanation": "왜 이 순서를 추천하는지 자세한 설명 (3-5문장)",
+  "explanation": "왜 이 순서를 추천하는지 자세한 설명. 프리미엄 장소가 포함된 경우 그 가치를 언급해주세요. (3-5문장)",
   "totalEstimatedTime": number (분 단위)
 }`
       : `${systemPrompt}
 
-Based on the following tourist attractions, recommend the best tour itinerary. Consider geographical proximity, category variety, and historical significance to suggest an efficient order.
+Based on the following tourist attractions, recommend the best tour itinerary. Consider geographical proximity, category variety, and historical significance to suggest an efficient order. Note that landmarks with \`isPremium: true\` have high-quality audio guides available.
 
 Landmark list:
 ${JSON.stringify(landmarkInfo, null, 2)}
@@ -93,7 +75,7 @@ ${userPosition ? `User current location: latitude ${userPosition.latitude}, long
 Respond with ONLY this exact JSON format (no other text):
 {
   "itinerary": [{"landmarkId": "string", "order": number}],
-  "explanation": "Detailed explanation of why you recommend this order (3-5 sentences)",
+  "explanation": "Detailed explanation of why you recommend this order. If premium landmarks are included, mention their value. (3-5 sentences)",
   "totalEstimatedTime": number (in minutes)
 }`;
 
@@ -132,16 +114,49 @@ Respond with ONLY this exact JSON format (no other text):
   } catch (error: any) {
     console.error('Failed to get Gemini AI recommendation:', error);
 
-    if (error?.message?.includes('429') || error?.message?.includes('RATELIMIT')) {
-      throw new Error('AI service rate limit exceeded. Please try again later.');
-    }
-
-    if (error?.message?.includes('401') || error?.message?.includes('authentication')) {
-      throw new Error('AI service authentication failed.');
+    // Provide mock fallback for rate limits or other temporary errors
+    const msg = error?.message?.toLowerCase() || "";
+    if (msg.includes('429') || msg.includes('rate limit') || msg.includes('ratelimit') || msg.includes('ai client not initialized')) {
+      return mockRecommendTourItinerary(landmarks, userPosition, language);
     }
 
     throw new Error('Failed to generate tour recommendation');
   }
+}
+
+// Mock implementation for tour recommendations when AI is unavailable or rate-limited
+function mockRecommendTourItinerary(
+  landmarks: Landmark[],
+  userPosition?: { latitude: number; longitude: number },
+  language: string = 'en'
+): TourRecommendation {
+  console.log("[Gemini] Using mock tour recommendation fallback.");
+
+  // Simple distance-based or original order sorting
+  const sortedLandmarks = [...landmarks];
+  if (userPosition) {
+    // Basic sorting by latitude proximity as a proxy for distance
+    sortedLandmarks.sort((a, b) => {
+      const distA = Math.sqrt(Math.pow(a.lat - userPosition.latitude, 2) + Math.pow(a.lng - userPosition.longitude, 2));
+      const distB = Math.sqrt(Math.pow(b.lat - userPosition.latitude, 2) + Math.pow(b.lng - userPosition.longitude, 2));
+      return distA - distB;
+    });
+  }
+
+  const itinerary = sortedLandmarks.slice(0, 5).map((l, index) => ({
+    landmarkId: l.id,
+    order: index + 1
+  }));
+
+  const explanation = language === 'ko'
+    ? "현재 위치와 지리적 근접성을 고려하여 구성된 추천 일정입니다. 효율적인 이동 동선을 따라 도시의 주요 명소들을 탐험하실 수 있도록 계획되었습니다."
+    : "This recommended itinerary is based on geographical proximity and efficiency of travel. It's designed to help you explore major city landmarks following a logical route.";
+
+  return {
+    itinerary,
+    explanation,
+    totalEstimatedTime: itinerary.length * 45 // 45 mins per stop average
+  };
 }
 
 export interface CityInfo {

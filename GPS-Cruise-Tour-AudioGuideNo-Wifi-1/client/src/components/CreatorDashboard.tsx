@@ -70,7 +70,7 @@ export default function CreatorDashboard() {
                                 <Wallet className="w-4 h-4 text-primary" />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">€{stats?.totalBalance.toFixed(2)}</div>
+                                <div className="text-2xl font-bold">€{(stats?.totalBalance || 0).toFixed(2)}</div>
                                 <p className="text-xs text-muted-foreground mt-1">
                                     언제든지 정산을 신청할 수 있습니다.
                                 </p>
@@ -84,7 +84,7 @@ export default function CreatorDashboard() {
                                 <TrendingUp className="w-4 h-4 text-green-500" />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">€{stats?.totalEarned.toFixed(2)}</div>
+                                <div className="text-2xl font-bold">€{(stats?.totalEarned || 0).toFixed(2)}</div>
                                 <p className="text-xs text-muted-foreground mt-1">
                                     플랫폼 참여 이후 총 성과입니다.
                                 </p>
@@ -98,7 +98,7 @@ export default function CreatorDashboard() {
                                 <Users className="w-4 h-4 text-blue-500" />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">{stats?.visitorCount}명</div>
+                                <div className="text-2xl font-bold">{stats?.visitorCount || 0}명</div>
                                 <p className="text-xs text-muted-foreground mt-1">
                                     당신의 가이드를 통해 세상을 즐긴 사람들입니다.
                                 </p>

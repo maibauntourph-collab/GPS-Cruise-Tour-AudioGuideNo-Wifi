@@ -1,4 +1,4 @@
-import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio, type User, type InsertUser, type UserIdentity, type InsertUserIdentity, type SavedRoute, type InsertSavedRoute, type RoutePhoto, type InsertRoutePhoto } from "@shared/schema";
+import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio, type User, type InsertUser, type UserIdentity, type InsertUserIdentity, type SavedRoute, type InsertSavedRoute, type RoutePhoto, type InsertRoutePhoto, type DbLandmarkGuide, type InsertLandmarkGuide } from "@shared/schema";
 import { db } from "./db";
 import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, cities as citiesTable, users, userIdentities, savedRoutes, routePhotos } from "@shared/schema";
 import { eq, count, and, sql, notInArray, desc } from "drizzle-orm";
@@ -55,7 +55,12 @@ export interface IStorage {
   getAllUsers(): Promise<User[]>;
   getMarketingContents(): Promise<any[]>;
   createCity(city: any): Promise<City>;
+  updateCity(id: string, updates: Partial<City>): Promise<City | undefined>;
   createLandmark(landmark: any): Promise<Landmark>;
+  updateLandmark(id: string, updates: Partial<Landmark>): Promise<Landmark | undefined>;
+  // Guide methods
+  getLandmarkGuides(landmarkId: string): Promise<DbLandmarkGuide[]>;
+  createLandmarkGuide(guide: InsertLandmarkGuide): Promise<DbLandmarkGuide>;
 }
 
 const CITIES: City[] = [
@@ -4533,6 +4538,108 @@ const LANDMARKS: Landmark[] = [
       'https://images.unsplash.com/photo-1563784462041-5f97ac9523dd?w=800',
       'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800'
     ],
+    translations: {
+      ko: {
+        name: '시라오 플라워 가든',
+        narration: '세부의 화려한 "작은 암스테르담"인 시라오 플라워 가든에 오신 것을 환영합니다. 이 활기찬 정원에는 아름다운 꽃밭, 특히 일년 내내 피는 상징적인 셀로시아 꽃이 특징입니다.',
+        description: '세부의 작은 암스테르담으로 알려진 다채로운 꽃 정원',
+        historicalInfo: '시라오 플라워 가든은 트랜스센트럴 하이웨이를 따라 경치 좋은 전망대로 개발되었으며 놀라운 파노라마 뷰로 세부에서 가장 인기 있는 관광지 중 하나가 되었습니다.'
+      }
+    }
+  },
+  {
+    id: 'la-cittadella-subdivision',
+    cityId: 'cebu',
+    name: 'La Cittadella Subdivision',
+    lat: 10.3685,
+    lng: 123.9168,
+    radius: 100,
+    narration: '🎤 "Yo, Cebu! 다들 내 말 좀 들어봐!" 여기 지금 우리가 서 있는 곳이 바로 **La Cittadella Subdivision**이야. 이름부터가 벌써 "나 좀 살지?" 하는 느낌 안 나? 지중해 스타일 건물들이 줄지어 있는데, 솔직히 여기 살면 매일 아침 에스프레소 한 잔 마시면서 "아, 인생 참 달다~" 해야 할 것 같은 분위기라고! 세부 시내의 그 정신없는 소음? 여기선 그게 뭐야? 먹는 건가? 여긴 너무 평화로워서 개미 발소리도 들릴 정도라니까! "똑똑똑, 실례합니다~ 저 이탈리아에서 왔는데요?" 하고 건물들이 말 거는 것 같지 않아? 다들 여기서 사진 한 장 박고 가자고. 인스타 올리면 다들 너 이탈리아 간 줄 알걸? 배꼽 잡는 평화로움, 그게 바로 여기 매력이야! 렛츠 기릿! 🔥',
+    description: 'Mediterranean-style residential community in Talamban',
+    category: 'Residential',
+    detailedDescription: 'La Cittadella is a premier subdivision located in the highlands of Talamban, Cebu City. It features Italian-themed homes and well-maintained landscapes, offering a serene environment for its residents away from the city hustle.',
+    translations: {
+      ko: {
+        name: '라 시타델라 서브디비전',
+        narration: '세부 탈람반에 위치한 평화로운 주거 단지인 라 시타델라 서브디비전에 오신 것을 환영합니다. 이 지역은 지중해 스타일의 건축물과 조용한 분위기로 유명합니다.',
+        description: '탈람반에 위치한 지중해 스타일 주거 단지'
+      }
+    }
+  },
+  {
+    id: 'san-isidro-parish-talamban',
+    cityId: 'cebu',
+    name: 'San Isidro Parish Church',
+    lat: 10.3665,
+    lng: 123.9185,
+    radius: 80,
+    narration: 'You are now near San Isidro Parish Church, the spiritual center of the Talamban community. It is a landmark of faith for locals in north Cebu.',
+    description: 'Historic Roman Catholic church in Talamban',
+    category: 'Religious',
+    translations: {
+      ko: {
+        name: '산 이시드로 성당',
+        narration: '탈람반 지역 사회의 영적 중심지인 산 이시드로 성당 근처에 계십니다. 세부 북부 지역 주민들에게 신앙의 상징과도 같은 곳입니다.',
+        description: '탈람반의 유서 깊은 로마 가톨릭 성당'
+      }
+    }
+  },
+  {
+    id: 'gaisano-grand-mall-talamban',
+    cityId: 'cebu',
+    name: 'Gaisano Grand Mall Talamban',
+    lat: 10.3705,
+    lng: 123.9195,
+    radius: 150,
+    narration: 'Welcome to Gaisano Grand Mall Talamban, the primary shopping and dining destination for residents in the area. A convenient stop for supplies and local food.',
+    description: 'Main shopping mall in Talamban area',
+    category: 'Shopping',
+    translations: {
+      ko: {
+        name: '가이사노 그랜드 몰 탈람반',
+        narration: '이 지역 주민들의 주요 쇼핑 및 식사 장소인 가이사노 그랜드 몰 탈람반에 오신 것을 환영합니다. 생필품 구입과 현지 음식을 맛보기에 편리한 장소입니다.',
+        description: '탈람반 지역의 주요 쇼핑몰'
+      }
+    }
+  },
+  {
+    id: 'talamban-post-office',
+    cityId: 'cebu',
+    name: 'Talamban Post Office',
+    lat: 10.3715,
+    lng: 123.9155,
+    radius: 50,
+    narration: 'You have reached the Talamban Post Office. It serves as a vital communication link and a historical landmark in the district.',
+    description: 'Local postal service hub in Talamban',
+    category: 'Public Service',
+    translations: {
+      ko: {
+        name: '탈람반 우체국',
+        narration: '탈람반 우체국에 도착하셨습니다. 이 지역의 중요한 통신 허브이자 역사적인 랜드마크 역할을 하고 있습니다.',
+        description: '탈람반 현지 우편 서비스 허브'
+      }
+    }
+  },
+  {
+    id: 'sirao-flower-garden',
+    cityId: 'cebu',
+    name: 'Sirao Flower Garden',
+    lat: 10.386111,
+    lng: 123.824722,
+    radius: 80,
+    narration: 'Welcome to Sirao Flower Garden, Cebu\'s colorful "Little Amsterdam". This vibrant garden features beautiful flower fields, especially the iconic celosia flowers that bloom year-round.',
+    description: 'Colorful flower garden known as Cebu\'s Little Amsterdam',
+    category: 'Garden & Nature',
+    detailedDescription: 'Sirao Flower Garden, affectionately called "Little Amsterdam" by locals, is a picturesque flower farm located in the highlands of Cebu City. Situated in Barangay Sirao, about 2,000 feet above sea level, the garden offers cool mountain air and stunning views. The garden is famous for its vibrant celosia flowers, which bloom in brilliant shades of red, pink, orange, and yellow throughout the year. The colorful flower beds are arranged in neat rows, creating a stunning visual spectacle reminiscent of Dutch tulip fields. Beyond celosia, the garden also features other flowers and plants including sunflowers, zinnias, and various ornamental plants. The site has become increasingly popular on social media, attracting photographers and nature lovers. Various photo installations and viewing decks have been added to enhance the visitor experience. The garden is family-owned and operated, representing the entrepreneurial spirit of local farmers who transformed their vegetable farm into a tourist attraction.',
+    photos: [
+      'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800',
+      'https://images.unsplash.com/photo-1464699908537-0954e50791ee?w=800',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800',
+      'https://images.unsplash.com/photo-1592422746942-44e05e70a8bc?w=800',
+      'https://images.unsplash.com/photo-1563784462041-5f97ac9523dd?w=800',
+      'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800'
+    ],
     historicalInfo: 'Originally a vegetable farm, Sirao Flower Garden was transformed into a tourist attraction by local farmers and has become famous on social media as Cebu\'s "Little Amsterdam".',
     yearBuilt: '2015',
     architect: 'Local Farmers',
@@ -8432,6 +8539,86 @@ export class MemStorage implements IStorage {
       this.landmarksMap.set(newLandmark.id, newLandmark);
       this.saveToDisk(); // Persistence fix
       return newLandmark;
+    }
+  }
+
+  async updateCity(id: string, updates: Partial<City>): Promise<City | undefined> {
+    try {
+      const [updated] = await db
+        .update(citiesTable)
+        .set({ ...updates, updatedAt: new Date() })
+        .where(eq(citiesTable.id, id))
+        .returning();
+      return updated as City;
+    } catch (error) {
+      console.warn('[AI DB Manager] DB update city failed, falling back to memory:', error);
+      const city = this.citiesMap.get(id);
+      if (city) {
+        const updatedCity = { ...city, ...updates, updatedAt: new Date() };
+        this.citiesMap.set(id, updatedCity);
+        this.saveToDisk();
+        return updatedCity;
+      }
+      return undefined;
+    }
+  }
+
+  async updateLandmark(id: string, updates: Partial<Landmark>): Promise<Landmark | undefined> {
+    try {
+      const [updated] = await db
+        .update(landmarksTable)
+        .set({ ...updates, updatedAt: new Date() })
+        .where(eq(landmarksTable.id, id))
+        .returning();
+      return updated as Landmark;
+    } catch (error) {
+      console.warn('[AI DB Manager] DB update landmark failed, falling back to memory:', error);
+      const landmark = this.landmarksMap.get(id);
+      if (landmark) {
+        const updatedLandmark = { ...landmark, ...updates, updatedAt: new Date() };
+        this.landmarksMap.set(id, updatedLandmark);
+        this.saveToDisk();
+        return updatedLandmark;
+      }
+      return undefined;
+    }
+  }
+
+  async getLandmarkGuides(landmarkId: string): Promise<DbLandmarkGuide[]> {
+    const { landmarkGuides: landmarkGuidesTable } = await import("@shared/schema");
+    try {
+      return await db
+        .select()
+        .from(landmarkGuidesTable)
+        .where(eq(landmarkGuidesTable.landmarkId, landmarkId))
+        .orderBy(desc(landmarkGuidesTable.createdAt));
+    } catch (error) {
+      console.warn('[AI DB Manager] DB fetch failed for landmark guides:', error);
+      return [];
+    }
+  }
+
+  async createLandmarkGuide(guide: InsertLandmarkGuide): Promise<DbLandmarkGuide> {
+    const { landmarkGuides: landmarkGuidesTable } = await import("@shared/schema");
+    try {
+      const [newGuide] = await db
+        .insert(landmarkGuidesTable)
+        .values(guide)
+        .onConflictDoUpdate({
+          target: [landmarkGuidesTable.landmarkId, landmarkGuidesTable.userId],
+          set: {
+            narration: guide.narration,
+            description: guide.description,
+            detailedDescription: guide.detailedDescription,
+            translations: guide.translations,
+            updatedAt: new Date()
+          }
+        })
+        .returning();
+      return newGuide;
+    } catch (error) {
+      console.error('[AI DB Manager] DB create landmark guide failed:', error);
+      throw error;
     }
   }
 }

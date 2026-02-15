@@ -1,7 +1,7 @@
 import { db } from "../db";
 import { Landmark, marketingContents, Translations } from "@shared/schema";
 import { eq } from "drizzle-orm";
-import { openai } from "../lib/openai";
+import { getAI } from "../lib/gemini";
 
 /**
  * [마케터 쏭의 마케팅 특강: AI를 활용한 자동 홍보 시스템]
@@ -25,18 +25,20 @@ export class AutomationService {
         // 1. 프롬프트 구성 (AI에게 시키는 섬세한 명령서)
         // 인공지능에게 단순히 '글 써줘'라고 하기보다, 구체적인 상황과 정체성을 부여하는 것이 훨씬 퀄리티가 높아!
         const prompt = `
-      너는 'Dr.'s Engine'의 수석 마케터 '마케터 쏭'이야.
-      아주 활기차고 에너지가 넘치며, 사람들을 당장 여행 떠나고 싶게 만드는 능력이 있어.
+      너는 'Dr.'s Engine'의 수석 마케터 '마케터 쏭'이자, 세상을 웃음으로 뒤흔드는 AI 스토리텔러 'Story Teller Lee'야.
+      아주 활기차고 에너지가 넘치며, 미국의 유명 코미디언처럼 아주 재밌고 유쾌한 말투를 사용해.
       
       새로운 여행 명소가 등록되었으니, 이를 홍보할 4가지 플랫폼용 콘텐츠를 만들어줘.
+      모든 콘텐츠는 읽는 사람이 배꼽이 빠질 정도로 재밌어야 하지만, 핵심 정보는 정확해야 해!
+      
       명소 이름: ${landmark.name}
       명소 설명: ${landmark.description || ''}
       
       각 플랫폼별 특징:
-      1. Naver Blog: 정보 위주로 풍부하게, '내돈내산' 느낌의 친근한 말투
-      2. Instagram: 감성 뿜뿜, 이모지 듬뿍, 세련된 해시태그 포함
-      3. TikTok: 아주 짧고 강렬한 훅(Hook) 문구 위주
-      4. Twitter: 트렌디하고 유머러스하게
+      1. Naver Blog: 정보 위주로 풍부하게, '내돈내산' 느낌의 친근하고 유머러스한 말투
+      2. Instagram: 감성 뿜뿜, 이모지 듬뿍, 세련되고 재치 있는 해시태그 포함
+      3. TikTok: 아주 짧고 강렬한 훅(Hook) 문구 위주, 빵 터지는 한 방이 필요해!
+      4. Twitter: 트렌디하고 배꼽 잡는 유머러스함
       
       결과는 반드시 다음 JSON 형식을 지켜야 해:
       {
@@ -50,27 +52,24 @@ export class AutomationService {
         try {
             console.log(`[Dr.'s Engine] '${landmark.name}' 명소에 대한 홍보 마케팅 캠페인을 시작합니다!`);
 
-            // 2. OpenAI API 호출
-            // response_format: { type: "json_object" } 를 사용하면 AI가 항상 객체 형태로만 대답하게 돼. (아주 편리한 기술!)
-            if (!openai) {
-                console.warn("[Dr.'s Engine] OpenAI가 설정되지 않아 홍보 콘텐츠 생성을 건너뜁니다.");
+            // 2. Gemini API 호출
+            const ai = getAI();
+            if (!ai) {
+                console.warn("[Dr.'s Engine] Gemini API Key가 없어 홍보 콘텐츠 생성을 건너뜁니다.");
                 return;
             }
 
-            const response = await openai.chat.completions.create({
-                model: "gpt-4o",
-                messages: [
-                    {
-                        role: "system",
-                        content: "너는 창의적이고 활기찬 20대 여성 마케터 '마케터 쏭'이야. 항상 에너제틱하게 대답해!"
-                    },
-                    { role: "user", content: prompt }
-                ],
-                response_format: { type: "json_object" }
+            const systemPrompt = "너는 창의적이고 활기찬 20대 여성 마케터 '마케터 쏭'이야. 항상 에너제틱하게 대답해!";
+            const fullPrompt = `${systemPrompt}\n\n${prompt}`;
+
+            const response = await ai.models.generateContent({
+                model: "gemini-2.0-flash",
+                contents: fullPrompt,
+                config: { responseMimeType: "application/json" }
             });
 
             // 3. 생성된 결과 확인
-            const content = response.choices[0].message.content;
+            const content = response?.text;
             if (content) {
                 const result = JSON.parse(content);
                 console.log(`[Dr.'s Engine] 마케터 쏭의 창의적인 콘텐츠가 도착했습니다!`, result);
@@ -82,7 +81,7 @@ export class AutomationService {
 
         } catch (error) {
             // 오류 처리도 교육적으로! AI 호출 시 API 키가 틀렸거나 네트워크 문제가 생길 수 있어.
-            console.error("[Dr.'s Engine] 아차! 마케터 쏭이 글을 쓰는 중에 연필이 부러졌나봐요(OpenAI 오류):", error);
+            console.error("[Dr.'s Engine] 아차! 마케터 쏭이 글을 쓰는 중에 연필이 부러졌나봐요(Gemini 오류):", error);
         }
     }
 
@@ -92,7 +91,7 @@ export class AutomationService {
      */
     async discoverLandmarks(cityName: string) {
         const prompt = `
-      너는 전 세계를 여행하는 전문 가이드이자 스토리텔러야.
+      너는 전 세계를 여행하며 배꼽 스틸을 일삼는 전문 가이드이자 스토리텔러 'Story Teller Lee'야.
       '${cityName}' 도시에 대해 다음 4가지 카테고리의 장소를 각각 적어도 3개씩(총 12개 이상) 추천해줘.
       1. Landmark (역사적 명소, 유적지)
       2. Activity (할 일, 체험, 액티비티)
@@ -104,10 +103,11 @@ export class AutomationService {
       - category: 위의 4가지 중 하나
       - lat: 위도 (숫자)
       - lng: 경도 (숫자)
-      - narration: 해당 장소에 얽힌 '재미있고 흥미진진한' 스토리. 반드시 **300자 이상**으로 작성할 것. (청취자가 몰입할 수 있도록 생생하게 기술)
-      - description: 한 줄 요약
+      - narration: 해당 장소에 얽힌 '미치도록 재밌고 흥미진진한' 스토리. 반드시 **300자 이상**으로 작성할 것. 
+        (미국의 유명 코미디언처럼 유머러스하고 생생한 성대모사나 유머를 섞어서 청취자가 배꼽 잡게 만들 것!)
+      - description: 한 줄 요약 (재치 있게!)
       - detailed_description: 장소에 대한 상세 정보
-      - historical_info: 역사적 배경 (Landmark인 경우 특히 중요)
+      - historical_info: 역사적 배경 (Landmark인 경우 특히 중요, 팩트는 지키면서!)
 
       결과는 반드시 다음 JSON 형식을 지켜야 해:
       {
@@ -128,27 +128,25 @@ export class AutomationService {
     `;
 
         try {
-            console.log(`[Dr.'s Engine] '${cityName}' 도시에 대한 AI 자동 탐사를 시작합니다...`);
+            console.log(`[Dr.'s Engine] '${cityName} ' 도시에 대한 AI 자동 탐사를 시작합니다...`);
 
-            // OpenAI API 키가 없는 경우 로컬 데모 데이터를 반환합니다.
-            if (!process.env.OPENAI_API_KEY) {
-                console.warn("[Dr.'s Engine] OPENAI_API_KEY가 설정되지 않았습니다. 데모 데이터를 반환합니다.");
+            const ai = getAI();
+            // Gemini API 키가 없는 경우 로컬 데모 데이터를 반환합니다.
+            if (!ai) {
+                console.warn("[Dr.'s Engine] GEMINI_API_KEY가 설정되지 않았습니다. 데모 데이터를 반환합니다.");
                 return this.getMockLandmarks(cityName);
             }
 
-            const response = await openai?.chat.completions.create({
-                model: "gpt-4o",
-                messages: [
-                    {
-                        role: "system",
-                        content: "너는 최고의 여행 가이드이자 이야기꾼이야. 항상 흥미진진하고 생생한 이야기를 들려줘."
-                    },
-                    { role: "user", content: prompt }
-                ],
-                response_format: { type: "json_object" }
+            const systemPrompt = "너는 창의적이고 유머러스한 최고의 가이드 'Story Teller Lee'야. 항상 에너제틱하고 사람들을 빵 터뜨리게 대답해!";
+            const fullPrompt = `${systemPrompt}\n\n${prompt}`;
+
+            const response = await ai.models.generateContent({
+                model: "gemini-2.0-flash",
+                contents: fullPrompt,
+                config: { responseMimeType: "application/json" }
             });
 
-            const content = response?.choices[0].message.content;
+            const content = response?.text;
             if (content) {
                 return JSON.parse(content).landmarks;
             }
