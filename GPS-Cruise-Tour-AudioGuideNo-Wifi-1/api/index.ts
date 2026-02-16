@@ -26,5 +26,10 @@ initializeOAuthProviders();
 setupAuthRoutes(app);
 registerRoutes(app);
 
+// 테스트용 헬스체크 라우트
+app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", message: "Vercel API is working", time: new Date().toISOString() });
+});
+
 // Vercel Serverless Function handler
 export default app;
