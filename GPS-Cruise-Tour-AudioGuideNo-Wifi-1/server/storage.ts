@@ -8038,6 +8038,7 @@ export class MemStorage implements IStorage {
       return allLandmarks;
     } catch (error) {
       // If DB query fails, fall back to hardcoded + memory data
+      console.error('[Storage] DB access failed for getLandmarks:', error);
       const fallbackLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values())];
       if (cityId) {
         return fallbackLandmarks.filter(landmark => landmark.cityId === cityId);
@@ -8056,7 +8057,8 @@ export class MemStorage implements IStorage {
     try {
       const [dbLandmark] = await db.select().from(landmarksTable).where(eq(landmarksTable.id, id));
       return dbLandmark as Landmark;
-    } catch {
+    } catch (error) {
+      console.error(`[Storage] DB access failed for getLandmark (${id}):`, error);
       return undefined;
     }
   }
@@ -8187,7 +8189,7 @@ export class MemStorage implements IStorage {
       const [user] = await db.select().from(users).where(eq(users.id, id));
       return user;
     } catch (e) {
-      console.warn("[Storage] DB access failed, falling back to memory for getUserById");
+      console.warn("[Storage] DB access failed for getUserById:", e);
       return Array.from(this.usersMap.values()).find(u => u.id === id);
     }
   }
@@ -8200,7 +8202,7 @@ export class MemStorage implements IStorage {
       const [user] = await db.select().from(users).where(eq(users.email, email));
       return user;
     } catch (e) {
-      console.warn("[Storage] DB access failed, falling back to memory for getUserByEmail");
+      console.warn("[Storage] DB access failed for getUserByEmail:", e);
       return Array.from(this.usersMap.values()).find(u => u.email === email);
     }
   }
@@ -8228,7 +8230,7 @@ export class MemStorage implements IStorage {
       const [created] = await db.insert(users).values(user).returning();
       return created;
     } catch (e) {
-      console.warn("[Storage] DB access failed, falling back to memory for createUser");
+      console.warn("[Storage] DB access failed for createUser:", e);
       const id = String(this.nextUserId++);
       const newUser: User = {
         ...user,
@@ -8256,7 +8258,7 @@ export class MemStorage implements IStorage {
         .returning();
       return updated;
     } catch (e) {
-      console.warn("[Storage] DB access failed, falling back to memory for updateUser");
+      console.warn("[Storage] DB access failed for updateUser:", e);
       const user = this.usersMap.get(id);
       if (user) {
         const updatedUser = { ...user, ...updates, updatedAt: new Date() };
@@ -8279,7 +8281,7 @@ export class MemStorage implements IStorage {
         ));
       return identity;
     } catch (e) {
-      console.warn("[Storage] DB access failed, falling back to memory for getUserIdentity");
+      console.warn("[Storage] DB access failed for getUserIdentity:", e);
       return Array.from(this.userIdentitiesMap.values()).find(
         i => i.provider === provider && i.providerUserId === providerUserId
       );
@@ -8290,7 +8292,7 @@ export class MemStorage implements IStorage {
     try {
       return await db.select().from(userIdentities).where(eq(userIdentities.userId, userId));
     } catch (e) {
-      console.warn("[Storage] DB access failed, falling back to memory for getUserIdentitiesByUserId");
+      console.warn("[Storage] DB access failed for getUserIdentitiesByUserId:", e);
       return Array.from(this.userIdentitiesMap.values()).filter(i => i.userId === userId);
     }
   }
@@ -8300,7 +8302,7 @@ export class MemStorage implements IStorage {
       const [created] = await db.insert(userIdentities).values(identity).returning();
       return created;
     } catch (e) {
-      console.warn("[Storage] DB access failed, falling back to memory for createUserIdentity");
+      console.warn("[Storage] DB access failed for createUserIdentity:", e);
       const id = String(this.nextIdentityId++);
       const newIdentity: UserIdentity = {
         ...identity,
@@ -8329,7 +8331,7 @@ export class MemStorage implements IStorage {
         .returning();
       return updated;
     } catch (e) {
-      console.warn("[Storage] DB access failed, falling back to memory for updateUserIdentity");
+      console.warn("[Storage] DB access failed for updateUserIdentity:", e);
       const identity = this.userIdentitiesMap.get(id);
       if (identity) {
         const updatedIdentity = { ...identity, ...updates, updatedAt: new Date() };

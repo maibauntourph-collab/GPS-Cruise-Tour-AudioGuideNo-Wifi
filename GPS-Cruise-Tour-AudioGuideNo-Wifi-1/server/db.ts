@@ -15,17 +15,23 @@ let pool: pg.Pool | NeonPool;
 
 if (!dbUrl.includes('neon.tech')) {
   // 로컬 개발 환경
-  console.log("[DB] Local development detected. Using node-postgres.");
+  console.log("[DB] Local development detected. Connecting to:", dbUrl.split('@').pop()); // 마스킹 처리된 URL 출력
   const poolNode = new pg.Pool({ connectionString: dbUrl });
   pool = poolNode;
   db = drizzleNode(poolNode, { schema });
 } else {
   // Neon 서버리스 환경
-  console.log("[DB] Cloud Neon environment detected. Using neon-serverless.");
-  neonConfig.webSocketConstructor = ws;
-  const poolNeon = new NeonPool({ connectionString: dbUrl });
-  pool = poolNeon;
-  db = drizzleNeon(poolNeon, { schema });
+  console.log("[DB] Cloud Neon environment detected. Using @neondatabase/serverless with WebSockets.");
+  try {
+    neonConfig.webSocketConstructor = ws;
+    const poolNeon = new NeonPool({ connectionString: dbUrl });
+    pool = poolNeon;
+    db = drizzleNeon(poolNeon, { schema });
+    console.log("[DB] Neon Pool initialized successfully.");
+  } catch (error) {
+    console.error("[DB] Critical: Failed to initialize Neon Pool:", error);
+    throw error;
+  }
 }
 
 export { db, pool };
