@@ -24,12 +24,19 @@ app.use(session({
 
 initializeOAuthProviders();
 setupAuthRoutes(app);
-registerRoutes(app);
 
-// 테스트용 헬스체크 라우트
-app.get("/api/health", (req, res) => {
-    res.json({ status: "ok", message: "Vercel API is working", time: new Date().toISOString() });
+// [연구소장 노트: Vercel 비동기 초기화 보장]
+// registerRoutes는 비동기 함수이므로, 모든 라우트 등록이 완료된 후에만 
+// Vercel의 서버리스 함수가 요청을 처리하도록 핸들러를 래핑합니다.
+let routesRegistered = false;
+const registrationPromise = registerRoutes(app).then(() => {
+    routesRegistered = true;
+    console.log("[Vercel API] Routes registered successfully");
 });
 
-// Vercel Serverless Function handler
-export default app;
+export default async (req: any, res: any) => {
+    if (!routesRegistered) {
+        await registrationPromise;
+    }
+    return app(req, res);
+};
