@@ -8,16 +8,11 @@ const dbUrl = process.env.DATABASE_URL;
 const geminiApiKey = process.env.GEMINI_API_KEY;
 
 const targetCities = [
-    { id: 'seoul', name: '서울특별시' },
-    { id: 'tokyo', name: '도쿄' },
-    { id: 'london', name: '런던' },
-    { id: 'rome', name: '로마' },
-    { id: 'paris', name: '파리' },
-    { id: 'barcelona', name: '바르셀로나' },
-    { id: 'singapore', name: '싱가포르' },
-    { id: 'busan', name: '부산광역시' },
     { id: 'jeju', name: '제주특별자치도' },
-    { id: 'new-york', name: '뉴욕' }
+    { id: 'new-york', name: '뉴욕' },
+    { id: 'tokyo', name: '도쿄' },
+    { id: 'busan', name: '부산광역시' },
+    { id: 'seoul', name: '서울특별시' }
 ];
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));

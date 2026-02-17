@@ -3,6 +3,7 @@ import { db } from "./db";
 import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, cities as citiesTable, users, userIdentities, savedRoutes, routePhotos } from "@shared/schema";
 import { eq, count, and, sql, notInArray, desc } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
+import { NEW_LANDMARKS } from "./data/landmarks_expansion";
 import fs from 'fs';
 import path from 'path';
 
@@ -7936,6 +7937,8 @@ const LANDMARKS: Landmark[] = [
     }
   }
 ];
+
+// LANDMARKS.push(...NEW_LANDMARKS);
 
 export class MemStorage implements IStorage {
   private usersMap: Map<string, User> = new Map();
