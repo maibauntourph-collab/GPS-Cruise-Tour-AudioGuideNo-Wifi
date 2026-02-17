@@ -25,18 +25,13 @@ app.use(session({
 initializeOAuthProviders();
 setupAuthRoutes(app);
 
-// [연구소장 노트: Vercel 비동기 초기화 보장]
-// registerRoutes는 비동기 함수이므로, 모든 라우트 등록이 완료된 후에만 
-// Vercel의 서버리스 함수가 요청을 처리하도록 핸들러를 래핑합니다.
-let routesRegistered = false;
-const registrationPromise = registerRoutes(app).then(() => {
-    routesRegistered = true;
-    console.log("[Vercel API] Routes registered successfully");
-});
+// [연구소장 고정: Vercel 초기화 컨텍스트]
+// 모든 라우트 등록이 완료될 때까지 대기하는 프로미스를 생성합니다.
+const initPromise = registerRoutes(app);
 
 export default async (req: any, res: any) => {
-    if (!routesRegistered) {
-        await registrationPromise;
-    }
+    // 라우트 등록이 완료될 때까지 대기
+    await initPromise;
+    // 익스프레스 앱 실해
     return app(req, res);
 };
