@@ -39,7 +39,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder_
   apiVersion: "2023-10-16" as any, // 최신 API 버전을 사용하여 호환성을 확보합니다.
 });
 
+import { dbCheckService } from "./services/dbCheckService";
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  // [연구소장 노트: 시스템 헬스체크]
+  // 외부 모니터링 도구나 배포 플랫폼(Vercel 등)에서 앱의 상태를 점검할 수 있는 엔드포인트입니다.
+  app.get("/api/health", async (_req, res) => {
+    const health = await dbCheckService.checkConnection();
+    res.status(health.status === 'healthy' ? 200 : 503).json(health);
+  });
   // [적요: 도시 목록 조회 API]
   // 데이터베이스에 저장된 모든 도시 정보를 배열로 반환합니다.
   app.get("/api/cities", async (req, res) => {

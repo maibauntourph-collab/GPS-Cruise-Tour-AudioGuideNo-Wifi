@@ -820,11 +820,29 @@ export class AudioService {
     }
 
     const sentence = this.clovaSentences[this.clovaSentenceIndex];
-    const voiceId = this.getSelectedClovaVoice(this.clovaSentenceLanguage);
+    const voiceId = this.getSelectedClovaVoice(this.clovaSentenceLanguage) || 'nara';
     const currentSessionId = this.clovaSessionId;
+    // Include voiceId in cache key to distinguish between different voices for the same text
+    const cacheKey = `clova-${voiceId}-${sentence.slice(0, 40)}`;
 
     try {
-      // Create abort controller for this fetch
+      // 1. Check Offline Cache First
+      const cached = await offlineStorage.getAudio(cacheKey, this.clovaSentenceLanguage);
+      if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
+
+      if (cached) {
+        console.log(`[AudioService] Using cached CLOVA sentence audio (${voiceId})`);
+        this.playAudioBlob(cached.audioBlob, currentSessionId, () => {
+          this.clovaSentenceIndex++;
+          if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
+            this.onClovaSentenceChange(this.clovaSentenceIndex);
+          }
+          this.playNextClovaSentence(currentSessionId);
+        });
+        return;
+      }
+
+      // 2. Fetch from API if not cached
       this.clovaAbortController = new AbortController();
 
       const response = await fetch('/api/tts/clova/generate', {
@@ -864,46 +882,29 @@ export class AudioService {
         return;
       }
 
-      const objectUrl = URL.createObjectURL(audioBlob);
-
-      // Stop previous audio element if exists
-      if (this.audioElement) {
-        this.audioElement.pause();
-        this.audioElement.onended = null;
-        this.audioElement.onerror = null;
-        this.audioElement.src = '';
+      // 3. Save to Offline Cache
+      try {
+        await offlineStorage.saveAudio({
+          landmarkId: cacheKey,
+          language: this.clovaSentenceLanguage,
+          audioBlob: audioBlob,
+          duration: Math.ceil(sentence.length / 10), // Approximate duration
+          sizeBytes: audioBlob.size,
+          voiceId: voiceId
+        });
+      } catch (e) {
+        console.warn('[AudioService] Failed to cache CLOVA audio:', e);
       }
 
-      this.audioElement = new Audio(objectUrl);
-
-      this.audioElement.onended = () => {
-        URL.revokeObjectURL(objectUrl);
-        // Guard against stale callbacks
-        if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
-
+      // 4. Play
+      this.playAudioBlob(audioBlob, currentSessionId, () => {
         this.clovaSentenceIndex++;
         if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
           this.onClovaSentenceChange(this.clovaSentenceIndex);
         }
         this.playNextClovaSentence(currentSessionId);
-      };
+      });
 
-      this.audioElement.onerror = () => {
-        URL.revokeObjectURL(objectUrl);
-        console.error('[AudioService] Error playing CLOVA sentence');
-        // Guard against stale callbacks
-        if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
-
-        // Try next sentence
-        this.clovaSentenceIndex++;
-        if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
-          this.onClovaSentenceChange(this.clovaSentenceIndex);
-        }
-        this.playNextClovaSentence(currentSessionId);
-      };
-
-      await this.audioElement.play();
-      console.log(`[AudioService] Playing CLOVA sentence ${this.clovaSentenceIndex + 1}/${this.clovaSentences.length}`);
     } catch (error: any) {
       // Ignore abort errors
       if (error?.name === 'AbortError') {

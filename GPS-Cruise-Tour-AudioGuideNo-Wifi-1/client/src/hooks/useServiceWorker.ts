@@ -20,7 +20,7 @@ export function useServiceWorker() {
     if (!shouldEnableServiceWorker && 'serviceWorker' in navigator) {
       console.log('[SW] Development/preview mode detected - cleaning up service workers and caches');
       console.log('[SW] Hostname:', window.location.hostname);
-      
+
       // Unregister all service workers
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         registrations.forEach((registration) => {
@@ -28,7 +28,7 @@ export function useServiceWorker() {
           console.log('[SW] Unregistered service worker:', registration.scope);
         });
       });
-      
+
       // Clear all caches
       if ('caches' in window) {
         caches.keys().then((cacheNames) => {
@@ -38,7 +38,7 @@ export function useServiceWorker() {
           });
         });
       }
-      
+
       return; // Don't register service worker in development/preview
     }
 
@@ -70,7 +70,10 @@ export function useServiceWorker() {
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (!refreshing) {
           refreshing = true;
-          window.location.reload();
+          // Prevent infinite loop by not reloading automatically
+          // Instead, we just let the user know via the update prompt
+          console.log('[SW] Controller changed, update ready');
+          // window.location.reload(); 
         }
       });
     }

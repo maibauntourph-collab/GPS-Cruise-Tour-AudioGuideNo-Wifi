@@ -12,6 +12,7 @@
     - [x] `/api/auth/dev-login/:role` 라우트 구축 (admin, creator, guide, tour_leader, shop_owner 지원)
     - [x] 코다리부장(상점주) 전용 세션 연동 완료
 - [x] 최종 검증 및 테스트 <!-- id: 19 -->
+- [x] CLOVA TTS 오프라인 캐싱 기능 구현 (Offline Audio Caching for Clova)
 - [x] 문서 한글화 작업 (Document Localization) <!-- id: 10 -->
     - [x] `PROJECT_OVERVIEW.md` 한글판 생성 (`_ko.md`) <!-- id: 11 -->
     - [x] `TECHNICAL_SPEC.md` 한글판 생성 (`_ko.md`) <!-- id: 12 -->

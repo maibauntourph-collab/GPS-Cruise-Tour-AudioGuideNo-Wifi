@@ -60,7 +60,17 @@ app.use((req, res, next) => {
   next();
 });
 
+import { dbCheckService } from "./services/dbCheckService";
+
 (async () => {
+  // [연구소장 노트: 부팅 시 자가 진단]
+  // 서버가 뜨자마자 DB가 제대로 붙었는지 확인부터 하고 시작합니다.
+  const health = await dbCheckService.checkConnection();
+  if (health.status === 'unhealthy' && process.env.NODE_ENV === 'production') {
+    console.error("[FATAL] Server startup aborted: Primary DB is unreachable.");
+    // 배포 환경이라면 재시작 루프에 빠지지 않도록 로그를 남기고 종료하는 설정을 고려할 수 있습니다.
+  }
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -87,7 +97,7 @@ app.use((req, res, next) => {
   const port = parseInt(process.env.PORT || '5001', 10);
   server.listen({
     port,
-    host: "localhost",
+    host: "0.0.0.0",
   }, () => {
     log(`serving on port ${port}`);
   });

@@ -43,5 +43,7 @@
 ## 6. 작업 진행 상황 (2026-02-18)
 - **Git Staging**: 현재 변경 사항을 모두 스테이징했습니다 (`git add .`).
 - **Git Commit**: 변경 사항을 커밋했습니다 (메시지: "다시 테스트").
-- **Git Push**: 원격 저장소(`origin main`)로 푸시를 완료했습니다.
+- **Git Push**: 원격 저장소(`origin main`)로 푸시를 시도했으나 충돌이 발생했습니다.
+- **Git Merge**: 원격 변경 사항을 병합하고 충돌(`server/storage.ts`, `docs/walkthrough_ko.md`)을 해결했습니다.
+- **Git Push**: 병합된 변경 사항을 원격 저장소로 최종 푸시했습니다.
 

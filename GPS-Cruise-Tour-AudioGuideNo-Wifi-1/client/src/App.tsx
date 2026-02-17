@@ -32,12 +32,12 @@ function Router() {
   return (
     <Suspense fallback={<PageLoader />}>
       <Switch>
-        <Route path="/" component={RoleSelection}/>
-        <Route path="/home" component={Home}/>
-        <Route path="/guide" component={GuideView}/>
-        <Route path="/tour-leader" component={TourLeaderView}/>
-        <Route path="/admin" component={Admin}/>
-        <Route path="/my-routes" component={MyRoutes}/>
+        <Route path="/" component={RoleSelection} />
+        <Route path="/home" component={Home} />
+        <Route path="/guide" component={GuideView} />
+        <Route path="/tour-leader" component={TourLeaderView} />
+        <Route path="/admin" component={Admin} />
+        <Route path="/my-routes" component={MyRoutes} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

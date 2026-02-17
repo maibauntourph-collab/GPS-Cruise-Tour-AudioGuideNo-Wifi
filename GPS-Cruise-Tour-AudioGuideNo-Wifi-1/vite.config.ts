@@ -34,7 +34,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,mp3}'],
-        maximumFileSizeToCacheInBytes: 5000000 // Increase limit for audio files if needed
+        maximumFileSizeToCacheInBytes: 20000000 // Increased to 20MB for audio files
       },
       devOptions: {
         enabled: true,
@@ -63,7 +63,7 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
   },
   server: {
