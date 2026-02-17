@@ -47,3 +47,11 @@
 - **Git Merge**: 원격 변경 사항을 병합하고 충돌(`server/storage.ts`, `docs/walkthrough_ko.md`)을 해결했습니다.
 - **Git Push**: 병합된 변경 사항을 원격 저장소로 최종 푸시했습니다.
 
+## 7. 트러블슈팅: Vercel 배포 시 데이터 로딩 오류 수정 (2026-02-18)
+- **증상**: 배포 후 `/api/cities` 등 API 호출 시 404 Not Found 발생. (사용자 제보: "데이터로부터 정보를 못 가져와서 생기는 에러")
+- **원인 분석**: Vercel Serverless Function 환경에서 `server/data` 디렉토리의 정적 데이터 파일들이 번들에 포함되지 않아 모듈 로딩 실패 또는 파일 읽기 오류가 발생한 것으로 추정.
+- **조치 사항**:
+    - `vercel.json`: `functions` 설정에 `includeFiles: "server/data/**"`를 추가하여 데이터 파일 강제 포함.
+    - `tsconfig.json`: `include` 경로에 `api/**/*` 추가.
+    - `api/index.ts`: 요청 디버깅을 위한 로깅 미들웨어 추가.
+
