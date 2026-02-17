@@ -1,16 +1,17 @@
 {
+    "outputDirectory": "dist",
+    "cleanUrls": true,
     "rewrites": [
         {
-            "source": "/api/:path*",
+            "source": "/api/(.*)",
             "destination": "/api/index.ts"
         },
         {
-            "source": "/((?!api/).*)",
-            "destination": "/dist/$1"
+            "handle": "filesystem"
         },
         {
             "source": "/(.*)",
-            "destination": "/dist/index.html"
+            "destination": "/index.html"
         }
     ],
     "headers": [

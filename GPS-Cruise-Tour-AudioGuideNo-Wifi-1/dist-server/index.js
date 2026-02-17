@@ -960,12 +960,20 @@ import { drizzle as drizzleNeon } from "drizzle-orm/neon-serverless";
 import { drizzle as drizzleNode } from "drizzle-orm/node-postgres";
 import pg from "pg";
 import ws from "ws";
-var dbUrl = process.env.DATABASE_URL || "postgresql://localhost:5432/postgres";
+var dbUrl = process.env.DATABASE_URL;
+if (!dbUrl) {
+  const errorMsg = "[DB] Critical: DATABASE_URL is not defined in environment variables.";
+  console.error(errorMsg);
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(errorMsg);
+  }
+}
 var db;
 var pool;
-if (!dbUrl.includes("neon.tech")) {
-  console.log("[DB] Local development detected. Connecting to:", dbUrl.split("@").pop());
-  const poolNode = new pg.Pool({ connectionString: dbUrl });
+if (!dbUrl || !dbUrl.includes("neon.tech")) {
+  const finalUrl = dbUrl || "postgresql://localhost:5432/postgres";
+  console.log("[DB] Local development/Fallback detected. Connecting to:", finalUrl.split("@").pop());
+  const poolNode = new pg.Pool({ connectionString: finalUrl });
   pool = poolNode;
   db = drizzleNode(poolNode, { schema: schema_exports });
 } else {
@@ -1517,11 +1525,7 @@ var RESTAURANTS = [
   }
 ];
 
-// server/storage.ts
-import fs from "fs";
-import path from "path";
-var DATA_DIR = path.join(process.cwd(), "server", "data");
-var DATA_FILE = path.join(DATA_DIR, "persistence.json");
+// server/data/cities.ts
 var CITIES = [
   {
     id: "rome",
@@ -1849,7 +1853,7 @@ var CITIES = [
               duration: "4-8 ore",
               frequency: "In base alla prenotazione",
               price: "\u20AC45-150 a persona",
-              tips: "I tour preordinati garantiscono il rientro in nave in tempo. Include biglietti salta fila. Prenota 48 ore prima."
+              tips: "I tour preordinati garantiscono il rientro in nave em tempo. Include biglietti salta fila. Prenota 48 ore prima."
             }
           }
         },
@@ -2090,6 +2094,8 @@ var CITIES = [
     zoom: 13
   }
 ];
+
+// server/data/landmarks.ts
 var LANDMARKS = [
   // Rome landmarks
   {
@@ -2104,6 +2110,7 @@ var LANDMARKS = [
     category: "Ancient Rome",
     detailedDescription: `The Colosseum, also known as the Flavian Amphitheatre, stands as one of the greatest architectural achievements of ancient Rome and remains the largest amphitheater ever constructed. Built between 70-80 AD under Emperors Vespasian and Titus, this magnificent elliptical structure could accommodate between 50,000 to 80,000 spectators who came to witness gladiatorial contests, animal hunts, mock naval battles, and public executions. The name "Colosseum" likely derives from the colossal bronze statue of Nero that once stood nearby. Constructed primarily of travertine limestone blocks, volcanic tuff, and brick-faced concrete, the Colosseum showcases the engineering brilliance of Roman architecture. Its innovative design featured a complex system of vaults and arches that distributed weight efficiently, allowing for its massive four-story facade. The exterior was adorned with Doric, Ionic, and Corinthian columns on successive levels, demonstrating the Romans mastery of classical architectural orders. The arena floor, once covered with wooden planking and sand, concealed an elaborate underground network called the hypogeum - a two-level subterranean complex of tunnels and chambers where gladiators, animals, and stage equipment were housed and prepared for the spectacles above. A sophisticated system of pulleys, ramps, and trapdoors allowed for dramatic entrances and special effects during performances. The Colosseum also featured a retractable awning system called the velarium, operated by sailors from the Roman navy, which provided shade for spectators during events. Despite suffering damage from earthquakes, stone-robbers who repurposed its materials for other buildings, and the general passage of time, the Colosseum has endured as a powerful symbol of Imperial Rome and ancient civilization. Today, it stands as one of Rome's most popular tourist attractions and a UNESCO World Heritage Site, drawing millions of visitors annually who come to marvel at this extraordinary monument to Roman engineering and entertainment.`,
     photos: [
+      "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1600&q=80",
       "/images/landmarks/colosseum.png",
       "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800",
       "https://images.unsplash.com/photo-1555992336-fb0d29498b13?w=800",
@@ -3015,6 +3022,7 @@ var LANDMARKS = [
     category: "Monument",
     detailedDescription: `The Eiffel Tower, or "La Tour Eiffel," stands as the undisputed symbol of Paris and France, an iron lattice masterpiece that has captivated the world since its completion in 1889. Rising 330 meters (1,083 feet) into the Parisian sky, this architectural marvel was initially conceived as a temporary structure for the 1889 Exposition Universelle (World's Fair), celebrating the centennial of the French Revolution. Today, it welcomes nearly seven million visitors annually, making it the most-visited paid monument in the world. The tower was designed by engineer Gustave Eiffel, whose company specialized in metal framework construction. Eiffel's design was selected from over 100 submissions in a competition to create a centerpiece for the World's Fair. The structure's innovative design and unprecedented height sparked intense controversy among Parisian artists and intellectuals, who published a petition called "Artists Against the Eiffel Tower," denouncing it as a monstrous iron monstrosity that would disfigure the elegant Parisian skyline. Notable critics included author Guy de Maupassant, who reportedly ate lunch in the tower's restaurant every day because it was the one place in Paris where he couldn't see the tower. Construction began in January 1887 and was completed in a remarkable 2 years, 2 months, and 5 days, a testament to Eiffel's engineering prowess and organizational skills. The tower required 18,038 metallic parts, 2.5 million rivets, and over 300 workers to assemble. Despite the enormous scale of the project and the height at which much of the work was performed, only one worker died during construction - a remarkably low casualty rate for the era. The tower's lattice structure was revolutionary, using an open-frame design that minimized wind resistance while maximizing strength. The four massive curved legs rest on concrete foundations, each supported by four separate foundation blocks. The legs converge as they rise, meeting at the first platform at 57 meters (187 feet). Above this, the structure continues upward through a second platform at 115 meters (377 feet) before tapering to the summit at 300 meters, with antennas extending the total height to 330 meters. The tower was painted a distinctive reddish-brown color for the exposition, but has since been repainted 18 times, with the current "Eiffel Tower Brown" requiring 60 tons of paint applied in three different shades - darker at the bottom and lighter at the top to enhance its appearance against the sky. Originally intended to stand for only 20 years, the Eiffel Tower was saved from demolition when Eiffel shrewdly emphasized its value as a radiotelegraphy station. The tower proved invaluable during World War I for intercepting enemy communications, and later became essential for radio and television broadcasting. During World War II, when Hitler visited Paris in 1940, French resistance fighters cut the elevator cables, forcing the F\xFChrer to climb the stairs if he wanted to reach the summit - he declined. The tower has served as the site of numerous scientific experiments, including Eiffel's own aerodynamic and meteorological studies. Physicist Th\xE9odore Wulf conducted radiation experiments from the top in 1910, leading to the discovery of cosmic rays. The tower has also witnessed remarkable feats of daring: in 1912, Austrian tailor Franz Reichelt jumped from the first platform wearing a parachute suit of his own design - tragically, it failed. In 1923, journalist Pierre Labric rode a bicycle down the stairs from the first level. The tower's three platforms offer spectacular views of Paris and host restaurants, museums, and shops. The first platform, recently renovated, features a glass floor offering a thrilling view straight down. The second platform houses the Michelin-starred restaurant Jules Verne, offering gourmet dining with unparalleled views. The summit, accessible by elevator, provides a breathtaking 360-degree panorama of the City of Light. The tower has been featured in countless films, artworks, and photographs, becoming synonymous with romance, elegance, and French culture. It serves as the backdrop for millions of proposals, weddings, and celebrations each year. Every evening, the tower sparkles for five minutes at the beginning of each hour after sunset, illuminated by 20,000 light bulbs installed in 1985, creating a magical spectacle visible throughout Paris. Recent additions include wind turbines and solar panels, making the iconic structure more environmentally sustainable while maintaining its historic character. The tower also hosts various exhibitions and events, from art installations to sporting events, continually reinventing itself while remaining true to Eiffel's original vision. Today, the Eiffel Tower stands not just as an engineering achievement but as a testament to human creativity, ambition, and the power of vision to overcome criticism and create something truly timeless. What was once derided as an eyesore has become the most recognizable landmark on Earth, proving that great art and engineering can transform not just skylines, but hearts and minds across generations.`,
     photos: [
+      "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=1600&q=80",
       "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800",
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800",
       "https://images.unsplash.com/photo-1431274172761-fca41d930114?w=800",
@@ -3567,6 +3575,7 @@ var LANDMARKS = [
     category: "Monument",
     detailedDescription: `Big Ben, one of the world's most recognizable landmarks, stands as an enduring symbol of London, British parliamentary democracy, and the precision of Victorian engineering. While "Big Ben" technically refers only to the Great Bell within the tower, the name has become synonymous with the entire Elizabeth Tower at the Palace of Westminster. Rising 96 meters (316 feet) above the Thames, this iconic clock tower has marked time over London since 1859, its distinctive chimes broadcast worldwide as the audio signature of British culture and news programming. The tower was designed by Augustus Pugin in the Gothic Revival style as part of the new Palace of Westminster, built after the devastating fire of 1834 destroyed the previous medieval palace. Construction began in 1843, but the tower was not completed until 1859, with the clock becoming operational on May 31 of that year. The first chimes of Big Ben rang out on July 11, 1859, though the bell cracked shortly after and was silent for four years while repairs were made. The repaired bell, with its distinctive tone created by the crack, began chiming again in 1863 and has continued to this day. The Elizabeth Tower (renamed from Clock Tower in 2012 to celebrate Queen Elizabeth II's Diamond Jubilee) showcases spectacular Gothic Revival architecture with its ornate stonework, pointed arches, and decorative cast iron spire topped with the cross of St. George. The tower contains 11 floors, with 334 steps spiraling up to the belfry and a further 59 steps to reach the Ayrton Light at the very top - a lantern that illuminates whenever either House of Parliament is sitting after dark. The Clock Tower houses the Great Clock, designed by Edmund Beckett Denison and built by clockmaker Edward John Dent. When it was completed, it was the largest and most accurate four-faced striking and chiming clock in the world. Each of the four clock faces measures 7 meters (23 feet) in diameter, with minute hands 4.3 meters (14 feet) long and hour hands 2.7 meters (9 feet) long. The clock mechanism, despite its Victorian origins, remains remarkably accurate, kept within two seconds of Greenwich Mean Time. The clock's precision is so valued that when the tower tilts slightly (it currently leans about 0.26 degrees), engineers carefully monitor to ensure it doesn't affect timekeeping. The tower contains five bells: the four quarter bells that chime every fifteen minutes, and the Great Bell - Big Ben itself - which strikes the hours. Big Ben weighs 13.7 tons and sounds the note E. The origin of the bell's name remains disputed; it may honor Sir Benjamin Hall, the Chief Commissioner of Works when the bell was installed, or Benjamin Caunt, a heavyweight boxing champion of the era. The quarter bells play the Westminster Quarters, a melody so famous it has been adopted by clock towers and grandfather clocks worldwide. The melody is based on variations of phrases from Handel's Messiah and is often followed by the striking of Big Ben on the hour. Big Ben has witnessed and marked some of Britain's most significant historical moments. During World War I, the chimes were silenced to prevent German zeppelins from using them for navigation, and the clock face lights were dimmed. In World War II, the tower suffered bomb damage but continued to keep time. On VE Day in 1945, the silenced bells rang out again to celebrate victory in Europe, their chimes representing the return of peace and normalcy. The clock stopped briefly on D-Day, creating rumors of sabotage, though it was likely a mechanical issue. Throughout the years, the clock has occasionally stopped or been silenced for various reasons. It ceased during Winston Churchill's funeral in 1965 and Margaret Thatcher's in 2013 as marks of respect. Mechanical failures have occurred, including a memorable incident in 1976 when the clock stopped for nine months due to metal fatigue. In 2007, a flock of starlings landing on a minute hand slowed the clock by several minutes. Big Ben has become a cultural icon appearing in countless films, from Peter Pan to V for Vendetta, where it serves as the ultimate symbol of London. The tower's image graces postcards, souvenirs, and media worldwide. Its chimes introduce BBC news broadcasts, making them perhaps the most recognized sound in broadcasting history. The "bongs" of Big Ben mark significant national moments, from New Year celebrations broadcast globally to moments of silence for national tragedies. From 2017 to 2021, Big Ben underwent its most extensive conservation project in its history, costing \xA380 million. The restoration involved dismantling the clock mechanism, repairing the tower's stonework, regilding the clock faces, and upgrading facilities. During this period, the bell was largely silenced except for special occasions, causing consternation among Londoners who missed its familiar hourly presence in the city's soundscape. The restoration revealed fascinating historical details, including graffiti left by Victorian workers and damage from World War II bombing raids. The Elizabeth Tower is not regularly open to the public, with tours available only to UK residents who arrange visits through their Members of Parliament, making it one of London's most exclusive tourist experiences. Those fortunate enough to climb the tower experience a journey through British history, passing through the prison room (where unruly MPs were once held), the clock room with its magnificent Victorian mechanism, and the belfry where Big Ben and the quarter bells hang. The view from the top offers spectacular panoramas of London, though the constant presence of the clock machinery serves as a reminder that this is a working building, not merely a tourist attraction. Big Ben represents more than Victorian engineering triumph - it symbolizes continuity, democracy, and British resilience. Through wars, celebrations, tragedies, and triumphs, its chimes have provided a constant, reassuring presence. As London continues to evolve around it, Big Ben remains an unchanging reference point, its hourly chimes marking not just time but the passage of history itself. The tower stands as a testament to the skill of Victorian craftsmen, the enduring power of Gothic architecture, and the human need for landmarks that connect us to our past while guiding us into the future.`,
     photos: [
+      "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=1600&q=80",
       "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
       "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800",
       "https://images.unsplash.com/photo-1543716021-36e0f757e6c9?w=800"
@@ -9384,6 +9393,12 @@ var LANDMARKS = [
     }
   }
 ];
+
+// server/storage.ts
+import fs from "fs";
+import path from "path";
+var DATA_DIR = path.join(process.cwd(), "server", "data");
+var DATA_FILE = path.join(DATA_DIR, "persistence.json");
 var MemStorage = class {
   usersMap = /* @__PURE__ */ new Map();
   userIdentitiesMap = /* @__PURE__ */ new Map();
@@ -10140,7 +10155,7 @@ function mockGenerateCityInfo(query) {
 // server/routes.ts
 init_clova();
 init_schema();
-import { eq as eq4, desc as desc2, or, ilike, sql as sql4, count as count2 } from "drizzle-orm";
+import { eq as eq4, desc as desc2, or, ilike, sql as sql5, count as count2 } from "drizzle-orm";
 import crypto4 from "crypto";
 import multer from "multer";
 import * as XLSX from "xlsx";
@@ -10619,6 +10634,28 @@ function requireRole(...roles) {
   };
 }
 
+// server/services/dbCheckService.ts
+import { sql as sql4 } from "drizzle-orm";
+var DbCheckService = class {
+  async checkConnection() {
+    const start = Date.now();
+    try {
+      await db.execute(sql4`SELECT 1`);
+      const latency = Date.now() - start;
+      console.log(`[DB Health] Connection is healthy. Latency: ${latency}ms`);
+      return { status: "healthy", latency };
+    } catch (error) {
+      console.error("[DB Health] Connection check failed:", error.message);
+      return {
+        status: "unhealthy",
+        latency: Date.now() - start,
+        error: error.message
+      };
+    }
+  }
+};
+var dbCheckService = new DbCheckService();
+
 // server/routes.ts
 if (!process.env.STRIPE_SECRET_KEY) {
   console.warn("[\uD68C\uACC4\uBD80\uC7A5 \uACBD\uACE0] \u26A0\uFE0F STRIPE_SECRET_KEY \uD658\uACBD\uBCC0\uC218\uAC00 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. \uACB0\uC81C \uAE30\uB2A5\uC774 \uBE44\uD65C\uC131\uD654\uB429\uB2C8\uB2E4.");
@@ -10631,6 +10668,10 @@ var stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder_wi
   // 최신 API 버전을 사용하여 호환성을 확보합니다.
 });
 async function registerRoutes(app2) {
+  app2.get("/api/health", async (_req, res) => {
+    const health = await dbCheckService.checkConnection();
+    res.status(health.status === "healthy" ? 200 : 503).json(health);
+  });
   app2.get("/api/cities", async (req, res) => {
     try {
       const cities2 = await storage.getCities();
@@ -11193,8 +11234,8 @@ async function registerRoutes(app2) {
         const [existing] = await tx.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, creatorId));
         if (existing) {
           await tx.update(creatorEarnings).set({
-            totalBalance: sql4`${creatorEarnings.totalBalance} + ${creatorShare}`,
-            totalEarned: sql4`${creatorEarnings.totalEarned} + ${creatorShare}`,
+            totalBalance: sql5`${creatorEarnings.totalBalance} + ${creatorShare}`,
+            totalEarned: sql5`${creatorEarnings.totalEarned} + ${creatorShare}`,
             updatedAt: /* @__PURE__ */ new Date()
           }).where(eq4(creatorEarnings.userId, creatorId));
         } else {
@@ -12404,7 +12445,7 @@ async function registerRoutes(app2) {
       }).from(userIdentities).groupBy(userIdentities.provider);
       const sevenDaysAgo = /* @__PURE__ */ new Date();
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-      const recentSignups = await db.select({ count: count2() }).from(users).where(sql4`${users.createdAt} > ${sevenDaysAgo}`);
+      const recentSignups = await db.select({ count: count2() }).from(users).where(sql5`${users.createdAt} > ${sevenDaysAgo}`);
       res.json({
         total,
         roles: Object.fromEntries(roleStats.map((r) => [r.role || "user", Number(r.count)])),
@@ -13161,6 +13202,10 @@ app.use((req, res, next) => {
   next();
 });
 (async () => {
+  const health = await dbCheckService.checkConnection();
+  if (health.status === "unhealthy" && process.env.NODE_ENV === "production") {
+    console.error("[FATAL] Server startup aborted: Primary DB is unreachable.");
+  }
   const server = await registerRoutes(app);
   app.use((err, _req, res, _next) => {
     const status = err.status || err.statusCode || 500;
