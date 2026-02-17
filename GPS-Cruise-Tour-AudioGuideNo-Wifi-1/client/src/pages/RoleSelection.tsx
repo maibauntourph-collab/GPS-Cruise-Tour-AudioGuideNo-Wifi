@@ -31,23 +31,6 @@ export default function RoleSelection() {
     // [적요: 이전 데이터 복원] 기존에 진행 중이던 투어 데이터가 있는지 확인합니다.
     const saved = getSavedTourData();
     setSavedTourData(saved);
-
-    // [적요: GPS 가용성 체크] 
-    // 사용자의 기기가 현재 GPS 신호를 줄 수 있는지 확인하여 UI(버튼 등)를 제어합니다.
-    if ('geolocation' in navigator) {
-      setIsGpsLoading(true);
-      navigator.geolocation.getCurrentPosition(
-        () => {
-          setIsGpsAvailable(true);
-          setIsGpsLoading(false);
-        },
-        () => {
-          setIsGpsAvailable(false);
-          setIsGpsLoading(false);
-        },
-        { timeout: 5000 }
-      );
-    }
   }, []);
 
   const formatDate = (dateStr: string) => {
@@ -73,8 +56,36 @@ export default function RoleSelection() {
   };
 
   const handleStartFromGPS = () => {
-    localStorage.setItem('startup-mode', 'gps');
-    setLocation('/home');
+    // Check permission and availability on click
+    if (!('geolocation' in navigator)) {
+      alert(t('gpsUnavailable', selectedLanguage));
+      return;
+    }
+
+    setIsGpsLoading(true);
+
+    // Explicitly request position with timeout
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        // Success
+        setIsGpsLoading(false);
+        setIsGpsAvailable(true);
+        localStorage.setItem('startup-mode', 'gps');
+        setLocation('/home');
+      },
+      (err) => {
+        // Error
+        setIsGpsLoading(false);
+        setIsGpsAvailable(false);
+        console.warn('GPS Error:', err);
+        // Still allow entry, but notify (optional)
+        // Or prompt to manually select city
+        if (confirm(`${t('gpsUnavailable', selectedLanguage)}\n${t('selectCityManually', selectedLanguage)}?`)) {
+          handleSkip();
+        }
+      },
+      { timeout: 8000, enableHighAccuracy: false } // Increased timeout slightly
+    );
   };
 
   const handleRestoreTour = () => {
@@ -112,10 +123,10 @@ export default function RoleSelection() {
             <button
               onClick={handleStartFromGPS}
               disabled={isGpsLoading}
-              className="w-full p-4 rounded-lg border-2 border-primary/20 hover:border-primary/50 hover:bg-primary/5 transition-all text-left group bg-white dark:bg-slate-800"
+              className="w-full p-4 rounded-lg border-2 border-primary/20 hover:border-primary/50 hover:bg-primary/5 transition-all text-left group bg-white dark:bg-slate-800 relative overflow-hidden"
               data-testid="button-start-gps"
             >
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 relative z-10">
                 <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
                   <MapPin className="w-5 h-5" />
                 </div>
@@ -124,13 +135,9 @@ export default function RoleSelection() {
                     {t('startFromGPS', selectedLanguage)}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isGpsLoading
-                      ? t('gettingGPS', selectedLanguage)
-                      : isGpsAvailable
-                        ? t('gpsSearch', selectedLanguage)
-                        : t('gpsUnavailable', selectedLanguage)
-                    }
+                    {isGpsLoading ? t('gpsSearch', selectedLanguage) : t('startFromGPSDesc', selectedLanguage) || "Detect current location"}
                   </p>
+
                   {isGpsLoading && (
                     <div className="mt-2 flex items-center gap-2">
                       <Loader2 className="w-4 h-4 animate-spin text-primary" />
@@ -139,14 +146,14 @@ export default function RoleSelection() {
                       </span>
                     </div>
                   )}
-                  {isGpsAvailable && !isGpsLoading && (
-                    <Badge variant="secondary" className="mt-2 gap-1">
-                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                      {t('gpsAvailable', selectedLanguage)}
-                    </Badge>
-                  )}
                 </div>
               </div>
+              {/* Progress bar effect when loading */}
+              {isGpsLoading && (
+                <div className="absolute bottom-0 left-0 h-1 bg-primary/30 w-full animate-pulse">
+                  <div className="h-full bg-primary w-1/3 animate-[loading_1s_ease-in-out_infinite]" />
+                </div>
+              )}
             </button>
 
             {savedTourData && savedTourData.tourStops.length > 0 && (

@@ -1,0 +1,51 @@
+[DB] Local development detected. Connecting to: postgresql://localhost:5432/postgres
+[dotenv@17.2.3] injecting env (3) from .env -- tip: ⚙️  override existing env vars with { override: true }
+🔍 DB Connection Diagnostic Start...
+Environment:  development
+Target URL:  postgresql:****@ep-summer-smoke-a1ly2y42-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+⌛ Connecting to database pool...
+npx : ❌ CRITICAL: Dat
+abase Connection Fail
+ed!
+At line:1 char:1
++ npx tsx scripts/db_
+test.ts > diagnostic_
+output.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (❌ CRITI   
+ CAL: Database Co    
+nnection Failed!    :
+String) [], Rem    ot
+eException
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+Error Name: Aggregate
+Error
+Error Message: 
+Error Detail: None
+Error Stack: Aggregat
+eError [ECONNREFUSED]
+: 
+    at F:\skill-nowif
+igps.tours\skills-now
+ifigps.tours\GPS-Crui
+se-Tour-AudioGuideNo-
+Wifi-1\node_modules\p
+g-pool\index.js:45:11
+    at process.proces
+sTicksAndRejections (
+node:internal/process
+/task_queues:95:5)
+    at async testConn
+ection (F:\skill-nowi
+figps.tours\skills-no
+wifigps.tours\GPS-Cru
+ise-Tour-AudioGuideNo
+-Wifi-1\scripts\db_te
+st.ts:22:30)
