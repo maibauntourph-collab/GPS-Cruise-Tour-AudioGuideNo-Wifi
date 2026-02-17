@@ -9,6 +9,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use((req, res, next) => {
+    console.log(`[Vercel Request] ${req.method} ${req.url}`);
+    next();
+});
+
 const sessionSecret = process.env.SESSION_SECRET || "vercel-secret-fallback";
 
 app.use(session({
