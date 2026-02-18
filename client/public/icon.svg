@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#e8633f" rx="128"/>
+  <g transform="translate(256, 256)">
+    <circle cx="0" cy="-40" r="80" fill="white" opacity="0.3"/>
+    <path d="M 0,-120 C -50,-120 -90,-80 -90,-30 C -90,20 0,120 0,120 C 0,120 90,20 90,-30 C 90,-80 50,-120 0,-120 Z" 
+          fill="white"/>
+    <circle cx="0" cy="-30" r="30" fill="#e8633f"/>
+  </g>
+  <text x="256" y="440" font-family="Inter, sans-serif" font-size="48" font-weight="600" fill="white" text-anchor="middle">GPS</text>
+</svg>
