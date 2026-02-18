@@ -252,409 +252,408 @@ export const NEW_LANDMARKS: Landmark[] = [
                 detailedDescription: "공식적으로 YTN 서울타워, 흔히 남산타워 또는 서울타워로 알려진 N서울타워는 대한민국 서울 중심부의 남산에 위치한 통신 및 전망 타워입니다. 높이 236m(774피트)로 서울에서 두 번째로 높은 지점입니다."
             }
         }
-    }
-  },
-{
-    id: 'jeju_jeongbang',
+    },
+    {
+        id: 'jeju_jeongbang',
         cityId: 'jeju',
-            name: 'Jeongbang Falls',
-                lat: 33.2447,
-                    lng: 126.5714,
-                        radius: 300,
-                            narration: "Witness the unique spectacle of Jeongbang Falls, the only waterfall in Asia that falls directly into the ocean. The thunderous sound of the water crashing onto the rocks and the cool mist on your face create a refreshing experience. According to legend, a holy dragon lived underneath the waterfall. The inscription 'Seobulgwacha' on the cliff is said to have been carved by a servant of the Chinese Emperor Qin Shi Huang, who visited in search of the elixir of life.",
-                                description: "The only waterfall in Asia that falls directly into the ocean.",
-                                    category: "Nature",
-                                        detailedDescription: "Jeongbang Waterfall is one of the three main waterfalls on Jeju Island, along with Cheonjiyeon Waterfall and Cheonjeyeon Waterfall. It is the only waterfall in Korea that falls directly into the sea. The waterfall is 23m high, 8m wide, and 5m deep. It is surrounded by vertical cliffs and pine trees.",
-                                            photos: ["https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "정방폭포",
+        name: 'Jeongbang Falls',
+        lat: 33.2447,
+        lng: 126.5714,
+        radius: 300,
+        narration: "Witness the unique spectacle of Jeongbang Falls, the only waterfall in Asia that falls directly into the ocean. The thunderous sound of the water crashing onto the rocks and the cool mist on your face create a refreshing experience. According to legend, a holy dragon lived underneath the waterfall. The inscription 'Seobulgwacha' on the cliff is said to have been carved by a servant of the Chinese Emperor Qin Shi Huang, who visited in search of the elixir of life.",
+        description: "The only waterfall in Asia that falls directly into the ocean.",
+        category: "Nature",
+        detailedDescription: "Jeongbang Waterfall is one of the three main waterfalls on Jeju Island, along with Cheonjiyeon Waterfall and Cheonjeyeon Waterfall. It is one of the few waterfalls in the world that falls directly into the sea. The waterfall is 23m high, 8m wide, and 5m deep. It is surrounded by vertical cliffs and pine trees.",
+        photos: ["https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "정방폭포",
                 narration: "아시아에서 유일하게 바다로 직접 떨어지는 정방폭포의 독특한 장관을 목격하세요. 바위에 부딪히는 웅장한 물소리와 얼굴에 닿는 시원한 물안개가 상쾌한 경험을 선사합니다. 전설에 따르면 폭포 아래에는 신성한 용이 살았다고 합니다. 절벽에 새겨진 '서불과차'라는 글귀는 중국 진시황의 신하가 불로초를 찾아 방문했다가 새긴 것으로 전해집니다.",
-                    description: "아시아에서 유일하게 바다로 직접 떨어지는 폭포입니다.",
-                        detailedDescription: "정방폭포는 천지연폭포, 천제연폭포와 함께 제주도 3대 폭포 중 하나입니다. 한국에서 유일하게 바다로 직접 떨어지는 폭포입니다. 높이 23m, 너비 8m, 깊이 5m입니다. 수직 절벽과 소나무 숲으로 둘러싸여 있습니다."
+                description: "아시아에서 유일하게 바다로 직접 떨어지는 폭포입니다.",
+                detailedDescription: "정방폭포는 천지연폭포, 천제연폭포와 함께 제주도 3대 폭포 중 하나입니다. 바다로 직접 떨어지는 동양 유일의 폭포입니다. 높이 23m, 너비 8m, 깊이 5m입니다. 수직 절벽과 소나무 숲으로 둘러싸여 있습니다."
+            }
         }
-    }
-},
-{
-    id: 'jeju_jusangjeolli',
+    },
+    {
+        id: 'jeju_jusangjeolli',
         cityId: 'jeju',
-            name: 'Jusangjeolli Cliff',
-                lat: 33.2378,
-                    lng: 126.4251,
-                        radius: 300,
-                            narration: "Marvel at the geometric perfection of the Jusangjeolli Cliff, a spectacular volcanic rock formation resembling giant hexagonal pillars. Formed when lava from Hallasan Mountain cooled rapidly upon contact with the sea, these stone columns look as if they were carved by stonemasons. As the waves crash against the pillars, shooting water high into the air, contemplate the incredible forces of nature that shaped this masterpiece.",
-                                description: "Spectacular volcanic rock formation featuring hexagonal basalt columns.",
-                                    category: "Nature",
-                                        detailedDescription: "The Jusangjeolli Cliff is a spectacular volcanic rock formation at the southern coast of Jeju Island. It is a designated natural monument. The cliff face is formed by columnar joints, which are hexagonal and pentagonal stone pillars. These were formed when the lava from Hallasan Mountain erupted into the sea of Jungmun.",
-                                            photos: ["https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "주상절리대",
+        name: 'Jusangjeolli Cliff',
+        lat: 33.2378,
+        lng: 126.4251,
+        radius: 300,
+        narration: "Marvel at the geometric perfection of the Jusangjeolli Cliff, a spectacular volcanic rock formation resembling giant hexagonal pillars. Formed when lava from Hallasan Mountain cooled rapidly upon contact with the sea, these stone columns look as if they were carved by stonemasons. As the waves crash against the pillars, shooting water high into the air, contemplate the incredible forces of nature that shaped this masterpiece.",
+        description: "Spectacular volcanic rock formation featuring hexagonal basalt columns.",
+        category: "Nature",
+        detailedDescription: "The Jusangjeolli Cliff is a spectacular volcanic rock formation at the southern coast of Jeju Island. It is a designated natural monument. The cliff face is formed by columnar joints, which are hexagonal and pentagonal stone pillars. These were formed when the lava from Hallasan Mountain erupted into the sea of Jungmun.",
+        photos: ["https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "주상절리대",
                 narration: "거대한 육각형 기둥을 닮은 장관을 이루는 주상절리대의 기하학적 완벽함에 감탄해 보세요. 한라산에서 분출한 용암이 바다와 만나 급격히 식으면서 형성된 이 돌기둥들은 마치 석공이 조각한 것처럼 보입니다. 파도가 기둥에 부딪혀 공중으로 높이 치솟는 모습을 보며, 이 걸작을 빚어낸 자연의 놀라운 힘을 생각해 보세요.",
-                    description: "육각형 현무암 기둥이 특징인 장관을 이루는 화산 암석 지형입니다.",
-                        detailedDescription: "주상절리대는 제주도 남쪽 해안에 있는 장관을 이루는 화산 암석 지형으로 천연기념물로 지정되어 있습니다. 절벽면은 주상절리로 이루어져 있으며, 이는 육각형과 오각형의 돌기둥입니다. 한라산의 용암이 중문 앞바다로 분출하면서 형성되었습니다."
+                description: "육각형 현무암 기둥이 특징인 장관을 이루는 화산 암석 지형입니다.",
+                detailedDescription: "주상절리대는 제주도 남쪽 해안에 있는 장관을 이루는 화산 암석 지형으로 천연기념물로 지정되어 있습니다. 절벽면은 주상절리로 이루어져 있으며, 이는 육각형과 오각형의 돌기둥입니다. 한라산의 용암이 중문 앞바다로 분출하면서 형성되었습니다."
+            }
         }
-    }
-},
-{
-    id: 'jeju_seopjikoji',
+    },
+    {
+        id: 'jeju_seopjikoji',
         cityId: 'jeju',
-            name: 'Seopjikoji',
-                lat: 33.4239,
-                    lng: 126.9292,
-                        radius: 500,
-                            narration: "Stroll along the scenic coast of Seopjikoji, famous for its fields of yellow canola flowers in spring and majestic coastal views year-round. Unlike other volcanic cones, it is made of red volcanic ash, creating a striking contrast with the blue sea. The white lighthouse standing at the end of the hill adds a romantic touch to the landscape, making it a popular filming location for Korean dramas.",
-                                description: "Scenic coastal cape known for canola flowers, lighthouse, and dramatic cliffs.",
-                                    category: "Nature",
-                                        detailedDescription: "Seopjikoji is located at the end of the eastern shore of Jeju Island. 'Seopji' is the old name for the area, and 'Koji' is Jeju dialect meaning a sudden bump on land. The area is made of red volcanic ash called scoria. The fantastic rock formations like Seondol hanging on the coastline and the lighthouse are the must-see points.",
-                                            photos: ["https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "섭지코지",
+        name: 'Seopjikoji',
+        lat: 33.4239,
+        lng: 126.9292,
+        radius: 500,
+        narration: "Stroll along the scenic coast of Seopjikoji, famous for its fields of yellow canola flowers in spring and majestic coastal views year-round. Unlike other volcanic cones, it is made of red volcanic ash, creating a striking contrast with the blue sea. The white lighthouse standing at the end of the hill adds a romantic touch to the landscape, making it a popular filming location for Korean dramas.",
+        description: "Scenic coastal cape known for canola flowers, lighthouse, and dramatic cliffs.",
+        category: "Nature",
+        detailedDescription: "Seopjikoji is located at the end of the eastern shore of Jeju Island. 'Seopji' is the old name for the area, and 'Koji' is Jeju dialect meaning a sudden bump on land. The area is made of red volcanic ash called scoria. The fantastic rock formations like Seondol hanging on the coastline and the lighthouse are the must-see points.",
+        photos: ["https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "섭지코지",
                 narration: "봄이면 노란 유채꽃밭으로, 사계절 내내 웅장한 해안 절경으로 유명한 섭지코지의 아름다운 해안을 거닐어 보세요. 다른 오름과 달리 붉은 화산재로 이루어져 있어 푸른 바다와 강렬한 대조를 이룹니다. 언덕 끝에 서 있는 하얀 등대는 풍경에 로맨틱한 분위기를 더하며 한국 드라마의 인기 촬영지로도 유명합니다.",
-                    description: "유채꽃, 등대, 드라마틱한 절벽으로 유명한 아름다운 해안 곶입니다.",
-                        detailedDescription: "섭지코지는 제주도 동쪽 해안 끝에 위치해 있습니다. '섭지'는 이 지역의 옛 이름이고, '코지'는 땅이 튀어나온 곳을 뜻하는 제주 방언입니다. 이 지역은 송이(scoria)라고 불리는 붉은 화산재로 이루어져 있습니다. 해안선에 걸려 있는 선돌과 같은 환상적인 기암괴석과 등대는 놓쳐선 안 될 볼거리입니다."
+                description: "유채꽃, 등대, 드라마틱한 절벽으로 유명한 아름다운 해안 곶입니다.",
+                detailedDescription: "섭지코지는 제주도 동쪽 해안 끝에 위치해 있습니다. '섭지'는 이 지역의 옛 이름이고, '코지'는 땅이 튀어나온 곳을 뜻하는 제주 방언입니다. 이 지역은 송이(scoria)라고 불리는 붉은 화산재로 이루어져 있습니다. 해안선에 걸려 있는 선돌과 같은 환상적인 기암괴석과 등대는 놓쳐선 안 될 볼거리입니다."
+            }
         }
-    }
-},
-// New York (Remaining)
-{
-    id: 'ny_empire_state',
+    },
+    // New York (Remaining)
+    {
+        id: 'ny_empire_state',
         cityId: 'new-york',
-            name: 'Empire State Building',
-                lat: 40.7484,
-                    lng: -73.9857,
-                        radius: 300,
-                            narration: "Look up at the Art Deco masterpiece that defined the New York skyline for decades. The Empire State Building, once the tallest building in the world, stands as a monument to American ambition and engineering. Visit the open-air observatory on the 86th floor for unforgettable views of the city that never sleeps. At night, its tower lights dazzle in colors celebrating holidays and special occasions.",
-                                description: "Famous Art Deco skyscraper offering observation decks with city views.",
-                                    category: "Landmark",
-                                        detailedDescription: "The Empire State Building is a 102-story Art Deco skyscraper in Midtown Manhattan in New York City. It was designed by Shreve, Lamb & Harmon and built from 1930 to 1931. Its name is derived from 'Empire State', the nickname of the state of New York.",
-                                            photos: ["https://images.unsplash.com/photo-1550664776-3a131846c26b?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "엠파이어 스테이트 빌딩",
+        name: 'Empire State Building',
+        lat: 40.7484,
+        lng: -73.9857,
+        radius: 300,
+        narration: "Look up at the Art Deco masterpiece that defined the New York skyline for decades. The Empire State Building, once the tallest building in the world, stands as a monument to American ambition and engineering. Visit the open-air observatory on the 86th floor for unforgettable views of the city that never sleeps. At night, its tower lights dazzle in colors celebrating holidays and special occasions.",
+        description: "Famous Art Deco skyscraper offering observation decks with city views.",
+        category: "Landmark",
+        detailedDescription: "The Empire State Building is a 102-story Art Deco skyscraper in Midtown Manhattan in New York City. It was designed by Shreve, Lamb & Harmon and built from 1930 to 1931. Its name is derived from 'Empire State', the nickname of the state of New York.",
+        photos: ["https://images.unsplash.com/photo-1550664776-3a131846c26b?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "엠파이어 스테이트 빌딩",
                 narration: "수십 년간 뉴욕의 스카이라인을 정의해 온 아르데코 걸작을 올려다보세요. 한때 세계에서 가장 높은 건물이었던 엠파이어 스테이트 빌딩은 미국의 야망과 공학 기술을 보여주는 기념비입니다. 86층 야외 전망대에서 잠들지 않는 도시의 잊지 못할 전망을 감상하세요. 밤에는 타워 조명이 휴일과 특별한 날을 축하하며 다채로운 색상으로 빛납니다.",
-                    description: "도시 전망을 제공하는 전망대가 있는 유명한 아르데코 양식의 초고층 빌딩입니다.",
-                        detailedDescription: "엠파이어 스테이트 빌딩은 뉴욕시 맨해튼 미드타운에 있는 102층짜리 아르데코 초고층 빌딩입니다. 슈리브, 램 앤 하먼이 설계하여 1930년부터 1931년까지 지어졌습니다. 이름은 뉴욕주의 별명인 '엠파이어 스테이트'에서 유래되었습니다."
+                description: "도시 전망을 제공하는 전망대가 있는 유명한 아르데코 양식의 초고층 빌딩입니다.",
+                detailedDescription: "엠파이어 스테이트 빌딩은 뉴욕시 맨해튼 미드타운에 있는 102층짜리 아르데코 초고층 빌딩입니다. 슈리브, 램 앤 하먼이 설계하여 1930년부터 1931년까지 지어졌습니다. 이름은 뉴욕주의 별명인 '엠파이어 스테이트'에서 유래되었습니다."
+            }
         }
-    }
-},
-{
-    id: 'ny_times_square',
+    },
+    {
+        id: 'ny_times_square',
         cityId: 'new-york',
-            name: 'Times Square',
-                lat: 40.7580,
-                    lng: -73.9855,
-                        radius: 300,
-                            narration: "Immerse yourself in the bright lights and bustling energy of Times Square, 'The Crossroads of the World'. Surrounded by massive digital billboards and Broadway theaters, this iconic intersection is the heartbeat of New York City's entertainment district. Feel the pulse of the city as crowds gather, street performers entertain, and the famous New Year's Eve ball dropping tradition comes to mind.",
-                                description: "Bustling commercial intersection, protected by billboards and advertisements.",
-                                    category: "Landmark",
-                                        detailedDescription: "Times Square is a major commercial intersection, tourist destination, entertainment center, and neighborhood in the Midtown Manhattan section of New York City. It is formed by the junction of Broadway, Seventh Avenue, and 42nd Street.",
-                                            photos: ["https://images.unsplash.com/photo-1534270804882-6b5048b1c1fc?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "타임스 스퀘어",
+        name: 'Times Square',
+        lat: 40.7580,
+        lng: -73.9855,
+        radius: 300,
+        narration: "Immerse yourself in the bright lights and bustling energy of Times Square, 'The Crossroads of the World'. Surrounded by massive digital billboards and Broadway theaters, this iconic intersection is the heartbeat of New York City's entertainment district. Feel the pulse of the city as crowds gather, street performers entertain, and the famous New Year's Eve ball dropping tradition comes to mind.",
+        description: "Bustling commercial intersection, protected by billboards and advertisements.",
+        category: "Landmark",
+        detailedDescription: "Times Square is a major commercial intersection, tourist destination, entertainment center, and neighborhood in the Midtown Manhattan section of New York City. It is formed by the junction of Broadway, Seventh Avenue, and 42nd Street.",
+        photos: ["https://images.unsplash.com/photo-1534270804882-6b5048b1c1fc?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "타임스 스퀘어",
                 narration: "'세계의 교차로' 타임스 스퀘어의 밝은 조명과 넘치는 에너지에 빠져보세요. 거대한 디지털 전광판과 브로드웨이 극장으로 둘러싸인 이 상징적인 교차로는 뉴욕시 엔터테인먼트 지구의 심장부입니다. 군중이 모이고, 거리 공연자들이 즐거움을 선사하며, 유명한 새해 전야 볼 드롭 전통이 떠오르는 이곳에서 도시의 맥동을 느껴보세요.",
-                    description: "전광판과 광고로 둘러싸인 붐비는 상업 교차로입니다.",
-                        detailedDescription: "타임스 스퀘어는 뉴욕시 맨해튼 미드타운 구역에 있는 주요 상업 교차로, 관광지, 엔터테인먼트 센터 및 지역입니다. 브로드웨이, 7번가, 42번가가 만나는 곳에 형성되어 있습니다."
+                description: "전광판과 광고로 둘러싸인 붐비는 상업 교차로입니다.",
+                detailedDescription: "타임스 스퀘어는 뉴욕시 맨해튼 미드타운 구역에 있는 주요 상업 교차로, 관광지, 엔터테인먼트 센터 및 지역입니다. 브로드웨이, 7번가, 42번가가 만나는 곳에 형성되어 있습니다."
+            }
         }
-    }
-},
-{
-    id: 'ny_brooklyn_bridge',
+    },
+    {
+        id: 'ny_brooklyn_bridge',
         cityId: 'new-york',
-            name: 'Brooklyn Bridge',
-                lat: 40.7061,
-                    lng: -73.9969,
-                        radius: 500,
-                            narration: "Walk across the historic Brooklyn Bridge, one of the oldest roadway bridges in the United States. Its stunning Gothic Revival stone towers and intricate web of steel cables make it an architectural marvel. As you stroll along the elevated pedestrian walkway, enjoy panoramic views of the Manhattan skyline, the East River, and the Statue of Liberty in the distance.",
-                                description: "Historic suspension bridge connecting Manhattan and Brooklyn.",
-                                    category: "Landmark",
-                                        detailedDescription: "The Brooklyn Bridge is a hybrid cable-stayed/suspension bridge in New York City, spanning the East River between the boroughs of Manhattan and Brooklyn. Opened on May 24, 1883, the Brooklyn Bridge was the first fixed crossing across the East River.",
-                                            photos: ["https://images.unsplash.com/photo-1506861596841-48357f44d9f6?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "브루클린 브리지",
+        name: 'Brooklyn Bridge',
+        lat: 40.7061,
+        lng: -73.9969,
+        radius: 500,
+        narration: "Walk across the historic Brooklyn Bridge, one of the oldest roadway bridges in the United States. Its stunning Gothic Revival stone towers and intricate web of steel cables make it an architectural marvel. As you stroll along the elevated pedestrian walkway, enjoy panoramic views of the Manhattan skyline, the East River, and the Statue of Liberty in the distance.",
+        description: "Historic suspension bridge connecting Manhattan and Brooklyn.",
+        category: "Landmark",
+        detailedDescription: "The Brooklyn Bridge is a hybrid cable-stayed/suspension bridge in New York City, spanning the East River between the boroughs of Manhattan and Brooklyn. Opened on May 24, 1883, the Brooklyn Bridge was the first fixed crossing across the East River.",
+        photos: ["https://images.unsplash.com/photo-1506861596841-48357f44d9f6?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "브루클린 브리지",
                 narration: "미국에서 가장 오래된 도로 교량 중 하나인 역사적인 브루클린 브리지를 걸어보세요. 멋진 고딕 부흥 양식의 석조 타워와 복잡한 강철 케이블 그물망은 건축적 경이로움을 선사합니다. 고가 보행자 도로를 따라 걸으며 맨해튼 스카이라인, 이스트 리버, 멀리 보이는 자유의 여신상의 파노라마 전경을 즐기세요.",
-                    description: "맨해튼과 브루클린을 연결하는 역사적인 현수교입니다.",
-                        detailedDescription: "브루클린 브리지는 뉴욕시의 맨해튼과 브루클린 자치구를 잇는 이스트 리버를 가로지르는 하이브리드 사장교/현수교입니다. 1883년 5월 24일에 개통된 브루클린 브리지는 이스트 리버를 가로지르는 최초의 고정 횡단로였습니다."
+                description: "맨해튼과 브루클린을 연결하는 역사적인 현수교입니다.",
+                detailedDescription: "브루클린 브리지는 뉴욕시의 맨해튼과 브루클린 자치구를 잇는 이스트 리버를 가로지르는 하이브리드 사장교/현수교입니다. 1883년 5월 24일에 개통된 브루클린 브리지는 이스트 리버를 가로지르는 최초의 고정 횡단로였습니다."
+            }
         }
-    }
-},
-{
-    id: 'ny_met_museum',
+    },
+    {
+        id: 'ny_met_museum',
         cityId: 'new-york',
-            name: 'The Metropolitan Museum of Art',
-                lat: 40.7794,
-                    lng: -73.9632,
-                        radius: 300,
-                            narration: "Explore 5,000 years of art from around the world at The Met, one of the largest and most prestigious art museums on the planet. From ancient Egyptian temples to contemporary masterpieces, the museum's vast collection invites you on a journey through human creativity. Get lost in the galleries, admire the Temple of Dendur, and find inspiration in the countless treasures housed within this cultural institution.",
-                                description: "One of the world's largest and most comprehensive art museums.",
-                                    category: "Museum",
-                                        detailedDescription: "The Metropolitan Museum of Art of New York City, colloquially 'the Met', is the largest art museum in the Americas. Its permanent collection contains over two million works, divided among 17 curatorial departments.",
-                                            photos: ["https://images.unsplash.com/photo-1549487050-705b76839359?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "메트로폴리탄 미술관",
+        name: 'The Metropolitan Museum of Art',
+        lat: 40.7794,
+        lng: -73.9632,
+        radius: 300,
+        narration: "Explore 5,000 years of art from around the world at The Met, one of the largest and most prestigious art museums on the planet. From ancient Egyptian temples to contemporary masterpieces, the museum's vast collection invites you on a journey through human creativity. Get lost in the galleries, admire the Temple of Dendur, and find inspiration in the countless treasures housed within this cultural institution.",
+        description: "One of the world's largest and most comprehensive art museums.",
+        category: "Museum",
+        detailedDescription: "The Metropolitan Museum of Art of New York City, colloquially 'the Met', is the largest art museum in the Americas. Its permanent collection contains over two million works, divided among 17 curatorial departments.",
+        photos: ["https://images.unsplash.com/photo-1549487050-705b76839359?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "메트로폴리탄 미술관",
                 narration: "세계에서 가장 크고 권위 있는 미술관 중 하나인 메트에서 전 세계 5,000년의 예술을 탐험해 보세요. 고대 이집트 신전부터 현대 걸작에 이르기까지 박물관의 방대한 컬렉션은 인간 창의성의 여정으로 여러분을 초대합니다. 갤러리에서 길을 잃어보고, 덴두르 신전을 감상하고, 이 문화 기관에 보관된 수많은 보물에서 영감을 얻으세요.",
-                    description: "세계에서 가장 크고 포괄적인 미술관 중 하나입니다.",
-                        detailedDescription: "뉴욕시의 메트로폴리탄 미술관(통칭 '더 메트')은 아메리카 대륙에서 가장 큰 미술관입니다. 영구 소장품은 17개 큐레이터 부서로 나뉘어 있으며 200만 점이 넘습니다."
+                description: "세계에서 가장 크고 포괄적인 미술관 중 하나입니다.",
+                detailedDescription: "뉴욕시의 메트로폴리탄 미술관(통칭 '더 메트')은 아메리카 대륙에서 가장 큰 미술관입니다. 영구 소장품은 17개 큐레이터 부서로 나뉘어 있으며 200만 점이 넘습니다."
+            }
         }
-    }
-},
-// Tokyo (Remaining)
-{
-    id: 'tokyo_shibuya_crossing',
+    },
+    // Tokyo (Remaining)
+    {
+        id: 'tokyo_shibuya_crossing',
         cityId: 'tokyo',
-            name: 'Shibuya Crossing',
-                lat: 35.6595,
-                    lng: 139.7004,
-                        radius: 200,
-                            narration: "Experience the organized chaos of Shibuya Crossing, often called the busiest pedestrian intersection in the world. When the traffic lights turn red, a sea of people flood the street from all directions, creating a mesmerizing spectacle of urban life. Watch the scene unfold from a nearby cafe or join the crowd to feel the pulse of Tokyo. Don't forget to visit the loyal dog Hachiko statue nearby.",
-                                description: "World-famous scramble crossing, known as the busiest pedestrian intersection.",
-                                    category: "Landmark",
-                                        detailedDescription: "Shibuya Crossing, or Shibuya Scramble Crossing, is a popular scramble crossing in Shibuya, Tokyo, Japan. It is located in front of the Shibuya Station Hachikō exit and stops vehicles in all directions to allow pedestrians to inundate the entire intersection.",
-                                            photos: ["https://images.unsplash.com/photo-1542931287-023b922fa89b?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "시부야 스크램블 교차로",
+        name: 'Shibuya Crossing',
+        lat: 35.6595,
+        lng: 139.7004,
+        radius: 200,
+        narration: "Experience the organized chaos of Shibuya Crossing, often called the busiest pedestrian intersection in the world. When the traffic lights turn red, a sea of people flood the street from all directions, creating a mesmerizing spectacle of urban life. Watch the scene unfold from a nearby cafe or join the crowd to feel the pulse of Tokyo. Don't forget to visit the loyal dog Hachiko statue nearby.",
+        description: "World-famous scramble crossing, known as the busiest pedestrian intersection.",
+        category: "Landmark",
+        detailedDescription: "Shibuya Crossing, or Shibuya Scramble Crossing, is a popular scramble crossing in Shibuya, Tokyo, Japan. It is located in front of the Shibuya Station Hachikō exit and stops vehicles in all directions to allow pedestrians to inundate the entire intersection.",
+        photos: ["https://images.unsplash.com/photo-1542931287-023b922fa89b?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "시부야 스크램블 교차로",
                 narration: "세계에서 가장 붐비는 보행자 교차로로 불리는 시부야 교차로의 질서 있는 혼란을 경험해 보세요. 신호등이 빨간불로 바뀌면 사방에서 인파가 거리로 쏟아져 나와 도시 생활의 매혹적인 장관을 연출합니다. 근처 카페에서 장면이 펼쳐지는 것을 지켜보거나 군중 속에 합류하여 도쿄의 맥동을 느껴보세요. 근처에 있는 충견 하치코 동상을 방문하는 것도 잊지 마세요.",
-                    description: "가장 붐비는 보행자 교차로로 알려진 세계적으로 유명한 스크램블 교차로입니다.",
-                        detailedDescription: "시부야 교차로 또는 시부야 스크램블 교차로는 일본 도쿄 시부야에 있는 인기 있는 스크램블 교차로입니다. 시부야역 하치코 출구 앞에 위치하며 보행자가 교차로 전체를 가득 메울 수 있도록 모든 방향의 차량을 정지시킵니다."
+                description: "가장 붐비는 보행자 교차로로 알려진 세계적으로 유명한 스크램블 교차로입니다.",
+                detailedDescription: "시부야 교차로 또는 시부야 스크램블 교차로는 일본 도쿄 시부야에 있는 인기 있는 스크램블 교차로입니다. 시부야역 하치코 출구 앞에 위치하며 보행자가 교차로 전체를 가득 메울 수 있도록 모든 방향의 차량을 정지시킵니다."
+            }
         }
-    }
-},
-{
-    id: 'tokyo_meiji_jingu',
+    },
+    {
+        id: 'tokyo_meiji_jingu',
         cityId: 'tokyo',
-            name: 'Meiji Jingu Shrine',
-                lat: 35.6764,
-                    lng: 139.6993,
-                        radius: 500,
-                            narration: "Find tranquility in the heart of the city at Meiji Jingu, a Shinto shrine dedicated to Emperor Meiji and his consort. Walk through the massive torii gates into a lush forest of 100,000 trees, a serene escape from the urban noise. Participate in traditional rituals, write a wish on an Ema voting tablet, and admire the shrine's austere beauty. It's a place to connect with Japan's spiritual heritage.",
-                                description: "Shinto shrine dedicated to Emperor Meiji, located in a lush forest.",
-                                    category: "Culture",
-                                        detailedDescription: "Meiji Jingu is a Shinto shrine in Shibuya, Tokyo, that is dedicated to the deified spirits of Emperor Meiji and his wife, Empress Shōken. The shrine does not contain the emperor's grave, which is located at Fushimi-momoyama, south of Kyoto.",
-                                            photos: ["https://images.unsplash.com/photo-1588722830846-5fd214214f48?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "메이지 신궁",
+        name: 'Meiji Jingu Shrine',
+        lat: 35.6764,
+        lng: 139.6993,
+        radius: 500,
+        narration: "Find tranquility in the heart of the city at Meiji Jingu, a Shinto shrine dedicated to Emperor Meiji and his consort. Walk through the massive torii gates into a lush forest of 100,000 trees, a serene escape from the urban noise. Participate in traditional rituals, write a wish on an Ema voting tablet, and admire the shrine's austere beauty. It's a place to connect with Japan's spiritual heritage.",
+        description: "Shinto shrine dedicated to Emperor Meiji, located in a lush forest.",
+        category: "Culture",
+        detailedDescription: "Meiji Jingu is a Shinto shrine in Shibuya, Tokyo, that is dedicated to the deified spirits of Emperor Meiji and his wife, Empress Shōken. The shrine does not contain the emperor's grave, which is located at Fushimi-momoyama, south of Kyoto.",
+        photos: ["https://images.unsplash.com/photo-1588722830846-5fd214214f48?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "메이지 신궁",
                 narration: "메이지 천황과 황태후를 모시는 신사인 메이지 신궁에서 도심 속 평온함을 찾아보세요. 거대한 도리이 문을 지나 10만 그루의 나무가 우거진 숲으로 들어가면 도시의 소음에서 벗어난 고요한 휴식처가 나옵니다. 전통 의식에 참여하고, 에마 소원패에 소원을 적고, 신사의 엄숙한 아름다움을 감상해 보세요. 일본의 영적 유산과 소통할 수 있는 곳입니다.",
-                    description: "울창한 숲에 위치한 메이지 천황을 모시는 신사입니다.",
-                        detailedDescription: "메이지 신궁은 도쿄 시부야에 있는 신사로 메이지 천황과 그의 아내 쇼켄 황태후의 신령을 모십니다. 신사에는 교토 남쪽 후시미 모모야마에 위치한 천황의 무덤이 없습니다."
+                description: "울창한 숲에 위치한 메이지 천황을 모시는 신사입니다.",
+                detailedDescription: "메이지 신궁은 도쿄 시부야에 있는 신사로 메이지 천황과 그의 아내 쇼켄 황태후의 신령을 모십니다. 신사에는 교토 남쪽 후시미 모모야마에 위치한 천황의 무덤이 없습니다."
+            }
         }
-    }
-},
-{
-    id: 'tokyo_skytree',
+    },
+    {
+        id: 'tokyo_skytree',
         cityId: 'tokyo',
-            name: 'Tokyo Skytree',
-                lat: 35.7100,
-                    lng: 139.8107,
-                        radius: 300,
-                            narration: "Look up at the tallest structure in Japan, the Tokyo Skytree. This broadcasting and observation tower blends traditional Japanese aesthetics with futuristic design. From its dizzying heights, enjoy unparalleled views of the Kanto region, and on clear days, even Mount Fuji. Explore the Solamachi shopping complex at its base for a taste of modern Tokyo lifestyle.",
-                                description: "Tallest structure in Japan, broadcasting tower with observation decks.",
-                                    category: "Landmark",
-                                        detailedDescription: "Tokyo Skytree is a broadcasting and observation tower in Sumida, Tokyo. It became the tallest structure in Japan in 2010 and reached its full height of 634 meters in March 2011, making it the tallest tower in the world.",
-                                            photos: ["https://images.unsplash.com/photo-1533559662493-90374e2a1599?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "도쿄 스카이트리",
+        name: 'Tokyo Skytree',
+        lat: 35.7100,
+        lng: 139.8107,
+        radius: 300,
+        narration: "Look up at the tallest structure in Japan, the Tokyo Skytree. This broadcasting and observation tower blends traditional Japanese aesthetics with futuristic design. From its dizzying heights, enjoy unparalleled views of the Kanto region, and on clear days, even Mount Fuji. Explore the Solamachi shopping complex at its base for a taste of modern Tokyo lifestyle.",
+        description: "Tallest structure in Japan, broadcasting tower with observation decks.",
+        category: "Landmark",
+        detailedDescription: "Tokyo Skytree is a broadcasting and observation tower in Sumida, Tokyo. It became the tallest structure in Japan in 2010 and reached its full height of 634 meters in March 2011, making it the tallest tower in the world.",
+        photos: ["https://images.unsplash.com/photo-1533559662493-90374e2a1599?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "도쿄 스카이트리",
                 narration: "일본에서 가장 높은 구조물인 도쿄 스카이트리를 올려다보세요. 이 방송 및 전망 타워는 일본의 전통 미학과 미래지향적인 디자인을 조화시켰습니다. 아찔한 높이에서 관동 지방의 비할 데 없는 전망을 즐기고, 맑은 날에는 후지산까지 감상할 수 있습니다. 타워 아래에 있는 소라마치 쇼핑 단지를 둘러보며 현대 도쿄의 라이프스타일을 맛보세요.",
-                    description: "일본에서 가장 높은 구조물로, 전망대가 있는 방송 타워입니다.",
-                        detailedDescription: "도쿄 스카이트리는 도쿄 스미다구에 있는 방송 및 전망 타워입니다. 2010년 일본에서 가장 높은 구조물이 되었으며 2011년 3월에 전체 높이 634미터에 도달하여 세계에서 가장 높은 타워가 되었습니다."
+                description: "일본에서 가장 높은 구조물로, 전망대가 있는 방송 타워입니다.",
+                detailedDescription: "도쿄 스카이트리는 도쿄 스미다구에 있는 방송 및 전망 타워입니다. 2010년 일본에서 가장 높은 구조물이 되었으며 2011년 3월에 전체 높이 634미터에 도달하여 세계에서 가장 높은 타워가 되었습니다."
+            }
         }
-    }
-},
-{
-    id: 'tokyo_tsukiji',
+    },
+    {
+        id: 'tokyo_tsukiji',
         cityId: 'tokyo',
-            name: 'Tsukiji Outer Market',
-                lat: 35.6655,
-                    lng: 139.7707,
-                        radius: 300,
-                            narration: "Satisfy your culinary curiosity at Tsukiji Outer Market, a food lover's paradise. Although the wholesale auction has moved, the outer market remains vibrant with hundreds of stalls selling fresh seafood, produce, and kitchenware. Sample fresh sushi, grilled scallops, and tamagoyaki (rolled omelet) as you navigate the narrow, bustling alleys. It's a sensory feast that captures the essence of Japan's food culture.",
-                                description: "Famous food market with stalls selling seafood, produce, and street food.",
-                                    category: "Food",
-                                        detailedDescription: "Tsukiji Outer Market is a district adjacent to the site of the former Tsukiji Wholesale Market. It consists of a few blocks of wholesale and retail shops, as well as restaurants crowded along narrow lanes. Here you can find fresh seafood, produce and food-related goods.",
-                                            photos: ["https://images.unsplash.com/photo-1540645603831-430c0428525f?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "츠키지 장외시장",
+        name: 'Tsukiji Outer Market',
+        lat: 35.6655,
+        lng: 139.7707,
+        radius: 300,
+        narration: "Satisfy your culinary curiosity at Tsukiji Outer Market, a food lover's paradise. Although the wholesale auction has moved, the outer market remains vibrant with hundreds of stalls selling fresh seafood, produce, and kitchenware. Sample fresh sushi, grilled scallops, and tamagoyaki (rolled omelet) as you navigate the narrow, bustling alleys. It's a sensory feast that captures the essence of Japan's food culture.",
+        description: "Famous food market with stalls selling seafood, produce, and street food.",
+        category: "Food",
+        detailedDescription: "Tsukiji Outer Market is a district adjacent to the site of the former Tsukiji Wholesale Market. It consists of a few blocks of wholesale and retail shops, as well as restaurants crowded along narrow lanes. Here you can find fresh seafood, produce and food-related goods.",
+        photos: ["https://images.unsplash.com/photo-1540645603831-430c0428525f?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "츠키지 장외시장",
                 narration: "미식가들의 천국인 츠키지 장외시장에서 요리 호기심을 충족시켜 보세요. 도매 경매장은 이전했지만 장외시장은 신선한 해산물, 농산물, 주방용품을 파는 수백 개의 노점으로 여전히 활기가 넘칩니다. 좁고 붐비는 골목을 누비며 신선한 초밥, 가리비 구이, 다마고야키(계란말이)를 맛보세요. 일본 음식 문화의 정수를 보여주는 감각적인 축제입니다.",
-                    description: "해산물, 농산물, 길거리 음식을 파는 노점이 있는 유명한 식품 시장입니다.",
-                        detailedDescription: "츠키지 장외시장은 옛 츠키지 도매시장 부지에 인접한 구역입니다. 좁은 골목을 따라 밀집한 도매 및 소매점과 식당으로 구성되어 있습니다. 이곳에서는 신선한 해산물, 농산물 및 식품 관련 상품을 찾을 수 있습니다."
+                description: "해산물, 농산물, 길거리 음식을 파는 노점이 있는 유명한 식품 시장입니다.",
+                detailedDescription: "츠키지 장외시장은 옛 츠키지 도매시장 부지에 인접한 구역입니다. 좁은 골목을 따라 밀집한 도매 및 소매점과 식당으로 구성되어 있습니다. 이곳에서는 신선한 해산물, 농산물 및 식품 관련 상품을 찾을 수 있습니다."
+            }
         }
-    }
-},
-// Busan (Remaining)
-{
-    id: 'busan_haedong',
+    },
+    // Busan (Remaining)
+    {
+        id: 'busan_haedong',
         cityId: 'busan',
-            name: 'Haedong Yonggungsa Temple',
-                lat: 35.1887,
-                    lng: 129.2234,
-                        radius: 300,
-                            narration: "Discover the rare beauty of Haedong Yonggungsa, a Buddhist temple situated on the coast. Unlike most temples found in mountains, this one offers a stunning ocean view. Listen to the waves crashing against the rocks as you explore the sanctuary dedicated to the Goddess of Mercy. It is said that if you pray here with all your heart, your wish will be granted.",
-                                description: "Beautiful Buddhist temple situated on the coast, offering stunning ocean views.",
-                                    category: "Culture",
-                                        detailedDescription: "Haedong Yonggungsa Temple is located in Gijang-gun, Busan. The temple was built in 1376 by the teacher known as Naong during the Goryeo Dynasty, and was originally known as Bomun Temple. It is one of the few temples in Korea to be built on the seaside.",
-                                            photos: ["https://images.unsplash.com/photo-1590425567308-33df4c352a88?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "해동용궁사",
+        name: 'Haedong Yonggungsa Temple',
+        lat: 35.1887,
+        lng: 129.2234,
+        radius: 300,
+        narration: "Discover the rare beauty of Haedong Yonggungsa, a Buddhist temple situated on the coast. Unlike most temples found in mountains, this one offers a stunning ocean view. Listen to the waves crashing against the rocks as you explore the sanctuary dedicated to the Goddess of Mercy. It is said that if you pray here with all your heart, your wish will be granted.",
+        description: "Beautiful Buddhist temple situated on the coast, offering stunning ocean views.",
+        category: "Culture",
+        detailedDescription: "Haedong Yonggungsa Temple is located in Gijang-gun, Busan. The temple was built in 1376 by the teacher known as Naong during the Goryeo Dynasty, and was originally known as Bomun Temple. It is one of the few temples in Korea to be built on the seaside.",
+        photos: ["https://images.unsplash.com/photo-1590425567308-33df4c352a88?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "해동용궁사",
                 narration: "해안가에 위치한 불교 사찰인 해동용궁사의 희귀한 아름다움을 발견해 보세요. 산속에 있는 대부분의 사찰과 달리 이곳은 멋진 바다 전망을 제공합니다. 관세음보살을 모신 성소를 둘러보며 바위에 부딪히는 파도 소리를 들어보세요. 이곳에서 진심으로 기도하면 소원이 이루어진다는 전설이 있습니다.",
-                    description: "해안가에 위치하여 멋진 바다 전망을 제공하는 아름다운 불교 사찰입니다.",
-                        detailedDescription: "해동용궁사는 부산 기장군에 위치해 있습니다. 이 사찰은 1376년 고려 시대에 나옹 화상에 의해 창건되었으며 원래 보문사로 알려졌습니다. 바닷가에 지어진 한국의 몇 안 되는 사찰 중 하나입니다."
+                description: "해안가에 위치하여 멋진 바다 전망을 제공하는 아름다운 불교 사찰입니다.",
+                detailedDescription: "해동용궁사는 부산 기장군에 위치해 있습니다. 이 사찰은 1376년 고려 시대에 나옹 화상에 의해 창건되었으며 원래 보문사로 알려졌습니다. 바닷가에 지어진 한국의 몇 안 되는 사찰 중 하나입니다."
+            }
         }
-    }
-},
-{
-    id: 'busan_jagalchi',
+    },
+    {
+        id: 'busan_jagalchi',
         cityId: 'busan',
-            name: 'Jagalchi Market',
-                lat: 35.0967,
-                    lng: 129.0305,
-                        radius: 300,
-                            narration: "Experience the raw energy of Korea's largest seafood market, Jagalchi Market. The famous slogan 'Oiso, Boiso, Saiso' (Come, See, Buy) welcomes you to rows of tanks filled with live fish, octopus, and crabs. Watch the 'Jagalchi Ajumma' (middle-aged women vendors) expertly handle the catch of the day. Enjoy fresh sashimi right on the spot and taste the authentic flavor of Busan.",
-                                description: "Korea's largest seafood market, famous for fresh catch and lively atmosphere.",
-                                    category: "Food",
-                                        detailedDescription: "Jagalchi Market is a fish market in the neighborhood of Nampo-dong in Jung-gu, and Chungmu-dong, Seo-gu, Busan, South Korea. The market is located on the edge of Nampo Port (Busan). It is considered to be the largest fish market in South Korea.",
-                                            photos: ["https://images.unsplash.com/photo-1580227974399-ce1231f61201?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "자갈치시장",
+        name: 'Jagalchi Market',
+        lat: 35.0967,
+        lng: 129.0305,
+        radius: 300,
+        narration: "Experience the raw energy of Korea's largest seafood market, Jagalchi Market. The famous slogan 'Oiso, Boiso, Saiso' (Come, See, Buy) welcomes you to rows of tanks filled with live fish, octopus, and crabs. Watch the 'Jagalchi Ajumma' (middle-aged women vendors) expertly handle the catch of the day. Enjoy fresh sashimi right on the spot and taste the authentic flavor of Busan.",
+        description: "Korea's largest seafood market, famous for fresh catch and lively atmosphere.",
+        category: "Food",
+        detailedDescription: "Jagalchi Market is a fish market in the neighborhood of Nampo-dong in Jung-gu, and Chungmu-dong, Seo-gu, Busan, South Korea. The market is located on the edge of Nampo Port (Busan). It is considered to be the largest fish market in South Korea.",
+        photos: ["https://images.unsplash.com/photo-1580227974399-ce1231f61201?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "자갈치시장",
                 narration: "한국 최대의 수산 시장인 자갈치시장의 활기찬 에너지를 경험해 보세요. '오이소, 보이소, 사이소'라는 유명한 슬로건이 살아있는 생선, 문어, 게로 가득 찬 수조 사이로 여러분을 맞이합니다. '자갈치 아지매'들이 그날 잡은 생선을 능숙하게 손질하는 모습을 지켜보세요. 그 자리에서 신선한 회를 즐기며 부산의 진정한 맛을 느껴보세요.",
-                    description: "신선한 어획물과 활기찬 분위기로 유명한 한국 최대의 수산 시장입니다.",
-                        detailedDescription: "자갈치시장은 대한민국 부산 중구 남포동과 서구 충무동에 있는 어시장입니다. 이 시장은 남포항(부산) 가장자리에 위치해 있습니다. 한국 최대의 어시장으로 간주됩니다."
+                description: "신선한 어획물과 활기찬 분위기로 유명한 한국 최대의 수산 시장입니다.",
+                detailedDescription: "자갈치시장은 대한민국 부산 중구 남포동과 서구 충무동에 있는 어시장입니다. 이 시장은 남포항(부산) 가장자리에 위치해 있습니다. 한국 최대의 어시장으로 간주됩니다."
+            }
         }
-    }
-},
-{
-    id: 'busan_gwangalli',
+    },
+    {
+        id: 'busan_gwangalli',
         cityId: 'busan',
-            name: 'Gwangalli Beach',
-                lat: 35.1532,
-                    lng: 129.1189,
-                        radius: 500,
-                            narration: "Enjoy the romantic atmosphere of Gwangalli Beach, famous for its fine sand and the spectacular view of the Gwangan Bridge. At night, the bridge lights up in magnificent colors, creating a dazzling reflection on the dark water. The beachfront is lined with cafes, bars, and restaurants, making it a popular spot for young people and couples to enjoy the nightlife and ocean breeze.",
-                                description: "Popular beach known for fine sand and views of the illuminated Gwangan Bridge.",
-                                    category: "Beach",
-                                        detailedDescription: "Gwangalli Beach is a beach in Busan, South Korea. It is located at Gwangan 2-dong, Suyeong-gu, Busan Metropolitan City, west of Haeundae Beach. It sits inside a cove spanned by the Gwangan Bridge.",
-                                            photos: ["https://images.unsplash.com/photo-1569947849641-57d424263169?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "광안리 해수욕장",
+        name: 'Gwangalli Beach',
+        lat: 35.1532,
+        lng: 129.1189,
+        radius: 500,
+        narration: "Enjoy the romantic atmosphere of Gwangalli Beach, famous for its fine sand and the spectacular view of the Gwangan Bridge. At night, the bridge lights up in magnificent colors, creating a dazzling reflection on the dark water. The beachfront is lined with cafes, bars, and restaurants, making it a popular spot for young people and couples to enjoy the nightlife and ocean breeze.",
+        description: "Popular beach known for fine sand and views of the illuminated Gwangan Bridge.",
+        category: "Beach",
+        detailedDescription: "Gwangalli Beach is a beach in Busan, South Korea. It is located at Gwangan 2-dong, Suyeong-gu, Busan Metropolitan City, west of Haeundae Beach. It sits inside a cove spanned by the Gwangan Bridge.",
+        photos: ["https://images.unsplash.com/photo-1569947849641-57d424263169?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "광안리 해수욕장",
                 narration: "고운 모래와 광안대교의 환상적인 전망으로 유명한 광안리 해수욕장의 낭만적인 분위기를 즐겨보세요. 밤이 되면 다리는 웅장한 색으로 불을 밝혀 어두운 물 위에 눈부신 반영을 만들어냅니다. 해변가에는 카페, 바, 레스토랑이 즐비하여 젊은이들과 커플들이 밤문화와 바닷바람을 즐기기에 인기 있는 장소입니다.",
-                    description: "고운 모래와 조명이 켜진 광안대교 전망으로 유명한 인기 해변입니다.",
-                        detailedDescription: "광안리 해수욕장은 대한민국 부산에 있는 해변입니다. 부산광역시 수영구 광안2동에 위치하며 해운대 해수욕장 서쪽에 있습니다. 광안대교가 가로지르는 만 안쪽에 자리 잡고 있습니다."
+                description: "고운 모래와 조명이 켜진 광안대교 전망으로 유명한 인기 해변입니다.",
+                detailedDescription: "광안리 해수욕장은 대한민국 부산에 있는 해변입니다. 부산광역시 수영구 광안2동에 위치하며 해운대 해수욕장 서쪽에 있습니다. 광안대교가 가로지르는 만 안쪽에 자리 잡고 있습니다."
+            }
         }
-    }
-},
-{
-    id: 'busan_taejongdae',
+    },
+    {
+        id: 'busan_taejongdae',
         cityId: 'busan',
-            name: 'Taejongdae Park',
-                lat: 35.0531,
-                    lng: 129.0872,
-                        radius: 800,
-                            narration: "Explore the dramatic cliffs and lush forests of Taejongdae Park, located at the southernmost tip of Yeongdo Island. Named after King Taejong Muyeol of Silla who enjoyed shooting arrows here, it offers breathtaking panoramic views of the ocean. Hike through the pine trees to the lighthouse, or take the Danubi Train for a scenic ride. On glorious days, you can even see Tsushima Island in Japan.",
-                                description: "Natural park featuring dramatic cliffs, a lighthouse, and ocean views.",
-                                    category: "Nature",
-                                        detailedDescription: "Taejongdae is a natural park of Busan, South Korea with magnificent cliffs facing the open sea on the southernmost tip of island of Yeongdo-gu. It is a designated monument, with a dense forest of pine trees and other varieties of trees.",
-                                            photos: ["https://images.unsplash.com/photo-1622383563227-044011385627?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "태종대 유원지",
+        name: 'Taejongdae Park',
+        lat: 35.0531,
+        lng: 129.0872,
+        radius: 800,
+        narration: "Explore the dramatic cliffs and lush forests of Taejongdae Park, located at the southernmost tip of Yeongdo Island. Named after King Taejong Muyeol of Silla who enjoyed shooting arrows here, it offers breathtaking panoramic views of the ocean. Hike through the pine trees to the lighthouse, or take the Danubi Train for a scenic ride. On glorious days, you can even see Tsushima Island in Japan.",
+        description: "Natural park featuring dramatic cliffs, a lighthouse, and ocean views.",
+        category: "Nature",
+        detailedDescription: "Taejongdae is a natural park of Busan, South Korea with magnificent cliffs facing the open sea on the southernmost tip of island of Yeongdo-gu. It is a designated monument, with a dense forest of pine trees and other varieties of trees.",
+        photos: ["https://images.unsplash.com/photo-1622383563227-044011385627?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "태종대 유원지",
                 narration: "영도 최남단에 위치한 태종대의 드라마틱한 절벽과 울창한 숲을 탐험해 보세요. 이곳에서 활쏘기를 즐겼던 신라 태종 무열왕의 이름에서 유래된 이곳은 숨막히는 파노라마 바다 전망을 제공합니다. 소나무 숲을 지나 등대까지 하이킹하거나 다누비 열차를 타고 경치를 즐기세요. 날씨가 좋은 날에는 일본 대마도까지 볼 수 있습니다.",
-                    description: "드라마틱한 절벽, 등대, 바다 전망이 특징인 자연 공원입니다.",
-                        detailedDescription: "태종대는 대한민국 부산 영도구 최남단에 위치한 자연 공원으로 탁 트인 바다를 마주하는 웅장한 절벽이 있습니다. 소나무 숲과 다양한 수종이 우거진 지정 기념물입니다."
+                description: "드라마틱한 절벽, 등대, 바다 전망이 특징인 자연 공원입니다.",
+                detailedDescription: "태종대는 대한민국 부산 영도구 최남단에 위치한 자연 공원으로 탁 트인 바다를 마주하는 웅장한 절벽이 있습니다. 소나무 숲과 다양한 수종이 우거진 지정 기념물입니다."
+            }
         }
-    }
-},
-// Seoul (Remaining)
-{
-    id: 'seoul_bukchon',
+    },
+    // Seoul (Remaining)
+    {
+        id: 'seoul_bukchon',
         cityId: 'seoul',
-            name: 'Bukchon Hanok Village',
-                lat: 37.5826,
-                    lng: 126.9830,
-                        radius: 300,
-                            narration: "Wander through the winding alleys of Bukchon Hanok Village, where centuries-old traditional Korean houses (Hanok) are preserved. Once the residential quarter for high-ranking officials, it now offers a glimpse into the past amidst the modern city. Admire the graceful curves of the tiled roofs and the wooden beams. Many Hanoks operate as cultural centers, guesthouses, and tea houses, inviting you to experience traditional Korean lifestyle.",
-                                description: "Traditional village featuring preserved Hanok houses and narrow alleys.",
-                                    category: "Culture",
-                                        detailedDescription: "Bukchon Hanok Village is a Korean traditional village in Seoul with a long history located on the top of a hill between Gyeongbok Palace, Changdeok Palace and Jongmyo Royal Shrine. The traditional village is composed of lots of alleys, hanok and is preserved to show a 600-year-old urban environment.",
-                                            photos: ["https://images.unsplash.com/photo-1549608184-72f88eb2211e?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "북촌한옥마을",
+        name: 'Bukchon Hanok Village',
+        lat: 37.5826,
+        lng: 126.9830,
+        radius: 300,
+        narration: "Wander through the winding alleys of Bukchon Hanok Village, where centuries-old traditional Korean houses (Hanok) are preserved. Once the residential quarter for high-ranking officials, it now offers a glimpse into the past amidst the modern city. Admire the graceful curves of the tiled roofs and the wooden beams. Many Hanoks operate as cultural centers, guesthouses, and tea houses, inviting you to experience traditional Korean lifestyle.",
+        description: "Traditional village featuring preserved Hanok houses and narrow alleys.",
+        category: "Culture",
+        detailedDescription: "Bukchon Hanok Village is a Korean traditional village in Seoul with a long history located on the top of a hill between Gyeongbok Palace, Changdeok Palace and Jongmyo Royal Shrine. The traditional village is composed of lots of alleys, hanok and is preserved to show a 600-year-old urban environment.",
+        photos: ["https://images.unsplash.com/photo-1549608184-72f88eb2211e?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "북촌한옥마을",
                 narration: "수백 년 된 전통 가옥(한옥)이 보존된 북촌한옥마을의 구불구불한 골목을 거닐어 보세요. 한때 고위 관리들의 거주지였던 이곳은 이제 현대 도시 속에서 과거를 엿볼 수 있는 기회를 제공합니다. 기와지붕의 우아한 곡선과 나무 기둥을 감상해 보세요. 많은 한옥이 문화 센터, 게스트하우스, 찻집으로 운영되어 전통적인 한국 생활 방식을 경험할 수 있습니다.",
-                    description: "보존된 한옥과 좁은 골목이 특징인 전통 마을입니다.",
-                        detailedDescription: "북촌한옥마을은 경복궁, 창덕궁, 종묘 사이에 위치한 언덕 위에 자리 잡은 오랜 역사를 가진 서울의 한국 전통 마을입니다. 이 전통 마을은 많은 골목과 한옥으로 구성되어 있으며 600년 된 도시 환경을 보여주기 위해 보존되고 있습니다."
+                description: "보존된 한옥과 좁은 골목이 특징인 전통 마을입니다.",
+                detailedDescription: "북촌한옥마을은 경복궁, 창덕궁, 종묘 사이에 위치한 언덕 위에 자리 잡은 오랜 역사를 가진 서울의 한국 전통 마을입니다. 이 전통 마을은 많은 골목과 한옥으로 구성되어 있으며 600년 된 도시 환경을 보여주기 위해 보존되고 있습니다."
+            }
         }
-    }
-},
-{
-    id: 'seoul_myeongdong',
+    },
+    {
+        id: 'seoul_myeongdong',
         cityId: 'seoul',
-            name: 'Myeongdong Shopping Street',
-                lat: 37.5636,
-                    lng: 126.9845,
-                        radius: 300,
-                            narration: "Dive into the bustling shopping mecca of Myeongdong, a paradise for fashion and beauty lovers. Neon lights, K-pop music, and the aroma of street food fill the air. Browse through countless cosmetic shops, department stores, and boutiques. Don't miss the famous Myeongdong street food alley, offering dazzling treats like giant lobster tails, tteokbokki, and hotteok.",
-                                description: "Bustling shopping district famous for cosmetics, fashion, and street food.",
-                                    category: "Shopping",
-                                        detailedDescription: "Myeongdong is a dong in Jung-gu, Seoul, South Korea between Chungmu-ro, Eulji-ro, and Namdaemun-ro. It is mostly a commercial area, being one of Seoul's main shopping, parade route and tourism districts.",
-                                            photos: ["https://images.unsplash.com/photo-1582215682859-f2156eb41a1c?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "명동 쇼핑거리",
+        name: 'Myeongdong Shopping Street',
+        lat: 37.5636,
+        lng: 126.9845,
+        radius: 300,
+        narration: "Dive into the bustling shopping mecca of Myeongdong, a paradise for fashion and beauty lovers. Neon lights, K-pop music, and the aroma of street food fill the air. Browse through countless cosmetic shops, department stores, and boutiques. Don't miss the famous Myeongdong street food alley, offering dazzling treats like giant lobster tails, tteokbokki, and hotteok.",
+        description: "Bustling shopping district famous for cosmetics, fashion, and street food.",
+        category: "Shopping",
+        detailedDescription: "Myeongdong is a dong in Jung-gu, Seoul, South Korea between Chungmu-ro, Eulji-ro, and Namdaemun-ro. It is mostly a commercial area, being one of Seoul's main shopping, parade route and tourism districts.",
+        photos: ["https://images.unsplash.com/photo-1582215682859-f2156eb41a1c?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "명동 쇼핑거리",
                 narration: "패션과 뷰티 애호가들의 천국인 번화한 쇼핑 메카 명동으로 뛰어들어 보세요. 네온사인, K-팝 음악, 길거리 음식의 향기가 공기를 가득 채웁니다. 수많은 화장품 가게, 백화점, 부티크를 둘러보세요. 거대 랍스터 꼬리, 떡볶이, 호떡과 같은 화려한 간식을 제공하는 유명한 명동 길거리 음식 골목을 놓치지 마세요.",
-                    description: "화장품, 패션, 길거리 음식으로 유명한 붐비는 쇼핑 지구입니다.",
-                        detailedDescription: "명동은 대한민국 서울 중구에 있는 동으로 충무로, 을지로, 남대문로 사이에 있습니다. 서울의 주요 쇼핑, 퍼레이드 경로 및 관광 지구 중 하나인 상업 지역입니다."
+                description: "화장품, 패션, 길거리 음식으로 유명한 붐비는 쇼핑 지구입니다.",
+                detailedDescription: "명동은 대한민국 서울 중구에 있는 동으로 충무로, 을지로, 남대문로 사이에 있습니다. 서울의 주요 쇼핑, 퍼레이드 경로 및 관광 지구 중 하나인 상업 지역입니다."
+            }
         }
-    }
-},
-{
-    id: 'seoul_ddp',
+    },
+    {
+        id: 'seoul_ddp',
         cityId: 'seoul',
-            name: 'Dongdaemun Design Plaza (DDP)',
-                lat: 37.5665,
-                    lng: 127.0093,
-                        radius: 300,
-                            narration: "Walk through the futuristic curves of the Dongdaemun Design Plaza, a neofuturistic landmark designed by Zaha Hadid. It's a hub for design, fashion, and culture, hosting exhibitions, fashion shows, and conferences. The spaceship-like architecture is especially stunning at night when the LED rose garden lights up. It's a symbol of Seoul's status as a World Design Capital.",
-                                description: "Neofuturistic cultural hub designed by Zaha Hadid, known for design and fashion events.",
-                                    category: "Culture",
-                                        detailedDescription: "Dongdaemun Design Plaza (DDP) is a major urban development landmark in Seoul, South Korea designed by Zaha Hadid and Samoo, with a distinctively neofuturistic design characterized by the 'powerful, curving forms of elongated structures'.",
-                                            photos: ["https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "동대문디자인플라자 (DDP)",
+        name: 'Dongdaemun Design Plaza (DDP)',
+        lat: 37.5665,
+        lng: 127.0093,
+        radius: 300,
+        narration: "Walk through the futuristic curves of the Dongdaemun Design Plaza, a neofuturistic landmark designed by Zaha Hadid. It's a hub for design, fashion, and culture, hosting exhibitions, fashion shows, and conferences. The spaceship-like architecture is especially stunning at night when the LED rose garden lights up. It's a symbol of Seoul's status as a World Design Capital.",
+        description: "Neofuturistic cultural hub designed by Zaha Hadid, known for design and fashion events.",
+        category: "Culture",
+        detailedDescription: "Dongdaemun Design Plaza (DDP) is a major urban development landmark in Seoul, South Korea designed by Zaha Hadid and Samoo, with a distinctively neofuturistic design characterized by the 'powerful, curving forms of elongated structures'.",
+        photos: ["https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "동대문디자인플라자 (DDP)",
                 narration: "자하 하디드가 설계한 네오퓨처리스틱 랜드마크인 동대문디자인플라자의 미래지향적인 곡선 사이를 걸어보세요. 디자인, 패션, 문화의 중심지로 전시회, 패션쇼, 컨퍼런스가 열립니다. 우주선 같은 건축물은 LED 장미 정원이 불을 밝히는 밤에 특히 아름답습니다. 세계 디자인 수도로서 서울의 위상을 상징합니다.",
-                    description: "자하 하디드가 설계한 네오퓨처리스틱 문화 허브로 디자인 및 패션 행사로 유명합니다.",
-                        detailedDescription: "동대문디자인플라자(DDP)는 자하 하디드와 삼우가 설계한 대한민국 서울의 주요 도시 개발 랜드마크로, '긴 구조물의 강력하고 곡선미 있는 형태'가 특징인 독특한 네오퓨처리스틱 디자인을 자랑합니다."
+                description: "자하 하디드가 설계한 네오퓨처리스틱 문화 허브로 디자인 및 패션 행사로 유명합니다.",
+                detailedDescription: "동대문디자인플라자(DDP)는 자하 하디드와 삼우가 설계한 대한민국 서울의 주요 도시 개발 랜드마크로, '긴 구조물의 강력하고 곡선미 있는 형태'가 특징인 독특한 네오퓨처리스틱 디자인을 자랑합니다."
+            }
         }
-    }
-},
-{
-    id: 'seoul_changdeokgung',
+    },
+    {
+        id: 'seoul_changdeokgung',
         cityId: 'seoul',
-            name: 'Changdeokgung Palace',
-                lat: 37.5794,
-                    lng: 126.9910,
-                        radius: 500,
-                            narration: "Visit Changdeokgung Palace, the most well-preserved of the five grand palaces and a UNESCO World Heritage site. Famous for its Secret Garden (Huwon), it was designed to harmonize with the natural topography. The garden, with its pavilions, lotus ponds, and ancient trees, was a leisure place for kings. It is a masterpiece of Korean landscape architecture.",
-                                description: "Well-preserved royal palace known for its beautiful Secret Garden.",
-                                    category: "History",
-                                        detailedDescription: "Changdeokgung is set within a large park in Jongno-gu, Seoul, South Korea. It is one of the 'Five Grand Palaces' built by the kings of the Joseon Dynasty. Changdeokgung was the most favored palace of many Joseon princes and retained many elements dating from the Three Kingdoms of Korea period.",
-                                            photos: ["https://images.unsplash.com/photo-1555027581-2c9381c81881?auto=format&fit=crop&q=80&w=1000"],
-                                                translations: {
-        ko: {
-            name: "창덕궁",
+        name: 'Changdeokgung Palace',
+        lat: 37.5794,
+        lng: 126.9910,
+        radius: 500,
+        narration: "Visit Changdeokgung Palace, the most well-preserved of the five grand palaces and a UNESCO World Heritage site. Famous for its Secret Garden (Huwon), it was designed to harmonize with the natural topography. The garden, with its pavilions, lotus ponds, and ancient trees, was a leisure place for kings. It is a masterpiece of Korean landscape architecture.",
+        description: "Well-preserved royal palace known for its beautiful Secret Garden.",
+        category: "History",
+        detailedDescription: "Changdeokgung is set within a large park in Jongno-gu, Seoul, South Korea. It is one of the 'Five Grand Palaces' built by the kings of the Joseon Dynasty. Changdeokgung was the most favored palace of many Joseon princes and retained many elements dating from the Three Kingdoms of Korea period.",
+        photos: ["https://images.unsplash.com/photo-1555027581-2c9381c81881?auto=format&fit=crop&q=80&w=1000"],
+        translations: {
+            ko: {
+                name: "창덕궁",
                 narration: "5대 궁궐 중 가장 잘 보존된 유네스코 세계문화유산인 창덕궁을 방문해 보세요. 비원(후원)으로 유명한 이곳은 자연 지형과 조화를 이루도록 설계되었습니다. 정자, 연꽃 연못, 고목이 있는 정원은 왕들의 휴식처였습니다. 한국 조경 건축의 걸작입니다.",
-                    description: "아름다운 후원으로 유명한 잘 보존된 왕궁입니다.",
-                        detailedDescription: "창덕궁은 대한민국 서울 종로구의 넓은 공원 안에 있습니다. 조선 왕조의 왕들이 지은 '5대 궁궐' 중 하나입니다. 창덕궁은 많은 조선 왕자들이 가장 좋아했던 궁궐이며 삼국 시대의 많은 요소를 간직하고 있습니다."
+                description: "아름다운 후원으로 유명한 잘 보존된 왕궁입니다.",
+                detailedDescription: "창덕궁은 대한민국 서울 종로구의 넓은 공원 안에 있습니다. 조선 왕조의 왕들이 지은 '5대 궁궐' 중 하나입니다. 창덕궁은 많은 조선 왕자들이 가장 좋아했던 궁궐이며 삼국 시대의 많은 요소를 간직하고 있습니다."
+            }
         }
     }
-}
 ];

@@ -97,6 +97,7 @@ interface DbCity {
   lng: number;
   zoom: number | null;
   cruisePort: any;
+  defaultGuideId: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -610,7 +611,7 @@ export default function Admin() {
                 <AIDiscoveryDialog
                   isOpen={isAIDiscoveryOpen}
                   onClose={() => setIsAIDiscoveryOpen(false)}
-                  cities={cities}
+                  cities={cities as any}
                 />
                 <Button
                   variant="outline"

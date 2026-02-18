@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity as ActivityIcon, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen, User as UserIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
@@ -1381,15 +1382,15 @@ export default function UnifiedFloatingCard({
                                     onClick={() => onRegionalGuideChange?.(guide.id)}
                                   >
                                     <div className="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
-                                      {guide.avatarUrl ? (
-                                        <img src={guide.avatarUrl} alt={guide.username} className="w-full h-full object-cover" />
+                                      {guide.avatar ? (
+                                        <img src={guide.avatar} alt={guide.displayName || guide.email || 'User'} className="w-full h-full object-cover" />
                                       ) : (
                                         <UserIcon className="w-4 h-4 m-2 text-slate-400" />
                                       )}
                                     </div>
                                     <div className="text-left overflow-hidden">
-                                      <div className="text-xs font-medium truncate">{guide.username}</div>
-                                      <div className="text-[10px] text-muted-foreground truncate">{guide.roles?.join(', ')}</div>
+                                      <div className="text-xs font-medium truncate">{guide.displayName || guide.email}</div>
+                                      <div className="text-[10px] text-muted-foreground truncate">{guide.role}</div>
                                     </div>
                                   </Button>
                                 ))}
@@ -1401,8 +1402,8 @@ export default function UnifiedFloatingCard({
 
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-200 overflow-hidden flex-shrink-0">
-                          {selectedRegionalGuide?.avatarUrl ? (
-                            <img src={selectedRegionalGuide.avatarUrl} alt={selectedRegionalGuide.username} className="w-full h-full object-cover" />
+                          {selectedRegionalGuide?.avatar ? (
+                            <img src={selectedRegionalGuide.avatar} alt={selectedRegionalGuide.displayName || selectedRegionalGuide.email || 'User'} className="w-full h-full object-cover" />
                           ) : (
                             <UserIcon className="w-6 h-6 m-3 text-amber-400" />
                           )}
@@ -1410,7 +1411,7 @@ export default function UnifiedFloatingCard({
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-1.5">
                             <span className="font-bold text-slate-900 truncate">
-                              {selectedRegionalGuide?.username || (selectedLanguage === 'ko' ? 'AI 가이드' : 'AI Guide')}
+                              {selectedRegionalGuide?.displayName || selectedRegionalGuide?.email || (selectedLanguage === 'ko' ? 'AI 가이드' : 'AI Guide')}
                             </span>
                             <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100 border-none px-1.5 py-0 h-4 text-[10px]">
                               Instructor

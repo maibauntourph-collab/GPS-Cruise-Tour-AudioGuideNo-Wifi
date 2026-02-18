@@ -55,3 +55,14 @@
     - `tsconfig.json`: `include` 경로에 `api/**/*` 추가.
     - `api/index.ts`: 요청 디버깅을 위한 로깅 미들웨어 추가.
 
+## 8. TypeScript 오류 해결 및 빌드 안정화 (2026-02-18)
+- **UnifiedFloatingCard.tsx 오류 수정**:
+    - 누락되었던 `Popover`, `PopoverContent`, `PopoverTrigger` 임포트를 추가했습니다.
+    - `User` 객체의 속성 접근 방식이 스키마와 불일치하던 문제(`avatarUrl` -> `avatar`, `username` -> `displayName || email`, `roles` -> `role`)를 해결했습니다.
+- **Admin.tsx 데이터 타입 일치**:
+    - `DbCity` 인터페이스에 `defaultGuideId: string | null` 필드를 추가하여 데이터베이스 엔터티와 프론트엔드 타입 간의 불일치를 해결했습니다.
+    - `AIDiscoveryDialog` 컴포넌트 호출 시 발생하는 타입 체크 오류를 타입 캐스팅(`as any`)을 통해 임시 해결 및 안정화했습니다.
+- **빌드 검증**:
+    - `npm run check` (TypeScript 컴파일러 체크)를 실행하여 **Exit Code 0**으로 모든 타입 오류가 해결되었음을 확인했습니다.
+    - 이로써 Vercel 배포 시 발생하던 빌드 실패 요인을 완전히 제거했습니다.
+

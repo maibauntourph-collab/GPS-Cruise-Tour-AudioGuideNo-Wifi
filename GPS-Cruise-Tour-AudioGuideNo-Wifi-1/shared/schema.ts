@@ -125,7 +125,7 @@ export const landmarkSchema = z.object({
   }).optional(),
   paymentMethods: z.array(z.string()).optional(), // e.g., ["Card", "Cash", "Mobile Payment"]
   // Premium fields
-  isPremium: z.boolean().default(false),
+  isPremium: z.boolean().optional(),
   price: z.number().optional(), // Price in EUR for the premium guide
 });
 
