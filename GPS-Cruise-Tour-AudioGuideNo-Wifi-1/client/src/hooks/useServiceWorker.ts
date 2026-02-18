@@ -5,10 +5,9 @@ import { useEffect, useState } from 'react';
 // We want service worker enabled for .replit.app (published apps) but not for local dev
 const isDevelopment = import.meta.env.DEV || window.location.hostname === 'localhost';
 const isReplitDevPreview = window.location.hostname.includes('.replit.dev');
-const isReplitProduction = window.location.hostname.includes('.replit.app');
+const isVercel = window.location.hostname.includes('.vercel.app');
 
-// Enable service worker in production OR on replit.app (published apps)
-// Disable in local development and replit.dev (development preview) to avoid HMR issues
+// Enable service worker in production, on replit.app, or on vercel.app
 const shouldEnableServiceWorker = !isDevelopment && !isReplitDevPreview;
 
 export function useServiceWorker() {
