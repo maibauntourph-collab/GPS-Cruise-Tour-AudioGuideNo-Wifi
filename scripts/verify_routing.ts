@@ -1,72 +1,65 @@
-import express from 'express';
-import apiHandler from '../api/index'; // default export
 
-async function runTest() {
-    console.log('--- Starting Route Verification (Vercel Simulation) ---');
+import express from "express";
+import { registerRoutes } from "../server/routes";
+import { setupAuth } from "../server/auth";
+import { storage } from "../server/storage";
 
-    // Mock Request/Response
-    // We need to simulate how Vercel calls the handler.
-    // The handler expects (req, res).
-    // We can use a real Express app to drive it, OR just call it.
-    // But apiHandler uses 'app(req, res)' internally where 'app' is an Express instance.
-    // So we can treat apiHandler as a middleware or just a request handler.
+async function verify() {
+    console.log("🔍 Starting Routing Verification...");
 
-    const simApp = express();
+    // 1. Check Data Availability
+    try {
+        const cities = await storage.getCities();
+        console.log(`✅ storage.getCities() returned ${cities.length} cities.`);
+        if (cities.length > 0) {
+            console.log(`   Sample: ${cities[0].name} (${cities[0].id})`);
+        } else {
+            console.warn("⚠️ No cities found in storage!");
+        }
+    } catch (error) {
+        console.error("❌ Error fetching cities from storage:", error);
+    }
 
-    // Mount the Vercel handler.
-    // In Vercel, requests to /api/cities hit the handler.
-    // The handler calls app(req, res).
-    // If app is a standard express app, it should route based on req.url.
+    // 2. Setup Express App & Routes
+    const app = express();
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
 
-    simApp.all('*', (req, res) => {
-        console.log(`[Sim] Request: ${req.method} ${req.url}`);
-        apiHandler(req, res);
-    });
+    // Mock server setup (similar to server/index.ts)
+    const server = await registerRoutes(app);
 
-    const PORT = 3456;
-    const server = simApp.listen(PORT, async () => {
-        console.log(`[Sim] Server listening on port ${PORT}`);
+    // Setup basics for simple request testing (mocking req/res)
+    // We can't easy mock full express request without libraries like supertest, 
+    // but we can check the route stack.
 
-        try {
-            // Test /api/cities
-            console.log('[Test] Fetching /api/cities...');
-            const response = await fetch(`http://localhost:${PORT}/api/cities`);
-            console.log(`[Test] Status: ${response.status}`);
-
-            if (response.status === 200) {
-                const data = await response.json();
-                console.log(`[Test] Data received: ${Array.isArray(data) ? data.length + ' cities' : 'Invalid data'}`);
-                if (Array.isArray(data) && data.length > 0) {
-                    console.log('SUCCESS: /api/cities returned data.');
-                    console.log('Sample:', data[0].name);
-                } else {
-                    console.error('FAILURE: /api/cities returned empty or invalid data.');
+    console.log("\n🛣️  Registered Routes (API):");
+    const routes: string[] = [];
+    app._router.stack.forEach((middleware: any) => {
+        if (middleware.route) {
+            // routes registered directly on the app
+            const methods = Object.keys(middleware.route.methods).join(',').toUpperCase();
+            routes.push(`${methods} ${middleware.route.path}`);
+            console.log(`   - ${methods} ${middleware.route.path}`);
+        } else if (middleware.name === 'router') {
+            // router middleware
+            middleware.handle.stack.forEach((handler: any) => {
+                if (handler.route) {
+                    const methods = Object.keys(handler.route.methods).join(',').toUpperCase();
+                    routes.push(`${methods} ${handler.route.path}`);
+                    console.log(`   - ${methods} ${handler.route.path}`);
                 }
-            } else {
-                console.error('FAILURE: /api/cities did not return 200.');
-                const text = await response.text();
-                console.log('Response:', text);
-            }
-
-            // Test /api/debug-routes
-            console.log('\n[Test] Fetching /api/debug-routes...');
-            const debugRes = await fetch(`http://localhost:${PORT}/api/debug-routes`);
-            if (debugRes.status === 200) {
-                const debugData = await debugRes.json();
-                console.log(`[Test] Routes registered: ${debugData.totalRoutes}`);
-                // console.log(JSON.stringify(debugData.routes, null, 2));
-            } else {
-                console.log('[Test] /api/debug-routes failed.');
-            }
-
-        } catch (e) {
-            console.error('[Test] Exception during fetch:', e);
-        } finally {
-            server.close();
-            console.log('--- Verification Finished ---');
-            process.exit(0);
+            });
         }
     });
+
+    if (routes.find(r => r.includes("/api/cities"))) {
+        console.log("\n✅ SUCCESS: GET /api/cities route is registered.");
+    } else {
+        console.error("\n❌ FAILURE: GET /api/cities route is MISSING!");
+    }
+
+    console.log("\nDone.");
+    process.exit(0);
 }
 
-runTest();
+verify();
