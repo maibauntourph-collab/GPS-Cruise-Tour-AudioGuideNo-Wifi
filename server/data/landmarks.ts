@@ -7305,5 +7305,130 @@ export const LANDMARKS: Landmark[] = [
         detailedDescription: '이 몰입형 태국 요리 수업은 레시피 이상을 제공합니다 - 태국 요리의 핵심을 드러내는 문화 경험입니다. 강사가 갈랑갈, 카피르 라임 잎, 태국 바질 품종, 피시 소스 등급과 같은 이국적인 재료를 설명하는 지역 시장의 가이드 투어로 시작합니다. 가장 신선한 농산물을 선택하는 방법을 배우고 각 재료의 중요성을 이해하세요. 전통적인 태국 주방이나 야외 요리 파빌리온으로 돌아와 톰얌 수프, 팟타이, 그린 커리, 솜탐(파파야 샐러드), 망고 스티키 라이스와 같은 4-5가지 고전 요리를 준비합니다. 절구에서 커리 페이스트를 찧는 것, 단맛, 신맛, 짠맛, 매운맛의 완벽한 균형을 이루는 것, 적절한 웍 다루기와 같은 필수 기술을 마스터하세요. 소규모 수업 규모는 개인별 관심을 보장합니다. 점심이나 저녁으로 여러분의 창작물을 즐기고, 레시피 카드와 수료증을 가져가세요. 채식 및 식이 조절이 가능합니다.'
       }
     }
+  },
+  // Cebu landmarks
+  {
+    id: 'magellans-cross',
+    cityId: 'cebu',
+    name: 'Magellan\'s Cross',
+    lat: 10.2936,
+    lng: 123.9019,
+    radius: 50,
+    narration: 'This is Magellan\'s Cross, a Christian cross planted by Portuguese and Spanish explorers as ordered by Ferdinand Magellan upon arriving in Cebu in the Philippines on April 21, 1521.',
+    description: 'A historical symbol of the introduction of Christianity to the Philippines',
+    category: 'Historical',
+    detailedDescription: 'Magellan\'s Cross represents the birth of Christianity in the Philippines. Planted by Ferdinand Magellan in 1521, it is housed in a chapel next to the Basilica Minore del Santo Niño. The original cross is believed to be encased inside the wooden cross founded in the center of the chapel to protect it from people who chipped away parts of the cross believing it had miraculous powers. The ceiling of the chapel features a mural depicted the baptism of Rajah Humabon and his household, marking the first Christian baptism in the archipelago.',
+    photos: [
+      'https://images.unsplash.com/photo-1590666060197-0775a646c039?w=800',
+      'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800'
+    ],
+    historicalInfo: 'Magellan\'s Cross holds immense historical significance as it marks the arrival of Christianity in the Philippines. It was planted by Ferdinand Magellan on April 21, 1521.',
+    yearBuilt: '1521',
+    architect: 'Spanish Explorers',
+    translations: {
+      en: {
+        name: 'Magellan\'s Cross',
+        narration: 'This is Magellan\'s Cross, a Christian cross planted by Portuguese and Spanish explorers as ordered by Ferdinand Magellan upon arriving in Cebu in the Philippines on April 21, 1521.',
+        description: 'A historical symbol of the introduction of Christianity to the Philippines'
+      },
+      ko: {
+        name: '마젤란의 십자가',
+        narration: '이것은 1521년 4월 21일 페르디난드 마젤란이 필리핀 세부에 도착했을 때 포르투갈과 스페인 탐험가들이 심은 기독교 십자가인 마젤란의 십자가입니다.',
+        description: '필리핀 기독교 전파의 역사적 상징'
+      }
+    }
+  },
+  {
+    id: 'basilica-santo-nino',
+    cityId: 'cebu',
+    name: 'Basilica Minore del Santo Niño',
+    lat: 10.2942,
+    lng: 123.9021,
+    radius: 60,
+    narration: 'The Basilica Minore del Santo Niño is the oldest Roman Catholic church in the country, founded in 1565.',
+    description: 'The oldest Roman Catholic church in the Philippines',
+    category: 'Religious',
+    detailedDescription: 'The Basilica Minore del Santo Niño de Cebu is the oldest Roman Catholic church in the Philippines. It was founded in 1565 by Fray Andrés de Urdaneta, O.S.A. and Fray Diego de Herrera, O.S.A. The church houses the image of the Santo Niño, a statue of the Child Jesus that is the oldest religious relic in the Philippines. The statue was a gift from Ferdinand Magellan to Rajah Humabon and his wife Juana during their baptism in 1521.',
+    photos: [
+      'https://images.unsplash.com/photo-1544898393-3ea6652eb640?w=800',
+      'https://images.unsplash.com/photo-1621323337922-383748281313?w=800'
+    ],
+    historicalInfo: 'Founded in 1565, it is the oldest Roman Catholic church in the Philippines and houses the country\'s oldest religious relic, the statue of Santo Niño.',
+    yearBuilt: '1565',
+    architect: 'Fray Andrés de Urdaneta',
+    translations: {
+      en: {
+        name: 'Basilica Minore del Santo Niño',
+        narration: 'The Basilica Minore del Santo Niño is the oldest Roman Catholic church in the country, founded in 1565.',
+        description: 'The oldest Roman Catholic church in the Philippines'
+      },
+      ko: {
+        name: '산토 니뇨 성당',
+        narration: '산토 니뇨 성당은 1565년에 설립된 필리핀에서 가장 오래된 로마 가톨릭 교회입니다.',
+        description: '필리핀에서 가장 오래된 로마 가톨릭 교회'
+      }
+    }
+  },
+  {
+    id: 'fort-san-pedro',
+    cityId: 'cebu',
+    name: 'Fort San Pedro',
+    lat: 10.2923,
+    lng: 123.9056,
+    radius: 70,
+    narration: 'Fort San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel López de Legazpi.',
+    description: 'The oldest triangular bastion fort in the country',
+    category: 'Historical',
+    detailedDescription: 'Fuerte de San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel López de Legazpi, first governor of the Captaincy General of the Philippines. It is located in the area now called Plaza Independencia, in the pier area of the city. The original fort was made of wood and was built in 1565. It was later replaced by the current stone fort in the 17th century.',
+    photos: [
+      'https://images.unsplash.com/photo-1596423528628-91217743d57d?w=800',
+      'https://images.unsplash.com/photo-1597816827806-0567a5497239?w=800'
+    ],
+    historicalInfo: 'Built in 1565, Fort San Pedro is the oldest triangular bastion fort in the Philippines. It served as the nucleus of the first Spanish settlement in the Philippines.',
+    yearBuilt: '1565',
+    architect: 'Miguel López de Legazpi',
+    translations: {
+      en: {
+        name: 'Fort San Pedro',
+        narration: 'Fort San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel López de Legazpi.',
+        description: 'The oldest triangular bastion fort in the country'
+      },
+      ko: {
+        name: '산 페드로 요새',
+        narration: '산 페드로 요새는 미겔 로페스 데 레가스피의 지휘 하에 스페인 사람들이 건설한 필리핀 세부의 군사 방어 구조물입니다.',
+        description: '필리핀에서 가장 오래된 삼각형 요새'
+      }
+    }
+  },
+  {
+    id: 'taoist-temple',
+    cityId: 'cebu',
+    name: 'Cebu Taoist Temple',
+    lat: 10.3340,
+    lng: 123.8870,
+    radius: 60,
+    narration: 'The Cebu Taoist Temple is a Taoist temple located in Beverly Hills Subdivision of Cebu City, Philippines.',
+    description: 'A colorful and multi-tiered Taoist temple',
+    category: 'Religious',
+    detailedDescription: 'The Cebu Taoist Temple is located in Beverly Hills Subdivision of Cebu City, Philippines. It was built by Cebu\'s substantial Chinese community in 1972. With an elevation of 300 meters (980 ft) above sea level, the temple is a towering, multi-tiered, multi-hued attraction accessible by three separate winding routes. Unlike the neighboring Phu Sian Temple, the Taoist Temple is open to the worshipers and non-worshipers alike.',
+    photos: [
+      'https://images.unsplash.com/photo-1627918498642-f7093847e137?w=800',
+      'https://images.unsplash.com/photo-1549419409-f8313437299a?w=800'
+    ],
+    historicalInfo: 'Built in 1972 by Cebu\'s Chinese community, the temple is a center of worship for Taoism in the city.',
+    yearBuilt: '1972',
+    architect: 'Chinese Community of Cebu',
+    translations: {
+      en: {
+        name: 'Cebu Taoist Temple',
+        narration: 'The Cebu Taoist Temple is a Taoist temple located in Beverly Hills Subdivision of Cebu City, Philippines.',
+        description: 'A colorful and multi-tiered Taoist temple'
+      },
+      ko: {
+        name: '세부 도교 사원',
+        narration: '세부 도교 사원은 필리핀 세부 시의 비벌리 힐스 구역에 위치한 도교 사원입니다.',
+        description: '화려하고 다층적인 도교 사원'
+      }
+    }
   }
 ];
