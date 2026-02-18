@@ -568,3 +568,18 @@ export const CITIES: City[] = [
               zoom: 13
        }
 ];
+
+// Add Cebu manually as it seems to be missing
+export const CEBU_CITY = {
+       id: 'cebu',
+       name: 'Cebu',
+       country: 'Philippines',
+       lat: 10.3157,
+       lng: 123.8854,
+       zoom: 13
+};
+
+// Check if Cebu is already in the list, if not add it
+if (!CITIES.some(c => c.id === 'cebu')) {
+       CITIES.push(CEBU_CITY);
+}

@@ -291,8 +291,16 @@ function UserInteractionTracker() {
 
 function MapUpdater({ position }: { position: GpsPosition | null }) {
   const map = useMap();
+  const previousPositionRef = useRef<GpsPosition | null>(null);
 
   useEffect(() => {
+    // If position was null and now is set (GPS turned on), reset interaction flag
+    // This ensures the map centers on the user when they enable GPS
+    if (!previousPositionRef.current && position) {
+      userHasInteracted = false;
+    }
+    previousPositionRef.current = position;
+
     // 사용자가 맵을 조작한 후에는 자동 이동하지 않음
     if (position && !userHasInteracted) {
       map.setView([position.latitude, position.longitude], map.getZoom(), {
