@@ -41,38 +41,26 @@ export function useServiceWorker() {
       return; // Don't register service worker in development/preview
     }
 
-    // Production mode - register service worker
+    // Production mode - wait for service worker to be ready (registered by pwa.ts)
     if ('serviceWorker' in navigator && shouldEnableServiceWorker) {
-      navigator.serviceWorker
-        .register('/service-worker.js')
-        .then((reg) => {
-          console.log('[SW] Service worker registered:', reg);
-          setRegistration(reg);
+      navigator.serviceWorker.ready.then((reg) => {
+        console.log('[SW] Service worker ready:', reg);
+        setRegistration(reg);
 
-          reg.addEventListener('updatefound', () => {
-            const newWorker = reg.installing;
-            if (newWorker) {
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  console.log('[SW] Update available');
-                  setIsUpdateAvailable(true);
-                }
-              });
-            }
-          });
-        })
-        .catch((error) => {
-          console.error('[SW] Service worker registration failed:', error);
-        });
+        // Check for updates periodically
+        setInterval(() => {
+          reg.update();
+        }, 60 * 60 * 1000); // Check every hour
+      });
 
+      // Listen for controller change (meaning a new SW has taken over)
+      // This happens after skipWaiting() is called
       let refreshing = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (!refreshing) {
           refreshing = true;
-          // Prevent infinite loop by not reloading automatically
-          // Instead, we just let the user know via the update prompt
-          console.log('[SW] Controller changed, update ready');
-          // window.location.reload(); 
+          // We don't auto-reload here to avoid loops, just log it
+          console.log('[SW] Controller changed - update completed');
         }
       });
     }
