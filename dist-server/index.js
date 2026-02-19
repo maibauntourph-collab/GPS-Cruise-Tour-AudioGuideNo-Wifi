@@ -955,44 +955,22 @@ import { createServer } from "http";
 
 // server/db.ts
 init_schema();
-import { neonConfig, Pool as NeonPool } from "@neondatabase/serverless";
-import { drizzle as drizzleNeon } from "drizzle-orm/neon-serverless";
-import { drizzle as drizzleNode } from "drizzle-orm/node-postgres";
-import pg from "pg";
-import ws from "ws";
-var dbUrl = process.env.DATABASE_URL;
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+var dbUrl = process.env.NOWIFIGPSTOURS;
 if (!dbUrl) {
-  const errorMsg = "[DB] Critical: DATABASE_URL is not defined in environment variables.";
+  const errorMsg = "[DB] Critical: NOWIFIGPSTOURS is not defined in environment variables.";
   console.error(errorMsg);
   if (process.env.NODE_ENV === "production") {
     throw new Error(errorMsg);
   }
 }
-var db;
-var pool;
-if (!dbUrl || !dbUrl.includes("neon.tech")) {
-  const finalUrl = dbUrl || "postgresql://localhost:5432/postgres";
-  console.log("[DB] Local development/Fallback detected. Connecting to:", finalUrl.split("@").pop());
-  const poolNode = new pg.Pool({ connectionString: finalUrl });
-  pool = poolNode;
-  db = drizzleNode(poolNode, { schema: schema_exports });
-} else {
-  console.log("[DB] Cloud Neon environment detected. Using @neondatabase/serverless with WebSockets.");
-  try {
-    neonConfig.webSocketConstructor = ws;
-    const poolNeon = new NeonPool({ connectionString: dbUrl });
-    pool = poolNeon;
-    db = drizzleNeon(poolNeon, { schema: schema_exports });
-    console.log("[DB] Neon Pool initialized successfully.");
-  } catch (error) {
-    console.error("[DB] Critical: Failed to initialize Neon Pool:", error);
-    throw error;
-  }
-}
+var sql2 = neon(dbUrl || "postgresql://localhost:5432/postgres");
+var db = drizzle(sql2, { schema: schema_exports });
 
 // server/storage.ts
 init_schema();
-import { eq, count, and, sql as sql2, notInArray, desc } from "drizzle-orm";
+import { eq, count, and, sql as sql3, notInArray, desc } from "drizzle-orm";
 
 // server/data/restaurants.ts
 var RESTAURANTS = [
@@ -2110,6 +2088,17 @@ var CITIES = [
     zoom: 13
   }
 ];
+var CEBU_CITY = {
+  id: "cebu",
+  name: "Cebu",
+  country: "Philippines",
+  lat: 10.3157,
+  lng: 123.8854,
+  zoom: 13
+};
+if (!CITIES.some((c) => c.id === "cebu")) {
+  CITIES.push(CEBU_CITY);
+}
 
 // server/data/landmarks.ts
 var LANDMARKS = [
@@ -9407,6 +9396,131 @@ var LANDMARKS = [
         detailedDescription: "\uC774 \uBAB0\uC785\uD615 \uD0DC\uAD6D \uC694\uB9AC \uC218\uC5C5\uC740 \uB808\uC2DC\uD53C \uC774\uC0C1\uC744 \uC81C\uACF5\uD569\uB2C8\uB2E4 - \uD0DC\uAD6D \uC694\uB9AC\uC758 \uD575\uC2EC\uC744 \uB4DC\uB7EC\uB0B4\uB294 \uBB38\uD654 \uACBD\uD5D8\uC785\uB2C8\uB2E4. \uAC15\uC0AC\uAC00 \uAC08\uB791\uAC08, \uCE74\uD53C\uB974 \uB77C\uC784 \uC78E, \uD0DC\uAD6D \uBC14\uC9C8 \uD488\uC885, \uD53C\uC2DC \uC18C\uC2A4 \uB4F1\uAE09\uACFC \uAC19\uC740 \uC774\uAD6D\uC801\uC778 \uC7AC\uB8CC\uB97C \uC124\uBA85\uD558\uB294 \uC9C0\uC5ED \uC2DC\uC7A5\uC758 \uAC00\uC774\uB4DC \uD22C\uC5B4\uB85C \uC2DC\uC791\uD569\uB2C8\uB2E4. \uAC00\uC7A5 \uC2E0\uC120\uD55C \uB18D\uC0B0\uBB3C\uC744 \uC120\uD0DD\uD558\uB294 \uBC29\uBC95\uC744 \uBC30\uC6B0\uACE0 \uAC01 \uC7AC\uB8CC\uC758 \uC911\uC694\uC131\uC744 \uC774\uD574\uD558\uC138\uC694. \uC804\uD1B5\uC801\uC778 \uD0DC\uAD6D \uC8FC\uBC29\uC774\uB098 \uC57C\uC678 \uC694\uB9AC \uD30C\uBE4C\uB9AC\uC628\uC73C\uB85C \uB3CC\uC544\uC640 \uD1B0\uC58C \uC218\uD504, \uD31F\uD0C0\uC774, \uADF8\uB9B0 \uCEE4\uB9AC, \uC19C\uD0D0(\uD30C\uD30C\uC57C \uC0D0\uB7EC\uB4DC), \uB9DD\uACE0 \uC2A4\uD2F0\uD0A4 \uB77C\uC774\uC2A4\uC640 \uAC19\uC740 4-5\uAC00\uC9C0 \uACE0\uC804 \uC694\uB9AC\uB97C \uC900\uBE44\uD569\uB2C8\uB2E4. \uC808\uAD6C\uC5D0\uC11C \uCEE4\uB9AC \uD398\uC774\uC2A4\uD2B8\uB97C \uCC27\uB294 \uAC83, \uB2E8\uB9DB, \uC2E0\uB9DB, \uC9E0\uB9DB, \uB9E4\uC6B4\uB9DB\uC758 \uC644\uBCBD\uD55C \uADE0\uD615\uC744 \uC774\uB8E8\uB294 \uAC83, \uC801\uC808\uD55C \uC6CD \uB2E4\uB8E8\uAE30\uC640 \uAC19\uC740 \uD544\uC218 \uAE30\uC220\uC744 \uB9C8\uC2A4\uD130\uD558\uC138\uC694. \uC18C\uADDC\uBAA8 \uC218\uC5C5 \uADDC\uBAA8\uB294 \uAC1C\uC778\uBCC4 \uAD00\uC2EC\uC744 \uBCF4\uC7A5\uD569\uB2C8\uB2E4. \uC810\uC2EC\uC774\uB098 \uC800\uB141\uC73C\uB85C \uC5EC\uB7EC\uBD84\uC758 \uCC3D\uC791\uBB3C\uC744 \uC990\uAE30\uACE0, \uB808\uC2DC\uD53C \uCE74\uB4DC\uC640 \uC218\uB8CC\uC99D\uC744 \uAC00\uC838\uAC00\uC138\uC694. \uCC44\uC2DD \uBC0F \uC2DD\uC774 \uC870\uC808\uC774 \uAC00\uB2A5\uD569\uB2C8\uB2E4."
       }
     }
+  },
+  // Cebu landmarks
+  {
+    id: "magellans-cross",
+    cityId: "cebu",
+    name: "Magellan's Cross",
+    lat: 10.2936,
+    lng: 123.9019,
+    radius: 50,
+    narration: "This is Magellan's Cross, a Christian cross planted by Portuguese and Spanish explorers as ordered by Ferdinand Magellan upon arriving in Cebu in the Philippines on April 21, 1521.",
+    description: "A historical symbol of the introduction of Christianity to the Philippines",
+    category: "Historical",
+    detailedDescription: "Magellan's Cross represents the birth of Christianity in the Philippines. Planted by Ferdinand Magellan in 1521, it is housed in a chapel next to the Basilica Minore del Santo Ni\xF1o. The original cross is believed to be encased inside the wooden cross founded in the center of the chapel to protect it from people who chipped away parts of the cross believing it had miraculous powers. The ceiling of the chapel features a mural depicted the baptism of Rajah Humabon and his household, marking the first Christian baptism in the archipelago.",
+    photos: [
+      "https://images.unsplash.com/photo-1590666060197-0775a646c039?w=800",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800"
+    ],
+    historicalInfo: "Magellan's Cross holds immense historical significance as it marks the arrival of Christianity in the Philippines. It was planted by Ferdinand Magellan on April 21, 1521.",
+    yearBuilt: "1521",
+    architect: "Spanish Explorers",
+    translations: {
+      en: {
+        name: "Magellan's Cross",
+        narration: "This is Magellan's Cross, a Christian cross planted by Portuguese and Spanish explorers as ordered by Ferdinand Magellan upon arriving in Cebu in the Philippines on April 21, 1521.",
+        description: "A historical symbol of the introduction of Christianity to the Philippines"
+      },
+      ko: {
+        name: "\uB9C8\uC824\uB780\uC758 \uC2ED\uC790\uAC00",
+        narration: "\uC774\uAC83\uC740 1521\uB144 4\uC6D4 21\uC77C \uD398\uB974\uB514\uB09C\uB4DC \uB9C8\uC824\uB780\uC774 \uD544\uB9AC\uD540 \uC138\uBD80\uC5D0 \uB3C4\uCC29\uD588\uC744 \uB54C \uD3EC\uB974\uD22C\uAC08\uACFC \uC2A4\uD398\uC778 \uD0D0\uD5D8\uAC00\uB4E4\uC774 \uC2EC\uC740 \uAE30\uB3C5\uAD50 \uC2ED\uC790\uAC00\uC778 \uB9C8\uC824\uB780\uC758 \uC2ED\uC790\uAC00\uC785\uB2C8\uB2E4.",
+        description: "\uD544\uB9AC\uD540 \uAE30\uB3C5\uAD50 \uC804\uD30C\uC758 \uC5ED\uC0AC\uC801 \uC0C1\uC9D5"
+      }
+    }
+  },
+  {
+    id: "basilica-santo-nino",
+    cityId: "cebu",
+    name: "Basilica Minore del Santo Ni\xF1o",
+    lat: 10.2942,
+    lng: 123.9021,
+    radius: 60,
+    narration: "The Basilica Minore del Santo Ni\xF1o is the oldest Roman Catholic church in the country, founded in 1565.",
+    description: "The oldest Roman Catholic church in the Philippines",
+    category: "Religious",
+    detailedDescription: "The Basilica Minore del Santo Ni\xF1o de Cebu is the oldest Roman Catholic church in the Philippines. It was founded in 1565 by Fray Andr\xE9s de Urdaneta, O.S.A. and Fray Diego de Herrera, O.S.A. The church houses the image of the Santo Ni\xF1o, a statue of the Child Jesus that is the oldest religious relic in the Philippines. The statue was a gift from Ferdinand Magellan to Rajah Humabon and his wife Juana during their baptism in 1521.",
+    photos: [
+      "https://images.unsplash.com/photo-1544898393-3ea6652eb640?w=800",
+      "https://images.unsplash.com/photo-1621323337922-383748281313?w=800"
+    ],
+    historicalInfo: "Founded in 1565, it is the oldest Roman Catholic church in the Philippines and houses the country's oldest religious relic, the statue of Santo Ni\xF1o.",
+    yearBuilt: "1565",
+    architect: "Fray Andr\xE9s de Urdaneta",
+    translations: {
+      en: {
+        name: "Basilica Minore del Santo Ni\xF1o",
+        narration: "The Basilica Minore del Santo Ni\xF1o is the oldest Roman Catholic church in the country, founded in 1565.",
+        description: "The oldest Roman Catholic church in the Philippines"
+      },
+      ko: {
+        name: "\uC0B0\uD1A0 \uB2C8\uB1E8 \uC131\uB2F9",
+        narration: "\uC0B0\uD1A0 \uB2C8\uB1E8 \uC131\uB2F9\uC740 1565\uB144\uC5D0 \uC124\uB9BD\uB41C \uD544\uB9AC\uD540\uC5D0\uC11C \uAC00\uC7A5 \uC624\uB798\uB41C \uB85C\uB9C8 \uAC00\uD1A8\uB9AD \uAD50\uD68C\uC785\uB2C8\uB2E4.",
+        description: "\uD544\uB9AC\uD540\uC5D0\uC11C \uAC00\uC7A5 \uC624\uB798\uB41C \uB85C\uB9C8 \uAC00\uD1A8\uB9AD \uAD50\uD68C"
+      }
+    }
+  },
+  {
+    id: "fort-san-pedro",
+    cityId: "cebu",
+    name: "Fort San Pedro",
+    lat: 10.2923,
+    lng: 123.9056,
+    radius: 70,
+    narration: "Fort San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel L\xF3pez de Legazpi.",
+    description: "The oldest triangular bastion fort in the country",
+    category: "Historical",
+    detailedDescription: "Fuerte de San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel L\xF3pez de Legazpi, first governor of the Captaincy General of the Philippines. It is located in the area now called Plaza Independencia, in the pier area of the city. The original fort was made of wood and was built in 1565. It was later replaced by the current stone fort in the 17th century.",
+    photos: [
+      "https://images.unsplash.com/photo-1596423528628-91217743d57d?w=800",
+      "https://images.unsplash.com/photo-1597816827806-0567a5497239?w=800"
+    ],
+    historicalInfo: "Built in 1565, Fort San Pedro is the oldest triangular bastion fort in the Philippines. It served as the nucleus of the first Spanish settlement in the Philippines.",
+    yearBuilt: "1565",
+    architect: "Miguel L\xF3pez de Legazpi",
+    translations: {
+      en: {
+        name: "Fort San Pedro",
+        narration: "Fort San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel L\xF3pez de Legazpi.",
+        description: "The oldest triangular bastion fort in the country"
+      },
+      ko: {
+        name: "\uC0B0 \uD398\uB4DC\uB85C \uC694\uC0C8",
+        narration: "\uC0B0 \uD398\uB4DC\uB85C \uC694\uC0C8\uB294 \uBBF8\uAC94 \uB85C\uD398\uC2A4 \uB370 \uB808\uAC00\uC2A4\uD53C\uC758 \uC9C0\uD718 \uD558\uC5D0 \uC2A4\uD398\uC778 \uC0AC\uB78C\uB4E4\uC774 \uAC74\uC124\uD55C \uD544\uB9AC\uD540 \uC138\uBD80\uC758 \uAD70\uC0AC \uBC29\uC5B4 \uAD6C\uC870\uBB3C\uC785\uB2C8\uB2E4.",
+        description: "\uD544\uB9AC\uD540\uC5D0\uC11C \uAC00\uC7A5 \uC624\uB798\uB41C \uC0BC\uAC01\uD615 \uC694\uC0C8"
+      }
+    }
+  },
+  {
+    id: "taoist-temple",
+    cityId: "cebu",
+    name: "Cebu Taoist Temple",
+    lat: 10.334,
+    lng: 123.887,
+    radius: 60,
+    narration: "The Cebu Taoist Temple is a Taoist temple located in Beverly Hills Subdivision of Cebu City, Philippines.",
+    description: "A colorful and multi-tiered Taoist temple",
+    category: "Religious",
+    detailedDescription: "The Cebu Taoist Temple is located in Beverly Hills Subdivision of Cebu City, Philippines. It was built by Cebu's substantial Chinese community in 1972. With an elevation of 300 meters (980 ft) above sea level, the temple is a towering, multi-tiered, multi-hued attraction accessible by three separate winding routes. Unlike the neighboring Phu Sian Temple, the Taoist Temple is open to the worshipers and non-worshipers alike.",
+    photos: [
+      "https://images.unsplash.com/photo-1627918498642-f7093847e137?w=800",
+      "https://images.unsplash.com/photo-1549419409-f8313437299a?w=800"
+    ],
+    historicalInfo: "Built in 1972 by Cebu's Chinese community, the temple is a center of worship for Taoism in the city.",
+    yearBuilt: "1972",
+    architect: "Chinese Community of Cebu",
+    translations: {
+      en: {
+        name: "Cebu Taoist Temple",
+        narration: "The Cebu Taoist Temple is a Taoist temple located in Beverly Hills Subdivision of Cebu City, Philippines.",
+        description: "A colorful and multi-tiered Taoist temple"
+      },
+      ko: {
+        name: "\uC138\uBD80 \uB3C4\uAD50 \uC0AC\uC6D0",
+        narration: "\uC138\uBD80 \uB3C4\uAD50 \uC0AC\uC6D0\uC740 \uD544\uB9AC\uD540 \uC138\uBD80 \uC2DC\uC758 \uBE44\uBC8C\uB9AC \uD790\uC2A4 \uAD6C\uC5ED\uC5D0 \uC704\uCE58\uD55C \uB3C4\uAD50 \uC0AC\uC6D0\uC785\uB2C8\uB2E4.",
+        description: "\uD654\uB824\uD558\uACE0 \uB2E4\uCE35\uC801\uC778 \uB3C4\uAD50 \uC0AC\uC6D0"
+      }
+    }
   }
 ];
 
@@ -9564,7 +9678,7 @@ var MemStorage = class {
     const landmarks2 = await this.getLandmarks(cityId);
     const landmarkIds = landmarks2.map((l) => l.id);
     if (landmarkIds.length === 0) return [];
-    const audioList = await db.select().from(landmarkAudio).where(sql2`${landmarkAudio.landmarkId} = ANY(${landmarkIds})`);
+    const audioList = await db.select().from(landmarkAudio).where(sql3`${landmarkAudio.landmarkId} = ANY(${landmarkIds})`);
     return audioList;
   }
   async saveAudio(audio) {
@@ -9589,7 +9703,7 @@ var MemStorage = class {
   }
   // User methods
   async getUserById(id) {
-    if (!process.env.DATABASE_URL) {
+    if (!process.env.NOWIFIGPSTOURS) {
       return Array.from(this.usersMap.values()).find((u) => u.id === id);
     }
     try {
@@ -9601,7 +9715,7 @@ var MemStorage = class {
     }
   }
   async getUserByEmail(email) {
-    if (!process.env.DATABASE_URL) {
+    if (!process.env.NOWIFIGPSTOURS) {
       return Array.from(this.usersMap.values()).find((u) => u.email === email);
     }
     try {
@@ -9613,8 +9727,8 @@ var MemStorage = class {
     }
   }
   async createUser(user) {
-    if (!process.env.DATABASE_URL) {
-      console.warn("[Storage] No DATABASE_URL, using memory for createUser");
+    if (!process.env.NOWIFIGPSTOURS) {
+      console.warn("[Storage] No NOWIFIGPSTOURS, using memory for createUser");
       const id = String(this.nextUserId++);
       const newUser = {
         ...user,
@@ -9789,7 +9903,7 @@ var MemStorage = class {
       return db.select().from(savedRoutes).orderBy(savedRoutes.createdAt);
     }
     if (userId && sessionId && !countryCode) {
-      return db.select().from(savedRoutes).where(sql2`(${savedRoutes.userId} = ${userId} OR ${savedRoutes.sessionId} = ${sessionId})`).orderBy(savedRoutes.createdAt);
+      return db.select().from(savedRoutes).where(sql3`(${savedRoutes.userId} = ${userId} OR ${savedRoutes.sessionId} = ${sessionId})`).orderBy(savedRoutes.createdAt);
     }
     if (countryCode && (userId || sessionId)) {
       const userCondition = userId ? eq(savedRoutes.userId, userId) : eq(savedRoutes.sessionId, sessionId || "");
@@ -10171,7 +10285,7 @@ function mockGenerateCityInfo(query) {
 // server/routes.ts
 init_clova();
 init_schema();
-import { eq as eq4, desc as desc2, or, ilike, sql as sql5, count as count2 } from "drizzle-orm";
+import { eq as eq4, desc as desc2, or, ilike, sql as sql6, count as count2 } from "drizzle-orm";
 import crypto4 from "crypto";
 import multer from "multer";
 import * as XLSX from "xlsx";
@@ -10360,7 +10474,7 @@ var automationService = new AutomationService();
 
 // server/services/settlementService.ts
 init_schema();
-import { eq as eq3, sql as sql3 } from "drizzle-orm";
+import { eq as eq3, sql as sql4 } from "drizzle-orm";
 var SettlementService = class {
   // 플랫폼의 수익 배분율! 70%는 크리에이터(생산자)에게, 30%는 플랫폼(우리)의 운영비로 사용해.
   CREATOR_SHARE = 0.7;
@@ -10393,9 +10507,9 @@ var SettlementService = class {
         const [existingEarnings] = await tx.select().from(creatorEarnings).where(eq3(creatorEarnings.userId, creatorId));
         if (existingEarnings) {
           await tx.update(creatorEarnings).set({
-            totalBalance: sql3`${creatorEarnings.totalBalance} + ${creatorAmount}`,
+            totalBalance: sql4`${creatorEarnings.totalBalance} + ${creatorAmount}`,
             // 출금 가능한 현재 잔액
-            totalEarned: sql3`${creatorEarnings.totalEarned} + ${creatorAmount}`,
+            totalEarned: sql4`${creatorEarnings.totalEarned} + ${creatorAmount}`,
             // 지금까지 번 누적 총액
             updatedAt: /* @__PURE__ */ new Date()
           }).where(eq3(creatorEarnings.userId, creatorId));
@@ -10453,7 +10567,7 @@ var SettlementService = class {
    */
   async getCreatorStats(userId) {
     const [earnings] = await db.select().from(creatorEarnings).where(eq3(creatorEarnings.userId, userId));
-    const recentTransactions = await db.select().from(transactions).where(eq3(transactions.userId, userId)).orderBy(sql3`${transactions.createdAt} DESC`).limit(10);
+    const recentTransactions = await db.select().from(transactions).where(eq3(transactions.userId, userId)).orderBy(sql4`${transactions.createdAt} DESC`).limit(10);
     return {
       totalBalance: Number(earnings?.totalBalance || 0),
       totalEarned: Number(earnings?.totalEarned || 0),
@@ -10651,12 +10765,12 @@ function requireRole(...roles) {
 }
 
 // server/services/dbCheckService.ts
-import { sql as sql4 } from "drizzle-orm";
+import { sql as sql5 } from "drizzle-orm";
 var DbCheckService = class {
   async checkConnection() {
     const start = Date.now();
     try {
-      await db.execute(sql4`SELECT 1`);
+      await db.execute(sql5`SELECT 1`);
       const latency = Date.now() - start;
       console.log(`[DB Health] Connection is healthy. Latency: ${latency}ms`);
       return { status: "healthy", latency };
@@ -10703,6 +10817,54 @@ async function registerRoutes(app2) {
       totalRoutes: routes.length,
       routes
     });
+  });
+  app2.get("/api/debug/env", (_req, res) => {
+    res.json({
+      NOWIFIGPSTOURS_exists: !!process.env.NOWIFIGPSTOURS,
+      NOWIFIGPSTOURS_preview: process.env.NOWIFIGPSTOURS ? `${process.env.NOWIFIGPSTOURS.substring(0, 30)}...` : "NOT SET",
+      NODE_ENV: process.env.NODE_ENV || "undefined",
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    });
+  });
+  app2.get("/api/debug/db-connection", async (_req, res) => {
+    try {
+      const dbUrl2 = process.env.NOWIFIGPSTOURS;
+      const hasDbUrl = !!dbUrl2;
+      const dbUrlPreview = hasDbUrl ? `${dbUrl2?.substring(0, 15)}...${dbUrl2?.substring(dbUrl2.length - 10)}` : "Not Set";
+      const start = Date.now();
+      let connectionResult;
+      let errorDetails = null;
+      try {
+        const result = await db.execute(sql6`SELECT NOW(), current_database(), current_user, version()`);
+        connectionResult = result;
+      } catch (err) {
+        errorDetails = {
+          message: err.message,
+          code: err.code,
+          name: err.name,
+          stack: process.env.NODE_ENV === "development" ? err.stack : void 0,
+          hint: err.hint
+          // Postgres 에러 힌트
+        };
+      }
+      res.json({
+        environment: {
+          nodeEnv: process.env.NODE_ENV,
+          hasDatabaseUrl: hasDbUrl,
+          dbUrlPreview,
+          isNeon: process.env.NOWIFIGPSTOURS?.includes("neon")
+        },
+        connection: {
+          success: !errorDetails,
+          latency: Date.now() - start,
+          result: connectionResult,
+          error: errorDetails
+        },
+        timestamp: (/* @__PURE__ */ new Date()).toISOString()
+      });
+    } catch (criticalError) {
+      res.status(500).json({ error: "Debug endpoint failed", details: criticalError.message });
+    }
   });
   app2.get("/api/cities", async (req, res) => {
     try {
@@ -11266,8 +11428,8 @@ async function registerRoutes(app2) {
         const [existing] = await tx.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, creatorId));
         if (existing) {
           await tx.update(creatorEarnings).set({
-            totalBalance: sql5`${creatorEarnings.totalBalance} + ${creatorShare}`,
-            totalEarned: sql5`${creatorEarnings.totalEarned} + ${creatorShare}`,
+            totalBalance: sql6`${creatorEarnings.totalBalance} + ${creatorShare}`,
+            totalEarned: sql6`${creatorEarnings.totalEarned} + ${creatorShare}`,
             updatedAt: /* @__PURE__ */ new Date()
           }).where(eq4(creatorEarnings.userId, creatorId));
         } else {
@@ -11351,11 +11513,11 @@ async function registerRoutes(app2) {
           translations: ""
         }];
       }
-      const ws2 = XLSX.utils.json_to_sheet(data);
+      const ws = XLSX.utils.json_to_sheet(data);
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws2, type === "cities" ? "Cities" : "Landmarks");
+      XLSX.utils.book_append_sheet(wb, ws, type === "cities" ? "Cities" : "Landmarks");
       if (format === "csv") {
-        const csv = XLSX.utils.sheet_to_csv(ws2);
+        const csv = XLSX.utils.sheet_to_csv(ws);
         res.setHeader("Content-Type", "text/csv");
         res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
         res.send(csv);
@@ -11416,11 +11578,11 @@ async function registerRoutes(app2) {
           translations: l.translations ? JSON.stringify(l.translations) : ""
         }));
       }
-      const ws2 = XLSX.utils.json_to_sheet(data);
+      const ws = XLSX.utils.json_to_sheet(data);
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws2, type === "cities" ? "Cities" : "Landmarks");
+      XLSX.utils.book_append_sheet(wb, ws, type === "cities" ? "Cities" : "Landmarks");
       if (format === "csv") {
-        const csv = XLSX.utils.sheet_to_csv(ws2);
+        const csv = XLSX.utils.sheet_to_csv(ws);
         res.setHeader("Content-Type", "text/csv");
         res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
         res.send(csv);
@@ -12477,7 +12639,7 @@ async function registerRoutes(app2) {
       }).from(userIdentities).groupBy(userIdentities.provider);
       const sevenDaysAgo = /* @__PURE__ */ new Date();
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-      const recentSignups = await db.select({ count: count2() }).from(users).where(sql5`${users.createdAt} > ${sevenDaysAgo}`);
+      const recentSignups = await db.select({ count: count2() }).from(users).where(sql6`${users.createdAt} > ${sevenDaysAgo}`);
       res.json({
         total,
         roles: Object.fromEntries(roleStats.map((r) => [r.role || "user", Number(r.count)])),
