@@ -66,6 +66,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
       routes
     });
   });
+
+  // [Vercel Debug] DB 연결 상세 진단 엔드포인트
+  // 로컬에서는 되는데 배포 환경에서만 안 될 때, 정확한 에러 원인(DNS, Auth, Timeout 등)을 파악하기 위함입니다.
+  app.get("/api/debug/db-connection", async (_req, res) => {
+    try {
+      const hasDbUrl = !!process.env.DATABASE_URL;
+      const dbUrlPreview = hasDbUrl
+        ? `${process.env.DATABASE_URL?.substring(0, 15)}...${process.env.DATABASE_URL?.substring(process.env.DATABASE_URL.length - 10)}`
+        : "Not Set";
+
+      const start = Date.now();
+      let connectionResult;
+      let errorDetails = null;
+
+      try {
+        // 실제 쿼리 실행 시도
+        const result = await db.execute(sql`SELECT NOW(), current_database(), current_user, version()`);
+        connectionResult = result[0]; // 첫 번째 행 반환
+      } catch (err: any) {
+        errorDetails = {
+          message: err.message,
+          code: err.code,
+          name: err.name,
+          stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
+          hint: err.hint // Postgres 에러 힌트
+        };
+      }
+
+      res.json({
+        environment: {
+          nodeEnv: process.env.NODE_ENV,
+          hasDatabaseUrl: hasDbUrl,
+          dbUrlPreview: dbUrlPreview,
+          isNeon: process.env.DATABASE_URL?.includes('neon'),
+        },
+        connection: {
+          success: !errorDetails,
+          latency: Date.now() - start,
+          result: connectionResult,
+          error: errorDetails
+        },
+        timestamp: new Date().toISOString()
+      });
+    } catch (criticalError: any) {
+      res.status(500).json({ error: "Debug endpoint failed", details: criticalError.message });
+    }
+  });
   // [적요: 도시 목록 조회 API]
   // 데이터베이스에 저장된 모든 도시 정보를 배열로 반환합니다.
   app.get("/api/cities", async (req, res) => {
