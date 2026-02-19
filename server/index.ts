@@ -102,3 +102,7 @@ import { dbCheckService } from "./services/dbCheckService";
     log(`serving on port ${port}`);
   });
 })();
+
+// [적요: Vercel 서버리스용 Express 앱 export]
+// api/index.ts에서 이 app을 import하여 서버리스 함수로 사용합니다.
+export default app;
