@@ -314,7 +314,7 @@ export class MemStorage implements IStorage {
 
   // User methods
   async getUserById(id: string): Promise<User | undefined> {
-    if (!process.env.DATABASE_URL) {
+    if (!process.env.NOWIFIGPSTOURS) {
       return Array.from(this.usersMap.values()).find(u => u.id === id);
     }
     try {
@@ -327,7 +327,7 @@ export class MemStorage implements IStorage {
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    if (!process.env.DATABASE_URL) {
+    if (!process.env.NOWIFIGPSTOURS) {
       return Array.from(this.usersMap.values()).find(u => u.email === email);
     }
     try {
@@ -340,8 +340,8 @@ export class MemStorage implements IStorage {
   }
 
   async createUser(user: InsertUser): Promise<User> {
-    if (!process.env.DATABASE_URL) {
-      console.warn("[Storage] No DATABASE_URL, using memory for createUser");
+    if (!process.env.NOWIFIGPSTOURS) {
+      console.warn("[Storage] No NOWIFIGPSTOURS, using memory for createUser");
       const id = String(this.nextUserId++);
       const newUser: User = {
         ...user,

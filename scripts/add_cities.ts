@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const dbUrl = process.env.DATABASE_URL;
+const dbUrl = process.env.NOWIFIGPSTOURS;
 
 const newCities = [
     { id: 'tokyo', name: '도쿄', country: '일본', lat: 35.6762, lng: 139.6503, zoom: 11, cruisePort: { name: 'Yokohama Port', lat: 35.4542, lng: 139.6472 } },
@@ -15,7 +15,7 @@ const newCities = [
 
 async function addCities() {
     if (!dbUrl) {
-        console.error("DATABASE_URL missing");
+        console.error("NOWIFIGPSTOURS missing");
         process.exit(1);
     }
     const client = new pg.Client({ connectionString: dbUrl, ssl: { rejectUnauthorized: false } });

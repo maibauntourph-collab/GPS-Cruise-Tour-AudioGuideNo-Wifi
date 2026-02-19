@@ -1,7 +1,10 @@
+// [적요: Drizzle ORM 마이그레이션 설정]
+// DB 스키마 변경 시 마이그레이션 파일을 생성하는 설정입니다.
+// 환경변수 키: NOWIFIGPSTOURS
 import { defineConfig } from "drizzle-kit";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL, ensure the database is provisioned");
+if (!process.env.NOWIFIGPSTOURS) {
+  throw new Error("NOWIFIGPSTOURS env var is required for database connection");
 }
 
 export default defineConfig({
@@ -9,6 +12,6 @@ export default defineConfig({
   schema: "./shared/schema.ts",
   dialect: "postgresql",
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: process.env.NOWIFIGPSTOURS,
   },
 });

@@ -1,7 +1,7 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
 dotenv.config();
-const dbUrl = process.env.DATABASE_URL;
+const dbUrl = process.env.NOWIFIGPSTOURS;
 
 const cityData = [
     { id: 'london', name: '런던', country: '영국', lat: 51.5074, lng: -0.1278 },

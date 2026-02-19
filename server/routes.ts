@@ -71,7 +71,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // 로컬에서는 되는데 배포 환경에서만 안 될 때, 정확한 에러 원인(DNS, Auth, Timeout 등)을 파악하기 위함입니다.
   app.get("/api/debug/db-connection", async (_req, res) => {
     try {
-      const dbUrl = process.env.DATABASE_URL || process.env.NOWIFIGPSTOURS;
+      const dbUrl = process.env.NOWIFIGPSTOURS;
       const hasDbUrl = !!dbUrl;
       const dbUrlPreview = hasDbUrl
         ? `${dbUrl?.substring(0, 15)}...${dbUrl?.substring(dbUrl.length - 10)}`
@@ -84,7 +84,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       try {
         // 실제 쿼리 실행 시도
         const result = await db.execute(sql`SELECT NOW(), current_database(), current_user, version()`);
-        connectionResult = result[0]; // 첫 번째 행 반환
+        connectionResult = result; // neon-http 결과는 배열 형태로 반환됨
       } catch (err: any) {
         errorDetails = {
           message: err.message,
@@ -100,7 +100,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           nodeEnv: process.env.NODE_ENV,
           hasDatabaseUrl: hasDbUrl,
           dbUrlPreview: dbUrlPreview,
-          isNeon: process.env.DATABASE_URL?.includes('neon'),
+          isNeon: process.env.NOWIFIGPSTOURS?.includes('neon'),
         },
         connection: {
           success: !errorDetails,

@@ -3,11 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const dbUrl = process.env.DATABASE_URL;
+const dbUrl = process.env.NOWIFIGPSTOURS;
 
 async function checkSchema() {
     if (!dbUrl) {
-        console.error("DATABASE_URL is missing in .env");
+        console.error("NOWIFIGPSTOURS is missing in .env");
         process.exit(1);
     }
 

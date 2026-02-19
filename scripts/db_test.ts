@@ -8,12 +8,12 @@ async function testConnection() {
        console.log("🔍 DB Connection Diagnostic Start...");
        console.log("Environment: ", process.env.NODE_ENV || 'development');
 
-       if (!process.env.DATABASE_URL) {
-              console.error("❌ ERROR: DATABASE_URL is not defined in .env");
+       if (!process.env.NOWIFIGPSTOURS) {
+              console.error("❌ ERROR: NOWIFIGPSTOURS is not defined in .env");
               process.exit(1);
        }
 
-       const maskedUrl = process.env.DATABASE_URL.replace(/:([^@]+)@/, ':****@');
+       const maskedUrl = process.env.NOWIFIGPSTOURS.replace(/:([^@]+)@/, ':****@');
        console.log("Target URL: ", maskedUrl);
 
        try {

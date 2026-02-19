@@ -2,11 +2,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 import pg from 'pg';
 
-const dbUrl = process.env.DATABASE_URL;
+const dbUrl = process.env.NOWIFIGPSTOURS;
 
 async function preview() {
     if (!dbUrl) {
-        console.error("DATABASE_URL missing");
+        console.error("NOWIFIGPSTOURS missing");
         process.exit(1);
     }
 

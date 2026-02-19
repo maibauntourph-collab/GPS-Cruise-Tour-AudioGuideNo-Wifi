@@ -7,9 +7,9 @@ import { pool } from '../server/db';
 async function testConnection() {
        console.log("🔍 [V2] DB Connection Diagnostic Start...");
 
-       const dbUrl = process.env.DATABASE_URL;
+       const dbUrl = process.env.NOWIFIGPSTOURS;
        if (!dbUrl) {
-              console.error("❌ ERROR: DATABASE_URL is STILL MISSING after dotenv.config()");
+              console.error("❌ ERROR: NOWIFIGPSTOURS is STILL MISSING after dotenv.config()");
               process.exit(1);
        }
 
@@ -18,9 +18,9 @@ async function testConnection() {
 
        // 환경 감지 로직 재검증
        if (dbUrl.includes('neon.tech')) {
-              console.log("✅ Cloud Neon environment detected in DATABASE_URL.");
+              console.log("✅ Cloud Neon environment detected in NOWIFIGPSTOURS.");
        } else {
-              console.warn("⚠️ DATABASE_URL does not seem to be a Neon URL.");
+              console.warn("⚠️ NOWIFIGPSTOURS does not seem to be a Neon URL.");
        }
 
        try {

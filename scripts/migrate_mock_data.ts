@@ -5,11 +5,11 @@ import path from 'path';
 
 dotenv.config();
 
-const dbUrl = process.env.DATABASE_URL;
+const dbUrl = process.env.NOWIFIGPSTOURS;
 
 async function migrate() {
     if (!dbUrl) {
-        console.error("DATABASE_URL is missing");
+        console.error("NOWIFIGPSTOURS is missing");
         process.exit(1);
     }
 

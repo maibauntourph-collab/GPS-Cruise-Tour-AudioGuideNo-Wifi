@@ -1,9 +1,9 @@
 
 import 'dotenv/config'; // Load .env file
 
-// Check if DATABASE_URL is present
-if (!process.env.DATABASE_URL) {
-    console.log('\n\x1b[33m%s\x1b[0m', '⚠️  WARNING: DATABASE_URL not found in environment variables.');
+// Check if NOWIFIGPSTOURS is present
+if (!process.env.NOWIFIGPSTOURS) {
+    console.log('\n\x1b[33m%s\x1b[0m', '⚠️  WARNING: NOWIFIGPSTOURS not found in environment variables.');
     console.log('   skipping actual DB connection test.');
     console.log('   (This is expected in local dev without a real DB connection, falling back to memory storage)\n');
     process.exit(0);

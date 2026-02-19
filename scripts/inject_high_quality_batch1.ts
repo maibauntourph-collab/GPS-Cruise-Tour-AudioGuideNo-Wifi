@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const dbUrl = process.env.DATABASE_URL;
+const dbUrl = process.env.NOWIFIGPSTOURS;
 
 const data = [
     // --- SEOUL (서울특별시) ---
@@ -154,7 +154,7 @@ const data = [
 
 async function insertData() {
     if (!dbUrl) {
-        console.error("DATABASE_URL missing");
+        console.error("NOWIFIGPSTOURS missing");
         process.exit(1);
     }
     const client = new pg.Client({ connectionString: dbUrl, ssl: { rejectUnauthorized: false } });

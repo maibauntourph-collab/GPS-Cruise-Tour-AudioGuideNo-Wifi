@@ -4,7 +4,7 @@ dotenv.config();
 import { GoogleGenAI } from "@google/genai";
 import pg from 'pg';
 
-const dbUrl = process.env.DATABASE_URL;
+const dbUrl = process.env.NOWIFIGPSTOURS;
 const geminiApiKey = process.env.GEMINI_API_KEY;
 
 const targetCities = [
@@ -23,7 +23,7 @@ async function massGenerate() {
         process.exit(1);
     }
     if (!dbUrl) {
-        console.error("DATABASE_URL missing");
+        console.error("NOWIFIGPSTOURS missing");
         process.exit(1);
     }
 
