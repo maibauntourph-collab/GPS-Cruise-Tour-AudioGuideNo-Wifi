@@ -5,7 +5,8 @@ import pg from 'pg';
 import ws from "ws";
 import * as schema from "@shared/schema";
 
-const dbUrl = process.env.DATABASE_URL;
+// [Fix] User has defined the DB URL as NOWIFIGPSTOURS in Vercel. Adding it as a fallback.
+const dbUrl = process.env.DATABASE_URL || process.env.NOWIFIGPSTOURS;
 
 // [연구소장 노조: DB 연결 안전장치]
 // 배포 환경에서 DATABASE_URL이 누락되어 localhost로 잘못 연결되는 것을 방지합니다.

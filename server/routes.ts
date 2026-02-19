@@ -71,9 +71,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // 로컬에서는 되는데 배포 환경에서만 안 될 때, 정확한 에러 원인(DNS, Auth, Timeout 등)을 파악하기 위함입니다.
   app.get("/api/debug/db-connection", async (_req, res) => {
     try {
-      const hasDbUrl = !!process.env.DATABASE_URL;
+      const dbUrl = process.env.DATABASE_URL || process.env.NOWIFIGPSTOURS;
+      const hasDbUrl = !!dbUrl;
       const dbUrlPreview = hasDbUrl
-        ? `${process.env.DATABASE_URL?.substring(0, 15)}...${process.env.DATABASE_URL?.substring(process.env.DATABASE_URL.length - 10)}`
+        ? `${dbUrl?.substring(0, 15)}...${dbUrl?.substring(dbUrl.length - 10)}`
         : "Not Set";
 
       const start = Date.now();
