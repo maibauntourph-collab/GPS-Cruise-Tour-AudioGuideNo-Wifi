@@ -8,13 +8,16 @@ import { useServiceWorker } from "@/hooks/useServiceWorker";
 import { Loader2 } from "lucide-react";
 import RoleSelection from "@/pages/RoleSelection";
 import NotFound from "@/pages/not-found";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 // Lazy load heavy components for code splitting
 const Home = lazy(() => import("@/pages/Home"));
 const Admin = lazy(() => import("@/pages/Admin"));
 const GuideView = lazy(() => import("@/pages/GuideView"));
 const TourLeaderView = lazy(() => import("@/pages/TourLeaderView"));
-const MyRoutes = lazy(() => import("@/pages/MyRoutes"));
+const MyRoutes = lazy(() => import("./pages/MyRoutes"));
+const ProductList = lazy(() => import("./pages/ProductList"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 
 // Loading fallback component
 function PageLoader() {
@@ -38,6 +41,8 @@ function Router() {
         <Route path="/tour-leader" component={TourLeaderView} />
         <Route path="/admin" component={Admin} />
         <Route path="/my-routes" component={MyRoutes} />
+        <Route path="/products" component={ProductList} />
+        <Route path="/product/:id" component={ProductDetail} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
@@ -51,10 +56,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="flex h-screen w-full">
-          <Router />
-        </div>
-        <Toaster />
+        <LanguageProvider>
+          <div className="flex h-screen w-full">
+            <Router />
+          </div>
+          <Toaster />
+        </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

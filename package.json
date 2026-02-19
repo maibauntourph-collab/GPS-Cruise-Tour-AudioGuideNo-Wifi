@@ -4,16 +4,22 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development SESSION_SECRET=devsecret123 tsx server/index.ts",
+    "dev": "cross-env NODE_ENV=development SESSION_SECRET=devsecret123456789012345678901234 tsx --env-file=.env server/index.ts",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist-server",
-    "start": "cross-env NODE_ENV=production SESSION_SECRET=prodsecret123 node dist-server/index.js",
+    "build:worker": "wrangler deploy --dry-run --outdir=dist-worker",
+    "dev:worker": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "start": "cross-env NODE_ENV=production SESSION_SECRET=prodsecret12345678901234567890123 node dist-server/index.js",
     "check": "tsc",
     "db:push": "drizzle-kit push",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:client": "vite"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
     "@google/genai": "^1.30.0",
+    "@hono/node-server": "^1.19.9",
+    "@hono/zod-validator": "^0.7.6",
     "@hookform/resolvers": "^3.10.0",
     "@jridgewell/trace-mapping": "^0.3.25",
     "@neondatabase/serverless": "^0.10.4",
@@ -57,9 +63,9 @@
     "drizzle-orm": "^0.39.3",
     "drizzle-zod": "^0.7.0",
     "embla-carousel-react": "^8.6.0",
-    "express": "^4.21.2",
-    "express-session": "^1.18.1",
     "framer-motion": "^11.13.1",
+    "hono": "^4.11.10",
+    "hono-sessions": "^0.8.1",
     "html2canvas": "^1.4.1",
     "input-otp": "^1.4.2",
     "jszip": "^3.10.1",
@@ -91,14 +97,13 @@
     "zod-validation-error": "^3.4.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260219.0",
     "@replit/vite-plugin-cartographer": "^0.4.4",
     "@replit/vite-plugin-dev-banner": "^0.1.1",
     "@replit/vite-plugin-runtime-error-modal": "^0.0.3",
     "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/vite": "^4.1.3",
     "@types/connect-pg-simple": "^7.0.3",
-    "@types/express": "4.17.21",
-    "@types/express-session": "^1.18.0",
     "@types/node": "20.16.11",
     "@types/passport": "^1.0.16",
     "@types/passport-local": "^1.0.38",
@@ -115,7 +120,8 @@
     "tsx": "^4.20.5",
     "typescript": "5.6.3",
     "vite": "^5.4.20",
-    "vite-plugin-pwa": "^1.2.0"
+    "vite-plugin-pwa": "^1.2.0",
+    "wrangler": "^4.66.0"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"

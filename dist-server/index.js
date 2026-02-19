@@ -612,6 +612,15 @@ var init_schema = __esm({
   }
 });
 
+// server/env.ts
+var env;
+var init_env = __esm({
+  "server/env.ts"() {
+    "use strict";
+    env = typeof process !== "undefined" ? process.env : {};
+  }
+});
+
 // server/lib/clova.ts
 var clova_exports = {};
 __export(clova_exports, {
@@ -621,9 +630,7 @@ __export(clova_exports, {
   generateClovaTTS: () => generateClovaTTS,
   getClovaVoicesForLanguage: () => getClovaVoicesForLanguage
 });
-import * as crypto from "crypto";
-import * as fs2 from "fs";
-import * as path2 from "path";
+import * as crypto2 from "node:crypto";
 function getClovaVoicesForLanguage(language) {
   const langMapping = {
     ko: "ko",
@@ -638,8 +645,8 @@ function getClovaVoicesForLanguage(language) {
   );
 }
 async function generateClovaTTS(text2, voiceId = "nara", speed = 0, pitch = 0, volume = 0) {
-  const clientId = process.env.NAVER_CLIENT_ID;
-  const clientSecret = process.env.NAVER_CLIENT_SECRET;
+  const clientId = env.NAVER_CLIENT_ID;
+  const clientSecret = env.NAVER_CLIENT_SECRET;
   if (!clientId || !clientSecret) {
     throw new Error("NAVER_CLIENT_ID and NAVER_CLIENT_SECRET must be set");
   }
@@ -675,16 +682,11 @@ async function generateClovaTTS(text2, voiceId = "nara", speed = 0, pitch = 0, v
 async function generateAndSaveClovaTTS(landmarkId, text2, language = "ko", voiceId) {
   const selectedVoice = voiceId || DEFAULT_CLOVA_VOICE_BY_LANGUAGE[language] || "nara";
   const result = await generateClovaTTS(text2, selectedVoice);
-  const audioDir = path2.join(process.cwd(), "public", "audio", "clova");
-  if (!fs2.existsSync(audioDir)) {
-    fs2.mkdirSync(audioDir, { recursive: true });
-  }
-  const filename = `${landmarkId}_${language}_${selectedVoice}.mp3`;
-  const filePath = path2.join(audioDir, filename);
-  fs2.writeFileSync(filePath, result.audioBuffer);
-  const checksum = crypto.createHash("md5").update(result.audioBuffer).digest("hex");
+  const base64Audio = result.audioBuffer.toString("base64");
+  const dataUri = `data:audio/mp3;base64,${base64Audio}`;
+  const checksum = crypto2.createHash("md5").update(result.audioBuffer).digest("hex");
   return {
-    audioUrl: `/audio/clova/${filename}`,
+    audioUrl: dataUri,
     voiceId: selectedVoice,
     sizeBytes: result.audioBuffer.length,
     checksum
@@ -694,6 +696,7 @@ var CLOVA_API_URL, CLOVA_VOICES, DEFAULT_CLOVA_VOICE_BY_LANGUAGE;
 var init_clova = __esm({
   "server/lib/clova.ts"() {
     "use strict";
+    init_env();
     CLOVA_API_URL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
     CLOVA_VOICES = {
       nara: { name: "Nara", nameKo: "\uB098\uB77C", gender: "female", language: "ko", description: "Korean female voice" },
@@ -756,17 +759,26 @@ __export(openai_exports, {
   VOICE_STYLES: () => VOICE_STYLES,
   generateImage: () => generateImage,
   generateLandmarkAudio: () => generateLandmarkAudio,
-  openai: () => openai,
-  recommendTourItinerary: () => recommendTourItinerary2
+  getOpenAI: () => getOpenAI,
+  recommendTourItinerary: () => recommendTourItinerary
 });
 import OpenAI from "openai";
-import * as fs3 from "fs";
-import * as path3 from "path";
-import * as crypto3 from "crypto";
+import * as crypto3 from "node:crypto";
+function getOpenAI() {
+  if (openaiInstance) return openaiInstance;
+  const apiKey = env.OPENAI_API_KEY;
+  if (apiKey) {
+    openaiInstance = new OpenAI({ apiKey });
+  } else {
+    console.warn("WARNING: OPENAI_API_KEY not set. AI features (audio, recommendations) will be limited or unavailable.");
+  }
+  return openaiInstance;
+}
 async function generateLandmarkAudio(landmarkId, text2, language = "en", preferredVoice) {
   try {
     const voice = preferredVoice && TTS_VOICES[preferredVoice] ? preferredVoice : DEFAULT_VOICE_MAP[language] || "fable";
     let buffer;
+    const openai = getOpenAI();
     if (!openai) {
       console.warn(`[Mock] Generating mock audio for: ${text2.slice(0, 20)}...`);
       buffer = Buffer.alloc(100);
@@ -782,16 +794,13 @@ async function generateLandmarkAudio(landmarkId, text2, language = "en", preferr
       buffer = Buffer.from(await mp3Response.arrayBuffer());
     }
     const checksum = crypto3.createHash("md5").update(buffer).digest("hex");
-    const uploadsDir = path3.join(process.cwd(), "uploads", "audio");
-    if (!fs3.existsSync(uploadsDir)) {
-      fs3.mkdirSync(uploadsDir, { recursive: true });
-    }
+    const base64Audio = buffer.toString("base64");
+    const dataUri = `data:audio/mp3;base64,${base64Audio}`;
     const fileName = `${landmarkId}-${language}-${checksum.slice(0, 8)}.mp3`;
-    const filePath = path3.join(uploadsDir, fileName);
-    fs3.writeFileSync(filePath, buffer);
+    console.log(`[Audio] Generated audio for ${fileName} (${buffer.length} bytes)`);
     const duration = Math.ceil(text2.length / 15);
     return {
-      audioUrl: `/uploads/audio/${fileName}`,
+      audioUrl: dataUri,
       duration,
       sizeBytes: buffer.length,
       checksum,
@@ -808,7 +817,7 @@ async function generateLandmarkAudio(landmarkId, text2, language = "en", preferr
     throw new Error("Failed to generate audio");
   }
 }
-async function recommendTourItinerary2(landmarks2, userPosition, language = "en") {
+async function recommendTourItinerary(landmarks2, userPosition, language = "en") {
   try {
     const landmarkInfo = landmarks2.map((l) => ({
       id: l.id,
@@ -844,6 +853,7 @@ Respond in this exact JSON format:
   "explanation": "Detailed explanation of why you recommend this order (3-5 sentences)",
   "totalEstimatedTime": number (in minutes)
 }`;
+    const openai = getOpenAI();
     const result = !openai ? {
       itinerary: landmarks2.slice(0, 3).map((l, i) => ({ landmarkId: l.id, order: i + 1 })),
       explanation: "[Mock] OpenAI \uD0A4\uAC00 \uC5C6\uC5B4 \uAE30\uBCF8 \uC21C\uC11C\uB85C \uCD94\uCC9C\uB418\uC5C8\uC2B5\uB2C8\uB2E4.",
@@ -874,6 +884,7 @@ Respond in this exact JSON format:
   }
 }
 async function generateImage(prompt) {
+  const openai = getOpenAI();
   if (!openai) {
     throw new Error("OpenAI API key not configured");
   }
@@ -894,14 +905,12 @@ async function generateImage(prompt) {
     throw error;
   }
 }
-var openai, TTS_VOICES, VOICE_STYLES, DEFAULT_VOICE_MAP;
+var openaiInstance, TTS_VOICES, VOICE_STYLES, DEFAULT_VOICE_MAP;
 var init_openai = __esm({
   "server/lib/openai.ts"() {
     "use strict";
-    openai = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null;
-    if (!openai) {
-      console.warn("WARNING: OPENAI_API_KEY not set. AI features (audio, recommendations) will be limited or unavailable.");
-    }
+    init_env();
+    openaiInstance = null;
     TTS_VOICES = {
       alloy: { name: "Alloy", description: "\uC911\uC131\uC801\uC774\uACE0 \uADE0\uD615\uC7A1\uD78C \uBAA9\uC18C\uB9AC", style: "neutral" },
       echo: { name: "Echo", description: "\uB0A8\uC131\uC801\uC774\uACE0 \uAE4A\uC740 \uBAA9\uC18C\uB9AC", style: "deep" },
@@ -946,31 +955,268 @@ var init_openai = __esm({
 });
 
 // server/index.ts
-import "dotenv/config";
-import express3 from "express";
-import session from "express-session";
+import { getRequestListener } from "@hono/node-server";
 
-// server/routes.ts
-import { createServer } from "http";
+// server/vite.ts
+import fs from "fs";
+import path2 from "path";
+import { createServer as createViteServer, createLogger } from "vite";
+
+// vite.config.ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import { VitePWA } from "vite-plugin-pwa";
+var vite_config_default = defineConfig({
+  plugins: [
+    react(),
+    runtimeErrorOverlay(),
+    VitePWA({
+      registerType: "autoUpdate",
+      includeAssets: ["favicon.ico", "icon.svg"],
+      manifest: {
+        name: "GPS Audio Guide",
+        short_name: "GPS Guide",
+        description: "Explore world cities with GPS-guided audio narration",
+        theme_color: "#e8633f",
+        background_color: "#ffffff",
+        display: "standalone",
+        orientation: "portrait",
+        icons: [
+          {
+            src: "icon.svg",
+            sizes: "192x192",
+            type: "image/svg+xml"
+          },
+          {
+            src: "icon.svg",
+            sizes: "512x512",
+            type: "image/svg+xml"
+          }
+        ]
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,json,mp3}"],
+        maximumFileSizeToCacheInBytes: 2e7
+        // Increased to 20MB for audio files
+      },
+      devOptions: {
+        enabled: true,
+        type: "module"
+      }
+    }),
+    ...process.env.NODE_ENV !== "production" && process.env.REPL_ID !== void 0 ? [
+      await import("@replit/vite-plugin-cartographer").then(
+        (m) => m.cartographer()
+      ),
+      await import("@replit/vite-plugin-dev-banner").then(
+        (m) => m.devBanner()
+      )
+    ] : []
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(import.meta.dirname, "client", "src"),
+      "@shared": path.resolve(import.meta.dirname, "shared"),
+      "@assets": path.resolve(import.meta.dirname, "attached_assets")
+    },
+    dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"]
+  },
+  root: path.resolve(import.meta.dirname, "client"),
+  build: {
+    outDir: path.resolve(import.meta.dirname, "dist"),
+    emptyOutDir: true
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:8787",
+        changeOrigin: true
+      }
+    },
+    fs: {
+      strict: true,
+      deny: ["**/.*"]
+    }
+  }
+});
+
+// server/vite.ts
+import { nanoid } from "nanoid";
 
 // server/db.ts
 init_schema();
+init_env();
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
-var dbUrl = process.env.NOWIFIGPSTOURS;
-if (!dbUrl) {
-  const errorMsg = "[DB] Critical: NOWIFIGPSTOURS is not defined in environment variables.";
-  console.error(errorMsg);
-  if (process.env.NODE_ENV === "production") {
-    throw new Error(errorMsg);
+var dbInstance = null;
+function getDb() {
+  if (dbInstance) return dbInstance;
+  const dbUrl = env.NOWIFIGPSTOURS;
+  if (!dbUrl) {
+    const errorMsg = "[DB] Critical: NOWIFIGPSTOURS is not defined in environment variables.";
+    console.error(errorMsg);
+    if (env.NODE_ENV === "production") {
+    }
   }
+  const connectionString = dbUrl || "postgresql://localhost:5432/postgres";
+  const sql6 = neon(connectionString);
+  dbInstance = drizzle(sql6, { schema: schema_exports });
+  return dbInstance;
 }
-var sql2 = neon(dbUrl || "postgresql://localhost:5432/postgres");
-var db = drizzle(sql2, { schema: schema_exports });
+var db = new Proxy({}, {
+  get: (_target, prop) => {
+    const instance = getDb();
+    return instance[prop];
+  }
+});
+
+// server/services/ogService.ts
+init_schema();
+import { eq } from "drizzle-orm";
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+var OgService = class {
+  /**
+   * 접속한 URL 주소를 분석해서 맞춤형 메타 태그를 생성합니다.
+   * @param url 현재 사용자가 접속하려고 시도하는 주소 (예: /landmark/namsan-tower)
+   */
+  async generateMetaTags(url) {
+    const landmarkIdMatch = url.match(/\/landmark\/([^\/?#]+)/);
+    const cityIdMatch = url.match(/\/city\/([^\/?#]+)/);
+    let title = "SNS Cruise Tour Audio Guide";
+    let description = "No-WiFi GPS Cruise Tour Audio Guide - Your perfect travel companion.";
+    let imageUrl = "https://nowifigps.tours/og-default.png";
+    if (landmarkIdMatch) {
+      const landmarkId = landmarkIdMatch[1];
+      const [landmark] = await db.select().from(landmarks).where(eq(landmarks.id, landmarkId));
+      if (landmark) {
+        const translations = landmark.translations;
+        const localizedName = translations?.ko?.name || landmark.name;
+        const localizedDesc = translations?.ko?.description || landmark.description || description;
+        title = `${localizedName} | GPS Cruise Tour`;
+        description = localizedDesc;
+        const photos = landmark.photos;
+        if (photos && photos.length > 0) {
+          imageUrl = photos[0];
+        }
+      }
+    } else if (cityIdMatch) {
+      const cityId = cityIdMatch[1];
+      const [city] = await db.select().from(cities).where(eq(cities.id, cityId));
+      if (city) {
+        title = `${city.name} \uC5EC\uD589 \uAC00\uC774\uB4DC | GPS Cruise Tour`;
+        description = `${city.name}\uC758 \uC228\uC740 \uC7AC\uBBF8\uB97C \uC624\uB514\uC624 \uAC00\uC774\uB4DC\uB85C \uBC1C\uACAC\uD574\uBCF4\uC138\uC694.`;
+      }
+    }
+    const safeTitle = escapeHtml(title);
+    const safeDescription = escapeHtml(description);
+    const safeImageUrl = escapeHtml(imageUrl);
+    const safeUrl = escapeHtml(url);
+    return `
+      <!-- Dr.'s Engine\uC774 \uC2E4\uC2DC\uAC04\uC73C\uB85C \uC0DD\uC131\uD55C \uBA4B\uC9C4 \uBA54\uD0C0 \uD0DC\uADF8\uB4E4\uC774\uC57C! -->
+      <title>${safeTitle}</title>
+      <meta name="description" content="${safeDescription}">
+      <meta property="og:title" content="${safeTitle}">
+      <meta property="og:description" content="${safeDescription}">
+      <meta property="og:image" content="${safeImageUrl}">
+      <meta property="og:url" content="https://nowifigps.tours${safeUrl}">
+      <meta property="og:type" content="website">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="${safeTitle}">
+      <meta name="twitter:description" content="${safeDescription}">
+      <meta name="twitter:image" content="${safeImageUrl}">
+    `;
+  }
+  /**
+   * 만들어진 메타 태그를 실제 index.html 소스코드에 쏙 끼워넣는 함수야.
+   * @param html 원본 index.html 내용
+   * @param url 사용자가 보고 있는 주소
+   */
+  async injectMetaTags(html, url) {
+    const metaTags = await this.generateMetaTags(url);
+    if (html.includes("<!-- OG_TAGS_PLACEHOLDER -->")) {
+      return html.replace("<!-- OG_TAGS_PLACEHOLDER -->", metaTags);
+    }
+    return html.replace("<head>", `<head>${metaTags}`);
+  }
+};
+var ogService = new OgService();
+
+// server/vite.ts
+import { fileURLToPath } from "url";
+import { serveStatic as honoServeStatic } from "@hono/node-server/serve-static";
+var __filename = fileURLToPath(import.meta.url);
+var __dirname = path2.dirname(__filename);
+var viteLogger = createLogger();
+function log(message, source = "express") {
+  const formattedTime = (/* @__PURE__ */ new Date()).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true
+  });
+  console.log(`${formattedTime} [${source}] ${message}`);
+}
+async function setupVite(app2, server2) {
+  const serverOptions = {
+    middlewareMode: true,
+    hmr: { server: server2 },
+    allowedHosts: true
+  };
+  const vite = await createViteServer({
+    ...vite_config_default,
+    configFile: false,
+    customLogger: {
+      ...viteLogger,
+      error: (msg, options) => {
+        viteLogger.error(msg, options);
+        process.exit(1);
+      }
+    },
+    server: serverOptions,
+    appType: "custom"
+  });
+  app2.get("*", async (c, next) => {
+    const url = c.req.url;
+    const { pathname } = new URL(url);
+    if (pathname.startsWith("/api")) {
+      return next();
+    }
+    try {
+      const clientTemplate = path2.join(__dirname, "..", "client", "index.html");
+      let template = await fs.promises.readFile(clientTemplate, "utf-8");
+      template = template.replace(
+        `src="/src/main.tsx"`,
+        `src="/src/main.tsx?v=${nanoid()}"`
+      );
+      const page = await vite.transformIndexHtml(url, template);
+      const finalHtml = await ogService.injectMetaTags(page, url);
+      return c.html(finalHtml);
+    } catch (e) {
+      vite.ssrFixStacktrace(e);
+      return next();
+    }
+  });
+  return vite;
+}
+
+// server/index.ts
+import { createServer } from "http";
+
+// server/app.ts
+import { Hono as Hono2 } from "hono";
+import { logger } from "hono/logger";
+import { sessionMiddleware, CookieStore } from "hono-sessions";
+
+// server/routes.ts
+import { Hono } from "hono";
 
 // server/storage.ts
 init_schema();
-import { eq, count, and, sql as sql3, notInArray, desc } from "drizzle-orm";
+import { eq as eq2, count, and, sql as sql2, notInArray, desc } from "drizzle-orm";
 
 // server/data/restaurants.ts
 var RESTAURANTS = [
@@ -9525,10 +9771,7 @@ var LANDMARKS = [
 ];
 
 // server/storage.ts
-import fs from "fs";
-import path from "path";
-var DATA_DIR = path.join(process.cwd(), "server", "data");
-var DATA_FILE = path.join(DATA_DIR, "persistence.json");
+init_env();
 var MemStorage = class {
   usersMap = /* @__PURE__ */ new Map();
   userIdentitiesMap = /* @__PURE__ */ new Map();
@@ -9537,39 +9780,6 @@ var MemStorage = class {
   nextUserId = 1;
   nextIdentityId = 1;
   constructor() {
-    this.loadFromDisk();
-  }
-  loadFromDisk() {
-    try {
-      if (fs.existsSync(DATA_FILE)) {
-        const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-        if (data.cities) {
-          this.citiesMap = new Map(Object.entries(data.cities));
-          console.log(`[Storage] Loaded ${this.citiesMap.size} cities from disk.`);
-        }
-        if (data.landmarks) {
-          this.landmarksMap = new Map(Object.entries(data.landmarks));
-          console.log(`[Storage] Loaded ${this.landmarksMap.size} landmarks from disk.`);
-        }
-      }
-    } catch (error) {
-      console.error("[Storage] Failed to load data from disk:", error);
-    }
-  }
-  saveToDisk() {
-    try {
-      if (!fs.existsSync(DATA_DIR)) {
-        fs.mkdirSync(DATA_DIR, { recursive: true });
-      }
-      const data = {
-        cities: Object.fromEntries(this.citiesMap.entries()),
-        landmarks: Object.fromEntries(this.landmarksMap.entries())
-      };
-      fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-      console.log("[Storage] Data saved to disk.");
-    } catch (error) {
-      console.error("[Storage] Failed to save data to disk:", error);
-    }
   }
   async getCities() {
     const hardcodedIds = CITIES.map((c) => c.id);
@@ -9594,7 +9804,7 @@ var MemStorage = class {
     const found = CITIES.find((city) => city.id === id) || this.citiesMap.get(id);
     if (found) return found;
     try {
-      const [dbCity] = await db.select().from(cities).where(eq(cities.id, id));
+      const [dbCity] = await db.select().from(cities).where(eq2(cities.id, id));
       return dbCity;
     } catch (error) {
       console.error(`Error fetching city ${id} from DB:`, error);
@@ -9630,7 +9840,7 @@ var MemStorage = class {
     const found = hardcodedLandmarks.find((landmark) => landmark.id === id) || this.landmarksMap.get(id);
     if (found) return found;
     try {
-      const [dbLandmark] = await db.select().from(landmarks).where(eq(landmarks.id, id));
+      const [dbLandmark] = await db.select().from(landmarks).where(eq2(landmarks.id, id));
       return dbLandmark;
     } catch (error) {
       console.error(`[Storage] DB access failed for getLandmark (${id}):`, error);
@@ -9641,7 +9851,7 @@ var MemStorage = class {
   async markLandmarkVisited(landmarkId, sessionId) {
     const [visited] = await db.insert(visitedLandmarks).values({ landmarkId, sessionId }).onConflictDoNothing().returning();
     if (!visited) {
-      const conditions = sessionId ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId)) : eq(visitedLandmarks.landmarkId, landmarkId);
+      const conditions = sessionId ? and(eq2(visitedLandmarks.landmarkId, landmarkId), eq2(visitedLandmarks.sessionId, sessionId)) : eq2(visitedLandmarks.landmarkId, landmarkId);
       const [existing] = await db.select().from(visitedLandmarks).where(conditions);
       return existing;
     }
@@ -9649,18 +9859,18 @@ var MemStorage = class {
   }
   async getVisitedLandmarks(sessionId) {
     if (sessionId) {
-      return await db.select().from(visitedLandmarks).where(eq(visitedLandmarks.sessionId, sessionId));
+      return await db.select().from(visitedLandmarks).where(eq2(visitedLandmarks.sessionId, sessionId));
     }
     return await db.select().from(visitedLandmarks);
   }
   async isLandmarkVisited(landmarkId, sessionId) {
-    const conditions = sessionId ? and(eq(visitedLandmarks.landmarkId, landmarkId), eq(visitedLandmarks.sessionId, sessionId)) : eq(visitedLandmarks.landmarkId, landmarkId);
+    const conditions = sessionId ? and(eq2(visitedLandmarks.landmarkId, landmarkId), eq2(visitedLandmarks.sessionId, sessionId)) : eq2(visitedLandmarks.landmarkId, landmarkId);
     const results = await db.select().from(visitedLandmarks).where(conditions);
     return results.length > 0;
   }
   async getVisitedCount(sessionId) {
     if (sessionId) {
-      const result2 = await db.select({ count: count() }).from(visitedLandmarks).where(eq(visitedLandmarks.sessionId, sessionId));
+      const result2 = await db.select({ count: count() }).from(visitedLandmarks).where(eq2(visitedLandmarks.sessionId, sessionId));
       return result2[0]?.count || 0;
     }
     const result = await db.select({ count: count() }).from(visitedLandmarks);
@@ -9669,8 +9879,8 @@ var MemStorage = class {
   // Audio methods - using database
   async getAudio(landmarkId, language) {
     const [audio] = await db.select().from(landmarkAudio).where(and(
-      eq(landmarkAudio.landmarkId, landmarkId),
-      eq(landmarkAudio.language, language)
+      eq2(landmarkAudio.landmarkId, landmarkId),
+      eq2(landmarkAudio.language, language)
     ));
     return audio;
   }
@@ -9678,7 +9888,7 @@ var MemStorage = class {
     const landmarks2 = await this.getLandmarks(cityId);
     const landmarkIds = landmarks2.map((l) => l.id);
     if (landmarkIds.length === 0) return [];
-    const audioList = await db.select().from(landmarkAudio).where(sql3`${landmarkAudio.landmarkId} = ANY(${landmarkIds})`);
+    const audioList = await db.select().from(landmarkAudio).where(sql2`${landmarkAudio.landmarkId} = ANY(${landmarkIds})`);
     return audioList;
   }
   async saveAudio(audio) {
@@ -9697,17 +9907,17 @@ var MemStorage = class {
   }
   async deleteAudio(landmarkId, language) {
     await db.delete(landmarkAudio).where(and(
-      eq(landmarkAudio.landmarkId, landmarkId),
-      eq(landmarkAudio.language, language)
+      eq2(landmarkAudio.landmarkId, landmarkId),
+      eq2(landmarkAudio.language, language)
     ));
   }
   // User methods
   async getUserById(id) {
-    if (!process.env.NOWIFIGPSTOURS) {
+    if (!env.NOWIFIGPSTOURS) {
       return Array.from(this.usersMap.values()).find((u) => u.id === id);
     }
     try {
-      const [user] = await db.select().from(users).where(eq(users.id, id));
+      const [user] = await db.select().from(users).where(eq2(users.id, id));
       return user;
     } catch (e) {
       console.warn("[Storage] DB access failed for getUserById:", e);
@@ -9715,11 +9925,11 @@ var MemStorage = class {
     }
   }
   async getUserByEmail(email) {
-    if (!process.env.NOWIFIGPSTOURS) {
+    if (!env.NOWIFIGPSTOURS) {
       return Array.from(this.usersMap.values()).find((u) => u.email === email);
     }
     try {
-      const [user] = await db.select().from(users).where(eq(users.email, email));
+      const [user] = await db.select().from(users).where(eq2(users.email, email));
       return user;
     } catch (e) {
       console.warn("[Storage] DB access failed for getUserByEmail:", e);
@@ -9727,7 +9937,7 @@ var MemStorage = class {
     }
   }
   async createUser(user) {
-    if (!process.env.NOWIFIGPSTOURS) {
+    if (!env.NOWIFIGPSTOURS) {
       console.warn("[Storage] No NOWIFIGPSTOURS, using memory for createUser");
       const id = String(this.nextUserId++);
       const newUser = {
@@ -9769,7 +9979,7 @@ var MemStorage = class {
   }
   async updateUser(id, updates) {
     try {
-      const [updated] = await db.update(users).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq(users.id, id)).returning();
+      const [updated] = await db.update(users).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq2(users.id, id)).returning();
       return updated;
     } catch (e) {
       console.warn("[Storage] DB access failed for updateUser:", e);
@@ -9786,8 +9996,8 @@ var MemStorage = class {
   async getUserIdentity(provider, providerUserId) {
     try {
       const [identity] = await db.select().from(userIdentities).where(and(
-        eq(userIdentities.provider, provider),
-        eq(userIdentities.providerUserId, providerUserId)
+        eq2(userIdentities.provider, provider),
+        eq2(userIdentities.providerUserId, providerUserId)
       ));
       return identity;
     } catch (e) {
@@ -9799,7 +10009,7 @@ var MemStorage = class {
   }
   async getUserIdentitiesByUserId(userId) {
     try {
-      return await db.select().from(userIdentities).where(eq(userIdentities.userId, userId));
+      return await db.select().from(userIdentities).where(eq2(userIdentities.userId, userId));
     } catch (e) {
       console.warn("[Storage] DB access failed for getUserIdentitiesByUserId:", e);
       return Array.from(this.userIdentitiesMap.values()).filter((i) => i.userId === userId);
@@ -9831,7 +10041,7 @@ var MemStorage = class {
   }
   async updateUserIdentity(id, updates) {
     try {
-      const [updated] = await db.update(userIdentities).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq(userIdentities.id, id)).returning();
+      const [updated] = await db.update(userIdentities).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq2(userIdentities.id, id)).returning();
       return updated;
     } catch (e) {
       console.warn("[Storage] DB access failed for updateUserIdentity:", e);
@@ -9891,36 +10101,36 @@ var MemStorage = class {
   async getSavedRoutes(userId, sessionId, countryCode) {
     let conditions = [];
     if (userId) {
-      conditions.push(eq(savedRoutes.userId, userId));
+      conditions.push(eq2(savedRoutes.userId, userId));
     }
     if (sessionId) {
-      conditions.push(eq(savedRoutes.sessionId, sessionId));
+      conditions.push(eq2(savedRoutes.sessionId, sessionId));
     }
     if (countryCode) {
-      conditions.push(eq(savedRoutes.countryCode, countryCode));
+      conditions.push(eq2(savedRoutes.countryCode, countryCode));
     }
     if (conditions.length === 0) {
       return db.select().from(savedRoutes).orderBy(savedRoutes.createdAt);
     }
     if (userId && sessionId && !countryCode) {
-      return db.select().from(savedRoutes).where(sql3`(${savedRoutes.userId} = ${userId} OR ${savedRoutes.sessionId} = ${sessionId})`).orderBy(savedRoutes.createdAt);
+      return db.select().from(savedRoutes).where(sql2`(${savedRoutes.userId} = ${userId} OR ${savedRoutes.sessionId} = ${sessionId})`).orderBy(savedRoutes.createdAt);
     }
     if (countryCode && (userId || sessionId)) {
-      const userCondition = userId ? eq(savedRoutes.userId, userId) : eq(savedRoutes.sessionId, sessionId || "");
-      return db.select().from(savedRoutes).where(and(userCondition, eq(savedRoutes.countryCode, countryCode))).orderBy(savedRoutes.createdAt);
+      const userCondition = userId ? eq2(savedRoutes.userId, userId) : eq2(savedRoutes.sessionId, sessionId || "");
+      return db.select().from(savedRoutes).where(and(userCondition, eq2(savedRoutes.countryCode, countryCode))).orderBy(savedRoutes.createdAt);
     }
     return db.select().from(savedRoutes).where(conditions[0]).orderBy(savedRoutes.createdAt);
   }
   async getSavedRouteById(id) {
-    const [route] = await db.select().from(savedRoutes).where(eq(savedRoutes.id, id));
+    const [route] = await db.select().from(savedRoutes).where(eq2(savedRoutes.id, id));
     return route;
   }
   async updateSavedRoute(id, updates) {
-    const [updated] = await db.update(savedRoutes).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq(savedRoutes.id, id)).returning();
+    const [updated] = await db.update(savedRoutes).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq2(savedRoutes.id, id)).returning();
     return updated;
   }
   async deleteSavedRoute(id) {
-    await db.delete(savedRoutes).where(eq(savedRoutes.id, id));
+    await db.delete(savedRoutes).where(eq2(savedRoutes.id, id));
   }
   // Route Photos methods
   async addRoutePhoto(photo) {
@@ -9928,10 +10138,10 @@ var MemStorage = class {
     return created;
   }
   async getRoutePhotos(routeId) {
-    return db.select().from(routePhotos).where(eq(routePhotos.routeId, routeId)).orderBy(routePhotos.takenAt);
+    return db.select().from(routePhotos).where(eq2(routePhotos.routeId, routeId)).orderBy(routePhotos.takenAt);
   }
   async deleteRoutePhoto(id) {
-    await db.delete(routePhotos).where(eq(routePhotos.id, id));
+    await db.delete(routePhotos).where(eq2(routePhotos.id, id));
   }
   /**
    * [AI DB 총괄 특강: 어드민 사용자 목록 조회]
@@ -9964,7 +10174,7 @@ var MemStorage = class {
         landmarkName: landmarksTable.name,
         content: marketingTable.content,
         updatedAt: marketingTable.updatedAt
-      }).from(marketingTable).innerJoin(landmarksTable, eq(marketingTable.landmarkId, landmarksTable.id)).orderBy(desc(marketingTable.updatedAt));
+      }).from(marketingTable).innerJoin(landmarksTable, eq2(marketingTable.landmarkId, landmarksTable.id)).orderBy(desc(marketingTable.updatedAt));
     } catch (error) {
       console.warn("[AI DB Manager] DB fetch failed for marketing contents, falling back to empty list:", error);
       return [];
@@ -9979,7 +10189,6 @@ var MemStorage = class {
       const newCityMem = { ...cityData, id: cityData.id || `city_${Date.now()}` };
       this.citiesMap.set(newCityMem.id, newCityMem);
       console.log(`[Storage Debug] City saved to memory map. Map size: ${this.citiesMap.size}`);
-      this.saveToDisk();
       return newCityMem;
     }
   }
@@ -9991,13 +10200,12 @@ var MemStorage = class {
       console.warn("[AI DB Manager] DB create landmark failed, falling back to memory:", error);
       const newLandmark = { ...landmarkData, id: landmarkData.id || `landmark_${Date.now()}` };
       this.landmarksMap.set(newLandmark.id, newLandmark);
-      this.saveToDisk();
       return newLandmark;
     }
   }
   async updateCity(id, updates) {
     try {
-      const [updated] = await db.update(cities).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq(cities.id, id)).returning();
+      const [updated] = await db.update(cities).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq2(cities.id, id)).returning();
       return updated;
     } catch (error) {
       console.warn("[AI DB Manager] DB update city failed, falling back to memory:", error);
@@ -10005,7 +10213,6 @@ var MemStorage = class {
       if (city) {
         const updatedCity = { ...city, ...updates, updatedAt: /* @__PURE__ */ new Date() };
         this.citiesMap.set(id, updatedCity);
-        this.saveToDisk();
         return updatedCity;
       }
       return void 0;
@@ -10013,7 +10220,7 @@ var MemStorage = class {
   }
   async updateLandmark(id, updates) {
     try {
-      const [updated] = await db.update(landmarks).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq(landmarks.id, id)).returning();
+      const [updated] = await db.update(landmarks).set({ ...updates, updatedAt: /* @__PURE__ */ new Date() }).where(eq2(landmarks.id, id)).returning();
       return updated;
     } catch (error) {
       console.warn("[AI DB Manager] DB update landmark failed, falling back to memory:", error);
@@ -10021,7 +10228,6 @@ var MemStorage = class {
       if (landmark) {
         const updatedLandmark = { ...landmark, ...updates, updatedAt: /* @__PURE__ */ new Date() };
         this.landmarksMap.set(id, updatedLandmark);
-        this.saveToDisk();
         return updatedLandmark;
       }
       return void 0;
@@ -10030,7 +10236,7 @@ var MemStorage = class {
   async getLandmarkGuides(landmarkId) {
     const { landmarkGuides: landmarkGuidesTable } = await Promise.resolve().then(() => (init_schema(), schema_exports));
     try {
-      return await db.select().from(landmarkGuidesTable).where(eq(landmarkGuidesTable.landmarkId, landmarkId)).orderBy(desc(landmarkGuidesTable.createdAt));
+      return await db.select().from(landmarkGuidesTable).where(eq2(landmarkGuidesTable.landmarkId, landmarkId)).orderBy(desc(landmarkGuidesTable.createdAt));
     } catch (error) {
       console.warn("[AI DB Manager] DB fetch failed for landmark guides:", error);
       return [];
@@ -10060,13 +10266,183 @@ var storage = new MemStorage();
 
 // server/routes.ts
 init_schema();
+import { z as z2 } from "zod";
+
+// server/auth.ts
+init_env();
+import crypto from "node:crypto";
+import Stripe from "stripe";
+var providers = /* @__PURE__ */ new Map();
+function getProvider(name) {
+  return providers.get(name);
+}
+function getEnabledProviders() {
+  return Array.from(providers.keys());
+}
+function generateState() {
+  return crypto.randomBytes(16).toString("hex");
+}
+function setupAuthRoutes(app2) {
+  if (env.NODE_ENV === "production") {
+    app2.get("/api/auth/dev-login/:role?", (c) => {
+      return c.json({ error: "[\uBB38\uC9C0\uAE30 \uBD80\uC7A5] \uD504\uB85C\uB355\uC158 \uD658\uACBD\uC5D0\uC11C\uB294 \uAC1C\uBC1C\uC6A9 \uB85C\uADF8\uC778\uC774 \uD5C8\uC6A9\uB418\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4." }, 404);
+    });
+  } else {
+    app2.get("/api/auth/dev-login/:role?", async (c) => {
+      const role = c.req.param("role") || "admin";
+      console.log(`[Dr.'s Engine] \uAC1C\uBC1C\uC6A9 ${role} \uB85C\uADF8\uC778 \uC694\uCCAD \uAC10\uC9C0!`);
+      const session = c.get("session");
+      try {
+        const providerUserId = `dev-${role}-id`;
+        const displayName = `\uAC1C\uBC1C\uC6A9 ${role.toUpperCase()}`;
+        const user = await storage.findOrCreateUserByIdentity(
+          "dev",
+          providerUserId,
+          {
+            email: `${role}@example.com`,
+            displayName,
+            avatar: void 0,
+            rawProfile: { role }
+          }
+        );
+        user.role = role;
+        await storage.updateUser(user.id, { role });
+        session.set("userId", user.id);
+        session.set("user", user);
+        let redirectPath = "/";
+        if (role === "admin") redirectPath = "/admin";
+        else if (role === "creator") redirectPath = "/admin";
+        else if (role === "guide") redirectPath = "/guide";
+        else if (role === "tour_leader") redirectPath = "/tour-leader";
+        else if (role === "shop_owner") redirectPath = "/admin";
+        const personaName = role === "shop_owner" ? "\uCF54\uB2E4\uB9AC\uBD80\uC7A5" : role.toUpperCase();
+        console.log(`[Auth] ${personaName} \uC138\uC158 \uBD80\uC5EC \uC644\uB8CC! ${redirectPath}\uB85C \uC774\uB3D9\uD569\uB2C8\uB2E4.`);
+        return c.redirect(redirectPath);
+      } catch (error) {
+        console.error("[Auth] \uAC1C\uBC1C\uC6A9 \uB85C\uADF8\uC778 \uC2E4\uD328:", error);
+        return c.json({ error: "Dev login failed" }, 500);
+      }
+    });
+  }
+  app2.get("/api/auth/providers", (c) => {
+    return c.json({ providers: getEnabledProviders() });
+  });
+  app2.get("/api/auth/me", async (c) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    if (!userId) {
+      return c.json({ user: null });
+    }
+    try {
+      const user = await storage.getUserById(userId);
+      if (!user) {
+        session.set("userId", null);
+        session.set("user", null);
+        session.set("oauthState", null);
+        return c.json({ user: null });
+      }
+      const identities = await storage.getUserIdentitiesByUserId(user.id);
+      const linkedProviders = identities.map((i) => i.provider);
+      return c.json({
+        user: {
+          id: user.id,
+          email: user.email,
+          displayName: user.displayName,
+          avatar: user.avatar,
+          locale: user.locale,
+          role: user.role
+        },
+        linkedProviders
+      });
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      return c.json({ error: "Failed to fetch user" }, 500);
+    }
+  });
+  app2.get("/api/auth/:provider", async (c) => {
+    const providerName = c.req.param("provider");
+    const provider = getProvider(providerName);
+    if (!provider) {
+      return c.json({ error: `Provider ${providerName} not configured` }, 400);
+    }
+    const state = generateState();
+    const session = c.get("session");
+    session.set("oauthState", state);
+    const authUrl = provider.getAuthUrl(state);
+    return c.redirect(authUrl);
+  });
+  app2.get("/api/auth/:provider/callback", async (c) => {
+    const providerName = c.req.param("provider");
+    const { code, state, error } = c.req.query();
+    if (error) {
+      console.error(`OAuth error from ${providerName}:`, error);
+      return c.redirect(`/?auth_error=${encodeURIComponent(String(error))}`);
+    }
+    const provider = getProvider(providerName);
+    if (!provider) {
+      return c.redirect(`/?auth_error=provider_not_found`);
+    }
+    const session = c.get("session");
+    const savedState = session.get("oauthState");
+    if (state !== savedState) {
+      console.error("State mismatch:", { received: state, saved: savedState });
+      return c.redirect(`/?auth_error=state_mismatch`);
+    }
+    try {
+      const tokens = await provider.exchangeCodeForToken(String(code));
+      const profile = await provider.getUserProfile(tokens.accessToken);
+      const user = await storage.findOrCreateUserByIdentity(
+        providerName,
+        profile.id,
+        {
+          email: profile.email,
+          displayName: profile.name,
+          avatar: profile.avatar,
+          rawProfile: profile.raw
+        }
+      );
+      session.set("userId", null);
+      session.set("user", null);
+      session.set("oauthState", null);
+      return c.redirect(`/?auth_success=true`);
+    } catch (error2) {
+      console.error(`OAuth callback error for ${providerName}:`, error2);
+      return c.redirect(`/?auth_error=callback_failed`);
+    }
+  });
+  app2.post("/api/auth/logout", (c) => {
+    const session = c.get("session");
+    session.set("userId", null);
+    session.set("user", null);
+    if (typeof session.destroy === "function") session.destroy();
+    return c.json({ success: true });
+  });
+}
+function requireRole(...roles) {
+  return async (c, next) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    if (!userId) {
+      return c.json({ error: "Authentication required" }, 401);
+    }
+    const user = await storage.getUserById(userId);
+    if (!user || !roles.includes(user.role || "user")) {
+      return c.json({ error: "Insufficient permissions" }, 403);
+    }
+    await next();
+  };
+}
+
+// server/routes.ts
+import { eq as eq5, desc as desc2, sql as sql5 } from "drizzle-orm";
 
 // server/lib/gemini.ts
+init_env();
 import { GoogleGenAI } from "@google/genai";
 var aiInstance = null;
 function getAI() {
   if (!aiInstance) {
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = env.GEMINI_API_KEY;
     if (!apiKey) {
       console.warn("GEMINI_API_KEY is missing. AI features will use mock data.");
       return null;
@@ -10075,103 +10451,6 @@ function getAI() {
     aiInstance = new GoogleGenAI({ apiKey });
   }
   return aiInstance;
-}
-async function recommendTourItinerary(landmarks2, userPosition, language = "en") {
-  try {
-    const landmarkInfo = landmarks2.map((l) => ({
-      id: l.id,
-      name: l.name,
-      category: l.category,
-      lat: l.lat,
-      lng: l.lng,
-      description: l.description,
-      isPremium: l.isPremium
-    }));
-    const systemPrompt = language === "ko" ? "\uB2F9\uC2E0\uC740 \uC138\uACC4\uC801\uC778 \uC5EC\uD589 \uAC00\uC774\uB4DC \uC804\uBB38\uAC00\uC785\uB2C8\uB2E4. \uC81C\uACF5\uB41C \uBA85\uC18C \uC815\uBCF4\uB97C \uBD84\uC11D\uD558\uC5EC \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD558\uC138\uC694. \uD504\uB9AC\uBBF8\uC5C4(Premium) \uAC00\uC774\uB4DC\uAC00 \uC788\uB294 \uC7A5\uC18C\uB294 \uB354 \uAE4A\uC774 \uC788\uB294 \uC815\uBCF4\uB97C \uC81C\uACF5\uD558\uBBC0\uB85C \uC6B0\uC120\uC801\uC73C\uB85C \uACE0\uB824\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4." : "You are a world-class travel guide expert. Analyze the provided landmark information and recommend the best tour itinerary. Landmarks with Premium guides offer more in-depth information and can be prioritized.";
-    const userPrompt = language === "ko" ? `${systemPrompt}
-
-\uB2E4\uC74C \uAD00\uAD11\uC9C0\uB4E4\uC744 \uAE30\uBC18\uC73C\uB85C \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD574\uC8FC\uC138\uC694. \uC9C0\uB9AC\uC801 \uC704\uCE58, \uCE74\uD14C\uACE0\uB9AC, \uC5ED\uC0AC\uC801 \uC911\uC694\uB3C4\uB97C \uACE0\uB824\uD558\uC5EC \uD6A8\uC728\uC801\uC778 \uC21C\uC11C\uB97C \uC81C\uC548\uD558\uC138\uC694. \`isPremium\`\uC774 \`true\`\uC778 \uC7A5\uC18C\uB294 \uACE0\uD488\uC9C8 \uC624\uB514\uC624 \uAC00\uC774\uB4DC\uAC00 \uD3EC\uD568\uB418\uC5B4 \uC788\uC74C\uC744 \uCC38\uACE0\uD558\uC138\uC694.
-
-\uAD00\uAD11\uC9C0 \uBAA9\uB85D:
-${JSON.stringify(landmarkInfo, null, 2)}
-
-${userPosition ? `\uC0AC\uC6A9\uC790 \uD604\uC7AC \uC704\uCE58: \uC704\uB3C4 ${userPosition.latitude}, \uACBD\uB3C4 ${userPosition.longitude}` : ""}
-
-\uC751\uB2F5\uC740 \uBC18\uB4DC\uC2DC \uB2E4\uC74C JSON \uD615\uC2DD\uC73C\uB85C \uD574\uC8FC\uC138\uC694 (\uB2E4\uB978 \uD14D\uC2A4\uD2B8 \uC5C6\uC774 JSON\uB9CC):
-{
-  "itinerary": [{"landmarkId": "string", "order": number}],
-  "explanation": "\uC65C \uC774 \uC21C\uC11C\uB97C \uCD94\uCC9C\uD558\uB294\uC9C0 \uC790\uC138\uD55C \uC124\uBA85. \uD504\uB9AC\uBBF8\uC5C4 \uC7A5\uC18C\uAC00 \uD3EC\uD568\uB41C \uACBD\uC6B0 \uADF8 \uAC00\uCE58\uB97C \uC5B8\uAE09\uD574\uC8FC\uC138\uC694. (3-5\uBB38\uC7A5)",
-  "totalEstimatedTime": number (\uBD84 \uB2E8\uC704)
-}` : `${systemPrompt}
-
-Based on the following tourist attractions, recommend the best tour itinerary. Consider geographical proximity, category variety, and historical significance to suggest an efficient order. Note that landmarks with \`isPremium: true\` have high-quality audio guides available.
-
-Landmark list:
-${JSON.stringify(landmarkInfo, null, 2)}
-
-${userPosition ? `User current location: latitude ${userPosition.latitude}, longitude ${userPosition.longitude}` : ""}
-
-Respond with ONLY this exact JSON format (no other text):
-{
-  "itinerary": [{"landmarkId": "string", "order": number}],
-  "explanation": "Detailed explanation of why you recommend this order. If premium landmarks are included, mention their value. (3-5 sentences)",
-  "totalEstimatedTime": number (in minutes)
-}`;
-    const ai = getAI();
-    if (!ai) {
-      throw new Error("AI client not initialized (missing API key)");
-    }
-    const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
-      contents: userPrompt
-    });
-    const text2 = response.text || "";
-    let jsonStr = text2;
-    const jsonMatch = text2.match(/```(?:json)?\s*([\s\S]*?)```/);
-    if (jsonMatch) {
-      jsonStr = jsonMatch[1].trim();
-    } else {
-      const objMatch = text2.match(/\{[\s\S]*\}/);
-      if (objMatch) {
-        jsonStr = objMatch[0];
-      }
-    }
-    const result = JSON.parse(jsonStr);
-    return {
-      itinerary: result.itinerary || [],
-      explanation: result.explanation || "",
-      totalEstimatedTime: result.totalEstimatedTime || 180
-    };
-  } catch (error) {
-    console.error("Failed to get Gemini AI recommendation:", error);
-    const msg = error?.message?.toLowerCase() || "";
-    if (msg.includes("429") || msg.includes("rate limit") || msg.includes("ratelimit") || msg.includes("ai client not initialized")) {
-      return mockRecommendTourItinerary(landmarks2, userPosition, language);
-    }
-    throw new Error("Failed to generate tour recommendation");
-  }
-}
-function mockRecommendTourItinerary(landmarks2, userPosition, language = "en") {
-  console.log("[Gemini] Using mock tour recommendation fallback.");
-  const sortedLandmarks = [...landmarks2];
-  if (userPosition) {
-    sortedLandmarks.sort((a, b) => {
-      const distA = Math.sqrt(Math.pow(a.lat - userPosition.latitude, 2) + Math.pow(a.lng - userPosition.longitude, 2));
-      const distB = Math.sqrt(Math.pow(b.lat - userPosition.latitude, 2) + Math.pow(b.lng - userPosition.longitude, 2));
-      return distA - distB;
-    });
-  }
-  const itinerary = sortedLandmarks.slice(0, 5).map((l, index) => ({
-    landmarkId: l.id,
-    order: index + 1
-  }));
-  const explanation = language === "ko" ? "\uD604\uC7AC \uC704\uCE58\uC640 \uC9C0\uB9AC\uC801 \uADFC\uC811\uC131\uC744 \uACE0\uB824\uD558\uC5EC \uAD6C\uC131\uB41C \uCD94\uCC9C \uC77C\uC815\uC785\uB2C8\uB2E4. \uD6A8\uC728\uC801\uC778 \uC774\uB3D9 \uB3D9\uC120\uC744 \uB530\uB77C \uB3C4\uC2DC\uC758 \uC8FC\uC694 \uBA85\uC18C\uB4E4\uC744 \uD0D0\uD5D8\uD558\uC2E4 \uC218 \uC788\uB3C4\uB85D \uACC4\uD68D\uB418\uC5C8\uC2B5\uB2C8\uB2E4." : "This recommended itinerary is based on geographical proximity and efficiency of travel. It's designed to help you explore major city landmarks following a logical route.";
-  return {
-    itinerary,
-    explanation,
-    totalEstimatedTime: itinerary.length * 45
-    // 45 mins per stop average
-  };
 }
 async function generateCityInfo(query, language = "ko") {
   const ai = getAI();
@@ -10282,21 +10561,9 @@ function mockGenerateCityInfo(query) {
   };
 }
 
-// server/routes.ts
-init_clova();
-init_schema();
-import { eq as eq4, desc as desc2, or, ilike, sql as sql6, count as count2 } from "drizzle-orm";
-import crypto4 from "crypto";
-import multer from "multer";
-import * as XLSX from "xlsx";
-import * as path4 from "path";
-import * as fs4 from "fs";
-import express from "express";
-import Stripe from "stripe";
-
 // server/services/automationService.ts
 init_schema();
-import { eq as eq2 } from "drizzle-orm";
+import { eq as eq3 } from "drizzle-orm";
 var AutomationService = class {
   /**
    * 홍보 콘텐츠 생성 로직
@@ -10454,9 +10721,9 @@ ${prompt}`;
    */
   async saveGeneratedContent(landmarkId, content) {
     try {
-      const existing = await db.select().from(marketingContents).where(eq2(marketingContents.landmarkId, landmarkId)).limit(1);
+      const existing = await db.select().from(marketingContents).where(eq3(marketingContents.landmarkId, landmarkId)).limit(1);
       if (existing.length > 0) {
-        await db.update(marketingContents).set({ content, updatedAt: /* @__PURE__ */ new Date() }).where(eq2(marketingContents.landmarkId, landmarkId));
+        await db.update(marketingContents).set({ content, updatedAt: /* @__PURE__ */ new Date() }).where(eq3(marketingContents.landmarkId, landmarkId));
         console.log(`[Dr.'s Engine] \uBA85\uC18C ID ${landmarkId}\uC758 \uD64D\uBCF4 \uBB38\uAD6C\uAC00 \uC131\uACF5\uC801\uC73C\uB85C \uC5C5\uB370\uC774\uD2B8\uB418\uC5C8\uC2B5\uB2C8\uB2E4. (\uC790\uC0B0 \uAC00\uCE58 \uC0C1\uC2B9!)`);
       } else {
         await db.insert(marketingContents).values({
@@ -10472,9 +10739,31 @@ ${prompt}`;
 };
 var automationService = new AutomationService();
 
+// server/services/dbCheckService.ts
+import { sql as sql3 } from "drizzle-orm";
+var DbCheckService = class {
+  async checkConnection() {
+    const start = Date.now();
+    try {
+      await db.execute(sql3`SELECT 1`);
+      const latency = Date.now() - start;
+      console.log(`[DB Health] Connection is healthy. Latency: ${latency}ms`);
+      return { status: "healthy", latency };
+    } catch (error) {
+      console.error("[DB Health] Connection check failed:", error.message);
+      return {
+        status: "unhealthy",
+        latency: Date.now() - start,
+        error: error.message
+      };
+    }
+  }
+};
+var dbCheckService = new DbCheckService();
+
 // server/services/settlementService.ts
 init_schema();
-import { eq as eq3, sql as sql4 } from "drizzle-orm";
+import { eq as eq4, sql as sql4 } from "drizzle-orm";
 var SettlementService = class {
   // 플랫폼의 수익 배분율! 70%는 크리에이터(생산자)에게, 30%는 플랫폼(우리)의 운영비로 사용해.
   CREATOR_SHARE = 0.7;
@@ -10504,7 +10793,7 @@ var SettlementService = class {
         }).returning();
         const creatorAmount = amount * this.CREATOR_SHARE;
         const creatorId = providerData.creatorId || "admin";
-        const [existingEarnings] = await tx.select().from(creatorEarnings).where(eq3(creatorEarnings.userId, creatorId));
+        const [existingEarnings] = await tx.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, creatorId));
         if (existingEarnings) {
           await tx.update(creatorEarnings).set({
             totalBalance: sql4`${creatorEarnings.totalBalance} + ${creatorAmount}`,
@@ -10512,7 +10801,7 @@ var SettlementService = class {
             totalEarned: sql4`${creatorEarnings.totalEarned} + ${creatorAmount}`,
             // 지금까지 번 누적 총액
             updatedAt: /* @__PURE__ */ new Date()
-          }).where(eq3(creatorEarnings.userId, creatorId));
+          }).where(eq4(creatorEarnings.userId, creatorId));
         } else {
           await tx.insert(creatorEarnings).values({
             userId: creatorId,
@@ -10536,7 +10825,7 @@ var SettlementService = class {
   async runSettlement(userId, period) {
     try {
       return await db.transaction(async (tx) => {
-        const [earnings] = await tx.select().from(creatorEarnings).where(eq3(creatorEarnings.userId, userId));
+        const [earnings] = await tx.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, userId));
         if (!earnings || earnings.totalBalance <= 0) {
           throw new Error("[\uD68C\uACC4\uBD80\uC7A5] \uC815\uC0B0\uD574\uC904 \uB3C8\uC774 \uC5C6\uB294\uB370\uC694? \uC794\uC561\uC774 0\uC6D0\uC785\uB2C8\uB2E4.");
         }
@@ -10553,7 +10842,7 @@ var SettlementService = class {
         await tx.update(creatorEarnings).set({
           totalBalance: 0,
           updatedAt: /* @__PURE__ */ new Date()
-        }).where(eq3(creatorEarnings.userId, userId));
+        }).where(eq4(creatorEarnings.userId, userId));
         console.log(`[\uD68C\uACC4\uBD80\uC7A5] ${userId}\uB2D8\uAED8 ${settleAmount}\uC6D0\uB9CC\uD07C \uC1A1\uAE08 \uC9C0\uC2DC\uB97C \uB0B4\uB838\uC2B5\uB2C8\uB2E4.`);
         return settlement;
       });
@@ -10566,8 +10855,8 @@ var SettlementService = class {
    * 크리에이터 실적 대시보드 데이터 조회
    */
   async getCreatorStats(userId) {
-    const [earnings] = await db.select().from(creatorEarnings).where(eq3(creatorEarnings.userId, userId));
-    const recentTransactions = await db.select().from(transactions).where(eq3(transactions.userId, userId)).orderBy(sql4`${transactions.createdAt} DESC`).limit(10);
+    const [earnings] = await db.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, userId));
+    const recentTransactions = await db.select().from(transactions).where(eq4(transactions.userId, userId)).orderBy(sql4`${transactions.createdAt} DESC`).limit(10);
     return {
       totalBalance: Number(earnings?.totalBalance || 0),
       totalEarned: Number(earnings?.totalEarned || 0),
@@ -10579,280 +10868,72 @@ var SettlementService = class {
 };
 var settlementService = new SettlementService();
 
-// server/auth.ts
-import crypto2 from "crypto";
-var providers = /* @__PURE__ */ new Map();
-function registerProvider(provider) {
-  providers.set(provider.name, provider);
-}
-function getProvider(name) {
-  return providers.get(name);
-}
-function getEnabledProviders() {
-  return Array.from(providers.keys());
-}
-function generateState() {
-  return crypto2.randomBytes(16).toString("hex");
-}
-function setupAuthRoutes(app2) {
-  if (process.env.NODE_ENV === "production") {
-    app2.get("/api/auth/dev-login/:role?", (_req, res) => {
-      res.status(404).json({ error: "[\uBB38\uC9C0\uAE30 \uBD80\uC7A5] \uD504\uB85C\uB355\uC158 \uD658\uACBD\uC5D0\uC11C\uB294 \uAC1C\uBC1C\uC6A9 \uB85C\uADF8\uC778\uC774 \uD5C8\uC6A9\uB418\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4." });
-    });
-  } else {
-    app2.get("/api/auth/dev-login/:role?", async (req, res) => {
-      const role = req.params.role || "admin";
-      console.log(`[Dr.'s Engine] \uAC1C\uBC1C\uC6A9 ${role} \uB85C\uADF8\uC778 \uC694\uCCAD \uAC10\uC9C0!`);
-      const authReq = req;
-      try {
-        const providerUserId = `dev-${role}-id`;
-        const displayName = `\uAC1C\uBC1C\uC6A9 ${role.toUpperCase()}`;
-        const user = await storage.findOrCreateUserByIdentity(
-          "dev",
-          providerUserId,
-          {
-            email: `${role}@example.com`,
-            displayName,
-            avatar: void 0,
-            rawProfile: { role }
-          }
-        );
-        user.role = role;
-        await storage.updateUser(user.id, { role });
-        authReq.session.userId = user.id;
-        authReq.session.user = user;
-        authReq.session.save((err) => {
-          if (err) {
-            console.error("[Auth] \uC138\uC158 \uC800\uC7A5 \uC2E4\uD328:", err);
-            return res.status(500).json({ error: "Session error" });
-          }
-          let redirectPath = "/";
-          if (role === "admin") redirectPath = "/admin";
-          else if (role === "creator") redirectPath = "/admin";
-          else if (role === "guide") redirectPath = "/guide";
-          else if (role === "tour_leader") redirectPath = "/tour-leader";
-          else if (role === "shop_owner") redirectPath = "/admin";
-          const personaName = role === "shop_owner" ? "\uCF54\uB2E4\uB9AC\uBD80\uC7A5" : role.toUpperCase();
-          console.log(`[Auth] ${personaName} \uC138\uC158 \uBD80\uC5EC \uC644\uB8CC! ${redirectPath}\uB85C \uC774\uB3D9\uD569\uB2C8\uB2E4.`);
-          res.redirect(redirectPath);
-        });
-      } catch (error) {
-        console.error("[Auth] \uAC1C\uBC1C\uC6A9 \uB85C\uADF8\uC778 \uC2E4\uD328:", error);
-        res.status(500).json({ error: "Dev login failed" });
-      }
-    });
-  }
-  app2.get("/api/auth/providers", (_req, res) => {
-    res.json({ providers: getEnabledProviders() });
-  });
-  app2.get("/api/auth/me", async (req, res) => {
-    const authReq = req;
-    if (!authReq.session.userId) {
-      return res.json({ user: null });
-    }
-    try {
-      const user = await storage.getUserById(authReq.session.userId);
-      if (!user) {
-        authReq.session.destroy(() => {
-        });
-        return res.json({ user: null });
-      }
-      const identities = await storage.getUserIdentitiesByUserId(user.id);
-      const linkedProviders = identities.map((i) => i.provider);
-      res.json({
-        user: {
-          id: user.id,
-          email: user.email,
-          displayName: user.displayName,
-          avatar: user.avatar,
-          locale: user.locale,
-          role: user.role
-        },
-        linkedProviders
-      });
-    } catch (error) {
-      console.error("Error fetching user:", error);
-      res.status(500).json({ error: "Failed to fetch user" });
-    }
-  });
-  app2.get("/api/auth/:provider", (req, res) => {
-    const authReq = req;
-    const { provider: providerName } = req.params;
-    const provider = getProvider(providerName);
-    if (!provider) {
-      return res.status(400).json({ error: `Provider ${providerName} not configured` });
-    }
-    const state = generateState();
-    authReq.session.oauthState = state;
-    authReq.session.save((err) => {
-      if (err) {
-        console.error("Session save error:", err);
-        return res.status(500).json({ error: "Session error" });
-      }
-      const authUrl = provider.getAuthUrl(state);
-      res.redirect(authUrl);
-    });
-  });
-  app2.get("/api/auth/:provider/callback", async (req, res) => {
-    const authReq = req;
-    const { provider: providerName } = req.params;
-    const { code, state, error } = req.query;
-    if (error) {
-      console.error(`OAuth error from ${providerName}:`, error);
-      return res.redirect(`/?auth_error=${encodeURIComponent(String(error))}`);
-    }
-    const provider = getProvider(providerName);
-    if (!provider) {
-      return res.redirect(`/?auth_error=provider_not_found`);
-    }
-    const savedState = authReq.session.oauthState;
-    if (state !== savedState) {
-      console.error("State mismatch:", { received: state, saved: savedState });
-      return res.redirect(`/?auth_error=state_mismatch`);
-    }
-    try {
-      const tokens = await provider.exchangeCodeForToken(String(code));
-      const profile = await provider.getUserProfile(tokens.accessToken);
-      const user = await storage.findOrCreateUserByIdentity(
-        providerName,
-        profile.id,
-        {
-          email: profile.email,
-          displayName: profile.name,
-          avatar: profile.avatar,
-          rawProfile: profile.raw
-        }
-      );
-      authReq.session.userId = user.id;
-      authReq.session.user = user;
-      delete authReq.session.oauthState;
-      authReq.session.save((err) => {
-        if (err) {
-          console.error("Session save error:", err);
-          return res.redirect(`/?auth_error=session_error`);
-        }
-        res.redirect(`/?auth_success=true`);
-      });
-    } catch (error2) {
-      console.error(`OAuth callback error for ${providerName}:`, error2);
-      res.redirect(`/?auth_error=callback_failed`);
-    }
-  });
-  app2.post("/api/auth/logout", (req, res) => {
-    const authReq = req;
-    authReq.session.destroy((err) => {
-      if (err) {
-        console.error("Logout error:", err);
-        return res.status(500).json({ error: "Logout failed" });
-      }
-      res.clearCookie("connect.sid");
-      res.json({ success: true });
-    });
-  });
-}
-function requireRole(...roles) {
-  return async (req, res, next) => {
-    const authReq = req;
-    if (!authReq.session.userId) {
-      return res.status(401).json({ error: "Authentication required" });
-    }
-    const user = await storage.getUserById(authReq.session.userId);
-    if (!user || !roles.includes(user.role || "user")) {
-      return res.status(403).json({ error: "Insufficient permissions" });
-    }
-    next();
-  };
-}
-
-// server/services/dbCheckService.ts
-import { sql as sql5 } from "drizzle-orm";
-var DbCheckService = class {
-  async checkConnection() {
-    const start = Date.now();
-    try {
-      await db.execute(sql5`SELECT 1`);
-      const latency = Date.now() - start;
-      console.log(`[DB Health] Connection is healthy. Latency: ${latency}ms`);
-      return { status: "healthy", latency };
-    } catch (error) {
-      console.error("[DB Health] Connection check failed:", error.message);
-      return {
-        status: "unhealthy",
-        latency: Date.now() - start,
-        error: error.message
-      };
-    }
-  }
-};
-var dbCheckService = new DbCheckService();
-
 // server/routes.ts
-if (!process.env.STRIPE_SECRET_KEY) {
-  console.warn("[\uD68C\uACC4\uBD80\uC7A5 \uACBD\uACE0] \u26A0\uFE0F STRIPE_SECRET_KEY \uD658\uACBD\uBCC0\uC218\uAC00 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. \uACB0\uC81C \uAE30\uB2A5\uC774 \uBE44\uD65C\uC131\uD654\uB429\uB2C8\uB2E4.");
-}
-if (!process.env.STRIPE_WEBHOOK_SECRET) {
-  console.warn("[\uD68C\uACC4\uBD80\uC7A5 \uACBD\uACE0] \u26A0\uFE0F STRIPE_WEBHOOK_SECRET \uD658\uACBD\uBCC0\uC218\uAC00 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. \uC6F9\uD6C5 \uC11C\uBA85 \uAC80\uC99D\uC774 \uC2E4\uD328\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.");
-}
-var stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder_will_fail", {
-  apiVersion: "2023-10-16"
-  // 최신 API 버전을 사용하여 호환성을 확보합니다.
-});
-async function registerRoutes(app2) {
-  app2.get("/api/health", async (_req, res) => {
-    const health = await dbCheckService.checkConnection();
-    res.status(health.status === "healthy" ? 200 : 503).json(health);
+init_env();
+import crypto4 from "node:crypto";
+import Stripe2 from "stripe";
+var stripeInstance = null;
+function getStripe() {
+  if (stripeInstance) return stripeInstance;
+  if (!env.STRIPE_SECRET_KEY) {
+    console.warn("[\uD68C\uACC4\uBD80\uC7A5 \uACBD\uACE0] \u26A0\uFE0F STRIPE_SECRET_KEY \uD658\uACBD\uBCC0\uC218\uAC00 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. \uACB0\uC81C \uAE30\uB2A5\uC774 \uBE44\uD65C\uC131\uD654\uB429\uB2C8\uB2E4.");
+    return null;
+  }
+  stripeInstance = new Stripe2(env.STRIPE_SECRET_KEY, {
+    apiVersion: "2023-10-16"
   });
-  app2.get("/api/debug-routes", (req, res) => {
-    const routes = [];
-    app2._router.stack.forEach((middleware) => {
-      if (middleware.route) {
-        routes.push({
-          path: middleware.route.path,
-          methods: Object.keys(middleware.route.methods)
-        });
-      }
-    });
-    res.json({
+  return stripeInstance;
+}
+function registerRoutes(app2) {
+  app2.get("/api/health", async (c) => {
+    const health = await dbCheckService.checkConnection();
+    return c.json(health, health.status === "healthy" ? 200 : 503);
+  });
+  app2.get("/api/debug-routes", (c) => {
+    const routes = app2.routes.map((r) => ({
+      path: r.path,
+      method: r.method
+    }));
+    return c.json({
       message: "Routes registered successfully",
       totalRoutes: routes.length,
       routes
     });
   });
-  app2.get("/api/debug/env", (_req, res) => {
-    res.json({
-      NOWIFIGPSTOURS_exists: !!process.env.NOWIFIGPSTOURS,
-      NOWIFIGPSTOURS_preview: process.env.NOWIFIGPSTOURS ? `${process.env.NOWIFIGPSTOURS.substring(0, 30)}...` : "NOT SET",
-      NODE_ENV: process.env.NODE_ENV || "undefined",
+  app2.get("/api/debug/env", (c) => {
+    return c.json({
+      NOWIFIGPSTOURS_exists: !!env.NOWIFIGPSTOURS,
+      NOWIFIGPSTOURS_preview: env.NOWIFIGPSTOURS ? `${env.NOWIFIGPSTOURS.substring(0, 30)}...` : "NOT SET",
+      NODE_ENV: env.NODE_ENV || "undefined",
       timestamp: (/* @__PURE__ */ new Date()).toISOString()
     });
   });
-  app2.get("/api/debug/db-connection", async (_req, res) => {
+  app2.get("/api/debug/db-connection", async (c) => {
     try {
-      const dbUrl2 = process.env.NOWIFIGPSTOURS;
-      const hasDbUrl = !!dbUrl2;
-      const dbUrlPreview = hasDbUrl ? `${dbUrl2?.substring(0, 15)}...${dbUrl2?.substring(dbUrl2.length - 10)}` : "Not Set";
+      const dbUrl = env.NOWIFIGPSTOURS;
+      const hasDbUrl = !!dbUrl;
+      const dbUrlPreview = hasDbUrl ? `${dbUrl?.substring(0, 15)}...${dbUrl?.substring(dbUrl.length - 10)}` : "Not Set";
       const start = Date.now();
       let connectionResult;
       let errorDetails = null;
       try {
-        const result = await db.execute(sql6`SELECT NOW(), current_database(), current_user, version()`);
+        const result = await db.execute(sql5`SELECT NOW(), current_database(), current_user, version()`);
         connectionResult = result;
       } catch (err) {
         errorDetails = {
           message: err.message,
           code: err.code,
           name: err.name,
-          stack: process.env.NODE_ENV === "development" ? err.stack : void 0,
+          stack: env.NODE_ENV === "development" ? err.stack : void 0,
           hint: err.hint
-          // Postgres 에러 힌트
         };
       }
-      res.json({
+      return c.json({
         environment: {
-          nodeEnv: process.env.NODE_ENV,
+          nodeEnv: env.NODE_ENV,
           hasDatabaseUrl: hasDbUrl,
           dbUrlPreview,
-          isNeon: process.env.NOWIFIGPSTOURS?.includes("neon")
+          isNeon: env.NOWIFIGPSTOURS?.includes("neon")
         },
         connection: {
           success: !errorDetails,
@@ -10863,45 +10944,45 @@ async function registerRoutes(app2) {
         timestamp: (/* @__PURE__ */ new Date()).toISOString()
       });
     } catch (criticalError) {
-      res.status(500).json({ error: "Debug endpoint failed", details: criticalError.message });
+      return c.json({ error: "Debug endpoint failed", details: criticalError.message }, 500);
     }
   });
-  app2.get("/api/cities", async (req, res) => {
+  app2.get("/api/cities", async (c) => {
     try {
       const cities2 = await storage.getCities();
-      res.json(cities2);
+      return c.json(cities2);
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch cities" });
+      return c.json({ error: "Failed to fetch cities" }, 500);
     }
   });
-  app2.get("/api/cities/:id", async (req, res) => {
+  app2.get("/api/cities/:id", async (c) => {
     try {
-      const city = await storage.getCity(req.params.id);
+      const city = await storage.getCity(c.req.param("id"));
       if (!city) {
-        return res.status(404).json({ error: "City not found" });
+        return c.json({ error: "City not found" }, 404);
       }
-      res.json(city);
+      return c.json(city);
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch city" });
+      return c.json({ error: "Failed to fetch city" }, 500);
     }
   });
-  app2.get("/api/landmarks", async (req, res) => {
+  app2.get("/api/landmarks", async (c) => {
     try {
-      const cityId = req.query.cityId;
+      const cityId = c.req.query("cityId");
       const landmarks2 = await storage.getLandmarks(cityId);
-      res.json(landmarks2);
+      return c.json(landmarks2);
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch landmarks" });
+      return c.json({ error: "Failed to fetch landmarks" }, 500);
     }
   });
-  app2.get("/api/landmarks/:id", async (req, res) => {
+  app2.get("/api/landmarks/:id", async (c) => {
     try {
-      const landmark = await storage.getLandmark(req.params.id);
+      const landmark = await storage.getLandmark(c.req.param("id"));
       if (!landmark) {
-        return res.status(404).json({ error: "Landmark not found" });
+        return c.json({ error: "Landmark not found" }, 404);
       }
-      const guides = await storage.getLandmarkGuides(req.params.id);
-      res.json({
+      const guides = await storage.getLandmarkGuides(c.req.param("id"));
+      return c.json({
         ...landmark,
         guides: guides.map((g) => ({
           id: g.id,
@@ -10915,69 +10996,73 @@ async function registerRoutes(app2) {
       });
     } catch (error) {
       console.error("[Landmark Detail Error]", error);
-      res.status(500).json({ error: "Failed to fetch landmark" });
+      return c.json({ error: "Failed to fetch landmark" }, 500);
     }
   });
-  app2.get("/api/landmarks/:id/guides", async (req, res) => {
+  app2.get("/api/landmarks/:id/guides", async (c) => {
     try {
-      const guides = await storage.getLandmarkGuides(req.params.id);
-      res.json(guides);
+      const guides = await storage.getLandmarkGuides(c.req.param("id"));
+      return c.json(guides);
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch guides" });
+      return c.json({ error: "Failed to fetch guides" }, 500);
     }
   });
-  app2.post("/api/visited", async (req, res) => {
+  app2.post("/api/visited", async (c) => {
     try {
-      const validatedData = insertVisitedLandmarkSchema.parse(req.body);
+      const body = await c.req.json();
+      const validatedData = insertVisitedLandmarkSchema.parse(body);
       const visited = await storage.markLandmarkVisited(
         validatedData.landmarkId,
         validatedData.sessionId || void 0
       );
-      res.json(visited);
+      return c.json(visited);
     } catch (error) {
+      if (error instanceof z2.ZodError) {
+        return c.json({ error: "Invalid request data" }, 400);
+      }
       if (error instanceof Error && error.name === "ZodError") {
-        return res.status(400).json({ error: "Invalid request data" });
+        return c.json({ error: "Invalid request data" }, 400);
       }
-      res.status(500).json({ error: "Failed to mark landmark as visited" });
+      return c.json({ error: "Failed to mark landmark as visited" }, 500);
     }
   });
-  app2.get("/api/visited", async (req, res) => {
+  app2.get("/api/visited", async (c) => {
     try {
-      const sessionId = req.query.sessionId;
+      const sessionId = c.req.query("sessionId");
       const visited = await storage.getVisitedLandmarks(sessionId);
-      res.json(visited);
+      return c.json(visited);
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch visited landmarks" });
+      return c.json({ error: "Failed to fetch visited landmarks" }, 500);
     }
   });
-  app2.get("/api/visited/count", async (req, res) => {
+  app2.get("/api/visited/count", async (c) => {
     try {
-      const sessionId = req.query.sessionId;
-      const count3 = await storage.getVisitedCount(sessionId);
-      res.json({ count: count3 });
+      const sessionId = c.req.query("sessionId");
+      const count2 = await storage.getVisitedCount(sessionId);
+      return c.json({ count: count2 });
     } catch (error) {
-      res.status(500).json({ error: "Failed to get visited count" });
+      return c.json({ error: "Failed to get visited count" }, 500);
     }
   });
-  app2.get("/api/visited/:landmarkId", async (req, res) => {
+  app2.get("/api/visited/:landmarkId", async (c) => {
     try {
-      const sessionId = req.query.sessionId;
-      const isVisited = await storage.isLandmarkVisited(req.params.landmarkId, sessionId);
-      res.json({ visited: isVisited });
+      const sessionId = c.req.query("sessionId");
+      const isVisited = await storage.isLandmarkVisited(c.req.param("landmarkId"), sessionId);
+      return c.json({ visited: isVisited });
     } catch (error) {
-      res.status(500).json({ error: "Failed to check if landmark is visited" });
+      return c.json({ error: "Failed to check if landmark is visited" }, 500);
     }
   });
-  app2.get("/api/offline-package/:cityId", async (req, res) => {
+  app2.get("/api/offline-package/:cityId", async (c) => {
     try {
-      const { cityId } = req.params;
-      const clientEtag = req.headers["if-none-match"];
-      const [cityData] = await db.select().from(cities).where(eq4(cities.id, cityId));
+      const cityId = c.req.param("cityId");
+      const clientEtag = c.req.header("if-none-match");
+      const [cityData] = await db.select().from(cities).where(eq5(cities.id, cityId));
       if (!cityData) {
-        return res.status(404).json({ error: "City not found" });
+        return c.json({ error: "City not found" }, 404);
       }
-      const cityLandmarks = await db.select().from(landmarks).where(eq4(landmarks.cityId, cityId));
-      const [versionRecord] = await db.select().from(dataVersions).where(eq4(dataVersions.entityType, "all"));
+      const cityLandmarks = await db.select().from(landmarks).where(eq5(landmarks.cityId, cityId));
+      const [versionRecord] = await db.select().from(dataVersions).where(eq5(dataVersions.entityType, "all"));
       const version = versionRecord?.version || 1;
       const packageData = {
         city: {
@@ -11022,17 +11107,17 @@ async function registerRoutes(app2) {
       const contentHash = crypto4.createHash("md5").update(JSON.stringify({ version, cityId, count: cityLandmarks.length })).digest("hex");
       const etag = `"${contentHash}"`;
       if (clientEtag === etag) {
-        return res.status(304).end();
+        return c.body(null, 304);
       }
-      res.setHeader("ETag", etag);
-      res.setHeader("Cache-Control", "private, max-age=3600");
-      res.json(packageData);
+      c.header("ETag", etag);
+      c.header("Cache-Control", "private, max-age=3600");
+      return c.json(packageData);
     } catch (error) {
       console.error("[Offline Package Error]", error);
-      res.status(500).json({ error: "Failed to generate offline package" });
+      return c.json({ error: "Failed to generate offline package" }, 500);
     }
   });
-  app2.get("/api/offline-package", async (req, res) => {
+  app2.get("/api/offline-package", async (c) => {
     try {
       const allCities = await db.select({
         id: cities.id,
@@ -11041,1101 +11126,218 @@ async function registerRoutes(app2) {
       }).from(cities);
       const citiesWithStats = await Promise.all(
         allCities.map(async (city) => {
-          const cityLandmarks = await db.select().from(landmarks).where(eq4(landmarks.cityId, city.id));
+          const cityLandmarks = await db.select().from(landmarks).where(eq5(landmarks.cityId, city.id));
           return {
             ...city,
             landmarkCount: cityLandmarks.length
           };
         })
       );
-      res.json(citiesWithStats);
+      return c.json(citiesWithStats);
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch available cities" });
+      return c.json({ error: "Failed to fetch available cities" }, 500);
     }
   });
-  app2.post("/api/admin/generate-city-info", async (req, res) => {
+  app2.post("/api/admin/generate-city-info", async (c) => {
     try {
-      const { query, language } = req.body;
+      const { query, language } = await c.req.json();
       if (!query) {
-        return res.status(400).json({ error: "City query is required" });
+        return c.json({ error: "City query is required" }, 400);
       }
-      const session2 = req.session;
-      if ((!session2 || !session2.userId) && process.env.NODE_ENV === "production") {
-        console.warn("[Admin AI] Unauthorized access blocked in production");
-        return res.status(401).json({ error: "Unauthorized" });
+      const session = c.get("session");
+      if ((!session || !session.get("userId")) && env.NODE_ENV === "production") {
+        return c.json({ error: "Unauthorized" }, 401);
       }
       console.log(`[Admin AI] Generating info for city: ${query}`);
       const cityInfo = await generateCityInfo(query, language || "ko");
-      res.json(cityInfo);
+      return c.json(cityInfo);
     } catch (error) {
       console.error("Failed to generate city info:", error);
-      res.status(500).json({ error: "Failed to generate city info" });
+      return c.json({ error: "Failed to generate city info" }, 500);
     }
   });
-  app2.use("/api/admin", requireRole("admin"));
-  app2.get("/api/admin/cities", async (req, res) => {
+  const adminCallback = new Hono();
+  adminCallback.use("*", requireRole("admin"));
+  adminCallback.get("/cities", async (c) => {
     try {
       const allCities = await db.select().from(cities).orderBy(cities.name);
-      res.json(allCities);
+      return c.json(allCities);
     } catch (error) {
-      console.warn("[Admin] DB fetch failed for cities, falling back to storage:", error);
       try {
         const fallbackCities = await storage.getCities();
-        res.json(fallbackCities);
-      } catch (storageError) {
-        res.status(500).json({ error: "Failed to fetch cities" });
+        return c.json(fallbackCities);
+      } catch (e) {
+        return c.json({ error: "Failed to fetch cities" }, 500);
       }
     }
   });
-  app2.post("/api/admin/cities", async (req, res) => {
+  adminCallback.post("/cities", async (c) => {
     try {
-      const { id, name, country, lat, lng, zoom, cruisePort } = req.body;
-      if (!id || !name || !country || lat === void 0 || lng === void 0) {
-        return res.status(400).json({ error: "Missing required fields" });
-      }
+      const body = await c.req.json();
+      if (!body.id || !body.name || !body.country) return c.json({ error: "Missing fields" }, 400);
       const newCity = await storage.createCity({
-        id,
-        name,
-        country,
-        lat,
-        lng,
-        zoom: zoom || 14,
-        cruisePort: cruisePort || null
+        ...body,
+        zoom: body.zoom || 14,
+        cruisePort: body.cruisePort || null
       });
-      res.status(201).json(newCity);
+      return c.json(newCity, 201);
     } catch (error) {
-      console.error("Admin create city error:", error);
-      if (error.code === "23505") {
-        return res.status(409).json({ error: "City with this ID already exists" });
-      }
-      res.status(500).json({ error: "Failed to create city" });
+      if (error?.code === "23505") return c.json({ error: "City ID exists" }, 409);
+      return c.json({ error: "Failed to create city" }, 500);
     }
   });
-  app2.put("/api/admin/cities/:id", async (req, res) => {
+  adminCallback.put("/cities/:id", async (c) => {
     try {
-      const { id } = req.params;
-      const { name, country, lat, lng, zoom, cruisePort } = req.body;
+      const id = c.req.param("id");
+      const body = await c.req.json();
       const [updated] = await db.update(cities).set({
-        name,
-        country,
-        lat,
-        lng,
-        zoom: zoom || 14,
-        cruisePort: cruisePort || null,
+        ...body,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq4(cities.id, id)).returning();
-      if (!updated) {
-        return res.status(404).json({ error: "City not found" });
-      }
-      res.json(updated);
-    } catch (error) {
-      console.error("Admin update city error:", error);
-      res.status(500).json({ error: "Failed to update city" });
+      }).where(eq5(cities.id, id)).returning();
+      if (!updated) return c.json({ error: "City not found" }, 404);
+      return c.json(updated);
+    } catch (e) {
+      return c.json({ error: "Failed to update city" }, 500);
     }
   });
-  app2.delete("/api/admin/cities/:id", async (req, res) => {
+  adminCallback.delete("/cities/:id", async (c) => {
     try {
-      const { id } = req.params;
-      const cityLandmarks = await db.select().from(landmarks).where(eq4(landmarks.cityId, id));
-      if (cityLandmarks.length > 0) {
-        return res.status(400).json({
-          error: `Cannot delete city with ${cityLandmarks.length} landmarks. Delete landmarks first.`
-        });
-      }
-      const [deleted] = await db.delete(cities).where(eq4(cities.id, id)).returning();
-      if (!deleted) {
-        return res.status(404).json({ error: "City not found" });
-      }
-      res.json({ success: true });
-    } catch (error) {
-      console.error("Admin delete city error:", error);
-      res.status(500).json({ error: "Failed to delete city" });
+      const id = c.req.param("id");
+      const marks = await db.select().from(landmarks).where(eq5(landmarks.cityId, id));
+      if (marks.length > 0) return c.json({ error: "Cannot delete city with landmarks" }, 400);
+      const [deleted] = await db.delete(cities).where(eq5(cities.id, id)).returning();
+      if (!deleted) return c.json({ error: "City not found" }, 404);
+      return c.json({ success: true });
+    } catch (e) {
+      return c.json({ error: "Failed to delete city" }, 500);
     }
   });
-  app2.get("/api/admin/landmarks", async (req, res) => {
+  app2.route("/api/admin", adminCallback);
+  app2.post("/api/payments/create-checkout-session", async (c) => {
     try {
-      const allLandmarks = await db.select().from(landmarks).orderBy(landmarks.name);
-      res.json(allLandmarks);
-    } catch (error) {
-      console.warn("[Admin] DB fetch failed for landmarks, falling back to storage:", error);
-      try {
-        const cityId = req.query.cityId;
-        const fallbackLandmarks = await storage.getLandmarks(cityId);
-        res.json(fallbackLandmarks);
-      } catch (storageError) {
-        res.status(500).json({ error: "Failed to fetch landmarks" });
-      }
-    }
-  });
-  app2.post("/api/admin/landmarks", async (req, res) => {
-    try {
-      const data = req.body;
-      if (!data.id || !data.cityId || !data.name || data.lat === void 0 || data.lng === void 0 || !data.narration) {
-        return res.status(400).json({ error: "Missing required fields" });
-      }
-      const newLandmark = await storage.createLandmark({
-        id: data.id,
-        cityId: data.cityId,
-        name: data.name,
-        lat: data.lat,
-        lng: data.lng,
-        radius: data.radius || 50,
-        narration: data.narration,
-        description: data.description || null,
-        category: data.category || null,
-        detailedDescription: data.detailedDescription || null,
-        photos: data.photos || null,
-        historicalInfo: data.historicalInfo || null,
-        yearBuilt: data.yearBuilt || null,
-        architect: data.architect || null,
-        translations: data.translations || null,
-        openingHours: data.openingHours || null,
-        priceRange: data.priceRange || null,
-        cuisine: data.cuisine || null,
-        reservationUrl: data.reservationUrl || null,
-        phoneNumber: data.phoneNumber || null,
-        menuHighlights: data.menuHighlights || null,
-        restaurantPhotos: data.restaurantPhotos || null,
-        paymentMethods: data.paymentMethods || null
-      });
-      automationService.generatePromotionContent(newLandmark).catch((err) => {
-        console.error("[Dr.'s Engine] \uD64D\uBCF4 \uC5D4\uC9C4 \uC791\uB3D9 \uC911 \uC791\uC740 \uC2E4\uC218\uAC00 \uC788\uC5C8\uB098\uBD10\uC694! \uD558\uC9C0\uB9CC \uBA85\uC18C \uB4F1\uB85D\uC740 \uC131\uACF5\uC785\uB2C8\uB2E4:", err);
-      });
-      res.status(201).json(newLandmark);
-    } catch (error) {
-      console.error("Admin create landmark error:", error);
-      if (error.code === "23505") {
-        return res.status(409).json({ error: "Landmark with this ID already exists" });
-      }
-      res.status(500).json({ error: "Failed to create landmark" });
-    }
-  });
-  app2.put("/api/admin/landmarks/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const data = req.body;
-      const [updated] = await db.update(landmarks).set({
-        cityId: data.cityId,
-        name: data.name,
-        lat: data.lat,
-        lng: data.lng,
-        radius: data.radius || 50,
-        narration: data.narration,
-        description: data.description || null,
-        category: data.category || null,
-        detailedDescription: data.detailedDescription || null,
-        photos: data.photos || null,
-        historicalInfo: data.historicalInfo || null,
-        yearBuilt: data.yearBuilt || null,
-        architect: data.architect || null,
-        translations: data.translations || null,
-        openingHours: data.openingHours || null,
-        priceRange: data.priceRange || null,
-        cuisine: data.cuisine || null,
-        reservationUrl: data.reservationUrl || null,
-        phoneNumber: data.phoneNumber || null,
-        menuHighlights: data.menuHighlights || null,
-        restaurantPhotos: data.restaurantPhotos || null,
-        paymentMethods: data.paymentMethods || null,
-        isPremium: data.isPremium !== void 0 ? data.isPremium : false,
-        price: data.price || null,
-        updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq4(landmarks.id, id)).returning();
-      if (!updated) {
-        return res.status(404).json({ error: "Landmark not found" });
-      }
-      res.json(updated);
-    } catch (error) {
-      console.error("Admin update landmark error:", error);
-      res.status(500).json({ error: "Failed to update landmark" });
-    }
-  });
-  app2.delete("/api/admin/landmarks/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const [deleted] = await db.delete(landmarks).where(eq4(landmarks.id, id)).returning();
-      if (!deleted) {
-        return res.status(404).json({ error: "Landmark not found" });
-      }
-      res.json({ success: true });
-    } catch (error) {
-      console.error("Admin delete landmark error:", error);
-      res.status(500).json({ error: "Failed to delete landmark" });
-    }
-  });
-  app2.get("/api/admin/stats", async (req, res) => {
-    try {
-      let allCities, allLandmarks;
-      try {
-        allCities = await db.select().from(cities);
-        allLandmarks = await db.select().from(landmarks);
-      } catch (dbError) {
-        console.warn("[Admin] DB fetch failed for stats, falling back to storage:", dbError);
-        allCities = await storage.getCities();
-        allLandmarks = await storage.getLandmarks();
-      }
-      const categories = {};
-      for (const l of allLandmarks) {
-        const cat = l.category || "Uncategorized";
-        categories[cat] = (categories[cat] || 0) + 1;
-      }
-      res.json({
-        cities: allCities.length,
-        landmarks: allLandmarks.length,
-        categories
-      });
-    } catch (error) {
-      console.error("Admin stats error:", error);
-      res.status(500).json({ error: "Failed to fetch stats" });
-    }
-  });
-  app2.get("/api/admin/ai/discover", async (req, res) => {
-    try {
-      const { cityId } = req.query;
-      if (!cityId || typeof cityId !== "string") {
-        return res.status(400).json({ error: "\uB3C4\uC2DC ID(cityId)\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." });
-      }
-      let city;
-      try {
-        const [dbCity] = await db.select().from(cities).where(eq4(cities.id, cityId));
-        city = dbCity;
-      } catch (dbError) {
-        console.warn(`[AI DB Manager] DB \uC5F0\uACB0 \uBD88\uC548\uC815, storage\uC5D0\uC11C \uB3C4\uC2DC \uC815\uBCF4\uB97C \uCC3E\uC2B5\uB2C8\uB2E4: ${cityId}`);
-        city = await storage.getCity(cityId);
-      }
-      if (!city) {
-        return res.status(404).json({ error: "\uD574\uB2F9 \uB3C4\uC2DC\uB97C \uCC3E\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4." });
-      }
-      console.log(`[Automation Doctor] Discovering landmarks for ${city.name}...`);
-      const discoveredLandmarks = await automationService.discoverLandmarks(city.name);
-      let existingLandmarks;
-      try {
-        existingLandmarks = await db.select().from(landmarks).where(eq4(landmarks.cityId, cityId));
-      } catch (dbError) {
-        console.warn(`[AI DB Manager] DB \uC5F0\uACB0 \uBD88\uC548\uC815, storage\uC5D0\uC11C \uAE30\uC874 \uBA85\uC18C\uB97C \uC870\uD68C\uD569\uB2C8\uB2E4.`);
-        existingLandmarks = await storage.getLandmarks(cityId);
-      }
-      const result = discoveredLandmarks.map((discovered) => {
-        const duplicate = existingLandmarks.find(
-          (existing) => existing.name.toLowerCase().includes(discovered.name.toLowerCase()) || discovered.name.toLowerCase().includes(existing.name.toLowerCase())
-        );
-        return {
-          ...discovered,
-          isDuplicate: !!duplicate,
-          existingLandmark: duplicate || null
-        };
-      });
-      res.json(result);
-    } catch (error) {
-      console.error("[Automation Doctor] AI \uD0D0\uC0AC \uC911 \uC624\uB958:", error);
-      res.status(500).json({ error: "AI \uD0D0\uC0AC \uB3C4\uC911 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4. \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4\uD574\uC8FC\uC138\uC694." });
-    }
-  });
-  app2.post("/api/admin/ai/apply", async (req, res) => {
-    try {
-      const { cityId, selectedLandmarks } = req.body;
-      if (!cityId || !selectedLandmarks || !Array.isArray(selectedLandmarks)) {
-        return res.status(400).json({ error: "Invalid request data" });
-      }
-      const results = [];
-      for (const data of selectedLandmarks) {
-        const id = data.id || `${cityId}_${data.name.toLowerCase().replace(/\s+/g, "_")}_${Date.now()}`;
-        const [upserted] = await db.insert(landmarks).values({
-          id,
-          cityId,
-          name: data.name,
-          lat: data.lat,
-          lng: data.lng,
-          radius: 50,
-          narration: data.narration,
-          description: data.description || null,
-          category: data.category || null,
-          detailedDescription: data.detailedDescription || null,
-          historicalInfo: data.historicalInfo || null
-        }).onConflictDoUpdate({
-          target: landmarks.id,
-          set: {
-            name: data.name,
-            lat: data.lat,
-            lng: data.lng,
-            narration: data.narration,
-            description: data.description || null,
-            category: data.category || null,
-            detailedDescription: data.detailedDescription || null,
-            historicalInfo: data.historicalInfo || null,
-            updatedAt: /* @__PURE__ */ new Date()
-          }
-        }).returning();
-        results.push(upserted);
-        automationService.generatePromotionContent(upserted).catch((err) => {
-          console.error("[Admin AI] Background marketing generation failed:", err);
-        });
-      }
-      res.json({ success: true, count: results.length, data: results });
-    } catch (error) {
-      console.error("Admin AI apply error:", error);
-      res.status(500).json({ error: "\uB370\uC774\uD130 \uC801\uC6A9 \uC911 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4." });
-    }
-  });
-  app2.post("/api/payments/create-checkout-session", async (req, res) => {
-    try {
-      const { landmarkId, creatorId, userId, amount, name } = req.body;
-      if (!landmarkId || !amount) {
-        return res.status(400).json({ error: "\uD544\uC218 \uACB0\uC81C \uC815\uBCF4\uAC00 \uB204\uB77D\uB418\uC5C8\uC2B5\uB2C8\uB2E4." });
-      }
-      const session2 = await stripe.checkout.sessions.create({
+      const { landmarkId, creatorId, userId, amount, name } = await c.req.json();
+      if (!landmarkId || !amount) return c.json({ error: "Missing info" }, 400);
+      const stripe = getStripe();
+      if (!stripe) return c.json({ error: "Stripe not configured" }, 503);
+      const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: [{
           price_data: {
             currency: "eur",
-            // 우리 플랫폼은 유로화(EUR)를 기본으로 합니다.
-            product_data: {
-              name: name || "\uAC00\uC774\uB4DC \uD328\uD0A4\uC9C0 \uAD6C\uB9E4"
-            },
+            product_data: { name: name || "Guide Package" },
             unit_amount: Math.round(amount * 100)
-            // Stripe는 센트(cent) 단위를 사용하므로 100을 곱합니다.
           },
           quantity: 1
         }],
         mode: "payment",
-        success_url: `${req.headers.origin}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/payment/cancel`,
-        metadata: {
-          landmarkId,
-          creatorId,
-          userId,
-          amount: amount.toString()
-        }
+        success_url: `${c.req.header("origin")}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${c.req.header("origin")}/payment/cancel`,
+        metadata: { landmarkId, creatorId, userId, amount: amount.toString() }
       });
-      res.json({ url: session2.url });
-    } catch (error) {
-      console.error("[\uCF54\uB2E4\uB9AC\uBD80\uC7A5] \uACB0\uC81C \uC138\uC158 \uC0DD\uC131 \uC911 \uC5D0\uB7EC \uBC1C\uC0DD:", error);
-      res.status(500).json({ error: "\uACB0\uC81C \uC138\uC158\uC744 \uC0DD\uC131\uD558\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4." });
+      return c.json({ url: session.url });
+    } catch (e) {
+      return c.json({ error: "Payment creation failed" }, 500);
     }
   });
-  app2.post("/api/payments/verify", async (req, res) => {
+  app2.post("/api/payments/verify", async (c) => {
+    return c.json({ success: true, message: "Verification simulation" });
+  });
+  adminCallback.post("/landmarks", async (c) => {
     try {
-      const { transactionId, userId, amount, creatorId } = req.body;
-      await db.transaction(async (tx) => {
-        await tx.insert(transactions).values({
-          userId,
-          targetId: "route-or-landmark-id",
-          amount,
-          status: "completed",
-          providerData: { verifiedAt: (/* @__PURE__ */ new Date()).toISOString() }
-        });
-        const creatorShare = amount * 0.7;
-        const [existing] = await tx.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, creatorId));
-        if (existing) {
-          await tx.update(creatorEarnings).set({
-            totalBalance: sql6`${creatorEarnings.totalBalance} + ${creatorShare}`,
-            totalEarned: sql6`${creatorEarnings.totalEarned} + ${creatorShare}`,
-            updatedAt: /* @__PURE__ */ new Date()
-          }).where(eq4(creatorEarnings.userId, creatorId));
-        } else {
-          await tx.insert(creatorEarnings).values({
-            userId: creatorId,
-            totalBalance: creatorShare,
-            totalEarned: creatorShare
-          });
-        }
+      const body = await c.req.json();
+      if (!body.id || !body.cityId || !body.name || !body.lat || !body.lng) return c.json({ error: "Missing fields" }, 400);
+      const newLandmark = await storage.createLandmark({
+        ...body,
+        radius: body.radius || 50
       });
-      res.json({ success: true, message: "\uC218\uC775 \uBC30\uBD84\uC774 \uC644\uB8CC\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uCF54\uB2E4\uB9AC\uBD80\uC7A5\uB2D8\uC774 \uD761\uC871\uD574\uD558\uC2ED\uB2C8\uB2E4." });
-    } catch (error) {
-      console.error("[Critical Error] Payment Verification Failed:", error);
-      res.status(500).json({ error: "\uACB0\uC81C \uAC80\uC99D \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4." });
-    }
-  });
-  const upload = multer({
-    storage: multer.memoryStorage(),
-    limits: { fileSize: 5 * 1024 * 1024 }
-    // 5MB limit
-  });
-  const arrayToString = (arr) => {
-    if (!arr || !Array.isArray(arr)) return "";
-    return arr.join(", ");
-  };
-  const stringToArray = (str) => {
-    if (!str || typeof str !== "string") return null;
-    const trimmed = str.trim();
-    if (!trimmed) return null;
-    return trimmed.split(",").map((s) => s.trim()).filter(Boolean);
-  };
-  const safeJsonParse = (str) => {
-    if (!str || typeof str !== "string") return null;
-    try {
-      return JSON.parse(str);
-    } catch {
-      return null;
-    }
-  };
-  app2.get("/api/admin/template", async (req, res) => {
-    try {
-      const type = req.query.type || "cities";
-      const format = req.query.format || "xlsx";
-      let data = [];
-      let filename = "";
-      if (type === "cities") {
-        filename = `cities_template.${format}`;
-        data = [{
-          id: "example_city",
-          name: "Example City",
-          country: "Country Name",
-          lat: 41.9028,
-          lng: 12.4964,
-          zoom: 14,
-          cruisePort: ""
-        }];
-      } else {
-        filename = `landmarks_template.${format}`;
-        data = [{
-          id: "example_landmark",
-          cityId: "example_city",
-          name: "Example Landmark",
-          lat: 41.9028,
-          lng: 12.4964,
-          radius: 50,
-          narration: "Audio narration text that will be spoken when user approaches",
-          description: "Short description",
-          category: "Monument",
-          detailedDescription: "Detailed description for the info panel",
-          photos: "https://example.com/photo1.jpg, https://example.com/photo2.jpg",
-          historicalInfo: "Historical information",
-          yearBuilt: "1900",
-          architect: "Architect Name",
-          openingHours: "Mon-Sun: 9:00-18:00",
-          priceRange: "\u20AC\u20AC",
-          cuisine: "",
-          reservationUrl: "",
-          phoneNumber: "",
-          menuHighlights: "",
-          paymentMethods: "Card, Cash",
-          translations: ""
-        }];
-      }
-      const ws = XLSX.utils.json_to_sheet(data);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, type === "cities" ? "Cities" : "Landmarks");
-      if (format === "csv") {
-        const csv = XLSX.utils.sheet_to_csv(ws);
-        res.setHeader("Content-Type", "text/csv");
-        res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
-        res.send(csv);
-      } else {
-        const buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
-        res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
-        res.send(buffer);
-      }
-    } catch (error) {
-      console.error("Template download error:", error);
-      res.status(500).json({ error: "Failed to generate template" });
-    }
-  });
-  app2.get("/api/admin/export", async (req, res) => {
-    try {
-      const type = req.query.type || "cities";
-      const format = req.query.format || "xlsx";
-      let data = [];
-      let filename = "";
-      if (type === "cities") {
-        const allCities = await storage.getCities();
-        filename = `cities_export_${Date.now()}.${format}`;
-        data = allCities.map((c) => ({
-          id: c.id,
-          name: c.name,
-          country: c.country,
-          lat: c.lat,
-          lng: c.lng,
-          zoom: c.zoom || 14,
-          cruisePort: c.cruisePort ? JSON.stringify(c.cruisePort) : ""
-        }));
-      } else {
-        const allLandmarks = await storage.getLandmarks();
-        filename = `landmarks_export_${Date.now()}.${format}`;
-        data = allLandmarks.map((l) => ({
-          id: l.id,
-          cityId: l.cityId,
-          name: l.name,
-          lat: l.lat,
-          lng: l.lng,
-          radius: l.radius,
-          narration: l.narration,
-          description: l.description || "",
-          category: l.category || "",
-          detailedDescription: l.detailedDescription || "",
-          photos: arrayToString(l.photos),
-          historicalInfo: l.historicalInfo || "",
-          yearBuilt: l.yearBuilt || "",
-          architect: l.architect || "",
-          openingHours: l.openingHours || "",
-          priceRange: l.priceRange || "",
-          cuisine: l.cuisine || "",
-          reservationUrl: l.reservationUrl || "",
-          phoneNumber: l.phoneNumber || "",
-          menuHighlights: arrayToString(l.menuHighlights),
-          paymentMethods: arrayToString(l.paymentMethods),
-          translations: l.translations ? JSON.stringify(l.translations) : ""
-        }));
-      }
-      const ws = XLSX.utils.json_to_sheet(data);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, type === "cities" ? "Cities" : "Landmarks");
-      if (format === "csv") {
-        const csv = XLSX.utils.sheet_to_csv(ws);
-        res.setHeader("Content-Type", "text/csv");
-        res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
-        res.send(csv);
-      } else {
-        const buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
-        res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
-        res.send(buffer);
-      }
-    } catch (error) {
-      console.error("Export error:", error);
-      res.status(500).json({ error: "Failed to export data" });
-    }
-  });
-  app2.post("/api/admin/import", upload.single("file"), async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
-      }
-      const type = req.body.type;
-      if (!type || !["cities", "landmarks"].includes(type)) {
-        return res.status(400).json({ error: "Invalid type. Must be 'cities' or 'landmarks'" });
-      }
-      const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
-      const sheetName = workbook.SheetNames[0];
-      const sheet = workbook.Sheets[sheetName];
-      const rows = XLSX.utils.sheet_to_json(sheet);
-      if (rows.length === 0) {
-        return res.status(400).json({ error: "File is empty or has no valid data" });
-      }
-      if (rows.length > 5e3) {
-        return res.status(400).json({ error: "Too many rows. Maximum 5000 rows allowed" });
-      }
-      const errors = [];
-      let successCount = 0;
-      if (type === "cities") {
-        for (let i = 0; i < rows.length; i++) {
-          const row = rows[i];
-          const rowNum = i + 2;
-          if (!row.id || typeof row.id !== "string") {
-            errors.push({ row: rowNum, message: "Missing or invalid id" });
-            continue;
-          }
-          if (!row.name || typeof row.name !== "string") {
-            errors.push({ row: rowNum, message: "Missing or invalid name" });
-            continue;
-          }
-          if (!row.country || typeof row.country !== "string") {
-            errors.push({ row: rowNum, message: "Missing or invalid country" });
-            continue;
-          }
-          const lat = parseFloat(row.lat);
-          const lng = parseFloat(row.lng);
-          if (isNaN(lat) || lat < -90 || lat > 90) {
-            errors.push({ row: rowNum, message: "Invalid latitude (must be -90 to 90)" });
-            continue;
-          }
-          if (isNaN(lng) || lng < -180 || lng > 180) {
-            errors.push({ row: rowNum, message: "Invalid longitude (must be -180 to 180)" });
-            continue;
-          }
-          try {
-            const existing = await db.select().from(cities).where(eq4(cities.id, row.id.toString().trim()));
-            const cityData = {
-              id: row.id.toString().trim(),
-              name: row.name.toString().trim(),
-              country: row.country.toString().trim(),
-              lat,
-              lng,
-              zoom: parseInt(row.zoom) || 14,
-              cruisePort: safeJsonParse(row.cruisePort)
-            };
-            if (existing.length > 0) {
-              await db.update(cities).set({ ...cityData, updatedAt: /* @__PURE__ */ new Date() }).where(eq4(cities.id, cityData.id));
-            } else {
-              await db.insert(cities).values(cityData);
-            }
-            successCount++;
-          } catch (dbError) {
-            errors.push({ row: rowNum, message: `Database error: ${dbError.message}` });
-          }
-        }
-      } else {
-        for (let i = 0; i < rows.length; i++) {
-          const row = rows[i];
-          const rowNum = i + 2;
-          if (!row.id || typeof row.id !== "string") {
-            errors.push({ row: rowNum, message: "Missing or invalid id" });
-            continue;
-          }
-          if (!row.cityId) {
-            errors.push({ row: rowNum, message: "Missing cityId" });
-            continue;
-          }
-          if (!row.name) {
-            errors.push({ row: rowNum, message: "Missing name" });
-            continue;
-          }
-          if (!row.narration) {
-            errors.push({ row: rowNum, message: "Missing narration" });
-            continue;
-          }
-          const lat = parseFloat(row.lat);
-          const lng = parseFloat(row.lng);
-          const radius = parseInt(row.radius) || 50;
-          if (isNaN(lat) || lat < -90 || lat > 90) {
-            errors.push({ row: rowNum, message: "Invalid latitude" });
-            continue;
-          }
-          if (isNaN(lng) || lng < -180 || lng > 180) {
-            errors.push({ row: rowNum, message: "Invalid longitude" });
-            continue;
-          }
-          if (radius <= 0) {
-            errors.push({ row: rowNum, message: "Radius must be positive" });
-            continue;
-          }
-          const cityExists = await db.select().from(cities).where(eq4(cities.id, row.cityId.toString().trim()));
-          if (cityExists.length === 0) {
-            errors.push({ row: rowNum, message: `City '${row.cityId}' does not exist` });
-            continue;
-          }
-          try {
-            const existing = await db.select().from(landmarks).where(eq4(landmarks.id, row.id.toString().trim()));
-            const landmarkData = {
-              id: row.id.toString().trim(),
-              cityId: row.cityId.toString().trim(),
-              name: row.name.toString().trim(),
-              lat,
-              lng,
-              radius,
-              narration: row.narration.toString(),
-              description: row.description?.toString() || null,
-              category: row.category?.toString() || null,
-              detailedDescription: row.detailedDescription?.toString() || null,
-              photos: stringToArray(row.photos?.toString()),
-              historicalInfo: row.historicalInfo?.toString() || null,
-              yearBuilt: row.yearBuilt?.toString() || null,
-              architect: row.architect?.toString() || null,
-              openingHours: row.openingHours?.toString() || null,
-              priceRange: row.priceRange?.toString() || null,
-              cuisine: row.cuisine?.toString() || null,
-              reservationUrl: row.reservationUrl?.toString() || null,
-              phoneNumber: row.phoneNumber?.toString() || null,
-              menuHighlights: stringToArray(row.menuHighlights?.toString()),
-              paymentMethods: stringToArray(row.paymentMethods?.toString()),
-              translations: safeJsonParse(row.translations?.toString())
-            };
-            if (existing.length > 0) {
-              await db.update(landmarks).set({ ...landmarkData, updatedAt: /* @__PURE__ */ new Date() }).where(eq4(landmarks.id, landmarkData.id));
-            } else {
-              await db.insert(landmarks).values(landmarkData);
-            }
-            successCount++;
-          } catch (dbError) {
-            errors.push({ row: rowNum, message: `Database error: ${dbError.message}` });
-          }
-        }
-      }
-      res.json({
-        success: true,
-        imported: successCount,
-        total: rows.length,
-        errors: errors.length > 0 ? errors : void 0
+      automationService.generatePromotionContent(newLandmark).catch((err) => {
+        console.error("Marketing generation failed:", err);
       });
+      return c.json(newLandmark, 201);
     } catch (error) {
-      console.error("Import error:", error);
-      res.status(500).json({ error: error.message || "Failed to import data" });
+      if (error?.code === "23505") return c.json({ error: "Landmark ID exists" }, 409);
+      return c.json({ error: "Failed to create landmark" }, 500);
     }
   });
-  app2.post("/api/ai/recommend-tour", async (req, res) => {
+  adminCallback.put("/landmarks/:id", async (c) => {
     try {
-      const { cityId, language, userPosition, filterType } = req.body;
-      if (!cityId) {
-        return res.status(400).json({ error: "City ID is required" });
-      }
-      let landmarks2 = await storage.getLandmarks(cityId);
-      if (filterType && filterType !== "all") {
-        switch (filterType) {
-          case "landmarks":
-            landmarks2 = landmarks2.filter(
-              (l) => l.category !== "Activity" && l.category !== "Restaurant" && l.category !== "Gift Shop"
-            );
-            break;
-          case "restaurants":
-            landmarks2 = landmarks2.filter((l) => l.category === "Restaurant");
-            break;
-          case "activities":
-            landmarks2 = landmarks2.filter((l) => l.category === "Activity");
-            break;
-        }
-      }
-      if (landmarks2.length === 0) {
-        return res.status(404).json({ error: "No landmarks found for this city with the selected filter" });
-      }
-      const recommendation = await recommendTourItinerary(
-        landmarks2,
-        userPosition,
-        language || "en"
-      );
-      const validLandmarkIds = new Set(landmarks2.map((l) => l.id));
-      const invalidIds = recommendation.itinerary.map((item) => item.landmarkId).filter((id) => !validLandmarkIds.has(id));
-      if (invalidIds.length > 0) {
-        console.error("AI recommended invalid landmark IDs:", invalidIds);
-        return res.status(500).json({
-          error: "AI recommendation contains invalid landmarks",
-          details: invalidIds
-        });
-      }
-      res.json(recommendation);
-    } catch (error) {
-      console.error("AI recommendation error:", error);
-      const errorMessage = error.message || "Failed to generate AI recommendation";
-      res.status(500).json({ error: errorMessage });
+      const id = c.req.param("id");
+      const body = await c.req.json();
+      const [updated] = await db.update(landmarks).set({
+        ...body,
+        updatedAt: /* @__PURE__ */ new Date()
+      }).where(eq5(landmarks.id, id)).returning();
+      if (!updated) return c.json({ error: "Landmark not found" }, 404);
+      return c.json(updated);
+    } catch (e) {
+      return c.json({ error: "Failed to update landmark" }, 500);
     }
   });
-  app2.use("/uploads/audio", express.static(path4.join(process.cwd(), "uploads", "audio")));
-  app2.get("/api/audio/voices", (req, res) => {
-    res.json({
-      voices: CLOVA_VOICES,
-      defaults: DEFAULT_CLOVA_VOICE_BY_LANGUAGE
-    });
-  });
-  app2.post("/api/audio/generate", async (req, res) => {
+  adminCallback.delete("/landmarks/:id", async (c) => {
     try {
-      const { landmarkId, language, voiceId, text: providedText } = req.body;
-      if (!landmarkId) {
-        return res.status(400).json({ error: "Landmark ID is required" });
-      }
-      const landmark = await storage.getLandmark(landmarkId);
-      if (!landmark) {
-        return res.status(404).json({ error: "Landmark not found" });
-      }
-      const lang = language || "en";
-      let text2 = providedText || landmark.narration || "";
-      if (!providedText && landmark.translations && landmark.translations[lang]) {
-        text2 = landmark.translations[lang].narration || landmark.translations[lang].description || text2;
-      }
-      if (!text2) {
-        return res.status(400).json({ error: "No narration text available for this landmark" });
-      }
-      const selectedVoice = voiceId && CLOVA_VOICES[voiceId] ? voiceId : DEFAULT_CLOVA_VOICE_BY_LANGUAGE[lang] || "clara";
-      const existingAudio = await storage.getAudio(landmarkId, lang);
-      if (existingAudio && existingAudio.voiceId === selectedVoice) {
-        return res.json(existingAudio);
-      }
-      const audioResult = await generateAndSaveClovaTTS(landmarkId, text2, lang, selectedVoice);
-      const duration = Math.ceil(text2.length / 15);
-      const savedAudio = await storage.saveAudio({
-        landmarkId,
-        language: lang,
-        audioUrl: audioResult.audioUrl,
-        duration,
-        sizeBytes: audioResult.sizeBytes,
-        checksum: audioResult.checksum,
-        voiceId: audioResult.voiceId
-      });
-      res.json(savedAudio);
-    } catch (error) {
-      console.error("CLOVA Audio generation error:", error);
-      res.status(500).json({ error: error.message || "Failed to generate audio with CLOVA Voice" });
+      const id = c.req.param("id");
+      const [deleted] = await db.delete(landmarks).where(eq5(landmarks.id, id)).returning();
+      if (!deleted) return c.json({ error: "Landmark not found" }, 404);
+      return c.json({ success: true });
+    } catch (e) {
+      return c.json({ error: "Failed to delete landmark" }, 500);
     }
   });
-  app2.get("/api/audio/:landmarkId", async (req, res) => {
-    try {
-      const { landmarkId } = req.params;
-      const language = req.query.language || "en";
-      const audio = await storage.getAudio(landmarkId, language);
-      if (!audio) {
-        return res.status(404).json({ error: "Audio not found" });
-      }
-      res.json(audio);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch audio" });
-    }
-  });
-  app2.get("/api/audio/city/:cityId", async (req, res) => {
-    try {
-      const { cityId } = req.params;
-      const audioList = await storage.getAudioByCity(cityId);
-      res.json(audioList);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch city audio" });
-    }
-  });
-  app2.post("/api/audio/batch-generate", async (req, res) => {
-    try {
-      const { cityId, language, voiceId } = req.body;
-      if (!cityId) {
-        return res.status(400).json({ error: "City ID is required" });
-      }
-      const landmarkList = await storage.getLandmarks(cityId);
-      const lang = language || "en";
-      const results = [];
-      const errors = [];
-      const selectedVoice = voiceId && CLOVA_VOICES[voiceId] ? voiceId : DEFAULT_CLOVA_VOICE_BY_LANGUAGE[lang] || "clara";
-      for (const landmark of landmarkList) {
-        try {
-          const existing = await storage.getAudio(landmark.id, lang);
-          if (existing && existing.voiceId === selectedVoice) {
-            results.push({ landmarkId: landmark.id, status: "exists", audio: existing });
-            continue;
-          }
-          let text2 = landmark.narration || "";
-          if (landmark.translations && landmark.translations[lang]) {
-            text2 = landmark.translations[lang].narration || landmark.translations[lang].description || text2;
-          }
-          if (!text2) {
-            errors.push({ landmarkId: landmark.id, error: "No narration text available" });
-            continue;
-          }
-          const audioResult = await generateAndSaveClovaTTS(landmark.id, text2, lang, selectedVoice);
-          const duration = Math.ceil(text2.length / 15);
-          const saved = await storage.saveAudio({
-            landmarkId: landmark.id,
-            language: lang,
-            audioUrl: audioResult.audioUrl,
-            duration,
-            sizeBytes: audioResult.sizeBytes,
-            checksum: audioResult.checksum,
-            voiceId: audioResult.voiceId
-          });
-          results.push({ landmarkId: landmark.id, status: "generated", audio: saved });
-        } catch (err) {
-          errors.push({ landmarkId: landmark.id, error: err.message });
-        }
-      }
-      res.json({
-        total: landmarkList.length,
-        generated: results.filter((r) => r.status === "generated").length,
-        existing: results.filter((r) => r.status === "exists").length,
-        errors: errors.length,
-        results,
-        errorDetails: errors.length > 0 ? errors : void 0
-      });
-    } catch (error) {
-      res.status(500).json({ error: error.message || "Failed to batch generate audio with CLOVA Voice" });
-    }
-  });
-  app2.use("/audio/clova", express.static(path4.join(process.cwd(), "public", "audio", "clova")));
-  app2.get("/api/tts/clova/voices", async (req, res) => {
-    try {
-      const { CLOVA_VOICES: CLOVA_VOICES2, getClovaVoicesForLanguage: getClovaVoicesForLanguage2, DEFAULT_CLOVA_VOICE_BY_LANGUAGE: DEFAULT_CLOVA_VOICE_BY_LANGUAGE2 } = await Promise.resolve().then(() => (init_clova(), clova_exports));
-      const language = req.query.language;
-      if (language) {
-        const voicesForLang = getClovaVoicesForLanguage2(language);
-        const voiceDetails = voicesForLang.map((id) => ({
-          id,
-          ...CLOVA_VOICES2[id]
-        }));
-        return res.json({ voices: voiceDetails, default: DEFAULT_CLOVA_VOICE_BY_LANGUAGE2[language] || "nara" });
-      }
-      res.json({
-        voices: CLOVA_VOICES2,
-        defaults: DEFAULT_CLOVA_VOICE_BY_LANGUAGE2
-      });
-    } catch (error) {
-      res.status(500).json({ error: error.message || "Failed to get CLOVA voices" });
-    }
-  });
-  app2.post("/api/tts/clova/generate", async (req, res) => {
+  app2.post("/api/tts/clova/generate", async (c) => {
     try {
       const { generateClovaTTS: generateClovaTTS2, DEFAULT_CLOVA_VOICE_BY_LANGUAGE: DEFAULT_CLOVA_VOICE_BY_LANGUAGE2 } = await Promise.resolve().then(() => (init_clova(), clova_exports));
-      const { text: text2, voice, language, speed, pitch, volume } = req.body;
-      if (!text2) {
-        return res.status(400).json({ error: "Text is required" });
-      }
+      const { text: text2, voice, language, speed, pitch, volume } = await c.req.json();
+      if (!text2) return c.json({ error: "Text is required" }, 400);
       const selectedVoice = voice || DEFAULT_CLOVA_VOICE_BY_LANGUAGE2[language || "ko"] || "nara";
-      const result = await generateClovaTTS2(
-        text2,
-        selectedVoice,
-        speed || 0,
-        pitch || 0,
-        volume || 0
-      );
-      res.set({
-        "Content-Type": result.contentType,
-        "Content-Length": result.audioBuffer.length,
-        "X-Voice-Id": result.voiceId
+      const result = await generateClovaTTS2(text2, selectedVoice, speed || 0, pitch || 0, volume || 0);
+      const uint8 = new Uint8Array(result.audioBuffer);
+      return new Response(uint8, {
+        headers: {
+          "Content-Type": result.contentType,
+          "Content-Length": result.audioBuffer.length.toString(),
+          "X-Voice-Id": result.voiceId
+        }
       });
-      res.send(result.audioBuffer);
-    } catch (error) {
-      console.error("CLOVA TTS error:", error);
-      res.status(500).json({ error: error.message || "Failed to generate CLOVA TTS" });
+    } catch (e) {
+      return c.json({ error: e.message || "TTS Failed" }, 500);
     }
   });
-  app2.post("/api/tts/openai/generate", async (req, res) => {
+  app2.post("/api/tts/openai/generate", async (c) => {
     try {
       const { generateLandmarkAudio: generateLandmarkAudio2 } = await Promise.resolve().then(() => (init_openai(), openai_exports));
-      const { text: text2, voice, language } = req.body;
-      if (!text2) {
-        return res.status(400).json({ error: "Text is required" });
-      }
-      const result = await generateLandmarkAudio2(
-        "streaming-tts",
-        text2,
-        language || "en",
-        voice
-      );
-      const filePath = path4.join(process.cwd(), result.audioUrl.startsWith("/") ? result.audioUrl.slice(1) : result.audioUrl);
-      const audioBuffer = fs4.readFileSync(filePath);
-      res.set({
-        "Content-Type": "audio/mpeg",
-        "Content-Length": audioBuffer.length,
-        "X-Voice-Id": result.voiceId
-      });
-      res.send(audioBuffer);
-    } catch (error) {
-      console.error("OpenAI TTS error:", error);
-      res.status(500).json({ error: error.message || "Failed to generate OpenAI TTS" });
-    }
-  });
-  app2.post("/api/tts/clova/landmark", async (req, res) => {
-    try {
-      const { generateAndSaveClovaTTS: generateAndSaveClovaTTS2, DEFAULT_CLOVA_VOICE_BY_LANGUAGE: DEFAULT_CLOVA_VOICE_BY_LANGUAGE2 } = await Promise.resolve().then(() => (init_clova(), clova_exports));
-      const { landmarkId, language, voice } = req.body;
-      if (!landmarkId) {
-        return res.status(400).json({ error: "Landmark ID is required" });
-      }
-      const landmark = await storage.getLandmark(landmarkId);
-      if (!landmark) {
-        return res.status(404).json({ error: "Landmark not found" });
-      }
-      const lang = language || "ko";
-      let text2 = landmark.narration;
-      if (landmark.translations && landmark.translations[lang]) {
-        text2 = landmark.translations[lang].narration || text2;
-      }
-      const result = await generateAndSaveClovaTTS2(landmarkId, text2, lang, voice);
-      res.json({
-        landmarkId,
-        language: lang,
-        ...result
-      });
-    } catch (error) {
-      console.error("CLOVA landmark TTS error:", error);
-      res.status(500).json({ error: error.message || "Failed to generate CLOVA TTS for landmark" });
-    }
-  });
-  app2.post("/api/admin/generate-audio-batch", async (req, res) => {
-    try {
-      const { generateAndSaveClovaTTS: generateAndSaveClovaTTS2, DEFAULT_CLOVA_VOICE_BY_LANGUAGE: DEFAULT_CLOVA_VOICE_BY_LANGUAGE2 } = await Promise.resolve().then(() => (init_clova(), clova_exports));
-      const { landmarkIds, languages, voice } = req.body;
-      if (!landmarkIds || !Array.isArray(landmarkIds) || landmarkIds.length === 0) {
-        return res.status(400).json({ error: "landmarkIds array is required" });
-      }
-      const targetLanguages = languages && Array.isArray(languages) ? languages : ["ko"];
-      const results = [];
-      const errors = [];
-      for (const landmarkId of landmarkIds) {
-        const landmark = await storage.getLandmark(landmarkId);
-        if (!landmark) {
-          errors.push({ landmarkId, error: "Landmark not found" });
-          continue;
+      const { text: text2, voice, language } = await c.req.json();
+      if (!text2) return c.json({ error: "Text is required" }, 400);
+      const result = await generateLandmarkAudio2("streaming-tts", text2, language || "en", voice);
+      const fs2 = await import("fs");
+      const path3 = await import("path");
+      const filePath = path3.join(process.cwd(), result.audioUrl.startsWith("/") ? result.audioUrl.slice(1) : result.audioUrl);
+      const audioBuffer = fs2.readFileSync(filePath);
+      const uint8 = new Uint8Array(audioBuffer);
+      return new Response(uint8, {
+        headers: {
+          "Content-Type": "audio/mpeg",
+          "X-Voice-Id": result.voiceId
         }
-        for (const lang of targetLanguages) {
-          try {
-            let text2 = landmark.detailedDescription || landmark.narration || landmark.description || "";
-            if (landmark.translations && landmark.translations[lang]) {
-              const trans = landmark.translations[lang];
-              text2 = trans.detailedDescription || trans.narration || trans.description || text2;
-            }
-            if (!text2 || text2.trim().length === 0) {
-              errors.push({ landmarkId, language: lang, error: "No text available" });
-              continue;
-            }
-            const selectedVoice = voice || DEFAULT_CLOVA_VOICE_BY_LANGUAGE2[lang] || "nara";
-            const result = await generateAndSaveClovaTTS2(landmarkId, text2, lang, selectedVoice);
-            results.push({
-              landmarkId,
-              landmarkName: landmark.name,
-              language: lang,
-              ...result
-            });
-          } catch (err) {
-            errors.push({ landmarkId, language: lang, error: err.message });
-          }
-        }
-      }
-      res.json({
-        success: true,
-        generated: results.length,
-        failed: errors.length,
-        results,
-        errors
       });
-    } catch (error) {
-      console.error("Batch CLOVA TTS error:", error);
-      res.status(500).json({ error: error.message || "Failed to generate batch audio" });
+    } catch (e) {
+      return c.json({ error: e.message || "OpenAI TTS Failed" }, 500);
     }
   });
-  app2.get("/api/admin/audio-status", async (req, res) => {
+  const tourLeader = new Hono();
+  tourLeader.get("/schedules", async (c) => {
     try {
-      const { cityId, language } = req.query;
-      const audioDir = path4.join(process.cwd(), "public", "audio", "clova");
-      const allLandmarks = await storage.getLandmarks(cityId);
-      const targetLang = language || "ko";
-      const status = allLandmarks.map((landmark) => {
-        const possibleFiles = [
-          `${landmark.id}_${targetLang}_nara.mp3`,
-          `${landmark.id}_${targetLang}_clara.mp3`,
-          `${landmark.id}_${targetLang}_ntomoko.mp3`,
-          `${landmark.id}_${targetLang}_meimei.mp3`,
-          `${landmark.id}_${targetLang}_carmen.mp3`
-        ];
-        let hasAudio = false;
-        let audioUrl = null;
-        for (const filename of possibleFiles) {
-          const filePath = path4.join(audioDir, filename);
-          if (fs4.existsSync(filePath)) {
-            hasAudio = true;
-            audioUrl = `/audio/clova/${filename}`;
-            break;
-          }
-        }
-        return {
-          landmarkId: landmark.id,
-          landmarkName: landmark.name,
-          category: landmark.category,
-          language: targetLang,
-          hasAudio,
-          audioUrl
-        };
-      });
-      const generated = status.filter((s) => s.hasAudio).length;
-      const pending = status.filter((s) => !s.hasAudio).length;
-      res.json({
-        total: status.length,
-        generated,
-        pending,
-        landmarks: status
-      });
-    } catch (error) {
-      console.error("Audio status error:", error);
-      res.status(500).json({ error: error.message || "Failed to get audio status" });
+      const tourId = c.req.query("tourId") || "default";
+      const schedules = await db.select().from(tourSchedules).where(eq5(tourSchedules.tourId, tourId)).orderBy(tourSchedules.orderIndex);
+      return c.json(schedules);
+    } catch (e) {
+      return c.json({ error: "Failed to fetch schedules" }, 500);
     }
   });
-  app2.get("/api/tour-leader/schedules", async (req, res) => {
+  tourLeader.post("/schedules", async (c) => {
     try {
-      const tourId = req.query.tourId || "default";
-      const schedules = await db.select().from(tourSchedules).where(eq4(tourSchedules.tourId, tourId)).orderBy(tourSchedules.orderIndex);
-      res.json(schedules);
-    } catch (error) {
-      console.error("Get schedules error:", error);
-      res.status(500).json({ error: "Failed to fetch schedules" });
-    }
-  });
-  app2.post("/api/tour-leader/schedules", async (req, res) => {
-    try {
-      const { tourId, time, location, duration, notes, orderIndex } = req.body;
-      if (!time || !location) {
-        return res.status(400).json({ error: "Time and location are required" });
-      }
+      const body = await c.req.json();
+      const { tourId, time, location, duration, notes, orderIndex } = body;
+      if (!time || !location) return c.json({ error: "Time and location required" }, 400);
       const [newSchedule] = await db.insert(tourSchedules).values({
         tourId: tourId || "default",
         time,
@@ -12144,705 +11346,139 @@ async function registerRoutes(app2) {
         notes: notes || null,
         orderIndex: orderIndex || 0
       }).returning();
-      res.status(201).json(newSchedule);
-    } catch (error) {
-      console.error("Create schedule error:", error);
-      res.status(500).json({ error: "Failed to create schedule" });
+      return c.json(newSchedule, 201);
+    } catch (e) {
+      return c.json({ error: "Failed to create schedule" }, 500);
     }
   });
-  app2.put("/api/tour-leader/schedules/:id", async (req, res) => {
+  tourLeader.put("/schedules/:id", async (c) => {
     try {
-      const { id } = req.params;
-      const { time, location, duration, notes, orderIndex } = req.body;
+      const id = c.req.param("id");
+      const body = await c.req.json();
       const [updated] = await db.update(tourSchedules).set({
-        time,
-        location,
-        duration: duration || null,
-        notes: notes || null,
-        orderIndex: orderIndex ?? 0,
+        ...body,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq4(tourSchedules.id, id)).returning();
-      if (!updated) {
-        return res.status(404).json({ error: "Schedule not found" });
-      }
-      res.json(updated);
-    } catch (error) {
-      console.error("Update schedule error:", error);
-      res.status(500).json({ error: "Failed to update schedule" });
+      }).where(eq5(tourSchedules.id, id)).returning();
+      if (!updated) return c.json({ error: "Schedule not found" }, 404);
+      return c.json(updated);
+    } catch (e) {
+      return c.json({ error: "Failed to update schedule" }, 500);
     }
   });
-  app2.delete("/api/tour-leader/schedules/:id", async (req, res) => {
+  tourLeader.delete("/schedules/:id", async (c) => {
     try {
-      const { id } = req.params;
-      const [deleted] = await db.delete(tourSchedules).where(eq4(tourSchedules.id, id)).returning();
-      if (!deleted) {
-        return res.status(404).json({ error: "Schedule not found" });
-      }
-      res.json({ success: true });
-    } catch (error) {
-      console.error("Delete schedule error:", error);
-      res.status(500).json({ error: "Failed to delete schedule" });
+      const id = c.req.param("id");
+      const [deleted] = await db.delete(tourSchedules).where(eq5(tourSchedules.id, id)).returning();
+      if (!deleted) return c.json({ error: "Schedule not found" }, 404);
+      return c.json({ success: true });
+    } catch (e) {
+      return c.json({ error: "Failed to delete schedule" }, 500);
     }
   });
-  app2.get("/api/tour-leader/members", async (req, res) => {
+  tourLeader.get("/members", async (c) => {
     try {
-      const tourId = req.query.tourId || "default";
-      const members = await db.select().from(groupMembers).where(eq4(groupMembers.tourId, tourId)).orderBy(groupMembers.name);
-      res.json(members);
-    } catch (error) {
-      console.error("Get members error:", error);
-      res.status(500).json({ error: "Failed to fetch members" });
+      const tourId = c.req.query("tourId") || "default";
+      return c.json([]);
+    } catch (e) {
+      return c.json({ error: "Failed" }, 500);
     }
   });
-  app2.post("/api/tour-leader/members", async (req, res) => {
+  app2.route("/api/tour-leader", tourLeader);
+  const savedRoutes2 = new Hono();
+  savedRoutes2.post("/", async (c) => {
     try {
-      const { tourId, name, phone, email, roomNumber, status, notes } = req.body;
-      if (!name) {
-        return res.status(400).json({ error: "Name is required" });
-      }
-      const [newMember] = await db.insert(groupMembers).values({
-        tourId: tourId || "default",
-        name,
-        phone: phone || null,
-        email: email || null,
-        roomNumber: roomNumber || null,
-        status: status || "on-time",
-        notes: notes || null
-      }).returning();
-      res.status(201).json(newMember);
-    } catch (error) {
-      console.error("Create member error:", error);
-      res.status(500).json({ error: "Failed to create member" });
-    }
-  });
-  app2.put("/api/tour-leader/members/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { name, phone, email, roomNumber, status, notes } = req.body;
-      const [updated] = await db.update(groupMembers).set({
-        name,
-        phone: phone || null,
-        email: email || null,
-        roomNumber: roomNumber || null,
-        status: status || "on-time",
-        notes: notes || null,
-        updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq4(groupMembers.id, id)).returning();
-      if (!updated) {
-        return res.status(404).json({ error: "Member not found" });
-      }
-      res.json(updated);
-    } catch (error) {
-      console.error("Update member error:", error);
-      res.status(500).json({ error: "Failed to update member" });
-    }
-  });
-  app2.patch("/api/tour-leader/members/:id/status", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { status } = req.body;
-      if (!status || !["on-time", "late", "absent"].includes(status)) {
-        return res.status(400).json({ error: "Valid status is required (on-time, late, absent)" });
-      }
-      const [updated] = await db.update(groupMembers).set({
-        status,
-        updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq4(groupMembers.id, id)).returning();
-      if (!updated) {
-        return res.status(404).json({ error: "Member not found" });
-      }
-      res.json(updated);
-    } catch (error) {
-      console.error("Update member status error:", error);
-      res.status(500).json({ error: "Failed to update member status" });
-    }
-  });
-  app2.delete("/api/tour-leader/members/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const [deleted] = await db.delete(groupMembers).where(eq4(groupMembers.id, id)).returning();
-      if (!deleted) {
-        return res.status(404).json({ error: "Member not found" });
-      }
-      res.json({ success: true });
-    } catch (error) {
-      console.error("Delete member error:", error);
-      res.status(500).json({ error: "Failed to delete member" });
-    }
-  });
-  app2.get("/api/tour-leader/export/schedules", async (req, res) => {
-    try {
-      const tourId = req.query.tourId || "default";
-      const format = req.query.format || "xlsx";
-      const schedules = await db.select().from(tourSchedules).where(eq4(tourSchedules.tourId, tourId)).orderBy(tourSchedules.orderIndex);
-      const data = schedules.map((s, idx) => ({
-        "\uC21C\uC11C": idx + 1,
-        "\uC2DC\uAC04": s.time,
-        "\uC7A5\uC18C": s.location,
-        "\uC18C\uC694\uC2DC\uAC04": s.duration || "",
-        "\uBA54\uBAA8": s.notes || ""
-      }));
-      if (format === "csv") {
-        const header = Object.keys(data[0] || {}).join(",");
-        const rows = data.map((row) => Object.values(row).map((v) => `"${v}"`).join(","));
-        const csv = [header, ...rows].join("\n");
-        res.setHeader("Content-Type", "text/csv; charset=utf-8");
-        res.setHeader("Content-Disposition", `attachment; filename="tour_schedule_${tourId}.csv"`);
-        res.send("\uFEFF" + csv);
-      } else {
-        const XLSX2 = await import("xlsx");
-        const worksheet = XLSX2.utils.json_to_sheet(data);
-        const workbook = XLSX2.utils.book_new();
-        XLSX2.utils.book_append_sheet(workbook, worksheet, "Schedule");
-        const buffer = XLSX2.write(workbook, { type: "buffer", bookType: "xlsx" });
-        res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        res.setHeader("Content-Disposition", `attachment; filename="tour_schedule_${tourId}.xlsx"`);
-        res.send(buffer);
-      }
-    } catch (error) {
-      console.error("Export schedules error:", error);
-      res.status(500).json({ error: "Failed to export schedules" });
-    }
-  });
-  app2.get("/api/tour-leader/export/members", async (req, res) => {
-    try {
-      const tourId = req.query.tourId || "default";
-      const format = req.query.format || "xlsx";
-      const members = await db.select().from(groupMembers).where(eq4(groupMembers.tourId, tourId)).orderBy(groupMembers.name);
-      const statusMap = { "on-time": "\uC815\uC2DC", "late": "\uC9C0\uC5F0", "absent": "\uACB0\uC11D" };
-      const data = members.map((m, idx) => ({
-        "\uBC88\uD638": idx + 1,
-        "\uC774\uB984": m.name,
-        "\uC804\uD654\uBC88\uD638": m.phone || "",
-        "\uC774\uBA54\uC77C": m.email || "",
-        "\uAC1D\uC2E4\uBC88\uD638": m.roomNumber || "",
-        "\uC0C1\uD0DC": statusMap[m.status] || m.status,
-        "\uBA54\uBAA8": m.notes || ""
-      }));
-      if (format === "csv") {
-        const header = Object.keys(data[0] || {}).join(",");
-        const rows = data.map((row) => Object.values(row).map((v) => `"${v}"`).join(","));
-        const csv = [header, ...rows].join("\n");
-        res.setHeader("Content-Type", "text/csv; charset=utf-8");
-        res.setHeader("Content-Disposition", `attachment; filename="group_members_${tourId}.csv"`);
-        res.send("\uFEFF" + csv);
-      } else {
-        const XLSX2 = await import("xlsx");
-        const worksheet = XLSX2.utils.json_to_sheet(data);
-        const workbook = XLSX2.utils.book_new();
-        XLSX2.utils.book_append_sheet(workbook, worksheet, "Members");
-        const buffer = XLSX2.write(workbook, { type: "buffer", bookType: "xlsx" });
-        res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        res.setHeader("Content-Disposition", `attachment; filename="group_members_${tourId}.xlsx"`);
-        res.send(buffer);
-      }
-    } catch (error) {
-      console.error("Export members error:", error);
-      res.status(500).json({ error: "Failed to export members" });
-    }
-  });
-  app2.post("/api/tour-leader/import/schedules", upload.single("file"), async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
-      }
-      const tourId = req.body.tourId || "default";
-      const XLSX2 = await import("xlsx");
-      const workbook = XLSX2.read(req.file.buffer, { type: "buffer" });
-      const sheetName = workbook.SheetNames[0];
-      const data = XLSX2.utils.sheet_to_json(workbook.Sheets[sheetName]);
-      let imported = 0;
-      const errors = [];
-      for (let i = 0; i < data.length; i++) {
-        const row = data[i];
-        try {
-          const time = row["\uC2DC\uAC04"] || row["time"] || row["Time"];
-          const location = row["\uC7A5\uC18C"] || row["location"] || row["Location"];
-          if (!time || !location) {
-            errors.push({ row: i + 2, message: "Missing time or location" });
-            continue;
-          }
-          await db.insert(tourSchedules).values({
-            tourId,
-            time: String(time),
-            location: String(location),
-            duration: row["\uC18C\uC694\uC2DC\uAC04"] || row["duration"] || null,
-            notes: row["\uBA54\uBAA8"] || row["notes"] || null,
-            orderIndex: i
-          });
-          imported++;
-        } catch (err) {
-          errors.push({ row: i + 2, message: err.message });
-        }
-      }
-      res.json({
-        success: true,
-        imported,
-        total: data.length,
-        errors: errors.length > 0 ? errors : void 0
-      });
-    } catch (error) {
-      console.error("Import schedules error:", error);
-      res.status(500).json({ error: "Failed to import schedules" });
-    }
-  });
-  app2.post("/api/tour-leader/import/members", upload.single("file"), async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
-      }
-      const tourId = req.body.tourId || "default";
-      const XLSX2 = await import("xlsx");
-      const workbook = XLSX2.read(req.file.buffer, { type: "buffer" });
-      const sheetName = workbook.SheetNames[0];
-      const data = XLSX2.utils.sheet_to_json(workbook.Sheets[sheetName]);
-      const statusMap = { "\uC815\uC2DC": "on-time", "\uC9C0\uC5F0": "late", "\uACB0\uC11D": "absent" };
-      let imported = 0;
-      const errors = [];
-      for (let i = 0; i < data.length; i++) {
-        const row = data[i];
-        try {
-          const name = row["\uC774\uB984"] || row["name"] || row["Name"];
-          if (!name) {
-            errors.push({ row: i + 2, message: "Missing name" });
-            continue;
-          }
-          const statusValue = row["\uC0C1\uD0DC"] || row["status"] || "on-time";
-          const mappedStatus = statusMap[statusValue] || statusValue;
-          await db.insert(groupMembers).values({
-            tourId,
-            name: String(name),
-            phone: row["\uC804\uD654\uBC88\uD638"] || row["phone"] || null,
-            email: row["\uC774\uBA54\uC77C"] || row["email"] || null,
-            roomNumber: row["\uAC1D\uC2E4\uBC88\uD638"] || row["roomNumber"] || null,
-            status: ["on-time", "late", "absent"].includes(mappedStatus) ? mappedStatus : "on-time",
-            notes: row["\uBA54\uBAA8"] || row["notes"] || null
-          });
-          imported++;
-        } catch (err) {
-          errors.push({ row: i + 2, message: err.message });
-        }
-      }
-      res.json({
-        success: true,
-        imported,
-        total: data.length,
-        errors: errors.length > 0 ? errors : void 0
-      });
-    } catch (error) {
-      console.error("Import members error:", error);
-      res.status(500).json({ error: "Failed to import members" });
-    }
-  });
-  app2.post("/api/routes", async (req, res) => {
-    try {
-      const { title, countryCode, cityId, stops, description, totalDistance, totalDuration, coverPhotoUrl } = req.body;
-      const sessionId = req.headers["x-session-id"];
-      const userId = req.session?.userId;
-      if (!title || !countryCode || !cityId || !stops || stops.length === 0) {
-        return res.status(400).json({ error: "Title, country code, city ID, and stops are required" });
-      }
+      const body = await c.req.json();
+      const sessionId = c.req.header("x-session-id");
+      const session = c.get("session");
+      const userId = session?.get?.("userId");
       const route = await storage.createSavedRoute({
+        ...body,
         userId: userId || null,
-        sessionId: sessionId || null,
-        title,
-        countryCode,
-        cityId,
-        stops,
-        description: description || null,
-        totalDistance: totalDistance || null,
-        totalDuration: totalDuration || null,
-        coverPhotoUrl: coverPhotoUrl || null
+        sessionId: sessionId || null
       });
-      res.status(201).json(route);
-    } catch (error) {
-      console.error("Create route error:", error);
-      res.status(500).json({ error: "Failed to create route" });
+      return c.json(route, 201);
+    } catch (e) {
+      return c.json({ error: "Failed to create route" }, 500);
     }
   });
-  app2.get("/api/routes", async (req, res) => {
+  savedRoutes2.get("/", async (c) => {
     try {
-      const sessionId = req.query.sessionId || req.headers["x-session-id"];
-      const userId = req.session?.userId;
-      const countryCode = req.query.countryCode;
-      if (!userId && !sessionId) {
-        return res.status(400).json({ error: "Session ID or authentication required" });
-      }
+      const sessionId = c.req.query("sessionId") || c.req.header("x-session-id");
+      const session = c.get("session");
+      const userId = session?.get?.("userId");
+      const countryCode = c.req.query("countryCode");
+      if (!userId && !sessionId) return c.json({ error: "Auth required" }, 400);
       const routes = await storage.getSavedRoutes(userId, sessionId, countryCode);
-      res.json(routes);
-    } catch (error) {
-      console.error("Get routes error:", error);
-      res.status(500).json({ error: "Failed to get routes" });
+      return c.json(routes);
+    } catch (e) {
+      return c.json({ error: "Failed to fetch routes" }, 500);
     }
   });
-  app2.get("/api/routes/:id", async (req, res) => {
+  savedRoutes2.get("/:id", async (c) => {
     try {
-      const route = await storage.getSavedRouteById(req.params.id);
-      if (!route) {
-        return res.status(404).json({ error: "Route not found" });
-      }
-      res.json(route);
-    } catch (error) {
-      console.error("Get route error:", error);
-      res.status(500).json({ error: "Failed to get route" });
+      const route = await storage.getSavedRouteById(c.req.param("id"));
+      if (!route) return c.json({ error: "Not found" }, 404);
+      return c.json(route);
+    } catch (e) {
+      return c.json({ error: "Failed" }, 500);
     }
   });
-  app2.put("/api/routes/:id", async (req, res) => {
+  savedRoutes2.put("/:id", async (c) => {
     try {
-      const { title, description, stops, totalDistance, totalDuration, coverPhotoUrl } = req.body;
-      const route = await storage.updateSavedRoute(req.params.id, {
-        title,
-        description,
-        stops,
-        totalDistance,
-        totalDuration,
-        coverPhotoUrl
-      });
-      if (!route) {
-        return res.status(404).json({ error: "Route not found" });
-      }
-      res.json(route);
-    } catch (error) {
-      console.error("Update route error:", error);
-      res.status(500).json({ error: "Failed to update route" });
+      const body = await c.req.json();
+      const route = await storage.updateSavedRoute(c.req.param("id"), body);
+      if (!route) return c.json({ error: "Not found" }, 404);
+      return c.json(route);
+    } catch (e) {
+      return c.json({ error: "Failed" }, 500);
     }
   });
-  app2.delete("/api/routes/:id", async (req, res) => {
+  savedRoutes2.delete("/:id", async (c) => {
     try {
-      await storage.deleteSavedRoute(req.params.id);
-      res.status(204).send();
-    } catch (error) {
-      console.error("Delete route error:", error);
-      res.status(500).json({ error: "Failed to delete route" });
+      await storage.deleteSavedRoute(c.req.param("id"));
+      return c.body(null, 204);
+    } catch (e) {
+      return c.json({ error: "Failed" }, 500);
     }
   });
-  app2.post("/api/routes/:routeId/photos", upload.single("photo"), async (req, res) => {
+  app2.route("/api/routes", savedRoutes2);
+  adminCallback.get("/users", async (c) => {
     try {
-      const { routeId } = req.params;
-      const file = req.file;
-      const userId = req.session?.userId;
-      if (!file) {
-        return res.status(400).json({ error: "Photo file is required" });
-      }
-      const { latitude, longitude, takenAt, source, metadata } = req.body;
-      const photo = await storage.addRoutePhoto({
-        routeId,
-        userId: userId || null,
-        storageUrl: `/uploads/${file.filename}`,
-        latitude: latitude ? parseFloat(latitude) : null,
-        longitude: longitude ? parseFloat(longitude) : null,
-        takenAt: takenAt ? new Date(takenAt) : null,
-        source: source || "upload",
-        metadata: metadata ? JSON.parse(metadata) : null
-      });
-      res.status(201).json(photo);
-    } catch (error) {
-      console.error("Add photo error:", error);
-      res.status(500).json({ error: "Failed to add photo" });
-    }
-  });
-  app2.get("/api/routes/:routeId/photos", async (req, res) => {
-    try {
-      const photos = await storage.getRoutePhotos(req.params.routeId);
-      res.json(photos);
-    } catch (error) {
-      console.error("Get photos error:", error);
-      res.status(500).json({ error: "Failed to get photos" });
-    }
-  });
-  app2.delete("/api/routes/photos/:id", async (req, res) => {
-    try {
-      await storage.deleteRoutePhoto(req.params.id);
-      res.status(204).send();
-    } catch (error) {
-      console.error("Delete photo error:", error);
-      res.status(500).json({ error: "Failed to delete photo" });
-    }
-  });
-  app2.get("/api/admin/users", async (req, res) => {
-    try {
-      const page = parseInt(req.query.page) || 1;
-      const limit = parseInt(req.query.limit) || 20;
-      const search = req.query.search || "";
-      const role = req.query.role;
+      const page = parseInt(c.req.query("page") || "1");
+      const limit = parseInt(c.req.query("limit") || "20");
+      const search = c.req.query("search") || "";
+      const role = c.req.query("role");
       const offset = (page - 1) * limit;
-      let query = db.select().from(users);
-      const conditions = [];
+      const allUsers = await storage.getAllUsers();
+      let filtered = allUsers;
       if (search) {
-        conditions.push(
-          or(
-            ilike(users.email, `%${search}%`),
-            ilike(users.displayName, `%${search}%`)
-          )
-        );
+        const s = search.toLowerCase();
+        filtered = filtered.filter((u) => u.email?.toLowerCase().includes(s) || u.displayName?.toLowerCase().includes(s));
       }
       if (role && role !== "all") {
-        conditions.push(eq4(users.role, role));
+        filtered = filtered.filter((u) => u.role === role);
       }
-      const countResult = await db.select({ count: count2() }).from(users);
-      const total = countResult[0]?.count || 0;
-      let usersQuery = db.select().from(users).orderBy(desc2(users.createdAt)).limit(limit).offset(offset);
-      const allUsers = await usersQuery;
-      let filteredUsers = allUsers;
-      if (search) {
-        const searchLower = search.toLowerCase();
-        filteredUsers = filteredUsers.filter(
-          (u) => u.email?.toLowerCase().includes(searchLower) || u.displayName?.toLowerCase().includes(searchLower)
-        );
-      }
-      if (role && role !== "all") {
-        filteredUsers = filteredUsers.filter((u) => u.role === role);
-      }
-      res.json({
-        users: filteredUsers,
+      const paginated = filtered.slice(offset, offset + limit);
+      return c.json({
+        users: paginated,
         pagination: {
           page,
           limit,
-          total: Number(total),
-          pages: Math.ceil(Number(total) / limit)
+          total: filtered.length,
+          pages: Math.ceil(filtered.length / limit)
         }
       });
-    } catch (error) {
-      console.warn("[Admin] DB fetch failed for users, falling back to storage:", error);
-      try {
-        const allUsers = await storage.getAllUsers();
-        let filtered = allUsers;
-        const search = req.query.search || "";
-        const role = req.query.role;
-        if (search) {
-          const s = search.toLowerCase();
-          filtered = filtered.filter((u) => u.email?.toLowerCase().includes(s) || u.displayName?.toLowerCase().includes(s));
-        }
-        if (role && role !== "all") {
-          filtered = filtered.filter((u) => u.role === role);
-        }
-        res.json({
-          users: filtered,
-          pagination: { page: 1, limit: filtered.length, total: filtered.length, pages: 1 }
-        });
-      } catch (storageError) {
-        res.status(500).json({ error: "Failed to fetch users" });
-      }
+    } catch (e) {
+      return c.json({ error: "Failed to fetch users" }, 500);
     }
   });
-  app2.get("/api/admin/users/stats", async (req, res) => {
-    try {
-      const totalResult = await db.select({ count: count2() }).from(users);
-      const total = Number(totalResult[0]?.count || 0);
-      const roleStats = await db.select({
-        role: users.role,
-        count: count2()
-      }).from(users).groupBy(users.role);
-      const providerStats = await db.select({
-        provider: userIdentities.provider,
-        count: count2()
-      }).from(userIdentities).groupBy(userIdentities.provider);
-      const sevenDaysAgo = /* @__PURE__ */ new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-      const recentSignups = await db.select({ count: count2() }).from(users).where(sql6`${users.createdAt} > ${sevenDaysAgo}`);
-      res.json({
-        total,
-        roles: Object.fromEntries(roleStats.map((r) => [r.role || "user", Number(r.count)])),
-        providers: Object.fromEntries(providerStats.map((p) => [p.provider, Number(p.count)])),
-        recentSignups: Number(recentSignups[0]?.count || 0)
-      });
-    } catch (error) {
-      console.warn("[Admin] DB fetch failed for user stats, falling back to storage:", error);
-      try {
-        const allUsers = await storage.getAllUsers();
-        const roleDist = {};
-        allUsers.forEach((u) => {
-          const r = u.role || "user";
-          roleDist[r] = (roleDist[r] || 0) + 1;
-        });
-        res.json({
-          total: allUsers.length,
-          roles: roleDist,
-          providers: {},
-          // Hard to get providers without identity join in fallback
-          recentSignups: 0
-        });
-      } catch (storageError) {
-        res.status(500).json({ error: "Failed to fetch user stats" });
-      }
-    }
+  adminCallback.patch("/users/:id/role", async (c) => {
+    const id = c.req.param("id");
+    const { role } = await c.req.json();
+    const [updated] = await db.update(users).set({ role }).where(eq5(users.id, id)).returning();
+    return c.json(updated || { error: "Not found" }, updated ? 200 : 404);
   });
-  app2.get("/api/admin/users/:id", async (req, res) => {
-    try {
-      const userId = req.params.id;
-      const [user] = await db.select().from(users).where(eq4(users.id, userId));
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      const identities = await db.select({
-        id: userIdentities.id,
-        provider: userIdentities.provider,
-        providerUserId: userIdentities.providerUserId,
-        email: userIdentities.email,
-        displayName: userIdentities.displayName,
-        avatar: userIdentities.avatar,
-        createdAt: userIdentities.createdAt,
-        updatedAt: userIdentities.updatedAt
-      }).from(userIdentities).where(eq4(userIdentities.userId, userId));
-      res.json({
-        ...user,
-        identities
-      });
-    } catch (error) {
-      console.error("Admin get user error:", error);
-      res.status(500).json({ error: "Failed to fetch user" });
-    }
-  });
-  app2.patch("/api/admin/users/:id/role", async (req, res) => {
-    try {
-      const userId = req.params.id;
-      const { role } = req.body;
-      const validRoles = ["user", "guide", "tour_leader", "admin"];
-      if (!validRoles.includes(role)) {
-        return res.status(400).json({ error: "Invalid role" });
-      }
-      const [updated] = await db.update(users).set({ role, updatedAt: /* @__PURE__ */ new Date() }).where(eq4(users.id, userId)).returning();
-      if (!updated) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      res.json(updated);
-    } catch (error) {
-      console.error("Admin update user role error:", error);
-      res.status(500).json({ error: "Failed to update user role" });
-    }
-  });
-  app2.put("/api/admin/users/:id", async (req, res) => {
-    try {
-      const userId = req.params.id;
-      const { displayName, email, locale, role } = req.body;
-      const updateData = { updatedAt: /* @__PURE__ */ new Date() };
-      if (displayName !== void 0) updateData.displayName = displayName;
-      if (email !== void 0) updateData.email = email;
-      if (locale !== void 0) updateData.locale = locale;
-      if (role !== void 0) {
-        const validRoles = ["user", "guide", "tour_leader", "admin"];
-        if (!validRoles.includes(role)) {
-          return res.status(400).json({ error: "Invalid role" });
-        }
-        updateData.role = role;
-      }
-      const [updated] = await db.update(users).set(updateData).where(eq4(users.id, userId)).returning();
-      if (!updated) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      res.json(updated);
-    } catch (error) {
-      console.error("Admin update user error:", error);
-      res.status(500).json({ error: "Failed to update user" });
-    }
-  });
-  app2.delete("/api/admin/users/:id", async (req, res) => {
-    try {
-      const userId = req.params.id;
-      const [deleted] = await db.delete(users).where(eq4(users.id, userId)).returning();
-      if (!deleted) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      res.status(204).send();
-    } catch (error) {
-      console.error("Admin delete user error:", error);
-      res.status(500).json({ error: "Failed to delete user" });
-    }
-  });
-  app2.get("/api/admin/identities", async (req, res) => {
-    try {
-      const provider = req.query.provider;
-      let query = db.select({
-        id: userIdentities.id,
-        userId: userIdentities.userId,
-        provider: userIdentities.provider,
-        providerUserId: userIdentities.providerUserId,
-        email: userIdentities.email,
-        displayName: userIdentities.displayName,
-        avatar: userIdentities.avatar,
-        createdAt: userIdentities.createdAt,
-        updatedAt: userIdentities.updatedAt,
-        userName: users.displayName,
-        userEmail: users.email
-      }).from(userIdentities).leftJoin(users, eq4(userIdentities.userId, users.id)).orderBy(desc2(userIdentities.createdAt));
-      const identities = await query;
-      const filtered = provider && provider !== "all" ? identities.filter((i) => i.provider === provider) : identities;
-      res.json(filtered);
-    } catch (error) {
-      console.error("Admin get identities error:", error);
-      res.status(500).json({ error: "Failed to fetch identities" });
-    }
-  });
-  app2.post("/api/payments/webhook", express.raw({ type: "application/json" }), async (req, res) => {
-    const sig = req.headers["stripe-signature"];
-    let event;
-    try {
-      event = stripe.webhooks.constructEvent(
-        req.body,
-        sig,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
-    } catch (err) {
-      console.error(`[\uD68C\uACC4\uBD80\uC7A5 \uAE34\uAE09 \uBCF4\uACE0] \uC6F9\uD6C5 \uC11C\uBA85 \uAC80\uC99D \uC2E4\uD328: ${err.message}`);
-      return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
-    if (event.type === "checkout.session.completed") {
-      const session2 = event.data.object;
-      const metadata = session2.metadata;
-      if (metadata) {
-        const { userId, creatorId, amount } = metadata;
-        const totalAmount = parseFloat(amount);
-        const creatorShare = totalAmount * 0.7;
-        console.log(`[\uD68C\uACC4\uBD80\uC7A5] \uACB0\uC81C \uC131\uACF5 \uD655\uC778: \uC0AC\uC6A9\uC790 ${userId}, \uD06C\uB9AC\uC5D0\uC774\uD130 ${creatorId}, \uCD1D\uC561 ${totalAmount}\u20AC, \uC218\uC775\uBC30\uBD84 ${creatorShare.toFixed(2)}\u20AC`);
-        try {
-          await settlementService.processPayment(
-            userId,
-            metadata.landmarkId || "unknown",
-            totalAmount,
-            {
-              stripeSessionId: session2.id,
-              paymentIntentId: session2.payment_intent,
-              verifiedAt: (/* @__PURE__ */ new Date()).toISOString(),
-              creatorId
-              // 수익금을 받을 주체
-            }
-          );
-          console.log(`[\uD68C\uACC4\uBD80\uC7A5] \uC7A5\uBD80 \uAE30\uC785 \uC644\uB8CC! \uC544\uC8FC \uAE54\uB054\uD569\uB2C8\uB2E4, \uB300\uD45C\uB2D8.`);
-        } catch (dbError) {
-          console.error(`[\uD68C\uACC4\uBD80\uC7A5 \uAE34\uAE09] DB \uC804\uC1A1 \uC911 \uC624\uB958 \uBC1C\uC0DD:`, dbError);
-          throw dbError;
-        }
-      }
-    }
-    res.json({ received: true });
-  });
-  app2.get("/api/creator/stats", async (req, res) => {
-    try {
-      const userId = req.session?.userId || req.query.userId;
-      if (!userId) {
-        return res.status(401).json({ error: "[\uD68C\uACC4\uBD80\uC7A5] \uB85C\uADF8\uC778\uBD80\uD130 \uD558\uACE0 \uC624\uC138\uC694! \uB204\uAD6C \uC7A5\uBD80\uC778\uC9C0 \uBAA8\uB974\uACA0\uC5B4\uC694." });
-      }
-      const stats = await settlementService.getCreatorStats(userId);
-      res.json(stats);
-    } catch (error) {
-      console.error("Get creator stats error:", error);
-      res.status(500).json({ error: "\uD1B5\uACC4\uC815\uBCF4\uB97C \uAC00\uC838\uC624\uB294\uB370 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4!" });
-    }
-  });
-  app2.post("/api/admin/settle", async (req, res) => {
-    try {
-      const { userId, period } = req.body;
-      if (!userId || !period) {
-        return res.status(400).json({ error: "\uB204\uAD6C\uC5D0\uAC8C, \uC5B8\uC81C\uCE58 \uC6D4\uAE09\uC744 \uC904\uC9C0 \uC815\uD655\uD788 \uC368\uC8FC\uC138\uC694!" });
-      }
-      const settlement = await settlementService.runSettlement(userId, period);
-      res.json({ success: true, settlement });
-    } catch (error) {
-      console.error("Run settlement error:", error);
-      res.status(500).json({ error: error.message || "\uC815\uC0B0 \uCC98\uB9AC \uC911 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4!" });
-    }
-  });
-  app2.get("/api/admin/marketing-contents", async (req, res) => {
+  adminCallback.get("/marketing-contents", async (c) => {
     try {
       const results = await db.select({
         id: marketingContents.id,
@@ -12850,535 +11486,91 @@ async function registerRoutes(app2) {
         landmarkName: landmarks.name,
         content: marketingContents.content,
         updatedAt: marketingContents.updatedAt
-      }).from(marketingContents).innerJoin(landmarks, eq4(marketingContents.landmarkId, landmarks.id)).orderBy(desc2(marketingContents.updatedAt));
-      res.json(results);
-    } catch (error) {
-      console.warn("[Admin] DB fetch failed for marketing contents, falling back to storage:", error);
-      try {
-        const fallbackContents = await storage.getMarketingContents();
-        res.json(fallbackContents);
-      } catch (storageError) {
-        res.status(500).json({ error: "Failed to fetch marketing contents" });
-      }
+      }).from(marketingContents).innerJoin(landmarks, eq5(marketingContents.landmarkId, landmarks.id)).orderBy(desc2(marketingContents.updatedAt));
+      return c.json(results);
+    } catch (e) {
+      return c.json({ error: "Failed" }, 500);
     }
   });
-  const httpServer = createServer(app2);
-  return httpServer;
-}
-
-// server/vite.ts
-import express2 from "express";
-import fs5 from "fs";
-import path6 from "path";
-import { createServer as createViteServer, createLogger } from "vite";
-
-// vite.config.ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path5 from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
-import { VitePWA } from "vite-plugin-pwa";
-var vite_config_default = defineConfig({
-  plugins: [
-    react(),
-    runtimeErrorOverlay(),
-    VitePWA({
-      registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "icon.svg"],
-      manifest: {
-        name: "GPS Audio Guide",
-        short_name: "GPS Guide",
-        description: "Explore world cities with GPS-guided audio narration",
-        theme_color: "#e8633f",
-        background_color: "#ffffff",
-        display: "standalone",
-        orientation: "portrait",
-        icons: [
-          {
-            src: "icon.svg",
-            sizes: "192x192",
-            type: "image/svg+xml"
-          },
-          {
-            src: "icon.svg",
-            sizes: "512x512",
-            type: "image/svg+xml"
-          }
-        ]
-      },
-      workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,json,mp3}"],
-        maximumFileSizeToCacheInBytes: 2e7
-        // Increased to 20MB for audio files
-      },
-      devOptions: {
-        enabled: true,
-        type: "module"
-      }
-    }),
-    ...process.env.NODE_ENV !== "production" && process.env.REPL_ID !== void 0 ? [
-      await import("@replit/vite-plugin-cartographer").then(
-        (m) => m.cartographer()
-      ),
-      await import("@replit/vite-plugin-dev-banner").then(
-        (m) => m.devBanner()
-      )
-    ] : []
-  ],
-  resolve: {
-    alias: {
-      "@": path5.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path5.resolve(import.meta.dirname, "shared"),
-      "@assets": path5.resolve(import.meta.dirname, "attached_assets")
-    },
-    dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"]
-  },
-  root: path5.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path5.resolve(import.meta.dirname, "dist"),
-    emptyOutDir: true
-  },
-  server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"]
-    }
-  }
-});
-
-// server/vite.ts
-import { nanoid } from "nanoid";
-
-// server/services/ogService.ts
-init_schema();
-import { eq as eq5 } from "drizzle-orm";
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-var OgService = class {
-  /**
-   * 접속한 URL 주소를 분석해서 맞춤형 메타 태그를 생성합니다.
-   * @param url 현재 사용자가 접속하려고 시도하는 주소 (예: /landmark/namsan-tower)
-   */
-  async generateMetaTags(url) {
-    const landmarkIdMatch = url.match(/\/landmark\/([^\/?#]+)/);
-    const cityIdMatch = url.match(/\/city\/([^\/?#]+)/);
-    let title = "SNS Cruise Tour Audio Guide";
-    let description = "No-WiFi GPS Cruise Tour Audio Guide - Your perfect travel companion.";
-    let imageUrl = "https://nowifigps.tours/og-default.png";
-    if (landmarkIdMatch) {
-      const landmarkId = landmarkIdMatch[1];
-      const [landmark] = await db.select().from(landmarks).where(eq5(landmarks.id, landmarkId));
-      if (landmark) {
-        const translations = landmark.translations;
-        const localizedName = translations?.ko?.name || landmark.name;
-        const localizedDesc = translations?.ko?.description || landmark.description || description;
-        title = `${localizedName} | GPS Cruise Tour`;
-        description = localizedDesc;
-        const photos = landmark.photos;
-        if (photos && photos.length > 0) {
-          imageUrl = photos[0];
+  app2.post("/api/payments/webhook", async (c) => {
+    const sig = c.req.header("stripe-signature");
+    const bodyText = await c.req.text();
+    try {
+      const stripe = getStripe();
+      if (!stripe) return c.json({ error: "Stripe not configured" }, 503);
+      const event = stripe.webhooks.constructEvent(bodyText, sig, env.STRIPE_WEBHOOK_SECRET);
+      if (event.type === "checkout.session.completed") {
+        const session = event.data.object;
+        const metadata = session.metadata;
+        if (metadata) {
+          const { userId, creatorId, amount, landmarkId } = metadata;
+          await settlementService.processPayment(
+            userId,
+            landmarkId || "unknown",
+            parseFloat(amount),
+            {
+              stripeSessionId: session.id,
+              paymentIntentId: session.payment_intent,
+              verifiedAt: (/* @__PURE__ */ new Date()).toISOString(),
+              creatorId
+            }
+          );
         }
       }
-    } else if (cityIdMatch) {
-      const cityId = cityIdMatch[1];
-      const [city] = await db.select().from(cities).where(eq5(cities.id, cityId));
-      if (city) {
-        title = `${city.name} \uC5EC\uD589 \uAC00\uC774\uB4DC | GPS Cruise Tour`;
-        description = `${city.name}\uC758 \uC228\uC740 \uC7AC\uBBF8\uB97C \uC624\uB514\uC624 \uAC00\uC774\uB4DC\uB85C \uBC1C\uACAC\uD574\uBCF4\uC138\uC694.`;
-      }
+    } catch (err) {
+      return c.text(`Webhook Error: ${err.message}`, 400);
     }
-    const safeTitle = escapeHtml(title);
-    const safeDescription = escapeHtml(description);
-    const safeImageUrl = escapeHtml(imageUrl);
-    const safeUrl = escapeHtml(url);
-    return `
-      <!-- Dr.'s Engine\uC774 \uC2E4\uC2DC\uAC04\uC73C\uB85C \uC0DD\uC131\uD55C \uBA4B\uC9C4 \uBA54\uD0C0 \uD0DC\uADF8\uB4E4\uC774\uC57C! -->
-      <title>${safeTitle}</title>
-      <meta name="description" content="${safeDescription}">
-      <meta property="og:title" content="${safeTitle}">
-      <meta property="og:description" content="${safeDescription}">
-      <meta property="og:image" content="${safeImageUrl}">
-      <meta property="og:url" content="https://nowifigps.tours${safeUrl}">
-      <meta property="og:type" content="website">
-      <meta name="twitter:card" content="summary_large_image">
-      <meta name="twitter:title" content="${safeTitle}">
-      <meta name="twitter:description" content="${safeDescription}">
-      <meta name="twitter:image" content="${safeImageUrl}">
-    `;
-  }
-  /**
-   * 만들어진 메타 태그를 실제 index.html 소스코드에 쏙 끼워넣는 함수야.
-   * @param html 원본 index.html 내용
-   * @param url 사용자가 보고 있는 주소
-   */
-  async injectMetaTags(html, url) {
-    const metaTags = await this.generateMetaTags(url);
-    if (html.includes("<!-- OG_TAGS_PLACEHOLDER -->")) {
-      return html.replace("<!-- OG_TAGS_PLACEHOLDER -->", metaTags);
-    }
-    return html.replace("<head>", `<head>${metaTags}`);
-  }
-};
-var ogService = new OgService();
-
-// server/vite.ts
-var viteLogger = createLogger();
-function log(message, source = "express") {
-  const formattedTime = (/* @__PURE__ */ new Date()).toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true
-  });
-  console.log(`${formattedTime} [${source}] ${message}`);
-}
-function serveStatic(app2) {
-  const distPath = path6.resolve(import.meta.dirname, "..", "dist");
-  if (!fs5.existsSync(distPath)) {
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
-    );
-  }
-  app2.use(express2.static(distPath));
-  app2.use("*", async (req, res) => {
-    const url = req.originalUrl;
-    const indexPath = path6.resolve(distPath, "index.html");
-    try {
-      let html = await fs5.promises.readFile(indexPath, "utf-8");
-      html = await ogService.injectMetaTags(html, url);
-      res.status(200).set({ "Content-Type": "text/html" }).send(html);
-    } catch (e) {
-      console.error("Failed to serve index.html with OG tags:", e);
-      res.sendFile(indexPath);
-    }
+    return c.json({ received: true });
   });
 }
 
-// server/oauth-providers.ts
-function getBaseUrl() {
-  return process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : `http://localhost:5001`;
-}
-var GoogleProvider = class {
-  name = "google";
-  config;
-  constructor() {
-    this.config = {
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-      redirectUri: `${getBaseUrl()}/api/auth/google/callback`
-    };
-  }
-  getAuthUrl(state) {
-    const params = new URLSearchParams({
-      client_id: this.config.clientId,
-      redirect_uri: this.config.redirectUri,
-      response_type: "code",
-      scope: "openid email profile",
-      state,
-      access_type: "offline",
-      prompt: "consent"
-    });
-    return `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
-  }
-  async exchangeCodeForToken(code) {
-    const response = await fetch("https://oauth2.googleapis.com/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        client_id: this.config.clientId,
-        client_secret: this.config.clientSecret,
-        code,
-        grant_type: "authorization_code",
-        redirect_uri: this.config.redirectUri
-      })
-    });
-    if (!response.ok) {
-      throw new Error(`Google token exchange failed: ${await response.text()}`);
-    }
-    const data = await response.json();
-    return {
-      accessToken: data.access_token,
-      refreshToken: data.refresh_token,
-      expiresIn: data.expires_in
-    };
-  }
-  async getUserProfile(accessToken) {
-    const response = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    });
-    if (!response.ok) {
-      throw new Error(`Google profile fetch failed: ${await response.text()}`);
-    }
-    const data = await response.json();
-    return {
-      id: data.id,
-      email: data.email,
-      name: data.name,
-      avatar: data.picture,
-      raw: data
-    };
-  }
+// server/app.ts
+init_env();
+var log2 = (message, source = "APP") => {
+  const time = (/* @__PURE__ */ new Date()).toLocaleTimeString();
+  console.log(`[${time}] [${source}] ${message}`);
 };
-var FacebookProvider = class {
-  name = "facebook";
-  config;
-  constructor() {
-    this.config = {
-      clientId: process.env.FACEBOOK_APP_ID || "",
-      clientSecret: process.env.FACEBOOK_APP_SECRET || "",
-      redirectUri: `${getBaseUrl()}/api/auth/facebook/callback`
-    };
-  }
-  getAuthUrl(state) {
-    const params = new URLSearchParams({
-      client_id: this.config.clientId,
-      redirect_uri: this.config.redirectUri,
-      state,
-      scope: "email,public_profile"
-    });
-    return `https://www.facebook.com/v18.0/dialog/oauth?${params}`;
-  }
-  async exchangeCodeForToken(code) {
-    const params = new URLSearchParams({
-      client_id: this.config.clientId,
-      client_secret: this.config.clientSecret,
-      code,
-      redirect_uri: this.config.redirectUri
-    });
-    const response = await fetch(`https://graph.facebook.com/v18.0/oauth/access_token?${params}`);
-    if (!response.ok) {
-      throw new Error(`Facebook token exchange failed: ${await response.text()}`);
+var app = new Hono2();
+app.use("*", logger());
+var store = new CookieStore();
+app.use("*", async (c, next) => {
+  const secret = c.env?.SESSION_SECRET || env.SESSION_SECRET || "default_secret_key_must_be_at_least_32_chars_long";
+  const middleware = sessionMiddleware({
+    store,
+    encryptionKey: secret,
+    expireAfterSeconds: 3600 * 24,
+    cookieOptions: {
+      path: "/",
+      httpOnly: true,
+      secure: (c.env?.NODE_ENV || env.NODE_ENV) === "production",
+      maxAge: 3600 * 24
     }
-    const data = await response.json();
-    return {
-      accessToken: data.access_token,
-      expiresIn: data.expires_in
-    };
-  }
-  async getUserProfile(accessToken) {
-    const response = await fetch(
-      `https://graph.facebook.com/me?fields=id,name,email,picture.type(large)&access_token=${accessToken}`
-    );
-    if (!response.ok) {
-      throw new Error(`Facebook profile fetch failed: ${await response.text()}`);
-    }
-    const data = await response.json();
-    return {
-      id: data.id,
-      email: data.email,
-      name: data.name,
-      avatar: data.picture?.data?.url,
-      raw: data
-    };
-  }
-};
-var KakaoProvider = class {
-  name = "kakao";
-  config;
-  constructor() {
-    this.config = {
-      clientId: process.env.KAKAO_CLIENT_ID || "",
-      clientSecret: process.env.KAKAO_CLIENT_SECRET || "",
-      redirectUri: `${getBaseUrl()}/api/auth/kakao/callback`
-    };
-  }
-  getAuthUrl(state) {
-    const params = new URLSearchParams({
-      client_id: this.config.clientId,
-      redirect_uri: this.config.redirectUri,
-      response_type: "code",
-      state
-    });
-    return `https://kauth.kakao.com/oauth/authorize?${params}`;
-  }
-  async exchangeCodeForToken(code) {
-    const response = await fetch("https://kauth.kakao.com/oauth/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        grant_type: "authorization_code",
-        client_id: this.config.clientId,
-        client_secret: this.config.clientSecret,
-        code,
-        redirect_uri: this.config.redirectUri
-      })
-    });
-    if (!response.ok) {
-      throw new Error(`Kakao token exchange failed: ${await response.text()}`);
-    }
-    const data = await response.json();
-    return {
-      accessToken: data.access_token,
-      refreshToken: data.refresh_token,
-      expiresIn: data.expires_in
-    };
-  }
-  async getUserProfile(accessToken) {
-    const response = await fetch("https://kapi.kakao.com/v2/user/me", {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    });
-    if (!response.ok) {
-      throw new Error(`Kakao profile fetch failed: ${await response.text()}`);
-    }
-    const data = await response.json();
-    const kakaoAccount = data.kakao_account || {};
-    const profile = kakaoAccount.profile || {};
-    return {
-      id: String(data.id),
-      email: kakaoAccount.email,
-      name: profile.nickname,
-      avatar: profile.profile_image_url,
-      raw: data
-    };
-  }
-};
-var NaverProvider = class {
-  name = "naver";
-  config;
-  constructor() {
-    this.config = {
-      clientId: process.env.NAVER_CLIENT_ID || "",
-      clientSecret: process.env.NAVER_CLIENT_SECRET || "",
-      redirectUri: `${getBaseUrl()}/api/auth/naver/callback`
-    };
-  }
-  getAuthUrl(state) {
-    const params = new URLSearchParams({
-      client_id: this.config.clientId,
-      redirect_uri: this.config.redirectUri,
-      response_type: "code",
-      state
-    });
-    return `https://nid.naver.com/oauth2.0/authorize?${params}`;
-  }
-  async exchangeCodeForToken(code) {
-    const params = new URLSearchParams({
-      grant_type: "authorization_code",
-      client_id: this.config.clientId,
-      client_secret: this.config.clientSecret,
-      code
-    });
-    const response = await fetch(`https://nid.naver.com/oauth2.0/token?${params}`);
-    if (!response.ok) {
-      throw new Error(`Naver token exchange failed: ${await response.text()}`);
-    }
-    const data = await response.json();
-    return {
-      accessToken: data.access_token,
-      refreshToken: data.refresh_token,
-      expiresIn: Number(data.expires_in)
-    };
-  }
-  async getUserProfile(accessToken) {
-    const response = await fetch("https://openapi.naver.com/v1/nid/me", {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    });
-    if (!response.ok) {
-      throw new Error(`Naver profile fetch failed: ${await response.text()}`);
-    }
-    const data = await response.json();
-    const profile = data.response || {};
-    return {
-      id: profile.id,
-      email: profile.email,
-      name: profile.name || profile.nickname,
-      avatar: profile.profile_image,
-      raw: data
-    };
-  }
-};
-function initializeOAuthProviders() {
-  if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-    registerProvider(new GoogleProvider());
-    console.log("Google OAuth provider registered");
-  }
-  if (process.env.FACEBOOK_APP_ID && process.env.FACEBOOK_APP_SECRET) {
-    registerProvider(new FacebookProvider());
-    console.log("Facebook OAuth provider registered");
-  }
-  if (process.env.KAKAO_CLIENT_ID) {
-    registerProvider(new KakaoProvider());
-    console.log("Kakao OAuth provider registered");
-  }
-  if (process.env.NAVER_CLIENT_ID && process.env.NAVER_CLIENT_SECRET) {
-    registerProvider(new NaverProvider());
-    console.log("Naver OAuth provider registered");
-  }
-}
+  });
+  return middleware(c, next);
+});
+app.use("*", async (c, next) => {
+  const start = Date.now();
+  const path3 = c.req.path;
+  const method = c.req.method;
+  await next();
+  const ms = Date.now() - start;
+  log2(`${method} ${path3} ${c.res.status} in ${ms}ms`, "access");
+});
+setupAuthRoutes(app);
+registerRoutes(app);
+var app_default = app;
 
 // server/index.ts
-var app = express3();
-app.use(express3.json());
-app.use(express3.urlencoded({ extended: false }));
-var sessionSecret = process.env.SESSION_SECRET || "fallback-secret-change-me";
-app.use(session({
-  secret: sessionSecret,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === "production",
-    httpOnly: true,
-    maxAge: 30 * 24 * 60 * 60 * 1e3
-  }
-}));
-initializeOAuthProviders();
-setupAuthRoutes(app);
-app.use((req, res, next) => {
-  const start = Date.now();
-  const path7 = req.path;
-  let capturedJsonResponse = void 0;
-  const originalResJson = res.json;
-  res.json = function(bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-    if (path7.startsWith("/api")) {
-      let logLine = `${req.method} ${path7} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "\u2026";
-      }
-      log(logLine);
-    }
+var PORT = Number(process.env.PORT) || 5e3;
+var server = createServer();
+setupVite(app_default, server).then(() => {
+  const requestListener = getRequestListener(app_default.fetch);
+  server.on("request", requestListener);
+  server.listen(PORT, "0.0.0.0", () => {
+    log(`Server started on port ${PORT}`, "server");
   });
-  next();
 });
-var initialized = false;
-async function initializeApp() {
-  if (initialized) return;
-  initialized = true;
-  await registerRoutes(app);
-  app.use((err, _req, res, _next) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-    res.status(status).json({ message });
-  });
-  if (process.env.NODE_ENV !== "production") {
-  } else {
-    serveStatic(app);
-  }
-}
-if (process.env.NODE_ENV !== "production" || process.env.RENDER) {
-  initializeApp().then(() => {
-    const port = parseInt(process.env.PORT || "5001", 10);
-    import("http").then(({ createServer: createServer2 }) => {
-      const server = createServer2(app);
-      server.listen({ port, host: "0.0.0.0" }, () => {
-        log(`serving on port ${port}`);
-      });
-    });
-  });
-}
-async function handler(req, res) {
-  await initializeApp();
-  app(req, res);
-}
+var index_default = app_default.fetch;
 export {
-  app,
-  handler as default
+  index_default as default
 };

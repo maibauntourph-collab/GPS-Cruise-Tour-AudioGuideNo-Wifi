@@ -44,7 +44,10 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp } from 'lucide-react';
+import { getMatchedCityId } from '@/lib/locationService';
+import { LANDING_DATA } from '@/data/landingData';
+import { useLanguage } from '@/context/LanguageContext';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -180,6 +183,11 @@ export default function Home() {
   const [capturedRouteImage, setCapturedRouteImage] = useState<string | null>(null);
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
   const [showTourOnly, setShowTourOnly] = useState(false);
+
+  // [디자이너 킴의 매직 UI 상태]
+  const { language } = useLanguage();
+  const [landingCityId, setLandingCityId] = useState<string | null>(null);
+  const [hasShownLandingThisSession, setHasShownLandingThisSession] = useState<Set<string>>(new Set());
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [aiRecommendation, setAiRecommendation] = useState<{
     itinerary: Array<{ landmarkId: string; order: number }>;
@@ -321,6 +329,21 @@ export default function Home() {
 
     return () => clearInterval(checkSpeakingInterval);
   }, [position, audioEnabled, landmarks, selectedLanguage]);
+
+  // [디자이너 킴의 GPS 입성 감지 훅]
+  useEffect(() => {
+    // 초기 설정 다이얼로그(StartupDialog)가 닫힌 상태에서만 위치 기반 랜딩을 수행합니다.
+    if (position && !landingCityId && !showStartupDialog) {
+      const matchedId = getMatchedCityId(position.latitude, position.longitude);
+
+      // 새로 매칭된 도시가 있고, 이번 세션에서 해당 도시 랜딩을 보여준 적이 없을 때만 팝업
+      if (matchedId && !hasShownLandingThisSession.has(matchedId)) {
+        console.log(`🎊 [Magic Landing] Welcome to ${matchedId}! Showing landing page...`);
+        setLandingCityId(matchedId);
+        setHasShownLandingThisSession(prev => new Set(prev).add(matchedId));
+      }
+    }
+  }, [position, landingCityId, hasShownLandingThisSession, showStartupDialog]);
 
   const selectedCity = cities.find(c => c.id === selectedCityId);
 
@@ -2512,6 +2535,66 @@ export default function Home() {
       <Dialog open={showCreatorDashboard} onOpenChange={setShowCreatorDashboard}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden">
           <CreatorDashboard />
+        </DialogContent>
+      </Dialog>
+
+      {/* [디자이너 킴의 매직 UI: 자동 랜딩 다이얼로그] */}
+      <Dialog open={!!landingCityId} onOpenChange={(open) => !open && setLandingCityId(null)}>
+        <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none bg-transparent shadow-2xl">
+          {landingCityId && LANDING_DATA[landingCityId] && (
+            <div className="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-slate-900 transition-all animate-in fade-in zoom-in duration-300">
+              {/* 히어 로 이미지 섹션 */}
+              <div className="relative h-64 w-full">
+                <img
+                  src={LANDING_DATA[landingCityId][language]?.heroImage || LANDING_DATA[landingCityId]['en']?.heroImage}
+                  alt="City Welcome"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <button
+                  onClick={() => setLandingCityId(null)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white backdrop-blur-sm transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="absolute bottom-6 left-6 right-6 text-white text-center">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md border border-white/20 mb-3 animate-bounce">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    <span className="text-xs font-bold uppercase tracking-wider">New Area Detected</span>
+                  </div>
+                  <h2 className="text-3xl font-black mb-1 drop-shadow-lg">
+                    {LANDING_DATA[landingCityId][language]?.title || LANDING_DATA[landingCityId]['en']?.title}
+                  </h2>
+                </div>
+              </div>
+
+              {/* 콘텐츠 섹션 */}
+              <div className="p-8 text-center bg-white dark:bg-slate-900">
+                <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">
+                  {LANDING_DATA[landingCityId][language]?.subTitle || LANDING_DATA[landingCityId]['en']?.subTitle}
+                </p>
+
+                <div className="flex flex-col gap-3">
+                  <Button
+                    className="w-full h-14 rounded-xl text-lg font-bold shadow-lg hover:shadow-primary/30 transition-all active:scale-95 bg-primary text-primary-foreground"
+                    onClick={() => {
+                      handleCityChange(landingCityId);
+                      setLandingCityId(null);
+                    }}
+                  >
+                    {language === 'ko' ? '지금 둘러보기' : 'Explore Now'}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full h-12 rounded-xl text-slate-500 hover:text-slate-700 font-semibold"
+                    onClick={() => setLandingCityId(null)}
+                  >
+                    {language === 'ko' ? '나중에 볼래요' : 'Maybe Later'}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </>

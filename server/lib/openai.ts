@@ -1,16 +1,24 @@
 import OpenAI from "openai";
 import { Landmark } from "@shared/schema";
-import * as fs from "fs";
-import * as path from "path";
-import * as crypto from "crypto";
+// import * as fs from "fs";
+// import * as path from "path";
+import * as crypto from "node:crypto";
 
-// Initialize OpenAI client only if API key is provided
-export const openai = process.env.OPENAI_API_KEY
-  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  : null;
+import { env } from "../env";
 
-if (!openai) {
-  console.warn("WARNING: OPENAI_API_KEY not set. AI features (audio, recommendations) will be limited or unavailable.");
+// Lazy initialization holder
+let openaiInstance: OpenAI | null = null;
+
+export function getOpenAI() {
+  if (openaiInstance) return openaiInstance;
+
+  const apiKey = env.OPENAI_API_KEY;
+  if (apiKey) {
+    openaiInstance = new OpenAI({ apiKey });
+  } else {
+    console.warn("WARNING: OPENAI_API_KEY not set. AI features (audio, recommendations) will be limited or unavailable.");
+  }
+  return openaiInstance;
 }
 
 // Available OpenAI TTS voices with descriptions
@@ -69,6 +77,8 @@ export async function generateLandmarkAudio(
     // Generate audio using OpenAI TTS
     let buffer: Buffer;
 
+    const openai = getOpenAI();
+
     if (!openai) {
       console.warn(`[Mock] Generating mock audio for: ${text.slice(0, 20)}...`);
       // Return a very small empty MP3 buffer as a mock
@@ -88,22 +98,21 @@ export async function generateLandmarkAudio(
     // Calculate checksum
     const checksum = crypto.createHash('md5').update(buffer).digest('hex');
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = path.join(process.cwd(), 'uploads', 'audio');
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
-    }
+    // [Cloudflare Workers Migration] File system is not available.
+    // Use Data URI for audio playback instead of saving to disk.
+    const base64Audio = buffer.toString('base64');
+    const dataUri = `data:audio/mp3;base64,${base64Audio}`;
 
-    // Save file with unique name
+    // Mock file connection logic removed
     const fileName = `${landmarkId}-${language}-${checksum.slice(0, 8)}.mp3`;
-    const filePath = path.join(uploadsDir, fileName);
-    fs.writeFileSync(filePath, buffer);
+    console.log(`[Audio] Generated audio for ${fileName} (${buffer.length} bytes)`);
+    // fs.writeFileSync(filePath, buffer);
 
     // Estimate duration (rough estimate: ~150 chars per second for speech)
     const duration = Math.ceil(text.length / 15); // seconds
 
     return {
-      audioUrl: `/uploads/audio/${fileName}`,
+      audioUrl: dataUri,
       duration,
       sizeBytes: buffer.length,
       checksum,
@@ -196,6 +205,7 @@ Respond in this exact JSON format:
   "totalEstimatedTime": number (in minutes)
 }`;
 
+    const openai = getOpenAI();
     const result = !openai
       ? {
         itinerary: landmarks.slice(0, 3).map((l, i) => ({ landmarkId: l.id, order: i + 1 })),
@@ -235,6 +245,7 @@ Respond in this exact JSON format:
 }
 
 export async function generateImage(prompt: string): Promise<string> {
+  const openai = getOpenAI();
   if (!openai) {
     throw new Error("OpenAI API key not configured");
   }

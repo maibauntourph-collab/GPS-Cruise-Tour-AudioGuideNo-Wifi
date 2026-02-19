@@ -5,11 +5,7 @@ import { eq, count, and, sql, notInArray, desc } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
 import { CITIES } from './data/cities';
 import { LANDMARKS } from './data/landmarks';
-import fs from 'fs';
-import path from 'path';
-
-const DATA_DIR = path.join(process.cwd(), 'server', 'data');
-const DATA_FILE = path.join(DATA_DIR, 'persistence.json');
+import { env } from "./env";
 
 // [AI 데이터베이스 총괄의 'No-Wifi' 데이터 철학]
 // "우리 서비스의 이름은 'nowifigps'입니다. 즉, 바다 위 크루즈나 인터넷이 없는 오지에서도 
@@ -78,41 +74,7 @@ export class MemStorage implements IStorage {
   private nextIdentityId: number = 1;
 
   constructor() {
-    this.loadFromDisk();
-  }
-
-  private loadFromDisk() {
-    try {
-      if (fs.existsSync(DATA_FILE)) {
-        const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
-        if (data.cities) {
-          this.citiesMap = new Map(Object.entries(data.cities));
-          console.log(`[Storage] Loaded ${this.citiesMap.size} cities from disk.`);
-        }
-        if (data.landmarks) {
-          this.landmarksMap = new Map(Object.entries(data.landmarks));
-          console.log(`[Storage] Loaded ${this.landmarksMap.size} landmarks from disk.`);
-        }
-      }
-    } catch (error) {
-      console.error('[Storage] Failed to load data from disk:', error);
-    }
-  }
-
-  private saveToDisk() {
-    try {
-      if (!fs.existsSync(DATA_DIR)) {
-        fs.mkdirSync(DATA_DIR, { recursive: true });
-      }
-      const data = {
-        cities: Object.fromEntries(this.citiesMap.entries()),
-        landmarks: Object.fromEntries(this.landmarksMap.entries()),
-      };
-      fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-      console.log('[Storage] Data saved to disk.');
-    } catch (error) {
-      console.error('[Storage] Failed to save data to disk:', error);
-    }
+    // Memory storage initialized empty (no disk load)
   }
   async getCities(): Promise<City[]> {
     const hardcodedIds = CITIES.map(c => c.id);
@@ -314,7 +276,7 @@ export class MemStorage implements IStorage {
 
   // User methods
   async getUserById(id: string): Promise<User | undefined> {
-    if (!process.env.NOWIFIGPSTOURS) {
+    if (!env.NOWIFIGPSTOURS) {
       return Array.from(this.usersMap.values()).find(u => u.id === id);
     }
     try {
@@ -327,7 +289,7 @@ export class MemStorage implements IStorage {
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    if (!process.env.NOWIFIGPSTOURS) {
+    if (!env.NOWIFIGPSTOURS) {
       return Array.from(this.usersMap.values()).find(u => u.email === email);
     }
     try {
@@ -340,7 +302,7 @@ export class MemStorage implements IStorage {
   }
 
   async createUser(user: InsertUser): Promise<User> {
-    if (!process.env.NOWIFIGPSTOURS) {
+    if (!env.NOWIFIGPSTOURS) {
       console.warn("[Storage] No NOWIFIGPSTOURS, using memory for createUser");
       const id = String(this.nextUserId++);
       const newUser: User = {
@@ -658,7 +620,7 @@ export class MemStorage implements IStorage {
       const newCityMem = { ...cityData, id: cityData.id || `city_${Date.now()}` } as City;
       this.citiesMap.set(newCityMem.id, newCityMem);
       console.log(`[Storage Debug] City saved to memory map. Map size: ${this.citiesMap.size}`);
-      this.saveToDisk(); // Persistence fix
+      // this.saveToDisk(); // Persistence disabled
       return newCityMem;
     }
   }
@@ -671,7 +633,7 @@ export class MemStorage implements IStorage {
       console.warn('[AI DB Manager] DB create landmark failed, falling back to memory:', error);
       const newLandmark = { ...landmarkData, id: landmarkData.id || `landmark_${Date.now()}` } as Landmark;
       this.landmarksMap.set(newLandmark.id, newLandmark);
-      this.saveToDisk(); // Persistence fix
+      // this.saveToDisk(); // Persistence disabled
       return newLandmark;
     }
   }
@@ -690,7 +652,7 @@ export class MemStorage implements IStorage {
       if (city) {
         const updatedCity = { ...city, ...updates, updatedAt: new Date() };
         this.citiesMap.set(id, updatedCity);
-        this.saveToDisk();
+        // this.saveToDisk();
         return updatedCity;
       }
       return undefined;
@@ -711,7 +673,7 @@ export class MemStorage implements IStorage {
       if (landmark) {
         const updatedLandmark = { ...landmark, ...updates, updatedAt: new Date() };
         this.landmarksMap.set(id, updatedLandmark);
-        this.saveToDisk();
+        // this.saveToDisk();
         return updatedLandmark;
       }
       return undefined;

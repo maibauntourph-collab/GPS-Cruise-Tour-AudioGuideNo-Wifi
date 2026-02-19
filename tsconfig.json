@@ -9,7 +9,8 @@
     "node_modules",
     "build",
     "dist",
-    "**/*.test.ts"
+    "**/*.test.ts",
+    "server/routes_express.ts"
   ],
   "compilerOptions": {
     "incremental": true,

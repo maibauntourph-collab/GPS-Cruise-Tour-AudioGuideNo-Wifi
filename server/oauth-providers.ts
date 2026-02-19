@@ -1,9 +1,10 @@
 import type { OAuthProvider, OAuthTokens, OAuthProfile, OAuthConfig } from "./auth";
 import { registerProvider } from "./auth";
+import { env } from "./env";
 
 function getBaseUrl(): string {
-  return process.env.REPLIT_DEV_DOMAIN
-    ? `https://${process.env.REPLIT_DEV_DOMAIN}`
+  return env.REPLIT_DEV_DOMAIN
+    ? `https://${env.REPLIT_DEV_DOMAIN}`
     : `http://localhost:5001`;
 }
 
@@ -13,8 +14,8 @@ class GoogleProvider implements OAuthProvider {
 
   constructor() {
     this.config = {
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      clientId: env.GOOGLE_CLIENT_ID || "",
+      clientSecret: env.GOOGLE_CLIENT_SECRET || "",
       redirectUri: `${getBaseUrl()}/api/auth/google/callback`
     };
   }
@@ -83,8 +84,8 @@ class FacebookProvider implements OAuthProvider {
 
   constructor() {
     this.config = {
-      clientId: process.env.FACEBOOK_APP_ID || "",
-      clientSecret: process.env.FACEBOOK_APP_SECRET || "",
+      clientId: env.FACEBOOK_APP_ID || "",
+      clientSecret: env.FACEBOOK_APP_SECRET || "",
       redirectUri: `${getBaseUrl()}/api/auth/facebook/callback`
     };
   }
@@ -146,8 +147,8 @@ class KakaoProvider implements OAuthProvider {
 
   constructor() {
     this.config = {
-      clientId: process.env.KAKAO_CLIENT_ID || "",
-      clientSecret: process.env.KAKAO_CLIENT_SECRET || "",
+      clientId: env.KAKAO_CLIENT_ID || "",
+      clientSecret: env.KAKAO_CLIENT_SECRET || "",
       redirectUri: `${getBaseUrl()}/api/auth/kakao/callback`
     };
   }
@@ -216,8 +217,8 @@ class NaverProvider implements OAuthProvider {
 
   constructor() {
     this.config = {
-      clientId: process.env.NAVER_CLIENT_ID || "",
-      clientSecret: process.env.NAVER_CLIENT_SECRET || "",
+      clientId: env.NAVER_CLIENT_ID || "",
+      clientSecret: env.NAVER_CLIENT_SECRET || "",
       redirectUri: `${getBaseUrl()}/api/auth/naver/callback`
     };
   }
@@ -277,22 +278,22 @@ class NaverProvider implements OAuthProvider {
 }
 
 export function initializeOAuthProviders() {
-  if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  if (env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET) {
     registerProvider(new GoogleProvider());
     console.log("Google OAuth provider registered");
   }
 
-  if (process.env.FACEBOOK_APP_ID && process.env.FACEBOOK_APP_SECRET) {
+  if (env.FACEBOOK_APP_ID && env.FACEBOOK_APP_SECRET) {
     registerProvider(new FacebookProvider());
     console.log("Facebook OAuth provider registered");
   }
 
-  if (process.env.KAKAO_CLIENT_ID) {
+  if (env.KAKAO_CLIENT_ID) {
     registerProvider(new KakaoProvider());
     console.log("Kakao OAuth provider registered");
   }
 
-  if (process.env.NAVER_CLIENT_ID && process.env.NAVER_CLIENT_SECRET) {
+  if (env.NAVER_CLIENT_ID && env.NAVER_CLIENT_SECRET) {
     registerProvider(new NaverProvider());
     console.log("Naver OAuth provider registered");
   }

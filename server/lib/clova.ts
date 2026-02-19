@@ -1,6 +1,7 @@
-import * as crypto from "crypto";
-import * as fs from "fs";
-import * as path from "path";
+import * as crypto from "node:crypto";
+import { env } from "../env";
+// import * as fs from "fs";
+// import * as path from "path";
 
 const CLOVA_API_URL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
 
@@ -86,8 +87,8 @@ export async function generateClovaTTS(
   pitch: number = 0,
   volume: number = 0
 ): Promise<ClovaAudioResult> {
-  const clientId = process.env.NAVER_CLIENT_ID;
-  const clientSecret = process.env.NAVER_CLIENT_SECRET;
+  const clientId = env.NAVER_CLIENT_ID;
+  const clientSecret = env.NAVER_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {
     throw new Error("NAVER_CLIENT_ID and NAVER_CLIENT_SECRET must be set");
@@ -134,22 +135,18 @@ export async function generateAndSaveClovaTTS(
   voiceId?: ClovaVoiceId
 ): Promise<{ audioUrl: string; voiceId: ClovaVoiceId; sizeBytes: number; checksum: string }> {
   const selectedVoice = voiceId || DEFAULT_CLOVA_VOICE_BY_LANGUAGE[language] || "nara";
-  
+
   const result = await generateClovaTTS(text, selectedVoice);
-  
-  const audioDir = path.join(process.cwd(), "public", "audio", "clova");
-  if (!fs.existsSync(audioDir)) {
-    fs.mkdirSync(audioDir, { recursive: true });
-  }
-  
-  const filename = `${landmarkId}_${language}_${selectedVoice}.mp3`;
-  const filePath = path.join(audioDir, filename);
-  fs.writeFileSync(filePath, result.audioBuffer);
-  
+
+  // [Cloudflare Workers] File system is not available.
+  // Use Data URI for audio playback.
+  const base64Audio = result.audioBuffer.toString('base64');
+  const dataUri = `data:audio/mp3;base64,${base64Audio}`;
+
   const checksum = crypto.createHash("md5").update(result.audioBuffer).digest("hex");
-  
+
   return {
-    audioUrl: `/audio/clova/${filename}`,
+    audioUrl: dataUri,
     voiceId: selectedVoice,
     sizeBytes: result.audioBuffer.length,
     checksum,

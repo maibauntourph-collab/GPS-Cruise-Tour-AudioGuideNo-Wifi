@@ -5,9 +5,11 @@ import { Landmark } from "@shared/schema";
 // Lazy initialization to ensure env vars are loaded
 let aiInstance: GoogleGenAI | null = null;
 
+import { env } from "../env";
+
 export function getAI() {
   if (!aiInstance) {
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = env.GEMINI_API_KEY;
     if (!apiKey) {
       console.warn("GEMINI_API_KEY is missing. AI features will use mock data.");
       return null;
@@ -77,7 +79,8 @@ Respond with ONLY this exact JSON format (no other text):
   "itinerary": [{"landmarkId": "string", "order": number}],
   "explanation": "Detailed explanation of why you recommend this order. If premium landmarks are included, mention their value. (3-5 sentences)",
   "totalEstimatedTime": number (in minutes)
-}`;
+}
+`;
 
     const ai = getAI();
     if (!ai) {

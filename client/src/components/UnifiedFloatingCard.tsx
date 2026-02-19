@@ -2029,12 +2029,17 @@ export default function UnifiedFloatingCard({
                       >
                         <div className="flex">
                           {/* Photo Thumbnail */}
+                          {/* [학습 포인트] img onError: 이미지 로드 실패 시 해당 img를 숨기고 fallback UI를 표시 */}
                           {hasPhoto && (
-                            <div className="w-20 h-20 flex-shrink-0 relative overflow-hidden">
+                            <div className="w-20 h-20 flex-shrink-0 relative overflow-hidden bg-muted">
                               <img
                                 src={landmark.photos![0]}
                                 alt={getTranslatedContent(landmark, selectedLanguage, 'name')}
                                 className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  // 이미지 로드 실패: 이미지 숨기고 부모를 muted 배경으로 대체
+                                  (e.target as HTMLImageElement).style.display = 'none';
+                                }}
                               />
                               <div className={`absolute top-1 left-1 ${styles.bg} ${styles.text} rounded-full p-1`}>
                                 {getCategoryIcon(landmark.category)}

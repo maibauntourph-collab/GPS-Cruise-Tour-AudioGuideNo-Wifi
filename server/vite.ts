@@ -1,11 +1,17 @@
-import express, { type Express } from "express";
+
+import { Hono } from "hono";
 import fs from "fs";
 import path from "path";
-import { createServer as createViteServer, createLogger } from "vite";
+import { createServer as createViteServer, createLogger, ViteDevServer } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 import { ogService } from "./services/ogService";
+import { fileURLToPath } from "url";
+import { serveStatic as honoServeStatic } from "@hono/node-server/serve-static";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const viteLogger = createLogger();
 
@@ -20,7 +26,7 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
-export async function setupVite(app: Express, server: Server) {
+export async function setupVite(app: Hono<any>, server: Server): Promise<ViteDevServer> {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
@@ -41,45 +47,45 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-  app.use(vite.middlewares);
-  app.use("*", async (req, res, next) => {
-    const url = req.originalUrl;
+  // Hono does not support Connect middleware directly in a way that works seamlessly with Vite's internals
+  // without a wrapper AND access to raw req/res. 
+  // We will return the 'vite' instance so index.ts can attach it to the raw Node server.
+
+  app.get("*", async (c, next) => {
+    const url = c.req.url;
+    const { pathname } = new URL(url);
+
+    if (pathname.startsWith("/api")) {
+      return next();
+    }
 
     try {
-      const clientTemplate = path.resolve(
-        import.meta.dirname,
-        "..",
-        "client",
-        "index.html",
-      );
-
-      // always reload the index.html file from disk incase it changes
+      const clientTemplate = path.join(__dirname, "..", "client", "index.html");
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
-      let page = await vite.transformIndexHtml(url, template);
 
-      /**
-       * [마케터 쏭의 핵심 기술: 동적 메타 데이터 주입]
-       * 학생 여러분, 여기가 바로 우리 앱의 첫인상을 결정하는 마법의 장소예요!
-       * `vite.transformIndexHtml`이 HTML을 기본적으로 변환해주면, 
-       * 우리가 만든 `ogService`가 그 속에 접속한 주소에 맞는(명소/도시) 태그를 심어준답니다.
-       * 이렇게 하면 SNS에 공유했을 때 흰 화면이 아니라 멋진 명소 사진이 뜨게 되는 거죠!
-       */
-      page = await ogService.injectMetaTags(page, url);
+      // Vite transformation
+      // We use the vite instance created in this scope
+      const page = await vite.transformIndexHtml(url, template);
 
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      // OG metatags
+      const finalHtml = await ogService.injectMetaTags(page, url);
+
+      return c.html(finalHtml);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
-      next(e);
+      return next();
     }
   });
+
+  return vite;
 }
 
-export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "..", "dist");
+export function serveStatic(app: Hono) {
+  const distPath = path.resolve(__dirname, "..", "dist");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
@@ -87,21 +93,27 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
+  // Serve static files from /assets (Vite build output)
+  app.use("/assets/*", honoServeStatic({
+    root: path.relative(process.cwd(), "dist")
+  }));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", async (req, res) => {
-    const url = req.originalUrl;
-    const indexPath = path.resolve(distPath, "index.html");
+  // Serve other root files if needed, or specific static folders
+  // Note: Hono's serveStatic is relative to CWD usually.
 
+  app.get("*", async (c, next) => {
+    if (c.req.path.startsWith("/api")) {
+      return next();
+    }
+
+    const indexPath = path.join(distPath, "index.html");
     try {
       let html = await fs.promises.readFile(indexPath, "utf-8");
-      // [마케터 쏭] 운영 환경에서도 SNS 공유는 소중하니까요! OG 태그를 주입해서 보냅니다.
-      html = await ogService.injectMetaTags(html, url);
-      res.status(200).set({ "Content-Type": "text/html" }).send(html);
+      html = await ogService.injectMetaTags(html, c.req.url);
+      return c.html(html);
     } catch (e) {
-      console.error("Failed to serve index.html with OG tags:", e);
-      res.sendFile(indexPath);
+      console.error("Failed to serve index.html:", e);
+      return c.text("Internal Server Error", 500);
     }
   });
 }

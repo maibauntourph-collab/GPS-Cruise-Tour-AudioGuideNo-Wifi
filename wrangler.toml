@@ -1,0 +1,22 @@
+name = "gps-audio-guide-no-wifi"
+compatibility_date = "2024-02-19"
+compatibility_flags = ["nodejs_compat"]
+main = "server/worker.ts"
+
+[vars]
+NODE_ENV = "production"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "gps-guide-db"
+database_id = "to-be-set-after-creation"
+
+[site]
+bucket = "./dist"
+
+[build]
+command = "npm run build"
+watch_dir = "server"
+
+[triggers]
+crons = ["0 * * * *"]
