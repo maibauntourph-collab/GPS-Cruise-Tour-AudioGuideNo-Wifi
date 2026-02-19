@@ -86,10 +86,8 @@ async function initializeApp() {
   });
 
   // [적요: 프로덕션에서만 정적 파일 서빙]
-  // 개발환경에서는 Vite Dev Server가 처리합니다.
-  if (process.env.NODE_ENV !== "production") {
-    // 로컬 개발환경에서만 Vite 실행
-  } else {
+  // 개발환경에서는 아래 로컬 실행 블록에서 Vite Dev Server를 설정합니다.
+  if (process.env.NODE_ENV === "production") {
     serveStatic(app);
   }
 }
@@ -97,13 +95,19 @@ async function initializeApp() {
 // [적요: 로컬 실행 시에만 HTTP 서버 시작]
 // Vercel 프로덕션 환경에서는 이 블록이 실행되지 않습니다.
 if (process.env.NODE_ENV !== 'production' || process.env.RENDER) {
-  initializeApp().then(() => {
+  initializeApp().then(async () => {
+    const { createServer } = await import('http');
+    const server = createServer(app);
     const port = parseInt(process.env.PORT || '5001', 10);
-    import('http').then(({ createServer }) => {
-      const server = createServer(app);
-      server.listen({ port, host: "0.0.0.0" }, () => {
-        log(`serving on port ${port}`);
-      });
+
+    // [적요: 개발 환경에서 Vite HMR(Hot Module Replacement) 설정]
+    // setupVite는 server 인스턴스가 필요하므로 여기서 호출합니다.
+    if (process.env.NODE_ENV === 'development') {
+      await setupVite(app, server);
+    }
+
+    server.listen({ port, host: "0.0.0.0" }, () => {
+      log(`serving on port ${port}`);
     });
   });
 }
