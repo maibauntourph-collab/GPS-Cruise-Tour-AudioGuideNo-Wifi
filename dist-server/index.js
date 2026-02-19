@@ -13033,49 +13033,6 @@ function log(message, source = "express") {
   });
   console.log(`${formattedTime} [${source}] ${message}`);
 }
-async function setupVite(app2, server) {
-  const serverOptions = {
-    middlewareMode: true,
-    hmr: { server },
-    allowedHosts: true
-  };
-  const vite = await createViteServer({
-    ...vite_config_default,
-    configFile: false,
-    customLogger: {
-      ...viteLogger,
-      error: (msg, options) => {
-        viteLogger.error(msg, options);
-        process.exit(1);
-      }
-    },
-    server: serverOptions,
-    appType: "custom"
-  });
-  app2.use(vite.middlewares);
-  app2.use("*", async (req, res, next) => {
-    const url = req.originalUrl;
-    try {
-      const clientTemplate = path6.resolve(
-        import.meta.dirname,
-        "..",
-        "client",
-        "index.html"
-      );
-      let template = await fs5.promises.readFile(clientTemplate, "utf-8");
-      template = template.replace(
-        `src="/src/main.tsx"`,
-        `src="/src/main.tsx?v=${nanoid()}"`
-      );
-      let page = await vite.transformIndexHtml(url, template);
-      page = await ogService.injectMetaTags(page, url);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
-    } catch (e) {
-      vite.ssrFixStacktrace(e);
-      next(e);
-    }
-  });
-}
 function serveStatic(app2) {
   const distPath = path6.resolve(import.meta.dirname, "..", "dist");
   if (!fs5.existsSync(distPath)) {
@@ -13354,11 +13311,7 @@ function initializeOAuthProviders() {
 var app = express3();
 app.use(express3.json());
 app.use(express3.urlencoded({ extended: false }));
-var sessionSecret = process.env.SESSION_SECRET;
-if (!sessionSecret) {
-  console.error("FATAL: SESSION_SECRET environment variable is required");
-  process.exit(1);
-}
+var sessionSecret = process.env.SESSION_SECRET || "fallback-secret-change-me";
 app.use(session({
   secret: sessionSecret,
   resave: false,
@@ -13395,27 +13348,37 @@ app.use((req, res, next) => {
   });
   next();
 });
-(async () => {
-  const health = await dbCheckService.checkConnection();
-  if (health.status === "unhealthy" && process.env.NODE_ENV === "production") {
-    console.error("[FATAL] Server startup aborted: Primary DB is unreachable.");
-  }
-  const server = await registerRoutes(app);
+var initialized = false;
+async function initializeApp() {
+  if (initialized) return;
+  initialized = true;
+  await registerRoutes(app);
   app.use((err, _req, res, _next) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
     res.status(status).json({ message });
   });
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
+  if (process.env.NODE_ENV !== "production") {
   } else {
     serveStatic(app);
   }
-  const port = parseInt(process.env.PORT || "5001", 10);
-  server.listen({
-    port,
-    host: "0.0.0.0"
-  }, () => {
-    log(`serving on port ${port}`);
+}
+if (process.env.NODE_ENV !== "production" || process.env.RENDER) {
+  initializeApp().then(() => {
+    const port = parseInt(process.env.PORT || "5001", 10);
+    import("http").then(({ createServer: createServer2 }) => {
+      const server = createServer2(app);
+      server.listen({ port, host: "0.0.0.0" }, () => {
+        log(`serving on port ${port}`);
+      });
+    });
   });
-})();
+}
+async function handler(req, res) {
+  await initializeApp();
+  app(req, res);
+}
+export {
+  app,
+  handler as default
+};
