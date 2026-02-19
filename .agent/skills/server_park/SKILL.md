@@ -47,3 +47,32 @@ description: AI 백엔드 팀장 — 인프라 및 엔진 최적화 전문가
 3. **에러 핸들링 원칙**
     - 모든 비동기 요청은 `try-catch` 또는 `express-async-errors`로 감싸십시오.
     - 사용자에게는 친절한 메시지를, 서버 로그에는 상세 스택 트레이스를 남기십시오.
+
+---
+
+## 🗄️ 데이터베이스 연결 가이드라인
+
+> ⚠️ **중요**: 데이터베이스 관련 작업(Vercel, Express, NeonDB 연결 등)은 **Claude Sonnet 4.6**으로 진행하여 코드를 개발할 것.
+
+| 항목 | 설정 |
+|------|------|
+| **DB 서비스** | Neon PostgreSQL (Serverless) |
+| **ORM** | Drizzle ORM (`drizzle-orm/neon-http`) |
+| **드라이버** | `@neondatabase/serverless` (HTTP 방식) |
+| **환경변수 키** | `NOWIFIGPSTOURS` (단일 키, 기존 DATABASE_URL 사용하지 않음) |
+| **배포 플랫폼** | Vercel (서버리스 함수) |
+
+### 핵심 파일 구조
+- `server/db.ts` — Neon HTTP 연결 설정 (WebSocket 사용 안 함)
+- `api/index.ts` — Vercel 서버리스 함수 진입점 (`dist-server/index.js` import)
+- `vercel.json` — 빌드 명령 및 API 라우팅 설정
+- `drizzle.config.ts` — Drizzle 마이그레이션 설정
+- `.env` — 로컬 환경변수 (git에 포함하지 않음)
+
+### Vercel 배포 체크리스트
+1. Vercel Dashboard → Settings → Environment Variables에 `NOWIFIGPSTOURS` 설정
+2. 값: `postgresql://neondb_owner:...@...neon.tech/neondb?sslmode=require`
+3. 환경변수 추가 후 반드시 **Redeploy** 실행 (자동 반영 안 됨)
+4. `/api/debug/env`로 환경변수 인식 여부 확인
+5. `/api/debug/db-connection`으로 DB 연결 상태 확인
+
