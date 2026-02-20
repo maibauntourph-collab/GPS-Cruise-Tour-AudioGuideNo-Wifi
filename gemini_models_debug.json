@@ -5,6 +5,7 @@
       "version": "001",
       "displayName": "Gemini 2.5 Flash",
       "description": "Stable version of Gemini 2.5 Flash, our mid-size multimodal model that supports up to 1 million tokens, released in June of 2025.",
+      "notes_ko": "학생 여러분, 이 모델은 2025년 6월에 출시된 중간 크기의 멀티모달 모델입니다. 최대 100만 토큰의 거대한 컨텍스트 창을 지원하여 방대한 문서를 한 번에 읽고 이해할 수 있는 아주 똑똑한 친구랍니다. 속도와 효율성 면에서 아주 뛰어나죠.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -24,6 +25,7 @@
       "version": "2.5",
       "displayName": "Gemini 2.5 Pro",
       "description": "Stable release (June 17th, 2025) of Gemini 2.5 Pro",
+      "notes_ko": "이 모델은 제미나이 제품군 중 가장 강력한 추론 능력을 갖춘 '프로' 등급의 모델입니다. 복잡한 문제를 풀거나 코드를 짤 때 아주 훌륭한 성능을 보여주니, 어려운 과제를 할 때 이 모델을 활용해 보세요!",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -43,6 +45,7 @@
       "version": "2.0",
       "displayName": "Gemini 2.0 Flash",
       "description": "Gemini 2.0 Flash",
+      "notes_ko": "2.0 버전의 차세대 플래시 모델입니다. 이전 세대보다 더 빠른 응답 속도와 향상된 성능을 자랑하며, 실시간 대화나 빠른 처리가 필요한 애플리케이션에 최적화되어 있습니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -61,6 +64,7 @@
       "version": "2.0",
       "displayName": "Gemini 2.0 Flash 001",
       "description": "Stable version of Gemini 2.0 Flash, our fast and versatile multimodal model for scaling across diverse tasks, released in January of 2025.",
+      "notes_ko": "2025년 1월에 출시된 2.0 플래시의 안정화 버전입니다. 다양한 작업을 규모 있게 처리할 수 있도록 설계된 다능한 모델로, 비즈니스 환경에서 믿고 쓸 수 있는 성능을 제공합니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -79,6 +83,7 @@
       "version": "2.0",
       "displayName": "Gemini 2.0 Flash (Image Generation) Experimental",
       "description": "Gemini 2.0 Flash (Image Generation) Experimental",
+      "notes_ko": "🚩 매우 중요한 모델입니다! 제미나이 2.0의 강력한 엔진을 바탕으로 이미지를 생성할 수 있는 능력을 가진 실험적 모델이에요. 텍스트 설명을 바탕으로 멋진 그림을 그려낼 수 있답니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -96,6 +101,7 @@
       "version": "2.0",
       "displayName": "Gemini 2.0 Flash-Lite 001",
       "description": "Stable version of Gemini 2.0 Flash-Lite",
+      "notes_ko": "플래시 모델보다 더욱 가볍고 빠른 '라이트' 버전입니다. 복잡한 계산보다는 간단한 질의응답이나 빠른 데이터 처리에 아주 효율적이며 비용도 저렴합니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -114,6 +120,7 @@
       "version": "2.0",
       "displayName": "Gemini 2.0 Flash-Lite",
       "description": "Gemini 2.0 Flash-Lite",
+      "notes_ko": "제미나이 2.0 기반의 라이트 모델입니다. 가벼운 모바일 앱이나 간단한 웹 서비스에서 실시간으로 지능적인 기능을 구현할 때 딱 맞는 도구입니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -132,6 +139,7 @@
       "version": "gemini-2.5-flash-exp-tts-2025-05-19",
       "displayName": "Gemini 2.5 Flash Preview TTS",
       "description": "Gemini 2.5 Flash Preview TTS",
+      "notes_ko": "텍스트를 사람의 목소리처럼 생생하게 읽어주는(TTS) 기능이 포함된 미래 지향적 모델입니다. 오디오 출력이 필요한 서비스에 활용하면 좋겠네요.",
       "inputTokenLimit": 8192,
       "outputTokenLimit": 16384,
       "supportedGenerationMethods": [
@@ -148,6 +156,7 @@
       "version": "gemini-2.5-pro-preview-tts-2025-05-19",
       "displayName": "Gemini 2.5 Pro Preview TTS",
       "description": "Gemini 2.5 Pro Preview TTS",
+      "notes_ko": "프로 급 추론 능력과 TTS 능력을 결합한 모델입니다. 지능적인 답변을 자연스러운 음성으로 들려주고 싶을 때 사용하는 고성능 모델이라 생각하면 됩니다.",
       "inputTokenLimit": 8192,
       "outputTokenLimit": 16384,
       "supportedGenerationMethods": [
@@ -164,6 +173,7 @@
       "name": "models/gemma-3-1b-it",
       "version": "001",
       "displayName": "Gemma 3 1B",
+      "notes_ko": "구글이 개발한 오픈 모델 '젬마'의 3세대 버전입니다. 10억 개의 매개변수를 가진 매우 작은 크기로, 스마트폰이나 노트북 같은 개인용 기기에서도 원활하게 작동합니다.",
       "inputTokenLimit": 32768,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -178,6 +188,7 @@
       "name": "models/gemma-3-4b-it",
       "version": "001",
       "displayName": "Gemma 3 4B",
+      "notes_ko": "40억 개의 매개변수를 가진 젬마 모델입니다. 크기 대비 성능이 아주 뛰어나서, 적당한 사양의 컴퓨터에서도 상당히 똑똑하게 답변을 해준답니다.",
       "inputTokenLimit": 32768,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -192,6 +203,7 @@
       "name": "models/gemma-3-12b-it",
       "version": "001",
       "displayName": "Gemma 3 12B",
+      "notes_ko": "120억 개의 매개변수를 가진 강력한 오픈 모델입니다. 제미나이 프로 수준의 지식을 갖추고 있으면서도 사용자가 직접 서버에 설치해서 자유롭게 사용할 수 있는 모델이죠.",
       "inputTokenLimit": 32768,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -206,6 +218,7 @@
       "name": "models/gemma-3-27b-it",
       "version": "001",
       "displayName": "Gemma 3 27B",
+      "notes_ko": "젬마 시리즈 중 가장 거대한 270억 매개변수 모델입니다. 복잡한 논리 구조를 이해하고 정교한 답변을 생성하는 데 특화되어 있습니다.",
       "inputTokenLimit": 131072,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -220,6 +233,7 @@
       "name": "models/gemma-3n-e4b-it",
       "version": "001",
       "displayName": "Gemma 3n E4B",
+      "notes_ko": "특정 작업에 특화되어 훈련된(Fine-tuned) 젬마 모델 변형입니다. 특정 분야에서 더 나은 성능을 보여주도록 최적화되어 있습니다.",
       "inputTokenLimit": 8192,
       "outputTokenLimit": 2048,
       "supportedGenerationMethods": [
@@ -234,6 +248,7 @@
       "name": "models/gemma-3n-e2b-it",
       "version": "001",
       "displayName": "Gemma 3n E2B",
+      "notes_ko": "E4B보다 더 가벼운 특수 목적용 젬마 모델입니다. 초경량 환경에서 전문적인 작업을 수행하는 데 도움을 줍니다.",
       "inputTokenLimit": 8192,
       "outputTokenLimit": 2048,
       "supportedGenerationMethods": [
@@ -249,6 +264,7 @@
       "version": "Gemini Flash Latest",
       "displayName": "Gemini Flash Latest",
       "description": "Latest release of Gemini Flash",
+      "notes_ko": "실시간으로 계속 업데이트되는 가장 최신 버전의 제미나이 플래시 모델입니다. 항상 최상의 속도와 모델 안정성을 제공하도록 관리되고 있습니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -268,6 +284,7 @@
       "version": "Gemini Flash-Lite Latest",
       "displayName": "Gemini Flash-Lite Latest",
       "description": "Latest release of Gemini Flash-Lite",
+      "notes_ko": "최신 사양의 제미나이 플래시 라이트 모델입니다. 가벼운 작업에 대해 항상 최신 기술을 적용하여 가장 경제적이고 빠른 성능을 보여줍니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -287,6 +304,7 @@
       "version": "Gemini Pro Latest",
       "displayName": "Gemini Pro Latest",
       "description": "Latest release of Gemini Pro",
+      "notes_ko": "항상 최신 상태로 유지되는 제미나이 프로 모델입니다. 가장 고도화된 지능과 문제 풀이 능력을 지속적으로 반영하는 모델입니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -306,6 +324,7 @@
       "version": "001",
       "displayName": "Gemini 2.5 Flash-Lite",
       "description": "Stable version of Gemini 2.5 Flash-Lite, released in July of 2025",
+      "notes_ko": "2025년 7월에 안정화 버전으로 출시된 2.5 플래시 라이트 모델입니다. 아주 경제적이면서도 뛰어난 언어 이해 능력을 갖추고 있습니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -325,6 +344,7 @@
       "version": "2.0",
       "displayName": "Nano Banana",
       "description": "Gemini 2.5 Flash Preview Image",
+      "notes_ko": "일부 환경에서 '나노 바나나'라는 귀여운 이름으로도 불리는 이미지 인식 및 생성을 지원할 수 있는 실험적 모델입니다.",
       "inputTokenLimit": 32768,
       "outputTokenLimit": 32768,
       "supportedGenerationMethods": [
@@ -342,6 +362,7 @@
       "version": "2.5-preview-09-25",
       "displayName": "Gemini 2.5 Flash-Lite Preview Sep 2025",
       "description": "Preview release (Septempber 25th, 2025) of Gemini 2.5 Flash-Lite",
+      "notes_ko": "2025년 9월에 공개된 미리보기 버전입니다. 정식 출시 전에 최신의 성능을 미리 체험해 볼 수 있도록 제공됩니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -361,6 +382,7 @@
       "version": "3-pro-preview-11-2025",
       "displayName": "Gemini 3 Pro Preview",
       "description": "Gemini 3 Pro Preview",
+      "notes_ko": "우와! 무려 3세대 제미나이 프로의 미리보기 모델입니다. 2025년 11월에 공개되었으며, 더욱 사람 같은 지능과 다국어 처리 능력을 보여줍니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -380,6 +402,7 @@
       "version": "3-flash-preview-12-2025",
       "displayName": "Gemini 3 Flash Preview",
       "description": "Gemini 3 Flash Preview",
+      "notes_ko": "3세대 제미나이 플래시의 미리보기 모델입니다. 눈 깜짝할 사이에 복잡한 질문에 답변할 수 있을 만큼 놀라운 속도를 자랑합니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -399,6 +422,7 @@
       "version": "3.1-pro-preview-01-2026",
       "displayName": "Gemini 3.1 Pro Preview",
       "description": "Gemini 3.1 Pro Preview",
+      "notes_ko": "2026년 1월에 공개된 최최신 3.1 버전의 프로 모델입니다. 오타 교정, 논리 추론, 창의적 프로그래밍 등 거의 모든 분야에서 인간을 뛰어넘을 만큼 정교합니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -418,6 +442,7 @@
       "version": "3.1-pro-preview-01-2026",
       "displayName": "Gemini 3.1 Pro Preview Custom Tools",
       "description": "Gemini 3.1 Pro Preview optimized for custom tool usage",
+      "notes_ko": "외부 도구(API 호출, 계산기 등)를 사용하는 데 최적화된 모델입니다. AI가 직접 웹검색을 하거나 프로그램을 실행할 때 아주 정확한 결정을 내립니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -437,6 +462,7 @@
       "version": "3.0",
       "displayName": "Nano Banana Pro",
       "description": "Gemini 3 Pro Image Preview",
+      "notes_ko": "3세대 프로 등급의 지능으로 이미지를 보고 분석하거나 생성할 수 있는 모델입니다. 사진 속의 아주 작은 디테일까지도 잡아낼 수 있어요.",
       "inputTokenLimit": 131072,
       "outputTokenLimit": 32768,
       "supportedGenerationMethods": [
@@ -455,6 +481,7 @@
       "version": "3.0",
       "displayName": "Nano Banana Pro",
       "description": "Gemini 3 Pro Image Preview",
+      "notes_ko": "또 다른 이름의 3세대 이미지 미리보기 모델입니다. 이름처럼 작고 빠르면서도 프로급 성능을 내는 것이 특징입니다.",
       "inputTokenLimit": 131072,
       "outputTokenLimit": 32768,
       "supportedGenerationMethods": [
@@ -473,6 +500,7 @@
       "version": "1.5-preview",
       "displayName": "Gemini Robotics-ER 1.5 Preview",
       "description": "Gemini Robotics-ER 1.5 Preview",
+      "notes_ko": "로봇 공학 분야에 특화된 모델입니다. 로봇 팔의 제어나 자율 주행 로봇의 판단을 돕기 위해 물리적인 법칙을 잘 이해하도록 훈련되었습니다.",
       "inputTokenLimit": 1048576,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -490,6 +518,7 @@
       "version": "Gemini 2.5 Computer Use Preview 10-2025",
       "displayName": "Gemini 2.5 Computer Use Preview 10-2025",
       "description": "Gemini 2.5 Computer Use Preview 10-2025",
+      "notes_ko": "AI가 직접 마우스와 키보드를 조작하여 컴퓨터의 다양한 앱을 사용할 수 있도록 설계된 특별한 모델입니다. 업무 자동화의 핵심 도구이죠.",
       "inputTokenLimit": 131072,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -507,6 +536,7 @@
       "version": "deepthink-exp-05-20",
       "displayName": "Deep Research Pro Preview (Dec-12-2025)",
       "description": "Preview release (December 12th, 2025) of Deep Research Pro",
+      "notes_ko": "전문적인 연구 조사(Research)를 위해 만들어졌습니다. 웹의 수많은 정보를 수집하고 분석하여 고난도의 보고서를 단 몇 분 만에 작성해 냅니다.",
       "inputTokenLimit": 131072,
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
@@ -524,6 +554,7 @@
       "version": "001",
       "displayName": "Gemini Embedding 001",
       "description": "Obtain a distributed representation of a text.",
+      "notes_ko": "문장을 숫자의 나열(Vector)로 바꿔주는 임베딩 모델입니다. 두 문장이 얼마나 비슷한지 비교하거나, 방대한 자료 중 원하는 내용을 검색할 때 기초가 됩니다.",
       "inputTokenLimit": 2048,
       "outputTokenLimit": 1,
       "supportedGenerationMethods": [
@@ -538,6 +569,7 @@
       "version": "001",
       "displayName": "Model that performs Attributed Question Answering.",
       "description": "Model trained to return answers to questions that are grounded in provided sources, along with estimating answerable probability.",
+      "notes_ko": "근거 기반 답변(AQA) 모델입니다. 질문에 대해 아무 말이나 하는 게 아니라, 반드시 주어진 출처를 바탕으로 대답하여 신뢰도를 높인 모델입니다.",
       "inputTokenLimit": 7168,
       "outputTokenLimit": 1024,
       "supportedGenerationMethods": [
@@ -552,6 +584,7 @@
       "version": "001",
       "displayName": "Imagen 4",
       "description": "Vertex served Imagen 4.0 model",
+      "notes_ko": "구글의 최신 이미지 생성 엔진인 '이마젠 4'입니다. 사진 같은 고퀄리티 이미지부터 예술적인 그림까지 자유자재로 만들어내는 모델이에요.",
       "inputTokenLimit": 480,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -563,6 +596,7 @@
       "version": "001",
       "displayName": "Imagen 4 Ultra",
       "description": "Vertex served Imagen 4.0 ultra model",
+      "notes_ko": "이마젠 4 중에서도 최대 해상도와 정교함을 자랑하는 '울트라' 버전입니다. 한 장 한 장이 작품처럼 느껴질 만큼 디테일이 살아있습니다.",
       "inputTokenLimit": 480,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -574,6 +608,7 @@
       "version": "001",
       "displayName": "Imagen 4 Fast",
       "description": "Vertex served Imagen 4.0 Fast model",
+      "notes_ko": "퀄리티를 유지하면서도 생성 속도를 획기적으로 높인 모델입니다. 실시간으로 사용자에게 이미지를 보여줄 때 아주 유리합니다.",
       "inputTokenLimit": 480,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -585,6 +620,7 @@
       "version": "2.0",
       "displayName": "Veo 2",
       "description": "Vertex served Veo 2 model. Access to this model requires billing to be enabled on the associated Google Cloud Platform account. Please visit https://console.cloud.google.com/billing to enable it.",
+      "notes_ko": "문장을 짧은 동영상으로 만들어주는 비디오 생성 모델 '비오 2'입니다. 상상 속의 장면이 움직이는 영상으로 탄생하는 신비한 경험을 줍니다.",
       "inputTokenLimit": 480,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -596,6 +632,7 @@
       "version": "3.0",
       "displayName": "Veo 3",
       "description": "Veo 3",
+      "notes_ko": "더욱 자연스러운 움직임과 고화질을 지원하는 3세대 비디오 생성 모델입니다. 영화 같은 장면을 연출하는 데 탁월합니다.",
       "inputTokenLimit": 480,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -607,6 +644,7 @@
       "version": "3.0",
       "displayName": "Veo 3 fast",
       "description": "Veo 3 fast",
+      "notes_ko": "비디오 생성은 시간이 오래 걸리지만, 이 모델은 'Fast'라는 이름답게 최대한 빠르게 영상을 뽑아내도록 최적화되어 있습니다.",
       "inputTokenLimit": 480,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -618,6 +656,7 @@
       "version": "3.1",
       "displayName": "Veo 3.1",
       "description": "Veo 3.1",
+      "notes_ko": "현재 실험 중인 3.1 버전 비디오 모델입니다. 물리적인 움직임을 더욱 실제처럼 묘사하는 능력이 향상되었습니다.",
       "inputTokenLimit": 480,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -629,6 +668,7 @@
       "version": "3.1",
       "displayName": "Veo 3.1 fast",
       "description": "Veo 3.1 fast",
+      "notes_ko": "3.1 버전의 빠른 비디오 생성 모델 미리보기입니다. 빠르면서도 현실감 있는 영상을 만드느라 열일 중이죠.",
       "inputTokenLimit": 480,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -640,6 +680,7 @@
       "version": "Gemini 2.5 Flash Native Audio Latest",
       "displayName": "Gemini 2.5 Flash Native Audio Latest",
       "description": "Latest release of Gemini 2.5 Flash Native Audio",
+      "notes_ko": "소리를 직접 듣고 이해하거나 목소리로 답변하는 기능이 내장된 '네이티브 오디오' 모델입니다. 번역기를 통하지 않고 소리를 직접 감지하므로 감정이나 톤까지 파악할 수 있어요.",
       "inputTokenLimit": 131072,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -657,6 +698,7 @@
       "version": "gemini-2.5-flash-preview-native-audio-dialog-2025-05-19",
       "displayName": "Gemini 2.5 Flash Native Audio Preview 09-2025",
       "description": "Gemini 2.5 Flash Native Audio Preview 09-2025",
+      "notes_ko": "2025년 9월에 공개된 오디오 특화 미리보기 모델입니다. 사람과 자연스럽게 목소리로 대화하는 기능을 시험해 보고 있습니다.",
       "inputTokenLimit": 131072,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
@@ -674,6 +716,7 @@
       "version": "12-2025",
       "displayName": "Gemini 2.5 Flash Native Audio Preview 12-2025",
       "description": "Gemini 2.5 Flash Native Audio Preview 12-2025",
+      "notes_ko": "오디오 대화 능력이 한층 더 강화된 12월 버전의 모델입니다. 실시간 음성 비서나 외국어 회화 연습 친구 같은 기능을 만들 때 아주 좋습니다.",
       "inputTokenLimit": 131072,
       "outputTokenLimit": 8192,
       "supportedGenerationMethods": [
