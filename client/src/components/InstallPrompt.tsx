@@ -10,6 +10,7 @@ interface BeforeInstallPromptEvent extends Event {
 interface InstallPromptProps {
   selectedLanguage?: string;
   onDownloadClick?: (language: string) => void;
+  onClose?: () => void; // 🎖️ [Dodari] 시퀀스 제어를 위한 클로즈 콜백 추가
 }
 
 const SUPPORTED_LANGUAGES = ['ko', 'en', 'ja', 'zh', 'es', 'fr', 'de', 'it', 'pt', 'ru'];
@@ -258,7 +259,7 @@ const translations: Record<string, {
   }
 };
 
-export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick }: InstallPromptProps) {
+export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick, onClose }: InstallPromptProps) {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
@@ -270,9 +271,9 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
 
   useEffect(() => {
     const checkIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const checkStandalone = window.matchMedia('(display-mode: standalone)').matches || 
-                           (window.navigator as any).standalone === true;
-    
+    const checkStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any).standalone === true;
+
     setIsIOS(checkIOS);
     setIsStandalone(checkStandalone);
 
@@ -280,17 +281,29 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
       return;
     }
 
-    const hasSeenPrompt = localStorage.getItem('pwa-install-seen');
-    const dismissedAt = localStorage.getItem('pwa-install-dismissed-at');
-    
-    const shouldShowAgain = !dismissedAt || 
-      (Date.now() - parseInt(dismissedAt)) > 24 * 60 * 60 * 1000;
+    // 🎖️ [Dodari] User Requirement: "Welcome Screen First ALWAYS"
+    // 기존의 localStorage(영구 저장) 로직은 "이미 봤으면 안 뜸"을 유발하므로,
+    // 세션 단위(sessionStorage)로 변경하여 "앱을 켤 때마다 무조건" 뜨도록 수정합니다.
+    const hasShownSession = sessionStorage.getItem('pwa-welcome-shown');
 
-    if (!hasSeenPrompt || shouldShowAgain) {
-      setTimeout(() => {
-        setShowPrompt(true);
-        localStorage.setItem('pwa-install-seen', 'true');
-      }, 500);
+    // const hasSeenPrompt = localStorage.getItem('pwa-install-seen');
+    // const dismissedAt = localStorage.getItem('pwa-install-dismissed-at');
+    // const shouldShowAgain = !dismissedAt || (Date.now() - parseInt(dismissedAt)) > 24 * 60 * 60 * 1000;
+
+    if (!hasShownSession) {
+      // 🎖️ [Dodari] "무조건 첫 화면" 지침 준수
+      // 주의: 여기서 바로 sessionStorage를 세팅하면 새로고침 시 사라집니다.
+      // 사용자가 "닫기"나 "설치"를 눌렀을 때만 세팅하도록 변경합니다.
+      setShowPrompt(true);
+    } else {
+      // 🎖️ [Dodari] 이번 세션에서 이미 봤다면 바로 락 해제
+      /* 
+       * [Critical Fix]: If the user refreshed, hasShownSession might be true. 
+       * But if they didn't actually interact, we might want to show it again?
+       * For now, strict session-based: if flag is there, don't show.
+       * The fix is in NOT setting it immediately above.
+       */
+      if (onClose) onClose();
     }
 
     const handler = (e: Event) => {
@@ -309,15 +322,18 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
     if (!deferredPrompt) return;
 
     deferredPrompt.prompt();
-    
+
     const { outcome } = await deferredPrompt.userChoice;
-    
+
     if (outcome === 'accepted') {
       console.log('[PWA] User accepted install');
       localStorage.removeItem('pwa-install-dismissed-at');
     } else {
       console.log('[PWA] User dismissed install');
     }
+
+    // 🎖️ [Fix] Set session flag to prevent reappearance
+    sessionStorage.setItem('pwa-welcome-shown', 'true');
 
     setDeferredPrompt(null);
     setShowPrompt(false);
@@ -326,6 +342,11 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
   const handleDismiss = () => {
     setShowPrompt(false);
     localStorage.setItem('pwa-install-dismissed-at', Date.now().toString());
+
+    // 🎖️ [Fix] Set session flag to prevent reappearance
+    sessionStorage.setItem('pwa-welcome-shown', 'true');
+
+    if (onClose) onClose(); // 🎖️ [Dodari] 닫힘 알림
   };
 
   if (!showPrompt || isStandalone) return null;
@@ -344,38 +365,36 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
           >
             <X className="w-5 h-5 text-white" />
           </button>
-          
+
           <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center">
             <Smartphone className="w-10 h-10 text-white" />
           </div>
-          
+
           <h1 className="text-2xl font-bold text-white mb-2">
             {t.welcomeTitle}
           </h1>
-          
+
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-500/30 rounded-full">
             <WifiOff className="w-4 h-4 text-green-200" />
             <span className="text-sm font-medium text-green-100">{t.subtitle}</span>
           </div>
-          
+
           <div className="flex gap-2 mt-4 justify-center">
             <button
               onClick={() => setActiveTab('install')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeTab === 'install'
-                  ? 'bg-white text-primary'
-                  : 'bg-white/20 text-white hover:bg-white/30'
-              }`}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'install'
+                ? 'bg-white text-primary'
+                : 'bg-white/20 text-white hover:bg-white/30'
+                }`}
             >
               {t.installTab}
             </button>
             <button
               onClick={() => setActiveTab('download')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
-                activeTab === 'download'
-                  ? 'bg-white text-primary'
-                  : 'bg-white/20 text-white hover:bg-white/30'
-              }`}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${activeTab === 'download'
+                ? 'bg-white text-primary'
+                : 'bg-white/20 text-white hover:bg-white/30'
+                }`}
             >
               <Download className="w-4 h-4" />
               {t.downloadTab}
@@ -446,7 +465,7 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
                     {t.install}
                   </Button>
                 ) : null}
-                
+
                 <Button
                   variant="outline"
                   onClick={handleDismiss}
@@ -473,11 +492,10 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
                   <button
                     key={lang}
                     onClick={() => setSelectedDownloadLanguage(lang)}
-                    className={`p-3 rounded-lg text-sm font-medium transition-colors ${
-                      selectedDownloadLanguage === lang
-                        ? 'bg-primary text-white'
-                        : 'bg-muted text-foreground hover:bg-muted/80'
-                    }`}
+                    className={`p-3 rounded-lg text-sm font-medium transition-colors ${selectedDownloadLanguage === lang
+                      ? 'bg-primary text-white'
+                      : 'bg-muted text-foreground hover:bg-muted/80'
+                      }`}
                     data-testid={`button-language-${lang}`}
                   >
                     {translations[lang]?.title.split(' ')[0] || lang}
@@ -499,7 +517,7 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
                   <Download className="w-5 h-5 mr-2" />
                   {t.downloadAudio}
                 </Button>
-                
+
                 <Button
                   variant="outline"
                   onClick={handleDismiss}

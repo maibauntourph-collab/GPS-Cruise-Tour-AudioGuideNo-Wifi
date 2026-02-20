@@ -184,10 +184,32 @@ export default function Home() {
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
   const [showTourOnly, setShowTourOnly] = useState(false);
 
+  // 🎖️ [Dodari] 시퀀스 정합성 절대 보장을 위한 락(Lock) 상태
+  const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
+
   // [디자이너 킴의 매직 UI 상태]
   const { language } = useLanguage();
   const [landingCityId, setLandingCityId] = useState<string | null>(null);
   const [hasShownLandingThisSession, setHasShownLandingThisSession] = useState<Set<string>>(new Set());
+
+  // 🎖️ [Dodari Architecture] 의도 지향적 UI 시퀀스 제어를 위한 상태
+  type UIAction = 'STARTUP_FINISH' | 'CITY_CHANGE' | 'SETTINGS_CLOSE' | 'NONE';
+  const [lastUIAction, setLastUIAction] = useState<UIAction>('NONE');
+
+  // 🎖️ [Dodari Architecture] 도시 변경 감지 및 Magic Landing 리셋 로직
+  // 사용자가 설정창(after_country_change.png)에서 도시를 변경하면 즉시 랜딩을 다시 보여줍니다.
+  useEffect(() => {
+    if (selectedCityId) {
+      console.log(`🎖️ [Dodari Architecture] City changed to: ${selectedCityId}. Marking for potential landing.`);
+      setHasShownLandingThisSession(prev => {
+        const next = new Set(prev);
+        next.delete(selectedCityId); // 현재 변경된 도시에 대한 랜딩 기록을 삭제하여 재트리거 유도
+        return next;
+      });
+      setLastUIAction('CITY_CHANGE'); // 도시 변경 액션 기록
+      setLandingCityId(null); // 현재 열려있을지 모르는 랜딩 아이디 초기화
+    }
+  }, [selectedCityId]);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [aiRecommendation, setAiRecommendation] = useState<{
     itinerary: Array<{ landmarkId: string; order: number }>;
@@ -197,153 +219,66 @@ export default function Home() {
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
 
-  // Startup dialog state
-  const [showStartupDialog, setShowStartupDialog] = useState<boolean>(() => {
-    // Show dialog only if not shown in this session
-    const shownThisSession = sessionStorage.getItem('startup-dialog-shown');
-    return !shownThisSession;
-  });
+  // Startup dialog state - 🩺 [Bug Doctor] Sequence Restored to original intent
+  // 🎖️ [Dodari] 최우선 화면(InstallPrompt) 노출을 위해 초기값은 false로 설정하고, 
+  // InstallPrompt가 닫히거나 렌더링된 이후에 필요시 로직으로 제어합니다.
+  const [showStartupDialog, setShowStartupDialog] = useState<boolean>(false);
+  const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
   const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
 
+  // 🎖️ [Dodari] 앱 진입 후 InstallPrompt(웰컴)를 위한 짧은 대기 후 StartupDialog 노출 여부 결정
+  // 🎖️ [Dodari] 앱 진입 후 InstallPrompt(웰컴) 완료 후 시퀀스 시작
   useEffect(() => {
-    audioService.setEnabled(audioEnabled);
-  }, [audioEnabled]);
+    // 웰컴 화면이 처리되기 전(@see InstallPrompt onClose)에는 StartupDialog 대기
+    if (!isWelcomeHandled) return;
 
-  // Save selected language to localStorage
-  useEffect(() => {
-    localStorage.setItem('selected-language', selectedLanguage);
-
-    // Check if native voice for the selected language is available
-    if (selectedLanguage !== 'en' && !audioService.hasNativeVoice(selectedLanguage)) {
-      const langNames: Record<string, string> = {
-        'ko': '한국어',
-        'ja': '日本語',
-        'zh': '中文',
-        'es': 'Español'
-      };
-
-      const langDisplay = langNames[selectedLanguage] || selectedLanguage;
-
-      toast({
-        title: t('nativeVoiceMissing', selectedLanguage).replace('{lang}', langDisplay),
-        description: t('suggestHighQualityVoice', selectedLanguage),
-        action: (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              // Open audio download dialog
-              setAudioDownloadLanguage(selectedLanguage);
-              setShowAudioDownloadDialog(true);
-            }}
-          >
-            {selectedLanguage === 'ko' ? '확인하기' : 'Switch'}
-          </Button>
-        ),
-        duration: 8000
-      });
+    const shownThisSession = sessionStorage.getItem('startup-dialog-shown');
+    if (!shownThisSession && !hasCheckedForStartup) {
+      // 웰컴 화면이 닫히면 부드럽게(800ms) StartupDialog를 띄웁니다.
+      const timer = setTimeout(() => {
+        setShowStartupDialog(true);
+        setHasCheckedForStartup(true);
+      }, 800);
+      return () => clearTimeout(timer);
     }
-  }, [selectedLanguage, toast]);
+  }, [isWelcomeHandled, hasCheckedForStartup]);
 
-  // Save tour time per stop to localStorage
+  // 🩺 [Bug Doctor] 시스템 생명주기 및 시퀀스 정합성 정밀 진단 훅
   useEffect(() => {
-    localStorage.setItem('tour-time-per-stop', tourTimePerStop.toString());
-  }, [tourTimePerStop]);
-
-  // Save individual tour stop durations to localStorage
-  useEffect(() => {
-    localStorage.setItem('tour-stop-durations', JSON.stringify(tourStopDurations));
-  }, [tourStopDurations]);
-
-  // Save tour data when it changes (for restoration on next visit)
-  useEffect(() => {
-    const city = cities.find(c => c.id === selectedCityId);
-    if (tourStops.length > 0 && city) {
-      saveTourData(selectedCityId, city.name, tourStops, tourTimePerStop, selectedLanguage);
+    if (lastUIAction !== 'NONE') {
+      console.log(`🩺 [Bug Doctor / Surgery Log] Action Detected: ${lastUIAction}`);
+      console.log(`🩺 [Bug Doctor / Vital Check] showStartupDialog: ${showStartupDialog}, landingCityId: ${landingCityId}`);
     }
-  }, [tourStops, selectedCityId, cities, tourTimePerStop, selectedLanguage]);
+  }, [lastUIAction, showStartupDialog, landingCityId]);
 
-  // Check for restored route from MyRoutes page
+  // [디버그 닥터 & 디자이너 킴의 UI Sequence 제어 훅: Startup Priority]
   useEffect(() => {
-    const restoredData = localStorage.getItem('restored-tour-data');
-    if (restoredData) {
-      try {
-        const data = JSON.parse(restoredData);
-        // Clean up immediately so we don't restore again on refresh unless intended
-        localStorage.removeItem('restored-tour-data');
-        handleRestoreTour(data);
-      } catch (e) {
-        console.error('Failed to parse restored tour data', e);
-      }
+    // 🎖️ [Dodari Architecture] 지능형 시퀀스 체인
+    // 웰컴 화면이 처리되지 않았거나(Startup 전) StartupDialog가 켜져있다면 랜딩 금지
+    if (!isWelcomeHandled || showStartupDialog) {
+      // 🩺 [Bug Doctor] 대기 상태 로깅
+      console.log("🩺 [Bug Doctor / Vital Check] Waiting for Sequence (Welcome/Startup) to be addressed...");
+      return;
     }
-  }, [cities, landmarks]); // Dependencies ensure we have data loaded before restoring
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (tourStops.length < 2) {
-      setTourRouteInfo(null);
-    }
-  }, [tourStops]);
-
-  useEffect(() => {
-    if (!position || !audioEnabled || !landmarks.length) return;
-
-    landmarks.forEach((landmark) => {
-      const distance = calculateDistance(
-        position.latitude,
-        position.longitude,
-        landmark.lat,
-        landmark.lng
-      );
-
-      if (distance < landmark.radius && !audioService.isLandmarkSpoken(landmark.id)) {
-        const narration = getTranslatedContent(landmark, selectedLanguage, 'narration');
-        // Use playAuto to respect audio mode (CLOVA, MP3, TTS, Auto)
-        audioService.playAuto(
-          landmark.id,
-          narration,
-          selectedLanguage,
-          undefined, // audioUrl - not available in this context
-          () => setIsSpeaking(false)
-        );
-        setSpokenLandmarks((prev) => new Set(prev).add(landmark.id));
-        setIsSpeaking(true);
-
-        if (!isVisited(landmark.id)) {
-          markVisited(landmark.id);
-        }
-      }
-    });
-
-    const checkSpeakingInterval = setInterval(() => {
-      setIsSpeaking(audioService.isSpeaking());
-    }, 500);
-
-    return () => clearInterval(checkSpeakingInterval);
-  }, [position, audioEnabled, landmarks, selectedLanguage]);
-
-  // [디자이너 킴의 GPS 입성 감지 훅]
-  useEffect(() => {
-    // 초기 설정 다이얼로그(StartupDialog)가 닫힌 상태에서만 위치 기반 랜딩을 수행합니다.
-    if (position && !landingCityId && !showStartupDialog) {
+    // [Bug Doctor] 위치 정보 및 액션 결합 검증
+    if (position && !landingCityId && (lastUIAction === 'STARTUP_FINISH' || lastUIAction === 'CITY_CHANGE')) {
       const matchedId = getMatchedCityId(position.latitude, position.longitude);
 
-      // 새로 매칭된 도시가 있고, 이번 세션에서 해당 도시 랜딩을 보여준 적이 없을 때만 팝업
       if (matchedId && !hasShownLandingThisSession.has(matchedId)) {
-        console.log(`🎊 [Magic Landing] Welcome to ${matchedId}! Showing landing page...`);
-        setLandingCityId(matchedId);
-        setHasShownLandingThisSession(prev => new Set(prev).add(matchedId));
+        console.log(`🎊 [Magic Landing] 🩺 [Bug Doctor] Sequence Chain Stable. Intent-Matched: ${lastUIAction}. Welcome to ${matchedId}!`);
+
+        const timer = setTimeout(() => {
+          setLandingCityId(matchedId);
+          setHasShownLandingThisSession(prev => new Set(prev).add(matchedId));
+          setLastUIAction('NONE'); // 트리거 완료 후 안전하게 초기화
+          console.log(`🩺 [Bug Doctor / Surgery Log] Landing Logic Grafted: Success for ${matchedId}`);
+        }, 600);
+
+        return () => clearTimeout(timer);
       }
     }
-  }, [position, landingCityId, hasShownLandingThisSession, showStartupDialog]);
+  }, [position, landingCityId, hasShownLandingThisSession, showStartupDialog, lastUIAction, isWelcomeHandled]);
 
   const selectedCity = cities.find(c => c.id === selectedCityId);
 
@@ -764,10 +699,14 @@ export default function Home() {
   const handleStartupClose = () => {
     setShowStartupDialog(false);
     sessionStorage.setItem('startup-dialog-shown', 'true');
+    // 🎖️ [Dodari Architecture] Manual Skip/Close should NOT trigger 'STARTUP_FINISH' 
+    // AND should clear any pending actions like 'CITY_CHANGE' at startup.
+    setLastUIAction('NONE');
   };
 
   const handleSelectGPS = () => {
     handleStartupClose();
+    setLastUIAction('STARTUP_FINISH'); // 🎖️ [Dodari Architecture] GPS Start should trigger Magic Landing
     // If GPS position is available and we have cities data, try to find nearest city
     if (position && cities.length > 0) {
       let nearestCity = cities[0];
@@ -2110,7 +2049,10 @@ export default function Home() {
             )}
 
             <OfflineIndicator />
-            <InstallPrompt selectedLanguage={selectedLanguage} />
+            <InstallPrompt
+              selectedLanguage={selectedLanguage}
+              onClose={() => setIsWelcomeHandled(true)}
+            />
             <UpdatePrompt
               isVisible={showUpdatePrompt}
               onUpdate={() => {
@@ -2486,6 +2428,10 @@ export default function Home() {
           setAudioDownloadLanguage(language);
           setShowAudioDownloadDialog(true);
         }}
+        onClose={() => {
+          console.log("🎖️ [Dodari] Welcome Screen Handled. Releasing sequence lock.");
+          setIsWelcomeHandled(true);
+        }}
       />
 
       {/* Audio Download Dialog */}
@@ -2538,63 +2484,84 @@ export default function Home() {
         </DialogContent>
       </Dialog>
 
-      {/* [디자이너 킴의 매직 UI: 자동 랜딩 다이얼로그] */}
-      <Dialog open={!!landingCityId} onOpenChange={(open) => !open && setLandingCityId(null)}>
-        <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none bg-transparent shadow-2xl">
-          {landingCityId && LANDING_DATA[landingCityId] && (
-            <div className="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-slate-900 transition-all animate-in fade-in zoom-in duration-300">
-              {/* 히어 로 이미지 섹션 */}
-              <div className="relative h-64 w-full">
-                <img
-                  src={LANDING_DATA[landingCityId][language]?.heroImage || LANDING_DATA[landingCityId]['en']?.heroImage}
-                  alt="City Welcome"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <button
-                  onClick={() => setLandingCityId(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white backdrop-blur-sm transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-                <div className="absolute bottom-6 left-6 right-6 text-white text-center">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md border border-white/20 mb-3 animate-bounce">
-                    <MapPin className="w-4 h-4 text-primary" />
-                    <span className="text-xs font-bold uppercase tracking-wider">New Area Detected</span>
-                  </div>
-                  <h2 className="text-3xl font-black mb-1 drop-shadow-lg">
-                    {LANDING_DATA[landingCityId][language]?.title || LANDING_DATA[landingCityId]['en']?.title}
-                  </h2>
-                </div>
-              </div>
+      {/* [디자이너 킴의 매직 UI: 자동 랜딩 다이얼로그 - 프리미엄 시각 고도화] */}
+      {/* 🎖️ [Dodari] 시퀀스 강제: 웰컴 화면 처리 완료(isWelcomeHandled) AND 스타트업 다이얼로그 없음(!showStartupDialog) 필수 */}
+      <Dialog
+        open={!!landingCityId && isWelcomeHandled && !showStartupDialog}
+        onOpenChange={(open) => !open && setLandingCityId(null)}
+      >
+        <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none bg-transparent shadow-2xl scale-100 transition-transform duration-500 ease-out">
+          {(() => {
+            const landingCity = cities.find(c => c.id === landingCityId);
+            // 🎖️ [Data Sync] DB 우선(landingCity?.landingContent), 없으면 하드코딩(LANDING_DATA) Fallback
+            const landingContentSource = (landingCity?.landingContent as any) || (landingCityId ? LANDING_DATA[landingCityId] : null);
 
-              {/* 콘텐츠 섹션 */}
-              <div className="p-8 text-center bg-white dark:bg-slate-900">
-                <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">
-                  {LANDING_DATA[landingCityId][language]?.subTitle || LANDING_DATA[landingCityId]['en']?.subTitle}
-                </p>
+            if (!landingCityId || !landingContentSource) return null;
 
-                <div className="flex flex-col gap-3">
-                  <Button
-                    className="w-full h-14 rounded-xl text-lg font-bold shadow-lg hover:shadow-primary/30 transition-all active:scale-95 bg-primary text-primary-foreground"
-                    onClick={() => {
-                      handleCityChange(landingCityId);
-                      setLandingCityId(null);
-                    }}
-                  >
-                    {language === 'ko' ? '지금 둘러보기' : 'Explore Now'}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full h-12 rounded-xl text-slate-500 hover:text-slate-700 font-semibold"
+            const content = landingContentSource[language] || landingContentSource['en'];
+
+            return (
+              <div className="relative w-full overflow-hidden rounded-3xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-white/20 transition-all animate-in fade-in zoom-in-95 duration-500">
+                {/* 히로 이미지 섹션: Ken Burns 효과 적용 */}
+                <div className="relative h-72 w-full overflow-hidden">
+                  <img
+                    src={content?.heroImage}
+                    alt="City Welcome"
+                    className="h-full w-full object-cover animate-ken-burns"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+                  {/* 닫기 버튼: 마이크로 인터랙션 */}
+                  <button
                     onClick={() => setLandingCityId(null)}
+                    className="absolute top-5 right-5 p-2.5 rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-md border border-white/10 transition-all active:scale-90"
                   >
-                    {language === 'ko' ? '나중에 볼래요' : 'Maybe Later'}
-                  </Button>
+                    <X className="w-5 h-5" />
+                  </button>
+
+                  <div className="absolute bottom-8 left-8 right-8 text-white text-center">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/30 backdrop-blur-xl border border-white/30 mb-4 animate-pulse shadow-[0_0_15px_rgba(var(--primary),0.5)]">
+                      <MapPin className="w-4 h-4 text-primary-foreground" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em]">New Destination Unlocked</span>
+                    </div>
+                    <h2 className="text-4xl font-black mb-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] tracking-tight">
+                      {content?.title}
+                    </h2>
+                  </div>
+                </div>
+
+                {/* 콘텐츠 섹션: 세련된 타이포그래피 및 버튼 글로우 */}
+                <div className="p-10 text-center">
+                  <p className="text-slate-600 dark:text-slate-300 mb-10 leading-relaxed font-semibold text-lg drop-shadow-sm">
+                    {content?.subTitle}
+                  </p>
+
+                  <div className="flex flex-col gap-4">
+                    <Button
+                      className="w-full h-16 rounded-2xl text-xl font-black shadow-[0_10px_30px_rgba(var(--primary),0.3)] hover:shadow-[0_15px_40px_rgba(var(--primary),0.5)] transition-all active:scale-95 bg-primary text-primary-foreground border-t border-white/20 group relative overflow-hidden"
+                      onClick={() => {
+                        handleCityChange(landingCityId);
+                        setLandingCityId(null);
+                      }}
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        {language === 'ko' ? '지금 낙원 탐험하기' : 'Explore Paradise Now'}
+                        <div className="w-2 h-2 rounded-full bg-white animate-ping" />
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-full h-12 rounded-xl text-slate-400 hover:text-primary font-bold transition-colors hover:bg-primary/5"
+                      onClick={() => setLandingCityId(null)}
+                    >
+                      {language === 'ko' ? '천천히 둘러볼게요' : 'Maybe Later'}
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
         </DialogContent>
       </Dialog>
     </>

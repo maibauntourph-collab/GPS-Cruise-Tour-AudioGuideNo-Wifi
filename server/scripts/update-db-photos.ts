@@ -1,4 +1,5 @@
 
+import "dotenv/config";
 import { db } from "../db";
 import { landmarks as landmarksTable } from "../../shared/schema";
 import { LANDMARKS } from "../data/landmarks";

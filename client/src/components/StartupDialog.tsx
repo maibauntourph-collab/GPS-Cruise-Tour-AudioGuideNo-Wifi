@@ -201,7 +201,7 @@ export default function StartupDialog({
             }}
             data-testid="button-skip-startup"
           >
-            {selectedLanguage === 'ko' ? '건너뛰기' : 'Skip'}
+            {selectedLanguage === 'ko' ? '도시 직접 선택하기' : 'Select City Directly'}
           </Button>
         </div>
       </DialogContent>

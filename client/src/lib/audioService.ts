@@ -38,13 +38,13 @@ export class AudioService {
     this.spokenLandmarks = new Set();
     this.isEnabled = true;
 
-    // Load saved rate from localStorage, default to 1.0
+    // Load saved rate from localStorage, default to 1.2
     const savedRate = localStorage.getItem('tts-speed');
     if (savedRate) {
       this.currentRate = parseFloat(savedRate);
     } else {
-      this.currentRate = 1.0;
-      localStorage.setItem('tts-speed', '1.0');
+      this.currentRate = 1.2;
+      localStorage.setItem('tts-speed', '1.2');
     }
 
     // Load saved audio mode

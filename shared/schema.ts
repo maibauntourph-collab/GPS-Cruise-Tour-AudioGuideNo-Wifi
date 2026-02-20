@@ -165,6 +165,7 @@ export const cities = pgTable("cities", {
   lng: doublePrecision("lng").notNull(),
   zoom: integer("zoom").default(14),
   cruisePort: json("cruise_port"), // JSON for cruise port data
+  landingContent: json("landing_content"), // 🎖️ [Query Master] Magic Landing Visuals (Title, SubTitle, HeroImage)
   defaultGuideId: varchar("default_guide_id"), // Global instructor ID for this city
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),

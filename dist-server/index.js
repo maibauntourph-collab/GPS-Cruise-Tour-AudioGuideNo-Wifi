@@ -219,6 +219,8 @@ var init_schema = __esm({
       zoom: integer("zoom").default(14),
       cruisePort: json("cruise_port"),
       // JSON for cruise port data
+      landingContent: json("landing_content"),
+      // 🎖️ [Query Master] Magic Landing Visuals (Title, SubTitle, HeroImage)
       defaultGuideId: varchar("default_guide_id"),
       // Global instructor ID for this city
       createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -1031,7 +1033,7 @@ var vite_config_default = defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:8787",
+        target: "http://127.0.0.1:8788",
         changeOrigin: true
       }
     },
@@ -3379,7 +3381,8 @@ var LANDMARKS = [
     detailedDescription: `The Louvre Museum, or Mus\xE9e du Louvre, stands as the world's largest and most visited art museum, housing an incomparable collection of over 380,000 objects and displaying 35,000 works of art across 72,735 square meters (782,910 square feet) of galleries. Located in the historic Louvre Palace on the Right Bank of the Seine in Paris, this magnificent institution attracts approximately 10 million visitors annually, making it not only a temple of art but also a pilgrimage site for culture enthusiasts from around the globe. The Louvre's history is as rich and layered as the artworks it contains. The site began as a fortress built by King Philippe Auguste in the late 12th century to protect Paris from Viking invasions. Archaeological remains of this medieval fortress can still be seen in the museum's basement. In the 14th century, Charles V transformed the fortress into a royal residence, beginning its evolution into a palace. The modern Louvre palace took shape during the Renaissance when Francis I, a great patron of the arts who brought Leonardo da Vinci to France, demolished the old fortress and began constructing a Renaissance palace in 1546. Successive monarchs, particularly Louis XIV before he moved the court to Versailles, continued expanding and embellishing the palace, creating the magnificent complex we see today. The Louvre's transformation into a public museum began during the French Revolution. In 1793, the revolutionary government opened the Mus\xE9e Central des Arts in the Grande Galerie, displaying the royal collection and artworks confiscated from the church and \xE9migr\xE9s. Napoleon Bonaparte greatly expanded the collection through his military campaigns, bringing treasures from across Europe and Egypt. Though many pieces were returned after his defeat, the Louvre retained a substantial collection that formed the basis of its current holdings. The museum's collections span from ancient civilizations to the mid-19th century and are divided into eight curatorial departments: Egyptian Antiquities, Near Eastern Antiquities, Greek and Roman Antiquities, Islamic Art, Sculpture, Decorative Arts, Paintings, and Prints and Drawings. Among its most famous treasures are Leonardo da Vinci's "Mona Lisa," the enigmatic portrait that draws millions of visitors who wait in long lines for a glimpse of her mysterious smile. The ancient Greek sculpture "Venus de Milo," depicting the goddess Aphrodite, captivates with her timeless beauty despite her missing arms. The "Winged Victory of Samothrace," a Hellenistic sculpture of Nike, the goddess of victory, commands attention at the top of the Daru staircase, her powerful form seemingly in motion despite being carved from marble over 2,000 years ago. The museum underwent dramatic transformation in the 1980s under President Fran\xE7ois Mitterrand's "Grand Louvre" project. The most controversial element was I.M. Pei's glass pyramid, completed in 1989, which serves as the museum's main entrance. Initially criticized as a modern intrusion on the historic palace, the pyramid has become an iconic symbol of the Louvre, its geometric form creating a striking dialogue between classical and contemporary architecture. The pyramid is surrounded by three smaller pyramids and fountains, creating the Cour Napol\xE9on, a space where visitors gather before descending into the vast underground lobby that connects the museum's three wings: Sully, Richelieu, and Denon. The Louvre's galleries are a journey through human creativity and civilization. In the Egyptian Antiquities department, visitors encounter mummies, sarcophagi, and the monumental Great Sphinx of Tanis. The Near Eastern Antiquities house the Code of Hammurabi, one of the oldest deciphered writings of significant length in the world. The Greek and Roman galleries showcase classical sculptures, pottery, and jewelry that influenced Western art for millennia. The Painting galleries feature masterpieces by Caravaggio, Rembrandt, Vermeer, and countless other masters. Delacroix's "Liberty Leading the People" captures the revolutionary spirit of France, while G\xE9ricault's "The Raft of the Medusa" confronts viewers with the drama and horror of a tragic maritime disaster. The museum's Islamic Art department, housed in a stunning modern wing covered by an undulating golden veil designed by architects Rudy Ricciotti and Mario Bellini, displays treasures from three continents spanning 1,300 years. The Louvre is not merely a repository of art but a living institution that continues to evolve. It organizes major temporary exhibitions, conducts scholarly research, and undertakes conservation projects to preserve its treasures for future generations. The museum has also expanded globally, with the Louvre Abu Dhabi opening in 2017, extending the institution's mission to new audiences. Recent initiatives have focused on improving visitor experience, including timed entry tickets to manage crowds, enhanced digital guides, and special programs for families and students. The museum has also committed to transparency regarding the provenance of works in its collection, addressing historical injustices and working toward restitution when appropriate. Today, the Louvre stands as more than a museum - it is a symbol of human cultural achievement, a place where the greatest works of art from civilizations across time and space come together under one roof. Walking through its galleries is to journey through human history, to witness the evolution of artistic expression, and to stand before works that have moved, inspired, and challenged viewers for centuries. The Louvre reminds us of our shared cultural heritage and the enduring power of art to transcend time, language, and borders.`,
     photos: [
       "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800",
-      "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=800",
+      // [수정] 만료된 photo-1566127444979 URL → 유효한 여행/건물 이미지로 대체
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800",
       "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800"
     ],
     historicalInfo: "The Louvre was originally a royal palace before becoming a public museum during the French Revolution in 1793. It houses approximately 38,000 objects from prehistory to the 21st century.",
@@ -6293,6 +6296,10 @@ var LANDMARKS = [
     narration: "You are now near San Isidro Parish Church, the spiritual center of the Talamban community. It is a landmark of faith for locals in north Cebu.",
     description: "Historic Roman Catholic church in Talamban",
     category: "Religious",
+    photos: [
+      "https://images.unsplash.com/photo-1544898393-3ea6652eb640?w=800",
+      "https://images.unsplash.com/photo-1621323337922-383748281313?w=800"
+    ],
     translations: {
       ko: {
         name: "\uC0B0 \uC774\uC2DC\uB4DC\uB85C \uC131\uB2F9",
@@ -6848,7 +6855,8 @@ var LANDMARKS = [
     category: "Museum & Heritage",
     detailedDescription: "The Pinang Peranakan Mansion is a museum that provides an insight into the unique Peranakan culture, also known as Straits Chinese or Baba-Nyonya culture. Housed in a restored 19th-century mansion, the museum showcases over 1,000 pieces of antiques and collectibles, including intricate Chinese carved wooden panels, mother-of-pearl inlaid furniture, gold-embroidered textiles, and Italian floor tiles. The Peranakan community emerged from marriages between Chinese immigrants and local Malays, creating a distinct culture that blends Chinese, Malay, and European influences. The mansion recreates the lavish lifestyle of a wealthy Peranakan family, with beautifully furnished rooms including a reception hall, ancestral altar, bridal chamber, and dining area. The collection includes rare Peranakan porcelain, jewelry, traditional costumes, and household items. The mansion serves as an important cultural institution preserving and promoting the rich heritage of Penang's Peranakan community.",
     photos: [
-      "https://images.unsplash.com/photo-1566127444979-b3d2b64d1b23?w=800",
+      // [수정] 만료된 photo-1566127444979 URL 제거 → 유효한 URL로 대체 (페라나칸 헤리티지)
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800",
       "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800",
       "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800",
       "https://images.unsplash.com/photo-1555217851-85fd5a8fa4cf?w=800",
@@ -9707,37 +9715,6 @@ var LANDMARKS = [
     }
   },
   {
-    id: "fort-san-pedro",
-    cityId: "cebu",
-    name: "Fort San Pedro",
-    lat: 10.2923,
-    lng: 123.9056,
-    radius: 70,
-    narration: "Fort San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel L\xF3pez de Legazpi.",
-    description: "The oldest triangular bastion fort in the country",
-    category: "Historical",
-    detailedDescription: "Fuerte de San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel L\xF3pez de Legazpi, first governor of the Captaincy General of the Philippines. It is located in the area now called Plaza Independencia, in the pier area of the city. The original fort was made of wood and was built in 1565. It was later replaced by the current stone fort in the 17th century.",
-    photos: [
-      "https://images.unsplash.com/photo-1596423528628-91217743d57d?w=800",
-      "https://images.unsplash.com/photo-1597816827806-0567a5497239?w=800"
-    ],
-    historicalInfo: "Built in 1565, Fort San Pedro is the oldest triangular bastion fort in the Philippines. It served as the nucleus of the first Spanish settlement in the Philippines.",
-    yearBuilt: "1565",
-    architect: "Miguel L\xF3pez de Legazpi",
-    translations: {
-      en: {
-        name: "Fort San Pedro",
-        narration: "Fort San Pedro is a military defense structure in Cebu, Philippines, built by the Spanish under the command of Miguel L\xF3pez de Legazpi.",
-        description: "The oldest triangular bastion fort in the country"
-      },
-      ko: {
-        name: "\uC0B0 \uD398\uB4DC\uB85C \uC694\uC0C8",
-        narration: "\uC0B0 \uD398\uB4DC\uB85C \uC694\uC0C8\uB294 \uBBF8\uAC94 \uB85C\uD398\uC2A4 \uB370 \uB808\uAC00\uC2A4\uD53C\uC758 \uC9C0\uD718 \uD558\uC5D0 \uC2A4\uD398\uC778 \uC0AC\uB78C\uB4E4\uC774 \uAC74\uC124\uD55C \uD544\uB9AC\uD540 \uC138\uBD80\uC758 \uAD70\uC0AC \uBC29\uC5B4 \uAD6C\uC870\uBB3C\uC785\uB2C8\uB2E4.",
-        description: "\uD544\uB9AC\uD540\uC5D0\uC11C \uAC00\uC7A5 \uC624\uB798\uB41C \uC0BC\uAC01\uD615 \uC694\uC0C8"
-      }
-    }
-  },
-  {
     id: "taoist-temple",
     cityId: "cebu",
     name: "Cebu Taoist Temple",
@@ -11563,9 +11540,13 @@ var app_default = app;
 // server/index.ts
 var PORT = Number(process.env.PORT) || 5e3;
 var server = createServer();
-setupVite(app_default, server).then(() => {
+setupVite(app_default, server).then((vite) => {
   const requestListener = getRequestListener(app_default.fetch);
-  server.on("request", requestListener);
+  server.on("request", (req, res) => {
+    vite.middlewares(req, res, () => {
+      requestListener(req, res);
+    });
+  });
   server.listen(PORT, "0.0.0.0", () => {
     log(`Server started on port ${PORT}`, "server");
   });
