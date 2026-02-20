@@ -1,0 +1,15 @@
+[dotenv@17.2.3] injecting env (4) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+🤖 [Automation Doctor] 대량 프롬프트 생성 세션을 시작합니다...
+🎯 대상 선정: 총 294개의 랜드마크가 리뉴얼 대상입니다.
+
+📦 배치 처리 중... (1/30)
+❌ 작업 실패: GoogleGenerativeAIFetchError: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+    at handleResponseNotOk (file:///E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/node_modules/@google/generative-ai/dist/index.mjs:432:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async makeRequest (file:///E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/node_modules/@google/generative-ai/dist/index.mjs:401:9)
+    at async generateContent (file:///E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/node_modules/@google/generative-ai/dist/index.mjs:865:22)
+    at async generatePrompts (E:\GPS-Cruise-Tour-AudioGuideNo-Wifi-1\server\scripts\generate-full-prompts.ts:63:28) {
+  status: 404,
+  statusText: 'Not Found',
+  errorDetails: undefined
+}

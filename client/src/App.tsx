@@ -13,6 +13,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 // Lazy load heavy components for code splitting
 const Home = lazy(() => import("@/pages/Home"));
 const Admin = lazy(() => import("@/pages/Admin"));
+const AdminLanding = lazy(() => import("@/pages/AdminLanding_20260221_0625"));
 const GuideView = lazy(() => import("@/pages/GuideView"));
 const TourLeaderView = lazy(() => import("@/pages/TourLeaderView"));
 const MyRoutes = lazy(() => import("./pages/MyRoutes"));
@@ -39,7 +40,8 @@ function Router() {
         <Route path="/home" component={Home} />
         <Route path="/guide" component={GuideView} />
         <Route path="/tour-leader" component={TourLeaderView} />
-        <Route path="/admin" component={Admin} />
+        <Route path="/admin" component={AdminLanding} />
+        <Route path="/admin/dashboard" component={Admin} />
         <Route path="/my-routes" component={MyRoutes} />
         <Route path="/products" component={ProductList} />
         <Route path="/product/:id" component={ProductDetail} />

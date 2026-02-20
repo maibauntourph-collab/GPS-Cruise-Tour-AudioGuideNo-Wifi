@@ -1,153 +1,62 @@
+// [학습 권고: 비즈니스 로직의 심장 - Accounting Manager]
+// 1. 수익 분배: 실 결제액의 20%를 파트너(가이드/승무원)의 몫으로 계산합니다.
+// 2. 데이터 무결성: 결제가 'completed' 상태인 경우에만 정산 로직이 실행되도록 가드(Guard)를 둡니다.
+// 3. 지갑 시스템: 각 유저별 creator_earnings 테이블을 업데이트하여 실시간 수익 현황을 관리합니다.
+// 4. 낙전 수익: 유효기간이 지난 크레딧을 처리하는 배치 프로세스의 기반을 마련합니다.
+
 import { db } from "../db";
-import { creatorEarnings, transactions, settlements, users } from "@shared/schema";
-import { eq, and, sql } from "drizzle-orm";
+import { transactions, creatorEarnings, users } from "../../shared/schema";
+import { eq, sql } from "drizzle-orm";
 
 /**
- * [회계부장 교수님의 금융 코딩 특강: 크리에이터 정산 시스템]
- * 
- * 안녕 미래의 개발자 여러분! 결제와 정산 시스템은 앱에서 가장 '돈'과 직결된 아주 예민한 부분이야.
- * 우리가 만든 이 `SettlementService`는 플랫폼과 크리에이터가 공생하는 '수익 배분 로직'을 담고 있단다.
- * 
- * 여기서 배울 수 있는 핵심 개발 포인트:
- * 1. DB 트랜잭션 (Transaction): '돈 계산'에서 중간에 멈추면 큰일나겠지? A라는 사람 돈은 빠졌는데 B에게 안 들어가면 안 되니까.
- *    그래서 `db.transaction`을 사용해서 모든 과정이 '동시에 성공하거나, 아예 실패하도록' 묶었어.
- * 2. SQL 원자적 업데이트 (sql``): `SQL + 500`처럼 DB 레벨에서 직접 더하기를 해서, 
- *    동시에 여러 결제가 이뤄져도 수치가 꼬이지 않게 보호하는 기술이야.
- * 3. 7:3 수익 배분: 플랫폼 비즈니스의 약속된 비즈니스 로직을 코드에 그대로 녹여냈단다.
+ * [회계 관리자 노트: 파트너 정산 서비스]
+ * 본 서비스는 결제 완료 시 파트너(가이드/승무원)에게 리워드를 적립하는 핵심 비즈니스 로직입니다.
  */
 export class SettlementService {
-    // 플랫폼의 수익 배분율! 70%는 크리에이터(생산자)에게, 30%는 플랫폼(우리)의 운영비로 사용해.
-    private readonly CREATOR_SHARE = 0.7; // 70%
-    private readonly PLATFORM_SHARE = 0.3; // 30%
 
     /**
-     * 결제 완료 처리 (Process Payment)
-     * 사용자가 Stripe 등으로 결제를 성공하면 호출되는 함수야.
-     * 
-     * @param userId 결제한 사용자 (관광객)
-     * @param targetId 구매 대상 (명소/가이드 ID)
-     * @param amount 결제 총액 (€ 또는 원)
-     * @param providerData 외부 결제 시스템(Stripe 등)에서 넘어온 상세 데이터
+     * [적요] 파트너 수익 배분 처리
+     * 결제 트랜잭션을 분석하여 정해진 비율(20%)만큼 파트너의 지갑에 수익을 누적시킵니다.
      */
-    async processPayment(userId: string, targetId: string, amount: number, providerData: any) {
-        try {
-            console.log(`[회계부장] 영수증 끊을게요! 결제액: ${amount}, 유저: ${userId}`);
+    static async processPartnerReward(transactionId: string) {
+        console.log(`💰 [Accounting Manager] 결제 건에 대한 수익 정산을 시작합니다: ${transactionId}`);
 
-            // [핵심] 트랜잭션 시작! 이 안에서 하나라도 실패하면 다시 없었던 일로 되돌려(Rollback).
-            return await db.transaction(async (tx) => {
+        const tx = await db.query.transactions.findFirst({
+            where: eq(transactions.id, transactionId)
+        });
 
-                // 1. 거래 내역(Transaction) 기록부 작성
-                // 누가, 언제, 무엇을, 얼마나 샀는지 영구적으로 기록해야 나중에 분쟁이 없겠지?
-                const [transaction] = await tx.insert(transactions).values({
-                    userId,
-                    targetId,
-                    amount,
-                    status: "completed", // 결제가 완료되었다는 상태값
-                    providerData
-                }).returning();
-
-                // 2. 크리에이터에게 갈 몫(70%) 계산
-                const creatorAmount = amount * this.CREATOR_SHARE;
-
-                // 3. 크리에이터 지갑(Earnings) 업데이트
-                // 이 결제와 연결된 크리에이터(작성자)가 누구인지 providerData에서 확인해서 수익금을 넣어줄 거야.
-                const creatorId = providerData.creatorId || 'admin'; // 누구의 수익인지 식별
-
-                const [existingEarnings] = await tx.select()
-                    .from(creatorEarnings)
-                    .where(eq(creatorEarnings.userId, creatorId));
-
-                if (existingEarnings) {
-                    // 이미 활동 중인 크리에이터라면 기존 잔액에 수익금을 더해줘 (SQL 원자적 업데이트 사용!)
-                    await tx.update(creatorEarnings)
-                        .set({
-                            totalBalance: sql`${creatorEarnings.totalBalance} + ${creatorAmount}`, // 출금 가능한 현재 잔액
-                            totalEarned: sql`${creatorEarnings.totalEarned} + ${creatorAmount}`,   // 지금까지 번 누적 총액
-                            updatedAt: new Date()
-                        })
-                        .where(eq(creatorEarnings.userId, creatorId));
-                } else {
-                    // 우리 플랫폼에 처음 참여한 크리에이터라면 새로운 지갑(레코드)을 만들어줘.
-                    await tx.insert(creatorEarnings).values({
-                        userId: creatorId,
-                        totalBalance: creatorAmount,
-                        totalEarned: creatorAmount,
-                        updatedAt: new Date()
-                    });
-                }
-
-                console.log(`[회계부장] 장부 기입이 아주 깔끔하게 끝났습니다! 거래 ID: ${transaction.id}`);
-                return transaction;
-            });
-        } catch (error) {
-            // 돈 문제는 정말 조심해야 해! 에러가 나면 즉시 관리자에게 로그로 알리는 과정이 필수란다.
-            console.error("[회계부장 긴급] 결제 처리 중 대형 사고 발생! (DB 롤백됨):", error);
-            throw error;
+        if (!tx || tx.status !== 'completed') {
+            console.error("❌ 완료되지 않은 결제 건이거나 존재하지 않는 트랜잭션입니다.");
+            return;
         }
+
+        // [적요] 실 결제액 추출: 할인 등을 제외하고 실제 결제된 금액(Net Revenue)을 기준으로 합니다.
+        const netRevenue = tx.amount;
+
+        // [적요] 리워드 계산: 비즈니스 정책에 따라 실 결제액의 20%를 분배합니다.
+        const partnerReward = netRevenue * 0.2;
+
+        console.log(`🎯 실 결제액: ${netRevenue}, 파트너 리워드(20%): ${partnerReward}`);
+
+        // [적요] 지갑 업데이트: Drizzle ORM의 sql 템플릿을 사용하여 원자적(Atomic)으로 금액을 증가시킵니다.
+        // 이는 데이터 동시성 문제를 방지하는 중요한 기법입니다.
+        await db.update(creatorEarnings)
+            .set({
+                totalBalance: sql`${creatorEarnings.totalBalance} + ${partnerReward}`,
+                totalEarned: sql`${creatorEarnings.totalEarned} + ${partnerReward}`,
+                updatedAt: new Date()
+            })
+            .where(eq(creatorEarnings.userId, tx.userId));
+
+        console.log(`✅ 파트너 지갑에 ${partnerReward}원이 성공적으로 적립되었습니다.`);
     }
 
     /**
-     * 정산 실행 (Run Settlement)
-     * 보통 한 달에 한 번, 크리에이터의 잔액을 0으로 만들고 실제 현금을 보내주는 과정이야.
+     * [적요] 크레딧 소멸 로직
+     * 사용자가 여행 종료 후 일정 기간(예: 1년) 동안 사용하지 않은 크레딧을 회사의 낙전수익으로 확정 처리합니다.
      */
-    async runSettlement(userId: string, period: string) {
-        try {
-            return await db.transaction(async (tx) => {
-                // 1. 정산할 금액이 있는지 지갑 확인
-                const [earnings] = await tx.select().from(creatorEarnings).where(eq(creatorEarnings.userId, userId));
-
-                if (!earnings || earnings.totalBalance <= 0) {
-                    throw new Error("[회계부장] 정산해줄 돈이 없는데요? 잔액이 0원입니다.");
-                }
-
-                const settleAmount = earnings.totalBalance;
-
-                // 2. '정산 완료' 증명서 레코드 생성
-                const [settlement] = await tx.insert(settlements).values({
-                    userId,
-                    amount: settleAmount,
-                    period, // 예: "2024-02"
-                    status: "processing", // 현재 입금 작업 중이라는 뜻
-                    createdAt: new Date()
-                }).returning();
-
-                // 3. 지갑 잔액을 0으로 리셋 (돈을 실제로 보내줄 거니까!)
-                await tx.update(creatorEarnings)
-                    .set({
-                        totalBalance: 0,
-                        updatedAt: new Date()
-                    })
-                    .where(eq(creatorEarnings.userId, userId));
-
-                console.log(`[회계부장] ${userId}님께 ${settleAmount}원만큼 송금 지시를 내렸습니다.`);
-                return settlement;
-            });
-        } catch (error) {
-            console.error("[회계부장] 정산 작업 중 문제 발생:", error);
-            throw error;
-        }
-    }
-
-    /**
-     * 크리에이터 실적 대시보드 데이터 조회
-     */
-    async getCreatorStats(userId: string) {
-        // 1. 현재 내 지갑 상태 (잔액, 총 수익) 가져오기
-        const [earnings] = await db.select().from(creatorEarnings).where(eq(creatorEarnings.userId, userId));
-
-        // 2. 최근 10개의 거래 내역만 정렬해서 보여주기 (최신순)
-        const recentTransactions = await db.select().from(transactions)
-            .where(eq(transactions.userId, userId))
-            .orderBy(sql`${transactions.createdAt} DESC`)
-            .limit(10);
-
-        return {
-            totalBalance: Number(earnings?.totalBalance || 0),
-            totalEarned: Number(earnings?.totalEarned || 0),
-            visitorCount: 0, // [회계부장] 차후 가문 목록이나 트랜잭션 수로 실제 집계 로직 추가 예정
-            recentTransactions
-        };
+    static async expireCredits() {
+        console.log("💳 [Accounting Manager] 크레딧 만료 배치 작업을 수행 중...");
+        // 추후 구현 예정: 유효기간 체크 및 잔액 조정 로직
     }
 }
-
-export const settlementService = new SettlementService();
