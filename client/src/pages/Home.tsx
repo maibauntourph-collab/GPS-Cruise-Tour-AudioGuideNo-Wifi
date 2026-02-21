@@ -2911,7 +2911,7 @@ export default function Home() {
 
             if (!landingCityId || !landingContentSource) return null;
 
-            const content = landingContentSource[language] || landingContentSource['en'];
+            const content = landingContentSource['ko'] || landingContentSource[language] || landingContentSource['en'] || Object.values(landingContentSource)[0];
 
             return (
               <div className="relative w-full overflow-hidden rounded-3xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-white/20 transition-all animate-in fade-in zoom-in-95 duration-500">

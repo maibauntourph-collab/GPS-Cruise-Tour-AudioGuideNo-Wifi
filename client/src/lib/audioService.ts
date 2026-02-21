@@ -444,30 +444,49 @@ export class AudioService {
   }
 
   // Unlock audio engine (call from user gesture)
-  unlockAudio() {
+  async unlockAudio() {
     if (this.isUnlocked) return;
 
     console.log('[AudioService] Unlocking audio engine...');
 
-    // 1. Try to unlock Web Speech API
-    const utterance = new SpeechSynthesisUtterance('');
-    utterance.volume = 0;
-    this.synthesis.speak(utterance);
+    try {
+      // 1. Try to unlock Web Speech API
+      // On some mobile browsers, we need to play a silent utterance
+      await new Promise<void>((resolve) => {
+        const utterance = new SpeechSynthesisUtterance(' ');
+        utterance.volume = 0;
+        utterance.onend = () => resolve();
+        utterance.onerror = () => resolve();
+        this.synthesis.speak(utterance);
 
-    // 2. Try to unlock HTML Audio if element exists
-    if (this.audioElement) {
-      this.audioElement.play().then(() => {
-        this.audioElement?.pause();
-      }).catch(() => { });
-    } else {
-      // Create a temporary silent audio to unlock
-      const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
-      silentAudio.play().then(() => {
-        this.isUnlocked = true;
-        console.log('[AudioService] Audio engine unlocked successfully');
-      }).catch(err => {
-        console.warn('[AudioService] Audio engine unlock failed:', err);
+        // Timeout as fallback for resolve
+        setTimeout(resolve, 100);
       });
+
+      // 2. Try to unlock HTML Audio if element exists
+      const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
+      await silentAudio.play()
+        .then(() => {
+          this.isUnlocked = true;
+          console.log('[AudioService] Audio engine unlocked successfully');
+        })
+        .catch(err => {
+          console.warn('[AudioService] HTML Audio unlock failed, but Web Speech might work:', err);
+          // Still mark as unlocked if we got this far, as Web Speech is our primary
+          this.isUnlocked = true;
+        });
+    } catch (e) {
+      console.error('[AudioService] Comprehensive unlock failed:', e);
+    }
+  }
+
+  // Helper to prevent SpeechSynthesis from timing out on long texts
+  // (Chrome/Safari bug where it stops after ~15 seconds)
+  private keepAlive() {
+    if (this.synthesis.speaking && !this.synthesis.paused) {
+      this.synthesis.pause();
+      this.synthesis.resume();
+      this.playbackTimer = setTimeout(() => this.keepAlive(), 10000);
     }
   }
 
