@@ -465,7 +465,11 @@ export default function UnifiedFloatingCard({
       const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
         getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
       console.log(`[UnifiedFloatingCard] Language changed to ${selectedLanguage}, refreshing audio...`);
-      audioService.refreshAudioForLanguage(text, selectedLanguage);
+      // Use the generic stop/play to refresh or use specific refresh method if exists
+      if (audioService.isPlaying()) {
+        audioService.stop();
+        audioService.play(text, selectedLanguage);
+      }
     }
   }, [selectedLanguage]);
 
@@ -711,75 +715,77 @@ export default function UnifiedFloatingCard({
         }}
         onClick={handleCardClick}
         data-testid="card-unified-floating-container"
+      <div
+        className="flex items-center gap-2 p-3 sm:p-4 border-b flex-shrink-0"
+        style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+        onMouseDown={handleStart}
+        onTouchStart={handleStart}
       >
-        {t('cruisePortInfo', selectedLanguage)}
-      </h3>
-        {
-      isSimulationMode && (
-        <Badge className="bg-red-500 hover:bg-red-600 text-white border-none animate-pulse">
-          Simulating
-        </Badge>
-      )
-    }
+        <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
+          {selectedLandmark 
+            ? getTranslatedContent(selectedLandmark, selectedLanguage, 'name')
+            : showCruisePort && city?.cruisePort
+              ? getCruisePortTranslation(city.cruisePort, selectedLanguage, 'portName')
+              : t('landmarks', selectedLanguage)}
+        </h3>
+        {isSimulationMode && (
+          <Badge className="bg-red-500 hover:bg-red-600 text-white border-none animate-pulse">
+            Simulating
+          </Badge>
+        )}
 
-    {/* Action buttons - Only show when landmark is selected */ }
-    {
-      selectedLandmark && (
-        <>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              onNavigate?.(selectedLandmark);
-              setIsMinimized(true);
-            }}
-            className="h-8 w-8"
-            data-testid="button-header-navigate"
-          >
-            <Navigation className="w-4 h-4" />
-          </Button>
-          {onAddToTour && (
+        {/* Action buttons - Only show when landmark is selected */}
+        {selectedLandmark && (
+          <>
             <Button
               variant="ghost"
               size="icon"
               onClick={(e) => {
                 e.stopPropagation();
-                onAddToTour(selectedLandmark);
-                // List 탭으로 먼저 전환
-                setActiveTab('list');
-                // 그 다음 랜드마크 닫기
-                setTimeout(() => {
-                  onLandmarkClose();
-                }, 100);
+                onNavigate?.(selectedLandmark);
+                setIsMinimized(true);
               }}
-              disabled={isInTour || tourStops.some(stop => stop.id === selectedLandmark.id)}
               className="h-8 w-8"
-              data-testid="button-header-add-to-tour"
+              data-testid="button-header-navigate"
             >
-              <MapPinned className="w-4 h-4" />
+              <Navigation className="w-4 h-4" />
             </Button>
-          )}
-        </>
-      )
-    }
+            {onAddToTour && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAddToTour(selectedLandmark);
+                  setActiveTab('list');
+                  setTimeout(() => {
+                    onLandmarkClose();
+                  }, 100);
+                }}
+                disabled={isInTour || tourStops.some(stop => stop.id === selectedLandmark.id)}
+                className="h-8 w-8"
+                data-testid="button-header-add-to-tour"
+              >
+                <MapPinned className="w-4 h-4" />
+              </Button>
+            )}
+          </>
+        )}
 
-    {/* Info icon - Only show when no landmark selected */ }
-    {
-      !selectedLandmark && activeTab === 'landmark' && (
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-8 w-8"
-          disabled
-          data-testid="button-header-info-icon"
-        >
-          <Info className="w-4 h-4 opacity-50" />
-        </Button>
-      )
-    }
+        {/* Info icon - Only show when no landmark selected */}
+        {!selectedLandmark && activeTab === 'landmark' && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            disabled
+            data-testid="button-header-info-icon"
+          >
+            <Info className="w-4 h-4 opacity-50" />
+          </Button>
+        )}
 
-    {/* List button in header */ }
+        {/* List button in header */}
         <Button
           variant="ghost"
           size="icon"
