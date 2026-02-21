@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { flushSync } from 'react-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import html2canvas from 'html2canvas';
 import {
@@ -358,6 +359,7 @@ export default function Home() {
   // 🎖️ [Dodari] 최우선 화면(InstallPrompt) 노출을 위해 초기값은 false로 설정하고, 
   // InstallPrompt가 닫히거나 렌더링된 이후에 필요시 로직으로 제어합니다.
   const [showStartupDialog, setShowStartupDialog] = useState<boolean>(false);
+  const [isStartupTransitioning, setIsStartupTransitioning] = useState<boolean>(false); // 🎖️ [Dodari] 시퀀스 전환 안정성 확보
   const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
   const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
   // [적요: isWelcomeHandled는 220행 부근에서 정의됨 — TDZ 방지를 위해 사용 전에 선언]
@@ -390,10 +392,12 @@ export default function Home() {
   // [디버그 닥터 & 디자이너 킴의 UI Sequence 제어 훅: Startup Priority]
   useEffect(() => {
     // 🎖️ [Dodari Architecture] 지능형 시퀀스 체인
-    // 웰컴 화면이 처리되지 않았거나(Startup 전) StartupDialog가 켜져있다면 랜딩 금지
-    if (!isWelcomeHandled || showStartupDialog) {
-      // 🩺 [Bug Doctor] 대기 상태 로깅
-      console.log("🩺 [Bug Doctor / Vital Check] Waiting for Sequence (Welcome/Startup) to be addressed...");
+    // 웰컴 화면이 처리되지 않았거나(Startup 전), StartupDialog 또는 전환 중이라면 랜딩 금지
+    if (!isWelcomeHandled || showStartupDialog || isStartupTransitioning) {
+      // 🩺 [Bug Doctor] 대기 상태 로깅 (전환 중일 때만 상세 출력)
+      if (isStartupTransitioning) {
+        console.log("🩺 [Bug Doctor / Progress] Startup is closing. Waiting for Magic Transition buffer...");
+      }
       return;
     }
 
@@ -404,17 +408,18 @@ export default function Home() {
       if (matchedId && !hasShownLandingThisSession.has(matchedId)) {
         console.log(`🎊 [Magic Landing] 🩺 [Bug Doctor] Sequence Chain Stable. Intent-Matched: ${lastUIAction}. Welcome to ${matchedId}!`);
 
+        // [Designer Kim] 전환 UX 안정성 확보: Startup 애니메이션이 완전히 끝난 후 나타나도록 800ms 딜레이
         const timer = setTimeout(() => {
           setLandingCityId(matchedId);
           setHasShownLandingThisSession(prev => new Set(prev).add(matchedId));
           setLastUIAction('NONE'); // 트리거 완료 후 안전하게 초기화
           console.log(`🩺 [Bug Doctor / Surgery Log] Landing Logic Grafted: Success for ${matchedId}`);
-        }, 600);
+        }, 800);
 
         return () => clearTimeout(timer);
       }
     }
-  }, [position, landingCityId, hasShownLandingThisSession, showStartupDialog, lastUIAction, isWelcomeHandled]);
+  }, [position, landingCityId, hasShownLandingThisSession, showStartupDialog, isStartupTransitioning, lastUIAction, isWelcomeHandled]);
 
   const selectedCity = cities.find(c => c.id === selectedCityId);
 
@@ -1018,10 +1023,14 @@ export default function Home() {
   // Startup dialog handlers
   const handleStartupClose = () => {
     setShowStartupDialog(false);
+    setIsStartupTransitioning(true); // 🎖️ [Dodari] 전환 버퍼 시작
     sessionStorage.setItem('startup-dialog-shown', 'true');
     // 🎖️ [Dodari Architecture] Manual Skip/Close should NOT trigger 'STARTUP_FINISH' 
     // AND should clear any pending actions like 'CITY_CHANGE' at startup.
     setLastUIAction('NONE');
+
+    // 600ms 후 전환 안정화 처리
+    setTimeout(() => setIsStartupTransitioning(false), 600);
   };
 
   const handleSelectGPS = () => {
@@ -2552,6 +2561,29 @@ export default function Home() {
         </header>
 
         <div className="relative flex-1 overflow-hidden flex flex-col">
+          {/* [Designer Kim] Magic Transition Overlay: Startup -> Landing 전환 시 부드러운 화이트아웃 */}
+          <AnimatePresence>
+            {isStartupTransitioning && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className="absolute inset-0 z-[2500] bg-white/40 backdrop-blur-[2px] flex items-center justify-center pointer-events-none"
+              >
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.4 }}
+                  className="flex flex-col items-center gap-3"
+                >
+                  <div className="w-12 h-12 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
+                  <p className="text-xs font-bold text-primary/60 tracking-widest uppercase">Initializing Paradise...</p>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Map Section - always show, full screen on mobile */}
           <div
             ref={mapContainerRef}
