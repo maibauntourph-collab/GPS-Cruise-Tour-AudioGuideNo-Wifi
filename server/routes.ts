@@ -122,6 +122,17 @@ export function registerRoutes(app: Hono<any>) {
   });
 
   // [적요: 도시 목록 조회 API]
+  // [DEBUG] Temporary route to verify Neon DB data for synchronization
+  app.get("/api/debug/db-landmark/:id", async (c) => {
+    const id = c.req.param("id");
+    try {
+      const result = await db.select().from(landmarks).where(eq(landmarks.id, id));
+      return c.json(result);
+    } catch (error: any) {
+      return c.json({ error: error.message }, 500);
+    }
+  });
+
   app.get("/api/cities", async (c) => {
     try {
       const cities = await storage.getCities();

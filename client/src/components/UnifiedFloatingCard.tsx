@@ -459,8 +459,15 @@ export default function UnifiedFloatingCard({
   }, [selectedLandmark?.id, playInBackground]);
 
   useEffect(() => {
-    audioService.stop();
-    setIsPlaying(false);
+    if (isPlaying && selectedLandmark) {
+      const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
+        getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
+      console.log(`[UnifiedFloatingCard] Language changed to ${selectedLanguage}, refreshing audio...`);
+      audioService.refreshAudioForLanguage(text, selectedLanguage);
+    } else {
+      audioService.stop();
+      setIsPlaying(false);
+    }
   }, [selectedLanguage]);
 
   // Reset page when filters change
