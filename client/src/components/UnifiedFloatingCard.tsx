@@ -292,7 +292,7 @@ export default function UnifiedFloatingCard({
     };
   const [activeTab, setActiveTab] = useState<string>('list');
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [playbackRate, setPlaybackRate] = useState(1.2);
 
   const { data: regionalGuides = [] } = useQuery<User[]>({
     queryKey: ['/api/users', 'creators'],

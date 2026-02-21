@@ -70,7 +70,7 @@ export default function Home() {
   });
 
   const { position, error, isLoading } = useGeoLocation(gpsEnabled);
-  const [selectedCityId, setSelectedCityId] = useState<string>('cebu');
+  const [selectedCityId, setSelectedCityId] = useState<string>('rome');
   const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
     // Check localStorage first, then default to Korean
     const savedLanguage = localStorage.getItem('selected-language');
@@ -140,7 +140,7 @@ export default function Home() {
   const [spokenLandmarks, setSpokenLandmarks] = useState<Set<string>>(new Set());
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
-  const [speechRate, setSpeechRate] = useState<number>(audioService.getCurrentRate());
+  const [speechRate, setSpeechRate] = useState<number>(1.2);
   const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
   const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
   const [showLandmarks, setShowLandmarks] = useState(true);
