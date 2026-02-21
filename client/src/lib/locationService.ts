@@ -1,4 +1,5 @@
 import { calculateDistance } from './geoUtils';
+import { Landmark } from '@shared/schema';
 
 /**
  * [도다리 부장 특강: '오프 스카우트'의 지리적 매핑 전략]
@@ -36,8 +37,34 @@ export const CITY_HUBS: CityHub[] = [
         lat: 10.3157,
         lng: 123.8854,
         radiusMeters: 30000 // 30km
+    },
+    {
+        id: "tokyo",
+        name: "Tokyo",
+        lat: 35.6895,
+        lng: 139.6917,
+        radiusMeters: 40000
+    },
+    {
+        id: "paris",
+        name: "Paris",
+        lat: 48.8566,
+        lng: 2.3522,
+        radiusMeters: 30000
+    },
+    {
+        id: "barcelona",
+        name: "Barcelona",
+        lat: 41.3851,
+        lng: 2.1734,
+        radiusMeters: 30000
     }
 ];
+
+export interface ProximityResult {
+    landmark: Landmark;
+    distance: number;
+}
 
 /**
  * 현재 위치 정보를 받아 입성한 도시 ID를 반환합니다.
@@ -54,4 +81,32 @@ export function getMatchedCityId(lat: number, lng: number): string | null {
         }
     }
     return null;
+}
+
+/**
+ * [교수님 노트] 사용자와 가장 가까운 랜드마크를 찾아주는 '가이드 도우미' 함수입니다.
+ * 345개의 랜드마크를 효율적으로 계산하기 위해 루프를 돌며 거리를 측정합니다.
+ */
+export function findNearestLandmark(
+    userLat: number,
+    userLng: number,
+    landmarks: Landmark[],
+    excludeIds: Set<string> = new Set()
+): ProximityResult | null {
+    let nearest: ProximityResult | null = null;
+    let minDistance = Infinity;
+
+    for (const landmark of landmarks) {
+        if (excludeIds.has(landmark.id)) continue;
+
+        const distance = calculateDistance(userLat, userLng, landmark.lat, landmark.lng);
+
+        // 설정된 반경(landmark.radius) 안에 들어왔는지 확인
+        if (distance <= (landmark.radius || 50) && distance < minDistance) {
+            minDistance = distance;
+            nearest = { landmark, distance };
+        }
+    }
+
+    return nearest;
 }

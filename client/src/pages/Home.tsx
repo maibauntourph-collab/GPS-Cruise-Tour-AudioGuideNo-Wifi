@@ -44,8 +44,8 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { getMatchedCityId } from '@/lib/locationService';
-import { LANDING_DATA } from '@/data/landingData';
+import { getMatchedCityId, findNearestLandmark } from '@/lib/locationService';
+import { LANDING_DATA } from '@/lib/landingData';
 import { useLanguage } from '@/context/LanguageContext';
 import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -58,6 +58,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { ChevronDown } from 'lucide-react';
 
 export default function Home() {
@@ -83,6 +85,16 @@ export default function Home() {
     return finalLanguage;
   });
   const [offlineMode, setOfflineMode] = useState(false);
+
+  // 🛰️ [Server Park] 가상 투어 시뮬레이션 상태
+  const [isSimulationMode, setIsSimulationMode] = useState(false);
+  const [simulatedPosition, setSimulatedPosition] = useState<{ latitude: number; longitude: number } | null>(null);
+  const [simulationSpeed, setSimulationSpeed] = useState(1); // 1x, 5x, 10x
+  const [simulationStepIndex, setSimulationStepIndex] = useState(0);
+
+  // 🛰️ [Server Park] 통합 위치 정보 (가상 또는 실제)
+  const effectivePosition = isSimulationMode ? simulatedPosition : position;
+
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== 'undefined' && window.innerWidth < 640
   );
@@ -506,6 +518,79 @@ export default function Home() {
       console.error('Failed to play click sound:', error);
     }
   };
+
+  // 🛰️ [Server Park] 가상 투어 시뮬레이션 엔진 로직
+  useEffect(() => {
+    if (!isSimulationMode || !tourStops.length) {
+      if (!isSimulationMode) setSimulatedPosition(null);
+      return;
+    }
+
+    console.log(`🚀 [Simulation] Starting/Resuming Virtual Tour. Speed: ${simulationSpeed}x`);
+
+    // 시뮬레이션 시작 시 첫 번째 포인트로 이동
+    if (!simulatedPosition && tourStops[simulationStepIndex]) {
+      const start = tourStops[simulationStepIndex];
+      setSimulatedPosition({ latitude: start.lat, longitude: start.lng });
+    }
+
+    const intervalId = setInterval(() => {
+      setSimulationStepIndex(prevIndex => {
+        const nextIndex = (prevIndex + 1) % tourStops.length;
+        const target = tourStops[nextIndex];
+
+        console.log(`🚶 [Simulation] Moving to next checkpoint: ${getTranslatedContent(target, selectedLanguage, 'name')}`);
+        setSimulatedPosition({ latitude: target.lat, longitude: target.lng });
+
+        return nextIndex;
+      });
+    }, 8000 / simulationSpeed); // 속도에 맞춰 좌표 변경
+
+    return () => clearInterval(intervalId);
+  }, [isSimulationMode, tourStops, simulationSpeed, selectedLanguage]);
+
+  // 🛰️ [Server Park] 실시간 랜드마크 근접 감지 및 자동 안내 효과
+  useEffect(() => {
+    if (!effectivePosition || !audioEnabled || !landmarks.length || offlineMode) return;
+
+    const nearest = findNearestLandmark(
+      effectivePosition.latitude,
+      effectivePosition.longitude,
+      landmarks,
+      spokenLandmarks // 이미 안내된 곳은 제외
+    );
+
+    if (nearest) {
+      const { landmark, distance } = nearest;
+      const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+      const description = getTranslatedContent(landmark, selectedLanguage, 'description');
+
+      console.log(`🎯 [Proximity] Landmark Detected: ${name} (${Math.round(distance)}m)`);
+
+      // 자동 재생 트리거
+      audioService.playAuto(
+        landmark.id,
+        `${name}. ${description}`,
+        selectedLanguage
+      );
+
+      // 안내 완료 목록에 추가
+      setSpokenLandmarks(prev => new Set(Array.from(prev).concat(landmark.id)));
+
+      // 방문 처리 (서버 연동)
+      if (!isVisited(landmark.id)) {
+        markVisited(landmark.id);
+        toast({
+          title: selectedLanguage === 'ko' ? '새로운 장소 발견!' : 'New Place Discovered!',
+          description: name,
+        });
+      }
+
+      // 해당 랜드마크로 지도 및 카드 포커싱
+      setSelectedLandmark(landmark);
+      setIsCardMinimized(false);
+    }
+  }, [effectivePosition, landmarks, audioEnabled, spokenLandmarks, selectedLanguage, offlineMode]);
 
   // Location search using OpenStreetMap Nominatim API
   const handleLocationSearch = async () => {
@@ -2062,6 +2147,49 @@ export default function Home() {
               onDismiss={() => setShowUpdatePrompt(false)}
               selectedLanguage={selectedLanguage}
             />
+
+            {/* 🛰️ [Server Park] 가상 투어 시뮬레이션 제어 바 */}
+            {isSimulationMode && (
+              <div
+                className="absolute top-4 left-1/2 -translate-x-1/2 z-[2000] animate-in fade-in slide-in-from-top-4 duration-500"
+                style={{ pointerEvents: 'auto' }}
+              >
+                <Card className="p-2 sm:p-3 bg-red-600/90 text-white border-none shadow-xl flex items-center gap-3 sm:gap-4 backdrop-blur-md">
+                  <div className="flex items-center gap-2 pr-3 border-r border-white/20">
+                    <div className="w-2 h-2 bg-white rounded-full animate-ping" />
+                    <span className="text-xs font-bold uppercase tracking-wider hidden sm:inline">Simulation</span>
+                    <span className="text-xs font-bold sm:hidden">Sim...</span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="flex bg-white/10 rounded-md p-0.5">
+                      {[1, 5, 10].map(speed => (
+                        <Button
+                          key={speed}
+                          variant="ghost"
+                          size="sm"
+                          className={`h-7 px-2 text-[10px] font-bold ${simulationSpeed === speed ? 'bg-white text-red-600' : 'text-white hover:bg-white/20'}`}
+                          onClick={() => setSimulationSpeed(speed)}
+                        >
+                          {speed}x
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 border-l border-white/20 pl-3">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-white hover:bg-white/20"
+                      onClick={() => setIsSimulationMode(false)}
+                    >
+                      <X className="w-5 h-5" />
+                    </Button>
+                  </div>
+                </Card>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -2119,7 +2247,7 @@ export default function Home() {
           }
         }}
         landmarks={filteredLandmarks}
-        userPosition={position}
+        userPosition={effectivePosition}
         onLandmarkRoute={handleLandmarkRoute}
         spokenLandmarks={spokenLandmarks}
         onLandmarkSelect={setSelectedLandmark}
@@ -2146,6 +2274,8 @@ export default function Home() {
         }}
         capturedRouteImage={capturedRouteImage}
         onClearCapturedImage={() => setCapturedRouteImage(null)}
+        isSimulationMode={isSimulationMode}
+        onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
       />
 
       {/* Bottom Sheet - Mobile Only */}

@@ -1,0 +1,2072 @@
+[
+  {
+    "id": "rome_restaurant_roscioli",
+    "name": "Roscioli",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Roscioli in Restaurant. Detailed view: Gourmet deli and restaurant with Italian delicacies. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_성산_일출봉",
+    "name": "성산 일출봉",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 성산 일출봉 in Landmark. Detailed view: 새벽을 깨우는 장엄한 풍광, 유네스코 세계자연유산의 웅장함 속에 피어나는 감동.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_65",
+    "name": "뉴욕 프리미엄 Restaurant 추천 66",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Restaurant 추천 66 in Restaurant. Detailed view: 이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "pantheon",
+    "name": "Pantheon",
+    "category": "Ancient Rome",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Pantheon in Ancient Rome. Detailed view: An architectural marvel with the world's largest unreinforced concrete dome. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "st_peters_basilica",
+    "name": "St. Peter's Basilica",
+    "category": "Religious Site",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of St. Peter's Basilica in Religious Site. Detailed view: The largest church in the world and center of Catholicism. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_50",
+    "name": "런던 프리미엄 Activity 추천 51",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Activity 추천 51 in Activity. Detailed view: 이곳은 london에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "notre_dame",
+    "name": "Notre-Dame Cathedral",
+    "category": "Cathedral",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Notre-Dame Cathedral in Cathedral. Detailed view: A medieval Catholic cathedral and UNESCO World Heritage Site. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_41",
+    "name": "로마 프리미엄 Restaurant 추천 42",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Restaurant 추천 42 in Restaurant. Detailed view: 이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_108",
+    "name": "SEOUL Premium Landmark 108",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Landmark 108 in Landmark. Detailed view: 이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "eiffel_tower",
+    "name": "Eiffel Tower",
+    "category": "Monument",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Eiffel Tower in Monument. Detailed view: The most-visited paid monument in the world. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "louvre",
+    "name": "Louvre Museum",
+    "category": "Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Louvre Museum in Museum. Detailed view: The world's largest art museum and a historic monument. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "arc_triomphe",
+    "name": "Arc de Triomphe",
+    "category": "Monument",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Arc de Triomphe in Monument. Detailed view: One of the most famous monuments in Paris. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "sacre_coeur",
+    "name": "Sacré-Cœur Basilica",
+    "category": "Religious Site",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Sacré-Cœur Basilica in Religious Site. Detailed view: Iconic white basilica atop Montmartre with panoramic city views. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_르_상크_le_cinq_포시즌스_호텔_조르주_v_파리",
+    "name": "르 상크 (Le Cinq) - 포시즌스 호텔 조르주 V 파리",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 르 상크 (Le Cinq) - 포시즌스 호텔 조르주 V 파리 in Restaurant. Detailed view: 파인 다이닝의 정점을 경험하는 3미슐랭 스타 레스토랑, 예술과 미학이 담긴 미식의 향연.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_restaurant_the_ledbury",
+    "name": "The Ledbury",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of The Ledbury in Restaurant. Detailed view: Two Michelin star fine dining. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_28",
+    "name": "SEOUL Premium Landmark 28",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Landmark 28 in Landmark. Detailed view: 이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tower_bridge",
+    "name": "Tower Bridge",
+    "category": "Bridge",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Tower Bridge in Bridge. Detailed view: An iconic symbol of London since 1894. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_eye",
+    "name": "London Eye",
+    "category": "Attraction",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of London Eye in Attraction. Detailed view: Europe's tallest cantilevered observation wheel. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rom_trevi",
+    "name": "트레비 분수 (Trevi Fountain)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 트레비 분수 (Trevi Fountain) in Landmark. Detailed view: 동전을 던지면 로마로 다시 돌아온다는 전설의 분수입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_긴자_코쥬_",
+    "name": "긴자 코쥬 (銀座 小十)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 긴자 코쥬 (銀座 小十) in Restaurant. Detailed view: 미식의 성지 긴자에서 오직 당신만을 위한 섬세한 미학, 미슐랭 3스타 가이세키의 정점에서 일본 요리의 정수를 경험하세요.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "서울특별시-demo-2",
+    "name": "서울특별시의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 서울특별시의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_99",
+    "name": "TOKYO Premium Shopping 99",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Shopping 99 in Shopping. Detailed view: 이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_restaurant_septime",
+    "name": "Septime",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Septime in Restaurant. Detailed view: Innovative seasonal French cuisine. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_11",
+    "name": "로마 프리미엄 Shopping 추천 12",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Shopping 추천 12 in Shopping. Detailed view: 이곳은 rome에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_31",
+    "name": "로마 프리미엄 Shopping 추천 32",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Shopping 추천 32 in Shopping. Detailed view: 이곳은 rome에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "buckingham_palace",
+    "name": "Buckingham Palace",
+    "category": "Palace",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Buckingham Palace in Palace. Detailed view: The official residence of the British monarch. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "british_museum",
+    "name": "British Museum",
+    "category": "Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of British Museum in Museum. Detailed view: World-renowned museum of human history and culture. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "glacier_bay",
+    "name": "Glacier Bay National Park",
+    "category": "National Park",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Glacier Bay National Park in National Park. Detailed view: UNESCO World Heritage Site with stunning glaciers and abundant wildlife. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "도쿄-demo-2",
+    "name": "도쿄의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 도쿄의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_90",
+    "name": "런던 프리미엄 Activity 추천 91",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Activity 추천 91 in Activity. Detailed view: 이곳은 london에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_포트넘_앤_메이슨_피카딜리_fortnum_mason_p",
+    "name": "포트넘 앤 메이슨, 피카딜리 (Fortnum & Mason, Piccadilly)",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 포트넘 앤 메이슨, 피카딜리 (Fortnum & Mason, Piccadilly) in Shopping. Detailed view: 영국 왕실의 품격과 미식의 역사를 담은, 300년 전통의 럭셔리 백화점. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_61",
+    "name": "로마 프리미엄 Restaurant 추천 62",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Restaurant 추천 62 in Restaurant. Detailed view: 이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_45",
+    "name": "뉴욕 프리미엄 Restaurant 추천 46",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Restaurant 추천 46 in Restaurant. Detailed view: 이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "도쿄-demo-1",
+    "name": "도쿄의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 도쿄의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "바르셀로나-demo-2",
+    "name": "바르셀로나의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_85",
+    "name": "뉴욕 프리미엄 Restaurant 추천 86",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Restaurant 추천 86 in Restaurant. Detailed view: 이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_25",
+    "name": "뉴욕 프리미엄 Restaurant 추천 26",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Restaurant 추천 26 in Restaurant. Detailed view: 이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "바르셀로나-demo-1",
+    "name": "바르셀로나의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "제주특별자치도-demo-1",
+    "name": "제주특별자치도의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "central-market-kl",
+    "name": "Central Market",
+    "category": "Cultural & Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Central Market in Cultural & Shopping. Detailed view: Historic cultural market for arts and crafts. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "싱가포르-demo-1",
+    "name": "싱가포르의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_더_리츠_런던_애프터눈_티_afternoon_tea_a",
+    "name": "더 리츠 런던 애프터눈 티 (Afternoon Tea at The Ritz London)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 더 리츠 런던 애프터눈 티 (Afternoon Tea at The Ritz London) in Activity. Detailed view: 영국 왕실의 전통이 살아 숨 쉬는, 런던 최고급 애프터눈 티의 정수. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "magellans-cross",
+    "name": "Magellan's Cross",
+    "category": "Historical",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Magellan's Cross in Historical. Detailed view: Historic wooden cross planted by Ferdinand Magellan in 1521. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "viking_ship_museum",
+    "name": "Viking Ship Museum",
+    "category": "Maritime Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Viking Ship Museum in Maritime Museum. Detailed view: Home to the world's best-preserved Viking ships. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_47",
+    "name": "제주특별자치도 프리미엄 Shopping 추천 48",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Shopping 추천 48 in Shopping. Detailed view: 이곳은 jeju에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_0",
+    "name": "런던 프리미엄 Landmark 추천 1",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Landmark 추천 1 in Landmark. Detailed view: 이곳은 london에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "oslo_opera_house",
+    "name": "Oslo Opera House",
+    "category": "Opera House",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Oslo Opera House in Opera House. Detailed view: Norway's architectural masterpiece with a walkable roof. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "whale-shark-watching-cebu",
+    "name": "Whale Shark Watching in Oslob",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Whale Shark Watching in Oslob in Activity. Detailed view: Once-in-a-lifetime whale shark swimming experience. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_52",
+    "name": "파리 프리미엄 Landmark 추천 53",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Landmark 추천 53 in Landmark. Detailed view: 이곳은 paris에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "west-end-theatre-show",
+    "name": "West End Theatre Show",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of West End Theatre Show in Activity. Detailed view: Premium tickets to top West End theatre productions. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_3",
+    "name": "바르셀로나 프리미엄 Shopping 추천 4",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Shopping 추천 4 in Shopping. Detailed view: 이곳은 barcelona에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "sentosa-island",
+    "name": "Sentosa Island",
+    "category": "Island Resort",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Sentosa Island in Island Resort. Detailed view: Island resort with beaches, attractions, and entertainment. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "서울특별시-demo-1",
+    "name": "서울특별시의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 서울특별시의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_70",
+    "name": "런던 프리미엄 Activity 추천 71",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Activity 추천 71 in Activity. Detailed view: 이곳은 london에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "versailles",
+    "name": "Palace of Versailles",
+    "category": "Palace",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Palace of Versailles in Palace. Detailed view: Magnificent royal palace and gardens, symbol of absolute monarchy. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_83",
+    "name": "바르셀로나 프리미엄 Shopping 추천 84",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Shopping 추천 84 in Shopping. Detailed view: 이곳은 barcelona에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "basilica-santo-nino",
+    "name": "Basilica del Santo Niño",
+    "category": "Religious",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Basilica del Santo Niño in Religious. Detailed view: Oldest Roman Catholic church in the Philippines, established in 1565. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "khoo-kongsi",
+    "name": "Khoo Kongsi",
+    "category": "Cultural Heritage",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Khoo Kongsi in Cultural Heritage. Detailed view: Ornate Chinese clan house and temple. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "gardens-by-the-bay",
+    "name": "Gardens by the Bay",
+    "category": "Park & Garden",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Gardens by the Bay in Park & Garden. Detailed view: Futuristic garden with iconic Supertree Grove. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_72",
+    "name": "파리 프리미엄 Landmark 추천 73",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Landmark 추천 73 in Landmark. Detailed view: 이곳은 paris에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "prague_castle",
+    "name": "Prague Castle",
+    "category": "Historic Castle",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Prague Castle in Historic Castle. Detailed view: The largest ancient castle complex in the world. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_더_울즐리_the_wolseley",
+    "name": "더 울즐리 (The Wolseley)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 더 울즐리 (The Wolseley) in Restaurant. Detailed view: 1920년대 유럽 그랜드 카페의 화려함 속에서 런던의 아침을 여는 미식의 전설. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_105",
+    "name": "뉴욕 프리미엄 Restaurant 추천 106",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Restaurant 추천 106 in Restaurant. Detailed view: 이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "klcc-aquarium",
+    "name": "Aquaria KLCC Underwater Experience",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Aquaria KLCC Underwater Experience in Activity. Detailed view: Visit to Aquaria KLCC world-class oceanarium. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "louvre-skip-line-tour",
+    "name": "Louvre Skip-the-Line Guided Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Louvre Skip-the-Line Guided Tour in Activity. Detailed view: Skip-the-line guided tour of Louvre Museum highlights. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "old-phuket-town-walk",
+    "name": "Old Phuket Town Cultural Walk",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Old Phuket Town Cultural Walk in Activity. Detailed view: Guided walking tour of historic Old Phuket Town. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "penang-national-park",
+    "name": "Penang National Park",
+    "category": "Nature & Park",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Penang National Park in Nature & Park. Detailed view: Smallest national park with beaches and rainforest. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_12",
+    "name": "파리 프리미엄 Landmark 추천 13",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Landmark 추천 13 in Landmark. Detailed view: 이곳은 paris에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "similan-islands",
+    "name": "Similan Islands",
+    "category": "Island & Marine Park",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Similan Islands in Island & Marine Park. Detailed view: Premier diving destination with pristine coral reefs. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "penang-trishaw-tour",
+    "name": "Heritage Trishaw Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Heritage Trishaw Tour in Activity. Detailed view: Traditional trishaw tour of George Town heritage sites. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_106",
+    "name": "부산광역시 프리미엄 Activity 추천 107",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Activity 추천 107 in Activity. Detailed view: 이곳은 busan에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris-wine-tasting",
+    "name": "French Wine Tasting Experience",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of French Wine Tasting Experience in Activity. Detailed view: Guided French wine tasting with expert sommelier. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_36",
+    "name": "부산광역시 프리미엄 Landmark 추천 37",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Landmark 추천 37 in Landmark. Detailed view: 이곳은 busan에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "roman-food-tour",
+    "name": "Traditional Roman Food Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Traditional Roman Food Tour in Activity. Detailed view: Guided tour of Rome's traditional cuisine and food culture. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "kawasan-canyoneering",
+    "name": "Canyoneering Adventure at Kawasan Falls",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Canyoneering Adventure at Kawasan Falls in Activity. Detailed view: Thrilling canyoneering experience at Kawasan Falls. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_restaurant_pink_mamma",
+    "name": "Pink Mamma",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Pink Mamma in Restaurant. Detailed view: Trendy Italian-French fusion restaurant. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "colosseum-underground-tour",
+    "name": "Colosseum Underground Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Colosseum Underground Tour in Activity. Detailed view: Exclusive underground tour of Colosseum chambers and arena floor. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_81",
+    "name": "로마 프리미엄 Restaurant 추천 82",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Restaurant 추천 82 in Restaurant. Detailed view: 이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_23",
+    "name": "바르셀로나 프리미엄 Shopping 추천 24",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Shopping 추천 24 in Shopping. Detailed view: 이곳은 barcelona에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_바티칸_박물관_시스티나_예배당_vatican_museu",
+    "name": "바티칸 박물관 & 시스티나 예배당 (Vatican Museums & Sistine Chapel)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바티칸 박물관 & 시스티나 예배당 (Vatican Museums & Sistine Chapel) in Landmark. Detailed view: 인류 예술의 정수가 응축된 바티칸, 미켈란젤로의 경이로운 천지창조를 마주하다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_6",
+    "name": "부산광역시 프리미엄 Activity 추천 7",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Activity 추천 7 in Activity. Detailed view: 이곳은 busan에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_48",
+    "name": "SEOUL Premium Landmark 48",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Landmark 48 in Landmark. Detailed view: 이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_26",
+    "name": "부산광역시 프리미엄 Activity 추천 27",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Activity 추천 27 in Activity. Detailed view: 이곳은 busan에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_restaurant_flavio_al_velavevodetto",
+    "name": "Flavio al Velavevodetto",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Flavio al Velavevodetto in Restaurant. Detailed view: Classic Roman cuisine in Testaccio. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "park_guell",
+    "name": "Park Güell",
+    "category": "Park",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Park Güell in Park. Detailed view: Gaudí's colorful mosaic park with panoramic city views. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_66",
+    "name": "부산광역시 프리미엄 Activity 추천 67",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Activity 추천 67 in Activity. Detailed view: 이곳은 busan에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_56",
+    "name": "부산광역시 프리미엄 Landmark 추천 57",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Landmark 추천 57 in Landmark. Detailed view: 이곳은 busan에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_75",
+    "name": "뉴욕 프리미엄 Shopping 추천 76",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Shopping 추천 76 in Shopping. Detailed view: 이곳은 new-york에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_8",
+    "name": "SEOUL Premium Landmark 8",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Landmark 8 in Landmark. Detailed view: 이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "alaska_wildlife_center",
+    "name": "Alaska Wildlife Conservation Center",
+    "category": "Wildlife Sanctuary",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Alaska Wildlife Conservation Center in Wildlife Sanctuary. Detailed view: A 200-acre wildlife sanctuary protecting Alaska's native species. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "george-town-unesco-site",
+    "name": "George Town UNESCO Site",
+    "category": "UNESCO Heritage",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of George Town UNESCO Site in UNESCO Heritage. Detailed view: UNESCO World Heritage historic city center. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_78",
+    "name": "SEOUL Premium Activity 78",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Activity 78 in Activity. Detailed view: 이곳은 seoul에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "phi-phi-island-tour",
+    "name": "Phi Phi Islands Day Trip",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Phi Phi Islands Day Trip in Activity. Detailed view: Full-day speedboat tour to Phi Phi Islands. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_37",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 38",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Restaurant 추천 38 in Restaurant. Detailed view: 이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_17",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 18",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Restaurant 추천 18 in Restaurant. Detailed view: 이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "sagrada_familia",
+    "name": "Sagrada Familia",
+    "category": "Architecture",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Sagrada Familia in Architecture. Detailed view: Gaudí's magnificent unfinished basilica, a UNESCO World Heritage Site. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "afternoon-tea-london",
+    "name": "Traditional Afternoon Tea Experience",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Traditional Afternoon Tea Experience in Activity. Detailed view: Classic British afternoon tea at prestigious venue. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "cebu-island-hopping",
+    "name": "Island Hopping Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Island Hopping Tour in Activity. Detailed view: Full-day island hopping tour to Cebu's beautiful islands. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_restaurant_lami_jean",
+    "name": "L'Ami Jean",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of L'Ami Jean in Restaurant. Detailed view: Basque-French bistro near Eiffel Tower. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_96",
+    "name": "부산광역시 프리미엄 Landmark 추천 97",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Landmark 추천 97 in Landmark. Detailed view: 이곳은 busan에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_restaurant_antico_arco",
+    "name": "Antico Arco",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Antico Arco in Restaurant. Detailed view: Contemporary Roman fine dining. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "georgetown-street-art",
+    "name": "Georgetown Street Art Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Georgetown Street Art Tour in Activity. Detailed view: Walking tour of Georgetown's famous street art and murals. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_67",
+    "name": "제주특별자치도 프리미엄 Shopping 추천 68",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Shopping 추천 68 in Shopping. Detailed view: 이곳은 jeju에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_104",
+    "name": "싱가포르 프리미엄 Landmark 추천 105",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Landmark 추천 105 in Landmark. Detailed view: 이곳은 singapore에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore-hawker-food-tour",
+    "name": "Hawker Center Food Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Hawker Center Food Tour in Activity. Detailed view: Guided food tour exploring Singapore's hawker cuisine. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_7",
+    "name": "제주특별자치도 프리미엄 Shopping 추천 8",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Shopping 추천 8 in Shopping. Detailed view: 이곳은 jeju에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_87",
+    "name": "제주특별자치도 프리미엄 Shopping 추천 88",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Shopping 추천 88 in Shopping. Detailed view: 이곳은 jeju에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "phi-phi-islands",
+    "name": "Phi Phi Islands",
+    "category": "Island & Beach",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Phi Phi Islands in Island & Beach. Detailed view: Tropical island paradise with limestone cliffs. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "penang-hill",
+    "name": "Penang Hill",
+    "category": "Nature & Viewpoint",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Penang Hill in Nature & Viewpoint. Detailed view: Scenic hilltop retreat with funicular railway. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_restaurant_la_pergola",
+    "name": "La Pergola",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of La Pergola in Restaurant. Detailed view: Three Michelin star fine dining with panoramic views. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_restaurant_da_enzo",
+    "name": "Da Enzo al 29",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Da Enzo al 29 in Restaurant. Detailed view: Authentic Trastevere trattoria. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "thean-hou-temple",
+    "name": "Thean Hou Temple",
+    "category": "Religious",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Thean Hou Temple in Religious. Detailed view: Six-tiered Chinese temple dedicated to goddess Mazu. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "lon_tower_bridge",
+    "name": "타워 브리지 (Tower Bridge)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 타워 브리지 (Tower Bridge) in Landmark. Detailed view: 템스강의 가장 아름다운 도개교입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "roman_forum",
+    "name": "Roman Forum",
+    "category": "Ancient Rome",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Roman Forum in Ancient Rome. Detailed view: The center of ancient Roman public life. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_restaurant_hawksmoor",
+    "name": "Hawksmoor Seven Dials",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Hawksmoor Seven Dials in Restaurant. Detailed view: British steakhouse with cocktails. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_restaurant_armando_al_pantheon",
+    "name": "Armando al Pantheon",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Armando al Pantheon in Restaurant. Detailed view: Historic family trattoria near the Pantheon. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_restaurant_padella",
+    "name": "Padella",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Padella in Restaurant. Detailed view: Fresh pasta near Borough Market. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "런던-demo-1",
+    "name": "런던의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "로마-demo-2",
+    "name": "로마의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "파리-demo-1",
+    "name": "파리의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "파리-demo-2",
+    "name": "파리의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "로마-demo-1",
+    "name": "로마의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "런던-demo-2",
+    "name": "런던의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "싱가포르-demo-2",
+    "name": "싱가포르의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_2",
+    "name": "파리 프리미엄 Activity 추천 3",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Activity 추천 3 in Activity. Detailed view: 이곳은 paris에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "anchorage_museum",
+    "name": "Anchorage Museum",
+    "category": "Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Anchorage Museum in Museum. Detailed view: Alaska's largest museum showcasing art, history, and culture. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "부산광역시-demo-1",
+    "name": "부산광역시의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "제주특별자치도-demo-2",
+    "name": "제주특별자치도의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "부산광역시-demo-2",
+    "name": "부산광역시의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "뉴욕-demo-2",
+    "name": "뉴욕의 맛집 골목",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕의 맛집 골목 in Restaurant. Detailed view: 로컬 테스트용 맛집 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rom_colosseum",
+    "name": "콜로세움 (Colosseum)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 콜로세움 (Colosseum) in Landmark. Detailed view: 고대 로마의 거대한 원형 경기장입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_62",
+    "name": "파리 프리미엄 Activity 추천 63",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Activity 추천 63 in Activity. Detailed view: 이곳은 paris에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "뉴욕-demo-1",
+    "name": "뉴욕의 숨겨진 보석",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕의 숨겨진 보석 in Landmark. Detailed view: 로컬 테스트용 데모 장소. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_82",
+    "name": "파리 프리미엄 Activity 추천 83",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Activity 추천 83 in Activity. Detailed view: 이곳은 paris에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "par_louvre",
+    "name": "루브르 박물관 (Louvre Museum)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 루브르 박물관 (Louvre Museum) in Landmark. Detailed view: 세계 최대 규모의 박물관이자 예술의 성지입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_1",
+    "name": "로마 프리미엄 Restaurant 추천 2",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Restaurant 추천 2 in Restaurant. Detailed view: 이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "gardens-light-show-singapore",
+    "name": "Gardens by the Bay Light Show",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Gardens by the Bay Light Show in Activity. Detailed view: Free nightly light and sound show at Supertree Grove. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "par_eiffel",
+    "name": "에펠탑 (Eiffel Tower)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 에펠탑 (Eiffel Tower) in Landmark. Detailed view: 낭만적인 도시 파리의 영원한 상징입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "casa_batllo",
+    "name": "Casa Batlló",
+    "category": "Architecture",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Casa Batlló in Architecture. Detailed view: Gaudí's fantastical modernist building with skeletal facade. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_4",
+    "name": "싱가포르 프리미엄 Landmark 추천 5",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Landmark 추천 5 in Landmark. Detailed view: 이곳은 singapore에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tivoli_gardens",
+    "name": "Tivoli Gardens",
+    "category": "Amusement Park",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Tivoli Gardens in Amusement Park. Detailed view: One of the world's oldest and most beautiful amusement parks. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "gamla_stan",
+    "name": "Gamla Stan",
+    "category": "Historic District",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Gamla Stan in Historic District. Detailed view: Stockholm's charming medieval Old Town. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome-vespa-tour",
+    "name": "Vespa Tour of Rome",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Vespa Tour of Rome in Activity. Detailed view: Guided Vespa tour through Rome's historic streets. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tops-lookout",
+    "name": "TOPS Lookout",
+    "category": "Viewpoint",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOPS Lookout in Viewpoint. Detailed view: Scenic mountain viewpoint with 360-degree views of Cebu. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "fort-san-pedro",
+    "name": "Fort San Pedro",
+    "category": "Historical",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Fort San Pedro in Historical. Detailed view: Oldest triangular Spanish colonial fortress in the Philippines. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "moulin-rouge-show",
+    "name": "Moulin Rouge Cabaret Show",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Moulin Rouge Cabaret Show in Activity. Detailed view: Iconic Parisian cabaret show with dinner option. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_15",
+    "name": "뉴욕 프리미엄 Shopping 추천 16",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Shopping 추천 16 in Shopping. Detailed view: 이곳은 new-york에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "harry-potter-studio-tour",
+    "name": "Warner Bros. Studio Tour London - Harry Potter",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Warner Bros. Studio Tour London - Harry Potter in Activity. Detailed view: Behind-the-scenes tour of Harry Potter film sets. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_19",
+    "name": "TOKYO Premium Shopping 19",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Shopping 19 in Shopping. Detailed view: 이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_21",
+    "name": "로마 프리미엄 Restaurant 추천 22",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Restaurant 추천 22 in Restaurant. Detailed view: 이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london-eye-fast-track",
+    "name": "London Eye Fast-Track Experience",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of London Eye Fast-Track Experience in Activity. Detailed view: Fast-track access to the London Eye observation wheel. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "batu-caves",
+    "name": "Batu Caves",
+    "category": "Religious & Natural",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Batu Caves in Religious & Natural. Detailed view: Sacred Hindu temple complex in limestone caves. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_24",
+    "name": "싱가포르 프리미엄 Landmark 추천 25",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Landmark 추천 25 in Landmark. Detailed view: 이곳은 singapore에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "kek-lok-si-temple",
+    "name": "Kek Lok Si Temple",
+    "category": "Religious",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Kek Lok Si Temple in Religious. Detailed view: Largest Buddhist temple in Southeast Asia. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_29",
+    "name": "TOKYO Premium Restaurant 29",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Restaurant 29 in Restaurant. Detailed view: 이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_27",
+    "name": "제주특별자치도 프리미엄 Shopping 추천 28",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Shopping 추천 28 in Shopping. Detailed view: 이곳은 jeju에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "wat-chalong",
+    "name": "Wat Chalong",
+    "category": "Religious",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Wat Chalong in Religious. Detailed view: Phuket's largest and most visited Buddhist temple. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "fort-cornwallis",
+    "name": "Fort Cornwallis",
+    "category": "Historical",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Fort Cornwallis in Historical. Detailed view: Largest standing British fort in Malaysia. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_32",
+    "name": "파리 프리미엄 Landmark 추천 33",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Landmark 추천 33 in Landmark. Detailed view: 이곳은 paris에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_35",
+    "name": "뉴욕 프리미엄 Shopping 추천 36",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Shopping 추천 36 in Shopping. Detailed view: 이곳은 new-york에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "anne_frank_house",
+    "name": "Anne Frank House",
+    "category": "Historical Site",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Anne Frank House in Historical Site. Detailed view: Historic house museum and hiding place of Anne Frank. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "colosseum",
+    "name": "Colosseum",
+    "category": "Ancient Rome",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Colosseum in Ancient Rome. Detailed view: The largest amphitheater ever built, a UNESCO World Heritage Site. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_39",
+    "name": "TOKYO Premium Shopping 39",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Shopping 39 in Shopping. Detailed view: 이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_13",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 14",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Restaurant 추천 14 in Restaurant. Detailed view: 이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_44",
+    "name": "싱가포르 프리미엄 Landmark 추천 45",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Landmark 추천 45 in Landmark. Detailed view: 이곳은 singapore에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "trevi_fountain",
+    "name": "Trevi Fountain",
+    "category": "Fountain",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Trevi Fountain in Fountain. Detailed view: The most famous fountain in Rome. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_73",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 74",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Restaurant 추천 74 in Restaurant. Detailed view: 이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_49",
+    "name": "TOKYO Premium Restaurant 49",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Restaurant 49 in Restaurant. Detailed view: 이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_33",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 34",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Restaurant 추천 34 in Restaurant. Detailed view: 이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "northern_lights_point",
+    "name": "Northern Lights Viewing Area",
+    "category": "Natural Wonder",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Northern Lights Viewing Area in Natural Wonder. Detailed view: Prime location for witnessing the spectacular Northern Lights. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_53",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 54",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Restaurant 추천 54 in Restaurant. Detailed view: 이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_51",
+    "name": "로마 프리미엄 Shopping 추천 52",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Shopping 추천 52 in Shopping. Detailed view: 이곳은 rome에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_디스프루타르_disfrutar",
+    "name": "디스프루타르 (Disfrutar)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 디스프루타르 (Disfrutar) in Restaurant. Detailed view: 미식의 한계를 뛰어넘는 창의적인 경험, 세계 정상급 분자 요리의 향연.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_43",
+    "name": "바르셀로나 프리미엄 Shopping 추천 44",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Shopping 추천 44 in Shopping. Detailed view: 이곳은 barcelona에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_사그라다_파밀리아_sagrada_familia",
+    "name": "사그라다 파밀리아 (Sagrada Familia)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 사그라다 파밀리아 (Sagrada Familia) in Landmark. Detailed view: 가우디의 미완성 걸작, 신앙과 자연이 조각된 경이로운 건축의 정수.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "vasa_museum",
+    "name": "Vasa Museum",
+    "category": "Maritime Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Vasa Museum in Maritime Museum. Detailed view: Home to the only preserved 17th-century ship in the world. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_55",
+    "name": "뉴욕 프리미엄 Shopping 추천 56",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Shopping 추천 56 in Shopping. Detailed view: 이곳은 new-york에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_93",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 94",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Restaurant 추천 94 in Restaurant. Detailed view: 이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_58",
+    "name": "SEOUL Premium Activity 58",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Activity 58 in Activity. Detailed view: 이곳은 seoul에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "vatican_museums",
+    "name": "Vatican Museums",
+    "category": "Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Vatican Museums in Museum. Detailed view: One of the largest and most impressive art museums in the world. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_59",
+    "name": "TOKYO Premium Shopping 59",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Shopping 59 in Shopping. Detailed view: 이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_64",
+    "name": "싱가포르 프리미엄 Landmark 추천 65",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Landmark 추천 65 in Landmark. Detailed view: 이곳은 singapore에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_63",
+    "name": "바르셀로나 프리미엄 Shopping 추천 64",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Shopping 추천 64 in Shopping. Detailed view: 이곳은 barcelona에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_16",
+    "name": "부산광역시 프리미엄 Landmark 추천 17",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Landmark 추천 17 in Landmark. Detailed view: 이곳은 busan에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_restaurant_chez_janou",
+    "name": "Chez Janou",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Chez Janou in Restaurant. Detailed view: Provençal bistro in the Marais. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "island-hopping-cebu",
+    "name": "Island Hopping Adventure",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Island Hopping Adventure in Activity. Detailed view: Full-day island hopping tour to pristine beaches. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_68",
+    "name": "SEOUL Premium Landmark 68",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Landmark 68 in Landmark. Detailed view: 이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_f1963_복합문화공간_f1963",
+    "name": "F1963 (복합문화공간 F1963)",
+    "category": "Activity | Restaurant | Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of F1963 (복합문화공간 F1963) in Activity | Restaurant | Shopping. Detailed view: 옛 공장의 거친 숨결 위에 예술과 문화, 미식이 피어난 부산의 가장 독창적인 복합문화공간.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_69",
+    "name": "TOKYO Premium Restaurant 69",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Restaurant 69 in Restaurant. Detailed view: 이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "denali_national_park",
+    "name": "Denali National Park",
+    "category": "National Park",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Denali National Park in National Park. Detailed view: Six million acres of pristine wilderness surrounding North America's highest peak. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "warsaw_old_town",
+    "name": "Warsaw Old Town",
+    "category": "Historic District",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Warsaw Old Town in Historic District. Detailed view: UNESCO World Heritage Site, meticulously reconstructed after WWII. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_71",
+    "name": "로마 프리미엄 Shopping 추천 72",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Shopping 추천 72 in Shopping. Detailed view: 이곳은 rome에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "oslob-whale-shark",
+    "name": "Oslob Whale Shark Watching",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Oslob Whale Shark Watching in Activity. Detailed view: Swim with whale sharks in their natural habitat. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "kl-tower",
+    "name": "KL Tower",
+    "category": "Observation & Modern Architecture",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of KL Tower in Observation & Modern Architecture. Detailed view: Iconic telecommunication tower with observation deck. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "parliament_building",
+    "name": "Hungarian Parliament Building",
+    "category": "Government Building",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Hungarian Parliament Building in Government Building. Detailed view: Magnificent Neo-Gothic parliament building on the Danube. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_46",
+    "name": "부산광역시 프리미엄 Activity 추천 47",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Activity 추천 47 in Activity. Detailed view: 이곳은 busan에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_9",
+    "name": "TOKYO Premium Restaurant 9",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Restaurant 9 in Restaurant. Detailed view: 이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_76",
+    "name": "부산광역시 프리미엄 Landmark 추천 77",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Landmark 추천 77 in Landmark. Detailed view: 이곳은 busan에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_18",
+    "name": "SEOUL Premium Activity 18",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Activity 18 in Activity. Detailed view: 이곳은 seoul에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_79",
+    "name": "TOKYO Premium Shopping 79",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Shopping 79 in Shopping. Detailed view: 이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "vatican-gifts-rome",
+    "name": "Vatican Treasures Shop",
+    "category": "Gift Shop",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Vatican Treasures Shop in Gift Shop. Detailed view: Authentic Vatican souvenirs, religious items, and papal merchandise. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore-flyer",
+    "name": "Singapore Flyer",
+    "category": "Observation",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Singapore Flyer in Observation. Detailed view: Giant observation wheel with panoramic city views. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_item_86",
+    "name": "부산광역시 프리미엄 Activity 추천 87",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 부산광역시 프리미엄 Activity 추천 87 in Activity. Detailed view: 이곳은 busan에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_84",
+    "name": "싱가포르 프리미엄 Landmark 추천 85",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Landmark 추천 85 in Landmark. Detailed view: 이곳은 singapore에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_해동용궁사_haedong_yonggungsa_templ",
+    "name": "해동용궁사 (Haedong Yonggungsa Temple)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 해동용궁사 (Haedong Yonggungsa Temple) in Landmark. Detailed view: 파도 소리가 기도를 노래하는, 바다 위 절경의 해상 사찰. 자연과 신앙이 빚어낸 경이로운 풍경 속으로.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_88",
+    "name": "SEOUL Premium Landmark 88",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Landmark 88 in Landmark. Detailed view: 이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_38",
+    "name": "SEOUL Premium Activity 38",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Activity 38 in Activity. Detailed view: 이곳은 seoul에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rijksmuseum",
+    "name": "Rijksmuseum",
+    "category": "Art Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Rijksmuseum in Art Museum. Detailed view: National museum of the Netherlands with Dutch Golden Age masterpieces. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_92",
+    "name": "파리 프리미엄 Landmark 추천 93",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Landmark 추천 93 in Landmark. Detailed view: 이곳은 paris에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "bus_gamcheon",
+    "name": "감천문화마을 (Gamcheon Culture Village)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 감천문화마을 (Gamcheon Culture Village) in Landmark. Detailed view: 한국의 산토리니로 불리는 알록달록한 계단식 마을입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "borghese-gift-shop-rome",
+    "name": "Borghese Souvenir Gallery",
+    "category": "Gift Shop",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Borghese Souvenir Gallery in Gift Shop. Detailed view: Upscale gift shop specializing in Italian leather, Vatican memorabilia, and artisan jewelry. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_91",
+    "name": "로마 프리미엄 Shopping 추천 92",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Shopping 추천 92 in Shopping. Detailed view: 이곳은 rome에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore-river-cruise",
+    "name": "Singapore River Bumboat Cruise",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Singapore River Bumboat Cruise in Activity. Detailed view: Traditional bumboat cruise along Singapore River. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_95",
+    "name": "뉴욕 프리미엄 Shopping 추천 96",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Shopping 추천 96 in Shopping. Detailed view: 이곳은 new-york에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_89",
+    "name": "TOKYO Premium Restaurant 89",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Restaurant 89 in Restaurant. Detailed view: 이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_item_101",
+    "name": "로마 프리미엄 Restaurant 추천 102",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 로마 프리미엄 Restaurant 추천 102 in Restaurant. Detailed view: 이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "patong-beach",
+    "name": "Patong Beach",
+    "category": "Beach & Entertainment",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Patong Beach in Beach & Entertainment. Detailed view: Phuket's most popular beach and entertainment hub. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "nyonya-cooking-class",
+    "name": "Traditional Nyonya Cooking Class",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Traditional Nyonya Cooking Class in Activity. Detailed view: Hands-on Nyonya cooking class with market visit. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "karon-viewpoint",
+    "name": "Karon Viewpoint",
+    "category": "Viewpoint",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Karon Viewpoint in Viewpoint. Detailed view: Panoramic viewpoint overlooking three stunning bays. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_item_103",
+    "name": "바르셀로나 프리미엄 Shopping 추천 104",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바르셀로나 프리미엄 Shopping 추천 104 in Shopping. Detailed view: 이곳은 barcelona에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_item_98",
+    "name": "SEOUL Premium Activity 98",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of SEOUL Premium Activity 98 in Activity. Detailed view: 이곳은 seoul에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_item_109",
+    "name": "TOKYO Premium Restaurant 109",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of TOKYO Premium Restaurant 109 in Restaurant. Detailed view: 이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_107",
+    "name": "제주특별자치도 프리미엄 Shopping 추천 108",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Shopping 추천 108 in Shopping. Detailed view: 이곳은 jeju에서 가장 추천하는 Shopping 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_restaurant_st_john",
+    "name": "St. JOHN",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of St. JOHN in Restaurant. Detailed view: Nose-to-tail British cuisine. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_sensoji_nanobanana",
+    "name": "센소지 (Senso-ji Temple)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 센소지 (Senso-ji Temple) in Landmark. Detailed view: 도쿄에서 가장 오래된 사원이자 아사쿠사의 상징.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_item_5",
+    "name": "뉴욕 프리미엄 Restaurant 추천 6",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 뉴욕 프리미엄 Restaurant 추천 6 in Restaurant. Detailed view: 이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_10",
+    "name": "런던 프리미엄 Activity 추천 11",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Activity 추천 11 in Activity. Detailed view: 이곳은 london에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_14",
+    "name": "싱가포르 프리미엄 Activity 추천 15",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Activity 추천 15 in Activity. Detailed view: 이곳은 singapore에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_20",
+    "name": "런던 프리미엄 Landmark 추천 21",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Landmark 추천 21 in Landmark. Detailed view: 이곳은 london에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_22",
+    "name": "파리 프리미엄 Activity 추천 23",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Activity 추천 23 in Activity. Detailed view: 이곳은 paris에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_30",
+    "name": "런던 프리미엄 Activity 추천 31",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Activity 추천 31 in Activity. Detailed view: 이곳은 london에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_34",
+    "name": "싱가포르 프리미엄 Activity 추천 35",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Activity 추천 35 in Activity. Detailed view: 이곳은 singapore에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_40",
+    "name": "런던 프리미엄 Landmark 추천 41",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Landmark 추천 41 in Landmark. Detailed view: 이곳은 london에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_42",
+    "name": "파리 프리미엄 Activity 추천 43",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Activity 추천 43 in Activity. Detailed view: 이곳은 paris에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "trastevere-artisan-shop-rome",
+    "name": "Trastevere Artisan Boutique",
+    "category": "Gift Shop",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Trastevere Artisan Boutique in Gift Shop. Detailed view: Handcrafted Italian products, local wines, and artisan pottery. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_54",
+    "name": "싱가포르 프리미엄 Activity 추천 55",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Activity 추천 55 in Activity. Detailed view: 이곳은 singapore에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_57",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 58",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Restaurant 추천 58 in Restaurant. Detailed view: 이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "penang-hill-cable-car",
+    "name": "Penang Hill Funicular Railway Experience",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Penang Hill Funicular Railway Experience in Activity. Detailed view: Funicular railway ride to Penang Hill summit. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "petronas-towers",
+    "name": "Petronas Twin Towers",
+    "category": "Modern Architecture",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Petronas Twin Towers in Modern Architecture. Detailed view: World's tallest twin skyscrapers. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_60",
+    "name": "런던 프리미엄 Landmark 추천 61",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Landmark 추천 61 in Landmark. Detailed view: 이곳은 london에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "batu-caves-tour",
+    "name": "Batu Caves Temple Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Batu Caves Temple Tour in Activity. Detailed view: Half-day tour to the famous Batu Caves temple complex. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_74",
+    "name": "싱가포르 프리미엄 Activity 추천 75",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Activity 추천 75 in Activity. Detailed view: 이곳은 singapore에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_77",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 78",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Restaurant 추천 78 in Restaurant. Detailed view: 이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "big_ben",
+    "name": "Big Ben",
+    "category": "Monument",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Big Ben in Monument. Detailed view: The Great Clock of Westminster. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "westminster_abbey",
+    "name": "Westminster Abbey",
+    "category": "Religious Site",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Westminster Abbey in Religious Site. Detailed view: Historic coronation church and burial place of British monarchs. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_80",
+    "name": "런던 프리미엄 Landmark 추천 81",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Landmark 추천 81 in Landmark. Detailed view: 이곳은 london에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "mendenhall_glacier",
+    "name": "Mendenhall Glacier",
+    "category": "Natural Wonder",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Mendenhall Glacier in Natural Wonder. Detailed view: A stunning 13-mile glacier accessible by road in Southeast Alaska. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_item_94",
+    "name": "싱가포르 프리미엄 Activity 추천 95",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 싱가포르 프리미엄 Activity 추천 95 in Activity. Detailed view: 이곳은 singapore에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_item_97",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 98",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주특별자치도 프리미엄 Restaurant 추천 98 in Restaurant. Detailed view: 이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_item_100",
+    "name": "런던 프리미엄 Landmark 추천 101",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 런던 프리미엄 Landmark 추천 101 in Landmark. Detailed view: 이곳은 london에서 가장 추천하는 Landmark 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_item_102",
+    "name": "파리 프리미엄 Activity 추천 103",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 파리 프리미엄 Activity 추천 103 in Activity. Detailed view: 이곳은 paris에서 가장 추천하는 Activity 명소입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "chain_bridge",
+    "name": "Chain Bridge",
+    "category": "Historic Bridge",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Chain Bridge in Historic Bridge. Detailed view: Historic suspension bridge connecting Buda and Pest. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_콜로세움_colosseum",
+    "name": "콜로세움 (Colosseum)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 콜로세움 (Colosseum) in Landmark. Detailed view: 글래디에이터들의 함성이 울려 퍼지던 로마 제국의 심장.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_트라토리아_다_엔조_알_29_trattoria_da_e",
+    "name": "트라토리아 다 엔조 알 29 (Trattoria Da Enzo al 29)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 트라토리아 다 엔조 알 29 (Trattoria Da Enzo al 29) in Restaurant. Detailed view: 트라스테베레 뒷골목에서 만나는 로마 전통 가정식의 정수.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_판테온_pantheon",
+    "name": "판테온 (Pantheon)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 판테온 (Pantheon) in Landmark. Detailed view: 2천 년의 시간을 견딘 신들의 안식처, 완벽에 가까운 건축의 경이.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "charles_bridge",
+    "name": "Charles Bridge",
+    "category": "Historic Bridge",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Charles Bridge in Historic Bridge. Detailed view: Historic stone bridge adorned with 30 baroque statues. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_아벤티노_열쇠_구멍_aventine_keyhole",
+    "name": "아벤티노 열쇠 구멍 (Aventine Keyhole)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 아벤티노 열쇠 구멍 (Aventine Keyhole) in Activity. Detailed view: 작은 열쇠 구멍 너머로 펼쳐지는 로마의 숨겨진 보물, 바티칸의 파노라마.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_북촌한옥마을_전통_차_체험_bukchon_hanok_v",
+    "name": "북촌한옥마을 & 전통 차 체험 (Bukchon Hanok Village & Traditional Tea Ceremony)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 북촌한옥마을 & 전통 차 체험 (Bukchon Hanok Village & Traditional Tea Ceremony) in Activity. Detailed view: 고즈넉한 한옥 골목을 거닐고, 천년의 지혜가 담긴 차 한 잔에 마음을 비우다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_정식당_서울_jungsik_seoul",
+    "name": "정식당 서울 (Jungsik Seoul)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 정식당 서울 (Jungsik Seoul) in Restaurant. Detailed view: 미쉐린 2스타, 전통과 혁신이 빚어낸 뉴 코리안 다이닝의 정점.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_젤라테리아_델_테아트로_gelateria_del_tea",
+    "name": "젤라테리아 델 테아트로 (Gelateria del Teatro)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 젤라테리아 델 테아트로 (Gelateria del Teatro) in Restaurant. Detailed view: 로마에서 가장 시적이고 독창적인 수제 젤라또를 맛보는 달콤한 순간.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "little_mermaid",
+    "name": "The Little Mermaid",
+    "category": "Monument",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of The Little Mermaid in Monument. Detailed view: Copenhagen's iconic bronze mermaid statue. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_긴자_",
+    "name": "긴자 (銀座)",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 긴자 (銀座) in Shopping. Detailed view: 도쿄의 심장부, 럭셔리 부티크와 미식의 향연이 펼쳐지는 상징적인 쇼핑 거리. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_황궁_동어원_",
+    "name": "황궁 동어원 (皇居東御苑)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 황궁 동어원 (皇居東御苑) in Landmark. Detailed view: 도쿄 심장부, 에도 성의 흔적 위에서 펼쳐지는 평온한 역사 산책. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_나리사와_narisawa",
+    "name": "나리사와 (Narisawa)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 나리사와 (Narisawa) in Restaurant. Detailed view: 숲의 미학과 자연의 본질을 담아내는 미식 경험, Satoyama 퀴진의 정수. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_한라산_국립공원_어승생악_탐방로",
+    "name": "한라산 국립공원 (어승생악 탐방로)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 한라산 국립공원 (어승생악 탐방로) in Landmark. Detailed view: 제주의 영혼, 한라산 품에 안기다. 유네스코 세계유산의 숨결을 느끼는 고요한 여정.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "spanish_steps",
+    "name": "Spanish Steps",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Spanish Steps in Landmark. Detailed view: A monumental stairway of 135 steps. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_스케치_sketch_더_렉처_룸_라이브러리_the_le",
+    "name": "스케치 (Sketch) - 더 렉처 룸 & 라이브러리 (The Lecture Room & Library)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 스케치 (Sketch) - 더 렉처 룸 & 라이브러리 (The Lecture Room & Library) in Restaurant. Detailed view: 미식과 예술이 조화된 미슐랭 3스타의 현대적인 미식 경험.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_콜로세움_로마_포럼_colosseum_roman_for",
+    "name": "콜로세움 & 로마 포럼 (Colosseum & Roman Forum)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 콜로세움 & 로마 포럼 (Colosseum & Roman Forum) in Landmark. Detailed view: 고대 로마 제국의 심장, 시간이 멈춘 듯한 거대한 유적. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_웨스트민스터_애비_westminster_abbey",
+    "name": "웨스트민스터 애비 (Westminster Abbey)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 웨스트민스터 애비 (Westminster Abbey) in Landmark. Detailed view: 영국 역사의 심장이 뛰는 웅장한 고딕 건축의 걸작.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_템스강_프라이빗_선셋_크루즈_private_thames",
+    "name": "템스강 프라이빗 선셋 크루즈 (Private Thames River Cruise at Sunset)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 템스강 프라이빗 선셋 크루즈 (Private Thames River Cruise at Sunset) in Activity. Detailed view: 템스강 위에서 런던의 황홀한 스카이라인을 배경으로 즐기는 프라이빗 럭셔리 경험.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "chinatown-heritage-centre",
+    "name": "Chinatown Heritage Centre",
+    "category": "Museum & Heritage",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Chinatown Heritage Centre in Museum & Heritage. Detailed view: Museum showcasing early Chinese immigrant life. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "national-museum-singapore",
+    "name": "National Museum of Singapore",
+    "category": "Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of National Museum of Singapore in Museum. Detailed view: Singapore's oldest museum with rich historical collections. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_이른_아침_투어",
+    "name": "바티칸 박물관 & 시스티나 예배당 프라이빗 이른 아침 투어 (Private Vatican Museums & Sistine Chapel Early Morning Tour)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바티칸 박물관 & 시스티나 예배당 프라이빗 이른 아침 투어 (Private Vatican Museums & Sistine Chapel Early Morning Tour) in Activity. Detailed view: 군중 없이 미켈란젤로의 걸작을 오롯이 마주하는 신성한 경험. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_웨스트민스터_사원_westminster_abbey",
+    "name": "웨스트민스터 사원 (Westminster Abbey)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 웨스트민스터 사원 (Westminster Abbey) in Landmark. Detailed view: 천년의 영국 왕실 역사가 숨 쉬는 대관식과 로열 웨딩의 심장부. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_보르게세_미술관_보르게세_공원_galleria_borg",
+    "name": "보르게세 미술관 & 보르게세 공원 (Galleria Borghese & Borghese Gardens)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 보르게세 미술관 & 보르게세 공원 (Galleria Borghese & Borghese Gardens) in Landmark. Detailed view: 카라바조와 베르니니의 걸작이 숨 쉬는 로마의 예술 오아시스. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "pinang-peranakan-mansion",
+    "name": "Pinang Peranakan Mansion",
+    "category": "Museum & Heritage",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Pinang Peranakan Mansion in Museum & Heritage. Detailed view: Museum of Peranakan heritage and culture. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_아르만도_알_판테온_armando_al_pantheon",
+    "name": "아르만도 알 판테온 (Armando al Pantheon)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 아르만도 알 판테온 (Armando al Pantheon) in Restaurant. Detailed view: 판테온 옆, 정통 로마 요리의 진수를 맛볼 수 있는 미식의 성지. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "big-buddha-phuket",
+    "name": "Big Buddha Phuket",
+    "category": "Religious & Viewpoint",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Big Buddha Phuket in Religious & Viewpoint. Detailed view: 45-meter white marble Buddha statue on hilltop. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_gardens_by_the_bay_supertree_g",
+    "name": "Gardens by the Bay (Supertree Grove & Cloud Forest)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Gardens by the Bay (Supertree Grove & Cloud Forest) in Landmark. Detailed view: 자연과 기술이 빚어낸 미래 도시의 환상적인 걸작.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "old-phuket-town",
+    "name": "Old Phuket Town",
+    "category": "Cultural Heritage",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Old Phuket Town in Cultural Heritage. Detailed view: Historic district with Sino-Portuguese architecture. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_raffles_hotel_singapore",
+    "name": "Raffles Hotel Singapore",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Raffles Hotel Singapore in Landmark. Detailed view: 시대를 초월한 우아함과 역사의 숨결이 살아 숨 쉬는 전설적인 호텔.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_구엘_공원_park_gell",
+    "name": "구엘 공원 (Park Güell)",
+    "category": "Landmark | Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 구엘 공원 (Park Güell) in Landmark | Activity. Detailed view: 가우디의 환상적인 상상력이 자연과 어우러진 동화 같은 공원.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "barcelona_프라이빗_선셋_요트_크루즈_private_sunset_",
+    "name": "프라이빗 선셋 요트 크루즈 (Private Sunset Yacht Cruise)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 프라이빗 선셋 요트 크루즈 (Private Sunset Yacht Cruise) in Activity. Detailed view: 바르셀로나 해안을 따라 즐기는 황홀한 선셋 요트 크루즈, 지중해의 낭만.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "vatican-night-tour",
+    "name": "Vatican Museums Night Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Vatican Museums Night Tour in Activity. Detailed view: Exclusive after-hours tour of Vatican Museums. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seine-river-cruise",
+    "name": "Seine River Dinner Cruise",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Seine River Dinner Cruise in Activity. Detailed view: Romantic dinner cruise along the Seine River. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_national_gallery_singapore",
+    "name": "National Gallery Singapore",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of National Gallery Singapore in Activity. Detailed view: 웅장한 역사적 건축물에서 만나는 동남아시아 미술의 보고.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore_national_kitchen_by_violet_oon",
+    "name": "National Kitchen by Violet Oon",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of National Kitchen by Violet Oon in Restaurant. Detailed view: 싱가포르의 문화유산을 맛으로 승화시킨 페라나칸 미식의 정수.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_더베이_101_the_bay_101",
+    "name": "더베이 101 (The Bay 101)",
+    "category": "Restaurant | Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 더베이 101 (The Bay 101) in Restaurant | Activity. Detailed view: 환상적인 해운대 마린시티 야경과 함께 미식과 럭셔리 요트 체험을 즐기는 부산 최고의 핫플레이스.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_해동_용궁사_haedong_yonggungsa_temp",
+    "name": "해동 용궁사 (Haedong Yonggungsa Temple)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 해동 용궁사 (Haedong Yonggungsa Temple) in Landmark. Detailed view: 파도가 부서지는 바위 절벽 위, 용왕의 전설을 품은 한국에서 가장 신비로운 해변 사찰.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_le_bernardin",
+    "name": "Le Bernardin",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Le Bernardin in Restaurant. Detailed view: 바다의 정수를 요리하는 뉴욕 최고의 미쉐린 3스타 해산물 명가.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_the_met_cloisters",
+    "name": "The Met Cloisters",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of The Met Cloisters in Landmark. Detailed view: 중세 유럽의 영혼이 살아 숨 쉬는 맨해튼 북부의 신비로운 수도원.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_밀본_제주_milbon_jeju",
+    "name": "밀본 제주 (Milbon Jeju)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 밀본 제주 (Milbon Jeju) in Restaurant. Detailed view: 제주의 자연을 담아낸 미식의 정점, 품격 있는 현대 한식 다이닝의 진수.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_비자림",
+    "name": "비자림",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 비자림 in Landmark. Detailed view: 천년 비자림의 신비로운 숲길, 시간마저 멈추는 고요함 속에서 치유의 숨결을 느끼다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "jeju_제주돌문화공원",
+    "name": "제주돌문화공원",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 제주돌문화공원 in Activity. Detailed view: 제주의 탄생과 삶을 돌에 새기다, 살아있는 신화와 역사를 탐험하는 공간.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_tenement_museum",
+    "name": "Tenement Museum",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Tenement Museum in Activity. Detailed view: 19세기 뉴욕 이민자들의 삶을 생생하게 경험하는 감동적인 타임캡슐 박물관.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_더베이_101_요트클럽_다이닝_the_bay_101_y",
+    "name": "더베이 101 요트클럽 & 다이닝 (The Bay 101 Yacht Club & Dining)",
+    "category": "Activity | Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 더베이 101 요트클럽 & 다이닝 (The Bay 101 Yacht Club & Dining) in Activity | Restaurant. Detailed view: 마천루와 바다의 환상적인 조화, 부산의 밤을 가장 화려하게 수놓는 요트 위 만찬과 해운대의 낭만.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "new-york_grand_central_terminal",
+    "name": "Grand Central Terminal",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Grand Central Terminal in Landmark. Detailed view: 뉴욕의 심장부, 웅장한 건축미와 수많은 이야기가 깃든 기차역이자 문화유산.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "chinatown-night-market-kl",
+    "name": "Chinatown Night Market Walk",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Chinatown Night Market Walk in Activity. Detailed view: Evening walking tour of bustling Chinatown market. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_권숙수_kwon_sook_soo",
+    "name": "권숙수 (Kwon Sook Soo)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 권숙수 (Kwon Sook Soo) in Restaurant. Detailed view: 미슐랭 2스타에 빛나는 '모던 한식 오마카세'의 정수, 전통을 현대적으로 재해석한 미식 경험의 품격.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "piazza-navona-crafts-rome",
+    "name": "Piazza Navona Craft Gallery",
+    "category": "Gift Shop",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Piazza Navona Craft Gallery in Gift Shop. Detailed view: Italian marble art, Murano glass masterpieces, and Renaissance reproductions. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "phuket-cooking-class",
+    "name": "Thai Cooking Class Experience",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Thai Cooking Class Experience in Activity. Detailed view: Authentic Thai cooking class with market tour. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_경복궁_경회루_gyeonghoeru_pavilion_g",
+    "name": "경복궁 경회루 (Gyeonghoeru Pavilion, Gyeongbokgung Palace)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 경복궁 경회루 (Gyeonghoeru Pavilion, Gyeongbokgung Palace) in Landmark. Detailed view: 연못 위에 홀로 떠올라 유유히 흐르는 시간을 붙잡는, 조선 왕실의 가장 성스러운 연회장이자 자연과 건축의 극치.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "busan_감천문화마을_gamcheon_culture_villag",
+    "name": "감천문화마을 (Gamcheon Culture Village)",
+    "category": "Landmark | Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 감천문화마을 (Gamcheon Culture Village) in Landmark | Activity. Detailed view: 산비탈에 피어난 무지개빛 동화, 부산의 아픈 역사 위에 세워진 예술과 희망의 마을.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_시부야_스카이_시부야_스크램블_교차로_",
+    "name": "시부야 스카이 & 시부야 스크램블 교차로 (渋谷スカイ & 渋谷スクランブル交差点)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 시부야 스카이 & 시부야 스크램블 교차로 (渋谷スカイ & 渋谷スクランブル交差点) in Activity. Detailed view: 도쿄의 심장이 가장 격렬하게 뛰는 곳, 스크램블 교차로의 활기찬 에너지를 하늘 위에서 만끽하며 숨 막히는 도시 파노라마를 경험하세요.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_팀랩_플래닛_도쿄_dmm_teamlab_planets_",
+    "name": "팀랩 플래닛 도쿄 DMM (teamLab Planets TOKYO DMM)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 팀랩 플래닛 도쿄 DMM (teamLab Planets TOKYO DMM) in Activity. Detailed view: 미래를 여는 예술과 기술의 융합, 온몸으로 경험하는 몰입형 디지털 아트의 경이로운 세계에서 당신의 오감을 깨우세요.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "tokyo_메이지_진구_신사_",
+    "name": "메이지 진구 신사 (明治神宮)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 메이지 진구 신사 (明治神宮) in Landmark. Detailed view: 도쿄의 번잡함 속 고요한 숲, 메이지 천황 부부의 영혼이 깃든 일본의 심장부에서 역사와 자연이 빚어낸 성스러운 조화를 경험하세요.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_아로마_레스토랑_팔라초_만프레디",
+    "name": "아로마 레스토랑 (팔라초 만프레디)",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 아로마 레스토랑 (팔라초 만프레디) in Restaurant. Detailed view: 콜로세움의 장엄한 전경과 미슐랭 스타 셰프의 예술이 만나는 로마 최상위 미식 경험.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_경복궁_gyeongbokgung_palace",
+    "name": "경복궁 (Gyeongbokgung Palace)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 경복궁 (Gyeongbokgung Palace) in Landmark. Detailed view: 조선 왕조의 웅장한 심장, 시공을 초월한 왕실의 위엄을 탐하다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "kenai_fjords",
+    "name": "Kenai Fjords National Park",
+    "category": "National Park",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Kenai Fjords National Park in National Park. Detailed view: Spectacular coastal park featuring tidewater glaciers and marine wildlife. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_더_판테온_로마_the_pantheon_rome",
+    "name": "더 판테온, 로마 (The Pantheon, Rome)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 더 판테온, 로마 (The Pantheon, Rome) in Landmark. Detailed view: 하늘과 소통하는 고대 로마 공학의 기적, 모든 신을 위한 신전에서 영원의 시간을 엿보다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_새벽_투어",
+    "name": "바티칸 박물관 & 시스티나 예배당 프라이빗 새벽 투어",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 바티칸 박물관 & 시스티나 예배당 프라이빗 새벽 투어 in Activity. Detailed view: 아무도 없는 고요 속에서 미켈란젤로의 경이로움을 오롯이 마주하는, 시스티나의 영혼을 깨우는 여정.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_베르사유_궁전_거울의_방_galerie_des_glac",
+    "name": "베르사유 궁전 - 거울의 방 (Galerie des Glaces)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 베르사유 궁전 - 거울의 방 (Galerie des Glaces) in Landmark. Detailed view: 태양왕 루이 14세의 절대 권력이 빛나는, 황금과 거울이 빚어낸 찬란한 환영의 공간.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "lon_big_ben",
+    "name": "빅벤과 국회의사당 (Big Ben & Parliament)",
+    "category": "Landmark",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 빅벤과 국회의사당 (Big Ben & Parliament) in Landmark. Detailed view: 런던의 상징적인 시계탑과 정치의 중심지입니다.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_요트_드_파리_럭셔리_프라이빗_세느강_디너_크루즈",
+    "name": "요트 드 파리 - 럭셔리 프라이빗 세느강 디너 크루즈",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 요트 드 파리 - 럭셔리 프라이빗 세느강 디너 크루즈 in Activity. Detailed view: 파리의 밤을 수놓는 별빛 아래, 세느강 위에서 펼쳐지는 황홀한 미식과 로맨틱한 풍경의 향연.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "grand_place",
+    "name": "Grand Place",
+    "category": "Historic Square",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Grand Place in Historic Square. Detailed view: Brussels' magnificent central square with ornate guildhalls. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "castel_santangelo",
+    "name": "Castel Sant'Angelo",
+    "category": "Fortress",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Castel Sant'Angelo in Fortress. Detailed view: Ancient mausoleum turned fortress and papal residence. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "seoul_리움미술관_leeum_museum_of_art",
+    "name": "리움미술관 (Leeum Museum of Art)",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of 리움미술관 (Leeum Museum of Art) in Activity. Detailed view: 과거와 현재, 동양과 서양의 아름다움이 공존하는 건축 걸작 속에서 한국 미술의 정수를 만나는 몰입형 예술 경험.. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "musee_dorsay",
+    "name": "Musée d'Orsay",
+    "category": "Museum",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Musée d'Orsay in Museum. Detailed view: World-renowned museum of Impressionist and Post-Impressionist art. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "st_pauls_cathedral",
+    "name": "St. Paul's Cathedral",
+    "category": "Cathedral",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of St. Paul's Cathedral in Cathedral. Detailed view: Iconic Baroque cathedral with one of the world's largest domes. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "palace_of_culture",
+    "name": "Palace of Culture and Science",
+    "category": "Cultural Building",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Palace of Culture and Science in Cultural Building. Detailed view: Warsaw's iconic skyscraper and cultural center. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "atomium",
+    "name": "Atomium",
+    "category": "Monument",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Atomium in Monument. Detailed view: Iconic futuristic structure representing an iron atom. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "old_town_square",
+    "name": "Old Town Square",
+    "category": "Historic Square",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Old Town Square in Historic Square. Detailed view: Historic square with the famous Astronomical Clock. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "nyhavn",
+    "name": "Nyhavn",
+    "category": "Historic District",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Nyhavn in Historic District. Detailed view: Copenhagen's colorful 17th-century waterfront district. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "taoist-temple-cebu",
+    "name": "Taoist Temple",
+    "category": "Religious",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Taoist Temple in Religious. Detailed view: Chinese Taoist temple with intricate architecture. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "san-isidro-parish-talamban",
+    "name": "San Isidro Parish Church",
+    "category": "Religious",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of San Isidro Parish Church in Religious. Detailed view: Historic Roman Catholic church in Talamban. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "gaisano-grand-mall-talamban",
+    "name": "Gaisano Grand Mall Talamban",
+    "category": "Shopping",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Gaisano Grand Mall Talamban in Shopping. Detailed view: Main shopping mall in Talamban area. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "la-cittadella-subdivision",
+    "name": "La Cittadella Subdivision",
+    "category": "Residential",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of La Cittadella Subdivision in Residential. Detailed view: Mediterranean-style residential community in Talamban. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "talamban-post-office",
+    "name": "Talamban Post Office",
+    "category": "Public Service",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Talamban Post Office in Public Service. Detailed view: Local postal service hub in Talamban. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "cebu-heritage-monument",
+    "name": "Cebu Heritage Monument",
+    "category": "Cultural Heritage",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Cebu Heritage Monument in Cultural Heritage. Detailed view: Monumental sculpture depicting Cebu's history. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "sirao-flower-garden",
+    "name": "Sirao Flower Garden",
+    "category": "Garden & Nature",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Sirao Flower Garden in Garden & Nature. Detailed view: Colorful flower garden known as Cebu's Little Amsterdam. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "marina-bay-sands",
+    "name": "Marina Bay Sands",
+    "category": "Modern Architecture",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Marina Bay Sands in Modern Architecture. Detailed view: Iconic integrated resort with rooftop infinity pool. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "singapore-night-safari",
+    "name": "Night Safari Experience",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Night Safari Experience in Activity. Detailed view: World's first nocturnal wildlife park experience. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "batu-caves-tour-kl",
+    "name": "Batu Caves Cultural Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Batu Caves Cultural Tour in Activity. Detailed view: Cultural tour of sacred Batu Caves Hindu temple. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "colosseum-memories-rome",
+    "name": "Colosseum Memories",
+    "category": "Gift Shop",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Colosseum Memories in Gift Shop. Detailed view: Colosseum-themed souvenirs, Roman replicas, and Italian ceramics. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "rome-cooking-class",
+    "name": "Roman Cuisine Cooking Class",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Roman Cuisine Cooking Class in Activity. Detailed view: Hands-on cooking class for traditional Roman cuisine. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "merlion-park",
+    "name": "Merlion Park",
+    "category": "Monument",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Merlion Park in Monument. Detailed view: Singapore's national icon and symbol. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris_restaurant_le_comptoir",
+    "name": "Le Comptoir du Relais",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Le Comptoir du Relais in Restaurant. Detailed view: Classic French bistro by renowned chef. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "kl-food-street-tour",
+    "name": "Kuala Lumpur Street Food Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Kuala Lumpur Street Food Tour in Activity. Detailed view: Evening street food walking tour in Kuala Lumpur. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "london_restaurant_dishoom",
+    "name": "Dishoom",
+    "category": "Restaurant",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Dishoom in Restaurant. Detailed view: Bombay-style Indian cuisine. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "thames-river-cruise",
+    "name": "Thames River Sightseeing Cruise",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Thames River Sightseeing Cruise in Activity. Detailed view: Scenic cruise along the River Thames. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "penang-street-food-tour",
+    "name": "Penang Street Food Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Penang Street Food Tour in Activity. Detailed view: Guided tour of Penang's famous street food. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "phuket-snorkeling-tour",
+    "name": "Coral Island Snorkeling Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Coral Island Snorkeling Tour in Activity. Detailed view: Full-day snorkeling adventure at Coral Island. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "phuket-sunset-cruise",
+    "name": "Phang Nga Bay Sunset Cruise",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Phang Nga Bay Sunset Cruise in Activity. Detailed view: Romantic sunset cruise through Phang Nga Bay. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "paris-catacombs-tour",
+    "name": "Paris Catacombs Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Paris Catacombs Tour in Activity. Detailed view: Guided tour of the underground Paris Catacombs. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  },
+  {
+    "id": "gardens-by-the-bay-night",
+    "name": "Gardens by the Bay Night Tour",
+    "category": "Activity",
+    "prompt": "Capture a breathtaking, high-quality professional travel photograph of Gardens by the Bay Night Tour in Activity. Detailed view: Evening tour of Gardens by the Bay with light show. Style: Photorealistic, 8k resolution, cinematic lighting, sharp focus, vibrant and natural colors. Strictly NO text, NO watermarks."
+  }
+]

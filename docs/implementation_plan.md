@@ -1,42 +1,36 @@
-# Admin Site & Backend Debugging Plan (Avengers)
+# GPS 기반 위치 서비스 및 자동 랜딩 시스템 구현 계획
 
-This plan addresses several critical issues discovered during the initial diagnostic:
-1. **Massive Hardcoded Storage**: `storage.ts` is 1.1MB with 8,000+ lines of hardcoded data.
-2. **Hybrid Storage Risks**: Mixing `MemStorage` for core data and `db` (Drizzle) for session-based data.
-3. **Admin API Security**: Verification of authentication/authorization for critical `/api/admin` routes.
+사용자의 실시간 GPS 좌표를 감지하여 현재 위치한 도시(로마, 치비타베키아, 세부 등)를 파악하고, 기기 언어 설정에 맞춰 최적화된 랜딩 페이지를 자동으로 표시하는 시스템을 구축합니다.
 
-## User Review Required
+## 에이전트 역할 분담 및 보고 방식
+- **도다리 (AI 개발부장)**: 프로젝트 전체 지휘 및 `locationService.ts` 개발 (GPS 매핑 기술 담당)
+- **서버팍 (AI 백엔드 팀장)**: `landingData.ts` 데이터 구조화 (전략적 데이터베이스 관리 담당, Claude Sonnet 4.6 기반 코드 개발)
+- **디자이너 킴 (AI 수석 디자이너)**: `LanguageContext.tsx` 및 `Home.tsx` UI/UX 개선 (사용자 경험 총괄)
 
 > [!IMPORTANT]
-> **Technical Debt Warning**: The system currently uses an 8,000-line hardcoded data file (`storage.ts`). While functional, this slows down development and increases the risk of memory exhaustion. We plan to fix bugs within this structure for now but suggest moving this data to a proper database in the future.
+> **토큰 사용 및 MCP 보고 규칙**
+> 각 단계별로 수행한 에이전트와 사용된 MCP 도구, 추정 토큰 사용량을 명확히 보고합니다.
 
-## Proposed Changes
+## 제안된 변경 사항
 
-### Backend Recovery (AI Avengers)
+### 1. 위치 서비스 레이어 [도다리 수행]
+#### [NEW] [locationService.ts](file:///e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/lib/locationService.ts)
+- 사용자의 위도/경도를 받아 주요 거점 도시와 매핑하는 로직.
+- 특정 반경(Radius) 내에 있을 경우 해당 도시 ID 반환.
 
-#### [MODIFY] [storage.ts](file:///Users/kwangseobpark/skills-gps/skills-nowifigps.tours/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/server/storage.ts)
-- **Query Master Audit**: Check for ID collisions and redundant data.
-- **Server Park Check**: Ensure `MemStorage` methods correctly handle DB failures as fallbacks.
-- **Dr. Automation**: Research ways to modularize the 8,000 lines if performance degrades.
+### 2. 데이터 시드 레이어 [서버팍 수행]
+#### [NEW] [landingData.ts](file:///e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/data/landingData.ts)
+- 각 도시별 한국어/영어 메인 카피, 서브 카피, 대표 이미지 경로 정의.
+- `landingData[cityId][language]` 구조의 정적 DB.
 
-#### [MODIFY] [routes.ts](file:///Users/kwangseobpark/skills-gps/skills-nowifigps.tours/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/server/routes.ts)
-- Verify that only `admin` users can access `/api/admin/*` routes.
-- Fix any potential logic errors in the `import/export` and `audio-generation` endpoints.
+### 3. 컨텍스트 및 UI 레이어 [디자이너 킴 수행]
+#### [NEW] [LanguageContext.tsx](file:///e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/context/LanguageContext.tsx)
+- `navigator.language`를 사용하여 사용자의 기본 언어 감지 및 유지.
+#### [MODIFY] [Home.tsx](file:///e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/pages/Home.tsx)
+- `locationService`와 `LanguageContext`를 결합하여 위치 감지 시 해당 도시 랜딩 화면 자동 로딩.
 
-### Admin UI Polishing
+## 검증 계획
 
-#### [MODIFY] [Admin.tsx](file:///Users/kwangseobpark/skills-gps/skills-nowifigps.tours/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/pages/Admin.tsx)
-- Ensure the CRUD operations correctly reflect the backend state.
-- Improve error handling for large data imports.
-
-## Verification Plan
-
-### Automated Tests
-- `npm run test` (if available)
-- Verify `/api/admin/stats` returns consistent data.
-
-### Manual Verification
-1. Log in as Admin.
-2. Create/Update a city and landmark.
-3. Restart server and verify persistence (Note: `MemStorage` data might reset for hardcoded items, but DB items should persist).
-4. Run an Export and verify the JSON structure.
+### 수동 검증
+- 브라우저의 '센서' 탭을 이용해 좌표를 로마/세부 등으로 시뮬레이션하여 화면이 바뀌는지 확인.
+- 브라우저 언어 설정을 변경하여 텍스트가 국문/영문으로 자동 변환되는지 확인.

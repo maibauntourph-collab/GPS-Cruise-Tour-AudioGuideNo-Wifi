@@ -95,6 +95,10 @@ interface UnifiedFloatingCardProps {
   // Regional Guide props
   selectedRegionalGuideId?: string | null;
   onRegionalGuideChange?: (guideId: string | null) => void;
+
+  // 🛰️ Simulation props
+  isSimulationMode?: boolean;
+  onToggleSimulation?: () => void;
 }
 
 import { useQuery } from '@tanstack/react-query';
@@ -263,7 +267,9 @@ export default function UnifiedFloatingCard({
   capturedRouteImage = null,
   onClearCapturedImage,
   selectedRegionalGuideId = null,
-  onRegionalGuideChange
+  onRegionalGuideChange,
+  isSimulationMode = false,
+  onToggleSimulation
 }: UnifiedFloatingCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -698,6 +704,11 @@ export default function UnifiedFloatingCard({
         <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
           {t('cruisePortInfo', selectedLanguage)}
         </h3>
+        {isSimulationMode && (
+          <Badge className="bg-red-500 hover:bg-red-600 text-white border-none animate-pulse">
+            Simulating
+          </Badge>
+        )}
 
         {/* Action buttons - Only show when landmark is selected */}
         {selectedLandmark && (
@@ -1481,6 +1492,25 @@ export default function UnifiedFloatingCard({
                         </TooltipTrigger>
                         <TooltipContent>
                           {selectedLanguage === 'ko' ? '경로 저장' : 'Save Route'}
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant={isSimulationMode ? "default" : "outline"}
+                            size="icon"
+                            className={`h-7 w-7 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 animate-pulse border-none' : 'text-blue-500 border-blue-200 hover:bg-blue-50'}`}
+                            onClick={() => onToggleSimulation?.()}
+                            disabled={tourStops.length < 2}
+                            data-testid="button-toggle-simulation"
+                          >
+                            {isSimulationMode ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4" />}
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {isSimulationMode
+                            ? (selectedLanguage === 'ko' ? '시뮬레이션 중단' : 'Stop Simulation')
+                            : (selectedLanguage === 'ko' ? '가상 투어 시작' : 'Start Virtual Tour')}
                         </TooltipContent>
                       </Tooltip>
                       <Tooltip>
