@@ -47,7 +47,7 @@ import { Landmark, City } from '@shared/schema';
 import { getMatchedCityId, findNearestLandmark } from '@/lib/locationService';
 import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, ZoomIn } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, ZoomIn, Volume2 as AudioIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {

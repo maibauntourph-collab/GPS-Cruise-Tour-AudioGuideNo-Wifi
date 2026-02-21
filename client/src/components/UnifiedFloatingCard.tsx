@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Volume2, Activity as ActivityIcon, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen, User as UserIcon } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Activity as ActivityIcon, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen, User as UserIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';

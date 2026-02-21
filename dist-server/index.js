@@ -623,6 +623,124 @@ var init_env = __esm({
   }
 });
 
+// server/db.ts
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+function getDb() {
+  if (dbInstance) return dbInstance;
+  const dbUrl = env.NOWIFIGPSTOURS;
+  if (!dbUrl) {
+    const errorMsg = "[DB] Critical: NOWIFIGPSTOURS is not defined in environment variables.";
+    console.error(errorMsg);
+    if (env.NODE_ENV === "production") {
+    }
+  }
+  const connectionString = dbUrl || "postgresql://localhost:5432/postgres";
+  const sql6 = neon(connectionString);
+  dbInstance = drizzle(sql6, { schema: schema_exports });
+  return dbInstance;
+}
+var dbInstance, db;
+var init_db = __esm({
+  "server/db.ts"() {
+    "use strict";
+    init_schema();
+    init_env();
+    dbInstance = null;
+    db = new Proxy({}, {
+      get: (_target, prop) => {
+        const instance = getDb();
+        return instance[prop];
+      }
+    });
+  }
+});
+
+// server/services/ogService.ts
+var ogService_exports = {};
+__export(ogService_exports, {
+  OgService: () => OgService,
+  ogService: () => ogService
+});
+import { eq } from "drizzle-orm";
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+var OgService, ogService;
+var init_ogService = __esm({
+  "server/services/ogService.ts"() {
+    "use strict";
+    init_db();
+    init_schema();
+    OgService = class {
+      /**
+       * 접속한 URL 주소를 분석해서 맞춤형 메타 태그를 생성합니다.
+       * @param url 현재 사용자가 접속하려고 시도하는 주소 (예: /landmark/namsan-tower)
+       */
+      async generateMetaTags(url) {
+        const landmarkIdMatch = url.match(/\/landmark\/([^\/?#]+)/);
+        const cityIdMatch = url.match(/\/city\/([^\/?#]+)/);
+        let title = "SNS Cruise Tour Audio Guide";
+        let description = "No-WiFi GPS Cruise Tour Audio Guide - Your perfect travel companion.";
+        let imageUrl = "https://nowifigps.tours/og-default.png";
+        if (landmarkIdMatch) {
+          const landmarkId = landmarkIdMatch[1];
+          const [landmark] = await db.select().from(landmarks).where(eq(landmarks.id, landmarkId));
+          if (landmark) {
+            const translations = landmark.translations;
+            const localizedName = translations?.ko?.name || landmark.name;
+            const localizedDesc = translations?.ko?.description || landmark.description || description;
+            title = `${localizedName} | GPS Cruise Tour`;
+            description = localizedDesc;
+            const photos = landmark.photos;
+            if (photos && photos.length > 0) {
+              imageUrl = photos[0];
+            }
+          }
+        } else if (cityIdMatch) {
+          const cityId = cityIdMatch[1];
+          const [city] = await db.select().from(cities).where(eq(cities.id, cityId));
+          if (city) {
+            title = `${city.name} \uC5EC\uD589 \uAC00\uC774\uB4DC | GPS Cruise Tour`;
+            description = `${city.name}\uC758 \uC228\uC740 \uC7AC\uBBF8\uB97C \uC624\uB514\uC624 \uAC00\uC774\uB4DC\uB85C \uBC1C\uACAC\uD574\uBCF4\uC138\uC694.`;
+          }
+        }
+        const safeTitle = escapeHtml(title);
+        const safeDescription = escapeHtml(description);
+        const safeImageUrl = escapeHtml(imageUrl);
+        const safeUrl = escapeHtml(url);
+        return `
+      <!-- Dr.'s Engine\uC774 \uC2E4\uC2DC\uAC04\uC73C\uB85C \uC0DD\uC131\uD55C \uBA4B\uC9C4 \uBA54\uD0C0 \uD0DC\uADF8\uB4E4\uC774\uC57C! -->
+      <title>${safeTitle}</title>
+      <meta name="description" content="${safeDescription}">
+      <meta property="og:title" content="${safeTitle}">
+      <meta property="og:description" content="${safeDescription}">
+      <meta property="og:image" content="${safeImageUrl}">
+      <meta property="og:url" content="https://nowifigps.tours${safeUrl}">
+      <meta property="og:type" content="website">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="${safeTitle}">
+      <meta name="twitter:description" content="${safeDescription}">
+      <meta name="twitter:image" content="${safeImageUrl}">
+    `;
+      }
+      /**
+       * 만들어진 메타 태그를 실제 index.html 소스코드에 쏙 끼워넣는 함수야.
+       * @param html 원본 index.html 내용
+       * @param url 사용자가 보고 있는 주소
+       */
+      async injectMetaTags(html, url) {
+        const metaTags = await this.generateMetaTags(url);
+        if (html.includes("<!-- OG_TAGS_PLACEHOLDER -->")) {
+          return html.replace("<!-- OG_TAGS_PLACEHOLDER -->", metaTags);
+        }
+        return html.replace("<head>", `<head>${metaTags}`);
+      }
+    };
+    ogService = new OgService();
+  }
+});
+
 // server/lib/clova.ts
 var clova_exports = {};
 __export(clova_exports, {
@@ -960,8 +1078,8 @@ var init_openai = __esm({
 import { getRequestListener } from "@hono/node-server";
 
 // server/vite.ts
-import fs from "fs";
-import path2 from "path";
+import fs from "node:fs";
+import path2 from "node:path";
 import { createServer as createViteServer, createLogger } from "vite";
 
 // vite.config.ts
@@ -1037,110 +1155,9 @@ var vite_config_default = defineConfig({
 });
 
 // server/vite.ts
+init_ogService();
 import { nanoid } from "nanoid";
-
-// server/db.ts
-init_schema();
-init_env();
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
-var dbInstance = null;
-function getDb() {
-  if (dbInstance) return dbInstance;
-  const dbUrl = env.NOWIFIGPSTOURS;
-  if (!dbUrl) {
-    const errorMsg = "[DB] Critical: NOWIFIGPSTOURS is not defined in environment variables.";
-    console.error(errorMsg);
-    if (env.NODE_ENV === "production") {
-    }
-  }
-  const connectionString = dbUrl || "postgresql://localhost:5432/postgres";
-  const sql6 = neon(connectionString);
-  dbInstance = drizzle(sql6, { schema: schema_exports });
-  return dbInstance;
-}
-var db = new Proxy({}, {
-  get: (_target, prop) => {
-    const instance = getDb();
-    return instance[prop];
-  }
-});
-
-// server/services/ogService.ts
-init_schema();
-import { eq } from "drizzle-orm";
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-var OgService = class {
-  /**
-   * 접속한 URL 주소를 분석해서 맞춤형 메타 태그를 생성합니다.
-   * @param url 현재 사용자가 접속하려고 시도하는 주소 (예: /landmark/namsan-tower)
-   */
-  async generateMetaTags(url) {
-    const landmarkIdMatch = url.match(/\/landmark\/([^\/?#]+)/);
-    const cityIdMatch = url.match(/\/city\/([^\/?#]+)/);
-    let title = "SNS Cruise Tour Audio Guide";
-    let description = "No-WiFi GPS Cruise Tour Audio Guide - Your perfect travel companion.";
-    let imageUrl = "https://nowifigps.tours/og-default.png";
-    if (landmarkIdMatch) {
-      const landmarkId = landmarkIdMatch[1];
-      const [landmark] = await db.select().from(landmarks).where(eq(landmarks.id, landmarkId));
-      if (landmark) {
-        const translations = landmark.translations;
-        const localizedName = translations?.ko?.name || landmark.name;
-        const localizedDesc = translations?.ko?.description || landmark.description || description;
-        title = `${localizedName} | GPS Cruise Tour`;
-        description = localizedDesc;
-        const photos = landmark.photos;
-        if (photos && photos.length > 0) {
-          imageUrl = photos[0];
-        }
-      }
-    } else if (cityIdMatch) {
-      const cityId = cityIdMatch[1];
-      const [city] = await db.select().from(cities).where(eq(cities.id, cityId));
-      if (city) {
-        title = `${city.name} \uC5EC\uD589 \uAC00\uC774\uB4DC | GPS Cruise Tour`;
-        description = `${city.name}\uC758 \uC228\uC740 \uC7AC\uBBF8\uB97C \uC624\uB514\uC624 \uAC00\uC774\uB4DC\uB85C \uBC1C\uACAC\uD574\uBCF4\uC138\uC694.`;
-      }
-    }
-    const safeTitle = escapeHtml(title);
-    const safeDescription = escapeHtml(description);
-    const safeImageUrl = escapeHtml(imageUrl);
-    const safeUrl = escapeHtml(url);
-    return `
-      <!-- Dr.'s Engine\uC774 \uC2E4\uC2DC\uAC04\uC73C\uB85C \uC0DD\uC131\uD55C \uBA4B\uC9C4 \uBA54\uD0C0 \uD0DC\uADF8\uB4E4\uC774\uC57C! -->
-      <title>${safeTitle}</title>
-      <meta name="description" content="${safeDescription}">
-      <meta property="og:title" content="${safeTitle}">
-      <meta property="og:description" content="${safeDescription}">
-      <meta property="og:image" content="${safeImageUrl}">
-      <meta property="og:url" content="https://nowifigps.tours${safeUrl}">
-      <meta property="og:type" content="website">
-      <meta name="twitter:card" content="summary_large_image">
-      <meta name="twitter:title" content="${safeTitle}">
-      <meta name="twitter:description" content="${safeDescription}">
-      <meta name="twitter:image" content="${safeImageUrl}">
-    `;
-  }
-  /**
-   * 만들어진 메타 태그를 실제 index.html 소스코드에 쏙 끼워넣는 함수야.
-   * @param html 원본 index.html 내용
-   * @param url 사용자가 보고 있는 주소
-   */
-  async injectMetaTags(html, url) {
-    const metaTags = await this.generateMetaTags(url);
-    if (html.includes("<!-- OG_TAGS_PLACEHOLDER -->")) {
-      return html.replace("<!-- OG_TAGS_PLACEHOLDER -->", metaTags);
-    }
-    return html.replace("<head>", `<head>${metaTags}`);
-  }
-};
-var ogService = new OgService();
-
-// server/vite.ts
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { serveStatic as honoServeStatic } from "@hono/node-server/serve-static";
 console.log("[DEBUG] server/vite.ts loading...");
 var __filename = fileURLToPath(import.meta.url);
@@ -1199,7 +1216,7 @@ async function setupVite(app2, server2) {
 }
 
 // server/index.ts
-import { createServer } from "http";
+import { createServer } from "node:http";
 
 // server/app.ts
 import { Hono as Hono2 } from "hono";
@@ -1210,6 +1227,7 @@ import { sessionMiddleware, CookieStore } from "hono-sessions";
 import { Hono } from "hono";
 
 // server/storage.ts
+init_db();
 init_schema();
 import { eq as eq2, count, and, sql as sql2, notInArray, desc } from "drizzle-orm";
 
@@ -10410,6 +10428,7 @@ function requireRole(...roles) {
 }
 
 // server/routes.ts
+init_db();
 import { eq as eq5, desc as desc2, sql as sql5 } from "drizzle-orm";
 
 // server/lib/gemini.ts
@@ -10636,6 +10655,7 @@ function mockGenerateCityInfo(query) {
 }
 
 // server/services/automationService.ts
+init_db();
 init_schema();
 import { eq as eq3 } from "drizzle-orm";
 var AutomationService = class {
@@ -10814,6 +10834,7 @@ ${prompt}`;
 var automationService = new AutomationService();
 
 // server/services/dbCheckService.ts
+init_db();
 import { sql as sql3 } from "drizzle-orm";
 var DbCheckService = class {
   async checkConnection() {
@@ -10836,6 +10857,7 @@ var DbCheckService = class {
 var dbCheckService = new DbCheckService();
 
 // server/services/settlementService.ts
+init_db();
 init_schema();
 import { eq as eq4, sql as sql4 } from "drizzle-orm";
 var SettlementService = class {
@@ -11330,8 +11352,8 @@ function registerRoutes(app2) {
       const { text: text2, voice, language } = await c.req.json();
       if (!text2) return c.json({ error: "Text is required" }, 400);
       const result = await generateLandmarkAudio2("streaming-tts", text2, language || "en", voice);
-      const fs2 = await import("fs");
-      const path3 = await import("path");
+      const fs2 = await import("node:fs");
+      const path3 = await import("node:path");
       const filePath = path3.join(process.cwd(), result.audioUrl.startsWith("/") ? result.audioUrl.slice(1) : result.audioUrl);
       const audioBuffer = fs2.readFileSync(filePath);
       const uint8 = new Uint8Array(audioBuffer);
@@ -11603,7 +11625,8 @@ var app = new Hono2();
 app.use("*", logger());
 var store = new CookieStore();
 app.use("*", async (c, next) => {
-  const secret = c.env?.SESSION_SECRET || env.SESSION_SECRET || "default_secret_key_must_be_at_least_32_chars_long";
+  const workerEnv = c.env;
+  const secret = workerEnv?.SESSION_SECRET || env.SESSION_SECRET || "default_secret_key_must_be_at_least_32_chars_long";
   const middleware = sessionMiddleware({
     store,
     encryptionKey: secret,
@@ -11611,7 +11634,7 @@ app.use("*", async (c, next) => {
     cookieOptions: {
       path: "/",
       httpOnly: true,
-      secure: (c.env?.NODE_ENV || env.NODE_ENV) === "production",
+      secure: (workerEnv?.NODE_ENV || env.NODE_ENV) === "production",
       maxAge: 3600 * 24
     }
   });
@@ -11627,6 +11650,58 @@ app.use("*", async (c, next) => {
 });
 setupAuthRoutes(app);
 registerRoutes(app);
+app.get("/", async (c) => {
+  const workerEnv = c.env;
+  if (!workerEnv?.__STATIC_CONTENT) {
+    return c.text("Bucket not bound", 500);
+  }
+  try {
+    let manifest = {};
+    try {
+      const m = await import("__STATIC_CONTENT_MANIFEST");
+      const manifestStr = m.default || m;
+      manifest = typeof manifestStr === "string" ? JSON.parse(manifestStr) : manifestStr;
+    } catch (e) {
+      console.warn("[Worker] Manifest not found, will try direct access");
+    }
+    const physicalKey = manifest["index.html"] || "index.html";
+    const asset = await workerEnv.__STATIC_CONTENT.get(physicalKey, { type: "text" });
+    if (asset) {
+      let html = asset;
+      try {
+        const { ogService: ogService2 } = await Promise.resolve().then(() => (init_ogService(), ogService_exports));
+        html = await ogService2.injectMetaTags(html, c.req.url);
+      } catch (ogError) {
+        console.error("[Worker] OG injection failed:", ogError);
+      }
+      return c.html(html);
+    } else {
+      const list = await workerEnv.__STATIC_CONTENT.list({ limit: 20 });
+      const fallbackKey = list.keys.find((k) => k.name.endsWith(".html"))?.name;
+      if (fallbackKey) {
+        const fallbackAsset = await workerEnv.__STATIC_CONTENT.get(fallbackKey, { type: "text" });
+        if (fallbackAsset) return c.html(fallbackAsset);
+      }
+      return c.text("index.html not found", 404);
+    }
+  } catch (e) {
+    return c.text(`Internal Error: ${e.message}`, 500);
+  }
+});
+app.get("/*", async (c, next) => {
+  const workerEnv = c.env;
+  if (workerEnv?.__STATIC_CONTENT) {
+    const { serveStatic: workerServeStatic } = await import("hono/cloudflare-workers");
+    let manifest = void 0;
+    try {
+      const m = await import("__STATIC_CONTENT_MANIFEST");
+      manifest = m.default ? JSON.parse(m.default) : m;
+    } catch (e) {
+    }
+    return workerServeStatic({ root: "./", manifest })(c, next);
+  }
+  return next();
+});
 var app_default = app;
 
 // server/index.ts
