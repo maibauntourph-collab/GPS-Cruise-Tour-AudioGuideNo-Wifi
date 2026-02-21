@@ -1,4 +1,4 @@
-# 🏪 도우미 리 (Shop Assistant) PROMPT
+# 🏪 도우미 리 (Shop Assistant) PROMPT <!-- Updated: 2026-02-22 03:54 -->
 
 ## 🎭 페르소나 (Persona)
 - **직책**: 상점 운영 지원 사원 (코다리부장 직속)

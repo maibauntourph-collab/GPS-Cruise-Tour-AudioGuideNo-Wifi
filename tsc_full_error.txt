@@ -1,0 +1,76 @@
+﻿client/src/pages/Home.tsx(2363,9): error TS17014: JSX fragment has no corresponding closing tag.
+client/src/pages/Home.tsx(2719,38): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(2833,22): error TS17008: JSX element 'span' has no corresponding closing tag.
+client/src/pages/Home.tsx(2833,63): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+client/src/pages/Home.tsx(4193,62): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4193,64): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4193,66): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4193,72): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4195,25): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4195,62): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4195,64): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4195,66): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4195,72): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4197,25): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4199,25): error TS1136: Property assignment expected.
+client/src/pages/Home.tsx(4199,63): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4199,65): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4199,67): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4199,73): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4201,25): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4201,63): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4201,65): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4201,67): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4201,73): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4203,25): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4203,63): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4203,65): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4203,67): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4203,73): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4205,23): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4307,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4307,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4307,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4309,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4309,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4309,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4309,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4311,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4311,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4311,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4311,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4313,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4313,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4313,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4313,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4315,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4315,60): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4315,63): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4315,69): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4317,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4317,60): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4317,63): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4317,69): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4319,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4319,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4319,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4319,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(4321,25): error TS1005: ':' expected.
+client/src/pages/Home.tsx(4325,71): error TS1005: ',' expected.
+client/src/pages/Home.tsx(4682,22): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(4683,22): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(4685,22): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(5849,24): error TS17008: JSX element 'select' has no corresponding closing tag.
+client/src/pages/Home.tsx(5863,54): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+client/src/pages/Home.tsx(5875,58): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+client/src/pages/Home.tsx(5881,29): error TS17002: Expected corresponding JSX closing tag for 'option'.
+client/src/pages/Home.tsx(5883,27): error TS17002: Expected corresponding JSX closing tag for 'option'.
+client/src/pages/Home.tsx(5985,13): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(5987,12): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+client/src/pages/Home.tsx(5991,7): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(6475,71): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(6569,21): error TS1003: Identifier expected.
+client/src/pages/Home.tsx(6571,3): error TS1005: '}' expected.
+client/src/pages/Home.tsx(6571,4): error TS1005: '}' expected.
+client/src/pages/Home.tsx(6573,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(6575,1): error TS1005: '</' expected.

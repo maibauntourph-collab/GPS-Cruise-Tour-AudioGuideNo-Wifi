@@ -1,0 +1,13 @@
+﻿
+> rest-express@1.0.0 check
+> tsc
+
+client/src/components/UnifiedFloatingCard.tsx(752,37): error TS2304: Cannot find name 'distanceToSelected'.
+client/src/components/UnifiedFloatingCard.tsx(761,73): error TS2304: Cannot find name 'distanceToSelected'.
+client/src/components/UnifiedFloatingCard.tsx(1317,46): error TS2304: Cannot find name 'Volume2'.
+client/src/components/UnifiedFloatingCard.tsx(2225,46): error TS2304: Cannot find name 'Volume2'.
+client/src/pages/Home.tsx(2285,24): error TS2304: Cannot find name 'ZoomIn'.
+client/src/pages/Home.tsx(2515,30): error TS2304: Cannot find name 'ZoomIn'.
+client/src/pages/Home.tsx(2753,28): error TS2304: Cannot find name 'AudioIcon'.
+server/scripts/check-progress.ts(5,19): error TS2305: Module '"drizzle-orm"' has no exported member 'length'.
+server/scripts/enhance-photos.ts(75,30): error TS18048: 'response.data' is possibly 'undefined'.

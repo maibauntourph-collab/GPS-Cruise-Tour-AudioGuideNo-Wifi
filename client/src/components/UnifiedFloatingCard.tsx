@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { X, Minus, MapPin, Ship, List, Navigation, Info, Activity as ActivityIcon, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen, User as UserIcon } from 'lucide-react';
+import { X, Minus, MapPin, Ship, List, Navigation, Info, Activity as ActivityIcon, Landmark as LandmarkIcon, Play, Pause, Volume2 as AudioIcon, Volume2, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen, User as UserIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
@@ -714,8 +714,14 @@ export default function UnifiedFloatingCard({
     if (isTransitMode && selectedLandmark && showMinimalTransitUI) {
       const isSpeaking = audioService.isSpeaking();
 
+      // [Server Park] 현재 선택된 랜드마크와의 거리 계산
+      const selectedLandmarkDistance = landmarksWithDistance.find(
+        ld => ld.landmark.id === selectedLandmark.id
+      )?.distance || 0;
+
       return (
         <motion.div
+
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
@@ -749,7 +755,7 @@ export default function UnifiedFloatingCard({
                     </span>
                   </div>
                   <div className="text-xs font-mono bg-white/10 px-2 py-0.5 rounded">
-                    {formatDistance(distanceToSelected)} {t('left', selectedLanguage)}
+                    {formatDistance(selectedLandmarkDistance)} {t('left', selectedLanguage)}
                   </div>
                 </div>
 
@@ -758,7 +764,7 @@ export default function UnifiedFloatingCard({
                   <motion.div
                     className="h-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]"
                     initial={{ width: 0 }}
-                    animate={{ width: `${Math.max(5, Math.min(100, (1 - distanceToSelected / 5) * 100))}%` }}
+                    animate={{ width: `${Math.max(5, Math.min(100, (1 - selectedLandmarkDistance / 5000) * 100))}%` }}
                   />
                 </div>
                 <div className="text-[10px] text-white/60 mt-1">
@@ -1640,8 +1646,8 @@ export default function UnifiedFloatingCard({
                           <Button
                             variant={isSimulationMode ? "default" : "default"}
                             className={`w-full py-8 text-lg font-black shadow-xl rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] ${isSimulationMode
-                                ? 'bg-red-500 hover:bg-red-600 animate-pulse'
-                                : 'bg-indigo-600 hover:bg-indigo-700'
+                              ? 'bg-red-500 hover:bg-red-600 animate-pulse'
+                              : 'bg-indigo-600 hover:bg-indigo-700'
                               }`}
                             onClick={() => onToggleSimulation?.()}
                             disabled={tourStops.length < 2}

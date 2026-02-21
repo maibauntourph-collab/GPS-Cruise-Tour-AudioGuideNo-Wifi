@@ -1,0 +1,50 @@
+﻿
+> rest-express@1.0.0 check
+> tsc
+
+client/src/pages/Home.tsx(245,60): error TS1005: ':' expected.
+client/src/pages/Home.tsx(245,65): error TS1005: ',' expected.
+client/src/pages/Home.tsx(245,71): error TS1005: ',' expected.
+client/src/pages/Home.tsx(245,78): error TS1005: ',' expected.
+client/src/pages/Home.tsx(245,80): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(991,38): error TS1005: ':' expected.
+client/src/pages/Home.tsx(991,39): error TS1005: ',' expected.
+client/src/pages/Home.tsx(991,54): error TS1005: ',' expected.
+client/src/pages/Home.tsx(991,62): error TS1005: ',' expected.
+client/src/pages/Home.tsx(991,65): error TS1005: ',' expected.
+client/src/pages/Home.tsx(991,69): error TS1005: ',' expected.
+client/src/pages/Home.tsx(992,40): error TS1005: ';' expected.
+client/src/pages/Home.tsx(992,56): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(992,63): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(992,70): error TS1443: Module declaration names may only use ' or " quoted strings.
+client/src/pages/Home.tsx(993,42): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(993,58): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(993,62): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(993,78): error TS1443: Module declaration names may only use ' or " quoted strings.
+client/src/pages/Home.tsx(994,44): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(994,60): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(994,69): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(994,76): error TS1443: Module declaration names may only use ' or " quoted strings.
+client/src/pages/Home.tsx(995,46): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(996,48): error TS1005: ':' expected.
+client/src/pages/Home.tsx(996,64): error TS1128: Declaration or statement expected.
+client/src/pages/Home.tsx(997,50): error TS1005: ':' expected.
+client/src/pages/Home.tsx(997,66): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(997,77): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(997,84): error TS1443: Module declaration names may only use ' or " quoted strings.
+client/src/pages/Home.tsx(998,52): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(998,68): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(998,82): error TS1109: Expression expected.
+client/src/pages/Home.tsx(999,26): error TS1005: ':' expected.
+client/src/pages/Home.tsx(999,42): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(999,48): error TS1434: Unexpected keyword or identifier.
+client/src/pages/Home.tsx(1058,17): error TS1005: ':' expected.
+client/src/pages/Home.tsx(1058,48): error TS1127: Invalid character.
+client/src/pages/Home.tsx(1059,11): error TS1109: Expression expected.
+client/src/pages/Home.tsx(1060,17): error TS1005: ';' expected.
+client/src/pages/Home.tsx(1061,7): error TS1109: Expression expected.
+client/src/pages/Home.tsx(1061,8): error TS1128: Declaration or statement expected.
+client/src/pages/Home.tsx(1062,5): error TS1128: Declaration or statement expected.
+client/src/pages/Home.tsx(1063,3): error TS1128: Declaration or statement expected.
+client/src/pages/Home.tsx(1085,29): error TS1005: ':' expected.
+client/src/pages/Home.tsx(1085,30): error TS1005: ',' expected.

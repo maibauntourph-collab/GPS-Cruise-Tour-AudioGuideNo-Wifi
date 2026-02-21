@@ -1,7 +1,7 @@
 # 🧠 AI DB 총괄 노하우 (AI DB Manager Know-How)
 
 > **작성자**: 🧠 AI DB 총괄 (AI DB Manager)
-> **최종 업데이트**: 2026-02-20
+> **최종 업데이트**: 2026-02-22 03:54
 
 ## 🧠 데이터 품질 및 AI (Data Quality & AI)
 

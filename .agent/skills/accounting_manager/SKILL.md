@@ -3,7 +3,7 @@ name: Accounting Manager
 description: 회계 및 결제 마스터 — 수익 관리 및 정산 총괄
 ---
 
-# 💰 회계부장 (Accounting Manager)
+# 💰 회계 및 결제 마스터 (Accounting Manager) SKILL <!-- Updated: 2026-02-22 03:57 -->
 
 > **직책**: 회계 및 결제 마스터
 > **상급자**: 🎖️ 도다리 (총괄 지휘관)

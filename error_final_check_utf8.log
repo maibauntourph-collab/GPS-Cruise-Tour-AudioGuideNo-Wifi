@@ -1,0 +1,14 @@
+﻿
+> rest-express@1.0.0 check
+> tsc
+
+client/src/components/UnifiedFloatingCard.tsx(1323,46): error TS2304: Cannot find name 'Volume2'.
+client/src/components/UnifiedFloatingCard.tsx(2231,46): error TS2304: Cannot find name 'Volume2'.
+client/src/pages/Home.tsx(1226,16): error TS2304: Cannot find name 'Activity'.
+client/src/pages/Home.tsx(2285,24): error TS2304: Cannot find name 'ZoomIn'.
+client/src/pages/Home.tsx(2342,24): error TS2304: Cannot find name 'Activity'.
+client/src/pages/Home.tsx(2460,53): error TS2304: Cannot find name 'Activity'.
+client/src/pages/Home.tsx(2515,30): error TS2304: Cannot find name 'ZoomIn'.
+client/src/pages/Home.tsx(2900,34): error TS2304: Cannot find name 'Activity'.
+server/scripts/check-progress.ts(5,19): error TS2305: Module '"drizzle-orm"' has no exported member 'length'.
+server/scripts/enhance-photos.ts(75,30): error TS18048: 'response.data' is possibly 'undefined'.

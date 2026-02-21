@@ -52,25 +52,21 @@ app.use("*", async (c: Context, next: Next) => {
 setupAuthRoutes(app);
 registerRoutes(app as any);
 
-// [적요: Cloudflare Workers를 위한 정수 파일 서빙 및 OG 태그 주입]
-// 1. 루트 경로 (/) 처리: index.html 서빙 + OG 태그 주입
-app.get("/", async (c) => {
+// [적요: Cloudflare Workers를 위한 정수 파일 서빙 및 SPA 폴백]
+// 1. 공통 index.html 로더 함수
+async function getIndexHtml(c: Context) {
     const workerEnv = c.env as any;
-
-    if (!workerEnv?.__STATIC_CONTENT) {
-        return c.text("Bucket not bound", 500);
-    }
+    if (!workerEnv?.__STATIC_CONTENT) return null;
 
     try {
-        // [연구소장 노트: 매니페스트에서 실제 키 찾기]
         let manifest: any = {};
         try {
-            // @ts-ignore
+            // @ts-ignore - Wrangler가 주입하는 매니페스트
             const m = await import("__STATIC_CONTENT_MANIFEST");
             const manifestStr = m.default || m;
             manifest = typeof manifestStr === 'string' ? JSON.parse(manifestStr) : manifestStr;
         } catch (e) {
-            console.warn("[Worker] Manifest not found, will try direct access");
+            console.warn("[Worker] Manifest not found/invalid");
         }
 
         const physicalKey = manifest["index.html"] || "index.html";
@@ -84,37 +80,52 @@ app.get("/", async (c) => {
             } catch (ogError) {
                 console.error("[Worker] OG injection failed:", ogError);
             }
-            return c.html(html);
-        } else {
-            // 폴백: 매니페스트가 어긋난 경우를 대비해 KV 목록에서 .html로 끝나는 파일 찾기 시도
-            const list = await workerEnv.__STATIC_CONTENT.list({ limit: 20 });
-            const fallbackKey = list.keys.find((k: any) => k.name.endsWith(".html"))?.name;
-            if (fallbackKey) {
-                const fallbackAsset = await workerEnv.__STATIC_CONTENT.get(fallbackKey, { type: "text" });
-                if (fallbackAsset) return c.html(fallbackAsset);
-            }
-            return c.text("index.html not found", 404);
+            return html;
         }
-    } catch (e: any) {
-        return c.text(`Internal Error: ${e.message}`, 500);
+    } catch (e) {
+        console.error("[Worker] Failed to load index.html from KV:", e);
     }
+    return null;
+}
+
+// 2. 루트 및 SPA 라우팅 (API가 아닌 모든 경로는 index.html 서빙)
+app.get("/", async (c) => {
+    const html = await getIndexHtml(c);
+    if (html) return c.html(html);
+    return c.text("index.html not found in assets", 404);
 });
 
-// 2. 나머지 정적 자산(CSS, JS, Images 등) 처리
+// 3. 정적 자산 서빙 (assets/*, *.js, *.css 등)
 app.get("/*", async (c, next) => {
+    const path = c.req.path;
     const workerEnv = c.env as any;
-    if (workerEnv?.__STATIC_CONTENT) {
-        const { serveStatic: workerServeStatic } = await import("hono/cloudflare-workers");
 
+    // API 요청은 통과
+    if (path.startsWith("/api/")) return next();
+
+    // 정적 자산인 경우 (확장자가 있거나 /assets/ 경로인 경우)
+    const isAsset = path.includes(".") || path.startsWith("/assets/");
+
+    if (isAsset && workerEnv?.__STATIC_CONTENT) {
+        const { serveStatic: workerServeStatic } = await import("hono/cloudflare-workers");
         let manifest: any = undefined;
         try {
             // @ts-ignore
             const m = await import("__STATIC_CONTENT_MANIFEST");
-            manifest = m.default ? JSON.parse(m.default) : m;
+            manifest = m.default ? (typeof m.default === 'string' ? JSON.parse(m.default) : m.default) : m;
         } catch (e) { }
 
-        return workerServeStatic({ root: "./", manifest })(c, next);
+        // 정적 파일 서빙 시도
+        const res = await workerServeStatic({ root: "./", manifest })(c, next);
+
+        // 파일이 발견되면 반환, 아니면 SPA 폴백으로 이동
+        if (res && res.status !== 404) return res;
     }
+
+    // [SPA Fallback] 파일이 없거나 자산이 아닌 경로(예: /home, /admin 등)는 index.html 서빙
+    const html = await getIndexHtml(c);
+    if (html) return c.html(html);
+
     return next();
 });
 
