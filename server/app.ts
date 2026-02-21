@@ -1,3 +1,4 @@
+console.log("[DEBUG] server/app.ts loading...");
 import { Hono, Context, Next } from "hono";
 import { logger } from "hono/logger";
 import { sessionMiddleware, CookieStore } from "hono-sessions";

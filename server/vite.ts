@@ -1,10 +1,10 @@
-
+console.log("[DEBUG] server/vite.ts loading...");
 import { Hono } from "hono";
 import fs from "fs";
 import path from "path";
 import { createServer as createViteServer, createLogger, ViteDevServer } from "vite";
 import { type Server } from "http";
-import viteConfig from "../vite.config";
+import viteConfig from "../vite.config.ts";
 import { nanoid } from "nanoid";
 import { ogService } from "./services/ogService";
 import { fileURLToPath } from "url";
