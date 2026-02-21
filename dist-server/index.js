@@ -11725,11 +11725,9 @@ app.use("*", async (c, next) => {
 });
 setupAuthRoutes(app);
 registerRoutes(app);
-app.get("/", async (c) => {
+async function getIndexHtml(c) {
   const workerEnv = c.env;
-  if (!workerEnv?.__STATIC_CONTENT) {
-    return c.text("Bucket not bound", 500);
-  }
+  if (!workerEnv?.__STATIC_CONTENT) return null;
   try {
     let manifest = {};
     try {
@@ -11737,7 +11735,7 @@ app.get("/", async (c) => {
       const manifestStr = m.default || m;
       manifest = typeof manifestStr === "string" ? JSON.parse(manifestStr) : manifestStr;
     } catch (e) {
-      console.warn("[Worker] Manifest not found, will try direct access");
+      console.warn("[Worker] Manifest not found/invalid");
     }
     const physicalKey = manifest["index.html"] || "index.html";
     const asset = await workerEnv.__STATIC_CONTENT.get(physicalKey, { type: "text" });
@@ -11749,32 +11747,36 @@ app.get("/", async (c) => {
       } catch (ogError) {
         console.error("[Worker] OG injection failed:", ogError);
       }
-      return c.html(html);
-    } else {
-      const list = await workerEnv.__STATIC_CONTENT.list({ limit: 20 });
-      const fallbackKey = list.keys.find((k) => k.name.endsWith(".html"))?.name;
-      if (fallbackKey) {
-        const fallbackAsset = await workerEnv.__STATIC_CONTENT.get(fallbackKey, { type: "text" });
-        if (fallbackAsset) return c.html(fallbackAsset);
-      }
-      return c.text("index.html not found", 404);
+      return html;
     }
   } catch (e) {
-    return c.text(`Internal Error: ${e.message}`, 500);
+    console.error("[Worker] Failed to load index.html from KV:", e);
   }
+  return null;
+}
+app.get("/", async (c) => {
+  const html = await getIndexHtml(c);
+  if (html) return c.html(html);
+  return c.text("index.html not found in assets", 404);
 });
 app.get("/*", async (c, next) => {
+  const path3 = c.req.path;
   const workerEnv = c.env;
-  if (workerEnv?.__STATIC_CONTENT) {
+  if (path3.startsWith("/api/")) return next();
+  const isAsset = path3.includes(".") || path3.startsWith("/assets/");
+  if (isAsset && workerEnv?.__STATIC_CONTENT) {
     const { serveStatic: workerServeStatic } = await import("hono/cloudflare-workers");
     let manifest = void 0;
     try {
       const m = await import("__STATIC_CONTENT_MANIFEST");
-      manifest = m.default ? JSON.parse(m.default) : m;
+      manifest = m.default ? typeof m.default === "string" ? JSON.parse(m.default) : m.default : m;
     } catch (e) {
     }
-    return workerServeStatic({ root: "./", manifest })(c, next);
+    const res = await workerServeStatic({ root: "./", manifest })(c, next);
+    if (res && res.status !== 404) return res;
   }
+  const html = await getIndexHtml(c);
+  if (html) return c.html(html);
   return next();
 });
 var app_default = app;
