@@ -1,0 +1,2 @@
+﻿server/scripts/check-progress.ts(5,19): error TS2305: Module '"drizzle-orm"' has no exported member 'length'.
+server/scripts/enhance-photos.ts(75,30): error TS18048: 'response.data' is possibly 'undefined'.

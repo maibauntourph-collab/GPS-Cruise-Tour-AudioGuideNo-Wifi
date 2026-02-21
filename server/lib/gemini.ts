@@ -89,10 +89,20 @@ Respond with ONLY this exact JSON format (no other text):
 
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
-      contents: userPrompt,
+      contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
     });
 
-    const text = response.text || "";
+    // Handle different response structures between SDK versions
+    let text = "";
+    if (response.text) {
+      text = response.text;
+    } else if (response.candidates && response.candidates[0]?.content?.parts?.[0]?.text) {
+      text = response.candidates[0].content.parts[0].text;
+    }
+
+    if (!text) {
+      throw new Error('AI response was empty');
+    }
 
     // Extract JSON from response (handle markdown code blocks)
     let jsonStr = text;

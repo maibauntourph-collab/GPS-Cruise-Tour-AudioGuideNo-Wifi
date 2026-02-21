@@ -1,0 +1,16 @@
+﻿
+> rest-express@1.0.0 check
+> tsc
+
+client/src/components/UnifiedFloatingCard.tsx(852,36): error TS2304: Cannot find name 'showRouteControls'.
+client/src/components/UnifiedFloatingCard.tsx(858,17): error TS2304: Cannot find name 'onOptimizeRoute'.
+client/src/components/UnifiedFloatingCard.tsx(863,16): error TS2304: Cannot find name 'Wand2'.
+client/src/components/UnifiedFloatingCard.tsx(875,19): error TS2304: Cannot find name 'onRemoveFromTour'.
+client/src/components/UnifiedFloatingCard.tsx(883,107): error TS2304: Cannot find name 'Plus'.
+client/src/components/UnifiedFloatingCard.tsx(1478,42): error TS18047: 'selectedLandmark' is possibly 'null'.
+client/src/components/UnifiedFloatingCard.tsx(1481,72): error TS18047: 'selectedLandmark' is possibly 'null'.
+client/src/pages/Home.tsx(357,9): error TS2451: Cannot redeclare block-scoped variable 'lastProximityCheckRef'.
+client/src/pages/Home.tsx(755,9): error TS2451: Cannot redeclare block-scoped variable 'lastProximityCheckRef'.
+client/src/pages/Home.tsx(2534,32): error TS2304: Cannot find name 'Settings'.
+server/scripts/check-progress.ts(5,19): error TS2305: Module '"drizzle-orm"' has no exported member 'length'.
+server/scripts/enhance-photos.ts(75,30): error TS18048: 'response.data' is possibly 'undefined'.

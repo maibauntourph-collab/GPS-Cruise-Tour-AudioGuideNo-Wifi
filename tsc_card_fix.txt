@@ -1,0 +1,42 @@
+﻿
+client/src/components/Unifie
+dFloatingCard.tsx(543,5): er
+ror TS2304: Cannot find name
+ 'setDragStart'.
+client/src/components/Unifie
+dFloatingCard.tsx(543,33): e
+rror TS2552: Cannot find nam
+e 'translate'. Did you mean 
+'CSSTranslate'?
+client/src/components/Unifie
+dFloatingCard.tsx(543,59): e
+rror TS2552: Cannot find nam
+e 'translate'. Did you mean 
+'CSSTranslate'?
+client/src/components/Unifie
+dFloatingCard.tsx(549,7): er
+ror TS2552: Cannot find name
+ 'translate'. Did you mean '
+CSSTranslate'?
+client/src/components/Unifie
+dFloatingCard.tsx(557,28): e
+rror TS2552: Cannot find nam
+e 'dragStart'. Did you mean 
+'ondragstart'?
+client/src/components/Unifie
+dFloatingCard.tsx(558,28): e
+rror TS2552: Cannot find nam
+e 'dragStart'. Did you mean 
+'ondragstart'?
+client/src/components/Unifie
+dFloatingCard.tsx(563,5): er
+ror TS2552: Cannot find name
+ 'setTranslate'. Did you mea
+n 'CSSTranslate'?
+client/src/components/Unifie
+dFloatingCard.tsx(564,7): er
+ror TS2552: Cannot find name
+ 'dragStart'. Did you mean '
+ondragstart'?
+
+

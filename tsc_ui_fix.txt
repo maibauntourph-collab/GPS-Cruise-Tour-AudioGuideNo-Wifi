@@ -1,0 +1,53 @@
+﻿
+client/src/components
+/UnifiedFloatingCard.
+tsx(543,5): error TS2
+304: Cannot find name
+ 'setDragStart'.
+client/src/components
+/UnifiedFloatingCard.
+tsx(543,33): error TS
+2552: Cannot find nam
+e 'translate'. Did yo
+u mean 'CSSTranslate'
+?
+client/src/components
+/UnifiedFloatingCard.
+tsx(543,59): error TS
+2552: Cannot find nam
+e 'translate'. Did yo
+u mean 'CSSTranslate'
+?
+client/src/components
+/UnifiedFloatingCard.
+tsx(549,7): error TS2
+552: Cannot find name
+ 'translate'. Did you
+ mean 'CSSTranslate'?
+client/src/components
+/UnifiedFloatingCard.
+tsx(557,28): error TS
+2552: Cannot find nam
+e 'dragStart'. Did yo
+u mean 'ondragstart'?
+client/src/components
+/UnifiedFloatingCard.
+tsx(558,28): error TS
+2552: Cannot find nam
+e 'dragStart'. Did yo
+u mean 'ondragstart'?
+client/src/components
+/UnifiedFloatingCard.
+tsx(563,5): error TS2
+552: Cannot find name
+ 'setTranslate'. Did 
+you mean 'CSSTranslat
+e'?
+client/src/components
+/UnifiedFloatingCard.
+tsx(564,7): error TS2
+552: Cannot find name
+ 'dragStart'. Did you
+ mean 'ondragstart'?
+
+

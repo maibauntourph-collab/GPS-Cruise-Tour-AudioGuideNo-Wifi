@@ -47,7 +47,7 @@ import { Landmark, City } from '@shared/schema';
 import { getMatchedCityId, checkProximity } from '@/lib/locationService';
 import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
-import { Landmark as LandmarkIcon, Activity as ActivityIcon, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon, Headphones as AudioIcon, Ticket, Navigation, Play, Pause, Minus, ZoomIn } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity as ActivityIcon, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon, Headphones as AudioIcon, Ticket, Navigation, Play, Pause, Minus, ZoomIn, Settings } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -354,6 +354,7 @@ export default function Home() {
     totalEstimatedTime: number;
   } | null>(null);
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastProximityCheckRef = useRef<number>(0);
   const { toast } = useToast();
 
   // Startup dialog state - 🚑 [Bug Doctor] Sequence Restored to original intent
@@ -750,8 +751,7 @@ export default function Home() {
   }, [isSimulationMode, tourStops, simulationSpeed, selectedLanguage]);
 
   // 🛰️ [Server Park] 실시간 랜드마크 근접 감지 및 자동 안내 효과
-  // [중요] lastProximityCheckRef: 마지막 proximity 검사 시각을 기록하여 2초 throttle 구현
-  const lastProximityCheckRef = useRef<number>(0);
+  // [중요] lastProximityCheckRef는 357줄에서 이미 선언됨 (중복 선언 제거 - Bug Doctor)
 
   useEffect(() => {
     if (!effectivePosition || !audioEnabled || !landmarks.length || offlineMode) return;
