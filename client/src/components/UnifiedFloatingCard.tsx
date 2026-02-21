@@ -563,31 +563,41 @@ export default function UnifiedFloatingCard({
     if (!selectedLandmark) return;
 
     if (isPlaying) {
-      audioService.stop();
-      audioService.stopMP3();
-      setIsPlaying(false);
+      try {
+        audioService.stop();
+        audioService.stopMP3();
+      } catch (e) {
+        console.error('[UnifiedFloatingCard] Audio stop error:', e);
+      } finally {
+        setIsPlaying(false);
+      }
     } else {
       const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
         getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
 
       const audioMode = audioService.getAudioMode();
 
-      if (audioMode === 'clova') {
-        setIsPlaying(true);
-        const success = await audioService.playClovaTTS(text, selectedLanguage, () => {
-          setIsPlaying(false);
-        });
-        if (!success) {
-          // Fallback to system TTS
+      try {
+        if (audioMode === 'clova') {
+          setIsPlaying(true);
+          const success = await audioService.playClovaTTS(text, selectedLanguage, () => {
+            setIsPlaying(false);
+          });
+          if (!success) {
+            // Fallback to system TTS
+            audioService.playText(text, selectedLanguage, playbackRate, () => {
+              setIsPlaying(false);
+            });
+          }
+        } else {
           audioService.playText(text, selectedLanguage, playbackRate, () => {
             setIsPlaying(false);
           });
+          setIsPlaying(true);
         }
-      } else {
-        audioService.playText(text, selectedLanguage, playbackRate, () => {
-          setIsPlaying(false);
-        });
-        setIsPlaying(true);
+      } catch (error) {
+        console.error('[UnifiedFloatingCard] Audio play error:', error);
+        setIsPlaying(false); // [Bug Doctor] 에러 발생 시 상태를 초기화하여 버튼이 먹통이 되지 않게 합니다.
       }
     }
   };
@@ -909,14 +919,17 @@ export default function UnifiedFloatingCard({
                         <Button
                           variant="ghost"
                           size="icon"
-                          onClick={() => {
+                          onClick={(e) => {
+                            // [Bug Doctor] 이벤트 전파를 막아 부모 요소의 클릭 이벤트와 충돌하지 않게 합니다.
+                            e.stopPropagation();
                             onLandmarkClose();
-                            setIsMinimized(true);
+                            // 최소화 상태도 초기화하여 다음에 열 때 정상적으로 보이게 합니다.
+                            setIsMinimized(false);
                           }}
-                          className="h-8 w-8 flex-shrink-0"
+                          className="h-8 w-8 flex-shrink-0 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
                           data-testid="button-close-landmark-info"
                         >
-                          <X className="w-4 h-4" />
+                          <X className="w-5 h-5" />
                         </Button>
                       </div>
 
@@ -1375,11 +1388,15 @@ export default function UnifiedFloatingCard({
               <TabsContent value="cruise" className="mt-4 flex flex-col flex-1">
                 {city?.cruisePort && (
                   <Tabs defaultValue="info" className="w-full flex flex-col flex-1 min-h-0">
-                    <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
-                      <TabsTrigger value="info" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('cruiseInfo', selectedLanguage)}</TabsTrigger>
-                      <TabsTrigger value="transport" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('transportation', selectedLanguage)}</TabsTrigger>
-                      <TabsTrigger value="tips" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('tips', selectedLanguage)}</TabsTrigger>
-                    </TabsList>
+                    {/* [Bug Doctor] 탭 리스트가 모바일에서 잘리지 않도록 스크롤 가능하게 변경합니다. */}
+                    <div className="overflow-x-auto scrollbar-hide -mx-4 px-4 pb-1">
+                      <TabsList className="inline-flex w-auto min-w-full justify-start md:grid md:grid-cols-4 md:w-full">
+                        <TabsTrigger value="info" className="text-xs whitespace-nowrap px-3">{t('info', selectedLanguage)}</TabsTrigger>
+                        <TabsTrigger value="route" className="text-xs whitespace-nowrap px-3">{t('route', selectedLanguage)}</TabsTrigger>
+                        <TabsTrigger value="cruise" className="text-xs whitespace-nowrap px-3">{t('cruiseTerminal', selectedLanguage)}</TabsTrigger>
+                        <TabsTrigger value="list" className="text-xs whitespace-nowrap px-3">{t('nearby', selectedLanguage)}</TabsTrigger>
+                      </TabsList>
+                    </div>
 
                     <TabsContent value="info" className="mt-4 overflow-y-auto flex-1">
                       <div>

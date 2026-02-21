@@ -10529,6 +10529,8 @@ async function recommendTourItinerary(landmarks2, userPosition, language = "en")
 
 \uB2E4\uC74C \uAD00\uAD11\uC9C0\uB4E4\uC744 \uAE30\uBC18\uC73C\uB85C \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD574\uC8FC\uC138\uC694. \uC9C0\uB9AC\uC801 \uC704\uCE58, \uCE74\uD14C\uACE0\uB9AC, \uC5ED\uC0AC\uC801 \uC911\uC694\uB3C4\uB97C \uACE0\uB824\uD558\uC5EC \uD6A8\uC728\uC801\uC778 \uC21C\uC11C\uB97C \uC81C\uC548\uD558\uC138\uC694. \`isPremium\`\uC774 \`true\`\uC778 \uC7A5\uC18C\uB294 \uACE0\uD488\uC9C8 \uC624\uB514\uC624 \uAC00\uC774\uB4DC\uAC00 \uD3EC\uD568\uB418\uC5B4 \uC788\uC74C\uC744 \uCC38\uACE0\uD558\uC138\uC694.
 
+\uC911\uC694: \uBC18\uB4DC\uC2DC \uC81C\uACF5\uB41C '\uAD00\uAD11\uC9C0 \uBAA9\uB85D'\uC5D0 \uC788\uB294 \`id\` \uAC12\uB9CC \uC0AC\uC6A9\uD574\uC57C \uD569\uB2C8\uB2E4. \uC0C8\uB85C\uC6B4 ID\uB97C \uC0DD\uC131\uD558\uAC70\uB098 \uC774\uB984\uC744 \uBCC0\uD615\uD558\uC9C0 \uB9C8\uC2ED\uC2DC\uC624.
+
 \uAD00\uAD11\uC9C0 \uBAA9\uB85D:
 ${JSON.stringify(landmarkInfo, null, 2)}
 
@@ -10542,6 +10544,8 @@ ${userPosition ? `\uC0AC\uC6A9\uC790 \uD604\uC7AC \uC704\uCE58: \uC704\uB3C4 ${u
 }` : `${systemPrompt}
 
 Based on the following tourist attractions, recommend the best tour itinerary. Consider geographical proximity, category variety, and historical significance to suggest an efficient order. Note that landmarks with \`isPremium: true\` have high-quality audio guides available.
+
+IMPORTANT: You MUST use ONLY the \`id\` values present in the provided 'Landmark list'. Do not generate new IDs or invent names.
 
 Landmark list:
 ${JSON.stringify(landmarkInfo, null, 2)}
@@ -10561,9 +10565,17 @@ Respond with ONLY this exact JSON format (no other text):
     }
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
-      contents: userPrompt
+      contents: [{ role: "user", parts: [{ text: userPrompt }] }]
     });
-    const text2 = response.text || "";
+    let text2 = "";
+    if (response.text) {
+      text2 = response.text;
+    } else if (response.candidates && response.candidates[0]?.content?.parts?.[0]?.text) {
+      text2 = response.candidates[0].content.parts[0].text;
+    }
+    if (!text2) {
+      throw new Error("AI response was empty");
+    }
     let jsonStr = text2;
     const jsonMatch = text2.match(/```(?:json)?\s*([\s\S]*?)```/);
     if (jsonMatch) {

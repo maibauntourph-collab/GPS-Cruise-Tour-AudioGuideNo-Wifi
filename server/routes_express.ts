@@ -1291,14 +1291,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Validate that all recommended landmark IDs exist in the database
       const validLandmarkIds = new Set(landmarks.map(l => l.id));
-      const invalidIds = recommendation.itinerary
-        .map(item => item.landmarkId)
-        .filter(id => !validLandmarkIds.has(id));
-
+      // [Bug Doctor] AI가 가끔 창의성을 발휘해 잘못된 ID를 생성하는 경우를 대비하여
+      // 500 에러를 내기보다는 유표한 ID들만 필터링하여 사용자에게 결과를 보여주도록 수정합니다.
       if (invalidIds.length > 0) {
-        console.error('AI recommended invalid landmark IDs:', invalidIds);
+        console.warn('AI recommended invalid landmark IDs, filtering them out:', invalidIds);
+        recommendation.itinerary = recommendation.itinerary.filter(
+          item => validLandmarkIds.has(item.landmarkId)
+        );
+
+        // 순서(order) 재정렬
+        recommendation.itinerary.forEach((item, index) => {
+          item.order = index + 1;
+        });
+      }
+
+      if (recommendation.itinerary.length === 0) {
         return res.status(500).json({
-          error: "AI recommendation contains invalid landmarks",
+          error: "AI recommendation failed to provide valid landmarks",
           details: invalidIds
         });
       }
