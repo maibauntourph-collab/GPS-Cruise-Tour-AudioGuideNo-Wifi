@@ -47,7 +47,7 @@ import { Landmark, City } from '@shared/schema';
 import { getMatchedCityId, checkProximity } from '@/lib/locationService';
 import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, ZoomIn, Volume2 as AudioIcon } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -2211,194 +2211,343 @@ export default function Home() {
                 크리에이터들이 자주 확인해야 하는 통계 페이지로의 입구를 여기에 배치했습니다.
                 TrendingUp 아이콘을 사용하여 '수익과 성장'의 의미를 담았죠. */}
             {/* [적요] QR코드 설치 공유 버튼 - 클릭 시 앱 설치 QR코드 다이얼로그 표시 */}
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="h-8 w-8 sm:h-9 sm:w-9 border-purple-300/50 bg-purple-50 hover:bg-purple-100 dark:border-purple-600/30 dark:bg-purple-900/20 dark:hover:bg-purple-900/40"
-                  onClick={() => setShowQrDialog(true)}
-                  data-testid="button-qr-install"
-                >
-                  <QrCode className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 dark:text-purple-400" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? 'QR코드로 앱 설치/공유' : 'Install/Share via QR Code'}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="h-8 w-8 sm:h-9 sm:w-9 border-primary/20 bg-primary/5 hover:bg-primary/10"
-                  onClick={() => setShowCreatorDashboard(true)}
-                  data-testid="button-creator-center"
-                >
-                  <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '크리에이터 센터 (수익 확인)' : 'Creator Center (Earnings)'}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={isNavigationOnlyMode ? "default" : "outline"}
-                  size="icon"
-                  className={`h-8 w-8 sm:h-9 sm:w-9 border-amber-300/50 ${isNavigationOnlyMode ? 'bg-amber-500 hover:bg-amber-600 text-white border-none' : 'bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/20 dark:hover:bg-amber-900/40'}`}
-                  onClick={() => setIsNavigationOnlyMode(!isNavigationOnlyMode)}
-                  data-testid="button-nav-only-mode"
-                >
-                  <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '설명 없이 지도만 보기' : 'Map Only (Hide Descriptions)'}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={isCarNavZoomMode ? "default" : "outline"}
-                  size="icon"
-                  className={`h-8 w-8 sm:h-9 sm:w-9 border-blue-300/50 ${isCarNavZoomMode ? 'bg-blue-600 hover:bg-blue-700 text-white border-none' : 'bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/40'}`}
-                  onClick={() => setIsCarNavZoomMode(!isCarNavZoomMode)}
-                  data-testid="button-car-nav-zoom"
-                >
-                  <ZoomIn className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '카 내비게이션 줌 (초근접)' : 'Car Nav Zoom (Close-up)'}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={handleAiRecommendation}
-                  data-testid="button-ai-recommend"
-                  className="h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                  <span className="hidden sm:inline text-xs">
-                    {selectedLanguage === 'ko' ? 'AI 추천' : 'AI'}
-                  </span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? 'AI가 최적의 관광 일정을 추천합니다' : 'AI recommends optimal tour itinerary'}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={showLandmarks ? "default" : "outline"}
-                  size="icon"
-                  onClick={handleToggleLandmarks}
-                  data-testid="button-toggle-landmarks"
-                  className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : 'animate-blink'}`}
-                >
-                  <LandmarkIcon className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline text-xs">{t('landmarks', selectedLanguage)}</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '유명 관광 명소 표시/숨기기' : 'Show/Hide Famous Landmarks'}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={showActivities ? "default" : "outline"}
-                  size="icon"
-                  onClick={handleToggleActivities}
-                  data-testid="button-toggle-activities"
-                  className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : 'animate-blink'}`}
-                >
-                  <Activity className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline text-xs">{t('activities', selectedLanguage)}</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '체험/액티비티 표시/숨기기' : 'Show/Hide Activities & Experiences'}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={showRestaurants ? "default" : "outline"}
-                  size="icon"
-                  onClick={handleToggleRestaurants}
-                  data-testid="button-toggle-restaurants"
-                  className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : 'animate-blink'}`}
-                >
-                  <Utensils className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline text-xs">{t('restaurants', selectedLanguage)}</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '추천 맛집 표시/숨기기' : 'Show/Hide Recommended Restaurants'}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={showGiftShops ? "default" : "outline"}
-                  size="icon"
-                  onClick={handleToggleGiftShops}
-                  data-testid="button-toggle-giftshops"
-                  className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
-                >
-                  <ShoppingBag className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline text-xs">{t('giftShops', selectedLanguage)}</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '기념품 가게 표시/숨기기' : 'Show/Hide Gift Shops'}</p>
-              </TooltipContent>
-            </Tooltip>
-            {selectedCity?.cruisePort && (
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant={showCruisePort ? "default" : "outline"}
-                    size="icon"
-                    onClick={() => setShowCruisePort(!showCruisePort)}
-                    data-testid="button-toggle-cruise-port"
-                    className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
-                  >
-                    <Ship className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline text-xs">{t('cruisePortInfo', selectedLanguage)}</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{selectedLanguage === 'ko' ? '크루즈 항구 정보 및 교통편 보기' : 'View Cruise Port Info & Transport'}</p>
-                </TooltipContent>
-              </Tooltip>
+            {/* [Server Park] Desktop View: Show all icons as usual */}
+            {!isMobile && (
+              <div className="flex items-center gap-0.5 sm:gap-1">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 sm:h-9 sm:w-9 border-purple-300/50 bg-purple-50 hover:bg-purple-100 dark:border-purple-600/30 dark:bg-purple-900/20 dark:hover:bg-purple-900/40"
+                      onClick={() => setShowQrDialog(true)}
+                      data-testid="button-qr-install"
+                    >
+                      <QrCode className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 dark:text-purple-400" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? 'QR코드로 앱 설치/공유' : 'Install/Share via QR Code'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 sm:h-9 sm:w-9 border-primary/20 bg-primary/5 hover:bg-primary/10"
+                      onClick={() => setShowCreatorDashboard(true)}
+                      data-testid="button-creator-center"
+                    >
+                      <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? '크리에이터 센터 (수익 확인)' : 'Creator Center (Earnings)'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={isNavigationOnlyMode ? "default" : "outline"}
+                      size="icon"
+                      className={`h-8 w-8 sm:h-9 sm:w-9 border-amber-300/50 ${isNavigationOnlyMode ? 'bg-amber-500 hover:bg-amber-600 text-white border-none' : 'bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/20 dark:hover:bg-amber-900/40'}`}
+                      onClick={() => setIsNavigationOnlyMode(!isNavigationOnlyMode)}
+                      data-testid="button-nav-only-mode"
+                    >
+                      <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? '설명 없이 지도만 보기' : 'Map Only (Hide Descriptions)'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={isCarNavZoomMode ? "default" : "outline"}
+                      size="icon"
+                      className={`h-8 w-8 sm:h-9 sm:w-9 border-blue-300/50 ${isCarNavZoomMode ? 'bg-blue-600 hover:bg-blue-700 text-white border-none' : 'bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/40'}`}
+                      onClick={() => setIsCarNavZoomMode(!isCarNavZoomMode)}
+                      data-testid="button-car-nav-zoom"
+                    >
+                      <ZoomIn className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? '카 내비게이션 줌 (초근접)' : 'Car Nav Zoom (Close-up)'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handleAiRecommendation}
+                      data-testid="button-ai-recommend"
+                      className="h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600"
+                    >
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                      </svg>
+                      <span className="hidden sm:inline text-xs">
+                        {selectedLanguage === 'ko' ? 'AI 추천' : 'AI'}
+                      </span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? 'AI가 최적의 관광 일정을 추천합니다' : 'AI recommends optimal tour itinerary'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={showLandmarks ? "default" : "outline"}
+                      size="icon"
+                      onClick={handleToggleLandmarks}
+                      data-testid="button-toggle-landmarks"
+                      className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : 'animate-blink'}`}
+                    >
+                      <LandmarkIcon className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline text-xs">{t('landmarks', selectedLanguage)}</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? '유명 관광 명소 표시/숨기기' : 'Show/Hide Famous Landmarks'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={showActivities ? "default" : "outline"}
+                      size="icon"
+                      onClick={handleToggleActivities}
+                      data-testid="button-toggle-activities"
+                      className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : 'animate-blink'}`}
+                    >
+                      <Activity className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline text-xs">{t('activities', selectedLanguage)}</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? '체험/액티비티 표시/숨기기' : 'Show/Hide Activities & Experiences'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={showRestaurants ? "default" : "outline"}
+                      size="icon"
+                      onClick={handleToggleRestaurants}
+                      data-testid="button-toggle-restaurants"
+                      className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : 'animate-blink'}`}
+                    >
+                      <Utensils className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline text-xs">{t('restaurants', selectedLanguage)}</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? '추천 맛집 표시/숨기기' : 'Show/Hide Recommended Restaurants'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={showGiftShops ? "default" : "outline"}
+                      size="icon"
+                      onClick={handleToggleGiftShops}
+                      data-testid="button-toggle-giftshops"
+                      className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline text-xs">{t('giftShops', selectedLanguage)}</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? '기념품 가게 표시/숨기기' : 'Show/Hide Gift Shops'}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                {selectedCity?.cruisePort && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant={showCruisePort ? "default" : "outline"}
+                        size="icon"
+                        onClick={() => setShowCruisePort(!showCruisePort)}
+                        data-testid="button-toggle-cruise-port"
+                        className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showCruisePort ? '!bg-[hsl(200,15%,55%)] hover:!bg-[hsl(200,15%,50%)] !border-[hsl(200,15%,55%)] text-white' : 'animate-blink'}`}
+                      >
+                        <Ship className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline text-xs">{t('cruisePortInfo', selectedLanguage)}</span>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{selectedLanguage === 'ko' ? '크루즈 항구 정보 및 교통편 보기' : 'View Cruise Port Info & Transport'}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => setShowLoginDialog(true)}
+                      data-testid="button-user-account"
+                      className="h-7 w-7 sm:h-8 sm:w-8"
+                    >
+                      <User className="w-3.5 h-3.5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{selectedLanguage === 'ko' ? '로그인 / 계정' : 'Login / Account'}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
             )}
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => setShowLoginDialog(true)}
-                  data-testid="button-user-account"
-                  className="h-7 w-7 sm:h-8 sm:w-8"
-                >
-                  <User className="w-3.5 h-3.5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '로그인 / 계정' : 'Login / Account'}</p>
-              </TooltipContent>
-            </Tooltip>
+
+            {/* [Server Park] Mobile Minimalism: Consolidated "More" Menu */}
+            {isMobile && (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-9 w-9 border-primary/30 bg-white/80 backdrop-blur-sm shadow-sm"
+                    data-testid="button-mobile-more-menu"
+                  >
+                    <Menu className="h-5 w-5 text-primary" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-64 p-3 z-[3000] border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-2xl" align="end">
+                  <div className="space-y-4">
+                    {/* Map Filters Group */}
+                    <div className="space-y-1.5">
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">Explore Filters</p>
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <Button
+                          variant={showLandmarks ? "default" : "outline"}
+                          size="sm"
+                          className={`h-9 justify-start gap-2 px-3 border-none ${showLandmarks ? 'bg-orange-500 hover:bg-orange-600' : 'bg-slate-50 hover:bg-slate-100'}`}
+                          onClick={handleToggleLandmarks}
+                        >
+                          <LandmarkIcon className={`w-4 h-4 ${showLandmarks ? 'text-white' : 'text-orange-500'}`} />
+                          <span className="text-xs font-bold">{t('landmarks', selectedLanguage)}</span>
+                        </Button>
+                        <Button
+                          variant={showActivities ? "default" : "outline"}
+                          size="sm"
+                          className={`h-9 justify-start gap-2 px-3 border-none ${showActivities ? 'bg-blue-500 hover:bg-blue-600' : 'bg-slate-50 hover:bg-slate-100'}`}
+                          onClick={handleToggleActivities}
+                        >
+                          <Activity className={`w-4 h-4 ${showActivities ? 'text-white' : 'text-blue-500'}`} />
+                          <span className="text-xs font-bold">{t('activities', selectedLanguage)}</span>
+                        </Button>
+                        <Button
+                          variant={showRestaurants ? "default" : "outline"}
+                          size="sm"
+                          className={`h-9 justify-start gap-2 px-3 border-none ${showRestaurants ? 'bg-amber-500 hover:bg-amber-600' : 'bg-slate-50 hover:bg-slate-100'}`}
+                          onClick={handleToggleRestaurants}
+                        >
+                          <Utensils className={`w-4 h-4 ${showRestaurants ? 'text-white' : 'text-amber-500'}`} />
+                          <span className="text-xs font-bold">{t('restaurants', selectedLanguage)}</span>
+                        </Button>
+                        <Button
+                          variant={showGiftShops ? "default" : "outline"}
+                          size="sm"
+                          className={`h-9 justify-start gap-2 px-3 border-none ${showGiftShops ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-slate-50 hover:bg-slate-100'}`}
+                          onClick={handleToggleGiftShops}
+                        >
+                          <ShoppingBag className={`w-4 h-4 ${showGiftShops ? 'text-white' : 'text-yellow-600'}`} />
+                          <span className="text-xs font-bold">{t('giftShops', selectedLanguage)}</span>
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Navigation Tools Group */}
+                    <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">Tour Tools</p>
+                      <Button
+                        variant="ghost"
+                        className="w-full h-10 justify-start gap-3 px-3 hover:bg-purple-50 text-purple-700 rounded-lg transition-colors"
+                        onClick={handleAiRecommendation}
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-purple-100 flex items-center justify-center">
+                          <AudioLines className="w-4 h-4" />
+                        </div>
+                        <span className="text-sm font-bold">{selectedLanguage === 'ko' ? 'AI 관광 코스 추천' : 'AI Recommendation'}</span>
+                      </Button>
+
+                      <Button
+                        variant="ghost"
+                        className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-colors ${isNavigationOnlyMode ? 'bg-amber-500 text-white hover:bg-amber-600' : 'hover:bg-amber-50 text-amber-700'}`}
+                        onClick={() => setIsNavigationOnlyMode(!isNavigationOnlyMode)}
+                      >
+                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isNavigationOnlyMode ? 'bg-white/20' : 'bg-amber-100'}`}>
+                          <EyeOff className="w-4 h-4" />
+                        </div>
+                        <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '지도 몰입 모드' : 'Map Only Mode'}</span>
+                      </Button>
+
+                      <Button
+                        variant="ghost"
+                        className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-colors ${isCarNavZoomMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'hover:bg-blue-50 text-blue-700'}`}
+                        onClick={() => setIsCarNavZoomMode(!isCarNavZoomMode)}
+                      >
+                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isCarNavZoomMode ? 'bg-white/20' : 'bg-blue-100'}`}>
+                          <ZoomIn className="w-4 h-4" />
+                        </div>
+                        <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '카 내비게이션 줌' : 'Car Nav Zoom'}</span>
+                      </Button>
+                    </div>
+
+                    {/* App & Account Group */}
+                    <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">App & Service</p>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 h-9 gap-2 border-purple-100 bg-purple-50/50 hover:bg-purple-100 text-purple-600 rounded-xl"
+                          onClick={() => setShowQrDialog(true)}
+                        >
+                          <QrCode className="w-4 h-4" />
+                          <span className="text-xs font-bold">Share</span>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 h-9 gap-2 border-indigo-100 bg-indigo-50/50 hover:bg-indigo-100 text-indigo-600 rounded-xl"
+                          onClick={() => setShowCreatorDashboard(true)}
+                        >
+                          <TrendingUp className="w-4 h-4" />
+                          <span className="text-xs font-bold">Admin</span>
+                        </Button>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        className="w-full h-10 justify-start gap-3 px-3 hover:bg-slate-100 text-slate-700 rounded-lg mt-1"
+                        onClick={() => setShowLoginDialog(true)}
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-slate-200 flex items-center justify-center">
+                          <User className="w-4 h-4" />
+                        </div>
+                        <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '로그인 / 계정 관리' : 'Account Settings'}</span>
+                      </Button>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            )}
           </div>
         </header>
 
