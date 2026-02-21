@@ -13,7 +13,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
 import { audioService } from '@/lib/audioService';
 import PhotoGallery from './PhotoGallery';
-import { getGoogleSearchUrl, getWikiUrl } from '@/lib/affiliateConfig';
+import { getGoogleSearchUrl, getWikiUrl, getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getMyRealTripUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import LandmarkDetailDialog from './LandmarkDetailDialog';
@@ -1015,32 +1015,64 @@ export default function UnifiedFloatingCard({
                                   <Globe className="w-3.5 h-3.5" />
                                   {selectedLanguage === 'ko' ? '관광청' : 'Official'}
                                 </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-8 px-2 gap-1.5 text-xs text-gray-600 hover:bg-gray-100"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    const name = getTranslatedContent(selectedLandmark, selectedLanguage, 'name');
-                                    window.open(getWikiUrl(name, selectedLanguage), '_blank', 'noopener,noreferrer');
-                                  }}
-                                >
-                                  <BookOpen className="w-3.5 h-3.5" />
-                                  {selectedLanguage === 'ko' ? '백과' : 'Wiki'}
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-8 px-2 gap-1.5 text-xs text-gray-600 hover:bg-gray-100"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    const name = getTranslatedContent(selectedLandmark, selectedLanguage, 'name');
-                                    window.open(getGoogleSearchUrl(name), '_blank', 'noopener,noreferrer');
-                                  }}
-                                >
-                                  <Search className="w-3.5 h-3.5" />
-                                  {selectedLanguage === 'ko' ? '검색' : 'Search'}
-                                </Button>
+                                {/* [연구소장 가이드] 가격 비교 테이블 및 다중 플랫폼 예약 구현 */}
+                                {selectedLanguage === 'ko' ? (
+                                  <div className="space-y-3">
+                                    <div className="overflow-hidden border rounded-lg bg-white dark:bg-slate-900 shadow-sm">
+                                      <table className="w-full text-[10px] text-left">
+                                        <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 font-bold uppercase border-b">
+                                          <tr>
+                                            <th className="px-2 py-2">플랫폼</th>
+                                            <th className="px-2 py-2 text-right">혜택</th>
+                                            <th className="px-2 py-2 text-center">링크</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                                          {[
+                                            { name: 'Klook (클룩)', url: getKlookUrl(getTranslatedContent(selectedLandmark, 'ko', 'name'), 'ko'), color: 'text-orange-500', info: '실시간' },
+                                            { name: '마이리얼트립', url: getMyRealTripUrl(getTranslatedContent(selectedLandmark, 'ko', 'name')), color: 'text-blue-500', info: '특가' },
+                                            { name: 'Trip.com', url: getTripUrl(getTranslatedContent(selectedLandmark, 'ko', 'name')), color: 'text-blue-700', info: '적립' },
+                                            { name: 'GetYourGuide', url: getGYGUrl(getTranslatedContent(selectedLandmark, 'ko', 'name'), 'ko'), color: 'text-red-500', info: '글로벌' },
+                                          ].map((p) => (
+                                            <tr key={p.name}>
+                                              <td className="px-2 py-2 font-medium">{p.name}</td>
+                                              <td className="px-2 py-2 text-right text-slate-500">{p.info}</td>
+                                              <td className="px-2 py-2 text-center">
+                                                <Button
+                                                  variant="ghost"
+                                                  size="sm"
+                                                  className={`h-6 w-6 p-0 ${p.color}`}
+                                                  onClick={() => window.open(p.url, '_blank', 'noopener,noreferrer')}
+                                                >
+                                                  <ExternalLink className="w-3 h-3" />
+                                                </Button>
+                                              </td>
+                                            </tr>
+                                          ))}
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="grid grid-cols-2 gap-2">
+                                    <Button
+                                      variant="outline"
+                                      className="h-9 text-[11px] gap-1.5"
+                                      onClick={() => window.open(getViatorUrl(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'), selectedLanguage), '_blank')}
+                                    >
+                                      <ExternalLink className="w-3.5 h-3.5 text-blue-500" />
+                                      {t('bookOnViator', selectedLanguage)}
+                                    </Button>
+                                    <Button
+                                      variant="outline"
+                                      className="h-9 text-[11px] gap-1.5"
+                                      onClick={() => window.open(getGYGUrl(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'), selectedLanguage), '_blank')}
+                                    >
+                                      <ExternalLink className="w-3.5 h-3.5 text-red-500" />
+                                      {t('bookOnGetYourGuide', selectedLanguage)}
+                                    </Button>
+                                  </div>
+                                )}
                               </div>
                               {isPlaying && (
                                 <select
@@ -1443,17 +1475,45 @@ export default function UnifiedFloatingCard({
                                             <p className="text-xs mt-2 italic">{getTransportTranslation(transport, selectedLanguage, 'tips')}</p>
                                           )}
                                         </div>
-                                        {transport.bookingUrl && (
+                                        {selectedLandmark.reservationUrl && (
                                           <Button
-                                            variant="outline"
-                                            size="sm"
-                                            className="mt-2 gap-2"
-                                            onClick={() => window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer')}
+                                            className="w-full h-12 gap-2 bg-primary text-white"
+                                            onClick={() => window.open(selectedLandmark.reservationUrl, '_blank')}
                                           >
-                                            <ExternalLink className="w-3 h-3" />
-                                            {t('bookNow', selectedLanguage)}
+                                            <Anchor className="w-5 h-5" />
+                                            {t('makeReservation', selectedLanguage)}
                                           </Button>
                                         )}
+                                      </div>
+
+                                      {/* 식당 플랫폼 다각화 */}
+                                      <div className="grid grid-cols-2 gap-2 mt-3">
+                                        {selectedLanguage === 'ko' && (
+                                          <Button
+                                            variant="outline"
+                                            className="h-10 text-[11px] gap-1.5 border-red-100 hover:bg-red-50"
+                                            onClick={() => window.open(getCatchTableUrl(getTranslatedContent(selectedLandmark, 'ko', 'name')), '_blank')}
+                                          >
+                                            <ExternalLink className="w-3.5 h-3.5 text-red-500" />
+                                            캐치테이블
+                                          </Button>
+                                        )}
+                                        <Button
+                                          variant="outline"
+                                          className="h-10 text-[11px] gap-1.5 border-green-100 hover:bg-green-50"
+                                          onClick={() => window.open(getTheForkUrl(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'), selectedLanguage), '_blank')}
+                                        >
+                                          <ExternalLink className="w-3.5 h-3.5 text-green-600" />
+                                          TheFork
+                                        </Button>
+                                        <Button
+                                          variant="outline"
+                                          className="h-10 text-[11px] gap-1.5 col-span-2"
+                                          onClick={() => window.open(`https://www.google.com/maps/search/${encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'))}`, '_blank')}
+                                        >
+                                          <Search className="w-3.5 h-3.5 text-blue-500" />
+                                          {selectedLanguage === 'ko' ? 'Google Maps에서 예약 찾기' : 'Find on Google Maps'}
+                                        </Button>
                                       </div>
                                     </div>
                                   </div>

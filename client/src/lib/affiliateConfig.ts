@@ -130,3 +130,25 @@ export const getWikiUrl = (query: string, lang: string = 'ko') => {
     const wikiLang = lang === 'en' ? 'en' : lang === 'ja' ? 'ja' : lang === 'zh' ? 'zh' : 'ko';
     return `https://${wikiLang}.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(query)}`;
 };
+
+/**
+ * Generates a MyRealTrip search link (Korea specific)
+ */
+export const getMyRealTripUrl = (query: string) => {
+    return `https://www.myrealtrip.com/search?q=${encodeURIComponent(query)}`;
+};
+
+/**
+ * Generates a CatchTable search link (Korea specific restaurant)
+ */
+export const getCatchTableUrl = (query: string) => {
+    return `https://app.catchtable.co.kr/ct/search/integrated?keyword=${encodeURIComponent(query)}`;
+};
+
+/**
+ * Generates a TheFork search link (Europe/Global restaurant)
+ */
+export const getTheForkUrl = (query: string, lang: string = 'en') => {
+    const forkLang = lang === 'fr' ? 'fr' : lang === 'es' ? 'es' : lang === 'it' ? 'it' : 'en';
+    return `https://www.thefork.com/search?text=${encodeURIComponent(query)}&language=${forkLang}`;
+};

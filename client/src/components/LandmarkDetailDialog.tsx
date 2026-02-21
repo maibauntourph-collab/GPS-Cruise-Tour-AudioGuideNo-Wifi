@@ -9,7 +9,7 @@ import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
-import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl } from '@/lib/affiliateConfig';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
 import { useQuery } from '@tanstack/react-query';
 import { User, DbLandmarkGuide } from '@shared/schema';
 import { Users, Headphones, Check } from 'lucide-react';
@@ -602,118 +602,135 @@ export default function LandmarkDetailDialog({
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {/* 한국어: Klook */}
+                      {/* 한국어 사용자 특화: 가격 비교 테이블 구현 */}
                       {selectedLanguage === 'ko' && (
-                        <Button
-                          variant="outline"
-                          className="justify-start gap-2 text-xs h-10 border-orange-200 hover:bg-orange-50"
-                          onClick={() => {
-                            const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
-                            window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
-                          }}
-                        >
-                          <ExternalLink className="w-4 h-4 text-orange-500" />
-                          Klook 실시간 예약
-                        </Button>
+                        <div className="mt-4 overflow-hidden border rounded-lg bg-white dark:bg-slate-950 shadow-sm">
+                          <table className="w-full text-xs text-left">
+                            <thead className="bg-slate-50 dark:bg-slate-900 text-slate-500 font-bold uppercase tracking-wider border-b">
+                              <tr>
+                                <th className="px-4 py-3">플랫폼</th>
+                                <th className="px-4 py-3 text-right">예상 최저가</th>
+                                <th className="px-4 py-3 text-right">상태</th>
+                                <th className="px-4 py-3 text-center">링크</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                              {[
+                                { name: 'Klook (클룩)', url: getKlookUrl(getTranslatedContent(landmark, 'ko', 'name'), 'ko'), color: 'text-orange-500', price: '실시간 확인' },
+                                { name: '마이리얼트립', url: getMyRealTripUrl(getTranslatedContent(landmark, 'ko', 'name')), color: 'text-blue-500', price: '특가 제공' },
+                                { name: 'Trip.com', url: getTripUrl(getTranslatedContent(landmark, 'ko', 'name')), color: 'text-blue-700', price: '포인트 적립' },
+                                { name: 'GetYourGuide', url: getGYGUrl(getTranslatedContent(landmark, 'ko', 'name'), 'ko'), color: 'text-red-500', price: '글로벌 1위' },
+                              ].map((platform) => (
+                                <tr key={platform.name} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
+                                  <td className="px-4 py-3 font-semibold">{platform.name}</td>
+                                  <td className="px-4 py-3 text-right text-slate-600 dark:text-slate-400">{platform.price}</td>
+                                  <td className="px-4 py-3 text-right">
+                                    <Badge variant="outline" className="text-[10px] h-5 py-0 px-1.5 border-green-200 text-green-600 bg-green-50">판매중</Badge>
+                                  </td>
+                                  <td className="px-4 py-3 text-center">
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className={`h-7 w-7 p-0 ${platform.color}`}
+                                      onClick={() => window.open(platform.url, '_blank', 'noopener,noreferrer')}
+                                    >
+                                      <ExternalLink className="w-3.5 h-3.5" />
+                                    </Button>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
                       )}
 
-                      {/* 일본어: Klook & Viator */}
-                      {selectedLanguage === 'ja' && (
-                        <>
-                          <Button
-                            variant="outline"
-                            className="justify-start gap-2 text-xs h-10 border-orange-200 hover:bg-orange-50"
-                            onClick={() => {
-                              const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
-                              window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
-                            }}
-                          >
-                            <ExternalLink className="w-4 h-4 text-orange-500" />
-                            Klookで予約
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="justify-start gap-2 text-xs h-10"
-                            onClick={() => {
-                              const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
-                              window.open(getViatorUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
-                            }}
-                          >
-                            <ExternalLink className="w-4 h-4 text-blue-500" />
-                            Viatorで予約
-                          </Button>
-                        </>
-                      )}
+                      {/* KR 이외의 경우 기존 로직 유지하되 스타일 보강 */}
+                      {selectedLanguage !== 'ko' && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {/* 일본어: Klook & Viator */}
+                          {selectedLanguage === 'ja' && (
+                            <>
+                              <Button
+                                variant="outline"
+                                className="justify-start gap-2 text-xs h-10 border-orange-200 hover:bg-orange-50"
+                                onClick={() => {
+                                  const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                                  window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
+                                }}
+                              >
+                                <ExternalLink className="w-4 h-4 text-orange-500" />
+                                Klookで予約
+                              </Button>
+                              <Button
+                                variant="outline"
+                                className="justify-start gap-2 text-xs h-10"
+                                onClick={() => {
+                                  const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                                  window.open(getViatorUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
+                                }}
+                              >
+                                <ExternalLink className="w-4 h-4 text-blue-500" />
+                                Viatorで予約
+                              </Button>
+                            </>
+                          )}
 
-                      {/* 중국어: Klook & Trip.com */}
-                      {selectedLanguage === 'zh' && (
-                        <>
-                          <Button
-                            variant="outline"
-                            className="justify-start gap-2 text-xs h-10 border-orange-200 hover:bg-orange-50"
-                            onClick={() => {
-                              const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
-                              window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
-                            }}
-                          >
-                            <ExternalLink className="w-4 h-4 text-orange-500" />
-                            Klook预订
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="justify-start gap-2 text-xs h-10"
-                            onClick={() => {
-                              const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
-                              window.open(getTripUrl(searchQuery), '_blank', 'noopener,noreferrer');
-                            }}
-                          >
-                            <ExternalLink className="w-4 h-4 text-blue-600" />
-                            Trip.com预订
-                          </Button>
-                        </>
-                      )}
+                          {/* 중국어: Klook & Trip.com */}
+                          {selectedLanguage === 'zh' && (
+                            <>
+                              <Button
+                                variant="outline"
+                                className="justify-start gap-2 text-xs h-10 border-orange-200 hover:bg-orange-50"
+                                onClick={() => {
+                                  const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                                  window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
+                                }}
+                              >
+                                <ExternalLink className="w-4 h-4 text-orange-500" />
+                                Klook预订
+                              </Button>
+                              <Button
+                                variant="outline"
+                                className="justify-start gap-2 text-xs h-10"
+                                onClick={() => {
+                                  const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                                  window.open(getTripUrl(searchQuery), '_blank', 'noopener,noreferrer');
+                                }}
+                              >
+                                <ExternalLink className="w-4 h-4 text-blue-600" />
+                                Trip.com预订
+                              </Button>
+                            </>
+                          )}
 
-                      {/* 동남아시아 언어: Klook */}
-                      {(selectedLanguage === 'th' || selectedLanguage === 'vi' || selectedLanguage === 'id') && (
-                        <Button
-                          variant="outline"
-                          className="justify-start gap-2 text-xs h-10 border-orange-200 hover:bg-orange-50"
-                          onClick={() => {
-                            const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
-                            window.open(getKlookUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
-                          }}
-                        >
-                          <ExternalLink className="w-4 h-4 text-orange-500" />
-                          {selectedLanguage === 'th' ? 'จองกับ Klook' : selectedLanguage === 'vi' ? 'Đặt trên Klook' : 'Pesan di Klook'}
-                        </Button>
-                      )}
-
-                      {/* 영어/유럽 언어/글로벌: GetYourGuide & Viator */}
-                      {['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar', 'hi', 'tr', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs'].includes(selectedLanguage) && (
-                        <>
-                          <Button
-                            variant="outline"
-                            className="justify-start gap-2 text-xs h-10"
-                            onClick={() => {
-                              const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
-                              window.open(getViatorUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
-                            }}
-                          >
-                            <ExternalLink className="w-4 h-4 text-blue-500" />
-                            {t('bookOnViator', selectedLanguage)}
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="justify-start gap-2 text-xs h-10"
-                            onClick={() => {
-                              const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
-                              window.open(getGYGUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
-                            }}
-                          >
-                            <ExternalLink className="w-4 h-4 text-red-500" />
-                            {t('bookOnGetYourGuide', selectedLanguage)}
-                          </Button>
-                        </>
+                          {/* 글로벌: GetYourGuide & Viator */}
+                          {['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar', 'hi', 'tr', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs', 'th', 'vi', 'id'].includes(selectedLanguage) && (
+                            <>
+                              <Button
+                                variant="outline"
+                                className="justify-start gap-2 text-xs h-10"
+                                onClick={() => {
+                                  const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                                  window.open(getViatorUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
+                                }}
+                              >
+                                <ExternalLink className="w-4 h-4 text-blue-500" />
+                                {t('bookOnViator', selectedLanguage)}
+                              </Button>
+                              <Button
+                                variant="outline"
+                                className="justify-start gap-2 text-xs h-10"
+                                onClick={() => {
+                                  const searchQuery = getTranslatedContent(landmark, selectedLanguage, 'name');
+                                  window.open(getGYGUrl(searchQuery, selectedLanguage), '_blank', 'noopener,noreferrer');
+                                }}
+                              >
+                                <ExternalLink className="w-4 h-4 text-red-500" />
+                                {t('bookOnGetYourGuide', selectedLanguage)}
+                              </Button>
+                            </>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -748,6 +765,49 @@ export default function LandmarkDetailDialog({
                           {t('makeReservation', selectedLanguage)}
                         </Button>
                       )}
+                    </div>
+
+                    {/* [연구소장 가이드] 대표님, 식당 예약 플랫폼을 글로벌하게 다각화했습니다! */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                      {/* 한국 사용자용: 캐치테이블 */}
+                      {selectedLanguage === 'ko' && (
+                        <Button
+                          variant="outline"
+                          className="justify-start gap-2 text-xs h-10 border-red-200 hover:bg-red-50"
+                          onClick={() => {
+                            const name = getTranslatedContent(landmark, 'ko', 'name');
+                            window.open(getCatchTableUrl(name), '_blank', 'noopener,noreferrer');
+                          }}
+                        >
+                          <ExternalLink className="w-4 h-4 text-red-500" />
+                          캐치테이블 실시간 예약
+                        </Button>
+                      )}
+
+                      {/* 글로벌/유럽: TheFork */}
+                      <Button
+                        variant="outline"
+                        className="justify-start gap-2 text-xs h-10 border-green-200 hover:bg-green-50"
+                        onClick={() => {
+                          const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                          window.open(getTheForkUrl(name, selectedLanguage), '_blank', 'noopener,noreferrer');
+                        }}
+                      >
+                        <ExternalLink className="w-4 h-4 text-green-600" />
+                        {selectedLanguage === 'ko' ? 'TheFork 해외 예약' : 'Book on TheFork'}
+                      </Button>
+
+                      {/* Google Maps 기반 통합 예약 */}
+                      <Button
+                        variant="outline"
+                        className="justify-start gap-2 text-xs h-10"
+                        onClick={() => {
+                          window.open(`https://www.google.com/maps/search/${encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'))}`, '_blank', 'noopener,noreferrer');
+                        }}
+                      >
+                        <Search className="w-4 h-4 text-blue-500" />
+                        Google Maps 예약 찾기
+                      </Button>
                     </div>
 
                     {!landmark.phoneNumber && !landmark.reservationUrl && (
