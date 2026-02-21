@@ -218,6 +218,9 @@ export default function Home() {
     return saved ? JSON.parse(saved) : null; // null이면 아직 결정 안 함 (팝업 띄우기)
   });
   const [showBackgroundGuideDialog, setShowBackgroundGuideDialog] = useState(false);
+  // [적요: InstallPrompt(웰컴 화면) 완료 여부를 추적하는 상태]
+  // 이 변수가 true가 되어야 StartupDialog와 BackgroundGuide 팝업이 순차적으로 띄워집니다.
+  const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
 
   // 🛰️ [Server Park] 백그라운드 자동 가이드 팝업 트리거
   useEffect(() => {
@@ -313,10 +316,7 @@ export default function Home() {
   const [showStartupDialog, setShowStartupDialog] = useState<boolean>(false);
   const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
   const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
-  // [적요: InstallPrompt(웰컴 화면) 완료 여부를 추적하는 상태]
-  // 학생 여러분, 이 변수가 true가 되어야만 StartupDialog와 BackgroundGuide 팝업이 순차적으로 띄워집니다.
-  // InstallPrompt의 onClose 콜백에서 setIsWelcomeHandled(true)가 호출됩니다.
-  const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
+  // [적요: isWelcomeHandled는 220행 부근에서 정의됨 — TDZ 방지를 위해 사용 전에 선언]
 
   // 🎖️ [Dodari] 앱 진입 후 InstallPrompt(웰컴)를 위한 짧은 대기 후 StartupDialog 노출 여부 결정
   // 🎖️ [Dodari] 앱 진입 후 InstallPrompt(웰컴) 완료 후 시퀀스 시작
