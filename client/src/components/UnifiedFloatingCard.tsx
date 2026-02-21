@@ -464,9 +464,6 @@ export default function UnifiedFloatingCard({
         getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
       console.log(`[UnifiedFloatingCard] Language changed to ${selectedLanguage}, refreshing audio...`);
       audioService.refreshAudioForLanguage(text, selectedLanguage);
-    } else {
-      audioService.stop();
-      setIsPlaying(false);
     }
   }, [selectedLanguage]);
 
