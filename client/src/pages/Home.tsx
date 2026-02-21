@@ -2200,18 +2200,18 @@ export default function Home() {
                   }}
                   data-testid="button-clear-all-points"
                 >
-                  {selectedLanguage === 'ko' ? '紐⑤몢 珥덇린' : 'Clear All'}
+                  {selectedLanguage === 'ko' ? '모두 초기화' : 'Clear All'}
                 </Button>
               )}
             </PopoverContent>
           </Popover>
 
           <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
-            {/* [강의 노트: ?곷떒 ?대컮 ?뺤옣]
-                학생 여러분 ?닿납諛붾줈 ?뚮옯?쇱쓽 二쇱슂 湲곕뒫紐⑥븘?볦? '?좏떥由ы떚 ?뱀뀡'?낅땲
-                ?щ━?먯씠?곕뱾?먯＜ ?뺤씤?댁빞 ?섎뒗 ?듦퀎 ?섏씠吏濡쒖쓽 ?낃뎄瑜ш린諛곗튂?덉뒿?덈떎.
-                TrendingUp ?꾩씠肄섏쓣 ?ъ슜?섏뿬 '?섏씡怨깆옣'?섎?瑜댁븯二? */}
-            ? '아래 QR코드를 촬영하거나 링크를 공유하여 앱을 설치하세요'
+            {/* [강의 노트: 상단 헤더 확장]
+                학생 여러분 이곳 바로 아래가 플랫폼의 주요 기능 모아놓은 '유틸리티 섹션'입니다.
+                크리에이터들이 자주 확인해야 하는 통계 페이지로의 입구를 미리 배치해두었습니다.
+                TrendingUp 아이콘을 사용하여 '수익 센터'의미를 담았죠. */}
+
             {/* [Server Park] Desktop View: Show all icons as usual */}
             {!isMobile && (
               <div className="flex items-center gap-0.5 sm:gap-1">
@@ -2228,7 +2228,7 @@ export default function Home() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    ? '아래 QR코드를 촬영하거나 링크를 공유하여 앱을 설치하세요'
+                    <p>{selectedLanguage === 'ko' ? '아래 QR코드를 촬영하거나 링크를 공유하여 앱을 설치하세요' : 'Scan QR or share link to install app'}</p>
                   </TooltipContent>
                 </Tooltip>
 
@@ -2245,7 +2245,7 @@ export default function Home() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{selectedLanguage === 'ko' ? '?щ━?먯씠?쇳꽣 (?섏씡 ?뺤씤)' : 'Creator Center (Earnings)'}</p>
+                    <p>{selectedLanguage === 'ko' ? '크리에이터 센터 (수익 확인)' : 'Creator Center (Earnings)'}</p>
                   </TooltipContent>
                 </Tooltip>
 
@@ -2262,7 +2262,7 @@ export default function Home() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{selectedLanguage === 'ko' ? '?ㅻ챸 ?놁씠 吏?꾨쭔 蹂닿린' : 'Map Only (Hide Descriptions)'}</p>
+                    <p>{selectedLanguage === 'ko' ? '설명 없이 지도만 보기' : 'Map Only (Hide Descriptions)'}</p>
                   </TooltipContent>
                 </Tooltip>
 
@@ -2279,7 +2279,7 @@ export default function Home() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{selectedLanguage === 'ko' ? '移대퉬寃뚯씠以?(珥덇렐' : 'Car Nav Zoom (Close-up)'}</p>
+                    <p>{selectedLanguage === 'ko' ? '내비게이션 줌 (근접 보기)' : 'Car Nav Zoom (Close-up)'}</p>
                   </TooltipContent>
                 </Tooltip>
 
@@ -2355,6 +2355,9 @@ export default function Home() {
                   </TooltipContent>
                 </Tooltip>
 
+                {/* [교수님 노트: 기념품 상점 및 크루즈 항구 정보 토글] 
+                    관광객들에게 필수적인 쇼핑 정보와 크루즈 터미널 데이터를 
+                    조건부 렌더링을 통해 깔끔하게 구현한 부분입니다. */}
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
