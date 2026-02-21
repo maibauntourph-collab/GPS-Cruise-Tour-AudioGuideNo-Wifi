@@ -712,40 +712,58 @@ export default function UnifiedFloatingCard({
     // 🛰️ [Server Park] Transit Mode 가이드 UI 최적화
     // 이동 중(Transit Mode)이고 미니멀 UI 모드가 켜져 있다면 슬림한 진행바만 렌더링합니다.
     if (isTransitMode && selectedLandmark && showMinimalTransitUI) {
+      const isSpeaking = audioService.isSpeaking();
+
       return (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           className="fixed bottom-6 left-4 right-4 z-[2100]"
-          onClick={onToggleMinimalTransitUI} // 클릭 시 다시 카드가 펼쳐지도록
         >
-          <Card className="p-3 bg-indigo-600/90 text-white border-none shadow-2xl backdrop-blur-md cursor-pointer hover:bg-indigo-700/95 transition-all">
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Navigation className="w-4 h-4 animate-pulse" />
-                  <span className="text-xs font-bold truncate max-w-[150px]">
-                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                  </span>
-                  <Badge variant="secondary" className="bg-white/20 text-white border-none text-[10px]">
-                    {t('transit', selectedLanguage)}
-                  </Badge>
+          <Card className="p-4 bg-indigo-600/90 text-white border-none shadow-2xl backdrop-blur-md overflow-hidden relative">
+            <div className="flex items-center gap-4">
+              {/* Large Audio Control Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-14 w-14 rounded-full bg-white/20 hover:bg-white/30 text-white flex-shrink-0"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (isSpeaking) {
+                    audioService.stopAll();
+                  } else {
+                    handlePlayAudio();
+                  }
+                }}
+              >
+                {isSpeaking ? <Minus className="w-8 h-8" /> : <Play className="w-8 h-8 fill-current" />}
+              </Button>
+
+              <div className="flex-1 min-w-0 cursor-pointer" onClick={onToggleMinimalTransitUI}>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-2">
+                    <Navigation className="w-4 h-4 animate-pulse" />
+                    <span className="text-sm font-bold truncate max-w-[150px]">
+                      {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                    </span>
+                  </div>
+                  <div className="text-xs font-mono bg-white/10 px-2 py-0.5 rounded">
+                    {formatDistance(distanceToSelected)} {t('left', selectedLanguage)}
+                  </div>
                 </div>
-                <div className="text-xs font-mono">
-                  {formatDistance(distanceToSelected)} {t('left', selectedLanguage)}
+
+                {/* Progress Bar */}
+                <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${Math.max(5, Math.min(100, (1 - distanceToSelected / 5) * 100))}%` }}
+                  />
                 </div>
-              </div>
-              {/* Simple Progress Bar */}
-              <div className="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full bg-white"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${Math.max(5, Math.min(100, (1 - distanceToSelected / 5) * 100))}%` }}
-                />
-              </div>
-              <div className="text-[10px] text-white/70 text-center">
-                {selectedLanguage === 'ko' ? '👆 탭하여 상세 안내 확인' : '👆 Tap to view detailed guide'}
+                <div className="text-[10px] text-white/60 mt-1">
+                  {selectedLanguage === 'ko' ? '탭하여 투어 상세 보기' : 'Tap for tour details'}
+                </div>
               </div>
             </div>
           </Card>
@@ -1596,25 +1614,6 @@ export default function UnifiedFloatingCard({
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <Button
-                                  variant={isSimulationMode ? "default" : "outline"}
-                                  size="icon"
-                                  className={`h-7 w-7 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 animate-pulse border-none' : 'text-blue-500 border-blue-200 hover:bg-blue-50'}`}
-                                  onClick={() => onToggleSimulation?.()}
-                                  disabled={tourStops.length < 2}
-                                  data-testid="button-toggle-simulation"
-                                >
-                                  {isSimulationMode ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4" />}
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                {isSimulationMode
-                                  ? (selectedLanguage === 'ko' ? '시뮬레이션 중단' : 'Stop Simulation')
-                                  : (selectedLanguage === 'ko' ? '가상 투어 시작' : 'Start Virtual Tour')}
-                              </TooltipContent>
-                            </Tooltip>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button
                                   variant="ghost"
                                   size="icon"
                                   className="h-7 w-7"
@@ -1630,6 +1629,38 @@ export default function UnifiedFloatingCard({
                             </Tooltip>
                           </div>
                         </div>
+
+                        {/* [Server Park] Huge Navigation Start Button */}
+                        <div className="mt-4 mb-6">
+                          <div className="text-center mb-3">
+                            <span className="text-sm font-bold text-primary animate-bounce inline-block">
+                              {selectedLanguage === 'ko' ? '↓↓ 안내 시작 ↓↓' : '↓↓ Start Guidance ↓↓'}
+                            </span>
+                          </div>
+                          <Button
+                            variant={isSimulationMode ? "default" : "default"}
+                            className={`w-full py-8 text-lg font-black shadow-xl rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] ${isSimulationMode
+                                ? 'bg-red-500 hover:bg-red-600 animate-pulse'
+                                : 'bg-indigo-600 hover:bg-indigo-700'
+                              }`}
+                            onClick={() => onToggleSimulation?.()}
+                            disabled={tourStops.length < 2}
+                            data-testid="button-toggle-simulation-huge"
+                          >
+                            {isSimulationMode ? (
+                              <>
+                                <Pause className="w-6 h-6 mr-3 fill-current" />
+                                {selectedLanguage === 'ko' ? '안내 중단' : 'Stop Tour'}
+                              </>
+                            ) : (
+                              <>
+                                <Play className="w-6 h-6 mr-3 fill-current" />
+                                {selectedLanguage === 'ko' ? '투어 시작' : 'Start Tour'}
+                              </>
+                            )}
+                          </Button>
+                        </div>
+
                         {tourStops.length >= 2 && tourRouteInfo && (
                           <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
                             {(() => {
