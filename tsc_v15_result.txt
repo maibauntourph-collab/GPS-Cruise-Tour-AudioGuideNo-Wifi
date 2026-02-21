@@ -1,0 +1,33 @@
+﻿client/src/pages/Home.tsx(2154,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2154,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2154,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(2155,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(2155,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2155,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2155,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(2156,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(2156,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2156,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2156,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(2157,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(2157,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2157,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2157,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(2158,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(2158,60): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2158,63): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2158,69): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(2159,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(2159,60): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2159,63): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2159,69): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(2160,27): error TS1005: ':' expected.
+client/src/pages/Home.tsx(2160,58): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2160,61): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2160,67): error TS1002: Unterminated string literal.
+client/src/pages/Home.tsx(2161,25): error TS1005: ':' expected.
+client/src/pages/Home.tsx(2163,71): error TS1005: ',' expected.
+client/src/pages/Home.tsx(2396,22): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(2397,22): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(2398,22): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+client/src/pages/Home.tsx(3293,71): error TS1002: Unterminated string literal.

@@ -1,0 +1,1 @@
+﻿client/src/pages/Home.tsx(94,31): error TS1128: Declaration or statement expected.
