@@ -2409,7 +2409,7 @@ export default function Home() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{selectedLanguage === 'ko' ? '濡쒓렇/ 怨꾩젙' : 'Login / Account'}</p>
+                    <p>{selectedLanguage === 'ko' ? '로그인 / 계정' : 'Login / Account'}</p>
                   </TooltipContent>
                 </Tooltip>
               </div>
@@ -2475,38 +2475,47 @@ export default function Home() {
                         <Button
                           variant="ghost"
                           className="w-full h-10 justify-start gap-3 px-3 hover:bg-purple-50 text-purple-700 rounded-lg transition-all active:scale-95"
-                          onClick={handleAiRecommendation}
+                          onClick={() => {
+                            audioService.unlockAudio();
+                            setShowAIRecommend(true);
+                          }}
                         >
                           <div className="w-7 h-7 rounded-lg bg-purple-100 flex items-center justify-center">
                             <AudioLines className="w-4 h-4" />
                           </div>
-                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? 'AI 愿愿?肄붿뒪 異붿쿇' : 'AI Recommendation'}</span>
+                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? 'AI 가이드 코스 추천' : 'AI Recommendation'}</span>
                         </Button>
                       </motion.div>
 
                       <motion.div variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
                         <Button
                           variant="ghost"
-                          className={`w-full h-10 justify - start gap-3 px-3 rounded-lg transition - all active: scale-95 ${isNavigationOnlyMode ? 'bg-amber-500 text-white hover:bg-amber-600' : 'hover:bg-amber-50 text-amber-700'}`}
-                          onClick={() => setIsNavigationOnlyMode(!isNavigationOnlyMode)}
+                          className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-all active:scale-95 ${isNavigationOnlyMode ? 'bg-amber-500 text-white hover:bg-amber-600' : 'hover:bg-amber-50 text-amber-700'}`}
+                          onClick={() => {
+                            audioService.unlockAudio();
+                            setIsNavigationOnlyMode(!isNavigationOnlyMode);
+                          }}
                         >
                           <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isNavigationOnlyMode ? 'bg-white/20' : 'bg-amber-100'}`}>
-                            <EyeOff className="w-4 h-4" />
+                            <EyeOff className="h-4 w-4" />
                           </div>
-                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '吏紐곗엯 紐⑤뱶' : 'Map Only Mode'}</span>
+                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '지도 몰입 모드' : 'Map Only Mode'}</span>
                         </Button>
                       </motion.div>
 
                       <motion.div variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
                         <Button
                           variant="ghost"
-                          className={`w-full h-10 justify - start gap-3 px-3 rounded-lg transition - all active: scale-95 ${isCarNavZoomMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'hover:bg-blue-50 text-blue-700'}`}
-                          onClick={() => setIsCarNavZoomMode(!isCarNavZoomMode)}
+                          className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-all active:scale-95 ${isCarNavZoomMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'hover:bg-blue-50 text-blue-700'}`}
+                          onClick={() => {
+                            audioService.unlockAudio();
+                            setIsCarNavZoomMode(!isCarNavZoomMode);
+                          }}
                         >
                           <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isCarNavZoomMode ? 'bg-white/20' : 'bg-blue-100'}`}>
                             <ZoomIn className="w-4 h-4" />
                           </div>
-                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '移대퉬寃뚯씠以?' : 'Car Nav Zoom'}</span>
+                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '이동 내비 줌' : 'Car Nav Zoom'}</span>
                         </Button>
                       </motion.div>
                     </div>
