@@ -22,37 +22,37 @@ export interface GlobalLandingData {
 export const LANDING_DATA: GlobalLandingData = {
     rome: {
         ko: {
-            title: "영원한 도시, 로마에 오신 것을 환영합니다",
-            subTitle: "인터넷 없이도 즐기는 로마의 역사와 예술 가이드",
+            title: "🕰️ 2,000년의 시간이 말을 거는 곳, 로마",
+            subTitle: "돌벽 하나에도 황제의 숨결이 깃든 로마, 교수님의 흥미진진한 이야기와 함께 2,000년 전으로 무선 여행을 떠나볼까요?",
             heroImage: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200"
         },
         en: {
-            title: "Welcome to the Eternal City, Rome",
-            subTitle: "Your Offline Guide to Rome's History and Art",
+            title: "Rome: Where Stones Whisper History",
+            subTitle: "Step into the Echoes of Emperors. Let our professor guide you through 2,000 years of Roman secrets, all without needing a single byte of Wi-Fi.",
             heroImage: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200"
         }
     },
     civitavecchia: {
         ko: {
-            title: "치비타베키아: 로마로 가는 관문",
-            subTitle: "항구 도시의 매력과 편안한 여행의 시작",
+            title: "⚓ 로마로 향하는 설레는 첫 관문, 치비타베키아",
+            subTitle: "크루즈에서 내리는 순간, 이탈리아의 햇살이 당신을 반깁니다. 로마로 향하는 가장 지혜롭고 편안한 길을 안내해 드릴게요.",
             heroImage: "https://images.unsplash.com/photo-1624835848527-0c7da796a5af?w=1200"
         },
         en: {
-            title: "Civitavecchia: Gateway to Rome",
-            subTitle: "Charming Port City and Your Journey's Start",
+            title: "Civitavecchia: Your Gateway to Roman Sunlight",
+            subTitle: "Step off the deck and into an Italian dream. We provide the most intelligent and comfortable path from the port to the heart of the Eternal City.",
             heroImage: "https://images.unsplash.com/photo-1624835848527-0c7da796a5af?w=1200"
         }
     },
     cebu: {
         ko: {
-            title: "에메랄드빛 낙원, 세부",
-            subTitle: "해변과 역사적 유산이 공존하는 아름다운 섬",
+            title: "🌴 에메랄드빛 전설이 흐르는 섬, 세부",
+            subTitle: "마젤란의 십자가부터 반짝이는 파도 아래 숨은 전설까지! 세부의 진짜 매력은 바다보다 더 깊은 이야기에 숨어있답니다.",
             heroImage: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200"
         },
         en: {
-            title: "Paradise Found: Cebu City",
-            subTitle: "Beautiful Island of Beaches and Heritage Sites",
+            title: "Cebu: Emerald Waves and Hidden Legends",
+            subTitle: "From Magellan's Cross to the secrets beneath the surf. Discover the true soul of Cebu through stories deeper than the ocean itself.",
             heroImage: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200"
         }
     }

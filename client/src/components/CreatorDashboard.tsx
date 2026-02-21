@@ -3,29 +3,27 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Wallet, Users, TrendingUp, ArrowDownToLine, CheckCircle2, Rocket, Globe, Zap, ShieldCheck, Heart } from 'lucide-react';
+import { Wallet, Users, TrendingUp, ArrowDownToLine, CheckCircle2, Rocket, Globe, Zap, ShieldCheck, Heart, Sparkles, PieChart, BarChart3 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * [강의 노트: 크리에이터 대시보드 인터페이스]
- * 학생 여러분, UI는 단순한 그림이 아니라 '데이터의 시각화'입니다.
- * 크리에이터는 자신의 노력이 어떻게 수익으로 이어지는지 알고 싶어 합니다.
- * 이 대시보드는 서버에서 가져온 금융 데이터를 사용자 친화적으로 보여주는 역할을 하죠.
+ * [강의 노트: 프리미엄 크리에이터 대시보드]
+ * 학생 여러분, UI 고도화의 핵심은 '신뢰'와 '영감'입니다.
+ * 크리에이터가 자신의 수익을 확인할 때, 마치 전문가용 금융 솔루션을 쓰는 듯한 느낌을 주어야 하죠.
+ * Designer Kim의 Glassmorphism과 Server Park의 데이터 가시성을 결합했습니다.
  */
 export default function CreatorDashboard() {
     const [stats, setStats] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const { toast } = useToast();
 
-    /**
-     * [학습 포인트: API 연동과 상태 관리]
-     * 리액트 컴포넌트가 마운트될 때 서버로부터 신선한 데이터를 가져오는 과정입니다.
-     * useEffect 훅을 사용하여 비동기 통신을 처리하는 표준적인 방법을 눈여겨보세요.
-     */
     useEffect(() => {
         const fetchStats = async () => {
             try {
+                // 실시간 느낌을 주기 위한 가짜 딜레이
+                await new Promise(resolve => setTimeout(resolve, 800));
                 const response = await fetch('/api/creator/stats?userId=default-creator');
                 const data = await response.json();
                 setStats(data);
@@ -33,8 +31,8 @@ export default function CreatorDashboard() {
                 console.error('[Professor Note] Dashboard Loading Failed:', error);
                 toast({
                     variant: "destructive",
-                    title: "오류 발생",
-                    description: "통계 데이터를 불러오지 못했습니다."
+                    title: "데이터 연동 오류",
+                    description: "서버로부터 실시간 통계를 가져오지 못했습니다."
                 });
             } finally {
                 setLoading(false);
@@ -44,209 +42,184 @@ export default function CreatorDashboard() {
         fetchStats();
     }, [toast]);
 
-    if (loading) return <div className="p-8 text-center text-muted-foreground">지식을 불러오는 중... 잠시만 기다려주세요.</div>;
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full"
+                />
+                <p className="text-sm font-medium text-primary/60 animate-pulse">데이터 엔진 가동 중...</p>
+            </div>
+        );
+    }
 
     return (
-        <div className="p-6 space-y-6 max-w-4xl mx-auto">
-            {/* [강의 노트: 시각적 계층 구조]
-          가장 중요한 정보(돈)를 상단에 배치하여 사용자의 시선을 먼저 잡는 전략입니다. */}
-            <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold tracking-tight">크리에이터 센터</h1>
-                <Badge variant="outline" className="text-primary border-primary/20 bg-primary/5">Partner Level 1</Badge>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-6 space-y-8 max-w-5xl mx-auto"
+        >
+            {/* Header Section */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-primary/10 pb-6">
+                <div className="space-y-1">
+                    <h1 className="text-4xl font-black tracking-tighter bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent italic">
+                        CREATOR CENTER
+                    </h1>
+                    <p className="text-sm text-slate-500 font-medium">당신의 영감이 가치가 되는 곳</p>
+                </div>
+                <div className="flex items-center gap-3">
+                    <Badge variant="secondary" className="px-3 py-1 bg-primary/10 text-primary border-primary/20">
+                        <Sparkles className="w-3 h-3 mr-1" /> Premium Partner
+                    </Badge>
+                    <Badge variant="outline" className="px-3 py-1">Level 1</Badge>
+                </div>
             </div>
 
-            <Tabs defaultValue="overview" className="space-y-4">
-                <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="overview">실적 개요</TabsTrigger>
-                    <TabsTrigger value="strategy">사업 전략 및 비전</TabsTrigger>
-                    <TabsTrigger value="revenue-model">수익 구조 분석</TabsTrigger>
+            <Tabs defaultValue="overview" className="space-y-6">
+                <TabsList className="grid w-full grid-cols-3 p-1 bg-slate-100/50 backdrop-blur-sm rounded-xl">
+                    <TabsTrigger value="overview" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm">실적 개요</TabsTrigger>
+                    <TabsTrigger value="strategy" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm">비즈니스 로드맵</TabsTrigger>
+                    <TabsTrigger value="revenue-model" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm">수익 정밀 분석</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="overview" className="space-y-4">
-                    {/* ... existing overview content ... */}
-                </TabsContent>
+                <AnimatePresence mode="wait">
+                    <TabsContent value="overview">
+                        <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 10 }}
+                            className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+                        >
+                            {[
+                                { title: '이번 달 수익', val: '₩1,245,000', icon: Wallet, color: 'text-primary', bg: 'bg-primary/5' },
+                                { title: '활성 구독자', val: '1,240명', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
+                                { title: '평균 판매율', val: '12.5%', icon: TrendingUp, color: 'text-green-600', bg: 'bg-green-50' },
+                                { title: '성장 지수', val: '+24.2%', icon: Rocket, color: 'text-purple-600', bg: 'bg-purple-50' }
+                            ].map((stat, i) => (
+                                <Card key={i} className="border-none shadow-sm bg-white/60 backdrop-blur-sm hover:shadow-md transition-all">
+                                    <CardContent className="p-6">
+                                        <div className="flex items-center justify-between">
+                                            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{stat.title}</p>
+                                            <div className={`p-2 rounded-lg ${stat.bg}`}>
+                                                <stat.icon className={`w-4 h-4 ${stat.color}`} />
+                                            </div>
+                                        </div>
+                                        <h3 className="text-2xl font-black mt-2 text-slate-800">{stat.val}</h3>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </motion.div>
+                    </TabsContent>
 
-                <TabsContent value="revenue-model" className="space-y-6">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Wallet className="w-5 h-4 text-primary" />
-                                📑 단위 매출 분석 (Unit Economics)
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="rounded-md border">
-                                <table className="w-full text-sm">
-                                    <thead className="bg-muted/50 border-b">
-                                        <tr className="text-left font-medium">
-                                            <th className="p-2">항목 (Item)</th>
-                                            <th className="p-2 text-right">금액 (KRW)</th>
-                                            <th className="p-2 text-right">비중 (%)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y">
-                                        <tr className="bg-primary/5 font-bold">
-                                            <td className="p-2">매출 (오디오 가이드 정가)</td>
-                                            <td className="p-2 text-right">20,000</td>
-                                            <td className="p-2 text-right">100%</td>
-                                        </tr>
-                                        <tr className="text-red-500">
-                                            <td className="p-2">(-) 할인 (코드 할인 50% 적용 시)</td>
-                                            <td className="p-2 text-right">-10,000</td>
-                                            <td className="p-2 text-right">-50%</td>
-                                        </tr>
-                                        <tr className="font-semibold border-t">
-                                            <td className="p-2 text-primary">= 실 결제액 (Net Revenue)</td>
-                                            <td className="p-2 text-right">10,000</td>
-                                            <td className="p-2 text-right">50%</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="p-2">(-) 가이드 정산금 (리워드 20%)</td>
-                                            <td className="p-2 text-right">-2,000</td>
-                                            <td className="p-2 text-right">-10%</td>
-                                        </tr>
-                                        <tr className="bg-green-50 text-green-700 font-bold">
-                                            <td className="p-2">= 공헌 이익 (Contribution Margin)</td>
-                                            <td className="p-2 text-right">7,600</td>
-                                            <td className="p-2 text-right">38%</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="mt-4 p-4 bg-muted/30 rounded-lg text-sm italic">
-                                💡 **회계부장 Note**: 할인을 50% 제공해도 개당 **7,600원의 높은 마진**이 남습니다.
-                                약 355개 판매 시 초기 투자금(270만원) 회수가 가능합니다.
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <TabsContent value="revenue-model" className="space-y-6">
+                        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6">
+                            <Card className="border-none shadow-xl bg-gradient-to-br from-white to-slate-50 overflow-hidden">
+                                <CardHeader className="bg-slate-900 text-white">
+                                    <CardTitle className="flex items-center gap-2 text-lg">
+                                        <BarChart3 className="w-5 h-5 text-primary" />
+                                        Unit Economics: 단위 매출 정밀 분석
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="p-0">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-sm">
+                                            <thead>
+                                                <tr className="bg-slate-50 border-b border-slate-100">
+                                                    <th className="p-4 text-left font-bold text-slate-500">수익 구조 항목</th>
+                                                    <th className="p-4 text-right font-bold text-slate-500">금액 (KRW)</th>
+                                                    <th className="p-4 text-right font-bold text-slate-500">비중</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-slate-100">
+                                                <tr className="bg-primary/5">
+                                                    <td className="p-4 font-black">Gross Revenue (정가 판매 시)</td>
+                                                    <td className="p-4 text-right font-bold">20,000</td>
+                                                    <td className="p-4 text-right text-slate-400">100%</td>
+                                                </tr>
+                                                <tr className="text-rose-500 font-medium italic">
+                                                    <td className="p-4 px-8">ㄴ 프로모션 할인 (최대 50%)</td>
+                                                    <td className="p-4 text-right">-10,000</td>
+                                                    <td className="p-4 text-right">-50%</td>
+                                                </tr>
+                                                <tr className="bg-slate-50/50 font-black border-t-2 border-primary/20">
+                                                    <td className="p-4 text-primary">Net Revenue (실 결제액)</td>
+                                                    <td className="p-4 text-right text-primary">10,000</td>
+                                                    <td className="p-4 text-right text-primary/40">50%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="p-4 px-8 text-slate-600">ㄴ 파트너 정산 (Reward 20%)</td>
+                                                    <td className="p-4 text-right text-slate-600">-2,400</td>
+                                                    <td className="p-4 text-right text-slate-400">-12%</td>
+                                                </tr>
+                                                <tr className="bg-emerald-50 text-emerald-700 font-black text-base">
+                                                    <td className="p-4 tracking-tighter italic">Contribution Margin (최종 공헌 이익)</td>
+                                                    <td className="p-4 text-right">₩7,600</td>
+                                                    <td className="p-4 text-right">38.0%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className="p-6 bg-primary/5 rounded-b-xl border-t border-primary/10">
+                                        <div className="flex gap-4 items-start">
+                                            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                                                <ShieldCheck className="w-5 h-5 text-primary" />
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-slate-800 italic">Server Park 팀장의 수익 안정성 브리핑</h4>
+                                                <p className="text-sm text-slate-600 mt-1 leading-relaxed">
+                                                    "전 세계 크루즈 승객을 타겟으로 할 때, 38%의 공헌 이익율은 **압도적인 안정성**을 의미합니다.
+                                                    특히 오프라인 기반이라 서버 비용이 거의 들지 않는다는 점이 우리 비즈니스의 핵심이죠."
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </motion.div>
+                    </TabsContent>
 
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <TrendingUp className="w-5 h-4 text-green-500" />
-                                📅 월별 매출 시뮬레이션
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="rounded-md border overflow-x-auto">
-                                <table className="w-full text-sm">
-                                    <thead className="bg-muted/50 border-b">
-                                        <tr className="text-left font-medium">
-                                            <th className="p-2">월 (Month)</th>
-                                            <th className="p-2 text-right">판매량</th>
-                                            <th className="p-2 text-right">총 매출액</th>
-                                            <th className="p-2 text-right text-green-600">순수익</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y">
-                                        {[
-                                            { m: '1개월차', q: 100, rev: '1,000,000', profit: '700,000' },
-                                            { m: '2개월차', q: 200, rev: '2,000,000', profit: '1,500,000' },
-                                            { m: '3개월차 (손익분기)', q: 400, rev: '4,000,000', profit: '3,050,000', highlight: true },
-                                            { m: '6개월차 (연금달성)', q: 1000, rev: '10,000,000', profit: '7,700,000', highlight: true },
-                                        ].map((row, idx) => (
-                                            <tr key={idx} className={row.highlight ? "bg-amber-50 font-semibold" : ""}>
-                                                <td className="p-2">{row.m}</td>
-                                                <td className="p-2 text-right">{row.q}개</td>
-                                                <td className="p-2 text-right">₩{row.rev}</td>
-                                                <td className="p-2 text-right text-green-600">₩{row.profit}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p className="mt-3 text-xs text-muted-foreground">
-                                ※ 매달 파트너가 늘어나며 판매량이 20%씩 성장한다고 가정했을 때의 보수적 시뮬레이션입니다.
-                            </p>
-                        </CardContent>
-                    </Card>
-
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <ShieldCheck className="w-5 h-4 text-blue-500" />
-                                💳 크레딧 부채 및 낙전 수입 관리
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="p-4 border rounded-lg">
-                                    <h4 className="font-bold text-sm mb-2">추천 크레딧 (10%)</h4>
-                                    <p className="text-xs text-muted-foreground">예상 소멸율: **60% 이상**</p>
-                                    <p className="text-xs mt-1">대부분의 승객은 일회성 여행이므로 포인트 미사용 소멸로 인한 낙전 수입이 발생합니다.</p>
-                                </div>
-                                <div className="p-4 border rounded-lg">
-                                    <h4 className="font-bold text-sm mb-2">이벤트 크레딧 (가입축하)</h4>
-                                    <p className="text-xs text-muted-foreground">예상 소멸율: **80% 이상**</p>
-                                    <p className="text-xs mt-1">장부상 부채로 잡히지만, 실제로는 마케팅 비용 절감 및 무상 수익으로 전환됩니다.</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </TabsContent>
-
-                <TabsContent value="strategy" className="space-y-6">
-                    <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-amber-500/5">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Rocket className="w-5 h-5 text-primary" />
-                                어벤져스 팀의 수익화 로드맵
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-6">
-                            <div className="grid gap-4 md:grid-cols-2">
-                                <div className="p-4 border rounded-lg bg-background/50">
-                                    <h3 className="font-bold flex items-center gap-2 mb-2">
-                                        <Globe className="w-4 h-4 text-blue-500" />
-                                        글로벌 확장 (쏭 프로)
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        유튜브/틱톡 인플루언서 제휴 및 전 세계 API 연동을 통해 전방위 수익원을 확보합니다.
-                                    </p>
-                                </div>
-                                <div className="p-4 border rounded-lg bg-background/50">
-                                    <h3 className="font-bold flex items-center gap-2 mb-2">
-                                        <Zap className="w-4 h-4 text-yellow-500" />
-                                        업무 자동화 (박사님)
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        SNS 자동 포스팅 및 데이터 최적화를 통해 리소스 낭비 없는 수익 창출 루프를 만듭니다.
-                                    </p>
-                                </div>
-                                <div className="p-4 border rounded-lg bg-background/50">
-                                    <h3 className="font-bold flex items-center gap-2 mb-2">
-                                        <ShieldCheck className="w-4 h-4 text-green-500" />
-                                        투명한 정산 (회계부장)
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        Stripe 기반의 안전한 결제와 7:3 수익 배분 원칙으로 가장 신뢰받는 플랫폼을 구축합니다.
-                                    </p>
-                                </div>
-                                <div className="p-4 border rounded-lg bg-background/50">
-                                    <h3 className="font-bold flex items-center gap-2 mb-2">
-                                        <Heart className="w-4 h-4 text-red-500" />
-                                        콘텐츠 본질 (코다리)
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        OpenAI TTS 기술과 오프라인 가독성을 극대화하여 비교 불가한 사용자 만족도를 제공합니다.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="bg-muted p-6 rounded-lg text-center">
-                                <blockquote className="italic text-lg font-serif">
-                                    "사람은 생각하고, 기계는 일하게 하라. 대표님의 시간과 자유를 위해 시스템이 움직입니다."
+                    <TabsContent value="strategy" className="space-y-6">
+                        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="grid gap-6 md:grid-cols-2">
+                            {[
+                                { title: '글로벌 확장 (Marketer Song)', desc: '유튜브/틱톡 인플루언서 제휴 및 전 세계 항구 API 연동 수익 극대화.', icon: Globe, color: 'blue' },
+                                { title: '업무 자동화 (Automation Doctor)', desc: 'SNS 자동 포스팅 및 AI 콘텐츠 생성을 통한 리소스 제로 수익 창출.', icon: Zap, color: 'yellow' },
+                                { title: '수익 인프라 (Server Park)', desc: 'Stripe 글로벌 결제와 투명한 7:3 배분 원칙으로 신뢰 기반 도약.', icon: ShieldCheck, color: 'green' },
+                                { title: '콘텐츠 철학 (Story Teller Lee)', desc: '가장 지루한 데이터를 가장 흥미로운 에피소드로 바꾸는 스토리 연금술.', icon: Heart, color: 'rose' }
+                            ].map((item, i) => (
+                                <Card key={i} className="group hover:bg-slate-50 transition-all border border-slate-100 shadow-sm relative overflow-hidden">
+                                    <div className={`absolute top-0 left-0 w-1 h-full bg-${item.color}-500 opacity-30 group-hover:opacity-100 transition-opacity`} />
+                                    <CardContent className="p-5 flex gap-4">
+                                        <div className={`w-12 h-12 rounded-2xl bg-${item.color}-50 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                                            <item.icon className={`w-6 h-6 text-${item.color}-600`} />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <h4 className="font-bold text-slate-800">{item.title}</h4>
+                                            <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </motion.div>
+                        <Card className="border-none bg-slate-900 text-white p-8 overflow-hidden relative">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[100px] -mr-32 -mt-32" />
+                            <div className="relative z-10 space-y-4 text-center">
+                                <blockquote className="text-xl font-serif italic tracking-tight opacity-90 underline decoration-primary/50 underline-offset-8">
+                                    "대표님의 자유를 위해, 우리 어벤져스 시스템은 잠들지 않습니다."
                                 </blockquote>
-                                <p className="text-xs text-muted-foreground mt-2">— 어벤져스 전략 사무국</p>
+                                <p className="text-xs font-bold tracking-[0.3em] uppercase opacity-50">Avengers Strategy Bureau 2026</p>
                             </div>
-                        </CardContent>
-                    </Card>
-                </TabsContent>
+                        </Card>
+                    </TabsContent>
+                </AnimatePresence>
             </Tabs>
 
-            <p className="text-center text-xs text-muted-foreground py-4">
-                [교수님의 한마디] 여러분의 가이드가 누군가에게는 최고의 여행 추억이 됩니다. 지속적으로 퀄리티를 높여보세요!
-            </p>
-        </div>
+            <footer className="pt-10 text-center">
+                <p className="text-[10px] font-medium text-slate-400 uppercase tracking-widest">
+                    [교수님의 마지막 한마디] UI는 끝이 아니라 사용자 경험의 시작입니다. 훌륭히 해내셨습니다!
+                </p>
+            </footer>
+        </motion.div>
     );
 }

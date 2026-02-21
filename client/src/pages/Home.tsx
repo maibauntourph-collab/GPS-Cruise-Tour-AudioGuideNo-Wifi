@@ -35,7 +35,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
  */
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
-import { Menu } from 'lucide-react';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
@@ -2438,95 +2437,96 @@ export default function Home() {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-64 p-3 z-[3000] border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-2xl" align="end">
-                  <div className="space-y-4">
+                  <motion.div
+                    initial="hidden"
+                    animate="show"
+                    variants={{
+                      hidden: { opacity: 0 },
+                      show: {
+                        opacity: 1,
+                        transition: {
+                          staggerChildren: 0.05
+                        }
+                      }
+                    }}
+                    className="space-y-4"
+                  >
                     {/* Map Filters Group */}
                     <div className="space-y-1.5">
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">Explore Filters</p>
                       <div className="grid grid-cols-2 gap-1.5">
-                        <Button
-                          variant={showLandmarks ? "default" : "outline"}
-                          size="sm"
-                          className={`h-9 justify-start gap-2 px-3 border-none ${showLandmarks ? 'bg-orange-500 hover:bg-orange-600' : 'bg-slate-50 hover:bg-slate-100'}`}
-                          onClick={handleToggleLandmarks}
-                        >
-                          <LandmarkIcon className={`w-4 h-4 ${showLandmarks ? 'text-white' : 'text-orange-500'}`} />
-                          <span className="text-xs font-bold">{t('landmarks', selectedLanguage)}</span>
-                        </Button>
-                        <Button
-                          variant={showActivities ? "default" : "outline"}
-                          size="sm"
-                          className={`h-9 justify-start gap-2 px-3 border-none ${showActivities ? 'bg-blue-500 hover:bg-blue-600' : 'bg-slate-50 hover:bg-slate-100'}`}
-                          onClick={handleToggleActivities}
-                        >
-                          <Activity className={`w-4 h-4 ${showActivities ? 'text-white' : 'text-blue-500'}`} />
-                          <span className="text-xs font-bold">{t('activities', selectedLanguage)}</span>
-                        </Button>
-                        <Button
-                          variant={showRestaurants ? "default" : "outline"}
-                          size="sm"
-                          className={`h-9 justify-start gap-2 px-3 border-none ${showRestaurants ? 'bg-amber-500 hover:bg-amber-600' : 'bg-slate-50 hover:bg-slate-100'}`}
-                          onClick={handleToggleRestaurants}
-                        >
-                          <Utensils className={`w-4 h-4 ${showRestaurants ? 'text-white' : 'text-amber-500'}`} />
-                          <span className="text-xs font-bold">{t('restaurants', selectedLanguage)}</span>
-                        </Button>
-                        <Button
-                          variant={showGiftShops ? "default" : "outline"}
-                          size="sm"
-                          className={`h-9 justify-start gap-2 px-3 border-none ${showGiftShops ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-slate-50 hover:bg-slate-100'}`}
-                          onClick={handleToggleGiftShops}
-                        >
-                          <ShoppingBag className={`w-4 h-4 ${showGiftShops ? 'text-white' : 'text-yellow-600'}`} />
-                          <span className="text-xs font-bold">{t('giftShops', selectedLanguage)}</span>
-                        </Button>
+                        {[
+                          { id: 'landmarks', icon: LandmarkIcon, active: showLandmarks, toggle: handleToggleLandmarks, color: 'orange' },
+                          { id: 'activities', icon: Activity, active: showActivities, toggle: handleToggleActivities, color: 'blue' },
+                          { id: 'restaurants', icon: Utensils, active: showRestaurants, toggle: handleToggleRestaurants, color: 'amber' },
+                          { id: 'giftShops', icon: ShoppingBag, active: showGiftShops, toggle: handleToggleGiftShops, color: 'yellow' }
+                        ].map((item) => (
+                          <motion.div key={item.id} variants={{ hidden: { y: 10, opacity: 0 }, show: { y: 0, opacity: 1 } }}>
+                            <Button
+                              variant={item.active ? "default" : "outline"}
+                              size="sm"
+                              className={`h-9 w-full justify-start gap-2 px-3 border-none transition-all active:scale-95 ${item.active ? `bg-${item.color}-500 hover:bg-${item.color}-600` : 'bg-slate-50 hover:bg-slate-100'}`}
+                              onClick={item.toggle}
+                            >
+                              <item.icon className={`w-4 h-4 ${item.active ? 'text-white' : `text-${item.color}-500`}`} />
+                              <span className="text-xs font-bold">{t(item.id, selectedLanguage)}</span>
+                            </Button>
+                          </motion.div>
+                        ))}
                       </div>
                     </div>
 
                     {/* Navigation Tools Group */}
                     <div className="space-y-1.5 pt-2 border-t border-slate-100">
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">Tour Tools</p>
-                      <Button
-                        variant="ghost"
-                        className="w-full h-10 justify-start gap-3 px-3 hover:bg-purple-50 text-purple-700 rounded-lg transition-colors"
-                        onClick={handleAiRecommendation}
-                      >
-                        <div className="w-7 h-7 rounded-lg bg-purple-100 flex items-center justify-center">
-                          <AudioLines className="w-4 h-4" />
-                        </div>
-                        <span className="text-sm font-bold">{selectedLanguage === 'ko' ? 'AI 관광 코스 추천' : 'AI Recommendation'}</span>
-                      </Button>
+                      <motion.div variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
+                        <Button
+                          variant="ghost"
+                          className="w-full h-10 justify-start gap-3 px-3 hover:bg-purple-50 text-purple-700 rounded-lg transition-all active:scale-95"
+                          onClick={handleAiRecommendation}
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-purple-100 flex items-center justify-center">
+                            <AudioLines className="w-4 h-4" />
+                          </div>
+                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? 'AI 관광 코스 추천' : 'AI Recommendation'}</span>
+                        </Button>
+                      </motion.div>
 
-                      <Button
-                        variant="ghost"
-                        className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-colors ${isNavigationOnlyMode ? 'bg-amber-500 text-white hover:bg-amber-600' : 'hover:bg-amber-50 text-amber-700'}`}
-                        onClick={() => setIsNavigationOnlyMode(!isNavigationOnlyMode)}
-                      >
-                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isNavigationOnlyMode ? 'bg-white/20' : 'bg-amber-100'}`}>
-                          <EyeOff className="w-4 h-4" />
-                        </div>
-                        <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '지도 몰입 모드' : 'Map Only Mode'}</span>
-                      </Button>
+                      <motion.div variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
+                        <Button
+                          variant="ghost"
+                          className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-all active:scale-95 ${isNavigationOnlyMode ? 'bg-amber-500 text-white hover:bg-amber-600' : 'hover:bg-amber-50 text-amber-700'}`}
+                          onClick={() => setIsNavigationOnlyMode(!isNavigationOnlyMode)}
+                        >
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isNavigationOnlyMode ? 'bg-white/20' : 'bg-amber-100'}`}>
+                            <EyeOff className="w-4 h-4" />
+                          </div>
+                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '지도 몰입 모드' : 'Map Only Mode'}</span>
+                        </Button>
+                      </motion.div>
 
-                      <Button
-                        variant="ghost"
-                        className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-colors ${isCarNavZoomMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'hover:bg-blue-50 text-blue-700'}`}
-                        onClick={() => setIsCarNavZoomMode(!isCarNavZoomMode)}
-                      >
-                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isCarNavZoomMode ? 'bg-white/20' : 'bg-blue-100'}`}>
-                          <ZoomIn className="w-4 h-4" />
-                        </div>
-                        <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '카 내비게이션 줌' : 'Car Nav Zoom'}</span>
-                      </Button>
+                      <motion.div variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
+                        <Button
+                          variant="ghost"
+                          className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-all active:scale-95 ${isCarNavZoomMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'hover:bg-blue-50 text-blue-700'}`}
+                          onClick={() => setIsCarNavZoomMode(!isCarNavZoomMode)}
+                        >
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isCarNavZoomMode ? 'bg-white/20' : 'bg-blue-100'}`}>
+                            <ZoomIn className="w-4 h-4" />
+                          </div>
+                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '카 내비게이션 줌' : 'Car Nav Zoom'}</span>
+                        </Button>
+                      </motion.div>
                     </div>
 
                     {/* App & Account Group */}
                     <div className="space-y-1.5 pt-2 border-t border-slate-100">
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">App & Service</p>
-                      <div className="flex gap-2">
+                      <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }} className="flex gap-2">
                         <Button
                           variant="outline"
                           size="sm"
-                          className="flex-1 h-9 gap-2 border-purple-100 bg-purple-50/50 hover:bg-purple-100 text-purple-600 rounded-xl"
+                          className="flex-1 h-9 gap-2 border-purple-100 bg-purple-50/50 hover:bg-purple-100 text-purple-600 rounded-xl transition-all active:scale-95"
                           onClick={() => setShowQrDialog(true)}
                         >
                           <QrCode className="w-4 h-4" />
@@ -2535,28 +2535,31 @@ export default function Home() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="flex-1 h-9 gap-2 border-indigo-100 bg-indigo-50/50 hover:bg-indigo-100 text-indigo-600 rounded-xl"
+                          className="flex-1 h-9 gap-2 border-indigo-100 bg-indigo-50/50 hover:bg-indigo-100 text-indigo-600 rounded-xl transition-all active:scale-95"
                           onClick={() => setShowCreatorDashboard(true)}
                         >
                           <TrendingUp className="w-4 h-4" />
                           <span className="text-xs font-bold">Admin</span>
                         </Button>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        className="w-full h-10 justify-start gap-3 px-3 hover:bg-slate-100 text-slate-700 rounded-lg mt-1"
-                        onClick={() => setShowLoginDialog(true)}
-                      >
-                        <div className="w-7 h-7 rounded-lg bg-slate-200 flex items-center justify-center">
-                          <User className="w-4 h-4" />
-                        </div>
-                        <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '로그인 / 계정 관리' : 'Account Settings'}</span>
-                      </Button>
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}>
+                        <Button
+                          variant="ghost"
+                          className="w-full h-10 justify-start gap-3 px-3 hover:bg-slate-100 text-slate-700 rounded-lg mt-1 transition-all active:scale-95"
+                          onClick={() => setShowLoginDialog(true)}
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-slate-200 flex items-center justify-center">
+                            <User className="w-4 h-4" />
+                          </div>
+                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '로그인 / 계정 관리' : 'Account Settings'}</span>
+                        </Button>
+                      </motion.div>
                     </div>
-                  </div>
+                  </motion.div>
                 </PopoverContent>
               </Popover>
             )}
+
           </div>
         </header>
 
@@ -2771,280 +2774,283 @@ export default function Home() {
             )}
           </div>
         </div>
-      </div>
+      </div >
 
       {/* [연구소장 가이드: 내비게이션 전용 모드 적용]
           학생 여러분, isNavigationOnlyMode가 켜져 있다면
           사용자에게 지도만 보여주기 위해 설명 패널(UnifiedFloatingCard)을 렌더링하지 않습니다.
           단, 오디오는 뒤에서 계속 나오고 있어야 하겠죠! */}
-      {!isNavigationOnlyMode && (
-        <UnifiedFloatingCard
-          forceShowList={forceShowCard}
-          isCardMinimized={isCardMinimized}
-          onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
-          showMinimalTransitUI={showMinimalTransitUI}
-          onToggleMinimalTransitUI={() => setShowMinimalTransitUI(!showMinimalTransitUI)}
-          selectedLandmark={selectedLandmark}
-          isTransitMode={!!activeRoute && !isManualSelection && !hasArrivedAtDestination}
-          onLandmarkClose={() => {
-            setSelectedLandmark(null);
-            setIsManualSelection(false);
-            // 🩺 [Bug Doctor] 카드 닫기 시 오디오 즉시 중지 정책 반영
-            audioService.stopAll();
-          }}
-          onNavigate={handleLandmarkRoute}
-          onAddToTour={handleAddToTour}
-          isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
-          city={selectedCity || null}
-          showCruisePort={showCruisePort}
-          onCruisePortClose={() => setShowCruisePort(false)}
-          tourStops={tourStops}
-          tourRouteInfo={tourRouteInfo}
-          onRemoveTourStop={(landmarkId) => {
-            setTourStops(tourStops.filter(stop => stop.id !== landmarkId));
-            setTourStopDurations(prev => {
-              const updated = { ...prev };
-              delete updated[landmarkId];
-              return updated;
-            });
-          }}
-          tourTimePerStop={tourTimePerStop}
-          tourStopDurations={tourStopDurations}
-          onUpdateStopDuration={handleUpdateStopDuration}
-          onSaveRoute={() => setShowSaveRouteDialog(true)}
-          onOpenMyRoutes={() => window.location.href = '/my-routes'}
-          aiRecommendation={aiRecommendation}
-          onLandmarkClick={(landmarkId) => {
-            const landmark = filteredLandmarks.find(l => l.id === landmarkId);
-            if (landmark) {
-              // Now set selected landmark
-              setIsManualSelection(true); // 직접 클릭했으므로 수동 선택 모드
-              setSelectedLandmark(landmark);
-            }
-          }}
-          landmarks={landmarks}
-          userPosition={effectivePosition}
-          onLandmarkRoute={handleLandmarkRoute}
-          onLandmarkSelect={setSelectedLandmark}
-          spokenLandmarks={spokenLandmarks}
-          showLandmarks={showLandmarks}
-          showActivities={showActivities}
-          showRestaurants={showRestaurants}
-          showGiftShops={showGiftShops}
-          onToggleLandmarks={handleToggleLandmarks}
-          onToggleActivities={handleToggleActivities}
-          onToggleRestaurants={handleToggleRestaurants}
-          onToggleGiftShops={handleToggleGiftShops}
-          selectedLanguage={selectedLanguage}
-          departureTime={departureTime}
-          startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type, name: startingPoint.name } : null}
-          endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type, name: endPoint.name } : null}
-          onOpenStartEndPointDialog={() => setIsStartingPointPopoverOpen(true)}
-          capturedRouteImage={capturedRouteImage}
-          onClearCapturedImage={() => setCapturedRouteImage(null)}
-          isSimulationMode={isSimulationMode}
-          onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
-          playInBackground={simulationAudioSettings.playInBackground}
-        />
-      )}
+      {
+        !isNavigationOnlyMode && (
+          <UnifiedFloatingCard
+            forceShowList={forceShowCard}
+            isCardMinimized={isCardMinimized}
+            onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
+            showMinimalTransitUI={showMinimalTransitUI}
+            onToggleMinimalTransitUI={() => setShowMinimalTransitUI(!showMinimalTransitUI)}
+            selectedLandmark={selectedLandmark}
+            isTransitMode={!!activeRoute && !isManualSelection && !hasArrivedAtDestination}
+            onLandmarkClose={() => {
+              setSelectedLandmark(null);
+              setIsManualSelection(false);
+              // 🩺 [Bug Doctor] 카드 닫기 시 오디오 즉시 중지 정책 반영
+              audioService.stopAll();
+            }}
+            onNavigate={handleLandmarkRoute}
+            onAddToTour={handleAddToTour}
+            isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
+            city={selectedCity || null}
+            showCruisePort={showCruisePort}
+            onCruisePortClose={() => setShowCruisePort(false)}
+            tourStops={tourStops}
+            tourRouteInfo={tourRouteInfo}
+            onRemoveTourStop={(landmarkId) => {
+              setTourStops(tourStops.filter(stop => stop.id !== landmarkId));
+              setTourStopDurations(prev => {
+                const updated = { ...prev };
+                delete updated[landmarkId];
+                return updated;
+              });
+            }}
+            tourTimePerStop={tourTimePerStop}
+            tourStopDurations={tourStopDurations}
+            onUpdateStopDuration={handleUpdateStopDuration}
+            onSaveRoute={() => setShowSaveRouteDialog(true)}
+            onOpenMyRoutes={() => window.location.href = '/my-routes'}
+            aiRecommendation={aiRecommendation}
+            onLandmarkClick={(landmarkId) => {
+              const landmark = filteredLandmarks.find(l => l.id === landmarkId);
+              if (landmark) {
+                // Now set selected landmark
+                setIsManualSelection(true); // 직접 클릭했으므로 수동 선택 모드
+                setSelectedLandmark(landmark);
+              }
+            }}
+            landmarks={landmarks}
+            userPosition={effectivePosition}
+            onLandmarkRoute={handleLandmarkRoute}
+            onLandmarkSelect={setSelectedLandmark}
+            spokenLandmarks={spokenLandmarks}
+            showLandmarks={showLandmarks}
+            showActivities={showActivities}
+            showRestaurants={showRestaurants}
+            showGiftShops={showGiftShops}
+            onToggleLandmarks={handleToggleLandmarks}
+            onToggleActivities={handleToggleActivities}
+            onToggleRestaurants={handleToggleRestaurants}
+            onToggleGiftShops={handleToggleGiftShops}
+            selectedLanguage={selectedLanguage}
+            departureTime={departureTime}
+            startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type, name: startingPoint.name } : null}
+            endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type, name: endPoint.name } : null}
+            onOpenStartEndPointDialog={() => setIsStartingPointPopoverOpen(true)}
+            capturedRouteImage={capturedRouteImage}
+            onClearCapturedImage={() => setCapturedRouteImage(null)}
+            isSimulationMode={isSimulationMode}
+            onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
+            playInBackground={simulationAudioSettings.playInBackground}
+          />
+        )
+      }
 
       {/* Bottom Sheet - Mobile Only */}
-      {isMobile && (
-        <BottomSheet
-          defaultTab="list"
-          translations={{
-            list: t('list', selectedLanguage),
-            details: selectedLandmark ? getTranslatedContent(selectedLandmark, selectedLanguage, 'name') : t('map', selectedLanguage),
-            settings: t('settings', selectedLanguage),
-          }}
-          listContent={
-            <div className="p-4">
-              <h2 className="text-2xl font-bold mb-4">{t('landmarks', selectedLanguage)}</h2>
-              <div className="space-y-3">
-                {filteredLandmarks.length === 0 ? (
-                  <p className="text-muted-foreground text-center py-8">
-                    {t('noLandmarksFound', selectedLanguage)}
-                  </p>
-                ) : (
-                  filteredLandmarks.map((landmark) => {
-                    const distance = position
-                      ? calculateDistance(position.latitude, position.longitude, landmark.lat, landmark.lng)
-                      : null;
-                    const isVisitedLandmark = isVisited(landmark.id);
-
-                    return (
-                      <button
-                        key={landmark.id}
-                        onClick={() => setSelectedLandmark(landmark)}
-                        className="w-full text-left p-4 rounded-lg border bg-card hover-elevate active-elevate-2 transition-all"
-                        data-testid={`landmark-item-${landmark.id}`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${landmark.category === 'landmark'
-                            ? 'bg-[hsl(14,85%,55%)]/20 text-[hsl(14,85%,55%)]'
-                            : landmark.category === 'activity'
-                              ? 'bg-[hsl(210,85%,55%)]/20 text-[hsl(210,85%,55%)]'
-                              : landmark.category === 'restaurant'
-                                ? 'bg-[hsl(25,95%,55%)]/20 text-[hsl(25,95%,55%)]'
-                                : 'bg-[hsl(45,90%,55%)]/20 text-[hsl(45,90%,55%)]'
-                            }`}>
-                            {landmark.category === 'landmark' ? (
-                              <LandmarkIcon className="w-5 h-5" />
-                            ) : landmark.category === 'activity' ? (
-                              <Activity className="w-5 h-5" />
-                            ) : landmark.category === 'restaurant' ? (
-                              <Utensils className="w-5 h-5" />
-                            ) : (
-                              <ShoppingBag className="w-5 h-5" />
-                            )}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-base">
-                              {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                            </h3>
-                            <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
-                              {getTranslatedContent(landmark, selectedLanguage, 'description')}
-                            </p>
-                            {distance !== null && (
-                              <p className="text-xs text-muted-foreground mt-1">
-                                {distance.toFixed(1)} km {t('away', selectedLanguage)}
-                              </p>
-                            )}
-                            {isVisitedLandmark && (
-                              <span className="inline-block mt-2 text-xs px-2 py-1 bg-primary/10 text-primary rounded">
-                                ✓ {t('visited', selectedLanguage)}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })
-                )}
-              </div>
-            </div>
-          }
-          detailsContent={
-            selectedLandmark ? (
+      {
+        isMobile && (
+          <BottomSheet
+            defaultTab="list"
+            translations={{
+              list: t('list', selectedLanguage),
+              details: selectedLandmark ? getTranslatedContent(selectedLandmark, selectedLanguage, 'name') : t('map', selectedLanguage),
+              settings: t('settings', selectedLanguage),
+            }}
+            listContent={
               <div className="p-4">
-                <h2 className="text-2xl font-bold mb-2">
-                  {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                </h2>
-                <p className="text-muted-foreground mb-4">
-                  {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
-                </p>
-                <div className="flex gap-2">
-                  <Button onClick={() => handleLandmarkRoute(selectedLandmark)} data-testid="button-navigate-bottom-sheet">
-                    Navigate
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      if (tourStops.some(stop => stop.id === selectedLandmark.id)) {
-                        setTourStops(tourStops.filter(stop => stop.id !== selectedLandmark.id));
-                      } else {
-                        handleAddToTour(selectedLandmark);
-                      }
-                    }}
-                    data-testid="button-add-to-tour-bottom-sheet"
-                  >
-                    {tourStops.some(stop => stop.id === selectedLandmark.id) ? 'Remove from Tour' : 'Add to Tour'}
-                  </Button>
+                <h2 className="text-2xl font-bold mb-4">{t('landmarks', selectedLanguage)}</h2>
+                <div className="space-y-3">
+                  {filteredLandmarks.length === 0 ? (
+                    <p className="text-muted-foreground text-center py-8">
+                      {t('noLandmarksFound', selectedLanguage)}
+                    </p>
+                  ) : (
+                    filteredLandmarks.map((landmark) => {
+                      const distance = position
+                        ? calculateDistance(position.latitude, position.longitude, landmark.lat, landmark.lng)
+                        : null;
+                      const isVisitedLandmark = isVisited(landmark.id);
+
+                      return (
+                        <button
+                          key={landmark.id}
+                          onClick={() => setSelectedLandmark(landmark)}
+                          className="w-full text-left p-4 rounded-lg border bg-card hover-elevate active-elevate-2 transition-all"
+                          data-testid={`landmark-item-${landmark.id}`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${landmark.category === 'landmark'
+                              ? 'bg-[hsl(14,85%,55%)]/20 text-[hsl(14,85%,55%)]'
+                              : landmark.category === 'activity'
+                                ? 'bg-[hsl(210,85%,55%)]/20 text-[hsl(210,85%,55%)]'
+                                : landmark.category === 'restaurant'
+                                  ? 'bg-[hsl(25,95%,55%)]/20 text-[hsl(25,95%,55%)]'
+                                  : 'bg-[hsl(45,90%,55%)]/20 text-[hsl(45,90%,55%)]'
+                              }`}>
+                              {landmark.category === 'landmark' ? (
+                                <LandmarkIcon className="w-5 h-5" />
+                              ) : landmark.category === 'activity' ? (
+                                <Activity className="w-5 h-5" />
+                              ) : landmark.category === 'restaurant' ? (
+                                <Utensils className="w-5 h-5" />
+                              ) : (
+                                <ShoppingBag className="w-5 h-5" />
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-base">
+                                {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                              </h3>
+                              <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
+                                {getTranslatedContent(landmark, selectedLanguage, 'description')}
+                              </p>
+                              {distance !== null && (
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  {distance.toFixed(1)} km {t('away', selectedLanguage)}
+                                </p>
+                              )}
+                              {isVisitedLandmark && (
+                                <span className="inline-block mt-2 text-xs px-2 py-1 bg-primary/10 text-primary rounded">
+                                  ✓ {t('visited', selectedLanguage)}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })
+                  )}
                 </div>
               </div>
-            ) : (
-              <div className="p-4 text-center text-muted-foreground">
-                Select a landmark to see details
-              </div>
-            )
-          }
-          settingsContent={
-            <div className="p-4 space-y-6">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">{t('selectCity', selectedLanguage)}</label>
-                <select
-                  value={selectedCityId}
-                  onChange={(e) => handleCityChange(e.target.value)}
-                  className="w-full p-2 border rounded-md bg-background"
-                  data-testid="select-city-mobile"
-                >
-                  {cities.map(city => (
-                    <option key={city.id} value={city.id}>{city.name}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium">{t('selectLanguage', selectedLanguage)}</label>
-                <select
-                  value={selectedLanguage}
-                  onChange={(e) => setSelectedLanguage(e.target.value)}
-                  className="w-full p-2 border rounded-md bg-background"
-                  data-testid="select-language-mobile"
-                >
-                  <option value="en">English</option>
-                  <option value="ko">한국어</option>
-                  <option value="es">Español</option>
-                  <option value="fr">Français</option>
-                  <option value="de">Deutsch</option>
-                  <option value="it">Italiano</option>
-                  <option value="zh">中文</option>
-                  <option value="ja">日本語</option>
-                  <option value="pt">Português</option>
-                  <option value="ru">Русский</option>
-                </select>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium">{t('audioGuide', selectedLanguage)}</label>
-                  <button
-                    onClick={() => setAudioEnabled(!audioEnabled)}
-                    className={`relative w-11 h-6 rounded-full transition-colors ${audioEnabled ? 'bg-primary' : 'bg-muted'
-                      }`}
-                    data-testid="toggle-audio-mobile"
-                  >
-                    <span
-                      className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${audioEnabled ? 'translate-x-5' : ''
-                        }`}
-                    />
-                  </button>
-                </div>
-
-                {audioEnabled && (
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      {t('speechSpeed', selectedLanguage)}: {speechRate}x
-                    </label>
-                    <input
-                      type="range"
-                      min="0.5"
-                      max="2"
-                      step="0.1"
-                      value={speechRate}
-                      onChange={(e) => {
-                        const newRate = parseFloat(e.target.value);
-                        setSpeechRate(newRate);
-                        audioService.setRate(newRate);
+            }
+            detailsContent={
+              selectedLandmark ? (
+                <div className="p-4">
+                  <h2 className="text-2xl font-bold mb-2">
+                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                  </h2>
+                  <p className="text-muted-foreground mb-4">
+                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
+                  </p>
+                  <div className="flex gap-2">
+                    <Button onClick={() => handleLandmarkRoute(selectedLandmark)} data-testid="button-navigate-bottom-sheet">
+                      Navigate
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        if (tourStops.some(stop => stop.id === selectedLandmark.id)) {
+                          setTourStops(tourStops.filter(stop => stop.id !== selectedLandmark.id));
+                        } else {
+                          handleAddToTour(selectedLandmark);
+                        }
                       }}
-                      className="w-full"
-                      data-testid="slider-speech-rate-mobile"
-                    />
+                      data-testid="button-add-to-tour-bottom-sheet"
+                    >
+                      {tourStops.some(stop => stop.id === selectedLandmark.id) ? 'Remove from Tour' : 'Add to Tour'}
+                    </Button>
                   </div>
-                )}
-              </div>
+                </div>
+              ) : (
+                <div className="p-4 text-center text-muted-foreground">
+                  Select a landmark to see details
+                </div>
+              )
+            }
+            settingsContent={
+              <div className="p-4 space-y-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">{t('selectCity', selectedLanguage)}</label>
+                  <select
+                    value={selectedCityId}
+                    onChange={(e) => handleCityChange(e.target.value)}
+                    className="w-full p-2 border rounded-md bg-background"
+                    data-testid="select-city-mobile"
+                  >
+                    {cities.map(city => (
+                      <option key={city.id} value={city.id}>{city.name}</option>
+                    ))}
+                  </select>
+                </div>
 
-              <div className="space-y-2 pt-4 border-t">
-                <h3 className="text-sm font-medium">{t('progress', selectedLanguage)}</h3>
-                <p className="text-2xl font-bold">
-                  {filteredLandmarks.filter(l => isVisited(l.id)).length} / {filteredLandmarks.length}
-                </p>
-                <p className="text-sm text-muted-foreground">{t('landmarksVisited', selectedLanguage)}</p>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">{t('selectLanguage', selectedLanguage)}</label>
+                  <select
+                    value={selectedLanguage}
+                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                    className="w-full p-2 border rounded-md bg-background"
+                    data-testid="select-language-mobile"
+                  >
+                    <option value="en">English</option>
+                    <option value="ko">한국어</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                    <option value="zh">中文</option>
+                    <option value="ja">日本語</option>
+                    <option value="pt">Português</option>
+                    <option value="ru">Русский</option>
+                  </select>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <label className="text-sm font-medium">{t('audioGuide', selectedLanguage)}</label>
+                    <button
+                      onClick={() => setAudioEnabled(!audioEnabled)}
+                      className={`relative w-11 h-6 rounded-full transition-colors ${audioEnabled ? 'bg-primary' : 'bg-muted'
+                        }`}
+                      data-testid="toggle-audio-mobile"
+                    >
+                      <span
+                        className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${audioEnabled ? 'translate-x-5' : ''
+                          }`}
+                      />
+                    </button>
+                  </div>
+
+                  {audioEnabled && (
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">
+                        {t('speechSpeed', selectedLanguage)}: {speechRate}x
+                      </label>
+                      <input
+                        type="range"
+                        min="0.5"
+                        max="2"
+                        step="0.1"
+                        value={speechRate}
+                        onChange={(e) => {
+                          const newRate = parseFloat(e.target.value);
+                          setSpeechRate(newRate);
+                          audioService.setRate(newRate);
+                        }}
+                        className="w-full"
+                        data-testid="slider-speech-rate-mobile"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-2 pt-4 border-t">
+                  <h3 className="text-sm font-medium">{t('progress', selectedLanguage)}</h3>
+                  <p className="text-2xl font-bold">
+                    {filteredLandmarks.filter(l => isVisited(l.id)).length} / {filteredLandmarks.length}
+                  </p>
+                  <p className="text-sm text-muted-foreground">{t('landmarksVisited', selectedLanguage)}</p>
+                </div>
               </div>
-            </div>
-          }
-        />
-      )
+            }
+          />
+        )
       }
 
       {/* Google Maps Direction Choice Dialog */}
