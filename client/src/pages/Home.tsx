@@ -1038,6 +1038,10 @@ export default function Home() {
     setShowRestaurants(!showRestaurants);
   };
 
+  const handleToggleGiftShops = () => {
+    setShowGiftShops(!showGiftShops);
+  };
+
   // Filter landmarks based on category
   const filteredByCategory = landmarks.filter(landmark => {
     const isActivity = landmark.category === 'Activity';
@@ -2250,7 +2254,7 @@ export default function Home() {
                 <Button
                   variant={showGiftShops ? "default" : "outline"}
                   size="icon"
-                  onClick={() => setShowGiftShops(!showGiftShops)}
+                  onClick={handleToggleGiftShops}
                   data-testid="button-toggle-giftshops"
                   className={`h-7 w-7 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1 ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-white' : 'animate-blink'}`}
                 >

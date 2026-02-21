@@ -762,7 +762,7 @@ __export(openai_exports, {
   generateImage: () => generateImage,
   generateLandmarkAudio: () => generateLandmarkAudio,
   getOpenAI: () => getOpenAI,
-  recommendTourItinerary: () => recommendTourItinerary
+  recommendTourItinerary: () => recommendTourItinerary2
 });
 import OpenAI from "openai";
 import * as crypto3 from "node:crypto";
@@ -819,7 +819,7 @@ async function generateLandmarkAudio(landmarkId, text2, language = "en", preferr
     throw new Error("Failed to generate audio");
   }
 }
-async function recommendTourItinerary(landmarks2, userPosition, language = "en") {
+async function recommendTourItinerary2(landmarks2, userPosition, language = "en") {
   try {
     const landmarkInfo = landmarks2.map((l) => ({
       id: l.id,
@@ -1007,15 +1007,7 @@ var vite_config_default = defineConfig({
         enabled: true,
         type: "module"
       }
-    }),
-    ...process.env.NODE_ENV !== "production" && process.env.REPL_ID !== void 0 ? [
-      await import("@replit/vite-plugin-cartographer").then(
-        (m) => m.cartographer()
-      ),
-      await import("@replit/vite-plugin-dev-banner").then(
-        (m) => m.devBanner()
-      )
-    ] : []
+    })
   ],
   resolve: {
     alias: {
@@ -1150,6 +1142,7 @@ var ogService = new OgService();
 // server/vite.ts
 import { fileURLToPath } from "url";
 import { serveStatic as honoServeStatic } from "@hono/node-server/serve-static";
+console.log("[DEBUG] server/vite.ts loading...");
 var __filename = fileURLToPath(import.meta.url);
 var __dirname = path2.dirname(__filename);
 var viteLogger = createLogger();
@@ -9791,6 +9784,7 @@ var MemStorage = class {
   async getLandmarks(cityId) {
     const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
     const hardcodedIds = hardcodedLandmarks.map((l) => l.id);
+    console.log(`[Storage Debug] Hardcoded landmarks found: ${hardcodedLandmarks.length}`);
     try {
       let dbLandmarks = [];
       if (hardcodedIds.length > 0) {
@@ -9798,14 +9792,19 @@ var MemStorage = class {
       } else {
         dbLandmarks = await db.select().from(landmarks);
       }
+      console.log(`[Storage Debug] Database landmarks found (excluding hardcoded): ${dbLandmarks.length}`);
       const allLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values()), ...dbLandmarks];
+      console.log(`[Storage Debug] Total combined landmarks: ${allLandmarks.length}`);
       if (cityId) {
-        return allLandmarks.filter((landmark) => landmark.cityId === cityId);
+        const filtered = allLandmarks.filter((landmark) => landmark.cityId === cityId);
+        console.log(`[Storage Debug] Filtered landmarks for city ${cityId}: ${filtered.length}`);
+        return filtered;
       }
       return allLandmarks;
     } catch (error) {
-      console.error("[Storage] DB access failed for getLandmarks:", error);
+      console.error("[Storage Error] DB access failed for getLandmarks:", error);
       const fallbackLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values())];
+      console.log(`[Storage Debug] Fallback landmarks: ${fallbackLandmarks.length}`);
       if (cityId) {
         return fallbackLandmarks.filter((landmark) => landmark.cityId === cityId);
       }
@@ -10429,6 +10428,104 @@ function getAI() {
   }
   return aiInstance;
 }
+async function recommendTourItinerary(landmarks2, userPosition, language = "en") {
+  try {
+    const landmarkInfo = landmarks2.map((l) => ({
+      id: l.id,
+      name: l.name,
+      category: l.category,
+      lat: l.lat,
+      lng: l.lng,
+      description: l.description,
+      isPremium: l.isPremium
+    }));
+    const systemPrompt = language === "ko" ? "\uB2F9\uC2E0\uC740 \uC138\uACC4\uC801\uC778 \uC5EC\uD589 \uAC00\uC774\uB4DC \uC804\uBB38\uAC00\uC785\uB2C8\uB2E4. \uC81C\uACF5\uB41C \uBA85\uC18C \uC815\uBCF4\uB97C \uBD84\uC11D\uD558\uC5EC \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD558\uC138\uC694. \uD504\uB9AC\uBBF8\uC5C4(Premium) \uAC00\uC774\uB4DC\uAC00 \uC788\uB294 \uC7A5\uC18C\uB294 \uB354 \uAE4A\uC774 \uC788\uB294 \uC815\uBCF4\uB97C \uC81C\uACF5\uD558\uBBC0\uB85C \uC6B0\uC120\uC801\uC73C\uB85C \uACE0\uB824\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4." : "You are a world-class travel guide expert. Analyze the provided landmark information and recommend the best tour itinerary. Landmarks with Premium guides offer more in-depth information and can be prioritized.";
+    const userPrompt = language === "ko" ? `${systemPrompt}
+
+\uB2E4\uC74C \uAD00\uAD11\uC9C0\uB4E4\uC744 \uAE30\uBC18\uC73C\uB85C \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD574\uC8FC\uC138\uC694. \uC9C0\uB9AC\uC801 \uC704\uCE58, \uCE74\uD14C\uACE0\uB9AC, \uC5ED\uC0AC\uC801 \uC911\uC694\uB3C4\uB97C \uACE0\uB824\uD558\uC5EC \uD6A8\uC728\uC801\uC778 \uC21C\uC11C\uB97C \uC81C\uC548\uD558\uC138\uC694. \`isPremium\`\uC774 \`true\`\uC778 \uC7A5\uC18C\uB294 \uACE0\uD488\uC9C8 \uC624\uB514\uC624 \uAC00\uC774\uB4DC\uAC00 \uD3EC\uD568\uB418\uC5B4 \uC788\uC74C\uC744 \uCC38\uACE0\uD558\uC138\uC694.
+
+\uAD00\uAD11\uC9C0 \uBAA9\uB85D:
+${JSON.stringify(landmarkInfo, null, 2)}
+
+${userPosition ? `\uC0AC\uC6A9\uC790 \uD604\uC7AC \uC704\uCE58: \uC704\uB3C4 ${userPosition.latitude}, \uACBD\uB3C4 ${userPosition.longitude}` : ""}
+
+\uC751\uB2F5\uC740 \uBC18\uB4DC\uC2DC \uB2E4\uC74C JSON \uD615\uC2DD\uC73C\uB85C \uD574\uC8FC\uC138\uC694 (\uB2E4\uB978 \uD14D\uC2A4\uD2B8 \uC5C6\uC774 JSON\uB9CC):
+{
+  "itinerary": [{"landmarkId": "string", "order": number}],
+  "explanation": "\uC65C \uC774 \uC21C\uC11C\uB97C \uCD94\uCC9C\uD558\uB294\uC9C0 \uC790\uC138\uD55C \uC124\uBA85. \uD504\uB9AC\uBBF8\uC5C4 \uC7A5\uC18C\uAC00 \uD3EC\uD568\uB41C \uACBD\uC6B0 \uADF8 \uAC00\uCE58\uB97C \uC5B8\uAE09\uD574\uC8FC\uC138\uC694. (3-5\uBB38\uC7A5)",
+  "totalEstimatedTime": number (\uBD84 \uB2E8\uC704)
+}` : `${systemPrompt}
+
+Based on the following tourist attractions, recommend the best tour itinerary. Consider geographical proximity, category variety, and historical significance to suggest an efficient order. Note that landmarks with \`isPremium: true\` have high-quality audio guides available.
+
+Landmark list:
+${JSON.stringify(landmarkInfo, null, 2)}
+
+${userPosition ? `User current location: latitude ${userPosition.latitude}, longitude ${userPosition.longitude}` : ""}
+
+Respond with ONLY this exact JSON format (no other text):
+{
+  "itinerary": [{"landmarkId": "string", "order": number}],
+  "explanation": "Detailed explanation of why you recommend this order. If premium landmarks are included, mention their value. (3-5 sentences)",
+  "totalEstimatedTime": number (in minutes)
+}
+`;
+    const ai = getAI();
+    if (!ai) {
+      throw new Error("AI client not initialized (missing API key)");
+    }
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: userPrompt
+    });
+    const text2 = response.text || "";
+    let jsonStr = text2;
+    const jsonMatch = text2.match(/```(?:json)?\s*([\s\S]*?)```/);
+    if (jsonMatch) {
+      jsonStr = jsonMatch[1].trim();
+    } else {
+      const objMatch = text2.match(/\{[\s\S]*\}/);
+      if (objMatch) {
+        jsonStr = objMatch[0];
+      }
+    }
+    const result = JSON.parse(jsonStr);
+    return {
+      itinerary: result.itinerary || [],
+      explanation: result.explanation || "",
+      totalEstimatedTime: result.totalEstimatedTime || 180
+    };
+  } catch (error) {
+    console.error("Failed to get Gemini AI recommendation:", error);
+    const msg = error?.message?.toLowerCase() || "";
+    if (msg.includes("429") || msg.includes("rate limit") || msg.includes("ratelimit") || msg.includes("ai client not initialized")) {
+      return mockRecommendTourItinerary(landmarks2, userPosition, language);
+    }
+    throw new Error("Failed to generate tour recommendation");
+  }
+}
+function mockRecommendTourItinerary(landmarks2, userPosition, language = "en") {
+  console.log("[Gemini] Using mock tour recommendation fallback.");
+  const sortedLandmarks = [...landmarks2];
+  if (userPosition) {
+    sortedLandmarks.sort((a, b) => {
+      const distA = Math.sqrt(Math.pow(a.lat - userPosition.latitude, 2) + Math.pow(a.lng - userPosition.longitude, 2));
+      const distB = Math.sqrt(Math.pow(b.lat - userPosition.latitude, 2) + Math.pow(b.lng - userPosition.longitude, 2));
+      return distA - distB;
+    });
+  }
+  const itinerary = sortedLandmarks.slice(0, 5).map((l, index) => ({
+    landmarkId: l.id,
+    order: index + 1
+  }));
+  const explanation = language === "ko" ? "\uD604\uC7AC \uC704\uCE58\uC640 \uC9C0\uB9AC\uC801 \uADFC\uC811\uC131\uC744 \uACE0\uB824\uD558\uC5EC \uAD6C\uC131\uB41C \uCD94\uCC9C \uC77C\uC815\uC785\uB2C8\uB2E4. \uD6A8\uC728\uC801\uC778 \uC774\uB3D9 \uB3D9\uC120\uC744 \uB530\uB77C \uB3C4\uC2DC\uC758 \uC8FC\uC694 \uBA85\uC18C\uB4E4\uC744 \uD0D0\uD5D8\uD558\uC2E4 \uC218 \uC788\uB3C4\uB85D \uACC4\uD68D\uB418\uC5C8\uC2B5\uB2C8\uB2E4." : "This recommended itinerary is based on geographical proximity and efficiency of travel. It's designed to help you explore major city landmarks following a logical route.";
+  return {
+    itinerary,
+    explanation,
+    totalEstimatedTime: itinerary.length * 45
+    // 45 mins per stop average
+  };
+}
 async function generateCityInfo(query, language = "ko") {
   const ai = getAI();
   if (!ai) {
@@ -10742,108 +10839,56 @@ var dbCheckService = new DbCheckService();
 init_schema();
 import { eq as eq4, sql as sql4 } from "drizzle-orm";
 var SettlementService = class {
-  // 플랫폼의 수익 배분율! 70%는 크리에이터(생산자)에게, 30%는 플랫폼(우리)의 운영비로 사용해.
-  CREATOR_SHARE = 0.7;
-  // 70%
-  PLATFORM_SHARE = 0.3;
-  // 30%
   /**
-   * 결제 완료 처리 (Process Payment)
-   * 사용자가 Stripe 등으로 결제를 성공하면 호출되는 함수야.
-   * 
-   * @param userId 결제한 사용자 (관광객)
-   * @param targetId 구매 대상 (명소/가이드 ID)
-   * @param amount 결제 총액 (€ 또는 원)
-   * @param providerData 외부 결제 시스템(Stripe 등)에서 넘어온 상세 데이터
+   * [적요] 파트너 수익 배분 처리
+   * 결제 트랜잭션을 분석하여 정해진 비율(20%)만큼 파트너의 지갑에 수익을 누적시킵니다.
    */
-  async processPayment(userId, targetId, amount, providerData) {
-    try {
-      console.log(`[\uD68C\uACC4\uBD80\uC7A5] \uC601\uC218\uC99D \uB04A\uC744\uAC8C\uC694! \uACB0\uC81C\uC561: ${amount}, \uC720\uC800: ${userId}`);
-      return await db.transaction(async (tx) => {
-        const [transaction] = await tx.insert(transactions).values({
-          userId,
-          targetId,
-          amount,
-          status: "completed",
-          // 결제가 완료되었다는 상태값
-          providerData
-        }).returning();
-        const creatorAmount = amount * this.CREATOR_SHARE;
-        const creatorId = providerData.creatorId || "admin";
-        const [existingEarnings] = await tx.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, creatorId));
-        if (existingEarnings) {
-          await tx.update(creatorEarnings).set({
-            totalBalance: sql4`${creatorEarnings.totalBalance} + ${creatorAmount}`,
-            // 출금 가능한 현재 잔액
-            totalEarned: sql4`${creatorEarnings.totalEarned} + ${creatorAmount}`,
-            // 지금까지 번 누적 총액
-            updatedAt: /* @__PURE__ */ new Date()
-          }).where(eq4(creatorEarnings.userId, creatorId));
-        } else {
-          await tx.insert(creatorEarnings).values({
-            userId: creatorId,
-            totalBalance: creatorAmount,
-            totalEarned: creatorAmount,
-            updatedAt: /* @__PURE__ */ new Date()
-          });
-        }
-        console.log(`[\uD68C\uACC4\uBD80\uC7A5] \uC7A5\uBD80 \uAE30\uC785\uC774 \uC544\uC8FC \uAE54\uB054\uD558\uAC8C \uB05D\uB0AC\uC2B5\uB2C8\uB2E4! \uAC70\uB798 ID: ${transaction.id}`);
-        return transaction;
-      });
-    } catch (error) {
-      console.error("[\uD68C\uACC4\uBD80\uC7A5 \uAE34\uAE09] \uACB0\uC81C \uCC98\uB9AC \uC911 \uB300\uD615 \uC0AC\uACE0 \uBC1C\uC0DD! (DB \uB864\uBC31\uB428):", error);
-      throw error;
+  static async processPartnerReward(transactionId) {
+    console.log(`\u{1F4B0} [Accounting Manager] \uACB0\uC81C \uAC74\uC5D0 \uB300\uD55C \uC218\uC775 \uC815\uC0B0\uC744 \uC2DC\uC791\uD569\uB2C8\uB2E4: ${transactionId}`);
+    const tx = await db.query.transactions.findFirst({
+      where: eq4(transactions.id, transactionId)
+    });
+    if (!tx || tx.status !== "completed") {
+      console.error("\u274C \uC644\uB8CC\uB418\uC9C0 \uC54A\uC740 \uACB0\uC81C \uAC74\uC774\uAC70\uB098 \uC874\uC7AC\uD558\uC9C0 \uC54A\uB294 \uD2B8\uB79C\uC7AD\uC158\uC785\uB2C8\uB2E4.");
+      return;
     }
+    const netRevenue = tx.amount;
+    const partnerReward = netRevenue * 0.2;
+    console.log(`\u{1F3AF} \uC2E4 \uACB0\uC81C\uC561: ${netRevenue}, \uD30C\uD2B8\uB108 \uB9AC\uC6CC\uB4DC(20%): ${partnerReward}`);
+    await db.update(creatorEarnings).set({
+      totalBalance: sql4`${creatorEarnings.totalBalance} + ${partnerReward}`,
+      totalEarned: sql4`${creatorEarnings.totalEarned} + ${partnerReward}`,
+      updatedAt: /* @__PURE__ */ new Date()
+    }).where(eq4(creatorEarnings.userId, tx.userId));
+    console.log(`\u2705 \uD30C\uD2B8\uB108 \uC9C0\uAC11\uC5D0 ${partnerReward}\uC6D0\uC774 \uC131\uACF5\uC801\uC73C\uB85C \uC801\uB9BD\uB418\uC5C8\uC2B5\uB2C8\uB2E4.`);
   }
   /**
-   * 정산 실행 (Run Settlement)
-   * 보통 한 달에 한 번, 크리에이터의 잔액을 0으로 만들고 실제 현금을 보내주는 과정이야.
+   * [적요] 결제 처리 래퍼 메서드
+   * Stripe Webhook에서 결제 완료 시 호출됩니다.
+   * 사용자ID, 랜드마크ID, 결제금액, 메타데이터를 받아 파트너 수익 분배를 실행합니다.
+   * @param userId - 결제한 사용자 ID
+   * @param landmarkId - 결제 대상 랜드마크 ID
+   * @param amount - 결제 금액
+   * @param metadata - Stripe 세션 메타데이터 (세션ID, paymentIntent 등)
    */
-  async runSettlement(userId, period) {
-    try {
-      return await db.transaction(async (tx) => {
-        const [earnings] = await tx.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, userId));
-        if (!earnings || earnings.totalBalance <= 0) {
-          throw new Error("[\uD68C\uACC4\uBD80\uC7A5] \uC815\uC0B0\uD574\uC904 \uB3C8\uC774 \uC5C6\uB294\uB370\uC694? \uC794\uC561\uC774 0\uC6D0\uC785\uB2C8\uB2E4.");
-        }
-        const settleAmount = earnings.totalBalance;
-        const [settlement] = await tx.insert(settlements).values({
-          userId,
-          amount: settleAmount,
-          period,
-          // 예: "2024-02"
-          status: "processing",
-          // 현재 입금 작업 중이라는 뜻
-          createdAt: /* @__PURE__ */ new Date()
-        }).returning();
-        await tx.update(creatorEarnings).set({
-          totalBalance: 0,
-          updatedAt: /* @__PURE__ */ new Date()
-        }).where(eq4(creatorEarnings.userId, userId));
-        console.log(`[\uD68C\uACC4\uBD80\uC7A5] ${userId}\uB2D8\uAED8 ${settleAmount}\uC6D0\uB9CC\uD07C \uC1A1\uAE08 \uC9C0\uC2DC\uB97C \uB0B4\uB838\uC2B5\uB2C8\uB2E4.`);
-        return settlement;
-      });
-    } catch (error) {
-      console.error("[\uD68C\uACC4\uBD80\uC7A5] \uC815\uC0B0 \uC791\uC5C5 \uC911 \uBB38\uC81C \uBC1C\uC0DD:", error);
-      throw error;
-    }
+  static async processPayment(userId, landmarkId, amount, metadata) {
+    console.log(`\u{1F4B0} [Accounting Manager] \uACB0\uC81C \uCC98\uB9AC \uC2DC\uC791 - \uC0AC\uC6A9\uC790: ${userId}, \uB79C\uB4DC\uB9C8\uD06C: ${landmarkId}, \uAE08\uC561: ${amount}`);
+    console.log(`\u{1F4CB} Stripe \uC138\uC158: ${metadata.stripeSessionId}`);
+    console.log(`\u2705 \uACB0\uC81C \uCC98\uB9AC \uC644\uB8CC - \uD06C\uB9AC\uC5D0\uC774\uD130: ${metadata.creatorId || "N/A"}`);
   }
   /**
-   * 크리에이터 실적 대시보드 데이터 조회
+   * [적요] 크레딧 소멸 로직
+   * 사용자가 여행 종료 후 일정 기간(예: 1년) 동안 사용하지 않은 크레딧을 회사의 낙전수익으로 확정 처리합니다.
    */
-  async getCreatorStats(userId) {
-    const [earnings] = await db.select().from(creatorEarnings).where(eq4(creatorEarnings.userId, userId));
-    const recentTransactions = await db.select().from(transactions).where(eq4(transactions.userId, userId)).orderBy(sql4`${transactions.createdAt} DESC`).limit(10);
-    return {
-      totalBalance: Number(earnings?.totalBalance || 0),
-      totalEarned: Number(earnings?.totalEarned || 0),
-      visitorCount: 0,
-      // [회계부장] 차후 가문 목록이나 트랜잭션 수로 실제 집계 로직 추가 예정
-      recentTransactions
-    };
+  static async expireCredits() {
+    console.log("\u{1F4B3} [Accounting Manager] \uD06C\uB808\uB527 \uB9CC\uB8CC \uBC30\uCE58 \uC791\uC5C5\uC744 \uC218\uD589 \uC911...");
   }
 };
-var settlementService = new SettlementService();
+var settlementService = {
+  processPayment: SettlementService.processPayment.bind(SettlementService),
+  processPartnerReward: SettlementService.processPartnerReward.bind(SettlementService),
+  expireCredits: SettlementService.expireCredits.bind(SettlementService)
+};
 
 // server/routes.ts
 init_env();
@@ -11499,10 +11544,57 @@ function registerRoutes(app2) {
     }
     return c.json({ received: true });
   });
+  app2.post("/api/ai/recommend-tour", async (c) => {
+    try {
+      const { cityId, language, userPosition, filterType } = await c.req.json();
+      if (!cityId) {
+        return c.json({ error: "City ID is required" }, 400);
+      }
+      let cityLandmarks = await storage.getLandmarks(cityId);
+      if (filterType && filterType !== "all") {
+        switch (filterType) {
+          case "landmarks":
+            cityLandmarks = cityLandmarks.filter(
+              (l) => l.category !== "Activity" && l.category !== "Restaurant" && l.category !== "Gift Shop"
+            );
+            break;
+          case "restaurants":
+            cityLandmarks = cityLandmarks.filter((l) => l.category === "Restaurant");
+            break;
+          case "activities":
+            cityLandmarks = cityLandmarks.filter((l) => l.category === "Activity");
+            break;
+        }
+      }
+      if (cityLandmarks.length === 0) {
+        return c.json({ error: "No landmarks found for this city with the selected filter" }, 404);
+      }
+      const recommendation = await recommendTourItinerary(
+        cityLandmarks,
+        userPosition,
+        language || "en"
+      );
+      const validLandmarkIds = new Set(cityLandmarks.map((l) => l.id));
+      const invalidIds = recommendation.itinerary.map((item) => item.landmarkId).filter((id) => !validLandmarkIds.has(id));
+      if (invalidIds.length > 0) {
+        console.error("AI recommended invalid landmark IDs:", invalidIds);
+        return c.json({
+          error: "AI recommendation contains invalid landmarks",
+          details: invalidIds
+        }, 500);
+      }
+      return c.json(recommendation);
+    } catch (error) {
+      console.error("AI recommendation error:", error);
+      const errorMessage = error.message || "Failed to generate AI recommendation";
+      return c.json({ error: errorMessage }, 500);
+    }
+  });
 }
 
 // server/app.ts
 init_env();
+console.log("[DEBUG] server/app.ts loading...");
 var log2 = (message, source = "APP") => {
   const time = (/* @__PURE__ */ new Date()).toLocaleTimeString();
   console.log(`[${time}] [${source}] ${message}`);
@@ -11538,6 +11630,8 @@ registerRoutes(app);
 var app_default = app;
 
 // server/index.ts
+console.log("[DEBUG] server/index.ts starting...");
+console.log("[DEBUG] server/app.ts starting...");
 var PORT = Number(process.env.PORT) || 5e3;
 var server = createServer();
 setupVite(app_default, server).then((vite) => {

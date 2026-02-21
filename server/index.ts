@@ -2,7 +2,7 @@ console.log("[DEBUG] server/index.ts starting...");
 import { serve, getRequestListener } from "@hono/node-server";
 import { setupVite, log } from "./vite";
 console.log("[DEBUG] server/app.ts starting...");
-import { createServer } from "http";
+import { createServer } from "node:http";
 import app from "./app";
 
 // Note: setupAuthRoutes and registerRoutes are now handled in server/app.ts

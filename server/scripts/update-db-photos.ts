@@ -1,5 +1,4 @@
 
-import "dotenv/config";
 import { db } from "../db";
 import { landmarks as landmarksTable } from "../../shared/schema";
 import { LANDMARKS } from "../data/landmarks";
@@ -62,12 +61,4 @@ export async function updateDbPhotos() {
     }
 
     return { updatedCount, dbOnlyCount: dbMissingInLocal.length };
-}
-
-// 직접 실행 시 (CLI)
-if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('update-db-photos.ts')) {
-    updateDbPhotos().then(() => process.exit(0)).catch((err) => {
-        console.error("🔥 Fatal error during update:", err);
-        process.exit(1);
-    });
 }

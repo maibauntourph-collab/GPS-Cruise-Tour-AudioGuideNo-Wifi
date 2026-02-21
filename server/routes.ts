@@ -1,6 +1,6 @@
 
 import { Hono } from "hono";
-import { type Server } from "http";
+import { type Server } from "node:http";
 import { storage } from "./storage";
 import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers } from "@shared/schema";
 import { zValidator } from "@hono/zod-validator";
@@ -566,8 +566,8 @@ export function registerRoutes(app: Hono<any>) {
       // Read file and stream
       // We need 'fs' and 'path' which we didn't import in this file?
       // Assuming imports are available or use dynamic import/require 
-      const fs = await import("fs");
-      const path = await import("path");
+      const fs = await import("node:fs");
+      const path = await import("node:path");
 
       const filePath = path.join(process.cwd(), result.audioUrl.startsWith('/') ? result.audioUrl.slice(1) : result.audioUrl);
       const audioBuffer = fs.readFileSync(filePath);

@@ -1,13 +1,13 @@
 console.log("[DEBUG] server/vite.ts loading...");
 import { Hono } from "hono";
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { createServer as createViteServer, createLogger, ViteDevServer } from "vite";
-import { type Server } from "http";
+import { type Server } from "node:http";
 import viteConfig from "../vite.config.ts";
 import { nanoid } from "nanoid";
 import { ogService } from "./services/ogService";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { serveStatic as honoServeStatic } from "@hono/node-server/serve-static";
 
 const __filename = fileURLToPath(import.meta.url);
