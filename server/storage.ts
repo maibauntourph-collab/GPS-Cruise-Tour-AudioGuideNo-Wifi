@@ -110,9 +110,10 @@ export class MemStorage implements IStorage {
   }
 
   async getLandmarks(cityId?: string): Promise<Landmark[]> {
-    // Get hardcoded landmarks and restaurants
+    // [연구소장 디버그] 명소 데이터 취득 경로 추적
     const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
     const hardcodedIds = hardcodedLandmarks.map(l => l.id);
+    console.log(`[Storage Debug] Hardcoded landmarks found: ${hardcodedLandmarks.length}`);
 
     // Get additional landmarks from database (ones not in hardcoded data)
     try {
@@ -122,18 +123,23 @@ export class MemStorage implements IStorage {
       } else {
         dbLandmarks = await db.select().from(landmarksTable) as Landmark[];
       }
+      console.log(`[Storage Debug] Database landmarks found (excluding hardcoded): ${dbLandmarks.length}`);
 
       // Combine all sources: hardcoded, memory, and database
       const allLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values()), ...dbLandmarks];
+      console.log(`[Storage Debug] Total combined landmarks: ${allLandmarks.length}`);
 
       if (cityId) {
-        return allLandmarks.filter(landmark => landmark.cityId === cityId);
+        const filtered = allLandmarks.filter(landmark => landmark.cityId === cityId);
+        console.log(`[Storage Debug] Filtered landmarks for city ${cityId}: ${filtered.length}`);
+        return filtered;
       }
       return allLandmarks;
     } catch (error) {
       // If DB query fails, fall back to hardcoded + memory data
-      console.error('[Storage] DB access failed for getLandmarks:', error);
+      console.error('[Storage Error] DB access failed for getLandmarks:', error);
       const fallbackLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values())];
+      console.log(`[Storage Debug] Fallback landmarks: ${fallbackLandmarks.length}`);
       if (cityId) {
         return fallbackLandmarks.filter(landmark => landmark.cityId === cityId);
       }

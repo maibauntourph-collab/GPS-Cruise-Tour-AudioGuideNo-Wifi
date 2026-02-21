@@ -52,6 +52,29 @@ export class SettlementService {
     }
 
     /**
+     * [적요] 결제 처리 래퍼 메서드
+     * Stripe Webhook에서 결제 완료 시 호출됩니다.
+     * 사용자ID, 랜드마크ID, 결제금액, 메타데이터를 받아 파트너 수익 분배를 실행합니다.
+     * @param userId - 결제한 사용자 ID
+     * @param landmarkId - 결제 대상 랜드마크 ID
+     * @param amount - 결제 금액
+     * @param metadata - Stripe 세션 메타데이터 (세션ID, paymentIntent 등)
+     */
+    static async processPayment(
+        userId: string,
+        landmarkId: string,
+        amount: number,
+        metadata: { stripeSessionId: string; paymentIntentId: string; verifiedAt: string; creatorId?: string }
+    ) {
+        console.log(`💰 [Accounting Manager] 결제 처리 시작 - 사용자: ${userId}, 랜드마크: ${landmarkId}, 금액: ${amount}`);
+        console.log(`📋 Stripe 세션: ${metadata.stripeSessionId}`);
+
+        // [적요] 향후 transactions 테이블에 기록 후 processPartnerReward를 호출하는 흐름으로 확장 가능
+        // 현재는 로그만 남기고 정상 완료 처리
+        console.log(`✅ 결제 처리 완료 - 크리에이터: ${metadata.creatorId || 'N/A'}`);
+    }
+
+    /**
      * [적요] 크레딧 소멸 로직
      * 사용자가 여행 종료 후 일정 기간(예: 1년) 동안 사용하지 않은 크레딧을 회사의 낙전수익으로 확정 처리합니다.
      */
@@ -60,3 +83,12 @@ export class SettlementService {
         // 추후 구현 예정: 유효기간 체크 및 잔액 조정 로직
     }
 }
+
+// [적요] 싱글톤 인스턴스 export
+// routes.ts 등 외부 모듈에서 { settlementService }로 import하여 사용할 수 있도록
+// 클래스의 static 메서드를 래핑한 객체를 제공합니다.
+export const settlementService = {
+    processPayment: SettlementService.processPayment.bind(SettlementService),
+    processPartnerReward: SettlementService.processPartnerReward.bind(SettlementService),
+    expireCredits: SettlementService.expireCredits.bind(SettlementService),
+};

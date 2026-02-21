@@ -8,7 +8,7 @@ import { z } from "zod";
 import { requireAuth, requireRole } from "./auth";
 import { db } from "./db";
 import { eq, desc, sql, and } from "drizzle-orm";
-import { generateCityInfo } from "./lib/gemini";
+import { generateCityInfo, recommendTourItinerary } from "./lib/gemini";
 import { automationService } from "./services/automationService";
 import { dbCheckService } from "./services/dbCheckService";
 import { settlementService } from "./services/settlementService";
@@ -843,6 +843,72 @@ export function registerRoutes(app: Hono<any>) {
       return c.text(`Webhook Error: ${err.message}`, 400);
     }
     return c.json({ received: true });
+  });
+
+  // [적요: AI 투어 추천 API]
+  // 사용자가 선택한 도시와 카테고리 필터를 기반으로 AI가 최적의 관광 경로를 추천합니다.
+  // Gemini API를 활용하여 랜드마크 조합과 순서를 지능적으로 결정합니다.
+  app.post("/api/ai/recommend-tour", async (c) => {
+    try {
+      const { cityId, language, userPosition, filterType } = await c.req.json();
+
+      if (!cityId) {
+        return c.json({ error: "City ID is required" }, 400);
+      }
+
+      // [적요] 도시별 랜드마크 목록 조회
+      let cityLandmarks = await storage.getLandmarks(cityId);
+
+      // [적요] 카테고리 필터 적용 (전체/명소/맛집/액티비티)
+      if (filterType && filterType !== 'all') {
+        switch (filterType) {
+          case 'landmarks':
+            cityLandmarks = cityLandmarks.filter(l =>
+              l.category !== 'Activity' &&
+              l.category !== 'Restaurant' &&
+              l.category !== 'Gift Shop'
+            );
+            break;
+          case 'restaurants':
+            cityLandmarks = cityLandmarks.filter(l => l.category === 'Restaurant');
+            break;
+          case 'activities':
+            cityLandmarks = cityLandmarks.filter(l => l.category === 'Activity');
+            break;
+        }
+      }
+
+      if (cityLandmarks.length === 0) {
+        return c.json({ error: "No landmarks found for this city with the selected filter" }, 404);
+      }
+
+      // [적요] Gemini AI를 통한 최적 투어 코스 생성
+      const recommendation = await recommendTourItinerary(
+        cityLandmarks,
+        userPosition,
+        language || 'en'
+      );
+
+      // [적요] AI가 추천한 랜드마크 ID 유효성 검증
+      const validLandmarkIds = new Set(cityLandmarks.map(l => l.id));
+      const invalidIds = recommendation.itinerary
+        .map(item => item.landmarkId)
+        .filter(id => !validLandmarkIds.has(id));
+
+      if (invalidIds.length > 0) {
+        console.error('AI recommended invalid landmark IDs:', invalidIds);
+        return c.json({
+          error: "AI recommendation contains invalid landmarks",
+          details: invalidIds
+        }, 500);
+      }
+
+      return c.json(recommendation);
+    } catch (error: any) {
+      console.error('AI recommendation error:', error);
+      const errorMessage = error.message || "Failed to generate AI recommendation";
+      return c.json({ error: errorMessage }, 500);
+    }
   });
 
   // Static files for uploads (if not handled by Vite/Nginx)

@@ -12,7 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from '@/components/ui/alert-dialog';
-import MapView from '@/components/MapView';
+import MapView, { resetMapInteraction } from '@/components/MapView';
 import UnifiedFloatingCard from '@/components/UnifiedFloatingCard';
 import MenuDialog from '@/components/MenuDialog';
 import OfflineIndicator from '@/components/OfflineIndicator';
@@ -45,9 +45,9 @@ import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/li
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
 import { getMatchedCityId, findNearestLandmark } from '@/lib/locationService';
-import { LANDING_DATA } from '@/lib/landingData';
+import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
-import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, ZoomIn } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -91,6 +91,8 @@ export default function Home() {
   const [simulatedPosition, setSimulatedPosition] = useState<{ latitude: number; longitude: number } | null>(null);
   const [simulationSpeed, setSimulationSpeed] = useState(1); // 1x, 5x, 10x
   const [simulationStepIndex, setSimulationStepIndex] = useState(0);
+  // [적요] QR코드 설치 공유 다이얼로그 표시 상태
+  const [showQrDialog, setShowQrDialog] = useState(false);
 
   // 🛰️ [Server Park] 통합 위치 정보 (가상 또는 실제)
   const effectivePosition = isSimulationMode ? simulatedPosition : position;
@@ -196,8 +198,82 @@ export default function Home() {
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
   const [showTourOnly, setShowTourOnly] = useState(false);
 
-  // 🎖️ [Dodari] 시퀀스 정합성 절대 보장을 위한 락(Lock) 상태
-  const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
+  // [연구소장 가이드: 신규 기능 상태 정의]
+  // 학생 여러분, 사용자의 요구사항을 반영하기 위해 몇 가지 중요한 상태를 추가합니다.
+  // 1. isNavigationOnlyMode: 불필요한 설명을 끄고 지도에 집중하는 모드
+  // 2. isCarNavZoomMode: 자동차 내비게이션처럼 초근접 줌을 활성화하는 모드
+  // 3. simulationAudioSettings: 시뮬레이션 중 오디오 재생 관련 옵션
+  const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
+  const [isCarNavZoomMode, setIsCarNavZoomMode] = useState(false);
+  const [simulationAudioSettings, setSimulationAudioSettings] = useState({
+    resumePlayback: true,    // 이전 위치에서 이어 듣기
+    playInBackground: true   // 창을 닫아도 계속 듣기
+  });
+
+  // [연구소장 가이드: 백그라운드 자동 가이드 상태]
+  // 학생 여러분, 경로가 없어도 주변 명소를 안내해주는 '친절한 가이드' 기능을 위해 
+  // 사용자의 동의 여부를 저장하는 상태를 추가합니다.
+  const [isBackgroundGuideEnabled, setIsBackgroundGuideEnabled] = useState<boolean | null>(() => {
+    const saved = localStorage.getItem('background_guide_enabled');
+    return saved ? JSON.parse(saved) : null; // null이면 아직 결정 안 함 (팝업 띄우기)
+  });
+  const [showBackgroundGuideDialog, setShowBackgroundGuideDialog] = useState(false);
+
+  // 🛰️ [Server Park] 백그라운드 자동 가이드 팝업 트리거
+  useEffect(() => {
+    if (isBackgroundGuideEnabled === null && isWelcomeHandled) {
+      const timer = setTimeout(() => setShowBackgroundGuideDialog(true), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isBackgroundGuideEnabled, isWelcomeHandled]);
+
+  const handleSetBackgroundGuide = (enabled: boolean) => {
+    setIsBackgroundGuideEnabled(enabled);
+    localStorage.setItem('background_guide_enabled', JSON.stringify(enabled));
+    setShowBackgroundGuideDialog(false);
+    toast({
+      title: enabled
+        ? (selectedLanguage === 'ko' ? '자동 가이드 활성화' : 'Auto Guide Enabled')
+        : (selectedLanguage === 'ko' ? '자동 가이드 비활성화' : 'Auto Guide Disabled'),
+      description: enabled
+        ? (selectedLanguage === 'ko' ? '경로가 없어도 주변 명소 정보를 알려드립니다.' : 'I will tell you about nearby spots even without a route.')
+        : (selectedLanguage === 'ko' ? '설정에서 언제든 다시 켤 수 있습니다.' : 'You can enable it anytime in settings.')
+    });
+  };
+
+  // 🛰️ [Server Park] 백그라운드 자동 가이드 핵심 로직
+  // [적요] 경로가 없더라도( !activeRoute ) 백그라운드 가이드가 켜져 있으면
+  // 주변 100m 이내의 명소를 찾아 자동으로 설명을 들려줍니다.
+  useEffect(() => {
+    if (!effectivePosition || !isBackgroundGuideEnabled || activeRoute) return;
+
+    // 이미 말한 랜드마크는 중복 재생 방지
+    const nearby = landmarks.find(landmark => {
+      if (spokenLandmarks.has(landmark.id)) return false;
+      const distance = calculateDistance(
+        effectivePosition.latitude,
+        effectivePosition.longitude,
+        landmark.lat,
+        landmark.lng
+      );
+      return distance <= 0.1; // 100m 이내
+    });
+
+    if (nearby) {
+      const name = getTranslatedContent(nearby, selectedLanguage, 'name');
+      const desc = getTranslatedContent(nearby, selectedLanguage, 'description');
+
+      console.log(`[Auto Guide] Found nearby landmark: ${name}`);
+
+      // 말하기 시작
+      setSpokenLandmarks(prev => new Set(prev).add(nearby.id));
+      setSelectedLandmark(nearby);
+
+      if (audioEnabled) {
+        audioService.playAuto(nearby.id, desc, selectedLanguage);
+      }
+    }
+  }, [effectivePosition, isBackgroundGuideEnabled, activeRoute, landmarks, spokenLandmarks, selectedLanguage, audioEnabled]);
 
   // [디자이너 킴의 매직 UI 상태]
   const { language } = useLanguage();
@@ -237,6 +313,10 @@ export default function Home() {
   const [showStartupDialog, setShowStartupDialog] = useState<boolean>(false);
   const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
   const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
+  // [적요: InstallPrompt(웰컴 화면) 완료 여부를 추적하는 상태]
+  // 학생 여러분, 이 변수가 true가 되어야만 StartupDialog와 BackgroundGuide 팝업이 순차적으로 띄워집니다.
+  // InstallPrompt의 onClose 콜백에서 setIsWelcomeHandled(true)가 호출됩니다.
+  const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
 
   // 🎖️ [Dodari] 앱 진입 후 InstallPrompt(웰컴)를 위한 짧은 대기 후 StartupDialog 노출 여부 결정
   // 🎖️ [Dodari] 앱 진입 후 InstallPrompt(웰컴) 완료 후 시퀀스 시작
@@ -520,44 +600,103 @@ export default function Home() {
   };
 
   // 🛰️ [Server Park] 가상 투어 시뮬레이션 엔진 로직
+  // [적요] 두 랜드마크 사이를 부드럽게 보간(lerp)하여 실제 이동하는 것처럼
+  // 지도에 표시합니다. 200ms 간격으로 좌표를 업데이트하여 자연스러운 이동 구현.
   useEffect(() => {
     if (!isSimulationMode || !tourStops.length) {
       if (!isSimulationMode) setSimulatedPosition(null);
       return;
     }
 
-    console.log(`🚀 [Simulation] Starting/Resuming Virtual Tour. Speed: ${simulationSpeed}x`);
+    console.log("[Simulation] Starting Virtual Tour. Speed:", simulationSpeed, "x");
 
-    // 시뮬레이션 시작 시 첫 번째 포인트로 이동
-    if (!simulatedPosition && tourStops[simulationStepIndex]) {
-      const start = tourStops[simulationStepIndex];
-      setSimulatedPosition({ latitude: start.lat, longitude: start.lng });
+    // [적요] 시뮬레이션 시작 시 첫 번째 정류장 선택 및 설명 표시
+    const startStop = tourStops[simulationStepIndex];
+    if (startStop) {
+      setSimulatedPosition({ latitude: startStop.lat, longitude: startStop.lng });
+      setSelectedLandmark(startStop);
     }
 
+    let progress = 0;
+    const segmentDurationMs = 8000 / simulationSpeed;
+    const pauseDurationMs = 5000 / simulationSpeed;
+    const updateIntervalMs = 200;
+    const progressStep = updateIntervalMs / segmentDurationMs;
+    let currentFromIndex = simulationStepIndex;
+    // [적요] isPaused: 정류장 도착 후 정차 중 (설명 읽는 시간)
+    let isPaused = true;
+    let pauseElapsed = 0;
+
     const intervalId = setInterval(() => {
-      setSimulationStepIndex(prevIndex => {
-        const nextIndex = (prevIndex + 1) % tourStops.length;
-        const target = tourStops[nextIndex];
+      if (isPaused) {
+        // [적요] 정류장에 정차 중 - 설명 카드를 읽을 시간 확보
+        pauseElapsed += updateIntervalMs;
+        if (pauseElapsed >= pauseDurationMs) {
+          isPaused = false;
+          pauseElapsed = 0;
+          progress = 0;
+          // [적요] 마지막 정류장이면 시뮬레이션 종료 (루핑 방지)
+          if (currentFromIndex >= tourStops.length - 1) {
+            console.log("[Simulation] Tour complete!");
+            clearInterval(intervalId);
+            return;
+          }
+        }
+        return;
+      }
 
-        console.log(`🚶 [Simulation] Moving to next checkpoint: ${getTranslatedContent(target, selectedLanguage, 'name')}`);
-        setSimulatedPosition({ latitude: target.lat, longitude: target.lng });
+      progress += progressStep;
 
-        return nextIndex;
-      });
-    }, 8000 / simulationSpeed); // 속도에 맞춰 좌표 변경
+      if (progress >= 1) {
+        // [적요] 다음 정류장 도착 -> 자동 선택하여 설명 카드 표시
+        currentFromIndex = currentFromIndex + 1;
+        setSimulationStepIndex(currentFromIndex);
+        const arrivedAt = tourStops[currentFromIndex];
+        if (arrivedAt) {
+          console.log("[Simulation] Arrived at:", getTranslatedContent(arrivedAt, selectedLanguage, "name"));
+          setSimulatedPosition({ latitude: arrivedAt.lat, longitude: arrivedAt.lng });
+          // [적요] 도착한 랜드마크를 자동 선택 -> 설명 카드가 화면에 표시됨
+          setSelectedLandmark(arrivedAt);
+        }
+        // [적요] 도착 후 정차 모드로 전환
+        isPaused = true;
+        pauseElapsed = 0;
+        progress = 0;
+        return;
+      }
+
+      // [적요] 현재 출발점과 다음 도착점 사이의 좌표를 선형 보간(lerp)
+      const fromStop = tourStops[currentFromIndex];
+      const toStop = tourStops[currentFromIndex + 1];
+      if (fromStop && toStop) {
+        const lat = fromStop.lat + (toStop.lat - fromStop.lat) * progress;
+        const lng = fromStop.lng + (toStop.lng - fromStop.lng) * progress;
+        setSimulatedPosition({ latitude: lat, longitude: lng });
+      }
+    }, updateIntervalMs);
 
     return () => clearInterval(intervalId);
   }, [isSimulationMode, tourStops, simulationSpeed, selectedLanguage]);
 
   // 🛰️ [Server Park] 실시간 랜드마크 근접 감지 및 자동 안내 효과
+  // [적요] lastProximityCheckRef: 마지막 proximity 검사 시각을 기록하여 2초 throttle 구현
+  const lastProximityCheckRef = useRef<number>(0);
+
   useEffect(() => {
     if (!effectivePosition || !audioEnabled || !landmarks.length || offlineMode) return;
+
+    // [적요] 2초 throttle — 매 GPS 업데이트마다 345개 랜드마크를 순회하면
+    // 저사양 기기에서 랙이 발생할 수 있으므로, 2초에 1번만 검사합니다.
+    const now = Date.now();
+    if (now - lastProximityCheckRef.current < 2000) return;
+    lastProximityCheckRef.current = now;
 
     const nearest = findNearestLandmark(
       effectivePosition.latitude,
       effectivePosition.longitude,
       landmarks,
-      spokenLandmarks // 이미 안내된 곳은 제외
+      spokenLandmarks, // 이미 안내된 곳은 제외
+      (effectivePosition as any).accuracy || 0 // GPS 정확도를 전달하여 동적 반경 계산
     );
 
     if (nearest) {
@@ -565,7 +704,7 @@ export default function Home() {
       const name = getTranslatedContent(landmark, selectedLanguage, 'name');
       const description = getTranslatedContent(landmark, selectedLanguage, 'description');
 
-      console.log(`🎯 [Proximity] Landmark Detected: ${name} (${Math.round(distance)}m)`);
+      console.log(`🎯 [Proximity] Landmark Detected: ${name} (${Math.round(distance)}m, accuracy: ${Math.round((effectivePosition as any).accuracy || 0)}m)`);
 
       // 자동 재생 트리거
       audioService.playAuto(
@@ -948,6 +1087,46 @@ export default function Home() {
         isGpsLoading={isLoading}
       />
 
+      {/* [연구소장 가이드: 백그라운드 가이드 안내 팝업]
+          학생 여러분, 사용자의 편의를 위해 먼저 물어보고 기능을 켜는 것이 'UX의 정석'입니다. */}
+      <Dialog open={showBackgroundGuideDialog} onOpenChange={setShowBackgroundGuideDialog}>
+        <DialogContent className="sm:max-w-md bg-gradient-to-br from-indigo-50 to-white dark:from-slate-900 dark:to-slate-950 border-none shadow-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-xl font-bold text-indigo-700 dark:text-indigo-400">
+              <Navigation2 className="w-6 h-6 animate-pulse" />
+              {selectedLanguage === 'ko' ? '스마트 가이드 모드' : 'Smart Guide Mode'}
+            </DialogTitle>
+            <DialogDescription className="pt-2 text-base leading-relaxed">
+              {selectedLanguage === 'ko'
+                ? '목적지를 설정하지 않아도, 주변 랜드마크를 지나갈 때 자동으로 오디오 가이드를 들으시겠습니까?'
+                : 'Would you like to hear audio guides automatically when passing nearby landmarks, even without a set destination?'}
+              <br />
+              <span className="text-sm text-muted-foreground mt-2 inline-block">
+                {selectedLanguage === 'ko'
+                  ? '※ 백그라운드에서도 GPS 기능을 사용하여 가이드를 지속합니다.'
+                  : '※ Uses GPS in the background to continue providing guidance.'}
+              </span>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 py-4">
+            <Button
+              onClick={() => handleSetBackgroundGuide(true)}
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold h-12 rounded-xl shadow-lg shadow-indigo-200 dark:shadow-indigo-900/20"
+            >
+              <Activity className="mr-2 w-5 h-5" />
+              {selectedLanguage === 'ko' ? '네, 자동으로 들을래요!' : 'Yes, I want auto guides!'}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => handleSetBackgroundGuide(false)}
+              className="w-full h-12 rounded-xl border-gray-200 dark:border-gray-800"
+            >
+              {selectedLanguage === 'ko' ? '필요할 때만 직접 켤게요' : 'I will turn it on manually'}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <MenuDialog
         isOpen={showMenu}
         onClose={() => setShowMenu(false)}
@@ -1059,6 +1238,39 @@ export default function Home() {
               <p>{selectedLanguage === 'ko' ? '명소 목록 표시/숨기기' : 'Show/Hide Landmark List'}</p>
             </TooltipContent>
           </Tooltip>
+
+          {/* [적요] 내 위치로 이동 버튼 — GPS 위치가 있을 때만 표시 */}
+          {position && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 gap-1 px-2"
+                  onClick={() => {
+                    // [적요] resetMapInteraction()을 호출하여 userHasInteracted 플래그를 리셋하면
+                    // MapUpdater가 자동으로 사용자의 GPS 위치로 지도 중심을 이동합니다.
+                    resetMapInteraction();
+                    toast({
+                      description: selectedLanguage === 'ko'
+                        ? '📍 내 위치로 이동합니다'
+                        : '📍 Moving to your location',
+                      duration: 2000,
+                    });
+                  }}
+                  data-testid="button-recenter-gps"
+                >
+                  <Navigation2 className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline text-xs">
+                    {selectedLanguage === 'ko' ? '내 위치' : 'My Location'}
+                  </span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '내 위치로 지도 이동' : 'Move map to my location'}</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
 
           {/* Starting/End Point Selector */}
           <Popover open={isStartingPointPopoverOpen} onOpenChange={(open) => {
@@ -1896,6 +2108,23 @@ export default function Home() {
                 학생 여러분, 이곳이 바로 플랫폼의 주요 기능을 모아놓은 '유틸리티 섹션'입니다.
                 크리에이터들이 자주 확인해야 하는 통계 페이지로의 입구를 여기에 배치했습니다.
                 TrendingUp 아이콘을 사용하여 '수익과 성장'의 의미를 담았죠. */}
+            {/* [적요] QR코드 설치 공유 버튼 - 클릭 시 앱 설치 QR코드 다이얼로그 표시 */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-8 w-8 sm:h-9 sm:w-9 border-purple-300/50 bg-purple-50 hover:bg-purple-100 dark:border-purple-600/30 dark:bg-purple-900/20 dark:hover:bg-purple-900/40"
+                  onClick={() => setShowQrDialog(true)}
+                  data-testid="button-qr-install"
+                >
+                  <QrCode className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 dark:text-purple-400" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? 'QR코드로 앱 설치/공유' : 'Install/Share via QR Code'}</p>
+              </TooltipContent>
+            </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -1910,6 +2139,38 @@ export default function Home() {
               </TooltipTrigger>
               <TooltipContent>
                 <p>{selectedLanguage === 'ko' ? '크리에이터 센터 (수익 확인)' : 'Creator Center (Earnings)'}</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={isNavigationOnlyMode ? "default" : "outline"}
+                  size="icon"
+                  className={`h-8 w-8 sm:h-9 sm:w-9 border-amber-300/50 ${isNavigationOnlyMode ? 'bg-amber-500 hover:bg-amber-600 text-white border-none' : 'bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/20 dark:hover:bg-amber-900/40'}`}
+                  onClick={() => setIsNavigationOnlyMode(!isNavigationOnlyMode)}
+                  data-testid="button-nav-only-mode"
+                >
+                  <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '설명 없이 지도만 보기' : 'Map Only (Hide Descriptions)'}</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={isCarNavZoomMode ? "default" : "outline"}
+                  size="icon"
+                  className={`h-8 w-8 sm:h-9 sm:w-9 border-blue-300/50 ${isCarNavZoomMode ? 'bg-blue-600 hover:bg-blue-700 text-white border-none' : 'bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/40'}`}
+                  onClick={() => setIsCarNavZoomMode(!isCarNavZoomMode)}
+                  data-testid="button-car-nav-zoom"
+                >
+                  <ZoomIn className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{selectedLanguage === 'ko' ? '카 내비게이션 줌 (초근접)' : 'Car Nav Zoom (Close-up)'}</p>
               </TooltipContent>
             </Tooltip>
             <Tooltip>
@@ -2047,7 +2308,7 @@ export default function Home() {
           >
             <MapView
               landmarks={filteredLandmarks}
-              userPosition={position}
+              userPosition={effectivePosition}
               onLandmarkRoute={handleLandmarkRoute}
               activeRoute={activeRoute}
               onRouteFound={setRouteInfo}
@@ -2055,6 +2316,7 @@ export default function Home() {
               cityZoom={selectedCity?.zoom}
               selectedLanguage={selectedLanguage}
               isCompact={false}
+              isSimulationMode={isSimulationMode}
               sidebarOpen={false}
               tourStops={tourStops}
               onAddToTour={handleAddToTour}
@@ -2101,6 +2363,7 @@ export default function Home() {
               showTourOnly={showTourOnly}
               tourStopIds={tourStops.map(s => s.id)}
               isMobile={isMobile}
+              isCarNavZoomMode={isCarNavZoomMode} // [추가] 카 내비 줌 버튼 상태 전달
             />
 
             {/* Tour Filter Button - next to zoom controls */}
@@ -2154,21 +2417,20 @@ export default function Home() {
                 className="absolute top-4 left-1/2 -translate-x-1/2 z-[2000] animate-in fade-in slide-in-from-top-4 duration-500"
                 style={{ pointerEvents: 'auto' }}
               >
-                <Card className="p-2 sm:p-3 bg-red-600/90 text-white border-none shadow-xl flex items-center gap-3 sm:gap-4 backdrop-blur-md">
-                  <div className="flex items-center gap-2 pr-3 border-r border-white/20">
+                <Card className="p-2 sm:p-3 bg-red-600/95 text-white border-none shadow-xl flex items-center gap-2 sm:gap-4 backdrop-blur-md">
+                  <div className="flex items-center gap-2 pr-2 sm:pr-3 border-r border-white/20">
                     <div className="w-2 h-2 bg-white rounded-full animate-ping" />
-                    <span className="text-xs font-bold uppercase tracking-wider hidden sm:inline">Simulation</span>
-                    <span className="text-xs font-bold sm:hidden">Sim...</span>
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">Simulating</span>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
                     <div className="flex bg-white/10 rounded-md p-0.5">
                       {[1, 5, 10].map(speed => (
                         <Button
                           key={speed}
                           variant="ghost"
                           size="sm"
-                          className={`h-7 px-2 text-[10px] font-bold ${simulationSpeed === speed ? 'bg-white text-red-600' : 'text-white hover:bg-white/20'}`}
+                          className={`h-6 px-1.5 sm:px-2 text-[10px] font-bold ${simulationSpeed === speed ? 'bg-white text-red-600' : 'text-white hover:bg-white/20'}`}
                           onClick={() => setSimulationSpeed(speed)}
                         >
                           {speed}x
@@ -2177,7 +2439,41 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 border-l border-white/20 pl-3">
+                  {/* 🛰️ [Server Park] 신규 오디오 제어 옵션 */}
+                  <div className="flex items-center gap-1 sm:gap-2 border-l border-white/20 pl-2 sm:pl-3">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className={`h-7 w-7 sm:h-8 sm:w-8 ${simulationAudioSettings.resumePlayback ? 'bg-white/20' : 'opacity-40'}`}
+                          onClick={() => setSimulationAudioSettings(prev => ({ ...prev, resumePlayback: !prev.resumePlayback }))}
+                        >
+                          <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{selectedLanguage === 'ko' ? '이전 위치에서 오디오 이어 듣기' : 'Resume audio from last position'}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className={`h-7 w-7 sm:h-8 sm:w-8 ${simulationAudioSettings.playInBackground ? 'bg-white/20' : 'opacity-40'}`}
+                          onClick={() => setSimulationAudioSettings(prev => ({ ...prev, playInBackground: !prev.playInBackground }))}
+                        >
+                          <AudioIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{selectedLanguage === 'ko' ? '설명창 닫아도 백그라운드 재생' : 'Play audio in background'}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+
+                  <div className="flex items-center gap-2 border-l border-white/20 pl-2 sm:pl-3">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -2194,89 +2490,71 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Unified Floating Card */}
-      <UnifiedFloatingCard
-        forceShowList={forceShowCard}
-        isCardMinimized={isCardMinimized}
-        onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
-        selectedLandmark={selectedLandmark}
-        onLandmarkClose={() => setSelectedLandmark(null)}
-        onNavigate={handleLandmarkRoute}
-        onAddToTour={handleAddToTour}
-        isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
-        city={selectedCity || null}
-        showCruisePort={showCruisePort}
-        onCruisePortClose={() => setShowCruisePort(false)}
-        tourStops={tourStops}
-        tourRouteInfo={tourRouteInfo}
-        onRemoveTourStop={(landmarkId) => {
-          setTourStops(tourStops.filter(stop => stop.id !== landmarkId));
-          setTourStopDurations(prev => {
-            const updated = { ...prev };
-            delete updated[landmarkId];
-            return updated;
-          });
-        }}
-        tourTimePerStop={tourTimePerStop}
-        tourStopDurations={tourStopDurations}
-        onUpdateStopDuration={handleUpdateStopDuration}
-        onSaveRoute={() => setShowSaveRouteDialog(true)}
-        onOpenMyRoutes={() => window.location.href = '/my-routes'}
-        aiRecommendation={aiRecommendation}
-        onLandmarkClick={(landmarkId) => {
-          const landmark = filteredLandmarks.find(l => l.id === landmarkId);
-          if (landmark) {
-            // Clear any existing timeout
-            if (cruisePortTimeoutRef.current) {
-              clearTimeout(cruisePortTimeoutRef.current);
-            }
-
-            // Use flushSync to immediately update state before rendering
-            flushSync(() => {
-              setKeepCruisePortVisible(true);
+      {/* [연구소장 가이드: 내비게이션 전용 모드 적용]
+          학생 여러분, isNavigationOnlyMode가 켜져 있다면
+          사용자에게 지도만 보여주기 위해 설명 패널(UnifiedFloatingCard)을 렌더링하지 않습니다.
+          단, 오디오는 뒤에서 계속 나오고 있어야 하겠죠! */}
+      {!isNavigationOnlyMode && (
+        <UnifiedFloatingCard
+          forceShowList={forceShowCard}
+          isCardMinimized={isCardMinimized}
+          onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
+          selectedLandmark={selectedLandmark}
+          onLandmarkClose={() => setSelectedLandmark(null)}
+          onNavigate={handleLandmarkRoute}
+          onAddToTour={handleAddToTour}
+          isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
+          city={selectedCity || null}
+          showCruisePort={showCruisePort}
+          onCruisePortClose={() => setShowCruisePort(false)}
+          tourStops={tourStops}
+          tourRouteInfo={tourRouteInfo}
+          onRemoveTourStop={(landmarkId) => {
+            setTourStops(tourStops.filter(stop => stop.id !== landmarkId));
+            setTourStopDurations(prev => {
+              const updated = { ...prev };
+              delete updated[landmarkId];
+              return updated;
             });
-
-            // Now set selected landmark
-            setSelectedLandmark(landmark);
-
-            // Start the 2-second countdown
-            cruisePortTimeoutRef.current = setTimeout(() => {
-              setKeepCruisePortVisible(false);
-              cruisePortTimeoutRef.current = null;
-            }, 2000);
-          }
-        }}
-        landmarks={filteredLandmarks}
-        userPosition={effectivePosition}
-        onLandmarkRoute={handleLandmarkRoute}
-        spokenLandmarks={spokenLandmarks}
-        onLandmarkSelect={setSelectedLandmark}
-        showLandmarks={showLandmarks}
-        showActivities={showActivities}
-        showRestaurants={showRestaurants}
-        showGiftShops={showGiftShops}
-        onToggleLandmarks={handleToggleLandmarks}
-        onToggleActivities={handleToggleActivities}
-        onToggleRestaurants={handleToggleRestaurants}
-        onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
-        selectedLanguage={selectedLanguage}
-        departureTime={departureTime}
-        startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type, name: startingPoint.name } : null}
-        endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type, name: endPoint.name } : null}
-        onOpenStartEndPointDialog={() => {
-          toast({
-            title: selectedLanguage === 'ko' ? '출발/도착 설정 필요' : 'Start/End Point Required',
-            description: selectedLanguage === 'ko'
-              ? '사이드바에서 출발지와 도착지를 먼저 설정해주세요'
-              : 'Please set your start and end points in the sidebar first',
-            variant: 'destructive'
-          });
-        }}
-        capturedRouteImage={capturedRouteImage}
-        onClearCapturedImage={() => setCapturedRouteImage(null)}
-        isSimulationMode={isSimulationMode}
-        onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
-      />
+          }}
+          tourTimePerStop={tourTimePerStop}
+          tourStopDurations={tourStopDurations}
+          onUpdateStopDuration={handleUpdateStopDuration}
+          onSaveRoute={() => setShowSaveRouteDialog(true)}
+          onOpenMyRoutes={() => window.location.href = '/my-routes'}
+          aiRecommendation={aiRecommendation}
+          onLandmarkClick={(landmarkId) => {
+            const landmark = filteredLandmarks.find(l => l.id === landmarkId);
+            if (landmark) {
+              // Now set selected landmark
+              setSelectedLandmark(landmark);
+            }
+          }}
+          landmarks={landmarks}
+          userPosition={effectivePosition}
+          onLandmarkRoute={handleLandmarkRoute}
+          onLandmarkSelect={setSelectedLandmark}
+          spokenLandmarks={spokenLandmarks}
+          showLandmarks={showLandmarks}
+          showActivities={showActivities}
+          showRestaurants={showRestaurants}
+          showGiftShops={showGiftShops}
+          onToggleLandmarks={handleToggleLandmarks}
+          onToggleActivities={handleToggleActivities}
+          onToggleRestaurants={handleToggleRestaurants}
+          onToggleGiftShops={handleToggleGiftShops}
+          selectedLanguage={selectedLanguage}
+          departureTime={departureTime}
+          startingPoint={startingPoint ? { lat: startingPoint.lat, lng: startingPoint.lng, type: startingPoint.type, name: startingPoint.name } : null}
+          endPoint={endPoint ? { lat: endPoint.lat, lng: endPoint.lng, type: endPoint.type, name: endPoint.name } : null}
+          onOpenStartEndPointDialog={() => setIsStartingPointPopoverOpen(true)}
+          capturedRouteImage={capturedRouteImage}
+          onClearCapturedImage={() => setCapturedRouteImage(null)}
+          isSimulationMode={isSimulationMode}
+          onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
+          playInBackground={simulationAudioSettings.playInBackground}
+        />
+      )}
 
       {/* Bottom Sheet - Mobile Only */}
       {isMobile && (
@@ -2474,7 +2752,8 @@ export default function Home() {
             </div>
           }
         />
-      )}
+      )
+      }
 
       {/* Google Maps Direction Choice Dialog */}
       <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
@@ -2682,7 +2961,16 @@ export default function Home() {
                     </Button>
                     <Button
                       variant="ghost"
-                      className="w-full h-12 rounded-xl text-slate-400 hover:text-primary font-bold transition-colors hover:bg-primary/5"
+                      className="w-full h-12 rounded-xl text-slate-400 hover:text-primary font-bold transition-colors hover:bg-primary/5 flex items-center justify-center gap-2"
+                      onClick={() => setShowQrDialog(true)}
+                    >
+                      <QrCode className="w-4 h-4" />
+                      {language === 'ko' ? 'QR코드로 앱 설치/공유' : 'Install/Share via QR Code'}
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      className="w-full h-12 rounded-xl text-slate-400 hover:text-slate-600 font-bold transition-colors hover:bg-slate-100"
                       onClick={() => setLandingCityId(null)}
                     >
                       {language === 'ko' ? '천천히 둘러볼게요' : 'Maybe Later'}
@@ -2692,6 +2980,66 @@ export default function Home() {
               </div>
             );
           })()}
+        </DialogContent>
+      </Dialog>
+
+      {/* [적요] QR코드 설치/공유 다이얼로그 */}
+      <Dialog open={showQrDialog} onOpenChange={setShowQrDialog}>
+        <DialogContent className="max-w-sm mx-auto">
+          <div className="flex flex-col items-center gap-4 py-4">
+            <div className="flex items-center gap-2 text-purple-600 dark:text-purple-400">
+              <QrCode className="h-6 w-6" />
+              <h2 className="text-lg font-bold">
+                {selectedLanguage === 'ko' ? '앱 설치 / 공유' : 'Install / Share App'}
+              </h2>
+            </div>
+            <p className="text-sm text-muted-foreground text-center">
+              {selectedLanguage === 'ko'
+                ? '아래 QR코드를 스캔하거나 링크를 공유하여 앱을 설치하세요'
+                : 'Scan the QR code or share the link to install the app'}
+            </p>
+            {/* [적요] QR코드 이미지 — qrserver.com API를 활용하여 현재 URL로 QR 이미지 생성 */}
+            <div className="bg-white p-4 rounded-2xl shadow-lg border">
+              <img
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin : '')}`}
+                alt="QR Code for app install"
+                className="w-48 h-48"
+                loading="lazy"
+              />
+            </div>
+            <div className="text-xs text-muted-foreground font-mono bg-muted px-3 py-1.5 rounded-lg max-w-full truncate">
+              {typeof window !== 'undefined' ? window.location.origin : ''}
+            </div>
+            <div className="flex gap-2 w-full">
+              <Button
+                variant="outline"
+                className="flex-1 gap-2"
+                onClick={() => {
+                  if (navigator.clipboard) {
+                    navigator.clipboard.writeText(window.location.origin);
+                    toast({ title: selectedLanguage === 'ko' ? '복사됨!' : 'Copied!', description: selectedLanguage === 'ko' ? '링크가 클립보드에 복사되었습니다.' : 'Link copied to clipboard.' });
+                  }
+                }}
+              >
+                <Download className="h-4 w-4" />
+                {selectedLanguage === 'ko' ? '링크 복사' : 'Copy Link'}
+              </Button>
+              <Button
+                className="flex-1 gap-2 bg-purple-600 hover:bg-purple-700"
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({ title: 'GPS Tour Guide', url: window.location.origin });
+                  } else {
+                    navigator.clipboard?.writeText(window.location.origin);
+                    toast({ title: selectedLanguage === 'ko' ? '공유됨!' : 'Shared!' });
+                  }
+                }}
+              >
+                <Share2 className="h-4 w-4" />
+                {selectedLanguage === 'ko' ? '공유하기' : 'Share'}
+              </Button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </>

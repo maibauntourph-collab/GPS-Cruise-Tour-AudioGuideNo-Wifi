@@ -24,6 +24,15 @@ export function useGeoLocation(enabled: boolean = true) {
 
     const watchId = navigator.geolocation.watchPosition(
       (pos) => {
+        // [적요] GPS 정확도 필터링:
+        // accuracy가 100m 초과인 경우 부정확한 GPS 신호로 판단하여 무시합니다.
+        // 이를 통해 실내, 터널, 고층 빌딩 사이 등에서 잘못된 랜드마크 트리거를 방지합니다.
+        if (pos.coords.accuracy > 100) {
+          console.log(`⚠️ [GPS] 정확도 낮음: ${Math.round(pos.coords.accuracy)}m — 위치 업데이트 무시`);
+          setIsLoading(false);
+          return;
+        }
+
         setPosition({
           latitude: pos.coords.latitude,
           longitude: pos.coords.longitude,
@@ -39,8 +48,10 @@ export function useGeoLocation(enabled: boolean = true) {
       },
       {
         enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0,
+        // [적요] timeout: 15초 — 터널/실내 등 GPS가 느린 환경 대응
+        timeout: 15000,
+        // [적요] maximumAge: 3초 — 최근 3초 이내 캐시된 위치를 재사용하여 배터리 절약
+        maximumAge: 3000,
       }
     );
 

@@ -99,36 +99,25 @@ const userLocationIcon = L.divIcon({
   html: `
     <div style="
       background-color: hsl(142, 71%, 45%);
-      width: 20px;
-      height: 20px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      border: 4px solid white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      border: 3px solid white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
     ">
-      <div style="
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 40px;
-        height: 40px;
-        border: 2px solid hsl(142, 71%, 45%);
-        border-radius: 50%;
-        opacity: 0.3;
-        animation: pulse 2s ease-in-out infinite;
-      "></div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.45.06.19.08.4.08.61a5.49 5.49 0 0 1-1.91 4.12c.43.75.69 1.61.81 2.52a15.44 15.44 0 0 1-1.25 7.45c-.56 1.31-1.69 2.35-3.08 2.8s-2.8.19-3.84-.46c-.3-.2-.6-.44-.88-.73-.28.29-.58.53-.88.73-1.04.65-2.45.91-3.84.46s-2.52-1.49-3.08-2.8a15.44 15.44 0 0 1-1.25-7.45c.12-.91.38-1.77.81-2.52a5.49 5.49 0 0 1-1.91-4.12c0-.21.02-.42.08-.61 1.39-.39 4.64.45 6.42 2.45.65-.17 1.33-.26 2-.26Z"/>
+        <path d="M9 14h.01"/>
+        <path d="M15 14h.01"/>
+      </svg>
     </div>
-    <style>
-      @keyframes pulse {
-        0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
-        50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.2; }
-        100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
-      }
-    </style>
   `,
-  iconSize: [20, 20],
-  iconAnchor: [10, 10],
+  iconSize: [36, 36],
+  iconAnchor: [18, 18],
 });
 
 // Flag icon for selected landmark
@@ -163,17 +152,17 @@ const selectedFlagIcon = L.divIcon({
         transform-origin: left center;
       ">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin: 2px 7px;">
-          <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+          <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z" />
         </svg>
       </div>
+      <style>
+        @keyframes flagWave {
+          0%, 100% { transform: rotate(0deg) skewX(0deg); }
+          25% { transform: rotate(2deg) skewX(-2deg); }
+          75% { transform: rotate(-2deg) skewX(2deg); }
+        }
+      </style>
     </div>
-    <style>
-      @keyframes flagWave {
-        0%, 100% { transform: rotate(0deg) skewX(0deg); }
-        25% { transform: rotate(2deg) skewX(-2deg); }
-        75% { transform: rotate(-2deg) skewX(2deg); }
-      }
-    </style>
   `,
   iconSize: [40, 50],
   iconAnchor: [4, 50],
@@ -276,6 +265,12 @@ function RoutingMachine({ start, end, onRouteFound }: RoutingMachineProps) {
 // 전역 플래그: 사용자가 맵을 직접 조작했는지 추적
 let userHasInteracted = false;
 
+// [적요] 외부(Home.tsx 등)에서 지도를 사용자 GPS 위치로 다시 중심 맞추기 위한 리셋 함수입니다.
+// '내 위치로 이동' 버튼 클릭 시 이 함수를 호출하면 MapUpdater가 자동으로 GPS 위치를 추적합니다.
+export function resetMapInteraction() {
+  userHasInteracted = false;
+}
+
 // 사용자 인터랙션 추적 컴포넌트
 function UserInteractionTracker() {
   useMapEvents({
@@ -289,25 +284,28 @@ function UserInteractionTracker() {
   return null;
 }
 
-function MapUpdater({ position }: { position: GpsPosition | null }) {
+// [적요] 시뮬레이션 모드에서는 네비게이션처럼 줌인(16)하고 자동 추적
+function UserLocationUpdater({ position, isCarNavZoomMode }: { position: GpsPosition | null; isCarNavZoomMode?: boolean }) {
   const map = useMap();
   const previousPositionRef = useRef<GpsPosition | null>(null);
 
   useEffect(() => {
-    // If position was null and now is set (GPS turned on), reset interaction flag
-    // This ensures the map centers on the user when they enable GPS
     if (!previousPositionRef.current && position) {
       userHasInteracted = false;
     }
     previousPositionRef.current = position;
 
-    // 사용자가 맵을 조작한 후에는 자동 이동하지 않음
-    if (position && !userHasInteracted) {
-      map.setView([position.latitude, position.longitude], map.getZoom(), {
+    if (position && userHasInteracted === false) {
+      // 🛰️ [Server Park] 카 내비 줌 모드일 경우 초근접(18), 아니면 내비 기본(16)
+      const targetZoom = isCarNavZoomMode ? 18 : 16;
+      const navZoom = Math.max(map.getZoom(), targetZoom);
+
+      map.setView([position.latitude, position.longitude], navZoom, {
         animate: true,
+        duration: 0.3,
       });
     }
-  }, [position, map]);
+  }, [position, map, isCarNavZoomMode]);
 
   return null;
 }
@@ -434,6 +432,8 @@ interface MapViewProps {
   showTourOnly?: boolean;
   tourStopIds?: string[];
   isMobile?: boolean;
+  isSimulationMode?: boolean;
+  isCarNavZoomMode?: boolean;
 }
 
 // 이전 도시 중심 좌표를 저장하여 실제 도시 변경 시에만 뷰 업데이트
@@ -444,7 +444,7 @@ function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: numbe
 
   useEffect(() => {
     if (center && zoom) {
-      const centerKey = `${center[0]},${center[1]}`;
+      const centerKey = `${center[0]},${center[1]} `;
       // 도시가 실제로 변경되었을 때만 뷰 업데이트
       if (centerKey !== previousCityCenter) {
         previousCityCenter = centerKey;
@@ -650,6 +650,8 @@ export default function MapView({
   showTourOnly = false,
   tourStopIds = [] as string[],
   isMobile = false,
+  isSimulationMode = false,
+  isCarNavZoomMode = false,
 }: MapViewProps) {
   const landmarkIcon = createCustomIcon('hsl(14, 85%, 55%)'); // Terracotta for landmarks
   const activityIcon = createCustomIcon('hsl(210, 85%, 55%)'); // Blue for activities
@@ -773,7 +775,7 @@ export default function MapView({
       dragging={true}
     >
       <UserInteractionTracker />
-      <MapUpdater position={userPosition} />
+      <UserLocationUpdater position={userPosition} isCarNavZoomMode={isCarNavZoomMode} />
       <CityUpdater center={cityCenter} zoom={cityZoom} />
       <MapResizer isCompact={isCompact} sidebarOpen={sidebarOpen} />
       <SelectedLandmarkUpdater landmark={selectedLandmark || null} isMobile={!!isMobile} />
@@ -813,7 +815,7 @@ export default function MapView({
 
           return (
             <Marker
-              key={`${landmark.id}-${isSelected ? 'selected' : isInTour ? 'intour' : 'normal'}`}
+              key={`${landmark.id} -${isSelected ? 'selected' : isInTour ? 'intour' : 'normal'} `}
               position={[landmark.lat, landmark.lng]}
               icon={icon}
               ref={(marker) => {
@@ -857,7 +859,7 @@ export default function MapView({
                 permanent={true}
                 direction={tooltipDirection as "top" | "bottom"}
                 offset={tooltipOffset}
-                className={`clickable-tooltip ${isHighlighted ? 'selected-landmark-tooltip' : 'landmark-tooltip'}`}
+                className={`clickable - tooltip ${isHighlighted ? 'selected-landmark-tooltip' : 'landmark-tooltip'} `}
                 interactive={true}
               >
                 <div
@@ -890,12 +892,21 @@ export default function MapView({
                     borderRadius: '4px',
                     whiteSpace: 'nowrap',
                   }}
-                  data-testid={`tooltip-landmark-${landmark.id}`}
+                  data-testid={`tooltip - landmark - ${landmark.id} `}
                 >
                   {isInTour && (
                     <span style={{ marginRight: '4px' }}>#{tourStops.findIndex(s => s.id === landmark.id) + 1}</span>
                   )}
                   {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                  {/* [적요] 사용자 GPS 위치가 있으면 랜드마크까지의 거리를 표시합니다 */}
+                  {userPosition && (
+                    <span style={{ marginLeft: '4px', opacity: 0.7, fontSize: '10px' }}>
+                      {(() => {
+                        const dist = calculateDistance(userPosition.latitude, userPosition.longitude, landmark.lat, landmark.lng);
+                        return dist < 1000 ? `${Math.round(dist)} m` : `${(dist / 1000).toFixed(1)} km`;
+                      })()}
+                    </span>
+                  )}
                 </div>
               </Tooltip>
             </Marker>
@@ -932,20 +943,20 @@ export default function MapView({
         <Marker
           position={[startingPoint.lat, startingPoint.lng]}
           icon={L.divIcon({
-            html: `<div data-testid="marker-starting-point" style="
-              background: ${startingPoint.type === 'airport' ? '#0ea5e9' : startingPoint.type === 'cruise_terminal' ? '#14b8a6' : startingPoint.type === 'hotel' ? '#a855f7' : '#22c55e'};
-              width: 32px;
-              height: 32px;
-              border-radius: 50%;
-              border: 3px solid white;
-              box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              color: white;
-              font-size: 14px;
-              font-weight: bold;
-            ">S</div>`,
+            html: `< div data - testid="marker-starting-point" style = "
+background: ${startingPoint.type === 'airport' ? '#0ea5e9' : startingPoint.type === 'cruise_terminal' ? '#14b8a6' : startingPoint.type === 'hotel' ? '#a855f7' : '#22c55e'};
+width: 32px;
+height: 32px;
+border - radius: 50 %;
+border: 3px solid white;
+box - shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+display: flex;
+align - items: center;
+justify - content: center;
+color: white;
+font - size: 14px;
+font - weight: bold;
+">S</div>`,
             className: 'starting-point-marker',
             iconSize: [32, 32],
             iconAnchor: [16, 16],
@@ -964,15 +975,16 @@ export default function MapView({
               </div>
             </div>
           </Popup>
-        </Marker>
+        </Marker >
       )}
 
       {/* End Point Marker */}
-      {endPoint && endPoint.lat && endPoint.lng && (
-        <Marker
-          position={[endPoint.lat, endPoint.lng]}
-          icon={L.divIcon({
-            html: `<div data-testid="marker-end-point" style="
+      {
+        endPoint && endPoint.lat && endPoint.lng && (
+          <Marker
+            position={[endPoint.lat, endPoint.lng]}
+            icon={L.divIcon({
+              html: `<div data-testid="marker-end-point" style="
               background: ${endPoint.type === 'airport' ? '#0ea5e9' : endPoint.type === 'cruise_terminal' ? '#14b8a6' : endPoint.type === 'hotel' ? '#a855f7' : '#ef4444'};
               width: 32px;
               height: 32px;
@@ -986,36 +998,39 @@ export default function MapView({
               font-size: 14px;
               font-weight: bold;
             ">E</div>`,
-            className: 'end-point-marker',
-            iconSize: [32, 32],
-            iconAnchor: [16, 16],
-          })}
-        >
-          <Popup>
-            <div className="text-sm font-medium">
-              {selectedLanguage === 'ko' ? '도착지' : 'End Point'}
-              <div className="text-xs text-muted-foreground mt-1">
-                {endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                  endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
-                    endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                      endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
-                        endPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
-                          (selectedLanguage === 'ko' ? '도착지' : 'End')}
+              className: 'end-point-marker',
+              iconSize: [32, 32],
+              iconAnchor: [16, 16],
+            })}
+          >
+            <Popup>
+              <div className="text-sm font-medium">
+                {selectedLanguage === 'ko' ? '도착지' : 'End Point'}
+                <div className="text-xs text-muted-foreground mt-1">
+                  {endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                    endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
+                      endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                        endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                          endPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
+                            (selectedLanguage === 'ko' ? '도착지' : 'End')}
+                </div>
               </div>
-            </div>
-          </Popup>
-        </Marker>
-      )}
+            </Popup>
+          </Marker>
+        )
+      }
 
       {/* Selected Landmark Flag Marker */}
-      {selectedLandmark && (
-        <Marker
-          position={[selectedLandmark.lat, selectedLandmark.lng]}
-          icon={selectedFlagIcon}
-          interactive={false}
-        />
-      )}
+      {
+        selectedLandmark && (
+          <Marker
+            position={[selectedLandmark.lat, selectedLandmark.lng]}
+            icon={selectedFlagIcon}
+            interactive={false}
+          />
+        )
+      }
 
-    </MapContainer>
+    </MapContainer >
   );
 }

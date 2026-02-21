@@ -99,6 +99,7 @@ interface UnifiedFloatingCardProps {
   // 🛰️ Simulation props
   isSimulationMode?: boolean;
   onToggleSimulation?: () => void;
+  playInBackground?: boolean;
 }
 
 import { useQuery } from '@tanstack/react-query';
@@ -269,7 +270,8 @@ export default function UnifiedFloatingCard({
   selectedRegionalGuideId = null,
   onRegionalGuideChange,
   isSimulationMode = false,
-  onToggleSimulation
+  onToggleSimulation,
+  playInBackground = true
 }: UnifiedFloatingCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -447,10 +449,14 @@ export default function UnifiedFloatingCard({
   // Stop audio when landmark changes or component unmounts
   useEffect(() => {
     return () => {
-      audioService.stop();
-      setIsPlaying(false);
+      // [연구소장 가이드] 학생 여러분, 백그라운드 재생이 활성화되어 있다면 
+      // 창이 닫혀도 오디오를 멈추지 않는 것이 핵심입니다.
+      if (!playInBackground) {
+        audioService.stop();
+        setIsPlaying(false);
+      }
     };
-  }, [selectedLandmark?.id]);
+  }, [selectedLandmark?.id, playInBackground]);
 
   useEffect(() => {
     audioService.stop();
