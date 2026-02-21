@@ -25,7 +25,7 @@ import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import LoginDialog from '@/components/LoginDialog';
 import SaveRouteDialog from '@/components/SaveRouteDialog';
 import CreatorDashboard from '@/components/CreatorDashboard';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 
 /**
  * [강의 노트: Phase 2 확장의 핵심]
