@@ -5,11 +5,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2 } from 'lucide-react';
+import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search } from 'lucide-react';
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
-import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl } from '@/lib/affiliateConfig';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl } from '@/lib/affiliateConfig';
 import { useQuery } from '@tanstack/react-query';
 import { User, DbLandmarkGuide } from '@shared/schema';
 import { Users, Headphones, Check } from 'lucide-react';
@@ -320,6 +320,51 @@ export default function LandmarkDetailDialog({
                         {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                         {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
                       </Button>
+
+                      {/* [연구소장 가이드] 대표님, 여기 관광청, 위키, 검색 버튼을 추가했습니다! */}
+                      <div className="flex items-center gap-1 border-l pl-2 ml-1">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 px-2 gap-1.5 text-xs text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                          onClick={() => {
+                            const website = landmark.reservationUrl;
+                            const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            if (website) {
+                              window.open(website, '_blank', 'noopener,noreferrer');
+                            } else {
+                              window.open(getGoogleSearchUrl(name + ' 공식 홈페이지'), '_blank', 'noopener,noreferrer');
+                            }
+                          }}
+                        >
+                          <Globe className="w-3.5 h-3.5" />
+                          {selectedLanguage === 'ko' ? '관광청' : 'Official'}
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 px-2 gap-1.5 text-xs text-gray-600 hover:bg-gray-100"
+                          onClick={() => {
+                            const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            window.open(getWikiUrl(name, selectedLanguage), '_blank', 'noopener,noreferrer');
+                          }}
+                        >
+                          <BookOpen className="w-3.5 h-3.5" />
+                          {selectedLanguage === 'ko' ? '백과' : 'Wiki'}
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 px-2 gap-1.5 text-xs text-gray-600 hover:bg-gray-100"
+                          onClick={() => {
+                            const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                            window.open(getGoogleSearchUrl(name), '_blank', 'noopener,noreferrer');
+                          }}
+                        >
+                          <Search className="w-3.5 h-3.5" />
+                          {selectedLanguage === 'ko' ? '검색' : 'Search'}
+                        </Button>
+                      </div>
                       {isPlaying && audioService.getAudioMode() !== 'clova' && (
                         <select
                           value={playbackRate}

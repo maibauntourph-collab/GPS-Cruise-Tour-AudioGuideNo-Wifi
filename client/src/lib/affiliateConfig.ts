@@ -114,3 +114,19 @@ export const getTripUrl = (searchQuery: string) => {
     }
     return url.toString();
 };
+
+/**
+ * Generates a Google Search link for a landmark
+ */
+export const getGoogleSearchUrl = (query: string) => {
+    return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+};
+
+/**
+ * Generates a Wikipedia link for a landmark
+ */
+export const getWikiUrl = (query: string, lang: string = 'ko') => {
+    // [연구소장 가이드] 위키백과는 언어별 서브도메인을 사용하므로 lang 값을 반영합니다.
+    const wikiLang = lang === 'en' ? 'en' : lang === 'ja' ? 'ja' : lang === 'zh' ? 'zh' : 'ko';
+    return `https://${wikiLang}.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(query)}`;
+};

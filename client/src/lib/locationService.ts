@@ -101,7 +101,6 @@ export function getMatchedCityId(lat: number, lng: number, cities: any[] = []): 
  * @param landmarks - 검색 대상 랜드마크 배열
  * @param excludeIds - 이미 안내된 랜드마크 ID 집합 (중복 안내 방지)
  * @param gpsAccuracy - GPS 정확도(미터). 이 값이 클수록 감지 반경이 소폭 확대됩니다.
- *   예) accuracy=20m → 유효 반경 = radius + 10m, accuracy=50m → 유효 반경 = radius + 25m (최대 +30m)
  */
 export function findNearestLandmark(
     userLat: number,
@@ -113,16 +112,13 @@ export function findNearestLandmark(
     let nearest: ProximityResult | null = null;
     let minDistance = Infinity;
 
+    // [적요] GPS 오차를 고려한 보정값 계산 (최대 30m 제한)
+    const accuracyBonus = Math.min(gpsAccuracy * 0.5, 30);
+
     for (const landmark of landmarks) {
         if (excludeIds.has(landmark.id)) continue;
 
         const distance = calculateDistance(userLat, userLng, landmark.lat, landmark.lng);
-
-        // [적요] GPS 정확도를 고려한 동적 감지 반경:
-        // 기본 radius에 GPS 오차(accuracy)의 절반을 더해서 '실제 유효 반경'을 계산합니다.
-        // 단, 무한정 늘어나는 것을 막기 위해 최대 보정값은 30m로 제한합니다.
-        // 예) radius=50m, accuracy=40m → effectiveRadius = 50 + 20 = 70m
-        const accuracyBonus = Math.min(gpsAccuracy * 0.5, 30);
         const effectiveRadius = (landmark.radius || 50) + accuracyBonus;
 
         if (distance <= effectiveRadius && distance < minDistance) {
@@ -131,11 +127,15 @@ export function findNearestLandmark(
         }
     }
 
+    if (nearest) {
+        console.log(`📡 [GPS] Nearest landmark found: ${nearest.landmark.id} (Distance: ${Math.round(nearest.distance)}m, Radius: ${nearest.landmark.radius}m, Bonus: ${Math.round(accuracyBonus)}m)`);
+    }
+
     return nearest;
 }
+
 /**
  * [Server Park] 현재 위치에서 가장 가까운 미방문 랜드마크를 찾는 래퍼 함수입니다.
- * implementation_plan_gps.md의 요구사항에 맞춰 findNearestLandmark를 호출합니다.
  */
 export function checkProximity(
     userLat: number,

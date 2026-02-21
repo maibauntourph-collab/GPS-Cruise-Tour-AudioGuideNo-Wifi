@@ -171,7 +171,7 @@ export class AudioService {
   private getLangCode(language: string): string {
     const langMap: { [key: string]: string } = {
       'en': 'en-US',
-      'es': 'es-ES',  // Spanish - Spain (prioritize European Spanish for quality)
+      'es': 'es-ES',
       'fr': 'fr-FR',
       'de': 'de-DE',
       'it': 'it-IT',
@@ -199,23 +199,19 @@ export class AudioService {
     return langMap[language] || 'en-US';
   }
 
-  // Get all possible language codes for broader voice selection (especially for Spanish)
+  // Get all possible language codes for broader voice selection
   private getLanguageVariants(langCode: string): string[] {
     const baseLang = langCode.split('-')[0];
 
-    // Spanish has many regional variants with high-quality voices
-    if (baseLang === 'es') {
-      return [
-        'es-ES',  // Spain (Castilian) - often highest quality
-        'es-MX',  // Mexico - very natural neural voices
-        'es-US',  // US Spanish - good quality
-        'es-AR',  // Argentina
-        'es-CO',  // Colombia
-        langCode  // Original requested code
-      ];
-    }
+    // Priority regional variants for quality
+    const variants: { [key: string]: string[] } = {
+      'es': ['es-ES', 'es-MX', 'es-US', 'es-AR', 'es-CO'],
+      'en': ['en-US', 'en-GB', 'en-AU', 'en-IN'],
+      'zh': ['zh-CN', 'zh-HK', 'zh-TW'],
+      'pt': ['pt-PT', 'pt-BR'],
+    };
 
-    return [langCode];
+    return variants[baseLang] || [langCode];
   }
 
   // Find the best voice for the given language (prioritize natural/premium voices)
@@ -360,6 +356,11 @@ export class AudioService {
     this.synthesis.cancel();
     this.currentUtterance = null;
 
+    // Check if native voice exists, if not, warn or suggest fallback
+    if (!this.hasNativeVoice(language)) {
+      console.warn(`[AudioService] Native voice missing for ${language}. Guidance may be suboptimal.`);
+    }
+
     this.playbackTimer = setTimeout(() => {
       this.currentUtterance = new SpeechSynthesisUtterance(text);
       const langCode = this.getLangCode(language);
@@ -468,19 +469,37 @@ export class AudioService {
       });
 
       // 2. Try to unlock HTML Audio if element exists
-      // Using a slightly more robust "silent" sound that browsers recognize as active
-      // Using 0.001 volume instead of 0 as some devices ignore 0 volume streams
+      // Using a more robust context-based silent sound for mobile browsers
+      const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
+      if (AudioContextClass) {
+        const audioCtx = new AudioContextClass();
+        // Create an empty buffer
+        const buffer = audioCtx.createBuffer(1, 1, 22050);
+        const source = audioCtx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioCtx.destination);
+
+        // Start and stop immediately to activate context
+        if (source.start) {
+          source.start(0);
+        } else if ((source as any).noteOn) {
+          (source as any).noteOn(0);
+        }
+
+        console.log('[AudioService] ✅ Web Audio Context unlocked');
+      }
+
       const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
       silentAudio.volume = 0.001;
 
       await silentAudio.play()
         .then(() => {
           this.isUnlocked = true;
-          console.log('[AudioService] ✅ Audio engine unlocked successfully via HTML Audio');
+          console.log('[AudioService] ✅ HTML Audio engine unlocked successfully via Silent Data URI');
         })
         .catch(err => {
           console.warn('[AudioService] ⚠️ HTML Audio unlock failed, but proceeding with Web Speech:', err);
-          // Still mark as unlocked if we got this far, as Web Speech is our primary
+          // Still mark as unlocked if we got this far
           this.isUnlocked = true;
         });
 

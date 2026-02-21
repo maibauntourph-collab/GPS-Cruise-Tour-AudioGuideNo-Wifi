@@ -30,8 +30,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 
 /**
  * [강의 노트: Phase 2 확장 핵심]
- * 학생 여러분 새로운 기능 추가는 愿?⑤맂 而댄룷?뚰듃瑜?癒쇱? 정확히 불러오는 寃껋씠 湲곕낯?낅땲
- * ?곕━媛 留뚮뱺 CreatorDashboard? ?대? 媛먯? ?덉씠?댁씤 Dialog瑜ш린?꾪룷?명뻽?듬땲
+ * 학생 여러분 새로운 기능 추가는 관련된 컴포넌트를 먼저 정확히 불러오는 것이 기본입니다
+ * 우리가 만든 CreatorDashboard 및 이미 검증된 레이아웃인 Dialog를 임포트했습니다
  */
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { useToast } from '@/hooks/use-toast';
@@ -74,9 +74,9 @@ export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
     // Check localStorage first, then default to Korean
     const savedLanguage = localStorage.getItem('selected-language');
-    const finalLanguage = savedLanguage || 'ko'; // 湲곕낯媛? ?쒓뎅
+    const finalLanguage = savedLanguage || 'ko'; // 기본값: 한국어
 
-    console.log('?뱷 Language initialization:', {
+    console.log('🌐 Language initialization:', {
       savedLanguage,
       finalLanguage,
       source: savedLanguage ? 'localStorage' : 'default (Korean)'
@@ -86,14 +86,14 @@ export default function Home() {
   });
   const [offlineMode, setOfflineMode] = useState(false);
 
-  // ?[Server Park] 媛?ъ뼱 ?쒕덉씠?곹깭
+  // 🛰️ [Server Park] 가상 투어 시뮬레이션 상태
   const [isSimulationMode, setIsSimulationMode] = useState(false);
   const [simulatedPosition, setSimulatedPosition] = useState<{ latitude: number; longitude: number } | null>(null);
   const [simulationSpeed, setSimulationSpeed] = useState(1); // 1x, 5x, 10x
   const [simulationStepIndex, setSimulationStepIndex] = useState(0);
   const [showQrDialog, setShowQrDialog] = useState(false);
 
-  // ?[Server Park] ?듯빀 ?꾩튂 ?뺣낫 (媛?먮뒗 ?ㅼ젣)
+  // 🛰️ [Server Park] 통합 위치 정보 (가상이든 실제든)
   const effectivePosition = isSimulationMode ? simulatedPosition : position;
 
   const [isMobile, setIsMobile] = useState(() =>
@@ -187,47 +187,47 @@ export default function Home() {
   const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showSaveRouteDialog, setShowSaveRouteDialog] = useState(false);
-  // ?[Server Park] 紐⑹쟻吏 ?꾩갑 湲곕컲 UI ?쒖뼱瑜꾪븳 ?곹깭
+  // 🛰️ [Server Park] 목적지 도착 기반 UI 제어를 위한 상태
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [hasTriggeredArrivalNarration, setHasTriggeredArrivalNarration] = useState<string | null>(null);
 
-  // [강의 노트: ?덈줈?꾨찓?몄쓽 ?깆옣]
-  // ?щ윭遺? ?щ━?먯씠紐⑤뱶瑜?耳쒓퀬 ?덈뒗 '?ㅼ쐞移?媛 ?섎굹 ?꾩슂?섍쿋二?
-  // showCreatorDashboard ?곹깭瑜듯빐 ??쒕낫?ㅼ씠?쇰줈洹몄쓽 媛?쒖꽦?쒖뼱?⑸땲
+  // [강의 노트: 새로운 메뉴의 등장]
+  // 여러분, 시뮬레이션 모드를 켜고 끄는 '스위치'가 하나 필요하겠죠?
+  // showCreatorDashboard 상태를 통해 대시보드 다이얼로그의 가시성을 제어합니다
   const [showCreatorDashboard, setShowCreatorDashboard] = useState(false);
   const [selectedRegionalGuideId, setSelectedRegionalGuideId] = useState<string | null>(null);
   const [capturedRouteImage, setCapturedRouteImage] = useState<string | null>(null);
   const [isCapturingRoute, setIsCapturingRoute] = useState(false);
   const [showTourOnly, setShowTourOnly] = useState(false);
 
-  // [?곌뎄?뚯옣 媛?대뱶: ?좉퇋 湲곕뒫 ?곹깭 ?뺤쓽]
-  // 학생 여러분 ?ъ슜?먯쓽 ?붽뎄?ы빆諛섏쁺?섍린 ?꾪빐 紐?媛吏 以묒슂?곹깭瑜?異붽⑸땲
-  // 1. isNavigationOnlyMode: 遺덊븘?뷀븳 ?ㅻ챸?꾧퀬 吏?꾩뿉 吏묒쨷?섎뒗 紐⑤뱶
-  // 2. isCarNavZoomMode: ?먮룞李대퉬寃뚯씠?섏쿂珥덇렐以뚯쓣 ?쒖꽦?뷀븯紐⑤뱶
-  // 3. simulationAudioSettings: ?쒕덉씠以ㅻ뵒?ъ깮 愿?듭뀡
+  // [연구소장 가이드: 신규 기능 상태 정의]
+  // 학생 여러분, 사용자의 요구사항을 반영하기 위해 몇 가지 중요 상태를 추가합니다
+  // 1. isNavigationOnlyMode: 불필요한 설명을 끄고 지도에 집중하는 모드
+  // 2. isCarNavZoomMode: 자동차 네비게이션처럼 초근접 줌을 활성화하는 모드
+  // 3. simulationAudioSettings: 시뮬레이션 시 재생 관련 옵션
   const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
   const [isCarNavZoomMode, setIsCarNavZoomMode] = useState(false);
   const [simulationAudioSettings, setSimulationAudioSettings] = useState({
-    resumePlayback: true,    // ?댁쟾 ?꾩튂?먯꽌 ?댁뼱 ?ｊ린
-    playInBackground: true   // 李쎌쓣 ?レ븘怨꾩냽 ?ｊ린
+    resumePlayback: true,    // 이전 위치에서 이어 듣기
+    playInBackground: true   // 창을 닫아도 계속 듣기
   });
 
-  // [?곌뎄?뚯옣 媛?대뱶: 諛깃렇?쇱슫?먮룞 媛?대뱶 ?곹깭]
-  // 학생 여러분 寃쎈줈媛 ?놁뼱二쇰? 紐낆냼瑜덈궡?댁＜'移쒖젅媛?대뱶' 湲곕뒫?꾪빐 
-  // ?ъ슜?먯쓽 ?숈쓽 ?щ?瑜?ν븯?곹깭瑜?異붽⑸땲
+  // [연구소장 가이드: 백그라운드 자동 가이드 상태]
+  // 학생 여러분, 경로가 없더라도 주변 명소를 안내해주는 '친절한 가이드' 기능을 위해 
+  // 사용자의 동의 여부를 저장하는 상태를 추가합니다
   const [isBackgroundGuideEnabled, setIsBackgroundGuideEnabled] = useState<boolean | null>(() => {
     const saved = localStorage.getItem('background_guide_enabled');
-    return saved ? JSON.parse(saved) : null; // null?대㈃ ?꾩쭅 寃곗젙 (?앹뾽 ?꾩슦湲?
+    return saved ? JSON.parse(saved) : null; // null이면 아직 결정 안 함 (팝업 띄우기)
   });
   const [showBackgroundGuideDialog, setShowBackgroundGuideDialog] = useState(false);
-  // [?곸슂: InstallPrompt(?곗뺨 ?붾㈃) ?꾨즺 ?щ?瑜?異붿쟻?섎뒗 ?곹깭]
-  // 蹂?섍? true媛 ?섏뼱StartupDialog? BackgroundGuide ?앹뾽?쒖감?곸쑝濡꾩썙吏묐땲
+  // [중요: InstallPrompt(웰컴 화면) 완료 여부를 추적하는 상태]
+  // 이 변수가 true가 되어야 StartupDialog와 BackgroundGuide 팝업이 순차적으로 나옵니다
   const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
 
-  // ?[Server Park] ?대룞 以?UI 理쒖냼?곹깭
+  // 🛰️ [Server Park] 이동 중 UI 최소화 상태
   const [showMinimalTransitUI, setShowMinimalTransitUI] = useState(true);
 
-  // ?[Server Park] 諛깃렇?쇱슫?먮룞 媛?대뱶 ?앹뾽 ?몃━嫄?
+  // 🛰️ [Server Park] 백그라운드 자동 가이드 팝업 트리거
   useEffect(() => {
     if (isBackgroundGuideEnabled === null && isWelcomeHandled) {
       const timer = setTimeout(() => setShowBackgroundGuideDialog(true), 2000);
@@ -242,18 +242,23 @@ export default function Home() {
     toast({
       title: enabled
         ? (selectedLanguage === 'ko' ? '자동 가이드 활성화' : 'Auto Guide Enabled')
-        : (selectedLanguage === 'ko' ? '?먮룞 媛?대뱶 비활성화' : 'Auto Guide Disabled'),
+        : (selectedLanguage === 'ko' ? '자동 가이드 비활성화' : 'Auto Guide Disabled'),
       description: enabled ? (selectedLanguage === 'ko' ? '경로가 없어도 주변 명소 정보를 알려드립니다.' : 'I will tell you about nearby spots even without a route.') : (selectedLanguage === 'ko' ? '설정에서 언제든 다시 켤 수 있습니다.' : 'You can enable it anytime in settings.')
     });
   };
 
-  // ?[Server Park] 諛깃렇?쇱슫?먮룞 媛?대뱶 ?듭떖 濡쒖쭅
-  // [?곸슂] 寃쎈줈媛 ?녿뜑?쇰룄( !activeRoute ) 諛깃렇?쇱슫媛?대뱶媛 耳쒖졇 ?덉쑝硫?
-  // 二쇰? 100m ?대궡紐낆냼瑜?李얠븘 ?먮룞?쇰줈 ?ㅻ챸?ㅻ젮以띾땲
+  // 🛰️ [Server Park] 백그라운드 자동 가이드 핵심 로직
+  // [중요] 경로가 없더라도(!activeRoute) 백그라운드 가이드가 켜져 있으면
+  // 주변 100m 이내 명소를 찾아 자동으로 설명해 드립니다
   useEffect(() => {
     if (!effectivePosition || !isBackgroundGuideEnabled || activeRoute) return;
 
-    // ?대? 留먰븳 ?쒕뱶留덊겕以묐났 ?ъ깮 諛⑹?
+    // 🚑 [Bug Doctor] 2초 throttle 적용 (성능 최적화)
+    const now = Date.now();
+    if (now - lastProximityCheckRef.current < 2000) return;
+    lastProximityCheckRef.current = now;
+
+    // 이미 말한 랜드마크 중복 재생 방지
     const nearby = landmarks.find(landmark => {
       if (spokenLandmarks.has(landmark.id)) return false;
       const distance = calculateDistance(
@@ -262,16 +267,16 @@ export default function Home() {
         landmark.lat,
         landmark.lng
       );
-      return distance <= 0.1; // 100m ?대궡
+      return distance <= 0.1; // 100m 이내
     });
 
     if (nearby) {
       const name = getTranslatedContent(nearby, selectedLanguage, 'name');
       const desc = getTranslatedContent(nearby, selectedLanguage, 'description');
 
-      console.log(`[Auto Guide] Found nearby landmark: ${name}`);
+      console.log(`📍 [Auto Guide] Found nearby landmark: ${name}`);
 
-      // 留먰븯湲쒖옉
+      // 말하기 시작
       setSpokenLandmarks(prev => new Set(prev).add(nearby.id));
       setSelectedLandmark(nearby);
 
@@ -281,9 +286,9 @@ export default function Home() {
     }
   }, [effectivePosition, isBackgroundGuideEnabled, activeRoute, landmarks, spokenLandmarks, selectedLanguage, audioEnabled]);
 
-  // ?[Server Park] 紐⑹쟻吏 ?꾩갑 湲곕컲 UI 諛ㅻ뵒?쒖뼱 濡쒖쭅
-  // [?곸슂] 湲몄갼湲?以?transit)?뚮뒗 移대뱶瑜④린怨? ?꾩갑(arrival) ?먮룞?쇰줈 蹂댁뿬以띾땲
-  const arrivalRadius = selectedLandmark?.radius || 50; // 湲곕낯 50m
+  // 🛰️ [Server Park] 목적지 도착 기반 UI 배터리 제어 로직
+  // [중요] 길찾기 중(transit)에는 카드를 숨기고, 도착(arrival) 시 자동으로 보여줍니다
+  const arrivalRadius = selectedLandmark?.radius || 50; // 기본 50m
   const distanceToSelected = useMemo(() => {
     if (!effectivePosition || !selectedLandmark) return null;
     return calculateDistance(
@@ -296,11 +301,11 @@ export default function Home() {
 
   const hasArrivedAtDestination = distanceToSelected !== null && distanceToSelected <= arrivalRadius;
 
-  // ?꾩갑 ?먮룞 ?섎젅?댁뀡 ?몃━嫄?
+  // 도착 자동 내레이션 트리거
   useEffect(() => {
     if (hasArrivedAtDestination && selectedLandmark && !isManualSelection) {
       if (hasTriggeredArrivalNarration !== selectedLandmark.id) {
-        console.log(`?렞 [Arrival Logic] Arrived at destination: ${selectedLandmark.id}. Triggering auto-guide.`);
+        console.log(`📍 [Arrival Logic] Arrived at destination: ${selectedLandmark.id}. Triggering auto-guide.`);
         setHasTriggeredArrivalNarration(selectedLandmark.id);
 
         if (audioEnabled) {
@@ -312,34 +317,34 @@ export default function Home() {
     }
   }, [hasArrivedAtDestination, selectedLandmark, isManualSelection, audioEnabled, selectedLanguage, hasTriggeredArrivalNarration]);
 
-  // 紐⑹쟻吏媛 蹂寃쎈릺硫몃━嫄곹깭 珥덇린
+  // 목적지가 변경되면 트리거 상태 초기화
   useEffect(() => {
     if (selectedLandmark?.id !== hasTriggeredArrivalNarration) {
       setHasTriggeredArrivalNarration(null);
     }
   }, [selectedLandmark?.id]);
 
-  // [?붿옄?대꼫 ?댁쓽 留ㅼ쭅 UI ?곹깭]
+  // [디자이너 킴의 매직 UI 상태]
   const { language } = useLanguage();
   const [landingCityId, setLandingCityId] = useState<string | null>(null);
   const [hasShownLandingThisSession, setHasShownLandingThisSession] = useState<Set<string>>(new Set());
 
-  // ?럷截?[Dodari Architecture] ?섎룄 吏?μ쟻 UI ?쒗?쒖뼱瑜꾪븳 ?곹깭
+  // 🔮 [Dodari Architecture] 의도 지향적 UI 시퀀스 제어를 위한 상태
   type UIAction = 'STARTUP_FINISH' | 'CITY_CHANGE' | 'SETTINGS_CLOSE' | 'NONE';
   const [lastUIAction, setLastUIAction] = useState<UIAction>('NONE');
 
-  // ?럷截?[Dodari Architecture] ?꾩떆 蹂寃?媛먯? 諛?Magic Landing 由ъ뀑 濡쒖쭅
-  // ?ъ슜?먭? ?ㅼ젙李?after_country_change.png)?먯꽌 ?꾩떆瑜?蹂寃쏀븯硫?利됱떆 ?쒕뵫?ㅼ떆 蹂댁뿬以띾땲
+  // 🔮 [Dodari Architecture] 도시 변경 감지 및 Magic Landing 리셋 로직
+  // 사용자가 설정창(after_country_change.png)에서 도시를 변경하면 즉시 랜딩 페이지를 다시 보여줍니다
   useEffect(() => {
     if (selectedCityId) {
-      console.log(`?럷截?[Dodari Architecture] City changed to: ${selectedCityId}. Marking for potential landing.`);
+      console.log(`🔮 [Dodari Architecture] City changed to: ${selectedCityId}. Marking for potential landing.`);
       setHasShownLandingThisSession(prev => {
         const next = new Set(prev);
-        next.delete(selectedCityId); // ?꾩옱 蹂寃쎈맂 ?꾩떆??쒕뵫 湲곕줉젣?섏뿬 ?ы듃由ш굅 ?좊룄
+        next.delete(selectedCityId); // 현재 변경된 도시는 랜딩 기록 삭제하여 재발생 유도
         return next;
       });
-      setLastUIAction('CITY_CHANGE'); // ?꾩떆 蹂寃≪뀡 湲곕줉
-      setLandingCityId(null); // ?꾩옱 ?대젮?덉쓣吏 紐⑤Ⅴ?쒕뵫 ?꾩씠珥덇린
+      setLastUIAction('CITY_CHANGE'); // 도시 변경 액션 기록
+      setLandingCityId(null); // 현재 열려있을지 모르는 랜딩 다이얼로그 초기화
     }
   }, [selectedCityId]);
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -351,24 +356,24 @@ export default function Home() {
   const cruisePortTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
 
-  // Startup dialog state - ?㈉ [Bug Doctor] Sequence Restored to original intent
-  // ?럷截?[Dodari] 理쒖슦?붾㈃(InstallPrompt) ?몄텧?꾪빐 珥덇린媛믪? false濡ㅼ젙?섍퀬, 
-  // InstallPrompt媛 ?ロ엳嫄곕굹 ?뚮뜑留곷맂 ?댄썑?꾩슂濡쒖쭅?쇰줈 ?쒖뼱?⑸땲
+  // Startup dialog state - 🚑 [Bug Doctor] Sequence Restored to original intent
+  // 🔮 [Dodari] 최초 화면(InstallPrompt) 호출을 위해 초기값은 false로 설정하고, 
+  // InstallPrompt가 닫히거나 스킵된 이후 수동 로직으로 제어합니다
   const [showStartupDialog, setShowStartupDialog] = useState<boolean>(false);
-  const [isStartupTransitioning, setIsStartupTransitioning] = useState<boolean>(false); // ?럷截?[Dodari] ?쒗?꾪솚 ?덉젙?뺣낫
+  const [isStartupTransitioning, setIsStartupTransitioning] = useState<boolean>(false); // 🔮 [Dodari] 시트 전환 연출 정보
   const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
   const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
-  // [?곸슂: isWelcomeHandled220遺洹쇱뿉?뺤쓽TDZ 諛⑹?瑜꾪빐 ?ъ슜 ?꾩뿉 ?좎뼵]
+  // [중요: isWelcomeHandled220부근에정의TDZ 방지를위해 사용 전에 선언]
 
-  // ?럷截?[Dodari] 吏꾩엯 InstallPrompt(?곗뺨)瑜꾪븳 吏㏃? ?湲?StartupDialog ?몄텧 ?щ? 寃곗젙
-  // ?럷截?[Dodari] 吏꾩엯 InstallPrompt(?곗뺨) ?꾨즺 ?쒗?쒖옉
+  // 🔮 [Dodari] 진입 InstallPrompt(웰컴)를 위한 짧은 대기 후 StartupDialog 호출 여부 결정
+  // 🔮 [Dodari] 진입 InstallPrompt(웰컴) 완료 시 시퀀스 시작
   useEffect(() => {
-    // ?곗뺨 ?붾㈃泥섎━?섍린 @see InstallPrompt onClose)?먮뒗 StartupDialog ?湲?
+    // 웰컴 화면처리하기 @see InstallPrompt onClose)에는 StartupDialog 대기
     if (!isWelcomeHandled) return;
 
     const shownThisSession = sessionStorage.getItem('startup-dialog-shown');
     if (!shownThisSession && !hasCheckedForStartup) {
-      // ?곗뺨 ?붾㈃?ロ엳硫?遺?쒕읇寃?800ms) StartupDialog瑜꾩썎?덈떎.
+      // 웰컴 화면 닫히면 부드럽게(800ms) StartupDialog를 띄워줍니다.
       const timer = setTimeout(() => {
         setShowStartupDialog(true);
         setHasCheckedForStartup(true);
@@ -377,40 +382,37 @@ export default function Home() {
     }
   }, [isWelcomeHandled, hasCheckedForStartup]);
 
-  // ?㈉ [Bug Doctor] ?쒖뒪?앸챸二쇨린 諛쒗?뺥빀?뺣? 吏꾨떒 
+  // 🚑 [Bug Doctor] 상태 생명주기 및 데이터 무결성 진단 
   useEffect(() => {
     if (lastUIAction !== 'NONE') {
-      console.log(`?㈉ [Bug Doctor / Surgery Log] Action Detected: ${lastUIAction}`);
-      console.log(`?㈉ [Bug Doctor / Vital Check] showStartupDialog: ${showStartupDialog}, landingCityId: ${landingCityId}`);
+      console.log(`🚑 [Bug Doctor / Surgery Log] Action Detected: ${lastUIAction}`);
+      console.log(`🚑 [Bug Doctor / Vital Check] showStartupDialog: ${showStartupDialog}, landingCityId: ${landingCityId}`);
     }
   }, [lastUIAction, showStartupDialog, landingCityId]);
 
-  // [?붾쾭洹ν꽣 & ?붿옄?대꼫 ?댁쓽 UI Sequence ?쒖뼱  Startup Priority]
+  // [버그닥터 & 디자이너 킴의 UI Sequence 제어 Startup Priority]
   useEffect(() => {
-    // ?럷截?[Dodari Architecture] 吏?ν삎 ?쒗泥댁씤
-    // ?곗뺨 ?붾㈃泥섎━?섏? ?딆븯嫄곕굹(Startup , StartupDialog ?먮뒗 ?꾪솚 以묒씠?쇰㈃ ?쒕뵫 湲덉?
+    // 🔮 [Dodari Architecture] 지능형 시퀀스 체인
+    // 웰컴 화면을 처리하지 않았거나(Startup), StartupDialog 또는 전환 중이라면 랜딩 금지
     if (!isWelcomeHandled || showStartupDialog || isStartupTransitioning) {
-      // ?㈉ [Bug Doctor] ?湲곹깭 濡쒓퉭 (?꾪솚 以묒씪 ?뚮쭔 ?곸꽭 異쒕젰)
       if (isStartupTransitioning) {
-        console.log("?㈉ [Bug Doctor / Progress] Startup is closing. Waiting for Magic Transition buffer...");
+        console.log("🚑 [Bug Doctor / Progress] Startup is closing. Waiting for Magic Transition buffer...");
       }
       return;
     }
 
-    // [Bug Doctor] ?꾩튂 ?뺣낫 諛≪뀡 寃고빀 寃利?
-    if (position && !landingCityId && (lastUIAction === 'STARTUP_FINISH' || lastUIAction === 'CITY_CHANGE')) {
+    // [Bug Doctor] 위치 정보/UI 액션에 따른 Magic Landing 트리거
+    if (position && !landingCityId && (lastUIAction === 'STARTUP_FINISH' || lastUIAction === 'CITY_CHANGE' || lastUIAction === 'NONE')) {
       const matchedId = getMatchedCityId(position.latitude, position.longitude, cities);
 
       if (matchedId && !hasShownLandingThisSession.has(matchedId)) {
-        console.log(`?럧 [Magic Landing] ?㈉ [Bug Doctor] Sequence Chain Stable. Intent-Matched: ${lastUIAction}. Welcome to ${matchedId}!`);
+        console.log(`🎯 [Magic Landing] Triggering for: ${matchedId}. Action: ${lastUIAction}`);
 
-        // [Designer Kim] ?꾪솚 UX ?덉젙?뺣낫: Startup ?좊땲硫붿씠?섏씠 ?꾩쟾?앸궃 ?섑섎룄濡?800ms ?쒕젅
         const timer = setTimeout(() => {
           setLandingCityId(matchedId);
           setHasShownLandingThisSession(prev => new Set(prev).add(matchedId));
-          setLastUIAction('NONE'); // ?몃━嫄꾨즺 ?덉쟾?섍쾶 珥덇린
-          console.log(`?㈉ [Bug Doctor / Surgery Log] Landing Logic Grafted: Success for ${matchedId}`);
-        }, 800);
+          setLastUIAction('NONE');
+        }, 1200); // 1.2s delay for smoother transition
 
         return () => clearTimeout(timer);
       }
@@ -470,7 +472,7 @@ export default function Home() {
       end: [pendingLandmark.lat, pendingLandmark.lng],
     });
     setTourRouteInfo(null);
-    setIsManualSelection(false); // 湲몄갼湲쒖옉 ?섎룞 紐⑤뱶 ?댁젣 (?대룞 紐⑤뱶 吏꾩엯)
+    setIsManualSelection(false); // 길 찾기 시작 시 수동 모드 해제 (이동 모드 진입)
 
     setShowDirectionsDialog(false);
     setPendingLandmark(null);
@@ -601,13 +603,13 @@ export default function Home() {
   };
 
   const handleTestAudio = () => {
-    // ?㈉ [Bug Doctor] 紐⑤컮?ㅻ뵒?좉툑 ?댁젣 ?쒕룄
+    // 🚑 [Bug Doctor] 모바일 오디오 잠금 해제 시도
     audioService.unlockAudio();
 
     const testMessages = {
       en: "Welcome to GPS Audio Guide. This is a test of the audio narration system.",
       it: "Benvenuti alla Guida Audio GPS. Questo 챔 un test del sistema di narrazione audio.",
-      ko: "GPS ?ㅻ뵒媛?대뱶?ㅼ떊 寃껋쓣 ?섏쁺?⑸땲 ?닿쾬? ?ㅻ뵒?댁꽕 ?쒖뒪?쒖쓽 ?뚯뒪?몄엯?덈떎."
+      ko: "GPS 오디오 가이드 서비스에 오신 것을 환영합니다. 이것은 오디오 해설 시스템의 테스트입니다."
     };
     const message = testMessages[selectedLanguage as keyof typeof testMessages] || testMessages.en;
 
@@ -648,9 +650,9 @@ export default function Home() {
     }
   };
 
-  // ?[Server Park] 媛?ъ뼱 ?쒕덉씠?붿쭊 濡쒖쭅
-  // [?곸슂] ?쒕뱶留덊겕 ?ъ씠瑜?遺?쒕읇寃?蹂닿컙(lerp)?섏뿬 ?ㅼ젣 ?대룞?섎뒗 寃껋쿂
-  // 吏?꾩뿉 ?쒖떆?⑸땲 200ms 媛꾧꺽?쇰줈 醫뚰몴瑜낅뜲?댄듃?섏뿬 ?먯뿰?ㅻ윭?대룞 援ы쁽.
+  // 🛰️ [Server Park] 가상 투어 시뮬레이션 로직
+  // [중요] 랜드마크 사이를 부드럽게 보간(lerp)하여 실제 이동하는 것처럼 
+  // 지도에 표시합니다. 200ms 간격으로 좌표를 업데이트하여 자연스러운 이동 구현.
   useEffect(() => {
     if (!isSimulationMode || !tourStops.length) {
       if (!isSimulationMode) setSimulatedPosition(null);
@@ -659,11 +661,11 @@ export default function Home() {
 
     console.log("[Simulation] Starting Virtual Tour. Speed:", simulationSpeed, "x");
 
-    // ?㈉ [Bug Doctor] ?쒕덉씠?쒖옉 ?덈궡 ?꾨즺 湲곕줉 珥덇린?뷀븯紐⑤뱺 紐낆냼?먯꽌 ?ㅻ뵒?ㅺ? ?섏삤寃?
+    // 🚑 [Bug Doctor] 시뮬레이션 시작 전 안내 완료 기록 초기화하여 모든 명소에서 오디오가 나오게
     setSpokenLandmarks(new Set());
     audioService.clearSpokenLandmarks();
 
-    // [?곸슂] ?쒕덉씠?쒖옉 泥?踰덉㎏ ?뺣쪟?좏깮 諛ㅻ챸 ?쒖떆
+    // [중요] 시뮬레이션 첫 번째 정류장 선택 및 위치 설정
     const startStop = tourStops[simulationStepIndex];
     if (startStop) {
       setSimulatedPosition({ latitude: startStop.lat, longitude: startStop.lng });
@@ -676,24 +678,24 @@ export default function Home() {
     const updateIntervalMs = 200;
     const progressStep = updateIntervalMs / segmentDurationMs;
     let currentFromIndex = simulationStepIndex;
-    // [?곸슂] isPaused: ?뺣쪟?꾩갑 ?뺤감 以?(?ㅻ챸 ?쎈뒗 ?쒓컙)
+    // [중요] isPaused: 정류장 도착 정차 중 (설명 듣는 시간)
     let isPaused = true;
     let pauseElapsed = 0;
 
     const intervalId = setInterval(() => {
       if (isPaused) {
-        // [?곸슂] ?뺣쪟?μ뿉 ?뺤감 以?- ?ㅻ챸 移대뱶瑜쎌쓣 ?쒓컙 ?뺣낫
+        // [중요] 정류장에 정차 중 - 설명 카드를 볼 시간 확보
         pauseElapsed += updateIntervalMs;
 
-        // ?㈉ [Bug Doctor] ?꾩옱 ?섎젅?댁뀡?섏삤怨덈뒗吏 泥댄겕
+        // 🚑 [Bug Doctor] 현재 내레이션이 나오고 있는지 체크
         const isSpeaking = audioService.isSpeaking();
 
-        // [?곸슂] ?ㅼ젙?뺤감 ?쒓컙吏?ш퀬, ?ㅻ뵒?ъ깮?앸궗?뚮쭔 ?ㅼ쓬?쇰줈 ?대룞
+        // [중요] 설정 정차 시간 지나고, 오디오 재생이 끝났을 때만 다음으로 이동
         if (pauseElapsed >= pauseDurationMs && !isSpeaking) {
           isPaused = false;
           pauseElapsed = 0;
           progress = 0;
-          // [?곸슂] 留덉?留뺣쪟?μ씠硫쒕덉씠醫낅즺 (猷⑦븨 諛⑹?)
+          // [중요] 마지막 정류장이면 시뮬레이션 종료 (루핑 방지)
           if (currentFromIndex >= tourStops.length - 1) {
             console.log("[Simulation] Tour complete!");
             clearInterval(intervalId);
@@ -706,19 +708,19 @@ export default function Home() {
       progress += progressStep;
 
       if (progress >= 1) {
-        // [?곸슂] ?ㅼ쓬 ?뺣쪟?꾩갑 -> ?먮룞 ?좏깮?섏뿬 ?ㅻ챸 移대뱶 ?쒖떆
+        // [중요] 다음 정류장 도착 -> 자동 선택하여 설명 카드 표시
         currentFromIndex = currentFromIndex + 1;
         setSimulationStepIndex(currentFromIndex);
         const arrivedAt = tourStops[currentFromIndex];
         if (arrivedAt) {
           console.log("[Simulation] Arrived at:", getTranslatedContent(arrivedAt, selectedLanguage, "name"));
           setSimulatedPosition({ latitude: arrivedAt.lat, longitude: arrivedAt.lng });
-          // [?곸슂] ?꾩갑?쒕뱶留덊겕瑜먮룞 ?좏깮 -> ?ㅻ챸 移대뱶媛 ?붾㈃?쒖떆
+          // [중요] 도착한 랜드마크 자동 선택 -> 설명 카드가 화면에 표시
           setSelectedLandmark(arrivedAt);
 
-          // ?[Server Park] ?쒕덉씠?꾩갑 ?ㅻ뵒媛뺤젣 ?ъ깮 ?몃━嫄?
-          // 학생 여러분 ?먮룞 ?덈궡 濡쒖쭅simulation ?꾩튂 蹂?붾? 媛먯섍린 ?꾩뿉
-          // 利됱떆 ?ъ깮?쒖옉?섏뿬 ?딄? ?녿뒗 寃쏀뿕?쒓났?⑸땲
+          // 🛰️ [Server Park] 시뮬레이션 도착 오디오 강제 재생 트리거
+          // 학생 여러분 자동 안내 로직이 simulation 위치 변화를 감지하기 전에
+          // 즉시 재생 시작하여 끊김 없는 경험을 제공합니다
           const name = getTranslatedContent(arrivedAt, selectedLanguage, 'name');
           const description = getTranslatedContent(arrivedAt, selectedLanguage, 'description');
           audioService.playAuto(
@@ -727,14 +729,14 @@ export default function Home() {
             selectedLanguage
           );
         }
-        // [?곸슂] ?꾩갑 ?뺤감 紐⑤뱶濡꾪솚
+        // [중요] 도착 정차 모드로 전환
         isPaused = true;
         pauseElapsed = 0;
         progress = 0;
         return;
       }
 
-      // [?곸슂] ?꾩옱 異쒕컻?먭낵 ?ㅼ쓬 ?꾩갑?ъ씠醫뚰몴瑜좏삎 蹂닿컙(lerp)
+      // [중요] 현재 출발점과 다음 도착점 사이 좌표를 선형 보간(lerp)
       const fromStop = tourStops[currentFromIndex];
       const toStop = tourStops[currentFromIndex + 1];
       if (fromStop && toStop) {
@@ -747,15 +749,15 @@ export default function Home() {
     return () => clearInterval(intervalId);
   }, [isSimulationMode, tourStops, simulationSpeed, selectedLanguage]);
 
-  // ?[Server Park] ?ㅼ떆媛쒕뱶留덊겕 洹쇱젒 媛먯? 諛먮룞 ?덈궡 ?④낵
-  // [?곸슂] lastProximityCheckRef: 留덉?留?proximity 寃?쒓컖湲곕줉?섏뿬 2珥?throttle 援ы쁽
+  // 🛰️ [Server Park] 실시간 랜드마크 근접 감지 및 자동 안내 효과
+  // [중요] lastProximityCheckRef: 마지막 proximity 검사 시각을 기록하여 2초 throttle 구현
   const lastProximityCheckRef = useRef<number>(0);
 
   useEffect(() => {
     if (!effectivePosition || !audioEnabled || !landmarks.length || offlineMode) return;
 
-    // [?곸슂] 2珥?throttle 留?GPS ?낅뜲?댄듃留덈떎 345媛쒕뱶留덊겕瑜쒗쉶?섎㈃
-    // ??ъ뼇 湲곌린?먯꽌 ?숈씠 諛쒖깮?덉쑝誘濡? 2珥덉뿉 1踰덈쭔 寃?ы빀?덈떎.
+    // [중요] 2초 throttle: 매 GPS 업데이트마다 34~45개 랜드마크를 순회하면
+    // 저사양 기기에서 렉이 발생하므로, 2초에 1번만 검사합니다.
     const now = Date.now();
     if (now - lastProximityCheckRef.current < 2000) return;
     lastProximityCheckRef.current = now;
@@ -773,7 +775,7 @@ export default function Home() {
       const name = getTranslatedContent(landmark, selectedLanguage, 'name');
       const description = getTranslatedContent(landmark, selectedLanguage, 'description');
 
-      console.log(`?렞 [Proximity] Landmark Detected: ${name} (${Math.round(distance)}m, accuracy: ${Math.round((effectivePosition as any).accuracy || 0)}m)`);
+      console.log(`📍 [Proximity] Landmark Detected: ${name} (${Math.round(distance)}m, accuracy: ${Math.round((effectivePosition as any).accuracy || 0)}m)`);
 
       // ?먮룞 ?ъ깮 ?몃━嫄?
       audioService.playAuto(
@@ -789,7 +791,7 @@ export default function Home() {
       if (!isVisited(landmark.id)) {
         markVisited(landmark.id);
         toast({
-          title: selectedLanguage === 'ko' ? '?덈줈?μ냼 諛쒓껄!' : 'New Place Discovered!',
+          title: selectedLanguage === 'ko' ? '새로운 장소 발견!' : 'New Place Discovered!',
           description: name,
         });
       }
@@ -2428,133 +2430,128 @@ export default function Home() {
                     <Menu className="h-5 w-5 text-primary" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-64 p-3 z-[3000] border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-2xl" align="end">
+                <PopoverContent className="w-[85vw] max-w-[360px] p-5 z-[3000] border-none shadow-2xl bg-white/60 backdrop-blur-2xl rounded-[2.5rem]" align="end" sideOffset={8}>
                   <motion.div
                     initial="hidden"
                     animate="show"
                     variants={{
-                      hidden: { opacity: 0 },
+                      hidden: { opacity: 0, y: 20 },
                       show: {
                         opacity: 1,
+                        y: 0,
                         transition: {
-                          staggerChildren: 0.05
+                          staggerChildren: 0.1
                         }
                       }
                     }}
-                    className="space-y-4"
+                    className="space-y-6"
                   >
-                    {/* Map Filters Group */}
-                    <div className="space-y-1.5">
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">Explore Filters</p>
-                      <div className="grid grid-cols-2 gap-1.5">
+                    {/* [교수님 노트] Explore Filters: 2x2 그리드 기반의 대형 아이콘 카드 섹션입니다. */}
+                    <div className="space-y-4">
+                      <p className="text-sm font-black text-slate-800 tracking-tight px-1">Explore Filters</p>
+                      <div className="grid grid-cols-2 gap-4">
                         {[
-                          { id: 'landmarks', icon: LandmarkIcon, active: showLandmarks, toggle: handleToggleLandmarks, color: 'orange' },
-                          { id: 'activities', icon: ActivityIcon, active: showActivities, toggle: handleToggleActivities, color: 'blue' },
-                          { id: 'restaurants', icon: Utensils, active: showRestaurants, toggle: handleToggleRestaurants, color: 'amber' },
-                          { id: 'giftShops', icon: ShoppingBag, active: showGiftShops, toggle: handleToggleGiftShops, color: 'yellow' }
+                          { id: 'landmarks', icon: LandmarkIcon, active: showLandmarks, toggle: handleToggleLandmarks, gradient: 'from-orange-400 to-rose-500' },
+                          { id: 'activities', icon: ActivityIcon, active: showActivities, toggle: handleToggleActivities, gradient: 'from-blue-400 to-cyan-500' },
+                          { id: 'restaurants', icon: Utensils, active: showRestaurants, toggle: handleToggleRestaurants, gradient: 'from-amber-400 to-red-500' },
+                          { id: 'giftShops', icon: ShoppingBag, active: showGiftShops, toggle: handleToggleGiftShops, gradient: 'from-emerald-400 to-teal-500' }
                         ].map((item) => (
-                          <motion.div key={item.id} variants={{ hidden: { y: 10, opacity: 0 }, show: { y: 0, opacity: 1 } }}>
+                          <motion.div key={item.id} variants={{ hidden: { scale: 0.8, opacity: 0 }, show: { scale: 1, opacity: 1 } }}>
                             <Button
-                              variant={item.active ? "default" : "outline"}
-                              size="sm"
-                              className={`h-9 w-full justify - start gap-2 px-3 border - none transition - all active: scale-95 ${item.active ? `bg-${item.color}-500 hover:bg-${item.color}-600` : 'bg-slate-50 hover:bg-slate-100'}`}
-                              onClick={item.toggle}
+                              variant="ghost"
+                              className={`h-32 w-full flex flex-col items-center justify-center gap-3 rounded-[2rem] border border-white/40 shadow-sm transition-all active:scale-95 ${item.active ? 'bg-white/80' : 'bg-white/30'}`}
+                              onClick={() => {
+                                audioService.unlockAudio();
+                                item.toggle();
+                              }}
                             >
-                              <item.icon className={`w-4 h-4 ${item.active ? 'text-white' : `text-${item.color}-500`}`} />
-                              <span className="text-xs font-bold">{t(item.id, selectedLanguage)}</span>
+                              <div className={`p-3 rounded-2xl bg-gradient-to-br ${item.gradient} shadow-lg shadow-black/5`}>
+                                <item.icon className="w-8 h-8 text-white" />
+                              </div>
+                              <span className="text-xs font-bold text-slate-600">{t(item.id, selectedLanguage)}</span>
                             </Button>
                           </motion.div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Navigation Tools Group */}
-                    <div className="space-y-1.5 pt-2 border-t border-slate-100">
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">Tour Tools</p>
-                      <motion.div variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
-                        <Button
-                          variant="ghost"
-                          className="w-full h-10 justify-start gap-3 px-3 hover:bg-purple-50 text-purple-700 rounded-lg transition-all active:scale-95"
-                          onClick={() => {
-                            audioService.unlockAudio();
-                            setShowAIRecommend(true);
-                          }}
-                        >
-                          <div className="w-7 h-7 rounded-lg bg-purple-100 flex items-center justify-center">
-                            <AudioLines className="w-4 h-4" />
-                          </div>
-                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? 'AI 가이드 코스 추천' : 'AI Recommendation'}</span>
-                        </Button>
-                      </motion.div>
-
-                      <motion.div variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
-                        <Button
-                          variant="ghost"
-                          className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-all active:scale-95 ${isNavigationOnlyMode ? 'bg-amber-500 text-white hover:bg-amber-600' : 'hover:bg-amber-50 text-amber-700'}`}
-                          onClick={() => {
-                            audioService.unlockAudio();
-                            setIsNavigationOnlyMode(!isNavigationOnlyMode);
-                          }}
-                        >
-                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isNavigationOnlyMode ? 'bg-white/20' : 'bg-amber-100'}`}>
-                            <EyeOff className="h-4 w-4" />
-                          </div>
-                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '지도 몰입 모드' : 'Map Only Mode'}</span>
-                        </Button>
-                      </motion.div>
-
-                      <motion.div variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
-                        <Button
-                          variant="ghost"
-                          className={`w-full h-10 justify-start gap-3 px-3 rounded-lg transition-all active:scale-95 ${isCarNavZoomMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'hover:bg-blue-50 text-blue-700'}`}
-                          onClick={() => {
-                            audioService.unlockAudio();
-                            setIsCarNavZoomMode(!isCarNavZoomMode);
-                          }}
-                        >
-                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${isCarNavZoomMode ? 'bg-white/20' : 'bg-blue-100'}`}>
-                            <ZoomIn className="w-4 h-4" />
-                          </div>
-                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '이동 내비 줌' : 'Car Nav Zoom'}</span>
-                        </Button>
-                      </motion.div>
+                    {/* [교수님 노트] Tour Tools: 리스트 형식의 유틸리티 도구 모음입니다. */}
+                    <div className="space-y-3">
+                      <p className="text-sm font-black text-slate-800 tracking-tight px-1">Tour Tools</p>
+                      <div className="flex flex-col gap-1">
+                        {[
+                          { id: 'ai', icon: AudioLines, label: selectedLanguage === 'ko' ? 'AI 가이드 코스 추천' : 'AI Recommendation', onClick: () => { audioService.unlockAudio(); setShowAIRecommend(true); }, color: 'text-purple-500', glow: 'bg-purple-100' },
+                          { id: 'mapMode', icon: EyeOff, label: selectedLanguage === 'ko' ? '지도 몰입 모드' : 'Map Only Mode', onClick: () => { audioService.unlockAudio(); setIsNavigationOnlyMode(!isNavigationOnlyMode); }, active: isNavigationOnlyMode, color: 'text-amber-500', glow: 'bg-amber-100' },
+                          { id: 'carNav', icon: ZoomIn, label: selectedLanguage === 'ko' ? '이동 내비 줌' : 'Car Nav Zoom', onClick: () => { audioService.unlockAudio(); setIsCarNavZoomMode(!isCarNavZoomMode); }, active: isCarNavZoomMode, color: 'text-blue-500', glow: 'bg-blue-100' }
+                        ].map((tool) => (
+                          <motion.div key={tool.id} variants={{ hidden: { x: -10, opacity: 0 }, show: { x: 0, opacity: 1 } }}>
+                            <Button
+                              variant="ghost"
+                              className={`w-full h-12 justify-start gap-4 px-2 rounded-xl border border-transparent hover:bg-white/50 hover:border-white/50 transition-all ${tool.active ? 'bg-white/60 border-white/60' : ''}`}
+                              onClick={tool.onClick}
+                            >
+                              <div className={`w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm ${tool.color}`}>
+                                <tool.icon className="w-5 h-5" />
+                              </div>
+                              <span className="text-sm font-bold text-slate-700">{tool.label}</span>
+                            </Button>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
 
-                    {/* App & Account Group */}
-                    <div className="space-y-1.5 pt-2 border-t border-slate-100">
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 mb-1">App & Service</p>
-                      <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }} className="flex gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1 h-9 gap-2 border-purple-100 bg-purple-50/50 hover:bg-purple-100 text-purple-600 rounded-xl transition-all active:scale-95"
-                          onClick={() => setShowQrDialog(true)}
-                        >
-                          <QrCode className="w-4 h-4" />
-                          <span className="text-xs font-bold">Share</span>
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1 h-9 gap-2 border-indigo-100 bg-indigo-50/50 hover:bg-indigo-100 text-indigo-600 rounded-xl transition-all active:scale-95"
-                          onClick={() => setShowCreatorDashboard(true)}
-                        >
-                          <TrendingUp className="w-4 h-4" />
-                          <span className="text-xs font-bold">Admin</span>
-                        </Button>
-                      </motion.div>
-                      <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}>
-                        <Button
-                          variant="ghost"
-                          className="w-full h-10 justify-start gap-3 px-3 hover:bg-slate-100 text-slate-700 rounded-lg mt-1 transition-all active:scale-95"
-                          onClick={() => setShowLoginDialog(true)}
-                        >
-                          <div className="w-7 h-7 rounded-lg bg-slate-200 flex items-center justify-center">
-                            <User className="w-4 h-4" />
-                          </div>
-                          <span className="text-sm font-bold">{selectedLanguage === 'ko' ? '濡쒓렇/ 怨꾩젙 愿由?' : 'Account Settings'}</span>
-                        </Button>
-                      </motion.div>
+                    {/* [교수님 노트] App & Service: 가로형 3열 카드 슬롯입니다. */}
+                    <div className="space-y-4">
+                      <p className="text-sm font-black text-slate-800 tracking-tight px-1">App & Service</p>
+                      <div className="grid grid-cols-3 gap-3">
+                        <motion.div variants={{ hidden: { y: 10, opacity: 0 }, show: { y: 0, opacity: 1 } }}>
+                          <Button
+                            variant="ghost"
+                            className="h-24 w-full flex flex-col items-center justify-center gap-2 rounded-[1.5rem] bg-white/40 border border-white/40 shadow-sm active:scale-95 transition-all"
+                            onClick={() => {
+                              audioService.unlockAudio();
+                              setShowQrDialog(true);
+                            }}
+                          >
+                            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                              <Share2 className="w-5 h-5 text-slate-700" />
+                            </div>
+                            <span className="text-[10px] font-bold text-slate-600">Share</span>
+                          </Button>
+                        </motion.div>
+
+                        <motion.div variants={{ hidden: { y: 10, opacity: 0 }, show: { y: 0, opacity: 1 } }}>
+                          <Button
+                            variant="ghost"
+                            className="h-24 w-full flex flex-col items-center justify-center gap-2 rounded-[1.5rem] bg-white/40 border border-white/40 shadow-sm active:scale-95 transition-all"
+                            onClick={() => {
+                              audioService.unlockAudio();
+                              setShowCreatorDashboard(true);
+                            }}
+                          >
+                            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                              <Settings className="w-5 h-5 text-slate-700" />
+                            </div>
+                            <span className="text-[10px] font-bold text-slate-600">Admin</span>
+                          </Button>
+                        </motion.div>
+
+                        <motion.div variants={{ hidden: { y: 10, opacity: 0 }, show: { y: 0, opacity: 1 } }}>
+                          <Button
+                            variant="ghost"
+                            className="h-24 w-full flex flex-col items-center justify-center gap-2 rounded-[1.5rem] bg-white/40 border border-white/40 shadow-sm active:scale-95 transition-all text-center px-1"
+                            onClick={() => {
+                              audioService.unlockAudio();
+                              setShowLoginDialog(true);
+                            }}
+                          >
+                            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                              <User className="w-5 h-5 text-slate-700" />
+                            </div>
+                            <span className="text-[10px] font-bold text-slate-600 leading-tight">Account Settings</span>
+                          </Button>
+                        </motion.div>
+                      </div>
                     </div>
                   </motion.div>
                 </PopoverContent>
@@ -2650,7 +2647,7 @@ export default function Home() {
               showTourOnly={showTourOnly}
               tourStopIds={tourStops.map(s => s.id)}
               isMobile={isMobile}
-              isCarNavZoomMode={isCarNavZoomMode} // [異붽?] 移대퉬 以?踰꾪듉 ?곹깭 ?꾨떖
+              isCarNavZoomMode={isCarNavZoomMode} // [異붽?] 移대퉥 以?踰꾪듉 ?곹깭 ?꾨떖
             />
 
             {/* Tour Filter Button - next to zoom controls */}
@@ -3260,19 +3257,10 @@ export default function Home() {
                     </Button>
                     <Button
                       variant="ghost"
-                      className="w-full h-12 rounded-xl text-slate-400 hover:text-primary font-bold transition-colors hover:bg-primary/5 flex items-center justify-center gap-2"
-                      onClick={() => setShowQrDialog(true)}
-                    >
-                      <QrCode className="w-4 h-4" />
-                      ? '아래 QR코드를 촬영하거나 링크를 공유하여 앱을 설치하세요'
-                    </Button>
-
-                    <Button
-                      variant="ghost"
                       className="w-full h-12 rounded-xl text-slate-400 hover:text-slate-600 font-bold transition-colors hover:bg-slate-100"
                       onClick={() => setLandingCityId(null)}
                     >
-                      {language === 'ko' ? '泥쒖쿇?섎윭蹂쇨쾶' : 'Maybe Later'}
+                      {language === 'ko' ? '먼저 둘러볼게요' : 'Maybe Later'}
                     </Button>
                   </div>
                 </div>
@@ -3282,7 +3270,7 @@ export default function Home() {
         </DialogContent>
       </Dialog>
 
-      ? '아래 QR코드를 촬영하거나 링크를 공유하여 앱을 설치하세요'
+
       <Dialog open={showQrDialog} onOpenChange={setShowQrDialog}>
         <DialogContent className="max-w-sm mx-auto">
           <div className="flex flex-col items-center gap-4 py-4">
@@ -3298,14 +3286,14 @@ export default function Home() {
                 : 'Scan the QR code or share the link to install the app'}
             </p>
             {/* [중요] QR코드 이미지: qrserver.com API를 사용하여 현재 URL로 QR 이미지 생성 */}
-            <div className="bg-white p-4 rounded-2xl shadow-lg border">
+            <div className="bg-white p-4 rounded-2xl shadow-lg border flex justify-center items-center">
               <img
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin : '')}`}
                 alt="QR Code for app install"
                 className="w-48 h-48"
                 loading="lazy"
               />
-            </div >
+            </div>
             <div className="text-xs text-muted-foreground font-mono bg-muted px-3 py-1.5 rounded-lg max-w-full truncate">
               {typeof window !== 'undefined' ? window.location.origin : ''}
             </div>
@@ -3338,9 +3326,9 @@ export default function Home() {
                 {selectedLanguage === 'ko' ? '怨듭쑀?섍린' : 'Share'}
               </Button>
             </div>
-          </div >
-        </DialogContent >
-      </Dialog >
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

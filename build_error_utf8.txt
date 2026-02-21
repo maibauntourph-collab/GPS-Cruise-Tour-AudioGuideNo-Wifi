@@ -1,0 +1,114 @@
+﻿
+> rest-express@1.0.0 build
+> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist-server
+
+[36mvite v5.4.20 [32mbuilding for production...[36m[39m
+transforming...
+node.exe : 
+위치 줄:1 문자:1
++ & "E:\node/node.exe
+" "E:\node/node_modul
+es/npm/bin/npm-cli.js
+" run bu ...
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (:String   
+ ) [], RemoteExce    
+ption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+A PostCSS plugin did 
+not pass the `from` o
+ption to `postcss.par
+se`. This may cause i
+mported assets to be 
+incorrectly transform
+ed. If you've recentl
+y added a PostCSS plu
+gin that raised this 
+warning, please conta
+ct the package author
+ to fix the issue.
+[32m??[39m 32 modules transformed.
+[31mx[39m Build fai
+led in 2.77s
+[31merror during bui
+ld:
+[31m[vite-plugin-pwa
+:build] Transform fai
+led with 1 error:
+E:/GPS-Cruise-Tour-Au
+dioGuideNo-Wifi-1/cli
+ent/src/pages/RoleSel
+ection.tsx:298:5: ERR
+OR: Expected identifi
+er but found "/"[31m
+file: [36mE:/GPS-Cru
+ise-Tour-AudioGuideNo
+-Wifi-1/client/src/pa
+ges/RoleSelection.tsx
+:298:5[31m
+[33m
+[33mExpected identif
+ier but found "/"[33
+m
+296|    );
+297|  }
+298|      </div >
+   |       ^
+299|    );
+300|  }
+[31m
+    at failureErrorWi
+thLog (E:\GPS-Cruise-
+Tour-AudioGuideNo-Wif
+i-1\node_modules\vite
+\node_modules\esbuild
+\lib\main.js:1472:15)
+    at E:\GPS-Cruise-
+Tour-AudioGuideNo-Wif
+i-1\node_modules\vite
+\node_modules\esbuild
+\lib\main.js:755:50
+    at responseCallba
+cks.<computed> (E:\GP
+S-Cruise-Tour-AudioGu
+ideNo-Wifi-1\node_mod
+ules\vite\node_module
+s\esbuild\lib\main.js
+:622:9)
+    at handleIncoming
+Packet (E:\GPS-Cruise
+-Tour-AudioGuideNo-Wi
+fi-1\node_modules\vit
+e\node_modules\esbuil
+d\lib\main.js:677:12)
+    at Socket.readFro
+mStdout (E:\GPS-Cruis
+e-Tour-AudioGuideNo-W
+ifi-1\node_modules\vi
+te\node_modules\esbui
+ld\lib\main.js:600:7)
+    at Socket.emit (n
+ode:events:519:28)
+    at addChunk (node
+:internal/streams/rea
+dable:561:12)
+    at readableAddChu
+nkPushByteMode (node:
+internal/streams/read
+able:512:3)
+    at Readable.push 
+(node:internal/stream
+s/readable:392:5)
+    at Pipe.onStreamR
+ead (node:internal/st
+ream_base_commons:189
+:23)[39m
+
