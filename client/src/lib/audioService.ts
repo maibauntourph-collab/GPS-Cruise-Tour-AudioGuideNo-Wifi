@@ -432,7 +432,11 @@ export class AudioService {
   }
 
   isSpeaking(): boolean {
-    return this.synthesis.speaking;
+    return this.synthesis.speaking || this.isMP3Playing() || this.clovaSentenceMode;
+  }
+
+  clearSpokenLandmarks() {
+    this.spokenLandmarks.clear();
   }
 
   isPaused(): boolean {
@@ -1357,7 +1361,7 @@ export class AudioService {
   // Stop all audio (both MP3 and TTS)
   stopAll() {
     this.stopMP3();
-    this.stopSentences();
+    this.stopClovaSentences();
     this.stop();
   }
 }

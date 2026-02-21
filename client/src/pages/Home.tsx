@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { flushSync } from 'react-dom';
 import { useQuery } from '@tanstack/react-query';
 import html2canvas from 'html2canvas';
@@ -652,6 +652,10 @@ export default function Home() {
 
     console.log("[Simulation] Starting Virtual Tour. Speed:", simulationSpeed, "x");
 
+    // 🩺 [Bug Doctor] 시뮬레이션 시작 시 안내 완료 기록 초기화하여 모든 명소에서 오디오가 나오게 함
+    setSpokenLandmarks(new Set());
+    audioService.clearSpokenLandmarks();
+
     // [적요] 시뮬레이션 시작 시 첫 번째 정류장 선택 및 설명 표시
     const startStop = tourStops[simulationStepIndex];
     if (startStop) {
@@ -673,7 +677,12 @@ export default function Home() {
       if (isPaused) {
         // [적요] 정류장에 정차 중 - 설명 카드를 읽을 시간 확보
         pauseElapsed += updateIntervalMs;
-        if (pauseElapsed >= pauseDurationMs) {
+
+        // 🩺 [Bug Doctor] 현재 나레이션이 나오고 있는지 체크
+        const isSpeaking = audioService.isSpeaking();
+
+        // [적요] 설정된 정차 시간이 지났고, 오디오 재생도 끝났을 때만 다음으로 이동
+        if (pauseElapsed >= pauseDurationMs && !isSpeaking) {
           isPaused = false;
           pauseElapsed = 0;
           progress = 0;
@@ -699,6 +708,17 @@ export default function Home() {
           setSimulatedPosition({ latitude: arrivedAt.lat, longitude: arrivedAt.lng });
           // [적요] 도착한 랜드마크를 자동 선택 -> 설명 카드가 화면에 표시됨
           setSelectedLandmark(arrivedAt);
+
+          // 🛰️ [Server Park] 시뮬레이션 도착 시 오디오 강제 재생 트리거
+          // 학생 여러분, 자동 안내 로직이 simulation 위치 변화를 감지하기 전에
+          // 즉시 재생을 시작하여 끊김 없는 경험을 제공합니다.
+          const name = getTranslatedContent(arrivedAt, selectedLanguage, 'name');
+          const description = getTranslatedContent(arrivedAt, selectedLanguage, 'description');
+          audioService.playAuto(
+            arrivedAt.id,
+            `${name}. ${description}`,
+            selectedLanguage
+          );
         }
         // [적요] 도착 후 정차 모드로 전환
         isPaused = true;
@@ -2549,6 +2569,8 @@ export default function Home() {
           onLandmarkClose={() => {
             setSelectedLandmark(null);
             setIsManualSelection(false);
+            // 🩺 [Bug Doctor] 카드 닫기 시 오디오 즉시 중지 정책 반영
+            audioService.stopAll();
           }}
           onNavigate={handleLandmarkRoute}
           onAddToTour={handleAddToTour}
@@ -2953,7 +2975,7 @@ export default function Home() {
           {(() => {
             const landingCity = cities.find(c => c.id === landingCityId);
             // 🎖️ [Data Sync] DB 우선(landingCity?.landingContent), 없으면 하드코딩(LANDING_DATA) Fallback
-            const landingContentSource = (landingCity?.landingContent as any) || (landingCityId ? LANDING_DATA[landingCityId] : null);
+            const landingContentSource = (landingCity as any)?.landingContent || (landingCityId ? LANDING_DATA[landingCityId] : null);
 
             if (!landingCityId || !landingContentSource) return null;
 

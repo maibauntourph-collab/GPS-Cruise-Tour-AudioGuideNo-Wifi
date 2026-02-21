@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback, useMemo, MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent, ReactNode } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -738,12 +739,19 @@ export default function UnifiedFloatingCard({
             }
           }}
         >
-          <h3 className="font-semibold text-lg flex-1" data-testid="text-unified-card-title">
+          <h3 className="font-semibold text-lg flex-1 flex items-center gap-2" data-testid="text-unified-card-title">
             {selectedLandmark
               ? getTranslatedContent(selectedLandmark, selectedLanguage, 'name')
               : showCruisePort && city?.cruisePort
                 ? getCruisePortTranslation(city.cruisePort, selectedLanguage, 'portName')
                 : t('landmarks', selectedLanguage)}
+
+            {/* 🛰️ [Designer Kim] 이동 모드 힌트 배지 */}
+            {isTransitMode && !showTransitDetails && (
+              <Badge variant="outline" className="text-[10px] py-0 px-1.5 h-5 bg-primary/10 text-primary border-primary/20 animate-pulse">
+                {selectedLanguage === 'ko' ? '클릭하여 상세 보기' : 'Click for details'}
+              </Badge>
+            )}
           </h3>
           {isSimulationMode && (
             <Badge className="bg-red-500 hover:bg-red-600 text-white border-none animate-pulse">
@@ -840,1367 +848,1344 @@ export default function UnifiedFloatingCard({
           </Button>
         </div>
 
-        {(!isTransitMode || showTransitDetails) && (
-          <div className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-4">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full">
-              {/* Tour Tab with filters */}
-              <TabsContent value="landmark" className="mt-4 flex flex-col">
-                {/* AI Recommendation Box */}
-                {aiRecommendation && (
-                  <div className="mb-4 p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
-                    <div className="flex items-start gap-2 mb-2">
-                      <svg className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                      <div className="flex-1">
-                        <h5 className="font-semibold text-purple-900 dark:text-purple-100 mb-1">
-                          {selectedLanguage === 'ko' ? 'AI 추천 이유' : 'AI Recommendation'}
-                        </h5>
-                        <p className="text-sm text-purple-800 dark:text-purple-200 leading-relaxed">
-                          {aiRecommendation.explanation}
-                        </p>
-                        <div className="mt-2 text-xs text-purple-700 dark:text-purple-300">
-                          {selectedLanguage === 'ko'
-                            ? `예상 소요 시간: ${aiRecommendation.totalEstimatedTime}분`
-                            : `Estimated time: ${aiRecommendation.totalEstimatedTime} min`
-                          }
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Scrollable content - Contains both selected landmark and list */}
-                <div className="space-y-4">
-                  {selectedLandmark && (
-                    <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
-                      <div className="flex items-start justify-between gap-2">
+        <AnimatePresence>
+          {(!isTransitMode || showTransitDetails) && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-4 border-t"
+            >
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full">
+                {/* Tour Tab with filters */}
+                <TabsContent value="landmark" className="mt-4 flex flex-col">
+                  {/* AI Recommendation Box */}
+                  {aiRecommendation && (
+                    <div className="mb-4 p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
+                      <div className="flex items-start gap-2 mb-2">
+                        <svg className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
                         <div className="flex-1">
-                          <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
-                            {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                          </h4>
-                          <div className="flex items-center gap-2 flex-wrap mb-3">
-                            <Badge variant={selectedLandmark.category === 'Activity' ? 'default' : 'secondary'}>
-                              {selectedLandmark.category === 'Activity' ? <ActivityIcon className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
-                              {selectedLandmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
-                            </Badge>
-                            {selectedLandmark.category && selectedLandmark.category !== 'Activity' && (
-                              <Badge variant="outline">{selectedLandmark.category}</Badge>
-                            )}
-                          </div>
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => {
-                            onLandmarkClose();
-                            setIsMinimized(true);
-                          }}
-                          className="h-8 w-8 flex-shrink-0"
-                          data-testid="button-close-landmark-info"
-                        >
-                          <X className="w-4 h-4" />
-                        </Button>
-                      </div>
-
-                      {selectedLandmark.photos && selectedLandmark.photos.length > 0 && (
-                        <PhotoGallery
-                          photos={selectedLandmark.photos}
-                          title={getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                        />
-                      )}
-
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
-                        </p>
-
-                        {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') && (
-                          <div className="space-y-3">
-                            <div className="flex items-center gap-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={handlePlayAudio}
-                                className="gap-2"
-                                data-testid="button-play-audio"
-                              >
-                                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                                {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
-                              </Button>
-                              {isPlaying && (
-                                <select
-                                  value={playbackRate}
-                                  onChange={(e) => {
-                                    const rate = parseFloat(e.target.value);
-                                    setPlaybackRate(rate);
-                                    audioService.setRate(rate);
-                                  }}
-                                  className="px-2 py-1 text-sm border rounded"
-                                  data-testid="select-playback-rate"
-                                >
-                                  <option value="0.5">0.5x</option>
-                                  <option value="0.75">0.75x</option>
-                                  <option value="1.0">1.0x</option>
-                                  <option value="1.25">1.25x</option>
-                                  <option value="1.5">1.5x</option>
-                                  <option value="2.0">2.0x</option>
-                                </select>
-                              )}
-                            </div>
-                            <p className="text-sm leading-relaxed">
-                              {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription')}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-
-                      {selectedLandmark.category === 'Activity' && (
-                        <div className="pt-3 border-t">
-                          <h5 className="font-semibold mb-2 flex items-center gap-2">
-                            <Ticket className="w-4 h-4" />
-                            {t('bookTicketsTours', selectedLanguage)}
+                          <h5 className="font-semibold text-purple-900 dark:text-purple-100 mb-1">
+                            {selectedLanguage === 'ko' ? 'AI 추천 이유' : 'AI Recommendation'}
                           </h5>
-                          <div className="space-y-2">
-                            {/* 한국어: Klook */}
-                            {selectedLanguage === 'ko' && (
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="w-full justify-start gap-2"
-                                onClick={() => {
-                                  const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                                  window.open(`https://www.klook.com/ko/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                                }}
-                                data-testid="button-book-klook"
-                              >
-                                <ExternalLink className="w-4 h-4" />
-                                Klook에서 예약
-                              </Button>
-                            )}
-
-                            {/* 일본어: Klook, Viator */}
-                            {selectedLanguage === 'ja' && (
-                              <>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full justify-start gap-2"
-                                  onClick={() => {
-                                    const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                                    window.open(`https://www.klook.com/ja/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                                  }}
-                                  data-testid="button-book-klook"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  Klookで予約
-                                </Button>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full justify-start gap-2"
-                                  onClick={() => {
-                                    const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                                    window.open(`https://www.viator.com/ja-JP/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                                  }}
-                                  data-testid="button-book-viator"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  Viatorで予約
-                                </Button>
-                              </>
-                            )}
-
-                            {/* 중국어: Klook, Trip.com */}
-                            {selectedLanguage === 'zh' && (
-                              <>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full justify-start gap-2"
-                                  onClick={() => {
-                                    const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                                    window.open(`https://www.klook.com/zh-CN/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                                  }}
-                                  data-testid="button-book-klook"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  Klook预订
-                                </Button>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full justify-start gap-2"
-                                  onClick={() => {
-                                    const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                                    window.open(`https://cn.trip.com/search/things-to-do?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                                  }}
-                                  data-testid="button-book-trip"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  Trip.com预订
-                                </Button>
-                              </>
-                            )}
-
-                            {/* 동남아시아 언어: Klook */}
-                            {(selectedLanguage === 'th' || selectedLanguage === 'vi' || selectedLanguage === 'id') && (
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="w-full justify-start gap-2"
-                                onClick={() => {
-                                  const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                                  const langCode = selectedLanguage === 'th' ? 'th-TH' : selectedLanguage === 'vi' ? 'vi-VN' : 'id-ID';
-                                  window.open(`https://www.klook.com/${langCode}/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                                }}
-                                data-testid="button-book-klook"
-                              >
-                                <ExternalLink className="w-4 h-4" />
-                                {selectedLanguage === 'th' ? 'จองกับ Klook' : selectedLanguage === 'vi' ? 'Đặt trên Klook' : 'Pesan di Klook'}
-                              </Button>
-                            )}
-
-                            {/* 영어/유럽 언어: GetYourGuide, Viator */}
-                            {['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar', 'hi', 'tr', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs'].includes(selectedLanguage) && (
-                              <>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full justify-start gap-2"
-                                  onClick={() => {
-                                    const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                                    // Language mapping for GetYourGuide
-                                    const gygLang = selectedLanguage === 'es' ? 'es' : selectedLanguage === 'fr' ? 'fr' : selectedLanguage === 'de' ? 'de' : selectedLanguage === 'it' ? 'it' : selectedLanguage === 'pt' ? 'pt-BR' : 'en';
-                                    window.open(`https://www.getyourguide.com/${gygLang}/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                                  }}
-                                  data-testid="button-book-getyourguide"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  {t('bookOnGetYourGuide', selectedLanguage)}
-                                </Button>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full justify-start gap-2"
-                                  onClick={() => {
-                                    const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
-                                    // Language mapping for Viator
-                                    const viatorLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-BR' : 'en-US';
-                                    window.open(`https://www.viator.com/${viatorLang}/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
-                                  }}
-                                  data-testid="button-book-viator"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  {t('bookOnViator', selectedLanguage)}
-                                </Button>
-                              </>
-                            )}
+                          <p className="text-sm text-purple-800 dark:text-purple-200 leading-relaxed">
+                            {aiRecommendation.explanation}
+                          </p>
+                          <div className="mt-2 text-xs text-purple-700 dark:text-purple-300">
+                            {selectedLanguage === 'ko'
+                              ? `예상 소요 시간: ${aiRecommendation.totalEstimatedTime}분`
+                              : `Estimated time: ${aiRecommendation.totalEstimatedTime} min`
+                            }
                           </div>
                         </div>
-                      )}
-
-                      {selectedLandmark.category === 'Restaurant' && (
-                        <div className="pt-3 border-t">
-                          <h5 className="font-semibold mb-3 flex items-center gap-2">
-                            <Utensils className="w-4 h-4" />
-                            {t('restaurantInfo', selectedLanguage)}
-                          </h5>
-                          <div className="space-y-3">
-                            {selectedLandmark.openingHours && (
-                              <div className="flex items-start gap-2 text-sm">
-                                <Clock className="w-4 h-4 text-muted-foreground mt-0.5" />
-                                <div>
-                                  <p className="font-medium">{t('openingHours', selectedLanguage)}</p>
-                                  <p className="text-muted-foreground">{selectedLandmark.openingHours}</p>
-                                </div>
-                              </div>
-                            )}
-
-                            {selectedLandmark.priceRange && (
-                              <div className="flex items-start gap-2 text-sm">
-                                <Euro className="w-4 h-4 text-muted-foreground mt-0.5" />
-                                <div>
-                                  <p className="font-medium">{t('priceRange', selectedLanguage)}</p>
-                                  <p className="text-muted-foreground">{selectedLandmark.priceRange}</p>
-                                </div>
-                              </div>
-                            )}
-
-                            {selectedLandmark.cuisine && (
-                              <div className="flex items-start gap-2 text-sm">
-                                <ChefHat className="w-4 h-4 text-muted-foreground mt-0.5" />
-                                <div>
-                                  <p className="font-medium">{t('cuisine', selectedLanguage)}</p>
-                                  <p className="text-muted-foreground">{selectedLandmark.cuisine}</p>
-                                </div>
-                              </div>
-                            )}
-
-                            {selectedLandmark.phoneNumber && (
-                              <div className="flex items-start gap-2 text-sm">
-                                <Phone className="w-4 h-4 text-muted-foreground mt-0.5" />
-                                <div>
-                                  <p className="font-medium">{t('phoneNumber', selectedLanguage)}</p>
-                                  <a
-                                    href={`tel:${selectedLandmark.phoneNumber}`}
-                                    className="text-primary hover:underline"
-                                    data-testid="link-restaurant-phone"
-                                  >
-                                    {selectedLandmark.phoneNumber}
-                                  </a>
-                                </div>
-                              </div>
-                            )}
-
-                            {selectedLandmark.menuHighlights && selectedLandmark.menuHighlights.length > 0 && (
-                              <div className="text-sm">
-                                <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
-                                <div className="flex flex-wrap gap-1">
-                                  {selectedLandmark.menuHighlights.map((dish, idx) => (
-                                    <Badge key={idx} variant="outline" className="text-xs">
-                                      {dish}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            <div className="flex gap-2">
-                              {selectedLandmark.phoneNumber && (
-                                <Button
-                                  variant="outline"
-                                  className="flex-1 gap-2"
-                                  onClick={() => window.open(`tel:${selectedLandmark.phoneNumber}`, '_self')}
-                                  data-testid="button-call-restaurant"
-                                >
-                                  <Phone className="w-4 h-4" />
-                                  {t('callRestaurant', selectedLanguage)}
-                                </Button>
-                              )}
-                              {selectedLandmark.reservationUrl && (
-                                <Button
-                                  variant="default"
-                                  className="flex-1 gap-2"
-                                  onClick={() => window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
-                                  data-testid="button-make-reservation"
-                                >
-                                  <ExternalLink className="w-4 h-4" />
-                                  {t('makeReservation', selectedLanguage)}
-                                </Button>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      )}
+                      </div>
                     </div>
                   )}
 
-                  {/* Landmark List - Category-based sections */}
+                  {/* Scrollable content - Contains both selected landmark and list */}
                   <div className="space-y-4">
-                    {(() => {
-                      const landmarksByCategory = filteredListLandmarks.reduce((acc, item) => {
-                        const category = item.landmark.category || 'Landmark';
-                        if (!acc[category]) acc[category] = [];
-                        acc[category].push(item);
-                        return acc;
-                      }, {} as Record<string, typeof filteredListLandmarks>);
-
-                      const renderSection = (category: string, items: typeof filteredListLandmarks, title: string, icon: ReactNode) => {
-                        if (items.length === 0) return null;
-                        return (
-                          <div key={category} className="space-y-2">
-                            <h5 className="font-semibold text-sm text-muted-foreground flex items-center gap-2">
-                              {icon}
-                              {title}
-                            </h5>
-                            {items.map(({ landmark, distance }) => {
-                              const isSelected = selectedLandmark?.id === landmark.id;
-                              return (
-                                <div
-                                  key={landmark.id}
-                                  className={`p-3 rounded-lg cursor-pointer transition-all ${isSelected
-                                    ? 'bg-primary/20 ring-2 ring-primary animate-pulse'
-                                    : 'bg-muted/30 hover-elevate'
-                                    }`}
-                                  onClick={() => onLandmarkSelect?.(landmark)}
-                                  data-testid={`card-landmark-${landmark.id}`}
-                                >
-                                  <div className="flex items-start justify-between gap-3">
-                                    <div className="flex-1">
-                                      <div className="flex items-center gap-2 mb-1">
-                                        <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
-                                          {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                                        </h4>
-                                        {spokenLandmarks.has(landmark.id) && (
-                                          <Volume2 className="w-3 h-3 text-green-600" />
-                                        )}
-                                      </div>
-                                      {distance !== null && (
-                                        <p className="text-xs text-muted-foreground">
-                                          {formatDistance(distance)}
-                                        </p>
-                                      )}
-                                    </div>
-                                    <Button
-                                      variant="ghost"
-                                      size="icon"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        onLandmarkRoute(landmark);
-                                        setIsMinimized(true);
-                                      }}
-                                      className="h-8 w-8"
-                                      data-testid={`button-navigate-${landmark.id}`}
-                                    >
-                                      <Navigation className="w-4 h-4" />
-                                    </Button>
-                                  </div>
-                                </div>
-                              );
-                            })}
+                    {selectedLandmark && (
+                      <div className="space-y-4 pb-4 border-b">{/* Selected landmark details */}
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1">
+                            <h4 className="font-bold text-xl mb-2" data-testid="text-landmark-name">
+                              {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                            </h4>
+                            <div className="flex items-center gap-2 flex-wrap mb-3">
+                              <Badge variant={selectedLandmark.category === 'Activity' ? 'default' : 'secondary'}>
+                                {selectedLandmark.category === 'Activity' ? <ActivityIcon className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
+                                {selectedLandmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
+                              </Badge>
+                              {selectedLandmark.category && selectedLandmark.category !== 'Activity' && (
+                                <Badge variant="outline">{selectedLandmark.category}</Badge>
+                              )}
+                            </div>
                           </div>
-                        );
-                      };
-
-                      return (
-                        <>
-                          {renderSection('Landmark', landmarksByCategory['Landmark'] || [], t('landmarksSection', selectedLanguage), <LandmarkIcon className="w-4 h-4 text-primary" />)}
-                          {renderSection('Activity', landmarksByCategory['Activity'] || [], t('activitiesSection', selectedLanguage), <ActivityIcon className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
-                          {renderSection('Restaurant', landmarksByCategory['Restaurant'] || [], t('restaurantsSection', selectedLanguage), <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
-                        </>
-                      );
-                    })()}
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Cruise Port Tab with sub-tabs */}
-              <TabsContent value="cruise" className="mt-4 flex flex-col flex-1">
-                {city?.cruisePort && (
-                  <Tabs defaultValue="info" className="w-full flex flex-col flex-1 min-h-0">
-                    <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
-                      <TabsTrigger value="info" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('cruiseInfo', selectedLanguage)}</TabsTrigger>
-                      <TabsTrigger value="transport" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('transportation', selectedLanguage)}</TabsTrigger>
-                      <TabsTrigger value="tips" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('tips', selectedLanguage)}</TabsTrigger>
-                    </TabsList>
-
-                    <TabsContent value="info" className="mt-4 overflow-y-auto flex-1">
-                      <div>
-                        <h4 className="font-bold text-lg mb-2">
-                          {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'portName')}
-                        </h4>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-muted-foreground" />
-                            <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'distanceFromCity')}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-muted-foreground" />
-                            <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'recommendedDuration')}</span>
-                          </div>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => {
+                              onLandmarkClose();
+                              setIsMinimized(true);
+                            }}
+                            className="h-8 w-8 flex-shrink-0"
+                            data-testid="button-close-landmark-info"
+                          >
+                            <X className="w-4 h-4" />
+                          </Button>
                         </div>
-                      </div>
-                    </TabsContent>
 
-                    <TabsContent value="transport" className="mt-4 flex flex-col flex-1">
-                      {city?.cruisePort?.transportOptions && city.cruisePort.transportOptions.length > 0 ? (
-                        <div className="flex-1 min-h-0 flex flex-col">
-                          <div className="flex-1 overflow-y-auto space-y-3">
-                            {(() => {
-                              const transportOptions = city.cruisePort.transportOptions;
-                              const totalPages = Math.ceil(transportOptions.length / transportItemsPerPage);
-                              const startIndex = (transportPage - 1) * transportItemsPerPage;
-                              const endIndex = startIndex + transportItemsPerPage;
-                              const currentTransports = transportOptions.slice(startIndex, endIndex);
+                        {selectedLandmark.photos && selectedLandmark.photos.length > 0 && (
+                          <PhotoGallery
+                            photos={selectedLandmark.photos}
+                            title={getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                          />
+                        )}
 
-                              return currentTransports.map((transport, idx) => {
-                                const Icon = getTransportIcon(transport.type as 'train' | 'bus' | 'taxi' | 'rideshare' | 'shuttle');
-                                return (
-                                  <div key={startIndex + idx} className="p-3 bg-muted/50 rounded-lg">
-                                    <div className="flex items-start gap-3">
-                                      <Icon className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                                      <div className="flex-1">
-                                        <h6 className="font-medium">{getTransportTranslation(transport, selectedLanguage, 'name')}</h6>
-                                        <div className="text-sm text-muted-foreground space-y-1 mt-1">
-                                          <p>{getTransportTranslation(transport, selectedLanguage, 'from')} → {getTransportTranslation(transport, selectedLanguage, 'to')}</p>
-                                          <p>{getTransportTranslation(transport, selectedLanguage, 'duration')} • {getTransportTranslation(transport, selectedLanguage, 'price')}</p>
-                                          {transport.tips && (
-                                            <p className="text-xs mt-2 italic">{getTransportTranslation(transport, selectedLanguage, 'tips')}</p>
-                                          )}
-                                        </div>
-                                        {transport.bookingUrl && (
-                                          <Button
-                                            variant="outline"
-                                            size="sm"
-                                            className="mt-2 gap-2"
-                                            onClick={() => window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer')}
-                                          >
-                                            <ExternalLink className="w-3 h-3" />
-                                            {t('bookNow', selectedLanguage)}
-                                          </Button>
-                                        )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                );
-                              });
-                            })()}
-                          </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-3">
+                            {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
+                          </p>
 
-                          {/* Pagination Controls for Transport */}
-                          {city.cruisePort.transportOptions.length > transportItemsPerPage && (
-                            <div className="flex items-center justify-between pt-3 border-t mt-3 flex-shrink-0">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => setTransportPage(prev => Math.max(1, prev - 1))}
-                                disabled={transportPage === 1}
-                                className={`gap-1 ${transportPage > 1 ? 'animate-blink' : ''}`}
-                                data-testid="button-transport-prev-page"
-                              >
-                                <ChevronLeft className="w-4 h-4" />
-                                {t('previous', selectedLanguage)}
-                              </Button>
-
-                              <span className="text-sm text-muted-foreground" data-testid="text-transport-page-info">
-                                {transportPage} / {Math.ceil(city.cruisePort.transportOptions.length / transportItemsPerPage)}
-                              </span>
-
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => setTransportPage(prev => Math.min(Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage), prev + 1))}
-                                disabled={transportPage === Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage)}
-                                className={`gap-1 ${transportPage < Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage) ? 'animate-blink' : ''}`}
-                                data-testid="button-transport-next-page"
-                              >
-                                {t('next', selectedLanguage)}
-                                <ChevronRight className="w-4 h-4" />
-                              </Button>
+                          {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') && (
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={handlePlayAudio}
+                                  className="gap-2"
+                                  data-testid="button-play-audio"
+                                >
+                                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                                  {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
+                                </Button>
+                                {isPlaying && (
+                                  <select
+                                    value={playbackRate}
+                                    onChange={(e) => {
+                                      const rate = parseFloat(e.target.value);
+                                      setPlaybackRate(rate);
+                                      audioService.setRate(rate);
+                                    }}
+                                    className="px-2 py-1 text-sm border rounded"
+                                    data-testid="select-playback-rate"
+                                  >
+                                    <option value="0.5">0.5x</option>
+                                    <option value="0.75">0.75x</option>
+                                    <option value="1.0">1.0x</option>
+                                    <option value="1.25">1.25x</option>
+                                    <option value="1.5">1.5x</option>
+                                    <option value="2.0">2.0x</option>
+                                  </select>
+                                )}
+                              </div>
+                              <p className="text-sm leading-relaxed">
+                                {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription')}
+                              </p>
                             </div>
                           )}
                         </div>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center h-full p-8 text-center">
-                          <Bus className="w-12 h-12 mb-3 opacity-50 text-muted-foreground" />
-                          <p className="text-sm text-muted-foreground">
-                            {t('noTransportOptions', selectedLanguage)}
-                          </p>
-                        </div>
-                      )}
-                    </TabsContent>
 
-                    <TabsContent value="tips" className="mt-4 overflow-y-auto flex-1">
-                      {city.cruisePort.tips && (
-                        <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg mb-4">
-                          <p className="text-sm text-muted-foreground">
-                            {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'tips')}
-                          </p>
-                        </div>
-                      )}
+                        {selectedLandmark.category === 'Activity' && (
+                          <div className="pt-3 border-t">
+                            <h5 className="font-semibold mb-2 flex items-center gap-2">
+                              <Ticket className="w-4 h-4" />
+                              {t('bookTicketsTours', selectedLanguage)}
+                            </h5>
+                            <div className="space-y-2">
+                              {/* 한국어: Klook */}
+                              {selectedLanguage === 'ko' && (
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="w-full justify-start gap-2"
+                                  onClick={() => {
+                                    const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                    window.open(`https://www.klook.com/ko/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                                  }}
+                                  data-testid="button-book-klook"
+                                >
+                                  <ExternalLink className="w-4 h-4" />
+                                  Klook에서 예약
+                                </Button>
+                              )}
 
-                      {/* Regional Guide (Instructor) Selection */}
-                      {(selectedRegionalGuide || regionalGuides.length > 0) && (
-                        <Card className="p-3 bg-amber-50/50 border-amber-100 mb-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-2 text-amber-900">
-                              <UserIcon className="w-4 h-4" />
-                              <span className="text-sm font-semibold">
-                                {selectedLanguage === 'ko' ? '도시 대표 가이드' : 'City Main Guide'}
-                              </span>
-                            </div>
-                            {regionalGuides.length > 1 && (
-                              <Popover>
-                                <PopoverTrigger asChild>
-                                  <Button variant="ghost" size="sm" className="h-7 text-xs gap-1 text-amber-700 hover:text-amber-800 hover:bg-amber-100">
-                                    {selectedLanguage === 'ko' ? '변경' : 'Switch'}
-                                    <ChevronRight className="w-3 h-3" />
+                              {/* 일본어: Klook, Viator */}
+                              {selectedLanguage === 'ja' && (
+                                <>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full justify-start gap-2"
+                                    onClick={() => {
+                                      const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                      window.open(`https://www.klook.com/ja/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                                    }}
+                                    data-testid="button-book-klook"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    Klookで予約
                                   </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-56 p-2">
-                                  <div className="space-y-1">
-                                    {regionalGuides.map(guide => (
-                                      <Button
-                                        key={guide.id}
-                                        variant={guide.id === selectedRegionalGuide?.id ? 'secondary' : 'ghost'}
-                                        size="sm"
-                                        className="w-full justify-start gap-2 h-auto py-2 px-2"
-                                        onClick={() => onRegionalGuideChange?.(guide.id)}
-                                      >
-                                        <div className="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
-                                          {guide.avatar ? (
-                                            <img src={guide.avatar} alt={guide.displayName || guide.email || 'User'} className="w-full h-full object-cover" />
-                                          ) : (
-                                            <UserIcon className="w-4 h-4 m-2 text-slate-400" />
-                                          )}
-                                        </div>
-                                        <div className="text-left overflow-hidden">
-                                          <div className="text-xs font-medium truncate">{guide.displayName || guide.email}</div>
-                                          <div className="text-[10px] text-muted-foreground truncate">{guide.role}</div>
-                                        </div>
-                                      </Button>
-                                    ))}
-                                  </div>
-                                </PopoverContent>
-                              </Popover>
-                            )}
-                          </div>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full justify-start gap-2"
+                                    onClick={() => {
+                                      const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                      window.open(`https://www.viator.com/ja-JP/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                                    }}
+                                    data-testid="button-book-viator"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    Viatorで予約
+                                  </Button>
+                                </>
+                              )}
 
-                          <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-200 overflow-hidden flex-shrink-0">
-                              {selectedRegionalGuide?.avatar ? (
-                                <img src={selectedRegionalGuide.avatar} alt={selectedRegionalGuide.displayName || selectedRegionalGuide.email || 'User'} className="w-full h-full object-cover" />
-                              ) : (
-                                <UserIcon className="w-6 h-6 m-3 text-amber-400" />
+                              {/* 중국어: Klook, Trip.com */}
+                              {selectedLanguage === 'zh' && (
+                                <>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full justify-start gap-2"
+                                    onClick={() => {
+                                      const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                      window.open(`https://www.klook.com/zh-CN/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                                    }}
+                                    data-testid="button-book-klook"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    Klook预订
+                                  </Button>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full justify-start gap-2"
+                                    onClick={() => {
+                                      const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                      window.open(`https://cn.trip.com/search/things-to-do?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                                    }}
+                                    data-testid="button-book-trip"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    Trip.com预订
+                                  </Button>
+                                </>
+                              )}
+
+                              {/* 동남아시아 언어: Klook */}
+                              {(selectedLanguage === 'th' || selectedLanguage === 'vi' || selectedLanguage === 'id') && (
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="w-full justify-start gap-2"
+                                  onClick={() => {
+                                    const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                    const langCode = selectedLanguage === 'th' ? 'th-TH' : selectedLanguage === 'vi' ? 'vi-VN' : 'id-ID';
+                                    window.open(`https://www.klook.com/${langCode}/search/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                                  }}
+                                  data-testid="button-book-klook"
+                                >
+                                  <ExternalLink className="w-4 h-4" />
+                                  {selectedLanguage === 'th' ? 'จองกับ Klook' : selectedLanguage === 'vi' ? 'Đặt trên Klook' : 'Pesan di Klook'}
+                                </Button>
+                              )}
+
+                              {/* 영어/유럽 언어: GetYourGuide, Viator */}
+                              {['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ar', 'hi', 'tr', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs'].includes(selectedLanguage) && (
+                                <>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full justify-start gap-2"
+                                    onClick={() => {
+                                      const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                      // Language mapping for GetYourGuide
+                                      const gygLang = selectedLanguage === 'es' ? 'es' : selectedLanguage === 'fr' ? 'fr' : selectedLanguage === 'de' ? 'de' : selectedLanguage === 'it' ? 'it' : selectedLanguage === 'pt' ? 'pt-BR' : 'en';
+                                      window.open(`https://www.getyourguide.com/${gygLang}/s/?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                                    }}
+                                    data-testid="button-book-getyourguide"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    {t('bookOnGetYourGuide', selectedLanguage)}
+                                  </Button>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full justify-start gap-2"
+                                    onClick={() => {
+                                      const searchQuery = encodeURIComponent(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'));
+                                      // Language mapping for Viator
+                                      const viatorLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-BR' : 'en-US';
+                                      window.open(`https://www.viator.com/${viatorLang}/search?q=${searchQuery}`, '_blank', 'noopener,noreferrer');
+                                    }}
+                                    data-testid="button-book-viator"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    {t('bookOnViator', selectedLanguage)}
+                                  </Button>
+                                </>
                               )}
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-1.5">
-                                <span className="font-bold text-slate-900 truncate">
-                                  {selectedRegionalGuide?.displayName || selectedRegionalGuide?.email || (selectedLanguage === 'ko' ? 'AI 가이드' : 'AI Guide')}
-                                </span>
-                                <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100 border-none px-1.5 py-0 h-4 text-[10px]">
-                                  Instructor
-                                </Badge>
+                          </div>
+                        )}
+
+                        {selectedLandmark.category === 'Restaurant' && (
+                          <div className="pt-3 border-t">
+                            <h5 className="font-semibold mb-3 flex items-center gap-2">
+                              <Utensils className="w-4 h-4" />
+                              {t('restaurantInfo', selectedLanguage)}
+                            </h5>
+                            <div className="space-y-3">
+                              {selectedLandmark.openingHours && (
+                                <div className="flex items-start gap-2 text-sm">
+                                  <Clock className="w-4 h-4 text-muted-foreground mt-0.5" />
+                                  <div>
+                                    <p className="font-medium">{t('openingHours', selectedLanguage)}</p>
+                                    <p className="text-muted-foreground">{selectedLandmark.openingHours}</p>
+                                  </div>
+                                </div>
+                              )}
+
+                              {selectedLandmark.priceRange && (
+                                <div className="flex items-start gap-2 text-sm">
+                                  <Euro className="w-4 h-4 text-muted-foreground mt-0.5" />
+                                  <div>
+                                    <p className="font-medium">{t('priceRange', selectedLanguage)}</p>
+                                    <p className="text-muted-foreground">{selectedLandmark.priceRange}</p>
+                                  </div>
+                                </div>
+                              )}
+
+                              {selectedLandmark.cuisine && (
+                                <div className="flex items-start gap-2 text-sm">
+                                  <ChefHat className="w-4 h-4 text-muted-foreground mt-0.5" />
+                                  <div>
+                                    <p className="font-medium">{t('cuisine', selectedLanguage)}</p>
+                                    <p className="text-muted-foreground">{selectedLandmark.cuisine}</p>
+                                  </div>
+                                </div>
+                              )}
+
+                              {selectedLandmark.phoneNumber && (
+                                <div className="flex items-start gap-2 text-sm">
+                                  <Phone className="w-4 h-4 text-muted-foreground mt-0.5" />
+                                  <div>
+                                    <p className="font-medium">{t('phoneNumber', selectedLanguage)}</p>
+                                    <a
+                                      href={`tel:${selectedLandmark.phoneNumber}`}
+                                      className="text-primary hover:underline"
+                                      data-testid="link-restaurant-phone"
+                                    >
+                                      {selectedLandmark.phoneNumber}
+                                    </a>
+                                  </div>
+                                </div>
+                              )}
+
+                              {selectedLandmark.menuHighlights && selectedLandmark.menuHighlights.length > 0 && (
+                                <div className="text-sm">
+                                  <p className="font-medium mb-1">{t('menuHighlights', selectedLanguage)}</p>
+                                  <div className="flex flex-wrap gap-1">
+                                    {selectedLandmark.menuHighlights.map((dish, idx) => (
+                                      <Badge key={idx} variant="outline" className="text-xs">
+                                        {dish}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              <div className="flex gap-2">
+                                {selectedLandmark.phoneNumber && (
+                                  <Button
+                                    variant="outline"
+                                    className="flex-1 gap-2"
+                                    onClick={() => window.open(`tel:${selectedLandmark.phoneNumber}`, '_self')}
+                                    data-testid="button-call-restaurant"
+                                  >
+                                    <Phone className="w-4 h-4" />
+                                    {t('callRestaurant', selectedLanguage)}
+                                  </Button>
+                                )}
+                                {selectedLandmark.reservationUrl && (
+                                  <Button
+                                    variant="default"
+                                    className="flex-1 gap-2"
+                                    onClick={() => window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
+                                    data-testid="button-make-reservation"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    {t('makeReservation', selectedLanguage)}
+                                  </Button>
+                                )}
                               </div>
-                              <p className="text-xs text-slate-600 line-clamp-2 mt-0.5">
-                                {selectedLanguage === 'ko'
-                                  ? `${city?.name}의 모든 명소에 대한 프리미엄 해설을 제공합니다.`
-                                  : `Providing premium commentary for all landmarks in ${city?.name}.`}
-                              </p>
                             </div>
                           </div>
-                        </Card>
-                      )}
-                    </TabsContent>
-                  </Tabs>
-                )}
-              </TabsContent>
-
-              {/* Landmark List Tab */}
-              <TabsContent value="list" className="mt-4 flex flex-col flex-1">
-                {/* Captured Route Image */}
-                {capturedRouteImage && (
-                  <div className="mb-3 relative">
-                    <img
-                      src={capturedRouteImage}
-                      alt="Tour Route"
-                      className="w-full h-32 object-cover rounded-lg border border-[hsl(14,85%,55%)]/30"
-                    />
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => onClearCapturedImage?.()}
-                      className="absolute top-1 right-1 h-6 w-6 bg-black/50 hover:bg-black/70 text-white rounded-full"
-                      data-testid="button-clear-route-image"
-                    >
-                      <X className="w-3 h-3" />
-                    </Button>
-                    <div className="absolute bottom-1 left-1 px-2 py-0.5 bg-black/60 text-white text-[10px] rounded">
-                      {selectedLanguage === 'ko' ? '투어 경로' : 'Tour Route'}
-                    </div>
-                  </div>
-                )}
-
-                {/* Tour Route Section - Scrollable */}
-                {tourStops.length > 0 && (
-                  <div className="pb-3 mb-3 border-b flex-shrink-0">
-                    <div className="mb-3">
-                      <div className="flex items-center justify-between mb-2">
-                        <h5 className="font-semibold flex items-center gap-2">
-                          <MapPinned className="w-4 h-4 text-primary" />
-                          {t('tourRoute', selectedLanguage)} ({tourStops.length})
-                        </h5>
-                        <div className="flex items-center gap-1">
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="h-7 w-7"
-                                onClick={() => onSaveRoute?.()}
-                                disabled={tourStops.length < 2}
-                                data-testid="button-save-route"
-                              >
-                                <Save className="w-4 h-4" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              {selectedLanguage === 'ko' ? '경로 저장' : 'Save Route'}
-                            </TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant={isSimulationMode ? "default" : "outline"}
-                                size="icon"
-                                className={`h-7 w-7 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 animate-pulse border-none' : 'text-blue-500 border-blue-200 hover:bg-blue-50'}`}
-                                onClick={() => onToggleSimulation?.()}
-                                disabled={tourStops.length < 2}
-                                data-testid="button-toggle-simulation"
-                              >
-                                {isSimulationMode ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4" />}
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              {isSimulationMode
-                                ? (selectedLanguage === 'ko' ? '시뮬레이션 중단' : 'Stop Simulation')
-                                : (selectedLanguage === 'ko' ? '가상 투어 시작' : 'Start Virtual Tour')}
-                            </TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="h-7 w-7"
-                                onClick={() => onOpenMyRoutes?.()}
-                                data-testid="button-my-routes"
-                              >
-                                <FolderOpen className="w-4 h-4" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              {selectedLanguage === 'ko' ? '저장된 경로' : 'My Routes'}
-                            </TooltipContent>
-                          </Tooltip>
-                        </div>
+                        )}
                       </div>
-                      {tourStops.length >= 2 && tourRouteInfo && (
-                        <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
-                          {(() => {
-                            const trafficInfo = getTrafficInfo(selectedLanguage, departureTime);
-                            const adjustedDuration = Math.round(tourRouteInfo.duration * trafficInfo.multiplier);
-                            const travelMinutes = Math.round(adjustedDuration / 60);
-                            const stayMinutes = tourStops.reduce((sum, stop) =>
-                              sum + (tourStopDurations[stop.id] || tourTimePerStop), 0);
-                            const totalMinutes = travelMinutes + stayMinutes;
-                            const hours = Math.floor(totalMinutes / 60);
-                            const mins = totalMinutes % 60;
+                    )}
 
-                            // Calculate estimated end time
-                            const startTime = departureTime || new Date();
-                            const endTime = new Date(startTime.getTime() + totalMinutes * 60 * 1000);
-                            const endHour = endTime.getHours();
-                            const endMinute = endTime.getMinutes();
-
-                            // Check if tour ends late (after 8 PM / 20:00)
-                            const isLateEnd = endHour >= 20;
-                            // Check if tour is very long (over 6 hours)
-                            const isVeryLong = totalMinutes > 360;
-                            // Check if tour is moderately long (over 4 hours)
-                            const isModeratelyLong = totalMinutes > 240 && totalMinutes <= 360;
-
-                            const formatTime = (date: Date) => {
-                              return date.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', {
-                                hour: '2-digit',
-                                minute: '2-digit',
-                                hour12: selectedLanguage !== 'ko'
-                              });
-                            };
-
-                            return (
-                              <>
-                                {/* Traffic Status Badge */}
-                                <div className="flex items-center justify-between mb-2">
-                                  <div
-                                    className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-white text-xs font-medium"
-                                    style={{ backgroundColor: trafficInfo.color }}
-                                    data-testid="badge-traffic-status"
-                                  >
-                                    <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                                    {trafficInfo.label}
-                                    {trafficInfo.multiplier !== 1.0 && (
-                                      <span className="opacity-80">
-                                        (×{trafficInfo.multiplier.toFixed(1)})
-                                      </span>
-                                    )}
-                                  </div>
-                                  <span className="text-[10px] text-muted-foreground">
-                                    {departureTime
-                                      ? `${selectedLanguage === 'ko' ? '출발' : 'Depart'}: ${formatTime(departureTime)}`
-                                      : (selectedLanguage === 'ko' ? '현재 교통상황' : 'Current traffic')
-                                    }
-                                  </span>
-                                </div>
-
-                                {/* Time Warning Alert */}
-                                {(isLateEnd || isVeryLong) && (
-                                  <div className="flex items-center gap-2 p-2 mb-2 rounded-md bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400">
-                                    <Clock className="w-4 h-4 flex-shrink-0" />
-                                    <div className="text-xs">
-                                      <p className="font-medium">
-                                        {selectedLanguage === 'ko' ? '⚠️ 시간 초과 주의!' : '⚠️ Time Warning!'}
-                                      </p>
-                                      <p className="text-[10px] opacity-80">
-                                        {isLateEnd
-                                          ? (selectedLanguage === 'ko'
-                                            ? `예상 종료: ${formatTime(endTime)} (늦은 시간)`
-                                            : `Est. end: ${formatTime(endTime)} (late evening)`)
-                                          : (selectedLanguage === 'ko'
-                                            ? `총 ${hours}시간 ${mins}분 - 투어가 매우 깁니다`
-                                            : `${hours}h ${mins}m total - very long tour`)
-                                        }
-                                      </p>
-                                    </div>
-                                  </div>
-                                )}
-
-                                {isModeratelyLong && !isLateEnd && !isVeryLong && (
-                                  <div className="flex items-center justify-between gap-2 p-2 mb-2 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
-                                    <div className="flex items-center gap-2">
-                                      <Clock className="w-4 h-4 flex-shrink-0" />
-                                      <div className="text-xs">
-                                        <p className="font-medium">
-                                          {selectedLanguage === 'ko' ? '💡 긴 투어입니다' : '💡 Long Tour'}
-                                        </p>
-                                        <p className="text-[10px] opacity-80">
-                                          {selectedLanguage === 'ko'
-                                            ? `예상 종료: ${formatTime(endTime)} - 휴식을 권장합니다`
-                                            : `Est. end: ${formatTime(endTime)} - consider breaks`
-                                          }
-                                        </p>
-                                      </div>
-                                    </div>
-                                    {(startingPoint || endPoint) && (
-                                      <div className="flex flex-col gap-0.5 text-[9px] text-right">
-                                        {startingPoint && (
-                                          <div className="flex items-center gap-1 justify-end">
-                                            <span className="opacity-70">{selectedLanguage === 'ko' ? '출발' : 'From'}:</span>
-                                            <span className="font-medium text-green-600 dark:text-green-400 truncate max-w-[60px]">
-                                              {startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') :
-                                                startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                                                  startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                                                    startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
-                                                      (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
-                                            </span>
-                                          </div>
-                                        )}
-                                        {endPoint && (
-                                          <div className="flex items-center gap-1 justify-end">
-                                            <span className="opacity-70">{selectedLanguage === 'ko' ? '도착' : 'To'}:</span>
-                                            <span className="font-medium text-red-600 dark:text-red-400 truncate max-w-[60px]">
-                                              {endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') :
-                                                endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                                                  endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                                                    endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
-                                                      (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
-                                            </span>
-                                          </div>
-                                        )}
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-
-                                {/* Start/End Point Info */}
-                                <div className="flex items-center justify-between gap-2 mb-2 text-xs">
-                                  <div className="flex flex-col gap-0.5 bg-green-500/10 border border-green-500/30 rounded-md px-2 py-1 max-w-[48%]">
-                                    <div className="flex items-center gap-1.5">
-                                      <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
-                                      <span className="text-green-700 dark:text-green-400 font-medium">
-                                        {selectedLanguage === 'ko' ? '출발' : 'Start'}: {formatTime(startTime)}
-                                      </span>
-                                    </div>
-                                    {startingPoint && (
-                                      <div className="text-[10px] text-green-600 dark:text-green-500 pl-3.5">
-                                        <span className="flex-shrink-0">
-                                          {startingPoint.type === 'my_location' ? '📍' :
-                                            startingPoint.type === 'hotel' ? '🏨' :
-                                              startingPoint.type === 'airport' ? '✈️' :
-                                                startingPoint.type === 'cruise_terminal' ? '🚢' :
-                                                  startingPoint.type === 'train_station' ? '🚂' : '📍'}
-                                        </span>
-                                        <span className="truncate block" title={startingPoint.name || ''}>
-                                          {startingPoint.name || (
-                                            startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
-                                              startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                                                startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                                                  startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 항구' : 'Cruise Port') :
-                                                    (selectedLanguage === 'ko' ? '지정 위치' : 'Custom')
-                                          )}
-                                        </span>
-                                      </div>
-                                    )}
-                                  </div>
-                                  <div className="flex-shrink-0 text-muted-foreground/50">→</div>
-                                  <div className={`flex flex-col gap-0.5 rounded-md px-2 py-1 max-w-[48%] ${isLateEnd ? 'bg-red-500/10 border border-red-500/30' : 'bg-blue-500/10 border border-blue-500/30'}`}>
-                                    <div className="flex items-center gap-1.5">
-                                      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isLateEnd ? 'bg-red-500' : 'bg-blue-500'}`} />
-                                      <span className={`font-medium ${isLateEnd ? 'text-red-600 dark:text-red-400' : 'text-blue-700 dark:text-blue-400'}`}>
-                                        {selectedLanguage === 'ko' ? '도착' : 'End'}: {formatTime(endTime)}
-                                      </span>
-                                    </div>
-                                    {endPoint && (
-                                      <div className={`text-[10px] pl-3.5 ${isLateEnd ? 'text-red-500 dark:text-red-400' : 'text-blue-600 dark:text-blue-500'}`}>
-                                        <span className="flex-shrink-0">
-                                          {endPoint.type === 'my_location' ? '📍' :
-                                            endPoint.type === 'hotel' ? '🏨' :
-                                              endPoint.type === 'airport' ? '✈️' :
-                                                endPoint.type === 'cruise_terminal' ? '🚢' :
-                                                  endPoint.type === 'train_station' ? '🚂' : '📍'}
-                                        </span>
-                                        <span className="truncate block" title={endPoint.name || ''}>
-                                          {endPoint.name || (
-                                            endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
-                                              endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                                                endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                                                  endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 항구' : 'Cruise Port') :
-                                                    (selectedLanguage === 'ko' ? '지정 위치' : 'Custom')
-                                          )}
-                                        </span>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-
-                                <div className="flex items-center justify-between gap-4">
-                                  <div className="flex items-center gap-3">
-                                    <div className="flex items-center gap-1.5">
-                                      <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '이동' : 'Travel'}</span>
-                                      <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
-                                        {(tourRouteInfo.distance / 1000).toFixed(1)}km
-                                      </span>
-                                    </div>
-                                    <div className="w-px h-4 bg-border"></div>
-                                    <div className="flex items-center gap-1.5">
-                                      <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '소요' : 'Time'}</span>
-                                      <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
-                                        {travelMinutes >= 60
-                                          ? (selectedLanguage === 'ko'
-                                            ? `${Math.floor(travelMinutes / 60)}시간 ${travelMinutes % 60}분`
-                                            : `${Math.floor(travelMinutes / 60)}h ${travelMinutes % 60}m`)
-                                          : (selectedLanguage === 'ko' ? `${travelMinutes}분` : `${travelMinutes}min`)
-                                        }
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div className="flex items-center gap-1.5 bg-[hsl(14,85%,55%)] text-white px-2.5 py-1 rounded-md">
-                                    <Clock className="w-3.5 h-3.5" />
-                                    <span className="text-xs font-medium">{selectedLanguage === 'ko' ? '전체' : 'Total'}</span>
-                                    <span className="text-sm font-bold">
-                                      {hours > 0
-                                        ? (selectedLanguage === 'ko' ? `${hours}시간 ${mins}분` : `${hours}h ${mins}m`)
-                                        : (selectedLanguage === 'ko' ? `${totalMinutes}분` : `${totalMinutes}min`)
-                                      }
-                                    </span>
-                                  </div>
-                                </div>
-
-                                {/* Adjustable stay time note */}
-                                <div className="mt-1.5 text-center">
-                                  <span className="text-[10px] text-muted-foreground">
-                                    * {selectedLanguage === 'ko' ? '장소별 체류시간 조정 가능' : 'Stay time adjustable per stop'}
-                                  </span>
-                                </div>
-                              </>
-                            );
-                          })()}
-                        </div>
-                      )}
-                    </div>
-                    <div className="space-y-2">
+                    {/* Landmark List - Category-based sections */}
+                    <div className="space-y-4">
                       {(() => {
-                        const totalPages = Math.ceil(tourStops.length / tourItemsPerPage);
-                        const startIndex = (tourPage - 1) * tourItemsPerPage;
-                        const endIndex = startIndex + tourItemsPerPage;
-                        const currentTourStops = tourStops.slice(startIndex, endIndex);
+                        const landmarksByCategory = filteredListLandmarks.reduce((acc, item) => {
+                          const category = item.landmark.category || 'Landmark';
+                          if (!acc[category]) acc[category] = [];
+                          acc[category].push(item);
+                          return acc;
+                        }, {} as Record<string, typeof filteredListLandmarks>);
+
+                        const renderSection = (category: string, items: typeof filteredListLandmarks, title: string, icon: ReactNode) => {
+                          if (items.length === 0) return null;
+                          return (
+                            <div key={category} className="space-y-2">
+                              <h5 className="font-semibold text-sm text-muted-foreground flex items-center gap-2">
+                                {icon}
+                                {title}
+                              </h5>
+                              {items.map(({ landmark, distance }) => {
+                                const isSelected = selectedLandmark?.id === landmark.id;
+                                return (
+                                  <div
+                                    key={landmark.id}
+                                    className={`p-3 rounded-lg cursor-pointer transition-all ${isSelected
+                                      ? 'bg-primary/20 ring-2 ring-primary animate-pulse'
+                                      : 'bg-muted/30 hover-elevate'
+                                      }`}
+                                    onClick={() => onLandmarkSelect?.(landmark)}
+                                    data-testid={`card-landmark-${landmark.id}`}
+                                  >
+                                    <div className="flex items-start justify-between gap-3">
+                                      <div className="flex-1">
+                                        <div className="flex items-center gap-2 mb-1">
+                                          <h4 className="font-medium text-sm" data-testid={`text-landmark-name-${landmark.id}`}>
+                                            {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                                          </h4>
+                                          {spokenLandmarks.has(landmark.id) && (
+                                            <Volume2 className="w-3 h-3 text-green-600" />
+                                          )}
+                                        </div>
+                                        {distance !== null && (
+                                          <p className="text-xs text-muted-foreground">
+                                            {formatDistance(distance)}
+                                          </p>
+                                        )}
+                                      </div>
+                                      <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          onLandmarkRoute(landmark);
+                                          setIsMinimized(true);
+                                        }}
+                                        className="h-8 w-8"
+                                        data-testid={`button-navigate-${landmark.id}`}
+                                      >
+                                        <Navigation className="w-4 h-4" />
+                                      </Button>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          );
+                        };
 
                         return (
                           <>
-                            {currentTourStops.map((stop, idx) => {
-                              const index = startIndex + idx;
-                              // Determine category color
-                              const getCategoryColor = (category: string) => {
-                                if (category === 'Activity') return 'hsl(210, 85%, 55%)'; // Blue
-                                if (category === 'Restaurant') return 'hsl(25, 95%, 55%)'; // Orange
-                                if (category === 'Gift Shop') return 'hsl(45, 90%, 55%)'; // Gold
-                                return 'hsl(14, 85%, 55%)'; // Terracotta (default for landmarks)
-                              };
-
-                              const categoryColor = getCategoryColor(stop.category || '');
-
-                              const stopDuration = tourStopDurations[stop.id] || tourTimePerStop;
-
-                              return (
-                                <div key={stop.id}>
-                                  <div
-                                    className="p-2 rounded-lg flex items-center gap-2 cursor-pointer hover-elevate"
-                                    style={{ backgroundColor: categoryColor }}
-                                    onClick={() => onLandmarkSelect?.(stop)}
-                                    data-testid={`tour-stop-${stop.id}`}
-                                  >
-                                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/90 text-xs font-bold"
-                                      style={{ color: categoryColor }}>
-                                      {index + 1}
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                      <p className="text-sm font-medium truncate text-white">
-                                        {getTranslatedContent(stop, selectedLanguage, 'name')}
-                                      </p>
-                                    </div>
-                                    <div className="flex items-center gap-1">
-                                      <div
-                                        className="flex items-center bg-white/20 rounded-md"
-                                        onClick={(e) => e.stopPropagation()}
-                                      >
-                                        <Button
-                                          variant="ghost"
-                                          size="icon"
-                                          className="h-6 w-6 text-white hover:bg-white/30 rounded-r-none"
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const newDuration = Math.max(15, stopDuration - 15);
-                                            onUpdateStopDuration?.(stop.id, newDuration);
-                                          }}
-                                          data-testid={`button-tour-stop-time-minus-${stop.id}`}
-                                        >
-                                          <span className="text-sm font-bold">-</span>
-                                        </Button>
-                                        <span className="text-xs font-medium text-white px-1 min-w-[40px] text-center">
-                                          {stopDuration}m
-                                        </span>
-                                        <Button
-                                          variant="ghost"
-                                          size="icon"
-                                          className="h-6 w-6 text-white hover:bg-white/30 rounded-l-none"
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const newDuration = Math.min(180, stopDuration + 15);
-                                            onUpdateStopDuration?.(stop.id, newDuration);
-                                          }}
-                                          data-testid={`button-tour-stop-time-plus-${stop.id}`}
-                                        >
-                                          <span className="text-sm font-bold">+</span>
-                                        </Button>
-                                      </div>
-                                      <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        className="h-7 w-7 text-white hover:bg-white/20"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          onLandmarkSelect?.(stop);
-                                        }}
-                                        data-testid={`button-tour-stop-info-${stop.id}`}
-                                      >
-                                        <Info className="w-3 h-3" />
-                                      </Button>
-                                      <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        className="h-7 w-7 text-white hover:bg-white/20"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          onRemoveTourStop?.(stop.id);
-                                        }}
-                                        data-testid={`button-tour-stop-remove-${stop.id}`}
-                                      >
-                                        <X className="w-3 h-3" />
-                                      </Button>
-                                    </div>
-                                  </div>
-                                  {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
-                                    <div className="flex items-center gap-2 pl-9 py-1.5">
-                                      {(() => {
-                                        const segmentTrafficInfo = getTrafficInfo(selectedLanguage, departureTime);
-                                        const adjustedSegmentDuration = Math.ceil(tourRouteInfo.segments[index].duration * segmentTrafficInfo.multiplier / 60);
-                                        const segHours = Math.floor(adjustedSegmentDuration / 60);
-                                        const segMins = adjustedSegmentDuration % 60;
-                                        const timeDisplay = adjustedSegmentDuration >= 60
-                                          ? (selectedLanguage === 'ko'
-                                            ? `${segHours}시간 ${segMins}분`
-                                            : `${segHours}h ${segMins}m`)
-                                          : (selectedLanguage === 'ko' ? `${adjustedSegmentDuration}분` : `${adjustedSegmentDuration}min`);
-                                        return (
-                                          <div className="flex items-center gap-1.5 text-xs bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/20 rounded-md px-2 py-0.5">
-                                            <span className="text-[hsl(14,85%,55%)] font-bold text-sm">↓</span>
-                                            <span className="font-medium text-[hsl(14,85%,55%)]">
-                                              {(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km
-                                            </span>
-                                            <span className="text-muted-foreground">•</span>
-                                            <span className="font-medium text-[hsl(14,85%,55%)]">
-                                              {timeDisplay}
-                                            </span>
-                                          </div>
-                                        );
-                                      })()}
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })}
-
-                            {/* Tour Pagination */}
-                            {tourStops.length > tourItemsPerPage && (
-                              <div className="flex items-center justify-between pt-2 border-t">
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => setTourPage(prev => Math.max(1, prev - 1))}
-                                  disabled={tourPage === 1}
-                                  className={`gap-1 h-7 text-xs ${tourPage > 1 ? 'animate-blink' : ''}`}
-                                  data-testid="button-tour-prev-page"
-                                >
-                                  <ChevronLeft className="w-3 h-3" />
-                                  Prev
-                                </Button>
-
-                                <span className="text-xs text-muted-foreground" data-testid="text-tour-page-info">
-                                  {tourPage} / {totalPages}
-                                </span>
-
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => setTourPage(prev => Math.min(totalPages, prev + 1))}
-                                  disabled={tourPage === totalPages}
-                                  className={`gap-1 h-7 text-xs ${tourPage < totalPages ? 'animate-blink' : ''}`}
-                                  data-testid="button-tour-next-page"
-                                >
-                                  Next
-                                  <ChevronRight className="w-3 h-3" />
-                                </Button>
-                              </div>
-                            )}
+                            {renderSection('Landmark', landmarksByCategory['Landmark'] || [], t('landmarksSection', selectedLanguage), <LandmarkIcon className="w-4 h-4 text-primary" />)}
+                            {renderSection('Activity', landmarksByCategory['Activity'] || [], t('activitiesSection', selectedLanguage), <ActivityIcon className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
+                            {renderSection('Restaurant', landmarksByCategory['Restaurant'] || [], t('restaurantsSection', selectedLanguage), <Utensils className="w-4 h-4 text-[hsl(195,85%,50%)]" />)}
                           </>
                         );
                       })()}
                     </div>
                   </div>
-                )}
+                </TabsContent>
 
-                {/* Landmark Search Input */}
-                <div className="relative mb-3 flex-shrink-0">
-                  <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    type="text"
-                    placeholder={selectedLanguage === 'ko' ? '랜드마크 검색...' : 'Search landmarks...'}
-                    value={landmarkSearchQuery}
-                    onChange={(e) => {
-                      setLandmarkSearchQuery(e.target.value);
-                      setCurrentPage(1); // Reset to first page when searching
-                    }}
-                    className="pl-8 h-8 text-sm"
-                    data-testid="input-landmark-search"
-                  />
-                  {landmarkSearchQuery && (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-1 top-1/2 -translate-y-1/2 h-6 w-6"
-                      onClick={() => {
-                        setLandmarkSearchQuery('');
-                        setCurrentPage(1);
-                      }}
-                      data-testid="button-clear-search"
-                    >
-                      <X className="w-3 h-3" />
-                    </Button>
-                  )}
-                </div>
+                {/* Cruise Port Tab with sub-tabs */}
+                <TabsContent value="cruise" className="mt-4 flex flex-col flex-1">
+                  {city?.cruisePort && (
+                    <Tabs defaultValue="info" className="w-full flex flex-col flex-1 min-h-0">
+                      <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
+                        <TabsTrigger value="info" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('cruiseInfo', selectedLanguage)}</TabsTrigger>
+                        <TabsTrigger value="transport" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('transportation', selectedLanguage)}</TabsTrigger>
+                        <TabsTrigger value="tips" className="text-xs whitespace-normal leading-tight px-1 h-auto py-2">{t('tips', selectedLanguage)}</TabsTrigger>
+                      </TabsList>
 
-                {/* Category Filter Buttons */}
-                <div className="flex flex-wrap gap-1.5 pb-3 mb-3 border-b flex-shrink-0">
-                  <Button
-                    variant={showLandmarks ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => onToggleLandmarks()}
-                    className={`h-7 gap-1 text-xs ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : ''}`}
-                    data-testid="button-filter-landmarks-list"
-                  >
-                    <LandmarkIcon className="w-3 h-3" />
-                    {selectedLanguage === 'ko' ? '명소' : 'Landmarks'}
-                  </Button>
-                  <Button
-                    variant={showActivities ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => onToggleActivities()}
-                    className={`h-7 gap-1 text-xs ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
-                    data-testid="button-filter-activities-list"
-                  >
-                    <ActivityIcon className="w-3 h-3" />
-                    {selectedLanguage === 'ko' ? '액티비티' : 'Activities'}
-                  </Button>
-                  <Button
-                    variant={showRestaurants ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => onToggleRestaurants()}
-                    className={`h-7 gap-1 text-xs ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : ''}`}
-                    data-testid="button-filter-restaurants-list"
-                  >
-                    <Utensils className="w-3 h-3" />
-                    {selectedLanguage === 'ko' ? '맛집' : 'Restaurants'}
-                  </Button>
-                  <Button
-                    variant={showGiftShops ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => onToggleGiftShops()}
-                    className={`h-7 gap-1 text-xs ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-black' : ''}`}
-                    data-testid="button-filter-giftshops-list"
-                  >
-                    <ShoppingBag className="w-3 h-3" />
-                    {selectedLanguage === 'ko' ? '기념품' : 'Gift Shops'}
-                  </Button>
-                </div>
+                      <TabsContent value="info" className="mt-4 overflow-y-auto flex-1">
+                        <div>
+                          <h4 className="font-bold text-lg mb-2">
+                            {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'portName')}
+                          </h4>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex items-center gap-2">
+                              <MapPin className="w-4 h-4 text-muted-foreground" />
+                              <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'distanceFromCity')}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Clock className="w-4 h-4 text-muted-foreground" />
+                              <span>{getCruisePortTranslation(city.cruisePort, selectedLanguage, 'recommendedDuration')}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </TabsContent>
 
-                {/* Paginated list - Takes remaining space */}
-                <div className="flex-1 min-h-0 flex flex-col">
-                  <div ref={listScrollRef} className="flex-1 overflow-y-auto space-y-2 pr-1">
-                    {filteredListLandmarks.length === 0 ? (
-                      <div className="flex flex-col items-center justify-center h-full p-8 text-center">
-                        <List className="w-12 h-12 mb-3 opacity-50 text-muted-foreground" />
-                        <p className="text-sm text-muted-foreground">
-                          {t('noLandmarksFound', selectedLanguage)}
-                        </p>
-                      </div>
-                    ) : (() => {
-                      const totalPages = Math.ceil(filteredListLandmarks.length / itemsPerPage);
-                      const startIndex = (currentPage - 1) * itemsPerPage;
-                      const endIndex = startIndex + itemsPerPage;
-                      const currentItems = filteredListLandmarks.slice(startIndex, endIndex);
+                      <TabsContent value="transport" className="mt-4 flex flex-col flex-1">
+                        {city?.cruisePort?.transportOptions && city.cruisePort.transportOptions.length > 0 ? (
+                          <div className="flex-1 min-h-0 flex flex-col">
+                            <div className="flex-1 overflow-y-auto space-y-3">
+                              {(() => {
+                                const transportOptions = city.cruisePort.transportOptions;
+                                const totalPages = Math.ceil(transportOptions.length / transportItemsPerPage);
+                                const startIndex = (transportPage - 1) * transportItemsPerPage;
+                                const endIndex = startIndex + transportItemsPerPage;
+                                const currentTransports = transportOptions.slice(startIndex, endIndex);
 
-                      return currentItems.map(({ landmark, distance }) => {
-                        const getCategoryStyles = (category: string | null | undefined) => {
-                          if (category === 'Activity') return { bg: 'bg-[hsl(210,85%,55%)]', text: 'text-white', border: 'border-[hsl(210,85%,55%)]' };
-                          if (category === 'Restaurant') return { bg: 'bg-[hsl(25,95%,55%)]', text: 'text-white', border: 'border-[hsl(25,95%,55%)]' };
-                          if (category === 'Gift Shop') return { bg: 'bg-[hsl(45,90%,55%)]', text: 'text-black', border: 'border-[hsl(45,90%,55%)]' };
-                          return { bg: 'bg-[hsl(14,85%,55%)]', text: 'text-white', border: 'border-[hsl(14,85%,55%)]' };
-                        };
-
-                        const getCategoryIcon = (category: string | null | undefined) => {
-                          if (category === 'Activity') return <ActivityIcon className="w-3 h-3" />;
-                          if (category === 'Restaurant') return <Utensils className="w-3 h-3" />;
-                          if (category === 'Gift Shop') return <ShoppingBag className="w-3 h-3" />;
-                          return <LandmarkIcon className="w-3 h-3" />;
-                        };
-
-                        const getCategoryLabel = (category: string | null | undefined, lang: string = 'en') => {
-                          if (category === 'Activity') return lang === 'ko' ? '액티비티' : 'Activity';
-                          if (category === 'Restaurant') return lang === 'ko' ? '레스토랑' : 'Restaurant';
-                          if (category === 'Gift Shop') return lang === 'ko' ? '기프트샵' : 'Gift Shop';
-                          return lang === 'ko' ? '명소' : 'Landmark';
-                        };
-
-                        const styles = getCategoryStyles(landmark.category);
-                        const hasPhoto = landmark.photos && landmark.photos.length > 0;
-
-                        return (
-                          <div
-                            key={landmark.id}
-                            className="rounded-xl border bg-card overflow-hidden hover-elevate cursor-pointer transition-all"
-                            onClick={() => handleLandmarkClick(landmark)}
-                            data-testid={`card-landmark-${landmark.id}`}
-                          >
-                            <div className="flex">
-                              {/* Photo Thumbnail */}
-                              {/* [학습 포인트] img onError: 이미지 로드 실패 시 해당 img를 숨기고 fallback UI를 표시 */}
-                              {hasPhoto && (
-                                <div className="w-20 h-20 flex-shrink-0 relative overflow-hidden bg-muted">
-                                  <img
-                                    src={landmark.photos![0]}
-                                    alt={getTranslatedContent(landmark, selectedLanguage, 'name')}
-                                    className="w-full h-full object-cover"
-                                    onError={(e) => {
-                                      // 이미지 로드 실패: 이미지 숨기고 부모를 muted 배경으로 대체
-                                      (e.target as HTMLImageElement).style.display = 'none';
-                                    }}
-                                  />
-                                  <div className={`absolute top-1 left-1 ${styles.bg} ${styles.text} rounded-full p-1`}>
-                                    {getCategoryIcon(landmark.category)}
-                                  </div>
-                                </div>
-                              )}
-
-                              {/* Content */}
-                              <div className={`flex-1 p-2.5 flex flex-col justify-between ${!hasPhoto ? 'pl-3' : ''}`}>
-                                <div>
-                                  <div className="flex items-start justify-between gap-2">
-                                    <div className="flex-1 min-w-0">
-                                      <div className="flex items-center gap-1.5 mb-0.5">
-                                        {!hasPhoto && (
-                                          <div className={`${styles.bg} ${styles.text} rounded-full p-1`}>
-                                            {getCategoryIcon(landmark.category)}
+                                return currentTransports.map((transport, idx) => {
+                                  const Icon = getTransportIcon(transport.type as 'train' | 'bus' | 'taxi' | 'rideshare' | 'shuttle');
+                                  return (
+                                    <div key={startIndex + idx} className="p-3 bg-muted/50 rounded-lg">
+                                      <div className="flex items-start gap-3">
+                                        <Icon className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                                        <div className="flex-1">
+                                          <h6 className="font-medium">{getTransportTranslation(transport, selectedLanguage, 'name')}</h6>
+                                          <div className="text-sm text-muted-foreground space-y-1 mt-1">
+                                            <p>{getTransportTranslation(transport, selectedLanguage, 'from')} → {getTransportTranslation(transport, selectedLanguage, 'to')}</p>
+                                            <p>{getTransportTranslation(transport, selectedLanguage, 'duration')} • {getTransportTranslation(transport, selectedLanguage, 'price')}</p>
+                                            {transport.tips && (
+                                              <p className="text-xs mt-2 italic">{getTransportTranslation(transport, selectedLanguage, 'tips')}</p>
+                                            )}
                                           </div>
-                                        )}
-                                        <h4 className="font-semibold text-sm truncate" data-testid={`text-landmark-name-${landmark.id}`}>
-                                          {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                                        </h4>
-                                        {spokenLandmarks.has(landmark.id) && (
-                                          <Volume2 className="w-3 h-3 text-green-600 flex-shrink-0" />
-                                        )}
+                                          {transport.bookingUrl && (
+                                            <Button
+                                              variant="outline"
+                                              size="sm"
+                                              className="mt-2 gap-2"
+                                              onClick={() => window.open(transport.bookingUrl, '_blank', 'noopener,noreferrer')}
+                                            >
+                                              <ExternalLink className="w-3 h-3" />
+                                              {t('bookNow', selectedLanguage)}
+                                            </Button>
+                                          )}
+                                        </div>
                                       </div>
-                                      <p className="text-xs text-muted-foreground line-clamp-1">
-                                        {getTranslatedContent(landmark, selectedLanguage, 'description')}
-                                      </p>
+                                    </div>
+                                  );
+                                });
+                              })()}
+                            </div>
+
+                            {/* Pagination Controls for Transport */}
+                            {city.cruisePort.transportOptions.length > transportItemsPerPage && (
+                              <div className="flex items-center justify-between pt-3 border-t mt-3 flex-shrink-0">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => setTransportPage(prev => Math.max(1, prev - 1))}
+                                  disabled={transportPage === 1}
+                                  className={`gap-1 ${transportPage > 1 ? 'animate-blink' : ''}`}
+                                  data-testid="button-transport-prev-page"
+                                >
+                                  <ChevronLeft className="w-4 h-4" />
+                                  {t('previous', selectedLanguage)}
+                                </Button>
+
+                                <span className="text-sm text-muted-foreground" data-testid="text-transport-page-info">
+                                  {transportPage} / {Math.ceil(city.cruisePort.transportOptions.length / transportItemsPerPage)}
+                                </span>
+
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => setTransportPage(prev => Math.min(Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage), prev + 1))}
+                                  disabled={transportPage === Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage)}
+                                  className={`gap-1 ${transportPage < Math.ceil((city?.cruisePort?.transportOptions?.length || 0) / transportItemsPerPage) ? 'animate-blink' : ''}`}
+                                  data-testid="button-transport-next-page"
+                                >
+                                  {t('next', selectedLanguage)}
+                                  <ChevronRight className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+                            <Bus className="w-12 h-12 mb-3 opacity-50 text-muted-foreground" />
+                            <p className="text-sm text-muted-foreground">
+                              {t('noTransportOptions', selectedLanguage)}
+                            </p>
+                          </div>
+                        )}
+                      </TabsContent>
+
+                      <TabsContent value="tips" className="mt-4 overflow-y-auto flex-1">
+                        {city.cruisePort.tips && (
+                          <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg mb-4">
+                            <p className="text-sm text-muted-foreground">
+                              {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'tips')}
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Regional Guide (Instructor) Selection */}
+                        {(selectedRegionalGuide || regionalGuides.length > 0) && (
+                          <Card className="p-3 bg-amber-50/50 border-amber-100 mb-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-2 text-amber-900">
+                                <UserIcon className="w-4 h-4" />
+                                <span className="text-sm font-semibold">
+                                  {selectedLanguage === 'ko' ? '도시 대표 가이드' : 'City Main Guide'}
+                                </span>
+                              </div>
+                              {regionalGuides.length > 1 && (
+                                <Popover>
+                                  <PopoverTrigger asChild>
+                                    <Button variant="ghost" size="sm" className="h-7 text-xs gap-1 text-amber-700 hover:text-amber-800 hover:bg-amber-100">
+                                      {selectedLanguage === 'ko' ? '변경' : 'Switch'}
+                                      <ChevronRight className="w-3 h-3" />
+                                    </Button>
+                                  </PopoverTrigger>
+                                  <PopoverContent className="w-56 p-2">
+                                    <div className="space-y-1">
+                                      {regionalGuides.map(guide => (
+                                        <Button
+                                          key={guide.id}
+                                          variant={guide.id === selectedRegionalGuide?.id ? 'secondary' : 'ghost'}
+                                          size="sm"
+                                          className="w-full justify-start gap-2 h-auto py-2 px-2"
+                                          onClick={() => onRegionalGuideChange?.(guide.id)}
+                                        >
+                                          <div className="w-8 h-8 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+                                            {guide.avatar ? (
+                                              <img src={guide.avatar} alt={guide.displayName || guide.email || 'User'} className="w-full h-full object-cover" />
+                                            ) : (
+                                              <UserIcon className="w-4 h-4 m-2 text-slate-400" />
+                                            )}
+                                          </div>
+                                          <div className="text-left overflow-hidden">
+                                            <div className="text-xs font-medium truncate">{guide.displayName || guide.email}</div>
+                                            <div className="text-[10px] text-muted-foreground truncate">{guide.role}</div>
+                                          </div>
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  </PopoverContent>
+                                </Popover>
+                              )}
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                              <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-200 overflow-hidden flex-shrink-0">
+                                {selectedRegionalGuide?.avatar ? (
+                                  <img src={selectedRegionalGuide.avatar} alt={selectedRegionalGuide.displayName || selectedRegionalGuide.email || 'User'} className="w-full h-full object-cover" />
+                                ) : (
+                                  <UserIcon className="w-6 h-6 m-3 text-amber-400" />
+                                )}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="font-bold text-slate-900 truncate">
+                                    {selectedRegionalGuide?.displayName || selectedRegionalGuide?.email || (selectedLanguage === 'ko' ? 'AI 가이드' : 'AI Guide')}
+                                  </span>
+                                  <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100 border-none px-1.5 py-0 h-4 text-[10px]">
+                                    Instructor
+                                  </Badge>
+                                </div>
+                                <p className="text-xs text-slate-600 line-clamp-2 mt-0.5">
+                                  {selectedLanguage === 'ko'
+                                    ? `${city?.name}의 모든 명소에 대한 프리미엄 해설을 제공합니다.`
+                                    : `Providing premium commentary for all landmarks in ${city?.name}.`}
+                                </p>
+                              </div>
+                            </div>
+                          </Card>
+                        )}
+                      </TabsContent>
+                    </Tabs>
+                  )}
+                </TabsContent>
+
+                {/* Landmark List Tab */}
+                <TabsContent value="list" className="mt-4 flex flex-col flex-1">
+                  {/* Captured Route Image */}
+                  {capturedRouteImage && (
+                    <div className="mb-3 relative">
+                      <img
+                        src={capturedRouteImage}
+                        alt="Tour Route"
+                        className="w-full h-32 object-cover rounded-lg border border-[hsl(14,85%,55%)]/30"
+                      />
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => onClearCapturedImage?.()}
+                        className="absolute top-1 right-1 h-6 w-6 bg-black/50 hover:bg-black/70 text-white rounded-full"
+                        data-testid="button-clear-route-image"
+                      >
+                        <X className="w-3 h-3" />
+                      </Button>
+                      <div className="absolute bottom-1 left-1 px-2 py-0.5 bg-black/60 text-white text-[10px] rounded">
+                        {selectedLanguage === 'ko' ? '투어 경로' : 'Tour Route'}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tour Route Section - Scrollable */}
+                  {tourStops.length > 0 && (
+                    <div className="pb-3 mb-3 border-b flex-shrink-0">
+                      <div className="mb-3">
+                        <div className="flex items-center justify-between mb-2">
+                          <h5 className="font-semibold flex items-center gap-2">
+                            <MapPinned className="w-4 h-4 text-primary" />
+                            {t('tourRoute', selectedLanguage)} ({tourStops.length})
+                          </h5>
+                          <div className="flex items-center gap-1">
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-7 w-7"
+                                  onClick={() => onSaveRoute?.()}
+                                  disabled={tourStops.length < 2}
+                                  data-testid="button-save-route"
+                                >
+                                  <Save className="w-4 h-4" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                {selectedLanguage === 'ko' ? '경로 저장' : 'Save Route'}
+                              </TooltipContent>
+                            </Tooltip>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  variant={isSimulationMode ? "default" : "outline"}
+                                  size="icon"
+                                  className={`h-7 w-7 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 animate-pulse border-none' : 'text-blue-500 border-blue-200 hover:bg-blue-50'}`}
+                                  onClick={() => onToggleSimulation?.()}
+                                  disabled={tourStops.length < 2}
+                                  data-testid="button-toggle-simulation"
+                                >
+                                  {isSimulationMode ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4" />}
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                {isSimulationMode
+                                  ? (selectedLanguage === 'ko' ? '시뮬레이션 중단' : 'Stop Simulation')
+                                  : (selectedLanguage === 'ko' ? '가상 투어 시작' : 'Start Virtual Tour')}
+                              </TooltipContent>
+                            </Tooltip>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-7 w-7"
+                                  onClick={() => onOpenMyRoutes?.()}
+                                  data-testid="button-my-routes"
+                                >
+                                  <FolderOpen className="w-4 h-4" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                {selectedLanguage === 'ko' ? '저장된 경로' : 'My Routes'}
+                              </TooltipContent>
+                            </Tooltip>
+                          </div>
+                        </div>
+                        {tourStops.length >= 2 && tourRouteInfo && (
+                          <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
+                            {(() => {
+                              const trafficInfo = getTrafficInfo(selectedLanguage, departureTime);
+                              const adjustedDuration = Math.round(tourRouteInfo.duration * trafficInfo.multiplier);
+                              const travelMinutes = Math.round(adjustedDuration / 60);
+                              const stayMinutes = tourStops.reduce((sum, stop) =>
+                                sum + (tourStopDurations[stop.id] || tourTimePerStop), 0);
+                              const totalMinutes = travelMinutes + stayMinutes;
+                              const hours = Math.floor(totalMinutes / 60);
+                              const mins = totalMinutes % 60;
+
+                              // Calculate estimated end time
+                              const startTime = departureTime || new Date();
+                              const endTime = new Date(startTime.getTime() + totalMinutes * 60 * 1000);
+                              const endHour = endTime.getHours();
+                              const endMinute = endTime.getMinutes();
+
+                              // Check if tour ends late (after 8 PM / 20:00)
+                              const isLateEnd = endHour >= 20;
+                              // Check if tour is very long (over 6 hours)
+                              const isVeryLong = totalMinutes > 360;
+                              // Check if tour is moderately long (over 4 hours)
+                              const isModeratelyLong = totalMinutes > 240 && totalMinutes <= 360;
+
+                              const formatTime = (date: Date) => {
+                                return date.toLocaleTimeString(selectedLanguage === 'ko' ? 'ko-KR' : 'en-US', {
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                  hour12: selectedLanguage !== 'ko'
+                                });
+                              };
+
+                              return (
+                                <>
+                                  {/* Traffic Status Badge */}
+                                  <div className="flex items-center justify-between mb-2">
+                                    <div
+                                      className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-white text-xs font-medium"
+                                      style={{ backgroundColor: trafficInfo.color }}
+                                      data-testid="badge-traffic-status"
+                                    >
+                                      <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                                      {trafficInfo.label}
+                                      {trafficInfo.multiplier !== 1.0 && (
+                                        <span className="opacity-80">
+                                          (×{trafficInfo.multiplier.toFixed(1)})
+                                        </span>
+                                      )}
+                                    </div>
+                                    <span className="text-[10px] text-muted-foreground">
+                                      {departureTime
+                                        ? `${selectedLanguage === 'ko' ? '출발' : 'Depart'}: ${formatTime(departureTime)}`
+                                        : (selectedLanguage === 'ko' ? '현재 교통상황' : 'Current traffic')
+                                      }
+                                    </span>
+                                  </div>
+
+                                  {/* Time Warning Alert */}
+                                  {(isLateEnd || isVeryLong) && (
+                                    <div className="flex items-center gap-2 p-2 mb-2 rounded-md bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400">
+                                      <Clock className="w-4 h-4 flex-shrink-0" />
+                                      <div className="text-xs">
+                                        <p className="font-medium">
+                                          {selectedLanguage === 'ko' ? '⚠️ 시간 초과 주의!' : '⚠️ Time Warning!'}
+                                        </p>
+                                        <p className="text-[10px] opacity-80">
+                                          {isLateEnd
+                                            ? (selectedLanguage === 'ko'
+                                              ? `예상 종료: ${formatTime(endTime)} (늦은 시간)`
+                                              : `Est. end: ${formatTime(endTime)} (late evening)`)
+                                            : (selectedLanguage === 'ko'
+                                              ? `총 ${hours}시간 ${mins}분 - 투어가 매우 깁니다`
+                                              : `${hours}h ${mins}m total - very long tour`)
+                                          }
+                                        </p>
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {isModeratelyLong && !isLateEnd && !isVeryLong && (
+                                    <div className="flex items-center justify-between gap-2 p-2 mb-2 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+                                      <div className="flex items-center gap-2">
+                                        <Clock className="w-4 h-4 flex-shrink-0" />
+                                        <div className="text-xs">
+                                          <p className="font-medium">
+                                            {selectedLanguage === 'ko' ? '💡 긴 투어입니다' : '💡 Long Tour'}
+                                          </p>
+                                          <p className="text-[10px] opacity-80">
+                                            {selectedLanguage === 'ko'
+                                              ? `예상 종료: ${formatTime(endTime)} - 휴식을 권장합니다`
+                                              : `Est. end: ${formatTime(endTime)} - consider breaks`
+                                            }
+                                          </p>
+                                        </div>
+                                      </div>
+                                      {(startingPoint || endPoint) && (
+                                        <div className="flex flex-col gap-0.5 text-[9px] text-right">
+                                          {startingPoint && (
+                                            <div className="flex items-center gap-1 justify-end">
+                                              <span className="opacity-70">{selectedLanguage === 'ko' ? '출발' : 'From'}:</span>
+                                              <span className="font-medium text-green-600 dark:text-green-400 truncate max-w-[60px]">
+                                                {startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') :
+                                                  startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                                    startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                                      startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
+                                                        (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
+                                              </span>
+                                            </div>
+                                          )}
+                                          {endPoint && (
+                                            <div className="flex items-center gap-1 justify-end">
+                                              <span className="opacity-70">{selectedLanguage === 'ko' ? '도착' : 'To'}:</span>
+                                              <span className="font-medium text-red-600 dark:text-red-400 truncate max-w-[60px]">
+                                                {endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Loc') :
+                                                  endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                                    endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                                      endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '항구' : 'Port') :
+                                                        (selectedLanguage === 'ko' ? '지정위치' : 'Custom')}
+                                              </span>
+                                            </div>
+                                          )}
+                                        </div>
+                                      )}
+                                    </div>
+                                  )}
+
+                                  {/* Start/End Point Info */}
+                                  <div className="flex items-center justify-between gap-2 mb-2 text-xs">
+                                    <div className="flex flex-col gap-0.5 bg-green-500/10 border border-green-500/30 rounded-md px-2 py-1 max-w-[48%]">
+                                      <div className="flex items-center gap-1.5">
+                                        <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+                                        <span className="text-green-700 dark:text-green-400 font-medium">
+                                          {selectedLanguage === 'ko' ? '출발' : 'Start'}: {formatTime(startTime)}
+                                        </span>
+                                      </div>
+                                      {startingPoint && (
+                                        <div className="text-[10px] text-green-600 dark:text-green-500 pl-3.5">
+                                          <span className="flex-shrink-0">
+                                            {startingPoint.type === 'my_location' ? '📍' :
+                                              startingPoint.type === 'hotel' ? '🏨' :
+                                                startingPoint.type === 'airport' ? '✈️' :
+                                                  startingPoint.type === 'cruise_terminal' ? '🚢' :
+                                                    startingPoint.type === 'train_station' ? '🚂' : '📍'}
+                                          </span>
+                                          <span className="truncate block" title={startingPoint.name || ''}>
+                                            {startingPoint.name || (
+                                              startingPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                                                startingPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                                  startingPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                                    startingPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 항구' : 'Cruise Port') :
+                                                      (selectedLanguage === 'ko' ? '지정 위치' : 'Custom')
+                                            )}
+                                          </span>
+                                        </div>
+                                      )}
+                                    </div>
+                                    <div className="flex-shrink-0 text-muted-foreground/50">→</div>
+                                    <div className={`flex flex-col gap-0.5 rounded-md px-2 py-1 max-w-[48%] ${isLateEnd ? 'bg-red-500/10 border border-red-500/30' : 'bg-blue-500/10 border border-blue-500/30'}`}>
+                                      <div className="flex items-center gap-1.5">
+                                        <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isLateEnd ? 'bg-red-500' : 'bg-blue-500'}`} />
+                                        <span className={`font-medium ${isLateEnd ? 'text-red-600 dark:text-red-400' : 'text-blue-700 dark:text-blue-400'}`}>
+                                          {selectedLanguage === 'ko' ? '도착' : 'End'}: {formatTime(endTime)}
+                                        </span>
+                                      </div>
+                                      {endPoint && (
+                                        <div className={`text-[10px] pl-3.5 ${isLateEnd ? 'text-red-500 dark:text-red-400' : 'text-blue-600 dark:text-blue-500'}`}>
+                                          <span className="flex-shrink-0">
+                                            {endPoint.type === 'my_location' ? '📍' :
+                                              endPoint.type === 'hotel' ? '🏨' :
+                                                endPoint.type === 'airport' ? '✈️' :
+                                                  endPoint.type === 'cruise_terminal' ? '🚢' :
+                                                    endPoint.type === 'train_station' ? '🚂' : '📍'}
+                                          </span>
+                                          <span className="truncate block" title={endPoint.name || ''}>
+                                            {endPoint.name || (
+                                              endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                                                endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                                                  endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                                                    endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 항구' : 'Cruise Port') :
+                                                      (selectedLanguage === 'ko' ? '지정 위치' : 'Custom')
+                                            )}
+                                          </span>
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
-                                </div>
 
-                                {/* Footer: Distance + Actions */}
-                                <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/50">
-                                  <div className="flex items-center gap-2">
-                                    <Badge variant="outline" className={`text-[10px] px-1.5 py-0 h-5 ${styles.border} ${styles.bg} ${styles.text}`}>
-                                      {getCategoryLabel(landmark.category, selectedLanguage)}
-                                    </Badge>
-                                    {distance !== null && (
-                                      <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
-                                        <MapPin className="w-2.5 h-2.5" />
-                                        {formatDistance(distance)}
-                                        <span className="text-muted-foreground/70 ml-0.5">
-                                          ({(() => {
-                                            const walkingMinutes = Math.round((distance / 1000) / 5 * 60);
-                                            if (walkingMinutes >= 60) {
-                                              const hours = Math.floor(walkingMinutes / 60);
-                                              const mins = walkingMinutes % 60;
-                                              return selectedLanguage === 'ko'
-                                                ? `${hours}시간 ${mins}분`
-                                                : `${hours}h ${mins}m`;
-                                            }
-                                            return selectedLanguage === 'ko' ? `${walkingMinutes}분` : `${walkingMinutes}min`;
-                                          })()})
+                                  <div className="flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-3">
+                                      <div className="flex items-center gap-1.5">
+                                        <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '이동' : 'Travel'}</span>
+                                        <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
+                                          {(tourRouteInfo.distance / 1000).toFixed(1)}km
                                         </span>
+                                      </div>
+                                      <div className="w-px h-4 bg-border"></div>
+                                      <div className="flex items-center gap-1.5">
+                                        <span className="text-xs text-muted-foreground">{selectedLanguage === 'ko' ? '소요' : 'Time'}</span>
+                                        <span className="text-sm font-semibold text-[hsl(14,85%,55%)]">
+                                          {travelMinutes >= 60
+                                            ? (selectedLanguage === 'ko'
+                                              ? `${Math.floor(travelMinutes / 60)}시간 ${travelMinutes % 60}분`
+                                              : `${Math.floor(travelMinutes / 60)}h ${travelMinutes % 60}m`)
+                                            : (selectedLanguage === 'ko' ? `${travelMinutes}분` : `${travelMinutes}min`)
+                                          }
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="flex items-center gap-1.5 bg-[hsl(14,85%,55%)] text-white px-2.5 py-1 rounded-md">
+                                      <Clock className="w-3.5 h-3.5" />
+                                      <span className="text-xs font-medium">{selectedLanguage === 'ko' ? '전체' : 'Total'}</span>
+                                      <span className="text-sm font-bold">
+                                        {hours > 0
+                                          ? (selectedLanguage === 'ko' ? `${hours}시간 ${mins}분` : `${hours}h ${mins}m`)
+                                          : (selectedLanguage === 'ko' ? `${totalMinutes}분` : `${totalMinutes}min`)
+                                        }
                                       </span>
-                                    )}
-                                    {tourStops.some(s => s.id === landmark.id) && (
-                                      <span className="text-[10px] text-[hsl(14,85%,55%)] flex items-center gap-0.5 font-medium">
-                                        <Clock className="w-2.5 h-2.5" />
-                                        {tourStopDurations[landmark.id] || tourTimePerStop}{selectedLanguage === 'ko' ? '분' : 'min'}
-                                      </span>
-                                    )}
+                                    </div>
                                   </div>
-                                  <div className="flex gap-1.5">
-                                    <Tooltip>
-                                      <TooltipTrigger asChild>
+
+                                  {/* Adjustable stay time note */}
+                                  <div className="mt-1.5 text-center">
+                                    <span className="text-[10px] text-muted-foreground">
+                                      * {selectedLanguage === 'ko' ? '장소별 체류시간 조정 가능' : 'Stay time adjustable per stop'}
+                                    </span>
+                                  </div>
+                                </>
+                              );
+                            })()}
+                          </div>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        {(() => {
+                          const totalPages = Math.ceil(tourStops.length / tourItemsPerPage);
+                          const startIndex = (tourPage - 1) * tourItemsPerPage;
+                          const endIndex = startIndex + tourItemsPerPage;
+                          const currentTourStops = tourStops.slice(startIndex, endIndex);
+
+                          return (
+                            <>
+                              {currentTourStops.map((stop, idx) => {
+                                const index = startIndex + idx;
+                                // Determine category color
+                                const getCategoryColor = (category: string) => {
+                                  if (category === 'Activity') return 'hsl(210, 85%, 55%)'; // Blue
+                                  if (category === 'Restaurant') return 'hsl(25, 95%, 55%)'; // Orange
+                                  if (category === 'Gift Shop') return 'hsl(45, 90%, 55%)'; // Gold
+                                  return 'hsl(14, 85%, 55%)'; // Terracotta (default for landmarks)
+                                };
+
+                                const categoryColor = getCategoryColor(stop.category || '');
+
+                                const stopDuration = tourStopDurations[stop.id] || tourTimePerStop;
+
+                                return (
+                                  <div key={stop.id}>
+                                    <div
+                                      className="p-2 rounded-lg flex items-center gap-2 cursor-pointer hover-elevate"
+                                      style={{ backgroundColor: categoryColor }}
+                                      onClick={() => onLandmarkSelect?.(stop)}
+                                      data-testid={`tour-stop-${stop.id}`}
+                                    >
+                                      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-white/90 text-xs font-bold"
+                                        style={{ color: categoryColor }}>
+                                        {index + 1}
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-medium truncate text-white">
+                                          {getTranslatedContent(stop, selectedLanguage, 'name')}
+                                        </p>
+                                      </div>
+                                      <div className="flex items-center gap-1">
+                                        <div
+                                          className="flex items-center bg-white/20 rounded-md"
+                                          onClick={(e) => e.stopPropagation()}
+                                        >
+                                          <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-6 w-6 text-white hover:bg-white/30 rounded-r-none"
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              const newDuration = Math.max(15, stopDuration - 15);
+                                              onUpdateStopDuration?.(stop.id, newDuration);
+                                            }}
+                                            data-testid={`button-tour-stop-time-minus-${stop.id}`}
+                                          >
+                                            <span className="text-sm font-bold">-</span>
+                                          </Button>
+                                          <span className="text-xs font-medium text-white px-1 min-w-[40px] text-center">
+                                            {stopDuration}m
+                                          </span>
+                                          <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-6 w-6 text-white hover:bg-white/30 rounded-l-none"
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              const newDuration = Math.min(180, stopDuration + 15);
+                                              onUpdateStopDuration?.(stop.id, newDuration);
+                                            }}
+                                            data-testid={`button-tour-stop-time-plus-${stop.id}`}
+                                          >
+                                            <span className="text-sm font-bold">+</span>
+                                          </Button>
+                                        </div>
                                         <Button
                                           variant="ghost"
                                           size="icon"
+                                          className="h-7 w-7 text-white hover:bg-white/20"
                                           onClick={(e) => {
                                             e.stopPropagation();
-                                            onLandmarkRoute(landmark);
-                                            setIsMinimized(true);
+                                            onLandmarkSelect?.(stop);
                                           }}
-                                          className="h-7 w-7"
-                                          data-testid={`button-navigate-${landmark.id}`}
+                                          data-testid={`button-tour-stop-info-${stop.id}`}
                                         >
-                                          <Navigation className="w-4 h-4" />
+                                          <Info className="w-3 h-3" />
                                         </Button>
-                                      </TooltipTrigger>
-                                      <TooltipContent side="top" className="text-xs">
-                                        {selectedLanguage === 'ko' ? '길찾기' :
-                                          selectedLanguage === 'es' ? 'Navegar' :
-                                            selectedLanguage === 'fr' ? 'Naviguer' :
-                                              selectedLanguage === 'de' ? 'Navigation' :
-                                                selectedLanguage === 'it' ? 'Naviga' :
-                                                  selectedLanguage === 'zh' ? '导航' :
-                                                    selectedLanguage === 'ja' ? 'ナビ' :
-                                                      selectedLanguage === 'pt' ? 'Navegar' :
-                                                        selectedLanguage === 'ru' ? 'Навигация' :
-                                                          'Navigate'}
-                                      </TooltipContent>
-                                    </Tooltip>
-                                    {onAddToTour && (
+                                        <Button
+                                          variant="ghost"
+                                          size="icon"
+                                          className="h-7 w-7 text-white hover:bg-white/20"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            onRemoveTourStop?.(stop.id);
+                                          }}
+                                          data-testid={`button-tour-stop-remove-${stop.id}`}
+                                        >
+                                          <X className="w-3 h-3" />
+                                        </Button>
+                                      </div>
+                                    </div>
+                                    {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
+                                      <div className="flex items-center gap-2 pl-9 py-1.5">
+                                        {(() => {
+                                          const segmentTrafficInfo = getTrafficInfo(selectedLanguage, departureTime);
+                                          const adjustedSegmentDuration = Math.ceil(tourRouteInfo.segments[index].duration * segmentTrafficInfo.multiplier / 60);
+                                          const segHours = Math.floor(adjustedSegmentDuration / 60);
+                                          const segMins = adjustedSegmentDuration % 60;
+                                          const timeDisplay = adjustedSegmentDuration >= 60
+                                            ? (selectedLanguage === 'ko'
+                                              ? `${segHours}시간 ${segMins}분`
+                                              : `${segHours}h ${segMins}m`)
+                                            : (selectedLanguage === 'ko' ? `${adjustedSegmentDuration}분` : `${adjustedSegmentDuration}min`);
+                                          return (
+                                            <div className="flex items-center gap-1.5 text-xs bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/20 rounded-md px-2 py-0.5">
+                                              <span className="text-[hsl(14,85%,55%)] font-bold text-sm">↓</span>
+                                              <span className="font-medium text-[hsl(14,85%,55%)]">
+                                                {(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km
+                                              </span>
+                                              <span className="text-muted-foreground">•</span>
+                                              <span className="font-medium text-[hsl(14,85%,55%)]">
+                                                {timeDisplay}
+                                              </span>
+                                            </div>
+                                          );
+                                        })()}
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })}
+
+                              {/* Tour Pagination */}
+                              {tourStops.length > tourItemsPerPage && (
+                                <div className="flex items-center justify-between pt-2 border-t">
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => setTourPage(prev => Math.max(1, prev - 1))}
+                                    disabled={tourPage === 1}
+                                    className={`gap-1 h-7 text-xs ${tourPage > 1 ? 'animate-blink' : ''}`}
+                                    data-testid="button-tour-prev-page"
+                                  >
+                                    <ChevronLeft className="w-3 h-3" />
+                                    Prev
+                                  </Button>
+
+                                  <span className="text-xs text-muted-foreground" data-testid="text-tour-page-info">
+                                    {tourPage} / {totalPages}
+                                  </span>
+
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => setTourPage(prev => Math.min(totalPages, prev + 1))}
+                                    disabled={tourPage === totalPages}
+                                    className={`gap-1 h-7 text-xs ${tourPage < totalPages ? 'animate-blink' : ''}`}
+                                    data-testid="button-tour-next-page"
+                                  >
+                                    Next
+                                    <ChevronRight className="w-3 h-3" />
+                                  </Button>
+                                </div>
+                              )}
+                            </>
+                          );
+                        })()}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Landmark Search Input */}
+                  <div className="relative mb-3 flex-shrink-0">
+                    <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder={selectedLanguage === 'ko' ? '랜드마크 검색...' : 'Search landmarks...'}
+                      value={landmarkSearchQuery}
+                      onChange={(e) => {
+                        setLandmarkSearchQuery(e.target.value);
+                        setCurrentPage(1); // Reset to first page when searching
+                      }}
+                      className="pl-8 h-8 text-sm"
+                      data-testid="input-landmark-search"
+                    />
+                    {landmarkSearchQuery && (
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute right-1 top-1/2 -translate-y-1/2 h-6 w-6"
+                        onClick={() => {
+                          setLandmarkSearchQuery('');
+                          setCurrentPage(1);
+                        }}
+                        data-testid="button-clear-search"
+                      >
+                        <X className="w-3 h-3" />
+                      </Button>
+                    )}
+                  </div>
+
+                  {/* Category Filter Buttons */}
+                  <div className="flex flex-wrap gap-1.5 pb-3 mb-3 border-b flex-shrink-0">
+                    <Button
+                      variant={showLandmarks ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => onToggleLandmarks()}
+                      className={`h-7 gap-1 text-xs ${showLandmarks ? '!bg-[hsl(14,85%,55%)] hover:!bg-[hsl(14,85%,50%)] !border-[hsl(14,85%,55%)] text-white' : ''}`}
+                      data-testid="button-filter-landmarks-list"
+                    >
+                      <LandmarkIcon className="w-3 h-3" />
+                      {selectedLanguage === 'ko' ? '명소' : 'Landmarks'}
+                    </Button>
+                    <Button
+                      variant={showActivities ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => onToggleActivities()}
+                      className={`h-7 gap-1 text-xs ${showActivities ? '!bg-[hsl(210,85%,55%)] hover:!bg-[hsl(210,85%,50%)] !border-[hsl(210,85%,55%)] text-white' : ''}`}
+                      data-testid="button-filter-activities-list"
+                    >
+                      <ActivityIcon className="w-3 h-3" />
+                      {selectedLanguage === 'ko' ? '액티비티' : 'Activities'}
+                    </Button>
+                    <Button
+                      variant={showRestaurants ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => onToggleRestaurants()}
+                      className={`h-7 gap-1 text-xs ${showRestaurants ? '!bg-[hsl(25,95%,55%)] hover:!bg-[hsl(25,95%,50%)] !border-[hsl(25,95%,55%)] text-white' : ''}`}
+                      data-testid="button-filter-restaurants-list"
+                    >
+                      <Utensils className="w-3 h-3" />
+                      {selectedLanguage === 'ko' ? '맛집' : 'Restaurants'}
+                    </Button>
+                    <Button
+                      variant={showGiftShops ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => onToggleGiftShops()}
+                      className={`h-7 gap-1 text-xs ${showGiftShops ? '!bg-[hsl(45,90%,55%)] hover:!bg-[hsl(45,90%,50%)] !border-[hsl(45,90%,55%)] text-black' : ''}`}
+                      data-testid="button-filter-giftshops-list"
+                    >
+                      <ShoppingBag className="w-3 h-3" />
+                      {selectedLanguage === 'ko' ? '기념품' : 'Gift Shops'}
+                    </Button>
+                  </div>
+
+                  {/* Paginated list - Takes remaining space */}
+                  <div className="flex-1 min-h-0 flex flex-col">
+                    <div ref={listScrollRef} className="flex-1 overflow-y-auto space-y-2 pr-1">
+                      {filteredListLandmarks.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+                          <List className="w-12 h-12 mb-3 opacity-50 text-muted-foreground" />
+                          <p className="text-sm text-muted-foreground">
+                            {t('noLandmarksFound', selectedLanguage)}
+                          </p>
+                        </div>
+                      ) : (() => {
+                        const totalPages = Math.ceil(filteredListLandmarks.length / itemsPerPage);
+                        const startIndex = (currentPage - 1) * itemsPerPage;
+                        const endIndex = startIndex + itemsPerPage;
+                        const currentItems = filteredListLandmarks.slice(startIndex, endIndex);
+
+                        return currentItems.map(({ landmark, distance }) => {
+                          const getCategoryStyles = (category: string | null | undefined) => {
+                            if (category === 'Activity') return { bg: 'bg-[hsl(210,85%,55%)]', text: 'text-white', border: 'border-[hsl(210,85%,55%)]' };
+                            if (category === 'Restaurant') return { bg: 'bg-[hsl(25,95%,55%)]', text: 'text-white', border: 'border-[hsl(25,95%,55%)]' };
+                            if (category === 'Gift Shop') return { bg: 'bg-[hsl(45,90%,55%)]', text: 'text-black', border: 'border-[hsl(45,90%,55%)]' };
+                            return { bg: 'bg-[hsl(14,85%,55%)]', text: 'text-white', border: 'border-[hsl(14,85%,55%)]' };
+                          };
+
+                          const getCategoryIcon = (category: string | null | undefined) => {
+                            if (category === 'Activity') return <ActivityIcon className="w-3 h-3" />;
+                            if (category === 'Restaurant') return <Utensils className="w-3 h-3" />;
+                            if (category === 'Gift Shop') return <ShoppingBag className="w-3 h-3" />;
+                            return <LandmarkIcon className="w-3 h-3" />;
+                          };
+
+                          const getCategoryLabel = (category: string | null | undefined, lang: string = 'en') => {
+                            if (category === 'Activity') return lang === 'ko' ? '액티비티' : 'Activity';
+                            if (category === 'Restaurant') return lang === 'ko' ? '레스토랑' : 'Restaurant';
+                            if (category === 'Gift Shop') return lang === 'ko' ? '기프트샵' : 'Gift Shop';
+                            return lang === 'ko' ? '명소' : 'Landmark';
+                          };
+
+                          const styles = getCategoryStyles(landmark.category);
+                          const hasPhoto = landmark.photos && landmark.photos.length > 0;
+
+                          return (
+                            <div
+                              key={landmark.id}
+                              className="rounded-xl border bg-card overflow-hidden hover-elevate cursor-pointer transition-all"
+                              onClick={() => handleLandmarkClick(landmark)}
+                              data-testid={`card-landmark-${landmark.id}`}
+                            >
+                              <div className="flex">
+                                {/* Photo Thumbnail */}
+                                {/* [학습 포인트] img onError: 이미지 로드 실패 시 해당 img를 숨기고 fallback UI를 표시 */}
+                                {hasPhoto && (
+                                  <div className="w-20 h-20 flex-shrink-0 relative overflow-hidden bg-muted">
+                                    <img
+                                      src={landmark.photos![0]}
+                                      alt={getTranslatedContent(landmark, selectedLanguage, 'name')}
+                                      className="w-full h-full object-cover"
+                                      onError={(e) => {
+                                        // 이미지 로드 실패: 이미지 숨기고 부모를 muted 배경으로 대체
+                                        (e.target as HTMLImageElement).style.display = 'none';
+                                      }}
+                                    />
+                                    <div className={`absolute top-1 left-1 ${styles.bg} ${styles.text} rounded-full p-1`}>
+                                      {getCategoryIcon(landmark.category)}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Content */}
+                                <div className={`flex-1 p-2.5 flex flex-col justify-between ${!hasPhoto ? 'pl-3' : ''}`}>
+                                  <div>
+                                    <div className="flex items-start justify-between gap-2">
+                                      <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-1.5 mb-0.5">
+                                          {!hasPhoto && (
+                                            <div className={`${styles.bg} ${styles.text} rounded-full p-1`}>
+                                              {getCategoryIcon(landmark.category)}
+                                            </div>
+                                          )}
+                                          <h4 className="font-semibold text-sm truncate" data-testid={`text-landmark-name-${landmark.id}`}>
+                                            {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                                          </h4>
+                                          {spokenLandmarks.has(landmark.id) && (
+                                            <Volume2 className="w-3 h-3 text-green-600 flex-shrink-0" />
+                                          )}
+                                        </div>
+                                        <p className="text-xs text-muted-foreground line-clamp-1">
+                                          {getTranslatedContent(landmark, selectedLanguage, 'description')}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {/* Footer: Distance + Actions */}
+                                  <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/50">
+                                    <div className="flex items-center gap-2">
+                                      <Badge variant="outline" className={`text-[10px] px-1.5 py-0 h-5 ${styles.border} ${styles.bg} ${styles.text}`}>
+                                        {getCategoryLabel(landmark.category, selectedLanguage)}
+                                      </Badge>
+                                      {distance !== null && (
+                                        <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
+                                          <MapPin className="w-2.5 h-2.5" />
+                                          {formatDistance(distance)}
+                                          <span className="text-muted-foreground/70 ml-0.5">
+                                            ({(() => {
+                                              const walkingMinutes = Math.round((distance / 1000) / 5 * 60);
+                                              if (walkingMinutes >= 60) {
+                                                const hours = Math.floor(walkingMinutes / 60);
+                                                const mins = walkingMinutes % 60;
+                                                return selectedLanguage === 'ko'
+                                                  ? `${hours}시간 ${mins}분`
+                                                  : `${hours}h ${mins}m`;
+                                              }
+                                              return selectedLanguage === 'ko' ? `${walkingMinutes}분` : `${walkingMinutes}min`;
+                                            })()})
+                                          </span>
+                                        </span>
+                                      )}
+                                      {tourStops.some(s => s.id === landmark.id) && (
+                                        <span className="text-[10px] text-[hsl(14,85%,55%)] flex items-center gap-0.5 font-medium">
+                                          <Clock className="w-2.5 h-2.5" />
+                                          {tourStopDurations[landmark.id] || tourTimePerStop}{selectedLanguage === 'ko' ? '분' : 'min'}
+                                        </span>
+                                      )}
+                                    </div>
+                                    <div className="flex gap-1.5">
                                       <Tooltip>
                                         <TooltipTrigger asChild>
                                           <Button
@@ -2208,86 +2193,117 @@ export default function UnifiedFloatingCard({
                                             size="icon"
                                             onClick={(e) => {
                                               e.stopPropagation();
-                                              onAddToTour(landmark);
+                                              onLandmarkRoute(landmark);
+                                              setIsMinimized(true);
                                             }}
-                                            className={`h-7 w-7 ${tourStops.some(s => s.id === landmark.id) ? 'text-[hsl(14,85%,55%)]' : ''}`}
-                                            data-testid={`button-add-tour-${landmark.id}`}
+                                            className="h-7 w-7"
+                                            data-testid={`button-navigate-${landmark.id}`}
                                           >
-                                            <MapPinned className="w-4 h-4" />
+                                            <Navigation className="w-4 h-4" />
                                           </Button>
                                         </TooltipTrigger>
                                         <TooltipContent side="top" className="text-xs">
-                                          {tourStops.some(s => s.id === landmark.id)
-                                            ? (selectedLanguage === 'ko' ? '투어에서 제거' :
-                                              selectedLanguage === 'es' ? 'Quitar del tour' :
-                                                selectedLanguage === 'fr' ? 'Retirer du tour' :
-                                                  selectedLanguage === 'de' ? 'Aus Tour entfernen' :
-                                                    selectedLanguage === 'it' ? 'Rimuovi dal tour' :
-                                                      selectedLanguage === 'zh' ? '从行程中移除' :
-                                                        selectedLanguage === 'ja' ? 'ツアーから削除' :
-                                                          selectedLanguage === 'pt' ? 'Remover do tour' :
-                                                            selectedLanguage === 'ru' ? 'Удалить из тура' :
-                                                              'Remove from Tour')
-                                            : (selectedLanguage === 'ko' ? '투어에 추가' :
-                                              selectedLanguage === 'es' ? 'Añadir al tour' :
-                                                selectedLanguage === 'fr' ? 'Ajouter au tour' :
-                                                  selectedLanguage === 'de' ? 'Zur Tour hinzufügen' :
-                                                    selectedLanguage === 'it' ? 'Aggiungi al tour' :
-                                                      selectedLanguage === 'zh' ? '添加到行程' :
-                                                        selectedLanguage === 'ja' ? 'ツアーに追加' :
-                                                          selectedLanguage === 'pt' ? 'Adicionar ao tour' :
-                                                            selectedLanguage === 'ru' ? 'Добавить в тур' :
-                                                              'Add to Tour')}
+                                          {selectedLanguage === 'ko' ? '길찾기' :
+                                            selectedLanguage === 'es' ? 'Navegar' :
+                                              selectedLanguage === 'fr' ? 'Naviguer' :
+                                                selectedLanguage === 'de' ? 'Navigation' :
+                                                  selectedLanguage === 'it' ? 'Naviga' :
+                                                    selectedLanguage === 'zh' ? '导航' :
+                                                      selectedLanguage === 'ja' ? 'ナビ' :
+                                                        selectedLanguage === 'pt' ? 'Navegar' :
+                                                          selectedLanguage === 'ru' ? 'Навигация' :
+                                                            'Navigate'}
                                         </TooltipContent>
                                       </Tooltip>
-                                    )}
+                                      {onAddToTour && (
+                                        <Tooltip>
+                                          <TooltipTrigger asChild>
+                                            <Button
+                                              variant="ghost"
+                                              size="icon"
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                onAddToTour(landmark);
+                                              }}
+                                              className={`h-7 w-7 ${tourStops.some(s => s.id === landmark.id) ? 'text-[hsl(14,85%,55%)]' : ''}`}
+                                              data-testid={`button-add-tour-${landmark.id}`}
+                                            >
+                                              <MapPinned className="w-4 h-4" />
+                                            </Button>
+                                          </TooltipTrigger>
+                                          <TooltipContent side="top" className="text-xs">
+                                            {tourStops.some(s => s.id === landmark.id)
+                                              ? (selectedLanguage === 'ko' ? '투어에서 제거' :
+                                                selectedLanguage === 'es' ? 'Quitar del tour' :
+                                                  selectedLanguage === 'fr' ? 'Retirer du tour' :
+                                                    selectedLanguage === 'de' ? 'Aus Tour entfernen' :
+                                                      selectedLanguage === 'it' ? 'Rimuovi dal tour' :
+                                                        selectedLanguage === 'zh' ? '从行程中移除' :
+                                                          selectedLanguage === 'ja' ? 'ツアーから削除' :
+                                                            selectedLanguage === 'pt' ? 'Remover do tour' :
+                                                              selectedLanguage === 'ru' ? 'Удалить из тура' :
+                                                                'Remove from Tour')
+                                              : (selectedLanguage === 'ko' ? '투어에 추가' :
+                                                selectedLanguage === 'es' ? 'Añadir al tour' :
+                                                  selectedLanguage === 'fr' ? 'Ajouter au tour' :
+                                                    selectedLanguage === 'de' ? 'Zur Tour hinzufügen' :
+                                                      selectedLanguage === 'it' ? 'Aggiungi al tour' :
+                                                        selectedLanguage === 'zh' ? '添加到行程' :
+                                                          selectedLanguage === 'ja' ? 'ツアーに追加' :
+                                                            selectedLanguage === 'pt' ? 'Adicionar ao tour' :
+                                                              selectedLanguage === 'ru' ? 'Добавить в тур' :
+                                                                'Add to Tour')}
+                                          </TooltipContent>
+                                        </Tooltip>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        );
-                      });
-                    })()}
-                  </div>
-
-                  {/* Pagination Controls */}
-                  {filteredListLandmarks.length > itemsPerPage && (
-                    <div className="flex items-center justify-between pt-3 border-t mt-3 flex-shrink-0">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                        disabled={currentPage === 1}
-                        className={`gap-1 ${currentPage > 1 ? 'animate-blink' : ''}`}
-                        data-testid="button-prev-page"
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                        {t('previous', selectedLanguage)}
-                      </Button>
-
-                      <span className="text-sm text-muted-foreground" data-testid="text-page-info">
-                        {currentPage} / {Math.ceil(filteredListLandmarks.length / itemsPerPage)}
-                      </span>
-
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setCurrentPage(prev => Math.min(Math.ceil(filteredListLandmarks.length / itemsPerPage), prev + 1))}
-                        disabled={currentPage === Math.ceil(filteredListLandmarks.length / itemsPerPage)}
-                        className={`gap-1 ${currentPage < Math.ceil(filteredListLandmarks.length / itemsPerPage) ? 'animate-blink' : ''}`}
-                        data-testid="button-next-page"
-                      >
-                        {t('next', selectedLanguage)}
-                        <ChevronRight className="w-4 h-4" />
-                      </Button>
+                          );
+                        });
+                      })()}
                     </div>
-                  )}
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div >
-        )}
+
+                    {/* Pagination Controls */}
+                    {filteredListLandmarks.length > itemsPerPage && (
+                      <div className="flex items-center justify-between pt-3 border-t mt-3 flex-shrink-0">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                          disabled={currentPage === 1}
+                          className={`gap-1 ${currentPage > 1 ? 'animate-blink' : ''}`}
+                          data-testid="button-prev-page"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                          {t('previous', selectedLanguage)}
+                        </Button>
+
+                        <span className="text-sm text-muted-foreground" data-testid="text-page-info">
+                          {currentPage} / {Math.ceil(filteredListLandmarks.length / itemsPerPage)}
+                        </span>
+
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setCurrentPage(prev => Math.min(Math.ceil(filteredListLandmarks.length / itemsPerPage), prev + 1))}
+                          disabled={currentPage === Math.ceil(filteredListLandmarks.length / itemsPerPage)}
+                          className={`gap-1 ${currentPage < Math.ceil(filteredListLandmarks.length / itemsPerPage) ? 'animate-blink' : ''}`}
+                          data-testid="button-next-page"
+                        >
+                          {t('next', selectedLanguage)}
+                          <ChevronRight className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <LandmarkDetailDialog
           landmark={selectedLandmark}
