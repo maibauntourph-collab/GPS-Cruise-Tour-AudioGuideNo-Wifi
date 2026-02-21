@@ -44,7 +44,7 @@ import { getTranslatedContent, t } from '@/lib/translations';
 import { StartingPoint, getCityStartingPoints, getStartingPointName } from '@/lib/startingPoints';
 import { detectDeviceCapabilities, getMaxMarkersToRender, shouldReduceAnimations } from '@/lib/deviceDetection';
 import { Landmark, City } from '@shared/schema';
-import { getMatchedCityId, findNearestLandmark } from '@/lib/locationService';
+import { getMatchedCityId, checkProximity } from '@/lib/locationService';
 import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
 import { Landmark as LandmarkIcon, Activity, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, ZoomIn, Volume2 as AudioIcon } from 'lucide-react';
@@ -396,7 +396,7 @@ export default function Home() {
 
     // [Bug Doctor] 위치 정보 및 액션 결합 검증
     if (position && !landingCityId && (lastUIAction === 'STARTUP_FINISH' || lastUIAction === 'CITY_CHANGE')) {
-      const matchedId = getMatchedCityId(position.latitude, position.longitude);
+      const matchedId = getMatchedCityId(position.latitude, position.longitude, cities);
 
       if (matchedId && !hasShownLandingThisSession.has(matchedId)) {
         console.log(`🎊 [Magic Landing] 🩺 [Bug Doctor] Sequence Chain Stable. Intent-Matched: ${lastUIAction}. Welcome to ${matchedId}!`);
@@ -753,7 +753,7 @@ export default function Home() {
     if (now - lastProximityCheckRef.current < 2000) return;
     lastProximityCheckRef.current = now;
 
-    const nearest = findNearestLandmark(
+    const nearest = checkProximity(
       effectivePosition.latitude,
       effectivePosition.longitude,
       landmarks,

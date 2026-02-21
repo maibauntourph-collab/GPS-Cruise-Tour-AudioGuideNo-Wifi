@@ -70,12 +70,21 @@ export interface ProximityResult {
  * 현재 위치 정보를 받아 입성한 도시 ID를 반환합니다.
  * @param lat 위도
  * @param lng 경도
+ * @param cities DB에서 가져온 도시 목록 (선택 사항, 없으면 CITY_HUBS 사용)
  * @returns 매칭된 도시 ID 또는 null
  */
-export function getMatchedCityId(lat: number, lng: number): string | null {
-    for (const city of CITY_HUBS) {
+export function getMatchedCityId(lat: number, lng: number, cities: any[] = []): string | null {
+    // 🛰️ [Server Park] DB에서 가져온 동적 도시 데이터가 있다면 우선적으로 사용합니다.
+    const targets = cities.length > 0 ? cities : CITY_HUBS;
+
+    for (const city of targets) {
+        // DB 도시 데이터와 CITY_HUBS 모두 lat, lng를 가집니다.
         const distance = calculateDistance(lat, lng, city.lat, city.lng);
-        if (distance <= city.radiusMeters) {
+
+        // DB 도시 데이터에는 radiusMeters가 없을 수 있으므로 기본값 50km를 적용합니다.
+        const radius = (city as any).radiusMeters || 50000;
+
+        if (distance <= radius) {
             console.log(`📍 [LocationService] "${city.name}" 거점 진입 감지! (거리: ${Math.round(distance / 1000)}km)`);
             return city.id;
         }
@@ -123,4 +132,17 @@ export function findNearestLandmark(
     }
 
     return nearest;
+}
+/**
+ * [Server Park] 현재 위치에서 가장 가까운 미방문 랜드마크를 찾는 래퍼 함수입니다.
+ * implementation_plan_gps.md의 요구사항에 맞춰 findNearestLandmark를 호출합니다.
+ */
+export function checkProximity(
+    userLat: number,
+    userLng: number,
+    landmarks: Landmark[],
+    excludeIds: Set<string> = new Set(),
+    gpsAccuracy: number = 0
+): ProximityResult | null {
+    return findNearestLandmark(userLat, userLng, landmarks, excludeIds, gpsAccuracy);
 }
