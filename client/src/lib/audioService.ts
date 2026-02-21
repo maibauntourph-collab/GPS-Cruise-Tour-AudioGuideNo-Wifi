@@ -451,36 +451,45 @@ export class AudioService {
   async unlockAudio() {
     if (this.isUnlocked) return;
 
-    console.log('[AudioService] Unlocking audio engine...');
+    console.log('[AudioService] 🔓 Unlocking audio engine for mobile stability...');
 
     try {
       // 1. Try to unlock Web Speech API
       // On some mobile browsers, we need to play a silent utterance
       await new Promise<void>((resolve) => {
-        const utterance = new SpeechSynthesisUtterance(' ');
+        const utterance = new SpeechSynthesisUtterance('');
         utterance.volume = 0;
         utterance.onend = () => resolve();
         utterance.onerror = () => resolve();
         this.synthesis.speak(utterance);
 
         // Timeout as fallback for resolve
-        setTimeout(resolve, 100);
+        setTimeout(resolve, 150);
       });
 
       // 2. Try to unlock HTML Audio if element exists
+      // Using a slightly more robust "silent" sound that browsers recognize as active
+      // Using 0.001 volume instead of 0 as some devices ignore 0 volume streams
       const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
+      silentAudio.volume = 0.001;
+
       await silentAudio.play()
         .then(() => {
           this.isUnlocked = true;
-          console.log('[AudioService] Audio engine unlocked successfully');
+          console.log('[AudioService] ✅ Audio engine unlocked successfully via HTML Audio');
         })
         .catch(err => {
-          console.warn('[AudioService] HTML Audio unlock failed, but Web Speech might work:', err);
+          console.warn('[AudioService] ⚠️ HTML Audio unlock failed, but proceeding with Web Speech:', err);
           // Still mark as unlocked if we got this far, as Web Speech is our primary
           this.isUnlocked = true;
         });
+
+      // Also reset any active speech if stuck
+      if (this.synthesis.speaking) {
+        this.synthesis.cancel();
+      }
     } catch (e) {
-      console.error('[AudioService] Comprehensive unlock failed:', e);
+      console.error('[AudioService] ❌ Comprehensive unlock failed:', e);
     }
   }
 

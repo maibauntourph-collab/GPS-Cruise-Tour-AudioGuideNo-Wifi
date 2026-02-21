@@ -102,6 +102,10 @@ interface UnifiedFloatingCardProps {
   isSimulationMode?: boolean;
   onToggleSimulation?: () => void;
   playInBackground?: boolean;
+
+  // 🛰️ [Server Park] Minimal Transit UI props
+  showMinimalTransitUI?: boolean;
+  onToggleMinimalTransitUI?: () => void;
 }
 
 import { useQuery } from '@tanstack/react-query';
@@ -274,7 +278,9 @@ export default function UnifiedFloatingCard({
   onRegionalGuideChange,
   isSimulationMode = false,
   onToggleSimulation,
-  playInBackground = true
+  playInBackground = true,
+  showMinimalTransitUI = false,
+  onToggleMinimalTransitUI
 }: UnifiedFloatingCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
@@ -703,6 +709,50 @@ export default function UnifiedFloatingCard({
 
   // Render full card
   const renderFullCard = (): JSX.Element | null => {
+    // 🛰️ [Server Park] Transit Mode 가이드 UI 최적화
+    // 이동 중(Transit Mode)이고 미니멀 UI 모드가 켜져 있다면 슬림한 진행바만 렌더링합니다.
+    if (isTransitMode && selectedLandmark && showMinimalTransitUI) {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          className="fixed bottom-6 left-4 right-4 z-[2100]"
+          onClick={onToggleMinimalTransitUI} // 클릭 시 다시 카드가 펼쳐지도록
+        >
+          <Card className="p-3 bg-indigo-600/90 text-white border-none shadow-2xl backdrop-blur-md cursor-pointer hover:bg-indigo-700/95 transition-all">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Navigation className="w-4 h-4 animate-pulse" />
+                  <span className="text-xs font-bold truncate max-w-[150px]">
+                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                  </span>
+                  <Badge variant="secondary" className="bg-white/20 text-white border-none text-[10px]">
+                    {t('transit', selectedLanguage)}
+                  </Badge>
+                </div>
+                <div className="text-xs font-mono">
+                  {formatDistance(distanceToSelected)} {t('left', selectedLanguage)}
+                </div>
+              </div>
+              {/* Simple Progress Bar */}
+              <div className="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-white"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${Math.max(5, Math.min(100, (1 - distanceToSelected / 5) * 100))}%` }}
+                />
+              </div>
+              <div className="text-[10px] text-white/70 text-center">
+                {selectedLanguage === 'ko' ? '👆 탭하여 상세 안내 확인' : '👆 Tap to view detailed guide'}
+              </div>
+            </div>
+          </Card>
+        </motion.div>
+      );
+    }
+
     // 🛰️ [Server Park] 이동 중(Transit Mode)일 때 카드 숨김 로직을 제거하고 상세만 접히도록 개선합니다.
     // 기존의 return null 로직은 화이트-아웃 현상 또는 UI 누락을 유발할 수 있어 삭제 조치했습니다.
 

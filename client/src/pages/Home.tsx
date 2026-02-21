@@ -225,6 +225,9 @@ export default function Home() {
   // 이 변수가 true가 되어야 StartupDialog와 BackgroundGuide 팝업이 순차적으로 띄워집니다.
   const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
 
+  // 🛰️ [Server Park] 이동 중 UI 최소화 상태
+  const [showMinimalTransitUI, setShowMinimalTransitUI] = useState(true);
+
   // 🛰️ [Server Park] 백그라운드 자동 가이드 팝업 트리거
   useEffect(() => {
     if (isBackgroundGuideEnabled === null && isWelcomeHandled) {
@@ -597,6 +600,9 @@ export default function Home() {
   };
 
   const handleTestAudio = () => {
+    // 🩺 [Bug Doctor] 모바일 오디오 잠금 해제 시도
+    audioService.unlockAudio();
+
     const testMessages = {
       en: "Welcome to GPS Audio Guide. This is a test of the audio narration system.",
       it: "Benvenuti alla Guida Audio GPS. Questo è un test del sistema di narrazione audio.",
@@ -790,6 +796,34 @@ export default function Home() {
       // 해당 랜드마크로 지도 및 카드 포커싱
       setSelectedLandmark(landmark);
       setIsCardMinimized(false);
+    } else {
+      // 🛰️ [Server Park] 재청취 로직: 랜드마크에서 충분히 멀어지면 안내 기록 리셋
+      // 랜드마크의 안내 반경(radius)의 3배 이상 멀어지면 '말한 목록'에서 제거합니다.
+      const farEnoughDistance = 0.5; // 500m 이상 멀어지면 전체 리셋 후보 (또는 개별 체크)
+
+      spokenLandmarks.forEach(landmarkId => {
+        const landmark = landmarks.find(l => l.id === landmarkId);
+        if (landmark) {
+          const distance = calculateDistance(
+            effectivePosition.latitude,
+            effectivePosition.longitude,
+            landmark.lat,
+            landmark.lng
+          );
+
+          // 안내 반경의 5배 이상 멀어지면 다시 안내할 수 있도록 리셋
+          const resetRadius = (landmark.radius / 1000) * 5;
+          if (distance > Math.max(resetRadius, 0.3)) { // 최소 300m 이상 멀어졌을 때
+            setSpokenLandmarks(prev => {
+              const next = new Set(prev);
+              next.delete(landmarkId);
+              return next;
+            });
+            audioService.removeLandmark(landmarkId);
+            console.log(`♻️ [Re-visit] Resetting landmark for re-hearing: ${landmark.id}`);
+          }
+        }
+      });
     }
   }, [effectivePosition, landmarks, audioEnabled, spokenLandmarks, selectedLanguage, offlineMode]);
 
@@ -991,6 +1025,9 @@ export default function Home() {
   };
 
   const handleSelectGPS = () => {
+    // 🩺 [Bug Doctor] 모바일 오디오 정책: 사용자 제스처 시점에 잠금 해제 필수
+    audioService.unlockAudio();
+
     handleStartupClose();
     setLastUIAction('STARTUP_FINISH'); // 🎖️ [Dodari Architecture] GPS Start should trigger Magic Landing
     // If GPS position is available and we have cities data, try to find nearest city
@@ -2564,6 +2601,8 @@ export default function Home() {
           forceShowList={forceShowCard}
           isCardMinimized={isCardMinimized}
           onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
+          showMinimalTransitUI={showMinimalTransitUI}
+          onToggleMinimalTransitUI={() => setShowMinimalTransitUI(!showMinimalTransitUI)}
           selectedLandmark={selectedLandmark}
           isTransitMode={!!activeRoute && !isManualSelection && !hasArrivedAtDestination}
           onLandmarkClose={() => {
