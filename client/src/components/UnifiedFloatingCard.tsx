@@ -703,10 +703,8 @@ export default function UnifiedFloatingCard({
 
   // Render full card
   const renderFullCard = (): JSX.Element | null => {
-    // 🛰️ [Server Park] 이동 중(Transit Mode)일 때 카드 숨김 처리
-    if (isTransitMode && selectedLandmark) {
-      return null; // 아예 렌더링하지 않거나, 최소화된 버튼만 보여줄 수도 있음
-    }
+    // 🛰️ [Server Park] 이동 중(Transit Mode)일 때 카드 숨김 로직을 제거하고 상세만 접히도록 개선합니다.
+    // 기존의 return null 로직은 화이트-아웃 현상 또는 UI 누락을 유발할 수 있어 삭제 조치했습니다.
 
     return (
       <div
@@ -1407,7 +1405,7 @@ export default function UnifiedFloatingCard({
                       </TabsContent>
 
                       <TabsContent value="tips" className="mt-4 overflow-y-auto flex-1">
-                        {city.cruisePort.tips && (
+                        {city?.cruisePort?.tips && (
                           <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg mb-4">
                             <p className="text-sm text-muted-foreground">
                               {getCruisePortTranslation(city.cruisePort, selectedLanguage, 'tips')}
@@ -1586,10 +1584,10 @@ export default function UnifiedFloatingCard({
                           <div className="bg-[hsl(14,85%,55%)]/10 border border-[hsl(14,85%,55%)]/30 rounded-lg p-2.5">
                             {(() => {
                               const trafficInfo = getTrafficInfo(selectedLanguage, departureTime);
-                              const adjustedDuration = Math.round(tourRouteInfo.duration * trafficInfo.multiplier);
+                              const adjustedDuration = Math.round((tourRouteInfo?.duration || 0) * trafficInfo.multiplier);
                               const travelMinutes = Math.round(adjustedDuration / 60);
                               const stayMinutes = tourStops.reduce((sum, stop) =>
-                                sum + (tourStopDurations[stop.id] || tourTimePerStop), 0);
+                                sum + (tourStopDurations?.[stop.id] || tourTimePerStop || 0), 0);
                               const totalMinutes = travelMinutes + stayMinutes;
                               const hours = Math.floor(totalMinutes / 60);
                               const mins = totalMinutes % 60;
