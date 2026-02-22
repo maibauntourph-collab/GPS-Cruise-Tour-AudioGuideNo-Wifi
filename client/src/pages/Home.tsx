@@ -63,6 +63,25 @@ import { Badge } from '@/components/ui/badge';
 import { ChevronDown, Volume2 } from 'lucide-react';
 
 export default function Home() {
+  // 🚑 [Bug Doctor] 모바일 브라우저 오디오 잠금 해제를 위한 전역 터치/클릭 핸들러
+  // 사용자가 화면 어디든 처음 클릭하는 순간 오디오 엔진을 깨웁니다.
+  useEffect(() => {
+    const handleGlobalInteraction = () => {
+      audioService.unlockAudio();
+      // 한 번만 실행되도록 리스너 제거
+      window.removeEventListener('click', handleGlobalInteraction);
+      window.removeEventListener('touchstart', handleGlobalInteraction);
+    };
+
+    window.addEventListener('click', handleGlobalInteraction);
+    window.addEventListener('touchstart', handleGlobalInteraction);
+
+    return () => {
+      window.removeEventListener('click', handleGlobalInteraction);
+      window.removeEventListener('touchstart', handleGlobalInteraction);
+    };
+  }, []);
+
   // GPS enabled state (persisted to localStorage)
   const [gpsEnabled, setGpsEnabled] = useState(() => {
     const saved = localStorage.getItem('gps-enabled');

@@ -452,63 +452,57 @@ export class AudioService {
   async unlockAudio() {
     if (this.isUnlocked) return;
 
-    console.log('[AudioService] 🔓 Unlocking audio engine for mobile stability...');
+    console.log('[AudioService] 🔓 [Bug Doctor] 모바일 안정성을 위한 오디오 엔진 정밀 잠금 해제 시작...');
 
     try {
-      // 1. Try to unlock Web Speech API
-      // On some mobile browsers, we need to play a silent utterance
-      await new Promise<void>((resolve) => {
-        const utterance = new SpeechSynthesisUtterance('');
-        utterance.volume = 0;
-        utterance.onend = () => resolve();
-        utterance.onerror = () => resolve();
-        this.synthesis.speak(utterance);
+      // 1. Web Speech API (TTS) 잠금 해제
+      // 모바일 브라우저에서는 빈 문장을 '사용자 제스처 내에서' 동기적으로 실행해야 합니다.
+      const utterance = new SpeechSynthesisUtterance(' ');
+      utterance.volume = 0;
+      this.synthesis.speak(utterance);
 
-        // Timeout as fallback for resolve
-        setTimeout(resolve, 150);
-      });
-
-      // 2. Try to unlock HTML Audio if element exists
-      // Using a more robust context-based silent sound for mobile browsers
+      // 2. Web Audio API Context 잠금 해제
+      // 오디오 컨텍스트가 'suspended' 상태인 경우 강제로 resume 시킵니다.
       const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
       if (AudioContextClass) {
         const audioCtx = new AudioContextClass();
-        // Create an empty buffer
-        const buffer = audioCtx.createBuffer(1, 1, 22050);
-        const source = audioCtx.createBufferSource();
-        source.buffer = buffer;
-        source.connect(audioCtx.destination);
-
-        // Start and stop immediately to activate context
-        if (source.start) {
-          source.start(0);
-        } else if ((source as any).noteOn) {
-          (source as any).noteOn(0);
+        if (audioCtx.state === 'suspended') {
+          await audioCtx.resume();
         }
 
-        console.log('[AudioService] ✅ Web Audio Context unlocked');
+        // 아주 짧은 무음 비프음을 생성하여 하드웨어 채널을 점유합니다.
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        gainNode.gain.value = 0;
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.start(0);
+        oscillator.stop(0.001);
+
+        console.log('[AudioService] ✅ Web Audio Context (Deep) unlocked');
       }
 
+      // 3. HTML5 Audio (MP3) 잠금 해제
+      // 무음 Data URI를 사용하여 오디오 엘리먼트 가동
       const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
-      silentAudio.volume = 0.001;
+      silentAudio.volume = 0;
 
       await silentAudio.play()
         .then(() => {
           this.isUnlocked = true;
-          console.log('[AudioService] ✅ HTML Audio engine unlocked successfully via Silent Data URI');
+          console.log('[AudioService] ✅ HTML Audio engine unlocked successfully');
         })
         .catch(err => {
-          console.warn('[AudioService] ⚠️ HTML Audio unlock failed, but proceeding with Web Speech:', err);
-          // Still mark as unlocked if we got this far
+          console.warn('[AudioService] ⚠️ HTML Audio unlock failed via Data URI, forcing fallback:', err);
           this.isUnlocked = true;
         });
 
-      // Also reset any active speech if stuck
+      // 4. 기존에 꼬여있을 수 있는 음성 엔진 초기화
       if (this.synthesis.speaking) {
         this.synthesis.cancel();
       }
     } catch (e) {
-      console.error('[AudioService] ❌ Comprehensive unlock failed:', e);
+      console.error('[AudioService] ❌ [Bug Doctor] 오디오 엔진 통합 잠금 해제 실패:', e);
     }
   }
 
