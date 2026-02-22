@@ -27,6 +27,8 @@ export class AudioService {
   private selectedClovaVoicesByLanguage: Map<string, string> = new Map(); // language -> CLOVA voice id
   private isUnlocked: boolean = false;
   private isPausedInternal: boolean = false;
+  private voiceCache: Map<string, SpeechSynthesisVoice> = new Map();
+  private warnedLanguages: Set<string> = new Set();
 
   // MP3 Audio properties
   private audioElement: HTMLAudioElement | null = null;
@@ -217,6 +219,11 @@ export class AudioService {
 
   // Find the best voice for the given language (prioritize natural/premium voices)
   private getVoiceForLanguage(langCode: string): SpeechSynthesisVoice | null {
+    // Check cache first for performance
+    if (this.voiceCache.has(langCode)) {
+      return this.voiceCache.get(langCode) || null;
+    }
+
     // Refresh voices if empty
     if (this.voices.length === 0) {
       this.voices = this.synthesis.getVoices();
@@ -246,13 +253,19 @@ export class AudioService {
     if (matchingVoices.length === 0) {
       // Avoid infinite recursion if English is also missing
       if (langCode === 'en-US') {
-        console.error('[AudioService] Critical: No voices available, even for English.');
+        if (!this.warnedLanguages.has('en-US')) {
+          console.error('[AudioService] Critical: No voices available, even for English.');
+          this.warnedLanguages.add('en-US');
+        }
         return this.voices[0] || null;
       }
 
       // LAST RESORT FALLBACK: If no matching voice for target language,
       // return the best English voice instead of null (better than silence)
-      console.warn(`[AudioService] No voices found for ${langCode}, falling back to English`);
+      if (!this.warnedLanguages.has(langCode)) {
+        console.warn(`[AudioService] No voices found for ${langCode}, falling back to English`);
+        this.warnedLanguages.add(langCode);
+      }
       return this.getVoiceForLanguage('en-US');
     }
 
@@ -311,8 +324,14 @@ export class AudioService {
     // Sort by score (highest first) and return the best voice
     scoredVoices.sort((a, b) => b.score - a.score);
 
-    // Log the selected voice for debugging
-    console.log(`[AudioService] Selected voice for ${langCode}:`, scoredVoices[0].voice.name, `(score: ${scoredVoices[0].score})`);
+    // Log the selected voice for debugging (only once per language)
+    if (!this.warnedLanguages.has(langCode)) {
+      console.log(`[AudioService] Selected voice for ${langCode}:`, scoredVoices[0].voice.name, `(score: ${scoredVoices[0].score})`);
+      this.warnedLanguages.add(langCode);
+    }
+
+    // Update cache
+    this.voiceCache.set(langCode, scoredVoices[0].voice);
 
     return scoredVoices[0].voice;
   }

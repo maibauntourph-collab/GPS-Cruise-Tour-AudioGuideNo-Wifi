@@ -564,9 +564,8 @@ export default function UnifiedFloatingCard({
     if (!selectedLandmark) return;
 
     // [Bug Doctor] Local UI state (isPlaying) is our source of truth for the toggle.
-    // Underlying audioService.isSpeaking() might be true due to unlockAudio() or zombie events.
     if (isPlaying) {
-      if (isPaused) {
+      if (audioService.isPaused()) {
         audioService.resume();
         setIsPaused(false);
       } else {
@@ -576,8 +575,7 @@ export default function UnifiedFloatingCard({
       return;
     }
 
-    // If we're here, it's a fresh "Play" click. 
-    // Ensure any zombie sessions are cleared before starting.
+    // Fresh Play start
     if (audioService.isSpeaking()) {
       audioService.stopAll();
     }
@@ -600,6 +598,11 @@ export default function UnifiedFloatingCard({
 
       if (audioMode === 'clova') {
         const success = await audioService.playClovaTTS(text, selectedLanguage, onEnd);
+        if (!success) {
+          audioService.playText(text, selectedLanguage, playbackRate, onEnd);
+        }
+      } else if (audioMode === 'openai') {
+        const success = await audioService.playOpenAISentences(text, selectedLanguage, undefined, onEnd);
         if (!success) {
           audioService.playText(text, selectedLanguage, playbackRate, onEnd);
         }
