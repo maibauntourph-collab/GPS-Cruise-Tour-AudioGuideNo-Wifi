@@ -572,7 +572,8 @@ export default function UnifiedFloatingCard({
         setIsPlaying(false);
       }
     } else {
-      const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
+      const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') ||
+        getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
         getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
 
       const audioMode = audioService.getAudioMode();
