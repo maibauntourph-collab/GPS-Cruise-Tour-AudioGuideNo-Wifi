@@ -176,6 +176,8 @@ export default function Home() {
   });
   const [keepCruisePortVisible, setKeepCruisePortVisible] = useState(false);
   const [tourStops, setTourStops] = useState<Landmark[]>([]);
+  // [적요] 지도 몰입 모드에서도 리스트 버튼 클릭 시 일시적으로 카드를 보여주기 위한 상태
+  const [temporaryShowCard, setTemporaryShowCard] = useState(false);
   const [tourRouteInfo, setTourRouteInfo] = useState<{
     distance: number;
     duration: number;
@@ -1349,6 +1351,7 @@ export default function Home() {
                       setIsCardMinimized(true);
                     }
                   }
+                  setTemporaryShowCard(true);
                 }}
                 data-testid="button-toggle-list"
               >
@@ -2798,7 +2801,7 @@ export default function Home() {
           ?ъ슜?먯뿉寃?吏?꾨쭔 蹂댁뿬二쇨린 ?꾪빐 ?ㅻ챸 ?⑤꼸(UnifiedFloatingCard)?뚮뜑留곹븯吏 ?딆뒿?덈떎.
            ?ㅻ뵒?ㅻ뒗 ?ㅼ뿉怨꾩냽 ?섏삤怨덉뼱?섍쿋二? */}
       {
-        !isNavigationOnlyMode && (
+        (!isNavigationOnlyMode || temporaryShowCard || selectedLandmark) && (
           <UnifiedFloatingCard
             forceShowList={forceShowCard}
             isCardMinimized={isCardMinimized}
@@ -2810,6 +2813,8 @@ export default function Home() {
             onLandmarkClose={() => {
               setSelectedLandmark(null);
               setIsManualSelection(false);
+              // [Designer Kim] 카드를 닫으면 임시 표시 상태 해제
+              setTemporaryShowCard(false);
               // ?㈉ [Bug Doctor] 移대뱶 ?リ린 ?ㅻ뵒利됱떆 以묒? ?뺤콉 諛섏쁺
               audioService.stopAll();
             }}

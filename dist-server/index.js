@@ -10529,7 +10529,8 @@ async function recommendTourItinerary(landmarks2, userPosition, language = "en")
 
 \uB2E4\uC74C \uAD00\uAD11\uC9C0\uB4E4\uC744 \uAE30\uBC18\uC73C\uB85C \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD574\uC8FC\uC138\uC694. \uC9C0\uB9AC\uC801 \uC704\uCE58, \uCE74\uD14C\uACE0\uB9AC, \uC5ED\uC0AC\uC801 \uC911\uC694\uB3C4\uB97C \uACE0\uB824\uD558\uC5EC \uD6A8\uC728\uC801\uC778 \uC21C\uC11C\uB97C \uC81C\uC548\uD558\uC138\uC694. \`isPremium\`\uC774 \`true\`\uC778 \uC7A5\uC18C\uB294 \uACE0\uD488\uC9C8 \uC624\uB514\uC624 \uAC00\uC774\uB4DC\uAC00 \uD3EC\uD568\uB418\uC5B4 \uC788\uC74C\uC744 \uCC38\uACE0\uD558\uC138\uC694.
 
-\uC911\uC694: \uBC18\uB4DC\uC2DC \uC81C\uACF5\uB41C '\uAD00\uAD11\uC9C0 \uBAA9\uB85D'\uC5D0 \uC788\uB294 \`id\` \uAC12\uB9CC \uC0AC\uC6A9\uD574\uC57C \uD569\uB2C8\uB2E4. \uC0C8\uB85C\uC6B4 ID\uB97C \uC0DD\uC131\uD558\uAC70\uB098 \uC774\uB984\uC744 \uBCC0\uD615\uD558\uC9C0 \uB9C8\uC2ED\uC2DC\uC624.
+\uC911\uC694(CRITICAL): \uBC18\uB4DC\uC2DC \uC81C\uACF5\uB41C '\uAD00\uAD11\uC9C0 \uBAA9\uB85D'\uC5D0 \uC788\uB294 \`id\` \uAC12\uC744 **\uAE00\uC790 \uD558\uB098 \uD2C0\uB9AC\uC9C0 \uC54A\uACE0 \uADF8\uB300\uB85C** \uC0AC\uC6A9\uD574\uC57C \uD569\uB2C8\uB2E4. 
+\uB9CC\uC57D ID\uAC00 'rome/colosseum'\uC774\uB098 'rome_restaurant_...'\uC640 \uAC19\uC774 \uC811\uB450\uC0AC\uB97C \uD3EC\uD568\uD558\uACE0 \uC788\uB2E4\uBA74, \uD574\uB2F9 \uC811\uB450\uC0AC\uB97C \uC808\uB300 \uC0DD\uB7B5\uD558\uC9C0 \uB9C8\uC2ED\uC2DC\uC624. \uC0C8\uB85C\uC6B4 ID\uB97C \uC0DD\uC131\uD558\uAC70\uB098 \uC774\uB984\uC744 \uBCC0\uD615\uD558\uC9C0 \uB9C8\uC2ED\uC2DC\uC624.
 
 \uAD00\uAD11\uC9C0 \uBAA9\uB85D:
 ${JSON.stringify(landmarkInfo, null, 2)}
@@ -10545,7 +10546,8 @@ ${userPosition ? `\uC0AC\uC6A9\uC790 \uD604\uC7AC \uC704\uCE58: \uC704\uB3C4 ${u
 
 Based on the following tourist attractions, recommend the best tour itinerary. Consider geographical proximity, category variety, and historical significance to suggest an efficient order. Note that landmarks with \`isPremium: true\` have high-quality audio guides available.
 
-IMPORTANT: You MUST use ONLY the \`id\` values present in the provided 'Landmark list'. Do not generate new IDs or invent names.
+IMPORTANT (CRITICAL): You MUST use the \`id\` values present in the provided 'Landmark list' **EXACTLY as they are, without any modifications**. 
+If an ID includes a prefix like 'rome/' or 'rome_restaurant_', you MUST include that prefix. Do not generate new IDs or invent names.
 
 Landmark list:
 ${JSON.stringify(landmarkInfo, null, 2)}
@@ -11684,14 +11686,43 @@ function registerRoutes(app2) {
         language || "en"
       );
       const validLandmarkIds = new Set(cityLandmarks.map((l) => l.id));
-      const invalidIds = recommendation.itinerary.map((item) => item.landmarkId).filter((id) => !validLandmarkIds.has(id));
+      const idLookupMap = /* @__PURE__ */ new Map();
+      cityLandmarks.forEach((l) => {
+        idLookupMap.set(l.id, l.id);
+        if (l.id.includes("/")) {
+          const suffix = l.id.split("/").pop() || "";
+          if (suffix && !idLookupMap.has(suffix)) {
+            idLookupMap.set(suffix, l.id);
+          }
+        }
+        if (l.id.includes("_restaurant_")) {
+          const parts = l.id.split("_restaurant_");
+          const suffix = parts.pop() || "";
+          if (suffix && !idLookupMap.has(suffix)) {
+            idLookupMap.set(suffix, l.id);
+          }
+        }
+      });
+      const processedItinerary = recommendation.itinerary.map((item) => {
+        const originalId = item.landmarkId;
+        const resolvedId = idLookupMap.get(originalId);
+        if (resolvedId && resolvedId !== originalId) {
+          console.warn(`[AI Debug] Landmark ID resolved from '${originalId}' to '${resolvedId}'`);
+        }
+        return {
+          ...item,
+          landmarkId: resolvedId || originalId
+        };
+      });
+      const invalidIds = processedItinerary.map((item) => item.landmarkId).filter((id) => !validLandmarkIds.has(id));
       if (invalidIds.length > 0) {
-        console.error("AI recommended invalid landmark IDs:", invalidIds);
+        console.error("[AI Error] Invalid landmark IDs after resolution attempt:", invalidIds);
         return c.json({
           error: "AI recommendation contains invalid landmarks",
           details: invalidIds
         }, 500);
       }
+      recommendation.itinerary = processedItinerary;
       return c.json(recommendation);
     } catch (error) {
       console.error("AI recommendation error:", error);
