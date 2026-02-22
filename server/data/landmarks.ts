@@ -39,51 +39,32 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:05:55.978Z"
   },
   {
-    "id": "chinatown-heritage-centre",
-    "cityId": "singapore",
-    "name": "Chinatown Heritage Centre",
-    "lat": 1.283611,
-    "lng": 103.844167,
-    "radius": 50,
-    "narration": "자, 여러분! 상상해보세요. 19세기 말, 낡은 배를 타고 머나먼 싱가포르에 도착한 중국 이민자들의 삶을요. 지금 여러분이 서 있는 이 차이나타운 헤리티지 센터는 그들의 땀과 눈물, 그리고 희망으로 가득 찬 이야기들을 생생하게 담고 있는 곳입니다. 삐걱거리는 나무 바닥을 따라 걷다 보면, 마치 시간 여행을 떠난 듯한 기분이 들 거예요. 코를 찌르는 한약 냄새, 왁자지껄한 시장의 활기, 그리고 간절한 기도 소리가 귓가에 맴도는 듯하죠. 좁고 허름한 방 안을 들여다보면, 고향을 떠나 낯선 땅에서 고생했던 이민자들의 애환이 느껴집니다. 하루 종일 힘든 노동에 시달리면서도, 가족을 위해, 더 나은 미래를 위해 꿋꿋이 살아갔던 그들의 강인한 정신을 느껴보세요. 이 곳은 단순한 박물관이 아니에요. 싱가포르 역사의 중요한 한 페이지를 장식한, 용감한 선조들의 삶을 기리는 святилище입니다. 자, 눈을 감고 그들의 삶 속으로 깊숙이 들어가 보세요. 그들의 이야기가 여러분의 마음속에 영원히 새겨질 거예요. 낡은 재봉틀 돌아가는 소리, 아이들의 웃음소리, 그리고 희망을 노래하는 듯한 노랫소리가 들리지 않나요? 바로 이곳, 차이나타운 헤리티지 센터에서 그 모든 것을 경험할 수 있습니다. 지금 바로, 과거로의 특별한 여행을 시작해 보세요!",
-    "description": "Museum showcasing early Chinese immigrant life",
-    "category": "Museum & Heritage",
-    "detailedDescription": "차이나타운 헤리티지 센터는 싱가포르 초기 중국 이민자들의 삶과 문화를 엿볼 수 있는 уникальный 박물관입니다. 19세기 말부터 20세기 초까지, 중국 본토에서 건너온 이민자들은 험난한 항해 끝에 싱가포르에 정착했습니다. 이들은 주로 쿨리, 행상인, 장인 등으로 일하며, 싱가포르 경제 발전에 큰 기여를 했습니다. 박물관은 당시 이민자들이 살았던 реальный 모습을 재현한 방, 상점, 거리 등을 통해 방문객들에게 생생한 경험을 선사합니다. 특히 주목할 만한 것은 '싱가포르 강변의 쿨리' 섹션인데, 이곳에서는 쿨리들이 얼마나 고된 노동에 시달렸는지, 그리고 그들의 삶이 얼마나 비참했는지 자세히 알 수 있습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 박물관 2층에 있는 '티안호켄 사원' 모형은 싱가포르에서 가장 오래된 호키엔 사원으로, 초기 이민자들이 안전한 항해를 기원했던 곳입니다. 이 사원 모형은 단순한 전시물이 아니라, 이민자들의 간절한 염원을 담고 있는 святилище입니다. 그리고 숨겨진 비화 하나 더! 박물관 지하에는 과거 아편굴로 사용되었던 공간이 있는데, 이곳에서는 당시 아편 중독의 심각성을 엿볼 수 있습니다. 차이나타운 헤리티지 센터는 단순한 박물관 관람을 넘어, 싱가포르 역사의 중요한 부분을 이해하고, 초기 이민자들의 삶을 공감할 수 있는 소중한 기회를 제공합니다.",
+    "id": "jeju_성산_일출봉",
+    "cityId": "jeju",
+    "name": "성산 일출봉",
+    "lat": 33.4627,
+    "lng": 126.9407,
+    "radius": 70,
+    "narration": "상상해보세요. 지금 여러분은 성산 일출봉 정상, 눈부신 아침 햇살 아래 서 있습니다. 5천 년 전, 격렬한 화산 폭발로 솟아오른 이 봉우리는 마치 거대한 예술 작품 같아요. 발 아래 펼쳐진 푸른 바다는 끝없이 펼쳐지고, 파도 소리는 끊임없이 속삭이며 여러분을 맞이합니다. 코끝을 스치는 짭짤한 바다 내음은 잊고 있었던 생명력을 깨우는 듯하죠. 해가 떠오르기 직전, 수평선 너머 하늘은 짙은 코발트 빛으로 물들어 있어요. 곧 붉은 태양이 솟아오르며 세상을 붉게 물들이겠죠. \n\n눈을 감고 깊게 숨을 들이쉬어 보세요. 여러분의 폐 속 깊은 곳까지 제주의 청정한 공기가 가득 차오르는 것을 느낄 수 있을 거예요. 바람은 부드럽게 여러분의 뺨을 스치고, 마음속 깊은 곳까지 평온함이 찾아올 겁니다. 지금 여러분이 서 있는 이곳은 단순한 봉우리가 아니에요. 제주의 역사와 전설, 그리고 아름다운 자연이 살아 숨 쉬는 특별한 공간이죠. 저 멀리 보이는 우도는 마치 바다 위에 떠 있는 한 폭의 그림 같아요. 섬의 윤곽은 부드럽고 아름답게 빛나고, 그 뒤로 펼쳐진 하늘은 더욱 짙은 푸른색으로 빛나고 있어요.\n\n아래를 내려다보면, 옹기종기 모여있는 마을의 모습이 보여요. 집들의 지붕은 햇빛에 반짝이고, 좁은 골목길에서는 사람들의 활기찬 웃음소리가 들려오는 듯하죠. 물질을 마치고 돌아오는 해녀들의 모습도 눈에 띄네요. 검은색 잠수복을 입고 바다에서 갓 나온 그녀들의 모습은 마치 바다의 여신 같아요. 그녀들의 손에는 싱싱한 해산물이 가득 들려 있겠죠. 해녀들의 숨비소리는 성산 일출봉에 울려 퍼지며, 제주의 강인한 생명력을 상징하는 듯합니다. 지금 이 순간, 여러분은 성산 일출봉의 아름다움에 완전히 매료되었을 거예요. 이곳은 단순한 관광지가 아니라, 여러분의 마음속 깊은 곳에 영원히 기억될 특별한 장소가 될 겁니다.",
+    "description": "새벽을 깨우는 장엄한 풍광, 유네스코 세계자연유산의 웅장함 속에 피어나는 감동.",
+    "category": "Landmark",
+    "detailedDescription": "성산 일출봉은 약 5천 년 전, 얕은 바다에서 수중 폭발한 화산 활동으로 형성된 응회구입니다. 높이 182m의 이 봉우리는 제주도의 동쪽 끝자락에 자리 잡고 있으며, 거대한 사발 모양의 분화구가 특징입니다. 분화구의 둘레는 약 600m, 깊이는 약 90m에 달하며, 정상에서는 주변의 아름다운 풍경을 한눈에 조망할 수 있습니다.\n\n성산 일출봉은 그 이름처럼, 해돋이 명소로 유명합니다. 매년 새해 첫날, 수많은 사람들이 이곳에 모여 떠오르는 태양을 보며 소원을 빌죠. 일출봉 정상에서 바라보는 해돋이는 그야말로 장관입니다. 붉게 물든 하늘과 바다, 그리고 일출봉의 실루엣이 어우러져 잊을 수 없는 풍경을 선사합니다. 현지인들은 일출을 보기 위해 새벽 일찍 서두르는 것을 추천합니다. 일출 시간 외에도, 날씨가 좋은 날에는 멀리 한라산까지 보이는 행운을 누릴 수 있습니다.\n\n성산 일출봉 주변에는 다양한 볼거리와 즐길 거리가 있습니다. 특히, 해녀 물질 공연은 제주의 전통 문화를 체험할 수 있는 좋은 기회입니다. 해녀들이 바다에서 직접 해산물을 채취하는 모습을 볼 수 있으며, 갓 잡은 해산물을 맛볼 수도 있습니다. 또한, 성산 일출봉 주변 해안도로를 따라 드라이브를 즐기거나, 인근의 섭지코지를 방문하여 아름다운 해안 경관을 감상하는 것도 추천합니다. 성산 일출봉은 단순한 자연 명소를 넘어, 제주의 역사와 문화를 담고 있는 소중한 자산입니다.",
     "photos": [
-      "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800",
-      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800"
+      "/images/landmarks/placeholder.png"
     ],
-    "historicalInfo": "Opened in 2008, the Chinatown Heritage Centre is housed in three restored shophouses and documents the lives of early Chinese immigrants to Singapore during the colonial period.",
-    "yearBuilt": "2008",
-    "architect": "Restoration by Singapore Tourism Board",
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
     "translations": {
-      "en": {
-        "name": "Chinatown Heritage Centre",
-        "narration": "Welcome to the Chinatown Heritage Centre, a museum that brings to life the immigrant experience of early Chinese settlers in Singapore. Step back in time and discover the stories of hardship and triumph.",
-        "description": "Museum showcasing early Chinese immigrant life",
-        "historicalInfo": "Opened in 2008, the Chinatown Heritage Centre is housed in three restored shophouses and documents the lives of early Chinese immigrants to Singapore during the colonial period.",
-        "yearBuilt": "2008",
-        "architect": "Restoration by Singapore Tourism Board"
-      },
-      "it": {
-        "name": "Centro del Patrimonio di Chinatown",
-        "narration": "Benvenuto al Centro del Patrimonio di Chinatown, un museo che dà vita all'esperienza degli immigrati dei primi coloni cinesi a Singapore. Fai un passo indietro nel tempo e scopri le storie di difficoltà e trionfo.",
-        "description": "Museo che mostra la vita dei primi immigrati cinesi",
-        "historicalInfo": "Aperto nel 2008, il Centro del Patrimonio di Chinatown è ospitato in tre shophouse restaurate e documenta la vita dei primi immigrati cinesi a Singapore durante il periodo coloniale.",
-        "yearBuilt": "2008",
-        "architect": "Restauro dell'Ente del Turismo di Singapore"
-      },
       "ko": {
-        "name": "차이나타운 헤리티지 센터",
-        "narration": "초기 중국인 정착민들의 이민 경험을 생생하게 재현한 박물관인 차이나타운 헤리티지 센터에 오신 것을 환영합니다. 시간을 거슬러 올라가 고난과 승리의 이야기를 발견하세요.",
-        "description": "초기 중국 이민자 생활을 보여주는 박물관",
-        "historicalInfo": "2008년에 개관한 차이나타운 헤리티지 센터는 복원된 세 개의 샵하우스에 자리하고 있으며 식민지 시대 싱가포르의 초기 중국 이민자들의 삶을 기록합니다.",
-        "yearBuilt": "2008",
-        "architect": "싱가포르 관광청 복원"
+        "name": "성산 일출봉",
+        "description": "새벽을 깨우는 장엄한 풍광, 유네스코 세계자연유산의 웅장함 속에 피어나는 감동.",
+        "narration": "여성 해설사의 나지막하지만 힘 있는 목소리로 시작됩니다. '이곳, 성산 일출봉은 단순한 봉우리가 아닙니다. 약 5천 년 전, 이 깊은 바다 속에서 솟구쳐 오르던 불의 숨결이 빚어낸 거대한 생명의 탄생지입니다. 지금 여러분의 발 아래서 들려오는 파도 소리는 마치 어머니 대지가 들려주는 자장가 같고, 짭짤한 바다 내음은 여러분을 시간의 강물 속으로 인도할 것입니다. 저기 수평선 끝을 보십시오. 곧 태양이 붉은 기운을 뿜어내며 하늘을 물들일 것입니다. 이 순간, 천지를 뒤흔드는 듯한 태양의 기운이 여러분의 심장을 뜨겁게 만들 것입니다. 그리고 저 아래, 물질을 나가는 해녀들의 모습에서는 제주의 강인한 여인들의 삶과 역사가 고스란히 느껴집니다. 해녀들의 숨비소리는 이곳의 모든 것을 기억하고, 모든 것을 이야기해줍니다. 이곳에서 여러분은 단순한 경치를 보는 것이 아니라, 제주의 역사와 생명력을 온몸으로 느끼게 될 것입니다.",
+        "detailedDescription": "제주 동쪽 해안에 우뚝 솟아오른 성산 일출봉은 약 5천 년 전 수중 화산 폭발로 형성된 거대한 응회구입니다. 그 독특하고 웅장한 지형 덕분에 유네스코 세계자연유산으로 지정되었으며, 그 이름처럼 동해에서 떠오르는 해를 가장 먼저 맞이하는 장엄한 일출 명소로 전 세계인의 발길이 끊이지 않습니다. 정상에 오르면 마치 거대한 성벽처럼 둘러싸인 분화구와 끝없이 펼쳐진 푸른 바다, 그리고 주변의 오름들이 한데 어우러져 숨 막히는 절경을 선사합니다. 특히 해녀들이 직접 채취한 해산물을 맛볼 수 있는 해녀의 집과 해녀 물질 시연은 제주의 전통 문화를 엿볼 수 있는 귀한 기회이기도 합니다. 새벽녘 일출을 감상하며 대자연의 경이로움과 시간의 흐름을 온몸으로 느껴보시길 추천합니다."
       }
     },
-    "openingHours": null,
-    "priceRange": null,
+    "openingHours": "07:00 - 19:00 (동절기 07:30 - 18:00)",
+    "priceRange": "€",
     "cuisine": null,
     "reservationUrl": null,
     "phoneNumber": null,
@@ -92,8 +73,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.427Z",
-    "updatedAt": "2026-02-22T18:31:18.892Z"
+    "createdAt": "2026-02-13T13:52:26.671Z",
+    "updatedAt": "2026-02-22T18:05:55.852Z"
   },
   {
     "id": "castel_santangelo",
@@ -216,152 +197,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:24.691Z",
-    "updatedAt": "2026-02-22T18:34:27.305Z"
-  },
-  {
-    "id": "jeju_성산_일출봉",
-    "cityId": "jeju",
-    "name": "성산 일출봉",
-    "lat": 33.4627,
-    "lng": 126.9407,
-    "radius": 70,
-    "narration": "상상해보세요. 지금 여러분은 성산 일출봉 정상, 눈부신 아침 햇살 아래 서 있습니다. 5천 년 전, 격렬한 화산 폭발로 솟아오른 이 봉우리는 마치 거대한 예술 작품 같아요. 발 아래 펼쳐진 푸른 바다는 끝없이 펼쳐지고, 파도 소리는 끊임없이 속삭이며 여러분을 맞이합니다. 코끝을 스치는 짭짤한 바다 내음은 잊고 있었던 생명력을 깨우는 듯하죠. 해가 떠오르기 직전, 수평선 너머 하늘은 짙은 코발트 빛으로 물들어 있어요. 곧 붉은 태양이 솟아오르며 세상을 붉게 물들이겠죠. \n\n눈을 감고 깊게 숨을 들이쉬어 보세요. 여러분의 폐 속 깊은 곳까지 제주의 청정한 공기가 가득 차오르는 것을 느낄 수 있을 거예요. 바람은 부드럽게 여러분의 뺨을 스치고, 마음속 깊은 곳까지 평온함이 찾아올 겁니다. 지금 여러분이 서 있는 이곳은 단순한 봉우리가 아니에요. 제주의 역사와 전설, 그리고 아름다운 자연이 살아 숨 쉬는 특별한 공간이죠. 저 멀리 보이는 우도는 마치 바다 위에 떠 있는 한 폭의 그림 같아요. 섬의 윤곽은 부드럽고 아름답게 빛나고, 그 뒤로 펼쳐진 하늘은 더욱 짙은 푸른색으로 빛나고 있어요.\n\n아래를 내려다보면, 옹기종기 모여있는 마을의 모습이 보여요. 집들의 지붕은 햇빛에 반짝이고, 좁은 골목길에서는 사람들의 활기찬 웃음소리가 들려오는 듯하죠. 물질을 마치고 돌아오는 해녀들의 모습도 눈에 띄네요. 검은색 잠수복을 입고 바다에서 갓 나온 그녀들의 모습은 마치 바다의 여신 같아요. 그녀들의 손에는 싱싱한 해산물이 가득 들려 있겠죠. 해녀들의 숨비소리는 성산 일출봉에 울려 퍼지며, 제주의 강인한 생명력을 상징하는 듯합니다. 지금 이 순간, 여러분은 성산 일출봉의 아름다움에 완전히 매료되었을 거예요. 이곳은 단순한 관광지가 아니라, 여러분의 마음속 깊은 곳에 영원히 기억될 특별한 장소가 될 겁니다.",
-    "description": "새벽을 깨우는 장엄한 풍광, 유네스코 세계자연유산의 웅장함 속에 피어나는 감동.",
-    "category": "Landmark",
-    "detailedDescription": "성산 일출봉은 약 5천 년 전, 얕은 바다에서 수중 폭발한 화산 활동으로 형성된 응회구입니다. 높이 182m의 이 봉우리는 제주도의 동쪽 끝자락에 자리 잡고 있으며, 거대한 사발 모양의 분화구가 특징입니다. 분화구의 둘레는 약 600m, 깊이는 약 90m에 달하며, 정상에서는 주변의 아름다운 풍경을 한눈에 조망할 수 있습니다.\n\n성산 일출봉은 그 이름처럼, 해돋이 명소로 유명합니다. 매년 새해 첫날, 수많은 사람들이 이곳에 모여 떠오르는 태양을 보며 소원을 빌죠. 일출봉 정상에서 바라보는 해돋이는 그야말로 장관입니다. 붉게 물든 하늘과 바다, 그리고 일출봉의 실루엣이 어우러져 잊을 수 없는 풍경을 선사합니다. 현지인들은 일출을 보기 위해 새벽 일찍 서두르는 것을 추천합니다. 일출 시간 외에도, 날씨가 좋은 날에는 멀리 한라산까지 보이는 행운을 누릴 수 있습니다.\n\n성산 일출봉 주변에는 다양한 볼거리와 즐길 거리가 있습니다. 특히, 해녀 물질 공연은 제주의 전통 문화를 체험할 수 있는 좋은 기회입니다. 해녀들이 바다에서 직접 해산물을 채취하는 모습을 볼 수 있으며, 갓 잡은 해산물을 맛볼 수도 있습니다. 또한, 성산 일출봉 주변 해안도로를 따라 드라이브를 즐기거나, 인근의 섭지코지를 방문하여 아름다운 해안 경관을 감상하는 것도 추천합니다. 성산 일출봉은 단순한 자연 명소를 넘어, 제주의 역사와 문화를 담고 있는 소중한 자산입니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "성산 일출봉",
-        "description": "새벽을 깨우는 장엄한 풍광, 유네스코 세계자연유산의 웅장함 속에 피어나는 감동.",
-        "narration": "여성 해설사의 나지막하지만 힘 있는 목소리로 시작됩니다. '이곳, 성산 일출봉은 단순한 봉우리가 아닙니다. 약 5천 년 전, 이 깊은 바다 속에서 솟구쳐 오르던 불의 숨결이 빚어낸 거대한 생명의 탄생지입니다. 지금 여러분의 발 아래서 들려오는 파도 소리는 마치 어머니 대지가 들려주는 자장가 같고, 짭짤한 바다 내음은 여러분을 시간의 강물 속으로 인도할 것입니다. 저기 수평선 끝을 보십시오. 곧 태양이 붉은 기운을 뿜어내며 하늘을 물들일 것입니다. 이 순간, 천지를 뒤흔드는 듯한 태양의 기운이 여러분의 심장을 뜨겁게 만들 것입니다. 그리고 저 아래, 물질을 나가는 해녀들의 모습에서는 제주의 강인한 여인들의 삶과 역사가 고스란히 느껴집니다. 해녀들의 숨비소리는 이곳의 모든 것을 기억하고, 모든 것을 이야기해줍니다. 이곳에서 여러분은 단순한 경치를 보는 것이 아니라, 제주의 역사와 생명력을 온몸으로 느끼게 될 것입니다.",
-        "detailedDescription": "제주 동쪽 해안에 우뚝 솟아오른 성산 일출봉은 약 5천 년 전 수중 화산 폭발로 형성된 거대한 응회구입니다. 그 독특하고 웅장한 지형 덕분에 유네스코 세계자연유산으로 지정되었으며, 그 이름처럼 동해에서 떠오르는 해를 가장 먼저 맞이하는 장엄한 일출 명소로 전 세계인의 발길이 끊이지 않습니다. 정상에 오르면 마치 거대한 성벽처럼 둘러싸인 분화구와 끝없이 펼쳐진 푸른 바다, 그리고 주변의 오름들이 한데 어우러져 숨 막히는 절경을 선사합니다. 특히 해녀들이 직접 채취한 해산물을 맛볼 수 있는 해녀의 집과 해녀 물질 시연은 제주의 전통 문화를 엿볼 수 있는 귀한 기회이기도 합니다. 새벽녘 일출을 감상하며 대자연의 경이로움과 시간의 흐름을 온몸으로 느껴보시길 추천합니다."
-      }
-    },
-    "openingHours": "07:00 - 19:00 (동절기 07:30 - 18:00)",
-    "priceRange": "€",
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:52:26.671Z",
-    "updatedAt": "2026-02-22T18:05:55.852Z"
-  },
-  {
-    "id": "new-york_item_65",
-    "cityId": "new-york",
-    "name": "뉴욕 프리미엄 Restaurant 추천 66",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "(1. The Grand Opening)  \n와우! 여러분, 뉴욕에서 가장 화려하고 매혹적인 레스토랑의 세계로 여러분을 초대합니다. 이름하여 \"뉴욕 프리미엄 레스토랑 추천 66\"! 이곳에 도착하면, 마치 영화 세트장에 들어선 듯한 웅장한 분위기에 압도될 것입니다. 번쩍이는 샹들리에가 천장을 가득 채우고, 화려한 장식이 곳곳에서 눈길을 사로잡으며, 마치 과거와 현재가 한데 어우러진 무대를 연상시킵니다. 여기에 은은하게 퍼지는 신선한 허브와 갓 구운 빵의 향은 입맛을 자극하고, 주방에서 들려오는 음식 준비 소리는 마치 오케스트라의 연주와도 같습니다.\n\n이 모든 것의 중심에는 이곳만의 독특한 매력이 자리하고 있습니다. 문턱을 넘어서는 순간, 시각과 후각, 청각의 향연이 펼쳐지며, 각자의 이야기를 담고 있는 테이블들이 여러분을 기다립니다. 모든 감각이 깨어나는 이곳에서의 경험은 단순한 식사가 아닌, 하나의 예술 작품과 같은 순간으로 여러분을 이끌 것입니다.\n\n(2. Deep-Dive History)  \n이 위대한 공간의 시작은 1920년대로 거슬러 올라갑니다. 그 시절, 뉴욕은 경제적 번영과 문화적 혁신이 어우러져 세상을 향해 열린 도시가 되어가고 있었습니다. 이 레스토랑의 창립자는 당시 젊고 야심찬 마르코 실바노. 그는 이탈리아 이민자로서 뉴욕에서 새로운 시작을 꿈꾸며 이곳에 레스토랑을 세웠습니다. 그가 이곳을 세우던 시기는 금주법이 시행 중이던 때로, 그에게는 진정한 도전의 연속이었습니다.\n\n마르코 실바노의 이야기는 참으로 감동적입니다. 그는 친구들의 도움으로 비밀 통로를 만들어 개인 파티룸을 운영했습니다. 당시 경찰의 감시를 피하기 위한 그의 기발한 대책이었죠. 어느 날, 그가 가장 사랑하는 손님 중 한 명인 유명 가수 에디 부건이 방문했을 때 실바노는 그에게 비밀스럽게 전하는 방법으로 신곡을 들려주곤 했습니다. 이러한 작은 이야기들이 모여 이곳을 전설로 만들었습니다.\n\n(3. Architectural Wonders)  \n이 레스토랑의 건축적 아름다움은 절대 간과할 수 없습니다. 이곳은 철저한 장인 정신과 혁신적인 건축 기술이 결합된 산물입니다. 고급스러운 대리석과 견고한 목재, 그리고 세밀한 금속 장식은 당시의 최고 기술을 보여줍니다. 특히, 천장에 그려진 예술적인 벽화는 방문자에게 마치 르네상스 시대로 돌아간 듯한 착각을 불러일으킵니다. 이 벽화는 당시 최고 예술가인 루카 피에트로가 직접 손으로 그린 것으로, 그의 정교한 기술과 상상력이 빚어낸 걸작입니다.\n\n이곳에는 숨겨진 디테일들이 산재해 있습니다. 예를 들면, 이 레스토랑의 한 구석에는 작게 조각된 '행운의 동전'이 숨겨져 있습니다. 이 동전은 전설에 따르면, 손님들이 손으로 만지면 행운을 가져다준다고 합니다. 이러한 작은 이야기와 세심한 디테일들은 방문객들에게 새로운 발견의 재미를 선사하며, 이곳을 단순한 식사 장소 그 이상으로 만들어 줍니다.\n\n(4. The Modern Saga)  \n현대에 들어서면서 이 레스토랑은 또 다른 전환점을 맞이했습니다. 2000년대 초, 한 투자자가 이곳을 발견하고 그 화려함을 되살리기 위해 대규모 복원 프로젝트를 시작했습니다. 이 과정에서 본래의 아름다움을 유지하면서도 현대적인 편의시설을 추가하여, 새로운 세대의 손님들에게도 어필할 수 있는 공간으로 변모했습니다. 그 결과, 이곳은 다시 한번 뉴욕의 명소로 확고히 자리 잡게 되었습니다.\n\n이 레스토랑은 여러 할리우드 영화에도 등장하며 더욱 유명세를 탔습니다. 그중에서도 가장 기억에 남는 장면은 블록버스터 영화에서 주인공들이 이곳에서 로맨틱한 저녁을 즐기는 장면입니다. 이러한 문화적 영향력 덕분에 많은 관광객들이 영화 속 장면을 재현하려고 이곳을 찾으며, 때로는 웃지 못할 해프닝들도 벌어지곤 합니다. 정말 이곳은 영화와 현실의 경계를 허무는 특별한 공간입니다.\n\n(5. The Philosophical Conclusion)  \n이 레스토랑은 단지 식사를 즐기는 곳이 아닙니다. 인간의 역사와 꿈, 그리고 많은 이들의 이야기가 녹아있는 공간입니다. 이곳은 뉴욕의 역동적인 변화와 아메리칸 드림의 상징적인 장소로 자리 잡았습니다. 그 어느 때보다도 화려한 이 공간에서 우리는 과거와 현재, 그리고 미래의 교차점을 경험할 수 있습니다. 이곳에서의 경험은 단순한 체험이 아니라, 한 사람의 기억에 영원히 새겨질 소중한 순간이 될 것입니다.\n\n마지막으로 여러분에게 이곳에서의 경험을 떠올리며, 자신만의 이야기를 만들어보시기를 권합니다. 이곳을 떠나면서 여러분도 마르코 실바노처럼 자신의 꿈을 이루기 위한 새로운 시작을 다짐하게 될 것입니다. 뉴욕 프리미엄 레스토랑 추천 66은 여러분에게 그 어떤 곳에서도 느낄 수 없는 특별한 감동과 여운을 선사할 것입니다. 여러분의 방문을 기대하며, 이곳에서의 만남을 소중히 간직하겠습니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "뉴욕 프리미엄 Restaurant 추천 66",
-        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "뉴욕의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:06.017Z",
-    "updatedAt": "2026-02-22T18:05:55.914Z"
-  },
-  {
-    "id": "oslo_opera_house",
-    "cityId": "oslo",
-    "name": "Oslo Opera House",
-    "lat": 59.907222,
-    "lng": 10.753333,
-    "radius": 80,
-    "narration": "자, 여러분, 상상해보세요! 지금 여러분은 노르웨이 오슬로, 그 심장부에 서 있습니다. 눈앞에 펼쳐진 것은 마치 빙하가 녹아내려 굳어진 듯한, 웅장한 오슬로 오페라 하우스! 하얀 대리석 지붕은 햇빛을 받아 눈부시게 빛나고, 마치 바다에서 솟아오른 거대한 조각 같습니다. 시원한 바람이 여러분의 뺨을 스치고, 멀리서는 갈매기 울음소리가 들려옵니다. 발 아래로는 오슬로 피오르드의 잔잔한 물결이 넘실거리고, 그 너머로는 푸른 숲이 우거진 섬들이 점점이 떠 있습니다. 숨을 깊게 들이마셔 보세요. 짭짤한 바다 내음과 싱그러운 풀 내음이 섞여 코끝을 간지럽힙니다. 지금 여러분은 오페라 하우스의 지붕 위를 걷고 있습니다. 특별한 허락 없이도 누구나 이 멋진 건축물 위를 자유롭게 거닐 수 있다는 사실, 믿어지시나요? 경사면을 따라 천천히 걸어 올라가 보세요. 마치 산책로를 걷는 듯 편안합니다. 점점 더 높아질수록, 눈 앞에 펼쳐지는 풍경은 더욱 장관입니다. 오슬로 시내의 건물들이 장난감처럼 작게 보이고, 피오르드의 아름다움은 말로 형언할 수 없을 정도입니다. 저 멀리 보이는 섬들은 마치 그림엽서 속 풍경 같아요. 잠시 발걸음을 멈추고, 눈을 감아 보세요. 오페라 하우스 안에서 울려 퍼지는 웅장한 오케스트라 소리가 들리는 듯하지 않나요? 이곳은 단순한 건물이 아닙니다. 예술과 자연, 그리고 인간이 조화를 이루는 특별한 공간입니다. 오슬로 오페라 하우스, 그 매력에 흠뻑 빠져보세요!",
-    "description": "Norway's architectural masterpiece with a walkable roof",
-    "category": "Opera House",
-    "detailedDescription": "오슬로 오페라 하우스는 2008년에 문을 연, 노르웨이 최대 규모의 공연 예술 센터입니다. 스노헤타(Snøhetta)라는 건축 회사가 설계했으며, 백색 대리석과 유리로 만들어진 독특한 외관은 오슬로의 새로운 랜드마크로 자리 잡았습니다. 놀라운 점은 누구나 오페라 하우스 지붕 위를 걸을 수 있다는 것입니다. 경사진 지붕은 마치 해변을 연상시키며, 오슬로 피오르드와 도시 전체를 한눈에 담을 수 있는 최고의 전망대 역할을 합니다. 현지인들은 여름에 이곳에서 피크닉을 즐기거나, 일광욕을 하기도 합니다. 숨겨진 비화 하나! 오페라 하우스 건설 당시, 환경 보호를 위해 해저 터널을 뚫어 교통량을 분산시키고 소음을 줄이는 노력을 기울였다고 합니다. 또한, 건물 내부는 노르웨이 예술가들의 작품으로 장식되어 있어, 공연 관람 외에도 예술 작품을 감상하는 즐거움을 누릴 수 있습니다. 오페라 하우스 주변에는 레스토랑과 카페가 즐비하며, 특히 여름에는 야외 테라스에서 식사를 즐기는 사람들이 많습니다. 오슬로를 방문한다면, 오페라 하우스는 절대 놓쳐서는 안 될 필수 방문 코스입니다. 꿀팁 하나 더! 오페라 하우스 내부 투어 프로그램에 참여하면, 무대 뒤편과 의상실 등 일반인에게 공개되지 않는 공간을 탐험할 수 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800"
-    ],
-    "historicalInfo": "The Oslo Opera House was designed by the Norwegian architectural firm Snøhetta and opened on April 12, 2008. It was the largest cultural building constructed in Norway since Nidaros Cathedral was completed around 1300. The building won the EU Prize for Contemporary Architecture (Mies van der Rohe Award) in 2009 and the World Architecture Festival Culture Award in 2008.",
-    "yearBuilt": "2008",
-    "architect": "Snøhetta",
-    "translations": {
-      "en": {
-        "name": "Oslo Opera House",
-        "narration": "Welcome to the Oslo Opera House, a stunning architectural masterpiece rising from the Oslo Fjord. This modern landmark invites visitors to walk on its sloping roof for panoramic views of the city and fjord.",
-        "description": "Norway's architectural masterpiece with a walkable roof",
-        "detailedDescription": "The Oslo Opera House is the home of the Norwegian National Opera and Ballet and one of Norway's most visited architectural landmarks. Designed by the Norwegian architecture firm Snøhetta, the building opened in 2008 and has won numerous international architecture awards, including the EU Prize for Contemporary Architecture in 2009. The building's most distinctive feature is its sloping white marble roof that appears to rise from the waters of the Oslo Fjord. The roof is accessible to the public and has become one of Oslo's most popular gathering spots, offering stunning 360-degree views of the city, harbor, and surrounding mountains. The design concept was inspired by Norwegian nature, particularly glaciers and icebergs, with the building appearing to float on the water's edge. The opera house features three stages and can seat over 1,364 people in the main auditorium. The interior showcases Norwegian craftsmanship with oak walls and floors, while the wave wall in the main foyer is covered with handmade oak panels. The building uses sustainable design principles and houses state-of-the-art performance facilities, making it both an architectural icon and a world-class cultural venue.",
-        "historicalInfo": "The Oslo Opera House was designed by the Norwegian architectural firm Snøhetta and opened on April 12, 2008. It was the largest cultural building constructed in Norway since Nidaros Cathedral was completed around 1300. The building won the EU Prize for Contemporary Architecture (Mies van der Rohe Award) in 2009 and the World Architecture Festival Culture Award in 2008.",
-        "yearBuilt": "2008",
-        "architect": "Snøhetta"
-      },
-      "ko": {
-        "name": "오슬로 오페라 하우스",
-        "narration": "오슬로 피요르드에서 솟아오르는 놀라운 건축 걸작 오슬로 오페라 하우스에 오신 것을 환영합니다. 이 현대적인 랜드마크는 방문객들을 경사진 지붕 위를 걸으며 도시와 피요르드의 파노라마 전망을 즐길 수 있도록 초대합니다.",
-        "description": "걸을 수 있는 지붕이 있는 노르웨이의 건축 걸작",
-        "detailedDescription": "오슬로 오페라 하우스는 노르웨이 국립 오페라 발레단의 본거지이자 노르웨이에서 가장 많이 방문하는 건축 랜드마크 중 하나입니다. 노르웨이 건축 회사 스뇌헤타가 설계한 이 건물은 2008년에 개관했으며 2009년 EU 현대 건축상을 포함한 수많은 국제 건축상을 수상했습니다. 건물의 가장 독특한 특징은 오슬로 피요르드의 물에서 솟아오르는 것처럼 보이는 경사진 흰색 대리석 지붕입니다. 지붕은 대중에게 개방되어 있으며 오슬로에서 가장 인기 있는 모임 장소 중 하나가 되었으며, 도시, 항구, 주변 산의 멋진 360도 전망을 제공합니다. 디자인 개념은 특히 빙하와 빙산과 같은 노르웨이 자연에서 영감을 받았으며, 건물이 물가에 떠 있는 것처럼 보입니다. 오페라 하우스는 3개의 무대를 갖추고 있으며 메인 강당에는 1,364명 이상을 수용할 수 있습니다. 내부는 오크 벽과 바닥으로 노르웨이 장인 정신을 보여주며, 메인 로비의 웨이브 벽은 수제 오크 패널로 덮여 있습니다. 건물은 지속 가능한 디자인 원칙을 사용하고 최첨단 공연 시설을 갖추고 있어 건축 아이콘이자 세계적 수준의 문화 공연장입니다.",
-        "historicalInfo": "오슬로 오페라 하우스는 노르웨이 건축 회사 스뇌헤타가 설계하여 2008년 4월 12일에 개관했습니다. 1300년경 니다로스 대성당이 완공된 이후 노르웨이에서 건설된 가장 큰 문화 건물이었습니다. 건물은 2009년 EU 현대 건축상(미스 반 데어 로에 상)과 2008년 세계 건축 페스티벌 문화상을 수상했습니다.",
-        "yearBuilt": "2008년",
-        "architect": "스뇌헤타"
-      },
-      "ja": {
-        "name": "オスロオペラハウス",
-        "narration": "オスロフィヨルドから立ち上がる見事な建築の傑作、オスロオペラハウスへようこそ。この現代的なランドマークは、訪問者を傾斜した屋根の上を歩いて市内とフィヨルドのパノラマビューを楽しむよう招待します。",
-        "description": "歩ける屋根を持つノルウェーの建築の傑作",
-        "detailedDescription": "オスロオペラハウスは、ノルウェー国立オペラバレエ団の本拠地であり、ノルウェーで最も訪問される建築的ランドマークの一つです。ノルウェーの建築事務所スノヘッタが設計したこの建物は、2008年に開館し、2009年のEU現代建築賞を含む数々の国際建築賞を受賞しています。建物の最も特徴的な特徴は、オスロフィヨルドの水面から立ち上がるように見える傾斜した白い大理石の屋根です。屋根は一般に公開されており、オスロで最も人気のある集まりスポットの一つとなり、市内、港、周辺の山々の見事な360度の景色を提供しています。デザインコンセプトは、特に氷河や氷山などのノルウェーの自然にインスピレーションを受けており、建物が水際に浮かんでいるように見えます。オペラハウスには3つのステージがあり、メインオーディトリアムには1,364人以上を収容できます。内部はオーク材の壁と床でノルウェーの職人技を披露し、メインロビーのウェーブウォールは手作りのオークパネルで覆われています。建物は持続可能なデザイン原則を使用し、最先端のパフォーマンス施設を備えているため、建築的アイコンであり世界クラスの文化会場でもあります。",
-        "historicalInfo": "オスロオペラハウスは、ノルウェーの建築事務所スノヘッタによって設計され、2008年4月12日に開館しました。1300年頃にニダロス大聖堂が完成して以来、ノルウェーで建設された最大の文化建築物でした。この建物は2009年にEU現代建築賞（ミース・ファン・デル・ローエ賞）と2008年の世界建築フェスティバル文化賞を受賞しました。",
-        "yearBuilt": "2008年",
-        "architect": "スノヘッタ"
-      },
-      "zh": {
-        "name": "奥斯陆歌剧院",
-        "narration": "欢迎来到奥斯陆歌剧院，这座从奥斯陆峡湾拔地而起的令人惊叹的建筑杰作。这个现代地标邀请游客在其倾斜的屋顶上行走，欣赏城市和峡湾的全景。",
-        "description": "拥有可步行屋顶的挪威建筑杰作",
-        "detailedDescription": "奥斯陆歌剧院是挪威国家歌剧院和芭蕾舞团的所在地，也是挪威访问量最大的建筑地标之一。由挪威建筑公司斯诺赫塔设计，该建筑于2008年开放，并获得了众多国际建筑奖项，包括2009年欧盟当代建筑奖。建筑最显著的特点是从奥斯陆峡湾水面升起的倾斜白色大理石屋顶。屋顶向公众开放，已成为奥斯陆最受欢迎的聚会场所之一，提供城市、港口和周围山脉的壮丽360度景观。设计理念受到挪威自然的启发，特别是冰川和冰山，建筑似乎漂浮在水边。歌剧院拥有三个舞台，主礼堂可容纳1,364多人。内部展示了挪威工艺，配有橡木墙壁和地板，主大厅的波浪墙覆盖着手工制作的橡木面板。建筑采用可持续设计原则，并设有最先进的表演设施，使其既是建筑标志，又是世界级的文化场所。",
-        "historicalInfo": "奥斯陆歌剧院由挪威建筑公司斯诺赫塔设计，于2008年4月12日开放。这是自1300年左右尼达罗斯大教堂建成以来挪威建造的最大文化建筑。该建筑在2009年获得了欧盟当代建筑奖（密斯·凡德罗奖）和2008年世界建筑节文化奖。",
-        "yearBuilt": "2008年",
-        "architect": "斯诺赫塔"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:29.986Z",
-    "updatedAt": "2026-02-22T18:13:01.665Z"
+    "updatedAt": "2026-02-22T20:00:56.719Z"
   },
   {
     "id": "seoul_item_108",
@@ -399,158 +235,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:08.835Z",
     "updatedAt": "2026-02-22T18:05:56.038Z"
-  },
-  {
-    "id": "arc_triomphe",
-    "cityId": "paris",
-    "name": "Arc de Triomphe",
-    "lat": 48.873787,
-    "lng": 2.295047,
-    "radius": 50,
-    "narration": "자, 상상해보세요. 개선문, 이 웅장한 석조 건축물이 여러분의 눈앞에 우뚝 솟아있는 모습을요! 파리의 심장, 샤를 드골 광장의 한복판에서 개선문은 마치 시간을 초월한 듯 그 위용을 자랑하고 있어요. 햇살이 개선문의 표면을 부드럽게 감싸 안고, 그 아래로 수많은 발걸음들이 역사의 흔적을 새기고 있죠. 지금 여러분의 발 아래에는 나폴레옹 시대의 영광과 숭고한 희생이 깃들어 있답니다. 개선문의 아치는 마치 거대한 액자 같아요. 그 액자 속에는 파리의 하늘과 샹젤리제 거리의 활기찬 풍경이 담겨 있죠. 개선문 꼭대기에 올라서면, 파리 시내가 한눈에 들어오는 파노라마 뷰가 펼쳐질 거예요. 에펠탑, 몽마르뜨 언덕, 센 강… 파리의 랜드마크들이 마치 장난감처럼 작게 보인답니다. 바람이 여러분의 머리카락을 스치고, 파리의 숨결이 여러분의 뺨을 간지럽힐 거예요. 개선문은 단순한 기념물이 아니에요. 프랑스 역사의 증인이자, 파리의 영원한 상징이죠. 개선문 아래 무명 용사의 묘에는 꺼지지 않는 불꽃이 타오르고 있어요. 이 불꽃은 조국을 위해 목숨을 바친 모든 영웅들을 기리는 숭고한 헌사랍니다. 밤이 되면 개선문은 더욱 아름다워져요. 조명이 켜진 개선문은 마치 황금빛 보석처럼 빛나고, 파리의 밤하늘을 더욱 로맨틱하게 물들인답니다. 개선문 앞 샹젤리제 거리에는 노천카페와 상점들이 즐비하게 늘어서 있어요. 커피 한 잔을 마시며 파리의 낭만을 만끽하고, 기념품을 사며 여행의 추억을 간직해보세요. 개선문은 파리를 방문하는 모든 이들에게 잊지 못할 감동과 추억을 선사할 거예요. 자, 이제 개선문의 이야기를 따라 시간 여행을 떠나볼까요?",
-    "description": "One of the most famous monuments in Paris",
-    "category": "Monument",
-    "detailedDescription": "개선문은 프랑스의 영광을 상징하는 기념비적인 건축물입니다. 1806년, 나폴레옹 1세의 명령으로 건설이 시작되었지만, 그의 몰락과 함께 중단되기도 했습니다. 이후 루이 필리프 왕에 의해 완공되어 1836년에 드디어 그 웅장한 모습을 드러냈죠. 높이 약 50미터, 폭 45미터에 달하는 거대한 크기를 자랑하며, 신고전주의 양식의 아름다움을 뽐냅니다. 개선문에는 프랑스 혁명과 나폴레옹 전쟁에서 활약한 장군들의 이름이 새겨져 있으며, 내부에는 프랑스 국립기념관이 자리 잡고 있습니다. 숨겨진 비화 하나 알려드릴까요? 개선문 건설 당시, 나폴레옹은 자신의 개선 행진을 위해 문을 설계하도록 지시했는데, 완공을 보지 못하고 세상을 떠났다는 슬픈 이야기가 전해진답니다. 또한, 개선문 아래에는 제1차 세계대전에서 전사한 무명 용사의 묘가 있으며, 꺼지지 않는 불꽃이 24시간 타오르고 있습니다. 현지인들은 개선문 꼭대기에서 바라보는 파리 야경을 최고로 꼽습니다. 특히 에펠탑 점등 시간에 맞춰 방문하면 더욱 환상적인 경험을 할 수 있다고 하네요! 개선문 주변에는 맛있는 레스토랑과 카페가 많으니, 여유롭게 식사를 즐기며 파리의 낭만을 만끽해보세요.",
-    "photos": [
-      "https://images.unsplash.com/photo-1549144511-f099e773c147?w=800",
-      "https://images.unsplash.com/photo-1509439581779-6298f75bf6e5?w=800",
-      "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800"
-    ],
-    "historicalInfo": "The Arc de Triomphe was commissioned by Napoleon in 1806 to honor the French army. It stands at the center of the Place Charles de Gaulle and contains the Tomb of the Unknown Soldier.",
-    "yearBuilt": "1806-1836",
-    "architect": "Jean Chalgrin",
-    "translations": {
-      "en": {
-        "name": "Arc de Triomphe",
-        "narration": "The Arc de Triomphe honors those who fought for France. It stands at the center of Place Charles de Gaulle.",
-        "description": "One of the most famous monuments in Paris",
-        "detailedDescription": "The Arc de Triomphe de l'Étoile, commonly known as the Arc de Triomphe, stands as one of the most iconic monuments in Paris and a powerful symbol of French national pride, military glory, and historical memory. Located at the center of the Place Charles de Gaulle (formerly Place de l'Étoile), at the western end of the Champs-Élysées, this monumental triumphal arch honors those who fought and died for France, particularly during the Revolutionary and Napoleonic Wars. Rising 50 meters (164 feet) in height, 45 meters (148 feet) in width, and 22 meters (72 feet) in depth, the Arc de Triomphe is the second-largest triumphal arch in existence, surpassed only by Arch of Triumph in Pyongyang, North Korea. The monument was commissioned by Napoleon Bonaparte in 1806, following his victory at the Battle of Austerlitz, to commemorate the achievements of the French armies. Napoleon declared, \"You will return home through arches of triumph,\" to his soldiers, and he envisioned a monument that would celebrate French military might for centuries to come. The architect Jean Chalgrin was chosen to design the arch, drawing inspiration from the ancient Roman Arch of Titus while creating something distinctly grander and more ambitious. Construction began in 1806, but progressed slowly due to Napoleon's political fortunes. When he married Marie-Louise of Austria in 1810, the arch was far from complete, so a full-scale wooden mock-up was hastily erected for the imperial procession. After Napoleon's abdication in 1814, construction halted entirely. Work resumed in 1826 under King Louis-Philippe and was finally completed in 1836, fifteen years after Napoleon's death. Tragically, Napoleon never saw his grand monument completed, though his funeral procession did pass under the arch in 1840 when his remains were returned to France from Saint Helena. The Arc de Triomphe is adorned with magnificent sculptural reliefs that tell the story of French military glory. The most famous is François Rude's \"La Marseillaise\" (officially titled \"Departure of the Volunteers of 1792\"), depicting French citizens rallying to defend the young Republic. This dynamic sculpture, with its central figure of Liberty urging the people forward, has become one of the most celebrated works of French Romantic sculpture. Other major reliefs include \"The Triumph of 1810\" by Jean-Pierre Cortot, showing Napoleon's victories; \"Resistance\" by Antoine Étex, depicting French resistance during the 1814 campaign; and \"Peace\" by Étex, celebrating the Treaty of Paris. The arch's inner walls are engraved with the names of 660 generals and marshals who served during the French Revolution and Napoleonic Empire. Those who died in battle are underlined, creating a poignant memorial to military leadership and sacrifice. The attic level features shields bearing the names of major Revolutionary and Napoleonic victories, while the four pillars support large sculptural groups representing pivotal moments in French military history. Perhaps the most solemn and significant feature of the Arc de Triomphe is the Tomb of the Unknown Soldier, installed beneath the arch on November 11, 1920, to honor the unidentified French soldiers who died in World War I. The eternal flame, rekindled every evening at 6:30 PM in a ceremony that has continued daily since 1923, serves as France's national war memorial. This tradition ensures that the memory of those who gave their lives for France is never extinguished. The flame has burned continuously even during the German occupation of Paris in World War II, a powerful symbol of French resilience and resistance. The Arc de Triomphe has witnessed countless historic moments. Victorious armies have marched beneath it, from the Allies in 1919 following World War I to the liberation of Paris in 1944 when General de Gaulle led Free French forces in a triumphant procession down the Champs-Élysées and through the arch. The monument has also served as a focal point for national mourning, including the funeral processions of presidents, war heroes, and cultural icons. The arch stands at the center of the Place Charles de Gaulle, from which twelve grand avenues radiate in a star pattern, earning the square its former name \"Place de l'Étoile\" (Star Square). This urban planning creates one of the world's most famous traffic circles and provides spectacular views of the arch from multiple vantage points throughout Paris. Visitors can climb the 284 steps to the top of the arch (an elevator is available for those with reduced mobility), where a viewing platform offers breathtaking panoramic views of Paris. From this vantage point, one can see the Champs-Élysées stretching toward the Louvre and Place de la Concorde in one direction, and the Grande Arche de la Défense continuing the axis in the other, creating what Parisians call the \"Voie Triomphale\" or Triumphal Way. Inside the arch, a museum traces its history, construction, and symbolic importance in French culture. Exhibitions explore the arch's role in French national identity, its architectural significance, and the countless ceremonies and events it has witnessed over two centuries. The Arc de Triomphe appears frequently in popular culture, from literature and film to art and photography, cementing its status as an instantly recognizable symbol of Paris. It has served as the finish line for the Tour de France bicycle race since 1975, adding a sporting dimension to its cultural significance. The monument has also been the site of major celebrations, including Bastille Day military parades and New Year's Eve festivities. Recent years have seen the arch at the center of both celebration and protest. In 2018, it suffered vandalism during Yellow Vest protests, highlighting its continued relevance as a symbol of French state power and national identity. In 2021, artist Christo's posthumous installation wrapped the entire arch in silvery blue recyclable fabric, transforming this stone monument of permanence into a temporary work of ephemeral art, demonstrating how even the most established symbols can be reimagined for new generations. Today, the Arc de Triomphe stands not merely as a monument to past glories but as a living symbol of French identity, resilience, and collective memory. It reminds visitors and Parisians alike of the sacrifices made for liberty, the importance of national unity, and the enduring power of monumental architecture to inspire, commemorate, and bring people together across generations."
-      },
-      "it": {
-        "name": "Arco di Trionfo",
-        "narration": "L'Arco di Trionfo onora coloro che hanno combattuto per la Francia. Si trova al centro di Place Charles de Gaulle.",
-        "description": "Uno dei monumenti più famosi di Parigi",
-        "historicalInfo": "L'Arco di Trionfo fu commissionato da Napoleone nel 1806 per onorare l'esercito francese. Si trova al centro di Place Charles de Gaulle e contiene la Tomba del Milite Ignoto.",
-        "yearBuilt": "1806-1836",
-        "architect": "Jean Chalgrin"
-      },
-      "ko": {
-        "name": "개선문",
-        "narration": "개선문은 프랑스를 위해 싸운 사람들을 기리는 곳입니다. 샤를 드골 광장 중앙에 위치해 있습니다.",
-        "description": "파리에서 가장 유명한 기념물 중 하나",
-        "detailedDescription": "에투알 개선문(Arc de Triomphe de l'Étoile)은 파리에서 가장 상징적인 기념물 중 하나이자 프랑스의 국가적 자긍심, 군사적 영광, 그리고 역사적 기억의 강력한 상징으로 서 있습니다. 샹젤리제 거리의 서쪽 끝, 샤를 드골 광장(구 에투알 광장) 중앙에 위치한 이 기념비적인 개선문은 특히 혁명 전쟁과 나폴레옹 전쟁 동안 프랑스를 위해 싸우고 전사한 이들을 기립니다. 높이 50미터(164피트), 너비 45미터(148피트), 깊이 22미터(72피트)로 솟아오른 개선문은 북한 평양의 개선문 다음으로 세계에서 두 번째로 큰 개선문입니다. 이 기념물은 1806년 나폴레옹 보나파르트가 아우스터리츠 전투에서의 승리 이후 프랑스 군대의 업적을 기념하기 위해 의뢰했습니다. 나폴레옹은 그의 병사들에게 \"당신들은 개선문을 통해 귀국할 것이다\"라고 선언하며, 수세기 동안 프랑스의 군사적 위력을 기념할 기념물을 구상했습니다. 건축가 장 샬그랭이 아치를 설계하도록 선택되었으며, 고대 로마의 티투스 개선문에서 영감을 받되 훨씬 더 웅장하고 야심찬 것을 창조했습니다. 건설은 1806년에 시작되었지만 나폴레옹의 정치적 운명으로 인해 천천히 진행되었습니다. 1810년 오스트리아의 마리 루이즈와 결혼할 때 아치는 완성과 거리가 멀었기 때문에, 황제의 행렬을 위해 실물 크기의 나무 모형이 급히 세워졌습니다. 1814년 나폴레옹의 퇴위 후 건설은 완전히 중단되었습니다. 작업은 1826년 루이 필립 왕 하에 재개되어 나폴레옹 사망 15년 후인 1836년에 마침내 완성되었습니다. 비극적이게도 나폴레옹은 그의 위대한 기념물이 완성되는 것을 보지 못했지만, 1840년 그의 유해가 세인트 헬레나에서 프랑스로 반환될 때 그의 장례 행렬이 아치 아래를 통과했습니다. 개선문은 프랑스 군사적 영광의 이야기를 전하는 장엄한 조각 부조로 장식되어 있습니다. 방문 팁: 개선문 꼭대기로 올라가 파리의 장엄한 파노라마 전망을 감상하고, 매일 저녁 6시 30분에 열리는 무명용사 묘의 추모식을 참석하며, 12개 방사형 대로의 별 모양 패턴을 관찰해 보세요.",
-        "historicalInfo": "개선문은 1806년 나폴레옹이 프랑스 군대를 기리기 위해 의뢰했습니다. 샤를 드골 광장 중앙에 위치하며 무명용사의 묘가 있습니다.",
-        "yearBuilt": "1806-1836년",
-        "architect": "장 샬그랭"
-      },
-      "es": {
-        "name": "Arco del Triunfo",
-        "narration": "El Arco del Triunfo honra a quienes lucharon por Francia. Se encuentra en el centro de la Place Charles de Gaulle.",
-        "description": "Uno de los monumentos más famosos de París",
-        "historicalInfo": "El Arco del Triunfo fue encargado por Napoleón en 1806 para honrar al ejército francés. Se encuentra en el centro de la Place Charles de Gaulle y contiene la Tumba del Soldado Desconocido.",
-        "yearBuilt": "1806-1836",
-        "architect": "Jean Chalgrin"
-      },
-      "fr": {
-        "name": "Arc de Triomphe",
-        "narration": "L'Arc de Triomphe rend hommage à ceux qui ont combattu pour la France. Il se dresse au centre de la Place Charles de Gaulle.",
-        "description": "L'un des monuments les plus célèbres de Paris",
-        "historicalInfo": "L'Arc de Triomphe a été commandé par Napoléon en 1806 pour honorer l'armée française. Il se trouve au centre de la Place Charles de Gaulle et contient la Tombe du Soldat Inconnu.",
-        "yearBuilt": "1806-1836",
-        "architect": "Jean Chalgrin"
-      },
-      "de": {
-        "name": "Arc de Triomphe",
-        "narration": "Der Arc de Triomphe ehrt diejenigen, die für Frankreich gekämpft haben. Er steht im Zentrum des Place Charles de Gaulle.",
-        "description": "Eines der berühmtesten Denkmäler in Paris",
-        "historicalInfo": "Der Arc de Triomphe wurde 1806 von Napoleon in Auftrag gegeben, um die französische Armee zu ehren. Er steht im Zentrum des Place Charles de Gaulle und enthält das Grab des Unbekannten Soldaten.",
-        "yearBuilt": "1806-1836",
-        "architect": "Jean Chalgrin"
-      },
-      "zh": {
-        "name": "凯旋门",
-        "narration": "凯旋门是为纪念为法国而战的人们而建。它位于戴高乐广场的中心。",
-        "description": "巴黎最著名的纪念碑之一",
-        "detailedDescription": "星形广场凯旋门（Arc de Triomphe de l'Étoile），通常简称凯旋门，是巴黎最具标志性的纪念碑之一，也是法国民族自豪感、军事荣耀和历史记忆的强大象征。这座宏伟的凯旋门位于香榭丽舍大街西端的戴高乐广场（原名星形广场）中心，纪念那些为法国而战并牺牲的人们，特别是在革命战争和拿破仑战争期间。凯旋门高50米（164英尺），宽45米（148英尺），深22米（72英尺），是世界上第二大凯旋门，仅次于朝鲜平壤的凯旋门。这座纪念碑由拿破仑·波拿巴于1806年在奥斯特里茨战役胜利后委托建造，以纪念法国军队的成就。拿破仑向他的士兵宣布：\"你们将通过凯旋门回家\"，他设想了一座将在未来几个世纪庆祝法国军事实力的纪念碑。建筑师让·沙尔格兰被选中设计这座拱门，从古罗马提图斯凯旋门中汲取灵感，同时创造出更加宏伟和雄心勃勃的作品。施工于1806年开始，但由于拿破仑的政治命运而进展缓慢。1810年他与奥地利的玛丽·路易丝结婚时，拱门远未完工，因此为皇家游行匆忙搭建了一个全尺寸的木制模型。1814年拿破仑退位后，施工完全停止。工程于1826年在路易·菲利普国王统治下恢复，最终于1836年完工，距拿破仑去世15年。可悲的是，拿破仑从未看到他宏伟的纪念碑完工，尽管1840年他的遗体从圣赫勒拿岛返回法国时，他的葬礼队伍确实通过了拱门下方。凯旋门装饰有讲述法国军事荣耀故事的宏伟雕刻浮雕。参观提示：登上凯旋门顶部欣赏巴黎壮丽的全景，参加每晚6:30在无名战士墓举行的纪念仪式，观察12条放射状大道形成的星形图案。",
-        "historicalInfo": "凯旋门由拿破仑于1806年委托建造，以纪念法国军队。它位于戴高乐广场的中心，内有无名战士墓。",
-        "yearBuilt": "1806-1836年",
-        "architect": "让·沙尔格兰"
-      },
-      "ja": {
-        "name": "凱旋門",
-        "narration": "凱旋門はフランスのために戦った人々を称えます。シャルル・ド・ゴール広場の中心に立っています。",
-        "description": "パリで最も有名な記念碑の一つ",
-        "detailedDescription": "エトワール凱旋門（Arc de Triomphe de l'Étoile）、一般に凱旋門として知られるこの記念碑は、パリで最も象徴的な建造物の一つであり、フランスの国民的誇り、軍事的栄光、歴史的記憶の強力なシンボルとして立っています。シャンゼリゼ通りの西端、シャルル・ド・ゴール広場（旧エトワール広場）の中心に位置するこの記念碑的な凱旋門は、特に革命戦争とナポレオン戦争中にフランスのために戦い、死んだ人々を称えています。高さ50メートル（164フィート）、幅45メートル（148フィート）、奥行き22メートル（72フィート）そびえる凱旋門は、北朝鮮平壌の凱旋門に次いで世界で2番目に大きな凱旋門です。この記念碑は1806年、アウステルリッツの戦いでの勝利の後、ナポレオン・ボナパルトがフランス軍の功績を記念するために委託しました。ナポレオンは兵士たちに「あなたたちは凱旋門を通って帰還するだろう」と宣言し、何世紀にもわたってフランスの軍事力を祝う記念碑を構想しました。建築家ジャン・シャルグランがアーチの設計に選ばれ、古代ローマのティトゥスの凱旋門からインスピレーションを得ながら、より壮大で野心的なものを創造しました。建設は1806年に始まりましたが、ナポレオンの政治的運命により進行は遅々としていました。1810年にオーストリアのマリー・ルイーズと結婚したとき、アーチは完成には程遠かったため、皇帝の行列のために実物大の木製模型が急遽建てられました。1814年のナポレオンの退位後、建設は完全に停止しました。工事は1826年にルイ・フィリップ王の下で再開され、ナポレオンの死から15年後の1836年にようやく完成しました。悲劇的に、ナポレオンは彼の壮大な記念碑が完成するのを見ることはありませんでしたが、1840年に彼の遺体がセントヘレナからフランスに戻されたとき、彼の葬列はアーチの下を通過しました。凱旋門はフランスの軍事的栄光の物語を語る壮大な彫刻レリーフで飾られています。訪問のヒント：凱旋門の頂上に登ってパリの壮大なパノラマビューを楽しみ、毎晩6時30分に無名戦士の墓で行われる追悼式に参加し、12本の放射状大通りが形成する星型パターンを観察してください。",
-        "historicalInfo": "凱旋門は1806年にナポレオンがフランス軍を称えるために委託しました。シャルル・ド・ゴール広場の中心にあり、無名戦士の墓があります。",
-        "yearBuilt": "1806-1836年",
-        "architect": "ジャン・シャルグラン"
-      },
-      "pt": {
-        "name": "Arco do Triunfo",
-        "narration": "O Arco do Triunfo homenageia aqueles que lutaram pela França. Está no centro da Place Charles de Gaulle.",
-        "description": "Um dos monumentos mais famosos de Paris",
-        "historicalInfo": "O Arco do Triunfo foi encomendado por Napoleão em 1806 para homenagear o exército francês. Está no centro da Place Charles de Gaulle e contém o Túmulo do Soldado Desconhecido.",
-        "yearBuilt": "1806-1836",
-        "architect": "Jean Chalgrin"
-      },
-      "ru": {
-        "name": "Триумфальная арка",
-        "narration": "Триумфальная арка чествует тех, кто сражался за Францию. Она стоит в центре площади Шарля де Голля.",
-        "description": "Один из самых известных памятников Парижа",
-        "historicalInfo": "Триумфальная арка была заказана Наполеоном в 1806 году в честь французской армии. Она находится в центре площади Шарля де Голля и содержит Могилу Неизвестного солдата.",
-        "yearBuilt": "1806-1836",
-        "architect": "Жан Шальгрен"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:25.178Z",
-    "updatedAt": "2026-02-22T18:07:18.571Z"
-  },
-  {
-    "id": "rome_item_41",
-    "cityId": "rome",
-    "name": "로마 프리미엄 Restaurant 추천 42",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "안녕하세요, 여러분! 오늘 여러분을 환상적인 로마의 심장부로 안내할 \"Story Teller Lee\"입니다. 준비되셨나요? 당신을 기다리고 있는 것은 단순한 레스토랑이 아닙니다. 이는 전설적인 이야기와 맛의 향연이 펼쳐질 무대입니다. 자, 그럼 시작해볼까요?\n\n### The Grand Opening\n\n첫걸음을 디디는 순간, 로마 프리미엄 레스토랑 추천 42는 당신을 마법의 세계로 이끕니다. 번쩍이는 샹들리에가 천장을 수놓고, 벽돌 벽은 수세기의 이야기를 속삭입니다. 가장 먼저 당신을 맞이하는 것은 고대 로마의 향기! 신선한 허브와 갓 구워진 빵의 향기가 코끝을 간질입니다. 이곳의 주방은 이미 활활 타오르고 있으며, 셰프들이 리듬감 있게 움직이며 요리를 선보이는 광경은 마치 예술 공연입니다. 들리시나요? 칼이 도마를 치는 소리와 그릴에서 올라오는 지글지글 소리가 당신을 식욕 도발의 세계로 초대합니다.\n\n### Deep-Dive History\n\n이 레스토랑의 건축은 진정한 예술적 혁명이었습니다. 15세기 초, 당시의 유명한 건축가 마르코 디 베네치아에 의해 설계된 이 건물은 로마의 정치적 불안과 문화적 변혁의 중심에 있었습니다. 이탈리아 전역에서 권력을 두고 치열하게 싸운 귀족 가문들이 이곳에서 비밀 회담을 열기도 했지요. 이곳은 단순한 식사를 넘어서, 로마의 권력 판도를 뒤흔든 장소였습니다.\n\n당시, 로마의 한 귀족 여인이 있었습니다. 유명한 레지나 디 로마입니다. 그녀는 이곳에서 천재적인 외교술로 로마의 운명을 바꿨습니다. 비밀 회담 중, 한밤중의 만찬에서 그녀는 다섯 귀족의 마음을 사로잡아 로마의 평화를 이끌어냈습니다. 이곳의 앤티크 테이블은 그 시절의 역사를 조용히 기억하고 있습니다. \n\n### Architectural Wonders\n\n이 건물의 건축적 경이는 정말 놀랍습니다. 돌과 대리석으로 이뤄진 외벽은 로마의 건축 기술의 절정을 보여줍니다. 그 비밀은 로마 콘크리트에 있습니다. 이 특별한 혼합물은 비바람에도 강하게 견디며, 수세기가 지나도 변치 않는 미를 유지합니다. 건축가들은 이곳을 지을 때, 고대 로마의 비율과 조화를 완벽히 맞추기 위해 수많은 시간과 노력을 기울였죠.\n\n하지만 주의 깊게 보지 않으면 놓치기 쉬운 것들이 있습니다. 이곳의 기둥에는 작은 문양들이 새겨져 있습니다. 이는 고대 로마의 상징, 전쟁의 신 마르스를 나타냅니다. 흔히 지나치기 쉬운 이 작은 디테일은 로마의 영광을 마치 내부의 비밀처럼 간직하고 있습니다. \n\n### The Modern Saga\n\n시간이 흐르면서, 이 레스토랑은 한때 잊혀질 뻔한 운명이었습니다. 하지만 20세기 중반, 한 탐험가가 이곳을 발견하고, 지금의 영광을 되찾았습니다. 그의 노력 덕분에 우리는 이 아름다운 건축물과 맛을 즐길 수 있게 되었습니다. 복원 작업은 당시의 예술과 문화를 섬세하게 재현하려는 노력의 결과였습니다.\n\n그 이후, 이곳은 영화 촬영지로도 유명해졌습니다. 수많은 영화와 드라마의 한 장면이 이곳에서 탄생했습니다. 최근에는 관광객들이 이곳에서 사진을 찍으며, 마치 자신이 영화의 주인공인 양 행동합니다. 어떤 이는 셀카를 찍으며 \"로마의 휴일\"을 재현하기도 합니다. \n\n### The Philosophical Conclusion\n\n로마 프리미엄 레스토랑 추천 42는 단순한 식당이 아닙니다. 이는 인류의 역사를 반영하는 거울이며, 고대와 현대가 공존하는 장소입니다. 이곳은 우리에게 문화의 중요성과 시간을 초월하는 예술의 가치를 일깨워줍니다. 이곳에서의 경험은 단순한 식사를 넘어, 영혼의 양식을 제공합니다.\n\n이제 여러분께 진심 어린 이별을 고합니다. 이곳을 떠나면서, 그 순간순간의 기억을 가슴 깊이 간직하시기를 바랍니다. 이곳이 여러분에게 남긴 감동이 오랫동안 기억되길 바라며, 다음에 다시 만나기를 기약합니다. 로마의 전설은 계속됩니다, 여러분도 그 일부입니다. 곧 다시 만나요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "로마 프리미엄 Restaurant 추천 42",
-        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "로마의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:04.338Z",
-    "updatedAt": "2026-02-22T18:05:56.104Z"
   },
   {
     "id": "seoul_item_28",
@@ -664,81 +348,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:00.814Z"
   },
   {
-    "id": "paris_르_상크_le_cinq_포시즌스_호텔_조르주_v_파리",
-    "cityId": "paris",
-    "name": "르 상크 (Le Cinq) - 포시즌스 호텔 조르주 V 파리",
-    "lat": 48.8696,
-    "lng": 2.3005,
-    "radius": 75,
-    "narration": "문을 열고 들어서는 순간, 부드러운 카펫이 발걸음을 감싸고, 은은한 조명 아래 황금빛 장식과 화려한 태피스트리가 고풍스러운 우아함을 속삭입니다. 테이블 위에는 눈부신 크리스털 잔과 섬세한 은식기가 완벽하게 정돈되어 있고, 생화에서 풍기는 은은한 향이 공기 중에 퍼져나갑니다. 주방에서 피어나는 섬세한 향신료와 신선한 재료의 향은 미지의 맛의 세계로 당신을 초대합니다. 첫 번째 코스가 서빙되면, 접시 위는 단순한 음식이 아니라 셰프의 예술적 영감이 담긴 작은 조각품이 됩니다. 한 입 맛보는 순간, 혀끝을 감도는 다채로운 맛과 섬세한 질감은 당신의 미각을 깨우고, 예상치 못한 조화는 놀라움을 선사합니다. 소믈리에의 차분한 목소리는 당신의 취향에 맞는 와인을 추천하며, 잔에 따르는 샴페인의 기포가 터지는 소리는 이 공간의 럭셔리함을 더욱 고조시킵니다. 창밖으로는 파리의 밤이 아련하게 펼쳐지고, 실내에서는 낮은 대화 소리와 은은한 재즈 선율이 어우러져 완벽한 배경음악이 됩니다. 르 상크에서의 시간은 단순히 배를 채우는 행위를 넘어, 파리의 미식 역사 속에 당신의 이름을 새기는 듯한 잊을 수 없는 감각의 여행이 될 것입니다. 이곳은 모든 순간이 예술이 되고, 모든 맛이 기억으로 남는 마법 같은 곳입니다.",
-    "description": "파인 다이닝의 정점을 경험하는 3미슐랭 스타 레스토랑, 예술과 미학이 담긴 미식의 향연.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 지금부터 우리와 함께 파리의 중심으로 여행을 떠날 준비가 되셨나요? 눈을 감고 상상해 보세요: 고요한 아침, 아직 햇살이 완전히 깨어나지 않았을 때, 그 침묵을 깨트리는 것은 바로 르 상크의 문이 열리는 소리입니다. 문이 열리면서 여러분을 맞이하는 것은 눈부신 샹들리에의 빛, 은은한 클래식 음악의 선율, 그리고 코끝에 스며드는 풍성한 향기의 오케스트라입니다. 이곳에서 펼쳐질 미식의 향연은 말 그대로 예술 작품과도 같습니다. 그야말로 \"포시즌스 호텔 조르주 V 파리\"의 심장을 뛰게 하는 순간이죠.\n\n이제 과거로 돌아가 볼까요? 르 상크, 이 놀라운 공간은 단순한 레스토랑이 아닙니다. 이곳의 역사는 1928년으로 거슬러 올라갑니다. 당시 프랑스는 포스트 제1차 세계대전의 혼란 속에서 다시 일어서는 중이었습니다. 그 와중에 파리는 예술과 혁신의 중심지로 자리잡고 있었고, 이곳에 새로운 명성을 더하기 위해 포시즌스 호텔 조르주 V가 건설되었습니다. 이 호텔은 당시 건축 혁신의 상징이기도 했으며, 세계 각국에서 온 여행자들에게 새로운 안식처를 제공하고자 했습니다.\n\n이제 한 가지 흥미로운 이야기를 들려드릴게요. 당시 이곳을 방문했던 한 유명 인사는 바로 항공기 발명가인 찰스 린드버그였습니다. 그의 역사적인 대서양 횡단 비행을 성공시킨 후, 그는 파리에 도착하자마자 이 호텔에 머물렀다고 합니다. 그의 방문은 호텔의 명성을 드높였고, 르 상크가 역사의 무대에 처음으로 등장하게 된 순간이기도 했습니다. 그의 방에서 바라본 파리의 풍광은 어떤 모습이었을지 상상해 보세요.\n\n르 상크의 건축적 아름다움은 정말 경이롭습니다. 이곳을 지은 건축가들은 최고급 재료들을 사용하여 그 어떤 것과도 비교할 수 없는 독특한 분위기를 만들어냈습니다. 대리석과 금박 장식이 실내를 장식하고 있으며, 손으로 직접 그려넣은 프레스코화는 마치 시간이 멈춘 듯한 착각을 불러일으킵니다. 특히, 천장의 돔 구조는 놀라운 기하학적 패턴으로 이루어져 있어, 그 정교함에 감탄을 금치 못할 것입니다.\n\n여러분께만 알려드리는 비밀이 하나 있습니다. 많은 이들이 지나치지만, 레스토랑의 한쪽 벽에는 고대 로마의 철학자 세네카의 격언이 새겨져 있습니다. 그의 말은 \"예술은 삶을 길게 하고, 인생은 짧다\"라는 의미를 담고 있죠. 이 레스토랑의 철학을 완벽히 대변하는 문구라 할 수 있습니다.\n\n이제 현대의 르 상크로 눈을 돌려봅시다. 이곳은 시간이 흘러도 변함없이 미식의 성지로 자리잡고 있습니다. 몇 차례의 리모델링을 거치며 현대적 감각을 더했지만, 변함없이 그 고유의 우아함을 유지하고 있습니다. 특히, 이번의 리노베이션에서는 환경 친화적인 재료를 사용하여 지속 가능성을 강조한 점이 돋보입니다. 그래서일까요? 매일 이곳을 찾는 수많은 관광객들 중 일부는 인스타그램용 \"완벽한\" 사진을 찍기 위해 온갖 묘기를 부리기도 합니다. 재미있는 광경이 아닐 수 없죠!\n\n마지막으로, 이 특별한 장소가 인류 역사에서 어떤 의미를 지니고 있는지 생각해 봅시다. 르 상크는 단순한 미식 경험을 넘어, 문화와 예술, 그리고 철학이 한데 어우러진 공간입니다. 여기서의 식사는 우리에게 일상의 순간을 넘어선 특별한 경험을 선사하며, 인간이 가진 창의력과 열정을 다시 한 번 느끼게 합니다.\n\n이제 이 이야기를 마치며 감회에 잠겨보세요. 르 상크에서의 경험은 단지 맛있는 음식을 넘어, 우리의 내면에 깊은 울림을 남깁니다. 다음에 이곳을 방문할 때, 여러분의 발걸음이 조금 더 가벼워지길 바라며, 또다시 이 특별한 이야기를 함께 나누기를 기대하겠습니다. 감사합니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "르 상크 (Le Cinq) - 포시즌스 호텔 조르주 V 파리",
-        "description": "파인 다이닝의 정점을 경험하는 3미슐랭 스타 레스토랑, 예술과 미학이 담긴 미식의 향연.",
-        "narration": "문을 열고 들어서는 순간, 부드러운 카펫이 발걸음을 감싸고, 은은한 조명 아래 황금빛 장식과 화려한 태피스트리가 고풍스러운 우아함을 속삭입니다. 테이블 위에는 눈부신 크리스털 잔과 섬세한 은식기가 완벽하게 정돈되어 있고, 생화에서 풍기는 은은한 향이 공기 중에 퍼져나갑니다. 주방에서 피어나는 섬세한 향신료와 신선한 재료의 향은 미지의 맛의 세계로 당신을 초대합니다. 첫 번째 코스가 서빙되면, 접시 위는 단순한 음식이 아니라 셰프의 예술적 영감이 담긴 작은 조각품이 됩니다. 한 입 맛보는 순간, 혀끝을 감도는 다채로운 맛과 섬세한 질감은 당신의 미각을 깨우고, 예상치 못한 조화는 놀라움을 선사합니다. 소믈리에의 차분한 목소리는 당신의 취향에 맞는 와인을 추천하며, 잔에 따르는 샴페인의 기포가 터지는 소리는 이 공간의 럭셔리함을 더욱 고조시킵니다. 창밖으로는 파리의 밤이 아련하게 펼쳐지고, 실내에서는 낮은 대화 소리와 은은한 재즈 선율이 어우러져 완벽한 배경음악이 됩니다. 르 상크에서의 시간은 단순히 배를 채우는 행위를 넘어, 파리의 미식 역사 속에 당신의 이름을 새기는 듯한 잊을 수 없는 감각의 여행이 될 것입니다. 이곳은 모든 순간이 예술이 되고, 모든 맛이 기억으로 남는 마법 같은 곳입니다.",
-        "detailedDescription": "파리의 심장부, 전설적인 포시즌스 호텔 조르주 V에 자리한 '르 상크'는 단순한 식사를 넘어선 미식 경험을 선사합니다. 크리스티앙 르 스케르(Christian Le Squer) 셰프의 지휘 아래, 르 상크는 3개의 미슐랭 스타를 굳건히 유지하며 세계적인 명성을 자랑합니다. 르 스케르 셰프는 프랑스 전통 요리의 깊은 뿌리에 현대적인 감각과 독창성을 불어넣어, 미식가들에게 놀라움과 감동을 동시에 선사하는 요리를 선보입니다. 그의 시그니처 요리들은 정교한 기술과 섬세한 맛의 균형이 돋보이며, 단순한 재료를 예술 작품으로 승화시키는 마법을 부립니다. 레스토랑의 실내 디자인은 필립 르노(Philippe Renauld)가 맡아 루이 15세 시대의 우아함과 현대적인 럭셔리가 조화된 공간을 창조했습니다. 웅장한 태피스트리, 황금빛 디테일, 그리고 바닥까지 닿는 창문을 통해 들어오는 자연광은 이곳에서의 식사를 더욱 특별하게 만듭니다. 르 상크의 소믈리에 팀은 세계적인 수준을 자랑하며, 5만 병 이상의 와인을 보유한 호텔의 전설적인 와인 셀러에서 당신의 요리에 완벽하게 어울리는 와인을 추천해 줄 것입니다. 이곳은 단순한 식사가 아닌, 오감을 자극하는 총체적인 예술 경험이자, 파리의 미식 문화를 가장 호화롭게 만끽할 수 있는 정점입니다. 특별한 기념일이나 잊지 못할 저녁 식사를 원한다면, 르 상크는 파리에서 최고의 선택이 될 것입니다."
-      }
-    },
-    "openingHours": "화-토 12:30 - 14:00 (점심), 19:00 - 21:30 (저녁)",
-    "priceRange": "€300 - €700+ (1인 기준, 코스 및 와인 페어링 포함)",
-    "cuisine": null,
-    "reservationUrl": "https://www.fourseasons.com/paris/dining/restaurants/le_cinq/reservations/",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-14T00:46:31.084Z",
-    "updatedAt": "2026-02-22T18:05:56.163Z"
-  },
-  {
-    "id": "rome_item_21",
-    "cityId": "rome",
-    "name": "로마 프리미엄 Restaurant 추천 22",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 로마의 심장부로 안내해 드리겠습니다! 이곳은 바로 \"로마 프리미엄 Restaurant 추천 22\"입니다. 나중에 '로마 여행의 백미'라 불리게 될 이곳의 문을 열고 들어서면, 마치 시간 여행을 하듯이 과거와 현재가 교차하는 순간을 경험하게 될 것입니다. 먼저, 감각을 깨워보세요! 이곳에 발을 들이는 순간, 눈앞에 펼쳐지는 화려한 인테리어가 눈을 사로잡고, 입구에서 들리는 와인잔의 경쾌한 소리, 그리고 부엌에서 풍겨 나오는 신선한 바질과 갓 구운 빵의 향기가 여러분을 로마의 중심으로 이끌어 드립니다.\n\n이 레스토랑의 역사는 단순한 요리 이상의 것입니다. 이곳은 1900년대 초, 로마의 번영기를 기념하여 로컬 사업가 루치아노 베르디가 세운 곳입니다. 당시 그는 이탈리아의 정치적 긴장 속에서 도시를 흔들림 없는 문화의 중심지로 만들고자 했습니다. 베르디는 자신의 레스토랑을 단순한 식당이 아닌 예술과 정치가 공존하는 '살롱'으로 만들기로 결심했습니다. 그 결과, 이곳은 로마의 지식인과 예술가들이 모이는 명소가 되었습니다.\n\n이 레스토랑이 탄생한 배경에는 흥미로운 인물이 있습니다. 바로 비토리아 마르첼로, 그녀는 당시의 명망 높은 여류 작가였습니다. 그녀는 로마의 정치적 격변기 동안 이곳에서 많은 시간을 보내며, 자신의 저서에 로마의 변화를 기록했습니다. 비토리아는 정기적으로 이곳을 방문하던 마르코라는 청년과 사랑에 빠졌습니다. 하지만, 그의 신분은 비밀에 싸여 있었고, 어느 날 갑자기 사라져버렸습니다. 그녀의 슬픔은 이곳의 많은 사람들에게 영향을 주었고, 결국 그녀는 이곳에서 쓴 소설로 국제적인 명성을 얻었습니다.\n\n여러분, 이제 이곳의 건축적 경이로움을 살펴볼 시간입니다! 이 레스토랑은 로마 네오클래식 양식의 정수를 보여줍니다. 거대한 대리석 기둥은 황제의 위엄을 상징하며, 세세한 조각들은 당대의 최고 장인들이 손수 작업한 결과물입니다. 특히, 천장의 프레스코화는 당시 유명한 화가 루이지 로시의 작품으로, 그는 이 작업을 위해 이탈리아 전역을 돌아다니며 영감을 얻었다고 합니다.\n\n그리고 여러분이 놓치기 쉬운 숨겨진 디테일이 있습니다. 벽면에 새겨진 작은 부적들은 당시 로마의 부적 문화를 반영하며, 이곳에 안전과 번영을 기원하는 마음을 담고 있습니다. 이곳의 문을 닫으며, 만약 여러분이 운이 좋다면 이 부적들을 발견할 수 있을지도 모릅니다. 로컬 가이드도 잘 모르지만, 여러분에게만 살짝 알려드리는 비밀입니다!\n\n이제 현대의 이야기로 넘어가 보죠. 이 레스토랑은 제2차 세계대전 후 다시금 조명을 받게 되었습니다. 당시 파손된 부분을 복원하면서 오랜 세월 속에 묻혀 있던 많은 이야기들이 세상 밖으로 드러났습니다. 현대적인 감각을 더한 이곳은, 영화 \"로마의 휴일\" 속 장면을 연상시키며 많은 이들의 사랑을 받게 되었습니다. 이곳에서는 관광객들이 영화의 주인공인 듯한 포즈를 취하며 사진을 찍는 모습을 볼 수 있습니다. 도심 속의 작은 영화 세트장 같은 느낌이랄까요?\n\n마지막으로, 여러분은 이곳이 인류 역사에서 어떤 의미를 지니고 있는지 궁금하실 겁니다. 이 레스토랑은 단순한 식당이 아니라, 시대의 변화와 인간의 꿈을 담고 있는 장소입니다. 다양한 문화가 만나는 교차로에서, 이곳은 과거와 현재 그리고 미래를 연결하는 타임캡슐과도 같습니다. 역사의 흐름 속에서 이곳이 가진 의미를 되새기며 우리는 서로의 다름을 이해하고 존중하는 법을 배우게 됩니다.\n\n마무리하며, 이곳을 방문한 여러분은 이제 로마 여행의 진정한 정수를 맛보게 될 것입니다. 떠나기 전에, 이곳에서의 순간들을 마음에 깊이 새기고 가십시오. 때로는 한 끼 식사가 인생의 방향을 바꾸기도 하니까요! 여러분과 함께한 이 여행이 오래도록 기억에 남길 바라며, 로마의 이야기를 전해드린 스토리텔러 리였습니다. 로마에 다시 오실 때까지, 안녕히 계세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "로마 프리미엄 Restaurant 추천 22",
-        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "로마의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:02.991Z",
-    "updatedAt": "2026-02-22T18:06:00.944Z"
-  },
-  {
     "id": "tokyo_item_99",
     "cityId": "tokyo",
     "name": "TOKYO Premium Shopping 99",
@@ -813,81 +422,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:01.006Z"
   },
   {
-    "id": "서울특별시-demo-2",
-    "cityId": "seoul",
-    "name": "서울특별시의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "상상해보세요. 지금 여러분은 서울의 어느 골목 어귀에 서 있습니다. 코를 간지럽히는 매콤한 떡볶이 냄새, 지글거리는 기름에 튀겨지는 전의 고소한 향, 그리고 뜨끈한 국물이 끓는 뚝배기 소리가 한데 어우러져 오감을 자극하죠. 여기는 단순한 맛집 골목이 아니에요. 수십 년의 역사를 간직한, 서울 사람들의 희로애락이 녹아있는 삶의 현장이랍니다. 발 디딜 틈 없이 빽빽한 테이블 사이로 오가는 사람들의 활기찬 목소리가 들리시나요? 왁자지껄 웃음꽃이 피어나는가 하면, 오랜 단골들의 정겨운 대화 소리도 들려옵니다. 마치 한 편의 드라마를 보는 듯하죠. 이 골목의 맛집들은 단순히 배를 채우는 곳이 아니라, 추억을 나누고 정을 쌓는 따뜻한 공간이에요. 할머니의 손맛을 그대로 담은 칼국수집, 아버지의 젊은 시절 추억이 깃든 삼겹살집, 연인들의 데이트 코스로 유명한 파스타집까지… 각자의 스토리를 품고 있는 맛집들이 골목을 가득 채우고 있답니다. 자, 어디부터 들어가볼까요? 지금 여러분의 발걸음을 이끄는 곳은 어디인가요? 골목을 천천히 거닐며, 오늘 하루, 여러분의 특별한 이야기를 만들어보세요!",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "서울특별시의 맛집 골목은 단순한 식당가가 아닙니다. 이곳은 서울 시민들의 삶과 애환이 고스란히 담겨있는 역사적인 장소입니다. 단순히 맛있는 음식을 파는 곳을 넘어, 세대를 이어온 가족 경영 식당들과 숨겨진 이야기가 가득한 곳이죠. 현지인들 사이에서는 '숨은 보석' 같은 맛집들이 많기로 유명합니다. 예를 들어, 겉보기에는 허름하지만 50년 넘게 한 자리에서 칼국수를 끓여온 할머니의 가게는, 그녀만의 비법 육수와 손맛으로 늘 문전성시를 이룹니다. 또, 좁은 골목길 안쪽에 숨어있는 작은 빵집은 매일 새벽 직접 구운 빵으로 동네 주민들의 아침을 책임지고 있죠. 꿀팁을 하나 드리자면, 점심시간이나 저녁시간 피크 타임을 피해서 방문하는 것이 좋습니다. 그래야 여유롭게 맛을 음미하고, 주인분들과 소소한 이야기를 나눌 수 있는 기회를 가질 수 있거든요. 또 다른 비화로는, 이 골목의 오래된 식당들은 과거 정치인, 예술가 등 유명 인사들의 단골집이었다는 이야기가 전해져 내려옵니다. 그들이 즐겨 먹던 메뉴는 지금도 여전히 인기 메뉴로 남아있으니, 한번 찾아보는 것도 재미있을 겁니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "서울특별시의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:50:32.063Z",
-    "updatedAt": "2026-02-22T18:05:56.285Z"
-  },
-  {
-    "id": "tokyo_긴자_코쥬_",
-    "cityId": "tokyo",
-    "name": "긴자 코쥬 (銀座 小十)",
-    "lat": 35.6726,
-    "lng": 139.7645,
-    "radius": 75,
-    "narration": "긴자의 번화가에서 한 걸음 물러난 고즈넉한 골목길, 은은한 조명 아래 '긴자 코쥬'의 문이 당신을 맞이합니다. 문을 여는 순간, 공기 중에 감도는 섬세한 다시마 향과 갓 지은 쌀밥의 따뜻한 내음이 코끝을 스칩니다. 고요하고 아늑한 공간, 정갈하게 정돈된 히노키 카운터에 앉으면 셰프의 손끝에서 펼쳐지는 요리의 마법이 눈앞에 펼쳐집니다. 능숙하고 절제된 움직임으로 신선한 재료들이 각자의 자리로 찾아가고, 한 접시 한 접시가 정성스럽게 당신에게 건네집니다. 첫 번째 요리를 입에 넣는 순간, 마치 숲 속을 거니는 듯한 신선함과 바다의 깊이가 동시에 느껴집니다. 재료 본연의 맛을 극대화한 섬세한 간, 그리고 온도감이 완벽하게 조절된 식감은 미각의 새로운 지평을 열어줍니다. 각 요리마다 셰프가 들려주는 재료의 이야기, 계절의 변화를 담아낸 색채의 조화, 그리고 완벽하게 어우러지는 사케 한 잔은 단순한 식사를 넘어선 오감 만족의 예술적 경험을 선사합니다. 이곳은 음식이 곧 문화이고, 셰프의 손길이 곧 역사가 되는 곳. 긴자 코쥬에서 당신은 일본 미식의 깊은 철학과 아름다움을 온몸으로 느끼게 될 것입니다. 당신의 미식 여정에서 잊을 수 없는 가장 빛나는 순간이 될 것입니다.",
-    "description": "미식의 성지 긴자에서 오직 당신만을 위한 섬세한 미학, 미슐랭 3스타 가이세키의 정점에서 일본 요리의 정수를 경험하세요.",
-    "category": "Restaurant",
-    "detailedDescription": "**The Grand Opening:**\n\n친구들, 여러분의 귀를 기울여 주세요! 긴자의 숨겨진 보석, 은자의 산해진미, 긴자 코쥬에 오신 것을 환영합니다! 이곳에 들어서는 순간, 당신의 모든 감각은 즉시 깨어납니다. 눈을 감고 상상해 보세요. 전통적인 일본 건축 양식의 우아한 실루엣이 눈앞에 펼쳐지고, 내부로 한 발짝 들여놓으면 나무와 생선, 쌀의 자연스러운 향이 당신을 감싸안습니다. 여기에서 들리는 것은 주방에서의 정교한 칼질 소리와 고객들의 기쁨에 찬 숨소리입니다. 경험해본 적 없는 새로운 미식의 세계로의 초대, 준비되셨나요?\n\n긴자 코쥬는 단순한 식당이 아닙니다. 이곳은 일본 요리의 정수를 체험할 수 있는 성소입니다. 눈에 보이는 것은 단순한 음식이 아니라, 예술 그 자체입니다. 당신의 입속에서 녹아내리는 섬세한 요리들이 만들어내는 미묘한 하모니, 그 절묘한 밸런스는 오직 긴자 코쥬에서만 느낄 수 있습니다. 이곳에 발을 들인 순간, 당신은 이미 그 특별한 여행을 시작한 것입니다.\n\n**Deep-Dive History:**\n\n긴자 코쥬의 문을 연 것은 2003년, 미슐랭 쓰리 스타 셰프 우에노 야스유키에 의해 세워졌습니다. 이 시기는 일본이 경제적 회복과 문화적 부흥을 도모하던 시기로, 현대와 전통을 조화롭게 융합시키는 요리의 혁신이 필요하던 시기였습니다. 야스유키는 일본의 전통적인 가이세키 요리를 현대적인 감각으로 풀어내어 세계적으로 주목받는 요리사로 자리매김했습니다. 그의 요리는 그 자체로 정치적, 문화적 변화를 대변하는 상징이 되었습니다.\n\n이 시대를 대표하는 한 인물을 소개하자면, 바로 긴자 코쥬의 첫 번째 고객이었던 일본의 유명 아티스트, 타케시 쿠보입니다. 그는 긴자 코쥬에서 처음으로 우에노의 요리를 맛보고 인생이 바뀌었다고 고백했습니다. 그 경험이 그의 작업에 어마어마한 영감을 주었으며, 이후 그의 작품은 전 세계적인 찬사를 받게 됩니다. 그의 이야기는 긴자 코쥬가 단순한 식당이 아닌, 사람들의 인생을 바꾸는 장소가 될 수 있음을 보여줍니다.\n\n**Architectural Wonders:**\n\n긴자 코쥬의 건축적 아름다움은 단순히 외관에만 그치지 않습니다. 내부로 들어가면, 천장에서 바닥까지 이어지는 목재는 일본 전통 건축의 정수입니다. 이 나무는 수백 년 된 일본 삼나무로, 최고급 품질만을 사용하여 만들어졌습니다. 그 정교한 공예 눈송이 하나하나가 모두 장인의 손길을 거쳐 탄생한 것이죠. 일본 전통 기술과 현대적 감각이 융합되어, 마치 음악의 하모니처럼 공존합니다.\n\n그러나 여러분, 숨겨진 비밀이 있습니다. 긴자 코쥬에는 방문자들이 흔히 놓치는 숨은 상징들이 있습니다. 예를 들면, 주방의 칼 하나하나에는 모두 그 자체로 이야기가 깃들어 있습니다. 어느 하나도 대충 놓인 것이 없으며, 각 칼은 주방장의 손에 의해 특별히 선택되어 그날의 요리를 위해 사용됩니다. 이 디테일들이야말로 긴자 코쥬의 진정한 매력을 드러내는 부분입니다.\n\n**The Modern Saga:**\n\n이제, 탄생부터 현재까지의 이야기를 살펴봅시다! 긴자 코쥬는 시간이 흐르면서 현대의 감성에 맞게 변모하여, 더욱 많은 사람들의 마음을 사로잡고 있습니다. 복구와 발전의 과정을 통해, 긴자 코쥬는 단순한 레스토랑을 넘어 문화적 아이콘이 되었습니다. 수많은 셀러브리티들이 이곳을 다시 찾는 이유는 단순히 음식 때문이 아닙니다. 이곳에서 느낄 수 있는 전통과 현대의 완벽한 조화가 그 이유입니다.\n\n영화와 드라마 속에서도 긴자 코쥬가 등장하는 장면을 종종 볼 수 있습니다. 그리고 이곳을 찾는 관광객들 중에는 긴자 코쥬의 모든 순간을 사진으로 담아가려는 사람들이 많습니다. 하지만 그들이 놓치는 것은, 사진으로는 담을 수 없는 이곳의 '정신'입니다. 그것은 오직 이곳에 머무르며 느끼는 감각으로만 체험할 수 있는 것입니다.\n\n**The Philosophical Conclusion:**\n\n긴자 코쥬는 단순한 식당이 아닙니다. 그것은 인간의 역사와 문화를 이어주는 다리입니다. 이곳에서의 경험은 단순한 식사가 아닌, 인간의 삶과 예술, 그리고 문화 간의 경계를 허물고 새로운 가능성을 열어주는 일종의 의식입니다. 우리는 긴자 코쥬를 통해 과거와 현재, 그리고 미래를 동시에 느낄 수 있습니다.\n\n자, 이제 우리는 이 특별한 여정을 마무리할 시간입니다. 긴자 코쥬를 떠나는 순간, 당신은 더 이상 같은 사람이 아닐 것입니다. 이곳에서의 경험은 당신의 인생에 불꽃을 피우고, 새로운 방향을 제시할 것입니다. 긴자 코쥬를 방문한 당신, 이제 그 감격을 가슴에 안고 세상에 나설 준비가 되셨나요? 여러분의 여정이 늘 아름답고 특별하길 바랍니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "긴자 코쥬 (銀座 小十)",
-        "description": "미식의 성지 긴자에서 오직 당신만을 위한 섬세한 미학, 미슐랭 3스타 가이세키의 정점에서 일본 요리의 정수를 경험하세요.",
-        "narration": "긴자의 번화가에서 한 걸음 물러난 고즈넉한 골목길, 은은한 조명 아래 '긴자 코쥬'의 문이 당신을 맞이합니다. 문을 여는 순간, 공기 중에 감도는 섬세한 다시마 향과 갓 지은 쌀밥의 따뜻한 내음이 코끝을 스칩니다. 고요하고 아늑한 공간, 정갈하게 정돈된 히노키 카운터에 앉으면 셰프의 손끝에서 펼쳐지는 요리의 마법이 눈앞에 펼쳐집니다. 능숙하고 절제된 움직임으로 신선한 재료들이 각자의 자리로 찾아가고, 한 접시 한 접시가 정성스럽게 당신에게 건네집니다. 첫 번째 요리를 입에 넣는 순간, 마치 숲 속을 거니는 듯한 신선함과 바다의 깊이가 동시에 느껴집니다. 재료 본연의 맛을 극대화한 섬세한 간, 그리고 온도감이 완벽하게 조절된 식감은 미각의 새로운 지평을 열어줍니다. 각 요리마다 셰프가 들려주는 재료의 이야기, 계절의 변화를 담아낸 색채의 조화, 그리고 완벽하게 어우러지는 사케 한 잔은 단순한 식사를 넘어선 오감 만족의 예술적 경험을 선사합니다. 이곳은 음식이 곧 문화이고, 셰프의 손길이 곧 역사가 되는 곳. 긴자 코쥬에서 당신은 일본 미식의 깊은 철학과 아름다움을 온몸으로 느끼게 될 것입니다. 당신의 미식 여정에서 잊을 수 없는 가장 빛나는 순간이 될 것입니다.",
-        "detailedDescription": "도쿄 긴자의 숨겨진 골목에 위치한 '긴자 코쥬'는 미슐랭 3스타의 영예를 빛내며 일본 가이세키 요리의 정수를 선보이는 곳입니다. 오너 셰프 오쿠다 토오루(奥田 透)는 '제철의 맛'과 '재료 본연의 맛'을 최대한 살리는 것을 철학으로 삼아, 단순한 요리를 넘어 하나의 예술 작품을 창조합니다. 매일 새벽 츠키지(현재 토요스) 시장에서 직접 공수한 최상급 해산물과 전국 각지의 신선한 제철 채소를 활용하며, 그날그날의 영감에 따라 메뉴를 구성합니다. 이곳의 가이세키는 단순히 고급 요리의 연속이 아닌, 일본 미식의 흐름을 이해하는 하나의 여정입니다. 각 요리는 정교한 도자기에 담겨 나오는데, 접시 하나하나가 요리의 맛을 더욱 돋보이게 하는 예술 작품입니다. 셰프가 손님 한 명 한 명에게 집중하여 요리를 설명하고, 식재료에 대한 이야기를 나누는 모습은 긴자 코쥬만의 특별한 경험을 선사합니다. 총 8석의 카운터 좌석이 전부이기에 프라이빗하고 친밀한 분위기 속에서 셰프의 장인정신을 오롯이 느낄 수 있습니다. 예약은 최소 수개월 전부터 마감되므로, 도쿄 방문이 확정되는 즉시 호텔 컨시어지를 통하거나 공식 예약 플랫폼을 이용해 서두르는 것이 필수입니다. 격식 있는 복장으로 방문하여 최상의 미식 경험을 만끽하시길 바랍니다."
-      }
-    },
-    "openingHours": "런치 12:00 - 14:00, 디너 18:00 - 22:00 (일요일 휴무, 상세 시간은 공식 홈페이지 확인)",
-    "priceRange": "JPY 30,000 - JPY 50,000+ (1인당, 코스 요리)",
-    "cuisine": null,
-    "reservationUrl": "https://www.tablecheck.com/shops/ginza-kojyu/reserve",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-14T00:43:36.836Z",
-    "updatedAt": "2026-02-22T18:05:56.347Z"
-  },
-  {
     "id": "rome_item_31",
     "cityId": "rome",
     "name": "로마 프리미엄 Shopping 추천 32",
@@ -960,57 +494,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:03.392Z",
     "updatedAt": "2026-02-22T18:06:01.128Z"
-  },
-  {
-    "id": "paris_restaurant_septime",
-    "cityId": "paris",
-    "name": "Septime",
-    "lat": 48.8532,
-    "lng": 2.3764,
-    "radius": 40,
-    "narration": "Discover Septime, one of Paris's hottest restaurants serving innovative seasonal cuisine in a relaxed setting.",
-    "description": "Innovative seasonal French cuisine",
-    "category": "Restaurant",
-    "detailedDescription": "Septime is a Michelin-starred restaurant that has become a pilgrimage site for food enthusiasts. Chef Bertrand Grébaut creates inventive dishes using seasonal, locally-sourced ingredients. The minimalist dining room and open kitchen create an unpretentious atmosphere. The natural wine list is exceptional. Reservations are notoriously difficult to secure but worth the effort.",
-    "photos": [
-      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Septime",
-        "narration": "Discover Septime, one of Paris's hottest restaurants serving innovative seasonal cuisine in a relaxed setting.",
-        "description": "Innovative seasonal French cuisine"
-      },
-      "ko": {
-        "name": "셉팀",
-        "narration": "편안한 분위기에서 혁신적인 계절 요리를 제공하는 파리에서 가장 핫한 레스토랑 중 하나인 셉팀을 발견하세요.",
-        "description": "혁신적인 계절 프렌치 요리"
-      },
-      "it": {
-        "name": "Septime",
-        "narration": "Scopri Septime, uno dei ristoranti più in voga di Parigi che serve cucina stagionale innovativa in un ambiente rilassato.",
-        "description": "Cucina francese stagionale innovativa"
-      }
-    },
-    "openingHours": "Mon-Fri: 12:00-14:00, 19:30-22:00 | Closed Sat-Sun",
-    "priceRange": "€€€€ (€80-120 per person)",
-    "cuisine": "Contemporary French",
-    "reservationUrl": "https://www.septime-charonne.fr/",
-    "phoneNumber": "+33 1 43 67 38 29",
-    "menuHighlights": [
-      "Seasonal Tasting Menu",
-      "Natural Wines",
-      "Artisan Bread"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:40.794Z",
-    "updatedAt": "2026-02-22T18:13:05.436Z"
   },
   {
     "id": "rome_item_11",
@@ -1088,80 +571,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:05:56.713Z"
   },
   {
-    "id": "도쿄-demo-2",
-    "cityId": "tokyo",
-    "name": "도쿄의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "자, 상상해보세요. 지금 여러분은 도쿄의 숨겨진 미식 골목 어귀에 서 있습니다. 좁다란 골목길 양 옆으로 낡은 나무 간판들이 빽빽하게 들어서 있고, 그 아래로 따스한 주황빛 불빛이 새어 나오고 있어요. 코를 찌르는 듯한 달콤 짭짤한 간장 소스 냄새와 고소한 참기름 향, 그리고 지글거리는 튀김 소리가 섞여 오감을 자극하죠. 마치 오래된 영화 세트장처럼 정겹고 아늑한 분위기가 감도는 이곳은, 도쿄 토박이들만 안다는 숨겨진 맛집 골목입니다. 흔한 관광 책자에는 소개되지 않지만, 한 번 발을 들인 사람은 그 매력에 푹 빠져 다시 찾게 된다는 마성의 장소죠. \n\n골목 안으로 더 깊숙이 들어가 볼까요? 왁자지껄 웃음소리가 들려오는 작은 선술집에서는 넥타이를 느슨하게 푼 직장인들이 술잔을 기울이며 하루의 피로를 풀고 있고, 연기가 모락모락 피어오르는 라멘 가게 앞에는 긴 줄이 늘어서 있습니다. 이 골목의 역사는 수십 년 전으로 거슬러 올라갑니다. 전쟁의 상흔이 채 가시지 않은 시절, 넉넉지 못한 형편에도 맛있는 음식을 향한 열정 하나로 시작한 작은 가게들이 하나 둘 모여 지금의 맛집 골목을 이루게 된 것이죠. \n\n자, 어느 가게로 들어가 볼까요? 망설이지 마세요. 어디든 좋습니다. 이 골목에 있는 가게들은 모두 저마다의 특별한 이야기를 품고 있으니까요. 용기를 내어 문을 열고 들어가 보세요. 따뜻한 미소와 맛있는 음식이 여러분을 기다리고 있을 겁니다. 그리고 잊지 마세요. 이 골목의 진짜 매력은 단순히 맛있는 음식을 맛보는 것에 있는 것이 아니라, 그 속에 담긴 사람들의 이야기와 정을 느끼는 데 있다는 것을요. 자, 그럼 지금부터 도쿄 맛집 골목 탐험을 시작해볼까요?",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "도쿄의 맛집 골목은 단순히 음식을 파는 곳이 아닌, 도쿄 서민들의 삶과 애환이 녹아 있는 특별한 공간입니다. 겉보기에는 허름해 보이지만, 수십 년 동안 한 자리를 지켜온 노포들이 즐비하며, 각 가게마다 독특한 역사와 철학을 가지고 있습니다. 이곳의 음식은 화려하거나 세련되지는 않지만, 정성과 깊은 맛으로 승부합니다. \n\n**현지인 꿀팁**: 저녁 시간에는 퇴근한 직장인들로 붐비기 때문에, 조금 일찍 방문하거나 아예 늦은 시간에 방문하는 것이 좋습니다. 또한, 대부분의 가게가 작고 좌석이 많지 않으니, 혼자 방문하거나 소규모 그룹으로 방문하는 것을 추천합니다. 메뉴판이 일본어로만 되어 있는 경우가 많으니, 번역 앱을 미리 준비해가거나, 주인에게 추천 메뉴를 물어보는 것도 좋은 방법입니다. \n\n**숨겨진 비화**: 이 골목에는 대대로 내려오는 비법 소스를 사용하는 가게들이 많습니다. 그중에서도 특히 유명한 곳은 50년 넘게 닭꼬치만을 만들어온 '토리타케'라는 가게입니다. 이 집의 닭꼬치는 특별한 비법 소스 덕분에 겉은 바삭하고 속은 촉촉한 완벽한 맛을 자랑합니다. 하지만 이 비법 소스는 아무에게도 공개되지 않고 있으며, 오직 주인만이 그 제조법을 알고 있다고 합니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "도쿄의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:57:46.997Z",
-    "updatedAt": "2026-02-22T18:05:56.592Z"
-  },
-  {
-    "id": "barcelona_item_53",
-    "cityId": "barcelona",
-    "name": "바르셀로나 프리미엄 Restaurant 추천 54",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 바르셀로나의 심장을 여러분께 강렬하게 소개할 시간입니다! 귀를 쫑긋 세우고, 마음을 활짝 열어보세요! \"바르셀로나 프리미엄 Restaurant 추천 54\"에 대한 전설적인 이야기가 시작됩니다. 이곳에 들어서는 순간, 눈이 부시게 화려한 장식과 코끝을 간지럽히는 절묘한 향이 여러분을 맞이할 것입니다. 상상해보세요! 선명한 붉은색과 금색이 조화를 이루는 실내 인테리어가 여러분을 따뜻하게 감싸안고, 부드러운 스페인 기타 연주가 귀를 간지럽히며, 주방에서 막 나온, 향긋한 파에야의 냄새가 공기에 퍼져 나갑니다. 이 모든 것이 여러분을 기다리고 있는 것입니다!\n\n깊이 있는 역사로 잠수해볼까요! 이 레스토랑은 19세기 말 스페인의 정치적 격동기 속에서, 어느 재능 있는 건축가에 의해 세워졌습니다. 그 당시, 바르셀로나는 혁신과 전통이 공존하는 도시로, 이곳 역시 그 흐름을 반영하고 있습니다. 건축가는 스페인의 역사와 문화에 대한 깊은 이해를 바탕으로, 이 장소를 단순한 식당이 아닌 예술의 집합체로 만들고자 했습니다. 고급스러운 대리석 바닥과 정교한 목조 천장은 그 당시의 뛰어난 건축 기술을 보여주며, 방문객들에게 마치 시공간을 초월한 듯한 경험을 선사합니다.\n\n또한, 그 시절의 한 인물에 대한 흥미진진한 이야기가 전해지고 있습니다. 유명한 스페인 화가가 이곳을 자주 찾았다고 합니다. 그는 이곳에서 영감을 받아 새로운 작품을 구상하곤 했다고 하는데요, 한 번은 이곳에서 큰 예술적 깨달음을 얻어, 이후 그의 작품 세계에 획기적인 변화를 가져왔다고 합니다. 이곳이 단순한 식사 공간이 아니라, 예술의 탄생지로서의 의미도 지니고 있다는 점에서 특별하게 다가옵니다.\n\n이제 건축의 경이로움에 대해 알아볼까요? 이곳의 건축물은 그 자체로도 하나의 예술품입니다. 고풍스러운 외관과 현대적인 실내 디자인이 어우러져 독특한 매력을 자아내며, 특히 천장의 장식은 마치 별이 쏟아지는 밤하늘을 연상시킵니다. 여기서 중요한 점은, 이 모든 것이 단순히 아름다움만을 위해 설계된 것이 아니라는 것입니다. 각각의 재료와 배치는 스페인의 이국적인 문화적 상징을 담고 있습니다. 건물의 돌 하나하나, 문양 하나하나가 깊은 의미를 품고 있으며, 이를 알아가는 재미 또한 쏠쏠합니다.\n\n하지만 일반 관광객들이 놓치기 쉬운 숨은 디테일이 있습니다. 예를 들어, 레스토랑의 벽면에 은밀하게 숨겨진 조각상들이 있는데, 이는 당시 사회적 메시지를 담고 있다고 합니다. 한 조각상은 평화를 상징하고, 다른 하나는 혁신을 의미합니다. 이런 숨은 의미를 찾아내는 재미가 이곳을 더욱 특별하게 만들어 줍니다.\n\n이제 현대의 이야기로 넘어가 봅시다. 이 레스토랑은 20세기에 이르러 거의 잊혀질 뻔한 위기를 맞았다가, 한 건축 애호가에 의해 재발견되었습니다. 그는 이곳의 역사적 가치를 알아보고, 원형을 최대한 보존하며 현대적으로 재탄생시키는 데 성공했습니다. 이로 인해 오늘날 수많은 관광객들이 이곳을 찾으며, 매년 수많은 문화 행사와 미식 축제가 열리고 있습니다.\n\n재밌는 사실 하나! 이곳은 유명한 영화의 촬영지로도 사용되었답니다. 주인공이 이곳에서 결정적인 장면을 연기하며, 그 순간이 영화 속에서 중요한 전환점으로 작용했죠. 또한, 이곳을 찾는 현대의 관광객들은 종종 재미있는 행동을 보이곤 합니다. 예를 들어, 사람들이 빈티지한 가구와 함께 사진을 찍으며, 과거로의 시간여행을 떠나는 듯한 포즈를 취하곤 합니다.\n\n마지막으로, 이곳의 철학적 의미를 생각해보세요. 이 레스토랑은 단순한 식사 장소가 아닙니다. 이는 인간의 역사와 문화가 어떻게 음식과 공간을 통해 서로 얽히고설키는지를 보여주는 살아있는 증거입니다. 과거와 현재가 공존하는 이곳에서, 우리는 문화가 어떻게 세대를 거쳐 전해지고, 또 어떻게 변화하는지를 느낄 수 있습니다.\n\n이제 여러분을 위해 준비한 이야기를 마무리할 시간입니다. 이곳을 떠나기 전, 그곳의 공기, 소리, 맛을 마음속 깊이 새겨두세요. 여러분이 이곳에서 경험한 모든 것이 단순한 추억으로 남는 것이 아니라, 여러분의 삶에 새로운 영감을 줄 것입니다. 바르셀로나 프리미엄 Restaurant 추천 54, 그곳은 여러분을 기다리고 있습니다. 즐거운 여행 되세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "바르셀로나 프리미엄 Restaurant 추천 54",
-        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "바르셀로나의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:05.125Z",
-    "updatedAt": "2026-02-22T18:06:01.707Z"
-  },
-  {
     "id": "barcelona_item_43",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Shopping 추천 44",
@@ -1197,43 +606,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:04.476Z",
     "updatedAt": "2026-02-22T18:06:01.892Z"
-  },
-  {
-    "id": "new-york_item_45",
-    "cityId": "new-york",
-    "name": "뉴욕 프리미엄 Restaurant 추천 46",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 뉴욕의 심장부로 초대합니다! 지금부터는 뉴욕의 최고의 레스토랑, \"뉴욕 프리미엄 Restaurant 추천 46\"을 탐험하게 될 시간입니다! 그 이름부터 이미 무언가 특별한 것이 느껴지지 않나요? 이곳은 뉴욕에서 최고의 맛과 경험을 제공합니다. 자 이제 상상해보세요. 눈앞에 펼쳐진 화려한 조명, 그리고 문이 열리면 마치 다른 세계로 들어가는 듯한 느낌! 감미로운 음악이 살짝 들려오고, 진한 향신료와 갓 구운 빵의 향기가 코끝을 자극합니다. 이곳은 단순한 레스토랑이 아닙니다. 바로 미각의 예술 전당입니다!\n\n이제 이곳의 역사에 대해 깊이 파고들어 보겠습니다. 뉴욕 프리미엄 Restaurant 추천 46은 1970년대, 뉴욕의 경제가 급격히 확장하던 시기에 탄생했습니다. 당시 건축가 제임스 맥길은 단순한 식당이 아닌, 뉴욕의 문화와 역사를 한데 모은 공간을 만들고자 했습니다. 그 시대의 정치적, 경제적 동향은 이 프로젝트에 큰 영향을 미쳤습니다. 당시의 뉴욕은 문화와 예술의 교차점이었으며, 맥길은 이러한 요소들을 레스토랑의 디자인과 메뉴에 반영하고자 했습니다.\n\n맥길의 비전 중 가장 극적인 이야기는 그가 자신의 모든 재산을 투자하며 사업에 뛰어들었던 때입니다. 그의 친구들은 그를 미쳤다고 했지만, 그는 뉴욕시라는 대도시에 자신만의 독창적인 레스토랑을 세우겠다는 꿈을 포기하지 않았습니다. 결국, 그의 열정과 노력은 결실을 맺었고, 이 레스토랑은 곧 뉴욕의 상징적인 명소로 자리잡게 되었습니다. \n\n이제 이곳의 건축적 경이로움에 대해 이야기해볼까요? 이 레스토랑은 현대 건축의 걸작으로, 시선을 끄는 독특한 디자인과 정교한 공학적 기법들이 돋보입니다. 유리와 강철, 그리고 고급 목재가 조화를 이루며, 실내는 자연 채광을 극대화하여 마치 대자연 속에 있는 듯한 느낌을 줍니다. 이러한 독창적인 설계는 당시로서는 혁신적이었고, 많은 건축가들에게 영감을 주었습니다.\n\n하지만 여러분, 이곳에는 눈에 띄지 않는 비밀들도 숨어 있습니다. 곳곳에 배치된 예술 작품들은 뉴욕의 역사를 상징합니다. 레스토랑의 벽면에는 뉴욕의 상징적인 건축물들이 미세하게 새겨져 있어, 이를 발견하는 것은 마치 보물을 찾는 듯한 재미를 선사합니다. 이런 작은 디테일들이 바로 이 레스토랑이 특별한 이유지요.\n\n현대에 들어서는 이 레스토랑이 어떻게 재발견되고, 복원되었는지 궁금하지 않으신가요? 시간이 지나면서 변화를 맞은 이곳은, 새로운 세대에 의해 다시금 주목받게 되었습니다. 레스토랑의 오리지널 디자인과 메뉴는 여전히 유지되지만, 현대적인 감각과 결합하여 새롭게 탄생했습니다. 이제는 세계 각국의 관광객들이 줄을 서서 그 맛과 분위기를 경험하려고 몰려듭니다.\n\n그리고 이곳은 영화와 TV에서도 자주 등장합니다. 여러 유명한 영화 장면이 이곳에서 촬영되었으며, 이는 레스토랑의 명성을 더욱 높였습니다. 또한, 이곳을 찾는 관광객들의 재밌는 행동들, 예를 들어 현지 음식을 시도해보려는 다양한 시도들은 웃음을 자아내기 충분합니다.\n\n마지막으로 이 레스토랑의 철학적 의미에 대해 생각해봅시다. 이곳은 단순한 식당이 아닙니다. 이는 뉴욕의 역사와 문화가 결합된 상징적인 공간입니다. 다양한 문화가 혼합되고, 사람들이 모여 함께 시간을 보내는 곳이며, 이는 인류의 역사에서 매우 중요한 의미를 가집니다.\n\n마무리하며, 이 레스토랑을 떠나면서 여러분은 단순한 식사가 아닌, 역사와 문화, 그리고 예술을 경험하게 되어 영감을 받을 것입니다. 이제 이 특별한 공간에서의 경험을 가슴 속에 새기고, 뉴욕이라는 도시의 또 다른 면모를 상상해보세요. 여러분의 여정이 새로운 이야기를 만들어가길 바랍니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "뉴욕 프리미엄 Restaurant 추천 46",
-        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "뉴욕의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:04.604Z",
-    "updatedAt": "2026-02-22T18:05:56.837Z"
   },
   {
     "id": "new-york_item_55",
@@ -1273,51 +645,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:02.039Z"
   },
   {
-    "id": "big-buddha-phuket",
-    "cityId": "phuket",
-    "name": "Big Buddha Phuket",
-    "lat": 7.827582,
-    "lng": 98.312842,
-    "radius": 70,
-    "narration": "푸껫의 랜드마크, 빅 부다에 오신 것을 환영합니다! 상상해보세요... 따스한 햇살이 당신의 얼굴을 어루만지고, 코끝에는 향긋한 꽃 내음과 은은한 향 냄새가 스며드는 것을요. 저 멀리 안다만 해의 푸른 물결이 반짝이고, 당신의 발 아래로는 푸껫 섬의 아름다운 풍경이 파노라마처럼 펼쳐집니다. 지금 여러분의 눈앞에는 높이 45미터에 달하는 거대한 백색 대리석 불상이 웅장한 자태를 드러내고 있습니다. 나케르드 언덕 꼭대기에 자리 잡은 이 불상은 섬 전체를 굽어보며 평화와 안녕을 기원하는 듯합니다. 불상의 발치까지 천천히 걸어가 보세요. 부드러운 대리석의 감촉이 손끝에 느껴지고, 불상의 거대한 크기에 압도되는 기분일 겁니다. 주변을 둘러싼 종소리가 바람에 실려 은은하게 울려 퍼지고, 사람들의 조용한 기도 소리가 마음을 차분하게 만들어 줍니다. 빅 부다는 단순한 조각상이 아닙니다. 이곳은 푸껫 사람들의 믿음과 염원이 담긴 신성한 장소이자, 평화와 명상을 위한 안식처입니다. 잠시 눈을 감고 깊은 숨을 들이쉬어 보세요. 빅 부다의 기운이 당신의 마음속 깊은 곳까지 스며들어 평온함을 가져다줄 겁니다. 빅 부다에서 특별한 경험을 만끽하고, 푸껫의 아름다움을 가슴에 담아 돌아가세요. 이 순간이 당신의 기억 속에 영원히 빛나는 추억으로 남을 겁니다.",
-    "description": "45-meter white marble Buddha statue on hilltop",
-    "category": "Religious & Viewpoint",
-    "detailedDescription": "빅 부다는 푸껫에서 가장 유명한 랜드마크 중 하나이며, 정식 명칭은 프라 풋타밍몽콜 에카나키리(Phra Phutta Ming Mongkol Eknakiri)입니다. 2002년에 건설이 시작되어 오랜 시간 동안 많은 사람들의 노력과 기부를 통해 완성되었습니다. 불상은 태국 남부 지역에서 존경받는 승려인 룽포 수파(Luang Pho Supa)를 기리기 위해 세워졌습니다. 빅 부다 건설에는 지역 주민들의 적극적인 참여가 있었으며, 방문객들은 불상 건설에 필요한 자재를 기부하거나 자원봉사를 통해 참여할 수 있습니다. 흥미로운 점은 빅 부다 건설 자금 대부분이 기부금으로 충당되었다는 것입니다. 현지인들은 물론 관광객들도 기꺼이 기부에 참여하여 이 웅장한 불상이 탄생하는 데 힘을 보탰습니다. 빅 부다 주변에는 작은 사원과 박물관이 있으며, 이곳에서는 불교 문화와 푸껫의 역사에 대해 더 자세히 알아볼 수 있습니다. 빅 부다를 방문할 때는 어깨와 무릎을 가리는 복장을 착용하는 것이 예의입니다. 또한, 빅 부다까지 가는 길은 좁고 구불구불하므로 운전에 주의해야 합니다. 현지인 팁 하나! 해 질 녘에 빅 부다를 방문하면 석양과 함께 빛나는 불상의 아름다운 모습을 감상할 수 있습니다. 이 시간대는 특히 사진작가들에게 인기가 많으니 놓치지 마세요!",
-    "photos": [
-      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=800",
-      "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800"
-    ],
-    "historicalInfo": "Construction began in 2004 and is still ongoing. The 45-meter tall statue is made of white Burmese marble and has become one of Phuket's most visited landmarks.",
-    "yearBuilt": "2004-present",
-    "architect": "Local Buddhist Community",
-    "translations": {
-      "en": {
-        "name": "Big Buddha Phuket",
-        "narration": "Welcome to the Big Buddha, one of Phuket's most iconic landmarks. This 45-meter tall white marble statue sits atop the Nakkerd Hills and offers breathtaking 360-degree views.",
-        "description": "45-meter white marble Buddha statue on hilltop",
-        "historicalInfo": "Construction began in 2004 and is still ongoing. The 45-meter tall statue is made of white Burmese marble and has become one of Phuket's most visited landmarks."
-      },
-      "ko": {
-        "name": "푸켓 빅 붓다",
-        "narration": "푸켓의 가장 상징적인 랜드마크 중 하나인 빅 붓다에 오신 것을 환영합니다. 높이 45미터의 백색 대리석 동상이 나케르드 힐 꼭대기에 자리잡고 있으며 숨막히는 360도 전망을 제공합니다.",
-        "description": "언덕 꼭대기의 45미터 높이 백색 대리석 부처 동상",
-        "historicalInfo": "2004년에 건설이 시작되어 현재도 진행 중입니다. 높이 45미터의 동상은 백색 버마 대리석으로 만들어졌으며 푸켓에서 가장 많이 방문하는 랜드마크 중 하나가 되었습니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:33.358Z",
-    "updatedAt": "2026-02-22T18:31:50.264Z"
-  },
-  {
     "id": "singapore_item_64",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Landmark 추천 65",
@@ -1353,43 +680,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:05.954Z",
     "updatedAt": "2026-02-22T18:06:02.299Z"
-  },
-  {
-    "id": "rome_item_61",
-    "cityId": "rome",
-    "name": "로마 프리미엄 Restaurant 추천 62",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "**웅장한 오프닝:**\n\n자, 여러분! 로마에 오신 것을 환영합니다! 오늘 우리는 로마의 정수를 맛볼 수 있는 곳, '로마 프리미엄 레스토랑 추천 62'에 대해 이야기하려고 합니다. 상상해보세요! 고풍스러운 건물의 문을 열자마자, 향긋한 바질의 향기가 코끝을 감싸고, 신선한 토마토 소스의 부드러운 향이 퍼지며 당신을 매혹합니다. 밑바닥에서는 갓 구운 빵의 바삭바삭한 소리가 당신의 귀를 간지럽히고, 이탈리아 전통 음악이 배경에서 부드럽게 흐릅니다. 이곳에서의 경험은 단순한 식사가 아닙니다. 로마의 역사와 풍미를 한 번에 느낄 수 있는 여행입니다.\n\n**깊이 있는 역사:**\n\n이 레스토랑은 18세기에 프란체스코라는 이름의 한 유명한 요리사가 세웠습니다. 그 당시 로마는 정치적 격동의 시기였습니다. 유럽의 여러 나라들 사이에서 권력 싸움이 치열했고, 로마는 그 중심에 있었습니다. 이러한 상황 속에서 프란체스코는 자신의 요리로 평화를 전하고자 했습니다. 그는 \"요리는 모든 사람을 하나로 묶을 수 있는 힘이 있다\"고 믿었습니다.\n\n프란체스코의 레스토랑은 많은 사람들에게 사랑받았지만, 그 당시 그의 요리는 단순한 맛의 문제가 아니었습니다. 역사적인 기록에 따르면 어느 날, 한 유명한 정치인이 이곳을 방문해 프란체스코의 요리를 맛보았습니다. 그 정치인은 감동한 나머지, 자신의 적과의 협상을 이곳에서 진행하기로 결정했죠. 결국 그날의 저녁식사가 로마의 정치적 평화를 이끄는 데 중요한 역할을 했다고 전해집니다. 프란체스코의 요리는 그 시대의 정치적 기류를 바꿀 만큼 강력한 힘을 가졌던 것입니다!\n\n**건축적 경이로움:**\n\n자, 이제 이곳의 건축적 경이로움을 살펴볼까요? 이 레스토랑은 당시의 최신 기술을 사용하여 지어졌습니다. 돌과 벽돌로 튼튼하게 지어진 이 건물은, 그 속에 정교한 타일 장식과 화려한 천장 프레스코화가 있습니다. 특히 천장의 그림은 수백 년 전 로마의 모습을 생생히 담고 있어, 마치 과거로의 시간 여행을 떠나는 느낌을 줍니다.\n\n하지만 이곳의 진짜 비밀은 잘 숨겨져 있습니다. 바로 벽에 그려진 작은 상징들입니다. 이 상징들은 당시 프란체스코가 직접 그린 것으로, 각각이 그의 인생과 철학을 나타냅니다. 예를 들어, 벽의 한쪽 구석에 숨어 있는 작은 라우렐 잎은 그의 영원한 성공을 바라는 마음을 담고 있습니다. 이런 작은 디테일을 발견하는 것은 이 레스토랑에서만 느낄 수 있는 특별한 경험이죠.\n\n**현대의 이야기:**\n\n세월이 흘러, 이 레스토랑은 잊혀질 뻔했지만, 20세기 초 한 젊은 고고학자에 의해 다시 발견되었습니다. 그는 이곳의 역사적 가치를 깨닫고, 레스토랑을 원래 모습으로 복원하려는 노력을 시작했습니다. 과거의 영광을 되찾기 위한 그의 노력 덕분에 오늘날 수많은 방문객들이 이곳의 역사와 맛을 즐기고 있습니다.\n\n최근 몇 년간, 이 레스토랑은 여러 영화와 드라마의 배경으로도 사용되었습니다. 특히, 로맨틱 코미디 영화에서 주인공들이 이곳에서 첫 데이트를 하는 장면은 많은 이들에게 깊은 인상을 남겼습니다. 그리고 관광객들은 이곳에서 그 유명한 장면을 재현하기 위해 줄을 서서 사진을 찍곤 합니다. 정말이지, 이곳은 과거와 현재가 만나는 특별한 장소입니다.\n\n**철학적 결론:**\n\n그러면 이 레스토랑이 우리의 역사에 어떤 의미를 가질까요? 이곳은 단순한 식당이 아닙니다. 수많은 역사의 흐름 속에서 인간의 미각을 통해 평화를 이루고자 했던 프란체스코의 꿈이 담긴 장소입니다. 그리고 그의 꿈은 오늘날에도 여전히 살아 숨쉬고 있습니다. 맛과 향, 그리고 역사가 어우러진 이 공간은 우리에게 과거의 교훈을, 그리고 미래를 향한 희망을 전해줍니다.\n\n마지막으로, 이곳을 떠나기 전 다시 한번 레스토랑 문을 바라보세요. 그 문은 단순한 출입구가 아닙니다. 이는 과거와 현재를 연결하는 문이자, 앞으로도 많은 이들의 삶에 영향을 미칠 문입니다. 다음에 로마를 방문할 때, 이곳을 기억하세요. 당신이 이곳에 서 있는 순간, 역사의 한 장면이 될 것입니다. 이로써 우리의 여행은 끝이 나지만, 그 여운은 길게 이어질 것입니다. 감사하고, 또 다시 만나요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "로마 프리미엄 Restaurant 추천 62",
-        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "로마의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:05.665Z",
-    "updatedAt": "2026-02-22T18:05:56.775Z"
   },
   {
     "id": "busan_item_16",
@@ -1465,137 +755,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-13T13:51:51.021Z",
     "updatedAt": "2026-02-22T18:06:02.567Z"
-  },
-  {
-    "id": "new-york_item_85",
-    "cityId": "new-york",
-    "name": "뉴욕 프리미엄 Restaurant 추천 86",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "**그랜드 오프닝**\n\n\"여러분! 뉴욕의 심장부에서 펼쳐지는 이 놀라운 여정을 시작해보세요! 뉴욕 프리미엄 Restaurant 추천 86에 오신 것을 환영합니다. 이곳에 들어서면 가장 먼저 느껴지는 것은 풍성한 향기입니다. 그 향기는 천국에서 나온 것처럼 다채롭고 풍부한, 고급스러운 요리의 조화! 그리고 그 소리! 주방에서 들려오는 쉼 없는 칼질 소리와 와인잔이 부딪치는 경쾌한 소리가 이곳의 활기를 더욱 돋보이게 합니다. 눈을 감고 그 소리와 향기에 몸을 맡기면, 마치 황홀한 오페라의 한 장면 속에 들어선 듯한 느낌입니다. 여러분, 이곳의 모든 감각이 여러분을 사로잡을 것입니다!\"\n\n**깊이 있는 역사 탐구**\n\n\"이 레스토랑의 시작은 1920년대, 뉴욕의 열정과 가능성이 최고조에 달한 시기였습니다. 존 스미스라는 이름의 야심 찬 젊은이가 이곳을 세웠습니다. 그는 대공황 속에서도 꿈을 잃지 않았던 사람들 중 하나였죠. 뉴욕은 당시 세계의 문화와 경제의 중심지로 성장하고 있었습니다. 이 장소는 단순한 식당 그 이상이었고, 뉴욕의 새로운 시대를 여는 상징적 공간이었습니다. 이제 여러분에게 그 시대의 드라마틱한 이야기를 들려드리겠습니다.\"\n\n\"1932년의 어느 저녁, 유명한 배우 마거리트 켈리가 이곳을 찾아왔습니다. 그녀는 당시 브로드웨이에서 가장 빛나는 별이었죠. 그녀의 방문은 그 시절 뉴욕의 고급 레스토랑이 어떻게 사교계의 중심이 되었는지를 잘 보여줍니다. 마거리트는 그날 밤, 이곳에서의 식사 후 미래의 유명한 감독과의 운명적인 만남을 가졌는데, 이는 이후 수많은 영화 역사에 영향을 미쳤습니다. 여러분, 그런 놀라운 순간들이 이곳에서 펼쳐졌습니다!\"\n\n**건축적 경이로움**\n\n\"이 레스토랑의 건축적 아름다움은 단순한 외관을 넘어서 있습니다. 이 건물은 당시 가장 혁신적인 건축 기술과 최고의 재료로 지어졌습니다. 알루미늄과 유리가 주재료로 사용되었고, 각각의 창문은 햇살에 따라 빛나는 황금빛을 띱니다. 그 시대의 가장 진보된 기술을 사용해 만든 조명 시스템은 저녁이 되면 마치 별이 쏟아지는 듯한 광경을 만들어냅니다.\"\n\n\"여러분이 놓치지 말아야 할 숨겨진 비밀은, 이곳의 벽면에 새겨진 작은 상징들입니다. 이 상징들은 당시 뉴욕의 엘리트 문화와 예술적 감성을 나타내며, 그들만이 이해했던 은밀한 메시지를 담고 있습니다. 이곳에 처음 오신 분들은 잘 모르실 수도 있지만, 자세히 살펴보면 그 깊이를 알 수 있습니다.\"\n\n**현대의 사가**\n\n\"시간이 흘러 2000년대에 들어서며 이 레스토랑은 끊임없는 변화와 함께 다시금 재발견되었습니다. 현대적인 터치와 복고풍의 매력을 결합하여, 옛날과 오늘날의 조화로운 융합을 이루어냈습니다. 복원 작업은 매우 치열했고, 그 과정에서 옛날의 아름다움을 되찾기 위해 수많은 노력이 기울여졌습니다.\"\n\n\"여러분, 이곳은 이제 수많은 영화와 드라마의 배경으로 등장하며 현대 대중문화 속에 깊이 자리 잡았습니다. 그리고 여기서 벌어지는 재미있는 일들! 셀카를 찍으며 웃음 가득한 표정의 관광객들과, 요리 사진을 찍어 SNS에 올리려는 모습들을 볼 수 있습니다. 모던한 뉴요커와 전 세계에서 온 여행객들이 한데 모여 이곳에서 새로운 추억을 만듭니다.\"\n\n**철학적 결론**\n\n\"이곳, 뉴욕 프리미엄 Restaurant 추천 86은 단순한 식당을 넘어, 인류의 역사 속에서 아름다움과 가능성을 상징합니다. 삶의 각 순간을 가치 있게 만드는 장소로서, 이곳은 우리에게 끊임없는 영감을 줍니다. 이러한 세계적 명소가 우리에게 가르쳐주는 것은, 꿈꾸는 자에게는 언제나 새로운 기회가 열린다는 것입니다.\"\n\n\"여러분, 이제 이곳에서의 여정을 마무리하며, 이곳이 주는 감동을 가슴에 품어보세요. 이곳은 당신의 삶 속에 특별한 순간을 더해줄 것입니다. 그리고 이곳의 이야기는, 살아있는 전설로서 계속해서 우리와 함께할 것입니다. 여러분, 다음에 또 만나길 기대합니다!\"",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "뉴욕 프리미엄 Restaurant 추천 86",
-        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "뉴욕의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:07.318Z",
-    "updatedAt": "2026-02-22T18:05:56.963Z"
-  },
-  {
-    "id": "new-york_item_25",
-    "cityId": "new-york",
-    "name": "뉴욕 프리미엄 Restaurant 추천 26",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "**위대한 시작**  \n자, 여러분! 뉴욕의 식도락 여행을 시작할 준비가 되었나요? \"뉴욕 프리미엄 Restaurant 추천 26\"에 오신 것을 환영합니다! 이곳은 그야말로 미각의 놀이터, 감각의 향연이 펼쳐지는 장소입니다. 눈앞에 펼쳐진 장면을 상상해보세요. 깊고 어두운 조명이 어우러진 세련된 인테리어, 테이블마다 정성스럽게 놓여진 아름다운 디너 세팅. 그리고 어디서든 느껴지는 풍부한 음식의 향기가 코끝을 간질입니다. 스테이크의 육즙이 입 안에서 녹아내리는 상상을 해보세요. 와인잔이 부딪히는 소리, 웃음과 대화가 넘쳐나는 소리, 그리고 주방에서 쉼 없이 울리는 냄비와 팬의 경쾌한 소리들. 이곳은 단순한 식당이 아닙니다. 이곳은 경험입니다!\n\n**깊이 있는 역사**  \n이곳의 역사는 단순한 식사의 역사가 아닌 뉴욕의 변화와 함께했습니다. 20세기 초반, 뉴욕은 이민자들이 꿈을 찾아 몰려드는 대혼란의 시기였습니다. 그러한 시기에, 한 젊은 셰프가 자신의 조국 이탈리아에서 받은 전통적인 요리 기술을 바탕으로 이곳을 세우게 됩니다. 당시 뉴욕은 급격한 산업화로 인해 변화하고 있었으며, 다양한 문화가 혼합되는 곳이었습니다. 그 중에서도 이 식당은 이탈리아 문화의 중심지로 자리잡으며 지역 사회에 깊은 영향을 미쳤습니다.  \n\n그 시절, 이곳을 자주 찾았던 인물 중 한 명은 바로 유명한 작가 에드가 앨런 포였습니다. 그는 이곳의 따뜻한 분위기와 재료의 풍미에 반해 매일같이 방문하며 영감을 얻었다고 전해집니다. 포는 여기서의 경험을 바탕으로 그의 작품에 녹여 내었고, 그 덕분에 이 식당은 작은 문학의 중심지로도 불리게 되었습니다. 그의 한 편의 이야기를 듣는 것만으로도 이곳의 분위기와 시절의 향수를 느낄 수 있을 것입니다.\n\n**건축의 경이로움**  \n이 식당의 건축물은 그 자체로 하나의 예술 작품입니다. 고전적인 유럽 스타일과 현대적인 감각이 조화를 이루고 있으며, 이탈리아에서 수입한 고급 대리석이 바닥을 감싸고 있습니다. 벽에는 활기찬 색채의 현대 미술 작품들이 걸려 있어, 과거와 현대의 만남을 느낄 수 있습니다. 이곳의 설계는 단순히 눈에 보이는 것 이상의 의미를 담고 있습니다.  \n\n벽에 새겨진 작은 문양과 조각들은 이곳을 처음 세운 셰프가 그의 고향을 기억하며 직접 디자인한 것입니다. 이탈리아 전통 문양과 뉴욕의 상징들이 교묘하게 조화를 이루고 있어, 자세히 들여다보면 그 숨겨진 메시지를 발견할 수 있을 것입니다. 대부분의 관광객들은 그냥 지나치지만, 그 조각들 속에는 이 식당의 역사를 이해하는 열쇠가 숨겨져 있습니다.\n\n**현대의 이야기**  \n세월이 흐르며, 이곳은 여러 번의 보수와 변화를 거쳤습니다. 그러나 그 본질은 변하지 않았습니다. 최근 몇 년간, 이곳은 현대적인 감각을 더해 재탄생하였으며, 다양한 문화와 맛이 조화를 이루는 지금의 모습으로 자리잡았습니다. 리모델링 과정에서 사용된 첨단 기술들은 이 식당의 매력을 더욱 돋보이게 하며, 새로운 세대의 방문객들에게도 끊임없는 감동을 선사하고 있습니다.  \n\n이 식당은 여러 유명 영화의 배경이 되며 대중문화에서도 큰 사랑을 받고 있습니다. 촬영 당시 배우들이 이곳의 음식을 맛본 후 전 세계에 그 맛을 소개하며, 순식간에 핫스팟이 되었습니다. 그리고 이제는 관광객들이 명소를 찾으며 저마다의 인생 샷을 남기는 장소가 되었죠. 그 중에는 이 식당의 고급스러움을 배경으로 독특한 포즈를 취하는 사람들도 있습니다. \n\n**철학적인 결론**  \n이 식당은 단순히 맛있는 음식을 제공하는 장소를 넘어섭니다. 이는 뉴욕 역사에서의 한 장면, 문화의 융합과 진화의 상징입니다. 이곳을 방문하는 것은 과거와 현재, 그리고 미래를 동시에 경험하는 것입니다. 한 젊은 셰프의 꿈에서 시작하여, 이제는 세계적인 명소로 자리잡은 이 레스토랑은 끊임없이 변화와 도전을 맞이하며 그 가치를 이어가고 있습니다.\n\n마지막으로, 여러분께 이곳에서의 경험이 단순한 식사가 아닌 하나의 이야기가 되기를 바랍니다. 뉴욕의 한가운데서, 이곳의 따뜻한 변주곡을 느껴보세요. 그리고 이곳에서의 맛과 시간이 여러분의 기억 속에 깊이 남아, 언제든지 떠올릴 수 있는 추억이 되기를 바랍니다. 여러분의 미각 여행을 통해, 이곳의 이야기가 여러분의 이야기가 되길 바랍니다. 그리고 이는 단순히 식사를 넘어서, 삶의 한 페이지가 되어 남을 것입니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "뉴욕 프리미엄 Restaurant 추천 26",
-        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "뉴욕의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:03.264Z",
-    "updatedAt": "2026-02-22T18:05:57.025Z"
-  },
-  {
-    "id": "central-market-kl",
-    "cityId": "kuala-lumpur",
-    "name": "Central Market",
-    "lat": 3.145833,
-    "lng": 101.695,
-    "radius": 80,
-    "narration": "자, 눈을 감고 상상해보세요. 1888년, 쿠알라룸푸르의 심장이 뛰기 시작한 곳, 바로 센트럴 마켓입니다. 지금 여러분의 발 아래에는 수많은 예술가와 장인들의 열정이 스며있는 역사의 흔적이 느껴지실 거예요. 코를 킁킁거려 보세요. 향긋한 말레이시아 향신료 냄새, 형형색색의 바틱 염색 ткани 냄새, 그리고 따뜻한 미소와 활기찬 대화 소리가 뒤섞여 만들어내는 독특한 분위기가 느껴지지 않나요? 마치 시간 여행을 떠나온 듯한 기분일 겁니다. 센트럴 마켓은 단순한 시장이 아니에요. 말레이시아의 다채로운 문화가 살아 숨 쉬는 공간이죠. 섬세한 수공예품부터 눈부신 예술 작품까지, 모든 것이 여러분의 감각을 자극할 준비가 되어 있답니다. 상인들의 호탕한 웃음소리, 흥정하는 활기찬 목소리, 그리고 곳곳에서 들려오는 전통 악기 소리가 어우러져 하나의 아름다운 교향곡을 만들어내죠. 잠시 발걸음을 멈추고 주변을 둘러보세요. 벽에 걸린 오래된 사진들은 이 곳의 잊혀진 이야기를 속삭여주는 듯하고, 손때 묻은 나무 기둥은 지난 세월의 흔적을 고스란히 간직하고 있답니다. 센트럴 마켓은 단순한 쇼핑 공간을 넘어, 말레이시아의 역사와 문화를 오롯이 느낄 수 있는 특별한 경험을 선사할 거예요. 자, 이제 센트럴 마켓의 매력에 흠뻑 빠져볼 준비 되셨나요? 당신의 눈과 귀, 그리고 마음을 활짝 열고 이 특별한 공간을 만끽해보세요!",
-    "description": "Historic cultural market for arts and crafts",
-    "category": "Cultural & Shopping",
-    "detailedDescription": "센트럴 마켓, 현지인들은 '파사르 세니(Pasar Seni)'라고 부르는 이 곳은 쿠알라룸푸르의 예술과 문화가 만나는 심장과도 같은 곳입니다. 1888년에 작은 습지 시장으로 시작해, 오늘날에는 말레이시아의 대표적인 문화 랜드마크로 자리 잡았죠. 원래는 농산물과 일용품을 거래하는 장소였지만, 시간이 흐르면서 예술가와 장인들이 모여들기 시작하면서 독특한 분위기를 형성하게 되었답니다. 1980년대에는 철거 위기에 놓이기도 했지만, 시민들의 강력한 보존 운동 덕분에 지금의 아름다운 모습으로 재탄생할 수 있었어요. 센트럴 마켓은 단순한 쇼핑 공간을 넘어, 말레이시아의 다채로운 문화를 경험할 수 있는 특별한 장소입니다. 바틱, 도자기, 목공예품 등 다양한 수공예품을 구경하고 구입할 수 있으며, 현지 예술가들의 작품 전시도 감상할 수 있죠. 특히 2층에는 '카스트리(Kasturi)'라는 이름의 야외 공간이 있는데, 이곳에서는 다양한 문화 공연과 이벤트가 열린답니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 센트럴 마켓 주변에는 맛있는 길거리 음식 노점들이 즐비하게 늘어서 있는데, 특히 '아쌈 락사(Asam Laksa)'와 '나시 르막(Nasi Lemak)'은 꼭 한번 드셔보시길 추천합니다. 센트럴 마켓 방문은 단순한 관광을 넘어, 말레이시아의 진정한 매력을 발견하는 특별한 경험이 될 거예요.",
-    "photos": [
-      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800",
-      "https://images.unsplash.com/photo-1595506040715-1e3f5dc50d4b?w=800"
-    ],
-    "historicalInfo": "Originally built in 1888 as a wet market, Central Market was saved from demolition and designated a Heritage Site in 1986. It now serves as a cultural center for Malaysian arts and crafts.",
-    "yearBuilt": "1888",
-    "architect": "Art Deco restoration in 1980s",
-    "translations": {
-      "en": {
-        "name": "Central Market",
-        "narration": "Welcome to Central Market, a cultural landmark in the heart of Kuala Lumpur. This historic market has been a hub for Malaysian arts, crafts, and culture since 1888.",
-        "description": "Historic cultural market for arts and crafts",
-        "historicalInfo": "Originally built in 1888 as a wet market, Central Market was saved from demolition and designated a Heritage Site in 1986. It now serves as a cultural center for Malaysian arts and crafts.",
-        "yearBuilt": "1888",
-        "architect": "Art Deco restoration in 1980s"
-      },
-      "it": {
-        "name": "Mercato Centrale",
-        "narration": "Benvenuto al Mercato Centrale, un punto di riferimento culturale nel cuore di Kuala Lumpur. Questo mercato storico è stato un centro per le arti, l'artigianato e la cultura malese dal 1888.",
-        "description": "Mercato culturale storico per arti e artigianato",
-        "historicalInfo": "Originariamente costruito nel 1888 come mercato umido, il Mercato Centrale è stato salvato dalla demolizione e designato Sito del Patrimonio nel 1986. Ora funge da centro culturale per le arti e l'artigianato malese.",
-        "yearBuilt": "1888",
-        "architect": "Restauro Art Deco negli anni '80"
-      },
-      "ko": {
-        "name": "중앙 시장",
-        "narration": "쿠알라룸푸르 중심부의 문화적 랜드마크인 중앙 시장에 오신 것을 환영합니다. 이 역사적인 시장은 1888년부터 말레이시아 예술, 공예, 문화의 중심지였습니다.",
-        "description": "예술과 공예를 위한 역사적 문화 시장",
-        "historicalInfo": "원래 1888년에 재래시장으로 건설된 중앙 시장은 철거로부터 구해져 1986년 유산지로 지정되었습니다. 현재 말레이시아 예술과 공예의 문화 센터로 기능합니다.",
-        "yearBuilt": "1888",
-        "architect": "1980년대 아르데코 복원"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:33.239Z",
-    "updatedAt": "2026-02-22T18:08:19.971Z"
   },
   {
     "id": "바르셀로나-demo-1",
@@ -2007,43 +1166,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:03.755Z"
   },
   {
-    "id": "new-york_item_5",
-    "cityId": "new-york",
-    "name": "뉴욕 프리미엄 Restaurant 추천 6",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "뉴욕, 이 도시를 떠올릴 때마다 그 화려한 불빛과 끝없는 활기가 마음을 뛰게 만듭니다! 이제 이 대도시의 심장부에서 미식의 향연을 펼치는 \"뉴욕 프리미엄 Restaurant 추천 6\"을 소개할 차례입니다. 상상해 보세요, 황홀한 향기와 재즈 선율이 어우러진 공간, 눈앞에 펼쳐진 미식의 천국! 문을 열고 들어가면, 독특한 분위기와 화려한 인테리어가 맞이하며 그저 고개만 끄덕일 수밖에 없게 만드는 곳입니다. 조리된 음식에서 나오는 구수한 향이 공기를 가득 메우고, 은은한 조명이 가리키는 것은 레스토랑의 모든 세부사항에 대한 사랑입니다. 고객들의 웃음소리와 식기 부딪히는 소리가 조화를 이루며, 여기서는 마치 모든 감각이 춤추고 있는 것처럼 느껴지죠.\n\n이 레스토랑이 처음 문을 연 것은 1980년대, 뉴욕이 문화의 용광로로 자리잡고 있을 때였습니다. 당시 뉴욕은 세계의 중심으로 나아가고 있었고, 그 중심에서 미식 문화를 선보이고자 했던 사람들이 이 레스토랑을 세웠습니다. 그들의 목표는 단순한 식사가 아니라 문화적 경험을 제공하는 것이었죠. 이들은 뉴욕의 다양한 인종과 문화적 배경을 반영한 요리를 선보이며, 그 당시 정치적, 사회적 변화의 물결 속에서 새로운 미식 트렌드를 만들어 냈습니다. \n\n전설적인 셰프 마리아나 키튼(Mariana Keaton)은 이곳의 첫 셰프였고 그녀의 이야기는 아직도 사람들 사이에서 회자되곤 합니다. 그녀는 어린 시절 유럽을 여행하며 배운 다양한 요리 기법을 바탕으로, 뉴욕의 미식계에 혁신을 가져왔습니다. 특히 그녀가 개발한 독특한 소스는 레스토랑의 대표 메뉴로 자리잡았고, 그녀의 이름을 따 '키튼 소스'로 불리며 많은 사랑을 받았습니다. 마리아나 셰프의 열정과 창의성은 이 레스토랑의 문을 열고 들어오는 모든 사람들에게 영감을 주었습니다.\n\n이 레스토랑의 건축적 경이로움 또한 놓칠 수 없는 포인트입니다. 고풍스러운 외관과 모던한 실내 디자인은 완벽한 조화를 이루고 있습니다. 이 건물을 설계할 때 사용된 고급 목재와 유리 소재는 공간의 우아함을 강조하며, 마치 미술관에 온 것 같은 착각을 불러일으킵니다. 창문 너머로 보이는 뉴욕의 스카이라인은 식사를 더욱 특별하게 만들어 줍니다.\n\n또한, 레스토랑 내부에는 쉽게 놓칠 수 있는 숨겨진 디테일들이 있습니다. 예를 들어, 벽에 걸린 그림들은 뉴욕의 역사적인 순간들을 담고 있으며, 그 중 일부는 유명한 예술가들이 이 레스토랑을 위해 특별히 제작한 것입니다. 이러한 세부사항들을 발견하는 것은 진정한 미식 경험의 완성도를 높여 줍니다.\n\n최근 몇 년간, 이 레스토랑은 재발견의 시간을 거쳤습니다. 세월의 흐름에도 불구하고, 여전히 뜨거운 관심을 받고 있으며, 현대적인 감각과 전통의 조화를 통해 새로운 세대를 맞이하고 있습니다. 리모델링과 함께 메뉴도 새롭게 단장되었으며, 이는 레스토랑의 지속적인 발전을 의미합니다. 많은 영화와 드라마에도 등장했으며, 그중 가장 유명한 것은 로맨틱 코미디 작품들입니다. 관광객들은 종종 그들만의 특별한 순간을 만들어내기 위해 레스토랑을 찾아옵니다. \n\n마지막으로, 이곳은 단순한 식당이 아닙니다. 이곳은 사람들 사이의 연결고리이며, 시대를 초월한 미식의 향연을 제공합니다. 뉴욕의 역사와 문화가 담긴 이 공간은 하나의 소중한 유산이며, 미래에도 그 가치를 이어갈 것입니다. 여러분, 이 레스토랑에서의 경험은 단순한 식사가 아니라, 삶의 작은 기쁨을 발견하는 순간입니다. 감사합니다. 여러분의 미식 탐험에 함께 할 수 있어 기쁩니다. 다음에 또 만나요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "뉴욕 프리미엄 Restaurant 추천 6",
-        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "뉴욕의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:01.786Z",
-    "updatedAt": "2026-02-22T18:06:04.063Z"
-  },
-  {
     "id": "london_item_10",
     "cityId": "london",
     "name": "런던 프리미엄 Activity 추천 11",
@@ -2079,43 +1201,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:02.173Z",
     "updatedAt": "2026-02-22T18:06:04.127Z"
-  },
-  {
-    "id": "jeju_item_57",
-    "cityId": "jeju",
-    "name": "제주특별자치도 프리미엄 Restaurant 추천 58",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "제주특별자치도 프리미엄 Restaurant 추천 58에 오신 것을 환영합니다! 여러분, 이곳은 단순한 레스토랑이 아닙니다. 이곳에 들어서는 순간, 마치 미각의 탐험가가 되어 제주도의 심오한 이야기와 맛의 모험을 시작하는 순간입니다. 여러분의 모든 감각이 깨어나는 이곳은, 시각적으로는 아름답게 디자인된 인테리어가 눈을 사로잡고, 귀를 기울이면 제주도의 자연과 어우러진 음악이 들려옵니다. 그리고 코를 자극하는 다양한 향신료와 신선한 재료의 향은 여러분을 매료시킬 것입니다. 이제, 이 모든 것을 경험할 준비가 되셨나요?\n\n자, 이제 여러분을 제주도의 역사 속으로 데려가겠습니다. 이 프리미엄 레스토랑은 수년 전, 한 젊은 요리사가 세계 각국을 여행하며 얻은 영감을 바탕으로 세워졌습니다. 그의 이름은 김준수였습니다. 김준수는 제주도의 전통적인 맛을 세계적인 수준으로 끌어올리고자 하는 열망을 품고 있었습니다. 그가 이 레스토랑을 열었을 당시, 제주도는 관광 산업의 중심지로 급부상하고 있었으며, 그는 이 흐름을 최대한 활용하기로 결심했습니다. 그의 비전은 단순히 음식을 제공하는 것이 아닌, 제주도의 문화를 경험할 수 있는 공간을 만드는 것이었습니다.\n\n김준수의 이야기를 더욱 깊이 들여다볼까요? 그는 어린 시절, 할머니가 만들어주신 제주의 전통 음식에 큰 감명을 받았습니다. 그가 요리에 대한 꿈을 키우게 된 동기였죠. 이후, 그는 세계 각국을 여행하며 다양한 요리 기법을 배우고, 제주도의 전통 재료를 현대적으로 재해석하는 데 주력했습니다. 특히, 그는 한 번도 본 적 없는 요리법으로 손님들을 놀라게 했던 일화가 있습니다. 독특한 제주 해산물과 양념을 사용해 새로운 맛을 창조한 그의 요리는, 그 당시 미식계에 큰 반향을 일으켰습니다.\n\n이제, 레스토랑 자체의 구조와 설계에 대해 이야기해볼까요? 이곳의 건축물은 단순함 속에 깃든 복잡성을 자랑합니다. 제주도의 풍경을 그대로 가져온 듯한 유리창과 자연광을 최대한 활용한 설계로, 외부의 아름다운 풍경이 실내로 흘러들어옵니다. 재료 역시 제주도 특유의 현무암과 나무를 사용해, 자연과의 조화를 이뤄냈습니다. 이 모든 것들이 여러분을 제주도의 자연 속으로 안내하는 듯한 착각을 불러일으키죠.\n\n그렇다면 이곳에서 쉽게 지나칠 수 있는 건축물의 숨겨진 디테일은 무엇일까요? 이 레스토랑의 벽면에는 제주의 전통 문양이 숨어 있습니다. 이러한 문양들은 제주도의 역사와 문화를 상징하며, 각각의 문양이 가지고 있는 숨은 이야기를 알고 보면, 여러분의 식사 경험은 더욱 특별해질 것입니다. 또한, 이곳의 조명은 특정 각도에서만 보이는 특별한 패턴을 가지고 있어, 이를 발견하는 것은 마치 숨겨진 보물을 찾는 듯한 재미를 선사합니다.\n\n이 레스토랑은 현대에 들어와 어떻게 재발견되고 복원되었을까요? 시간이 흐르면서 이곳은 제주도를 방문하는 많은 관광객들에게 필수적인 명소가 되었습니다. 그리고 몇 해 전, 이 레스토랑은 대대적인 리모델링을 거치면서 더 현대적인 시설과 편의성을 갖추게 되었습니다. 그러나 그 과정에서 제주도의 전통과 정신을 잃지 않기 위해 많은 노력이 기울여졌다고 합니다. 그 결과, 이곳은 전 세계의 미식가들이 꼭 방문해야 할 장소 중 하나로 자리매김하게 되었습니다.\n\n요즘 이곳이 대중문화에 미친 영향과 재미있는 관광객 행동에는 어떤 것들이 있을까요? 이 레스토랑은 여러 영화와 드라마의 배경으로 등장하면서 한층 더 유명해졌습니다. 이러한 작품들 덕분에, 많은 관광객들이 그 장면을 떠올리며 사진을 찍는 모습을 쉽게 볼 수 있습니다. 또한, 이곳에서는 종종 유명인들을 목격할 수 있어, 그들과 같은 공간에서 식사한다는 사실에 흥분하는 관광객들도 많습니다.\n\n이제, 이 레스토랑의 철학적인 의미를 함께 생각해봅시다. 이곳은 단순히 음식을 먹는 장소가 아니라, 제주도의 과거와 현재, 그리고 미래를 아우르는 하나의 예술 작품과도 같습니다. 이곳에서의 경험은 단순히 식사가 아닌, 제주도라는 섬 자체와의 깊은 교감이 됩니다. 여러분은 이곳에서 제주도의 역사, 문화, 자연을 모두 느낄 수 있습니다. 그러니 이곳은 단순한 맛집 이상의 가치를 지니고 있는 것이죠.\n\n마지막으로, 여러분께 깊은 인상을 남기며 이곳을 떠나실 수 있도록 감동적인 작별 인사를 전합니다. 여러분이 이곳에서 경험한 것들은 그저 한 끼 식사 이상의 것이었고, 그 기억은 여러분의 마음속에 오랫동안 남을 것입니다. 제주도의 바람, 햇살, 그리고 맛이 여러분의 여정에 영원히 동반자가 될 것입니다. 다음에도 다시 이곳을 찾아와, 제주도의 새로운 이야기를 함께 만들어 주시길 바랍니다. 우리는 언제나 여러분을 기다리고 있겠습니다. 감사합니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "제주특별자치도 프리미엄 Restaurant 추천 58",
-        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "제주특별자치도의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:05.384Z",
-    "updatedAt": "2026-02-22T18:06:04.705Z"
   },
   {
     "id": "서울특별시-demo-1",
@@ -2229,43 +1314,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:05:57.668Z"
   },
   {
-    "id": "jeju_item_97",
-    "cityId": "jeju",
-    "name": "제주특별자치도 프리미엄 Restaurant 추천 98",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "들어보세요! 여러분은 제주의 보석 같은 식도락의 성지, \"제주특별자치도 프리미엄 Restaurant 추천 98\"에 오신 것을 환영합니다! 이곳은 단순히 음식을 먹는 장소가 아닙니다. 이것은 맛의 오케스트라, 감각의 심포니가 펼쳐지는 곳입니다. 식당에 들어선 순간, 눈앞에 펼쳐지는 화려한 장식과 따스한 조명 아래 다채로운 음식들이 여러분을 반겨줍니다. 듣고 있나요? 주방에서 들려오는 셰프의 능숙한 칼질 소리와 함께, 고소한 향과 신선한 바다 내음이 코를 자극합니다. 이제 여러분은 제주에서 가장 추천받는 맛을 경험할 준비가 되셨습니다!\n\n이곳의 역사를 파헤쳐봅시다! \"제주특별자치도 프리미엄 Restaurant 추천 98\"은 1998년, 한국의 경제 위기가 한창일 때 탄생했습니다. 경제적인 불황 속에서도 제주도를 찾는 관광객들에게 특별한 경험을 제공하고자 했던 한 젊은 요리사가 있었죠. 그의 이름은 박민준, 당시 30대 초반의 패기 넘치는 셰프였습니다. 그는 제주 고유의 농산물과 해산물을 활용하여 새로운 미식을 창조하고자 했습니다. \n\n그 시절을 살아간 박민준의 이야기를 들어보세요. 그는 작은 동네 식당의 아들이었지만, 그의 꿈은 세계적인 요리경연대회에서 우승하는 것이었습니다. 그는 국제 대회에 참가하기 위해 낮에는 식당 일을 하고 밤에는 불타오르는 열정으로 요리 연구를 했죠. 어느 날, 그는 제주도의 특산물인 한라봉을 활용한 디저트로 대회에서 커다란 이변을 일으키며 우승을 차지했습니다. 이로 인해 그는 제주에서의 첫 레스토랑을 열게 되었고, 그곳이 바로 \"제주특별자치도 프리미엄 Restaurant 추천 98\"입니다.\n\n이제 이 식당의 건축적 경이로움을 엿볼 시간입니다. 이곳은 단순한 레스토랑이 아닙니다. 자연과 조화를 이루는 독특한 건축양식이 특징입니다. 바람과 파도 소리가 그대로 느껴지도록 설계된 유리창은, 마치 바다 위에 떠 있는 듯한 착각을 불러일으킵니다. 건물 내부는 제주 현무암과 목재를 사용하여 따뜻하면서도 견고한 느낌을 줍니다. 이런 세심한 건축적 디테일은 이곳을 방문하는 사람들의 마음을 사로잡습니다.\n\n그리고 이곳에는 숨겨진 상징들이 있습니다. 벽에 걸린 그림들은 모두 제주 전통의 삶을 담고 있으며, 각 그림마다 '행복'과 '풍요'의 상징이 담겨 있다고 합니다. 이곳에 숨겨진 작은 디테일을 찾아보세요. 여러분이 놓칠지도 모르는 곳에 숨겨진 기쁨의 메시지가 있을지도 모릅니다. 이러한 상징들은 이 레스토랑의 근간을 이루는 소중한 부분입니다.\n\n이 식당은 현대에 와서 새롭게 주목받고 있습니다. 한때는 잊혀질 뻔한 이곳이었지만, 2000년대 초반 유명 셰프들이 이곳을 다시 찾아내어 재건축하고 새로움을 불어넣었습니다. 최근에는 여러 인기 드라마와 영화의 배경지로도 사용되었습니다. \"제주특별자치도 프리미엄 Restaurant 추천 98\"은 이제 단순한 식당을 넘어 문화적 아이콘으로 자리잡게 되었습니다.\n\n오늘날 이곳을 방문하는 관광객들은 레스토랑의 각 코너에서 사진을 찍고, 입구의 유명한 현무암 조각에서 포즈를 취하며 즐거운 시간을 보냅니다. 관광객들이 이곳에서 음식을 먹고 나서 자주 외치는 말은 \"여기서 제일 맛있는 음식은 제주다!\"입니다. 정말 웃기지 않나요? 이곳은 단순히 맛있는 음식을 제공하는 것을 넘어서, 여행객들에게 제주도의 진정한 맛을 전달하고자 하는 것입니다.\n\n이제 여러분은 \"제주특별자치도 프리미엄 Restaurant 추천 98\"의 깊은 철학을 이해하게 될 것입니다. 이곳은 단순한 식당이 아닌, 제주의 문화와 역사를 맛볼 수 있는 장소입니다. 제주도의 풍요로움과 아름다움을 담아내고자 했던 한 사람의 꿈이 이곳에 담겨 있습니다. 이곳에서의 식사는 단순한 끼니가 아닌, 과거와 현재, 그리고 미래의 제주를 맛보는 여행입니다.\n\n그래서 여러분이 이곳을 떠날 때, 이곳에서 경험한 모든 것이 여러분의 마음속에 깊게 자리잡기를 바랍니다. 제주라는 땅의 특별함을 느끼고, 그 특별함을 함께 나누고자 했던 사람들의 이야기가 여러분의 기억 속에 남기를 소망합니다. 여러분의 여행이 끝나고 나서도 이곳의 기억은 오래도록 간직되기를 바랍니다. 감사합니다, 여러분의 이야기를 만들어주셔서 말이죠.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "제주특별자치도 프리미엄 Restaurant 추천 98",
-        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "제주특별자치도의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:08.106Z",
-    "updatedAt": "2026-02-22T18:06:05.107Z"
-  },
-  {
     "id": "khoo-kongsi",
     "cityId": "penang",
     "name": "Khoo Kongsi",
@@ -2308,45 +1356,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:32.023Z",
-    "updatedAt": "2026-02-22T18:09:38.753Z"
-  },
-  {
-    "id": "rome_트라토리아_다_엔조_알_29_trattoria_da_e",
-    "cityId": "rome",
-    "name": "트라토리아 다 엔조 알 29 (Trattoria Da Enzo al 29)",
-    "lat": 41.888772,
-    "lng": 12.472149,
-    "radius": 70,
-    "narration": "(분주하면서도 정겨운 식당 소음, 접시 부딪히는 소리, 활기찬 대화, 식욕을 돋우는 요리 냄새) 후각을 자극하는 고소한 올리브유와 허브 향을 따라 트라스테베레의 돌길을 걷다 보면, 작은 간판 하나가 눈에 뜁니다. 바로 로마 현지인들의 비밀스러운 아지트, '트라토리아 다 엔조 알 29'입니다. 이 작은 공간에 들어서는 순간, 여러분은 시간여행을 하는 듯한 착각에 빠질 것입니다. 세련된 장식 대신 벽을 가득 채운 오래된 사진들과 가족적인 분위기, 그리고 끊임없이 오가는 정겨운 대화 소리가 마치 로마인의 삶 속으로 스며든 듯한 느낌을 줍니다. 부엌에서는 능숙한 손길로 카치오 에 페페의 크리미한 소스가 만들어지고, 노릇하게 구워진 아티초크 튀김이 금방 튀겨져 나옵니다. 바삭하면서도 부드러운 아티초크 한 입, 그리고 진한 페코리노 치즈와 후추가 어우러진 카치오 에 페페 파스타 한 포크… 이 모든 것이 바로 로마의 맛입니다. 와인 한 잔을 기울이며 이 활기찬 분위기 속에 함께 녹아들어 보세요. 화려하진 않지만, 진정성 있는 로마의 미식과 따뜻한 정이 여러분의 혀끝과 마음을 동시에 채울 것입니다.",
-    "description": "트라스테베레 뒷골목에서 만나는 로마 전통 가정식의 정수.",
-    "category": "Restaurant",
-    "detailedDescription": "(환호하는 관중 소리와 함께) 여러분, 트라토리아 다 엔조 알 29에 오신 것을 환영합니다! 이곳은 트라스테베레의 뒷골목 깊숙한 곳에서 여러분을 기다리고 있는 로마 전통 가정식의 보물 같은 장소입니다. 이제 상상해 보세요! 좁은 골목길을 걸어 들어가면, 고대 로마의 영혼이 깃든 벽돌들과 향긋한 허브 냄새가 당신을 맞이합니다. 갓 구운 빵의 고소한 향기와 로마의 햇살과 어우러진 신선한 토마토 소스의 풍미를 느껴보세요! 거친 돌길에 부딪히는 발자국 소리와 함께, 이곳은 시간을 초월한 맛의 여행을 시작할 준비를 마쳤습니다.\n\n이제 1920년대로 돌이켜 봅시다. 트라토리아 다 엔조 알 29는 당시 로마의 소란스러운 정치적 격변 속에서 탄생했습니다. 이 전통 있는 식당을 세운 주인공은, 바로 요리사 엔조! 그는 제1차 세계 대전이 끝난 후, 온화함과 따뜻함을 나누고자 했습니다. 그 당시 이탈리아는 모험과 열정으로 가득 찬 시기였고, 사람들은 새로운 시작을 꿈꾸며 이곳으로 몰려들었습니다. 엔조는 그의 음식으로 그들에게 위로와 희망을 주고자 했습니다.\n\n그 중에서도 한 가지 잊을 수 없는 이야기가 있습니다. 나폴레옹 전쟁의 한 참전 용사가 그 당시 이곳에 들러, 가족과 함께 힘든 시기를 극복한 감격의 눈물을 흘리며 엔조의 파스타를 맛본 것입니다. 그 용사는 \"이 맛은 내 삶의 가장 위대한 승리보다 값지다\"고 말했다고 전해집니다. 이 특별한 순간은 트라토리아 다 엔조 알 29의 정신을 대표하는 순간으로 남아 있습니다.\n\n이제 이 건축물의 경이로움을 살펴봅시다. 이곳의 벽돌은 로마제국 시절의 기술로 쌓아 올려졌습니다. 각 벽돌은 손으로 깎아내어진 정밀함을 자랑하며, 그 안에 숨겨진 세월의 흔적들이 여전히 살아 숨쉬고 있습니다. 그리고 이곳의 천장에는 우리가 눈치채지 못할 수도 있는 작은 상징들이 숨어 있습니다. 로마의 고대 신화에서 가져온 독특한 문양들이 조각되어 있어, 이를 발견하면 마치 비밀의 문을 여는 기분을 느낄 수 있습니다.\n\n이제 현대의 이야기를 들어봅시다. 트라토리아 다 엔조 알 29는 한때 잊히기도 했지만, 최근에 다시 그 매력을 찾아 부활했습니다. 예술가와 고급 미식가들의 발길이 이어지며, 그들의 열정과 노력이 이곳을 다시 생동감 있게 만들었습니다. 특히 할리우드 영화 속에서 이곳은 로마의 정취를 전달하는 중요한 배경으로 등장했습니다. 관광객들은 이곳에서 사진을 찍으며, 영화 속 주인공이 되어 보는 즐거움을 만끽합니다. 그리고 때로는 이곳의 자유로운 분위기에 취해, 그만 빈 접시를 들고 춤을 추는 이색적인 장면이 펼쳐지기도 합니다!\n\n이제 이곳이 인간 역사에서 어떤 의미를 갖는지 생각해 봅시다. 트라토리아 다 엔조 알 29는 단순한 식당이 아닙니다. 이는 음식을 통해 사랑과 연결을 나누는 사람들의 이야기입니다. 시대를 초월하는 맛과 따뜻함은 우리를 시간과 공간을 넘어 한데 모아줍니다. 이곳을 방문하는 모든 이는 이탈리아의 전통과 혁신이 결합된 진정한 경험을 할 수 있습니다.\n\n그리고 마지막으로, 여러분과 함께 머무른 이 시간이 아쉬움으로 가득 차면서도 감동적인 순간이었습니다. 트라토리아 다 엔조 알 29에서의 시간을 통해 느낀 모든 감정들이 여러분의 마음속에 깊이 새겨지길 바랍니다. 이곳에서의 추억이 여러분의 삶의 한 장면으로 남아, 언제든지 따뜻하게 떠올릴 수 있는 소중한 기억이 되길 바랍니다. 여러분, 로마에서 만난 이 특별한 경험을 기억하며, 다시 만날 그날까지 안녕히 계세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "트라토리아 다 엔조 알 29 (Trattoria Da Enzo al 29)",
-        "description": "트라스테베레 뒷골목에서 만나는 로마 전통 가정식의 정수.",
-        "narration": "(분주하면서도 정겨운 식당 소음, 접시 부딪히는 소리, 활기찬 대화, 식욕을 돋우는 요리 냄새) 후각을 자극하는 고소한 올리브유와 허브 향을 따라 트라스테베레의 돌길을 걷다 보면, 작은 간판 하나가 눈에 뜁니다. 바로 로마 현지인들의 비밀스러운 아지트, '트라토리아 다 엔조 알 29'입니다. 이 작은 공간에 들어서는 순간, 여러분은 시간여행을 하는 듯한 착각에 빠질 것입니다. 세련된 장식 대신 벽을 가득 채운 오래된 사진들과 가족적인 분위기, 그리고 끊임없이 오가는 정겨운 대화 소리가 마치 로마인의 삶 속으로 스며든 듯한 느낌을 줍니다. 부엌에서는 능숙한 손길로 카치오 에 페페의 크리미한 소스가 만들어지고, 노릇하게 구워진 아티초크 튀김이 금방 튀겨져 나옵니다. 바삭하면서도 부드러운 아티초크 한 입, 그리고 진한 페코리노 치즈와 후추가 어우러진 카치오 에 페페 파스타 한 포크… 이 모든 것이 바로 로마의 맛입니다. 와인 한 잔을 기울이며 이 활기찬 분위기 속에 함께 녹아들어 보세요. 화려하진 않지만, 진정성 있는 로마의 미식과 따뜻한 정이 여러분의 혀끝과 마음을 동시에 채울 것입니다.",
-        "detailedDescription": "트라스테베레의 고즈넉한 뒷골목에 자리한 '다 엔조 알 29'는 화려함과는 거리가 멀지만, 로마 현지인들이 진정으로 사랑하는 전통 트라토리아입니다. 이곳은 수십 년간 변함없는 맛으로 '로마 가정식'의 정수를 선보이며, 늘 문전성시를 이루는 작은 보석 같은 식당입니다. 메뉴판에는 로마 4대 파스타인 카르보나라, 아마트리치아나, 카치오 에 페페, 그라차뿐만 아니라, 로마식 아티초크(카르초피 알라 로마나)나 송아지 고기 요리(살팀보카) 등 고전적인 로마 요리들이 가득합니다. 마치 할머니 집에 초대받은 듯 따뜻하고 활기찬 분위기 속에서, 소박하지만 깊이 있는 로마의 맛을 경험할 수 있습니다. 특히 저녁 시간에는 예약 없이는 자리를 잡기 어려울 수 있으니, 오픈 시간에 맞춰 일찍 방문하거나 사전에 예약을 시도하는 것이 현명합니다. 진정한 로마 미식 경험을 원한다면 이곳을 놓치지 마세요."
-      }
-    },
-    "openingHours": "화-일 12:30–15:00, 19:30–23:00 (월요일 휴무)",
-    "priceRange": "€€",
-    "cuisine": null,
-    "reservationUrl": "https://www.thefork.com/restaurant/trattoria-da-enzo-al-29-r13554",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:36:25.156Z",
-    "updatedAt": "2026-02-22T18:06:05.355Z"
+    "updatedAt": "2026-02-22T20:00:57.441Z"
   },
   {
     "id": "paris_item_72",
@@ -2424,43 +1434,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:05.478Z"
   },
   {
-    "id": "new-york_item_105",
-    "cityId": "new-york",
-    "name": "뉴욕 프리미엄 Restaurant 추천 106",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "안녕하세요, 여러분! New York의 심장부에서 여러분을 맞이하게 되어 기쁩니다. 오늘은 \"뉴욕 프리미엄 Restaurant 추천 106\"에 대해 이야기할 예정입니다. 이곳은 단순한 식당이 아닙니다. 이야기가 숨어있는 레스토랑, 역사가 숨쉬는 공간, 그리고 현대의 미식이 만나 펼쳐지는 무대입니다. 상상해보세요, 뉴욕 한복판에서 펼쳐지는 이 장대한 미식의 서사시를!\n\n첫 번째로, 레스토랑의 문을 열고 들어서면 무엇이 느껴질까요? 눈앞에 펼쳐지는 세련된 인테리어에 숨이 멎습니다. 은은한 조명 아래서 빛나는 테이블, 그리고 벽을 장식하는 예술 작품들은 마치 하나의 전시회와도 같습니다. 주변을 감싸고 있는 부드러운 재즈 음악은 여러분을 마치 다른 세계로 데려다 놓은 듯한 기분을 주죠. 그리고, 그 공기 중에 감도는 향기! 신선한 허브와 갓 구운 빵의 냄새가 여러분의 감각을 곤두세웁니다. 이 모든 것이 미각, 시각, 후각을 자극하며, 첫 번째 한 입을 기다리게 만드는 그 순간, 바로 여기서 시작됩니다.\n\n이제 이 역사적인 건물의 깊숙한 과거로 떠나볼까요? 이 레스토랑은 19세기 말, 뉴욕이 산업 혁명으로 번창하던 시기에 지어졌습니다. 당시의 건축가, 조나단 스미스는 이곳을 뉴욕의 랜드마크로 만들고자 했습니다. 그는 유럽의 고전적 스타일과 미국의 신흥 건축 기술을 접목하여 이곳을 완성했습니다. 그리고 그 당시 뉴욕은 혼란과 희망이 공존하던 시기로, 수많은 이민자들이 꿈을 품고 찾아오던 도시였습니다.\n\n이곳엔 한 가지 특별한 이야기가 있습니다. 1910년대, 이곳을 자주 방문하던 한 젊은 시인이 있었습니다. 그는 이 레스토랑의 창가 자리에 앉아 시를 쓰곤 했죠. 그의 이름은 존 도라고 알려져 있으며, 그는 나중에 뉴욕을 대표하는 시인이 되었습니다. 당시 그는 이곳에서의 작은 순간들을 고스란히 시에 담았고, 뉴욕의 밤을 배경으로 한 그의 시는 오늘날에도 많은 사랑을 받고 있습니다.\n\n이제 건축적 경이로움의 비밀을 파헤쳐 보겠습니다. 이 건물은 당시로서는 혁신적이었던 철골 구조로 지어졌습니다. 이로 인해 높은 천장과 넓은 공간을 구현할 수 있었죠. 또한, 외관에 사용된 석재는 이탈리아에서 수입된 특별한 대리석으로, 시간이 지나도 변치 않는 아름다움을 자랑합니다. 이런 구조는 단순히 기능적일 뿐만 아니라, 시각적으로도 큰 영향을 미치며, 방문객들에게 깊은 인상을 남깁니다.\n\n그리고 여기서 숨겨진 디테일이 있습니다. 건물의 각 창문 상단에는 작은 상징들이 새겨져 있는데, 이는 당시 건축가가 남겨놓은 암호 같은 것입니다. 뉴욕의 역사와 이곳의 역할을 상징하는 이 조각들은, 단순히 장식적 요소를 넘어 역사적 의미를 담고 있죠. 관광객들이 종종 지나치는 이 작은 것들 속에서, 뉴욕의 과거와 미래를 엿볼 수 있습니다.\n\n현대에 이르러, 이 레스토랑은 예술과 미식의 중심지로 다시 주목받게 됩니다. 21세기 초반, 대대적인 복원 작업을 통해 이곳은 그 옛날의 영광을 되찾았습니다. 이 과정에서 원래의 설계도를 토대로 한 복원이 이루어졌고, 현대적 요소들이 추가되었습니다. 그리하여 오늘날의 뉴욕을 대표하는 레스토랑으로 자리매김하게 되었습니다.\n\n매해 수많은 관광객들이 이곳을 찾아옵니다. 그리고 이곳은 때때로 영화의 배경으로 등장하기도 하죠. 여러분은 혹시 유명 영화 \"뉴욕의 밤\"을 기억하시나요? 이 영화의 주인공들이 바로 이 레스토랑에서 운명적인 만남을 가지게 됩니다. 그리고 이곳을 방문한 관광객들은 서로 사진을 찍으며 그 순간을 재현하려고 하죠. 이런 모습은 웃음을 자아내곤 합니다. \n\n마지막으로, 이곳이 인류 역사에 남긴 의미에 대해 잠시 생각해보겠습니다. 이 레스토랑은 단순한 식사를 넘어선, 문화적 교류의 장이었습니다. 수많은 이들이 이곳에서 나눈 대화와 그 속에서 탄생한 아이디어들은, 뉴욕의 발전에 큰 영향을 미쳤습니다. 이곳은 미식이라는 예술을 통해, 다른 문화와 시대를 잇는 다리 역할을 해왔습니다.\n\n그리고 이제, 여러분과 함께한 이 멋지고도 흥미로운 여정을 마치며, 감동적인 작별 인사를 드리고자 합니다. 이 레스토랑은 단순한 장소가 아닌, 수많은 이야기가 얽힌 역사적 유산입니다. 여러분이 이곳을 떠나면서, 이곳에서의 경험이 작은 여운으로 남기를 바라며, 언젠가 다시 이곳의 문을 열고 또 다른 이야기를 만들기를 기대합니다. 감사합니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "뉴욕 프리미엄 Restaurant 추천 106",
-        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "뉴욕의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:08.643Z",
-    "updatedAt": "2026-02-22T18:05:57.857Z"
-  },
-  {
     "id": "rome_콜로세움_로마_포럼_colosseum_roman_for",
     "cityId": "rome",
     "name": "콜로세움 & 로마 포럼 (Colosseum & Roman Forum)",
@@ -2535,197 +1508,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-13T13:44:31.532Z",
     "updatedAt": "2026-02-22T18:06:06.113Z"
-  },
-  {
-    "id": "prague_castle",
-    "cityId": "prague",
-    "name": "Prague Castle",
-    "lat": 50.090833,
-    "lng": 14.400556,
-    "radius": 100,
-    "narration": "자, 눈을 감고 프라하 성의 문턱을 넘어선 여러분의 모습을 상상해보세요. 귓가에는 웅장한 성벽을 스치는 바람 소리, 코 끝에는 오랜 역사의 향기가 느껴지시나요? 지금 여러분의 발 아래에는 천 년이 넘는 시간 동안 왕과 황제, 그리고 대통령들의 발자취가 고스란히 남아 있습니다. 프라하 성은 단순한 건축물이 아니에요. 체코의 심장이자, 살아있는 역사 그 자체랍니다. 9세기, 보르지보이 왕자가 처음 이 곳에 나무 울타리를 세운 이후, 프라하 성은 끊임없이 변화하고 확장되어 왔어요. 로마네스크 양식의 교회, 고딕 양식의 웅장한 대성당, 그리고 화려한 바로크 양식의 궁전까지, 각 시대의 건축 양식이 조화롭게 어우러져 마치 한 권의 건축 역사책을 펼쳐 놓은 듯하죠. 성 비투스 대성당의 스테인드글라스를 통해 쏟아지는 빛줄기를 느껴보세요. 그 황홀한 광경은 마치 신성한 기운이 여러분을 감싸는 듯한 느낌을 선사할 거예요. 그리고 황금 소로를 거닐며 연금술사들과 작가들의 숨결을 느껴보세요. 그들의 꿈과 열정이 아직도 그 좁은 골목길 어딘가에 깃들어 있을지도 모릅니다. 프라하 성은 낮에도 아름답지만, 해질녘에는 더욱 매혹적인 자태를 뽐낸답니다. 붉게 물든 하늘 아래 우뚝 솟은 성의 모습은 마치 한 폭의 그림 같아요. 사랑하는 사람과 함께 카를교 위에서 프라하 성을 바라보며 영원히 잊지 못할 추억을 만들어 보세요. 자, 이제 프라하 성의 깊숙한 곳으로 함께 떠나볼까요?",
-    "description": "The largest ancient castle complex in the world",
-    "category": "Historic Castle",
-    "detailedDescription": "프라하 성은 기원후 9세기부터 존재해 온 거대한 성곽 단지로, 체코의 역사와 문화를 고스란히 담고 있는 상징적인 장소입니다. 단순히 규모가 큰 것을 넘어, 천 년이 넘는 시간 동안 체코의 왕, 신성 로마 제국의 황제, 그리고 체코슬로바키아와 체코 공화국의 대통령들이 거주하며 권력의 중심지 역할을 해왔습니다. 성 비투스 대성당은 프라하 성의 핵심 건물로, 고딕 양식의 걸작으로 손꼽힙니다. 성 바츨라프 예배당에는 보헤미아 왕관 보석이 보관되어 있으며, 얀 네포무츠키 성인의 은으로 만든 무덤은 그 화려함에 입을 다물 수 없게 만듭니다. 황금 소로는 한때 연금술사들이 거주했던 좁은 골목길로, 현재는 작은 상점과 갤러리들이 들어서 있어 독특한 분위기를 자아냅니다. 흥미로운 사실은, 황금 소로 22번지에는 프란츠 카프카가 잠시 거주하며 작품 활동을 했다는 점입니다. 프라하 성의 정원은 계절마다 다른 아름다움을 선사합니다. 봄에는 꽃들이 만발하고, 여름에는 푸르른 녹음이 우거지며, 가을에는 붉게 물든 단풍이 장관을 이루죠. 현지인들은 프라하 성 정원에서 여유로운 시간을 보내거나, 피크닉을 즐기기도 합니다. 꿀팁 하나! 프라하 성의 정문에서는 매시간 정각에 근위병 교대식을 볼 수 있습니다. 웅장한 음악과 함께 펼쳐지는 교대식은 놓치면 후회할 볼거리 중 하나입니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800",
-      "https://images.unsplash.com/photo-1458150945447-7fb764c11a92?w=800",
-      "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800"
-    ],
-    "historicalInfo": "Prague Castle was founded around 880 by Prince Bořivoj of the Přemyslid Dynasty. It has been rebuilt and expanded many times over the centuries. The castle has always been the seat of power for Czech rulers and is now the official residence of the President of the Czech Republic.",
-    "yearBuilt": "880 AD",
-    "architect": "Various architects over centuries",
-    "translations": {
-      "en": {
-        "name": "Prague Castle",
-        "narration": "Welcome to Prague Castle, one of the largest ancient castles in the world. This magnificent complex has been the seat of power for kings, emperors, and presidents for over a thousand years.",
-        "description": "The largest ancient castle complex in the world",
-        "detailedDescription": "Prague Castle is a castle complex in Prague, Czech Republic, built in the 9th century. It is the official office of the President of the Czech Republic and was once the seat of Bohemian kings and Holy Roman emperors. The castle is among the most visited tourist attractions in Prague attracting over 1.8 million visitors annually. The Bohemian Crown Jewels are kept within a hidden room inside it. According to the Guinness Book of Records, Prague Castle is the largest ancient castle in the world, occupying an area of almost 70,000 square meters. The castle includes Gothic St. Vitus Cathedral, Romanesque Basilica of St. George, a monastery, and several palaces, gardens and defense towers. Most of the castle's present appearance is a result of reconstruction in the second half of the 18th century. The castle houses the Czech Crown Jewels and is a UNESCO World Heritage Site. The changing of the guard takes place every hour and is a popular attraction.",
-        "historicalInfo": "Prague Castle was founded around 880 by Prince Bořivoj of the Přemyslid Dynasty. It has been rebuilt and expanded many times over the centuries. The castle has always been the seat of power for Czech rulers and is now the official residence of the President of the Czech Republic.",
-        "yearBuilt": "880 AD",
-        "architect": "Various architects over centuries"
-      },
-      "ko": {
-        "name": "프라하 성",
-        "narration": "세계에서 가장 큰 고대 성 중 하나인 프라하 성에 오신 것을 환영합니다. 이 장엄한 복합 건물은 천년 이상 왕, 황제, 대통령의 권력의 자리였습니다.",
-        "description": "세계에서 가장 큰 고대 성 복합 건물",
-        "detailedDescription": "프라하 성은 9세기에 건축된 체코 프라하의 성 복합 건물입니다. 체코 공화국 대통령의 공식 집무실이며 한때 보헤미아 왕과 신성 로마 제국 황제의 자리였습니다. 이 성은 프라하에서 가장 많이 방문하는 관광 명소 중 하나로 연간 180만 명 이상의 방문객을 끌어들입니다. 보헤미아 왕관 보석은 성 내부의 숨겨진 방에 보관되어 있습니다. 기네스북에 따르면 프라하 성은 세계에서 가장 큰 고대 성으로 거의 70,000제곱미터의 면적을 차지합니다. 성에는 고딕 양식의 성 비투스 대성당, 로마네스크 양식의 성 조지 대성당, 수도원, 여러 궁전, 정원 및 방어 탑이 포함됩니다. 성의 현재 모습 대부분은 18세기 후반 재건의 결과입니다. 성에는 체코 왕관 보석이 보관되어 있으며 유네스코 세계문화유산입니다. 위병 교대식은 매시간 진행되며 인기 있는 명소입니다.",
-        "historicalInfo": "프라하 성은 880년경 프르셰미슬 왕조의 보르지보이 공작에 의해 건립되었습니다. 수세기에 걸쳐 여러 차례 재건 및 확장되었습니다. 이 성은 항상 체코 통치자의 권력의 자리였으며 현재 체코 공화국 대통령의 공식 거주지입니다.",
-        "yearBuilt": "서기 880년",
-        "architect": "여러 세기에 걸친 다양한 건축가"
-      },
-      "ja": {
-        "name": "プラハ城",
-        "narration": "世界最大級の古代城の一つであるプラハ城へようこそ。この壮大な複合施設は、千年以上にわたり王、皇帝、大統領の権力の座でした。",
-        "description": "世界最大の古代城郭複合体",
-        "detailedDescription": "プラハ城は、9世紀に建設されたチェコのプラハにある城郭複合体です。チェコ共和国大統領の公式執務室であり、かつてボヘミア王と神聖ローマ皇帝の座でした。この城はプラハで最も訪問された観光名所の一つで、年間180万人以上の訪問者を集めています。ボヘミア王冠宝石は城内の隠し部屋に保管されています。ギネスブックによると、プラハ城は世界最大の古代城で、約70,000平方メートルの面積を占めています。城にはゴシック様式の聖ヴィート大聖堂、ロマネスク様式の聖ジョージ教会、修道院、いくつかの宮殿、庭園、防衛塔が含まれます。城の現在の外観の大部分は、18世紀後半の再建の結果です。城にはチェコ王冠宝石が収蔵されており、ユネスコ世界遺産です。衛兵交代式は毎時行われ、人気のアトラクションです。",
-        "historicalInfo": "プラハ城は880年頃、プシェミスル朝のボジヴォイ公によって建設されました。何世紀にもわたって何度も再建され拡張されました。この城は常にチェコ統治者の権力の座であり、現在はチェコ共和国大統領の公式住居です。",
-        "yearBuilt": "西暦880年",
-        "architect": "数世紀にわたるさまざまな建築家"
-      },
-      "zh": {
-        "name": "布拉格城堡",
-        "narration": "欢迎来到布拉格城堡,世界上最大的古代城堡之一。这座宏伟的建筑群一千多年来一直是国王、皇帝和总统的权力所在地。",
-        "description": "世界上最大的古代城堡建筑群",
-        "detailedDescription": "布拉格城堡是捷克布拉格的一座城堡建筑群,建于9世纪。它是捷克共和国总统的官方办公室,曾经是波希米亚国王和神圣罗马帝国皇帝的所在地。该城堡是布拉格访问量最大的旅游景点之一,每年吸引超过180万游客。波希米亚王冠珠宝保存在城堡内的一个隐藏房间中。根据吉尼斯世界纪录,布拉格城堡是世界上最大的古代城堡,占地面积近70,000平方米。城堡包括哥特式圣维特大教堂、罗马式圣乔治教堂、修道院以及几座宫殿、花园和防御塔。城堡目前的外观大部分是18世纪后半叶重建的结果。城堡收藏着捷克王冠珠宝,是联合国教科文组织世界遗产。卫兵换岗仪式每小时举行一次,是一个受欢迎的景点。",
-        "historicalInfo": "布拉格城堡大约在880年由普热米斯尔王朝的博日沃伊王子建立。几个世纪以来,它被多次重建和扩建。这座城堡一直是捷克统治者的权力所在地,现在是捷克共和国总统的官方住所。",
-        "yearBuilt": "公元880年",
-        "architect": "几个世纪以来的各种建筑师"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:28.323Z",
-    "updatedAt": "2026-02-22T18:09:49.140Z"
-  },
-  {
-    "id": "sagrada_familia",
-    "cityId": "barcelona",
-    "name": "Sagrada Familia",
-    "lat": 41.403629,
-    "lng": 2.174356,
-    "radius": 80,
-    "narration": "바르셀로나에 오신 것을 환영합니다! 지금 여러분 눈앞에는, 아니, 상상해보세요. 140년이 넘는 시간 동안 건설 중인, 그 웅장함과 섬세함으로 전 세계를 매료시킨 안토니 가우디의 걸작, 사그라다 파밀리아가 펼쳐져 있습니다. 하늘을 향해 솟아오른 듯한 첨탑들은 마치 거대한 석조 숲 같아요. 햇빛이 스테인드글라스를 통과하며 만들어내는 다채로운 색깔의 향연은 마치 천상의 빛이 쏟아지는 듯 황홀하죠. \n\n숨을 크게 들이쉬고, 잠시 주변의 소리를 들어보세요. 관광객들의 웅성거림, 아이들의 웃음소리, 그리고 어쩌면 저 멀리서 들려오는 기타 소리까지… 이 모든 소리가 사그라다 파밀리아를 더욱 특별하게 만들어 줍니다. 지금 여러분의 발 아래에는 수백 년의 역사가 잠들어 있어요. 가우디는 자연에서 영감을 받아 이 성당을 설계했다고 해요. 그래서인지 성당 곳곳에서 나무, 꽃, 동물 등 자연의 형태를 발견할 수 있답니다. \n\n성당 내부로 들어가 볼까요? 마치 거대한 숲 속에 들어온 듯한 느낌이 들 거예요. 기둥들은 마치 나무처럼 하늘을 향해 뻗어 있고, 천장에는 나뭇잎 모양의 장식들이 가득하죠. 스테인드글라스를 통해 들어오는 빛은 마치 숲 속의 햇살처럼 따뜻하고 부드러워요. 상상해보세요. 이 아름다운 공간에서 여러분은 마치 신성한 기운에 감싸이는 듯한 느낌을 받을 겁니다. 사그라다 파밀리아는 단순한 건축물이 아니에요. 가우디의 열정과 꿈, 그리고 바르셀로나의 역사가 담겨 있는 살아있는 예술 작품이죠. 자, 이제 여러분만의 사그라다 파밀리아 이야기를 만들어 보세요!",
-    "description": "Gaudí's magnificent unfinished basilica, a UNESCO World Heritage Site",
-    "category": "Architecture",
-    "detailedDescription": "사그라다 파밀리아는 안토니 가우디의 가장 유명한 작품이자, 바르셀로나를 상징하는 랜드마크입니다. 1882년에 착공하여 아직까지도 건설 중인 이 성당은 가우디의 독창적인 건축 철학과 종교적인 신념이 담겨 있습니다. 가우디는 자연에서 영감을 받아 사그라다 파밀리아를 설계했으며, 이는 성당의 외관과 내부 곳곳에서 확인할 수 있습니다. 첨탑은 마치 옥수수처럼 하늘을 향해 솟아 있고, 파사드는 예수의 탄생, 수난, 영광을 묘사하고 있습니다. 내부에는 숲을 연상시키는 기둥과 스테인드글라스가 있으며, 빛과 색채를 통해 신성한 분위기를 연출합니다.\n\n**현지인 꿀팁**: 사그라다 파밀리아는 늘 관광객으로 붐비기 때문에, 온라인으로 미리 입장권을 예매하는 것이 좋습니다. 특히 첨탑에 올라가려면 예약이 필수입니다. 첨탑에서는 바르셀로나 시내를 한눈에 조망할 수 있습니다. 또한, 가우디의 생애와 작품에 대해 더 자세히 알고 싶다면, 사그라다 파밀리아 지하에 있는 박물관을 방문해 보세요. 가우디가 사용했던 도구와 설계 도면, 모형 등을 볼 수 있습니다. **숨겨진 비화**: 가우디는 사그라다 파밀리아 건설에 자신의 모든 것을 바쳤다고 합니다. 그는 성당 근처에 살면서 매일같이 설계하고 감독했으며, 심지어 노숙자처럼 초라한 모습으로 다니다가 교통사고로 사망했다고 합니다. 그의 유언에 따라 사그라다 파밀리아에 안치되었으며, 그의 정신은 여전히 이 성당에 살아 숨 쉬고 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1583779457050-39e95d3d9d8b?w=800",
-      "https://images.unsplash.com/photo-1561632669-7f55f7975606?w=800",
-      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800"
-    ],
-    "historicalInfo": "Construction of the Sagrada Família started in 1882 under architect Francisco de Paula del Villar. In 1883, Antoni Gaudí took over the project and transformed it with his architectural vision. He worked on the church for 43 years until his death in 1926. Gaudí devoted his final years exclusively to the project, and at the time of his death, less than a quarter of the project was complete.",
-    "yearBuilt": "1882-present (under construction)",
-    "architect": "Antoni Gaudí",
-    "translations": {
-      "en": {
-        "name": "Sagrada Familia",
-        "narration": "Welcome to the Sagrada Familia, Antoni Gaudí's masterpiece and Barcelona's most iconic landmark. This breathtaking basilica has been under construction for over 140 years.",
-        "description": "Gaudí's magnificent unfinished basilica, a UNESCO World Heritage Site",
-        "detailedDescription": "The Basílica de la Sagrada Família, also known as the Sagrada Família, is a large unfinished Roman Catholic minor basilica in Barcelona, Catalonia, Spain. Designed by Catalan architect Antoni Gaudí (1852–1926), his work on the building is part of a UNESCO World Heritage Site. Construction began in 1882 and is projected to be completed in 2026, the centenary of Gaudí's death. Combining Gothic and Art Nouveau forms, the Sagrada Família is renowned for its unique architectural style featuring organic shapes inspired by nature. The basilica has three grand facades: the Nativity facade, the Passion facade, and the Glory facade, each telling a different part of the story of Jesus. The interior is equally spectacular, with towering columns designed to resemble trees in a forest, creating a stunning canopy effect.",
-        "historicalInfo": "Construction of the Sagrada Família started in 1882 under architect Francisco de Paula del Villar. In 1883, Antoni Gaudí took over the project and transformed it with his architectural vision. He worked on the church for 43 years until his death in 1926. Gaudí devoted his final years exclusively to the project, and at the time of his death, less than a quarter of the project was complete.",
-        "yearBuilt": "1882-present (under construction)",
-        "architect": "Antoni Gaudí"
-      },
-      "ko": {
-        "name": "사그라다 파밀리아",
-        "narration": "안토니 가우디의 걸작이자 바르셀로나의 가장 상징적인 랜드마크인 사그라다 파밀리아에 오신 것을 환영합니다. 이 숨막히는 바실리카는 140년 넘게 건설 중입니다.",
-        "description": "가우디의 장엄한 미완성 바실리카, 유네스코 세계문화유산",
-        "detailedDescription": "사그라다 파밀리아 대성당은 스페인 카탈루냐 바르셀로나에 있는 대형 미완성 로마 가톨릭 소바실리카입니다. 카탈루냐 건축가 안토니 가우디(1852-1926)가 설계했으며, 그의 작업은 유네스코 세계문화유산의 일부입니다. 건설은 1882년에 시작되었으며 가우디 사망 100주년인 2026년에 완성될 것으로 예상됩니다. 고딕 양식과 아르누보 형식을 결합한 사그라다 파밀리아는 자연에서 영감을 받은 유기적 형태를 특징으로 하는 독특한 건축 양식으로 유명합니다. 바실리카에는 세 개의 웅장한 파사드가 있습니다: 탄생 파사드, 수난 파사드, 영광 파사드로, 각각 예수의 이야기의 다른 부분을 이야기합니다. 내부도 똑같이 장관으로, 숲속의 나무를 닮도록 설계된 우뚝 솟은 기둥이 놀라운 캐노피 효과를 만들어냅니다.",
-        "historicalInfo": "사그라다 파밀리아 건설은 1882년 건축가 프란시스코 데 파울라 델 비야르의 지휘 하에 시작되었습니다. 1883년, 안토니 가우디가 프로젝트를 인수하고 그의 건축적 비전으로 변모시켰습니다. 그는 1926년 사망할 때까지 43년 동안 교회를 작업했습니다. 가우디는 말년을 오직 이 프로젝트에만 전념했으며, 그의 사망 당시 프로젝트의 1/4도 완성되지 않았습니다.",
-        "yearBuilt": "1882년-현재 (건설 중)",
-        "architect": "안토니 가우디"
-      },
-      "ja": {
-        "name": "サグラダ・ファミリア",
-        "narration": "アントニ・ガウディの傑作であり、バルセロナで最も象徴的なランドマークであるサグラダ・ファミリアへようこそ。この息をのむようなバシリカは140年以上建設中です。",
-        "description": "ガウディの壮大な未完成バシリカ、ユネスコ世界遺産",
-        "detailedDescription": "サグラダ・ファミリア大聖堂は、スペインのカタルーニャ州バルセロナにある大型の未完成ローマカトリック小バシリカです。カタルーニャの建築家アントニ・ガウディ(1852-1926)によって設計され、建物に関する彼の作業はユネスコ世界遺産の一部です。建設は1882年に始まり、ガウディの死の100周年である2026年に完成すると予測されています。ゴシック様式とアールヌーヴォー様式を組み合わせたサグラダ・ファミリアは、自然に触発された有機的な形状を特徴とする独特の建築様式で有名です。バシリカには3つの壮大なファサードがあります:降誕のファサード、受難のファサード、栄光のファサードで、それぞれがイエスの物語の異なる部分を語っています。内部も同様に壮観で、森の木々に似せて設計された高くそびえる柱が、見事な天蓋効果を生み出しています。",
-        "historicalInfo": "サグラダ・ファミリアの建設は、建築家フランシスコ・デ・パウラ・デル・ビリャールの下で1882年に開始されました。1883年、アントニ・ガウディがプロジェクトを引き継ぎ、彼の建築ビジョンで変貌させました。彼は1926年に亡くなるまで43年間教会に取り組みました。ガウディは晩年をこのプロジェクトにのみ専念させ、彼の死の時点で、プロジェクトの4分の1も完成していませんでした。",
-        "yearBuilt": "1882年-現在 (建設中)",
-        "architect": "アントニ・ガウディ"
-      },
-      "zh": {
-        "name": "圣家堂",
-        "narration": "欢迎来到圣家堂,安东尼·高迪的杰作和巴塞罗那最具标志性的地标。这座令人叹为观止的大教堂已经建造了140多年。",
-        "description": "高迪宏伟的未完成大教堂,联合国教科文组织世界遗产",
-        "detailedDescription": "圣家堂大教堂是位于西班牙加泰罗尼亚巴塞罗那的一座大型未完成罗马天主教次级圣殿。由加泰罗尼亚建筑师安东尼·高迪(1852-1926)设计,他对这座建筑的工作是联合国教科文组织世界遗产的一部分。建设始于1882年,预计将在2026年,即高迪逝世100周年时完工。结合哥特式和新艺术风格,圣家堂以其独特的建筑风格而闻名,其特色是受自然启发的有机形状。大教堂有三个宏伟的立面:诞生立面、受难立面和荣耀立面,每个都讲述了耶稣故事的不同部分。内部同样壮观,设计成森林中树木的高耸柱子,创造出令人惊叹的树冠效果。",
-        "historicalInfo": "圣家堂的建设于1882年在建筑师弗朗西斯科·德·保拉·德尔·比利亚尔的领导下开始。1883年,安东尼·高迪接管了这个项目,并用他的建筑愿景改造了它。他在1926年去世之前为这座教堂工作了43年。高迪将他的晚年完全奉献给了这个项目,在他去世时,项目还不到四分之一完成。",
-        "yearBuilt": "1882年-至今 (建设中)",
-        "architect": "安东尼·高迪"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:27.595Z",
-    "updatedAt": "2026-02-22T18:09:59.419Z"
-  },
-  {
-    "id": "london_restaurant_padella",
-    "cityId": "london",
-    "name": "Padella",
-    "lat": 51.5056,
-    "lng": -0.0911,
-    "radius": 40,
-    "narration": "상상해보세요. 지금 여러분은 런던의 활기 넘치는 보로우 마켓 한복판에 서 있습니다. 코끝을 간지럽히는 신선한 식재료의 향기, 왁자지껄한 사람들의 웃음소리, 그리고… 바로 저기, 파델라에서 풍겨오는 마법 같은 파스타의 향기가 여러분을 유혹합니다. 문을 열고 들어서는 순간, 따뜻한 분위기와 활기찬 에너지가 여러분을 감싸 안을 거예요. 오픈 키친에서는 숙련된 요리사들이 쉴 새 없이 면을 뽑고, 소스를 만들고, 예술 작품 같은 파스타를 만들어내는 모습이 펼쳐집니다. 자, 자리에 앉아 메뉴를 펼쳐보세요. 뭘 고를지 고민하지 마세요. 뭘 골라도 후회하지 않을 테니까요! 특히 시그니처 메뉴인 '파파르델레 위드 8시간 브레이즈드 비프 라구'는 꼭 맛봐야 할 메뉴입니다. 부드럽게 녹아내리는 소고기와 쫄깃한 파파르델레 면의 환상적인 조합! 한 입 베어 무는 순간, 입 안 가득 퍼지는 풍미에 감탄사를 연발하게 될 거예요. 파델라는 단순히 맛있는 파스타를 파는 곳이 아니에요. 신선한 재료, 정성, 그리고 열정이 만들어낸 최고의 경험을 선사하는 곳이죠. 친구와 함께, 연인과 함께, 혹은 혼자라도 괜찮아요. 파델라에서는 누구든 행복한 미소를 지으며 식사를 즐길 수 있습니다. 지금 바로 파델라로 떠나 맛있는 파스타의 향연에 빠져보세요! 분명 잊지 못할 추억을 만들 수 있을 거예요.",
-    "description": "Fresh pasta near Borough Market",
-    "category": "Restaurant",
-    "detailedDescription": "파델라는 런던 보로우 마켓에서 가장 인기 있는 이탈리안 레스토랑 중 하나입니다. 매일 아침 신선한 재료로 직접 만드는 파스타는 그 맛과 퀄리티로 정평이 나 있습니다. 짧은 메뉴이지만 모든 메뉴 하나하나에 정성이 가득 담겨 있으며, 특히 8시간 동안 끓인 소고기 라구 파파르델레는 꼭 맛봐야 할 시그니처 메뉴입니다. 현지인들 사이에서는 '줄 서서 먹는 파스타 맛집'으로 유명하며, 점심시간이나 저녁시간에는 웨이팅이 필수입니다. 파델라의 숨겨진 비화 하나! 사실 파델라는 이탈리아 작은 마을에서 요리 수업을 받던 두 친구가 런던에서 만나 의기투합하여 시작한 레스토랑입니다. 그들은 이탈리아의 전통적인 레시피를 바탕으로 자신들만의 독창적인 터치를 더해 파델라만의 특별한 파스타를 만들어냈습니다. 보로우 마켓에 위치한 만큼, 주변 상인들과의 협업을 통해 신선한 재료를 공급받고 있으며, 이는 파델라 파스타의 맛을 더욱 풍부하게 만들어주는 비결 중 하나입니다. 꿀팁 하나 더! 웨이팅을 피하고 싶다면 오픈 시간 직후나 점심시간 이후, 저녁 시간 전에 방문하는 것을 추천합니다. 또는 포장 주문을 통해 집에서 편안하게 파델라의 파스타를 즐길 수도 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Padella",
-        "narration": "Enjoy fresh handmade pasta at Padella, Borough Market's popular Italian eatery.",
-        "description": "Fresh pasta near Borough Market"
-      },
-      "ko": {
-        "name": "파델라",
-        "narration": "보로 마켓의 인기 이탈리안 식당 파델라에서 신선한 수제 파스타를 즐기세요.",
-        "description": "보로 마켓 근처 신선한 파스타"
-      },
-      "it": {
-        "name": "Padella",
-        "narration": "Goditi la pasta fresca fatta a mano da Padella, la popolare trattoria italiana del Borough Market.",
-        "description": "Pasta fresca vicino al Borough Market"
-      }
-    },
-    "openingHours": "Mon-Sat: 12:00-16:00, 17:00-22:00, Sun: 12:00-16:00, 17:00-21:00",
-    "priceRange": "££ (£20-35 per person)",
-    "cuisine": "Italian",
-    "reservationUrl": "https://www.padella.co/",
-    "phoneNumber": "+44 20 7357 8167",
-    "menuHighlights": [
-      "Pici Cacio e Pepe",
-      "Pappardelle Beef Shin Ragu",
-      "Burrata"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:41.628Z",
-    "updatedAt": "2026-02-22T18:14:19.837Z"
   },
   {
     "id": "paris_item_12",
@@ -2841,115 +1623,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:06.551Z"
   },
   {
-    "id": "rome_restaurant_armando_al_pantheon",
-    "cityId": "rome",
-    "name": "Armando al Pantheon",
-    "lat": 41.8986,
-    "lng": 12.4769,
-    "radius": 40,
-    "narration": "자, 눈을 감고 상상해보세요. 따스한 햇살이 쏟아지는 로마의 좁다란 골목길을 따라 걷고 있다고. 코끝을 간지럽히는 맛있는 냄새에 이끌려 도착한 곳은 바로 '아르만도 알 판테온'입니다. 1961년부터 3대째 이어져 오는 이 곳은 단순한 식당이 아니라 로마의 역사와 문화를 맛볼 수 있는 특별한 공간이에요. 문을 열고 들어서는 순간, 마치 영화 속 한 장면처럼 정겹고 따뜻한 분위기가 여러분을 감싸 안을 거예요. 벽에는 세월의 흔적이 고스란히 느껴지는 흑백 사진들이 걸려 있고, 테이블 위에는 붉은 체크무늬 식탁보가 깔려 있죠. 상상해보세요. 바로 옆 테이블에서는 이탈리아 가족들이 왁자지껄 웃으며 파스타를 먹고 있고, 웨이터는 능숙한 솜씨로 와인을 따르고 있어요. 이곳의 모든 것이 여러분을 과거로 데려가는 듯한 느낌을 줄 겁니다. 아르만도 알 판테온에서는 최고의 재료로 정성껏 만든 로마 전통 요리를 맛볼 수 있어요. 신선한 토마토와 바질로 맛을 낸 '카쵸 에 페페'는 꼭 맛봐야 할 메뉴 중 하나입니다. 파스타 면을 입안에 넣는 순간, 고소한 치즈와 후추의 풍미가 입안 가득 퍼져 나갈 거예요. 또 다른 인기 메뉴는 '아티초크 튀김'이에요. 바삭한 튀김옷 속에는 부드러운 아티초크가 숨어 있는데, 그 맛이 정말 환상적이랍니다. 와인 한 잔과 함께 즐기면 더욱 훌륭하겠죠? 아르만도 알 판테온은 단순한 식사를 넘어, 로마의 정통 문화를 경험하고 느낄 수 있는 특별한 공간입니다. 이곳에서 맛있는 음식과 함께 잊지 못할 추억을 만들어 보세요. 지금 바로 아르만도 알 판테온으로 떠나볼까요?",
-    "description": "Historic family trattoria near the Pantheon",
-    "category": "Restaurant",
-    "detailedDescription": "아르만도 알 판테온은 로마 중심부에 위치한 유명한 가족 운영 트라토리아입니다. 1961년에 문을 연 이후, 이곳은 3대째 로마 전통 요리의 맛과 향을 지켜오고 있습니다. 판테온 바로 근처에 있어 관광객들에게도 인기가 많지만, 현지인들에게도 사랑받는 진정한 맛집입니다. 이 식당의 역사는 아르만도 가니니(Armando Gannini)에서 시작됩니다. 그는 로마의 풍부한 요리 유산을 기념하는 식당을 만들겠다는 꿈을 가지고 이 곳을 열었습니다. 그의 열정과 헌신은 다음 세대로 이어져, 오늘날까지 아르만도 알 판테온을 로마 최고의 레스토랑 중 하나로 만들었습니다. 메뉴는 로마 전통 요리를 중심으로 구성되어 있습니다. '카쵸 에 페페', '아마트리치아나', '로마식 아티초크'와 같은 클래식한 요리들은 신선한 현지 재료로 만들어지며, 전통적인 조리법을 고수합니다. 숨겨진 팁을 하나 알려드리자면, 메뉴에 없는 특별 요리를 문의해보세요. 가끔 그날 준비된 신선한 재료로 만든 특별한 요리를 맛볼 수 있습니다. 예약은 필수입니다. 특히 점심시간과 저녁시간에는 자리가 없을 수 있으니, 미리 예약하고 방문하는 것이 좋습니다. 아르만도 알 판테온은 단순한 식당이 아니라, 로마의 역사와 문화를 경험할 수 있는 특별한 공간입니다. 이곳에서 맛있는 음식과 함께 잊지 못할 추억을 만들어 보세요.",
-    "photos": [
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800",
-      "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?w=800",
-      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800"
-    ],
-    "historicalInfo": "Founded in 1961 by Armando Gargioli, this restaurant has become a landmark of Roman culinary tradition.",
-    "yearBuilt": "1961",
-    "architect": "Gargioli family",
-    "translations": {
-      "en": {
-        "name": "Armando al Pantheon",
-        "narration": "Experience authentic Roman cuisine at Armando al Pantheon, a family-run trattoria serving traditional dishes since 1961.",
-        "description": "Historic family trattoria near the Pantheon",
-        "detailedDescription": "Located just steps from the Pantheon, Armando al Pantheon is a beloved Roman institution that has been serving authentic Roman cuisine since 1961. This family-run trattoria is famous for its classic dishes like cacio e pepe, carbonara, and amatriciana, all prepared according to traditional recipes passed down through generations. The intimate dining room features checkered tablecloths and walls adorned with photos of celebrity guests. The menu changes daily based on seasonal ingredients from local markets. Reservations are essential as this small trattoria fills up quickly with both locals and food enthusiasts who appreciate genuine Roman cooking.",
-        "historicalInfo": "Founded in 1961 by Armando Gargioli, this restaurant has become a landmark of Roman culinary tradition.",
-        "yearBuilt": "1961",
-        "architect": "Gargioli family"
-      },
-      "ko": {
-        "name": "아르만도 알 판테온",
-        "narration": "1961년부터 전통 요리를 제공하는 가족 운영 트라토리아, 아르만도 알 판테온에서 정통 로마 요리를 경험하세요.",
-        "description": "판테온 근처의 역사적인 가족 트라토리아",
-        "detailedDescription": "판테온에서 몇 걸음 떨어진 곳에 위치한 아르만도 알 판테온은 1961년부터 정통 로마 요리를 제공해온 사랑받는 로마 명소입니다. 이 가족 운영 트라토리아는 카치오 에 페페, 카르보나라, 아마트리치아나와 같은 클래식 요리로 유명하며, 모두 대대로 전해 내려온 전통 레시피에 따라 준비됩니다. 아늑한 식당에는 체크무늬 테이블보와 유명인 손님들의 사진이 장식된 벽이 있습니다. 메뉴는 현지 시장의 제철 재료를 기반으로 매일 바뀝니다. 이 작은 트라토리아는 진정한 로마 요리를 감상하는 현지인과 음식 애호가들로 빠르게 채워지므로 예약이 필수입니다.",
-        "historicalInfo": "1961년 아르만도 가르지올리가 설립한 이 레스토랑은 로마 요리 전통의 랜드마크가 되었습니다.",
-        "yearBuilt": "1961년",
-        "architect": "가르지올리 가족"
-      },
-      "it": {
-        "name": "Armando al Pantheon",
-        "narration": "Vivi la cucina romana autentica da Armando al Pantheon, una trattoria a conduzione familiare che serve piatti tradizionali dal 1961.",
-        "description": "Storica trattoria familiare vicino al Pantheon",
-        "detailedDescription": "Situata a pochi passi dal Pantheon, Armando al Pantheon è un'istituzione romana amata che serve cucina romana autentica dal 1961. Questa trattoria a conduzione familiare è famosa per i suoi piatti classici come cacio e pepe, carbonara e amatriciana, tutti preparati secondo ricette tradizionali tramandate di generazione in generazione. La sala da pranzo intima presenta tovaglie a quadretti e pareti adornate con foto di ospiti famosi. Il menu cambia quotidianamente in base agli ingredienti stagionali dei mercati locali. Le prenotazioni sono essenziali poiché questa piccola trattoria si riempie rapidamente sia con i locali che con gli appassionati di cibo che apprezzano la vera cucina romana.",
-        "historicalInfo": "Fondata nel 1961 da Armando Gargioli, questo ristorante è diventato un punto di riferimento della tradizione culinaria romana.",
-        "yearBuilt": "1961",
-        "architect": "Famiglia Gargioli"
-      },
-      "es": {
-        "name": "Armando al Pantheon",
-        "narration": "Experimenta la auténtica cocina romana en Armando al Pantheon, una trattoria familiar que sirve platos tradicionales desde 1961.",
-        "description": "Histórica trattoria familiar cerca del Panteón",
-        "detailedDescription": "Ubicada a pocos pasos del Panteón, Armando al Pantheon es una querida institución romana que sirve auténtica cocina romana desde 1961. Esta trattoria familiar es famosa por sus platos clásicos como cacio e pepe, carbonara y amatriciana, todos preparados según recetas tradicionales transmitidas de generación en generación. El íntimo comedor presenta manteles a cuadros y paredes adornadas con fotos de invitados célebres. El menú cambia diariamente según los ingredientes de temporada de los mercados locales. Las reservas son esenciales ya que esta pequeña trattoria se llena rápidamente con locales y entusiastas de la comida que aprecian la verdadera cocina romana."
-      },
-      "fr": {
-        "name": "Armando al Pantheon",
-        "narration": "Découvrez la cuisine romaine authentique chez Armando al Pantheon, une trattoria familiale servant des plats traditionnels depuis 1961.",
-        "description": "Trattoria familiale historique près du Panthéon",
-        "detailedDescription": "Située à quelques pas du Panthéon, Armando al Pantheon est une institution romaine bien-aimée servant une cuisine romaine authentique depuis 1961. Cette trattoria familiale est célèbre pour ses plats classiques comme le cacio e pepe, la carbonara et l'amatriciana, tous préparés selon des recettes traditionnelles transmises de génération en génération. La salle à manger intime présente des nappes à carreaux et des murs ornés de photos de célébrités. Le menu change quotidiennement en fonction des ingrédients de saison des marchés locaux. Les réservations sont essentielles car cette petite trattoria se remplit rapidement avec des locaux et des passionnés de cuisine qui apprécient la vraie cuisine romaine."
-      },
-      "de": {
-        "name": "Armando al Pantheon",
-        "narration": "Erleben Sie authentische römische Küche im Armando al Pantheon, einer familiengeführten Trattoria, die seit 1961 traditionelle Gerichte serviert.",
-        "description": "Historische Familientrattoria nahe dem Pantheon",
-        "detailedDescription": "Nur wenige Schritte vom Pantheon entfernt liegt Armando al Pantheon, eine beliebte römische Institution, die seit 1961 authentische römische Küche serviert. Diese familiengeführte Trattoria ist berühmt für ihre klassischen Gerichte wie Cacio e Pepe, Carbonara und Amatriciana, alle nach traditionellen Rezepten zubereitet, die von Generation zu Generation weitergegeben wurden. Der intime Speisesaal präsentiert karierte Tischdecken und mit Prominentenfotos geschmückte Wände. Die Speisekarte wechselt täglich basierend auf saisonalen Zutaten von lokalen Märkten. Reservierungen sind unerlässlich, da diese kleine Trattoria schnell von Einheimischen und Feinschmeckern gefüllt wird, die echte römische Küche schätzen."
-      },
-      "zh": {
-        "name": "Armando al Pantheon",
-        "narration": "在Armando al Pantheon体验正宗的罗马美食，这是一家自1961年以来提供传统菜肴的家族经营餐厅。",
-        "description": "万神殿附近的历史悠久的家族餐厅",
-        "detailedDescription": "位于万神殿几步之遥的Armando al Pantheon是一家深受喜爱的罗马餐厅，自1961年以来一直提供正宗的罗马美食。这家家族经营的餐厅以其经典菜肴而闻名，如cacio e pepe、carbonara和amatriciana，所有菜肴都按照代代相传的传统食谱制作。温馨的用餐室配有格子桌布，墙上装饰着名人宾客的照片。菜单根据当地市场的时令食材每日更换。由于这家小餐厅很快就会被当地人和美食爱好者填满，预订是必不可少的。"
-      },
-      "ja": {
-        "name": "Armando al Pantheon",
-        "narration": "1961年から伝統料理を提供している家族経営のトラットリア、Armando al Pantheonで本格的なローマ料理をお楽しみください。",
-        "description": "パンテオン近くの歴史ある家族経営トラットリア",
-        "detailedDescription": "パンテオンからわずか数歩のところにあるArmando al Pantheonは、1961年から本格的なローマ料理を提供している愛されるローマの名店です。この家族経営のトラットリアは、カチョ・エ・ペペ、カルボナーラ、アマトリチャーナなどのクラシックな料理で有名で、すべて何世代にもわたって受け継がれてきた伝統的なレシピで調理されています。親密なダイニングルームには、チェック柄のテーブルクロスと著名なゲストの写真で飾られた壁があります。メニューは地元市場の旬の食材に基づいて毎日変わります。この小さなトラットリアは、本物のローマ料理を高く評価する地元の人々や美食家ですぐにいっぱいになるため、予約は必須です。"
-      },
-      "pt": {
-        "name": "Armando al Pantheon",
-        "narration": "Experimente a autêntica cozinha romana no Armando al Pantheon, uma trattoria familiar que serve pratos tradicionais desde 1961.",
-        "description": "Histórica trattoria familiar perto do Panteão",
-        "detailedDescription": "Localizada a poucos passos do Panteão, Armando al Pantheon é uma querida instituição romana que serve autêntica cozinha romana desde 1961. Esta trattoria familiar é famosa por seus pratos clássicos como cacio e pepe, carbonara e amatriciana, todos preparados de acordo com receitas tradicionais passadas de geração em geração. A sala de jantar íntima apresenta toalhas de mesa xadrez e paredes adornadas com fotos de convidados célebres. O menu muda diariamente com base em ingredientes sazonais dos mercados locais. As reservas são essenciais, pois esta pequena trattoria se enche rapidamente com locais e entusiastas da gastronomia que apreciam a verdadeira cozinha romana."
-      },
-      "ru": {
-        "name": "Armando al Pantheon",
-        "narration": "Насладитесь подлинной римской кухней в Armando al Pantheon — семейной траттории, которая подает традиционные блюда с 1961 года.",
-        "description": "Историческая семейная траттория рядом с Пантеоном",
-        "detailedDescription": "Расположенный в нескольких шагах от Пантеона, Armando al Pantheon — это любимое римское заведение, которое подает аутентичную римскую кухню с 1961 года. Эта семейная траттория славится своими классическими блюдами, такими как качо э пепе, карбонара и аматричиана, приготовленными по традиционным рецептам, передаваемым из поколения в поколение. Уютный обеденный зал украшен клетчатыми скатертями и фотографиями знаменитых гостей на стенах. Меню меняется ежедневно в зависимости от сезонных ингредиентов с местных рынков. Бронирование необходимо, так как эта маленькая траттория быстро заполняется местными жителями и гурманами, ценящими настоящую римскую кухню."
-      }
-    },
-    "openingHours": "Tue-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun-Mon",
-    "priceRange": "€€€ (€40-60 per person)",
-    "cuisine": "Traditional Roman",
-    "reservationUrl": "https://www.thefork.com/restaurant/armando-al-pantheon-r44759",
-    "phoneNumber": "+39 06 6880 3034",
-    "menuHighlights": [
-      "Cacio e Pepe",
-      "Carbonara",
-      "Amatriciana",
-      "Carciofi alla Romana",
-      "Saltimbocca"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:39.943Z",
-    "updatedAt": "2026-02-22T18:14:30.014Z"
-  },
-  {
     "id": "busan_item_106",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Activity 추천 107",
@@ -3054,7 +1727,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:29.859Z",
-    "updatedAt": "2026-02-22T18:10:29.680Z"
+    "updatedAt": "2026-02-22T20:00:57.609Z"
   },
   {
     "id": "barcelona_구엘_공원_park_gell",
@@ -3093,197 +1766,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-13T13:50:28.164Z",
     "updatedAt": "2026-02-22T18:06:06.612Z"
-  },
-  {
-    "id": "singapore-night-safari",
-    "cityId": "singapore",
-    "name": "Night Safari Experience",
-    "lat": 1.4043,
-    "lng": 103.79,
-    "radius": 80,
-    "narration": "자, 상상해보세요. 짙은 어둠이 내려앉은 싱가포르의 밤, 어디선가 들려오는 풀벌레 소리가 귓가를 간지럽히는 그 순간, 여러분은 나이트 사파리의 입구에 서 있습니다. 단순히 동물원을 방문하는 것이 아니에요. 마치 다큐멘터리 영화 속 주인공이 된 듯한 특별한 경험이 여러분을 기다리고 있죠. 발걸음을 내딛는 순간, 세상은 온통 새로운 빛깔로 물듭니다. 인공적인 조명은 최소화되어 있고, 달빛과 별빛만이 길을 안내하는 은밀한 공간. 바로 눈앞에는 벵골 호랑이가 유유히 거닐고, 코끼리 가족이 정답게 코를 맞대고 있습니다. \n\n고요한 밤, 2,500마리가 넘는 동물들의 숨소리가 들려오는 듯합니다. 맹수의 날카로운 눈빛, 초식동물의 평화로운 몸짓 하나하나가 여러분의 심장을 두근거리게 만들 거예요. 걷다 보면 마치 아프리카 초원에 와 있는 듯한 착각이 들기도 합니다. 사자 울음소리가 저 멀리서 들려오고, 하이에나 무리가 어슬렁거리는 모습은 마치 영화의 한 장면 같아요. \n\n지금 여러분의 발 아래에는 수많은 동물들의 흔적이 고스란히 남아 있습니다. 그들의 발자국 소리, 나뭇잎을 스치는 소리, 심지어는 숨소리까지 느껴지는 듯하지 않나요? 밤의 장막 아래 펼쳐지는 야생의 세계는 낮과는 완전히 다른 얼굴을 하고 있습니다. 단순히 보는 것을 넘어, 온몸으로 느끼는 경험. 이것이 바로 나이트 사파리가 선사하는 특별한 선물입니다. 밤의 정령이 속삭이는 듯한 신비로운 분위기 속에서, 잊지 못할 추억을 만들어보세요. 자, 이제 여러분도 밤의 야생 속으로 함께 떠나볼까요?",
-    "description": "World's first nocturnal wildlife park experience",
-    "category": "Activity",
-    "detailedDescription": "싱가포르 나이트 사파리는 단순한 동물원을 넘어, 세계 최초의 야간 사파리라는 독특한 타이틀을 가지고 있습니다. 1994년 개장 이후, 밤에 활동하는 동물들의 생태를 관찰할 수 있도록 설계된 이곳은, 100종 이상의 동물, 2,500마리 이상이 서식하는 거대한 야생 공간입니다. 단순히 동물을 '보는' 것을 넘어, 밤의 환경 속에서 그들의 자연스러운 행동을 '관찰'할 수 있다는 점이 가장 큰 매력입니다. \n\n**현지인 꿀팁**: 나이트 사파리를 제대로 즐기려면 트램 투어를 놓치지 마세요. 35분 동안 진행되는 트램 투어는 넓은 사파리 곳곳을 편안하게 둘러볼 수 있게 해줍니다. 특히, 어두운 밤에는 길을 잃기 쉬우므로, 트램 투어를 통해 주요 스팟을 먼저 파악하는 것이 좋습니다. 또한, '크리쳐스 오브 더 나이트 쇼'는 꼭 봐야 할 공연 중 하나입니다. 밤에 활동하는 동물들의 놀라운 능력을 눈앞에서 확인할 수 있습니다. \n\n**숨겨진 비화**: 나이트 사파리는 단순히 관광 명소를 넘어, 야생동물 보호에도 적극적으로 참여하고 있습니다. 멸종 위기에 처한 동물들의 번식 프로그램을 운영하며, 야생동물 보호 교육에도 힘쓰고 있습니다. 밤의 정취를 느끼며 동물을 관찰하는 동시에, 야생동물 보호에 대한 인식을 높일 수 있는 뜻깊은 경험을 할 수 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800",
-      "https://images.unsplash.com/photo-1549366021-9f761d450615?w=800",
-      "https://images.unsplash.com/photo-1534188753412-5fd1b30d5c17?w=800",
-      "https://images.unsplash.com/photo-1474314170901-f351b68f544f?w=800",
-      "https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800",
-      "https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=800",
-      "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800"
-    ],
-    "historicalInfo": "Opened in 1994 as the world's first nocturnal zoo, the Night Safari pioneered the concept of observing wildlife after dark.",
-    "yearBuilt": "1994",
-    "architect": "Bernard Harrison (concept), various wildlife experts",
-    "translations": {
-      "en": {
-        "name": "Night Safari Experience",
-        "narration": "Discover nocturnal wildlife at the world's first night safari. Explore themed trails and see over 2,500 animals in their natural nighttime habitat.",
-        "description": "World's first nocturnal wildlife park experience",
-        "detailedDescription": "The Night Safari offers a unique opportunity to observe nocturnal animals in naturalistic habitats designed to replicate their native environments. Opened in 1994, it was the world's first nocturnal zoo and remains one of Singapore's most popular attractions. The 35-hectare park houses over 2,500 animals representing more than 130 species, including many threatened and endangered species. Explore via tram ride that takes you through seven geographical zones from the Himalayan Foothills to the jungles of Southeast Asia, or walk along four themed trails for closer encounters. Watch entertaining shows featuring talented animals, and learn about conservation efforts. Special lighting creates an atmospheric moonlit ambiance without disturbing the animals' natural behaviors. The park opens at 7:15 PM, with the tram rides and walking trails offering different perspectives on wildlife after dark.",
-        "historicalInfo": "Opened in 1994 as the world's first nocturnal zoo, the Night Safari pioneered the concept of observing wildlife after dark.",
-        "yearBuilt": "1994",
-        "architect": "Bernard Harrison (concept), various wildlife experts"
-      },
-      "it": {
-        "name": "Esperienza Night Safari",
-        "narration": "Scopri la fauna notturna nel primo safari notturno del mondo. Esplora sentieri a tema e osserva oltre 2.500 animali nel loro habitat notturno naturale.",
-        "description": "Esperienza del primo parco faunistico notturno del mondo",
-        "detailedDescription": "Il Night Safari offre un'opportunità unica di osservare animali notturni in habitat naturalistici progettati per replicare i loro ambienti nativi. Aperto nel 1994, è stato il primo zoo notturno del mondo e rimane una delle attrazioni più popolari di Singapore. Il parco di 35 ettari ospita oltre 2.500 animali che rappresentano più di 130 specie, comprese molte specie minacciate ed in pericolo. Esplora tramite un giro in tram che ti porta attraverso sette zone geografiche dai piedi dell'Himalaya alle giungle del Sud-Est asiatico, oppure cammina lungo quattro sentieri tematici per incontri ravvicinati. Guarda spettacoli divertenti con animali talentuosi e scopri gli sforzi di conservazione. L'illuminazione speciale crea un'atmosfera lunare suggestiva senza disturbare i comportamenti naturali degli animali. Il parco apre alle 19:15, con i giri in tram e i sentieri a piedi che offrono diverse prospettive sulla fauna selvatica dopo il tramonto.",
-        "historicalInfo": "Aperto nel 1994 come primo zoo notturno del mondo, il Night Safari ha aperto la strada al concetto di osservare la fauna selvatica dopo il tramonto.",
-        "yearBuilt": "1994",
-        "architect": "Bernard Harrison (concept), vari esperti di fauna selvatica"
-      },
-      "ko": {
-        "name": "나이트 사파리 체험",
-        "narration": "세계 최초의 야간 사파리에서 야행성 야생동물을 발견하세요. 테마별 산책로를 탐험하고 자연적인 야간 서식지에서 2,500마리 이상의 동물을 관찰하세요.",
-        "description": "세계 최초의 야행성 야생동물 공원 체험",
-        "detailedDescription": "나이트 사파리는 자연 환경을 재현하도록 설계된 자연주의적 서식지에서 야행성 동물을 관찰할 수 있는 독특한 기회를 제공합니다. 1994년에 개장한 세계 최초의 야간 동물원이며 여전히 싱가포르에서 가장 인기 있는 명소 중 하나입니다. 35헥타르의 공원에는 멸종 위기에 처한 많은 종을 포함하여 130종 이상을 대표하는 2,500마리 이상의 동물이 서식하고 있습니다. 히말라야 산기슭부터 동남아시아 정글까지 7개의 지리적 구역을 통과하는 트램을 타거나, 4개의 테마별 산책로를 따라 걸으며 더 가까이서 만날 수 있습니다. 재능 있는 동물들이 등장하는 재미있는 쇼를 관람하고 보존 노력에 대해 배우세요. 특별한 조명이 동물의 자연스러운 행동을 방해하지 않으면서 분위기 있는 달빛 분위기를 연출합니다. 공원은 오후 7시 15분에 개장하며, 트램 라이드와 도보 산책로는 어두워진 후 야생동물에 대한 다양한 관점을 제공합니다.",
-        "historicalInfo": "1994년 세계 최초의 야간 동물원으로 개장한 나이트 사파리는 어두워진 후 야생동물을 관찰하는 개념의 선구자입니다.",
-        "yearBuilt": "1994",
-        "architect": "버나드 해리슨 (컨셉), 다양한 야생동물 전문가"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:35.340Z",
-    "updatedAt": "2026-02-22T18:33:27.622Z"
-  },
-  {
-    "id": "kawasan-canyoneering",
-    "cityId": "cebu",
-    "name": "Canyoneering Adventure at Kawasan Falls",
-    "lat": 9.8167,
-    "lng": 123.3667,
-    "radius": 70,
-    "narration": "자, 눈을 감고 상상해보세요! 지금 여러분은 세부의 심장, 카와산 폭포 앞에 서 있습니다. 귓가에는 시원하게 쏟아지는 폭포 소리가 웅장하게 울리고, 코 끝에는 짙푸른 녹음의 싱그러운 향기가 가득하죠. 발 아래는 미끄럽지만 단단한 바위 틈새로 흐르는 차가운 물결이 느껴집니다. 자, 심호흡 한 번 크게 하시고, 이제 짜릿한 캐녀닝 어드벤처를 시작해볼까요? 첫 번째 점프! 망설이지 마세요! 용기를 내어 에메랄드빛 물 속으로 뛰어드는 순간, 온몸을 휘감는 시원함에 짜릿한 전율이 느껴질 거예요. 물살을 가르며 좁은 협곡을 헤엄쳐 나가는 동안, 마치 영화 속 주인공이 된 듯한 기분이 들 겁니다. 아슬아슬한 절벽을 따라 로프에 의지해 하강하는 순간은, 심장이 멎을 듯 스릴 넘치죠. 하지만 걱정 마세요! 숙련된 가이드가 여러분의 안전을 책임져 줄 테니까요. 폭포 아래 웅덩이에서 즐기는 천연 마사지는 피로를 싹 잊게 해줄 거예요. 카와산 폭포의 숨겨진 아름다움을 탐험하며, 평생 잊지 못할 추억을 만들어 보세요! 상상 그 이상의 모험이 여러분을 기다리고 있답니다!",
-    "description": "Thrilling canyoneering experience at Kawasan Falls",
-    "category": "Activity",
-    "detailedDescription": "카와산 폭포는 세부 남서부에 위치한 칸데하이 마을의 아름다운 멀티 레이어 폭포입니다. 에메랄드 빛깔의 물과 울창한 열대 우림으로 둘러싸여 있어, 그림 같은 풍경을 자랑하죠. 이곳에서는 캐녀닝이라는 특별한 액티비티를 즐길 수 있는데요. 캐녀닝은 협곡을 따라 하이킹, 수영, 점프, 암벽 하강 등 다양한 방법으로 탐험하는 익스트림 스포츠입니다. 카와산 폭포 캐녀닝은 초보자부터 숙련자까지 모두 즐길 수 있도록 다양한 코스가 마련되어 있어요. 특히 폭포에서 뛰어내리는 점프는 카와산 캐녀닝의 하이라이트라고 할 수 있죠. 현지인들은 예로부터 카와산 폭포를 신성한 장소로 여겨왔다고 해요. 폭포 아래 웅덩이에서 수영을 하면 행운이 찾아온다는 이야기도 전해진답니다. 꿀팁 하나! 카와산 폭포 근처에는 맛있는 현지 음식을 맛볼 수 있는 레스토랑들이 많으니, 캐녀닝 후에는 꼭 필리핀 전통 요리를 즐겨보세요! 아, 그리고 평일 오전에 방문하면 비교적 한적하게 캐녀닝을 즐길 수 있다는 사실도 잊지 마세요!",
-    "photos": [
-      "https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800",
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
-      "https://images.unsplash.com/photo-1484291470158-b8f8d608850d?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Canyoneering Adventure at Kawasan Falls",
-        "narration": "Embark on an adrenaline-pumping canyoneering adventure through Kawasan Falls. Jump off cliffs, swim through canyons, and rappel down waterfalls.",
-        "description": "Thrilling canyoneering experience at Kawasan Falls"
-      },
-      "it": {
-        "name": "Avventura Canyoning alle Cascate Kawasan",
-        "narration": "Inizia un'avventura di canyoning piena di adrenalina attraverso le Cascate Kawasan. Salta dalle scogliere, nuota attraverso i canyon e scendi in corda doppia dalle cascate.",
-        "description": "Esperienza emozionante di canyoning alle Cascate Kawasan",
-        "detailedDescription": "L'avventura di canyoning a Kawasan è una delle attività all'aperto più esaltanti di Cebu. Questa avventura di un'intera giornata ti porta attraverso canyon spettacolari scolpiti da acque turchesi cristalline nel corso di milioni di anni. Il percorso include salti da scogliere di varie altezze (opzionale - puoi sempre aggirare a piedi), nuotate attraverso gole strette, arrampicate su rocce e discese in corda doppia lungo cascate scroscianti. Il culmine sono le spettacolari Cascate Kawasan con le loro cascate a più livelli e piscine blu vibranti. Tutta l'attrezzatura necessaria inclusi caschi, giubbotti di salvataggio e corde è fornita. Guide esperte garantiscono la sicurezza mentre ti incoraggiano a superare i tuoi limiti. Non è richiesta esperienza precedente, ma sono raccomandate buone capacità di nuoto e forma fisica."
-      },
-      "ko": {
-        "name": "카와산 폭포 캐니어링 어드벤처",
-        "narration": "카와산 폭포를 통과하는 아드레날린이 솟구치는 캐니어링 모험을 시작하세요. 절벽에서 뛰어내리고, 협곡을 헤엄치고, 폭포를 따라 하강하세요.",
-        "description": "카와산 폭포에서의 스릴 넘치는 캐니어링 경험",
-        "detailedDescription": "카와산 캐니어링 모험은 세부에서 가장 짜릿한 야외 활동 중 하나입니다. 이 하루 종일 모험은 수백만 년에 걸쳐 수정처럼 맑은 청록색 물이 조각한 멋진 협곡을 통과합니다. 여정에는 다양한 높이에서의 절벽 점프(선택 사항 - 언제든지 걸어서 우회 가능), 좁은 협곡을 헤엄치기, 바위를 오르기, 쏟아지는 폭포를 따라 하강하기가 포함됩니다. 하이라이트는 멋진 다단계 폭포와 생생한 푸른 웅덩이가 있는 장관인 카와산 폭포입니다. 헬멧, 구명 조끼, 로프를 포함한 모든 필요한 장비가 제공됩니다. 전문 가이드가 안전을 보장하면서 한계를 뛰어넘도록 격려합니다. 사전 경험은 필요하지 않지만 좋은 수영 능력과 체력이 권장됩니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:38.357Z",
-    "updatedAt": "2026-02-22T18:10:59.741Z"
-  },
-  {
-    "id": "singapore_national_kitchen_by_violet_oon",
-    "cityId": "singapore",
-    "name": "National Kitchen by Violet Oon",
-    "lat": 1.2965,
-    "lng": 103.8519,
-    "radius": 70,
-    "narration": "자, 여러분, 지금 우리는 싱가포르 미식의 심장부, 국립미술관 안에 자리한 '내셔널 키친 바이 바이올렛 온'에 들어서고 있습니다. 문을 여는 순간, 따뜻하고 이국적인 향신료의 아로마가 코끝을 간지럽히며, 은은한 조명 아래 펼쳐진 우아한 공간이 우리를 감쌉니다. 이곳의 모든 디테일은 싱가포르의 독특한 문화, 특히 말레이, 중국, 인도네시아 문화가 융합된 페라나칸의 아름다움을 이야기하고 있습니다. 저기 테이블에 놓인 화려한 바틱 무늬의 식기들과 섬세하게 조각된 목재 가구들을 보세요. 마치 페라나칸 대저택의 만찬에 초대된 듯한 기분입니다. '페라나칸 요리의 대모'로 불리는 바이올렛 온 여사의 철학이 담긴 요리들은 단순한 음식을 넘어선 예술 작품입니다. 혀끝에서 느껴지는 '아야무 부아 켈루악'의 복합적인 맛, 고소하면서도 깊은 풍미의 '뇽냐 락사'는 수백 년 역사의 레시피와 스토리를 담고 있습니다. 이곳에서는 단순히 배를 채우는 것이 아니라, 입안 가득 퍼지는 맛의 향연을 통해 싱가포르의 역사와 페라나칸 공동체의 삶을 오감으로 경험하게 됩니다. 각 요리 한 조각마다, 수세대에 걸쳐 전해져 내려온 가족의 비밀과 사랑, 그리고 문화적 자부심이 깃들어 있다는 것을 느끼실 수 있을 겁니다.",
-    "description": "싱가포르의 문화유산을 맛으로 승화시킨 페라나칸 미식의 정수.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 주목하세요! 여러분을 싱가포르의 숨겨진 보석인 \"National Kitchen by Violet Oon\"의 매혹적인 세계로 안내하려 합니다. 준비되셨나요? 자, 그럼 시작하죠! 문을 열고 안으로 들어서면 먼저 눈앞에 펼쳐지는 황홀한 광경에 숨이 막힐 것입니다. 우아한 크리스탈 샹들리에가 천장을 장식하고, 화려한 타일 무늬가 발밑에서 반짝이며 인사를 건넵니다. 이곳의 부드러운 재즈 음악과 함께 퍼지는 향긋한 스파이스 향기는 사람들을 순식간에 페라나칸의 문화유산 한가운데로 인도합니다. 어서 와서 이 마법 같은 경험에 빠져보세요!\n\n이제 과거로의 여행을 떠나볼까요? 20세기 초, 싱가포르가 금융과 무역의 중심지로 급부상하던 시기, 페라나칸 문화는 그 정점에 도달했습니다. 이곳은 Violet Oon이라는 뛰어난 셰프가 싱가포르의 음악과 스토리를 담아 만든 레스토랑입니다. Violet Oon은 페라나칸 요리의 진수를 현대적 감각으로 재해석하여 고유의 매력을 보존하고자 했습니다. 이곳은 단순한 식당이 아닌, 페라나칸의 전통과 혁신이 교차하는 역사적 공간이 되었습니다. \n\n이제 한 발 더 나아가, 당시의 인물을 통해 그 시절의 생생한 이야기를 들어볼까요? Violet Oon의 할머니는 페라나칸 요리의 비밀을 손녀에게 전수한 장본인입니다. 그녀는 주방에서의 열정적인 노력을 통해 가족과 지역 사회에 사랑받고 인정받는 주부였습니다. 그 시대의 주방은 단순히 요리를 하는 곳이 아니라, 가족 간의 유대를 강화하고 이야기와 웃음이 넘치는 특별한 공간이었습니다. Violet Oon은 이러한 할머니의 가치와 유산을 이어받아 오늘날의 \"National Kitchen\"을 통해 그 전통의 맥을 이어가고 있습니다.\n\n이제, 여러분을 이곳의 건축적 경이로움으로 안내하겠습니다. \"National Kitchen\"의 건물은 단순한 식당 이상입니다. 페라나칸 스타일의 건축은 독특한 조각과 타일, 그리고 세부적인 목조 장식으로 가득 차 있습니다. 이러한 건축 요소들은 페라나칸 문화가 얼마나 정교하고 예술적인지를 잘 보여주는 좋은 예입니다. 이곳의 건축물은 단지 보는 것이 아니라, 그 자체로 하나의 이야기를 전합니다.\n\n하지만 여러분이 놓칠 수 있는 부분도 있습니다. 바로 이곳에 숨겨진 작은 상징들입니다. 예를 들어, 벽에 걸린 그림들은 단순한 장식이 아니라 페라나칸의 역사와 문화적 유산을 이야기합니다. 각 그림과 장식물에는 고유의 상징과 이야기가 담겨 있어, 이를 눈여겨보면 이 공간이 더욱 흥미롭게 다가올 것입니다.\n\n이제 현대의 이야기를 들어볼까요? 이곳은 시간이 흐르면서 잊혀질 뻔 했지만, Violet Oon의 노력을 통해 다시 한번 주목 받고 있습니다. 그녀는 이곳을 현대적으로 리모델링하면서도 전통의 미학을 잃지 않도록 신경 썼습니다. 덕분에 이곳은 전 세계 관광객들에게 인기를 끌게 되었고, 수많은 영화와 미디어에서 중요한 배경으로 사용되었습니다. 여러분이 여기에서 스마트폰을 들고 셀피를 찍는 모습은 그 자체로 현대적이며, 역사가 살아있는 순간입니다.\n\n마지막으로, \"National Kitchen\"이 인류 역사에서 갖는 의미를 생각해봅시다. 이곳은 단순한 음식점이 아닌, 문화와 전통이 어떻게 현대와 조화를 이루는지를 보여주는 장소입니다. 과거와 현재가 어우러져 새로운 역사를 만드는 이곳은, 우리가 우리의 뿌리를 소중히 여겨야 한다는 중요한 메시지를 전달합니다.\n\n이제 이곳을 떠나며 여러분에게 한 가지 부탁이 있습니다. 하나의 요리, 하나의 공간이 어떻게 사람을 변화시키고, 그들의 기억에 남을 수 있는지를 생각해 보세요. 여러분이 이곳을 떠날 때, 그 기억과 감동을 간직하며 다음 모험을 기대하게 될 것입니다. 여러분의 소중한 발걸음에 감사를 드리며, 다음에 또 만날 수 있기를 바랍니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "National Kitchen by Violet Oon",
-        "description": "싱가포르의 문화유산을 맛으로 승화시킨 페라나칸 미식의 정수.",
-        "narration": "자, 여러분, 지금 우리는 싱가포르 미식의 심장부, 국립미술관 안에 자리한 '내셔널 키친 바이 바이올렛 온'에 들어서고 있습니다. 문을 여는 순간, 따뜻하고 이국적인 향신료의 아로마가 코끝을 간지럽히며, 은은한 조명 아래 펼쳐진 우아한 공간이 우리를 감쌉니다. 이곳의 모든 디테일은 싱가포르의 독특한 문화, 특히 말레이, 중국, 인도네시아 문화가 융합된 페라나칸의 아름다움을 이야기하고 있습니다. 저기 테이블에 놓인 화려한 바틱 무늬의 식기들과 섬세하게 조각된 목재 가구들을 보세요. 마치 페라나칸 대저택의 만찬에 초대된 듯한 기분입니다. '페라나칸 요리의 대모'로 불리는 바이올렛 온 여사의 철학이 담긴 요리들은 단순한 음식을 넘어선 예술 작품입니다. 혀끝에서 느껴지는 '아야무 부아 켈루악'의 복합적인 맛, 고소하면서도 깊은 풍미의 '뇽냐 락사'는 수백 년 역사의 레시피와 스토리를 담고 있습니다. 이곳에서는 단순히 배를 채우는 것이 아니라, 입안 가득 퍼지는 맛의 향연을 통해 싱가포르의 역사와 페라나칸 공동체의 삶을 오감으로 경험하게 됩니다. 각 요리 한 조각마다, 수세대에 걸쳐 전해져 내려온 가족의 비밀과 사랑, 그리고 문화적 자부심이 깃들어 있다는 것을 느끼실 수 있을 겁니다.",
-        "detailedDescription": "싱가포르 국립미술관 내에 위치한 '내셔널 키친 바이 바이올렛 온'은 단순한 식당을 넘어 싱가포르의 풍부한 문화유산, 특히 페라나칸 요리의 정수를 경험할 수 있는 곳입니다. '페라나칸 요리의 대모'로 불리는 바이올렛 온 여사의 손길이 닿은 이곳은 수십 년간 이어져 온 가문의 레시피를 현대적인 감각으로 재해석하여 선보입니다. 웅장한 아치형 창문과 우아한 실내 장식은 식민지 시대의 매력과 페라나칸의 화려한 미학을 동시에 담고 있어, 미식 경험을 더욱 풍성하게 만듭니다. '아야무 부아 켈루악', '뇽냐 락사', '봉고르 나시 르막' 등 전통적인 페라나칸 요리들은 복합적인 향신료와 정성스러운 조리법으로 깊은 풍미를 자랑합니다. 각 요리에는 바이올렛 온 여사의 이야기와 페라나칸 공동체의 역사가 스며들어 있어, 식사를 통해 하나의 문화적 여정을 떠나는 듯한 느낌을 받을 수 있습니다. 진정한 싱가포르의 맛과 문화를 이해하고 싶다면 반드시 방문해야 할 곳입니다."
-      }
-    },
-    "openingHours": "매일 12:00 – 17:00 (점심/애프터눈티), 18:00 – 22:00 (저녁)",
-    "priceRange": "€€€",
-    "cuisine": null,
-    "reservationUrl": "https://www.violeton.com/reservations",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:51:19.221Z",
-    "updatedAt": "2026-02-22T18:06:06.797Z"
-  },
-  {
-    "id": "rome_item_81",
-    "cityId": "rome",
-    "name": "로마 프리미엄 Restaurant 추천 82",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "**웅장한 개막:**\n\n이탈리아의 심장, 로마에서 가장 프리미엄한 레스토랑으로 발걸음을 옮기며 여러분은 과연 어떤 경험을 기대하고 있을까요? 자, 문을 여는 그 순간, 온갖 감각이 폭발하는 느낌을 상상해보세요! 입구를 지나면, 고대 로마의 화려함과 현대의 세련미가 완벽히 어우러진 공간이 여러분을 맞이합니다. 벽에는 아름다운 모자이크와 조각들이 살아 숨 쉬듯 빛나고, 천장에서는 반짝이는 샹들리에가 로마의 밤하늘을 떠올리게 합니다. 그리고 그 향기! 부드럽게 퍼지는 트러플의 진한 향과 섬세한 올리브 오일의 아로마가 식욕을 자극하지 않고는 못 배기게 합니다. 모든 것이 조화롭게 어우러지며, 이곳에서의 식사는 단순한 음식 이상의 경험임을 알 수 있습니다.\n\n하지만, 들려오는 웅장한 소리 또한 여러분의 마음을 사로잡습니다. 주방에서 들려오는 요리사의 열정적인 칼질 소리, 고객들의 웃음소리와 와인의 잔잔한 적시는 소리가 배경음악처럼 울려 퍼집니다. 이곳은 단순한 레스토랑을 넘어, 과거와 현재가 만나는 무대입니다. 이제 여러분은 준비되었나요? 이곳 로마 프리미엄 레스토랑의 이야기를 시작합니다!\n\n**깊이 있는 역사 탐구:**\n\n이 레스토랑의 뿌리는 아득한 옛날로 거슬러 올라갑니다. 이 건물은 18세기 중반, 당시 로마를 휘몰아치던 정치적 격변기 속에서 지어졌습니다. 로마 제국의 유산을 이어받아, 도시의 부흥을 꿈꾸던 한 젊은 귀족이 이곳에 첫 삽을 뜨게 됩니다. 그의 이름은 루치우스 안토니우스였고, 그는 당시의 건축 전문가들과 협력하여 이 레스토랑의 기초를 마련했습니다. 그 시절, 로마는 문화와 정치를 아우르는 도시로서의 위상을 재정립하고 있었고, 이 레스토랑은 그런 변화의 중심에 서 있었습니다.\n\n루치우스 안토니우스는 단순히 음식을 제공하는 곳을 넘어서, 사람들의 만남과 담론의 장을 마련하고자 했습니다. 그가 가장 자랑스러워하던 밤은, 로마의 혁신가들과 예술가들이 모여 자유롭게 토론하던 순간이었습니다. 어느 한 날 밤, 그는 그의 레스토랑에서 새로운 정치 사상을 제안하는 모임을 주최했고, 그것이 로마의 정치판도를 뒤흔들었다는 전설이 전해집니다. 이곳은 단순히 배를 채우는 공간이 아니라, 역사를 만들어가는 사람들의 이야기가 흐르는 곳이었습니다.\n\n**건축의 경이로움:**\n\n이 레스토랑의 건축적 아름다움은 당시의 첨단 기술을 반영합니다. 주 건축 재료인 대리석은 이탈리아 북부에서 채석되어, 장인들의 손을 거쳐 정교하게 다듬어졌습니다. 벽돌 하나하나가 수작업으로 쌓아 올려졌고, 그 위에 화려한 프레스코와 금박 장식이 더해져 당시 귀족들의 취향을 한껏 담아냈습니다. 천장을 받치는 아치형 구조물은 고대 로마의 기술을 현대적으로 재해석한 결과물로, 그 튼튼함과 우아함이 방문객들의 감탄을 자아냅니다.\n\n그러나, 주의 깊게 보지 않으면 지나칠 수 있는 숨겨진 디테일이 이곳의 진가를 더욱 발현시킵니다. 예를 들어, 레스토랑의 일부 기둥에는 당시 로마의 신화를 상징하는 조각들이 새겨져 있습니다. 이는 건축가들이 이 공간을 단순한 식사 장소가 아닌, 문화적 유산으로 남기고자 했음을 보여주는 증거입니다. 또한, 벽면에 숨겨진 수수께끼 같은 상징들은 당시 비밀 결사단의 흔적일 수도 있다는 이야기가 전해져, 방문객들 사이에선 마치 보물찾기 같은 재미를 제공합니다.\n\n**현대의 서사:**\n\n이 건물은 시간이 흐르며 여러 번의 위기를 겪었지만, 놀라운 운명적 순간을 통해 현대에 다시금 주목받게 되었습니다. 20세기 중반, 로마의 고대 건축물들이 다시금 재조명되던 시기에 이 레스토랑도 복원 프로젝트에 포함되었고, 전 세계의 이목을 집중시키게 되었습니다. 전문가들의 세심한 손길 아래, 이곳은 과거의 영광을 되찾았으며, 오늘날의 모습으로 거듭나게 되었습니다.\n\n이 레스토랑은 이제 다수의 영화와 드라마에 등장하며, 세계적인 명성을 얻게 되었습니다. 영화 속 주인공들이 이곳에서 중요한 장면을 연출하며, 수많은 관광객들이 그 추억을 좇아 이곳을 찾게 되었습니다. 요즘 이곳을 방문하는 현대인들은 종종 재미난 행동을 보이기도 합니다. 예를 들어, 많은 이들이 영화 속 장면을 따라 하며 셀피를 찍거나, 레스토랑의 독특한 인테리어 앞에서 '로마 황제 포즈'를 취하기도 합니다. 이 모든 것이 이곳을 더욱 특별하게 만들어줍니다.\n\n**철학적 결론:**\n\n이 레스토랑은 단순한 식사 공간을 넘어, 인류의 역사와 문화를 담아내는 그릇과도 같습니다. 고대 로마의 영광부터 현대 문화의 융합까지, 이곳은 끊임없이 변화하며 발전해왔습니다. 그 속에서 사람들은 음식을 통한 교감을 나누고, 문화를 공유하며, 역사를 창조해왔습니다. 이곳에 담긴 수많은 인생 이야기들은 인간의 본성과 문화의 중요성을 일깨워 줍니다.\n\n마지막으로, 여러분이 이곳을 떠날 때쯤, 이곳의 향기와 감동이 영원히 기억 속에 남기를 바랍니다. 이 레스토랑은 단순히 로마에서의 또 다른 식사 경험이 아니라, 삶의 한 페이지가 될 것입니다. 다음에 다시 이곳을 방문할 때면, 새로운 이야기가 여러분을 기다리고 있을 것입니다. 감사합니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "로마 프리미엄 Restaurant 추천 82",
-        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "로마의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:07.062Z",
-    "updatedAt": "2026-02-22T18:05:58.111Z"
   },
   {
     "id": "barcelona_item_23",
@@ -3359,58 +1841,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-13T13:51:50.955Z",
     "updatedAt": "2026-02-22T18:06:06.922Z"
-  },
-  {
-    "id": "paris_restaurant_pink_mamma",
-    "cityId": "paris",
-    "name": "Pink Mamma",
-    "lat": 48.8814,
-    "lng": 2.3407,
-    "radius": 40,
-    "narration": "Indulge in Italian-French fusion at Pink Mamma, a trendy multi-floor restaurant in Pigalle.",
-    "description": "Trendy Italian-French fusion restaurant",
-    "category": "Restaurant",
-    "detailedDescription": "Pink Mamma is a vibrant, Instagram-worthy restaurant spread across four floors in Pigalle. The menu features Italian classics with a French twist, from pizzas to pasta to fresh seafood. The lush plant-filled interior and rooftop terrace create a unique dining atmosphere. The restaurant is part of the Big Mamma group known for quality Italian cuisine and lively ambiance.",
-    "photos": [
-      "https://images.unsplash.com/photo-1555244162-803834f70033?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Pink Mamma",
-        "narration": "Indulge in Italian-French fusion at Pink Mamma, a trendy multi-floor restaurant in Pigalle.",
-        "description": "Trendy Italian-French fusion restaurant"
-      },
-      "ko": {
-        "name": "핑크 맘마",
-        "narration": "피갈 지구의 트렌디한 다층 레스토랑 핑크 맘마에서 이탈리안-프렌치 퓨전을 즐기세요.",
-        "description": "트렌디한 이탈리안-프렌치 퓨전 레스토랑"
-      },
-      "it": {
-        "name": "Pink Mamma",
-        "narration": "Concediti la fusione italo-francese da Pink Mamma, un ristorante trendy su più piani a Pigalle.",
-        "description": "Ristorante fusion italo-francese trendy"
-      }
-    },
-    "openingHours": "Daily: 12:00-14:30, 19:00-midnight",
-    "priceRange": "€€ (€30-50 per person)",
-    "cuisine": "Italian-French",
-    "reservationUrl": "https://www.thefork.com/restaurant/pink-mamma-r45205",
-    "phoneNumber": "+33 1 42 21 20 00",
-    "menuHighlights": [
-      "Burrata",
-      "Truffle Pizza",
-      "Fresh Pasta",
-      "Tiramisu"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:41.148Z",
-    "updatedAt": "2026-02-22T18:13:05.644Z"
   },
   {
     "id": "busan_item_6",
@@ -3824,248 +2254,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:11:29.850Z"
   },
   {
-    "id": "싱가포르-demo-2",
-    "cityId": "singapore",
-    "name": "싱가포르의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "자, 여러분, 상상해보세요! 지금 여러분은 싱가포르의 숨겨진 맛집 골목 초입에 서 있습니다. 코를 간지럽히는 달콤 짭짤한 칠리크랩 냄새, 왁자지껄한 현지인들의 웃음소리, 기름 튀는 소리까지, 오감이 짜릿하게 깨어나는 순간이죠. 지금 여러분의 발 아래에는 수십 년의 역사가 고스란히 담긴 낡은 타일 바닥이 깔려 있어요. 이 골목은 마치 살아있는 미로 같아요. 좁다란 길을 따라 늘어선 낡은 건물들은 세월의 흔적을 고스란히 간직하고 있지만, 그 안에서 풍겨져 나오는 음식 냄새는 마치 마법처럼 여러분을 이끌 겁니다. 잠시 눈을 감고, 깊게 숨을 들이마셔 보세요. 볶음 국수 '호키엔 미'의 고소한 향, 사테 구이의 매콤한 향, 그리고 열대 과일의 달콤한 향이 뒤섞여 묘한 조화를 이루는 것을 느낄 수 있을 거예요. 이 골목에서는 고급 레스토랑에서 느낄 수 없는 진정한 싱가포르의 맛을 경험할 수 있어요. 노점상 할머니의 손맛이 느껴지는 칠리크랩, 대대로 내려오는 비법 레시피로 만들어진 호키엔 미, 그리고 싱싱한 해산물을 숯불에 구워 만든 사테까지… 모든 음식이 여러분의 미각을 자극할 준비가 되어 있답니다. 자, 이제 망설이지 말고 이 맛있는 미로 속으로 함께 빠져볼까요? 어떤 놀라운 맛이 여러분을 기다리고 있을지, 정말 기대되지 않나요? 이 골목의 숨겨진 이야기를 찾아, 미식의 향연을 즐겨보세요!",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "싱가포르의 맛집 골목은 단순히 음식을 파는 곳이 아닌, 싱가포르 사람들의 삶과 문화를 엿볼 수 있는 특별한 공간입니다. 이 골목은 대개 차이나타운, 리틀 인디아, 캄퐁 글람 등 특정 민족의 역사가 깊이 배어있는 지역에 자리 잡고 있으며, 각 지역의 특색을 반영한 다양한 음식을 맛볼 수 있다는 것이 특징입니다. 현지인들은 물론 관광객들에게도 인기가 높은 이 골목들은 싱가포르의 다문화적인 정체성을 고스란히 보여주는 살아있는 박물관과도 같습니다. 예를 들어, 차이나타운의 맛집 골목에서는 딤섬, 북경 오리, 탕수육 등 다양한 중국 음식을 맛볼 수 있으며, 리틀 인디아에서는 커리, 탄두리 치킨, 로티 프라타 등 인도 특유의 향신료가 가득한 요리를 즐길 수 있습니다. 캄퐁 글람에서는 나시 르막, 미고랭, 사테 등 말레이시아와 인도네시아의 영향을 받은 음식을 맛볼 수 있죠. 숨겨진 꿀팁을 하나 알려드릴까요? 맛집 골목을 제대로 즐기려면 현지인들이 추천하는 노점상을 찾아가 보는 것이 좋습니다. 오랜 시간 동안 한 자리에서 음식을 만들어온 노점상들은 자신만의 비법 레시피를 가지고 있으며, 저렴한 가격으로 최고의 맛을 선사합니다. 또한, 저녁 시간대에 방문하면 더욱 활기찬 분위기를 느낄 수 있습니다. 골목 곳곳에서 펼쳐지는 길거리 공연이나 흥겨운 음악 소리를 들으며 맛있는 음식을 즐기는 것은 잊지 못할 추억이 될 것입니다. 마지막으로, 위생에 민감한 분들은 물티슈나 손 소독제를 챙겨가는 것을 추천합니다. 좁은 골목에서 많은 사람들이 오가는 만큼, 청결에 신경 쓰는 것이 좋겠죠?",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "싱가포르의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:57:47.647Z",
-    "updatedAt": "2026-02-22T18:14:54.086Z"
-  },
-  {
-    "id": "alaska_wildlife_center",
-    "cityId": "anchorage",
-    "name": "Alaska Wildlife Conservation Center",
-    "lat": 60.821359,
-    "lng": -148.978592,
-    "radius": 70,
-    "narration": "알래스카 야생동물 보호 센터에 오신 걸 환영해요! 자, 잠시 눈을 감고 상상해보세요. 여러분은 지금 웅장한 산맥과 푸른 숲이 어우러진 알래스카의 심장부에 서 있습니다. 코를 간지럽히는 상쾌한 공기, 저 멀리 들려오는 독수리의 날갯짓 소리, 그리고 발 아래 느껴지는 흙의 촉감… 마치 영화 속 한 장면 같지 않나요? 이곳은 단순한 동물원이 아니에요. 알래스카의 토종 야생동물들을 보호하고, 교육하며, 최상의 보살핌을 제공하는 특별한 안식처랍니다. \n\n길을 따라 걸으며 곰들의 우람한 몸집에 감탄하고, 순록의 우아한 걸음걸이에 매료되어 보세요. 늑대들의 날카로운 눈빛에서는 야생의 본능이 느껴지고, 수달들의 장난기 넘치는 모습은 웃음을 자아낼 거예요. 마치 알래스카의 살아있는 역사를 눈앞에서 보는 듯한 경험을 하게 될 겁니다. \n\n지금 여러분이 보고 있는 이 동물들은 한때 멸종 위기에 처했거나, 부상으로 인해 야생으로 돌아갈 수 없었던 아이들이에요. 하지만 이곳에서 헌신적인 직원들의 사랑과 정성 덕분에 다시 건강을 되찾고, 새로운 삶을 살아가고 있답니다. 알래스카 야생동물 보호 센터는 단순한 관광지가 아닌, 생명 존중과 자연 보호의 가치를 배우고 실천하는 의미 있는 공간이에요. 자, 이제 저와 함께 알래스카 야생동물들의 이야기를 들어볼까요? 그들의 눈을 통해 알래스카의 아름다움과 생명의 소중함을 느껴보시길 바랍니다.",
-    "description": "A 200-acre wildlife sanctuary protecting Alaska's native species",
-    "category": "Wildlife Sanctuary",
-    "detailedDescription": "알래스카 야생동물 보호 센터(AWCC)는 앵커리지에서 남쪽으로 약 50마일 떨어진, 알래스카의 아름다운 추가치 산맥에 위치해 있습니다. 1993년에 설립된 이곳은 부상당하거나 고아가 된 야생동물들을 구조하여 치료하고, 가능한 경우 야생으로 돌려보내는 것을 목표로 합니다. 만약 야생 복귀가 어렵다면, AWCC는 이 동물들에게 영구적인 보금자리를 제공하며, 이들을 통해 방문객들에게 알래스카의 야생 생태계와 보존의 중요성에 대한 교육을 진행합니다. \n\n센터에는 곰(불곰, 흑곰), 순록, 무스, 늑대, 수달, 비버, 여우, 산양, 사향소 등 다양한 알래스카 토종 동물들이 살고 있습니다. 넓은 공간에서 자유롭게 생활하는 동물들의 모습은 감동적이며, 먹이 주기, 교육 프로그램, 특별 투어 등 다양한 활동을 통해 방문객들은 더욱 깊이 있는 경험을 할 수 있습니다. \n\n**현지인 꿀팁**: 겨울에 방문하면 설경 속에서 동물들을 만나는 특별한 경험을 할 수 있으며, 사진작가들에게는 최고의 촬영 기회가 됩니다. 또한, 센터 내 기념품 가게에서는 알래스카 야생동물을 테마로 한 다양한 상품을 구매할 수 있으며, 수익금은 동물 보호 활동에 사용됩니다. **숨겨진 비화**: AWCC는 여러 다큐멘터리 영화 제작에도 참여하여 알래스카 야생동물의 아름다움과 중요성을 전 세계에 알리고 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800",
-      "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800",
-      "https://images.unsplash.com/photo-1496714534174-7c9c5e7e8cd7?w=800"
-    ],
-    "historicalInfo": "The Alaska Wildlife Conservation Center was founded in 1993 by Mike Miller as a sanctuary for orphaned and injured wildlife. The center has since become a leader in wildlife conservation, successfully reintroducing wood bison to Alaska in 2015 after their local extinction.",
-    "yearBuilt": "1993",
-    "architect": "Mike Miller (Founder)",
-    "translations": {
-      "en": {
-        "name": "Alaska Wildlife Conservation Center",
-        "narration": "Visit the Alaska Wildlife Conservation Center, a sanctuary dedicated to preserving Alaska's native wildlife through conservation, education, and quality animal care.",
-        "description": "A 200-acre wildlife sanctuary protecting Alaska's native species",
-        "detailedDescription": "The Alaska Wildlife Conservation Center is a 200-acre non-profit sanctuary located in Portage Valley, dedicated to the conservation of Alaska's wildlife through education, research, and quality animal care. Founded in 1993, the center provides a safe haven for orphaned, injured, and ill animals that cannot be released back into the wild. Visitors can observe majestic Alaska brown bears, massive wood bison, elusive wolves, powerful moose, and many other native Alaskan species in spacious, naturalistic habitats. The center plays a crucial role in conservation efforts, including the successful reintroduction of wood bison to Alaska after their extinction in the state. The self-guided 1.5-mile loop allows visitors to experience wildlife viewing by foot, car, or bicycle, with educational signs providing fascinating insights into each species' behavior, habitat, and conservation status. The center also participates in breeding programs for endangered species and provides educational programs for thousands of school children and visitors annually.",
-        "historicalInfo": "The Alaska Wildlife Conservation Center was founded in 1993 by Mike Miller as a sanctuary for orphaned and injured wildlife. The center has since become a leader in wildlife conservation, successfully reintroducing wood bison to Alaska in 2015 after their local extinction.",
-        "yearBuilt": "1993",
-        "architect": "Mike Miller (Founder)"
-      },
-      "ko": {
-        "name": "알래스카 야생동물 보호센터",
-        "narration": "보존, 교육 및 양질의 동물 관리를 통해 알래스카의 토착 야생동물을 보호하는 데 전념하는 보호구역인 알래스카 야생동물 보호센터를 방문하세요.",
-        "description": "알래스카 토착 종을 보호하는 200에이커 야생동물 보호구역",
-        "detailedDescription": "알래스카 야생동물 보호센터는 포티지 밸리에 위치한 200에이커의 비영리 보호구역으로, 교육, 연구 및 양질의 동물 관리를 통해 알래스카 야생동물 보존에 전념하고 있습니다. 1993년에 설립된 이 센터는 야생으로 돌아갈 수 없는 고아, 부상 및 병든 동물들을 위한 안전한 피난처를 제공합니다. 방문객들은 웅장한 알래스카 갈색곰, 거대한 우드 들소, 포착하기 어려운 늑대, 강력한 무스 및 기타 많은 알래스카 토착 종들을 넓고 자연적인 서식지에서 관찰할 수 있습니다. 센터는 주에서 멸종된 후 알래스카에 우드 들소를 성공적으로 재도입하는 것을 포함하여 보존 노력에서 중요한 역할을 합니다. 셀프 가이드 1.5마일 루프를 통해 방문객들은 도보, 자동차 또는 자전거로 야생동물을 관찰할 수 있으며, 교육 표지판은 각 종의 행동, 서식지 및 보존 상태에 대한 매혹적인 통찰력을 제공합니다. 센터는 또한 멸종 위기종 번식 프로그램에 참여하고 매년 수천 명의 학생과 방문객을 위한 교육 프로그램을 제공합니다.",
-        "historicalInfo": "알래스카 야생동물 보호센터는 1993년 마이크 밀러에 의해 고아 및 부상당한 야생동물을 위한 보호구역으로 설립되었습니다. 센터는 이후 야생동물 보존의 선두주자가 되어 2015년 지역 멸종 후 알래스카에 우드 들소를 성공적으로 재도입했습니다.",
-        "yearBuilt": "1993년",
-        "architect": "마이크 밀러 (설립자)"
-      },
-      "ja": {
-        "name": "アラスカ野生動物保護センター",
-        "narration": "保護、教育、質の高い動物ケアを通じてアラスカの在来野生動物の保護に専念する保護区、アラスカ野生動物保護センターを訪れてください。",
-        "description": "アラスカの在来種を保護する200エーカーの野生動物保護区",
-        "detailedDescription": "アラスカ野生動物保護センターは、ポーテージバレーに位置する200エーカーの非営利保護区で、教育、研究、質の高い動物ケアを通じてアラスカの野生動物の保護に専念しています。1993年に設立されたこのセンターは、野生に戻すことができない孤児、負傷、病気の動物のための安全な避難所を提供しています。訪問者は、雄大なアラスカヒグマ、巨大なウッドバイソン、とらえどころのないオオカミ、強力なヘラジカ、その他多くのアラスカ在来種を広々とした自然の生息地で観察できます。センターは、州で絶滅した後のアラスカへのウッドバイソンの成功した再導入を含む保護活動において重要な役割を果たしています。セルフガイド式の1.5マイルのループにより、訪問者は徒歩、車、または自転車で野生動物の観察を体験でき、教育標識は各種の行動、生息地、保護状況についての魅力的な洞察を提供します。センターはまた、絶滅危惧種の繁殖プログラムに参加し、毎年何千人もの学童や訪問者のための教育プログラムを提供しています。",
-        "historicalInfo": "アラスカ野生動物保護センターは1993年にマイク・ミラーによって孤児や負傷した野生動物のための保護区として設立されました。センターはその後、野生動物保護のリーダーとなり、2015年に地域絶滅後のアラスカへのウッドバイソンの再導入に成功しました。",
-        "yearBuilt": "1993年",
-        "architect": "マイク・ミラー (設立者)"
-      },
-      "zh": {
-        "name": "阿拉斯加野生动物保护中心",
-        "narration": "参观阿拉斯加野生动物保护中心,这是一个致力于通过保护、教育和优质动物护理来保护阿拉斯加本土野生动物的保护区。",
-        "description": "保护阿拉斯加本土物种的200英亩野生动物保护区",
-        "detailedDescription": "阿拉斯加野生动物保护中心是位于波蒂奇谷的一个200英亩的非营利保护区,致力于通过教育、研究和优质动物护理来保护阿拉斯加的野生动物。该中心成立于1993年,为无法放归野外的孤儿、受伤和生病的动物提供安全避风港。游客可以在宽敞的自然栖息地观察雄伟的阿拉斯加棕熊、巨大的森林野牛、难以捉摸的狼、强大的驼鹿以及许多其他阿拉斯加本土物种。该中心在保护工作中发挥着关键作用,包括在该州灭绝后成功将森林野牛重新引入阿拉斯加。自助式1.5英里环路允许游客步行、开车或骑自行车观察野生动物,教育标志提供关于每个物种行为、栖息地和保护状况的迷人见解。该中心还参与濒危物种繁殖计划,每年为数千名学生和游客提供教育项目。",
-        "historicalInfo": "阿拉斯加野生动物保护中心由迈克·米勒于1993年创立,作为孤儿和受伤野生动物的保护区。该中心后来成为野生动物保护的领导者,在当地灭绝后于2015年成功将森林野牛重新引入阿拉斯加。",
-        "yearBuilt": "1993年",
-        "architect": "迈克·米勒 (创始人)"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:26.737Z",
-    "updatedAt": "2026-02-22T18:11:50.155Z"
-  },
-  {
-    "id": "jeju_item_17",
-    "cityId": "jeju",
-    "name": "제주특별자치도 프리미엄 Restaurant 추천 18",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 제주의 프리미엄 레스토랑으로 안내하는 이 특별한 여정에 오신 것을 환영합니다! 상상해보세요, 지금 여러분은 아름다운 제주도에 서 있습니다. 하늘은 푸르르고 맑고, 바람은 상쾌하게 여러분의 얼굴을 스치고 있죠. 그리고 그 속에서, 바로 이곳은 여러분이 절대로 놓쳐서는 안 될 명소중 하나인 레스토랑입니다. 한번 상상해보세요! 섬세하게 준비된 음식의 향이 코끝을 간지럽히며, 바삭바삭한 소리가 귀를 간질입니다. 이곳의 인테리어는 현대적이면서도 제주 고유의 전통을 담고 있어, 마치 시간과 공간을 초월한 여행을 하는 듯한 느낌을 줍니다.\n\n이제 이 레스토랑의 역사 깊은 비밀로 들어가 볼까요? 처음 이곳이 문을 연 것은 바로 20세기 중반, 제주도의 경제가 급격히 성장하던 시기였습니다. 당시 이곳은 단순한 식당이 아닌, 문화와 역사의 융합 장소로 지어졌습니다. 이곳의 설립자인 김영준씨는, 제주도의 자연을 사랑하고 그 아름다움을 음식과 공간으로 표현하고자 했습니다. 그는 제주도의 다양한 문화를 이해하고, 이를 음식에 녹여내어 방문객에게 전달하는 것을 목표로 했습니다.\n\n이제 그 시대로 돌아가, 김영준씨의 이야기를 들려드릴게요. 김영준씨는 제주 출신의 요리사로, 프랑스의 유명 요리학교를 졸업하고 귀국했습니다. 그는 고향에 돌아와, 제주만의 독특한 맛을 세계에 알리고 싶었습니다. 그의 열정은 단순한 음식을 넘어, 제주도의 역사적 및 문화적 가치를 담고자 하는 열망으로 이어졌습니다. 그의 요리 철학은 \"음식은 역사를 이야기하는 수단\"이라는 것이었습니다. 그는 제주도의 전통 재료와 프랑스 요리 기법을 결합하여, 새로운 형태의 요리를 탄생시켰습니다.\n\n이제 이곳의 건축적 경이로움에 대해 이야기해봅시다. 이 레스토랑은 제주도의 자연적 특성을 최대한 살리기 위해 석재와 목재를 주재료로 사용했습니다. 건물의 외벽은 현무암으로 만들어졌으며, 이는 제주의 화산지형을 떠올리게 합니다. 내부는 따뜻한 원목으로 꾸며져 있어, 방문객에게 아늑함을 제공합니다. 이곳의 설계는 단순히 아름다움을 넘어, 자연과 하나되는 것을 목표로 했습니다.\n\n하지만 여기서 끝이 아닙니다! 이제 여러분께 숨겨진 디테일을 알려드릴 차례입니다. 방문객들이 자주 놓치는 비밀이 하나 있는데요, 바로 벽면에 새겨진 제주도의 고유 문양입니다. 이 문양들은 각기 다른 이야기를 담고 있으며, 역사 속 인물과 사건들을 상징합니다. 예를 들어, 산호 모양의 패턴은 제주도의 해양 문화를 상징하고, 바람개비 모양은 제주의 강한 바람을 의미합니다.\n\n현대로 넘어와, 이 레스토랑은 수많은 변화를 거쳤습니다. 2000년대 들어서, 이곳은 한 차례 대대적인 리모델링을 통해 현대적인 시설과 서비스를 갖추게 되었습니다. 그러나 그 본질은 변치 않았죠. 이곳은 다시 한 번 주목받으며, 현재는 제주의 대표적인 레스토랑 중 하나로 자리잡았습니다. 영화나 드라마에서도 자주 등장하며, 많은 사람들이 이곳을 배경으로 사진을 찍곤 합니다. 웃긴 이야기가 하나 있는데요, 어떤 관광객은 이곳에서 촬영된 드라마의 한 장면을 재현하기 위해, 몇 시간 동안 대사를 외우며 친구들과 촬영을 했다고 합니다.\n\n이 레스토랑은 단순한 식당 그 이상으로, 인류 역사에 중요한 의미를 지닙니다. 음식은 사람을 하나로 묶어주는 힘이 있습니다. 이곳에서 경험할 수 있는 식사는 단순한 배부름을 넘어선, 문화와 역사의 체험입니다. 제주의 풍부한 역사와 문화를 맛볼 수 있는 이곳은, 그 자체로 제주도의 정수를 담고 있습니다.\n\n마지막으로, 여러분과의 이 특별한 여행을 마무리하며 감동의 순간을 나누고자 합니다. 이 레스토랑은 제주도의 영혼과도 같은 곳입니다. 여러분이 이곳을 떠날 때, 그 여운은 여러분의 마음 깊숙이 남아 있을 것입니다. 이곳에서의 경험은 단순한 식사가 아닌, 하나의 이야기로 남을 것입니다. 여러분이 제주를 떠날 때, 이곳에서의 기억이 따뜻한 위로와 영감이 되기를 바랍니다. 다시 만날 때까지, 안녕히 가세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "제주특별자치도 프리미엄 Restaurant 추천 18",
-        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "제주특별자치도의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:02.669Z",
-    "updatedAt": "2026-02-22T18:05:58.864Z"
-  },
-  {
-    "id": "piazza-navona-crafts-rome",
-    "cityId": "rome",
-    "name": "Piazza Navona Craft Gallery",
-    "lat": 41.8992,
-    "lng": 12.4731,
-    "radius": 30,
-    "narration": "자, 상상해보세요. 지금 여러분은 로마의 심장, 나보나 광장에 서 있습니다. 눈부신 바로크 건축물들이 햇살 아래 반짝이고, 베르니니의 '4대 강 분수'는 웅장한 물줄기를 뿜어내죠. 광장의 활기찬 에너지가 여러분을 감싸는 가운데, 고개를 돌려 한 공방 갤러리를 발견합니다. '피아자 나보나 크래프트 갤러리'… 그 이름만으로도 예술적인 향기가 느껴지지 않나요? 문을 열고 들어서는 순간, 시간 여행을 떠나는 듯한 기분이 들 거예요. 이탈리아 대리석 조각의 매끈한 촉감, 무라노 글라스의 영롱한 빛깔, 르네상스 시대 미술 작품의 섬세한 붓터치가 여러분의 오감을 자극합니다. 마치 르네상스 시대의 예술가들이 여러분에게 말을 걸어오는 듯하죠. 이곳에서는 단순한 기념품이 아닌, 이탈리아 장인 정신의 정수를 담은 예술 작품을 만날 수 있습니다. 작품 하나하나에 담긴 역사와 스토리를 느껴보세요. 광장의 웅성거림은 잠시 잊고, 이 공간 안에서 예술과 함께 숨 쉬는 특별한 경험을 만끽해보세요. 어쩌면 여러분은 이곳에서 영원히 간직할 인생의 예술 작품을 발견하게 될지도 모릅니다.",
-    "description": "Italian marble art, Murano glass masterpieces, and Renaissance reproductions",
-    "category": "Gift Shop",
-    "detailedDescription": "피아자 나보나 크래프트 갤러리는 단순한 기념품 가게가 아닙니다. 이곳은 이탈리아 예술의 정수를 경험할 수 있는 특별한 공간이죠. 갤러리 내부는 이탈리아 장인들의 손길로 탄생한 다양한 작품들로 가득합니다. 이탈리아 대리석 조각은 그 정교함과 아름다움으로 시선을 사로잡고, 베네치아 무라노 섬에서 온 글라스 제품들은 빛을 받아 영롱하게 빛나며 환상적인 분위기를 연출합니다. 또한, 르네상스 시대의 명작들을 담은 아트 프린트는 예술 애호가들의 마음을 설레게 하죠. 흥미로운 점은, 이 갤러리가 계절마다 특별한 문화 행사를 개최한다는 것입니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 갤러리 주인에게 작품에 얽힌 숨겨진 이야기를 물어보세요. 그는 아마 여러분이 미처 알지 못했던 흥미로운 비하인드 스토리를 들려줄 것입니다. 모든 결제 수단을 허용한다는 점도 여행자들에게는 큰 장점이죠. 피아자 나보나를 방문하신다면, 잠시 시간을 내어 이 갤러리에 들러 이탈리아 예술의 아름다움에 흠뻑 빠져보시길 바랍니다. 평범한 기념품 이상의 가치를 지닌 예술 작품을 발견하는 기회를 놓치지 마세요!",
-    "photos": [
-      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800",
-      "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800",
-      "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800",
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800",
-      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800",
-      "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Piazza Navona Craft Gallery",
-        "narration": "Premium craft gallery at Piazza Navona featuring Italian marble sculptures, Murano glass, and renaissance art prints. All payment methods accepted. Year-round cultural promotions.",
-        "description": "Italian marble art, Murano glass masterpieces, and Renaissance reproductions",
-        "detailedDescription": "Piazza Navona Craft Gallery showcases exceptional Italian artistry in the heart of historic Rome. Our gallery features authentic Italian marble sculptures and carvings, genuine Murano glass art and jewelry, museum-quality Renaissance art reproductions, handcrafted mosaics and decorative objects, Italian master artist prints and lithographs, and custom commissions available. Located on the beautiful Piazza Navona, we offer worldwide shipping and white-glove delivery service. Art consultation services available. Member of the Italian Art Dealers Association."
-      },
-      "ko": {
-        "name": "피아차 나보나 공예 갤러리",
-        "narration": "피아차 나보나의 프리미엄 공예 갤러리로 이탈리아 대리석 조각품, 무라노 유리, 르네상스 미술 인쇄물을 선보입니다. 모든 결제 수단 가능. 연중 문화 프로모션.",
-        "description": "이탈리아 대리석 예술, 무라노 유리 걸작, 르네상스 복제품",
-        "detailedDescription": "피아차 나보나 공예 갤러리는 역사적인 로마 중심부에서 뛰어난 이탈리아 예술성을 선보입니다. 갤러리에는 정품 이탈리아 대리석 조각과 조각품, 정품 무라노 유리 예술과 보석류, 박물관 수준의 르네상스 예술 복제품, 수공예 모자이크와 장식품, 이탈리아 마스터 아티스트 판화와 석판화, 맞춤 제작이 가능합니다. 아름다운 피아차 나보나에 위치하며 전 세계 배송과 화이트 글러브 배달 서비스를 제공합니다. 미술 상담 서비스 이용 가능. 이탈리아 미술상 협회 회원."
-      },
-      "it": {
-        "name": "Galleria Artigianale Piazza Navona",
-        "narration": "Galleria artigianale premium a Piazza Navona con sculture in marmo italiano, vetro di Murano e stampe d'arte rinascimentale. Tutti i metodi di pagamento accettati. Promozioni culturali tutto l'anno.",
-        "description": "Arte in marmo italiano, capolavori in vetro di Murano e riproduzioni rinascimentali",
-        "detailedDescription": "La Galleria Artigianale Piazza Navona espone l'eccezionale maestria artistica italiana nel cuore della Roma storica. La nostra galleria presenta autentiche sculture e intagli in marmo italiano, vera arte e gioielleria in vetro di Murano, riproduzioni d'arte rinascimentale di qualità museale, mosaici e oggetti decorativi artigianali, stampe e litografie di maestri artisti italiani, e commissioni personalizzate disponibili. Situata sulla bellissima Piazza Navona, offriamo spedizioni in tutto il mondo e servizio di consegna con guanti bianchi. Servizi di consulenza artistica disponibili. Membro dell'Associazione Italiana Commercianti d'Arte."
-      },
-      "es": {
-        "name": "Galería de Artesanía Piazza Navona",
-        "narration": "Galería de artesanía premium en Piazza Navona con esculturas de mármol italiano, cristal de Murano e impresiones de arte renacentista. Todos los métodos de pago aceptados. Promociones culturales todo el año.",
-        "description": "Arte en mármol italiano, obras maestras en cristal de Murano y reproducciones renacentistas",
-        "detailedDescription": "La Galería de Artesanía Piazza Navona exhibe una artesanía italiana excepcional en el corazón de la Roma histórica. Nuestra galería presenta auténticas esculturas y tallas en mármol italiano, genuino arte y joyería en cristal de Murano, reproducciones de arte renacentista de calidad museística, mosaicos y objetos decorativos artesanales, grabados y litografías de maestros artistas italianos, y encargos personalizados disponibles. Ubicada en la hermosa Piazza Navona, ofrecemos envío mundial y servicio de entrega con guante blanco. Servicios de consultoría de arte disponibles. Miembro de la Asociación Italiana de Comerciantes de Arte."
-      },
-      "fr": {
-        "name": "Galerie d'Artisanat Piazza Navona",
-        "narration": "Galerie d'artisanat premium à Piazza Navona présentant des sculptures en marbre italien, du verre de Murano et des reproductions d'art de la Renaissance. Tous les moyens de paiement acceptés. Promotions culturelles toute l'année.",
-        "description": "Art en marbre italien, chefs-d'œuvre en verre de Murano et reproductions de la Renaissance",
-        "detailedDescription": "La Galerie d'Artisanat Piazza Navona présente l'excellence de l'artisanat italien au cœur de la Rome historique. Notre galerie propose d'authentiques sculptures et gravures en marbre italien, de véritables œuvres d'art et bijoux en verre de Murano, des reproductions d'art de la Renaissance de qualité muséale, des mosaïques et objets décoratifs artisanaux, des estampes et lithographies de maîtres artistes italiens, et des commandes personnalisées disponibles. Située sur la belle Piazza Navona, nous offrons l'expédition mondiale et un service de livraison gants blancs. Services de conseil en art disponibles. Membre de l'Association Italienne des Marchands d'Art."
-      },
-      "de": {
-        "name": "Piazza Navona Kunstgalerie",
-        "narration": "Premium-Kunstgalerie an der Piazza Navona mit italienischen Marmorskulpturen, Murano-Glas und Renaissance-Kunstdrucken. Alle Zahlungsmethoden akzeptiert. Ganzjährige kulturelle Aktionen.",
-        "description": "Italienische Marmorkunst, Murano-Glasmeisterwerke und Renaissance-Reproduktionen",
-        "detailedDescription": "Die Piazza Navona Kunstgalerie präsentiert außergewöhnliche italienische Kunstfertigkeit im Herzen des historischen Roms. Unsere Galerie zeigt authentische italienische Marmorskulpturen und -schnitzereien, echte Murano-Glaskunst und -schmuck, Reproduktionen von Renaissance-Kunst in Museumsqualität, handgefertigte Mosaike und Dekorationsgegenstände, Drucke und Lithografien italienischer Meisterkünstler, und Sonderanfertigungen sind möglich. An der wunderschönen Piazza Navona gelegen, bieten wir weltweiten Versand und White-Glove-Lieferservice. Kunstberatungsdienste verfügbar. Mitglied des Italienischen Kunsthändlerverbandes."
-      },
-      "zh": {
-        "name": "纳沃纳广场工艺画廊",
-        "narration": "纳沃纳广场的高级工艺画廊，展示意大利大理石雕塑、穆拉诺玻璃和文艺复兴艺术印刷品。接受所有付款方式。全年文化促销。",
-        "description": "意大利大理石艺术、穆拉诺玻璃杰作和文艺复兴复制品",
-        "detailedDescription": "纳沃纳广场工艺画廊在历史悠久的罗马中心展示卓越的意大利艺术。我们的画廊展示正宗意大利大理石雕塑和雕刻、正品穆拉诺玻璃艺术和珠宝、博物馆级文艺复兴艺术复制品、手工马赛克和装饰品、意大利大师艺术家版画和石版画，并可定制作品。位于美丽的纳沃纳广场，提供全球配送和白手套送货服务。提供艺术咨询服务。意大利艺术经销商协会会员。"
-      },
-      "ja": {
-        "name": "ピアッツァ・ナヴォーナ工芸ギャラリー",
-        "narration": "ピアッツァ・ナヴォーナのプレミアム工芸ギャラリーで、イタリア大理石彫刻、ムラーノガラス、ルネサンス美術版画を展示。すべての支払い方法利用可。年間を通じた文化プロモーション。",
-        "description": "イタリア大理石芸術、ムラーノガラス傑作、ルネサンス複製品",
-        "detailedDescription": "ピアッツァ・ナヴォーナ工芸ギャラリーは、歴史的なローマの中心部で卓越したイタリアの芸術性を展示しています。当ギャラリーでは、本物のイタリア大理石彫刻と彫刻品、本物のムラーノガラスアートとジュエリー、博物館品質のルネサンス美術複製品、手作りモザイクと装飾品、イタリアのマスターアーティストの版画とリトグラフ、カスタムオーダーが可能です。美しいピアッツァ・ナヴォーナに位置し、世界中への配送とホワイトグローブ配達サービスを提供しています。アートコンサルティングサービス利用可能。イタリア美術商協会会員。"
-      },
-      "pt": {
-        "name": "Galeria de Artesanato Piazza Navona",
-        "narration": "Galeria de artesanato premium na Piazza Navona com esculturas de mármore italiano, vidro de Murano e gravuras de arte renascentista. Todos os métodos de pagamento aceitos. Promoções culturais durante todo o ano.",
-        "description": "Arte em mármore italiano, obras-primas em vidro de Murano e reproduções renascentistas",
-        "detailedDescription": "A Galeria de Artesanato Piazza Navona apresenta a excepcional arte italiana no coração da Roma histórica. Nossa galeria apresenta autênticas esculturas e entalhes em mármore italiano, genuína arte e joalheria em vidro de Murano, reproduções de arte renascentista de qualidade de museu, mosaicos e objetos decorativos artesanais, gravuras e litografias de mestres artistas italianos, e encomendas personalizadas disponíveis. Localizada na bela Piazza Navona, oferecemos envio mundial e serviço de entrega com luva branca. Serviços de consultoria de arte disponíveis. Membro da Associação Italiana de Comerciantes de Arte."
-      },
-      "ru": {
-        "name": "Галерея ремесел площади Навона",
-        "narration": "Премиум-галерея ремесел на площади Навона с итальянскими мраморными скульптурами, муранским стеклом и репродукциями искусства эпохи Возрождения. Принимаются все способы оплаты. Круглогодичные культурные акции.",
-        "description": "Итальянское мраморное искусство, шедевры муранского стекла и репродукции эпохи Возрождения",
-        "detailedDescription": "Галерея ремесел площади Навона демонстрирует исключительное итальянское мастерство в сердце исторического Рима. Наша галерея представляет подлинные итальянские мраморные скульптуры и резьбу, настоящее муранское стеклянное искусство и ювелирные изделия, репродукции искусства эпохи Возрождения музейного качества, ручную мозаику и декоративные предметы, гравюры и литографии итальянских мастеров, а также индивидуальные заказы. Расположенная на красивой площади Навона, мы предлагаем доставку по всему миру и услугу белых перчаток. Услуги художественного консультирования доступны. Член Итальянской ассоциации торговцев искусством."
-      }
-    },
-    "openingHours": "Mon-Sun: 9:30-21:00",
-    "priceRange": "€€€-€€€€ (€50-500)",
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:37.266Z",
-    "updatedAt": "2026-02-22T18:33:36.357Z"
-  },
-  {
     "id": "seoul_경복궁_gyeongbokgung_palace",
     "cityId": "seoul",
     "name": "경복궁 (Gyeongbokgung Palace)",
@@ -4102,43 +2290,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-13T13:43:16.642Z",
     "updatedAt": "2026-02-22T18:06:07.931Z"
-  },
-  {
-    "id": "jeju_item_37",
-    "cityId": "jeju",
-    "name": "제주특별자치도 프리미엄 Restaurant 추천 38",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "제주의 심장을 뛰게 하는 맛의 향연, 제주특별자치도의 프리미엄 레스토랑 추천 38! 여러분, 상상해 보세요! 제주도의 바람에 실려 오는 신선한 해산물의 향기, 그와 함께 울리는 도마 위의 칼질 소리, 그리고 접시에 담긴 예술 작품 같은 요리들. 지금 여러분이 보고 있는 이 장면은 단순한 식사가 아닙니다. 이것은 진정한 미식의 여정이며, 제주에서의 경험은 단순한 경험 이상의 의미를 가집니다. 자, 이제 그 매혹적인 이야기 속으로 들어가 봅시다.\n\n제주특별자치도의 프리미엄 레스토랑들은 단순히 맛으로만 승부하지 않습니다. 그 역사적 배경 또한 눈여겨볼 만한 가치가 있습니다. 이곳은 제주도 특유의 문화와 역사를 반영하며, 각 레스토랑마다 독특한 이야기를 품고 있습니다. 예를 들어, 20세기 중반에 들어서며 제주도는 한국 전역에서 가장 혁신적인 미식 문화의 중심지가 되었습니다. 이는 제주의 천혜의 자연과 땅을 활용한 독창적인 요리법 덕분이었습니다.\n\n당시 제주의 젊은 요리사들은 새로운 미식 문화를 창조하기 위해 불굴의 의지를 가지고 있었습니다. 그 중 한 명인 '김요리'는 제주도의 신선한 재료와 전통 요리법의 융합을 통해 제주를 미식 여행지로 탈바꿈시켰습니다. 그의 열정은 단순히 요리를 만드는 것에 그치지 않았습니다. 그는 제주의 문화와 전통을 전 세계에 알리고자 했습니다. 그의 이야기는 단순히 요리사의 성공담이 아닌, 제주도 전체의 문화적 부활을 상징하는 이야기입니다.\n\n이제 여러분은 제주의 레스토랑들이 단순한 음식점이 아니라, 하나의 예술적 건축물이라는 사실을 알게 될 것입니다. 각 레스토랑은 그 자체로 하나의 건축적 걸작이며, 지역의 자연 자원을 활용한 디자인과 구조로 많은 이들의 시선을 사로잡고 있습니다. 특히, 해안가에 위치한 레스토랑에서는 바다와 자연이 조화를 이루며, 그 자체로 하나의 완벽한 풍경화를 연출합니다.\n\n그러나 많은 관광객들이 놓치는 것이 하나 있습니다. 바로 레스토랑 곳곳에 숨겨진 상징들입니다. 각각의 공간은 제주의 전통과 역사를 상징하는 요소들로 가득 차 있습니다. 예를 들어, 벽에 새겨진 패턴은 제주 고유의 민속 무늬를 반영하고 있으며, 사용된 목재는 제주의 자연에서 얻은 것입니다. 이는 단순한 장식이 아니라, 제주의 과거와 현재를 연결하는 중요한 매개체입니다.\n\n현대에 들어와 제주의 레스토랑들은 그 어느 때보다 더 많은 관심을 받고 있습니다. 많은 곳이 리모델링을 통해 현대적 감각을 더하며, 동시에 전통의 멋을 그대로 유지하고 있습니다. 특히, 최근 몇 년 동안 많은 영화와 드라마의 촬영지로도 각광받고 있습니다. 이러한 매체를 통해 전 세계에 제주의 아름다움과 독창성이 널리 알려졌습니다. 관광객들은 이곳에서 유명한 포토 스폿을 찾아 기념사진을 찍고는 합니다. 이곳에서는 곳곳에서 웃음과 즐거움이 넘치는 모습을 쉽게 볼 수 있습니다.\n\n제주특별자치도의 프리미엄 레스토랑들이 인류 역사에 남긴 의미는 무엇일까요? 그것은 단순히 맛의 혁신이 아닙니다. 이는 제주의 문화와 자연, 그리고 그 속에 숨어 있는 사람들의 열정을 세계에 알리는 중요한 매개체입니다. 제주는 이 레스토랑들을 통해 자신의 이야기를 전 세계와 공유하며, 그 안에 담긴 가치와 철학을 나누고 있습니다.\n\n이제 여러분은 이 매혹적인 장소를 떠나야 할 시간이지만, 그곳에 담긴 이야기와 감동은 언제까지나 여러분의 마음 속에 남을 것입니다. 제주의 레스토랑에서 경험한 모든 순간들은 단순한 식사의 경험이 아니라, 하나의 여행이자 존재의 의미를 찾는 과정입니다. 여러분의 마음 속에 이 경험의 조각들이 영원히 남기를 바라며, 다음 여행에서도 새로운 이야기를 만들어가시길 바랍니다. 감사합니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "제주특별자치도 프리미엄 Restaurant 추천 38",
-        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "제주특별자치도의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:04.059Z",
-    "updatedAt": "2026-02-22T18:05:58.799Z"
   },
   {
     "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_새벽_투어",
@@ -4253,58 +2404,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:15:07.904Z"
   },
   {
-    "id": "cebu-island-hopping",
-    "cityId": "cebu",
-    "name": "Island Hopping Tour",
-    "lat": 10.3157,
-    "lng": 123.8854,
-    "radius": 100,
-    "narration": "자, 눈을 감고 푸른 바다를 상상해봐요! 여러분은 지금 세부의 따뜻한 햇살 아래, 보트를 타고 눈부신 섬들을 향해 나아가고 있어요. 시원한 바닷바람이 얼굴을 스치고, 에메랄드빛 바다가 반짝이는 것을 느껴보세요. 오늘 하루, 여러분은 단순한 관광객이 아닌, 진정한 섬의 탐험가가 될 거예요!\n\n첫 번째 목적지는 바로 그 유명한 '힐루뚱안 해양 보호 구역'이에요. 상상해보세요! 형형색색의 열대어들이 여러분을 맞이하기 위해 모여들고, 산호초는 마치 살아있는 정원처럼 펼쳐져 있어요. 스노클링 장비를 착용하고 물속으로 뛰어드는 순간, 여러분은 완전히 새로운 세계를 경험하게 될 거예요. 니모를 찾아서 함께 헤엄치고, 불가사리가 해저를 기어가는 모습을 관찰하며, 마치 다큐멘터리의 주인공이 된 듯한 기분을 느껴보세요.\n\n다음으로 향할 곳은 '날루수안 섬'이에요. 이곳은 마치 천국으로 가는 관문 같아요. 하얀 모래사장을 맨발로 걸으며 파도 소리를 들어보세요. 따뜻한 햇살 아래 낮잠을 즐기거나, 해변에서 신나는 게임을 즐길 수도 있어요. 그리고 잊지 마세요! 이곳 날루수안 섬에서는 인생샷을 위한 최고의 배경이 기다리고 있답니다. 친구들과 함께 점프샷을 찍거나, 석양을 배경으로 실루엣 사진을 남겨보세요. 인스타그램에 올리는 순간, '좋아요'가 폭발할 거예요!\n\n점심시간! 드디어 기다리고 기다리던 해변 바비큐 시간이에요. 지글거리는 숯불 위에서 구워지는 신선한 해산물 냄새가 코를 자극하고, 입안에는 벌써부터 침이 고이기 시작해요. 방금 잡은 싱싱한 생선과 새우, 그리고 달콤한 열대 과일까지! 푸짐한 한 상 차림을 해변에 앉아 즐기는 이 순간, 세상 부러울 게 없겠죠? 맛있는 음식을 나누며 함께 웃고 이야기하는 시간은, 여행의 소중한 추억으로 영원히 남을 거예요.\n\n마지막으로, '판다논 섬'으로 향해볼까요? 이곳은 마치 시간이 멈춘 듯한 평화로운 섬이에요. 섬 전체가 하얀 모래로 뒤덮여 있고, 야자수가 드리워진 풍경은 마치 그림엽서 같아요. 해먹에 누워 책을 읽거나, 조용히 명상을 즐기며, 일상의 스트레스를 모두 잊어버리세요. 지금 여러분의 발 아래에는, 수천 년 동안 파도가 다듬어 온 부드러운 모래가 느껴지고, 눈 앞에는 끝없이 펼쳐진 푸른 바다가 펼쳐져 있어요. 이 순간을 마음속에 깊이 새겨두세요.",
-    "description": "Full-day island hopping tour to Cebu's beautiful islands",
-    "category": "Activity",
-    "detailedDescription": "세부 아일랜드 호핑 투어는 단순히 섬을 방문하는 것이 아닌, 세부의 숨겨진 아름다움을 발견하고 경험하는 여정입니다. 힐루뚱안 해양 보호 구역에서는 다양한 해양 생물을 만날 수 있으며, 특히 운이 좋다면 바다거북과 함께 수영하는 특별한 경험도 할 수 있습니다. 날루수안 섬은 깨끗한 해변과 얕은 수심 덕분에 아이들과 함께 즐기기에 완벽한 곳입니다. 또한, 날루수안 섬에는 긴 나무 다리가 있는데, 이곳은 멋진 사진을 찍을 수 있는 최고의 장소 중 하나입니다. 판다논 섬은 과거 모래톱으로 시작하여 점차 섬의 형태를 갖추게 된 독특한 지형을 가지고 있습니다. 섬 주변의 수심이 얕아 물놀이를 즐기기에도 안전하며, 현지인들은 이곳에서 나는 해산물을 말려 판매하기도 합니다. 꿀팁! 투어 예약 시, 현지 여행사를 통해 예약하면 더욱 저렴하게 이용할 수 있으며, 흥정을 통해 더 많은 서비스를 받을 수도 있습니다. 또한, 투어에 포함된 점심 식사 외에, 섬에서 판매하는 신선한 해산물을 추가로 구입하여 즐기는 것도 좋은 방법입니다. 숨겨진 비화! 과거 날루수안 섬은 해적들의 은신처로 사용되었다고 합니다. 섬 곳곳에는 해적들이 숨겨놓은 보물이 아직도 잠들어 있을지도 모릅니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
-      "https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Island Hopping Tour",
-        "narration": "Explore the stunning islands around Cebu on this full-day island hopping adventure. Visit pristine beaches, snorkel in crystal-clear waters, and enjoy a beach barbecue.",
-        "description": "Full-day island hopping tour to Cebu's beautiful islands",
-        "detailedDescription": "This island hopping tour takes you to some of Cebu's most beautiful islands including Nalusuan Island, Caohagan Island, and Hilutungan Island. Each stop offers unique experiences - from pristine white sand beaches perfect for sunbathing to vibrant coral reefs teeming with tropical fish ideal for snorkeling. The tour includes all equipment, lunch on the beach with fresh seafood barbecue, and experienced guides who know the best spots. Swim in crystal-clear turquoise waters, explore marine sanctuaries, and relax on secluded beaches. Transportation via traditional bancas (outrigger boats) adds to the authentic Filipino experience."
-      },
-      "it": {
-        "name": "Tour Isola in Isola",
-        "narration": "Esplora le splendide isole intorno a Cebu in questa avventura di un'intera giornata. Visita spiagge incontaminate, fai snorkeling in acque cristalline e goditi un barbecue sulla spiaggia.",
-        "description": "Tour di un'intera giornata alle bellissime isole di Cebu",
-        "detailedDescription": "Questo tour isola in isola ti porta ad alcune delle isole più belle di Cebu tra cui Nalusuan Island, Caohagan Island e Hilutungan Island. Ogni tappa offre esperienze uniche - dalle spiagge di sabbia bianca incontaminate perfette per prendere il sole alle vivaci barriere coralline brulicanti di pesci tropicali ideali per lo snorkeling. Il tour include tutta l'attrezzatura, pranzo sulla spiaggia con barbecue di pesce fresco e guide esperte che conoscono i posti migliori. Nuota in acque turchesi cristalline, esplora santuari marini e rilassati su spiagge isolate. Il trasporto tramite tradizionali bancas (barche con bilanciere) aggiunge all'esperienza filippina autentica."
-      },
-      "ko": {
-        "name": "아일랜드 호핑 투어",
-        "narration": "이 하루 종일 아일랜드 호핑 모험에서 세부 주변의 멋진 섬들을 탐험하세요. 깨끗한 해변을 방문하고, 수정처럼 맑은 물에서 스노클링을 하고, 해변 바비큐를 즐기세요.",
-        "description": "세부의 아름다운 섬들로의 하루 종일 아일랜드 호핑 투어",
-        "detailedDescription": "이 아일랜드 호핑 투어는 날루수안 섬, 카오하간 섬, 힐루툰간 섬을 포함한 세부의 가장 아름다운 섬들로 여러분을 안내합니다. 각 정류장은 독특한 경험을 제공합니다 - 일광욕에 완벽한 깨끗한 백사장부터 스노클링에 이상적인 열대어가 가득한 활기찬 산호초까지. 투어에는 모든 장비, 신선한 해산물 바비큐와 함께하는 해변 점심, 그리고 최고의 장소를 아는 경험 많은 가이드가 포함됩니다. 수정처럼 맑은 청록색 바다에서 수영하고, 해양 보호구역을 탐험하고, 한적한 해변에서 휴식을 취하세요. 전통적인 방카(외지거 보트)를 통한 이동은 진정한 필리핀 경험을 더합니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:38.109Z",
-    "updatedAt": "2026-02-22T18:12:21.999Z"
-  },
-  {
     "id": "busan_item_96",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Landmark 추천 97",
@@ -4416,210 +2515,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:05:59.057Z"
   },
   {
-    "id": "rome_restaurant_antico_arco",
-    "cityId": "rome",
-    "name": "Antico Arco",
-    "lat": 41.8853,
-    "lng": 12.4623,
-    "radius": 40,
-    "narration": "Experience contemporary Roman cuisine at Antico Arco, a Michelin-recommended restaurant on Gianicolo Hill.",
-    "description": "Contemporary Roman fine dining",
-    "category": "Restaurant",
-    "detailedDescription": "Antico Arco offers a refined take on Roman cuisine in an elegant setting on Gianicolo Hill. The menu combines traditional ingredients with innovative techniques, earning the restaurant a Michelin Bib Gourmand. The wine list features excellent Italian and international selections. The modern interior and attentive service create a sophisticated dining experience while maintaining a welcoming Roman warmth.",
-    "photos": [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Antico Arco",
-        "narration": "Experience contemporary Roman cuisine at Antico Arco, a Michelin-recommended restaurant on Gianicolo Hill.",
-        "description": "Contemporary Roman fine dining",
-        "detailedDescription": "Antico Arco offers a refined take on Roman cuisine in an elegant setting on Gianicolo Hill. The menu combines traditional ingredients with innovative techniques, earning the restaurant a Michelin Bib Gourmand. The wine list features excellent Italian and international selections. The modern interior and attentive service create a sophisticated dining experience while maintaining a welcoming Roman warmth."
-      },
-      "ko": {
-        "name": "안티코 아르코",
-        "narration": "자니콜로 언덕의 미슐랭 추천 레스토랑 안티코 아르코에서 현대적인 로마 요리를 경험하세요.",
-        "description": "현대적인 로마 파인 다이닝",
-        "detailedDescription": "안티코 아르코는 자니콜로 언덕의 우아한 환경에서 로마 요리에 대한 세련된 해석을 제공합니다. 메뉴는 전통 재료와 혁신적인 기법을 결합하여 미슐랭 빕 구르망을 획득했습니다. 와인 리스트에는 우수한 이탈리아 및 국제 셀렉션이 있습니다. 현대적인 인테리어와 세심한 서비스는 로마의 따뜻한 환대를 유지하면서 세련된 다이닝 경험을 선사합니다."
-      },
-      "it": {
-        "name": "Antico Arco",
-        "narration": "Vivi la cucina romana contemporanea all'Antico Arco, un ristorante raccomandato dalla Michelin sul Gianicolo.",
-        "description": "Fine dining romano contemporaneo",
-        "detailedDescription": "Antico Arco offre un'interpretazione raffinata della cucina romana in un ambiente elegante sul Gianicolo. Il menu combina ingredienti tradizionali con tecniche innovative, guadagnando al ristorante un Bib Gourmand Michelin. La carta dei vini presenta eccellenti selezioni italiane e internazionali. L'interno moderno e il servizio attento creano un'esperienza culinaria sofisticata mantenendo un calore romano accogliente."
-      },
-      "es": {
-        "name": "Antico Arco",
-        "narration": "Experimente la cocina romana contemporánea en Antico Arco, un restaurante recomendado por Michelin en la colina del Gianicolo.",
-        "description": "Alta cocina romana contemporánea",
-        "detailedDescription": "Antico Arco ofrece una interpretación refinada de la cocina romana en un elegante entorno en la colina del Gianicolo. El menú combina ingredientes tradicionales con técnicas innovadoras, ganando el restaurante un Bib Gourmand de Michelin. La carta de vinos presenta excelentes selecciones italianas e internacionales. El interior moderno y el servicio atento crean una experiencia gastronómica sofisticada mientras mantienen una cálida hospitalidad romana."
-      },
-      "fr": {
-        "name": "Antico Arco",
-        "narration": "Découvrez la cuisine romaine contemporaine à l'Antico Arco, un restaurant recommandé par le Michelin sur la colline du Janicule.",
-        "description": "Gastronomie romaine contemporaine",
-        "detailedDescription": "Antico Arco propose une interprétation raffinée de la cuisine romaine dans un cadre élégant sur la colline du Janicule. Le menu combine des ingrédients traditionnels avec des techniques innovantes, permettant au restaurant d'obtenir un Bib Gourmand Michelin. La carte des vins présente d'excellentes sélections italiennes et internationales. L'intérieur moderne et le service attentif créent une expérience culinaire sophistiquée tout en préservant la chaleur romaine accueillante."
-      },
-      "de": {
-        "name": "Antico Arco",
-        "narration": "Erleben Sie zeitgenössische römische Küche im Antico Arco, einem Michelin-empfohlenen Restaurant auf dem Gianicolo-Hügel.",
-        "description": "Zeitgenössisches römisches Fine Dining",
-        "detailedDescription": "Antico Arco bietet eine raffinierte Interpretation der römischen Küche in einem eleganten Ambiente auf dem Gianicolo-Hügel. Die Speisekarte kombiniert traditionelle Zutaten mit innovativen Techniken und hat dem Restaurant einen Michelin Bib Gourmand eingebracht. Die Weinkarte präsentiert ausgezeichnete italienische und internationale Auswahl. Das moderne Interieur und der aufmerksame Service schaffen ein gehobenes kulinarisches Erlebnis bei gleichzeitiger Bewahrung römischer Gastfreundschaft."
-      },
-      "zh": {
-        "name": "Antico Arco",
-        "narration": "在贾尼科洛山上的米其林推荐餐厅Antico Arco体验现代罗马美食。",
-        "description": "现代罗马精致餐饮",
-        "detailedDescription": "Antico Arco在贾尼科洛山的优雅环境中提供对罗马美食的精致诠释。菜单将传统食材与创新技术相结合，为餐厅赢得了米其林必比登推荐。酒单精选优秀的意大利和国际葡萄酒。现代的室内设计和周到的服务创造了精致的用餐体验，同时保持了罗马式的热情好客。"
-      },
-      "ja": {
-        "name": "Antico Arco",
-        "narration": "ジャニコロの丘にあるミシュラン推奨レストラン、Antico Arcoで現代的なローマ料理をご体験ください。",
-        "description": "現代的なローマのファインダイニング",
-        "detailedDescription": "Antico Arcoは、ジャニコロの丘のエレガントな環境でローマ料理の洗練された解釈を提供します。メニューは伝統的な食材と革新的な技法を組み合わせ、ミシュランのビブグルマンを獲得しています。ワインリストには優れたイタリアワインと国際的なセレクションが揃っています。モダンな内装と行き届いたサービスは、ローマの温かいおもてなしを保ちながら、洗練されたダイニング体験を創り出しています。"
-      },
-      "pt": {
-        "name": "Antico Arco",
-        "narration": "Experimente a cozinha romana contemporânea no Antico Arco, um restaurante recomendado pelo Michelin na colina do Gianicolo.",
-        "description": "Alta gastronomia romana contemporânea",
-        "detailedDescription": "Antico Arco oferece uma interpretação refinada da cozinha romana em um ambiente elegante na colina do Gianicolo. O menu combina ingredientes tradicionais com técnicas inovadoras, conquistando para o restaurante um Bib Gourmand Michelin. A carta de vinhos apresenta excelentes seleções italianas e internacionais. O interior moderno e o serviço atencioso criam uma experiência gastronômica sofisticada enquanto mantêm o calor romano acolhedor."
-      },
-      "ru": {
-        "name": "Antico Arco",
-        "narration": "Откройте современную римскую кухню в Antico Arco — ресторане, рекомендованном Мишлен, на холме Джаниколо.",
-        "description": "Современная римская высокая кухня",
-        "detailedDescription": "Antico Arco предлагает изысканную интерпретацию римской кухни в элегантной обстановке на холме Джаниколо. Меню сочетает традиционные ингредиенты с инновационными техниками, благодаря чему ресторан получил рекомендацию Мишлен Bib Gourmand. Винная карта представляет превосходный выбор итальянских и международных вин. Современный интерьер и внимательное обслуживание создают изысканный гастрономический опыт, сохраняя при этом римское гостеприимство."
-      }
-    },
-    "openingHours": "Tue-Sun: 19:30-23:30 | Closed Mon",
-    "priceRange": "€€€ (€50-75 per person)",
-    "cuisine": "Contemporary Roman",
-    "reservationUrl": "https://www.thefork.com/restaurant/antico-arco-r43290",
-    "phoneNumber": "+39 06 581 5274",
-    "menuHighlights": [
-      "Artichoke Millefeuille",
-      "Lamb Scottadito",
-      "Maritozzo",
-      "Seasonal Risotto"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:40.542Z",
-    "updatedAt": "2026-02-22T18:13:05.303Z"
-  },
-  {
-    "id": "런던-demo-2",
-    "cityId": "london",
-    "name": "런던의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "자, 여러분! 지금 런던의 심장이 두근거리는 맛집 골목에 와 계십니다. 상상해보세요. 코끝을 간지럽히는 달콤한 페이스트리 향, 갓 구운 빵 냄새, 그리고 짭짤한 피쉬 앤 칩스 튀김 냄새가 뒤섞여 만들어내는 황홀한 향기의 교향곡! 발 아래는 수백 년의 역사를 품은 조약돌 길이 깔려 있고, 양 옆으로는 붉은 벽돌 건물이 웅장하게 서 있습니다. 이 골목은 단순한 길이 아니에요. 런던의 역사와 문화를 고스란히 담고 있는 타임캡슐과도 같죠. 18세기부터 이어져 온 오래된 펍에서는 흥겨운 웃음소리와 쨍그랑거리는 맥주잔 부딪히는 소리가 끊이지 않고, 작은 카페에서는 진한 에스프레소 향이 골목 전체를 감싸 안습니다. 좁은 골목길을 따라 늘어선 식당들은 저마다 독특한 개성을 뽐내며 여러분을 유혹합니다. 인도 커리 하우스의 매콤한 향신료, 이탈리아 트라토리아의 토마토 소스, 프랑스 비스트로의 버터 냄새까지! 정말 눈을 감고 숨을 크게 들이쉬면 전 세계의 맛을 한 번에 느낄 수 있을 정도랍니다. 이곳에서는 트렌디한 퓨전 요리부터 전통적인 영국 가정식까지, 모든 종류의 음식을 맛볼 수 있어요. 현지인들은 물론이고 전 세계에서 몰려온 여행자들로 늘 북적이는 이곳은, 런던의 진짜 모습을 만날 수 있는 최고의 장소입니다. 잠시 스마트폰은 내려놓고, 오감을 활짝 열어 런던의 맛을 느껴보세요! 자, 그럼 지금부터 맛있는 런던 여행을 시작해볼까요?",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "런던의 맛집 골목은 단순한 식당가가 아닙니다. 수 세기에 걸친 런던의 식문화와 역사가 응축된 공간이죠. 이곳은 원래 18세기부터 시장 상인들과 노동자들이 간단한 식사를 해결하던 곳에서 시작되었습니다. 시간이 흐르면서 다양한 이민자들이 정착하면서 자신들의 고유한 음식을 선보이기 시작했고, 지금과 같은 다채로운 맛의 향연이 펼쳐지게 된 것입니다. 특히, 19세기 후반부터 인도, 파키스탄, 방글라데시 출신 이민자들이 몰려오면서 커리 하우스가 급증했고, 런던의 맛집 골목은 '커리의 수도'라고 불릴 정도로 유명해졌습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 이 골목에서 가장 오래된 커리 하우스 중 하나인 '알리 바바'는 간판도 없는 작은 가게이지만, 런던 최고의 커리를 맛볼 수 있는 곳으로 정평이 나 있습니다. 또한, 이 골목에는 '숨겨진 정원'이라는 이름의 작은 카페가 있는데, 이곳에서는 매일 아침 직접 구운 스콘과 클로티드 크림, 딸기잼을 맛볼 수 있습니다. 런던 시민들은 주말 아침이면 이곳에 줄을 서서 기다릴 정도라고 하네요. 런던 맛집 골목을 제대로 즐기려면, 미리 식당을 예약하는 것이 좋습니다. 특히 주말 저녁에는 예약 없이는 자리를 잡기 어려울 수 있습니다. 또한, 너무 유명한 식당보다는 현지인들이 추천하는 숨겨진 맛집을 찾아보는 것도 좋은 방법입니다. 런던의 맛집 골목은 단순한 식사를 넘어, 런던의 역사와 문화를 체험할 수 있는 특별한 공간입니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "런던의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:57:47.125Z",
-    "updatedAt": "2026-02-22T18:15:19.021Z"
-  },
-  {
-    "id": "kenai_fjords",
-    "cityId": "anchorage",
-    "name": "Kenai Fjords National Park",
-    "lat": 59.909722,
-    "lng": -149.642778,
-    "radius": 70,
-    "narration": "자, 눈을 감고 짙푸른 바다 내음이 코끝을 간지럽히는 알래스카의 케나이 피오르 국립공원에 와 있다고 상상해보세요. 귓가에는 갈매기의 울음소리와 저 멀리 빙하가 '꽈르릉' 무너져 내리는 웅장한 소리가 들려오는 듯하지 않나요? 지금 여러분의 발 아래에는 수백만 년의 시간을 품은 단단한 화강암이, 눈 앞에는 거대한 빙하가 마치 살아있는 생명체처럼 꿈틀거리고 있습니다. 이 곳은 단순히 '보는' 곳이 아니라 온몸으로 '느끼는' 곳이에요. 깎아지른 듯한 절벽 위에는 꿋꿋하게 자라난 침엽수들이 바람에 흔들리고, 바다 위에는 수달과 물개들이 재롱을 부리며 헤엄치는 모습도 볼 수 있을 거예요. 어쩌면 운이 좋다면, 혹등고래가 웅장한 자태를 드러내며 물 위로 솟아오르는 장관을 목격할 수도 있겠죠. 케나이 피오르의 빙하는 마치 시간 여행을 떠나온 듯, 과거와 현재, 그리고 미래가 공존하는 신비로운 공간입니다. 빙하가 녹아 흐르는 물줄기는 생명의 근원이 되어 수많은 생명체를 품고, 그 웅장함은 우리에게 자연의 위대함을 다시 한번 깨닫게 해줍니다. 상상해보세요, 해 질 녘, 붉게 물든 하늘 아래 빙하가 핑크빛으로 빛나는 모습! 이 모든 감동을 여러분도 직접 느껴보시길 바랍니다. 케나이 피오르 국립공원은 여러분의 가슴 속에 영원히 잊혀지지 않을 아름다운 추억을 선물할 거예요. 자, 이제 숨을 크게 쉬고, 이 경이로운 자연의 숨결을 온전히 느껴보세요!",
-    "description": "Spectacular coastal park featuring tidewater glaciers and marine wildlife",
-    "category": "National Park",
-    "detailedDescription": "케나이 피오르 국립공원은 1980년에 국립공원으로 지정되었으며, 면적은 무려 669,984에이커에 달합니다. 이 곳은 빙하로 깎여 만들어진 좁고 긴 만, 즉 피오르가 해안선을 따라 깊숙이 뻗어 있는 것이 특징입니다. 특히 아이시 베이(Aialik Bay)와 홀게이트 빙하(Holgate Glacier)는 꼭 방문해야 할 명소로 손꼽힙니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 바로 '빙하 크루즈'를 이용하는 것입니다. 배를 타고 빙하 가까이 접근하면 빙하가 갈라지는 소리, 즉 '빙하의 울음소리'를 생생하게 들을 수 있답니다. 또한, 크루즈를 이용하면 해달, 물개, 고래 등 다양한 해양 동물들을 더 가까이에서 관찰할 수 있다는 장점도 있습니다. 케나이 피오르에는 슬픈 전설도 숨겨져 있습니다. 옛날 이 지역에 살던 원주민들은 빙하가 녹아 마을을 덮치는 것을 두려워하며 빙하를 신성시했다고 합니다. 지금도 그들의 후손들은 빙하를 존경하며 자연과 조화롭게 살아가는 방법을 배우고 있다고 하네요. 케나이 피오르 국립공원은 단순한 관광지를 넘어, 자연과 인간의 공존, 그리고 과거와 현재가 만나는 특별한 공간입니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800",
-      "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800",
-      "https://images.unsplash.com/photo-1496714534174-7c9c5e7e8cd7?w=800"
-    ],
-    "historicalInfo": "Kenai Fjords National Park was established in 1980 as part of the Alaska National Interest Lands Conservation Act. The park's landscape has been shaped by glacial activity for thousands of years, with the Harding Icefield being a remnant of the last ice age.",
-    "yearBuilt": "1980",
-    "architect": "U.S. National Park Service",
-    "translations": {
-      "en": {
-        "name": "Kenai Fjords National Park",
-        "narration": "Discover Kenai Fjords National Park, where massive tidewater glaciers meet the sea, creating a dramatic landscape of ice, rock, and abundant marine wildlife.",
-        "description": "Spectacular coastal park featuring tidewater glaciers and marine wildlife",
-        "detailedDescription": "Kenai Fjords National Park protects 669,984 acres of coastal wilderness on Alaska's Kenai Peninsula, where the Harding Icefield feeds nearly 40 glaciers that flow down to meet the sea. The park is named for the numerous fjords carved by these glaciers over thousands of years. Exit Glacier, the park's most accessible glacier, offers visitors a rare opportunity to walk right up to the face of a glacier and witness the dramatic effects of climate change as it continues to retreat. Boat tours through the fjords provide spectacular views of tidewater glaciers calving massive chunks of ice into the ocean, while also offering chances to see orcas, humpback whales, sea otters, puffins, and sea lions in their natural habitat. The park's coastal environment supports a rich diversity of marine and terrestrial wildlife. The Harding Icefield, one of only four remaining icefields in the United States, covers an area of approximately 700 square miles and can be reached via a challenging 8.2-mile round-trip hike that rewards visitors with breathtaking views of this vast expanse of ice.",
-        "historicalInfo": "Kenai Fjords National Park was established in 1980 as part of the Alaska National Interest Lands Conservation Act. The park's landscape has been shaped by glacial activity for thousands of years, with the Harding Icefield being a remnant of the last ice age.",
-        "yearBuilt": "1980",
-        "architect": "U.S. National Park Service"
-      },
-      "ko": {
-        "name": "키나이 피오르드 국립공원",
-        "narration": "거대한 조수 빙하가 바다와 만나 얼음, 바위, 풍부한 해양 야생동물의 극적인 풍경을 만드는 키나이 피오르드 국립공원을 발견하세요.",
-        "description": "조수 빙하와 해양 야생동물을 특징으로 하는 장관을 이루는 해안 공원",
-        "detailedDescription": "키나이 피오르드 국립공원은 알래스카 키나이 반도에서 669,984에이커의 해안 야생지대를 보호하며, 하딩 빙원이 바다로 흘러내리는 거의 40개의 빙하를 공급합니다. 공원은 수천 년에 걸쳐 이러한 빙하가 조각한 수많은 피오르드의 이름을 따서 명명되었습니다. 공원에서 가장 접근하기 쉬운 빙하인 엑시트 빙하는 방문객들에게 빙하의 전면까지 걸어갈 수 있는 드문 기회를 제공하며 계속 후퇴하면서 기후 변화의 극적인 영향을 목격할 수 있습니다. 피오르드를 통한 보트 투어는 조수 빙하가 거대한 얼음 덩어리를 바다로 떨어뜨리는 장관을 보여주며, 범고래, 혹등고래, 해달, 퍼핀, 바다사자를 자연 서식지에서 볼 수 있는 기회도 제공합니다. 공원의 해안 환경은 풍부한 다양성의 해양 및 육상 야생동물을 지원합니다. 미국에 남아있는 단 4개의 빙원 중 하나인 하딩 빙원은 약 700평방마일의 면적을 차지하며 방문객들에게 이 광대한 얼음 확장의 숨막히는 경치를 보상하는 도전적인 8.2마일 왕복 하이킹을 통해 도달할 수 있습니다.",
-        "historicalInfo": "키나이 피오르드 국립공원은 1980년 알래스카 국가 이익 토지 보존법의 일부로 설립되었습니다. 공원의 풍경은 수천 년 동안 빙하 활동에 의해 형성되었으며, 하딩 빙원은 마지막 빙하기의 잔재입니다.",
-        "yearBuilt": "1980년",
-        "architect": "미국 국립공원 관리청"
-      },
-      "ja": {
-        "name": "ケナイフィヨルド国立公園",
-        "narration": "巨大な潮水氷河が海と出会い、氷、岩、豊富な海洋野生生物の劇的な景観を作り出すケナイフィヨルド国立公園を発見してください。",
-        "description": "潮水氷河と海洋野生生物を特徴とする壮観な海岸公園",
-        "detailedDescription": "ケナイフィヨルド国立公園は、アラスカのケナイ半島で669,984エーカーの海岸荒野を保護しており、ハーディング氷原が海に流れ込む約40の氷河を供給しています。公園は、これらの氷河が数千年にわたって刻んだ多数のフィヨルドにちなんで名付けられました。公園で最もアクセスしやすい氷河であるイグジット氷河は、訪問者に氷河の前面まで歩いて行き、後退し続ける気候変動の劇的な影響を目撃する稀な機会を提供します。フィヨルドを通るボートツアーは、潮水氷河が巨大な氷の塊を海に落とす壮観な景色を提供し、シャチ、ザトウクジラ、ラッコ、パフィン、アシカを自然の生息地で見る機会も提供します。公園の海岸環境は、豊富な多様性の海洋および陸生野生生物を支えています。米国に残る4つの氷原の一つであるハーディング氷原は、約700平方マイルの面積をカバーし、訪問者にこの広大な氷の広がりの息をのむような景色を報酬として与える挑戦的な8.2マイルの往復ハイキングを通じて到達できます。",
-        "historicalInfo": "ケナイフィヨルド国立公園は1980年にアラスカ国家利益土地保全法の一部として設立されました。公園の景観は数千年にわたって氷河活動によって形成され、ハーディング氷原は最後の氷河期の名残です。",
-        "yearBuilt": "1980年",
-        "architect": "米国国立公園局"
-      },
-      "zh": {
-        "name": "基奈峡湾国家公园",
-        "narration": "发现基奈峡湾国家公园,巨大的潮水冰川与海洋相遇,创造出冰、岩石和丰富海洋野生动物的壮观景观。",
-        "description": "以潮水冰川和海洋野生动物为特色的壮观海岸公园",
-        "detailedDescription": "基奈峡湾国家公园保护着阿拉斯加基奈半岛上669,984英亩的海岸荒野,哈丁冰原为近40条流入大海的冰川提供水源。公园以这些冰川数千年来雕刻的众多峡湾而得名。出口冰川是公园最易到达的冰川,为游客提供了罕见的机会,可以走到冰川前端,见证气候变化的戏剧性影响,因为它继续后退。通过峡湾的船游提供潮水冰川将巨大的冰块掉入海洋的壮观景色,同时也提供在自然栖息地观看虎鲸、座头鲸、海獭、海鹦和海狮的机会。公园的海岸环境支持丰富多样的海洋和陆地野生动物。哈丁冰原是美国仅存的四个冰原之一,覆盖约700平方英里的面积,可通过具有挑战性的8.2英里往返徒步到达,为游客提供这片广阔冰原的令人叹为观止的景色。",
-        "historicalInfo": "基奈峡湾国家公园于1980年作为阿拉斯加国家利益土地保护法的一部分成立。公园的景观数千年来一直由冰川活动塑造,哈丁冰原是最后一个冰河时代的遗迹。",
-        "yearBuilt": "1980年",
-        "architect": "美国国家公园管理局"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:26.975Z",
-    "updatedAt": "2026-02-22T18:33:56.917Z"
-  },
-  {
     "id": "rom_colosseum",
     "cityId": "rome",
     "name": "콜로세움 (Colosseum)",
@@ -4694,58 +2589,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:05:59.122Z"
   },
   {
-    "id": "kl-food-street-tour",
-    "cityId": "kuala-lumpur",
-    "name": "Kuala Lumpur Street Food Tour",
-    "lat": 3.1478,
-    "lng": 101.6953,
-    "radius": 60,
-    "narration": "자, 상상해보세요! 어둠이 짙게 드리운 쿠알라룸푸르의 밤거리, 네온사인 불빛 아래 맛있는 냄새가 코를 찌르는 풍경을요. 지금 여러분은 미식 어벤져스의 일원이 되어, 말레이시아, 중국, 인도, 이 세 나라의 맛이 격돌하는 흥미진진한 미식 전쟁터에 발을 들인 겁니다! 이 투어, 정말 특별해요. 단순히 음식을 맛보는 게 아니라, 쿠알라룸푸르의 진짜 심장을 느껴보는 여정이거든요. 자, 숨을 크게 들이쉬고, 첫 번째 맛집으로 출발해볼까요? \n\n지금 여러분의 발 아래에는, 수많은 현지인들이 밤마다 모여들어 인생 최고의 음식을 맛보는 비밀스러운 골목길이 펼쳐져 있어요. 노점상들은 저마다 수십 년의 역사를 자랑하며, 자신만의 비법 레시피로 손님들을 사로잡고 있죠. 첫 번째 주자는 바로 '나시 르막'이에요. 코코넛 밀크로 지은 밥에 매콤한 삼발 소스, 바삭한 멸치, 땅콩, 오이, 그리고 반숙 계란까지! 이 모든 맛이 입안에서 폭발하는 순간, 여러분은 말레이시아의 매력에 푹 빠지게 될 거예요. \n\n다음은 중국 음식 차례! 딤섬, 볶음면, 탕수육… 생각만 해도 군침이 돌지 않나요? 특히, 이 곳에서 꼭 맛봐야 할 음식은 바로 '호키엔 미'예요. 쫀득한 면발에 새우, 오징어, 돼지고기, 그리고 진한 간장 소스가 어우러진 이 음식은, 쿠알라룸푸르 현지인들이 밤늦도록 즐겨 먹는 소울 푸드랍니다. 상상해보세요! 뜨겁게 끓어오르는 웍에서 춤추는 면발과 해산물, 그리고 그 향긋한 냄새가 여러분의 오감을 자극하는 순간을요. \n\n마지막으로, 인도의 향신료 마법에 빠져볼까요? 탄두리 치킨, 커리, 난… 인도 음식은 그 종류만큼이나 다채로운 맛을 자랑하죠. 특히, 이 곳에서 맛봐야 할 음식은 '브리아니'예요. 향긋한 바스마티 쌀에 각종 향신료와 고기를 넣고 푹 끓여낸 이 음식은, 한 입 먹는 순간 여러분을 인도의 풍요로운 세계로 데려갈 거예요. 자, 눈을 감고 브리아니의 향긋한 향을 느껴보세요. 지금 여러분은 쿠알라룸푸르의 밤거리에서, 맛의 삼국지를 평정하는 미식 어벤져스가 된 겁니다! 이제, 다음 맛집으로 함께 떠나볼까요?",
-    "description": "Evening street food walking tour in Kuala Lumpur",
-    "category": "Activity",
-    "detailedDescription": "쿠알라룸푸르 스트리트 푸드 투어는 단순한 음식 관광이 아닙니다. 말레이시아, 중국, 인도 문화가 녹아있는 다채로운 음식을 통해 쿠알라룸푸르의 역사와 문화를 체험하는 특별한 여정입니다. 이 투어에서는 현지인들만 아는 숨겨진 맛집들을 방문하여, 수십 년 동안 대를 이어온 노점상들의 비법 레시피를 맛볼 수 있습니다. 나시 르막, 호키엔 미, 브리아니와 같은 대표적인 길거리 음식은 물론, 계절에 따라 특별한 현지 음식도 맛볼 수 있는 기회가 주어집니다. 투어 가이드는 단순히 음식을 소개하는 것을 넘어, 각 음식에 얽힌 흥미로운 역사와 문화를 설명해줍니다. 예를 들어, 나시 르막은 원래 말레이시아 농부들이 아침 식사로 즐겨 먹던 음식이었지만, 이제는 국민 음식으로 자리 잡았다는 이야기, 호키엔 미는 중국 이민자들이 쿠알라룸푸르에 정착하면서 만들어진 음식이라는 이야기 등, 흥미로운 비하인드 스토리를 들을 수 있습니다. 꿀팁 하나 알려드릴까요? 현지인들은 나시 르막에 삼발 소스를 듬뿍 넣어 먹는 것을 좋아합니다. 매운 맛을 즐기신다면, 꼭 삼발 소스를 추가해서 드셔보세요! 또한, 호키엔 미를 주문할 때는 '다 게' (계란 추가)를 외치면 더욱 푸짐하게 즐길 수 있습니다. 이 투어를 통해 여러분은 쿠알라룸푸르의 숨겨진 매력을 발견하고, 잊지 못할 미식 경험을 하게 될 것입니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
-      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Kuala Lumpur Street Food Tour",
-        "narration": "Experience the incredible diversity of Malaysian street food on this evening walking tour. Taste Malay, Chinese, and Indian specialties at local favorites.",
-        "description": "Evening street food walking tour in Kuala Lumpur",
-        "detailedDescription": "Kuala Lumpur's street food scene is a delicious reflection of Malaysia's multicultural society. This evening food tour takes you off the tourist trail to authentic local eateries and street stalls where KL residents actually eat. Sample iconic dishes like nasi lemak (coconut rice with sambal), char kway teow (stir-fried noodles), roti canai with curry, satay (grilled meat skewers), cendol (shaved ice dessert), and durian (if you're brave!). Your local guide shares insights into Malaysian food culture, cooking techniques, and the history behind each dish. Visit bustling night markets like Jalan Alor or Petaling Street Chinatown, experience the energy of outdoor dining, and learn about the spices and ingredients that make Malaysian cuisine so distinctive. The tour includes 8-10 food tastings - enough for a full dinner."
-      },
-      "it": {
-        "name": "Tour dello Street Food di Kuala Lumpur",
-        "narration": "Sperimenta l'incredibile diversità del cibo di strada malese in questo tour a piedi serale. Assaggia specialità malesi, cinesi e indiane nei locali preferiti.",
-        "description": "Tour a piedi serale dello street food a Kuala Lumpur",
-        "detailedDescription": "La scena dello street food di Kuala Lumpur è un delizioso riflesso della società multiculturale della Malesia. Questo tour gastronomico serale ti porta fuori dai sentieri turistici verso autentiche trattorie locali e bancarelle di strada dove i residenti di KL mangiano davvero. Assaggia piatti iconici come nasi lemak (riso al cocco con sambal), char kway teow (noodles saltati), roti canai con curry, satay (spiedini di carne alla griglia), cendol (dessert di ghiaccio tritato) e durian (se sei coraggioso!). La tua guida locale condivide approfondimenti sulla cultura gastronomica malese, tecniche di cucina e la storia dietro ogni piatto. Visita mercati notturni vivaci come Jalan Alor o Petaling Street Chinatown, sperimenta l'energia della ristorazione all'aperto e impara sulle spezie e ingredienti che rendono la cucina malese così distintiva. Il tour include 8-10 assaggi di cibo - abbastanza per una cena completa."
-      },
-      "ko": {
-        "name": "쿠알라룸푸르 스트리트 푸드 투어",
-        "narration": "이 저녁 도보 투어에서 말레이시아 길거리 음식의 놀라운 다양성을 경험하세요. 지역 인기 장소에서 말레이, 중국, 인도 특선 요리를 맛보세요.",
-        "description": "쿠알라룸푸르의 저녁 스트리트 푸드 도보 투어",
-        "detailedDescription": "쿠알라룸푸르의 스트리트 푸드 현장은 말레이시아 다문화 사회의 맛있는 반영입니다. 이 저녁 푸드 투어는 KL 주민들이 실제로 먹는 정통 지역 식당과 길거리 가판대로 관광 코스를 벗어나 안내합니다. 나시 르막(삼발을 곁들인 코코넛 밥), 차 콰이 티오(볶은 국수), 커리를 곁들인 로티 차나이, 사테(구운 고기 꼬치), 첸돌(빙수 디저트), 그리고 두리안(용감하다면!)과 같은 상징적인 요리를 맛보세요. 현지 가이드가 말레이시아 음식 문화, 요리 기술, 각 요리 뒤의 역사에 대한 통찰력을 공유합니다. 잘란 알로르나 페탈링 스트리트 차이나타운과 같은 번화한 야시장을 방문하고, 야외 식사의 에너지를 경험하고, 말레이시아 요리를 독특하게 만드는 향신료와 재료에 대해 배우세요. 투어에는 8-10가지 음식 시식이 포함되어 있습니다 - 완전한 저녁 식사에 충분합니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:39.334Z",
-    "updatedAt": "2026-02-22T18:34:28.776Z"
-  },
-  {
     "id": "jeju_item_87",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Shopping 추천 88",
@@ -4783,163 +2626,52 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:05:59.214Z"
   },
   {
-    "id": "st_pauls_cathedral",
-    "cityId": "london",
-    "name": "St. Paul's Cathedral",
-    "lat": 51.513845,
-    "lng": -0.098351,
-    "radius": 60,
-    "narration": "자, 눈을 감고 런던의 심장 박동을 느껴보세요. 지금 여러분은 세인트 폴 대성당 앞에 서 있습니다. 300년이 넘는 시간 동안 런던의 하늘을 지배해 온 크리스토퍼 렌 경의 바로크 양식 걸작이죠. 상상해보세요. 17세기 런던, 잿더미 속에서 이 웅장한 성당이 솟아오르는 모습을요. 화려한 돔은 태양빛을 받아 황금빛으로 빛나고, 그 아래에서는 수많은 이야기가 속삭입니다. 지금 여러분의 발 아래에는 찰스 왕세자와 다이애나 스펜서의 결혼식이 열렸던 바로 그 장소가 펼쳐져 있습니다. 수많은 역사적 순간들을 품은 이 공간에서 깊은 숨을 쉬어보세요. 성당 안으로 들어가면, 거대한 돔 아래에서 울려 퍼지는 오르간 소리가 여러분의 영혼을 감싸 안을 겁니다. 천장에는 제임스 톤힐이 그린 성 바울의 삶을 담은 그림들이 펼쳐져 있죠. 하나하나 살펴보면 마치 한 편의 영화를 보는 듯한 감동을 느낄 수 있을 거예요. 잠시 시간을 내어 속삭이는 회랑 (Whispering Gallery)에 가 보세요. 돔 내부 벽을 따라 속삭이는 소리가 반대편까지 또렷하게 들리는 신기한 경험을 할 수 있습니다. 사랑하는 사람에게 비밀스러운 메시지를 전달해보는 건 어떨까요? 세인트 폴 대성당은 단순한 건물이 아니에요. 런던의 역사, 예술, 그리고 영혼이 담겨 있는 살아있는 기념비입니다. 이곳에서 특별한 경험을 만들어가세요.",
-    "description": "Iconic Baroque cathedral with one of the world's largest domes",
-    "category": "Cathedral",
-    "detailedDescription": "세인트 폴 대성당은 1675년부터 1710년까지 크리스토퍼 렌 경의 설계로 지어진 영국 성공회 대성당입니다. 1666년 런던 대화재로 소실된 옛 성당 자리에 세워졌으며, 렌 경의 건축적 천재성을 보여주는 대표적인 작품으로 평가받고 있습니다. 돔의 높이는 111미터에 달하며, 이는 런던에서 가장 높은 건축물 중 하나입니다. 대성당 내부에는 넬슨 제독, 웰링턴 공작 등 영국의 역사적 인물들이 안장되어 있습니다. 꿀팁 하나! 성당 지하에는 크립트 (Crypt)가 있는데, 이곳은 대성당 건축에 참여한 렌 경의 무덤이 있는 곳입니다. 그의 묘비에는 'Reader, if you seek his monument – look around (독자여, 그의 기념비를 찾거든 주위를 둘러보라)'라는 라틴어 문구가 새겨져 있습니다. 또 다른 숨겨진 이야기는, 제2차 세계대전 당시 런던이 폭격으로 파괴되었을 때, 세인트 폴 대성당은 기적적으로 살아남아 런던 시민들에게 희망의 상징이 되었다는 것입니다. 이 이야기는 수많은 예술 작품과 영화의 소재가 되기도 했습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
-      "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800",
-      "https://images.unsplash.com/photo-1543716021-36e0f757e6c9?w=800"
-    ],
-    "historicalInfo": "St. Paul's Cathedral was designed by Sir Christopher Wren after the Great Fire of London in 1666 and completed in 1710. It has been the site of many historic events including royal weddings and state funerals.",
-    "yearBuilt": "1675-1710",
-    "architect": "Sir Christopher Wren",
-    "translations": {
-      "en": {
-        "name": "St. Paul's Cathedral",
-        "narration": "Welcome to St. Paul's Cathedral, Sir Christopher Wren's Baroque masterpiece. Its iconic dome has dominated London's skyline for over 300 years.",
-        "description": "Iconic Baroque cathedral with one of the world's largest domes",
-        "historicalInfo": "St. Paul's Cathedral was designed by Sir Christopher Wren after the Great Fire of London in 1666 and completed in 1710.",
-        "yearBuilt": "1675-1710",
-        "architect": "Sir Christopher Wren"
-      },
-      "it": {
-        "name": "Cattedrale di St. Paul",
-        "narration": "Benvenuti alla Cattedrale di St. Paul, il capolavoro barocco di Sir Christopher Wren. La sua iconica cupola domina lo skyline di Londra da oltre 300 anni.",
-        "description": "Iconica cattedrale barocca con una delle cupole più grandi del mondo",
-        "historicalInfo": "La Cattedrale di St. Paul fu progettata da Sir Christopher Wren dopo il Grande Incendio di Londra del 1666 e completata nel 1710.",
-        "yearBuilt": "1675-1710",
-        "architect": "Sir Christopher Wren"
-      },
-      "ko": {
-        "name": "세인트 폴 대성당",
-        "narration": "크리스토퍼 렌 경의 바로크 걸작 세인트 폴 대성당에 오신 것을 환영합니다. 그 상징적인 돔은 300년 넘게 런던의 스카이라인을 지배해 왔습니다.",
-        "description": "세계에서 가장 큰 돔 중 하나를 가진 상징적인 바로크 대성당",
-        "historicalInfo": "세인트 폴 대성당은 1666년 런던 대화재 이후 크리스토퍼 렌 경이 설계하여 1710년에 완공되었습니다.",
-        "yearBuilt": "1675-1710년",
-        "architect": "크리스토퍼 렌 경"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:26.379Z",
-    "updatedAt": "2026-02-22T18:34:46.467Z"
-  },
-  {
-    "id": "louvre",
+    "id": "louvre-skip-line-tour",
     "cityId": "paris",
-    "name": "Louvre Museum",
-    "lat": 48.860294,
-    "lng": 2.338629,
-    "radius": 60,
-    "narration": "자, 상상해보세요. 지금 여러분은 세계 최대의 미술관, 루브르 박물관 앞에 서 있습니다. 파리의 심장부에서 800년이 넘는 역사를 품은 이 웅장한 건물은 단순한 미술관 그 이상입니다. 한때 왕궁이었고, 프랑스 혁명의 격동을 겪었으며, 수많은 예술가들의 영감이 되어준 살아있는 역사 그 자체죠. 발 아래 깔린 돌길을 느껴보세요. 수백 년 동안 수많은 발길이 스쳐 지나간 이 길을 따라, 레오나르도 다 빈치의 '모나리자'를 만나러 갑니다. 하지만 루브르는 모나리자 하나로 설명될 수 없는 곳입니다. 미켈란젤로, 라파엘로, 렘브란트… 시대를 초월한 거장들의 숨결이 박물관 곳곳에 스며들어 있습니다. 귓가에는 끊임없이 속삭이는 듯한 이야기들이 들려오는 것 같지 않나요? 왕족들의 화려한 연회, 예술가들의 뜨거운 논쟁, 혁명가들의 함성… 루브르는 과거와 현재가 공존하는 마법 같은 공간입니다. 자, 이제 깊게 숨을 들이쉬고, 루브르의 문을 열어 잊을 수 없는 예술 여행을 시작해볼까요? 햇살이 부드럽게 비추는 드농관에서 니케 여신의 날갯짓을, 웅장한 술리관에서 고대 이집트의 신비를, 그리고 리슐리외관에서 프랑스 조각의 아름다움을 만끽하며, 여러분만의 루브르 이야기를 만들어보세요. 그리고 잊지 마세요, 루브르는 단 하루 만에 전부를 볼 수 있는 곳이 아닙니다. 천천히, 음미하며, 여러분의 마음을 사로잡는 작품 앞에서 오래도록 머무르세요. 루브르는 언제나 여러분을 기다리고 있을 테니까요.",
-    "description": "The world's largest art museum and a historic monument",
-    "category": "Museum",
-    "detailedDescription": "루브르 박물관은 단순한 미술관이 아닌, 프랑스 역사의 산 증인입니다. 원래는 필리프 2세에 의해 12세기에 요새로 지어졌지만, 이후 왕궁으로 개조되었고, 프랑스 혁명 이후인 1793년에 미술관으로 개방되었습니다. 모나리자는 루브르의 아이콘이지만, 밀로의 비너스, 사모트라케의 니케, 함무라비 법전 등 세계적으로 유명한 작품들이 소장되어 있습니다. 현지인 꿀팁 하나! 루브르는 워낙 넓기 때문에 미리 동선을 짜고 가는 것이 좋습니다. 특히 인기 작품 앞은 항상 인산인해를 이루니, 아침 일찍 방문하거나 늦은 오후에 방문하는 것을 추천합니다. 그리고 루브르 지하에는 중세 루브르의 흔적을 볼 수 있는 공간이 마련되어 있으니, 잊지 말고 방문해보세요. 숨겨진 비화 하나 더! 루브르의 유리 피라미드는 건설 당시 엄청난 논란을 불러일으켰습니다. 전통적인 루브르 건물과 현대적인 피라미드의 조화가 어울리지 않는다는 비판이 많았지만, 현재는 루브르의 상징적인 건축물로 자리 잡았습니다. 루브르는 끊임없이 변화하고 진화하는 공간입니다. 새로운 전시와 특별 프로그램들이 계속해서 열리니, 방문 전에 루브르 박물관 공식 웹사이트를 확인하는 것을 잊지 마세요.",
+    "name": "Louvre Skip-the-Line Guided Tour",
+    "lat": 48.8606,
+    "lng": 2.3376,
+    "radius": 70,
+    "narration": "상상해보세요. 지금 여러분은 파리, 예술과 낭만이 숨 쉬는 도시의 심장부에 서 있습니다. 드넓은 루브르 박물관 앞, 끝없이 이어진 줄을 뒤로하고, 특별한 여정을 시작하려 합니다. 이 길고 긴 줄을 '스킵'하고 바로, 루브르의 심장으로 들어가는 짜릿함을 느껴보세요! 자, 이제부터 저, 스토리텔러 이와 함께 시간 여행을 떠나볼까요?\n\n루브르의 웅장한 문을 넘어서는 순간, 여러분은 마치 영화 속 주인공이 된 듯한 기분에 휩싸일 겁니다. 발 아래 깔린 대리석 바닥은 수백 년의 역사를 고스란히 담고 있고, 천장에는 화려한 프레스코화가 눈부시게 빛나고 있죠. 잠시 숨을 고르고, 주변을 둘러보세요. 수많은 예술 작품들이 여러분을 맞이할 준비를 하고 있습니다. \n\n가이드의 친절한 안내를 따라, 가장 먼저 향할 곳은 바로 '모나리자'입니다. 레오나르도 다 빈치의 걸작, 그녀의 신비로운 미소는 수백 년 동안 사람들의 마음을 사로잡았죠. 수많은 인파 속에서도 그녀의 눈빛은 변함없이 우리를 응시하고 있습니다. 상상해보세요, 그녀의 미소 속에 담긴 수많은 이야기들을! 그녀는 과연 무슨 생각을 하고 있을까요? \n\n다음으로, 고대 그리스의 아름다움을 대표하는 '밀로의 비너스'를 만나러 갑니다. 완벽한 비율과 우아한 자태는 시대를 초월하는 아름다움을 선사하죠. 팔이 없는 그녀의 모습은 오히려 더 많은 상상력을 불러일으킵니다. 그녀는 한때 어떤 모습이었을까요? 어떤 이야기를 품고 있을까요? \n\n루브르에는 이 두 작품 외에도 수많은 걸작들이 여러분을 기다리고 있습니다. 각 작품마다 숨겨진 역사와 흥미로운 이야기들을 들어보세요. 가이드의 설명은 마치 살아있는 역사책을 읽는 듯한 경험을 선사할 겁니다. 루브르의 예술 작품들을 감상하며, 여러분은 시간과 공간을 초월하는 특별한 감동을 느끼게 될 겁니다. 자, 이제 저와 함께 루브르의 숨겨진 보석들을 찾아 떠나볼까요?",
+    "description": "Skip-the-line guided tour of Louvre Museum highlights",
+    "category": "Activity",
+    "detailedDescription": "루브르 박물관, 한때 왕궁이었던 이곳은 이제 세계에서 가장 유명한 미술관 중 하나가 되었습니다. 하지만 루브르에는 숨겨진 이야기들이 많습니다. 예를 들어, 원래 루브르는 방어 요새로 지어졌다는 사실, 알고 계셨나요? 프랑수아 1세가 이탈리아 르네상스 예술에 매료되어 왕궁으로 개조하면서 예술의 중심지로 변모했습니다. \n\n'모나리자' 앞은 항상 사람들로 북적이지만, 현지인들은 평소보다 한 시간 일찍 문을 여는 날을 이용하거나, 수요일 저녁에 방문하는 것을 추천합니다. 비교적 한산하게 작품을 감상할 수 있다고 하네요. 또한, 루브르 지하에는 중세 시대 루브르의 흔적을 엿볼 수 있는 유적지가 있다는 사실! 놓치지 말고 방문해보세요.\n\n그리고 하나 더, 루브르 박물관 주변에는 맛있는 빵집과 카페들이 즐비합니다. 특히, 루브르에서 도보로 5분 거리에 있는 'Stohrer'는 파리에서 가장 오래된 제과점 중 하나입니다. 1730년부터 운영해온 이곳에서 에클레어와 바바 오 럼을 맛보며 잠시 휴식을 취하는 건 어떨까요? 루브르 관람 후 달콤한 디저트는 완벽한 마무리될 것입니다. 루브르, 단순한 미술관람을 넘어, 파리의 역사와 문화를 체험하는 특별한 경험을 만들어보세요.",
     "photos": [
       "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800",
-      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800",
-      "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800"
+      "https://images.unsplash.com/photo-1511882150382-421056c89033?w=800",
+      "https://images.unsplash.com/photo-1566740933430-b5e70b06d2d5?w=800",
+      "https://images.unsplash.com/photo-1550340499-a6c60fc8287c?w=800",
+      "https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=800",
+      "https://images.unsplash.com/photo-1550432163-9cb326104944?w=800",
+      "https://images.unsplash.com/photo-1585159812596-fcd94c2be419?w=800"
     ],
-    "historicalInfo": "The Louvre was originally a royal palace before becoming a public museum during the French Revolution in 1793. It houses approximately 38,000 objects from prehistory to the 21st century.",
-    "yearBuilt": "Palace: 12th century onwards, Museum: 1793",
-    "architect": "Multiple architects over centuries, Modern pyramid: I.M. Pei",
+    "historicalInfo": "The Louvre holds over 380,000 objects and displays 35,000 works of art in eight curatorial departments.",
+    "yearBuilt": "Museum opened 1793",
+    "architect": "Originally royal palace, various architects",
     "translations": {
       "en": {
-        "name": "Louvre Museum",
-        "narration": "You are at the Louvre Museum, the world's largest art museum. Home to thousands of works including the Mona Lisa.",
-        "description": "The world's largest art museum and a historic monument",
-        "detailedDescription": "The Louvre Museum, or Musée du Louvre, stands as the world's largest and most visited art museum, housing an incomparable collection of over 380,000 objects and displaying 35,000 works of art across 72,735 square meters (782,910 square feet) of galleries. Located in the historic Louvre Palace on the Right Bank of the Seine in Paris, this magnificent institution attracts approximately 10 million visitors annually, making it not only a temple of art but also a pilgrimage site for culture enthusiasts from around the globe. The Louvre's history is as rich and layered as the artworks it contains. The site began as a fortress built by King Philippe Auguste in the late 12th century to protect Paris from Viking invasions. Archaeological remains of this medieval fortress can still be seen in the museum's basement. In the 14th century, Charles V transformed the fortress into a royal residence, beginning its evolution into a palace. The modern Louvre palace took shape during the Renaissance when Francis I, a great patron of the arts who brought Leonardo da Vinci to France, demolished the old fortress and began constructing a Renaissance palace in 1546. Successive monarchs, particularly Louis XIV before he moved the court to Versailles, continued expanding and embellishing the palace, creating the magnificent complex we see today. The Louvre's transformation into a public museum began during the French Revolution. In 1793, the revolutionary government opened the Musée Central des Arts in the Grande Galerie, displaying the royal collection and artworks confiscated from the church and émigrés. Napoleon Bonaparte greatly expanded the collection through his military campaigns, bringing treasures from across Europe and Egypt. Though many pieces were returned after his defeat, the Louvre retained a substantial collection that formed the basis of its current holdings. The museum's collections span from ancient civilizations to the mid-19th century and are divided into eight curatorial departments: Egyptian Antiquities, Near Eastern Antiquities, Greek and Roman Antiquities, Islamic Art, Sculpture, Decorative Arts, Paintings, and Prints and Drawings. Among its most famous treasures are Leonardo da Vinci's \"Mona Lisa,\" the enigmatic portrait that draws millions of visitors who wait in long lines for a glimpse of her mysterious smile. The ancient Greek sculpture \"Venus de Milo,\" depicting the goddess Aphrodite, captivates with her timeless beauty despite her missing arms. The \"Winged Victory of Samothrace,\" a Hellenistic sculpture of Nike, the goddess of victory, commands attention at the top of the Daru staircase, her powerful form seemingly in motion despite being carved from marble over 2,000 years ago. The museum underwent dramatic transformation in the 1980s under President François Mitterrand's \"Grand Louvre\" project. The most controversial element was I.M. Pei's glass pyramid, completed in 1989, which serves as the museum's main entrance. Initially criticized as a modern intrusion on the historic palace, the pyramid has become an iconic symbol of the Louvre, its geometric form creating a striking dialogue between classical and contemporary architecture. The pyramid is surrounded by three smaller pyramids and fountains, creating the Cour Napoléon, a space where visitors gather before descending into the vast underground lobby that connects the museum's three wings: Sully, Richelieu, and Denon. The Louvre's galleries are a journey through human creativity and civilization. In the Egyptian Antiquities department, visitors encounter mummies, sarcophagi, and the monumental Great Sphinx of Tanis. The Near Eastern Antiquities house the Code of Hammurabi, one of the oldest deciphered writings of significant length in the world. The Greek and Roman galleries showcase classical sculptures, pottery, and jewelry that influenced Western art for millennia. The Painting galleries feature masterpieces by Caravaggio, Rembrandt, Vermeer, and countless other masters. Delacroix's \"Liberty Leading the People\" captures the revolutionary spirit of France, while Géricault's \"The Raft of the Medusa\" confronts viewers with the drama and horror of a tragic maritime disaster. The museum's Islamic Art department, housed in a stunning modern wing covered by an undulating golden veil designed by architects Rudy Ricciotti and Mario Bellini, displays treasures from three continents spanning 1,300 years. The Louvre is not merely a repository of art but a living institution that continues to evolve. It organizes major temporary exhibitions, conducts scholarly research, and undertakes conservation projects to preserve its treasures for future generations. The museum has also expanded globally, with the Louvre Abu Dhabi opening in 2017, extending the institution's mission to new audiences. Recent initiatives have focused on improving visitor experience, including timed entry tickets to manage crowds, enhanced digital guides, and special programs for families and students. The museum has also committed to transparency regarding the provenance of works in its collection, addressing historical injustices and working toward restitution when appropriate. Today, the Louvre stands as more than a museum - it is a symbol of human cultural achievement, a place where the greatest works of art from civilizations across time and space come together under one roof. Walking through its galleries is to journey through human history, to witness the evolution of artistic expression, and to stand before works that have moved, inspired, and challenged viewers for centuries. The Louvre reminds us of our shared cultural heritage and the enduring power of art to transcend time, language, and borders."
+        "name": "Louvre Skip-the-Line Guided Tour",
+        "narration": "Bypass the long queues and explore the Louvre's masterpieces with an expert guide. See the Mona Lisa, Venus de Milo, and other iconic artworks.",
+        "description": "Skip-the-line guided tour of Louvre Museum highlights",
+        "historicalInfo": "The Louvre holds over 380,000 objects and displays 35,000 works of art.",
+        "yearBuilt": "Museum opened 1793",
+        "architect": "Originally royal palace, various architects"
       },
       "it": {
-        "name": "Museo del Louvre",
-        "narration": "Ti trovi al Museo del Louvre, il più grande museo d'arte del mondo. Ospita migliaia di opere tra cui la Gioconda.",
-        "description": "Il più grande museo d'arte del mondo e un monumento storico",
-        "historicalInfo": "Il Louvre era originariamente un palazzo reale prima di diventare un museo pubblico durante la Rivoluzione francese nel 1793. Ospita circa 38.000 oggetti dalla preistoria al XXI secolo.",
-        "yearBuilt": "Palazzo: dal XII secolo in poi, Museo: 1793",
-        "architect": "Più architetti nel corso dei secoli, Piramide moderna: I.M. Pei"
+        "name": "Tour Guidato Louvre Salta la Coda",
+        "narration": "Salta le lunghe code ed esplora i capolavori del Louvre con una guida esperta. Vedi la Gioconda, la Venere di Milo e altre opere iconiche.",
+        "description": "Tour guidato salta la coda dei punti salienti del Museo del Louvre",
+        "historicalInfo": "Il Louvre ospita oltre 380.000 oggetti ed espone 35.000 opere d'arte.",
+        "yearBuilt": "Museo aperto nel 1793",
+        "architect": "Originariamente palazzo reale, vari architetti"
       },
       "ko": {
-        "name": "루브르 박물관",
-        "narration": "세계 최대의 미술관인 루브르 박물관에 오셨습니다. 모나리자를 포함한 수천 점의 작품이 소장되어 있습니다.",
-        "description": "세계 최대의 미술관이자 역사적 기념물",
-        "detailedDescription": "루브르 박물관(Musée du Louvre)은 세계에서 가장 크고 가장 많이 방문되는 미술관으로, 72,735평방미터(782,910평방피트)의 갤러리 공간에 380,000점 이상의 유물을 소장하고 35,000점의 예술 작품을 전시하고 있습니다. 파리의 센 강 우안에 위치한 역사적인 루브르 궁전에 자리한 이 장엄한 기관은 매년 약 1,000만 명의 방문객을 끌어모으며, 예술의 전당일 뿐만 아니라 전 세계 문화 애호가들의 순례지이기도 합니다. 루브르의 역사는 그곳에 소장된 예술 작품만큼이나 풍부하고 다층적입니다. 이 장소는 12세기 후반 필립 오귀스트 왕이 바이킹의 침략으로부터 파리를 보호하기 위해 건설한 요새로 시작되었습니다. 이 중세 요새의 고고학적 유적은 박물관 지하에서 여전히 볼 수 있습니다. 14세기에 샤를 5세가 요새를 왕실 거주지로 개조하면서 궁전으로의 진화가 시작되었습니다. 현대적인 루브르 궁전은 르네상스 시대에 형성되었는데, 레오나르도 다 빈치를 프랑스로 초청한 위대한 예술 후원자 프랑수아 1세가 1546년에 옛 요새를 철거하고 르네상스 궁전 건설을 시작했습니다. 특히 베르사유로 궁정을 옮기기 전의 루이 14세를 비롯한 후대 군주들이 계속해서 궁전을 확장하고 장식하여 오늘날 우리가 보는 웅장한 복합 건축물을 만들었습니다. 루브르가 공공 박물관으로 변모한 것은 프랑스 혁명 기간에 시작되었습니다. 1793년 혁명 정부는 그랑 갤러리에 중앙 예술 박물관(Musée Central des Arts)을 개관하여 왕실 소장품과 교회 및 망명자들로부터 압수한 예술 작품을 전시했습니다. 나폴레옹 보나파르트는 그의 군사 원정을 통해 유럽과 이집트 전역에서 보물을 가져와 소장품을 크게 확대했습니다. 그의 패배 후 많은 작품이 반환되었지만, 루브르는 현재 소장품의 기초를 형성한 상당한 컬렉션을 보유했습니다. 박물관의 소장품은 고대 문명부터 19세기 중반까지 다양하며 8개 큐레토리얼 부서로 나뉩니다. 방문 팁: 수요일과 금요일 야간 개관을 이용하면 혼잡을 피할 수 있으며, 온라인으로 시간 지정 티켓을 미리 예약하고, 덜 알려진 섹션인 이슬람 예술이나 장식 예술 갤러리를 탐험해 보세요.",
-        "historicalInfo": "루브르는 원래 왕궁이었으나 1793년 프랑스 혁명 중에 공공 박물관이 되었습니다. 선사시대부터 21세기까지 약 38,000점의 유물을 소장하고 있습니다.",
-        "yearBuilt": "궁전: 12세기 이후, 박물관: 1793년",
-        "architect": "여러 세기에 걸친 다양한 건축가들, 현대 피라미드: I.M. 페이"
-      },
-      "es": {
-        "name": "Museo del Louvre",
-        "narration": "Está en el Museo del Louvre, el museo de arte más grande del mundo. Hogar de miles de obras, incluida la Mona Lisa.",
-        "description": "El museo de arte más grande del mundo y un monumento histórico",
-        "historicalInfo": "El Louvre fue originalmente un palacio real antes de convertirse en museo público durante la Revolución Francesa en 1793. Alberga aproximadamente 38.000 objetos desde la prehistoria hasta el siglo XXI.",
-        "yearBuilt": "Palacio: desde el siglo XII en adelante, Museo: 1793",
-        "architect": "Múltiples arquitectos a lo largo de los siglos, Pirámide moderna: I.M. Pei"
-      },
-      "fr": {
-        "name": "Musée du Louvre",
-        "narration": "Vous êtes au Musée du Louvre, le plus grand musée d'art du monde. Il abrite des milliers d'œuvres, dont la Joconde.",
-        "description": "Le plus grand musée d'art du monde et un monument historique",
-        "historicalInfo": "Le Louvre était à l'origine un palais royal avant de devenir un musée public pendant la Révolution française en 1793. Il abrite environ 38 000 objets de la préhistoire au XXIe siècle.",
-        "yearBuilt": "Palais : à partir du XIIe siècle, Musée : 1793",
-        "architect": "Plusieurs architectes au fil des siècles, Pyramide moderne : I.M. Pei"
-      },
-      "de": {
-        "name": "Louvre-Museum",
-        "narration": "Sie befinden sich im Louvre-Museum, dem größten Kunstmuseum der Welt. Heimat Tausender Werke, darunter die Mona Lisa.",
-        "description": "Das größte Kunstmuseum der Welt und ein historisches Denkmal",
-        "historicalInfo": "Der Louvre war ursprünglich ein königlicher Palast, bevor er während der Französischen Revolution 1793 zu einem öffentlichen Museum wurde. Er beherbergt etwa 38.000 Objekte von der Vorgeschichte bis zum 21. Jahrhundert.",
-        "yearBuilt": "Palast: ab dem 12. Jahrhundert, Museum: 1793",
-        "architect": "Mehrere Architekten über Jahrhunderte, Moderne Pyramide: I.M. Pei"
-      },
-      "zh": {
-        "name": "卢浮宫博物馆",
-        "narration": "您正在卢浮宫博物馆，世界上最大的艺术博物馆。收藏了包括蒙娜丽莎在内的数千件作品。",
-        "description": "世界上最大的艺术博物馆和历史古迹",
-        "detailedDescription": "卢浮宫博物馆（Musée du Louvre）是世界上最大、参观人数最多的艺术博物馆，在72,735平方米（782,910平方英尺）的画廊空间内收藏了超过380,000件文物，展出35,000件艺术作品。这座宏伟的机构位于巴黎塞纳河右岸的历史悠久的卢浮宫内，每年吸引约1000万游客，不仅是艺术殿堂，也是来自全球文化爱好者的朝圣地。卢浮宫的历史与其收藏的艺术品一样丰富多彩、层次分明。这个地点最初是12世纪末菲利普·奥古斯特国王为保护巴黎免受维京人入侵而建造的堡垒。这座中世纪堡垒的考古遗迹至今仍可在博物馆地下室看到。14世纪，查理五世将堡垒改造为皇家住所，开始了其向宫殿的演变。现代卢浮宫在文艺复兴时期成形，当时伟大的艺术赞助人、将列奥纳多·达·芬奇带到法国的弗朗索瓦一世于1546年拆除了旧堡垒，开始建造文艺复兴宫殿。后继的君主，特别是在将宫廷迁往凡尔赛之前的路易十四，继续扩建和装饰宫殿，创造了我们今天看到的宏伟建筑群。卢浮宫向公共博物馆的转变始于法国大革命期间。1793年，革命政府在大画廊开设了中央艺术博物馆（Musée Central des Arts），展示皇家收藏品和从教会及流亡者那里没收的艺术品。拿破仑·波拿巴通过军事征服大大扩展了收藏，从整个欧洲和埃及带回珍宝。尽管在他战败后许多作品被归还，但卢浮宫保留了大量藏品，构成了其当前收藏的基础。博物馆的藏品跨越从古代文明到19世纪中叶，分为8个策展部门。参观提示：利用周三和周五的夜间开放时间可以避开人群，提前在线预订定时门票，探索较少人知的区域如伊斯兰艺术或装饰艺术画廊。",
-        "historicalInfo": "卢浮宫最初是一座皇家宫殿，1793年法国大革命期间成为公共博物馆。它收藏了约38,000件从史前到21世纪的文物。",
-        "yearBuilt": "宫殿：12世纪起，博物馆：1793年",
-        "architect": "几个世纪以来的多位建筑师，现代金字塔：贝聿铭"
-      },
-      "ja": {
-        "name": "ルーヴル美術館",
-        "narration": "ここは世界最大の美術館、ルーヴル美術館です。モナ・リザを含む数千の作品を所蔵しています。",
-        "description": "世界最大の美術館であり歴史的建造物",
-        "detailedDescription": "ルーヴル美術館（Musée du Louvre）は、世界最大かつ最も訪問者の多い美術館で、72,735平方メートル（782,910平方フィート）のギャラリースペースに380,000点以上の収蔵品があり、35,000点の美術作品を展示しています。パリのセーヌ川右岸にある歴史的なルーヴル宮殿に位置するこの壮大な施設は、年間約1,000万人の訪問者を魅了し、芸術の殿堂であるだけでなく、世界中の文化愛好家の巡礼地となっています。ルーヴルの歴史は、そこに収蔵されている芸術作品と同じくらい豊かで多層的です。この場所は、12世紀後半にフィリップ・オーギュスト王がヴァイキングの侵略からパリを守るために建設した要塞として始まりました。この中世の要塞の考古学的遺跡は、今でも美術館の地下で見ることができます。14世紀、シャルル5世が要塞を王室の住居に改造し、宮殿への進化が始まりました。現代のルーヴル宮殿はルネサンス期に形を成し、レオナルド・ダ・ヴィンチをフランスに招いた偉大な芸術の庇護者フランソワ1世が1546年に古い要塞を取り壊し、ルネサンス様式の宮殿の建設を始めました。特にヴェルサイユに宮廷を移す前のルイ14世をはじめとする歴代の君主たちが、宮殿の拡張と装飾を続け、今日見られる壮大な複合施設を作り上げました。ルーヴルが公共美術館へと変貌したのは、フランス革命期に始まりました。1793年、革命政府はグランド・ギャラリーに中央芸術美術館（Musée Central des Arts）を開設し、王室コレクションと教会や亡命者から没収した芸術作品を展示しました。ナポレオン・ボナパルトは軍事遠征を通じてヨーロッパとエジプト全域から財宝を持ち帰り、コレクションを大幅に拡大しました。彼の敗北後、多くの作品が返還されましたが、ルーヴルは現在の所蔵品の基礎となる相当なコレクションを保持しました。美術館のコレクションは古代文明から19世紀半ばまでをカバーし、8つのキュレーター部門に分かれています。訪問のヒント：水曜日と金曜日の夜間開館を利用すると混雑を避けられ、オンラインで時間指定チケットを事前予約し、イスラム美術や装飾美術ギャラリーなどあまり知られていないセクションを探索してみてください。",
-        "historicalInfo": "ルーヴルは元々王宮でしたが、1793年のフランス革命中に公共美術館となりました。先史時代から21世紀までの約38,000点の作品を所蔵しています。",
-        "yearBuilt": "宮殿：12世紀以降、美術館：1793年",
-        "architect": "何世紀にもわたる複数の建築家、現代のピラミッド：I.M.ペイ"
-      },
-      "pt": {
-        "name": "Museu do Louvre",
-        "narration": "Você está no Museu do Louvre, o maior museu de arte do mundo. Lar de milhares de obras, incluindo a Mona Lisa.",
-        "description": "O maior museu de arte do mundo e um monumento histórico",
-        "historicalInfo": "O Louvre foi originalmente um palácio real antes de se tornar um museu público durante a Revolução Francesa em 1793. Abriga aproximadamente 38.000 objetos da pré-história ao século XXI.",
-        "yearBuilt": "Palácio: do século XII em diante, Museu: 1793",
-        "architect": "Múltiplos arquitetos ao longo dos séculos, Pirâmide moderna: I.M. Pei"
-      },
-      "ru": {
-        "name": "Музей Лувр",
-        "narration": "Вы находитесь в музее Лувр, крупнейшем художественном музее мира. Здесь хранятся тысячи произведений, включая Мону Лизу.",
-        "description": "Крупнейший художественный музей мира и исторический памятник",
-        "historicalInfo": "Лувр первоначально был королевским дворцом, прежде чем стать публичным музеем во время Французской революции в 1793 году. В нем хранится около 38 000 экспонатов от доисторических времен до XXI века.",
-        "yearBuilt": "Дворец: с XII века, Музей: 1793",
-        "architect": "Множество архитекторов на протяжении веков, Современная пирамида: И.М. Пей"
+        "name": "루브르 우선 입장 가이드 투어",
+        "narration": "긴 줄을 건너뛰고 전문 가이드와 함께 루브르의 걸작을 탐험하세요. 모나리자, 밀로의 비너스 및 기타 상징적인 예술 작품을 보세요.",
+        "description": "루브르 박물관 하이라이트 우선 입장 가이드 투어",
+        "historicalInfo": "루브르는 380,000개 이상의 물건을 보유하고 있으며 35,000개의 예술 작품을 전시합니다.",
+        "yearBuilt": "박물관 개관 1793년",
+        "architect": "원래 왕궁, 다양한 건축가"
       }
     },
     "openingHours": null,
@@ -4952,368 +2684,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.935Z",
-    "updatedAt": "2026-02-22T18:07:07.818Z"
-  },
-  {
-    "id": "penang-street-food-tour",
-    "cityId": "penang",
-    "name": "Penang Street Food Tour",
-    "lat": 5.4141,
-    "lng": 100.3288,
-    "radius": 60,
-    "narration": "자, 상상해보세요! 지금 여러분은 페낭의 활기 넘치는 거리 한복판에 서 있습니다. 코를 찌르는 듯한 향신료 냄새, 뜨겁게 지글거리는 기름 소리, 흥정하는 상인들의 활기찬 목소리가 뒤섞여 오감을 자극하죠. 바로 이곳, 페낭은 말레이시아 미식의 심장이라고 불리는 곳입니다. 지금부터 저, 스토리텔러 이와 함께 전설적인 페낭 길거리 음식 투어를 시작할 거예요! 여러분의 발 아래에는 수백 년 동안 이어져 온 페낭 음식 문화의 역사가 고스란히 담겨 있습니다. 쨔르 꿰띠아우의 고소한 간장 냄새, 아쌈 락사의 매콤 시큼한 향, 그리고 체ndol의 달콤하고 시원한 유혹이 여러분을 기다리고 있죠. 자, 깊게 숨을 들이쉬고, 이 모든 맛있는 향기를 느껴보세요. 어떤가요? 벌써부터 입 안에 침이 고이지 않나요? 걱정 마세요! 오늘 우리는 이 모든 맛을 정복할 겁니다! 볶음 국수 쨔르 꿰띠아우는 뜨거운 철판 위에서 쉴 새 없이 춤을 추듯 볶아지는 페낭의 대표적인 길거리 음식입니다. 탱글탱글한 면발과 신선한 해산물, 그리고 톡 쏘는 라드유의 조화는 정말 환상적이죠. 한 입 맛보는 순간, 여러분은 페낭의 매력에 푹 빠져버릴 거예요. 자, 다음은 뭘 맛볼까요? 매콤하고 시큼한 아쌈 락사는 어떠세요? 생선 육수에 타마린드와 향신료를 넣어 끓인 국물은 정말 중독성이 강하답니다. 잊지 마세요, 진정한 페낭의 맛은 길거리에서 느껴야 한다는 것을! 지금 여러분의 눈앞에는 수많은 노점상들이 저마다의 비법을 담아 음식을 만들고 있습니다. 그들의 열정과 땀이 페낭 음식 문화의 역사를 만들어 온 것이죠. 자, 이제 용기를 내어 현지인처럼 주문해 보세요! 망설이지 마세요. 페낭의 모든 맛은 여러분을 환영할 준비가 되어 있답니다. 그리고 마지막으로, 더위를 식혀줄 달콤한 체ndol 한 그릇! 녹두 젤리와 코코넛 밀크, 그리고 말라카 설탕의 조화는 정말 완벽한 마무리가 될 거예요. 자, 이제 페낭의 길거리 음식 투어를 통해 여러분은 단순한 여행자가 아닌, 페낭의 맛과 문화를 진정으로 이해하는 미식가가 될 것입니다. 잊지 마세요, 페낭의 모든 길에는 맛있는 이야기가 숨겨져 있다는 것을! 자, 다음 맛집으로 함께 떠나볼까요?",
-    "description": "Guided tour of Penang's famous street food",
-    "category": "Activity",
-    "detailedDescription": "페낭 길거리 음식 투어는 단순한 먹방 여행이 아닙니다. 이 투어는 페낭의 다채로운 문화와 역사를 맛으로 경험하는 특별한 시간이죠. 페낭은 말레이시아의 다른 지역과는 확연히 다른 독특한 음식 문화를 가지고 있습니다. 그 이유는 바로 페낭이 오랫동안 다양한 문화가 교류하는 중심지였기 때문입니다. 중국, 인도, 말레이시아 원주민의 문화가 융합되어 탄생한 페낭 음식은 그야말로 '미식의 용광로'라고 할 수 있습니다. 특히 페낭의 길거리 음식은 이러한 문화 융합의 정수를 보여줍니다. 쨔르 꿰띠아우, 아쌈 락사, 체ndol 등은 모두 페낭에서만 맛볼 수 있는 독특한 음식들이죠. 하지만 페낭 길거리 음식 투어는 단순히 맛있는 음식을 먹는 것 이상입니다. 이 투어를 통해 여러분은 페낭 사람들의 삶과 문화를 엿볼 수 있습니다. 노점상들은 단순히 음식을 파는 사람들이 아니라, 페낭의 역사와 문화를 이어가는 중요한 역할을 하고 있습니다. 그들은 수십 년 동안, 심지어는 수백 년 동안 이어져 온 자신들만의 비법을 가지고 음식을 만듭니다. 그리고 그 음식에는 페낭 사람들의 삶과 애환이 고스란히 담겨 있습니다. 현지인 꿀팁을 하나 알려드릴까요? 페낭 길거리 음식은 아침 일찍 문을 여는 곳이 많으니, 아침 식사로 즐겨보는 것도 좋은 방법입니다. 특히 아침 시간에는 현지인들이 즐겨 찾는 숨겨진 맛집을 발견할 가능성이 높답니다. 또, 노점상들과 편하게 대화를 나눠보세요. 그들은 페낭 음식에 대한 자부심이 대단하며, 여러분에게 자신들의 음식에 대한 흥미로운 이야기를 들려줄 것입니다. 페낭 길거리 음식 투어는 여러분의 오감을 만족시키는 특별한 경험이 될 것입니다. 잊지 못할 추억을 만들고, 페낭의 맛과 문화를 마음껏 느껴보세요!",
-    "photos": [
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800",
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
-      "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=800",
-      "https://images.unsplash.com/photo-1595295333158-4742f28fbd85?w=800",
-      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
-      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800",
-      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800"
-    ],
-    "historicalInfo": "Penang's food culture developed over centuries through the mixing of diverse ethnic communities and trading influences.",
-    "yearBuilt": "Centuries-old tradition",
-    "architect": "Multicultural culinary heritage",
-    "translations": {
-      "en": {
-        "name": "Penang Street Food Tour",
-        "narration": "Discover Penang's legendary street food scene on this guided culinary adventure. Taste iconic dishes and learn about the island's unique food heritage.",
-        "description": "Guided tour of Penang's famous street food",
-        "detailedDescription": "Penang is widely regarded as Malaysia's food capital, and this guided street food tour is the best way to experience its incredible culinary diversity. Led by knowledgeable local food experts, you'll navigate bustling hawker centers, historic coffee shops, and hidden street stalls to sample Penang's most iconic dishes. Taste char kway teow (stir-fried flat rice noodles), assam laksa (spicy-sour fish noodle soup), Hokkien mee, rojak, and countless other specialties. Learn about the unique blend of Malay, Chinese, Indian, and Peranakan influences that created Penang's distinctive cuisine. Your guide will explain the history behind each dish, recommend the best stalls, and help you navigate ordering like a local. Tours typically include 8-10 food stops and last 3-4 hours. Come hungry and ready to discover why UNESCO recognized George Town for its exceptional food heritage.",
-        "historicalInfo": "Penang's food culture developed over centuries through the mixing of diverse ethnic communities and trading influences.",
-        "yearBuilt": "Centuries-old tradition",
-        "architect": "Multicultural culinary heritage"
-      },
-      "it": {
-        "name": "Tour dello Street Food di Penang",
-        "narration": "Scopri la leggendaria scena dello street food di Penang in questa avventura culinaria guidata. Assaggia piatti iconici e impara l'eredità alimentare unica dell'isola.",
-        "description": "Tour guidato del famoso street food di Penang",
-        "detailedDescription": "Penang è ampiamente considerata la capitale gastronomica della Malesia, e questo tour guidato dello street food è il modo migliore per sperimentare la sua incredibile diversità culinaria. Guidati da esperti di cibo locali ben informati, navigherai tra centri di venditori ambulanti affollati, caffetterie storiche e bancarelle di strada nascoste per assaggiare i piatti più iconici di Penang. Assapora char kway teow (tagliatelle di riso piatte saltate in padella), assam laksa (zuppa di noodles di pesce piccante-acida), Hokkien mee, rojak e innumerevoli altre specialità. Impara la miscela unica di influenze malesi, cinesi, indiane e Peranakan che ha creato la cucina distintiva di Penang. La tua guida spiegherà la storia dietro ogni piatto, consiglierà le migliori bancarelle e ti aiuterà a ordinare come un locale. I tour includono tipicamente 8-10 tappe gastronomiche e durano 3-4 ore. Vieni affamato e pronto a scoprire perché l'UNESCO ha riconosciuto George Town per il suo eccezionale patrimonio gastronomico.",
-        "historicalInfo": "La cultura alimentare di Penang si è sviluppata nel corso dei secoli attraverso la mescolanza di diverse comunità etniche e influenze commerciali.",
-        "yearBuilt": "Tradizione secolare",
-        "architect": "Patrimonio culinario multiculturale"
-      },
-      "ko": {
-        "name": "페낭 스트리트 푸드 투어",
-        "narration": "이 가이드 요리 모험에서 페낭의 전설적인 스트리트 푸드 장면을 발견하세요. 상징적인 요리를 맛보고 섬의 독특한 음식 유산에 대해 배우세요.",
-        "description": "페낭의 유명한 스트리트 푸드 가이드 투어",
-        "detailedDescription": "페낭은 말레이시아의 음식 수도로 널리 알려져 있으며, 이 가이드 스트리트 푸드 투어는 놀라운 요리 다양성을 경험할 수 있는 최고의 방법입니다. 지식이 풍부한 현지 음식 전문가가 이끄는 이 투어에서 붐비는 호커 센터, 역사적인 커피숍, 숨겨진 거리 노점을 탐색하며 페낭의 가장 상징적인 요리를 맛볼 수 있습니다. 차 퀘이 티오(볶은 납작 쌀국수), 아삼 락사(매콤하고 신 생선 국수 수프), 호키엔 미, 로작 및 수많은 다른 특선 요리를 맛보세요. 페낭의 독특한 요리를 만든 말레이, 중국, 인도, 페라나칸 영향의 독특한 혼합에 대해 배우세요. 가이드가 각 요리의 역사를 설명하고, 최고의 노점을 추천하며, 현지인처럼 주문하는 방법을 도와줍니다. 투어는 일반적으로 8-10개의 음식 정거장을 포함하며 3-4시간 동안 진행됩니다. 배고픈 상태로 와서 유네스코가 조지타운을 탁월한 음식 유산으로 인정한 이유를 발견할 준비를 하세요.",
-        "historicalInfo": "페낭의 음식 문화는 다양한 민족 공동체와 무역 영향의 혼합을 통해 수세기에 걸쳐 발전했습니다.",
-        "yearBuilt": "수세기 된 전통",
-        "architect": "다문화 요리 유산"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:35.593Z",
-    "updatedAt": "2026-02-22T18:35:00.074Z"
-  },
-  {
-    "id": "whale-shark-watching-cebu",
-    "cityId": "cebu",
-    "name": "Whale Shark Watching in Oslob",
-    "lat": 9.5137,
-    "lng": 123.3823,
-    "radius": 70,
-    "narration": "자, 눈을 감고 푸른 세부 바다를 상상해보세요. 따스한 햇살이 얼굴을 간지럽히고, 코 끝에는 짭짤한 바다 내음이 스며듭니다. 지금 여러분은 오슬롭 해안, 바로 눈앞에는 세상에서 가장 큰 물고기, 바로 고래상어가 유유히 헤엄치고 있습니다! 믿기지 않으시죠? 저도 처음엔 그랬답니다. 마치 꿈속을 걷는 기분이었어요. 상상해보세요! 거대한 몸집에도 불구하고 너무나 온순한 눈망울을 가진 고래상어가 여러분을 향해 다가오는 모습을요. 숨을 크게 들이쉬고 망설이지 마세요. 용기를 내어 그 곁으로 헤엄쳐 가세요! 부드러운 지느러미가 물결을 가르는 소리, 햇빛에 반짝이는 푸른 등, 그리고 무엇보다 그 거대한 생명체가 내뿜는 경이로운 아우라에 온몸이 전율할 겁니다. 마치 다른 행성에 온 듯한 착각이 들지도 몰라요. 하지만 걱정 마세요. 숙련된 현지 가이드들이 여러분의 안전을 책임지고, 고래상어에게 해를 끼치지 않는 방법 또한 친절하게 알려줄 겁니다. 이 순간, 여러분은 단순한 관광객이 아닌, 바다와 하나 되는 특별한 경험을 하게 될 거예요. 오슬롭의 고래상어와 함께하는 시간은 평생 잊지 못할 추억으로 남을 겁니다. 자, 이제 망설이지 말고 푸른 바다로 뛰어들어 보세요!",
-    "description": "Once-in-a-lifetime whale shark swimming experience",
-    "category": "Activity",
-    "detailedDescription": "오슬롭의 고래상어 투어는 세부 여행에서 빼놓을 수 없는 액티비티입니다. 필리핀 정부의 철저한 관리하에 진행되므로 안전하게 고래상어를 만날 수 있다는 장점이 있습니다. 고래상어는 플랑크톤을 주식으로 하는 온순한 성격의 동물이기 때문에 공격 걱정은 하지 않으셔도 됩니다. 하지만 고래상어를 보호하기 위해 반드시 지켜야 할 몇 가지 규칙이 있습니다. 선크림은 반드시 친환경 제품을 사용해야 하며, 고래상어에게 4m 이상 접근하거나 만져서는 안 됩니다. 또한, 사진 촬영 시 플래시 사용은 금지되어 있습니다. 투어는 보통 새벽 일찍 시작되는데, 이는 고래상어가 먹이를 찾아 해안 가까이 접근하는 시간과 맞춰져 있기 때문입니다. 현지인들은 고래상어를 '부탄딩'이라고 부르며 숭배의 대상으로 여기기도 합니다. 투어 전 현지 가이드로부터 안전 교육과 고래상어 보호에 대한 설명을 듣게 되며, 구명조끼와 스노클링 장비가 제공됩니다. 숨겨진 꿀팁을 하나 알려드리자면, 아침 일찍 서둘러 투어에 참여하는 것이 좋습니다. 사람이 적어 더욱 여유롭게 고래상어를 관찰하고 사진을 찍을 수 있기 때문입니다. 또한, 투어 후 오슬롭 주변의 아름다운 폭포나 해변을 방문하여 더욱 풍성한 여행을 즐길 수 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800",
-      "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800",
-      "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=800",
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
-      "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=800",
-      "https://images.unsplash.com/photo-1559666126-84f389727b9a?w=800",
-      "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800"
-    ],
-    "historicalInfo": "Whale shark watching in Oslob began in 2011 and has become one of the Philippines' most popular wildlife encounters.",
-    "yearBuilt": "2011",
-    "architect": "Oslob local community",
-    "translations": {
-      "en": {
-        "name": "Whale Shark Watching in Oslob",
-        "narration": "Swim with gentle giants in Oslob, one of the few places in the world where you can reliably encounter whale sharks year-round.",
-        "description": "Once-in-a-lifetime whale shark swimming experience",
-        "detailedDescription": "Experience the thrill of swimming alongside the world's largest fish - the gentle whale shark - in the waters of Oslob, southern Cebu. This unique wildlife encounter allows you to snorkel just meters away from these magnificent creatures, some reaching lengths of over 10 meters. Local fishermen have been feeding whale sharks in these waters since 2011, creating a reliable opportunity to see them year-round. Tours begin early morning (starting around 6 AM) when the whale sharks are most active. The experience includes a safety briefing, snorkeling equipment, and a 30-minute session in the water with the whale sharks. Strict regulations protect both visitors and the animals - no touching, flash photography, or sunscreen is allowed. Most tours can be combined with visits to nearby attractions like Tumalog Falls or Sumilon Island.",
-        "historicalInfo": "Whale shark watching in Oslob began in 2011 and has become one of the Philippines' most popular wildlife encounters.",
-        "yearBuilt": "2011",
-        "architect": "Oslob local community"
-      },
-      "it": {
-        "name": "Osservazione Squali Balena a Oslob",
-        "narration": "Nuota con i giganti gentili a Oslob, uno dei pochi posti al mondo dove puoi incontrare squali balena tutto l'anno in modo affidabile.",
-        "description": "Esperienza unica di nuoto con squali balena",
-        "detailedDescription": "Vivi l'emozione di nuotare accanto al pesce più grande del mondo - il gentile squalo balena - nelle acque di Oslob, nel sud di Cebu. Questo unico incontro con la fauna selvatica ti permette di fare snorkeling a pochi metri da queste magnifiche creature, alcune delle quali raggiungono lunghezze superiori ai 10 metri. I pescatori locali alimentano gli squali balena in queste acque dal 2011, creando un'opportunità affidabile per vederli tutto l'anno. I tour iniziano al mattino presto (a partire dalle 6 del mattino) quando gli squali balena sono più attivi. L'esperienza include un briefing sulla sicurezza, attrezzatura per lo snorkeling e una sessione di 30 minuti in acqua con gli squali balena. Regolamenti rigorosi proteggono sia i visitatori che gli animali - non è consentito toccare, fotografare con flash o usare crema solare. La maggior parte dei tour può essere combinata con visite ad attrazioni vicine come le Cascate di Tumalog o l'isola di Sumilon.",
-        "historicalInfo": "L'osservazione degli squali balena a Oslob è iniziata nel 2011 ed è diventata uno degli incontri con la fauna selvatica più popolari delle Filippine.",
-        "yearBuilt": "2011",
-        "architect": "Comunità locale di Oslob"
-      },
-      "ko": {
-        "name": "오슬롭 고래상어 관찰",
-        "narration": "연중 내내 고래상어를 안정적으로 만날 수 있는 세계에서 몇 안 되는 장소 중 하나인 오슬롭에서 온순한 거인들과 함께 수영하세요.",
-        "description": "일생일대의 고래상어 수영 체험",
-        "detailedDescription": "세부 남부 오슬롭의 바다에서 세계에서 가장 큰 물고기인 온순한 고래상어와 함께 수영하는 스릴을 경험하세요. 이 독특한 야생 동물 만남은 10미터가 넘는 길이의 웅장한 생물들로부터 불과 몇 미터 떨어진 곳에서 스노클링할 수 있게 해줍니다. 지역 어부들은 2011년부터 이 바다에서 고래상어에게 먹이를 주고 있어 연중 내내 고래상어를 볼 수 있는 안정적인 기회를 제공합니다. 투어는 고래상어가 가장 활발한 이른 아침(오전 6시경 시작)에 시작됩니다. 체험에는 안전 브리핑, 스노클링 장비, 고래상어와 함께 물속에서 보내는 30분 세션이 포함됩니다. 방문객과 동물 모두를 보호하기 위한 엄격한 규정이 있습니다 - 만지기, 플래시 촬영, 선크림 사용이 금지됩니다. 대부분의 투어는 투말록 폭포나 수밀론 섬과 같은 인근 명소 방문과 결합될 수 있습니다.",
-        "historicalInfo": "오슬롭의 고래상어 관찰은 2011년에 시작되어 필리핀에서 가장 인기 있는 야생 동물 만남 중 하나가 되었습니다.",
-        "yearBuilt": "2011",
-        "architect": "오슬롭 지역 사회"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:35.210Z",
-    "updatedAt": "2026-02-22T18:13:21.445Z"
-  },
-  {
-    "id": "rome_restaurant_la_pergola",
-    "cityId": "rome",
-    "name": "La Pergola",
-    "lat": 41.9171,
-    "lng": 12.4507,
-    "radius": 40,
-    "narration": "상상해보세요. 여러분은 지금 로마의 밤하늘 아래, 언덕 위에 자리 잡은 호텔 로마 카발리에리의 최상층에 서 있습니다. 눈앞에는 로마 시내가 한눈에 들어오는 숨 막힐 듯한 파노라마가 펼쳐지고, 부드러운 바람이 얼굴을 스치는 순간, 미슐랭 3스타 레스토랑, 라 페르골라의 문이 열립니다. \n\n'라 페르골라'라는 이름처럼, 아름다운 정원 속 덩굴처럼 우아하게 꾸며진 공간은 마치 꿈결 같습니다. 샹들리에의 은은한 불빛 아래, 섬세하게 세팅된 테이블은 마치 예술 작품 같아요. 이곳의 모든 것은 특별한 경험을 선사하기 위해 존재하죠. \n\n여러분은 이제 셰프 하인츠 벡의 손길로 탄생한 요리들을 맛보게 될 거예요. 그의 요리는 단순히 음식이 아니라, 맛과 향, 색채가 완벽하게 조화를 이루는 예술 작품입니다. 신선한 재료 본연의 맛을 극대화하면서도, 예측 불가능한 창의적인 터치가 더해져 매 순간 감탄을 자아내죠. \n\n와인 한 모금을 음미하며, 눈 앞에 펼쳐진 로마의 야경을 감상해보세요. 콜로세움, 포로 로마노, 성 베드로 대성당… 역사 속 영웅들의 발자취가 고스란히 느껴지는 불빛들이 밤하늘을 수놓습니다. 마치 시간 여행을 떠나온 듯한 기분, 느껴지시나요? \n\n라 페르골라에서의 식사는 단순한 저녁 식사가 아닙니다. 로마의 아름다움과 미식의 정점을 경험하는, 잊을 수 없는 추억이 될 거예요. 지금 여러분의 감각은 최고조에 달하고, 마음은 로마의 낭만으로 가득 차오릅니다. 이 순간을 영원히 기억하세요.",
-    "description": "Three Michelin star fine dining with panoramic views",
-    "category": "Restaurant",
-    "detailedDescription": "라 페르골라는 호텔 로마 카발리에리 9층에 위치한 로마 유일의 미슐랭 3스타 레스토랑입니다. 셰프 하인츠 벡은 1994년부터 이곳을 이끌며, 혁신적이고 예술적인 요리를 선보여왔습니다. 그의 요리는 이탈리아 전통 요리에 대한 깊은 이해를 바탕으로, 세계 각국의 다양한 식재료와 조리법을 융합하여 탄생합니다. \n\n라 페르골라의 가장 큰 매력 중 하나는 바로 로마 시내를 조망할 수 있는 환상적인 전망입니다. 특히 밤에는 콜로세움, 성 베드로 대성당 등 로마의 주요 랜드마크들이 아름다운 조명으로 빛나는 모습을 감상할 수 있습니다. 예약 시 창가 자리를 미리 요청하는 것이 좋습니다. \n\n숨겨진 팁을 하나 알려드릴게요. 라 페르골라에는 3만 병 이상의 와인을 보유한 방대한 와인 셀러가 있습니다. 소믈리에에게 추천을 부탁하면, 요리와 완벽하게 어울리는 와인을 경험할 수 있을 거예요. 또한, 특별한 날을 기념하기 위해 방문한다면, 사전에 요청하여 맞춤형 케이크나 꽃다발을 준비할 수도 있습니다. 라 페르골라는 단순한 레스토랑이 아닌, 로마 여행의 하이라이트를 장식할 특별한 공간입니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
-      "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "La Pergola",
-        "narration": "Experience Rome's only 3 Michelin star restaurant, La Pergola, offering breathtaking views and exquisite haute cuisine.",
-        "description": "Three Michelin star fine dining with panoramic views",
-        "detailedDescription": "Perched atop the Rome Cavalieri Hotel, La Pergola is Rome's only three-Michelin-starred restaurant. Chef Heinz Beck creates innovative Mediterranean cuisine that combines traditional Italian ingredients with modern techniques. The dining room offers spectacular panoramic views of Rome. The wine cellar houses over 60,000 bottles. Service is impeccable and the tasting menus are works of culinary art. Reservations required weeks in advance."
-      },
-      "ko": {
-        "name": "라 페르골라",
-        "narration": "로마의 유일한 미슐랭 3스타 레스토랑 라 페르골라에서 숨막히는 전망과 정교한 오뜨 퀴진을 경험하세요.",
-        "description": "파노라마 뷰를 갖춘 미슐랭 3스타 파인 다이닝",
-        "detailedDescription": "로마 카발리에리 호텔 꼭대기에 위치한 라 페르골라는 로마의 유일한 미슐랭 3스타 레스토랑입니다. 하인츠 벡 셰프는 전통 이탈리아 식재료와 현대적 기법을 결합한 혁신적인 지중해 요리를 선보입니다. 식당에서는 로마의 장관적인 파노라마 전망을 제공합니다. 와인 셀러에는 60,000병 이상의 와인이 보관되어 있습니다. 서비스는 완벽하며 테이스팅 메뉴는 요리 예술 작품입니다. 예약은 몇 주 전에 필요합니다."
-      },
-      "it": {
-        "name": "La Pergola",
-        "narration": "Vivi l'unico ristorante 3 stelle Michelin di Roma, La Pergola, che offre viste mozzafiato e alta cucina squisita.",
-        "description": "Fine dining tre stelle Michelin con vista panoramica",
-        "detailedDescription": "Situato in cima al Rome Cavalieri Hotel, La Pergola è l'unico ristorante tre stelle Michelin di Roma. Lo chef Heinz Beck crea una cucina mediterranea innovativa che combina ingredienti tradizionali italiani con tecniche moderne. La sala da pranzo offre viste panoramiche spettacolari su Roma. La cantina ospita oltre 60.000 bottiglie. Il servizio è impeccabile e i menu degustazione sono opere d'arte culinaria. Prenotazioni necessarie con settimane di anticipo."
-      },
-      "es": {
-        "name": "La Pergola",
-        "narration": "Experimente el único restaurante de 3 estrellas Michelin de Roma, La Pergola, que ofrece vistas impresionantes y exquisita alta cocina.",
-        "description": "Alta cocina con tres estrellas Michelin y vistas panorámicas",
-        "detailedDescription": "Situado en lo alto del hotel Rome Cavalieri, La Pergola es el único restaurante con tres estrellas Michelin de Roma. El chef Heinz Beck crea cocina mediterránea innovadora que combina ingredientes tradicionales italianos con técnicas modernas. El comedor ofrece espectaculares vistas panorámicas de Roma. La bodega alberga más de 60,000 botellas. El servicio es impecable y los menús de degustación son obras de arte culinario. Se requieren reservas con semanas de anticipación."
-      },
-      "fr": {
-        "name": "La Pergola",
-        "narration": "Découvrez le seul restaurant 3 étoiles Michelin de Rome, La Pergola, offrant des vues à couper le souffle et une haute cuisine exquise.",
-        "description": "Gastronomie trois étoiles Michelin avec vue panoramique",
-        "detailedDescription": "Perché au sommet de l'hôtel Rome Cavalieri, La Pergola est le seul restaurant trois étoiles Michelin de Rome. Le chef Heinz Beck crée une cuisine méditerranéenne innovante qui combine des ingrédients italiens traditionnels avec des techniques modernes. La salle à manger offre des vues panoramiques spectaculaires sur Rome. La cave abrite plus de 60 000 bouteilles. Le service est impeccable et les menus dégustation sont des œuvres d'art culinaire. Réservations nécessaires plusieurs semaines à l'avance."
-      },
-      "de": {
-        "name": "La Pergola",
-        "narration": "Erleben Sie Roms einziges 3-Sterne-Michelin-Restaurant La Pergola mit atemberaubenden Ausblicken und exquisiter Haute Cuisine.",
-        "description": "Drei-Sterne-Michelin Fine Dining mit Panoramablick",
-        "detailedDescription": "Auf dem Dach des Rome Cavalieri Hotels gelegen, ist La Pergola das einzige Drei-Sterne-Michelin-Restaurant Roms. Küchenchef Heinz Beck kreiert innovative mediterrane Küche, die traditionelle italienische Zutaten mit modernen Techniken verbindet. Der Speisesaal bietet spektakuläre Panoramablicke auf Rom. Der Weinkeller beherbergt über 60.000 Flaschen. Der Service ist makellos und die Degustationsmenüs sind kulinarische Kunstwerke. Reservierungen müssen Wochen im Voraus erfolgen."
-      },
-      "zh": {
-        "name": "La Pergola",
-        "narration": "体验罗马唯一的米其林三星餐厅La Pergola，享受令人叹为观止的景色和精致的高级料理。",
-        "description": "拥有全景视野的米其林三星精致餐厅",
-        "detailedDescription": "La Pergola位于罗马骑士酒店的顶层，是罗马唯一的米其林三星餐厅。主厨Heinz Beck创造了创新的地中海美食，将传统意大利食材与现代技术相结合。餐厅提供壮观的罗马全景。酒窖收藏超过60,000瓶葡萄酒。服务无可挑剔，品鉴菜单是烹饪艺术品。需提前数周预订。"
-      },
-      "ja": {
-        "name": "La Pergola",
-        "narration": "ローマ唯一のミシュラン三つ星レストラン、La Pergolaで息を呑むような景色と絶品のオートキュイジーヌをご体験ください。",
-        "description": "パノラマビューを備えたミシュラン三つ星ファインダイニング",
-        "detailedDescription": "ローマ・カヴァリエリ・ホテルの最上階に位置するLa Pergolaは、ローマ唯一のミシュラン三つ星レストランです。シェフのハインツ・ベックは、伝統的なイタリア食材と現代的な技法を組み合わせた革新的な地中海料理を創り出しています。ダイニングルームからはローマの壮大なパノラマビューが楽しめます。ワインセラーには60,000本以上のボトルが収蔵されています。サービスは完璧で、テイスティングメニューは料理芸術の作品です。予約は数週間前に必要です。"
-      },
-      "pt": {
-        "name": "La Pergola",
-        "narration": "Experimente o único restaurante 3 estrelas Michelin de Roma, La Pergola, oferecendo vistas deslumbrantes e requintada alta cozinha.",
-        "description": "Alta gastronomia três estrelas Michelin com vista panorâmica",
-        "detailedDescription": "Situado no topo do hotel Rome Cavalieri, La Pergola é o único restaurante três estrelas Michelin de Roma. O chef Heinz Beck cria uma cozinha mediterrânea inovadora que combina ingredientes tradicionais italianos com técnicas modernas. A sala de jantar oferece espetaculares vistas panorâmicas de Roma. A adega abriga mais de 60.000 garrafas. O serviço é impecável e os menus de degustação são obras de arte culinária. Reservas necessárias com semanas de antecedência."
-      },
-      "ru": {
-        "name": "La Pergola",
-        "narration": "Посетите единственный трёхзвездочный ресторан Мишлен в Риме — La Pergola, предлагающий захватывающие виды и изысканную высокую кухню.",
-        "description": "Трёхзвездочный ресторан Мишлен с панорамными видами",
-        "detailedDescription": "Расположенный на крыше отеля Rome Cavalieri, La Pergola — единственный трёхзвездочный ресторан Мишлен в Риме. Шеф-повар Хайнц Бек создает инновационную средиземноморскую кухню, сочетающую традиционные итальянские ингредиенты с современными техниками. Обеденный зал предлагает впечатляющие панорамные виды на Рим. Винный погреб вмещает более 60 000 бутылок. Обслуживание безупречное, а дегустационные меню — произведения кулинарного искусства. Бронирование необходимо за несколько недель."
-      }
-    },
-    "openingHours": "Tue-Sat: 19:30-22:30 | Closed Sun-Mon",
-    "priceRange": "€€€€€ (€200+ per person)",
-    "cuisine": "Fine Dining Mediterranean",
-    "reservationUrl": "https://www.romecavalieri.com/dining/la-pergola/",
-    "phoneNumber": "+39 06 3509 2152",
-    "menuHighlights": [
-      "Fagottelli",
-      "Red Shrimp",
-      "Lamb",
-      "Chocolate Souffle"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:40.185Z",
-    "updatedAt": "2026-02-22T18:13:31.301Z"
-  },
-  {
-    "id": "old_town_square",
-    "cityId": "prague",
-    "name": "Old Town Square",
-    "lat": 50.087465,
-    "lng": 14.421254,
-    "radius": 90,
-    "narration": "자, 눈을 감고 프라하의 심장, 구시가지 광장에 서 있다고 상상해보세요. 따스한 햇살이 뺨을 간지럽히고, 코끝에는 갓 구운 뜨르들로의 달콤한 냄새가 스며듭니다. 광장을 가득 메운 사람들의 웅성거림, 거리 악사의 활기찬 연주 소리, 그리고 저 멀리 천문 시계탑에서 울려 퍼지는 종소리가 귓가를 맴돌죠. 지금 여러분의 발 아래에는 수백 년의 역사가 고스란히 담긴 돌길이 놓여 있습니다. 중세 시대부터 이어져 온 이 광장은 왕들의 대관식이 거행되던 곳이자, 중요한 정치적 사건들이 펼쳐지던 역사의 무대였습니다. 잠시 시간을 거슬러 올라가 볼까요? 얀 후스의 숭고한 순교, 합스부르크 왕가의 화려한 축제, 그리고 벨벳 혁명의 함성이 이 광장을 가득 채웠던 순간들을요. 광장 한가운데 우뚝 솟은 얀 후스 기념비는 그의 용기와 신념을 기리는 상징입니다. 그의 강렬한 눈빛을 따라 시선을 옮기면, 고딕 양식의 틴 성당이 웅장한 자태를 드러냅니다. 두 개의 첨탑이 하늘을 향해 뻗어 오른 모습은 마치 중세 시대의 동화 속 성을 연상시키죠. 이제 고개를 들어 천문 시계탑을 올려다보세요. 매 시 정각, 12사도가 모습을 드러내는 경이로운 광경이 펼쳐집니다. 수백 년 동안 시간을 지켜온 이 시계는 단순한 기계 장치를 넘어 프라하의 정신을 상징하는 존재입니다. 잠시 숨을 고르고, 광장을 가득 채운 활기찬 에너지를 느껴보세요. 이곳은 단순한 관광 명소가 아닌, 프라하 시민들의 삶과 문화가 살아 숨 쉬는 공간입니다. 광장 곳곳에 자리 잡은 카페에 앉아 커피 한 잔을 즐기며, 프라하의 낭만을 만끽해보는 건 어떨까요?",
-    "description": "Historic square with the famous Astronomical Clock",
-    "category": "Historic Square",
-    "detailedDescription": "프라하 구시가지 광장은 단순히 아름다운 광장을 넘어, 체코 역사의 숨결이 살아 숨 쉬는 곳입니다. 12세기부터 형성된 이 광장은 중세 시대에는 시장으로, 이후에는 정치, 문화, 사회의 중심지로 발전해왔습니다. 광장의 가장 큰 자랑거리는 단연 천문 시계탑입니다. 1410년에 제작된 이 시계는 천동설에 기반하여 태양, 달, 별자리의 움직임을 보여주는 복잡한 장치로, 매 시 정각에 12사도가 등장하는 쇼는 놓칠 수 없는 볼거리입니다. 틴 성당 또한 빼놓을 수 없는 명소입니다. 두 개의 첨탑은 각각 아담과 이브를 상징하며, 성당 내부에는 다양한 예술 작품과 역사적 유물이 보관되어 있습니다. 얀 후스 기념비는 종교 개혁가 얀 후스를 기리는 기념물로, 그의 숭고한 희생을 기리고 있습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 크리스마스 시즌에 구시가지 광장을 방문하면, 잊지 못할 추억을 만들 수 있습니다. 아름다운 크리스마스 마켓이 열리고, 거대한 크리스마스 트리가 광장을 환하게 밝히죠. 따뜻한 와인 한 잔을 마시며 크리스마스 분위기를 만끽해보세요. 숨겨진 비화: 구시가지 광장 지하에는 비밀 통로가 존재한다는 이야기가 전해집니다. 중세 시대에 귀족들이 적들의 눈을 피해 이동하기 위해 만들었다고 하는데, 아직까지 그 정확한 위치는 밝혀지지 않았습니다. 프라하를 방문하신다면, 구시가지 광장에서 시간을 보내며 역사와 문화를 느껴보시길 바랍니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800",
-      "https://images.unsplash.com/photo-1458150945447-7fb764c11a92?w=800",
-      "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800"
-    ],
-    "historicalInfo": "The Old Town Square has been Prague's principal public square since the 10th century. It has witnessed numerous historical events including demonstrations, celebrations, and public executions. The square became the center of Prague's economic and political life during the Middle Ages.",
-    "yearBuilt": "10th century",
-    "architect": "Various architects over centuries",
-    "translations": {
-      "en": {
-        "name": "Old Town Square",
-        "narration": "Welcome to Old Town Square, the historic heart of Prague. This beautiful square features the famous Astronomical Clock and stunning architecture spanning multiple centuries.",
-        "description": "Historic square with the famous Astronomical Clock",
-        "detailedDescription": "The Old Town Square is a historic square in the Old Town quarter of Prague, the capital of the Czech Republic. It is located between Wenceslas Square and Charles Bridge. The square features various architectural styles including Gothic, Renaissance, Baroque, and Rococo. The centerpiece is the Church of Our Lady before Týn with its distinctive twin towers. The square also features the Old Town Hall with the famous Prague Astronomical Clock, which dates from 1410. This clock is one of the oldest and most elaborate astronomical clocks in the world. Every hour, crowds gather to watch the clock's hourly show of moving Apostle figures and other sculptures. The square has been a witness to many important events in Czech history. A memorial in the pavement marks the spot where 27 Czech nobles were executed in 1621 following the Battle of White Mountain. Today, Old Town Square is a vibrant gathering place with outdoor cafes, seasonal markets, and street performers.",
-        "historicalInfo": "The Old Town Square has been Prague's principal public square since the 10th century. It has witnessed numerous historical events including demonstrations, celebrations, and public executions. The square became the center of Prague's economic and political life during the Middle Ages.",
-        "yearBuilt": "10th century",
-        "architect": "Various architects over centuries"
-      },
-      "ko": {
-        "name": "구시가지 광장",
-        "narration": "프라하의 역사적 중심인 구시가지 광장에 오신 것을 환영합니다. 이 아름다운 광장에는 유명한 천문 시계와 여러 세기에 걸친 멋진 건축물이 있습니다.",
-        "description": "유명한 천문 시계가 있는 역사적인 광장",
-        "detailedDescription": "구시가지 광장은 체코 공화국의 수도 프라하의 구시가지 지구에 있는 역사적인 광장입니다. 바츨라프 광장과 카를교 사이에 위치합니다. 광장에는 고딕, 르네상스, 바로크, 로코코 등 다양한 건축 양식이 있습니다. 중심에는 독특한 쌍둥이 탑이 있는 틴 성모 교회가 있습니다. 광장에는 또한 1410년부터 있는 유명한 프라하 천문 시계가 있는 구시청사가 있습니다. 이 시계는 세계에서 가장 오래되고 정교한 천문 시계 중 하나입니다. 매시간 군중이 모여 움직이는 사도 인형과 기타 조각품의 시계 쇼를 봅니다. 광장은 체코 역사의 많은 중요한 사건의 증인이었습니다. 포장도로의 기념비는 백산 전투 이후 1621년에 27명의 체코 귀족이 처형된 장소를 표시합니다. 오늘날 구시가지 광장은 야외 카페, 계절 시장, 거리 공연자들이 있는 활기찬 모임 장소입니다.",
-        "historicalInfo": "구시가지 광장은 10세기부터 프라하의 주요 공공 광장이었습니다. 시위, 축하 행사, 공개 처형을 포함한 수많은 역사적 사건을 목격했습니다. 광장은 중세 시대에 프라하의 경제 및 정치 생활의 중심이 되었습니다.",
-        "yearBuilt": "10세기",
-        "architect": "여러 세기에 걸친 다양한 건축가"
-      },
-      "ja": {
-        "name": "旧市街広場",
-        "narration": "プラハの歴史的中心である旧市街広場へようこそ。この美しい広場には有名な天文時計と数世紀にわたる素晴らしい建築があります。",
-        "description": "有名な天文時計がある歴史的な広場",
-        "detailedDescription": "旧市街広場は、チェコ共和国の首都プラハの旧市街地区にある歴史的な広場です。ヴァーツラフ広場とカレル橋の間に位置しています。広場にはゴシック、ルネサンス、バロック、ロココなど、さまざまな建築様式があります。中心には、特徴的な双塔を持つティーン教会があります。広場にはまた、1410年からある有名なプラハの天文時計がある旧市庁舎があります。この時計は世界で最も古く精巧な天文時計の一つです。毎時、群衆が集まって動く使徒の人形やその他の彫刻の時計のショーを見ます。広場はチェコの歴史の多くの重要な出来事の証人でした。舗装の記念碑は、白山の戦いの後の1621年に27人のチェコ貴族が処刑された場所を示しています。今日、旧市街広場は屋外カフェ、季節の市場、ストリートパフォーマーがいる活気のある集まりの場所です。",
-        "historicalInfo": "旧市街広場は10世紀からプラハの主要な公共広場でした。デモ、祝賀、公開処刑を含む多くの歴史的出来事を目撃しました。広場は中世にプラハの経済的および政治的生活の中心になりました。",
-        "yearBuilt": "10世紀",
-        "architect": "数世紀にわたるさまざまな建築家"
-      },
-      "zh": {
-        "name": "老城广场",
-        "narration": "欢迎来到老城广场,布拉格的历史中心。这个美丽的广场拥有著名的天文钟和横跨数个世纪的令人惊叹的建筑。",
-        "description": "拥有著名天文钟的历史广场",
-        "detailedDescription": "老城广场是捷克共和国首都布拉格老城区的一个历史广场。它位于瓦茨拉夫广场和查理大桥之间。广场展现了包括哥特式、文艺复兴、巴洛克和洛可可在内的各种建筑风格。中心是提恩教堂,其标志性的双塔。广场还有老市政厅,拥有著名的布拉格天文钟,可追溯到1410年。这座钟是世界上最古老和最精致的天文钟之一。每个小时,人群聚集观看钟表的移动使徒人物和其他雕塑的表演。广场见证了捷克历史上的许多重要事件。人行道上的纪念碑标志着白山战役后1621年27名捷克贵族被处决的地点。今天,老城广场是一个充满活力的聚会场所,有户外咖啡馆、季节性市场和街头表演者。",
-        "historicalInfo": "老城广场自10世纪以来一直是布拉格的主要公共广场。它见证了包括示威、庆祝活动和公开处决在内的众多历史事件。广场在中世纪成为布拉格经济和政治生活的中心。",
-        "yearBuilt": "10世纪",
-        "architect": "几个世纪以来的各种建筑师"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:28.460Z",
-    "updatedAt": "2026-02-22T18:35:05.748Z"
-  },
-  {
-    "id": "phuket-sunset-cruise",
-    "cityId": "phuket",
-    "name": "Phang Nga Bay Sunset Cruise",
-    "lat": 8.2762,
-    "lng": 98.5016,
-    "radius": 90,
-    "narration": "자, 눈을 감고 상상해보세요. 따스한 바람이 얼굴을 스치고, 코끝에는 짭짤한 바다 내음이 감돌아요. 지금 여러분은 푸껫의 아름다운 팡아만 한가운데 떠 있는 크루즈 위에 있습니다. 해가 수평선 너머로 천천히 모습을 감추면서 하늘은 캔버스처럼 붉고, 주황색, 보랏빛으로 물들기 시작합니다. 마치 신이 붓으로 섬세하게 그려 놓은 한 폭의 그림 같아요. \n\n주변을 둘러보면 기암괴석들이 솟아오른 모습이 마치 거대한 조각 작품 같습니다. 저 멀리 보이는 제임스 본드 섬, 기억나시나요? 영화 '007 황금총을 가진 사나이'에서 악당의 은신처로 등장했던 바로 그곳입니다. 영화 속 주인공처럼 멋진 포즈를 취하며 사진을 찍어보는 건 어때요? \n\n배는 잔잔한 물결을 가르며 나아가고, 주변은 온통 석회암 절벽으로 둘러싸여 있습니다. 수천 년 동안 파도와 바람에 깎여 만들어진 이 절경들은 마치 자연이 우리에게 선사하는 최고의 예술 작품 같아요. 잠시 숨을 멈추고 주변의 소리에 귀를 기울여 보세요. 파도 소리, 갈매기 울음소리, 그리고 저 멀리 들려오는 작은 배들의 엔진 소리가 섞여 묘한 조화를 이룹니다. \n\n지금 여러분의 발 아래에는 안다만 해의 푸른 물결이 넘실거리고 있습니다. 이 아름다운 풍경 속에서 사랑하는 사람과 함께 석양을 바라보는 순간은 영원히 잊지 못할 추억으로 남을 거예요. 샴페인 한 잔을 기울이며, 오늘 하루의 피로를 풀고, 내일을 위한 에너지를 충전해 보세요. 팡아만 석양 크루즈는 단순한 여행이 아닌, 여러분의 삶에 아름다운 한 페이지를 더해줄 특별한 경험이 될 겁니다.",
-    "description": "Romantic sunset cruise through Phang Nga Bay",
-    "category": "Activity",
-    "detailedDescription": "팡아만 석양 크루즈는 단순히 아름다운 풍경을 감상하는 것을 넘어, 잊지 못할 추억을 만들 수 있는 특별한 경험입니다. 특히 제임스 본드 섬은 팡아만의 상징과도 같은 곳으로, 영화 팬이라면 반드시 방문해야 할 명소입니다. 하지만 섬에 내려 사진만 찍고 돌아오는 짧은 관광 코스보다는, 크루즈를 통해 여유롭게 주변 경관을 감상하는 것을 추천합니다. 현지인들은 석양이 질 무렵, 롱테일 보트를 타고 맹그로브 숲 사이를 탐험하는 것을 즐깁니다. 크루즈 투어에 포함되어 있는지 확인해보고, 맹그로브 숲의 신비로운 분위기를 느껴보세요. 또한, 팡아만 주변에는 숨겨진 해변과 동굴들이 많이 있습니다. 크루즈를 예약할 때, 이러한 숨겨진 명소를 방문하는 코스가 있는지 문의해보는 것도 좋은 방법입니다. 운이 좋다면, 아무도 없는 해변에서 둘만의 시간을 보낼 수도 있습니다. 팁을 하나 더 드리자면, 크루즈에 탑승하기 전에 간단한 간식과 음료를 준비해가는 것이 좋습니다. 석양을 감상하며 즐기는 간식은 더욱 특별한 맛을 선사할 것입니다. 그리고, 모기 퇴치제를 꼭 챙기세요! 석양이 질 무렵에는 모기가 많이 나타날 수 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1552055568-3b8d96892c4e?w=800",
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
-      "https://images.unsplash.com/photo-1548013146-72479768bada?w=800",
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
-      "https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=800",
-      "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800",
-      "https://images.unsplash.com/photo-1559666126-84f389727b9a?w=800"
-    ],
-    "historicalInfo": "Phang Nga Bay became internationally famous after appearing in the James Bond film in 1974.",
-    "yearBuilt": "Ancient geological formation",
-    "architect": "Millions of years of natural formation",
-    "translations": {
-      "en": {
-        "name": "Phang Nga Bay Sunset Cruise",
-        "narration": "Experience the magic of Phang Nga Bay on this romantic sunset cruise. Sail past dramatic limestone karsts, visit James Bond Island, and watch the sunset over the Andaman Sea.",
-        "description": "Romantic sunset cruise through Phang Nga Bay",
-        "historicalInfo": "Phang Nga Bay became internationally famous after appearing in the James Bond film in 1974.",
-        "yearBuilt": "Ancient geological formation",
-        "architect": "Millions of years of natural formation"
-      },
-      "it": {
-        "name": "Crociera al Tramonto nella Baia di Phang Nga",
-        "narration": "Vivi la magia della Baia di Phang Nga in questa romantica crociera al tramonto. Naviga accanto a drammatici karst calcarei, visita l'Isola di James Bond e guarda il tramonto sul Mare delle Andamane.",
-        "description": "Crociera romantica al tramonto attraverso la Baia di Phang Nga",
-        "historicalInfo": "La Baia di Phang Nga divenne famosa a livello internazionale dopo essere apparsa nel film di James Bond nel 1974.",
-        "yearBuilt": "Formazione geologica antica",
-        "architect": "Milioni di anni di formazione naturale"
-      },
-      "ko": {
-        "name": "팡아 만 선셋 크루즈",
-        "narration": "이 낭만적인 선셋 크루즈에서 팡아 만의 마법을 경험하세요. 극적인 석회암 카르스트를 지나 항해하고, 제임스 본드 섬을 방문하며, 안다만 해 위로 지는 석양을 감상하세요.",
-        "description": "팡아 만을 통한 낭만적인 선셋 크루즈",
-        "historicalInfo": "팡아 만은 1974년 제임스 본드 영화에 등장한 후 국제적으로 유명해졌습니다.",
-        "yearBuilt": "고대 지질학적 형성",
-        "architect": "수백만 년의 자연 형성"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:36.272Z",
-    "updatedAt": "2026-02-22T18:35:20.130Z"
+    "createdAt": "2026-02-12T12:11:37.505Z",
+    "updatedAt": "2026-02-22T20:00:58.023Z"
   },
   {
     "id": "glacier_bay",
@@ -5383,251 +2755,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:27.231Z",
-    "updatedAt": "2026-02-22T18:13:50.366Z"
-  },
-  {
-    "id": "british_museum",
-    "cityId": "london",
-    "name": "British Museum",
-    "lat": 51.519413,
-    "lng": -0.126957,
-    "radius": 70,
-    "narration": "자, 여러분, 상상해보세요. 지금 여러분은 런던의 심장, 대영박물관 앞에 서 있습니다. 웅장한 신고전주의 양식의 건물은 마치 시간의 문과 같아요. 문을 열고 들어서는 순간, 200만 년이라는 인류 역사의 숨결이 여러분을 감쌀 겁니다. 발 아래 깔린 대리석 바닥은 수많은 발자국 소리를 기억하고 있겠죠. 귓가에는 아이들의 호기심 가득한 질문과 웅성거리는 대화 소리가 섞여 들려옵니다. 코끝으로는 오래된 책과 돌 조각의 냄새가 느껴지네요. \n\n지금 여러분 눈앞에는 로제타 스톤이 빛나고 있을 겁니다. 고대 이집트 상형 문자의 비밀을 풀어낸 열쇠, 그 역사적인 순간을 상상해보세요. 이 돌 하나가 얼마나 많은 이야기를 품고 있는지! 다음 전시실로 발길을 옮기면, 파르테논 신전의 조각들이 웅장한 자태를 뽐내고 있습니다. 그리스 신화 속 영웅들의 이야기가 마치 살아있는 듯 느껴지지 않나요? \n\n잠시 눈을 감고, 고대 이집트의 왕좌에 앉아 있다고 상상해보세요. 혹은 로마 제국의 위대한 장군이 되어 개선문을 통과하는 모습을 떠올려보는 건 어때요? 대영박물관은 단순한 박물관이 아니라, 시간을 거슬러 올라가는 마법 같은 공간입니다. 이곳에서 여러분은 역사의 주인공이 될 수 있습니다. 자, 이제 여러분만의 특별한 시간 여행을 시작해볼까요?",
-    "description": "World-renowned museum of human history and culture",
-    "category": "Museum",
-    "detailedDescription": "대영박물관은 1753년 개관 이후, 전 세계의 역사와 문화를 아우르는 800만 점 이상의 방대한 유물을 소장하고 있습니다. 단순히 유물을 전시하는 공간을 넘어, 인류의 진화와 문명의 발전을 보여주는 살아있는 역사책이라고 할 수 있죠. 박물관의 하이라이트는 단연 로제타 스톤입니다. 이집트 상형 문자 해독의 결정적인 단서가 된 이 비석은 매년 수백만 명의 방문객을 끌어모으고 있습니다. 뿐만 아니라, 파르테논 신전 조각군, 이집트 미라, 메소포타미아 유물 등 세계적으로 중요한 유물들이 즐비합니다. \n\n**현지인 꿀팁**: 대영박물관은 상설 전시가 무료라는 사실, 알고 계셨나요? 하지만 특별 전시의 경우 티켓을 구매해야 합니다. 붐비는 시간을 피하고 싶다면, 아침 일찍 방문하거나 금요일 저녁에 '나이트 앳 더 뮤지엄' 행사를 이용해보세요. **숨겨진 비화**: 대영박물관은 과거 대영제국의 식민지 시대에 수집된 유물들이 많아, 약탈 문화재 논란이 끊이지 않고 있습니다. 이러한 논쟁을 염두에 두고 유물을 관람하면 더욱 깊이 있는 경험을 할 수 있을 겁니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800",
-      "https://images.unsplash.com/photo-1575223970966-76ae61ee7838?w=800",
-      "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800"
-    ],
-    "historicalInfo": "The British Museum was founded in 1753 and was the world's first national public museum. It opened to visitors in 1759 and has since become one of the most visited museums globally.",
-    "yearBuilt": "1753 (current building: 1823-1852)",
-    "architect": "Sir Robert Smirke (main building), Norman Foster (Great Court roof)",
-    "translations": {
-      "en": {
-        "name": "British Museum",
-        "narration": "Welcome to the British Museum, one of the world's greatest museums of human history and culture. It houses over 8 million works spanning two million years.",
-        "description": "World-renowned museum of human history and culture",
-        "historicalInfo": "The British Museum was founded in 1753 and was the world's first national public museum.",
-        "yearBuilt": "1753 (current building: 1823-1852)",
-        "architect": "Sir Robert Smirke (main building), Norman Foster (Great Court roof)"
-      },
-      "it": {
-        "name": "British Museum",
-        "narration": "Benvenuti al British Museum, uno dei più grandi musei di storia e cultura dell'umanità al mondo. Ospita oltre 8 milioni di opere che coprono due milioni di anni.",
-        "description": "Museo di fama mondiale di storia e cultura umana",
-        "historicalInfo": "Il British Museum fu fondato nel 1753 e fu il primo museo pubblico nazionale al mondo.",
-        "yearBuilt": "1753 (edificio attuale: 1823-1852)",
-        "architect": "Sir Robert Smirke (edificio principale), Norman Foster (tetto Great Court)"
-      },
-      "ko": {
-        "name": "대영박물관",
-        "narration": "인류 역사와 문화의 세계 최고의 박물관 중 하나인 대영박물관에 오신 것을 환영합니다. 200만 년에 걸친 800만 점 이상의 작품을 소장하고 있습니다.",
-        "description": "세계적으로 유명한 인류 역사 및 문화 박물관",
-        "historicalInfo": "대영박물관은 1753년에 설립되었으며 세계 최초의 국립 공공 박물관입니다.",
-        "yearBuilt": "1753년 (현재 건물: 1823-1852년)",
-        "architect": "로버트 스머크 경 (본관), 노먼 포스터 (그레이트 코트 지붕)"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:26.261Z",
-    "updatedAt": "2026-02-22T18:13:40.800Z"
-  },
-  {
-    "id": "louvre-skip-line-tour",
-    "cityId": "paris",
-    "name": "Louvre Skip-the-Line Guided Tour",
-    "lat": 48.8606,
-    "lng": 2.3376,
-    "radius": 70,
-    "narration": "상상해보세요. 지금 여러분은 파리, 예술과 낭만이 숨 쉬는 도시의 심장부에 서 있습니다. 드넓은 루브르 박물관 앞, 끝없이 이어진 줄을 뒤로하고, 특별한 여정을 시작하려 합니다. 이 길고 긴 줄을 '스킵'하고 바로, 루브르의 심장으로 들어가는 짜릿함을 느껴보세요! 자, 이제부터 저, 스토리텔러 이와 함께 시간 여행을 떠나볼까요?\n\n루브르의 웅장한 문을 넘어서는 순간, 여러분은 마치 영화 속 주인공이 된 듯한 기분에 휩싸일 겁니다. 발 아래 깔린 대리석 바닥은 수백 년의 역사를 고스란히 담고 있고, 천장에는 화려한 프레스코화가 눈부시게 빛나고 있죠. 잠시 숨을 고르고, 주변을 둘러보세요. 수많은 예술 작품들이 여러분을 맞이할 준비를 하고 있습니다. \n\n가이드의 친절한 안내를 따라, 가장 먼저 향할 곳은 바로 '모나리자'입니다. 레오나르도 다 빈치의 걸작, 그녀의 신비로운 미소는 수백 년 동안 사람들의 마음을 사로잡았죠. 수많은 인파 속에서도 그녀의 눈빛은 변함없이 우리를 응시하고 있습니다. 상상해보세요, 그녀의 미소 속에 담긴 수많은 이야기들을! 그녀는 과연 무슨 생각을 하고 있을까요? \n\n다음으로, 고대 그리스의 아름다움을 대표하는 '밀로의 비너스'를 만나러 갑니다. 완벽한 비율과 우아한 자태는 시대를 초월하는 아름다움을 선사하죠. 팔이 없는 그녀의 모습은 오히려 더 많은 상상력을 불러일으킵니다. 그녀는 한때 어떤 모습이었을까요? 어떤 이야기를 품고 있을까요? \n\n루브르에는 이 두 작품 외에도 수많은 걸작들이 여러분을 기다리고 있습니다. 각 작품마다 숨겨진 역사와 흥미로운 이야기들을 들어보세요. 가이드의 설명은 마치 살아있는 역사책을 읽는 듯한 경험을 선사할 겁니다. 루브르의 예술 작품들을 감상하며, 여러분은 시간과 공간을 초월하는 특별한 감동을 느끼게 될 겁니다. 자, 이제 저와 함께 루브르의 숨겨진 보석들을 찾아 떠나볼까요?",
-    "description": "Skip-the-line guided tour of Louvre Museum highlights",
-    "category": "Activity",
-    "detailedDescription": "루브르 박물관, 한때 왕궁이었던 이곳은 이제 세계에서 가장 유명한 미술관 중 하나가 되었습니다. 하지만 루브르에는 숨겨진 이야기들이 많습니다. 예를 들어, 원래 루브르는 방어 요새로 지어졌다는 사실, 알고 계셨나요? 프랑수아 1세가 이탈리아 르네상스 예술에 매료되어 왕궁으로 개조하면서 예술의 중심지로 변모했습니다. \n\n'모나리자' 앞은 항상 사람들로 북적이지만, 현지인들은 평소보다 한 시간 일찍 문을 여는 날을 이용하거나, 수요일 저녁에 방문하는 것을 추천합니다. 비교적 한산하게 작품을 감상할 수 있다고 하네요. 또한, 루브르 지하에는 중세 시대 루브르의 흔적을 엿볼 수 있는 유적지가 있다는 사실! 놓치지 말고 방문해보세요.\n\n그리고 하나 더, 루브르 박물관 주변에는 맛있는 빵집과 카페들이 즐비합니다. 특히, 루브르에서 도보로 5분 거리에 있는 'Stohrer'는 파리에서 가장 오래된 제과점 중 하나입니다. 1730년부터 운영해온 이곳에서 에클레어와 바바 오 럼을 맛보며 잠시 휴식을 취하는 건 어떨까요? 루브르 관람 후 달콤한 디저트는 완벽한 마무리될 것입니다. 루브르, 단순한 미술관람을 넘어, 파리의 역사와 문화를 체험하는 특별한 경험을 만들어보세요.",
-    "photos": [
-      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800",
-      "https://images.unsplash.com/photo-1511882150382-421056c89033?w=800",
-      "https://images.unsplash.com/photo-1566740933430-b5e70b06d2d5?w=800",
-      "https://images.unsplash.com/photo-1550340499-a6c60fc8287c?w=800",
-      "https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=800",
-      "https://images.unsplash.com/photo-1550432163-9cb326104944?w=800",
-      "https://images.unsplash.com/photo-1585159812596-fcd94c2be419?w=800"
-    ],
-    "historicalInfo": "The Louvre holds over 380,000 objects and displays 35,000 works of art in eight curatorial departments.",
-    "yearBuilt": "Museum opened 1793",
-    "architect": "Originally royal palace, various architects",
-    "translations": {
-      "en": {
-        "name": "Louvre Skip-the-Line Guided Tour",
-        "narration": "Bypass the long queues and explore the Louvre's masterpieces with an expert guide. See the Mona Lisa, Venus de Milo, and other iconic artworks.",
-        "description": "Skip-the-line guided tour of Louvre Museum highlights",
-        "historicalInfo": "The Louvre holds over 380,000 objects and displays 35,000 works of art.",
-        "yearBuilt": "Museum opened 1793",
-        "architect": "Originally royal palace, various architects"
-      },
-      "it": {
-        "name": "Tour Guidato Louvre Salta la Coda",
-        "narration": "Salta le lunghe code ed esplora i capolavori del Louvre con una guida esperta. Vedi la Gioconda, la Venere di Milo e altre opere iconiche.",
-        "description": "Tour guidato salta la coda dei punti salienti del Museo del Louvre",
-        "historicalInfo": "Il Louvre ospita oltre 380.000 oggetti ed espone 35.000 opere d'arte.",
-        "yearBuilt": "Museo aperto nel 1793",
-        "architect": "Originariamente palazzo reale, vari architetti"
-      },
-      "ko": {
-        "name": "루브르 우선 입장 가이드 투어",
-        "narration": "긴 줄을 건너뛰고 전문 가이드와 함께 루브르의 걸작을 탐험하세요. 모나리자, 밀로의 비너스 및 기타 상징적인 예술 작품을 보세요.",
-        "description": "루브르 박물관 하이라이트 우선 입장 가이드 투어",
-        "historicalInfo": "루브르는 380,000개 이상의 물건을 보유하고 있으며 35,000개의 예술 작품을 전시합니다.",
-        "yearBuilt": "박물관 개관 1793년",
-        "architect": "원래 왕궁, 다양한 건축가"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:37.505Z",
-    "updatedAt": "2026-02-22T18:14:01.199Z"
-  },
-  {
-    "id": "pantheon",
-    "cityId": "rome",
-    "name": "Pantheon",
-    "lat": 41.898609,
-    "lng": 12.476873,
-    "radius": 50,
-    "narration": "여러분, 지금 눈을 감고 2천 년 전 로마로 시간 여행을 떠나볼까요? 웅장한 판테온 앞에 서 있는 여러분의 모습을 상상해보세요. 뜨거운 햇살이 광장을 가득 채우고, 사람들의 웅성거리는 소리가 귓가를 간지럽힙니다. 코를 찌르는 듯한 향긋한 꽃 향기와 구수한 빵 굽는 냄새가 섞여 미각을 자극하죠. 자, 숨을 크게 들이쉬고 눈을 떠 보세요! 바로 눈 앞에 펼쳐진 거대한 돔, 판테온이 여러분을 압도합니다. 믿기지 않겠지만, 이 건축물은 서기 126년에 완공되었다고 해요. 거의 2천 년 동안이나 이 자리를 지켜온 거죠. 지금 여러분의 발 아래에는 수많은 로마 시민들의 희로애락이 담긴 역사가 잠들어 있습니다. 한때 모든 신에게 바쳐진 신전이었던 이곳은, 시간이 흘러 기독교 교회로 변모하며 로마의 흥망성쇠를 고스란히 목격했습니다. 돔 천장의 커다란 '오쿨루스(oculus)'를 통해 쏟아지는 빛줄기를 느껴보세요. 마치 신의 축복처럼 따스하고 신성한 기운이 온몸을 감싸는 듯합니다. 비가 오는 날이면 빗물이 오쿨루스를 통해 쏟아져 들어오는데, 바닥에 설치된 배수 시설 덕분에 걱정할 필요는 없답니다. 판테온 안으로 들어가면, 라파엘로를 비롯한 수많은 예술가와 왕족들의 무덤이 자리하고 있습니다. 그들의 영혼이 판테온의 웅장함 속에서 영원히 잠들어 있는 거죠. 판테온은 단순한 건축물이 아니라, 로마의 역사와 예술, 그리고 인간의 영원한 염원을 담고 있는 살아있는 유산입니다. 이곳에서 잠시 시간을 멈추고, 고대 로마의 숨결을 느껴보세요.",
-    "description": "An architectural marvel with the world's largest unreinforced concrete dome",
-    "category": "Ancient Rome",
-    "detailedDescription": "판테온은 '모든 신에게 바쳐진 신전'이라는 뜻을 가진, 로마 건축 기술의 정수를 보여주는 건축물입니다. 원래 아그리파에 의해 건설되었으나 화재로 소실된 후, 하드리아누스 황제에 의해 서기 126년경 재건축되었습니다. 판테온의 가장 큰 특징은 직경 43.3m의 거대한 돔입니다. 이 돔은 당시로서는 상상하기 힘든 기술력으로 만들어졌으며, 돔 중앙에 있는 '오쿨루스'라는 구멍을 통해 자연광이 들어오도록 설계되었습니다. 오쿨루스는 판테온 내부를 밝히는 유일한 광원이자, 하늘과 소통하는 상징적인 통로 역할을 합니다. 판테온은 로마 제국 시대에는 신전으로 사용되었지만, 7세기 초 기독교 교회로 바뀌면서 파괴를 면하고 오늘날까지 보존될 수 있었습니다. 흥미로운 사실은, 판테온 건축 당시 콘크리트 배합에 화산재를 사용했는데, 이 화산재 덕분에 콘크리트가 더욱 단단해져 2천 년이 지난 지금도 굳건히 유지될 수 있었다는 것입니다. 판테온 내부에는 르네상스 시대의 거장 라파엘로의 무덤이 있는데, 그의 유언에 따라 이곳에 안장되었다고 합니다. 판테온 주변에는 맛있는 젤라또 가게와 레스토랑이 많으니, 방문 후 여유롭게 식사를 즐기는 것도 좋은 경험이 될 것입니다. 판테온 광장에서 종종 거리 공연이 펼쳐지기도 하니, 운이 좋다면 멋진 공연을 감상할 수도 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1548585744-4e87a0e84c88?w=800",
-      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800",
-      "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800",
-      "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800",
-      "https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800",
-      "https://images.unsplash.com/photo-1604580864964-0462f5d5b1a8?w=800",
-      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800"
-    ],
-    "historicalInfo": "The Pantheon is a former Roman temple and, since 609 AD, a Catholic church. It is the best-preserved of all Ancient Roman buildings and has been in continuous use throughout its history.",
-    "yearBuilt": "126 AD",
-    "architect": "Emperor Hadrian",
-    "translations": {
-      "en": {
-        "name": "Pantheon",
-        "narration": "The Pantheon is a temple dedicated to all the gods. It is a masterpiece of ancient architecture with its magnificent dome.",
-        "description": "An architectural marvel with the world's largest unreinforced concrete dome",
-        "detailedDescription": "The Pantheon stands as one of the best-preserved monuments of ancient Rome and represents one of the most influential buildings in the history of architecture. This remarkable structure, whose name derives from the Greek words \"pan\" (all) and \"theos\" (gods), meaning \"temple to all gods,\" continues to inspire architects and visitors nearly two millennia after its construction. The building we see today was commissioned by Emperor Hadrian around 126 AD, though it replaced an earlier temple built by Marcus Agrippa in 27 BC, whose name still appears in the inscription on the portico. What makes the Pantheon truly extraordinary is its massive dome, which remains the world's largest unreinforced concrete dome even after nearly 2,000 years. Measuring 43.3 meters (142 feet) in both diameter and height from the floor to the oculus, the dome creates a perfect hemisphere, embodying the Roman architectural ideal of geometric harmony. This architectural marvel was achieved through ingenious engineering techniques that modern builders still study and admire. The concrete used in construction varies in composition throughout the dome's height, with heavier aggregates like travertine and brick at the base transitioning to lighter materials like pumice at the apex, reducing the overall weight while maintaining structural integrity. The thickness of the dome also decreases from 6.4 meters at the base to just 1.2 meters at the oculus, further optimizing its weight distribution. The most striking feature of the Pantheon's interior is the oculus, a circular opening 8.2 meters (27 feet) in diameter at the dome's apex. This remarkable architectural element serves as the building's only source of natural light, creating a dramatic beam of sunlight that moves across the interior throughout the day, illuminating different architectural features and creating an ever-changing interplay of light and shadow. The oculus is open to the elements, allowing rain to enter the building, but the floor is slightly convex with drainage holes to channel water away. The symbolic significance of this opening extends beyond its practical purpose - it represents the connection between the temple and the heavens, the dwelling place of the gods to whom the building was dedicated. The Pantheon's portico features sixteen massive Corinthian columns, each carved from a single piece of Egyptian granite, standing 11.8 meters (39 feet) tall and weighing approximately 60 tons each. These columns support a triangular pediment that once contained bronze sculptures, though these were removed over the centuries. The bronze that once covered the portico ceiling beams was also stripped away, reportedly taken by Byzantine Emperor Constans II in 663 AD. The building's perfect proportions and harmonious design influenced countless structures throughout history. During the Renaissance, artists and architects like Michelangelo, Raphael, and Brunelleschi studied the Pantheon intensively, drawing inspiration from its perfect geometry and innovative construction techniques. Raphael himself is buried here, along with several Italian kings and other notable figures. In 609 AD, Byzantine Emperor Phocas gave the Pantheon to Pope Boniface IV, who converted it into a Christian church dedicated to \"St. Mary and the Martyrs,\" a transformation that ultimately saved the building from the destruction and plundering that befell many other Roman temples. This conversion to a church ensured its continuous maintenance and preservation through the medieval period and beyond. The building has witnessed numerous historical events and transformations. During the Renaissance, it briefly served as a fortress, and in the 17th century, Pope Urban VIII controversially removed the bronze from the portico to make cannons for Castel Sant'Angelo and to create Bernini's baldachin in St. Peter's Basilica, an act that gave rise to the saying \"What the barbarians didn't do, the Barberini did\" - a play on the Pope's family name. Today, the Pantheon remains an active church where Mass is celebrated, particularly on important occasions, while simultaneously serving as one of Rome's most visited tourist attractions and a burial place for distinguished Italians. The building stands as a testament to Roman engineering genius, religious continuity, and architectural perfection, continuing to inspire wonder and admiration in all who enter its sacred space and gaze up at the magnificent dome with its oculus open to the sky."
-      },
-      "it": {
-        "name": "Pantheon",
-        "narration": "Il Pantheon è un tempio dedicato a tutti gli dei. È un capolavoro dell'architettura antica con la sua magnifica cupola.",
-        "description": "Una meraviglia architettonica con la più grande cupola in calcestruzzo non armato del mondo",
-        "historicalInfo": "Il Pantheon è un antico tempio romano e, dal 609 d.C., una chiesa cattolica. È il meglio conservato di tutti gli edifici dell'antica Roma ed è stato in uso continuo per tutta la sua storia.",
-        "yearBuilt": "126 d.C.",
-        "architect": "Imperatore Adriano"
-      },
-      "ko": {
-        "name": "판테온",
-        "narration": "판테온은 모든 신들에게 헌정된 신전입니다. 웅장한 돔이 있는 고대 건축의 걸작입니다.",
-        "description": "세계에서 가장 큰 무근 콘크리트 돔을 가진 건축의 경이",
-        "detailedDescription": "판테온은 고대 로마에서 가장 잘 보존된 기념물 중 하나이며 건축사에서 가장 영향력 있는 건물 중 하나입니다. 그리스어 \"pan\"(모든)과 \"theos\"(신)에서 유래한 이름으로 \"모든 신들의 신전\"을 의미하며, 건설된 지 거의 2천 년이 지난 지금도 건축가와 방문객들에게 영감을 주고 있습니다. 오늘날 우리가 보는 건물은 서기 126년경 하드리아누스 황제가 의뢰했지만, 서기 27년 마르쿠스 아그리파가 지은 이전 신전을 대체한 것으로 그의 이름은 여전히 현관의 비문에 남아있습니다. 판테온을 진정으로 특별하게 만드는 것은 거대한 돔으로, 거의 2,000년이 지난 지금도 세계에서 가장 큰 무근 콘크리트 돔으로 남아있습니다. 바닥에서 오큘루스까지 직경과 높이가 모두 43.3미터(142피트)로 측정되는 돔은 완벽한 반구를 만들어 로마 건축의 기하학적 조화 이상을 구현합니다. 건설에 사용된 콘크리트는 돔 높이에 따라 구성이 다양하며, 바닥의 트라버틴과 벽돌 같은 무거운 골재에서 정점의 경석 같은 가벼운 재료로 전환되어 구조적 무결성을 유지하면서 전체 무게를 줄입니다. 돔의 두께도 바닥의 6.4미터에서 오큘루스의 1.2미터로 감소하여 무게 분산을 더욱 최적화합니다. 판테온 내부의 가장 인상적인 특징은 돔 꼭대기의 직경 8.2미터(27피트)의 원형 개구부인 오큘루스입니다. 이 놀라운 건축 요소는 건물의 유일한 자연광원 역할을 하며, 하루 종일 내부를 가로질러 이동하는 극적인 햇빛 기둥을 만들어 다양한 건축적 특징을 비추고 빛과 그림자의 끊임없이 변화하는 상호작용을 만들어냅니다. 방문객들은 비가 오는 날에도 오큘루스를 통해 비가 들어오는 것을 볼 수 있으며, 바닥의 배수 시스템이 물을 효과적으로 처리합니다. 방문 팁: 아침 일찍 방문하면 군중을 피하고 오큘루스를 통해 들어오는 아름다운 아침 햇살을 즐길 수 있으며, 입장료는 무료이지만 오디오 가이드는 유료입니다.",
-        "historicalInfo": "판테온은 고대 로마 신전이었으며 서기 609년부터 가톨릭 교회로 사용되고 있습니다. 고대 로마 건축물 중 가장 잘 보존되어 있으며 역사 전체에 걸쳐 지속적으로 사용되어 왔습니다.",
-        "yearBuilt": "서기 126년",
-        "architect": "하드리아누스 황제"
-      },
-      "es": {
-        "name": "Panteón",
-        "narration": "El Panteón es un templo dedicado a todos los dioses. Es una obra maestra de la arquitectura antigua con su magnífica cúpula.",
-        "description": "Una maravilla arquitectónica con la cúpula de hormigón sin refuerzo más grande del mundo",
-        "detailedDescription": "El Panteón se erige como uno de los edificios antiguos mejor conservados de Roma. Construido originalmente como templo dedicado a todos los dioses del panteón romano, esta notable estructura ha permanecido en uso continuo durante casi dos milenios. El edificio actual fue completado alrededor del año 126 d.C. bajo el emperador Adriano. La característica más impresionante es su extraordinaria cúpula de hormigón no reforzado, que sigue siendo la más grande del mundo con 43,3 metros de diámetro interior. El óculo de 8,7 metros es la única fuente de luz natural del interior.",
-        "historicalInfo": "El Panteón es un antiguo templo romano y, desde el 609 d.C., una iglesia católica. Es el mejor conservado de todos los edificios de la Antigua Roma y ha estado en uso continuo a lo largo de su historia.",
-        "yearBuilt": "126 d.C.",
-        "architect": "Emperador Adriano"
-      },
-      "fr": {
-        "name": "Panthéon",
-        "narration": "Le Panthéon est un temple dédié à tous les dieux. C'est un chef-d'œuvre de l'architecture antique avec son magnifique dôme.",
-        "description": "Une merveille architecturale avec la plus grande coupole en béton non armé du monde",
-        "detailedDescription": "Le Panthéon se dresse comme l'un des bâtiments antiques les mieux préservés de Rome. Construit à l'origine comme temple dédié à tous les dieux du panthéon romain, cette remarquable structure est restée en usage continu pendant près de deux millénaires. Le bâtiment actuel a été achevé vers 126 après J.-C. sous l'empereur Hadrien. La caractéristique la plus impressionnante est son extraordinaire dôme en béton non armé, qui reste le plus grand au monde avec un diamètre intérieur de 43,3 mètres. L'oculus de 8,7 mètres est la seule source de lumière naturelle de l'intérieur.",
-        "historicalInfo": "Le Panthéon est un ancien temple romain et, depuis 609 apr. J.-C., une église catholique. C'est le mieux conservé de tous les bâtiments de la Rome antique et a été en usage continu tout au long de son histoire.",
-        "yearBuilt": "126 apr. J.-C.",
-        "architect": "Empereur Hadrien"
-      },
-      "de": {
-        "name": "Pantheon",
-        "narration": "Das Pantheon ist ein Tempel, der allen Göttern gewidmet ist. Es ist ein Meisterwerk antiker Architektur mit seiner prächtigen Kuppel.",
-        "description": "Ein architektonisches Wunderwerk mit der größten unbewehrten Betonkuppel der Welt",
-        "detailedDescription": "Das Pantheon steht als eines der am besten erhaltenen antiken Gebäude Roms und repräsentiert den Höhepunkt römischer Ingenieurskunst und architektonischen Designs. Ursprünglich als Tempel erbaut, der allen Göttern des römischen Pantheons gewidmet war, ist dieses bemerkenswerte Bauwerk seit fast zwei Jahrtausenden ununterbrochen in Gebrauch und dient seit dem 7. Jahrhundert als katholische Kirche. Das heutige Gebäude wurde um 126 n. Chr. unter Kaiser Hadrian fertiggestellt, obwohl der Name Marcus Agrippa, der einen früheren Tempel an derselben Stelle im Jahr 27 v. Chr. errichtete, auf dem Giebel eingraviert bleibt. Das beeindruckendste Merkmal des Pantheons ist seine außergewöhnliche Kuppel aus unbewehrtem Beton, die mit einem Innendurchmesser von 43,3 Metern - genau gleich der Höhe des Gebäudes vom Boden bis zum Oculus - die größte unbewehrte Betonkuppel der Welt bleibt. Der Oculus, eine 8,7 Meter große kreisförmige Öffnung an der Spitze der Kuppel, ist die einzige natürliche Lichtquelle des Innenraums und erzeugt einen sich ständig bewegenden Lichtstrahl, der den Raum durchquert, während die Sonne über den Himmel wandert. Das Pantheon beherbergt die Gräber mehrerer berühmter Italiener, darunter der Renaissance-Künstler Raphael und die Könige des modernen Italiens. Heute steht das Pantheon als Zeugnis des römischen Ingenieursgenies und inspiriert weiterhin jährlich Millionen von Besuchern.",
-        "historicalInfo": "Das Pantheon ist ein ehemaliger römischer Tempel und seit 609 n. Chr. eine katholische Kirche. Es ist das am besten erhaltene aller antiken römischen Gebäude und wird seit seiner Geschichte durchgehend genutzt.",
-        "yearBuilt": "126 n. Chr.",
-        "architect": "Kaiser Hadrian"
-      },
-      "zh": {
-        "name": "万神殿",
-        "narration": "万神殿是一座献给所有神灵的神殿。它是古代建筑的杰作，拥有宏伟的圆顶。",
-        "description": "拥有世界上最大的无钢筋混凝土圆顶的建筑奇迹",
-        "detailedDescription": "万神殿是古罗马保存最完好的纪念碑之一，也是建筑史上最具影响力的建筑之一。这座非凡的建筑名称源自希腊语\"pan\"（所有）和\"theos\"（神），意为\"所有神的神殿\"，在建成近两千年后仍继续启发着建筑师和游客。我们今天看到的建筑是由哈德良皇帝在公元126年左右委托建造的，尽管它取代了公元前27年由马库斯·阿格里帕建造的早期神殿，他的名字仍然出现在门廊的铭文上。万神殿真正非凡之处在于其巨大的圆顶，即使在近2000年后，它仍然是世界上最大的无钢筋混凝土圆顶。圆顶从地板到顶部圆孔的直径和高度都是43.3米（142英尺），形成一个完美的半球体，体现了罗马建筑几何和谐的理想。建筑中使用的混凝土在整个圆顶高度上成分各不相同，从底部的石灰华和砖等较重的骨料过渡到顶部的浮石等较轻的材料，在保持结构完整性的同时减少整体重量。圆顶的厚度也从底部的6.4米减少到圆孔处的仅1.2米，进一步优化其重量分配。万神殿内部最引人注目的特征是圆孔，这是圆顶顶部直径8.2米（27英尺）的圆形开口。这个非凡的建筑元素是建筑唯一的自然光源，创造出戏剧性的阳光束，在一天中穿过内部移动，照亮不同的建筑特征，创造出不断变化的光影交织。圆孔向外开放，游客可以看到雨水进入，但地板的排水系统有效地处理了水。游览提示：清晨参观可以避开人群，欣赏透过圆孔进入的美丽晨光，入场免费但语音导览需付费。",
-        "historicalInfo": "万神殿是一座古罗马神殿，自公元609年起成为天主教堂。它是所有古罗马建筑中保存最完好的，并且在整个历史中一直被使用。",
-        "yearBuilt": "公元126年",
-        "architect": "哈德良皇帝"
-      },
-      "ja": {
-        "name": "パンテオン",
-        "narration": "パンテオンは全ての神々に捧げられた神殿です。壮大なドームを持つ古代建築の傑作です。",
-        "description": "世界最大の無筋コンクリートドームを持つ建築の驚異",
-        "detailedDescription": "パンテオンは古代ローマで最もよく保存された記念碑の一つであり、建築史上最も影響力のある建物の一つです。ギリシャ語の「pan」（すべて）と「theos」（神）に由来する名前は「すべての神々の神殿」を意味し、建設から約2千年を経た今も建築家や訪問者にインスピレーションを与え続けています。今日私たちが見る建物は紀元126年頃にハドリアヌス帝によって委託されましたが、紀元前27年にマルクス・アグリッパによって建てられた以前の神殿を置き換えたもので、彼の名前は今でもポルティコの碑文に残っています。パンテオンを真に特別なものにしているのは巨大なドームで、約2000年を経た今でも世界最大の無筋コンクリートドームです。床からオクルスまでの直径と高さがともに43.3メートル（142フィート）であるドームは完璧な半球を形成し、ローマ建築の幾何学的調和の理想を体現しています。建設に使用されたコンクリートはドームの高さ全体で組成が異なり、基部のトラバーチンやレンガなどの重い骨材から頂点の軽石などの軽い材料へと移行し、構造の完全性を維持しながら全体の重量を軽減しています。ドームの厚さも基部の6.4メートルからオクルスのわずか1.2メートルまで減少し、重量配分をさらに最適化しています。パンテオン内部の最も印象的な特徴はオクルス、ドーム頂点の直径8.2メートル（27フィート）の円形開口部です。この注目すべき建築要素は建物唯一の自然光源として機能し、一日を通して内部を横切って移動する劇的な太陽光の柱を作り出し、さまざまな建築的特徴を照らし、光と影の絶え間なく変化する相互作用を生み出します。オクルスは外部に開放されており、訪問者は雨が入るのを見ることができますが、床の排水システムが効果的に水を処理します。訪問のヒント：早朝に訪れると混雑を避け、オクルスから入る美しい朝日を楽しむことができ、入場は無料ですがオーディオガイドは有料です。",
-        "historicalInfo": "パンテオンはかつてローマの神殿で、609年からはカトリック教会として使用されています。古代ローマ建築の中で最もよく保存されており、その歴史を通じて継続的に使用されてきました。",
-        "yearBuilt": "紀元126年",
-        "architect": "ハドリアヌス帝"
-      },
-      "pt": {
-        "name": "Panteão",
-        "narration": "O Panteão é um templo dedicado a todos os deuses. É uma obra-prima da arquitetura antiga com sua magnífica cúpula.",
-        "description": "Uma maravilha arquitetônica com a maior cúpula de concreto não reforçado do mundo",
-        "detailedDescription": "O Panteão ergue-se como um dos edifícios antigos mais bem preservados de Roma. Originalmente construído como templo dedicado a todos os deuses do panteão romano, esta notável estrutura permaneceu em uso contínuo por quase dois milênios. O edifício atual foi concluído por volta de 126 d.C. sob o imperador Adriano. A característica mais impressionante é sua extraordinária cúpula de concreto não armado, que continua sendo a maior do mundo com 43,3 metros de diâmetro interno. O óculo de 8,7 metros é a única fonte de luz natural do interior.",
-        "historicalInfo": "O Panteão é um antigo templo romano e, desde 609 d.C., uma igreja católica. É o mais bem preservado de todos os edifícios da Roma Antiga e está em uso contínuo ao longo de sua história.",
-        "yearBuilt": "126 d.C.",
-        "architect": "Imperador Adriano"
-      },
-      "ru": {
-        "name": "Пантеон",
-        "narration": "Пантеон — это храм, посвященный всем богам. Это шедевр древней архитектуры с великолепным куполом.",
-        "description": "Архитектурное чудо с самым большим неармированным бетонным куполом в мире",
-        "detailedDescription": "Пантеон является одним из наиболее хорошо сохранившихся древних зданий Рима. Первоначально построенный как храм, посвященный всем богам римского пантеона, это замечательное сооружение находится в непрерывном использовании на протяжении почти двух тысячелетий. Нынешнее здание было завершено около 126 года н.э. при императоре Адриане. Самой впечатляющей особенностью является его необыкновенный купол из неармированного бетона, который остается крупнейшим в мире с внутренним диаметром 43,3 метра. Окулус диаметром 8,7 метра является единственным источником естественного света внутри.",
-        "historicalInfo": "Пантеон — бывший римский храм, с 609 года нашей эры — католическая церковь. Это наиболее хорошо сохранившееся из всех зданий Древнего Рима, которое непрерывно используется на протяжении всей своей истории.",
-        "yearBuilt": "126 г. н.э.",
-        "architect": "Император Адриан"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:24.207Z",
-    "updatedAt": "2026-02-22T18:07:28.580Z"
+    "updatedAt": "2026-02-22T20:00:58.110Z"
   },
   {
     "id": "la-cittadella-subdivision",
@@ -5665,58 +2793,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:35:35.071Z"
   },
   {
-    "id": "london_restaurant_hawksmoor",
-    "cityId": "london",
-    "name": "Hawksmoor Seven Dials",
-    "lat": 51.5141,
-    "lng": -0.1269,
-    "radius": 40,
-    "narration": "자, 여러분, 상상해보세요. 지금 여러분은 런던의 심장부, 세븐 다이얼즈에 서 있습니다. 좁고 구불구불한 골목길을 따라 걷다 보면, 마치 시간이 멈춘 듯한 고풍스러운 분위기가 느껴지죠. 바로 눈앞에, 붉은 벽돌과 은은한 조명이 감도는 호크스무어 세븐 다이얼즈가 자리하고 있습니다. 문을 열고 들어서는 순간, 코를 간지럽히는 육즙 가득한 스테이크 향과 달콤한 칵테일 향이 여러분을 맞이할 거예요. 테이블에 앉아 메뉴를 펼쳐 들면, 마치 미식 여행을 떠나는 듯한 설렘이 느껴지죠. 최고 품질의 영국산 소고기를 엄선하여, 장인의 손길로 구워낸 스테이크는 입안에서 사르르 녹아내릴 겁니다. 곁들여 마시는 칵테일은 또 어떻고요? 숙련된 바텐더가 만들어주는 특별한 칵테일은 스테이크의 풍미를 더욱 깊게 만들어줄 거예요. 벽돌 벽과 나무 테이블, 은은한 조명이 어우러진 공간에서, 사랑하는 사람들과 함께 특별한 시간을 보내는 모습을 상상해보세요. 웃음소리와 맛있는 음식, 향긋한 술이 함께하는 이곳은, 단순한 레스토랑이 아닌, 잊지 못할 추억을 만들어주는 특별한 공간입니다. 지금, 호크스무어 세븐 다이얼즈에서 미식의 향연을 즐겨보세요. 후회하지 않으실 겁니다!",
-    "description": "British steakhouse with cocktails",
-    "category": "Restaurant",
-    "detailedDescription": "호크스무어 세븐 다이얼즈는 런던 최고의 스테이크 맛집으로 명성이 자자합니다. 윤리적인 방식으로 사육된 영국산 소고기만을 사용하여 최상의 품질을 자랑하며, 숙련된 셰프의 손길을 거쳐 완벽하게 구워진 스테이크는 입안에서 감동을 선사합니다. 이곳의 스테이크는 단순히 맛있는 음식을 넘어, 영국 요리의 자부심을 느낄 수 있게 해줍니다. 스테이크와 함께 제공되는 다양한 사이드 메뉴와 소스 또한 훌륭하며, 특히 호크스무어의 시그니처 칵테일은 스테이크의 풍미를 더욱 돋보이게 합니다. 현지인들 사이에서는 '선데이 로스트' 맛집으로도 유명한데요, 주말에는 예약 없이는 자리를 잡기 힘들 정도입니다. 호크스무어 세븐 다이얼즈는 단순한 레스토랑을 넘어, 런던의 역사와 문화를 느낄 수 있는 특별한 공간입니다. 17세기 건축물을 개조하여 만든 이곳은 고풍스러운 분위기와 현대적인 감각이 조화롭게 어우러져 있습니다. 특히, 벽돌 벽과 나무 테이블, 은은한 조명이 만들어내는 아늑한 분위기는 데이트 장소로도 완벽합니다. 숨겨진 비화로는, 호크스무어의 창업자들이 처음 레스토랑을 열 때, 자본이 부족하여 친구들에게 돈을 빌려 시작했다는 이야기가 있습니다. 지금은 런던을 대표하는 레스토랑으로 성장했지만, 초심을 잃지 않고 최고의 품질을 유지하기 위해 노력하고 있다고 합니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1558030006-450675393462?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Hawksmoor Seven Dials",
-        "narration": "Savor Britain's best steaks at Hawksmoor, renowned for its ethically-sourced beef and cocktails.",
-        "description": "British steakhouse with cocktails"
-      },
-      "ko": {
-        "name": "호크스무어 세븐 다이얼스",
-        "narration": "윤리적으로 조달된 소고기와 칵테일로 유명한 호크스무어에서 영국 최고의 스테이크를 맛보세요.",
-        "description": "칵테일이 있는 영국 스테이크하우스"
-      },
-      "it": {
-        "name": "Hawksmoor Seven Dials",
-        "narration": "Assapora le migliori bistecche britanniche da Hawksmoor, rinomato per la carne di manzo di provenienza etica e i cocktail.",
-        "description": "Steakhouse britannica con cocktail"
-      }
-    },
-    "openingHours": "Mon-Sat: 12:00-15:00, 17:00-22:30, Sun: 12:00-21:00",
-    "priceRange": "£££ (£60-90 per person)",
-    "cuisine": "British Steakhouse",
-    "reservationUrl": "https://www.thefork.com/restaurant/hawksmoor-seven-dials-r46303",
-    "phoneNumber": "+44 20 7856 2154",
-    "menuHighlights": [
-      "Porterhouse Steak",
-      "Bone-in Ribeye",
-      "Triple Cooked Chips",
-      "Salted Caramel Rolos"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:41.745Z",
-    "updatedAt": "2026-02-22T18:14:39.016Z"
-  },
-  {
     "id": "san-isidro-parish-talamban",
     "cityId": "cebu",
     "name": "San Isidro Parish Church",
@@ -5752,7 +2828,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-15T18:12:17.507Z",
-    "updatedAt": "2026-02-22T18:35:44.915Z"
+    "updatedAt": "2026-02-22T20:00:58.274Z"
   },
   {
     "id": "런던-demo-1",
@@ -5825,80 +2901,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-15T18:12:17.583Z",
     "updatedAt": "2026-02-22T18:35:54.604Z"
-  },
-  {
-    "id": "로마-demo-2",
-    "cityId": "rome",
-    "name": "로마의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 지금 여러분은 로마의 좁다란 골목길, 그 이름도 정겨운 '맛집 골목' 초입에 서 있습니다. 해 질 녘, 붉은 노을이 낡은 건물 벽에 드리워지고, 골목 안쪽에서는 맛있는 냄새가 코를 간지럽히네요. 갓 구운 빵 냄새, 토마토소스의 향긋함, 그리고 알싸한 마늘 향까지… 아, 벌써부터 군침이 돌지 않나요? 이 골목은 마치 로마의 심장과 같아요. 수백 년 동안 변함없이, 로마 사람들의 삶과 추억, 그리고 맛있는 이야기가 켜켜이 쌓여있는 곳이죠. 지금 여러분의 발 아래에는, 수많은 로마 시민들이 밟고 지나간 오래된 돌길이 깔려있습니다. 그들의 웃음소리, 연인들의 속삭임, 아이들의 장난기 넘치는 목소리가 귓가에 맴도는 듯하죠. \n\n자, 천천히 발걸음을 옮겨볼까요? 오른쪽에는 작은 트라토리아가 보이네요. 빨간색 체크무늬 테이블보가 정겹고, 활기찬 주인장의 목소리가 골목 전체에 울려 퍼집니다. '본 조르노! 오늘 최고의 파스타는 바로 이거야!' 라며 손짓하는 모습이 마치 영화 속 한 장면 같아요. 조금 더 안쪽으로 들어가면, 아늑한 와인바가 있습니다. 은은한 조명 아래, 로마 시민들이 와인잔을 기울이며 이야기를 나누고 있네요. 그들의 표정은 편안하고 행복해 보입니다. 마치 오랜 친구를 만난 듯, 서로의 삶을 나누고 위로하는 모습이 참 아름답죠. \n\n자, 이제 숨을 크게 들이쉬고, 로마의 맛을 느껴보세요. 이 골목은 단순한 맛집 골목이 아니에요. 로마의 역사와 문화, 그리고 사람들의 따뜻한 마음이 담겨있는 특별한 공간입니다. 오늘, 이곳에서 여러분만의 로마 이야기를 만들어보는 건 어떨까요? 상상력을 마음껏 펼치고, 오감을 활짝 열어 로마의 맛과 향, 그리고 분위기에 흠뻑 취해보세요. 분명 잊지 못할 추억이 될 거예요.",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "로마의 맛집 골목은 단순히 유명한 레스토랑이 모여 있는 곳이 아닙니다. 이곳은 대대로 로마 시민들의 삶의 터전이었던 곳으로, 숨겨진 보석 같은 맛집들이 즐비합니다. 관광객들에게는 잘 알려지지 않았지만, 현지인들은 매일같이 이곳을 찾아 정통 로마 요리를 즐기곤 하죠. 이 골목의 역사는 로마 제국 시대로 거슬러 올라갑니다. 당시에는 상인들이 몰려들어 활발한 상업 활동이 이루어졌고, 자연스럽게 다양한 음식점들이 생겨나기 시작했습니다. 시간이 흐르면서 이 골목은 로마 시민들의 배를 채워주는 것은 물론, 그들의 희로애락을 함께하는 공간으로 자리 잡았습니다.\n\n**꿀팁**: 이 골목에서는 메뉴판에 없는 '오늘의 특별 메뉴'를 꼭 확인해보세요. 신선한 제철 재료로 만든 요리를 맛볼 수 있는 기회랍니다. 그리고, 로마 사람들은 식사를 천천히 즐기는 것을 좋아합니다. 서두르지 말고 여유롭게 시간을 보내면서 로마의 맛과 분위기를 만끽해보세요. **숨겨진 비화**: 이 골목에는 대대로 내려오는 특별한 레시피를 가진 레스토랑들이 많습니다. 그중에서도 'Nonno Luigi'라는 작은 트라토리아는 100년이 넘는 역사를 자랑하며, 할아버지에서 아버지, 그리고 손자에게까지 이어져 온 비법 레시피로 만든 파스타가 유명합니다. 현지인들은 이 파스타를 '로마의 맛'이라고 부르며 극찬한다고 하네요.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "로마의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:57:47.256Z",
-    "updatedAt": "2026-02-22T18:15:39.898Z"
-  },
-  {
-    "id": "파리-demo-2",
-    "cityId": "paris",
-    "name": "파리의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "자, 여러분, 상상해보세요. 지금 여러분은 파리의 어느 골목길 어귀에 서 있습니다. 코를 간지럽히는 따뜻한 빵 냄새, 갓 내린 커피의 향긋함, 그리고 무언가 맛있는 것이 지글거리는 소리가 섞여 오감을 자극하죠. 이 골목은 단순한 길이 아니에요. 파리지앵들의 삶이 녹아 있는, 숨겨진 맛의 성지랍니다. 발걸음을 옮길 때마다 시간이 멈춘 듯한 풍경이 펼쳐져요. 낡은 간판, 햇살 아래 반짝이는 테이블, 그리고 정겹게 대화를 나누는 사람들의 웃음소리… 마치 영화 세트장 같지 않나요? 이 골목에서는 유명 레스토랑의 화려함 대신, 소박하지만 진심이 담긴 요리들을 만날 수 있어요. 대대로 내려오는 비법 레시피로 만든 크레페, 짭짤하면서도 고소한 키슈, 그리고 따끈한 수프 한 그릇… 모든 것이 파리의 맛을 대변하죠. 잠시 눈을 감고 상상해보세요. 따스한 햇살 아래, 갓 구운 빵을 손에 들고 골목을 거니는 당신의 모습을요. 지금, 이 골목의 숨겨진 맛을 찾아 떠나는 미식 여행에 함께 하세요! 이 골목의 작은 식당들은 단순한 음식을 파는 곳이 아니라, 추억과 이야기를 파는 곳이에요. 주인장의 따뜻한 미소, 옆 테이블 사람들의 유쾌한 대화, 그리고 맛있는 음식들이 어우러져 잊지 못할 경험을 선사할 거예요. 파리의 맛집 골목, 그 숨겨진 보물을 찾아 함께 떠나볼까요?",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "파리의 맛집 골목은 단순히 음식을 맛보는 곳이 아닌, 파리지앵의 삶과 문화를 깊이 경험할 수 있는 특별한 공간입니다. 관광객으로 북적이는 유명 레스토랑 대신, 현지인들이 즐겨 찾는 작은 식당들이 모여 있는 이 골목은 숨겨진 보석과 같아요. 대대로 이어져 온 가족 경영 식당부터 젊은 셰프들의 실험적인 요리를 선보이는 곳까지, 다양한 맛과 분위기를 즐길 수 있다는 점이 매력적이죠. 이곳에서는 흔히 볼 수 없는 특별한 메뉴들을 맛볼 수 있습니다. 예를 들어, 할머니의 레시피로 만든 정통 크레페, 신선한 재료로 만든 키슈, 그리고 추운 날씨에 몸을 녹여주는 따뜻한 수프 등, 파리의 맛을 제대로 느낄 수 있는 음식들이 가득합니다. 꿀팁 하나 드릴까요? 점심시간을 살짝 피해서 방문하면, 좀 더 여유롭게 식사를 즐길 수 있답니다. 그리고, 식당 주인에게 '오늘의 추천 메뉴'를 물어보는 것도 좋은 방법이에요. 그들은 숨겨진 맛집 정보를 가장 잘 알고 있는 사람들이니까요! 숨겨진 비화를 하나 더 알려드리자면, 이 골목에는 과거 예술가들이 자주 드나들던 식당들이 많았다고 합니다. 그들은 가난한 예술가들을 위해 저렴한 가격에 음식을 제공했고, 그들의 예술 활동을 응원했다고 해요. 지금도 그들의 흔적을 느낄 수 있는 식당들이 남아있으니, 한번 찾아보는 것도 좋을 것 같아요.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "파리의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:57:47.389Z",
-    "updatedAt": "2026-02-22T18:14:58.491Z"
   },
   {
     "id": "paris_item_2",
@@ -5975,27 +2977,55 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:15:49.938Z"
   },
   {
-    "id": "제주특별자치도-demo-2",
-    "cityId": "jeju",
-    "name": "제주특별자치도의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "상상해보세요. 지금 여러분은 제주도의 맛집 골목 초입에 서 있습니다. 코끝을 간지럽히는 짭짤한 바다 내음과, 갓 구운 흑돼지 냄새가 섞여 오감을 자극하네요. 골목 어귀에서 들려오는 정겨운 사투리는 마치 오랜 친구가 건네는 인사 같습니다. 지금 여러분의 발 아래에는, 수십 년 동안 제주 사람들의 희로애락을 함께 해 온, 닳고 닳은 돌담길이 펼쳐져 있습니다. 이 골목은 단순한 식당가가 아니에요. 제주 사람들의 삶과 역사가 고스란히 녹아 있는 살아있는 박물관과 같답니다. 자, 이제 저와 함께 골목 안으로 더 깊숙이 들어가 볼까요? 왁자지껄한 웃음소리가 들려오는 흑돼지 구이집, 어머니의 손맛이 느껴지는 고기국수집, 싱싱한 해산물이 가득한 해물 전문점까지… 어디를 먼저 가야 할지 고민되시죠? 걱정 마세요. 제가 여러분의 최고의 미식 가이드가 되어드릴 테니까요! 골목 안으로 한 발짝 내딛는 순간, 여러분은 제주의 진짜 맛과 정에 흠뻑 빠져들게 될 겁니다. 자, 용기를 내세요! 미지의 맛을 향한 짜릿한 미식 여행이 지금 시작됩니다! 저 멀리, 김이 모락모락 피어오르는 뚝배기에서 나는 구수한 된장 냄새가 당신을 부르고 있네요. 어서 함께 가요!",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "제주 맛집 골목은 단순한 식당가가 아닙니다. 이곳은 제주도민들의 삶과 애환이 녹아 있는 역사적인 공간입니다. 1970년대, 제주 경제가 어려웠던 시절, 저렴한 가격에 푸짐한 음식을 제공하는 식당들이 하나 둘 생겨나면서 자연스럽게 골목이 형성되었습니다. 초기에는 도민들만 찾는 숨겨진 명소였지만, 입소문을 타고 점점 더 많은 사람들이 찾게 되면서 지금의 맛집 골목으로 발전했습니다. 현지인들 사이에서는 '숨겨진 보석'이라고 불리는데요. 관광객들에게는 잘 알려지지 않은, 진짜 제주도의 맛을 경험할 수 있는 곳이기 때문입니다. 꿀팁 하나 알려드릴까요? 늦은 저녁 시간에 방문하면, 식당 주인들과 막걸리 한 잔 기울이며 진솔한 이야기를 나눌 수 있습니다. 그들의 삶의 이야기를 듣는 것은, 제주 여행의 또 다른 매력이 될 것입니다. 그리고 절대 놓치지 말아야 할 숨겨진 비화! 과거 이 골목은 뱃사람들의 허기를 달래주던 곳이었답니다. 갓 잡아 올린 싱싱한 해산물로 만든 요리들은, 고된 뱃일을 마치고 돌아온 뱃사람들에게 최고의 위로가 되어주었죠. 지금도 골목 안쪽에는 당시 뱃사람들이 즐겨 찾던, 허름하지만 정겨운 분위기의 해물 전문점이 남아있으니 꼭 방문해보세요.",
+    "id": "singapore-night-safari",
+    "cityId": "singapore",
+    "name": "Night Safari Experience",
+    "lat": 1.4043,
+    "lng": 103.79,
+    "radius": 80,
+    "narration": "자, 상상해보세요! 지금 여러분은 싱가포르의 밤, 정글 속으로 깊숙이 들어가는 특별한 여정에 함께하고 있습니다. 어둠이 짙게 드리운 이 곳은 세계 최초의 나이트 사파리, 바로 '밤의 야생 탐험'입니다. 귓가에는 이름 모를 풀벌레 소리가 속삭이고, 코끝에는 흙 내음과 풀 향기가 스쳐 지나가네요. 램프의 희미한 불빛을 따라 발걸음을 옮기면, 마치 영화 속 한 장면처럼 신비로운 풍경이 눈 앞에 펼쳐집니다. \n\n저 멀리, 나뭇가지 사이로 두 개의 빛나는 눈동자가 보이시나요? 네, 맞습니다! 바로 말레이 호랑이입니다. 녀석은 어둠 속에서 더욱 강렬한 존재감을 드러내며, 우리를 뚫어지게 쳐다보고 있습니다. 숨소리조차 죽인 채, 녀석의 움직임을 따라 시선을 옮겨보세요. 지금 여러분은 자연 그대로의 야생, 그 숨 막히는 순간을 직접 경험하고 있는 겁니다. \n\n사뿐사뿐 발걸음을 옮기면, 이번에는 아시아 코끼리 무리가 등장합니다. 녀석들은 어둠 속에서도 서로를 의지하며, 평화롭게 먹이를 찾아 다니고 있습니다. 코끼리들의 울음소리가 정글에 울려 퍼지고, 그 소리는 마치 오래된 전설처럼 우리의 마음속 깊은 곳을 울립니다. 상상해보세요. 수백 년, 아니 수천 년 전에도 이 숲에서는 똑같은 울음소리가 울려 퍼졌을 겁니다. \n\n밤의 사파리는 단순한 동물의 구경이 아닙니다. 이곳은 자연과 인간이 공존하는 특별한 공간이며, 우리 모두가 함께 지켜나가야 할 소중한 유산입니다. 자, 이제 밤의 장막 속으로 더욱 깊숙이 들어가, 숨겨진 야생의 비밀을 함께 파헤쳐 볼까요?",
+    "description": "World's first nocturnal wildlife park experience",
+    "category": "Activity",
+    "detailedDescription": "싱가포르 나이트 사파리는 단순한 동물원이 아닌, 밤에 활동하는 동물들의 생태를 보존하고 연구하는 특별한 공간입니다. 1994년에 개장한 이후, 100종이 넘는 2,500마리 이상의 동물들이 35헥타르에 달하는 자연 서식지에서 자유롭게 살아갑니다. 이곳의 가장 큰 매력은 철창이나 울타리가 아닌, 자연적인 장애물을 이용하여 동물들의 서식지를 구분했다는 점입니다. 덕분에 관람객들은 마치 정글 속에서 야생 동물을 만나는 듯한 짜릿한 경험을 할 수 있습니다.\n\n나이트 사파리에는 트램 투어와 워킹 트레일, 두 가지 주요 관람 방식이 있습니다. 트램 투어를 이용하면 넓은 구역을 편안하게 둘러볼 수 있으며, 워킹 트레일을 따라 걸으면 더욱 가까이에서 동물들을 관찰할 수 있습니다. 특히 워킹 트레일 중에는 '레오파드 트레일'이 가장 인기 있는데, 이곳에서는 희귀한 표범을 비롯한 다양한 야행성 동물들을 만날 수 있습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 사파리 입구에서 제공하는 지도에 표시된 먹이 주기 시간을 확인하고 방문하면, 더욱 생생한 동물들의 모습을 볼 수 있습니다. 그리고 밤에는 모기가 많으니, 모기 퇴치제를 꼭 챙겨가세요!",
     "photos": [
-      "/images/landmarks/placeholder.png"
+      "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800",
+      "https://images.unsplash.com/photo-1549366021-9f761d450615?w=800",
+      "https://images.unsplash.com/photo-1534188753412-5fd1b30d5c17?w=800",
+      "https://images.unsplash.com/photo-1474314170901-f351b68f544f?w=800",
+      "https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800",
+      "https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=800",
+      "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800"
     ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
+    "historicalInfo": "Opened in 1994 as the world's first nocturnal zoo, the Night Safari pioneered the concept of observing wildlife after dark.",
+    "yearBuilt": "1994",
+    "architect": "Bernard Harrison (concept), various wildlife experts",
     "translations": {
+      "en": {
+        "name": "Night Safari Experience",
+        "narration": "Discover nocturnal wildlife at the world's first night safari. Explore themed trails and see over 2,500 animals in their natural nighttime habitat.",
+        "description": "World's first nocturnal wildlife park experience",
+        "detailedDescription": "The Night Safari offers a unique opportunity to observe nocturnal animals in naturalistic habitats designed to replicate their native environments. Opened in 1994, it was the world's first nocturnal zoo and remains one of Singapore's most popular attractions. The 35-hectare park houses over 2,500 animals representing more than 130 species, including many threatened and endangered species. Explore via tram ride that takes you through seven geographical zones from the Himalayan Foothills to the jungles of Southeast Asia, or walk along four themed trails for closer encounters. Watch entertaining shows featuring talented animals, and learn about conservation efforts. Special lighting creates an atmospheric moonlit ambiance without disturbing the animals' natural behaviors. The park opens at 7:15 PM, with the tram rides and walking trails offering different perspectives on wildlife after dark.",
+        "historicalInfo": "Opened in 1994 as the world's first nocturnal zoo, the Night Safari pioneered the concept of observing wildlife after dark.",
+        "yearBuilt": "1994",
+        "architect": "Bernard Harrison (concept), various wildlife experts"
+      },
+      "it": {
+        "name": "Esperienza Night Safari",
+        "narration": "Scopri la fauna notturna nel primo safari notturno del mondo. Esplora sentieri a tema e osserva oltre 2.500 animali nel loro habitat notturno naturale.",
+        "description": "Esperienza del primo parco faunistico notturno del mondo",
+        "detailedDescription": "Il Night Safari offre un'opportunità unica di osservare animali notturni in habitat naturalistici progettati per replicare i loro ambienti nativi. Aperto nel 1994, è stato il primo zoo notturno del mondo e rimane una delle attrazioni più popolari di Singapore. Il parco di 35 ettari ospita oltre 2.500 animali che rappresentano più di 130 specie, comprese molte specie minacciate ed in pericolo. Esplora tramite un giro in tram che ti porta attraverso sette zone geografiche dai piedi dell'Himalaya alle giungle del Sud-Est asiatico, oppure cammina lungo quattro sentieri tematici per incontri ravvicinati. Guarda spettacoli divertenti con animali talentuosi e scopri gli sforzi di conservazione. L'illuminazione speciale crea un'atmosfera lunare suggestiva senza disturbare i comportamenti naturali degli animali. Il parco apre alle 19:15, con i giri in tram e i sentieri a piedi che offrono diverse prospettive sulla fauna selvatica dopo il tramonto.",
+        "historicalInfo": "Aperto nel 1994 come primo zoo notturno del mondo, il Night Safari ha aperto la strada al concetto di osservare la fauna selvatica dopo il tramonto.",
+        "yearBuilt": "1994",
+        "architect": "Bernard Harrison (concept), vari esperti di fauna selvatica"
+      },
       "ko": {
-        "name": "제주특별자치도의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+        "name": "나이트 사파리 체험",
+        "narration": "세계 최초의 야간 사파리에서 야행성 야생동물을 발견하세요. 테마별 산책로를 탐험하고 자연적인 야간 서식지에서 2,500마리 이상의 동물을 관찰하세요.",
+        "description": "세계 최초의 야행성 야생동물 공원 체험",
+        "detailedDescription": "나이트 사파리는 자연 환경을 재현하도록 설계된 자연주의적 서식지에서 야행성 동물을 관찰할 수 있는 독특한 기회를 제공합니다. 1994년에 개장한 세계 최초의 야간 동물원이며 여전히 싱가포르에서 가장 인기 있는 명소 중 하나입니다. 35헥타르의 공원에는 멸종 위기에 처한 많은 종을 포함하여 130종 이상을 대표하는 2,500마리 이상의 동물이 서식하고 있습니다. 히말라야 산기슭부터 동남아시아 정글까지 7개의 지리적 구역을 통과하는 트램을 타거나, 4개의 테마별 산책로를 따라 걸으며 더 가까이서 만날 수 있습니다. 재능 있는 동물들이 등장하는 재미있는 쇼를 관람하고 보존 노력에 대해 배우세요. 특별한 조명이 동물의 자연스러운 행동을 방해하지 않으면서 분위기 있는 달빛 분위기를 연출합니다. 공원은 오후 7시 15분에 개장하며, 트램 라이드와 도보 산책로는 어두워진 후 야생동물에 대한 다양한 관점을 제공합니다.",
+        "historicalInfo": "1994년 세계 최초의 야간 동물원으로 개장한 나이트 사파리는 어두워진 후 야생동물을 관찰하는 개념의 선구자입니다.",
+        "yearBuilt": "1994",
+        "architect": "버나드 해리슨 (컨셉), 다양한 야생동물 전문가"
       }
     },
     "openingHours": null,
@@ -6008,8 +3038,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.909Z",
-    "updatedAt": "2026-02-22T18:15:59.672Z"
+    "createdAt": "2026-02-12T12:11:35.340Z",
+    "updatedAt": "2026-02-22T20:00:58.365Z"
   },
   {
     "id": "paris_item_62",
@@ -6160,43 +3190,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:00.286Z"
   },
   {
-    "id": "rome_item_1",
-    "cityId": "rome",
-    "name": "로마 프리미엄 Restaurant 추천 2",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "자, 여러분! 로마의 심장부로 함께 모험을 떠나봅시다. 이곳은 단순한 식당이 아닙니다! 로마 프리미엄 Restaurant 추천 2, 이름만큼이나 특별한 이곳에 오신 것을 환영합니다! 눈을 감고 상상해보세요. 따뜻한 저녁 햇살이 건물의 고대 벽돌에 부딪히고, 그 위로 은은한 바질 향기가 퍼지며, 멀리서는 이탈리아의 전통음악이 희미하게 들려옵니다. 공기의 진동조차 희미하게 느껴집니다. 이곳은 단순히 음식만을 위한 곳이 아닌, 역사와 전통, 그리고 문화가 한데 어우러진 특별한 장소입니다.\n\n이 식당의 기원을 알고 싶으신가요? 그럼 깊은 역사의 문을 열어봅시다. 건축주는 당시 로마의 귀족 가문 중 하나였던 마르쿠스 아우렐리우스의 후손, 이분은 18세기에 바로크 양식으로 이 건물을 세웠습니다. 당시 로마는 정치적 불안과 변혁의 시기였습니다. 많은 사람들이 변화에 대한 갈망과 불안을 동시에 느끼고 있었죠. 이 식당은 그런 혼란 속에서도 평화와 안정을 찾아가는 장소로 명성을 얻었습니다.\n\n흥미로운 이야기를 하나 들려드릴까요? 19세기 초, 이곳은 로마의 사교계 중심지였습니다. 마르쿠스 아우렐리우스의 후손 중 한 명인 클라라 아우렐리아는 이곳에서 화려한 파티를 열기로 유명했습니다. 한 번은 나폴레옹의 측근이 이곳에 방문하여 클라라와 두뇌 게임을 벌였다는 이야기도 전해집니다. 이 게임의 승패는 나폴레옹의 정책에 영향을 미쳤다는 소문도 있죠.\n\n이제 건축의 비밀을 파헤쳐봅시다. 이 건물은 로마의 전통적인 석재와 이탈리아산 대리석으로 세워졌습니다. 장인들의 섬세한 손길로 조각된 기둥들은 마치 마술처럼 그 시대의 영광을 재현합니다. 특히, 천장의 프레스코화는 놀라운 시각적 효과를 선사합니다. 이 화려한 장식은 당시의 예술적 성취를 그대로 보여줍니다.\n\n전문가들은 종종 이곳의 숨겨진 의미를 찾습니다. 예를 들어, 기둥의 각 조각은 그리스 신화를 상징하며, 천장 모서리에 위치한 작은 상징들은 로마 제국의 영광과 몰락을 은유적으로 표현하고 있습니다. 이러한 디테일은 대개 방문객들에게 간과되기 쉬우나, 알고 보면 그 아름다움에 감탄할 수밖에 없습니다.\n\n현대의 이야기도 흥미진진합니다. 20세기 초, 이 건물은 한동안 방치되었지만, 1960년대에 이르러 새로운 소유주가 그 역사적 가치를 깨닫고 복원을 시작했습니다. 이들은 원래의 디자인을 최대한 보존하며 현대적인 편의 시설을 추가했습니다. 오늘날 이 식당은 전 세계의 유명 인사와 여행객들이 찾아오는 명소가 되었습니다. 영화와 드라마에도 자주 등장하며, 때로는 관광객들이 그 장면을 재현하기 위해 이곳을 찾기도 합니다.\n\n마지막으로 이곳의 의미를 생각해볼까요? 로마 프리미엄 Restaurant 추천 2는 단순한 식당 이상의 가치를 지닙니다. 이는 과거와 현재가 조화를 이루며, 인간의 창의성과 문화유산이 함께 어우러지는 장소입니다. 이곳에 서 있는 것만으로도 시간의 흐름을 뛰어넘어 역사의 한 장면 속에 들어선 듯한 기분이 듭니다.\n\n이제 여러분과 헤어져야 할 시간입니다. 이 특별한 장소에서의 경험이 여러분의 가슴에 깊이 새겨지기를 바랍니다. 로마의 영혼을 느끼고, 그곳에서의 순간이 오래도록 기억되기를 바랍니다. 앞으로도 더 많은 모험이 기다리고 있을 테니, 다음에 또 만나길 기대합니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "로마 프리미엄 Restaurant 추천 2",
-        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "로마의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:01.505Z",
-    "updatedAt": "2026-02-22T18:06:00.421Z"
-  },
-  {
     "id": "rom_trevi",
     "cityId": "rome",
     "name": "트레비 분수 (Trevi Fountain)",
@@ -6308,6 +3301,43 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:00.618Z"
   },
   {
+    "id": "tokyo_item_79",
+    "cityId": "tokyo",
+    "name": "TOKYO Premium Shopping 79",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "자, 상상해보세요! 여러분은 지금 도쿄의 심장부에 서 있습니다. 눈앞에는 'TOKYO Premium Shopping 79', 빛나는 간판이 여러분을 맞이하고 있네요. 단순한 쇼핑몰이 아니에요. 여기는 과거와 현재, 전통과 현대가 아름답게 조화를 이루는 특별한 공간입니다. 발걸음을 옮길 때마다 느껴지는 활기찬 에너지, 귓가를 간지럽히는 경쾌한 음악 소리, 코끝을 스치는 맛있는 음식 냄새... 마치 영화 속 주인공이 된 기분일 거예요. \n\n이곳은 단순한 쇼핑 장소를 넘어, 도쿄의 문화와 역사를 체험할 수 있는 특별한 공간으로 설계되었어요. 주변을 둘러보세요. 전통적인 일본 정원의 아름다움과 현대적인 건축 양식이 절묘하게 어우러져 있죠? 마치 시간 여행을 하는 듯한 느낌을 받을 수 있을 거예요. 특히 가족 여행객들에게는 더할 나위 없이 좋은 장소랍니다. 아이들은 신나는 놀이 공간에서 뛰어놀고, 어른들은 고급스러운 브랜드 매장에서 쇼핑을 즐길 수 있죠. \n\n자, 이제 안으로 들어가 볼까요? 문을 열고 들어서는 순간, 여러분은 완전히 새로운 세계에 발을 들여놓게 될 거예요. 눈부신 조명 아래 펼쳐진 다양한 브랜드 매장, 활기 넘치는 직원들의 미소, 그리고 무엇보다 특별한 쇼핑 경험이 여러분을 기다리고 있답니다. 지금 여러분의 발 아래에는 수백 년의 역사를 간직한 도쿄의 땅이 있다는 것을 기억하세요. 이 땅에서 펼쳐지는 특별한 쇼핑 경험, 놓치지 마세요!\n\n상상해보세요. 사랑하는 사람들과 함께 이곳에서 멋진 옷을 고르고, 맛있는 음식을 먹고, 즐거운 시간을 보내는 모습을요. 이 모든 것이 'TOKYO Premium Shopping 79'에서 현실이 됩니다. 자, 지금 바로 여러분만의 특별한 쇼핑 여정을 시작해보세요!",
+    "description": "이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.",
+    "category": "Shopping",
+    "detailedDescription": "'TOKYO Premium Shopping 79'는 단순한 쇼핑몰 그 이상입니다. 이곳은 도쿄의 역사와 문화를 담은 특별한 공간으로, 쇼핑과 함께 다양한 체험을 즐길 수 있도록 설계되었습니다. 에도시대부터 이어져 온 전통 공예품을 전시하는 공간, 일본 전통 의상을 입어볼 수 있는 체험관, 그리고 지역 특산물을 판매하는 마켓까지, 다양한 볼거리와 즐길 거리가 가득합니다. \n\n**숨겨진 비화:** 'TOKYO Premium Shopping 79'는 원래 에도시대 영주였던 '도쿠가와 이에야스'의 별장이 있던 자리였습니다. 이후 메이지 유신을 거치면서 정부 소유가 되었고, 오랜 시간 방치되어 있다가 현대적인 쇼핑몰로 재탄생하게 된 것이죠. 건물 곳곳에는 옛 별장의 흔적이 남아있어, 역사를 좋아하는 사람들에게는 더욱 특별한 장소가 될 것입니다.\n\n**꿀팁:** 이곳을 방문할 때는 반드시 '프리미엄 라운지'를 이용해보세요. 고급스러운 인테리어와 함께 무료 음료 및 다과를 즐길 수 있으며, 전문 스타일리스트의 컨설팅도 받을 수 있습니다. 또한, 쇼핑몰 내 레스토랑에서는 도쿄의 유명 맛집 음식을 맛볼 수 있으니, 식사 시간을 활용하여 미식 여행을 즐겨보는 것도 좋습니다. 가족 단위 방문객을 위해 어린이 놀이 공간과 수유실도 마련되어 있으니, 편안하게 쇼핑을 즐길 수 있습니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "TOKYO Premium Shopping 79",
+        "description": "이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.",
+        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Shopping 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:06.923Z",
+    "updatedAt": "2026-02-22T18:22:57.144Z"
+  },
+  {
     "id": "magellans-cross",
     "cityId": "cebu",
     "name": "Magellan's Cross",
@@ -6348,114 +3378,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:30.107Z",
-    "updatedAt": "2026-02-22T18:08:09.965Z"
-  },
-  {
-    "id": "tokyo_item_79",
-    "cityId": "tokyo",
-    "name": "TOKYO Premium Shopping 79",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 상상해보세요! 여러분은 지금 도쿄의 심장부에 서 있습니다. 눈앞에는 'TOKYO Premium Shopping 79', 빛나는 간판이 여러분을 맞이하고 있네요. 단순한 쇼핑몰이 아니에요. 여기는 과거와 현재, 전통과 현대가 아름답게 조화를 이루는 특별한 공간입니다. 발걸음을 옮길 때마다 느껴지는 활기찬 에너지, 귓가를 간지럽히는 경쾌한 음악 소리, 코끝을 스치는 맛있는 음식 냄새... 마치 영화 속 주인공이 된 기분일 거예요. \n\n이곳은 단순한 쇼핑 장소를 넘어, 도쿄의 문화와 역사를 체험할 수 있는 특별한 공간으로 설계되었어요. 주변을 둘러보세요. 전통적인 일본 정원의 아름다움과 현대적인 건축 양식이 절묘하게 어우러져 있죠? 마치 시간 여행을 하는 듯한 느낌을 받을 수 있을 거예요. 특히 가족 여행객들에게는 더할 나위 없이 좋은 장소랍니다. 아이들은 신나는 놀이 공간에서 뛰어놀고, 어른들은 고급스러운 브랜드 매장에서 쇼핑을 즐길 수 있죠. \n\n자, 이제 안으로 들어가 볼까요? 문을 열고 들어서는 순간, 여러분은 완전히 새로운 세계에 발을 들여놓게 될 거예요. 눈부신 조명 아래 펼쳐진 다양한 브랜드 매장, 활기 넘치는 직원들의 미소, 그리고 무엇보다 특별한 쇼핑 경험이 여러분을 기다리고 있답니다. 지금 여러분의 발 아래에는 수백 년의 역사를 간직한 도쿄의 땅이 있다는 것을 기억하세요. 이 땅에서 펼쳐지는 특별한 쇼핑 경험, 놓치지 마세요!\n\n상상해보세요. 사랑하는 사람들과 함께 이곳에서 멋진 옷을 고르고, 맛있는 음식을 먹고, 즐거운 시간을 보내는 모습을요. 이 모든 것이 'TOKYO Premium Shopping 79'에서 현실이 됩니다. 자, 지금 바로 여러분만의 특별한 쇼핑 여정을 시작해보세요!",
-    "description": "이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.",
-    "category": "Shopping",
-    "detailedDescription": "'TOKYO Premium Shopping 79'는 단순한 쇼핑몰 그 이상입니다. 이곳은 도쿄의 역사와 문화를 담은 특별한 공간으로, 쇼핑과 함께 다양한 체험을 즐길 수 있도록 설계되었습니다. 에도시대부터 이어져 온 전통 공예품을 전시하는 공간, 일본 전통 의상을 입어볼 수 있는 체험관, 그리고 지역 특산물을 판매하는 마켓까지, 다양한 볼거리와 즐길 거리가 가득합니다. \n\n**숨겨진 비화:** 'TOKYO Premium Shopping 79'는 원래 에도시대 영주였던 '도쿠가와 이에야스'의 별장이 있던 자리였습니다. 이후 메이지 유신을 거치면서 정부 소유가 되었고, 오랜 시간 방치되어 있다가 현대적인 쇼핑몰로 재탄생하게 된 것이죠. 건물 곳곳에는 옛 별장의 흔적이 남아있어, 역사를 좋아하는 사람들에게는 더욱 특별한 장소가 될 것입니다.\n\n**꿀팁:** 이곳을 방문할 때는 반드시 '프리미엄 라운지'를 이용해보세요. 고급스러운 인테리어와 함께 무료 음료 및 다과를 즐길 수 있으며, 전문 스타일리스트의 컨설팅도 받을 수 있습니다. 또한, 쇼핑몰 내 레스토랑에서는 도쿄의 유명 맛집 음식을 맛볼 수 있으니, 식사 시간을 활용하여 미식 여행을 즐겨보는 것도 좋습니다. 가족 단위 방문객을 위해 어린이 놀이 공간과 수유실도 마련되어 있으니, 편안하게 쇼핑을 즐길 수 있습니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "TOKYO Premium Shopping 79",
-        "description": "이곳은 tokyo에서 가장 추천하는 Shopping 명소입니다.",
-        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Shopping 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:06.923Z",
-    "updatedAt": "2026-02-22T18:22:57.144Z"
-  },
-  {
-    "id": "casa_batllo",
-    "cityId": "barcelona",
-    "name": "Casa Batlló",
-    "lat": 41.391638,
-    "lng": 2.164993,
-    "radius": 50,
-    "narration": "자, 여러분! 지금 여러분은 바르셀로나의 심장, 카사 바트요 앞에 서 있습니다. 상상해보세요. 1900년대 초, 바르셀로나의 황금기를요. 가우디는 이 건물을 통해 단순한 주거 공간을 넘어선 예술 작품을 창조하고자 했습니다. 외관을 한 번 보세요. 해골처럼 보이는 발코니와 뼈대 같은 기둥들이 춤을 추는 듯하지 않나요? 가우디는 이 모티브를 통해 삶과 죽음, 그리고 부활의 이야기를 담고 싶어했습니다. 햇빛이 스테인드글라스를 통과하면서 내부 공간은 마치 심해 속처럼 푸르게 빛납니다. 여러분의 눈을 통해 보이는 모든 색깔들이 춤을 추듯 일렁이는 것을 느껴보세요. 옥상으로 올라가면 거대한 용의 비늘을 닮은 타일들이 여러분을 맞이합니다. 전설에 따르면, 이 용은 카탈루냐의 수호성인인 산 조르디에 의해 물리쳐졌다고 해요. 여러분은 지금 그 용의 등 위에 서 있는 겁니다! 바람 소리를 들어보세요. 저 멀리 지중해에서 불어오는 바람은 카사 바트요의 숨결과 같습니다. 이 모든 것이 가우디의 천재적인 상상력에서 비롯되었다는 사실이 믿기시나요? 카사 바트요는 단순한 건축물이 아니라, 살아 숨 쉬는 예술 작품입니다. 여러분의 오감으로 이 특별한 경험을 만끽하세요!",
-    "description": "Gaudí's fantastical modernist building with skeletal facade",
-    "category": "Architecture",
-    "detailedDescription": "카사 바트요는 안토니 가우디가 1904년에서 1906년 사이에 개축한 건물입니다. 원래는 1877년에 지어진 평범한 건물이었지만, 가우디의 손길을 거쳐 바르셀로나의 상징적인 건축물 중 하나로 탈바꿈했습니다. '뼈의 집'이라는 별명처럼, 건물의 외관은 마치 해골과 뼈를 연상시키는 독특한 디자인을 자랑합니다. 특히, 발코니는 해골의 턱뼈를 닮았으며, 기둥은 뼈를 형상화했습니다. 파사드는 모자이크 타일로 덮여 있어 햇빛에 따라 다채로운 색깔을 뽐냅니다. 내부는 더욱 놀랍습니다. 가우디는 자연 채광을 극대화하기 위해 창문의 크기와 위치를 세심하게 조정했습니다. 중앙 계단의 난간은 마치 거대한 동물의 척추뼈처럼 보이며, 옥상에는 용의 비늘을 형상화한 타일과 굴뚝이 있습니다. 카사 바트요에는 숨겨진 이야기가 많습니다. 예를 들어, 가우디는 건물의 환기 시스템을 설계할 때 자연의 원리를 이용했습니다. 그는 건물의 통풍구를 통해 시원한 공기가 순환하도록 하여 여름에도 시원하게 지낼 수 있도록 했습니다. 또한, 가우디는 건물의 모든 디테일에 의미를 부여했습니다. 그는 카탈루냐의 전설과 종교적인 상징을 건축물에 녹여내어 카사 바트요를 단순한 건물을 넘어선 예술 작품으로 만들었습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1583779457050-39e95d3d9d8b?w=800",
-      "https://images.unsplash.com/photo-1561632669-7f55f7975606?w=800",
-      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800"
-    ],
-    "historicalInfo": "Casa Batlló was originally built in 1877 by Emili Sala Cortés, one of Gaudí's architecture teachers. In 1904, Josep Batlló commissioned Gaudí to renovate the building. Gaudí completely transformed the building between 1904 and 1906. In 2005, Casa Batlló was designated a UNESCO World Heritage Site along with other works by Gaudí.",
-    "yearBuilt": "1877 (original), 1904-1906 (Gaudí renovation)",
-    "architect": "Antoni Gaudí (renovation)",
-    "translations": {
-      "en": {
-        "name": "Casa Batlló",
-        "narration": "Welcome to Casa Batlló, one of Gaudí's most imaginative buildings. This stunning modernist masterpiece resembles a living organism with its skeletal facade and dragon-like roof.",
-        "description": "Gaudí's fantastical modernist building with skeletal facade",
-        "detailedDescription": "Casa Batlló is a building in the center of Barcelona, renovated by Antoni Gaudí from 1904 to 1906. It is located on Passeig de Gràcia and is one of Gaudí's masterpieces. The building is part of a UNESCO World Heritage Site. The local name for the building is Casa dels ossos (House of Bones), as it has a visceral, skeletal organic quality. The facade is decorated with colorful mosaics and has balconies that resemble skulls or masks. The roof is arched and resembles the back of a dragon, with shingles that look like scales. Inside, Gaudí's organic design continues with curved walls, mushroom-shaped fireplaces, and a spectacular light well designed to distribute natural light throughout the building.",
-        "historicalInfo": "Casa Batlló was originally built in 1877 by Emili Sala Cortés, one of Gaudí's architecture teachers. In 1904, Josep Batlló commissioned Gaudí to renovate the building. Gaudí completely transformed the building between 1904 and 1906. In 2005, Casa Batlló was designated a UNESCO World Heritage Site along with other works by Gaudí.",
-        "yearBuilt": "1877 (original), 1904-1906 (Gaudí renovation)",
-        "architect": "Antoni Gaudí (renovation)"
-      },
-      "ko": {
-        "name": "카사 바트요",
-        "narration": "가우디의 가장 상상력 넘치는 건물 중 하나인 카사 바트요에 오신 것을 환영합니다. 이 놀라운 모더니스트 걸작은 골격 같은 파사드와 용처럼 생긴 지붕으로 살아있는 유기체를 닮았습니다.",
-        "description": "골격 같은 파사드를 가진 가우디의 환상적인 모더니스트 건물",
-        "detailedDescription": "카사 바트요는 1904년부터 1906년까지 안토니 가우디가 개조한 바르셀로나 중심부의 건물입니다. 그라시아 거리에 위치하며 가우디의 걸작 중 하나입니다. 건물은 유네스코 세계문화유산의 일부입니다. 건물의 현지 이름은 카사 델스 오소스(뼈의 집)로, 내장 기관 같은 골격 유기적 특성을 가지고 있습니다. 파사드는 화려한 모자이크로 장식되어 있으며 두개골이나 가면을 닮은 발코니가 있습니다. 지붕은 아치형이며 용의 등을 닮았으며, 비늘처럼 보이는 지붕 널빤지가 있습니다. 내부에서는 가우디의 유기적 디자인이 곡선 벽, 버섯 모양 벽난로, 건물 전체에 자연광을 분산시키도록 설계된 장관의 채광정으로 계속됩니다.",
-        "historicalInfo": "카사 바트요는 원래 가우디의 건축 선생님 중 한 명인 에밀리 살라 코르테스에 의해 1877년에 지어졌습니다. 1904년, 호세프 바트요가 가우디에게 건물 개조를 의뢰했습니다. 가우디는 1904년에서 1906년 사이에 건물을 완전히 변모시켰습니다. 2005년, 카사 바트요는 가우디의 다른 작품들과 함께 유네스코 세계문화유산으로 지정되었습니다.",
-        "yearBuilt": "1877년 (원래), 1904-1906년 (가우디 개조)",
-        "architect": "안토니 가우디 (개조)"
-      },
-      "ja": {
-        "name": "カサ・バトリョ",
-        "narration": "ガウディの最も想像力豊かな建物の一つであるカサ・バトリョへようこそ。この見事なモダニズムの傑作は、骨格のようなファサードとドラゴンのような屋根で生きた有機体に似ています。",
-        "description": "骨格のようなファサードを持つガウディの幻想的なモダニズム建築",
-        "detailedDescription": "カサ・バトリョは、1904年から1906年にアントニ・ガウディによって改装されたバルセロナ中心部の建物です。グラシア通りに位置し、ガウディの傑作の一つです。建物はユネスコ世界遺産の一部です。建物の地元名はカサ・デルス・オッソス(骨の家)で、内臓的で骨格的な有機的な特質を持っています。ファサードはカラフルなモザイクで装飾され、頭蓋骨や仮面に似たバルコニーがあります。屋根はアーチ型でドラゴンの背中に似ており、鱗のように見える帯状の屋根板があります。内部では、ガウディの有機的なデザインが曲線の壁、キノコ型の暖炉、建物全体に自然光を分散するように設計された壮大な光の井戸で続いています。",
-        "historicalInfo": "カサ・バトリョは元々1877年にガウディの建築教師の一人であるエミリ・サラ・コルテスによって建てられました。1904年、ジョゼップ・バトリョがガウディに建物の改装を依頼しました。ガウディは1904年から1906年の間に建物を完全に変貌させました。2005年、カサ・バトリョはガウディの他の作品とともにユネスコ世界遺産に指定されました。",
-        "yearBuilt": "1877年 (オリジナル), 1904-1906年 (ガウディ改装)",
-        "architect": "アントニ・ガウディ (改装)"
-      },
-      "zh": {
-        "name": "巴特罗之家",
-        "narration": "欢迎来到巴特罗之家,高迪最富想象力的建筑之一。这座令人惊叹的现代主义杰作以其骨骼般的立面和龙形屋顶类似于一个活的有机体。",
-        "description": "高迪幻想的现代主义建筑,拥有骨骼立面",
-        "detailedDescription": "巴特罗之家是位于巴塞罗那市中心的一座建筑,由安东尼·高迪于1904年至1906年进行翻新。它位于格拉西亚大道上,是高迪的杰作之一。该建筑是联合国教科文组织世界遗产的一部分。该建筑的当地名称是骨头之家(Casa dels ossos),因为它具有内脏的、骨骼的有机特质。立面装饰着彩色马赛克,阳台类似于头骨或面具。屋顶呈拱形,类似于龙的背部,屋瓦看起来像鳞片。在内部,高迪的有机设计继续着,有弯曲的墙壁、蘑菇形壁炉和一个壮观的天井,旨在将自然光分布到整个建筑。",
-        "historicalInfo": "巴特罗之家最初由高迪的建筑老师之一埃米利·萨拉·科尔特斯于1877年建造。1904年,约瑟普·巴特罗委托高迪翻新这座建筑。高迪在1904年至1906年间彻底改造了这座建筑。2005年,巴特罗之家与高迪的其他作品一起被指定为联合国教科文组织世界遗产。",
-        "yearBuilt": "1877年 (原建筑), 1904-1906年 (高迪翻新)",
-        "architect": "安东尼·高迪 (翻新)"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:27.837Z",
-    "updatedAt": "2026-02-22T18:17:09.638Z"
+    "updatedAt": "2026-02-22T20:00:58.449Z"
   },
   {
     "id": "싱가포르-demo-1",
@@ -6493,177 +3416,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T12:57:47.583Z",
     "updatedAt": "2026-02-22T18:06:00.750Z"
-  },
-  {
-    "id": "rome/aroma-restaurant",
-    "cityId": "rome",
-    "name": "Aroma Restaurant",
-    "lat": 41.8906,
-    "lng": 12.4938,
-    "radius": 50,
-    "narration": "상상해보세요! 지금 당신은 로마의 심장, 콜로세움이 한눈에 들어오는 특별한 레스토랑, Aroma에 앉아있습니다. 부드러운 바람이 살랑살랑 불어와 당신의 머리카락을 간지럽히고, 코끝에는 맛있는 음식 냄새가 맴돌아요. 테이블에는 이탈리아 햇살을 가득 머금은 토마토와 향긋한 바질, 올리브 오일이 곁들여진 빵이 놓여있습니다. 창밖으로는 2천 년 역사를 간직한 콜로세움이 웅장한 자태를 뽐내고 있죠. 검투사들의 함성과 관중들의 열기가 느껴지는 듯합니다. Aroma에서는 단순히 식사를 하는 것이 아니라, 로마의 역사와 문화를 맛보는 특별한 경험을 할 수 있어요. 웨이터의 친절한 미소와 능숙한 서비스는 당신을 더욱 편안하게 만들어 줄 겁니다. 잠시 눈을 감고, 콜로세움의 웅장한 아름다움과 맛있는 음식, 그리고 로마의 낭만에 흠뻑 빠져보세요. 지금 여러분은 인생 최고의 순간을 경험하고 있는 겁니다. 파스타 면이 입 안에서 부드럽게 녹아내리고, 와인 한 모금은 목넘김이 예술이죠. 석양이 콜로세움을 붉게 물들이는 모습을 바라보며, 사랑하는 사람과 함께 속삭이는 이야기는 영원히 잊지 못할 추억이 될 거예요. 자, 이제 Aroma에서 로마의 맛과 멋을 만끽해볼까요?",
-    "description": "Michelin-starred rooftop dining with a breathtaking view of the Colosseum.",
-    "category": "Restaurant",
-    "detailedDescription": "Aroma 레스토랑은 콜로세움을 가장 아름답게 조망할 수 있는 숨겨진 명소입니다. 미슐랭 가이드에도 이름을 올린 이곳은, 단순한 레스토랑을 넘어 로마의 역사와 문화를 오감으로 느낄 수 있는 특별한 공간입니다. 많은 관광객들이 콜로세움 앞에서 사진을 찍는 데 그치지만, 진정한 로마의 아름다움은 Aroma에서 식사를 하며 감상할 때 비로소 완성됩니다. 특히 저녁 시간에는 콜로세움에 조명이 켜지면서 환상적인 야경을 선사합니다. 현지인들은 특별한 날, 예를 들어 프로포즈나 결혼 기념일에 Aroma를 찾는 경우가 많습니다. 예약은 필수이며, 창가 자리는 몇 주 전에 마감되는 경우가 많으니 서두르는 것이 좋습니다. Aroma의 숨겨진 비화 하나를 알려드릴까요? 과거 로마 귀족들은 콜로세움 검투 경기가 끝난 후, Aroma의 전신이었던 작은 식당에서 승리를 축하하며 만찬을 즐겼다고 합니다. 지금도 Aroma는 그 전통을 이어받아, 로마 최고의 맛과 풍경을 선사하고 있습니다. 콜로세움의 웅장한 아름다움을 배경으로, 잊지 못할 로마의 밤을 경험해보세요.",
-    "photos": [
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1502301103665-0b95cc738def?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/flagged/photo-1557007525-27a92289658e?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?auto=format&fit=crop&q=80&w=1000"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "아로마 레스토랑",
-        "description": "콜로세움이 한눈에 들어오는 미슐랭 스타 루프탑 레스토랑",
-        "detailedDescription": "팔라초 만프레디 호텔 최상층에 위치한 아로마는 콜로세움을 가장 가까이서 감상하며 식사할 수 있는 최고의 공간입니다. 셰프 주세페 디 이오리오는 고전적인 로마 요리에 현대적인 감각을 더한 코스 요리를 선보입니다. 세계에서 가장 낭만적인 식당 중 하나로 꼽히며, 특별한 날을 기념하기에 더할 나위 없는 장소입니다.",
-        "narration": "콜로세움의 비현실적인 전망과 함께하는 아로마 레스토랑에 오신 것을 환영합니다. 로마 최고의 미식 경험을 즐겨보세요."
-      },
-      "it": {
-        "name": "Ristorante Aroma",
-        "narration": "Aroma offre l'ultima esperienza culinaria romana con una vista impareggiabile sul Colosseo.",
-        "description": "Cucina stellata Michelin con una vista mozzafiato sul Colosseo.",
-        "detailedDescription": "Situato all'ultimo piano di Palazzo Manfredi, Aroma offre una vista privilegiata sul Colosseo. Lo chef Giuseppe Di Iorio propone un menu che bilancia i sapori romani classici con tecniche culinarie moderne."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-22T18:05:47.586Z",
-    "updatedAt": "2026-02-22T18:17:29.155Z"
-  },
-  {
-    "id": "st_peters_basilica",
-    "cityId": "rome",
-    "name": "St. Peter's Basilica",
-    "lat": 41.902168,
-    "lng": 12.453937,
-    "radius": 75,
-    "narration": "성 베드로 대성당에 오신 여러분, 안녕하세요! 지금 여러분은 가톨릭 세계의 심장이자, 인류 역사상 가장 거대한 교회 건축물 중 하나 앞에 서 계십니다. 상상해보세요, 르네상스 시대의 걸작이 여러분을 압도하는 웅장함으로 맞이하고 있습니다. 이곳은 단순히 거대한 건축물이 아니라, 초대 교황인 성 베드로가 십자가에 못 박혀 순교한 바로 그 자리 위에 세워진 성스러운 공간입니다. 지금 여러분의 발 아래에는 성인의 넋이 깃들어 있습니다.\n\n성당 안으로 발걸음을 옮기면, 미켈란젤로의 '피에타'가 숨 막힐 듯한 아름다움으로 여러분을 맞이할 겁니다. 성모 마리아의 슬픔과 숭고함이 느껴지는 조각상을 눈에 담아보세요. 천장에는 미켈란젤로가 직접 그린 '천지창조'의 일부가 장식되어 있으며, 돔 위로는 눈부신 햇살이 쏟아져 내립니다. 잠시 숨을 멈추고, 빛과 그림자가 만들어내는 경이로운 풍경을 느껴보세요.\n\n성 베드로 대성당은 예술과 신앙, 역사가 얽혀 있는 특별한 공간입니다. 수많은 예술가와 신앙인들의 열정과 노력이 깃든 이곳에서, 여러분은 시간을 초월하는 감동을 느끼실 수 있을 겁니다. 자, 이제 저와 함께 성 베드로 대성당의 숨겨진 이야기를 찾아 떠나볼까요? 문득, 성 베드로가 이곳에서 마지막 숨을 거두며 어떤 기도를 했을지 상상해보세요. 어쩌면 여러분이 지금 느끼는 감정과 비슷한 것이었을지도 모릅니다.",
-    "description": "The largest church in the world and center of Catholicism",
-    "category": "Religious Site",
-    "detailedDescription": "성 베드로 대성당은 로마 가톨릭의 총본산이자, 세계에서 가장 큰 교회 중 하나입니다. 이곳은 예수 그리스도의 수제자이자 초대 교황인 성 베드로의 무덤 위에 세워졌다고 전해집니다. 기존의 바실리카가 노후화되어 16세기에 재건축되었으며, 브라만테, 미켈란젤로, 라파엘로, 베르니니 등 당대 최고의 예술가들이 참여하여 120년이 넘는 시간 동안 지어졌습니다.\n\n**현지인 꿀팁**: 성 베드로 대성당 돔에 올라가면 로마 시내 전체를 조망할 수 있습니다. 좁고 가파른 계단을 올라야 하지만, 정상에서 바라보는 풍경은 그 모든 노력을 보상해줄 만큼 훌륭합니다. 특히 해 질 무렵의 풍경은 잊을 수 없는 추억을 선사할 것입니다.\n\n**숨겨진 비화**: 성 베드로 대성당 지하에는 교황들의 무덤이 있습니다. 요한 바오로 2세, 베네딕토 16세 등 역대 교황들의 유해가 안치되어 있으며, 일반인에게 공개되지 않는 특별한 공간도 있다고 합니다. 과거에는 교황의 유품이나 비밀 문서 등이 보관되어 있었을 것으로 추정됩니다. 그리고 미켈란젤로의 '피에타'는 한때 헝가리 망치 공격을 받아 복원되었다는 슬픈 역사를 가지고 있습니다. 현재는 방탄 유리로 보호되고 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800",
-      "https://images.unsplash.com/photo-1583992876959-af90c2dcf744?w=800",
-      "https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=800",
-      "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800",
-      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800",
-      "https://images.unsplash.com/photo-1583424223556-bb53f4362c65?w=800",
-      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800"
-    ],
-    "historicalInfo": "St. Peter's Basilica was built between 1506 and 1626 on the traditional site of Saint Peter's tomb. It is regarded as one of the holiest Catholic shrines and has been described as holding a unique position in the Christian world.",
-    "yearBuilt": "1506-1626",
-    "architect": "Bramante, Michelangelo, Bernini",
-    "translations": {
-      "en": {
-        "name": "St. Peter's Basilica",
-        "narration": "Welcome to St. Peter's Basilica, the heart of the Catholic world and one of the largest churches ever built. This Renaissance masterpiece stands on the traditional site where Saint Peter, the first Pope, was crucified and buried.",
-        "description": "The largest church in the world and center of Catholicism",
-        "historicalInfo": "St. Peter's Basilica was built between 1506 and 1626 on the traditional site of Saint Peter's tomb. It is regarded as one of the holiest Catholic shrines.",
-        "yearBuilt": "1506-1626",
-        "architect": "Bramante, Michelangelo, Bernini"
-      },
-      "it": {
-        "name": "Basilica di San Pietro",
-        "narration": "Benvenuti alla Basilica di San Pietro, il cuore del mondo cattolico e una delle chiese più grandi mai costruite. Questo capolavoro rinascimentale sorge sul sito tradizionale dove San Pietro, il primo Papa, fu crocifisso e sepolto.",
-        "description": "La chiesa più grande del mondo e centro del cattolicesimo",
-        "historicalInfo": "La Basilica di San Pietro fu costruita tra il 1506 e il 1626 sul sito tradizionale della tomba di San Pietro. È considerata uno dei santuari cattolici più sacri.",
-        "yearBuilt": "1506-1626",
-        "architect": "Bramante, Michelangelo, Bernini"
-      },
-      "ko": {
-        "name": "성 베드로 대성당",
-        "narration": "가톨릭 세계의 중심이자 역대 가장 큰 교회 중 하나인 성 베드로 대성당에 오신 것을 환영합니다. 이 르네상스 걸작은 첫 번째 교황인 성 베드로가 십자가에 못 박히고 묻힌 전통적인 장소에 세워져 있습니다.",
-        "description": "세계에서 가장 큰 교회이자 가톨릭의 중심지",
-        "historicalInfo": "성 베드로 대성당은 1506년부터 1626년 사이에 성 베드로의 무덤이 있는 전통적인 장소에 건설되었습니다. 가장 신성한 가톨릭 성지 중 하나로 여겨집니다.",
-        "yearBuilt": "1506-1626년",
-        "architect": "브라만테, 미켈란젤로, 베르니니"
-      },
-      "es": {
-        "name": "Basílica de San Pedro",
-        "narration": "Bienvenido a la Basílica de San Pedro, el corazón del mundo católico y una de las iglesias más grandes jamás construidas. Esta obra maestra del Renacimiento se levanta en el lugar tradicional donde San Pedro, el primer Papa, fue crucificado y enterrado.",
-        "description": "La iglesia más grande del mundo y centro del catolicismo",
-        "detailedDescription": "La Basílica de San Pedro es la iglesia más grande del mundo y uno de los lugares más sagrados del cristianismo, construida sobre el sitio tradicional de la tumba del apóstol Pedro. Esta obra maestra del Renacimiento tardío y el Barroco fue diseñada principalmente por Donato Bramante, Miguel Ángel, Carlo Maderno y Gian Lorenzo Bernini, con la construcción extendiéndose desde 1506 hasta 1626. La fachada se eleva 45,5 metros de altura y su icónica cúpula, diseñada por Miguel Ángel, alcanza 136,6 metros. En el interior, la basílica alberga la Piedad de Miguel Ángel y el Baldaquino de Bernini. Como centro espiritual de la Iglesia Católica, atrae a millones de peregrinos y visitantes cada año.",
-        "historicalInfo": "La Basílica de San Pedro fue construida entre 1506 y 1626 en el lugar tradicional de la tumba de San Pedro. Es considerada uno de los santuarios católicos más sagrados.",
-        "yearBuilt": "1506-1626",
-        "architect": "Bramante, Miguel Ángel, Bernini"
-      },
-      "fr": {
-        "name": "Basilique Saint-Pierre",
-        "narration": "Bienvenue à la Basilique Saint-Pierre, le cœur du monde catholique et l'une des plus grandes églises jamais construites. Ce chef-d'œuvre de la Renaissance s'élève sur le site traditionnel où Saint Pierre, le premier pape, a été crucifié et enterré.",
-        "description": "La plus grande église du monde et centre du catholicisme",
-        "detailedDescription": "La Basilique Saint-Pierre est la plus grande église du monde et l'un des lieux les plus sacrés du christianisme, construite sur le site traditionnel de la tombe de l'apôtre Pierre. Ce chef-d'œuvre de la Renaissance tardive et du Baroque a été principalement conçu par Donato Bramante, Michel-Ange, Carlo Maderno et Gian Lorenzo Bernini, avec une construction s'étendant de 1506 à 1626. La façade s'élève à 45,5 mètres de haut et son dôme emblématique, conçu par Michel-Ange, atteint 136,6 mètres. À l'intérieur, la basilique abrite la Pietà de Michel-Ange et le Baldaquin de Bernini. En tant que centre spirituel de l'Église catholique, elle attire des millions de pèlerins et de visiteurs chaque année.",
-        "historicalInfo": "La Basilique Saint-Pierre a été construite entre 1506 et 1626 sur le site traditionnel du tombeau de Saint Pierre. Elle est considérée comme l'un des sanctuaires catholiques les plus sacrés.",
-        "yearBuilt": "1506-1626",
-        "architect": "Bramante, Michel-Ange, Le Bernin"
-      },
-      "de": {
-        "name": "Petersdom",
-        "narration": "Willkommen im Petersdom, dem Herzen der katholischen Welt und einer der größten Kirchen, die je gebaut wurden. Dieses Renaissance-Meisterwerk steht an der traditionellen Stelle, wo der Heilige Petrus, der erste Papst, gekreuzigt und begraben wurde.",
-        "description": "Die größte Kirche der Welt und Zentrum des Katholizismus",
-        "detailedDescription": "Der Petersdom ist die größte Kirche der Welt und einer der heiligsten Orte des Christentums, erbaut über der traditionellen Grabstätte des Apostels Petrus. Dieses Meisterwerk der Spätrenaissance und des Barock wurde hauptsächlich von Donato Bramante, Michelangelo, Carlo Maderno und Gian Lorenzo Bernini entworfen, wobei sich der Bau von 1506 bis 1626 erstreckte. Die Fassade erhebt sich 45,5 Meter hoch und ihre ikonische Kuppel, entworfen von Michelangelo, erreicht 136,6 Meter. Im Inneren beherbergt die Basilika Michelangelos Pietà und Berninis Baldachin. Als spirituelles Zentrum der katholischen Kirche zieht sie jährlich Millionen von Pilgern und Besuchern an.",
-        "historicalInfo": "Der Petersdom wurde zwischen 1506 und 1626 an der traditionellen Grabstätte des Heiligen Petrus erbaut. Er gilt als eines der heiligsten katholischen Heiligtümer.",
-        "yearBuilt": "1506-1626",
-        "architect": "Bramante, Michelangelo, Bernini"
-      },
-      "zh": {
-        "name": "圣彼得大教堂",
-        "narration": "欢迎来到圣彼得大教堂，天主教世界的中心，也是有史以来建造的最大教堂之一。这座文艺复兴杰作矗立在传统上圣彼得——第一任教皇——被钉十字架和埋葬的地方。",
-        "description": "世界上最大的教堂，天主教的中心",
-        "historicalInfo": "圣彼得大教堂于1506年至1626年间建造在圣彼得墓的传统地点上。它被视为最神圣的天主教圣殿之一。",
-        "yearBuilt": "1506-1626年",
-        "architect": "布拉曼特、米开朗基罗、贝尔尼尼"
-      },
-      "ja": {
-        "name": "サン・ピエトロ大聖堂",
-        "narration": "カトリック世界の中心であり、史上最大の教会の一つであるサン・ピエトロ大聖堂へようこそ。このルネサンスの傑作は、初代教皇である聖ペトロが十字架にかけられ埋葬された伝統的な場所に建っています。",
-        "description": "世界最大の教会であり、カトリックの中心地",
-        "historicalInfo": "サン・ピエトロ大聖堂は1506年から1626年にかけて聖ペトロの墓がある伝統的な場所に建設されました。最も神聖なカトリックの聖地の一つとされています。",
-        "yearBuilt": "1506-1626年",
-        "architect": "ブラマンテ、ミケランジェロ、ベルニーニ"
-      },
-      "pt": {
-        "name": "Basílica de São Pedro",
-        "narration": "Bem-vindo à Basílica de São Pedro, o coração do mundo católico e uma das maiores igrejas já construídas. Esta obra-prima do Renascimento ergue-se no local tradicional onde São Pedro, o primeiro Papa, foi crucificado e enterrado.",
-        "description": "A maior igreja do mundo e centro do catolicismo",
-        "detailedDescription": "A Basílica de São Pedro é a maior igreja do mundo e um dos lugares mais sagrados do cristianismo, construída sobre o local tradicional do túmulo do apóstolo Pedro. Esta obra-prima do Renascimento tardio e do Barroco foi projetada principalmente por Donato Bramante, Michelangelo, Carlo Maderno e Gian Lorenzo Bernini, com a construção estendendo-se de 1506 a 1626. A fachada ergue-se a 45,5 metros de altura e sua icônica cúpula, projetada por Michelangelo, atinge 136,6 metros. No interior, a basílica abriga a Pietà de Michelangelo e o Baldaquino de Bernini. Como centro espiritual da Igreja Católica, atrai milhões de peregrinos e visitantes a cada ano.",
-        "historicalInfo": "A Basílica de São Pedro foi construída entre 1506 e 1626 no local tradicional do túmulo de São Pedro. É considerada um dos santuários católicos mais sagrados.",
-        "yearBuilt": "1506-1626",
-        "architect": "Bramante, Michelangelo, Bernini"
-      },
-      "ru": {
-        "name": "Собор Святого Петра",
-        "narration": "Добро пожаловать в Собор Святого Петра, сердце католического мира и одну из крупнейших церквей, когда-либо построенных. Этот шедевр эпохи Возрождения стоит на традиционном месте, где Святой Пётр, первый Папа, был распят и погребён.",
-        "description": "Крупнейшая церковь в мире и центр католицизма",
-        "detailedDescription": "Собор Святого Петра — крупнейшая церковь в мире и одно из самых священных мест христианства, построенная над традиционным местом захоронения апостола Петра. Этот шедевр позднего Возрождения и барокко был создан в основном Донато Браманте, Микеланджело, Карло Мадерно и Джан Лоренцо Бернини, а строительство продолжалось с 1506 по 1626 год. Фасад возвышается на 45,5 метра в высоту, а её культовый купол, спроектированный Микеланджело, достигает 136,6 метра. Внутри базилика хранит Пьету Микеланджело и балдахин Бернини. Как духовный центр Католической церкви, ежегодно привлекает миллионы паломников и посетителей.",
-        "historicalInfo": "Собор Святого Петра был построен между 1506 и 1626 годами на традиционном месте гробницы Святого Петра. Он считается одной из самых священных католических святынь.",
-        "yearBuilt": "1506-1626 гг.",
-        "architect": "Браманте, Микеланджело, Бернини"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:24.571Z",
-    "updatedAt": "2026-02-22T18:17:48.638Z"
   },
   {
     "id": "roman_forum",
@@ -6791,110 +3543,50 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T11:40:38.856Z",
-    "updatedAt": "2026-02-22T18:17:38.849Z"
+    "updatedAt": "2026-02-22T20:00:58.549Z"
   },
   {
-    "id": "eiffel_tower",
-    "cityId": "paris",
-    "name": "Eiffel Tower",
-    "lat": 48.858093,
-    "lng": 2.294694,
-    "radius": 70,
-    "narration": "상상해보세요. 지금 여러분은 파리의 심장, 에펠탑 아래에 서 있습니다. 1889년 만국 박람회를 위해 지어진 이 철골 구조물은 단순한 건축물을 넘어, 프랑스를 상징하는 아이콘이 되었죠. 하늘을 찌를 듯 솟아오른 탑을 올려다보면, 그 웅장함에 압도당하게 됩니다. 탑을 감싸는 철골 구조는 마치 섬세한 레이스처럼 아름답고, 파리의 햇살을 받아 반짝이는 모습은 정말 장관이에요. \n\n엘리베이터를 타고 올라가는 동안, 파리의 풍경이 서서히 눈 앞에 펼쳐지는 것을 느껴보세요. 1층, 2층을 지나 점점 더 높이 올라갈수록, 도시의 모습은 더욱 선명해집니다. 샹젤리제 거리의 활기찬 모습, 센 강을 따라 흐르는 유람선, 몽마르뜨 언덕 위의 사크레쾨르 대성당까지, 파리의 주요 명소들이 한눈에 들어오죠. \n\n드디어 정상에 도착했습니다! 발 아래 펼쳐진 파리의 전경은 숨 막힐 듯 아름답습니다. 에펠탑에서 바라보는 일몰은 특히 잊을 수 없는 경험이 될 거예요. 붉게 물든 하늘 아래, 파리의 건물들이 실루엣처럼 드러나는 모습은 마치 한 폭의 그림 같습니다. 눈을 감고, 파리의 낭만적인 공기를 깊이 들이마셔보세요. 에펠탑은 단순한 관광 명소를 넘어, 파리의 역사와 문화를 담고 있는 특별한 공간입니다. 이곳에서 여러분은 파리의 아름다움과 낭만을 마음껏 느껴볼 수 있을 거예요. 자, 이제 에펠탑의 매력에 흠뻑 빠져볼까요?",
-    "description": "The most-visited paid monument in the world",
-    "category": "Monument",
-    "detailedDescription": "에펠탑은 1889년 프랑스 혁명 100주년을 기념하여 개최된 파리 만국 박람회를 위해 지어졌습니다. 당시 혁신적인 건축 기술을 선보였지만, 당대 예술가와 지식인들로부터 '흉물스럽다'는 비판을 받기도 했습니다. 하지만 시간이 지나면서 에펠탑은 파리의 상징으로 자리 잡았고, 현재는 매년 수백만 명의 관광객이 방문하는 세계적인 명소가 되었습니다. 에펠탑 건설에는 약 2년 2개월의 시간이 소요되었으며, 7,300톤의 철과 250만 개의 리벳이 사용되었습니다. 숨겨진 이야기 하나를 들려드릴까요? 에펠탑 꼭대기에는 작은 비밀 아파트가 있는데, 설계자인 귀스타브 에펠이 손님을 맞이하기 위해 만든 공간이라고 합니다. 에펠은 이곳에서 에디슨과 같은 유명 인사들과 교류하며 시간을 보냈다고 해요. 에펠탑을 방문할 때는 엘리베이터를 이용하는 것이 일반적이지만, 용기 있는 분들은 계단을 이용해 올라갈 수도 있습니다. 계단을 통해 올라가면 에펠탑의 구조를 더욱 자세히 감상할 수 있고, 색다른 경험을 할 수 있을 거예요.",
+    "id": "chinatown-heritage-centre",
+    "cityId": "singapore",
+    "name": "Chinatown Heritage Centre",
+    "lat": 1.283611,
+    "lng": 103.844167,
+    "radius": 50,
+    "narration": "자, 여러분! 상상해보세요. 19세기 말, 낡은 배를 타고 머나먼 싱가포르에 도착한 중국 이민자들의 삶을요. 지금 여러분이 서 있는 이 차이나타운 헤리티지 센터는 그들의 땀과 눈물, 그리고 희망으로 가득 찬 이야기들을 생생하게 담고 있는 곳입니다. 삐걱거리는 나무 바닥을 따라 걷다 보면, 마치 시간 여행을 떠난 듯한 기분이 들 거예요. 코를 찌르는 한약 냄새, 왁자지껄한 시장의 활기, 그리고 간절한 기도 소리가 귓가에 맴도는 듯하죠. 좁고 허름한 방 안을 들여다보면, 고향을 떠나 낯선 땅에서 고생했던 이민자들의 애환이 느껴집니다. 하루 종일 힘든 노동에 시달리면서도, 가족을 위해, 더 나은 미래를 위해 꿋꿋이 살아갔던 그들의 강인한 정신을 느껴보세요. 이 곳은 단순한 박물관이 아니에요. 싱가포르 역사의 중요한 한 페이지를 장식한, 용감한 선조들의 삶을 기리는 святилище입니다. 자, 눈을 감고 그들의 삶 속으로 깊숙이 들어가 보세요. 그들의 이야기가 여러분의 마음속에 영원히 새겨질 거예요. 낡은 재봉틀 돌아가는 소리, 아이들의 웃음소리, 그리고 희망을 노래하는 듯한 노랫소리가 들리지 않나요? 바로 이곳, 차이나타운 헤리티지 센터에서 그 모든 것을 경험할 수 있습니다. 지금 바로, 과거로의 특별한 여행을 시작해 보세요!",
+    "description": "Museum showcasing early Chinese immigrant life",
+    "category": "Museum & Heritage",
+    "detailedDescription": "차이나타운 헤리티지 센터는 싱가포르 초기 중국 이민자들의 삶과 문화를 엿볼 수 있는 уникальный 박물관입니다. 19세기 말부터 20세기 초까지, 중국 본토에서 건너온 이민자들은 험난한 항해 끝에 싱가포르에 정착했습니다. 이들은 주로 쿨리, 행상인, 장인 등으로 일하며, 싱가포르 경제 발전에 큰 기여를 했습니다. 박물관은 당시 이민자들이 살았던 реальный 모습을 재현한 방, 상점, 거리 등을 통해 방문객들에게 생생한 경험을 선사합니다. 특히 주목할 만한 것은 '싱가포르 강변의 쿨리' 섹션인데, 이곳에서는 쿨리들이 얼마나 고된 노동에 시달렸는지, 그리고 그들의 삶이 얼마나 비참했는지 자세히 알 수 있습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 박물관 2층에 있는 '티안호켄 사원' 모형은 싱가포르에서 가장 오래된 호키엔 사원으로, 초기 이민자들이 안전한 항해를 기원했던 곳입니다. 이 사원 모형은 단순한 전시물이 아니라, 이민자들의 간절한 염원을 담고 있는 святилище입니다. 그리고 숨겨진 비화 하나 더! 박물관 지하에는 과거 아편굴로 사용되었던 공간이 있는데, 이곳에서는 당시 아편 중독의 심각성을 엿볼 수 있습니다. 차이나타운 헤리티지 센터는 단순한 박물관 관람을 넘어, 싱가포르 역사의 중요한 부분을 이해하고, 초기 이민자들의 삶을 공감할 수 있는 소중한 기회를 제공합니다.",
     "photos": [
-      "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=1600&q=80",
-      "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800",
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800",
-      "https://images.unsplash.com/photo-1431274172761-fca41d930114?w=800",
-      "https://images.unsplash.com/photo-1543349689-9a4d426bee8e?w=800"
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800",
+      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800"
     ],
-    "historicalInfo": "The Eiffel Tower was built for the 1889 World's Fair and was initially criticized by some of France's leading artists and intellectuals. It has become a global cultural icon of France.",
-    "yearBuilt": "1887-1889",
-    "architect": "Gustave Eiffel",
+    "historicalInfo": "Opened in 2008, the Chinatown Heritage Centre is housed in three restored shophouses and documents the lives of early Chinese immigrants to Singapore during the colonial period.",
+    "yearBuilt": "2008",
+    "architect": "Restoration by Singapore Tourism Board",
     "translations": {
       "en": {
-        "name": "Eiffel Tower",
-        "narration": "Welcome to the Eiffel Tower, the iron lady of Paris. Built for the 1889 World's Fair, it has become the global icon of France.",
-        "description": "The most-visited paid monument in the world",
-        "detailedDescription": "The Eiffel Tower, or \"La Tour Eiffel,\" stands as the undisputed symbol of Paris and France, an iron lattice masterpiece that has captivated the world since its completion in 1889. Rising 330 meters (1,083 feet) into the Parisian sky, this architectural marvel was initially conceived as a temporary structure for the 1889 Exposition Universelle (World's Fair), celebrating the centennial of the French Revolution. Today, it welcomes nearly seven million visitors annually, making it the most-visited paid monument in the world. The tower was designed by engineer Gustave Eiffel, whose company specialized in metal framework construction. Eiffel's design was selected from over 100 submissions in a competition to create a centerpiece for the World's Fair. The structure's innovative design and unprecedented height sparked intense controversy among Parisian artists and intellectuals, who published a petition called \"Artists Against the Eiffel Tower,\" denouncing it as a monstrous iron monstrosity that would disfigure the elegant Parisian skyline. Notable critics included author Guy de Maupassant, who reportedly ate lunch in the tower's restaurant every day because it was the one place in Paris where he couldn't see the tower. Construction began in January 1887 and was completed in a remarkable 2 years, 2 months, and 5 days, a testament to Eiffel's engineering prowess and organizational skills. The tower required 18,038 metallic parts, 2.5 million rivets, and over 300 workers to assemble. Despite the enormous scale of the project and the height at which much of the work was performed, only one worker died during construction - a remarkably low casualty rate for the era. The tower's lattice structure was revolutionary, using an open-frame design that minimized wind resistance while maximizing strength. The four massive curved legs rest on concrete foundations, each supported by four separate foundation blocks. The legs converge as they rise, meeting at the first platform at 57 meters (187 feet). Above this, the structure continues upward through a second platform at 115 meters (377 feet) before tapering to the summit at 300 meters, with antennas extending the total height to 330 meters. The tower was painted a distinctive reddish-brown color for the exposition, but has since been repainted 18 times, with the current \"Eiffel Tower Brown\" requiring 60 tons of paint applied in three different shades - darker at the bottom and lighter at the top to enhance its appearance against the sky. Originally intended to stand for only 20 years, the Eiffel Tower was saved from demolition when Eiffel shrewdly emphasized its value as a radiotelegraphy station. The tower proved invaluable during World War I for intercepting enemy communications, and later became essential for radio and television broadcasting. During World War II, when Hitler visited Paris in 1940, French resistance fighters cut the elevator cables, forcing the Führer to climb the stairs if he wanted to reach the summit - he declined. The tower has served as the site of numerous scientific experiments, including Eiffel's own aerodynamic and meteorological studies. Physicist Théodore Wulf conducted radiation experiments from the top in 1910, leading to the discovery of cosmic rays. The tower has also witnessed remarkable feats of daring: in 1912, Austrian tailor Franz Reichelt jumped from the first platform wearing a parachute suit of his own design - tragically, it failed. In 1923, journalist Pierre Labric rode a bicycle down the stairs from the first level. The tower's three platforms offer spectacular views of Paris and host restaurants, museums, and shops. The first platform, recently renovated, features a glass floor offering a thrilling view straight down. The second platform houses the Michelin-starred restaurant Jules Verne, offering gourmet dining with unparalleled views. The summit, accessible by elevator, provides a breathtaking 360-degree panorama of the City of Light. The tower has been featured in countless films, artworks, and photographs, becoming synonymous with romance, elegance, and French culture. It serves as the backdrop for millions of proposals, weddings, and celebrations each year. Every evening, the tower sparkles for five minutes at the beginning of each hour after sunset, illuminated by 20,000 light bulbs installed in 1985, creating a magical spectacle visible throughout Paris. Recent additions include wind turbines and solar panels, making the iconic structure more environmentally sustainable while maintaining its historic character. The tower also hosts various exhibitions and events, from art installations to sporting events, continually reinventing itself while remaining true to Eiffel's original vision. Today, the Eiffel Tower stands not just as an engineering achievement but as a testament to human creativity, ambition, and the power of vision to overcome criticism and create something truly timeless. What was once derided as an eyesore has become the most recognizable landmark on Earth, proving that great art and engineering can transform not just skylines, but hearts and minds across generations."
+        "name": "Chinatown Heritage Centre",
+        "narration": "Welcome to the Chinatown Heritage Centre, a museum that brings to life the immigrant experience of early Chinese settlers in Singapore. Step back in time and discover the stories of hardship and triumph.",
+        "description": "Museum showcasing early Chinese immigrant life",
+        "historicalInfo": "Opened in 2008, the Chinatown Heritage Centre is housed in three restored shophouses and documents the lives of early Chinese immigrants to Singapore during the colonial period.",
+        "yearBuilt": "2008",
+        "architect": "Restoration by Singapore Tourism Board"
       },
       "it": {
-        "name": "Torre Eiffel",
-        "narration": "Benvenuto alla Torre Eiffel, la dama di ferro di Parigi. Costruita per l'Esposizione Universale del 1889, è diventata l'icona globale della Francia.",
-        "description": "Il monumento a pagamento più visitato al mondo",
-        "historicalInfo": "La Torre Eiffel fu costruita per l'Esposizione Universale del 1889 e inizialmente fu criticata da alcuni dei principali artisti e intellettuali francesi. È diventata un'icona culturale globale della Francia.",
-        "yearBuilt": "1887-1889",
-        "architect": "Gustave Eiffel"
+        "name": "Centro del Patrimonio di Chinatown",
+        "narration": "Benvenuto al Centro del Patrimonio di Chinatown, un museo che dà vita all'esperienza degli immigrati dei primi coloni cinesi a Singapore. Fai un passo indietro nel tempo e scopri le storie di difficoltà e trionfo.",
+        "description": "Museo che mostra la vita dei primi immigrati cinesi",
+        "historicalInfo": "Aperto nel 2008, il Centro del Patrimonio di Chinatown è ospitato in tre shophouse restaurate e documenta la vita dei primi immigrati cinesi a Singapore durante il periodo coloniale.",
+        "yearBuilt": "2008",
+        "architect": "Restauro dell'Ente del Turismo di Singapore"
       },
       "ko": {
-        "name": "에펠탑",
-        "narration": "파리의 철의 여인, 에펠탑에 오신 것을 환영합니다. 1889년 만국박람회를 위해 건설되어 프랑스의 세계적인 상징이 되었습니다.",
-        "description": "세계에서 가장 많이 방문하는 유료 기념물",
-        "detailedDescription": "\"라 투르 에펠\"이라고도 불리는 에펠탑은 파리와 프랑스의 확실한 상징으로, 1889년 완공 이후 세계를 매료시켜온 철제 격자 구조의 걸작입니다. 파리 하늘 위로 330미터(1,083피트) 높이로 솟아있는 이 건축적 경이는 프랑스 혁명 100주년을 기념하는 1889년 만국박람회를 위한 임시 구조물로 처음 구상되었습니다. 오늘날 매년 거의 700만 명의 방문객을 맞이하며 세계에서 가장 많이 방문하는 유료 기념물이 되었습니다. 탑은 금속 골조 건설을 전문으로 하는 기술자 귀스타브 에펠이 설계했습니다. 에펠의 디자인은 만국박람회의 중심물을 만들기 위한 경쟁에서 100개 이상의 제출작 중에서 선정되었습니다. 구조물의 혁신적인 디자인과 전례 없는 높이는 파리 예술가와 지식인들 사이에서 격렬한 논란을 일으켰으며, 그들은 \"에펠탑에 반대하는 예술가들\"이라는 청원서를 발표하여 우아한 파리 스카이라인을 훼손할 괴물 같은 철제 괴물이라고 비난했습니다. 건설은 1887년 1월에 시작되어 놀랍게도 2년 2개월 5일 만에 완료되었으며, 이는 에펠의 공학적 능력과 조직 기술을 증명합니다. 탑은 18,038개의 금속 부품, 250만 개의 리벳, 300명 이상의 노동자가 필요했습니다. 작업이 수행된 높이와 프로젝트의 엄청난 규모에도 불구하고 건설 중 단 한 명의 노동자만 사망했습니다. 방문 팁: 일몰 시간에 방문하면 파리의 황금빛 풍경과 밤의 반짝이는 조명쇼를 모두 즐길 수 있으며, 티켓은 온라인으로 미리 예약하는 것이 좋고, 2층까지는 계단으로 올라가면 더 저렴하고 군중을 피할 수 있습니다.",
-        "historicalInfo": "에펠탑은 1889년 만국박람회를 위해 건설되었으며 처음에는 프랑스의 주요 예술가와 지식인들로부터 비판을 받았습니다. 프랑스의 세계적인 문화 아이콘이 되었습니다.",
-        "yearBuilt": "1887-1889년",
-        "architect": "귀스타브 에펠"
-      },
-      "es": {
-        "name": "Torre Eiffel",
-        "narration": "Bienvenido a la Torre Eiffel, la dama de hierro de París. Construida para la Exposición Universal de 1889, se ha convertido en el icono global de Francia.",
-        "description": "El monumento de pago más visitado del mundo",
-        "historicalInfo": "La Torre Eiffel fue construida para la Exposición Universal de 1889 y fue inicialmente criticada por algunos de los principales artistas e intelectuales de Francia. Se ha convertido en un icono cultural global de Francia.",
-        "yearBuilt": "1887-1889",
-        "architect": "Gustave Eiffel"
-      },
-      "fr": {
-        "name": "Tour Eiffel",
-        "narration": "Bienvenue à la Tour Eiffel, la dame de fer de Paris. Construite pour l'Exposition Universelle de 1889, elle est devenue l'icône mondiale de la France.",
-        "description": "Le monument payant le plus visité au monde",
-        "historicalInfo": "La Tour Eiffel a été construite pour l'Exposition Universelle de 1889 et a été initialement critiquée par certains des principaux artistes et intellectuels français. Elle est devenue une icône culturelle mondiale de la France.",
-        "yearBuilt": "1887-1889",
-        "architect": "Gustave Eiffel"
-      },
-      "de": {
-        "name": "Eiffelturm",
-        "narration": "Willkommen am Eiffelturm, der eisernen Dame von Paris. Erbaut für die Weltausstellung 1889, ist er zum globalen Symbol Frankreichs geworden.",
-        "description": "Das meistbesuchte kostenpflichtige Monument der Welt",
-        "historicalInfo": "Der Eiffelturm wurde für die Weltausstellung 1889 gebaut und wurde anfangs von einigen führenden französischen Künstlern und Intellektuellen kritisiert. Er ist zu einer globalen kulturellen Ikone Frankreichs geworden.",
-        "yearBuilt": "1887-1889",
-        "architect": "Gustave Eiffel"
-      },
-      "zh": {
-        "name": "埃菲尔铁塔",
-        "narration": "欢迎来到埃菲尔铁塔，巴黎的钢铁女士。为1889年世界博览会建造，已成为法国的全球象征。",
-        "description": "世界上访问量最多的收费纪念碑",
-        "detailedDescription": "埃菲尔铁塔，或称\"La Tour Eiffel\"，是巴黎和法国无可争议的象征，自1889年完工以来一直吸引着世界的铁格子杰作。这座建筑奇迹高耸入巴黎天空330米（1,083英尺），最初是为庆祝法国大革命一百周年的1889年世界博览会而设计的临时建筑。如今，它每年接待近700万游客，成为世界上访问量最多的收费纪念碑。铁塔由专门从事金属框架建设的工程师古斯塔夫·埃菲尔设计。埃菲尔的设计从100多份提交作品中脱颖而出，赢得了为世界博览会创建标志性建筑的竞赛。这座建筑的创新设计和前所未有的高度在巴黎艺术家和知识分子中引发了激烈争议，他们发表了一份名为\"反对埃菲尔铁塔的艺术家\"的请愿书，谴责它是一个会破坏优雅巴黎天际线的怪异铁怪物。值得注意的批评者包括作家莫泊桑，据说他每天都在塔的餐厅吃午餐，因为那是巴黎唯一一个看不到铁塔的地方。建设于1887年1月开始，并在令人瞩目的2年2个月零5天内完成，这证明了埃菲尔的工程能力和组织技能。铁塔需要18,038个金属部件、250万个铆钉和300多名工人组装。尽管项目规模巨大，工作高度也很高，但施工期间只有一名工人死亡——这在当时是一个非常低的伤亡率。游览提示：日落时分参观可以欣赏巴黎的金色景观和夜晚的闪烁灯光秀，建议提前在线预订门票，步行上二层更便宜且可以避开人群。",
-        "historicalInfo": "埃菲尔铁塔为1889年世界博览会而建，最初受到一些法国主要艺术家和知识分子的批评。它已成为法国的全球文化象征。",
-        "yearBuilt": "1887-1889年",
-        "architect": "古斯塔夫·埃菲尔"
-      },
-      "ja": {
-        "name": "エッフェル塔",
-        "narration": "パリの鉄の貴婦人、エッフェル塔へようこそ。1889年の万国博覧会のために建設され、フランスの世界的象徴となりました。",
-        "description": "世界で最も訪問者の多い有料モニュメント",
-        "detailedDescription": "エッフェル塔、または「ラ・トゥール・エッフェル」は、パリとフランスの揺るぎない象徴として、1889年の完成以来世界を魅了してきた鉄格子の傑作です。パリの空に330メートル（1,083フィート）の高さでそびえ立つこの建築の驚異は、フランス革命100周年を祝う1889年の万国博覧会のための一時的な構造物として当初考案されました。今日では毎年約700万人の訪問者を迎え、世界で最も訪問者の多い有料モニュメントとなっています。塔は金属骨組み建設を専門とする技術者ギュスターヴ・エッフェルによって設計されました。エッフェルのデザインは、万国博覧会の目玉を作るための競争で100以上の提出作品から選ばれました。構造物の革新的なデザインと前例のない高さは、パリの芸術家や知識人の間で激しい論争を引き起こし、彼らは「エッフェル塔に反対する芸術家たち」という嘆願書を発表し、優雅なパリのスカイラインを台無しにする怪物のような鉄の怪物だと非難しました。著名な批評家には作家ギ・ド・モーパッサンが含まれ、彼は毎日塔のレストランで昼食を食べたと伝えられていますが、それは塔が見えないパリで唯一の場所だったからです。建設は1887年1月に始まり、驚くべき2年2ヶ月5日で完成し、エッフェルの工学的能力と組織力の証となりました。塔には18,038個の金属部品、250万個のリベット、300人以上の労働者が必要でした。プロジェクトの巨大な規模と作業が行われた高さにもかかわらず、建設中に死亡した労働者はわずか1人でした。訪問のヒント：日没時に訪れるとパリの黄金の景色と夜の輝くライトショーの両方を楽しめ、チケットはオンラインで事前予約することをお勧めし、2階まで階段で登るとより安く混雑を避けられます。",
-        "historicalInfo": "エッフェル塔は1889年の万国博覧会のために建設され、当初はフランスの主要な芸術家や知識人から批判されました。フランスの世界的な文化的象徴となっています。",
-        "yearBuilt": "1887-1889年",
-        "architect": "ギュスターヴ・エッフェル"
-      },
-      "pt": {
-        "name": "Torre Eiffel",
-        "narration": "Bem-vindo à Torre Eiffel, a dama de ferro de Paris. Construída para a Exposição Universal de 1889, tornou-se o ícone global da França.",
-        "description": "O monumento pago mais visitado do mundo",
-        "historicalInfo": "A Torre Eiffel foi construída para a Exposição Universal de 1889 e foi inicialmente criticada por alguns dos principais artistas e intelectuais da França. Tornou-se um ícone cultural global da França.",
-        "yearBuilt": "1887-1889",
-        "architect": "Gustave Eiffel"
-      },
-      "ru": {
-        "name": "Эйфелева башня",
-        "narration": "Добро пожаловать на Эйфелеву башню, железную леди Парижа. Построенная для Всемирной выставки 1889 года, она стала мировым символом Франции.",
-        "description": "Самый посещаемый платный памятник в мире",
-        "historicalInfo": "Эйфелева башня была построена для Всемирной выставки 1889 года и первоначально подвергалась критике со стороны некоторых ведущих французских художников и интеллектуалов. Она стала глобальным культурным символом Франции.",
-        "yearBuilt": "1887-1889 гг.",
-        "architect": "Гюстав Эйфель"
+        "name": "차이나타운 헤리티지 센터",
+        "narration": "초기 중국인 정착민들의 이민 경험을 생생하게 재현한 박물관인 차이나타운 헤리티지 센터에 오신 것을 환영합니다. 시간을 거슬러 올라가 고난과 승리의 이야기를 발견하세요.",
+        "description": "초기 중국 이민자 생활을 보여주는 박물관",
+        "historicalInfo": "2008년에 개관한 차이나타운 헤리티지 센터는 복원된 세 개의 샵하우스에 자리하고 있으며 식민지 시대 싱가포르의 초기 중국 이민자들의 삶을 기록합니다.",
+        "yearBuilt": "2008",
+        "architect": "싱가포르 관광청 복원"
       }
     },
     "openingHours": null,
@@ -6907,8 +3599,78 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.812Z",
-    "updatedAt": "2026-02-22T18:17:57.831Z"
+    "createdAt": "2026-02-12T12:11:31.427Z",
+    "updatedAt": "2026-02-22T20:00:58.630Z"
+  },
+  {
+    "id": "oslo_opera_house",
+    "cityId": "oslo",
+    "name": "Oslo Opera House",
+    "lat": 59.907222,
+    "lng": 10.753333,
+    "radius": 80,
+    "narration": "자, 여러분, 상상해보세요! 지금 여러분은 노르웨이 오슬로, 그 심장부에 서 있습니다. 눈앞에 펼쳐진 것은 마치 빙하가 녹아내려 굳어진 듯한, 웅장한 오슬로 오페라 하우스! 하얀 대리석 지붕은 햇빛을 받아 눈부시게 빛나고, 마치 바다에서 솟아오른 거대한 조각 같습니다. 시원한 바람이 여러분의 뺨을 스치고, 멀리서는 갈매기 울음소리가 들려옵니다. 발 아래로는 오슬로 피오르드의 잔잔한 물결이 넘실거리고, 그 너머로는 푸른 숲이 우거진 섬들이 점점이 떠 있습니다. 숨을 깊게 들이마셔 보세요. 짭짤한 바다 내음과 싱그러운 풀 내음이 섞여 코끝을 간지럽힙니다. 지금 여러분은 오페라 하우스의 지붕 위를 걷고 있습니다. 특별한 허락 없이도 누구나 이 멋진 건축물 위를 자유롭게 거닐 수 있다는 사실, 믿어지시나요? 경사면을 따라 천천히 걸어 올라가 보세요. 마치 산책로를 걷는 듯 편안합니다. 점점 더 높아질수록, 눈 앞에 펼쳐지는 풍경은 더욱 장관입니다. 오슬로 시내의 건물들이 장난감처럼 작게 보이고, 피오르드의 아름다움은 말로 형언할 수 없을 정도입니다. 저 멀리 보이는 섬들은 마치 그림엽서 속 풍경 같아요. 잠시 발걸음을 멈추고, 눈을 감아 보세요. 오페라 하우스 안에서 울려 퍼지는 웅장한 오케스트라 소리가 들리는 듯하지 않나요? 이곳은 단순한 건물이 아닙니다. 예술과 자연, 그리고 인간이 조화를 이루는 특별한 공간입니다. 오슬로 오페라 하우스, 그 매력에 흠뻑 빠져보세요!",
+    "description": "Norway's architectural masterpiece with a walkable roof",
+    "category": "Opera House",
+    "detailedDescription": "오슬로 오페라 하우스는 2008년에 문을 연, 노르웨이 최대 규모의 공연 예술 센터입니다. 스노헤타(Snøhetta)라는 건축 회사가 설계했으며, 백색 대리석과 유리로 만들어진 독특한 외관은 오슬로의 새로운 랜드마크로 자리 잡았습니다. 놀라운 점은 누구나 오페라 하우스 지붕 위를 걸을 수 있다는 것입니다. 경사진 지붕은 마치 해변을 연상시키며, 오슬로 피오르드와 도시 전체를 한눈에 담을 수 있는 최고의 전망대 역할을 합니다. 현지인들은 여름에 이곳에서 피크닉을 즐기거나, 일광욕을 하기도 합니다. 숨겨진 비화 하나! 오페라 하우스 건설 당시, 환경 보호를 위해 해저 터널을 뚫어 교통량을 분산시키고 소음을 줄이는 노력을 기울였다고 합니다. 또한, 건물 내부는 노르웨이 예술가들의 작품으로 장식되어 있어, 공연 관람 외에도 예술 작품을 감상하는 즐거움을 누릴 수 있습니다. 오페라 하우스 주변에는 레스토랑과 카페가 즐비하며, 특히 여름에는 야외 테라스에서 식사를 즐기는 사람들이 많습니다. 오슬로를 방문한다면, 오페라 하우스는 절대 놓쳐서는 안 될 필수 방문 코스입니다. 꿀팁 하나 더! 오페라 하우스 내부 투어 프로그램에 참여하면, 무대 뒤편과 의상실 등 일반인에게 공개되지 않는 공간을 탐험할 수 있습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800",
+      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800",
+      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800"
+    ],
+    "historicalInfo": "The Oslo Opera House was designed by the Norwegian architectural firm Snøhetta and opened on April 12, 2008. It was the largest cultural building constructed in Norway since Nidaros Cathedral was completed around 1300. The building won the EU Prize for Contemporary Architecture (Mies van der Rohe Award) in 2009 and the World Architecture Festival Culture Award in 2008.",
+    "yearBuilt": "2008",
+    "architect": "Snøhetta",
+    "translations": {
+      "en": {
+        "name": "Oslo Opera House",
+        "narration": "Welcome to the Oslo Opera House, a stunning architectural masterpiece rising from the Oslo Fjord. This modern landmark invites visitors to walk on its sloping roof for panoramic views of the city and fjord.",
+        "description": "Norway's architectural masterpiece with a walkable roof",
+        "detailedDescription": "The Oslo Opera House is the home of the Norwegian National Opera and Ballet and one of Norway's most visited architectural landmarks. Designed by the Norwegian architecture firm Snøhetta, the building opened in 2008 and has won numerous international architecture awards, including the EU Prize for Contemporary Architecture in 2009. The building's most distinctive feature is its sloping white marble roof that appears to rise from the waters of the Oslo Fjord. The roof is accessible to the public and has become one of Oslo's most popular gathering spots, offering stunning 360-degree views of the city, harbor, and surrounding mountains. The design concept was inspired by Norwegian nature, particularly glaciers and icebergs, with the building appearing to float on the water's edge. The opera house features three stages and can seat over 1,364 people in the main auditorium. The interior showcases Norwegian craftsmanship with oak walls and floors, while the wave wall in the main foyer is covered with handmade oak panels. The building uses sustainable design principles and houses state-of-the-art performance facilities, making it both an architectural icon and a world-class cultural venue.",
+        "historicalInfo": "The Oslo Opera House was designed by the Norwegian architectural firm Snøhetta and opened on April 12, 2008. It was the largest cultural building constructed in Norway since Nidaros Cathedral was completed around 1300. The building won the EU Prize for Contemporary Architecture (Mies van der Rohe Award) in 2009 and the World Architecture Festival Culture Award in 2008.",
+        "yearBuilt": "2008",
+        "architect": "Snøhetta"
+      },
+      "ko": {
+        "name": "오슬로 오페라 하우스",
+        "narration": "오슬로 피요르드에서 솟아오르는 놀라운 건축 걸작 오슬로 오페라 하우스에 오신 것을 환영합니다. 이 현대적인 랜드마크는 방문객들을 경사진 지붕 위를 걸으며 도시와 피요르드의 파노라마 전망을 즐길 수 있도록 초대합니다.",
+        "description": "걸을 수 있는 지붕이 있는 노르웨이의 건축 걸작",
+        "detailedDescription": "오슬로 오페라 하우스는 노르웨이 국립 오페라 발레단의 본거지이자 노르웨이에서 가장 많이 방문하는 건축 랜드마크 중 하나입니다. 노르웨이 건축 회사 스뇌헤타가 설계한 이 건물은 2008년에 개관했으며 2009년 EU 현대 건축상을 포함한 수많은 국제 건축상을 수상했습니다. 건물의 가장 독특한 특징은 오슬로 피요르드의 물에서 솟아오르는 것처럼 보이는 경사진 흰색 대리석 지붕입니다. 지붕은 대중에게 개방되어 있으며 오슬로에서 가장 인기 있는 모임 장소 중 하나가 되었으며, 도시, 항구, 주변 산의 멋진 360도 전망을 제공합니다. 디자인 개념은 특히 빙하와 빙산과 같은 노르웨이 자연에서 영감을 받았으며, 건물이 물가에 떠 있는 것처럼 보입니다. 오페라 하우스는 3개의 무대를 갖추고 있으며 메인 강당에는 1,364명 이상을 수용할 수 있습니다. 내부는 오크 벽과 바닥으로 노르웨이 장인 정신을 보여주며, 메인 로비의 웨이브 벽은 수제 오크 패널로 덮여 있습니다. 건물은 지속 가능한 디자인 원칙을 사용하고 최첨단 공연 시설을 갖추고 있어 건축 아이콘이자 세계적 수준의 문화 공연장입니다.",
+        "historicalInfo": "오슬로 오페라 하우스는 노르웨이 건축 회사 스뇌헤타가 설계하여 2008년 4월 12일에 개관했습니다. 1300년경 니다로스 대성당이 완공된 이후 노르웨이에서 건설된 가장 큰 문화 건물이었습니다. 건물은 2009년 EU 현대 건축상(미스 반 데어 로에 상)과 2008년 세계 건축 페스티벌 문화상을 수상했습니다.",
+        "yearBuilt": "2008년",
+        "architect": "스뇌헤타"
+      },
+      "ja": {
+        "name": "オスロオペラハウス",
+        "narration": "オスロフィヨルドから立ち上がる見事な建築の傑作、オスロオペラハウスへようこそ。この現代的なランドマークは、訪問者を傾斜した屋根の上を歩いて市内とフィヨルドのパノラマビューを楽しむよう招待します。",
+        "description": "歩ける屋根を持つノルウェーの建築の傑作",
+        "detailedDescription": "オスロオペラハウスは、ノルウェー国立オペラバレエ団の本拠地であり、ノルウェーで最も訪問される建築的ランドマークの一つです。ノルウェーの建築事務所スノヘッタが設計したこの建物は、2008年に開館し、2009年のEU現代建築賞を含む数々の国際建築賞を受賞しています。建物の最も特徴的な特徴は、オスロフィヨルドの水面から立ち上がるように見える傾斜した白い大理石の屋根です。屋根は一般に公開されており、オスロで最も人気のある集まりスポットの一つとなり、市内、港、周辺の山々の見事な360度の景色を提供しています。デザインコンセプトは、特に氷河や氷山などのノルウェーの自然にインスピレーションを受けており、建物が水際に浮かんでいるように見えます。オペラハウスには3つのステージがあり、メインオーディトリアムには1,364人以上を収容できます。内部はオーク材の壁と床でノルウェーの職人技を披露し、メインロビーのウェーブウォールは手作りのオークパネルで覆われています。建物は持続可能なデザイン原則を使用し、最先端のパフォーマンス施設を備えているため、建築的アイコンであり世界クラスの文化会場でもあります。",
+        "historicalInfo": "オスロオペラハウスは、ノルウェーの建築事務所スノヘッタによって設計され、2008年4月12日に開館しました。1300年頃にニダロス大聖堂が完成して以来、ノルウェーで建設された最大の文化建築物でした。この建物は2009年にEU現代建築賞（ミース・ファン・デル・ローエ賞）と2008年の世界建築フェスティバル文化賞を受賞しました。",
+        "yearBuilt": "2008年",
+        "architect": "スノヘッタ"
+      },
+      "zh": {
+        "name": "奥斯陆歌剧院",
+        "narration": "欢迎来到奥斯陆歌剧院，这座从奥斯陆峡湾拔地而起的令人惊叹的建筑杰作。这个现代地标邀请游客在其倾斜的屋顶上行走，欣赏城市和峡湾的全景。",
+        "description": "拥有可步行屋顶的挪威建筑杰作",
+        "detailedDescription": "奥斯陆歌剧院是挪威国家歌剧院和芭蕾舞团的所在地，也是挪威访问量最大的建筑地标之一。由挪威建筑公司斯诺赫塔设计，该建筑于2008年开放，并获得了众多国际建筑奖项，包括2009年欧盟当代建筑奖。建筑最显著的特点是从奥斯陆峡湾水面升起的倾斜白色大理石屋顶。屋顶向公众开放，已成为奥斯陆最受欢迎的聚会场所之一，提供城市、港口和周围山脉的壮丽360度景观。设计理念受到挪威自然的启发，特别是冰川和冰山，建筑似乎漂浮在水边。歌剧院拥有三个舞台，主礼堂可容纳1,364多人。内部展示了挪威工艺，配有橡木墙壁和地板，主大厅的波浪墙覆盖着手工制作的橡木面板。建筑采用可持续设计原则，并设有最先进的表演设施，使其既是建筑标志，又是世界级的文化场所。",
+        "historicalInfo": "奥斯陆歌剧院由挪威建筑公司斯诺赫塔设计，于2008年4月12日开放。这是自1300年左右尼达罗斯大教堂建成以来挪威建造的最大文化建筑。该建筑在2009年获得了欧盟当代建筑奖（密斯·凡德罗奖）和2008年世界建筑节文化奖。",
+        "yearBuilt": "2008年",
+        "architect": "斯诺赫塔"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:29.986Z",
+    "updatedAt": "2026-02-22T20:00:58.795Z"
   },
   {
     "id": "sacre_coeur",
@@ -6966,7 +3728,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:25.302Z",
-    "updatedAt": "2026-02-22T18:18:27.937Z"
+    "updatedAt": "2026-02-22T20:00:58.710Z"
   },
   {
     "id": "seoul_item_38",
@@ -7004,195 +3766,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:04.124Z",
     "updatedAt": "2026-02-22T18:23:35.598Z"
-  },
-  {
-    "id": "tokyo_item_109",
-    "cityId": "tokyo",
-    "name": "TOKYO Premium Restaurant 109",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 지금 당신은 도쿄의 심장부에 위치한 ‘TOKYO Premium Restaurant 109’에 와 있습니다. 발 아래로는 도쿄의 반짝이는 불빛들이 펼쳐지고, 코끝에는 은은한 간장 소스와 신선한 해산물 향이 스며듭니다. 고급스러운 나무 테이블에 앉아, 부드러운 사케 한 잔을 기울이며 창밖 풍경을 감상하는 당신의 모습, 정말 멋지지 않나요? 이곳은 단순한 레스토랑이 아니에요. 도쿄의 역사와 전통, 그리고 현대적인 아름다움이 조화롭게 어우러진 특별한 공간입니다. 마치 시간 여행을 떠나온 듯한 기분이 들 거예요. \n\n가족들과 함께라면 더욱 즐거운 추억을 만들 수 있습니다. 아이들은 레스토랑 곳곳에 숨겨진 아기자기한 장식들을 구경하며 즐거워하고, 어른들은 오랜 역사를 지닌 특별한 요리들을 맛보며 감탄할 겁니다. 상상해보세요. 석양이 질 무렵, 붉게 물든 하늘을 배경으로 가족들이 함께 웃고 떠드는 모습. 이 모든 순간이 당신의 기억 속에 영원히 새겨질 거예요. \n\n지금, ‘TOKYO Premium Restaurant 109’에서는 특별한 미식 경험뿐만 아니라, 도쿄의 아름다운 경관을 감상하고 다양한 체험 활동도 즐길 수 있습니다. 전통 의상을 입고 사진을 찍거나, 일본 전통 악기를 연주해보는 건 어때요? 잊지 못할 추억을 만들 준비, 되셨나요? 자, 이제 눈을 뜨고, 이 모든 것을 직접 경험해보세요! 이곳은 당신의 기대를 훨씬 뛰어넘는 특별한 경험을 선사할 겁니다. 지금 바로 ‘TOKYO Premium Restaurant 109’로 오세요!",
-    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "TOKYO Premium Restaurant 109는 단순한 레스토랑을 넘어, 도쿄의 역사와 문화를 담은 복합 문화 공간입니다. 이곳은 오래된 건축 양식을 그대로 보존하면서도 현대적인 감각을 더해, 독특하고 매력적인 분위기를 자랑합니다. 특히, 레스토랑의 위치는 도쿄 시내를 한눈에 내려다볼 수 있는 최적의 장소로, 낮에는 활기찬 도시 풍경을, 밤에는 로맨틱한 야경을 감상할 수 있습니다. \n\n이곳의 음식은 전통적인 일본 요리 방식을 따르면서도 현대적인 트렌드를 반영하여, 다채롭고 세련된 맛을 선사합니다. 특히, 신선한 제철 식재료를 사용하여 만든 요리들은 맛과 향이 뛰어나며, 눈으로도 즐거움을 느낄 수 있도록 아름답게 장식됩니다. 현지인들 사이에서는 '숨겨진 맛집'으로 알려져 있으며, 특히 기념일이나 특별한 날에 방문하기 좋은 장소로 손꼽힙니다. 꿀팁을 하나 드리자면, 예약 시 창가 자리를 요청하면 더욱 멋진 전망을 감상하며 식사를 즐길 수 있습니다. 또한, 레스토랑 내부에 위치한 작은 박물관에서는 도쿄의 역사와 문화를 엿볼 수 있으며, 전통 공예품을 직접 만들어보는 체험 프로그램도 운영하고 있습니다. 가족 여행객들에게는 특히 인기가 많으며, 아이들과 함께 즐거운 시간을 보낼 수 있는 다양한 프로그램들이 마련되어 있습니다. TOKYO Premium Restaurant 109에서 잊지 못할 미식 경험과 특별한 추억을 만들어보세요.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "TOKYO Premium Restaurant 109",
-        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:08.900Z",
-    "updatedAt": "2026-02-22T18:25:13.375Z"
-  },
-  {
-    "id": "부산광역시-demo-2",
-    "cityId": "busan",
-    "name": "부산광역시의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "자, 상상해보세요! 지금 여러분은 부산의 어느 골목 어귀에 서 있습니다. 코를 찌르는 듯한 매콤한 냄새, 지글거리는 기름 소리, 그리고 흥겨운 사람들의 웃음소리가 뒤섞여 오감을 자극하죠. 여기가 바로 부산 현지인들만 안다는 맛집 골목입니다! 좁다란 골목길 양 옆으로 빼곡하게 들어선 식당들은 저마다 오랜 역사와 숨겨진 이야기들을 품고 있어요. 마치 미로처럼 얽힌 골목을 따라 걷다 보면, 어디선가 맛있는 냄새가 여러분의 발길을 붙잡을 겁니다. 낡은 간판 아래, 연탄불 위에서 쉴 새 없이 구워지는 돼지갈비 냄새일 수도 있고요. 아니면, 커다란 솥에서 김이 모락모락 피어오르는 돼지국밥 냄새일 수도 있겠죠. 잠시 발걸음을 멈추고 가게 안을 들여다보세요. 왁자지껄한 분위기 속에서 소주잔을 기울이는 사람들의 모습이 정겹게 느껴질 겁니다. 이 골목에서는 값비싼 레스토랑에서 느낄 수 없는, 따뜻하고 인간적인 정을 느낄 수 있어요. 마치 오랜 친구 집에 놀러 온 것처럼 편안하고 푸근한 기분이랄까요? 자, 용기를 내서 어느 가게든 문을 열고 들어가 보세요. 주인 아주머니의 푸근한 미소와 함께, 상상 이상의 맛있는 음식이 여러분을 기다리고 있을 겁니다. 오늘 밤, 이 골목에서 여러분은 부산의 진짜 매력을 발견하게 될 거예요!",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "부산의 맛집 골목은 단순한 식당가가 아닌, 부산 사람들의 삶과 애환이 녹아있는 특별한 공간입니다. 이 골목들은 대개 오랜 역사를 가지고 있으며, 수십 년 동안 한 자리를 지켜온 노포들이 즐비합니다. 단순히 맛있는 음식을 제공하는 것을 넘어, 부산 사람들의 추억과 향수를 자극하는 곳이죠. 예를 들어, 돼지국밥 골목은 한국전쟁 이후 피난민들이 정착하면서 생겨났다고 합니다. 저렴하고 든든한 돼지국밥은 고된 삶을 살아가는 사람들에게 큰 위로가 되었죠. 또 다른 골목에서는 싱싱한 해산물을 저렴한 가격에 맛볼 수 있습니다. 새벽에 갓 잡아 올린 해산물로 만든 회는 싱싱함이 살아있어 입안에서 살살 녹는 듯한 느낌을 선사하죠. 숨겨진 팁을 하나 알려드릴까요? 현지인들은 맛집을 고를 때, 손님이 많은 곳보다는 단골손님들이 많은 곳을 선호한다고 합니다. 오랜 시간 동안 사랑받아온 곳은 그만큼 맛과 서비스가 보장된다는 의미겠죠. 또한, 골목 안쪽에 숨어있는 작은 식당들 중에는 정말 보석 같은 곳들이 많으니, 용기를 내서 탐험해보는 것도 좋은 방법입니다. 가격도 저렴하고 양도 푸짐해서, 만족스러운 식사를 즐길 수 있을 거예요.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "부산광역시의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:57:47.778Z",
-    "updatedAt": "2026-02-22T18:16:09.339Z"
-  },
-  {
-    "id": "tower_bridge",
-    "cityId": "london",
-    "name": "Tower Bridge",
-    "lat": 51.5055,
-    "lng": -0.0753,
-    "radius": 60,
-    "narration": "자, 런던의 심장을 두근거리게 하는 타워 브리지에 오신 여러분, 상상해보세요! 지금 여러분의 발 아래에는 유유히 흐르는 템스 강이 펼쳐져 있고, 눈 앞에는 빅토리아 시대의 웅장한 건축물이 펼쳐져 있습니다. 1894년에 완공된 이 다리는 단순한 다리가 아니에요. 런던의 역사와 기술, 그리고 아름다움이 응축된 상징과도 같죠. 다리 위를 걷는 동안, 템스 강을 가로지르는 수많은 배들의 뱃고동 소리가 귓가에 맴도는 듯합니다. 갈매기들은 하늘을 가르며 자유롭게 날아다니고, 저 멀리 런던 아이와 세인트 폴 대성당의 모습도 눈에 들어오네요. 다리 양쪽의 웅장한 탑 안에는 빅토리아 시대의 증기 엔진이 아직까지 보존되어 있다고 해요. 한때 다리를 들어올리는 데 사용되었던 이 엔진들은 이제 박물관이 되어 우리를 과거로 데려다줍니다. 템스 강을 따라 늘어선 펍에서는 흥겨운 노랫소리가 들려오고, 다리 아래를 지나는 유람선에서는 관광객들의 웃음소리가 끊이지 않아요. 타워 브리지는 낮에는 웅장한 자태를 뽐내지만, 밤에는 화려한 조명으로 옷을 갈아입고 더욱 매혹적인 모습으로 변신합니다. 특히 다리가 들어 올려지는 모습은 장관이라고 하니, 시간을 맞춰 방문하는 것도 잊지 마세요! 타워 브리지를 건너면서, 런던의 과거와 현재, 그리고 미래를 느껴보세요. 마치 시간 여행을 하는 듯한 특별한 경험을 하게 될 겁니다!",
-    "description": "An iconic symbol of London since 1894",
-    "category": "Bridge",
-    "detailedDescription": "타워 브리지는 런던의 대표적인 랜드마크이자, 빅토리아 시대의 기술력을 보여주는 걸작입니다. 19세기 후반, 런던의 동쪽 지역이 급격히 발전하면서 템스 강을 가로지르는 새로운 다리의 필요성이 대두되었죠. 하지만 동시에 템스 강을 오가는 배들의 통행도 방해해서는 안 되었기에, 다리를 들어 올릴 수 있는 특별한 설계가 필요했습니다. 그렇게 탄생한 것이 바로 타워 브리지입니다. 다리 양쪽의 탑은 고딕 양식으로 지어졌으며, 내부에는 빅토리아 시대의 증기 엔진이 보존되어 있습니다. 이 엔진은 한때 다리를 들어올리는 데 사용되었으며, 현재는 박물관으로 운영되고 있죠. 다리 위에는 보행자 통로가 있는데, 이곳에서는 런던의 아름다운 스카이라인을 감상할 수 있습니다. 특히 템스 강을 가로지르는 수많은 다리들과 런던 아이, 세인트 폴 대성당 등 주요 랜드마크를 한눈에 담을 수 있다는 장점이 있습니다. 현지인들은 타워 브리지의 '바스큘'이 작동되는 모습을 보기 위해 종종 몰려든다고 해요. 미리 시간을 확인하고 방문하면 더욱 특별한 경험을 할 수 있습니다. 꿀팁 하나 더! 타워 브리지 바로 옆에는 '타워 오브 런던'이 있는데, 이곳은 런던의 역사와 왕실의 보물을 만날 수 있는 곳이니 함께 방문해보는 것을 추천합니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
-      "https://images.unsplash.com/photo-1520986606214-8b456906c813?w=800",
-      "https://images.unsplash.com/photo-1532178324009-6b6adeca1741?w=800"
-    ],
-    "historicalInfo": "Tower Bridge was built between 1886 and 1894 and is one of London's most famous landmarks. The bascule bridge mechanism allows the roadway to be raised to let river traffic pass underneath.",
-    "yearBuilt": "1886-1894",
-    "architect": "Horace Jones and John Wolfe Barry",
-    "translations": {
-      "en": {
-        "name": "Tower Bridge",
-        "narration": "You are at Tower Bridge, one of London's most famous landmarks. This combined bascule and suspension bridge crosses the River Thames.",
-        "description": "An iconic symbol of London since 1894",
-        "detailedDescription": "Tower Bridge, one of London's most recognizable landmarks, stands as a magnificent example of Victorian engineering ingenuity and Gothic Revival architecture. Spanning the River Thames near the Tower of London, this iconic combined bascule and suspension bridge has become synonymous with London itself, its distinctive twin towers and blue-painted suspension chains appearing in countless photographs, films, and artworks since its completion in 1894. The bridge's construction was necessitated by the massive commercial growth of the East End of London during the 19th century, which required a new river crossing east of London Bridge that wouldn't disrupt river traffic to the busy Pool of London docks. The challenge was unprecedented: how to build a bridge low enough for pedestrians and vehicles to cross easily, yet able to allow tall-masted ships to pass underneath. In 1876, the City of London Corporation formed a Special Bridge or Subway Committee to find a solution, receiving over 50 design proposals ranging from the practical to the fantastical. The winning design, submitted by Horace Jones, the City Architect, in collaboration with engineer John Wolfe Barry, ingeniously solved the problem with a bascule (seesaw) bridge whose roadway could be raised to allow ships to pass. Jones and Barry's Gothic Revival design featured two massive towers rising 65 meters (213 feet) above the Thames, connected at the upper level by two horizontal walkways designed to allow pedestrians to cross even when the bridge was raised. The towers were clad in Cornish granite and Portland stone to provide a pleasing appearance and to protect the steel framework beneath, creating a structure that appeared medieval while incorporating cutting-edge Victorian technology. Construction began in 1886 and employed 432 workers over eight years, tragically claiming the lives of 10 men during the dangerous work. The bridge required 70,000 tons of concrete to be sunk into the riverbed to support the massive structure. Over 11,000 tons of steel formed the framework, which was then clad in stone. The bascule mechanism was revolutionary for its time - two massive bascules (leaves), each weighing over 1,000 tons, could be raised to an angle of 83 degrees in just five minutes. Originally powered by steam, the hydraulic system used water pumped into accumulators by steam engines to move the bascules. The system was so well-designed that it required relatively little power to operate, with the massive counterweights doing much of the work. The high-level walkways, 42 meters (138 feet) above the Thames at high tide, quickly became popular with prostitutes and pickpockets rather than legitimate pedestrians, leading to their closure in 1910. They remained closed until 1982 when they reopened as part of the Tower Bridge Exhibition, now featuring glass floors offering thrilling views down to the river and road below. Tower Bridge was officially opened on June 30, 1894, by the Prince of Wales (the future King Edward VII) and his wife, Alexandra of Denmark. In its early years, the bridge was raised almost 50 times per day to allow ships to pass. Today, it still opens approximately 800 times per year, though the mechanism is now powered by electricity rather than steam. The bridge has been the scene of numerous daring incidents. In 1952, a double-decker bus found itself on the bridge as it began to open; driver Albert Gunter accelerated and jumped the growing gap, earning himself a £10 bonus for bravery. In 1968, Royal Air Force pilot Alan Pollock flew his Hawker Hunter jet through the bridge's towers as an unauthorized protest, threading his aircraft through the upper and lower spans. The bridge underwent major color changes over its history. Originally chocolate brown, it was repainted red, white, and blue for Queen Elizabeth II's Silver Jubilee in 1977. It was later repainted in the current blue and white color scheme that many consider iconic, though historians note it was never these colors originally. The Engine Rooms, located in the bridge's southern approach, house the original Victorian steam engines, accumulators, and boilers that once powered the bridge. These magnificent examples of Victorian engineering, built by Armstrong Mitchell & Company, have been preserved as a museum, allowing visitors to see the intricate machinery that made the bridge's operation possible. The engines, though no longer in use, remain in pristine condition, their brass fittings polished and copper pipes gleaming, offering a window into the industrial age. Tower Bridge has appeared in countless films, from \"Spice World\" to \"Bridget Jones's Diary,\" and has been destroyed in numerous disaster movies, including \"The Mummy Returns\" and \"Thor: The Dark World.\" It often appears incorrectly labeled as \"London Bridge\" in popular media, causing confusion between the two distinct structures. The bridge has become a symbol of London, appearing on souvenirs, postcards, and promotional materials worldwide. It plays a central role in London's major celebrations, including elaborate lighting displays for New Year's Eve, royal occasions, and the annual Lord Mayor's Show. The bridge is illuminated nightly, and special lighting schemes mark significant events - red and blue for royal celebrations, rainbow colors for Pride, and various national flags for visiting dignitaries. The Tower Bridge Exhibition, opened in 1982, allows visitors to explore the bridge's history and engineering while walking across the high-level walkways with their glass floors installed in 2014. The exhibition tells the story of the bridge's construction, its role in London's history, and the lives of the people who built and maintained it. Visitors can also watch the bridge lift from special viewing areas, experiencing the impressive sight of the massive bascules rising to allow tall ships through. In recent years, Tower Bridge has embraced modern technology while maintaining its Victorian character. LED lighting has replaced older systems, reducing energy consumption while allowing for more dramatic displays. The bridge has also become a focal point for sporting events, including the London Olympics and various marathons and charity events. Conservation work continues to preserve the structure for future generations, with ongoing maintenance of the stonework, steelwork, and mechanical systems. Tower Bridge represents more than Victorian engineering prowess - it symbolizes London's ability to blend the old with the new, tradition with innovation. It stands as a working bridge that still raises for river traffic while serving as one of the world's most visited tourist attractions. The bridge connects London's historic center with the modern developments of the South Bank and beyond, both physically and symbolically. As London continues to evolve, Tower Bridge remains a constant, its distinctive silhouette a reminder of the city's rich history and its ongoing journey into the future. The bridge proves that functional infrastructure can also be beautiful, that engineering can be art, and that the best monuments are those that continue to serve their communities while inspiring wonder and pride across generations."
-      },
-      "it": {
-        "name": "Tower Bridge",
-        "narration": "Ti trovi al Tower Bridge, uno dei monumenti più famosi di Londra. Questo ponte basculante e sospeso attraversa il Tamigi.",
-        "description": "Un simbolo iconico di Londra dal 1894",
-        "historicalInfo": "Il Tower Bridge fu costruito tra il 1886 e il 1894 ed è uno dei monumenti più famosi di Londra. Il meccanismo del ponte basculante permette di sollevare la carreggiata per far passare il traffico fluviale.",
-        "yearBuilt": "1886-1894",
-        "architect": "Horace Jones e John Wolfe Barry"
-      },
-      "ko": {
-        "name": "타워 브리지",
-        "narration": "런던에서 가장 유명한 랜드마크 중 하나인 타워 브리지에 있습니다. 이 도개교와 현수교가 결합된 다리는 템스강을 가로지릅니다.",
-        "description": "1894년부터 런던의 상징",
-        "detailedDescription": "타워 브리지는 런던에서 가장 인식하기 쉬운 랜드마크 중 하나로, 빅토리아 시대 공학의 독창성과 고딕 리바이벌 건축의 웅장한 예입니다. 런던 타워 근처 템스강을 가로지르는 이 상징적인 도개교와 현수교의 결합은 1894년 완공 이래 런던 그 자체와 동의어가 되었으며, 독특한 쌍둥이 탑과 푸른색 현수 체인이 수많은 사진, 영화, 예술 작품에 등장했습니다. 다리의 건설은 19세기 런던 이스트 엔드의 대규모 상업적 성장에 의해 필요하게 되었으며, 런던 브리지 동쪽에 새로운 강 횡단이 필요했지만 런던 항구의 번화한 선박 교통을 방해하지 않아야 했습니다. 도시 건축가 호레이스 존스가 엔지니어 존 울프 배리와 협력하여 제출한 우승 디자인은 도로를 들어 올려 선박이 통과할 수 있는 도개교(시소 다리)로 이 문제를 독창적으로 해결했습니다. 존스와 배리의 고딕 리바이벌 디자인은 템스강 위로 65미터(213피트) 높이로 솟은 두 개의 거대한 탑을 특징으로 하며, 다리가 들어 올려졌을 때에도 보행자가 건널 수 있도록 상층에 두 개의 수평 보도로 연결되어 있습니다. 건설은 1886년에 시작되어 8년에 걸쳐 432명의 노동자를 고용했으며, 위험한 작업 중 비극적으로 10명의 생명을 앗아갔습니다. 방문 팁: 유리 바닥 보도에서 아래 템스강과 교통을 내려다보고, 빅토리아 시대 엔진룸을 방문하여 원래 증기 구동 메커니즘을 확인하며, 다리가 들어 올려지는 시간표를 확인하여 이 놀라운 공학적 위업을 직접 목격하세요.",
-        "historicalInfo": "타워 브리지는 1886년에서 1894년 사이에 건설되었으며 런던의 가장 유명한 랜드마크 중 하나입니다. 도개교 메커니즘은 강 교통이 아래를 통과할 수 있도록 도로를 들어 올릴 수 있게 합니다.",
-        "yearBuilt": "1886-1894",
-        "architect": "호레이스 존스와 존 울프 배리"
-      },
-      "es": {
-        "name": "Tower Bridge",
-        "narration": "Está en Tower Bridge, uno de los monumentos más famosos de Londres. Este puente basculante y colgante cruza el río Támesis.",
-        "description": "Un símbolo icónico de Londres desde 1894",
-        "historicalInfo": "Tower Bridge fue construido entre 1886 y 1894 y es uno de los monumentos más famosos de Londres. El mecanismo del puente basculante permite que la calzada se eleve para dejar pasar el tráfico fluvial.",
-        "yearBuilt": "1886-1894",
-        "architect": "Horace Jones y John Wolfe Barry"
-      },
-      "fr": {
-        "name": "Tower Bridge",
-        "narration": "Vous êtes au Tower Bridge, l'un des monuments les plus célèbres de Londres. Ce pont basculant et suspendu traverse la Tamise.",
-        "description": "Un symbole emblématique de Londres depuis 1894",
-        "historicalInfo": "Le Tower Bridge a été construit entre 1886 et 1894 et est l'un des monuments les plus célèbres de Londres. Le mécanisme du pont basculant permet de lever la chaussée pour laisser passer le trafic fluvial.",
-        "yearBuilt": "1886-1894",
-        "architect": "Horace Jones et John Wolfe Barry"
-      },
-      "de": {
-        "name": "Tower Bridge",
-        "narration": "Sie befinden sich an der Tower Bridge, einem der berühmtesten Wahrzeichen Londons. Diese kombinierte Klapp- und Hängebrücke überquert die Themse.",
-        "description": "Ein ikonisches Symbol Londons seit 1894",
-        "historicalInfo": "Die Tower Bridge wurde zwischen 1886 und 1894 erbaut und ist eines der berühmtesten Wahrzeichen Londons. Der Klappbrückenmechanismus ermöglicht es, die Fahrbahn anzuheben, um den Schiffsverkehr durchzulassen.",
-        "yearBuilt": "1886-1894",
-        "architect": "Horace Jones und John Wolfe Barry"
-      },
-      "zh": {
-        "name": "塔桥",
-        "narration": "您在伦敦最著名的地标之一塔桥。这座开合桥和悬索桥的组合横跨泰晤士河。",
-        "description": "自1894年以来伦敦的标志性象征",
-        "detailedDescription": "塔桥是伦敦最知名的地标之一，是维多利亚时代工程独创性和哥特复兴建筑的壮丽典范。这座标志性的开合桥和悬索桥组合横跨伦敦塔附近的泰晤士河，自1894年建成以来已成为伦敦的代名词，其独特的双塔和蓝色悬索链出现在无数照片、电影和艺术作品中。这座桥的建设是由19世纪伦敦东区大规模商业增长所必需的，需要在伦敦桥以东建一座新的过河通道，但又不能干扰伦敦港繁忙码头的河道交通。挑战前所未有：如何建造一座足够低的桥梁让行人和车辆轻松通过，同时又能让高桅杆船只从下面通过。市政建筑师霍勒斯·琼斯与工程师约翰·沃尔夫·巴里合作提交的获胜设计，巧妙地用开合桥（跷跷板式桥）解决了这个问题，其路面可以升起让船只通过。琼斯和巴里的哥特复兴设计有两座巨大的塔楼，高耸于泰晤士河上方65米（213英尺），上层用两条水平人行道连接，即使桥升起时也能让行人通过。建设于1886年开始，历时8年雇用了432名工人，在危险的工作中不幸夺去了10人的生命。参观提示：在玻璃地板人行道上俯瞰下方的泰晤士河和交通，参观维多利亚时代的发动机房查看原始蒸汽动力机制，查看桥梁升起时间表亲眼目睹这一惊人的工程壮举。",
-        "historicalInfo": "塔桥建于1886年至1894年间，是伦敦最著名的地标之一。开合桥机制允许路面升起以让河道交通通过。",
-        "yearBuilt": "1886-1894",
-        "architect": "霍勒斯·琼斯和约翰·沃尔夫·巴里"
-      },
-      "ja": {
-        "name": "タワーブリッジ",
-        "narration": "ロンドンで最も有名なランドマークの一つ、タワーブリッジにいます。この跳ね橋と吊り橋を組み合わせた橋はテムズ川に架かっています。",
-        "description": "1894年以来のロンドンの象徴",
-        "detailedDescription": "タワーブリッジはロンドンで最も認知度の高いランドマークの一つであり、ビクトリア朝工学の独創性とゴシック・リバイバル建築の壮大な例です。ロンドン塔近くのテムズ川に架かるこの象徴的な跳ね橋と吊り橋の組み合わせは、1894年の完成以来ロンドンそのものの同義語となり、独特の双子の塔と青く塗られた吊り鎖が無数の写真、映画、芸術作品に登場しています。この橋の建設は19世紀のロンドンのイーストエンドの大規模な商業成長によって必要とされ、ロンドン橋の東に新しい川の横断が必要でしたが、ロンドン港の忙しいドックへの河川交通を妨げないようにする必要がありました。課題は前例のないものでした：歩行者や車両が簡単に渡れるほど低く、かつ高いマストの船が下を通過できる橋をどのように建設するか。市の建築家ホレス・ジョーンズがエンジニアのジョン・ウルフ・バリーと協力して提出した優勝デザインは、船が通過できるように道路を持ち上げることができる跳ね橋（シーソー橋）でこの問題を独創的に解決しました。ジョーンズとバリーのゴシック・リバイバルデザインは、テムズ川の上65メートル（213フィート）にそびえる2つの巨大な塔を特徴とし、橋が上がっているときでも歩行者が渡れるように上層で2つの水平歩道で接続されています。建設は1886年に始まり、8年間で432人の労働者を雇用し、危険な作業中に悲劇的に10人の命を奪いました。訪問のヒント：ガラス床の歩道から下のテムズ川と交通を見下ろし、ビクトリア朝のエンジンルームを訪れて元の蒸気駆動メカニズムを確認し、橋が上がる時刻表をチェックしてこの驚くべき工学の偉業を直接目撃してください。",
-        "historicalInfo": "タワーブリッジは1886年から1894年にかけて建設され、ロンドンで最も有名なランドマークの一つです。跳ね橋機構により、河川交通を通過させるために道路を持ち上げることができます。",
-        "yearBuilt": "1886-1894",
-        "architect": "ホレス・ジョーンズとジョン・ウルフ・バリー"
-      },
-      "pt": {
-        "name": "Tower Bridge",
-        "narration": "Você está na Tower Bridge, um dos marcos mais famosos de Londres. Esta ponte basculante e suspensa cruza o Rio Tâmisa.",
-        "description": "Um símbolo icônico de Londres desde 1894",
-        "historicalInfo": "A Tower Bridge foi construída entre 1886 e 1894 e é um dos marcos mais famosos de Londres. O mecanismo da ponte basculante permite que a pista seja levantada para deixar o tráfego fluvial passar por baixo.",
-        "yearBuilt": "1886-1894",
-        "architect": "Horace Jones e John Wolfe Barry"
-      },
-      "ru": {
-        "name": "Тауэрский мост",
-        "narration": "Вы находитесь у Тауэрского моста, одной из самых известных достопримечательностей Лондона. Этот разводной и подвесной мост пересекает Темзу.",
-        "description": "Знаковый символ Лондона с 1894 года",
-        "historicalInfo": "Тауэрский мост был построен между 1886 и 1894 годами и является одной из самых известных достопримечательностей Лондона. Механизм разводного моста позволяет поднимать проезжую часть для пропуска речного транспорта.",
-        "yearBuilt": "1886-1894",
-        "architect": "Гораций Джонс и Джон Вулф Барри"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:25.778Z",
-    "updatedAt": "2026-02-22T18:18:47.750Z"
   },
   {
     "id": "versailles",
@@ -7250,125 +3823,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:25.420Z",
-    "updatedAt": "2026-02-22T18:06:02.808Z"
-  },
-  {
-    "id": "london_eye",
-    "cityId": "london",
-    "name": "London Eye",
-    "lat": 51.503399,
-    "lng": -0.119519,
-    "radius": 50,
-    "narration": "자, 눈을 감고 런던 아이, 거대한 회전 관람차에 올라탄 당신을 상상해보세요! 캡슐 문이 스르륵 닫히고, 드디어 움직이기 시작합니다. 천천히, 아주 천천히 런던 하늘을 향해 떠오르는 기분, 느껴지시나요? 발 아래로는 템스 강이 유유히 흐르고, 저 멀리 빅벤 시계탑이 웅장한 자태를 뽐내고 있네요. 런던 아이는 단순한 관람차가 아니에요. 마치 거대한 수정구슬처럼, 런던의 과거와 현재, 미래를 담고 있는 듯하죠. 캡슐 안에서는 런던의 모든 명소가 한눈에 들어와요. 버킹엄 궁전의 깃발이 바람에 나부끼고, 세인트 폴 대성당의 돔은 햇빛에 반짝입니다. 런던 탑의 첨탑들은 마치 중세 시대의 기사처럼 늠름하게 서 있네요. 상상해보세요! 맑은 날에는 저 멀리 윈저 성까지 보인다고 해요. 런던 아이는 마치 하늘을 나는 마법 양탄자 같아요. 캡슐 안에서 따뜻한 차 한 잔을 마시며, 런던의 아름다운 풍경을 감상하는 여유, 정말 낭만적이지 않나요? 밤이 되면 런던 아이는 더욱 화려하게 변신합니다. 수천 개의 조명이 켜지고, 런던의 밤하늘을 아름답게 수놓죠. 런던 아이에서 바라보는 야경은 그야말로 환상적이에요. 템스 강에 비치는 불빛, 런던 브리지의 웅장한 모습, 그리고 저 멀리 보이는 런던의 스카이라인... 마치 꿈을 꾸는 것 같아요. 지금 여러분의 발 아래에는 수백 년의 역사를 간직한 런던이 펼쳐져 있습니다. 런던 아이는 단순한 관광 명소가 아니라, 런던의 심장과 영혼을 느낄 수 있는 특별한 공간입니다. 런던 여행을 계획하고 있다면, 런던 아이는 절대 놓치지 마세요! 잊지 못할 추억을 선물해줄 거예요.",
-    "description": "Europe's tallest cantilevered observation wheel",
-    "category": "Attraction",
-    "detailedDescription": "런던 아이는 2000년에 밀레니엄을 기념하여 건설된 거대한 회전 관람차입니다. 높이가 무려 135m에 달하며, 런던 시내를 360도로 조망할 수 있는 최고의 명소로 자리 잡았죠. 32개의 캡슐은 런던의 32개 자치구를 상징하며, 각 캡슐은 최대 25명까지 수용할 수 있습니다. 런던 아이의 건설에는 다양한 에피소드가 숨어있는데요. 특히 템스 강 위에서 조립하는 과정은 엄청난 기술력을 요구했습니다. 거대한 구조물을 강 위에서 안전하게 조립하고, 수직으로 세우는 것은 당시로서는 혁신적인 시도였죠. 현지인들은 런던 아이를 '밀레니엄 휠'이라고도 부르는데, 이는 2000년대 초반에 지어진 탓입니다. 런던 아이를 제대로 즐기는 꿀팁이 있다면, 바로 '패스트 트랙 티켓'을 이용하는 것입니다. 특히 성수기에는 긴 줄을 서야 하는데, 패스트 트랙 티켓을 구매하면 기다림 없이 바로 탑승할 수 있습니다. 또 다른 꿀팁은 해 질 무렵에 방문하는 것입니다. 붉게 물든 런던의 하늘과 야경을 동시에 감상할 수 있는 최고의 시간대이죠. 그리고 런던 아이 주변에는 다양한 레스토랑과 카페가 많으니, 관람 전후에 여유롭게 식사를 즐기는 것도 좋은 방법입니다. 숨겨진 비화로는 런던 아이의 원래 이름이 '브리티시 에어웨이즈 런던 아이'였다는 사실! 초기에는 브리티시 에어웨이즈가 주요 스폰서였기 때문이죠. 런던 아이는 단순한 관광 명소를 넘어, 런던의 랜드마크이자 상징으로 자리 잡았습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1543716021-36e0f757e6c9?w=800",
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
-      "https://images.unsplash.com/photo-1520116468816-95b69f847357?w=800"
-    ],
-    "historicalInfo": "The London Eye was built to celebrate the millennium and opened to the public in March 2000. It was designed by architects David Marks and Julia Barfield and has become one of London's most iconic landmarks.",
-    "yearBuilt": "1999-2000",
-    "architect": "David Marks and Julia Barfield",
-    "translations": {
-      "en": {
-        "name": "London Eye",
-        "narration": "The London Eye is a giant observation wheel offering spectacular views over the city.",
-        "description": "Europe's tallest cantilevered observation wheel",
-        "detailedDescription": "The London Eye, also known as the Millennium Wheel, stands as one of the world's most iconic observation wheels and London's most popular paid tourist attraction, welcoming over 3.5 million visitors annually to experience breathtaking 360-degree views of the British capital. Rising 135 meters (443 feet) above the South Bank of the River Thames, this engineering marvel has transformed London's skyline since its opening in 2000, becoming as synonymous with the city as Big Ben, Tower Bridge, and Buckingham Palace. The London Eye was conceived as part of the millennium celebrations, designed to be a temporary structure that would stand for just five years. However, its immediate popularity and iconic status led to it becoming a permanent fixture of London's landscape. The wheel was designed by architects David Marks and Julia Barfield, who won a competition organized by The Sunday Times and the Architecture Foundation to design a landmark to celebrate the new millennium. Their innovative design drew inspiration from the engineering principles of bicycle wheels, creating a cantilevered structure that appears to float effortlessly above the Thames. Construction of the London Eye was an engineering feat of remarkable complexity and ambition. The wheel was constructed in sections, with components manufactured across Europe and transported to London for assembly. The A-frame legs, which support the wheel's massive weight, were transported up the Thames on barges and lifted into position by some of Europe's largest floating cranes. The wheel itself was assembled horizontally on temporary platforms in the river, then slowly raised to its vertical position over the course of a week in October 1999 using a sophisticated jacking system. The process was so delicate and unprecedented that it captured worldwide attention, with thousands gathering to watch the dramatic tilting of the massive structure. The London Eye consists of 32 sealed and air-conditioned passenger capsules, representing the 32 London boroughs. Interestingly, the capsules are numbered 1 to 33, skipping number 13 for superstitious reasons. Each capsule weighs 10 tons, is built to carry 25 people, and provides unobstructed 360-degree views through its glass construction. The capsules are attached to the external circumference of the wheel and rotate in motorized fashion, maintaining a horizontal position as the wheel turns, ensuring passengers always have an upright viewing platform. A complete rotation takes approximately 30 minutes, moving at a stately pace of 0.9 kilometers per hour (0.6 mph), allowing the wheel to continue moving while passengers board and alight - though it can be stopped for disabled or elderly passengers who need more time. The wheel weighs approximately 2,100 tons, with the rim alone weighing 1,700 tons. It is supported by an A-frame on one side only, making it the world's tallest cantilevered observation wheel. This cantilever design, with the wheel supported from one side rather than both, creates the distinctive silhouette that has become so recognizable. The structure requires 1,700 tons of steel and took seven years from conception to completion, at a cost of £75 million. From the top of the London Eye, on a clear day, visitors can see up to 40 kilometers (25 miles) in all directions, encompassing Windsor Castle to the west and the hills of Kent to the south. The views include all of London's major landmarks: the Houses of Parliament and Big Ben directly across the river, St. Paul's Cathedral's distinctive dome, the Tower of London, Tower Bridge, the Shard piercing the sky, and countless other historic and modern buildings that tell the story of London's evolution from Roman settlement to global metropolis. The London Eye has become much more than an observation wheel - it serves as a cultural landmark and event venue. The capsules have hosted everything from weddings to business meetings, from yoga sessions to wine tastings. In 2005, one capsule was temporarily converted into a luxury apartment where two competition winners spent the night suspended 135 meters above London. The wheel has been illuminated in various colors to mark significant events: red for Chinese New Year, pink for breast cancer awareness, rainbow colors for Pride, and even the colors of national flags to welcome visiting dignitaries. The London Eye played a central role in London's millennium celebrations, with a spectacular fireworks display launched from the wheel itself at midnight on January 1, 2000 - though technical problems meant the wheel wasn't actually rotating for passengers until March 2000. Since then, it has become the focal point for London's New Year's Eve celebrations, with elaborate firework displays launched from the wheel and surrounding area, broadcast to millions worldwide. The wheel has also been featured in numerous films, television shows, and music videos, from the James Bond thriller \"Spectre\" to the romantic comedy \"Bridget Jones's Diary,\" cementing its place in popular culture. Its distinctive circular form has become an instantly recognizable symbol of London, appearing in countless photographs, paintings, and promotional materials for the city. In 2015, the London Eye underwent a major refurbishment, with Coca-Cola becoming the title sponsor, leading to it being officially branded as the \"Coca-Cola London Eye\" - though most Londoners and visitors continue to call it simply \"The London Eye.\" The refurbishment included new lighting systems using LED technology, creating more dynamic and energy-efficient illumination displays that can change color and pattern for special events. The London Eye pioneered the concept of large-scale observation wheels in major cities, inspiring similar structures worldwide, including the Singapore Flyer, the High Roller in Las Vegas, and the Dubai Eye. However, the London Eye remains unique in its cantilever design and its integration into the urban landscape, positioned to provide optimal views of one of the world's most historic cityscapes. The observation wheel has also contributed significantly to the regeneration of London's South Bank, which has transformed from an underutilized industrial area into one of London's most vibrant cultural quarters. The area now features theaters, galleries, restaurants, and public spaces, with the London Eye serving as the anchor attraction that draws millions of visitors who then explore the surrounding cultural offerings. During the COVID-19 pandemic, the London Eye stood silent for months, its empty capsules a poignant symbol of the tourism industry's challenges. However, upon reopening, it implemented new safety measures and private capsule bookings, demonstrating its adaptability and resilience. The pandemic period also saw the wheel illuminated in rainbow colors to honor NHS workers and in other meaningful displays of solidarity and hope. Today, the London Eye stands as a symbol of the turn of the millennium, a monument to engineering ingenuity, and a beloved London landmark that offers both residents and visitors a unique perspective on one of the world's great cities. It represents London's ability to embrace the new while honoring the old, to innovate while respecting tradition. From its capsules, suspended above the Thames, passengers gain not just a view of London but a new understanding of the city's layout, history, and evolution - a 30-minute journey that connects past, present, and future in the most literal and spectacular way possible. The London Eye reminds us that sometimes the best way to appreciate where we are is to step back, rise above, and see the bigger picture.",
-        "historicalInfo": "The London Eye was built to celebrate the millennium and opened to the public in March 2000. It was designed by architects David Marks and Julia Barfield and has become one of London's most iconic landmarks.",
-        "yearBuilt": "1999-2000",
-        "architect": "David Marks and Julia Barfield"
-      },
-      "it": {
-        "name": "London Eye",
-        "narration": "Il London Eye è una gigantesca ruota panoramica che offre viste spettacolari sulla città.",
-        "description": "La ruota panoramica a sbalzo più alta d'Europa",
-        "historicalInfo": "Il London Eye è stato costruito per celebrare il millennio e aperto al pubblico nel marzo 2000. È stato progettato dagli architetti David Marks e Julia Barfield ed è diventato uno dei monumenti più iconici di Londra.",
-        "yearBuilt": "1999-2000",
-        "architect": "David Marks e Julia Barfield"
-      },
-      "ko": {
-        "name": "런던 아이",
-        "narration": "런던 아이는 도시의 멋진 전망을 제공하는 거대한 관람차입니다.",
-        "description": "유럽에서 가장 높은 캔틸레버 관람차",
-        "detailedDescription": "밀레니엄 휠로도 알려진 런던 아이는 세계에서 가장 상징적인 관람차 중 하나이자 런던에서 가장 인기 있는 유료 관광 명소로, 매년 350만 명 이상의 방문객이 영국 수도의 숨막히는 360도 전망을 경험하러 옵니다. 템스강 남안 위로 135미터(443피트) 높이로 솟아 있는 이 공학적 경이로움은 2000년 개장 이래 런던의 스카이라인을 변화시켰으며, 빅벤, 타워 브리지, 버킹엄 궁전만큼이나 런던의 상징이 되었습니다. 런던 아이는 밀레니엄 축하의 일환으로 구상되었으며, 단 5년만 서 있을 임시 구조물로 설계되었습니다. 그러나 즉각적인 인기와 상징적 지위로 인해 런던 풍경의 영구적인 고정물이 되었습니다. 이 바퀴는 건축가 데이비드 마크스와 줄리아 바필드가 설계했으며, 그들은 새로운 밀레니엄을 기념할 랜드마크를 설계하기 위해 선데이 타임즈와 건축 재단이 조직한 경쟁에서 우승했습니다. 그들의 혁신적인 디자인은 자전거 바퀴의 공학 원리에서 영감을 받아, 템스강 위에 손쉽게 떠 있는 것처럼 보이는 캔틸레버 구조를 만들었습니다. 방문 팁: 맑은 날 30분 회전 중 최대 40킬로미터까지 볼 수 있으며, 일몰 무렵 방문하여 황금빛 시간대 전망을 즐기고, 특별한 경험을 위해 프라이빗 캡슐을 예약하며, 4D 시네마 경험을 체험하세요.",
-        "historicalInfo": "런던 아이는 밀레니엄을 기념하기 위해 건설되었으며 2000년 3월에 대중에게 개방되었습니다. 건축가 데이비드 마크스와 줄리아 바필드가 설계했으며 런던의 가장 상징적인 랜드마크 중 하나가 되었습니다.",
-        "yearBuilt": "1999-2000",
-        "architect": "데이비드 마크스와 줄리아 바필드"
-      },
-      "es": {
-        "name": "London Eye",
-        "narration": "El London Eye es una noria gigante que ofrece vistas espectaculares de la ciudad.",
-        "description": "La noria en voladizo más alta de Europa",
-        "historicalInfo": "El London Eye fue construido para celebrar el milenio y abierto al público en marzo de 2000. Fue diseñado por los arquitectos David Marks y Julia Barfield y se ha convertido en uno de los monumentos más icónicos de Londres.",
-        "yearBuilt": "1999-2000",
-        "architect": "David Marks y Julia Barfield"
-      },
-      "fr": {
-        "name": "London Eye",
-        "narration": "Le London Eye est une grande roue offrant des vues spectaculaires sur la ville.",
-        "description": "La plus haute grande roue en porte-à-faux d'Europe",
-        "historicalInfo": "Le London Eye a été construit pour célébrer le millénaire et ouvert au public en mars 2000. Il a été conçu par les architectes David Marks et Julia Barfield et est devenu l'un des monuments les plus emblématiques de Londres.",
-        "yearBuilt": "1999-2000",
-        "architect": "David Marks et Julia Barfield"
-      },
-      "de": {
-        "name": "London Eye",
-        "narration": "Das London Eye ist ein riesiges Riesenrad, das spektakuläre Ausblicke über die Stadt bietet.",
-        "description": "Das höchste freitragende Riesenrad Europas",
-        "historicalInfo": "Das London Eye wurde zur Feier des Jahrtausendwechsels gebaut und im März 2000 für die Öffentlichkeit eröffnet. Es wurde von den Architekten David Marks und Julia Barfield entworfen und ist zu einem der ikonischsten Wahrzeichen Londons geworden.",
-        "yearBuilt": "1999-2000",
-        "architect": "David Marks und Julia Barfield"
-      },
-      "zh": {
-        "name": "伦敦眼",
-        "narration": "伦敦眼是一座巨型摩天轮，可欣赏城市壮观景色。",
-        "description": "欧洲最高的悬臂式摩天轮",
-        "detailedDescription": "伦敦眼，也称为千禧轮，是世界上最具标志性的观景轮之一，也是伦敦最受欢迎的付费旅游景点，每年欢迎超过350万游客体验英国首都令人叹为观止的360度全景。这座工程奇迹高耸于泰晤士河南岸上方135米（443英尺），自2000年开放以来改变了伦敦的天际线，与大本钟、塔桥和白金汉宫一样成为伦敦的代名词。伦敦眼作为千禧年庆祝活动的一部分而构思，设计为只矗立五年的临时结构。然而，其即时的受欢迎程度和标志性地位使其成为伦敦景观的永久性固定装置。摩天轮由建筑师大卫·马克斯和朱莉娅·巴菲尔德设计，他们赢得了由《星期日泰晤士报》和建筑基金会组织的竞赛，旨在设计一个庆祝新千年的地标。他们的创新设计从自行车轮的工程原理中汲取灵感，创造了一个看似毫不费力地漂浮在泰晤士河上的悬臂结构。伦敦眼的建设是一项复杂而雄心勃勃的工程壮举。摩天轮分段建造，组件在整个欧洲制造并运往伦敦组装。参观提示：在晴朗的日子里，30分钟的旋转可以看到最远40公里的景色，在日落时分访问以获得黄金时段的景色，为特殊体验预订私人舱，体验4D电影体验。",
-        "historicalInfo": "伦敦眼是为庆祝千禧年而建，于2000年3月向公众开放。它由建筑师大卫·马克斯和朱莉娅·巴菲尔德设计，已成为伦敦最具标志性的地标之一。",
-        "yearBuilt": "1999-2000",
-        "architect": "大卫·马克斯和朱莉娅·巴菲尔德"
-      },
-      "ja": {
-        "name": "ロンドン・アイ",
-        "narration": "ロンドン・アイは、街の素晴らしい景色を提供する巨大な観覧車です。",
-        "description": "ヨーロッパで最も高い片持ち式観覧車",
-        "detailedDescription": "ミレニアム・ホイールとしても知られるロンドン・アイは、世界で最も象徴的な観覧車の一つであり、ロンドンで最も人気のある有料観光名所で、毎年350万人以上の訪問者が英国首都の息をのむような360度の景色を体験するために訪れます。テムズ川のサウスバンクの上135メートル（443フィート）にそびえ立つこの工学の驚異は、2000年の開業以来ロンドンのスカイラインを変え、ビッグ・ベン、タワーブリッジ、バッキンガム宮殿と同様にこの都市の代名詞となっています。ロンドン・アイはミレニアム祝賀の一環として構想され、わずか5年間立つ一時的な構造物として設計されました。しかし、その即座の人気と象徴的な地位により、ロンドンの景観の恒久的な固定物となりました。この観覧車は建築家デイビッド・マークスとジュリア・バーフィールドによって設計され、彼らは新しいミレニアムを祝うランドマークを設計するためにサンデー・タイムズと建築財団が主催したコンペティションで優勝しました。彼らの革新的なデザインは自転車の車輪の工学原理からインスピレーションを得て、テムズ川の上に楽々と浮かんでいるように見える片持ち式構造を創り出しました。ロンドン・アイの建設は、驚くべき複雑さと野心の工学的偉業でした。訪問のヒント：晴れた日には30分の回転中に最大40キロメートルまで見渡せます、夕暮れ時に訪れてゴールデンアワーの景色を楽しみ、特別な体験のためにプライベートカプセルを予約し、4Dシネマ体験を体験してください。",
-        "historicalInfo": "ロンドン・アイはミレニアムを祝うために建設され、2000年3月に一般公開されました。建築家デイビッド・マークスとジュリア・バーフィールドによって設計され、ロンドンで最も象徴的なランドマークの1つとなりました。",
-        "yearBuilt": "1999-2000",
-        "architect": "デイビッド・マークスとジュリア・バーフィールド"
-      },
-      "pt": {
-        "name": "London Eye",
-        "narration": "O London Eye é uma roda-gigante que oferece vistas espetaculares sobre a cidade.",
-        "description": "A roda-gigante em balanço mais alta da Europa",
-        "historicalInfo": "O London Eye foi construído para celebrar o milênio e aberto ao público em março de 2000. Foi projetado pelos arquitetos David Marks e Julia Barfield e se tornou um dos marcos mais icônicos de Londres.",
-        "yearBuilt": "1999-2000",
-        "architect": "David Marks e Julia Barfield"
-      },
-      "ru": {
-        "name": "Лондонский глаз",
-        "narration": "Лондонский глаз - это гигантское колесо обозрения, откуда открываются захватывающие виды на город.",
-        "description": "Самое высокое консольное колесо обозрения в Европе",
-        "historicalInfo": "Лондонский глаз был построен в честь празднования миллениума и открыт для публики в марте 2000 года. Он был спроектирован архитекторами Дэвидом Марксом и Джулией Барфилд и стал одной из самых знаковых достопримечательностей Лондона.",
-        "yearBuilt": "1999-2000",
-        "architect": "Дэвид Маркс и Джулия Барфилд"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:26.022Z",
-    "updatedAt": "2026-02-22T18:19:09.307Z"
+    "updatedAt": "2026-02-22T20:00:58.879Z"
   },
   {
     "id": "par_louvre",
@@ -7406,76 +3861,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:01.232Z",
     "updatedAt": "2026-02-22T18:16:15.848Z"
-  },
-  {
-    "id": "warsaw_old_town",
-    "cityId": "warsaw",
-    "name": "Warsaw Old Town",
-    "lat": 52.249722,
-    "lng": 21.011944,
-    "radius": 100,
-    "narration": "상상해보세요. 지금 여러분은 2차 세계대전의 잿더미를 딛고 일어선 바르샤바 구시가지, 그 심장부에 서 있습니다. 귓가에는 광장 한복판에서 울려 퍼지는 거리 악사의 폴란드 전통 음악 선율이 감미롭게 속삭이고, 코끝에는 갓 구운 빵과 따뜻한 커피의 향긋한 조화가 부드럽게 스며듭니다. 1944년, 바르샤바 봉기 당시 나치에 의해 도시 전체가 85% 이상 파괴되었지만, 폴란드인들은 단 한 장의 사진과 기억에 의존하여 벽돌 하나하나, 지붕의 기와 한 장까지 완벽하게 복원해냈습니다. 지금 여러분의 발 아래에는, 그들의 숭고한 정신과 불굴의 의지가 고스란히 담겨 있는 역사의 흔적이 살아 숨 쉬고 있습니다. 알록달록한 파스텔 톤 건물들이 옹기종기 모여 있는 구시가지 광장을 거닐며, 잠시 시간을 멈추고 그들의 뜨거운 숨결을 느껴보세요. 광장 중앙에 우뚝 솟은 인어공주 동상은 바르샤바의 수호신이자 희망의 상징입니다. 전설에 따르면, 인어공주는 발트해에서 헤엄쳐 와 비스와 강에 정착했고, 아름다운 목소리로 어부들을 매혹했다고 합니다. 그녀는 도시를 지키기 위해 칼과 방패를 들고 용맹하게 싸웠으며, 지금도 변함없이 바르샤바를 굳건히 지키고 있습니다. 좁고 구불구불한 골목길을 따라 걷다 보면, 중세 시대의 흔적이 고스란히 남아있는 붉은 벽돌 건물과 고풍스러운 교회를 만나게 됩니다. 잠시 멈춰 서서, 벽돌 하나하나에 새겨진 시간의 흔적을 손으로 느껴보세요. 마치 과거로 시간 여행을 떠나온 듯한 특별한 경험을 선사할 것입니다. 바르샤바 구시가지는 단순한 관광 명소가 아닌, 폴란드인의 자긍심과 희망, 그리고 불굴의 정신이 살아 숨 쉬는 역사적인 공간입니다. 이곳에서 폴란드의 아름다움과 강인함을 마음껏 느껴보세요.",
-    "description": "UNESCO World Heritage Site, meticulously reconstructed after WWII",
-    "category": "Historic District",
-    "detailedDescription": "바르샤바 구시가지는 13세기 초에 건설되었으며, 폴란드 왕국의 수도로서 중요한 역할을 수행했습니다. 16세기에는 르네상스 양식의 건축물이 들어서면서 유럽의 문화 중심지로 발돋움했습니다. 하지만 17세기 스웨덴의 침공과 2차 세계대전을 거치면서 도시 전체가 완전히 파괴되는 비극을 겪었습니다. 놀라운 사실은, 전쟁 이후 폴란드인들이 단 한 장의 사진과 기억에 의존하여 구시가지를 완벽하게 복원했다는 점입니다. 유네스코는 이러한 폴란드인들의 노력과 가치를 인정하여 1980년 바르샤바 구시가지를 세계문화유산으로 지정했습니다. 현지인만 아는 꿀팁을 하나 알려드릴까요? 구시가지 광장에서 조금만 벗어나면 숨겨진 뒷골목들이 나타납니다. 이곳에는 아늑한 카페와 레스토랑, 그리고 독특한 공예품 상점들이 숨어 있습니다. 특히, 폴란드 전통 음식을 맛볼 수 있는 작은 식당들은 현지인들에게도 인기가 높습니다. 바르샤바 구시가지를 방문하신다면, 꼭 뒷골목 탐험을 통해 숨겨진 매력을 발견해보시길 바랍니다. 그리고 바르샤바 봉기 기념관 (Warsaw Uprising Museum)을 방문하여 2차 세계대전 당시 폴란드인들의 처절했던 저항과 희생을 기리는 시간을 가져보세요. 구시가지 복원의 진정한 의미를 더욱 깊이 이해할 수 있을 것입니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800",
-      "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800",
-      "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800"
-    ],
-    "historicalInfo": "Warsaw's Old Town was founded in the 13th century and grew over the centuries. It was completely destroyed during the Warsaw Uprising in 1944. The meticulous reconstruction after WWII, based on historical documents and paintings, is considered one of the greatest achievements of post-war reconstruction.",
-    "yearBuilt": "13th century (original), 1945-1966 (reconstruction)",
-    "architect": "Various architects (original), Post-war reconstruction teams",
-    "translations": {
-      "en": {
-        "name": "Warsaw Old Town",
-        "narration": "Welcome to Warsaw's Old Town, a UNESCO World Heritage Site that was meticulously reconstructed after World War II. This historic district showcases the resilience and spirit of the Polish people.",
-        "description": "UNESCO World Heritage Site, meticulously reconstructed after WWII",
-        "detailedDescription": "Warsaw's Old Town is the oldest part of the capital city. It was established in the 13th century and was completely destroyed during the Warsaw Uprising in 1944. After World War II, the Old Town was meticulously reconstructed according to pre-war photographs and paintings, particularly those by 18th-century vedutist Bernardo Bellotto. The reconstruction was so thorough and authentic that UNESCO listed Warsaw's Old Town as a World Heritage Site in 1980, citing it as an outstanding example of a near-total reconstruction of a span of history covering the 13th to 20th century. The Old Town is centered on the Old Town Market Place (Rynek Starego Miasta), which teems with restaurants, cafés, and shops. Surrounding streets feature medieval architecture, the 17th-century Royal Castle, and numerous historical monuments. The area is a popular tourist destination and a symbol of Polish national identity and pride.",
-        "historicalInfo": "Warsaw's Old Town was founded in the 13th century and grew over the centuries. It was completely destroyed during the Warsaw Uprising in 1944. The meticulous reconstruction after WWII, based on historical documents and paintings, is considered one of the greatest achievements of post-war reconstruction.",
-        "yearBuilt": "13th century (original), 1945-1966 (reconstruction)",
-        "architect": "Various architects (original), Post-war reconstruction teams"
-      },
-      "ko": {
-        "name": "바르샤바 구시가지",
-        "narration": "제2차 세계 대전 후 세심하게 재건된 유네스코 세계문화유산인 바르샤바 구시가지에 오신 것을 환영합니다. 이 역사적인 지구는 폴란드 국민의 회복력과 정신을 보여줍니다.",
-        "description": "유네스코 세계문화유산, 제2차 세계 대전 후 세심하게 재건",
-        "detailedDescription": "바르샤바 구시가지는 수도에서 가장 오래된 지역입니다. 13세기에 설립되었으며 1944년 바르샤바 봉기 중에 완전히 파괴되었습니다. 제2차 세계 대전 후 구시가지는 전쟁 전 사진과 그림, 특히 18세기 베두티스트 베르나르도 벨로토의 작품에 따라 세심하게 재건되었습니다. 재건이 너무나 철저하고 진정성 있게 이루어져 유네스코는 1980년 바르샤바 구시가지를 세계문화유산으로 지정했으며, 13세기부터 20세기까지의 역사를 거의 완전히 재건한 뛰어난 사례로 인용했습니다. 구시가지는 레스토랑, 카페, 상점으로 가득한 구시가지 시장 광장(리넥 스타레고 미아스타)을 중심으로 합니다. 주변 거리에는 중세 건축물, 17세기 왕궁, 수많은 역사적 기념물이 있습니다. 이 지역은 인기 있는 관광지이자 폴란드 국가 정체성과 자부심의 상징입니다.",
-        "historicalInfo": "바르샤바 구시가지는 13세기에 설립되어 수세기에 걸쳐 성장했습니다. 1944년 바르샤바 봉기 중에 완전히 파괴되었습니다. 역사적 문서와 그림을 기반으로 한 제2차 세계 대전 후의 세심한 재건은 전후 재건의 가장 위대한 업적 중 하나로 여겨집니다.",
-        "yearBuilt": "13세기 (원래), 1945-1966년 (재건)",
-        "architect": "다양한 건축가 (원래), 전후 재건 팀"
-      },
-      "ja": {
-        "name": "ワルシャワ旧市街",
-        "narration": "第二次世界大戦後に細心の注意を払って再建されたユネスコ世界遺産、ワルシャワ旧市街へようこそ。この歴史的地区はポーランド人の回復力と精神を示しています。",
-        "description": "ユネスコ世界遺産、第二次世界大戦後に細心の注意を払って再建",
-        "detailedDescription": "ワルシャワ旧市街は首都の最も古い部分です。13世紀に設立され、1944年のワルシャワ蜂起中に完全に破壊されました。第二次世界大戦後、旧市街は戦前の写真と絵画、特に18世紀のヴェドゥティスタ、ベルナルド・ベロットの作品に従って細心の注意を払って再建されました。再建が非常に徹底的で本格的であったため、ユネスコは1980年にワルシャワ旧市街を世界遺産に登録し、13世紀から20世紀にかけての歴史のほぼ完全な再建の優れた例として引用しました。旧市街は、レストラン、カフェ、ショップで賑わう旧市街市場広場(リネク・スタレゴ・ミアスタ)を中心としています。周辺の通りには中世の建築、17世紀の王宮、多数の歴史的記念碑があります。この地域は人気の観光地であり、ポーランドの国家的アイデンティティと誇りの象徴です。",
-        "historicalInfo": "ワルシャワ旧市街は13世紀に設立され、何世紀にもわたって成長しました。1944年のワルシャワ蜂起中に完全に破壊されました。歴史的文書と絵画に基づく第二次世界大戦後の細心の再建は、戦後再建の最大の業績の一つと見なされています。",
-        "yearBuilt": "13世紀 (オリジナル)、1945-1966年 (再建)",
-        "architect": "さまざまな建築家 (オリジナル)、戦後再建チーム"
-      },
-      "zh": {
-        "name": "华沙老城",
-        "narration": "欢迎来到华沙老城,一个在第二次世界大战后精心重建的联合国教科文组织世界遗产。这个历史街区展示了波兰人民的韧性和精神。",
-        "description": "联合国教科文组织世界遗产,二战后精心重建",
-        "detailedDescription": "华沙老城是首都最古老的部分。它建立于13世纪,在1944年华沙起义期间被完全摧毁。第二次世界大战后,老城根据战前的照片和绘画,特别是18世纪风景画家贝尔纳多·贝洛托的作品,被精心重建。重建工作如此彻底和真实,以至于联合国教科文组织于1980年将华沙老城列为世界遗产,称其为13世纪至20世纪历史跨度近乎完全重建的杰出范例。老城以老城市场广场(Rynek Starego Miasta)为中心,那里到处都是餐馆、咖啡馆和商店。周围的街道有中世纪建筑、17世纪的皇家城堡和众多历史纪念碑。该地区是热门旅游目的地,也是波兰民族认同和自豪感的象征。",
-        "historicalInfo": "华沙老城建立于13世纪,并在几个世纪中成长。它在1944年华沙起义期间被完全摧毁。基于历史文献和绘画的二战后精心重建被认为是战后重建的最伟大成就之一。",
-        "yearBuilt": "13世纪 (原建筑), 1945-1966年 (重建)",
-        "architect": "各种建筑师 (原建筑), 战后重建团队"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:28.838Z",
-    "updatedAt": "2026-02-22T18:21:57.454Z"
   },
   {
     "id": "park_guell",
@@ -7545,7 +3930,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:27.716Z",
-    "updatedAt": "2026-02-22T18:19:18.879Z"
+    "updatedAt": "2026-02-22T20:00:59.049Z"
   },
   {
     "id": "tokyo_item_19",
@@ -7652,7 +4037,77 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:26.855Z",
-    "updatedAt": "2026-02-22T18:16:20.574Z"
+    "updatedAt": "2026-02-22T20:00:59.211Z"
+  },
+  {
+    "id": "sagrada_familia",
+    "cityId": "barcelona",
+    "name": "Sagrada Familia",
+    "lat": 41.403629,
+    "lng": 2.174356,
+    "radius": 80,
+    "narration": "바르셀로나에 오신 것을 환영합니다! 지금 여러분 눈앞에는, 아니, 상상해보세요. 140년이 넘는 시간 동안 건설 중인, 그 웅장함과 섬세함으로 전 세계를 매료시킨 안토니 가우디의 걸작, 사그라다 파밀리아가 펼쳐져 있습니다. 하늘을 향해 솟아오른 듯한 첨탑들은 마치 거대한 석조 숲 같아요. 햇빛이 스테인드글라스를 통과하며 만들어내는 다채로운 색깔의 향연은 마치 천상의 빛이 쏟아지는 듯 황홀하죠. \n\n숨을 크게 들이쉬고, 잠시 주변의 소리를 들어보세요. 관광객들의 웅성거림, 아이들의 웃음소리, 그리고 어쩌면 저 멀리서 들려오는 기타 소리까지… 이 모든 소리가 사그라다 파밀리아를 더욱 특별하게 만들어 줍니다. 지금 여러분의 발 아래에는 수백 년의 역사가 잠들어 있어요. 가우디는 자연에서 영감을 받아 이 성당을 설계했다고 해요. 그래서인지 성당 곳곳에서 나무, 꽃, 동물 등 자연의 형태를 발견할 수 있답니다. \n\n성당 내부로 들어가 볼까요? 마치 거대한 숲 속에 들어온 듯한 느낌이 들 거예요. 기둥들은 마치 나무처럼 하늘을 향해 뻗어 있고, 천장에는 나뭇잎 모양의 장식들이 가득하죠. 스테인드글라스를 통해 들어오는 빛은 마치 숲 속의 햇살처럼 따뜻하고 부드러워요. 상상해보세요. 이 아름다운 공간에서 여러분은 마치 신성한 기운에 감싸이는 듯한 느낌을 받을 겁니다. 사그라다 파밀리아는 단순한 건축물이 아니에요. 가우디의 열정과 꿈, 그리고 바르셀로나의 역사가 담겨 있는 살아있는 예술 작품이죠. 자, 이제 여러분만의 사그라다 파밀리아 이야기를 만들어 보세요!",
+    "description": "Gaudí's magnificent unfinished basilica, a UNESCO World Heritage Site",
+    "category": "Architecture",
+    "detailedDescription": "사그라다 파밀리아는 안토니 가우디의 가장 유명한 작품이자, 바르셀로나를 상징하는 랜드마크입니다. 1882년에 착공하여 아직까지도 건설 중인 이 성당은 가우디의 독창적인 건축 철학과 종교적인 신념이 담겨 있습니다. 가우디는 자연에서 영감을 받아 사그라다 파밀리아를 설계했으며, 이는 성당의 외관과 내부 곳곳에서 확인할 수 있습니다. 첨탑은 마치 옥수수처럼 하늘을 향해 솟아 있고, 파사드는 예수의 탄생, 수난, 영광을 묘사하고 있습니다. 내부에는 숲을 연상시키는 기둥과 스테인드글라스가 있으며, 빛과 색채를 통해 신성한 분위기를 연출합니다.\n\n**현지인 꿀팁**: 사그라다 파밀리아는 늘 관광객으로 붐비기 때문에, 온라인으로 미리 입장권을 예매하는 것이 좋습니다. 특히 첨탑에 올라가려면 예약이 필수입니다. 첨탑에서는 바르셀로나 시내를 한눈에 조망할 수 있습니다. 또한, 가우디의 생애와 작품에 대해 더 자세히 알고 싶다면, 사그라다 파밀리아 지하에 있는 박물관을 방문해 보세요. 가우디가 사용했던 도구와 설계 도면, 모형 등을 볼 수 있습니다. **숨겨진 비화**: 가우디는 사그라다 파밀리아 건설에 자신의 모든 것을 바쳤다고 합니다. 그는 성당 근처에 살면서 매일같이 설계하고 감독했으며, 심지어 노숙자처럼 초라한 모습으로 다니다가 교통사고로 사망했다고 합니다. 그의 유언에 따라 사그라다 파밀리아에 안치되었으며, 그의 정신은 여전히 이 성당에 살아 숨 쉬고 있습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1583779457050-39e95d3d9d8b?w=800",
+      "https://images.unsplash.com/photo-1561632669-7f55f7975606?w=800",
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800"
+    ],
+    "historicalInfo": "Construction of the Sagrada Família started in 1882 under architect Francisco de Paula del Villar. In 1883, Antoni Gaudí took over the project and transformed it with his architectural vision. He worked on the church for 43 years until his death in 1926. Gaudí devoted his final years exclusively to the project, and at the time of his death, less than a quarter of the project was complete.",
+    "yearBuilt": "1882-present (under construction)",
+    "architect": "Antoni Gaudí",
+    "translations": {
+      "en": {
+        "name": "Sagrada Familia",
+        "narration": "Welcome to the Sagrada Familia, Antoni Gaudí's masterpiece and Barcelona's most iconic landmark. This breathtaking basilica has been under construction for over 140 years.",
+        "description": "Gaudí's magnificent unfinished basilica, a UNESCO World Heritage Site",
+        "detailedDescription": "The Basílica de la Sagrada Família, also known as the Sagrada Família, is a large unfinished Roman Catholic minor basilica in Barcelona, Catalonia, Spain. Designed by Catalan architect Antoni Gaudí (1852–1926), his work on the building is part of a UNESCO World Heritage Site. Construction began in 1882 and is projected to be completed in 2026, the centenary of Gaudí's death. Combining Gothic and Art Nouveau forms, the Sagrada Família is renowned for its unique architectural style featuring organic shapes inspired by nature. The basilica has three grand facades: the Nativity facade, the Passion facade, and the Glory facade, each telling a different part of the story of Jesus. The interior is equally spectacular, with towering columns designed to resemble trees in a forest, creating a stunning canopy effect.",
+        "historicalInfo": "Construction of the Sagrada Família started in 1882 under architect Francisco de Paula del Villar. In 1883, Antoni Gaudí took over the project and transformed it with his architectural vision. He worked on the church for 43 years until his death in 1926. Gaudí devoted his final years exclusively to the project, and at the time of his death, less than a quarter of the project was complete.",
+        "yearBuilt": "1882-present (under construction)",
+        "architect": "Antoni Gaudí"
+      },
+      "ko": {
+        "name": "사그라다 파밀리아",
+        "narration": "안토니 가우디의 걸작이자 바르셀로나의 가장 상징적인 랜드마크인 사그라다 파밀리아에 오신 것을 환영합니다. 이 숨막히는 바실리카는 140년 넘게 건설 중입니다.",
+        "description": "가우디의 장엄한 미완성 바실리카, 유네스코 세계문화유산",
+        "detailedDescription": "사그라다 파밀리아 대성당은 스페인 카탈루냐 바르셀로나에 있는 대형 미완성 로마 가톨릭 소바실리카입니다. 카탈루냐 건축가 안토니 가우디(1852-1926)가 설계했으며, 그의 작업은 유네스코 세계문화유산의 일부입니다. 건설은 1882년에 시작되었으며 가우디 사망 100주년인 2026년에 완성될 것으로 예상됩니다. 고딕 양식과 아르누보 형식을 결합한 사그라다 파밀리아는 자연에서 영감을 받은 유기적 형태를 특징으로 하는 독특한 건축 양식으로 유명합니다. 바실리카에는 세 개의 웅장한 파사드가 있습니다: 탄생 파사드, 수난 파사드, 영광 파사드로, 각각 예수의 이야기의 다른 부분을 이야기합니다. 내부도 똑같이 장관으로, 숲속의 나무를 닮도록 설계된 우뚝 솟은 기둥이 놀라운 캐노피 효과를 만들어냅니다.",
+        "historicalInfo": "사그라다 파밀리아 건설은 1882년 건축가 프란시스코 데 파울라 델 비야르의 지휘 하에 시작되었습니다. 1883년, 안토니 가우디가 프로젝트를 인수하고 그의 건축적 비전으로 변모시켰습니다. 그는 1926년 사망할 때까지 43년 동안 교회를 작업했습니다. 가우디는 말년을 오직 이 프로젝트에만 전념했으며, 그의 사망 당시 프로젝트의 1/4도 완성되지 않았습니다.",
+        "yearBuilt": "1882년-현재 (건설 중)",
+        "architect": "안토니 가우디"
+      },
+      "ja": {
+        "name": "サグラダ・ファミリア",
+        "narration": "アントニ・ガウディの傑作であり、バルセロナで最も象徴的なランドマークであるサグラダ・ファミリアへようこそ。この息をのむようなバシリカは140年以上建設中です。",
+        "description": "ガウディの壮大な未完成バシリカ、ユネスコ世界遺産",
+        "detailedDescription": "サグラダ・ファミリア大聖堂は、スペインのカタルーニャ州バルセロナにある大型の未完成ローマカトリック小バシリカです。カタルーニャの建築家アントニ・ガウディ(1852-1926)によって設計され、建物に関する彼の作業はユネスコ世界遺産の一部です。建設は1882年に始まり、ガウディの死の100周年である2026年に完成すると予測されています。ゴシック様式とアールヌーヴォー様式を組み合わせたサグラダ・ファミリアは、自然に触発された有機的な形状を特徴とする独特の建築様式で有名です。バシリカには3つの壮大なファサードがあります:降誕のファサード、受難のファサード、栄光のファサードで、それぞれがイエスの物語の異なる部分を語っています。内部も同様に壮観で、森の木々に似せて設計された高くそびえる柱が、見事な天蓋効果を生み出しています。",
+        "historicalInfo": "サグラダ・ファミリアの建設は、建築家フランシスコ・デ・パウラ・デル・ビリャールの下で1882年に開始されました。1883年、アントニ・ガウディがプロジェクトを引き継ぎ、彼の建築ビジョンで変貌させました。彼は1926年に亡くなるまで43年間教会に取り組みました。ガウディは晩年をこのプロジェクトにのみ専念させ、彼の死の時点で、プロジェクトの4分の1も完成していませんでした。",
+        "yearBuilt": "1882年-現在 (建設中)",
+        "architect": "アントニ・ガウディ"
+      },
+      "zh": {
+        "name": "圣家堂",
+        "narration": "欢迎来到圣家堂,安东尼·高迪的杰作和巴塞罗那最具标志性的地标。这座令人叹为观止的大教堂已经建造了140多年。",
+        "description": "高迪宏伟的未完成大教堂,联合国教科文组织世界遗产",
+        "detailedDescription": "圣家堂大教堂是位于西班牙加泰罗尼亚巴塞罗那的一座大型未完成罗马天主教次级圣殿。由加泰罗尼亚建筑师安东尼·高迪(1852-1926)设计,他对这座建筑的工作是联合国教科文组织世界遗产的一部分。建设始于1882年,预计将在2026年,即高迪逝世100周年时完工。结合哥特式和新艺术风格,圣家堂以其独特的建筑风格而闻名,其特色是受自然启发的有机形状。大教堂有三个宏伟的立面:诞生立面、受难立面和荣耀立面,每个都讲述了耶稣故事的不同部分。内部同样壮观,设计成森林中树木的高耸柱子,创造出令人惊叹的树冠效果。",
+        "historicalInfo": "圣家堂的建设于1882年在建筑师弗朗西斯科·德·保拉·德尔·比利亚尔的领导下开始。1883年,安东尼·高迪接管了这个项目,并用他的建筑愿景改造了它。他在1926年去世之前为这座教堂工作了43年。高迪将他的晚年完全奉献给了这个项目,在他去世时,项目还不到四分之一完成。",
+        "yearBuilt": "1882年-至今 (建设中)",
+        "architect": "安东尼·高迪"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:27.595Z",
+    "updatedAt": "2026-02-22T20:00:59.294Z"
   },
   {
     "id": "london-eye-fast-track",
@@ -7714,58 +4169,63 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:37.871Z",
-    "updatedAt": "2026-02-22T18:20:09.529Z"
+    "updatedAt": "2026-02-22T20:00:59.377Z"
   },
   {
-    "id": "gardens-light-show-singapore",
-    "cityId": "singapore",
-    "name": "Gardens by the Bay Light Show",
-    "lat": 1.2816,
-    "lng": 103.8636,
+    "id": "alaska_wildlife_center",
+    "cityId": "anchorage",
+    "name": "Alaska Wildlife Conservation Center",
+    "lat": 60.821359,
+    "lng": -148.978592,
     "radius": 70,
-    "narration": "자, 상상해보세요. 싱가포르의 밤하늘 아래, 거대한 슈퍼트리들이 웅장한 자태를 뽐내고 있는 모습을요. 지금 여러분의 발 아래에는, 수많은 사람들이 숨죽이며 빛과 음악의 향연을 기다리고 있습니다. 곧, 어둠이 짙어지고, 첫 번째 음이 울려 퍼지기 시작합니다. 슈퍼트리들은 마치 살아있는 생명체처럼, 음악에 맞춰 형형색색의 빛을 뿜어내기 시작하죠. \n\n저 멀리, '가든 랩소디'의 선율이 밤공기를 가득 채우며, 마치 꿈결 같은 분위기를 자아냅니다. 빛은 마치 춤을 추듯, 슈퍼트리들의 가지를 타고 흐르며, 그 아름다움에 넋을 잃게 만들죠. 각기 다른 테마의 음악에 맞춰, 빛의 색깔과 움직임도 변화무쌍하게 바뀝니다. 때로는 강렬하게, 때로는 부드럽게, 여러분의 눈과 귀를 사로잡을 거예요. \n\n마치 거대한 오케스트라를 감상하는 듯한 느낌이랄까요? 주변 사람들의 감탄사와 웃음소리가 섞여, 더욱 낭만적인 분위기를 더합니다. 사랑하는 사람과 함께라면, 그 감동은 배가 될 거예요. 잠시 모든 것을 잊고, 이 아름다운 광경에 몸을 맡겨보세요. \n\n숨을 크게 들이쉬고, 싱가포르의 밤공기를 느껴보세요. 꽃과 나무의 향기가 코끝을 간지럽히고, 슈퍼트리에서 뿜어져 나오는 시원한 미스트가 여러분의 피부를 촉촉하게 적셔줄 겁니다. 이 모든 감각들이 어우러져, 잊지 못할 추억을 만들어 줄 거예요. 자, 이제 마음껏 '가든 랩소디'를 즐겨보세요! 분명, 여러분의 싱가포르 여행을 더욱 특별하게 만들어 줄 거예요.",
-    "description": "Free nightly light and sound show at Supertree Grove",
-    "category": "Activity",
-    "detailedDescription": "가든스 바이 더 베이의 '가든 랩소디'는 단순한 빛과 음악 쇼 그 이상입니다. 슈퍼트리 그로브를 배경으로 펼쳐지는 이 쇼는, 싱가포르의 대표적인 랜드마크 중 하나로 자리 잡았습니다. 매일 밤 펼쳐지는 이 무료 쇼는, 현지인과 관광객 모두에게 사랑받는 명소입니다. \n\n숨겨진 이야기가 하나 있어요. 슈퍼트리들의 디자인은 실제 나무의 생태적 기능을 모방하도록 설계되었다는 사실, 알고 계셨나요? 빗물을 모아 재활용하고, 태양 에너지를 흡수하여 자체적으로 전력을 생산하기도 합니다. 쇼에 사용되는 조명 역시 에너지 효율이 높은 LED 조명을 사용하여 환경 보호에 기여하고 있다고 해요. \n\n꿀팁을 하나 더 드릴게요! 쇼가 시작되기 최소 30분 전에 도착해서 좋은 자리를 확보하는 것이 중요합니다. 슈퍼트리 아래 누워서 하늘을 가득 채운 빛의 향연을 감상하는 것을 추천합니다. 만약 돗자리가 없다면, 주변 상점에서 저렴하게 구입할 수 있습니다. 쇼가 끝난 후에는, 가든스 바이 더 베이 주변을 산책하며 야경을 즐기는 것도 좋은 선택이 될 거예요. 특히, 플라워 돔과 클라우드 포레스트는 밤에도 개방하니, 시간을 내어 방문해 보세요. 분명, 잊지 못할 경험이 될 겁니다.",
+    "narration": "알래스카 야생동물 보호 센터에 오신 걸 환영해요! 자, 잠시 눈을 감고 상상해보세요. 여러분은 지금 웅장한 산맥과 푸른 숲이 어우러진 알래스카의 심장부에 서 있습니다. 코를 간지럽히는 상쾌한 공기, 저 멀리 들려오는 독수리의 날갯짓 소리, 그리고 발 아래 느껴지는 흙의 촉감… 마치 영화 속 한 장면 같지 않나요? 이곳은 단순한 동물원이 아니에요. 알래스카의 토종 야생동물들을 보호하고, 교육하며, 최상의 보살핌을 제공하는 특별한 안식처랍니다. \n\n길을 따라 걸으며 곰들의 우람한 몸집에 감탄하고, 순록의 우아한 걸음걸이에 매료되어 보세요. 늑대들의 날카로운 눈빛에서는 야생의 본능이 느껴지고, 수달들의 장난기 넘치는 모습은 웃음을 자아낼 거예요. 마치 알래스카의 살아있는 역사를 눈앞에서 보는 듯한 경험을 하게 될 겁니다. \n\n지금 여러분이 보고 있는 이 동물들은 한때 멸종 위기에 처했거나, 부상으로 인해 야생으로 돌아갈 수 없었던 아이들이에요. 하지만 이곳에서 헌신적인 직원들의 사랑과 정성 덕분에 다시 건강을 되찾고, 새로운 삶을 살아가고 있답니다. 알래스카 야생동물 보호 센터는 단순한 관광지가 아닌, 생명 존중과 자연 보호의 가치를 배우고 실천하는 의미 있는 공간이에요. 자, 이제 저와 함께 알래스카 야생동물들의 이야기를 들어볼까요? 그들의 눈을 통해 알래스카의 아름다움과 생명의 소중함을 느껴보시길 바랍니다.",
+    "description": "A 200-acre wildlife sanctuary protecting Alaska's native species",
+    "category": "Wildlife Sanctuary",
+    "detailedDescription": "알래스카 야생동물 보호 센터(AWCC)는 앵커리지에서 남쪽으로 약 50마일 떨어진, 알래스카의 아름다운 추가치 산맥에 위치해 있습니다. 1993년에 설립된 이곳은 부상당하거나 고아가 된 야생동물들을 구조하여 치료하고, 가능한 경우 야생으로 돌려보내는 것을 목표로 합니다. 만약 야생 복귀가 어렵다면, AWCC는 이 동물들에게 영구적인 보금자리를 제공하며, 이들을 통해 방문객들에게 알래스카의 야생 생태계와 보존의 중요성에 대한 교육을 진행합니다. \n\n센터에는 곰(불곰, 흑곰), 순록, 무스, 늑대, 수달, 비버, 여우, 산양, 사향소 등 다양한 알래스카 토종 동물들이 살고 있습니다. 넓은 공간에서 자유롭게 생활하는 동물들의 모습은 감동적이며, 먹이 주기, 교육 프로그램, 특별 투어 등 다양한 활동을 통해 방문객들은 더욱 깊이 있는 경험을 할 수 있습니다. \n\n**현지인 꿀팁**: 겨울에 방문하면 설경 속에서 동물들을 만나는 특별한 경험을 할 수 있으며, 사진작가들에게는 최고의 촬영 기회가 됩니다. 또한, 센터 내 기념품 가게에서는 알래스카 야생동물을 테마로 한 다양한 상품을 구매할 수 있으며, 수익금은 동물 보호 활동에 사용됩니다. **숨겨진 비화**: AWCC는 여러 다큐멘터리 영화 제작에도 참여하여 알래스카 야생동물의 아름다움과 중요성을 전 세계에 알리고 있습니다.",
     "photos": [
-      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800",
-      "https://images.unsplash.com/photo-1551802241-a3acdb5ce0b6?w=800",
-      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800",
-      "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800",
-      "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800",
-      "https://images.unsplash.com/photo-1548390453-0d6df5c3d44e?w=800",
-      "https://images.unsplash.com/photo-1563535343-836a1c084df8?w=800"
+      "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800",
+      "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800",
+      "https://images.unsplash.com/photo-1496714534174-7c9c5e7e8cd7?w=800"
     ],
-    "historicalInfo": "The Garden Rhapsody show has been entertaining visitors since Gardens by the Bay opened in 2012.",
-    "yearBuilt": "2012",
-    "architect": "Grant Associates (Supertrees design)",
+    "historicalInfo": "The Alaska Wildlife Conservation Center was founded in 1993 by Mike Miller as a sanctuary for orphaned and injured wildlife. The center has since become a leader in wildlife conservation, successfully reintroducing wood bison to Alaska in 2015 after their local extinction.",
+    "yearBuilt": "1993",
+    "architect": "Mike Miller (Founder)",
     "translations": {
       "en": {
-        "name": "Gardens by the Bay Light Show",
-        "narration": "Experience the spectacular Garden Rhapsody light and sound show at the Supertree Grove. Watch the iconic Supertrees come alive with dazzling lights and music.",
-        "description": "Free nightly light and sound show at Supertree Grove",
-        "detailedDescription": "The Garden Rhapsody is a spectacular multimedia show that transforms the iconic Supertree Grove into a mesmerizing display of lights and sound. This free nightly show occurs twice every evening (7:45 PM and 8:45 PM) and lasts about 10-15 minutes. The 16 Supertrees, ranging from 25 to 50 meters tall, are illuminated with a choreographed light display synchronized to music ranging from classical to contemporary. The vertical gardens covering the Supertrees create a stunning backdrop as colors pulse and flow to the rhythm. For the best viewing experience, arrive early to secure a good spot on the grass beneath the Supertrees. You can also watch from the OCBC Skyway, a 128-meter aerial walkway suspended between two Supertrees, offering a unique elevated perspective (separate admission fee applies). The show is family-friendly and completely free, making it one of Singapore's most popular evening attractions.",
-        "historicalInfo": "The Garden Rhapsody show has been entertaining visitors since Gardens by the Bay opened in 2012.",
-        "yearBuilt": "2012",
-        "architect": "Grant Associates (Supertrees design)"
-      },
-      "it": {
-        "name": "Spettacolo di Luci ai Gardens by the Bay",
-        "narration": "Vivi lo spettacolare spettacolo di luci e suoni Garden Rhapsody al Supertree Grove. Guarda gli iconici Supertree prendere vita con luci e musica abbaglianti.",
-        "description": "Spettacolo gratuito serale di luci e suoni al Supertree Grove",
-        "detailedDescription": "Il Garden Rhapsody è uno spettacolo multimediale spettacolare che trasforma l'iconico Supertree Grove in un affascinante display di luci e suoni. Questo spettacolo serale gratuito si svolge due volte ogni sera (alle 19:45 e alle 20:45) e dura circa 10-15 minuti. I 16 Supertree, alti da 25 a 50 metri, sono illuminati con un display luminoso coreografato sincronizzato con musica che varia dal classico al contemporaneo. I giardini verticali che ricoprono i Supertree creano uno sfondo stupendo mentre i colori pulsano e fluiscono al ritmo. Per la migliore esperienza visiva, arriva presto per assicurarti un buon posto sull'erba sotto i Supertree. Puoi anche guardare dall'OCBC Skyway, una passerella aerea di 128 metri sospesa tra due Supertree, che offre una prospettiva elevata unica (si applica una tariffa d'ingresso separata). Lo spettacolo è adatto alle famiglie e completamente gratuito, rendendolo una delle attrazioni serali più popolari di Singapore.",
-        "historicalInfo": "Lo spettacolo Garden Rhapsody intrattiene i visitatori dall'apertura di Gardens by the Bay nel 2012.",
-        "yearBuilt": "2012",
-        "architect": "Grant Associates (design Supertrees)"
+        "name": "Alaska Wildlife Conservation Center",
+        "narration": "Visit the Alaska Wildlife Conservation Center, a sanctuary dedicated to preserving Alaska's native wildlife through conservation, education, and quality animal care.",
+        "description": "A 200-acre wildlife sanctuary protecting Alaska's native species",
+        "detailedDescription": "The Alaska Wildlife Conservation Center is a 200-acre non-profit sanctuary located in Portage Valley, dedicated to the conservation of Alaska's wildlife through education, research, and quality animal care. Founded in 1993, the center provides a safe haven for orphaned, injured, and ill animals that cannot be released back into the wild. Visitors can observe majestic Alaska brown bears, massive wood bison, elusive wolves, powerful moose, and many other native Alaskan species in spacious, naturalistic habitats. The center plays a crucial role in conservation efforts, including the successful reintroduction of wood bison to Alaska after their extinction in the state. The self-guided 1.5-mile loop allows visitors to experience wildlife viewing by foot, car, or bicycle, with educational signs providing fascinating insights into each species' behavior, habitat, and conservation status. The center also participates in breeding programs for endangered species and provides educational programs for thousands of school children and visitors annually.",
+        "historicalInfo": "The Alaska Wildlife Conservation Center was founded in 1993 by Mike Miller as a sanctuary for orphaned and injured wildlife. The center has since become a leader in wildlife conservation, successfully reintroducing wood bison to Alaska in 2015 after their local extinction.",
+        "yearBuilt": "1993",
+        "architect": "Mike Miller (Founder)"
       },
       "ko": {
-        "name": "가든스 바이 더 베이 라이트 쇼",
-        "narration": "슈퍼트리 그로브에서 장관을 이루는 가든 랩소디 빛과 소리 쇼를 경험하세요. 상징적인 슈퍼트리가 눈부신 조명과 음악으로 생동감 있게 살아나는 것을 보세요.",
-        "description": "슈퍼트리 그로브의 무료 야간 빛과 소리 쇼",
-        "detailedDescription": "가든 랩소디는 상징적인 슈퍼트리 그로브를 황홀한 빛과 소리의 디스플레이로 변모시키는 장관을 이루는 멀티미디어 쇼입니다. 이 무료 야간 쇼는 매일 저녁 두 번(오후 7시 45분과 8시 45분)에 열리며 약 10-15분 동안 진행됩니다. 높이가 25~50미터에 달하는 16개의 슈퍼트리는 클래식에서 현대 음악까지 다양한 음악에 맞춰 안무된 조명 디스플레이로 빛납니다. 슈퍼트리를 덮고 있는 수직 정원은 색상이 리듬에 맞춰 맥동하고 흐르는 동안 멋진 배경을 만듭니다. 최고의 감상 경험을 위해 일찍 도착하여 슈퍼트리 아래 잔디밭에서 좋은 자리를 확보하세요. 두 슈퍼트리 사이에 매달린 128미터 공중 보도인 OCBC 스카이웨이에서도 감상할 수 있으며, 독특한 높이의 관점을 제공합니다(별도 입장료 적용). 쇼는 가족 친화적이며 완전히 무료로, 싱가포르에서 가장 인기 있는 저녁 명소 중 하나입니다.",
-        "historicalInfo": "가든 랩소디 쇼는 2012년 가든스 바이 더 베이가 개장한 이래 방문객들을 즐겁게 해왔습니다.",
-        "yearBuilt": "2012",
-        "architect": "그랜트 어소시에이츠 (슈퍼트리 디자인)"
+        "name": "알래스카 야생동물 보호센터",
+        "narration": "보존, 교육 및 양질의 동물 관리를 통해 알래스카의 토착 야생동물을 보호하는 데 전념하는 보호구역인 알래스카 야생동물 보호센터를 방문하세요.",
+        "description": "알래스카 토착 종을 보호하는 200에이커 야생동물 보호구역",
+        "detailedDescription": "알래스카 야생동물 보호센터는 포티지 밸리에 위치한 200에이커의 비영리 보호구역으로, 교육, 연구 및 양질의 동물 관리를 통해 알래스카 야생동물 보존에 전념하고 있습니다. 1993년에 설립된 이 센터는 야생으로 돌아갈 수 없는 고아, 부상 및 병든 동물들을 위한 안전한 피난처를 제공합니다. 방문객들은 웅장한 알래스카 갈색곰, 거대한 우드 들소, 포착하기 어려운 늑대, 강력한 무스 및 기타 많은 알래스카 토착 종들을 넓고 자연적인 서식지에서 관찰할 수 있습니다. 센터는 주에서 멸종된 후 알래스카에 우드 들소를 성공적으로 재도입하는 것을 포함하여 보존 노력에서 중요한 역할을 합니다. 셀프 가이드 1.5마일 루프를 통해 방문객들은 도보, 자동차 또는 자전거로 야생동물을 관찰할 수 있으며, 교육 표지판은 각 종의 행동, 서식지 및 보존 상태에 대한 매혹적인 통찰력을 제공합니다. 센터는 또한 멸종 위기종 번식 프로그램에 참여하고 매년 수천 명의 학생과 방문객을 위한 교육 프로그램을 제공합니다.",
+        "historicalInfo": "알래스카 야생동물 보호센터는 1993년 마이크 밀러에 의해 고아 및 부상당한 야생동물을 위한 보호구역으로 설립되었습니다. 센터는 이후 야생동물 보존의 선두주자가 되어 2015년 지역 멸종 후 알래스카에 우드 들소를 성공적으로 재도입했습니다.",
+        "yearBuilt": "1993년",
+        "architect": "마이크 밀러 (설립자)"
+      },
+      "ja": {
+        "name": "アラスカ野生動物保護センター",
+        "narration": "保護、教育、質の高い動物ケアを通じてアラスカの在来野生動物の保護に専念する保護区、アラスカ野生動物保護センターを訪れてください。",
+        "description": "アラスカの在来種を保護する200エーカーの野生動物保護区",
+        "detailedDescription": "アラスカ野生動物保護センターは、ポーテージバレーに位置する200エーカーの非営利保護区で、教育、研究、質の高い動物ケアを通じてアラスカの野生動物の保護に専念しています。1993年に設立されたこのセンターは、野生に戻すことができない孤児、負傷、病気の動物のための安全な避難所を提供しています。訪問者は、雄大なアラスカヒグマ、巨大なウッドバイソン、とらえどころのないオオカミ、強力なヘラジカ、その他多くのアラスカ在来種を広々とした自然の生息地で観察できます。センターは、州で絶滅した後のアラスカへのウッドバイソンの成功した再導入を含む保護活動において重要な役割を果たしています。セルフガイド式の1.5マイルのループにより、訪問者は徒歩、車、または自転車で野生動物の観察を体験でき、教育標識は各種の行動、生息地、保護状況についての魅力的な洞察を提供します。センターはまた、絶滅危惧種の繁殖プログラムに参加し、毎年何千人もの学童や訪問者のための教育プログラムを提供しています。",
+        "historicalInfo": "アラスカ野生動物保護センターは1993年にマイク・ミラーによって孤児や負傷した野生動物のための保護区として設立されました。センターはその後、野生動物保護のリーダーとなり、2015年に地域絶滅後のアラスカへのウッドバイソンの再導入に成功しました。",
+        "yearBuilt": "1993年",
+        "architect": "マイク・ミラー (設立者)"
+      },
+      "zh": {
+        "name": "阿拉斯加野生动物保护中心",
+        "narration": "参观阿拉斯加野生动物保护中心,这是一个致力于通过保护、教育和优质动物护理来保护阿拉斯加本土野生动物的保护区。",
+        "description": "保护阿拉斯加本土物种的200英亩野生动物保护区",
+        "detailedDescription": "阿拉斯加野生动物保护中心是位于波蒂奇谷的一个200英亩的非营利保护区,致力于通过教育、研究和优质动物护理来保护阿拉斯加的野生动物。该中心成立于1993年,为无法放归野外的孤儿、受伤和生病的动物提供安全避风港。游客可以在宽敞的自然栖息地观察雄伟的阿拉斯加棕熊、巨大的森林野牛、难以捉摸的狼、强大的驼鹿以及许多其他阿拉斯加本土物种。该中心在保护工作中发挥着关键作用,包括在该州灭绝后成功将森林野牛重新引入阿拉斯加。自助式1.5英里环路允许游客步行、开车或骑自行车观察野生动物,教育标志提供关于每个物种行为、栖息地和保护状况的迷人见解。该中心还参与濒危物种繁殖计划,每年为数千名学生和游客提供教育项目。",
+        "historicalInfo": "阿拉斯加野生动物保护中心由迈克·米勒于1993年创立,作为孤儿和受伤野生动物的保护区。该中心后来成为野生动物保护的领导者,在当地灭绝后于2015年成功将森林野牛重新引入阿拉斯加。",
+        "yearBuilt": "1993年",
+        "architect": "迈克·米勒 (创始人)"
       }
     },
     "openingHours": null,
@@ -7778,8 +4238,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.469Z",
-    "updatedAt": "2026-02-22T18:17:00.219Z"
+    "createdAt": "2026-02-12T12:11:26.737Z",
+    "updatedAt": "2026-02-22T20:00:59.629Z"
   },
   {
     "id": "basilica-santo-nino",
@@ -7822,7 +4282,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:30.224Z",
-    "updatedAt": "2026-02-22T18:20:20.107Z"
+    "updatedAt": "2026-02-22T20:00:59.709Z"
   },
   {
     "id": "paris_item_32",
@@ -7860,52 +4320,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:03.720Z",
     "updatedAt": "2026-02-22T18:06:01.194Z"
-  },
-  {
-    "id": "gardens-by-the-bay",
-    "cityId": "singapore",
-    "name": "Gardens by the Bay",
-    "lat": 1.281563,
-    "lng": 103.86356,
-    "radius": 100,
-    "narration": "자, 눈을 감고 싱가포르의 숨결을 느껴보세요. 당신은 지금, 가든스 바이 더 베이 한복판에 서 있습니다. 따뜻하고 습한 공기가 피부에 와 닿고, 어디선가 달콤한 꽃 향기가 코끝을 간지럽히는군요. 상상해보세요. 거대한 슈퍼트리들이 당신을 압도적인 스케일로 맞이합니다. 마치 다른 행성에 온 듯한 기분이 들지 않나요? 해가 뉘엿뉘엿 저물어갈 때, 슈퍼트리들은 화려한 조명으로 옷을 갈아입고, 매혹적인 빛의 향연을 펼쳐냅니다. \n\n지금 여러분의 발 아래에는 수많은 식물들이 살아 숨 쉬고 있어요. 열대 우림에서 온 희귀한 꽃들부터, 사막에서 온 강인한 선인장들까지. 이 모든 것이 한데 어우러져 놀라운 생태계를 이루고 있답니다. 잠시 걸음을 멈추고, 주변의 소리에 귀 기울여 보세요. 새들의 지저귐, 나뭇잎 스치는 소리, 그리고 저 멀리 들려오는 아이들의 웃음소리까지. 이 모든 소리가 하나의 아름다운 교향곡처럼 느껴질 거예요. \n\n가든스 바이 더 베이는 단순한 공원이 아니에요. 싱가포르의 꿈과 미래를 담은 상징과도 같죠. 자연과 기술이 조화롭게 공존하는 이곳에서, 우리는 지속 가능한 미래의 가능성을 엿볼 수 있습니다. 자, 이제 천천히 걸으며 이 놀라운 공간을 마음껏 느껴보세요. 슈퍼트리 그로브의 숨 막히는 야경을 감상하고, 클라우드 포레스트의 신비로운 분위기에 흠뻑 빠져보세요. 그리고 잊지 마세요. 이 모든 경험은 당신의 마음속에 오랫동안 기억될 거예요.",
-    "description": "Futuristic garden with iconic Supertree Grove",
-    "category": "Park & Garden",
-    "detailedDescription": "가든스 바이 더 베이는 싱가포르 정부가 '정원 속의 도시'라는 비전을 실현하기 위해 조성한 초대형 인공 정원입니다. 101헥타르에 달하는 넓은 부지에는 슈퍼트리 그로브, 클라우드 포레스트, 플라워 돔 등 다양한 테마 정원이 조성되어 있습니다. 특히 슈퍼트리 그로브는 높이 25~50m에 달하는 거대한 인공 나무들로, 수직 정원의 역할을 수행하며 태양광 에너지를 수집하고 빗물을 저장하는 친환경적인 기능을 수행합니다. \n\n현지인들은 저녁 시간에 슈퍼트리 그로브에서 펼쳐지는 '가든 랩소디' 쇼를 즐겨 찾습니다. 화려한 조명과 음악이 어우러진 이 쇼는 무료로 관람할 수 있으며, 매일 밤 두 차례 진행됩니다. 클라우드 포레스트는 거대한 인공 산을 중심으로 조성된 온실로, 다양한 고산 식물과 폭포를 감상할 수 있습니다. 정상에서는 싱가포르의 아름다운 전경을 한눈에 담을 수 있습니다. 숨겨진 비화로는, 가든스 바이 더 베이 건설 당시 수많은 나무들을 옮겨 심는 과정에서 상당한 어려움이 있었다고 합니다. 특히 뿌리가 손상되지 않도록 특수 장비를 사용하여 섬세하게 작업했다고 하네요. 가든스 바이 더 베이는 단순한 관광 명소를 넘어, 싱가포르의 혁신적인 기술과 환경 보호 노력을 보여주는 상징적인 공간입니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1506351421178-63b52a2d0b1c?w=800",
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800",
-      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800"
-    ],
-    "historicalInfo": "Opened in 2012, Gardens by the Bay was developed at a cost of over $1 billion to transform Singapore into a \"City in a Garden\". It has won numerous international horticulture and design awards.",
-    "yearBuilt": "2012",
-    "architect": "Grant Associates, Wilkinson Eyre",
-    "translations": {
-      "en": {
-        "name": "Gardens by the Bay",
-        "narration": "Welcome to Gardens by the Bay, a futuristic garden featuring the iconic Supertree Grove. These vertical gardens are a stunning blend of nature and technology.",
-        "description": "Futuristic garden with iconic Supertree Grove",
-        "historicalInfo": "Opened in 2012, Gardens by the Bay was developed at a cost of over $1 billion to transform Singapore into a \"City in a Garden\". It has won numerous international horticulture and design awards."
-      },
-      "ko": {
-        "name": "가든스 바이 더 베이",
-        "narration": "상징적인 슈퍼트리 그로브를 특징으로 하는 미래지향적인 정원인 가든스 바이 더 베이에 오신 것을 환영합니다. 이 수직 정원은 자연과 기술의 놀라운 조화입니다.",
-        "description": "상징적인 슈퍼트리 그로브가 있는 미래지향적인 정원",
-        "historicalInfo": "2012년에 개장한 가든스 바이 더 베이는 싱가포르를 \"정원 속의 도시\"로 변모시키기 위해 10억 달러 이상의 비용으로 개발되었습니다. 수많은 국제 원예 및 디자인 상을 수상했습니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:31.182Z",
-    "updatedAt": "2026-02-22T18:06:12.596Z"
   },
   {
     "id": "fort-san-pedro",
@@ -7950,55 +4364,45 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:30.343Z",
-    "updatedAt": "2026-02-22T18:20:49.375Z"
+    "updatedAt": "2026-02-22T20:00:59.960Z"
   },
   {
-    "id": "west-end-theatre-show",
-    "cityId": "london",
-    "name": "West End Theatre Show",
-    "lat": 51.5114,
-    "lng": -0.1281,
-    "radius": 50,
-    "narration": "자, 여러분, 상상해보세요. 런던 웨스트엔드의 밤거리, 화려한 조명이 쏟아지고, 설렘 가득한 사람들의 미소가 넘실대는 풍경을요. 지금 여러분은 세계 최고의 공연들이 펼쳐지는 심장, 웨스트엔드 극장 앞에 서 있습니다. 19세기부터 이어져 온 역사가 고스란히 담긴 이 극장들의 문을 열고 들어서는 순간, 여러분은 시간 여행자가 됩니다. 낡은 나무 바닥의 삐걱거림, 붉은 벨벳 커튼의 묵직함, 그리고 천장에서 쏟아지는 샹들리에의 눈부신 빛까지, 모든 것이 여러분을 새로운 세계로 초대하죠. 오늘 밤, 여러분은 어떤 이야기에 빠져들게 될까요? 웅장한 오케스트라 선율에 맞춰 펼쳐지는 화려한 뮤지컬일까요, 아니면 배우들의 숨 막히는 연기 앙상블이 돋보이는 연극일까요? 웨스트엔드에서는 모든 것이 가능하답니다. 공연 시작 전, 극장 주변의 펍에서 가볍게 맥주 한 잔을 기울이며 사람들과 이야기를 나눠보세요. 왠지 모르게 오늘 공연에 대한 기대감이 더욱 커질 거예요. 막이 오르고, 첫 번째 음표가 울려 퍼지는 순간, 여러분은 완전히 다른 사람이 될 겁니다. 웨스트엔드의 마법은 바로 그런 거예요. 현실의 모든 걱정과 고민을 잊게 해주고, 오직 이야기 속에 몰입하게 만들어주는 거죠. 공연이 끝나고 극장을 나설 때, 여러분은 분명히 무언가 특별한 것을 경험했다는 것을 느끼게 될 거예요. 런던 웨스트엔드, 이곳은 단순한 극장이 아니라, 꿈과 환상이 현실이 되는 마법 같은 공간이니까요. 자, 이제 여러분의 밤을 빛낼 최고의 공연을 선택하고, 웨스트엔드의 마법에 빠져보세요!",
-    "description": "Premium tickets to top West End theatre productions",
+    "id": "cebu-island-hopping",
+    "cityId": "cebu",
+    "name": "Island Hopping Tour",
+    "lat": 10.3157,
+    "lng": 123.8854,
+    "radius": 100,
+    "narration": "자, 눈을 감고 푸른 바다를 상상해봐요! 여러분은 지금 세부의 따뜻한 햇살 아래, 보트를 타고 눈부신 섬들을 향해 나아가고 있어요. 시원한 바닷바람이 얼굴을 스치고, 에메랄드빛 바다가 반짝이는 것을 느껴보세요. 오늘 하루, 여러분은 단순한 관광객이 아닌, 진정한 섬의 탐험가가 될 거예요!\n\n첫 번째 목적지는 바로 그 유명한 '힐루뚱안 해양 보호 구역'이에요. 상상해보세요! 형형색색의 열대어들이 여러분을 맞이하기 위해 모여들고, 산호초는 마치 살아있는 정원처럼 펼쳐져 있어요. 스노클링 장비를 착용하고 물속으로 뛰어드는 순간, 여러분은 완전히 새로운 세계를 경험하게 될 거예요. 니모를 찾아서 함께 헤엄치고, 불가사리가 해저를 기어가는 모습을 관찰하며, 마치 다큐멘터리의 주인공이 된 듯한 기분을 느껴보세요.\n\n다음으로 향할 곳은 '날루수안 섬'이에요. 이곳은 마치 천국으로 가는 관문 같아요. 하얀 모래사장을 맨발로 걸으며 파도 소리를 들어보세요. 따뜻한 햇살 아래 낮잠을 즐기거나, 해변에서 신나는 게임을 즐길 수도 있어요. 그리고 잊지 마세요! 이곳 날루수안 섬에서는 인생샷을 위한 최고의 배경이 기다리고 있답니다. 친구들과 함께 점프샷을 찍거나, 석양을 배경으로 실루엣 사진을 남겨보세요. 인스타그램에 올리는 순간, '좋아요'가 폭발할 거예요!\n\n점심시간! 드디어 기다리고 기다리던 해변 바비큐 시간이에요. 지글거리는 숯불 위에서 구워지는 신선한 해산물 냄새가 코를 자극하고, 입안에는 벌써부터 침이 고이기 시작해요. 방금 잡은 싱싱한 생선과 새우, 그리고 달콤한 열대 과일까지! 푸짐한 한 상 차림을 해변에 앉아 즐기는 이 순간, 세상 부러울 게 없겠죠? 맛있는 음식을 나누며 함께 웃고 이야기하는 시간은, 여행의 소중한 추억으로 영원히 남을 거예요.\n\n마지막으로, '판다논 섬'으로 향해볼까요? 이곳은 마치 시간이 멈춘 듯한 평화로운 섬이에요. 섬 전체가 하얀 모래로 뒤덮여 있고, 야자수가 드리워진 풍경은 마치 그림엽서 같아요. 해먹에 누워 책을 읽거나, 조용히 명상을 즐기며, 일상의 스트레스를 모두 잊어버리세요. 지금 여러분의 발 아래에는, 수천 년 동안 파도가 다듬어 온 부드러운 모래가 느껴지고, 눈 앞에는 끝없이 펼쳐진 푸른 바다가 펼쳐져 있어요. 이 순간을 마음속에 깊이 새겨두세요.",
+    "description": "Full-day island hopping tour to Cebu's beautiful islands",
     "category": "Activity",
-    "detailedDescription": "런던 웨스트엔드 극장가는 뉴욕 브로드웨이와 어깨를 나란히 하는 세계적인 공연 예술의 중심지입니다. 수십 개의 극장이 밀집해 있으며, 매일 밤 다채로운 공연들이 펼쳐지죠. 이곳의 역사는 19세기 빅토리아 시대로 거슬러 올라갑니다. 당시 급증하는 인구와 함께 엔터테인먼트에 대한 수요가 늘면서, 웨스트엔드에 극장들이 우후죽순처럼 생겨나기 시작했습니다. 주목할 점은, 웨스트엔드의 많은 극장들이 단순히 공연만 보는 공간이 아니라는 거예요. 예를 들어, 'Her Majesty's Theatre'는 오페라의 유령 초연 장소로 유명하며, 극장 자체의 건축 양식 또한 매우 아름답습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 웨스트엔드 공연 티켓을 싸게 구할 수 있는 방법이 있다는 것! 바로 'TKTS' 부스를 이용하는 겁니다. 레스터 스퀘어에 위치한 이 부스에서는 당일 공연 티켓을 최대 50%까지 할인된 가격으로 구매할 수 있답니다. 또한, 몇몇 극장에서는 공연 시작 직전에 'Standing Room Only' 티켓을 판매하기도 하니, 운이 좋다면 저렴한 가격으로 웨스트엔드 공연을 즐길 수 있을 거예요. 숨겨진 비화 하나 더! 웨스트엔드 극장들은 과거 화재 사고가 빈번하게 발생했었는데, 이를 방지하기 위해 극장마다 특별한 소방 시스템을 갖추고 있다고 합니다. 런던 웨스트엔드, 그 화려한 무대 뒤에는 흥미로운 역사와 이야기가 숨겨져 있다는 사실, 잊지 마세요!",
+    "detailedDescription": "세부 아일랜드 호핑 투어는 단순히 섬을 방문하는 것이 아닌, 세부의 숨겨진 아름다움을 발견하고 경험하는 여정입니다. 힐루뚱안 해양 보호 구역에서는 다양한 해양 생물을 만날 수 있으며, 특히 운이 좋다면 바다거북과 함께 수영하는 특별한 경험도 할 수 있습니다. 날루수안 섬은 깨끗한 해변과 얕은 수심 덕분에 아이들과 함께 즐기기에 완벽한 곳입니다. 또한, 날루수안 섬에는 긴 나무 다리가 있는데, 이곳은 멋진 사진을 찍을 수 있는 최고의 장소 중 하나입니다. 판다논 섬은 과거 모래톱으로 시작하여 점차 섬의 형태를 갖추게 된 독특한 지형을 가지고 있습니다. 섬 주변의 수심이 얕아 물놀이를 즐기기에도 안전하며, 현지인들은 이곳에서 나는 해산물을 말려 판매하기도 합니다. 꿀팁! 투어 예약 시, 현지 여행사를 통해 예약하면 더욱 저렴하게 이용할 수 있으며, 흥정을 통해 더 많은 서비스를 받을 수도 있습니다. 또한, 투어에 포함된 점심 식사 외에, 섬에서 판매하는 신선한 해산물을 추가로 구입하여 즐기는 것도 좋은 방법입니다. 숨겨진 비화! 과거 날루수안 섬은 해적들의 은신처로 사용되었다고 합니다. 섬 곳곳에는 해적들이 숨겨놓은 보물이 아직도 잠들어 있을지도 모릅니다.",
     "photos": [
-      "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800",
-      "https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=800",
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
-      "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800",
-      "https://images.unsplash.com/photo-1478147427282-58a87a120781?w=800",
-      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800",
-      "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800"
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
+      "https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800"
     ],
-    "historicalInfo": "London's West End theatre district has been the center of British theatre since the 17th century.",
-    "yearBuilt": "Historic tradition",
-    "architect": "Various historic theatres",
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
     "translations": {
       "en": {
-        "name": "West End Theatre Show",
-        "narration": "Experience world-class theatre in London's West End. Choose from spectacular musicals and acclaimed plays in historic venues.",
-        "description": "Premium tickets to top West End theatre productions",
-        "historicalInfo": "London's West End has been the center of British theatre since the 17th century.",
-        "yearBuilt": "Historic tradition",
-        "architect": "Various historic theatres"
+        "name": "Island Hopping Tour",
+        "narration": "Explore the stunning islands around Cebu on this full-day island hopping adventure. Visit pristine beaches, snorkel in crystal-clear waters, and enjoy a beach barbecue.",
+        "description": "Full-day island hopping tour to Cebu's beautiful islands",
+        "detailedDescription": "This island hopping tour takes you to some of Cebu's most beautiful islands including Nalusuan Island, Caohagan Island, and Hilutungan Island. Each stop offers unique experiences - from pristine white sand beaches perfect for sunbathing to vibrant coral reefs teeming with tropical fish ideal for snorkeling. The tour includes all equipment, lunch on the beach with fresh seafood barbecue, and experienced guides who know the best spots. Swim in crystal-clear turquoise waters, explore marine sanctuaries, and relax on secluded beaches. Transportation via traditional bancas (outrigger boats) adds to the authentic Filipino experience."
       },
       "it": {
-        "name": "Spettacolo Teatrale del West End",
-        "narration": "Vivi il teatro di classe mondiale nel West End di Londra. Scegli tra spettacolari musical e acclamati spettacoli teatrali in luoghi storici.",
-        "description": "Biglietti premium per le migliori produzioni teatrali del West End",
-        "historicalInfo": "Il West End di Londra è stato il centro del teatro britannico dal XVII secolo.",
-        "yearBuilt": "Tradizione storica",
-        "architect": "Vari teatri storici"
+        "name": "Tour Isola in Isola",
+        "narration": "Esplora le splendide isole intorno a Cebu in questa avventura di un'intera giornata. Visita spiagge incontaminate, fai snorkeling in acque cristalline e goditi un barbecue sulla spiaggia.",
+        "description": "Tour di un'intera giornata alle bellissime isole di Cebu",
+        "detailedDescription": "Questo tour isola in isola ti porta ad alcune delle isole più belle di Cebu tra cui Nalusuan Island, Caohagan Island e Hilutungan Island. Ogni tappa offre esperienze uniche - dalle spiagge di sabbia bianca incontaminate perfette per prendere il sole alle vivaci barriere coralline brulicanti di pesci tropicali ideali per lo snorkeling. Il tour include tutta l'attrezzatura, pranzo sulla spiaggia con barbecue di pesce fresco e guide esperte che conoscono i posti migliori. Nuota in acque turchesi cristalline, esplora santuari marini e rilassati su spiagge isolate. Il trasporto tramite tradizionali bancas (barche con bilanciere) aggiunge all'esperienza filippina autentica."
       },
       "ko": {
-        "name": "웨스트 엔드 연극 쇼",
-        "narration": "런던 웨스트 엔드에서 세계적인 연극을 경험하세요. 역사적인 장소에서 화려한 뮤지컬과 찬사를 받는 연극 중에서 선택하세요.",
-        "description": "최고의 웨스트 엔드 연극 프로덕션 프리미엄 티켓",
-        "historicalInfo": "런던 웨스트 엔드는 17세기부터 영국 연극의 중심지였습니다.",
-        "yearBuilt": "역사적 전통",
-        "architect": "다양한 역사적 극장"
+        "name": "아일랜드 호핑 투어",
+        "narration": "이 하루 종일 아일랜드 호핑 모험에서 세부 주변의 멋진 섬들을 탐험하세요. 깨끗한 해변을 방문하고, 수정처럼 맑은 물에서 스노클링을 하고, 해변 바비큐를 즐기세요.",
+        "description": "세부의 아름다운 섬들로의 하루 종일 아일랜드 호핑 투어",
+        "detailedDescription": "이 아일랜드 호핑 투어는 날루수안 섬, 카오하간 섬, 힐루툰간 섬을 포함한 세부의 가장 아름다운 섬들로 여러분을 안내합니다. 각 정류장은 독특한 경험을 제공합니다 - 일광욕에 완벽한 깨끗한 백사장부터 스노클링에 이상적인 열대어가 가득한 활기찬 산호초까지. 투어에는 모든 장비, 신선한 해산물 바비큐와 함께하는 해변 점심, 그리고 최고의 장소를 아는 경험 많은 가이드가 포함됩니다. 수정처럼 맑은 청록색 바다에서 수영하고, 해양 보호구역을 탐험하고, 한적한 해변에서 휴식을 취하세요. 전통적인 방카(외지거 보트)를 통한 이동은 진정한 필리핀 경험을 더합니다."
       }
     },
     "openingHours": null,
@@ -8011,8 +4415,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.990Z",
-    "updatedAt": "2026-02-22T18:09:08.427Z"
+    "createdAt": "2026-02-12T12:11:38.109Z",
+    "updatedAt": "2026-02-22T20:01:00.040Z"
   },
   {
     "id": "new-york_item_35",
@@ -8180,44 +4584,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T11:40:38.720Z",
-    "updatedAt": "2026-02-22T18:21:10.410Z"
-  },
-  {
-    "id": "barcelona_item_13",
-    "cityId": "barcelona",
-    "name": "바르셀로나 프리미엄 Restaurant 추천 14",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 안녕하십니까! 역사와 맛을 한자리에서 만나볼 수 있는 놀라운 여정을 시작할 시간입니다. \"바르셀로나 프리미엄 Restaurant 추천 14\"로 여러분을 초대합니다. 이곳은 바르셀로나에서 가장 추천하는 레스토랑 명소로, 감각을 일깨우는 경험을 제공합니다. 문을 여는 순간부터 여러분의 감각은 이곳의 모든 것에 포착될 것입니다. 치솟는 대리석 벽, 고급스러운 샹들리에의 빛, 주방에서 풍겨오는 고기 굽는 냄새. 모든 것이 환상적입니다! 여러분, 바르셀로나의 심장이 이곳에서 뛰고 있는 것이 확실하게 느껴집니다!\n\n이제 역사의 흐름 속으로 뛰어들어 봅시다. 이 레스토랑은 과거 19세기 말, 카탈루냐의 전설적인 건축가인 조제프 페레라에 의해 건립되었습니다. 당시 바르셀로나는 산업 혁명으로 인해 급격한 변화를 겪고 있었습니다. 도시가 성장함에 따라, 새로운 사회적 중심지로 자리 잡기 위해 그는 이곳을 설계했으며, 그야말로 예술과 혁신의 상징으로 탄생하게 되었습니다. 당시의 건축 스타일과 정치적 분위기는 물론, 이곳에서의 식사는 사교계의 화려함을 자랑했습니다.\n\n자, 이제 그 시대의 한 인물에 대한 이야기를 들어봅시다. 한때 이곳을 자주 찾았던 도나 루이자라는 여인이 있었습니다. 그녀는 바르셀로나의 사교계 여왕으로, 이 레스토랑에서 파티를 열며 도시의 엘리트들과 함께 그들의 사상과 문화를 나누었습니다. 그녀의 파티는 항상 화려했고, 그녀의 웃음소리는 이곳의 벽을 타고 울려 퍼졌습니다. 그녀는 단순한 고객이 아닌, 그 시대 문화를 발전시키는 데 일조한 인물로 기억되고 있습니다.\n\n이제 건축의 경이로움을 감상해봅시다. 이 레스토랑의 내부는 단순히 아름다움을 넘어서 기능성까지 겸비한 공간으로 설계되었습니다. 대리석과 유리, 철강이 완벽하게 조화되어, 어느 곳을 보더라도 예술 작품처럼 느껴집니다. 교묘하게 설계된 환기 시스템은 주방의 열기를 효율적으로 배출하여 내부 공간을 쾌적하게 유지합니다. 여러분, 정말 대단하지 않습니까?\n\n그렇다면, 이곳에서는 어떤 숨겨진 비밀이 있을까요? 바로, 천장의 섬세한 디테일 속에 숨어 있는 카탈루냐의 전통 문양입니다. 이 문양은 당시의 예술적 정신을 표현하고 있으며, 보통 방문객들은 그 아름다움을 놓치곤 합니다. 하지만 여러분은 오늘 그 비밀을 알게 되셨으니, 다음 방문 때는 꼭 눈여겨보시길 바랍니다!\n\n현대로 돌아와, 이 레스토랑은 다시금 그 가치를 인정받아 복원되었습니다. 과거의 영광을 되찾기 위해 수많은 전문가들이 모여 세심한 복원 작업을 진행했으며, 이제 이곳은 과거와 현대가 조화롭게 어우러진 명소로 거듭났습니다. 영화와 드라마의 촬영지로도 종종 등장하며, 이곳의 매력은 세상에 널리 알려져 있습니다.\n\n마지막으로, 이곳을 찾는 현대의 관광객들에 관한 재미있는 이야기를 빼놓을 수 없죠. 이 레스토랑에 들어서면, 모두가 저마다의 독특한 방식으로 감탄을 표현합니다. 어떤 이는 음식을 찍어 소셜 미디어에 공유하고, 어떤 이는 특별한 인테리어에 감탄하며 사진을 찍습니다. 이곳을 방문하면 여러분도 아마 비슷한 경향을 보이실 겁니다.\n\n이제 이 레스토랑의 의미를 깊이 생각해 보겠습니다. 이곳은 단순히 음식을 먹는 장소 이상의 의미를 가지고 있습니다. 사람들은 이곳에서 역사의 일부분을 느끼고, 과거와 현재를 아우르는 대화를 나누게 됩니다. 이는 인류의 문화적 발전을 상징하며, 서로 다른 시대의 사람들이 한자리에 모여 문화를 나누는 장소로 자리 잡고 있습니다.\n\n여러분, 이제 우리의 여정은 끝이 났지만, 이곳의 이야기는 여러분의 마음속에 영원히 남을 것입니다. 바르셀로나의 이 특별한 레스토랑은 단순한 감탄을 넘어, 귀환하고 싶은 매력을 지니고 있습니다. 여러분에게 이곳에서의 시간이 단순한 방문이 아닌, 특별한 추억으로 기억되기를 바랍니다. 다음에 또 뵙겠습니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "바르셀로나 프리미엄 Restaurant 추천 14",
-        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "바르셀로나의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:02.409Z",
-    "updatedAt": "2026-02-22T18:06:01.380Z"
+    "updatedAt": "2026-02-22T20:01:00.371Z"
   },
   {
     "id": "뉴욕-demo-1",
@@ -8299,44 +4666,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:31.904Z",
-    "updatedAt": "2026-02-22T18:21:38.790Z"
-  },
-  {
-    "id": "barcelona_item_73",
-    "cityId": "barcelona",
-    "name": "바르셀로나 프리미엄 Restaurant 추천 74",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 바르셀로나 프리미엄 Restaurant 추천 74에 오신 것을 환영합니다! 지금 막 여러분은 전 세계 미식가들의 꿈의 종착지에 도착했습니다. 눈을 감고 상상해 보세요! 환상적인 스페인 타파스의 향이 코끝을 간질이고, 열정적인 플라멩코 리듬이 귀에 울려 퍼집니다. 매혹적인 조명이 레스토랑의 황홀한 내부를 비추고, 곳곳에는 미소 짓는 얼굴들이 가득합니다. 이곳은 단순한 식당이 아닙니다. 바르셀로나의 맛을 집결시킨 예술 작품이자, 세월의 풍파를 견딘 역사의 무대입니다. 이제, 이 특별한 공간의 이야기가 시작됩니다.\n\n이 놀라운 레스토랑은 19세기에 스페인 내전의 여파 속에서 탄생했습니다. 당시 바르셀로나는 정치적 혼란과 갈등의 한가운데 있었고, 사람들은 모두 삶의 작은 위안을 찾고 있었습니다. 바로 그때, 한 젊은 요리사 페드로가 등장했습니다. 그는 자신의 열정과 기술로 사람들이 다시 미소를 지을 수 있도록 하고자 했죠. 그래서 이곳에 레스토랑을 세웠습니다. 그의 꿈은 바르셀로나의 맛을 탐구하고 전 세계로 전파하는 것이었습니다. 이곳에서 탄생한 수많은 요리는 그 당시 사람들에게 위안과 희망을 선사했습니다.\n\n이제 여러분은 이 레스토랑의 숨겨진 건축적 비밀을 들을 차례입니다. 처음 건설될 당시, 페드로는 지역에서 구한 석재와 목재를 사용하여 이곳을 지었습니다. 그중 가장 인상적인 부분은 천장에 설치된 아름다운 목조 패널입니다. 이것은 당시의 장인 정신을 그대로 보여주며, 건축학적으로도 뛰어난 예술품입니다. 그리고 벽에 새겨진 섬세한 조각들은 바르셀로나 사람들의 삶과 문화를 생생하게 묘사하고 있습니다.\n\n관광객들이 놓치기 쉬운 숨겨진 디테일로는, 식당 내부의 벽면 곳곳에 작은 카탈루냐어 문구들이 새겨져 있다는 점입니다. 이 문구들은 역사의 순간들을 기념하며, 그 시대에 대한 경의를 표하고 있습니다. 이러한 디테일을 자세히 살펴보면, 이곳이 단순한 레스토랑 이상의 의미를 지니고 있음을 알 수 있습니다.\n\n시간이 흐르면서 이곳은 잊혀지는 듯 보였으나, 1970년대에 한 역사학자의 발견으로 다시금 그 빛을 발했습니다. 그는 이곳이 단순한 요리 공간을 넘어 문화적 상징임을 깨달았고, 이를 복원하고 보존하기로 마음먹었습니다. 레스토랑은 과거의 영광을 되찾았고, 현대의 미식가들과 관광객들이 이곳을 찾기 시작했습니다. 영화의 배경으로도 자주 등장하면서, 오늘날에는 그 명성을 더욱 높이고 있습니다. 또한 방문객들은 셀카를 찍으며 SNS에 포스팅하는 재미를 만끽합니다. 이로 인해 이곳은 현대의 문화 아이콘으로 자리 잡았습니다.\n\n여러분, 이 식당의 진정한 의의는 단순한 미식 공간을 넘어섭니다. 이곳은 인류가 어떻게 역경 속에서 새로운 의미와 가치를 발견하는지를 보여줍니다. 요리라는 예술을 통해 사람들의 마음을 치유하고, 문화를 잇고, 역사를 말하는 공간으로서의 역할을 담당하고 있습니다.\n\n이제 여러분은 이 특별한 레스토랑을 떠나게 되겠지만, 여러분의 마음속에 새겨진 이곳의 이야기는 영원히 간직될 것입니다. 이곳에서의 경험이 여러분의 일상에 작은 감동과 영감을 더해주길 바랍니다. 바르셀로나는 언제든 여러분을 다시 환영할 것입니다. 감사합니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "바르셀로나 프리미엄 Restaurant 추천 74",
-        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "바르셀로나의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:06.533Z",
-    "updatedAt": "2026-02-22T18:06:01.518Z"
+    "updatedAt": "2026-02-22T20:01:00.535Z"
   },
   {
     "id": "singapore_item_44",
@@ -8376,60 +4706,60 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:01.446Z"
   },
   {
-    "id": "tivoli_gardens",
-    "cityId": "copenhagen",
-    "name": "Tivoli Gardens",
-    "lat": 55.673686,
-    "lng": 12.568105,
-    "radius": 100,
-    "narration": "자, 눈을 감고 코펜하겐의 심장, 티볼리 공원으로 시간 여행을 떠나볼까요? 1843년, 동화 속에서 막 튀어나온 듯한 이 마법의 정원이 문을 연 순간을 상상해보세요. 지금 여러분의 발 아래에는 수백 년의 이야기가 켜켜이 쌓여 있습니다. 발걸음을 옮길 때마다 들려오는 아이들의 웃음소리, 롤러코스터가 바람을 가르는 짜릿한 비명, 그리고 달콤한 솜사탕 냄새가 코를 간지럽히는 듯하죠? 티볼리 공원은 단순한 놀이공원이 아니에요. 덴마크 사람들의 삶 속에 깊숙이 뿌리내린 소중한 추억이자, 전 세계에서 온 여행자들의 가슴 속에 영원히 기억될 아름다운 이야기랍니다. 밤이 되면 수천 개의 전구가 켜지면서 공원은 더욱 황홀한 모습으로 변신해요. 마치 밤하늘의 별들이 땅으로 내려와 춤을 추는 듯한 환상적인 광경이 펼쳐지죠. 아름다운 정원을 거닐며, 형형색색의 꽃들이 뿜어내는 향기에 취해보세요. 잠시 벤치에 앉아, 길거리 악사들의 연주를 감상하며 여유를 만끽하는 건 어때요? 아니면 스릴 넘치는 놀이기구에 몸을 맡기고, 스트레스를 날려버리는 것도 좋겠죠. 티볼리 공원은 여러분에게 잊지 못할 특별한 경험을 선사할 거예요. 자, 이제 티볼리 공원의 문을 활짝 열고, 마법 같은 시간 속으로 함께 떠나볼까요?",
-    "description": "One of the world's oldest and most beautiful amusement parks",
-    "category": "Amusement Park",
-    "detailedDescription": "티볼리 공원은 1843년에 문을 연 세계에서 가장 오래된 놀이공원 중 하나입니다. 덴마크의 왕 크리스티안 8세의 허가를 받아 게오르그 카르스텐센에 의해 건설되었죠. 카르스텐센은 '사람들이 즐거움을 느끼면 정치를 잊을 것이다'라는 신념을 가지고 있었고, 티볼리 공원은 이러한 그의 철학을 반영하고 있습니다. 공원 내에는 다양한 테마의 정원, 놀이기구, 레스토랑, 극장 등이 있으며, 특히 밤에는 수천 개의 전구로 장식되어 낭만적인 분위기를 자아냅니다. 현지인들은 티볼리 공원을 '프리하벤(Frihavnen, 자유항)' 지역에 있다고 말하는데, 과거 이곳이 자유 무역 지역이었던 것에서 유래했습니다. 꿀팁 하나 드릴까요? 티볼리 공원에서는 계절마다 특별한 축제가 열리는데, 크리스마스 시즌에는 아름다운 크리스마스 마켓이 열리고, 할로윈 시즌에는 오싹한 분위기로 변신합니다. 또한, 매주 토요일 밤에는 화려한 불꽃놀이가 펼쳐지니, 시간을 맞춰 방문하면 더욱 특별한 경험을 할 수 있을 거예요. 티볼리 공원은 단순한 놀이공원을 넘어, 덴마크 문화와 역사를 엿볼 수 있는 소중한 공간입니다.",
+    "id": "old_town_square",
+    "cityId": "prague",
+    "name": "Old Town Square",
+    "lat": 50.087465,
+    "lng": 14.421254,
+    "radius": 90,
+    "narration": "자, 눈을 감고 프라하의 심장, 구시가지 광장에 서 있다고 상상해보세요. 따스한 햇살이 뺨을 간지럽히고, 코끝에는 갓 구운 뜨르들로의 달콤한 냄새가 스며듭니다. 광장을 가득 메운 사람들의 웅성거림, 거리 악사의 활기찬 연주 소리, 그리고 저 멀리 천문 시계탑에서 울려 퍼지는 종소리가 귓가를 맴돌죠. 지금 여러분의 발 아래에는 수백 년의 역사가 고스란히 담긴 돌길이 놓여 있습니다. 중세 시대부터 이어져 온 이 광장은 왕들의 대관식이 거행되던 곳이자, 중요한 정치적 사건들이 펼쳐지던 역사의 무대였습니다. 잠시 시간을 거슬러 올라가 볼까요? 얀 후스의 숭고한 순교, 합스부르크 왕가의 화려한 축제, 그리고 벨벳 혁명의 함성이 이 광장을 가득 채웠던 순간들을요. 광장 한가운데 우뚝 솟은 얀 후스 기념비는 그의 용기와 신념을 기리는 상징입니다. 그의 강렬한 눈빛을 따라 시선을 옮기면, 고딕 양식의 틴 성당이 웅장한 자태를 드러냅니다. 두 개의 첨탑이 하늘을 향해 뻗어 오른 모습은 마치 중세 시대의 동화 속 성을 연상시키죠. 이제 고개를 들어 천문 시계탑을 올려다보세요. 매 시 정각, 12사도가 모습을 드러내는 경이로운 광경이 펼쳐집니다. 수백 년 동안 시간을 지켜온 이 시계는 단순한 기계 장치를 넘어 프라하의 정신을 상징하는 존재입니다. 잠시 숨을 고르고, 광장을 가득 채운 활기찬 에너지를 느껴보세요. 이곳은 단순한 관광 명소가 아닌, 프라하 시민들의 삶과 문화가 살아 숨 쉬는 공간입니다. 광장 곳곳에 자리 잡은 카페에 앉아 커피 한 잔을 즐기며, 프라하의 낭만을 만끽해보는 건 어떨까요?",
+    "description": "Historic square with the famous Astronomical Clock",
+    "category": "Historic Square",
+    "detailedDescription": "프라하 구시가지 광장은 단순히 아름다운 광장을 넘어, 체코 역사의 숨결이 살아 숨 쉬는 곳입니다. 12세기부터 형성된 이 광장은 중세 시대에는 시장으로, 이후에는 정치, 문화, 사회의 중심지로 발전해왔습니다. 광장의 가장 큰 자랑거리는 단연 천문 시계탑입니다. 1410년에 제작된 이 시계는 천동설에 기반하여 태양, 달, 별자리의 움직임을 보여주는 복잡한 장치로, 매 시 정각에 12사도가 등장하는 쇼는 놓칠 수 없는 볼거리입니다. 틴 성당 또한 빼놓을 수 없는 명소입니다. 두 개의 첨탑은 각각 아담과 이브를 상징하며, 성당 내부에는 다양한 예술 작품과 역사적 유물이 보관되어 있습니다. 얀 후스 기념비는 종교 개혁가 얀 후스를 기리는 기념물로, 그의 숭고한 희생을 기리고 있습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 크리스마스 시즌에 구시가지 광장을 방문하면, 잊지 못할 추억을 만들 수 있습니다. 아름다운 크리스마스 마켓이 열리고, 거대한 크리스마스 트리가 광장을 환하게 밝히죠. 따뜻한 와인 한 잔을 마시며 크리스마스 분위기를 만끽해보세요. 숨겨진 비화: 구시가지 광장 지하에는 비밀 통로가 존재한다는 이야기가 전해집니다. 중세 시대에 귀족들이 적들의 눈을 피해 이동하기 위해 만들었다고 하는데, 아직까지 그 정확한 위치는 밝혀지지 않았습니다. 프라하를 방문하신다면, 구시가지 광장에서 시간을 보내며 역사와 문화를 느껴보시길 바랍니다.",
     "photos": [
-      "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800",
-      "https://images.unsplash.com/photo-1552560880-2482cef14240?w=800",
-      "https://images.unsplash.com/photo-1533582064595-1b6f8c0a8e92?w=800"
+      "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800",
+      "https://images.unsplash.com/photo-1458150945447-7fb764c11a92?w=800",
+      "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800"
     ],
-    "historicalInfo": "Tivoli Gardens was founded on August 15, 1843 by Georg Carstensen. He persuaded King Christian VIII to let him create the park, arguing that \"when the people are amusing themselves, they do not think about politics.\" The park quickly became popular and has remained a beloved institution in Danish culture.",
-    "yearBuilt": "1843",
-    "architect": "Georg Carstensen",
+    "historicalInfo": "The Old Town Square has been Prague's principal public square since the 10th century. It has witnessed numerous historical events including demonstrations, celebrations, and public executions. The square became the center of Prague's economic and political life during the Middle Ages.",
+    "yearBuilt": "10th century",
+    "architect": "Various architects over centuries",
     "translations": {
       "en": {
-        "name": "Tivoli Gardens",
-        "narration": "Welcome to Tivoli Gardens, one of the world's oldest operating amusement parks. This enchanting garden has been delighting visitors since 1843 with its rides, beautiful gardens, and magical atmosphere.",
-        "description": "One of the world's oldest and most beautiful amusement parks",
-        "detailedDescription": "Tivoli Gardens is a world-famous amusement park and pleasure garden in Copenhagen. Opened in 1843, it is the third-oldest operating amusement park in the world and has inspired countless theme parks, including Disneyland. Walt Disney himself visited Tivoli several times and drew inspiration for his own parks. Tivoli combines traditional fairground rides with beautifully landscaped gardens, outdoor entertainment, and cultural attractions. The park features over 30 attractions including vintage wooden roller coasters, modern thrill rides, a carousel from 1943, and the famous Vertigo. Beyond the rides, Tivoli is renowned for its stunning gardens with thousands of flowers, illuminated at night by over 115,000 colored lights. The park hosts concerts at the open-air stage and concert hall, pantomime performances at the Peacock Theatre, and various cultural events throughout the year. During Halloween and Christmas, Tivoli transforms into a magical wonderland with special decorations and events. The park has become an integral part of Copenhagen culture and is visited by locals and tourists alike.",
-        "historicalInfo": "Tivoli Gardens was founded on August 15, 1843 by Georg Carstensen. He persuaded King Christian VIII to let him create the park, arguing that \"when the people are amusing themselves, they do not think about politics.\" The park quickly became popular and has remained a beloved institution in Danish culture.",
-        "yearBuilt": "1843",
-        "architect": "Georg Carstensen"
+        "name": "Old Town Square",
+        "narration": "Welcome to Old Town Square, the historic heart of Prague. This beautiful square features the famous Astronomical Clock and stunning architecture spanning multiple centuries.",
+        "description": "Historic square with the famous Astronomical Clock",
+        "detailedDescription": "The Old Town Square is a historic square in the Old Town quarter of Prague, the capital of the Czech Republic. It is located between Wenceslas Square and Charles Bridge. The square features various architectural styles including Gothic, Renaissance, Baroque, and Rococo. The centerpiece is the Church of Our Lady before Týn with its distinctive twin towers. The square also features the Old Town Hall with the famous Prague Astronomical Clock, which dates from 1410. This clock is one of the oldest and most elaborate astronomical clocks in the world. Every hour, crowds gather to watch the clock's hourly show of moving Apostle figures and other sculptures. The square has been a witness to many important events in Czech history. A memorial in the pavement marks the spot where 27 Czech nobles were executed in 1621 following the Battle of White Mountain. Today, Old Town Square is a vibrant gathering place with outdoor cafes, seasonal markets, and street performers.",
+        "historicalInfo": "The Old Town Square has been Prague's principal public square since the 10th century. It has witnessed numerous historical events including demonstrations, celebrations, and public executions. The square became the center of Prague's economic and political life during the Middle Ages.",
+        "yearBuilt": "10th century",
+        "architect": "Various architects over centuries"
       },
       "ko": {
-        "name": "티볼리 공원",
-        "narration": "세계에서 가장 오래된 놀이공원 중 하나인 티볼리 공원에 오신 것을 환영합니다. 이 매혹적인 정원은 1843년부터 놀이기구, 아름다운 정원, 마법 같은 분위기로 방문객들을 즐겁게 하고 있습니다.",
-        "description": "세계에서 가장 오래되고 아름다운 놀이공원 중 하나",
-        "detailedDescription": "티볼리 공원은 코펜하겐의 세계적으로 유명한 놀이공원이자 유원지입니다. 1843년에 개장한 이 공원은 세계에서 세 번째로 오래된 운영 중인 놀이공원이며 디즈니랜드를 포함한 수많은 테마파크에 영감을 주었습니다. 월트 디즈니 자신도 티볼리를 여러 번 방문했고 자신의 공원을 위한 영감을 얻었습니다. 티볼리는 전통적인 놀이기구를 아름답게 조경된 정원, 야외 엔터테인먼트, 문화 명소와 결합합니다. 공원에는 빈티지 목조 롤러코스터, 현대적인 스릴 놀이기구, 1943년 회전목마, 유명한 버티고를 포함한 30개 이상의 명소가 있습니다. 놀이기구 외에도 티볼리는 수천 송이의 꽃이 있는 멋진 정원으로 유명하며, 밤에는 115,000개 이상의 컬러 조명으로 조명됩니다. 공원은 야외 무대와 콘서트홀에서 콘서트, 피코크 극장에서 무언극 공연, 그리고 연중 다양한 문화 행사를 개최합니다. 할로윈과 크리스마스 기간에는 티볼리가 특별한 장식과 행사로 마법의 원더랜드로 변합니다. 공원은 코펜하겐 문화의 필수적인 부분이 되었으며 현지인과 관광객 모두가 방문합니다.",
-        "historicalInfo": "티볼리 공원은 1843년 8월 15일 게오르그 카르스텐센에 의해 설립되었습니다. 그는 \"사람들이 즐기고 있을 때 정치에 대해 생각하지 않는다\"고 주장하며 크리스티안 8세 왕을 설득하여 공원을 만들도록 했습니다. 공원은 빠르게 인기를 얻었고 덴마크 문화에서 사랑받는 기관으로 남아 있습니다.",
-        "yearBuilt": "1843년",
-        "architect": "게오르그 카르스텐센"
+        "name": "구시가지 광장",
+        "narration": "프라하의 역사적 중심인 구시가지 광장에 오신 것을 환영합니다. 이 아름다운 광장에는 유명한 천문 시계와 여러 세기에 걸친 멋진 건축물이 있습니다.",
+        "description": "유명한 천문 시계가 있는 역사적인 광장",
+        "detailedDescription": "구시가지 광장은 체코 공화국의 수도 프라하의 구시가지 지구에 있는 역사적인 광장입니다. 바츨라프 광장과 카를교 사이에 위치합니다. 광장에는 고딕, 르네상스, 바로크, 로코코 등 다양한 건축 양식이 있습니다. 중심에는 독특한 쌍둥이 탑이 있는 틴 성모 교회가 있습니다. 광장에는 또한 1410년부터 있는 유명한 프라하 천문 시계가 있는 구시청사가 있습니다. 이 시계는 세계에서 가장 오래되고 정교한 천문 시계 중 하나입니다. 매시간 군중이 모여 움직이는 사도 인형과 기타 조각품의 시계 쇼를 봅니다. 광장은 체코 역사의 많은 중요한 사건의 증인이었습니다. 포장도로의 기념비는 백산 전투 이후 1621년에 27명의 체코 귀족이 처형된 장소를 표시합니다. 오늘날 구시가지 광장은 야외 카페, 계절 시장, 거리 공연자들이 있는 활기찬 모임 장소입니다.",
+        "historicalInfo": "구시가지 광장은 10세기부터 프라하의 주요 공공 광장이었습니다. 시위, 축하 행사, 공개 처형을 포함한 수많은 역사적 사건을 목격했습니다. 광장은 중세 시대에 프라하의 경제 및 정치 생활의 중심이 되었습니다.",
+        "yearBuilt": "10세기",
+        "architect": "여러 세기에 걸친 다양한 건축가"
       },
       "ja": {
-        "name": "チボリ公園",
-        "narration": "世界最古の遊園地の一つ、チボリ公園へようこそ。この魅惑的な庭園は1843年以来、乗り物、美しい庭園、魔法のような雰囲気で訪問者を楽しませてきました。",
-        "description": "世界で最も古く美しい遊園地の一つ",
-        "detailedDescription": "チボリ公園は、コペンハーゲンにある世界的に有名な遊園地および遊園地です。1843年に開園し、世界で3番目に古い運営中の遊園地であり、ディズニーランドを含む無数のテーマパークにインスピレーションを与えてきました。ウォルト・ディズニー自身も何度かチボリを訪れ、自分のパークのインスピレーションを得ました。チボリは伝統的な遊園地の乗り物と美しく造園された庭園、屋外エンターテインメント、文化的アトラクションを組み合わせています。公園には、ビンテージの木製ジェットコースター、現代的なスリルライド、1943年のメリーゴーランド、有名なバーティゴを含む30以上のアトラクションがあります。乗り物以外にも、チボリは数千の花がある見事な庭園で有名であり、夜には115,000以上のカラーライトで照らされます。公園は野外ステージとコンサートホールでコンサート、ピーコックシアターでパントマイムパフォーマンス、年間を通じてさまざまな文化イベントを開催しています。ハロウィンとクリスマスの期間中、チボリは特別な装飾とイベントで魔法の国に変わります。公園はコペンハーゲン文化の不可欠な部分となり、地元の人々と観光客の両方が訪れています。",
-        "historicalInfo": "チボリ公園は1843年8月15日にゲオルグ・カールステンセンによって設立されました。彼は「人々が楽しんでいるとき、彼らは政治について考えない」と主張して、クリスチャン8世王を説得し、公園を作ることを許可させました。公園はすぐに人気を博し、デンマーク文化において愛される機関であり続けています。",
-        "yearBuilt": "1843年",
-        "architect": "ゲオルグ・カールステンセン"
+        "name": "旧市街広場",
+        "narration": "プラハの歴史的中心である旧市街広場へようこそ。この美しい広場には有名な天文時計と数世紀にわたる素晴らしい建築があります。",
+        "description": "有名な天文時計がある歴史的な広場",
+        "detailedDescription": "旧市街広場は、チェコ共和国の首都プラハの旧市街地区にある歴史的な広場です。ヴァーツラフ広場とカレル橋の間に位置しています。広場にはゴシック、ルネサンス、バロック、ロココなど、さまざまな建築様式があります。中心には、特徴的な双塔を持つティーン教会があります。広場にはまた、1410年からある有名なプラハの天文時計がある旧市庁舎があります。この時計は世界で最も古く精巧な天文時計の一つです。毎時、群衆が集まって動く使徒の人形やその他の彫刻の時計のショーを見ます。広場はチェコの歴史の多くの重要な出来事の証人でした。舗装の記念碑は、白山の戦いの後の1621年に27人のチェコ貴族が処刑された場所を示しています。今日、旧市街広場は屋外カフェ、季節の市場、ストリートパフォーマーがいる活気のある集まりの場所です。",
+        "historicalInfo": "旧市街広場は10世紀からプラハの主要な公共広場でした。デモ、祝賀、公開処刑を含む多くの歴史的出来事を目撃しました。広場は中世にプラハの経済的および政治的生活の中心になりました。",
+        "yearBuilt": "10世紀",
+        "architect": "数世紀にわたるさまざまな建築家"
       },
       "zh": {
-        "name": "趣伏里公园",
-        "narration": "欢迎来到趣伏里公园，世界上最古老的运营游乐园之一。这个迷人的花园自1843年以来一直以其游乐设施、美丽的花园和神奇的氛围让游客流连忘返。",
-        "description": "世界上最古老、最美丽的游乐园之一",
-        "detailedDescription": "趣伏里公园是哥本哈根世界著名的游乐园和游乐场。它于1843年开放，是世界上第三古老的运营游乐园，并激发了包括迪士尼乐园在内的无数主题公园的灵感。华特·迪士尼本人多次访问趣伏里，并从中获得了自己公园的灵感。趣伏里将传统的游乐场设施与美丽的景观花园、户外娱乐和文化景点相结合。公园拥有30多个景点，包括复古木制过山车、现代惊险游乐设施、1943年的旋转木马和著名的眩晕塔。除了游乐设施外，趣伏里还以其拥有数千朵鲜花的迷人花园而闻名，夜晚由115,000多盏彩灯照亮。公园在露天舞台和音乐厅举办音乐会，在孔雀剧院举办哑剧表演，全年举办各种文化活动。在万圣节和圣诞节期间，趣伏里会通过特殊的装饰和活动变成一个神奇的仙境。公园已成为哥本哈根文化不可分割的一部分，当地人和游客都会前来参观。",
-        "historicalInfo": "趣伏里公园于1843年8月15日由乔治·卡斯滕森创立。他说服克里斯蒂安八世国王让他创建公园，理由是\"当人们娱乐时，他们不会考虑政治。\"公园迅速流行起来，并一直是丹麦文化中深受喜爱的机构。",
-        "yearBuilt": "1843年",
-        "architect": "乔治·卡斯滕森"
+        "name": "老城广场",
+        "narration": "欢迎来到老城广场,布拉格的历史中心。这个美丽的广场拥有著名的天文钟和横跨数个世纪的令人惊叹的建筑。",
+        "description": "拥有著名天文钟的历史广场",
+        "detailedDescription": "老城广场是捷克共和国首都布拉格老城区的一个历史广场。它位于瓦茨拉夫广场和查理大桥之间。广场展现了包括哥特式、文艺复兴、巴洛克和洛可可在内的各种建筑风格。中心是提恩教堂,其标志性的双塔。广场还有老市政厅,拥有著名的布拉格天文钟,可追溯到1410年。这座钟是世界上最古老和最精致的天文钟之一。每个小时,人群聚集观看钟表的移动使徒人物和其他雕塑的表演。广场见证了捷克历史上的许多重要事件。人行道上的纪念碑标志着白山战役后1621年27名捷克贵族被处决的地点。今天,老城广场是一个充满活力的聚会场所,有户外咖啡馆、季节性市场和街头表演者。",
+        "historicalInfo": "老城广场自10世纪以来一直是布拉格的主要公共广场。它见证了包括示威、庆祝活动和公开处决在内的众多历史事件。广场在中世纪成为布拉格经济和政治生活的中心。",
+        "yearBuilt": "10世纪",
+        "architect": "几个世纪以来的各种建筑师"
       }
     },
     "openingHours": null,
@@ -8442,176 +4772,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:29.738Z",
-    "updatedAt": "2026-02-22T18:20:39.887Z"
-  },
-  {
-    "id": "뉴욕-demo-2",
-    "cityId": "new-york",
-    "name": "뉴욕의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "자, 상상해보세요. 지금 여러분은 뉴욕의 심장, 그중에서도 가장 맛있는 냄새로 가득한 골목길 초입에 서 있습니다. 코를 간지럽히는 달콤한 빵 굽는 냄새, 매콤한 양념이 지글거리는 소리, 갓 내린 에스프레소의 깊고 풍부한 향까지. 이 모든 감각이 뒤섞여 여러분을 유혹하는 곳, 바로 뉴욕 맛집 골목입니다. 발 아래 깔린 낡은 벽돌 길을 따라 천천히 걸어보세요. 양 옆으로는 세월의 흔적이 고스란히 느껴지는 건물들이 빽빽하게 들어서 있죠. 마치 시간 여행을 떠나온 듯한 기분이 들 거예요. 자그마한 가게들은 저마다 개성 넘치는 간판을 내걸고 손님들을 맞이합니다. 어떤 곳은 수십 년째 같은 자리를 지켜온 노포 맛집이고, 또 다른 곳은 젊은 셰프들의 실험 정신이 돋보이는 트렌디한 레스토랑이죠. 잠시 멈춰 서서 귀를 기울여 보세요. 활기찬 사람들의 웃음소리, 접시 부딪히는 소리, 맛있는 음식을 칭찬하는 소리가 끊이지 않고 들려올 거예요. 이 골목은 단순히 음식을 파는 곳이 아니라, 뉴욕 사람들의 삶과 문화가 녹아 있는 특별한 공간입니다. 눈을 감고 깊게 숨을 들이쉬어 보세요. 지금 여러분은 뉴욕의 진짜 맛을 경험하고 있는 겁니다. 자, 이제 어디부터 맛볼까요? 선택은 여러분의 몫입니다!",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "뉴욕 맛집 골목은 단순한 식당가를 넘어, 뉴욕의 다채로운 문화를 압축적으로 보여주는 공간입니다. 이곳은 수십 년 된 이탈리아 레스토랑부터 최근에 문을 연 퓨전 음식점까지, 다양한 종류의 식당들이 공존하며 독특한 분위기를 자아냅니다. 현지인들은 물론 관광객들에게도 사랑받는 명소이지만, 몇몇 숨겨진 맛집들은 여전히 현지인들만 아는 비밀스러운 장소로 남아있습니다. 예를 들어, 골목 안쪽에 위치한 작은 델리에서는 '뉴욕 최고의 루벤 샌드위치'라고 불리는 메뉴를 맛볼 수 있습니다. 또 다른 숨겨진 명소는 간판도 없는 작은 바인데, 이곳에서는 세계 각국의 희귀한 맥주와 독특한 칵테일을 즐길 수 있습니다. 이 골목의 진짜 매력은 단순히 맛있는 음식을 먹는 것을 넘어, 뉴욕 사람들의 일상 속으로 깊숙이 들어갈 수 있다는 점입니다. 식당 주인과 이야기를 나누고, 옆 테이블 손님과 웃으며 인사를 나누는 경험은 다른 곳에서는 쉽게 얻을 수 없는 특별한 추억이 될 것입니다. 뉴욕을 방문한다면 꼭 이 골목을 방문하여, 진짜 뉴욕의 맛과 문화를 경험해보세요! 꿀팁 하나: 점심시간이나 저녁시간에는 매우 혼잡하므로, 조금 일찍 방문하거나 예약을 하는 것이 좋습니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "뉴욕의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:57:48.037Z",
-    "updatedAt": "2026-02-22T18:16:40.419Z"
-  },
-  {
-    "id": "barcelona_item_33",
-    "cityId": "barcelona",
-    "name": "바르셀로나 프리미엄 Restaurant 추천 34",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 바르셀로나 프리미엄 레스토랑 추천 34에 오신 걸 환영합니다! 이곳은 바르셀로나의 심장부에서 빛나는 보석과도 같습니다. 먼저, 눈을 감고 상상해 보세요. 당신은 매혹적인 고딕 건물들 사이를 지나, 이 레스토랑의 문턱에 서 있습니다. 그리고 문을 여는 순간, 눈부신 샹들리에가 반짝이며 당신을 맞이합니다. 귀에는 연주의 달콤한 멜로디가 울리고, 공기 중에는 신선한 바질과 레몬의 향기가 조화를 이루어 퍼집니다. 이곳은 단순한 식당이 아닙니다. 이는 마치 시간 여행을 하는 듯, 감각을 자극하는 장소입니다. 자, 이제 그 역사를 통해 이 멋진 장소를 깊이 탐험해 봅시다!\n\n이 레스토랑은 19세기 후반, 바르셀로나의 문화적 르네상스 시기에 세워졌습니다. 당시 스페인은 격변의 시기를 맞이하고 있었고, 이곳은 혁신적 사고와 예술적 제작의 중심지로 부상하였습니다. 레스토랑의 설립자는 당시의 유명한 건축가였던 마르셀로 라미레스였습니다. 그는 현대적 미학과 고전적 아름다움을 조화롭게 결합한 공간을 창조하고자 했습니다. 그의 작품은 바르셀로나의 정체성을 새롭게 정의하며, 도시의 고유한 매력을 전 세계에 알렸습니다. \n\n하지만 마르셀로의 이야기는 여기서 끝나지 않습니다. 그는 그야말로 혁신의 아이콘이었습니다. 1901년 어느 날, 마르셀로는 그 당시 가장 영향력 있는 문화예술가들을 초대하여 운영 기념 파티를 열었습니다. 이 자리에서 그는 예술과 요리가 결합된 독특한 경험을 선보였고, 이는 곧 유럽 전역에 화제의 중심이 되었습니다. 이 자리에서 많은 예술적 협업이 이루어졌고, 이는 오늘날까지도 이 레스토랑의 독창적 요리 철학에 뿌리 깊게 자리잡고 있습니다.\n\n이제 건축적 경이로움을 더욱 깊이 들여다보겠습니다. 레스토랑의 외관은 고딕 양식과 자연주의적 요소가 결합된 독특한 디자인을 자랑합니다. 특히, 벽돌의 배열은 단순히 장식적인 요소를 넘어서 기술적 혁신으로 칭송받았습니다. 이 벽돌은 특별한 열처리를 통해 내구성과 아름다움을 동시에 유지함으로써, 오늘날에도 그 견고함을 자랑합니다.\n\n그리고 여러분, 비밀을 하나 알려 드릴까요? 벽의 가장자리에는 눈에 잘 띄지 않는 작은 문양들이 새겨져 있습니다. 이는 마르셀로가 그 시기에 마주한 개인적 시련과 기쁨을 상징적으로 표현한 것입니다. 사실, 이는 그가 남긴 '시간의 연대기'로 불리며, 바르셀로나의 역사와 문화를 이해하는 데 중요한 열쇠로 작용합니다.\n\n현대에 이르러, 레스토랑은 새로운 생명을 얻게 되었습니다. 1980년대 말, 한 젊은 연구가가 이곳의 가치와 잠재력을 발견하며 복원 프로젝트를 추진했습니다. 초기에는 다소 회의적인 시선도 있었지만, 이내 지역 사회와 관광객 모두의 사랑을 받으며, 현재의 웅장함을 되찾았습니다.\n\n그리고 여러분, 이곳은 영화와 드라마의 무대로도 자주 등장하죠. 수많은 유명 배우들이 이곳에서 촬영을 진행하며, 다양한 에피소드를 남겼습니다. 한 번은 유명 배우가 대사 외우기를 미루고 이곳의 명물 요리인 '가르비의 파에야'를 먹다가 촬영이 지연된 일화도 있습니다. 이런 재미있는 일화는 이곳을 방문하는 관광객들에게 또 다른 즐거운 경험을 선사합니다.\n\n이제 이 레스토랑의 철학적 의미를 생각해봅시다. 이는 단순히 음식을 맛보는 장소를 넘어, 시대와 예술이 교차하는 만남의 장입니다. 그리고 바르셀로나의 독특한 문화적 정체성을 고스란히 담고 있는 살아있는 역사입니다.\n\n여러분, 이제 이 여행의 끝자락에 이르렀습니다. 이 레스토랑은 우리에게 단순한 공간 이상의 의미를 제공합니다. 이곳에서의 경험은 우리의 감각을 깨우고, 역사의 흐름 속에서 우리의 위치를 다시금 생각하게 합니다. 바르셀로나 프리미엄 레스토랑 추천 34, 여러분의 기억 속에 오래 남을 것입니다. 다음에 다시 방문할 때까지 건강을 기원하며, 안녕히 계세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "바르셀로나 프리미엄 Restaurant 추천 34",
-        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "바르셀로나의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:03.783Z",
-    "updatedAt": "2026-02-22T18:06:01.643Z"
-  },
-  {
-    "id": "tokyo_item_49",
-    "cityId": "tokyo",
-    "name": "TOKYO Premium Restaurant 49",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "상상해보세요. 지금 당신은 도쿄의 심장부에 자리한, 숨 막히는 아름다움을 자랑하는 'Restaurant 49' 앞에 서 있습니다. 해 질 녘, 황금빛 노을이 유리창을 통해 따스하게 쏟아져 들어오는 풍경을요. 코끝을 간지럽히는 은은한 허브 향과 갓 구운 빵 냄새가 당신을 부드럽게 감싸 안습니다. 마치 오래된 친구가 건네는 따뜻한 포옹처럼. 레스토랑 안으로 발을 내딛는 순간, 시간 여행을 떠나는 듯한 기분이 들 거예요. 앤티크 가구와 섬세하게 장식된 식기들이 고풍스러운 분위기를 자아내고, 벽에는 이 레스토랑의 오랜 역사를 증명하듯 빛바랜 사진들이 걸려 있습니다. 종업원의 친절한 안내를 받으며 자리에 앉으면, 눈앞에는 도쿄의 아름다운 야경이 파노라마처럼 펼쳐집니다. 귓가에는 잔잔한 클래식 음악이 흐르고, 테이블 위에는 정갈하게 세팅된 커트러리가 은은하게 빛나죠. 지금 당신의 손에는 부드러운 감촉의 메뉴판이 들려 있습니다. 메뉴를 펼치는 순간, 당신은 미식의 세계로 빠져들게 될 거예요. 신선한 제철 재료로 만든 창의적인 요리들은 눈으로 보기에도 황홀하지만, 입안에 넣는 순간 혀끝에서 펼쳐지는 맛의 향연은 그야말로 예술입니다. 섬세한 손길로 만들어진 소스와 식재료의 조화는 당신의 미각을 완전히 사로잡을 겁니다. 와인 한 모금을 음미하며 천천히 음식을 즐기는 동안, 당신은 마치 영화 속 주인공이 된 듯한 특별한 기분을 느낄 수 있을 거예요. 이곳 Restaurant 49는 단순한 식사를 넘어, 오감을 만족시키는 특별한 경험을 선사하는 곳입니다. 도쿄 여행에서 잊지 못할 추억을 만들고 싶다면, 꼭 한번 방문해보세요. 분명 당신의 기대를 훨씬 뛰어넘는 감동을 받을 수 있을 겁니다. 자, 지금 바로 Restaurant 49에서 당신만의 특별한 스토리를 만들어보세요!",
-    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "Restaurant 49는 단순히 아름다운 풍경을 감상하며 식사를 즐길 수 있는 곳이 아닙니다. 이곳은 도쿄의 역사와 문화를 고스란히 간직한 특별한 공간입니다. 1949년에 문을 연 이후, Restaurant 49는 수많은 예술가, 정치가, 유명 인사들의 사랑을 받아왔습니다. 벽에 걸린 사진들은 그들의 발자취를 생생하게 보여주죠. 현지인들 사이에서는 '약속의 장소'로도 유명합니다. 중요한 비즈니스 미팅이나 특별한 데이트를 위해 많은 사람들이 이곳을 찾습니다. 레스토랑의 숨겨진 이야기가 하나 더 있습니다. 전해지는 이야기에 따르면, Restaurant 49의 창업주는 세계 2차 대전 당시 폐허가 된 도쿄에서 희망을 잃지 않고 이 레스토랑을 세웠다고 합니다. 그의 굳은 의지와 열정은 레스토랑 곳곳에 스며들어 있으며, 방문객들에게 깊은 감동을 선사합니다. Restaurant 49를 방문할 때는 반드시 예약하는 것이 좋습니다. 특히 저녁 시간대에는 창가 자리를 확보하기가 매우 어렵습니다. 예약을 할 때 특별한 기념일이라고 언급하면, 레스토랑에서 깜짝 이벤트를 준비해 줄 수도 있습니다. 그리고, 이곳의 숨겨진 메뉴, '셰프 스페셜'을 꼭 맛보세요. 메뉴판에는 없지만, 그날 가장 신선한 재료로 만든 특별한 요리를 맛볼 수 있습니다. Restaurant 49는 단순한 레스토랑이 아닌, 도쿄의 역사와 문화를 경험하고 특별한 추억을 만들 수 있는 공간입니다. 당신의 도쿄 여행을 더욱 풍성하게 만들어줄 Restaurant 49에서 잊지 못할 시간을 보내세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "TOKYO Premium Restaurant 49",
-        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:04.866Z",
-    "updatedAt": "2026-02-22T18:22:32.110Z"
-  },
-  {
-    "id": "sentosa-island",
-    "cityId": "singapore",
-    "name": "Sentosa Island",
-    "lat": 1.249404,
-    "lng": 103.830321,
-    "radius": 100,
-    "narration": "자, 눈을 감고 상상해보세요. 따스한 햇살이 여러분의 피부를 부드럽게 감싸고, 발 아래로는 부드럽고 하얀 모래가 느껴지는 센토사 섬에 와 있다고! 코 끝을 간지럽히는 짭짤한 바다 내음과 함께 저 멀리서 들려오는 파도 소리는 마치 자연이 연주하는 아름다운 교향곡 같아요. 지금 여러분은 싱가포르의 숨겨진 보석, 센토사 섬에 와 계십니다. 단순히 아름다운 해변과 럭셔리한 리조트만 있는 곳이 아니에요. 이곳은 짜릿한 액티비티와 스릴 넘치는 어드벤처, 그리고 잊지 못할 추억이 가득한 마법 같은 섬이죠. \n\n센토사 섬에 도착하면 가장 먼저 실로소 비치(Siloso Beach)의 활기 넘치는 분위기가 여러분을 반길 거예요. 형형색색의 비치 바에서 흘러나오는 흥겨운 음악에 맞춰 몸을 흔들고, 시원한 칵테일 한 잔을 기울이며 여유를 만끽해보세요. 아니면 탄종 비치(Tanjong Beach)의 고요함 속에서 책을 읽거나 낮잠을 즐기며 완벽한 휴식을 취하는 건 어떠세요? 해가 질 무렵, 팔라완 비치(Palawan Beach)로 향해 보세요. 아시아 최남단 지점을 상징하는 흔들 다리를 건너, 인도양과 남중국해가 만나는 경이로운 순간을 직접 경험할 수 있답니다. \n\n하지만 센토사 섬의 매력은 여기서 끝이 아니에요. 유니버설 스튜디오 싱가포르(Universal Studios Singapore)에서는 영화 속 주인공이 되어 짜릿한 롤러코스터를 타고, S.E.A 아쿠아리움(S.E.A Aquarium)에서는 신비로운 해양 생물들을 만나보세요. 메가 어드벤처 파크(Mega Adventure Park)에서 하늘을 나는 듯한 짚라인을 타거나, iFly 싱가포르(iFly Singapore)에서 자유 낙하의 스릴을 만끽하는 것도 잊지 못할 경험이 될 거예요. 밤이 되면, 윙스 오브 타임(Wings of Time) 쇼가 펼쳐집니다. 화려한 불빛과 레이저, 그리고 웅장한 음악이 어우러진 환상적인 쇼는 여러분을 꿈결 같은 세계로 안내할 거예요. 자, 이제 센토사 섬으로 떠날 준비 되셨나요? 여러분의 마음속에 영원히 기억될 특별한 여행이 기다리고 있답니다!",
-    "description": "Island resort with beaches, attractions, and entertainment",
-    "category": "Island Resort",
-    "detailedDescription": "센토사 섬은 단순히 아름다운 휴양지를 넘어, 싱가포르 역사의 중요한 한 페이지를 장식하고 있습니다. 과거 말레이어로 '평화와 고요'를 뜻하는 'Pulau Belakang Mati' (죽음 뒤의 섬)으로 불렸던 이곳은 해적들의 은신처이자, 제2차 세계대전 당시에는 영국군의 요새로 사용되기도 했습니다. 1970년대, 싱가포르 정부는 센토사 섬을 관광지로 개발하기로 결정하고, '평화와 고요'라는 새로운 의미를 담아 센토사(Sentosa)라는 이름으로 재탄생시켰습니다.\n\n현지인들만 아는 센토사 섬 꿀팁 하나 알려드릴까요? 센토사 섬은 대중교통으로도 쉽게 접근할 수 있지만, 케이블카를 이용하면 더욱 특별한 경험을 할 수 있습니다. 싱가포르 본토에서 센토사 섬까지 이어지는 케이블카를 타고, 아름다운 해안선을 감상하며 섬으로 들어가는 것은 정말 잊지 못할 추억이 될 거예요. 특히 해질녘에 케이블카를 타면, 붉게 물든 하늘과 센토사 섬의 야경을 한눈에 담을 수 있답니다. 그리고 센토사 섬 곳곳에는 무료 셔틀 버스가 운행되고 있으니, 편리하게 섬 전체를 둘러볼 수 있다는 사실! 미리 노선도를 확인하고 효율적인 여행 계획을 세워보세요. 마지막으로, 센토사 섬의 숨겨진 명소인 '포트 실로소 스카이워크' (Fort Siloso Skywalk)를 방문해보세요. 울창한 열대 우림 위를 걷는 듯한 짜릿한 경험과 함께, 싱가포르의 아름다운 자연을 만끽할 수 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800",
-      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800"
-    ],
-    "historicalInfo": "Once a military fortress, Sentosa was redeveloped as a tourist destination in the 1970s. It has since become Singapore's premier integrated resort island with world-class attractions.",
-    "yearBuilt": "1972",
-    "architect": "Sentosa Development Corporation",
-    "translations": {
-      "en": {
-        "name": "Sentosa Island",
-        "narration": "Welcome to Sentosa Island, Singapore's premier island resort destination. This tropical paradise offers beaches, theme parks, attractions, and entertainment for the whole family.",
-        "description": "Island resort with beaches, attractions, and entertainment",
-        "historicalInfo": "Once a military fortress, Sentosa was redeveloped as a tourist destination in the 1970s. It has since become Singapore's premier integrated resort island with world-class attractions.",
-        "yearBuilt": "1972",
-        "architect": "Sentosa Development Corporation"
-      },
-      "it": {
-        "name": "Isola di Sentosa",
-        "narration": "Benvenuto all'Isola di Sentosa, la principale destinazione resort di Singapore. Questo paradiso tropicale offre spiagge, parchi a tema, attrazioni e intrattenimento per tutta la famiglia.",
-        "description": "Resort insulare con spiagge, attrazioni e intrattenimento",
-        "historicalInfo": "Un tempo fortezza militare, Sentosa è stata riconvertita come destinazione turistica negli anni '70. Da allora è diventata la principale isola resort integrata di Singapore con attrazioni di livello mondiale.",
-        "yearBuilt": "1972",
-        "architect": "Sentosa Development Corporation"
-      },
-      "ko": {
-        "name": "센토사 섬",
-        "narration": "싱가포르 최고의 섬 리조트 목적지인 센토사 섬에 오신 것을 환영합니다. 이 열대 낙원은 온 가족을 위한 해변, 테마파크, 명소, 엔터테인먼트를 제공합니다.",
-        "description": "해변, 명소, 엔터테인먼트를 갖춘 섬 리조트",
-        "historicalInfo": "한때 군사 요새였던 센토사는 1970년대에 관광지로 재개발되었습니다. 이후 세계적인 수준의 명소를 갖춘 싱가포르 최고의 통합 리조트 섬이 되었습니다.",
-        "yearBuilt": "1972",
-        "architect": "센토사 개발 공사"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:31.664Z",
-    "updatedAt": "2026-02-22T18:09:19.558Z"
+    "createdAt": "2026-02-12T12:11:28.460Z",
+    "updatedAt": "2026-02-22T20:01:00.899Z"
   },
   {
     "id": "rome_item_51",
@@ -8651,6 +4813,130 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:01.769Z"
   },
   {
+    "id": "pantheon",
+    "cityId": "rome",
+    "name": "Pantheon",
+    "lat": 41.898609,
+    "lng": 12.476873,
+    "radius": 50,
+    "narration": "여러분, 지금 눈을 감고 2천 년 전 로마로 시간 여행을 떠나볼까요? 웅장한 판테온 앞에 서 있는 여러분의 모습을 상상해보세요. 뜨거운 햇살이 광장을 가득 채우고, 사람들의 웅성거리는 소리가 귓가를 간지럽힙니다. 코를 찌르는 듯한 향긋한 꽃 향기와 구수한 빵 굽는 냄새가 섞여 미각을 자극하죠. 자, 숨을 크게 들이쉬고 눈을 떠 보세요! 바로 눈 앞에 펼쳐진 거대한 돔, 판테온이 여러분을 압도합니다. 믿기지 않겠지만, 이 건축물은 서기 126년에 완공되었다고 해요. 거의 2천 년 동안이나 이 자리를 지켜온 거죠. 지금 여러분의 발 아래에는 수많은 로마 시민들의 희로애락이 담긴 역사가 잠들어 있습니다. 한때 모든 신에게 바쳐진 신전이었던 이곳은, 시간이 흘러 기독교 교회로 변모하며 로마의 흥망성쇠를 고스란히 목격했습니다. 돔 천장의 커다란 '오쿨루스(oculus)'를 통해 쏟아지는 빛줄기를 느껴보세요. 마치 신의 축복처럼 따스하고 신성한 기운이 온몸을 감싸는 듯합니다. 비가 오는 날이면 빗물이 오쿨루스를 통해 쏟아져 들어오는데, 바닥에 설치된 배수 시설 덕분에 걱정할 필요는 없답니다. 판테온 안으로 들어가면, 라파엘로를 비롯한 수많은 예술가와 왕족들의 무덤이 자리하고 있습니다. 그들의 영혼이 판테온의 웅장함 속에서 영원히 잠들어 있는 거죠. 판테온은 단순한 건축물이 아니라, 로마의 역사와 예술, 그리고 인간의 영원한 염원을 담고 있는 살아있는 유산입니다. 이곳에서 잠시 시간을 멈추고, 고대 로마의 숨결을 느껴보세요.",
+    "description": "An architectural marvel with the world's largest unreinforced concrete dome",
+    "category": "Ancient Rome",
+    "detailedDescription": "판테온은 '모든 신에게 바쳐진 신전'이라는 뜻을 가진, 로마 건축 기술의 정수를 보여주는 건축물입니다. 원래 아그리파에 의해 건설되었으나 화재로 소실된 후, 하드리아누스 황제에 의해 서기 126년경 재건축되었습니다. 판테온의 가장 큰 특징은 직경 43.3m의 거대한 돔입니다. 이 돔은 당시로서는 상상하기 힘든 기술력으로 만들어졌으며, 돔 중앙에 있는 '오쿨루스'라는 구멍을 통해 자연광이 들어오도록 설계되었습니다. 오쿨루스는 판테온 내부를 밝히는 유일한 광원이자, 하늘과 소통하는 상징적인 통로 역할을 합니다. 판테온은 로마 제국 시대에는 신전으로 사용되었지만, 7세기 초 기독교 교회로 바뀌면서 파괴를 면하고 오늘날까지 보존될 수 있었습니다. 흥미로운 사실은, 판테온 건축 당시 콘크리트 배합에 화산재를 사용했는데, 이 화산재 덕분에 콘크리트가 더욱 단단해져 2천 년이 지난 지금도 굳건히 유지될 수 있었다는 것입니다. 판테온 내부에는 르네상스 시대의 거장 라파엘로의 무덤이 있는데, 그의 유언에 따라 이곳에 안장되었다고 합니다. 판테온 주변에는 맛있는 젤라또 가게와 레스토랑이 많으니, 방문 후 여유롭게 식사를 즐기는 것도 좋은 경험이 될 것입니다. 판테온 광장에서 종종 거리 공연이 펼쳐지기도 하니, 운이 좋다면 멋진 공연을 감상할 수도 있습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1548585744-4e87a0e84c88?w=800",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800",
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800",
+      "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800",
+      "https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800",
+      "https://images.unsplash.com/photo-1604580864964-0462f5d5b1a8?w=800",
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800"
+    ],
+    "historicalInfo": "The Pantheon is a former Roman temple and, since 609 AD, a Catholic church. It is the best-preserved of all Ancient Roman buildings and has been in continuous use throughout its history.",
+    "yearBuilt": "126 AD",
+    "architect": "Emperor Hadrian",
+    "translations": {
+      "en": {
+        "name": "Pantheon",
+        "narration": "The Pantheon is a temple dedicated to all the gods. It is a masterpiece of ancient architecture with its magnificent dome.",
+        "description": "An architectural marvel with the world's largest unreinforced concrete dome",
+        "detailedDescription": "The Pantheon stands as one of the best-preserved monuments of ancient Rome and represents one of the most influential buildings in the history of architecture. This remarkable structure, whose name derives from the Greek words \"pan\" (all) and \"theos\" (gods), meaning \"temple to all gods,\" continues to inspire architects and visitors nearly two millennia after its construction. The building we see today was commissioned by Emperor Hadrian around 126 AD, though it replaced an earlier temple built by Marcus Agrippa in 27 BC, whose name still appears in the inscription on the portico. What makes the Pantheon truly extraordinary is its massive dome, which remains the world's largest unreinforced concrete dome even after nearly 2,000 years. Measuring 43.3 meters (142 feet) in both diameter and height from the floor to the oculus, the dome creates a perfect hemisphere, embodying the Roman architectural ideal of geometric harmony. This architectural marvel was achieved through ingenious engineering techniques that modern builders still study and admire. The concrete used in construction varies in composition throughout the dome's height, with heavier aggregates like travertine and brick at the base transitioning to lighter materials like pumice at the apex, reducing the overall weight while maintaining structural integrity. The thickness of the dome also decreases from 6.4 meters at the base to just 1.2 meters at the oculus, further optimizing its weight distribution. The most striking feature of the Pantheon's interior is the oculus, a circular opening 8.2 meters (27 feet) in diameter at the dome's apex. This remarkable architectural element serves as the building's only source of natural light, creating a dramatic beam of sunlight that moves across the interior throughout the day, illuminating different architectural features and creating an ever-changing interplay of light and shadow. The oculus is open to the elements, allowing rain to enter the building, but the floor is slightly convex with drainage holes to channel water away. The symbolic significance of this opening extends beyond its practical purpose - it represents the connection between the temple and the heavens, the dwelling place of the gods to whom the building was dedicated. The Pantheon's portico features sixteen massive Corinthian columns, each carved from a single piece of Egyptian granite, standing 11.8 meters (39 feet) tall and weighing approximately 60 tons each. These columns support a triangular pediment that once contained bronze sculptures, though these were removed over the centuries. The bronze that once covered the portico ceiling beams was also stripped away, reportedly taken by Byzantine Emperor Constans II in 663 AD. The building's perfect proportions and harmonious design influenced countless structures throughout history. During the Renaissance, artists and architects like Michelangelo, Raphael, and Brunelleschi studied the Pantheon intensively, drawing inspiration from its perfect geometry and innovative construction techniques. Raphael himself is buried here, along with several Italian kings and other notable figures. In 609 AD, Byzantine Emperor Phocas gave the Pantheon to Pope Boniface IV, who converted it into a Christian church dedicated to \"St. Mary and the Martyrs,\" a transformation that ultimately saved the building from the destruction and plundering that befell many other Roman temples. This conversion to a church ensured its continuous maintenance and preservation through the medieval period and beyond. The building has witnessed numerous historical events and transformations. During the Renaissance, it briefly served as a fortress, and in the 17th century, Pope Urban VIII controversially removed the bronze from the portico to make cannons for Castel Sant'Angelo and to create Bernini's baldachin in St. Peter's Basilica, an act that gave rise to the saying \"What the barbarians didn't do, the Barberini did\" - a play on the Pope's family name. Today, the Pantheon remains an active church where Mass is celebrated, particularly on important occasions, while simultaneously serving as one of Rome's most visited tourist attractions and a burial place for distinguished Italians. The building stands as a testament to Roman engineering genius, religious continuity, and architectural perfection, continuing to inspire wonder and admiration in all who enter its sacred space and gaze up at the magnificent dome with its oculus open to the sky."
+      },
+      "it": {
+        "name": "Pantheon",
+        "narration": "Il Pantheon è un tempio dedicato a tutti gli dei. È un capolavoro dell'architettura antica con la sua magnifica cupola.",
+        "description": "Una meraviglia architettonica con la più grande cupola in calcestruzzo non armato del mondo",
+        "historicalInfo": "Il Pantheon è un antico tempio romano e, dal 609 d.C., una chiesa cattolica. È il meglio conservato di tutti gli edifici dell'antica Roma ed è stato in uso continuo per tutta la sua storia.",
+        "yearBuilt": "126 d.C.",
+        "architect": "Imperatore Adriano"
+      },
+      "ko": {
+        "name": "판테온",
+        "narration": "판테온은 모든 신들에게 헌정된 신전입니다. 웅장한 돔이 있는 고대 건축의 걸작입니다.",
+        "description": "세계에서 가장 큰 무근 콘크리트 돔을 가진 건축의 경이",
+        "detailedDescription": "판테온은 고대 로마에서 가장 잘 보존된 기념물 중 하나이며 건축사에서 가장 영향력 있는 건물 중 하나입니다. 그리스어 \"pan\"(모든)과 \"theos\"(신)에서 유래한 이름으로 \"모든 신들의 신전\"을 의미하며, 건설된 지 거의 2천 년이 지난 지금도 건축가와 방문객들에게 영감을 주고 있습니다. 오늘날 우리가 보는 건물은 서기 126년경 하드리아누스 황제가 의뢰했지만, 서기 27년 마르쿠스 아그리파가 지은 이전 신전을 대체한 것으로 그의 이름은 여전히 현관의 비문에 남아있습니다. 판테온을 진정으로 특별하게 만드는 것은 거대한 돔으로, 거의 2,000년이 지난 지금도 세계에서 가장 큰 무근 콘크리트 돔으로 남아있습니다. 바닥에서 오큘루스까지 직경과 높이가 모두 43.3미터(142피트)로 측정되는 돔은 완벽한 반구를 만들어 로마 건축의 기하학적 조화 이상을 구현합니다. 건설에 사용된 콘크리트는 돔 높이에 따라 구성이 다양하며, 바닥의 트라버틴과 벽돌 같은 무거운 골재에서 정점의 경석 같은 가벼운 재료로 전환되어 구조적 무결성을 유지하면서 전체 무게를 줄입니다. 돔의 두께도 바닥의 6.4미터에서 오큘루스의 1.2미터로 감소하여 무게 분산을 더욱 최적화합니다. 판테온 내부의 가장 인상적인 특징은 돔 꼭대기의 직경 8.2미터(27피트)의 원형 개구부인 오큘루스입니다. 이 놀라운 건축 요소는 건물의 유일한 자연광원 역할을 하며, 하루 종일 내부를 가로질러 이동하는 극적인 햇빛 기둥을 만들어 다양한 건축적 특징을 비추고 빛과 그림자의 끊임없이 변화하는 상호작용을 만들어냅니다. 방문객들은 비가 오는 날에도 오큘루스를 통해 비가 들어오는 것을 볼 수 있으며, 바닥의 배수 시스템이 물을 효과적으로 처리합니다. 방문 팁: 아침 일찍 방문하면 군중을 피하고 오큘루스를 통해 들어오는 아름다운 아침 햇살을 즐길 수 있으며, 입장료는 무료이지만 오디오 가이드는 유료입니다.",
+        "historicalInfo": "판테온은 고대 로마 신전이었으며 서기 609년부터 가톨릭 교회로 사용되고 있습니다. 고대 로마 건축물 중 가장 잘 보존되어 있으며 역사 전체에 걸쳐 지속적으로 사용되어 왔습니다.",
+        "yearBuilt": "서기 126년",
+        "architect": "하드리아누스 황제"
+      },
+      "es": {
+        "name": "Panteón",
+        "narration": "El Panteón es un templo dedicado a todos los dioses. Es una obra maestra de la arquitectura antigua con su magnífica cúpula.",
+        "description": "Una maravilla arquitectónica con la cúpula de hormigón sin refuerzo más grande del mundo",
+        "detailedDescription": "El Panteón se erige como uno de los edificios antiguos mejor conservados de Roma. Construido originalmente como templo dedicado a todos los dioses del panteón romano, esta notable estructura ha permanecido en uso continuo durante casi dos milenios. El edificio actual fue completado alrededor del año 126 d.C. bajo el emperador Adriano. La característica más impresionante es su extraordinaria cúpula de hormigón no reforzado, que sigue siendo la más grande del mundo con 43,3 metros de diámetro interior. El óculo de 8,7 metros es la única fuente de luz natural del interior.",
+        "historicalInfo": "El Panteón es un antiguo templo romano y, desde el 609 d.C., una iglesia católica. Es el mejor conservado de todos los edificios de la Antigua Roma y ha estado en uso continuo a lo largo de su historia.",
+        "yearBuilt": "126 d.C.",
+        "architect": "Emperador Adriano"
+      },
+      "fr": {
+        "name": "Panthéon",
+        "narration": "Le Panthéon est un temple dédié à tous les dieux. C'est un chef-d'œuvre de l'architecture antique avec son magnifique dôme.",
+        "description": "Une merveille architecturale avec la plus grande coupole en béton non armé du monde",
+        "detailedDescription": "Le Panthéon se dresse comme l'un des bâtiments antiques les mieux préservés de Rome. Construit à l'origine comme temple dédié à tous les dieux du panthéon romain, cette remarquable structure est restée en usage continu pendant près de deux millénaires. Le bâtiment actuel a été achevé vers 126 après J.-C. sous l'empereur Hadrien. La caractéristique la plus impressionnante est son extraordinaire dôme en béton non armé, qui reste le plus grand au monde avec un diamètre intérieur de 43,3 mètres. L'oculus de 8,7 mètres est la seule source de lumière naturelle de l'intérieur.",
+        "historicalInfo": "Le Panthéon est un ancien temple romain et, depuis 609 apr. J.-C., une église catholique. C'est le mieux conservé de tous les bâtiments de la Rome antique et a été en usage continu tout au long de son histoire.",
+        "yearBuilt": "126 apr. J.-C.",
+        "architect": "Empereur Hadrien"
+      },
+      "de": {
+        "name": "Pantheon",
+        "narration": "Das Pantheon ist ein Tempel, der allen Göttern gewidmet ist. Es ist ein Meisterwerk antiker Architektur mit seiner prächtigen Kuppel.",
+        "description": "Ein architektonisches Wunderwerk mit der größten unbewehrten Betonkuppel der Welt",
+        "detailedDescription": "Das Pantheon steht als eines der am besten erhaltenen antiken Gebäude Roms und repräsentiert den Höhepunkt römischer Ingenieurskunst und architektonischen Designs. Ursprünglich als Tempel erbaut, der allen Göttern des römischen Pantheons gewidmet war, ist dieses bemerkenswerte Bauwerk seit fast zwei Jahrtausenden ununterbrochen in Gebrauch und dient seit dem 7. Jahrhundert als katholische Kirche. Das heutige Gebäude wurde um 126 n. Chr. unter Kaiser Hadrian fertiggestellt, obwohl der Name Marcus Agrippa, der einen früheren Tempel an derselben Stelle im Jahr 27 v. Chr. errichtete, auf dem Giebel eingraviert bleibt. Das beeindruckendste Merkmal des Pantheons ist seine außergewöhnliche Kuppel aus unbewehrtem Beton, die mit einem Innendurchmesser von 43,3 Metern - genau gleich der Höhe des Gebäudes vom Boden bis zum Oculus - die größte unbewehrte Betonkuppel der Welt bleibt. Der Oculus, eine 8,7 Meter große kreisförmige Öffnung an der Spitze der Kuppel, ist die einzige natürliche Lichtquelle des Innenraums und erzeugt einen sich ständig bewegenden Lichtstrahl, der den Raum durchquert, während die Sonne über den Himmel wandert. Das Pantheon beherbergt die Gräber mehrerer berühmter Italiener, darunter der Renaissance-Künstler Raphael und die Könige des modernen Italiens. Heute steht das Pantheon als Zeugnis des römischen Ingenieursgenies und inspiriert weiterhin jährlich Millionen von Besuchern.",
+        "historicalInfo": "Das Pantheon ist ein ehemaliger römischer Tempel und seit 609 n. Chr. eine katholische Kirche. Es ist das am besten erhaltene aller antiken römischen Gebäude und wird seit seiner Geschichte durchgehend genutzt.",
+        "yearBuilt": "126 n. Chr.",
+        "architect": "Kaiser Hadrian"
+      },
+      "zh": {
+        "name": "万神殿",
+        "narration": "万神殿是一座献给所有神灵的神殿。它是古代建筑的杰作，拥有宏伟的圆顶。",
+        "description": "拥有世界上最大的无钢筋混凝土圆顶的建筑奇迹",
+        "detailedDescription": "万神殿是古罗马保存最完好的纪念碑之一，也是建筑史上最具影响力的建筑之一。这座非凡的建筑名称源自希腊语\"pan\"（所有）和\"theos\"（神），意为\"所有神的神殿\"，在建成近两千年后仍继续启发着建筑师和游客。我们今天看到的建筑是由哈德良皇帝在公元126年左右委托建造的，尽管它取代了公元前27年由马库斯·阿格里帕建造的早期神殿，他的名字仍然出现在门廊的铭文上。万神殿真正非凡之处在于其巨大的圆顶，即使在近2000年后，它仍然是世界上最大的无钢筋混凝土圆顶。圆顶从地板到顶部圆孔的直径和高度都是43.3米（142英尺），形成一个完美的半球体，体现了罗马建筑几何和谐的理想。建筑中使用的混凝土在整个圆顶高度上成分各不相同，从底部的石灰华和砖等较重的骨料过渡到顶部的浮石等较轻的材料，在保持结构完整性的同时减少整体重量。圆顶的厚度也从底部的6.4米减少到圆孔处的仅1.2米，进一步优化其重量分配。万神殿内部最引人注目的特征是圆孔，这是圆顶顶部直径8.2米（27英尺）的圆形开口。这个非凡的建筑元素是建筑唯一的自然光源，创造出戏剧性的阳光束，在一天中穿过内部移动，照亮不同的建筑特征，创造出不断变化的光影交织。圆孔向外开放，游客可以看到雨水进入，但地板的排水系统有效地处理了水。游览提示：清晨参观可以避开人群，欣赏透过圆孔进入的美丽晨光，入场免费但语音导览需付费。",
+        "historicalInfo": "万神殿是一座古罗马神殿，自公元609年起成为天主教堂。它是所有古罗马建筑中保存最完好的，并且在整个历史中一直被使用。",
+        "yearBuilt": "公元126年",
+        "architect": "哈德良皇帝"
+      },
+      "ja": {
+        "name": "パンテオン",
+        "narration": "パンテオンは全ての神々に捧げられた神殿です。壮大なドームを持つ古代建築の傑作です。",
+        "description": "世界最大の無筋コンクリートドームを持つ建築の驚異",
+        "detailedDescription": "パンテオンは古代ローマで最もよく保存された記念碑の一つであり、建築史上最も影響力のある建物の一つです。ギリシャ語の「pan」（すべて）と「theos」（神）に由来する名前は「すべての神々の神殿」を意味し、建設から約2千年を経た今も建築家や訪問者にインスピレーションを与え続けています。今日私たちが見る建物は紀元126年頃にハドリアヌス帝によって委託されましたが、紀元前27年にマルクス・アグリッパによって建てられた以前の神殿を置き換えたもので、彼の名前は今でもポルティコの碑文に残っています。パンテオンを真に特別なものにしているのは巨大なドームで、約2000年を経た今でも世界最大の無筋コンクリートドームです。床からオクルスまでの直径と高さがともに43.3メートル（142フィート）であるドームは完璧な半球を形成し、ローマ建築の幾何学的調和の理想を体現しています。建設に使用されたコンクリートはドームの高さ全体で組成が異なり、基部のトラバーチンやレンガなどの重い骨材から頂点の軽石などの軽い材料へと移行し、構造の完全性を維持しながら全体の重量を軽減しています。ドームの厚さも基部の6.4メートルからオクルスのわずか1.2メートルまで減少し、重量配分をさらに最適化しています。パンテオン内部の最も印象的な特徴はオクルス、ドーム頂点の直径8.2メートル（27フィート）の円形開口部です。この注目すべき建築要素は建物唯一の自然光源として機能し、一日を通して内部を横切って移動する劇的な太陽光の柱を作り出し、さまざまな建築的特徴を照らし、光と影の絶え間なく変化する相互作用を生み出します。オクルスは外部に開放されており、訪問者は雨が入るのを見ることができますが、床の排水システムが効果的に水を処理します。訪問のヒント：早朝に訪れると混雑を避け、オクルスから入る美しい朝日を楽しむことができ、入場は無料ですがオーディオガイドは有料です。",
+        "historicalInfo": "パンテオンはかつてローマの神殿で、609年からはカトリック教会として使用されています。古代ローマ建築の中で最もよく保存されており、その歴史を通じて継続的に使用されてきました。",
+        "yearBuilt": "紀元126年",
+        "architect": "ハドリアヌス帝"
+      },
+      "pt": {
+        "name": "Panteão",
+        "narration": "O Panteão é um templo dedicado a todos os deuses. É uma obra-prima da arquitetura antiga com sua magnífica cúpula.",
+        "description": "Uma maravilha arquitetônica com a maior cúpula de concreto não reforçado do mundo",
+        "detailedDescription": "O Panteão ergue-se como um dos edifícios antigos mais bem preservados de Roma. Originalmente construído como templo dedicado a todos os deuses do panteão romano, esta notável estrutura permaneceu em uso contínuo por quase dois milênios. O edifício atual foi concluído por volta de 126 d.C. sob o imperador Adriano. A característica mais impressionante é sua extraordinária cúpula de concreto não armado, que continua sendo a maior do mundo com 43,3 metros de diâmetro interno. O óculo de 8,7 metros é a única fonte de luz natural do interior.",
+        "historicalInfo": "O Panteão é um antigo templo romano e, desde 609 d.C., uma igreja católica. É o mais bem preservado de todos os edifícios da Roma Antiga e está em uso contínuo ao longo de sua história.",
+        "yearBuilt": "126 d.C.",
+        "architect": "Imperador Adriano"
+      },
+      "ru": {
+        "name": "Пантеон",
+        "narration": "Пантеон — это храм, посвященный всем богам. Это шедевр древней архитектуры с великолепным куполом.",
+        "description": "Архитектурное чудо с самым большим неармированным бетонным куполом в мире",
+        "detailedDescription": "Пантеон является одним из наиболее хорошо сохранившихся древних зданий Рима. Первоначально построенный как храм, посвященный всем богам римского пантеона, это замечательное сооружение находится в непрерывном использовании на протяжении почти двух тысячелетий. Нынешнее здание было завершено около 126 года н.э. при императоре Адриане. Самой впечатляющей особенностью является его необыкновенный купол из неармированного бетона, который остается крупнейшим в мире с внутренним диаметром 43,3 метра. Окулус диаметром 8,7 метра является единственным источником естественного света внутри.",
+        "historicalInfo": "Пантеон — бывший римский храм, с 609 года нашей эры — католическая церковь. Это наиболее хорошо сохранившееся из всех зданий Древнего Рима, которое непрерывно используется на протяжении всей своей истории.",
+        "yearBuilt": "126 г. н.э.",
+        "architect": "Император Адриан"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:24.207Z",
+    "updatedAt": "2026-02-22T20:01:01.065Z"
+  },
+  {
     "id": "barcelona_사그라다_파밀리아_sagrada_familia",
     "cityId": "barcelona",
     "name": "사그라다 파밀리아 (Sagrada Familia)",
@@ -8687,43 +4973,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-13T13:50:28.035Z",
     "updatedAt": "2026-02-22T18:06:01.955Z"
-  },
-  {
-    "id": "barcelona_item_93",
-    "cityId": "barcelona",
-    "name": "바르셀로나 프리미엄 Restaurant 추천 94",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "## The Grand Opening\n\n여러분, 역사와 문화의 심장부인 바르셀로나에서 가장 뛰어난 맛의 명소, 바로 \"바르셀로나 프리미엄 Restaurant 추천 94\"에 오신 것을 환영합니다! 이곳은 마치 예술과 음식이 결혼해 낳은 천재적인 작품 같습니다. 먼저 눈을 감고 상상해보세요: 고풍스러운 건물 외관이 눈앞에 펼쳐지고, 거리의 분주한 소리 속에 희미하게 들려오는 플라멩코 기타의 선율이 귓가를 스쳐 지나갑니다. 그리고 그 순간, 강력한 허브와 올리브 오일의 향이 코를 자극하며 당신을 이끄는군요. 진정 꿈속의 경험이 아닐 수 없습니다!\n\n안으로 들어서면, 진귀한 스페인식 타일과 세기말의 우아한 샹들리에가 당신을 맞이합니다. 들판을 달리는 불꽃처럼 불규칙하게 흔들리는 불빛은 귀족의 저택에 방문한 듯한 기분을 선사합니다. 조금 더 다가가면, 철판 위에서 치익 치익 소리 내며 익어가는 신선한 해산물의 소리가 들려옵니다. 그 소리에는 바르셀로나의 바다 내음이 고스란히 담겨 있죠. 이곳은 그저 식사하는 곳이 아니라, 오감이 모두 깨어나는 무대입니다!\n\n## Deep-Dive History\n\n이 환상적인 레스토랑은 1894년, 스페인이 정치적 격변 속에서 새로운 길을 찾고 있을 때 한 젊은 요리사에 의해 문을 열었습니다. 그의 이름은 엔리케 여스코였는데, 그는 자신의 요리 실력과 창의력을 결합하여 전통과 혁신을 아우르는 새로운 음식 문화를 창출하고자 했습니다. 당시 스페인은 정치적 혼란 속에서 새로운 아이디어와 문화가 생성되던 시기였고, 이곳은 그 중심에 있었습니다. 엔리케는 그의 요리를 통해 바르셀로나의 정치적 갈등을 잊고 평화로운 순간을 제공하고자 했습니다.\n\n한편, 엔리케의 가장 유명한 일화가 하나 있습니다. 어느 날, 한 고위 정치인이 급박한 상황을 피해 레스토랑에 숨어들었는데, 그는 자신의 삶을 바꾸는 요리를 맛보게 됩니다. 그 후 그 정치인은 매주 이곳을 찾아와 요리와 함께 새로운 정치 전략을 구상했다고 합니다. 이 이야기는 엔리케 여스코의 요리가 단순한 음식 그 이상임을 보여줍니다. 그것은 사람들을 모으고 새로운 생각을 창출하게 하는 촉매였죠.\n\n## Architectural Wonders\n\n이 레스토랑의 구조는 그 자체로도 경이로운 작품입니다. 노출된 붉은 벽돌과 정교하게 조각된 목재 기둥은 당시 바르셀로나의 건축 트렌드를 반영합니다. 건물의 설계는 스페인의 유명 건축가 안토니 가우디의 영향을 받았으며, 이는 건축물 곳곳에 숨겨진 곡선과 유기적인 형상으로 드러납니다. 건물 안에서 보면, 각기 다른 높이의 천장과 독특한 창문 배열은 시각적 즐거움을 선사하며, 매 순간 새로운 발견을 가능케 합니다.\n\n하지만 여기서 주목할 점은, 이곳에는 잘 알려지지 않은 상징들이 숨겨져 있다는 점입니다. 예를 들어, 입구의 타일 무늬는 카탈루냐의 전통 문양을 포함하고 있으며, 이는 바르셀로나의 정체성을 강하게 드러냅니다. 또, 벽에 걸린 그림들은 스페인의 위대한 미술가들의 작품을 모방한 것이지만, 가까이서 보면 그 작품 속 인물들이 모두 살짝 미소를 띠고 있는 것을 발견할 수 있습니다. 이는 방문자들에게 미묘한 즐거움을 주는 요소로 작용합니다.\n\n## The Modern Saga\n\n세월이 흐르며 이 레스토랑은 여러 번의 변화를 겪었지만, 최근 들어 다시 한번 주목받고 있습니다. 현대적 유행과 전통적 가치가 결합된 이곳은 바르셀로나에서 빼놓을 수 없는 명소 중 하나로 자리 잡았습니다. 최근 복원 작업을 통해 원래의 아름다움을 되찾았으며, 최신 기술을 활용해 새로운 경험을 제공하고 있습니다. 예를 들어, 레스토랑의 모든 창문은 스마트 글래스로 교체되어, 날씨와 분위기에 따라 자동으로 조정됩니다. 기술과 감성이 만나 새로운 역사를 써내려가고 있는 것이죠.\n\n또한, 이곳은 여러 영화와 드라마의 배경으로도 등장했습니다. 특히, 한 스페인 드라마에서는 주인공이 이곳에서 중요한 결정을 내리는 장면이 등장해 많은 팬들이 그 순간을 재현하기 위해 이곳을 찾습니다. 관광객들이 가장 즐기는 것은 이곳의 유명한 요리를 사진으로 찍고, 소셜 미디어에 공유하는 것입니다. 친구들과 함께 셀카를 찍으며 \"나도 여기 와봤어!\"라고 외치는 그들의 표정은 언제나 즐겁습니다.\n\n## The Philosophical Conclusion\n\n이 레스토랑은 단순히 음식을 제공하는 곳이 아닙니다. 그것은 바르셀로나의 역사와 문화를 체험하는 창구이며, 사람들 간의 연결을 만드는 장소입니다. 엔리케 여스코가 시작한 이 작은 공간은, 시간이 흐르며 수많은 사람들의 이야기와 감정을 담아냈습니다. 이는 인류가 만든 가장 위대한 예술의 한 형태라고 할 수 있습니다. 여기에서 보낸 시간은 단순한 식사가 아닌, 마음속 깊이 각인되는 경험으로 남습니다.\n\n자, 이제 여러분은 이 모든 이야기를 마음에 품고 이 경이로운 레스토랑을 떠나게 됩니다. 마지막으로, 이곳이 주는 감동을 잊지 마세요. 이곳의 벽들은 수많은 이야기를 간직하고 있으며, 그 이야기는 계속해서 이어질 것입니다. 앞으로도 이곳을 방문할 수많은 이들이 새로운 이야기를 써내려가길 바라며, 다시 만날 날을 기대하겠습니다. 여러분, 안녕히 가세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "바르셀로나 프리미엄 Restaurant 추천 94",
-        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "바르셀로나의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:07.849Z",
-    "updatedAt": "2026-02-22T18:06:02.106Z"
   },
   {
     "id": "vasa_museum",
@@ -8864,6 +5113,58 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T12:11:29.222Z",
     "updatedAt": "2026-02-22T18:20:00.391Z"
+  },
+  {
+    "id": "kl-food-street-tour",
+    "cityId": "kuala-lumpur",
+    "name": "Kuala Lumpur Street Food Tour",
+    "lat": 3.1478,
+    "lng": 101.6953,
+    "radius": 60,
+    "narration": "자, 상상해보세요. 따스한 쿠알라룸푸르의 밤공기가 여러분의 뺨을 스치고, 코끝을 간지럽히는 달콤하고 매콤한 향신료의 향연이 펼쳐지는 풍경을요! 지금 여러분은 활기 넘치는 쿠알라룸푸르의 밤거리 한복판에 서 있습니다. 여기저기서 들려오는 흥겨운 노랫소리, 오토바이의 경쾌한 엔진 소리, 그리고 무엇보다도 맛있는 음식을 볶고 튀기는 소리가 여러분의 귀를 즐겁게 하죠. 오늘 우리는 단순한 음식을 맛보는 것이 아니라, 쿠알라룸푸르의 심장이자 영혼인 길거리 음식 속으로 깊숙이 들어가 볼 거예요. \n\n첫 번째 목적지는 말레이시아 전통 음식을 맛볼 수 있는 노점상입니다. 코코넛 밀크와 향신료로 맛을 낸 나시 르막의 고소한 냄새가 벌써부터 여러분을 유혹하네요. 따끈한 밥 위에 매콤한 삼발 소스를 얹고, 바삭한 멸치와 땅콩을 곁들여 한 입 크게 베어 물면, 입 안 가득 퍼지는 풍미에 감탄하게 될 거예요. 마치 엄마가 해주는 집밥처럼 따뜻하고 정겨운 맛이죠. \n\n다음은 중국 음식 차례! 웍에서 화려하게 춤추는 면 요리, 차 퀘이 테오를 맛볼 시간입니다. 뜨거운 불길에 볶아진 쫄깃한 면발과 신선한 해산물, 그리고 달콤 짭짤한 간장 소스가 어우러져 환상의 조화를 이루죠. 젓가락질을 멈출 수 없는 마성의 맛! 특히, 현지인들이 즐겨 찾는 숨겨진 맛집에서 맛보는 차 퀘이 테오는 그 특별함이 더하답니다. \n\n마지막으로, 인도 음식의 매력에 빠져볼까요? 손으로 직접 반죽해서 갓 구워낸 따끈한 난에 향긋한 커리를 듬뿍 찍어 먹으면, 세상 모든 근심이 사라지는 듯한 행복감을 느낄 수 있을 거예요. 특히, 탄두리 치킨은 놓치지 마세요! 붉은 색깔만큼이나 강렬한 풍미가 여러분의 미각을 사로잡을 겁니다. 이 모든 경험은 단순한 식사가 아니라, 쿠알라룸푸르의 문화와 삶을 온몸으로 느끼는 특별한 순간이 될 거예요. 자, 이제 맛있는 여정을 시작해볼까요?",
+    "description": "Evening street food walking tour in Kuala Lumpur",
+    "category": "Activity",
+    "detailedDescription": "쿠알라룸푸르는 말레이시아의 수도이자, 다양한 문화가 공존하는 매력적인 도시입니다. 그중에서도 길거리 음식은 쿠알라룸푸르의 다채로운 문화를 가장 잘 보여주는 대표적인 요소 중 하나죠. 말레이, 중국, 인도 등 다양한 민족의 음식을 한자리에서 맛볼 수 있다는 점이 가장 큰 매력입니다. \n\n나시 르막은 말레이시아를 대표하는 음식으로, 코코넛 밀크로 지은 밥에 삼발 소스, 멸치, 땅콩, 오이 등을 곁들여 먹는 음식입니다. 아침 식사로 많이 먹지만, 쿠알라룸푸르에서는 언제든지 맛볼 수 있습니다. 차 퀘이 테오는 중국식 볶음면으로, 넓적한 면에 새우, 조개, 중국 소시지 등을 넣고 간장 소스로 볶아낸 음식입니다. 매콤한 맛을 좋아하는 사람들을 위해 고추를 넣어주기도 합니다. 난과 커리는 인도 음식의 대표적인 조합이죠. 쿠알라룸푸르에는 다양한 종류의 커리를 맛볼 수 있는 인도 음식점이 많습니다. \n\n**현지인 꿀팁**: 잘란 알로(Jalan Alor)는 쿠알라룸푸르에서 가장 유명한 길거리 음식 거리입니다. 다양한 종류의 음식을 맛볼 수 있으며, 밤늦게까지 활기가 넘칩니다. 단, 가격이 조금 비쌀 수 있으니, 흥정을 시도해보는 것도 좋습니다. 또 다른 꿀팁은, 현지인들이 많이 찾는 노점상을 찾아보라는 것입니다. 관광객들에게는 잘 알려지지 않았지만, 숨겨진 맛집들이 많이 있습니다. **숨겨진 비화**: 쿠알라룸푸르의 길거리 음식은 단순한 음식을 넘어, 이민자들의 역사와 애환이 담겨 있습니다. 각 민족의 전통 음식은 물론, 다양한 문화가 융합된 독특한 음식들을 맛보면서 쿠알라룸푸르의 역사와 문화를 느껴보세요.",
+    "photos": [
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Kuala Lumpur Street Food Tour",
+        "narration": "Experience the incredible diversity of Malaysian street food on this evening walking tour. Taste Malay, Chinese, and Indian specialties at local favorites.",
+        "description": "Evening street food walking tour in Kuala Lumpur",
+        "detailedDescription": "Kuala Lumpur's street food scene is a delicious reflection of Malaysia's multicultural society. This evening food tour takes you off the tourist trail to authentic local eateries and street stalls where KL residents actually eat. Sample iconic dishes like nasi lemak (coconut rice with sambal), char kway teow (stir-fried noodles), roti canai with curry, satay (grilled meat skewers), cendol (shaved ice dessert), and durian (if you're brave!). Your local guide shares insights into Malaysian food culture, cooking techniques, and the history behind each dish. Visit bustling night markets like Jalan Alor or Petaling Street Chinatown, experience the energy of outdoor dining, and learn about the spices and ingredients that make Malaysian cuisine so distinctive. The tour includes 8-10 food tastings - enough for a full dinner."
+      },
+      "it": {
+        "name": "Tour dello Street Food di Kuala Lumpur",
+        "narration": "Sperimenta l'incredibile diversità del cibo di strada malese in questo tour a piedi serale. Assaggia specialità malesi, cinesi e indiane nei locali preferiti.",
+        "description": "Tour a piedi serale dello street food a Kuala Lumpur",
+        "detailedDescription": "La scena dello street food di Kuala Lumpur è un delizioso riflesso della società multiculturale della Malesia. Questo tour gastronomico serale ti porta fuori dai sentieri turistici verso autentiche trattorie locali e bancarelle di strada dove i residenti di KL mangiano davvero. Assaggia piatti iconici come nasi lemak (riso al cocco con sambal), char kway teow (noodles saltati), roti canai con curry, satay (spiedini di carne alla griglia), cendol (dessert di ghiaccio tritato) e durian (se sei coraggioso!). La tua guida locale condivide approfondimenti sulla cultura gastronomica malese, tecniche di cucina e la storia dietro ogni piatto. Visita mercati notturni vivaci come Jalan Alor o Petaling Street Chinatown, sperimenta l'energia della ristorazione all'aperto e impara sulle spezie e ingredienti che rendono la cucina malese così distintiva. Il tour include 8-10 assaggi di cibo - abbastanza per una cena completa."
+      },
+      "ko": {
+        "name": "쿠알라룸푸르 스트리트 푸드 투어",
+        "narration": "이 저녁 도보 투어에서 말레이시아 길거리 음식의 놀라운 다양성을 경험하세요. 지역 인기 장소에서 말레이, 중국, 인도 특선 요리를 맛보세요.",
+        "description": "쿠알라룸푸르의 저녁 스트리트 푸드 도보 투어",
+        "detailedDescription": "쿠알라룸푸르의 스트리트 푸드 현장은 말레이시아 다문화 사회의 맛있는 반영입니다. 이 저녁 푸드 투어는 KL 주민들이 실제로 먹는 정통 지역 식당과 길거리 가판대로 관광 코스를 벗어나 안내합니다. 나시 르막(삼발을 곁들인 코코넛 밥), 차 콰이 티오(볶은 국수), 커리를 곁들인 로티 차나이, 사테(구운 고기 꼬치), 첸돌(빙수 디저트), 그리고 두리안(용감하다면!)과 같은 상징적인 요리를 맛보세요. 현지 가이드가 말레이시아 음식 문화, 요리 기술, 각 요리 뒤의 역사에 대한 통찰력을 공유합니다. 잘란 알로르나 페탈링 스트리트 차이나타운과 같은 번화한 야시장을 방문하고, 야외 식사의 에너지를 경험하고, 말레이시아 요리를 독특하게 만드는 향신료와 재료에 대해 배우세요. 투어에는 8-10가지 음식 시식이 포함되어 있습니다 - 완전한 저녁 식사에 충분합니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:39.334Z",
+    "updatedAt": "2026-02-22T19:01:04.783Z"
   },
   {
     "id": "rome/borghese-gallery",
@@ -9199,6 +5500,71 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:02.364Z"
   },
   {
+    "id": "thames-river-cruise",
+    "cityId": "london",
+    "name": "Thames River Sightseeing Cruise",
+    "lat": 51.5007,
+    "lng": -0.1246,
+    "radius": 60,
+    "narration": "자, 여러분! 템스 강을 따라 떠나는 특별한 여정에 여러분을 초대합니다. 상상해보세요. 따스한 햇살이 템스 강물에 부서져 반짝이는 모습, 그리고 시원한 강바람이 여러분의 머리카락을 부드럽게 스치는 기분 좋은 감각을요. 지금 여러분은 런던의 심장을 가로지르는 템스 강 위, 유람선에 몸을 싣고 있습니다. 뱃고동 소리가 울려 퍼지면, 역사의 물결이 여러분을 감싸 안을 거예요. 저 멀리 웅장한 타워 브리지가 모습을 드러냅니다. 마치 거대한 용이 강을 가로질러 웅크리고 있는 듯한 위엄 있는 모습에 압도당하게 될 거예요. 다리 아래를 통과할 때, 잠시 숨을 멈추고 다리의 웅장함에 경의를 표해보세요. 런던 아이가 천천히 회전하며 런던의 스카이라인을 수놓고, 웨스트민스터 궁전의 시계탑 빅벤은 여전히 묵묵히 시간을 지키고 있습니다. 템스 강은 단순히 강이 아니에요. 런던의 역사와 문화를 담고 있는 살아있는 기록과 같습니다. 강변을 따라 늘어선 오래된 건물들은 저마다 흥미진진한 이야기를 품고 있답니다. 찰스 디킨스가 이 강을 걸으며 영감을 얻었고, 윈스턴 처칠이 전쟁의 위협 속에서도 이 강을 바라보며 용기를 얻었다고 상상해보세요. 템스 강은 런던 시민들의 삶과 함께 흘러온 역사의 강입니다. 유람선 갑판에 기대어 템스 강을 따라 펼쳐지는 런던의 아름다운 풍경을 마음껏 즐기세요. 이 순간, 여러분은 런던의 역사를 직접 경험하고 있는 것입니다.",
+    "description": "Scenic cruise along the River Thames",
+    "category": "Activity",
+    "detailedDescription": "템스 강 유람선 관광은 런던을 가장 매혹적인 방식으로 탐험하는 방법 중 하나입니다. 타워 브리지, 런던 아이, 국회의사당 등 런던의 상징적인 랜드마크들을 한눈에 담을 수 있을 뿐만 아니라, 템스 강이 런던 역사에서 차지하는 중요한 역할에 대해서도 깊이 이해할 수 있습니다. 템스 강은 로마 시대부터 런던의 주요 교통로였으며, 무역과 교류의 중심지였습니다. 런던의 번영은 템스 강과 떼려야 뗄 수 없는 관계에 있다고 해도 과언이 아닙니다. \n\n현지인 꿀팁을 하나 알려드릴까요? 템스 강 유람선 투어는 낮 시간뿐만 아니라 밤에도 운영됩니다. 특히 밤에 즐기는 유람선 투어는 런던의 야경을 감상하기에 더할 나위 없이 좋습니다. 런던의 랜드마크들이 조명으로 빛나는 모습은 낮과는 또 다른 매력을 선사합니다. 또한, 일부 유람선에서는 저녁 식사나 음료를 제공하기도 하니, 낭만적인 분위기를 즐기고 싶다면 밤 시간대 투어를 고려해보세요. 그리고 템스 강변에는 숨겨진 작은 펍들이 많이 있습니다. 유람선 투어를 마치고 강변 펍에서 시원한 맥주 한 잔을 즐기며 런던의 밤을 만끽해보는 것도 좋은 경험이 될 것입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
+      "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=800",
+      "https://images.unsplash.com/photo-1543832923-44667a44c804?w=800",
+      "https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800",
+      "https://images.unsplash.com/photo-1508711451996-c8cabc35c030?w=800",
+      "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800",
+      "https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800"
+    ],
+    "historicalInfo": "Thames cruises have been popular since Victorian times when steamboats first offered public river transport.",
+    "yearBuilt": "19th century",
+    "architect": "Various cruise operators",
+    "translations": {
+      "en": {
+        "name": "Thames River Sightseeing Cruise",
+        "narration": "See London's iconic landmarks from the Thames on this relaxing sightseeing cruise. Pass Tower Bridge, the London Eye, and historic riverside attractions.",
+        "description": "Scenic cruise along the River Thames",
+        "detailedDescription": "A Thames River cruise offers a unique perspective on London's most famous landmarks. Glide along the historic waterway that has been the lifeblood of the city for over 2000 years. Your journey takes you past iconic sights including the Tower of London, Tower Bridge, Shakespeare's Globe Theatre, the London Eye, Houses of Parliament, and Westminster Abbey. Most cruises offer live or recorded commentary in multiple languages, providing fascinating historical insights and architectural details. Choose from various options: hop-on-hop-off services that let you explore attractions at your own pace, circular cruises for comprehensive sightseeing, or themed experiences like afternoon tea cruises or evening jazz cruises. The open-air upper deck provides perfect photo opportunities and fresh river breezes.",
+        "historicalInfo": "Thames cruises have been popular since Victorian times when steamboats first offered public river transport.",
+        "yearBuilt": "19th century",
+        "architect": "Various cruise operators"
+      },
+      "it": {
+        "name": "Crociera Turistica sul Tamigi",
+        "narration": "Ammira i monumenti iconici di Londra dal Tamigi in questa rilassante crociera turistica. Passa il Tower Bridge, il London Eye e le storiche attrazioni lungo il fiume.",
+        "description": "Crociera panoramica lungo il fiume Tamigi",
+        "detailedDescription": "Una crociera sul fiume Tamigi offre una prospettiva unica sui monumenti più famosi di Londra. Scivola lungo la storica via d'acqua che è stata la linfa vitale della città per oltre 2000 anni. Il tuo viaggio ti porta davanti a luoghi iconici tra cui la Torre di Londra, il Tower Bridge, il Globe Theatre di Shakespeare, il London Eye, il Parlamento e l'Abbazia di Westminster. La maggior parte delle crociere offre commenti dal vivo o registrati in più lingue, fornendo affascinanti approfondimenti storici e dettagli architettonici. Scegli tra varie opzioni: servizi hop-on-hop-off che ti permettono di esplorare le attrazioni al tuo ritmo, crociere circolari per un turismo completo o esperienze a tema come crociere con tè pomeridiano o crociere jazz serali. Il ponte superiore all'aperto offre perfette opportunità fotografiche e fresche brezze fluviali.",
+        "historicalInfo": "Le crociere sul Tamigi sono popolari dall'epoca vittoriana quando i battelli a vapore iniziarono a offrire trasporti fluviali pubblici.",
+        "yearBuilt": "XIX secolo",
+        "architect": "Vari operatori di crociera"
+      },
+      "ko": {
+        "name": "템스 강 관광 크루즈",
+        "narration": "이 편안한 관광 크루즈에서 템스 강에서 런던의 상징적인 랜드마크를 보세요. 타워 브리지, 런던 아이, 역사적인 강변 명소를 지나갑니다.",
+        "description": "템스 강을 따라 경치 좋은 크루즈",
+        "detailedDescription": "템스 강 크루즈는 런던의 가장 유명한 랜드마크에 대한 독특한 관점을 제공합니다. 2000년 이상 도시의 생명선이 되어온 역사적인 수로를 따라 미끄러지세요. 여정은 런던 타워, 타워 브리지, 셰익스피어 글로브 극장, 런던 아이, 국회의사당, 웨스트민스터 사원을 포함한 상징적인 명소를 지나갑니다. 대부분의 크루즈는 여러 언어로 라이브 또는 녹음된 해설을 제공하여 매혹적인 역사적 통찰력과 건축적 세부 사항을 제공합니다. 다양한 옵션 중에서 선택하세요: 자신의 속도로 명소를 탐험할 수 있는 홉온홉오프 서비스, 포괄적인 관광을 위한 순환 크루즈, 또는 애프터눈 티 크루즈나 저녁 재즈 크루즈와 같은 테마 체험. 야외 상부 갑판은 완벽한 사진 촬영 기회와 신선한 강바람을 제공합니다.",
+        "historicalInfo": "템스 강 크루즈는 증기선이 처음 공공 강 운송을 제공한 빅토리아 시대부터 인기를 끌고 있습니다.",
+        "yearBuilt": "19세기",
+        "architect": "다양한 크루즈 운영사"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:34.848Z",
+    "updatedAt": "2026-02-22T19:01:04.869Z"
+  },
+  {
     "id": "notre_dame",
     "cityId": "paris",
     "name": "Notre-Dame Cathedral",
@@ -9461,27 +5827,55 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:24:12.459Z"
   },
   {
-    "id": "tokyo_item_69",
-    "cityId": "tokyo",
-    "name": "TOKYO Premium Restaurant 69",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "상상해보세요. 지금 여러분은 도쿄의 심장부에 위치한, TOKYO Premium Restaurant 69의 문턱을 넘어섰습니다. 문이 열리는 순간, 은은하게 퍼지는 향긋한 냄새와 따뜻한 조명이 여러분을 맞이하죠. 마치 영화 속 한 장면처럼, 눈앞에 펼쳐진 도쿄의 야경은 숨 막힐 듯 아름답습니다. 귓가에는 부드러운 피아노 선율이 흐르고, 테이블 위에는 정갈하게 놓인 식기가 반짝입니다. \n\n이곳은 단순한 레스토랑이 아니에요. 도쿄의 역사와 현대가 조화롭게 어우러진, 특별한 공간이죠. 창밖을 바라보며, 여러분은 수백 년 동안 이어져 온 도쿄의 숨결을 느낄 수 있습니다. 오래된 사찰의 지붕과 현대적인 고층 빌딩이 어우러진 풍경은, 과거와 현재가 공존하는 도쿄의 매력을 고스란히 보여줍니다.\n\n지금 여러분의 발 아래에는, 수많은 사람들의 이야기가 담긴 역사가 흐르고 있습니다. 에도 시대의 상인부터 메이지 유신의 혁명가, 그리고 현대의 예술가와 기업가까지, 이곳을 거쳐간 모든 이들의 꿈과 열정이 이 레스토랑의 분위기를 더욱 특별하게 만들죠. \n\n눈을 감고, 깊게 숨을 들이쉬어 보세요. 이곳의 모든 감각들이 여러분의 오감을 자극하며, 잊지 못할 추억을 만들어 줄 겁니다. TOKYO Premium Restaurant 69에서, 도쿄의 아름다움을 맛과 함께 느껴보세요. 마치 시간을 거슬러 올라간 듯한 기분, 느껴지시나요? 여러분의 미각과 감성을 깨우는 특별한 경험이 시작됩니다.",
-    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "TOKYO Premium Restaurant 69는 도쿄의 랜드마크 중 하나로, 단순한 레스토랑을 넘어선 복합 문화 공간입니다. 역사적인 건물에 자리 잡고 있으며, 에도 시대부터 이어진 전통과 현대적인 디자인이 조화를 이루고 있습니다. 이곳은 미식 경험뿐만 아니라, 예술 작품 감상, 전통 공연 관람 등 다양한 문화 체험을 제공합니다. \n\n레스토랑 내부에는 유명 예술가의 작품들이 전시되어 있으며, 주기적으로 특별 전시회도 개최됩니다. 또한, 전통적인 일본 정원을 모티브로 한 아름다운 공간은 식사 전후로 산책을 즐기기에 안성맞춤입니다. 특히, 저녁 시간에는 라이브 재즈 공연이 열려 로맨틱한 분위기를 더합니다.\n\n**현지인 꿀팁**: 레스토랑 예약 시, 창가 자리를 미리 요청하세요. 도쿄 타워를 비롯한 아름다운 야경을 감상하며 식사를 즐길 수 있습니다. 또한, 계절별로 특별 메뉴가 제공되니, 방문 시기에 맞춰 특별한 요리를 맛보는 것을 추천합니다. 숨겨진 비화로는, 이 레스토랑은 과거 유명 사무라이의 저택이었다고 합니다. 지금도 건물 곳곳에서 그 흔적을 찾아볼 수 있다는 점이 흥미롭습니다.",
+    "id": "penang-street-food-tour",
+    "cityId": "penang",
+    "name": "Penang Street Food Tour",
+    "lat": 5.4141,
+    "lng": 100.3288,
+    "radius": 60,
+    "narration": "자, 상상해보세요. 지금 여러분은 페낭의 뜨겁고 활기찬 거리 한복판에 서 있습니다. 코를 간지럽히는 향긋한 향신료 냄새, 지글거리는 기름에 튀겨지는 음식 소리, 활기 넘치는 사람들의 웃음소리가 뒤섞여 마치 축제와 같은 분위기를 자아내죠. 오늘 우리는 미식 천국, 페낭의 숨겨진 보석 같은 길거리 음식들을 찾아 떠나는 특별한 여정을 시작할 거예요. 페낭의 길거리 음식은 단순한 음식이 아니라, 대대로 이어져 온 역사와 문화, 그리고 페낭 사람들의 삶 그 자체를 담고 있습니다. 자, 깊게 숨을 들이쉬고, 이 놀라운 미식의 향연 속으로 함께 빠져 볼까요? 먼저, 우리를 맞이하는 건 '차 퀘이 테오'입니다. 넓적한 쌀국수를 뜨겁게 달궈진 웍에 볶아 새우, 조개, 중국 소시지와 함께 볶아낸 이 음식은, 한 입 베어 물면 입 안 가득 퍼지는 불맛이 일품이죠. 상상해보세요. 뜨거운 김이 모락모락 피어오르는 차 퀘이 테오를 입에 넣는 순간, 짜릿한 불맛과 신선한 해산물의 조화가 당신의 미각을 깨우는 것을요. 다음은 페낭의 대표적인 아침 식사, '나시 르막'입니다. 코코넛 밀크로 지은 밥에 삼발 소스, 멸치 튀김, 땅콩, 삶은 계란을 곁들여 먹는 이 음식은, 달콤하면서도 매콤하고, 고소하면서도 짭짤한 오묘한 맛의 조화가 매력적이죠. 특히, 아침 햇살 아래 야자수 그늘에서 즐기는 나시 르막은, 그 어떤 고급 레스토랑의 음식보다 특별한 경험을 선사할 거예요. 그리고 빼놓을 수 없는 것이 바로 '아쌈 락사'입니다. 신맛, 매운맛, 단맛이 어우러진 독특한 국물에 굵은 쌀국수를 넣어 먹는 이 음식은, 페낭에서 꼭 맛봐야 할 대표적인 음식 중 하나죠. 특히, 생선살을 발라 넣은 국물은 깊고 풍부한 맛을 자랑하며, 한 번 맛보면 잊을 수 없는 강렬한 인상을 남깁니다. 이 외에도 페낭에는 '호키엔미', '로박', '첸돌' 등 수많은 길거리 음식들이 여러분을 기다리고 있습니다. 자, 지금부터 우리는 단순한 관광객이 아닌, 페낭의 맛과 문화를 사랑하는 진정한 미식가가 될 거예요. 페낭의 길거리 음식은 단순한 음식이 아니라, 페낭 사람들의 삶과 역사를 담고 있는 소중한 문화유산입니다. 이 음식을 맛보는 것은, 페낭의 심장을 느끼는 것과 같아요. 자, 이제 용기를 내어 새로운 맛에 도전하고, 페낭의 풍요로운 미식 세계를 마음껏 탐험해 보세요!",
+    "description": "Guided tour of Penang's famous street food",
+    "category": "Activity",
+    "detailedDescription": "페낭의 길거리 음식 투어는 단순한 미식 여행을 넘어, 페낭의 다채로운 문화와 역사를 체험하는 특별한 경험입니다. 페낭은 말레이시아, 중국, 인도 문화가 융합된 독특한 지역으로, 이러한 문화적 다양성이 길거리 음식에도 고스란히 반영되어 있습니다. 차 퀘이 테오, 나시 르막, 아쌈 락사 등 대표적인 페낭 음식들은 각기 다른 문화적 배경을 가지고 있으며, 오랜 역사와 전통을 자랑합니다. 현지인들은 이러한 음식들을 통해 자신들의 문화적 정체성을 표현하고, 공동체 의식을 함양해 왔습니다. 페낭의 길거리 음식은 또한, 지역 경제 활성화에도 중요한 역할을 합니다. 수많은 길거리 음식점들이 관광객과 현지인들에게 저렴하고 맛있는 음식을 제공하며, 지역 경제의 중요한 부분을 차지하고 있습니다. 특히, 페낭의 길거리 음식은 단순히 배를 채우는 수단이 아니라, 사람들과의 소통과 교류를 위한 공간을 제공합니다. 길거리 음식점에서는 다양한 배경을 가진 사람들이 모여 음식을 함께 나누고, 이야기를 나누며, 서로의 문화를 이해하고 존중하는 경험을 할 수 있습니다. 페낭의 길거리 음식 투어는 단순히 음식을 맛보는 것을 넘어, 페낭 사람들의 삶과 문화를 직접 체험하고, 새로운 사람들과 소통하며, 잊지 못할 추억을 만들 수 있는 특별한 기회입니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 저녁 늦게 문을 여는 '글루가르 카페'의 '미고랭 마마'는 현지 젊은이들 사이에서 가장 핫한 야식 메뉴입니다. 매콤하면서도 달콤한 맛이 일품이며, 특히 맥주와 함께 먹으면 그 맛이 배가 됩니다. 숨겨진 비화 하나 더! 페낭의 길거리 음식은 원래 가난한 이민자들이 생계를 위해 시작한 것이라고 합니다. 그들은 자신들의 고향에서 가져온 레시피를 바탕으로 저렴하고 맛있는 음식을 만들어 팔았고, 이것이 오늘날 페낭 길거리 음식의 시초가 되었습니다.",
     "photos": [
-      "/images/landmarks/placeholder.png"
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
+      "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=800",
+      "https://images.unsplash.com/photo-1595295333158-4742f28fbd85?w=800",
+      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800",
+      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800",
+      "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=800"
     ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
+    "historicalInfo": "Penang's food culture developed over centuries through the mixing of diverse ethnic communities and trading influences.",
+    "yearBuilt": "Centuries-old tradition",
+    "architect": "Multicultural culinary heritage",
     "translations": {
+      "en": {
+        "name": "Penang Street Food Tour",
+        "narration": "Discover Penang's legendary street food scene on this guided culinary adventure. Taste iconic dishes and learn about the island's unique food heritage.",
+        "description": "Guided tour of Penang's famous street food",
+        "detailedDescription": "Penang is widely regarded as Malaysia's food capital, and this guided street food tour is the best way to experience its incredible culinary diversity. Led by knowledgeable local food experts, you'll navigate bustling hawker centers, historic coffee shops, and hidden street stalls to sample Penang's most iconic dishes. Taste char kway teow (stir-fried flat rice noodles), assam laksa (spicy-sour fish noodle soup), Hokkien mee, rojak, and countless other specialties. Learn about the unique blend of Malay, Chinese, Indian, and Peranakan influences that created Penang's distinctive cuisine. Your guide will explain the history behind each dish, recommend the best stalls, and help you navigate ordering like a local. Tours typically include 8-10 food stops and last 3-4 hours. Come hungry and ready to discover why UNESCO recognized George Town for its exceptional food heritage.",
+        "historicalInfo": "Penang's food culture developed over centuries through the mixing of diverse ethnic communities and trading influences.",
+        "yearBuilt": "Centuries-old tradition",
+        "architect": "Multicultural culinary heritage"
+      },
+      "it": {
+        "name": "Tour dello Street Food di Penang",
+        "narration": "Scopri la leggendaria scena dello street food di Penang in questa avventura culinaria guidata. Assaggia piatti iconici e impara l'eredità alimentare unica dell'isola.",
+        "description": "Tour guidato del famoso street food di Penang",
+        "detailedDescription": "Penang è ampiamente considerata la capitale gastronomica della Malesia, e questo tour guidato dello street food è il modo migliore per sperimentare la sua incredibile diversità culinaria. Guidati da esperti di cibo locali ben informati, navigherai tra centri di venditori ambulanti affollati, caffetterie storiche e bancarelle di strada nascoste per assaggiare i piatti più iconici di Penang. Assapora char kway teow (tagliatelle di riso piatte saltate in padella), assam laksa (zuppa di noodles di pesce piccante-acida), Hokkien mee, rojak e innumerevoli altre specialità. Impara la miscela unica di influenze malesi, cinesi, indiane e Peranakan che ha creato la cucina distintiva di Penang. La tua guida spiegherà la storia dietro ogni piatto, consiglierà le migliori bancarelle e ti aiuterà a ordinare come un locale. I tour includono tipicamente 8-10 tappe gastronomiche e durano 3-4 ore. Vieni affamato e pronto a scoprire perché l'UNESCO ha riconosciuto George Town per il suo eccezionale patrimonio gastronomico.",
+        "historicalInfo": "La cultura alimentare di Penang si è sviluppata nel corso dei secoli attraverso la mescolanza di diverse comunità etniche e influenze commerciali.",
+        "yearBuilt": "Tradizione secolare",
+        "architect": "Patrimonio culinario multiculturale"
+      },
       "ko": {
-        "name": "TOKYO Premium Restaurant 69",
-        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+        "name": "페낭 스트리트 푸드 투어",
+        "narration": "이 가이드 요리 모험에서 페낭의 전설적인 스트리트 푸드 장면을 발견하세요. 상징적인 요리를 맛보고 섬의 독특한 음식 유산에 대해 배우세요.",
+        "description": "페낭의 유명한 스트리트 푸드 가이드 투어",
+        "detailedDescription": "페낭은 말레이시아의 음식 수도로 널리 알려져 있으며, 이 가이드 스트리트 푸드 투어는 놀라운 요리 다양성을 경험할 수 있는 최고의 방법입니다. 지식이 풍부한 현지 음식 전문가가 이끄는 이 투어에서 붐비는 호커 센터, 역사적인 커피숍, 숨겨진 거리 노점을 탐색하며 페낭의 가장 상징적인 요리를 맛볼 수 있습니다. 차 퀘이 티오(볶은 납작 쌀국수), 아삼 락사(매콤하고 신 생선 국수 수프), 호키엔 미, 로작 및 수많은 다른 특선 요리를 맛보세요. 페낭의 독특한 요리를 만든 말레이, 중국, 인도, 페라나칸 영향의 독특한 혼합에 대해 배우세요. 가이드가 각 요리의 역사를 설명하고, 최고의 노점을 추천하며, 현지인처럼 주문하는 방법을 도와줍니다. 투어는 일반적으로 8-10개의 음식 정거장을 포함하며 3-4시간 동안 진행됩니다. 배고픈 상태로 와서 유네스코가 조지타운을 탁월한 음식 유산으로 인정한 이유를 발견할 준비를 하세요.",
+        "historicalInfo": "페낭의 음식 문화는 다양한 민족 공동체와 무역 영향의 혼합을 통해 수세기에 걸쳐 발전했습니다.",
+        "yearBuilt": "수세기 된 전통",
+        "architect": "다문화 요리 유산"
       }
     },
     "openingHours": null,
@@ -9494,8 +5888,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.278Z",
-    "updatedAt": "2026-02-22T18:24:22.000Z"
+    "createdAt": "2026-02-12T12:11:35.593Z",
+    "updatedAt": "2026-02-22T19:01:04.949Z"
   },
   {
     "id": "colosseum-underground-tour",
@@ -9602,6 +5996,68 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:24:44.890Z"
   },
   {
+    "id": "phuket-sunset-cruise",
+    "cityId": "phuket",
+    "name": "Phang Nga Bay Sunset Cruise",
+    "lat": 8.2762,
+    "lng": 98.5016,
+    "radius": 90,
+    "narration": "자, 여러분! 상상해보세요. 따뜻한 바람이 얼굴을 스치고, 귓가에는 잔잔한 파도 소리가 속삭이는 석양 크루즈에 몸을 싣는 모습을요. 지금 여러분은 푸껫의 팡아만, 바로 그 심장부에 와 계십니다. 뱃머리를 가르는 물결은 마치 시간이 멈춘 듯 고요하고, 눈 앞에는 기암괴석들이 웅장한 자태를 뽐내고 있죠. 마치 수천 년 전 신들이 빚어 놓은 듯한 풍경이에요. \n\n저 멀리 보이는 저 섬, 바로 제임스 본드 아일랜드입니다! 영화 '007 황금총을 가진 사나이'의 촬영지로 유명하죠. 깎아지른 듯한 절벽과 푸른 바다가 어우러져 한 폭의 그림 같아요. 영화 속 제임스 본드처럼 멋진 포즈를 취하며 사진을 찍어보는 건 어때요? \n\n해가 점점 수평선 너머로 기울면서 하늘은 붉은색, 주황색, 보라색으로 물들어 갑니다. 마치 화가가 캔버스에 풀어놓은 듯한 황홀한 광경이죠. 샴페인 한 잔을 손에 들고, 사랑하는 사람과 함께 석양을 감상하는 이 순간... 정말 잊지 못할 추억이 될 거예요. \n\n밤이 되면 팡아만은 또 다른 매력을 발산합니다. 하늘에는 별들이 쏟아지고, 바다에는 플랑크톤이 빛을 내며 반짝이죠. 마치 우주를 유영하는 듯한 신비로운 기분을 느낄 수 있을 거예요. 자, 눈을 감고 깊게 숨을 들이쉬어 보세요. 팡아만의 밤은 여러분의 마음속 깊은 곳까지 평온함으로 채워줄 겁니다.",
+    "description": "Romantic sunset cruise through Phang Nga Bay",
+    "category": "Activity",
+    "detailedDescription": "팡아만 석양 크루즈는 단순한 관광을 넘어, 자연과 하나 되는 특별한 경험을 선사합니다. 제임스 본드 섬 외에도, 숨겨진 라군을 탐험하고, 카누를 타고 석회암 동굴을 탐험하는 등 다양한 액티비티를 즐길 수 있습니다. 현지 어부들은 팡아만의 석회암 동굴 안에 집을 짓고 사는데, 간혹 이들이 잡은 신선한 해산물을 맛볼 기회도 얻을 수 있습니다. 크루즈 스태프들은 팡아만의 역사와 문화에 대한 흥미로운 이야기를 들려주며, 여행을 더욱 풍성하게 만들어 줍니다. \n\n**꿀팁**: 크루즈 예약 시 선셋 뷰가 좋은 자리를 미리 확보하세요. 또한, 모기 퇴치제와 가벼운 겉옷을 준비하는 것이 좋습니다. 팡아만의 석양은 예측 불가능하기 때문에, 날씨 앱을 통해 일몰 시간을 미리 확인하고, 최상의 순간을 놓치지 마세요. 무엇보다 중요한 건, 마음을 열고 팡아만의 아름다움을 온전히 느껴보는 것입니다! 석양 아래 펼쳐지는 마법 같은 순간은 여러분의 삶에 오랫동안 기억될 감동을 선사할 것입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1552055568-3b8d96892c4e?w=800",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?w=800",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+      "https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=800",
+      "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800",
+      "https://images.unsplash.com/photo-1559666126-84f389727b9a?w=800"
+    ],
+    "historicalInfo": "Phang Nga Bay became internationally famous after appearing in the James Bond film in 1974.",
+    "yearBuilt": "Ancient geological formation",
+    "architect": "Millions of years of natural formation",
+    "translations": {
+      "en": {
+        "name": "Phang Nga Bay Sunset Cruise",
+        "narration": "Experience the magic of Phang Nga Bay on this romantic sunset cruise. Sail past dramatic limestone karsts, visit James Bond Island, and watch the sunset over the Andaman Sea.",
+        "description": "Romantic sunset cruise through Phang Nga Bay",
+        "historicalInfo": "Phang Nga Bay became internationally famous after appearing in the James Bond film in 1974.",
+        "yearBuilt": "Ancient geological formation",
+        "architect": "Millions of years of natural formation"
+      },
+      "it": {
+        "name": "Crociera al Tramonto nella Baia di Phang Nga",
+        "narration": "Vivi la magia della Baia di Phang Nga in questa romantica crociera al tramonto. Naviga accanto a drammatici karst calcarei, visita l'Isola di James Bond e guarda il tramonto sul Mare delle Andamane.",
+        "description": "Crociera romantica al tramonto attraverso la Baia di Phang Nga",
+        "historicalInfo": "La Baia di Phang Nga divenne famosa a livello internazionale dopo essere apparsa nel film di James Bond nel 1974.",
+        "yearBuilt": "Formazione geologica antica",
+        "architect": "Milioni di anni di formazione naturale"
+      },
+      "ko": {
+        "name": "팡아 만 선셋 크루즈",
+        "narration": "이 낭만적인 선셋 크루즈에서 팡아 만의 마법을 경험하세요. 극적인 석회암 카르스트를 지나 항해하고, 제임스 본드 섬을 방문하며, 안다만 해 위로 지는 석양을 감상하세요.",
+        "description": "팡아 만을 통한 낭만적인 선셋 크루즈",
+        "historicalInfo": "팡아 만은 1974년 제임스 본드 영화에 등장한 후 국제적으로 유명해졌습니다.",
+        "yearBuilt": "고대 지질학적 형성",
+        "architect": "수백만 년의 자연 형성"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:36.272Z",
+    "updatedAt": "2026-02-22T19:01:05.034Z"
+  },
+  {
     "id": "oslob-whale-shark",
     "cityId": "cebu",
     "name": "Oslob Whale Shark Watching",
@@ -9651,6 +6107,76 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T12:11:38.235Z",
     "updatedAt": "2026-02-22T18:25:04.910Z"
+  },
+  {
+    "id": "casa_batllo",
+    "cityId": "barcelona",
+    "name": "Casa Batlló",
+    "lat": 41.391638,
+    "lng": 2.164993,
+    "radius": 50,
+    "narration": "자, 여러분! 지금 여러분은 바르셀로나의 심장, 카사 바트요 앞에 서 있습니다. 상상해보세요. 1900년대 초, 바르셀로나의 황금기를요. 가우디는 이 건물을 통해 단순한 주거 공간을 넘어선 예술 작품을 창조하고자 했습니다. 외관을 한 번 보세요. 해골처럼 보이는 발코니와 뼈대 같은 기둥들이 춤을 추는 듯하지 않나요? 가우디는 이 모티브를 통해 삶과 죽음, 그리고 부활의 이야기를 담고 싶어했습니다. 햇빛이 스테인드글라스를 통과하면서 내부 공간은 마치 심해 속처럼 푸르게 빛납니다. 여러분의 눈을 통해 보이는 모든 색깔들이 춤을 추듯 일렁이는 것을 느껴보세요. 옥상으로 올라가면 거대한 용의 비늘을 닮은 타일들이 여러분을 맞이합니다. 전설에 따르면, 이 용은 카탈루냐의 수호성인인 산 조르디에 의해 물리쳐졌다고 해요. 여러분은 지금 그 용의 등 위에 서 있는 겁니다! 바람 소리를 들어보세요. 저 멀리 지중해에서 불어오는 바람은 카사 바트요의 숨결과 같습니다. 이 모든 것이 가우디의 천재적인 상상력에서 비롯되었다는 사실이 믿기시나요? 카사 바트요는 단순한 건축물이 아니라, 살아 숨 쉬는 예술 작품입니다. 여러분의 오감으로 이 특별한 경험을 만끽하세요!",
+    "description": "Gaudí's fantastical modernist building with skeletal facade",
+    "category": "Architecture",
+    "detailedDescription": "카사 바트요는 안토니 가우디가 1904년에서 1906년 사이에 개축한 건물입니다. 원래는 1877년에 지어진 평범한 건물이었지만, 가우디의 손길을 거쳐 바르셀로나의 상징적인 건축물 중 하나로 탈바꿈했습니다. '뼈의 집'이라는 별명처럼, 건물의 외관은 마치 해골과 뼈를 연상시키는 독특한 디자인을 자랑합니다. 특히, 발코니는 해골의 턱뼈를 닮았으며, 기둥은 뼈를 형상화했습니다. 파사드는 모자이크 타일로 덮여 있어 햇빛에 따라 다채로운 색깔을 뽐냅니다. 내부는 더욱 놀랍습니다. 가우디는 자연 채광을 극대화하기 위해 창문의 크기와 위치를 세심하게 조정했습니다. 중앙 계단의 난간은 마치 거대한 동물의 척추뼈처럼 보이며, 옥상에는 용의 비늘을 형상화한 타일과 굴뚝이 있습니다. 카사 바트요에는 숨겨진 이야기가 많습니다. 예를 들어, 가우디는 건물의 환기 시스템을 설계할 때 자연의 원리를 이용했습니다. 그는 건물의 통풍구를 통해 시원한 공기가 순환하도록 하여 여름에도 시원하게 지낼 수 있도록 했습니다. 또한, 가우디는 건물의 모든 디테일에 의미를 부여했습니다. 그는 카탈루냐의 전설과 종교적인 상징을 건축물에 녹여내어 카사 바트요를 단순한 건물을 넘어선 예술 작품으로 만들었습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1583779457050-39e95d3d9d8b?w=800",
+      "https://images.unsplash.com/photo-1561632669-7f55f7975606?w=800",
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800"
+    ],
+    "historicalInfo": "Casa Batlló was originally built in 1877 by Emili Sala Cortés, one of Gaudí's architecture teachers. In 1904, Josep Batlló commissioned Gaudí to renovate the building. Gaudí completely transformed the building between 1904 and 1906. In 2005, Casa Batlló was designated a UNESCO World Heritage Site along with other works by Gaudí.",
+    "yearBuilt": "1877 (original), 1904-1906 (Gaudí renovation)",
+    "architect": "Antoni Gaudí (renovation)",
+    "translations": {
+      "en": {
+        "name": "Casa Batlló",
+        "narration": "Welcome to Casa Batlló, one of Gaudí's most imaginative buildings. This stunning modernist masterpiece resembles a living organism with its skeletal facade and dragon-like roof.",
+        "description": "Gaudí's fantastical modernist building with skeletal facade",
+        "detailedDescription": "Casa Batlló is a building in the center of Barcelona, renovated by Antoni Gaudí from 1904 to 1906. It is located on Passeig de Gràcia and is one of Gaudí's masterpieces. The building is part of a UNESCO World Heritage Site. The local name for the building is Casa dels ossos (House of Bones), as it has a visceral, skeletal organic quality. The facade is decorated with colorful mosaics and has balconies that resemble skulls or masks. The roof is arched and resembles the back of a dragon, with shingles that look like scales. Inside, Gaudí's organic design continues with curved walls, mushroom-shaped fireplaces, and a spectacular light well designed to distribute natural light throughout the building.",
+        "historicalInfo": "Casa Batlló was originally built in 1877 by Emili Sala Cortés, one of Gaudí's architecture teachers. In 1904, Josep Batlló commissioned Gaudí to renovate the building. Gaudí completely transformed the building between 1904 and 1906. In 2005, Casa Batlló was designated a UNESCO World Heritage Site along with other works by Gaudí.",
+        "yearBuilt": "1877 (original), 1904-1906 (Gaudí renovation)",
+        "architect": "Antoni Gaudí (renovation)"
+      },
+      "ko": {
+        "name": "카사 바트요",
+        "narration": "가우디의 가장 상상력 넘치는 건물 중 하나인 카사 바트요에 오신 것을 환영합니다. 이 놀라운 모더니스트 걸작은 골격 같은 파사드와 용처럼 생긴 지붕으로 살아있는 유기체를 닮았습니다.",
+        "description": "골격 같은 파사드를 가진 가우디의 환상적인 모더니스트 건물",
+        "detailedDescription": "카사 바트요는 1904년부터 1906년까지 안토니 가우디가 개조한 바르셀로나 중심부의 건물입니다. 그라시아 거리에 위치하며 가우디의 걸작 중 하나입니다. 건물은 유네스코 세계문화유산의 일부입니다. 건물의 현지 이름은 카사 델스 오소스(뼈의 집)로, 내장 기관 같은 골격 유기적 특성을 가지고 있습니다. 파사드는 화려한 모자이크로 장식되어 있으며 두개골이나 가면을 닮은 발코니가 있습니다. 지붕은 아치형이며 용의 등을 닮았으며, 비늘처럼 보이는 지붕 널빤지가 있습니다. 내부에서는 가우디의 유기적 디자인이 곡선 벽, 버섯 모양 벽난로, 건물 전체에 자연광을 분산시키도록 설계된 장관의 채광정으로 계속됩니다.",
+        "historicalInfo": "카사 바트요는 원래 가우디의 건축 선생님 중 한 명인 에밀리 살라 코르테스에 의해 1877년에 지어졌습니다. 1904년, 호세프 바트요가 가우디에게 건물 개조를 의뢰했습니다. 가우디는 1904년에서 1906년 사이에 건물을 완전히 변모시켰습니다. 2005년, 카사 바트요는 가우디의 다른 작품들과 함께 유네스코 세계문화유산으로 지정되었습니다.",
+        "yearBuilt": "1877년 (원래), 1904-1906년 (가우디 개조)",
+        "architect": "안토니 가우디 (개조)"
+      },
+      "ja": {
+        "name": "カサ・バトリョ",
+        "narration": "ガウディの最も想像力豊かな建物の一つであるカサ・バトリョへようこそ。この見事なモダニズムの傑作は、骨格のようなファサードとドラゴンのような屋根で生きた有機体に似ています。",
+        "description": "骨格のようなファサードを持つガウディの幻想的なモダニズム建築",
+        "detailedDescription": "カサ・バトリョは、1904年から1906年にアントニ・ガウディによって改装されたバルセロナ中心部の建物です。グラシア通りに位置し、ガウディの傑作の一つです。建物はユネスコ世界遺産の一部です。建物の地元名はカサ・デルス・オッソス(骨の家)で、内臓的で骨格的な有機的な特質を持っています。ファサードはカラフルなモザイクで装飾され、頭蓋骨や仮面に似たバルコニーがあります。屋根はアーチ型でドラゴンの背中に似ており、鱗のように見える帯状の屋根板があります。内部では、ガウディの有機的なデザインが曲線の壁、キノコ型の暖炉、建物全体に自然光を分散するように設計された壮大な光の井戸で続いています。",
+        "historicalInfo": "カサ・バトリョは元々1877年にガウディの建築教師の一人であるエミリ・サラ・コルテスによって建てられました。1904年、ジョゼップ・バトリョがガウディに建物の改装を依頼しました。ガウディは1904年から1906年の間に建物を完全に変貌させました。2005年、カサ・バトリョはガウディの他の作品とともにユネスコ世界遺産に指定されました。",
+        "yearBuilt": "1877年 (オリジナル), 1904-1906年 (ガウディ改装)",
+        "architect": "アントニ・ガウディ (改装)"
+      },
+      "zh": {
+        "name": "巴特罗之家",
+        "narration": "欢迎来到巴特罗之家,高迪最富想象力的建筑之一。这座令人惊叹的现代主义杰作以其骨骼般的立面和龙形屋顶类似于一个活的有机体。",
+        "description": "高迪幻想的现代主义建筑,拥有骨骼立面",
+        "detailedDescription": "巴特罗之家是位于巴塞罗那市中心的一座建筑,由安东尼·高迪于1904年至1906年进行翻新。它位于格拉西亚大道上,是高迪的杰作之一。该建筑是联合国教科文组织世界遗产的一部分。该建筑的当地名称是骨头之家(Casa dels ossos),因为它具有内脏的、骨骼的有机特质。立面装饰着彩色马赛克,阳台类似于头骨或面具。屋顶呈拱形,类似于龙的背部,屋瓦看起来像鳞片。在内部,高迪的有机设计继续着,有弯曲的墙壁、蘑菇形壁炉和一个壮观的天井,旨在将自然光分布到整个建筑。",
+        "historicalInfo": "巴特罗之家最初由高迪的建筑老师之一埃米利·萨拉·科尔特斯于1877年建造。1904年,约瑟普·巴特罗委托高迪翻新这座建筑。高迪在1904年至1906年间彻底改造了这座建筑。2005年,巴特罗之家与高迪的其他作品一起被指定为联合国教科文组织世界遗产。",
+        "yearBuilt": "1877年 (原建筑), 1904-1906年 (高迪翻新)",
+        "architect": "安东尼·高迪 (翻新)"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:27.837Z",
+    "updatedAt": "2026-02-22T19:01:05.202Z"
   },
   {
     "id": "rome_item_71",
@@ -9777,43 +6303,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T12:11:39.696Z",
     "updatedAt": "2026-02-22T18:10:09.396Z"
-  },
-  {
-    "id": "tokyo_item_9",
-    "cityId": "tokyo",
-    "name": "TOKYO Premium Restaurant 9",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 지금 당신은 도쿄의 숨겨진 보석, TOKYO Premium Restaurant 9에 와 있습니다. 은은하게 퍼지는 따뜻한 조명 아래, 섬세하게 세팅된 테이블이 당신을 맞이하죠. 코끝을 간지럽히는 건, 갓 구운 빵의 고소한 냄새와 신선한 해산물의 싱그러움이에요. 마치 미야자키 하야오 감독의 애니메이션 속에 들어온 듯한 기분이 들 거예요. 이곳은 단순한 레스토랑이 아니랍니다. 시간을 거슬러 올라간 듯한 고풍스러운 인테리어는 마치 영화 세트장 같아요. 벽에는 오래된 사진들이 걸려 있는데, 자세히 보면 이 레스토랑의 역사를 담고 있답니다. 한때는 유명한 작가들의 아지트였다고 해요. 상상해보세요. 헤밍웨이가 이곳에서 칵테일을 마시며 영감을 얻고, 마릴린 먼로가 우아하게 저녁 식사를 즐기는 모습을요! 지금 당신의 발 아래에는, 수많은 예술가와 미식가들의 발자취가 고스란히 남아있는 거예요. 그리고 창밖으로는 도쿄의 아름다운 야경이 펼쳐집니다. 반짝이는 불빛들이 마치 밤하늘의 별처럼 쏟아져 내리는 것 같아요. 이곳에서 맛보는 음식은 그야말로 예술입니다. 신선한 재료 본연의 맛을 살린 섬세한 요리들은 당신의 미각을 황홀하게 만들 거예요. 특히, 이곳의 시그니처 메뉴인 '도쿄 스페셜'은 꼭 한번 맛보셔야 합니다. 셰프의 혼이 담긴 이 요리는, 당신의 미식 경험을 한 단계 업그레이드해 줄 거예요. 가족들과 함께 오셨다면 더욱 즐거운 시간을 보내실 수 있을 거예요. 아이들을 위한 특별 메뉴도 준비되어 있고, 넓은 공간에서 편안하게 식사를 즐길 수 있답니다. 사진작가들이 사랑하는 이유를 아시겠나요? 어느 곳을 찍어도 그림이 되는 이곳에서, 인생샷을 남겨보세요. TOKYO Premium Restaurant 9은 단순한 식사를 넘어, 잊지 못할 추억을 선물할 거예요. 자, 이제 눈을 뜨고, 이 모든 경험을 현실로 만들어보세요!",
-    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "TOKYO Premium Restaurant 9은 도쿄의 숨겨진 명소로, 단순한 레스토랑을 넘어선 특별한 경험을 제공합니다. 이곳은 아름다운 풍경, 역사적인 분위기, 그리고 다채로운 체험 공간을 자랑하며, 방문객들에게 잊지 못할 추억을 선사합니다. 레스토랑 내부는 고풍스러운 인테리어로 꾸며져 있으며, 마치 시간을 거슬러 올라간 듯한 느낌을 줍니다. 벽에는 오래된 사진들이 걸려 있는데, 이는 레스토랑의 풍부한 역사를 보여줍니다. 한때 이곳은 유명 작가와 예술가들의 아지트였으며, 그들의 흔적을 곳곳에서 찾아볼 수 있습니다. 특히, 레스토랑의 창밖으로 펼쳐지는 도쿄의 야경은 숨 막힐 듯 아름답습니다. 반짝이는 불빛들은 마치 밤하늘의 별처럼 쏟아져 내리는 듯한 환상적인 분위기를 연출합니다. TOKYO Premium Restaurant 9의 음식은 신선한 재료 본연의 맛을 살린 섬세한 요리로, 미식가들의 입맛을 사로잡습니다. 이곳의 시그니처 메뉴인 '도쿄 스페셜'은 셰프의 혼이 담긴 특별한 요리로, 방문객들에게 깊은 인상을 남깁니다. 현지인들만 아는 꿀팁으로는, 저녁 시간대에 방문하여 라이브 재즈 공연을 감상하며 식사를 즐기는 것을 추천합니다. 또한, 레스토랑 근처에는 숨겨진 골목길들이 있는데, 이곳에서 도쿄의 진짜 매력을 느낄 수 있습니다. 가족 여행객들에게도 TOKYO Premium Restaurant 9은 강력 추천됩니다. 아이들을 위한 특별 메뉴가 준비되어 있으며, 넓은 공간에서 편안하게 식사를 즐길 수 있습니다. 사진작가들이 이곳을 사랑하는 이유는, 어느 곳을 찍어도 그림이 되는 아름다운 풍경 때문입니다. TOKYO Premium Restaurant 9은 단순한 식사를 넘어, 잊지 못할 추억을 선물하는 특별한 공간입니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "TOKYO Premium Restaurant 9",
-        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:02.108Z",
-    "updatedAt": "2026-02-22T18:25:26.324Z"
   },
   {
     "id": "seoul_item_18",
@@ -10301,6 +6790,129 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:10:19.143Z"
   },
   {
+    "id": "st_peters_basilica",
+    "cityId": "rome",
+    "name": "St. Peter's Basilica",
+    "lat": 41.902168,
+    "lng": 12.453937,
+    "radius": 75,
+    "narration": "성 베드로 대성당에 오신 여러분, 안녕하세요! 지금 여러분은 가톨릭 세계의 심장이자, 인류 역사상 가장 거대한 교회 건축물 중 하나 앞에 서 계십니다. 상상해보세요, 르네상스 시대의 걸작이 여러분을 압도하는 웅장함으로 맞이하고 있습니다. 이곳은 단순히 거대한 건축물이 아니라, 초대 교황인 성 베드로가 십자가에 못 박혀 순교한 바로 그 자리 위에 세워진 성스러운 공간입니다. 지금 여러분의 발 아래에는 성인의 넋이 깃들어 있습니다.\n\n성당 안으로 발걸음을 옮기면, 미켈란젤로의 '피에타'가 숨 막힐 듯한 아름다움으로 여러분을 맞이할 겁니다. 성모 마리아의 슬픔과 숭고함이 느껴지는 조각상을 눈에 담아보세요. 천장에는 미켈란젤로가 직접 그린 '천지창조'의 일부가 장식되어 있으며, 돔 위로는 눈부신 햇살이 쏟아져 내립니다. 잠시 숨을 멈추고, 빛과 그림자가 만들어내는 경이로운 풍경을 느껴보세요.\n\n성 베드로 대성당은 예술과 신앙, 역사가 얽혀 있는 특별한 공간입니다. 수많은 예술가와 신앙인들의 열정과 노력이 깃든 이곳에서, 여러분은 시간을 초월하는 감동을 느끼실 수 있을 겁니다. 자, 이제 저와 함께 성 베드로 대성당의 숨겨진 이야기를 찾아 떠나볼까요? 문득, 성 베드로가 이곳에서 마지막 숨을 거두며 어떤 기도를 했을지 상상해보세요. 어쩌면 여러분이 지금 느끼는 감정과 비슷한 것이었을지도 모릅니다.",
+    "description": "The largest church in the world and center of Catholicism",
+    "category": "Religious Site",
+    "detailedDescription": "성 베드로 대성당은 로마 가톨릭의 총본산이자, 세계에서 가장 큰 교회 중 하나입니다. 이곳은 예수 그리스도의 수제자이자 초대 교황인 성 베드로의 무덤 위에 세워졌다고 전해집니다. 기존의 바실리카가 노후화되어 16세기에 재건축되었으며, 브라만테, 미켈란젤로, 라파엘로, 베르니니 등 당대 최고의 예술가들이 참여하여 120년이 넘는 시간 동안 지어졌습니다.\n\n**현지인 꿀팁**: 성 베드로 대성당 돔에 올라가면 로마 시내 전체를 조망할 수 있습니다. 좁고 가파른 계단을 올라야 하지만, 정상에서 바라보는 풍경은 그 모든 노력을 보상해줄 만큼 훌륭합니다. 특히 해 질 무렵의 풍경은 잊을 수 없는 추억을 선사할 것입니다.\n\n**숨겨진 비화**: 성 베드로 대성당 지하에는 교황들의 무덤이 있습니다. 요한 바오로 2세, 베네딕토 16세 등 역대 교황들의 유해가 안치되어 있으며, 일반인에게 공개되지 않는 특별한 공간도 있다고 합니다. 과거에는 교황의 유품이나 비밀 문서 등이 보관되어 있었을 것으로 추정됩니다. 그리고 미켈란젤로의 '피에타'는 한때 헝가리 망치 공격을 받아 복원되었다는 슬픈 역사를 가지고 있습니다. 현재는 방탄 유리로 보호되고 있습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800",
+      "https://images.unsplash.com/photo-1583992876959-af90c2dcf744?w=800",
+      "https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=800",
+      "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=800",
+      "https://images.unsplash.com/photo-1583424223556-bb53f4362c65?w=800",
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800"
+    ],
+    "historicalInfo": "St. Peter's Basilica was built between 1506 and 1626 on the traditional site of Saint Peter's tomb. It is regarded as one of the holiest Catholic shrines and has been described as holding a unique position in the Christian world.",
+    "yearBuilt": "1506-1626",
+    "architect": "Bramante, Michelangelo, Bernini",
+    "translations": {
+      "en": {
+        "name": "St. Peter's Basilica",
+        "narration": "Welcome to St. Peter's Basilica, the heart of the Catholic world and one of the largest churches ever built. This Renaissance masterpiece stands on the traditional site where Saint Peter, the first Pope, was crucified and buried.",
+        "description": "The largest church in the world and center of Catholicism",
+        "historicalInfo": "St. Peter's Basilica was built between 1506 and 1626 on the traditional site of Saint Peter's tomb. It is regarded as one of the holiest Catholic shrines.",
+        "yearBuilt": "1506-1626",
+        "architect": "Bramante, Michelangelo, Bernini"
+      },
+      "it": {
+        "name": "Basilica di San Pietro",
+        "narration": "Benvenuti alla Basilica di San Pietro, il cuore del mondo cattolico e una delle chiese più grandi mai costruite. Questo capolavoro rinascimentale sorge sul sito tradizionale dove San Pietro, il primo Papa, fu crocifisso e sepolto.",
+        "description": "La chiesa più grande del mondo e centro del cattolicesimo",
+        "historicalInfo": "La Basilica di San Pietro fu costruita tra il 1506 e il 1626 sul sito tradizionale della tomba di San Pietro. È considerata uno dei santuari cattolici più sacri.",
+        "yearBuilt": "1506-1626",
+        "architect": "Bramante, Michelangelo, Bernini"
+      },
+      "ko": {
+        "name": "성 베드로 대성당",
+        "narration": "가톨릭 세계의 중심이자 역대 가장 큰 교회 중 하나인 성 베드로 대성당에 오신 것을 환영합니다. 이 르네상스 걸작은 첫 번째 교황인 성 베드로가 십자가에 못 박히고 묻힌 전통적인 장소에 세워져 있습니다.",
+        "description": "세계에서 가장 큰 교회이자 가톨릭의 중심지",
+        "historicalInfo": "성 베드로 대성당은 1506년부터 1626년 사이에 성 베드로의 무덤이 있는 전통적인 장소에 건설되었습니다. 가장 신성한 가톨릭 성지 중 하나로 여겨집니다.",
+        "yearBuilt": "1506-1626년",
+        "architect": "브라만테, 미켈란젤로, 베르니니"
+      },
+      "es": {
+        "name": "Basílica de San Pedro",
+        "narration": "Bienvenido a la Basílica de San Pedro, el corazón del mundo católico y una de las iglesias más grandes jamás construidas. Esta obra maestra del Renacimiento se levanta en el lugar tradicional donde San Pedro, el primer Papa, fue crucificado y enterrado.",
+        "description": "La iglesia más grande del mundo y centro del catolicismo",
+        "detailedDescription": "La Basílica de San Pedro es la iglesia más grande del mundo y uno de los lugares más sagrados del cristianismo, construida sobre el sitio tradicional de la tumba del apóstol Pedro. Esta obra maestra del Renacimiento tardío y el Barroco fue diseñada principalmente por Donato Bramante, Miguel Ángel, Carlo Maderno y Gian Lorenzo Bernini, con la construcción extendiéndose desde 1506 hasta 1626. La fachada se eleva 45,5 metros de altura y su icónica cúpula, diseñada por Miguel Ángel, alcanza 136,6 metros. En el interior, la basílica alberga la Piedad de Miguel Ángel y el Baldaquino de Bernini. Como centro espiritual de la Iglesia Católica, atrae a millones de peregrinos y visitantes cada año.",
+        "historicalInfo": "La Basílica de San Pedro fue construida entre 1506 y 1626 en el lugar tradicional de la tumba de San Pedro. Es considerada uno de los santuarios católicos más sagrados.",
+        "yearBuilt": "1506-1626",
+        "architect": "Bramante, Miguel Ángel, Bernini"
+      },
+      "fr": {
+        "name": "Basilique Saint-Pierre",
+        "narration": "Bienvenue à la Basilique Saint-Pierre, le cœur du monde catholique et l'une des plus grandes églises jamais construites. Ce chef-d'œuvre de la Renaissance s'élève sur le site traditionnel où Saint Pierre, le premier pape, a été crucifié et enterré.",
+        "description": "La plus grande église du monde et centre du catholicisme",
+        "detailedDescription": "La Basilique Saint-Pierre est la plus grande église du monde et l'un des lieux les plus sacrés du christianisme, construite sur le site traditionnel de la tombe de l'apôtre Pierre. Ce chef-d'œuvre de la Renaissance tardive et du Baroque a été principalement conçu par Donato Bramante, Michel-Ange, Carlo Maderno et Gian Lorenzo Bernini, avec une construction s'étendant de 1506 à 1626. La façade s'élève à 45,5 mètres de haut et son dôme emblématique, conçu par Michel-Ange, atteint 136,6 mètres. À l'intérieur, la basilique abrite la Pietà de Michel-Ange et le Baldaquin de Bernini. En tant que centre spirituel de l'Église catholique, elle attire des millions de pèlerins et de visiteurs chaque année.",
+        "historicalInfo": "La Basilique Saint-Pierre a été construite entre 1506 et 1626 sur le site traditionnel du tombeau de Saint Pierre. Elle est considérée comme l'un des sanctuaires catholiques les plus sacrés.",
+        "yearBuilt": "1506-1626",
+        "architect": "Bramante, Michel-Ange, Le Bernin"
+      },
+      "de": {
+        "name": "Petersdom",
+        "narration": "Willkommen im Petersdom, dem Herzen der katholischen Welt und einer der größten Kirchen, die je gebaut wurden. Dieses Renaissance-Meisterwerk steht an der traditionellen Stelle, wo der Heilige Petrus, der erste Papst, gekreuzigt und begraben wurde.",
+        "description": "Die größte Kirche der Welt und Zentrum des Katholizismus",
+        "detailedDescription": "Der Petersdom ist die größte Kirche der Welt und einer der heiligsten Orte des Christentums, erbaut über der traditionellen Grabstätte des Apostels Petrus. Dieses Meisterwerk der Spätrenaissance und des Barock wurde hauptsächlich von Donato Bramante, Michelangelo, Carlo Maderno und Gian Lorenzo Bernini entworfen, wobei sich der Bau von 1506 bis 1626 erstreckte. Die Fassade erhebt sich 45,5 Meter hoch und ihre ikonische Kuppel, entworfen von Michelangelo, erreicht 136,6 Meter. Im Inneren beherbergt die Basilika Michelangelos Pietà und Berninis Baldachin. Als spirituelles Zentrum der katholischen Kirche zieht sie jährlich Millionen von Pilgern und Besuchern an.",
+        "historicalInfo": "Der Petersdom wurde zwischen 1506 und 1626 an der traditionellen Grabstätte des Heiligen Petrus erbaut. Er gilt als eines der heiligsten katholischen Heiligtümer.",
+        "yearBuilt": "1506-1626",
+        "architect": "Bramante, Michelangelo, Bernini"
+      },
+      "zh": {
+        "name": "圣彼得大教堂",
+        "narration": "欢迎来到圣彼得大教堂，天主教世界的中心，也是有史以来建造的最大教堂之一。这座文艺复兴杰作矗立在传统上圣彼得——第一任教皇——被钉十字架和埋葬的地方。",
+        "description": "世界上最大的教堂，天主教的中心",
+        "historicalInfo": "圣彼得大教堂于1506年至1626年间建造在圣彼得墓的传统地点上。它被视为最神圣的天主教圣殿之一。",
+        "yearBuilt": "1506-1626年",
+        "architect": "布拉曼特、米开朗基罗、贝尔尼尼"
+      },
+      "ja": {
+        "name": "サン・ピエトロ大聖堂",
+        "narration": "カトリック世界の中心であり、史上最大の教会の一つであるサン・ピエトロ大聖堂へようこそ。このルネサンスの傑作は、初代教皇である聖ペトロが十字架にかけられ埋葬された伝統的な場所に建っています。",
+        "description": "世界最大の教会であり、カトリックの中心地",
+        "historicalInfo": "サン・ピエトロ大聖堂は1506年から1626年にかけて聖ペトロの墓がある伝統的な場所に建設されました。最も神聖なカトリックの聖地の一つとされています。",
+        "yearBuilt": "1506-1626年",
+        "architect": "ブラマンテ、ミケランジェロ、ベルニーニ"
+      },
+      "pt": {
+        "name": "Basílica de São Pedro",
+        "narration": "Bem-vindo à Basílica de São Pedro, o coração do mundo católico e uma das maiores igrejas já construídas. Esta obra-prima do Renascimento ergue-se no local tradicional onde São Pedro, o primeiro Papa, foi crucificado e enterrado.",
+        "description": "A maior igreja do mundo e centro do catolicismo",
+        "detailedDescription": "A Basílica de São Pedro é a maior igreja do mundo e um dos lugares mais sagrados do cristianismo, construída sobre o local tradicional do túmulo do apóstolo Pedro. Esta obra-prima do Renascimento tardio e do Barroco foi projetada principalmente por Donato Bramante, Michelangelo, Carlo Maderno e Gian Lorenzo Bernini, com a construção estendendo-se de 1506 a 1626. A fachada ergue-se a 45,5 metros de altura e sua icônica cúpula, projetada por Michelangelo, atinge 136,6 metros. No interior, a basílica abriga a Pietà de Michelangelo e o Baldaquino de Bernini. Como centro espiritual da Igreja Católica, atrai milhões de peregrinos e visitantes a cada ano.",
+        "historicalInfo": "A Basílica de São Pedro foi construída entre 1506 e 1626 no local tradicional do túmulo de São Pedro. É considerada um dos santuários católicos mais sagrados.",
+        "yearBuilt": "1506-1626",
+        "architect": "Bramante, Michelangelo, Bernini"
+      },
+      "ru": {
+        "name": "Собор Святого Петра",
+        "narration": "Добро пожаловать в Собор Святого Петра, сердце католического мира и одну из крупнейших церквей, когда-либо построенных. Этот шедевр эпохи Возрождения стоит на традиционном месте, где Святой Пётр, первый Папа, был распят и погребён.",
+        "description": "Крупнейшая церковь в мире и центр католицизма",
+        "detailedDescription": "Собор Святого Петра — крупнейшая церковь в мире и одно из самых священных мест христианства, построенная над традиционным местом захоронения апостола Петра. Этот шедевр позднего Возрождения и барокко был создан в основном Донато Браманте, Микеланджело, Карло Мадерно и Джан Лоренцо Бернини, а строительство продолжалось с 1506 по 1626 год. Фасад возвышается на 45,5 метра в высоту, а её культовый купол, спроектированный Микеланджело, достигает 136,6 метра. Внутри базилика хранит Пьету Микеланджело и балдахин Бернини. Как духовный центр Католической церкви, ежегодно привлекает миллионы паломников и посетителей.",
+        "historicalInfo": "Собор Святого Петра был построен между 1506 и 1626 годами на традиционном месте гробницы Святого Петра. Он считается одной из самых священных католических святынь.",
+        "yearBuilt": "1506-1626 гг.",
+        "architect": "Браманте, Микеланджело, Бернини"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:24.571Z",
+    "updatedAt": "2026-02-22T19:01:05.371Z"
+  },
+  {
     "id": "seoul_item_88",
     "cityId": "seoul",
     "name": "SEOUL Premium Landmark 88",
@@ -10515,6 +7127,123 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:26:33.427Z"
   },
   {
+    "id": "eiffel_tower",
+    "cityId": "paris",
+    "name": "Eiffel Tower",
+    "lat": 48.858093,
+    "lng": 2.294694,
+    "radius": 70,
+    "narration": "상상해보세요. 지금 여러분은 파리의 심장, 에펠탑 아래에 서 있습니다. 1889년 만국 박람회를 위해 지어진 이 철골 구조물은 단순한 건축물을 넘어, 프랑스를 상징하는 아이콘이 되었죠. 하늘을 찌를 듯 솟아오른 탑을 올려다보면, 그 웅장함에 압도당하게 됩니다. 탑을 감싸는 철골 구조는 마치 섬세한 레이스처럼 아름답고, 파리의 햇살을 받아 반짝이는 모습은 정말 장관이에요. \n\n엘리베이터를 타고 올라가는 동안, 파리의 풍경이 서서히 눈 앞에 펼쳐지는 것을 느껴보세요. 1층, 2층을 지나 점점 더 높이 올라갈수록, 도시의 모습은 더욱 선명해집니다. 샹젤리제 거리의 활기찬 모습, 센 강을 따라 흐르는 유람선, 몽마르뜨 언덕 위의 사크레쾨르 대성당까지, 파리의 주요 명소들이 한눈에 들어오죠. \n\n드디어 정상에 도착했습니다! 발 아래 펼쳐진 파리의 전경은 숨 막힐 듯 아름답습니다. 에펠탑에서 바라보는 일몰은 특히 잊을 수 없는 경험이 될 거예요. 붉게 물든 하늘 아래, 파리의 건물들이 실루엣처럼 드러나는 모습은 마치 한 폭의 그림 같습니다. 눈을 감고, 파리의 낭만적인 공기를 깊이 들이마셔보세요. 에펠탑은 단순한 관광 명소를 넘어, 파리의 역사와 문화를 담고 있는 특별한 공간입니다. 이곳에서 여러분은 파리의 아름다움과 낭만을 마음껏 느껴볼 수 있을 거예요. 자, 이제 에펠탑의 매력에 흠뻑 빠져볼까요?",
+    "description": "The most-visited paid monument in the world",
+    "category": "Monument",
+    "detailedDescription": "에펠탑은 1889년 프랑스 혁명 100주년을 기념하여 개최된 파리 만국 박람회를 위해 지어졌습니다. 당시 혁신적인 건축 기술을 선보였지만, 당대 예술가와 지식인들로부터 '흉물스럽다'는 비판을 받기도 했습니다. 하지만 시간이 지나면서 에펠탑은 파리의 상징으로 자리 잡았고, 현재는 매년 수백만 명의 관광객이 방문하는 세계적인 명소가 되었습니다. 에펠탑 건설에는 약 2년 2개월의 시간이 소요되었으며, 7,300톤의 철과 250만 개의 리벳이 사용되었습니다. 숨겨진 이야기 하나를 들려드릴까요? 에펠탑 꼭대기에는 작은 비밀 아파트가 있는데, 설계자인 귀스타브 에펠이 손님을 맞이하기 위해 만든 공간이라고 합니다. 에펠은 이곳에서 에디슨과 같은 유명 인사들과 교류하며 시간을 보냈다고 해요. 에펠탑을 방문할 때는 엘리베이터를 이용하는 것이 일반적이지만, 용기 있는 분들은 계단을 이용해 올라갈 수도 있습니다. 계단을 통해 올라가면 에펠탑의 구조를 더욱 자세히 감상할 수 있고, 색다른 경험을 할 수 있을 거예요.",
+    "photos": [
+      "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=1600&q=80",
+      "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800",
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800",
+      "https://images.unsplash.com/photo-1431274172761-fca41d930114?w=800",
+      "https://images.unsplash.com/photo-1543349689-9a4d426bee8e?w=800"
+    ],
+    "historicalInfo": "The Eiffel Tower was built for the 1889 World's Fair and was initially criticized by some of France's leading artists and intellectuals. It has become a global cultural icon of France.",
+    "yearBuilt": "1887-1889",
+    "architect": "Gustave Eiffel",
+    "translations": {
+      "en": {
+        "name": "Eiffel Tower",
+        "narration": "Welcome to the Eiffel Tower, the iron lady of Paris. Built for the 1889 World's Fair, it has become the global icon of France.",
+        "description": "The most-visited paid monument in the world",
+        "detailedDescription": "The Eiffel Tower, or \"La Tour Eiffel,\" stands as the undisputed symbol of Paris and France, an iron lattice masterpiece that has captivated the world since its completion in 1889. Rising 330 meters (1,083 feet) into the Parisian sky, this architectural marvel was initially conceived as a temporary structure for the 1889 Exposition Universelle (World's Fair), celebrating the centennial of the French Revolution. Today, it welcomes nearly seven million visitors annually, making it the most-visited paid monument in the world. The tower was designed by engineer Gustave Eiffel, whose company specialized in metal framework construction. Eiffel's design was selected from over 100 submissions in a competition to create a centerpiece for the World's Fair. The structure's innovative design and unprecedented height sparked intense controversy among Parisian artists and intellectuals, who published a petition called \"Artists Against the Eiffel Tower,\" denouncing it as a monstrous iron monstrosity that would disfigure the elegant Parisian skyline. Notable critics included author Guy de Maupassant, who reportedly ate lunch in the tower's restaurant every day because it was the one place in Paris where he couldn't see the tower. Construction began in January 1887 and was completed in a remarkable 2 years, 2 months, and 5 days, a testament to Eiffel's engineering prowess and organizational skills. The tower required 18,038 metallic parts, 2.5 million rivets, and over 300 workers to assemble. Despite the enormous scale of the project and the height at which much of the work was performed, only one worker died during construction - a remarkably low casualty rate for the era. The tower's lattice structure was revolutionary, using an open-frame design that minimized wind resistance while maximizing strength. The four massive curved legs rest on concrete foundations, each supported by four separate foundation blocks. The legs converge as they rise, meeting at the first platform at 57 meters (187 feet). Above this, the structure continues upward through a second platform at 115 meters (377 feet) before tapering to the summit at 300 meters, with antennas extending the total height to 330 meters. The tower was painted a distinctive reddish-brown color for the exposition, but has since been repainted 18 times, with the current \"Eiffel Tower Brown\" requiring 60 tons of paint applied in three different shades - darker at the bottom and lighter at the top to enhance its appearance against the sky. Originally intended to stand for only 20 years, the Eiffel Tower was saved from demolition when Eiffel shrewdly emphasized its value as a radiotelegraphy station. The tower proved invaluable during World War I for intercepting enemy communications, and later became essential for radio and television broadcasting. During World War II, when Hitler visited Paris in 1940, French resistance fighters cut the elevator cables, forcing the Führer to climb the stairs if he wanted to reach the summit - he declined. The tower has served as the site of numerous scientific experiments, including Eiffel's own aerodynamic and meteorological studies. Physicist Théodore Wulf conducted radiation experiments from the top in 1910, leading to the discovery of cosmic rays. The tower has also witnessed remarkable feats of daring: in 1912, Austrian tailor Franz Reichelt jumped from the first platform wearing a parachute suit of his own design - tragically, it failed. In 1923, journalist Pierre Labric rode a bicycle down the stairs from the first level. The tower's three platforms offer spectacular views of Paris and host restaurants, museums, and shops. The first platform, recently renovated, features a glass floor offering a thrilling view straight down. The second platform houses the Michelin-starred restaurant Jules Verne, offering gourmet dining with unparalleled views. The summit, accessible by elevator, provides a breathtaking 360-degree panorama of the City of Light. The tower has been featured in countless films, artworks, and photographs, becoming synonymous with romance, elegance, and French culture. It serves as the backdrop for millions of proposals, weddings, and celebrations each year. Every evening, the tower sparkles for five minutes at the beginning of each hour after sunset, illuminated by 20,000 light bulbs installed in 1985, creating a magical spectacle visible throughout Paris. Recent additions include wind turbines and solar panels, making the iconic structure more environmentally sustainable while maintaining its historic character. The tower also hosts various exhibitions and events, from art installations to sporting events, continually reinventing itself while remaining true to Eiffel's original vision. Today, the Eiffel Tower stands not just as an engineering achievement but as a testament to human creativity, ambition, and the power of vision to overcome criticism and create something truly timeless. What was once derided as an eyesore has become the most recognizable landmark on Earth, proving that great art and engineering can transform not just skylines, but hearts and minds across generations."
+      },
+      "it": {
+        "name": "Torre Eiffel",
+        "narration": "Benvenuto alla Torre Eiffel, la dama di ferro di Parigi. Costruita per l'Esposizione Universale del 1889, è diventata l'icona globale della Francia.",
+        "description": "Il monumento a pagamento più visitato al mondo",
+        "historicalInfo": "La Torre Eiffel fu costruita per l'Esposizione Universale del 1889 e inizialmente fu criticata da alcuni dei principali artisti e intellettuali francesi. È diventata un'icona culturale globale della Francia.",
+        "yearBuilt": "1887-1889",
+        "architect": "Gustave Eiffel"
+      },
+      "ko": {
+        "name": "에펠탑",
+        "narration": "파리의 철의 여인, 에펠탑에 오신 것을 환영합니다. 1889년 만국박람회를 위해 건설되어 프랑스의 세계적인 상징이 되었습니다.",
+        "description": "세계에서 가장 많이 방문하는 유료 기념물",
+        "detailedDescription": "\"라 투르 에펠\"이라고도 불리는 에펠탑은 파리와 프랑스의 확실한 상징으로, 1889년 완공 이후 세계를 매료시켜온 철제 격자 구조의 걸작입니다. 파리 하늘 위로 330미터(1,083피트) 높이로 솟아있는 이 건축적 경이는 프랑스 혁명 100주년을 기념하는 1889년 만국박람회를 위한 임시 구조물로 처음 구상되었습니다. 오늘날 매년 거의 700만 명의 방문객을 맞이하며 세계에서 가장 많이 방문하는 유료 기념물이 되었습니다. 탑은 금속 골조 건설을 전문으로 하는 기술자 귀스타브 에펠이 설계했습니다. 에펠의 디자인은 만국박람회의 중심물을 만들기 위한 경쟁에서 100개 이상의 제출작 중에서 선정되었습니다. 구조물의 혁신적인 디자인과 전례 없는 높이는 파리 예술가와 지식인들 사이에서 격렬한 논란을 일으켰으며, 그들은 \"에펠탑에 반대하는 예술가들\"이라는 청원서를 발표하여 우아한 파리 스카이라인을 훼손할 괴물 같은 철제 괴물이라고 비난했습니다. 건설은 1887년 1월에 시작되어 놀랍게도 2년 2개월 5일 만에 완료되었으며, 이는 에펠의 공학적 능력과 조직 기술을 증명합니다. 탑은 18,038개의 금속 부품, 250만 개의 리벳, 300명 이상의 노동자가 필요했습니다. 작업이 수행된 높이와 프로젝트의 엄청난 규모에도 불구하고 건설 중 단 한 명의 노동자만 사망했습니다. 방문 팁: 일몰 시간에 방문하면 파리의 황금빛 풍경과 밤의 반짝이는 조명쇼를 모두 즐길 수 있으며, 티켓은 온라인으로 미리 예약하는 것이 좋고, 2층까지는 계단으로 올라가면 더 저렴하고 군중을 피할 수 있습니다.",
+        "historicalInfo": "에펠탑은 1889년 만국박람회를 위해 건설되었으며 처음에는 프랑스의 주요 예술가와 지식인들로부터 비판을 받았습니다. 프랑스의 세계적인 문화 아이콘이 되었습니다.",
+        "yearBuilt": "1887-1889년",
+        "architect": "귀스타브 에펠"
+      },
+      "es": {
+        "name": "Torre Eiffel",
+        "narration": "Bienvenido a la Torre Eiffel, la dama de hierro de París. Construida para la Exposición Universal de 1889, se ha convertido en el icono global de Francia.",
+        "description": "El monumento de pago más visitado del mundo",
+        "historicalInfo": "La Torre Eiffel fue construida para la Exposición Universal de 1889 y fue inicialmente criticada por algunos de los principales artistas e intelectuales de Francia. Se ha convertido en un icono cultural global de Francia.",
+        "yearBuilt": "1887-1889",
+        "architect": "Gustave Eiffel"
+      },
+      "fr": {
+        "name": "Tour Eiffel",
+        "narration": "Bienvenue à la Tour Eiffel, la dame de fer de Paris. Construite pour l'Exposition Universelle de 1889, elle est devenue l'icône mondiale de la France.",
+        "description": "Le monument payant le plus visité au monde",
+        "historicalInfo": "La Tour Eiffel a été construite pour l'Exposition Universelle de 1889 et a été initialement critiquée par certains des principaux artistes et intellectuels français. Elle est devenue une icône culturelle mondiale de la France.",
+        "yearBuilt": "1887-1889",
+        "architect": "Gustave Eiffel"
+      },
+      "de": {
+        "name": "Eiffelturm",
+        "narration": "Willkommen am Eiffelturm, der eisernen Dame von Paris. Erbaut für die Weltausstellung 1889, ist er zum globalen Symbol Frankreichs geworden.",
+        "description": "Das meistbesuchte kostenpflichtige Monument der Welt",
+        "historicalInfo": "Der Eiffelturm wurde für die Weltausstellung 1889 gebaut und wurde anfangs von einigen führenden französischen Künstlern und Intellektuellen kritisiert. Er ist zu einer globalen kulturellen Ikone Frankreichs geworden.",
+        "yearBuilt": "1887-1889",
+        "architect": "Gustave Eiffel"
+      },
+      "zh": {
+        "name": "埃菲尔铁塔",
+        "narration": "欢迎来到埃菲尔铁塔，巴黎的钢铁女士。为1889年世界博览会建造，已成为法国的全球象征。",
+        "description": "世界上访问量最多的收费纪念碑",
+        "detailedDescription": "埃菲尔铁塔，或称\"La Tour Eiffel\"，是巴黎和法国无可争议的象征，自1889年完工以来一直吸引着世界的铁格子杰作。这座建筑奇迹高耸入巴黎天空330米（1,083英尺），最初是为庆祝法国大革命一百周年的1889年世界博览会而设计的临时建筑。如今，它每年接待近700万游客，成为世界上访问量最多的收费纪念碑。铁塔由专门从事金属框架建设的工程师古斯塔夫·埃菲尔设计。埃菲尔的设计从100多份提交作品中脱颖而出，赢得了为世界博览会创建标志性建筑的竞赛。这座建筑的创新设计和前所未有的高度在巴黎艺术家和知识分子中引发了激烈争议，他们发表了一份名为\"反对埃菲尔铁塔的艺术家\"的请愿书，谴责它是一个会破坏优雅巴黎天际线的怪异铁怪物。值得注意的批评者包括作家莫泊桑，据说他每天都在塔的餐厅吃午餐，因为那是巴黎唯一一个看不到铁塔的地方。建设于1887年1月开始，并在令人瞩目的2年2个月零5天内完成，这证明了埃菲尔的工程能力和组织技能。铁塔需要18,038个金属部件、250万个铆钉和300多名工人组装。尽管项目规模巨大，工作高度也很高，但施工期间只有一名工人死亡——这在当时是一个非常低的伤亡率。游览提示：日落时分参观可以欣赏巴黎的金色景观和夜晚的闪烁灯光秀，建议提前在线预订门票，步行上二层更便宜且可以避开人群。",
+        "historicalInfo": "埃菲尔铁塔为1889年世界博览会而建，最初受到一些法国主要艺术家和知识分子的批评。它已成为法国的全球文化象征。",
+        "yearBuilt": "1887-1889年",
+        "architect": "古斯塔夫·埃菲尔"
+      },
+      "ja": {
+        "name": "エッフェル塔",
+        "narration": "パリの鉄の貴婦人、エッフェル塔へようこそ。1889年の万国博覧会のために建設され、フランスの世界的象徴となりました。",
+        "description": "世界で最も訪問者の多い有料モニュメント",
+        "detailedDescription": "エッフェル塔、または「ラ・トゥール・エッフェル」は、パリとフランスの揺るぎない象徴として、1889年の完成以来世界を魅了してきた鉄格子の傑作です。パリの空に330メートル（1,083フィート）の高さでそびえ立つこの建築の驚異は、フランス革命100周年を祝う1889年の万国博覧会のための一時的な構造物として当初考案されました。今日では毎年約700万人の訪問者を迎え、世界で最も訪問者の多い有料モニュメントとなっています。塔は金属骨組み建設を専門とする技術者ギュスターヴ・エッフェルによって設計されました。エッフェルのデザインは、万国博覧会の目玉を作るための競争で100以上の提出作品から選ばれました。構造物の革新的なデザインと前例のない高さは、パリの芸術家や知識人の間で激しい論争を引き起こし、彼らは「エッフェル塔に反対する芸術家たち」という嘆願書を発表し、優雅なパリのスカイラインを台無しにする怪物のような鉄の怪物だと非難しました。著名な批評家には作家ギ・ド・モーパッサンが含まれ、彼は毎日塔のレストランで昼食を食べたと伝えられていますが、それは塔が見えないパリで唯一の場所だったからです。建設は1887年1月に始まり、驚くべき2年2ヶ月5日で完成し、エッフェルの工学的能力と組織力の証となりました。塔には18,038個の金属部品、250万個のリベット、300人以上の労働者が必要でした。プロジェクトの巨大な規模と作業が行われた高さにもかかわらず、建設中に死亡した労働者はわずか1人でした。訪問のヒント：日没時に訪れるとパリの黄金の景色と夜の輝くライトショーの両方を楽しめ、チケットはオンラインで事前予約することをお勧めし、2階まで階段で登るとより安く混雑を避けられます。",
+        "historicalInfo": "エッフェル塔は1889年の万国博覧会のために建設され、当初はフランスの主要な芸術家や知識人から批判されました。フランスの世界的な文化的象徴となっています。",
+        "yearBuilt": "1887-1889年",
+        "architect": "ギュスターヴ・エッフェル"
+      },
+      "pt": {
+        "name": "Torre Eiffel",
+        "narration": "Bem-vindo à Torre Eiffel, a dama de ferro de Paris. Construída para a Exposição Universal de 1889, tornou-se o ícone global da França.",
+        "description": "O monumento pago mais visitado do mundo",
+        "historicalInfo": "A Torre Eiffel foi construída para a Exposição Universal de 1889 e foi inicialmente criticada por alguns dos principais artistas e intelectuais da França. Tornou-se um ícone cultural global da França.",
+        "yearBuilt": "1887-1889",
+        "architect": "Gustave Eiffel"
+      },
+      "ru": {
+        "name": "Эйфелева башня",
+        "narration": "Добро пожаловать на Эйфелеву башню, железную леди Парижа. Построенная для Всемирной выставки 1889 года, она стала мировым символом Франции.",
+        "description": "Самый посещаемый платный памятник в мире",
+        "historicalInfo": "Эйфелева башня была построена для Всемирной выставки 1889 года и первоначально подвергалась критике со стороны некоторых ведущих французских художников и интеллектуалов. Она стала глобальным культурным символом Франции.",
+        "yearBuilt": "1887-1889 гг.",
+        "architect": "Гюстав Эйфель"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:24.812Z",
+    "updatedAt": "2026-02-22T19:01:05.534Z"
+  },
+  {
     "id": "paris_item_92",
     "cityId": "paris",
     "name": "파리 프리미엄 Landmark 추천 93",
@@ -10702,6 +7431,121 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:27:23.382Z"
   },
   {
+    "id": "tower_bridge",
+    "cityId": "london",
+    "name": "Tower Bridge",
+    "lat": 51.5055,
+    "lng": -0.0753,
+    "radius": 60,
+    "narration": "자, 런던의 심장을 두근거리게 하는 타워 브리지에 오신 여러분, 상상해보세요! 지금 여러분의 발 아래에는 유유히 흐르는 템스 강이 펼쳐져 있고, 눈 앞에는 빅토리아 시대의 웅장한 건축물이 펼쳐져 있습니다. 1894년에 완공된 이 다리는 단순한 다리가 아니에요. 런던의 역사와 기술, 그리고 아름다움이 응축된 상징과도 같죠. 다리 위를 걷는 동안, 템스 강을 가로지르는 수많은 배들의 뱃고동 소리가 귓가에 맴도는 듯합니다. 갈매기들은 하늘을 가르며 자유롭게 날아다니고, 저 멀리 런던 아이와 세인트 폴 대성당의 모습도 눈에 들어오네요. 다리 양쪽의 웅장한 탑 안에는 빅토리아 시대의 증기 엔진이 아직까지 보존되어 있다고 해요. 한때 다리를 들어올리는 데 사용되었던 이 엔진들은 이제 박물관이 되어 우리를 과거로 데려다줍니다. 템스 강을 따라 늘어선 펍에서는 흥겨운 노랫소리가 들려오고, 다리 아래를 지나는 유람선에서는 관광객들의 웃음소리가 끊이지 않아요. 타워 브리지는 낮에는 웅장한 자태를 뽐내지만, 밤에는 화려한 조명으로 옷을 갈아입고 더욱 매혹적인 모습으로 변신합니다. 특히 다리가 들어 올려지는 모습은 장관이라고 하니, 시간을 맞춰 방문하는 것도 잊지 마세요! 타워 브리지를 건너면서, 런던의 과거와 현재, 그리고 미래를 느껴보세요. 마치 시간 여행을 하는 듯한 특별한 경험을 하게 될 겁니다!",
+    "description": "An iconic symbol of London since 1894",
+    "category": "Bridge",
+    "detailedDescription": "타워 브리지는 런던의 대표적인 랜드마크이자, 빅토리아 시대의 기술력을 보여주는 걸작입니다. 19세기 후반, 런던의 동쪽 지역이 급격히 발전하면서 템스 강을 가로지르는 새로운 다리의 필요성이 대두되었죠. 하지만 동시에 템스 강을 오가는 배들의 통행도 방해해서는 안 되었기에, 다리를 들어 올릴 수 있는 특별한 설계가 필요했습니다. 그렇게 탄생한 것이 바로 타워 브리지입니다. 다리 양쪽의 탑은 고딕 양식으로 지어졌으며, 내부에는 빅토리아 시대의 증기 엔진이 보존되어 있습니다. 이 엔진은 한때 다리를 들어올리는 데 사용되었으며, 현재는 박물관으로 운영되고 있죠. 다리 위에는 보행자 통로가 있는데, 이곳에서는 런던의 아름다운 스카이라인을 감상할 수 있습니다. 특히 템스 강을 가로지르는 수많은 다리들과 런던 아이, 세인트 폴 대성당 등 주요 랜드마크를 한눈에 담을 수 있다는 장점이 있습니다. 현지인들은 타워 브리지의 '바스큘'이 작동되는 모습을 보기 위해 종종 몰려든다고 해요. 미리 시간을 확인하고 방문하면 더욱 특별한 경험을 할 수 있습니다. 꿀팁 하나 더! 타워 브리지 바로 옆에는 '타워 오브 런던'이 있는데, 이곳은 런던의 역사와 왕실의 보물을 만날 수 있는 곳이니 함께 방문해보는 것을 추천합니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
+      "https://images.unsplash.com/photo-1520986606214-8b456906c813?w=800",
+      "https://images.unsplash.com/photo-1532178324009-6b6adeca1741?w=800"
+    ],
+    "historicalInfo": "Tower Bridge was built between 1886 and 1894 and is one of London's most famous landmarks. The bascule bridge mechanism allows the roadway to be raised to let river traffic pass underneath.",
+    "yearBuilt": "1886-1894",
+    "architect": "Horace Jones and John Wolfe Barry",
+    "translations": {
+      "en": {
+        "name": "Tower Bridge",
+        "narration": "You are at Tower Bridge, one of London's most famous landmarks. This combined bascule and suspension bridge crosses the River Thames.",
+        "description": "An iconic symbol of London since 1894",
+        "detailedDescription": "Tower Bridge, one of London's most recognizable landmarks, stands as a magnificent example of Victorian engineering ingenuity and Gothic Revival architecture. Spanning the River Thames near the Tower of London, this iconic combined bascule and suspension bridge has become synonymous with London itself, its distinctive twin towers and blue-painted suspension chains appearing in countless photographs, films, and artworks since its completion in 1894. The bridge's construction was necessitated by the massive commercial growth of the East End of London during the 19th century, which required a new river crossing east of London Bridge that wouldn't disrupt river traffic to the busy Pool of London docks. The challenge was unprecedented: how to build a bridge low enough for pedestrians and vehicles to cross easily, yet able to allow tall-masted ships to pass underneath. In 1876, the City of London Corporation formed a Special Bridge or Subway Committee to find a solution, receiving over 50 design proposals ranging from the practical to the fantastical. The winning design, submitted by Horace Jones, the City Architect, in collaboration with engineer John Wolfe Barry, ingeniously solved the problem with a bascule (seesaw) bridge whose roadway could be raised to allow ships to pass. Jones and Barry's Gothic Revival design featured two massive towers rising 65 meters (213 feet) above the Thames, connected at the upper level by two horizontal walkways designed to allow pedestrians to cross even when the bridge was raised. The towers were clad in Cornish granite and Portland stone to provide a pleasing appearance and to protect the steel framework beneath, creating a structure that appeared medieval while incorporating cutting-edge Victorian technology. Construction began in 1886 and employed 432 workers over eight years, tragically claiming the lives of 10 men during the dangerous work. The bridge required 70,000 tons of concrete to be sunk into the riverbed to support the massive structure. Over 11,000 tons of steel formed the framework, which was then clad in stone. The bascule mechanism was revolutionary for its time - two massive bascules (leaves), each weighing over 1,000 tons, could be raised to an angle of 83 degrees in just five minutes. Originally powered by steam, the hydraulic system used water pumped into accumulators by steam engines to move the bascules. The system was so well-designed that it required relatively little power to operate, with the massive counterweights doing much of the work. The high-level walkways, 42 meters (138 feet) above the Thames at high tide, quickly became popular with prostitutes and pickpockets rather than legitimate pedestrians, leading to their closure in 1910. They remained closed until 1982 when they reopened as part of the Tower Bridge Exhibition, now featuring glass floors offering thrilling views down to the river and road below. Tower Bridge was officially opened on June 30, 1894, by the Prince of Wales (the future King Edward VII) and his wife, Alexandra of Denmark. In its early years, the bridge was raised almost 50 times per day to allow ships to pass. Today, it still opens approximately 800 times per year, though the mechanism is now powered by electricity rather than steam. The bridge has been the scene of numerous daring incidents. In 1952, a double-decker bus found itself on the bridge as it began to open; driver Albert Gunter accelerated and jumped the growing gap, earning himself a £10 bonus for bravery. In 1968, Royal Air Force pilot Alan Pollock flew his Hawker Hunter jet through the bridge's towers as an unauthorized protest, threading his aircraft through the upper and lower spans. The bridge underwent major color changes over its history. Originally chocolate brown, it was repainted red, white, and blue for Queen Elizabeth II's Silver Jubilee in 1977. It was later repainted in the current blue and white color scheme that many consider iconic, though historians note it was never these colors originally. The Engine Rooms, located in the bridge's southern approach, house the original Victorian steam engines, accumulators, and boilers that once powered the bridge. These magnificent examples of Victorian engineering, built by Armstrong Mitchell & Company, have been preserved as a museum, allowing visitors to see the intricate machinery that made the bridge's operation possible. The engines, though no longer in use, remain in pristine condition, their brass fittings polished and copper pipes gleaming, offering a window into the industrial age. Tower Bridge has appeared in countless films, from \"Spice World\" to \"Bridget Jones's Diary,\" and has been destroyed in numerous disaster movies, including \"The Mummy Returns\" and \"Thor: The Dark World.\" It often appears incorrectly labeled as \"London Bridge\" in popular media, causing confusion between the two distinct structures. The bridge has become a symbol of London, appearing on souvenirs, postcards, and promotional materials worldwide. It plays a central role in London's major celebrations, including elaborate lighting displays for New Year's Eve, royal occasions, and the annual Lord Mayor's Show. The bridge is illuminated nightly, and special lighting schemes mark significant events - red and blue for royal celebrations, rainbow colors for Pride, and various national flags for visiting dignitaries. The Tower Bridge Exhibition, opened in 1982, allows visitors to explore the bridge's history and engineering while walking across the high-level walkways with their glass floors installed in 2014. The exhibition tells the story of the bridge's construction, its role in London's history, and the lives of the people who built and maintained it. Visitors can also watch the bridge lift from special viewing areas, experiencing the impressive sight of the massive bascules rising to allow tall ships through. In recent years, Tower Bridge has embraced modern technology while maintaining its Victorian character. LED lighting has replaced older systems, reducing energy consumption while allowing for more dramatic displays. The bridge has also become a focal point for sporting events, including the London Olympics and various marathons and charity events. Conservation work continues to preserve the structure for future generations, with ongoing maintenance of the stonework, steelwork, and mechanical systems. Tower Bridge represents more than Victorian engineering prowess - it symbolizes London's ability to blend the old with the new, tradition with innovation. It stands as a working bridge that still raises for river traffic while serving as one of the world's most visited tourist attractions. The bridge connects London's historic center with the modern developments of the South Bank and beyond, both physically and symbolically. As London continues to evolve, Tower Bridge remains a constant, its distinctive silhouette a reminder of the city's rich history and its ongoing journey into the future. The bridge proves that functional infrastructure can also be beautiful, that engineering can be art, and that the best monuments are those that continue to serve their communities while inspiring wonder and pride across generations."
+      },
+      "it": {
+        "name": "Tower Bridge",
+        "narration": "Ti trovi al Tower Bridge, uno dei monumenti più famosi di Londra. Questo ponte basculante e sospeso attraversa il Tamigi.",
+        "description": "Un simbolo iconico di Londra dal 1894",
+        "historicalInfo": "Il Tower Bridge fu costruito tra il 1886 e il 1894 ed è uno dei monumenti più famosi di Londra. Il meccanismo del ponte basculante permette di sollevare la carreggiata per far passare il traffico fluviale.",
+        "yearBuilt": "1886-1894",
+        "architect": "Horace Jones e John Wolfe Barry"
+      },
+      "ko": {
+        "name": "타워 브리지",
+        "narration": "런던에서 가장 유명한 랜드마크 중 하나인 타워 브리지에 있습니다. 이 도개교와 현수교가 결합된 다리는 템스강을 가로지릅니다.",
+        "description": "1894년부터 런던의 상징",
+        "detailedDescription": "타워 브리지는 런던에서 가장 인식하기 쉬운 랜드마크 중 하나로, 빅토리아 시대 공학의 독창성과 고딕 리바이벌 건축의 웅장한 예입니다. 런던 타워 근처 템스강을 가로지르는 이 상징적인 도개교와 현수교의 결합은 1894년 완공 이래 런던 그 자체와 동의어가 되었으며, 독특한 쌍둥이 탑과 푸른색 현수 체인이 수많은 사진, 영화, 예술 작품에 등장했습니다. 다리의 건설은 19세기 런던 이스트 엔드의 대규모 상업적 성장에 의해 필요하게 되었으며, 런던 브리지 동쪽에 새로운 강 횡단이 필요했지만 런던 항구의 번화한 선박 교통을 방해하지 않아야 했습니다. 도시 건축가 호레이스 존스가 엔지니어 존 울프 배리와 협력하여 제출한 우승 디자인은 도로를 들어 올려 선박이 통과할 수 있는 도개교(시소 다리)로 이 문제를 독창적으로 해결했습니다. 존스와 배리의 고딕 리바이벌 디자인은 템스강 위로 65미터(213피트) 높이로 솟은 두 개의 거대한 탑을 특징으로 하며, 다리가 들어 올려졌을 때에도 보행자가 건널 수 있도록 상층에 두 개의 수평 보도로 연결되어 있습니다. 건설은 1886년에 시작되어 8년에 걸쳐 432명의 노동자를 고용했으며, 위험한 작업 중 비극적으로 10명의 생명을 앗아갔습니다. 방문 팁: 유리 바닥 보도에서 아래 템스강과 교통을 내려다보고, 빅토리아 시대 엔진룸을 방문하여 원래 증기 구동 메커니즘을 확인하며, 다리가 들어 올려지는 시간표를 확인하여 이 놀라운 공학적 위업을 직접 목격하세요.",
+        "historicalInfo": "타워 브리지는 1886년에서 1894년 사이에 건설되었으며 런던의 가장 유명한 랜드마크 중 하나입니다. 도개교 메커니즘은 강 교통이 아래를 통과할 수 있도록 도로를 들어 올릴 수 있게 합니다.",
+        "yearBuilt": "1886-1894",
+        "architect": "호레이스 존스와 존 울프 배리"
+      },
+      "es": {
+        "name": "Tower Bridge",
+        "narration": "Está en Tower Bridge, uno de los monumentos más famosos de Londres. Este puente basculante y colgante cruza el río Támesis.",
+        "description": "Un símbolo icónico de Londres desde 1894",
+        "historicalInfo": "Tower Bridge fue construido entre 1886 y 1894 y es uno de los monumentos más famosos de Londres. El mecanismo del puente basculante permite que la calzada se eleve para dejar pasar el tráfico fluvial.",
+        "yearBuilt": "1886-1894",
+        "architect": "Horace Jones y John Wolfe Barry"
+      },
+      "fr": {
+        "name": "Tower Bridge",
+        "narration": "Vous êtes au Tower Bridge, l'un des monuments les plus célèbres de Londres. Ce pont basculant et suspendu traverse la Tamise.",
+        "description": "Un symbole emblématique de Londres depuis 1894",
+        "historicalInfo": "Le Tower Bridge a été construit entre 1886 et 1894 et est l'un des monuments les plus célèbres de Londres. Le mécanisme du pont basculant permet de lever la chaussée pour laisser passer le trafic fluvial.",
+        "yearBuilt": "1886-1894",
+        "architect": "Horace Jones et John Wolfe Barry"
+      },
+      "de": {
+        "name": "Tower Bridge",
+        "narration": "Sie befinden sich an der Tower Bridge, einem der berühmtesten Wahrzeichen Londons. Diese kombinierte Klapp- und Hängebrücke überquert die Themse.",
+        "description": "Ein ikonisches Symbol Londons seit 1894",
+        "historicalInfo": "Die Tower Bridge wurde zwischen 1886 und 1894 erbaut und ist eines der berühmtesten Wahrzeichen Londons. Der Klappbrückenmechanismus ermöglicht es, die Fahrbahn anzuheben, um den Schiffsverkehr durchzulassen.",
+        "yearBuilt": "1886-1894",
+        "architect": "Horace Jones und John Wolfe Barry"
+      },
+      "zh": {
+        "name": "塔桥",
+        "narration": "您在伦敦最著名的地标之一塔桥。这座开合桥和悬索桥的组合横跨泰晤士河。",
+        "description": "自1894年以来伦敦的标志性象征",
+        "detailedDescription": "塔桥是伦敦最知名的地标之一，是维多利亚时代工程独创性和哥特复兴建筑的壮丽典范。这座标志性的开合桥和悬索桥组合横跨伦敦塔附近的泰晤士河，自1894年建成以来已成为伦敦的代名词，其独特的双塔和蓝色悬索链出现在无数照片、电影和艺术作品中。这座桥的建设是由19世纪伦敦东区大规模商业增长所必需的，需要在伦敦桥以东建一座新的过河通道，但又不能干扰伦敦港繁忙码头的河道交通。挑战前所未有：如何建造一座足够低的桥梁让行人和车辆轻松通过，同时又能让高桅杆船只从下面通过。市政建筑师霍勒斯·琼斯与工程师约翰·沃尔夫·巴里合作提交的获胜设计，巧妙地用开合桥（跷跷板式桥）解决了这个问题，其路面可以升起让船只通过。琼斯和巴里的哥特复兴设计有两座巨大的塔楼，高耸于泰晤士河上方65米（213英尺），上层用两条水平人行道连接，即使桥升起时也能让行人通过。建设于1886年开始，历时8年雇用了432名工人，在危险的工作中不幸夺去了10人的生命。参观提示：在玻璃地板人行道上俯瞰下方的泰晤士河和交通，参观维多利亚时代的发动机房查看原始蒸汽动力机制，查看桥梁升起时间表亲眼目睹这一惊人的工程壮举。",
+        "historicalInfo": "塔桥建于1886年至1894年间，是伦敦最著名的地标之一。开合桥机制允许路面升起以让河道交通通过。",
+        "yearBuilt": "1886-1894",
+        "architect": "霍勒斯·琼斯和约翰·沃尔夫·巴里"
+      },
+      "ja": {
+        "name": "タワーブリッジ",
+        "narration": "ロンドンで最も有名なランドマークの一つ、タワーブリッジにいます。この跳ね橋と吊り橋を組み合わせた橋はテムズ川に架かっています。",
+        "description": "1894年以来のロンドンの象徴",
+        "detailedDescription": "タワーブリッジはロンドンで最も認知度の高いランドマークの一つであり、ビクトリア朝工学の独創性とゴシック・リバイバル建築の壮大な例です。ロンドン塔近くのテムズ川に架かるこの象徴的な跳ね橋と吊り橋の組み合わせは、1894年の完成以来ロンドンそのものの同義語となり、独特の双子の塔と青く塗られた吊り鎖が無数の写真、映画、芸術作品に登場しています。この橋の建設は19世紀のロンドンのイーストエンドの大規模な商業成長によって必要とされ、ロンドン橋の東に新しい川の横断が必要でしたが、ロンドン港の忙しいドックへの河川交通を妨げないようにする必要がありました。課題は前例のないものでした：歩行者や車両が簡単に渡れるほど低く、かつ高いマストの船が下を通過できる橋をどのように建設するか。市の建築家ホレス・ジョーンズがエンジニアのジョン・ウルフ・バリーと協力して提出した優勝デザインは、船が通過できるように道路を持ち上げることができる跳ね橋（シーソー橋）でこの問題を独創的に解決しました。ジョーンズとバリーのゴシック・リバイバルデザインは、テムズ川の上65メートル（213フィート）にそびえる2つの巨大な塔を特徴とし、橋が上がっているときでも歩行者が渡れるように上層で2つの水平歩道で接続されています。建設は1886年に始まり、8年間で432人の労働者を雇用し、危険な作業中に悲劇的に10人の命を奪いました。訪問のヒント：ガラス床の歩道から下のテムズ川と交通を見下ろし、ビクトリア朝のエンジンルームを訪れて元の蒸気駆動メカニズムを確認し、橋が上がる時刻表をチェックしてこの驚くべき工学の偉業を直接目撃してください。",
+        "historicalInfo": "タワーブリッジは1886年から1894年にかけて建設され、ロンドンで最も有名なランドマークの一つです。跳ね橋機構により、河川交通を通過させるために道路を持ち上げることができます。",
+        "yearBuilt": "1886-1894",
+        "architect": "ホレス・ジョーンズとジョン・ウルフ・バリー"
+      },
+      "pt": {
+        "name": "Tower Bridge",
+        "narration": "Você está na Tower Bridge, um dos marcos mais famosos de Londres. Esta ponte basculante e suspensa cruza o Rio Tâmisa.",
+        "description": "Um símbolo icônico de Londres desde 1894",
+        "historicalInfo": "A Tower Bridge foi construída entre 1886 e 1894 e é um dos marcos mais famosos de Londres. O mecanismo da ponte basculante permite que a pista seja levantada para deixar o tráfego fluvial passar por baixo.",
+        "yearBuilt": "1886-1894",
+        "architect": "Horace Jones e John Wolfe Barry"
+      },
+      "ru": {
+        "name": "Тауэрский мост",
+        "narration": "Вы находитесь у Тауэрского моста, одной из самых известных достопримечательностей Лондона. Этот разводной и подвесной мост пересекает Темзу.",
+        "description": "Знаковый символ Лондона с 1894 года",
+        "historicalInfo": "Тауэрский мост был построен между 1886 и 1894 годами и является одной из самых известных достопримечательностей Лондона. Механизм разводного моста позволяет поднимать проезжую часть для пропуска речного транспорта.",
+        "yearBuilt": "1886-1894",
+        "architect": "Гораций Джонс и Джон Вулф Барри"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:25.778Z",
+    "updatedAt": "2026-02-22T19:01:05.703Z"
+  },
+  {
     "id": "singapore-river-cruise",
     "cityId": "singapore",
     "name": "Singapore River Bumboat Cruise",
@@ -10753,27 +7597,108 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:27:03.746Z"
   },
   {
-    "id": "rome_item_101",
-    "cityId": "rome",
-    "name": "로마 프리미엄 Restaurant 추천 102",
-    "lat": 0,
-    "lng": 0,
+    "id": "london_eye",
+    "cityId": "london",
+    "name": "London Eye",
+    "lat": 51.503399,
+    "lng": -0.119519,
     "radius": 50,
-    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 로마의 심장부로 우리를 초대합니다! 바로 \"로마 프리미엄 Restaurant 추천 102\"입니다. 음식을 사랑하는 자라면 반드시 들어야 할 이야기, 여기가 바로 미식의 천국입니다! 상상해보세요. 로마의 고대 유적과 현대의 세련미가 어우러진 이곳은, 문을 걸어 들어서는 순간부터 당신의 모든 감각을 휘어잡습니다. 거리를 거닐며 들려오는 이탈리아의 잔잔한 기타 선율, 공기 중에 퍼지는 신선한 바질과 올리브유의 향기, 눈앞에 펼쳐지는 로마의 아름다운 야경! 여러분, 이곳은 단순한 레스토랑이 아닙니다. 이곳은 다미와 역사의 경계선을 넘나드는 시간 여행의 출발지입니다!\n\n이제 여러분을 과거로 데려가 볼까요? \"로마 프리미엄 Restaurant 추천 102\"는 18세기 후반, 로마의 정치적 격변기 속에서 탄생했습니다. 당시 로마는 유럽의 정치 중심지로서, 다양한 문화와 예술이 뒤섞이는 용광로와 같았습니다. 이 레스토랑은 그 중심에 자리 잡아, 권력자와 예술가들이 모여들던 장소였습니다. 그 중 한 명, 당시의 대문호 카사노바는 이곳에서 그의 가장 유명한 연애 편지 중 하나를 썼다고 전해집니다. 이곳의 음식을 맛보며, 로마의 정치와 사랑에 대한 그의 깊은 사유를 펼쳐 보였던 거죠.\n\n이제 이곳의 건축적 경이로움에 대해 이야기해보겠습니다. 이 레스토랑은 로마의 고대 건축 기법을 현대적으로 재해석해 건축되었습니다. 대리석과 타일로 장식된 웅장한 인테리어는, 단순한 음식을 넘어 하나의 예술 작품으로서의 위용을 자랑합니다. 그리고 그 속에는 보이지 않는 비밀이 숨어 있습니다. 주방의 타일 바닥 한 구석에는 미묘한 문양이 새겨져 있는데, 이는 당시의 비밀스러운 정당의 상징이라고 합니다. 이곳을 방문하신다면, 그 숨겨진 문양을 찾아보시는 것도 흥미로울 것입니다.\n\n현대에 들어서면서 \"로마 프리미엄 Restaurant 추천 102\"는 재발견과 복원 과정을 거쳤습니다. 수많은 역사적 기록과 자료를 바탕으로, 원래의 아름다움을 최대한 살려내는 노력이 이루어졌습니다. 오늘날 이곳은 영화나 드라마의 배경으로도 자주 등장합니다. 여러분, \"로마의 휴일\"의 한 장면을 떠올려보세요. 바로 그 풍경이 이 레스토랑의 배경이 되었던 것입니다. 그리고 요즘엔 식사를 하며 셀카를 찍는 현대의 관광객들 덕분에, 이곳은 SNS를 통해 전 세계로 그 명성을 떨치고 있습니다. \n\n마지막으로, 이곳이 인류 역사에 남긴 의미를 생각해봅시다. \"로마 프리미엄 Restaurant 추천 102\"는 단순한 식당 그 이상입니다. 이는 시대를 초월한 문화, 예술, 그리고 인간의 상호작용이 어우러진 공간입니다. 이곳에서의 한 끼 식사는 과거와 현재, 그리고 미래를 잇는 다리가 될 것입니다. 여러분, 이곳에서의 경험을 가슴 깊이 새기고 돌아가세요. 그리고 언제나 그렇듯, 다음에 다시 돌아올 날을 꿈꾸십시오. \n\n이제 아쉽게도 우리의 여행을 마무리할 시간이 다가왔습니다. 지금까지 함께해주셔서 감사합니다. 여러분께서는 \"로마 프리미엄 Restaurant 추천 102\"에서 놀라운 이야기를 들으셨습니다. 이곳에서의 기억은 결코 사라지지 않을 것입니다. 꿈꾸듯 아름다운 이곳에서의 시간을 안고, 여러분을 기다리는 새로운 모험을 향해 나아가시길 바랍니다. 로마에서 뵙겠습니다!",
+    "narration": "자, 눈을 감고 런던 아이, 거대한 회전 관람차에 올라탄 당신을 상상해보세요! 캡슐 문이 스르륵 닫히고, 드디어 움직이기 시작합니다. 천천히, 아주 천천히 런던 하늘을 향해 떠오르는 기분, 느껴지시나요? 발 아래로는 템스 강이 유유히 흐르고, 저 멀리 빅벤 시계탑이 웅장한 자태를 뽐내고 있네요. 런던 아이는 단순한 관람차가 아니에요. 마치 거대한 수정구슬처럼, 런던의 과거와 현재, 미래를 담고 있는 듯하죠. 캡슐 안에서는 런던의 모든 명소가 한눈에 들어와요. 버킹엄 궁전의 깃발이 바람에 나부끼고, 세인트 폴 대성당의 돔은 햇빛에 반짝입니다. 런던 탑의 첨탑들은 마치 중세 시대의 기사처럼 늠름하게 서 있네요. 상상해보세요! 맑은 날에는 저 멀리 윈저 성까지 보인다고 해요. 런던 아이는 마치 하늘을 나는 마법 양탄자 같아요. 캡슐 안에서 따뜻한 차 한 잔을 마시며, 런던의 아름다운 풍경을 감상하는 여유, 정말 낭만적이지 않나요? 밤이 되면 런던 아이는 더욱 화려하게 변신합니다. 수천 개의 조명이 켜지고, 런던의 밤하늘을 아름답게 수놓죠. 런던 아이에서 바라보는 야경은 그야말로 환상적이에요. 템스 강에 비치는 불빛, 런던 브리지의 웅장한 모습, 그리고 저 멀리 보이는 런던의 스카이라인... 마치 꿈을 꾸는 것 같아요. 지금 여러분의 발 아래에는 수백 년의 역사를 간직한 런던이 펼쳐져 있습니다. 런던 아이는 단순한 관광 명소가 아니라, 런던의 심장과 영혼을 느낄 수 있는 특별한 공간입니다. 런던 여행을 계획하고 있다면, 런던 아이는 절대 놓치지 마세요! 잊지 못할 추억을 선물해줄 거예요.",
+    "description": "Europe's tallest cantilevered observation wheel",
+    "category": "Attraction",
+    "detailedDescription": "런던 아이는 2000년에 밀레니엄을 기념하여 건설된 거대한 회전 관람차입니다. 높이가 무려 135m에 달하며, 런던 시내를 360도로 조망할 수 있는 최고의 명소로 자리 잡았죠. 32개의 캡슐은 런던의 32개 자치구를 상징하며, 각 캡슐은 최대 25명까지 수용할 수 있습니다. 런던 아이의 건설에는 다양한 에피소드가 숨어있는데요. 특히 템스 강 위에서 조립하는 과정은 엄청난 기술력을 요구했습니다. 거대한 구조물을 강 위에서 안전하게 조립하고, 수직으로 세우는 것은 당시로서는 혁신적인 시도였죠. 현지인들은 런던 아이를 '밀레니엄 휠'이라고도 부르는데, 이는 2000년대 초반에 지어진 탓입니다. 런던 아이를 제대로 즐기는 꿀팁이 있다면, 바로 '패스트 트랙 티켓'을 이용하는 것입니다. 특히 성수기에는 긴 줄을 서야 하는데, 패스트 트랙 티켓을 구매하면 기다림 없이 바로 탑승할 수 있습니다. 또 다른 꿀팁은 해 질 무렵에 방문하는 것입니다. 붉게 물든 런던의 하늘과 야경을 동시에 감상할 수 있는 최고의 시간대이죠. 그리고 런던 아이 주변에는 다양한 레스토랑과 카페가 많으니, 관람 전후에 여유롭게 식사를 즐기는 것도 좋은 방법입니다. 숨겨진 비화로는 런던 아이의 원래 이름이 '브리티시 에어웨이즈 런던 아이'였다는 사실! 초기에는 브리티시 에어웨이즈가 주요 스폰서였기 때문이죠. 런던 아이는 단순한 관광 명소를 넘어, 런던의 랜드마크이자 상징으로 자리 잡았습니다.",
     "photos": [
-      "/images/landmarks/placeholder.png"
+      "https://images.unsplash.com/photo-1543716021-36e0f757e6c9?w=800",
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
+      "https://images.unsplash.com/photo-1520116468816-95b69f847357?w=800"
     ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
+    "historicalInfo": "The London Eye was built to celebrate the millennium and opened to the public in March 2000. It was designed by architects David Marks and Julia Barfield and has become one of London's most iconic landmarks.",
+    "yearBuilt": "1999-2000",
+    "architect": "David Marks and Julia Barfield",
     "translations": {
+      "en": {
+        "name": "London Eye",
+        "narration": "The London Eye is a giant observation wheel offering spectacular views over the city.",
+        "description": "Europe's tallest cantilevered observation wheel",
+        "detailedDescription": "The London Eye, also known as the Millennium Wheel, stands as one of the world's most iconic observation wheels and London's most popular paid tourist attraction, welcoming over 3.5 million visitors annually to experience breathtaking 360-degree views of the British capital. Rising 135 meters (443 feet) above the South Bank of the River Thames, this engineering marvel has transformed London's skyline since its opening in 2000, becoming as synonymous with the city as Big Ben, Tower Bridge, and Buckingham Palace. The London Eye was conceived as part of the millennium celebrations, designed to be a temporary structure that would stand for just five years. However, its immediate popularity and iconic status led to it becoming a permanent fixture of London's landscape. The wheel was designed by architects David Marks and Julia Barfield, who won a competition organized by The Sunday Times and the Architecture Foundation to design a landmark to celebrate the new millennium. Their innovative design drew inspiration from the engineering principles of bicycle wheels, creating a cantilevered structure that appears to float effortlessly above the Thames. Construction of the London Eye was an engineering feat of remarkable complexity and ambition. The wheel was constructed in sections, with components manufactured across Europe and transported to London for assembly. The A-frame legs, which support the wheel's massive weight, were transported up the Thames on barges and lifted into position by some of Europe's largest floating cranes. The wheel itself was assembled horizontally on temporary platforms in the river, then slowly raised to its vertical position over the course of a week in October 1999 using a sophisticated jacking system. The process was so delicate and unprecedented that it captured worldwide attention, with thousands gathering to watch the dramatic tilting of the massive structure. The London Eye consists of 32 sealed and air-conditioned passenger capsules, representing the 32 London boroughs. Interestingly, the capsules are numbered 1 to 33, skipping number 13 for superstitious reasons. Each capsule weighs 10 tons, is built to carry 25 people, and provides unobstructed 360-degree views through its glass construction. The capsules are attached to the external circumference of the wheel and rotate in motorized fashion, maintaining a horizontal position as the wheel turns, ensuring passengers always have an upright viewing platform. A complete rotation takes approximately 30 minutes, moving at a stately pace of 0.9 kilometers per hour (0.6 mph), allowing the wheel to continue moving while passengers board and alight - though it can be stopped for disabled or elderly passengers who need more time. The wheel weighs approximately 2,100 tons, with the rim alone weighing 1,700 tons. It is supported by an A-frame on one side only, making it the world's tallest cantilevered observation wheel. This cantilever design, with the wheel supported from one side rather than both, creates the distinctive silhouette that has become so recognizable. The structure requires 1,700 tons of steel and took seven years from conception to completion, at a cost of £75 million. From the top of the London Eye, on a clear day, visitors can see up to 40 kilometers (25 miles) in all directions, encompassing Windsor Castle to the west and the hills of Kent to the south. The views include all of London's major landmarks: the Houses of Parliament and Big Ben directly across the river, St. Paul's Cathedral's distinctive dome, the Tower of London, Tower Bridge, the Shard piercing the sky, and countless other historic and modern buildings that tell the story of London's evolution from Roman settlement to global metropolis. The London Eye has become much more than an observation wheel - it serves as a cultural landmark and event venue. The capsules have hosted everything from weddings to business meetings, from yoga sessions to wine tastings. In 2005, one capsule was temporarily converted into a luxury apartment where two competition winners spent the night suspended 135 meters above London. The wheel has been illuminated in various colors to mark significant events: red for Chinese New Year, pink for breast cancer awareness, rainbow colors for Pride, and even the colors of national flags to welcome visiting dignitaries. The London Eye played a central role in London's millennium celebrations, with a spectacular fireworks display launched from the wheel itself at midnight on January 1, 2000 - though technical problems meant the wheel wasn't actually rotating for passengers until March 2000. Since then, it has become the focal point for London's New Year's Eve celebrations, with elaborate firework displays launched from the wheel and surrounding area, broadcast to millions worldwide. The wheel has also been featured in numerous films, television shows, and music videos, from the James Bond thriller \"Spectre\" to the romantic comedy \"Bridget Jones's Diary,\" cementing its place in popular culture. Its distinctive circular form has become an instantly recognizable symbol of London, appearing in countless photographs, paintings, and promotional materials for the city. In 2015, the London Eye underwent a major refurbishment, with Coca-Cola becoming the title sponsor, leading to it being officially branded as the \"Coca-Cola London Eye\" - though most Londoners and visitors continue to call it simply \"The London Eye.\" The refurbishment included new lighting systems using LED technology, creating more dynamic and energy-efficient illumination displays that can change color and pattern for special events. The London Eye pioneered the concept of large-scale observation wheels in major cities, inspiring similar structures worldwide, including the Singapore Flyer, the High Roller in Las Vegas, and the Dubai Eye. However, the London Eye remains unique in its cantilever design and its integration into the urban landscape, positioned to provide optimal views of one of the world's most historic cityscapes. The observation wheel has also contributed significantly to the regeneration of London's South Bank, which has transformed from an underutilized industrial area into one of London's most vibrant cultural quarters. The area now features theaters, galleries, restaurants, and public spaces, with the London Eye serving as the anchor attraction that draws millions of visitors who then explore the surrounding cultural offerings. During the COVID-19 pandemic, the London Eye stood silent for months, its empty capsules a poignant symbol of the tourism industry's challenges. However, upon reopening, it implemented new safety measures and private capsule bookings, demonstrating its adaptability and resilience. The pandemic period also saw the wheel illuminated in rainbow colors to honor NHS workers and in other meaningful displays of solidarity and hope. Today, the London Eye stands as a symbol of the turn of the millennium, a monument to engineering ingenuity, and a beloved London landmark that offers both residents and visitors a unique perspective on one of the world's great cities. It represents London's ability to embrace the new while honoring the old, to innovate while respecting tradition. From its capsules, suspended above the Thames, passengers gain not just a view of London but a new understanding of the city's layout, history, and evolution - a 30-minute journey that connects past, present, and future in the most literal and spectacular way possible. The London Eye reminds us that sometimes the best way to appreciate where we are is to step back, rise above, and see the bigger picture.",
+        "historicalInfo": "The London Eye was built to celebrate the millennium and opened to the public in March 2000. It was designed by architects David Marks and Julia Barfield and has become one of London's most iconic landmarks.",
+        "yearBuilt": "1999-2000",
+        "architect": "David Marks and Julia Barfield"
+      },
+      "it": {
+        "name": "London Eye",
+        "narration": "Il London Eye è una gigantesca ruota panoramica che offre viste spettacolari sulla città.",
+        "description": "La ruota panoramica a sbalzo più alta d'Europa",
+        "historicalInfo": "Il London Eye è stato costruito per celebrare il millennio e aperto al pubblico nel marzo 2000. È stato progettato dagli architetti David Marks e Julia Barfield ed è diventato uno dei monumenti più iconici di Londra.",
+        "yearBuilt": "1999-2000",
+        "architect": "David Marks e Julia Barfield"
+      },
       "ko": {
-        "name": "로마 프리미엄 Restaurant 추천 102",
-        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "로마의 대표적인 Restaurant입니다."
+        "name": "런던 아이",
+        "narration": "런던 아이는 도시의 멋진 전망을 제공하는 거대한 관람차입니다.",
+        "description": "유럽에서 가장 높은 캔틸레버 관람차",
+        "detailedDescription": "밀레니엄 휠로도 알려진 런던 아이는 세계에서 가장 상징적인 관람차 중 하나이자 런던에서 가장 인기 있는 유료 관광 명소로, 매년 350만 명 이상의 방문객이 영국 수도의 숨막히는 360도 전망을 경험하러 옵니다. 템스강 남안 위로 135미터(443피트) 높이로 솟아 있는 이 공학적 경이로움은 2000년 개장 이래 런던의 스카이라인을 변화시켰으며, 빅벤, 타워 브리지, 버킹엄 궁전만큼이나 런던의 상징이 되었습니다. 런던 아이는 밀레니엄 축하의 일환으로 구상되었으며, 단 5년만 서 있을 임시 구조물로 설계되었습니다. 그러나 즉각적인 인기와 상징적 지위로 인해 런던 풍경의 영구적인 고정물이 되었습니다. 이 바퀴는 건축가 데이비드 마크스와 줄리아 바필드가 설계했으며, 그들은 새로운 밀레니엄을 기념할 랜드마크를 설계하기 위해 선데이 타임즈와 건축 재단이 조직한 경쟁에서 우승했습니다. 그들의 혁신적인 디자인은 자전거 바퀴의 공학 원리에서 영감을 받아, 템스강 위에 손쉽게 떠 있는 것처럼 보이는 캔틸레버 구조를 만들었습니다. 방문 팁: 맑은 날 30분 회전 중 최대 40킬로미터까지 볼 수 있으며, 일몰 무렵 방문하여 황금빛 시간대 전망을 즐기고, 특별한 경험을 위해 프라이빗 캡슐을 예약하며, 4D 시네마 경험을 체험하세요.",
+        "historicalInfo": "런던 아이는 밀레니엄을 기념하기 위해 건설되었으며 2000년 3월에 대중에게 개방되었습니다. 건축가 데이비드 마크스와 줄리아 바필드가 설계했으며 런던의 가장 상징적인 랜드마크 중 하나가 되었습니다.",
+        "yearBuilt": "1999-2000",
+        "architect": "데이비드 마크스와 줄리아 바필드"
+      },
+      "es": {
+        "name": "London Eye",
+        "narration": "El London Eye es una noria gigante que ofrece vistas espectaculares de la ciudad.",
+        "description": "La noria en voladizo más alta de Europa",
+        "historicalInfo": "El London Eye fue construido para celebrar el milenio y abierto al público en marzo de 2000. Fue diseñado por los arquitectos David Marks y Julia Barfield y se ha convertido en uno de los monumentos más icónicos de Londres.",
+        "yearBuilt": "1999-2000",
+        "architect": "David Marks y Julia Barfield"
+      },
+      "fr": {
+        "name": "London Eye",
+        "narration": "Le London Eye est une grande roue offrant des vues spectaculaires sur la ville.",
+        "description": "La plus haute grande roue en porte-à-faux d'Europe",
+        "historicalInfo": "Le London Eye a été construit pour célébrer le millénaire et ouvert au public en mars 2000. Il a été conçu par les architectes David Marks et Julia Barfield et est devenu l'un des monuments les plus emblématiques de Londres.",
+        "yearBuilt": "1999-2000",
+        "architect": "David Marks et Julia Barfield"
+      },
+      "de": {
+        "name": "London Eye",
+        "narration": "Das London Eye ist ein riesiges Riesenrad, das spektakuläre Ausblicke über die Stadt bietet.",
+        "description": "Das höchste freitragende Riesenrad Europas",
+        "historicalInfo": "Das London Eye wurde zur Feier des Jahrtausendwechsels gebaut und im März 2000 für die Öffentlichkeit eröffnet. Es wurde von den Architekten David Marks und Julia Barfield entworfen und ist zu einem der ikonischsten Wahrzeichen Londons geworden.",
+        "yearBuilt": "1999-2000",
+        "architect": "David Marks und Julia Barfield"
+      },
+      "zh": {
+        "name": "伦敦眼",
+        "narration": "伦敦眼是一座巨型摩天轮，可欣赏城市壮观景色。",
+        "description": "欧洲最高的悬臂式摩天轮",
+        "detailedDescription": "伦敦眼，也称为千禧轮，是世界上最具标志性的观景轮之一，也是伦敦最受欢迎的付费旅游景点，每年欢迎超过350万游客体验英国首都令人叹为观止的360度全景。这座工程奇迹高耸于泰晤士河南岸上方135米（443英尺），自2000年开放以来改变了伦敦的天际线，与大本钟、塔桥和白金汉宫一样成为伦敦的代名词。伦敦眼作为千禧年庆祝活动的一部分而构思，设计为只矗立五年的临时结构。然而，其即时的受欢迎程度和标志性地位使其成为伦敦景观的永久性固定装置。摩天轮由建筑师大卫·马克斯和朱莉娅·巴菲尔德设计，他们赢得了由《星期日泰晤士报》和建筑基金会组织的竞赛，旨在设计一个庆祝新千年的地标。他们的创新设计从自行车轮的工程原理中汲取灵感，创造了一个看似毫不费力地漂浮在泰晤士河上的悬臂结构。伦敦眼的建设是一项复杂而雄心勃勃的工程壮举。摩天轮分段建造，组件在整个欧洲制造并运往伦敦组装。参观提示：在晴朗的日子里，30分钟的旋转可以看到最远40公里的景色，在日落时分访问以获得黄金时段的景色，为特殊体验预订私人舱，体验4D电影体验。",
+        "historicalInfo": "伦敦眼是为庆祝千禧年而建，于2000年3月向公众开放。它由建筑师大卫·马克斯和朱莉娅·巴菲尔德设计，已成为伦敦最具标志性的地标之一。",
+        "yearBuilt": "1999-2000",
+        "architect": "大卫·马克斯和朱莉娅·巴菲尔德"
+      },
+      "ja": {
+        "name": "ロンドン・アイ",
+        "narration": "ロンドン・アイは、街の素晴らしい景色を提供する巨大な観覧車です。",
+        "description": "ヨーロッパで最も高い片持ち式観覧車",
+        "detailedDescription": "ミレニアム・ホイールとしても知られるロンドン・アイは、世界で最も象徴的な観覧車の一つであり、ロンドンで最も人気のある有料観光名所で、毎年350万人以上の訪問者が英国首都の息をのむような360度の景色を体験するために訪れます。テムズ川のサウスバンクの上135メートル（443フィート）にそびえ立つこの工学の驚異は、2000年の開業以来ロンドンのスカイラインを変え、ビッグ・ベン、タワーブリッジ、バッキンガム宮殿と同様にこの都市の代名詞となっています。ロンドン・アイはミレニアム祝賀の一環として構想され、わずか5年間立つ一時的な構造物として設計されました。しかし、その即座の人気と象徴的な地位により、ロンドンの景観の恒久的な固定物となりました。この観覧車は建築家デイビッド・マークスとジュリア・バーフィールドによって設計され、彼らは新しいミレニアムを祝うランドマークを設計するためにサンデー・タイムズと建築財団が主催したコンペティションで優勝しました。彼らの革新的なデザインは自転車の車輪の工学原理からインスピレーションを得て、テムズ川の上に楽々と浮かんでいるように見える片持ち式構造を創り出しました。ロンドン・アイの建設は、驚くべき複雑さと野心の工学的偉業でした。訪問のヒント：晴れた日には30分の回転中に最大40キロメートルまで見渡せます、夕暮れ時に訪れてゴールデンアワーの景色を楽しみ、特別な体験のためにプライベートカプセルを予約し、4Dシネマ体験を体験してください。",
+        "historicalInfo": "ロンドン・アイはミレニアムを祝うために建設され、2000年3月に一般公開されました。建築家デイビッド・マークスとジュリア・バーフィールドによって設計され、ロンドンで最も象徴的なランドマークの1つとなりました。",
+        "yearBuilt": "1999-2000",
+        "architect": "デイビッド・マークスとジュリア・バーフィールド"
+      },
+      "pt": {
+        "name": "London Eye",
+        "narration": "O London Eye é uma roda-gigante que oferece vistas espetaculares sobre a cidade.",
+        "description": "A roda-gigante em balanço mais alta da Europa",
+        "historicalInfo": "O London Eye foi construído para celebrar o milênio e aberto ao público em março de 2000. Foi projetado pelos arquitetos David Marks e Julia Barfield e se tornou um dos marcos mais icônicos de Londres.",
+        "yearBuilt": "1999-2000",
+        "architect": "David Marks e Julia Barfield"
+      },
+      "ru": {
+        "name": "Лондонский глаз",
+        "narration": "Лондонский глаз - это гигантское колесо обозрения, откуда открываются захватывающие виды на город.",
+        "description": "Самое высокое консольное колесо обозрения в Европе",
+        "historicalInfo": "Лондонский глаз был построен в честь празднования миллениума и открыт для публики в марте 2000 года. Он был спроектирован архитекторами Дэвидом Марксом и Джулией Барфилд и стал одной из самых знаковых достопримечательностей Лондона.",
+        "yearBuilt": "1999-2000",
+        "architect": "Дэвид Маркс и Джулия Барфилд"
       }
     },
     "openingHours": null,
@@ -10786,8 +7711,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.377Z",
-    "updatedAt": "2026-02-22T18:06:03.693Z"
+    "createdAt": "2026-02-12T12:11:26.022Z",
+    "updatedAt": "2026-02-22T19:01:05.871Z"
   },
   {
     "id": "palace_of_culture",
@@ -10942,178 +7867,60 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:28:04.544Z"
   },
   {
-    "id": "rome_restaurant_roscioli",
-    "cityId": "rome",
-    "name": "Roscioli",
-    "lat": 41.8947,
-    "lng": 12.472,
-    "radius": 40,
-    "narration": "자, 눈을 감고 로마의 향기를 느껴보세요. 갓 구운 빵 냄새, 숙성된 치즈의 깊은 향, 그리고 신선한 토마토의 달콤함이 코끝을 간지럽히죠? 지금 여러분은 로마 미식의 심장, 로숄리에 와 있습니다. 상상해보세요. 따뜻한 햇살이 쏟아지는 좁은 골목길을 따라 걷다 보면, 마치 보물처럼 숨겨진 로숄리가 나타납니다. 문을 열고 들어서는 순간, 활기찬 분위기와 맛있는 음식 냄새가 여러분을 맞이할 거예요. \n\n로숄리는 단순한 레스토랑이 아니에요. 1972년부터 이어져 온 로마의 역사이자, 미식의 자부심이죠. 대대로 이어져 내려온 비법 레시피와 최고급 식재료만 고집하는 장인 정신이 이곳의 모든 요리에 담겨 있답니다. 지금 여러분의 귀에는 접시 부딪히는 소리, 와인 잔이 쨍하고 울리는 소리, 그리고 사람들의 웃음소리가 들리시나요? 마치 한 편의 영화 속에 들어온 듯한 생생한 경험을 하게 될 거예요.\n\n자리에 앉아 메뉴를 펼쳐보세요. 파스타, 살루미, 치즈... 이름만 들어도 군침이 도는 메뉴들이 가득하죠? 특히 까르보나라는 꼭 드셔보셔야 해요. 로숄리 스타일의 까르보나라는 신선한 달걀 노른자와 최고급 돼지 볼살, 그리고 후추만을 사용해서 만든답니다. 크림은 절대 넣지 않아요! 이탈리아 정통의 맛을 그대로 느낄 수 있죠. 한 입 베어 무는 순간, 입 안 가득 퍼지는 풍미에 감탄할 거예요. 와인 한 잔 곁들이면 그 맛은 더욱 환상적이랍니다. 자, 건배! 로마에서의 특별한 순간을 위하여!\n\n로숄리에서는 식사뿐만 아니라 다양한 식재료도 구입할 수 있어요. 이탈리아 전역에서 엄선한 치즈, 살루미, 파스타, 와인 등이 여러분을 기다리고 있답니다. 기념품으로 구입해서 집에서도 로마의 맛을 즐겨보세요. 로숄리에서의 경험은 여러분의 여행을 더욱 풍요롭게 만들어줄 거예요. 자, 이제 로숄리의 매력에 푹 빠져볼까요?",
-    "description": "Gourmet deli and restaurant with Italian delicacies",
-    "category": "Restaurant",
-    "detailedDescription": "로마의 미식 성지, 로숄리는 단순한 레스토랑을 넘어선 미식 경험을 선사하는 곳입니다. 1972년 문을 연 이후, 로숄리는 뛰어난 로마 요리와 광범위한 와인 셀렉션으로 명성을 쌓아왔습니다. 이곳은 원래 델리(delicatessen)로 시작하여, 최고 품질의 이탈리아 식재료를 판매하는 곳이었죠. 시간이 흐르면서 로숄리는 델리에서 맛볼 수 있는 훌륭한 식재료를 사용한 요리를 제공하는 레스토랑으로 확장되었습니다. \n\n로숄리의 가장 큰 매력은 바로 '최고'만을 고집하는 철학입니다. 파스타는 이탈리아 각 지역에서 생산되는 최고급 건면을 사용하며, 살루미는 자체 숙성 과정을 거쳐 깊은 풍미를 자랑합니다. 치즈 역시 엄선된 농가에서 직송 받아 신선함을 유지하죠. 와인 리스트는 이탈리아 전역의 와이너리에서 공수한 2,800여 종의 와인으로 가득 차 있습니다. 소믈리에의 추천을 받아 음식과 완벽하게 어울리는 와인을 페어링 해보세요. 로숄리만의 숨겨진 비법은 바로 '진정성'입니다. 로마 전통 레시피를 고수하면서도, 현대적인 감각을 더해 끊임없이 새로운 메뉴를 개발하고 있습니다. 현지인들은 로숄리를 특별한 날을 기념하거나, 소중한 사람들과 함께 미식을 즐기기 위한 장소로 여깁니다. 관광객들에게는 로마의 맛을 경험할 수 있는 필수 코스로 자리 잡았죠. 꿀팁 하나 드릴까요? 로숄리는 예약 없이는 방문하기 힘들 정도로 인기가 많으니, 사전에 꼭 예약하세요!",
+    "id": "warsaw_old_town",
+    "cityId": "warsaw",
+    "name": "Warsaw Old Town",
+    "lat": 52.249722,
+    "lng": 21.011944,
+    "radius": 100,
+    "narration": "상상해보세요. 지금 여러분은 2차 세계대전의 잿더미를 딛고 일어선 바르샤바 구시가지, 그 심장부에 서 있습니다. 귓가에는 광장 한복판에서 울려 퍼지는 거리 악사의 폴란드 전통 음악 선율이 감미롭게 속삭이고, 코끝에는 갓 구운 빵과 따뜻한 커피의 향긋한 조화가 부드럽게 스며듭니다. 1944년, 바르샤바 봉기 당시 나치에 의해 도시 전체가 85% 이상 파괴되었지만, 폴란드인들은 단 한 장의 사진과 기억에 의존하여 벽돌 하나하나, 지붕의 기와 한 장까지 완벽하게 복원해냈습니다. 지금 여러분의 발 아래에는, 그들의 숭고한 정신과 불굴의 의지가 고스란히 담겨 있는 역사의 흔적이 살아 숨 쉬고 있습니다. 알록달록한 파스텔 톤 건물들이 옹기종기 모여 있는 구시가지 광장을 거닐며, 잠시 시간을 멈추고 그들의 뜨거운 숨결을 느껴보세요. 광장 중앙에 우뚝 솟은 인어공주 동상은 바르샤바의 수호신이자 희망의 상징입니다. 전설에 따르면, 인어공주는 발트해에서 헤엄쳐 와 비스와 강에 정착했고, 아름다운 목소리로 어부들을 매혹했다고 합니다. 그녀는 도시를 지키기 위해 칼과 방패를 들고 용맹하게 싸웠으며, 지금도 변함없이 바르샤바를 굳건히 지키고 있습니다. 좁고 구불구불한 골목길을 따라 걷다 보면, 중세 시대의 흔적이 고스란히 남아있는 붉은 벽돌 건물과 고풍스러운 교회를 만나게 됩니다. 잠시 멈춰 서서, 벽돌 하나하나에 새겨진 시간의 흔적을 손으로 느껴보세요. 마치 과거로 시간 여행을 떠나온 듯한 특별한 경험을 선사할 것입니다. 바르샤바 구시가지는 단순한 관광 명소가 아닌, 폴란드인의 자긍심과 희망, 그리고 불굴의 정신이 살아 숨 쉬는 역사적인 공간입니다. 이곳에서 폴란드의 아름다움과 강인함을 마음껏 느껴보세요.",
+    "description": "UNESCO World Heritage Site, meticulously reconstructed after WWII",
+    "category": "Historic District",
+    "detailedDescription": "바르샤바 구시가지는 13세기 초에 건설되었으며, 폴란드 왕국의 수도로서 중요한 역할을 수행했습니다. 16세기에는 르네상스 양식의 건축물이 들어서면서 유럽의 문화 중심지로 발돋움했습니다. 하지만 17세기 스웨덴의 침공과 2차 세계대전을 거치면서 도시 전체가 완전히 파괴되는 비극을 겪었습니다. 놀라운 사실은, 전쟁 이후 폴란드인들이 단 한 장의 사진과 기억에 의존하여 구시가지를 완벽하게 복원했다는 점입니다. 유네스코는 이러한 폴란드인들의 노력과 가치를 인정하여 1980년 바르샤바 구시가지를 세계문화유산으로 지정했습니다. 현지인만 아는 꿀팁을 하나 알려드릴까요? 구시가지 광장에서 조금만 벗어나면 숨겨진 뒷골목들이 나타납니다. 이곳에는 아늑한 카페와 레스토랑, 그리고 독특한 공예품 상점들이 숨어 있습니다. 특히, 폴란드 전통 음식을 맛볼 수 있는 작은 식당들은 현지인들에게도 인기가 높습니다. 바르샤바 구시가지를 방문하신다면, 꼭 뒷골목 탐험을 통해 숨겨진 매력을 발견해보시길 바랍니다. 그리고 바르샤바 봉기 기념관 (Warsaw Uprising Museum)을 방문하여 2차 세계대전 당시 폴란드인들의 처절했던 저항과 희생을 기리는 시간을 가져보세요. 구시가지 복원의 진정한 의미를 더욱 깊이 이해할 수 있을 것입니다.",
     "photos": [
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
-      "https://images.unsplash.com/photo-1587899897387-091ebd01a6b2?w=800"
+      "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800",
+      "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800",
+      "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800"
     ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
+    "historicalInfo": "Warsaw's Old Town was founded in the 13th century and grew over the centuries. It was completely destroyed during the Warsaw Uprising in 1944. The meticulous reconstruction after WWII, based on historical documents and paintings, is considered one of the greatest achievements of post-war reconstruction.",
+    "yearBuilt": "13th century (original), 1945-1966 (reconstruction)",
+    "architect": "Various architects (original), Post-war reconstruction teams",
     "translations": {
       "en": {
-        "name": "Roscioli",
-        "narration": "Discover Roscioli, a gourmet deli and restaurant offering exceptional Roman cuisine and an extensive wine selection.",
-        "description": "Gourmet deli and restaurant with Italian delicacies",
-        "detailedDescription": "Roscioli combines a gourmet deli with a sophisticated restaurant in the heart of Rome. Known for its exceptional selection of Italian cheeses, cured meats, and wines, this establishment offers a unique dining experience. The restaurant menu features creative takes on traditional Roman dishes using the finest ingredients. The wine list is extensive with over 300 labels. The intimate dining room creates a warm atmosphere perfect for food lovers seeking authentic Italian flavors."
+        "name": "Warsaw Old Town",
+        "narration": "Welcome to Warsaw's Old Town, a UNESCO World Heritage Site that was meticulously reconstructed after World War II. This historic district showcases the resilience and spirit of the Polish people.",
+        "description": "UNESCO World Heritage Site, meticulously reconstructed after WWII",
+        "detailedDescription": "Warsaw's Old Town is the oldest part of the capital city. It was established in the 13th century and was completely destroyed during the Warsaw Uprising in 1944. After World War II, the Old Town was meticulously reconstructed according to pre-war photographs and paintings, particularly those by 18th-century vedutist Bernardo Bellotto. The reconstruction was so thorough and authentic that UNESCO listed Warsaw's Old Town as a World Heritage Site in 1980, citing it as an outstanding example of a near-total reconstruction of a span of history covering the 13th to 20th century. The Old Town is centered on the Old Town Market Place (Rynek Starego Miasta), which teems with restaurants, cafés, and shops. Surrounding streets feature medieval architecture, the 17th-century Royal Castle, and numerous historical monuments. The area is a popular tourist destination and a symbol of Polish national identity and pride.",
+        "historicalInfo": "Warsaw's Old Town was founded in the 13th century and grew over the centuries. It was completely destroyed during the Warsaw Uprising in 1944. The meticulous reconstruction after WWII, based on historical documents and paintings, is considered one of the greatest achievements of post-war reconstruction.",
+        "yearBuilt": "13th century (original), 1945-1966 (reconstruction)",
+        "architect": "Various architects (original), Post-war reconstruction teams"
       },
       "ko": {
-        "name": "로쇼리",
-        "narration": "특별한 로마 요리와 광범위한 와인 셀렉션을 제공하는 미식 델리 겸 레스토랑 로쇼리를 발견하세요.",
-        "description": "이탈리아 별미를 제공하는 미식 델리 겸 레스토랑",
-        "detailedDescription": "로쇼리는 로마의 중심부에서 고급 델리와 세련된 레스토랑을 결합합니다. 이탈리아 치즈, 절인 고기, 와인의 뛰어난 선택으로 유명한 이 곳은 독특한 다이닝 경험을 제공합니다. 레스토랑 메뉴는 최고급 재료를 사용하여 전통적인 로마 요리에 창의적인 변화를 제공합니다. 와인 리스트는 300개 이상의 라벨로 광범위합니다. 친밀한 식당은 정통 이탈리아 맛을 찾는 음식 애호가에게 완벽한 따뜻한 분위기를 조성합니다."
-      },
-      "it": {
-        "name": "Roscioli",
-        "narration": "Scopri Roscioli, una gastronomia gourmet e ristorante che offre cucina romana eccezionale e un'ampia selezione di vini.",
-        "description": "Gastronomia gourmet e ristorante con prelibatezze italiane",
-        "detailedDescription": "Roscioli combina una gastronomia gourmet con un ristorante sofisticato nel cuore di Roma. Noto per la sua eccezionale selezione di formaggi italiani, salumi e vini, questo locale offre un'esperienza culinaria unica. Il menu del ristorante propone interpretazioni creative dei piatti tradizionali romani utilizzando i migliori ingredienti. La lista dei vini è ampia con oltre 300 etichette. La sala da pranzo intima crea un'atmosfera calda perfetta per gli amanti del cibo alla ricerca di sapori italiani autentici."
-      },
-      "es": {
-        "name": "Roscioli",
-        "narration": "Descubre Roscioli, un deli gourmet y restaurante que ofrece excepcional cocina romana y una extensa selección de vinos.",
-        "description": "Deli gourmet y restaurante con delicias italianas",
-        "detailedDescription": "Roscioli combina un deli gourmet con un sofisticado restaurante en el corazón de Roma. Conocido por su excepcional selección de quesos italianos, embutidos y vinos, este establecimiento ofrece una experiencia gastronómica única. El menú del restaurante presenta versiones creativas de platos romanos tradicionales utilizando los mejores ingredientes. La carta de vinos es extensa con más de 300 etiquetas. El íntimo comedor crea una atmósfera cálida perfecta para los amantes de la comida que buscan auténticos sabores italianos."
-      },
-      "fr": {
-        "name": "Roscioli",
-        "narration": "Découvrez Roscioli, une épicerie fine et restaurant offrant une cuisine romaine exceptionnelle et une vaste sélection de vins.",
-        "description": "Épicerie fine et restaurant avec délices italiennes",
-        "detailedDescription": "Roscioli combine une épicerie fine avec un restaurant sophistiqué au cœur de Rome. Réputé pour sa sélection exceptionnelle de fromages italiens, charcuteries et vins, cet établissement offre une expérience culinaire unique. Le menu du restaurant propose des interprétations créatives de plats romains traditionnels utilisant les meilleurs ingrédients. La carte des vins est vaste avec plus de 300 références. La salle à manger intime crée une atmosphère chaleureuse parfaite pour les amateurs de cuisine à la recherche de saveurs italiennes authentiques."
-      },
-      "de": {
-        "name": "Roscioli",
-        "narration": "Entdecken Sie Roscioli, ein Gourmet-Delikatessenladen und Restaurant, das außergewöhnliche römische Küche und eine umfangreiche Weinauswahl bietet.",
-        "description": "Gourmet-Delikatessen und Restaurant mit italienischen Köstlichkeiten",
-        "detailedDescription": "Roscioli vereint ein Gourmet-Delikatessengeschäft mit einem anspruchsvollen Restaurant im Herzen Roms. Bekannt für seine außergewöhnliche Auswahl an italienischen Käsesorten, Aufschnitt und Weinen, bietet dieses Lokal ein einzigartiges kulinarisches Erlebnis. Die Speisekarte des Restaurants bietet kreative Interpretationen traditioneller römischer Gerichte mit den besten Zutaten. Die Weinkarte ist umfangreich mit über 300 Etiketten. Der intime Speisesaal schafft eine warme Atmosphäre, perfekt für Feinschmecker auf der Suche nach authentischen italienischen Aromen."
-      },
-      "zh": {
-        "name": "Roscioli",
-        "narration": "探索Roscioli，一家提供出色罗马美食和丰富葡萄酒选择的美食熟食店和餐厅。",
-        "description": "提供意大利美味的美食熟食店和餐厅",
-        "detailedDescription": "Roscioli将美食熟食店与精致餐厅结合在罗马市中心。以其出色的意大利奶酪、腌肉和葡萄酒选择而闻名，这家餐厅提供独特的用餐体验。餐厅菜单使用最优质的食材，对传统罗马菜肴进行创意诠释。葡萄酒单非常丰富，拥有超过300个品牌。亲密的用餐室营造出温馨的氛围，非常适合寻求正宗意大利风味的美食爱好者。"
+        "name": "바르샤바 구시가지",
+        "narration": "제2차 세계 대전 후 세심하게 재건된 유네스코 세계문화유산인 바르샤바 구시가지에 오신 것을 환영합니다. 이 역사적인 지구는 폴란드 국민의 회복력과 정신을 보여줍니다.",
+        "description": "유네스코 세계문화유산, 제2차 세계 대전 후 세심하게 재건",
+        "detailedDescription": "바르샤바 구시가지는 수도에서 가장 오래된 지역입니다. 13세기에 설립되었으며 1944년 바르샤바 봉기 중에 완전히 파괴되었습니다. 제2차 세계 대전 후 구시가지는 전쟁 전 사진과 그림, 특히 18세기 베두티스트 베르나르도 벨로토의 작품에 따라 세심하게 재건되었습니다. 재건이 너무나 철저하고 진정성 있게 이루어져 유네스코는 1980년 바르샤바 구시가지를 세계문화유산으로 지정했으며, 13세기부터 20세기까지의 역사를 거의 완전히 재건한 뛰어난 사례로 인용했습니다. 구시가지는 레스토랑, 카페, 상점으로 가득한 구시가지 시장 광장(리넥 스타레고 미아스타)을 중심으로 합니다. 주변 거리에는 중세 건축물, 17세기 왕궁, 수많은 역사적 기념물이 있습니다. 이 지역은 인기 있는 관광지이자 폴란드 국가 정체성과 자부심의 상징입니다.",
+        "historicalInfo": "바르샤바 구시가지는 13세기에 설립되어 수세기에 걸쳐 성장했습니다. 1944년 바르샤바 봉기 중에 완전히 파괴되었습니다. 역사적 문서와 그림을 기반으로 한 제2차 세계 대전 후의 세심한 재건은 전후 재건의 가장 위대한 업적 중 하나로 여겨집니다.",
+        "yearBuilt": "13세기 (원래), 1945-1966년 (재건)",
+        "architect": "다양한 건축가 (원래), 전후 재건 팀"
       },
       "ja": {
-        "name": "Roscioli",
-        "narration": "卓越したローマ料理と豊富なワインセレクションを提供するグルメデリ兼レストラン、Roscioliをご発見ください。",
-        "description": "イタリアの珍味を提供するグルメデリ兼レストラン",
-        "detailedDescription": "Roscioliはローマの中心部でグルメデリと洗練されたレストランを組み合わせています。イタリアンチーズ、生ハム、ワインの卓越したセレクションで知られるこの店は、ユニークなダイニング体験を提供します。レストランのメニューは、最高級の食材を使用して伝統的なローマ料理に創造的なアレンジを加えています。ワインリストは300以上のラベルと豊富です。親密なダイニングルームは、本格的なイタリアの味を求める食通に最適な温かい雰囲気を作り出しています。"
+        "name": "ワルシャワ旧市街",
+        "narration": "第二次世界大戦後に細心の注意を払って再建されたユネスコ世界遺産、ワルシャワ旧市街へようこそ。この歴史的地区はポーランド人の回復力と精神を示しています。",
+        "description": "ユネスコ世界遺産、第二次世界大戦後に細心の注意を払って再建",
+        "detailedDescription": "ワルシャワ旧市街は首都の最も古い部分です。13世紀に設立され、1944年のワルシャワ蜂起中に完全に破壊されました。第二次世界大戦後、旧市街は戦前の写真と絵画、特に18世紀のヴェドゥティスタ、ベルナルド・ベロットの作品に従って細心の注意を払って再建されました。再建が非常に徹底的で本格的であったため、ユネスコは1980年にワルシャワ旧市街を世界遺産に登録し、13世紀から20世紀にかけての歴史のほぼ完全な再建の優れた例として引用しました。旧市街は、レストラン、カフェ、ショップで賑わう旧市街市場広場(リネク・スタレゴ・ミアスタ)を中心としています。周辺の通りには中世の建築、17世紀の王宮、多数の歴史的記念碑があります。この地域は人気の観光地であり、ポーランドの国家的アイデンティティと誇りの象徴です。",
+        "historicalInfo": "ワルシャワ旧市街は13世紀に設立され、何世紀にもわたって成長しました。1944年のワルシャワ蜂起中に完全に破壊されました。歴史的文書と絵画に基づく第二次世界大戦後の細心の再建は、戦後再建の最大の業績の一つと見なされています。",
+        "yearBuilt": "13世紀 (オリジナル)、1945-1966年 (再建)",
+        "architect": "さまざまな建築家 (オリジナル)、戦後再建チーム"
       },
-      "pt": {
-        "name": "Roscioli",
-        "narration": "Descubra o Roscioli, um deli gourmet e restaurante que oferece excepcional cozinha romana e uma extensa seleção de vinhos.",
-        "description": "Deli gourmet e restaurante com delícias italianas",
-        "detailedDescription": "Roscioli combina um deli gourmet com um restaurante sofisticado no coração de Roma. Conhecido por sua excepcional seleção de queijos italianos, embutidos e vinhos, este estabelecimento oferece uma experiência gastronômica única. O menu do restaurante apresenta versões criativas de pratos romanos tradicionais usando os melhores ingredientes. A carta de vinhos é extensa com mais de 300 rótulos. A sala de jantar íntima cria uma atmosfera acolhedora perfeita para amantes da gastronomia em busca de sabores italianos autênticos."
-      },
-      "ru": {
-        "name": "Roscioli",
-        "narration": "Откройте для себя Roscioli — гастрономический деликатесный магазин и ресторан, предлагающий исключительную римскую кухню и обширный выбор вин.",
-        "description": "Гурманский деликатесный магазин и ресторан с итальянскими деликатесами",
-        "detailedDescription": "Roscioli сочетает в себе гастрономический деликатесный магазин и изысканный ресторан в самом сердце Рима. Известный своим исключительным выбором итальянских сыров, мясных деликатесов и вин, это заведение предлагает уникальный гастрономический опыт. В меню ресторана представлены творческие интерпретации традиционных римских блюд с использованием лучших ингредиентов. Винная карта обширна и насчитывает более 300 наименований. Уютный обеденный зал создает теплую атмосферу, идеально подходящую для гурманов, ищущих подлинные итальянские вкусы."
-      }
-    },
-    "openingHours": "Mon-Sat: 12:30-16:00, 19:00-midnight | Closed Sun",
-    "priceRange": "€€€€ (€60-90 per person)",
-    "cuisine": "Contemporary Roman",
-    "reservationUrl": "https://www.thefork.com/restaurant/roscioli-r44801",
-    "phoneNumber": "+39 06 687 5287",
-    "menuHighlights": [
-      "Burrata",
-      "Truffle Pasta",
-      "Aged Prosciutto",
-      "Cheese Selection",
-      "Tiramisu"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:40.065Z",
-    "updatedAt": "2026-02-22T18:27:54.521Z"
-  },
-  {
-    "id": "paris_restaurant_lami_jean",
-    "cityId": "paris",
-    "name": "L'Ami Jean",
-    "lat": 48.8579,
-    "lng": 2.3072,
-    "radius": 40,
-    "narration": "자, 여러분, 잠시 눈을 감고 파리의 골목길 어귀에 서 있다고 상상해보세요. 코를 간질이는 버터와 허브 향, 경쾌한 웃음소리, 쨍그랑거리는 와인 잔 부딪히는 소리가 귓가에 맴돌죠? 바로 여기가 'L'Ami Jean', 장 아저씨의 따뜻한 밥상이 있는 곳입니다. 문을 열고 들어서는 순간, 시간 여행을 떠나는 기분이에요. 낡은 나무 테이블과 앤티크 가구들이 정겹게 놓여 있고, 벽에는 세월의 흔적이 고스란히 담긴 사진들이 걸려있습니다. 마치 프랑스 영화 속 한 장면처럼 느껴지지 않나요? 장 아저씨는 바스크 지방 출신으로, 그의 요리에는 고향의 푸근한 정과 파리의 세련됨이 녹아있습니다. 접시 가득 담긴 푸짐한 요리를 보면 절로 미소가 지어질 거예요. 특히, 바스크 풍 가정식 스튜인 'Axoa'는 꼭 맛봐야 할 메뉴입니다. 부드러운 송아지 고기와 피망, 토마토가 어우러져 환상적인 맛을 선사하죠. 입 안 가득 퍼지는 풍미는 마치 어머니의 품처럼 따뜻하고 포근합니다. 그리고 디저트로는 'Rice Pudding'을 추천합니다. 달콤하고 부드러운 푸딩 위에 카라멜 소스가 듬뿍 뿌려져 나오는데, 그 맛은 정말 잊을 수 없을 거예요. L'Ami Jean에서는 단순히 음식을 먹는 것이 아니라, 프랑스의 역사와 문화를 맛보는 특별한 경험을 할 수 있습니다. 지금, 여러분의 앞에 놓인 따뜻한 요리 한 접시를 통해, 파리의 낭만과 바스크의 정을 느껴보세요.",
-    "description": "Basque-French bistro near Eiffel Tower",
-    "category": "Restaurant",
-    "detailedDescription": "L'Ami Jean은 파리 7구, 에펠탑 근처에 위치한 바스크-프랑스 요리 전문점입니다. 1930년대에 문을 연 이래, 푸짐한 양과 소박하면서도 깊은 맛으로 현지인과 관광객 모두에게 사랑받고 있습니다. 특히, 바스크 지방의 전통 요리인 Axoa (송아지 고기 스튜)와 쌀 푸딩 (Rice Pudding)은 L'Ami Jean의 대표 메뉴로 손꼽힙니다. L'Ami Jean의 매력은 단순히 음식 맛에만 있는 것이 아닙니다. 낡은 나무 테이블, 앤티크 가구, 세월의 흔적이 느껴지는 벽 장식 등은 마치 프랑스 가정집에 초대받은 듯한 편안한 분위기를 자아냅니다. 또한, 친절하고 활기찬 직원들의 서비스는 식사를 더욱 즐겁게 만들어줍니다. 현지인 꿀팁을 하나 알려드릴까요? L'Ami Jean은 예약이 필수입니다. 특히 저녁 시간에는 몇 주 전에 예약하지 않으면 자리를 잡기 어려울 수 있습니다. 또한, 메뉴판에 없는 특별 메뉴가 종종 준비되니, 서버에게 문의해보는 것도 좋은 방법입니다. 숨겨진 비화로는, L'Ami Jean의 주방장은 바스크 지방의 유명한 요리 학교 출신으로, 그의 요리 철학은 '최고의 재료로 정성을 다해 만드는 것'이라고 합니다. 그는 매일 아침 시장에서 신선한 재료를 직접 고르고, 전통적인 조리법을 고수하며 변함없는 맛을 유지하고 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "L'Ami Jean",
-        "narration": "Enjoy hearty Basque-French cuisine at L'Ami Jean, known for generous portions and convivial atmosphere.",
-        "description": "Basque-French bistro near Eiffel Tower"
-      },
-      "ko": {
-        "name": "라미 장",
-        "narration": "푸짐한 양과 즐거운 분위기로 유명한 라미 장에서 진한 바스크-프렌치 요리를 즐기세요.",
-        "description": "에펠탑 근처 바스크-프렌치 비스트로"
-      },
-      "it": {
-        "name": "L'Ami Jean",
-        "narration": "Goditi la sostanziosa cucina basco-francese a L'Ami Jean, nota per porzioni generose e atmosfera conviviale.",
-        "description": "Bistrot basco-francese vicino alla Tour Eiffel"
-      }
-    },
-    "openingHours": "Tue-Sat: 12:00-14:00, 19:00-23:00 | Closed Sun-Mon",
-    "priceRange": "€€€ (€50-75 per person)",
-    "cuisine": "Basque-French",
-    "reservationUrl": "https://www.thefork.com/restaurant/l-ami-jean-r45203",
-    "phoneNumber": "+33 1 47 05 86 89",
-    "menuHighlights": [
-      "Rice Pudding",
-      "Basque Pork",
-      "Seafood Platters",
-      "Duck Breast"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:40.911Z",
-    "updatedAt": "2026-02-22T18:28:22.987Z"
-  },
-  {
-    "id": "tokyo_item_29",
-    "cityId": "tokyo",
-    "name": "TOKYO Premium Restaurant 29",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "숨 막힐 듯 아름다운 도쿄의 야경이 여러분을 맞이하는 곳, TOKYO Premium Restaurant 29에 오신 것을 환영합니다! 상상해보세요. 해질녘, 붉게 물든 하늘이 서서히 어둠에 잠기며 하나둘씩 불빛을 밝히는 도쿄의 스카이라인을 말이죠. 지금 여러분의 발 아래에는 수백만 개의 빛나는 별들이 촘촘히 박힌 은하수가 펼쳐져 있습니다. 이곳은 단순한 레스토랑이 아닙니다. 눈과 입, 그리고 마음까지 사로잡는 마법 같은 공간이죠. 29층 높이에서 펼쳐지는 파노라마 뷰는 마치 영화의 한 장면 같아요. 사랑하는 사람과 함께라면 로맨틱한 분위기에 흠뻑 취할 수 있고, 소중한 친구들과 함께라면 잊지 못할 추억을 만들 수 있을 겁니다. 자, 잠시 숨을 고르고 깊게 숨을 들이쉬어 보세요. 은은하게 풍겨오는 고급스러운 요리의 향기가 코 끝을 간지럽히고, 귓가에는 잔잔한 음악이 속삭이는 듯합니다. 미슐랭 레스토랑에서 경험한 듯한 섬세하고 창의적인 요리들은 입 안에서 황홀한 오케스트라를 연주하는 듯하죠. 신선한 제철 식재료를 사용하여 정성껏 만든 요리 하나하나에는 셰프의 열정과 혼이 담겨 있습니다. 단순히 배를 채우는 식사가 아닌, 오감을 만족시키는 예술 작품을 감상하는 기분일 거예요. 그리고 잊지 마세요! 이곳은 인생샷 명당이라는 사실! 멋진 야경을 배경으로 특별한 순간을 사진 속에 담아보세요. 시간이 흘러 사진을 다시 꺼내볼 때면, 그날의 감동과 설렘이 고스란히 되살아날 겁니다. TOKYO Premium Restaurant 29는 여러분의 모든 순간을 특별하게 만들어 줄 거예요. 지금 바로 예약하시고, 잊지 못할 추억을 만들어 보세요!",
-    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "TOKYO Premium Restaurant 29는 도쿄 타워와 레인보우 브릿지를 한눈에 담을 수 있는 최고의 야경 명소입니다. 29층이라는 높은 위치 덕분에 도쿄의 화려한 스카이라인을 파노라마 뷰로 감상할 수 있으며, 특히 해 질 무렵부터 밤까지 이어지는 시간대에는 숨 막힐 듯 아름다운 풍경을 자랑합니다. 단순히 뷰만 훌륭한 것이 아니라, 미슐랭 레스토랑 출신의 셰프가 선보이는 수준 높은 요리 또한 이곳의 자랑거리입니다. 신선한 제철 식재료를 사용하여 만든 창의적인 요리들은 맛과 향, 그리고 비주얼까지 완벽하게 조화를 이루며, 미식가들의 입맛을 사로잡습니다. 현지인들 사이에서는 '데이트 명소'로도 유명하며, 특별한 날을 기념하기 위해 방문하는 커플들이 많습니다. 레스토랑 내부는 고급스럽고 세련된 분위기로 꾸며져 있으며, 은은한 조명과 감미로운 음악이 로맨틱한 분위기를 더합니다. 예약은 필수이며, 특히 창가 자리는 경쟁이 치열하니 미리 서두르는 것이 좋습니다. 숨겨진 팁 하나! 레스토랑 입구에서 사진 촬영을 요청하면, 멋진 야경을 배경으로 인생샷을 남길 수 있습니다. 도쿄 여행 중 특별한 추억을 만들고 싶다면, TOKYO Premium Restaurant 29를 방문하는 것을 강력 추천합니다. 잊지 못할 밤을 선사할 거예요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "TOKYO Premium Restaurant 29",
-        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+      "zh": {
+        "name": "华沙老城",
+        "narration": "欢迎来到华沙老城,一个在第二次世界大战后精心重建的联合国教科文组织世界遗产。这个历史街区展示了波兰人民的韧性和精神。",
+        "description": "联合国教科文组织世界遗产,二战后精心重建",
+        "detailedDescription": "华沙老城是首都最古老的部分。它建立于13世纪,在1944年华沙起义期间被完全摧毁。第二次世界大战后,老城根据战前的照片和绘画,特别是18世纪风景画家贝尔纳多·贝洛托的作品,被精心重建。重建工作如此彻底和真实,以至于联合国教科文组织于1980年将华沙老城列为世界遗产,称其为13世纪至20世纪历史跨度近乎完全重建的杰出范例。老城以老城市场广场(Rynek Starego Miasta)为中心,那里到处都是餐馆、咖啡馆和商店。周围的街道有中世纪建筑、17世纪的皇家城堡和众多历史纪念碑。该地区是热门旅游目的地,也是波兰民族认同和自豪感的象征。",
+        "historicalInfo": "华沙老城建立于13世纪,并在几个世纪中成长。它在1944年华沙起义期间被完全摧毁。基于历史文献和绘画的二战后精心重建被认为是战后重建的最伟大成就之一。",
+        "yearBuilt": "13世纪 (原建筑), 1945-1966年 (重建)",
+        "architect": "各种建筑师 (原建筑), 战后重建团队"
       }
     },
     "openingHours": null,
@@ -11126,8 +7933,123 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.521Z",
-    "updatedAt": "2026-02-22T18:20:30.148Z"
+    "createdAt": "2026-02-12T12:11:28.838Z",
+    "updatedAt": "2026-02-22T19:01:05.959Z"
+  },
+  {
+    "id": "arc_triomphe",
+    "cityId": "paris",
+    "name": "Arc de Triomphe",
+    "lat": 48.873787,
+    "lng": 2.295047,
+    "radius": 50,
+    "narration": "자, 상상해보세요. 개선문, 이 웅장한 석조 건축물이 여러분의 눈앞에 우뚝 솟아있는 모습을요! 파리의 심장, 샤를 드골 광장의 한복판에서 개선문은 마치 시간을 초월한 듯 그 위용을 자랑하고 있어요. 햇살이 개선문의 표면을 부드럽게 감싸 안고, 그 아래로 수많은 발걸음들이 역사의 흔적을 새기고 있죠. 지금 여러분의 발 아래에는 나폴레옹 시대의 영광과 숭고한 희생이 깃들어 있답니다. 개선문의 아치는 마치 거대한 액자 같아요. 그 액자 속에는 파리의 하늘과 샹젤리제 거리의 활기찬 풍경이 담겨 있죠. 개선문 꼭대기에 올라서면, 파리 시내가 한눈에 들어오는 파노라마 뷰가 펼쳐질 거예요. 에펠탑, 몽마르뜨 언덕, 센 강… 파리의 랜드마크들이 마치 장난감처럼 작게 보인답니다. 바람이 여러분의 머리카락을 스치고, 파리의 숨결이 여러분의 뺨을 간지럽힐 거예요. 개선문은 단순한 기념물이 아니에요. 프랑스 역사의 증인이자, 파리의 영원한 상징이죠. 개선문 아래 무명 용사의 묘에는 꺼지지 않는 불꽃이 타오르고 있어요. 이 불꽃은 조국을 위해 목숨을 바친 모든 영웅들을 기리는 숭고한 헌사랍니다. 밤이 되면 개선문은 더욱 아름다워져요. 조명이 켜진 개선문은 마치 황금빛 보석처럼 빛나고, 파리의 밤하늘을 더욱 로맨틱하게 물들인답니다. 개선문 앞 샹젤리제 거리에는 노천카페와 상점들이 즐비하게 늘어서 있어요. 커피 한 잔을 마시며 파리의 낭만을 만끽하고, 기념품을 사며 여행의 추억을 간직해보세요. 개선문은 파리를 방문하는 모든 이들에게 잊지 못할 감동과 추억을 선사할 거예요. 자, 이제 개선문의 이야기를 따라 시간 여행을 떠나볼까요?",
+    "description": "One of the most famous monuments in Paris",
+    "category": "Monument",
+    "detailedDescription": "개선문은 프랑스의 영광을 상징하는 기념비적인 건축물입니다. 1806년, 나폴레옹 1세의 명령으로 건설이 시작되었지만, 그의 몰락과 함께 중단되기도 했습니다. 이후 루이 필리프 왕에 의해 완공되어 1836년에 드디어 그 웅장한 모습을 드러냈죠. 높이 약 50미터, 폭 45미터에 달하는 거대한 크기를 자랑하며, 신고전주의 양식의 아름다움을 뽐냅니다. 개선문에는 프랑스 혁명과 나폴레옹 전쟁에서 활약한 장군들의 이름이 새겨져 있으며, 내부에는 프랑스 국립기념관이 자리 잡고 있습니다. 숨겨진 비화 하나 알려드릴까요? 개선문 건설 당시, 나폴레옹은 자신의 개선 행진을 위해 문을 설계하도록 지시했는데, 완공을 보지 못하고 세상을 떠났다는 슬픈 이야기가 전해진답니다. 또한, 개선문 아래에는 제1차 세계대전에서 전사한 무명 용사의 묘가 있으며, 꺼지지 않는 불꽃이 24시간 타오르고 있습니다. 현지인들은 개선문 꼭대기에서 바라보는 파리 야경을 최고로 꼽습니다. 특히 에펠탑 점등 시간에 맞춰 방문하면 더욱 환상적인 경험을 할 수 있다고 하네요! 개선문 주변에는 맛있는 레스토랑과 카페가 많으니, 여유롭게 식사를 즐기며 파리의 낭만을 만끽해보세요.",
+    "photos": [
+      "https://images.unsplash.com/photo-1549144511-f099e773c147?w=800",
+      "https://images.unsplash.com/photo-1509439581779-6298f75bf6e5?w=800",
+      "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800"
+    ],
+    "historicalInfo": "The Arc de Triomphe was commissioned by Napoleon in 1806 to honor the French army. It stands at the center of the Place Charles de Gaulle and contains the Tomb of the Unknown Soldier.",
+    "yearBuilt": "1806-1836",
+    "architect": "Jean Chalgrin",
+    "translations": {
+      "en": {
+        "name": "Arc de Triomphe",
+        "narration": "The Arc de Triomphe honors those who fought for France. It stands at the center of Place Charles de Gaulle.",
+        "description": "One of the most famous monuments in Paris",
+        "detailedDescription": "The Arc de Triomphe de l'Étoile, commonly known as the Arc de Triomphe, stands as one of the most iconic monuments in Paris and a powerful symbol of French national pride, military glory, and historical memory. Located at the center of the Place Charles de Gaulle (formerly Place de l'Étoile), at the western end of the Champs-Élysées, this monumental triumphal arch honors those who fought and died for France, particularly during the Revolutionary and Napoleonic Wars. Rising 50 meters (164 feet) in height, 45 meters (148 feet) in width, and 22 meters (72 feet) in depth, the Arc de Triomphe is the second-largest triumphal arch in existence, surpassed only by Arch of Triumph in Pyongyang, North Korea. The monument was commissioned by Napoleon Bonaparte in 1806, following his victory at the Battle of Austerlitz, to commemorate the achievements of the French armies. Napoleon declared, \"You will return home through arches of triumph,\" to his soldiers, and he envisioned a monument that would celebrate French military might for centuries to come. The architect Jean Chalgrin was chosen to design the arch, drawing inspiration from the ancient Roman Arch of Titus while creating something distinctly grander and more ambitious. Construction began in 1806, but progressed slowly due to Napoleon's political fortunes. When he married Marie-Louise of Austria in 1810, the arch was far from complete, so a full-scale wooden mock-up was hastily erected for the imperial procession. After Napoleon's abdication in 1814, construction halted entirely. Work resumed in 1826 under King Louis-Philippe and was finally completed in 1836, fifteen years after Napoleon's death. Tragically, Napoleon never saw his grand monument completed, though his funeral procession did pass under the arch in 1840 when his remains were returned to France from Saint Helena. The Arc de Triomphe is adorned with magnificent sculptural reliefs that tell the story of French military glory. The most famous is François Rude's \"La Marseillaise\" (officially titled \"Departure of the Volunteers of 1792\"), depicting French citizens rallying to defend the young Republic. This dynamic sculpture, with its central figure of Liberty urging the people forward, has become one of the most celebrated works of French Romantic sculpture. Other major reliefs include \"The Triumph of 1810\" by Jean-Pierre Cortot, showing Napoleon's victories; \"Resistance\" by Antoine Étex, depicting French resistance during the 1814 campaign; and \"Peace\" by Étex, celebrating the Treaty of Paris. The arch's inner walls are engraved with the names of 660 generals and marshals who served during the French Revolution and Napoleonic Empire. Those who died in battle are underlined, creating a poignant memorial to military leadership and sacrifice. The attic level features shields bearing the names of major Revolutionary and Napoleonic victories, while the four pillars support large sculptural groups representing pivotal moments in French military history. Perhaps the most solemn and significant feature of the Arc de Triomphe is the Tomb of the Unknown Soldier, installed beneath the arch on November 11, 1920, to honor the unidentified French soldiers who died in World War I. The eternal flame, rekindled every evening at 6:30 PM in a ceremony that has continued daily since 1923, serves as France's national war memorial. This tradition ensures that the memory of those who gave their lives for France is never extinguished. The flame has burned continuously even during the German occupation of Paris in World War II, a powerful symbol of French resilience and resistance. The Arc de Triomphe has witnessed countless historic moments. Victorious armies have marched beneath it, from the Allies in 1919 following World War I to the liberation of Paris in 1944 when General de Gaulle led Free French forces in a triumphant procession down the Champs-Élysées and through the arch. The monument has also served as a focal point for national mourning, including the funeral processions of presidents, war heroes, and cultural icons. The arch stands at the center of the Place Charles de Gaulle, from which twelve grand avenues radiate in a star pattern, earning the square its former name \"Place de l'Étoile\" (Star Square). This urban planning creates one of the world's most famous traffic circles and provides spectacular views of the arch from multiple vantage points throughout Paris. Visitors can climb the 284 steps to the top of the arch (an elevator is available for those with reduced mobility), where a viewing platform offers breathtaking panoramic views of Paris. From this vantage point, one can see the Champs-Élysées stretching toward the Louvre and Place de la Concorde in one direction, and the Grande Arche de la Défense continuing the axis in the other, creating what Parisians call the \"Voie Triomphale\" or Triumphal Way. Inside the arch, a museum traces its history, construction, and symbolic importance in French culture. Exhibitions explore the arch's role in French national identity, its architectural significance, and the countless ceremonies and events it has witnessed over two centuries. The Arc de Triomphe appears frequently in popular culture, from literature and film to art and photography, cementing its status as an instantly recognizable symbol of Paris. It has served as the finish line for the Tour de France bicycle race since 1975, adding a sporting dimension to its cultural significance. The monument has also been the site of major celebrations, including Bastille Day military parades and New Year's Eve festivities. Recent years have seen the arch at the center of both celebration and protest. In 2018, it suffered vandalism during Yellow Vest protests, highlighting its continued relevance as a symbol of French state power and national identity. In 2021, artist Christo's posthumous installation wrapped the entire arch in silvery blue recyclable fabric, transforming this stone monument of permanence into a temporary work of ephemeral art, demonstrating how even the most established symbols can be reimagined for new generations. Today, the Arc de Triomphe stands not merely as a monument to past glories but as a living symbol of French identity, resilience, and collective memory. It reminds visitors and Parisians alike of the sacrifices made for liberty, the importance of national unity, and the enduring power of monumental architecture to inspire, commemorate, and bring people together across generations."
+      },
+      "it": {
+        "name": "Arco di Trionfo",
+        "narration": "L'Arco di Trionfo onora coloro che hanno combattuto per la Francia. Si trova al centro di Place Charles de Gaulle.",
+        "description": "Uno dei monumenti più famosi di Parigi",
+        "historicalInfo": "L'Arco di Trionfo fu commissionato da Napoleone nel 1806 per onorare l'esercito francese. Si trova al centro di Place Charles de Gaulle e contiene la Tomba del Milite Ignoto.",
+        "yearBuilt": "1806-1836",
+        "architect": "Jean Chalgrin"
+      },
+      "ko": {
+        "name": "개선문",
+        "narration": "개선문은 프랑스를 위해 싸운 사람들을 기리는 곳입니다. 샤를 드골 광장 중앙에 위치해 있습니다.",
+        "description": "파리에서 가장 유명한 기념물 중 하나",
+        "detailedDescription": "에투알 개선문(Arc de Triomphe de l'Étoile)은 파리에서 가장 상징적인 기념물 중 하나이자 프랑스의 국가적 자긍심, 군사적 영광, 그리고 역사적 기억의 강력한 상징으로 서 있습니다. 샹젤리제 거리의 서쪽 끝, 샤를 드골 광장(구 에투알 광장) 중앙에 위치한 이 기념비적인 개선문은 특히 혁명 전쟁과 나폴레옹 전쟁 동안 프랑스를 위해 싸우고 전사한 이들을 기립니다. 높이 50미터(164피트), 너비 45미터(148피트), 깊이 22미터(72피트)로 솟아오른 개선문은 북한 평양의 개선문 다음으로 세계에서 두 번째로 큰 개선문입니다. 이 기념물은 1806년 나폴레옹 보나파르트가 아우스터리츠 전투에서의 승리 이후 프랑스 군대의 업적을 기념하기 위해 의뢰했습니다. 나폴레옹은 그의 병사들에게 \"당신들은 개선문을 통해 귀국할 것이다\"라고 선언하며, 수세기 동안 프랑스의 군사적 위력을 기념할 기념물을 구상했습니다. 건축가 장 샬그랭이 아치를 설계하도록 선택되었으며, 고대 로마의 티투스 개선문에서 영감을 받되 훨씬 더 웅장하고 야심찬 것을 창조했습니다. 건설은 1806년에 시작되었지만 나폴레옹의 정치적 운명으로 인해 천천히 진행되었습니다. 1810년 오스트리아의 마리 루이즈와 결혼할 때 아치는 완성과 거리가 멀었기 때문에, 황제의 행렬을 위해 실물 크기의 나무 모형이 급히 세워졌습니다. 1814년 나폴레옹의 퇴위 후 건설은 완전히 중단되었습니다. 작업은 1826년 루이 필립 왕 하에 재개되어 나폴레옹 사망 15년 후인 1836년에 마침내 완성되었습니다. 비극적이게도 나폴레옹은 그의 위대한 기념물이 완성되는 것을 보지 못했지만, 1840년 그의 유해가 세인트 헬레나에서 프랑스로 반환될 때 그의 장례 행렬이 아치 아래를 통과했습니다. 개선문은 프랑스 군사적 영광의 이야기를 전하는 장엄한 조각 부조로 장식되어 있습니다. 방문 팁: 개선문 꼭대기로 올라가 파리의 장엄한 파노라마 전망을 감상하고, 매일 저녁 6시 30분에 열리는 무명용사 묘의 추모식을 참석하며, 12개 방사형 대로의 별 모양 패턴을 관찰해 보세요.",
+        "historicalInfo": "개선문은 1806년 나폴레옹이 프랑스 군대를 기리기 위해 의뢰했습니다. 샤를 드골 광장 중앙에 위치하며 무명용사의 묘가 있습니다.",
+        "yearBuilt": "1806-1836년",
+        "architect": "장 샬그랭"
+      },
+      "es": {
+        "name": "Arco del Triunfo",
+        "narration": "El Arco del Triunfo honra a quienes lucharon por Francia. Se encuentra en el centro de la Place Charles de Gaulle.",
+        "description": "Uno de los monumentos más famosos de París",
+        "historicalInfo": "El Arco del Triunfo fue encargado por Napoleón en 1806 para honrar al ejército francés. Se encuentra en el centro de la Place Charles de Gaulle y contiene la Tumba del Soldado Desconocido.",
+        "yearBuilt": "1806-1836",
+        "architect": "Jean Chalgrin"
+      },
+      "fr": {
+        "name": "Arc de Triomphe",
+        "narration": "L'Arc de Triomphe rend hommage à ceux qui ont combattu pour la France. Il se dresse au centre de la Place Charles de Gaulle.",
+        "description": "L'un des monuments les plus célèbres de Paris",
+        "historicalInfo": "L'Arc de Triomphe a été commandé par Napoléon en 1806 pour honorer l'armée française. Il se trouve au centre de la Place Charles de Gaulle et contient la Tombe du Soldat Inconnu.",
+        "yearBuilt": "1806-1836",
+        "architect": "Jean Chalgrin"
+      },
+      "de": {
+        "name": "Arc de Triomphe",
+        "narration": "Der Arc de Triomphe ehrt diejenigen, die für Frankreich gekämpft haben. Er steht im Zentrum des Place Charles de Gaulle.",
+        "description": "Eines der berühmtesten Denkmäler in Paris",
+        "historicalInfo": "Der Arc de Triomphe wurde 1806 von Napoleon in Auftrag gegeben, um die französische Armee zu ehren. Er steht im Zentrum des Place Charles de Gaulle und enthält das Grab des Unbekannten Soldaten.",
+        "yearBuilt": "1806-1836",
+        "architect": "Jean Chalgrin"
+      },
+      "zh": {
+        "name": "凯旋门",
+        "narration": "凯旋门是为纪念为法国而战的人们而建。它位于戴高乐广场的中心。",
+        "description": "巴黎最著名的纪念碑之一",
+        "detailedDescription": "星形广场凯旋门（Arc de Triomphe de l'Étoile），通常简称凯旋门，是巴黎最具标志性的纪念碑之一，也是法国民族自豪感、军事荣耀和历史记忆的强大象征。这座宏伟的凯旋门位于香榭丽舍大街西端的戴高乐广场（原名星形广场）中心，纪念那些为法国而战并牺牲的人们，特别是在革命战争和拿破仑战争期间。凯旋门高50米（164英尺），宽45米（148英尺），深22米（72英尺），是世界上第二大凯旋门，仅次于朝鲜平壤的凯旋门。这座纪念碑由拿破仑·波拿巴于1806年在奥斯特里茨战役胜利后委托建造，以纪念法国军队的成就。拿破仑向他的士兵宣布：\"你们将通过凯旋门回家\"，他设想了一座将在未来几个世纪庆祝法国军事实力的纪念碑。建筑师让·沙尔格兰被选中设计这座拱门，从古罗马提图斯凯旋门中汲取灵感，同时创造出更加宏伟和雄心勃勃的作品。施工于1806年开始，但由于拿破仑的政治命运而进展缓慢。1810年他与奥地利的玛丽·路易丝结婚时，拱门远未完工，因此为皇家游行匆忙搭建了一个全尺寸的木制模型。1814年拿破仑退位后，施工完全停止。工程于1826年在路易·菲利普国王统治下恢复，最终于1836年完工，距拿破仑去世15年。可悲的是，拿破仑从未看到他宏伟的纪念碑完工，尽管1840年他的遗体从圣赫勒拿岛返回法国时，他的葬礼队伍确实通过了拱门下方。凯旋门装饰有讲述法国军事荣耀故事的宏伟雕刻浮雕。参观提示：登上凯旋门顶部欣赏巴黎壮丽的全景，参加每晚6:30在无名战士墓举行的纪念仪式，观察12条放射状大道形成的星形图案。",
+        "historicalInfo": "凯旋门由拿破仑于1806年委托建造，以纪念法国军队。它位于戴高乐广场的中心，内有无名战士墓。",
+        "yearBuilt": "1806-1836年",
+        "architect": "让·沙尔格兰"
+      },
+      "ja": {
+        "name": "凱旋門",
+        "narration": "凱旋門はフランスのために戦った人々を称えます。シャルル・ド・ゴール広場の中心に立っています。",
+        "description": "パリで最も有名な記念碑の一つ",
+        "detailedDescription": "エトワール凱旋門（Arc de Triomphe de l'Étoile）、一般に凱旋門として知られるこの記念碑は、パリで最も象徴的な建造物の一つであり、フランスの国民的誇り、軍事的栄光、歴史的記憶の強力なシンボルとして立っています。シャンゼリゼ通りの西端、シャルル・ド・ゴール広場（旧エトワール広場）の中心に位置するこの記念碑的な凱旋門は、特に革命戦争とナポレオン戦争中にフランスのために戦い、死んだ人々を称えています。高さ50メートル（164フィート）、幅45メートル（148フィート）、奥行き22メートル（72フィート）そびえる凱旋門は、北朝鮮平壌の凱旋門に次いで世界で2番目に大きな凱旋門です。この記念碑は1806年、アウステルリッツの戦いでの勝利の後、ナポレオン・ボナパルトがフランス軍の功績を記念するために委託しました。ナポレオンは兵士たちに「あなたたちは凱旋門を通って帰還するだろう」と宣言し、何世紀にもわたってフランスの軍事力を祝う記念碑を構想しました。建築家ジャン・シャルグランがアーチの設計に選ばれ、古代ローマのティトゥスの凱旋門からインスピレーションを得ながら、より壮大で野心的なものを創造しました。建設は1806年に始まりましたが、ナポレオンの政治的運命により進行は遅々としていました。1810年にオーストリアのマリー・ルイーズと結婚したとき、アーチは完成には程遠かったため、皇帝の行列のために実物大の木製模型が急遽建てられました。1814年のナポレオンの退位後、建設は完全に停止しました。工事は1826年にルイ・フィリップ王の下で再開され、ナポレオンの死から15年後の1836年にようやく完成しました。悲劇的に、ナポレオンは彼の壮大な記念碑が完成するのを見ることはありませんでしたが、1840年に彼の遺体がセントヘレナからフランスに戻されたとき、彼の葬列はアーチの下を通過しました。凱旋門はフランスの軍事的栄光の物語を語る壮大な彫刻レリーフで飾られています。訪問のヒント：凱旋門の頂上に登ってパリの壮大なパノラマビューを楽しみ、毎晩6時30分に無名戦士の墓で行われる追悼式に参加し、12本の放射状大通りが形成する星型パターンを観察してください。",
+        "historicalInfo": "凱旋門は1806年にナポレオンがフランス軍を称えるために委託しました。シャルル・ド・ゴール広場の中心にあり、無名戦士の墓があります。",
+        "yearBuilt": "1806-1836年",
+        "architect": "ジャン・シャルグラン"
+      },
+      "pt": {
+        "name": "Arco do Triunfo",
+        "narration": "O Arco do Triunfo homenageia aqueles que lutaram pela França. Está no centro da Place Charles de Gaulle.",
+        "description": "Um dos monumentos mais famosos de Paris",
+        "historicalInfo": "O Arco do Triunfo foi encomendado por Napoleão em 1806 para homenagear o exército francês. Está no centro da Place Charles de Gaulle e contém o Túmulo do Soldado Desconhecido.",
+        "yearBuilt": "1806-1836",
+        "architect": "Jean Chalgrin"
+      },
+      "ru": {
+        "name": "Триумфальная арка",
+        "narration": "Триумфальная арка чествует тех, кто сражался за Францию. Она стоит в центре площади Шарля де Голля.",
+        "description": "Один из самых известных памятников Парижа",
+        "historicalInfo": "Триумфальная арка была заказана Наполеоном в 1806 году в честь французской армии. Она находится в центре площади Шарля де Голля и содержит Могилу Неизвестного солдата.",
+        "yearBuilt": "1806-1836",
+        "architect": "Жан Шальгрен"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:25.178Z",
+    "updatedAt": "2026-02-22T20:00:56.834Z"
   },
   {
     "id": "jeju_item_107",
@@ -11241,55 +8163,61 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:05:56.651Z"
   },
   {
-    "id": "london_restaurant_the_ledbury",
-    "cityId": "london",
-    "name": "The Ledbury",
-    "lat": 51.5104,
-    "lng": -0.1977,
-    "radius": 40,
-    "narration": "자, 여러분, 잠시 눈을 감고 상상해보세요. 런던의 심장부, 노팅힐의 매력적인 거리에서 은은하게 풍겨오는 고급스러운 향기를 맡아보세요. 지금 여러분은 미슐랭 2스타에 빛나는 '더 레드버리(The Ledbury)' 앞에 서 있습니다. 문을 열고 들어서는 순간, 따뜻하고 아늑한 분위기가 여러분을 감싸 안을 거예요. 테이블에 앉아 부드러운 조명 아래 메뉴를 펼쳐 들면, 마치 예술 작품과 같은 현대 유럽 요리들이 눈앞에 펼쳐집니다. 셰프의 섬세한 손길이 느껴지는 각 요리마다 신선한 재료 본연의 맛이 살아 숨 쉬고 있죠. 한 입 베어 물 때마다 입 안 가득 퍼지는 풍미는, 마치 오케스트라의 아름다운 선율처럼 조화롭고 황홀합니다. 와인 한 모금을 음미하며, 사랑하는 사람과의 특별한 순간을 기념하거나, 비즈니스 파트너와의 성공적인 만찬을 즐기는 상상을 해보세요. 이곳, 더 레드버리에서는 단순한 식사를 넘어, 오랫동안 기억될 특별한 경험을 선사받을 수 있습니다. 귓가에는 은은한 클래식 음악이 흐르고, 셰프와 소믈리에의 정성 어린 설명이 더해져, 미각뿐 아니라 오감을 만족시키는 완벽한 밤이 펼쳐질 거예요. 런던 여행 중, 미식의 정점을 경험하고 싶다면, 주저하지 말고 더 레드버리를 방문해보세요. 분명 여러분의 기대를 뛰어넘는 감동을 선사할 겁니다.",
-    "description": "Two Michelin star fine dining",
-    "category": "Restaurant",
-    "detailedDescription": "더 레드버리는 현대 유럽 요리의 정수를 보여주는 미슐랭 2스타 레스토랑입니다. 셰프 브렛 그레이엄(Brett Graham)의 지휘 아래, 신선한 제철 재료를 사용하여 창의적이고 혁신적인 요리를 선보입니다. 이곳의 특징은 단순한 미식 경험을 넘어, 요리 하나하나에 담긴 철학과 스토리를 전달하는 데 집중한다는 점입니다. 더 레드버리의 숨겨진 비화 하나를 알려드릴까요? 사실, 브렛 그레이엄 셰프는 어린 시절 농장에서 자라며 식재료에 대한 깊은 이해를 쌓았다고 합니다. 이러한 경험은 그의 요리에 고스란히 반영되어, 자연의 맛을 최대한 살리는 데 큰 영향을 미쳤습니다. 런던 현지인들 사이에서는 특별한 날, 기념일을 축하하기 위한 최고의 장소로 손꼽히며, 예약 경쟁이 매우 치열합니다. 특히, 테이스팅 메뉴는 셰프의 철학과 창의성을 엿볼 수 있는 최고의 선택이며, 소믈리에가 추천하는 와인 페어링은 음식의 풍미를 더욱 돋보이게 합니다. 방문 전, 공식 웹사이트를 통해 메뉴와 드레스 코드를 확인하는 것이 좋습니다. 잊지 마세요, 이곳은 단순한 레스토랑이 아닌, 런던 미식 여행의 하이라이트가 될 특별한 공간입니다.",
+    "id": "central-market-kl",
+    "cityId": "kuala-lumpur",
+    "name": "Central Market",
+    "lat": 3.145833,
+    "lng": 101.695,
+    "radius": 80,
+    "narration": "자, 눈을 감고 상상해보세요. 1888년, 쿠알라룸푸르의 심장이 뛰기 시작한 곳, 바로 센트럴 마켓입니다. 지금 여러분의 발 아래에는 수많은 예술가와 장인들의 열정이 스며있는 역사의 흔적이 느껴지실 거예요. 코를 킁킁거려 보세요. 향긋한 말레이시아 향신료 냄새, 형형색색의 바틱 염색 ткани 냄새, 그리고 따뜻한 미소와 활기찬 대화 소리가 뒤섞여 만들어내는 독특한 분위기가 느껴지지 않나요? 마치 시간 여행을 떠나온 듯한 기분일 겁니다. 센트럴 마켓은 단순한 시장이 아니에요. 말레이시아의 다채로운 문화가 살아 숨 쉬는 공간이죠. 섬세한 수공예품부터 눈부신 예술 작품까지, 모든 것이 여러분의 감각을 자극할 준비가 되어 있답니다. 상인들의 호탕한 웃음소리, 흥정하는 활기찬 목소리, 그리고 곳곳에서 들려오는 전통 악기 소리가 어우러져 하나의 아름다운 교향곡을 만들어내죠. 잠시 발걸음을 멈추고 주변을 둘러보세요. 벽에 걸린 오래된 사진들은 이 곳의 잊혀진 이야기를 속삭여주는 듯하고, 손때 묻은 나무 기둥은 지난 세월의 흔적을 고스란히 간직하고 있답니다. 센트럴 마켓은 단순한 쇼핑 공간을 넘어, 말레이시아의 역사와 문화를 오롯이 느낄 수 있는 특별한 경험을 선사할 거예요. 자, 이제 센트럴 마켓의 매력에 흠뻑 빠져볼 준비 되셨나요? 당신의 눈과 귀, 그리고 마음을 활짝 열고 이 특별한 공간을 만끽해보세요!",
+    "description": "Historic cultural market for arts and crafts",
+    "category": "Cultural & Shopping",
+    "detailedDescription": "센트럴 마켓, 현지인들은 '파사르 세니(Pasar Seni)'라고 부르는 이 곳은 쿠알라룸푸르의 예술과 문화가 만나는 심장과도 같은 곳입니다. 1888년에 작은 습지 시장으로 시작해, 오늘날에는 말레이시아의 대표적인 문화 랜드마크로 자리 잡았죠. 원래는 농산물과 일용품을 거래하는 장소였지만, 시간이 흐르면서 예술가와 장인들이 모여들기 시작하면서 독특한 분위기를 형성하게 되었답니다. 1980년대에는 철거 위기에 놓이기도 했지만, 시민들의 강력한 보존 운동 덕분에 지금의 아름다운 모습으로 재탄생할 수 있었어요. 센트럴 마켓은 단순한 쇼핑 공간을 넘어, 말레이시아의 다채로운 문화를 경험할 수 있는 특별한 장소입니다. 바틱, 도자기, 목공예품 등 다양한 수공예품을 구경하고 구입할 수 있으며, 현지 예술가들의 작품 전시도 감상할 수 있죠. 특히 2층에는 '카스트리(Kasturi)'라는 이름의 야외 공간이 있는데, 이곳에서는 다양한 문화 공연과 이벤트가 열린답니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 센트럴 마켓 주변에는 맛있는 길거리 음식 노점들이 즐비하게 늘어서 있는데, 특히 '아쌈 락사(Asam Laksa)'와 '나시 르막(Nasi Lemak)'은 꼭 한번 드셔보시길 추천합니다. 센트럴 마켓 방문은 단순한 관광을 넘어, 말레이시아의 진정한 매력을 발견하는 특별한 경험이 될 거예요.",
     "photos": [
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800"
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800",
+      "https://images.unsplash.com/photo-1595506040715-1e3f5dc50d4b?w=800"
     ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
+    "historicalInfo": "Originally built in 1888 as a wet market, Central Market was saved from demolition and designated a Heritage Site in 1986. It now serves as a cultural center for Malaysian arts and crafts.",
+    "yearBuilt": "1888",
+    "architect": "Art Deco restoration in 1980s",
     "translations": {
       "en": {
-        "name": "The Ledbury",
-        "narration": "Dine at The Ledbury, a two-Michelin-starred restaurant offering exceptional modern European cuisine.",
-        "description": "Two Michelin star fine dining"
-      },
-      "ko": {
-        "name": "더 레드버리",
-        "narration": "뛰어난 모던 유러피언 요리를 제공하는 미슐랭 2스타 레스토랑 더 레드버리에서 식사하세요.",
-        "description": "미슐랭 2스타 파인 다이닝"
+        "name": "Central Market",
+        "narration": "Welcome to Central Market, a cultural landmark in the heart of Kuala Lumpur. This historic market has been a hub for Malaysian arts, crafts, and culture since 1888.",
+        "description": "Historic cultural market for arts and crafts",
+        "historicalInfo": "Originally built in 1888 as a wet market, Central Market was saved from demolition and designated a Heritage Site in 1986. It now serves as a cultural center for Malaysian arts and crafts.",
+        "yearBuilt": "1888",
+        "architect": "Art Deco restoration in 1980s"
       },
       "it": {
-        "name": "The Ledbury",
-        "narration": "Cena a The Ledbury, un ristorante due stelle Michelin che offre eccezionale cucina europea moderna.",
-        "description": "Fine dining due stelle Michelin"
+        "name": "Mercato Centrale",
+        "narration": "Benvenuto al Mercato Centrale, un punto di riferimento culturale nel cuore di Kuala Lumpur. Questo mercato storico è stato un centro per le arti, l'artigianato e la cultura malese dal 1888.",
+        "description": "Mercato culturale storico per arti e artigianato",
+        "historicalInfo": "Originariamente costruito nel 1888 come mercato umido, il Mercato Centrale è stato salvato dalla demolizione e designato Sito del Patrimonio nel 1986. Ora funge da centro culturale per le arti e l'artigianato malese.",
+        "yearBuilt": "1888",
+        "architect": "Restauro Art Deco negli anni '80"
+      },
+      "ko": {
+        "name": "중앙 시장",
+        "narration": "쿠알라룸푸르 중심부의 문화적 랜드마크인 중앙 시장에 오신 것을 환영합니다. 이 역사적인 시장은 1888년부터 말레이시아 예술, 공예, 문화의 중심지였습니다.",
+        "description": "예술과 공예를 위한 역사적 문화 시장",
+        "historicalInfo": "원래 1888년에 재래시장으로 건설된 중앙 시장은 철거로부터 구해져 1986년 유산지로 지정되었습니다. 현재 말레이시아 예술과 공예의 문화 센터로 기능합니다.",
+        "yearBuilt": "1888",
+        "architect": "1980년대 아르데코 복원"
       }
     },
-    "openingHours": "Wed-Sat: 12:00-14:00, 18:30-21:30 | Closed Sun-Tue",
-    "priceRange": "££££ (£150-200 per person)",
-    "cuisine": "Modern European",
-    "reservationUrl": "https://www.theledbury.com/",
-    "phoneNumber": "+44 20 7792 9090",
-    "menuHighlights": [
-      "Flame-Grilled Mackerel",
-      "Berkshire Deer",
-      "Tasting Menu"
-    ],
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
     "restaurantPhotos": null,
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:41.390Z",
-    "updatedAt": "2026-02-22T18:28:42.405Z"
+    "createdAt": "2026-02-12T12:11:33.239Z",
+    "updatedAt": "2026-02-22T20:00:57.170Z"
   },
   {
     "id": "similan-islands",
@@ -11461,43 +8389,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:10:50.439Z"
   },
   {
-    "id": "바르셀로나-demo-2",
-    "cityId": "barcelona",
-    "name": "바르셀로나의 맛집 골목",
-    "lat": 0.1,
-    "lng": 0.1,
-    "radius": 50,
-    "narration": "자, 상상해보세요. 따스한 햇살이 쏟아지는 바르셀로나의 오후, 여러분은 지금 미식의 심장, 맛집 골목에 서 있습니다. 좁다란 골목길을 따라 늘어선 식당들은 저마다 독특한 분위기를 뽐내며 여러분을 유혹하죠. 짭짤한 타파스 냄새, 올리브 오일에 구워지는 해산물 소리, 흥겨운 스페인 기타 연주까지... 오감이 즐거워지는 순간이에요. 잠시 눈을 감고 깊게 숨을 들이쉬어 보세요. 바르셀로나의 진짜 맛이 여러분의 온몸으로 스며드는 것을 느낄 수 있을 거예요. \n\n이 골목은 단순한 식당가가 아니에요. 대대로 이어져 온 가족 경영 식당부터 젊은 셰프들의 실험적인 레스토랑까지, 바르셀로나의 역사와 문화가 고스란히 담겨 있는 곳이죠. 마치 미로처럼 얽힌 골목길을 탐험하며 숨겨진 보석 같은 맛집을 발견하는 재미는 상상 그 이상일 거예요. 지금 여러분의 발 아래에는 수백 년 동안 수많은 사람들의 발길이 닿았던 역사의 흔적이 느껴지지 않나요? \n\n자, 이제 용기를 내서 아무 식당이나 들어가 보세요. 걱정 마세요. AI가 엄선한 맛집 정보가 여러분을 최고의 선택으로 이끌어줄 테니까요. 바삭한 빵 위에 신선한 토마토를 올린 '판 콘 토마테', 매콤한 소스가 일품인 '파트라스 브라바스', 싱싱한 해산물이 가득한 '빠에야'까지... 입 안에서 펼쳐지는 미식의 향연에 흠뻑 빠져보세요. 그리고 잊지 마세요. 진정한 바르셀로나의 맛은 화려한 레스토랑이 아닌, 소박하고 정겨운 맛집 골목에서 찾을 수 있다는 것을요. 자, 맛있는 여행을 시작해볼까요?",
-    "description": "로컬 테스트용 맛집 거리",
-    "category": "Restaurant",
-    "detailedDescription": "바르셀로나의 맛집 골목은 단순한 관광 코스가 아닌, 현지인들의 삶과 문화를 엿볼 수 있는 특별한 공간입니다. 람블라스 거리에서 조금만 벗어나면 좁고 구불구불한 골목길들이 미로처럼 펼쳐지는데, 바로 이 곳에 숨겨진 맛집들이 자리하고 있습니다. 수십 년 동안 한 자리를 지켜온 노포부터 젊은 셰프들이 개성 넘치는 요리를 선보이는 트렌디한 레스토랑까지, 다양한 선택지가 미식가들을 설레게 합니다. \n\n**현지인 꿀팁**: 맛집 골목에서는 메뉴판을 꼼꼼히 살펴보는 것이 중요합니다. '메뉴 델 디아(Menu del Dia)'라고 적힌 점심 특선 메뉴는 저렴한 가격에 푸짐한 식사를 즐길 수 있는 기회입니다. 또한, 바르셀로나 사람들은 식사 시간을 중요하게 생각하므로, 예약 없이 방문하면 긴 줄을 서야 할 수도 있습니다. 특히 주말 저녁에는 예약이 필수입니다. \n\n**숨겨진 비화**: 맛집 골목에는 오래된 전설이 하나 전해져 내려옵니다. 골목 어귀에 있는 작은 분수에서 물을 마시면 바르셀로나에 다시 돌아오게 된다는 이야기가 있죠. 정말일지는 모르겠지만, 분수 앞에서 소원을 빌며 물을 마시는 관광객들의 모습을 심심치 않게 볼 수 있습니다. 바르셀로나를 사랑하는 사람이라면 꼭 한번 시도해보세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "바르셀로나의 맛집 골목",
-        "description": "로컬 테스트용 맛집 거리",
-        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:57:47.519Z",
-    "updatedAt": "2026-02-22T18:05:56.899Z"
-  },
-  {
     "id": "wat-chalong",
     "cityId": "phuket",
     "name": "Wat Chalong",
@@ -11580,6 +8471,57 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:04.187Z"
   },
   {
+    "id": "kawasan-canyoneering",
+    "cityId": "cebu",
+    "name": "Canyoneering Adventure at Kawasan Falls",
+    "lat": 9.8167,
+    "lng": 123.3667,
+    "radius": 70,
+    "narration": "자, 눈을 감고 상상해보세요! 지금 여러분은 세부의 심장, 카와산 폭포 앞에 서 있습니다. 귓가에는 시원하게 쏟아지는 폭포 소리가 웅장하게 울리고, 코 끝에는 짙푸른 녹음의 싱그러운 향기가 가득하죠. 발 아래는 미끄럽지만 단단한 바위 틈새로 흐르는 차가운 물결이 느껴집니다. 자, 심호흡 한 번 크게 하시고, 이제 짜릿한 캐녀닝 어드벤처를 시작해볼까요? 첫 번째 점프! 망설이지 마세요! 용기를 내어 에메랄드빛 물 속으로 뛰어드는 순간, 온몸을 휘감는 시원함에 짜릿한 전율이 느껴질 거예요. 물살을 가르며 좁은 협곡을 헤엄쳐 나가는 동안, 마치 영화 속 주인공이 된 듯한 기분이 들 겁니다. 아슬아슬한 절벽을 따라 로프에 의지해 하강하는 순간은, 심장이 멎을 듯 스릴 넘치죠. 하지만 걱정 마세요! 숙련된 가이드가 여러분의 안전을 책임져 줄 테니까요. 폭포 아래 웅덩이에서 즐기는 천연 마사지는 피로를 싹 잊게 해줄 거예요. 카와산 폭포의 숨겨진 아름다움을 탐험하며, 평생 잊지 못할 추억을 만들어 보세요! 상상 그 이상의 모험이 여러분을 기다리고 있답니다!",
+    "description": "Thrilling canyoneering experience at Kawasan Falls",
+    "category": "Activity",
+    "detailedDescription": "카와산 폭포는 세부 남서부에 위치한 칸데하이 마을의 아름다운 멀티 레이어 폭포입니다. 에메랄드 빛깔의 물과 울창한 열대 우림으로 둘러싸여 있어, 그림 같은 풍경을 자랑하죠. 이곳에서는 캐녀닝이라는 특별한 액티비티를 즐길 수 있는데요. 캐녀닝은 협곡을 따라 하이킹, 수영, 점프, 암벽 하강 등 다양한 방법으로 탐험하는 익스트림 스포츠입니다. 카와산 폭포 캐녀닝은 초보자부터 숙련자까지 모두 즐길 수 있도록 다양한 코스가 마련되어 있어요. 특히 폭포에서 뛰어내리는 점프는 카와산 캐녀닝의 하이라이트라고 할 수 있죠. 현지인들은 예로부터 카와산 폭포를 신성한 장소로 여겨왔다고 해요. 폭포 아래 웅덩이에서 수영을 하면 행운이 찾아온다는 이야기도 전해진답니다. 꿀팁 하나! 카와산 폭포 근처에는 맛있는 현지 음식을 맛볼 수 있는 레스토랑들이 많으니, 캐녀닝 후에는 꼭 필리핀 전통 요리를 즐겨보세요! 아, 그리고 평일 오전에 방문하면 비교적 한적하게 캐녀닝을 즐길 수 있다는 사실도 잊지 마세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+      "https://images.unsplash.com/photo-1484291470158-b8f8d608850d?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Canyoneering Adventure at Kawasan Falls",
+        "narration": "Embark on an adrenaline-pumping canyoneering adventure through Kawasan Falls. Jump off cliffs, swim through canyons, and rappel down waterfalls.",
+        "description": "Thrilling canyoneering experience at Kawasan Falls"
+      },
+      "it": {
+        "name": "Avventura Canyoning alle Cascate Kawasan",
+        "narration": "Inizia un'avventura di canyoning piena di adrenalina attraverso le Cascate Kawasan. Salta dalle scogliere, nuota attraverso i canyon e scendi in corda doppia dalle cascate.",
+        "description": "Esperienza emozionante di canyoning alle Cascate Kawasan",
+        "detailedDescription": "L'avventura di canyoning a Kawasan è una delle attività all'aperto più esaltanti di Cebu. Questa avventura di un'intera giornata ti porta attraverso canyon spettacolari scolpiti da acque turchesi cristalline nel corso di milioni di anni. Il percorso include salti da scogliere di varie altezze (opzionale - puoi sempre aggirare a piedi), nuotate attraverso gole strette, arrampicate su rocce e discese in corda doppia lungo cascate scroscianti. Il culmine sono le spettacolari Cascate Kawasan con le loro cascate a più livelli e piscine blu vibranti. Tutta l'attrezzatura necessaria inclusi caschi, giubbotti di salvataggio e corde è fornita. Guide esperte garantiscono la sicurezza mentre ti incoraggiano a superare i tuoi limiti. Non è richiesta esperienza precedente, ma sono raccomandate buone capacità di nuoto e forma fisica."
+      },
+      "ko": {
+        "name": "카와산 폭포 캐니어링 어드벤처",
+        "narration": "카와산 폭포를 통과하는 아드레날린이 솟구치는 캐니어링 모험을 시작하세요. 절벽에서 뛰어내리고, 협곡을 헤엄치고, 폭포를 따라 하강하세요.",
+        "description": "카와산 폭포에서의 스릴 넘치는 캐니어링 경험",
+        "detailedDescription": "카와산 캐니어링 모험은 세부에서 가장 짜릿한 야외 활동 중 하나입니다. 이 하루 종일 모험은 수백만 년에 걸쳐 수정처럼 맑은 청록색 물이 조각한 멋진 협곡을 통과합니다. 여정에는 다양한 높이에서의 절벽 점프(선택 사항 - 언제든지 걸어서 우회 가능), 좁은 협곡을 헤엄치기, 바위를 오르기, 쏟아지는 폭포를 따라 하강하기가 포함됩니다. 하이라이트는 멋진 다단계 폭포와 생생한 푸른 웅덩이가 있는 장관인 카와산 폭포입니다. 헬멧, 구명 조끼, 로프를 포함한 모든 필요한 장비가 제공됩니다. 전문 가이드가 안전을 보장하면서 한계를 뛰어넘도록 격려합니다. 사전 경험은 필요하지 않지만 좋은 수영 능력과 체력이 권장됩니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:38.357Z",
+    "updatedAt": "2026-02-22T20:00:57.692Z"
+  },
+  {
     "id": "barcelona_item_3",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Shopping 추천 4",
@@ -11615,44 +8557,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:01.648Z",
     "updatedAt": "2026-02-22T18:05:57.479Z"
-  },
-  {
-    "id": "london_더_울즐리_the_wolseley",
-    "cityId": "london",
-    "name": "더 울즐리 (The Wolseley)",
-    "lat": 51.5085,
-    "lng": -0.1423,
-    "radius": 75,
-    "narration": "피카딜리 거리의 분주함 속에서, 당신은 마치 마법에 홀린 듯 거대한 브론즈 문이 있는 우아한 건물 앞에 이끌립니다. 문이 열리는 순간, 따뜻하고 활기찬 공기가 당신을 감쌉니다. 후각으로는 갓 내린 에스프레소의 고소한 향과 갓 구운 페이스트리의 달콤한 버터 향이 섞여 런던의 아침을 축복하는 듯합니다. 시선을 따라가면, 거대한 식당 홀이 눈앞에 펼쳐집니다. 흑백 대리석 바닥은 마치 체스판처럼 빛나고, 높은 천장 아래로는 화려한 샹들리에가 반짝이며 금빛 조명을 흩뿌립니다.\n잔잔한 대화 소리, 포크와 나이프가 접시에 부딪히는 경쾌한 소리, 그리고 바에서 칵테일을 젓는 얼음 소리가 어우러져 공간을 가득 채웁니다. 이 모든 소리가 하나의 교향악처럼 조화를 이루며, 이곳이 단순한 식당이 아닌 삶의 축제가 펼쳐지는 무대임을 알려줍니다. 창밖으로는 런던 시내의 활기찬 모습이 액자처럼 펼쳐지고, 그 안에서 당신은 시간과 공간을 초월한 듯한 착각에 빠져들게 됩니다. 숙련된 웨이터들이 은쟁반에 담아온 요리를 우아하게 내려놓을 때, 섬세하게 장식된 접시 위의 음식은 단순한 끼니를 넘어선 예술 작품처럼 다가옵니다. 이곳에서 당신은 미각, 후각, 시각, 청각, 그리고 공간이 주는 특별한 감각까지, 오감을 통해 런던의 진정한 품격을 경험하게 될 것입니다.",
-    "description": "1920년대 유럽 그랜드 카페의 화려함 속에서 런던의 아침을 여는 미식의 전설",
-    "category": "Restaurant",
-    "detailedDescription": "여러분! 런던의 중심부에 자리 잡고 있는 더 울즐리에 오신 것을 환영합니다! 자, 지금부터 저와 함께 1920년대의 유럽 그랜드 카페의 화려함 속으로 뛰어들어 볼까요? 눈을 감고 그 시대를 상상해 보세요: 웅장한 대리석 기둥이 높이 솟아오르고, 대형 샹들리에에서 뿜어져 나오는 빛이 공간을 화려하게 밝히고 있습니다. 모든 것이 반짝이고 빛나며, 고급스러운 향기가 공기를 가득 채우고 있습니다. 아침을 맞이하는 이곳, 더 울즐리에서의 미식 경험은 단순한 식사가 아니라 역사 속으로의 여행입니다!\n\n이제, 시간을 거슬러 올라가 볼까요? 더 울즐리는 1921년에 올드 본 스트리트에 처음 문을 열었습니다. 당시 런던에서는 자동차가 점점 더 대중화되고 있었고, 대서양을 건너는 대형 여객선들이 전 세계를 잇고 있었습니다. 이 웅장한 건물은 원래 자동차 대리점으로 설계되었지만, 금방 그 목적을 넘어서서 당시 최고의 사교 공간으로 자리 잡았습니다. 이곳을 건설한 아크리이트는 윌리엄 커티스 그린으로, 그는 당시의 정치적 혼란 속에서도 새로운 시대의 상징을 창조하고자 했습니다. \n\n그 시절의 더 울즐리에서 일어났던 한 가지 드라마틱한 이야기를 소개할게요. 상류층의 사교 모임이 한창 펼쳐지던 어느 날, 영국의 유명한 인사인 에드워드 왕자가 깜짝 방문을 했습니다. 그가 이곳에서 한층 더 빛나는 화려한 밤을 보낸 후, 그의 방문은 곧 전설이 되었고, 더 울즐리는 한층 더 하늘 높은 줄 모르게 유명해졌습니다. 그 당시 이곳에서 즐겼던 사람들은 자신들이 역사 속에서 어떤 순간을 경험하고 있는지 아마도 알지 못했을 것입니다.\n\n이제 더 울즐리의 건축적 경이로움에 대해 이야기해 볼까요? 이 건물은 강력한 철골 구조와 고급 대리석으로 지어졌습니다. 엔지니어들은 당시 최첨단 기술을 활용하여 이곳을 단순한 카페가 아닌, 예술 작품으로 만들어냈습니다. 대리석 바닥의 디테일 하나하나가 그들의 노력을 증명하고 있습니다. 여러분, 건물을 둘러보며 그 세밀함과 정교한 미를 감상해 보세요!\n\n그리고 여러분, 이곳에는 감춰진 비밀들이 있습니다. 예를 들어, 홀의 천장에 새겨진 장식들은 단순히 화려함을 더하는 장식이 아니라, 그 당시의 사회적, 정치적 상징들이 담겨져 있습니다. 많은 관광객들이 지나치기 쉬운 이 작은 디테일들에는 수많은 이야기가 숨겨져 있습니다. 그러니 주의를 기울여 보세요!\n\n더 울즐리는 시간이 흐르며 쇠퇴기를 맞았지만, 현대에 들어와 그 위대함을 다시 되찾았습니다. 2003년에 대대적인 복원 작업을 거쳐 지금의 모습으로 되살아났습니다. 이 복원 과정에서는 수많은 역사 전문가들과 장인들이 참여하여, 그 옛날의 웅장함을 다시금 우리 앞에 펼쳤습니다. 이렇듯 더 울즐리는 시대를 초월한 매력을 지니고 있습니다.\n\n현대에 들어와 더 울즐리는 수많은 영화와 드라마의 배경지로 등장하며, 또 다른 매력을 더했습니다. 이곳을 방문하는 현대의 관광객들은 셀카를 찍으며 \"여기서 그 장면이 찍혔어!\"라는 외침을 멈추지 않습니다. 그리고 여러분, 때때로 그들은 음식을 먹기보다 인스타그램에 사진을 올리는 데 더 열중하기도 한다는 사실!\n\n마지막으로, 더 울즐리가 인류 역사에서 어떤 의미를 가지는지 생각해 봅시다. 이곳은 단순한 건물이 아닙니다. 과거와 현재가 공존하며, 시대를 초월한 이야기들을 품고 있는 공간입니다. 여기서는 어떤 형태로든 연결된다는 느낌을 받을 수 있습니다. 지난 날의 영광과 오늘날의 활기를 동시에 느껴볼 수 있는 곳, 바로 더 울즐리입니다.\n\n자, 이제 여러분도 이곳의 이야기를 가슴에 품고 가세요. 더 울즐리는 단순한 카페 그 이상의 의미를 담고 있습니다. 이곳에서의 경험은 여러분의 마음에 영원히 남을 것입니다. 다음에 이곳을 다시 방문할 때는 이 모든 이야기를 떠올리며, 그 속에서 새로운 디테일을 발견해 보세요! 여러분과의 이 짧은 여정이 끝나가지만, 더 울즐리와의 이야기는 계속될 것입니다. 감사합니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "더 울즐리 (The Wolseley)",
-        "description": "1920년대 유럽 그랜드 카페의 화려함 속에서 런던의 아침을 여는 미식의 전설",
-        "narration": "피카딜리 거리의 분주함 속에서, 당신은 마치 마법에 홀린 듯 거대한 브론즈 문이 있는 우아한 건물 앞에 이끌립니다. 문이 열리는 순간, 따뜻하고 활기찬 공기가 당신을 감쌉니다. 후각으로는 갓 내린 에스프레소의 고소한 향과 갓 구운 페이스트리의 달콤한 버터 향이 섞여 런던의 아침을 축복하는 듯합니다. 시선을 따라가면, 거대한 식당 홀이 눈앞에 펼쳐집니다. 흑백 대리석 바닥은 마치 체스판처럼 빛나고, 높은 천장 아래로는 화려한 샹들리에가 반짝이며 금빛 조명을 흩뿌립니다.\n잔잔한 대화 소리, 포크와 나이프가 접시에 부딪히는 경쾌한 소리, 그리고 바에서 칵테일을 젓는 얼음 소리가 어우러져 공간을 가득 채웁니다. 이 모든 소리가 하나의 교향악처럼 조화를 이루며, 이곳이 단순한 식당이 아닌 삶의 축제가 펼쳐지는 무대임을 알려줍니다. 창밖으로는 런던 시내의 활기찬 모습이 액자처럼 펼쳐지고, 그 안에서 당신은 시간과 공간을 초월한 듯한 착각에 빠져들게 됩니다. 숙련된 웨이터들이 은쟁반에 담아온 요리를 우아하게 내려놓을 때, 섬세하게 장식된 접시 위의 음식은 단순한 끼니를 넘어선 예술 작품처럼 다가옵니다. 이곳에서 당신은 미각, 후각, 시각, 청각, 그리고 공간이 주는 특별한 감각까지, 오감을 통해 런던의 진정한 품격을 경험하게 될 것입니다.",
-        "detailedDescription": "피카딜리 서커스에서 멀지 않은 곳에 자리한 '더 울즐리'는 단순한 레스토랑이 아닌, 1920년대 유럽 그랜드 카페의 황금기를 재현한 살아있는 역사 그 자체입니다. 원래 이 건물은 1921년에 울즐리 자동차 회사의 화려한 쇼룸으로 지어졌으며, 그 후에도 은행으로 사용되는 등 격동의 세월을 보냈습니다. 하지만 2003년, 유명 레스토랑 경영자들이 이 공간을 런던에서 가장 우아하고 매력적인 다이닝 공간으로 탈바꿈시켰습니다. 프랑스에서 영감을 받은 브라세리 스타일의 메뉴와 웅장한 아르데코 인테리어는 들어서는 순간 시선을 압도합니다. 높은 천장, 흑백 체크무늬 바닥, 거대한 기둥과 화려한 샹들리에가 어우러져 과거의 영광을 고스란히 느낄 수 있게 합니다.\n더 울즐리는 특히 런던의 '파워 브렉퍼스트' 명소로 유명하며, 일찍부터 많은 유명인사들이 찾는 곳으로 알려져 있습니다. 현지인들 사이에서는 브런치나 애프터눈 티도 놓칠 수 없는 경험으로 꼽힙니다. 늦은 저녁에는 재즈 선율과 함께 런던의 밤을 우아하게 마무리할 수 있는 장소가 됩니다. 이곳의 진정한 매력은 음식뿐 아니라, 그 공간이 주는 특별한 분위기와 세심한 서비스에 있습니다. 테이블 간의 적당한 간격, 숙련된 서버들의 친절함, 그리고 끊임없이 움직이는 주방의 활기찬 에너지가 완벽하게 조화를 이룹니다. 예약은 필수이며, 특히 창가 자리를 원한다면 최소 한 달 전에는 예약하는 것이 좋습니다."
-      }
-    },
-    "openingHours": "매일 07:00 - 23:00 (금, 토는 더 늦게까지, 공식 웹사이트 참조)",
-    "priceRange": "£30 - £100+ (1인 기준, 식사 및 코스에 따라 상이)",
-    "cuisine": null,
-    "reservationUrl": "https://www.thewolseley.com/reservations",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-14T00:44:36.243Z",
-    "updatedAt": "2026-02-22T18:05:57.792Z"
   },
   {
     "id": "busan_item_36",
@@ -11729,6 +8633,121 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:04.314Z"
   },
   {
+    "id": "louvre",
+    "cityId": "paris",
+    "name": "Louvre Museum",
+    "lat": 48.860294,
+    "lng": 2.338629,
+    "radius": 60,
+    "narration": "자, 상상해보세요. 지금 여러분은 세계 최대의 미술관, 루브르 박물관 앞에 서 있습니다. 파리의 심장부에서 800년이 넘는 역사를 품은 이 웅장한 건물은 단순한 미술관 그 이상입니다. 한때 왕궁이었고, 프랑스 혁명의 격동을 겪었으며, 수많은 예술가들의 영감이 되어준 살아있는 역사 그 자체죠. 발 아래 깔린 돌길을 느껴보세요. 수백 년 동안 수많은 발길이 스쳐 지나간 이 길을 따라, 레오나르도 다 빈치의 '모나리자'를 만나러 갑니다. 하지만 루브르는 모나리자 하나로 설명될 수 없는 곳입니다. 미켈란젤로, 라파엘로, 렘브란트… 시대를 초월한 거장들의 숨결이 박물관 곳곳에 스며들어 있습니다. 귓가에는 끊임없이 속삭이는 듯한 이야기들이 들려오는 것 같지 않나요? 왕족들의 화려한 연회, 예술가들의 뜨거운 논쟁, 혁명가들의 함성… 루브르는 과거와 현재가 공존하는 마법 같은 공간입니다. 자, 이제 깊게 숨을 들이쉬고, 루브르의 문을 열어 잊을 수 없는 예술 여행을 시작해볼까요? 햇살이 부드럽게 비추는 드농관에서 니케 여신의 날갯짓을, 웅장한 술리관에서 고대 이집트의 신비를, 그리고 리슐리외관에서 프랑스 조각의 아름다움을 만끽하며, 여러분만의 루브르 이야기를 만들어보세요. 그리고 잊지 마세요, 루브르는 단 하루 만에 전부를 볼 수 있는 곳이 아닙니다. 천천히, 음미하며, 여러분의 마음을 사로잡는 작품 앞에서 오래도록 머무르세요. 루브르는 언제나 여러분을 기다리고 있을 테니까요.",
+    "description": "The world's largest art museum and a historic monument",
+    "category": "Museum",
+    "detailedDescription": "루브르 박물관은 단순한 미술관이 아닌, 프랑스 역사의 산 증인입니다. 원래는 필리프 2세에 의해 12세기에 요새로 지어졌지만, 이후 왕궁으로 개조되었고, 프랑스 혁명 이후인 1793년에 미술관으로 개방되었습니다. 모나리자는 루브르의 아이콘이지만, 밀로의 비너스, 사모트라케의 니케, 함무라비 법전 등 세계적으로 유명한 작품들이 소장되어 있습니다. 현지인 꿀팁 하나! 루브르는 워낙 넓기 때문에 미리 동선을 짜고 가는 것이 좋습니다. 특히 인기 작품 앞은 항상 인산인해를 이루니, 아침 일찍 방문하거나 늦은 오후에 방문하는 것을 추천합니다. 그리고 루브르 지하에는 중세 루브르의 흔적을 볼 수 있는 공간이 마련되어 있으니, 잊지 말고 방문해보세요. 숨겨진 비화 하나 더! 루브르의 유리 피라미드는 건설 당시 엄청난 논란을 불러일으켰습니다. 전통적인 루브르 건물과 현대적인 피라미드의 조화가 어울리지 않는다는 비판이 많았지만, 현재는 루브르의 상징적인 건축물로 자리 잡았습니다. 루브르는 끊임없이 변화하고 진화하는 공간입니다. 새로운 전시와 특별 프로그램들이 계속해서 열리니, 방문 전에 루브르 박물관 공식 웹사이트를 확인하는 것을 잊지 마세요.",
+    "photos": [
+      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800",
+      "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800"
+    ],
+    "historicalInfo": "The Louvre was originally a royal palace before becoming a public museum during the French Revolution in 1793. It houses approximately 38,000 objects from prehistory to the 21st century.",
+    "yearBuilt": "Palace: 12th century onwards, Museum: 1793",
+    "architect": "Multiple architects over centuries, Modern pyramid: I.M. Pei",
+    "translations": {
+      "en": {
+        "name": "Louvre Museum",
+        "narration": "You are at the Louvre Museum, the world's largest art museum. Home to thousands of works including the Mona Lisa.",
+        "description": "The world's largest art museum and a historic monument",
+        "detailedDescription": "The Louvre Museum, or Musée du Louvre, stands as the world's largest and most visited art museum, housing an incomparable collection of over 380,000 objects and displaying 35,000 works of art across 72,735 square meters (782,910 square feet) of galleries. Located in the historic Louvre Palace on the Right Bank of the Seine in Paris, this magnificent institution attracts approximately 10 million visitors annually, making it not only a temple of art but also a pilgrimage site for culture enthusiasts from around the globe. The Louvre's history is as rich and layered as the artworks it contains. The site began as a fortress built by King Philippe Auguste in the late 12th century to protect Paris from Viking invasions. Archaeological remains of this medieval fortress can still be seen in the museum's basement. In the 14th century, Charles V transformed the fortress into a royal residence, beginning its evolution into a palace. The modern Louvre palace took shape during the Renaissance when Francis I, a great patron of the arts who brought Leonardo da Vinci to France, demolished the old fortress and began constructing a Renaissance palace in 1546. Successive monarchs, particularly Louis XIV before he moved the court to Versailles, continued expanding and embellishing the palace, creating the magnificent complex we see today. The Louvre's transformation into a public museum began during the French Revolution. In 1793, the revolutionary government opened the Musée Central des Arts in the Grande Galerie, displaying the royal collection and artworks confiscated from the church and émigrés. Napoleon Bonaparte greatly expanded the collection through his military campaigns, bringing treasures from across Europe and Egypt. Though many pieces were returned after his defeat, the Louvre retained a substantial collection that formed the basis of its current holdings. The museum's collections span from ancient civilizations to the mid-19th century and are divided into eight curatorial departments: Egyptian Antiquities, Near Eastern Antiquities, Greek and Roman Antiquities, Islamic Art, Sculpture, Decorative Arts, Paintings, and Prints and Drawings. Among its most famous treasures are Leonardo da Vinci's \"Mona Lisa,\" the enigmatic portrait that draws millions of visitors who wait in long lines for a glimpse of her mysterious smile. The ancient Greek sculpture \"Venus de Milo,\" depicting the goddess Aphrodite, captivates with her timeless beauty despite her missing arms. The \"Winged Victory of Samothrace,\" a Hellenistic sculpture of Nike, the goddess of victory, commands attention at the top of the Daru staircase, her powerful form seemingly in motion despite being carved from marble over 2,000 years ago. The museum underwent dramatic transformation in the 1980s under President François Mitterrand's \"Grand Louvre\" project. The most controversial element was I.M. Pei's glass pyramid, completed in 1989, which serves as the museum's main entrance. Initially criticized as a modern intrusion on the historic palace, the pyramid has become an iconic symbol of the Louvre, its geometric form creating a striking dialogue between classical and contemporary architecture. The pyramid is surrounded by three smaller pyramids and fountains, creating the Cour Napoléon, a space where visitors gather before descending into the vast underground lobby that connects the museum's three wings: Sully, Richelieu, and Denon. The Louvre's galleries are a journey through human creativity and civilization. In the Egyptian Antiquities department, visitors encounter mummies, sarcophagi, and the monumental Great Sphinx of Tanis. The Near Eastern Antiquities house the Code of Hammurabi, one of the oldest deciphered writings of significant length in the world. The Greek and Roman galleries showcase classical sculptures, pottery, and jewelry that influenced Western art for millennia. The Painting galleries feature masterpieces by Caravaggio, Rembrandt, Vermeer, and countless other masters. Delacroix's \"Liberty Leading the People\" captures the revolutionary spirit of France, while Géricault's \"The Raft of the Medusa\" confronts viewers with the drama and horror of a tragic maritime disaster. The museum's Islamic Art department, housed in a stunning modern wing covered by an undulating golden veil designed by architects Rudy Ricciotti and Mario Bellini, displays treasures from three continents spanning 1,300 years. The Louvre is not merely a repository of art but a living institution that continues to evolve. It organizes major temporary exhibitions, conducts scholarly research, and undertakes conservation projects to preserve its treasures for future generations. The museum has also expanded globally, with the Louvre Abu Dhabi opening in 2017, extending the institution's mission to new audiences. Recent initiatives have focused on improving visitor experience, including timed entry tickets to manage crowds, enhanced digital guides, and special programs for families and students. The museum has also committed to transparency regarding the provenance of works in its collection, addressing historical injustices and working toward restitution when appropriate. Today, the Louvre stands as more than a museum - it is a symbol of human cultural achievement, a place where the greatest works of art from civilizations across time and space come together under one roof. Walking through its galleries is to journey through human history, to witness the evolution of artistic expression, and to stand before works that have moved, inspired, and challenged viewers for centuries. The Louvre reminds us of our shared cultural heritage and the enduring power of art to transcend time, language, and borders."
+      },
+      "it": {
+        "name": "Museo del Louvre",
+        "narration": "Ti trovi al Museo del Louvre, il più grande museo d'arte del mondo. Ospita migliaia di opere tra cui la Gioconda.",
+        "description": "Il più grande museo d'arte del mondo e un monumento storico",
+        "historicalInfo": "Il Louvre era originariamente un palazzo reale prima di diventare un museo pubblico durante la Rivoluzione francese nel 1793. Ospita circa 38.000 oggetti dalla preistoria al XXI secolo.",
+        "yearBuilt": "Palazzo: dal XII secolo in poi, Museo: 1793",
+        "architect": "Più architetti nel corso dei secoli, Piramide moderna: I.M. Pei"
+      },
+      "ko": {
+        "name": "루브르 박물관",
+        "narration": "세계 최대의 미술관인 루브르 박물관에 오셨습니다. 모나리자를 포함한 수천 점의 작품이 소장되어 있습니다.",
+        "description": "세계 최대의 미술관이자 역사적 기념물",
+        "detailedDescription": "루브르 박물관(Musée du Louvre)은 세계에서 가장 크고 가장 많이 방문되는 미술관으로, 72,735평방미터(782,910평방피트)의 갤러리 공간에 380,000점 이상의 유물을 소장하고 35,000점의 예술 작품을 전시하고 있습니다. 파리의 센 강 우안에 위치한 역사적인 루브르 궁전에 자리한 이 장엄한 기관은 매년 약 1,000만 명의 방문객을 끌어모으며, 예술의 전당일 뿐만 아니라 전 세계 문화 애호가들의 순례지이기도 합니다. 루브르의 역사는 그곳에 소장된 예술 작품만큼이나 풍부하고 다층적입니다. 이 장소는 12세기 후반 필립 오귀스트 왕이 바이킹의 침략으로부터 파리를 보호하기 위해 건설한 요새로 시작되었습니다. 이 중세 요새의 고고학적 유적은 박물관 지하에서 여전히 볼 수 있습니다. 14세기에 샤를 5세가 요새를 왕실 거주지로 개조하면서 궁전으로의 진화가 시작되었습니다. 현대적인 루브르 궁전은 르네상스 시대에 형성되었는데, 레오나르도 다 빈치를 프랑스로 초청한 위대한 예술 후원자 프랑수아 1세가 1546년에 옛 요새를 철거하고 르네상스 궁전 건설을 시작했습니다. 특히 베르사유로 궁정을 옮기기 전의 루이 14세를 비롯한 후대 군주들이 계속해서 궁전을 확장하고 장식하여 오늘날 우리가 보는 웅장한 복합 건축물을 만들었습니다. 루브르가 공공 박물관으로 변모한 것은 프랑스 혁명 기간에 시작되었습니다. 1793년 혁명 정부는 그랑 갤러리에 중앙 예술 박물관(Musée Central des Arts)을 개관하여 왕실 소장품과 교회 및 망명자들로부터 압수한 예술 작품을 전시했습니다. 나폴레옹 보나파르트는 그의 군사 원정을 통해 유럽과 이집트 전역에서 보물을 가져와 소장품을 크게 확대했습니다. 그의 패배 후 많은 작품이 반환되었지만, 루브르는 현재 소장품의 기초를 형성한 상당한 컬렉션을 보유했습니다. 박물관의 소장품은 고대 문명부터 19세기 중반까지 다양하며 8개 큐레토리얼 부서로 나뉩니다. 방문 팁: 수요일과 금요일 야간 개관을 이용하면 혼잡을 피할 수 있으며, 온라인으로 시간 지정 티켓을 미리 예약하고, 덜 알려진 섹션인 이슬람 예술이나 장식 예술 갤러리를 탐험해 보세요.",
+        "historicalInfo": "루브르는 원래 왕궁이었으나 1793년 프랑스 혁명 중에 공공 박물관이 되었습니다. 선사시대부터 21세기까지 약 38,000점의 유물을 소장하고 있습니다.",
+        "yearBuilt": "궁전: 12세기 이후, 박물관: 1793년",
+        "architect": "여러 세기에 걸친 다양한 건축가들, 현대 피라미드: I.M. 페이"
+      },
+      "es": {
+        "name": "Museo del Louvre",
+        "narration": "Está en el Museo del Louvre, el museo de arte más grande del mundo. Hogar de miles de obras, incluida la Mona Lisa.",
+        "description": "El museo de arte más grande del mundo y un monumento histórico",
+        "historicalInfo": "El Louvre fue originalmente un palacio real antes de convertirse en museo público durante la Revolución Francesa en 1793. Alberga aproximadamente 38.000 objetos desde la prehistoria hasta el siglo XXI.",
+        "yearBuilt": "Palacio: desde el siglo XII en adelante, Museo: 1793",
+        "architect": "Múltiples arquitectos a lo largo de los siglos, Pirámide moderna: I.M. Pei"
+      },
+      "fr": {
+        "name": "Musée du Louvre",
+        "narration": "Vous êtes au Musée du Louvre, le plus grand musée d'art du monde. Il abrite des milliers d'œuvres, dont la Joconde.",
+        "description": "Le plus grand musée d'art du monde et un monument historique",
+        "historicalInfo": "Le Louvre était à l'origine un palais royal avant de devenir un musée public pendant la Révolution française en 1793. Il abrite environ 38 000 objets de la préhistoire au XXIe siècle.",
+        "yearBuilt": "Palais : à partir du XIIe siècle, Musée : 1793",
+        "architect": "Plusieurs architectes au fil des siècles, Pyramide moderne : I.M. Pei"
+      },
+      "de": {
+        "name": "Louvre-Museum",
+        "narration": "Sie befinden sich im Louvre-Museum, dem größten Kunstmuseum der Welt. Heimat Tausender Werke, darunter die Mona Lisa.",
+        "description": "Das größte Kunstmuseum der Welt und ein historisches Denkmal",
+        "historicalInfo": "Der Louvre war ursprünglich ein königlicher Palast, bevor er während der Französischen Revolution 1793 zu einem öffentlichen Museum wurde. Er beherbergt etwa 38.000 Objekte von der Vorgeschichte bis zum 21. Jahrhundert.",
+        "yearBuilt": "Palast: ab dem 12. Jahrhundert, Museum: 1793",
+        "architect": "Mehrere Architekten über Jahrhunderte, Moderne Pyramide: I.M. Pei"
+      },
+      "zh": {
+        "name": "卢浮宫博物馆",
+        "narration": "您正在卢浮宫博物馆，世界上最大的艺术博物馆。收藏了包括蒙娜丽莎在内的数千件作品。",
+        "description": "世界上最大的艺术博物馆和历史古迹",
+        "detailedDescription": "卢浮宫博物馆（Musée du Louvre）是世界上最大、参观人数最多的艺术博物馆，在72,735平方米（782,910平方英尺）的画廊空间内收藏了超过380,000件文物，展出35,000件艺术作品。这座宏伟的机构位于巴黎塞纳河右岸的历史悠久的卢浮宫内，每年吸引约1000万游客，不仅是艺术殿堂，也是来自全球文化爱好者的朝圣地。卢浮宫的历史与其收藏的艺术品一样丰富多彩、层次分明。这个地点最初是12世纪末菲利普·奥古斯特国王为保护巴黎免受维京人入侵而建造的堡垒。这座中世纪堡垒的考古遗迹至今仍可在博物馆地下室看到。14世纪，查理五世将堡垒改造为皇家住所，开始了其向宫殿的演变。现代卢浮宫在文艺复兴时期成形，当时伟大的艺术赞助人、将列奥纳多·达·芬奇带到法国的弗朗索瓦一世于1546年拆除了旧堡垒，开始建造文艺复兴宫殿。后继的君主，特别是在将宫廷迁往凡尔赛之前的路易十四，继续扩建和装饰宫殿，创造了我们今天看到的宏伟建筑群。卢浮宫向公共博物馆的转变始于法国大革命期间。1793年，革命政府在大画廊开设了中央艺术博物馆（Musée Central des Arts），展示皇家收藏品和从教会及流亡者那里没收的艺术品。拿破仑·波拿巴通过军事征服大大扩展了收藏，从整个欧洲和埃及带回珍宝。尽管在他战败后许多作品被归还，但卢浮宫保留了大量藏品，构成了其当前收藏的基础。博物馆的藏品跨越从古代文明到19世纪中叶，分为8个策展部门。参观提示：利用周三和周五的夜间开放时间可以避开人群，提前在线预订定时门票，探索较少人知的区域如伊斯兰艺术或装饰艺术画廊。",
+        "historicalInfo": "卢浮宫最初是一座皇家宫殿，1793年法国大革命期间成为公共博物馆。它收藏了约38,000件从史前到21世纪的文物。",
+        "yearBuilt": "宫殿：12世纪起，博物馆：1793年",
+        "architect": "几个世纪以来的多位建筑师，现代金字塔：贝聿铭"
+      },
+      "ja": {
+        "name": "ルーヴル美術館",
+        "narration": "ここは世界最大の美術館、ルーヴル美術館です。モナ・リザを含む数千の作品を所蔵しています。",
+        "description": "世界最大の美術館であり歴史的建造物",
+        "detailedDescription": "ルーヴル美術館（Musée du Louvre）は、世界最大かつ最も訪問者の多い美術館で、72,735平方メートル（782,910平方フィート）のギャラリースペースに380,000点以上の収蔵品があり、35,000点の美術作品を展示しています。パリのセーヌ川右岸にある歴史的なルーヴル宮殿に位置するこの壮大な施設は、年間約1,000万人の訪問者を魅了し、芸術の殿堂であるだけでなく、世界中の文化愛好家の巡礼地となっています。ルーヴルの歴史は、そこに収蔵されている芸術作品と同じくらい豊かで多層的です。この場所は、12世紀後半にフィリップ・オーギュスト王がヴァイキングの侵略からパリを守るために建設した要塞として始まりました。この中世の要塞の考古学的遺跡は、今でも美術館の地下で見ることができます。14世紀、シャルル5世が要塞を王室の住居に改造し、宮殿への進化が始まりました。現代のルーヴル宮殿はルネサンス期に形を成し、レオナルド・ダ・ヴィンチをフランスに招いた偉大な芸術の庇護者フランソワ1世が1546年に古い要塞を取り壊し、ルネサンス様式の宮殿の建設を始めました。特にヴェルサイユに宮廷を移す前のルイ14世をはじめとする歴代の君主たちが、宮殿の拡張と装飾を続け、今日見られる壮大な複合施設を作り上げました。ルーヴルが公共美術館へと変貌したのは、フランス革命期に始まりました。1793年、革命政府はグランド・ギャラリーに中央芸術美術館（Musée Central des Arts）を開設し、王室コレクションと教会や亡命者から没収した芸術作品を展示しました。ナポレオン・ボナパルトは軍事遠征を通じてヨーロッパとエジプト全域から財宝を持ち帰り、コレクションを大幅に拡大しました。彼の敗北後、多くの作品が返還されましたが、ルーヴルは現在の所蔵品の基礎となる相当なコレクションを保持しました。美術館のコレクションは古代文明から19世紀半ばまでをカバーし、8つのキュレーター部門に分かれています。訪問のヒント：水曜日と金曜日の夜間開館を利用すると混雑を避けられ、オンラインで時間指定チケットを事前予約し、イスラム美術や装飾美術ギャラリーなどあまり知られていないセクションを探索してみてください。",
+        "historicalInfo": "ルーヴルは元々王宮でしたが、1793年のフランス革命中に公共美術館となりました。先史時代から21世紀までの約38,000点の作品を所蔵しています。",
+        "yearBuilt": "宮殿：12世紀以降、美術館：1793年",
+        "architect": "何世紀にもわたる複数の建築家、現代のピラミッド：I.M.ペイ"
+      },
+      "pt": {
+        "name": "Museu do Louvre",
+        "narration": "Você está no Museu do Louvre, o maior museu de arte do mundo. Lar de milhares de obras, incluindo a Mona Lisa.",
+        "description": "O maior museu de arte do mundo e um monumento histórico",
+        "historicalInfo": "O Louvre foi originalmente um palácio real antes de se tornar um museu público durante a Revolução Francesa em 1793. Abriga aproximadamente 38.000 objetos da pré-história ao século XXI.",
+        "yearBuilt": "Palácio: do século XII em diante, Museu: 1793",
+        "architect": "Múltiplos arquitetos ao longo dos séculos, Pirâmide moderna: I.M. Pei"
+      },
+      "ru": {
+        "name": "Музей Лувр",
+        "narration": "Вы находитесь в музее Лувр, крупнейшем художественном музее мира. Здесь хранятся тысячи произведений, включая Мону Лизу.",
+        "description": "Крупнейший художественный музей мира и исторический памятник",
+        "historicalInfo": "Лувр первоначально был королевским дворцом, прежде чем стать публичным музеем во время Французской революции в 1793 году. В нем хранится около 38 000 экспонатов от доисторических времен до XXI века.",
+        "yearBuilt": "Дворец: с XII века, Музей: 1793",
+        "architect": "Множество архитекторов на протяжении веков, Современная пирамида: И.М. Пей"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:24.935Z",
+    "updatedAt": "2026-02-22T20:00:57.942Z"
+  },
+  {
     "id": "london_item_20",
     "cityId": "london",
     "name": "런던 프리미엄 Landmark 추천 21",
@@ -11801,6 +8820,51 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:04.803Z",
     "updatedAt": "2026-02-22T18:29:11.347Z"
+  },
+  {
+    "id": "big-buddha-phuket",
+    "cityId": "phuket",
+    "name": "Big Buddha Phuket",
+    "lat": 7.827582,
+    "lng": 98.312842,
+    "radius": 70,
+    "narration": "푸껫의 랜드마크, 빅 부다에 오신 것을 환영합니다! 상상해보세요... 따스한 햇살이 당신의 얼굴을 어루만지고, 코끝에는 향긋한 꽃 내음과 은은한 향 냄새가 스며드는 것을요. 저 멀리 안다만 해의 푸른 물결이 반짝이고, 당신의 발 아래로는 푸껫 섬의 아름다운 풍경이 파노라마처럼 펼쳐집니다. 지금 여러분의 눈앞에는 높이 45미터에 달하는 거대한 백색 대리석 불상이 웅장한 자태를 드러내고 있습니다. 나케르드 언덕 꼭대기에 자리 잡은 이 불상은 섬 전체를 굽어보며 평화와 안녕을 기원하는 듯합니다. 불상의 발치까지 천천히 걸어가 보세요. 부드러운 대리석의 감촉이 손끝에 느껴지고, 불상의 거대한 크기에 압도되는 기분일 겁니다. 주변을 둘러싼 종소리가 바람에 실려 은은하게 울려 퍼지고, 사람들의 조용한 기도 소리가 마음을 차분하게 만들어 줍니다. 빅 부다는 단순한 조각상이 아닙니다. 이곳은 푸껫 사람들의 믿음과 염원이 담긴 신성한 장소이자, 평화와 명상을 위한 안식처입니다. 잠시 눈을 감고 깊은 숨을 들이쉬어 보세요. 빅 부다의 기운이 당신의 마음속 깊은 곳까지 스며들어 평온함을 가져다줄 겁니다. 빅 부다에서 특별한 경험을 만끽하고, 푸껫의 아름다움을 가슴에 담아 돌아가세요. 이 순간이 당신의 기억 속에 영원히 빛나는 추억으로 남을 겁니다.",
+    "description": "45-meter white marble Buddha statue on hilltop",
+    "category": "Religious & Viewpoint",
+    "detailedDescription": "빅 부다는 푸껫에서 가장 유명한 랜드마크 중 하나이며, 정식 명칭은 프라 풋타밍몽콜 에카나키리(Phra Phutta Ming Mongkol Eknakiri)입니다. 2002년에 건설이 시작되어 오랜 시간 동안 많은 사람들의 노력과 기부를 통해 완성되었습니다. 불상은 태국 남부 지역에서 존경받는 승려인 룽포 수파(Luang Pho Supa)를 기리기 위해 세워졌습니다. 빅 부다 건설에는 지역 주민들의 적극적인 참여가 있었으며, 방문객들은 불상 건설에 필요한 자재를 기부하거나 자원봉사를 통해 참여할 수 있습니다. 흥미로운 점은 빅 부다 건설 자금 대부분이 기부금으로 충당되었다는 것입니다. 현지인들은 물론 관광객들도 기꺼이 기부에 참여하여 이 웅장한 불상이 탄생하는 데 힘을 보탰습니다. 빅 부다 주변에는 작은 사원과 박물관이 있으며, 이곳에서는 불교 문화와 푸껫의 역사에 대해 더 자세히 알아볼 수 있습니다. 빅 부다를 방문할 때는 어깨와 무릎을 가리는 복장을 착용하는 것이 예의입니다. 또한, 빅 부다까지 가는 길은 좁고 구불구불하므로 운전에 주의해야 합니다. 현지인 팁 하나! 해 질 녘에 빅 부다를 방문하면 석양과 함께 빛나는 불상의 아름다운 모습을 감상할 수 있습니다. 이 시간대는 특히 사진작가들에게 인기가 많으니 놓치지 마세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=800",
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800"
+    ],
+    "historicalInfo": "Construction began in 2004 and is still ongoing. The 45-meter tall statue is made of white Burmese marble and has become one of Phuket's most visited landmarks.",
+    "yearBuilt": "2004-present",
+    "architect": "Local Buddhist Community",
+    "translations": {
+      "en": {
+        "name": "Big Buddha Phuket",
+        "narration": "Welcome to the Big Buddha, one of Phuket's most iconic landmarks. This 45-meter tall white marble statue sits atop the Nakkerd Hills and offers breathtaking 360-degree views.",
+        "description": "45-meter white marble Buddha statue on hilltop",
+        "historicalInfo": "Construction began in 2004 and is still ongoing. The 45-meter tall statue is made of white Burmese marble and has become one of Phuket's most visited landmarks."
+      },
+      "ko": {
+        "name": "푸켓 빅 붓다",
+        "narration": "푸켓의 가장 상징적인 랜드마크 중 하나인 빅 붓다에 오신 것을 환영합니다. 높이 45미터의 백색 대리석 동상이 나케르드 힐 꼭대기에 자리잡고 있으며 숨막히는 360도 전망을 제공합니다.",
+        "description": "언덕 꼭대기의 45미터 높이 백색 대리석 부처 동상",
+        "historicalInfo": "2004년에 건설이 시작되어 현재도 진행 중입니다. 높이 45미터의 동상은 백색 버마 대리석으로 만들어졌으며 푸켓에서 가장 많이 방문하는 랜드마크 중 하나가 되었습니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:33.358Z",
+    "updatedAt": "2026-02-22T20:00:58.965Z"
   },
   {
     "id": "anne_frank_house",
@@ -12066,6 +9130,76 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:21:29.280Z"
   },
   {
+    "id": "prague_castle",
+    "cityId": "prague",
+    "name": "Prague Castle",
+    "lat": 50.090833,
+    "lng": 14.400556,
+    "radius": 100,
+    "narration": "자, 눈을 감고 프라하 성의 문턱을 넘어선 여러분의 모습을 상상해보세요. 귓가에는 웅장한 성벽을 스치는 바람 소리, 코 끝에는 오랜 역사의 향기가 느껴지시나요? 지금 여러분의 발 아래에는 천 년이 넘는 시간 동안 왕과 황제, 그리고 대통령들의 발자취가 고스란히 남아 있습니다. 프라하 성은 단순한 건축물이 아니에요. 체코의 심장이자, 살아있는 역사 그 자체랍니다. 9세기, 보르지보이 왕자가 처음 이 곳에 나무 울타리를 세운 이후, 프라하 성은 끊임없이 변화하고 확장되어 왔어요. 로마네스크 양식의 교회, 고딕 양식의 웅장한 대성당, 그리고 화려한 바로크 양식의 궁전까지, 각 시대의 건축 양식이 조화롭게 어우러져 마치 한 권의 건축 역사책을 펼쳐 놓은 듯하죠. 성 비투스 대성당의 스테인드글라스를 통해 쏟아지는 빛줄기를 느껴보세요. 그 황홀한 광경은 마치 신성한 기운이 여러분을 감싸는 듯한 느낌을 선사할 거예요. 그리고 황금 소로를 거닐며 연금술사들과 작가들의 숨결을 느껴보세요. 그들의 꿈과 열정이 아직도 그 좁은 골목길 어딘가에 깃들어 있을지도 모릅니다. 프라하 성은 낮에도 아름답지만, 해질녘에는 더욱 매혹적인 자태를 뽐낸답니다. 붉게 물든 하늘 아래 우뚝 솟은 성의 모습은 마치 한 폭의 그림 같아요. 사랑하는 사람과 함께 카를교 위에서 프라하 성을 바라보며 영원히 잊지 못할 추억을 만들어 보세요. 자, 이제 프라하 성의 깊숙한 곳으로 함께 떠나볼까요?",
+    "description": "The largest ancient castle complex in the world",
+    "category": "Historic Castle",
+    "detailedDescription": "프라하 성은 기원후 9세기부터 존재해 온 거대한 성곽 단지로, 체코의 역사와 문화를 고스란히 담고 있는 상징적인 장소입니다. 단순히 규모가 큰 것을 넘어, 천 년이 넘는 시간 동안 체코의 왕, 신성 로마 제국의 황제, 그리고 체코슬로바키아와 체코 공화국의 대통령들이 거주하며 권력의 중심지 역할을 해왔습니다. 성 비투스 대성당은 프라하 성의 핵심 건물로, 고딕 양식의 걸작으로 손꼽힙니다. 성 바츨라프 예배당에는 보헤미아 왕관 보석이 보관되어 있으며, 얀 네포무츠키 성인의 은으로 만든 무덤은 그 화려함에 입을 다물 수 없게 만듭니다. 황금 소로는 한때 연금술사들이 거주했던 좁은 골목길로, 현재는 작은 상점과 갤러리들이 들어서 있어 독특한 분위기를 자아냅니다. 흥미로운 사실은, 황금 소로 22번지에는 프란츠 카프카가 잠시 거주하며 작품 활동을 했다는 점입니다. 프라하 성의 정원은 계절마다 다른 아름다움을 선사합니다. 봄에는 꽃들이 만발하고, 여름에는 푸르른 녹음이 우거지며, 가을에는 붉게 물든 단풍이 장관을 이루죠. 현지인들은 프라하 성 정원에서 여유로운 시간을 보내거나, 피크닉을 즐기기도 합니다. 꿀팁 하나! 프라하 성의 정문에서는 매시간 정각에 근위병 교대식을 볼 수 있습니다. 웅장한 음악과 함께 펼쳐지는 교대식은 놓치면 후회할 볼거리 중 하나입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800",
+      "https://images.unsplash.com/photo-1458150945447-7fb764c11a92?w=800",
+      "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=800"
+    ],
+    "historicalInfo": "Prague Castle was founded around 880 by Prince Bořivoj of the Přemyslid Dynasty. It has been rebuilt and expanded many times over the centuries. The castle has always been the seat of power for Czech rulers and is now the official residence of the President of the Czech Republic.",
+    "yearBuilt": "880 AD",
+    "architect": "Various architects over centuries",
+    "translations": {
+      "en": {
+        "name": "Prague Castle",
+        "narration": "Welcome to Prague Castle, one of the largest ancient castles in the world. This magnificent complex has been the seat of power for kings, emperors, and presidents for over a thousand years.",
+        "description": "The largest ancient castle complex in the world",
+        "detailedDescription": "Prague Castle is a castle complex in Prague, Czech Republic, built in the 9th century. It is the official office of the President of the Czech Republic and was once the seat of Bohemian kings and Holy Roman emperors. The castle is among the most visited tourist attractions in Prague attracting over 1.8 million visitors annually. The Bohemian Crown Jewels are kept within a hidden room inside it. According to the Guinness Book of Records, Prague Castle is the largest ancient castle in the world, occupying an area of almost 70,000 square meters. The castle includes Gothic St. Vitus Cathedral, Romanesque Basilica of St. George, a monastery, and several palaces, gardens and defense towers. Most of the castle's present appearance is a result of reconstruction in the second half of the 18th century. The castle houses the Czech Crown Jewels and is a UNESCO World Heritage Site. The changing of the guard takes place every hour and is a popular attraction.",
+        "historicalInfo": "Prague Castle was founded around 880 by Prince Bořivoj of the Přemyslid Dynasty. It has been rebuilt and expanded many times over the centuries. The castle has always been the seat of power for Czech rulers and is now the official residence of the President of the Czech Republic.",
+        "yearBuilt": "880 AD",
+        "architect": "Various architects over centuries"
+      },
+      "ko": {
+        "name": "프라하 성",
+        "narration": "세계에서 가장 큰 고대 성 중 하나인 프라하 성에 오신 것을 환영합니다. 이 장엄한 복합 건물은 천년 이상 왕, 황제, 대통령의 권력의 자리였습니다.",
+        "description": "세계에서 가장 큰 고대 성 복합 건물",
+        "detailedDescription": "프라하 성은 9세기에 건축된 체코 프라하의 성 복합 건물입니다. 체코 공화국 대통령의 공식 집무실이며 한때 보헤미아 왕과 신성 로마 제국 황제의 자리였습니다. 이 성은 프라하에서 가장 많이 방문하는 관광 명소 중 하나로 연간 180만 명 이상의 방문객을 끌어들입니다. 보헤미아 왕관 보석은 성 내부의 숨겨진 방에 보관되어 있습니다. 기네스북에 따르면 프라하 성은 세계에서 가장 큰 고대 성으로 거의 70,000제곱미터의 면적을 차지합니다. 성에는 고딕 양식의 성 비투스 대성당, 로마네스크 양식의 성 조지 대성당, 수도원, 여러 궁전, 정원 및 방어 탑이 포함됩니다. 성의 현재 모습 대부분은 18세기 후반 재건의 결과입니다. 성에는 체코 왕관 보석이 보관되어 있으며 유네스코 세계문화유산입니다. 위병 교대식은 매시간 진행되며 인기 있는 명소입니다.",
+        "historicalInfo": "프라하 성은 880년경 프르셰미슬 왕조의 보르지보이 공작에 의해 건립되었습니다. 수세기에 걸쳐 여러 차례 재건 및 확장되었습니다. 이 성은 항상 체코 통치자의 권력의 자리였으며 현재 체코 공화국 대통령의 공식 거주지입니다.",
+        "yearBuilt": "서기 880년",
+        "architect": "여러 세기에 걸친 다양한 건축가"
+      },
+      "ja": {
+        "name": "プラハ城",
+        "narration": "世界最大級の古代城の一つであるプラハ城へようこそ。この壮大な複合施設は、千年以上にわたり王、皇帝、大統領の権力の座でした。",
+        "description": "世界最大の古代城郭複合体",
+        "detailedDescription": "プラハ城は、9世紀に建設されたチェコのプラハにある城郭複合体です。チェコ共和国大統領の公式執務室であり、かつてボヘミア王と神聖ローマ皇帝の座でした。この城はプラハで最も訪問された観光名所の一つで、年間180万人以上の訪問者を集めています。ボヘミア王冠宝石は城内の隠し部屋に保管されています。ギネスブックによると、プラハ城は世界最大の古代城で、約70,000平方メートルの面積を占めています。城にはゴシック様式の聖ヴィート大聖堂、ロマネスク様式の聖ジョージ教会、修道院、いくつかの宮殿、庭園、防衛塔が含まれます。城の現在の外観の大部分は、18世紀後半の再建の結果です。城にはチェコ王冠宝石が収蔵されており、ユネスコ世界遺産です。衛兵交代式は毎時行われ、人気のアトラクションです。",
+        "historicalInfo": "プラハ城は880年頃、プシェミスル朝のボジヴォイ公によって建設されました。何世紀にもわたって何度も再建され拡張されました。この城は常にチェコ統治者の権力の座であり、現在はチェコ共和国大統領の公式住居です。",
+        "yearBuilt": "西暦880年",
+        "architect": "数世紀にわたるさまざまな建築家"
+      },
+      "zh": {
+        "name": "布拉格城堡",
+        "narration": "欢迎来到布拉格城堡,世界上最大的古代城堡之一。这座宏伟的建筑群一千多年来一直是国王、皇帝和总统的权力所在地。",
+        "description": "世界上最大的古代城堡建筑群",
+        "detailedDescription": "布拉格城堡是捷克布拉格的一座城堡建筑群,建于9世纪。它是捷克共和国总统的官方办公室,曾经是波希米亚国王和神圣罗马帝国皇帝的所在地。该城堡是布拉格访问量最大的旅游景点之一,每年吸引超过180万游客。波希米亚王冠珠宝保存在城堡内的一个隐藏房间中。根据吉尼斯世界纪录,布拉格城堡是世界上最大的古代城堡,占地面积近70,000平方米。城堡包括哥特式圣维特大教堂、罗马式圣乔治教堂、修道院以及几座宫殿、花园和防御塔。城堡目前的外观大部分是18世纪后半叶重建的结果。城堡收藏着捷克王冠珠宝,是联合国教科文组织世界遗产。卫兵换岗仪式每小时举行一次,是一个受欢迎的景点。",
+        "historicalInfo": "布拉格城堡大约在880年由普热米斯尔王朝的博日沃伊王子建立。几个世纪以来,它被多次重建和扩建。这座城堡一直是捷克统治者的权力所在地,现在是捷克共和国总统的官方住所。",
+        "yearBuilt": "公元880年",
+        "architect": "几个世纪以来的各种建筑师"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:28.323Z",
+    "updatedAt": "2026-02-22T20:00:59.129Z"
+  },
+  {
     "id": "penang-hill",
     "cityId": "penang",
     "name": "Penang Hill",
@@ -12148,101 +9282,69 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:04.643Z"
   },
   {
-    "id": "rome_restaurant_flavio_al_velavevodetto",
-    "cityId": "rome",
-    "name": "Flavio al Velavevodetto",
-    "lat": 41.8813,
-    "lng": 12.4767,
-    "radius": 40,
-    "narration": "Savor Roman classics at Flavio al Velavevodetto, famous for its traditional recipes and welcoming atmosphere.",
-    "description": "Classic Roman cuisine in Testaccio",
-    "category": "Restaurant",
-    "detailedDescription": "Located in the historic Testaccio neighborhood, Flavio al Velavevodetto is renowned for its authentic Roman cuisine. The restaurant specializes in offal dishes and traditional pastas, prepared with recipes passed down through generations. The casual, bustling atmosphere attracts both locals and visitors seeking genuine Roman flavors. The portions are generous and the prices are reasonable for the quality offered.",
+    "id": "gardens-light-show-singapore",
+    "cityId": "singapore",
+    "name": "Gardens by the Bay Light Show",
+    "lat": 1.2816,
+    "lng": 103.8636,
+    "radius": 70,
+    "narration": "자, 상상해보세요. 싱가포르의 밤하늘 아래, 거대한 슈퍼트리들이 웅장한 자태를 뽐내고 있는 모습을요. 지금 여러분의 발 아래에는, 수많은 사람들이 숨죽이며 빛과 음악의 향연을 기다리고 있습니다. 곧, 어둠이 짙어지고, 첫 번째 음이 울려 퍼지기 시작합니다. 슈퍼트리들은 마치 살아있는 생명체처럼, 음악에 맞춰 형형색색의 빛을 뿜어내기 시작하죠. \n\n저 멀리, '가든 랩소디'의 선율이 밤공기를 가득 채우며, 마치 꿈결 같은 분위기를 자아냅니다. 빛은 마치 춤을 추듯, 슈퍼트리들의 가지를 타고 흐르며, 그 아름다움에 넋을 잃게 만들죠. 각기 다른 테마의 음악에 맞춰, 빛의 색깔과 움직임도 변화무쌍하게 바뀝니다. 때로는 강렬하게, 때로는 부드럽게, 여러분의 눈과 귀를 사로잡을 거예요. \n\n마치 거대한 오케스트라를 감상하는 듯한 느낌이랄까요? 주변 사람들의 감탄사와 웃음소리가 섞여, 더욱 낭만적인 분위기를 더합니다. 사랑하는 사람과 함께라면, 그 감동은 배가 될 거예요. 잠시 모든 것을 잊고, 이 아름다운 광경에 몸을 맡겨보세요. \n\n숨을 크게 들이쉬고, 싱가포르의 밤공기를 느껴보세요. 꽃과 나무의 향기가 코끝을 간지럽히고, 슈퍼트리에서 뿜어져 나오는 시원한 미스트가 여러분의 피부를 촉촉하게 적셔줄 겁니다. 이 모든 감각들이 어우러져, 잊지 못할 추억을 만들어 줄 거예요. 자, 이제 마음껏 '가든 랩소디'를 즐겨보세요! 분명, 여러분의 싱가포르 여행을 더욱 특별하게 만들어 줄 거예요.",
+    "description": "Free nightly light and sound show at Supertree Grove",
+    "category": "Activity",
+    "detailedDescription": "가든스 바이 더 베이의 '가든 랩소디'는 단순한 빛과 음악 쇼 그 이상입니다. 슈퍼트리 그로브를 배경으로 펼쳐지는 이 쇼는, 싱가포르의 대표적인 랜드마크 중 하나로 자리 잡았습니다. 매일 밤 펼쳐지는 이 무료 쇼는, 현지인과 관광객 모두에게 사랑받는 명소입니다. \n\n숨겨진 이야기가 하나 있어요. 슈퍼트리들의 디자인은 실제 나무의 생태적 기능을 모방하도록 설계되었다는 사실, 알고 계셨나요? 빗물을 모아 재활용하고, 태양 에너지를 흡수하여 자체적으로 전력을 생산하기도 합니다. 쇼에 사용되는 조명 역시 에너지 효율이 높은 LED 조명을 사용하여 환경 보호에 기여하고 있다고 해요. \n\n꿀팁을 하나 더 드릴게요! 쇼가 시작되기 최소 30분 전에 도착해서 좋은 자리를 확보하는 것이 중요합니다. 슈퍼트리 아래 누워서 하늘을 가득 채운 빛의 향연을 감상하는 것을 추천합니다. 만약 돗자리가 없다면, 주변 상점에서 저렴하게 구입할 수 있습니다. 쇼가 끝난 후에는, 가든스 바이 더 베이 주변을 산책하며 야경을 즐기는 것도 좋은 선택이 될 거예요. 특히, 플라워 돔과 클라우드 포레스트는 밤에도 개방하니, 시간을 내어 방문해 보세요. 분명, 잊지 못할 경험이 될 겁니다.",
     "photos": [
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800"
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800",
+      "https://images.unsplash.com/photo-1551802241-a3acdb5ce0b6?w=800",
+      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800",
+      "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800",
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800",
+      "https://images.unsplash.com/photo-1548390453-0d6df5c3d44e?w=800",
+      "https://images.unsplash.com/photo-1563535343-836a1c084df8?w=800"
     ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
+    "historicalInfo": "The Garden Rhapsody show has been entertaining visitors since Gardens by the Bay opened in 2012.",
+    "yearBuilt": "2012",
+    "architect": "Grant Associates (Supertrees design)",
     "translations": {
       "en": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "Savor Roman classics at Flavio al Velavevodetto, famous for its traditional recipes and welcoming atmosphere.",
-        "description": "Classic Roman cuisine in Testaccio",
-        "detailedDescription": "Located in the historic Testaccio neighborhood, Flavio al Velavevodetto is renowned for its authentic Roman cuisine. The restaurant specializes in offal dishes and traditional pastas, prepared with recipes passed down through generations. The casual, bustling atmosphere attracts both locals and visitors seeking genuine Roman flavors. The portions are generous and the prices are reasonable for the quality offered."
-      },
-      "ko": {
-        "name": "플라비오 알 벨라베보데토",
-        "narration": "전통 레시피와 환영하는 분위기로 유명한 플라비오 알 벨라베보데토에서 로마 클래식을 맛보세요.",
-        "description": "테스타치오의 클래식 로마 요리",
-        "detailedDescription": "역사적인 테스타치오 지역에 위치한 플라비오 알 벨라베보데토는 정통 로마 요리로 유명합니다. 이 레스토랑은 대대로 전해 내려온 레시피로 준비된 내장 요리와 전통 파스타를 전문으로 합니다. 캐주얼하고 활기찬 분위기는 진정한 로마 맛을 찾는 현지인과 방문객 모두를 끌어들입니다. 양은 푸짐하고 제공되는 품질에 비해 가격도 합리적입니다."
+        "name": "Gardens by the Bay Light Show",
+        "narration": "Experience the spectacular Garden Rhapsody light and sound show at the Supertree Grove. Watch the iconic Supertrees come alive with dazzling lights and music.",
+        "description": "Free nightly light and sound show at Supertree Grove",
+        "detailedDescription": "The Garden Rhapsody is a spectacular multimedia show that transforms the iconic Supertree Grove into a mesmerizing display of lights and sound. This free nightly show occurs twice every evening (7:45 PM and 8:45 PM) and lasts about 10-15 minutes. The 16 Supertrees, ranging from 25 to 50 meters tall, are illuminated with a choreographed light display synchronized to music ranging from classical to contemporary. The vertical gardens covering the Supertrees create a stunning backdrop as colors pulse and flow to the rhythm. For the best viewing experience, arrive early to secure a good spot on the grass beneath the Supertrees. You can also watch from the OCBC Skyway, a 128-meter aerial walkway suspended between two Supertrees, offering a unique elevated perspective (separate admission fee applies). The show is family-friendly and completely free, making it one of Singapore's most popular evening attractions.",
+        "historicalInfo": "The Garden Rhapsody show has been entertaining visitors since Gardens by the Bay opened in 2012.",
+        "yearBuilt": "2012",
+        "architect": "Grant Associates (Supertrees design)"
       },
       "it": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "Assapora i classici romani da Flavio al Velavevodetto, famoso per le sue ricette tradizionali e l'atmosfera accogliente.",
-        "description": "Cucina romana classica a Testaccio",
-        "detailedDescription": "Situato nel storico quartiere di Testaccio, Flavio al Velavevodetto è rinomato per la sua autentica cucina romana. Il ristorante è specializzato in piatti a base di frattaglie e paste tradizionali, preparati con ricette tramandate di generazione in generazione. L'atmosfera informale e vivace attrae sia i locali che i visitatori alla ricerca di autentici sapori romani. Le porzioni sono generose e i prezzi sono ragionevoli per la qualità offerta."
+        "name": "Spettacolo di Luci ai Gardens by the Bay",
+        "narration": "Vivi lo spettacolare spettacolo di luci e suoni Garden Rhapsody al Supertree Grove. Guarda gli iconici Supertree prendere vita con luci e musica abbaglianti.",
+        "description": "Spettacolo gratuito serale di luci e suoni al Supertree Grove",
+        "detailedDescription": "Il Garden Rhapsody è uno spettacolo multimediale spettacolare che trasforma l'iconico Supertree Grove in un affascinante display di luci e suoni. Questo spettacolo serale gratuito si svolge due volte ogni sera (alle 19:45 e alle 20:45) e dura circa 10-15 minuti. I 16 Supertree, alti da 25 a 50 metri, sono illuminati con un display luminoso coreografato sincronizzato con musica che varia dal classico al contemporaneo. I giardini verticali che ricoprono i Supertree creano uno sfondo stupendo mentre i colori pulsano e fluiscono al ritmo. Per la migliore esperienza visiva, arriva presto per assicurarti un buon posto sull'erba sotto i Supertree. Puoi anche guardare dall'OCBC Skyway, una passerella aerea di 128 metri sospesa tra due Supertree, che offre una prospettiva elevata unica (si applica una tariffa d'ingresso separata). Lo spettacolo è adatto alle famiglie e completamente gratuito, rendendolo una delle attrazioni serali più popolari di Singapore.",
+        "historicalInfo": "Lo spettacolo Garden Rhapsody intrattiene i visitatori dall'apertura di Gardens by the Bay nel 2012.",
+        "yearBuilt": "2012",
+        "architect": "Grant Associates (design Supertrees)"
       },
-      "es": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "Saborea los clásicos romanos en Flavio al Velavevodetto, famoso por sus recetas tradicionales y ambiente acogedor.",
-        "description": "Cocina romana clásica en Testaccio",
-        "detailedDescription": "Ubicado en el histórico barrio de Testaccio, Flavio al Velavevodetto es reconocido por su auténtica cocina romana. El restaurante se especializa en platos de casquería y pastas tradicionales, preparados con recetas transmitidas de generación en generación. El ambiente casual y animado atrae tanto a locales como a visitantes que buscan auténticos sabores romanos. Las porciones son generosas y los precios son razonables para la calidad ofrecida."
-      },
-      "fr": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "Savourez les classiques romains chez Flavio al Velavevodetto, célèbre pour ses recettes traditionnelles et son atmosphère accueillante.",
-        "description": "Cuisine romaine classique à Testaccio",
-        "detailedDescription": "Situé dans le quartier historique de Testaccio, Flavio al Velavevodetto est réputé pour sa cuisine romaine authentique. Le restaurant est spécialisé dans les plats d'abats et les pâtes traditionnelles, préparés selon des recettes transmises de génération en génération. L'atmosphère décontractée et animée attire aussi bien les locaux que les visiteurs à la recherche de saveurs romaines authentiques. Les portions sont généreuses et les prix raisonnables pour la qualité proposée."
-      },
-      "de": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "Genießen Sie römische Klassiker bei Flavio al Velavevodetto, berühmt für seine traditionellen Rezepte und einladende Atmosphäre.",
-        "description": "Klassische römische Küche in Testaccio",
-        "detailedDescription": "Im historischen Viertel Testaccio gelegen, ist Flavio al Velavevodetto für seine authentische römische Küche bekannt. Das Restaurant ist auf Innereien-Gerichte und traditionelle Pasta spezialisiert, die nach Generationen überlieferten Rezepten zubereitet werden. Die lockere, belebte Atmosphäre zieht sowohl Einheimische als auch Besucher an, die echte römische Aromen suchen. Die Portionen sind großzügig und die Preise für die gebotene Qualität angemessen."
-      },
-      "zh": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "在Flavio al Velavevodetto品尝罗马经典美食，这里以传统食谱和温馨氛围而闻名。",
-        "description": "泰斯塔奇奥的经典罗马美食",
-        "detailedDescription": "位于历史悠久的泰斯塔奇奥社区，Flavio al Velavevodetto以其正宗的罗马美食而闻名。餐厅专门供应内脏菜肴和传统意面，采用代代相传的食谱制作。休闲热闹的氛围吸引了寻求正宗罗马风味的当地人和游客。份量慷慨，价格对于所提供的品质来说非常合理。"
-      },
-      "ja": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "伝統的なレシピと温かい雰囲気で有名なFlavio al Velavevodettoでローマの定番料理をお楽しみください。",
-        "description": "テスタッチョのクラシックなローマ料理",
-        "detailedDescription": "歴史あるテスタッチョ地区に位置するFlavio al Velavevodettoは、本格的なローマ料理で有名です。レストランは代々受け継がれてきたレシピで調理された内臓料理と伝統的なパスタを専門としています。カジュアルで活気のある雰囲気は、本物のローマの味を求める地元の人々と観光客の両方を惹きつけます。ポーションは惜しみなく、提供される品質に対して価格も手頃です。"
-      },
-      "pt": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "Saboreie os clássicos romanos no Flavio al Velavevodetto, famoso por suas receitas tradicionais e atmosfera acolhedora.",
-        "description": "Cozinha romana clássica em Testaccio",
-        "detailedDescription": "Localizado no histórico bairro de Testaccio, Flavio al Velavevodetto é reconhecido por sua autêntica cozinha romana. O restaurante é especializado em pratos de miúdos e massas tradicionais, preparados com receitas passadas de geração em geração. A atmosfera casual e movimentada atrai tanto locais quanto visitantes em busca de sabores romanos genuínos. As porções são generosas e os preços são razoáveis pela qualidade oferecida."
-      },
-      "ru": {
-        "name": "Flavio al Velavevodetto",
-        "narration": "Насладитесь римской классикой в Flavio al Velavevodetto, известном своими традиционными рецептами и гостеприимной атмосферой.",
-        "description": "Классическая римская кухня в Тестаччо",
-        "detailedDescription": "Расположенный в историческом районе Тестаччо, Flavio al Velavevodetto славится своей аутентичной римской кухней. Ресторан специализируется на блюдах из субпродуктов и традиционных пастах, приготовленных по рецептам, передаваемым из поколения в поколение. Непринужденная оживленная атмосфера привлекает как местных жителей, так и гостей, ищущих подлинные римские вкусы. Порции щедрые, а цены разумные для предлагаемого качества."
+      "ko": {
+        "name": "가든스 바이 더 베이 라이트 쇼",
+        "narration": "슈퍼트리 그로브에서 장관을 이루는 가든 랩소디 빛과 소리 쇼를 경험하세요. 상징적인 슈퍼트리가 눈부신 조명과 음악으로 생동감 있게 살아나는 것을 보세요.",
+        "description": "슈퍼트리 그로브의 무료 야간 빛과 소리 쇼",
+        "detailedDescription": "가든 랩소디는 상징적인 슈퍼트리 그로브를 황홀한 빛과 소리의 디스플레이로 변모시키는 장관을 이루는 멀티미디어 쇼입니다. 이 무료 야간 쇼는 매일 저녁 두 번(오후 7시 45분과 8시 45분)에 열리며 약 10-15분 동안 진행됩니다. 높이가 25~50미터에 달하는 16개의 슈퍼트리는 클래식에서 현대 음악까지 다양한 음악에 맞춰 안무된 조명 디스플레이로 빛납니다. 슈퍼트리를 덮고 있는 수직 정원은 색상이 리듬에 맞춰 맥동하고 흐르는 동안 멋진 배경을 만듭니다. 최고의 감상 경험을 위해 일찍 도착하여 슈퍼트리 아래 잔디밭에서 좋은 자리를 확보하세요. 두 슈퍼트리 사이에 매달린 128미터 공중 보도인 OCBC 스카이웨이에서도 감상할 수 있으며, 독특한 높이의 관점을 제공합니다(별도 입장료 적용). 쇼는 가족 친화적이며 완전히 무료로, 싱가포르에서 가장 인기 있는 저녁 명소 중 하나입니다.",
+        "historicalInfo": "가든 랩소디 쇼는 2012년 가든스 바이 더 베이가 개장한 이래 방문객들을 즐겁게 해왔습니다.",
+        "yearBuilt": "2012",
+        "architect": "그랜트 어소시에이츠 (슈퍼트리 디자인)"
       }
     },
-    "openingHours": "Mon-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun",
-    "priceRange": "€€ (€30-45 per person)",
-    "cuisine": "Traditional Roman",
-    "reservationUrl": "https://www.thefork.com/restaurant/flavio-al-velavevodetto-r43289",
-    "phoneNumber": "+39 06 574 4194",
-    "menuHighlights": [
-      "Rigatoni con la Pajata",
-      "Coda alla Vaccinara",
-      "Trippa",
-      "Supplì"
-    ],
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
     "restaurantPhotos": null,
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.424Z",
-    "updatedAt": "2026-02-22T18:13:05.237Z"
+    "createdAt": "2026-02-12T12:11:35.469Z",
+    "updatedAt": "2026-02-22T20:00:59.461Z"
   },
   {
     "id": "trastevere-artisan-shop-rome",
@@ -12341,6 +9443,52 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T12:11:37.146Z",
     "updatedAt": "2026-02-22T18:29:20.332Z"
+  },
+  {
+    "id": "gardens-by-the-bay",
+    "cityId": "singapore",
+    "name": "Gardens by the Bay",
+    "lat": 1.281563,
+    "lng": 103.86356,
+    "radius": 100,
+    "narration": "자, 눈을 감고 싱가포르의 숨결을 느껴보세요. 당신은 지금, 가든스 바이 더 베이 한복판에 서 있습니다. 따뜻하고 습한 공기가 피부에 와 닿고, 어디선가 달콤한 꽃 향기가 코끝을 간지럽히는군요. 상상해보세요. 거대한 슈퍼트리들이 당신을 압도적인 스케일로 맞이합니다. 마치 다른 행성에 온 듯한 기분이 들지 않나요? 해가 뉘엿뉘엿 저물어갈 때, 슈퍼트리들은 화려한 조명으로 옷을 갈아입고, 매혹적인 빛의 향연을 펼쳐냅니다. \n\n지금 여러분의 발 아래에는 수많은 식물들이 살아 숨 쉬고 있어요. 열대 우림에서 온 희귀한 꽃들부터, 사막에서 온 강인한 선인장들까지. 이 모든 것이 한데 어우러져 놀라운 생태계를 이루고 있답니다. 잠시 걸음을 멈추고, 주변의 소리에 귀 기울여 보세요. 새들의 지저귐, 나뭇잎 스치는 소리, 그리고 저 멀리 들려오는 아이들의 웃음소리까지. 이 모든 소리가 하나의 아름다운 교향곡처럼 느껴질 거예요. \n\n가든스 바이 더 베이는 단순한 공원이 아니에요. 싱가포르의 꿈과 미래를 담은 상징과도 같죠. 자연과 기술이 조화롭게 공존하는 이곳에서, 우리는 지속 가능한 미래의 가능성을 엿볼 수 있습니다. 자, 이제 천천히 걸으며 이 놀라운 공간을 마음껏 느껴보세요. 슈퍼트리 그로브의 숨 막히는 야경을 감상하고, 클라우드 포레스트의 신비로운 분위기에 흠뻑 빠져보세요. 그리고 잊지 마세요. 이 모든 경험은 당신의 마음속에 오랫동안 기억될 거예요.",
+    "description": "Futuristic garden with iconic Supertree Grove",
+    "category": "Park & Garden",
+    "detailedDescription": "가든스 바이 더 베이는 싱가포르 정부가 '정원 속의 도시'라는 비전을 실현하기 위해 조성한 초대형 인공 정원입니다. 101헥타르에 달하는 넓은 부지에는 슈퍼트리 그로브, 클라우드 포레스트, 플라워 돔 등 다양한 테마 정원이 조성되어 있습니다. 특히 슈퍼트리 그로브는 높이 25~50m에 달하는 거대한 인공 나무들로, 수직 정원의 역할을 수행하며 태양광 에너지를 수집하고 빗물을 저장하는 친환경적인 기능을 수행합니다. \n\n현지인들은 저녁 시간에 슈퍼트리 그로브에서 펼쳐지는 '가든 랩소디' 쇼를 즐겨 찾습니다. 화려한 조명과 음악이 어우러진 이 쇼는 무료로 관람할 수 있으며, 매일 밤 두 차례 진행됩니다. 클라우드 포레스트는 거대한 인공 산을 중심으로 조성된 온실로, 다양한 고산 식물과 폭포를 감상할 수 있습니다. 정상에서는 싱가포르의 아름다운 전경을 한눈에 담을 수 있습니다. 숨겨진 비화로는, 가든스 바이 더 베이 건설 당시 수많은 나무들을 옮겨 심는 과정에서 상당한 어려움이 있었다고 합니다. 특히 뿌리가 손상되지 않도록 특수 장비를 사용하여 섬세하게 작업했다고 하네요. 가든스 바이 더 베이는 단순한 관광 명소를 넘어, 싱가포르의 혁신적인 기술과 환경 보호 노력을 보여주는 상징적인 공간입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1506351421178-63b52a2d0b1c?w=800",
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800",
+      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800"
+    ],
+    "historicalInfo": "Opened in 2012, Gardens by the Bay was developed at a cost of over $1 billion to transform Singapore into a \"City in a Garden\". It has won numerous international horticulture and design awards.",
+    "yearBuilt": "2012",
+    "architect": "Grant Associates, Wilkinson Eyre",
+    "translations": {
+      "en": {
+        "name": "Gardens by the Bay",
+        "narration": "Welcome to Gardens by the Bay, a futuristic garden featuring the iconic Supertree Grove. These vertical gardens are a stunning blend of nature and technology.",
+        "description": "Futuristic garden with iconic Supertree Grove",
+        "historicalInfo": "Opened in 2012, Gardens by the Bay was developed at a cost of over $1 billion to transform Singapore into a \"City in a Garden\". It has won numerous international horticulture and design awards."
+      },
+      "ko": {
+        "name": "가든스 바이 더 베이",
+        "narration": "상징적인 슈퍼트리 그로브를 특징으로 하는 미래지향적인 정원인 가든스 바이 더 베이에 오신 것을 환영합니다. 이 수직 정원은 자연과 기술의 놀라운 조화입니다.",
+        "description": "상징적인 슈퍼트리 그로브가 있는 미래지향적인 정원",
+        "historicalInfo": "2012년에 개장한 가든스 바이 더 베이는 싱가포르를 \"정원 속의 도시\"로 변모시키기 위해 10억 달러 이상의 비용으로 개발되었습니다. 수많은 국제 원예 및 디자인 상을 수상했습니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:31.182Z",
+    "updatedAt": "2026-02-22T20:00:59.795Z"
   },
   {
     "id": "petronas-towers",
@@ -12648,6 +9796,104 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:04.830Z"
   },
   {
+    "id": "piazza-navona-crafts-rome",
+    "cityId": "rome",
+    "name": "Piazza Navona Craft Gallery",
+    "lat": 41.8992,
+    "lng": 12.4731,
+    "radius": 30,
+    "narration": "자, 상상해보세요. 지금 여러분은 로마의 심장, 나보나 광장에 서 있습니다. 눈부신 바로크 건축물들이 햇살 아래 반짝이고, 베르니니의 '4대 강 분수'는 웅장한 물줄기를 뿜어내죠. 광장의 활기찬 에너지가 여러분을 감싸는 가운데, 고개를 돌려 한 공방 갤러리를 발견합니다. '피아자 나보나 크래프트 갤러리'… 그 이름만으로도 예술적인 향기가 느껴지지 않나요? 문을 열고 들어서는 순간, 시간 여행을 떠나는 듯한 기분이 들 거예요. 이탈리아 대리석 조각의 매끈한 촉감, 무라노 글라스의 영롱한 빛깔, 르네상스 시대 미술 작품의 섬세한 붓터치가 여러분의 오감을 자극합니다. 마치 르네상스 시대의 예술가들이 여러분에게 말을 걸어오는 듯하죠. 이곳에서는 단순한 기념품이 아닌, 이탈리아 장인 정신의 정수를 담은 예술 작품을 만날 수 있습니다. 작품 하나하나에 담긴 역사와 스토리를 느껴보세요. 광장의 웅성거림은 잠시 잊고, 이 공간 안에서 예술과 함께 숨 쉬는 특별한 경험을 만끽해보세요. 어쩌면 여러분은 이곳에서 영원히 간직할 인생의 예술 작품을 발견하게 될지도 모릅니다.",
+    "description": "Italian marble art, Murano glass masterpieces, and Renaissance reproductions",
+    "category": "Gift Shop",
+    "detailedDescription": "피아자 나보나 크래프트 갤러리는 단순한 기념품 가게가 아닙니다. 이곳은 이탈리아 예술의 정수를 경험할 수 있는 특별한 공간이죠. 갤러리 내부는 이탈리아 장인들의 손길로 탄생한 다양한 작품들로 가득합니다. 이탈리아 대리석 조각은 그 정교함과 아름다움으로 시선을 사로잡고, 베네치아 무라노 섬에서 온 글라스 제품들은 빛을 받아 영롱하게 빛나며 환상적인 분위기를 연출합니다. 또한, 르네상스 시대의 명작들을 담은 아트 프린트는 예술 애호가들의 마음을 설레게 하죠. 흥미로운 점은, 이 갤러리가 계절마다 특별한 문화 행사를 개최한다는 것입니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 갤러리 주인에게 작품에 얽힌 숨겨진 이야기를 물어보세요. 그는 아마 여러분이 미처 알지 못했던 흥미로운 비하인드 스토리를 들려줄 것입니다. 모든 결제 수단을 허용한다는 점도 여행자들에게는 큰 장점이죠. 피아자 나보나를 방문하신다면, 잠시 시간을 내어 이 갤러리에 들러 이탈리아 예술의 아름다움에 흠뻑 빠져보시길 바랍니다. 평범한 기념품 이상의 가치를 지닌 예술 작품을 발견하는 기회를 놓치지 마세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800",
+      "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800",
+      "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800",
+      "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800",
+      "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Piazza Navona Craft Gallery",
+        "narration": "Premium craft gallery at Piazza Navona featuring Italian marble sculptures, Murano glass, and renaissance art prints. All payment methods accepted. Year-round cultural promotions.",
+        "description": "Italian marble art, Murano glass masterpieces, and Renaissance reproductions",
+        "detailedDescription": "Piazza Navona Craft Gallery showcases exceptional Italian artistry in the heart of historic Rome. Our gallery features authentic Italian marble sculptures and carvings, genuine Murano glass art and jewelry, museum-quality Renaissance art reproductions, handcrafted mosaics and decorative objects, Italian master artist prints and lithographs, and custom commissions available. Located on the beautiful Piazza Navona, we offer worldwide shipping and white-glove delivery service. Art consultation services available. Member of the Italian Art Dealers Association."
+      },
+      "ko": {
+        "name": "피아차 나보나 공예 갤러리",
+        "narration": "피아차 나보나의 프리미엄 공예 갤러리로 이탈리아 대리석 조각품, 무라노 유리, 르네상스 미술 인쇄물을 선보입니다. 모든 결제 수단 가능. 연중 문화 프로모션.",
+        "description": "이탈리아 대리석 예술, 무라노 유리 걸작, 르네상스 복제품",
+        "detailedDescription": "피아차 나보나 공예 갤러리는 역사적인 로마 중심부에서 뛰어난 이탈리아 예술성을 선보입니다. 갤러리에는 정품 이탈리아 대리석 조각과 조각품, 정품 무라노 유리 예술과 보석류, 박물관 수준의 르네상스 예술 복제품, 수공예 모자이크와 장식품, 이탈리아 마스터 아티스트 판화와 석판화, 맞춤 제작이 가능합니다. 아름다운 피아차 나보나에 위치하며 전 세계 배송과 화이트 글러브 배달 서비스를 제공합니다. 미술 상담 서비스 이용 가능. 이탈리아 미술상 협회 회원."
+      },
+      "it": {
+        "name": "Galleria Artigianale Piazza Navona",
+        "narration": "Galleria artigianale premium a Piazza Navona con sculture in marmo italiano, vetro di Murano e stampe d'arte rinascimentale. Tutti i metodi di pagamento accettati. Promozioni culturali tutto l'anno.",
+        "description": "Arte in marmo italiano, capolavori in vetro di Murano e riproduzioni rinascimentali",
+        "detailedDescription": "La Galleria Artigianale Piazza Navona espone l'eccezionale maestria artistica italiana nel cuore della Roma storica. La nostra galleria presenta autentiche sculture e intagli in marmo italiano, vera arte e gioielleria in vetro di Murano, riproduzioni d'arte rinascimentale di qualità museale, mosaici e oggetti decorativi artigianali, stampe e litografie di maestri artisti italiani, e commissioni personalizzate disponibili. Situata sulla bellissima Piazza Navona, offriamo spedizioni in tutto il mondo e servizio di consegna con guanti bianchi. Servizi di consulenza artistica disponibili. Membro dell'Associazione Italiana Commercianti d'Arte."
+      },
+      "es": {
+        "name": "Galería de Artesanía Piazza Navona",
+        "narration": "Galería de artesanía premium en Piazza Navona con esculturas de mármol italiano, cristal de Murano e impresiones de arte renacentista. Todos los métodos de pago aceptados. Promociones culturales todo el año.",
+        "description": "Arte en mármol italiano, obras maestras en cristal de Murano y reproducciones renacentistas",
+        "detailedDescription": "La Galería de Artesanía Piazza Navona exhibe una artesanía italiana excepcional en el corazón de la Roma histórica. Nuestra galería presenta auténticas esculturas y tallas en mármol italiano, genuino arte y joyería en cristal de Murano, reproducciones de arte renacentista de calidad museística, mosaicos y objetos decorativos artesanales, grabados y litografías de maestros artistas italianos, y encargos personalizados disponibles. Ubicada en la hermosa Piazza Navona, ofrecemos envío mundial y servicio de entrega con guante blanco. Servicios de consultoría de arte disponibles. Miembro de la Asociación Italiana de Comerciantes de Arte."
+      },
+      "fr": {
+        "name": "Galerie d'Artisanat Piazza Navona",
+        "narration": "Galerie d'artisanat premium à Piazza Navona présentant des sculptures en marbre italien, du verre de Murano et des reproductions d'art de la Renaissance. Tous les moyens de paiement acceptés. Promotions culturelles toute l'année.",
+        "description": "Art en marbre italien, chefs-d'œuvre en verre de Murano et reproductions de la Renaissance",
+        "detailedDescription": "La Galerie d'Artisanat Piazza Navona présente l'excellence de l'artisanat italien au cœur de la Rome historique. Notre galerie propose d'authentiques sculptures et gravures en marbre italien, de véritables œuvres d'art et bijoux en verre de Murano, des reproductions d'art de la Renaissance de qualité muséale, des mosaïques et objets décoratifs artisanaux, des estampes et lithographies de maîtres artistes italiens, et des commandes personnalisées disponibles. Située sur la belle Piazza Navona, nous offrons l'expédition mondiale et un service de livraison gants blancs. Services de conseil en art disponibles. Membre de l'Association Italienne des Marchands d'Art."
+      },
+      "de": {
+        "name": "Piazza Navona Kunstgalerie",
+        "narration": "Premium-Kunstgalerie an der Piazza Navona mit italienischen Marmorskulpturen, Murano-Glas und Renaissance-Kunstdrucken. Alle Zahlungsmethoden akzeptiert. Ganzjährige kulturelle Aktionen.",
+        "description": "Italienische Marmorkunst, Murano-Glasmeisterwerke und Renaissance-Reproduktionen",
+        "detailedDescription": "Die Piazza Navona Kunstgalerie präsentiert außergewöhnliche italienische Kunstfertigkeit im Herzen des historischen Roms. Unsere Galerie zeigt authentische italienische Marmorskulpturen und -schnitzereien, echte Murano-Glaskunst und -schmuck, Reproduktionen von Renaissance-Kunst in Museumsqualität, handgefertigte Mosaike und Dekorationsgegenstände, Drucke und Lithografien italienischer Meisterkünstler, und Sonderanfertigungen sind möglich. An der wunderschönen Piazza Navona gelegen, bieten wir weltweiten Versand und White-Glove-Lieferservice. Kunstberatungsdienste verfügbar. Mitglied des Italienischen Kunsthändlerverbandes."
+      },
+      "zh": {
+        "name": "纳沃纳广场工艺画廊",
+        "narration": "纳沃纳广场的高级工艺画廊，展示意大利大理石雕塑、穆拉诺玻璃和文艺复兴艺术印刷品。接受所有付款方式。全年文化促销。",
+        "description": "意大利大理石艺术、穆拉诺玻璃杰作和文艺复兴复制品",
+        "detailedDescription": "纳沃纳广场工艺画廊在历史悠久的罗马中心展示卓越的意大利艺术。我们的画廊展示正宗意大利大理石雕塑和雕刻、正品穆拉诺玻璃艺术和珠宝、博物馆级文艺复兴艺术复制品、手工马赛克和装饰品、意大利大师艺术家版画和石版画，并可定制作品。位于美丽的纳沃纳广场，提供全球配送和白手套送货服务。提供艺术咨询服务。意大利艺术经销商协会会员。"
+      },
+      "ja": {
+        "name": "ピアッツァ・ナヴォーナ工芸ギャラリー",
+        "narration": "ピアッツァ・ナヴォーナのプレミアム工芸ギャラリーで、イタリア大理石彫刻、ムラーノガラス、ルネサンス美術版画を展示。すべての支払い方法利用可。年間を通じた文化プロモーション。",
+        "description": "イタリア大理石芸術、ムラーノガラス傑作、ルネサンス複製品",
+        "detailedDescription": "ピアッツァ・ナヴォーナ工芸ギャラリーは、歴史的なローマの中心部で卓越したイタリアの芸術性を展示しています。当ギャラリーでは、本物のイタリア大理石彫刻と彫刻品、本物のムラーノガラスアートとジュエリー、博物館品質のルネサンス美術複製品、手作りモザイクと装飾品、イタリアのマスターアーティストの版画とリトグラフ、カスタムオーダーが可能です。美しいピアッツァ・ナヴォーナに位置し、世界中への配送とホワイトグローブ配達サービスを提供しています。アートコンサルティングサービス利用可能。イタリア美術商協会会員。"
+      },
+      "pt": {
+        "name": "Galeria de Artesanato Piazza Navona",
+        "narration": "Galeria de artesanato premium na Piazza Navona com esculturas de mármore italiano, vidro de Murano e gravuras de arte renascentista. Todos os métodos de pagamento aceitos. Promoções culturais durante todo o ano.",
+        "description": "Arte em mármore italiano, obras-primas em vidro de Murano e reproduções renascentistas",
+        "detailedDescription": "A Galeria de Artesanato Piazza Navona apresenta a excepcional arte italiana no coração da Roma histórica. Nossa galeria apresenta autênticas esculturas e entalhes em mármore italiano, genuína arte e joalheria em vidro de Murano, reproduções de arte renascentista de qualidade de museu, mosaicos e objetos decorativos artesanais, gravuras e litografias de mestres artistas italianos, e encomendas personalizadas disponíveis. Localizada na bela Piazza Navona, oferecemos envio mundial e serviço de entrega com luva branca. Serviços de consultoria de arte disponíveis. Membro da Associação Italiana de Comerciantes de Arte."
+      },
+      "ru": {
+        "name": "Галерея ремесел площади Навона",
+        "narration": "Премиум-галерея ремесел на площади Навона с итальянскими мраморными скульптурами, муранским стеклом и репродукциями искусства эпохи Возрождения. Принимаются все способы оплаты. Круглогодичные культурные акции.",
+        "description": "Итальянское мраморное искусство, шедевры муранского стекла и репродукции эпохи Возрождения",
+        "detailedDescription": "Галерея ремесел площади Навона демонстрирует исключительное итальянское мастерство в сердце исторического Рима. Наша галерея представляет подлинные итальянские мраморные скульптуры и резьбу, настоящее муранское стеклянное искусство и ювелирные изделия, репродукции искусства эпохи Возрождения музейного качества, ручную мозаику и декоративные предметы, гравюры и литографии итальянских мастеров, а также индивидуальные заказы. Расположенная на красивой площади Навона, мы предлагаем доставку по всему миру и услугу белых перчаток. Услуги художественного консультирования доступны. Член Итальянской ассоциации торговцев искусством."
+      }
+    },
+    "openingHours": "Mon-Sun: 9:30-21:00",
+    "priceRange": "€€€-€€€€ (€50-500)",
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:37.266Z",
+    "updatedAt": "2026-02-22T20:00:59.876Z"
+  },
+  {
     "id": "seoul_item_8",
     "cityId": "seoul",
     "name": "SEOUL Premium Landmark 8",
@@ -12683,43 +9929,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T13:05:02.040Z",
     "updatedAt": "2026-02-22T18:11:59.025Z"
-  },
-  {
-    "id": "jeju_item_77",
-    "cityId": "jeju",
-    "name": "제주특별자치도 프리미엄 Restaurant 추천 78",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 오늘 저와 함께 제주특별자치도의 숨겨진 진주, 제주의 프리미엄 레스토랑 추천 78에 대해 탐험해 보도록 하겠습니다! 상상해 보세요! 눈앞에 펼쳐지는 이 아름다운 풍경, 그야말로 제주도의 모든 멋짐을 한 자리에서 느낄 수 있는 곳입니다. 여러분의 귀를 즐겁게 하는 신선한 제주 바람의 속삭임과, 그 속삭임에 담긴 레스토랑의 식욕을 돋우는 다양한 요리의 냄새. 마치 자연과 요리가 한데 어우러진 오케스트라처럼 우리의 감각을 사로잡습니다!\n\n이제 여러분을 이곳으로 초대한 이야기의 시작으로 돌아가 볼까요? 제주의 프리미엄 레스토랑 추천 78은, 그 시작도 아주 특별했습니다. 이야기를 시작하기 전, 상상해 보세요! 1990년대 중반, 제주도는 세계에서 주목받기 시작했으며, 그 시기에 이곳은 지역의 자부심을 걸고 탄생했어요. 이곳을 설립한 이는 바로 제주 출신의 유명한 셰프, '김영식'이었습니다. 그는 어릴 적부터 바다와 땅에서 나오는 재료의 조화를 느끼며 자랐고, 세계를 여행하며 얻은 다양한 경험을 통해 자신만의 레스토랑을 열게 되었습니다. 당시 제주도는 관광산업을 통해 지역 경제를 활성화하려는 시도를 하고 있었고, 김영식 셰프의 도전 역시 그 시기의 흐름에 발맞춘 것이었죠.\n\n이제 여러분, 김영식 셰프와 그의 레스토랑이 그 시대 사람들에게 어떤 의미였는지 아시나요? 듣기 싫어할 줄 알았겠지만, 이건 정말 흥미로운 이야기입니다. 김영식은 자신만의 요리 철학을 위해 전 세계에서 재료를 공수했어요. 그리고 그 과정에서 알게 된 한 젊은 농부와의 우정이 레스토랑 성공의 비결이 되었죠. 그 농부는 제주 토박이로, 지역의 자연을 활용한 재배법을 배우고 있었습니다. 김영식은 자신의 레스토랑에 그 농부의 농산물을 사용하기로 결정했고, 그것이 바로 이 곳의 요리가 특별한 이유가 되었습니다.\n\n이제 건축의 비밀로 넘어가 볼까요? 제주의 프리미엄 레스토랑 추천 78은 단순한 건축물이 아닙니다. 그야말로 예술 작품입니다! 이곳의 건축은 자연과 융합되도록 설계되었습니다. 여러분, 여기서 한 걸음 내디뎌 보세요. 이곳의 벽들은 제주 현무암을 사용하여 만들어졌고, 자연광을 최대한 활용할 수 있도록 창문이 배치되어 있습니다. 그 덕분에 실내에서도 제주의 따스한 햇살을 느낄 수 있습니다.\n\n그런데 이곳에 숨겨진 비밀, 알고 계신가요? 건축물 곳곳에 숨겨진 작은 장식들은 모두 제주도의 전통적인 문양을 본뜬 것입니다. 많은 관광객들이 지나치기 쉽지만, 그 작은 문양들은 제주도의 문화와 역사를 보여주고 있습니다. 마치 그 자체가 제주도의 작은 박물관 같지 않나요?\n\n근대와 현대를 연결하는 다리 같은 이곳은 어떻게 다시 주목받게 되었을까요? 시대의 흐름 속에서 잠시 잊혔던 이 레스토랑은 최근 몇 년 사이 다시 부활했습니다. 전문가들은 이곳의 가치를 재발견하고, 원래의 아름다움을 되살리기 위해 많은 노력을 기울였죠. 복원 작업은 제주 지역 사회의 지원 속에서 이루어졌고, 그 결과는 그야말로 장관입니다.\n\n그리고 여러분, 이 레스토랑이 영화 속 한 장면 같다는 소리를 들어보셨나요? 실제로 이곳은 여러 영화와 드라마에 등장하면서 현대 문화 속에서 더욱더 많은 사람들에게 사랑받게 되었어요. 재미있는 사실은, 일부 방문객들이 영화의 한 장면을 연출하듯이 사진을 찍고 즐긴다고 합니다. 그들이 사진을 찍으며 웃고 즐거워하는 모습을 보면, 이곳이 얼마나 매력적인지 알 수 있습니다.\n\n마지막으로, 여러분께 이 장소의 철학적인 의미를 전해드리고 싶습니다. 제주의 프리미엄 레스토랑 추천 78은 단순한 식당이 아닙니다. 그것은 자연과 인간의 조화, 그리고 그 속에서 탄생한 문화의 결실입니다. 이곳에서의 한 끼는 단순한 식사가 아닌, 제주의 자연과 역사를 맛보는 특별한 경험이죠.\n\n이제 여러분, 이곳에서의 시간을 마무리하며, 이 레스토랑이 여러분의 마음속에 어떤 기억으로 남게 될지 상상해 보세요. 이곳은 제주도의 심장과도 같은 곳이며, 그곳에서의 경험은 여러분의 제주 여행을 더욱 특별하게 만들어 줄 것입니다. 여러분이 이곳을 떠나며 느낄 감동이, 오래도록 마음속에 남을 거라 확신합니다. 여러분, 다음에 또 만나요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "제주특별자치도 프리미엄 Restaurant 추천 78",
-        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
-        "description": "제주특별자치도의 대표적인 Restaurant입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:06.794Z",
-    "updatedAt": "2026-02-22T18:06:04.897Z"
   },
   {
     "id": "phi-phi-island-tour",
@@ -13125,6 +10334,68 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:12:30.778Z"
   },
   {
+    "id": "west-end-theatre-show",
+    "cityId": "london",
+    "name": "West End Theatre Show",
+    "lat": 51.5114,
+    "lng": -0.1281,
+    "radius": 50,
+    "narration": "자, 여러분, 상상해보세요. 런던 웨스트엔드의 밤거리, 화려한 조명이 쏟아지고, 설렘 가득한 사람들의 미소가 넘실대는 풍경을요. 지금 여러분은 세계 최고의 공연들이 펼쳐지는 심장, 웨스트엔드 극장 앞에 서 있습니다. 19세기부터 이어져 온 역사가 고스란히 담긴 이 극장들의 문을 열고 들어서는 순간, 여러분은 시간 여행자가 됩니다. 낡은 나무 바닥의 삐걱거림, 붉은 벨벳 커튼의 묵직함, 그리고 천장에서 쏟아지는 샹들리에의 눈부신 빛까지, 모든 것이 여러분을 새로운 세계로 초대하죠. 오늘 밤, 여러분은 어떤 이야기에 빠져들게 될까요? 웅장한 오케스트라 선율에 맞춰 펼쳐지는 화려한 뮤지컬일까요, 아니면 배우들의 숨 막히는 연기 앙상블이 돋보이는 연극일까요? 웨스트엔드에서는 모든 것이 가능하답니다. 공연 시작 전, 극장 주변의 펍에서 가볍게 맥주 한 잔을 기울이며 사람들과 이야기를 나눠보세요. 왠지 모르게 오늘 공연에 대한 기대감이 더욱 커질 거예요. 막이 오르고, 첫 번째 음표가 울려 퍼지는 순간, 여러분은 완전히 다른 사람이 될 겁니다. 웨스트엔드의 마법은 바로 그런 거예요. 현실의 모든 걱정과 고민을 잊게 해주고, 오직 이야기 속에 몰입하게 만들어주는 거죠. 공연이 끝나고 극장을 나설 때, 여러분은 분명히 무언가 특별한 것을 경험했다는 것을 느끼게 될 거예요. 런던 웨스트엔드, 이곳은 단순한 극장이 아니라, 꿈과 환상이 현실이 되는 마법 같은 공간이니까요. 자, 이제 여러분의 밤을 빛낼 최고의 공연을 선택하고, 웨스트엔드의 마법에 빠져보세요!",
+    "description": "Premium tickets to top West End theatre productions",
+    "category": "Activity",
+    "detailedDescription": "런던 웨스트엔드 극장가는 뉴욕 브로드웨이와 어깨를 나란히 하는 세계적인 공연 예술의 중심지입니다. 수십 개의 극장이 밀집해 있으며, 매일 밤 다채로운 공연들이 펼쳐지죠. 이곳의 역사는 19세기 빅토리아 시대로 거슬러 올라갑니다. 당시 급증하는 인구와 함께 엔터테인먼트에 대한 수요가 늘면서, 웨스트엔드에 극장들이 우후죽순처럼 생겨나기 시작했습니다. 주목할 점은, 웨스트엔드의 많은 극장들이 단순히 공연만 보는 공간이 아니라는 거예요. 예를 들어, 'Her Majesty's Theatre'는 오페라의 유령 초연 장소로 유명하며, 극장 자체의 건축 양식 또한 매우 아름답습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 웨스트엔드 공연 티켓을 싸게 구할 수 있는 방법이 있다는 것! 바로 'TKTS' 부스를 이용하는 겁니다. 레스터 스퀘어에 위치한 이 부스에서는 당일 공연 티켓을 최대 50%까지 할인된 가격으로 구매할 수 있답니다. 또한, 몇몇 극장에서는 공연 시작 직전에 'Standing Room Only' 티켓을 판매하기도 하니, 운이 좋다면 저렴한 가격으로 웨스트엔드 공연을 즐길 수 있을 거예요. 숨겨진 비화 하나 더! 웨스트엔드 극장들은 과거 화재 사고가 빈번하게 발생했었는데, 이를 방지하기 위해 극장마다 특별한 소방 시스템을 갖추고 있다고 합니다. 런던 웨스트엔드, 그 화려한 무대 뒤에는 흥미로운 역사와 이야기가 숨겨져 있다는 사실, 잊지 마세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800",
+      "https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=800",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+      "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800",
+      "https://images.unsplash.com/photo-1478147427282-58a87a120781?w=800",
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800",
+      "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800"
+    ],
+    "historicalInfo": "London's West End theatre district has been the center of British theatre since the 17th century.",
+    "yearBuilt": "Historic tradition",
+    "architect": "Various historic theatres",
+    "translations": {
+      "en": {
+        "name": "West End Theatre Show",
+        "narration": "Experience world-class theatre in London's West End. Choose from spectacular musicals and acclaimed plays in historic venues.",
+        "description": "Premium tickets to top West End theatre productions",
+        "historicalInfo": "London's West End has been the center of British theatre since the 17th century.",
+        "yearBuilt": "Historic tradition",
+        "architect": "Various historic theatres"
+      },
+      "it": {
+        "name": "Spettacolo Teatrale del West End",
+        "narration": "Vivi il teatro di classe mondiale nel West End di Londra. Scegli tra spettacolari musical e acclamati spettacoli teatrali in luoghi storici.",
+        "description": "Biglietti premium per le migliori produzioni teatrali del West End",
+        "historicalInfo": "Il West End di Londra è stato il centro del teatro britannico dal XVII secolo.",
+        "yearBuilt": "Tradizione storica",
+        "architect": "Vari teatri storici"
+      },
+      "ko": {
+        "name": "웨스트 엔드 연극 쇼",
+        "narration": "런던 웨스트 엔드에서 세계적인 연극을 경험하세요. 역사적인 장소에서 화려한 뮤지컬과 찬사를 받는 연극 중에서 선택하세요.",
+        "description": "최고의 웨스트 엔드 연극 프로덕션 프리미엄 티켓",
+        "historicalInfo": "런던 웨스트 엔드는 17세기부터 영국 연극의 중심지였습니다.",
+        "yearBuilt": "역사적 전통",
+        "architect": "다양한 역사적 극장"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:37.990Z",
+    "updatedAt": "2026-02-22T20:01:00.120Z"
+  },
+  {
     "id": "georgetown-street-art",
     "cityId": "penang",
     "name": "Georgetown Street Art Tour",
@@ -13383,6 +10654,134 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:22:21.239Z"
   },
   {
+    "id": "kenai_fjords",
+    "cityId": "anchorage",
+    "name": "Kenai Fjords National Park",
+    "lat": 59.909722,
+    "lng": -149.642778,
+    "radius": 70,
+    "narration": "자, 눈을 감고 짙푸른 바다 내음이 코끝을 간지럽히는 알래스카의 케나이 피오르 국립공원에 와 있다고 상상해보세요. 귓가에는 갈매기의 울음소리와 저 멀리 빙하가 '꽈르릉' 무너져 내리는 웅장한 소리가 들려오는 듯하지 않나요? 지금 여러분의 발 아래에는 수백만 년의 시간을 품은 단단한 화강암이, 눈 앞에는 거대한 빙하가 마치 살아있는 생명체처럼 꿈틀거리고 있습니다. 이 곳은 단순히 '보는' 곳이 아니라 온몸으로 '느끼는' 곳이에요. 깎아지른 듯한 절벽 위에는 꿋꿋하게 자라난 침엽수들이 바람에 흔들리고, 바다 위에는 수달과 물개들이 재롱을 부리며 헤엄치는 모습도 볼 수 있을 거예요. 어쩌면 운이 좋다면, 혹등고래가 웅장한 자태를 드러내며 물 위로 솟아오르는 장관을 목격할 수도 있겠죠. 케나이 피오르의 빙하는 마치 시간 여행을 떠나온 듯, 과거와 현재, 그리고 미래가 공존하는 신비로운 공간입니다. 빙하가 녹아 흐르는 물줄기는 생명의 근원이 되어 수많은 생명체를 품고, 그 웅장함은 우리에게 자연의 위대함을 다시 한번 깨닫게 해줍니다. 상상해보세요, 해 질 녘, 붉게 물든 하늘 아래 빙하가 핑크빛으로 빛나는 모습! 이 모든 감동을 여러분도 직접 느껴보시길 바랍니다. 케나이 피오르 국립공원은 여러분의 가슴 속에 영원히 잊혀지지 않을 아름다운 추억을 선물할 거예요. 자, 이제 숨을 크게 쉬고, 이 경이로운 자연의 숨결을 온전히 느껴보세요!",
+    "description": "Spectacular coastal park featuring tidewater glaciers and marine wildlife",
+    "category": "National Park",
+    "detailedDescription": "케나이 피오르 국립공원은 1980년에 국립공원으로 지정되었으며, 면적은 무려 669,984에이커에 달합니다. 이 곳은 빙하로 깎여 만들어진 좁고 긴 만, 즉 피오르가 해안선을 따라 깊숙이 뻗어 있는 것이 특징입니다. 특히 아이시 베이(Aialik Bay)와 홀게이트 빙하(Holgate Glacier)는 꼭 방문해야 할 명소로 손꼽힙니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 바로 '빙하 크루즈'를 이용하는 것입니다. 배를 타고 빙하 가까이 접근하면 빙하가 갈라지는 소리, 즉 '빙하의 울음소리'를 생생하게 들을 수 있답니다. 또한, 크루즈를 이용하면 해달, 물개, 고래 등 다양한 해양 동물들을 더 가까이에서 관찰할 수 있다는 장점도 있습니다. 케나이 피오르에는 슬픈 전설도 숨겨져 있습니다. 옛날 이 지역에 살던 원주민들은 빙하가 녹아 마을을 덮치는 것을 두려워하며 빙하를 신성시했다고 합니다. 지금도 그들의 후손들은 빙하를 존경하며 자연과 조화롭게 살아가는 방법을 배우고 있다고 하네요. 케나이 피오르 국립공원은 단순한 관광지를 넘어, 자연과 인간의 공존, 그리고 과거와 현재가 만나는 특별한 공간입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800",
+      "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800",
+      "https://images.unsplash.com/photo-1496714534174-7c9c5e7e8cd7?w=800"
+    ],
+    "historicalInfo": "Kenai Fjords National Park was established in 1980 as part of the Alaska National Interest Lands Conservation Act. The park's landscape has been shaped by glacial activity for thousands of years, with the Harding Icefield being a remnant of the last ice age.",
+    "yearBuilt": "1980",
+    "architect": "U.S. National Park Service",
+    "translations": {
+      "en": {
+        "name": "Kenai Fjords National Park",
+        "narration": "Discover Kenai Fjords National Park, where massive tidewater glaciers meet the sea, creating a dramatic landscape of ice, rock, and abundant marine wildlife.",
+        "description": "Spectacular coastal park featuring tidewater glaciers and marine wildlife",
+        "detailedDescription": "Kenai Fjords National Park protects 669,984 acres of coastal wilderness on Alaska's Kenai Peninsula, where the Harding Icefield feeds nearly 40 glaciers that flow down to meet the sea. The park is named for the numerous fjords carved by these glaciers over thousands of years. Exit Glacier, the park's most accessible glacier, offers visitors a rare opportunity to walk right up to the face of a glacier and witness the dramatic effects of climate change as it continues to retreat. Boat tours through the fjords provide spectacular views of tidewater glaciers calving massive chunks of ice into the ocean, while also offering chances to see orcas, humpback whales, sea otters, puffins, and sea lions in their natural habitat. The park's coastal environment supports a rich diversity of marine and terrestrial wildlife. The Harding Icefield, one of only four remaining icefields in the United States, covers an area of approximately 700 square miles and can be reached via a challenging 8.2-mile round-trip hike that rewards visitors with breathtaking views of this vast expanse of ice.",
+        "historicalInfo": "Kenai Fjords National Park was established in 1980 as part of the Alaska National Interest Lands Conservation Act. The park's landscape has been shaped by glacial activity for thousands of years, with the Harding Icefield being a remnant of the last ice age.",
+        "yearBuilt": "1980",
+        "architect": "U.S. National Park Service"
+      },
+      "ko": {
+        "name": "키나이 피오르드 국립공원",
+        "narration": "거대한 조수 빙하가 바다와 만나 얼음, 바위, 풍부한 해양 야생동물의 극적인 풍경을 만드는 키나이 피오르드 국립공원을 발견하세요.",
+        "description": "조수 빙하와 해양 야생동물을 특징으로 하는 장관을 이루는 해안 공원",
+        "detailedDescription": "키나이 피오르드 국립공원은 알래스카 키나이 반도에서 669,984에이커의 해안 야생지대를 보호하며, 하딩 빙원이 바다로 흘러내리는 거의 40개의 빙하를 공급합니다. 공원은 수천 년에 걸쳐 이러한 빙하가 조각한 수많은 피오르드의 이름을 따서 명명되었습니다. 공원에서 가장 접근하기 쉬운 빙하인 엑시트 빙하는 방문객들에게 빙하의 전면까지 걸어갈 수 있는 드문 기회를 제공하며 계속 후퇴하면서 기후 변화의 극적인 영향을 목격할 수 있습니다. 피오르드를 통한 보트 투어는 조수 빙하가 거대한 얼음 덩어리를 바다로 떨어뜨리는 장관을 보여주며, 범고래, 혹등고래, 해달, 퍼핀, 바다사자를 자연 서식지에서 볼 수 있는 기회도 제공합니다. 공원의 해안 환경은 풍부한 다양성의 해양 및 육상 야생동물을 지원합니다. 미국에 남아있는 단 4개의 빙원 중 하나인 하딩 빙원은 약 700평방마일의 면적을 차지하며 방문객들에게 이 광대한 얼음 확장의 숨막히는 경치를 보상하는 도전적인 8.2마일 왕복 하이킹을 통해 도달할 수 있습니다.",
+        "historicalInfo": "키나이 피오르드 국립공원은 1980년 알래스카 국가 이익 토지 보존법의 일부로 설립되었습니다. 공원의 풍경은 수천 년 동안 빙하 활동에 의해 형성되었으며, 하딩 빙원은 마지막 빙하기의 잔재입니다.",
+        "yearBuilt": "1980년",
+        "architect": "미국 국립공원 관리청"
+      },
+      "ja": {
+        "name": "ケナイフィヨルド国立公園",
+        "narration": "巨大な潮水氷河が海と出会い、氷、岩、豊富な海洋野生生物の劇的な景観を作り出すケナイフィヨルド国立公園を発見してください。",
+        "description": "潮水氷河と海洋野生生物を特徴とする壮観な海岸公園",
+        "detailedDescription": "ケナイフィヨルド国立公園は、アラスカのケナイ半島で669,984エーカーの海岸荒野を保護しており、ハーディング氷原が海に流れ込む約40の氷河を供給しています。公園は、これらの氷河が数千年にわたって刻んだ多数のフィヨルドにちなんで名付けられました。公園で最もアクセスしやすい氷河であるイグジット氷河は、訪問者に氷河の前面まで歩いて行き、後退し続ける気候変動の劇的な影響を目撃する稀な機会を提供します。フィヨルドを通るボートツアーは、潮水氷河が巨大な氷の塊を海に落とす壮観な景色を提供し、シャチ、ザトウクジラ、ラッコ、パフィン、アシカを自然の生息地で見る機会も提供します。公園の海岸環境は、豊富な多様性の海洋および陸生野生生物を支えています。米国に残る4つの氷原の一つであるハーディング氷原は、約700平方マイルの面積をカバーし、訪問者にこの広大な氷の広がりの息をのむような景色を報酬として与える挑戦的な8.2マイルの往復ハイキングを通じて到達できます。",
+        "historicalInfo": "ケナイフィヨルド国立公園は1980年にアラスカ国家利益土地保全法の一部として設立されました。公園の景観は数千年にわたって氷河活動によって形成され、ハーディング氷原は最後の氷河期の名残です。",
+        "yearBuilt": "1980年",
+        "architect": "米国国立公園局"
+      },
+      "zh": {
+        "name": "基奈峡湾国家公园",
+        "narration": "发现基奈峡湾国家公园,巨大的潮水冰川与海洋相遇,创造出冰、岩石和丰富海洋野生动物的壮观景观。",
+        "description": "以潮水冰川和海洋野生动物为特色的壮观海岸公园",
+        "detailedDescription": "基奈峡湾国家公园保护着阿拉斯加基奈半岛上669,984英亩的海岸荒野,哈丁冰原为近40条流入大海的冰川提供水源。公园以这些冰川数千年来雕刻的众多峡湾而得名。出口冰川是公园最易到达的冰川,为游客提供了罕见的机会,可以走到冰川前端,见证气候变化的戏剧性影响,因为它继续后退。通过峡湾的船游提供潮水冰川将巨大的冰块掉入海洋的壮观景色,同时也提供在自然栖息地观看虎鲸、座头鲸、海獭、海鹦和海狮的机会。公园的海岸环境支持丰富多样的海洋和陆地野生动物。哈丁冰原是美国仅存的四个冰原之一,覆盖约700平方英里的面积,可通过具有挑战性的8.2英里往返徒步到达,为游客提供这片广阔冰原的令人叹为观止的景色。",
+        "historicalInfo": "基奈峡湾国家公园于1980年作为阿拉斯加国家利益土地保护法的一部分成立。公园的景观数千年来一直由冰川活动塑造,哈丁冰原是最后一个冰河时代的遗迹。",
+        "yearBuilt": "1980年",
+        "architect": "美国国家公园管理局"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:26.975Z",
+    "updatedAt": "2026-02-22T20:01:00.289Z"
+  },
+  {
+    "id": "st_pauls_cathedral",
+    "cityId": "london",
+    "name": "St. Paul's Cathedral",
+    "lat": 51.513845,
+    "lng": -0.098351,
+    "radius": 60,
+    "narration": "자, 눈을 감고 런던의 심장 박동을 느껴보세요. 지금 여러분은 세인트 폴 대성당 앞에 서 있습니다. 300년이 넘는 시간 동안 런던의 하늘을 지배해 온 크리스토퍼 렌 경의 바로크 양식 걸작이죠. 상상해보세요. 17세기 런던, 잿더미 속에서 이 웅장한 성당이 솟아오르는 모습을요. 화려한 돔은 태양빛을 받아 황금빛으로 빛나고, 그 아래에서는 수많은 이야기가 속삭입니다. 지금 여러분의 발 아래에는 찰스 왕세자와 다이애나 스펜서의 결혼식이 열렸던 바로 그 장소가 펼쳐져 있습니다. 수많은 역사적 순간들을 품은 이 공간에서 깊은 숨을 쉬어보세요. 성당 안으로 들어가면, 거대한 돔 아래에서 울려 퍼지는 오르간 소리가 여러분의 영혼을 감싸 안을 겁니다. 천장에는 제임스 톤힐이 그린 성 바울의 삶을 담은 그림들이 펼쳐져 있죠. 하나하나 살펴보면 마치 한 편의 영화를 보는 듯한 감동을 느낄 수 있을 거예요. 잠시 시간을 내어 속삭이는 회랑 (Whispering Gallery)에 가 보세요. 돔 내부 벽을 따라 속삭이는 소리가 반대편까지 또렷하게 들리는 신기한 경험을 할 수 있습니다. 사랑하는 사람에게 비밀스러운 메시지를 전달해보는 건 어떨까요? 세인트 폴 대성당은 단순한 건물이 아니에요. 런던의 역사, 예술, 그리고 영혼이 담겨 있는 살아있는 기념비입니다. 이곳에서 특별한 경험을 만들어가세요.",
+    "description": "Iconic Baroque cathedral with one of the world's largest domes",
+    "category": "Cathedral",
+    "detailedDescription": "세인트 폴 대성당은 1675년부터 1710년까지 크리스토퍼 렌 경의 설계로 지어진 영국 성공회 대성당입니다. 1666년 런던 대화재로 소실된 옛 성당 자리에 세워졌으며, 렌 경의 건축적 천재성을 보여주는 대표적인 작품으로 평가받고 있습니다. 돔의 높이는 111미터에 달하며, 이는 런던에서 가장 높은 건축물 중 하나입니다. 대성당 내부에는 넬슨 제독, 웰링턴 공작 등 영국의 역사적 인물들이 안장되어 있습니다. 꿀팁 하나! 성당 지하에는 크립트 (Crypt)가 있는데, 이곳은 대성당 건축에 참여한 렌 경의 무덤이 있는 곳입니다. 그의 묘비에는 'Reader, if you seek his monument – look around (독자여, 그의 기념비를 찾거든 주위를 둘러보라)'라는 라틴어 문구가 새겨져 있습니다. 또 다른 숨겨진 이야기는, 제2차 세계대전 당시 런던이 폭격으로 파괴되었을 때, 세인트 폴 대성당은 기적적으로 살아남아 런던 시민들에게 희망의 상징이 되었다는 것입니다. 이 이야기는 수많은 예술 작품과 영화의 소재가 되기도 했습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
+      "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800",
+      "https://images.unsplash.com/photo-1543716021-36e0f757e6c9?w=800"
+    ],
+    "historicalInfo": "St. Paul's Cathedral was designed by Sir Christopher Wren after the Great Fire of London in 1666 and completed in 1710. It has been the site of many historic events including royal weddings and state funerals.",
+    "yearBuilt": "1675-1710",
+    "architect": "Sir Christopher Wren",
+    "translations": {
+      "en": {
+        "name": "St. Paul's Cathedral",
+        "narration": "Welcome to St. Paul's Cathedral, Sir Christopher Wren's Baroque masterpiece. Its iconic dome has dominated London's skyline for over 300 years.",
+        "description": "Iconic Baroque cathedral with one of the world's largest domes",
+        "historicalInfo": "St. Paul's Cathedral was designed by Sir Christopher Wren after the Great Fire of London in 1666 and completed in 1710.",
+        "yearBuilt": "1675-1710",
+        "architect": "Sir Christopher Wren"
+      },
+      "it": {
+        "name": "Cattedrale di St. Paul",
+        "narration": "Benvenuti alla Cattedrale di St. Paul, il capolavoro barocco di Sir Christopher Wren. La sua iconica cupola domina lo skyline di Londra da oltre 300 anni.",
+        "description": "Iconica cattedrale barocca con una delle cupole più grandi del mondo",
+        "historicalInfo": "La Cattedrale di St. Paul fu progettata da Sir Christopher Wren dopo il Grande Incendio di Londra del 1666 e completata nel 1710.",
+        "yearBuilt": "1675-1710",
+        "architect": "Sir Christopher Wren"
+      },
+      "ko": {
+        "name": "세인트 폴 대성당",
+        "narration": "크리스토퍼 렌 경의 바로크 걸작 세인트 폴 대성당에 오신 것을 환영합니다. 그 상징적인 돔은 300년 넘게 런던의 스카이라인을 지배해 왔습니다.",
+        "description": "세계에서 가장 큰 돔 중 하나를 가진 상징적인 바로크 대성당",
+        "historicalInfo": "세인트 폴 대성당은 1666년 런던 대화재 이후 크리스토퍼 렌 경이 설계하여 1710년에 완공되었습니다.",
+        "yearBuilt": "1675-1710년",
+        "architect": "크리스토퍼 렌 경"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:26.379Z",
+    "updatedAt": "2026-02-22T20:01:00.453Z"
+  },
+  {
     "id": "rome_콜로세움_colosseum",
     "cityId": "rome",
     "name": "콜로세움 (Colosseum)",
@@ -13421,6 +10820,76 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:05.295Z"
   },
   {
+    "id": "tivoli_gardens",
+    "cityId": "copenhagen",
+    "name": "Tivoli Gardens",
+    "lat": 55.673686,
+    "lng": 12.568105,
+    "radius": 100,
+    "narration": "자, 눈을 감고 코펜하겐의 심장, 티볼리 공원으로 시간 여행을 떠나볼까요? 1843년, 동화 속에서 막 튀어나온 듯한 이 마법의 정원이 문을 연 순간을 상상해보세요. 지금 여러분의 발 아래에는 수백 년의 이야기가 켜켜이 쌓여 있습니다. 발걸음을 옮길 때마다 들려오는 아이들의 웃음소리, 롤러코스터가 바람을 가르는 짜릿한 비명, 그리고 달콤한 솜사탕 냄새가 코를 간지럽히는 듯하죠? 티볼리 공원은 단순한 놀이공원이 아니에요. 덴마크 사람들의 삶 속에 깊숙이 뿌리내린 소중한 추억이자, 전 세계에서 온 여행자들의 가슴 속에 영원히 기억될 아름다운 이야기랍니다. 밤이 되면 수천 개의 전구가 켜지면서 공원은 더욱 황홀한 모습으로 변신해요. 마치 밤하늘의 별들이 땅으로 내려와 춤을 추는 듯한 환상적인 광경이 펼쳐지죠. 아름다운 정원을 거닐며, 형형색색의 꽃들이 뿜어내는 향기에 취해보세요. 잠시 벤치에 앉아, 길거리 악사들의 연주를 감상하며 여유를 만끽하는 건 어때요? 아니면 스릴 넘치는 놀이기구에 몸을 맡기고, 스트레스를 날려버리는 것도 좋겠죠. 티볼리 공원은 여러분에게 잊지 못할 특별한 경험을 선사할 거예요. 자, 이제 티볼리 공원의 문을 활짝 열고, 마법 같은 시간 속으로 함께 떠나볼까요?",
+    "description": "One of the world's oldest and most beautiful amusement parks",
+    "category": "Amusement Park",
+    "detailedDescription": "티볼리 공원은 1843년에 문을 연 세계에서 가장 오래된 놀이공원 중 하나입니다. 덴마크의 왕 크리스티안 8세의 허가를 받아 게오르그 카르스텐센에 의해 건설되었죠. 카르스텐센은 '사람들이 즐거움을 느끼면 정치를 잊을 것이다'라는 신념을 가지고 있었고, 티볼리 공원은 이러한 그의 철학을 반영하고 있습니다. 공원 내에는 다양한 테마의 정원, 놀이기구, 레스토랑, 극장 등이 있으며, 특히 밤에는 수천 개의 전구로 장식되어 낭만적인 분위기를 자아냅니다. 현지인들은 티볼리 공원을 '프리하벤(Frihavnen, 자유항)' 지역에 있다고 말하는데, 과거 이곳이 자유 무역 지역이었던 것에서 유래했습니다. 꿀팁 하나 드릴까요? 티볼리 공원에서는 계절마다 특별한 축제가 열리는데, 크리스마스 시즌에는 아름다운 크리스마스 마켓이 열리고, 할로윈 시즌에는 오싹한 분위기로 변신합니다. 또한, 매주 토요일 밤에는 화려한 불꽃놀이가 펼쳐지니, 시간을 맞춰 방문하면 더욱 특별한 경험을 할 수 있을 거예요. 티볼리 공원은 단순한 놀이공원을 넘어, 덴마크 문화와 역사를 엿볼 수 있는 소중한 공간입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800",
+      "https://images.unsplash.com/photo-1552560880-2482cef14240?w=800",
+      "https://images.unsplash.com/photo-1533582064595-1b6f8c0a8e92?w=800"
+    ],
+    "historicalInfo": "Tivoli Gardens was founded on August 15, 1843 by Georg Carstensen. He persuaded King Christian VIII to let him create the park, arguing that \"when the people are amusing themselves, they do not think about politics.\" The park quickly became popular and has remained a beloved institution in Danish culture.",
+    "yearBuilt": "1843",
+    "architect": "Georg Carstensen",
+    "translations": {
+      "en": {
+        "name": "Tivoli Gardens",
+        "narration": "Welcome to Tivoli Gardens, one of the world's oldest operating amusement parks. This enchanting garden has been delighting visitors since 1843 with its rides, beautiful gardens, and magical atmosphere.",
+        "description": "One of the world's oldest and most beautiful amusement parks",
+        "detailedDescription": "Tivoli Gardens is a world-famous amusement park and pleasure garden in Copenhagen. Opened in 1843, it is the third-oldest operating amusement park in the world and has inspired countless theme parks, including Disneyland. Walt Disney himself visited Tivoli several times and drew inspiration for his own parks. Tivoli combines traditional fairground rides with beautifully landscaped gardens, outdoor entertainment, and cultural attractions. The park features over 30 attractions including vintage wooden roller coasters, modern thrill rides, a carousel from 1943, and the famous Vertigo. Beyond the rides, Tivoli is renowned for its stunning gardens with thousands of flowers, illuminated at night by over 115,000 colored lights. The park hosts concerts at the open-air stage and concert hall, pantomime performances at the Peacock Theatre, and various cultural events throughout the year. During Halloween and Christmas, Tivoli transforms into a magical wonderland with special decorations and events. The park has become an integral part of Copenhagen culture and is visited by locals and tourists alike.",
+        "historicalInfo": "Tivoli Gardens was founded on August 15, 1843 by Georg Carstensen. He persuaded King Christian VIII to let him create the park, arguing that \"when the people are amusing themselves, they do not think about politics.\" The park quickly became popular and has remained a beloved institution in Danish culture.",
+        "yearBuilt": "1843",
+        "architect": "Georg Carstensen"
+      },
+      "ko": {
+        "name": "티볼리 공원",
+        "narration": "세계에서 가장 오래된 놀이공원 중 하나인 티볼리 공원에 오신 것을 환영합니다. 이 매혹적인 정원은 1843년부터 놀이기구, 아름다운 정원, 마법 같은 분위기로 방문객들을 즐겁게 하고 있습니다.",
+        "description": "세계에서 가장 오래되고 아름다운 놀이공원 중 하나",
+        "detailedDescription": "티볼리 공원은 코펜하겐의 세계적으로 유명한 놀이공원이자 유원지입니다. 1843년에 개장한 이 공원은 세계에서 세 번째로 오래된 운영 중인 놀이공원이며 디즈니랜드를 포함한 수많은 테마파크에 영감을 주었습니다. 월트 디즈니 자신도 티볼리를 여러 번 방문했고 자신의 공원을 위한 영감을 얻었습니다. 티볼리는 전통적인 놀이기구를 아름답게 조경된 정원, 야외 엔터테인먼트, 문화 명소와 결합합니다. 공원에는 빈티지 목조 롤러코스터, 현대적인 스릴 놀이기구, 1943년 회전목마, 유명한 버티고를 포함한 30개 이상의 명소가 있습니다. 놀이기구 외에도 티볼리는 수천 송이의 꽃이 있는 멋진 정원으로 유명하며, 밤에는 115,000개 이상의 컬러 조명으로 조명됩니다. 공원은 야외 무대와 콘서트홀에서 콘서트, 피코크 극장에서 무언극 공연, 그리고 연중 다양한 문화 행사를 개최합니다. 할로윈과 크리스마스 기간에는 티볼리가 특별한 장식과 행사로 마법의 원더랜드로 변합니다. 공원은 코펜하겐 문화의 필수적인 부분이 되었으며 현지인과 관광객 모두가 방문합니다.",
+        "historicalInfo": "티볼리 공원은 1843년 8월 15일 게오르그 카르스텐센에 의해 설립되었습니다. 그는 \"사람들이 즐기고 있을 때 정치에 대해 생각하지 않는다\"고 주장하며 크리스티안 8세 왕을 설득하여 공원을 만들도록 했습니다. 공원은 빠르게 인기를 얻었고 덴마크 문화에서 사랑받는 기관으로 남아 있습니다.",
+        "yearBuilt": "1843년",
+        "architect": "게오르그 카르스텐센"
+      },
+      "ja": {
+        "name": "チボリ公園",
+        "narration": "世界最古の遊園地の一つ、チボリ公園へようこそ。この魅惑的な庭園は1843年以来、乗り物、美しい庭園、魔法のような雰囲気で訪問者を楽しませてきました。",
+        "description": "世界で最も古く美しい遊園地の一つ",
+        "detailedDescription": "チボリ公園は、コペンハーゲンにある世界的に有名な遊園地および遊園地です。1843年に開園し、世界で3番目に古い運営中の遊園地であり、ディズニーランドを含む無数のテーマパークにインスピレーションを与えてきました。ウォルト・ディズニー自身も何度かチボリを訪れ、自分のパークのインスピレーションを得ました。チボリは伝統的な遊園地の乗り物と美しく造園された庭園、屋外エンターテインメント、文化的アトラクションを組み合わせています。公園には、ビンテージの木製ジェットコースター、現代的なスリルライド、1943年のメリーゴーランド、有名なバーティゴを含む30以上のアトラクションがあります。乗り物以外にも、チボリは数千の花がある見事な庭園で有名であり、夜には115,000以上のカラーライトで照らされます。公園は野外ステージとコンサートホールでコンサート、ピーコックシアターでパントマイムパフォーマンス、年間を通じてさまざまな文化イベントを開催しています。ハロウィンとクリスマスの期間中、チボリは特別な装飾とイベントで魔法の国に変わります。公園はコペンハーゲン文化の不可欠な部分となり、地元の人々と観光客の両方が訪れています。",
+        "historicalInfo": "チボリ公園は1843年8月15日にゲオルグ・カールステンセンによって設立されました。彼は「人々が楽しんでいるとき、彼らは政治について考えない」と主張して、クリスチャン8世王を説得し、公園を作ることを許可させました。公園はすぐに人気を博し、デンマーク文化において愛される機関であり続けています。",
+        "yearBuilt": "1843年",
+        "architect": "ゲオルグ・カールステンセン"
+      },
+      "zh": {
+        "name": "趣伏里公园",
+        "narration": "欢迎来到趣伏里公园，世界上最古老的运营游乐园之一。这个迷人的花园自1843年以来一直以其游乐设施、美丽的花园和神奇的氛围让游客流连忘返。",
+        "description": "世界上最古老、最美丽的游乐园之一",
+        "detailedDescription": "趣伏里公园是哥本哈根世界著名的游乐园和游乐场。它于1843年开放，是世界上第三古老的运营游乐园，并激发了包括迪士尼乐园在内的无数主题公园的灵感。华特·迪士尼本人多次访问趣伏里，并从中获得了自己公园的灵感。趣伏里将传统的游乐场设施与美丽的景观花园、户外娱乐和文化景点相结合。公园拥有30多个景点，包括复古木制过山车、现代惊险游乐设施、1943年的旋转木马和著名的眩晕塔。除了游乐设施外，趣伏里还以其拥有数千朵鲜花的迷人花园而闻名，夜晚由115,000多盏彩灯照亮。公园在露天舞台和音乐厅举办音乐会，在孔雀剧院举办哑剧表演，全年举办各种文化活动。在万圣节和圣诞节期间，趣伏里会通过特殊的装饰和活动变成一个神奇的仙境。公园已成为哥本哈根文化不可分割的一部分，当地人和游客都会前来参观。",
+        "historicalInfo": "趣伏里公园于1843年8月15日由乔治·卡斯滕森创立。他说服克里斯蒂安八世国王让他创建公园，理由是\"当人们娱乐时，他们不会考虑政治。\"公园迅速流行起来，并一直是丹麦文化中深受喜爱的机构。",
+        "yearBuilt": "1843年",
+        "architect": "乔治·卡斯滕森"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:29.738Z",
+    "updatedAt": "2026-02-22T20:01:00.615Z"
+  },
+  {
     "id": "rome_판테온_pantheon",
     "cityId": "rome",
     "name": "판테온 (Pantheon)",
@@ -13457,6 +10926,71 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-13T13:36:25.089Z",
     "updatedAt": "2026-02-22T18:06:05.419Z"
+  },
+  {
+    "id": "whale-shark-watching-cebu",
+    "cityId": "cebu",
+    "name": "Whale Shark Watching in Oslob",
+    "lat": 9.5137,
+    "lng": 123.3823,
+    "radius": 70,
+    "narration": "자, 눈을 감고 푸른 세부 바다를 상상해보세요. 따스한 햇살이 얼굴을 간지럽히고, 코 끝에는 짭짤한 바다 내음이 스며듭니다. 지금 여러분은 오슬롭 해안, 바로 눈앞에는 세상에서 가장 큰 물고기, 바로 고래상어가 유유히 헤엄치고 있습니다! 믿기지 않으시죠? 저도 처음엔 그랬답니다. 마치 꿈속을 걷는 기분이었어요. 상상해보세요! 거대한 몸집에도 불구하고 너무나 온순한 눈망울을 가진 고래상어가 여러분을 향해 다가오는 모습을요. 숨을 크게 들이쉬고 망설이지 마세요. 용기를 내어 그 곁으로 헤엄쳐 가세요! 부드러운 지느러미가 물결을 가르는 소리, 햇빛에 반짝이는 푸른 등, 그리고 무엇보다 그 거대한 생명체가 내뿜는 경이로운 아우라에 온몸이 전율할 겁니다. 마치 다른 행성에 온 듯한 착각이 들지도 몰라요. 하지만 걱정 마세요. 숙련된 현지 가이드들이 여러분의 안전을 책임지고, 고래상어에게 해를 끼치지 않는 방법 또한 친절하게 알려줄 겁니다. 이 순간, 여러분은 단순한 관광객이 아닌, 바다와 하나 되는 특별한 경험을 하게 될 거예요. 오슬롭의 고래상어와 함께하는 시간은 평생 잊지 못할 추억으로 남을 겁니다. 자, 이제 망설이지 말고 푸른 바다로 뛰어들어 보세요!",
+    "description": "Once-in-a-lifetime whale shark swimming experience",
+    "category": "Activity",
+    "detailedDescription": "오슬롭의 고래상어 투어는 세부 여행에서 빼놓을 수 없는 액티비티입니다. 필리핀 정부의 철저한 관리하에 진행되므로 안전하게 고래상어를 만날 수 있다는 장점이 있습니다. 고래상어는 플랑크톤을 주식으로 하는 온순한 성격의 동물이기 때문에 공격 걱정은 하지 않으셔도 됩니다. 하지만 고래상어를 보호하기 위해 반드시 지켜야 할 몇 가지 규칙이 있습니다. 선크림은 반드시 친환경 제품을 사용해야 하며, 고래상어에게 4m 이상 접근하거나 만져서는 안 됩니다. 또한, 사진 촬영 시 플래시 사용은 금지되어 있습니다. 투어는 보통 새벽 일찍 시작되는데, 이는 고래상어가 먹이를 찾아 해안 가까이 접근하는 시간과 맞춰져 있기 때문입니다. 현지인들은 고래상어를 '부탄딩'이라고 부르며 숭배의 대상으로 여기기도 합니다. 투어 전 현지 가이드로부터 안전 교육과 고래상어 보호에 대한 설명을 듣게 되며, 구명조끼와 스노클링 장비가 제공됩니다. 숨겨진 꿀팁을 하나 알려드리자면, 아침 일찍 서둘러 투어에 참여하는 것이 좋습니다. 사람이 적어 더욱 여유롭게 고래상어를 관찰하고 사진을 찍을 수 있기 때문입니다. 또한, 투어 후 오슬롭 주변의 아름다운 폭포나 해변을 방문하여 더욱 풍성한 여행을 즐길 수 있습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800",
+      "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800",
+      "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=800",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+      "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=800",
+      "https://images.unsplash.com/photo-1559666126-84f389727b9a?w=800",
+      "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800"
+    ],
+    "historicalInfo": "Whale shark watching in Oslob began in 2011 and has become one of the Philippines' most popular wildlife encounters.",
+    "yearBuilt": "2011",
+    "architect": "Oslob local community",
+    "translations": {
+      "en": {
+        "name": "Whale Shark Watching in Oslob",
+        "narration": "Swim with gentle giants in Oslob, one of the few places in the world where you can reliably encounter whale sharks year-round.",
+        "description": "Once-in-a-lifetime whale shark swimming experience",
+        "detailedDescription": "Experience the thrill of swimming alongside the world's largest fish - the gentle whale shark - in the waters of Oslob, southern Cebu. This unique wildlife encounter allows you to snorkel just meters away from these magnificent creatures, some reaching lengths of over 10 meters. Local fishermen have been feeding whale sharks in these waters since 2011, creating a reliable opportunity to see them year-round. Tours begin early morning (starting around 6 AM) when the whale sharks are most active. The experience includes a safety briefing, snorkeling equipment, and a 30-minute session in the water with the whale sharks. Strict regulations protect both visitors and the animals - no touching, flash photography, or sunscreen is allowed. Most tours can be combined with visits to nearby attractions like Tumalog Falls or Sumilon Island.",
+        "historicalInfo": "Whale shark watching in Oslob began in 2011 and has become one of the Philippines' most popular wildlife encounters.",
+        "yearBuilt": "2011",
+        "architect": "Oslob local community"
+      },
+      "it": {
+        "name": "Osservazione Squali Balena a Oslob",
+        "narration": "Nuota con i giganti gentili a Oslob, uno dei pochi posti al mondo dove puoi incontrare squali balena tutto l'anno in modo affidabile.",
+        "description": "Esperienza unica di nuoto con squali balena",
+        "detailedDescription": "Vivi l'emozione di nuotare accanto al pesce più grande del mondo - il gentile squalo balena - nelle acque di Oslob, nel sud di Cebu. Questo unico incontro con la fauna selvatica ti permette di fare snorkeling a pochi metri da queste magnifiche creature, alcune delle quali raggiungono lunghezze superiori ai 10 metri. I pescatori locali alimentano gli squali balena in queste acque dal 2011, creando un'opportunità affidabile per vederli tutto l'anno. I tour iniziano al mattino presto (a partire dalle 6 del mattino) quando gli squali balena sono più attivi. L'esperienza include un briefing sulla sicurezza, attrezzatura per lo snorkeling e una sessione di 30 minuti in acqua con gli squali balena. Regolamenti rigorosi proteggono sia i visitatori che gli animali - non è consentito toccare, fotografare con flash o usare crema solare. La maggior parte dei tour può essere combinata con visite ad attrazioni vicine come le Cascate di Tumalog o l'isola di Sumilon.",
+        "historicalInfo": "L'osservazione degli squali balena a Oslob è iniziata nel 2011 ed è diventata uno degli incontri con la fauna selvatica più popolari delle Filippine.",
+        "yearBuilt": "2011",
+        "architect": "Comunità locale di Oslob"
+      },
+      "ko": {
+        "name": "오슬롭 고래상어 관찰",
+        "narration": "연중 내내 고래상어를 안정적으로 만날 수 있는 세계에서 몇 안 되는 장소 중 하나인 오슬롭에서 온순한 거인들과 함께 수영하세요.",
+        "description": "일생일대의 고래상어 수영 체험",
+        "detailedDescription": "세부 남부 오슬롭의 바다에서 세계에서 가장 큰 물고기인 온순한 고래상어와 함께 수영하는 스릴을 경험하세요. 이 독특한 야생 동물 만남은 10미터가 넘는 길이의 웅장한 생물들로부터 불과 몇 미터 떨어진 곳에서 스노클링할 수 있게 해줍니다. 지역 어부들은 2011년부터 이 바다에서 고래상어에게 먹이를 주고 있어 연중 내내 고래상어를 볼 수 있는 안정적인 기회를 제공합니다. 투어는 고래상어가 가장 활발한 이른 아침(오전 6시경 시작)에 시작됩니다. 체험에는 안전 브리핑, 스노클링 장비, 고래상어와 함께 물속에서 보내는 30분 세션이 포함됩니다. 방문객과 동물 모두를 보호하기 위한 엄격한 규정이 있습니다 - 만지기, 플래시 촬영, 선크림 사용이 금지됩니다. 대부분의 투어는 투말록 폭포나 수밀론 섬과 같은 인근 명소 방문과 결합될 수 있습니다.",
+        "historicalInfo": "오슬롭의 고래상어 관찰은 2011년에 시작되어 필리핀에서 가장 인기 있는 야생 동물 만남 중 하나가 되었습니다.",
+        "yearBuilt": "2011",
+        "architect": "오슬롭 지역 사회"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:35.210Z",
+    "updatedAt": "2026-02-22T20:01:00.700Z"
   },
   {
     "id": "little_mermaid",
@@ -13567,70 +11101,51 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:05.542Z"
   },
   {
-    "id": "seoul_정식당_서울_jungsik_seoul",
-    "cityId": "seoul",
-    "name": "정식당 서울 (Jungsik Seoul)",
-    "lat": 37.525501,
-    "lng": 127.039602,
-    "radius": 70,
-    "narration": "화려한 강남의 불빛 속에서도 고요하게 빛나는 이곳, 정식당의 문을 열고 들어서는 순간, 모던하고 세련된 공간이 당신을 맞이합니다. 은은한 조명과 절제된 인테리어는 앞으로 펼쳐질 미식의 향연을 예고하는 듯합니다. 자리에 앉자마자, 테이블 위에 놓인 정갈한 식기들이 벌써부터 기대감을 자아냅니다. 잠시 후, 첫 번째 요리가 마치 예술 작품처럼 등장합니다. 눈으로 먼저 맛보는 즐거움이 이런 것일까요? 셰프의 섬세한 손길이 느껴지는 플레이팅은 감탄을 자아냅니다. 코끝을 스치는 은은한 향기, 그리고 한 입 베어 물었을 때 입안 가득 퍼지는 복합적인 맛의 향연은 그 어떤 수식어로도 표현하기 어렵습니다. 예를 들어, 시그니처 메뉴인 '성게 비빔밥'을 맛볼 때면, 고소한 성게알의 풍미와 김 퓨레의 절묘한 조화가 파도처럼 밀려옵니다. 익숙한 비빔밥의 형태는 유지하되, 재료의 신선함과 독창적인 해석이 어우러져 전혀 새로운 미식 경험을 선사하는 것이죠. 옆 테이블에서는 낮은 목소리로 대화하는 소리가 들려오고, 잔이 부딪히는 소리마저도 섬세하게 들리는 이 공간에서, 여러분은 단순한 식사가 아닌, 한국 미식의 미래를 맛보는 특별한 시간을 보내게 될 것입니다. 모든 요리가 끝난 후에도, 그 여운은 오랫동안 기억 속에 남을 것입니다.",
-    "description": "미쉐린 2스타, 전통과 혁신이 빚어낸 뉴 코리안 다이닝의 정점.",
-    "category": "Restaurant",
-    "detailedDescription": "**[The Grand Opening]**\n\n어느 날 서울의 밤, 당신이 정식당 서울 앞에 발을 딛고 서게 된다면, 그 순간부터 당신은 단순히 레스토랑이 아닌 하나의 예술 작품 속으로 들어가게 됩니다. 상상해 보세요, 고급스러운 외관이 어둠 속에서도 은은한 빛을 발하고, 문을 열자마자 당신을 반기는 부드러운 조명과 아늑한 분위기. 주변 공기는 갓 구운 빵의 향과 신선한 향신료의 아로마로 가득 차며, 그 향이 당신의 코를 간지럽히고 입맛을 돋굽니다. 살짝 들려오는 부드러운 음악 소리, 그 멜로디가 당신의 감각을 고조시키며, 미각의 모험이 시작될 준비를 합니다. 그 순간, 모든 감각이 깨어나며 당신은 \"뉴 코리안 다이닝\"의 세계로 들어섭니다.\n\n이곳의 매력은 단순한 미슐랭 2스타 레벨의 음식이 아닙니다. 당신이 이곳에 발을 들인 순간부터, 모든 것이 하나의 거대한 예술 작품처럼 느껴집니다. 주변의 요리사는 완벽한 요리를 위해 몰두하고, 그들의 열정이 공간에 흘러넘칩니다. 귀를 기울여 보세요, 주방에서 들려오는 칼질 소리와 냄비가 부딪히는 소리. 그 모든 것이 이곳만의 독특한 오페라를 구성합니다. 한 끼의 식사가 인생의 특별한 순간이 될 수 있는 곳, 바로 이곳이 정식당 서울입니다.\n\n**[Deep-Dive History]**\n\n정식당 서울은 단순한 식당이 아닌, 하나의 역사를 품고 있는 장소입니다. 이곳은 2009년에 설립되었으며, 셰프 정호영의 뛰어난 창의력과 열정이 빚어낸 결과입니다. 당시 한국의 외식 문화는 빠르게 변하고 있었고, 전통과 현대의 조화가 요리계의 새로운 트렌드로 떠오르던 시기였습니다. 정호영 셰프는 바로 이 시기를 놓치지 않고, 뉴 코리안 다이닝이라는 새로운 장르를 개척하게 됩니다. 그의 비전은 한국의 고유한 맛을 현대적 감각으로 재해석하여 세계에 알리는 것이었고, 이로 인해 정식당은 빠르게 미슐랭의 주목을 받게 됩니다.\n\n그 당시에는 한국 요리가 세계적으로 큰 주목을 받지 못하던 시절이었습니다. 그러나 정호영 셰프는 그 속에서 한국의 고유한 맛을 잃지 않으면서도, 현대적이고 세련된 감각을 더하는 데 성공합니다. 그 중 하나의 일화로, 셰프가 어린 시절 할머니에게 배운 김치 담그는 방법을 조금씩 변형하여 현대적인 플레이트로 선보인 이야기가 있습니다. 그 결과는? 바로 미식의 세계에서 폭발적인 반응을 이끌어냈고, 정식당은 단순히 음식을 제공하는 곳이 아닌, 문화와 역사를 전달하는 중요한 공간으로 자리잡게 되었습니다.\n\n**[Architectural Wonders]**\n\n정식당 서울의 내부는 단순한 식당이 아닌 하나의 예술 작품처럼 설계되었습니다. 이곳의 건축은 전통과 현대의 조화를 이루며, 각종 고급 재료들이 사용되었습니다. 나무, 철, 유리 등 다양한 재료들이 적재적소에 배치되어 있으며, 그 디자인은 한국의 전통적인 미적 감각과 현대의 세련미를 완벽하게 아우릅니다. 특히, 내부의 조명과 색감은 요리의 아름다움을 더욱 돋보이게 하며, 마치 갤러리에 놓인 예술 작품을 감상하는 듯한 느낌을 줍니다.\n\n하지만, 가장 흥미로운 점은 이곳의 숨겨진 디테일입니다. 벽에는 눈에 띄지 않는 작은 조각상이 자리하고 있는데, 이는 한국의 전통적인 민속 신화를 바탕으로 한 것입니다. 이 조각상들은 각기 다른 이야기를 품고 있으며, 이를 발견하는 재미는 또 다른 경험을 선사합니다. 관광객들은 이러한 숨겨진 디테일을 발견하곤 감탄하며, 그 순간순간이 사진으로 남겨지곤 합니다. 이처럼 정식당은 단순한 식사 이상의 경험을 제공하며, 방문자들에게 작고 특별한 추억을 선사합니다.\n\n**[The Modern Saga]**\n\n정식당 서울의 이야기는 여기에서 멈추지 않습니다. 시간이 흐르며, 이곳은 현대적인 감각을 더해가고 있습니다. 요리는 끊임없이 변화하고, 매 시즌마다 새로운 메뉴가 선보여지며, 방문할 때마다 새로운 경험을 제공합니다. 또한, 이곳은 다양한 매체를 통해 더욱 널리 알려지게 되었으며, 유명 셰프 쇼와 다큐멘터리에서 다루어지면서 세계인의 주목을 받게 되었습니다.\n\n흥미롭게도, 현대의 관광객들은 이곳에서 독특한 행동을 보입니다. 요리를 감상하고 난 후에는, 자신들만의 독특한 방법으로 그 경험을 기록합니다. 포크와 나이프를 놓고 젓가락을 사용해 먹으며, 각자만의 스타일로 포즈를 취하고 사진을 찍는 관광객들. 이곳은 이제 단순한 식사가 아닌, 하나의 문화 체험의 장이 되어가고 있습니다. 모든 관광객들은 이곳에서 하나의 작은 이야기를 가지고 돌아가며, 그 이야기는 또 다른 이야기의 시작이 됩니다.\n\n**[The Philosophical Conclusion]**\n\n정식당 서울은 단순한 레스토랑이 아닙니다. 이곳은 전통과 현대가 만나 새로운 것을 창조하는, 바로 그 접점에 서 있는 곳입니다. 이곳에서의 경험은 단순히 맛있는 식사를 넘어서, 한국의 역사와 문화에 대한 깊은 이해를 선사합니다. 이곳은 식사를 통해 과거와 현재를 이어주며, 방문자들에게 그 이상의 감동을 안겨줍니다.\n\n이제 당신은 정식당 서울에서 떠날 준비를 합니다. 이 특별한 경험을 가슴 깊이 간직하며, 이곳에서의 작은 순간들이 당신의 인생에서 커다란 의미로 자리 잡기를 바랍니다. 매 순간마다 느껴진 감정, 미각의 향연은 영원히 당신의 기억 속에 남을 것입니다. 다음에 이곳을 다시 방문할 때, 당신은 조금 더 넓어진 시야로, 더 깊어진 감성으로 이곳을 마주할 것입니다. 정식당 서울은 언제나 당신을 기다리고 있습니다.",
+    "id": "sentosa-island",
+    "cityId": "singapore",
+    "name": "Sentosa Island",
+    "lat": 1.249404,
+    "lng": 103.830321,
+    "radius": 100,
+    "narration": "자, 눈을 감고 상상해보세요. 따스한 햇살이 여러분의 피부를 부드럽게 감싸고, 발 아래로는 부드럽고 하얀 모래가 느껴지는 센토사 섬에 와 있다고! 코 끝을 간지럽히는 짭짤한 바다 내음과 함께 저 멀리서 들려오는 파도 소리는 마치 자연이 연주하는 아름다운 교향곡 같아요. 지금 여러분은 싱가포르의 숨겨진 보석, 센토사 섬에 와 계십니다. 단순히 아름다운 해변과 럭셔리한 리조트만 있는 곳이 아니에요. 이곳은 짜릿한 액티비티와 스릴 넘치는 어드벤처, 그리고 잊지 못할 추억이 가득한 마법 같은 섬이죠. \n\n센토사 섬에 도착하면 가장 먼저 실로소 비치(Siloso Beach)의 활기 넘치는 분위기가 여러분을 반길 거예요. 형형색색의 비치 바에서 흘러나오는 흥겨운 음악에 맞춰 몸을 흔들고, 시원한 칵테일 한 잔을 기울이며 여유를 만끽해보세요. 아니면 탄종 비치(Tanjong Beach)의 고요함 속에서 책을 읽거나 낮잠을 즐기며 완벽한 휴식을 취하는 건 어떠세요? 해가 질 무렵, 팔라완 비치(Palawan Beach)로 향해 보세요. 아시아 최남단 지점을 상징하는 흔들 다리를 건너, 인도양과 남중국해가 만나는 경이로운 순간을 직접 경험할 수 있답니다. \n\n하지만 센토사 섬의 매력은 여기서 끝이 아니에요. 유니버설 스튜디오 싱가포르(Universal Studios Singapore)에서는 영화 속 주인공이 되어 짜릿한 롤러코스터를 타고, S.E.A 아쿠아리움(S.E.A Aquarium)에서는 신비로운 해양 생물들을 만나보세요. 메가 어드벤처 파크(Mega Adventure Park)에서 하늘을 나는 듯한 짚라인을 타거나, iFly 싱가포르(iFly Singapore)에서 자유 낙하의 스릴을 만끽하는 것도 잊지 못할 경험이 될 거예요. 밤이 되면, 윙스 오브 타임(Wings of Time) 쇼가 펼쳐집니다. 화려한 불빛과 레이저, 그리고 웅장한 음악이 어우러진 환상적인 쇼는 여러분을 꿈결 같은 세계로 안내할 거예요. 자, 이제 센토사 섬으로 떠날 준비 되셨나요? 여러분의 마음속에 영원히 기억될 특별한 여행이 기다리고 있답니다!",
+    "description": "Island resort with beaches, attractions, and entertainment",
+    "category": "Island Resort",
+    "detailedDescription": "센토사 섬은 단순히 아름다운 휴양지를 넘어, 싱가포르 역사의 중요한 한 페이지를 장식하고 있습니다. 과거 말레이어로 '평화와 고요'를 뜻하는 'Pulau Belakang Mati' (죽음 뒤의 섬)으로 불렸던 이곳은 해적들의 은신처이자, 제2차 세계대전 당시에는 영국군의 요새로 사용되기도 했습니다. 1970년대, 싱가포르 정부는 센토사 섬을 관광지로 개발하기로 결정하고, '평화와 고요'라는 새로운 의미를 담아 센토사(Sentosa)라는 이름으로 재탄생시켰습니다.\n\n현지인들만 아는 센토사 섬 꿀팁 하나 알려드릴까요? 센토사 섬은 대중교통으로도 쉽게 접근할 수 있지만, 케이블카를 이용하면 더욱 특별한 경험을 할 수 있습니다. 싱가포르 본토에서 센토사 섬까지 이어지는 케이블카를 타고, 아름다운 해안선을 감상하며 섬으로 들어가는 것은 정말 잊지 못할 추억이 될 거예요. 특히 해질녘에 케이블카를 타면, 붉게 물든 하늘과 센토사 섬의 야경을 한눈에 담을 수 있답니다. 그리고 센토사 섬 곳곳에는 무료 셔틀 버스가 운행되고 있으니, 편리하게 섬 전체를 둘러볼 수 있다는 사실! 미리 노선도를 확인하고 효율적인 여행 계획을 세워보세요. 마지막으로, 센토사 섬의 숨겨진 명소인 '포트 실로소 스카이워크' (Fort Siloso Skywalk)를 방문해보세요. 울창한 열대 우림 위를 걷는 듯한 짜릿한 경험과 함께, 싱가포르의 아름다운 자연을 만끽할 수 있습니다.",
     "photos": [
-      "/images/landmarks/placeholder.png"
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800",
+      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800"
     ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
+    "historicalInfo": "Once a military fortress, Sentosa was redeveloped as a tourist destination in the 1970s. It has since become Singapore's premier integrated resort island with world-class attractions.",
+    "yearBuilt": "1972",
+    "architect": "Sentosa Development Corporation",
     "translations": {
+      "en": {
+        "name": "Sentosa Island",
+        "narration": "Welcome to Sentosa Island, Singapore's premier island resort destination. This tropical paradise offers beaches, theme parks, attractions, and entertainment for the whole family.",
+        "description": "Island resort with beaches, attractions, and entertainment",
+        "historicalInfo": "Once a military fortress, Sentosa was redeveloped as a tourist destination in the 1970s. It has since become Singapore's premier integrated resort island with world-class attractions.",
+        "yearBuilt": "1972",
+        "architect": "Sentosa Development Corporation"
+      },
+      "it": {
+        "name": "Isola di Sentosa",
+        "narration": "Benvenuto all'Isola di Sentosa, la principale destinazione resort di Singapore. Questo paradiso tropicale offre spiagge, parchi a tema, attrazioni e intrattenimento per tutta la famiglia.",
+        "description": "Resort insulare con spiagge, attrazioni e intrattenimento",
+        "historicalInfo": "Un tempo fortezza militare, Sentosa è stata riconvertita come destinazione turistica negli anni '70. Da allora è diventata la principale isola resort integrata di Singapore con attrazioni di livello mondiale.",
+        "yearBuilt": "1972",
+        "architect": "Sentosa Development Corporation"
+      },
       "ko": {
-        "name": "정식당 서울 (Jungsik Seoul)",
-        "description": "미쉐린 2스타, 전통과 혁신이 빚어낸 뉴 코리안 다이닝의 정점.",
-        "narration": "화려한 강남의 불빛 속에서도 고요하게 빛나는 이곳, 정식당의 문을 열고 들어서는 순간, 모던하고 세련된 공간이 당신을 맞이합니다. 은은한 조명과 절제된 인테리어는 앞으로 펼쳐질 미식의 향연을 예고하는 듯합니다. 자리에 앉자마자, 테이블 위에 놓인 정갈한 식기들이 벌써부터 기대감을 자아냅니다. 잠시 후, 첫 번째 요리가 마치 예술 작품처럼 등장합니다. 눈으로 먼저 맛보는 즐거움이 이런 것일까요? 셰프의 섬세한 손길이 느껴지는 플레이팅은 감탄을 자아냅니다. 코끝을 스치는 은은한 향기, 그리고 한 입 베어 물었을 때 입안 가득 퍼지는 복합적인 맛의 향연은 그 어떤 수식어로도 표현하기 어렵습니다. 예를 들어, 시그니처 메뉴인 '성게 비빔밥'을 맛볼 때면, 고소한 성게알의 풍미와 김 퓨레의 절묘한 조화가 파도처럼 밀려옵니다. 익숙한 비빔밥의 형태는 유지하되, 재료의 신선함과 독창적인 해석이 어우러져 전혀 새로운 미식 경험을 선사하는 것이죠. 옆 테이블에서는 낮은 목소리로 대화하는 소리가 들려오고, 잔이 부딪히는 소리마저도 섬세하게 들리는 이 공간에서, 여러분은 단순한 식사가 아닌, 한국 미식의 미래를 맛보는 특별한 시간을 보내게 될 것입니다. 모든 요리가 끝난 후에도, 그 여운은 오랫동안 기억 속에 남을 것입니다.",
-        "detailedDescription": "서울 강남의 미식 지도를 새롭게 그려낸 정식당은 셰프 임정식의 탁월한 비전이 담긴 미쉐린 2스타 레스토랑입니다. 이곳은 전통 한식의 재료와 맛을 기반으로 하되, 현대적인 서양 조리 기법을 과감하게 접목하여 '뉴 코리안 다이닝'이라는 새로운 장르를 개척했습니다. 단순한 식사를 넘어 하나의 예술 작품을 경험하는 듯한 코스 요리는 시각과 미각, 후각을 동시에 만족시킵니다. 대표 메뉴인 '성게 비빔밥'이나 '구절판'은 낯설면서도 익숙한 맛의 조화를 선사하며, 재료 본연의 맛을 섬세하게 살려낸 셰프의 장인정신을 엿볼 수 있습니다. 절제되면서도 우아한 인테리어와 더불어, 각 요리에 대한 섬세한 설명과 빈틈없는 서비스는 최상의 다이닝 경험을 완성합니다. 한국의 미식 수준을 세계에 알린 정식당에서, 잊을 수 없는 미식의 여정을 떠나보세요. 특별한 기념일이나 소중한 사람과의 추억을 만들기에 더할 나위 없이 완벽한 공간입니다."
+        "name": "센토사 섬",
+        "narration": "싱가포르 최고의 섬 리조트 목적지인 센토사 섬에 오신 것을 환영합니다. 이 열대 낙원은 온 가족을 위한 해변, 테마파크, 명소, 엔터테인먼트를 제공합니다.",
+        "description": "해변, 명소, 엔터테인먼트를 갖춘 섬 리조트",
+        "historicalInfo": "한때 군사 요새였던 센토사는 1970년대에 관광지로 재개발되었습니다. 이후 세계적인 수준의 명소를 갖춘 싱가포르 최고의 통합 리조트 섬이 되었습니다.",
+        "yearBuilt": "1972",
+        "architect": "센토사 개발 공사"
       }
     },
-    "openingHours": "점심 12:00 - 15:00, 저녁 18:00 - 22:00. 매일 운영.",
-    "priceRange": "₩₩₩₩",
-    "cuisine": null,
-    "reservationUrl": "https://www.jungsik.kr/seoul/en/reservation/",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:43:16.739Z",
-    "updatedAt": "2026-02-22T18:06:05.602Z"
-  },
-  {
-    "id": "rome_젤라테리아_델_테아트로_gelateria_del_tea",
-    "cityId": "rome",
-    "name": "젤라테리아 델 테아트로 (Gelateria del Teatro)",
-    "lat": 41.900985,
-    "lng": 12.469076,
-    "radius": 70,
-    "narration": "(경쾌하고 달콤한 배경 음악, 사람들의 즐거운 대화 소리, 젤라또 스쿱으로 뜨는 소리) 햇살 좋은 로마의 오후, 산탄젤로 다리 근처의 매력적인 골목을 걷다 보면, 상쾌하면서도 달콤한 유혹이 여러분을 이끌 것입니다. 바로 로마 최고의 젤라또 장인들이 혼을 불어넣는 '젤라테리아 델 테아트로'입니다. 통유리 너머로 젤라또가 만들어지는 과정을 엿볼 수 있는 이곳은, 마치 작은 요리 연구소 같습니다. 신선한 우유, 제철 과일, 그리고 이탈리아 각지에서 공수한 최상급 견과류가 마법처럼 부드럽고 향긋한 젤라또로 변신하는 모습을 직접 보실 수 있죠. 자, 어떤 맛을 선택하시겠습니까? 진한 다크 초콜릿의 유혹, 아니면 라임과 바질 같은 예측 불가능한 상큼함? 무화과와 호두의 고소함, 혹은 화이트 피치와 세이지의 섬세한 조화까지. (젤라또를 맛보는 소리) 한 스푼 입에 넣는 순간, 차가운 젤라또가 사르르 녹아내리며 재료 본연의 풍미가 입안 가득 퍼집니다. 인공적인 단맛 대신, 자연 그대로의 신선함과 깊이가 느껴지실 겁니다. 이 작고 달콤한 순간이 로마에서의 여러분의 기억을 더욱 황홀하게 만들어 줄 것입니다. 로마의 역사와 예술에 지친 미각을, 이 완벽한 젤라또로 달래보세요.",
-    "description": "로마에서 가장 시적이고 독창적인 수제 젤라또를 맛보는 달콤한 순간.",
-    "category": "Restaurant",
-    "detailedDescription": "자, 여러분! 로마의 젤라또 세계로 뛰어들 시간입니다. 젤라테리아 델 테아트로로 여러분을 안내하게 되어 정말 기쁩니다. 여기가 어떤 곳인지 궁금하시죠? 찬란한 빛 속에서, 과거의 향기와 맛을 느낄 준비가 되셨나요? 자, 이제 시작합니다!\n\n**The Grand Opening**\n\n거리에 발을 디디는 순간, 마치 마법에 걸린 듯한 향기가 여러분을 감싸 안습니다. 부드럽게 퍼지는 신선한 우유와 진한 초콜릿, 그리고 톡 쏘는 과일의 향이 교차하며 코끝을 간질입니다. 눈앞에 펼쳐진 젤라테리아 델 테아트로의 모습은 그야말로 한 편의 예술 작품입니다. 옛 로마의 건축물과 조화롭게 어우러진 이곳에서, 여러분은 수많은 젤라또 맛을 경험할 수 있습니다. 바로 이곳에서, 로마의 역사가 젤라또의 달콤함과 함께 녹아내립니다.\n\n**Deep-Dive History**\n\n이곳은 2005년에 탄생했습니다. 한 낭만적인 젤라또 장인, 스테파노 마르꼬니가 처음 이곳의 문을 열었습니다. 그 당시 로마는 예술과 문화의 르네상스를 맞이하고 있었고, 스테파노는 이곳을 젤라또라는 캔버스 위에 자신의 예술을 펼치기로 결심했습니다. 젤라토를 만들기 위해 최고급 재료를 구하러 세계를 여행했고, 그 결과는 맛을 통해 느낄 수 있습니다. 그 시절 로마의 거리에서는 새로운 예술적 영감이 넘쳐났고, 젤라토는 그 중심에 있었습니다.\n\n이곳에는 스테파노의 젤라또와 함께 한 개인의 드라마틱한 이야기가 숨겨져 있습니다. 카사노바 같은 인물이었던 로마의 젊은 청년 루카가 이곳 젤라또에 반해 그만 사랑에 빠지고 말았습니다. 매일 밤 젤라또 한 스푼을 먹으며, 루카는 자신의 사랑을 고백할 방법을 고민했다고 합니다. 결국 그는 젤라또에 자신의 마음을 담아 그녀에게 고백했고, 이곳은 그들의 사랑의 시작이 되었습니다. 이야기를 들으니, 젤라또의 맛이 더욱 특별하게 다가오지 않나요?\n\n**Architectural Wonders**\n\n젤라테리아 델 테아트로는 그 자체로도 건축적 경이로움을 자랑합니다. 이곳은 과거와 현재가 조화를 이루는 공간으로, 고전적인 로마 건축물의 아름다움을 간직하고 있습니다. 특히, 이곳의 아치형 창문은 로마의 전통과 현대적인 감각이 조화를 이루는 대표적인 예입니다. 젤라또를 즐기며, 그 아래에서 느껴지는 시간의 흐름을 상상해 보세요. \n\n또한, 이곳에는 쉽게 지나칠 수 있는 숨겨진 디테일들이 많습니다. 예를 들어, 작은 문구가 새겨진 벽돌들이 곳곳에 숨어 있습니다. 이는 스테파노가 젤라또를 만들면서 들었던 음악의 가사나, 그가 감명을 받은 시구절들입니다. 이러한 숨겨진 이야기들을 찾아보는 것도 이곳을 방문하는 재미 중 하나입니다.\n\n**The Modern Saga**\n\n시간이 흐르면서 젤라테리아 델 테아트로는 재발견되고 복원되었습니다. 이곳은 단순한 젤라또 가게가 아닌, 로마의 문화와 예술을 상징하는 공간으로 자리매김했습니다. 많은 젊은 예술가들이 이곳에서 영감을 얻어 작품을 완성했고, 때로는 그들이 만든 작품이 이곳에서 전시되기도 했습니다. \n\n또한, 이곳은 영화와 드라마의 촬영지로도 유명합니다. 젤라또 한 입을 먹으며 사랑에 빠지는 주인공의 로맨틱한 장면이 여러 작품에서 이곳을 배경으로 펼쳐졌습니다. 관광객들이 이곳에서 자신만의 영화 속 주인공이 되어 사진을 찍는 모습은 언제나 유쾌한 광경입니다. 젤라또를 한 손에 들고, 영화 속 한 장면처럼 로마의 거리를 활보하는 관광객들을 보며, 여러분도 그런 주인공이 되어 보세요!\n\n**The Philosophical Conclusion**\n\n젤라테리아 델 테아트로는 단순히 젤라또를 파는 가게가 아닙니다. 이곳은 삶의 아름다움과 달콤함을 깨닫게 해주는 철학적인 공간입니다. 젤라또 한 입에 담긴 이야기는 우리가 지나온 과거와 앞으로 나아갈 미래를 연결하는 다리와 같습니다. 이곳에서 느낀 모든 감정과 경험은 결국 우리의 삶을 더욱 풍요롭게 만들어 줍니다.\n\n여러분, 이제 이곳을 떠날 시간이 다가왔습니다. 하지만 젤라테리아 델 테아트로는 여러분의 기억 속에서 언제나 달콤하게 간직될 것입니다. 이곳에서의 순간은 마치 한 편의 시가 되어, 여러분의 마음 속에 영원히 남게 될 것입니다. 자, 이제 여러분도 이 특별한 장소의 일부분이 되셨습니다. 다음에 다시 로마를 찾을 때, 새로운 맛의 젤라또와 함께 여러분을 다시 맞이할 것입니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "젤라테리아 델 테아트로 (Gelateria del Teatro)",
-        "description": "로마에서 가장 시적이고 독창적인 수제 젤라또를 맛보는 달콤한 순간.",
-        "narration": "(경쾌하고 달콤한 배경 음악, 사람들의 즐거운 대화 소리, 젤라또 스쿱으로 뜨는 소리) 햇살 좋은 로마의 오후, 산탄젤로 다리 근처의 매력적인 골목을 걷다 보면, 상쾌하면서도 달콤한 유혹이 여러분을 이끌 것입니다. 바로 로마 최고의 젤라또 장인들이 혼을 불어넣는 '젤라테리아 델 테아트로'입니다. 통유리 너머로 젤라또가 만들어지는 과정을 엿볼 수 있는 이곳은, 마치 작은 요리 연구소 같습니다. 신선한 우유, 제철 과일, 그리고 이탈리아 각지에서 공수한 최상급 견과류가 마법처럼 부드럽고 향긋한 젤라또로 변신하는 모습을 직접 보실 수 있죠. 자, 어떤 맛을 선택하시겠습니까? 진한 다크 초콜릿의 유혹, 아니면 라임과 바질 같은 예측 불가능한 상큼함? 무화과와 호두의 고소함, 혹은 화이트 피치와 세이지의 섬세한 조화까지. (젤라또를 맛보는 소리) 한 스푼 입에 넣는 순간, 차가운 젤라또가 사르르 녹아내리며 재료 본연의 풍미가 입안 가득 퍼집니다. 인공적인 단맛 대신, 자연 그대로의 신선함과 깊이가 느껴지실 겁니다. 이 작고 달콤한 순간이 로마에서의 여러분의 기억을 더욱 황홀하게 만들어 줄 것입니다. 로마의 역사와 예술에 지친 미각을, 이 완벽한 젤라또로 달래보세요.",
-        "detailedDescription": "폰테 산탄젤로 근처, 작은 골목에 숨어있는 '젤라테리아 델 테아트로'는 단순한 젤라또 가게가 아닌, 장인의 정신이 깃든 예술 작품을 맛볼 수 있는 곳입니다. 이곳은 이탈리아 전역에서도 손꼽히는 최고급 젤라또를 선보이며, 신선하고 최상의 재료만을 사용하여 매일 아침 직접 젤라또를 만듭니다. 상큼한 과일 소르베부터 진한 다크 초콜릿, 피스타치오, 헤이즐넛은 물론, 무화과와 호두, 화이트 피치와 세이지 등 상상력을 자극하는 독창적인 조합의 맛으로 미식가들을 사로잡습니다. 인공적인 색소나 향료 없이 재료 본연의 맛을 극대화한 부드러운 젤라또는 한 스푼 뜨는 순간, 로마의 햇살과 자연의 풍미가 입안 가득 퍼지는 경험을 선사할 것입니다. 젤라또를 만드는 과정을 엿볼 수 있는 주방이 통유리로 개방되어 있어, 보는 즐거움까지 더합니다. 로마에서의 달콤하고 완벽한 순간을 위해 이곳을 꼭 방문해 보세요."
-      }
-    },
-    "openingHours": "매일 11:00 - 00:00 (계절별 상이)",
-    "priceRange": "€",
+    "openingHours": null,
+    "priceRange": null,
     "cuisine": null,
     "reservationUrl": null,
     "phoneNumber": null,
@@ -13639,46 +11154,8 @@ export const LANDMARKS: Landmark[] = [
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:36:25.335Z",
-    "updatedAt": "2026-02-22T18:06:05.668Z"
-  },
-  {
-    "id": "tokyo_나리사와_narisawa",
-    "cityId": "tokyo",
-    "name": "나리사와 (Narisawa)",
-    "lat": 35.6644,
-    "lng": 139.7188,
-    "radius": 70,
-    "narration": "(부드러운 식기 부딪히는 소리, 나지막한 대화 소리, 은은한 장작 연기와 신선한 허브 향) 사랑하는 미식가 여러분, 지금 우리는 도쿄의 중심부에서 일본의 영혼, 그리고 자연과의 깊은 대화를 요리하는 '나리사와'에 와 있습니다. 이곳은 단순한 식당이 아닙니다. 요시히로 나리사와 셰프의 손끝에서 탄생하는 '사토야마 퀴진'은 일본의 숲과 바다, 계절의 숨결을 그대로 접시에 옮겨 담습니다. 마치 숲속을 걷다가 마주친 자연의 경이로움을 맛보는 듯한 경험이죠. 테이블로 서빙되는 순간, 모든 접시가 하나의 예술 작품임을 깨닫게 됩니다. 특히, 뜨거운 돌 그릇 안에서 구워지는 '숲의 빵'은 그 자체로 퍼포먼스이자 자연의 온기를 상징합니다. 갓 구운 빵의 고소한 향이 코끝을 스치고, 겉은 바삭하고 속은 촉촉한 식감이 경이롭습니다. 이 빵 한 조각에도 셰프의 철학과 자연에 대한 존경이 담겨 있습니다. 당신의 오감을 깨우고, 일본의 식재료가 가진 본연의 아름다움을 재발견하게 할 나리사와에서의 식사는 단순한 한 끼를 넘어, 잊을 수 없는 미학적 체험이 될 것입니다. 이곳의 요리는 단순히 맛있는 것을 넘어, 우리에게 자연의 소중함과 미식을 통한 사유의 시간을 선물합니다.",
-    "description": "숲의 미학과 자연의 본질을 담아내는 미식 경험, Satoyama 퀴진의 정수",
-    "category": "Restaurant",
-    "detailedDescription": "자, 여러분! 속으로 들어가 봅시다. 두 눈을 감고, 감각을 일깨워 보세요! 우리는 지금 도쿄의 한 가운데, 나리사와에 도착했습니다. 이곳은 단순한 레스토랑이 아닙니다. 이곳은 자연의 경외감을 맛보는 곳입니다! 공기 중에 떠도는 숲의 향, 나무들이 속삭이는 소리가 들리지 않나요? 바로 앞에 보이는 것은 자연과 정교한 예술의 절묘한 조화, Satoyama 퀴진의 정수입니다. 나리사와의 문을 열면 마치 세상의 모든 자연이 여러분을 맞이하는 듯한 느낌이 드실 겁니다. 소리 없는 오케스트라가 시작되듯, 다양한 맛과 향이 여러분의 감각을 사로잡습니다. \n\n이제 나리사와의 탄생 이야기를 들려드리겠습니다. 2003년, 이곳은 요시히로 나리사와라는 혁신적이고 용감한 셰프에 의해 탄생했습니다. 그는 요리에 대한 열정과 자연에 대한 깊은 애정을 갖고 있습니다. 그때는 일본이 경제적, 문화적 부흥기를 맞이하던 시기였죠. 나리사와는 자연의 아름다움을 요리에 담아내고자 했습니다. 그는 일본의 전통적이고 독특한 '산과 들의 요리 문화'를 현대화하여 전 세계에 소개하고자 했습니다. 그의 철학은 단순한 음식이 아닌, 자연 그 자체를 탐구하는 데 있었습니다.\n\n나리사와가 추구하는 요리 철학은 단순히 재료를 조리하는 것을 넘어섭니다. 한 번은 한 농부가 나리사와에게 무언가 특별한 것을 전해주었습니다. 그것은 그의 농장에서 직접 기른 유기농 채소였죠. 농부의 얼굴에 환한 미소가 가득했는데, 그것은 마치 자신의 모든 정성과 사랑이 담긴 작품을 나리사와에게 선물하는 듯했습니다. 나리사와는 그 농부의 열정과 정성을 요리로 승화시켜, 그 채소 하나하나에 생명을 불어넣었습니다. \n\n이제 나리사와의 건축적 기적을 알아봅시다. 이곳은 그저 벽과 천장으로 이루어진 공간이 아닙니다. 자연과 조화를 이루는 특별한 디자인입니다. 나무와 돌, 그리고 금속이 조화를 이룬 공간은 자연의 일부가 되고자 하는 나리사와의 철학을 그대로 반영합니다. 모든 재료는 자연에서 얻은 것들로, 친환경적이고 지속 가능성을 염두에 두고 설계되었습니다. 이곳의 벽과 바닥은 자연광을 최대한 활용할 수 있도록 디자인되어, 낮에는 실내가 마치 숲속에 있는 듯한 느낌을 줍니다.\n\n그리고 나리사와에는 관광객들이 흔히 지나치는 숨겨진 상징들이 숨어 있습니다. 예를 들어, 레스토랑의 입구에는 작은 돌탑이 자리잡고 있습니다. 이 돌탑은 우리에게 자연을 존중하고 그 속에서 배우라는 메시지를 전합니다. 나리사와의 주방은 오픈형으로 설계되어 있어, 손님들은 요리 과정에서의 모든 순간을 경험할 수 있습니다. 요리사들이 자연의 재료를 어떻게 다루는지를 직접 보고 느낄 수 있는 것이죠.\n\n현대에 와서는 나리사와가 전 세계적으로 재발견되고 있습니다. 많은 미식가들이 이곳을 찾아와 Satoyama 퀴진의 진수를 맛보고자 합니다. 나리사와는 그 자체로 문화적 아이콘이 되어, 여러 영화와 다큐멘터리에 등장하게 되었습니다. 또한, 이곳을 방문하는 관광객들 중에는 음식을 찍어 소셜 미디어에 올리는 경우가 많습니다. 그들이 찍은 사진은 단순한 음식 사진이 아닌, 예술 작품처럼 보이기도 합니다.\n\n마지막으로, 나리사와의 철학적 의미를 들려드리겠습니다. 나리사와는 단순한 레스토랑이 아닌, 자연과 인간의 연결을 의미합니다. 우리는 여기서 자연의 순환과 인간의 삶을 직접 경험할 수 있습니다. 나리사와에서의 경험은 단순히 맛있는 음식을 먹는 것을 넘어서, 자연의 본질을 깨닫고 그 속에서 우리의 삶을 되돌아보게 합니다. \n\n이제 여러분과의 마지막 인사를 드릴 시간입니다. 나리사와는 단순한 장소가 아닙니다. 이곳은 자연과 인간이 함께 어우러지는 공간입니다. 여러분이 이곳을 떠날 때, 자연이 우리에게 주는 무한한 아름다움과 우리 삶의 깊이를 느낄 수 있기를 바랍니다. 여러분의 마음속에 나리사와의 풍경이 오래도록 남아, 일상 속에서도 자연의 소중함을 상기할 수 있기를 바랍니다. 안녕히 가세요, 그리고 언제든 자연의 경이로움을 다시 찾아오세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "나리사와 (Narisawa)",
-        "description": "숲의 미학과 자연의 본질을 담아내는 미식 경험, Satoyama 퀴진의 정수",
-        "narration": "(부드러운 식기 부딪히는 소리, 나지막한 대화 소리, 은은한 장작 연기와 신선한 허브 향) 사랑하는 미식가 여러분, 지금 우리는 도쿄의 중심부에서 일본의 영혼, 그리고 자연과의 깊은 대화를 요리하는 '나리사와'에 와 있습니다. 이곳은 단순한 식당이 아닙니다. 요시히로 나리사와 셰프의 손끝에서 탄생하는 '사토야마 퀴진'은 일본의 숲과 바다, 계절의 숨결을 그대로 접시에 옮겨 담습니다. 마치 숲속을 걷다가 마주친 자연의 경이로움을 맛보는 듯한 경험이죠. 테이블로 서빙되는 순간, 모든 접시가 하나의 예술 작품임을 깨닫게 됩니다. 특히, 뜨거운 돌 그릇 안에서 구워지는 '숲의 빵'은 그 자체로 퍼포먼스이자 자연의 온기를 상징합니다. 갓 구운 빵의 고소한 향이 코끝을 스치고, 겉은 바삭하고 속은 촉촉한 식감이 경이롭습니다. 이 빵 한 조각에도 셰프의 철학과 자연에 대한 존경이 담겨 있습니다. 당신의 오감을 깨우고, 일본의 식재료가 가진 본연의 아름다움을 재발견하게 할 나리사와에서의 식사는 단순한 한 끼를 넘어, 잊을 수 없는 미학적 체험이 될 것입니다. 이곳의 요리는 단순히 맛있는 것을 넘어, 우리에게 자연의 소중함과 미식을 통한 사유의 시간을 선물합니다.",
-        "detailedDescription": "나리사와는 단순한 레스토랑이 아닙니다. 자연과 인간의 삶이 조화롭게 공존하는 일본의 '사토야마' 철학을 깊이 탐구하는 심오한 미식의 여정입니다. 지속 가능한 미식의 선구자인 요시히로 나리사와 셰프는 일본의 숲과 바다에서 직접 채취한 제철 식재료에 깊이 뿌리내린 요리를 선보입니다. 각 접시는 시각적으로 놀랍고, 자연의 순수하고 꾸밈없는 맛으로 가득 찬 예술 작품입니다. 이곳에서의 식사는 모든 감각을 사로잡는 몰입형 경험이며, 따뜻한 흙의 생명력을 상징하는 뜨거운 돌 그릇에서 테이블 옆에서 구워지는 '숲의 빵'과 같은 독특한 프레젠테이션을 자랑합니다. 우아하고 미니멀한 분위기는 음식이 단연 돋보이도록 합니다. 일본 미식 정체성에 대한 심오한 탐구이며, 전통을 존중하면서도 한계를 뛰어넘는 요리로, 잊을 수 없는, 사색을 불러일으키는 식사를 찾는 모든 미식가에게 필수적인 방문지입니다. 예약은 매우 어렵기로 악명 높으며, 그만큼 특별함을 더합니다."
-      }
-    },
-    "openingHours": "런치 오후 12시 ~ 오후 1시 (마지막 주문), 디너 오후 6시 30분 ~ 오후 7시 (마지막 주문). 일요일 휴무.",
-    "priceRange": "€€€€€",
-    "cuisine": null,
-    "reservationUrl": "https://www.narisawa-y.co.jp/en/reservation/",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:43:57.049Z",
-    "updatedAt": "2026-02-22T18:06:05.858Z"
+    "createdAt": "2026-02-12T12:11:31.664Z",
+    "updatedAt": "2026-02-22T20:01:00.792Z"
   },
   {
     "id": "tokyo_긴자_",
@@ -13852,44 +11329,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:06.176Z"
   },
   {
-    "id": "london_스케치_sketch_더_렉처_룸_라이브러리_the_le",
-    "cityId": "london",
-    "name": "스케치 (Sketch) - 더 렉처 룸 & 라이브러리 (The Lecture Room & Library)",
-    "lat": 51.5144,
-    "lng": -0.1408,
-    "radius": 70,
-    "narration": "메이페어의 심장부, Sketch의 'The Lecture Room & Library'로 들어서면 시간과 공간을 초월한 듯한 신비로운 분위기에 압도될 것입니다. 벨벳 의자의 부드러움, 은은하게 풍기는 고급스러운 향, 그리고 샹들리에의 황금빛 조명이 만들어내는 아늑하면서도 웅장한 공간은 마치 비밀스러운 살롱에 들어선 듯한 착각을 불러일으킵니다. 저 멀리서는 섬세한 나이프와 포크가 부딪히는 소리, 그리고 손님들의 낮은 웃음소리가 우아한 배경 음악처럼 퍼져 나갑니다. 당신 앞에 놓인 접시는 단순한 음식이 아닙니다. 신선한 제철 재료와 셰프의 창의성이 만나 탄생한 한 폭의 미식 예술 작품입니다. 혀끝에 닿는 캐비어의 톡 쏘는 바다 향, 완벽하게 구워진 비둘기 요리의 깊은 풍미, 그리고 입안에서 부드럽게 녹아내리는 디저트의 달콤함은 오감을 황홀하게 만듭니다. 이 모든 것이 마치 잘 짜여진 교향곡처럼 완벽한 조화를 이룹니다. 이곳은 단순히 식사를 하는 곳이 아니라, 맛과 향, 그리고 예술이 어우러진 잊지 못할 경험을 선사하는 곳입니다. 당신의 미식 경험이 한 차원 더 높아지는 순간을 만끽하세요.",
-    "description": "미식과 예술이 조화된 미슐랭 3스타의 현대적인 미식 경험.",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 스케치(The Sketch) - 더 렉처 룸 & 라이브러리(The Lecture Room & Library)에 오신 것을 환영합니다! 이곳은 단순한 레스토랑이 아닙니다. 이는 감각과 예술의 대폭발이 일어나는 미슐랭 3스타의 무대입니다. 지금 그 문을 열고 들어가 보세요. 먼저 눈을 감고, 상상해 보세요. 눈앞에 펼쳐지는 황금빛 샹들리에가 천장에서 반짝이며, 벽을 가득 채운 예술 작품들이 여러분을 부릅니다. 고요한 클래식 음악이 공간을 가득 채우고, 그 사이를 유영하는 멋진 향기가 코끝을 자극합니다. 갓 구운 빵과 이탈리안 허브의 향기가 어우러져, 마치 식탁 앞에서 세상 모든 맛의 축제가 벌어지는 것 같습니다.\n\n깊은 호흡을 하세요. 이제 이곳의 역사를 탐험해 봅시다. 2003년, 프랑스 출신의 전설적인 요리사 피에르 가냐르(Pierre Gagnaire)가 이 장소의 문을 열었습니다. 그 당시 런던은 유럽 대륙의 미식 혁명의 한복판에 있었죠. 정치적, 경제적 격변 속에서 런던은 문화와 예술, 그리고 미식의 중심지로 자리 잡았습니다. 그 누구도 상상하지 못한 현대적인 요리 기법과 감각적인 디자인이 이곳을 특별하게 만들었습니다.\n\n이제 시간을 조금 더 거슬러 올라가 볼까요? 피에르 가냐르가 이곳을 오픈했을 때의 이야기를 들려드릴게요. 전설에 따르면, 그는 이곳의 매 순간을 예술로 만들기 위해 전심을 쏟았다고 합니다. 오프닝 날, 유명한 비평가들이 모두 모여들었습니다. 그리고 가냐르는 그들에게 놀라운 요리를 선보이며, 이곳을 단숨에 런던 최고의 레스토랑으로 만들어 버렸습니다. 그날 밤, 그는 하얀 셰프 모자를 벗고, 환호하는 군중을 향해 손을 흔들었다고 합니다. 이 감동적인 순간은 영원히 기록으로 남았죠.\n\n자, 그럼 이제 이곳의 건축적 경이로움에 대해 알아봅시다. 이곳은 단순한 식당이 아닙니다. 예술과 기능, 그리고 혁신이 결합된 건축물입니다. 빛의 흐름과 공간의 배치는 마치 오케스트라의 연주처럼 조화를 이루고 있습니다. 이런 조화는 섬세하게 설계된 구조 덕분입니다. 벽마다 숨겨진 조명이 있으며, 천장 모양은 음향 효과를 최적화하도록 설계되었습니다.\n\n그리고 그 숨겨진 디테일들을 눈여겨보세요. 벽에 걸린 그림들 중 일부는 특별한 역사적 사건과 연결된 상징을 품고 있습니다. 예를 들어 한 쌍의 포도송이가 그려진 그림은 프랑스 혁명을 상징한다고 하는데, 전통과 혁신의 조화로움을 나타냅니다. 이런 것들은 일반 관광객들이 쉽게 놓치는 부분이니, 여러분께서만 알고 계시길 바랍니다.\n\n현대에 들어와, 이곳은 새로운 방식으로 재발견되었습니다. 과거의 영광을 되찾고자 하는 열망 속에서, 여러 명의 예술가들과 셰프들이 협업하여 이 공간을 재창조했습니다. 이곳은 이제 다시 현대미술과 미식의 중심지로 자리매김하며, 전 세계에서 찾아오는 미식가들을 맞이하고 있습니다. 그리고 이곳은 다양한 영화와 드라마의 배경지가 되어, 수많은 스토리를 담고 있습니다. 영화를 보며 이곳을 알아본 관객들이, 카메라를 들고 그 장면을 재현하곤 합니다.\n\n그리고 마지막으로, 이곳이 인류 역사에서 갖는 의미에 대해 생각해봅시다. 스케치는 단순한 식당 이상의 존재로서, 인간의 창의성과 예술, 그리고 맛의 추구가 결합된 장소입니다. 이곳에서 우리는 미식이라는 예술이 어떻게 발전해왔는지를 느낄 수 있습니다. 이는 우리가 끊임없이 새로운 것을 탐구하고 창조하는 인간의 본질을 상기시켜줍니다.\n\n이제 이곳을 떠나기 전, 마지막으로 감성을 가득 담아 여러분께 작별 인사를 드립니다. 여러분이 이곳에서 느낀 감동과 경험이 삶의 한 부분이 되길 바랍니다. 그리고 언제든지 여러분을 다시 맞이할 준비가 되어 있으니, 이곳에서의 아름다운 기억을 가슴에 품고 돌아가길 바랍니다. 감사합니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "스케치 (Sketch) - 더 렉처 룸 & 라이브러리 (The Lecture Room & Library)",
-        "description": "미식과 예술이 조화된 미슐랭 3스타의 현대적인 미식 경험.",
-        "narration": "메이페어의 심장부, Sketch의 'The Lecture Room & Library'로 들어서면 시간과 공간을 초월한 듯한 신비로운 분위기에 압도될 것입니다. 벨벳 의자의 부드러움, 은은하게 풍기는 고급스러운 향, 그리고 샹들리에의 황금빛 조명이 만들어내는 아늑하면서도 웅장한 공간은 마치 비밀스러운 살롱에 들어선 듯한 착각을 불러일으킵니다. 저 멀리서는 섬세한 나이프와 포크가 부딪히는 소리, 그리고 손님들의 낮은 웃음소리가 우아한 배경 음악처럼 퍼져 나갑니다. 당신 앞에 놓인 접시는 단순한 음식이 아닙니다. 신선한 제철 재료와 셰프의 창의성이 만나 탄생한 한 폭의 미식 예술 작품입니다. 혀끝에 닿는 캐비어의 톡 쏘는 바다 향, 완벽하게 구워진 비둘기 요리의 깊은 풍미, 그리고 입안에서 부드럽게 녹아내리는 디저트의 달콤함은 오감을 황홀하게 만듭니다. 이 모든 것이 마치 잘 짜여진 교향곡처럼 완벽한 조화를 이룹니다. 이곳은 단순히 식사를 하는 곳이 아니라, 맛과 향, 그리고 예술이 어우러진 잊지 못할 경험을 선사하는 곳입니다. 당신의 미식 경험이 한 차원 더 높아지는 순간을 만끽하세요.",
-        "detailedDescription": "메이페어에 위치한 Sketch는 단순한 레스토랑이 아닌, 다감각적인 예술 작품 그 자체입니다. 특히 미슐랭 3스타를 받은 'The Lecture Room & Library'는 데이비드 쉬나(David Shna) 셰프의 지휘 아래 현대적인 프랑스 요리의 정수를 선보이며, 영국 최고의 파인 다이닝 경험 중 하나로 손꼽힙니다. 웅장하고 우아한 인테리어는 마치 18세기 귀족의 서재에 초대받은 듯한 느낌을 주며, 섬세한 식기류와 최고급 서비스는 식사의 품격을 한층 높여줍니다. 각 요리는 예술 작품처럼 플레이팅되어 시각적인 즐거움까지 선사하며, 엄선된 와인 페어링은 미식 경험을 완벽하게 마무리합니다. 단순히 배를 채우는 것을 넘어, 미각과 시각, 후각 등 모든 감각을 만족시키는 잊지 못할 여정을 선사할 것입니다. 이곳은 특별한 기념일이나 런던에서의 잊을 수 없는 밤을 위한 완벽한 선택입니다. 방문 전 예약은 필수입니다."
-      }
-    },
-    "openingHours": "화-토 12:00 - 14:30 (런치), 18:30 - 21:30 (디너)",
-    "priceRange": "€€€€",
-    "cuisine": null,
-    "reservationUrl": "https://sketch.london/bookings/",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:44:31.595Z",
-    "updatedAt": "2026-02-22T18:06:05.988Z"
-  },
-  {
     "id": "pinang-peranakan-mansion",
     "cityId": "penang",
     "name": "Pinang Peranakan Mansion",
@@ -13950,44 +11389,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T12:11:32.378Z",
     "updatedAt": "2026-02-22T18:31:40.384Z"
-  },
-  {
-    "id": "rome_아르만도_알_판테온_armando_al_pantheon",
-    "cityId": "rome",
-    "name": "아르만도 알 판테온 (Armando al Pantheon)",
-    "lat": 41.8993,
-    "lng": 12.4764,
-    "radius": 70,
-    "narration": "지금 당신은 로마의 고동치는 심장부, 판테온 옆 작은 골목에 위치한 '아르만도 알 판테온' 문 앞에 서 있습니다. 안으로 들어서면, 고소한 올리브 오일과 잘 익은 토마토 소스, 그리고 신선한 허브 향이 코끝을 간지럽히며 식욕을 돋웁니다. 아늑하고 소박한 인테리어는 마치 로마 친구의 집에 초대받은 듯한 편안함을 선사합니다. 테이블에서는 접시 부딪히는 소리, 포크가 파스타를 돌돌 마는 소리, 그리고 유쾌한 이탈리아어 대화가 작은 소음의 교향곡을 이룹니다. 이곳의 시그니처 메뉴인 '까르보나라'를 한 입 맛보면, 꾸덕한 노른자와 바삭한 관찰레, 페코리노 치즈의 완벽한 조화가 미뢰를 자극하며 진정한 로마의 맛을 선사합니다. 마치 시간이 멈춘 듯, 모든 것이 제자리를 찾은 안정감이 느껴집니다. 벽에 걸린 낡은 사진들은 이곳의 오랜 역사와 가족의 스토리를 말해주며, 단순한 식사가 아닌, 로마의 문화와 전통을 오감으로 체험하는 귀한 순간임을 깨닫게 합니다. 마지막 한 입까지, 이탈리아 식사의 진정한 즐거움을 만끽해 보세요.",
-    "description": "판테온 옆, 정통 로마 요리의 진수를 맛볼 수 있는 미식의 성지",
-    "category": "Restaurant",
-    "detailedDescription": "여러분, 로마에 온 것을 환영합니다! 지금부터 여러분을 미식과 역사의 향연이 펼쳐지는 특별한 장소로 안내할 텐데요. 바로 판테온 옆에 자리한 아르만도 알 판테온입니다! 눈을 감고 이곳의 공기를 들이마셔 보세요. 갓 구운 빵과 올리브 오일의 향, 그리고 짭조름하게 구워진 로마식 요리의 풍미가 코끝을 간지럽히죠. 이곳은 단순한 레스토랑이 아닌, 미각의 판테온이라 불릴 만한 곳입니다. 앞을 보세요. 고풍스러운 벽돌 건물 사이로 쏟아지는 로마의 햇살이 이곳을 비추며, 이곳에서 펼쳐질 이야기를 시작하는 듯합니다.\n\n이제 여러분을 시간 여행자로 만들어 줄 흥미진진한 이야기가 기다리고 있습니다. 아르만도 알 판테온은 어느 날 갑자기 하늘에서 떨어진 것이 아닙니다! 1870년대, 이탈리아가 통일을 이루며 로마는 새로운 수도로 자리잡게 되었습니다. 이 시기에 판테온 주변은 로마의 역사와 혁명이 얽힌 복잡한 정치적 중심지가 되었죠. 아르만도 알 판테온은 19세기 말에 이탈리아의 부흥과 함께 문을 열었습니다. 그 당시의 로마는 새로운 시대의 태동을 알리며, 음식 문화 또한 새로운 국면을 맞이했습니다. 이곳은 정치인과 예술가, 그리고 혁명가들이 자주 찾던 장소로, 식탁 위에서 많은 역사적 논의가 이루어졌습니다.\n\n여러분, 이제 한 인간 드라마에 귀를 기울여 보세요. 1900년대 초, 이곳을 방문한 한 젊은 시인은 자신의 시를 친구들에게 낭독하며 로마의 밤을 불태웠습니다. 그는 바로 젊은 필리포 마리네티였습니다. 그는 미래파 운동의 선구자로, 이곳에서 그가 펼친 혁신적 사고와 예술적 열정은 그야말로 폭발적이었죠. 로마의 전통 요리와 함께 그의 불같은 열망은 이곳에 또 다른 숨결을 불어넣었습니다. 여러분, 상상해보세요. 이곳에서 나눈 대화가 오늘날까지도 많은 사람들에게 영감을 주고 있다는 것을!\n\n다음은 건축의 경이로움에 대해 알아볼 차례입니다. \"어떻게 이런 멋진 건축물이 가능했을까요?\" 여러분, 로마의 엔지니어들은 과거에도 천재적이었습니다. 이 건물은 튼튼한 화산재와 석회암을 섞어 만든 천장 아래에 자리 잡고 있습니다. 놀랍지 않습니까? 이 곳의 벽돌들은 마치 시간이 멈춘 듯, 당시의 기술력과 장인 정신을 그대로 보여줍니다. 그리고 그 속에 숨겨진 비밀스러운 상징들이 있습니다. 벽의 장식들 속에 숨겨진 고대 로마의 신화와 상징들이 여러분에게 말을 걸어옵니다. 사람들은 무엇을 놓치고 있는지 모를 때가 많죠, 그렇죠?\n\n이제 현대의 이야기를 들어볼 시간입니다. \"이곳은 다시 어떻게 꽃피웠을까요?\" 20세기에 들어서면서, 아르만도 알 판테온은 도시의 재건과 함께 다시 주목받기 시작했습니다. 보수와 복원이 이루어졌고, 과거의 영광을 되찾았죠. 이곳은 특별한 이벤트, 영화 촬영지로도 유명해지기 시작했습니다. 영화 '로마의 휴일'이 이곳에서 촬영된 이야기는 유명합니다. 오드리 헵번이 이곳에서 스파게티를 즐기는 장면은 지금까지도 많은 이들의 기억 속에 남아있죠. 그리고 오늘날, 전 세계의 관광객들이 이곳을 찾으며 셀카를 찍고, SNS에 올리느라 분주합니다. 정말 웃기지 않나요? 어떤 관광객은 로마에 와서도 피자만 찾는다니까요!\n\n자, 이제 이곳의 철학적 의미를 생각해 볼까요? 아르만도 알 판테온은 단순히 음식을 제공하는 장소가 아닙니다. 이곳은 로마의 역사와 문화, 그리고 인간의 삶을 이해하는 데 중요한 단서를 제공합니다. 이곳에서 맛보는 한 접시의 요리는 로마의 영혼을 담고 있으며, 과거와 현재가 조화를 이루는 장입니다. 여러분이 여기서 느끼는 감동은 단순한 맛 이상의 것이죠.\n\n마지막으로, 여러분에게 감동적인 작별 인사를 남기고 싶습니다. 여러분, 이곳에서의 경험이 여러분의 마음 속에 오래 남기를 바랍니다. 로마의 역사와 함께한 이 특별한 시간을 통해, 여러분은 진정한 의미의 여행을 경험하셨습니다. 이제 여러분의 삶 속에서 새로운 장을 열며, 이곳의 이야기를 마음속에 간직하길 바랍니다. 고맙습니다, 그리고 다시 만날 날을 기대합니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "아르만도 알 판테온 (Armando al Pantheon)",
-        "description": "판테온 옆, 정통 로마 요리의 진수를 맛볼 수 있는 미식의 성지",
-        "narration": "지금 당신은 로마의 고동치는 심장부, 판테온 옆 작은 골목에 위치한 '아르만도 알 판테온' 문 앞에 서 있습니다. 안으로 들어서면, 고소한 올리브 오일과 잘 익은 토마토 소스, 그리고 신선한 허브 향이 코끝을 간지럽히며 식욕을 돋웁니다. 아늑하고 소박한 인테리어는 마치 로마 친구의 집에 초대받은 듯한 편안함을 선사합니다. 테이블에서는 접시 부딪히는 소리, 포크가 파스타를 돌돌 마는 소리, 그리고 유쾌한 이탈리아어 대화가 작은 소음의 교향곡을 이룹니다. 이곳의 시그니처 메뉴인 '까르보나라'를 한 입 맛보면, 꾸덕한 노른자와 바삭한 관찰레, 페코리노 치즈의 완벽한 조화가 미뢰를 자극하며 진정한 로마의 맛을 선사합니다. 마치 시간이 멈춘 듯, 모든 것이 제자리를 찾은 안정감이 느껴집니다. 벽에 걸린 낡은 사진들은 이곳의 오랜 역사와 가족의 스토리를 말해주며, 단순한 식사가 아닌, 로마의 문화와 전통을 오감으로 체험하는 귀한 순간임을 깨닫게 합니다. 마지막 한 입까지, 이탈리아 식사의 진정한 즐거움을 만끽해 보세요.",
-        "detailedDescription": "판테온 바로 옆에 자리한 '아르만도 알 판테온'은 1961년부터 3대째 이어져 내려오는 로마 미식의 자부심입니다. 화려한 장식이나 현대적인 감각은 없지만, 이곳의 모든 요리에는 로마 전통에 대한 깊은 존중과 장인정신이 담겨 있습니다. 메뉴는 로마의 사계절에 따라 신선한 제철 재료로 바뀌며, 까르보나라, 아마뜨리차나, 까치오 에 페페와 같은 고전 로마 파스타는 물론, 옥스테일 스튜인 '꼬다 알라 바치나라(Coda alla Vaccinara)'와 같은 특별한 요리도 맛볼 수 있습니다. 좁은 공간이지만, 테이블마다 오가는 정겨운 대화와 웨이터들의 능숙하고 친근한 서비스는 이곳을 단순한 식당이 아닌, 로마의 살아있는 역사를 경험하는 장소로 만듭니다. 예약은 필수이며, 특히 저녁 식사를 원한다면 몇 주 전에 미리 예약하는 것이 좋습니다. 진정한 로마의 맛을 추구하는 미식가들에게는 더할 나위 없는 선택이 될 것입니다."
-      }
-    },
-    "openingHours": "월-토 12:30–14:45, 19:00–22:45 (일요일 휴무)",
-    "priceRange": "€€€",
-    "cuisine": null,
-    "reservationUrl": "https://www.armandoalpantheon.it/en/booking/",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:45:15.051Z",
-    "updatedAt": "2026-02-22T18:06:06.423Z"
   },
   {
     "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_이른_아침_투어",
@@ -14416,82 +11817,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:32:48.283Z"
   },
   {
-    "id": "new-york_le_bernardin",
-    "cityId": "new-york",
-    "name": "Le Bernardin",
-    "lat": 40.7615,
-    "lng": -73.9806,
-    "radius": 70,
-    "narration": "상상해보세요. 여러분은 지금 뉴욕 맨해튼의 심장부에 위치한, 미식의 성전이라 불리는 르 베르나르댕 앞에 서 있습니다. 문을 열고 들어서는 순간, 마치 깊고 푸른 바닷속으로 빨려 들어가는 듯한 고요함과 우아함이 여러분을 감싸 안을 거예요. 은은하게 울려 퍼지는 대화 소리, 섬세한 크리스탈 잔이 부딪히는 청아한 소리가 마치 아름다운 교향곡의 서곡처럼 귓가를 간지럽힙니다. 눈을 감고 숨을 깊게 들이쉬면, 신선한 해산물의 향긋한 내음이 코끝을 스치며 미각을 자극하죠. 자, 이제 테이블에 앉아 에릭 리퍼트 셰프의 손끝에서 탄생한 예술 작품들을 감상할 시간입니다. 윤기가 흐르는 신선한 참치 타르타르는 마치 보석처럼 빛나고, 입안에서 사르르 녹아내리는 농어 요리는 섬세한 풍미로 여러분의 미각을 황홀하게 만들 거예요. 랍스터 비스크를 한 모금 마시는 순간, 따뜻한 바다의 품에 안기는 듯한 포근함을 느낄 수 있습니다. 르 베르나르댕에서의 식사는 단순한 만찬이 아닌, 셰프의 열정과 철학, 그리고 뉴욕의 바다를 담은 한 편의 감동적인 드라마와 같아요. 여러분의 모든 감각을 깨우고, 오랫동안 잊지 못할 특별한 추억을 선사할 겁니다. 지금, 르 베르나르댕에서 미식의 정점을 경험해보세요!",
-    "description": "바다의 정수를 요리하는 뉴욕 최고의 미쉐린 3스타 해산물 명가.",
-    "category": "Restaurant",
-    "detailedDescription": "르 베르나르댕은 1986년 뉴욕에 문을 연 이후, 30년 넘게 뉴욕 미식계의 최정상을 지켜온 전설적인 해산물 레스토랑입니다. 프랑스에서 시작된 르 베르나르댕은 뉴욕으로 건너오면서 에릭 리퍼트 셰프의 지휘 아래 더욱 혁신적이고 세련된 해산물 요리를 선보여왔습니다. 르 베르나르댕의 성공 비결은 단순히 신선한 재료를 사용하는 것을 넘어, 해산물 본연의 맛을 극대화하는 섬세한 조리법과 창의적인 플레이팅에 있습니다. 리퍼트 셰프는 각 재료의 특성을 완벽하게 이해하고, 이를 바탕으로 최고의 맛을 이끌어내는 데 집중합니다. 르 베르나르댕의 또 다른 매력은 바로 완벽한 서비스입니다. 숙련된 직원들은 고객 한 명 한 명에게 최고의 서비스를 제공하기 위해 노력하며, 편안하고 고급스러운 분위기 속에서 식사를 즐길 수 있도록 세심하게 배려합니다. 현지인들 사이에서는 '특별한 날'을 기념하기 위한 최고의 장소로 손꼽히며, 예약 없이는 방문이 거의 불가능할 정도입니다. 르 베르나르댕에 방문한다면, 드레스 코드를 반드시 확인하고 예약은 필수입니다. 팁을 하나 드리자면, 런치 코스는 디너보다 가격이 저렴하면서도 르 베르나르댕의 훌륭한 요리를 경험할 수 있는 좋은 기회입니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "Le Bernardin",
-        "description": "바다의 정수를 요리하는 뉴욕 최고의 미쉐린 3스타 해산물 명가.",
-        "narration": "자, 이곳은 뉴욕의 미식 심장부, 르 베르나르댕입니다. 문을 들어서는 순간, 바다 깊은 곳의 고요함과 우아함이 공기를 가득 채우는 듯합니다. 나지막이 들려오는 은은한 대화 소리, 섬세한 식기들이 부딪히는 소리가 조화롭게 어우러져 마치 오케스트라의 잔잔한 서곡처럼 느껴집니다. 에릭 리퍼트 셰프의 마법 같은 손길로 탄생한 해산물 요리들이 테이블에 놓일 때마다, 코끝을 스치는 섬세한 바다의 향기는 그 어떤 향수보다도 매혹적입니다. 예를 들어, 살짝 그을린 랍스터는 그 자체로 하나의 조각품 같고, 한 입 베어 물면 바다의 신선함이 입안 가득 터져 나오죠. 모든 요리 하나하나에 담긴 셰프의 철학과 열정, 그리고 미학이 고스란히 느껴집니다. 이곳에서의 식사는 단순히 배를 채우는 행위를 넘어, 미각과 시각, 그리고 마음을 풍요롭게 하는 잊을 수 없는 감각적인 여행이 될 것입니다.",
-        "detailedDescription": "에릭 리퍼트 셰프가 이끄는 르 베르나르댕은 단순히 고급스러운 해산물 요리를 넘어, 미식 예술의 경지를 보여주는 뉴욕의 상징적인 미쉐린 3스타 레스토랑입니다. '거의 날 것', '살짝만 건드린', '가볍게 익힌'이라는 세 가지 조리 철학 아래, 가장 신선한 해산물이 가진 본연의 맛과 질감을 극대화합니다. 세련되고 우아한 다이닝 공간은 마치 심해를 연상시키는 블루 톤으로 꾸며져 있으며, 캔버스 위의 한 폭 그림처럼 섬세하게 플레이팅 된 요리들은 맛뿐만 아니라 시각적인 즐거움까지 선사합니다. 와인 페어링은 소믈리에의 완벽한 추천으로 요리의 풍미를 한층 더 끌어올리며, 모든 서비스는 마치 물 흐르듯 자연스럽고 품격 있습니다. 뉴욕에서 잊을 수 없는 미식 경험을 원한다면, 이곳에서의 저녁 식사는 단순한 식사를 넘어 평생 기억될 예술적인 순간이 될 것입니다. 특별한 기념일이나 비즈니스 미팅에도 완벽한 선택입니다."
-      }
-    },
-    "openingHours": "점심: 월-금 12:00-14:30 / 저녁: 월-목 17:30-22:30, 금-토 17:15-23:00 (일요일 휴무)",
-    "priceRange": "$$$$",
-    "cuisine": null,
-    "reservationUrl": "https://www.le-bernardin.com/reservations",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:56:27.722Z",
-    "updatedAt": "2026-02-22T18:32:27.906Z"
-  },
-  {
-    "id": "jeju_밀본_제주_milbon_jeju",
-    "cityId": "jeju",
-    "name": "밀본 제주 (Milbon Jeju)",
-    "lat": 33.4862,
-    "lng": 126.5009,
-    "radius": 70,
-    "narration": "상상해보세요. 여러분은 지금, 제주의 밤하늘 아래 숨겨진 보석 같은 공간, '밀본 제주'의 문턱을 넘어서고 있습니다. 은은하게 감도는 따뜻한 조명이 여러분을 맞이하고, 코끝을 간지럽히는 향긋한 제철 식재료의 향기가 기대감을 높입니다. 잔잔하게 흐르는 클래식 선율은 마치 제주의 속삭임처럼 느껴지네요. 테이블 위에는 제주의 현무암을 닮은 그릇들이 정갈하게 놓여 있고, 그 위에는 셰프의 예술혼이 담긴 요리들이 눈부시게 빛나고 있습니다. 지금 여러분의 눈앞에는 갓 잡아 올린 싱싱한 은갈치가 섬세한 칼솜씨로 다듬어져 마치 살아있는 듯 꿈틀거리는 모습으로 놓여 있습니다. 한라산 흑돼지는 오랜 시간 정성스럽게 조리되어 윤기가 자르르 흐르고, 입안에 넣는 순간 사르르 녹아내리는 황홀경을 선사합니다. 숟가락과 포크가 부딪히는 소리, 옆 테이블의 소곤거리는 대화 소리마저도 아름다운 배경음악처럼 느껴지는 이곳. 밀본 제주는 단순한 식당이 아닌, 제주의 자연과 문화, 그리고 셰프의 열정이 어우러진 하나의 예술 작품입니다. 잠시 눈을 감고, 제주의 바람 소리를 느껴보세요. 그리고 밀본 제주가 선사하는 맛과 향의 향연 속으로 빠져들어 보세요. 이곳에서의 시간은 여러분의 오감을 깨우고, 오랫동안 잊지 못할 특별한 추억으로 남을 것입니다. 지금, 당신의 미각은 제주도의 푸른 바다와 웅장한 한라산을 여행하고 있습니다.",
-    "description": "제주의 자연을 담아낸 미식의 정점, 품격 있는 현대 한식 다이닝의 진수.",
-    "category": "Restaurant",
-    "detailedDescription": "밀본 제주는 단순히 맛있는 음식을 제공하는 레스토랑을 넘어, 제주의 자연과 문화를 경험할 수 있는 특별한 공간입니다. 이곳은 제주의 신선한 제철 식재료를 사용하여, 셰프의 창의적인 해석과 정성이 담긴 요리를 선보입니다. 예를 들어, 밀본 제주에서는 흔히 볼 수 있는 갈치 요리도 특별합니다. 갓 잡아 올린 갈치를 숙성시켜 풍미를 극대화하고, 제주 특유의 향신료와 조리법을 사용하여 잊을 수 없는 맛을 선사합니다. 현지인들 사이에서는 '갈치회'를 꼭 맛봐야 할 메뉴로 손꼽습니다. 또한, 밀본 제주에서는 제주의 전통 술과 음료도 맛볼 수 있습니다. 제주의 맑은 물로 빚은 전통주는 음식의 풍미를 더욱 깊게 해주고, 제주의 특산물을 활용한 음료는 입안을 상쾌하게 마무리해줍니다. 숨겨진 비화 하나를 알려드리자면, 밀본 제주의 셰프는 매일 아침 직접 제주의 시장을 방문하여 가장 신선하고 품질 좋은 식재료를 엄선한다고 합니다. 그의 열정과 노력 덕분에 밀본 제주는 항상 최고의 맛과 서비스를 제공할 수 있는 것이죠. 밀본 제주에서 제주의 맛과 향, 그리고 문화를 느껴보세요.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "밀본 제주 (Milbon Jeju)",
-        "description": "제주의 자연을 담아낸 미식의 정점, 품격 있는 현대 한식 다이닝의 진수.",
-        "narration": "신사 숙녀 여러분, 지금 우리는 제주의 미식 예술이 꽃피는 '밀본 제주'에 도착했습니다. 문을 열고 들어서는 순간, 은은하게 퍼지는 제철 식재료의 향긋함과 잔잔한 클래식 음악이 여러분을 부드럽게 감쌉니다. 테이블 위에는 제주의 현무암을 연상시키는 정갈한 그릇들이 놓여 있고, 통유리 너머로는 제주의 밤 풍경이 은은하게 펼쳐집니다. 이곳의 모든 요리는 셰프의 장인정신과 제주의 자연이 만나 탄생한 걸작입니다. 갓 잡은 제주의 은갈치가 화려하게 변신하고, 한라산 흑돼지가 예술적인 한 점의 그림으로 승화됩니다. 한입 베어 물 때마다 입안 가득 퍼지는 섬세한 맛의 향연은 여러분의 미각을 깨우고, 제주의 풍부한 이야기가 혀끝에서 펼쳐지는 듯합니다. 식기가 부딪히는 소리와 낮은 대화 소리만이 공간을 채우며, 여러분은 이곳에서 단순한 식사를 넘어, 제주의 문화와 역사를 맛보는 특별한 경험을 하게 될 것입니다.",
-        "detailedDescription": "제주 시내에 위치한 '밀본 제주'는 제주의 청정 자연이 빚어낸 최상급 식재료를 바탕으로 현대적인 감각과 전통 한식의 깊이를 조화시킨 파인 다이닝 레스토랑입니다. 이곳의 셰프는 제주 해안에서 갓 잡은 싱싱한 해산물부터 한라산 자락에서 자란 제철 나물, 흑돼지 등 제주의 식탁을 풍요롭게 하는 모든 요소를 세심하게 엄선합니다. 각 요리는 단순한 식사가 아닌 하나의 예술 작품처럼 정교한 플레이팅과 섬세한 맛의 조화로 오감을 만족시킵니다. 고급스러운 인테리어와 제주의 풍경이 어우러진 차분한 분위기는 특별한 날의 만찬이나 소중한 사람들과의 시간에 더할 나위 없는 경험을 선사합니다. 제주의 맛과 멋을 동시에 경험하며 잊지 못할 미식의 추억을 만들어보세요. 제철 식재료에 따라 메뉴가 달라지므로 사전 예약 시 문의하는 것이 좋습니다."
-      }
-    },
-    "openingHours": "런치 12:00 - 15:00, 디너 18:00 - 22:00 (월요일 휴무)",
-    "priceRange": "€€€€",
-    "cuisine": null,
-    "reservationUrl": "https://www.milbonjeju.com/reservations",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:52:26.859Z",
-    "updatedAt": "2026-02-22T18:32:57.758Z"
-  },
-  {
     "id": "chinatown-night-market-kl",
     "cityId": "kuala-lumpur",
     "name": "Chinatown Night Market Walk",
@@ -14590,6 +11915,126 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-13T13:56:27.787Z",
     "updatedAt": "2026-02-22T18:33:17.718Z"
+  },
+  {
+    "id": "british_museum",
+    "cityId": "london",
+    "name": "British Museum",
+    "lat": 51.519413,
+    "lng": -0.126957,
+    "radius": 70,
+    "narration": "자, 여러분, 상상해보세요. 지금 여러분은 런던의 심장, 대영박물관 앞에 서 있습니다. 웅장한 신고전주의 양식의 건물은 마치 시간의 문과 같아요. 문을 열고 들어서는 순간, 200만 년이라는 인류 역사의 숨결이 여러분을 감쌀 겁니다. 발 아래 깔린 대리석 바닥은 수많은 발자국 소리를 기억하고 있겠죠. 귓가에는 아이들의 호기심 가득한 질문과 웅성거리는 대화 소리가 섞여 들려옵니다. 코끝으로는 오래된 책과 돌 조각의 냄새가 느껴지네요. \n\n지금 여러분 눈앞에는 로제타 스톤이 빛나고 있을 겁니다. 고대 이집트 상형 문자의 비밀을 풀어낸 열쇠, 그 역사적인 순간을 상상해보세요. 이 돌 하나가 얼마나 많은 이야기를 품고 있는지! 다음 전시실로 발길을 옮기면, 파르테논 신전의 조각들이 웅장한 자태를 뽐내고 있습니다. 그리스 신화 속 영웅들의 이야기가 마치 살아있는 듯 느껴지지 않나요? \n\n잠시 눈을 감고, 고대 이집트의 왕좌에 앉아 있다고 상상해보세요. 혹은 로마 제국의 위대한 장군이 되어 개선문을 통과하는 모습을 떠올려보는 건 어때요? 대영박물관은 단순한 박물관이 아니라, 시간을 거슬러 올라가는 마법 같은 공간입니다. 이곳에서 여러분은 역사의 주인공이 될 수 있습니다. 자, 이제 여러분만의 특별한 시간 여행을 시작해볼까요?",
+    "description": "World-renowned museum of human history and culture",
+    "category": "Museum",
+    "detailedDescription": "대영박물관은 1753년 개관 이후, 전 세계의 역사와 문화를 아우르는 800만 점 이상의 방대한 유물을 소장하고 있습니다. 단순히 유물을 전시하는 공간을 넘어, 인류의 진화와 문명의 발전을 보여주는 살아있는 역사책이라고 할 수 있죠. 박물관의 하이라이트는 단연 로제타 스톤입니다. 이집트 상형 문자 해독의 결정적인 단서가 된 이 비석은 매년 수백만 명의 방문객을 끌어모으고 있습니다. 뿐만 아니라, 파르테논 신전 조각군, 이집트 미라, 메소포타미아 유물 등 세계적으로 중요한 유물들이 즐비합니다. \n\n**현지인 꿀팁**: 대영박물관은 상설 전시가 무료라는 사실, 알고 계셨나요? 하지만 특별 전시의 경우 티켓을 구매해야 합니다. 붐비는 시간을 피하고 싶다면, 아침 일찍 방문하거나 금요일 저녁에 '나이트 앳 더 뮤지엄' 행사를 이용해보세요. **숨겨진 비화**: 대영박물관은 과거 대영제국의 식민지 시대에 수집된 유물들이 많아, 약탈 문화재 논란이 끊이지 않고 있습니다. 이러한 논쟁을 염두에 두고 유물을 관람하면 더욱 깊이 있는 경험을 할 수 있을 겁니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800",
+      "https://images.unsplash.com/photo-1575223970966-76ae61ee7838?w=800",
+      "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800"
+    ],
+    "historicalInfo": "The British Museum was founded in 1753 and was the world's first national public museum. It opened to visitors in 1759 and has since become one of the most visited museums globally.",
+    "yearBuilt": "1753 (current building: 1823-1852)",
+    "architect": "Sir Robert Smirke (main building), Norman Foster (Great Court roof)",
+    "translations": {
+      "en": {
+        "name": "British Museum",
+        "narration": "Welcome to the British Museum, one of the world's greatest museums of human history and culture. It houses over 8 million works spanning two million years.",
+        "description": "World-renowned museum of human history and culture",
+        "historicalInfo": "The British Museum was founded in 1753 and was the world's first national public museum.",
+        "yearBuilt": "1753 (current building: 1823-1852)",
+        "architect": "Sir Robert Smirke (main building), Norman Foster (Great Court roof)"
+      },
+      "it": {
+        "name": "British Museum",
+        "narration": "Benvenuti al British Museum, uno dei più grandi musei di storia e cultura dell'umanità al mondo. Ospita oltre 8 milioni di opere che coprono due milioni di anni.",
+        "description": "Museo di fama mondiale di storia e cultura umana",
+        "historicalInfo": "Il British Museum fu fondato nel 1753 e fu il primo museo pubblico nazionale al mondo.",
+        "yearBuilt": "1753 (edificio attuale: 1823-1852)",
+        "architect": "Sir Robert Smirke (edificio principale), Norman Foster (tetto Great Court)"
+      },
+      "ko": {
+        "name": "대영박물관",
+        "narration": "인류 역사와 문화의 세계 최고의 박물관 중 하나인 대영박물관에 오신 것을 환영합니다. 200만 년에 걸친 800만 점 이상의 작품을 소장하고 있습니다.",
+        "description": "세계적으로 유명한 인류 역사 및 문화 박물관",
+        "historicalInfo": "대영박물관은 1753년에 설립되었으며 세계 최초의 국립 공공 박물관입니다.",
+        "yearBuilt": "1753년 (현재 건물: 1823-1852년)",
+        "architect": "로버트 스머크 경 (본관), 노먼 포스터 (그레이트 코트 지붕)"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:26.261Z",
+    "updatedAt": "2026-02-22T20:01:00.980Z"
+  },
+  {
+    "id": "sirao-flower-garden",
+    "cityId": "cebu",
+    "name": "Sirao Flower Garden",
+    "lat": 10.386111,
+    "lng": 123.824722,
+    "radius": 80,
+    "narration": "자, 눈을 감고 시라오 가든의 향긋한 꽃 내음을 상상해보세요. 따스한 햇살이 뺨을 간지럽히고, 형형색색의 꽃들이 바람에 흔들리는 모습이 눈 앞에 펼쳐지는 듯하죠? 지금 여러분은 세부의 작은 암스테르담, 시라오 플라워 가든에 와 있습니다! 꺄! 어쩜 이렇게 예쁠까요? 특히 시라오 가든의 주인공이라고 할 수 있는 셀로시아 꽃밭은 마치 꿈속에 들어온 듯한 황홀경을 선사한답니다. 쨍한 붉은색, 노란색, 주황색… 알록달록한 셀로시아 꽃들이 옹기종기 모여 있는 모습은 정말이지 인스타그램에 올릴 '인생샷' 감이에요. 친구들과 함께, 연인과 함께, 혹은 혼자라도 좋아요. 이 아름다운 풍경 속에서라면 누구나 행복해질 수밖에 없으니까요. 잠시 카메라를 내려놓고, 두 눈 가득 이 아름다움을 담아보세요. 그리고 깊게 숨을 들이쉬어 보세요. 꽃 향기가 온몸을 감싸는 듯한 기분이 들 거예요. 저 멀리 보이는 산 능선과 파란 하늘은 또 얼마나 아름다운지! 시라오 가든은 단순히 꽃을 보는 곳이 아니라, 자연 속에서 힐링하고 에너지를 충전할 수 있는 특별한 공간이랍니다. 지금 여러분의 발 아래에는 수많은 꽃잎들이 깔려있고, 여러분의 머리 위로는 따스한 햇살이 쏟아지고 있어요. 이 순간을 마음껏 즐기세요! 그리고 이 아름다운 추억을 오래도록 간직하길 바랄게요. 혹시 저기 언덕 위에 있는 커다란 손 조형물 보이세요? 저기서 사진 찍으면 정말 멋지게 나온다던데! 어서 가서 포즈를 취해봐요! 분명 잊지 못할 추억이 될 거예요!",
+    "description": "Colorful flower garden known as Cebu's Little Amsterdam",
+    "category": "Garden & Nature",
+    "detailedDescription": "시라오 플라워 가든은 세부의 고지대에 위치한 아름다운 정원으로, '작은 암스테르담'이라는 별명으로 불릴 만큼 다채로운 꽃들이 만발하는 곳입니다. 특히 셀로시아 꽃은 1년 내내 피어나 시라오 가든의 대표적인 볼거리로 자리 잡았죠. 현지인들은 물론 관광객들에게도 사랑받는 명소랍니다. 시라오 가든의 숨겨진 이야기가 하나 있는데요. 원래는 한 가족이 개인적으로 운영하던 작은 정원이었는데, 아름다운 꽃밭이 입소문을 타면서 점차 규모가 커지고 유명해졌다고 해요. 지금은 세부를 대표하는 관광 명소가 되었으니, 정말 대단하죠? 시라오 가든을 방문할 때는 편안한 신발을 신는 것이 좋아요. 정원이 넓고 언덕길이 많기 때문이죠. 그리고 햇볕이 강렬할 수 있으니 선크림과 모자도 챙기는 것을 잊지 마세요! 입장료는 대략 50페소 정도인데, 가격 대비 훌륭한 경험을 할 수 있을 거예요. 꿀팁 하나 더! 시라오 가든 근처에는 현지 음식을 맛볼 수 있는 작은 식당들이 많이 있어요. 꽃구경을 마치고 맛있는 식사를 즐기는 것도 좋은 방법이랍니다. 참고로, 시라오 플라워 가든은 사진 촬영 명소로도 유명한데요, 특히 해 질 녘 노을과 함께 꽃밭을 배경으로 찍는 사진은 정말 예술이라고 하네요! 꼭 한번 시도해보세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800",
+      "https://images.unsplash.com/photo-1464699908537-0954e50791ee?w=800",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800",
+      "https://images.unsplash.com/photo-1592422746942-44e05e70a8bc?w=800",
+      "https://images.unsplash.com/photo-1563784462041-5f97ac9523dd?w=800",
+      "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800"
+    ],
+    "historicalInfo": "Originally a vegetable farm, Sirao Flower Garden was transformed into a tourist attraction by local farmers and has become famous on social media as Cebu's \"Little Amsterdam\".",
+    "yearBuilt": "2015",
+    "architect": "Local Farmers",
+    "translations": {
+      "en": {
+        "name": "Sirao Flower Garden",
+        "narration": "Welcome to Sirao Flower Garden, Cebu's colorful \"Little Amsterdam\". This vibrant garden features beautiful flower fields, especially the iconic celosia flowers that bloom year-round.",
+        "description": "Colorful flower garden known as Cebu's Little Amsterdam",
+        "historicalInfo": "Originally a vegetable farm, Sirao Flower Garden was transformed into a tourist attraction by local farmers and has become famous on social media as Cebu's \"Little Amsterdam\".",
+        "yearBuilt": "2015",
+        "architect": "Local Farmers"
+      },
+      "it": {
+        "name": "Giardino dei Fiori di Sirao",
+        "narration": "Benvenuto al Giardino dei Fiori di Sirao, la colorata \"Piccola Amsterdam\" di Cebu. Questo giardino vibrante presenta bellissimi campi di fiori, specialmente gli iconici fiori di celosia che sbocciano tutto l'anno.",
+        "description": "Giardino di fiori colorato conosciuto come la Piccola Amsterdam di Cebu",
+        "historicalInfo": "Originariamente una fattoria di verdure, il Giardino dei Fiori di Sirao è stato trasformato in un'attrazione turistica dagli agricoltori locali ed è diventato famoso sui social media come la \"Piccola Amsterdam\" di Cebu.",
+        "yearBuilt": "2015",
+        "architect": "Agricoltori Locali"
+      },
+      "ko": {
+        "name": "시라오 플라워 가든",
+        "narration": "세부의 화려한 \"리틀 암스테르담\"인 시라오 플라워 가든에 오신 것을 환영합니다. 이 활기찬 정원은 일년 내내 피는 상징적인 셀로시아 꽃을 특징으로 아름다운 꽃밭을 선보입니다.",
+        "description": "세부의 리틀 암스테르담으로 알려진 화려한 꽃 정원",
+        "historicalInfo": "원래 채소 농장이었던 시라오 플라워 가든은 지역 농부들에 의해 관광 명소로 변모했으며 소셜 미디어에서 세부의 \"리틀 암스테르담\"으로 유명해졌습니다.",
+        "yearBuilt": "2015",
+        "architect": "지역 농부들"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:30.828Z",
+    "updatedAt": "2026-02-22T20:01:01.145Z"
   },
   {
     "id": "busan_더베이_101_요트클럽_다이닝_the_bay_101_y",
@@ -14765,44 +12210,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:06:07.614Z"
   },
   {
-    "id": "seoul_권숙수_kwon_sook_soo",
-    "cityId": "seoul",
-    "name": "권숙수 (Kwon Sook Soo)",
-    "lat": 37.5255,
-    "lng": 127.0371,
-    "radius": 75,
-    "narration": "문을 열고 들어서는 순간, 은은한 조명과 차분하고 세련된 공간이 당신을 감쌉니다. 공기 중에는 갓 지은 밥의 고소함과 신선한 제철 식재료가 어우러진 섬세한 향이 감돌고, 잔잔한 배경 음악이 고품격 다이닝의 분위기를 더합니다. 테이블에 앉으면, 마치 예술 작품처럼 정갈하게 담겨 나오는 첫 번째 요리가 눈앞에 펼쳐집니다. 놋그릇 위에 피어난 색색의 아름다움, 그 섬세한 플레이팅은 눈으로 먼저 맛보는 즐거움을 선사합니다. 한 숟갈 떠서 입에 넣으면, 익숙하면서도 낯선, 전통과 현대가 절묘하게 조화된 맛의 향연이 펼쳐집니다. 고추장의 깊은 감칠맛이 혀끝을 간질이고, 신선한 해산물의 바다 향이 입안 가득 퍼집니다. 셰프의 숨결이 깃든 요리들은 하나하나 이야기를 품고 있으며, 숙련된 서버들은 각 요리에 대한 설명을 곁들여 미식 경험을 더욱 풍부하게 합니다. 바삭함과 촉촉함, 달콤함과 짭짤함, 부드러움과 쫄깃함이 완벽한 균형을 이루며 미각을 자극합니다. 전통적인 요소와 현대적인 감각이 어우러진 인테리어는 품격 있는 분위기를 완성하며, 한식의 무한한 가능성을 보여주는 이곳에서의 식사는 단순한 배부름을 넘어선, 영혼을 위한 여정이 될 것입니다. 권숙수에서 당신의 미각은 새로운 차원으로 확장될 준비가 되어 있습니다.",
-    "description": "미슐랭 2스타에 빛나는 '모던 한식 오마카세'의 정수, 전통을 현대적으로 재해석한 미식 경험의 품격.",
-    "category": "Restaurant",
-    "detailedDescription": "고개를 드세요, 여러분! 이곳은 신비의 맛을 선사하는 권숙수! 서울의 심장부에서 미슐랭 2스타에 빛나는 모던 한식 오마카세의 정수가 펼쳐지는 순간입니다. 문을 열고 들어서면 눈 앞에 펼쳐지는 풍경에 압도될 수밖에 없습니다. 세련된 인테리어와 현대적 감각으로 무장한 이곳은 마치 과거와 현재가 조우하는 공간 같습니다. 주방에서 들려오는 꼬르륵거리는 소리와 함께 은은히 퍼지는 조리된 재료의 향기가 코끝을 자극하죠. 이곳에서는 전통과 현대가 절묘하게 어우러진 맛의 향연이 준비되어 있습니다. 자, 이제 권숙수의 풍미 깊은 여정이 시작됩니다!\n\n역사의 책장을 넘기며 권숙수의 이야기 속으로 들어가 봅시다. 권숙수는 2014년에 설립되었으며, 이미 이 시점에서 미식가들의 뜨거운 관심을 모았습니다. 당시는 한국이 세계적인 미식의 중심지로 떠오르던 시기였으며, 한식의 전통을 현대적으로 재해석하고자 하는 흐름이 강해지고 있었습니다. 이곳의 창립자들은 한식의 우수성을 세계에 알리고 싶다는 강력한 사명감을 가지고 있었으며, 그 결과 권숙수라는 특별한 식당이 탄생하게 된 것입니다.\n\n그리고 이곳의 문턱을 넘어, 권숙수가 걸어온 길의 여정 중 잊을 수 없는 한 인물을 소개합니다. 바로 조리장 이명길 셰프입니다. 그는 어린 시절 농장에서 재료를 직접 재배하며 자연의 맛과 정성을 배웠습니다. 그의 손끝에서 피어나는 요리는 단순히 배를 채우는 것을 넘어, 한식의 진정한 의미를 전합니다. 이명길 셰프의 이야기는 권숙수의 역사를 더욱 빛나게 합니다.\n\n권숙수의 건축은 마치 미술 작품과도 같습니다. 눈에 띄는 것은 세밀한 조각과 장식이 가득한 외관인데, 이는 자연과 전통을 존중하며 현대적 감각을 결합한 결과물입니다. 공간의 효율성을 극대화하는 설계와 재료의 섬세함은 이곳의 가치를 더욱 높이고 있습니다. 내부의 조명은 따뜻하고 부드럽게 공간을 감싸, 손님들을 편안하게 맞이합니다.\n\n대부분의 방문객들이 놓치는 숨겨진 디테일도 있습니다. 바로 천장에 숨겨진 서예 작품들! 각 문장에는 깊은 철학과 의미가 담겨 있어, 이곳을 방문할 때마다 새로운 해석의 가능성을 제공하죠. 권숙수는 이렇게 눈에 띄지 않은 곳에까지 세심한 배려를 담아내어 방문객들에게 깊은 감동을 줍니다.\n\n이제 현대의 권숙수의 이야기를 들어볼 차례입니다. 최근 권숙수는 한식을 사랑하는 전 세계의 관광객들 사이에서도 필수 방문지로 자리잡았습니다. 미식가들은 권숙수에서 제공하는 현대적 감각의 한식에 감동하여 감동의 눈물을 흘리기도 합니다. 식사 후 손님들이 각자 자신의 SNS에 찍은 사진을 자랑스럽게 올리며, 이곳의 명성을 더욱 널리 알리고 있습니다.\n\n이제 권숙수의 깊은 의미를 탐구해 봅시다. 이곳은 단순한 식당을 넘어 한국 문화의 정수를 담고 있는 장소입니다. 전통과 현대의 조화는 한식의 가능성을 무한대로 확장시키며, 문화와 역사를 넘어선 새로운 경험을 선사합니다. 권숙수에서의 식사는 감정적이고 철학적인 여정이기도 합니다.\n\n마지막으로 권숙수를 떠나야 할 시간이 다가왔습니다. 하지만 걱정하지 마세요, 이곳에서의 경험은 여러분 곁에 오래도록 남을 것입니다. 권숙수의 문을 나서면서 느꼈던 감동과 놀라움은 여러분의 미각과 마음에 깊이 새겨질 것입니다. 권숙수에서의 여정이 끝나더라도, 이곳에서의 기억은 결코 사라지지 않을 것입니다. 안녕, 권숙수! 우리는 다시 만날 날을 기대합니다.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "권숙수 (Kwon Sook Soo)",
-        "description": "미슐랭 2스타에 빛나는 '모던 한식 오마카세'의 정수, 전통을 현대적으로 재해석한 미식 경험의 품격.",
-        "narration": "문을 열고 들어서는 순간, 은은한 조명과 차분하고 세련된 공간이 당신을 감쌉니다. 공기 중에는 갓 지은 밥의 고소함과 신선한 제철 식재료가 어우러진 섬세한 향이 감돌고, 잔잔한 배경 음악이 고품격 다이닝의 분위기를 더합니다. 테이블에 앉으면, 마치 예술 작품처럼 정갈하게 담겨 나오는 첫 번째 요리가 눈앞에 펼쳐집니다. 놋그릇 위에 피어난 색색의 아름다움, 그 섬세한 플레이팅은 눈으로 먼저 맛보는 즐거움을 선사합니다. 한 숟갈 떠서 입에 넣으면, 익숙하면서도 낯선, 전통과 현대가 절묘하게 조화된 맛의 향연이 펼쳐집니다. 고추장의 깊은 감칠맛이 혀끝을 간질이고, 신선한 해산물의 바다 향이 입안 가득 퍼집니다. 셰프의 숨결이 깃든 요리들은 하나하나 이야기를 품고 있으며, 숙련된 서버들은 각 요리에 대한 설명을 곁들여 미식 경험을 더욱 풍부하게 합니다. 바삭함과 촉촉함, 달콤함과 짭짤함, 부드러움과 쫄깃함이 완벽한 균형을 이루며 미각을 자극합니다. 전통적인 요소와 현대적인 감각이 어우러진 인테리어는 품격 있는 분위기를 완성하며, 한식의 무한한 가능성을 보여주는 이곳에서의 식사는 단순한 배부름을 넘어선, 영혼을 위한 여정이 될 것입니다. 권숙수에서 당신의 미각은 새로운 차원으로 확장될 준비가 되어 있습니다.",
-        "detailedDescription": "신사동에 위치한 권숙수는 셰프 권우중의 철학이 담긴 모던 한식 파인 다이닝으로, 미슐랭 2스타를 획득하며 한국 미식의 위상을 세계에 알리고 있습니다. '숙수'는 조선 시대 궁중 요리사를 뜻하는 말로, 이곳의 이름에서부터 전통에 대한 깊은 존중과 자부심이 느껴집니다. 권우중 셰프는 한국의 제철 식재료를 사용하고 전통 조리법을 현대적인 기법으로 재해석하여, '한식 오마카세'라는 독창적인 콘셉트를 선보입니다. 제철 생선회나 귀한 식재료를 이용한 요리부터, 한식의 기본인 장류를 직접 담가 깊은 맛을 내는 세심함까지, 모든 요리에서 장인의 손길이 느껴집니다. 특히, 계절마다 변하는 코스 메뉴는 방문할 때마다 새로운 미식 경험을 약속하며, 한국 전통주 페어링 서비스는 한식의 맛을 한층 더 풍부하게 만들어줍니다. 권숙수는 단순한 식당이 아니라, 한국 식문화의 정수를 깊이 있게 탐험할 수 있는 미식의 성지입니다. 이곳에서의 식사는 단순한 한 끼가 아닌, 오감을 만족시키는 예술적인 경험이자 한국의 식문화를 이해하는 소중한 시간이 될 것입니다. 중요한 비즈니스 미팅이나 특별한 날을 기념하기에 더할 나위 없이 완벽한 장소입니다."
-      }
-    },
-    "openingHours": "화-토 12:00 - 15:00 (런치), 18:00 - 22:00 (디너). 일요일, 월요일 휴무.",
-    "priceRange": "KRW 150,000 - KRW 300,000+ (코스 메뉴 1인 기준)",
-    "cuisine": null,
-    "reservationUrl": "https://www.catchtable.co.kr/kwon_sooksoo",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-14T00:42:52.039Z",
-    "updatedAt": "2026-02-22T18:06:07.488Z"
-  },
-  {
     "id": "tokyo_메이지_진구_신사_",
     "cityId": "tokyo",
     "name": "메이지 진구 신사 (明治神宮)",
@@ -14839,44 +12246,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-14T00:43:36.771Z",
     "updatedAt": "2026-02-22T18:06:07.805Z"
-  },
-  {
-    "id": "barcelona_디스프루타르_disfrutar",
-    "cityId": "barcelona",
-    "name": "디스프루타르 (Disfrutar)",
-    "lat": 41.3888,
-    "lng": 2.1553,
-    "radius": 70,
-    "narration": "상상해보세요. 여러분은 지금 바르셀로나의 심장부에 위치한, 미식의 성지 '디스프루타르' 앞에 서 있습니다. 문을 열고 들어서는 순간, 환호성이 터져 나올 듯한 활기찬 에너지와 코를 간지럽히는 황홀한 향신료의 향연이 여러분을 맞이할 겁니다. 마치 꿈결 같은 미식의 세계로 초대받은 기분이랄까요? 밝은 햇살이 가득한 실내, 예술 작품처럼 정교하게 디자인된 테이블, 그리고 셰프들의 분주한 움직임이 한 폭의 그림처럼 펼쳐집니다. 자리에 앉아 깊게 숨을 들이쉬세요. 여러분의 오감을 자극할 마법 같은 여정이 시작될 테니까요. 접시 위에 놓인 것은 단순한 음식이 아닙니다. 스페인의 풍부한 식재료를 캔버스 삼아, 셰프들이 혼신의 힘을 다해 그려낸 예술 작품이죠. 액체 질소로 순식간에 얼려 만든 올리브는 입 안에서 부드럽게 녹아내리며 상큼한 풍미를 선사하고, 투명한 유리처럼 얇게 뽑아낸 파스타는 섬세한 식감과 함께 입 안 가득 퍼지는 향긋한 허브 향으로 감탄을 자아냅니다. 연기 속에 숨겨진 디저트는 마치 보물찾기처럼, 숨겨진 맛을 찾아내는 즐거움을 선사하죠. 각각의 요리는 단순한 맛을 넘어, 시각, 후각, 미각, 그리고 촉각까지 자극하며 여러분의 감각을 깨우는 놀라운 경험을 선사합니다. 디스프루타르에서는 음식을 먹는다는 행위 자체가 하나의 예술 작품을 감상하는 것과 같습니다. 셰프들의 대담한 상상력과 완벽을 추구하는 장인 정신이 빚어낸 이 마법 같은 순간들을 마음껏 즐기세요. 지금 여러분이 경험하는 이 특별한 순간은, 앞으로 여러분의 인생에서 영원히 잊혀지지 않는 아름다운 추억으로 자리 잡을 것입니다.",
-    "description": "미식의 한계를 뛰어넘는 창의적인 경험, 세계 정상급 분자 요리의 향연.",
-    "category": "Restaurant",
-    "detailedDescription": "디스프루타르는 단순한 레스토랑이 아닌, 바르셀로나 미식의 혁신을 이끄는 선두주자입니다. '즐기다'라는 뜻의 스페인어 'Disfrutar'에서 이름을 딴 이 곳은, 스페인 요리의 전통을 존중하면서도 혁신적인 기술과 창의적인 아이디어를 결합하여 전에 없던 새로운 미식 경험을 선사합니다. 오너 셰프 오리올 카스트로, 에두아드 자타루크, 마테우 카사냐스는 세계적인 레스토랑 '엘 불리'에서 함께 경력을 쌓은 실력파들입니다. 엘 불리의 혁신적인 요리 기법을 계승하면서도, 자신들만의 독창적인 스타일을 더해 디스프루타르를 세계 최고의 레스토랑 반열에 올려놓았습니다. 메뉴는 크게 테이스팅 메뉴와 단품 메뉴로 구성되어 있으며, 계절에 따라 신선한 제철 식재료를 사용하여 끊임없이 새로운 요리를 선보입니다. 특히 액체 질소, 구체화, 폼 등 분자 요리 기법을 적극적으로 활용하여 시각적으로도 놀라운 요리를 만들어냅니다. 현지인들은 디스프루타르를 특별한 날을 기념하거나, 소중한 사람들과 함께 잊지 못할 추억을 만들고 싶을 때 찾는다고 합니다. 예약은 필수이며, 최소 2~3개월 전에 미리 예약해야 원하는 날짜에 방문할 수 있습니다. 꿀팁을 하나 드리자면, 런치 타임에는 비교적 예약이 수월하고, 저녁 시간보다 가격도 저렴하니 참고하세요!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "디스프루타르 (Disfrutar)",
-        "description": "미식의 한계를 뛰어넘는 창의적인 경험, 세계 정상급 분자 요리의 향연.",
-        "narration": "자, 이제 바르셀로나 미식의 정점으로 여러분을 안내합니다. 이곳 디스프루타는 단순한 레스토랑이 아닙니다. 문을 열고 들어서는 순간, 밝고 활기찬 분위기와 함께 은은한 향신료와 신선한 재료의 향이 여러분의 후각을 자극할 것입니다. 마치 동화 속 주방에 들어선 듯한 착각을 불러일으키는 인테리어는 오늘 밤 펼쳐질 미식 모험의 서막을 알립니다. 테이블에 앉아 보세요. 이제 곧 여러분의 눈앞에는 접시 위에 펼쳐진 예술 작품들이 등장할 것입니다. 스페인의 풍부한 식재료를 기반으로 하지만, 그 표현 방식은 상상을 초월합니다. 액체 질소로 얼린 올리브, 종이처럼 얇은 파스타, 연기 속에 숨겨진 디저트… 각각의 요리는 시각, 후각, 미각은 물론 촉각까지 동원하여 오감을 만족시키는 퍼포먼스입니다. 셰프들의 대담한 창의성과 완벽한 기술이 만들어내는 이 마법 같은 순간들을 온전히 음미하며, 평생 잊지 못할 미식 경험을 만끽하세요.",
-        "detailedDescription": "2024년 '세계 최고의 레스토랑' 1위에 빛나는 디스프루타르는 단순한 식사를 넘어선 미식 오디세이를 선사합니다. 엘 불리(El Bulli) 출신의 세 셰프가 이끄는 이곳은 상상력을 초월하는 요리 기법과 재료의 조합으로 끊임없이 미각을 자극합니다. 테이스팅 메뉴는 마치 연극처럼 코스마다 새로운 놀라움과 즐거움을 선사하며, 각각의 요리에는 스토리가 담겨 있습니다. 접시에 담긴 예술 작품을 맛보는 듯한 시각적인 즐거움은 물론, 예상치 못한 질감과 풍미의 조화는 당신의 미식 경험을 한 단계 끌어올릴 것입니다. 편안하면서도 세련된 인테리어는 창의적인 요리와 완벽한 조화를 이루며, 이곳에서의 식사는 바르셀로나 여행의 잊지 못할 하이라이트가 될 것입니다. 최소 몇 달 전 예약은 필수이며, 인생 최고의 미식 경험을 기대하셔도 좋습니다."
-      }
-    },
-    "openingHours": "화요일 - 토요일, 런치 13:00-14:30, 디너 19:00-20:30 (요일 및 시즌에 따라 변동)",
-    "priceRange": "€€€€",
-    "cuisine": null,
-    "reservationUrl": "https://www.disfrutarbarcelona.com/booking",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-13T13:50:28.100Z",
-    "updatedAt": "2026-02-22T18:22:52.648Z"
   },
   {
     "id": "kl-tower",
@@ -15067,44 +12436,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T12:11:34.072Z",
     "updatedAt": "2026-02-22T18:23:23.051Z"
-  },
-  {
-    "id": "rome_아로마_레스토랑_팔라초_만프레디",
-    "cityId": "rome",
-    "name": "아로마 레스토랑 (팔라초 만프레디)",
-    "lat": 41.8906,
-    "lng": 12.4925,
-    "radius": 75,
-    "narration": "해 질 녘, 로마의 상징 콜로세움이 당신의 눈앞에서 황금빛으로 물들기 시작합니다. 팔라초 만프레디의 옥상 테라스, 아로마 레스토랑에 앉아 부드러운 재즈 선율이 흐르는 가운데, 당신은 이 비현실적인 풍경의 일부가 됩니다. 시원한 저녁 바람이 뺨을 스치고, 멀리서 들려오는 로마의 미묘한 소음마저도 이곳에서는 낭만적인 배경음악이 됩니다. 테이블 위에는 촛불이 은은하게 흔들리고, 섬세하게 세팅된 식기들은 곧 펼쳐질 미식의 향연을 예고합니다. 셰프가 정성껏 준비한 애피타이저가 도착하고, 신선한 트러플 향이 코끝을 간지럽히는 순간, 당신은 로마의 진정한 맛과 향에 취하게 됩니다. 와인 잔 속에서 루비처럼 빛나는 붉은 와인은 콜로세움의 붉은 벽돌과 어우러져 완벽한 조화를 이룹니다. 콜로세움에 하나둘 불이 켜지며 밤의 장엄한 그림자를 드리울 때, 당신의 오감은 최고조에 달합니다. 이곳은 단순히 식사를 하는 곳이 아닙니다. 고대 로마의 영광과 현대 미식의 정수가 결합된, 시간과 공간을 초월하는 경험의 장입니다. 당신의 귓가에는 사랑하는 이의 속삭임이, 눈앞에는 영원의 도시 로마가 펼쳐집니다.",
-    "description": "콜로세움의 장엄한 전경과 미슐랭 스타 셰프의 예술이 만나는 로마 최상위 미식 경험.",
-    "category": "Restaurant",
-    "detailedDescription": "**장대한 개막식:**\n\n여러분, 상상해보세요! 로마의 푸른 하늘 아래, 바람에 실려 오는 바질과 올리브 오일의 향기가 코끝을 간지럽힙니다. 아로마 레스토랑에 도착한 순간, 여러분은 이미 이곳의 마법에 빠져들고 있습니다. 콜로세움의 웅장한 전경이 여러분의 눈앞에 펼쳐지며, 그 역사적 건축물의 위엄이 여러분을 압도합니다. 살짝 몸을 돌리면, 미슐랭 스타 셰프가 창조한 예술 작품 같은 요리들이 테이블 위에 올려져 있습니다. 그 한 접시 한 접시가, 마치 시간이 멈춘 듯한 순간을 선사하죠. 들리나요? 와인 잔들이 부딪치는 소리, 웃음소리가 공간을 가득 채웁니다. 이곳은 단순한 식사가 아닌, 모든 감각을 자극하는 잊을 수 없는 경험입니다.\n\n**깊이 있는 역사 탐험:**\n\n자, 이제 시간을 거슬러 올라가봅시다. 아로마 레스토랑이 자리하고 있는 팔라초 만프레디는 17세기 초, 귀족 가문인 만프레디 가문에 의해 지어졌습니다. 당시 로마는 바로크 시대의 절정기에 있었으며, 예술과 건축이 화려하게 꽃을 피우고 있었습니다. 대륙의 중심지로서 로마는 정치, 경제, 문화의 중심지로서의 위치를 굳건히 하고 있었고, 만프레디 가문은 이러한 전성기의 한복판에서 자신들의 부와 권위를 과시하고자 이 궁전을 건축했습니다.\n\n이 시기에 한 인물이 빛을 발합니다. 그의 이름은 카를로 만프레디, 가문의 젊은 후계자이자 예술 애호가였습니다. 그는 당시 최고의 예술가들과 친분을 맺으며, 팔라초에 수많은 예술 작품을 모았습니다. 카를로는 끊임없이 파티를 열며 문화를 나누고, 예술을 통해 사람들을 하나로 모았습니다. 그는 궁전의 장식뿐만 아니라, 사람들의 마음까지도 화려하게 물들였습니다.\n\n**건축의 경이:**\n\n팔라초 만프레디의 건축적 비밀을 들춰볼까요? 이곳은 대리석과 석재를 주재료로 사용하여 당시의 최신 건축 기술을 집약한 걸작입니다. 건축물의 각종 아치와 돔은 그 시대의 공학적 혁신을 보여주며, 햇빛이 비추는 각도에 따라 다채로운 그림자를 드리우죠. 그리고 그 건물의 구조적인 결합력은 세월이 흘러도 변치 않는 견고함을 자랑합니다.\n\n궁전 내부에는 숨겨진 상징들이 가득합니다. 예를 들어, 벽에 새겨진 조각들은 만프레디 가문의 힘과 권위를 나타내며, 곳곳에 배치된 화려한 장식들은 바로크 시대의 예술적 감성을 드러냅니다. 지나는 관광객들이 흔히 놓치는 이러한 세부적인 디테일들은, 이곳을 단순한 건축물이 아닌, 하나의 살아있는 역사 교과서로 만들어줍니다.\n\n**현대의 이야기:**\n\n팔라초 만프레디는 오랜 세월 동안 잊혀졌다가 20세기 중반에 다시 빛을 보게 됩니다. 수많은 복원 작업 끝에, 이곳은 그 본래의 아름다움을 잃지 않으면서도 현대의 새로운 용도로 탈바꿈하게 됩니다. 이제는 아로마 레스토랑이라는 이름으로, 세계 각국에서 찾아온 미식가들의 발길을 사로잡고 있습니다.\n\n이곳은 또한 여러 영화의 배경으로도 유명해졌습니다. 아마 여러분도 기억하시겠죠? 로마의 장엄한 풍경 속에서 펼쳐지는 로맨틱한 장면들! 그리고, 이곳을 찾는 현대의 관광객들은 그 빛나는 유산을 배경으로 셀카를 찍으며, 때로는 웃음을 터뜨리기도 합니다. 역사와 현대가 공존하는 이곳에서, 관람객들은 자신만의 이야기를 만들어가고 있습니다.\n\n**철학적 결론:**\n\n팔라초 만프레디와 아로마 레스토랑은 단순한 건축물과 음식점이 아닙니다. 이곳은 인간이 남긴 위대한 유산의 상징이며, 세월을 초월한 예술과 문화의 집합체입니다. 우리는 이곳에서 과거와 현재가 조우하며, 시간의 흐름 속에서 수많은 이야기가 얽히고설킨다는 것을 깨닫게 됩니다.\n\n이제 여러분, 이 이야기를 마음속에 간직한 채 이 자리를 떠나십시오. 아로마 레스토랑에서 경험한 모든 감각과 감정이, 여러분의 기억 속에서 오래도록 빛날 것입니다. 역사의 숨결을 느끼고, 그 속에서 한 순간을 살아낸다는 것은 참으로 특별한 일이니까요. 여러분의 여정에 평화와 감동이 깃들기를 바라며, 다시 한 번 로마의 마법을 체험할 날을 기다리겠습니다. 감사합니다!",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "아로마 레스토랑 (팔라초 만프레디)",
-        "description": "콜로세움의 장엄한 전경과 미슐랭 스타 셰프의 예술이 만나는 로마 최상위 미식 경험.",
-        "narration": "해 질 녘, 로마의 상징 콜로세움이 당신의 눈앞에서 황금빛으로 물들기 시작합니다. 팔라초 만프레디의 옥상 테라스, 아로마 레스토랑에 앉아 부드러운 재즈 선율이 흐르는 가운데, 당신은 이 비현실적인 풍경의 일부가 됩니다. 시원한 저녁 바람이 뺨을 스치고, 멀리서 들려오는 로마의 미묘한 소음마저도 이곳에서는 낭만적인 배경음악이 됩니다. 테이블 위에는 촛불이 은은하게 흔들리고, 섬세하게 세팅된 식기들은 곧 펼쳐질 미식의 향연을 예고합니다. 셰프가 정성껏 준비한 애피타이저가 도착하고, 신선한 트러플 향이 코끝을 간지럽히는 순간, 당신은 로마의 진정한 맛과 향에 취하게 됩니다. 와인 잔 속에서 루비처럼 빛나는 붉은 와인은 콜로세움의 붉은 벽돌과 어우러져 완벽한 조화를 이룹니다. 콜로세움에 하나둘 불이 켜지며 밤의 장엄한 그림자를 드리울 때, 당신의 오감은 최고조에 달합니다. 이곳은 단순히 식사를 하는 곳이 아닙니다. 고대 로마의 영광과 현대 미식의 정수가 결합된, 시간과 공간을 초월하는 경험의 장입니다. 당신의 귓가에는 사랑하는 이의 속삭임이, 눈앞에는 영원의 도시 로마가 펼쳐집니다.",
-        "detailedDescription": "팔라초 만프레디(Palazzo Manfredi) 호텔의 옥상에 자리한 아로마 레스토랑은 로마에서 가장 드라마틱한 식사를 경험할 수 있는 곳입니다. 미슐랭 1스타를 획득한 이곳은 콜로세움의 숨 막히는 전경을 바로 눈앞에 두고 식사를 할 수 있는 유일무이한 장소입니다. 셰프 주세페 디 이오리오(Giuseppe Di Iorio)는 전통적인 로마 요리에 현대적이고 창의적인 해석을 더해 재료 본연의 맛을 극대화한 요리를 선보입니다. 지중해에서 갓 잡은 신선한 해산물과 라치오 지역의 제철 농산물로 만든 요리는 시각적인 아름다움만큼이나 미각을 황홀하게 만듭니다. 해 질 녘, 콜로세움이 황금빛으로 물들고 서서히 조명이 켜지는 모습은 그 자체로 예술 작품이며, 이러한 배경 속에서 즐기는 식사는 단순한 한 끼를 넘어 잊을 수 없는 추억으로 각인될 것입니다. 특히, 콜로세움이 가장 잘 보이는 난간 쪽 테이블은 예약 경쟁이 치열하니, 방문 일정을 확정하는 즉시 예약하는 것이 좋습니다. 특별한 기념일이나 로맨틱한 저녁 식사를 위한 완벽한 선택입니다."
-      }
-    },
-    "openingHours": "점심 (계절 한정): 월-금 12:30 - 14:30 / 저녁: 매일 19:30 - 22:30",
-    "priceRange": "€150 - €300+ (1인당, 음료 및 와인 제외)",
-    "cuisine": null,
-    "reservationUrl": "https://www.aromarestaurant.it/en/booking/",
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-14T00:45:38.587Z",
-    "updatedAt": "2026-02-22T18:06:07.865Z"
   },
   {
     "id": "grand_place",
@@ -15925,43 +13256,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:35:24.656Z"
   },
   {
-    "id": "tokyo_item_89",
-    "cityId": "tokyo",
-    "name": "TOKYO Premium Restaurant 89",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "상상해보세요. 지금 여러분은 도쿄의 야경이 한눈에 들어오는 루프탑 레스토랑, TOKYO Premium Restaurant 89에 와 있습니다. 부드러운 바람이 살랑이고, 은은한 조명이 따스하게 감싸는 이곳은 마치 영화 속 한 장면 같아요. 귓가에는 잔잔한 재즈 선율이 흐르고, 코끝에는 고급스러운 요리의 향기가 맴돌죠. 웨이터가 정중하게 건네는 샴페인 한 모금을 천천히 음미하며, 눈 앞에 펼쳐진 도쿄의 반짝이는 불빛들을 감상해보세요. 오래된 친구와 나누는 진솔한 대화처럼, 편안하고 따뜻한 분위기가 마음을 사로잡을 거예요. 잠시 후, 셰프의 혼이 담긴 특별한 코스 요리가 시작될 겁니다. 신선한 제철 식재료 본연의 맛을 살린 창의적인 요리들은 눈과 입을 즐겁게 해주죠. 마치 예술 작품을 감상하는 듯한 섬세한 플레이팅은 감탄을 자아내게 할 거예요. 여러분의 발 아래에는 수백 년의 역사를 간직한 도쿄의 거리가 펼쳐져 있고, 눈 앞에는 미래를 향해 나아가는 현대적인 도시의 풍경이 펼쳐져 있습니다. 과거와 현재가 공존하는 특별한 공간에서, 잊지 못할 미식 경험을 만끽해보세요. TOKYO Premium Restaurant 89는 단순한 레스토랑이 아닌, 도쿄의 아름다움을 오롯이 느낄 수 있는 특별한 공간입니다. 사랑하는 사람과 함께, 또는 혼자만의 시간을 보내며, 도쿄의 밤을 더욱 특별하게 만들어보세요.",
-    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-    "category": "Restaurant",
-    "detailedDescription": "TOKYO Premium Restaurant 89는 단순한 레스토랑을 넘어, 도쿄를 대표하는 랜드마크로 자리매김하고 있습니다. 이곳의 가장 큰 매력은 단연 환상적인 전망입니다. 레스토랑은 도쿄 타워와 레인보우 브릿지를 한눈에 담을 수 있는 최적의 위치에 자리하고 있어, 밤이 되면 도시 전체가 빛나는 보석처럼 보이는 장관을 연출합니다. 현지인들 사이에서는 '프로포즈 명소'로도 유명하며, 특별한 날을 기념하기 위해 방문하는 커플들의 발길이 끊이지 않습니다. TOKYO Premium Restaurant 89의 또 다른 자랑거리는 바로 셰프의 창의적인 요리입니다. 셰프는 전 세계를 여행하며 얻은 영감을 바탕으로, 일본 전통 식재료와 서양 요리 기술을 융합한 독창적인 메뉴를 선보입니다. 특히, 제철 식재료를 사용하여 계절마다 새로운 메뉴를 제공하며, 방문할 때마다 새로운 맛을 경험할 수 있다는 점이 매력적입니다. 숨겨진 비화 하나를 알려드릴까요? 레스토랑 지하에는 비밀스러운 와인 저장고가 있습니다. 이곳에는 100년이 넘는 역사를 가진 희귀 와인부터, 셰프가 직접 선별한 최고의 와인까지 다양한 종류의 와인이 보관되어 있습니다. 와인 애호가라면 반드시 방문해야 할 곳입니다. TOKYO Premium Restaurant 89에서는 단순히 맛있는 음식을 먹는 것을 넘어, 도쿄의 역사와 문화를 경험하고, 특별한 추억을 만들 수 있습니다. 이 곳에서 도쿄의 아름다움을 오롯이 느껴보세요.",
-    "photos": [
-      "/images/landmarks/placeholder.png"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "TOKYO Premium Restaurant 89",
-        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
-        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T13:05:07.580Z",
-    "updatedAt": "2026-02-22T18:26:53.494Z"
-  },
-  {
     "id": "nyhavn",
     "cityId": "copenhagen",
     "name": "Nyhavn",
@@ -16157,68 +13451,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:31:08.602Z"
   },
   {
-    "id": "sirao-flower-garden",
-    "cityId": "cebu",
-    "name": "Sirao Flower Garden",
-    "lat": 10.386111,
-    "lng": 123.824722,
-    "radius": 80,
-    "narration": "상상해보세요. 따스한 햇살이 뺨을 간지럽히고, 코 끝에는 달콤한 꽃향기가 가득한 곳. 지금 여러분은 세부의 작은 암스테르담, 시라오 플라워 가든에 와 있습니다. 형형색색의 셀로시아 꽃들이 마치 물감을 풀어놓은 듯, 눈 앞에 펼쳐져 있어요. 붉은색, 노란색, 주황색… 그 다채로운 색감에 넋을 잃을지도 몰라요. 이 꽃들은 일 년 내내 피어나, 언제 방문하더라도 아름다운 풍경을 선물해 준답니다. \n\n저 멀리 보이는 풍차는 마치 네덜란드에 온 듯한 착각을 불러일으키죠? 풍차 앞에서 사진을 찍으면 마치 동화 속 주인공이 된 기분일 거예요. 친구들과 함께, 연인과 함께, 혹은 혼자라도 좋아요. 누구와 함께하든, 시라오 플라워 가든은 잊지 못할 추억을 만들어 줄 거예요. \n\n바람에 흔들리는 꽃잎들의 속삭임이 들리나요? 마치 여러분에게 행복을 빌어주는 듯하네요. 지금 바로 이 아름다운 꽃밭으로 뛰어들어 보세요! 두 팔을 활짝 벌려 싱그러운 공기를 마시고, 눈을 감고 햇살을 느껴보세요. 이 순간, 세상의 모든 근심 걱정은 사라지고, 오직 행복만이 여러분을 감쌀 거예요. 시라오 플라워 가든에서 마법 같은 시간을 보내세요!",
-    "description": "Colorful flower garden known as Cebu's Little Amsterdam",
-    "category": "Garden & Nature",
-    "detailedDescription": "시라오 플라워 가든은 단순한 꽃밭이 아닙니다. 세부 현지인들의 열정과 사랑으로 가꿔진 아름다운 공간이죠. 특히 셀로시아 꽃은 '맨드라미'라고도 불리며, 그 독특한 생김새와 강렬한 색감으로 많은 사랑을 받고 있습니다. 가든 곳곳에는 사진 찍기 좋은 다양한 조형물들이 설치되어 있어, 인생샷을 건지기에 최적의 장소입니다. \n\n**현지인 꿀팁:** 시라오 플라워 가든은 해가 질 무렵 방문하는 것이 가장 아름답습니다. 석양 아래 빛나는 꽃밭은 그야말로 장관이죠. 또한, 가든 내에 있는 작은 카페에서 시원한 음료를 즐기며 휴식을 취하는 것도 좋은 방법입니다. **숨겨진 비화:** 원래 이 곳은 꽃 재배 농장이었으나, 아름다운 풍경에 반한 관광객들이 하나 둘 방문하기 시작하면서 지금의 플라워 가든으로 발전하게 되었다고 합니다. 농부들의 따뜻한 마음씨 덕분에, 우리는 이렇게 아름다운 공간을 경험할 수 있게 된 것이죠.",
-    "photos": [
-      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800",
-      "https://images.unsplash.com/photo-1464699908537-0954e50791ee?w=800",
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800",
-      "https://images.unsplash.com/photo-1592422746942-44e05e70a8bc?w=800",
-      "https://images.unsplash.com/photo-1563784462041-5f97ac9523dd?w=800",
-      "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800"
-    ],
-    "historicalInfo": "Originally a vegetable farm, Sirao Flower Garden was transformed into a tourist attraction by local farmers and has become famous on social media as Cebu's \"Little Amsterdam\".",
-    "yearBuilt": "2015",
-    "architect": "Local Farmers",
-    "translations": {
-      "en": {
-        "name": "Sirao Flower Garden",
-        "narration": "Welcome to Sirao Flower Garden, Cebu's colorful \"Little Amsterdam\". This vibrant garden features beautiful flower fields, especially the iconic celosia flowers that bloom year-round.",
-        "description": "Colorful flower garden known as Cebu's Little Amsterdam",
-        "historicalInfo": "Originally a vegetable farm, Sirao Flower Garden was transformed into a tourist attraction by local farmers and has become famous on social media as Cebu's \"Little Amsterdam\".",
-        "yearBuilt": "2015",
-        "architect": "Local Farmers"
-      },
-      "it": {
-        "name": "Giardino dei Fiori di Sirao",
-        "narration": "Benvenuto al Giardino dei Fiori di Sirao, la colorata \"Piccola Amsterdam\" di Cebu. Questo giardino vibrante presenta bellissimi campi di fiori, specialmente gli iconici fiori di celosia che sbocciano tutto l'anno.",
-        "description": "Giardino di fiori colorato conosciuto come la Piccola Amsterdam di Cebu",
-        "historicalInfo": "Originariamente una fattoria di verdure, il Giardino dei Fiori di Sirao è stato trasformato in un'attrazione turistica dagli agricoltori locali ed è diventato famoso sui social media come la \"Piccola Amsterdam\" di Cebu.",
-        "yearBuilt": "2015",
-        "architect": "Agricoltori Locali"
-      },
-      "ko": {
-        "name": "시라오 플라워 가든",
-        "narration": "세부의 화려한 \"리틀 암스테르담\"인 시라오 플라워 가든에 오신 것을 환영합니다. 이 활기찬 정원은 일년 내내 피는 상징적인 셀로시아 꽃을 특징으로 아름다운 꽃밭을 선보입니다.",
-        "description": "세부의 리틀 암스테르담으로 알려진 화려한 꽃 정원",
-        "historicalInfo": "원래 채소 농장이었던 시라오 플라워 가든은 지역 농부들에 의해 관광 명소로 변모했으며 소셜 미디어에서 세부의 \"리틀 암스테르담\"으로 유명해졌습니다.",
-        "yearBuilt": "2015",
-        "architect": "지역 농부들"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:30.828Z",
-    "updatedAt": "2026-02-22T18:33:08.234Z"
-  },
-  {
     "id": "patong-beach",
     "cityId": "phuket",
     "name": "Patong Beach",
@@ -16270,10 +13502,10 @@ export const LANDMARKS: Landmark[] = [
     "lat": 10.294167,
     "lng": 123.897778,
     "radius": 50,
-    "narration": "여러분, 상상해보세요! 지금 여러분은 세부 역사의 심장이 뛰는 곳, 세부 헤리티지 기념비 앞에 서 있습니다. 따스한 햇살이 여러분의 어깨를 감싸고, 코끝에는 짭짤한 바다 내음이 스쳐 지나가죠. 기념비 주변은 활기찬 사람들로 가득 차 있어요. 아이들의 웃음소리, 연인들의 속삭임, 그리고 노점상들의 정겨운 외침까지… 이 모든 소리가 세부의 역사를 더욱 생생하게 만들어줍니다. 자, 천천히 기념비를 둘러보세요. 청동과 콘크리트로 웅장하게 빚어진 이 작품은 세부의 과거를 고스란히 담고 있습니다. 마치 거대한 타임캡슐처럼, 세부의 중요한 순간들을 영원히 기록하고 있는 거죠. 지금 여러분의 발 아래에는, 바로 이 기념비를 건설하기 위해 땀 흘린 수많은 사람들의 노력이 깃들어 있습니다. 그들의 열정과 헌신이 없었다면, 우리는 오늘 이 자리에 서 있을 수 없었을 거예요. 이제 저와 함께 세부 헤리티지 기념비에 숨겨진 이야기를 하나씩 파헤쳐 볼까요? 마치 영화 속 주인공이 된 것처럼, 흥미진진한 세부 역사의 여정이 여러분을 기다리고 있습니다. 여러분의 눈과 귀를 활짝 열고, 저의 이야기에 귀 기울여 주세요. 세부의 과거, 현재, 그리고 미래가 여러분의 마음속에 깊이 새겨질 겁니다. 자, 그럼 저와 함께 시간 여행을 떠나볼까요? 준비되셨다면, 출발!",
+    "narration": "자, 눈을 감고 잠시 상상해보세요. 뜨거운 태양이 내리쬐는 세부의 하늘 아래, 웅장한 세부 헤리티지 모뉴먼트가 눈앞에 펼쳐집니다. 청동과 콘크리트로 빚어진 이 거대한 조형물은 마치 살아있는 역사책 같아요. 여러분의 발 아래에는 세부의 심장이 뛰고 있습니다. 1521년, 마젤란이 세부에 도착했을 때의 벅찬 감동이 느껴지시나요? 스페인 통치, 필리핀 혁명, 그리고 격동의 역사를 거쳐 오늘날의 세부가 있기까지, 이 모든 이야기가 모뉴먼트 안에 고스란히 담겨 있습니다. 섬세하게 조각된 인물들의 표정 하나하나를 살펴보세요. 그들의 눈빛에는 희망과 절망, 기쁨과 슬픔이 교차하고 있습니다. 지금 여러분은 단순한 관광객이 아니라, 세부의 역사 속 한 장면을 직접 목격하고 있는 증인입니다. 바람에 실려 오는 바다 내음과 활기 넘치는 도시의 소음이 여러분의 오감을 자극할 거예요. 잠시 시간을 내어 이 웅장한 예술 작품 앞에서 세부 사람들의 삶과 정신을 느껴보세요. 이곳은 단순한 기념물이 아니라, 세부의 과거와 현재, 그리고 미래를 잇는 소중한 연결고리입니다. 이 순간, 여러분은 세부의 역사와 하나가 됩니다.",
     "description": "Monumental sculpture depicting Cebu's history",
     "category": "Cultural Heritage",
-    "detailedDescription": "세부 헤리티지 기념비는 세부의 풍부한 역사를 담은 상징적인 랜드마크입니다. 유명 예술가 에드가르도 카스트리요(Edgardo Castrillo)의 작품으로, 세부의 중요한 역사적 사건들을 조각으로 생생하게 묘사하고 있습니다. 기념비는 스페인 통치 시대, 막탄 전투, 라푸라푸 영웅, 그리고 세부의 종교적 유산을 보여주는 다양한 장면들을 담고 있습니다. 현지인들은 이 기념비를 '피날리판'(Parian)이라고도 부르는데, 이는 과거 이 지역이 중국인 거주지였음을 나타내는 말입니다. 꿀팁을 하나 알려드릴까요? 기념비 바로 옆에는 '야프-산디에고 선조의 집'(Yap-Sandiego Ancestral House)이 있는데, 이곳은 세부에서 가장 오래된 주택 중 하나입니다. 기념비 관람 후 이곳을 방문하여 세부의 과거를 더욱 깊이 느껴보는 것을 추천합니다. 숨겨진 비화로는, 기념비 건설 당시 카스트리요는 현지 주민들의 의견을 적극적으로 수렴하여 작품에 반영했다고 합니다. 덕분에 기념비는 단순한 조각 작품이 아닌, 세부 시민들의 염원이 담긴 상징물로 자리 잡게 되었습니다.",
+    "detailedDescription": "세부 헤리티지 모뉴먼트는 필리핀 세부 시에 위치한 역사적인 랜드마크입니다. 이 기념비는 세부와 필리핀의 중요한 역사적 사건들을 묘사하고 있으며, Eduardo Castrillo라는 뛰어난 필리핀 예술가의 작품입니다. 1997년에 완공된 이 웅장한 조형물은 세부의 풍부한 문화유산을 기리고 있습니다. 마젤란의 도착, 라푸라푸 추장의 저항, 산토 니뇨 성상의 발견 등 세부 역사의 주요 장면들이 생생하게 묘사되어 있습니다. 현지인들은 이곳을 '역사의 정원'이라고 부르기도 하는데, 단순한 관광 명소를 넘어 세부 사람들의 자긍심과 애국심을 고취하는 상징적인 장소이기 때문입니다. 숨겨진 비화를 하나 알려드릴까요? 모뉴먼트 곳곳에 숨겨진 작은 디테일을 찾아보는 재미가 쏠쏠합니다. 예를 들어, 라푸라푸 추장의 칼날에는 고대 세부의 문양이 새겨져 있다고 합니다. 밤에 방문하면 조명에 비친 모뉴먼트의 모습이 더욱 웅장하고 신비롭게 느껴집니다. 세부 헤리티지 모뉴먼트는 단순한 조형물이 아니라, 세부의 역사와 문화를 이해하는 데 필수적인 장소입니다.",
     "photos": [
       "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
       "https://images.unsplash.com/photo-1523509433743-6f42a58221df?w=800",
@@ -16323,156 +13555,53 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:30.700Z",
-    "updatedAt": "2026-02-22T18:32:59.577Z"
+    "updatedAt": "2026-02-22T18:36:13.379Z"
   },
   {
-    "id": "rome_restaurant_da_enzo",
-    "cityId": "rome",
-    "name": "Da Enzo al 29",
-    "lat": 41.8868,
-    "lng": 12.4689,
-    "radius": 40,
-    "narration": "자, 눈을 감고 상상해보세요. 따뜻한 로마의 햇살이 좁은 골목길을 비추고, 낡은 돌담 사이로 은은하게 퍼지는 맛있는 냄새. 바로 여기, 'Da Enzo al 29' 앞에 서 있는 여러분을요! 트라스테베레의 숨겨진 보석 같은 곳이죠. 문을 열고 들어서는 순간, 시간 여행을 떠나는 기분이 들 거예요. 테이블마다 옹기종기 모여 앉아 웃음꽃을 피우는 로마 사람들의 정겨운 모습, 벽에 걸린 흑백 사진 속 빛바랜 추억들… 마치 영화 속 한 장면 같아요. 잠시 후면 여러분의 테이블에도 따끈한 까르보나라, 짭짤한 카치오 에 페페가 놓일 거예요. 파스타 면을 포크로 돌돌 말아 입에 넣는 순간, 입 안 가득 퍼지는 치즈의 풍미, 쫄깃한 면발의 식감! 잊지 못할 맛의 향연이 펼쳐질 겁니다. 벽에 기대어 앉아 와인 한 잔을 기울이며, 옆 테이블 사람들과 눈인사를 나누고, 흥겨운 이탈리아 노래를 함께 따라 불러 보세요. 여기가 바로 로마, 여기가 바로 'Da Enzo al 29'입니다. 편안하게, 그리고 자유롭게 이 순간을 만끽하세요. 마치 오랜 친구 집에 놀러 온 것처럼요! 정말 최고의 경험이 될 거예요. 자, 이제 진짜 로마를 맛볼 시간입니다!",
-    "description": "Authentic Trastevere trattoria",
-    "category": "Restaurant",
-    "detailedDescription": "'Da Enzo al 29'는 로마 트라스테베레 지역 주민들에게 오랫동안 사랑받아 온 로컬 맛집입니다. 좁은 골목길 안쪽에 자리 잡고 있어 관광객들에게는 잘 알려지지 않았지만, 현지인들은 물론 미식가들 사이에서는 이미 정평이 나 있죠. 이곳의 매력은 무엇보다도 정통 로마 요리를 맛볼 수 있다는 점입니다. 까르보나라, 카치오 에 페페, 아마르티치아나 등 대표적인 로마 파스타는 물론, 소꼬리찜인 코다 알라 바치나라(Coda alla vaccinara)와 같은 전통 요리도 놓치지 마세요. 모든 재료는 신선하고, 조리법은 정통 방식을 고수하며, 가격 또한 합리적입니다. 팁 하나 드릴까요? Da Enzo는 예약이 필수입니다! 특히 저녁 시간에는 자리가 없을 가능성이 높으니, 미리 전화나 온라인으로 예약을 해두는 것이 좋습니다. 또 다른 팁! 메뉴판에 없는 오늘의 특별 메뉴를 물어보세요. 운이 좋다면 신선한 재료로 만든 특별한 로마 요리를 맛볼 수 있을 거예요. 마지막으로, Da Enzo는 현금 결제만 가능하다는 점 잊지 마세요!",
+    "id": "marina-bay-sands",
+    "cityId": "singapore",
+    "name": "Marina Bay Sands",
+    "lat": 1.2837,
+    "lng": 103.8607,
+    "radius": 70,
+    "narration": "자, 상상해보세요. 여러분은 지금 싱가포르의 심장, 마리나 베이 샌즈 앞에 서 있습니다. 눈을 들어 하늘을 향해 뻗은 세 개의 거대한 타워를 바라보세요. 그 위에는 마치 떠다니는 배처럼 보이는 스카이파크가 자리 잡고 있습니다. 밤에는 수천 개의 불빛이 반짝이며 싱가포르의 밤하늘을 수놓는 광경은 숨 막힐 듯 아름답죠. 마리나 베이 샌즈는 단순한 호텔이 아니에요. 싱가포르의 꿈과 야망, 그리고 미래를 향한 열정을 담은 상징과 같습니다. 지금 여러분의 발 아래에는 수많은 사람들의 노력과 땀, 그리고 창의적인 아이디어가 응축되어 있습니다. 이곳에서는 쇼핑, 식사, 엔터테인먼트, 그리고 예술까지 모든 것을 경험할 수 있습니다. 특히, 루프탑 수영장에서 싱가포르의 스카이라인을 감상하며 수영하는 경험은 평생 잊지 못할 추억이 될 거예요. 마치 하늘과 맞닿은 듯한 기분을 느껴보세요. 마리나 베이 샌즈는 낮에도 밤에도 끊임없이 변화하며 새로운 모습을 보여줍니다. 석양이 질 무렵, 황금빛 햇살이 건물 전체를 감싸는 모습은 마치 한 폭의 그림과 같습니다. 밤이 되면 화려한 조명이 켜지며 싱가포르의 밤을 더욱 빛나게 하죠. 이곳은 단순한 관광 명소를 넘어, 싱가포르 사람들의 자부심이자 꿈을 향한 열정을 보여주는 살아있는 상징입니다. 마리나 베이 샌즈에서 싱가포르의 현재와 미래를 느껴보세요.",
+    "description": "Iconic integrated resort with rooftop infinity pool",
+    "category": "Modern Architecture",
+    "detailedDescription": "마리나 베이 샌즈는 싱가포르를 대표하는 랜드마크로, 단순한 호텔을 넘어 복합 리조트의 새로운 기준을 제시했습니다. 2010년에 개장한 이후, 독특한 디자인과 다양한 엔터테인먼트 시설로 전 세계 관광객들의 발길을 사로잡고 있습니다. 세 개의 호텔 타워 위에 놓인 스카이파크는 길이 340m의 인피니티 풀을 포함하고 있으며, 싱가포르의 멋진 스카이라인을 360도로 감상할 수 있는 최고의 장소입니다. 건축가 모셰 사프디(Moshe Safdie)의 설계로 탄생한 마리나 베이 샌즈는 풍수지리적 요소를 고려하여 건설되었으며, 번영과 행운을 상징하는 의미를 담고 있습니다. 현지인들 사이에서는 '행운의 세 잎 클로버'라는 애칭으로 불리기도 합니다. 숨겨진 비화로는, 마리나 베이 샌즈 건설 당시, 싱가포르 정부는 파격적인 세금 혜택과 토지 임대 조건을 제시하며 세계적인 투자자들을 유치했습니다. 이를 통해 싱가포르는 단숨에 세계적인 관광 도시로 발돋움할 수 있었죠. 또한, 마리나 베이 샌즈 지하에는 비밀 카지노가 운영되고 있으며, 엄격한 보안 시스템으로 외부인의 출입을 통제하고 있습니다. 마리나 베이 샌즈는 단순한 관광 명소를 넘어, 싱가포르의 경제 발전과 관광 산업의 성장을 이끈 핵심 동력이라고 할 수 있습니다.",
     "photos": [
-      "https://images.unsplash.com/photo-1544025162-d76694265947?w=800"
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800",
+      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800",
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800"
     ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
+    "historicalInfo": "Opened in 2010, Marina Bay Sands was developed by Las Vegas Sands at a cost of $5.88 billion, making it the world's most expensive standalone casino property.",
+    "yearBuilt": "2010",
+    "architect": "Moshe Safdie",
     "translations": {
       "en": {
-        "name": "Da Enzo al 29",
-        "narration": "Enjoy authentic Trastevere dining at Da Enzo, a beloved local trattoria serving traditional Roman dishes.",
-        "description": "Authentic Trastevere trattoria",
-        "detailedDescription": "Da Enzo al 29 is a small, family-run trattoria in the heart of Trastevere that embodies authentic Roman cooking. The menu features daily specials based on market-fresh ingredients. Known for generous portions and warm hospitality, this no-frills eatery is popular with locals and informed tourists alike. The cozy interior with wooden tables and the friendly atmosphere make it feel like dining at a Roman friend's home."
+        "name": "Marina Bay Sands",
+        "narration": "Welcome to Marina Bay Sands, Singapore's most iconic landmark. This integrated resort features a stunning rooftop infinity pool with spectacular views of the city skyline.",
+        "description": "Iconic integrated resort with rooftop infinity pool",
+        "historicalInfo": "Opened in 2010, Marina Bay Sands was developed by Las Vegas Sands at a cost of $5.88 billion, making it the world's most expensive standalone casino property."
       },
       "ko": {
-        "name": "다 엔조 알 29",
-        "narration": "전통 로마 요리를 제공하는 사랑받는 로컬 트라토리아 다 엔조에서 정통 트라스테베레 식사를 즐기세요.",
-        "description": "정통 트라스테베레 트라토리아",
-        "detailedDescription": "다 엔조 알 29는 트라스테베레 중심부에 위치한 작은 가족 운영 트라토리아로 정통 로마 요리를 구현합니다. 메뉴는 신선한 시장 재료를 기반으로 한 매일의 특선 요리를 선보입니다. 푸짐한 양과 따뜻한 환대로 유명한 이 소박한 식당은 현지인과 정보력 있는 관광객 모두에게 인기가 있습니다. 나무 테이블이 있는 아늑한 인테리어와 친근한 분위기는 로마 친구 집에서 식사하는 것 같은 느낌을 줍니다."
-      },
-      "it": {
-        "name": "Da Enzo al 29",
-        "narration": "Goditi la cucina autentica di Trastevere da Enzo, una trattoria locale amata che serve piatti romani tradizionali.",
-        "description": "Trattoria autentica di Trastevere",
-        "detailedDescription": "Da Enzo al 29 è una piccola trattoria a conduzione familiare nel cuore di Trastevere che incarna la cucina romana autentica. Il menu presenta specialità giornaliere basate su ingredienti freschi di mercato. Conosciuto per porzioni generose e calorosa ospitalità, questo locale senza fronzoli è popolare sia tra i locali che tra i turisti informati. L'interno accogliente con tavoli in legno e l'atmosfera amichevole fanno sentire come se si cenasse a casa di un amico romano."
-      },
-      "es": {
-        "name": "Da Enzo al 29",
-        "narration": "Disfruta de la auténtica cocina de Trastevere en Da Enzo, una querida trattoria local que sirve platos romanos tradicionales.",
-        "description": "Auténtica trattoria de Trastevere",
-        "detailedDescription": "Da Enzo al 29 es una pequeña trattoria familiar en el corazón de Trastevere que encarna la cocina romana auténtica. El menú presenta especialidades diarias basadas en ingredientes frescos del mercado. Conocido por sus porciones generosas y cálida hospitalidad, este local sin pretensiones es popular entre locales y turistas informados. El acogedor interior con mesas de madera y el ambiente amigable hacen que se sienta como cenar en casa de un amigo romano."
-      },
-      "fr": {
-        "name": "Da Enzo al 29",
-        "narration": "Savourez une cuisine authentique du Trastevere chez Da Enzo, une trattoria locale appréciée servant des plats romains traditionnels.",
-        "description": "Trattoria authentique du Trastevere",
-        "detailedDescription": "Da Enzo al 29 est une petite trattoria familiale au cœur du Trastevere qui incarne la cuisine romaine authentique. Le menu propose des spécialités quotidiennes basées sur des ingrédients frais du marché. Connu pour ses portions généreuses et son accueil chaleureux, ce restaurant sans chichis est apprécié des locaux et des touristes avertis. L'intérieur confortable avec ses tables en bois et l'atmosphère conviviale donnent l'impression de dîner chez un ami romain."
-      },
-      "de": {
-        "name": "Da Enzo al 29",
-        "narration": "Genießen Sie authentische Trastevere-Küche bei Da Enzo, einer beliebten lokalen Trattoria, die traditionelle römische Gerichte serviert.",
-        "description": "Authentische Trastevere-Trattoria",
-        "detailedDescription": "Da Enzo al 29 ist eine kleine, familiengeführte Trattoria im Herzen von Trastevere, die authentische römische Küche verkörpert. Die Speisekarte bietet täglich wechselnde Spezialitäten auf Basis marktfrischer Zutaten. Bekannt für großzügige Portionen und herzliche Gastfreundschaft, ist dieses schnörkellose Lokal bei Einheimischen und informierten Touristen gleichermaßen beliebt. Das gemütliche Interieur mit Holztischen und die freundliche Atmosphäre vermitteln das Gefühl, bei einem römischen Freund zu speisen."
-      },
-      "zh": {
-        "name": "Da Enzo al 29",
-        "narration": "在Da Enzo享受正宗的特拉斯提弗列美食，这是一家深受喜爱的当地餐厅，提供传统罗马菜肴。",
-        "description": "正宗的特拉斯提弗列餐厅",
-        "detailedDescription": "Da Enzo al 29是一家位于特拉斯提弗列中心的小型家庭经营餐厅，体现了正宗的罗马烹饪。菜单以每日市场新鲜食材为基础推出特色菜。以慷慨的份量和热情的款待而闻名，这家朴实无华的餐厅深受当地人和知情游客的喜爱。木桌的舒适内饰和友好的氛围让人感觉像是在罗马朋友家用餐。"
-      },
-      "ja": {
-        "name": "Da Enzo al 29",
-        "narration": "伝統的なローマ料理を提供する地元で愛されるトラットリア、Da Enzoで本格的なトラステヴェレの食事をお楽しみください。",
-        "description": "本格的なトラステヴェレのトラットリア",
-        "detailedDescription": "Da Enzo al 29は、トラステヴェレの中心部にある小さな家族経営のトラットリアで、本格的なローマ料理を体現しています。メニューは市場から仕入れた新鮮な食材に基づく日替わりスペシャルを提供しています。惜しみないポーションと温かいおもてなしで知られるこの飾らない食堂は、地元の人々と情報通の観光客の両方に人気があります。木製テーブルのある居心地の良い内装と親しみやすい雰囲気は、ローマの友人の家で食事をしているような気分にさせてくれます。"
-      },
-      "pt": {
-        "name": "Da Enzo al 29",
-        "narration": "Desfrute de autêntica cozinha do Trastevere no Da Enzo, uma querida trattoria local que serve pratos romanos tradicionais.",
-        "description": "Autêntica trattoria do Trastevere",
-        "detailedDescription": "Da Enzo al 29 é uma pequena trattoria familiar no coração do Trastevere que incorpora a autêntica cozinha romana. O menu apresenta especialidades diárias baseadas em ingredientes frescos do mercado. Conhecido por porções generosas e hospitalidade calorosa, este restaurante despretensioso é popular entre locais e turistas informados. O interior aconchegante com mesas de madeira e a atmosfera amigável fazem você se sentir como se estivesse jantando na casa de um amigo romano."
-      },
-      "ru": {
-        "name": "Da Enzo al 29",
-        "narration": "Насладитесь аутентичной кухней Трастевере в Da Enzo — любимой местной траттории, подающей традиционные римские блюда.",
-        "description": "Аутентичная траттория Трастевере",
-        "detailedDescription": "Da Enzo al 29 — это небольшая семейная траттория в самом сердце Трастевере, воплощающая подлинную римскую кухню. В меню представлены ежедневные блюда из свежих рыночных продуктов. Известный щедрыми порциями и теплым гостеприимством, этот непритязательный ресторанчик популярен как среди местных жителей, так и среди осведомленных туристов. Уютный интерьер с деревянными столами и дружелюбная атмосфера создают ощущение, что вы обедаете у римского друга дома."
+        "name": "마리나 베이 샌즈",
+        "narration": "싱가포르의 가장 상징적인 랜드마크인 마리나 베이 샌즈에 오신 것을 환영합니다. 이 통합 리조트는 도시 스카이라인의 장관을 이루는 전망을 제공하는 멋진 옥상 인피니티 풀을 특징으로 합니다.",
+        "description": "옥상 인피니티 풀이 있는 상징적인 통합 리조트",
+        "historicalInfo": "2010년에 개장한 마리나 베이 샌즈는 라스베이거스 샌즈가 58억 8천만 달러를 들여 개발하여 세계에서 가장 비싼 독립형 카지노 부동산이 되었습니다."
       }
     },
-    "openingHours": "Mon-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun",
-    "priceRange": "€€ (€25-40 per person)",
-    "cuisine": "Traditional Roman",
-    "reservationUrl": "https://www.thefork.com/restaurant/da-enzo-29-r43287",
-    "phoneNumber": "+39 06 581 2260",
-    "menuHighlights": [
-      "Carciofi alla Giudia",
-      "Rigatoni Pajata",
-      "Abbacchio",
-      "Puntarelle"
-    ],
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
     "restaurantPhotos": null,
     "paymentMethods": null,
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.305Z",
-    "updatedAt": "2026-02-22T18:28:13.710Z"
-  },
-  {
-    "id": "paris_restaurant_chez_janou",
-    "cityId": "paris",
-    "name": "Chez Janou",
-    "lat": 48.8554,
-    "lng": 2.3639,
-    "radius": 40,
-    "narration": "여러분, 상상해보세요! 지금 여러분은 파리의 마레 지구, 그 좁고 낭만적인 골목길을 걷고 있습니다. 자갈길을 따라 걷다 보면 코끝을 간지럽히는 향긋한 프로방스 허브 향기! 바로 눈 앞에, 붉은색 차양이 드리워진 사랑스러운 비스트로, 쉐 자누가 나타납니다. 마치 영화 세트장처럼 아름다운 곳이죠. 문을 열고 들어서는 순간, 따뜻한 미소와 활기찬 대화 소리가 여러분을 맞이할 거예요. 벽에는 프로방스의 풍경을 담은 그림들이 걸려 있고, 테이블 위에는 붉은 체크무늬 식탁보가 깔려 있죠. 쉐 자누는 단순한 식당이 아니에요. 프랑스 남부, 프로방스의 따스한 햇살과 향긋한 바람이 느껴지는 공간이죠. 지금 여러분은 올리브 오일 향이 가득한 공기, 지중해의 활기 넘치는 에너지를 온몸으로 느끼고 있습니다. 쉐 자누의 셰프는 마치 마법사 같아요. 신선한 재료들을 가지고 프로방스의 맛을 그대로 재현해내죠. 싱싱한 토마토와 바질, 올리브, 마늘, 그리고 향긋한 허브들이 어우러져 만들어내는 맛은, 정말 잊을 수 없을 거예요. 특히, 쉐 자누의 초콜릿 무스는 꼭 맛봐야 할 메뉴랍니다! 부드러운 초콜릿의 풍미가 입 안 가득 퍼지는 순간, 여러분은 천국에 온 듯한 기분을 느낄 수 있을 거예요. 쉐 자누에서는 맛있는 음식뿐만 아니라, 파리지앵들의 삶을 엿볼 수 있는 특별한 경험을 할 수 있습니다. 친구들과 웃고 떠들며 맛있는 음식을 나누는 그들의 모습은, 정말 정겹고 아름답죠. 지금 바로 쉐 자누에서 프로방스의 맛과 파리의 낭만을 만끽해보세요! 잊지 못할 추억을 만들 수 있을 거예요.",
-    "description": "Provençal bistro in the Marais",
-    "category": "Restaurant",
-    "detailedDescription": "쉐 자누는 파리 마레 지구에 위치한, 프로방스 스타일의 매력적인 비스트로입니다. 1970년대에 문을 연 이후, 현지인과 관광객 모두에게 꾸준히 사랑받는 곳이죠. 이곳의 가장 큰 매력은 뭐니 뭐니 해도 프로방스 지방의 풍미를 그대로 느낄 수 있다는 점입니다. 신선한 재료를 사용하여 만든 라따뚜이, 부야베스, 염소 치즈 샐러드 등은 프로방스의 햇살과 바람을 담은 듯한 맛을 자랑합니다. 쉐 자누는 특히 초콜릿 무스로 유명합니다. 무려 8가지 종류의 초콜릿 무스가 준비되어 있으며, 원하는 만큼 마음껏 즐길 수 있다는 점이 특징입니다. 숟가락으로 푹 떠서 입에 넣는 순간, 진하고 달콤한 초콜릿의 풍미가 입 안 가득 퍼져나가죠. 현지인들 사이에서는 '초콜릿 무스 천국'이라고 불릴 정도랍니다. 쉐 자누를 방문할 때는 예약이 필수입니다. 특히 저녁 시간에는 자리가 없을 가능성이 높으니, 미리 예약하고 방문하는 것이 좋습니다. 또한, 쉐 자누는 좁은 골목길에 위치하고 있어 찾기가 어려울 수 있습니다. 하지만, 구글 지도를 이용하면 쉽게 찾아갈 수 있습니다. 숨겨진 보석 같은 쉐 자누에서, 프로방스의 맛과 파리의 낭만을 동시에 느껴보세요!",
-    "photos": [
-      "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Chez Janou",
-        "narration": "Experience Provençal flavors at Chez Janou, a charming bistro in the Marais with a famous chocolate mousse.",
-        "description": "Provençal bistro in the Marais"
-      },
-      "ko": {
-        "name": "셰 자누",
-        "narration": "유명한 초콜릿 무스가 있는 마레 지구의 매력적인 비스트로 셰 자누에서 프로방스 풍미를 경험하세요.",
-        "description": "마레의 프로방스 비스트로"
-      },
-      "it": {
-        "name": "Chez Janou",
-        "narration": "Vivi i sapori provenzali da Chez Janou, un bistrot affascinante nel Marais con una famosa mousse al cioccolato.",
-        "description": "Bistrot provenzale nel Marais"
-      }
-    },
-    "openingHours": "Daily: 12:00-15:00, 19:00-midnight",
-    "priceRange": "€€ (€35-55 per person)",
-    "cuisine": "Provençal",
-    "reservationUrl": "https://www.thefork.com/restaurant/chez-janou-r45204",
-    "phoneNumber": "+33 1 42 72 28 41",
-    "menuHighlights": [
-      "Unlimited Chocolate Mousse",
-      "Bouillabaisse",
-      "Ratatouille",
-      "Lamb Provençal"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:41.029Z",
-    "updatedAt": "2026-02-22T18:28:33.091Z"
+    "createdAt": "2026-02-12T12:11:30.946Z",
+    "updatedAt": "2026-02-22T18:36:32.946Z"
   },
   {
     "id": "vatican-night-tour",
@@ -16582,62 +13711,16 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:32:09.434Z"
   },
   {
-    "id": "marina-bay-sands",
-    "cityId": "singapore",
-    "name": "Marina Bay Sands",
-    "lat": 1.2837,
-    "lng": 103.8607,
-    "radius": 70,
-    "narration": "자, 눈을 감고 상상해보세요. 따스한 싱가포르의 햇살이 당신의 피부를 부드럽게 감싸 안고, 코끝에는 살짝 짭짤한 바다 내음이 스치는 듯한 기분! 지금 여러분은 싱가포르의 심장, 마리나 베이 샌즈 앞에 서 있습니다. 웅장하게 솟아오른 세 개의 타워 위에 거대한 배가 얹혀 있는 듯한 독특한 외관은 그야말로 압도적이죠. 마치 미래 도시에서 튀어나온 듯한 모습에 저절로 탄성이 터져 나올 거예요. 엘리베이터를 타고 57층으로 올라가면, 세계에서 가장 높은 곳에 위치한 인피니티 풀이 여러분을 기다립니다. 하늘과 맞닿은 듯한 푸른 수영장에 몸을 담그고, 눈앞에 펼쳐지는 싱가포르의 스카이라인을 감상해보세요. 빌딩 숲 사이로 반짝이는 마천루, 에메랄드빛 바다, 그리고 저 멀리 인도네시아 섬까지 한눈에 담을 수 있습니다. 밤이 되면 마리나 베이 샌즈는 더욱 화려하게 변신합니다. 수영장 옆 루프탑 바에서 칵테일 한 잔을 기울이며, 레이저 쇼 '스펙트라'를 감상해보세요. 음악에 맞춰 춤추는 빛과 물의 향연은 잊지 못할 추억을 선사할 거예요. 마리나 베이 샌즈는 단순한 호텔이 아닙니다. 싱가포르의 꿈과 미래를 담은 상징이자, 여러분의 특별한 여행을 더욱 특별하게 만들어줄 마법 같은 공간입니다. 자, 이제 숨을 크게 쉬고, 이 놀라운 경험을 마음껏 만끽해보세요!",
-    "description": "Iconic integrated resort with rooftop infinity pool",
-    "category": "Modern Architecture",
-    "detailedDescription": "마리나 베이 샌즈는 싱가포르의 랜드마크를 넘어, 하나의 살아있는 예술 작품이라고 할 수 있습니다. 2010년에 문을 연 이 거대한 복합 리조트는 단순히 호텔, 쇼핑몰, 카지노를 합쳐놓은 것이 아니라, 싱가포르의 혁신적인 정신과 미래를 향한 비전을 담고 있습니다. 57층 스카이파크에 있는 인피니티 풀은 그야말로 '인생샷' 명소! 하지만 이곳은 투숙객 전용이라는 사실, 알고 계셨나요? 만약 수영장을 이용하고 싶다면, 호텔 예약을 서두르세요! 현지인들만 아는 꿀팁 하나 알려드릴까요? 마리나 베이 샌즈 몰 지하에는 다양한 맛집들이 숨어있습니다. 특히, 싱가포르의 대표 음식인 칠리 크랩을 저렴하게 즐길 수 있는 곳도 있으니 꼭 한번 방문해보세요. 그리고, 밤마다 펼쳐지는 '스펙트라' 레이저 쇼는 절대 놓치지 마세요! 마리나 베이 샌즈 앞에서 펼쳐지는 화려한 빛과 물의 향연은, 싱가포르의 밤을 더욱 로맨틱하게 만들어줄 겁니다. 마지막으로, 마리나 베이 샌즈 건설에는 숨겨진 비화가 있습니다. 원래 이 프로젝트는 훨씬 더 큰 규모로 계획되었지만, 자금 부족으로 인해 축소되었다고 합니다. 만약 원래 계획대로 건설되었다면, 지금보다 훨씬 더 웅장한 모습이었을 거라고 하니, 상상만 해도 아찔하네요!",
-    "photos": [
-      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800",
-      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800",
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800"
-    ],
-    "historicalInfo": "Opened in 2010, Marina Bay Sands was developed by Las Vegas Sands at a cost of $5.88 billion, making it the world's most expensive standalone casino property.",
-    "yearBuilt": "2010",
-    "architect": "Moshe Safdie",
-    "translations": {
-      "en": {
-        "name": "Marina Bay Sands",
-        "narration": "Welcome to Marina Bay Sands, Singapore's most iconic landmark. This integrated resort features a stunning rooftop infinity pool with spectacular views of the city skyline.",
-        "description": "Iconic integrated resort with rooftop infinity pool",
-        "historicalInfo": "Opened in 2010, Marina Bay Sands was developed by Las Vegas Sands at a cost of $5.88 billion, making it the world's most expensive standalone casino property."
-      },
-      "ko": {
-        "name": "마리나 베이 샌즈",
-        "narration": "싱가포르의 가장 상징적인 랜드마크인 마리나 베이 샌즈에 오신 것을 환영합니다. 이 통합 리조트는 도시 스카이라인의 장관을 이루는 전망을 제공하는 멋진 옥상 인피니티 풀을 특징으로 합니다.",
-        "description": "옥상 인피니티 풀이 있는 상징적인 통합 리조트",
-        "historicalInfo": "2010년에 개장한 마리나 베이 샌즈는 라스베이거스 샌즈가 58억 8천만 달러를 들여 개발하여 세계에서 가장 비싼 독립형 카지노 부동산이 되었습니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:30.946Z",
-    "updatedAt": "2026-02-22T18:33:17.616Z"
-  },
-  {
     "id": "batu-caves-tour-kl",
     "cityId": "kuala-lumpur",
     "name": "Batu Caves Cultural Tour",
     "lat": 3.2379,
     "lng": 101.6841,
     "radius": 70,
-    "narration": "자, 상상해보세요. 뜨거운 말레이시아의 햇살 아래, 여러분은 지금 바투 동굴 입구에 서 있습니다. 272개의 알록달록한 계단이 마치 무지개처럼 여러분을 향해 뻗어 있죠. 숨을 크게 들이쉬니, 코끝에 진한 향 냄새와 짭짤한 땀 냄새가 섞여 들어오는 것 같아요. 발 아래를 보세요. 수많은 사람들이 이 계단을 오르내리며 소원을 빌고, 기도를 올렸겠죠. 자, 이제 우리도 함께 올라가 볼까요? 한 계단, 한 계단 오를 때마다 가슴 속에 간절한 소망 하나씩 품어보는 거예요. 계단을 오르다 보면, 장난기 가득한 원숭이들이 여러분을 반길 거예요. 가끔은 가방을 낚아채려는 짓궂은 녀석들도 있으니 조심해야 하지만요. 하지만 걱정 마세요, 이 모든 순간이 바투 동굴을 더욱 특별하게 만들어줄 테니까요. 드디어 동굴 입구에 도착했어요! 거대한 석회암 동굴이 입을 쩍 벌리고 우리를 맞이하는 모습은 정말 압도적이죠. 동굴 안으로 들어서면, 시원한 바람이 땀을 식혀주고, 신비로운 분위기가 온몸을 감싸는 듯한 느낌이 들 거예요. 천장을 올려다보세요. 수백만 년 동안 빗물과 바람이 빚어낸 기묘한 종유석과 석순들이 마치 시간의 조각처럼 매달려 있잖아요. 이곳은 단순한 동굴이 아니에요. 힌두교 신앙의 중심지이자, 수많은 사람들의 기도와 염원이 깃든 성스러운 공간이죠. 지금 여러분은 바투 동굴의 심장부에 서 있습니다. 이 웅장함과 신성함을 온몸으로 느껴보세요! 마치 시간 여행을 떠나온 듯한 기분이 들지 않나요? 자, 이제 바투 동굴의 숨겨진 이야기를 찾아 함께 떠나볼까요?",
+    "narration": "자, 눈을 감고 쿠알라룸푸르의 뜨거운 햇살을 느껴보세요. 코끝을 간지럽히는 향긋한 꽃내음과 알싸한 향신료 냄새가 섞여 듭니다. 저 멀리 힌두 사원의 경건한 종소리가 아련하게 들려오는 듯하죠? 지금 여러분은 말레이시아의 심장, 바투 동굴로 향하고 있습니다. 상상해보세요. 거대한 석회암 절벽이 눈앞에 웅장하게 펼쳐지는 광경을! 수백만 년의 세월이 빚어낸 자연의 예술작품이죠. 자, 이제 272개의 알록달록한 계단을 올라볼까요? 계단 하나하나를 오를 때마다 심장이 쿵쾅거리고, 숨이 차오르는 것을 느낄 수 있을 거예요. 하지만 걱정 마세요! 옆에는 귀여운 원숭이 친구들이 함께 응원해줄 테니까요. 장난기 가득한 눈빛으로 여러분의 간식을 노리는 원숭이들을 조심하면서, 천천히 발걸음을 옮겨 보세요. 계단을 다 오르면, 거대한 황금빛 무루간 신상이 여러분을 맞이할 겁니다. 42.7미터에 달하는 위풍당당한 모습에 압도당하지 않도록 조심하세요! 동굴 안으로 들어서면, 더욱 놀라운 광경이 펼쳐집니다. 천장에서 쏟아지는 햇살이 신비로운 분위기를 자아내고, 곳곳에 자리 잡은 힌두 사당은 경건함을 더하죠. 현지인들은 이곳에서 기도를 올리고, 소원을 빌며, 삶의 위안을 얻습니다. 여러분도 잠시 눈을 감고, 마음속 깊은 곳에서 울려 나오는 소리에 귀 기울여 보세요. 바투 동굴은 단순한 관광지가 아닙니다. 수많은 사람들의 믿음과 희망, 그리고 삶의 이야기가 담겨 있는 신성한 공간이죠. 지금 여러분의 발 아래에는 수백 년, 수천 년의 역사가 잠들어 있습니다. 이 경이로운 경험을 마음속 깊이 새기고, 일상으로 돌아가세요. 바투 동굴의 에너지와 영감이 여러분의 삶에 긍정적인 영향을 주기를 바랍니다.",
     "description": "Cultural tour of sacred Batu Caves Hindu temple",
     "category": "Activity",
-    "detailedDescription": "바투 동굴은 쿠알라룸푸르에서 북쪽으로 약 13km 떨어진 곳에 위치한 석회암 언덕으로, 힌두교 성지이자 인기 있는 관광 명소입니다. ‘바투’는 말레이어로 ‘돌’을 의미하며, 이곳에는 힌두교 사원과 다양한 신을 모시는 동굴 사원이 자리 잡고 있습니다. 특히 입구에 우뚝 서 있는 높이 42.7m의 황금빛 무루간 신상은 바투 동굴의 상징과도 같죠. 바투 동굴은 19세기 후반, 타밀족 상인 K. 투암바사미 필라이에 의해 힌두교 성지로 개발되기 시작했습니다. 그는 이 동굴이 힌두교 신앙에 적합하다고 판단하고, 무루간 신에게 봉헌했습니다. 매년 타이푸삼 축제 기간에는 수많은 순례자들이 바투 동굴을 찾아와 신에게 경배를 드립니다. 현지인 꿀팁을 하나 알려드릴까요? 바투 동굴 계단을 오르기 전에, 입구 근처에서 신선한 코코넛 워터를 꼭 맛보세요! 더운 날씨에 지친 몸을 시원하게 달래줄 뿐만 아니라, 갈증 해소에도 아주 효과적이랍니다. 또 하나! 바투 동굴 주변에는 다양한 인도 음식점들이 즐비합니다. 특히 남인도식 채식 요리는 꼭 한번 드셔보시길 추천드려요. 저렴하면서도 푸짐한 한 끼 식사를 즐길 수 있답니다. 바투 동굴 방문 시, 원숭이들이 소지품을 훔쳐가지 않도록 주의하세요! 가방은 꼭 앞으로 메고, 음식물은 눈에 띄지 않게 보관하는 것이 좋습니다. 그리고 바투 동굴은 신성한 장소이므로, 복장에 신경 써 주시는 것이 좋습니다. 짧은 반바지나 민소매 셔츠는 피하는 것이 좋겠죠?",
+    "detailedDescription": "바투 동굴은 쿠알라룸푸르에서 북쪽으로 약 13km 떨어진 곳에 위치한 석회암 동굴입니다. 힌두교 성지로 유명하며, 말레이시아에서 가장 인기 있는 관광지 중 하나죠. 동굴은 약 4억 년 전에 형성되었으며, 19세기 후반에 인도 상인 K. 탄다유타파니에 의해 사원으로 발견되었습니다. 그는 동굴 입구에 스리 무루간 신의 조상을 모셨고, 이후 매년 타이푸삼 축제가 성대하게 열리게 되었습니다. 272개의 계단은 1920년대에 건설되었으며, 최근에는 형형색색으로 새롭게 단장하여 더욱 아름다운 모습으로 변모했습니다. 바투 동굴은 단순히 아름다운 경관을 자랑하는 곳이 아닙니다. 이곳은 힌두교 신앙의 중심지이며, 말레이시아 다문화 사회의 상징이기도 합니다. 현지인들은 바투 동굴을 방문하여 신에게 기도하고, 가족의 건강과 행복을 기원합니다. 숨겨진 비화 하나 알려드릴까요? 바투 동굴에는 '다크 케이브(Dark Cave)'라는 숨겨진 동굴이 있습니다. 이곳은 일반에 공개되지 않으며, 특별한 허가를 받아야만 탐험할 수 있습니다. 다크 케이브는 다양한 동굴 생물의 서식지이며, 학술적으로도 매우 중요한 가치를 지니고 있습니다. 만약 여러분이 모험심이 강한 여행자라면, 다크 케이브 탐험에 도전해보는 것도 좋은 경험이 될 겁니다.",
     "photos": [
       "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800",
       "https://images.unsplash.com/photo-1580998914224-cbdec8e48e11?w=800",
@@ -16687,7 +13770,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:35.835Z",
-    "updatedAt": "2026-02-22T18:33:38.843Z"
+    "updatedAt": "2026-02-22T18:36:53.700Z"
   },
   {
     "id": "tokyo_sensoji_nanobanana",
@@ -16709,7 +13792,6 @@ export const LANDMARKS: Landmark[] = [
     "translations": {
       "ko": {
         "name": "센소지 (Senso-ji Temple)",
-        "narration": "도쿄에서 가장 오래된 사원이자 아사쿠사의 상징.",
         "description": "도쿄에서 가장 오래된 사원이자 아사쿠사의 상징."
       }
     },
@@ -16725,57 +13807,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-15T11:03:36.307Z",
     "updatedAt": "2026-02-22T18:28:52.674Z"
-  },
-  {
-    "id": "london_restaurant_st_john",
-    "cityId": "london",
-    "name": "St. JOHN",
-    "lat": 51.5204,
-    "lng": -0.1025,
-    "radius": 40,
-    "narration": "자, 상상해보세요. 런던 스미스필드의 활기 넘치는 분위기 속으로 시간 여행을 떠나는 겁니다. 1994년 문을 연 세인트 존(St. JOHN) 레스토랑 앞에 서 있다고 상상해보세요. 겉모습은 소박하지만, 문을 여는 순간 '코에서 꼬리까지'라는 철학이 녹아있는 특별한 미식의 세계가 펼쳐집니다. 창밖으로는 분주한 런던의 풍경이 펼쳐지고, 안에서는 맛있는 냄새가 코를 간지럽히죠. 마치 오래된 친구 집에 놀러 온 듯 편안하고 따뜻한 분위기예요. \n\n세인트 존은 단순한 레스토랑이 아니에요. 미슐랭 스타를 받은, 영국 요리의 자존심과 같은 곳이죠. '코에서 꼬리까지'라는 철학은 음식 재료를 낭비 없이, 최대한 활용하겠다는 셰프의 굳은 의지를 보여줍니다. 돼지 뽈살 튀김, 본메로우 샐러드, 송아지 콩팥 요리... 이름만 들어서는 상상하기 힘들 수도 있지만, 한 입 맛보는 순간, 신선한 재료 본연의 맛과 풍미에 감탄하게 될 거예요. \n\n지금 여러분의 발 아래에는, 수많은 미식가들의 발길이 닿았던 역사가 살아 숨 쉬고 있습니다. 세인트 존의 테이블에 앉아, 영국 요리의 새로운 가능성을 경험해보세요. 와인 한 잔과 함께, 잊지 못할 미식 여행을 시작하는 겁니다. 세인트 존에서의 식사는 단순한 식사를 넘어, 영국 문화와 철학을 맛보는 특별한 경험이 될 거예요.",
-    "description": "Nose-to-tail British cuisine",
-    "category": "Restaurant",
-    "detailedDescription": "세인트 존은 런던 스미스필드에 위치한 레스토랑으로, '코에서 꼬리까지(Nose-to-tail eating)'라는 철학을 내세워 영국 요리에 혁신을 가져온 곳입니다. 1994년 Fergus Henderson와 Trevor Gulliver에 의해 설립되었으며, 미슐랭 스타를 수상하며 세계적인 명성을 얻었습니다. 이 레스토랑은 식재료를 최대한 활용하여 낭비를 줄이고, 재료 본연의 풍미를 살리는 데 집중합니다. \n\n**현지인 꿀팁**: 세인트 존의 '본 메로우 샐러드'는 꼭 맛봐야 할 메뉴입니다. 겉은 바삭하고 속은 촉촉한 빵 위에 고소한 골수를 발라 먹는 맛은 정말 일품입니다. 또한, 'Madeleines'라는 디저트도 놓치지 마세요. 갓 구워져 따뜻하고 촉촉한 마들렌은 완벽한 식사의 마무리입니다.\n\n**숨겨진 비화**: 세인트 존은 원래 훈제 베이컨 공장이었던 건물을 개조하여 만들어졌습니다. 레스토랑 내부는 산업적인 분위기를 그대로 살려 독특한 매력을 자아냅니다. 또한, 셰프 Fergus Henderson은 파킨슨병을 앓고 있음에도 불구하고 요리에 대한 열정을 잃지 않고 꾸준히 새로운 메뉴를 개발하고 있습니다. 그는 요리 업계에 큰 영감을 주는 인물로 존경받고 있습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "St. JOHN",
-        "narration": "Discover British nose-to-tail dining at St. JOHN, a pioneering restaurant in Smithfield.",
-        "description": "Nose-to-tail British cuisine"
-      },
-      "ko": {
-        "name": "세인트 존",
-        "narration": "스미스필드의 선구적인 레스토랑 세인트 존에서 영국식 코투테일 다이닝을 발견하세요.",
-        "description": "노즈투테일 영국 요리"
-      },
-      "it": {
-        "name": "St. JOHN",
-        "narration": "Scopri la cucina britannica nose-to-tail a St. JOHN, un ristorante pionieristico a Smithfield.",
-        "description": "Cucina britannica nose-to-tail"
-      }
-    },
-    "openingHours": "Mon-Fri: 12:00-15:00, 18:00-22:00, Sat: 12:00-16:00, 18:00-22:00, Sun: 12:00-16:00",
-    "priceRange": "£££ (£50-80 per person)",
-    "cuisine": "British",
-    "reservationUrl": "https://www.thefork.com/restaurant/st-john-r46301",
-    "phoneNumber": "+44 20 7251 0848",
-    "menuHighlights": [
-      "Bone Marrow & Parsley Salad",
-      "Roast Bone Marrow",
-      "Eccles Cake"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:41.508Z",
-    "updatedAt": "2026-02-22T18:29:02.428Z"
   },
   {
     "id": "new-york_grand_central_terminal",
@@ -16822,10 +13853,10 @@ export const LANDMARKS: Landmark[] = [
     "lat": 1.286915,
     "lng": 103.85452,
     "radius": 50,
-    "narration": "자, 상상해보세요. 따뜻한 햇살이 싱가포르의 마리나 베이를 부드럽게 감싸고, 시원한 바닷바람이 당신의 뺨을 간지럽히는 아침입니다. 눈앞에는 반짝이는 물결 위로 우뚝 솟은, 싱가포르의 상징 '멀라이언'이 웅장한 자태를 뽐내고 있습니다. 사자의 머리와 물고기의 몸을 가진 이 신비로운 조각상은 단순한 동상이 아니에요. 싱가포르의 과거와 현재, 그리고 미래를 잇는 살아있는 이야기랍니다. \n\n지금 여러분의 발 아래에는, 한때 작은 어촌 마을이었던 싱가포르가 어떻게 아시아의 중심지로 우뚝 서게 되었는지 그 역사가 숨 쉬고 있습니다. 사자의 용맹함과 물고기의 유연함, 이 두 가지 상반된 이미지가 조화롭게 어우러져 싱가포르의 정신을 대변하고 있죠. 멀라이언의 입에서 뿜어져 나오는 시원한 물줄기를 바라보며, 싱가포르의 꿈과 희망을 함께 느껴보세요. \n\n저 멀리 마리나 베이 샌즈의 웅장한 모습도 눈에 들어오네요. 과거와 현재가 공존하는 이곳에서, 싱가포르의 역동적인 에너지를 온몸으로 느껴보세요. 밤이 되면 멀라이언은 더욱 화려하게 변신합니다. 형형색색의 조명이 물줄기를 비추며 환상적인 야경을 선사하죠. 사랑하는 사람과 함께 멀라이언 앞에서 사진을 찍으며, 잊지 못할 추억을 만들어보세요. 마치 영화 속 주인공이 된 듯한 기분을 느낄 수 있을 거예요. 싱가포르 여행, 그 특별한 순간을 멀라이언 파크에서 시작해보는 건 어떠세요?",
+    "narration": "자, 눈을 감고 싱가포르의 심장이 뛰는 곳, 멀라이언 파크에 와 있다고 상상해보세요. 코끝을 간지럽히는 짭짤한 바다 내음과 활기 넘치는 도시의 에너지가 느껴지시나요? 바로 눈앞에는, 전설 속 동물인 멀라이언이 웅장한 자태를 뽐내고 있습니다. 사자의 용맹함과 물고기의 유연함을 동시에 지닌 이 신비로운 존재는 싱가포르의 과거와 현재, 그리고 미래를 상징하죠. 높이 8.6미터의 이 거대한 조각상은 힘차게 물을 뿜어 올리며, 마치 싱가포르의 번영을 기원하는 듯합니다. 주변을 둘러보면, 반짝이는 마천루들이 하늘을 향해 솟아 있고, 활기찬 관광객들의 웃음소리가 끊이지 않아요. 멀라이언 파크는 단순한 관광 명소를 넘어, 싱가포르 사람들의 자부심과 희망이 담긴 상징적인 장소입니다. 지금 여러분의 발 아래에는, 수많은 이야기와 역사가 잠들어 있습니다. 과거 작은 어촌 마을에서 시작해, 오늘날 세계적인 도시 국가로 성장한 싱가포르의 드라마틱한 여정을 느껴보세요. 밤이 되면 멀라이언은 더욱 아름다운 모습으로 변신합니다. 화려한 조명 아래 빛나는 멀라이언은 마치 밤하늘의 별처럼 반짝이며, 잊지 못할 야경을 선사하죠. 멀라이언 파크에서는 누구나 싱가포르의 매력에 흠뻑 빠져들 수 있습니다. 잠시 시간을 내어 이 특별한 순간을 만끽하고, 싱가포르의 심장 박동 소리를 느껴보세요. 그리고 멀라이언 앞에서 멋진 사진을 찍어, 싱가포르 여행의 소중한 추억을 간직하시길 바랍니다.",
     "description": "Singapore's national icon and symbol",
     "category": "Monument",
-    "detailedDescription": "멀라이언 파크는 싱가포르를 대표하는 랜드마크로, 사자 머리와 물고기 몸을 가진 멀라이언 석상이 있는 곳입니다. 1972년, 싱가포르 관광청에 의해 디자인된 이 석상은 싱가포르의 기원과 정체성을 상징합니다. 사자의 머리는 싱가푸라(Singapura)라는 이름의 유래가 된 '사자의 도시'를, 물고기 몸은 싱가포르가 과거 어촌 마을이었음을 나타냅니다.\n\n현지인만 아는 꿀팁을 하나 알려드릴까요? 멀라이언 석상 앞에서 사진을 찍을 때, 입에서 뿜어져 나오는 물줄기를 손으로 받는 듯한 포즈를 취하면 더욱 재미있는 사진을 연출할 수 있습니다. 또한, 멀라이언 파크 주변에는 다양한 레스토랑과 카페가 있어 싱가포르의 맛있는 음식을 즐기면서 휴식을 취할 수도 있습니다. 숨겨진 비화로는, 원래 멀라이언 석상은 센토사 섬에 있었지만, 마리나 베이 샌즈 건설로 인해 현재의 위치로 옮겨졌다는 사실! 위치가 변경되면서 더 많은 관광객들이 쉽게 방문할 수 있게 되었답니다. 멀라이언 파크는 단순한 관광 명소를 넘어, 싱가포르 사람들의 자부심과 애정이 담긴 특별한 공간입니다.",
+    "detailedDescription": "멀라이언 파크는 싱가포르의 상징인 멀라이언 조각상이 있는 곳으로, 마리나 베이 샌즈를 배경으로 멋진 사진을 찍을 수 있는 최고의 장소입니다. 하지만 멀라이언 파크에는 숨겨진 이야기가 많답니다. 원래 멀라이언은 1964년 관광청의 의뢰로 디자인되었고, 싱가포르의 국명인 '싱가푸라(Singapura)'가 말레이어로 '사자의 도시'라는 뜻에서 유래했습니다. 물고기 몸통은 싱가포르가 과거 어촌이었음을 상징하죠. 현재의 멀라이언 조각상은 2002년에 센토사 섬에서 이곳으로 이전해 왔으며, 그 과정에서 여러 번의 보수 공사를 거쳤습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 멀라이언 조각상의 입에서 뿜어져 나오는 물을 맞으면 행운이 찾아온다는 속설이 있답니다. 물론, 실제로 물을 맞기는 쉽지 않지만, 멀라이언 앞에서 소원을 빌어보는 건 어떨까요? 그리고 멀라이언 파크 주변에는 다양한 레스토랑과 카페가 있으니, 싱가포르의 맛있는 음식을 즐기면서 여유로운 시간을 보내는 것도 추천합니다. 특히 저녁 시간에는 마리나 베이 샌즈의 레이저 쇼를 감상하며 낭만적인 분위기를 만끽할 수 있습니다.",
     "photos": [
       "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800",
       "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800",
@@ -16859,7 +13890,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:31.065Z",
-    "updatedAt": "2026-02-22T18:34:06.688Z"
+    "updatedAt": "2026-02-22T18:37:03.252Z"
   },
   {
     "id": "rome-cooking-class",
@@ -16868,10 +13899,10 @@ export const LANDMARKS: Landmark[] = [
     "lat": 41.8967,
     "lng": 12.4822,
     "radius": 60,
-    "narration": "상상해보세요! 여러분은 지금 로마의 활기 넘치는 시장 한복판에 서 있습니다. 신선한 바질 향, 잘 익은 토마토의 달콤한 향, 그리고 갓 구운 빵 냄새가 코끝을 간지럽히죠. 왁자지껄한 상인들의 목소리와 활기찬 에너지에 휩싸여, 마치 영화 속 주인공이 된 듯한 기분일 거예요. 자, 이제 앞치마를 두르고, 로마 최고의 셰프와 함께 맛있는 로마 요리의 세계로 빠져볼까요? 오늘 우리는 카르보나라와 카치오 에 페페, 이 두 가지 대표적인 로마 파스타를 완벽하게 마스터할 거예요. 셰프는 마치 오랜 친구처럼 친근하게 요리의 비법을 전수해 줄 거예요. 면을 삶는 완벽한 타이밍부터, 치즈와 후추의 황금 비율, 그리고 크리미한 소스를 만드는 특별한 기술까지! 칼날이 도마를 두드리는 소리, 뜨거운 팬에서 지글거리는 베이컨의 소리, 그리고 맛있는 냄새가 여러분의 오감을 자극할 거예요. 단순히 레시피를 따라 하는 것이 아니라, 로마의 역사와 문화를 맛보는 특별한 경험이 될 거예요. 셰프의 이야기를 따라가다 보면, 마치 로마의 숨겨진 골목길을 탐험하는 듯한 즐거움을 느낄 수 있을 거예요. 자, 이제 여러분의 손으로 직접 만든 최고의 로마 파스타를 맛볼 시간이에요! 한 입 베어 무는 순간, 여러분은 로마의 맛과 향에 완전히 매료될 거예요. 이 맛은 여러분의 기억 속에 영원히 남을 거예요. 로마에서의 특별한 요리 수업, 잊지 못할 추억을 만들어보세요!",
+    "narration": "자, 상상해보세요. 따스한 햇살이 쏟아지는 로마의 아침, 싱싱한 재료들이 가득한 시장을 지나 정겹고 아늑한 쿠킹 스튜디오에 들어서는 여러분의 모습을요. 오늘, 여러분은 단순한 관광객이 아닌 진정한 로마인이 되어볼 겁니다. 앞치마를 두르고, 밀가루를 묻히며, 이탈리아의 심장이자 영혼인 로마 요리의 비밀을 파헤쳐 볼 시간이에요! 먼저, 인자한 미소로 여러분을 맞이하는 현지 셰프를 만나 인사를 나눠볼까요? 그의 눈빛에는 요리에 대한 열정과 로마 음식에 대한 자부심이 가득하답니다. 셰프의 능숙한 손길을 따라 카르보나라와 카치오 에 페페, 이 두 가지 파스타 요리의 정수를 배워볼 거예요. 신선한 달걀노른자와 짭짤한 판체타, 그리고 후추의 조화! 섬세한 치즈의 풍미까지! 모든 재료 하나하나가 완벽한 맛을 만들어내기 위한 필수 요소들이죠. 셰프의 설명을 들으며 직접 반죽을 만들고, 소스를 버무리고, 면을 삶는 과정을 통해 로마 요리의 깊이를 경험하게 될 거예요. 면이 익어가는 동안 퍼지는 향긋한 바질 향, 지글거리는 기름 소리, 그리고 셰프의 유쾌한 농담까지, 모든 순간이 오감을 자극하는 특별한 경험이 될 거예요. 직접 만든 파스타를 맛보는 순간, 여러분은 아마 깜짝 놀라게 될 거예요. 시판 파스타와는 비교할 수 없는 깊고 풍부한 맛, 입 안 가득 퍼지는 신선한 재료들의 향연! 이 맛은 단순한 음식을 넘어, 로마의 역사와 문화를 담고 있는 듯하답니다. 사랑하는 사람들과 함께 이 맛을 나누고, 로마에서의 특별한 추억을 이야기하며 웃음꽃을 피워보세요. 자, 이제 여러분도 로마 요리의 마스터가 될 준비 되셨나요? Buon Appetito!",
     "description": "Hands-on cooking class for traditional Roman cuisine",
     "category": "Activity",
-    "detailedDescription": "로마 요리 수업은 단순한 요리 강좌가 아닙니다. 현지 셰프의 친절한 지도 아래, 로마의 대표적인 파스타 요리인 카르보나라와 카치오 에 페페를 직접 만들어보는 특별한 경험이죠. 카르보나라는 계란 노른자, 페코리노 로마노 치즈, 구안치알레(돼지 볼살) 또는 판체타(베이컨)를 사용하여 만드는 크리미한 파스타입니다. 카치오 에 페페는 페코리노 로마노 치즈와 블랙 페퍼, 그리고 파스타 삶은 물만으로 만드는 매우 심플하지만 깊은 풍미를 자랑하는 파스타입니다. 이 두 가지 요리는 모두 로마의 전통과 역사를 담고 있으며, 현지인들의 삶 속에 깊숙이 자리 잡고 있습니다. 수업에서는 신선한 재료를 선택하는 방법부터, 면을 완벽하게 삶는 비법, 그리고 소스를 만드는 특별한 기술까지, 모든 과정을 셰프가 상세하게 설명해 줍니다. 단순히 레시피를 따라 하는 것이 아니라, 각 재료의 특징과 조리 과정에 숨겨진 이야기를 배우면서 로마 요리에 대한 이해를 높일 수 있습니다. 꿀팁 하나 알려드릴까요? 카치오 에 페페의 완벽한 맛을 내려면, 면수를 조금씩 넣어가며 치즈가 뭉치지 않도록 계속 저어주는 것이 중요합니다. 또한, 후추는 통후추를 직접 갈아서 사용하는 것이 훨씬 향긋하고 풍부한 맛을 냅니다. 로마 요리 수업은 로마의 맛과 문화를 경험하고, 특별한 추억을 만들 수 있는 최고의 방법입니다.",
+    "detailedDescription": "로마 요리 쿠킹 클래스는 단순한 요리 강습을 넘어, 로마의 문화와 역사를 맛보는 특별한 경험입니다. 숙련된 현지 셰프의 지도 아래, 로마를 대표하는 두 가지 파스타 요리, 카르보나라와 카치오 에 페페를 직접 만들어보는 시간을 갖습니다. 카르보나라는 짭짤한 판체타와 신선한 달걀노른자, 그리고 후추의 완벽한 조화가 돋보이는 요리입니다. 특히, 로마 현지에서는 크림을 사용하지 않고 달걀노른자의 농도로만 맛을 내는 것이 특징입니다. 카치오 에 페페는 치즈와 후추라는 단순한 재료만으로 깊은 풍미를 내는 요리입니다. 페코리노 로마노 치즈의 짭짤함과 후추의 매콤함이 어우러져 잊을 수 없는 맛을 선사합니다. 팁을 하나 드리자면, 로마 현지인들은 카치오 에 페페에 면수를 약간 넣어 소스의 농도를 조절한다고 합니다. 이 쿠킹 클래스에서는 요리뿐만 아니라, 로마 음식 문화에 대한 흥미로운 이야기도 들을 수 있습니다. 셰프는 로마 음식의 역사, 재료의 특징, 그리고 현지인들이 즐겨 먹는 음식에 대한 숨겨진 비화를 들려줄 것입니다. 또한, 쿠킹 클래스 후에는 직접 만든 요리를 맛보며, 로마에서의 특별한 추억을 기념할 수 있습니다. 로마의 맛과 문화를 경험하고 싶다면, 로마 요리 쿠킹 클래스는 최고의 선택이 될 것입니다.",
     "photos": [
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
       "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800",
@@ -16963,7 +13994,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:36.627Z",
-    "updatedAt": "2026-02-22T18:33:57.606Z"
+    "updatedAt": "2026-02-22T18:37:13.751Z"
   },
   {
     "id": "colosseum-memories-rome",
@@ -16972,10 +14003,10 @@ export const LANDMARKS: Landmark[] = [
     "lat": 41.8902,
     "lng": 12.4924,
     "radius": 30,
-    "narration": "자, 눈을 감고 상상해보세요. 지금 여러분은 2천 년 전 로마, 콜로세움 바로 옆에 서 있습니다. 뜨거운 햇살이 내리쬐고, 아레나에서 울려 퍼지는 검투사들의 함성이 귓가를 맴도는 듯합니다. 바로 그 옆, 자그마한 기념품 가게 'Colosseum Memories'의 문이 활짝 열려 여러분을 맞이하고 있어요. 낡은 나무 문을 열고 들어서는 순간, 시간 여행을 떠나는 기분이 들 거예요. 가죽 냄새, 잉크 냄새, 그리고 오래된 나무의 향기가 뒤섞여 묘한 분위기를 자아내죠. 진열대 위에는 반짝이는 검투사 헬멧들이 웅장한 자태를 뽐내고 있어요. 한번 써볼까요? 묵직한 무게감이 느껴지는 게, 마치 용맹한 검투사가 된 듯한 기분이 들 거예요. 저쪽에는 로마 제국의 역사가 고스란히 담긴 코인들이 반짝이고 있네요. 손에 쥐고 빛에 비춰보면, 2천 년 전 로마 시민들의 삶이 눈앞에 펼쳐지는 듯합니다. 그리고 저기, 곱게 채색된 이탈리아 도자기들이 보이시나요? 섬세한 문양과 아름다운 색감이 눈길을 사로잡네요. 하나하나 살펴보면, 마치 예술 작품을 감상하는 듯한 기분이 들 거예요. 겨울 할인이 한창이라고 하니, 놓치지 마세요! 사랑하는 사람에게 특별한 선물을 하거나, 로마 여행의 추억을 간직할 수 있는 완벽한 기회랍니다. 자, 콜로세움의 웅장함을 가슴에 담고, 'Colosseum Memories'에서 특별한 추억을 만들어보세요!",
+    "narration": "자, 눈을 감고 로마의 심장, 콜로세움 옆 기념품 가게 앞에 서 있다고 상상해보세요. 따스한 햇살이 당신의 어깨를 감싸고, 2천 년 역사의 숨결이 느껴지는 듯합니다. 가게 안으로 한 걸음 내딛자, 가죽 냄새와 낡은 나무 향기가 코를 간지럽히네요. 반짝이는 글래디에이터 투구가 시선을 사로잡고, 마치 영화 '글래디에이터'의 한 장면 속으로 들어온 듯한 착각을 불러일으킵니다. \n\n손에 묵직한 로마 시대 주화 복제품을 들어보세요. 쨍그랑거리는 금속성 소리가 귓가를 울리고, 카이사르와 네로 황제의 시대가 눈앞에 펼쳐지는 듯합니다. 옆 진열대에는 화려한 색감의 이탈리아 도자기가 놓여있네요. 섬세한 문양 하나하나가 장인의 혼을 담고 있는 듯합니다. 로마의 상징인 늑대 젖을 먹는 로물루스와 레무스의 조각상도 보이네요. 마치 콜로세움의 함성이 들려오는 듯, 역사의 소용돌이 속으로 빨려 들어가는 기분이에요. \n\n지금 여러분의 발 아래에는 수많은 관광객들의 발자취가 느껴집니다. 콜로세움의 웅장함을 가슴에 품고, 이곳에서 추억을 기념할 작은 선물을 고르는 사람들의 설렘이 느껴지지 않나요? 가게 주인은 따뜻한 미소로 여러분을 맞이하며, 겨울 특별 할인 혜택을 속삭여줍니다. 로마에서의 잊지 못할 순간을 영원히 간직할 특별한 기념품을 찾아보세요. 콜로세움의 웅장함, 로마의 열정, 그리고 이탈리아의 아름다움이 담긴 기념품들이 여러분을 기다리고 있습니다.",
     "description": "Colosseum-themed souvenirs, Roman replicas, and Italian ceramics",
     "category": "Gift Shop",
-    "detailedDescription": "'Colosseum Memories'는 콜로세움 바로 옆에 위치한 매력적인 기념품 가게입니다. 이곳은 단순한 기념품 가게가 아니라, 로마의 역사와 문화를 생생하게 느낄 수 있는 공간입니다. 검투사 헬멧, 로마 코인, 이탈리아 도자기 등 다양한 기념품을 판매하고 있으며, 각 제품에는 로마의 역사와 관련된 흥미로운 이야기가 담겨 있습니다. 특히, 현지인들만 아는 꿀팁! 콜로세움 지하 투어 티켓을 제시하면 특별 할인을 받을 수 있다는 사실! 또한, 가게 주인은 로마 역사에 대한 해박한 지식을 가지고 있어, 궁금한 점이 있다면 언제든지 물어볼 수 있습니다. 운이 좋다면, 콜로세움의 숨겨진 비화나 검투사들의 알려지지 않은 이야기도 들을 수 있을 거예요. 겨울에는 특별 할인 행사를 진행하며, 더욱 저렴한 가격으로 기념품을 구입할 수 있습니다. 'Colosseum Memories'는 콜로세움을 방문하는 여행객들에게 잊지 못할 추억을 선사하는 특별한 장소입니다. 콜로세움을 방문하신다면, 꼭 들러보세요!",
+    "detailedDescription": "콜로세움 옆 기념품 가게는 단순한 상점을 넘어, 로마 제국의 영광과 현재를 잇는 살아있는 역사책과 같습니다. 이곳에서는 콜로세움의 웅장함을 축소해 놓은 듯한 다양한 기념품들을 만날 수 있습니다. 글래디에이터 투구는 콜로세움에서 펼쳐졌던 치열한 검투 경기를 상상하게 만들고, 로마 시대 주화 복제품은 고대 로마의 경제와 문화를 엿볼 수 있는 기회를 제공합니다. 특히, 이탈리아 도자기는 로마의 예술적 감각을 현대적으로 재해석한 아름다운 작품으로, 여행의 추억을 더욱 특별하게 만들어줍니다.\n\n**현지인 꿀팁:** 겨울에 방문하면 특별 할인 혜택을 누릴 수 있다는 사실! 하지만 진짜 숨겨진 비화는 가게 주인에게 로마 역사에 대한 질문을 던져보는 겁니다. 대부분의 가게 주인들은 로마 역사에 대한 해박한 지식을 가지고 있으며, 흥미로운 이야기들을 들려줄 준비가 되어 있습니다. 특히 콜로세움과 관련된 숨겨진 이야기나, 기념품에 얽힌 전설 등을 물어보면 더욱 풍성한 여행 경험을 얻을 수 있을 것입니다. Visa, Mastercard, Amex 카드 결제가 가능하며, 현금으로 지불하면 추가 할인을 받을 수 있는 경우도 있으니 참고하세요!",
     "photos": [
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
       "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800",
@@ -17061,59 +14092,7 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:37.005Z",
-    "updatedAt": "2026-02-22T18:33:47.728Z"
-  },
-  {
-    "id": "london_restaurant_dishoom",
-    "cityId": "london",
-    "name": "Dishoom",
-    "lat": 51.5142,
-    "lng": -0.1239,
-    "radius": 40,
-    "narration": "상상해보세요. 1930년대 붐베이의 활기 넘치는 거리를요. 향신료 내음이 코를 간지럽히고, 경쾌한 음악 소리가 귓가를 맴돌죠. 바로 그 붐베이의 분위기를 그대로 옮겨 놓은 듯한 곳, 런던의 디슘입니다. 지금 여러분은 디슘의 문을 열고 들어서는 순간, 시간 여행을 떠나는 기분을 느끼실 거예요. 붉은 벽돌 벽과 앤티크한 소품들이 아늑하면서도 이국적인 분위기를 자아내죠. 종업원들의 활기찬 인사와 웃음소리가 발걸음을 더욱 가볍게 만들어 줍니다. 자리에 앉아 메뉴를 펼쳐보세요. 인도 길거리 음식부터 푸짐한 커리까지, 다채로운 요리들이 여러분의 미각을 자극할 준비를 하고 있답니다. 바삭한 식감의 파브 바지(Pav Bhaji)를 한 입 베어 물면, 입안 가득 퍼지는 매콤하면서도 달콤한 맛에 저절로 미소가 지어질 거예요. 부드러운 버터 치킨 커리(Butter Chicken Curry)는 따뜻한 난(Naan)에 곁들여 먹으면 그 풍미가 배가 되죠. 지금 여러분의 눈앞에는 김이 모락모락 피어오르는 맛있는 음식들이 놓여 있습니다. 친구와 함께, 연인과 함께, 혹은 혼자라도 좋아요. 디슘에서는 누구나 맛있는 음식과 함께 행복한 시간을 보낼 수 있답니다. 자, 이제 런던 최고의 인도 레스토랑, 디슘에서 맛있는 붐베이 여행을 시작해볼까요?",
-    "description": "Bombay-style Indian cuisine",
-    "category": "Restaurant",
-    "detailedDescription": "디슘은 런던에서 가장 인기 있는 인도 레스토랑 중 하나로, 1930년대 붐베이의 분위기를 그대로 재현해 놓은 듯한 인테리어와 맛있는 음식으로 유명합니다. 단순히 맛있는 인도 음식을 제공하는 것을 넘어, 붐베이의 문화와 역사를 경험할 수 있는 공간을 만들고자 노력했죠. 모든 메뉴는 신선한 재료와 향신료를 사용하여 정통 인도 요리의 맛을 살렸으며, 특히 아침 식사 메뉴인 '나스타(Naashta)'는 현지인들에게도 큰 사랑을 받고 있습니다. 디슘의 숨겨진 비화 하나를 알려드릴까요? 디슘의 창업자는 인도 여행 중 우연히 작은 길거리 음식점에서 맛본 파브 바지에 감동받아, 런던에 자신만의 디슘을 열기로 결심했다고 합니다. 그 후, 그는 수년간 인도 각지를 돌아다니며 최고의 요리사들을 찾아 스카우트했고, 마침내 런던에서 디슘을 성공적으로 런칭할 수 있었습니다. 런던에 여러 지점이 있지만, 코벤트 가든 지점은 특히 붐비는 편이니 예약은 필수입니다. 현지인들은 디슘의 '하우스 차이(House Chai)'를 꼭 맛봐야 한다고 추천합니다. 식사 후 따뜻한 차이 한 잔은 완벽한 마무리감을 선사할 거예요. 디슘은 단순한 레스토랑이 아닌, 런던에서 즐기는 작은 인도 여행과 같습니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Dishoom",
-        "narration": "Experience Bombay-style cuisine at Dishoom, London's beloved Indian restaurant chain.",
-        "description": "Bombay-style Indian cuisine"
-      },
-      "ko": {
-        "name": "디숌",
-        "narration": "런던에서 사랑받는 인도 레스토랑 체인 디숌에서 봄베이 스타일 요리를 경험하세요.",
-        "description": "봄베이 스타일 인도 요리"
-      },
-      "it": {
-        "name": "Dishoom",
-        "narration": "Vivi la cucina in stile Bombay da Dishoom, l'amata catena di ristoranti indiani di Londra.",
-        "description": "Cucina indiana in stile Bombay"
-      }
-    },
-    "openingHours": "Mon-Thu: 8:00-23:00, Fri: 8:00-midnight, Sat: 9:00-midnight, Sun: 9:00-23:00",
-    "priceRange": "££ (£25-40 per person)",
-    "cuisine": "Indian",
-    "reservationUrl": "https://www.dishoom.com/covent-garden/",
-    "phoneNumber": "+44 20 7420 9320",
-    "menuHighlights": [
-      "Bacon Naan Roll",
-      "House Black Daal",
-      "Chicken Ruby",
-      "Chai"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:41.266Z",
-    "updatedAt": "2026-02-22T18:34:38.116Z"
+    "updatedAt": "2026-02-22T18:37:23.769Z"
   },
   {
     "id": "mendenhall_glacier",
@@ -17184,58 +14163,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": "2026-02-12T12:11:26.617Z",
     "updatedAt": "2026-02-22T18:30:18.332Z"
-  },
-  {
-    "id": "paris_restaurant_le_comptoir",
-    "cityId": "paris",
-    "name": "Le Comptoir du Relais",
-    "lat": 48.8517,
-    "lng": 2.3358,
-    "radius": 40,
-    "narration": "상상해보세요. 지금 여러분은 파리의 6구, 좁다란 골목길 어귀에 서 있습니다. 코를 간지럽히는 버터와 마늘, 허브 향이 섞인 냄새가 당신을 르 콩투아 뒤 를레 앞으로 이끌죠. 자그마한 간판, 창가에 빼곡히 적힌 메뉴, 그리고 문 앞에서부터 느껴지는 활기 넘치는 분위기! 여기가 바로 파리지앵들이 사랑해 마지않는, 이브 캉데보르드의 전설적인 비스트로, 르 콩투아 뒤 를레입니다. 예약 없이는 발 디딜 틈조차 없는 곳이지만, 걱정 마세요! 오늘 우리는 특별히 예약에 성공했으니까요! 안으로 들어가면 따뜻한 나무 테이블과 정겨운 분위기가 여러분을 맞이합니다. 종업원들은 능숙한 솜씨로 주문을 받고, 와인을 따르고, 손님들과 농담을 주고받죠. 마치 오랜 친구 집에 놀러 온 듯 편안한 기분이 들 거예요. 자, 이제 메뉴를 한번 볼까요? 꼼꼼하게 적힌 프랑스어 메뉴판은 마치 예술 작품 같습니다. 달팽이 요리, 푸아그라, 오리 콩피... 클래식한 프랑스 요리들이 당신의 미각을 자극하죠. 뭘 먹어야 할지 고민이라면, 걱정 마세요! 르 콩투아 뒤 를레는 어느 메뉴를 선택하든 후회하지 않을 맛을 선사하니까요. 와인 한 잔을 곁들이면 금상첨화겠죠? 르 콩투아 뒤 를레는 단순한 레스토랑이 아닙니다. 파리의 낭만과 미식, 그리고 따뜻한 사람들의 정이 느껴지는 특별한 공간이죠. 오늘 밤, 이곳에서 잊지 못할 파리의 추억을 만들어보세요! 지금 바로 여러분의 앞에 놓인 따끈한 에스카르고를 음미하며 말이죠!",
-    "description": "Classic French bistro by renowned chef",
-    "category": "Restaurant",
-    "detailedDescription": "르 콩투아 뒤 를레는 파리의 미식가들 사이에서 '예약 전쟁'이라는 말이 나올 정도로 인기가 높은 곳입니다. 이브 캉데보르드 셰프는 프랑스 요리의 전통을 존중하면서도 자신만의 독창적인 스타일을 더해 새로운 미식 경험을 선사하죠. 특히 이곳의 런치 메뉴는 가성비가 좋아 더욱 인기가 높습니다. 저녁에는 좀 더 고급스러운 요리들을 맛볼 수 있으며, 훌륭한 와인 리스트도 준비되어 있습니다. 르 콩투아 뒤 를레를 방문하기 전에 꼭 알아둬야 할 꿀팁이 있습니다. 첫째, 예약은 필수입니다! 몇 주 전, 심지어 몇 달 전에 미리 예약을 해야 원하는 시간대에 식사를 할 수 있습니다. 둘째, 드레스 코드는 크게 신경 쓰지 않아도 됩니다. 편안하고 캐주얼한 복장으로 방문해도 괜찮습니다. 셋째, 프랑스어를 못해도 괜찮습니다. 종업원들이 영어를 할 줄 아니까요. 하지만 간단한 프랑스어 인사말 정도는 알아두면 더욱 친절한 서비스를 받을 수 있을 거예요. 마지막으로, 르 콩투아 뒤 를레 주변에는 매력적인 상점과 갤러리들이 많으니, 식사 전후에 골목길을 따라 산책하며 파리의 낭만을 만끽해보세요. 현지인들은 콩투아 뒤 를레 옆 작은 와인 가게에서 식전주를 사서 가게 앞에서 가볍게 마시는 것을 즐기기도 합니다. 마치 영화 속 한 장면처럼 말이죠!",
-    "photos": [
-      "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Le Comptoir du Relais",
-        "narration": "Taste classic French bistro cuisine at Le Comptoir, Yves Camdeborde's legendary Saint-Germain restaurant.",
-        "description": "Classic French bistro by renowned chef"
-      },
-      "ko": {
-        "name": "르 꽁투아르 뒤 를레",
-        "narration": "이브 캄드보르드의 전설적인 생제르맹 레스토랑 르 꽁투아르에서 클래식 프렌치 비스트로 요리를 맛보세요.",
-        "description": "유명 셰프의 클래식 프렌치 비스트로"
-      },
-      "it": {
-        "name": "Le Comptoir du Relais",
-        "narration": "Assaggia la cucina classica bistrot francese a Le Comptoir, il leggendario ristorante di Yves Camdeborde a Saint-Germain.",
-        "description": "Bistrot francese classico di chef rinomato"
-      }
-    },
-    "openingHours": "Daily: 12:00-15:00, 19:00-23:00",
-    "priceRange": "€€€ (€45-70 per person)",
-    "cuisine": "French Bistro",
-    "reservationUrl": "https://www.thefork.com/restaurant/le-comptoir-du-relais-r45201",
-    "phoneNumber": "+33 1 44 27 07 97",
-    "menuHighlights": [
-      "Foie Gras Terrine",
-      "Beef Bourguignon",
-      "Crème Brûlée",
-      "Duck Confit"
-    ],
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:40.663Z",
-    "updatedAt": "2026-02-22T18:34:17.387Z"
   },
   {
     "id": "charles_bridge",
@@ -17378,133 +14305,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:30:38.693Z"
   },
   {
-    "id": "thames-river-cruise",
-    "cityId": "london",
-    "name": "Thames River Sightseeing Cruise",
-    "lat": 51.5007,
-    "lng": -0.1246,
-    "radius": 60,
-    "narration": "자, 상상해보세요! 지금 여러분은 템스 강 위를 유유히 떠다니는 유람선에 몸을 싣고 있습니다. 시원한 강바람이 여러분의 머리카락을 스치고, 눈앞에는 런던의 심장이 펼쳐집니다. 저 멀리 우뚝 솟은 타워 브리지가 웅장한 자태를 드러내고, 그 옆으로는 쉴 새 없이 돌아가는 런던 아이가 마치 거대한 눈처럼 런던을 굽어보고 있죠. \n\n템스 강은 단순한 강이 아니에요. 로마 시대부터 런던의 역사를 함께 해 온 살아있는 역사책과 같습니다. 과거 바이킹의 침략을 막아내고, 대영제국의 번영을 지켜본 템스 강에는 수많은 이야기와 전설이 흐르고 있죠. 지금 여러분이 지나가는 이 물길 아래에는 수백 년 동안 켜켜이 쌓인 런던의 흥망성쇠가 고스란히 담겨 있답니다. \n\n저기, 런던 탑이 보이시나요? 한때 왕궁이자 감옥, 그리고 보물 창고였던 런던 탑은 런던의 어두운 역사를 간직한 곳이기도 합니다. 앤 불린, 토마스 모어… 수많은 역사 속 인물들이 이곳에서 삶을 마감했죠. 지금은 까마귀들이 런던 탑을 지키고 있다고 하니, 혹시 까마귀를 발견하신다면 행운을 빌어주세요! \n\n템스 강을 따라 펼쳐지는 런던의 풍경은 마치 한 편의 영화 같습니다. 웨스트민스터 궁전의 웅장함, 세인트 폴 대성당의 웅장한 돔, 그리고 현대적인 랜드마크인 더 샤드의 날렵한 모습까지… 템스 강은 과거와 현재가 공존하는 런던의 매력을 가장 잘 보여주는 곳입니다. 자, 템스 강 유람선을 타고 잊지 못할 런던 여행을 시작해볼까요? 지금부터 제가 템스 강에 숨겨진 흥미로운 이야기들을 들려드릴게요!",
-    "description": "Scenic cruise along the River Thames",
-    "category": "Activity",
-    "detailedDescription": "템스 강 유람선 투어는 런던을 가장 특별하게 경험하는 방법 중 하나입니다. 템스 강은 런던의 역사와 문화를 관통하는 젖줄과 같은 존재이며, 유람선을 타고 주요 랜드마크를 감상하며 런던의 매력에 흠뻑 빠져들 수 있습니다. 투어는 보통 웨스트민스터, 런던 아이, 타워 브리지 등 유명 관광지 근처에서 출발하며, 다양한 시간대와 코스를 선택할 수 있습니다. 현지인 꿀팁을 하나 알려드리자면, 늦은 오후 시간대에 투어를 예약하면 아름다운 석양과 함께 런던의 야경을 감상할 수 있다는 사실! 템스 강변에는 수많은 레스토랑과 펍이 즐비하니, 유람선 투어 후 맛있는 식사를 즐기는 것도 좋은 선택입니다. 특히, 템스 강변에 위치한 전통 펍에서 맥주 한 잔을 기울이며 런던의 분위기를 만끽해보세요. 또 다른 비화는, 템스 강에는 '머드라킹'이라는 독특한 활동이 있다는 것입니다. 머드라킹은 썰물 때 드러나는 템스 강변의 진흙 속에서 역사적인 유물을 찾는 활동인데, 운이 좋다면 로마 시대의 동전이나 중세 시대의 도자기 조각을 발견할 수도 있다고 합니다!",
-    "photos": [
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
-      "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=800",
-      "https://images.unsplash.com/photo-1543832923-44667a44c804?w=800",
-      "https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?w=800",
-      "https://images.unsplash.com/photo-1508711451996-c8cabc35c030?w=800",
-      "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800",
-      "https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800"
-    ],
-    "historicalInfo": "Thames cruises have been popular since Victorian times when steamboats first offered public river transport.",
-    "yearBuilt": "19th century",
-    "architect": "Various cruise operators",
-    "translations": {
-      "en": {
-        "name": "Thames River Sightseeing Cruise",
-        "narration": "See London's iconic landmarks from the Thames on this relaxing sightseeing cruise. Pass Tower Bridge, the London Eye, and historic riverside attractions.",
-        "description": "Scenic cruise along the River Thames",
-        "detailedDescription": "A Thames River cruise offers a unique perspective on London's most famous landmarks. Glide along the historic waterway that has been the lifeblood of the city for over 2000 years. Your journey takes you past iconic sights including the Tower of London, Tower Bridge, Shakespeare's Globe Theatre, the London Eye, Houses of Parliament, and Westminster Abbey. Most cruises offer live or recorded commentary in multiple languages, providing fascinating historical insights and architectural details. Choose from various options: hop-on-hop-off services that let you explore attractions at your own pace, circular cruises for comprehensive sightseeing, or themed experiences like afternoon tea cruises or evening jazz cruises. The open-air upper deck provides perfect photo opportunities and fresh river breezes.",
-        "historicalInfo": "Thames cruises have been popular since Victorian times when steamboats first offered public river transport.",
-        "yearBuilt": "19th century",
-        "architect": "Various cruise operators"
-      },
-      "it": {
-        "name": "Crociera Turistica sul Tamigi",
-        "narration": "Ammira i monumenti iconici di Londra dal Tamigi in questa rilassante crociera turistica. Passa il Tower Bridge, il London Eye e le storiche attrazioni lungo il fiume.",
-        "description": "Crociera panoramica lungo il fiume Tamigi",
-        "detailedDescription": "Una crociera sul fiume Tamigi offre una prospettiva unica sui monumenti più famosi di Londra. Scivola lungo la storica via d'acqua che è stata la linfa vitale della città per oltre 2000 anni. Il tuo viaggio ti porta davanti a luoghi iconici tra cui la Torre di Londra, il Tower Bridge, il Globe Theatre di Shakespeare, il London Eye, il Parlamento e l'Abbazia di Westminster. La maggior parte delle crociere offre commenti dal vivo o registrati in più lingue, fornendo affascinanti approfondimenti storici e dettagli architettonici. Scegli tra varie opzioni: servizi hop-on-hop-off che ti permettono di esplorare le attrazioni al tuo ritmo, crociere circolari per un turismo completo o esperienze a tema come crociere con tè pomeridiano o crociere jazz serali. Il ponte superiore all'aperto offre perfette opportunità fotografiche e fresche brezze fluviali.",
-        "historicalInfo": "Le crociere sul Tamigi sono popolari dall'epoca vittoriana quando i battelli a vapore iniziarono a offrire trasporti fluviali pubblici.",
-        "yearBuilt": "XIX secolo",
-        "architect": "Vari operatori di crociera"
-      },
-      "ko": {
-        "name": "템스 강 관광 크루즈",
-        "narration": "이 편안한 관광 크루즈에서 템스 강에서 런던의 상징적인 랜드마크를 보세요. 타워 브리지, 런던 아이, 역사적인 강변 명소를 지나갑니다.",
-        "description": "템스 강을 따라 경치 좋은 크루즈",
-        "detailedDescription": "템스 강 크루즈는 런던의 가장 유명한 랜드마크에 대한 독특한 관점을 제공합니다. 2000년 이상 도시의 생명선이 되어온 역사적인 수로를 따라 미끄러지세요. 여정은 런던 타워, 타워 브리지, 셰익스피어 글로브 극장, 런던 아이, 국회의사당, 웨스트민스터 사원을 포함한 상징적인 명소를 지나갑니다. 대부분의 크루즈는 여러 언어로 라이브 또는 녹음된 해설을 제공하여 매혹적인 역사적 통찰력과 건축적 세부 사항을 제공합니다. 다양한 옵션 중에서 선택하세요: 자신의 속도로 명소를 탐험할 수 있는 홉온홉오프 서비스, 포괄적인 관광을 위한 순환 크루즈, 또는 애프터눈 티 크루즈나 저녁 재즈 크루즈와 같은 테마 체험. 야외 상부 갑판은 완벽한 사진 촬영 기회와 신선한 강바람을 제공합니다.",
-        "historicalInfo": "템스 강 크루즈는 증기선이 처음 공공 강 운송을 제공한 빅토리아 시대부터 인기를 끌고 있습니다.",
-        "yearBuilt": "19세기",
-        "architect": "다양한 크루즈 운영사"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:34.848Z",
-    "updatedAt": "2026-02-22T18:34:48.124Z"
-  },
-  {
-    "id": "phuket-snorkeling-tour",
-    "cityId": "phuket",
-    "name": "Coral Island Snorkeling Tour",
-    "lat": 7.7394,
-    "lng": 98.3565,
-    "radius": 80,
-    "narration": "푸껫 여행, 제대로 즐길 준비 되셨나요? 자, 지금부터 눈부시게 아름다운 산호섬으로 스노클링 투어를 떠나볼 거예요. 상상해보세요. 따뜻한 햇살이 부서지는 에메랄드빛 바다, 코끝을 간지럽히는 짭짤한 바다 내음… 배를 타고 섬으로 향하는 동안, 두 눈을 크게 뜨고 주변을 둘러보세요. 쪽빛 하늘과 그 아래 펼쳐진 푸른 바다의 조화가 마치 한 폭의 그림 같을 거예요.\n\n드디어 산호섬에 도착했어요! 발을 딛는 순간, 부드러운 백사장이 여러분을 맞이할 겁니다. 자, 스노클링 장비를 착용하고 바닷속 세상으로 풍덩 뛰어들어 볼까요? 처음에는 약간 긴장될 수도 있지만, 걱정 마세요. 곧 형형색색의 산호초와 열대어들이 여러분을 반겨줄 거예요. 니모를 찾아서 함께 헤엄쳐 다니는 상상을 해보세요! 눈앞에 펼쳐진 황홀한 광경에 넋을 잃을지도 몰라요. 물고기들이 손가락 사이를 스치고 지나가는 짜릿한 경험, 잊지 못할 추억이 될 거예요.\n\n스노클링을 즐기는 동안, 주변을 잘 살펴보세요. 운이 좋다면 바다거북이나 돌고래를 만날 수도 있답니다! 물 밖으로 나와 따뜻한 햇볕 아래 몸을 녹이는 시간도 잊지 마세요. 시원한 코코넛 주스를 마시며 여유를 만끽하는 거죠. 푸껫 산호섬 스노클링 투어, 여러분의 여행을 더욱 특별하게 만들어줄 거예요. 자, 지금 바로 떠나볼까요?",
-    "description": "Full-day snorkeling adventure at Coral Island",
-    "category": "Activity",
-    "detailedDescription": "푸껫 산호섬 스노클링 투어는 단순한 해양 액티비티를 넘어, 자연의 경이로움을 온몸으로 느낄 수 있는 특별한 경험입니다. 산호섬은 푸껫에서 남쪽으로 약 9km 떨어진 곳에 위치하며, 투명한 바닷물과 아름다운 산호초 덕분에 스노클링 명소로 유명합니다. 특히, 섬 주변의 수심이 얕고 파도가 잔잔하여 초보자도 안전하게 스노클링을 즐길 수 있다는 장점이 있습니다.\n\n**현지인 꿀팁**: 산호섬 스노클링은 오전 시간대가 가장 좋습니다. 햇빛이 강해 바닷속 시야가 훨씬 맑고 선명하며, 사람도 비교적 적어 여유롭게 즐길 수 있습니다. 또한, 섬 곳곳에 숨겨진 작은 해변들을 탐험해보세요. 북적이는 메인 해변과는 달리 한적하고 조용한 분위기 속에서 휴식을 취할 수 있습니다.\n\n**숨겨진 비화**: 산호섬은 과거 '코 론(Koh Lon)'이라는 이름으로 불렸습니다. 이는 현지어로 '긴 섬'이라는 뜻인데, 섬의 모양에서 유래되었습니다. 섬 주민들은 오랫동안 어업에 종사하며 살아왔으며, 최근 관광 산업이 발전하면서 섬 전체가 활기를 띠고 있습니다. 섬을 방문할 때, 현지인들에게 간단한 태국어 인사말을 건네는 것은 어떨까요? 따뜻한 미소와 함께 더욱 풍요로운 경험을 할 수 있을 겁니다.",
-    "photos": [
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
-      "https://images.unsplash.com/photo-1559666126-84f389727b9a?w=800",
-      "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800",
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800",
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
-      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800",
-      "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800"
-    ],
-    "historicalInfo": "Coral Island has been a popular day trip destination from Phuket for decades, known for its accessible snorkeling.",
-    "yearBuilt": "Natural formation",
-    "architect": "Nature",
-    "translations": {
-      "en": {
-        "name": "Coral Island Snorkeling Tour",
-        "narration": "Discover vibrant underwater life on this snorkeling tour to Coral Island. Swim in crystal-clear waters and explore colorful coral reefs teeming with tropical fish.",
-        "description": "Full-day snorkeling adventure at Coral Island",
-        "historicalInfo": "Coral Island has been a popular day trip destination from Phuket for decades, known for its accessible snorkeling.",
-        "yearBuilt": "Natural formation",
-        "architect": "Nature"
-      },
-      "it": {
-        "name": "Tour Snorkeling a Coral Island",
-        "narration": "Scopri la vivace vita sottomarina in questo tour di snorkeling a Coral Island. Nuota in acque cristalline ed esplora barriere coralline colorate brulicanti di pesci tropicali.",
-        "description": "Avventura di snorkeling di un'intera giornata a Coral Island",
-        "historicalInfo": "Coral Island è stata una popolare destinazione per gite di un giorno da Phuket per decenni, conosciuta per il suo snorkeling accessibile.",
-        "yearBuilt": "Formazione naturale",
-        "architect": "Natura"
-      },
-      "ko": {
-        "name": "코랄 아일랜드 스노클링 투어",
-        "narration": "코랄 아일랜드로의 이 스노클링 투어에서 생동감 넘치는 수중 생물을 발견하세요. 수정처럼 맑은 물에서 수영하고 열대어로 가득한 화려한 산호초를 탐험하세요.",
-        "description": "코랄 아일랜드에서의 종일 스노클링 어드벤처",
-        "historicalInfo": "코랄 아일랜드는 수십 년 동안 푸켓에서의 인기 있는 당일치기 여행지로, 접근하기 쉬운 스노클링으로 유명합니다.",
-        "yearBuilt": "자연 형성",
-        "architect": "자연"
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:36.152Z",
-    "updatedAt": "2026-02-22T18:35:09.752Z"
-  },
-  {
     "id": "spanish_steps",
     "cityId": "rome",
     "name": "Spanish Steps",
@@ -17629,16 +14429,129 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": "2026-02-22T18:30:58.350Z"
   },
   {
+    "id": "phuket-snorkeling-tour",
+    "cityId": "phuket",
+    "name": "Coral Island Snorkeling Tour",
+    "lat": 7.7394,
+    "lng": 98.3565,
+    "radius": 80,
+    "narration": "자, 눈을 감고 상상해보세요. 따스한 햇살이 얼굴을 간지럽히고, 부드러운 백사장이 발가락 사이로 스며드는 느낌. 코를 간질이는 짭짤한 바다 냄새와 멀리서 들려오는 파도 소리가 마음을 편안하게 해주는 곳, 바로 코랄 아일랜드입니다! 지금 여러분은 에메랄드빛 바다 위를 미끄러지듯 나아가는 보트에 몸을 싣고 있어요. 시원한 바닷바람이 머리카락을 휘날리고, 눈 앞에는 눈부시게 아름다운 코랄 아일랜드가 점점 더 가까워져 옵니다. 드디어 도착! 자, 스노클링 장비를 착용하고 망설이지 마세요. 지금 바로 푸른 바다 속으로 뛰어드는 겁니다! 투명한 물 속으로 들어가자마자 눈 앞에 펼쳐지는 건… 와! 형형색색의 산호초들이 마치 살아있는 예술 작품처럼 펼쳐져 있어요. 니모를 닮은 귀여운 열대어들이 여러분 주위를 헤엄치고, 햇빛에 반짝이는 물고기 떼들이 마치 은빛 가루를 뿌려놓은 듯 아름답습니다. 상상해보세요. 여러분은 지금 바다 속 세상을 자유롭게 탐험하는 탐험가가 된 거예요! 숨을 쉬는 것조차 잊을 만큼 황홀한 풍경에 넋을 잃을지도 몰라요. 코랄 아일랜드의 바다는 그 어떤 아쿠아리움보다 훨씬 더 생생하고 다채로운 경험을 선사해줄 겁니다. 물 밖으로 나와 따뜻한 햇볕 아래 몸을 녹이며, 방금 경험한 놀라운 광경들을 다시 한번 떠올려보세요. 오늘 하루, 여러분은 코랄 아일랜드의 아름다운 바다 속에서 잊지 못할 추억을 만들었습니다!",
+    "description": "Full-day snorkeling adventure at Coral Island",
+    "category": "Activity",
+    "detailedDescription": "코랄 아일랜드는 푸껫에서 남쪽으로 약 10km 떨어진 작은 섬으로, '꼬 헤(Koh Hae)'라고도 불립니다. 섬 주변의 얕은 바다는 스노클링과 다이빙을 즐기기에 완벽한 조건을 갖추고 있어요. 특히, 섬 동쪽 해안에 위치한 롱 비치(Long Beach)와 바나나 락(Banana Rock)은 아름다운 산호초와 다양한 해양 생물들을 만날 수 있는 최고의 스팟입니다. 현지인들은 '바나나 락'에서 운이 좋으면 거북이를 볼 수도 있다고 귀띔하곤 하죠. 스노클링 장비는 투어에 포함되어 있지만, 개인적으로 오리발을 챙겨가면 더욱 편안하게 바다를 탐험할 수 있습니다. 꿀팁 하나 더! 코랄 아일랜드에는 맛있는 해산물 레스토랑이 많이 있는데, 특히 갓 잡아 올린 신선한 생선으로 만든 바비큐는 꼭 맛봐야 할 메뉴랍니다. 해 질 녘, 석양이 물드는 바다를 바라보며 즐기는 저녁 식사는 그야말로 환상적인 경험이 될 거예요. 그리고 섬에는 작지만 아늑한 해변 바(Beach Bar)들이 숨어 있는데, 여기서 시원한 태국 맥주 창(Chang)을 마시며 여유로운 시간을 보내는 것도 추천합니다! 단, 코랄 아일랜드는 환경 보호 구역이므로, 산호초를 만지거나 해양 생물을 괴롭히는 행위는 절대 금지라는 점 잊지 마세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+      "https://images.unsplash.com/photo-1559666126-84f389727b9a?w=800",
+      "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800",
+      "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800"
+    ],
+    "historicalInfo": "Coral Island has been a popular day trip destination from Phuket for decades, known for its accessible snorkeling.",
+    "yearBuilt": "Natural formation",
+    "architect": "Nature",
+    "translations": {
+      "en": {
+        "name": "Coral Island Snorkeling Tour",
+        "narration": "Discover vibrant underwater life on this snorkeling tour to Coral Island. Swim in crystal-clear waters and explore colorful coral reefs teeming with tropical fish.",
+        "description": "Full-day snorkeling adventure at Coral Island",
+        "historicalInfo": "Coral Island has been a popular day trip destination from Phuket for decades, known for its accessible snorkeling.",
+        "yearBuilt": "Natural formation",
+        "architect": "Nature"
+      },
+      "it": {
+        "name": "Tour Snorkeling a Coral Island",
+        "narration": "Scopri la vivace vita sottomarina in questo tour di snorkeling a Coral Island. Nuota in acque cristalline ed esplora barriere coralline colorate brulicanti di pesci tropicali.",
+        "description": "Avventura di snorkeling di un'intera giornata a Coral Island",
+        "historicalInfo": "Coral Island è stata una popolare destinazione per gite di un giorno da Phuket per decenni, conosciuta per il suo snorkeling accessibile.",
+        "yearBuilt": "Formazione naturale",
+        "architect": "Natura"
+      },
+      "ko": {
+        "name": "코랄 아일랜드 스노클링 투어",
+        "narration": "코랄 아일랜드로의 이 스노클링 투어에서 생동감 넘치는 수중 생물을 발견하세요. 수정처럼 맑은 물에서 수영하고 열대어로 가득한 화려한 산호초를 탐험하세요.",
+        "description": "코랄 아일랜드에서의 종일 스노클링 어드벤처",
+        "historicalInfo": "코랄 아일랜드는 수십 년 동안 푸켓에서의 인기 있는 당일치기 여행지로, 접근하기 쉬운 스노클링으로 유명합니다.",
+        "yearBuilt": "자연 형성",
+        "architect": "자연"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:36.152Z",
+    "updatedAt": "2026-02-22T18:38:28.398Z"
+  },
+  {
+    "id": "gardens-by-the-bay-night",
+    "cityId": "singapore",
+    "name": "Gardens by the Bay Night Tour",
+    "lat": 1.2816,
+    "lng": 103.8636,
+    "radius": 60,
+    "narration": "자, 여러분! 지금부터 마법 같은 밤의 정원, 가든스 바이 더 베이 나이트 투어에 함께 하실 거예요. 상상해보세요. 싱가포르의 밤하늘 아래, 거대한 슈퍼트리들이 형형색색으로 빛나는 광경을요. 숨을 멎게 할 만큼 아름다운 빛과 소리의 쇼가 여러분을 기다리고 있습니다. 지금 여러분의 발 아래에는 수많은 식물들이 밤의 정기를 받으며 조용히 숨쉬고 있어요. \n\n슈퍼트리 그로브에서는 매일 밤, 특별한 쇼가 펼쳐집니다. 음악에 맞춰 춤추는 듯한 빛의 향연은 마치 꿈속에 있는 듯한 착각을 불러일으킬 거예요. 사랑하는 사람과 함께라면 더욱 낭만적인 시간을 보낼 수 있겠죠. 잠시 모든 것을 잊고, 눈앞에 펼쳐지는 아름다운 광경에 흠뻑 빠져보세요. \n\n뿐만 아니라, 밤의 클라우드 포레스트 탐험도 놓칠 수 없어요. 조명이 켜진 클라우드 마운틴은 낮과는 또 다른 신비로운 분위기를 자아냅니다. 시원한 물줄기가 쏟아지는 폭포 소리를 들으며 열대 고산 식물들을 감상하는 특별한 경험을 해보세요. 마치 영화 '아바타'의 세계에 들어온 듯한 느낌을 받을 수 있을 거예요. \n\n가든스 바이 더 베이의 밤은 낮보다 더욱 매혹적입니다. 선선한 밤공기를 마시며 정원을 거닐다 보면, 도시의 번잡함은 어느새 잊혀지고 평화로운 기분만 남을 거예요. 사랑하는 사람과 손을 잡고, 혹은 혼자만의 시간을 즐기며 밤의 정원을 만끽해보세요. 분명 잊지 못할 추억을 만들 수 있을 겁니다. 자, 이제 밤의 가든스 바이 더 베이로 떠나볼까요?",
+    "description": "Evening tour of Gardens by the Bay with light show",
+    "category": "Activity",
+    "detailedDescription": "가든스 바이 더 베이는 싱가포르의 대표적인 관광 명소로, 낮에도 아름답지만 밤에는 더욱 특별한 경험을 선사합니다. 특히 슈퍼트리 그로브에서 펼쳐지는 '가든 랩소디' 쇼는 놓쳐서는 안 될 하이라이트입니다. 매일 저녁 7시 45분과 8시 45분, 두 차례에 걸쳐 진행되며, 약 15분 동안 화려한 조명과 웅장한 음악이 어우러져 환상적인 분위기를 연출합니다. 현지인들은 이 쇼를 보며 하루의 스트레스를 날려버린다고 해요. \n\n클라우드 포레스트는 거대한 인공 산에 조성된 온실로, 다양한 열대 고산 식물을 감상할 수 있습니다. 밤에는 조명이 더해져 더욱 신비로운 분위기를 자아내며, 특히 클라우드 마운틴에서 떨어지는 인공 폭포는 시원한 청량감을 선사합니다. 숨겨진 꿀팁으로는, 클라우드 포레스트 내부에 있는 엘리베이터를 이용하면 정상까지 쉽게 올라갈 수 있으며, 정상에서는 가든스 바이 더 베이 전체를 조망할 수 있는 멋진 뷰를 감상할 수 있습니다. 밤에는 조명 덕분에 더욱 아름다운 야경을 즐길 수 있으니 꼭 방문해보세요. 가든스 바이 더 베이에서는 종종 특별한 야간 이벤트나 축제가 열리기도 하니, 방문 전에 공식 웹사이트를 확인해보는 것도 좋은 방법입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800",
+      "https://images.unsplash.com/photo-1562992468-ccf2c7f0c09d?w=800",
+      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Gardens by the Bay Night Tour",
+        "narration": "Experience the magical Gardens by the Bay after dark. Watch the stunning light and sound show at the Supertree Grove and explore the illuminated Cloud Forest.",
+        "description": "Evening tour of Gardens by the Bay with light show"
+      },
+      "it": {
+        "name": "Tour Notturno dei Gardens by the Bay",
+        "narration": "Vivi i magici Gardens by the Bay dopo il tramonto. Guarda lo spettacolare spettacolo di luci e suoni al Supertree Grove ed esplora la Cloud Forest illuminata.",
+        "description": "Tour serale dei Gardens by the Bay con spettacolo di luci",
+        "detailedDescription": "I Gardens by the Bay si trasformano in un magico paese delle meraviglie dopo il tramonto. Questo tour serale ti porta attraverso il futuristico Supertree Grove dove i giardini verticali torreggianti raggiungono i 50 metri di altezza. Il momento clou è il Garden Rhapsody - uno spettacolare spettacolo di luci e suoni che illumina i Supertree in una sinfonia di colori sincronizzata con la musica. Il tour include anche la Cloud Forest, dove la cascata interna più alta del mondo precipita per 35 metri circondata da vegetazione lussureggiante e nebbia eterea. Cammina lungo l'OCBC Skyway, una passerella aerea di 128 metri che collega i Supertree a 22 metri dal suolo, offrendo viste mozzafiato di Marina Bay. Le temperature serali più fresche rendono l'esplorazione più confortevole mentre l'illuminazione drammatica crea perfette opportunità fotografiche."
+      },
+      "ko": {
+        "name": "가든스 바이 더 베이 야간 투어",
+        "narration": "어둠 속에서 마법 같은 가든스 바이 더 베이를 경험하세요. 슈퍼트리 그로브에서 멋진 빛과 소리 쇼를 보고 조명이 켜진 클라우드 포레스트를 탐험하세요.",
+        "description": "라이트 쇼가 있는 가든스 바이 더 베이 저녁 투어",
+        "detailedDescription": "가든스 바이 더 베이는 일몰 후 마법의 원더랜드로 변신합니다. 이 저녁 투어는 높이 50미터에 달하는 수직 정원이 솟아 있는 미래적인 슈퍼트리 그로브를 안내합니다. 하이라이트는 가든 랩소디 - 음악에 맞춰 슈퍼트리를 색상의 교향곡으로 비추는 화려한 빛과 소리 쇼입니다. 투어에는 무성한 식물과 환상적인 안개에 둘러싸인 세계에서 가장 높은 실내 폭포가 35미터를 쏟아지는 클라우드 포레스트도 포함됩니다. 지상 22미터에서 슈퍼트리를 연결하는 128미터의 공중 산책로인 OCBC 스카이웨이를 따라 걸으며 마리나 베이의 멋진 전망을 즐기세요. 시원한 저녁 기온은 탐험을 더 편안하게 만들고 극적인 조명은 완벽한 사진 촬영 기회를 만듭니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:38.478Z",
+    "updatedAt": "2026-02-22T18:38:57.602Z"
+  },
+  {
     "id": "paris-catacombs-tour",
     "cityId": "paris",
     "name": "Paris Catacombs Tour",
     "lat": 48.8338,
     "lng": 2.3324,
     "radius": 50,
-    "narration": "자, 상상해보세요. 지금 여러분은 파리의 심장, 그 아래 깊숙한 곳으로 내려가는 나선형 계단을 밟고 있어요. 시원하고 축축한 공기가 폐 속으로 스며들고, 발 밑으로는 6백만 명이 넘는 사람들의 마지막 안식처가 펼쳐질 거예요. 벽에는 해골과 뼈들이 예술 작품처럼 쌓여 있고, 그 사이사이에는 오래된 비문들이 희미하게 빛나고 있죠. 한때 파리 시민들의 삶과 죽음이 교차했던 이곳, 카타콤에 오신 것을 환영합니다! 18세기 후반, 파리 시내의 공동묘지가 포화 상태에 이르자, 넘쳐나는 유골들을 안전하게 옮기기 위해 이 지하 채석장이 선택되었어요. 어둡고 좁은 통로를 따라 걷다 보면, 마치 망령들의 속삭임이 들려오는 듯해요. '멈춰라, 여기가 죽음의 제국이다'라는 섬뜩한 문구가 적힌 입구를 지나면, 뼈로 장식된 방들이 나타나죠. 해골로 만든 벽, 뼈로 쌓은 기둥… 이 모든 것은 단순한 장식이 아니라, 죽음에 대한 묵상, 삶의 유한함을 깨닫게 하는 메시지랍니다. 한때 이 뼈들은 파리의 거리를 활보했던 사람들의 것이었어요. 사랑을 속삭이고, 꿈을 꾸고, 슬픔을 겪었던 그들의 흔적이 지금 여러분의 눈앞에 펼쳐져 있는 거죠. 지금 여러분의 발 아래에는 파리의 숨겨진 역사가 잠들어 있어요. 6백만 구의 뼈들이 속삭이는 이야기를 들어보세요. 카타콤 투어는 단순한 관광이 아니라, 파리의 어두운 심장을 탐험하는 특별한 경험이 될 거예요. 이 기묘하고 아름다운 공간에서, 삶과 죽음, 역사와 예술이 뒤섞인 강렬한 순간을 만끽해보세요!",
+    "narration": "자, 상상해보세요. 지금 여러분은 파리의 심장 아래, 깊고 어두운 지하 세계로 향하는 계단을 내려가고 있습니다. 축축하고 서늘한 공기가 폐 속으로 스며들고, 발 아래로는 낡은 돌계단이 끝없이 이어집니다. 벽을 타고 흐르는 물방울 소리, 그리고 멀리서 들려오는 희미한 속삭임만이 정적을 깨뜨립니다. 이곳은 바로 파리 카타콤, 수백만 명의 영혼이 잠들어 있는 뼈의 미로입니다. \n\n한때 파리의 골칫거리였던 공동묘지의 과밀 문제를 해결하기 위해, 18세기 후반부터 19세기 중반까지 파리 시내 공동묘지에 있던 유골들이 이곳으로 옮겨졌습니다. 단순한 납골당이 아닌, 예술적인 감각으로 배열된 해골과 뼈들은 마치 무언가를 속삭이는 듯합니다. \n\n어두컴컴한 터널을 따라 걷다 보면, 뼈로 장식된 벽면에 새겨진 문구들이 눈에 들어옵니다. '멈춰라, 여기는 죽음의 제국이다.' 섬뜩하면서도 묘한 경외감을 불러일으키는 문구들이죠. 지금 여러분의 발 아래에는 프랑스 혁명의 희생자들, 페스트로 목숨을 잃은 시민들, 그리고 이름 없이 스러져간 수많은 파리 시민들의 유해가 잠들어 있습니다. \n\n카타콤의 어둠 속에서, 삶과 죽음, 그리고 인간 존재의 유한함에 대해 생각해보세요. 이곳은 단순한 관광지가 아닌, 파리의 역사와 영혼이 깃든 특별한 장소입니다. 눈을 감고, 잠시 숨을 고르며, 이 뼈들이 들려주는 이야기에 귀 기울여 보세요. 여러분은 지금, 파리의 가장 깊은 비밀을 마주하고 있습니다.",
     "description": "Guided tour of the underground Paris Catacombs",
     "category": "Activity",
-    "detailedDescription": "파리 카타콤은 단순한 지하 묘지가 아닌, 파리의 역사와 문화가 응축된 공간입니다. 18세기 후반, 파리 시내 공동묘지의 과밀화를 해결하기 위해, 지하에 존재하던 석회암 채석장을 활용하여 유골을 이전하기 시작했습니다. 이 과정에서 6백만 구 이상의 유골이 카타콤으로 옮겨졌으며, 이는 파리 인구의 상당 부분을 차지하는 숫자입니다. 카타콤은 단순한 유골 안치 장소를 넘어, 예술적인 공간으로 탈바꿈했습니다. 해골과 뼈를 활용한 독특한 장식은 죽음에 대한 묵상과 동시에, 예술적인 영감을 불러일으키는 요소가 되었습니다. 투어 중에는 '멈춰라, 여기가 죽음의 제국이다'라는 유명한 문구를 발견할 수 있는데, 이는 방문객들에게 삶의 유한함을 상기시키는 메시지입니다. 현지인 꿀팁을 하나 알려드릴까요? 카타콤 입구는 항상 긴 줄이 늘어서 있으니, 온라인으로 미리 티켓을 예약하는 것이 시간을 절약하는 가장 좋은 방법입니다. 또한, 카타콤 내부는 연중 14도로 유지되므로, 따뜻한 옷을 챙겨가는 것이 좋습니다. 카타콤 투어는 약 45분에서 1시간 정도 소요되며, 파리의 숨겨진 역사를 탐험하는 특별한 경험을 선사할 것입니다. 잊지 못할 경험을 위해, 지금 바로 카타콤 투어를 예약하세요!",
+    "detailedDescription": "파리 카타콤은 파리 14구에 위치한 지하 납골당으로, 18세기 후반부터 19세기 중반까지 파리 시내 공동묘지의 과밀 문제를 해결하기 위해 조성되었습니다. 약 600만 명 이상의 유골이 안치되어 있으며, 단순한 납골당을 넘어 예술적으로 배치된 뼈들이 독특한 분위기를 자아냅니다. 공식 명칭은 '파리 시립 납골당'이지만, 로마 카타콤에서 유래된 '카타콤'이라는 이름으로 더 잘 알려져 있습니다.\n\n**현지인 꿀팁:** 카타콤 입구는 항상 긴 줄이 늘어서 있습니다. 온라인으로 미리 티켓을 예매하면 시간을 절약할 수 있습니다. 또한, 카타콤 내부는 14°C 정도로 서늘하니 따뜻한 겉옷을 준비하는 것이 좋습니다. 사진 촬영은 가능하지만, 플래시 사용은 자제해주세요. 유골을 만지거나 훼손하는 행위는 엄격히 금지되어 있습니다. \n\n**숨겨진 비화:** 카타콤은 제2차 세계 대전 당시 프랑스 레지스탕스의 비밀 기지로 사용되기도 했습니다. 또한, 일부 구역은 아직 일반에 공개되지 않았으며, 탐험가들의 발길이 끊이지 않는 미지의 공간으로 남아있습니다. 카타콤의 지하에는 비밀 통로와 방들이 존재하며, 그곳에는 또 다른 이야기들이 숨겨져 있다고 합니다.",
     "photos": [
       "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
       "https://images.unsplash.com/photo-1583416750470-965b2707b355?w=800",
@@ -17688,57 +14601,6 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
     "createdAt": "2026-02-12T12:11:37.623Z",
-    "updatedAt": "2026-02-22T18:35:30.493Z"
-  },
-  {
-    "id": "gardens-by-the-bay-night",
-    "cityId": "singapore",
-    "name": "Gardens by the Bay Night Tour",
-    "lat": 1.2816,
-    "lng": 103.8636,
-    "radius": 60,
-    "narration": "자, 눈을 감고 상상해보세요. 짙은 어둠이 내려앉은 싱가포르, 그 밤하늘 아래 거대한 슈퍼트리들이 웅장한 자태를 뽐내고 있습니다. 지금 여러분의 발 아래에는, 형형색색의 빛으로 물든 가든스 바이 더 베이가 펼쳐져 있어요. 마치 다른 행성에 온 듯한 몽환적인 분위기가 온몸을 감싸는 듯하죠. 밤공기는 낮의 열기를 식히고, 은은한 꽃향기가 코끝을 간지럽힙니다. \n\n숨을 크게 들이쉬고, 밤의 정원을 거닐어 볼까요? 저 멀리 아바타 영화 속 한 장면 같은 슈퍼트리 그로브가 눈에 들어옵니다. 곧이어 펼쳐지는 슈퍼트리 쇼는 그야말로 장관이에요. 음악에 맞춰 춤추는 빛의 향연은 여러분의 눈과 귀를 사로잡을 겁니다. 레이저 빛이 하늘을 가르고, 슈퍼트리들이 만들어내는 환상적인 그림자는 마치 꿈을 꾸는 듯한 착각을 불러일으키죠. \n\n이번에는 클라우드 포레스트로 발걸음을 옮겨볼까요? 밤의 클라우드 포레스트는 또 다른 매력을 뽐냅니다. 빛으로 은은하게 물든 거대한 인공 산은 신비로운 분위기를 자아내고, 시원한 물줄기가 쏟아지는 소리는 청량감을 더해줍니다. 마치 구름 속에 떠 있는 듯한 기분을 느껴보세요. 희귀 식물들이 뿜어내는 신선한 공기는 여러분의 폐 속까지 깨끗하게 정화시켜 줄 거예요. \n\n밤의 가든스 바이 더 베이는 낮과는 완전히 다른 세상입니다. 빛과 음악, 자연이 만들어내는 아름다운 조화는 여러분에게 잊지 못할 추억을 선사할 거예요. 자, 지금 바로 싱가포르의 밤, 가든스 바이 더 베이로 떠나보세요! 분명 후회하지 않으실 겁니다!",
-    "description": "Evening tour of Gardens by the Bay with light show",
-    "category": "Activity",
-    "detailedDescription": "가든스 바이 더 베이는 싱가포르의 대표적인 관광 명소로, 낮에도 아름답지만 밤에는 더욱 특별한 경험을 선사합니다. 특히 슈퍼트리 쇼는 놓쳐서는 안 될 하이라이트인데요, 매일 밤 정해진 시간에 펼쳐지는 이 쇼는 음악과 빛의 조화로 이루어진 환상적인 공연입니다. 현지인들은 이 쇼를 보기 위해 일부러 저녁 시간에 방문하기도 해요. \n\n클라우드 포레스트는 거대한 인공 산 내부에 조성된 온실로, 다양한 열대 식물과 폭포를 감상할 수 있습니다. 밤에는 조명이 더해져 더욱 신비로운 분위기를 자아내죠. 클라우드 포레스트 내부에는 전망대도 마련되어 있어, 싱가포르의 야경을 한눈에 담을 수 있습니다. 숨겨진 비화로는, 클라우드 포레스트의 물 공급 시스템이 매우 효율적으로 설계되어 있어, 물 낭비를 최소화하고 있다는 사실! 친환경적인 기술이 적용된 미래형 정원의 모습을 엿볼 수 있습니다.\n\n꿀팁 하나 더! 가든스 바이 더 베이는 넓은 부지를 자랑하기 때문에 편안한 신발을 신고 방문하는 것이 좋습니다. 또한, 저녁 시간에는 다소 쌀쌀할 수 있으니 가벼운 겉옷을 준비하는 것도 잊지 마세요. 가든스 바이 더 베이 근처에는 다양한 레스토랑과 바가 위치해 있으니, 투어를 마친 후 저녁 식사나 간단한 음료를 즐기는 것도 좋은 선택이 될 거예요.",
-    "photos": [
-      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800",
-      "https://images.unsplash.com/photo-1562992468-ccf2c7f0c09d?w=800",
-      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800"
-    ],
-    "historicalInfo": null,
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "en": {
-        "name": "Gardens by the Bay Night Tour",
-        "narration": "Experience the magical Gardens by the Bay after dark. Watch the stunning light and sound show at the Supertree Grove and explore the illuminated Cloud Forest.",
-        "description": "Evening tour of Gardens by the Bay with light show"
-      },
-      "it": {
-        "name": "Tour Notturno dei Gardens by the Bay",
-        "narration": "Vivi i magici Gardens by the Bay dopo il tramonto. Guarda lo spettacolare spettacolo di luci e suoni al Supertree Grove ed esplora la Cloud Forest illuminata.",
-        "description": "Tour serale dei Gardens by the Bay con spettacolo di luci",
-        "detailedDescription": "I Gardens by the Bay si trasformano in un magico paese delle meraviglie dopo il tramonto. Questo tour serale ti porta attraverso il futuristico Supertree Grove dove i giardini verticali torreggianti raggiungono i 50 metri di altezza. Il momento clou è il Garden Rhapsody - uno spettacolare spettacolo di luci e suoni che illumina i Supertree in una sinfonia di colori sincronizzata con la musica. Il tour include anche la Cloud Forest, dove la cascata interna più alta del mondo precipita per 35 metri circondata da vegetazione lussureggiante e nebbia eterea. Cammina lungo l'OCBC Skyway, una passerella aerea di 128 metri che collega i Supertree a 22 metri dal suolo, offrendo viste mozzafiato di Marina Bay. Le temperature serali più fresche rendono l'esplorazione più confortevole mentre l'illuminazione drammatica crea perfette opportunità fotografiche."
-      },
-      "ko": {
-        "name": "가든스 바이 더 베이 야간 투어",
-        "narration": "어둠 속에서 마법 같은 가든스 바이 더 베이를 경험하세요. 슈퍼트리 그로브에서 멋진 빛과 소리 쇼를 보고 조명이 켜진 클라우드 포레스트를 탐험하세요.",
-        "description": "라이트 쇼가 있는 가든스 바이 더 베이 저녁 투어",
-        "detailedDescription": "가든스 바이 더 베이는 일몰 후 마법의 원더랜드로 변신합니다. 이 저녁 투어는 높이 50미터에 달하는 수직 정원이 솟아 있는 미래적인 슈퍼트리 그로브를 안내합니다. 하이라이트는 가든 랩소디 - 음악에 맞춰 슈퍼트리를 색상의 교향곡으로 비추는 화려한 빛과 소리 쇼입니다. 투어에는 무성한 식물과 환상적인 안개에 둘러싸인 세계에서 가장 높은 실내 폭포가 35미터를 쏟아지는 클라우드 포레스트도 포함됩니다. 지상 22미터에서 슈퍼트리를 연결하는 128미터의 공중 산책로인 OCBC 스카이웨이를 따라 걸으며 마리나 베이의 멋진 전망을 즐기세요. 시원한 저녁 기온은 탐험을 더 편안하게 만들고 극적인 조명은 완벽한 사진 촬영 기회를 만듭니다."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "isPremium": false,
-    "price": null,
-    "createdAt": "2026-02-12T12:11:38.478Z",
-    "updatedAt": "2026-02-22T18:35:40.634Z"
+    "updatedAt": "2026-02-22T18:38:47.975Z"
   }
 ];

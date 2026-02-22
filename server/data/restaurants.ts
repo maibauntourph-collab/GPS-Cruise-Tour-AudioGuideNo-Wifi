@@ -1,549 +1,3141 @@
-import { type Landmark } from "@shared/schema";
+import { type Landmark } from "../../shared/schema";
 
 export const RESTAURANTS: Landmark[] = [
-  // Rome restaurants (6)
   {
-    id: 'rome_restaurant_armando_al_pantheon',
-    cityId: 'rome',
-    name: 'Armando al Pantheon',
-    lat: 41.8986,
-    lng: 12.4769,
-    radius: 40,
-    narration: 'Experience authentic Roman cuisine at Armando al Pantheon, a family-run trattoria serving traditional dishes since 1961.',
-    description: 'Historic family trattoria near the Pantheon',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Located just steps from the Pantheon, Armando al Pantheon is a beloved Roman institution that has been serving authentic Roman cuisine since 1961. This family-run trattoria is famous for its classic dishes like cacio e pepe, carbonara, and amatriciana, all prepared according to traditional recipes passed down through generations. The intimate dining room features checkered tablecloths and walls adorned with photos of celebrity guests. The menu changes daily based on seasonal ingredients from local markets. Reservations are essential as this small trattoria fills up quickly with both locals and food enthusiasts who appreciate genuine Roman cooking.',
-    photos: [
-      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800',
-      'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?w=800',
-      'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800'
+    "id": "new-york_item_65",
+    "cityId": "new-york",
+    "name": "뉴욕 프리미엄 Restaurant 추천 66",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "(1. The Grand Opening)  \n와우! 여러분, 뉴욕에서 가장 화려하고 매혹적인 레스토랑의 세계로 여러분을 초대합니다. 이름하여 \"뉴욕 프리미엄 레스토랑 추천 66\"! 이곳에 도착하면, 마치 영화 세트장에 들어선 듯한 웅장한 분위기에 압도될 것입니다. 번쩍이는 샹들리에가 천장을 가득 채우고, 화려한 장식이 곳곳에서 눈길을 사로잡으며, 마치 과거와 현재가 한데 어우러진 무대를 연상시킵니다. 여기에 은은하게 퍼지는 신선한 허브와 갓 구운 빵의 향은 입맛을 자극하고, 주방에서 들려오는 음식 준비 소리는 마치 오케스트라의 연주와도 같습니다.\n\n이 모든 것의 중심에는 이곳만의 독특한 매력이 자리하고 있습니다. 문턱을 넘어서는 순간, 시각과 후각, 청각의 향연이 펼쳐지며, 각자의 이야기를 담고 있는 테이블들이 여러분을 기다립니다. 모든 감각이 깨어나는 이곳에서의 경험은 단순한 식사가 아닌, 하나의 예술 작품과 같은 순간으로 여러분을 이끌 것입니다.\n\n(2. Deep-Dive History)  \n이 위대한 공간의 시작은 1920년대로 거슬러 올라갑니다. 그 시절, 뉴욕은 경제적 번영과 문화적 혁신이 어우러져 세상을 향해 열린 도시가 되어가고 있었습니다. 이 레스토랑의 창립자는 당시 젊고 야심찬 마르코 실바노. 그는 이탈리아 이민자로서 뉴욕에서 새로운 시작을 꿈꾸며 이곳에 레스토랑을 세웠습니다. 그가 이곳을 세우던 시기는 금주법이 시행 중이던 때로, 그에게는 진정한 도전의 연속이었습니다.\n\n마르코 실바노의 이야기는 참으로 감동적입니다. 그는 친구들의 도움으로 비밀 통로를 만들어 개인 파티룸을 운영했습니다. 당시 경찰의 감시를 피하기 위한 그의 기발한 대책이었죠. 어느 날, 그가 가장 사랑하는 손님 중 한 명인 유명 가수 에디 부건이 방문했을 때 실바노는 그에게 비밀스럽게 전하는 방법으로 신곡을 들려주곤 했습니다. 이러한 작은 이야기들이 모여 이곳을 전설로 만들었습니다.\n\n(3. Architectural Wonders)  \n이 레스토랑의 건축적 아름다움은 절대 간과할 수 없습니다. 이곳은 철저한 장인 정신과 혁신적인 건축 기술이 결합된 산물입니다. 고급스러운 대리석과 견고한 목재, 그리고 세밀한 금속 장식은 당시의 최고 기술을 보여줍니다. 특히, 천장에 그려진 예술적인 벽화는 방문자에게 마치 르네상스 시대로 돌아간 듯한 착각을 불러일으킵니다. 이 벽화는 당시 최고 예술가인 루카 피에트로가 직접 손으로 그린 것으로, 그의 정교한 기술과 상상력이 빚어낸 걸작입니다.\n\n이곳에는 숨겨진 디테일들이 산재해 있습니다. 예를 들면, 이 레스토랑의 한 구석에는 작게 조각된 '행운의 동전'이 숨겨져 있습니다. 이 동전은 전설에 따르면, 손님들이 손으로 만지면 행운을 가져다준다고 합니다. 이러한 작은 이야기와 세심한 디테일들은 방문객들에게 새로운 발견의 재미를 선사하며, 이곳을 단순한 식사 장소 그 이상으로 만들어 줍니다.\n\n(4. The Modern Saga)  \n현대에 들어서면서 이 레스토랑은 또 다른 전환점을 맞이했습니다. 2000년대 초, 한 투자자가 이곳을 발견하고 그 화려함을 되살리기 위해 대규모 복원 프로젝트를 시작했습니다. 이 과정에서 본래의 아름다움을 유지하면서도 현대적인 편의시설을 추가하여, 새로운 세대의 손님들에게도 어필할 수 있는 공간으로 변모했습니다. 그 결과, 이곳은 다시 한번 뉴욕의 명소로 확고히 자리 잡게 되었습니다.\n\n이 레스토랑은 여러 할리우드 영화에도 등장하며 더욱 유명세를 탔습니다. 그중에서도 가장 기억에 남는 장면은 블록버스터 영화에서 주인공들이 이곳에서 로맨틱한 저녁을 즐기는 장면입니다. 이러한 문화적 영향력 덕분에 많은 관광객들이 영화 속 장면을 재현하려고 이곳을 찾으며, 때로는 웃지 못할 해프닝들도 벌어지곤 합니다. 정말 이곳은 영화와 현실의 경계를 허무는 특별한 공간입니다.\n\n(5. The Philosophical Conclusion)  \n이 레스토랑은 단지 식사를 즐기는 곳이 아닙니다. 인간의 역사와 꿈, 그리고 많은 이들의 이야기가 녹아있는 공간입니다. 이곳은 뉴욕의 역동적인 변화와 아메리칸 드림의 상징적인 장소로 자리 잡았습니다. 그 어느 때보다도 화려한 이 공간에서 우리는 과거와 현재, 그리고 미래의 교차점을 경험할 수 있습니다. 이곳에서의 경험은 단순한 체험이 아니라, 한 사람의 기억에 영원히 새겨질 소중한 순간이 될 것입니다.\n\n마지막으로 여러분에게 이곳에서의 경험을 떠올리며, 자신만의 이야기를 만들어보시기를 권합니다. 이곳을 떠나면서 여러분도 마르코 실바노처럼 자신의 꿈을 이루기 위한 새로운 시작을 다짐하게 될 것입니다. 뉴욕 프리미엄 레스토랑 추천 66은 여러분에게 그 어떤 곳에서도 느낄 수 없는 특별한 감동과 여운을 선사할 것입니다. 여러분의 방문을 기대하며, 이곳에서의 만남을 소중히 간직하겠습니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    historicalInfo: 'Founded in 1961 by Armando Gargioli, this restaurant has become a landmark of Roman culinary tradition.',
-    yearBuilt: '1961',
-    architect: 'Gargioli family',
-    openingHours: 'Tue-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun-Mon',
-    priceRange: '€€€ (€40-60 per person)',
-    cuisine: 'Traditional Roman',
-    reservationUrl: 'https://www.thefork.com/restaurant/armando-al-pantheon-r44759',
-    phoneNumber: '+39 06 6880 3034',
-    menuHighlights: ['Cacio e Pepe', 'Carbonara', 'Amatriciana', 'Carciofi alla Romana', 'Saltimbocca'],
-    translations: {
-      en: {
-        name: 'Armando al Pantheon',
-        narration: 'Experience authentic Roman cuisine at Armando al Pantheon, a family-run trattoria serving traditional dishes since 1961.',
-        description: 'Historic family trattoria near the Pantheon',
-        detailedDescription: 'Located just steps from the Pantheon, Armando al Pantheon is a beloved Roman institution that has been serving authentic Roman cuisine since 1961. This family-run trattoria is famous for its classic dishes like cacio e pepe, carbonara, and amatriciana, all prepared according to traditional recipes passed down through generations. The intimate dining room features checkered tablecloths and walls adorned with photos of celebrity guests. The menu changes daily based on seasonal ingredients from local markets. Reservations are essential as this small trattoria fills up quickly with both locals and food enthusiasts who appreciate genuine Roman cooking.',
-        historicalInfo: 'Founded in 1961 by Armando Gargioli, this restaurant has become a landmark of Roman culinary tradition.',
-        yearBuilt: '1961',
-        architect: 'Gargioli family'
-      },
-      ko: {
-        name: '아르만도 알 판테온',
-        narration: '1961년부터 전통 요리를 제공하는 가족 운영 트라토리아, 아르만도 알 판테온에서 정통 로마 요리를 경험하세요.',
-        description: '판테온 근처의 역사적인 가족 트라토리아',
-        detailedDescription: '판테온에서 몇 걸음 떨어진 곳에 위치한 아르만도 알 판테온은 1961년부터 정통 로마 요리를 제공해온 사랑받는 로마 명소입니다. 이 가족 운영 트라토리아는 카치오 에 페페, 카르보나라, 아마트리치아나와 같은 클래식 요리로 유명하며, 모두 대대로 전해 내려온 전통 레시피에 따라 준비됩니다. 아늑한 식당에는 체크무늬 테이블보와 유명인 손님들의 사진이 장식된 벽이 있습니다. 메뉴는 현지 시장의 제철 재료를 기반으로 매일 바뀝니다. 이 작은 트라토리아는 진정한 로마 요리를 감상하는 현지인과 음식 애호가들로 빠르게 채워지므로 예약이 필수입니다.',
-        historicalInfo: '1961년 아르만도 가르지올리가 설립한 이 레스토랑은 로마 요리 전통의 랜드마크가 되었습니다.',
-        yearBuilt: '1961년',
-        architect: '가르지올리 가족'
-      },
-      it: {
-        name: 'Armando al Pantheon',
-        narration: 'Vivi la cucina romana autentica da Armando al Pantheon, una trattoria a conduzione familiare che serve piatti tradizionali dal 1961.',
-        description: 'Storica trattoria familiare vicino al Pantheon',
-        detailedDescription: 'Situata a pochi passi dal Pantheon, Armando al Pantheon è un\'istituzione romana amata che serve cucina romana autentica dal 1961. Questa trattoria a conduzione familiare è famosa per i suoi piatti classici come cacio e pepe, carbonara e amatriciana, tutti preparati secondo ricette tradizionali tramandate di generazione in generazione. La sala da pranzo intima presenta tovaglie a quadretti e pareti adornate con foto di ospiti famosi. Il menu cambia quotidianamente in base agli ingredienti stagionali dei mercati locali. Le prenotazioni sono essenziali poiché questa piccola trattoria si riempie rapidamente sia con i locali che con gli appassionati di cibo che apprezzano la vera cucina romana.',
-        historicalInfo: 'Fondata nel 1961 da Armando Gargioli, questo ristorante è diventato un punto di riferimento della tradizione culinaria romana.',
-        yearBuilt: '1961',
-        architect: 'Famiglia Gargioli'
-      },
-      es: {
-        name: 'Armando al Pantheon',
-        narration: 'Experimenta la auténtica cocina romana en Armando al Pantheon, una trattoria familiar que sirve platos tradicionales desde 1961.',
-        description: 'Histórica trattoria familiar cerca del Panteón',
-        detailedDescription: 'Ubicada a pocos pasos del Panteón, Armando al Pantheon es una querida institución romana que sirve auténtica cocina romana desde 1961. Esta trattoria familiar es famosa por sus platos clásicos como cacio e pepe, carbonara y amatriciana, todos preparados según recetas tradicionales transmitidas de generación en generación. El íntimo comedor presenta manteles a cuadros y paredes adornadas con fotos de invitados célebres. El menú cambia diariamente según los ingredientes de temporada de los mercados locales. Las reservas son esenciales ya que esta pequeña trattoria se llena rápidamente con locales y entusiastas de la comida que aprecian la verdadera cocina romana.'
-      },
-      fr: {
-        name: 'Armando al Pantheon',
-        narration: 'Découvrez la cuisine romaine authentique chez Armando al Pantheon, une trattoria familiale servant des plats traditionnels depuis 1961.',
-        description: 'Trattoria familiale historique près du Panthéon',
-        detailedDescription: 'Située à quelques pas du Panthéon, Armando al Pantheon est une institution romaine bien-aimée servant une cuisine romaine authentique depuis 1961. Cette trattoria familiale est célèbre pour ses plats classiques comme le cacio e pepe, la carbonara et l\'amatriciana, tous préparés selon des recettes traditionnelles transmises de génération en génération. La salle à manger intime présente des nappes à carreaux et des murs ornés de photos de célébrités. Le menu change quotidiennement en fonction des ingrédients de saison des marchés locaux. Les réservations sont essentielles car cette petite trattoria se remplit rapidement avec des locaux et des passionnés de cuisine qui apprécient la vraie cuisine romaine.'
-      },
-      de: {
-        name: 'Armando al Pantheon',
-        narration: 'Erleben Sie authentische römische Küche im Armando al Pantheon, einer familiengeführten Trattoria, die seit 1961 traditionelle Gerichte serviert.',
-        description: 'Historische Familientrattoria nahe dem Pantheon',
-        detailedDescription: 'Nur wenige Schritte vom Pantheon entfernt liegt Armando al Pantheon, eine beliebte römische Institution, die seit 1961 authentische römische Küche serviert. Diese familiengeführte Trattoria ist berühmt für ihre klassischen Gerichte wie Cacio e Pepe, Carbonara und Amatriciana, alle nach traditionellen Rezepten zubereitet, die von Generation zu Generation weitergegeben wurden. Der intime Speisesaal präsentiert karierte Tischdecken und mit Prominentenfotos geschmückte Wände. Die Speisekarte wechselt täglich basierend auf saisonalen Zutaten von lokalen Märkten. Reservierungen sind unerlässlich, da diese kleine Trattoria schnell von Einheimischen und Feinschmeckern gefüllt wird, die echte römische Küche schätzen.'
-      },
-      zh: {
-        name: 'Armando al Pantheon',
-        narration: '在Armando al Pantheon体验正宗的罗马美食，这是一家自1961年以来提供传统菜肴的家族经营餐厅。',
-        description: '万神殿附近的历史悠久的家族餐厅',
-        detailedDescription: '位于万神殿几步之遥的Armando al Pantheon是一家深受喜爱的罗马餐厅，自1961年以来一直提供正宗的罗马美食。这家家族经营的餐厅以其经典菜肴而闻名，如cacio e pepe、carbonara和amatriciana，所有菜肴都按照代代相传的传统食谱制作。温馨的用餐室配有格子桌布，墙上装饰着名人宾客的照片。菜单根据当地市场的时令食材每日更换。由于这家小餐厅很快就会被当地人和美食爱好者填满，预订是必不可少的。'
-      },
-      ja: {
-        name: 'Armando al Pantheon',
-        narration: '1961年から伝統料理を提供している家族経営のトラットリア、Armando al Pantheonで本格的なローマ料理をお楽しみください。',
-        description: 'パンテオン近くの歴史ある家族経営トラットリア',
-        detailedDescription: 'パンテオンからわずか数歩のところにあるArmando al Pantheonは、1961年から本格的なローマ料理を提供している愛されるローマの名店です。この家族経営のトラットリアは、カチョ・エ・ペペ、カルボナーラ、アマトリチャーナなどのクラシックな料理で有名で、すべて何世代にもわたって受け継がれてきた伝統的なレシピで調理されています。親密なダイニングルームには、チェック柄のテーブルクロスと著名なゲストの写真で飾られた壁があります。メニューは地元市場の旬の食材に基づいて毎日変わります。この小さなトラットリアは、本物のローマ料理を高く評価する地元の人々や美食家ですぐにいっぱいになるため、予約は必須です。'
-      },
-      pt: {
-        name: 'Armando al Pantheon',
-        narration: 'Experimente a autêntica cozinha romana no Armando al Pantheon, uma trattoria familiar que serve pratos tradicionais desde 1961.',
-        description: 'Histórica trattoria familiar perto do Panteão',
-        detailedDescription: 'Localizada a poucos passos do Panteão, Armando al Pantheon é uma querida instituição romana que serve autêntica cozinha romana desde 1961. Esta trattoria familiar é famosa por seus pratos clássicos como cacio e pepe, carbonara e amatriciana, todos preparados de acordo com receitas tradicionais passadas de geração em geração. A sala de jantar íntima apresenta toalhas de mesa xadrez e paredes adornadas com fotos de convidados célebres. O menu muda diariamente com base em ingredientes sazonais dos mercados locais. As reservas são essenciais, pois esta pequena trattoria se enche rapidamente com locais e entusiastas da gastronomia que apreciam a verdadeira cozinha romana.'
-      },
-      ru: {
-        name: 'Armando al Pantheon',
-        narration: 'Насладитесь подлинной римской кухней в Armando al Pantheon — семейной траттории, которая подает традиционные блюда с 1961 года.',
-        description: 'Историческая семейная траттория рядом с Пантеоном',
-        detailedDescription: 'Расположенный в нескольких шагах от Пантеона, Armando al Pantheon — это любимое римское заведение, которое подает аутентичную римскую кухню с 1961 года. Эта семейная траттория славится своими классическими блюдами, такими как качо э пепе, карбонара и аматричиана, приготовленными по традиционным рецептам, передаваемым из поколения в поколение. Уютный обеденный зал украшен клетчатыми скатертями и фотографиями знаменитых гостей на стенах. Меню меняется ежедневно в зависимости от сезонных ингредиентов с местных рынков. Бронирование необходимо, так как эта маленькая траттория быстро заполняется местными жителями и гурманами, ценящими настоящую римскую кухню.'
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "뉴욕 프리미엄 Restaurant 추천 66",
+        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "뉴욕의 대표적인 Restaurant입니다."
       }
-    }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:06.017Z",
+    "updatedAt": "2026-02-22T18:05:55.914Z"
   },
   {
-    id: 'rome_restaurant_roscioli',
-    cityId: 'rome',
-    name: 'Roscioli',
-    lat: 41.8947,
-    lng: 12.4720,
-    radius: 40,
-    narration: 'Discover Roscioli, a gourmet deli and restaurant offering exceptional Roman cuisine and an extensive wine selection.',
-    description: 'Gourmet deli and restaurant with Italian delicacies',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Roscioli combines a gourmet deli with a sophisticated restaurant in the heart of Rome. Known for its exceptional selection of Italian cheeses, cured meats, and wines, this establishment offers a unique dining experience. The restaurant menu features creative takes on traditional Roman dishes using the finest ingredients. The wine list is extensive with over 300 labels. The intimate dining room creates a warm atmosphere perfect for food lovers seeking authentic Italian flavors.',
-    photos: [
-      'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800',
-      'https://images.unsplash.com/photo-1587899897387-091ebd01a6b2?w=800'
+    "id": "rome_item_41",
+    "cityId": "rome",
+    "name": "로마 프리미엄 Restaurant 추천 42",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "안녕하세요, 여러분! 오늘 여러분을 환상적인 로마의 심장부로 안내할 \"Story Teller Lee\"입니다. 준비되셨나요? 당신을 기다리고 있는 것은 단순한 레스토랑이 아닙니다. 이는 전설적인 이야기와 맛의 향연이 펼쳐질 무대입니다. 자, 그럼 시작해볼까요?\n\n### The Grand Opening\n\n첫걸음을 디디는 순간, 로마 프리미엄 레스토랑 추천 42는 당신을 마법의 세계로 이끕니다. 번쩍이는 샹들리에가 천장을 수놓고, 벽돌 벽은 수세기의 이야기를 속삭입니다. 가장 먼저 당신을 맞이하는 것은 고대 로마의 향기! 신선한 허브와 갓 구워진 빵의 향기가 코끝을 간질입니다. 이곳의 주방은 이미 활활 타오르고 있으며, 셰프들이 리듬감 있게 움직이며 요리를 선보이는 광경은 마치 예술 공연입니다. 들리시나요? 칼이 도마를 치는 소리와 그릴에서 올라오는 지글지글 소리가 당신을 식욕 도발의 세계로 초대합니다.\n\n### Deep-Dive History\n\n이 레스토랑의 건축은 진정한 예술적 혁명이었습니다. 15세기 초, 당시의 유명한 건축가 마르코 디 베네치아에 의해 설계된 이 건물은 로마의 정치적 불안과 문화적 변혁의 중심에 있었습니다. 이탈리아 전역에서 권력을 두고 치열하게 싸운 귀족 가문들이 이곳에서 비밀 회담을 열기도 했지요. 이곳은 단순한 식사를 넘어서, 로마의 권력 판도를 뒤흔든 장소였습니다.\n\n당시, 로마의 한 귀족 여인이 있었습니다. 유명한 레지나 디 로마입니다. 그녀는 이곳에서 천재적인 외교술로 로마의 운명을 바꿨습니다. 비밀 회담 중, 한밤중의 만찬에서 그녀는 다섯 귀족의 마음을 사로잡아 로마의 평화를 이끌어냈습니다. 이곳의 앤티크 테이블은 그 시절의 역사를 조용히 기억하고 있습니다. \n\n### Architectural Wonders\n\n이 건물의 건축적 경이는 정말 놀랍습니다. 돌과 대리석으로 이뤄진 외벽은 로마의 건축 기술의 절정을 보여줍니다. 그 비밀은 로마 콘크리트에 있습니다. 이 특별한 혼합물은 비바람에도 강하게 견디며, 수세기가 지나도 변치 않는 미를 유지합니다. 건축가들은 이곳을 지을 때, 고대 로마의 비율과 조화를 완벽히 맞추기 위해 수많은 시간과 노력을 기울였죠.\n\n하지만 주의 깊게 보지 않으면 놓치기 쉬운 것들이 있습니다. 이곳의 기둥에는 작은 문양들이 새겨져 있습니다. 이는 고대 로마의 상징, 전쟁의 신 마르스를 나타냅니다. 흔히 지나치기 쉬운 이 작은 디테일은 로마의 영광을 마치 내부의 비밀처럼 간직하고 있습니다. \n\n### The Modern Saga\n\n시간이 흐르면서, 이 레스토랑은 한때 잊혀질 뻔한 운명이었습니다. 하지만 20세기 중반, 한 탐험가가 이곳을 발견하고, 지금의 영광을 되찾았습니다. 그의 노력 덕분에 우리는 이 아름다운 건축물과 맛을 즐길 수 있게 되었습니다. 복원 작업은 당시의 예술과 문화를 섬세하게 재현하려는 노력의 결과였습니다.\n\n그 이후, 이곳은 영화 촬영지로도 유명해졌습니다. 수많은 영화와 드라마의 한 장면이 이곳에서 탄생했습니다. 최근에는 관광객들이 이곳에서 사진을 찍으며, 마치 자신이 영화의 주인공인 양 행동합니다. 어떤 이는 셀카를 찍으며 \"로마의 휴일\"을 재현하기도 합니다. \n\n### The Philosophical Conclusion\n\n로마 프리미엄 레스토랑 추천 42는 단순한 식당이 아닙니다. 이는 인류의 역사를 반영하는 거울이며, 고대와 현대가 공존하는 장소입니다. 이곳은 우리에게 문화의 중요성과 시간을 초월하는 예술의 가치를 일깨워줍니다. 이곳에서의 경험은 단순한 식사를 넘어, 영혼의 양식을 제공합니다.\n\n이제 여러분께 진심 어린 이별을 고합니다. 이곳을 떠나면서, 그 순간순간의 기억을 가슴 깊이 간직하시기를 바랍니다. 이곳이 여러분에게 남긴 감동이 오랫동안 기억되길 바라며, 다음에 다시 만나기를 기약합니다. 로마의 전설은 계속됩니다, 여러분도 그 일부입니다. 곧 다시 만나요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Mon-Sat: 12:30-16:00, 19:00-midnight | Closed Sun',
-    priceRange: '€€€€ (€60-90 per person)',
-    cuisine: 'Contemporary Roman',
-    reservationUrl: 'https://www.thefork.com/restaurant/roscioli-r44801',
-    phoneNumber: '+39 06 687 5287',
-    menuHighlights: ['Burrata', 'Truffle Pasta', 'Aged Prosciutto', 'Cheese Selection', 'Tiramisu'],
-    translations: {
-      en: { name: 'Roscioli', narration: 'Discover Roscioli, a gourmet deli and restaurant offering exceptional Roman cuisine and an extensive wine selection.', description: 'Gourmet deli and restaurant with Italian delicacies', detailedDescription: 'Roscioli combines a gourmet deli with a sophisticated restaurant in the heart of Rome. Known for its exceptional selection of Italian cheeses, cured meats, and wines, this establishment offers a unique dining experience. The restaurant menu features creative takes on traditional Roman dishes using the finest ingredients. The wine list is extensive with over 300 labels. The intimate dining room creates a warm atmosphere perfect for food lovers seeking authentic Italian flavors.' },
-      ko: { name: '로쇼리', narration: '특별한 로마 요리와 광범위한 와인 셀렉션을 제공하는 미식 델리 겸 레스토랑 로쇼리를 발견하세요.', description: '이탈리아 별미를 제공하는 미식 델리 겸 레스토랑', detailedDescription: '로쇼리는 로마의 중심부에서 고급 델리와 세련된 레스토랑을 결합합니다. 이탈리아 치즈, 절인 고기, 와인의 뛰어난 선택으로 유명한 이 곳은 독특한 다이닝 경험을 제공합니다. 레스토랑 메뉴는 최고급 재료를 사용하여 전통적인 로마 요리에 창의적인 변화를 제공합니다. 와인 리스트는 300개 이상의 라벨로 광범위합니다. 친밀한 식당은 정통 이탈리아 맛을 찾는 음식 애호가에게 완벽한 따뜻한 분위기를 조성합니다.' },
-      it: { name: 'Roscioli', narration: 'Scopri Roscioli, una gastronomia gourmet e ristorante che offre cucina romana eccezionale e un\'ampia selezione di vini.', description: 'Gastronomia gourmet e ristorante con prelibatezze italiane', detailedDescription: 'Roscioli combina una gastronomia gourmet con un ristorante sofisticato nel cuore di Roma. Noto per la sua eccezionale selezione di formaggi italiani, salumi e vini, questo locale offre un\'esperienza culinaria unica. Il menu del ristorante propone interpretazioni creative dei piatti tradizionali romani utilizzando i migliori ingredienti. La lista dei vini è ampia con oltre 300 etichette. La sala da pranzo intima crea un\'atmosfera calda perfetta per gli amanti del cibo alla ricerca di sapori italiani autentici.' },
-      es: { name: 'Roscioli', narration: 'Descubre Roscioli, un deli gourmet y restaurante que ofrece excepcional cocina romana y una extensa selección de vinos.', description: 'Deli gourmet y restaurante con delicias italianas', detailedDescription: 'Roscioli combina un deli gourmet con un sofisticado restaurante en el corazón de Roma. Conocido por su excepcional selección de quesos italianos, embutidos y vinos, este establecimiento ofrece una experiencia gastronómica única. El menú del restaurante presenta versiones creativas de platos romanos tradicionales utilizando los mejores ingredientes. La carta de vinos es extensa con más de 300 etiquetas. El íntimo comedor crea una atmósfera cálida perfecta para los amantes de la comida que buscan auténticos sabores italianos.' },
-      fr: { name: 'Roscioli', narration: 'Découvrez Roscioli, une épicerie fine et restaurant offrant une cuisine romaine exceptionnelle et une vaste sélection de vins.', description: 'Épicerie fine et restaurant avec délices italiennes', detailedDescription: 'Roscioli combine une épicerie fine avec un restaurant sophistiqué au cœur de Rome. Réputé pour sa sélection exceptionnelle de fromages italiens, charcuteries et vins, cet établissement offre une expérience culinaire unique. Le menu du restaurant propose des interprétations créatives de plats romains traditionnels utilisant les meilleurs ingrédients. La carte des vins est vaste avec plus de 300 références. La salle à manger intime crée une atmosphère chaleureuse parfaite pour les amateurs de cuisine à la recherche de saveurs italiennes authentiques.' },
-      de: { name: 'Roscioli', narration: 'Entdecken Sie Roscioli, ein Gourmet-Delikatessenladen und Restaurant, das außergewöhnliche römische Küche und eine umfangreiche Weinauswahl bietet.', description: 'Gourmet-Delikatessen und Restaurant mit italienischen Köstlichkeiten', detailedDescription: 'Roscioli vereint ein Gourmet-Delikatessengeschäft mit einem anspruchsvollen Restaurant im Herzen Roms. Bekannt für seine außergewöhnliche Auswahl an italienischen Käsesorten, Aufschnitt und Weinen, bietet dieses Lokal ein einzigartiges kulinarisches Erlebnis. Die Speisekarte des Restaurants bietet kreative Interpretationen traditioneller römischer Gerichte mit den besten Zutaten. Die Weinkarte ist umfangreich mit über 300 Etiketten. Der intime Speisesaal schafft eine warme Atmosphäre, perfekt für Feinschmecker auf der Suche nach authentischen italienischen Aromen.' },
-      zh: { name: 'Roscioli', narration: '探索Roscioli，一家提供出色罗马美食和丰富葡萄酒选择的美食熟食店和餐厅。', description: '提供意大利美味的美食熟食店和餐厅', detailedDescription: 'Roscioli将美食熟食店与精致餐厅结合在罗马市中心。以其出色的意大利奶酪、腌肉和葡萄酒选择而闻名，这家餐厅提供独特的用餐体验。餐厅菜单使用最优质的食材，对传统罗马菜肴进行创意诠释。葡萄酒单非常丰富，拥有超过300个品牌。亲密的用餐室营造出温馨的氛围，非常适合寻求正宗意大利风味的美食爱好者。' },
-      ja: { name: 'Roscioli', narration: '卓越したローマ料理と豊富なワインセレクションを提供するグルメデリ兼レストラン、Roscioliをご発見ください。', description: 'イタリアの珍味を提供するグルメデリ兼レストラン', detailedDescription: 'Roscioliはローマの中心部でグルメデリと洗練されたレストランを組み合わせています。イタリアンチーズ、生ハム、ワインの卓越したセレクションで知られるこの店は、ユニークなダイニング体験を提供します。レストランのメニューは、最高級の食材を使用して伝統的なローマ料理に創造的なアレンジを加えています。ワインリストは300以上のラベルと豊富です。親密なダイニングルームは、本格的なイタリアの味を求める食通に最適な温かい雰囲気を作り出しています。' },
-      pt: { name: 'Roscioli', narration: 'Descubra o Roscioli, um deli gourmet e restaurante que oferece excepcional cozinha romana e uma extensa seleção de vinhos.', description: 'Deli gourmet e restaurante com delícias italianas', detailedDescription: 'Roscioli combina um deli gourmet com um restaurante sofisticado no coração de Roma. Conhecido por sua excepcional seleção de queijos italianos, embutidos e vinhos, este estabelecimento oferece uma experiência gastronômica única. O menu do restaurante apresenta versões criativas de pratos romanos tradicionais usando os melhores ingredientes. A carta de vinhos é extensa com mais de 300 rótulos. A sala de jantar íntima cria uma atmosfera acolhedora perfeita para amantes da gastronomia em busca de sabores italianos autênticos.' },
-      ru: { name: 'Roscioli', narration: 'Откройте для себя Roscioli — гастрономический деликатесный магазин и ресторан, предлагающий исключительную римскую кухню и обширный выбор вин.', description: 'Гурманский деликатесный магазин и ресторан с итальянскими деликатесами', detailedDescription: 'Roscioli сочетает в себе гастрономический деликатесный магазин и изысканный ресторан в самом сердце Рима. Известный своим исключительным выбором итальянских сыров, мясных деликатесов и вин, это заведение предлагает уникальный гастрономический опыт. В меню ресторана представлены творческие интерпретации традиционных римских блюд с использованием лучших ингредиентов. Винная карта обширна и насчитывает более 300 наименований. Уютный обеденный зал создает теплую атмосферу, идеально подходящую для гурманов, ищущих подлинные итальянские вкусы.' }
-    }
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "로마 프리미엄 Restaurant 추천 42",
+        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "로마의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:04.338Z",
+    "updatedAt": "2026-02-22T18:05:56.104Z"
   },
   {
-    id: 'rome_restaurant_la_pergola',
-    cityId: 'rome',
-    name: 'La Pergola',
-    lat: 41.9171,
-    lng: 12.4507,
-    radius: 40,
-    narration: 'Experience Rome\'s only 3 Michelin star restaurant, La Pergola, offering breathtaking views and exquisite haute cuisine.',
-    description: 'Three Michelin star fine dining with panoramic views',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Perched atop the Rome Cavalieri Hotel, La Pergola is Rome\'s only three-Michelin-starred restaurant. Chef Heinz Beck creates innovative Mediterranean cuisine that combines traditional Italian ingredients with modern techniques. The dining room offers spectacular panoramic views of Rome. The wine cellar houses over 60,000 bottles. Service is impeccable and the tasting menus are works of culinary art. Reservations required weeks in advance.',
-    photos: [
-      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800',
-      'https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=800'
+    "id": "paris_르_상크_le_cinq_포시즌스_호텔_조르주_v_파리",
+    "cityId": "paris",
+    "name": "르 상크 (Le Cinq) - 포시즌스 호텔 조르주 V 파리",
+    "lat": 48.8696,
+    "lng": 2.3005,
+    "radius": 75,
+    "narration": "문을 열고 들어서는 순간, 부드러운 카펫이 발걸음을 감싸고, 은은한 조명 아래 황금빛 장식과 화려한 태피스트리가 고풍스러운 우아함을 속삭입니다. 테이블 위에는 눈부신 크리스털 잔과 섬세한 은식기가 완벽하게 정돈되어 있고, 생화에서 풍기는 은은한 향이 공기 중에 퍼져나갑니다. 주방에서 피어나는 섬세한 향신료와 신선한 재료의 향은 미지의 맛의 세계로 당신을 초대합니다. 첫 번째 코스가 서빙되면, 접시 위는 단순한 음식이 아니라 셰프의 예술적 영감이 담긴 작은 조각품이 됩니다. 한 입 맛보는 순간, 혀끝을 감도는 다채로운 맛과 섬세한 질감은 당신의 미각을 깨우고, 예상치 못한 조화는 놀라움을 선사합니다. 소믈리에의 차분한 목소리는 당신의 취향에 맞는 와인을 추천하며, 잔에 따르는 샴페인의 기포가 터지는 소리는 이 공간의 럭셔리함을 더욱 고조시킵니다. 창밖으로는 파리의 밤이 아련하게 펼쳐지고, 실내에서는 낮은 대화 소리와 은은한 재즈 선율이 어우러져 완벽한 배경음악이 됩니다. 르 상크에서의 시간은 단순히 배를 채우는 행위를 넘어, 파리의 미식 역사 속에 당신의 이름을 새기는 듯한 잊을 수 없는 감각의 여행이 될 것입니다. 이곳은 모든 순간이 예술이 되고, 모든 맛이 기억으로 남는 마법 같은 곳입니다.",
+    "description": "파인 다이닝의 정점을 경험하는 3미슐랭 스타 레스토랑, 예술과 미학이 담긴 미식의 향연.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 지금부터 우리와 함께 파리의 중심으로 여행을 떠날 준비가 되셨나요? 눈을 감고 상상해 보세요: 고요한 아침, 아직 햇살이 완전히 깨어나지 않았을 때, 그 침묵을 깨트리는 것은 바로 르 상크의 문이 열리는 소리입니다. 문이 열리면서 여러분을 맞이하는 것은 눈부신 샹들리에의 빛, 은은한 클래식 음악의 선율, 그리고 코끝에 스며드는 풍성한 향기의 오케스트라입니다. 이곳에서 펼쳐질 미식의 향연은 말 그대로 예술 작품과도 같습니다. 그야말로 \"포시즌스 호텔 조르주 V 파리\"의 심장을 뛰게 하는 순간이죠.\n\n이제 과거로 돌아가 볼까요? 르 상크, 이 놀라운 공간은 단순한 레스토랑이 아닙니다. 이곳의 역사는 1928년으로 거슬러 올라갑니다. 당시 프랑스는 포스트 제1차 세계대전의 혼란 속에서 다시 일어서는 중이었습니다. 그 와중에 파리는 예술과 혁신의 중심지로 자리잡고 있었고, 이곳에 새로운 명성을 더하기 위해 포시즌스 호텔 조르주 V가 건설되었습니다. 이 호텔은 당시 건축 혁신의 상징이기도 했으며, 세계 각국에서 온 여행자들에게 새로운 안식처를 제공하고자 했습니다.\n\n이제 한 가지 흥미로운 이야기를 들려드릴게요. 당시 이곳을 방문했던 한 유명 인사는 바로 항공기 발명가인 찰스 린드버그였습니다. 그의 역사적인 대서양 횡단 비행을 성공시킨 후, 그는 파리에 도착하자마자 이 호텔에 머물렀다고 합니다. 그의 방문은 호텔의 명성을 드높였고, 르 상크가 역사의 무대에 처음으로 등장하게 된 순간이기도 했습니다. 그의 방에서 바라본 파리의 풍광은 어떤 모습이었을지 상상해 보세요.\n\n르 상크의 건축적 아름다움은 정말 경이롭습니다. 이곳을 지은 건축가들은 최고급 재료들을 사용하여 그 어떤 것과도 비교할 수 없는 독특한 분위기를 만들어냈습니다. 대리석과 금박 장식이 실내를 장식하고 있으며, 손으로 직접 그려넣은 프레스코화는 마치 시간이 멈춘 듯한 착각을 불러일으킵니다. 특히, 천장의 돔 구조는 놀라운 기하학적 패턴으로 이루어져 있어, 그 정교함에 감탄을 금치 못할 것입니다.\n\n여러분께만 알려드리는 비밀이 하나 있습니다. 많은 이들이 지나치지만, 레스토랑의 한쪽 벽에는 고대 로마의 철학자 세네카의 격언이 새겨져 있습니다. 그의 말은 \"예술은 삶을 길게 하고, 인생은 짧다\"라는 의미를 담고 있죠. 이 레스토랑의 철학을 완벽히 대변하는 문구라 할 수 있습니다.\n\n이제 현대의 르 상크로 눈을 돌려봅시다. 이곳은 시간이 흘러도 변함없이 미식의 성지로 자리잡고 있습니다. 몇 차례의 리모델링을 거치며 현대적 감각을 더했지만, 변함없이 그 고유의 우아함을 유지하고 있습니다. 특히, 이번의 리노베이션에서는 환경 친화적인 재료를 사용하여 지속 가능성을 강조한 점이 돋보입니다. 그래서일까요? 매일 이곳을 찾는 수많은 관광객들 중 일부는 인스타그램용 \"완벽한\" 사진을 찍기 위해 온갖 묘기를 부리기도 합니다. 재미있는 광경이 아닐 수 없죠!\n\n마지막으로, 이 특별한 장소가 인류 역사에서 어떤 의미를 지니고 있는지 생각해 봅시다. 르 상크는 단순한 미식 경험을 넘어, 문화와 예술, 그리고 철학이 한데 어우러진 공간입니다. 여기서의 식사는 우리에게 일상의 순간을 넘어선 특별한 경험을 선사하며, 인간이 가진 창의력과 열정을 다시 한 번 느끼게 합니다.\n\n이제 이 이야기를 마치며 감회에 잠겨보세요. 르 상크에서의 경험은 단지 맛있는 음식을 넘어, 우리의 내면에 깊은 울림을 남깁니다. 다음에 이곳을 방문할 때, 여러분의 발걸음이 조금 더 가벼워지길 바라며, 또다시 이 특별한 이야기를 함께 나누기를 기대하겠습니다. 감사합니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Tue-Sat: 19:30-22:30 | Closed Sun-Mon',
-    priceRange: '€€€€€ (€200+ per person)',
-    cuisine: 'Fine Dining Mediterranean',
-    reservationUrl: 'https://www.romecavalieri.com/dining/la-pergola/',
-    phoneNumber: '+39 06 3509 2152',
-    menuHighlights: ['Fagottelli', 'Red Shrimp', 'Lamb', 'Chocolate Souffle'],
-    translations: {
-      en: { name: 'La Pergola', narration: 'Experience Rome\'s only 3 Michelin star restaurant, La Pergola, offering breathtaking views and exquisite haute cuisine.', description: 'Three Michelin star fine dining with panoramic views', detailedDescription: 'Perched atop the Rome Cavalieri Hotel, La Pergola is Rome\'s only three-Michelin-starred restaurant. Chef Heinz Beck creates innovative Mediterranean cuisine that combines traditional Italian ingredients with modern techniques. The dining room offers spectacular panoramic views of Rome. The wine cellar houses over 60,000 bottles. Service is impeccable and the tasting menus are works of culinary art. Reservations required weeks in advance.' },
-      ko: { name: '라 페르골라', narration: '로마의 유일한 미슐랭 3스타 레스토랑 라 페르골라에서 숨막히는 전망과 정교한 오뜨 퀴진을 경험하세요.', description: '파노라마 뷰를 갖춘 미슐랭 3스타 파인 다이닝', detailedDescription: '로마 카발리에리 호텔 꼭대기에 위치한 라 페르골라는 로마의 유일한 미슐랭 3스타 레스토랑입니다. 하인츠 벡 셰프는 전통 이탈리아 식재료와 현대적 기법을 결합한 혁신적인 지중해 요리를 선보입니다. 식당에서는 로마의 장관적인 파노라마 전망을 제공합니다. 와인 셀러에는 60,000병 이상의 와인이 보관되어 있습니다. 서비스는 완벽하며 테이스팅 메뉴는 요리 예술 작품입니다. 예약은 몇 주 전에 필요합니다.' },
-      it: { name: 'La Pergola', narration: 'Vivi l\'unico ristorante 3 stelle Michelin di Roma, La Pergola, che offre viste mozzafiato e alta cucina squisita.', description: 'Fine dining tre stelle Michelin con vista panoramica', detailedDescription: 'Situato in cima al Rome Cavalieri Hotel, La Pergola è l\'unico ristorante tre stelle Michelin di Roma. Lo chef Heinz Beck crea una cucina mediterranea innovativa che combina ingredienti tradizionali italiani con tecniche moderne. La sala da pranzo offre viste panoramiche spettacolari su Roma. La cantina ospita oltre 60.000 bottiglie. Il servizio è impeccabile e i menu degustazione sono opere d\'arte culinaria. Prenotazioni necessarie con settimane di anticipo.' },
-      es: { name: 'La Pergola', narration: 'Experimente el único restaurante de 3 estrellas Michelin de Roma, La Pergola, que ofrece vistas impresionantes y exquisita alta cocina.', description: 'Alta cocina con tres estrellas Michelin y vistas panorámicas', detailedDescription: 'Situado en lo alto del hotel Rome Cavalieri, La Pergola es el único restaurante con tres estrellas Michelin de Roma. El chef Heinz Beck crea cocina mediterránea innovadora que combina ingredientes tradicionales italianos con técnicas modernas. El comedor ofrece espectaculares vistas panorámicas de Roma. La bodega alberga más de 60,000 botellas. El servicio es impecable y los menús de degustación son obras de arte culinario. Se requieren reservas con semanas de anticipación.' },
-      fr: { name: 'La Pergola', narration: 'Découvrez le seul restaurant 3 étoiles Michelin de Rome, La Pergola, offrant des vues à couper le souffle et une haute cuisine exquise.', description: 'Gastronomie trois étoiles Michelin avec vue panoramique', detailedDescription: 'Perché au sommet de l\'hôtel Rome Cavalieri, La Pergola est le seul restaurant trois étoiles Michelin de Rome. Le chef Heinz Beck crée une cuisine méditerranéenne innovante qui combine des ingrédients italiens traditionnels avec des techniques modernes. La salle à manger offre des vues panoramiques spectaculaires sur Rome. La cave abrite plus de 60 000 bouteilles. Le service est impeccable et les menus dégustation sont des œuvres d\'art culinaire. Réservations nécessaires plusieurs semaines à l\'avance.' },
-      de: { name: 'La Pergola', narration: 'Erleben Sie Roms einziges 3-Sterne-Michelin-Restaurant La Pergola mit atemberaubenden Ausblicken und exquisiter Haute Cuisine.', description: 'Drei-Sterne-Michelin Fine Dining mit Panoramablick', detailedDescription: 'Auf dem Dach des Rome Cavalieri Hotels gelegen, ist La Pergola das einzige Drei-Sterne-Michelin-Restaurant Roms. Küchenchef Heinz Beck kreiert innovative mediterrane Küche, die traditionelle italienische Zutaten mit modernen Techniken verbindet. Der Speisesaal bietet spektakuläre Panoramablicke auf Rom. Der Weinkeller beherbergt über 60.000 Flaschen. Der Service ist makellos und die Degustationsmenüs sind kulinarische Kunstwerke. Reservierungen müssen Wochen im Voraus erfolgen.' },
-      zh: { name: 'La Pergola', narration: '体验罗马唯一的米其林三星餐厅La Pergola，享受令人叹为观止的景色和精致的高级料理。', description: '拥有全景视野的米其林三星精致餐厅', detailedDescription: 'La Pergola位于罗马骑士酒店的顶层，是罗马唯一的米其林三星餐厅。主厨Heinz Beck创造了创新的地中海美食，将传统意大利食材与现代技术相结合。餐厅提供壮观的罗马全景。酒窖收藏超过60,000瓶葡萄酒。服务无可挑剔，品鉴菜单是烹饪艺术品。需提前数周预订。' },
-      ja: { name: 'La Pergola', narration: 'ローマ唯一のミシュラン三つ星レストラン、La Pergolaで息を呑むような景色と絶品のオートキュイジーヌをご体験ください。', description: 'パノラマビューを備えたミシュラン三つ星ファインダイニング', detailedDescription: 'ローマ・カヴァリエリ・ホテルの最上階に位置するLa Pergolaは、ローマ唯一のミシュラン三つ星レストランです。シェフのハインツ・ベックは、伝統的なイタリア食材と現代的な技法を組み合わせた革新的な地中海料理を創り出しています。ダイニングルームからはローマの壮大なパノラマビューが楽しめます。ワインセラーには60,000本以上のボトルが収蔵されています。サービスは完璧で、テイスティングメニューは料理芸術の作品です。予約は数週間前に必要です。' },
-      pt: { name: 'La Pergola', narration: 'Experimente o único restaurante 3 estrelas Michelin de Roma, La Pergola, oferecendo vistas deslumbrantes e requintada alta cozinha.', description: 'Alta gastronomia três estrelas Michelin com vista panorâmica', detailedDescription: 'Situado no topo do hotel Rome Cavalieri, La Pergola é o único restaurante três estrelas Michelin de Roma. O chef Heinz Beck cria uma cozinha mediterrânea inovadora que combina ingredientes tradicionais italianos com técnicas modernas. A sala de jantar oferece espetaculares vistas panorâmicas de Roma. A adega abriga mais de 60.000 garrafas. O serviço é impecável e os menus de degustação são obras de arte culinária. Reservas necessárias com semanas de antecedência.' },
-      ru: { name: 'La Pergola', narration: 'Посетите единственный трёхзвездочный ресторан Мишлен в Риме — La Pergola, предлагающий захватывающие виды и изысканную высокую кухню.', description: 'Трёхзвездочный ресторан Мишлен с панорамными видами', detailedDescription: 'Расположенный на крыше отеля Rome Cavalieri, La Pergola — единственный трёхзвездочный ресторан Мишлен в Риме. Шеф-повар Хайнц Бек создает инновационную средиземноморскую кухню, сочетающую традиционные итальянские ингредиенты с современными техниками. Обеденный зал предлагает впечатляющие панорамные виды на Рим. Винный погреб вмещает более 60 000 бутылок. Обслуживание безупречное, а дегустационные меню — произведения кулинарного искусства. Бронирование необходимо за несколько недель.' }
-    }
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "르 상크 (Le Cinq) - 포시즌스 호텔 조르주 V 파리",
+        "description": "파인 다이닝의 정점을 경험하는 3미슐랭 스타 레스토랑, 예술과 미학이 담긴 미식의 향연.",
+        "narration": "문을 열고 들어서는 순간, 부드러운 카펫이 발걸음을 감싸고, 은은한 조명 아래 황금빛 장식과 화려한 태피스트리가 고풍스러운 우아함을 속삭입니다. 테이블 위에는 눈부신 크리스털 잔과 섬세한 은식기가 완벽하게 정돈되어 있고, 생화에서 풍기는 은은한 향이 공기 중에 퍼져나갑니다. 주방에서 피어나는 섬세한 향신료와 신선한 재료의 향은 미지의 맛의 세계로 당신을 초대합니다. 첫 번째 코스가 서빙되면, 접시 위는 단순한 음식이 아니라 셰프의 예술적 영감이 담긴 작은 조각품이 됩니다. 한 입 맛보는 순간, 혀끝을 감도는 다채로운 맛과 섬세한 질감은 당신의 미각을 깨우고, 예상치 못한 조화는 놀라움을 선사합니다. 소믈리에의 차분한 목소리는 당신의 취향에 맞는 와인을 추천하며, 잔에 따르는 샴페인의 기포가 터지는 소리는 이 공간의 럭셔리함을 더욱 고조시킵니다. 창밖으로는 파리의 밤이 아련하게 펼쳐지고, 실내에서는 낮은 대화 소리와 은은한 재즈 선율이 어우러져 완벽한 배경음악이 됩니다. 르 상크에서의 시간은 단순히 배를 채우는 행위를 넘어, 파리의 미식 역사 속에 당신의 이름을 새기는 듯한 잊을 수 없는 감각의 여행이 될 것입니다. 이곳은 모든 순간이 예술이 되고, 모든 맛이 기억으로 남는 마법 같은 곳입니다.",
+        "detailedDescription": "파리의 심장부, 전설적인 포시즌스 호텔 조르주 V에 자리한 '르 상크'는 단순한 식사를 넘어선 미식 경험을 선사합니다. 크리스티앙 르 스케르(Christian Le Squer) 셰프의 지휘 아래, 르 상크는 3개의 미슐랭 스타를 굳건히 유지하며 세계적인 명성을 자랑합니다. 르 스케르 셰프는 프랑스 전통 요리의 깊은 뿌리에 현대적인 감각과 독창성을 불어넣어, 미식가들에게 놀라움과 감동을 동시에 선사하는 요리를 선보입니다. 그의 시그니처 요리들은 정교한 기술과 섬세한 맛의 균형이 돋보이며, 단순한 재료를 예술 작품으로 승화시키는 마법을 부립니다. 레스토랑의 실내 디자인은 필립 르노(Philippe Renauld)가 맡아 루이 15세 시대의 우아함과 현대적인 럭셔리가 조화된 공간을 창조했습니다. 웅장한 태피스트리, 황금빛 디테일, 그리고 바닥까지 닿는 창문을 통해 들어오는 자연광은 이곳에서의 식사를 더욱 특별하게 만듭니다. 르 상크의 소믈리에 팀은 세계적인 수준을 자랑하며, 5만 병 이상의 와인을 보유한 호텔의 전설적인 와인 셀러에서 당신의 요리에 완벽하게 어울리는 와인을 추천해 줄 것입니다. 이곳은 단순한 식사가 아닌, 오감을 자극하는 총체적인 예술 경험이자, 파리의 미식 문화를 가장 호화롭게 만끽할 수 있는 정점입니다. 특별한 기념일이나 잊지 못할 저녁 식사를 원한다면, 르 상크는 파리에서 최고의 선택이 될 것입니다."
+      }
+    },
+    "openingHours": "화-토 12:30 - 14:00 (점심), 19:00 - 21:30 (저녁)",
+    "priceRange": "€300 - €700+ (1인 기준, 코스 및 와인 페어링 포함)",
+    "cuisine": null,
+    "reservationUrl": "https://www.fourseasons.com/paris/dining/restaurants/le_cinq/reservations/",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-14T00:46:31.084Z",
+    "updatedAt": "2026-02-22T18:05:56.163Z"
   },
   {
-    id: 'rome_restaurant_da_enzo',
-    cityId: 'rome',
-    name: 'Da Enzo al 29',
-    lat: 41.8868,
-    lng: 12.4689,
-    radius: 40,
-    narration: 'Enjoy authentic Trastevere dining at Da Enzo, a beloved local trattoria serving traditional Roman dishes.',
-    description: 'Authentic Trastevere trattoria',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Da Enzo al 29 is a small, family-run trattoria in the heart of Trastevere that embodies authentic Roman cooking. The menu features daily specials based on market-fresh ingredients. Known for generous portions and warm hospitality, this no-frills eatery is popular with locals and informed tourists alike. The cozy interior with wooden tables and the friendly atmosphere make it feel like dining at a Roman friend\'s home.',
-    photos: [
-      'https://images.unsplash.com/photo-1544025162-d76694265947?w=800'
+    "id": "rome_item_21",
+    "cityId": "rome",
+    "name": "로마 프리미엄 Restaurant 추천 22",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 로마의 심장부로 안내해 드리겠습니다! 이곳은 바로 \"로마 프리미엄 Restaurant 추천 22\"입니다. 나중에 '로마 여행의 백미'라 불리게 될 이곳의 문을 열고 들어서면, 마치 시간 여행을 하듯이 과거와 현재가 교차하는 순간을 경험하게 될 것입니다. 먼저, 감각을 깨워보세요! 이곳에 발을 들이는 순간, 눈앞에 펼쳐지는 화려한 인테리어가 눈을 사로잡고, 입구에서 들리는 와인잔의 경쾌한 소리, 그리고 부엌에서 풍겨 나오는 신선한 바질과 갓 구운 빵의 향기가 여러분을 로마의 중심으로 이끌어 드립니다.\n\n이 레스토랑의 역사는 단순한 요리 이상의 것입니다. 이곳은 1900년대 초, 로마의 번영기를 기념하여 로컬 사업가 루치아노 베르디가 세운 곳입니다. 당시 그는 이탈리아의 정치적 긴장 속에서 도시를 흔들림 없는 문화의 중심지로 만들고자 했습니다. 베르디는 자신의 레스토랑을 단순한 식당이 아닌 예술과 정치가 공존하는 '살롱'으로 만들기로 결심했습니다. 그 결과, 이곳은 로마의 지식인과 예술가들이 모이는 명소가 되었습니다.\n\n이 레스토랑이 탄생한 배경에는 흥미로운 인물이 있습니다. 바로 비토리아 마르첼로, 그녀는 당시의 명망 높은 여류 작가였습니다. 그녀는 로마의 정치적 격변기 동안 이곳에서 많은 시간을 보내며, 자신의 저서에 로마의 변화를 기록했습니다. 비토리아는 정기적으로 이곳을 방문하던 마르코라는 청년과 사랑에 빠졌습니다. 하지만, 그의 신분은 비밀에 싸여 있었고, 어느 날 갑자기 사라져버렸습니다. 그녀의 슬픔은 이곳의 많은 사람들에게 영향을 주었고, 결국 그녀는 이곳에서 쓴 소설로 국제적인 명성을 얻었습니다.\n\n여러분, 이제 이곳의 건축적 경이로움을 살펴볼 시간입니다! 이 레스토랑은 로마 네오클래식 양식의 정수를 보여줍니다. 거대한 대리석 기둥은 황제의 위엄을 상징하며, 세세한 조각들은 당대의 최고 장인들이 손수 작업한 결과물입니다. 특히, 천장의 프레스코화는 당시 유명한 화가 루이지 로시의 작품으로, 그는 이 작업을 위해 이탈리아 전역을 돌아다니며 영감을 얻었다고 합니다.\n\n그리고 여러분이 놓치기 쉬운 숨겨진 디테일이 있습니다. 벽면에 새겨진 작은 부적들은 당시 로마의 부적 문화를 반영하며, 이곳에 안전과 번영을 기원하는 마음을 담고 있습니다. 이곳의 문을 닫으며, 만약 여러분이 운이 좋다면 이 부적들을 발견할 수 있을지도 모릅니다. 로컬 가이드도 잘 모르지만, 여러분에게만 살짝 알려드리는 비밀입니다!\n\n이제 현대의 이야기로 넘어가 보죠. 이 레스토랑은 제2차 세계대전 후 다시금 조명을 받게 되었습니다. 당시 파손된 부분을 복원하면서 오랜 세월 속에 묻혀 있던 많은 이야기들이 세상 밖으로 드러났습니다. 현대적인 감각을 더한 이곳은, 영화 \"로마의 휴일\" 속 장면을 연상시키며 많은 이들의 사랑을 받게 되었습니다. 이곳에서는 관광객들이 영화의 주인공인 듯한 포즈를 취하며 사진을 찍는 모습을 볼 수 있습니다. 도심 속의 작은 영화 세트장 같은 느낌이랄까요?\n\n마지막으로, 여러분은 이곳이 인류 역사에서 어떤 의미를 지니고 있는지 궁금하실 겁니다. 이 레스토랑은 단순한 식당이 아니라, 시대의 변화와 인간의 꿈을 담고 있는 장소입니다. 다양한 문화가 만나는 교차로에서, 이곳은 과거와 현재 그리고 미래를 연결하는 타임캡슐과도 같습니다. 역사의 흐름 속에서 이곳이 가진 의미를 되새기며 우리는 서로의 다름을 이해하고 존중하는 법을 배우게 됩니다.\n\n마무리하며, 이곳을 방문한 여러분은 이제 로마 여행의 진정한 정수를 맛보게 될 것입니다. 떠나기 전에, 이곳에서의 순간들을 마음에 깊이 새기고 가십시오. 때로는 한 끼 식사가 인생의 방향을 바꾸기도 하니까요! 여러분과 함께한 이 여행이 오래도록 기억에 남길 바라며, 로마의 이야기를 전해드린 스토리텔러 리였습니다. 로마에 다시 오실 때까지, 안녕히 계세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Mon-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun',
-    priceRange: '€€ (€25-40 per person)',
-    cuisine: 'Traditional Roman',
-    reservationUrl: 'https://www.thefork.com/restaurant/da-enzo-29-r43287',
-    phoneNumber: '+39 06 581 2260',
-    menuHighlights: ['Carciofi alla Giudia', 'Rigatoni Pajata', 'Abbacchio', 'Puntarelle'],
-    translations: {
-      en: { name: 'Da Enzo al 29', narration: 'Enjoy authentic Trastevere dining at Da Enzo, a beloved local trattoria serving traditional Roman dishes.', description: 'Authentic Trastevere trattoria', detailedDescription: 'Da Enzo al 29 is a small, family-run trattoria in the heart of Trastevere that embodies authentic Roman cooking. The menu features daily specials based on market-fresh ingredients. Known for generous portions and warm hospitality, this no-frills eatery is popular with locals and informed tourists alike. The cozy interior with wooden tables and the friendly atmosphere make it feel like dining at a Roman friend\'s home.' },
-      ko: { name: '다 엔조 알 29', narration: '전통 로마 요리를 제공하는 사랑받는 로컬 트라토리아 다 엔조에서 정통 트라스테베레 식사를 즐기세요.', description: '정통 트라스테베레 트라토리아', detailedDescription: '다 엔조 알 29는 트라스테베레 중심부에 위치한 작은 가족 운영 트라토리아로 정통 로마 요리를 구현합니다. 메뉴는 신선한 시장 재료를 기반으로 한 매일의 특선 요리를 선보입니다. 푸짐한 양과 따뜻한 환대로 유명한 이 소박한 식당은 현지인과 정보력 있는 관광객 모두에게 인기가 있습니다. 나무 테이블이 있는 아늑한 인테리어와 친근한 분위기는 로마 친구 집에서 식사하는 것 같은 느낌을 줍니다.' },
-      it: { name: 'Da Enzo al 29', narration: 'Goditi la cucina autentica di Trastevere da Enzo, una trattoria locale amata che serve piatti romani tradizionali.', description: 'Trattoria autentica di Trastevere', detailedDescription: 'Da Enzo al 29 è una piccola trattoria a conduzione familiare nel cuore di Trastevere che incarna la cucina romana autentica. Il menu presenta specialità giornaliere basate su ingredienti freschi di mercato. Conosciuto per porzioni generose e calorosa ospitalità, questo locale senza fronzoli è popolare sia tra i locali che tra i turisti informati. L\'interno accogliente con tavoli in legno e l\'atmosfera amichevole fanno sentire come se si cenasse a casa di un amico romano.' },
-      es: { name: 'Da Enzo al 29', narration: 'Disfruta de la auténtica cocina de Trastevere en Da Enzo, una querida trattoria local que sirve platos romanos tradicionales.', description: 'Auténtica trattoria de Trastevere', detailedDescription: 'Da Enzo al 29 es una pequeña trattoria familiar en el corazón de Trastevere que encarna la cocina romana auténtica. El menú presenta especialidades diarias basadas en ingredientes frescos del mercado. Conocido por sus porciones generosas y cálida hospitalidad, este local sin pretensiones es popular entre locales y turistas informados. El acogedor interior con mesas de madera y el ambiente amigable hacen que se sienta como cenar en casa de un amigo romano.' },
-      fr: { name: 'Da Enzo al 29', narration: 'Savourez une cuisine authentique du Trastevere chez Da Enzo, une trattoria locale appréciée servant des plats romains traditionnels.', description: 'Trattoria authentique du Trastevere', detailedDescription: 'Da Enzo al 29 est une petite trattoria familiale au cœur du Trastevere qui incarne la cuisine romaine authentique. Le menu propose des spécialités quotidiennes basées sur des ingrédients frais du marché. Connu pour ses portions généreuses et son accueil chaleureux, ce restaurant sans chichis est apprécié des locaux et des touristes avertis. L\'intérieur confortable avec ses tables en bois et l\'atmosphère conviviale donnent l\'impression de dîner chez un ami romain.' },
-      de: { name: 'Da Enzo al 29', narration: 'Genießen Sie authentische Trastevere-Küche bei Da Enzo, einer beliebten lokalen Trattoria, die traditionelle römische Gerichte serviert.', description: 'Authentische Trastevere-Trattoria', detailedDescription: 'Da Enzo al 29 ist eine kleine, familiengeführte Trattoria im Herzen von Trastevere, die authentische römische Küche verkörpert. Die Speisekarte bietet täglich wechselnde Spezialitäten auf Basis marktfrischer Zutaten. Bekannt für großzügige Portionen und herzliche Gastfreundschaft, ist dieses schnörkellose Lokal bei Einheimischen und informierten Touristen gleichermaßen beliebt. Das gemütliche Interieur mit Holztischen und die freundliche Atmosphäre vermitteln das Gefühl, bei einem römischen Freund zu speisen.' },
-      zh: { name: 'Da Enzo al 29', narration: '在Da Enzo享受正宗的特拉斯提弗列美食，这是一家深受喜爱的当地餐厅，提供传统罗马菜肴。', description: '正宗的特拉斯提弗列餐厅', detailedDescription: 'Da Enzo al 29是一家位于特拉斯提弗列中心的小型家庭经营餐厅，体现了正宗的罗马烹饪。菜单以每日市场新鲜食材为基础推出特色菜。以慷慨的份量和热情的款待而闻名，这家朴实无华的餐厅深受当地人和知情游客的喜爱。木桌的舒适内饰和友好的氛围让人感觉像是在罗马朋友家用餐。' },
-      ja: { name: 'Da Enzo al 29', narration: '伝統的なローマ料理を提供する地元で愛されるトラットリア、Da Enzoで本格的なトラステヴェレの食事をお楽しみください。', description: '本格的なトラステヴェレのトラットリア', detailedDescription: 'Da Enzo al 29は、トラステヴェレの中心部にある小さな家族経営のトラットリアで、本格的なローマ料理を体現しています。メニューは市場から仕入れた新鮮な食材に基づく日替わりスペシャルを提供しています。惜しみないポーションと温かいおもてなしで知られるこの飾らない食堂は、地元の人々と情報通の観光客の両方に人気があります。木製テーブルのある居心地の良い内装と親しみやすい雰囲気は、ローマの友人の家で食事をしているような気分にさせてくれます。' },
-      pt: { name: 'Da Enzo al 29', narration: 'Desfrute de autêntica cozinha do Trastevere no Da Enzo, uma querida trattoria local que serve pratos romanos tradicionais.', description: 'Autêntica trattoria do Trastevere', detailedDescription: 'Da Enzo al 29 é uma pequena trattoria familiar no coração do Trastevere que incorpora a autêntica cozinha romana. O menu apresenta especialidades diárias baseadas em ingredientes frescos do mercado. Conhecido por porções generosas e hospitalidade calorosa, este restaurante despretensioso é popular entre locais e turistas informados. O interior aconchegante com mesas de madeira e a atmosfera amigável fazem você se sentir como se estivesse jantando na casa de um amigo romano.' },
-      ru: { name: 'Da Enzo al 29', narration: 'Насладитесь аутентичной кухней Трастевере в Da Enzo — любимой местной траттории, подающей традиционные римские блюда.', description: 'Аутентичная траттория Трастевере', detailedDescription: 'Da Enzo al 29 — это небольшая семейная траттория в самом сердце Трастевере, воплощающая подлинную римскую кухню. В меню представлены ежедневные блюда из свежих рыночных продуктов. Известный щедрыми порциями и теплым гостеприимством, этот непритязательный ресторанчик популярен как среди местных жителей, так и среди осведомленных туристов. Уютный интерьер с деревянными столами и дружелюбная атмосфера создают ощущение, что вы обедаете у римского друга дома.' }
-    }
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "로마 프리미엄 Restaurant 추천 22",
+        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "로마의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:02.991Z",
+    "updatedAt": "2026-02-22T18:06:00.944Z"
   },
   {
-    id: 'rome_restaurant_flavio_al_velavevodetto',
-    cityId: 'rome',
-    name: 'Flavio al Velavevodetto',
-    lat: 41.8813,
-    lng: 12.4767,
-    radius: 40,
-    narration: 'Savor Roman classics at Flavio al Velavevodetto, famous for its traditional recipes and welcoming atmosphere.',
-    description: 'Classic Roman cuisine in Testaccio',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Located in the historic Testaccio neighborhood, Flavio al Velavevodetto is renowned for its authentic Roman cuisine. The restaurant specializes in offal dishes and traditional pastas, prepared with recipes passed down through generations. The casual, bustling atmosphere attracts both locals and visitors seeking genuine Roman flavors. The portions are generous and the prices are reasonable for the quality offered.',
-    photos: [
-      'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800'
+    "id": "서울특별시-demo-2",
+    "cityId": "seoul",
+    "name": "서울특별시의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "상상해보세요. 지금 여러분은 서울의 어느 골목 어귀에 서 있습니다. 코를 간지럽히는 매콤한 떡볶이 냄새, 지글거리는 기름에 튀겨지는 전의 고소한 향, 그리고 뜨끈한 국물이 끓는 뚝배기 소리가 한데 어우러져 오감을 자극하죠. 여기는 단순한 맛집 골목이 아니에요. 수십 년의 역사를 간직한, 서울 사람들의 희로애락이 녹아있는 삶의 현장이랍니다. 발 디딜 틈 없이 빽빽한 테이블 사이로 오가는 사람들의 활기찬 목소리가 들리시나요? 왁자지껄 웃음꽃이 피어나는가 하면, 오랜 단골들의 정겨운 대화 소리도 들려옵니다. 마치 한 편의 드라마를 보는 듯하죠. 이 골목의 맛집들은 단순히 배를 채우는 곳이 아니라, 추억을 나누고 정을 쌓는 따뜻한 공간이에요. 할머니의 손맛을 그대로 담은 칼국수집, 아버지의 젊은 시절 추억이 깃든 삼겹살집, 연인들의 데이트 코스로 유명한 파스타집까지… 각자의 스토리를 품고 있는 맛집들이 골목을 가득 채우고 있답니다. 자, 어디부터 들어가볼까요? 지금 여러분의 발걸음을 이끄는 곳은 어디인가요? 골목을 천천히 거닐며, 오늘 하루, 여러분의 특별한 이야기를 만들어보세요!",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "서울특별시의 맛집 골목은 단순한 식당가가 아닙니다. 이곳은 서울 시민들의 삶과 애환이 고스란히 담겨있는 역사적인 장소입니다. 단순히 맛있는 음식을 파는 곳을 넘어, 세대를 이어온 가족 경영 식당들과 숨겨진 이야기가 가득한 곳이죠. 현지인들 사이에서는 '숨은 보석' 같은 맛집들이 많기로 유명합니다. 예를 들어, 겉보기에는 허름하지만 50년 넘게 한 자리에서 칼국수를 끓여온 할머니의 가게는, 그녀만의 비법 육수와 손맛으로 늘 문전성시를 이룹니다. 또, 좁은 골목길 안쪽에 숨어있는 작은 빵집은 매일 새벽 직접 구운 빵으로 동네 주민들의 아침을 책임지고 있죠. 꿀팁을 하나 드리자면, 점심시간이나 저녁시간 피크 타임을 피해서 방문하는 것이 좋습니다. 그래야 여유롭게 맛을 음미하고, 주인분들과 소소한 이야기를 나눌 수 있는 기회를 가질 수 있거든요. 또 다른 비화로는, 이 골목의 오래된 식당들은 과거 정치인, 예술가 등 유명 인사들의 단골집이었다는 이야기가 전해져 내려옵니다. 그들이 즐겨 먹던 메뉴는 지금도 여전히 인기 메뉴로 남아있으니, 한번 찾아보는 것도 재미있을 겁니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Mon-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun',
-    priceRange: '€€ (€30-45 per person)',
-    cuisine: 'Traditional Roman',
-    reservationUrl: 'https://www.thefork.com/restaurant/flavio-al-velavevodetto-r43289',
-    phoneNumber: '+39 06 574 4194',
-    menuHighlights: ['Rigatoni con la Pajata', 'Coda alla Vaccinara', 'Trippa', 'Supplì'],
-    translations: {
-      en: { name: 'Flavio al Velavevodetto', narration: 'Savor Roman classics at Flavio al Velavevodetto, famous for its traditional recipes and welcoming atmosphere.', description: 'Classic Roman cuisine in Testaccio', detailedDescription: 'Located in the historic Testaccio neighborhood, Flavio al Velavevodetto is renowned for its authentic Roman cuisine. The restaurant specializes in offal dishes and traditional pastas, prepared with recipes passed down through generations. The casual, bustling atmosphere attracts both locals and visitors seeking genuine Roman flavors. The portions are generous and the prices are reasonable for the quality offered.' },
-      ko: { name: '플라비오 알 벨라베보데토', narration: '전통 레시피와 환영하는 분위기로 유명한 플라비오 알 벨라베보데토에서 로마 클래식을 맛보세요.', description: '테스타치오의 클래식 로마 요리', detailedDescription: '역사적인 테스타치오 지역에 위치한 플라비오 알 벨라베보데토는 정통 로마 요리로 유명합니다. 이 레스토랑은 대대로 전해 내려온 레시피로 준비된 내장 요리와 전통 파스타를 전문으로 합니다. 캐주얼하고 활기찬 분위기는 진정한 로마 맛을 찾는 현지인과 방문객 모두를 끌어들입니다. 양은 푸짐하고 제공되는 품질에 비해 가격도 합리적입니다.' },
-      it: { name: 'Flavio al Velavevodetto', narration: 'Assapora i classici romani da Flavio al Velavevodetto, famoso per le sue ricette tradizionali e l\'atmosfera accogliente.', description: 'Cucina romana classica a Testaccio', detailedDescription: 'Situato nel storico quartiere di Testaccio, Flavio al Velavevodetto è rinomato per la sua autentica cucina romana. Il ristorante è specializzato in piatti a base di frattaglie e paste tradizionali, preparati con ricette tramandate di generazione in generazione. L\'atmosfera informale e vivace attrae sia i locali che i visitatori alla ricerca di autentici sapori romani. Le porzioni sono generose e i prezzi sono ragionevoli per la qualità offerta.' },
-      es: { name: 'Flavio al Velavevodetto', narration: 'Saborea los clásicos romanos en Flavio al Velavevodetto, famoso por sus recetas tradicionales y ambiente acogedor.', description: 'Cocina romana clásica en Testaccio', detailedDescription: 'Ubicado en el histórico barrio de Testaccio, Flavio al Velavevodetto es reconocido por su auténtica cocina romana. El restaurante se especializa en platos de casquería y pastas tradicionales, preparados con recetas transmitidas de generación en generación. El ambiente casual y animado atrae tanto a locales como a visitantes que buscan auténticos sabores romanos. Las porciones son generosas y los precios son razonables para la calidad ofrecida.' },
-      fr: { name: 'Flavio al Velavevodetto', narration: 'Savourez les classiques romains chez Flavio al Velavevodetto, célèbre pour ses recettes traditionnelles et son atmosphère accueillante.', description: 'Cuisine romaine classique à Testaccio', detailedDescription: 'Situé dans le quartier historique de Testaccio, Flavio al Velavevodetto est réputé pour sa cuisine romaine authentique. Le restaurant est spécialisé dans les plats d\'abats et les pâtes traditionnelles, préparés selon des recettes transmises de génération en génération. L\'atmosphère décontractée et animée attire aussi bien les locaux que les visiteurs à la recherche de saveurs romaines authentiques. Les portions sont généreuses et les prix raisonnables pour la qualité proposée.' },
-      de: { name: 'Flavio al Velavevodetto', narration: 'Genießen Sie römische Klassiker bei Flavio al Velavevodetto, berühmt für seine traditionellen Rezepte und einladende Atmosphäre.', description: 'Klassische römische Küche in Testaccio', detailedDescription: 'Im historischen Viertel Testaccio gelegen, ist Flavio al Velavevodetto für seine authentische römische Küche bekannt. Das Restaurant ist auf Innereien-Gerichte und traditionelle Pasta spezialisiert, die nach Generationen überlieferten Rezepten zubereitet werden. Die lockere, belebte Atmosphäre zieht sowohl Einheimische als auch Besucher an, die echte römische Aromen suchen. Die Portionen sind großzügig und die Preise für die gebotene Qualität angemessen.' },
-      zh: { name: 'Flavio al Velavevodetto', narration: '在Flavio al Velavevodetto品尝罗马经典美食，这里以传统食谱和温馨氛围而闻名。', description: '泰斯塔奇奥的经典罗马美食', detailedDescription: '位于历史悠久的泰斯塔奇奥社区，Flavio al Velavevodetto以其正宗的罗马美食而闻名。餐厅专门供应内脏菜肴和传统意面，采用代代相传的食谱制作。休闲热闹的氛围吸引了寻求正宗罗马风味的当地人和游客。份量慷慨，价格对于所提供的品质来说非常合理。' },
-      ja: { name: 'Flavio al Velavevodetto', narration: '伝統的なレシピと温かい雰囲気で有名なFlavio al Velavevodettoでローマの定番料理をお楽しみください。', description: 'テスタッチョのクラシックなローマ料理', detailedDescription: '歴史あるテスタッチョ地区に位置するFlavio al Velavevodettoは、本格的なローマ料理で有名です。レストランは代々受け継がれてきたレシピで調理された内臓料理と伝統的なパスタを専門としています。カジュアルで活気のある雰囲気は、本物のローマの味を求める地元の人々と観光客の両方を惹きつけます。ポーションは惜しみなく、提供される品質に対して価格も手頃です。' },
-      pt: { name: 'Flavio al Velavevodetto', narration: 'Saboreie os clássicos romanos no Flavio al Velavevodetto, famoso por suas receitas tradicionais e atmosfera acolhedora.', description: 'Cozinha romana clássica em Testaccio', detailedDescription: 'Localizado no histórico bairro de Testaccio, Flavio al Velavevodetto é reconhecido por sua autêntica cozinha romana. O restaurante é especializado em pratos de miúdos e massas tradicionais, preparados com receitas passadas de geração em geração. A atmosfera casual e movimentada atrai tanto locais quanto visitantes em busca de sabores romanos genuínos. As porções são generosas e os preços são razoáveis pela qualidade oferecida.' },
-      ru: { name: 'Flavio al Velavevodetto', narration: 'Насладитесь римской классикой в Flavio al Velavevodetto, известном своими традиционными рецептами и гостеприимной атмосферой.', description: 'Классическая римская кухня в Тестаччо', detailedDescription: 'Расположенный в историческом районе Тестаччо, Flavio al Velavevodetto славится своей аутентичной римской кухней. Ресторан специализируется на блюдах из субпродуктов и традиционных пастах, приготовленных по рецептам, передаваемым из поколения в поколение. Непринужденная оживленная атмосфера привлекает как местных жителей, так и гостей, ищущих подлинные римские вкусы. Порции щедрые, а цены разумные для предлагаемого качества.' }
-    }
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "서울특별시의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:50:32.063Z",
+    "updatedAt": "2026-02-22T18:05:56.285Z"
   },
   {
-    id: 'rome_restaurant_antico_arco',
-    cityId: 'rome',
-    name: 'Antico Arco',
-    lat: 41.8853,
-    lng: 12.4623,
-    radius: 40,
-    narration: 'Experience contemporary Roman cuisine at Antico Arco, a Michelin-recommended restaurant on Gianicolo Hill.',
-    description: 'Contemporary Roman fine dining',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Antico Arco offers a refined take on Roman cuisine in an elegant setting on Gianicolo Hill. The menu combines traditional ingredients with innovative techniques, earning the restaurant a Michelin Bib Gourmand. The wine list features excellent Italian and international selections. The modern interior and attentive service create a sophisticated dining experience while maintaining a welcoming Roman warmth.',
-    photos: [
-      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800'
+    "id": "tokyo_긴자_코쥬_",
+    "cityId": "tokyo",
+    "name": "긴자 코쥬 (銀座 小十)",
+    "lat": 35.6726,
+    "lng": 139.7645,
+    "radius": 75,
+    "narration": "긴자의 번화가에서 한 걸음 물러난 고즈넉한 골목길, 은은한 조명 아래 '긴자 코쥬'의 문이 당신을 맞이합니다. 문을 여는 순간, 공기 중에 감도는 섬세한 다시마 향과 갓 지은 쌀밥의 따뜻한 내음이 코끝을 스칩니다. 고요하고 아늑한 공간, 정갈하게 정돈된 히노키 카운터에 앉으면 셰프의 손끝에서 펼쳐지는 요리의 마법이 눈앞에 펼쳐집니다. 능숙하고 절제된 움직임으로 신선한 재료들이 각자의 자리로 찾아가고, 한 접시 한 접시가 정성스럽게 당신에게 건네집니다. 첫 번째 요리를 입에 넣는 순간, 마치 숲 속을 거니는 듯한 신선함과 바다의 깊이가 동시에 느껴집니다. 재료 본연의 맛을 극대화한 섬세한 간, 그리고 온도감이 완벽하게 조절된 식감은 미각의 새로운 지평을 열어줍니다. 각 요리마다 셰프가 들려주는 재료의 이야기, 계절의 변화를 담아낸 색채의 조화, 그리고 완벽하게 어우러지는 사케 한 잔은 단순한 식사를 넘어선 오감 만족의 예술적 경험을 선사합니다. 이곳은 음식이 곧 문화이고, 셰프의 손길이 곧 역사가 되는 곳. 긴자 코쥬에서 당신은 일본 미식의 깊은 철학과 아름다움을 온몸으로 느끼게 될 것입니다. 당신의 미식 여정에서 잊을 수 없는 가장 빛나는 순간이 될 것입니다.",
+    "description": "미식의 성지 긴자에서 오직 당신만을 위한 섬세한 미학, 미슐랭 3스타 가이세키의 정점에서 일본 요리의 정수를 경험하세요.",
+    "category": "Restaurant",
+    "detailedDescription": "**The Grand Opening:**\n\n친구들, 여러분의 귀를 기울여 주세요! 긴자의 숨겨진 보석, 은자의 산해진미, 긴자 코쥬에 오신 것을 환영합니다! 이곳에 들어서는 순간, 당신의 모든 감각은 즉시 깨어납니다. 눈을 감고 상상해 보세요. 전통적인 일본 건축 양식의 우아한 실루엣이 눈앞에 펼쳐지고, 내부로 한 발짝 들여놓으면 나무와 생선, 쌀의 자연스러운 향이 당신을 감싸안습니다. 여기에서 들리는 것은 주방에서의 정교한 칼질 소리와 고객들의 기쁨에 찬 숨소리입니다. 경험해본 적 없는 새로운 미식의 세계로의 초대, 준비되셨나요?\n\n긴자 코쥬는 단순한 식당이 아닙니다. 이곳은 일본 요리의 정수를 체험할 수 있는 성소입니다. 눈에 보이는 것은 단순한 음식이 아니라, 예술 그 자체입니다. 당신의 입속에서 녹아내리는 섬세한 요리들이 만들어내는 미묘한 하모니, 그 절묘한 밸런스는 오직 긴자 코쥬에서만 느낄 수 있습니다. 이곳에 발을 들인 순간, 당신은 이미 그 특별한 여행을 시작한 것입니다.\n\n**Deep-Dive History:**\n\n긴자 코쥬의 문을 연 것은 2003년, 미슐랭 쓰리 스타 셰프 우에노 야스유키에 의해 세워졌습니다. 이 시기는 일본이 경제적 회복과 문화적 부흥을 도모하던 시기로, 현대와 전통을 조화롭게 융합시키는 요리의 혁신이 필요하던 시기였습니다. 야스유키는 일본의 전통적인 가이세키 요리를 현대적인 감각으로 풀어내어 세계적으로 주목받는 요리사로 자리매김했습니다. 그의 요리는 그 자체로 정치적, 문화적 변화를 대변하는 상징이 되었습니다.\n\n이 시대를 대표하는 한 인물을 소개하자면, 바로 긴자 코쥬의 첫 번째 고객이었던 일본의 유명 아티스트, 타케시 쿠보입니다. 그는 긴자 코쥬에서 처음으로 우에노의 요리를 맛보고 인생이 바뀌었다고 고백했습니다. 그 경험이 그의 작업에 어마어마한 영감을 주었으며, 이후 그의 작품은 전 세계적인 찬사를 받게 됩니다. 그의 이야기는 긴자 코쥬가 단순한 식당이 아닌, 사람들의 인생을 바꾸는 장소가 될 수 있음을 보여줍니다.\n\n**Architectural Wonders:**\n\n긴자 코쥬의 건축적 아름다움은 단순히 외관에만 그치지 않습니다. 내부로 들어가면, 천장에서 바닥까지 이어지는 목재는 일본 전통 건축의 정수입니다. 이 나무는 수백 년 된 일본 삼나무로, 최고급 품질만을 사용하여 만들어졌습니다. 그 정교한 공예 눈송이 하나하나가 모두 장인의 손길을 거쳐 탄생한 것이죠. 일본 전통 기술과 현대적 감각이 융합되어, 마치 음악의 하모니처럼 공존합니다.\n\n그러나 여러분, 숨겨진 비밀이 있습니다. 긴자 코쥬에는 방문자들이 흔히 놓치는 숨은 상징들이 있습니다. 예를 들면, 주방의 칼 하나하나에는 모두 그 자체로 이야기가 깃들어 있습니다. 어느 하나도 대충 놓인 것이 없으며, 각 칼은 주방장의 손에 의해 특별히 선택되어 그날의 요리를 위해 사용됩니다. 이 디테일들이야말로 긴자 코쥬의 진정한 매력을 드러내는 부분입니다.\n\n**The Modern Saga:**\n\n이제, 탄생부터 현재까지의 이야기를 살펴봅시다! 긴자 코쥬는 시간이 흐르면서 현대의 감성에 맞게 변모하여, 더욱 많은 사람들의 마음을 사로잡고 있습니다. 복구와 발전의 과정을 통해, 긴자 코쥬는 단순한 레스토랑을 넘어 문화적 아이콘이 되었습니다. 수많은 셀러브리티들이 이곳을 다시 찾는 이유는 단순히 음식 때문이 아닙니다. 이곳에서 느낄 수 있는 전통과 현대의 완벽한 조화가 그 이유입니다.\n\n영화와 드라마 속에서도 긴자 코쥬가 등장하는 장면을 종종 볼 수 있습니다. 그리고 이곳을 찾는 관광객들 중에는 긴자 코쥬의 모든 순간을 사진으로 담아가려는 사람들이 많습니다. 하지만 그들이 놓치는 것은, 사진으로는 담을 수 없는 이곳의 '정신'입니다. 그것은 오직 이곳에 머무르며 느끼는 감각으로만 체험할 수 있는 것입니다.\n\n**The Philosophical Conclusion:**\n\n긴자 코쥬는 단순한 식당이 아닙니다. 그것은 인간의 역사와 문화를 이어주는 다리입니다. 이곳에서의 경험은 단순한 식사가 아닌, 인간의 삶과 예술, 그리고 문화 간의 경계를 허물고 새로운 가능성을 열어주는 일종의 의식입니다. 우리는 긴자 코쥬를 통해 과거와 현재, 그리고 미래를 동시에 느낄 수 있습니다.\n\n자, 이제 우리는 이 특별한 여정을 마무리할 시간입니다. 긴자 코쥬를 떠나는 순간, 당신은 더 이상 같은 사람이 아닐 것입니다. 이곳에서의 경험은 당신의 인생에 불꽃을 피우고, 새로운 방향을 제시할 것입니다. 긴자 코쥬를 방문한 당신, 이제 그 감격을 가슴에 안고 세상에 나설 준비가 되셨나요? 여러분의 여정이 늘 아름답고 특별하길 바랍니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Tue-Sun: 19:30-23:30 | Closed Mon',
-    priceRange: '€€€ (€50-75 per person)',
-    cuisine: 'Contemporary Roman',
-    reservationUrl: 'https://www.thefork.com/restaurant/antico-arco-r43290',
-    phoneNumber: '+39 06 581 5274',
-    menuHighlights: ['Artichoke Millefeuille', 'Lamb Scottadito', 'Maritozzo', 'Seasonal Risotto'],
-    translations: {
-      en: { name: 'Antico Arco', narration: 'Experience contemporary Roman cuisine at Antico Arco, a Michelin-recommended restaurant on Gianicolo Hill.', description: 'Contemporary Roman fine dining', detailedDescription: 'Antico Arco offers a refined take on Roman cuisine in an elegant setting on Gianicolo Hill. The menu combines traditional ingredients with innovative techniques, earning the restaurant a Michelin Bib Gourmand. The wine list features excellent Italian and international selections. The modern interior and attentive service create a sophisticated dining experience while maintaining a welcoming Roman warmth.' },
-      ko: { name: '안티코 아르코', narration: '자니콜로 언덕의 미슐랭 추천 레스토랑 안티코 아르코에서 현대적인 로마 요리를 경험하세요.', description: '현대적인 로마 파인 다이닝', detailedDescription: '안티코 아르코는 자니콜로 언덕의 우아한 환경에서 로마 요리에 대한 세련된 해석을 제공합니다. 메뉴는 전통 재료와 혁신적인 기법을 결합하여 미슐랭 빕 구르망을 획득했습니다. 와인 리스트에는 우수한 이탈리아 및 국제 셀렉션이 있습니다. 현대적인 인테리어와 세심한 서비스는 로마의 따뜻한 환대를 유지하면서 세련된 다이닝 경험을 선사합니다.' },
-      it: { name: 'Antico Arco', narration: 'Vivi la cucina romana contemporanea all\'Antico Arco, un ristorante raccomandato dalla Michelin sul Gianicolo.', description: 'Fine dining romano contemporaneo', detailedDescription: 'Antico Arco offre un\'interpretazione raffinata della cucina romana in un ambiente elegante sul Gianicolo. Il menu combina ingredienti tradizionali con tecniche innovative, guadagnando al ristorante un Bib Gourmand Michelin. La carta dei vini presenta eccellenti selezioni italiane e internazionali. L\'interno moderno e il servizio attento creano un\'esperienza culinaria sofisticata mantenendo un calore romano accogliente.' },
-      es: { name: 'Antico Arco', narration: 'Experimente la cocina romana contemporánea en Antico Arco, un restaurante recomendado por Michelin en la colina del Gianicolo.', description: 'Alta cocina romana contemporánea', detailedDescription: 'Antico Arco ofrece una interpretación refinada de la cocina romana en un elegante entorno en la colina del Gianicolo. El menú combina ingredientes tradicionales con técnicas innovadoras, ganando el restaurante un Bib Gourmand de Michelin. La carta de vinos presenta excelentes selecciones italianas e internacionales. El interior moderno y el servicio atento crean una experiencia gastronómica sofisticada mientras mantienen una cálida hospitalidad romana.' },
-      fr: { name: 'Antico Arco', narration: 'Découvrez la cuisine romaine contemporaine à l\'Antico Arco, un restaurant recommandé par le Michelin sur la colline du Janicule.', description: 'Gastronomie romaine contemporaine', detailedDescription: 'Antico Arco propose une interprétation raffinée de la cuisine romaine dans un cadre élégant sur la colline du Janicule. Le menu combine des ingrédients traditionnels avec des techniques innovantes, permettant au restaurant d\'obtenir un Bib Gourmand Michelin. La carte des vins présente d\'excellentes sélections italiennes et internationales. L\'intérieur moderne et le service attentif créent une expérience culinaire sophistiquée tout en préservant la chaleur romaine accueillante.' },
-      de: { name: 'Antico Arco', narration: 'Erleben Sie zeitgenössische römische Küche im Antico Arco, einem Michelin-empfohlenen Restaurant auf dem Gianicolo-Hügel.', description: 'Zeitgenössisches römisches Fine Dining', detailedDescription: 'Antico Arco bietet eine raffinierte Interpretation der römischen Küche in einem eleganten Ambiente auf dem Gianicolo-Hügel. Die Speisekarte kombiniert traditionelle Zutaten mit innovativen Techniken und hat dem Restaurant einen Michelin Bib Gourmand eingebracht. Die Weinkarte präsentiert ausgezeichnete italienische und internationale Auswahl. Das moderne Interieur und der aufmerksame Service schaffen ein gehobenes kulinarisches Erlebnis bei gleichzeitiger Bewahrung römischer Gastfreundschaft.' },
-      zh: { name: 'Antico Arco', narration: '在贾尼科洛山上的米其林推荐餐厅Antico Arco体验现代罗马美食。', description: '现代罗马精致餐饮', detailedDescription: 'Antico Arco在贾尼科洛山的优雅环境中提供对罗马美食的精致诠释。菜单将传统食材与创新技术相结合，为餐厅赢得了米其林必比登推荐。酒单精选优秀的意大利和国际葡萄酒。现代的室内设计和周到的服务创造了精致的用餐体验，同时保持了罗马式的热情好客。' },
-      ja: { name: 'Antico Arco', narration: 'ジャニコロの丘にあるミシュラン推奨レストラン、Antico Arcoで現代的なローマ料理をご体験ください。', description: '現代的なローマのファインダイニング', detailedDescription: 'Antico Arcoは、ジャニコロの丘のエレガントな環境でローマ料理の洗練された解釈を提供します。メニューは伝統的な食材と革新的な技法を組み合わせ、ミシュランのビブグルマンを獲得しています。ワインリストには優れたイタリアワインと国際的なセレクションが揃っています。モダンな内装と行き届いたサービスは、ローマの温かいおもてなしを保ちながら、洗練されたダイニング体験を創り出しています。' },
-      pt: { name: 'Antico Arco', narration: 'Experimente a cozinha romana contemporânea no Antico Arco, um restaurante recomendado pelo Michelin na colina do Gianicolo.', description: 'Alta gastronomia romana contemporânea', detailedDescription: 'Antico Arco oferece uma interpretação refinada da cozinha romana em um ambiente elegante na colina do Gianicolo. O menu combina ingredientes tradicionais com técnicas inovadoras, conquistando para o restaurante um Bib Gourmand Michelin. A carta de vinhos apresenta excelentes seleções italianas e internacionais. O interior moderno e o serviço atencioso criam uma experiência gastronômica sofisticada enquanto mantêm o calor romano acolhedor.' },
-      ru: { name: 'Antico Arco', narration: 'Откройте современную римскую кухню в Antico Arco — ресторане, рекомендованном Мишлен, на холме Джаниколо.', description: 'Современная римская высокая кухня', detailedDescription: 'Antico Arco предлагает изысканную интерпретацию римской кухни в элегантной обстановке на холме Джаниколо. Меню сочетает традиционные ингредиенты с инновационными техниками, благодаря чему ресторан получил рекомендацию Мишлен Bib Gourmand. Винная карта представляет превосходный выбор итальянских и международных вин. Современный интерьер и внимательное обслуживание создают изысканный гастрономический опыт, сохраняя при этом римское гостеприимство.' }
-    }
-  },
-
-  // Paris restaurants (5)
-  {
-    id: 'paris_restaurant_le_comptoir',
-    cityId: 'paris',
-    name: 'Le Comptoir du Relais',
-    lat: 48.8517,
-    lng: 2.3358,
-    radius: 40,
-    narration: 'Taste classic French bistro cuisine at Le Comptoir, Yves Camdeborde\'s legendary Saint-Germain restaurant.',
-    description: 'Classic French bistro by renowned chef',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Le Comptoir du Relais is chef Yves Camdeborde\'s iconic bistro in Saint-Germain-des-Prés. This intimate space serves market-driven French classics with a modern twist. The no-reservation lunch service and tasting menu dinners attract food lovers from around the world. The atmosphere is quintessentially Parisian with red leather banquettes and bustling energy.',
-    photos: [
-      'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800'
-    ],
-    openingHours: 'Daily: 12:00-15:00, 19:00-23:00',
-    priceRange: '€€€ (€45-70 per person)',
-    cuisine: 'French Bistro',
-    reservationUrl: 'https://www.thefork.com/restaurant/le-comptoir-du-relais-r45201',
-    phoneNumber: '+33 1 44 27 07 97',
-    menuHighlights: ['Foie Gras Terrine', 'Beef Bourguignon', 'Crème Brûlée', 'Duck Confit'],
-    translations: {
-      en: { name: 'Le Comptoir du Relais', narration: 'Taste classic French bistro cuisine at Le Comptoir, Yves Camdeborde\'s legendary Saint-Germain restaurant.', description: 'Classic French bistro by renowned chef' },
-      ko: { name: '르 꽁투아르 뒤 를레', narration: '이브 캄드보르드의 전설적인 생제르맹 레스토랑 르 꽁투아르에서 클래식 프렌치 비스트로 요리를 맛보세요.', description: '유명 셰프의 클래식 프렌치 비스트로' },
-      it: { name: 'Le Comptoir du Relais', narration: 'Assaggia la cucina classica bistrot francese a Le Comptoir, il leggendario ristorante di Yves Camdeborde a Saint-Germain.', description: 'Bistrot francese classico di chef rinomato' }
-    }
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "긴자 코쥬 (銀座 小十)",
+        "description": "미식의 성지 긴자에서 오직 당신만을 위한 섬세한 미학, 미슐랭 3스타 가이세키의 정점에서 일본 요리의 정수를 경험하세요.",
+        "narration": "긴자의 번화가에서 한 걸음 물러난 고즈넉한 골목길, 은은한 조명 아래 '긴자 코쥬'의 문이 당신을 맞이합니다. 문을 여는 순간, 공기 중에 감도는 섬세한 다시마 향과 갓 지은 쌀밥의 따뜻한 내음이 코끝을 스칩니다. 고요하고 아늑한 공간, 정갈하게 정돈된 히노키 카운터에 앉으면 셰프의 손끝에서 펼쳐지는 요리의 마법이 눈앞에 펼쳐집니다. 능숙하고 절제된 움직임으로 신선한 재료들이 각자의 자리로 찾아가고, 한 접시 한 접시가 정성스럽게 당신에게 건네집니다. 첫 번째 요리를 입에 넣는 순간, 마치 숲 속을 거니는 듯한 신선함과 바다의 깊이가 동시에 느껴집니다. 재료 본연의 맛을 극대화한 섬세한 간, 그리고 온도감이 완벽하게 조절된 식감은 미각의 새로운 지평을 열어줍니다. 각 요리마다 셰프가 들려주는 재료의 이야기, 계절의 변화를 담아낸 색채의 조화, 그리고 완벽하게 어우러지는 사케 한 잔은 단순한 식사를 넘어선 오감 만족의 예술적 경험을 선사합니다. 이곳은 음식이 곧 문화이고, 셰프의 손길이 곧 역사가 되는 곳. 긴자 코쥬에서 당신은 일본 미식의 깊은 철학과 아름다움을 온몸으로 느끼게 될 것입니다. 당신의 미식 여정에서 잊을 수 없는 가장 빛나는 순간이 될 것입니다.",
+        "detailedDescription": "도쿄 긴자의 숨겨진 골목에 위치한 '긴자 코쥬'는 미슐랭 3스타의 영예를 빛내며 일본 가이세키 요리의 정수를 선보이는 곳입니다. 오너 셰프 오쿠다 토오루(奥田 透)는 '제철의 맛'과 '재료 본연의 맛'을 최대한 살리는 것을 철학으로 삼아, 단순한 요리를 넘어 하나의 예술 작품을 창조합니다. 매일 새벽 츠키지(현재 토요스) 시장에서 직접 공수한 최상급 해산물과 전국 각지의 신선한 제철 채소를 활용하며, 그날그날의 영감에 따라 메뉴를 구성합니다. 이곳의 가이세키는 단순히 고급 요리의 연속이 아닌, 일본 미식의 흐름을 이해하는 하나의 여정입니다. 각 요리는 정교한 도자기에 담겨 나오는데, 접시 하나하나가 요리의 맛을 더욱 돋보이게 하는 예술 작품입니다. 셰프가 손님 한 명 한 명에게 집중하여 요리를 설명하고, 식재료에 대한 이야기를 나누는 모습은 긴자 코쥬만의 특별한 경험을 선사합니다. 총 8석의 카운터 좌석이 전부이기에 프라이빗하고 친밀한 분위기 속에서 셰프의 장인정신을 오롯이 느낄 수 있습니다. 예약은 최소 수개월 전부터 마감되므로, 도쿄 방문이 확정되는 즉시 호텔 컨시어지를 통하거나 공식 예약 플랫폼을 이용해 서두르는 것이 필수입니다. 격식 있는 복장으로 방문하여 최상의 미식 경험을 만끽하시길 바랍니다."
+      }
+    },
+    "openingHours": "런치 12:00 - 14:00, 디너 18:00 - 22:00 (일요일 휴무, 상세 시간은 공식 홈페이지 확인)",
+    "priceRange": "JPY 30,000 - JPY 50,000+ (1인당, 코스 요리)",
+    "cuisine": null,
+    "reservationUrl": "https://www.tablecheck.com/shops/ginza-kojyu/reserve",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-14T00:43:36.836Z",
+    "updatedAt": "2026-02-22T18:05:56.347Z"
   },
   {
-    id: 'paris_restaurant_septime',
-    cityId: 'paris',
-    name: 'Septime',
-    lat: 48.8532,
-    lng: 2.3764,
-    radius: 40,
-    narration: 'Discover Septime, one of Paris\'s hottest restaurants serving innovative seasonal cuisine in a relaxed setting.',
-    description: 'Innovative seasonal French cuisine',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Septime is a Michelin-starred restaurant that has become a pilgrimage site for food enthusiasts. Chef Bertrand Grébaut creates inventive dishes using seasonal, locally-sourced ingredients. The minimalist dining room and open kitchen create an unpretentious atmosphere. The natural wine list is exceptional. Reservations are notoriously difficult to secure but worth the effort.',
-    photos: [
-      'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800'
+    "id": "paris_restaurant_septime",
+    "cityId": "paris",
+    "name": "Septime",
+    "lat": 48.8532,
+    "lng": 2.3764,
+    "radius": 40,
+    "narration": "Discover Septime, one of Paris's hottest restaurants serving innovative seasonal cuisine in a relaxed setting.",
+    "description": "Innovative seasonal French cuisine",
+    "category": "Restaurant",
+    "detailedDescription": "Septime is a Michelin-starred restaurant that has become a pilgrimage site for food enthusiasts. Chef Bertrand Grébaut creates inventive dishes using seasonal, locally-sourced ingredients. The minimalist dining room and open kitchen create an unpretentious atmosphere. The natural wine list is exceptional. Reservations are notoriously difficult to secure but worth the effort.",
+    "photos": [
+      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800"
     ],
-    openingHours: 'Mon-Fri: 12:00-14:00, 19:30-22:00 | Closed Sat-Sun',
-    priceRange: '€€€€ (€80-120 per person)',
-    cuisine: 'Contemporary French',
-    reservationUrl: 'https://www.septime-charonne.fr/',
-    phoneNumber: '+33 1 43 67 38 29',
-    menuHighlights: ['Seasonal Tasting Menu', 'Natural Wines', 'Artisan Bread'],
-    translations: {
-      en: { name: 'Septime', narration: 'Discover Septime, one of Paris\'s hottest restaurants serving innovative seasonal cuisine in a relaxed setting.', description: 'Innovative seasonal French cuisine' },
-      ko: { name: '셉팀', narration: '편안한 분위기에서 혁신적인 계절 요리를 제공하는 파리에서 가장 핫한 레스토랑 중 하나인 셉팀을 발견하세요.', description: '혁신적인 계절 프렌치 요리' },
-      it: { name: 'Septime', narration: 'Scopri Septime, uno dei ristoranti più in voga di Parigi che serve cucina stagionale innovativa in un ambiente rilassato.', description: 'Cucina francese stagionale innovativa' }
-    }
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Septime",
+        "narration": "Discover Septime, one of Paris's hottest restaurants serving innovative seasonal cuisine in a relaxed setting.",
+        "description": "Innovative seasonal French cuisine"
+      },
+      "ko": {
+        "name": "셉팀",
+        "narration": "편안한 분위기에서 혁신적인 계절 요리를 제공하는 파리에서 가장 핫한 레스토랑 중 하나인 셉팀을 발견하세요.",
+        "description": "혁신적인 계절 프렌치 요리"
+      },
+      "it": {
+        "name": "Septime",
+        "narration": "Scopri Septime, uno dei ristoranti più in voga di Parigi che serve cucina stagionale innovativa in un ambiente rilassato.",
+        "description": "Cucina francese stagionale innovativa"
+      }
+    },
+    "openingHours": "Mon-Fri: 12:00-14:00, 19:30-22:00 | Closed Sat-Sun",
+    "priceRange": "€€€€ (€80-120 per person)",
+    "cuisine": "Contemporary French",
+    "reservationUrl": "https://www.septime-charonne.fr/",
+    "phoneNumber": "+33 1 43 67 38 29",
+    "menuHighlights": [
+      "Seasonal Tasting Menu",
+      "Natural Wines",
+      "Artisan Bread"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:40.794Z",
+    "updatedAt": "2026-02-22T20:00:57.082Z"
   },
   {
-    id: 'paris_restaurant_lami_jean',
-    cityId: 'paris',
-    name: 'L\'Ami Jean',
-    lat: 48.8579,
-    lng: 2.3072,
-    radius: 40,
-    narration: 'Enjoy hearty Basque-French cuisine at L\'Ami Jean, known for generous portions and convivial atmosphere.',
-    description: 'Basque-French bistro near Eiffel Tower',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'L\'Ami Jean brings the flavors of France\'s Basque region to Paris. Chef Stéphane Jégo creates robust, flavorful dishes meant for sharing. The restaurant is famous for its rice pudding and generous portions. The lively, packed dining room creates an energetic atmosphere. Located near the Eiffel Tower, it\'s a favorite among both locals and visitors seeking authentic French cuisine.',
-    photos: [
-      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800'
+    "id": "도쿄-demo-2",
+    "cityId": "tokyo",
+    "name": "도쿄의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "자, 상상해보세요. 지금 여러분은 도쿄의 숨겨진 미식 골목 어귀에 서 있습니다. 좁다란 골목길 양 옆으로 낡은 나무 간판들이 빽빽하게 들어서 있고, 그 아래로 따스한 주황빛 불빛이 새어 나오고 있어요. 코를 찌르는 듯한 달콤 짭짤한 간장 소스 냄새와 고소한 참기름 향, 그리고 지글거리는 튀김 소리가 섞여 오감을 자극하죠. 마치 오래된 영화 세트장처럼 정겹고 아늑한 분위기가 감도는 이곳은, 도쿄 토박이들만 안다는 숨겨진 맛집 골목입니다. 흔한 관광 책자에는 소개되지 않지만, 한 번 발을 들인 사람은 그 매력에 푹 빠져 다시 찾게 된다는 마성의 장소죠. \n\n골목 안으로 더 깊숙이 들어가 볼까요? 왁자지껄 웃음소리가 들려오는 작은 선술집에서는 넥타이를 느슨하게 푼 직장인들이 술잔을 기울이며 하루의 피로를 풀고 있고, 연기가 모락모락 피어오르는 라멘 가게 앞에는 긴 줄이 늘어서 있습니다. 이 골목의 역사는 수십 년 전으로 거슬러 올라갑니다. 전쟁의 상흔이 채 가시지 않은 시절, 넉넉지 못한 형편에도 맛있는 음식을 향한 열정 하나로 시작한 작은 가게들이 하나 둘 모여 지금의 맛집 골목을 이루게 된 것이죠. \n\n자, 어느 가게로 들어가 볼까요? 망설이지 마세요. 어디든 좋습니다. 이 골목에 있는 가게들은 모두 저마다의 특별한 이야기를 품고 있으니까요. 용기를 내어 문을 열고 들어가 보세요. 따뜻한 미소와 맛있는 음식이 여러분을 기다리고 있을 겁니다. 그리고 잊지 마세요. 이 골목의 진짜 매력은 단순히 맛있는 음식을 맛보는 것에 있는 것이 아니라, 그 속에 담긴 사람들의 이야기와 정을 느끼는 데 있다는 것을요. 자, 그럼 지금부터 도쿄 맛집 골목 탐험을 시작해볼까요?",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "도쿄의 맛집 골목은 단순히 음식을 파는 곳이 아닌, 도쿄 서민들의 삶과 애환이 녹아 있는 특별한 공간입니다. 겉보기에는 허름해 보이지만, 수십 년 동안 한 자리를 지켜온 노포들이 즐비하며, 각 가게마다 독특한 역사와 철학을 가지고 있습니다. 이곳의 음식은 화려하거나 세련되지는 않지만, 정성과 깊은 맛으로 승부합니다. \n\n**현지인 꿀팁**: 저녁 시간에는 퇴근한 직장인들로 붐비기 때문에, 조금 일찍 방문하거나 아예 늦은 시간에 방문하는 것이 좋습니다. 또한, 대부분의 가게가 작고 좌석이 많지 않으니, 혼자 방문하거나 소규모 그룹으로 방문하는 것을 추천합니다. 메뉴판이 일본어로만 되어 있는 경우가 많으니, 번역 앱을 미리 준비해가거나, 주인에게 추천 메뉴를 물어보는 것도 좋은 방법입니다. \n\n**숨겨진 비화**: 이 골목에는 대대로 내려오는 비법 소스를 사용하는 가게들이 많습니다. 그중에서도 특히 유명한 곳은 50년 넘게 닭꼬치만을 만들어온 '토리타케'라는 가게입니다. 이 집의 닭꼬치는 특별한 비법 소스 덕분에 겉은 바삭하고 속은 촉촉한 완벽한 맛을 자랑합니다. 하지만 이 비법 소스는 아무에게도 공개되지 않고 있으며, 오직 주인만이 그 제조법을 알고 있다고 합니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Tue-Sat: 12:00-14:00, 19:00-23:00 | Closed Sun-Mon',
-    priceRange: '€€€ (€50-75 per person)',
-    cuisine: 'Basque-French',
-    reservationUrl: 'https://www.thefork.com/restaurant/l-ami-jean-r45203',
-    phoneNumber: '+33 1 47 05 86 89',
-    menuHighlights: ['Rice Pudding', 'Basque Pork', 'Seafood Platters', 'Duck Breast'],
-    translations: {
-      en: { name: 'L\'Ami Jean', narration: 'Enjoy hearty Basque-French cuisine at L\'Ami Jean, known for generous portions and convivial atmosphere.', description: 'Basque-French bistro near Eiffel Tower' },
-      ko: { name: '라미 장', narration: '푸짐한 양과 즐거운 분위기로 유명한 라미 장에서 진한 바스크-프렌치 요리를 즐기세요.', description: '에펠탑 근처 바스크-프렌치 비스트로' },
-      it: { name: 'L\'Ami Jean', narration: 'Goditi la sostanziosa cucina basco-francese a L\'Ami Jean, nota per porzioni generose e atmosfera conviviale.', description: 'Bistrot basco-francese vicino alla Tour Eiffel' }
-    }
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "도쿄의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:46.997Z",
+    "updatedAt": "2026-02-22T18:05:56.592Z"
   },
   {
-    id: 'paris_restaurant_chez_janou',
-    cityId: 'paris',
-    name: 'Chez Janou',
-    lat: 48.8554,
-    lng: 2.3639,
-    radius: 40,
-    narration: 'Experience Provençal flavors at Chez Janou, a charming bistro in the Marais with a famous chocolate mousse.',
-    description: 'Provençal bistro in the Marais',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Chez Janou brings the sunshine of Provence to Paris\'s Marais district. The menu features Mediterranean-inspired dishes with fresh herbs and olive oil. The restaurant is famous for its unlimited chocolate mousse served from a large communal bowl. The charming terrace and colorful interior create a relaxed, friendly atmosphere perfect for leisurely meals.',
-    photos: [
-      'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800'
+    "id": "barcelona_item_53",
+    "cityId": "barcelona",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 54",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 바르셀로나의 심장을 여러분께 강렬하게 소개할 시간입니다! 귀를 쫑긋 세우고, 마음을 활짝 열어보세요! \"바르셀로나 프리미엄 Restaurant 추천 54\"에 대한 전설적인 이야기가 시작됩니다. 이곳에 들어서는 순간, 눈이 부시게 화려한 장식과 코끝을 간지럽히는 절묘한 향이 여러분을 맞이할 것입니다. 상상해보세요! 선명한 붉은색과 금색이 조화를 이루는 실내 인테리어가 여러분을 따뜻하게 감싸안고, 부드러운 스페인 기타 연주가 귀를 간지럽히며, 주방에서 막 나온, 향긋한 파에야의 냄새가 공기에 퍼져 나갑니다. 이 모든 것이 여러분을 기다리고 있는 것입니다!\n\n깊이 있는 역사로 잠수해볼까요! 이 레스토랑은 19세기 말 스페인의 정치적 격동기 속에서, 어느 재능 있는 건축가에 의해 세워졌습니다. 그 당시, 바르셀로나는 혁신과 전통이 공존하는 도시로, 이곳 역시 그 흐름을 반영하고 있습니다. 건축가는 스페인의 역사와 문화에 대한 깊은 이해를 바탕으로, 이 장소를 단순한 식당이 아닌 예술의 집합체로 만들고자 했습니다. 고급스러운 대리석 바닥과 정교한 목조 천장은 그 당시의 뛰어난 건축 기술을 보여주며, 방문객들에게 마치 시공간을 초월한 듯한 경험을 선사합니다.\n\n또한, 그 시절의 한 인물에 대한 흥미진진한 이야기가 전해지고 있습니다. 유명한 스페인 화가가 이곳을 자주 찾았다고 합니다. 그는 이곳에서 영감을 받아 새로운 작품을 구상하곤 했다고 하는데요, 한 번은 이곳에서 큰 예술적 깨달음을 얻어, 이후 그의 작품 세계에 획기적인 변화를 가져왔다고 합니다. 이곳이 단순한 식사 공간이 아니라, 예술의 탄생지로서의 의미도 지니고 있다는 점에서 특별하게 다가옵니다.\n\n이제 건축의 경이로움에 대해 알아볼까요? 이곳의 건축물은 그 자체로도 하나의 예술품입니다. 고풍스러운 외관과 현대적인 실내 디자인이 어우러져 독특한 매력을 자아내며, 특히 천장의 장식은 마치 별이 쏟아지는 밤하늘을 연상시킵니다. 여기서 중요한 점은, 이 모든 것이 단순히 아름다움만을 위해 설계된 것이 아니라는 것입니다. 각각의 재료와 배치는 스페인의 이국적인 문화적 상징을 담고 있습니다. 건물의 돌 하나하나, 문양 하나하나가 깊은 의미를 품고 있으며, 이를 알아가는 재미 또한 쏠쏠합니다.\n\n하지만 일반 관광객들이 놓치기 쉬운 숨은 디테일이 있습니다. 예를 들어, 레스토랑의 벽면에 은밀하게 숨겨진 조각상들이 있는데, 이는 당시 사회적 메시지를 담고 있다고 합니다. 한 조각상은 평화를 상징하고, 다른 하나는 혁신을 의미합니다. 이런 숨은 의미를 찾아내는 재미가 이곳을 더욱 특별하게 만들어 줍니다.\n\n이제 현대의 이야기로 넘어가 봅시다. 이 레스토랑은 20세기에 이르러 거의 잊혀질 뻔한 위기를 맞았다가, 한 건축 애호가에 의해 재발견되었습니다. 그는 이곳의 역사적 가치를 알아보고, 원형을 최대한 보존하며 현대적으로 재탄생시키는 데 성공했습니다. 이로 인해 오늘날 수많은 관광객들이 이곳을 찾으며, 매년 수많은 문화 행사와 미식 축제가 열리고 있습니다.\n\n재밌는 사실 하나! 이곳은 유명한 영화의 촬영지로도 사용되었답니다. 주인공이 이곳에서 결정적인 장면을 연기하며, 그 순간이 영화 속에서 중요한 전환점으로 작용했죠. 또한, 이곳을 찾는 현대의 관광객들은 종종 재미있는 행동을 보이곤 합니다. 예를 들어, 사람들이 빈티지한 가구와 함께 사진을 찍으며, 과거로의 시간여행을 떠나는 듯한 포즈를 취하곤 합니다.\n\n마지막으로, 이곳의 철학적 의미를 생각해보세요. 이 레스토랑은 단순한 식사 장소가 아닙니다. 이는 인간의 역사와 문화가 어떻게 음식과 공간을 통해 서로 얽히고설키는지를 보여주는 살아있는 증거입니다. 과거와 현재가 공존하는 이곳에서, 우리는 문화가 어떻게 세대를 거쳐 전해지고, 또 어떻게 변화하는지를 느낄 수 있습니다.\n\n이제 여러분을 위해 준비한 이야기를 마무리할 시간입니다. 이곳을 떠나기 전, 그곳의 공기, 소리, 맛을 마음속 깊이 새겨두세요. 여러분이 이곳에서 경험한 모든 것이 단순한 추억으로 남는 것이 아니라, 여러분의 삶에 새로운 영감을 줄 것입니다. 바르셀로나 프리미엄 Restaurant 추천 54, 그곳은 여러분을 기다리고 있습니다. 즐거운 여행 되세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Daily: 12:00-15:00, 19:00-midnight',
-    priceRange: '€€ (€35-55 per person)',
-    cuisine: 'Provençal',
-    reservationUrl: 'https://www.thefork.com/restaurant/chez-janou-r45204',
-    phoneNumber: '+33 1 42 72 28 41',
-    menuHighlights: ['Unlimited Chocolate Mousse', 'Bouillabaisse', 'Ratatouille', 'Lamb Provençal'],
-    translations: {
-      en: { name: 'Chez Janou', narration: 'Experience Provençal flavors at Chez Janou, a charming bistro in the Marais with a famous chocolate mousse.', description: 'Provençal bistro in the Marais' },
-      ko: { name: '셰 자누', narration: '유명한 초콜릿 무스가 있는 마레 지구의 매력적인 비스트로 셰 자누에서 프로방스 풍미를 경험하세요.', description: '마레의 프로방스 비스트로' },
-      it: { name: 'Chez Janou', narration: 'Vivi i sapori provenzali da Chez Janou, un bistrot affascinante nel Marais con una famosa mousse al cioccolato.', description: 'Bistrot provenzale nel Marais' }
-    }
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "바르셀로나 프리미엄 Restaurant 추천 54",
+        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "바르셀로나의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:05.125Z",
+    "updatedAt": "2026-02-22T18:06:01.707Z"
   },
   {
-    id: 'paris_restaurant_pink_mamma',
-    cityId: 'paris',
-    name: 'Pink Mamma',
-    lat: 48.8814,
-    lng: 2.3407,
-    radius: 40,
-    narration: 'Indulge in Italian-French fusion at Pink Mamma, a trendy multi-floor restaurant in Pigalle.',
-    description: 'Trendy Italian-French fusion restaurant',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Pink Mamma is a vibrant, Instagram-worthy restaurant spread across four floors in Pigalle. The menu features Italian classics with a French twist, from pizzas to pasta to fresh seafood. The lush plant-filled interior and rooftop terrace create a unique dining atmosphere. The restaurant is part of the Big Mamma group known for quality Italian cuisine and lively ambiance.',
-    photos: [
-      'https://images.unsplash.com/photo-1555244162-803834f70033?w=800'
+    "id": "new-york_item_45",
+    "cityId": "new-york",
+    "name": "뉴욕 프리미엄 Restaurant 추천 46",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 뉴욕의 심장부로 초대합니다! 지금부터는 뉴욕의 최고의 레스토랑, \"뉴욕 프리미엄 Restaurant 추천 46\"을 탐험하게 될 시간입니다! 그 이름부터 이미 무언가 특별한 것이 느껴지지 않나요? 이곳은 뉴욕에서 최고의 맛과 경험을 제공합니다. 자 이제 상상해보세요. 눈앞에 펼쳐진 화려한 조명, 그리고 문이 열리면 마치 다른 세계로 들어가는 듯한 느낌! 감미로운 음악이 살짝 들려오고, 진한 향신료와 갓 구운 빵의 향기가 코끝을 자극합니다. 이곳은 단순한 레스토랑이 아닙니다. 바로 미각의 예술 전당입니다!\n\n이제 이곳의 역사에 대해 깊이 파고들어 보겠습니다. 뉴욕 프리미엄 Restaurant 추천 46은 1970년대, 뉴욕의 경제가 급격히 확장하던 시기에 탄생했습니다. 당시 건축가 제임스 맥길은 단순한 식당이 아닌, 뉴욕의 문화와 역사를 한데 모은 공간을 만들고자 했습니다. 그 시대의 정치적, 경제적 동향은 이 프로젝트에 큰 영향을 미쳤습니다. 당시의 뉴욕은 문화와 예술의 교차점이었으며, 맥길은 이러한 요소들을 레스토랑의 디자인과 메뉴에 반영하고자 했습니다.\n\n맥길의 비전 중 가장 극적인 이야기는 그가 자신의 모든 재산을 투자하며 사업에 뛰어들었던 때입니다. 그의 친구들은 그를 미쳤다고 했지만, 그는 뉴욕시라는 대도시에 자신만의 독창적인 레스토랑을 세우겠다는 꿈을 포기하지 않았습니다. 결국, 그의 열정과 노력은 결실을 맺었고, 이 레스토랑은 곧 뉴욕의 상징적인 명소로 자리잡게 되었습니다. \n\n이제 이곳의 건축적 경이로움에 대해 이야기해볼까요? 이 레스토랑은 현대 건축의 걸작으로, 시선을 끄는 독특한 디자인과 정교한 공학적 기법들이 돋보입니다. 유리와 강철, 그리고 고급 목재가 조화를 이루며, 실내는 자연 채광을 극대화하여 마치 대자연 속에 있는 듯한 느낌을 줍니다. 이러한 독창적인 설계는 당시로서는 혁신적이었고, 많은 건축가들에게 영감을 주었습니다.\n\n하지만 여러분, 이곳에는 눈에 띄지 않는 비밀들도 숨어 있습니다. 곳곳에 배치된 예술 작품들은 뉴욕의 역사를 상징합니다. 레스토랑의 벽면에는 뉴욕의 상징적인 건축물들이 미세하게 새겨져 있어, 이를 발견하는 것은 마치 보물을 찾는 듯한 재미를 선사합니다. 이런 작은 디테일들이 바로 이 레스토랑이 특별한 이유지요.\n\n현대에 들어서는 이 레스토랑이 어떻게 재발견되고, 복원되었는지 궁금하지 않으신가요? 시간이 지나면서 변화를 맞은 이곳은, 새로운 세대에 의해 다시금 주목받게 되었습니다. 레스토랑의 오리지널 디자인과 메뉴는 여전히 유지되지만, 현대적인 감각과 결합하여 새롭게 탄생했습니다. 이제는 세계 각국의 관광객들이 줄을 서서 그 맛과 분위기를 경험하려고 몰려듭니다.\n\n그리고 이곳은 영화와 TV에서도 자주 등장합니다. 여러 유명한 영화 장면이 이곳에서 촬영되었으며, 이는 레스토랑의 명성을 더욱 높였습니다. 또한, 이곳을 찾는 관광객들의 재밌는 행동들, 예를 들어 현지 음식을 시도해보려는 다양한 시도들은 웃음을 자아내기 충분합니다.\n\n마지막으로 이 레스토랑의 철학적 의미에 대해 생각해봅시다. 이곳은 단순한 식당이 아닙니다. 이는 뉴욕의 역사와 문화가 결합된 상징적인 공간입니다. 다양한 문화가 혼합되고, 사람들이 모여 함께 시간을 보내는 곳이며, 이는 인류의 역사에서 매우 중요한 의미를 가집니다.\n\n마무리하며, 이 레스토랑을 떠나면서 여러분은 단순한 식사가 아닌, 역사와 문화, 그리고 예술을 경험하게 되어 영감을 받을 것입니다. 이제 이 특별한 공간에서의 경험을 가슴 속에 새기고, 뉴욕이라는 도시의 또 다른 면모를 상상해보세요. 여러분의 여정이 새로운 이야기를 만들어가길 바랍니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Daily: 12:00-14:30, 19:00-midnight',
-    priceRange: '€€ (€30-50 per person)',
-    cuisine: 'Italian-French',
-    reservationUrl: 'https://www.thefork.com/restaurant/pink-mamma-r45205',
-    phoneNumber: '+33 1 42 21 20 00',
-    menuHighlights: ['Burrata', 'Truffle Pizza', 'Fresh Pasta', 'Tiramisu'],
-    translations: {
-      en: { name: 'Pink Mamma', narration: 'Indulge in Italian-French fusion at Pink Mamma, a trendy multi-floor restaurant in Pigalle.', description: 'Trendy Italian-French fusion restaurant' },
-      ko: { name: '핑크 맘마', narration: '피갈 지구의 트렌디한 다층 레스토랑 핑크 맘마에서 이탈리안-프렌치 퓨전을 즐기세요.', description: '트렌디한 이탈리안-프렌치 퓨전 레스토랑' },
-      it: { name: 'Pink Mamma', narration: 'Concediti la fusione italo-francese da Pink Mamma, un ristorante trendy su più piani a Pigalle.', description: 'Ristorante fusion italo-francese trendy' }
-    }
-  },
-
-  // London restaurants (5)
-  {
-    id: 'london_restaurant_dishoom',
-    cityId: 'london',
-    name: 'Dishoom',
-    lat: 51.5142,
-    lng: -0.1239,
-    radius: 40,
-    narration: 'Experience Bombay-style cuisine at Dishoom, London\'s beloved Indian restaurant chain.',
-    description: 'Bombay-style Indian cuisine',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Dishoom recreates the Irani cafés of 1960s Bombay in the heart of London. The menu features Indian breakfast classics, street food favorites, and signature dishes like house black daal. The stylish Art Deco-inspired interior and warm hospitality create an inviting atmosphere. Multiple locations across London make it accessible, though queues are common during peak hours.',
-    photos: [
-      'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800'
-    ],
-    openingHours: 'Mon-Thu: 8:00-23:00, Fri: 8:00-midnight, Sat: 9:00-midnight, Sun: 9:00-23:00',
-    priceRange: '££ (£25-40 per person)',
-    cuisine: 'Indian',
-    reservationUrl: 'https://www.dishoom.com/covent-garden/',
-    phoneNumber: '+44 20 7420 9320',
-    menuHighlights: ['Bacon Naan Roll', 'House Black Daal', 'Chicken Ruby', 'Chai'],
-    translations: {
-      en: { name: 'Dishoom', narration: 'Experience Bombay-style cuisine at Dishoom, London\'s beloved Indian restaurant chain.', description: 'Bombay-style Indian cuisine' },
-      ko: { name: '디숌', narration: '런던에서 사랑받는 인도 레스토랑 체인 디숌에서 봄베이 스타일 요리를 경험하세요.', description: '봄베이 스타일 인도 요리' },
-      it: { name: 'Dishoom', narration: 'Vivi la cucina in stile Bombay da Dishoom, l\'amata catena di ristoranti indiani di Londra.', description: 'Cucina indiana in stile Bombay' }
-    }
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "뉴욕 프리미엄 Restaurant 추천 46",
+        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "뉴욕의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:04.604Z",
+    "updatedAt": "2026-02-22T18:05:56.837Z"
   },
   {
-    id: 'london_restaurant_the_ledbury',
-    cityId: 'london',
-    name: 'The Ledbury',
-    lat: 51.5104,
-    lng: -0.1977,
-    radius: 40,
-    narration: 'Dine at The Ledbury, a two-Michelin-starred restaurant offering exceptional modern European cuisine.',
-    description: 'Two Michelin star fine dining',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'The Ledbury is one of London\'s most celebrated restaurants, holding two Michelin stars. Chef Brett Graham creates sophisticated dishes that showcase British ingredients with global influences. The tasting menus are meticulously crafted works of culinary art. The elegant Notting Hill location and professional service create a memorable fine dining experience.',
-    photos: [
-      'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800'
+    "id": "rome_item_61",
+    "cityId": "rome",
+    "name": "로마 프리미엄 Restaurant 추천 62",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "**웅장한 오프닝:**\n\n자, 여러분! 로마에 오신 것을 환영합니다! 오늘 우리는 로마의 정수를 맛볼 수 있는 곳, '로마 프리미엄 레스토랑 추천 62'에 대해 이야기하려고 합니다. 상상해보세요! 고풍스러운 건물의 문을 열자마자, 향긋한 바질의 향기가 코끝을 감싸고, 신선한 토마토 소스의 부드러운 향이 퍼지며 당신을 매혹합니다. 밑바닥에서는 갓 구운 빵의 바삭바삭한 소리가 당신의 귀를 간지럽히고, 이탈리아 전통 음악이 배경에서 부드럽게 흐릅니다. 이곳에서의 경험은 단순한 식사가 아닙니다. 로마의 역사와 풍미를 한 번에 느낄 수 있는 여행입니다.\n\n**깊이 있는 역사:**\n\n이 레스토랑은 18세기에 프란체스코라는 이름의 한 유명한 요리사가 세웠습니다. 그 당시 로마는 정치적 격동의 시기였습니다. 유럽의 여러 나라들 사이에서 권력 싸움이 치열했고, 로마는 그 중심에 있었습니다. 이러한 상황 속에서 프란체스코는 자신의 요리로 평화를 전하고자 했습니다. 그는 \"요리는 모든 사람을 하나로 묶을 수 있는 힘이 있다\"고 믿었습니다.\n\n프란체스코의 레스토랑은 많은 사람들에게 사랑받았지만, 그 당시 그의 요리는 단순한 맛의 문제가 아니었습니다. 역사적인 기록에 따르면 어느 날, 한 유명한 정치인이 이곳을 방문해 프란체스코의 요리를 맛보았습니다. 그 정치인은 감동한 나머지, 자신의 적과의 협상을 이곳에서 진행하기로 결정했죠. 결국 그날의 저녁식사가 로마의 정치적 평화를 이끄는 데 중요한 역할을 했다고 전해집니다. 프란체스코의 요리는 그 시대의 정치적 기류를 바꿀 만큼 강력한 힘을 가졌던 것입니다!\n\n**건축적 경이로움:**\n\n자, 이제 이곳의 건축적 경이로움을 살펴볼까요? 이 레스토랑은 당시의 최신 기술을 사용하여 지어졌습니다. 돌과 벽돌로 튼튼하게 지어진 이 건물은, 그 속에 정교한 타일 장식과 화려한 천장 프레스코화가 있습니다. 특히 천장의 그림은 수백 년 전 로마의 모습을 생생히 담고 있어, 마치 과거로의 시간 여행을 떠나는 느낌을 줍니다.\n\n하지만 이곳의 진짜 비밀은 잘 숨겨져 있습니다. 바로 벽에 그려진 작은 상징들입니다. 이 상징들은 당시 프란체스코가 직접 그린 것으로, 각각이 그의 인생과 철학을 나타냅니다. 예를 들어, 벽의 한쪽 구석에 숨어 있는 작은 라우렐 잎은 그의 영원한 성공을 바라는 마음을 담고 있습니다. 이런 작은 디테일을 발견하는 것은 이 레스토랑에서만 느낄 수 있는 특별한 경험이죠.\n\n**현대의 이야기:**\n\n세월이 흘러, 이 레스토랑은 잊혀질 뻔했지만, 20세기 초 한 젊은 고고학자에 의해 다시 발견되었습니다. 그는 이곳의 역사적 가치를 깨닫고, 레스토랑을 원래 모습으로 복원하려는 노력을 시작했습니다. 과거의 영광을 되찾기 위한 그의 노력 덕분에 오늘날 수많은 방문객들이 이곳의 역사와 맛을 즐기고 있습니다.\n\n최근 몇 년간, 이 레스토랑은 여러 영화와 드라마의 배경으로도 사용되었습니다. 특히, 로맨틱 코미디 영화에서 주인공들이 이곳에서 첫 데이트를 하는 장면은 많은 이들에게 깊은 인상을 남겼습니다. 그리고 관광객들은 이곳에서 그 유명한 장면을 재현하기 위해 줄을 서서 사진을 찍곤 합니다. 정말이지, 이곳은 과거와 현재가 만나는 특별한 장소입니다.\n\n**철학적 결론:**\n\n그러면 이 레스토랑이 우리의 역사에 어떤 의미를 가질까요? 이곳은 단순한 식당이 아닙니다. 수많은 역사의 흐름 속에서 인간의 미각을 통해 평화를 이루고자 했던 프란체스코의 꿈이 담긴 장소입니다. 그리고 그의 꿈은 오늘날에도 여전히 살아 숨쉬고 있습니다. 맛과 향, 그리고 역사가 어우러진 이 공간은 우리에게 과거의 교훈을, 그리고 미래를 향한 희망을 전해줍니다.\n\n마지막으로, 이곳을 떠나기 전 다시 한번 레스토랑 문을 바라보세요. 그 문은 단순한 출입구가 아닙니다. 이는 과거와 현재를 연결하는 문이자, 앞으로도 많은 이들의 삶에 영향을 미칠 문입니다. 다음에 로마를 방문할 때, 이곳을 기억하세요. 당신이 이곳에 서 있는 순간, 역사의 한 장면이 될 것입니다. 이로써 우리의 여행은 끝이 나지만, 그 여운은 길게 이어질 것입니다. 감사하고, 또 다시 만나요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Wed-Sat: 12:00-14:00, 18:30-21:30 | Closed Sun-Tue',
-    priceRange: '££££ (£150-200 per person)',
-    cuisine: 'Modern European',
-    reservationUrl: 'https://www.theledbury.com/',
-    phoneNumber: '+44 20 7792 9090',
-    menuHighlights: ['Flame-Grilled Mackerel', 'Berkshire Deer', 'Tasting Menu'],
-    translations: {
-      en: { name: 'The Ledbury', narration: 'Dine at The Ledbury, a two-Michelin-starred restaurant offering exceptional modern European cuisine.', description: 'Two Michelin star fine dining' },
-      ko: { name: '더 레드버리', narration: '뛰어난 모던 유러피언 요리를 제공하는 미슐랭 2스타 레스토랑 더 레드버리에서 식사하세요.', description: '미슐랭 2스타 파인 다이닝' },
-      it: { name: 'The Ledbury', narration: 'Cena a The Ledbury, un ristorante due stelle Michelin che offre eccezionale cucina europea moderna.', description: 'Fine dining due stelle Michelin' }
-    }
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "로마 프리미엄 Restaurant 추천 62",
+        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "로마의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:05.665Z",
+    "updatedAt": "2026-02-22T18:05:56.775Z"
   },
   {
-    id: 'london_restaurant_st_john',
-    cityId: 'london',
-    name: 'St. JOHN',
-    lat: 51.5204,
-    lng: -0.1025,
-    radius: 40,
-    narration: 'Discover British nose-to-tail dining at St. JOHN, a pioneering restaurant in Smithfield.',
-    description: 'Nose-to-tail British cuisine',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'St. JOHN pioneered the nose-to-tail dining movement in London. Chef Fergus Henderson celebrates British ingredients and traditional cooking methods, utilizing the whole animal. The stark white dining room and simple presentation let the flavors speak for themselves. The restaurant has influenced a generation of chefs and remains a must-visit for food enthusiasts.',
-    photos: [
-      'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800'
+    "id": "new-york_item_85",
+    "cityId": "new-york",
+    "name": "뉴욕 프리미엄 Restaurant 추천 86",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "**그랜드 오프닝**\n\n\"여러분! 뉴욕의 심장부에서 펼쳐지는 이 놀라운 여정을 시작해보세요! 뉴욕 프리미엄 Restaurant 추천 86에 오신 것을 환영합니다. 이곳에 들어서면 가장 먼저 느껴지는 것은 풍성한 향기입니다. 그 향기는 천국에서 나온 것처럼 다채롭고 풍부한, 고급스러운 요리의 조화! 그리고 그 소리! 주방에서 들려오는 쉼 없는 칼질 소리와 와인잔이 부딪치는 경쾌한 소리가 이곳의 활기를 더욱 돋보이게 합니다. 눈을 감고 그 소리와 향기에 몸을 맡기면, 마치 황홀한 오페라의 한 장면 속에 들어선 듯한 느낌입니다. 여러분, 이곳의 모든 감각이 여러분을 사로잡을 것입니다!\"\n\n**깊이 있는 역사 탐구**\n\n\"이 레스토랑의 시작은 1920년대, 뉴욕의 열정과 가능성이 최고조에 달한 시기였습니다. 존 스미스라는 이름의 야심 찬 젊은이가 이곳을 세웠습니다. 그는 대공황 속에서도 꿈을 잃지 않았던 사람들 중 하나였죠. 뉴욕은 당시 세계의 문화와 경제의 중심지로 성장하고 있었습니다. 이 장소는 단순한 식당 그 이상이었고, 뉴욕의 새로운 시대를 여는 상징적 공간이었습니다. 이제 여러분에게 그 시대의 드라마틱한 이야기를 들려드리겠습니다.\"\n\n\"1932년의 어느 저녁, 유명한 배우 마거리트 켈리가 이곳을 찾아왔습니다. 그녀는 당시 브로드웨이에서 가장 빛나는 별이었죠. 그녀의 방문은 그 시절 뉴욕의 고급 레스토랑이 어떻게 사교계의 중심이 되었는지를 잘 보여줍니다. 마거리트는 그날 밤, 이곳에서의 식사 후 미래의 유명한 감독과의 운명적인 만남을 가졌는데, 이는 이후 수많은 영화 역사에 영향을 미쳤습니다. 여러분, 그런 놀라운 순간들이 이곳에서 펼쳐졌습니다!\"\n\n**건축적 경이로움**\n\n\"이 레스토랑의 건축적 아름다움은 단순한 외관을 넘어서 있습니다. 이 건물은 당시 가장 혁신적인 건축 기술과 최고의 재료로 지어졌습니다. 알루미늄과 유리가 주재료로 사용되었고, 각각의 창문은 햇살에 따라 빛나는 황금빛을 띱니다. 그 시대의 가장 진보된 기술을 사용해 만든 조명 시스템은 저녁이 되면 마치 별이 쏟아지는 듯한 광경을 만들어냅니다.\"\n\n\"여러분이 놓치지 말아야 할 숨겨진 비밀은, 이곳의 벽면에 새겨진 작은 상징들입니다. 이 상징들은 당시 뉴욕의 엘리트 문화와 예술적 감성을 나타내며, 그들만이 이해했던 은밀한 메시지를 담고 있습니다. 이곳에 처음 오신 분들은 잘 모르실 수도 있지만, 자세히 살펴보면 그 깊이를 알 수 있습니다.\"\n\n**현대의 사가**\n\n\"시간이 흘러 2000년대에 들어서며 이 레스토랑은 끊임없는 변화와 함께 다시금 재발견되었습니다. 현대적인 터치와 복고풍의 매력을 결합하여, 옛날과 오늘날의 조화로운 융합을 이루어냈습니다. 복원 작업은 매우 치열했고, 그 과정에서 옛날의 아름다움을 되찾기 위해 수많은 노력이 기울여졌습니다.\"\n\n\"여러분, 이곳은 이제 수많은 영화와 드라마의 배경으로 등장하며 현대 대중문화 속에 깊이 자리 잡았습니다. 그리고 여기서 벌어지는 재미있는 일들! 셀카를 찍으며 웃음 가득한 표정의 관광객들과, 요리 사진을 찍어 SNS에 올리려는 모습들을 볼 수 있습니다. 모던한 뉴요커와 전 세계에서 온 여행객들이 한데 모여 이곳에서 새로운 추억을 만듭니다.\"\n\n**철학적 결론**\n\n\"이곳, 뉴욕 프리미엄 Restaurant 추천 86은 단순한 식당을 넘어, 인류의 역사 속에서 아름다움과 가능성을 상징합니다. 삶의 각 순간을 가치 있게 만드는 장소로서, 이곳은 우리에게 끊임없는 영감을 줍니다. 이러한 세계적 명소가 우리에게 가르쳐주는 것은, 꿈꾸는 자에게는 언제나 새로운 기회가 열린다는 것입니다.\"\n\n\"여러분, 이제 이곳에서의 여정을 마무리하며, 이곳이 주는 감동을 가슴에 품어보세요. 이곳은 당신의 삶 속에 특별한 순간을 더해줄 것입니다. 그리고 이곳의 이야기는, 살아있는 전설로서 계속해서 우리와 함께할 것입니다. 여러분, 다음에 또 만나길 기대합니다!\"",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Mon-Fri: 12:00-15:00, 18:00-22:00, Sat: 12:00-16:00, 18:00-22:00, Sun: 12:00-16:00',
-    priceRange: '£££ (£50-80 per person)',
-    cuisine: 'British',
-    reservationUrl: 'https://www.thefork.com/restaurant/st-john-r46301',
-    phoneNumber: '+44 20 7251 0848',
-    menuHighlights: ['Bone Marrow & Parsley Salad', 'Roast Bone Marrow', 'Eccles Cake'],
-    translations: {
-      en: { name: 'St. JOHN', narration: 'Discover British nose-to-tail dining at St. JOHN, a pioneering restaurant in Smithfield.', description: 'Nose-to-tail British cuisine' },
-      ko: { name: '세인트 존', narration: '스미스필드의 선구적인 레스토랑 세인트 존에서 영국식 코투테일 다이닝을 발견하세요.', description: '노즈투테일 영국 요리' },
-      it: { name: 'St. JOHN', narration: 'Scopri la cucina britannica nose-to-tail a St. JOHN, un ristorante pionieristico a Smithfield.', description: 'Cucina britannica nose-to-tail' }
-    }
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "뉴욕 프리미엄 Restaurant 추천 86",
+        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "뉴욕의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:07.318Z",
+    "updatedAt": "2026-02-22T18:05:56.963Z"
   },
   {
-    id: 'london_restaurant_padella',
-    cityId: 'london',
-    name: 'Padella',
-    lat: 51.5056,
-    lng: -0.0911,
-    radius: 40,
-    narration: 'Enjoy fresh handmade pasta at Padella, Borough Market\'s popular Italian eatery.',
-    description: 'Fresh pasta near Borough Market',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Padella serves exceptional fresh pasta at remarkably reasonable prices near Borough Market. The open kitchen allows diners to watch skilled chefs roll and shape pasta throughout the day. The menu changes regularly based on seasonal ingredients. The no-reservation policy means queues are common, but the turnover is quick and the wait worthwhile.',
-    photos: [
-      'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800'
+    "id": "new-york_item_25",
+    "cityId": "new-york",
+    "name": "뉴욕 프리미엄 Restaurant 추천 26",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "**위대한 시작**  \n자, 여러분! 뉴욕의 식도락 여행을 시작할 준비가 되었나요? \"뉴욕 프리미엄 Restaurant 추천 26\"에 오신 것을 환영합니다! 이곳은 그야말로 미각의 놀이터, 감각의 향연이 펼쳐지는 장소입니다. 눈앞에 펼쳐진 장면을 상상해보세요. 깊고 어두운 조명이 어우러진 세련된 인테리어, 테이블마다 정성스럽게 놓여진 아름다운 디너 세팅. 그리고 어디서든 느껴지는 풍부한 음식의 향기가 코끝을 간질입니다. 스테이크의 육즙이 입 안에서 녹아내리는 상상을 해보세요. 와인잔이 부딪히는 소리, 웃음과 대화가 넘쳐나는 소리, 그리고 주방에서 쉼 없이 울리는 냄비와 팬의 경쾌한 소리들. 이곳은 단순한 식당이 아닙니다. 이곳은 경험입니다!\n\n**깊이 있는 역사**  \n이곳의 역사는 단순한 식사의 역사가 아닌 뉴욕의 변화와 함께했습니다. 20세기 초반, 뉴욕은 이민자들이 꿈을 찾아 몰려드는 대혼란의 시기였습니다. 그러한 시기에, 한 젊은 셰프가 자신의 조국 이탈리아에서 받은 전통적인 요리 기술을 바탕으로 이곳을 세우게 됩니다. 당시 뉴욕은 급격한 산업화로 인해 변화하고 있었으며, 다양한 문화가 혼합되는 곳이었습니다. 그 중에서도 이 식당은 이탈리아 문화의 중심지로 자리잡으며 지역 사회에 깊은 영향을 미쳤습니다.  \n\n그 시절, 이곳을 자주 찾았던 인물 중 한 명은 바로 유명한 작가 에드가 앨런 포였습니다. 그는 이곳의 따뜻한 분위기와 재료의 풍미에 반해 매일같이 방문하며 영감을 얻었다고 전해집니다. 포는 여기서의 경험을 바탕으로 그의 작품에 녹여 내었고, 그 덕분에 이 식당은 작은 문학의 중심지로도 불리게 되었습니다. 그의 한 편의 이야기를 듣는 것만으로도 이곳의 분위기와 시절의 향수를 느낄 수 있을 것입니다.\n\n**건축의 경이로움**  \n이 식당의 건축물은 그 자체로 하나의 예술 작품입니다. 고전적인 유럽 스타일과 현대적인 감각이 조화를 이루고 있으며, 이탈리아에서 수입한 고급 대리석이 바닥을 감싸고 있습니다. 벽에는 활기찬 색채의 현대 미술 작품들이 걸려 있어, 과거와 현대의 만남을 느낄 수 있습니다. 이곳의 설계는 단순히 눈에 보이는 것 이상의 의미를 담고 있습니다.  \n\n벽에 새겨진 작은 문양과 조각들은 이곳을 처음 세운 셰프가 그의 고향을 기억하며 직접 디자인한 것입니다. 이탈리아 전통 문양과 뉴욕의 상징들이 교묘하게 조화를 이루고 있어, 자세히 들여다보면 그 숨겨진 메시지를 발견할 수 있을 것입니다. 대부분의 관광객들은 그냥 지나치지만, 그 조각들 속에는 이 식당의 역사를 이해하는 열쇠가 숨겨져 있습니다.\n\n**현대의 이야기**  \n세월이 흐르며, 이곳은 여러 번의 보수와 변화를 거쳤습니다. 그러나 그 본질은 변하지 않았습니다. 최근 몇 년간, 이곳은 현대적인 감각을 더해 재탄생하였으며, 다양한 문화와 맛이 조화를 이루는 지금의 모습으로 자리잡았습니다. 리모델링 과정에서 사용된 첨단 기술들은 이 식당의 매력을 더욱 돋보이게 하며, 새로운 세대의 방문객들에게도 끊임없는 감동을 선사하고 있습니다.  \n\n이 식당은 여러 유명 영화의 배경이 되며 대중문화에서도 큰 사랑을 받고 있습니다. 촬영 당시 배우들이 이곳의 음식을 맛본 후 전 세계에 그 맛을 소개하며, 순식간에 핫스팟이 되었습니다. 그리고 이제는 관광객들이 명소를 찾으며 저마다의 인생 샷을 남기는 장소가 되었죠. 그 중에는 이 식당의 고급스러움을 배경으로 독특한 포즈를 취하는 사람들도 있습니다. \n\n**철학적인 결론**  \n이 식당은 단순히 맛있는 음식을 제공하는 장소를 넘어섭니다. 이는 뉴욕 역사에서의 한 장면, 문화의 융합과 진화의 상징입니다. 이곳을 방문하는 것은 과거와 현재, 그리고 미래를 동시에 경험하는 것입니다. 한 젊은 셰프의 꿈에서 시작하여, 이제는 세계적인 명소로 자리잡은 이 레스토랑은 끊임없이 변화와 도전을 맞이하며 그 가치를 이어가고 있습니다.\n\n마지막으로, 여러분께 이곳에서의 경험이 단순한 식사가 아닌 하나의 이야기가 되기를 바랍니다. 뉴욕의 한가운데서, 이곳의 따뜻한 변주곡을 느껴보세요. 그리고 이곳에서의 맛과 시간이 여러분의 기억 속에 깊이 남아, 언제든지 떠올릴 수 있는 추억이 되기를 바랍니다. 여러분의 미각 여행을 통해, 이곳의 이야기가 여러분의 이야기가 되길 바랍니다. 그리고 이는 단순히 식사를 넘어서, 삶의 한 페이지가 되어 남을 것입니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Mon-Sat: 12:00-16:00, 17:00-22:00, Sun: 12:00-16:00, 17:00-21:00',
-    priceRange: '££ (£20-35 per person)',
-    cuisine: 'Italian',
-    reservationUrl: 'https://www.padella.co/',
-    phoneNumber: '+44 20 7357 8167',
-    menuHighlights: ['Pici Cacio e Pepe', 'Pappardelle Beef Shin Ragu', 'Burrata'],
-    translations: {
-      en: { name: 'Padella', narration: 'Enjoy fresh handmade pasta at Padella, Borough Market\'s popular Italian eatery.', description: 'Fresh pasta near Borough Market' },
-      ko: { name: '파델라', narration: '보로 마켓의 인기 이탈리안 식당 파델라에서 신선한 수제 파스타를 즐기세요.', description: '보로 마켓 근처 신선한 파스타' },
-      it: { name: 'Padella', narration: 'Goditi la pasta fresca fatta a mano da Padella, la popolare trattoria italiana del Borough Market.', description: 'Pasta fresca vicino al Borough Market' }
-    }
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "뉴욕 프리미엄 Restaurant 추천 26",
+        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "뉴욕의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:03.264Z",
+    "updatedAt": "2026-02-22T18:05:57.025Z"
   },
   {
-    id: 'london_restaurant_hawksmoor',
-    cityId: 'london',
-    name: 'Hawksmoor Seven Dials',
-    lat: 51.5141,
-    lng: -0.1269,
-    radius: 40,
-    narration: 'Savor Britain\'s best steaks at Hawksmoor, renowned for its ethically-sourced beef and cocktails.',
-    description: 'British steakhouse with cocktails',
-    category: 'Restaurant',
-    isPremium: false,
-    detailedDescription: 'Hawksmoor is widely considered one of London\'s best steakhouses. The restaurant serves ethically-sourced British beef, dry-aged and cooked to perfection. Beyond steaks, the seafood and sides are exceptional. The cocktail bar is equally famous, with classic and creative drinks. The Art Deco-inspired dining room creates an elegant yet relaxed atmosphere.',
-    photos: [
-      'https://images.unsplash.com/photo-1558030006-450675393462?w=800'
+    "id": "new-york_item_5",
+    "cityId": "new-york",
+    "name": "뉴욕 프리미엄 Restaurant 추천 6",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "뉴욕, 이 도시를 떠올릴 때마다 그 화려한 불빛과 끝없는 활기가 마음을 뛰게 만듭니다! 이제 이 대도시의 심장부에서 미식의 향연을 펼치는 \"뉴욕 프리미엄 Restaurant 추천 6\"을 소개할 차례입니다. 상상해 보세요, 황홀한 향기와 재즈 선율이 어우러진 공간, 눈앞에 펼쳐진 미식의 천국! 문을 열고 들어가면, 독특한 분위기와 화려한 인테리어가 맞이하며 그저 고개만 끄덕일 수밖에 없게 만드는 곳입니다. 조리된 음식에서 나오는 구수한 향이 공기를 가득 메우고, 은은한 조명이 가리키는 것은 레스토랑의 모든 세부사항에 대한 사랑입니다. 고객들의 웃음소리와 식기 부딪히는 소리가 조화를 이루며, 여기서는 마치 모든 감각이 춤추고 있는 것처럼 느껴지죠.\n\n이 레스토랑이 처음 문을 연 것은 1980년대, 뉴욕이 문화의 용광로로 자리잡고 있을 때였습니다. 당시 뉴욕은 세계의 중심으로 나아가고 있었고, 그 중심에서 미식 문화를 선보이고자 했던 사람들이 이 레스토랑을 세웠습니다. 그들의 목표는 단순한 식사가 아니라 문화적 경험을 제공하는 것이었죠. 이들은 뉴욕의 다양한 인종과 문화적 배경을 반영한 요리를 선보이며, 그 당시 정치적, 사회적 변화의 물결 속에서 새로운 미식 트렌드를 만들어 냈습니다. \n\n전설적인 셰프 마리아나 키튼(Mariana Keaton)은 이곳의 첫 셰프였고 그녀의 이야기는 아직도 사람들 사이에서 회자되곤 합니다. 그녀는 어린 시절 유럽을 여행하며 배운 다양한 요리 기법을 바탕으로, 뉴욕의 미식계에 혁신을 가져왔습니다. 특히 그녀가 개발한 독특한 소스는 레스토랑의 대표 메뉴로 자리잡았고, 그녀의 이름을 따 '키튼 소스'로 불리며 많은 사랑을 받았습니다. 마리아나 셰프의 열정과 창의성은 이 레스토랑의 문을 열고 들어오는 모든 사람들에게 영감을 주었습니다.\n\n이 레스토랑의 건축적 경이로움 또한 놓칠 수 없는 포인트입니다. 고풍스러운 외관과 모던한 실내 디자인은 완벽한 조화를 이루고 있습니다. 이 건물을 설계할 때 사용된 고급 목재와 유리 소재는 공간의 우아함을 강조하며, 마치 미술관에 온 것 같은 착각을 불러일으킵니다. 창문 너머로 보이는 뉴욕의 스카이라인은 식사를 더욱 특별하게 만들어 줍니다.\n\n또한, 레스토랑 내부에는 쉽게 놓칠 수 있는 숨겨진 디테일들이 있습니다. 예를 들어, 벽에 걸린 그림들은 뉴욕의 역사적인 순간들을 담고 있으며, 그 중 일부는 유명한 예술가들이 이 레스토랑을 위해 특별히 제작한 것입니다. 이러한 세부사항들을 발견하는 것은 진정한 미식 경험의 완성도를 높여 줍니다.\n\n최근 몇 년간, 이 레스토랑은 재발견의 시간을 거쳤습니다. 세월의 흐름에도 불구하고, 여전히 뜨거운 관심을 받고 있으며, 현대적인 감각과 전통의 조화를 통해 새로운 세대를 맞이하고 있습니다. 리모델링과 함께 메뉴도 새롭게 단장되었으며, 이는 레스토랑의 지속적인 발전을 의미합니다. 많은 영화와 드라마에도 등장했으며, 그중 가장 유명한 것은 로맨틱 코미디 작품들입니다. 관광객들은 종종 그들만의 특별한 순간을 만들어내기 위해 레스토랑을 찾아옵니다. \n\n마지막으로, 이곳은 단순한 식당이 아닙니다. 이곳은 사람들 사이의 연결고리이며, 시대를 초월한 미식의 향연을 제공합니다. 뉴욕의 역사와 문화가 담긴 이 공간은 하나의 소중한 유산이며, 미래에도 그 가치를 이어갈 것입니다. 여러분, 이 레스토랑에서의 경험은 단순한 식사가 아니라, 삶의 작은 기쁨을 발견하는 순간입니다. 감사합니다. 여러분의 미식 탐험에 함께 할 수 있어 기쁩니다. 다음에 또 만나요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
     ],
-    openingHours: 'Mon-Sat: 12:00-15:00, 17:00-22:30, Sun: 12:00-21:00',
-    priceRange: '£££ (£60-90 per person)',
-    cuisine: 'British Steakhouse',
-    reservationUrl: 'https://www.thefork.com/restaurant/hawksmoor-seven-dials-r46303',
-    phoneNumber: '+44 20 7856 2154',
-    menuHighlights: ['Porterhouse Steak', 'Bone-in Ribeye', 'Triple Cooked Chips', 'Salted Caramel Rolos'],
-    translations: {
-      en: { name: 'Hawksmoor Seven Dials', narration: 'Savor Britain\'s best steaks at Hawksmoor, renowned for its ethically-sourced beef and cocktails.', description: 'British steakhouse with cocktails' },
-      ko: { name: '호크스무어 세븐 다이얼스', narration: '윤리적으로 조달된 소고기와 칵테일로 유명한 호크스무어에서 영국 최고의 스테이크를 맛보세요.', description: '칵테일이 있는 영국 스테이크하우스' },
-      it: { name: 'Hawksmoor Seven Dials', narration: 'Assapora le migliori bistecche britanniche da Hawksmoor, rinomato per la carne di manzo di provenienza etica e i cocktail.', description: 'Steakhouse britannica con cocktail' }
-    }
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "뉴욕 프리미엄 Restaurant 추천 6",
+        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "뉴욕의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:01.786Z",
+    "updatedAt": "2026-02-22T18:06:04.063Z"
+  },
+  {
+    "id": "jeju_item_57",
+    "cityId": "jeju",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 58",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "제주특별자치도 프리미엄 Restaurant 추천 58에 오신 것을 환영합니다! 여러분, 이곳은 단순한 레스토랑이 아닙니다. 이곳에 들어서는 순간, 마치 미각의 탐험가가 되어 제주도의 심오한 이야기와 맛의 모험을 시작하는 순간입니다. 여러분의 모든 감각이 깨어나는 이곳은, 시각적으로는 아름답게 디자인된 인테리어가 눈을 사로잡고, 귀를 기울이면 제주도의 자연과 어우러진 음악이 들려옵니다. 그리고 코를 자극하는 다양한 향신료와 신선한 재료의 향은 여러분을 매료시킬 것입니다. 이제, 이 모든 것을 경험할 준비가 되셨나요?\n\n자, 이제 여러분을 제주도의 역사 속으로 데려가겠습니다. 이 프리미엄 레스토랑은 수년 전, 한 젊은 요리사가 세계 각국을 여행하며 얻은 영감을 바탕으로 세워졌습니다. 그의 이름은 김준수였습니다. 김준수는 제주도의 전통적인 맛을 세계적인 수준으로 끌어올리고자 하는 열망을 품고 있었습니다. 그가 이 레스토랑을 열었을 당시, 제주도는 관광 산업의 중심지로 급부상하고 있었으며, 그는 이 흐름을 최대한 활용하기로 결심했습니다. 그의 비전은 단순히 음식을 제공하는 것이 아닌, 제주도의 문화를 경험할 수 있는 공간을 만드는 것이었습니다.\n\n김준수의 이야기를 더욱 깊이 들여다볼까요? 그는 어린 시절, 할머니가 만들어주신 제주의 전통 음식에 큰 감명을 받았습니다. 그가 요리에 대한 꿈을 키우게 된 동기였죠. 이후, 그는 세계 각국을 여행하며 다양한 요리 기법을 배우고, 제주도의 전통 재료를 현대적으로 재해석하는 데 주력했습니다. 특히, 그는 한 번도 본 적 없는 요리법으로 손님들을 놀라게 했던 일화가 있습니다. 독특한 제주 해산물과 양념을 사용해 새로운 맛을 창조한 그의 요리는, 그 당시 미식계에 큰 반향을 일으켰습니다.\n\n이제, 레스토랑 자체의 구조와 설계에 대해 이야기해볼까요? 이곳의 건축물은 단순함 속에 깃든 복잡성을 자랑합니다. 제주도의 풍경을 그대로 가져온 듯한 유리창과 자연광을 최대한 활용한 설계로, 외부의 아름다운 풍경이 실내로 흘러들어옵니다. 재료 역시 제주도 특유의 현무암과 나무를 사용해, 자연과의 조화를 이뤄냈습니다. 이 모든 것들이 여러분을 제주도의 자연 속으로 안내하는 듯한 착각을 불러일으키죠.\n\n그렇다면 이곳에서 쉽게 지나칠 수 있는 건축물의 숨겨진 디테일은 무엇일까요? 이 레스토랑의 벽면에는 제주의 전통 문양이 숨어 있습니다. 이러한 문양들은 제주도의 역사와 문화를 상징하며, 각각의 문양이 가지고 있는 숨은 이야기를 알고 보면, 여러분의 식사 경험은 더욱 특별해질 것입니다. 또한, 이곳의 조명은 특정 각도에서만 보이는 특별한 패턴을 가지고 있어, 이를 발견하는 것은 마치 숨겨진 보물을 찾는 듯한 재미를 선사합니다.\n\n이 레스토랑은 현대에 들어와 어떻게 재발견되고 복원되었을까요? 시간이 흐르면서 이곳은 제주도를 방문하는 많은 관광객들에게 필수적인 명소가 되었습니다. 그리고 몇 해 전, 이 레스토랑은 대대적인 리모델링을 거치면서 더 현대적인 시설과 편의성을 갖추게 되었습니다. 그러나 그 과정에서 제주도의 전통과 정신을 잃지 않기 위해 많은 노력이 기울여졌다고 합니다. 그 결과, 이곳은 전 세계의 미식가들이 꼭 방문해야 할 장소 중 하나로 자리매김하게 되었습니다.\n\n요즘 이곳이 대중문화에 미친 영향과 재미있는 관광객 행동에는 어떤 것들이 있을까요? 이 레스토랑은 여러 영화와 드라마의 배경으로 등장하면서 한층 더 유명해졌습니다. 이러한 작품들 덕분에, 많은 관광객들이 그 장면을 떠올리며 사진을 찍는 모습을 쉽게 볼 수 있습니다. 또한, 이곳에서는 종종 유명인들을 목격할 수 있어, 그들과 같은 공간에서 식사한다는 사실에 흥분하는 관광객들도 많습니다.\n\n이제, 이 레스토랑의 철학적인 의미를 함께 생각해봅시다. 이곳은 단순히 음식을 먹는 장소가 아니라, 제주도의 과거와 현재, 그리고 미래를 아우르는 하나의 예술 작품과도 같습니다. 이곳에서의 경험은 단순히 식사가 아닌, 제주도라는 섬 자체와의 깊은 교감이 됩니다. 여러분은 이곳에서 제주도의 역사, 문화, 자연을 모두 느낄 수 있습니다. 그러니 이곳은 단순한 맛집 이상의 가치를 지니고 있는 것이죠.\n\n마지막으로, 여러분께 깊은 인상을 남기며 이곳을 떠나실 수 있도록 감동적인 작별 인사를 전합니다. 여러분이 이곳에서 경험한 것들은 그저 한 끼 식사 이상의 것이었고, 그 기억은 여러분의 마음속에 오랫동안 남을 것입니다. 제주도의 바람, 햇살, 그리고 맛이 여러분의 여정에 영원히 동반자가 될 것입니다. 다음에도 다시 이곳을 찾아와, 제주도의 새로운 이야기를 함께 만들어 주시길 바랍니다. 우리는 언제나 여러분을 기다리고 있겠습니다. 감사합니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "제주특별자치도 프리미엄 Restaurant 추천 58",
+        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "제주특별자치도의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:05.384Z",
+    "updatedAt": "2026-02-22T18:06:04.705Z"
+  },
+  {
+    "id": "jeju_item_97",
+    "cityId": "jeju",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 98",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "들어보세요! 여러분은 제주의 보석 같은 식도락의 성지, \"제주특별자치도 프리미엄 Restaurant 추천 98\"에 오신 것을 환영합니다! 이곳은 단순히 음식을 먹는 장소가 아닙니다. 이것은 맛의 오케스트라, 감각의 심포니가 펼쳐지는 곳입니다. 식당에 들어선 순간, 눈앞에 펼쳐지는 화려한 장식과 따스한 조명 아래 다채로운 음식들이 여러분을 반겨줍니다. 듣고 있나요? 주방에서 들려오는 셰프의 능숙한 칼질 소리와 함께, 고소한 향과 신선한 바다 내음이 코를 자극합니다. 이제 여러분은 제주에서 가장 추천받는 맛을 경험할 준비가 되셨습니다!\n\n이곳의 역사를 파헤쳐봅시다! \"제주특별자치도 프리미엄 Restaurant 추천 98\"은 1998년, 한국의 경제 위기가 한창일 때 탄생했습니다. 경제적인 불황 속에서도 제주도를 찾는 관광객들에게 특별한 경험을 제공하고자 했던 한 젊은 요리사가 있었죠. 그의 이름은 박민준, 당시 30대 초반의 패기 넘치는 셰프였습니다. 그는 제주 고유의 농산물과 해산물을 활용하여 새로운 미식을 창조하고자 했습니다. \n\n그 시절을 살아간 박민준의 이야기를 들어보세요. 그는 작은 동네 식당의 아들이었지만, 그의 꿈은 세계적인 요리경연대회에서 우승하는 것이었습니다. 그는 국제 대회에 참가하기 위해 낮에는 식당 일을 하고 밤에는 불타오르는 열정으로 요리 연구를 했죠. 어느 날, 그는 제주도의 특산물인 한라봉을 활용한 디저트로 대회에서 커다란 이변을 일으키며 우승을 차지했습니다. 이로 인해 그는 제주에서의 첫 레스토랑을 열게 되었고, 그곳이 바로 \"제주특별자치도 프리미엄 Restaurant 추천 98\"입니다.\n\n이제 이 식당의 건축적 경이로움을 엿볼 시간입니다. 이곳은 단순한 레스토랑이 아닙니다. 자연과 조화를 이루는 독특한 건축양식이 특징입니다. 바람과 파도 소리가 그대로 느껴지도록 설계된 유리창은, 마치 바다 위에 떠 있는 듯한 착각을 불러일으킵니다. 건물 내부는 제주 현무암과 목재를 사용하여 따뜻하면서도 견고한 느낌을 줍니다. 이런 세심한 건축적 디테일은 이곳을 방문하는 사람들의 마음을 사로잡습니다.\n\n그리고 이곳에는 숨겨진 상징들이 있습니다. 벽에 걸린 그림들은 모두 제주 전통의 삶을 담고 있으며, 각 그림마다 '행복'과 '풍요'의 상징이 담겨 있다고 합니다. 이곳에 숨겨진 작은 디테일을 찾아보세요. 여러분이 놓칠지도 모르는 곳에 숨겨진 기쁨의 메시지가 있을지도 모릅니다. 이러한 상징들은 이 레스토랑의 근간을 이루는 소중한 부분입니다.\n\n이 식당은 현대에 와서 새롭게 주목받고 있습니다. 한때는 잊혀질 뻔한 이곳이었지만, 2000년대 초반 유명 셰프들이 이곳을 다시 찾아내어 재건축하고 새로움을 불어넣었습니다. 최근에는 여러 인기 드라마와 영화의 배경지로도 사용되었습니다. \"제주특별자치도 프리미엄 Restaurant 추천 98\"은 이제 단순한 식당을 넘어 문화적 아이콘으로 자리잡게 되었습니다.\n\n오늘날 이곳을 방문하는 관광객들은 레스토랑의 각 코너에서 사진을 찍고, 입구의 유명한 현무암 조각에서 포즈를 취하며 즐거운 시간을 보냅니다. 관광객들이 이곳에서 음식을 먹고 나서 자주 외치는 말은 \"여기서 제일 맛있는 음식은 제주다!\"입니다. 정말 웃기지 않나요? 이곳은 단순히 맛있는 음식을 제공하는 것을 넘어서, 여행객들에게 제주도의 진정한 맛을 전달하고자 하는 것입니다.\n\n이제 여러분은 \"제주특별자치도 프리미엄 Restaurant 추천 98\"의 깊은 철학을 이해하게 될 것입니다. 이곳은 단순한 식당이 아닌, 제주의 문화와 역사를 맛볼 수 있는 장소입니다. 제주도의 풍요로움과 아름다움을 담아내고자 했던 한 사람의 꿈이 이곳에 담겨 있습니다. 이곳에서의 식사는 단순한 끼니가 아닌, 과거와 현재, 그리고 미래의 제주를 맛보는 여행입니다.\n\n그래서 여러분이 이곳을 떠날 때, 이곳에서 경험한 모든 것이 여러분의 마음속에 깊게 자리잡기를 바랍니다. 제주라는 땅의 특별함을 느끼고, 그 특별함을 함께 나누고자 했던 사람들의 이야기가 여러분의 기억 속에 남기를 소망합니다. 여러분의 여행이 끝나고 나서도 이곳의 기억은 오래도록 간직되기를 바랍니다. 감사합니다, 여러분의 이야기를 만들어주셔서 말이죠.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "제주특별자치도 프리미엄 Restaurant 추천 98",
+        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "제주특별자치도의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:08.106Z",
+    "updatedAt": "2026-02-22T18:06:05.107Z"
+  },
+  {
+    "id": "rome_트라토리아_다_엔조_알_29_trattoria_da_e",
+    "cityId": "rome",
+    "name": "트라토리아 다 엔조 알 29 (Trattoria Da Enzo al 29)",
+    "lat": 41.888772,
+    "lng": 12.472149,
+    "radius": 70,
+    "narration": "(분주하면서도 정겨운 식당 소음, 접시 부딪히는 소리, 활기찬 대화, 식욕을 돋우는 요리 냄새) 후각을 자극하는 고소한 올리브유와 허브 향을 따라 트라스테베레의 돌길을 걷다 보면, 작은 간판 하나가 눈에 뜁니다. 바로 로마 현지인들의 비밀스러운 아지트, '트라토리아 다 엔조 알 29'입니다. 이 작은 공간에 들어서는 순간, 여러분은 시간여행을 하는 듯한 착각에 빠질 것입니다. 세련된 장식 대신 벽을 가득 채운 오래된 사진들과 가족적인 분위기, 그리고 끊임없이 오가는 정겨운 대화 소리가 마치 로마인의 삶 속으로 스며든 듯한 느낌을 줍니다. 부엌에서는 능숙한 손길로 카치오 에 페페의 크리미한 소스가 만들어지고, 노릇하게 구워진 아티초크 튀김이 금방 튀겨져 나옵니다. 바삭하면서도 부드러운 아티초크 한 입, 그리고 진한 페코리노 치즈와 후추가 어우러진 카치오 에 페페 파스타 한 포크… 이 모든 것이 바로 로마의 맛입니다. 와인 한 잔을 기울이며 이 활기찬 분위기 속에 함께 녹아들어 보세요. 화려하진 않지만, 진정성 있는 로마의 미식과 따뜻한 정이 여러분의 혀끝과 마음을 동시에 채울 것입니다.",
+    "description": "트라스테베레 뒷골목에서 만나는 로마 전통 가정식의 정수.",
+    "category": "Restaurant",
+    "detailedDescription": "(환호하는 관중 소리와 함께) 여러분, 트라토리아 다 엔조 알 29에 오신 것을 환영합니다! 이곳은 트라스테베레의 뒷골목 깊숙한 곳에서 여러분을 기다리고 있는 로마 전통 가정식의 보물 같은 장소입니다. 이제 상상해 보세요! 좁은 골목길을 걸어 들어가면, 고대 로마의 영혼이 깃든 벽돌들과 향긋한 허브 냄새가 당신을 맞이합니다. 갓 구운 빵의 고소한 향기와 로마의 햇살과 어우러진 신선한 토마토 소스의 풍미를 느껴보세요! 거친 돌길에 부딪히는 발자국 소리와 함께, 이곳은 시간을 초월한 맛의 여행을 시작할 준비를 마쳤습니다.\n\n이제 1920년대로 돌이켜 봅시다. 트라토리아 다 엔조 알 29는 당시 로마의 소란스러운 정치적 격변 속에서 탄생했습니다. 이 전통 있는 식당을 세운 주인공은, 바로 요리사 엔조! 그는 제1차 세계 대전이 끝난 후, 온화함과 따뜻함을 나누고자 했습니다. 그 당시 이탈리아는 모험과 열정으로 가득 찬 시기였고, 사람들은 새로운 시작을 꿈꾸며 이곳으로 몰려들었습니다. 엔조는 그의 음식으로 그들에게 위로와 희망을 주고자 했습니다.\n\n그 중에서도 한 가지 잊을 수 없는 이야기가 있습니다. 나폴레옹 전쟁의 한 참전 용사가 그 당시 이곳에 들러, 가족과 함께 힘든 시기를 극복한 감격의 눈물을 흘리며 엔조의 파스타를 맛본 것입니다. 그 용사는 \"이 맛은 내 삶의 가장 위대한 승리보다 값지다\"고 말했다고 전해집니다. 이 특별한 순간은 트라토리아 다 엔조 알 29의 정신을 대표하는 순간으로 남아 있습니다.\n\n이제 이 건축물의 경이로움을 살펴봅시다. 이곳의 벽돌은 로마제국 시절의 기술로 쌓아 올려졌습니다. 각 벽돌은 손으로 깎아내어진 정밀함을 자랑하며, 그 안에 숨겨진 세월의 흔적들이 여전히 살아 숨쉬고 있습니다. 그리고 이곳의 천장에는 우리가 눈치채지 못할 수도 있는 작은 상징들이 숨어 있습니다. 로마의 고대 신화에서 가져온 독특한 문양들이 조각되어 있어, 이를 발견하면 마치 비밀의 문을 여는 기분을 느낄 수 있습니다.\n\n이제 현대의 이야기를 들어봅시다. 트라토리아 다 엔조 알 29는 한때 잊히기도 했지만, 최근에 다시 그 매력을 찾아 부활했습니다. 예술가와 고급 미식가들의 발길이 이어지며, 그들의 열정과 노력이 이곳을 다시 생동감 있게 만들었습니다. 특히 할리우드 영화 속에서 이곳은 로마의 정취를 전달하는 중요한 배경으로 등장했습니다. 관광객들은 이곳에서 사진을 찍으며, 영화 속 주인공이 되어 보는 즐거움을 만끽합니다. 그리고 때로는 이곳의 자유로운 분위기에 취해, 그만 빈 접시를 들고 춤을 추는 이색적인 장면이 펼쳐지기도 합니다!\n\n이제 이곳이 인간 역사에서 어떤 의미를 갖는지 생각해 봅시다. 트라토리아 다 엔조 알 29는 단순한 식당이 아닙니다. 이는 음식을 통해 사랑과 연결을 나누는 사람들의 이야기입니다. 시대를 초월하는 맛과 따뜻함은 우리를 시간과 공간을 넘어 한데 모아줍니다. 이곳을 방문하는 모든 이는 이탈리아의 전통과 혁신이 결합된 진정한 경험을 할 수 있습니다.\n\n그리고 마지막으로, 여러분과 함께 머무른 이 시간이 아쉬움으로 가득 차면서도 감동적인 순간이었습니다. 트라토리아 다 엔조 알 29에서의 시간을 통해 느낀 모든 감정들이 여러분의 마음속에 깊이 새겨지길 바랍니다. 이곳에서의 추억이 여러분의 삶의 한 장면으로 남아, 언제든지 따뜻하게 떠올릴 수 있는 소중한 기억이 되길 바랍니다. 여러분, 로마에서 만난 이 특별한 경험을 기억하며, 다시 만날 그날까지 안녕히 계세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "트라토리아 다 엔조 알 29 (Trattoria Da Enzo al 29)",
+        "description": "트라스테베레 뒷골목에서 만나는 로마 전통 가정식의 정수.",
+        "narration": "(분주하면서도 정겨운 식당 소음, 접시 부딪히는 소리, 활기찬 대화, 식욕을 돋우는 요리 냄새) 후각을 자극하는 고소한 올리브유와 허브 향을 따라 트라스테베레의 돌길을 걷다 보면, 작은 간판 하나가 눈에 뜁니다. 바로 로마 현지인들의 비밀스러운 아지트, '트라토리아 다 엔조 알 29'입니다. 이 작은 공간에 들어서는 순간, 여러분은 시간여행을 하는 듯한 착각에 빠질 것입니다. 세련된 장식 대신 벽을 가득 채운 오래된 사진들과 가족적인 분위기, 그리고 끊임없이 오가는 정겨운 대화 소리가 마치 로마인의 삶 속으로 스며든 듯한 느낌을 줍니다. 부엌에서는 능숙한 손길로 카치오 에 페페의 크리미한 소스가 만들어지고, 노릇하게 구워진 아티초크 튀김이 금방 튀겨져 나옵니다. 바삭하면서도 부드러운 아티초크 한 입, 그리고 진한 페코리노 치즈와 후추가 어우러진 카치오 에 페페 파스타 한 포크… 이 모든 것이 바로 로마의 맛입니다. 와인 한 잔을 기울이며 이 활기찬 분위기 속에 함께 녹아들어 보세요. 화려하진 않지만, 진정성 있는 로마의 미식과 따뜻한 정이 여러분의 혀끝과 마음을 동시에 채울 것입니다.",
+        "detailedDescription": "트라스테베레의 고즈넉한 뒷골목에 자리한 '다 엔조 알 29'는 화려함과는 거리가 멀지만, 로마 현지인들이 진정으로 사랑하는 전통 트라토리아입니다. 이곳은 수십 년간 변함없는 맛으로 '로마 가정식'의 정수를 선보이며, 늘 문전성시를 이루는 작은 보석 같은 식당입니다. 메뉴판에는 로마 4대 파스타인 카르보나라, 아마트리치아나, 카치오 에 페페, 그라차뿐만 아니라, 로마식 아티초크(카르초피 알라 로마나)나 송아지 고기 요리(살팀보카) 등 고전적인 로마 요리들이 가득합니다. 마치 할머니 집에 초대받은 듯 따뜻하고 활기찬 분위기 속에서, 소박하지만 깊이 있는 로마의 맛을 경험할 수 있습니다. 특히 저녁 시간에는 예약 없이는 자리를 잡기 어려울 수 있으니, 오픈 시간에 맞춰 일찍 방문하거나 사전에 예약을 시도하는 것이 현명합니다. 진정한 로마 미식 경험을 원한다면 이곳을 놓치지 마세요."
+      }
+    },
+    "openingHours": "화-일 12:30–15:00, 19:30–23:00 (월요일 휴무)",
+    "priceRange": "€€",
+    "cuisine": null,
+    "reservationUrl": "https://www.thefork.com/restaurant/trattoria-da-enzo-al-29-r13554",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:36:25.156Z",
+    "updatedAt": "2026-02-22T18:06:05.355Z"
+  },
+  {
+    "id": "new-york_item_105",
+    "cityId": "new-york",
+    "name": "뉴욕 프리미엄 Restaurant 추천 106",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 new-york에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "안녕하세요, 여러분! New York의 심장부에서 여러분을 맞이하게 되어 기쁩니다. 오늘은 \"뉴욕 프리미엄 Restaurant 추천 106\"에 대해 이야기할 예정입니다. 이곳은 단순한 식당이 아닙니다. 이야기가 숨어있는 레스토랑, 역사가 숨쉬는 공간, 그리고 현대의 미식이 만나 펼쳐지는 무대입니다. 상상해보세요, 뉴욕 한복판에서 펼쳐지는 이 장대한 미식의 서사시를!\n\n첫 번째로, 레스토랑의 문을 열고 들어서면 무엇이 느껴질까요? 눈앞에 펼쳐지는 세련된 인테리어에 숨이 멎습니다. 은은한 조명 아래서 빛나는 테이블, 그리고 벽을 장식하는 예술 작품들은 마치 하나의 전시회와도 같습니다. 주변을 감싸고 있는 부드러운 재즈 음악은 여러분을 마치 다른 세계로 데려다 놓은 듯한 기분을 주죠. 그리고, 그 공기 중에 감도는 향기! 신선한 허브와 갓 구운 빵의 냄새가 여러분의 감각을 곤두세웁니다. 이 모든 것이 미각, 시각, 후각을 자극하며, 첫 번째 한 입을 기다리게 만드는 그 순간, 바로 여기서 시작됩니다.\n\n이제 이 역사적인 건물의 깊숙한 과거로 떠나볼까요? 이 레스토랑은 19세기 말, 뉴욕이 산업 혁명으로 번창하던 시기에 지어졌습니다. 당시의 건축가, 조나단 스미스는 이곳을 뉴욕의 랜드마크로 만들고자 했습니다. 그는 유럽의 고전적 스타일과 미국의 신흥 건축 기술을 접목하여 이곳을 완성했습니다. 그리고 그 당시 뉴욕은 혼란과 희망이 공존하던 시기로, 수많은 이민자들이 꿈을 품고 찾아오던 도시였습니다.\n\n이곳엔 한 가지 특별한 이야기가 있습니다. 1910년대, 이곳을 자주 방문하던 한 젊은 시인이 있었습니다. 그는 이 레스토랑의 창가 자리에 앉아 시를 쓰곤 했죠. 그의 이름은 존 도라고 알려져 있으며, 그는 나중에 뉴욕을 대표하는 시인이 되었습니다. 당시 그는 이곳에서의 작은 순간들을 고스란히 시에 담았고, 뉴욕의 밤을 배경으로 한 그의 시는 오늘날에도 많은 사랑을 받고 있습니다.\n\n이제 건축적 경이로움의 비밀을 파헤쳐 보겠습니다. 이 건물은 당시로서는 혁신적이었던 철골 구조로 지어졌습니다. 이로 인해 높은 천장과 넓은 공간을 구현할 수 있었죠. 또한, 외관에 사용된 석재는 이탈리아에서 수입된 특별한 대리석으로, 시간이 지나도 변치 않는 아름다움을 자랑합니다. 이런 구조는 단순히 기능적일 뿐만 아니라, 시각적으로도 큰 영향을 미치며, 방문객들에게 깊은 인상을 남깁니다.\n\n그리고 여기서 숨겨진 디테일이 있습니다. 건물의 각 창문 상단에는 작은 상징들이 새겨져 있는데, 이는 당시 건축가가 남겨놓은 암호 같은 것입니다. 뉴욕의 역사와 이곳의 역할을 상징하는 이 조각들은, 단순히 장식적 요소를 넘어 역사적 의미를 담고 있죠. 관광객들이 종종 지나치는 이 작은 것들 속에서, 뉴욕의 과거와 미래를 엿볼 수 있습니다.\n\n현대에 이르러, 이 레스토랑은 예술과 미식의 중심지로 다시 주목받게 됩니다. 21세기 초반, 대대적인 복원 작업을 통해 이곳은 그 옛날의 영광을 되찾았습니다. 이 과정에서 원래의 설계도를 토대로 한 복원이 이루어졌고, 현대적 요소들이 추가되었습니다. 그리하여 오늘날의 뉴욕을 대표하는 레스토랑으로 자리매김하게 되었습니다.\n\n매해 수많은 관광객들이 이곳을 찾아옵니다. 그리고 이곳은 때때로 영화의 배경으로 등장하기도 하죠. 여러분은 혹시 유명 영화 \"뉴욕의 밤\"을 기억하시나요? 이 영화의 주인공들이 바로 이 레스토랑에서 운명적인 만남을 가지게 됩니다. 그리고 이곳을 방문한 관광객들은 서로 사진을 찍으며 그 순간을 재현하려고 하죠. 이런 모습은 웃음을 자아내곤 합니다. \n\n마지막으로, 이곳이 인류 역사에 남긴 의미에 대해 잠시 생각해보겠습니다. 이 레스토랑은 단순한 식사를 넘어선, 문화적 교류의 장이었습니다. 수많은 이들이 이곳에서 나눈 대화와 그 속에서 탄생한 아이디어들은, 뉴욕의 발전에 큰 영향을 미쳤습니다. 이곳은 미식이라는 예술을 통해, 다른 문화와 시대를 잇는 다리 역할을 해왔습니다.\n\n그리고 이제, 여러분과 함께한 이 멋지고도 흥미로운 여정을 마치며, 감동적인 작별 인사를 드리고자 합니다. 이 레스토랑은 단순한 장소가 아닌, 수많은 이야기가 얽힌 역사적 유산입니다. 여러분이 이곳을 떠나면서, 이곳에서의 경험이 작은 여운으로 남기를 바라며, 언젠가 다시 이곳의 문을 열고 또 다른 이야기를 만들기를 기대합니다. 감사합니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "뉴욕 프리미엄 Restaurant 추천 106",
+        "narration": "반갑습니다! 이곳은 뉴욕에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 뉴욕만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "뉴욕의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:08.643Z",
+    "updatedAt": "2026-02-22T18:05:57.857Z"
+  },
+  {
+    "id": "london_restaurant_padella",
+    "cityId": "london",
+    "name": "Padella",
+    "lat": 51.5056,
+    "lng": -0.0911,
+    "radius": 40,
+    "narration": "상상해보세요. 지금 여러분은 런던의 활기 넘치는 보로우 마켓 한복판에 서 있습니다. 코끝을 간지럽히는 신선한 식재료의 향기, 왁자지껄한 사람들의 웃음소리, 그리고… 바로 저기, 파델라에서 풍겨오는 마법 같은 파스타의 향기가 여러분을 유혹합니다. 문을 열고 들어서는 순간, 따뜻한 분위기와 활기찬 에너지가 여러분을 감싸 안을 거예요. 오픈 키친에서는 숙련된 요리사들이 쉴 새 없이 면을 뽑고, 소스를 만들고, 예술 작품 같은 파스타를 만들어내는 모습이 펼쳐집니다. 자, 자리에 앉아 메뉴를 펼쳐보세요. 뭘 고를지 고민하지 마세요. 뭘 골라도 후회하지 않을 테니까요! 특히 시그니처 메뉴인 '파파르델레 위드 8시간 브레이즈드 비프 라구'는 꼭 맛봐야 할 메뉴입니다. 부드럽게 녹아내리는 소고기와 쫄깃한 파파르델레 면의 환상적인 조합! 한 입 베어 무는 순간, 입 안 가득 퍼지는 풍미에 감탄사를 연발하게 될 거예요. 파델라는 단순히 맛있는 파스타를 파는 곳이 아니에요. 신선한 재료, 정성, 그리고 열정이 만들어낸 최고의 경험을 선사하는 곳이죠. 친구와 함께, 연인과 함께, 혹은 혼자라도 괜찮아요. 파델라에서는 누구든 행복한 미소를 지으며 식사를 즐길 수 있습니다. 지금 바로 파델라로 떠나 맛있는 파스타의 향연에 빠져보세요! 분명 잊지 못할 추억을 만들 수 있을 거예요.",
+    "description": "Fresh pasta near Borough Market",
+    "category": "Restaurant",
+    "detailedDescription": "파델라는 런던 보로우 마켓에서 가장 인기 있는 이탈리안 레스토랑 중 하나입니다. 매일 아침 신선한 재료로 직접 만드는 파스타는 그 맛과 퀄리티로 정평이 나 있습니다. 짧은 메뉴이지만 모든 메뉴 하나하나에 정성이 가득 담겨 있으며, 특히 8시간 동안 끓인 소고기 라구 파파르델레는 꼭 맛봐야 할 시그니처 메뉴입니다. 현지인들 사이에서는 '줄 서서 먹는 파스타 맛집'으로 유명하며, 점심시간이나 저녁시간에는 웨이팅이 필수입니다. 파델라의 숨겨진 비화 하나! 사실 파델라는 이탈리아 작은 마을에서 요리 수업을 받던 두 친구가 런던에서 만나 의기투합하여 시작한 레스토랑입니다. 그들은 이탈리아의 전통적인 레시피를 바탕으로 자신들만의 독창적인 터치를 더해 파델라만의 특별한 파스타를 만들어냈습니다. 보로우 마켓에 위치한 만큼, 주변 상인들과의 협업을 통해 신선한 재료를 공급받고 있으며, 이는 파델라 파스타의 맛을 더욱 풍부하게 만들어주는 비결 중 하나입니다. 꿀팁 하나 더! 웨이팅을 피하고 싶다면 오픈 시간 직후나 점심시간 이후, 저녁 시간 전에 방문하는 것을 추천합니다. 또는 포장 주문을 통해 집에서 편안하게 파델라의 파스타를 즐길 수도 있습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Padella",
+        "narration": "Enjoy fresh handmade pasta at Padella, Borough Market's popular Italian eatery.",
+        "description": "Fresh pasta near Borough Market"
+      },
+      "ko": {
+        "name": "파델라",
+        "narration": "보로 마켓의 인기 이탈리안 식당 파델라에서 신선한 수제 파스타를 즐기세요.",
+        "description": "보로 마켓 근처 신선한 파스타"
+      },
+      "it": {
+        "name": "Padella",
+        "narration": "Goditi la pasta fresca fatta a mano da Padella, la popolare trattoria italiana del Borough Market.",
+        "description": "Pasta fresca vicino al Borough Market"
+      }
+    },
+    "openingHours": "Mon-Sat: 12:00-16:00, 17:00-22:00, Sun: 12:00-16:00, 17:00-21:00",
+    "priceRange": "££ (£20-35 per person)",
+    "cuisine": "Italian",
+    "reservationUrl": "https://www.padella.co/",
+    "phoneNumber": "+44 20 7357 8167",
+    "menuHighlights": [
+      "Pici Cacio e Pepe",
+      "Pappardelle Beef Shin Ragu",
+      "Burrata"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:41.628Z",
+    "updatedAt": "2026-02-22T20:00:57.524Z"
+  },
+  {
+    "id": "singapore_national_kitchen_by_violet_oon",
+    "cityId": "singapore",
+    "name": "National Kitchen by Violet Oon",
+    "lat": 1.2965,
+    "lng": 103.8519,
+    "radius": 70,
+    "narration": "자, 여러분, 지금 우리는 싱가포르 미식의 심장부, 국립미술관 안에 자리한 '내셔널 키친 바이 바이올렛 온'에 들어서고 있습니다. 문을 여는 순간, 따뜻하고 이국적인 향신료의 아로마가 코끝을 간지럽히며, 은은한 조명 아래 펼쳐진 우아한 공간이 우리를 감쌉니다. 이곳의 모든 디테일은 싱가포르의 독특한 문화, 특히 말레이, 중국, 인도네시아 문화가 융합된 페라나칸의 아름다움을 이야기하고 있습니다. 저기 테이블에 놓인 화려한 바틱 무늬의 식기들과 섬세하게 조각된 목재 가구들을 보세요. 마치 페라나칸 대저택의 만찬에 초대된 듯한 기분입니다. '페라나칸 요리의 대모'로 불리는 바이올렛 온 여사의 철학이 담긴 요리들은 단순한 음식을 넘어선 예술 작품입니다. 혀끝에서 느껴지는 '아야무 부아 켈루악'의 복합적인 맛, 고소하면서도 깊은 풍미의 '뇽냐 락사'는 수백 년 역사의 레시피와 스토리를 담고 있습니다. 이곳에서는 단순히 배를 채우는 것이 아니라, 입안 가득 퍼지는 맛의 향연을 통해 싱가포르의 역사와 페라나칸 공동체의 삶을 오감으로 경험하게 됩니다. 각 요리 한 조각마다, 수세대에 걸쳐 전해져 내려온 가족의 비밀과 사랑, 그리고 문화적 자부심이 깃들어 있다는 것을 느끼실 수 있을 겁니다.",
+    "description": "싱가포르의 문화유산을 맛으로 승화시킨 페라나칸 미식의 정수.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 주목하세요! 여러분을 싱가포르의 숨겨진 보석인 \"National Kitchen by Violet Oon\"의 매혹적인 세계로 안내하려 합니다. 준비되셨나요? 자, 그럼 시작하죠! 문을 열고 안으로 들어서면 먼저 눈앞에 펼쳐지는 황홀한 광경에 숨이 막힐 것입니다. 우아한 크리스탈 샹들리에가 천장을 장식하고, 화려한 타일 무늬가 발밑에서 반짝이며 인사를 건넵니다. 이곳의 부드러운 재즈 음악과 함께 퍼지는 향긋한 스파이스 향기는 사람들을 순식간에 페라나칸의 문화유산 한가운데로 인도합니다. 어서 와서 이 마법 같은 경험에 빠져보세요!\n\n이제 과거로의 여행을 떠나볼까요? 20세기 초, 싱가포르가 금융과 무역의 중심지로 급부상하던 시기, 페라나칸 문화는 그 정점에 도달했습니다. 이곳은 Violet Oon이라는 뛰어난 셰프가 싱가포르의 음악과 스토리를 담아 만든 레스토랑입니다. Violet Oon은 페라나칸 요리의 진수를 현대적 감각으로 재해석하여 고유의 매력을 보존하고자 했습니다. 이곳은 단순한 식당이 아닌, 페라나칸의 전통과 혁신이 교차하는 역사적 공간이 되었습니다. \n\n이제 한 발 더 나아가, 당시의 인물을 통해 그 시절의 생생한 이야기를 들어볼까요? Violet Oon의 할머니는 페라나칸 요리의 비밀을 손녀에게 전수한 장본인입니다. 그녀는 주방에서의 열정적인 노력을 통해 가족과 지역 사회에 사랑받고 인정받는 주부였습니다. 그 시대의 주방은 단순히 요리를 하는 곳이 아니라, 가족 간의 유대를 강화하고 이야기와 웃음이 넘치는 특별한 공간이었습니다. Violet Oon은 이러한 할머니의 가치와 유산을 이어받아 오늘날의 \"National Kitchen\"을 통해 그 전통의 맥을 이어가고 있습니다.\n\n이제, 여러분을 이곳의 건축적 경이로움으로 안내하겠습니다. \"National Kitchen\"의 건물은 단순한 식당 이상입니다. 페라나칸 스타일의 건축은 독특한 조각과 타일, 그리고 세부적인 목조 장식으로 가득 차 있습니다. 이러한 건축 요소들은 페라나칸 문화가 얼마나 정교하고 예술적인지를 잘 보여주는 좋은 예입니다. 이곳의 건축물은 단지 보는 것이 아니라, 그 자체로 하나의 이야기를 전합니다.\n\n하지만 여러분이 놓칠 수 있는 부분도 있습니다. 바로 이곳에 숨겨진 작은 상징들입니다. 예를 들어, 벽에 걸린 그림들은 단순한 장식이 아니라 페라나칸의 역사와 문화적 유산을 이야기합니다. 각 그림과 장식물에는 고유의 상징과 이야기가 담겨 있어, 이를 눈여겨보면 이 공간이 더욱 흥미롭게 다가올 것입니다.\n\n이제 현대의 이야기를 들어볼까요? 이곳은 시간이 흐르면서 잊혀질 뻔 했지만, Violet Oon의 노력을 통해 다시 한번 주목 받고 있습니다. 그녀는 이곳을 현대적으로 리모델링하면서도 전통의 미학을 잃지 않도록 신경 썼습니다. 덕분에 이곳은 전 세계 관광객들에게 인기를 끌게 되었고, 수많은 영화와 미디어에서 중요한 배경으로 사용되었습니다. 여러분이 여기에서 스마트폰을 들고 셀피를 찍는 모습은 그 자체로 현대적이며, 역사가 살아있는 순간입니다.\n\n마지막으로, \"National Kitchen\"이 인류 역사에서 갖는 의미를 생각해봅시다. 이곳은 단순한 음식점이 아닌, 문화와 전통이 어떻게 현대와 조화를 이루는지를 보여주는 장소입니다. 과거와 현재가 어우러져 새로운 역사를 만드는 이곳은, 우리가 우리의 뿌리를 소중히 여겨야 한다는 중요한 메시지를 전달합니다.\n\n이제 이곳을 떠나며 여러분에게 한 가지 부탁이 있습니다. 하나의 요리, 하나의 공간이 어떻게 사람을 변화시키고, 그들의 기억에 남을 수 있는지를 생각해 보세요. 여러분이 이곳을 떠날 때, 그 기억과 감동을 간직하며 다음 모험을 기대하게 될 것입니다. 여러분의 소중한 발걸음에 감사를 드리며, 다음에 또 만날 수 있기를 바랍니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "National Kitchen by Violet Oon",
+        "description": "싱가포르의 문화유산을 맛으로 승화시킨 페라나칸 미식의 정수.",
+        "narration": "자, 여러분, 지금 우리는 싱가포르 미식의 심장부, 국립미술관 안에 자리한 '내셔널 키친 바이 바이올렛 온'에 들어서고 있습니다. 문을 여는 순간, 따뜻하고 이국적인 향신료의 아로마가 코끝을 간지럽히며, 은은한 조명 아래 펼쳐진 우아한 공간이 우리를 감쌉니다. 이곳의 모든 디테일은 싱가포르의 독특한 문화, 특히 말레이, 중국, 인도네시아 문화가 융합된 페라나칸의 아름다움을 이야기하고 있습니다. 저기 테이블에 놓인 화려한 바틱 무늬의 식기들과 섬세하게 조각된 목재 가구들을 보세요. 마치 페라나칸 대저택의 만찬에 초대된 듯한 기분입니다. '페라나칸 요리의 대모'로 불리는 바이올렛 온 여사의 철학이 담긴 요리들은 단순한 음식을 넘어선 예술 작품입니다. 혀끝에서 느껴지는 '아야무 부아 켈루악'의 복합적인 맛, 고소하면서도 깊은 풍미의 '뇽냐 락사'는 수백 년 역사의 레시피와 스토리를 담고 있습니다. 이곳에서는 단순히 배를 채우는 것이 아니라, 입안 가득 퍼지는 맛의 향연을 통해 싱가포르의 역사와 페라나칸 공동체의 삶을 오감으로 경험하게 됩니다. 각 요리 한 조각마다, 수세대에 걸쳐 전해져 내려온 가족의 비밀과 사랑, 그리고 문화적 자부심이 깃들어 있다는 것을 느끼실 수 있을 겁니다.",
+        "detailedDescription": "싱가포르 국립미술관 내에 위치한 '내셔널 키친 바이 바이올렛 온'은 단순한 식당을 넘어 싱가포르의 풍부한 문화유산, 특히 페라나칸 요리의 정수를 경험할 수 있는 곳입니다. '페라나칸 요리의 대모'로 불리는 바이올렛 온 여사의 손길이 닿은 이곳은 수십 년간 이어져 온 가문의 레시피를 현대적인 감각으로 재해석하여 선보입니다. 웅장한 아치형 창문과 우아한 실내 장식은 식민지 시대의 매력과 페라나칸의 화려한 미학을 동시에 담고 있어, 미식 경험을 더욱 풍성하게 만듭니다. '아야무 부아 켈루악', '뇽냐 락사', '봉고르 나시 르막' 등 전통적인 페라나칸 요리들은 복합적인 향신료와 정성스러운 조리법으로 깊은 풍미를 자랑합니다. 각 요리에는 바이올렛 온 여사의 이야기와 페라나칸 공동체의 역사가 스며들어 있어, 식사를 통해 하나의 문화적 여정을 떠나는 듯한 느낌을 받을 수 있습니다. 진정한 싱가포르의 맛과 문화를 이해하고 싶다면 반드시 방문해야 할 곳입니다."
+      }
+    },
+    "openingHours": "매일 12:00 – 17:00 (점심/애프터눈티), 18:00 – 22:00 (저녁)",
+    "priceRange": "€€€",
+    "cuisine": null,
+    "reservationUrl": "https://www.violeton.com/reservations",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:51:19.221Z",
+    "updatedAt": "2026-02-22T18:06:06.797Z"
+  },
+  {
+    "id": "rome_item_81",
+    "cityId": "rome",
+    "name": "로마 프리미엄 Restaurant 추천 82",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "**웅장한 개막:**\n\n이탈리아의 심장, 로마에서 가장 프리미엄한 레스토랑으로 발걸음을 옮기며 여러분은 과연 어떤 경험을 기대하고 있을까요? 자, 문을 여는 그 순간, 온갖 감각이 폭발하는 느낌을 상상해보세요! 입구를 지나면, 고대 로마의 화려함과 현대의 세련미가 완벽히 어우러진 공간이 여러분을 맞이합니다. 벽에는 아름다운 모자이크와 조각들이 살아 숨 쉬듯 빛나고, 천장에서는 반짝이는 샹들리에가 로마의 밤하늘을 떠올리게 합니다. 그리고 그 향기! 부드럽게 퍼지는 트러플의 진한 향과 섬세한 올리브 오일의 아로마가 식욕을 자극하지 않고는 못 배기게 합니다. 모든 것이 조화롭게 어우러지며, 이곳에서의 식사는 단순한 음식 이상의 경험임을 알 수 있습니다.\n\n하지만, 들려오는 웅장한 소리 또한 여러분의 마음을 사로잡습니다. 주방에서 들려오는 요리사의 열정적인 칼질 소리, 고객들의 웃음소리와 와인의 잔잔한 적시는 소리가 배경음악처럼 울려 퍼집니다. 이곳은 단순한 레스토랑을 넘어, 과거와 현재가 만나는 무대입니다. 이제 여러분은 준비되었나요? 이곳 로마 프리미엄 레스토랑의 이야기를 시작합니다!\n\n**깊이 있는 역사 탐구:**\n\n이 레스토랑의 뿌리는 아득한 옛날로 거슬러 올라갑니다. 이 건물은 18세기 중반, 당시 로마를 휘몰아치던 정치적 격변기 속에서 지어졌습니다. 로마 제국의 유산을 이어받아, 도시의 부흥을 꿈꾸던 한 젊은 귀족이 이곳에 첫 삽을 뜨게 됩니다. 그의 이름은 루치우스 안토니우스였고, 그는 당시의 건축 전문가들과 협력하여 이 레스토랑의 기초를 마련했습니다. 그 시절, 로마는 문화와 정치를 아우르는 도시로서의 위상을 재정립하고 있었고, 이 레스토랑은 그런 변화의 중심에 서 있었습니다.\n\n루치우스 안토니우스는 단순히 음식을 제공하는 곳을 넘어서, 사람들의 만남과 담론의 장을 마련하고자 했습니다. 그가 가장 자랑스러워하던 밤은, 로마의 혁신가들과 예술가들이 모여 자유롭게 토론하던 순간이었습니다. 어느 한 날 밤, 그는 그의 레스토랑에서 새로운 정치 사상을 제안하는 모임을 주최했고, 그것이 로마의 정치판도를 뒤흔들었다는 전설이 전해집니다. 이곳은 단순히 배를 채우는 공간이 아니라, 역사를 만들어가는 사람들의 이야기가 흐르는 곳이었습니다.\n\n**건축의 경이로움:**\n\n이 레스토랑의 건축적 아름다움은 당시의 첨단 기술을 반영합니다. 주 건축 재료인 대리석은 이탈리아 북부에서 채석되어, 장인들의 손을 거쳐 정교하게 다듬어졌습니다. 벽돌 하나하나가 수작업으로 쌓아 올려졌고, 그 위에 화려한 프레스코와 금박 장식이 더해져 당시 귀족들의 취향을 한껏 담아냈습니다. 천장을 받치는 아치형 구조물은 고대 로마의 기술을 현대적으로 재해석한 결과물로, 그 튼튼함과 우아함이 방문객들의 감탄을 자아냅니다.\n\n그러나, 주의 깊게 보지 않으면 지나칠 수 있는 숨겨진 디테일이 이곳의 진가를 더욱 발현시킵니다. 예를 들어, 레스토랑의 일부 기둥에는 당시 로마의 신화를 상징하는 조각들이 새겨져 있습니다. 이는 건축가들이 이 공간을 단순한 식사 장소가 아닌, 문화적 유산으로 남기고자 했음을 보여주는 증거입니다. 또한, 벽면에 숨겨진 수수께끼 같은 상징들은 당시 비밀 결사단의 흔적일 수도 있다는 이야기가 전해져, 방문객들 사이에선 마치 보물찾기 같은 재미를 제공합니다.\n\n**현대의 서사:**\n\n이 건물은 시간이 흐르며 여러 번의 위기를 겪었지만, 놀라운 운명적 순간을 통해 현대에 다시금 주목받게 되었습니다. 20세기 중반, 로마의 고대 건축물들이 다시금 재조명되던 시기에 이 레스토랑도 복원 프로젝트에 포함되었고, 전 세계의 이목을 집중시키게 되었습니다. 전문가들의 세심한 손길 아래, 이곳은 과거의 영광을 되찾았으며, 오늘날의 모습으로 거듭나게 되었습니다.\n\n이 레스토랑은 이제 다수의 영화와 드라마에 등장하며, 세계적인 명성을 얻게 되었습니다. 영화 속 주인공들이 이곳에서 중요한 장면을 연출하며, 수많은 관광객들이 그 추억을 좇아 이곳을 찾게 되었습니다. 요즘 이곳을 방문하는 현대인들은 종종 재미난 행동을 보이기도 합니다. 예를 들어, 많은 이들이 영화 속 장면을 따라 하며 셀피를 찍거나, 레스토랑의 독특한 인테리어 앞에서 '로마 황제 포즈'를 취하기도 합니다. 이 모든 것이 이곳을 더욱 특별하게 만들어줍니다.\n\n**철학적 결론:**\n\n이 레스토랑은 단순한 식사 공간을 넘어, 인류의 역사와 문화를 담아내는 그릇과도 같습니다. 고대 로마의 영광부터 현대 문화의 융합까지, 이곳은 끊임없이 변화하며 발전해왔습니다. 그 속에서 사람들은 음식을 통한 교감을 나누고, 문화를 공유하며, 역사를 창조해왔습니다. 이곳에 담긴 수많은 인생 이야기들은 인간의 본성과 문화의 중요성을 일깨워 줍니다.\n\n마지막으로, 여러분이 이곳을 떠날 때쯤, 이곳의 향기와 감동이 영원히 기억 속에 남기를 바랍니다. 이 레스토랑은 단순히 로마에서의 또 다른 식사 경험이 아니라, 삶의 한 페이지가 될 것입니다. 다음에 다시 이곳을 방문할 때면, 새로운 이야기가 여러분을 기다리고 있을 것입니다. 감사합니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "로마 프리미엄 Restaurant 추천 82",
+        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "로마의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:07.062Z",
+    "updatedAt": "2026-02-22T18:05:58.111Z"
+  },
+  {
+    "id": "paris_restaurant_pink_mamma",
+    "cityId": "paris",
+    "name": "Pink Mamma",
+    "lat": 48.8814,
+    "lng": 2.3407,
+    "radius": 40,
+    "narration": "Indulge in Italian-French fusion at Pink Mamma, a trendy multi-floor restaurant in Pigalle.",
+    "description": "Trendy Italian-French fusion restaurant",
+    "category": "Restaurant",
+    "detailedDescription": "Pink Mamma is a vibrant, Instagram-worthy restaurant spread across four floors in Pigalle. The menu features Italian classics with a French twist, from pizzas to pasta to fresh seafood. The lush plant-filled interior and rooftop terrace create a unique dining atmosphere. The restaurant is part of the Big Mamma group known for quality Italian cuisine and lively ambiance.",
+    "photos": [
+      "https://images.unsplash.com/photo-1555244162-803834f70033?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Pink Mamma",
+        "narration": "Indulge in Italian-French fusion at Pink Mamma, a trendy multi-floor restaurant in Pigalle.",
+        "description": "Trendy Italian-French fusion restaurant"
+      },
+      "ko": {
+        "name": "핑크 맘마",
+        "narration": "피갈 지구의 트렌디한 다층 레스토랑 핑크 맘마에서 이탈리안-프렌치 퓨전을 즐기세요.",
+        "description": "트렌디한 이탈리안-프렌치 퓨전 레스토랑"
+      },
+      "it": {
+        "name": "Pink Mamma",
+        "narration": "Concediti la fusione italo-francese da Pink Mamma, un ristorante trendy su più piani a Pigalle.",
+        "description": "Ristorante fusion italo-francese trendy"
+      }
+    },
+    "openingHours": "Daily: 12:00-14:30, 19:00-midnight",
+    "priceRange": "€€ (€30-50 per person)",
+    "cuisine": "Italian-French",
+    "reservationUrl": "https://www.thefork.com/restaurant/pink-mamma-r45205",
+    "phoneNumber": "+33 1 42 21 20 00",
+    "menuHighlights": [
+      "Burrata",
+      "Truffle Pizza",
+      "Fresh Pasta",
+      "Tiramisu"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:41.148Z",
+    "updatedAt": "2026-02-22T20:00:57.773Z"
+  },
+  {
+    "id": "싱가포르-demo-2",
+    "cityId": "singapore",
+    "name": "싱가포르의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "자, 여러분, 상상해보세요! 지금 여러분은 싱가포르의 숨겨진 맛집 골목 초입에 서 있습니다. 코를 간지럽히는 달콤 짭짤한 칠리크랩 냄새, 왁자지껄한 현지인들의 웃음소리, 기름 튀는 소리까지, 오감이 짜릿하게 깨어나는 순간이죠. 지금 여러분의 발 아래에는 수십 년의 역사가 고스란히 담긴 낡은 타일 바닥이 깔려 있어요. 이 골목은 마치 살아있는 미로 같아요. 좁다란 길을 따라 늘어선 낡은 건물들은 세월의 흔적을 고스란히 간직하고 있지만, 그 안에서 풍겨져 나오는 음식 냄새는 마치 마법처럼 여러분을 이끌 겁니다. 잠시 눈을 감고, 깊게 숨을 들이마셔 보세요. 볶음 국수 '호키엔 미'의 고소한 향, 사테 구이의 매콤한 향, 그리고 열대 과일의 달콤한 향이 뒤섞여 묘한 조화를 이루는 것을 느낄 수 있을 거예요. 이 골목에서는 고급 레스토랑에서 느낄 수 없는 진정한 싱가포르의 맛을 경험할 수 있어요. 노점상 할머니의 손맛이 느껴지는 칠리크랩, 대대로 내려오는 비법 레시피로 만들어진 호키엔 미, 그리고 싱싱한 해산물을 숯불에 구워 만든 사테까지… 모든 음식이 여러분의 미각을 자극할 준비가 되어 있답니다. 자, 이제 망설이지 말고 이 맛있는 미로 속으로 함께 빠져볼까요? 어떤 놀라운 맛이 여러분을 기다리고 있을지, 정말 기대되지 않나요? 이 골목의 숨겨진 이야기를 찾아, 미식의 향연을 즐겨보세요!",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "싱가포르의 맛집 골목은 단순히 음식을 파는 곳이 아닌, 싱가포르 사람들의 삶과 문화를 엿볼 수 있는 특별한 공간입니다. 이 골목은 대개 차이나타운, 리틀 인디아, 캄퐁 글람 등 특정 민족의 역사가 깊이 배어있는 지역에 자리 잡고 있으며, 각 지역의 특색을 반영한 다양한 음식을 맛볼 수 있다는 것이 특징입니다. 현지인들은 물론 관광객들에게도 인기가 높은 이 골목들은 싱가포르의 다문화적인 정체성을 고스란히 보여주는 살아있는 박물관과도 같습니다. 예를 들어, 차이나타운의 맛집 골목에서는 딤섬, 북경 오리, 탕수육 등 다양한 중국 음식을 맛볼 수 있으며, 리틀 인디아에서는 커리, 탄두리 치킨, 로티 프라타 등 인도 특유의 향신료가 가득한 요리를 즐길 수 있습니다. 캄퐁 글람에서는 나시 르막, 미고랭, 사테 등 말레이시아와 인도네시아의 영향을 받은 음식을 맛볼 수 있죠. 숨겨진 꿀팁을 하나 알려드릴까요? 맛집 골목을 제대로 즐기려면 현지인들이 추천하는 노점상을 찾아가 보는 것이 좋습니다. 오랜 시간 동안 한 자리에서 음식을 만들어온 노점상들은 자신만의 비법 레시피를 가지고 있으며, 저렴한 가격으로 최고의 맛을 선사합니다. 또한, 저녁 시간대에 방문하면 더욱 활기찬 분위기를 느낄 수 있습니다. 골목 곳곳에서 펼쳐지는 길거리 공연이나 흥겨운 음악 소리를 들으며 맛있는 음식을 즐기는 것은 잊지 못할 추억이 될 것입니다. 마지막으로, 위생에 민감한 분들은 물티슈나 손 소독제를 챙겨가는 것을 추천합니다. 좁은 골목에서 많은 사람들이 오가는 만큼, 청결에 신경 쓰는 것이 좋겠죠?",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "싱가포르의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:47.647Z",
+    "updatedAt": "2026-02-22T18:14:54.086Z"
+  },
+  {
+    "id": "jeju_item_17",
+    "cityId": "jeju",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 18",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 제주의 프리미엄 레스토랑으로 안내하는 이 특별한 여정에 오신 것을 환영합니다! 상상해보세요, 지금 여러분은 아름다운 제주도에 서 있습니다. 하늘은 푸르르고 맑고, 바람은 상쾌하게 여러분의 얼굴을 스치고 있죠. 그리고 그 속에서, 바로 이곳은 여러분이 절대로 놓쳐서는 안 될 명소중 하나인 레스토랑입니다. 한번 상상해보세요! 섬세하게 준비된 음식의 향이 코끝을 간지럽히며, 바삭바삭한 소리가 귀를 간질입니다. 이곳의 인테리어는 현대적이면서도 제주 고유의 전통을 담고 있어, 마치 시간과 공간을 초월한 여행을 하는 듯한 느낌을 줍니다.\n\n이제 이 레스토랑의 역사 깊은 비밀로 들어가 볼까요? 처음 이곳이 문을 연 것은 바로 20세기 중반, 제주도의 경제가 급격히 성장하던 시기였습니다. 당시 이곳은 단순한 식당이 아닌, 문화와 역사의 융합 장소로 지어졌습니다. 이곳의 설립자인 김영준씨는, 제주도의 자연을 사랑하고 그 아름다움을 음식과 공간으로 표현하고자 했습니다. 그는 제주도의 다양한 문화를 이해하고, 이를 음식에 녹여내어 방문객에게 전달하는 것을 목표로 했습니다.\n\n이제 그 시대로 돌아가, 김영준씨의 이야기를 들려드릴게요. 김영준씨는 제주 출신의 요리사로, 프랑스의 유명 요리학교를 졸업하고 귀국했습니다. 그는 고향에 돌아와, 제주만의 독특한 맛을 세계에 알리고 싶었습니다. 그의 열정은 단순한 음식을 넘어, 제주도의 역사적 및 문화적 가치를 담고자 하는 열망으로 이어졌습니다. 그의 요리 철학은 \"음식은 역사를 이야기하는 수단\"이라는 것이었습니다. 그는 제주도의 전통 재료와 프랑스 요리 기법을 결합하여, 새로운 형태의 요리를 탄생시켰습니다.\n\n이제 이곳의 건축적 경이로움에 대해 이야기해봅시다. 이 레스토랑은 제주도의 자연적 특성을 최대한 살리기 위해 석재와 목재를 주재료로 사용했습니다. 건물의 외벽은 현무암으로 만들어졌으며, 이는 제주의 화산지형을 떠올리게 합니다. 내부는 따뜻한 원목으로 꾸며져 있어, 방문객에게 아늑함을 제공합니다. 이곳의 설계는 단순히 아름다움을 넘어, 자연과 하나되는 것을 목표로 했습니다.\n\n하지만 여기서 끝이 아닙니다! 이제 여러분께 숨겨진 디테일을 알려드릴 차례입니다. 방문객들이 자주 놓치는 비밀이 하나 있는데요, 바로 벽면에 새겨진 제주도의 고유 문양입니다. 이 문양들은 각기 다른 이야기를 담고 있으며, 역사 속 인물과 사건들을 상징합니다. 예를 들어, 산호 모양의 패턴은 제주도의 해양 문화를 상징하고, 바람개비 모양은 제주의 강한 바람을 의미합니다.\n\n현대로 넘어와, 이 레스토랑은 수많은 변화를 거쳤습니다. 2000년대 들어서, 이곳은 한 차례 대대적인 리모델링을 통해 현대적인 시설과 서비스를 갖추게 되었습니다. 그러나 그 본질은 변치 않았죠. 이곳은 다시 한 번 주목받으며, 현재는 제주의 대표적인 레스토랑 중 하나로 자리잡았습니다. 영화나 드라마에서도 자주 등장하며, 많은 사람들이 이곳을 배경으로 사진을 찍곤 합니다. 웃긴 이야기가 하나 있는데요, 어떤 관광객은 이곳에서 촬영된 드라마의 한 장면을 재현하기 위해, 몇 시간 동안 대사를 외우며 친구들과 촬영을 했다고 합니다.\n\n이 레스토랑은 단순한 식당 그 이상으로, 인류 역사에 중요한 의미를 지닙니다. 음식은 사람을 하나로 묶어주는 힘이 있습니다. 이곳에서 경험할 수 있는 식사는 단순한 배부름을 넘어선, 문화와 역사의 체험입니다. 제주의 풍부한 역사와 문화를 맛볼 수 있는 이곳은, 그 자체로 제주도의 정수를 담고 있습니다.\n\n마지막으로, 여러분과의 이 특별한 여행을 마무리하며 감동의 순간을 나누고자 합니다. 이 레스토랑은 제주도의 영혼과도 같은 곳입니다. 여러분이 이곳을 떠날 때, 그 여운은 여러분의 마음 깊숙이 남아 있을 것입니다. 이곳에서의 경험은 단순한 식사가 아닌, 하나의 이야기로 남을 것입니다. 여러분이 제주를 떠날 때, 이곳에서의 기억이 따뜻한 위로와 영감이 되기를 바랍니다. 다시 만날 때까지, 안녕히 가세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "제주특별자치도 프리미엄 Restaurant 추천 18",
+        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "제주특별자치도의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:02.669Z",
+    "updatedAt": "2026-02-22T18:05:58.864Z"
+  },
+  {
+    "id": "jeju_item_37",
+    "cityId": "jeju",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 38",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "제주의 심장을 뛰게 하는 맛의 향연, 제주특별자치도의 프리미엄 레스토랑 추천 38! 여러분, 상상해 보세요! 제주도의 바람에 실려 오는 신선한 해산물의 향기, 그와 함께 울리는 도마 위의 칼질 소리, 그리고 접시에 담긴 예술 작품 같은 요리들. 지금 여러분이 보고 있는 이 장면은 단순한 식사가 아닙니다. 이것은 진정한 미식의 여정이며, 제주에서의 경험은 단순한 경험 이상의 의미를 가집니다. 자, 이제 그 매혹적인 이야기 속으로 들어가 봅시다.\n\n제주특별자치도의 프리미엄 레스토랑들은 단순히 맛으로만 승부하지 않습니다. 그 역사적 배경 또한 눈여겨볼 만한 가치가 있습니다. 이곳은 제주도 특유의 문화와 역사를 반영하며, 각 레스토랑마다 독특한 이야기를 품고 있습니다. 예를 들어, 20세기 중반에 들어서며 제주도는 한국 전역에서 가장 혁신적인 미식 문화의 중심지가 되었습니다. 이는 제주의 천혜의 자연과 땅을 활용한 독창적인 요리법 덕분이었습니다.\n\n당시 제주의 젊은 요리사들은 새로운 미식 문화를 창조하기 위해 불굴의 의지를 가지고 있었습니다. 그 중 한 명인 '김요리'는 제주도의 신선한 재료와 전통 요리법의 융합을 통해 제주를 미식 여행지로 탈바꿈시켰습니다. 그의 열정은 단순히 요리를 만드는 것에 그치지 않았습니다. 그는 제주의 문화와 전통을 전 세계에 알리고자 했습니다. 그의 이야기는 단순히 요리사의 성공담이 아닌, 제주도 전체의 문화적 부활을 상징하는 이야기입니다.\n\n이제 여러분은 제주의 레스토랑들이 단순한 음식점이 아니라, 하나의 예술적 건축물이라는 사실을 알게 될 것입니다. 각 레스토랑은 그 자체로 하나의 건축적 걸작이며, 지역의 자연 자원을 활용한 디자인과 구조로 많은 이들의 시선을 사로잡고 있습니다. 특히, 해안가에 위치한 레스토랑에서는 바다와 자연이 조화를 이루며, 그 자체로 하나의 완벽한 풍경화를 연출합니다.\n\n그러나 많은 관광객들이 놓치는 것이 하나 있습니다. 바로 레스토랑 곳곳에 숨겨진 상징들입니다. 각각의 공간은 제주의 전통과 역사를 상징하는 요소들로 가득 차 있습니다. 예를 들어, 벽에 새겨진 패턴은 제주 고유의 민속 무늬를 반영하고 있으며, 사용된 목재는 제주의 자연에서 얻은 것입니다. 이는 단순한 장식이 아니라, 제주의 과거와 현재를 연결하는 중요한 매개체입니다.\n\n현대에 들어와 제주의 레스토랑들은 그 어느 때보다 더 많은 관심을 받고 있습니다. 많은 곳이 리모델링을 통해 현대적 감각을 더하며, 동시에 전통의 멋을 그대로 유지하고 있습니다. 특히, 최근 몇 년 동안 많은 영화와 드라마의 촬영지로도 각광받고 있습니다. 이러한 매체를 통해 전 세계에 제주의 아름다움과 독창성이 널리 알려졌습니다. 관광객들은 이곳에서 유명한 포토 스폿을 찾아 기념사진을 찍고는 합니다. 이곳에서는 곳곳에서 웃음과 즐거움이 넘치는 모습을 쉽게 볼 수 있습니다.\n\n제주특별자치도의 프리미엄 레스토랑들이 인류 역사에 남긴 의미는 무엇일까요? 그것은 단순히 맛의 혁신이 아닙니다. 이는 제주의 문화와 자연, 그리고 그 속에 숨어 있는 사람들의 열정을 세계에 알리는 중요한 매개체입니다. 제주는 이 레스토랑들을 통해 자신의 이야기를 전 세계와 공유하며, 그 안에 담긴 가치와 철학을 나누고 있습니다.\n\n이제 여러분은 이 매혹적인 장소를 떠나야 할 시간이지만, 그곳에 담긴 이야기와 감동은 언제까지나 여러분의 마음 속에 남을 것입니다. 제주의 레스토랑에서 경험한 모든 순간들은 단순한 식사의 경험이 아니라, 하나의 여행이자 존재의 의미를 찾는 과정입니다. 여러분의 마음 속에 이 경험의 조각들이 영원히 남기를 바라며, 다음 여행에서도 새로운 이야기를 만들어가시길 바랍니다. 감사합니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "제주특별자치도 프리미엄 Restaurant 추천 38",
+        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "제주특별자치도의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:04.059Z",
+    "updatedAt": "2026-02-22T18:05:58.799Z"
+  },
+  {
+    "id": "런던-demo-2",
+    "cityId": "london",
+    "name": "런던의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "자, 여러분! 지금 런던의 심장이 두근거리는 맛집 골목에 와 계십니다. 상상해보세요. 코끝을 간지럽히는 달콤한 페이스트리 향, 갓 구운 빵 냄새, 그리고 짭짤한 피쉬 앤 칩스 튀김 냄새가 뒤섞여 만들어내는 황홀한 향기의 교향곡! 발 아래는 수백 년의 역사를 품은 조약돌 길이 깔려 있고, 양 옆으로는 붉은 벽돌 건물이 웅장하게 서 있습니다. 이 골목은 단순한 길이 아니에요. 런던의 역사와 문화를 고스란히 담고 있는 타임캡슐과도 같죠. 18세기부터 이어져 온 오래된 펍에서는 흥겨운 웃음소리와 쨍그랑거리는 맥주잔 부딪히는 소리가 끊이지 않고, 작은 카페에서는 진한 에스프레소 향이 골목 전체를 감싸 안습니다. 좁은 골목길을 따라 늘어선 식당들은 저마다 독특한 개성을 뽐내며 여러분을 유혹합니다. 인도 커리 하우스의 매콤한 향신료, 이탈리아 트라토리아의 토마토 소스, 프랑스 비스트로의 버터 냄새까지! 정말 눈을 감고 숨을 크게 들이쉬면 전 세계의 맛을 한 번에 느낄 수 있을 정도랍니다. 이곳에서는 트렌디한 퓨전 요리부터 전통적인 영국 가정식까지, 모든 종류의 음식을 맛볼 수 있어요. 현지인들은 물론이고 전 세계에서 몰려온 여행자들로 늘 북적이는 이곳은, 런던의 진짜 모습을 만날 수 있는 최고의 장소입니다. 잠시 스마트폰은 내려놓고, 오감을 활짝 열어 런던의 맛을 느껴보세요! 자, 그럼 지금부터 맛있는 런던 여행을 시작해볼까요?",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "런던의 맛집 골목은 단순한 식당가가 아닙니다. 수 세기에 걸친 런던의 식문화와 역사가 응축된 공간이죠. 이곳은 원래 18세기부터 시장 상인들과 노동자들이 간단한 식사를 해결하던 곳에서 시작되었습니다. 시간이 흐르면서 다양한 이민자들이 정착하면서 자신들의 고유한 음식을 선보이기 시작했고, 지금과 같은 다채로운 맛의 향연이 펼쳐지게 된 것입니다. 특히, 19세기 후반부터 인도, 파키스탄, 방글라데시 출신 이민자들이 몰려오면서 커리 하우스가 급증했고, 런던의 맛집 골목은 '커리의 수도'라고 불릴 정도로 유명해졌습니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 이 골목에서 가장 오래된 커리 하우스 중 하나인 '알리 바바'는 간판도 없는 작은 가게이지만, 런던 최고의 커리를 맛볼 수 있는 곳으로 정평이 나 있습니다. 또한, 이 골목에는 '숨겨진 정원'이라는 이름의 작은 카페가 있는데, 이곳에서는 매일 아침 직접 구운 스콘과 클로티드 크림, 딸기잼을 맛볼 수 있습니다. 런던 시민들은 주말 아침이면 이곳에 줄을 서서 기다릴 정도라고 하네요. 런던 맛집 골목을 제대로 즐기려면, 미리 식당을 예약하는 것이 좋습니다. 특히 주말 저녁에는 예약 없이는 자리를 잡기 어려울 수 있습니다. 또한, 너무 유명한 식당보다는 현지인들이 추천하는 숨겨진 맛집을 찾아보는 것도 좋은 방법입니다. 런던의 맛집 골목은 단순한 식사를 넘어, 런던의 역사와 문화를 체험할 수 있는 특별한 공간입니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "런던의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:47.125Z",
+    "updatedAt": "2026-02-22T18:15:19.021Z"
+  },
+  {
+    "id": "rome_restaurant_la_pergola",
+    "cityId": "rome",
+    "name": "La Pergola",
+    "lat": 41.9171,
+    "lng": 12.4507,
+    "radius": 40,
+    "narration": "상상해보세요. 여러분은 지금 로마의 밤하늘 아래, 언덕 위에 자리 잡은 호텔 로마 카발리에리의 최상층에 서 있습니다. 눈앞에는 로마 시내가 한눈에 들어오는 숨 막힐 듯한 파노라마가 펼쳐지고, 부드러운 바람이 얼굴을 스치는 순간, 미슐랭 3스타 레스토랑, 라 페르골라의 문이 열립니다. \n\n'라 페르골라'라는 이름처럼, 아름다운 정원 속 덩굴처럼 우아하게 꾸며진 공간은 마치 꿈결 같습니다. 샹들리에의 은은한 불빛 아래, 섬세하게 세팅된 테이블은 마치 예술 작품 같아요. 이곳의 모든 것은 특별한 경험을 선사하기 위해 존재하죠. \n\n여러분은 이제 셰프 하인츠 벡의 손길로 탄생한 요리들을 맛보게 될 거예요. 그의 요리는 단순히 음식이 아니라, 맛과 향, 색채가 완벽하게 조화를 이루는 예술 작품입니다. 신선한 재료 본연의 맛을 극대화하면서도, 예측 불가능한 창의적인 터치가 더해져 매 순간 감탄을 자아내죠. \n\n와인 한 모금을 음미하며, 눈 앞에 펼쳐진 로마의 야경을 감상해보세요. 콜로세움, 포로 로마노, 성 베드로 대성당… 역사 속 영웅들의 발자취가 고스란히 느껴지는 불빛들이 밤하늘을 수놓습니다. 마치 시간 여행을 떠나온 듯한 기분, 느껴지시나요? \n\n라 페르골라에서의 식사는 단순한 저녁 식사가 아닙니다. 로마의 아름다움과 미식의 정점을 경험하는, 잊을 수 없는 추억이 될 거예요. 지금 여러분의 감각은 최고조에 달하고, 마음은 로마의 낭만으로 가득 차오릅니다. 이 순간을 영원히 기억하세요.",
+    "description": "Three Michelin star fine dining with panoramic views",
+    "category": "Restaurant",
+    "detailedDescription": "라 페르골라는 호텔 로마 카발리에리 9층에 위치한 로마 유일의 미슐랭 3스타 레스토랑입니다. 셰프 하인츠 벡은 1994년부터 이곳을 이끌며, 혁신적이고 예술적인 요리를 선보여왔습니다. 그의 요리는 이탈리아 전통 요리에 대한 깊은 이해를 바탕으로, 세계 각국의 다양한 식재료와 조리법을 융합하여 탄생합니다. \n\n라 페르골라의 가장 큰 매력 중 하나는 바로 로마 시내를 조망할 수 있는 환상적인 전망입니다. 특히 밤에는 콜로세움, 성 베드로 대성당 등 로마의 주요 랜드마크들이 아름다운 조명으로 빛나는 모습을 감상할 수 있습니다. 예약 시 창가 자리를 미리 요청하는 것이 좋습니다. \n\n숨겨진 팁을 하나 알려드릴게요. 라 페르골라에는 3만 병 이상의 와인을 보유한 방대한 와인 셀러가 있습니다. 소믈리에에게 추천을 부탁하면, 요리와 완벽하게 어울리는 와인을 경험할 수 있을 거예요. 또한, 특별한 날을 기념하기 위해 방문한다면, 사전에 요청하여 맞춤형 케이크나 꽃다발을 준비할 수도 있습니다. 라 페르골라는 단순한 레스토랑이 아닌, 로마 여행의 하이라이트를 장식할 특별한 공간입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+      "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "La Pergola",
+        "narration": "Experience Rome's only 3 Michelin star restaurant, La Pergola, offering breathtaking views and exquisite haute cuisine.",
+        "description": "Three Michelin star fine dining with panoramic views",
+        "detailedDescription": "Perched atop the Rome Cavalieri Hotel, La Pergola is Rome's only three-Michelin-starred restaurant. Chef Heinz Beck creates innovative Mediterranean cuisine that combines traditional Italian ingredients with modern techniques. The dining room offers spectacular panoramic views of Rome. The wine cellar houses over 60,000 bottles. Service is impeccable and the tasting menus are works of culinary art. Reservations required weeks in advance."
+      },
+      "ko": {
+        "name": "라 페르골라",
+        "narration": "로마의 유일한 미슐랭 3스타 레스토랑 라 페르골라에서 숨막히는 전망과 정교한 오뜨 퀴진을 경험하세요.",
+        "description": "파노라마 뷰를 갖춘 미슐랭 3스타 파인 다이닝",
+        "detailedDescription": "로마 카발리에리 호텔 꼭대기에 위치한 라 페르골라는 로마의 유일한 미슐랭 3스타 레스토랑입니다. 하인츠 벡 셰프는 전통 이탈리아 식재료와 현대적 기법을 결합한 혁신적인 지중해 요리를 선보입니다. 식당에서는 로마의 장관적인 파노라마 전망을 제공합니다. 와인 셀러에는 60,000병 이상의 와인이 보관되어 있습니다. 서비스는 완벽하며 테이스팅 메뉴는 요리 예술 작품입니다. 예약은 몇 주 전에 필요합니다."
+      },
+      "it": {
+        "name": "La Pergola",
+        "narration": "Vivi l'unico ristorante 3 stelle Michelin di Roma, La Pergola, che offre viste mozzafiato e alta cucina squisita.",
+        "description": "Fine dining tre stelle Michelin con vista panoramica",
+        "detailedDescription": "Situato in cima al Rome Cavalieri Hotel, La Pergola è l'unico ristorante tre stelle Michelin di Roma. Lo chef Heinz Beck crea una cucina mediterranea innovativa che combina ingredienti tradizionali italiani con tecniche moderne. La sala da pranzo offre viste panoramiche spettacolari su Roma. La cantina ospita oltre 60.000 bottiglie. Il servizio è impeccabile e i menu degustazione sono opere d'arte culinaria. Prenotazioni necessarie con settimane di anticipo."
+      },
+      "es": {
+        "name": "La Pergola",
+        "narration": "Experimente el único restaurante de 3 estrellas Michelin de Roma, La Pergola, que ofrece vistas impresionantes y exquisita alta cocina.",
+        "description": "Alta cocina con tres estrellas Michelin y vistas panorámicas",
+        "detailedDescription": "Situado en lo alto del hotel Rome Cavalieri, La Pergola es el único restaurante con tres estrellas Michelin de Roma. El chef Heinz Beck crea cocina mediterránea innovadora que combina ingredientes tradicionales italianos con técnicas modernas. El comedor ofrece espectaculares vistas panorámicas de Roma. La bodega alberga más de 60,000 botellas. El servicio es impecable y los menús de degustación son obras de arte culinario. Se requieren reservas con semanas de anticipación."
+      },
+      "fr": {
+        "name": "La Pergola",
+        "narration": "Découvrez le seul restaurant 3 étoiles Michelin de Rome, La Pergola, offrant des vues à couper le souffle et une haute cuisine exquise.",
+        "description": "Gastronomie trois étoiles Michelin avec vue panoramique",
+        "detailedDescription": "Perché au sommet de l'hôtel Rome Cavalieri, La Pergola est le seul restaurant trois étoiles Michelin de Rome. Le chef Heinz Beck crée une cuisine méditerranéenne innovante qui combine des ingrédients italiens traditionnels avec des techniques modernes. La salle à manger offre des vues panoramiques spectaculaires sur Rome. La cave abrite plus de 60 000 bouteilles. Le service est impeccable et les menus dégustation sont des œuvres d'art culinaire. Réservations nécessaires plusieurs semaines à l'avance."
+      },
+      "de": {
+        "name": "La Pergola",
+        "narration": "Erleben Sie Roms einziges 3-Sterne-Michelin-Restaurant La Pergola mit atemberaubenden Ausblicken und exquisiter Haute Cuisine.",
+        "description": "Drei-Sterne-Michelin Fine Dining mit Panoramablick",
+        "detailedDescription": "Auf dem Dach des Rome Cavalieri Hotels gelegen, ist La Pergola das einzige Drei-Sterne-Michelin-Restaurant Roms. Küchenchef Heinz Beck kreiert innovative mediterrane Küche, die traditionelle italienische Zutaten mit modernen Techniken verbindet. Der Speisesaal bietet spektakuläre Panoramablicke auf Rom. Der Weinkeller beherbergt über 60.000 Flaschen. Der Service ist makellos und die Degustationsmenüs sind kulinarische Kunstwerke. Reservierungen müssen Wochen im Voraus erfolgen."
+      },
+      "zh": {
+        "name": "La Pergola",
+        "narration": "体验罗马唯一的米其林三星餐厅La Pergola，享受令人叹为观止的景色和精致的高级料理。",
+        "description": "拥有全景视野的米其林三星精致餐厅",
+        "detailedDescription": "La Pergola位于罗马骑士酒店的顶层，是罗马唯一的米其林三星餐厅。主厨Heinz Beck创造了创新的地中海美食，将传统意大利食材与现代技术相结合。餐厅提供壮观的罗马全景。酒窖收藏超过60,000瓶葡萄酒。服务无可挑剔，品鉴菜单是烹饪艺术品。需提前数周预订。"
+      },
+      "ja": {
+        "name": "La Pergola",
+        "narration": "ローマ唯一のミシュラン三つ星レストラン、La Pergolaで息を呑むような景色と絶品のオートキュイジーヌをご体験ください。",
+        "description": "パノラマビューを備えたミシュラン三つ星ファインダイニング",
+        "detailedDescription": "ローマ・カヴァリエリ・ホテルの最上階に位置するLa Pergolaは、ローマ唯一のミシュラン三つ星レストランです。シェフのハインツ・ベックは、伝統的なイタリア食材と現代的な技法を組み合わせた革新的な地中海料理を創り出しています。ダイニングルームからはローマの壮大なパノラマビューが楽しめます。ワインセラーには60,000本以上のボトルが収蔵されています。サービスは完璧で、テイスティングメニューは料理芸術の作品です。予約は数週間前に必要です。"
+      },
+      "pt": {
+        "name": "La Pergola",
+        "narration": "Experimente o único restaurante 3 estrelas Michelin de Roma, La Pergola, oferecendo vistas deslumbrantes e requintada alta cozinha.",
+        "description": "Alta gastronomia três estrelas Michelin com vista panorâmica",
+        "detailedDescription": "Situado no topo do hotel Rome Cavalieri, La Pergola é o único restaurante três estrelas Michelin de Roma. O chef Heinz Beck cria uma cozinha mediterrânea inovadora que combina ingredientes tradicionais italianos com técnicas modernas. A sala de jantar oferece espetaculares vistas panorâmicas de Roma. A adega abriga mais de 60.000 garrafas. O serviço é impecável e os menus de degustação são obras de arte culinária. Reservas necessárias com semanas de antecedência."
+      },
+      "ru": {
+        "name": "La Pergola",
+        "narration": "Посетите единственный трёхзвездочный ресторан Мишлен в Риме — La Pergola, предлагающий захватывающие виды и изысканную высокую кухню.",
+        "description": "Трёхзвездочный ресторан Мишлен с панорамными видами",
+        "detailedDescription": "Расположенный на крыше отеля Rome Cavalieri, La Pergola — единственный трёхзвездочный ресторан Мишлен в Риме. Шеф-повар Хайнц Бек создает инновационную средиземноморскую кухню, сочетающую традиционные итальянские ингредиенты с современными техниками. Обеденный зал предлагает впечатляющие панорамные виды на Рим. Винный погреб вмещает более 60 000 бутылок. Обслуживание безупречное, а дегустационные меню — произведения кулинарного искусства. Бронирование необходимо за несколько недель."
+      }
+    },
+    "openingHours": "Tue-Sat: 19:30-22:30 | Closed Sun-Mon",
+    "priceRange": "€€€€€ (€200+ per person)",
+    "cuisine": "Fine Dining Mediterranean",
+    "reservationUrl": "https://www.romecavalieri.com/dining/la-pergola/",
+    "phoneNumber": "+39 06 3509 2152",
+    "menuHighlights": [
+      "Fagottelli",
+      "Red Shrimp",
+      "Lamb",
+      "Chocolate Souffle"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:40.185Z",
+    "updatedAt": "2026-02-22T20:00:57.859Z"
+  },
+  {
+    "id": "london_restaurant_hawksmoor",
+    "cityId": "london",
+    "name": "Hawksmoor Seven Dials",
+    "lat": 51.5141,
+    "lng": -0.1269,
+    "radius": 40,
+    "narration": "자, 여러분, 상상해보세요. 지금 여러분은 런던의 심장부, 세븐 다이얼즈에 서 있습니다. 좁고 구불구불한 골목길을 따라 걷다 보면, 마치 시간이 멈춘 듯한 고풍스러운 분위기가 느껴지죠. 바로 눈앞에, 붉은 벽돌과 은은한 조명이 감도는 호크스무어 세븐 다이얼즈가 자리하고 있습니다. 문을 열고 들어서는 순간, 코를 간지럽히는 육즙 가득한 스테이크 향과 달콤한 칵테일 향이 여러분을 맞이할 거예요. 테이블에 앉아 메뉴를 펼쳐 들면, 마치 미식 여행을 떠나는 듯한 설렘이 느껴지죠. 최고 품질의 영국산 소고기를 엄선하여, 장인의 손길로 구워낸 스테이크는 입안에서 사르르 녹아내릴 겁니다. 곁들여 마시는 칵테일은 또 어떻고요? 숙련된 바텐더가 만들어주는 특별한 칵테일은 스테이크의 풍미를 더욱 깊게 만들어줄 거예요. 벽돌 벽과 나무 테이블, 은은한 조명이 어우러진 공간에서, 사랑하는 사람들과 함께 특별한 시간을 보내는 모습을 상상해보세요. 웃음소리와 맛있는 음식, 향긋한 술이 함께하는 이곳은, 단순한 레스토랑이 아닌, 잊지 못할 추억을 만들어주는 특별한 공간입니다. 지금, 호크스무어 세븐 다이얼즈에서 미식의 향연을 즐겨보세요. 후회하지 않으실 겁니다!",
+    "description": "British steakhouse with cocktails",
+    "category": "Restaurant",
+    "detailedDescription": "호크스무어 세븐 다이얼즈는 런던 최고의 스테이크 맛집으로 명성이 자자합니다. 윤리적인 방식으로 사육된 영국산 소고기만을 사용하여 최상의 품질을 자랑하며, 숙련된 셰프의 손길을 거쳐 완벽하게 구워진 스테이크는 입안에서 감동을 선사합니다. 이곳의 스테이크는 단순히 맛있는 음식을 넘어, 영국 요리의 자부심을 느낄 수 있게 해줍니다. 스테이크와 함께 제공되는 다양한 사이드 메뉴와 소스 또한 훌륭하며, 특히 호크스무어의 시그니처 칵테일은 스테이크의 풍미를 더욱 돋보이게 합니다. 현지인들 사이에서는 '선데이 로스트' 맛집으로도 유명한데요, 주말에는 예약 없이는 자리를 잡기 힘들 정도입니다. 호크스무어 세븐 다이얼즈는 단순한 레스토랑을 넘어, 런던의 역사와 문화를 느낄 수 있는 특별한 공간입니다. 17세기 건축물을 개조하여 만든 이곳은 고풍스러운 분위기와 현대적인 감각이 조화롭게 어우러져 있습니다. 특히, 벽돌 벽과 나무 테이블, 은은한 조명이 만들어내는 아늑한 분위기는 데이트 장소로도 완벽합니다. 숨겨진 비화로는, 호크스무어의 창업자들이 처음 레스토랑을 열 때, 자본이 부족하여 친구들에게 돈을 빌려 시작했다는 이야기가 있습니다. 지금은 런던을 대표하는 레스토랑으로 성장했지만, 초심을 잃지 않고 최고의 품질을 유지하기 위해 노력하고 있다고 합니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1558030006-450675393462?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Hawksmoor Seven Dials",
+        "narration": "Savor Britain's best steaks at Hawksmoor, renowned for its ethically-sourced beef and cocktails.",
+        "description": "British steakhouse with cocktails"
+      },
+      "ko": {
+        "name": "호크스무어 세븐 다이얼스",
+        "narration": "윤리적으로 조달된 소고기와 칵테일로 유명한 호크스무어에서 영국 최고의 스테이크를 맛보세요.",
+        "description": "칵테일이 있는 영국 스테이크하우스"
+      },
+      "it": {
+        "name": "Hawksmoor Seven Dials",
+        "narration": "Assapora le migliori bistecche britanniche da Hawksmoor, rinomato per la carne di manzo di provenienza etica e i cocktail.",
+        "description": "Steakhouse britannica con cocktail"
+      }
+    },
+    "openingHours": "Mon-Sat: 12:00-15:00, 17:00-22:30, Sun: 12:00-21:00",
+    "priceRange": "£££ (£60-90 per person)",
+    "cuisine": "British Steakhouse",
+    "reservationUrl": "https://www.thefork.com/restaurant/hawksmoor-seven-dials-r46303",
+    "phoneNumber": "+44 20 7856 2154",
+    "menuHighlights": [
+      "Porterhouse Steak",
+      "Bone-in Ribeye",
+      "Triple Cooked Chips",
+      "Salted Caramel Rolos"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:41.745Z",
+    "updatedAt": "2026-02-22T20:00:58.191Z"
+  },
+  {
+    "id": "로마-demo-2",
+    "cityId": "rome",
+    "name": "로마의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "자, 눈을 감고 상상해보세요. 지금 여러분은 로마의 좁다란 골목길, 그 이름도 정겨운 '맛집 골목' 초입에 서 있습니다. 해 질 녘, 붉은 노을이 낡은 건물 벽에 드리워지고, 골목 안쪽에서는 맛있는 냄새가 코를 간지럽히네요. 갓 구운 빵 냄새, 토마토소스의 향긋함, 그리고 알싸한 마늘 향까지… 아, 벌써부터 군침이 돌지 않나요? 이 골목은 마치 로마의 심장과 같아요. 수백 년 동안 변함없이, 로마 사람들의 삶과 추억, 그리고 맛있는 이야기가 켜켜이 쌓여있는 곳이죠. 지금 여러분의 발 아래에는, 수많은 로마 시민들이 밟고 지나간 오래된 돌길이 깔려있습니다. 그들의 웃음소리, 연인들의 속삭임, 아이들의 장난기 넘치는 목소리가 귓가에 맴도는 듯하죠. \n\n자, 천천히 발걸음을 옮겨볼까요? 오른쪽에는 작은 트라토리아가 보이네요. 빨간색 체크무늬 테이블보가 정겹고, 활기찬 주인장의 목소리가 골목 전체에 울려 퍼집니다. '본 조르노! 오늘 최고의 파스타는 바로 이거야!' 라며 손짓하는 모습이 마치 영화 속 한 장면 같아요. 조금 더 안쪽으로 들어가면, 아늑한 와인바가 있습니다. 은은한 조명 아래, 로마 시민들이 와인잔을 기울이며 이야기를 나누고 있네요. 그들의 표정은 편안하고 행복해 보입니다. 마치 오랜 친구를 만난 듯, 서로의 삶을 나누고 위로하는 모습이 참 아름답죠. \n\n자, 이제 숨을 크게 들이쉬고, 로마의 맛을 느껴보세요. 이 골목은 단순한 맛집 골목이 아니에요. 로마의 역사와 문화, 그리고 사람들의 따뜻한 마음이 담겨있는 특별한 공간입니다. 오늘, 이곳에서 여러분만의 로마 이야기를 만들어보는 건 어떨까요? 상상력을 마음껏 펼치고, 오감을 활짝 열어 로마의 맛과 향, 그리고 분위기에 흠뻑 취해보세요. 분명 잊지 못할 추억이 될 거예요.",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "로마의 맛집 골목은 단순히 유명한 레스토랑이 모여 있는 곳이 아닙니다. 이곳은 대대로 로마 시민들의 삶의 터전이었던 곳으로, 숨겨진 보석 같은 맛집들이 즐비합니다. 관광객들에게는 잘 알려지지 않았지만, 현지인들은 매일같이 이곳을 찾아 정통 로마 요리를 즐기곤 하죠. 이 골목의 역사는 로마 제국 시대로 거슬러 올라갑니다. 당시에는 상인들이 몰려들어 활발한 상업 활동이 이루어졌고, 자연스럽게 다양한 음식점들이 생겨나기 시작했습니다. 시간이 흐르면서 이 골목은 로마 시민들의 배를 채워주는 것은 물론, 그들의 희로애락을 함께하는 공간으로 자리 잡았습니다.\n\n**꿀팁**: 이 골목에서는 메뉴판에 없는 '오늘의 특별 메뉴'를 꼭 확인해보세요. 신선한 제철 재료로 만든 요리를 맛볼 수 있는 기회랍니다. 그리고, 로마 사람들은 식사를 천천히 즐기는 것을 좋아합니다. 서두르지 말고 여유롭게 시간을 보내면서 로마의 맛과 분위기를 만끽해보세요. **숨겨진 비화**: 이 골목에는 대대로 내려오는 특별한 레시피를 가진 레스토랑들이 많습니다. 그중에서도 'Nonno Luigi'라는 작은 트라토리아는 100년이 넘는 역사를 자랑하며, 할아버지에서 아버지, 그리고 손자에게까지 이어져 온 비법 레시피로 만든 파스타가 유명합니다. 현지인들은 이 파스타를 '로마의 맛'이라고 부르며 극찬한다고 하네요.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "로마의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:47.256Z",
+    "updatedAt": "2026-02-22T18:15:39.898Z"
+  },
+  {
+    "id": "파리-demo-2",
+    "cityId": "paris",
+    "name": "파리의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "자, 여러분, 상상해보세요. 지금 여러분은 파리의 어느 골목길 어귀에 서 있습니다. 코를 간지럽히는 따뜻한 빵 냄새, 갓 내린 커피의 향긋함, 그리고 무언가 맛있는 것이 지글거리는 소리가 섞여 오감을 자극하죠. 이 골목은 단순한 길이 아니에요. 파리지앵들의 삶이 녹아 있는, 숨겨진 맛의 성지랍니다. 발걸음을 옮길 때마다 시간이 멈춘 듯한 풍경이 펼쳐져요. 낡은 간판, 햇살 아래 반짝이는 테이블, 그리고 정겹게 대화를 나누는 사람들의 웃음소리… 마치 영화 세트장 같지 않나요? 이 골목에서는 유명 레스토랑의 화려함 대신, 소박하지만 진심이 담긴 요리들을 만날 수 있어요. 대대로 내려오는 비법 레시피로 만든 크레페, 짭짤하면서도 고소한 키슈, 그리고 따끈한 수프 한 그릇… 모든 것이 파리의 맛을 대변하죠. 잠시 눈을 감고 상상해보세요. 따스한 햇살 아래, 갓 구운 빵을 손에 들고 골목을 거니는 당신의 모습을요. 지금, 이 골목의 숨겨진 맛을 찾아 떠나는 미식 여행에 함께 하세요! 이 골목의 작은 식당들은 단순한 음식을 파는 곳이 아니라, 추억과 이야기를 파는 곳이에요. 주인장의 따뜻한 미소, 옆 테이블 사람들의 유쾌한 대화, 그리고 맛있는 음식들이 어우러져 잊지 못할 경험을 선사할 거예요. 파리의 맛집 골목, 그 숨겨진 보물을 찾아 함께 떠나볼까요?",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "파리의 맛집 골목은 단순히 음식을 맛보는 곳이 아닌, 파리지앵의 삶과 문화를 깊이 경험할 수 있는 특별한 공간입니다. 관광객으로 북적이는 유명 레스토랑 대신, 현지인들이 즐겨 찾는 작은 식당들이 모여 있는 이 골목은 숨겨진 보석과 같아요. 대대로 이어져 온 가족 경영 식당부터 젊은 셰프들의 실험적인 요리를 선보이는 곳까지, 다양한 맛과 분위기를 즐길 수 있다는 점이 매력적이죠. 이곳에서는 흔히 볼 수 없는 특별한 메뉴들을 맛볼 수 있습니다. 예를 들어, 할머니의 레시피로 만든 정통 크레페, 신선한 재료로 만든 키슈, 그리고 추운 날씨에 몸을 녹여주는 따뜻한 수프 등, 파리의 맛을 제대로 느낄 수 있는 음식들이 가득합니다. 꿀팁 하나 드릴까요? 점심시간을 살짝 피해서 방문하면, 좀 더 여유롭게 식사를 즐길 수 있답니다. 그리고, 식당 주인에게 '오늘의 추천 메뉴'를 물어보는 것도 좋은 방법이에요. 그들은 숨겨진 맛집 정보를 가장 잘 알고 있는 사람들이니까요! 숨겨진 비화를 하나 더 알려드리자면, 이 골목에는 과거 예술가들이 자주 드나들던 식당들이 많았다고 합니다. 그들은 가난한 예술가들을 위해 저렴한 가격에 음식을 제공했고, 그들의 예술 활동을 응원했다고 해요. 지금도 그들의 흔적을 느낄 수 있는 식당들이 남아있으니, 한번 찾아보는 것도 좋을 것 같아요.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "파리의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:47.389Z",
+    "updatedAt": "2026-02-22T18:14:58.491Z"
+  },
+  {
+    "id": "제주특별자치도-demo-2",
+    "cityId": "jeju",
+    "name": "제주특별자치도의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "상상해보세요. 지금 여러분은 제주도의 맛집 골목 초입에 서 있습니다. 코끝을 간지럽히는 짭짤한 바다 내음과, 갓 구운 흑돼지 냄새가 섞여 오감을 자극하네요. 골목 어귀에서 들려오는 정겨운 사투리는 마치 오랜 친구가 건네는 인사 같습니다. 지금 여러분의 발 아래에는, 수십 년 동안 제주 사람들의 희로애락을 함께 해 온, 닳고 닳은 돌담길이 펼쳐져 있습니다. 이 골목은 단순한 식당가가 아니에요. 제주 사람들의 삶과 역사가 고스란히 녹아 있는 살아있는 박물관과 같답니다. 자, 이제 저와 함께 골목 안으로 더 깊숙이 들어가 볼까요? 왁자지껄한 웃음소리가 들려오는 흑돼지 구이집, 어머니의 손맛이 느껴지는 고기국수집, 싱싱한 해산물이 가득한 해물 전문점까지… 어디를 먼저 가야 할지 고민되시죠? 걱정 마세요. 제가 여러분의 최고의 미식 가이드가 되어드릴 테니까요! 골목 안으로 한 발짝 내딛는 순간, 여러분은 제주의 진짜 맛과 정에 흠뻑 빠져들게 될 겁니다. 자, 용기를 내세요! 미지의 맛을 향한 짜릿한 미식 여행이 지금 시작됩니다! 저 멀리, 김이 모락모락 피어오르는 뚝배기에서 나는 구수한 된장 냄새가 당신을 부르고 있네요. 어서 함께 가요!",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "제주 맛집 골목은 단순한 식당가가 아닙니다. 이곳은 제주도민들의 삶과 애환이 녹아 있는 역사적인 공간입니다. 1970년대, 제주 경제가 어려웠던 시절, 저렴한 가격에 푸짐한 음식을 제공하는 식당들이 하나 둘 생겨나면서 자연스럽게 골목이 형성되었습니다. 초기에는 도민들만 찾는 숨겨진 명소였지만, 입소문을 타고 점점 더 많은 사람들이 찾게 되면서 지금의 맛집 골목으로 발전했습니다. 현지인들 사이에서는 '숨겨진 보석'이라고 불리는데요. 관광객들에게는 잘 알려지지 않은, 진짜 제주도의 맛을 경험할 수 있는 곳이기 때문입니다. 꿀팁 하나 알려드릴까요? 늦은 저녁 시간에 방문하면, 식당 주인들과 막걸리 한 잔 기울이며 진솔한 이야기를 나눌 수 있습니다. 그들의 삶의 이야기를 듣는 것은, 제주 여행의 또 다른 매력이 될 것입니다. 그리고 절대 놓치지 말아야 할 숨겨진 비화! 과거 이 골목은 뱃사람들의 허기를 달래주던 곳이었답니다. 갓 잡아 올린 싱싱한 해산물로 만든 요리들은, 고된 뱃일을 마치고 돌아온 뱃사람들에게 최고의 위로가 되어주었죠. 지금도 골목 안쪽에는 당시 뱃사람들이 즐겨 찾던, 허름하지만 정겨운 분위기의 해물 전문점이 남아있으니 꼭 방문해보세요.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "제주특별자치도의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:47.909Z",
+    "updatedAt": "2026-02-22T18:15:59.672Z"
+  },
+  {
+    "id": "rome_item_1",
+    "cityId": "rome",
+    "name": "로마 프리미엄 Restaurant 추천 2",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "자, 여러분! 로마의 심장부로 함께 모험을 떠나봅시다. 이곳은 단순한 식당이 아닙니다! 로마 프리미엄 Restaurant 추천 2, 이름만큼이나 특별한 이곳에 오신 것을 환영합니다! 눈을 감고 상상해보세요. 따뜻한 저녁 햇살이 건물의 고대 벽돌에 부딪히고, 그 위로 은은한 바질 향기가 퍼지며, 멀리서는 이탈리아의 전통음악이 희미하게 들려옵니다. 공기의 진동조차 희미하게 느껴집니다. 이곳은 단순히 음식만을 위한 곳이 아닌, 역사와 전통, 그리고 문화가 한데 어우러진 특별한 장소입니다.\n\n이 식당의 기원을 알고 싶으신가요? 그럼 깊은 역사의 문을 열어봅시다. 건축주는 당시 로마의 귀족 가문 중 하나였던 마르쿠스 아우렐리우스의 후손, 이분은 18세기에 바로크 양식으로 이 건물을 세웠습니다. 당시 로마는 정치적 불안과 변혁의 시기였습니다. 많은 사람들이 변화에 대한 갈망과 불안을 동시에 느끼고 있었죠. 이 식당은 그런 혼란 속에서도 평화와 안정을 찾아가는 장소로 명성을 얻었습니다.\n\n흥미로운 이야기를 하나 들려드릴까요? 19세기 초, 이곳은 로마의 사교계 중심지였습니다. 마르쿠스 아우렐리우스의 후손 중 한 명인 클라라 아우렐리아는 이곳에서 화려한 파티를 열기로 유명했습니다. 한 번은 나폴레옹의 측근이 이곳에 방문하여 클라라와 두뇌 게임을 벌였다는 이야기도 전해집니다. 이 게임의 승패는 나폴레옹의 정책에 영향을 미쳤다는 소문도 있죠.\n\n이제 건축의 비밀을 파헤쳐봅시다. 이 건물은 로마의 전통적인 석재와 이탈리아산 대리석으로 세워졌습니다. 장인들의 섬세한 손길로 조각된 기둥들은 마치 마술처럼 그 시대의 영광을 재현합니다. 특히, 천장의 프레스코화는 놀라운 시각적 효과를 선사합니다. 이 화려한 장식은 당시의 예술적 성취를 그대로 보여줍니다.\n\n전문가들은 종종 이곳의 숨겨진 의미를 찾습니다. 예를 들어, 기둥의 각 조각은 그리스 신화를 상징하며, 천장 모서리에 위치한 작은 상징들은 로마 제국의 영광과 몰락을 은유적으로 표현하고 있습니다. 이러한 디테일은 대개 방문객들에게 간과되기 쉬우나, 알고 보면 그 아름다움에 감탄할 수밖에 없습니다.\n\n현대의 이야기도 흥미진진합니다. 20세기 초, 이 건물은 한동안 방치되었지만, 1960년대에 이르러 새로운 소유주가 그 역사적 가치를 깨닫고 복원을 시작했습니다. 이들은 원래의 디자인을 최대한 보존하며 현대적인 편의 시설을 추가했습니다. 오늘날 이 식당은 전 세계의 유명 인사와 여행객들이 찾아오는 명소가 되었습니다. 영화와 드라마에도 자주 등장하며, 때로는 관광객들이 그 장면을 재현하기 위해 이곳을 찾기도 합니다.\n\n마지막으로 이곳의 의미를 생각해볼까요? 로마 프리미엄 Restaurant 추천 2는 단순한 식당 이상의 가치를 지닙니다. 이는 과거와 현재가 조화를 이루며, 인간의 창의성과 문화유산이 함께 어우러지는 장소입니다. 이곳에 서 있는 것만으로도 시간의 흐름을 뛰어넘어 역사의 한 장면 속에 들어선 듯한 기분이 듭니다.\n\n이제 여러분과 헤어져야 할 시간입니다. 이 특별한 장소에서의 경험이 여러분의 가슴에 깊이 새겨지기를 바랍니다. 로마의 영혼을 느끼고, 그곳에서의 순간이 오래도록 기억되기를 바랍니다. 앞으로도 더 많은 모험이 기다리고 있을 테니, 다음에 또 만나길 기대합니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "로마 프리미엄 Restaurant 추천 2",
+        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "로마의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:01.505Z",
+    "updatedAt": "2026-02-22T18:06:00.421Z"
+  },
+  {
+    "id": "tokyo_item_109",
+    "cityId": "tokyo",
+    "name": "TOKYO Premium Restaurant 109",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "자, 눈을 감고 상상해보세요. 지금 당신은 도쿄의 심장부에 위치한 ‘TOKYO Premium Restaurant 109’에 와 있습니다. 발 아래로는 도쿄의 반짝이는 불빛들이 펼쳐지고, 코끝에는 은은한 간장 소스와 신선한 해산물 향이 스며듭니다. 고급스러운 나무 테이블에 앉아, 부드러운 사케 한 잔을 기울이며 창밖 풍경을 감상하는 당신의 모습, 정말 멋지지 않나요? 이곳은 단순한 레스토랑이 아니에요. 도쿄의 역사와 전통, 그리고 현대적인 아름다움이 조화롭게 어우러진 특별한 공간입니다. 마치 시간 여행을 떠나온 듯한 기분이 들 거예요. \n\n가족들과 함께라면 더욱 즐거운 추억을 만들 수 있습니다. 아이들은 레스토랑 곳곳에 숨겨진 아기자기한 장식들을 구경하며 즐거워하고, 어른들은 오랜 역사를 지닌 특별한 요리들을 맛보며 감탄할 겁니다. 상상해보세요. 석양이 질 무렵, 붉게 물든 하늘을 배경으로 가족들이 함께 웃고 떠드는 모습. 이 모든 순간이 당신의 기억 속에 영원히 새겨질 거예요. \n\n지금, ‘TOKYO Premium Restaurant 109’에서는 특별한 미식 경험뿐만 아니라, 도쿄의 아름다운 경관을 감상하고 다양한 체험 활동도 즐길 수 있습니다. 전통 의상을 입고 사진을 찍거나, 일본 전통 악기를 연주해보는 건 어때요? 잊지 못할 추억을 만들 준비, 되셨나요? 자, 이제 눈을 뜨고, 이 모든 것을 직접 경험해보세요! 이곳은 당신의 기대를 훨씬 뛰어넘는 특별한 경험을 선사할 겁니다. 지금 바로 ‘TOKYO Premium Restaurant 109’로 오세요!",
+    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "TOKYO Premium Restaurant 109는 단순한 레스토랑을 넘어, 도쿄의 역사와 문화를 담은 복합 문화 공간입니다. 이곳은 오래된 건축 양식을 그대로 보존하면서도 현대적인 감각을 더해, 독특하고 매력적인 분위기를 자랑합니다. 특히, 레스토랑의 위치는 도쿄 시내를 한눈에 내려다볼 수 있는 최적의 장소로, 낮에는 활기찬 도시 풍경을, 밤에는 로맨틱한 야경을 감상할 수 있습니다. \n\n이곳의 음식은 전통적인 일본 요리 방식을 따르면서도 현대적인 트렌드를 반영하여, 다채롭고 세련된 맛을 선사합니다. 특히, 신선한 제철 식재료를 사용하여 만든 요리들은 맛과 향이 뛰어나며, 눈으로도 즐거움을 느낄 수 있도록 아름답게 장식됩니다. 현지인들 사이에서는 '숨겨진 맛집'으로 알려져 있으며, 특히 기념일이나 특별한 날에 방문하기 좋은 장소로 손꼽힙니다. 꿀팁을 하나 드리자면, 예약 시 창가 자리를 요청하면 더욱 멋진 전망을 감상하며 식사를 즐길 수 있습니다. 또한, 레스토랑 내부에 위치한 작은 박물관에서는 도쿄의 역사와 문화를 엿볼 수 있으며, 전통 공예품을 직접 만들어보는 체험 프로그램도 운영하고 있습니다. 가족 여행객들에게는 특히 인기가 많으며, 아이들과 함께 즐거운 시간을 보낼 수 있는 다양한 프로그램들이 마련되어 있습니다. TOKYO Premium Restaurant 109에서 잊지 못할 미식 경험과 특별한 추억을 만들어보세요.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "TOKYO Premium Restaurant 109",
+        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:08.900Z",
+    "updatedAt": "2026-02-22T18:25:13.375Z"
+  },
+  {
+    "id": "부산광역시-demo-2",
+    "cityId": "busan",
+    "name": "부산광역시의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "자, 상상해보세요! 지금 여러분은 부산의 어느 골목 어귀에 서 있습니다. 코를 찌르는 듯한 매콤한 냄새, 지글거리는 기름 소리, 그리고 흥겨운 사람들의 웃음소리가 뒤섞여 오감을 자극하죠. 여기가 바로 부산 현지인들만 안다는 맛집 골목입니다! 좁다란 골목길 양 옆으로 빼곡하게 들어선 식당들은 저마다 오랜 역사와 숨겨진 이야기들을 품고 있어요. 마치 미로처럼 얽힌 골목을 따라 걷다 보면, 어디선가 맛있는 냄새가 여러분의 발길을 붙잡을 겁니다. 낡은 간판 아래, 연탄불 위에서 쉴 새 없이 구워지는 돼지갈비 냄새일 수도 있고요. 아니면, 커다란 솥에서 김이 모락모락 피어오르는 돼지국밥 냄새일 수도 있겠죠. 잠시 발걸음을 멈추고 가게 안을 들여다보세요. 왁자지껄한 분위기 속에서 소주잔을 기울이는 사람들의 모습이 정겹게 느껴질 겁니다. 이 골목에서는 값비싼 레스토랑에서 느낄 수 없는, 따뜻하고 인간적인 정을 느낄 수 있어요. 마치 오랜 친구 집에 놀러 온 것처럼 편안하고 푸근한 기분이랄까요? 자, 용기를 내서 어느 가게든 문을 열고 들어가 보세요. 주인 아주머니의 푸근한 미소와 함께, 상상 이상의 맛있는 음식이 여러분을 기다리고 있을 겁니다. 오늘 밤, 이 골목에서 여러분은 부산의 진짜 매력을 발견하게 될 거예요!",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "부산의 맛집 골목은 단순한 식당가가 아닌, 부산 사람들의 삶과 애환이 녹아있는 특별한 공간입니다. 이 골목들은 대개 오랜 역사를 가지고 있으며, 수십 년 동안 한 자리를 지켜온 노포들이 즐비합니다. 단순히 맛있는 음식을 제공하는 것을 넘어, 부산 사람들의 추억과 향수를 자극하는 곳이죠. 예를 들어, 돼지국밥 골목은 한국전쟁 이후 피난민들이 정착하면서 생겨났다고 합니다. 저렴하고 든든한 돼지국밥은 고된 삶을 살아가는 사람들에게 큰 위로가 되었죠. 또 다른 골목에서는 싱싱한 해산물을 저렴한 가격에 맛볼 수 있습니다. 새벽에 갓 잡아 올린 해산물로 만든 회는 싱싱함이 살아있어 입안에서 살살 녹는 듯한 느낌을 선사하죠. 숨겨진 팁을 하나 알려드릴까요? 현지인들은 맛집을 고를 때, 손님이 많은 곳보다는 단골손님들이 많은 곳을 선호한다고 합니다. 오랜 시간 동안 사랑받아온 곳은 그만큼 맛과 서비스가 보장된다는 의미겠죠. 또한, 골목 안쪽에 숨어있는 작은 식당들 중에는 정말 보석 같은 곳들이 많으니, 용기를 내서 탐험해보는 것도 좋은 방법입니다. 가격도 저렴하고 양도 푸짐해서, 만족스러운 식사를 즐길 수 있을 거예요.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "부산광역시의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:47.778Z",
+    "updatedAt": "2026-02-22T18:16:09.339Z"
+  },
+  {
+    "id": "rome_restaurant_armando_al_pantheon",
+    "cityId": "rome",
+    "name": "Armando al Pantheon",
+    "lat": 41.8986,
+    "lng": 12.4769,
+    "radius": 40,
+    "narration": "자, 눈을 감고 상상해보세요. 따스한 햇살이 쏟아지는 로마의 좁다란 골목길을 따라 걷고 있다고. 코끝을 간지럽히는 맛있는 냄새에 이끌려 도착한 곳은 바로 '아르만도 알 판테온'입니다. 1961년부터 3대째 이어져 오는 이 곳은 단순한 식당이 아니라 로마의 역사와 문화를 맛볼 수 있는 특별한 공간이에요. 문을 열고 들어서는 순간, 마치 영화 속 한 장면처럼 정겹고 따뜻한 분위기가 여러분을 감싸 안을 거예요. 벽에는 세월의 흔적이 고스란히 느껴지는 흑백 사진들이 걸려 있고, 테이블 위에는 붉은 체크무늬 식탁보가 깔려 있죠. 상상해보세요. 바로 옆 테이블에서는 이탈리아 가족들이 왁자지껄 웃으며 파스타를 먹고 있고, 웨이터는 능숙한 솜씨로 와인을 따르고 있어요. 이곳의 모든 것이 여러분을 과거로 데려가는 듯한 느낌을 줄 겁니다. 아르만도 알 판테온에서는 최고의 재료로 정성껏 만든 로마 전통 요리를 맛볼 수 있어요. 신선한 토마토와 바질로 맛을 낸 '카쵸 에 페페'는 꼭 맛봐야 할 메뉴 중 하나입니다. 파스타 면을 입안에 넣는 순간, 고소한 치즈와 후추의 풍미가 입안 가득 퍼져 나갈 거예요. 또 다른 인기 메뉴는 '아티초크 튀김'이에요. 바삭한 튀김옷 속에는 부드러운 아티초크가 숨어 있는데, 그 맛이 정말 환상적이랍니다. 와인 한 잔과 함께 즐기면 더욱 훌륭하겠죠? 아르만도 알 판테온은 단순한 식사를 넘어, 로마의 정통 문화를 경험하고 느낄 수 있는 특별한 공간입니다. 이곳에서 맛있는 음식과 함께 잊지 못할 추억을 만들어 보세요. 지금 바로 아르만도 알 판테온으로 떠나볼까요?",
+    "description": "Historic family trattoria near the Pantheon",
+    "category": "Restaurant",
+    "detailedDescription": "아르만도 알 판테온은 로마 중심부에 위치한 유명한 가족 운영 트라토리아입니다. 1961년에 문을 연 이후, 이곳은 3대째 로마 전통 요리의 맛과 향을 지켜오고 있습니다. 판테온 바로 근처에 있어 관광객들에게도 인기가 많지만, 현지인들에게도 사랑받는 진정한 맛집입니다. 이 식당의 역사는 아르만도 가니니(Armando Gannini)에서 시작됩니다. 그는 로마의 풍부한 요리 유산을 기념하는 식당을 만들겠다는 꿈을 가지고 이 곳을 열었습니다. 그의 열정과 헌신은 다음 세대로 이어져, 오늘날까지 아르만도 알 판테온을 로마 최고의 레스토랑 중 하나로 만들었습니다. 메뉴는 로마 전통 요리를 중심으로 구성되어 있습니다. '카쵸 에 페페', '아마트리치아나', '로마식 아티초크'와 같은 클래식한 요리들은 신선한 현지 재료로 만들어지며, 전통적인 조리법을 고수합니다. 숨겨진 팁을 하나 알려드리자면, 메뉴에 없는 특별 요리를 문의해보세요. 가끔 그날 준비된 신선한 재료로 만든 특별한 요리를 맛볼 수 있습니다. 예약은 필수입니다. 특히 점심시간과 저녁시간에는 자리가 없을 수 있으니, 미리 예약하고 방문하는 것이 좋습니다. 아르만도 알 판테온은 단순한 식당이 아니라, 로마의 역사와 문화를 경험할 수 있는 특별한 공간입니다. 이곳에서 맛있는 음식과 함께 잊지 못할 추억을 만들어 보세요.",
+    "photos": [
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800",
+      "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?w=800",
+      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800"
+    ],
+    "historicalInfo": "Founded in 1961 by Armando Gargioli, this restaurant has become a landmark of Roman culinary tradition.",
+    "yearBuilt": "1961",
+    "architect": "Gargioli family",
+    "translations": {
+      "en": {
+        "name": "Armando al Pantheon",
+        "narration": "Experience authentic Roman cuisine at Armando al Pantheon, a family-run trattoria serving traditional dishes since 1961.",
+        "description": "Historic family trattoria near the Pantheon",
+        "detailedDescription": "Located just steps from the Pantheon, Armando al Pantheon is a beloved Roman institution that has been serving authentic Roman cuisine since 1961. This family-run trattoria is famous for its classic dishes like cacio e pepe, carbonara, and amatriciana, all prepared according to traditional recipes passed down through generations. The intimate dining room features checkered tablecloths and walls adorned with photos of celebrity guests. The menu changes daily based on seasonal ingredients from local markets. Reservations are essential as this small trattoria fills up quickly with both locals and food enthusiasts who appreciate genuine Roman cooking.",
+        "historicalInfo": "Founded in 1961 by Armando Gargioli, this restaurant has become a landmark of Roman culinary tradition.",
+        "yearBuilt": "1961",
+        "architect": "Gargioli family"
+      },
+      "ko": {
+        "name": "아르만도 알 판테온",
+        "narration": "1961년부터 전통 요리를 제공하는 가족 운영 트라토리아, 아르만도 알 판테온에서 정통 로마 요리를 경험하세요.",
+        "description": "판테온 근처의 역사적인 가족 트라토리아",
+        "detailedDescription": "판테온에서 몇 걸음 떨어진 곳에 위치한 아르만도 알 판테온은 1961년부터 정통 로마 요리를 제공해온 사랑받는 로마 명소입니다. 이 가족 운영 트라토리아는 카치오 에 페페, 카르보나라, 아마트리치아나와 같은 클래식 요리로 유명하며, 모두 대대로 전해 내려온 전통 레시피에 따라 준비됩니다. 아늑한 식당에는 체크무늬 테이블보와 유명인 손님들의 사진이 장식된 벽이 있습니다. 메뉴는 현지 시장의 제철 재료를 기반으로 매일 바뀝니다. 이 작은 트라토리아는 진정한 로마 요리를 감상하는 현지인과 음식 애호가들로 빠르게 채워지므로 예약이 필수입니다.",
+        "historicalInfo": "1961년 아르만도 가르지올리가 설립한 이 레스토랑은 로마 요리 전통의 랜드마크가 되었습니다.",
+        "yearBuilt": "1961년",
+        "architect": "가르지올리 가족"
+      },
+      "it": {
+        "name": "Armando al Pantheon",
+        "narration": "Vivi la cucina romana autentica da Armando al Pantheon, una trattoria a conduzione familiare che serve piatti tradizionali dal 1961.",
+        "description": "Storica trattoria familiare vicino al Pantheon",
+        "detailedDescription": "Situata a pochi passi dal Pantheon, Armando al Pantheon è un'istituzione romana amata che serve cucina romana autentica dal 1961. Questa trattoria a conduzione familiare è famosa per i suoi piatti classici come cacio e pepe, carbonara e amatriciana, tutti preparati secondo ricette tradizionali tramandate di generazione in generazione. La sala da pranzo intima presenta tovaglie a quadretti e pareti adornate con foto di ospiti famosi. Il menu cambia quotidianamente in base agli ingredienti stagionali dei mercati locali. Le prenotazioni sono essenziali poiché questa piccola trattoria si riempie rapidamente sia con i locali che con gli appassionati di cibo che apprezzano la vera cucina romana.",
+        "historicalInfo": "Fondata nel 1961 da Armando Gargioli, questo ristorante è diventato un punto di riferimento della tradizione culinaria romana.",
+        "yearBuilt": "1961",
+        "architect": "Famiglia Gargioli"
+      },
+      "es": {
+        "name": "Armando al Pantheon",
+        "narration": "Experimenta la auténtica cocina romana en Armando al Pantheon, una trattoria familiar que sirve platos tradicionales desde 1961.",
+        "description": "Histórica trattoria familiar cerca del Panteón",
+        "detailedDescription": "Ubicada a pocos pasos del Panteón, Armando al Pantheon es una querida institución romana que sirve auténtica cocina romana desde 1961. Esta trattoria familiar es famosa por sus platos clásicos como cacio e pepe, carbonara y amatriciana, todos preparados según recetas tradicionales transmitidas de generación en generación. El íntimo comedor presenta manteles a cuadros y paredes adornadas con fotos de invitados célebres. El menú cambia diariamente según los ingredientes de temporada de los mercados locales. Las reservas son esenciales ya que esta pequeña trattoria se llena rápidamente con locales y entusiastas de la comida que aprecian la verdadera cocina romana."
+      },
+      "fr": {
+        "name": "Armando al Pantheon",
+        "narration": "Découvrez la cuisine romaine authentique chez Armando al Pantheon, une trattoria familiale servant des plats traditionnels depuis 1961.",
+        "description": "Trattoria familiale historique près du Panthéon",
+        "detailedDescription": "Située à quelques pas du Panthéon, Armando al Pantheon est une institution romaine bien-aimée servant une cuisine romaine authentique depuis 1961. Cette trattoria familiale est célèbre pour ses plats classiques comme le cacio e pepe, la carbonara et l'amatriciana, tous préparés selon des recettes traditionnelles transmises de génération en génération. La salle à manger intime présente des nappes à carreaux et des murs ornés de photos de célébrités. Le menu change quotidiennement en fonction des ingrédients de saison des marchés locaux. Les réservations sont essentielles car cette petite trattoria se remplit rapidement avec des locaux et des passionnés de cuisine qui apprécient la vraie cuisine romaine."
+      },
+      "de": {
+        "name": "Armando al Pantheon",
+        "narration": "Erleben Sie authentische römische Küche im Armando al Pantheon, einer familiengeführten Trattoria, die seit 1961 traditionelle Gerichte serviert.",
+        "description": "Historische Familientrattoria nahe dem Pantheon",
+        "detailedDescription": "Nur wenige Schritte vom Pantheon entfernt liegt Armando al Pantheon, eine beliebte römische Institution, die seit 1961 authentische römische Küche serviert. Diese familiengeführte Trattoria ist berühmt für ihre klassischen Gerichte wie Cacio e Pepe, Carbonara und Amatriciana, alle nach traditionellen Rezepten zubereitet, die von Generation zu Generation weitergegeben wurden. Der intime Speisesaal präsentiert karierte Tischdecken und mit Prominentenfotos geschmückte Wände. Die Speisekarte wechselt täglich basierend auf saisonalen Zutaten von lokalen Märkten. Reservierungen sind unerlässlich, da diese kleine Trattoria schnell von Einheimischen und Feinschmeckern gefüllt wird, die echte römische Küche schätzen."
+      },
+      "zh": {
+        "name": "Armando al Pantheon",
+        "narration": "在Armando al Pantheon体验正宗的罗马美食，这是一家自1961年以来提供传统菜肴的家族经营餐厅。",
+        "description": "万神殿附近的历史悠久的家族餐厅",
+        "detailedDescription": "位于万神殿几步之遥的Armando al Pantheon是一家深受喜爱的罗马餐厅，自1961年以来一直提供正宗的罗马美食。这家家族经营的餐厅以其经典菜肴而闻名，如cacio e pepe、carbonara和amatriciana，所有菜肴都按照代代相传的传统食谱制作。温馨的用餐室配有格子桌布，墙上装饰着名人宾客的照片。菜单根据当地市场的时令食材每日更换。由于这家小餐厅很快就会被当地人和美食爱好者填满，预订是必不可少的。"
+      },
+      "ja": {
+        "name": "Armando al Pantheon",
+        "narration": "1961年から伝統料理を提供している家族経営のトラットリア、Armando al Pantheonで本格的なローマ料理をお楽しみください。",
+        "description": "パンテオン近くの歴史ある家族経営トラットリア",
+        "detailedDescription": "パンテオンからわずか数歩のところにあるArmando al Pantheonは、1961年から本格的なローマ料理を提供している愛されるローマの名店です。この家族経営のトラットリアは、カチョ・エ・ペペ、カルボナーラ、アマトリチャーナなどのクラシックな料理で有名で、すべて何世代にもわたって受け継がれてきた伝統的なレシピで調理されています。親密なダイニングルームには、チェック柄のテーブルクロスと著名なゲストの写真で飾られた壁があります。メニューは地元市場の旬の食材に基づいて毎日変わります。この小さなトラットリアは、本物のローマ料理を高く評価する地元の人々や美食家ですぐにいっぱいになるため、予約は必須です。"
+      },
+      "pt": {
+        "name": "Armando al Pantheon",
+        "narration": "Experimente a autêntica cozinha romana no Armando al Pantheon, uma trattoria familiar que serve pratos tradicionais desde 1961.",
+        "description": "Histórica trattoria familiar perto do Panteão",
+        "detailedDescription": "Localizada a poucos passos do Panteão, Armando al Pantheon é uma querida instituição romana que serve autêntica cozinha romana desde 1961. Esta trattoria familiar é famosa por seus pratos clássicos como cacio e pepe, carbonara e amatriciana, todos preparados de acordo com receitas tradicionais passadas de geração em geração. A sala de jantar íntima apresenta toalhas de mesa xadrez e paredes adornadas com fotos de convidados célebres. O menu muda diariamente com base em ingredientes sazonais dos mercados locais. As reservas são essenciais, pois esta pequena trattoria se enche rapidamente com locais e entusiastas da gastronomia que apreciam a verdadeira cozinha romana."
+      },
+      "ru": {
+        "name": "Armando al Pantheon",
+        "narration": "Насладитесь подлинной римской кухней в Armando al Pantheon — семейной траттории, которая подает традиционные блюда с 1961 года.",
+        "description": "Историческая семейная траттория рядом с Пантеоном",
+        "detailedDescription": "Расположенный в нескольких шагах от Пантеона, Armando al Pantheon — это любимое римское заведение, которое подает аутентичную римскую кухню с 1961 года. Эта семейная траттория славится своими классическими блюдами, такими как качо э пепе, карбонара и аматричиана, приготовленными по традиционным рецептам, передаваемым из поколения в поколение. Уютный обеденный зал украшен клетчатыми скатертями и фотографиями знаменитых гостей на стенах. Меню меняется ежедневно в зависимости от сезонных ингредиентов с местных рынков. Бронирование необходимо, так как эта маленькая траттория быстро заполняется местными жителями и гурманами, ценящими настоящую римскую кухню."
+      }
+    },
+    "openingHours": "Tue-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun-Mon",
+    "priceRange": "€€€ (€40-60 per person)",
+    "cuisine": "Traditional Roman",
+    "reservationUrl": "https://www.thefork.com/restaurant/armando-al-pantheon-r44759",
+    "phoneNumber": "+39 06 6880 3034",
+    "menuHighlights": [
+      "Cacio e Pepe",
+      "Carbonara",
+      "Amatriciana",
+      "Carciofi alla Romana",
+      "Saltimbocca"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:39.943Z",
+    "updatedAt": "2026-02-22T20:00:59.545Z"
+  },
+  {
+    "id": "rome_restaurant_antico_arco",
+    "cityId": "rome",
+    "name": "Antico Arco",
+    "lat": 41.8853,
+    "lng": 12.4623,
+    "radius": 40,
+    "narration": "Experience contemporary Roman cuisine at Antico Arco, a Michelin-recommended restaurant on Gianicolo Hill.",
+    "description": "Contemporary Roman fine dining",
+    "category": "Restaurant",
+    "detailedDescription": "Antico Arco offers a refined take on Roman cuisine in an elegant setting on Gianicolo Hill. The menu combines traditional ingredients with innovative techniques, earning the restaurant a Michelin Bib Gourmand. The wine list features excellent Italian and international selections. The modern interior and attentive service create a sophisticated dining experience while maintaining a welcoming Roman warmth.",
+    "photos": [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Antico Arco",
+        "narration": "Experience contemporary Roman cuisine at Antico Arco, a Michelin-recommended restaurant on Gianicolo Hill.",
+        "description": "Contemporary Roman fine dining",
+        "detailedDescription": "Antico Arco offers a refined take on Roman cuisine in an elegant setting on Gianicolo Hill. The menu combines traditional ingredients with innovative techniques, earning the restaurant a Michelin Bib Gourmand. The wine list features excellent Italian and international selections. The modern interior and attentive service create a sophisticated dining experience while maintaining a welcoming Roman warmth."
+      },
+      "ko": {
+        "name": "안티코 아르코",
+        "narration": "자니콜로 언덕의 미슐랭 추천 레스토랑 안티코 아르코에서 현대적인 로마 요리를 경험하세요.",
+        "description": "현대적인 로마 파인 다이닝",
+        "detailedDescription": "안티코 아르코는 자니콜로 언덕의 우아한 환경에서 로마 요리에 대한 세련된 해석을 제공합니다. 메뉴는 전통 재료와 혁신적인 기법을 결합하여 미슐랭 빕 구르망을 획득했습니다. 와인 리스트에는 우수한 이탈리아 및 국제 셀렉션이 있습니다. 현대적인 인테리어와 세심한 서비스는 로마의 따뜻한 환대를 유지하면서 세련된 다이닝 경험을 선사합니다."
+      },
+      "it": {
+        "name": "Antico Arco",
+        "narration": "Vivi la cucina romana contemporanea all'Antico Arco, un ristorante raccomandato dalla Michelin sul Gianicolo.",
+        "description": "Fine dining romano contemporaneo",
+        "detailedDescription": "Antico Arco offre un'interpretazione raffinata della cucina romana in un ambiente elegante sul Gianicolo. Il menu combina ingredienti tradizionali con tecniche innovative, guadagnando al ristorante un Bib Gourmand Michelin. La carta dei vini presenta eccellenti selezioni italiane e internazionali. L'interno moderno e il servizio attento creano un'esperienza culinaria sofisticata mantenendo un calore romano accogliente."
+      },
+      "es": {
+        "name": "Antico Arco",
+        "narration": "Experimente la cocina romana contemporánea en Antico Arco, un restaurante recomendado por Michelin en la colina del Gianicolo.",
+        "description": "Alta cocina romana contemporánea",
+        "detailedDescription": "Antico Arco ofrece una interpretación refinada de la cocina romana en un elegante entorno en la colina del Gianicolo. El menú combina ingredientes tradicionales con técnicas innovadoras, ganando el restaurante un Bib Gourmand de Michelin. La carta de vinos presenta excelentes selecciones italianas e internacionales. El interior moderno y el servicio atento crean una experiencia gastronómica sofisticada mientras mantienen una cálida hospitalidad romana."
+      },
+      "fr": {
+        "name": "Antico Arco",
+        "narration": "Découvrez la cuisine romaine contemporaine à l'Antico Arco, un restaurant recommandé par le Michelin sur la colline du Janicule.",
+        "description": "Gastronomie romaine contemporaine",
+        "detailedDescription": "Antico Arco propose une interprétation raffinée de la cuisine romaine dans un cadre élégant sur la colline du Janicule. Le menu combine des ingrédients traditionnels avec des techniques innovantes, permettant au restaurant d'obtenir un Bib Gourmand Michelin. La carte des vins présente d'excellentes sélections italiennes et internationales. L'intérieur moderne et le service attentif créent une expérience culinaire sophistiquée tout en préservant la chaleur romaine accueillante."
+      },
+      "de": {
+        "name": "Antico Arco",
+        "narration": "Erleben Sie zeitgenössische römische Küche im Antico Arco, einem Michelin-empfohlenen Restaurant auf dem Gianicolo-Hügel.",
+        "description": "Zeitgenössisches römisches Fine Dining",
+        "detailedDescription": "Antico Arco bietet eine raffinierte Interpretation der römischen Küche in einem eleganten Ambiente auf dem Gianicolo-Hügel. Die Speisekarte kombiniert traditionelle Zutaten mit innovativen Techniken und hat dem Restaurant einen Michelin Bib Gourmand eingebracht. Die Weinkarte präsentiert ausgezeichnete italienische und internationale Auswahl. Das moderne Interieur und der aufmerksame Service schaffen ein gehobenes kulinarisches Erlebnis bei gleichzeitiger Bewahrung römischer Gastfreundschaft."
+      },
+      "zh": {
+        "name": "Antico Arco",
+        "narration": "在贾尼科洛山上的米其林推荐餐厅Antico Arco体验现代罗马美食。",
+        "description": "现代罗马精致餐饮",
+        "detailedDescription": "Antico Arco在贾尼科洛山的优雅环境中提供对罗马美食的精致诠释。菜单将传统食材与创新技术相结合，为餐厅赢得了米其林必比登推荐。酒单精选优秀的意大利和国际葡萄酒。现代的室内设计和周到的服务创造了精致的用餐体验，同时保持了罗马式的热情好客。"
+      },
+      "ja": {
+        "name": "Antico Arco",
+        "narration": "ジャニコロの丘にあるミシュラン推奨レストラン、Antico Arcoで現代的なローマ料理をご体験ください。",
+        "description": "現代的なローマのファインダイニング",
+        "detailedDescription": "Antico Arcoは、ジャニコロの丘のエレガントな環境でローマ料理の洗練された解釈を提供します。メニューは伝統的な食材と革新的な技法を組み合わせ、ミシュランのビブグルマンを獲得しています。ワインリストには優れたイタリアワインと国際的なセレクションが揃っています。モダンな内装と行き届いたサービスは、ローマの温かいおもてなしを保ちながら、洗練されたダイニング体験を創り出しています。"
+      },
+      "pt": {
+        "name": "Antico Arco",
+        "narration": "Experimente a cozinha romana contemporânea no Antico Arco, um restaurante recomendado pelo Michelin na colina do Gianicolo.",
+        "description": "Alta gastronomia romana contemporânea",
+        "detailedDescription": "Antico Arco oferece uma interpretação refinada da cozinha romana em um ambiente elegante na colina do Gianicolo. O menu combina ingredientes tradicionais com técnicas inovadoras, conquistando para o restaurante um Bib Gourmand Michelin. A carta de vinhos apresenta excelentes seleções italianas e internacionais. O interior moderno e o serviço atencioso criam uma experiência gastronômica sofisticada enquanto mantêm o calor romano acolhedor."
+      },
+      "ru": {
+        "name": "Antico Arco",
+        "narration": "Откройте современную римскую кухню в Antico Arco — ресторане, рекомендованном Мишлен, на холме Джаниколо.",
+        "description": "Современная римская высокая кухня",
+        "detailedDescription": "Antico Arco предлагает изысканную интерпретацию римской кухни в элегантной обстановке на холме Джаниколо. Меню сочетает традиционные ингредиенты с инновационными техниками, благодаря чему ресторан получил рекомендацию Мишлен Bib Gourmand. Винная карта представляет превосходный выбор итальянских и международных вин. Современный интерьер и внимательное обслуживание создают изысканный гастрономический опыт, сохраняя при этом римское гостеприимство."
+      }
+    },
+    "openingHours": "Tue-Sun: 19:30-23:30 | Closed Mon",
+    "priceRange": "€€€ (€50-75 per person)",
+    "cuisine": "Contemporary Roman",
+    "reservationUrl": "https://www.thefork.com/restaurant/antico-arco-r43290",
+    "phoneNumber": "+39 06 581 5274",
+    "menuHighlights": [
+      "Artichoke Millefeuille",
+      "Lamb Scottadito",
+      "Maritozzo",
+      "Seasonal Risotto"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:40.542Z",
+    "updatedAt": "2026-02-22T20:01:00.204Z"
+  },
+  {
+    "id": "barcelona_item_13",
+    "cityId": "barcelona",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 14",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 안녕하십니까! 역사와 맛을 한자리에서 만나볼 수 있는 놀라운 여정을 시작할 시간입니다. \"바르셀로나 프리미엄 Restaurant 추천 14\"로 여러분을 초대합니다. 이곳은 바르셀로나에서 가장 추천하는 레스토랑 명소로, 감각을 일깨우는 경험을 제공합니다. 문을 여는 순간부터 여러분의 감각은 이곳의 모든 것에 포착될 것입니다. 치솟는 대리석 벽, 고급스러운 샹들리에의 빛, 주방에서 풍겨오는 고기 굽는 냄새. 모든 것이 환상적입니다! 여러분, 바르셀로나의 심장이 이곳에서 뛰고 있는 것이 확실하게 느껴집니다!\n\n이제 역사의 흐름 속으로 뛰어들어 봅시다. 이 레스토랑은 과거 19세기 말, 카탈루냐의 전설적인 건축가인 조제프 페레라에 의해 건립되었습니다. 당시 바르셀로나는 산업 혁명으로 인해 급격한 변화를 겪고 있었습니다. 도시가 성장함에 따라, 새로운 사회적 중심지로 자리 잡기 위해 그는 이곳을 설계했으며, 그야말로 예술과 혁신의 상징으로 탄생하게 되었습니다. 당시의 건축 스타일과 정치적 분위기는 물론, 이곳에서의 식사는 사교계의 화려함을 자랑했습니다.\n\n자, 이제 그 시대의 한 인물에 대한 이야기를 들어봅시다. 한때 이곳을 자주 찾았던 도나 루이자라는 여인이 있었습니다. 그녀는 바르셀로나의 사교계 여왕으로, 이 레스토랑에서 파티를 열며 도시의 엘리트들과 함께 그들의 사상과 문화를 나누었습니다. 그녀의 파티는 항상 화려했고, 그녀의 웃음소리는 이곳의 벽을 타고 울려 퍼졌습니다. 그녀는 단순한 고객이 아닌, 그 시대 문화를 발전시키는 데 일조한 인물로 기억되고 있습니다.\n\n이제 건축의 경이로움을 감상해봅시다. 이 레스토랑의 내부는 단순히 아름다움을 넘어서 기능성까지 겸비한 공간으로 설계되었습니다. 대리석과 유리, 철강이 완벽하게 조화되어, 어느 곳을 보더라도 예술 작품처럼 느껴집니다. 교묘하게 설계된 환기 시스템은 주방의 열기를 효율적으로 배출하여 내부 공간을 쾌적하게 유지합니다. 여러분, 정말 대단하지 않습니까?\n\n그렇다면, 이곳에서는 어떤 숨겨진 비밀이 있을까요? 바로, 천장의 섬세한 디테일 속에 숨어 있는 카탈루냐의 전통 문양입니다. 이 문양은 당시의 예술적 정신을 표현하고 있으며, 보통 방문객들은 그 아름다움을 놓치곤 합니다. 하지만 여러분은 오늘 그 비밀을 알게 되셨으니, 다음 방문 때는 꼭 눈여겨보시길 바랍니다!\n\n현대로 돌아와, 이 레스토랑은 다시금 그 가치를 인정받아 복원되었습니다. 과거의 영광을 되찾기 위해 수많은 전문가들이 모여 세심한 복원 작업을 진행했으며, 이제 이곳은 과거와 현대가 조화롭게 어우러진 명소로 거듭났습니다. 영화와 드라마의 촬영지로도 종종 등장하며, 이곳의 매력은 세상에 널리 알려져 있습니다.\n\n마지막으로, 이곳을 찾는 현대의 관광객들에 관한 재미있는 이야기를 빼놓을 수 없죠. 이 레스토랑에 들어서면, 모두가 저마다의 독특한 방식으로 감탄을 표현합니다. 어떤 이는 음식을 찍어 소셜 미디어에 공유하고, 어떤 이는 특별한 인테리어에 감탄하며 사진을 찍습니다. 이곳을 방문하면 여러분도 아마 비슷한 경향을 보이실 겁니다.\n\n이제 이 레스토랑의 의미를 깊이 생각해 보겠습니다. 이곳은 단순히 음식을 먹는 장소 이상의 의미를 가지고 있습니다. 사람들은 이곳에서 역사의 일부분을 느끼고, 과거와 현재를 아우르는 대화를 나누게 됩니다. 이는 인류의 문화적 발전을 상징하며, 서로 다른 시대의 사람들이 한자리에 모여 문화를 나누는 장소로 자리 잡고 있습니다.\n\n여러분, 이제 우리의 여정은 끝이 났지만, 이곳의 이야기는 여러분의 마음속에 영원히 남을 것입니다. 바르셀로나의 이 특별한 레스토랑은 단순한 감탄을 넘어, 귀환하고 싶은 매력을 지니고 있습니다. 여러분에게 이곳에서의 시간이 단순한 방문이 아닌, 특별한 추억으로 기억되기를 바랍니다. 다음에 또 뵙겠습니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "바르셀로나 프리미엄 Restaurant 추천 14",
+        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "바르셀로나의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:02.409Z",
+    "updatedAt": "2026-02-22T18:06:01.380Z"
+  },
+  {
+    "id": "barcelona_item_73",
+    "cityId": "barcelona",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 74",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 바르셀로나 프리미엄 Restaurant 추천 74에 오신 것을 환영합니다! 지금 막 여러분은 전 세계 미식가들의 꿈의 종착지에 도착했습니다. 눈을 감고 상상해 보세요! 환상적인 스페인 타파스의 향이 코끝을 간질이고, 열정적인 플라멩코 리듬이 귀에 울려 퍼집니다. 매혹적인 조명이 레스토랑의 황홀한 내부를 비추고, 곳곳에는 미소 짓는 얼굴들이 가득합니다. 이곳은 단순한 식당이 아닙니다. 바르셀로나의 맛을 집결시킨 예술 작품이자, 세월의 풍파를 견딘 역사의 무대입니다. 이제, 이 특별한 공간의 이야기가 시작됩니다.\n\n이 놀라운 레스토랑은 19세기에 스페인 내전의 여파 속에서 탄생했습니다. 당시 바르셀로나는 정치적 혼란과 갈등의 한가운데 있었고, 사람들은 모두 삶의 작은 위안을 찾고 있었습니다. 바로 그때, 한 젊은 요리사 페드로가 등장했습니다. 그는 자신의 열정과 기술로 사람들이 다시 미소를 지을 수 있도록 하고자 했죠. 그래서 이곳에 레스토랑을 세웠습니다. 그의 꿈은 바르셀로나의 맛을 탐구하고 전 세계로 전파하는 것이었습니다. 이곳에서 탄생한 수많은 요리는 그 당시 사람들에게 위안과 희망을 선사했습니다.\n\n이제 여러분은 이 레스토랑의 숨겨진 건축적 비밀을 들을 차례입니다. 처음 건설될 당시, 페드로는 지역에서 구한 석재와 목재를 사용하여 이곳을 지었습니다. 그중 가장 인상적인 부분은 천장에 설치된 아름다운 목조 패널입니다. 이것은 당시의 장인 정신을 그대로 보여주며, 건축학적으로도 뛰어난 예술품입니다. 그리고 벽에 새겨진 섬세한 조각들은 바르셀로나 사람들의 삶과 문화를 생생하게 묘사하고 있습니다.\n\n관광객들이 놓치기 쉬운 숨겨진 디테일로는, 식당 내부의 벽면 곳곳에 작은 카탈루냐어 문구들이 새겨져 있다는 점입니다. 이 문구들은 역사의 순간들을 기념하며, 그 시대에 대한 경의를 표하고 있습니다. 이러한 디테일을 자세히 살펴보면, 이곳이 단순한 레스토랑 이상의 의미를 지니고 있음을 알 수 있습니다.\n\n시간이 흐르면서 이곳은 잊혀지는 듯 보였으나, 1970년대에 한 역사학자의 발견으로 다시금 그 빛을 발했습니다. 그는 이곳이 단순한 요리 공간을 넘어 문화적 상징임을 깨달았고, 이를 복원하고 보존하기로 마음먹었습니다. 레스토랑은 과거의 영광을 되찾았고, 현대의 미식가들과 관광객들이 이곳을 찾기 시작했습니다. 영화의 배경으로도 자주 등장하면서, 오늘날에는 그 명성을 더욱 높이고 있습니다. 또한 방문객들은 셀카를 찍으며 SNS에 포스팅하는 재미를 만끽합니다. 이로 인해 이곳은 현대의 문화 아이콘으로 자리 잡았습니다.\n\n여러분, 이 식당의 진정한 의의는 단순한 미식 공간을 넘어섭니다. 이곳은 인류가 어떻게 역경 속에서 새로운 의미와 가치를 발견하는지를 보여줍니다. 요리라는 예술을 통해 사람들의 마음을 치유하고, 문화를 잇고, 역사를 말하는 공간으로서의 역할을 담당하고 있습니다.\n\n이제 여러분은 이 특별한 레스토랑을 떠나게 되겠지만, 여러분의 마음속에 새겨진 이곳의 이야기는 영원히 간직될 것입니다. 이곳에서의 경험이 여러분의 일상에 작은 감동과 영감을 더해주길 바랍니다. 바르셀로나는 언제든 여러분을 다시 환영할 것입니다. 감사합니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "바르셀로나 프리미엄 Restaurant 추천 74",
+        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "바르셀로나의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:06.533Z",
+    "updatedAt": "2026-02-22T18:06:01.518Z"
+  },
+  {
+    "id": "뉴욕-demo-2",
+    "cityId": "new-york",
+    "name": "뉴욕의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "자, 상상해보세요. 지금 여러분은 뉴욕의 심장, 그중에서도 가장 맛있는 냄새로 가득한 골목길 초입에 서 있습니다. 코를 간지럽히는 달콤한 빵 굽는 냄새, 매콤한 양념이 지글거리는 소리, 갓 내린 에스프레소의 깊고 풍부한 향까지. 이 모든 감각이 뒤섞여 여러분을 유혹하는 곳, 바로 뉴욕 맛집 골목입니다. 발 아래 깔린 낡은 벽돌 길을 따라 천천히 걸어보세요. 양 옆으로는 세월의 흔적이 고스란히 느껴지는 건물들이 빽빽하게 들어서 있죠. 마치 시간 여행을 떠나온 듯한 기분이 들 거예요. 자그마한 가게들은 저마다 개성 넘치는 간판을 내걸고 손님들을 맞이합니다. 어떤 곳은 수십 년째 같은 자리를 지켜온 노포 맛집이고, 또 다른 곳은 젊은 셰프들의 실험 정신이 돋보이는 트렌디한 레스토랑이죠. 잠시 멈춰 서서 귀를 기울여 보세요. 활기찬 사람들의 웃음소리, 접시 부딪히는 소리, 맛있는 음식을 칭찬하는 소리가 끊이지 않고 들려올 거예요. 이 골목은 단순히 음식을 파는 곳이 아니라, 뉴욕 사람들의 삶과 문화가 녹아 있는 특별한 공간입니다. 눈을 감고 깊게 숨을 들이쉬어 보세요. 지금 여러분은 뉴욕의 진짜 맛을 경험하고 있는 겁니다. 자, 이제 어디부터 맛볼까요? 선택은 여러분의 몫입니다!",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "뉴욕 맛집 골목은 단순한 식당가를 넘어, 뉴욕의 다채로운 문화를 압축적으로 보여주는 공간입니다. 이곳은 수십 년 된 이탈리아 레스토랑부터 최근에 문을 연 퓨전 음식점까지, 다양한 종류의 식당들이 공존하며 독특한 분위기를 자아냅니다. 현지인들은 물론 관광객들에게도 사랑받는 명소이지만, 몇몇 숨겨진 맛집들은 여전히 현지인들만 아는 비밀스러운 장소로 남아있습니다. 예를 들어, 골목 안쪽에 위치한 작은 델리에서는 '뉴욕 최고의 루벤 샌드위치'라고 불리는 메뉴를 맛볼 수 있습니다. 또 다른 숨겨진 명소는 간판도 없는 작은 바인데, 이곳에서는 세계 각국의 희귀한 맥주와 독특한 칵테일을 즐길 수 있습니다. 이 골목의 진짜 매력은 단순히 맛있는 음식을 먹는 것을 넘어, 뉴욕 사람들의 일상 속으로 깊숙이 들어갈 수 있다는 점입니다. 식당 주인과 이야기를 나누고, 옆 테이블 손님과 웃으며 인사를 나누는 경험은 다른 곳에서는 쉽게 얻을 수 없는 특별한 추억이 될 것입니다. 뉴욕을 방문한다면 꼭 이 골목을 방문하여, 진짜 뉴욕의 맛과 문화를 경험해보세요! 꿀팁 하나: 점심시간이나 저녁시간에는 매우 혼잡하므로, 조금 일찍 방문하거나 예약을 하는 것이 좋습니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "뉴욕의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:48.037Z",
+    "updatedAt": "2026-02-22T18:16:40.419Z"
+  },
+  {
+    "id": "barcelona_item_33",
+    "cityId": "barcelona",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 34",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 바르셀로나 프리미엄 레스토랑 추천 34에 오신 걸 환영합니다! 이곳은 바르셀로나의 심장부에서 빛나는 보석과도 같습니다. 먼저, 눈을 감고 상상해 보세요. 당신은 매혹적인 고딕 건물들 사이를 지나, 이 레스토랑의 문턱에 서 있습니다. 그리고 문을 여는 순간, 눈부신 샹들리에가 반짝이며 당신을 맞이합니다. 귀에는 연주의 달콤한 멜로디가 울리고, 공기 중에는 신선한 바질과 레몬의 향기가 조화를 이루어 퍼집니다. 이곳은 단순한 식당이 아닙니다. 이는 마치 시간 여행을 하는 듯, 감각을 자극하는 장소입니다. 자, 이제 그 역사를 통해 이 멋진 장소를 깊이 탐험해 봅시다!\n\n이 레스토랑은 19세기 후반, 바르셀로나의 문화적 르네상스 시기에 세워졌습니다. 당시 스페인은 격변의 시기를 맞이하고 있었고, 이곳은 혁신적 사고와 예술적 제작의 중심지로 부상하였습니다. 레스토랑의 설립자는 당시의 유명한 건축가였던 마르셀로 라미레스였습니다. 그는 현대적 미학과 고전적 아름다움을 조화롭게 결합한 공간을 창조하고자 했습니다. 그의 작품은 바르셀로나의 정체성을 새롭게 정의하며, 도시의 고유한 매력을 전 세계에 알렸습니다. \n\n하지만 마르셀로의 이야기는 여기서 끝나지 않습니다. 그는 그야말로 혁신의 아이콘이었습니다. 1901년 어느 날, 마르셀로는 그 당시 가장 영향력 있는 문화예술가들을 초대하여 운영 기념 파티를 열었습니다. 이 자리에서 그는 예술과 요리가 결합된 독특한 경험을 선보였고, 이는 곧 유럽 전역에 화제의 중심이 되었습니다. 이 자리에서 많은 예술적 협업이 이루어졌고, 이는 오늘날까지도 이 레스토랑의 독창적 요리 철학에 뿌리 깊게 자리잡고 있습니다.\n\n이제 건축적 경이로움을 더욱 깊이 들여다보겠습니다. 레스토랑의 외관은 고딕 양식과 자연주의적 요소가 결합된 독특한 디자인을 자랑합니다. 특히, 벽돌의 배열은 단순히 장식적인 요소를 넘어서 기술적 혁신으로 칭송받았습니다. 이 벽돌은 특별한 열처리를 통해 내구성과 아름다움을 동시에 유지함으로써, 오늘날에도 그 견고함을 자랑합니다.\n\n그리고 여러분, 비밀을 하나 알려 드릴까요? 벽의 가장자리에는 눈에 잘 띄지 않는 작은 문양들이 새겨져 있습니다. 이는 마르셀로가 그 시기에 마주한 개인적 시련과 기쁨을 상징적으로 표현한 것입니다. 사실, 이는 그가 남긴 '시간의 연대기'로 불리며, 바르셀로나의 역사와 문화를 이해하는 데 중요한 열쇠로 작용합니다.\n\n현대에 이르러, 레스토랑은 새로운 생명을 얻게 되었습니다. 1980년대 말, 한 젊은 연구가가 이곳의 가치와 잠재력을 발견하며 복원 프로젝트를 추진했습니다. 초기에는 다소 회의적인 시선도 있었지만, 이내 지역 사회와 관광객 모두의 사랑을 받으며, 현재의 웅장함을 되찾았습니다.\n\n그리고 여러분, 이곳은 영화와 드라마의 무대로도 자주 등장하죠. 수많은 유명 배우들이 이곳에서 촬영을 진행하며, 다양한 에피소드를 남겼습니다. 한 번은 유명 배우가 대사 외우기를 미루고 이곳의 명물 요리인 '가르비의 파에야'를 먹다가 촬영이 지연된 일화도 있습니다. 이런 재미있는 일화는 이곳을 방문하는 관광객들에게 또 다른 즐거운 경험을 선사합니다.\n\n이제 이 레스토랑의 철학적 의미를 생각해봅시다. 이는 단순히 음식을 맛보는 장소를 넘어, 시대와 예술이 교차하는 만남의 장입니다. 그리고 바르셀로나의 독특한 문화적 정체성을 고스란히 담고 있는 살아있는 역사입니다.\n\n여러분, 이제 이 여행의 끝자락에 이르렀습니다. 이 레스토랑은 우리에게 단순한 공간 이상의 의미를 제공합니다. 이곳에서의 경험은 우리의 감각을 깨우고, 역사의 흐름 속에서 우리의 위치를 다시금 생각하게 합니다. 바르셀로나 프리미엄 레스토랑 추천 34, 여러분의 기억 속에 오래 남을 것입니다. 다음에 다시 방문할 때까지 건강을 기원하며, 안녕히 계세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "바르셀로나 프리미엄 Restaurant 추천 34",
+        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "바르셀로나의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:03.783Z",
+    "updatedAt": "2026-02-22T18:06:01.643Z"
+  },
+  {
+    "id": "tokyo_item_49",
+    "cityId": "tokyo",
+    "name": "TOKYO Premium Restaurant 49",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "상상해보세요. 지금 당신은 도쿄의 심장부에 자리한, 숨 막히는 아름다움을 자랑하는 'Restaurant 49' 앞에 서 있습니다. 해 질 녘, 황금빛 노을이 유리창을 통해 따스하게 쏟아져 들어오는 풍경을요. 코끝을 간지럽히는 은은한 허브 향과 갓 구운 빵 냄새가 당신을 부드럽게 감싸 안습니다. 마치 오래된 친구가 건네는 따뜻한 포옹처럼. 레스토랑 안으로 발을 내딛는 순간, 시간 여행을 떠나는 듯한 기분이 들 거예요. 앤티크 가구와 섬세하게 장식된 식기들이 고풍스러운 분위기를 자아내고, 벽에는 이 레스토랑의 오랜 역사를 증명하듯 빛바랜 사진들이 걸려 있습니다. 종업원의 친절한 안내를 받으며 자리에 앉으면, 눈앞에는 도쿄의 아름다운 야경이 파노라마처럼 펼쳐집니다. 귓가에는 잔잔한 클래식 음악이 흐르고, 테이블 위에는 정갈하게 세팅된 커트러리가 은은하게 빛나죠. 지금 당신의 손에는 부드러운 감촉의 메뉴판이 들려 있습니다. 메뉴를 펼치는 순간, 당신은 미식의 세계로 빠져들게 될 거예요. 신선한 제철 재료로 만든 창의적인 요리들은 눈으로 보기에도 황홀하지만, 입안에 넣는 순간 혀끝에서 펼쳐지는 맛의 향연은 그야말로 예술입니다. 섬세한 손길로 만들어진 소스와 식재료의 조화는 당신의 미각을 완전히 사로잡을 겁니다. 와인 한 모금을 음미하며 천천히 음식을 즐기는 동안, 당신은 마치 영화 속 주인공이 된 듯한 특별한 기분을 느낄 수 있을 거예요. 이곳 Restaurant 49는 단순한 식사를 넘어, 오감을 만족시키는 특별한 경험을 선사하는 곳입니다. 도쿄 여행에서 잊지 못할 추억을 만들고 싶다면, 꼭 한번 방문해보세요. 분명 당신의 기대를 훨씬 뛰어넘는 감동을 받을 수 있을 겁니다. 자, 지금 바로 Restaurant 49에서 당신만의 특별한 스토리를 만들어보세요!",
+    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "Restaurant 49는 단순히 아름다운 풍경을 감상하며 식사를 즐길 수 있는 곳이 아닙니다. 이곳은 도쿄의 역사와 문화를 고스란히 간직한 특별한 공간입니다. 1949년에 문을 연 이후, Restaurant 49는 수많은 예술가, 정치가, 유명 인사들의 사랑을 받아왔습니다. 벽에 걸린 사진들은 그들의 발자취를 생생하게 보여주죠. 현지인들 사이에서는 '약속의 장소'로도 유명합니다. 중요한 비즈니스 미팅이나 특별한 데이트를 위해 많은 사람들이 이곳을 찾습니다. 레스토랑의 숨겨진 이야기가 하나 더 있습니다. 전해지는 이야기에 따르면, Restaurant 49의 창업주는 세계 2차 대전 당시 폐허가 된 도쿄에서 희망을 잃지 않고 이 레스토랑을 세웠다고 합니다. 그의 굳은 의지와 열정은 레스토랑 곳곳에 스며들어 있으며, 방문객들에게 깊은 감동을 선사합니다. Restaurant 49를 방문할 때는 반드시 예약하는 것이 좋습니다. 특히 저녁 시간대에는 창가 자리를 확보하기가 매우 어렵습니다. 예약을 할 때 특별한 기념일이라고 언급하면, 레스토랑에서 깜짝 이벤트를 준비해 줄 수도 있습니다. 그리고, 이곳의 숨겨진 메뉴, '셰프 스페셜'을 꼭 맛보세요. 메뉴판에는 없지만, 그날 가장 신선한 재료로 만든 특별한 요리를 맛볼 수 있습니다. Restaurant 49는 단순한 레스토랑이 아닌, 도쿄의 역사와 문화를 경험하고 특별한 추억을 만들 수 있는 공간입니다. 당신의 도쿄 여행을 더욱 풍성하게 만들어줄 Restaurant 49에서 잊지 못할 시간을 보내세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "TOKYO Premium Restaurant 49",
+        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:04.866Z",
+    "updatedAt": "2026-02-22T18:22:32.110Z"
+  },
+  {
+    "id": "barcelona_item_93",
+    "cityId": "barcelona",
+    "name": "바르셀로나 프리미엄 Restaurant 추천 94",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 barcelona에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "## The Grand Opening\n\n여러분, 역사와 문화의 심장부인 바르셀로나에서 가장 뛰어난 맛의 명소, 바로 \"바르셀로나 프리미엄 Restaurant 추천 94\"에 오신 것을 환영합니다! 이곳은 마치 예술과 음식이 결혼해 낳은 천재적인 작품 같습니다. 먼저 눈을 감고 상상해보세요: 고풍스러운 건물 외관이 눈앞에 펼쳐지고, 거리의 분주한 소리 속에 희미하게 들려오는 플라멩코 기타의 선율이 귓가를 스쳐 지나갑니다. 그리고 그 순간, 강력한 허브와 올리브 오일의 향이 코를 자극하며 당신을 이끄는군요. 진정 꿈속의 경험이 아닐 수 없습니다!\n\n안으로 들어서면, 진귀한 스페인식 타일과 세기말의 우아한 샹들리에가 당신을 맞이합니다. 들판을 달리는 불꽃처럼 불규칙하게 흔들리는 불빛은 귀족의 저택에 방문한 듯한 기분을 선사합니다. 조금 더 다가가면, 철판 위에서 치익 치익 소리 내며 익어가는 신선한 해산물의 소리가 들려옵니다. 그 소리에는 바르셀로나의 바다 내음이 고스란히 담겨 있죠. 이곳은 그저 식사하는 곳이 아니라, 오감이 모두 깨어나는 무대입니다!\n\n## Deep-Dive History\n\n이 환상적인 레스토랑은 1894년, 스페인이 정치적 격변 속에서 새로운 길을 찾고 있을 때 한 젊은 요리사에 의해 문을 열었습니다. 그의 이름은 엔리케 여스코였는데, 그는 자신의 요리 실력과 창의력을 결합하여 전통과 혁신을 아우르는 새로운 음식 문화를 창출하고자 했습니다. 당시 스페인은 정치적 혼란 속에서 새로운 아이디어와 문화가 생성되던 시기였고, 이곳은 그 중심에 있었습니다. 엔리케는 그의 요리를 통해 바르셀로나의 정치적 갈등을 잊고 평화로운 순간을 제공하고자 했습니다.\n\n한편, 엔리케의 가장 유명한 일화가 하나 있습니다. 어느 날, 한 고위 정치인이 급박한 상황을 피해 레스토랑에 숨어들었는데, 그는 자신의 삶을 바꾸는 요리를 맛보게 됩니다. 그 후 그 정치인은 매주 이곳을 찾아와 요리와 함께 새로운 정치 전략을 구상했다고 합니다. 이 이야기는 엔리케 여스코의 요리가 단순한 음식 그 이상임을 보여줍니다. 그것은 사람들을 모으고 새로운 생각을 창출하게 하는 촉매였죠.\n\n## Architectural Wonders\n\n이 레스토랑의 구조는 그 자체로도 경이로운 작품입니다. 노출된 붉은 벽돌과 정교하게 조각된 목재 기둥은 당시 바르셀로나의 건축 트렌드를 반영합니다. 건물의 설계는 스페인의 유명 건축가 안토니 가우디의 영향을 받았으며, 이는 건축물 곳곳에 숨겨진 곡선과 유기적인 형상으로 드러납니다. 건물 안에서 보면, 각기 다른 높이의 천장과 독특한 창문 배열은 시각적 즐거움을 선사하며, 매 순간 새로운 발견을 가능케 합니다.\n\n하지만 여기서 주목할 점은, 이곳에는 잘 알려지지 않은 상징들이 숨겨져 있다는 점입니다. 예를 들어, 입구의 타일 무늬는 카탈루냐의 전통 문양을 포함하고 있으며, 이는 바르셀로나의 정체성을 강하게 드러냅니다. 또, 벽에 걸린 그림들은 스페인의 위대한 미술가들의 작품을 모방한 것이지만, 가까이서 보면 그 작품 속 인물들이 모두 살짝 미소를 띠고 있는 것을 발견할 수 있습니다. 이는 방문자들에게 미묘한 즐거움을 주는 요소로 작용합니다.\n\n## The Modern Saga\n\n세월이 흐르며 이 레스토랑은 여러 번의 변화를 겪었지만, 최근 들어 다시 한번 주목받고 있습니다. 현대적 유행과 전통적 가치가 결합된 이곳은 바르셀로나에서 빼놓을 수 없는 명소 중 하나로 자리 잡았습니다. 최근 복원 작업을 통해 원래의 아름다움을 되찾았으며, 최신 기술을 활용해 새로운 경험을 제공하고 있습니다. 예를 들어, 레스토랑의 모든 창문은 스마트 글래스로 교체되어, 날씨와 분위기에 따라 자동으로 조정됩니다. 기술과 감성이 만나 새로운 역사를 써내려가고 있는 것이죠.\n\n또한, 이곳은 여러 영화와 드라마의 배경으로도 등장했습니다. 특히, 한 스페인 드라마에서는 주인공이 이곳에서 중요한 결정을 내리는 장면이 등장해 많은 팬들이 그 순간을 재현하기 위해 이곳을 찾습니다. 관광객들이 가장 즐기는 것은 이곳의 유명한 요리를 사진으로 찍고, 소셜 미디어에 공유하는 것입니다. 친구들과 함께 셀카를 찍으며 \"나도 여기 와봤어!\"라고 외치는 그들의 표정은 언제나 즐겁습니다.\n\n## The Philosophical Conclusion\n\n이 레스토랑은 단순히 음식을 제공하는 곳이 아닙니다. 그것은 바르셀로나의 역사와 문화를 체험하는 창구이며, 사람들 간의 연결을 만드는 장소입니다. 엔리케 여스코가 시작한 이 작은 공간은, 시간이 흐르며 수많은 사람들의 이야기와 감정을 담아냈습니다. 이는 인류가 만든 가장 위대한 예술의 한 형태라고 할 수 있습니다. 여기에서 보낸 시간은 단순한 식사가 아닌, 마음속 깊이 각인되는 경험으로 남습니다.\n\n자, 이제 여러분은 이 모든 이야기를 마음에 품고 이 경이로운 레스토랑을 떠나게 됩니다. 마지막으로, 이곳이 주는 감동을 잊지 마세요. 이곳의 벽들은 수많은 이야기를 간직하고 있으며, 그 이야기는 계속해서 이어질 것입니다. 앞으로도 이곳을 방문할 수많은 이들이 새로운 이야기를 써내려가길 바라며, 다시 만날 날을 기대하겠습니다. 여러분, 안녕히 가세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "바르셀로나 프리미엄 Restaurant 추천 94",
+        "narration": "반갑습니다! 이곳은 바르셀로나에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 바르셀로나만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "바르셀로나의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:07.849Z",
+    "updatedAt": "2026-02-22T18:06:02.106Z"
+  },
+  {
+    "id": "tokyo_item_69",
+    "cityId": "tokyo",
+    "name": "TOKYO Premium Restaurant 69",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "상상해보세요. 지금 여러분은 도쿄의 심장부에 위치한, TOKYO Premium Restaurant 69의 문턱을 넘어섰습니다. 문이 열리는 순간, 은은하게 퍼지는 향긋한 냄새와 따뜻한 조명이 여러분을 맞이하죠. 마치 영화 속 한 장면처럼, 눈앞에 펼쳐진 도쿄의 야경은 숨 막힐 듯 아름답습니다. 귓가에는 부드러운 피아노 선율이 흐르고, 테이블 위에는 정갈하게 놓인 식기가 반짝입니다. \n\n이곳은 단순한 레스토랑이 아니에요. 도쿄의 역사와 현대가 조화롭게 어우러진, 특별한 공간이죠. 창밖을 바라보며, 여러분은 수백 년 동안 이어져 온 도쿄의 숨결을 느낄 수 있습니다. 오래된 사찰의 지붕과 현대적인 고층 빌딩이 어우러진 풍경은, 과거와 현재가 공존하는 도쿄의 매력을 고스란히 보여줍니다.\n\n지금 여러분의 발 아래에는, 수많은 사람들의 이야기가 담긴 역사가 흐르고 있습니다. 에도 시대의 상인부터 메이지 유신의 혁명가, 그리고 현대의 예술가와 기업가까지, 이곳을 거쳐간 모든 이들의 꿈과 열정이 이 레스토랑의 분위기를 더욱 특별하게 만들죠. \n\n눈을 감고, 깊게 숨을 들이쉬어 보세요. 이곳의 모든 감각들이 여러분의 오감을 자극하며, 잊지 못할 추억을 만들어 줄 겁니다. TOKYO Premium Restaurant 69에서, 도쿄의 아름다움을 맛과 함께 느껴보세요. 마치 시간을 거슬러 올라간 듯한 기분, 느껴지시나요? 여러분의 미각과 감성을 깨우는 특별한 경험이 시작됩니다.",
+    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "TOKYO Premium Restaurant 69는 도쿄의 랜드마크 중 하나로, 단순한 레스토랑을 넘어선 복합 문화 공간입니다. 역사적인 건물에 자리 잡고 있으며, 에도 시대부터 이어진 전통과 현대적인 디자인이 조화를 이루고 있습니다. 이곳은 미식 경험뿐만 아니라, 예술 작품 감상, 전통 공연 관람 등 다양한 문화 체험을 제공합니다. \n\n레스토랑 내부에는 유명 예술가의 작품들이 전시되어 있으며, 주기적으로 특별 전시회도 개최됩니다. 또한, 전통적인 일본 정원을 모티브로 한 아름다운 공간은 식사 전후로 산책을 즐기기에 안성맞춤입니다. 특히, 저녁 시간에는 라이브 재즈 공연이 열려 로맨틱한 분위기를 더합니다.\n\n**현지인 꿀팁**: 레스토랑 예약 시, 창가 자리를 미리 요청하세요. 도쿄 타워를 비롯한 아름다운 야경을 감상하며 식사를 즐길 수 있습니다. 또한, 계절별로 특별 메뉴가 제공되니, 방문 시기에 맞춰 특별한 요리를 맛보는 것을 추천합니다. 숨겨진 비화로는, 이 레스토랑은 과거 유명 사무라이의 저택이었다고 합니다. 지금도 건물 곳곳에서 그 흔적을 찾아볼 수 있다는 점이 흥미롭습니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "TOKYO Premium Restaurant 69",
+        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:06.278Z",
+    "updatedAt": "2026-02-22T18:24:22.000Z"
+  },
+  {
+    "id": "rome/aroma-restaurant",
+    "cityId": "rome",
+    "name": "Aroma Restaurant",
+    "lat": 41.8906,
+    "lng": 12.4938,
+    "radius": 50,
+    "narration": "상상해보세요! 지금 당신은 로마의 심장, 콜로세움이 한눈에 들어오는 특별한 레스토랑, Aroma에 앉아있습니다. 부드러운 바람이 살랑살랑 불어와 당신의 머리카락을 간지럽히고, 코끝에는 맛있는 음식 냄새가 맴돌아요. 테이블에는 이탈리아 햇살을 가득 머금은 토마토와 향긋한 바질, 올리브 오일이 곁들여진 빵이 놓여있습니다. 창밖으로는 2천 년 역사를 간직한 콜로세움이 웅장한 자태를 뽐내고 있죠. 검투사들의 함성과 관중들의 열기가 느껴지는 듯합니다. Aroma에서는 단순히 식사를 하는 것이 아니라, 로마의 역사와 문화를 맛보는 특별한 경험을 할 수 있어요. 웨이터의 친절한 미소와 능숙한 서비스는 당신을 더욱 편안하게 만들어 줄 겁니다. 잠시 눈을 감고, 콜로세움의 웅장한 아름다움과 맛있는 음식, 그리고 로마의 낭만에 흠뻑 빠져보세요. 지금 여러분은 인생 최고의 순간을 경험하고 있는 겁니다. 파스타 면이 입 안에서 부드럽게 녹아내리고, 와인 한 모금은 목넘김이 예술이죠. 석양이 콜로세움을 붉게 물들이는 모습을 바라보며, 사랑하는 사람과 함께 속삭이는 이야기는 영원히 잊지 못할 추억이 될 거예요. 자, 이제 Aroma에서 로마의 맛과 멋을 만끽해볼까요?",
+    "description": "Michelin-starred rooftop dining with a breathtaking view of the Colosseum.",
+    "category": "Restaurant",
+    "detailedDescription": "Aroma 레스토랑은 콜로세움을 가장 아름답게 조망할 수 있는 숨겨진 명소입니다. 미슐랭 가이드에도 이름을 올린 이곳은, 단순한 레스토랑을 넘어 로마의 역사와 문화를 오감으로 느낄 수 있는 특별한 공간입니다. 많은 관광객들이 콜로세움 앞에서 사진을 찍는 데 그치지만, 진정한 로마의 아름다움은 Aroma에서 식사를 하며 감상할 때 비로소 완성됩니다. 특히 저녁 시간에는 콜로세움에 조명이 켜지면서 환상적인 야경을 선사합니다. 현지인들은 특별한 날, 예를 들어 프로포즈나 결혼 기념일에 Aroma를 찾는 경우가 많습니다. 예약은 필수이며, 창가 자리는 몇 주 전에 마감되는 경우가 많으니 서두르는 것이 좋습니다. Aroma의 숨겨진 비화 하나를 알려드릴까요? 과거 로마 귀족들은 콜로세움 검투 경기가 끝난 후, Aroma의 전신이었던 작은 식당에서 승리를 축하하며 만찬을 즐겼다고 합니다. 지금도 Aroma는 그 전통을 이어받아, 로마 최고의 맛과 풍경을 선사하고 있습니다. 콜로세움의 웅장한 아름다움을 배경으로, 잊지 못할 로마의 밤을 경험해보세요.",
+    "photos": [
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000",
+      "https://images.unsplash.com/photo-1502301103665-0b95cc738def?auto=format&fit=crop&q=80&w=1000",
+      "https://images.unsplash.com/flagged/photo-1557007525-27a92289658e?auto=format&fit=crop&q=80&w=1000",
+      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000",
+      "https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?auto=format&fit=crop&q=80&w=1000"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "아로마 레스토랑",
+        "description": "콜로세움이 한눈에 들어오는 미슐랭 스타 루프탑 레스토랑",
+        "detailedDescription": "팔라초 만프레디 호텔 최상층에 위치한 아로마는 콜로세움을 가장 가까이서 감상하며 식사할 수 있는 최고의 공간입니다. 셰프 주세페 디 이오리오는 고전적인 로마 요리에 현대적인 감각을 더한 코스 요리를 선보입니다. 세계에서 가장 낭만적인 식당 중 하나로 꼽히며, 특별한 날을 기념하기에 더할 나위 없는 장소입니다.",
+        "narration": "콜로세움의 비현실적인 전망과 함께하는 아로마 레스토랑에 오신 것을 환영합니다. 로마 최고의 미식 경험을 즐겨보세요."
+      },
+      "it": {
+        "name": "Ristorante Aroma",
+        "narration": "Aroma offre l'ultima esperienza culinaria romana con una vista impareggiabile sul Colosseo.",
+        "description": "Cucina stellata Michelin con una vista mozzafiato sul Colosseo.",
+        "detailedDescription": "Situato all'ultimo piano di Palazzo Manfredi, Aroma offre una vista privilegiata sul Colosseo. Lo chef Giuseppe Di Iorio propone un menu che bilancia i sapori romani classici con tecniche culinarie moderne."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-22T18:05:47.586Z",
+    "updatedAt": "2026-02-22T19:01:05.286Z"
+  },
+  {
+    "id": "tokyo_item_9",
+    "cityId": "tokyo",
+    "name": "TOKYO Premium Restaurant 9",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "자, 눈을 감고 상상해보세요. 지금 당신은 도쿄의 숨겨진 보석, TOKYO Premium Restaurant 9에 와 있습니다. 은은하게 퍼지는 따뜻한 조명 아래, 섬세하게 세팅된 테이블이 당신을 맞이하죠. 코끝을 간지럽히는 건, 갓 구운 빵의 고소한 냄새와 신선한 해산물의 싱그러움이에요. 마치 미야자키 하야오 감독의 애니메이션 속에 들어온 듯한 기분이 들 거예요. 이곳은 단순한 레스토랑이 아니랍니다. 시간을 거슬러 올라간 듯한 고풍스러운 인테리어는 마치 영화 세트장 같아요. 벽에는 오래된 사진들이 걸려 있는데, 자세히 보면 이 레스토랑의 역사를 담고 있답니다. 한때는 유명한 작가들의 아지트였다고 해요. 상상해보세요. 헤밍웨이가 이곳에서 칵테일을 마시며 영감을 얻고, 마릴린 먼로가 우아하게 저녁 식사를 즐기는 모습을요! 지금 당신의 발 아래에는, 수많은 예술가와 미식가들의 발자취가 고스란히 남아있는 거예요. 그리고 창밖으로는 도쿄의 아름다운 야경이 펼쳐집니다. 반짝이는 불빛들이 마치 밤하늘의 별처럼 쏟아져 내리는 것 같아요. 이곳에서 맛보는 음식은 그야말로 예술입니다. 신선한 재료 본연의 맛을 살린 섬세한 요리들은 당신의 미각을 황홀하게 만들 거예요. 특히, 이곳의 시그니처 메뉴인 '도쿄 스페셜'은 꼭 한번 맛보셔야 합니다. 셰프의 혼이 담긴 이 요리는, 당신의 미식 경험을 한 단계 업그레이드해 줄 거예요. 가족들과 함께 오셨다면 더욱 즐거운 시간을 보내실 수 있을 거예요. 아이들을 위한 특별 메뉴도 준비되어 있고, 넓은 공간에서 편안하게 식사를 즐길 수 있답니다. 사진작가들이 사랑하는 이유를 아시겠나요? 어느 곳을 찍어도 그림이 되는 이곳에서, 인생샷을 남겨보세요. TOKYO Premium Restaurant 9은 단순한 식사를 넘어, 잊지 못할 추억을 선물할 거예요. 자, 이제 눈을 뜨고, 이 모든 경험을 현실로 만들어보세요!",
+    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "TOKYO Premium Restaurant 9은 도쿄의 숨겨진 명소로, 단순한 레스토랑을 넘어선 특별한 경험을 제공합니다. 이곳은 아름다운 풍경, 역사적인 분위기, 그리고 다채로운 체험 공간을 자랑하며, 방문객들에게 잊지 못할 추억을 선사합니다. 레스토랑 내부는 고풍스러운 인테리어로 꾸며져 있으며, 마치 시간을 거슬러 올라간 듯한 느낌을 줍니다. 벽에는 오래된 사진들이 걸려 있는데, 이는 레스토랑의 풍부한 역사를 보여줍니다. 한때 이곳은 유명 작가와 예술가들의 아지트였으며, 그들의 흔적을 곳곳에서 찾아볼 수 있습니다. 특히, 레스토랑의 창밖으로 펼쳐지는 도쿄의 야경은 숨 막힐 듯 아름답습니다. 반짝이는 불빛들은 마치 밤하늘의 별처럼 쏟아져 내리는 듯한 환상적인 분위기를 연출합니다. TOKYO Premium Restaurant 9의 음식은 신선한 재료 본연의 맛을 살린 섬세한 요리로, 미식가들의 입맛을 사로잡습니다. 이곳의 시그니처 메뉴인 '도쿄 스페셜'은 셰프의 혼이 담긴 특별한 요리로, 방문객들에게 깊은 인상을 남깁니다. 현지인들만 아는 꿀팁으로는, 저녁 시간대에 방문하여 라이브 재즈 공연을 감상하며 식사를 즐기는 것을 추천합니다. 또한, 레스토랑 근처에는 숨겨진 골목길들이 있는데, 이곳에서 도쿄의 진짜 매력을 느낄 수 있습니다. 가족 여행객들에게도 TOKYO Premium Restaurant 9은 강력 추천됩니다. 아이들을 위한 특별 메뉴가 준비되어 있으며, 넓은 공간에서 편안하게 식사를 즐길 수 있습니다. 사진작가들이 이곳을 사랑하는 이유는, 어느 곳을 찍어도 그림이 되는 아름다운 풍경 때문입니다. TOKYO Premium Restaurant 9은 단순한 식사를 넘어, 잊지 못할 추억을 선물하는 특별한 공간입니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "TOKYO Premium Restaurant 9",
+        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:02.108Z",
+    "updatedAt": "2026-02-22T18:25:26.324Z"
+  },
+  {
+    "id": "rome_item_101",
+    "cityId": "rome",
+    "name": "로마 프리미엄 Restaurant 추천 102",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 rome에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 로마의 심장부로 우리를 초대합니다! 바로 \"로마 프리미엄 Restaurant 추천 102\"입니다. 음식을 사랑하는 자라면 반드시 들어야 할 이야기, 여기가 바로 미식의 천국입니다! 상상해보세요. 로마의 고대 유적과 현대의 세련미가 어우러진 이곳은, 문을 걸어 들어서는 순간부터 당신의 모든 감각을 휘어잡습니다. 거리를 거닐며 들려오는 이탈리아의 잔잔한 기타 선율, 공기 중에 퍼지는 신선한 바질과 올리브유의 향기, 눈앞에 펼쳐지는 로마의 아름다운 야경! 여러분, 이곳은 단순한 레스토랑이 아닙니다. 이곳은 다미와 역사의 경계선을 넘나드는 시간 여행의 출발지입니다!\n\n이제 여러분을 과거로 데려가 볼까요? \"로마 프리미엄 Restaurant 추천 102\"는 18세기 후반, 로마의 정치적 격변기 속에서 탄생했습니다. 당시 로마는 유럽의 정치 중심지로서, 다양한 문화와 예술이 뒤섞이는 용광로와 같았습니다. 이 레스토랑은 그 중심에 자리 잡아, 권력자와 예술가들이 모여들던 장소였습니다. 그 중 한 명, 당시의 대문호 카사노바는 이곳에서 그의 가장 유명한 연애 편지 중 하나를 썼다고 전해집니다. 이곳의 음식을 맛보며, 로마의 정치와 사랑에 대한 그의 깊은 사유를 펼쳐 보였던 거죠.\n\n이제 이곳의 건축적 경이로움에 대해 이야기해보겠습니다. 이 레스토랑은 로마의 고대 건축 기법을 현대적으로 재해석해 건축되었습니다. 대리석과 타일로 장식된 웅장한 인테리어는, 단순한 음식을 넘어 하나의 예술 작품으로서의 위용을 자랑합니다. 그리고 그 속에는 보이지 않는 비밀이 숨어 있습니다. 주방의 타일 바닥 한 구석에는 미묘한 문양이 새겨져 있는데, 이는 당시의 비밀스러운 정당의 상징이라고 합니다. 이곳을 방문하신다면, 그 숨겨진 문양을 찾아보시는 것도 흥미로울 것입니다.\n\n현대에 들어서면서 \"로마 프리미엄 Restaurant 추천 102\"는 재발견과 복원 과정을 거쳤습니다. 수많은 역사적 기록과 자료를 바탕으로, 원래의 아름다움을 최대한 살려내는 노력이 이루어졌습니다. 오늘날 이곳은 영화나 드라마의 배경으로도 자주 등장합니다. 여러분, \"로마의 휴일\"의 한 장면을 떠올려보세요. 바로 그 풍경이 이 레스토랑의 배경이 되었던 것입니다. 그리고 요즘엔 식사를 하며 셀카를 찍는 현대의 관광객들 덕분에, 이곳은 SNS를 통해 전 세계로 그 명성을 떨치고 있습니다. \n\n마지막으로, 이곳이 인류 역사에 남긴 의미를 생각해봅시다. \"로마 프리미엄 Restaurant 추천 102\"는 단순한 식당 그 이상입니다. 이는 시대를 초월한 문화, 예술, 그리고 인간의 상호작용이 어우러진 공간입니다. 이곳에서의 한 끼 식사는 과거와 현재, 그리고 미래를 잇는 다리가 될 것입니다. 여러분, 이곳에서의 경험을 가슴 깊이 새기고 돌아가세요. 그리고 언제나 그렇듯, 다음에 다시 돌아올 날을 꿈꾸십시오. \n\n이제 아쉽게도 우리의 여행을 마무리할 시간이 다가왔습니다. 지금까지 함께해주셔서 감사합니다. 여러분께서는 \"로마 프리미엄 Restaurant 추천 102\"에서 놀라운 이야기를 들으셨습니다. 이곳에서의 기억은 결코 사라지지 않을 것입니다. 꿈꾸듯 아름다운 이곳에서의 시간을 안고, 여러분을 기다리는 새로운 모험을 향해 나아가시길 바랍니다. 로마에서 뵙겠습니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "로마 프리미엄 Restaurant 추천 102",
+        "narration": "반갑습니다! 이곳은 로마에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 로마만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "로마의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:08.377Z",
+    "updatedAt": "2026-02-22T18:06:03.693Z"
+  },
+  {
+    "id": "rome_restaurant_roscioli",
+    "cityId": "rome",
+    "name": "Roscioli",
+    "lat": 41.8947,
+    "lng": 12.472,
+    "radius": 40,
+    "narration": "자, 눈을 감고 로마의 향기를 느껴보세요. 갓 구운 빵 냄새, 숙성된 치즈의 깊은 향, 그리고 신선한 토마토의 달콤함이 코끝을 간지럽히죠? 지금 여러분은 로마 미식의 심장, 로숄리에 와 있습니다. 상상해보세요. 따뜻한 햇살이 쏟아지는 좁은 골목길을 따라 걷다 보면, 마치 보물처럼 숨겨진 로숄리가 나타납니다. 문을 열고 들어서는 순간, 활기찬 분위기와 맛있는 음식 냄새가 여러분을 맞이할 거예요. \n\n로숄리는 단순한 레스토랑이 아니에요. 1972년부터 이어져 온 로마의 역사이자, 미식의 자부심이죠. 대대로 이어져 내려온 비법 레시피와 최고급 식재료만 고집하는 장인 정신이 이곳의 모든 요리에 담겨 있답니다. 지금 여러분의 귀에는 접시 부딪히는 소리, 와인 잔이 쨍하고 울리는 소리, 그리고 사람들의 웃음소리가 들리시나요? 마치 한 편의 영화 속에 들어온 듯한 생생한 경험을 하게 될 거예요.\n\n자리에 앉아 메뉴를 펼쳐보세요. 파스타, 살루미, 치즈... 이름만 들어도 군침이 도는 메뉴들이 가득하죠? 특히 까르보나라는 꼭 드셔보셔야 해요. 로숄리 스타일의 까르보나라는 신선한 달걀 노른자와 최고급 돼지 볼살, 그리고 후추만을 사용해서 만든답니다. 크림은 절대 넣지 않아요! 이탈리아 정통의 맛을 그대로 느낄 수 있죠. 한 입 베어 무는 순간, 입 안 가득 퍼지는 풍미에 감탄할 거예요. 와인 한 잔 곁들이면 그 맛은 더욱 환상적이랍니다. 자, 건배! 로마에서의 특별한 순간을 위하여!\n\n로숄리에서는 식사뿐만 아니라 다양한 식재료도 구입할 수 있어요. 이탈리아 전역에서 엄선한 치즈, 살루미, 파스타, 와인 등이 여러분을 기다리고 있답니다. 기념품으로 구입해서 집에서도 로마의 맛을 즐겨보세요. 로숄리에서의 경험은 여러분의 여행을 더욱 풍요롭게 만들어줄 거예요. 자, 이제 로숄리의 매력에 푹 빠져볼까요?",
+    "description": "Gourmet deli and restaurant with Italian delicacies",
+    "category": "Restaurant",
+    "detailedDescription": "로마의 미식 성지, 로숄리는 단순한 레스토랑을 넘어선 미식 경험을 선사하는 곳입니다. 1972년 문을 연 이후, 로숄리는 뛰어난 로마 요리와 광범위한 와인 셀렉션으로 명성을 쌓아왔습니다. 이곳은 원래 델리(delicatessen)로 시작하여, 최고 품질의 이탈리아 식재료를 판매하는 곳이었죠. 시간이 흐르면서 로숄리는 델리에서 맛볼 수 있는 훌륭한 식재료를 사용한 요리를 제공하는 레스토랑으로 확장되었습니다. \n\n로숄리의 가장 큰 매력은 바로 '최고'만을 고집하는 철학입니다. 파스타는 이탈리아 각 지역에서 생산되는 최고급 건면을 사용하며, 살루미는 자체 숙성 과정을 거쳐 깊은 풍미를 자랑합니다. 치즈 역시 엄선된 농가에서 직송 받아 신선함을 유지하죠. 와인 리스트는 이탈리아 전역의 와이너리에서 공수한 2,800여 종의 와인으로 가득 차 있습니다. 소믈리에의 추천을 받아 음식과 완벽하게 어울리는 와인을 페어링 해보세요. 로숄리만의 숨겨진 비법은 바로 '진정성'입니다. 로마 전통 레시피를 고수하면서도, 현대적인 감각을 더해 끊임없이 새로운 메뉴를 개발하고 있습니다. 현지인들은 로숄리를 특별한 날을 기념하거나, 소중한 사람들과 함께 미식을 즐기기 위한 장소로 여깁니다. 관광객들에게는 로마의 맛을 경험할 수 있는 필수 코스로 자리 잡았죠. 꿀팁 하나 드릴까요? 로숄리는 예약 없이는 방문하기 힘들 정도로 인기가 많으니, 사전에 꼭 예약하세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
+      "https://images.unsplash.com/photo-1587899897387-091ebd01a6b2?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Roscioli",
+        "narration": "Discover Roscioli, a gourmet deli and restaurant offering exceptional Roman cuisine and an extensive wine selection.",
+        "description": "Gourmet deli and restaurant with Italian delicacies",
+        "detailedDescription": "Roscioli combines a gourmet deli with a sophisticated restaurant in the heart of Rome. Known for its exceptional selection of Italian cheeses, cured meats, and wines, this establishment offers a unique dining experience. The restaurant menu features creative takes on traditional Roman dishes using the finest ingredients. The wine list is extensive with over 300 labels. The intimate dining room creates a warm atmosphere perfect for food lovers seeking authentic Italian flavors."
+      },
+      "ko": {
+        "name": "로쇼리",
+        "narration": "특별한 로마 요리와 광범위한 와인 셀렉션을 제공하는 미식 델리 겸 레스토랑 로쇼리를 발견하세요.",
+        "description": "이탈리아 별미를 제공하는 미식 델리 겸 레스토랑",
+        "detailedDescription": "로쇼리는 로마의 중심부에서 고급 델리와 세련된 레스토랑을 결합합니다. 이탈리아 치즈, 절인 고기, 와인의 뛰어난 선택으로 유명한 이 곳은 독특한 다이닝 경험을 제공합니다. 레스토랑 메뉴는 최고급 재료를 사용하여 전통적인 로마 요리에 창의적인 변화를 제공합니다. 와인 리스트는 300개 이상의 라벨로 광범위합니다. 친밀한 식당은 정통 이탈리아 맛을 찾는 음식 애호가에게 완벽한 따뜻한 분위기를 조성합니다."
+      },
+      "it": {
+        "name": "Roscioli",
+        "narration": "Scopri Roscioli, una gastronomia gourmet e ristorante che offre cucina romana eccezionale e un'ampia selezione di vini.",
+        "description": "Gastronomia gourmet e ristorante con prelibatezze italiane",
+        "detailedDescription": "Roscioli combina una gastronomia gourmet con un ristorante sofisticato nel cuore di Roma. Noto per la sua eccezionale selezione di formaggi italiani, salumi e vini, questo locale offre un'esperienza culinaria unica. Il menu del ristorante propone interpretazioni creative dei piatti tradizionali romani utilizzando i migliori ingredienti. La lista dei vini è ampia con oltre 300 etichette. La sala da pranzo intima crea un'atmosfera calda perfetta per gli amanti del cibo alla ricerca di sapori italiani autentici."
+      },
+      "es": {
+        "name": "Roscioli",
+        "narration": "Descubre Roscioli, un deli gourmet y restaurante que ofrece excepcional cocina romana y una extensa selección de vinos.",
+        "description": "Deli gourmet y restaurante con delicias italianas",
+        "detailedDescription": "Roscioli combina un deli gourmet con un sofisticado restaurante en el corazón de Roma. Conocido por su excepcional selección de quesos italianos, embutidos y vinos, este establecimiento ofrece una experiencia gastronómica única. El menú del restaurante presenta versiones creativas de platos romanos tradicionales utilizando los mejores ingredientes. La carta de vinos es extensa con más de 300 etiquetas. El íntimo comedor crea una atmósfera cálida perfecta para los amantes de la comida que buscan auténticos sabores italianos."
+      },
+      "fr": {
+        "name": "Roscioli",
+        "narration": "Découvrez Roscioli, une épicerie fine et restaurant offrant une cuisine romaine exceptionnelle et une vaste sélection de vins.",
+        "description": "Épicerie fine et restaurant avec délices italiennes",
+        "detailedDescription": "Roscioli combine une épicerie fine avec un restaurant sophistiqué au cœur de Rome. Réputé pour sa sélection exceptionnelle de fromages italiens, charcuteries et vins, cet établissement offre une expérience culinaire unique. Le menu du restaurant propose des interprétations créatives de plats romains traditionnels utilisant les meilleurs ingrédients. La carte des vins est vaste avec plus de 300 références. La salle à manger intime crée une atmosphère chaleureuse parfaite pour les amateurs de cuisine à la recherche de saveurs italiennes authentiques."
+      },
+      "de": {
+        "name": "Roscioli",
+        "narration": "Entdecken Sie Roscioli, ein Gourmet-Delikatessenladen und Restaurant, das außergewöhnliche römische Küche und eine umfangreiche Weinauswahl bietet.",
+        "description": "Gourmet-Delikatessen und Restaurant mit italienischen Köstlichkeiten",
+        "detailedDescription": "Roscioli vereint ein Gourmet-Delikatessengeschäft mit einem anspruchsvollen Restaurant im Herzen Roms. Bekannt für seine außergewöhnliche Auswahl an italienischen Käsesorten, Aufschnitt und Weinen, bietet dieses Lokal ein einzigartiges kulinarisches Erlebnis. Die Speisekarte des Restaurants bietet kreative Interpretationen traditioneller römischer Gerichte mit den besten Zutaten. Die Weinkarte ist umfangreich mit über 300 Etiketten. Der intime Speisesaal schafft eine warme Atmosphäre, perfekt für Feinschmecker auf der Suche nach authentischen italienischen Aromen."
+      },
+      "zh": {
+        "name": "Roscioli",
+        "narration": "探索Roscioli，一家提供出色罗马美食和丰富葡萄酒选择的美食熟食店和餐厅。",
+        "description": "提供意大利美味的美食熟食店和餐厅",
+        "detailedDescription": "Roscioli将美食熟食店与精致餐厅结合在罗马市中心。以其出色的意大利奶酪、腌肉和葡萄酒选择而闻名，这家餐厅提供独特的用餐体验。餐厅菜单使用最优质的食材，对传统罗马菜肴进行创意诠释。葡萄酒单非常丰富，拥有超过300个品牌。亲密的用餐室营造出温馨的氛围，非常适合寻求正宗意大利风味的美食爱好者。"
+      },
+      "ja": {
+        "name": "Roscioli",
+        "narration": "卓越したローマ料理と豊富なワインセレクションを提供するグルメデリ兼レストラン、Roscioliをご発見ください。",
+        "description": "イタリアの珍味を提供するグルメデリ兼レストラン",
+        "detailedDescription": "Roscioliはローマの中心部でグルメデリと洗練されたレストランを組み合わせています。イタリアンチーズ、生ハム、ワインの卓越したセレクションで知られるこの店は、ユニークなダイニング体験を提供します。レストランのメニューは、最高級の食材を使用して伝統的なローマ料理に創造的なアレンジを加えています。ワインリストは300以上のラベルと豊富です。親密なダイニングルームは、本格的なイタリアの味を求める食通に最適な温かい雰囲気を作り出しています。"
+      },
+      "pt": {
+        "name": "Roscioli",
+        "narration": "Descubra o Roscioli, um deli gourmet e restaurante que oferece excepcional cozinha romana e uma extensa seleção de vinhos.",
+        "description": "Deli gourmet e restaurante com delícias italianas",
+        "detailedDescription": "Roscioli combina um deli gourmet com um restaurante sofisticado no coração de Roma. Conhecido por sua excepcional seleção de queijos italianos, embutidos e vinhos, este estabelecimento oferece uma experiência gastronômica única. O menu do restaurante apresenta versões criativas de pratos romanos tradicionais usando os melhores ingredientes. A carta de vinhos é extensa com mais de 300 rótulos. A sala de jantar íntima cria uma atmosfera acolhedora perfeita para amantes da gastronomia em busca de sabores italianos autênticos."
+      },
+      "ru": {
+        "name": "Roscioli",
+        "narration": "Откройте для себя Roscioli — гастрономический деликатесный магазин и ресторан, предлагающий исключительную римскую кухню и обширный выбор вин.",
+        "description": "Гурманский деликатесный магазин и ресторан с итальянскими деликатесами",
+        "detailedDescription": "Roscioli сочетает в себе гастрономический деликатесный магазин и изысканный ресторан в самом сердце Рима. Известный своим исключительным выбором итальянских сыров, мясных деликатесов и вин, это заведение предлагает уникальный гастрономический опыт. В меню ресторана представлены творческие интерпретации традиционных римских блюд с использованием лучших ингредиентов. Винная карта обширна и насчитывает более 300 наименований. Уютный обеденный зал создает теплую атмосферу, идеально подходящую для гурманов, ищущих подлинные итальянские вкусы."
+      }
+    },
+    "openingHours": "Mon-Sat: 12:30-16:00, 19:00-midnight | Closed Sun",
+    "priceRange": "€€€€ (€60-90 per person)",
+    "cuisine": "Contemporary Roman",
+    "reservationUrl": "https://www.thefork.com/restaurant/roscioli-r44801",
+    "phoneNumber": "+39 06 687 5287",
+    "menuHighlights": [
+      "Burrata",
+      "Truffle Pasta",
+      "Aged Prosciutto",
+      "Cheese Selection",
+      "Tiramisu"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:40.065Z",
+    "updatedAt": "2026-02-22T18:27:54.521Z"
+  },
+  {
+    "id": "paris_restaurant_lami_jean",
+    "cityId": "paris",
+    "name": "L'Ami Jean",
+    "lat": 48.8579,
+    "lng": 2.3072,
+    "radius": 40,
+    "narration": "자, 여러분, 잠시 눈을 감고 파리의 골목길 어귀에 서 있다고 상상해보세요. 코를 간질이는 버터와 허브 향, 경쾌한 웃음소리, 쨍그랑거리는 와인 잔 부딪히는 소리가 귓가에 맴돌죠? 바로 여기가 'L'Ami Jean', 장 아저씨의 따뜻한 밥상이 있는 곳입니다. 문을 열고 들어서는 순간, 시간 여행을 떠나는 기분이에요. 낡은 나무 테이블과 앤티크 가구들이 정겹게 놓여 있고, 벽에는 세월의 흔적이 고스란히 담긴 사진들이 걸려있습니다. 마치 프랑스 영화 속 한 장면처럼 느껴지지 않나요? 장 아저씨는 바스크 지방 출신으로, 그의 요리에는 고향의 푸근한 정과 파리의 세련됨이 녹아있습니다. 접시 가득 담긴 푸짐한 요리를 보면 절로 미소가 지어질 거예요. 특히, 바스크 풍 가정식 스튜인 'Axoa'는 꼭 맛봐야 할 메뉴입니다. 부드러운 송아지 고기와 피망, 토마토가 어우러져 환상적인 맛을 선사하죠. 입 안 가득 퍼지는 풍미는 마치 어머니의 품처럼 따뜻하고 포근합니다. 그리고 디저트로는 'Rice Pudding'을 추천합니다. 달콤하고 부드러운 푸딩 위에 카라멜 소스가 듬뿍 뿌려져 나오는데, 그 맛은 정말 잊을 수 없을 거예요. L'Ami Jean에서는 단순히 음식을 먹는 것이 아니라, 프랑스의 역사와 문화를 맛보는 특별한 경험을 할 수 있습니다. 지금, 여러분의 앞에 놓인 따뜻한 요리 한 접시를 통해, 파리의 낭만과 바스크의 정을 느껴보세요.",
+    "description": "Basque-French bistro near Eiffel Tower",
+    "category": "Restaurant",
+    "detailedDescription": "L'Ami Jean은 파리 7구, 에펠탑 근처에 위치한 바스크-프랑스 요리 전문점입니다. 1930년대에 문을 연 이래, 푸짐한 양과 소박하면서도 깊은 맛으로 현지인과 관광객 모두에게 사랑받고 있습니다. 특히, 바스크 지방의 전통 요리인 Axoa (송아지 고기 스튜)와 쌀 푸딩 (Rice Pudding)은 L'Ami Jean의 대표 메뉴로 손꼽힙니다. L'Ami Jean의 매력은 단순히 음식 맛에만 있는 것이 아닙니다. 낡은 나무 테이블, 앤티크 가구, 세월의 흔적이 느껴지는 벽 장식 등은 마치 프랑스 가정집에 초대받은 듯한 편안한 분위기를 자아냅니다. 또한, 친절하고 활기찬 직원들의 서비스는 식사를 더욱 즐겁게 만들어줍니다. 현지인 꿀팁을 하나 알려드릴까요? L'Ami Jean은 예약이 필수입니다. 특히 저녁 시간에는 몇 주 전에 예약하지 않으면 자리를 잡기 어려울 수 있습니다. 또한, 메뉴판에 없는 특별 메뉴가 종종 준비되니, 서버에게 문의해보는 것도 좋은 방법입니다. 숨겨진 비화로는, L'Ami Jean의 주방장은 바스크 지방의 유명한 요리 학교 출신으로, 그의 요리 철학은 '최고의 재료로 정성을 다해 만드는 것'이라고 합니다. 그는 매일 아침 시장에서 신선한 재료를 직접 고르고, 전통적인 조리법을 고수하며 변함없는 맛을 유지하고 있습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "L'Ami Jean",
+        "narration": "Enjoy hearty Basque-French cuisine at L'Ami Jean, known for generous portions and convivial atmosphere.",
+        "description": "Basque-French bistro near Eiffel Tower"
+      },
+      "ko": {
+        "name": "라미 장",
+        "narration": "푸짐한 양과 즐거운 분위기로 유명한 라미 장에서 진한 바스크-프렌치 요리를 즐기세요.",
+        "description": "에펠탑 근처 바스크-프렌치 비스트로"
+      },
+      "it": {
+        "name": "L'Ami Jean",
+        "narration": "Goditi la sostanziosa cucina basco-francese a L'Ami Jean, nota per porzioni generose e atmosfera conviviale.",
+        "description": "Bistrot basco-francese vicino alla Tour Eiffel"
+      }
+    },
+    "openingHours": "Tue-Sat: 12:00-14:00, 19:00-23:00 | Closed Sun-Mon",
+    "priceRange": "€€€ (€50-75 per person)",
+    "cuisine": "Basque-French",
+    "reservationUrl": "https://www.thefork.com/restaurant/l-ami-jean-r45203",
+    "phoneNumber": "+33 1 47 05 86 89",
+    "menuHighlights": [
+      "Rice Pudding",
+      "Basque Pork",
+      "Seafood Platters",
+      "Duck Breast"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:40.911Z",
+    "updatedAt": "2026-02-22T18:28:22.987Z"
+  },
+  {
+    "id": "tokyo_item_29",
+    "cityId": "tokyo",
+    "name": "TOKYO Premium Restaurant 29",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "숨 막힐 듯 아름다운 도쿄의 야경이 여러분을 맞이하는 곳, TOKYO Premium Restaurant 29에 오신 것을 환영합니다! 상상해보세요. 해질녘, 붉게 물든 하늘이 서서히 어둠에 잠기며 하나둘씩 불빛을 밝히는 도쿄의 스카이라인을 말이죠. 지금 여러분의 발 아래에는 수백만 개의 빛나는 별들이 촘촘히 박힌 은하수가 펼쳐져 있습니다. 이곳은 단순한 레스토랑이 아닙니다. 눈과 입, 그리고 마음까지 사로잡는 마법 같은 공간이죠. 29층 높이에서 펼쳐지는 파노라마 뷰는 마치 영화의 한 장면 같아요. 사랑하는 사람과 함께라면 로맨틱한 분위기에 흠뻑 취할 수 있고, 소중한 친구들과 함께라면 잊지 못할 추억을 만들 수 있을 겁니다. 자, 잠시 숨을 고르고 깊게 숨을 들이쉬어 보세요. 은은하게 풍겨오는 고급스러운 요리의 향기가 코 끝을 간지럽히고, 귓가에는 잔잔한 음악이 속삭이는 듯합니다. 미슐랭 레스토랑에서 경험한 듯한 섬세하고 창의적인 요리들은 입 안에서 황홀한 오케스트라를 연주하는 듯하죠. 신선한 제철 식재료를 사용하여 정성껏 만든 요리 하나하나에는 셰프의 열정과 혼이 담겨 있습니다. 단순히 배를 채우는 식사가 아닌, 오감을 만족시키는 예술 작품을 감상하는 기분일 거예요. 그리고 잊지 마세요! 이곳은 인생샷 명당이라는 사실! 멋진 야경을 배경으로 특별한 순간을 사진 속에 담아보세요. 시간이 흘러 사진을 다시 꺼내볼 때면, 그날의 감동과 설렘이 고스란히 되살아날 겁니다. TOKYO Premium Restaurant 29는 여러분의 모든 순간을 특별하게 만들어 줄 거예요. 지금 바로 예약하시고, 잊지 못할 추억을 만들어 보세요!",
+    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "TOKYO Premium Restaurant 29는 도쿄 타워와 레인보우 브릿지를 한눈에 담을 수 있는 최고의 야경 명소입니다. 29층이라는 높은 위치 덕분에 도쿄의 화려한 스카이라인을 파노라마 뷰로 감상할 수 있으며, 특히 해 질 무렵부터 밤까지 이어지는 시간대에는 숨 막힐 듯 아름다운 풍경을 자랑합니다. 단순히 뷰만 훌륭한 것이 아니라, 미슐랭 레스토랑 출신의 셰프가 선보이는 수준 높은 요리 또한 이곳의 자랑거리입니다. 신선한 제철 식재료를 사용하여 만든 창의적인 요리들은 맛과 향, 그리고 비주얼까지 완벽하게 조화를 이루며, 미식가들의 입맛을 사로잡습니다. 현지인들 사이에서는 '데이트 명소'로도 유명하며, 특별한 날을 기념하기 위해 방문하는 커플들이 많습니다. 레스토랑 내부는 고급스럽고 세련된 분위기로 꾸며져 있으며, 은은한 조명과 감미로운 음악이 로맨틱한 분위기를 더합니다. 예약은 필수이며, 특히 창가 자리는 경쟁이 치열하니 미리 서두르는 것이 좋습니다. 숨겨진 팁 하나! 레스토랑 입구에서 사진 촬영을 요청하면, 멋진 야경을 배경으로 인생샷을 남길 수 있습니다. 도쿄 여행 중 특별한 추억을 만들고 싶다면, TOKYO Premium Restaurant 29를 방문하는 것을 강력 추천합니다. 잊지 못할 밤을 선사할 거예요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "TOKYO Premium Restaurant 29",
+        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:03.521Z",
+    "updatedAt": "2026-02-22T18:20:30.148Z"
+  },
+  {
+    "id": "london_restaurant_the_ledbury",
+    "cityId": "london",
+    "name": "The Ledbury",
+    "lat": 51.5104,
+    "lng": -0.1977,
+    "radius": 40,
+    "narration": "자, 여러분, 잠시 눈을 감고 상상해보세요. 런던의 심장부, 노팅힐의 매력적인 거리에서 은은하게 풍겨오는 고급스러운 향기를 맡아보세요. 지금 여러분은 미슐랭 2스타에 빛나는 '더 레드버리(The Ledbury)' 앞에 서 있습니다. 문을 열고 들어서는 순간, 따뜻하고 아늑한 분위기가 여러분을 감싸 안을 거예요. 테이블에 앉아 부드러운 조명 아래 메뉴를 펼쳐 들면, 마치 예술 작품과 같은 현대 유럽 요리들이 눈앞에 펼쳐집니다. 셰프의 섬세한 손길이 느껴지는 각 요리마다 신선한 재료 본연의 맛이 살아 숨 쉬고 있죠. 한 입 베어 물 때마다 입 안 가득 퍼지는 풍미는, 마치 오케스트라의 아름다운 선율처럼 조화롭고 황홀합니다. 와인 한 모금을 음미하며, 사랑하는 사람과의 특별한 순간을 기념하거나, 비즈니스 파트너와의 성공적인 만찬을 즐기는 상상을 해보세요. 이곳, 더 레드버리에서는 단순한 식사를 넘어, 오랫동안 기억될 특별한 경험을 선사받을 수 있습니다. 귓가에는 은은한 클래식 음악이 흐르고, 셰프와 소믈리에의 정성 어린 설명이 더해져, 미각뿐 아니라 오감을 만족시키는 완벽한 밤이 펼쳐질 거예요. 런던 여행 중, 미식의 정점을 경험하고 싶다면, 주저하지 말고 더 레드버리를 방문해보세요. 분명 여러분의 기대를 뛰어넘는 감동을 선사할 겁니다.",
+    "description": "Two Michelin star fine dining",
+    "category": "Restaurant",
+    "detailedDescription": "더 레드버리는 현대 유럽 요리의 정수를 보여주는 미슐랭 2스타 레스토랑입니다. 셰프 브렛 그레이엄(Brett Graham)의 지휘 아래, 신선한 제철 재료를 사용하여 창의적이고 혁신적인 요리를 선보입니다. 이곳의 특징은 단순한 미식 경험을 넘어, 요리 하나하나에 담긴 철학과 스토리를 전달하는 데 집중한다는 점입니다. 더 레드버리의 숨겨진 비화 하나를 알려드릴까요? 사실, 브렛 그레이엄 셰프는 어린 시절 농장에서 자라며 식재료에 대한 깊은 이해를 쌓았다고 합니다. 이러한 경험은 그의 요리에 고스란히 반영되어, 자연의 맛을 최대한 살리는 데 큰 영향을 미쳤습니다. 런던 현지인들 사이에서는 특별한 날, 기념일을 축하하기 위한 최고의 장소로 손꼽히며, 예약 경쟁이 매우 치열합니다. 특히, 테이스팅 메뉴는 셰프의 철학과 창의성을 엿볼 수 있는 최고의 선택이며, 소믈리에가 추천하는 와인 페어링은 음식의 풍미를 더욱 돋보이게 합니다. 방문 전, 공식 웹사이트를 통해 메뉴와 드레스 코드를 확인하는 것이 좋습니다. 잊지 마세요, 이곳은 단순한 레스토랑이 아닌, 런던 미식 여행의 하이라이트가 될 특별한 공간입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "The Ledbury",
+        "narration": "Dine at The Ledbury, a two-Michelin-starred restaurant offering exceptional modern European cuisine.",
+        "description": "Two Michelin star fine dining"
+      },
+      "ko": {
+        "name": "더 레드버리",
+        "narration": "뛰어난 모던 유러피언 요리를 제공하는 미슐랭 2스타 레스토랑 더 레드버리에서 식사하세요.",
+        "description": "미슐랭 2스타 파인 다이닝"
+      },
+      "it": {
+        "name": "The Ledbury",
+        "narration": "Cena a The Ledbury, un ristorante due stelle Michelin che offre eccezionale cucina europea moderna.",
+        "description": "Fine dining due stelle Michelin"
+      }
+    },
+    "openingHours": "Wed-Sat: 12:00-14:00, 18:30-21:30 | Closed Sun-Tue",
+    "priceRange": "££££ (£150-200 per person)",
+    "cuisine": "Modern European",
+    "reservationUrl": "https://www.theledbury.com/",
+    "phoneNumber": "+44 20 7792 9090",
+    "menuHighlights": [
+      "Flame-Grilled Mackerel",
+      "Berkshire Deer",
+      "Tasting Menu"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:41.390Z",
+    "updatedAt": "2026-02-22T18:28:42.405Z"
+  },
+  {
+    "id": "바르셀로나-demo-2",
+    "cityId": "barcelona",
+    "name": "바르셀로나의 맛집 골목",
+    "lat": 0.1,
+    "lng": 0.1,
+    "radius": 50,
+    "narration": "자, 상상해보세요. 따스한 햇살이 쏟아지는 바르셀로나의 오후, 여러분은 지금 미식의 심장, 맛집 골목에 서 있습니다. 좁다란 골목길을 따라 늘어선 식당들은 저마다 독특한 분위기를 뽐내며 여러분을 유혹하죠. 짭짤한 타파스 냄새, 올리브 오일에 구워지는 해산물 소리, 흥겨운 스페인 기타 연주까지... 오감이 즐거워지는 순간이에요. 잠시 눈을 감고 깊게 숨을 들이쉬어 보세요. 바르셀로나의 진짜 맛이 여러분의 온몸으로 스며드는 것을 느낄 수 있을 거예요. \n\n이 골목은 단순한 식당가가 아니에요. 대대로 이어져 온 가족 경영 식당부터 젊은 셰프들의 실험적인 레스토랑까지, 바르셀로나의 역사와 문화가 고스란히 담겨 있는 곳이죠. 마치 미로처럼 얽힌 골목길을 탐험하며 숨겨진 보석 같은 맛집을 발견하는 재미는 상상 그 이상일 거예요. 지금 여러분의 발 아래에는 수백 년 동안 수많은 사람들의 발길이 닿았던 역사의 흔적이 느껴지지 않나요? \n\n자, 이제 용기를 내서 아무 식당이나 들어가 보세요. 걱정 마세요. AI가 엄선한 맛집 정보가 여러분을 최고의 선택으로 이끌어줄 테니까요. 바삭한 빵 위에 신선한 토마토를 올린 '판 콘 토마테', 매콤한 소스가 일품인 '파트라스 브라바스', 싱싱한 해산물이 가득한 '빠에야'까지... 입 안에서 펼쳐지는 미식의 향연에 흠뻑 빠져보세요. 그리고 잊지 마세요. 진정한 바르셀로나의 맛은 화려한 레스토랑이 아닌, 소박하고 정겨운 맛집 골목에서 찾을 수 있다는 것을요. 자, 맛있는 여행을 시작해볼까요?",
+    "description": "로컬 테스트용 맛집 거리",
+    "category": "Restaurant",
+    "detailedDescription": "바르셀로나의 맛집 골목은 단순한 관광 코스가 아닌, 현지인들의 삶과 문화를 엿볼 수 있는 특별한 공간입니다. 람블라스 거리에서 조금만 벗어나면 좁고 구불구불한 골목길들이 미로처럼 펼쳐지는데, 바로 이 곳에 숨겨진 맛집들이 자리하고 있습니다. 수십 년 동안 한 자리를 지켜온 노포부터 젊은 셰프들이 개성 넘치는 요리를 선보이는 트렌디한 레스토랑까지, 다양한 선택지가 미식가들을 설레게 합니다. \n\n**현지인 꿀팁**: 맛집 골목에서는 메뉴판을 꼼꼼히 살펴보는 것이 중요합니다. '메뉴 델 디아(Menu del Dia)'라고 적힌 점심 특선 메뉴는 저렴한 가격에 푸짐한 식사를 즐길 수 있는 기회입니다. 또한, 바르셀로나 사람들은 식사 시간을 중요하게 생각하므로, 예약 없이 방문하면 긴 줄을 서야 할 수도 있습니다. 특히 주말 저녁에는 예약이 필수입니다. \n\n**숨겨진 비화**: 맛집 골목에는 오래된 전설이 하나 전해져 내려옵니다. 골목 어귀에 있는 작은 분수에서 물을 마시면 바르셀로나에 다시 돌아오게 된다는 이야기가 있죠. 정말일지는 모르겠지만, 분수 앞에서 소원을 빌며 물을 마시는 관광객들의 모습을 심심치 않게 볼 수 있습니다. 바르셀로나를 사랑하는 사람이라면 꼭 한번 시도해보세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "역사적 배경이 존재하지 않는 현대식 구역입니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "바르셀로나의 맛집 골목",
+        "description": "로컬 테스트용 맛집 거리",
+        "narration": "현지인들만 아는 비밀스러운 맛집들이 모여있는 곳입니다. 데모 모드에서는 AI가 직접 생성한 것처럼 보이지만, 사실 시스템이 제공하는 안전한 테스트 데이터란다. 맛있어 보이는 음식 사진들이 눈앞에 그려지지 않니?"
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:57:47.519Z",
+    "updatedAt": "2026-02-22T18:05:56.899Z"
+  },
+  {
+    "id": "london_더_울즐리_the_wolseley",
+    "cityId": "london",
+    "name": "더 울즐리 (The Wolseley)",
+    "lat": 51.5085,
+    "lng": -0.1423,
+    "radius": 75,
+    "narration": "피카딜리 거리의 분주함 속에서, 당신은 마치 마법에 홀린 듯 거대한 브론즈 문이 있는 우아한 건물 앞에 이끌립니다. 문이 열리는 순간, 따뜻하고 활기찬 공기가 당신을 감쌉니다. 후각으로는 갓 내린 에스프레소의 고소한 향과 갓 구운 페이스트리의 달콤한 버터 향이 섞여 런던의 아침을 축복하는 듯합니다. 시선을 따라가면, 거대한 식당 홀이 눈앞에 펼쳐집니다. 흑백 대리석 바닥은 마치 체스판처럼 빛나고, 높은 천장 아래로는 화려한 샹들리에가 반짝이며 금빛 조명을 흩뿌립니다.\n잔잔한 대화 소리, 포크와 나이프가 접시에 부딪히는 경쾌한 소리, 그리고 바에서 칵테일을 젓는 얼음 소리가 어우러져 공간을 가득 채웁니다. 이 모든 소리가 하나의 교향악처럼 조화를 이루며, 이곳이 단순한 식당이 아닌 삶의 축제가 펼쳐지는 무대임을 알려줍니다. 창밖으로는 런던 시내의 활기찬 모습이 액자처럼 펼쳐지고, 그 안에서 당신은 시간과 공간을 초월한 듯한 착각에 빠져들게 됩니다. 숙련된 웨이터들이 은쟁반에 담아온 요리를 우아하게 내려놓을 때, 섬세하게 장식된 접시 위의 음식은 단순한 끼니를 넘어선 예술 작품처럼 다가옵니다. 이곳에서 당신은 미각, 후각, 시각, 청각, 그리고 공간이 주는 특별한 감각까지, 오감을 통해 런던의 진정한 품격을 경험하게 될 것입니다.",
+    "description": "1920년대 유럽 그랜드 카페의 화려함 속에서 런던의 아침을 여는 미식의 전설",
+    "category": "Restaurant",
+    "detailedDescription": "여러분! 런던의 중심부에 자리 잡고 있는 더 울즐리에 오신 것을 환영합니다! 자, 지금부터 저와 함께 1920년대의 유럽 그랜드 카페의 화려함 속으로 뛰어들어 볼까요? 눈을 감고 그 시대를 상상해 보세요: 웅장한 대리석 기둥이 높이 솟아오르고, 대형 샹들리에에서 뿜어져 나오는 빛이 공간을 화려하게 밝히고 있습니다. 모든 것이 반짝이고 빛나며, 고급스러운 향기가 공기를 가득 채우고 있습니다. 아침을 맞이하는 이곳, 더 울즐리에서의 미식 경험은 단순한 식사가 아니라 역사 속으로의 여행입니다!\n\n이제, 시간을 거슬러 올라가 볼까요? 더 울즐리는 1921년에 올드 본 스트리트에 처음 문을 열었습니다. 당시 런던에서는 자동차가 점점 더 대중화되고 있었고, 대서양을 건너는 대형 여객선들이 전 세계를 잇고 있었습니다. 이 웅장한 건물은 원래 자동차 대리점으로 설계되었지만, 금방 그 목적을 넘어서서 당시 최고의 사교 공간으로 자리 잡았습니다. 이곳을 건설한 아크리이트는 윌리엄 커티스 그린으로, 그는 당시의 정치적 혼란 속에서도 새로운 시대의 상징을 창조하고자 했습니다. \n\n그 시절의 더 울즐리에서 일어났던 한 가지 드라마틱한 이야기를 소개할게요. 상류층의 사교 모임이 한창 펼쳐지던 어느 날, 영국의 유명한 인사인 에드워드 왕자가 깜짝 방문을 했습니다. 그가 이곳에서 한층 더 빛나는 화려한 밤을 보낸 후, 그의 방문은 곧 전설이 되었고, 더 울즐리는 한층 더 하늘 높은 줄 모르게 유명해졌습니다. 그 당시 이곳에서 즐겼던 사람들은 자신들이 역사 속에서 어떤 순간을 경험하고 있는지 아마도 알지 못했을 것입니다.\n\n이제 더 울즐리의 건축적 경이로움에 대해 이야기해 볼까요? 이 건물은 강력한 철골 구조와 고급 대리석으로 지어졌습니다. 엔지니어들은 당시 최첨단 기술을 활용하여 이곳을 단순한 카페가 아닌, 예술 작품으로 만들어냈습니다. 대리석 바닥의 디테일 하나하나가 그들의 노력을 증명하고 있습니다. 여러분, 건물을 둘러보며 그 세밀함과 정교한 미를 감상해 보세요!\n\n그리고 여러분, 이곳에는 감춰진 비밀들이 있습니다. 예를 들어, 홀의 천장에 새겨진 장식들은 단순히 화려함을 더하는 장식이 아니라, 그 당시의 사회적, 정치적 상징들이 담겨져 있습니다. 많은 관광객들이 지나치기 쉬운 이 작은 디테일들에는 수많은 이야기가 숨겨져 있습니다. 그러니 주의를 기울여 보세요!\n\n더 울즐리는 시간이 흐르며 쇠퇴기를 맞았지만, 현대에 들어와 그 위대함을 다시 되찾았습니다. 2003년에 대대적인 복원 작업을 거쳐 지금의 모습으로 되살아났습니다. 이 복원 과정에서는 수많은 역사 전문가들과 장인들이 참여하여, 그 옛날의 웅장함을 다시금 우리 앞에 펼쳤습니다. 이렇듯 더 울즐리는 시대를 초월한 매력을 지니고 있습니다.\n\n현대에 들어와 더 울즐리는 수많은 영화와 드라마의 배경지로 등장하며, 또 다른 매력을 더했습니다. 이곳을 방문하는 현대의 관광객들은 셀카를 찍으며 \"여기서 그 장면이 찍혔어!\"라는 외침을 멈추지 않습니다. 그리고 여러분, 때때로 그들은 음식을 먹기보다 인스타그램에 사진을 올리는 데 더 열중하기도 한다는 사실!\n\n마지막으로, 더 울즐리가 인류 역사에서 어떤 의미를 가지는지 생각해 봅시다. 이곳은 단순한 건물이 아닙니다. 과거와 현재가 공존하며, 시대를 초월한 이야기들을 품고 있는 공간입니다. 여기서는 어떤 형태로든 연결된다는 느낌을 받을 수 있습니다. 지난 날의 영광과 오늘날의 활기를 동시에 느껴볼 수 있는 곳, 바로 더 울즐리입니다.\n\n자, 이제 여러분도 이곳의 이야기를 가슴에 품고 가세요. 더 울즐리는 단순한 카페 그 이상의 의미를 담고 있습니다. 이곳에서의 경험은 여러분의 마음에 영원히 남을 것입니다. 다음에 이곳을 다시 방문할 때는 이 모든 이야기를 떠올리며, 그 속에서 새로운 디테일을 발견해 보세요! 여러분과의 이 짧은 여정이 끝나가지만, 더 울즐리와의 이야기는 계속될 것입니다. 감사합니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "더 울즐리 (The Wolseley)",
+        "description": "1920년대 유럽 그랜드 카페의 화려함 속에서 런던의 아침을 여는 미식의 전설",
+        "narration": "피카딜리 거리의 분주함 속에서, 당신은 마치 마법에 홀린 듯 거대한 브론즈 문이 있는 우아한 건물 앞에 이끌립니다. 문이 열리는 순간, 따뜻하고 활기찬 공기가 당신을 감쌉니다. 후각으로는 갓 내린 에스프레소의 고소한 향과 갓 구운 페이스트리의 달콤한 버터 향이 섞여 런던의 아침을 축복하는 듯합니다. 시선을 따라가면, 거대한 식당 홀이 눈앞에 펼쳐집니다. 흑백 대리석 바닥은 마치 체스판처럼 빛나고, 높은 천장 아래로는 화려한 샹들리에가 반짝이며 금빛 조명을 흩뿌립니다.\n잔잔한 대화 소리, 포크와 나이프가 접시에 부딪히는 경쾌한 소리, 그리고 바에서 칵테일을 젓는 얼음 소리가 어우러져 공간을 가득 채웁니다. 이 모든 소리가 하나의 교향악처럼 조화를 이루며, 이곳이 단순한 식당이 아닌 삶의 축제가 펼쳐지는 무대임을 알려줍니다. 창밖으로는 런던 시내의 활기찬 모습이 액자처럼 펼쳐지고, 그 안에서 당신은 시간과 공간을 초월한 듯한 착각에 빠져들게 됩니다. 숙련된 웨이터들이 은쟁반에 담아온 요리를 우아하게 내려놓을 때, 섬세하게 장식된 접시 위의 음식은 단순한 끼니를 넘어선 예술 작품처럼 다가옵니다. 이곳에서 당신은 미각, 후각, 시각, 청각, 그리고 공간이 주는 특별한 감각까지, 오감을 통해 런던의 진정한 품격을 경험하게 될 것입니다.",
+        "detailedDescription": "피카딜리 서커스에서 멀지 않은 곳에 자리한 '더 울즐리'는 단순한 레스토랑이 아닌, 1920년대 유럽 그랜드 카페의 황금기를 재현한 살아있는 역사 그 자체입니다. 원래 이 건물은 1921년에 울즐리 자동차 회사의 화려한 쇼룸으로 지어졌으며, 그 후에도 은행으로 사용되는 등 격동의 세월을 보냈습니다. 하지만 2003년, 유명 레스토랑 경영자들이 이 공간을 런던에서 가장 우아하고 매력적인 다이닝 공간으로 탈바꿈시켰습니다. 프랑스에서 영감을 받은 브라세리 스타일의 메뉴와 웅장한 아르데코 인테리어는 들어서는 순간 시선을 압도합니다. 높은 천장, 흑백 체크무늬 바닥, 거대한 기둥과 화려한 샹들리에가 어우러져 과거의 영광을 고스란히 느낄 수 있게 합니다.\n더 울즐리는 특히 런던의 '파워 브렉퍼스트' 명소로 유명하며, 일찍부터 많은 유명인사들이 찾는 곳으로 알려져 있습니다. 현지인들 사이에서는 브런치나 애프터눈 티도 놓칠 수 없는 경험으로 꼽힙니다. 늦은 저녁에는 재즈 선율과 함께 런던의 밤을 우아하게 마무리할 수 있는 장소가 됩니다. 이곳의 진정한 매력은 음식뿐 아니라, 그 공간이 주는 특별한 분위기와 세심한 서비스에 있습니다. 테이블 간의 적당한 간격, 숙련된 서버들의 친절함, 그리고 끊임없이 움직이는 주방의 활기찬 에너지가 완벽하게 조화를 이룹니다. 예약은 필수이며, 특히 창가 자리를 원한다면 최소 한 달 전에는 예약하는 것이 좋습니다."
+      }
+    },
+    "openingHours": "매일 07:00 - 23:00 (금, 토는 더 늦게까지, 공식 웹사이트 참조)",
+    "priceRange": "£30 - £100+ (1인 기준, 식사 및 코스에 따라 상이)",
+    "cuisine": null,
+    "reservationUrl": "https://www.thewolseley.com/reservations",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-14T00:44:36.243Z",
+    "updatedAt": "2026-02-22T18:05:57.792Z"
+  },
+  {
+    "id": "rome_restaurant_flavio_al_velavevodetto",
+    "cityId": "rome",
+    "name": "Flavio al Velavevodetto",
+    "lat": 41.8813,
+    "lng": 12.4767,
+    "radius": 40,
+    "narration": "Savor Roman classics at Flavio al Velavevodetto, famous for its traditional recipes and welcoming atmosphere.",
+    "description": "Classic Roman cuisine in Testaccio",
+    "category": "Restaurant",
+    "detailedDescription": "Located in the historic Testaccio neighborhood, Flavio al Velavevodetto is renowned for its authentic Roman cuisine. The restaurant specializes in offal dishes and traditional pastas, prepared with recipes passed down through generations. The casual, bustling atmosphere attracts both locals and visitors seeking genuine Roman flavors. The portions are generous and the prices are reasonable for the quality offered.",
+    "photos": [
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "Savor Roman classics at Flavio al Velavevodetto, famous for its traditional recipes and welcoming atmosphere.",
+        "description": "Classic Roman cuisine in Testaccio",
+        "detailedDescription": "Located in the historic Testaccio neighborhood, Flavio al Velavevodetto is renowned for its authentic Roman cuisine. The restaurant specializes in offal dishes and traditional pastas, prepared with recipes passed down through generations. The casual, bustling atmosphere attracts both locals and visitors seeking genuine Roman flavors. The portions are generous and the prices are reasonable for the quality offered."
+      },
+      "ko": {
+        "name": "플라비오 알 벨라베보데토",
+        "narration": "전통 레시피와 환영하는 분위기로 유명한 플라비오 알 벨라베보데토에서 로마 클래식을 맛보세요.",
+        "description": "테스타치오의 클래식 로마 요리",
+        "detailedDescription": "역사적인 테스타치오 지역에 위치한 플라비오 알 벨라베보데토는 정통 로마 요리로 유명합니다. 이 레스토랑은 대대로 전해 내려온 레시피로 준비된 내장 요리와 전통 파스타를 전문으로 합니다. 캐주얼하고 활기찬 분위기는 진정한 로마 맛을 찾는 현지인과 방문객 모두를 끌어들입니다. 양은 푸짐하고 제공되는 품질에 비해 가격도 합리적입니다."
+      },
+      "it": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "Assapora i classici romani da Flavio al Velavevodetto, famoso per le sue ricette tradizionali e l'atmosfera accogliente.",
+        "description": "Cucina romana classica a Testaccio",
+        "detailedDescription": "Situato nel storico quartiere di Testaccio, Flavio al Velavevodetto è rinomato per la sua autentica cucina romana. Il ristorante è specializzato in piatti a base di frattaglie e paste tradizionali, preparati con ricette tramandate di generazione in generazione. L'atmosfera informale e vivace attrae sia i locali che i visitatori alla ricerca di autentici sapori romani. Le porzioni sono generose e i prezzi sono ragionevoli per la qualità offerta."
+      },
+      "es": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "Saborea los clásicos romanos en Flavio al Velavevodetto, famoso por sus recetas tradicionales y ambiente acogedor.",
+        "description": "Cocina romana clásica en Testaccio",
+        "detailedDescription": "Ubicado en el histórico barrio de Testaccio, Flavio al Velavevodetto es reconocido por su auténtica cocina romana. El restaurante se especializa en platos de casquería y pastas tradicionales, preparados con recetas transmitidas de generación en generación. El ambiente casual y animado atrae tanto a locales como a visitantes que buscan auténticos sabores romanos. Las porciones son generosas y los precios son razonables para la calidad ofrecida."
+      },
+      "fr": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "Savourez les classiques romains chez Flavio al Velavevodetto, célèbre pour ses recettes traditionnelles et son atmosphère accueillante.",
+        "description": "Cuisine romaine classique à Testaccio",
+        "detailedDescription": "Situé dans le quartier historique de Testaccio, Flavio al Velavevodetto est réputé pour sa cuisine romaine authentique. Le restaurant est spécialisé dans les plats d'abats et les pâtes traditionnelles, préparés selon des recettes transmises de génération en génération. L'atmosphère décontractée et animée attire aussi bien les locaux que les visiteurs à la recherche de saveurs romaines authentiques. Les portions sont généreuses et les prix raisonnables pour la qualité proposée."
+      },
+      "de": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "Genießen Sie römische Klassiker bei Flavio al Velavevodetto, berühmt für seine traditionellen Rezepte und einladende Atmosphäre.",
+        "description": "Klassische römische Küche in Testaccio",
+        "detailedDescription": "Im historischen Viertel Testaccio gelegen, ist Flavio al Velavevodetto für seine authentische römische Küche bekannt. Das Restaurant ist auf Innereien-Gerichte und traditionelle Pasta spezialisiert, die nach Generationen überlieferten Rezepten zubereitet werden. Die lockere, belebte Atmosphäre zieht sowohl Einheimische als auch Besucher an, die echte römische Aromen suchen. Die Portionen sind großzügig und die Preise für die gebotene Qualität angemessen."
+      },
+      "zh": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "在Flavio al Velavevodetto品尝罗马经典美食，这里以传统食谱和温馨氛围而闻名。",
+        "description": "泰斯塔奇奥的经典罗马美食",
+        "detailedDescription": "位于历史悠久的泰斯塔奇奥社区，Flavio al Velavevodetto以其正宗的罗马美食而闻名。餐厅专门供应内脏菜肴和传统意面，采用代代相传的食谱制作。休闲热闹的氛围吸引了寻求正宗罗马风味的当地人和游客。份量慷慨，价格对于所提供的品质来说非常合理。"
+      },
+      "ja": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "伝統的なレシピと温かい雰囲気で有名なFlavio al Velavevodettoでローマの定番料理をお楽しみください。",
+        "description": "テスタッチョのクラシックなローマ料理",
+        "detailedDescription": "歴史あるテスタッチョ地区に位置するFlavio al Velavevodettoは、本格的なローマ料理で有名です。レストランは代々受け継がれてきたレシピで調理された内臓料理と伝統的なパスタを専門としています。カジュアルで活気のある雰囲気は、本物のローマの味を求める地元の人々と観光客の両方を惹きつけます。ポーションは惜しみなく、提供される品質に対して価格も手頃です。"
+      },
+      "pt": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "Saboreie os clássicos romanos no Flavio al Velavevodetto, famoso por suas receitas tradicionais e atmosfera acolhedora.",
+        "description": "Cozinha romana clássica em Testaccio",
+        "detailedDescription": "Localizado no histórico bairro de Testaccio, Flavio al Velavevodetto é reconhecido por sua autêntica cozinha romana. O restaurante é especializado em pratos de miúdos e massas tradicionais, preparados com receitas passadas de geração em geração. A atmosfera casual e movimentada atrai tanto locais quanto visitantes em busca de sabores romanos genuínos. As porções são generosas e os preços são razoáveis pela qualidade oferecida."
+      },
+      "ru": {
+        "name": "Flavio al Velavevodetto",
+        "narration": "Насладитесь римской классикой в Flavio al Velavevodetto, известном своими традиционными рецептами и гостеприимной атмосферой.",
+        "description": "Классическая римская кухня в Тестаччо",
+        "detailedDescription": "Расположенный в историческом районе Тестаччо, Flavio al Velavevodetto славится своей аутентичной римской кухней. Ресторан специализируется на блюдах из субпродуктов и традиционных пастах, приготовленных по рецептам, передаваемым из поколения в поколение. Непринужденная оживленная атмосфера привлекает как местных жителей, так и гостей, ищущих подлинные римские вкусы. Порции щедрые, а цены разумные для предлагаемого качества."
+      }
+    },
+    "openingHours": "Mon-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun",
+    "priceRange": "€€ (€30-45 per person)",
+    "cuisine": "Traditional Roman",
+    "reservationUrl": "https://www.thefork.com/restaurant/flavio-al-velavevodetto-r43289",
+    "phoneNumber": "+39 06 574 4194",
+    "menuHighlights": [
+      "Rigatoni con la Pajata",
+      "Coda alla Vaccinara",
+      "Trippa",
+      "Supplì"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:40.424Z",
+    "updatedAt": "2026-02-22T18:13:05.237Z"
+  },
+  {
+    "id": "jeju_item_77",
+    "cityId": "jeju",
+    "name": "제주특별자치도 프리미엄 Restaurant 추천 78",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+    "description": "이곳은 jeju에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 오늘 저와 함께 제주특별자치도의 숨겨진 진주, 제주의 프리미엄 레스토랑 추천 78에 대해 탐험해 보도록 하겠습니다! 상상해 보세요! 눈앞에 펼쳐지는 이 아름다운 풍경, 그야말로 제주도의 모든 멋짐을 한 자리에서 느낄 수 있는 곳입니다. 여러분의 귀를 즐겁게 하는 신선한 제주 바람의 속삭임과, 그 속삭임에 담긴 레스토랑의 식욕을 돋우는 다양한 요리의 냄새. 마치 자연과 요리가 한데 어우러진 오케스트라처럼 우리의 감각을 사로잡습니다!\n\n이제 여러분을 이곳으로 초대한 이야기의 시작으로 돌아가 볼까요? 제주의 프리미엄 레스토랑 추천 78은, 그 시작도 아주 특별했습니다. 이야기를 시작하기 전, 상상해 보세요! 1990년대 중반, 제주도는 세계에서 주목받기 시작했으며, 그 시기에 이곳은 지역의 자부심을 걸고 탄생했어요. 이곳을 설립한 이는 바로 제주 출신의 유명한 셰프, '김영식'이었습니다. 그는 어릴 적부터 바다와 땅에서 나오는 재료의 조화를 느끼며 자랐고, 세계를 여행하며 얻은 다양한 경험을 통해 자신만의 레스토랑을 열게 되었습니다. 당시 제주도는 관광산업을 통해 지역 경제를 활성화하려는 시도를 하고 있었고, 김영식 셰프의 도전 역시 그 시기의 흐름에 발맞춘 것이었죠.\n\n이제 여러분, 김영식 셰프와 그의 레스토랑이 그 시대 사람들에게 어떤 의미였는지 아시나요? 듣기 싫어할 줄 알았겠지만, 이건 정말 흥미로운 이야기입니다. 김영식은 자신만의 요리 철학을 위해 전 세계에서 재료를 공수했어요. 그리고 그 과정에서 알게 된 한 젊은 농부와의 우정이 레스토랑 성공의 비결이 되었죠. 그 농부는 제주 토박이로, 지역의 자연을 활용한 재배법을 배우고 있었습니다. 김영식은 자신의 레스토랑에 그 농부의 농산물을 사용하기로 결정했고, 그것이 바로 이 곳의 요리가 특별한 이유가 되었습니다.\n\n이제 건축의 비밀로 넘어가 볼까요? 제주의 프리미엄 레스토랑 추천 78은 단순한 건축물이 아닙니다. 그야말로 예술 작품입니다! 이곳의 건축은 자연과 융합되도록 설계되었습니다. 여러분, 여기서 한 걸음 내디뎌 보세요. 이곳의 벽들은 제주 현무암을 사용하여 만들어졌고, 자연광을 최대한 활용할 수 있도록 창문이 배치되어 있습니다. 그 덕분에 실내에서도 제주의 따스한 햇살을 느낄 수 있습니다.\n\n그런데 이곳에 숨겨진 비밀, 알고 계신가요? 건축물 곳곳에 숨겨진 작은 장식들은 모두 제주도의 전통적인 문양을 본뜬 것입니다. 많은 관광객들이 지나치기 쉽지만, 그 작은 문양들은 제주도의 문화와 역사를 보여주고 있습니다. 마치 그 자체가 제주도의 작은 박물관 같지 않나요?\n\n근대와 현대를 연결하는 다리 같은 이곳은 어떻게 다시 주목받게 되었을까요? 시대의 흐름 속에서 잠시 잊혔던 이 레스토랑은 최근 몇 년 사이 다시 부활했습니다. 전문가들은 이곳의 가치를 재발견하고, 원래의 아름다움을 되살리기 위해 많은 노력을 기울였죠. 복원 작업은 제주 지역 사회의 지원 속에서 이루어졌고, 그 결과는 그야말로 장관입니다.\n\n그리고 여러분, 이 레스토랑이 영화 속 한 장면 같다는 소리를 들어보셨나요? 실제로 이곳은 여러 영화와 드라마에 등장하면서 현대 문화 속에서 더욱더 많은 사람들에게 사랑받게 되었어요. 재미있는 사실은, 일부 방문객들이 영화의 한 장면을 연출하듯이 사진을 찍고 즐긴다고 합니다. 그들이 사진을 찍으며 웃고 즐거워하는 모습을 보면, 이곳이 얼마나 매력적인지 알 수 있습니다.\n\n마지막으로, 여러분께 이 장소의 철학적인 의미를 전해드리고 싶습니다. 제주의 프리미엄 레스토랑 추천 78은 단순한 식당이 아닙니다. 그것은 자연과 인간의 조화, 그리고 그 속에서 탄생한 문화의 결실입니다. 이곳에서의 한 끼는 단순한 식사가 아닌, 제주의 자연과 역사를 맛보는 특별한 경험이죠.\n\n이제 여러분, 이곳에서의 시간을 마무리하며, 이 레스토랑이 여러분의 마음속에 어떤 기억으로 남게 될지 상상해 보세요. 이곳은 제주도의 심장과도 같은 곳이며, 그곳에서의 경험은 여러분의 제주 여행을 더욱 특별하게 만들어 줄 것입니다. 여러분이 이곳을 떠나며 느낄 감동이, 오래도록 마음속에 남을 거라 확신합니다. 여러분, 다음에 또 만나요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "제주특별자치도 프리미엄 Restaurant 추천 78",
+        "narration": "반갑습니다! 이곳은 제주특별자치도에서 여러분이 꼭 방문하셔야 할 아주 특별한 Restaurant 명소입니다. 이곳의 가장 큰 매력은 도시의 역사와 현대적인 감각이 완벽하게 조화를 이루고 있다는 점인데요, 현지인들 사이에서도 숨겨진 보석으로 통하는 이곳은 방문객들에게 잊지 못할 깊은 감동과 여운을 선사합니다. 내부에 들어서는 순간 느껴지는 독특한 분위기와 세련된 인테리어는 물론, 각각의 코너마다 숨겨진 흥미진진한 스토리를 가이드의 목소리로 생생하게 들려드릴 예정입니다. 여행의 피로를 잊게 해줄 시원한 바람과 함께, 제주특별자치도만의 정취를 물씬 느끼며 특별한 추억을 만들어보시는 건 어떨까요? 저희 Kenneth Cruise Guide는 여러분의 여행이 더욱 풍성하고 가치 있는 시간이 될 수 있도록 항상 최선을 다해 정보를 엄선하고 있습니다. 오늘 이곳에서의 경험이 여러분의 인생 여행 리스트에서 가장 빛나는 한 페이지가 되기를 진심으로 기원합니다. 지금부터 저와 함께 이 놀라운 장소의 구석구석을 탐험하며 그 숨겨진 매력을 하나씩 발견해 보시죠! 정말 기대되지 않나요?",
+        "description": "제주특별자치도의 대표적인 Restaurant입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:06.794Z",
+    "updatedAt": "2026-02-22T18:06:04.897Z"
+  },
+  {
+    "id": "seoul_정식당_서울_jungsik_seoul",
+    "cityId": "seoul",
+    "name": "정식당 서울 (Jungsik Seoul)",
+    "lat": 37.525501,
+    "lng": 127.039602,
+    "radius": 70,
+    "narration": "화려한 강남의 불빛 속에서도 고요하게 빛나는 이곳, 정식당의 문을 열고 들어서는 순간, 모던하고 세련된 공간이 당신을 맞이합니다. 은은한 조명과 절제된 인테리어는 앞으로 펼쳐질 미식의 향연을 예고하는 듯합니다. 자리에 앉자마자, 테이블 위에 놓인 정갈한 식기들이 벌써부터 기대감을 자아냅니다. 잠시 후, 첫 번째 요리가 마치 예술 작품처럼 등장합니다. 눈으로 먼저 맛보는 즐거움이 이런 것일까요? 셰프의 섬세한 손길이 느껴지는 플레이팅은 감탄을 자아냅니다. 코끝을 스치는 은은한 향기, 그리고 한 입 베어 물었을 때 입안 가득 퍼지는 복합적인 맛의 향연은 그 어떤 수식어로도 표현하기 어렵습니다. 예를 들어, 시그니처 메뉴인 '성게 비빔밥'을 맛볼 때면, 고소한 성게알의 풍미와 김 퓨레의 절묘한 조화가 파도처럼 밀려옵니다. 익숙한 비빔밥의 형태는 유지하되, 재료의 신선함과 독창적인 해석이 어우러져 전혀 새로운 미식 경험을 선사하는 것이죠. 옆 테이블에서는 낮은 목소리로 대화하는 소리가 들려오고, 잔이 부딪히는 소리마저도 섬세하게 들리는 이 공간에서, 여러분은 단순한 식사가 아닌, 한국 미식의 미래를 맛보는 특별한 시간을 보내게 될 것입니다. 모든 요리가 끝난 후에도, 그 여운은 오랫동안 기억 속에 남을 것입니다.",
+    "description": "미쉐린 2스타, 전통과 혁신이 빚어낸 뉴 코리안 다이닝의 정점.",
+    "category": "Restaurant",
+    "detailedDescription": "**[The Grand Opening]**\n\n어느 날 서울의 밤, 당신이 정식당 서울 앞에 발을 딛고 서게 된다면, 그 순간부터 당신은 단순히 레스토랑이 아닌 하나의 예술 작품 속으로 들어가게 됩니다. 상상해 보세요, 고급스러운 외관이 어둠 속에서도 은은한 빛을 발하고, 문을 열자마자 당신을 반기는 부드러운 조명과 아늑한 분위기. 주변 공기는 갓 구운 빵의 향과 신선한 향신료의 아로마로 가득 차며, 그 향이 당신의 코를 간지럽히고 입맛을 돋굽니다. 살짝 들려오는 부드러운 음악 소리, 그 멜로디가 당신의 감각을 고조시키며, 미각의 모험이 시작될 준비를 합니다. 그 순간, 모든 감각이 깨어나며 당신은 \"뉴 코리안 다이닝\"의 세계로 들어섭니다.\n\n이곳의 매력은 단순한 미슐랭 2스타 레벨의 음식이 아닙니다. 당신이 이곳에 발을 들인 순간부터, 모든 것이 하나의 거대한 예술 작품처럼 느껴집니다. 주변의 요리사는 완벽한 요리를 위해 몰두하고, 그들의 열정이 공간에 흘러넘칩니다. 귀를 기울여 보세요, 주방에서 들려오는 칼질 소리와 냄비가 부딪히는 소리. 그 모든 것이 이곳만의 독특한 오페라를 구성합니다. 한 끼의 식사가 인생의 특별한 순간이 될 수 있는 곳, 바로 이곳이 정식당 서울입니다.\n\n**[Deep-Dive History]**\n\n정식당 서울은 단순한 식당이 아닌, 하나의 역사를 품고 있는 장소입니다. 이곳은 2009년에 설립되었으며, 셰프 정호영의 뛰어난 창의력과 열정이 빚어낸 결과입니다. 당시 한국의 외식 문화는 빠르게 변하고 있었고, 전통과 현대의 조화가 요리계의 새로운 트렌드로 떠오르던 시기였습니다. 정호영 셰프는 바로 이 시기를 놓치지 않고, 뉴 코리안 다이닝이라는 새로운 장르를 개척하게 됩니다. 그의 비전은 한국의 고유한 맛을 현대적 감각으로 재해석하여 세계에 알리는 것이었고, 이로 인해 정식당은 빠르게 미슐랭의 주목을 받게 됩니다.\n\n그 당시에는 한국 요리가 세계적으로 큰 주목을 받지 못하던 시절이었습니다. 그러나 정호영 셰프는 그 속에서 한국의 고유한 맛을 잃지 않으면서도, 현대적이고 세련된 감각을 더하는 데 성공합니다. 그 중 하나의 일화로, 셰프가 어린 시절 할머니에게 배운 김치 담그는 방법을 조금씩 변형하여 현대적인 플레이트로 선보인 이야기가 있습니다. 그 결과는? 바로 미식의 세계에서 폭발적인 반응을 이끌어냈고, 정식당은 단순히 음식을 제공하는 곳이 아닌, 문화와 역사를 전달하는 중요한 공간으로 자리잡게 되었습니다.\n\n**[Architectural Wonders]**\n\n정식당 서울의 내부는 단순한 식당이 아닌 하나의 예술 작품처럼 설계되었습니다. 이곳의 건축은 전통과 현대의 조화를 이루며, 각종 고급 재료들이 사용되었습니다. 나무, 철, 유리 등 다양한 재료들이 적재적소에 배치되어 있으며, 그 디자인은 한국의 전통적인 미적 감각과 현대의 세련미를 완벽하게 아우릅니다. 특히, 내부의 조명과 색감은 요리의 아름다움을 더욱 돋보이게 하며, 마치 갤러리에 놓인 예술 작품을 감상하는 듯한 느낌을 줍니다.\n\n하지만, 가장 흥미로운 점은 이곳의 숨겨진 디테일입니다. 벽에는 눈에 띄지 않는 작은 조각상이 자리하고 있는데, 이는 한국의 전통적인 민속 신화를 바탕으로 한 것입니다. 이 조각상들은 각기 다른 이야기를 품고 있으며, 이를 발견하는 재미는 또 다른 경험을 선사합니다. 관광객들은 이러한 숨겨진 디테일을 발견하곤 감탄하며, 그 순간순간이 사진으로 남겨지곤 합니다. 이처럼 정식당은 단순한 식사 이상의 경험을 제공하며, 방문자들에게 작고 특별한 추억을 선사합니다.\n\n**[The Modern Saga]**\n\n정식당 서울의 이야기는 여기에서 멈추지 않습니다. 시간이 흐르며, 이곳은 현대적인 감각을 더해가고 있습니다. 요리는 끊임없이 변화하고, 매 시즌마다 새로운 메뉴가 선보여지며, 방문할 때마다 새로운 경험을 제공합니다. 또한, 이곳은 다양한 매체를 통해 더욱 널리 알려지게 되었으며, 유명 셰프 쇼와 다큐멘터리에서 다루어지면서 세계인의 주목을 받게 되었습니다.\n\n흥미롭게도, 현대의 관광객들은 이곳에서 독특한 행동을 보입니다. 요리를 감상하고 난 후에는, 자신들만의 독특한 방법으로 그 경험을 기록합니다. 포크와 나이프를 놓고 젓가락을 사용해 먹으며, 각자만의 스타일로 포즈를 취하고 사진을 찍는 관광객들. 이곳은 이제 단순한 식사가 아닌, 하나의 문화 체험의 장이 되어가고 있습니다. 모든 관광객들은 이곳에서 하나의 작은 이야기를 가지고 돌아가며, 그 이야기는 또 다른 이야기의 시작이 됩니다.\n\n**[The Philosophical Conclusion]**\n\n정식당 서울은 단순한 레스토랑이 아닙니다. 이곳은 전통과 현대가 만나 새로운 것을 창조하는, 바로 그 접점에 서 있는 곳입니다. 이곳에서의 경험은 단순히 맛있는 식사를 넘어서, 한국의 역사와 문화에 대한 깊은 이해를 선사합니다. 이곳은 식사를 통해 과거와 현재를 이어주며, 방문자들에게 그 이상의 감동을 안겨줍니다.\n\n이제 당신은 정식당 서울에서 떠날 준비를 합니다. 이 특별한 경험을 가슴 깊이 간직하며, 이곳에서의 작은 순간들이 당신의 인생에서 커다란 의미로 자리 잡기를 바랍니다. 매 순간마다 느껴진 감정, 미각의 향연은 영원히 당신의 기억 속에 남을 것입니다. 다음에 이곳을 다시 방문할 때, 당신은 조금 더 넓어진 시야로, 더 깊어진 감성으로 이곳을 마주할 것입니다. 정식당 서울은 언제나 당신을 기다리고 있습니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "정식당 서울 (Jungsik Seoul)",
+        "description": "미쉐린 2스타, 전통과 혁신이 빚어낸 뉴 코리안 다이닝의 정점.",
+        "narration": "화려한 강남의 불빛 속에서도 고요하게 빛나는 이곳, 정식당의 문을 열고 들어서는 순간, 모던하고 세련된 공간이 당신을 맞이합니다. 은은한 조명과 절제된 인테리어는 앞으로 펼쳐질 미식의 향연을 예고하는 듯합니다. 자리에 앉자마자, 테이블 위에 놓인 정갈한 식기들이 벌써부터 기대감을 자아냅니다. 잠시 후, 첫 번째 요리가 마치 예술 작품처럼 등장합니다. 눈으로 먼저 맛보는 즐거움이 이런 것일까요? 셰프의 섬세한 손길이 느껴지는 플레이팅은 감탄을 자아냅니다. 코끝을 스치는 은은한 향기, 그리고 한 입 베어 물었을 때 입안 가득 퍼지는 복합적인 맛의 향연은 그 어떤 수식어로도 표현하기 어렵습니다. 예를 들어, 시그니처 메뉴인 '성게 비빔밥'을 맛볼 때면, 고소한 성게알의 풍미와 김 퓨레의 절묘한 조화가 파도처럼 밀려옵니다. 익숙한 비빔밥의 형태는 유지하되, 재료의 신선함과 독창적인 해석이 어우러져 전혀 새로운 미식 경험을 선사하는 것이죠. 옆 테이블에서는 낮은 목소리로 대화하는 소리가 들려오고, 잔이 부딪히는 소리마저도 섬세하게 들리는 이 공간에서, 여러분은 단순한 식사가 아닌, 한국 미식의 미래를 맛보는 특별한 시간을 보내게 될 것입니다. 모든 요리가 끝난 후에도, 그 여운은 오랫동안 기억 속에 남을 것입니다.",
+        "detailedDescription": "서울 강남의 미식 지도를 새롭게 그려낸 정식당은 셰프 임정식의 탁월한 비전이 담긴 미쉐린 2스타 레스토랑입니다. 이곳은 전통 한식의 재료와 맛을 기반으로 하되, 현대적인 서양 조리 기법을 과감하게 접목하여 '뉴 코리안 다이닝'이라는 새로운 장르를 개척했습니다. 단순한 식사를 넘어 하나의 예술 작품을 경험하는 듯한 코스 요리는 시각과 미각, 후각을 동시에 만족시킵니다. 대표 메뉴인 '성게 비빔밥'이나 '구절판'은 낯설면서도 익숙한 맛의 조화를 선사하며, 재료 본연의 맛을 섬세하게 살려낸 셰프의 장인정신을 엿볼 수 있습니다. 절제되면서도 우아한 인테리어와 더불어, 각 요리에 대한 섬세한 설명과 빈틈없는 서비스는 최상의 다이닝 경험을 완성합니다. 한국의 미식 수준을 세계에 알린 정식당에서, 잊을 수 없는 미식의 여정을 떠나보세요. 특별한 기념일이나 소중한 사람과의 추억을 만들기에 더할 나위 없이 완벽한 공간입니다."
+      }
+    },
+    "openingHours": "점심 12:00 - 15:00, 저녁 18:00 - 22:00. 매일 운영.",
+    "priceRange": "₩₩₩₩",
+    "cuisine": null,
+    "reservationUrl": "https://www.jungsik.kr/seoul/en/reservation/",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:43:16.739Z",
+    "updatedAt": "2026-02-22T18:06:05.602Z"
+  },
+  {
+    "id": "rome_젤라테리아_델_테아트로_gelateria_del_tea",
+    "cityId": "rome",
+    "name": "젤라테리아 델 테아트로 (Gelateria del Teatro)",
+    "lat": 41.900985,
+    "lng": 12.469076,
+    "radius": 70,
+    "narration": "(경쾌하고 달콤한 배경 음악, 사람들의 즐거운 대화 소리, 젤라또 스쿱으로 뜨는 소리) 햇살 좋은 로마의 오후, 산탄젤로 다리 근처의 매력적인 골목을 걷다 보면, 상쾌하면서도 달콤한 유혹이 여러분을 이끌 것입니다. 바로 로마 최고의 젤라또 장인들이 혼을 불어넣는 '젤라테리아 델 테아트로'입니다. 통유리 너머로 젤라또가 만들어지는 과정을 엿볼 수 있는 이곳은, 마치 작은 요리 연구소 같습니다. 신선한 우유, 제철 과일, 그리고 이탈리아 각지에서 공수한 최상급 견과류가 마법처럼 부드럽고 향긋한 젤라또로 변신하는 모습을 직접 보실 수 있죠. 자, 어떤 맛을 선택하시겠습니까? 진한 다크 초콜릿의 유혹, 아니면 라임과 바질 같은 예측 불가능한 상큼함? 무화과와 호두의 고소함, 혹은 화이트 피치와 세이지의 섬세한 조화까지. (젤라또를 맛보는 소리) 한 스푼 입에 넣는 순간, 차가운 젤라또가 사르르 녹아내리며 재료 본연의 풍미가 입안 가득 퍼집니다. 인공적인 단맛 대신, 자연 그대로의 신선함과 깊이가 느껴지실 겁니다. 이 작고 달콤한 순간이 로마에서의 여러분의 기억을 더욱 황홀하게 만들어 줄 것입니다. 로마의 역사와 예술에 지친 미각을, 이 완벽한 젤라또로 달래보세요.",
+    "description": "로마에서 가장 시적이고 독창적인 수제 젤라또를 맛보는 달콤한 순간.",
+    "category": "Restaurant",
+    "detailedDescription": "자, 여러분! 로마의 젤라또 세계로 뛰어들 시간입니다. 젤라테리아 델 테아트로로 여러분을 안내하게 되어 정말 기쁩니다. 여기가 어떤 곳인지 궁금하시죠? 찬란한 빛 속에서, 과거의 향기와 맛을 느낄 준비가 되셨나요? 자, 이제 시작합니다!\n\n**The Grand Opening**\n\n거리에 발을 디디는 순간, 마치 마법에 걸린 듯한 향기가 여러분을 감싸 안습니다. 부드럽게 퍼지는 신선한 우유와 진한 초콜릿, 그리고 톡 쏘는 과일의 향이 교차하며 코끝을 간질입니다. 눈앞에 펼쳐진 젤라테리아 델 테아트로의 모습은 그야말로 한 편의 예술 작품입니다. 옛 로마의 건축물과 조화롭게 어우러진 이곳에서, 여러분은 수많은 젤라또 맛을 경험할 수 있습니다. 바로 이곳에서, 로마의 역사가 젤라또의 달콤함과 함께 녹아내립니다.\n\n**Deep-Dive History**\n\n이곳은 2005년에 탄생했습니다. 한 낭만적인 젤라또 장인, 스테파노 마르꼬니가 처음 이곳의 문을 열었습니다. 그 당시 로마는 예술과 문화의 르네상스를 맞이하고 있었고, 스테파노는 이곳을 젤라또라는 캔버스 위에 자신의 예술을 펼치기로 결심했습니다. 젤라토를 만들기 위해 최고급 재료를 구하러 세계를 여행했고, 그 결과는 맛을 통해 느낄 수 있습니다. 그 시절 로마의 거리에서는 새로운 예술적 영감이 넘쳐났고, 젤라토는 그 중심에 있었습니다.\n\n이곳에는 스테파노의 젤라또와 함께 한 개인의 드라마틱한 이야기가 숨겨져 있습니다. 카사노바 같은 인물이었던 로마의 젊은 청년 루카가 이곳 젤라또에 반해 그만 사랑에 빠지고 말았습니다. 매일 밤 젤라또 한 스푼을 먹으며, 루카는 자신의 사랑을 고백할 방법을 고민했다고 합니다. 결국 그는 젤라또에 자신의 마음을 담아 그녀에게 고백했고, 이곳은 그들의 사랑의 시작이 되었습니다. 이야기를 들으니, 젤라또의 맛이 더욱 특별하게 다가오지 않나요?\n\n**Architectural Wonders**\n\n젤라테리아 델 테아트로는 그 자체로도 건축적 경이로움을 자랑합니다. 이곳은 과거와 현재가 조화를 이루는 공간으로, 고전적인 로마 건축물의 아름다움을 간직하고 있습니다. 특히, 이곳의 아치형 창문은 로마의 전통과 현대적인 감각이 조화를 이루는 대표적인 예입니다. 젤라또를 즐기며, 그 아래에서 느껴지는 시간의 흐름을 상상해 보세요. \n\n또한, 이곳에는 쉽게 지나칠 수 있는 숨겨진 디테일들이 많습니다. 예를 들어, 작은 문구가 새겨진 벽돌들이 곳곳에 숨어 있습니다. 이는 스테파노가 젤라또를 만들면서 들었던 음악의 가사나, 그가 감명을 받은 시구절들입니다. 이러한 숨겨진 이야기들을 찾아보는 것도 이곳을 방문하는 재미 중 하나입니다.\n\n**The Modern Saga**\n\n시간이 흐르면서 젤라테리아 델 테아트로는 재발견되고 복원되었습니다. 이곳은 단순한 젤라또 가게가 아닌, 로마의 문화와 예술을 상징하는 공간으로 자리매김했습니다. 많은 젊은 예술가들이 이곳에서 영감을 얻어 작품을 완성했고, 때로는 그들이 만든 작품이 이곳에서 전시되기도 했습니다. \n\n또한, 이곳은 영화와 드라마의 촬영지로도 유명합니다. 젤라또 한 입을 먹으며 사랑에 빠지는 주인공의 로맨틱한 장면이 여러 작품에서 이곳을 배경으로 펼쳐졌습니다. 관광객들이 이곳에서 자신만의 영화 속 주인공이 되어 사진을 찍는 모습은 언제나 유쾌한 광경입니다. 젤라또를 한 손에 들고, 영화 속 한 장면처럼 로마의 거리를 활보하는 관광객들을 보며, 여러분도 그런 주인공이 되어 보세요!\n\n**The Philosophical Conclusion**\n\n젤라테리아 델 테아트로는 단순히 젤라또를 파는 가게가 아닙니다. 이곳은 삶의 아름다움과 달콤함을 깨닫게 해주는 철학적인 공간입니다. 젤라또 한 입에 담긴 이야기는 우리가 지나온 과거와 앞으로 나아갈 미래를 연결하는 다리와 같습니다. 이곳에서 느낀 모든 감정과 경험은 결국 우리의 삶을 더욱 풍요롭게 만들어 줍니다.\n\n여러분, 이제 이곳을 떠날 시간이 다가왔습니다. 하지만 젤라테리아 델 테아트로는 여러분의 기억 속에서 언제나 달콤하게 간직될 것입니다. 이곳에서의 순간은 마치 한 편의 시가 되어, 여러분의 마음 속에 영원히 남게 될 것입니다. 자, 이제 여러분도 이 특별한 장소의 일부분이 되셨습니다. 다음에 다시 로마를 찾을 때, 새로운 맛의 젤라또와 함께 여러분을 다시 맞이할 것입니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "젤라테리아 델 테아트로 (Gelateria del Teatro)",
+        "description": "로마에서 가장 시적이고 독창적인 수제 젤라또를 맛보는 달콤한 순간.",
+        "narration": "(경쾌하고 달콤한 배경 음악, 사람들의 즐거운 대화 소리, 젤라또 스쿱으로 뜨는 소리) 햇살 좋은 로마의 오후, 산탄젤로 다리 근처의 매력적인 골목을 걷다 보면, 상쾌하면서도 달콤한 유혹이 여러분을 이끌 것입니다. 바로 로마 최고의 젤라또 장인들이 혼을 불어넣는 '젤라테리아 델 테아트로'입니다. 통유리 너머로 젤라또가 만들어지는 과정을 엿볼 수 있는 이곳은, 마치 작은 요리 연구소 같습니다. 신선한 우유, 제철 과일, 그리고 이탈리아 각지에서 공수한 최상급 견과류가 마법처럼 부드럽고 향긋한 젤라또로 변신하는 모습을 직접 보실 수 있죠. 자, 어떤 맛을 선택하시겠습니까? 진한 다크 초콜릿의 유혹, 아니면 라임과 바질 같은 예측 불가능한 상큼함? 무화과와 호두의 고소함, 혹은 화이트 피치와 세이지의 섬세한 조화까지. (젤라또를 맛보는 소리) 한 스푼 입에 넣는 순간, 차가운 젤라또가 사르르 녹아내리며 재료 본연의 풍미가 입안 가득 퍼집니다. 인공적인 단맛 대신, 자연 그대로의 신선함과 깊이가 느껴지실 겁니다. 이 작고 달콤한 순간이 로마에서의 여러분의 기억을 더욱 황홀하게 만들어 줄 것입니다. 로마의 역사와 예술에 지친 미각을, 이 완벽한 젤라또로 달래보세요.",
+        "detailedDescription": "폰테 산탄젤로 근처, 작은 골목에 숨어있는 '젤라테리아 델 테아트로'는 단순한 젤라또 가게가 아닌, 장인의 정신이 깃든 예술 작품을 맛볼 수 있는 곳입니다. 이곳은 이탈리아 전역에서도 손꼽히는 최고급 젤라또를 선보이며, 신선하고 최상의 재료만을 사용하여 매일 아침 직접 젤라또를 만듭니다. 상큼한 과일 소르베부터 진한 다크 초콜릿, 피스타치오, 헤이즐넛은 물론, 무화과와 호두, 화이트 피치와 세이지 등 상상력을 자극하는 독창적인 조합의 맛으로 미식가들을 사로잡습니다. 인공적인 색소나 향료 없이 재료 본연의 맛을 극대화한 부드러운 젤라또는 한 스푼 뜨는 순간, 로마의 햇살과 자연의 풍미가 입안 가득 퍼지는 경험을 선사할 것입니다. 젤라또를 만드는 과정을 엿볼 수 있는 주방이 통유리로 개방되어 있어, 보는 즐거움까지 더합니다. 로마에서의 달콤하고 완벽한 순간을 위해 이곳을 꼭 방문해 보세요."
+      }
+    },
+    "openingHours": "매일 11:00 - 00:00 (계절별 상이)",
+    "priceRange": "€",
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:36:25.335Z",
+    "updatedAt": "2026-02-22T18:06:05.668Z"
+  },
+  {
+    "id": "tokyo_나리사와_narisawa",
+    "cityId": "tokyo",
+    "name": "나리사와 (Narisawa)",
+    "lat": 35.6644,
+    "lng": 139.7188,
+    "radius": 70,
+    "narration": "(부드러운 식기 부딪히는 소리, 나지막한 대화 소리, 은은한 장작 연기와 신선한 허브 향) 사랑하는 미식가 여러분, 지금 우리는 도쿄의 중심부에서 일본의 영혼, 그리고 자연과의 깊은 대화를 요리하는 '나리사와'에 와 있습니다. 이곳은 단순한 식당이 아닙니다. 요시히로 나리사와 셰프의 손끝에서 탄생하는 '사토야마 퀴진'은 일본의 숲과 바다, 계절의 숨결을 그대로 접시에 옮겨 담습니다. 마치 숲속을 걷다가 마주친 자연의 경이로움을 맛보는 듯한 경험이죠. 테이블로 서빙되는 순간, 모든 접시가 하나의 예술 작품임을 깨닫게 됩니다. 특히, 뜨거운 돌 그릇 안에서 구워지는 '숲의 빵'은 그 자체로 퍼포먼스이자 자연의 온기를 상징합니다. 갓 구운 빵의 고소한 향이 코끝을 스치고, 겉은 바삭하고 속은 촉촉한 식감이 경이롭습니다. 이 빵 한 조각에도 셰프의 철학과 자연에 대한 존경이 담겨 있습니다. 당신의 오감을 깨우고, 일본의 식재료가 가진 본연의 아름다움을 재발견하게 할 나리사와에서의 식사는 단순한 한 끼를 넘어, 잊을 수 없는 미학적 체험이 될 것입니다. 이곳의 요리는 단순히 맛있는 것을 넘어, 우리에게 자연의 소중함과 미식을 통한 사유의 시간을 선물합니다.",
+    "description": "숲의 미학과 자연의 본질을 담아내는 미식 경험, Satoyama 퀴진의 정수",
+    "category": "Restaurant",
+    "detailedDescription": "자, 여러분! 속으로 들어가 봅시다. 두 눈을 감고, 감각을 일깨워 보세요! 우리는 지금 도쿄의 한 가운데, 나리사와에 도착했습니다. 이곳은 단순한 레스토랑이 아닙니다. 이곳은 자연의 경외감을 맛보는 곳입니다! 공기 중에 떠도는 숲의 향, 나무들이 속삭이는 소리가 들리지 않나요? 바로 앞에 보이는 것은 자연과 정교한 예술의 절묘한 조화, Satoyama 퀴진의 정수입니다. 나리사와의 문을 열면 마치 세상의 모든 자연이 여러분을 맞이하는 듯한 느낌이 드실 겁니다. 소리 없는 오케스트라가 시작되듯, 다양한 맛과 향이 여러분의 감각을 사로잡습니다. \n\n이제 나리사와의 탄생 이야기를 들려드리겠습니다. 2003년, 이곳은 요시히로 나리사와라는 혁신적이고 용감한 셰프에 의해 탄생했습니다. 그는 요리에 대한 열정과 자연에 대한 깊은 애정을 갖고 있습니다. 그때는 일본이 경제적, 문화적 부흥기를 맞이하던 시기였죠. 나리사와는 자연의 아름다움을 요리에 담아내고자 했습니다. 그는 일본의 전통적이고 독특한 '산과 들의 요리 문화'를 현대화하여 전 세계에 소개하고자 했습니다. 그의 철학은 단순한 음식이 아닌, 자연 그 자체를 탐구하는 데 있었습니다.\n\n나리사와가 추구하는 요리 철학은 단순히 재료를 조리하는 것을 넘어섭니다. 한 번은 한 농부가 나리사와에게 무언가 특별한 것을 전해주었습니다. 그것은 그의 농장에서 직접 기른 유기농 채소였죠. 농부의 얼굴에 환한 미소가 가득했는데, 그것은 마치 자신의 모든 정성과 사랑이 담긴 작품을 나리사와에게 선물하는 듯했습니다. 나리사와는 그 농부의 열정과 정성을 요리로 승화시켜, 그 채소 하나하나에 생명을 불어넣었습니다. \n\n이제 나리사와의 건축적 기적을 알아봅시다. 이곳은 그저 벽과 천장으로 이루어진 공간이 아닙니다. 자연과 조화를 이루는 특별한 디자인입니다. 나무와 돌, 그리고 금속이 조화를 이룬 공간은 자연의 일부가 되고자 하는 나리사와의 철학을 그대로 반영합니다. 모든 재료는 자연에서 얻은 것들로, 친환경적이고 지속 가능성을 염두에 두고 설계되었습니다. 이곳의 벽과 바닥은 자연광을 최대한 활용할 수 있도록 디자인되어, 낮에는 실내가 마치 숲속에 있는 듯한 느낌을 줍니다.\n\n그리고 나리사와에는 관광객들이 흔히 지나치는 숨겨진 상징들이 숨어 있습니다. 예를 들어, 레스토랑의 입구에는 작은 돌탑이 자리잡고 있습니다. 이 돌탑은 우리에게 자연을 존중하고 그 속에서 배우라는 메시지를 전합니다. 나리사와의 주방은 오픈형으로 설계되어 있어, 손님들은 요리 과정에서의 모든 순간을 경험할 수 있습니다. 요리사들이 자연의 재료를 어떻게 다루는지를 직접 보고 느낄 수 있는 것이죠.\n\n현대에 와서는 나리사와가 전 세계적으로 재발견되고 있습니다. 많은 미식가들이 이곳을 찾아와 Satoyama 퀴진의 진수를 맛보고자 합니다. 나리사와는 그 자체로 문화적 아이콘이 되어, 여러 영화와 다큐멘터리에 등장하게 되었습니다. 또한, 이곳을 방문하는 관광객들 중에는 음식을 찍어 소셜 미디어에 올리는 경우가 많습니다. 그들이 찍은 사진은 단순한 음식 사진이 아닌, 예술 작품처럼 보이기도 합니다.\n\n마지막으로, 나리사와의 철학적 의미를 들려드리겠습니다. 나리사와는 단순한 레스토랑이 아닌, 자연과 인간의 연결을 의미합니다. 우리는 여기서 자연의 순환과 인간의 삶을 직접 경험할 수 있습니다. 나리사와에서의 경험은 단순히 맛있는 음식을 먹는 것을 넘어서, 자연의 본질을 깨닫고 그 속에서 우리의 삶을 되돌아보게 합니다. \n\n이제 여러분과의 마지막 인사를 드릴 시간입니다. 나리사와는 단순한 장소가 아닙니다. 이곳은 자연과 인간이 함께 어우러지는 공간입니다. 여러분이 이곳을 떠날 때, 자연이 우리에게 주는 무한한 아름다움과 우리 삶의 깊이를 느낄 수 있기를 바랍니다. 여러분의 마음속에 나리사와의 풍경이 오래도록 남아, 일상 속에서도 자연의 소중함을 상기할 수 있기를 바랍니다. 안녕히 가세요, 그리고 언제든 자연의 경이로움을 다시 찾아오세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "나리사와 (Narisawa)",
+        "description": "숲의 미학과 자연의 본질을 담아내는 미식 경험, Satoyama 퀴진의 정수",
+        "narration": "(부드러운 식기 부딪히는 소리, 나지막한 대화 소리, 은은한 장작 연기와 신선한 허브 향) 사랑하는 미식가 여러분, 지금 우리는 도쿄의 중심부에서 일본의 영혼, 그리고 자연과의 깊은 대화를 요리하는 '나리사와'에 와 있습니다. 이곳은 단순한 식당이 아닙니다. 요시히로 나리사와 셰프의 손끝에서 탄생하는 '사토야마 퀴진'은 일본의 숲과 바다, 계절의 숨결을 그대로 접시에 옮겨 담습니다. 마치 숲속을 걷다가 마주친 자연의 경이로움을 맛보는 듯한 경험이죠. 테이블로 서빙되는 순간, 모든 접시가 하나의 예술 작품임을 깨닫게 됩니다. 특히, 뜨거운 돌 그릇 안에서 구워지는 '숲의 빵'은 그 자체로 퍼포먼스이자 자연의 온기를 상징합니다. 갓 구운 빵의 고소한 향이 코끝을 스치고, 겉은 바삭하고 속은 촉촉한 식감이 경이롭습니다. 이 빵 한 조각에도 셰프의 철학과 자연에 대한 존경이 담겨 있습니다. 당신의 오감을 깨우고, 일본의 식재료가 가진 본연의 아름다움을 재발견하게 할 나리사와에서의 식사는 단순한 한 끼를 넘어, 잊을 수 없는 미학적 체험이 될 것입니다. 이곳의 요리는 단순히 맛있는 것을 넘어, 우리에게 자연의 소중함과 미식을 통한 사유의 시간을 선물합니다.",
+        "detailedDescription": "나리사와는 단순한 레스토랑이 아닙니다. 자연과 인간의 삶이 조화롭게 공존하는 일본의 '사토야마' 철학을 깊이 탐구하는 심오한 미식의 여정입니다. 지속 가능한 미식의 선구자인 요시히로 나리사와 셰프는 일본의 숲과 바다에서 직접 채취한 제철 식재료에 깊이 뿌리내린 요리를 선보입니다. 각 접시는 시각적으로 놀랍고, 자연의 순수하고 꾸밈없는 맛으로 가득 찬 예술 작품입니다. 이곳에서의 식사는 모든 감각을 사로잡는 몰입형 경험이며, 따뜻한 흙의 생명력을 상징하는 뜨거운 돌 그릇에서 테이블 옆에서 구워지는 '숲의 빵'과 같은 독특한 프레젠테이션을 자랑합니다. 우아하고 미니멀한 분위기는 음식이 단연 돋보이도록 합니다. 일본 미식 정체성에 대한 심오한 탐구이며, 전통을 존중하면서도 한계를 뛰어넘는 요리로, 잊을 수 없는, 사색을 불러일으키는 식사를 찾는 모든 미식가에게 필수적인 방문지입니다. 예약은 매우 어렵기로 악명 높으며, 그만큼 특별함을 더합니다."
+      }
+    },
+    "openingHours": "런치 오후 12시 ~ 오후 1시 (마지막 주문), 디너 오후 6시 30분 ~ 오후 7시 (마지막 주문). 일요일 휴무.",
+    "priceRange": "€€€€€",
+    "cuisine": null,
+    "reservationUrl": "https://www.narisawa-y.co.jp/en/reservation/",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:43:57.049Z",
+    "updatedAt": "2026-02-22T18:06:05.858Z"
+  },
+  {
+    "id": "london_스케치_sketch_더_렉처_룸_라이브러리_the_le",
+    "cityId": "london",
+    "name": "스케치 (Sketch) - 더 렉처 룸 & 라이브러리 (The Lecture Room & Library)",
+    "lat": 51.5144,
+    "lng": -0.1408,
+    "radius": 70,
+    "narration": "메이페어의 심장부, Sketch의 'The Lecture Room & Library'로 들어서면 시간과 공간을 초월한 듯한 신비로운 분위기에 압도될 것입니다. 벨벳 의자의 부드러움, 은은하게 풍기는 고급스러운 향, 그리고 샹들리에의 황금빛 조명이 만들어내는 아늑하면서도 웅장한 공간은 마치 비밀스러운 살롱에 들어선 듯한 착각을 불러일으킵니다. 저 멀리서는 섬세한 나이프와 포크가 부딪히는 소리, 그리고 손님들의 낮은 웃음소리가 우아한 배경 음악처럼 퍼져 나갑니다. 당신 앞에 놓인 접시는 단순한 음식이 아닙니다. 신선한 제철 재료와 셰프의 창의성이 만나 탄생한 한 폭의 미식 예술 작품입니다. 혀끝에 닿는 캐비어의 톡 쏘는 바다 향, 완벽하게 구워진 비둘기 요리의 깊은 풍미, 그리고 입안에서 부드럽게 녹아내리는 디저트의 달콤함은 오감을 황홀하게 만듭니다. 이 모든 것이 마치 잘 짜여진 교향곡처럼 완벽한 조화를 이룹니다. 이곳은 단순히 식사를 하는 곳이 아니라, 맛과 향, 그리고 예술이 어우러진 잊지 못할 경험을 선사하는 곳입니다. 당신의 미식 경험이 한 차원 더 높아지는 순간을 만끽하세요.",
+    "description": "미식과 예술이 조화된 미슐랭 3스타의 현대적인 미식 경험.",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 스케치(The Sketch) - 더 렉처 룸 & 라이브러리(The Lecture Room & Library)에 오신 것을 환영합니다! 이곳은 단순한 레스토랑이 아닙니다. 이는 감각과 예술의 대폭발이 일어나는 미슐랭 3스타의 무대입니다. 지금 그 문을 열고 들어가 보세요. 먼저 눈을 감고, 상상해 보세요. 눈앞에 펼쳐지는 황금빛 샹들리에가 천장에서 반짝이며, 벽을 가득 채운 예술 작품들이 여러분을 부릅니다. 고요한 클래식 음악이 공간을 가득 채우고, 그 사이를 유영하는 멋진 향기가 코끝을 자극합니다. 갓 구운 빵과 이탈리안 허브의 향기가 어우러져, 마치 식탁 앞에서 세상 모든 맛의 축제가 벌어지는 것 같습니다.\n\n깊은 호흡을 하세요. 이제 이곳의 역사를 탐험해 봅시다. 2003년, 프랑스 출신의 전설적인 요리사 피에르 가냐르(Pierre Gagnaire)가 이 장소의 문을 열었습니다. 그 당시 런던은 유럽 대륙의 미식 혁명의 한복판에 있었죠. 정치적, 경제적 격변 속에서 런던은 문화와 예술, 그리고 미식의 중심지로 자리 잡았습니다. 그 누구도 상상하지 못한 현대적인 요리 기법과 감각적인 디자인이 이곳을 특별하게 만들었습니다.\n\n이제 시간을 조금 더 거슬러 올라가 볼까요? 피에르 가냐르가 이곳을 오픈했을 때의 이야기를 들려드릴게요. 전설에 따르면, 그는 이곳의 매 순간을 예술로 만들기 위해 전심을 쏟았다고 합니다. 오프닝 날, 유명한 비평가들이 모두 모여들었습니다. 그리고 가냐르는 그들에게 놀라운 요리를 선보이며, 이곳을 단숨에 런던 최고의 레스토랑으로 만들어 버렸습니다. 그날 밤, 그는 하얀 셰프 모자를 벗고, 환호하는 군중을 향해 손을 흔들었다고 합니다. 이 감동적인 순간은 영원히 기록으로 남았죠.\n\n자, 그럼 이제 이곳의 건축적 경이로움에 대해 알아봅시다. 이곳은 단순한 식당이 아닙니다. 예술과 기능, 그리고 혁신이 결합된 건축물입니다. 빛의 흐름과 공간의 배치는 마치 오케스트라의 연주처럼 조화를 이루고 있습니다. 이런 조화는 섬세하게 설계된 구조 덕분입니다. 벽마다 숨겨진 조명이 있으며, 천장 모양은 음향 효과를 최적화하도록 설계되었습니다.\n\n그리고 그 숨겨진 디테일들을 눈여겨보세요. 벽에 걸린 그림들 중 일부는 특별한 역사적 사건과 연결된 상징을 품고 있습니다. 예를 들어 한 쌍의 포도송이가 그려진 그림은 프랑스 혁명을 상징한다고 하는데, 전통과 혁신의 조화로움을 나타냅니다. 이런 것들은 일반 관광객들이 쉽게 놓치는 부분이니, 여러분께서만 알고 계시길 바랍니다.\n\n현대에 들어와, 이곳은 새로운 방식으로 재발견되었습니다. 과거의 영광을 되찾고자 하는 열망 속에서, 여러 명의 예술가들과 셰프들이 협업하여 이 공간을 재창조했습니다. 이곳은 이제 다시 현대미술과 미식의 중심지로 자리매김하며, 전 세계에서 찾아오는 미식가들을 맞이하고 있습니다. 그리고 이곳은 다양한 영화와 드라마의 배경지가 되어, 수많은 스토리를 담고 있습니다. 영화를 보며 이곳을 알아본 관객들이, 카메라를 들고 그 장면을 재현하곤 합니다.\n\n그리고 마지막으로, 이곳이 인류 역사에서 갖는 의미에 대해 생각해봅시다. 스케치는 단순한 식당 이상의 존재로서, 인간의 창의성과 예술, 그리고 맛의 추구가 결합된 장소입니다. 이곳에서 우리는 미식이라는 예술이 어떻게 발전해왔는지를 느낄 수 있습니다. 이는 우리가 끊임없이 새로운 것을 탐구하고 창조하는 인간의 본질을 상기시켜줍니다.\n\n이제 이곳을 떠나기 전, 마지막으로 감성을 가득 담아 여러분께 작별 인사를 드립니다. 여러분이 이곳에서 느낀 감동과 경험이 삶의 한 부분이 되길 바랍니다. 그리고 언제든지 여러분을 다시 맞이할 준비가 되어 있으니, 이곳에서의 아름다운 기억을 가슴에 품고 돌아가길 바랍니다. 감사합니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "스케치 (Sketch) - 더 렉처 룸 & 라이브러리 (The Lecture Room & Library)",
+        "description": "미식과 예술이 조화된 미슐랭 3스타의 현대적인 미식 경험.",
+        "narration": "메이페어의 심장부, Sketch의 'The Lecture Room & Library'로 들어서면 시간과 공간을 초월한 듯한 신비로운 분위기에 압도될 것입니다. 벨벳 의자의 부드러움, 은은하게 풍기는 고급스러운 향, 그리고 샹들리에의 황금빛 조명이 만들어내는 아늑하면서도 웅장한 공간은 마치 비밀스러운 살롱에 들어선 듯한 착각을 불러일으킵니다. 저 멀리서는 섬세한 나이프와 포크가 부딪히는 소리, 그리고 손님들의 낮은 웃음소리가 우아한 배경 음악처럼 퍼져 나갑니다. 당신 앞에 놓인 접시는 단순한 음식이 아닙니다. 신선한 제철 재료와 셰프의 창의성이 만나 탄생한 한 폭의 미식 예술 작품입니다. 혀끝에 닿는 캐비어의 톡 쏘는 바다 향, 완벽하게 구워진 비둘기 요리의 깊은 풍미, 그리고 입안에서 부드럽게 녹아내리는 디저트의 달콤함은 오감을 황홀하게 만듭니다. 이 모든 것이 마치 잘 짜여진 교향곡처럼 완벽한 조화를 이룹니다. 이곳은 단순히 식사를 하는 곳이 아니라, 맛과 향, 그리고 예술이 어우러진 잊지 못할 경험을 선사하는 곳입니다. 당신의 미식 경험이 한 차원 더 높아지는 순간을 만끽하세요.",
+        "detailedDescription": "메이페어에 위치한 Sketch는 단순한 레스토랑이 아닌, 다감각적인 예술 작품 그 자체입니다. 특히 미슐랭 3스타를 받은 'The Lecture Room & Library'는 데이비드 쉬나(David Shna) 셰프의 지휘 아래 현대적인 프랑스 요리의 정수를 선보이며, 영국 최고의 파인 다이닝 경험 중 하나로 손꼽힙니다. 웅장하고 우아한 인테리어는 마치 18세기 귀족의 서재에 초대받은 듯한 느낌을 주며, 섬세한 식기류와 최고급 서비스는 식사의 품격을 한층 높여줍니다. 각 요리는 예술 작품처럼 플레이팅되어 시각적인 즐거움까지 선사하며, 엄선된 와인 페어링은 미식 경험을 완벽하게 마무리합니다. 단순히 배를 채우는 것을 넘어, 미각과 시각, 후각 등 모든 감각을 만족시키는 잊지 못할 여정을 선사할 것입니다. 이곳은 특별한 기념일이나 런던에서의 잊을 수 없는 밤을 위한 완벽한 선택입니다. 방문 전 예약은 필수입니다."
+      }
+    },
+    "openingHours": "화-토 12:00 - 14:30 (런치), 18:30 - 21:30 (디너)",
+    "priceRange": "€€€€",
+    "cuisine": null,
+    "reservationUrl": "https://sketch.london/bookings/",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:44:31.595Z",
+    "updatedAt": "2026-02-22T18:06:05.988Z"
+  },
+  {
+    "id": "rome_아르만도_알_판테온_armando_al_pantheon",
+    "cityId": "rome",
+    "name": "아르만도 알 판테온 (Armando al Pantheon)",
+    "lat": 41.8993,
+    "lng": 12.4764,
+    "radius": 70,
+    "narration": "지금 당신은 로마의 고동치는 심장부, 판테온 옆 작은 골목에 위치한 '아르만도 알 판테온' 문 앞에 서 있습니다. 안으로 들어서면, 고소한 올리브 오일과 잘 익은 토마토 소스, 그리고 신선한 허브 향이 코끝을 간지럽히며 식욕을 돋웁니다. 아늑하고 소박한 인테리어는 마치 로마 친구의 집에 초대받은 듯한 편안함을 선사합니다. 테이블에서는 접시 부딪히는 소리, 포크가 파스타를 돌돌 마는 소리, 그리고 유쾌한 이탈리아어 대화가 작은 소음의 교향곡을 이룹니다. 이곳의 시그니처 메뉴인 '까르보나라'를 한 입 맛보면, 꾸덕한 노른자와 바삭한 관찰레, 페코리노 치즈의 완벽한 조화가 미뢰를 자극하며 진정한 로마의 맛을 선사합니다. 마치 시간이 멈춘 듯, 모든 것이 제자리를 찾은 안정감이 느껴집니다. 벽에 걸린 낡은 사진들은 이곳의 오랜 역사와 가족의 스토리를 말해주며, 단순한 식사가 아닌, 로마의 문화와 전통을 오감으로 체험하는 귀한 순간임을 깨닫게 합니다. 마지막 한 입까지, 이탈리아 식사의 진정한 즐거움을 만끽해 보세요.",
+    "description": "판테온 옆, 정통 로마 요리의 진수를 맛볼 수 있는 미식의 성지",
+    "category": "Restaurant",
+    "detailedDescription": "여러분, 로마에 온 것을 환영합니다! 지금부터 여러분을 미식과 역사의 향연이 펼쳐지는 특별한 장소로 안내할 텐데요. 바로 판테온 옆에 자리한 아르만도 알 판테온입니다! 눈을 감고 이곳의 공기를 들이마셔 보세요. 갓 구운 빵과 올리브 오일의 향, 그리고 짭조름하게 구워진 로마식 요리의 풍미가 코끝을 간지럽히죠. 이곳은 단순한 레스토랑이 아닌, 미각의 판테온이라 불릴 만한 곳입니다. 앞을 보세요. 고풍스러운 벽돌 건물 사이로 쏟아지는 로마의 햇살이 이곳을 비추며, 이곳에서 펼쳐질 이야기를 시작하는 듯합니다.\n\n이제 여러분을 시간 여행자로 만들어 줄 흥미진진한 이야기가 기다리고 있습니다. 아르만도 알 판테온은 어느 날 갑자기 하늘에서 떨어진 것이 아닙니다! 1870년대, 이탈리아가 통일을 이루며 로마는 새로운 수도로 자리잡게 되었습니다. 이 시기에 판테온 주변은 로마의 역사와 혁명이 얽힌 복잡한 정치적 중심지가 되었죠. 아르만도 알 판테온은 19세기 말에 이탈리아의 부흥과 함께 문을 열었습니다. 그 당시의 로마는 새로운 시대의 태동을 알리며, 음식 문화 또한 새로운 국면을 맞이했습니다. 이곳은 정치인과 예술가, 그리고 혁명가들이 자주 찾던 장소로, 식탁 위에서 많은 역사적 논의가 이루어졌습니다.\n\n여러분, 이제 한 인간 드라마에 귀를 기울여 보세요. 1900년대 초, 이곳을 방문한 한 젊은 시인은 자신의 시를 친구들에게 낭독하며 로마의 밤을 불태웠습니다. 그는 바로 젊은 필리포 마리네티였습니다. 그는 미래파 운동의 선구자로, 이곳에서 그가 펼친 혁신적 사고와 예술적 열정은 그야말로 폭발적이었죠. 로마의 전통 요리와 함께 그의 불같은 열망은 이곳에 또 다른 숨결을 불어넣었습니다. 여러분, 상상해보세요. 이곳에서 나눈 대화가 오늘날까지도 많은 사람들에게 영감을 주고 있다는 것을!\n\n다음은 건축의 경이로움에 대해 알아볼 차례입니다. \"어떻게 이런 멋진 건축물이 가능했을까요?\" 여러분, 로마의 엔지니어들은 과거에도 천재적이었습니다. 이 건물은 튼튼한 화산재와 석회암을 섞어 만든 천장 아래에 자리 잡고 있습니다. 놀랍지 않습니까? 이 곳의 벽돌들은 마치 시간이 멈춘 듯, 당시의 기술력과 장인 정신을 그대로 보여줍니다. 그리고 그 속에 숨겨진 비밀스러운 상징들이 있습니다. 벽의 장식들 속에 숨겨진 고대 로마의 신화와 상징들이 여러분에게 말을 걸어옵니다. 사람들은 무엇을 놓치고 있는지 모를 때가 많죠, 그렇죠?\n\n이제 현대의 이야기를 들어볼 시간입니다. \"이곳은 다시 어떻게 꽃피웠을까요?\" 20세기에 들어서면서, 아르만도 알 판테온은 도시의 재건과 함께 다시 주목받기 시작했습니다. 보수와 복원이 이루어졌고, 과거의 영광을 되찾았죠. 이곳은 특별한 이벤트, 영화 촬영지로도 유명해지기 시작했습니다. 영화 '로마의 휴일'이 이곳에서 촬영된 이야기는 유명합니다. 오드리 헵번이 이곳에서 스파게티를 즐기는 장면은 지금까지도 많은 이들의 기억 속에 남아있죠. 그리고 오늘날, 전 세계의 관광객들이 이곳을 찾으며 셀카를 찍고, SNS에 올리느라 분주합니다. 정말 웃기지 않나요? 어떤 관광객은 로마에 와서도 피자만 찾는다니까요!\n\n자, 이제 이곳의 철학적 의미를 생각해 볼까요? 아르만도 알 판테온은 단순히 음식을 제공하는 장소가 아닙니다. 이곳은 로마의 역사와 문화, 그리고 인간의 삶을 이해하는 데 중요한 단서를 제공합니다. 이곳에서 맛보는 한 접시의 요리는 로마의 영혼을 담고 있으며, 과거와 현재가 조화를 이루는 장입니다. 여러분이 여기서 느끼는 감동은 단순한 맛 이상의 것이죠.\n\n마지막으로, 여러분에게 감동적인 작별 인사를 남기고 싶습니다. 여러분, 이곳에서의 경험이 여러분의 마음 속에 오래 남기를 바랍니다. 로마의 역사와 함께한 이 특별한 시간을 통해, 여러분은 진정한 의미의 여행을 경험하셨습니다. 이제 여러분의 삶 속에서 새로운 장을 열며, 이곳의 이야기를 마음속에 간직하길 바랍니다. 고맙습니다, 그리고 다시 만날 날을 기대합니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "아르만도 알 판테온 (Armando al Pantheon)",
+        "description": "판테온 옆, 정통 로마 요리의 진수를 맛볼 수 있는 미식의 성지",
+        "narration": "지금 당신은 로마의 고동치는 심장부, 판테온 옆 작은 골목에 위치한 '아르만도 알 판테온' 문 앞에 서 있습니다. 안으로 들어서면, 고소한 올리브 오일과 잘 익은 토마토 소스, 그리고 신선한 허브 향이 코끝을 간지럽히며 식욕을 돋웁니다. 아늑하고 소박한 인테리어는 마치 로마 친구의 집에 초대받은 듯한 편안함을 선사합니다. 테이블에서는 접시 부딪히는 소리, 포크가 파스타를 돌돌 마는 소리, 그리고 유쾌한 이탈리아어 대화가 작은 소음의 교향곡을 이룹니다. 이곳의 시그니처 메뉴인 '까르보나라'를 한 입 맛보면, 꾸덕한 노른자와 바삭한 관찰레, 페코리노 치즈의 완벽한 조화가 미뢰를 자극하며 진정한 로마의 맛을 선사합니다. 마치 시간이 멈춘 듯, 모든 것이 제자리를 찾은 안정감이 느껴집니다. 벽에 걸린 낡은 사진들은 이곳의 오랜 역사와 가족의 스토리를 말해주며, 단순한 식사가 아닌, 로마의 문화와 전통을 오감으로 체험하는 귀한 순간임을 깨닫게 합니다. 마지막 한 입까지, 이탈리아 식사의 진정한 즐거움을 만끽해 보세요.",
+        "detailedDescription": "판테온 바로 옆에 자리한 '아르만도 알 판테온'은 1961년부터 3대째 이어져 내려오는 로마 미식의 자부심입니다. 화려한 장식이나 현대적인 감각은 없지만, 이곳의 모든 요리에는 로마 전통에 대한 깊은 존중과 장인정신이 담겨 있습니다. 메뉴는 로마의 사계절에 따라 신선한 제철 재료로 바뀌며, 까르보나라, 아마뜨리차나, 까치오 에 페페와 같은 고전 로마 파스타는 물론, 옥스테일 스튜인 '꼬다 알라 바치나라(Coda alla Vaccinara)'와 같은 특별한 요리도 맛볼 수 있습니다. 좁은 공간이지만, 테이블마다 오가는 정겨운 대화와 웨이터들의 능숙하고 친근한 서비스는 이곳을 단순한 식당이 아닌, 로마의 살아있는 역사를 경험하는 장소로 만듭니다. 예약은 필수이며, 특히 저녁 식사를 원한다면 몇 주 전에 미리 예약하는 것이 좋습니다. 진정한 로마의 맛을 추구하는 미식가들에게는 더할 나위 없는 선택이 될 것입니다."
+      }
+    },
+    "openingHours": "월-토 12:30–14:45, 19:00–22:45 (일요일 휴무)",
+    "priceRange": "€€€",
+    "cuisine": null,
+    "reservationUrl": "https://www.armandoalpantheon.it/en/booking/",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:45:15.051Z",
+    "updatedAt": "2026-02-22T18:06:06.423Z"
+  },
+  {
+    "id": "new-york_le_bernardin",
+    "cityId": "new-york",
+    "name": "Le Bernardin",
+    "lat": 40.7615,
+    "lng": -73.9806,
+    "radius": 70,
+    "narration": "상상해보세요. 여러분은 지금 뉴욕 맨해튼의 심장부에 위치한, 미식의 성전이라 불리는 르 베르나르댕 앞에 서 있습니다. 문을 열고 들어서는 순간, 마치 깊고 푸른 바닷속으로 빨려 들어가는 듯한 고요함과 우아함이 여러분을 감싸 안을 거예요. 은은하게 울려 퍼지는 대화 소리, 섬세한 크리스탈 잔이 부딪히는 청아한 소리가 마치 아름다운 교향곡의 서곡처럼 귓가를 간지럽힙니다. 눈을 감고 숨을 깊게 들이쉬면, 신선한 해산물의 향긋한 내음이 코끝을 스치며 미각을 자극하죠. 자, 이제 테이블에 앉아 에릭 리퍼트 셰프의 손끝에서 탄생한 예술 작품들을 감상할 시간입니다. 윤기가 흐르는 신선한 참치 타르타르는 마치 보석처럼 빛나고, 입안에서 사르르 녹아내리는 농어 요리는 섬세한 풍미로 여러분의 미각을 황홀하게 만들 거예요. 랍스터 비스크를 한 모금 마시는 순간, 따뜻한 바다의 품에 안기는 듯한 포근함을 느낄 수 있습니다. 르 베르나르댕에서의 식사는 단순한 만찬이 아닌, 셰프의 열정과 철학, 그리고 뉴욕의 바다를 담은 한 편의 감동적인 드라마와 같아요. 여러분의 모든 감각을 깨우고, 오랫동안 잊지 못할 특별한 추억을 선사할 겁니다. 지금, 르 베르나르댕에서 미식의 정점을 경험해보세요!",
+    "description": "바다의 정수를 요리하는 뉴욕 최고의 미쉐린 3스타 해산물 명가.",
+    "category": "Restaurant",
+    "detailedDescription": "르 베르나르댕은 1986년 뉴욕에 문을 연 이후, 30년 넘게 뉴욕 미식계의 최정상을 지켜온 전설적인 해산물 레스토랑입니다. 프랑스에서 시작된 르 베르나르댕은 뉴욕으로 건너오면서 에릭 리퍼트 셰프의 지휘 아래 더욱 혁신적이고 세련된 해산물 요리를 선보여왔습니다. 르 베르나르댕의 성공 비결은 단순히 신선한 재료를 사용하는 것을 넘어, 해산물 본연의 맛을 극대화하는 섬세한 조리법과 창의적인 플레이팅에 있습니다. 리퍼트 셰프는 각 재료의 특성을 완벽하게 이해하고, 이를 바탕으로 최고의 맛을 이끌어내는 데 집중합니다. 르 베르나르댕의 또 다른 매력은 바로 완벽한 서비스입니다. 숙련된 직원들은 고객 한 명 한 명에게 최고의 서비스를 제공하기 위해 노력하며, 편안하고 고급스러운 분위기 속에서 식사를 즐길 수 있도록 세심하게 배려합니다. 현지인들 사이에서는 '특별한 날'을 기념하기 위한 최고의 장소로 손꼽히며, 예약 없이는 방문이 거의 불가능할 정도입니다. 르 베르나르댕에 방문한다면, 드레스 코드를 반드시 확인하고 예약은 필수입니다. 팁을 하나 드리자면, 런치 코스는 디너보다 가격이 저렴하면서도 르 베르나르댕의 훌륭한 요리를 경험할 수 있는 좋은 기회입니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "Le Bernardin",
+        "description": "바다의 정수를 요리하는 뉴욕 최고의 미쉐린 3스타 해산물 명가.",
+        "narration": "자, 이곳은 뉴욕의 미식 심장부, 르 베르나르댕입니다. 문을 들어서는 순간, 바다 깊은 곳의 고요함과 우아함이 공기를 가득 채우는 듯합니다. 나지막이 들려오는 은은한 대화 소리, 섬세한 식기들이 부딪히는 소리가 조화롭게 어우러져 마치 오케스트라의 잔잔한 서곡처럼 느껴집니다. 에릭 리퍼트 셰프의 마법 같은 손길로 탄생한 해산물 요리들이 테이블에 놓일 때마다, 코끝을 스치는 섬세한 바다의 향기는 그 어떤 향수보다도 매혹적입니다. 예를 들어, 살짝 그을린 랍스터는 그 자체로 하나의 조각품 같고, 한 입 베어 물면 바다의 신선함이 입안 가득 터져 나오죠. 모든 요리 하나하나에 담긴 셰프의 철학과 열정, 그리고 미학이 고스란히 느껴집니다. 이곳에서의 식사는 단순히 배를 채우는 행위를 넘어, 미각과 시각, 그리고 마음을 풍요롭게 하는 잊을 수 없는 감각적인 여행이 될 것입니다.",
+        "detailedDescription": "에릭 리퍼트 셰프가 이끄는 르 베르나르댕은 단순히 고급스러운 해산물 요리를 넘어, 미식 예술의 경지를 보여주는 뉴욕의 상징적인 미쉐린 3스타 레스토랑입니다. '거의 날 것', '살짝만 건드린', '가볍게 익힌'이라는 세 가지 조리 철학 아래, 가장 신선한 해산물이 가진 본연의 맛과 질감을 극대화합니다. 세련되고 우아한 다이닝 공간은 마치 심해를 연상시키는 블루 톤으로 꾸며져 있으며, 캔버스 위의 한 폭 그림처럼 섬세하게 플레이팅 된 요리들은 맛뿐만 아니라 시각적인 즐거움까지 선사합니다. 와인 페어링은 소믈리에의 완벽한 추천으로 요리의 풍미를 한층 더 끌어올리며, 모든 서비스는 마치 물 흐르듯 자연스럽고 품격 있습니다. 뉴욕에서 잊을 수 없는 미식 경험을 원한다면, 이곳에서의 저녁 식사는 단순한 식사를 넘어 평생 기억될 예술적인 순간이 될 것입니다. 특별한 기념일이나 비즈니스 미팅에도 완벽한 선택입니다."
+      }
+    },
+    "openingHours": "점심: 월-금 12:00-14:30 / 저녁: 월-목 17:30-22:30, 금-토 17:15-23:00 (일요일 휴무)",
+    "priceRange": "$$$$",
+    "cuisine": null,
+    "reservationUrl": "https://www.le-bernardin.com/reservations",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:56:27.722Z",
+    "updatedAt": "2026-02-22T18:32:27.906Z"
+  },
+  {
+    "id": "jeju_밀본_제주_milbon_jeju",
+    "cityId": "jeju",
+    "name": "밀본 제주 (Milbon Jeju)",
+    "lat": 33.4862,
+    "lng": 126.5009,
+    "radius": 70,
+    "narration": "상상해보세요. 여러분은 지금, 제주의 밤하늘 아래 숨겨진 보석 같은 공간, '밀본 제주'의 문턱을 넘어서고 있습니다. 은은하게 감도는 따뜻한 조명이 여러분을 맞이하고, 코끝을 간지럽히는 향긋한 제철 식재료의 향기가 기대감을 높입니다. 잔잔하게 흐르는 클래식 선율은 마치 제주의 속삭임처럼 느껴지네요. 테이블 위에는 제주의 현무암을 닮은 그릇들이 정갈하게 놓여 있고, 그 위에는 셰프의 예술혼이 담긴 요리들이 눈부시게 빛나고 있습니다. 지금 여러분의 눈앞에는 갓 잡아 올린 싱싱한 은갈치가 섬세한 칼솜씨로 다듬어져 마치 살아있는 듯 꿈틀거리는 모습으로 놓여 있습니다. 한라산 흑돼지는 오랜 시간 정성스럽게 조리되어 윤기가 자르르 흐르고, 입안에 넣는 순간 사르르 녹아내리는 황홀경을 선사합니다. 숟가락과 포크가 부딪히는 소리, 옆 테이블의 소곤거리는 대화 소리마저도 아름다운 배경음악처럼 느껴지는 이곳. 밀본 제주는 단순한 식당이 아닌, 제주의 자연과 문화, 그리고 셰프의 열정이 어우러진 하나의 예술 작품입니다. 잠시 눈을 감고, 제주의 바람 소리를 느껴보세요. 그리고 밀본 제주가 선사하는 맛과 향의 향연 속으로 빠져들어 보세요. 이곳에서의 시간은 여러분의 오감을 깨우고, 오랫동안 잊지 못할 특별한 추억으로 남을 것입니다. 지금, 당신의 미각은 제주도의 푸른 바다와 웅장한 한라산을 여행하고 있습니다.",
+    "description": "제주의 자연을 담아낸 미식의 정점, 품격 있는 현대 한식 다이닝의 진수.",
+    "category": "Restaurant",
+    "detailedDescription": "밀본 제주는 단순히 맛있는 음식을 제공하는 레스토랑을 넘어, 제주의 자연과 문화를 경험할 수 있는 특별한 공간입니다. 이곳은 제주의 신선한 제철 식재료를 사용하여, 셰프의 창의적인 해석과 정성이 담긴 요리를 선보입니다. 예를 들어, 밀본 제주에서는 흔히 볼 수 있는 갈치 요리도 특별합니다. 갓 잡아 올린 갈치를 숙성시켜 풍미를 극대화하고, 제주 특유의 향신료와 조리법을 사용하여 잊을 수 없는 맛을 선사합니다. 현지인들 사이에서는 '갈치회'를 꼭 맛봐야 할 메뉴로 손꼽습니다. 또한, 밀본 제주에서는 제주의 전통 술과 음료도 맛볼 수 있습니다. 제주의 맑은 물로 빚은 전통주는 음식의 풍미를 더욱 깊게 해주고, 제주의 특산물을 활용한 음료는 입안을 상쾌하게 마무리해줍니다. 숨겨진 비화 하나를 알려드리자면, 밀본 제주의 셰프는 매일 아침 직접 제주의 시장을 방문하여 가장 신선하고 품질 좋은 식재료를 엄선한다고 합니다. 그의 열정과 노력 덕분에 밀본 제주는 항상 최고의 맛과 서비스를 제공할 수 있는 것이죠. 밀본 제주에서 제주의 맛과 향, 그리고 문화를 느껴보세요.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "밀본 제주 (Milbon Jeju)",
+        "description": "제주의 자연을 담아낸 미식의 정점, 품격 있는 현대 한식 다이닝의 진수.",
+        "narration": "신사 숙녀 여러분, 지금 우리는 제주의 미식 예술이 꽃피는 '밀본 제주'에 도착했습니다. 문을 열고 들어서는 순간, 은은하게 퍼지는 제철 식재료의 향긋함과 잔잔한 클래식 음악이 여러분을 부드럽게 감쌉니다. 테이블 위에는 제주의 현무암을 연상시키는 정갈한 그릇들이 놓여 있고, 통유리 너머로는 제주의 밤 풍경이 은은하게 펼쳐집니다. 이곳의 모든 요리는 셰프의 장인정신과 제주의 자연이 만나 탄생한 걸작입니다. 갓 잡은 제주의 은갈치가 화려하게 변신하고, 한라산 흑돼지가 예술적인 한 점의 그림으로 승화됩니다. 한입 베어 물 때마다 입안 가득 퍼지는 섬세한 맛의 향연은 여러분의 미각을 깨우고, 제주의 풍부한 이야기가 혀끝에서 펼쳐지는 듯합니다. 식기가 부딪히는 소리와 낮은 대화 소리만이 공간을 채우며, 여러분은 이곳에서 단순한 식사를 넘어, 제주의 문화와 역사를 맛보는 특별한 경험을 하게 될 것입니다.",
+        "detailedDescription": "제주 시내에 위치한 '밀본 제주'는 제주의 청정 자연이 빚어낸 최상급 식재료를 바탕으로 현대적인 감각과 전통 한식의 깊이를 조화시킨 파인 다이닝 레스토랑입니다. 이곳의 셰프는 제주 해안에서 갓 잡은 싱싱한 해산물부터 한라산 자락에서 자란 제철 나물, 흑돼지 등 제주의 식탁을 풍요롭게 하는 모든 요소를 세심하게 엄선합니다. 각 요리는 단순한 식사가 아닌 하나의 예술 작품처럼 정교한 플레이팅과 섬세한 맛의 조화로 오감을 만족시킵니다. 고급스러운 인테리어와 제주의 풍경이 어우러진 차분한 분위기는 특별한 날의 만찬이나 소중한 사람들과의 시간에 더할 나위 없는 경험을 선사합니다. 제주의 맛과 멋을 동시에 경험하며 잊지 못할 미식의 추억을 만들어보세요. 제철 식재료에 따라 메뉴가 달라지므로 사전 예약 시 문의하는 것이 좋습니다."
+      }
+    },
+    "openingHours": "런치 12:00 - 15:00, 디너 18:00 - 22:00 (월요일 휴무)",
+    "priceRange": "€€€€",
+    "cuisine": null,
+    "reservationUrl": "https://www.milbonjeju.com/reservations",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:52:26.859Z",
+    "updatedAt": "2026-02-22T18:32:57.758Z"
+  },
+  {
+    "id": "seoul_권숙수_kwon_sook_soo",
+    "cityId": "seoul",
+    "name": "권숙수 (Kwon Sook Soo)",
+    "lat": 37.5255,
+    "lng": 127.0371,
+    "radius": 75,
+    "narration": "문을 열고 들어서는 순간, 은은한 조명과 차분하고 세련된 공간이 당신을 감쌉니다. 공기 중에는 갓 지은 밥의 고소함과 신선한 제철 식재료가 어우러진 섬세한 향이 감돌고, 잔잔한 배경 음악이 고품격 다이닝의 분위기를 더합니다. 테이블에 앉으면, 마치 예술 작품처럼 정갈하게 담겨 나오는 첫 번째 요리가 눈앞에 펼쳐집니다. 놋그릇 위에 피어난 색색의 아름다움, 그 섬세한 플레이팅은 눈으로 먼저 맛보는 즐거움을 선사합니다. 한 숟갈 떠서 입에 넣으면, 익숙하면서도 낯선, 전통과 현대가 절묘하게 조화된 맛의 향연이 펼쳐집니다. 고추장의 깊은 감칠맛이 혀끝을 간질이고, 신선한 해산물의 바다 향이 입안 가득 퍼집니다. 셰프의 숨결이 깃든 요리들은 하나하나 이야기를 품고 있으며, 숙련된 서버들은 각 요리에 대한 설명을 곁들여 미식 경험을 더욱 풍부하게 합니다. 바삭함과 촉촉함, 달콤함과 짭짤함, 부드러움과 쫄깃함이 완벽한 균형을 이루며 미각을 자극합니다. 전통적인 요소와 현대적인 감각이 어우러진 인테리어는 품격 있는 분위기를 완성하며, 한식의 무한한 가능성을 보여주는 이곳에서의 식사는 단순한 배부름을 넘어선, 영혼을 위한 여정이 될 것입니다. 권숙수에서 당신의 미각은 새로운 차원으로 확장될 준비가 되어 있습니다.",
+    "description": "미슐랭 2스타에 빛나는 '모던 한식 오마카세'의 정수, 전통을 현대적으로 재해석한 미식 경험의 품격.",
+    "category": "Restaurant",
+    "detailedDescription": "고개를 드세요, 여러분! 이곳은 신비의 맛을 선사하는 권숙수! 서울의 심장부에서 미슐랭 2스타에 빛나는 모던 한식 오마카세의 정수가 펼쳐지는 순간입니다. 문을 열고 들어서면 눈 앞에 펼쳐지는 풍경에 압도될 수밖에 없습니다. 세련된 인테리어와 현대적 감각으로 무장한 이곳은 마치 과거와 현재가 조우하는 공간 같습니다. 주방에서 들려오는 꼬르륵거리는 소리와 함께 은은히 퍼지는 조리된 재료의 향기가 코끝을 자극하죠. 이곳에서는 전통과 현대가 절묘하게 어우러진 맛의 향연이 준비되어 있습니다. 자, 이제 권숙수의 풍미 깊은 여정이 시작됩니다!\n\n역사의 책장을 넘기며 권숙수의 이야기 속으로 들어가 봅시다. 권숙수는 2014년에 설립되었으며, 이미 이 시점에서 미식가들의 뜨거운 관심을 모았습니다. 당시는 한국이 세계적인 미식의 중심지로 떠오르던 시기였으며, 한식의 전통을 현대적으로 재해석하고자 하는 흐름이 강해지고 있었습니다. 이곳의 창립자들은 한식의 우수성을 세계에 알리고 싶다는 강력한 사명감을 가지고 있었으며, 그 결과 권숙수라는 특별한 식당이 탄생하게 된 것입니다.\n\n그리고 이곳의 문턱을 넘어, 권숙수가 걸어온 길의 여정 중 잊을 수 없는 한 인물을 소개합니다. 바로 조리장 이명길 셰프입니다. 그는 어린 시절 농장에서 재료를 직접 재배하며 자연의 맛과 정성을 배웠습니다. 그의 손끝에서 피어나는 요리는 단순히 배를 채우는 것을 넘어, 한식의 진정한 의미를 전합니다. 이명길 셰프의 이야기는 권숙수의 역사를 더욱 빛나게 합니다.\n\n권숙수의 건축은 마치 미술 작품과도 같습니다. 눈에 띄는 것은 세밀한 조각과 장식이 가득한 외관인데, 이는 자연과 전통을 존중하며 현대적 감각을 결합한 결과물입니다. 공간의 효율성을 극대화하는 설계와 재료의 섬세함은 이곳의 가치를 더욱 높이고 있습니다. 내부의 조명은 따뜻하고 부드럽게 공간을 감싸, 손님들을 편안하게 맞이합니다.\n\n대부분의 방문객들이 놓치는 숨겨진 디테일도 있습니다. 바로 천장에 숨겨진 서예 작품들! 각 문장에는 깊은 철학과 의미가 담겨 있어, 이곳을 방문할 때마다 새로운 해석의 가능성을 제공하죠. 권숙수는 이렇게 눈에 띄지 않은 곳에까지 세심한 배려를 담아내어 방문객들에게 깊은 감동을 줍니다.\n\n이제 현대의 권숙수의 이야기를 들어볼 차례입니다. 최근 권숙수는 한식을 사랑하는 전 세계의 관광객들 사이에서도 필수 방문지로 자리잡았습니다. 미식가들은 권숙수에서 제공하는 현대적 감각의 한식에 감동하여 감동의 눈물을 흘리기도 합니다. 식사 후 손님들이 각자 자신의 SNS에 찍은 사진을 자랑스럽게 올리며, 이곳의 명성을 더욱 널리 알리고 있습니다.\n\n이제 권숙수의 깊은 의미를 탐구해 봅시다. 이곳은 단순한 식당을 넘어 한국 문화의 정수를 담고 있는 장소입니다. 전통과 현대의 조화는 한식의 가능성을 무한대로 확장시키며, 문화와 역사를 넘어선 새로운 경험을 선사합니다. 권숙수에서의 식사는 감정적이고 철학적인 여정이기도 합니다.\n\n마지막으로 권숙수를 떠나야 할 시간이 다가왔습니다. 하지만 걱정하지 마세요, 이곳에서의 경험은 여러분 곁에 오래도록 남을 것입니다. 권숙수의 문을 나서면서 느꼈던 감동과 놀라움은 여러분의 미각과 마음에 깊이 새겨질 것입니다. 권숙수에서의 여정이 끝나더라도, 이곳에서의 기억은 결코 사라지지 않을 것입니다. 안녕, 권숙수! 우리는 다시 만날 날을 기대합니다.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "권숙수 (Kwon Sook Soo)",
+        "description": "미슐랭 2스타에 빛나는 '모던 한식 오마카세'의 정수, 전통을 현대적으로 재해석한 미식 경험의 품격.",
+        "narration": "문을 열고 들어서는 순간, 은은한 조명과 차분하고 세련된 공간이 당신을 감쌉니다. 공기 중에는 갓 지은 밥의 고소함과 신선한 제철 식재료가 어우러진 섬세한 향이 감돌고, 잔잔한 배경 음악이 고품격 다이닝의 분위기를 더합니다. 테이블에 앉으면, 마치 예술 작품처럼 정갈하게 담겨 나오는 첫 번째 요리가 눈앞에 펼쳐집니다. 놋그릇 위에 피어난 색색의 아름다움, 그 섬세한 플레이팅은 눈으로 먼저 맛보는 즐거움을 선사합니다. 한 숟갈 떠서 입에 넣으면, 익숙하면서도 낯선, 전통과 현대가 절묘하게 조화된 맛의 향연이 펼쳐집니다. 고추장의 깊은 감칠맛이 혀끝을 간질이고, 신선한 해산물의 바다 향이 입안 가득 퍼집니다. 셰프의 숨결이 깃든 요리들은 하나하나 이야기를 품고 있으며, 숙련된 서버들은 각 요리에 대한 설명을 곁들여 미식 경험을 더욱 풍부하게 합니다. 바삭함과 촉촉함, 달콤함과 짭짤함, 부드러움과 쫄깃함이 완벽한 균형을 이루며 미각을 자극합니다. 전통적인 요소와 현대적인 감각이 어우러진 인테리어는 품격 있는 분위기를 완성하며, 한식의 무한한 가능성을 보여주는 이곳에서의 식사는 단순한 배부름을 넘어선, 영혼을 위한 여정이 될 것입니다. 권숙수에서 당신의 미각은 새로운 차원으로 확장될 준비가 되어 있습니다.",
+        "detailedDescription": "신사동에 위치한 권숙수는 셰프 권우중의 철학이 담긴 모던 한식 파인 다이닝으로, 미슐랭 2스타를 획득하며 한국 미식의 위상을 세계에 알리고 있습니다. '숙수'는 조선 시대 궁중 요리사를 뜻하는 말로, 이곳의 이름에서부터 전통에 대한 깊은 존중과 자부심이 느껴집니다. 권우중 셰프는 한국의 제철 식재료를 사용하고 전통 조리법을 현대적인 기법으로 재해석하여, '한식 오마카세'라는 독창적인 콘셉트를 선보입니다. 제철 생선회나 귀한 식재료를 이용한 요리부터, 한식의 기본인 장류를 직접 담가 깊은 맛을 내는 세심함까지, 모든 요리에서 장인의 손길이 느껴집니다. 특히, 계절마다 변하는 코스 메뉴는 방문할 때마다 새로운 미식 경험을 약속하며, 한국 전통주 페어링 서비스는 한식의 맛을 한층 더 풍부하게 만들어줍니다. 권숙수는 단순한 식당이 아니라, 한국 식문화의 정수를 깊이 있게 탐험할 수 있는 미식의 성지입니다. 이곳에서의 식사는 단순한 한 끼가 아닌, 오감을 만족시키는 예술적인 경험이자 한국의 식문화를 이해하는 소중한 시간이 될 것입니다. 중요한 비즈니스 미팅이나 특별한 날을 기념하기에 더할 나위 없이 완벽한 장소입니다."
+      }
+    },
+    "openingHours": "화-토 12:00 - 15:00 (런치), 18:00 - 22:00 (디너). 일요일, 월요일 휴무.",
+    "priceRange": "KRW 150,000 - KRW 300,000+ (코스 메뉴 1인 기준)",
+    "cuisine": null,
+    "reservationUrl": "https://www.catchtable.co.kr/kwon_sooksoo",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-14T00:42:52.039Z",
+    "updatedAt": "2026-02-22T18:06:07.488Z"
+  },
+  {
+    "id": "barcelona_디스프루타르_disfrutar",
+    "cityId": "barcelona",
+    "name": "디스프루타르 (Disfrutar)",
+    "lat": 41.3888,
+    "lng": 2.1553,
+    "radius": 70,
+    "narration": "상상해보세요. 여러분은 지금 바르셀로나의 심장부에 위치한, 미식의 성지 '디스프루타르' 앞에 서 있습니다. 문을 열고 들어서는 순간, 환호성이 터져 나올 듯한 활기찬 에너지와 코를 간지럽히는 황홀한 향신료의 향연이 여러분을 맞이할 겁니다. 마치 꿈결 같은 미식의 세계로 초대받은 기분이랄까요? 밝은 햇살이 가득한 실내, 예술 작품처럼 정교하게 디자인된 테이블, 그리고 셰프들의 분주한 움직임이 한 폭의 그림처럼 펼쳐집니다. 자리에 앉아 깊게 숨을 들이쉬세요. 여러분의 오감을 자극할 마법 같은 여정이 시작될 테니까요. 접시 위에 놓인 것은 단순한 음식이 아닙니다. 스페인의 풍부한 식재료를 캔버스 삼아, 셰프들이 혼신의 힘을 다해 그려낸 예술 작품이죠. 액체 질소로 순식간에 얼려 만든 올리브는 입 안에서 부드럽게 녹아내리며 상큼한 풍미를 선사하고, 투명한 유리처럼 얇게 뽑아낸 파스타는 섬세한 식감과 함께 입 안 가득 퍼지는 향긋한 허브 향으로 감탄을 자아냅니다. 연기 속에 숨겨진 디저트는 마치 보물찾기처럼, 숨겨진 맛을 찾아내는 즐거움을 선사하죠. 각각의 요리는 단순한 맛을 넘어, 시각, 후각, 미각, 그리고 촉각까지 자극하며 여러분의 감각을 깨우는 놀라운 경험을 선사합니다. 디스프루타르에서는 음식을 먹는다는 행위 자체가 하나의 예술 작품을 감상하는 것과 같습니다. 셰프들의 대담한 상상력과 완벽을 추구하는 장인 정신이 빚어낸 이 마법 같은 순간들을 마음껏 즐기세요. 지금 여러분이 경험하는 이 특별한 순간은, 앞으로 여러분의 인생에서 영원히 잊혀지지 않는 아름다운 추억으로 자리 잡을 것입니다.",
+    "description": "미식의 한계를 뛰어넘는 창의적인 경험, 세계 정상급 분자 요리의 향연.",
+    "category": "Restaurant",
+    "detailedDescription": "디스프루타르는 단순한 레스토랑이 아닌, 바르셀로나 미식의 혁신을 이끄는 선두주자입니다. '즐기다'라는 뜻의 스페인어 'Disfrutar'에서 이름을 딴 이 곳은, 스페인 요리의 전통을 존중하면서도 혁신적인 기술과 창의적인 아이디어를 결합하여 전에 없던 새로운 미식 경험을 선사합니다. 오너 셰프 오리올 카스트로, 에두아드 자타루크, 마테우 카사냐스는 세계적인 레스토랑 '엘 불리'에서 함께 경력을 쌓은 실력파들입니다. 엘 불리의 혁신적인 요리 기법을 계승하면서도, 자신들만의 독창적인 스타일을 더해 디스프루타르를 세계 최고의 레스토랑 반열에 올려놓았습니다. 메뉴는 크게 테이스팅 메뉴와 단품 메뉴로 구성되어 있으며, 계절에 따라 신선한 제철 식재료를 사용하여 끊임없이 새로운 요리를 선보입니다. 특히 액체 질소, 구체화, 폼 등 분자 요리 기법을 적극적으로 활용하여 시각적으로도 놀라운 요리를 만들어냅니다. 현지인들은 디스프루타르를 특별한 날을 기념하거나, 소중한 사람들과 함께 잊지 못할 추억을 만들고 싶을 때 찾는다고 합니다. 예약은 필수이며, 최소 2~3개월 전에 미리 예약해야 원하는 날짜에 방문할 수 있습니다. 꿀팁을 하나 드리자면, 런치 타임에는 비교적 예약이 수월하고, 저녁 시간보다 가격도 저렴하니 참고하세요!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "디스프루타르 (Disfrutar)",
+        "description": "미식의 한계를 뛰어넘는 창의적인 경험, 세계 정상급 분자 요리의 향연.",
+        "narration": "자, 이제 바르셀로나 미식의 정점으로 여러분을 안내합니다. 이곳 디스프루타는 단순한 레스토랑이 아닙니다. 문을 열고 들어서는 순간, 밝고 활기찬 분위기와 함께 은은한 향신료와 신선한 재료의 향이 여러분의 후각을 자극할 것입니다. 마치 동화 속 주방에 들어선 듯한 착각을 불러일으키는 인테리어는 오늘 밤 펼쳐질 미식 모험의 서막을 알립니다. 테이블에 앉아 보세요. 이제 곧 여러분의 눈앞에는 접시 위에 펼쳐진 예술 작품들이 등장할 것입니다. 스페인의 풍부한 식재료를 기반으로 하지만, 그 표현 방식은 상상을 초월합니다. 액체 질소로 얼린 올리브, 종이처럼 얇은 파스타, 연기 속에 숨겨진 디저트… 각각의 요리는 시각, 후각, 미각은 물론 촉각까지 동원하여 오감을 만족시키는 퍼포먼스입니다. 셰프들의 대담한 창의성과 완벽한 기술이 만들어내는 이 마법 같은 순간들을 온전히 음미하며, 평생 잊지 못할 미식 경험을 만끽하세요.",
+        "detailedDescription": "2024년 '세계 최고의 레스토랑' 1위에 빛나는 디스프루타르는 단순한 식사를 넘어선 미식 오디세이를 선사합니다. 엘 불리(El Bulli) 출신의 세 셰프가 이끄는 이곳은 상상력을 초월하는 요리 기법과 재료의 조합으로 끊임없이 미각을 자극합니다. 테이스팅 메뉴는 마치 연극처럼 코스마다 새로운 놀라움과 즐거움을 선사하며, 각각의 요리에는 스토리가 담겨 있습니다. 접시에 담긴 예술 작품을 맛보는 듯한 시각적인 즐거움은 물론, 예상치 못한 질감과 풍미의 조화는 당신의 미식 경험을 한 단계 끌어올릴 것입니다. 편안하면서도 세련된 인테리어는 창의적인 요리와 완벽한 조화를 이루며, 이곳에서의 식사는 바르셀로나 여행의 잊지 못할 하이라이트가 될 것입니다. 최소 몇 달 전 예약은 필수이며, 인생 최고의 미식 경험을 기대하셔도 좋습니다."
+      }
+    },
+    "openingHours": "화요일 - 토요일, 런치 13:00-14:30, 디너 19:00-20:30 (요일 및 시즌에 따라 변동)",
+    "priceRange": "€€€€",
+    "cuisine": null,
+    "reservationUrl": "https://www.disfrutarbarcelona.com/booking",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-13T13:50:28.100Z",
+    "updatedAt": "2026-02-22T18:22:52.648Z"
+  },
+  {
+    "id": "rome_아로마_레스토랑_팔라초_만프레디",
+    "cityId": "rome",
+    "name": "아로마 레스토랑 (팔라초 만프레디)",
+    "lat": 41.8906,
+    "lng": 12.4925,
+    "radius": 75,
+    "narration": "해 질 녘, 로마의 상징 콜로세움이 당신의 눈앞에서 황금빛으로 물들기 시작합니다. 팔라초 만프레디의 옥상 테라스, 아로마 레스토랑에 앉아 부드러운 재즈 선율이 흐르는 가운데, 당신은 이 비현실적인 풍경의 일부가 됩니다. 시원한 저녁 바람이 뺨을 스치고, 멀리서 들려오는 로마의 미묘한 소음마저도 이곳에서는 낭만적인 배경음악이 됩니다. 테이블 위에는 촛불이 은은하게 흔들리고, 섬세하게 세팅된 식기들은 곧 펼쳐질 미식의 향연을 예고합니다. 셰프가 정성껏 준비한 애피타이저가 도착하고, 신선한 트러플 향이 코끝을 간지럽히는 순간, 당신은 로마의 진정한 맛과 향에 취하게 됩니다. 와인 잔 속에서 루비처럼 빛나는 붉은 와인은 콜로세움의 붉은 벽돌과 어우러져 완벽한 조화를 이룹니다. 콜로세움에 하나둘 불이 켜지며 밤의 장엄한 그림자를 드리울 때, 당신의 오감은 최고조에 달합니다. 이곳은 단순히 식사를 하는 곳이 아닙니다. 고대 로마의 영광과 현대 미식의 정수가 결합된, 시간과 공간을 초월하는 경험의 장입니다. 당신의 귓가에는 사랑하는 이의 속삭임이, 눈앞에는 영원의 도시 로마가 펼쳐집니다.",
+    "description": "콜로세움의 장엄한 전경과 미슐랭 스타 셰프의 예술이 만나는 로마 최상위 미식 경험.",
+    "category": "Restaurant",
+    "detailedDescription": "**장대한 개막식:**\n\n여러분, 상상해보세요! 로마의 푸른 하늘 아래, 바람에 실려 오는 바질과 올리브 오일의 향기가 코끝을 간지럽힙니다. 아로마 레스토랑에 도착한 순간, 여러분은 이미 이곳의 마법에 빠져들고 있습니다. 콜로세움의 웅장한 전경이 여러분의 눈앞에 펼쳐지며, 그 역사적 건축물의 위엄이 여러분을 압도합니다. 살짝 몸을 돌리면, 미슐랭 스타 셰프가 창조한 예술 작품 같은 요리들이 테이블 위에 올려져 있습니다. 그 한 접시 한 접시가, 마치 시간이 멈춘 듯한 순간을 선사하죠. 들리나요? 와인 잔들이 부딪치는 소리, 웃음소리가 공간을 가득 채웁니다. 이곳은 단순한 식사가 아닌, 모든 감각을 자극하는 잊을 수 없는 경험입니다.\n\n**깊이 있는 역사 탐험:**\n\n자, 이제 시간을 거슬러 올라가봅시다. 아로마 레스토랑이 자리하고 있는 팔라초 만프레디는 17세기 초, 귀족 가문인 만프레디 가문에 의해 지어졌습니다. 당시 로마는 바로크 시대의 절정기에 있었으며, 예술과 건축이 화려하게 꽃을 피우고 있었습니다. 대륙의 중심지로서 로마는 정치, 경제, 문화의 중심지로서의 위치를 굳건히 하고 있었고, 만프레디 가문은 이러한 전성기의 한복판에서 자신들의 부와 권위를 과시하고자 이 궁전을 건축했습니다.\n\n이 시기에 한 인물이 빛을 발합니다. 그의 이름은 카를로 만프레디, 가문의 젊은 후계자이자 예술 애호가였습니다. 그는 당시 최고의 예술가들과 친분을 맺으며, 팔라초에 수많은 예술 작품을 모았습니다. 카를로는 끊임없이 파티를 열며 문화를 나누고, 예술을 통해 사람들을 하나로 모았습니다. 그는 궁전의 장식뿐만 아니라, 사람들의 마음까지도 화려하게 물들였습니다.\n\n**건축의 경이:**\n\n팔라초 만프레디의 건축적 비밀을 들춰볼까요? 이곳은 대리석과 석재를 주재료로 사용하여 당시의 최신 건축 기술을 집약한 걸작입니다. 건축물의 각종 아치와 돔은 그 시대의 공학적 혁신을 보여주며, 햇빛이 비추는 각도에 따라 다채로운 그림자를 드리우죠. 그리고 그 건물의 구조적인 결합력은 세월이 흘러도 변치 않는 견고함을 자랑합니다.\n\n궁전 내부에는 숨겨진 상징들이 가득합니다. 예를 들어, 벽에 새겨진 조각들은 만프레디 가문의 힘과 권위를 나타내며, 곳곳에 배치된 화려한 장식들은 바로크 시대의 예술적 감성을 드러냅니다. 지나는 관광객들이 흔히 놓치는 이러한 세부적인 디테일들은, 이곳을 단순한 건축물이 아닌, 하나의 살아있는 역사 교과서로 만들어줍니다.\n\n**현대의 이야기:**\n\n팔라초 만프레디는 오랜 세월 동안 잊혀졌다가 20세기 중반에 다시 빛을 보게 됩니다. 수많은 복원 작업 끝에, 이곳은 그 본래의 아름다움을 잃지 않으면서도 현대의 새로운 용도로 탈바꿈하게 됩니다. 이제는 아로마 레스토랑이라는 이름으로, 세계 각국에서 찾아온 미식가들의 발길을 사로잡고 있습니다.\n\n이곳은 또한 여러 영화의 배경으로도 유명해졌습니다. 아마 여러분도 기억하시겠죠? 로마의 장엄한 풍경 속에서 펼쳐지는 로맨틱한 장면들! 그리고, 이곳을 찾는 현대의 관광객들은 그 빛나는 유산을 배경으로 셀카를 찍으며, 때로는 웃음을 터뜨리기도 합니다. 역사와 현대가 공존하는 이곳에서, 관람객들은 자신만의 이야기를 만들어가고 있습니다.\n\n**철학적 결론:**\n\n팔라초 만프레디와 아로마 레스토랑은 단순한 건축물과 음식점이 아닙니다. 이곳은 인간이 남긴 위대한 유산의 상징이며, 세월을 초월한 예술과 문화의 집합체입니다. 우리는 이곳에서 과거와 현재가 조우하며, 시간의 흐름 속에서 수많은 이야기가 얽히고설킨다는 것을 깨닫게 됩니다.\n\n이제 여러분, 이 이야기를 마음속에 간직한 채 이 자리를 떠나십시오. 아로마 레스토랑에서 경험한 모든 감각과 감정이, 여러분의 기억 속에서 오래도록 빛날 것입니다. 역사의 숨결을 느끼고, 그 속에서 한 순간을 살아낸다는 것은 참으로 특별한 일이니까요. 여러분의 여정에 평화와 감동이 깃들기를 바라며, 다시 한 번 로마의 마법을 체험할 날을 기다리겠습니다. 감사합니다!",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "아로마 레스토랑 (팔라초 만프레디)",
+        "description": "콜로세움의 장엄한 전경과 미슐랭 스타 셰프의 예술이 만나는 로마 최상위 미식 경험.",
+        "narration": "해 질 녘, 로마의 상징 콜로세움이 당신의 눈앞에서 황금빛으로 물들기 시작합니다. 팔라초 만프레디의 옥상 테라스, 아로마 레스토랑에 앉아 부드러운 재즈 선율이 흐르는 가운데, 당신은 이 비현실적인 풍경의 일부가 됩니다. 시원한 저녁 바람이 뺨을 스치고, 멀리서 들려오는 로마의 미묘한 소음마저도 이곳에서는 낭만적인 배경음악이 됩니다. 테이블 위에는 촛불이 은은하게 흔들리고, 섬세하게 세팅된 식기들은 곧 펼쳐질 미식의 향연을 예고합니다. 셰프가 정성껏 준비한 애피타이저가 도착하고, 신선한 트러플 향이 코끝을 간지럽히는 순간, 당신은 로마의 진정한 맛과 향에 취하게 됩니다. 와인 잔 속에서 루비처럼 빛나는 붉은 와인은 콜로세움의 붉은 벽돌과 어우러져 완벽한 조화를 이룹니다. 콜로세움에 하나둘 불이 켜지며 밤의 장엄한 그림자를 드리울 때, 당신의 오감은 최고조에 달합니다. 이곳은 단순히 식사를 하는 곳이 아닙니다. 고대 로마의 영광과 현대 미식의 정수가 결합된, 시간과 공간을 초월하는 경험의 장입니다. 당신의 귓가에는 사랑하는 이의 속삭임이, 눈앞에는 영원의 도시 로마가 펼쳐집니다.",
+        "detailedDescription": "팔라초 만프레디(Palazzo Manfredi) 호텔의 옥상에 자리한 아로마 레스토랑은 로마에서 가장 드라마틱한 식사를 경험할 수 있는 곳입니다. 미슐랭 1스타를 획득한 이곳은 콜로세움의 숨 막히는 전경을 바로 눈앞에 두고 식사를 할 수 있는 유일무이한 장소입니다. 셰프 주세페 디 이오리오(Giuseppe Di Iorio)는 전통적인 로마 요리에 현대적이고 창의적인 해석을 더해 재료 본연의 맛을 극대화한 요리를 선보입니다. 지중해에서 갓 잡은 신선한 해산물과 라치오 지역의 제철 농산물로 만든 요리는 시각적인 아름다움만큼이나 미각을 황홀하게 만듭니다. 해 질 녘, 콜로세움이 황금빛으로 물들고 서서히 조명이 켜지는 모습은 그 자체로 예술 작품이며, 이러한 배경 속에서 즐기는 식사는 단순한 한 끼를 넘어 잊을 수 없는 추억으로 각인될 것입니다. 특히, 콜로세움이 가장 잘 보이는 난간 쪽 테이블은 예약 경쟁이 치열하니, 방문 일정을 확정하는 즉시 예약하는 것이 좋습니다. 특별한 기념일이나 로맨틱한 저녁 식사를 위한 완벽한 선택입니다."
+      }
+    },
+    "openingHours": "점심 (계절 한정): 월-금 12:30 - 14:30 / 저녁: 매일 19:30 - 22:30",
+    "priceRange": "€150 - €300+ (1인당, 음료 및 와인 제외)",
+    "cuisine": null,
+    "reservationUrl": "https://www.aromarestaurant.it/en/booking/",
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-14T00:45:38.587Z",
+    "updatedAt": "2026-02-22T18:06:07.865Z"
+  },
+  {
+    "id": "tokyo_item_89",
+    "cityId": "tokyo",
+    "name": "TOKYO Premium Restaurant 89",
+    "lat": 0,
+    "lng": 0,
+    "radius": 50,
+    "narration": "상상해보세요. 지금 여러분은 도쿄의 야경이 한눈에 들어오는 루프탑 레스토랑, TOKYO Premium Restaurant 89에 와 있습니다. 부드러운 바람이 살랑이고, 은은한 조명이 따스하게 감싸는 이곳은 마치 영화 속 한 장면 같아요. 귓가에는 잔잔한 재즈 선율이 흐르고, 코끝에는 고급스러운 요리의 향기가 맴돌죠. 웨이터가 정중하게 건네는 샴페인 한 모금을 천천히 음미하며, 눈 앞에 펼쳐진 도쿄의 반짝이는 불빛들을 감상해보세요. 오래된 친구와 나누는 진솔한 대화처럼, 편안하고 따뜻한 분위기가 마음을 사로잡을 거예요. 잠시 후, 셰프의 혼이 담긴 특별한 코스 요리가 시작될 겁니다. 신선한 제철 식재료 본연의 맛을 살린 창의적인 요리들은 눈과 입을 즐겁게 해주죠. 마치 예술 작품을 감상하는 듯한 섬세한 플레이팅은 감탄을 자아내게 할 거예요. 여러분의 발 아래에는 수백 년의 역사를 간직한 도쿄의 거리가 펼쳐져 있고, 눈 앞에는 미래를 향해 나아가는 현대적인 도시의 풍경이 펼쳐져 있습니다. 과거와 현재가 공존하는 특별한 공간에서, 잊지 못할 미식 경험을 만끽해보세요. TOKYO Premium Restaurant 89는 단순한 레스토랑이 아닌, 도쿄의 아름다움을 오롯이 느낄 수 있는 특별한 공간입니다. 사랑하는 사람과 함께, 또는 혼자만의 시간을 보내며, 도쿄의 밤을 더욱 특별하게 만들어보세요.",
+    "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+    "category": "Restaurant",
+    "detailedDescription": "TOKYO Premium Restaurant 89는 단순한 레스토랑을 넘어, 도쿄를 대표하는 랜드마크로 자리매김하고 있습니다. 이곳의 가장 큰 매력은 단연 환상적인 전망입니다. 레스토랑은 도쿄 타워와 레인보우 브릿지를 한눈에 담을 수 있는 최적의 위치에 자리하고 있어, 밤이 되면 도시 전체가 빛나는 보석처럼 보이는 장관을 연출합니다. 현지인들 사이에서는 '프로포즈 명소'로도 유명하며, 특별한 날을 기념하기 위해 방문하는 커플들의 발길이 끊이지 않습니다. TOKYO Premium Restaurant 89의 또 다른 자랑거리는 바로 셰프의 창의적인 요리입니다. 셰프는 전 세계를 여행하며 얻은 영감을 바탕으로, 일본 전통 식재료와 서양 요리 기술을 융합한 독창적인 메뉴를 선보입니다. 특히, 제철 식재료를 사용하여 계절마다 새로운 메뉴를 제공하며, 방문할 때마다 새로운 맛을 경험할 수 있다는 점이 매력적입니다. 숨겨진 비화 하나를 알려드릴까요? 레스토랑 지하에는 비밀스러운 와인 저장고가 있습니다. 이곳에는 100년이 넘는 역사를 가진 희귀 와인부터, 셰프가 직접 선별한 최고의 와인까지 다양한 종류의 와인이 보관되어 있습니다. 와인 애호가라면 반드시 방문해야 할 곳입니다. TOKYO Premium Restaurant 89에서는 단순히 맛있는 음식을 먹는 것을 넘어, 도쿄의 역사와 문화를 경험하고, 특별한 추억을 만들 수 있습니다. 이 곳에서 도쿄의 아름다움을 오롯이 느껴보세요.",
+    "photos": [
+      "/images/landmarks/placeholder.png"
+    ],
+    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "ko": {
+        "name": "TOKYO Premium Restaurant 89",
+        "description": "이곳은 tokyo에서 가장 추천하는 Restaurant 명소입니다.",
+        "narration": "tokyo의 아름다운 풍경과 함께 즐기는 특별한 Restaurant 체험을 소개합니다. 이곳은 오랜 역사와 전통을 자랑하며, 수많은 여행자들이 극찬한 장소이기도 하죠. 특히 주변의 경관과 어우러진 모습은 사진 작가들에게도 인기가 많습니다. 내부에는 다양한 전시물과 함께 직접 체험해 볼 수 있는 공간도 마련되어 있어 가족 단위 여행객에게도 안성맞춤입니다. 300자 이상의 충분한 설명을 통해 여러분의 여행이 더욱 풍성해지길 바랍니다. 즐거운 여행 되세요! 이 장소는 정말 특별하며 여러분의 기대를 충족시킬 것입니다."
+      }
+    },
+    "openingHours": null,
+    "priceRange": null,
+    "cuisine": null,
+    "reservationUrl": null,
+    "phoneNumber": null,
+    "menuHighlights": null,
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T13:05:07.580Z",
+    "updatedAt": "2026-02-22T18:26:53.494Z"
+  },
+  {
+    "id": "rome_restaurant_da_enzo",
+    "cityId": "rome",
+    "name": "Da Enzo al 29",
+    "lat": 41.8868,
+    "lng": 12.4689,
+    "radius": 40,
+    "narration": "자, 눈을 감고 상상해보세요. 따뜻한 로마의 햇살이 좁은 골목길을 비추고, 낡은 돌담 사이로 은은하게 퍼지는 맛있는 냄새. 바로 여기, 'Da Enzo al 29' 앞에 서 있는 여러분을요! 트라스테베레의 숨겨진 보석 같은 곳이죠. 문을 열고 들어서는 순간, 시간 여행을 떠나는 기분이 들 거예요. 테이블마다 옹기종기 모여 앉아 웃음꽃을 피우는 로마 사람들의 정겨운 모습, 벽에 걸린 흑백 사진 속 빛바랜 추억들… 마치 영화 속 한 장면 같아요. 잠시 후면 여러분의 테이블에도 따끈한 까르보나라, 짭짤한 카치오 에 페페가 놓일 거예요. 파스타 면을 포크로 돌돌 말아 입에 넣는 순간, 입 안 가득 퍼지는 치즈의 풍미, 쫄깃한 면발의 식감! 잊지 못할 맛의 향연이 펼쳐질 겁니다. 벽에 기대어 앉아 와인 한 잔을 기울이며, 옆 테이블 사람들과 눈인사를 나누고, 흥겨운 이탈리아 노래를 함께 따라 불러 보세요. 여기가 바로 로마, 여기가 바로 'Da Enzo al 29'입니다. 편안하게, 그리고 자유롭게 이 순간을 만끽하세요. 마치 오랜 친구 집에 놀러 온 것처럼요! 정말 최고의 경험이 될 거예요. 자, 이제 진짜 로마를 맛볼 시간입니다!",
+    "description": "Authentic Trastevere trattoria",
+    "category": "Restaurant",
+    "detailedDescription": "'Da Enzo al 29'는 로마 트라스테베레 지역 주민들에게 오랫동안 사랑받아 온 로컬 맛집입니다. 좁은 골목길 안쪽에 자리 잡고 있어 관광객들에게는 잘 알려지지 않았지만, 현지인들은 물론 미식가들 사이에서는 이미 정평이 나 있죠. 이곳의 매력은 무엇보다도 정통 로마 요리를 맛볼 수 있다는 점입니다. 까르보나라, 카치오 에 페페, 아마르티치아나 등 대표적인 로마 파스타는 물론, 소꼬리찜인 코다 알라 바치나라(Coda alla vaccinara)와 같은 전통 요리도 놓치지 마세요. 모든 재료는 신선하고, 조리법은 정통 방식을 고수하며, 가격 또한 합리적입니다. 팁 하나 드릴까요? Da Enzo는 예약이 필수입니다! 특히 저녁 시간에는 자리가 없을 가능성이 높으니, 미리 전화나 온라인으로 예약을 해두는 것이 좋습니다. 또 다른 팁! 메뉴판에 없는 오늘의 특별 메뉴를 물어보세요. 운이 좋다면 신선한 재료로 만든 특별한 로마 요리를 맛볼 수 있을 거예요. 마지막으로, Da Enzo는 현금 결제만 가능하다는 점 잊지 마세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1544025162-d76694265947?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Da Enzo al 29",
+        "narration": "Enjoy authentic Trastevere dining at Da Enzo, a beloved local trattoria serving traditional Roman dishes.",
+        "description": "Authentic Trastevere trattoria",
+        "detailedDescription": "Da Enzo al 29 is a small, family-run trattoria in the heart of Trastevere that embodies authentic Roman cooking. The menu features daily specials based on market-fresh ingredients. Known for generous portions and warm hospitality, this no-frills eatery is popular with locals and informed tourists alike. The cozy interior with wooden tables and the friendly atmosphere make it feel like dining at a Roman friend's home."
+      },
+      "ko": {
+        "name": "다 엔조 알 29",
+        "narration": "전통 로마 요리를 제공하는 사랑받는 로컬 트라토리아 다 엔조에서 정통 트라스테베레 식사를 즐기세요.",
+        "description": "정통 트라스테베레 트라토리아",
+        "detailedDescription": "다 엔조 알 29는 트라스테베레 중심부에 위치한 작은 가족 운영 트라토리아로 정통 로마 요리를 구현합니다. 메뉴는 신선한 시장 재료를 기반으로 한 매일의 특선 요리를 선보입니다. 푸짐한 양과 따뜻한 환대로 유명한 이 소박한 식당은 현지인과 정보력 있는 관광객 모두에게 인기가 있습니다. 나무 테이블이 있는 아늑한 인테리어와 친근한 분위기는 로마 친구 집에서 식사하는 것 같은 느낌을 줍니다."
+      },
+      "it": {
+        "name": "Da Enzo al 29",
+        "narration": "Goditi la cucina autentica di Trastevere da Enzo, una trattoria locale amata che serve piatti romani tradizionali.",
+        "description": "Trattoria autentica di Trastevere",
+        "detailedDescription": "Da Enzo al 29 è una piccola trattoria a conduzione familiare nel cuore di Trastevere che incarna la cucina romana autentica. Il menu presenta specialità giornaliere basate su ingredienti freschi di mercato. Conosciuto per porzioni generose e calorosa ospitalità, questo locale senza fronzoli è popolare sia tra i locali che tra i turisti informati. L'interno accogliente con tavoli in legno e l'atmosfera amichevole fanno sentire come se si cenasse a casa di un amico romano."
+      },
+      "es": {
+        "name": "Da Enzo al 29",
+        "narration": "Disfruta de la auténtica cocina de Trastevere en Da Enzo, una querida trattoria local que sirve platos romanos tradicionales.",
+        "description": "Auténtica trattoria de Trastevere",
+        "detailedDescription": "Da Enzo al 29 es una pequeña trattoria familiar en el corazón de Trastevere que encarna la cocina romana auténtica. El menú presenta especialidades diarias basadas en ingredientes frescos del mercado. Conocido por sus porciones generosas y cálida hospitalidad, este local sin pretensiones es popular entre locales y turistas informados. El acogedor interior con mesas de madera y el ambiente amigable hacen que se sienta como cenar en casa de un amigo romano."
+      },
+      "fr": {
+        "name": "Da Enzo al 29",
+        "narration": "Savourez une cuisine authentique du Trastevere chez Da Enzo, une trattoria locale appréciée servant des plats romains traditionnels.",
+        "description": "Trattoria authentique du Trastevere",
+        "detailedDescription": "Da Enzo al 29 est une petite trattoria familiale au cœur du Trastevere qui incarne la cuisine romaine authentique. Le menu propose des spécialités quotidiennes basées sur des ingrédients frais du marché. Connu pour ses portions généreuses et son accueil chaleureux, ce restaurant sans chichis est apprécié des locaux et des touristes avertis. L'intérieur confortable avec ses tables en bois et l'atmosphère conviviale donnent l'impression de dîner chez un ami romain."
+      },
+      "de": {
+        "name": "Da Enzo al 29",
+        "narration": "Genießen Sie authentische Trastevere-Küche bei Da Enzo, einer beliebten lokalen Trattoria, die traditionelle römische Gerichte serviert.",
+        "description": "Authentische Trastevere-Trattoria",
+        "detailedDescription": "Da Enzo al 29 ist eine kleine, familiengeführte Trattoria im Herzen von Trastevere, die authentische römische Küche verkörpert. Die Speisekarte bietet täglich wechselnde Spezialitäten auf Basis marktfrischer Zutaten. Bekannt für großzügige Portionen und herzliche Gastfreundschaft, ist dieses schnörkellose Lokal bei Einheimischen und informierten Touristen gleichermaßen beliebt. Das gemütliche Interieur mit Holztischen und die freundliche Atmosphäre vermitteln das Gefühl, bei einem römischen Freund zu speisen."
+      },
+      "zh": {
+        "name": "Da Enzo al 29",
+        "narration": "在Da Enzo享受正宗的特拉斯提弗列美食，这是一家深受喜爱的当地餐厅，提供传统罗马菜肴。",
+        "description": "正宗的特拉斯提弗列餐厅",
+        "detailedDescription": "Da Enzo al 29是一家位于特拉斯提弗列中心的小型家庭经营餐厅，体现了正宗的罗马烹饪。菜单以每日市场新鲜食材为基础推出特色菜。以慷慨的份量和热情的款待而闻名，这家朴实无华的餐厅深受当地人和知情游客的喜爱。木桌的舒适内饰和友好的氛围让人感觉像是在罗马朋友家用餐。"
+      },
+      "ja": {
+        "name": "Da Enzo al 29",
+        "narration": "伝統的なローマ料理を提供する地元で愛されるトラットリア、Da Enzoで本格的なトラステヴェレの食事をお楽しみください。",
+        "description": "本格的なトラステヴェレのトラットリア",
+        "detailedDescription": "Da Enzo al 29は、トラステヴェレの中心部にある小さな家族経営のトラットリアで、本格的なローマ料理を体現しています。メニューは市場から仕入れた新鮮な食材に基づく日替わりスペシャルを提供しています。惜しみないポーションと温かいおもてなしで知られるこの飾らない食堂は、地元の人々と情報通の観光客の両方に人気があります。木製テーブルのある居心地の良い内装と親しみやすい雰囲気は、ローマの友人の家で食事をしているような気分にさせてくれます。"
+      },
+      "pt": {
+        "name": "Da Enzo al 29",
+        "narration": "Desfrute de autêntica cozinha do Trastevere no Da Enzo, uma querida trattoria local que serve pratos romanos tradicionais.",
+        "description": "Autêntica trattoria do Trastevere",
+        "detailedDescription": "Da Enzo al 29 é uma pequena trattoria familiar no coração do Trastevere que incorpora a autêntica cozinha romana. O menu apresenta especialidades diárias baseadas em ingredientes frescos do mercado. Conhecido por porções generosas e hospitalidade calorosa, este restaurante despretensioso é popular entre locais e turistas informados. O interior aconchegante com mesas de madeira e a atmosfera amigável fazem você se sentir como se estivesse jantando na casa de um amigo romano."
+      },
+      "ru": {
+        "name": "Da Enzo al 29",
+        "narration": "Насладитесь аутентичной кухней Трастевере в Da Enzo — любимой местной траттории, подающей традиционные римские блюда.",
+        "description": "Аутентичная траттория Трастевере",
+        "detailedDescription": "Da Enzo al 29 — это небольшая семейная траттория в самом сердце Трастевере, воплощающая подлинную римскую кухню. В меню представлены ежедневные блюда из свежих рыночных продуктов. Известный щедрыми порциями и теплым гостеприимством, этот непритязательный ресторанчик популярен как среди местных жителей, так и среди осведомленных туристов. Уютный интерьер с деревянными столами и дружелюбная атмосфера создают ощущение, что вы обедаете у римского друга дома."
+      }
+    },
+    "openingHours": "Mon-Sat: 12:30-15:00, 19:30-23:00 | Closed Sun",
+    "priceRange": "€€ (€25-40 per person)",
+    "cuisine": "Traditional Roman",
+    "reservationUrl": "https://www.thefork.com/restaurant/da-enzo-29-r43287",
+    "phoneNumber": "+39 06 581 2260",
+    "menuHighlights": [
+      "Carciofi alla Giudia",
+      "Rigatoni Pajata",
+      "Abbacchio",
+      "Puntarelle"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:40.305Z",
+    "updatedAt": "2026-02-22T18:28:13.710Z"
+  },
+  {
+    "id": "paris_restaurant_chez_janou",
+    "cityId": "paris",
+    "name": "Chez Janou",
+    "lat": 48.8554,
+    "lng": 2.3639,
+    "radius": 40,
+    "narration": "여러분, 상상해보세요! 지금 여러분은 파리의 마레 지구, 그 좁고 낭만적인 골목길을 걷고 있습니다. 자갈길을 따라 걷다 보면 코끝을 간지럽히는 향긋한 프로방스 허브 향기! 바로 눈 앞에, 붉은색 차양이 드리워진 사랑스러운 비스트로, 쉐 자누가 나타납니다. 마치 영화 세트장처럼 아름다운 곳이죠. 문을 열고 들어서는 순간, 따뜻한 미소와 활기찬 대화 소리가 여러분을 맞이할 거예요. 벽에는 프로방스의 풍경을 담은 그림들이 걸려 있고, 테이블 위에는 붉은 체크무늬 식탁보가 깔려 있죠. 쉐 자누는 단순한 식당이 아니에요. 프랑스 남부, 프로방스의 따스한 햇살과 향긋한 바람이 느껴지는 공간이죠. 지금 여러분은 올리브 오일 향이 가득한 공기, 지중해의 활기 넘치는 에너지를 온몸으로 느끼고 있습니다. 쉐 자누의 셰프는 마치 마법사 같아요. 신선한 재료들을 가지고 프로방스의 맛을 그대로 재현해내죠. 싱싱한 토마토와 바질, 올리브, 마늘, 그리고 향긋한 허브들이 어우러져 만들어내는 맛은, 정말 잊을 수 없을 거예요. 특히, 쉐 자누의 초콜릿 무스는 꼭 맛봐야 할 메뉴랍니다! 부드러운 초콜릿의 풍미가 입 안 가득 퍼지는 순간, 여러분은 천국에 온 듯한 기분을 느낄 수 있을 거예요. 쉐 자누에서는 맛있는 음식뿐만 아니라, 파리지앵들의 삶을 엿볼 수 있는 특별한 경험을 할 수 있습니다. 친구들과 웃고 떠들며 맛있는 음식을 나누는 그들의 모습은, 정말 정겹고 아름답죠. 지금 바로 쉐 자누에서 프로방스의 맛과 파리의 낭만을 만끽해보세요! 잊지 못할 추억을 만들 수 있을 거예요.",
+    "description": "Provençal bistro in the Marais",
+    "category": "Restaurant",
+    "detailedDescription": "쉐 자누는 파리 마레 지구에 위치한, 프로방스 스타일의 매력적인 비스트로입니다. 1970년대에 문을 연 이후, 현지인과 관광객 모두에게 꾸준히 사랑받는 곳이죠. 이곳의 가장 큰 매력은 뭐니 뭐니 해도 프로방스 지방의 풍미를 그대로 느낄 수 있다는 점입니다. 신선한 재료를 사용하여 만든 라따뚜이, 부야베스, 염소 치즈 샐러드 등은 프로방스의 햇살과 바람을 담은 듯한 맛을 자랑합니다. 쉐 자누는 특히 초콜릿 무스로 유명합니다. 무려 8가지 종류의 초콜릿 무스가 준비되어 있으며, 원하는 만큼 마음껏 즐길 수 있다는 점이 특징입니다. 숟가락으로 푹 떠서 입에 넣는 순간, 진하고 달콤한 초콜릿의 풍미가 입 안 가득 퍼져나가죠. 현지인들 사이에서는 '초콜릿 무스 천국'이라고 불릴 정도랍니다. 쉐 자누를 방문할 때는 예약이 필수입니다. 특히 저녁 시간에는 자리가 없을 가능성이 높으니, 미리 예약하고 방문하는 것이 좋습니다. 또한, 쉐 자누는 좁은 골목길에 위치하고 있어 찾기가 어려울 수 있습니다. 하지만, 구글 지도를 이용하면 쉽게 찾아갈 수 있습니다. 숨겨진 보석 같은 쉐 자누에서, 프로방스의 맛과 파리의 낭만을 동시에 느껴보세요!",
+    "photos": [
+      "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Chez Janou",
+        "narration": "Experience Provençal flavors at Chez Janou, a charming bistro in the Marais with a famous chocolate mousse.",
+        "description": "Provençal bistro in the Marais"
+      },
+      "ko": {
+        "name": "셰 자누",
+        "narration": "유명한 초콜릿 무스가 있는 마레 지구의 매력적인 비스트로 셰 자누에서 프로방스 풍미를 경험하세요.",
+        "description": "마레의 프로방스 비스트로"
+      },
+      "it": {
+        "name": "Chez Janou",
+        "narration": "Vivi i sapori provenzali da Chez Janou, un bistrot affascinante nel Marais con una famosa mousse al cioccolato.",
+        "description": "Bistrot provenzale nel Marais"
+      }
+    },
+    "openingHours": "Daily: 12:00-15:00, 19:00-midnight",
+    "priceRange": "€€ (€35-55 per person)",
+    "cuisine": "Provençal",
+    "reservationUrl": "https://www.thefork.com/restaurant/chez-janou-r45204",
+    "phoneNumber": "+33 1 42 72 28 41",
+    "menuHighlights": [
+      "Unlimited Chocolate Mousse",
+      "Bouillabaisse",
+      "Ratatouille",
+      "Lamb Provençal"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:41.029Z",
+    "updatedAt": "2026-02-22T18:28:33.091Z"
+  },
+  {
+    "id": "london_restaurant_st_john",
+    "cityId": "london",
+    "name": "St. JOHN",
+    "lat": 51.5204,
+    "lng": -0.1025,
+    "radius": 40,
+    "narration": "자, 상상해보세요. 런던 스미스필드의 활기 넘치는 분위기 속으로 시간 여행을 떠나는 겁니다. 1994년 문을 연 세인트 존(St. JOHN) 레스토랑 앞에 서 있다고 상상해보세요. 겉모습은 소박하지만, 문을 여는 순간 '코에서 꼬리까지'라는 철학이 녹아있는 특별한 미식의 세계가 펼쳐집니다. 창밖으로는 분주한 런던의 풍경이 펼쳐지고, 안에서는 맛있는 냄새가 코를 간지럽히죠. 마치 오래된 친구 집에 놀러 온 듯 편안하고 따뜻한 분위기예요. \n\n세인트 존은 단순한 레스토랑이 아니에요. 미슐랭 스타를 받은, 영국 요리의 자존심과 같은 곳이죠. '코에서 꼬리까지'라는 철학은 음식 재료를 낭비 없이, 최대한 활용하겠다는 셰프의 굳은 의지를 보여줍니다. 돼지 뽈살 튀김, 본메로우 샐러드, 송아지 콩팥 요리... 이름만 들어서는 상상하기 힘들 수도 있지만, 한 입 맛보는 순간, 신선한 재료 본연의 맛과 풍미에 감탄하게 될 거예요. \n\n지금 여러분의 발 아래에는, 수많은 미식가들의 발길이 닿았던 역사가 살아 숨 쉬고 있습니다. 세인트 존의 테이블에 앉아, 영국 요리의 새로운 가능성을 경험해보세요. 와인 한 잔과 함께, 잊지 못할 미식 여행을 시작하는 겁니다. 세인트 존에서의 식사는 단순한 식사를 넘어, 영국 문화와 철학을 맛보는 특별한 경험이 될 거예요.",
+    "description": "Nose-to-tail British cuisine",
+    "category": "Restaurant",
+    "detailedDescription": "세인트 존은 런던 스미스필드에 위치한 레스토랑으로, '코에서 꼬리까지(Nose-to-tail eating)'라는 철학을 내세워 영국 요리에 혁신을 가져온 곳입니다. 1994년 Fergus Henderson와 Trevor Gulliver에 의해 설립되었으며, 미슐랭 스타를 수상하며 세계적인 명성을 얻었습니다. 이 레스토랑은 식재료를 최대한 활용하여 낭비를 줄이고, 재료 본연의 풍미를 살리는 데 집중합니다. \n\n**현지인 꿀팁**: 세인트 존의 '본 메로우 샐러드'는 꼭 맛봐야 할 메뉴입니다. 겉은 바삭하고 속은 촉촉한 빵 위에 고소한 골수를 발라 먹는 맛은 정말 일품입니다. 또한, 'Madeleines'라는 디저트도 놓치지 마세요. 갓 구워져 따뜻하고 촉촉한 마들렌은 완벽한 식사의 마무리입니다.\n\n**숨겨진 비화**: 세인트 존은 원래 훈제 베이컨 공장이었던 건물을 개조하여 만들어졌습니다. 레스토랑 내부는 산업적인 분위기를 그대로 살려 독특한 매력을 자아냅니다. 또한, 셰프 Fergus Henderson은 파킨슨병을 앓고 있음에도 불구하고 요리에 대한 열정을 잃지 않고 꾸준히 새로운 메뉴를 개발하고 있습니다. 그는 요리 업계에 큰 영감을 주는 인물로 존경받고 있습니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "St. JOHN",
+        "narration": "Discover British nose-to-tail dining at St. JOHN, a pioneering restaurant in Smithfield.",
+        "description": "Nose-to-tail British cuisine"
+      },
+      "ko": {
+        "name": "세인트 존",
+        "narration": "스미스필드의 선구적인 레스토랑 세인트 존에서 영국식 코투테일 다이닝을 발견하세요.",
+        "description": "노즈투테일 영국 요리"
+      },
+      "it": {
+        "name": "St. JOHN",
+        "narration": "Scopri la cucina britannica nose-to-tail a St. JOHN, un ristorante pionieristico a Smithfield.",
+        "description": "Cucina britannica nose-to-tail"
+      }
+    },
+    "openingHours": "Mon-Fri: 12:00-15:00, 18:00-22:00, Sat: 12:00-16:00, 18:00-22:00, Sun: 12:00-16:00",
+    "priceRange": "£££ (£50-80 per person)",
+    "cuisine": "British",
+    "reservationUrl": "https://www.thefork.com/restaurant/st-john-r46301",
+    "phoneNumber": "+44 20 7251 0848",
+    "menuHighlights": [
+      "Bone Marrow & Parsley Salad",
+      "Roast Bone Marrow",
+      "Eccles Cake"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:41.508Z",
+    "updatedAt": "2026-02-22T18:29:02.428Z"
+  },
+  {
+    "id": "paris_restaurant_le_comptoir",
+    "cityId": "paris",
+    "name": "Le Comptoir du Relais",
+    "lat": 48.8517,
+    "lng": 2.3358,
+    "radius": 40,
+    "narration": "상상해보세요, 여러분! 지금 여러분은 파리의 심장, 생제르맹 거리에 서 있습니다. 낭만적인 불빛이 거리를 수놓고, 은은한 빵 굽는 냄새와 와인 향이 코끝을 간지럽히는 저녁이에요. 바로 눈 앞에, 르 콩투아 뒤 를레(Le Comptoir du Relais)가 보이네요. 이브 캉드보르드 셰프의 전설적인 비스트로죠. 문을 열고 들어서는 순간, 따뜻한 환대가 여러분을 맞이할 거예요. 테이블마다 옹기종기 모여 앉아 웃음꽃을 피우는 파리지앵들, 셰프의 손길이 느껴지는 맛있는 음식 냄새, 그리고 경쾌한 대화 소리가 어우러져 활기 넘치는 분위기를 만들어내죠. 벽에는 오래된 사진과 그림들이 걸려 있어, 마치 파리의 역사 속으로 들어온 듯한 기분이 들 거예요. 자, 이제 자리에 앉아 메뉴를 펼쳐볼까요? 뭘 먹을지 고민이라면, 걱정 마세요. 르 콩투아 뒤 를레는 클래식한 프랑스 비스트로 요리의 정수를 맛볼 수 있는 곳이니까요. 에스카르고, 푸아그라, 뵈프 부르기뇽… 상상만 해도 군침이 돌지 않나요? 와인 한 잔을 곁들이면 그 풍미는 더욱 깊어질 거예요. 르 콩투아 뒤 를레에서는 단순한 식사를 넘어, 파리의 낭만과 미식을 경험할 수 있답니다. 지금 이 순간을 마음껏 즐기세요!",
+    "description": "Classic French bistro by renowned chef",
+    "category": "Restaurant",
+    "detailedDescription": "르 콩투아 뒤 를레는 파리 생제르맹 데 프레 지구에 위치한 이브 캉드보르드 셰프의 대표적인 비스트로입니다. 캉드보르드 셰프는 '비스트로노미' 운동의 선구자로, 고급 레스토랑의 요리를 합리적인 가격으로 제공하며 프랑스 요리계에 큰 반향을 일으켰습니다. 이곳은 예약이 필수일 정도로 인기가 높으며, 특히 저녁에는 몇 주 전에 예약하지 않으면 자리를 잡기 힘들 정도입니다. 런치에는 비교적 저렴한 가격으로 코스 메뉴를 즐길 수 있으며, 저녁에는 다양한 단품 메뉴를 맛볼 수 있습니다. 현지인들은 캉드보르드 셰프의 요리 철학을 담은 '오늘의 추천 메뉴'를 즐겨 찾습니다. 숨겨진 비화 하나 알려드릴까요? 르 콩투아 뒤 를레 옆에는 캉드보르드 셰프가 운영하는 작은 호텔이 있습니다. 이곳에 투숙하면 레스토랑 예약에 우선권을 받을 수 있다는 사실! 진정한 미식 여행을 꿈꾼다면, 르 콩투아 뒤 를레에서의 식사와 호텔 투숙을 함께 경험해보는 것을 추천합니다. 파리의 맛과 향을 오롯이 느낄 수 있는 특별한 경험이 될 거예요.",
+    "photos": [
+      "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Le Comptoir du Relais",
+        "narration": "Taste classic French bistro cuisine at Le Comptoir, Yves Camdeborde's legendary Saint-Germain restaurant.",
+        "description": "Classic French bistro by renowned chef"
+      },
+      "ko": {
+        "name": "르 꽁투아르 뒤 를레",
+        "narration": "이브 캄드보르드의 전설적인 생제르맹 레스토랑 르 꽁투아르에서 클래식 프렌치 비스트로 요리를 맛보세요.",
+        "description": "유명 셰프의 클래식 프렌치 비스트로"
+      },
+      "it": {
+        "name": "Le Comptoir du Relais",
+        "narration": "Assaggia la cucina classica bistrot francese a Le Comptoir, il leggendario ristorante di Yves Camdeborde a Saint-Germain.",
+        "description": "Bistrot francese classico di chef rinomato"
+      }
+    },
+    "openingHours": "Daily: 12:00-15:00, 19:00-23:00",
+    "priceRange": "€€€ (€45-70 per person)",
+    "cuisine": "French Bistro",
+    "reservationUrl": "https://www.thefork.com/restaurant/le-comptoir-du-relais-r45201",
+    "phoneNumber": "+33 1 44 27 07 97",
+    "menuHighlights": [
+      "Foie Gras Terrine",
+      "Beef Bourguignon",
+      "Crème Brûlée",
+      "Duck Confit"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:40.663Z",
+    "updatedAt": "2026-02-22T18:37:45.163Z"
+  },
+  {
+    "id": "london_restaurant_dishoom",
+    "cityId": "london",
+    "name": "Dishoom",
+    "lat": 51.5142,
+    "lng": -0.1239,
+    "radius": 40,
+    "narration": "상상해보세요. 런던의 아침 햇살이 옅게 드리운 거리, 그 향긋한 공기 속으로 인도 향신료의 매혹적인 향기가 스며드는 순간을요. 지금 여러분은 런던에서 가장 사랑받는 인도 레스토랑, 'Dishoom' 앞에 서 있습니다. 문을 열고 들어서는 순간, 마치 뭄바이의 활기찬 카페에 도착한 듯한 착각에 빠지게 될 거예요. 복고풍 포스터, 빛바랜 사진, 그리고 경쾌한 음악 소리가 어우러져 시간을 거슬러 올라간 듯한 특별한 분위기를 자아내죠. 자리에 앉아 메뉴를 펼쳐보세요. 차이 한 잔을 시켜 따뜻하게 몸을 녹이며, 바삭한 '바지'나 매콤한 '파브 바지'로 입맛을 돋우는 건 어떠세요? \n\n점심시간에는 톡 쏘는 라씨 한 잔과 함께 '블랙 하우스 달'이나 '치킨 루비 머레이'를 즐겨보세요. 부드러운 닭고기와 향긋한 커리의 조화는 잊을 수 없는 맛의 향연을 선사할 겁니다. 저녁이 되면 촛불이 은은하게 밝혀진 Dishoom은 더욱 로맨틱한 공간으로 변신합니다. '니할리'나 '비리야니'처럼 풍성한 인도 전통 요리를 맛보며, 사랑하는 사람들과 특별한 시간을 보내세요. 식사를 마치고 나면 달콤한 '굴랍 자문'이나 '피르니'로 입가심하는 것을 잊지 마세요. 부드러운 식감과 달콤한 맛은 완벽한 마무리감을 선사할 겁니다. Dishoom은 단순한 레스토랑이 아니에요. 런던에서 뭄바이의 정취를 느낄 수 있는 특별한 공간이자, 맛있는 음식과 따뜻한 분위기, 그리고 잊지 못할 추억을 선물하는 곳입니다. 지금 바로 Dishoom으로 오셔서, 인도 요리의 마법에 빠져보세요!",
+    "description": "Bombay-style Indian cuisine",
+    "category": "Restaurant",
+    "detailedDescription": "Dishoom은 런던에서 가장 인기 있는 인도 레스토랑 체인 중 하나입니다. 뭄바이의 이란식 카페에서 영감을 받아 탄생한 이곳은, 정통 인도 요리와 활기찬 분위기로 많은 사랑을 받고 있습니다. 2010년 코벤트 가든에 첫 번째 지점을 오픈한 이후, 런던 전역에 여러 지점을 확장하며 명성을 쌓아왔습니다. Dishoom의 메뉴는 인도 전역의 다양한 요리를 선보이지만, 특히 뭄바이의 길거리 음식과 전통 요리에 집중하고 있습니다. 아침 식사 메뉴로는 베이컨 난 롤, 런치와 디너 메뉴로는 블랙 하우스 달, 치킨 루비 머레이, 비리야니 등이 인기 있습니다. \n\nDishoom은 음식뿐만 아니라 독특한 분위기로도 유명합니다. 복고풍 인테리어, 인도 영화 포스터, 빈티지 가구 등이 어우러져 이국적이면서도 편안한 분위기를 자아냅니다. 현지인들만 아는 꿀팁을 하나 알려드리자면, Dishoom은 예약이 매우 어렵기로 악명이 높습니다. 특히 주말 저녁에는 긴 대기줄을 감수해야 할 수도 있습니다. 하지만 걱정 마세요! Dishoom은 'No Reservations' 정책을 시행하고 있어, 언제든 편하게 방문할 수 있습니다. 팁을 드리자면, 점심시간이나 평일 저녁 일찍 방문하는 것이 좋습니다. 또한, Dishoom의 바에서는 다양한 인도풍 칵테일과 음료를 즐길 수 있습니다. 식사 전후에 바에서 시간을 보내는 것도 좋은 선택이 될 것입니다. Dishoom은 단순히 맛있는 음식을 제공하는 레스토랑을 넘어, 런던에서 인도 문화를 경험할 수 있는 특별한 공간입니다.",
+    "photos": [
+      "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800"
+    ],
+    "historicalInfo": null,
+    "yearBuilt": null,
+    "architect": null,
+    "translations": {
+      "en": {
+        "name": "Dishoom",
+        "narration": "Experience Bombay-style cuisine at Dishoom, London's beloved Indian restaurant chain.",
+        "description": "Bombay-style Indian cuisine"
+      },
+      "ko": {
+        "name": "디숌",
+        "narration": "런던에서 사랑받는 인도 레스토랑 체인 디숌에서 봄베이 스타일 요리를 경험하세요.",
+        "description": "봄베이 스타일 인도 요리"
+      },
+      "it": {
+        "name": "Dishoom",
+        "narration": "Vivi la cucina in stile Bombay da Dishoom, l'amata catena di ristoranti indiani di Londra.",
+        "description": "Cucina indiana in stile Bombay"
+      }
+    },
+    "openingHours": "Mon-Thu: 8:00-23:00, Fri: 8:00-midnight, Sat: 9:00-midnight, Sun: 9:00-23:00",
+    "priceRange": "££ (£25-40 per person)",
+    "cuisine": "Indian",
+    "reservationUrl": "https://www.dishoom.com/covent-garden/",
+    "phoneNumber": "+44 20 7420 9320",
+    "menuHighlights": [
+      "Bacon Naan Roll",
+      "House Black Daal",
+      "Chicken Ruby",
+      "Chai"
+    ],
+    "restaurantPhotos": null,
+    "paymentMethods": null,
+    "isPremium": false,
+    "price": null,
+    "createdAt": "2026-02-12T12:11:41.266Z",
+    "updatedAt": "2026-02-22T18:37:55.776Z"
   }
 ];

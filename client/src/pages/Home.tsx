@@ -48,8 +48,8 @@ import { getMatchedCityId, checkProximity } from '@/lib/locationService';
 import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
 import { Landmark as LandmarkIcon, Activity as ActivityIcon, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon, Headphones as AudioIcon, Ticket, Navigation, Play, Pause, Minus, ZoomIn, Settings, Star } from 'lucide-react';
-import { HARDCODED_LANDMARKS } from '@/data/hardcodedLandmarks';
 import { offlineStorage } from '@/lib/offlineStorage';
+import { syncService } from '@/lib/syncService';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -138,6 +138,20 @@ export default function Home() {
     }
   }, [isUpdateAvailable]);
 
+  // [Query Master] On-Demand City Synchronization Trigger
+  // 사용자가 도시를 변경할 때마다 해당 도시의 모든 데이터를 NeonDB -> IndexedDB로 동기화합니다.
+  useEffect(() => {
+    if (selectedCityId && !offlineMode) {
+      console.log(`📡 [Home] Triggering sync for ${selectedCityId}`);
+      syncService.syncCityData(selectedCityId).then(success => {
+        if (success) {
+          // 동기화 성공 시 쿼리 무효화하여 최신 데이터 반영
+          // queryClient.invalidateQueries({ queryKey: ['/api/landmarks', selectedCityId] });
+        }
+      });
+    }
+  }, [selectedCityId, offlineMode]);
+
   // Detect device capabilities for performance optimization
   const [deviceCapabilities] = useState(() => detectDeviceCapabilities());
   const maxMarkers = getMaxMarkersToRender(deviceCapabilities.isLowEnd);
@@ -149,36 +163,34 @@ export default function Home() {
 
   const { data: landmarks = [], isLoading: landmarksLoading } = useQuery<Landmark[]>({
     queryKey: ['/api/landmarks', selectedCityId],
-    initialData: HARDCODED_LANDMARKS.filter(l => l.cityId === selectedCityId),
     queryFn: async () => {
       try {
-        const response = await fetch(`/api/landmarks?cityId=${selectedCityId}`);
-        if (!response.ok) throw new Error('Failed to fetch landmarks');
-        const fetchedLandmarks: Landmark[] = await response.json();
-
-        // [Query Master] NeonDB와 로컬 하드코드 데이터를 비교하여 동기화
-        // 1. 하드코드 데이터에 없는 항목이 있거나 내용이 다르면 IndexedDB에 강제 업데이트
-        offlineStorage.init().then(() => {
-          fetchedLandmarks.forEach(async (l) => {
-            const existing = await offlineStorage.getLandmark(l.id);
-            // 데이터가 다르거나 없는 경우 업데이트
-            if (!existing || JSON.stringify(existing) !== JSON.stringify(l)) {
-              console.log(`🔄 [Data Sync] Updating landmark in local DB: ${l.id}`);
-              await offlineStorage.saveLandmark(l);
-            }
-          });
-        });
-
-        return fetchedLandmarks;
-      } catch (error) {
-        console.warn('⚠️ [Data Sync] Fetch failed, falling back to local storage', error);
-        // 페치 실패 시 로컬 DB에서 데이터 로드
+        // [Query Master] 온디맨드 동기화가 진행 중이거나 완료되었으므로, 우선 로컬 DB 데이터를 신뢰합니다.
         await offlineStorage.init();
         const localLandmarks = await offlineStorage.getLandmarks(selectedCityId);
-        return localLandmarks.length > 0 ? localLandmarks : HARDCODED_LANDMARKS.filter(l => l.cityId === selectedCityId);
+
+        // 온라인 상태인 경우 서버에서 최신 데이터를 가져오되, 실패해도 로컬 데이터를 사용합니다.
+        if (!offlineMode) {
+          try {
+            const response = await fetch(`/api/landmarks?cityId=${selectedCityId}`);
+            if (response.ok) {
+              const fetchedLandmarks: Landmark[] = await response.json();
+              // 백그라운드에서 로컬 DB 업데이트
+              fetchedLandmarks.forEach(l => offlineStorage.saveLandmark(l));
+              return fetchedLandmarks;
+            }
+          } catch (e) {
+            console.warn('⚠️ [Data Sync] API fetch failed, using local cache');
+          }
+        }
+
+        return localLandmarks.length > 0 ? localLandmarks : [];
+      } catch (error) {
+        console.error('Critical data load error:', error);
+        return [];
       }
     },
-    staleTime: 1000 * 60 * 60, // 1 hour
+    staleTime: 1000 * 60 * 5, // 5 minutes (온디맨드 동기화가 있으므로 짧게 유지)
   });
 
   const [audioEnabled, setAudioEnabled] = useState(true);
