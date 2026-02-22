@@ -211,6 +211,55 @@ export const landmarks = pgTable("landmarks", {
 });
 
 /**
+ * [백업 전용] cities_backup 테이블
+ */
+export const citiesBackup = pgTable("cities_backup", {
+  id: varchar("id").primaryKey(),
+  name: varchar("name").notNull(),
+  country: varchar("country").notNull(),
+  lat: doublePrecision("lat").notNull(),
+  lng: doublePrecision("lng").notNull(),
+  zoom: integer("zoom").default(14),
+  cruisePort: json("cruise_port"),
+  landingContent: json("landing_content"),
+  defaultGuideId: varchar("default_guide_id"),
+  backupAt: timestamp("backup_at").notNull().defaultNow(),
+});
+
+/**
+ * [백업 전용] landmarks_backup 테이블
+ */
+export const landmarksBackup = pgTable("landmarks_backup", {
+  id: varchar("id").primaryKey(),
+  cityId: varchar("city_id").notNull(),
+  name: varchar("name").notNull(),
+  lat: doublePrecision("lat").notNull(),
+  lng: doublePrecision("lng").notNull(),
+  radius: integer("radius").notNull(),
+  narration: text("narration").notNull(),
+  description: text("description"),
+  category: varchar("category"),
+  detailedDescription: text("detailed_description"),
+  photos: json("photos"),
+  historicalInfo: text("historical_info"),
+  yearBuilt: varchar("year_built"),
+  architect: varchar("architect"),
+  translations: json("translations"),
+  openingHours: varchar("opening_hours"),
+  priceRange: varchar("price_range"),
+  cuisine: varchar("cuisine"),
+  reservationUrl: varchar("reservation_url"),
+  phoneNumber: varchar("phone_number"),
+  menuHighlights: json("menu_highlights"),
+  restaurantPhotos: json("restaurant_photos"),
+  paymentMethods: json("payment_methods"),
+  isPremium: boolean("is_premium").notNull().default(false),
+  price: doublePrecision("price"),
+  backupAt: timestamp("backup_at").notNull().defaultNow(),
+});
+
+
+/**
  * [연구소장 노트: 다중 가이드 해설 설계]
  * 하나의 랜드마크에 대해 여러 명의 크리에이터(가이드)가 제공하는 다양한 버전의 해설입니다.
  * 사용자는 취향에 맞는 가이드의 목소리와 내용을 선택하여 들을 수 있습니다.
@@ -646,3 +695,6 @@ export type Settlement = typeof settlements.$inferSelect;
 export type MarketingContent = typeof marketingContents.$inferSelect;
 export const LandmarkGuide = typeof landmarkGuides.$inferSelect;
 export type DbLandmarkGuide = typeof landmarkGuides.$inferSelect;
+
+export type DbCityBackup = typeof citiesBackup.$inferSelect;
+export type DbLandmarkBackup = typeof landmarksBackup.$inferSelect;
