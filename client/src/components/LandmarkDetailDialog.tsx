@@ -40,7 +40,7 @@ export default function LandmarkDetailDialog({
 
   // Fetch guides for this landmark
   const { data: guides = [] } = useQuery<DbLandmarkGuide[]>({
-    queryKey: [`/api/landmarks/${landmark?.id}/guides`],
+    queryKey: [`/api/landmarks/${encodeURIComponent(landmark?.id || '')}/guides`],
     enabled: !!landmark,
   });
 

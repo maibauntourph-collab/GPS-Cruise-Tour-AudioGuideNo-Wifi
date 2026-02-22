@@ -9996,6 +9996,17 @@ var MemStorage = class {
       return Array.from(this.usersMap.values()).find((u) => u.email === email);
     }
   }
+  async getUsersByRole(role) {
+    if (!env.NOWIFIGPSTOURS) {
+      return Array.from(this.usersMap.values()).filter((u) => u.role === role);
+    }
+    try {
+      return await db.select().from(users).where(eq2(users.role, role));
+    } catch (e) {
+      console.warn("[Storage] DB access failed for getUsersByRole:", e);
+      return Array.from(this.usersMap.values()).filter((u) => u.role === role);
+    }
+  }
   async createUser(user) {
     if (!env.NOWIFIGPSTOURS) {
       console.warn("[Storage] No NOWIFIGPSTOURS, using memory for createUser");
@@ -11097,6 +11108,21 @@ function registerRoutes(app2) {
       return c.json(city);
     } catch (error) {
       return c.json({ error: "Failed to fetch city" }, 500);
+    }
+  });
+  app2.get("/api/users", async (c) => {
+    try {
+      const role = c.req.query("role");
+      let users3;
+      if (role) {
+        users3 = await storage.getUsersByRole(role);
+      } else {
+        users3 = await storage.getAllUsers();
+      }
+      return c.json(users3);
+    } catch (error) {
+      console.error("[User API Error]", error);
+      return c.json({ error: "Failed to fetch users" }, 500);
     }
   });
   app2.get("/api/landmarks", async (c) => {

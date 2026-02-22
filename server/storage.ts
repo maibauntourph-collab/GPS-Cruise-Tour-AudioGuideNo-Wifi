@@ -51,6 +51,7 @@ export interface IStorage {
   deleteRoutePhoto(id: string): Promise<void>;
   // Admin methods
   getAllUsers(): Promise<User[]>;
+  getUsersByRole(role: string): Promise<User[]>;
   getMarketingContents(): Promise<any[]>;
   createCity(city: any): Promise<City>;
   updateCity(id: string, updates: Partial<City>): Promise<City | undefined>;
@@ -304,6 +305,18 @@ export class MemStorage implements IStorage {
     } catch (e) {
       console.warn("[Storage] DB access failed for getUserByEmail:", e);
       return Array.from(this.usersMap.values()).find(u => u.email === email);
+    }
+  }
+
+  async getUsersByRole(role: string): Promise<User[]> {
+    if (!env.NOWIFIGPSTOURS) {
+      return Array.from(this.usersMap.values()).filter(u => u.role === role);
+    }
+    try {
+      return await db.select().from(users).where(eq(users.role, role));
+    } catch (e) {
+      console.warn("[Storage] DB access failed for getUsersByRole:", e);
+      return Array.from(this.usersMap.values()).filter(u => u.role === role);
     }
   }
 

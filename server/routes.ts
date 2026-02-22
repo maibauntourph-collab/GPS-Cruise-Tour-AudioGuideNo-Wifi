@@ -154,7 +154,23 @@ export function registerRoutes(app: Hono<any>) {
     }
   });
 
-  // [적요: 특정 도시의 랜드마크(명소) 목록 조회 API]
+  // [적요: 사용자 목록 조회 API (역할 필터링 포함)]
+  app.get("/api/users", async (c) => {
+    try {
+      const role = c.req.query("role");
+      let users;
+      if (role) {
+        users = await storage.getUsersByRole(role);
+      } else {
+        users = await storage.getAllUsers();
+      }
+      return c.json(users);
+    } catch (error) {
+      console.error("[User API Error]", error);
+      return c.json({ error: "Failed to fetch users" }, 500);
+    }
+  });
+
   app.get("/api/landmarks", async (c) => {
     try {
       const cityId = c.req.query("cityId");
