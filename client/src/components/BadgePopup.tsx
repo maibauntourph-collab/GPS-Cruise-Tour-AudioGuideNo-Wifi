@@ -3,7 +3,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { X, Award, CheckCircle2, QrCode, Sparkles } from 'lucide-react';
+import { X, Award, CheckCircle2, QrCode, Sparkles, Building2, Landmark as LandmarkIcon, Castle, Trophy, Crown, Gem } from 'lucide-react';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent } from '@/lib/translations';
 import { generateBadgeQRData } from '@/lib/qrUtils';
@@ -26,6 +26,62 @@ export default function BadgePopup({ landmark, language, onClose, onGet, isAcqui
     const landmarkName = getTranslatedContent(landmark, language, 'name');
     const qrData = generateBadgeQRData(landmark.id);
 
+    // [강의 노트] 난이도 및 지역별 커스터마이징 로직
+    const getBadgeStyle = () => {
+        if (landmark.isPremium) {
+            return {
+                tier: language === 'ko' ? '프리미엄' : 'Premium',
+                color: 'from-emerald-400 to-cyan-500',
+                border: 'border-emerald-500/30',
+                shadow: 'shadow-[0_0_40px_rgba(16,185,129,0.3)]',
+                icon: <Gem className="w-10 h-10" />,
+                medal: <Crown className="w-5 h-5 text-emerald-500" />
+            };
+        }
+
+        // 카테고리나 명칭 기반으로 임의 난이도 배정 (실제 업무에서는 DB 필드 추가 권장)
+        const name = landmark.id.toLowerCase();
+        if (name.includes('colosseum') || name.includes('vatican') || name.includes('eiffel')) {
+            return {
+                tier: language === 'ko' ? '골드 메달' : 'Gold Medal',
+                color: 'from-amber-300 to-orange-500',
+                border: 'border-amber-500/30',
+                shadow: 'shadow-[0_0_40px_rgba(245,158,11,0.3)]',
+                icon: <Trophy className="w-10 h-10" />,
+                medal: <Award className="w-5 h-5 text-amber-500" />
+            };
+        }
+
+        if (landmark.category?.includes('Ancient') || name.includes('fountain') || name.length > 10) {
+            return {
+                tier: language === 'ko' ? '실버 메달' : 'Silver Medal',
+                color: 'from-slate-300 to-slate-500',
+                border: 'border-slate-400/30',
+                shadow: 'shadow-[0_0_40px_rgba(148,163,184,0.3)]',
+                icon: <Award className="w-10 h-10" />,
+                medal: <Award className="w-5 h-5 text-slate-400" />
+            };
+        }
+
+        return {
+            tier: language === 'ko' ? '브론즈 메달' : 'Bronze Medal',
+            color: 'from-orange-400 to-orange-700',
+            border: 'border-orange-500/30',
+            shadow: 'shadow-[0_0_40px_rgba(194,65,12,0.3)]',
+            icon: <Award className="w-10 h-10" />,
+            medal: <Award className="w-5 h-5 text-orange-600" />
+        };
+    };
+
+    const getCitySymbol = () => {
+        const cityId = landmark.cityId.toLowerCase();
+        if (cityId === 'rome') return <Building2 className="w-20 h-20 rotate-12" />;
+        if (cityId === 'paris') return <LandmarkIcon className="w-20 h-20 rotate-12" />;
+        return <Castle className="w-20 h-20 rotate-12" />;
+    };
+
+    const style = getBadgeStyle();
+
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -33,21 +89,24 @@ export default function BadgePopup({ landmark, language, onClose, onGet, isAcqui
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             className="fixed inset-x-4 bottom-24 sm:left-auto sm:right-4 sm:w-[380px] z-[3000]"
         >
-            <Card className="relative overflow-hidden bg-background/80 backdrop-blur-xl border-indigo-500/30 shadow-[0_0_40px_rgba(79,70,229,0.2)] p-6 rounded-3xl">
-                {/* Background Sparkles */}
-                <div className="absolute top-0 right-0 p-4 text-indigo-500/20">
-                    <Sparkles className="w-20 h-20 rotate-12" />
+            <Card className={`relative overflow-hidden bg-background/80 backdrop-blur-xl border-t-4 ${style.border} ${style.shadow} p-6 rounded-3xl`}>
+                {/* Background Regional Symbol */}
+                <div className="absolute top-0 right-0 p-4 text-primary/5">
+                    {getCitySymbol()}
                 </div>
 
                 <div className="relative z-10 flex flex-col items-center text-center gap-4">
-                    <div className="w-16 h-16 bg-indigo-500/10 rounded-full flex items-center justify-center text-indigo-500 mb-2">
-                        <Award className="w-10 h-10" />
+                    <div className={`w-16 h-16 bg-gradient-to-br ${style.color} rounded-2xl flex items-center justify-center text-white mb-2 shadow-lg transform rotate-3`}>
+                        {style.icon}
                     </div>
 
                     <div className="space-y-1">
-                        <Badge variant="outline" className="bg-indigo-500/10 text-indigo-600 border-indigo-500/20 px-3">
-                            {language === 'ko' ? '새로운 투어 배지' : 'New Tour Badge'}
-                        </Badge>
+                        <div className="flex items-center justify-center gap-1">
+                            {style.medal}
+                            <Badge variant="outline" className="bg-primary/5 text-primary border-primary/10 px-3 uppercase text-[10px] font-bold tracking-widest">
+                                {style.tier}
+                            </Badge>
+                        </div>
                         <h3 className="text-2xl font-bold tracking-tight mt-2">{landmarkName}</h3>
                         <p className="text-muted-foreground text-sm">
                             {language === 'ko'
@@ -79,16 +138,16 @@ export default function BadgePopup({ landmark, language, onClose, onGet, isAcqui
                     </motion.div>
 
                     {/* Action Buttons */}
-                    <div className="flex gap-2 w-full mt-2">
+                    <div className="flex gap-3 w-full mt-2">
                         <Button
                             variant="outline"
-                            className="flex-1 rounded-xl h-12"
+                            className="flex-1 rounded-xl h-12 border-primary/10 hover:bg-primary/5"
                             onClick={onClose}
                         >
                             {language === 'ko' ? '나중에' : 'Later'}
                         </Button>
                         <Button
-                            className={`flex-1 rounded-xl h-12 ${isAcquired ? 'bg-green-500 hover:bg-green-600' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+                            className={`flex-1 rounded-xl h-12 font-bold shadow-lg transition-all ${isAcquired ? 'bg-green-500 hover:bg-green-600' : 'bg-primary hover:bg-primary/90'}`}
                             onClick={() => !isAcquired ? onGet(landmark.id) : onClose()}
                         >
                             {isAcquired
