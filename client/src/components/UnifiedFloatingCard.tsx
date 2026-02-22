@@ -2385,22 +2385,67 @@ export default function UnifiedFloatingCard({
                                             {getCategoryIcon(landmark.category)}
                                           </div>
                                         )}
-                                        <h4 className="font-semibold text-sm line-clamp-2 leading-tight" data-testid={`text-landmark-name-${landmark.id}`}>
+                                        <h4 className="font-semibold text-sm leading-tight break-words" data-testid={`text-landmark-name-${landmark.id}`}>
                                           {getTranslatedContent(landmark, selectedLanguage, 'name')}
                                         </h4>
                                         {spokenLandmarks.has(landmark.id) && (
                                           <Volume2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
                                         )}
                                       </div>
-                                      <p className="text-[11px] text-muted-foreground line-clamp-2 mt-0.5 leading-snug">
-                                        {getTranslatedContent(landmark, selectedLanguage, 'description')}
-                                      </p>
+                                      <div className="flex items-start justify-between gap-2">
+                                        <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug flex-1 break-words">
+                                          {getTranslatedContent(landmark, selectedLanguage, 'description')}
+                                        </p>
+                                        <div className="flex gap-1 flex-shrink-0 mt-0.5">
+                                          <Tooltip>
+                                            <TooltipTrigger asChild>
+                                              <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                onClick={(e) => {
+                                                  e.stopPropagation();
+                                                  onLandmarkRoute(landmark);
+                                                  setIsMinimized(true);
+                                                }}
+                                                className="h-7 w-7 bg-muted/30 hover:bg-muted/50 rounded-full"
+                                                data-testid={`button-navigate-${landmark.id}`}
+                                              >
+                                                <Navigation className="w-3.5 h-3.5" />
+                                              </Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent side="top" className="text-[10px]">
+                                              {selectedLanguage === 'ko' ? '길찾기' : 'Navigate'}
+                                            </TooltipContent>
+                                          </Tooltip>
+                                          {onAddToTour && (
+                                            <Tooltip>
+                                              <TooltipTrigger asChild>
+                                                <Button
+                                                  variant="ghost"
+                                                  size="icon"
+                                                  onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    onAddToTour(landmark);
+                                                  }}
+                                                  className={`h-7 w-7 rounded-full bg-muted/30 hover:bg-muted/50 ${tourStops.some(s => s.id === landmark.id) ? 'text-[hsl(14,85%,55%)]' : ''}`}
+                                                  data-testid={`button-add-tour-${landmark.id}`}
+                                                >
+                                                  <MapPinned className="w-3.5 h-3.5" />
+                                                </Button>
+                                              </TooltipTrigger>
+                                              <TooltipContent side="top" className="text-[10px]">
+                                                {tourStops.some(s => s.id === landmark.id) ? (selectedLanguage === 'ko' ? '제거' : 'Remove') : (selectedLanguage === 'ko' ? '추가' : 'Add')}
+                                              </TooltipContent>
+                                            </Tooltip>
+                                          )}
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
 
                                 {/* Footer: Distance + Actions */}
-                                <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/50">
+                                <div className="flex items-center justify-between mt-1 pt-1.5 border-t border-border/50">
                                   <div className="flex items-center gap-2">
                                     <Badge variant="outline" className={`text-[10px] px-1.5 py-0 h-5 ${styles.border} ${styles.bg} ${styles.text}`}>
                                       {getCategoryLabel(landmark.category, selectedLanguage)}
@@ -2429,78 +2474,6 @@ export default function UnifiedFloatingCard({
                                         <Clock className="w-2.5 h-2.5" />
                                         {tourStopDurations[landmark.id] || tourTimePerStop}{selectedLanguage === 'ko' ? '분' : 'min'}
                                       </span>
-                                    )}
-                                  </div>
-                                  <div className="flex gap-1.5">
-                                    <Tooltip>
-                                      <TooltipTrigger asChild>
-                                        <Button
-                                          variant="ghost"
-                                          size="icon"
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            onLandmarkRoute(landmark);
-                                            setIsMinimized(true);
-                                          }}
-                                          className="h-7 w-7"
-                                          data-testid={`button-navigate-${landmark.id}`}
-                                        >
-                                          <Navigation className="w-4 h-4" />
-                                        </Button>
-                                      </TooltipTrigger>
-                                      <TooltipContent side="top" className="text-xs">
-                                        {selectedLanguage === 'ko' ? '길찾기' :
-                                          selectedLanguage === 'es' ? 'Navegar' :
-                                            selectedLanguage === 'fr' ? 'Naviguer' :
-                                              selectedLanguage === 'de' ? 'Navigation' :
-                                                selectedLanguage === 'it' ? 'Naviga' :
-                                                  selectedLanguage === 'zh' ? '导航' :
-                                                    selectedLanguage === 'ja' ? 'ナビ' :
-                                                      selectedLanguage === 'pt' ? 'Navegar' :
-                                                        selectedLanguage === 'ru' ? 'Навигация' :
-                                                          'Navigate'}
-                                      </TooltipContent>
-                                    </Tooltip>
-                                    {onAddToTour && (
-                                      <Tooltip>
-                                        <TooltipTrigger asChild>
-                                          <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              onAddToTour(landmark);
-                                            }}
-                                            className={`h-7 w-7 ${tourStops.some(s => s.id === landmark.id) ? 'text-[hsl(14,85%,55%)]' : ''}`}
-                                            data-testid={`button-add-tour-${landmark.id}`}
-                                          >
-                                            <MapPinned className="w-4 h-4" />
-                                          </Button>
-                                        </TooltipTrigger>
-                                        <TooltipContent side="top" className="text-xs">
-                                          {tourStops.some(s => s.id === landmark.id)
-                                            ? (selectedLanguage === 'ko' ? '투어에서 제거' :
-                                              selectedLanguage === 'es' ? 'Quitar del tour' :
-                                                selectedLanguage === 'fr' ? 'Retirer du tour' :
-                                                  selectedLanguage === 'de' ? 'Aus Tour entfernen' :
-                                                    selectedLanguage === 'it' ? 'Rimuovi dal tour' :
-                                                      selectedLanguage === 'zh' ? '从行程中移除' :
-                                                        selectedLanguage === 'ja' ? 'ツアーから削除' :
-                                                          selectedLanguage === 'pt' ? 'Remover do tour' :
-                                                            selectedLanguage === 'ru' ? 'Удалить из тура' :
-                                                              'Remove from Tour')
-                                            : (selectedLanguage === 'ko' ? '투어에 추가' :
-                                              selectedLanguage === 'es' ? 'Añadir al tour' :
-                                                selectedLanguage === 'fr' ? 'Ajouter au tour' :
-                                                  selectedLanguage === 'de' ? 'Zur Tour hinzufügen' :
-                                                    selectedLanguage === 'it' ? 'Aggiungi al tour' :
-                                                      selectedLanguage === 'zh' ? '添加到行程' :
-                                                        selectedLanguage === 'ja' ? 'ツアーに追加' :
-                                                          selectedLanguage === 'pt' ? 'Adicionar ao tour' :
-                                                            selectedLanguage === 'ru' ? 'Добавить в тур' :
-                                                              'Add to Tour')}
-                                        </TooltipContent>
-                                      </Tooltip>
                                     )}
                                   </div>
                                 </div>
