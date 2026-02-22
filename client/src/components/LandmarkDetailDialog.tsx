@@ -311,9 +311,36 @@ export default function LandmarkDetailDialog({
           {/* Overview Tab */}
           <TabsContent value="overview" className="flex-1 overflow-y-auto p-4 m-0">
             <div className="max-w-2xl mx-auto space-y-4">
+              {/* [Designer Kim] 프리미엄 배지 수집 상태 섹션 추가 */}
+              <div className="relative overflow-hidden p-4 border rounded-2xl bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 border-indigo-100/30 backdrop-blur-sm group">
+                <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:scale-110 transition-transform duration-700">
+                  <Trophy className="w-12 h-12 text-indigo-500" />
+                </div>
+                <div className="flex items-center gap-4 relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-white dark:bg-slate-900 shadow-lg flex items-center justify-center border border-white/50">
+                    <Award className="w-6 h-6 text-indigo-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-indigo-900 dark:text-indigo-100">
+                      {selectedLanguage === 'ko' ? '디지털 배지 콜렉션' : 'Digital Badge Collection'}
+                    </h4>
+                    <p className="text-xs text-indigo-600/70 dark:text-indigo-400/70 font-medium">
+                      {selectedLanguage === 'ko'
+                        ? '이 명소에 방문하여 한정판 배지를 획득하세요!'
+                        : 'Visit this place and collect a limited edition badge!'}
+                    </p>
+                  </div>
+                  <div className="ml-auto">
+                    <Badge variant="secondary" className="bg-indigo-500 text-white border-none shadow-md shadow-indigo-500/20">
+                      NEW
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+
               {/* Description */}
-              <div>
-                <p className="text-sm text-muted-foreground">
+              <div className="pt-2">
+                <p className="text-sm leading-relaxed text-muted-foreground font-medium">
                   {selectedGuide
                     ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description')
                     : getTranslatedContent(landmark, selectedLanguage, 'description')}

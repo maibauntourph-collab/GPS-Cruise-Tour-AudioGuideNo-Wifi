@@ -26,141 +26,173 @@ export default function BadgePopup({ landmark, language, onClose, onGet, isAcqui
     const landmarkName = getTranslatedContent(landmark, language, 'name');
     const qrData = generateBadgeQRData(landmark.id);
 
-    // [강의 노트] 난이도 및 지역별 커스터마이징 로직
+    // [디자이너 킴의 매직 UI] 난이도 및 지역별 커스터마이징 로직 (HSL 기반 프리미엄 스타일)
     const getBadgeStyle = () => {
         if (landmark.isPremium) {
             return {
                 tier: language === 'ko' ? '프리미엄' : 'Premium',
-                color: 'from-emerald-400 to-cyan-500',
-                border: 'border-emerald-500/30',
-                shadow: 'shadow-[0_0_40px_rgba(16,185,129,0.3)]',
-                icon: <Gem className="w-10 h-10" />,
-                medal: <Crown className="w-5 h-5 text-emerald-500" />
+                color: 'from-[#10b981] via-[#06b6d4] to-[#3b82f6]', // 에메랄드-시안-블루 그라데이션
+                border: 'border-emerald-500/40',
+                shadow: 'shadow-[0_0_50px_rgba(16,185,129,0.4)]',
+                icon: <Gem className="w-12 h-12" />,
+                medal: <Crown className="w-5 h-5 text-emerald-400" />,
+                glow: 'bg-emerald-500/20'
             };
         }
 
-        // 카테고리나 명칭 기반으로 임의 난이도 배정 (실제 업무에서는 DB 필드 추가 권장)
         const name = landmark.id.toLowerCase();
-        if (name.includes('colosseum') || name.includes('vatican') || name.includes('eiffel')) {
+        // [강의 노트] 명소의 역사적 중요도에 따른 자동 티어 배정 로직
+        if (name.includes('colosseum') || name.includes('vatican') || name.includes('eiffel') || name.includes('notre')) {
             return {
-                tier: language === 'ko' ? '골드 메달' : 'Gold Medal',
-                color: 'from-amber-300 to-orange-500',
-                border: 'border-amber-500/30',
-                shadow: 'shadow-[0_0_40px_rgba(245,158,11,0.3)]',
-                icon: <Trophy className="w-10 h-10" />,
-                medal: <Award className="w-5 h-5 text-amber-500" />
+                tier: language === 'ko' ? '골드 퀘스트' : 'Gold Quest',
+                color: 'from-[#f59e0b] via-[#fbbf24] to-[#d97706]', // 황금빛 그라데이션
+                border: 'border-amber-400/40',
+                shadow: 'shadow-[0_0_50px_rgba(245,158,11,0.4)]',
+                icon: <Trophy className="w-12 h-12" />,
+                medal: <Sparkles className="w-5 h-5 text-amber-400" />,
+                glow: 'bg-amber-500/20'
             };
         }
 
-        if (landmark.category?.includes('Ancient') || name.includes('fountain') || name.length > 10) {
+        if (landmark.category?.includes('Ancient') || name.includes('fountain') || landmark.category === 'Museum') {
             return {
-                tier: language === 'ko' ? '실버 메달' : 'Silver Medal',
-                color: 'from-slate-300 to-slate-500',
-                border: 'border-slate-400/30',
-                shadow: 'shadow-[0_0_40px_rgba(148,163,184,0.3)]',
-                icon: <Award className="w-10 h-10" />,
-                medal: <Award className="w-5 h-5 text-slate-400" />
+                tier: language === 'ko' ? '실버 익스플로러' : 'Silver Explorer',
+                color: 'from-[#94a3b8] via-[#cbd5e1] to-[#64748b]', // 은빛 슬레이트 그라데이션
+                border: 'border-slate-300/40',
+                shadow: 'shadow-[0_0_50px_rgba(148,163,184,0.4)]',
+                icon: <Award className="w-12 h-12" />,
+                medal: <Award className="w-5 h-5 text-slate-300" />,
+                glow: 'bg-slate-400/20'
             };
         }
 
         return {
-            tier: language === 'ko' ? '브론즈 메달' : 'Bronze Medal',
-            color: 'from-orange-400 to-orange-700',
-            border: 'border-orange-500/30',
-            shadow: 'shadow-[0_0_40px_rgba(194,65,12,0.3)]',
-            icon: <Award className="w-10 h-10" />,
-            medal: <Award className="w-5 h-5 text-orange-600" />
+            tier: language === 'ko' ? '브론즈 어드벤처' : 'Bronze Adventure',
+            color: 'from-[#c2410c] via-[#ea580c] to-[#9a3412]', // 구리빛 오렌지 그라데이션
+            border: 'border-orange-500/40',
+            shadow: 'shadow-[0_0_50px_rgba(194,65,12,0.4)]',
+            icon: <LandmarkIcon className="w-12 h-12" />,
+            medal: <CheckCircle2 className="w-5 h-5 text-orange-500" />,
+            glow: 'bg-orange-600/20'
         };
     };
 
     const getCitySymbol = () => {
-        const cityId = landmark.cityId.toLowerCase();
-        if (cityId === 'rome') return <Building2 className="w-20 h-20 rotate-12" />;
-        if (cityId === 'paris') return <LandmarkIcon className="w-20 h-20 rotate-12" />;
-        return <Castle className="w-20 h-20 rotate-12" />;
+        const cityId = (landmark.cityId || '').toLowerCase();
+        if (cityId === 'rome') return <Building2 className="w-32 h-32 absolute -bottom-8 -right-8 text-primary/10 rotate-12" />;
+        if (cityId === 'paris') return <LandmarkIcon className="w-32 h-32 absolute -bottom-8 -right-8 text-primary/10 rotate-12" />;
+        return <Castle className="w-32 h-32 absolute -bottom-8 -right-8 text-primary/10 rotate-12" />;
     };
 
     const style = getBadgeStyle();
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="fixed inset-x-4 bottom-24 sm:left-auto sm:right-4 sm:w-[380px] z-[3000]"
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            className="fixed inset-x-4 bottom-28 sm:left-auto sm:right-8 sm:w-[440px] z-[3000]"
         >
-            <Card className={`relative overflow-hidden bg-background/80 backdrop-blur-xl border-t-4 ${style.border} ${style.shadow} p-6 rounded-3xl`}>
-                {/* Background Regional Symbol */}
-                <div className="absolute top-0 right-0 p-4 text-primary/5">
+            <Card className={`relative overflow-hidden bg-background/40 backdrop-blur-[32px] border-t-2 ${style.border} ${style.shadow} p-10 rounded-[3rem] transition-all duration-700`}>
+                {/* [디자이너 킴의 매직] 배경 글로우 효과 */}
+                <div className={`absolute -top-32 -left-32 w-64 h-64 ${style.glow} blur-[100px] rounded-full pointer-events-none opacity-60`} />
+
+                {/* Regional Symbol Ornament */}
+                <div className="absolute -bottom-4 -right-4 overflow-hidden w-40 h-40 pointer-events-none opacity-[0.08]">
                     {getCitySymbol()}
                 </div>
 
-                <div className="relative z-10 flex flex-col items-center text-center gap-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${style.color} rounded-2xl flex items-center justify-center text-white mb-2 shadow-lg transform rotate-3`}>
+                <div className="relative z-10 flex flex-col items-center text-center gap-8">
+                    <motion.div
+                        animate={{
+                            rotate: [5, -5, 5],
+                            scale: [1, 1.1, 1],
+                            y: [0, -5, 0]
+                        }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                        className={`w-24 h-24 bg-gradient-to-br ${style.color} rounded-[2rem] flex items-center justify-center text-white mb-2 shadow-2xl shadow-primary/20 transform rotate-6 relative`}
+                    >
                         {style.icon}
-                    </div>
-
-                    <div className="space-y-1">
-                        <div className="flex items-center justify-center gap-1">
+                        <div className="absolute -top-3 -right-3 bg-white/30 backdrop-blur-xl p-2 rounded-full border border-white/40 shadow-xl">
                             {style.medal}
-                            <Badge variant="outline" className="bg-primary/5 text-primary border-primary/10 px-3 uppercase text-[10px] font-bold tracking-widest">
+                        </div>
+                    </motion.div>
+
+                    <div className="space-y-3">
+                        <div className="flex items-center justify-center">
+                            <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 px-5 py-2 uppercase text-[12px] font-black tracking-[0.25em] rounded-full backdrop-blur-md">
                                 {style.tier}
                             </Badge>
                         </div>
-                        <h3 className="text-2xl font-bold tracking-tight mt-2">{landmarkName}</h3>
-                        <p className="text-muted-foreground text-sm">
+                        <h3 className="text-4xl font-black tracking-tight mt-4 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/60">
+                            {landmarkName}
+                        </h3>
+                        <p className="text-muted-foreground/90 text-sm font-semibold leading-relaxed px-6">
                             {language === 'ko'
-                                ? '명소에 도착하셨습니다! 아래 QR을 터치하여 배지를 획득하세요.'
-                                : "You've arrived! Tap the QR below to collect your badge."}
+                                ? '명소의 정기가 느껴지시나요? 아래 QR 코드를 탭하여 당신만의 특별한 콜렉션을 완성하세요!'
+                                : "Can you feel the aura? Tap the QR code below to complete your exclusive digital collection!"}
                         </p>
                     </div>
 
-                    {/* QR Code Area */}
+                    {/* QR Code Canvas with Deep Glass Border */}
                     <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.04, rotate: -1 }}
+                        whileTap={{ scale: 0.96 }}
                         onClick={() => !isAcquired && onGet(landmark.id)}
-                        className={`cursor-pointer p-4 bg-white rounded-2xl shadow-lg border-4 ${isAcquired ? 'border-green-500' : 'border-indigo-500/30'} relative transition-colors`}
+                        className={`cursor-pointer p-6 bg-white rounded-[2.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.12)] border-[8px] ${isAcquired ? 'border-emerald-500' : 'border-primary/5'} relative transition-all duration-500 overflow-hidden group`}
                     >
-                        <QRCodeSVG value={qrData} size={160} level="H" />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 hover:opacity-100 transition-opacity">
-                            <QrCode className="w-8 h-8 text-white drop-shadow-lg" />
-                        </div>
+                        <QRCodeSVG value={qrData} size={200} level="H" includeMargin={false} />
+
+                        {/* Interactive Shine Effect */}
+                        <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-white/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
                         {isAcquired && (
                             <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                className="absolute -top-4 -right-4 bg-green-500 text-white p-2 rounded-full shadow-lg"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="absolute inset-0 flex items-center justify-center bg-emerald-500/15 backdrop-blur-[3px]"
                             >
-                                <CheckCircle2 className="w-6 h-6" />
+                                <motion.div
+                                    initial={{ y: 20 }}
+                                    animate={{ y: 0 }}
+                                    className="bg-emerald-500 text-white p-5 rounded-full shadow-[0_10px_40px_rgba(16,185,129,0.6)]"
+                                >
+                                    <CheckCircle2 className="w-12 h-12" />
+                                </motion.div>
                             </motion.div>
                         )}
                     </motion.div>
 
-                    {/* Action Buttons */}
-                    <div className="flex gap-3 w-full mt-2">
+                    {/* Action Buttons: Ultra-Premium Style */}
+                    <div className="flex gap-5 w-full mt-6">
                         <Button
-                            variant="outline"
-                            className="flex-1 rounded-xl h-12 border-primary/10 hover:bg-primary/5"
+                            variant="ghost"
+                            className="flex-1 rounded-[1.5rem] h-16 font-black text-muted-foreground/70 hover:bg-muted/30 hover:text-foreground transition-all text-lg"
                             onClick={onClose}
                         >
                             {language === 'ko' ? '나중에' : 'Later'}
                         </Button>
                         <Button
-                            className={`flex-1 rounded-xl h-12 font-bold shadow-lg transition-all ${isAcquired ? 'bg-green-500 hover:bg-green-600' : 'bg-primary hover:bg-primary/90'}`}
+                            className={`flex-1 rounded-[1.5rem] h-16 font-black shadow-2xl transition-all relative overflow-hidden group text-lg ${isAcquired ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-primary hover:bg-primary/90'
+                                }`}
                             onClick={() => !isAcquired ? onGet(landmark.id) : onClose()}
                         >
-                            {isAcquired
-                                ? (language === 'ko' ? '확인' : 'OK')
-                                : (language === 'ko' ? '배지 획득' : 'Get It!')}
+                            <span className="relative z-10">
+                                {isAcquired
+                                    ? (language === 'ko' ? '완료' : 'Done')
+                                    : (language === 'ko' ? '배지 수집' : 'Collect')}
+                            </span>
+                            {!isAcquired && (
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:animate-shimmer" />
+                            )}
                         </Button>
                     </div>
                 </div>
 
-                {/* Close Icon */}
+                {/* Close Button: Discreet Glass Style */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+                    className="absolute top-8 right-8 p-3 text-muted-foreground/50 hover:text-foreground hover:bg-muted/40 rounded-full transition-all backdrop-blur-sm"
                 >
                     <X className="w-5 h-5" />
                 </button>
