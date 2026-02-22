@@ -182,6 +182,19 @@ class OfflineStorage {
     });
   }
 
+  async saveLandmark(landmark: Landmark): Promise<void> {
+    const db = await this.ensureDb();
+
+    return new Promise<void>((resolve, reject) => {
+      const transaction = db.transaction(['landmarks'], 'readwrite');
+      const store = transaction.objectStore('landmarks');
+      const request = store.put(landmark);
+
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve();
+    });
+  }
+
   async getLandmark(id: string): Promise<Landmark | null> {
     const db = await this.ensureDb();
 

@@ -48,6 +48,8 @@ import { getMatchedCityId, checkProximity } from '@/lib/locationService';
 import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
 import { Landmark as LandmarkIcon, Activity as ActivityIcon, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon, Headphones as AudioIcon, Ticket, Navigation, Play, Pause, Minus, ZoomIn, Settings } from 'lucide-react';
+import { HARDCODED_LANDMARKS } from '@/data/hardcodedLandmarks';
+import { offlineStorage } from '@/lib/offlineStorage';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -114,7 +116,11 @@ export default function Home() {
   const [showQrDialog, setShowQrDialog] = useState(false);
 
   // 🛰️ [Server Park] 통합 위치 정보 (가상이든 실제든)
-  const effectivePosition = isSimulationMode ? simulatedPosition : position;
+  // [중요] 시뮬레이션 모드에서는 실제 GPS(position)를 완벽히 무시하고 시뮬레이션 좌표만 사용합니다.
+  const effectivePosition = useMemo(() => {
+    if (isSimulationMode) return simulatedPosition;
+    return position;
+  }, [isSimulationMode, simulatedPosition, position]);
 
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== 'undefined' && window.innerWidth < 640
@@ -143,11 +149,36 @@ export default function Home() {
 
   const { data: landmarks = [], isLoading: landmarksLoading } = useQuery<Landmark[]>({
     queryKey: ['/api/landmarks', selectedCityId],
+    initialData: HARDCODED_LANDMARKS.filter(l => l.cityId === selectedCityId),
     queryFn: async () => {
-      const response = await fetch(`/api/landmarks?cityId=${selectedCityId}`);
-      if (!response.ok) throw new Error('Failed to fetch landmarks');
-      return response.json();
+      try {
+        const response = await fetch(`/api/landmarks?cityId=${selectedCityId}`);
+        if (!response.ok) throw new Error('Failed to fetch landmarks');
+        const fetchedLandmarks: Landmark[] = await response.json();
+
+        // [Query Master] NeonDB와 로컬 하드코드 데이터를 비교하여 동기화
+        // 1. 하드코드 데이터에 없는 항목이 있거나 내용이 다르면 IndexedDB에 강제 업데이트
+        offlineStorage.init().then(() => {
+          fetchedLandmarks.forEach(async (l) => {
+            const existing = await offlineStorage.getLandmark(l.id);
+            // 데이터가 다르거나 없는 경우 업데이트
+            if (!existing || JSON.stringify(existing) !== JSON.stringify(l)) {
+              console.log(`🔄 [Data Sync] Updating landmark in local DB: ${l.id}`);
+              await offlineStorage.saveLandmark(l);
+            }
+          });
+        });
+
+        return fetchedLandmarks;
+      } catch (error) {
+        console.warn('⚠️ [Data Sync] Fetch failed, falling back to local storage', error);
+        // 페치 실패 시 로컬 DB에서 데이터 로드
+        await offlineStorage.init();
+        const localLandmarks = await offlineStorage.getLandmarks(selectedCityId);
+        return localLandmarks.length > 0 ? localLandmarks : HARDCODED_LANDMARKS.filter(l => l.cityId === selectedCityId);
+      }
     },
+    staleTime: 1000 * 60 * 60, // 1 hour
   });
 
   const [audioEnabled, setAudioEnabled] = useState(true);
@@ -425,8 +456,11 @@ export default function Home() {
     }
 
     // [Bug Doctor] 위치 정보/UI 액션에 따른 Magic Landing 트리거
-    if (position && !landingCityId && (lastUIAction === 'STARTUP_FINISH' || lastUIAction === 'CITY_CHANGE' || lastUIAction === 'NONE')) {
-      const matchedId = getMatchedCityId(position.latitude, position.longitude, cities);
+    // [중요] 시뮬레이션 중에는 실제 position 대신 effectivePosition을 사용하여 도시를 매칭합니다.
+    const currentLoc = isSimulationMode ? effectivePosition : position;
+
+    if (currentLoc && !landingCityId && (lastUIAction === 'STARTUP_FINISH' || lastUIAction === 'CITY_CHANGE' || lastUIAction === 'NONE')) {
+      const matchedId = getMatchedCityId(currentLoc.latitude, currentLoc.longitude, cities);
 
       if (matchedId && !hasShownLandingThisSession.has(matchedId)) {
         console.log(`🎯 [Magic Landing] Triggering for: ${matchedId}. Action: ${lastUIAction}`);
@@ -2872,9 +2906,11 @@ export default function Home() {
             onLandmarkClose={() => {
               setSelectedLandmark(null);
               setIsManualSelection(false);
+              // [Designer Kim] 카드를 닫으면 완전히 숨기기 위해 최소화 상태로 전환합니다.
+              setIsCardMinimized(true);
               // [Designer Kim] 카드를 닫으면 임시 표시 상태 해제
               setTemporaryShowCard(false);
-              // ?㈉ [Bug Doctor] 移대뱶 ?リ린 ?ㅻ뵒利됱떆 以묒? ?뺤콉 諛섏쁺
+              // 🚑 [Bug Doctor] 카드 닫기 시 오디오 즉시 중지 정책 반영
               audioService.stopAll();
             }}
             onNavigate={handleLandmarkRoute}
@@ -2954,8 +2990,8 @@ export default function Home() {
                     </p>
                   ) : (
                     filteredLandmarks.map((landmark) => {
-                      const distance = position
-                        ? calculateDistance(position.latitude, position.longitude, landmark.lat, landmark.lng)
+                      const distance = effectivePosition
+                        ? calculateDistance(effectivePosition.latitude, effectivePosition.longitude, landmark.lat, landmark.lng)
                         : null;
                       const isVisitedLandmark = isVisited(landmark.id);
 
