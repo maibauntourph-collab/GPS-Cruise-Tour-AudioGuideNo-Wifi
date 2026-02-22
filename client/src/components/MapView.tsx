@@ -906,11 +906,10 @@ export default function MapView({
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    // Show the list panel first
+                    // [적요] 툴팁 클릭 시 리스트 패널을 먼저 열고 랜드마크를 선택하여 상세 카드를 노출합니다.
                     if (onShowList) {
                       onShowList();
                     }
-                    // Then select the landmark to show details
                     if (onLandmarkSelect) {
                       onLandmarkSelect(landmark);
                     }
@@ -924,13 +923,15 @@ export default function MapView({
                   className={isHighlighted ? 'selected-tooltip-content' : ''}
                   style={{
                     cursor: 'pointer',
-                    fontWeight: isHighlighted ? 600 : 500,
-                    fontSize: isHighlighted ? '9px' : '11px', // Smaller for tour items
-                    color: isHighlighted ? '#FFD700' : undefined,
-                    backgroundColor: isHighlighted ? '#000000' : undefined,
-                    padding: isHighlighted ? '2px 6px' : '4px 8px', // Smaller padding for tour items
-                    borderRadius: '4px',
+                    fontWeight: isHighlighted ? 700 : 500,
+                    fontSize: isHighlighted ? '12px' : '11px',
+                    color: isHighlighted ? '#ffffff' : undefined,
+                    backgroundColor: isHighlighted ? '#f85108' : undefined, // 주황색 강조
+                    padding: isHighlighted ? '4px 10px' : '4px 8px',
+                    borderRadius: '6px',
+                    boxShadow: isHighlighted ? '0 2px 8px rgba(248, 81, 8, 0.4)' : 'none',
                     whiteSpace: 'nowrap',
+                    transition: 'all 0.2s ease-in-out',
                   }}
                   data-testid={`tooltip - landmark - ${landmark.id} `}
                 >
