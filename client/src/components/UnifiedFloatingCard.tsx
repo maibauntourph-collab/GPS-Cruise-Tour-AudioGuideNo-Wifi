@@ -569,8 +569,11 @@ export default function UnifiedFloatingCard({
         audioService.resume();
         setIsPaused(false);
       } else {
-        audioService.pause();
-        setIsPaused(true);
+        // [Bug Doctor] If it's "speaking" but not paused, it might be a stuck session.
+        // We'll treat this as a "stop" request to let the user reset it.
+        audioService.stopAll();
+        setIsPlaying(false);
+        setIsPaused(false);
       }
       return;
     }
