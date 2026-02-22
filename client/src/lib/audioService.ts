@@ -35,6 +35,7 @@ export class AudioService {
   private audioMode: AudioMode = 'auto';
   private downloadProgress: Map<string, AudioDownloadProgress> = new Map();
   private onDownloadProgressChange: ((progress: Map<string, AudioDownloadProgress>) => void) | null = null;
+  private onStateChange: ((isSpeaking: boolean) => void) | null = null;
 
   constructor() {
     this.synthesis = window.speechSynthesis;
@@ -467,7 +468,18 @@ export class AudioService {
   }
 
   isSpeaking(): boolean {
-    return this.synthesis.speaking || this.isMP3Playing() || this.clovaSentenceMode || (this.isPausedInternal && (this.synthesis.paused || this.isMP3Paused()));
+    const speaking = this.synthesis.speaking || this.isMP3Playing() || this.clovaSentenceMode || (this.isPausedInternal && (this.synthesis.paused || this.isMP3Paused()));
+    return !!speaking;
+  }
+
+  setOnStateChange(callback: ((isSpeaking: boolean) => void) | null) {
+    this.onStateChange = callback;
+  }
+
+  private notifyStateChange() {
+    if (this.onStateChange) {
+      this.onStateChange(this.isSpeaking());
+    }
   }
 
   clearSpokenLandmarks() {
@@ -1413,10 +1425,10 @@ export class AudioService {
 
   // Stop all audio (both MP3 and TTS)
   stopAll() {
-    this.isPausedInternal = false;
     this.stopMP3();
-    this.stopClovaSentences();
     this.stop();
+    this.clovaSentenceMode = false;
+    this.notifyStateChange();
   }
 
   // Helper for single-emission warnings (using window global to survive re-renders/HMR)
