@@ -303,6 +303,7 @@ export default function UnifiedFloatingCard({
     };
   const [activeTab, setActiveTab] = useState<string>('list');
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.2);
 
   const { data: regionalGuides = [] } = useQuery<User[]>({
@@ -562,48 +563,46 @@ export default function UnifiedFloatingCard({
   const handlePlayAudio = async () => {
     if (!selectedLandmark) return;
 
-    if (isPlaying) {
-      try {
-        audioService.stop();
-        audioService.stopMP3();
-      } catch (e) {
-        console.error('[UnifiedFloatingCard] Audio stop error:', e);
-      } finally {
+    // Check if already speaking (active session)
+    if (audioService.isSpeaking()) {
+      if (audioService.isPaused()) {
+        audioService.resume();
+        setIsPaused(false);
+      } else {
+        audioService.pause();
+        setIsPaused(true);
+      }
+      return;
+    }
+
+    const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') ||
+      getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
+      getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
+
+    const audioMode = audioService.getAudioMode();
+
+    try {
+      await audioService.unlockAudio();
+      setIsPlaying(true);
+      setIsPaused(false);
+
+      const onEnd = () => {
         setIsPlaying(false);
-      }
-    } else {
-      const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') ||
-        getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
-        getTranslatedContent(selectedLandmark, selectedLanguage, 'description') || '';
+        setIsPaused(false);
+      };
 
-      const audioMode = audioService.getAudioMode();
-
-      try {
-        // [Bug Doctor] 모바일 브라우저의 오디오 정책을 준수하기 위해 
-        // 사용자 인터랙션이 발생한 이 시점에 잠금을 해제합니다.
-        await audioService.unlockAudio();
-
-        if (audioMode === 'clova') {
-          setIsPlaying(true);
-          const success = await audioService.playClovaTTS(text, selectedLanguage, () => {
-            setIsPlaying(false);
-          });
-          if (!success) {
-            // Fallback to system TTS
-            audioService.playText(text, selectedLanguage, playbackRate, () => {
-              setIsPlaying(false);
-            });
-          }
-        } else {
-          audioService.playText(text, selectedLanguage, playbackRate, () => {
-            setIsPlaying(false);
-          });
-          setIsPlaying(true);
+      if (audioMode === 'clova') {
+        const success = await audioService.playClovaTTS(text, selectedLanguage, onEnd);
+        if (!success) {
+          audioService.playText(text, selectedLanguage, playbackRate, onEnd);
         }
-      } catch (error) {
-        console.error('[UnifiedFloatingCard] Audio play error:', error);
-        setIsPlaying(false); // [Bug Doctor] 에러 발생 시 상태를 초기화하여 버튼이 먹통이 되지 않게 합니다.
+      } else {
+        audioService.playText(text, selectedLanguage, playbackRate, onEnd);
       }
+    } catch (error) {
+      console.error('[UnifiedFloatingCard] Audio play error:', error);
+      setIsPlaying(false);
+      setIsPaused(false);
     }
   };
 
@@ -957,12 +956,42 @@ export default function UnifiedFloatingCard({
                                 variant="outline"
                                 size="sm"
                                 onClick={handlePlayAudio}
-                                className="gap-2"
+                                className={`gap-2 ${isPlaying ? 'bg-primary/10 border-primary shadow-inner' : ''}`}
                                 data-testid="button-play-audio"
                               >
-                                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                                {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
+                                {isPlaying && !isPaused ? (
+                                  <>
+                                    <Pause className="w-4 h-4 animate-pulse" />
+                                    {selectedLanguage === 'ko' ? '일시정지' : 'Pause'}
+                                  </>
+                                ) : isPlaying && isPaused ? (
+                                  <>
+                                    <Play className="w-4 h-4 text-blue-600" />
+                                    {selectedLanguage === 'ko' ? '이어듣기' : 'Resume'}
+                                  </>
+                                ) : (
+                                  <>
+                                    <Play className="w-4 h-4" />
+                                    {selectedLanguage === 'ko' ? '재생' : 'Play'}
+                                  </>
+                                )}
                               </Button>
+
+                              {isPlaying && (
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    audioService.stopAll();
+                                    setIsPlaying(false);
+                                    setIsPaused(false);
+                                  }}
+                                  className="h-8 w-8 text-red-500 hover:text-red-700 hover:bg-red-50"
+                                >
+                                  <Square className="w-3.5 h-3.5 fill-current" />
+                                </Button>
+                              )}
 
                               <div className="flex items-center gap-1 border-l pl-2 ml-1">
                                 <Button

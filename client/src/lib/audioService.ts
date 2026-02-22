@@ -26,6 +26,7 @@ export class AudioService {
   private selectedVoicesByLanguage: Map<string, string> = new Map(); // language -> voice name
   private selectedClovaVoicesByLanguage: Map<string, string> = new Map(); // language -> CLOVA voice id
   private isUnlocked: boolean = false;
+  private isPausedInternal: boolean = false;
 
   // MP3 Audio properties
   private audioElement: HTMLAudioElement | null = null;
@@ -397,6 +398,24 @@ export class AudioService {
     }
   }
 
+  // Unified pause for all active modes
+  pause() {
+    this.isPausedInternal = true;
+    this.pauseSpeech();
+    this.pauseMP3();
+  }
+
+  // Unified resume for all active modes
+  resume() {
+    this.isPausedInternal = false;
+    this.resumeSpeech();
+    this.resumeMP3();
+  }
+
+  isPaused(): boolean {
+    return this.isPausedInternal;
+  }
+
   setRate(rate: number) {
     this.currentRate = rate;
     localStorage.setItem('tts-speed', rate.toString());
@@ -433,15 +452,11 @@ export class AudioService {
   }
 
   isSpeaking(): boolean {
-    return this.synthesis.speaking || this.isMP3Playing() || this.clovaSentenceMode;
+    return this.synthesis.speaking || this.isMP3Playing() || this.clovaSentenceMode || (this.isPausedInternal && (this.synthesis.paused || this.isMP3Paused()));
   }
 
   clearSpokenLandmarks() {
     this.spokenLandmarks.clear();
-  }
-
-  isPaused(): boolean {
-    return this.synthesis.paused;
   }
 
   removeLandmark(landmarkId: string): void {
@@ -1383,6 +1398,7 @@ export class AudioService {
 
   // Stop all audio (both MP3 and TTS)
   stopAll() {
+    this.isPausedInternal = false;
     this.stopMP3();
     this.stopClovaSentences();
     this.stop();

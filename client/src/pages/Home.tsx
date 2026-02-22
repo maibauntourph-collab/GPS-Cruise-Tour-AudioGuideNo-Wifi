@@ -2744,7 +2744,15 @@ export default function Home() {
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8 text-white hover:bg-white/20"
-                      onClick={() => setIsSimulationPaused(!isSimulationPaused)}
+                      onClick={() => {
+                        const nextPaused = !isSimulationPaused;
+                        setIsSimulationPaused(nextPaused);
+                        if (nextPaused) {
+                          audioService.pause();
+                        } else {
+                          audioService.resume();
+                        }
+                      }}
                     >
                       {isSimulationPaused ? <Play className="w-4 h-4 fill-current" /> : <Pause className="w-4 h-4 fill-current" />}
                     </Button>
