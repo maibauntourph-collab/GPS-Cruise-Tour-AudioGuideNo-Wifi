@@ -26,6 +26,8 @@ import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import LoginDialog from '@/components/LoginDialog';
 import SaveRouteDialog from '@/components/SaveRouteDialog';
 import CreatorDashboard from '@/components/CreatorDashboard';
+import BadgePopup from '@/components/BadgePopup';
+import { parseQRData } from '@/lib/qrUtils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 
 /**
@@ -255,6 +257,7 @@ export default function Home() {
   // 🛰️ [Server Park] 목적지 도착 기반 UI 제어를 위한 상태
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [hasTriggeredArrivalNarration, setHasTriggeredArrivalNarration] = useState<string | null>(null);
+  const [activeBadgeLandmark, setActiveBadgeLandmark] = useState<Landmark | null>(null);
 
   // [강의 노트: 새로운 메뉴의 등장]
   // 여러분, 시뮬레이션 모드를 켜고 끄는 '스위치'가 하나 필요하겠죠?
@@ -343,6 +346,31 @@ export default function Home() {
     });
   };
 
+  // 🚀 [Automation Doctor] Seamless QR Onboarding
+  // [중요] URL 파라미터를 분석하여 즉시 도시와 투어 설정을 완료합니다.
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const cityParam = searchParams.get('city');
+    const routeParam = searchParams.get('route');
+
+    if (cityParam && cities.length > 0) {
+      const city = cities.find(c => c.id.toLowerCase() === cityParam.toLowerCase());
+      if (city) {
+        console.log(`🚀 [Onboarding] Auto-starting tour for ${city.id}`);
+        handleCityChange(city.id);
+
+        // 특정 경로가 지정된 경우 (B2B 차량 등)
+        if (routeParam) {
+          // 여기에 특정 경로 로드 로직 추가 가능
+          console.log(`🚀 [Onboarding] Route requested: ${routeParam}`);
+        }
+
+        // URL 파라미터 제거 (선택 사항, 깔끔한 개발을 위해 유지 또는 제거)
+        // window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
+  }, [cities.length]);
+
   // 🛰️ [Server Park] 백그라운드 자동 가이드 핵심 로직
   // [중요] 경로가 없더라도(!activeRoute) 백그라운드 가이드가 켜져 있으면
   // 주변 100m 이내 명소를 찾아 자동으로 설명해 드립니다
@@ -408,6 +436,12 @@ export default function Home() {
           const narrationText = getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') || getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
           audioService.playAuto(selectedLandmark.id, narrationText, selectedLanguage);
           setIsSpeaking(true);
+        }
+
+        // [Get It! Badge Popup] 미방문 명소인 경우 배지 팝업 트리거
+        if (!isVisited(selectedLandmark.id)) {
+          console.log(`🎯 [Badge Logic] Triggering badge popup for ${selectedLandmark.id}`);
+          setActiveBadgeLandmark(selectedLandmark);
         }
       }
     }
