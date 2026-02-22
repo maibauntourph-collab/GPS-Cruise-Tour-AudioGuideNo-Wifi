@@ -55,7 +55,12 @@ export default function AdminLanding() {
                         <div className="p-2 bg-primary rounded-lg">
                             <Shield className="w-5 h-5 text-white" />
                         </div>
-                        <span className="text-xl font-bold tracking-tight">Avengers Control</span>
+                        <div className="flex flex-col">
+                            <span className="text-xl font-bold tracking-tight">Avengers Control</span>
+                            <span className="text-[8px] tracking-[0.3em] text-primary opacity-60 font-medium uppercase">
+                                여행의 네비게이터 • Travel Navigator
+                            </span>
+                        </div>
                     </div>
                     <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
                         <a href="#vision" className="hover:text-primary transition-colors">비전</a>

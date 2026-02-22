@@ -1,12 +1,12 @@
-import { 
-  Sidebar, 
-  SidebarContent, 
-  SidebarGroup, 
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton 
+  SidebarMenuButton
 } from '@/components/ui/sidebar';
 import { Card } from '@/components/ui/card';
 import { CitySelector } from './CitySelector';
@@ -41,8 +41,8 @@ interface AppSidebarProps {
   searchedLocations?: Array<{ id: string; name: string; lat: number; lng: number }>;
   onSearchedLocationClick?: (location: { id: string; name: string; lat: number; lng: number }) => void;
   tourStops: Landmark[];
-  tourRouteInfo: { 
-    distance: number; 
+  tourRouteInfo: {
+    distance: number;
     duration: number;
     segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
   } | null;
@@ -82,19 +82,24 @@ export function AppSidebar({
         <Card className="md:border-0 md:bg-transparent md:shadow-none">
           <div className="p-3 sm:p-4 md:p-0">
             <SidebarGroup>
-              <SidebarGroupLabel className="text-sm sm:text-base">GPS Audio Guide</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-sm sm:text-base flex flex-col items-start h-auto py-2">
+                <span>GPS Audio Guide</span>
+                <span className="text-[9px] text-primary/60 font-medium tracking-[0.2em] leading-none mt-1">
+                  {selectedLanguage === 'ko' ? '여행의 네비게이터' : 'Travel Navigator'}
+                </span>
+              </SidebarGroupLabel>
               <SidebarGroupContent className="space-y-3 sm:space-y-4 px-2">
                 <div className="space-y-3">
                   <div>
                     <Label className="text-xs text-muted-foreground mb-2 block">{t('city', selectedLanguage)}</Label>
-                    <CitySelector 
+                    <CitySelector
                       cities={cities}
                       selectedCityId={selectedCityId}
                       onCityChange={onCityChange}
                       selectedLanguage={selectedLanguage}
                     />
                   </div>
-                  
+
                   <div>
                     <Label className="text-xs text-muted-foreground mb-2 block">{t('language', selectedLanguage)}</Label>
                     <LanguageSelector
@@ -118,7 +123,7 @@ export function AppSidebar({
                           {t('audioGuide', selectedLanguage)} {isSpeaking && '(Speaking...)'}
                         </Label>
                       </div>
-                      <Switch 
+                      <Switch
                         id="audio-toggle"
                         checked={audioEnabled}
                         onCheckedChange={onToggleAudio}
@@ -135,7 +140,7 @@ export function AppSidebar({
                           {t('offlineMode', selectedLanguage)}
                         </Label>
                       </div>
-                      <Switch 
+                      <Switch
                         id="offline-toggle"
                         checked={offlineMode}
                         onCheckedChange={onToggleOfflineMode}
@@ -166,9 +171,9 @@ export function AppSidebar({
             <SidebarGroup>
               <SidebarGroupLabel>{t('progress', selectedLanguage)}</SidebarGroupLabel>
               <SidebarGroupContent className="px-2">
-                <ProgressStats 
-                  totalLandmarks={totalLandmarks} 
-                  cityName={cityName} 
+                <ProgressStats
+                  totalLandmarks={totalLandmarks}
+                  cityName={cityName}
                   selectedLanguage={selectedLanguage}
                   landmarks={landmarks}
                   tourStops={tourStops}
