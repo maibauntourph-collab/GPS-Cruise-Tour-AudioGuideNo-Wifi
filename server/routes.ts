@@ -900,19 +900,59 @@ export function registerRoutes(app: Hono<any>) {
         language || 'en'
       );
 
-      // [적요] AI가 추천한 랜드마크 ID 유효성 검증
+      // [적요] AI가 추천한 랜드마크 ID 유효성 검증 및 유연한 매칭
       const validLandmarkIds = new Set(cityLandmarks.map(l => l.id));
-      const invalidIds = recommendation.itinerary
+
+      // [Bug Doctor] AI가 'rome/' 등의 접두사를 누락하고 반환할 경우를 대비한 매핑 맵 생성
+      const idLookupMap = new Map<string, string>();
+      cityLandmarks.forEach(l => {
+        idLookupMap.set(l.id, l.id); // 전체 ID 매핑
+
+        // 접두사를 뺀 나머지 부분도 매핑 (예: 'rome/colosseum' -> 'rome/colosseum')
+        if (l.id.includes('/')) {
+          const suffix = l.id.split('/').pop() || '';
+          if (suffix && !idLookupMap.has(suffix)) {
+            idLookupMap.set(suffix, l.id);
+          }
+        }
+        // 'rome_restaurant_...' 와 같은 형식도 처리
+        if (l.id.includes('_restaurant_')) {
+          const parts = l.id.split('_restaurant_');
+          const suffix = parts.pop() || '';
+          if (suffix && !idLookupMap.has(suffix)) {
+            idLookupMap.set(suffix, l.id);
+          }
+        }
+      });
+
+      const processedItinerary = recommendation.itinerary.map(item => {
+        const originalId = item.landmarkId;
+        const resolvedId = idLookupMap.get(originalId);
+
+        if (resolvedId && resolvedId !== originalId) {
+          console.warn(`[AI Debug] Landmark ID resolved from '${originalId}' to '${resolvedId}'`);
+        }
+
+        return {
+          ...item,
+          landmarkId: resolvedId || originalId
+        };
+      });
+
+      const invalidIds = processedItinerary
         .map(item => item.landmarkId)
         .filter(id => !validLandmarkIds.has(id));
 
       if (invalidIds.length > 0) {
-        console.error('AI recommended invalid landmark IDs:', invalidIds);
+        console.error('[AI Error] Invalid landmark IDs after resolution attempt:', invalidIds);
         return c.json({
           error: "AI recommendation contains invalid landmarks",
           details: invalidIds
         }, 500);
       }
+
+      // 보정된 일정으로 업데이트
+      recommendation.itinerary = processedItinerary;
 
       return c.json(recommendation);
     } catch (error: any) {

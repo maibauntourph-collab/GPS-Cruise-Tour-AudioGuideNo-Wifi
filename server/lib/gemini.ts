@@ -54,7 +54,8 @@ export async function recommendTourItinerary(
 
 다음 관광지들을 기반으로 최적의 투어 일정을 추천해주세요. 지리적 위치, 카테고리, 역사적 중요도를 고려하여 효율적인 순서를 제안하세요. \`isPremium\`이 \`true\`인 장소는 고품질 오디오 가이드가 포함되어 있음을 참고하세요.
 
-중요: 반드시 제공된 '관광지 목록'에 있는 \`id\` 값만 사용해야 합니다. 새로운 ID를 생성하거나 이름을 변형하지 마십시오.
+중요(CRITICAL): 반드시 제공된 '관광지 목록'에 있는 \`id\` 값을 **글자 하나 틀리지 않고 그대로** 사용해야 합니다. 
+만약 ID가 'rome/colosseum'이나 'rome_restaurant_...'와 같이 접두사를 포함하고 있다면, 해당 접두사를 절대 생략하지 마십시오. 새로운 ID를 생성하거나 이름을 변형하지 마십시오.
 
 관광지 목록:
 ${JSON.stringify(landmarkInfo, null, 2)}
@@ -71,7 +72,8 @@ ${userPosition ? `사용자 현재 위치: 위도 ${userPosition.latitude}, 경�
 
 Based on the following tourist attractions, recommend the best tour itinerary. Consider geographical proximity, category variety, and historical significance to suggest an efficient order. Note that landmarks with \`isPremium: true\` have high-quality audio guides available.
 
-IMPORTANT: You MUST use ONLY the \`id\` values present in the provided 'Landmark list'. Do not generate new IDs or invent names.
+IMPORTANT (CRITICAL): You MUST use the \`id\` values present in the provided 'Landmark list' **EXACTLY as they are, without any modifications**. 
+If an ID includes a prefix like 'rome/' or 'rome_restaurant_', you MUST include that prefix. Do not generate new IDs or invent names.
 
 Landmark list:
 ${JSON.stringify(landmarkInfo, null, 2)}

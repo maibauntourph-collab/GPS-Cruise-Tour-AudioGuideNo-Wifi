@@ -467,19 +467,20 @@ export class AudioService {
       if (AudioContextClass) {
         const audioCtx = new AudioContextClass();
         if (audioCtx.state === 'suspended') {
+          console.log('[AudioService] 🔄 Resuming suspended AudioContext...');
           await audioCtx.resume();
         }
 
         // 아주 짧은 무음 비프음을 생성하여 하드웨어 채널을 점유합니다.
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
-        gainNode.gain.value = 0;
+        gainNode.gain.value = 0.0001; // Tiny volume to ensure it's not discarded
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
         oscillator.start(0);
-        oscillator.stop(0.001);
+        oscillator.stop(0.1);
 
-        console.log('[AudioService] ✅ Web Audio Context (Deep) unlocked');
+        console.log(`[AudioService] ✅ Web Audio Context (${audioCtx.state}) unlocked`);
       }
 
       // 3. HTML5 Audio (MP3) 잠금 해제

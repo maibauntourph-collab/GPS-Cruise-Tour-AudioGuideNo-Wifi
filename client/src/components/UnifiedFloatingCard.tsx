@@ -578,6 +578,10 @@ export default function UnifiedFloatingCard({
       const audioMode = audioService.getAudioMode();
 
       try {
+        // [Bug Doctor] 모바일 브라우저의 오디오 정책을 준수하기 위해 
+        // 사용자 인터랙션이 발생한 이 시점에 잠금을 해제합니다.
+        await audioService.unlockAudio();
+
         if (audioMode === 'clova') {
           setIsPlaying(true);
           const success = await audioService.playClovaTTS(text, selectedLanguage, () => {
