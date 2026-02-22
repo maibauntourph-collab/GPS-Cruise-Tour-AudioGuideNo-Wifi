@@ -107,6 +107,7 @@ export default function Home() {
 
   // 🛰️ [Server Park] 가상 투어 시뮬레이션 상태
   const [isSimulationMode, setIsSimulationMode] = useState(false);
+  const [isSimulationPaused, setIsSimulationPaused] = useState(false);
   const [simulatedPosition, setSimulatedPosition] = useState<{ latitude: number; longitude: number } | null>(null);
   const [simulationSpeed, setSimulationSpeed] = useState(1); // 1x, 5x, 10x
   const [simulationStepIndex, setSimulationStepIndex] = useState(0);
@@ -330,8 +331,8 @@ export default function Home() {
         setHasTriggeredArrivalNarration(selectedLandmark.id);
 
         if (audioEnabled) {
-          const desc = getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
-          audioService.playAuto(selectedLandmark.id, desc, selectedLanguage);
+          const narrationText = getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') || getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
+          audioService.playAuto(selectedLandmark.id, narrationText, selectedLanguage);
           setIsSpeaking(true);
         }
       }
@@ -677,19 +678,25 @@ export default function Home() {
   // 지도에 표시합니다. 200ms 간격으로 좌표를 업데이트하여 자연스러운 이동 구현.
   useEffect(() => {
     if (!isSimulationMode || !tourStops.length) {
-      if (!isSimulationMode) setSimulatedPosition(null);
+      if (!isSimulationMode) {
+        setSimulatedPosition(null);
+        setIsSimulationPaused(false);
+        setSimulationStepIndex(0);
+      }
       return;
     }
 
-    console.log("[Simulation] Starting Virtual Tour. Speed:", simulationSpeed, "x");
+    console.log("[Simulation] Virtual Tour State - Speed:", simulationSpeed, "x", "Paused:", isSimulationPaused);
 
     // 🚑 [Bug Doctor] 시뮬레이션 시작 전 안내 완료 기록 초기화하여 모든 명소에서 오디오가 나오게
-    setSpokenLandmarks(new Set());
-    audioService.clearSpokenLandmarks();
+    if (simulationStepIndex === 0 && !isSimulationPaused) {
+      setSpokenLandmarks(new Set());
+      audioService.clearSpokenLandmarks();
+    }
 
-    // [중요] 시뮬레이션 첫 번째 정류장 선택 및 위치 설정
-    const startStop = tourStops[simulationStepIndex];
-    if (startStop) {
+    // [중요] 시뮬레이션 위치 초기화 (시작 시)
+    if (!simulatedPosition && tourStops[simulationStepIndex]) {
+      const startStop = tourStops[simulationStepIndex];
       setSimulatedPosition({ latitude: startStop.lat, longitude: startStop.lng });
       setSelectedLandmark(startStop);
     }
@@ -700,12 +707,15 @@ export default function Home() {
     const updateIntervalMs = 200;
     const progressStep = updateIntervalMs / segmentDurationMs;
     let currentFromIndex = simulationStepIndex;
-    // [중요] isPaused: 정류장 도착 정차 중 (설명 듣는 시간)
-    let isPaused = true;
+    // [중요] isPausedAtStop: 정류장 도착 정차 중 (설명 듣는 시간)
+    let isPausedAtStop = true;
     let pauseElapsed = 0;
 
     const intervalId = setInterval(() => {
-      if (isPaused) {
+      // [Designer Kim] 사용자가 일시정지를 눌렀다면 아무것도 하지 않음
+      if (isSimulationPaused) return;
+
+      if (isPausedAtStop) {
         // [중요] 정류장에 정차 중 - 설명 카드를 볼 시간 확보
         pauseElapsed += updateIntervalMs;
 
@@ -714,7 +724,7 @@ export default function Home() {
 
         // [중요] 설정 정차 시간 지나고, 오디오 재생이 끝났을 때만 다음으로 이동
         if (pauseElapsed >= pauseDurationMs && !isSpeaking) {
-          isPaused = false;
+          isPausedAtStop = false;
           pauseElapsed = 0;
           progress = 0;
           // [중요] 마지막 정류장이면 시뮬레이션 종료 (루핑 방지)
@@ -741,18 +751,17 @@ export default function Home() {
           setSelectedLandmark(arrivedAt);
 
           // 🛰️ [Server Park] 시뮬레이션 도착 오디오 강제 재생 트리거
-          // 학생 여러분 자동 안내 로직이 simulation 위치 변화를 감지하기 전에
-          // 즉시 재생 시작하여 끊김 없는 경험을 제공합니다
           const name = getTranslatedContent(arrivedAt, selectedLanguage, 'name');
-          const description = getTranslatedContent(arrivedAt, selectedLanguage, 'description');
+          const narrationText = getTranslatedContent(arrivedAt, selectedLanguage, 'narration') || getTranslatedContent(arrivedAt, selectedLanguage, 'description');
+
           audioService.playAuto(
             arrivedAt.id,
-            `${name}. ${description}`,
+            `${name}. ${narrationText}`,
             selectedLanguage
           );
         }
         // [중요] 도착 정차 모드로 전환
-        isPaused = true;
+        isPausedAtStop = true;
         pauseElapsed = 0;
         progress = 0;
         return;
@@ -769,7 +778,7 @@ export default function Home() {
     }, updateIntervalMs);
 
     return () => clearInterval(intervalId);
-  }, [isSimulationMode, tourStops, simulationSpeed, selectedLanguage]);
+  }, [isSimulationMode, isSimulationPaused, tourStops, simulationSpeed, selectedLanguage, simulationStepIndex]);
 
   // 🛰️ [Server Park] 실시간 랜드마크 근접 감지 및 자동 안내 효과
   // [중요] lastProximityCheckRef는 357줄에서 이미 선언됨 (중복 선언 제거 - Bug Doctor)
@@ -794,14 +803,14 @@ export default function Home() {
     if (nearest) {
       const { landmark, distance } = nearest;
       const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-      const description = getTranslatedContent(landmark, selectedLanguage, 'description');
+      const narrationText = getTranslatedContent(landmark, selectedLanguage, 'narration') || getTranslatedContent(landmark, selectedLanguage, 'description');
 
       console.log(`📍 [Proximity] Landmark Detected: ${name} (${Math.round(distance)}m, accuracy: ${Math.round((effectivePosition as any).accuracy || 0)}m)`);
 
-      // ?먮룞 ?ъ깮 ?몃━嫄?
+      // 자동 재생 트리거
       audioService.playAuto(
         landmark.id,
-        `${name}. ${description}`,
+        `${name}. ${narrationText}`,
         selectedLanguage
       );
 
@@ -2717,7 +2726,7 @@ export default function Home() {
               selectedLanguage={selectedLanguage}
             />
 
-            {/* ?[Server Park] 媛?ъ뼱 ?쒕덉씠?쒖뼱 諛?*/}
+            {/* 🛰️ [Server Park] 가상 투어 시뮬레이션 바 */}
             {isSimulationMode && (
               <div
                 className="absolute top-4 left-1/2 -translate-x-1/2 z-[2000] animate-in fade-in slide-in-from-top-4 duration-500"
@@ -2729,8 +2738,47 @@ export default function Home() {
                     <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider">Simulating</span>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <div className="flex bg-white/10 rounded-md p-0.5">
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    {/* Pause / Play */}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-white hover:bg-white/20"
+                      onClick={() => setIsSimulationPaused(!isSimulationPaused)}
+                    >
+                      {isSimulationPaused ? <Play className="w-4 h-4 fill-current" /> : <Pause className="w-4 h-4 fill-current" />}
+                    </Button>
+
+                    {/* Restart */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-white hover:bg-white/20"
+                          onClick={() => {
+                            setSimulationStepIndex(0);
+                            setSimulatedPosition(null); // Will be re-initialized by useEffect
+                            setIsSimulationPaused(false);
+                            audioService.stopAll();
+                            audioService.clearSpokenLandmarks();
+                            setSpokenLandmarks(new Set());
+                          }}
+                        >
+                          <Route className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{selectedLanguage === 'ko' ? '처음부터 다시 시작' : 'Restart from beginning'}</p>
+                      </TooltipContent>
+                    </Tooltip>
+
+                    {/* Progress Indicator */}
+                    <div className="px-2 py-0.5 bg-white/10 rounded text-[10px] font-bold min-w-[50px] text-center">
+                      {simulationStepIndex + 1} / {tourStops.length}
+                    </div>
+
+                    <div className="flex bg-white/10 rounded-md p-0.5 hidden xs:flex">
                       {[1, 5, 10].map(speed => (
                         <Button
                           key={speed}
@@ -2745,7 +2793,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* ?[Server Park] 시뮬레이션 오디오 옵션 */}
+                  {/* 🛰️ [Server Park] 시뮬레이션 오디오 옵션 */}
                   <div className="flex items-center gap-1 sm:gap-2 border-l border-white/20 pl-2 sm:pl-3">
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -2759,7 +2807,7 @@ export default function Home() {
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>{selectedLanguage === 'ko' ? '?댁쟾 ?꾩튂?먯꽌 ?ㅻ뵒?댁뼱 ?ｊ린' : 'Resume audio from last position'}</p>
+                        <p>{selectedLanguage === 'ko' ? '이전 위치에서 오디오 듣기' : 'Resume audio'}</p>
                       </TooltipContent>
                     </Tooltip>
                     <Tooltip>
@@ -2774,7 +2822,7 @@ export default function Home() {
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>{selectedLanguage === 'ko' ? '?ㅻ챸李レ븘諛깃렇?쇱슫?ъ깮' : 'Play audio in background'}</p>
+                        <p>{selectedLanguage === 'ko' ? '설명 창 닫아도 백그라운드 재생' : 'Play in background'}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
@@ -2784,7 +2832,10 @@ export default function Home() {
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8 text-white hover:bg-white/20"
-                      onClick={() => setIsSimulationMode(false)}
+                      onClick={() => {
+                        setIsSimulationMode(false);
+                        setIsSimulationPaused(false);
+                      }}
                     >
                       <X className="w-5 h-5" />
                     </Button>
