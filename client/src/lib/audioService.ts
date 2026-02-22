@@ -28,7 +28,7 @@ export class AudioService {
   private isUnlocked: boolean = false;
   private isPausedInternal: boolean = false;
   private voiceCache: Map<string, SpeechSynthesisVoice> = new Map();
-  private static warnedOnce: Set<string> = new Set();
+  // Suppression set moved to window level in helper methods
 
   // MP3 Audio properties
   private audioElement: HTMLAudioElement | null = null;
@@ -236,7 +236,7 @@ export class AudioService {
     if (selectedVoiceName) {
       const selectedVoice = this.voices.find(v => v.name === selectedVoiceName);
       if (selectedVoice) {
-        console.log(`[AudioService] Using user-selected voice for ${langCode}: ${selectedVoice.name}`);
+        this.debugLogOnce(`user-voice-${langCode}`, `[AudioService] Using user-selected voice for ${langCode}: ${selectedVoice.name}`);
         return selectedVoice;
       }
     }
@@ -811,7 +811,7 @@ export class AudioService {
     };
 
     this.audioElement.play().catch(e => {
-      console.error('[AudioService] Playback error:', e);
+      this.debugWarnOnce('openai-play-error', `[AudioService] OpenAI Playback error: ${e}`);
       URL.revokeObjectURL(objectUrl);
       onEnded();
     });
@@ -986,7 +986,7 @@ export class AudioService {
       if (error?.name === 'AbortError') {
         return;
       }
-      console.error('[AudioService] CLOVA sentence error:', error);
+      this.debugWarnOnce('clova-error', `[AudioService] CLOVA sentence error: ${error}`);
 
       // Guard against stale callbacks
       if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
@@ -1073,7 +1073,7 @@ export class AudioService {
 
         this.audioElement.onerror = () => {
           URL.revokeObjectURL(objectUrl);
-          console.error('Error playing cached audio');
+          this.debugWarnOnce('cached-mp3-error', '[AudioService] Error playing cached audio');
         };
 
         this.audioElement.playbackRate = this.currentRate;
@@ -1419,19 +1419,27 @@ export class AudioService {
     this.stop();
   }
 
-  // Helper for single-emission warnings
+  // Helper for single-emission warnings (using window global to survive re-renders/HMR)
   private debugWarnOnce(key: string, message: string) {
-    if (!AudioService.warnedOnce.has(key)) {
-      console.warn(message);
-      AudioService.warnedOnce.add(key);
+    if (typeof window !== 'undefined') {
+      const g = window as any;
+      if (!g.__audioWarned) g.__audioWarned = new Set();
+      if (!g.__audioWarned.has(key)) {
+        console.warn(message);
+        g.__audioWarned.add(key);
+      }
     }
   }
 
   // Helper for single-emission logs
   private debugLogOnce(key: string, message: string) {
-    if (!AudioService.warnedOnce.has(key)) {
-      console.log(message);
-      AudioService.warnedOnce.add(key);
+    if (typeof window !== 'undefined') {
+      const g = window as any;
+      if (!g.__audioWarned) g.__audioWarned = new Set();
+      if (!g.__audioWarned.has(key)) {
+        console.log(message);
+        g.__audioWarned.add(key);
+      }
     }
   }
 }

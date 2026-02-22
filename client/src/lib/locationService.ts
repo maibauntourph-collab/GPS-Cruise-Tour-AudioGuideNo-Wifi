@@ -85,7 +85,7 @@ export function getMatchedCityId(lat: number, lng: number, cities: any[] = []): 
         const radius = (city as any).radiusMeters || 50000;
 
         if (distance <= radius) {
-            console.log(`📍 [LocationService] "${city.name}" 거점 진입 감지! (거리: ${Math.round(distance / 1000)}km)`);
+            // [Bug Doctor] Silent by default to prevent console noise; use debug global if needed
             return city.id;
         }
     }
