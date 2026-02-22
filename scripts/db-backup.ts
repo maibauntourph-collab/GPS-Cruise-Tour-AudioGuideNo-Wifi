@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { db } from "../server/db";
-import { cities, landmarks } from "../shared/schema";
-import { sql } from "drizzle-orm";
+import { cities, landmarks, updateStats } from "../shared/schema";
+import { sql, desc } from "drizzle-orm";
 
 async function runHistoricalBackup() {
     const today = new Date().toISOString().split('T')[0];
@@ -49,28 +49,44 @@ async function runHistoricalBackup() {
 
         // 3. 업데이트 통계 기록 (자동화 닥터 기능)
         console.log("📊 [자동화 닥터] 업데이트 통계 산출 중...");
-        const countryResult = await db.execute(sql`SELECT count(DISTINCT country) as count FROM cities`);
+        const countryResult = await db.select({ count: sql<number>`count(DISTINCT ${cities.country})` }).from(cities);
         const totalCountries = Number(countryResult[0].count);
         const totalRegions = allCities.length;
 
         // 이전 기록 가져오기 (가장 최신)
-        const prevStats = await db.execute(sql`SELECT * FROM update_stats ORDER BY id DESC LIMIT 1`);
+        const prevStatsResult = await db.select().from(updateStats).orderBy(desc(updateStats.id)).limit(1);
         let newCountries = 0;
         let newRegions = 0;
 
-        if (prevStats.length > 0) {
-            newCountries = Math.max(0, totalCountries - Number(prevStats[0].total_countries));
-            newRegions = Math.max(0, totalRegions - Number(prevStats[0].total_regions));
+        if (prevStatsResult.length > 0) {
+            newCountries = Math.max(0, totalCountries - Number(prevStatsResult[0].totalCountries));
+            newRegions = Math.max(0, totalRegions - Number(prevStatsResult[0].totalRegions));
         }
 
+        // 4. 이색 탐험(Exotic Exploration) 카운트 산출
+        const exoticTours = allLandmarks.filter(l => l.category?.includes('이색') && (l.category?.includes('투어') || l.category?.includes('Activity'))).length;
+        const exoticEats = allLandmarks.filter(l => l.category?.includes('이색') && (l.category?.includes('맛집') || l.category?.includes('Restaurant'))).length;
+        const exoticSpots = allLandmarks.filter(l => l.category?.includes('이색') && (l.category?.includes('관광') || l.category?.includes('Landmark'))).length;
+        const exoticShops = allLandmarks.filter(l => l.category?.includes('이색') && (l.category?.includes('쇼핑') || l.category?.includes('Gift Shop'))).length;
+
         await db.execute(sql`
-            INSERT INTO update_stats (date, total_countries, total_regions, new_countries, new_regions, created_at)
-            VALUES (${today}, ${totalCountries}, ${totalRegions}, ${newCountries}, ${newRegions}, now())
+            INSERT INTO update_stats (
+                date, total_countries, total_regions, new_countries, new_regions, 
+                exotic_tours_count, exotic_eats_count, exotic_spots_count, exotic_shops_count, created_at
+            )
+            VALUES (
+                ${today}, ${totalCountries}, ${totalRegions}, ${newCountries}, ${newRegions},
+                ${exoticTours}, ${exoticEats}, ${exoticSpots}, ${exoticShops}, now()
+            )
             ON CONFLICT (date) DO UPDATE SET
                 total_countries = EXCLUDED.total_countries,
                 total_regions = EXCLUDED.total_regions,
                 new_countries = EXCLUDED.new_countries,
-                new_regions = EXCLUDED.new_regions
+                new_regions = EXCLUDED.new_regions,
+                exotic_tours_count = EXCLUDED.exotic_tours_count,
+                exotic_eats_count = EXCLUDED.exotic_eats_count,
+                exotic_spots_count = EXCLUDED.exotic_spots_count,
+                exotic_shops_count = EXCLUDED.exotic_shops_count
         `);
 
         console.log(`\n🎉 [${today}] 일자 데이터가 백업되었으며, 통계가 기록되었습니다.`);

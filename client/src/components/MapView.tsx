@@ -168,6 +168,46 @@ const selectedFlagIcon = L.divIcon({
   iconAnchor: [4, 50],
 });
 
+// [강의 노트: 프리미엄 포토맵 마커]
+// 단순한 핀 대신 실제 사진 썸네일을 사용하여 사용자의 시각적 경험을 극대화합니다.
+const createPhotoIcon = (photoUrl: string) => {
+  return L.divIcon({
+    className: 'photo-marker',
+    html: `
+      <div style="
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        border: 2px solid white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        overflow: hidden;
+        background: #f0f0f0;
+        position: relative;
+        transform: scale(1);
+        transition: transform 0.2s ease;
+      " class="hover:scale-110 transition-transform">
+        <img src="${photoUrl}" style="width: 100%; height: 100%; object-fit: cover;" />
+        <div style="
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background: rgba(0,0,0,0.5);
+          padding: 2px;
+          border-top-left-radius: 4px;
+        ">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </div>
+      </div>
+    `,
+    iconSize: [38, 38],
+    iconAnchor: [19, 19],
+    popupAnchor: [0, -19],
+  });
+};
+
 interface RoutingMachineProps {
   start: [number, number] | null;
   end: [number, number] | null;
@@ -1029,6 +1069,43 @@ font - weight: bold;
             interactive={false}
           />
         )
+      }
+
+      {/* [강의 노트: Path Tracing 이동 라인]
+          학생 여러분, Polyline을 사용하여 투어의 흐름을 지도에 그립니다.
+          opacity와 weight를 조절하여 배경 지도와 조화를 이루도록 디자인했습니다. */}
+      {tourStops.length >= 2 && (
+        <Polyline
+          positions={tourStops.map(stop => [stop.lat, stop.lng])}
+          pathOptions={{
+            color: 'hsl(14, 85%, 55%)',
+            weight: 4,
+            opacity: 0.6,
+            dashArray: '10, 10',
+            lineJoin: 'round',
+          }}
+        />
+      )}
+
+      {/* [적요: PhotoMap 사진 마커]
+          랜드마크 중 사진 데이터가 있는 경우  thumbnails를 지도에 직접 뿌려줍니다. */}
+      {landmarks
+        .filter(l => l.photos && l.photos.length > 0)
+        .map(l => (
+          <Marker
+            key={`photo-${l.id}`}
+            position={[l.lat, l.lng]}
+            icon={createPhotoIcon(l.photos![0])}
+            eventHandlers={{
+              click: () => onLandmarkSelect?.(l)
+            }}
+            zIndexOffset={100}
+          >
+            <Tooltip direction="bottom" offset={[0, 20]}>
+              <span className="text-[10px] font-bold">{getTranslatedContent(l, selectedLanguage, 'name')}</span>
+            </Tooltip>
+          </Marker>
+        ))
       }
 
     </MapContainer >

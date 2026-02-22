@@ -2,7 +2,7 @@
 import { Hono } from "hono";
 import { type Server } from "node:http";
 import { storage } from "./storage";
-import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers } from "@shared/schema";
+import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats } from "@shared/schema";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { requireAuth, requireRole } from "./auth";
@@ -148,7 +148,7 @@ export function registerRoutes(app: Hono<any>) {
       const today = new Date().toISOString().split('T')[0];
       const [stats] = await db.select().from(dataVersions as any).limit(1); // Placeholder or use updateStats
       // Real implementation using the new updateStats table
-      const result = await db.execute(sql`SELECT * FROM update_stats ORDER BY id DESC LIMIT 1`);
+      const result = await db.select().from(updateStats).orderBy(desc(updateStats.id)).limit(1);
       if (result.length === 0) {
         return c.json({ hasUpdates: false });
       }
@@ -156,11 +156,16 @@ export function registerRoutes(app: Hono<any>) {
       const latest = result[0];
       return c.json({
         date: latest.date,
-        totalCountries: latest.total_countries,
-        totalRegions: latest.total_regions,
-        newCountries: latest.new_countries,
-        newRegions: latest.new_regions,
-        hasUpdates: latest.new_regions > 0 || latest.new_countries > 0
+        totalCountries: latest.totalCountries,
+        totalRegions: latest.totalRegions,
+        newCountries: latest.newCountries,
+        newRegions: latest.newRegions,
+        exoticTours: latest.exoticToursCount || 0,
+        exoticEats: latest.exoticEatsCount || 0,
+        exoticSpots: latest.exoticSpotsCount || 0,
+        exoticShops: latest.exoticShopsCount || 0,
+        hasUpdates: latest.newRegions > 0 || latest.newCountries > 0 ||
+          (latest.exoticToursCount + latest.exoticEatsCount + latest.exoticSpotsCount + latest.exoticShopsCount) > 0
       });
     } catch (error) {
       return c.json({ hasUpdates: false });

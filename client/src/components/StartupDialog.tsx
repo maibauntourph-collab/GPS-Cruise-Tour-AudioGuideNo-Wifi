@@ -96,9 +96,14 @@ export default function StartupDialog({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md" data-testid="dialog-startup">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-xl">
-            <Navigation className="w-5 h-5 text-primary" />
-            {selectedLanguage === 'ko' ? 'GPS Audio Guide' : 'GPS Audio Guide'}
+          <DialogTitle className="flex flex-col text-xl">
+            <div className="flex items-center gap-2">
+              <Navigation className="w-5 h-5 text-primary" />
+              <span>GPS Audio Guide</span>
+            </div>
+            <span className="text-[10px] text-primary/60 font-medium tracking-[0.2em] ml-7">
+              {selectedLanguage === 'ko' ? '여행의 네비게이터' : 'Travel Navigator'}
+            </span>
           </DialogTitle>
           <DialogDescription>
             {selectedLanguage === 'ko'

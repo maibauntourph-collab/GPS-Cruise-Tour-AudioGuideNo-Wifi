@@ -10,6 +10,7 @@ async function initHistoricalBackupTables() {
         console.log("⚠️ 기존 백업 테이블 정리 중...");
         await db.execute(sql`DROP TABLE IF EXISTS cities_backup;`);
         await db.execute(sql`DROP TABLE IF EXISTS landmarks_backup;`);
+        await db.execute(sql`DROP TABLE IF EXISTS update_stats;`);
 
         // cities_backup 테이블 생성 (backup_id 추가 및 복합 PK/Serial 활용)
         await db.execute(sql`
@@ -72,6 +73,10 @@ async function initHistoricalBackupTables() {
                 total_regions integer NOT NULL,
                 new_countries integer NOT NULL DEFAULT 0,
                 new_regions integer NOT NULL DEFAULT 0,
+                exotic_tours_count integer NOT NULL DEFAULT 0,
+                exotic_eats_count integer NOT NULL DEFAULT 0,
+                exotic_spots_count integer NOT NULL DEFAULT 0,
+                exotic_shops_count integer NOT NULL DEFAULT 0,
                 created_at timestamp NOT NULL DEFAULT now()
             );
         `);

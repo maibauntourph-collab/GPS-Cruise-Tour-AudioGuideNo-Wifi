@@ -6,14 +6,14 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { X, Minus, Plus, MapPin, Ship, List, Navigation, Info, Activity as ActivityIcon, Landmark as LandmarkIcon, Play, Pause, Square, Volume2 as AudioIcon, Volume2, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen, User as UserIcon, Globe, BookOpen, Wand2 } from 'lucide-react';
+import { X, Minus, Plus, MapPin, Ship, List, Navigation, Info, Activity as ActivityIcon, Landmark as LandmarkIcon, Play, Pause, Square, Volume2 as AudioIcon, Volume2, Ticket, ExternalLink, MapPinned, Train, Bus, Car, Clock, Anchor, Utensils, Euro, ChefHat, Phone, ChevronLeft, ChevronRight, ShoppingBag, Search, Save, FolderOpen, User as UserIcon, Globe, BookOpen, Wand2, Hotel } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Landmark, City, GpsPosition, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
 import { audioService } from '@/lib/audioService';
 import PhotoGallery from './PhotoGallery';
-import { getGoogleSearchUrl, getWikiUrl, getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getMyRealTripUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
+import { getGoogleSearchUrl, getWikiUrl, getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getMyRealTripUrl, getCatchTableUrl, getTheForkUrl, getAirbnbUrl } from '@/lib/affiliateConfig';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import LandmarkDetailDialog from './LandmarkDetailDialog';
@@ -971,6 +971,18 @@ export default function UnifiedFloatingCard({
                         />
                       )}
 
+                      {/* [강의 노트: 이국적 탐험(Exotic Exploration) 배지]
+                          학생 여러분, 브랜드 아이덴티티를 강화하기 위해 특정 카테고리에 프리미엄 배지를 부여합니다.
+                          Exotic Exploration은 단순한 여행이 아닌 '발견'의 경험을 시각화합니다. */}
+                      {selectedLandmark.category === 'Landmark' && (
+                        <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-amber-500/10 to-transparent border-l-4 border-amber-500 rounded-r-lg">
+                          <Wand2 className="w-4 h-4 text-amber-600 animate-pulse" />
+                          <span className="text-xs font-bold text-amber-800 uppercase tracking-tighter">
+                            Exotic Exploration Badge
+                          </span>
+                        </div>
+                      )}
+
                       <div>
                         <p className="text-sm text-muted-foreground mb-3">
                           {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
@@ -1038,6 +1050,22 @@ export default function UnifiedFloatingCard({
                                 >
                                   <Globe className="w-3.5 h-3.5" />
                                   {selectedLanguage === 'ko' ? '관광청' : 'Official'}
+                                </Button>
+
+                                {/* [적요] 이국적 탐험의 완성은 머무름입니다. 
+                                    Airbnb 연동을 통해 명소 근처의 독특한 숙소를 바로 찾아볼 수 있게 합니다. */}
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-8 px-2 gap-1.5 text-xs text-rose-500 hover:text-rose-600 hover:bg-rose-50 border border-rose-100"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    const name = getTranslatedContent(selectedLandmark, selectedLanguage, 'name');
+                                    window.open(getAirbnbUrl(name), '_blank', 'noopener,noreferrer');
+                                  }}
+                                >
+                                  <Hotel className="w-3.5 h-3.5" />
+                                  Airbnb
                                 </Button>
                                 {/* [연구소장 가이드] 가격 비교 테이블 및 다중 플랫폼 예약 구현 */}
                                 {selectedLanguage === 'ko' ? (

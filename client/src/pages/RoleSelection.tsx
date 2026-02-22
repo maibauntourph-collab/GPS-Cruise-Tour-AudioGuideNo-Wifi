@@ -122,7 +122,14 @@ export default function RoleSelection() {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
               <Navigation className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-black tracking-tighter uppercase italic">GPS Cruise <span className="text-blue-500">Tour</span></span>
+            <span className="text-xl font-black tracking-tighter uppercase italic">
+              GPS Cruise <span className="text-blue-500">Tour</span>
+              {/* [강의 노트: 서브 브랜드 네임 반영]
+                  사용자 경험의 깊이를 더하기 위해 '여행의 네비게이터'라는 감성적인 서브 타이틀을 추가했습니다. */}
+              <span className="block text-[8px] tracking-[0.4em] text-blue-400 opacity-60 font-medium not-italic">
+                {selectedLanguage === 'ko' ? '여행의 네비게이터' : 'Travel Navigator'}
+              </span>
+            </span>
           </motion.div>
 
           <motion.button

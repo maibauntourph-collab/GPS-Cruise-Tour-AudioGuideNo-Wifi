@@ -3517,6 +3517,45 @@ export default function Home() {
               </Card>
             </div>
 
+            {/* [자동화 닥터] 이색 탐험(Exotic Exploration) 섹션 */}
+            {(updateStatsSummary?.exoticTours > 0 || updateStatsSummary?.exoticEats > 0 ||
+              updateStatsSummary?.exoticSpots > 0 || updateStatsSummary?.exoticShops > 0) && (
+                <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 space-y-3 border border-slate-100 dark:border-slate-700">
+                  <div className="flex items-center gap-2 justify-center mb-1">
+                    <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                    <span className="text-sm font-bold text-slate-700 dark:text-slate-200">
+                      {selectedLanguage === 'ko' ? '기다려온 이색 탐험' : 'Exotic Exploration Wait'}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-4 gap-2 text-center">
+                    <div className="flex flex-col items-center">
+                      <span className="text-[10px] text-muted-foreground mb-1">{selectedLanguage === 'ko' ? '이색투어' : 'Tours'}</span>
+                      <Badge variant="outline" className={`${updateStatsSummary?.exoticTours > 0 ? 'bg-indigo-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
+                        {updateStatsSummary?.exoticTours || 0}
+                      </Badge>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="text-[10px] text-muted-foreground mb-1">{selectedLanguage === 'ko' ? '이색맛집' : 'Eats'}</span>
+                      <Badge variant="outline" className={`${updateStatsSummary?.exoticEats > 0 ? 'bg-rose-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
+                        {updateStatsSummary?.exoticEats || 0}
+                      </Badge>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="text-[10px] text-muted-foreground mb-1">{selectedLanguage === 'ko' ? '이색관광지' : 'Spots'}</span>
+                      <Badge variant="outline" className={`${updateStatsSummary?.exoticSpots > 0 ? 'bg-emerald-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
+                        {updateStatsSummary?.exoticSpots || 0}
+                      </Badge>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="text-[10px] text-muted-foreground mb-1">{selectedLanguage === 'ko' ? '이색쇼핑' : 'Shops'}</span>
+                      <Badge variant="outline" className={`${updateStatsSummary?.exoticShops > 0 ? 'bg-amber-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
+                        {updateStatsSummary?.exoticShops || 0}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              )}
+
             <p className="text-sm font-medium text-slate-600 dark:text-slate-300 italic">
               {selectedLanguage === 'ko'
                 ? '“지루한 일상에 여행의 설렘을 더해드립니다.”'

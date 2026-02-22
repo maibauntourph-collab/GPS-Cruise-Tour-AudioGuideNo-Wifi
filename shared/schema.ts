@@ -532,6 +532,11 @@ export const updateStats = pgTable("update_stats", {
   totalRegions: integer("total_regions").notNull(),
   newCountries: integer("new_countries").notNull().default(0),
   newRegions: integer("new_regions").notNull().default(0),
+  // [이색 탐험] 카테고리별 통계
+  exoticToursCount: integer("exotic_tours_count").notNull().default(0),
+  exoticEatsCount: integer("exotic_eats_count").notNull().default(0),
+  exoticSpotsCount: integer("exotic_spots_count").notNull().default(0),
+  exoticShopsCount: integer("exotic_shops_count").notNull().default(0),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
