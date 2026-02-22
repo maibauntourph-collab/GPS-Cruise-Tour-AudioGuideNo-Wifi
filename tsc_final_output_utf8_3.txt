@@ -1,0 +1,5 @@
+﻿
+> rest-express@1.0.0 check
+> tsc
+
+server/scripts/check-progress.ts(5,19): error TS2305: Module '"drizzle-orm"' has no exported member 'length'.

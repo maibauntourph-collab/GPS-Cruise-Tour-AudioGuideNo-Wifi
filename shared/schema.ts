@@ -82,11 +82,11 @@ export type Language = z.infer<typeof languageSchema>;
 const translationContentSchema = z.object({
   name: z.string(),
   narration: z.string(),
-  description: z.string().optional(),
-  detailedDescription: z.string().optional(), // Long 5-minute reading content
-  historicalInfo: z.string().optional(), // Extended historical information
-  yearBuilt: z.string().optional(), // Construction year/period
-  architect: z.string().optional(), // Architect or creator name
+  description: z.string().nullable().optional(),
+  detailedDescription: z.string().nullable().optional(), // Long 5-minute reading content
+  historicalInfo: z.string().nullable().optional(), // Extended historical information
+  yearBuilt: z.string().nullable().optional(), // Construction year/period
+  architect: z.string().nullable().optional(), // Architect or creator name
 });
 
 // Dynamic translations schema - supports any language code
@@ -103,30 +103,32 @@ export const landmarkSchema = z.object({
   lng: z.number(),
   radius: z.number(),
   narration: z.string(),
-  description: z.string().optional(),
-  category: z.string().optional(),
+  description: z.string().nullable().optional(),
+  category: z.string().nullable().optional(),
   translations: translationsSchema,
-  detailedDescription: z.string().optional(), // Long 5-minute reading content
-  photos: z.array(z.string()).optional(), // Array of photo URLs
-  historicalInfo: z.string().optional(), // Extended historical information
-  yearBuilt: z.string().optional(), // Construction year/period
-  architect: z.string().optional(), // Architect or creator name
+  detailedDescription: z.string().nullable().optional(), // Long 5-minute reading content
+  photos: z.array(z.string()).nullable().optional(), // Array of photo URLs
+  historicalInfo: z.string().nullable().optional(), // Extended historical information
+  yearBuilt: z.string().nullable().optional(), // Construction year/period
+  architect: z.string().nullable().optional(), // Architect or creator name
   // Restaurant-specific fields
-  openingHours: z.string().optional(), // e.g., "Mon-Sat: 12:00-15:00, 19:00-23:00"
-  priceRange: z.string().optional(), // e.g., "€€€" or "$50-80 per person"
-  cuisine: z.string().optional(), // e.g., "Traditional Roman", "French Fine Dining"
-  reservationUrl: z.string().optional(), // Direct reservation link (OpenTable, TheFork, etc.)
-  phoneNumber: z.string().optional(), // Restaurant phone number
-  menuHighlights: z.array(z.string()).optional(), // Key dishes: ["Cacio e Pepe", "Carbonara"]
+  openingHours: z.string().nullable().optional(), // e.g., "Mon-Sat: 12:00-15:00, 19:00-23:00"
+  priceRange: z.string().nullable().optional(), // e.g., "€€€" or "$50-80 per person"
+  cuisine: z.string().nullable().optional(), // e.g., "Traditional Roman", "French Fine Dining"
+  reservationUrl: z.string().nullable().optional(), // Direct reservation link (OpenTable, TheFork, etc.)
+  phoneNumber: z.string().nullable().optional(), // Restaurant phone number
+  menuHighlights: z.array(z.string()).nullable().optional(), // Key dishes: ["Cacio e Pepe", "Carbonara"]
   restaurantPhotos: z.object({
-    exterior: z.array(z.string()).optional(), // Exterior photos
-    interior: z.array(z.string()).optional(), // Interior photos
-    menu: z.array(z.string()).optional(), // Menu photos
-  }).optional(),
-  paymentMethods: z.array(z.string()).optional(), // e.g., ["Card", "Cash", "Mobile Payment"]
+    exterior: z.array(z.string()).nullable().optional(), // Exterior photos
+    interior: z.array(z.string()).nullable().optional(), // Interior photos
+    menu: z.array(z.string()).nullable().optional(), // Menu photos
+  }).nullable().optional(),
+  paymentMethods: z.array(z.string()).nullable().optional(), // e.g., ["Card", "Cash", "Mobile Payment"]
   // Premium fields
   isPremium: z.boolean().optional(),
-  price: z.number().optional(), // Price in EUR for the premium guide
+  price: z.number().nullable().optional(), // Price in EUR for the premium guide
+  createdAt: z.union([z.string(), z.date()]).optional(),
+  updatedAt: z.union([z.string(), z.date()]).optional(),
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;
@@ -189,7 +191,7 @@ export const landmarks = pgTable("landmarks", {
   description: text("description"),
   category: varchar("category"), // 'Ancient Rome', 'Activity', 'Restaurant', 'Gift Shop', etc.
   detailedDescription: text("detailed_description"),
-  photos: json("photos"), // Array of photo URLs
+  photos: json("photos").$type<string[] | null>(), // Array of photo URLs
   historicalInfo: text("historical_info"),
   yearBuilt: varchar("year_built"),
   architect: varchar("architect"),
@@ -201,9 +203,13 @@ export const landmarks = pgTable("landmarks", {
   cuisine: varchar("cuisine"),
   reservationUrl: varchar("reservation_url"),
   phoneNumber: varchar("phone_number"),
-  menuHighlights: json("menu_highlights"), // Array of strings
-  restaurantPhotos: json("restaurant_photos"), // { exterior, interior, menu }
-  paymentMethods: json("payment_methods"), // Array of strings
+  menuHighlights: json("menu_highlights").$type<string[] | null>(), // Array of strings
+  restaurantPhotos: json("restaurant_photos").$type<{
+    exterior?: string[] | null;
+    interior?: string[] | null;
+    menu?: string[] | null;
+  } | null>(), // { exterior, interior, menu }
+  paymentMethods: json("payment_methods").$type<string[] | null>(), // Array of strings
   isPremium: boolean("is_premium").notNull().default(false),
   price: doublePrecision("price"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -716,7 +722,6 @@ export type CreatorEarnings = typeof creatorEarnings.$inferSelect;
 export type Transaction = typeof transactions.$inferSelect;
 export type Settlement = typeof settlements.$inferSelect;
 export type MarketingContent = typeof marketingContents.$inferSelect;
-export const LandmarkGuide = typeof landmarkGuides.$inferSelect;
 export type DbLandmarkGuide = typeof landmarkGuides.$inferSelect;
 
 export type DbCityBackup = typeof citiesBackup.$inferSelect;

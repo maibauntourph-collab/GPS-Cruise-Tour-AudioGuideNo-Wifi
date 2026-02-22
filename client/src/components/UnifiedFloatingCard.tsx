@@ -1400,7 +1400,7 @@ export default function UnifiedFloatingCard({
                                 <Button
                                   variant="default"
                                   className="flex-1 gap-2"
-                                  onClick={() => window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
+                                  onClick={() => selectedLandmark.reservationUrl && window.open(selectedLandmark.reservationUrl, '_blank', 'noopener,noreferrer')}
                                   data-testid="button-make-reservation"
                                 >
                                   <ExternalLink className="w-4 h-4" />
@@ -1554,7 +1554,7 @@ export default function UnifiedFloatingCard({
                                         {selectedLandmark?.reservationUrl && (
                                           <Button
                                             className="w-full h-12 gap-2 bg-primary text-white"
-                                            onClick={() => window.open(selectedLandmark?.reservationUrl, '_blank')}
+                                            onClick={() => selectedLandmark?.reservationUrl && window.open(selectedLandmark.reservationUrl, '_blank')}
                                           >
                                             <Anchor className="w-5 h-5" />
                                             {t('makeReservation', selectedLanguage)}

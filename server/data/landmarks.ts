@@ -16709,6 +16709,7 @@ export const LANDMARKS: Landmark[] = [
     "translations": {
       "ko": {
         "name": "센소지 (Senso-ji Temple)",
+        "narration": "도쿄에서 가장 오래된 사원이자 아사쿠사의 상징.",
         "description": "도쿄에서 가장 오래된 사원이자 아사쿠사의 상징."
       }
     },

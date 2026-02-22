@@ -120,9 +120,9 @@ export class MemStorage implements IStorage {
     try {
       let dbLandmarks: Landmark[] = [];
       if (hardcodedIds.length > 0) {
-        dbLandmarks = await db.select().from(landmarksTable).where(notInArray(landmarksTable.id, hardcodedIds)) as Landmark[];
+        dbLandmarks = await db.select().from(landmarksTable).where(notInArray(landmarksTable.id, hardcodedIds)) as unknown as Landmark[];
       } else {
-        dbLandmarks = await db.select().from(landmarksTable) as Landmark[];
+        dbLandmarks = await db.select().from(landmarksTable) as unknown as Landmark[];
       }
       console.log(`[Storage Debug] Database landmarks found (excluding hardcoded): ${dbLandmarks.length}`);
 
@@ -157,7 +157,7 @@ export class MemStorage implements IStorage {
     // If not found, check database
     try {
       const [dbLandmark] = await db.select().from(landmarksTable).where(eq(landmarksTable.id, id));
-      return dbLandmark as Landmark;
+      return dbLandmark as unknown as Landmark;
     } catch (error) {
       console.error(`[Storage] DB access failed for getLandmark (${id}):`, error);
       return undefined;
@@ -647,7 +647,7 @@ export class MemStorage implements IStorage {
   async createLandmark(landmarkData: any): Promise<Landmark> {
     try {
       const [newLandmark] = await db.insert(landmarksTable).values(landmarkData).returning();
-      return newLandmark as Landmark;
+      return newLandmark as unknown as Landmark;
     } catch (error) {
       console.warn('[AI DB Manager] DB create landmark failed, falling back to memory:', error);
       const newLandmark = { ...landmarkData, id: landmarkData.id || `landmark_${Date.now()}` } as Landmark;
@@ -680,12 +680,13 @@ export class MemStorage implements IStorage {
 
   async updateLandmark(id: string, updates: Partial<Landmark>): Promise<Landmark | undefined> {
     try {
+      const { createdAt, updatedAt, ...rest } = updates;
       const [updated] = await db
         .update(landmarksTable)
-        .set({ ...updates, updatedAt: new Date() })
+        .set({ ...rest, updatedAt: new Date() })
         .where(eq(landmarksTable.id, id))
         .returning();
-      return updated as Landmark;
+      return updated as unknown as Landmark;
     } catch (error) {
       console.warn('[AI DB Manager] DB update landmark failed, falling back to memory:', error);
       const landmark = this.landmarksMap.get(id);

@@ -47,7 +47,7 @@ import { Landmark, City } from '@shared/schema';
 import { getMatchedCityId, checkProximity } from '@/lib/locationService';
 import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
-import { Landmark as LandmarkIcon, Activity as ActivityIcon, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon, Headphones as AudioIcon, Ticket, Navigation, Play, Pause, Minus, ZoomIn, Settings } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity as ActivityIcon, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon, Headphones as AudioIcon, Ticket, Navigation, Play, Pause, Minus, ZoomIn, Settings, Star } from 'lucide-react';
 import { HARDCODED_LANDMARKS } from '@/data/hardcodedLandmarks';
 import { offlineStorage } from '@/lib/offlineStorage';
 import { Input } from '@/components/ui/input';
@@ -282,7 +282,20 @@ export default function Home() {
 
   // [자동화 닥터] 업데이트 통계 상태
   const [showUpdateStats, setShowUpdateStats] = useState(false);
-  const { data: updateStatsSummary } = useQuery({
+
+  interface UpdateStatsSummary {
+    hasUpdates: boolean;
+    totalCountries: number;
+    newCountries: number;
+    totalRegions: number;
+    newRegions: number;
+    exoticTours: number;
+    exoticEats: number;
+    exoticSpots: number;
+    exoticShops: number;
+  }
+
+  const { data: updateStatsSummary } = useQuery<UpdateStatsSummary>({
     queryKey: ['/api/updates/summary'],
     staleTime: 1000 * 60 * 60 * 24, // 24 hours
   });
@@ -3496,9 +3509,9 @@ export default function Home() {
                 <h4 className="text-3xl font-black text-primary">
                   {updateStatsSummary?.totalCountries || '...'}
                 </h4>
-                {updateStatsSummary?.newCountries > 0 && (
+                {(updateStatsSummary?.newCountries ?? 0) > 0 && (
                   <Badge className="mt-2 bg-green-500 hover:bg-green-600 border-none">
-                    +{updateStatsSummary.newCountries}
+                    +{updateStatsSummary?.newCountries}
                   </Badge>
                 )}
               </Card>
@@ -3509,17 +3522,17 @@ export default function Home() {
                 <h4 className="text-3xl font-black text-secondary">
                   {updateStatsSummary?.totalRegions || '...'}
                 </h4>
-                {updateStatsSummary?.newRegions > 0 && (
+                {(updateStatsSummary?.newRegions ?? 0) > 0 && (
                   <Badge className="mt-2 bg-amber-500 hover:bg-amber-600 border-none animate-pulse">
-                    +{updateStatsSummary.newRegions}
+                    +{updateStatsSummary?.newRegions}
                   </Badge>
                 )}
               </Card>
             </div>
 
             {/* [자동화 닥터] 이색 탐험(Exotic Exploration) 섹션 */}
-            {(updateStatsSummary?.exoticTours > 0 || updateStatsSummary?.exoticEats > 0 ||
-              updateStatsSummary?.exoticSpots > 0 || updateStatsSummary?.exoticShops > 0) && (
+            {((updateStatsSummary?.exoticTours ?? 0) > 0 || (updateStatsSummary?.exoticEats ?? 0) > 0 ||
+              (updateStatsSummary?.exoticSpots ?? 0) > 0 || (updateStatsSummary?.exoticShops ?? 0) > 0) && (
                 <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 space-y-3 border border-slate-100 dark:border-slate-700">
                   <div className="flex items-center gap-2 justify-center mb-1">
                     <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
@@ -3530,25 +3543,25 @@ export default function Home() {
                   <div className="grid grid-cols-4 gap-2 text-center">
                     <div className="flex flex-col items-center">
                       <span className="text-[10px] text-muted-foreground mb-1">{selectedLanguage === 'ko' ? '이색투어' : 'Tours'}</span>
-                      <Badge variant="outline" className={`${updateStatsSummary?.exoticTours > 0 ? 'bg-indigo-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
+                      <Badge variant="outline" className={`${(updateStatsSummary?.exoticTours ?? 0) > 0 ? 'bg-indigo-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
                         {updateStatsSummary?.exoticTours || 0}
                       </Badge>
                     </div>
                     <div className="flex flex-col items-center">
                       <span className="text-[10px] text-muted-foreground mb-1">{selectedLanguage === 'ko' ? '이색맛집' : 'Eats'}</span>
-                      <Badge variant="outline" className={`${updateStatsSummary?.exoticEats > 0 ? 'bg-rose-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
+                      <Badge variant="outline" className={`${(updateStatsSummary?.exoticEats ?? 0) > 0 ? 'bg-rose-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
                         {updateStatsSummary?.exoticEats || 0}
                       </Badge>
                     </div>
                     <div className="flex flex-col items-center">
                       <span className="text-[10px] text-muted-foreground mb-1">{selectedLanguage === 'ko' ? '이색관광지' : 'Spots'}</span>
-                      <Badge variant="outline" className={`${updateStatsSummary?.exoticSpots > 0 ? 'bg-emerald-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
+                      <Badge variant="outline" className={`${(updateStatsSummary?.exoticSpots ?? 0) > 0 ? 'bg-emerald-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
                         {updateStatsSummary?.exoticSpots || 0}
                       </Badge>
                     </div>
                     <div className="flex flex-col items-center">
                       <span className="text-[10px] text-muted-foreground mb-1">{selectedLanguage === 'ko' ? '이색쇼핑' : 'Shops'}</span>
-                      <Badge variant="outline" className={`${updateStatsSummary?.exoticShops > 0 ? 'bg-amber-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
+                      <Badge variant="outline" className={`${(updateStatsSummary?.exoticShops ?? 0) > 0 ? 'bg-amber-500 text-white border-none' : 'text-muted-foreground opacity-50'}`}>
                         {updateStatsSummary?.exoticShops || 0}
                       </Badge>
                     </div>

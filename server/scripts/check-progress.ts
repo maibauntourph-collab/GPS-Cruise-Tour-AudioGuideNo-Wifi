@@ -2,7 +2,7 @@
 import "dotenv/config";
 import { db } from "../db";
 import { landmarks } from "../../shared/schema";
-import { sql, gt, length, and, isNotNull } from "drizzle-orm";
+import { sql, isNotNull } from "drizzle-orm";
 
 async function checkProgress() {
     // Count landmarks that have been enhanced (long narration and recent update)

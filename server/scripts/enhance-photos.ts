@@ -72,7 +72,7 @@ async function enhancePhotos() {
                 response_format: "url",
             });
 
-            const imageUrl = response.data[0].url;
+            const imageUrl = response.data?.[0]?.url;
             if (!imageUrl) throw new Error("이미지 URL을 반환받지 못했습니다.");
 
             // [적요] 고유 파일명 생성: ID와 타임스탬프를 조합하여 파일명 충돌을 방지합니다.
@@ -84,11 +84,23 @@ async function enhancePhotos() {
             await downloadImage(imageUrl, localPath);
 
             // [적요] DB 최종 승인: 생성된 로컬 이미지 경로를 photos 컬렉션의 첫 번째 항목으로 등록합니다.
+            // 맛집 카테고리인 경우 restaurantPhotos.exterior에도 함께 등록하여 상세 페이지 연동을 강화합니다.
+            const updateData: any = {
+                photos: [dbPath],
+                updatedAt: new Date()
+            };
+
+            const categoryLower = landmark.category?.toLowerCase() || "";
+            if (categoryLower.includes("eat") || categoryLower.includes("rest") || categoryLower.includes("맛집")) {
+                updateData.restaurantPhotos = {
+                    exterior: [dbPath],
+                    interior: null,
+                    menu: null
+                };
+            }
+
             await db.update(landmarksTable)
-                .set({
-                    photos: [dbPath],
-                    updatedAt: new Date()
-                })
+                .set(updateData)
                 .where(eq(landmarksTable.id, landmark.id));
 
             console.log(`   ✅ DB 업데이트 완료: ${dbPath}`);
