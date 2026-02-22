@@ -37,6 +37,7 @@ export default function LandmarkDetailDialog({
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
   const [selectedGuideId, setSelectedGuideId] = useState<string | null>(null);
+  const [audioContentType, setAudioContentType] = useState<'summary' | 'narration'>('summary');
 
   // Fetch guides for this landmark
   const { data: guides = [] } = useQuery<DbLandmarkGuide[]>({
@@ -86,6 +87,30 @@ export default function LandmarkDetailDialog({
     }
   }, [isOpen, landmark]);
 
+  // [Automation Doctor] Auto-play audio when dialog opens
+  useEffect(() => {
+    if (isOpen && landmark && !isPlaying) {
+      // Small delay to ensure everything is rendered
+      const timer = setTimeout(() => {
+        handlePlayAudio();
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, landmark?.id]);
+
+  // Stop audio when changing content type to allow restarting with new content
+  useEffect(() => {
+    if (isPlaying) {
+      audioService.stopSentences();
+      audioService.stop();
+      audioService.stopMP3();
+      setIsPlaying(false);
+      setCurrentSentenceIndex(-1);
+      // Restart with new content
+      setTimeout(() => handlePlayAudio(), 100);
+    }
+  }, [audioContentType]);
+
   // Handle dialog close - stop all audio first
   const handleDialogClose = () => {
     setCurrentSentenceIndex(-1);
@@ -132,7 +157,12 @@ export default function LandmarkDetailDialog({
   if (!landmark) return null;
 
   const handlePlayAudio = async () => {
-    if (!currentDetailedDescription) return;
+    // Select content based on toggle
+    const textToPlay = audioContentType === 'summary'
+      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : getTranslatedContent(landmark, selectedLanguage, 'description'))
+      : currentDetailedDescription;
+
+    if (!textToPlay) return;
 
     if (isPlaying) {
       audioService.stopSentences();
@@ -146,7 +176,7 @@ export default function LandmarkDetailDialog({
       if (audioMode === 'clova') {
         setIsPlaying(true);
         const success = await audioService.playClovaSentences(
-          currentDetailedDescription,
+          textToPlay,
           selectedLanguage,
           (index) => setCurrentSentenceIndex(index),
           () => {
@@ -157,7 +187,7 @@ export default function LandmarkDetailDialog({
         if (!success) {
           // Fallback to system TTS if CLOVA fails
           audioService.playSentences(
-            currentDetailedDescription,
+            textToPlay,
             selectedLanguage,
             playbackRate,
             (index) => setCurrentSentenceIndex(index),
@@ -170,7 +200,7 @@ export default function LandmarkDetailDialog({
       } else if (audioMode === 'openai') {
         setIsPlaying(true);
         const success = await audioService.playOpenAISentences(
-          currentDetailedDescription,
+          textToPlay,
           selectedLanguage,
           (index) => setCurrentSentenceIndex(index),
           () => {
@@ -181,7 +211,7 @@ export default function LandmarkDetailDialog({
         if (!success) {
           // Fallback to system TTS if OpenAI fails
           audioService.playSentences(
-            currentDetailedDescription,
+            textToPlay,
             selectedLanguage,
             playbackRate,
             (index) => setCurrentSentenceIndex(index),
@@ -194,7 +224,7 @@ export default function LandmarkDetailDialog({
       } else {
         // Use sentence-by-sentence playback with highlighting for TTS/Auto/MP3 modes
         audioService.playSentences(
-          currentDetailedDescription,
+          textToPlay,
           selectedLanguage,
           playbackRate,
           (index) => setCurrentSentenceIndex(index),
@@ -207,6 +237,15 @@ export default function LandmarkDetailDialog({
       }
     }
   };
+
+  // Sentences for current playing content
+  const activeSentences = useMemo(() => {
+    const text = audioContentType === 'summary'
+      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : getTranslatedContent(landmark, selectedLanguage, 'description'))
+      : currentDetailedDescription;
+    if (!text) return [];
+    return AudioService.splitIntoSentences(text);
+  }, [landmark, selectedGuide, selectedLanguage, audioContentType, currentDetailedDescription]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogClose}>
@@ -320,136 +359,169 @@ export default function LandmarkDetailDialog({
               </div>
 
               {/* Audio Section */}
-              {currentDetailedDescription && (
-                <div className="p-3 border rounded-lg space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handlePlayAudio}
-                        className="gap-2"
-                        data-testid="button-play-audio-dialog"
-                      >
-                        {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                        {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
-                      </Button>
+              <div className="p-3 border rounded-lg bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-sm space-y-3">
+                <div className="flex items-center justify-between">
+                  {/* Summary/Narration Toggle */}
+                  <div className="flex bg-muted p-1 rounded-lg">
+                    <Button
+                      variant={audioContentType === 'summary' ? 'secondary' : 'ghost'}
+                      size="sm"
+                      className="h-8 text-xs font-semibold gap-1.5"
+                      onClick={() => setAudioContentType('summary')}
+                    >
+                      <BookOpen className="w-3.5 h-3.5" />
+                      {selectedLanguage === 'ko' ? '개요' : 'Summary'}
+                    </Button>
+                    <Button
+                      variant={audioContentType === 'narration' ? 'secondary' : 'ghost'}
+                      size="sm"
+                      className="h-8 text-xs font-semibold gap-1.5"
+                      onClick={() => setAudioContentType('narration')}
+                    >
+                      <Headphones className="w-3.5 h-3.5" />
+                      {selectedLanguage === 'ko' ? '나레이션' : 'Narration'}
+                    </Button>
+                  </div>
 
-                      {/* [연구소장 가이드] 대표님, 여기 관광청, 위키, 검색 버튼을 추가했습니다! */}
-                      <div className="flex items-center gap-1 border-l pl-2 ml-1">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 px-2 gap-1.5 text-xs text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                          onClick={() => {
-                            const website = landmark.reservationUrl;
-                            const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                            if (website) {
-                              window.open(website, '_blank', 'noopener,noreferrer');
-                            } else {
-                              window.open(getGoogleSearchUrl(name + ' 공식 홈페이지'), '_blank', 'noopener,noreferrer');
-                            }
-                          }}
-                        >
-                          <Globe className="w-3.5 h-3.5" />
-                          {selectedLanguage === 'ko' ? '관광청' : 'Official'}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 px-2 gap-1.5 text-xs text-gray-600 hover:bg-gray-100"
-                          onClick={() => {
-                            const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                            window.open(getWikiUrl(name, selectedLanguage), '_blank', 'noopener,noreferrer');
-                          }}
-                        >
-                          <BookOpen className="w-3.5 h-3.5" />
-                          {selectedLanguage === 'ko' ? '백과' : 'Wiki'}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 px-2 gap-1.5 text-xs text-gray-600 hover:bg-gray-100"
-                          onClick={() => {
-                            const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                            window.open(getGoogleSearchUrl(name), '_blank', 'noopener,noreferrer');
-                          }}
-                        >
-                          <Search className="w-3.5 h-3.5" />
-                          {selectedLanguage === 'ko' ? '검색' : 'Search'}
-                        </Button>
-                      </div>
-                      {isPlaying && audioService.getAudioMode() !== 'clova' && (
-                        <select
-                          value={playbackRate}
-                          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                            const rate = parseFloat(e.target.value);
-                            setPlaybackRate(rate);
-                            audioService.setRate(rate);
-                            if (currentDetailedDescription) {
-                              audioService.playSentences(
-                                currentDetailedDescription,
-                                selectedLanguage,
-                                rate,
-                                (index) => setCurrentSentenceIndex(index),
-                                () => {
-                                  setIsPlaying(false);
-                                  setCurrentSentenceIndex(-1);
-                                }
-                              );
-                            }
-                          }}
-                          className="px-2 py-1 text-sm border rounded"
-                          data-testid="select-playback-rate-dialog"
-                        >
-                          <option value="0.5">0.5x</option>
-                          <option value="0.75">0.75x</option>
-                          <option value="1.0">1.0x</option>
-                          <option value="1.25">1.25x</option>
-                          <option value="1.5">1.5x</option>
-                          <option value="2.0">2.0x</option>
-                        </select>
-                      )}
-                    </div>
+                  <div className="flex items-center gap-2">
                     {selectedGuide && (
-                      <Badge variant="outline" className="gap-1">
-                        <Headphones className="w-3 h-3" />
-                        {selectedLanguage === 'ko' ? '커스텀 가이드' : 'Custom Guide'}
+                      <Badge variant="outline" className="gap-1 bg-primary/5 text-primary border-primary/20">
+                        <Check className="w-3 h-3" />
+                        {selectedLanguage === 'ko' ? '맞춤' : 'Custom'}
                       </Badge>
                     )}
                   </div>
-                  {/* Sentence-by-sentence text with memory pen highlighting */}
-                  <div className="text-sm leading-relaxed" data-testid="audio-text-container">
-                    {sentences.length > 0 ? (
-                      sentences.map((sentence: string, index: number) => {
-                        const isCurrentSentence = currentSentenceIndex === index;
-                        const isReadSentence = currentSentenceIndex > index && isPlaying;
+                </div>
 
-                        return (
-                          <span
-                            key={index}
-                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${isCurrentSentence
-                              ? 'bg-yellow-300/50 font-medium shadow-sm dark:bg-yellow-400/40'
-                              : isReadSentence
-                                ? 'bg-green-300/30 dark:bg-green-400/20'
-                                : 'bg-transparent'
-                              }`}
-                            style={{
-                              boxDecorationBreak: 'clone',
-                              WebkitBoxDecorationBreak: 'clone'
-                            }}
-                            data-testid={`sentence-${index}`}
-                          >
-                            {sentence}{' '}
-                          </span>
-                        );
-                      })
-                    ) : (
-                      <span>{currentDetailedDescription}</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <Button
+                      variant="default"
+                      size="sm"
+                      onClick={handlePlayAudio}
+                      className={`gap-2 ${isPlaying ? 'bg-red-500 hover:bg-red-600' : 'bg-primary hover:bg-primary/90'}`}
+                      data-testid="button-play-audio-dialog"
+                    >
+                      {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                      {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
+                    </Button>
+
+                    {/* [연구소장 가이드] 대표님, 여기 관광청, 위키, 검색 버튼을 추가했습니다! */}
+                    <div className="flex items-center gap-1 border-l pl-2 ml-1">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 px-2 gap-1.5 text-xs text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                        onClick={() => {
+                          const website = landmark.reservationUrl;
+                          const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                          if (website) {
+                            window.open(website, '_blank', 'noopener,noreferrer');
+                          } else {
+                            window.open(getGoogleSearchUrl(name + ' 공식 홈페이지'), '_blank', 'noopener,noreferrer');
+                          }
+                        }}
+                      >
+                        <Globe className="w-3.5 h-3.5" />
+                        {selectedLanguage === 'ko' ? '관광청' : 'Official'}
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 px-2 gap-1.5 text-xs text-gray-600 hover:bg-gray-100"
+                        onClick={() => {
+                          const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                          window.open(getWikiUrl(name, selectedLanguage), '_blank', 'noopener,noreferrer');
+                        }}
+                      >
+                        <BookOpen className="w-3.5 h-3.5" />
+                        {selectedLanguage === 'ko' ? '백과' : 'Wiki'}
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 px-2 gap-1.5 text-xs text-gray-600 hover:bg-gray-100"
+                        onClick={() => {
+                          const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                          window.open(getGoogleSearchUrl(name), '_blank', 'noopener,noreferrer');
+                        }}
+                      >
+                        <Search className="w-3.5 h-3.5" />
+                        {selectedLanguage === 'ko' ? '검색' : 'Search'}
+                      </Button>
+                    </div>
+                    {isPlaying && audioService.getAudioMode() !== 'clova' && (
+                      <select
+                        value={playbackRate}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                          const rate = parseFloat(e.target.value);
+                          setPlaybackRate(rate);
+                          audioService.setRate(rate);
+                          if (currentDetailedDescription) {
+                            audioService.playSentences(
+                              currentDetailedDescription,
+                              selectedLanguage,
+                              rate,
+                              (index) => setCurrentSentenceIndex(index),
+                              () => {
+                                setIsPlaying(false);
+                                setCurrentSentenceIndex(-1);
+                              }
+                            );
+                          }
+                        }}
+                        className="px-2 py-1 text-sm border rounded"
+                        data-testid="select-playback-rate-dialog"
+                      >
+                        <option value="0.5">0.5x</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1.0">1.0x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2.0">2.0x</option>
+                      </select>
                     )}
                   </div>
+                  {selectedGuide && (
+                    <Badge variant="outline" className="gap-1">
+                      <Headphones className="w-3 h-3" />
+                      {selectedLanguage === 'ko' ? '커스텀 가이드' : 'Custom Guide'}
+                    </Badge>
+                  )}
                 </div>
-              )}
+                {/* Sentence-by-sentence text with memory pen highlighting */}
+                <div className="text-sm leading-relaxed max-h-[200px] overflow-y-auto pr-2 custom-scrollbar" data-testid="audio-text-container">
+                  {activeSentences.length > 0 ? (
+                    activeSentences.map((sentence: string, index: number) => {
+                      const isCurrentSentence = currentSentenceIndex === index;
+                      const isReadSentence = currentSentenceIndex > index && isPlaying;
+
+                      return (
+                        <span
+                          key={index}
+                          className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${isCurrentSentence
+                            ? 'bg-yellow-300/50 font-medium shadow-sm dark:bg-yellow-400/40'
+                            : isReadSentence
+                              ? 'bg-green-300/30 dark:bg-green-400/20'
+                              : 'bg-transparent'
+                            }`}
+                          style={{
+                            boxDecorationBreak: 'clone',
+                            WebkitBoxDecorationBreak: 'clone'
+                          }}
+                          data-testid={`sentence-${index}`}
+                        >
+                          {sentence}{' '}
+                        </span>
+                      );
+                    })
+                  ) : (
+                    <span className="text-muted-foreground italic">
+                      {audioContentType === 'summary' ? '개요 데이터가 없습니다.' : '나레이션 데이터가 없습니다.'}
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
           </TabsContent>
 

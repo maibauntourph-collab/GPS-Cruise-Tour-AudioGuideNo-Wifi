@@ -3,7 +3,7 @@
 // 2. Drizzle (pgTable...): 실제 데이터베이스(PostgreSQL)의 '테이블 구조'를 정의합니다.
 // 이 둘을 하나로 합쳐서(createInsertSchema) 관리하면 코드 중복 없이 안전한 코딩이 가능해요!
 import { z } from "zod";
-import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, json, unique } from "drizzle-orm/pg-core";
+import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, json, unique, serial } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 
@@ -520,6 +520,21 @@ export const marketingContents = pgTable("marketing_contents", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
+/**
+ * [자동화 닥터의 기록부: 시스템 업데이트 통계]
+ * 교수님, 매일 시스템이 얼마나 성장하고 있는지 기록하는 테이블입니다.
+ * 로그인 시 유저에게 "오늘 X개의 지역이 추가되었습니다"와 같은 희망적인 소식을 전해줄 수 있습니다.
+ */
+export const updateStats = pgTable("update_stats", {
+  id: serial("id").primaryKey(),
+  date: varchar("date", { length: 20 }).notNull().unique(), // YYYY-MM-DD
+  totalCountries: integer("total_countries").notNull(),
+  totalRegions: integer("total_regions").notNull(),
+  newCountries: integer("new_countries").notNull().default(0),
+  newRegions: integer("new_regions").notNull().default(0),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 // Insert schemas
 export const insertCitySchema = createInsertSchema(cities).omit({
   createdAt: true,
@@ -583,6 +598,9 @@ export const insertTransactionSchema = createInsertSchema(transactions).omit({ i
 export const insertSettlementSchema = createInsertSchema(settlements).omit({ id: true, createdAt: true });
 export const insertMarketingContentSchema = createInsertSchema(marketingContents).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertLandmarkGuideSchema = createInsertSchema(landmarkGuides).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertUpdateStatsSchema = createInsertSchema(updateStats).omit({ id: true, createdAt: true });
+
+export type DbUpdateStats = typeof updateStats.$inferSelect;
 
 export type InsertLandmarkGuide = z.infer<typeof insertLandmarkGuideSchema>;
 

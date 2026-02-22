@@ -142,6 +142,31 @@ export function registerRoutes(app: Hono<any>) {
     }
   });
 
+  // [자동화 닥터: 업데이트 요약 API]
+  app.get("/api/updates/summary", async (c) => {
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      const [stats] = await db.select().from(dataVersions as any).limit(1); // Placeholder or use updateStats
+      // Real implementation using the new updateStats table
+      const result = await db.execute(sql`SELECT * FROM update_stats ORDER BY id DESC LIMIT 1`);
+      if (result.length === 0) {
+        return c.json({ hasUpdates: false });
+      }
+
+      const latest = result[0];
+      return c.json({
+        date: latest.date,
+        totalCountries: latest.total_countries,
+        totalRegions: latest.total_regions,
+        newCountries: latest.new_countries,
+        newRegions: latest.new_regions,
+        hasUpdates: latest.new_regions > 0 || latest.new_countries > 0
+      });
+    } catch (error) {
+      return c.json({ hasUpdates: false });
+    }
+  });
+
   app.get("/api/cities/:id", async (c) => {
     try {
       const city = await storage.getCity(c.req.param("id"));

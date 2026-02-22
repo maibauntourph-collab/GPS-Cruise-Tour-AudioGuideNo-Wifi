@@ -280,6 +280,24 @@ export default function Home() {
   // 🛰️ [Server Park] 이동 중 UI 최소화 상태
   const [showMinimalTransitUI, setShowMinimalTransitUI] = useState(true);
 
+  // [자동화 닥터] 업데이트 통계 상태
+  const [showUpdateStats, setShowUpdateStats] = useState(false);
+  const { data: updateStatsSummary } = useQuery({
+    queryKey: ['/api/updates/summary'],
+    staleTime: 1000 * 60 * 60 * 24, // 24 hours
+  });
+
+  // [자동화 닥터] 로그인/진입 시 업데이트 알림 트리거
+  useEffect(() => {
+    if (updateStatsSummary?.hasUpdates && isWelcomeHandled && !sessionStorage.getItem('update-stats-notified')) {
+      const timer = setTimeout(() => {
+        setShowUpdateStats(true);
+        sessionStorage.setItem('update-stats-notified', 'true');
+      }, 3000); // 3 seconds delay after welcome
+      return () => clearTimeout(timer);
+    }
+  }, [updateStatsSummary, isWelcomeHandled]);
+
   // 🛰️ [Server Park] 백그라운드 자동 가이드 팝업 트리거
   useEffect(() => {
     if (isBackgroundGuideEnabled === null && isWelcomeHandled) {
@@ -3445,6 +3463,74 @@ export default function Home() {
                 {selectedLanguage === 'ko' ? '怨듭쑀?섍린' : 'Share'}
               </Button>
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+      {/* [자동화 닥터] 일일 업데이트 브리핑 다이얼로그 */}
+      <Dialog open={showUpdateStats} onOpenChange={setShowUpdateStats}>
+        <DialogContent className="max-w-md bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-primary/20 shadow-2xl rounded-3xl overflow-hidden p-0">
+          <div className="relative p-6 pt-10 text-center space-y-4">
+            {/* Background Decoration */}
+            <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-primary/10 to-transparent -z-10" />
+
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-2 animate-bounce">
+              <TrendingUp className="w-8 h-8 text-primary" />
+            </div>
+
+            <DialogHeader className="space-y-2">
+              <DialogTitle className="text-2xl font-bold tracking-tight">
+                {selectedLanguage === 'ko' ? '오늘의 업데이트 소식' : "Today's Update News"}
+              </DialogTitle>
+              <DialogDescription className="text-slate-500 dark:text-slate-400">
+                {selectedLanguage === 'ko'
+                  ? '교수님! 밤사이 새로운 명소와 이야기가 추가되었습니다.'
+                  : 'New landmarks and stories have been added overnight.'}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="grid grid-cols-2 gap-4 py-4">
+              <Card className="p-4 bg-primary/5 border-none shadow-none text-center group hover:bg-primary/10 transition-colors">
+                <p className="text-xs font-semibold text-primary/60 uppercase tracking-widest mb-1">
+                  {selectedLanguage === 'ko' ? '총 국가' : 'Total Countries'}
+                </p>
+                <h4 className="text-3xl font-black text-primary">
+                  {updateStatsSummary?.totalCountries || '...'}
+                </h4>
+                {updateStatsSummary?.newCountries > 0 && (
+                  <Badge className="mt-2 bg-green-500 hover:bg-green-600 border-none">
+                    +{updateStatsSummary.newCountries}
+                  </Badge>
+                )}
+              </Card>
+              <Card className="p-4 bg-secondary/10 border-none shadow-none text-center group hover:bg-secondary/20 transition-colors">
+                <p className="text-xs font-semibold text-secondary/60 uppercase tracking-widest mb-1">
+                  {selectedLanguage === 'ko' ? '총 지역' : 'Total Regions'}
+                </p>
+                <h4 className="text-3xl font-black text-secondary">
+                  {updateStatsSummary?.totalRegions || '...'}
+                </h4>
+                {updateStatsSummary?.newRegions > 0 && (
+                  <Badge className="mt-2 bg-amber-500 hover:bg-amber-600 border-none animate-pulse">
+                    +{updateStatsSummary.newRegions}
+                  </Badge>
+                )}
+              </Card>
+            </div>
+
+            <p className="text-sm font-medium text-slate-600 dark:text-slate-300 italic">
+              {selectedLanguage === 'ko'
+                ? '“지루한 일상에 여행의 설렘을 더해드립니다.”'
+                : '"Adding the excitement of travel to boring daily life."'}
+            </p>
+
+            <DialogFooter>
+              <Button
+                onClick={() => setShowUpdateStats(false)}
+                className="w-full h-12 rounded-2xl bg-primary hover:bg-primary/90 text-white font-bold text-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95"
+              >
+                {selectedLanguage === 'ko' ? '지금 확인하러 가기' : 'Check Now'}
+              </Button>
+            </DialogFooter>
           </div>
         </DialogContent>
       </Dialog>
