@@ -9,7 +9,7 @@ import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
-import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
 import { useQuery } from '@tanstack/react-query';
 import { User, DbLandmarkGuide } from '@shared/schema';
 import { Users, Headphones, Check } from 'lucide-react';
@@ -215,19 +215,33 @@ export default function LandmarkDetailDialog({
           <DialogDescription className="sr-only">
             Detailed information about this landmark including photos, history, and navigation options
           </DialogDescription>
-          <div>
-            <DialogTitle className="text-xl mb-1" data-testid="text-landmark-detail-name">
-              {getTranslatedContent(landmark, selectedLanguage, 'name')}
-            </DialogTitle>
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant={landmark.category === 'Activity' ? 'default' : 'secondary'} className="text-xs">
-                {landmark.category === 'Activity' ? <ActivityIcon className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
-                {landmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
-              </Badge>
-              {landmark.category && landmark.category !== 'Activity' && (
-                <Badge variant="outline" className="text-xs">{landmark.category}</Badge>
-              )}
+          <div className="flex items-center justify-between gap-4 mr-8">
+            <div className="flex-1">
+              <DialogTitle className="text-xl mb-1" data-testid="text-landmark-detail-name">
+                {getTranslatedContent(landmark, selectedLanguage, 'name')}
+              </DialogTitle>
+              <div className="flex items-center gap-2 flex-wrap">
+                <Badge variant={landmark.category === 'Activity' ? 'default' : 'secondary'} className="text-xs">
+                  {landmark.category === 'Activity' ? <ActivityIcon className="w-3 h-3 mr-1" /> : <LandmarkIcon className="w-3 h-3 mr-1" />}
+                  {landmark.category === 'Activity' ? t('activity', selectedLanguage) : t('landmark', selectedLanguage)}
+                </Badge>
+                {landmark.category && landmark.category !== 'Activity' && (
+                  <Badge variant="outline" className="text-xs">{landmark.category}</Badge>
+                )}
+              </div>
             </div>
+
+            {/* [Designer Kim] 노란색 영역에 추가된 '지도로 가기' 버튼 */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDialogClose}
+              className="bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100 flex-shrink-0 gap-1.5 h-9"
+              data-testid="button-go-to-map"
+            >
+              <MapPinned className="w-4 h-4" />
+              <span className="font-medium">{selectedLanguage === 'ko' ? '지도로 가기' : 'Go to Map'}</span>
+            </Button>
           </div>
         </DialogHeader>
 
@@ -616,16 +630,19 @@ export default function LandmarkDetailDialog({
                             </thead>
                             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                               {[
-                                { name: 'Klook (클룩)', url: getKlookUrl(getTranslatedContent(landmark, 'ko', 'name'), 'ko'), color: 'text-orange-500', price: '실시간 확인' },
-                                { name: '마이리얼트립', url: getMyRealTripUrl(getTranslatedContent(landmark, 'ko', 'name')), color: 'text-blue-500', price: '특가 제공' },
-                                { name: 'Trip.com', url: getTripUrl(getTranslatedContent(landmark, 'ko', 'name')), color: 'text-blue-700', price: '포인트 적립' },
-                                { name: 'GetYourGuide', url: getGYGUrl(getTranslatedContent(landmark, 'ko', 'name'), 'ko'), color: 'text-red-500', price: '글로벌 1위' },
+                                { name: '마이리얼트립', url: getMyRealTripUrl(getTranslatedContent(landmark, 'ko', 'name')), color: 'text-blue-500', price: '특가 제공', status: '인기' },
+                                { name: '구글 맵 예약', url: getGoogleMapsUrl(getTranslatedContent(landmark, 'ko', 'name')), color: 'text-green-600', price: '최저가 확인', status: '추천' },
+                                { name: 'Klook (클룩)', url: getKlookUrl(getTranslatedContent(landmark, 'ko', 'name'), 'ko'), color: 'text-orange-500', price: '실시간 확인', status: '판매중' },
+                                { name: 'Trip.com', url: getTripUrl(getTranslatedContent(landmark, 'ko', 'name')), color: 'text-blue-700', price: '포인트 적립', status: '판매중' },
+                                { name: 'GetYourGuide', url: getGYGUrl(getTranslatedContent(landmark, 'ko', 'name'), 'ko'), color: 'text-red-500', price: '글로벌 1위', status: '판매중' },
                               ].map((platform) => (
                                 <tr key={platform.name} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
                                   <td className="px-4 py-3 font-semibold">{platform.name}</td>
                                   <td className="px-4 py-3 text-right text-slate-600 dark:text-slate-400">{platform.price}</td>
                                   <td className="px-4 py-3 text-right">
-                                    <Badge variant="outline" className="text-[10px] h-5 py-0 px-1.5 border-green-200 text-green-600 bg-green-50">판매중</Badge>
+                                    <Badge variant="outline" className={`text-[10px] h-5 py-0 px-1.5 border-green-200 ${platform.status === '인기' ? 'bg-blue-50 text-blue-600' : 'bg-green-50 text-green-600'}`}>
+                                      {platform.status}
+                                    </Badge>
                                   </td>
                                   <td className="px-4 py-3 text-center">
                                     <Button

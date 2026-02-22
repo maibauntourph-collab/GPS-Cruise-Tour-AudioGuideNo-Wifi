@@ -132,6 +132,13 @@ export const getWikiUrl = (query: string, lang: string = 'ko') => {
 };
 
 /**
+ * Generates a Google Maps link for a landmark
+ */
+export const getGoogleMapsUrl = (query: string) => {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+};
+
+/**
  * Generates a MyRealTrip search link (Korea specific)
  */
 export const getMyRealTripUrl = (query: string) => {

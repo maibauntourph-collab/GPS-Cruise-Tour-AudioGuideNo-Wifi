@@ -28,7 +28,7 @@ export class AudioService {
   private isUnlocked: boolean = false;
   private isPausedInternal: boolean = false;
   private voiceCache: Map<string, SpeechSynthesisVoice> = new Map();
-  private warnedLanguages: Set<string> = new Set();
+  private static warnedOnce: Set<string> = new Set();
 
   // MP3 Audio properties
   private audioElement: HTMLAudioElement | null = null;
@@ -132,7 +132,7 @@ export class AudioService {
   setClovaVoiceForLanguage(language: string, voiceId: string) {
     this.selectedClovaVoicesByLanguage.set(language, voiceId);
     this.saveSelectedClovaVoices();
-    console.log(`[AudioService] Saved CLOVA voice for ${language}: ${voiceId}`);
+    this.debugLogOnce(`clova-set-${language}`, `[AudioService] Saved CLOVA voice for ${language}: ${voiceId}`);
   }
 
   // Get all available voices
@@ -162,7 +162,7 @@ export class AudioService {
   setVoiceForLanguage(language: string, voiceName: string) {
     this.selectedVoicesByLanguage.set(language, voiceName);
     this.saveSelectedVoices();
-    console.log(`[AudioService] Set voice for ${language}: ${voiceName}`);
+    this.debugLogOnce(`voice-set-${language}`, `[AudioService] Set voice for ${language}: ${voiceName}`);
   }
 
   // Get selected voice name for a language
@@ -253,19 +253,12 @@ export class AudioService {
     if (matchingVoices.length === 0) {
       // Avoid infinite recursion if English is also missing
       if (langCode === 'en-US') {
-        if (!this.warnedLanguages.has('en-US')) {
-          console.error('[AudioService] Critical: No voices available, even for English.');
-          this.warnedLanguages.add('en-US');
-        }
+        this.debugWarnOnce('en-uss-missing', '[AudioService] Critical: No voices available, even for English.');
         return this.voices[0] || null;
       }
 
-      // LAST RESORT FALLBACK: If no matching voice for target language,
-      // return the best English voice instead of null (better than silence)
-      if (!this.warnedLanguages.has(langCode)) {
-        console.warn(`[AudioService] No voices found for ${langCode}, falling back to English`);
-        this.warnedLanguages.add(langCode);
-      }
+      // LAST RESORT FALLBACK
+      this.debugWarnOnce(`missing-${langCode}`, `[AudioService] No voices found for ${langCode}, falling back to English`);
       return this.getVoiceForLanguage('en-US');
     }
 
@@ -325,10 +318,7 @@ export class AudioService {
     scoredVoices.sort((a, b) => b.score - a.score);
 
     // Log the selected voice for debugging (only once per language)
-    if (!this.warnedLanguages.has(langCode)) {
-      console.log(`[AudioService] Selected voice for ${langCode}:`, scoredVoices[0].voice.name, `(score: ${scoredVoices[0].score})`);
-      this.warnedLanguages.add(langCode);
-    }
+    this.debugLogOnce(`selected-${langCode}`, `[AudioService] Selected voice for ${langCode}: ${scoredVoices[0].voice.name} (score: ${scoredVoices[0].score})`);
 
     // Update cache
     this.voiceCache.set(langCode, scoredVoices[0].voice);
@@ -384,7 +374,7 @@ export class AudioService {
 
     // Check if native voice exists, if not, warn or suggest fallback
     if (!this.hasNativeVoice(language)) {
-      console.warn(`[AudioService] Native voice missing for ${language}. Guidance may be suboptimal.`);
+      this.debugWarnOnce(`native-missing-${language}`, `[AudioService] Native voice missing for ${language}. Guidance may be suboptimal.`);
     }
 
     this.playbackTimer = setTimeout(() => {
@@ -1427,6 +1417,22 @@ export class AudioService {
     this.stopMP3();
     this.stopClovaSentences();
     this.stop();
+  }
+
+  // Helper for single-emission warnings
+  private debugWarnOnce(key: string, message: string) {
+    if (!AudioService.warnedOnce.has(key)) {
+      console.warn(message);
+      AudioService.warnedOnce.add(key);
+    }
+  }
+
+  // Helper for single-emission logs
+  private debugLogOnce(key: string, message: string) {
+    if (!AudioService.warnedOnce.has(key)) {
+      console.log(message);
+      AudioService.warnedOnce.add(key);
+    }
   }
 }
 
