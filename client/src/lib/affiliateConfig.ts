@@ -159,3 +159,11 @@ export const getTheForkUrl = (query: string, lang: string = 'en') => {
     const forkLang = lang === 'fr' ? 'fr' : lang === 'es' ? 'es' : lang === 'it' ? 'it' : 'en';
     return `https://www.thefork.com/search?text=${encodeURIComponent(query)}&language=${forkLang}`;
 };
+
+/**
+ * [강의 노트] 에어비앤비 제휴 링크 생성 함수
+ * 학생 여러분, 특정 플랫폼의 검색 결과 페이지로 이동시키는 URL을 동적으로 생성합니다.
+ */
+export const getAirbnbUrl = (locationName: string) => {
+    return `https://www.airbnb.com/s/${encodeURIComponent(locationName)}/homes`;
+};
