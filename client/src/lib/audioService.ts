@@ -61,15 +61,36 @@ export class AudioService {
     this.loadSelectedVoices();
     this.loadSelectedClovaVoices();
 
-    // Load voices when available
-    this.loadVoices();
+    // [Bug Doctor] 음성 목록 로딩 — 브라우저마다 getVoices() 반환 시점이 다름
+    // Chrome은 비동기, Firefox/Safari는 동기적으로 반환하는 경우가 많습니다.
+    this.loadVoicesWithRetry();
     if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = () => this.loadVoices();
+      speechSynthesis.onvoiceschanged = () => {
+        this.voices = this.synthesis.getVoices();
+        this.voiceCache.clear(); // 음성 목록이 변경되면 캐시도 초기화
+      };
     }
   }
 
-  private loadVoices() {
+  /**
+   * [학습 포인트] 음성 목록 재시도 로딩
+   * 
+   * 문제: 모바일 Chrome 등의 브라우저에서 speechSynthesis.getVoices()가
+   *       초기 로딩 시 빈 배열을 반환하여 "No voices found for ko-KR" 경고 발생.
+   * 
+   * 해결: 최대 5회까지 200ms 간격으로 재시도하여 음성 목록을 안정적으로 가져옵니다.
+   * onvoiceschanged 이벤트가 발생하면 즉시 반영되지만, 해당 이벤트가
+   * 지원되지 않는 환경을 위한 폴백 전략입니다.
+   */
+  private loadVoicesWithRetry(attempt: number = 0, maxAttempts: number = 5) {
     this.voices = this.synthesis.getVoices();
+
+    if (this.voices.length === 0 && attempt < maxAttempts) {
+      // 음성 목록이 아직 준비되지 않았으면 200ms 후 재시도
+      setTimeout(() => this.loadVoicesWithRetry(attempt + 1, maxAttempts), 200);
+    } else if (this.voices.length > 0) {
+      console.log(`[AudioService] ✅ ${this.voices.length}개 음성 로딩 완료 (시도 ${attempt + 1}회)`);
+    }
   }
 
   private loadSelectedVoices() {
@@ -544,6 +565,10 @@ export class AudioService {
       if (this.synthesis.speaking) {
         this.synthesis.cancel();
       }
+
+      // 5. [Bug Doctor] unlockAudio 시점에 음성 목록 재로딩
+      // 사용자 제스처 이후에 음성 목록이 갱신되는 브라우저 대응
+      this.loadVoicesWithRetry();
     } catch (e) {
       console.error('[AudioService] ❌ [Bug Doctor] 오디오 엔진 통합 잠금 해제 실패:', e);
     }

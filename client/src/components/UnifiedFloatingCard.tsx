@@ -838,19 +838,7 @@ export default function UnifiedFloatingCard({
             {selectedLanguage === 'ko' ? '주변' : 'Nearby'}
           </Button>
 
-          <Button
-            variant={activeTab === 'gallery' ? 'default' : 'ghost'}
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveTab('gallery');
-            }}
-            className="flex-shrink-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 hover:from-indigo-500/20 hover:to-purple-500/20"
-            data-testid="button-tab-gallery"
-          >
-            <Camera className="w-4 h-4 mr-1.5 text-indigo-500" />
-            {selectedLanguage === 'ko' ? '갤러리' : 'Gallery'}
-          </Button>
+          {/* [적요] 갤러리 탭은 MyPic(LandmarkDetailDialog)으로 이동됨 — 라우터 맵에서 제거 */}
         </div>
 
         <div className="flex items-center gap-1 pl-2 border-l">
@@ -978,16 +966,16 @@ export default function UnifiedFloatingCard({
                         </Button>
                       </div>
 
-                      {/* PhotoGallery removed from landmark details to be placed in its own tab */}
+                      {/* [적요] '사진 보기' → MyPic(LandmarkDetailDialog)에서 보도록 변경 */}
                       <div className="py-2">
                         <Button
                           variant="secondary"
                           size="sm"
                           className="w-full gap-2 text-xs"
-                          onClick={() => setActiveTab('gallery')}
+                          onClick={() => setShowDetailDialog(true)}
                         >
                           <ImageIcon className="w-3.5 h-3.5" />
-                          {selectedLanguage === 'ko' ? '이 명소의 사진 모두 보기' : 'View all photos of this landmark'}
+                          {selectedLanguage === 'ko' ? 'MyPic에서 사진 보기' : 'View photos in MyPic'}
                         </Button>
                       </div>
 
@@ -1728,74 +1716,7 @@ export default function UnifiedFloatingCard({
                 )}
               </TabsContent>
 
-              {/* Gallery Tab - Dedicated frame for photos */}
-              <TabsContent value="gallery" className="mt-4 flex flex-col flex-1 overflow-hidden">
-                <div className="flex items-center justify-between mb-4">
-                  <h5 className="font-bold flex items-center gap-2">
-                    <Camera className="w-5 h-5 text-indigo-600" />
-                    {selectedLanguage === 'ko' ? '여행의 기록' : 'Tour Gallery'}
-                  </h5>
 
-                  {/* [Server Park] Sync Button Placeholder */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8 gap-1.5 border-indigo-200 text-indigo-700 hover:bg-indigo-50"
-                  >
-                    <Globe className="w-3.5 h-3.5" />
-                    {selectedLanguage === 'ko' ? '동기화 설정' : 'Sync Settings'}
-                  </Button>
-                </div>
-
-                {/* Cloud Sync Promo Card */}
-                <div className="mb-4 p-3 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/20 dark:to-purple-950/20 rounded-xl border border-indigo-100 dark:border-indigo-900 shadow-sm">
-                  <div className="flex gap-3">
-                    <div className="p-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm h-fit">
-                      <ImageIcon className="w-5 h-5 text-indigo-500" />
-                    </div>
-                    <div>
-                      <h6 className="text-[13px] font-bold text-indigo-900 dark:text-indigo-100">
-                        {selectedLanguage === 'ko' ? '매직 포토 동기화 추천' : 'Magic Photo Sync'}
-                      </h6>
-                      <p className="text-[11px] text-indigo-700 dark:text-indigo-300 mb-2">
-                        {selectedLanguage === 'ko'
-                          ? '구글 포토와 연동하여 투어 중 찍은 사진을 자동으로 매칭해보세요.'
-                          : 'Auto-match your tour photos by syncing with Google Photos.'}
-                      </p>
-                      <Badge className="bg-indigo-500 text-white border-none text-[9px] h-4">
-                        Hono + Cloudflare Workers 기반추천
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex-1 overflow-y-auto">
-                  {selectedLandmark ? (
-                    <div className="space-y-4">
-                      <h6 className="text-sm font-semibold opacity-70">
-                        {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                      </h6>
-                      {selectedLandmark.photos && selectedLandmark.photos.length > 0 ? (
-                        <PhotoGallery
-                          photos={selectedLandmark.photos}
-                          title={getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
-                        />
-                      ) : (
-                        <div className="text-center py-10 text-muted-foreground italic text-sm">
-                          {selectedLanguage === 'ko' ? '이 명소에 등록된 사진이 없습니다.' : 'No photos for this landmark.'}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center h-full py-10 opacity-50 grayscale">
-                      <ImageIcon className="w-12 h-12 mb-3" />
-                      <p className="text-sm">
-                        {selectedLanguage === 'ko' ? '명소를 선택하여 갤러리를 확인하세요' : 'Select a landmark to view its gallery'}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </TabsContent>
 
               {/* Landmark List Tab */}
               <TabsContent value="list" className="mt-4 flex flex-col flex-1">
@@ -2641,6 +2562,6 @@ export default function UnifiedFloatingCard({
         isInTour={isInTour}
         selectedLanguage={selectedLanguage}
       />
-    </div>
+    </div >
   );
 }
