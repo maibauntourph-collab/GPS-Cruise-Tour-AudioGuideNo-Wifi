@@ -262,7 +262,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     pause: '일시정지',
     resume: '재개',
     speed: '속도',
-    detailedInformation: '상세 정보',
+    detailedInformation: 'MyPic',
     close: '닫기',
     navigate: '길찾기',
     photos: '사진',
@@ -290,7 +290,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     location: '위치',
     clickToViewOnMap: '클릭하여 메인 지도에서 보기',
     bookTickets: '티켓 및 투어 예약',
-    bookOn: '예약하기',
+    bookOn: '예약',
     cruisePortInfo: '크루즈 항구 정보',
     shoreExcursions: '기항지 관광',
     portName: '항구 이름',
@@ -367,7 +367,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     rideshareSection: '라이드셰어',
     shuttleSection: '셔틀 서비스',
     noBookingInfo: '이 명소는 예약 옵션이 없습니다',
-    details: '상세 정보',
+    details: 'MyPic',
     previous: '이전',
     next: '다음',
     noLandmarksFound: '현재 필터로 찾은 명소가 없습니다',
@@ -476,7 +476,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     downloadError: '다운로드 오류',
     nativeVoiceMissing: '현재 기기에 {lang} 음성이 설치되어 있지 않습니다.',
     suggestHighQualityVoice: '더 자연스러운 안내를 위해 고품질(Clova) 모드로 전환하시겠습니까?',
-    booking: '예약하기'
+    booking: '예약'
   },
   es: {
     landmarks: 'Monumentos',

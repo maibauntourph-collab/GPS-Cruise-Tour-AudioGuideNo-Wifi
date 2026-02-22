@@ -90,7 +90,7 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
             className="relative aspect-square overflow-hidden rounded-xl border border-white/20 shadow-sm transition-shadow hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
             data-testid={`button-photo-${index}`}
           >
-            {errorIndices.has(index) ? (
+            {errorIndices.has(index) || (photo && photo.includes('placeholder.png')) ? (
               <ImageFallback className="h-full w-full" />
             ) : (
               <div className="h-full w-full bg-muted/30 animate-pulse-subtle">

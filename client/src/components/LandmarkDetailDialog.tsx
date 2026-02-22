@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award } from 'lucide-react';
+import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award } from 'lucide-react';
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
@@ -34,6 +34,7 @@ export default function LandmarkDetailDialog({
   selectedLanguage = 'en'
 }: LandmarkDetailDialogProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
   const [selectedGuideId, setSelectedGuideId] = useState<string | null>(null);
@@ -80,6 +81,7 @@ export default function LandmarkDetailDialog({
     if (!isOpen) {
       setCurrentSentenceIndex(-1);
       setIsPlaying(false);
+      setIsPaused(false);
       // Stop all types of audio
       audioService.stopSentences();
       audioService.stop();
@@ -100,11 +102,12 @@ export default function LandmarkDetailDialog({
 
   // Stop audio when changing content type to allow restarting with new content
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying || isPaused) {
       audioService.stopSentences();
       audioService.stop();
       audioService.stopMP3();
       setIsPlaying(false);
+      setIsPaused(false);
       setCurrentSentenceIndex(-1);
       // Restart with new content
       setTimeout(() => handlePlayAudio(), 100);
@@ -115,6 +118,7 @@ export default function LandmarkDetailDialog({
   const handleDialogClose = () => {
     setCurrentSentenceIndex(-1);
     setIsPlaying(false);
+    setIsPaused(false);
     audioService.stopSentences();
     audioService.stop();
     audioService.stopMP3();
@@ -157,72 +161,44 @@ export default function LandmarkDetailDialog({
 
 
   const handlePlayAudio = async () => {
-    // Select content based on toggle
+    // If playing and not paused, then pause
+    if (isPlaying && !isPaused) {
+      audioService.pause();
+      setIsPaused(true);
+      return;
+    }
+
+    // If already paused, then resume
+    if (isPlaying && isPaused) {
+      audioService.resume();
+      setIsPaused(false);
+      return;
+    }
+
+    // Otherwise, start fresh
     const textToPlay = audioContentType === 'summary'
       ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : getTranslatedContent(landmark, selectedLanguage, 'description'))
       : currentDetailedDescription;
 
     if (!textToPlay) return;
 
-    if (isPlaying) {
-      audioService.stopSentences();
-      audioService.stop();
-      audioService.stopMP3();
-      setIsPlaying(false);
-      setCurrentSentenceIndex(-1);
-    } else {
-      const audioMode = audioService.getAudioMode();
+    const audioMode = audioService.getAudioMode();
 
-      if (audioMode === 'clova') {
-        setIsPlaying(true);
-        const success = await audioService.playClovaSentences(
-          textToPlay,
-          selectedLanguage,
-          (index) => setCurrentSentenceIndex(index),
-          () => {
-            setIsPlaying(false);
-            setCurrentSentenceIndex(-1);
-          }
-        );
-        if (!success) {
-          // Fallback to system TTS if CLOVA fails
-          audioService.playSentences(
-            textToPlay,
-            selectedLanguage,
-            playbackRate,
-            (index) => setCurrentSentenceIndex(index),
-            () => {
-              setIsPlaying(false);
-              setCurrentSentenceIndex(-1);
-            }
-          );
+    if (audioMode === 'clova') {
+      setIsPlaying(true);
+      setIsPaused(false);
+      const success = await audioService.playClovaSentences(
+        textToPlay,
+        selectedLanguage,
+        (index) => setCurrentSentenceIndex(index),
+        () => {
+          setIsPlaying(false);
+          setIsPaused(false);
+          setCurrentSentenceIndex(-1);
         }
-      } else if (audioMode === 'openai') {
-        setIsPlaying(true);
-        const success = await audioService.playOpenAISentences(
-          textToPlay,
-          selectedLanguage,
-          (index) => setCurrentSentenceIndex(index),
-          () => {
-            setIsPlaying(false);
-            setCurrentSentenceIndex(-1);
-          }
-        );
-        if (!success) {
-          // Fallback to system TTS if OpenAI fails
-          audioService.playSentences(
-            textToPlay,
-            selectedLanguage,
-            playbackRate,
-            (index) => setCurrentSentenceIndex(index),
-            () => {
-              setIsPlaying(false);
-              setCurrentSentenceIndex(-1);
-            }
-          );
-        }
-      } else {
-        // Use sentence-by-sentence playback with highlighting for TTS/Auto/MP3 modes
+      );
+      if (!success) {
+        // Fallback to system TTS if CLOVA fails
         audioService.playSentences(
           textToPlay,
           selectedLanguage,
@@ -230,11 +206,65 @@ export default function LandmarkDetailDialog({
           (index) => setCurrentSentenceIndex(index),
           () => {
             setIsPlaying(false);
+            setIsPaused(false);
             setCurrentSentenceIndex(-1);
           }
         );
       }
+    } else if (audioMode === 'openai') {
+      setIsPlaying(true);
+      setIsPaused(false);
+      const success = await audioService.playOpenAISentences(
+        textToPlay,
+        selectedLanguage,
+        (index) => setCurrentSentenceIndex(index),
+        () => {
+          setIsPlaying(false);
+          setIsPaused(false);
+          setCurrentSentenceIndex(-1);
+        }
+      );
+      if (!success) {
+        // Fallback to system TTS if OpenAI fails
+        audioService.playSentences(
+          textToPlay,
+          selectedLanguage,
+          playbackRate,
+          (index) => setCurrentSentenceIndex(index),
+          () => {
+            setIsPlaying(false);
+            setIsPaused(false);
+            setCurrentSentenceIndex(-1);
+          }
+        );
+      }
+    } else {
+      // Use sentence-by-sentence playback with highlighting for TTS/Auto/MP3 modes
+      setIsPlaying(true);
+      setIsPaused(false);
+      audioService.playSentences(
+        textToPlay,
+        selectedLanguage,
+        playbackRate,
+        (index) => setCurrentSentenceIndex(index),
+        () => {
+          setIsPlaying(false);
+          setIsPaused(false);
+          setCurrentSentenceIndex(-1);
+        }
+      );
     }
+  };
+
+  const handleRestartAudio = () => {
+    audioService.stopSentences();
+    audioService.stop();
+    audioService.stopMP3();
+    setIsPlaying(false);
+    setIsPaused(false);
+    setCurrentSentenceIndex(-1);
+    // Use setTimeout to ensure state is processed before restarting
+    setTimeout(() => handlePlayAudio(), 100);
   };
 
   // Sentences for current playing content
@@ -423,16 +453,31 @@ export default function LandmarkDetailDialog({
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <Button
-                      variant="default"
-                      size="sm"
-                      onClick={handlePlayAudio}
-                      className={`gap-2 ${isPlaying ? 'bg-red-500 hover:bg-red-600' : 'bg-primary hover:bg-primary/90'}`}
-                      data-testid="button-play-audio-dialog"
-                    >
-                      {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                      {isPlaying ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
-                    </Button>
+                    <div className="flex items-center gap-1.5 bg-muted/30 p-1 rounded-xl">
+                      <Button
+                        variant="default"
+                        size="sm"
+                        onClick={handlePlayAudio}
+                        className={`gap-2 h-9 px-4 rounded-lg transition-all shadow-sm ${isPlaying && !isPaused ? 'bg-orange-500 hover:bg-orange-600' : 'bg-primary hover:bg-primary/90'}`}
+                        data-testid="button-play-audio-dialog"
+                      >
+                        {isPlaying && !isPaused ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                        {isPlaying && !isPaused
+                          ? t('pause', selectedLanguage)
+                          : (isPlaying && isPaused ? (selectedLanguage === 'ko' ? '재개' : 'Resume') : t('playAudio', selectedLanguage))}
+                      </Button>
+
+                      <Button
+                        variant="secondary"
+                        size="icon"
+                        onClick={handleRestartAudio}
+                        className="h-9 w-9 bg-white/50 backdrop-blur-sm border-white/50 hover:bg-white/80"
+                        title={selectedLanguage === 'ko' ? '처음부터 재생' : 'Restart from beginning'}
+                        data-testid="button-restart-audio"
+                      >
+                        <RotateCcw className="w-4 h-4" />
+                      </Button>
+                    </div>
 
                     <div className="flex items-center gap-1 border-l pl-2 ml-1">
                       <Button
