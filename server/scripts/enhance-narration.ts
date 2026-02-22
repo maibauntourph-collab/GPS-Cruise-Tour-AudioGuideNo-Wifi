@@ -17,10 +17,11 @@ const genAI = new GoogleGenAI({ apiKey });
 async function enhanceNarration() {
     console.log("🎤 Story Teller Lee is entering the stage... (Gemini Edition / 한국어 모드)");
 
-    // 1. Find landmarks with short narration (< 300 chars) OR missing detailed description
+    // 1. Find landmarks that do not meet Gravity V3 Premium standards (MD500+ narration, MD400+ detailedDescription)
     const targets = await db.select().from(landmarksTable).where(
         or(
-            sql`length(${landmarksTable.narration}) < 300`,
+            sql`length(${landmarksTable.narration}) < 500`,
+            sql`length(${landmarksTable.detailedDescription}) < 400`,
             sql`${landmarksTable.detailedDescription} IS NULL`
         )
     );
@@ -34,27 +35,33 @@ async function enhanceNarration() {
             const systemPrompt = `당신은 세계 최고의 오디오 가이드 크리에이터 **'스토리텔러 이(Story Teller Lee)'**입니다.
                         
             [당신의 미션]
-            1. 딱딱하고 지루한 여행지 정보를 찾아서 **5분 분량의 재미있고 몰입감 넘치는 오디오 가이드 대본**으로 재탄생시키세요.
-            2. **스타일**: 
-                - 유머러스하고 재치 있는 입담 (아재 개그 금지, 세련된 위트 사용).
+            1. 딱딱하고 지루한 여행지 정보를 찾아서 **최고급 프리미엄(Gravity V3 Premium)** 오디오 가이드와 상세 설명으로 재탄생시키세요.
+            2. **나레이션 (narration)**: 
+                - **최소 500자 이상**의 풍부한 분량.
+                - 현장의 공기, 냄새, 소리, 전설을 담은 영화 같은 대본.
                 - "상상해보세요", "지금 여러분의 발 아래에는..." 처럼 청취자를 현장으로 끌어들이는 몰입형 화법.
-                - 친구에게 이야기하듯 친근한 반존대나 해요체 사용 (상황에 맞춰 자연스럽게).
-            3. **구성**:
-                - **도입부(Hook)**: 듣자마자 귀를 사로잡는 강력한 첫 문장.
-                - **본문(Body)**: 역사적 사실을 흥미진진한 스토리로 각색. ("알고 계셨나요?" 같은 트리비아 적극 활용)
-                - **결론(Conclusion)**: 여운이 남는 마무리 멘트.
-            4. **언어**: 한국어 (Korean)
+                - 친구에게 이야기하듯 친근한 '해요체' 사용.
+            3. **상세 설명 (detailedDescription)**:
+                - **최소 400자 이상**.
+                - 역사적 팩트에 '현지인만 아는 꿀팁'이나 '숨겨진 비화'를 버무린 매혹적인 텍스트.
+            4. **이미지 프롬프트 (imagePrompt)**:
+                - **Nanobanana 스타일** 반영: "Hyper-realistic, 8k, cinematic lighting, wide-angle, vibrant colors".
+                - 해당 장소의 가장 아름다운 순간을 묘사하는 정밀한 영문 프롬프트 생성.
+            5. **언어**: 모든 텍스트 설명은 한국어로 작성하되, 'imagePrompt'만 영어로 작성하세요.
             
             [출력 형식]
             반드시 다음 JSON 형식으로만 응답하세요 (Markdown 포맷 없이 JSON 객체만):
             {
-                "narration": "300~500자 내외의 핵심 요약 (앱 목록 표시용)",
-                "detailedDescription": "약 5분 분량의 전체 오디오 가이드 대본 (1500~2000자)"
+                "narration": "500자 이상의 프리미엄 나레이션 대본",
+                "detailedDescription": "400자 이상의 심도 있는 상세 설명",
+                "imagePrompt": "Nanobanana style English image prompt"
             }`;
 
-            const userPrompt = `다음 장소의 정보를 스토리텔러 이의 스타일로 고도화해주세요:
+            const userPrompt = `다음 장소의 정보를 Gravity V3 Premium 등급으로 고도화해주세요:
                         
             이름: ${landmark.name}
+            도시: ${landmark.cityId}
+            카테고리: ${landmark.category}
             기존 정보: ${landmark.narration || landmark.description || "정보 없음"}`;
 
             const response = await genAI.models.generateContent({
@@ -86,8 +93,10 @@ async function enhanceNarration() {
                     })
                     .where(eq(landmarksTable.id, landmark.id));
 
-                console.log(`✅ Enhanced (Gemini): ${landmark.name}`);
-                console.log(`   - Narration Summary: ${content.narration.substring(0, 50)}...`);
+                console.log(`✅ Enhanced (V3 Premium): ${landmark.name}`);
+                console.log(`   - Narration length: ${content.narration.length} chars`);
+                console.log(`   - Description length: ${content.detailedDescription.length} chars`);
+                console.log(`   - Image Prompt: ${content.imagePrompt?.substring(0, 30)}...`);
             } else {
                 console.warn(`⚠️ Failed to generate valid content for ${landmark.name}`);
             }
@@ -97,7 +106,7 @@ async function enhanceNarration() {
         }
 
         // Rate limit protection
-        await new Promise(resolve => setTimeout(resolve, 2000)); // Slower for free tier
+        await new Promise(resolve => setTimeout(resolve, 3000)); // Be gentle with Gemini API (3s for free tier)
     }
 
     console.log("\n✨ Enhancement Complete! Story Teller Lee is signing off.");
