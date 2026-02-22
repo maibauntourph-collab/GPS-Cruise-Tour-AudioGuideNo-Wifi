@@ -26,7 +26,6 @@ import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import LoginDialog from '@/components/LoginDialog';
 import SaveRouteDialog from '@/components/SaveRouteDialog';
 import CreatorDashboard from '@/components/CreatorDashboard';
-import BadgePopup from '@/components/BadgePopup';
 import { parseQRData } from '@/lib/qrUtils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 

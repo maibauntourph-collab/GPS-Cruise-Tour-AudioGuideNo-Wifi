@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home } from 'lucide-react';
+import { Navigation, MapPinned, MapPin, Play, Pause, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award } from 'lucide-react';
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
@@ -154,7 +154,7 @@ export default function LandmarkDetailDialog({
     }
   };
 
-  if (!landmark) return null;
+
 
   const handlePlayAudio = async () => {
     // Select content based on toggle
@@ -233,7 +233,6 @@ export default function LandmarkDetailDialog({
             setCurrentSentenceIndex(-1);
           }
         );
-        setIsPlaying(true);
       }
     }
   };
@@ -246,6 +245,8 @@ export default function LandmarkDetailDialog({
     if (!text) return [];
     return AudioService.splitIntoSentences(text);
   }, [landmark, selectedGuide, selectedLanguage, audioContentType, currentDetailedDescription]);
+
+  if (!landmark) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogClose}>
