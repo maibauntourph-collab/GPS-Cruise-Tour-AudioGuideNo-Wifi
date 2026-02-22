@@ -323,6 +323,14 @@ export default function UnifiedFloatingCard({
     };
   }, []);
 
+  // [Bug Doctor] 언어 변경 시 모든 페이지네이션 및 검색 상태를 초기화하여 정합성 유지
+  useEffect(() => {
+    setCurrentPage(1);
+    setTransportPage(1);
+    setTourPage(1);
+    setLandmarkSearchQuery('');
+  }, [selectedLanguage]);
+
   const { data: regionalGuides = [] } = useQuery<User[]>({
     queryKey: ['/api/users', 'creators'],
     queryFn: async () => {
@@ -2089,7 +2097,7 @@ export default function UnifiedFloatingCard({
                                       {index + 1}
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                      <p className="text-sm font-medium truncate text-white">
+                                      <p className="text-sm font-medium line-clamp-2 text-white leading-tight">
                                         {getTranslatedContent(stop, selectedLanguage, 'name')}
                                       </p>
                                     </div>
@@ -2377,14 +2385,14 @@ export default function UnifiedFloatingCard({
                                             {getCategoryIcon(landmark.category)}
                                           </div>
                                         )}
-                                        <h4 className="font-semibold text-sm truncate" data-testid={`text-landmark-name-${landmark.id}`}>
+                                        <h4 className="font-semibold text-sm line-clamp-2 leading-tight" data-testid={`text-landmark-name-${landmark.id}`}>
                                           {getTranslatedContent(landmark, selectedLanguage, 'name')}
                                         </h4>
                                         {spokenLandmarks.has(landmark.id) && (
-                                          <Volume2 className="w-3 h-3 text-green-600 flex-shrink-0" />
+                                          <Volume2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
                                         )}
                                       </div>
-                                      <p className="text-xs text-muted-foreground line-clamp-1">
+                                      <p className="text-[11px] text-muted-foreground line-clamp-2 mt-0.5 leading-snug">
                                         {getTranslatedContent(landmark, selectedLanguage, 'description')}
                                       </p>
                                     </div>

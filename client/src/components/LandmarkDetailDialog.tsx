@@ -369,9 +369,8 @@ export default function LandmarkDetailDialog({
                 </div>
               </div>
 
-              {/* Description */}
-              <div className="pt-2">
-                <p className="text-sm leading-relaxed text-muted-foreground font-medium">
+              <div className="pt-2 min-h-fit">
+                <p className="text-sm leading-relaxed text-muted-foreground font-medium whitespace-pre-wrap">
                   {selectedGuide
                     ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description')
                     : getTranslatedContent(landmark, selectedLanguage, 'description')}
@@ -1042,11 +1041,11 @@ export default function LandmarkDetailDialog({
                   </h5>
                   <div className="space-y-2">
                     {landmark.openingHours && (
-                      <div className="flex items-start gap-1.5 text-xs">
+                      <div className="flex items-start gap-1.5 text-xs py-1">
                         <Clock className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium">{t('openingHours', selectedLanguage)}</p>
-                          <p className="text-muted-foreground">{landmark.openingHours}</p>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-slate-700 dark:text-slate-300">{t('openingHours', selectedLanguage)}</p>
+                          <p className="text-muted-foreground break-words">{landmark.openingHours}</p>
                         </div>
                       </div>
                     )}
