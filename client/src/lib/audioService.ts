@@ -244,6 +244,12 @@ export class AudioService {
     });
 
     if (matchingVoices.length === 0) {
+      // Avoid infinite recursion if English is also missing
+      if (langCode === 'en-US') {
+        console.error('[AudioService] Critical: No voices available, even for English.');
+        return this.voices[0] || null;
+      }
+
       // LAST RESORT FALLBACK: If no matching voice for target language,
       // return the best English voice instead of null (better than silence)
       console.warn(`[AudioService] No voices found for ${langCode}, falling back to English`);

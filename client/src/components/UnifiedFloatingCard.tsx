@@ -563,19 +563,23 @@ export default function UnifiedFloatingCard({
   const handlePlayAudio = async () => {
     if (!selectedLandmark) return;
 
-    // Check if already speaking (active session)
-    if (audioService.isSpeaking()) {
-      if (audioService.isPaused()) {
+    // [Bug Doctor] Local UI state (isPlaying) is our source of truth for the toggle.
+    // Underlying audioService.isSpeaking() might be true due to unlockAudio() or zombie events.
+    if (isPlaying) {
+      if (isPaused) {
         audioService.resume();
         setIsPaused(false);
       } else {
-        // [Bug Doctor] If it's "speaking" but not paused, it might be a stuck session.
-        // We'll treat this as a "stop" request to let the user reset it.
-        audioService.stopAll();
-        setIsPlaying(false);
-        setIsPaused(false);
+        audioService.pause();
+        setIsPaused(true);
       }
       return;
+    }
+
+    // If we're here, it's a fresh "Play" click. 
+    // Ensure any zombie sessions are cleared before starting.
+    if (audioService.isSpeaking()) {
+      audioService.stopAll();
     }
 
     const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') ||
