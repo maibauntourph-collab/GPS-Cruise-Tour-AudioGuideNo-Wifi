@@ -86,106 +86,7 @@ export default function Home() {
     };
   }, []);
 
-  // 🚑 [Bug Doctor] 모바일 뒤로가기 버튼 처리 로직 (Browser History Sync)
-  // 학생 여러분, SPA에서 모바일 뒤로가기는 앱 종료 방지를 위해 필수적인 UX 처리입니다.
-  const isAnyOverlayOpen = useCallback(() => {
-    return !!(
-      selectedLandmark ||
-      showMenu ||
-      showAIRecommend ||
-      showQrDialog ||
-      showCreatorDashboard ||
-      showLoginDialog ||
-      showDirectionsDialog ||
-      showAudioDownloadDialog ||
-      showUpdateStats ||
-      showStartupDialog ||
-      landingCityId ||
-      showBackgroundGuideDialog ||
-      showSaveRouteDialog
-    );
-  }, [
-    selectedLandmark, showMenu, showAIRecommend, showQrDialog,
-    showCreatorDashboard, showLoginDialog, showDirectionsDialog,
-    showAudioDownloadDialog, showUpdateStats, showStartupDialog,
-    landingCityId, showBackgroundGuideDialog, showSaveRouteDialog
-  ]);
 
-  const closeAllOverlays = useCallback(() => {
-    setSelectedLandmark(null);
-    setShowMenu(false);
-    setShowAIRecommend(false);
-    setShowQrDialog(false);
-    setShowCreatorDashboard(false);
-    setShowLoginDialog(false);
-    setShowDirectionsDialog(false);
-    setShowAudioDownloadDialog(false);
-    setShowUpdateStats(false);
-    setShowStartupDialog(false);
-    setLandingCityId(null);
-    setShowBackgroundGuideDialog(false);
-    setShowSaveRouteDialog(false);
-    setIsCardMinimized(false);
-    setTemporaryShowCard(false);
-    setPendingLandmark(null);
-  }, []);
-
-  // 오버레이 상태 변화 감지 및 히스토리 푸시
-  useEffect(() => {
-    if (isAnyOverlayOpen()) {
-      // 현재 히스토리 상태를 체크하여 중복 푸시 방지
-      if (window.history.state?.ui !== 'overlay') {
-        console.log("🚑 [History Manager] Overlay opened. Pushing state.");
-        window.history.pushState({ ui: 'overlay' }, '');
-      }
-    }
-  }, [isAnyOverlayOpen]);
-
-  // 뒤로가기(popstate) 발생 시 처리
-  useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      if (isAnyOverlayOpen()) {
-        console.log("🚑 [History Manager] Pop state detected. Closing overlays.");
-        closeAllOverlays();
-      }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, [isAnyOverlayOpen, closeAllOverlays]);
-
-  // 🚑 [Bug Doctor] 바디 락 강제 복구 가드 (Style Guard)
-  // 학생 여러분, 명소 카드(비모달)가 열려 있을 때도 지도를 만질 수 있어야 하기에 모달 여부를 정밀 체크합니다.
-  useEffect(() => {
-    const isModalOpen = !!(
-      showMenu || showAIRecommend || showQrDialog || showCreatorDashboard ||
-      showLoginDialog || showDirectionsDialog || showAudioDownloadDialog ||
-      showUpdateStats || showStartupDialog || showBackgroundGuideDialog || showSaveRouteDialog
-    );
-
-    if (!isModalOpen) {
-      const timer = setTimeout(() => {
-        // 한 번 더 체크해서 상태 변화 반영
-        const isStillModalOpen = !!(
-          showMenu || showAIRecommend || showQrDialog || showCreatorDashboard ||
-          showLoginDialog || showDirectionsDialog || showAudioDownloadDialog ||
-          showUpdateStats || showStartupDialog || showBackgroundGuideDialog || showSaveRouteDialog
-        );
-
-        if (!isStillModalOpen) {
-          console.log("🚑 [Style Guard] Restoring body interaction (Modal-free state).");
-          document.body.style.pointerEvents = 'auto';
-          document.body.style.overflow = 'auto';
-          document.body.removeAttribute('data-scroll-locked');
-        }
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [
-    showMenu, showAIRecommend, showQrDialog, showCreatorDashboard,
-    showLoginDialog, showDirectionsDialog, showAudioDownloadDialog,
-    showUpdateStats, showStartupDialog, showBackgroundGuideDialog, showSaveRouteDialog
-  ]);
 
   // GPS enabled state (persisted to localStorage)
   const [gpsEnabled, setGpsEnabled] = useState(() => {
@@ -598,6 +499,103 @@ export default function Home() {
   const [showStartupDialog, setShowStartupDialog] = useState<boolean>(false);
   const [isStartupTransitioning, setIsStartupTransitioning] = useState<boolean>(false); // 🔮 [Dodari] 시트 전환 연출 정보
   const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
+
+  // 🚑 [Bug Doctor] 모바일 뒤로가기 버튼 처리 로직 (Browser History Sync)
+  // 학생 여러분, 모든 State가 선언된 이후에 이 로직을 배치하여 TDZ 오류를 방지합니다.
+  const isAnyOverlayOpen = useCallback(() => {
+    return !!(
+      selectedLandmark ||
+      showMenu ||
+      showAIRecommend ||
+      showQrDialog ||
+      showCreatorDashboard ||
+      showLoginDialog ||
+      showDirectionsDialog ||
+      showAudioDownloadDialog ||
+      showUpdateStats ||
+      showStartupDialog ||
+      landingCityId ||
+      showBackgroundGuideDialog ||
+      showSaveRouteDialog
+    );
+  }, [
+    selectedLandmark, showMenu, showAIRecommend, showQrDialog,
+    showCreatorDashboard, showLoginDialog, showDirectionsDialog,
+    showAudioDownloadDialog, showUpdateStats, showStartupDialog,
+    landingCityId, showBackgroundGuideDialog, showSaveRouteDialog
+  ]);
+
+  const closeAllOverlays = useCallback(() => {
+    setSelectedLandmark(null);
+    setShowMenu(false);
+    setShowAIRecommend(false);
+    setShowQrDialog(false);
+    setShowCreatorDashboard(false);
+    setShowLoginDialog(false);
+    setShowDirectionsDialog(false);
+    setShowAudioDownloadDialog(false);
+    setShowUpdateStats(false);
+    setShowStartupDialog(false);
+    setLandingCityId(null);
+    setShowBackgroundGuideDialog(false);
+    setShowSaveRouteDialog(false);
+    setIsCardMinimized(false);
+    setTemporaryShowCard(false);
+    setPendingLandmark(null);
+  }, []);
+
+  // 오버레이 상태 변화 감지 및 히스토리 푸시
+  useEffect(() => {
+    if (isAnyOverlayOpen()) {
+      if (window.history.state?.ui !== 'overlay') {
+        process.env.NODE_ENV === 'development' && console.log("🚑 [History Manager] Overlay opened. Pushing state.");
+        window.history.pushState({ ui: 'overlay' }, '');
+      }
+    }
+  }, [isAnyOverlayOpen]);
+
+  // 뒤로가기(popstate) 발생 시 처리
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (isAnyOverlayOpen()) {
+        process.env.NODE_ENV === 'development' && console.log("🚑 [History Manager] Pop state detected. Closing overlays.");
+        closeAllOverlays();
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [isAnyOverlayOpen, closeAllOverlays]);
+
+  // 🚑 [Bug Doctor] 바디 락 강제 복구 가드 (Style Guard)
+  useEffect(() => {
+    const isModalOpen = !!(
+      showMenu || showAIRecommend || showQrDialog || showCreatorDashboard ||
+      showLoginDialog || showDirectionsDialog || showAudioDownloadDialog ||
+      showUpdateStats || showStartupDialog || showBackgroundGuideDialog || showSaveRouteDialog
+    );
+
+    if (!isModalOpen) {
+      const timer = setTimeout(() => {
+        const isStillModalOpen = !!(
+          showMenu || showAIRecommend || showQrDialog || showCreatorDashboard ||
+          showLoginDialog || showDirectionsDialog || showAudioDownloadDialog ||
+          showUpdateStats || showStartupDialog || showBackgroundGuideDialog || showSaveRouteDialog
+        );
+
+        if (!isStillModalOpen) {
+          document.body.style.pointerEvents = 'auto';
+          document.body.style.overflow = 'auto';
+          document.body.removeAttribute('data-scroll-locked');
+        }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [
+    showMenu, showAIRecommend, showQrDialog, showCreatorDashboard,
+    showLoginDialog, showDirectionsDialog, showAudioDownloadDialog,
+    showUpdateStats, showStartupDialog, showBackgroundGuideDialog, showSaveRouteDialog
+  ]);
   const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
   // [중요: isWelcomeHandled220부근에정의TDZ 방지를위해 사용 전에 선언]
 
