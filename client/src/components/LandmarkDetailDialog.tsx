@@ -286,7 +286,7 @@ export default function LandmarkDetailDialog({
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogClose} modal={false}>
       <DialogContent
-        className="max-w-4xl w-[85vw] h-[90vh] p-0 gap-0 overflow-hidden"
+        className="max-w-4xl w-[85vw] h-[90vh] p-0 gap-0 overflow-hidden no-overlay"
         style={{ display: 'grid', gridTemplateColumns: 'minmax(340px, 1fr)' }}
       >
         <DialogHeader className="p-4 pb-3 border-b flex-shrink-0">

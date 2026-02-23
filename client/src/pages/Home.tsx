@@ -155,20 +155,37 @@ export default function Home() {
   }, [isAnyOverlayOpen, closeAllOverlays]);
 
   // 🚑 [Bug Doctor] 바디 락 강제 복구 가드 (Style Guard)
-  // 학생 여러분, Radix UI 등 외부 라이브러리가 바디 스타일을 제때 복구하지 못할 때를 대비한 안전장치입니다.
+  // 학생 여러분, 명소 카드(비모달)가 열려 있을 때도 지도를 만질 수 있어야 하기에 모달 여부를 정밀 체크합니다.
   useEffect(() => {
-    if (!isAnyOverlayOpen()) {
+    const isModalOpen = !!(
+      showMenu || showAIRecommend || showQrDialog || showCreatorDashboard ||
+      showLoginDialog || showDirectionsDialog || showAudioDownloadDialog ||
+      showUpdateStats || showStartupDialog || showBackgroundGuideDialog || showSaveRouteDialog
+    );
+
+    if (!isModalOpen) {
       const timer = setTimeout(() => {
-        if (!isAnyOverlayOpen()) {
-          console.log("🚑 [Style Guard] No overlays open. Ensuring body interaction is restored.");
+        // 한 번 더 체크해서 상태 변화 반영
+        const isStillModalOpen = !!(
+          showMenu || showAIRecommend || showQrDialog || showCreatorDashboard ||
+          showLoginDialog || showDirectionsDialog || showAudioDownloadDialog ||
+          showUpdateStats || showStartupDialog || showBackgroundGuideDialog || showSaveRouteDialog
+        );
+
+        if (!isStillModalOpen) {
+          console.log("🚑 [Style Guard] Restoring body interaction (Modal-free state).");
           document.body.style.pointerEvents = 'auto';
           document.body.style.overflow = 'auto';
           document.body.removeAttribute('data-scroll-locked');
         }
-      }, 300); // 팝업 닫기 애니메이션 대기
+      }, 300);
       return () => clearTimeout(timer);
     }
-  }, [isAnyOverlayOpen]);
+  }, [
+    showMenu, showAIRecommend, showQrDialog, showCreatorDashboard,
+    showLoginDialog, showDirectionsDialog, showAudioDownloadDialog,
+    showUpdateStats, showStartupDialog, showBackgroundGuideDialog, showSaveRouteDialog
+  ]);
 
   // GPS enabled state (persisted to localStorage)
   const [gpsEnabled, setGpsEnabled] = useState(() => {
@@ -609,6 +626,14 @@ export default function Home() {
     }
   }, [lastUIAction, showStartupDialog, landingCityId]);
 
+  // 🚑 [Bug Doctor] 명소 선택 시 스타트업 다이얼로그 강제 종료
+  useEffect(() => {
+    if (selectedLandmark && showStartupDialog) {
+      console.log("🚑 [Bug Doctor] Landmark selected while StartupDialog open. Closing it to prevent modal lock.");
+      setShowStartupDialog(false);
+    }
+  }, [selectedLandmark, showStartupDialog]);
+
   // [버그닥터 & 디자이너 킴의 UI Sequence 제어 Startup Priority]
   useEffect(() => {
     // 🔮 [Dodari Architecture] 지능형 시퀀스 체인
@@ -623,6 +648,9 @@ export default function Home() {
     // [Bug Doctor] 위치 정보/UI 액션에 따른 Magic Landing 트리거
     // [중요] 시뮬레이션 중에는 실제 position 대신 effectivePosition을 사용하여 도시를 매칭합니다.
     const currentLoc = isSimulationMode ? effectivePosition : position;
+
+    // 명소 카드가 열려있으면 다른 다이얼로그(Startup, Landing)는 띄우지 않습니다.
+    if (selectedLandmark) return;
 
     if (currentLoc && !landingCityId && (lastUIAction === 'STARTUP_FINISH' || lastUIAction === 'CITY_CHANGE' || lastUIAction === 'NONE')) {
       const matchedId = getMatchedCityId(currentLoc.latitude, currentLoc.longitude, cities);
