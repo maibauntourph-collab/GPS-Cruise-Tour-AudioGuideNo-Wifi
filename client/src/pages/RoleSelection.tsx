@@ -136,10 +136,10 @@ export default function RoleSelection() {
             {/* 🚀 [Server Park] Deployment Timestamp for verification */}
             <Badge
               variant="outline"
-              className="px-2 py-0.5 h-6 text-[9px] font-mono bg-blue-500/10 text-blue-400 border-blue-500/30 backdrop-blur-md rounded-full whitespace-nowrap hidden xs:flex items-center gap-1 shadow-[0_0_10px_rgba(59,130,246,0.1)]"
+              className="px-2 py-0.5 h-6 text-[9px] font-mono bg-blue-500/10 text-blue-400 border-blue-500/30 backdrop-blur-md rounded-full whitespace-nowrap flex items-center gap-1 shadow-[0_0_10px_rgba(59,130,246,0.1)]"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-              Dep: 2026-02-23 21:38
+              Dep: 2026-02-23 21:44
             </Badge>
 
             <motion.button
