@@ -440,12 +440,16 @@ export class AudioService {
   pauseSpeech() {
     if (this.synthesis.speaking && !this.synthesis.paused) {
       this.synthesis.pause();
+      this.isPausedInternal = true;
+      this.notifyStateChange();
     }
   }
 
   resumeSpeech() {
     if (this.synthesis.paused) {
       this.synthesis.resume();
+      this.isPausedInternal = false;
+      this.notifyStateChange();
     }
   }
 
@@ -458,59 +462,62 @@ export class AudioService {
 
   // Unified resume for all active modes
   resume() {
+    console.log('[AudioService] 🔄 [Bug Doctor] Resume sequence initiated...');
     this.isPausedInternal = false;
 
-    // [Bug Doctor] 일시정지 후 재개 안됨 현상 해결을 위한 'Force Resume' 전략
+    // [Bug Doctor] 1단계: AudioContext 강제 활성화 (사용자 제스처 내에서 실행)
+    if (this.audioContext && this.audioContext.state === 'suspended') {
+      this.audioContext.resume().catch(e => console.error('[AudioService] AudioContext resume failed:', e));
+    }
+
+    // [Bug Doctor] 2단계: Web Speech API (TTS) 엔진 깨우기 (Silent Kickstart)
+    // 일부 브라우저에서는 resume()이 무시되는데, 이때 무음 처리를 한 번 해주면 엔진이 정상화됩니다.
     if (this.synthesis.paused) {
+      const kickstart = new SpeechSynthesisUtterance('');
+      kickstart.volume = 0;
+      this.synthesis.speak(kickstart);
       this.synthesis.resume();
     }
 
-    // [Bug Doctor] 2단계: 재개 명령 후 150ms 뒤에도 여전히 멈춰있거나 소리가 안 나오는 경우, 강제로 다시 'speak' 시작
+    // [Bug Doctor] 3단계: HTML5 Audio (MP3/Clova/OpenAI) 재개
+    if (this.audioElement && this.audioElement.paused) {
+      this.audioElement.play().catch(e => {
+        console.warn('[AudioService] MP3 resume failed, trying absolute force play:', e);
+      });
+    }
+
+    // [Bug Doctor] 4단계: 상태 안정화 체크 (150ms 지연)
+    // 여전히 멈춰있거나 소리가 안 나오는 경우를 대비한 최후의 수단
     setTimeout(() => {
       if (!this.isPausedInternal) {
-        // 1. Web Speech API (Native TTS) 체크
-        // synthesis.paused가 true이거나 speaking이 false인데 문장 모드인 경우
+        // Native TTS 체크
         if (this.synthesis.paused || (!this.synthesis.speaking && this.isSentenceMode)) {
-          console.log('[AudioService] 🔄 Native Resume failed or stalled, forcing absolute play...');
+          console.log('[AudioService] 🔄 Native Resume stalled, forcing restart strategy...');
 
-          // 이미 speaking 중이라면 cancel 먼저 수행
           if (this.synthesis.speaking) {
             this.synthesis.cancel();
           }
 
           if (this.isSentenceMode) {
-            // 현재 문장부터 다시 시작
+            // 현재 문장부터 다시 시작 (안정성 100% 확보)
             this.playNextSentence(this.openaiSentenceLanguage || 'ko', this.currentRate);
           } else if (this.currentUtterance) {
             this.synthesis.speak(this.currentUtterance);
           }
         }
 
-        // 2. Clova/OpenAI (HTML5 Audio) 체크
+        // HTML5 Audio 체크
         if (this.audioElement && this.audioElement.paused && (this.clovaSentenceMode || this.openaiSentenceMode)) {
-          console.log('[AudioService] 🔄 HTML5 Audio Resume failed, forcing play...');
+          console.log('[AudioService] 🔄 HTML5 Audio stalled, forcing play...');
           this.audioElement.play().catch(e => {
-            console.error('[AudioService] Force audio play failed:', e);
-            // 최후의 수단: 다음 문장으로 넘어가기
-            if (this.clovaSentenceMode) this.playNextClovaSentence(this.clovaSessionId);
-            if (this.openaiSentenceMode) this.playNextOpenAISentence(this.openaiSessionId);
+            console.error('[AudioService] Last resort play failed:', e);
           });
         }
       }
+      this.notifyStateChange();
     }, 150);
 
     this.resumeMP3();
-
-    // [Bug Doctor] 교수님 가이드 반영: AudioContext 재개 로직 강화
-    if (this.audioContext && this.audioContext.state === 'suspended') {
-      this.audioContext.resume().then(() => {
-        console.log('[AudioService] ✅ AudioContext resumed successfully');
-      }).catch(err => {
-        console.error('[AudioService] ❌ AudioContext resume failed:', err);
-      });
-    } else if (this.audioContext) {
-      console.log('[AudioService] ℹ️ AudioContext state is already:', this.audioContext.state);
-    }
   }
 
   isPaused(): boolean {
