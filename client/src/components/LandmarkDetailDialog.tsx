@@ -285,7 +285,10 @@ export default function LandmarkDetailDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogClose} modal={false}>
-      <DialogContent className="max-w-6xl w-[90vw] h-[90vh] p-0 gap-0 overflow-hidden">
+      <DialogContent
+        className="max-w-4xl w-[85vw] h-[90vh] p-0 gap-0 overflow-hidden"
+        style={{ display: 'grid', gridTemplateColumns: 'minmax(340px, 1fr)' }}
+      >
         <DialogHeader className="p-4 pb-3 border-b flex-shrink-0">
           <DialogDescription className="sr-only">
             Detailed information about this landmark including photos, history, and navigation options
