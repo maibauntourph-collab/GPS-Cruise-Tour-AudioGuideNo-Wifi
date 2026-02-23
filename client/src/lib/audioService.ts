@@ -461,63 +461,66 @@ export class AudioService {
   }
 
   // Unified resume for all active modes
-  resume() {
+  async resume() {
     console.log('[AudioService] 🔄 [Bug Doctor] Resume sequence initiated...');
     this.isPausedInternal = false;
 
-    // [Bug Doctor] 1단계: AudioContext 강제 활성화 (사용자 제스처 내에서 실행)
-    if (this.audioContext && this.audioContext.state === 'suspended') {
-      this.audioContext.resume().catch(e => console.error('[AudioService] AudioContext resume failed:', e));
-    }
-
-    // [Bug Doctor] 2단계: Web Speech API (TTS) 엔진 깨우기 (Silent Kickstart)
-    // 일부 브라우저에서는 resume()이 무시되는데, 이때 무음 처리를 한 번 해주면 엔진이 정상화됩니다.
-    if (this.synthesis.paused) {
-      const kickstart = new SpeechSynthesisUtterance('');
-      kickstart.volume = 0;
-      this.synthesis.speak(kickstart);
-      this.synthesis.resume();
-    }
-
-    // [Bug Doctor] 3단계: HTML5 Audio (MP3/Clova/OpenAI) 재개
-    if (this.audioElement && this.audioElement.paused) {
-      this.audioElement.play().catch(e => {
-        console.warn('[AudioService] MP3 resume failed, trying absolute force play:', e);
-      });
-    }
-
-    // [Bug Doctor] 4단계: 상태 안정화 체크 (150ms 지연)
-    // 여전히 멈춰있거나 소리가 안 나오는 경우를 대비한 최후의 수단
-    setTimeout(() => {
-      if (!this.isPausedInternal) {
-        // Native TTS 체크
-        if (this.synthesis.paused || (!this.synthesis.speaking && this.isSentenceMode)) {
-          console.log('[AudioService] 🔄 Native Resume stalled, forcing restart strategy...');
-
-          if (this.synthesis.speaking) {
-            this.synthesis.cancel();
-          }
-
-          if (this.isSentenceMode) {
-            // 현재 문장부터 다시 시작 (안정성 100% 확보)
-            this.playNextSentence(this.openaiSentenceLanguage || 'ko', this.currentRate);
-          } else if (this.currentUtterance) {
-            this.synthesis.speak(this.currentUtterance);
-          }
-        }
-
-        // HTML5 Audio 체크
-        if (this.audioElement && this.audioElement.paused && (this.clovaSentenceMode || this.openaiSentenceMode)) {
-          console.log('[AudioService] 🔄 HTML5 Audio stalled, forcing play...');
-          this.audioElement.play().catch(e => {
-            console.error('[AudioService] Last resort play failed:', e);
-          });
-        }
+    try {
+      // [Bug Doctor] 1단계: AudioContext 강제 활성화 (사용자 제스처 내에서 실행)
+      if (this.audioContext && this.audioContext.state === 'suspended') {
+        await this.audioContext.resume();
+        console.log("[AudioService] ✅ Context resumed successfully");
       }
-      this.notifyStateChange();
-    }, 150);
 
-    this.resumeMP3();
+      // [Bug Doctor] 2단계: Web Speech API (TTS) 엔진 깨우기 (Silent Kickstart)
+      if (this.synthesis.paused) {
+        const kickstart = new SpeechSynthesisUtterance('');
+        kickstart.volume = 0;
+        this.synthesis.speak(kickstart);
+        this.synthesis.resume();
+      }
+
+      // [Bug Doctor] 3단계: HTML5 Audio (MP3/Clova/OpenAI) 재개
+      if (this.audioElement && this.audioElement.paused) {
+        await this.audioElement.play();
+        console.log("[AudioService] ✅ Audio playback resumed");
+      }
+
+      // [Bug Doctor] 4단계: 상태 안정화 체크 (150ms 지연)
+      // 여전히 멈춰있거나 소리가 안 나오는 경우를 대비한 최후의 수단
+      setTimeout(() => {
+        if (!this.isPausedInternal) {
+          // Native TTS 체크
+          if (this.synthesis.paused || (!this.synthesis.speaking && this.isSentenceMode)) {
+            console.log('[AudioService] 🔄 Native Resume stalled, forcing restart strategy...');
+
+            if (this.synthesis.speaking) {
+              this.synthesis.cancel();
+            }
+
+            if (this.isSentenceMode) {
+              // 현재 문장부터 다시 시작 (안정성 100% 확보)
+              this.playNextSentence(this.openaiSentenceLanguage || 'ko', this.currentRate);
+            } else if (this.currentUtterance) {
+              this.synthesis.speak(this.currentUtterance);
+            }
+          }
+
+          // HTML5 Audio 체크
+          if (this.audioElement && this.audioElement.paused && (this.clovaSentenceMode || this.openaiSentenceMode)) {
+            console.log('[AudioService] 🔄 HTML5 Audio stalled, forcing play...');
+            this.audioElement.play().catch(e => {
+              console.error('[AudioService] Last resort play failed:', e);
+            });
+          }
+        }
+        this.notifyStateChange();
+      }, 150);
+
+      this.resumeMP3();
+    } catch (error) {
+      console.error("[AudioService] ❌ Resume failed:", error);
+    }
   }
 
   isPaused(): boolean {

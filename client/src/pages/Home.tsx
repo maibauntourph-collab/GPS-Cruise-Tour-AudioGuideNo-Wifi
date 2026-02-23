@@ -3103,6 +3103,10 @@ export default function Home() {
             onToggleMinimalTransitUI={() => setShowMinimalTransitUI(!showMinimalTransitUI)}
             selectedLandmark={selectedLandmark}
             isTransitMode={!!activeRoute && !isManualSelection && !hasArrivedAtDestination}
+            onLandmarkSelect={(l) => {
+              setIsManualSelection(true);
+              setSelectedLandmark(l);
+            }}
             onLandmarkClose={() => {
               setSelectedLandmark(null);
               setIsManualSelection(false);
