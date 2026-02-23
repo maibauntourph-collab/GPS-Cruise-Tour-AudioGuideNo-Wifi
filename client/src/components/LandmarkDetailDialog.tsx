@@ -324,7 +324,7 @@ export default function LandmarkDetailDialog({
         </DialogHeader>
 
         <Tabs defaultValue="overview" className="flex-1 flex flex-col min-h-0">
-          <TabsList className="mx-4 mt-4 grid w-auto grid-cols-5 flex-shrink-0">
+          <TabsList className="mx-4 mt-4 grid w-auto grid-cols-4 flex-shrink-0">
             <TabsTrigger value="overview" className="gap-2">
               <Info className="w-4 h-4" />
               {t('overview', selectedLanguage)}
@@ -344,17 +344,13 @@ export default function LandmarkDetailDialog({
               <CreditCard className="w-4 h-4" />
               {t('booking', selectedLanguage)}
             </TabsTrigger>
-            <TabsTrigger value="details" className="gap-2">
-              <Calendar className="w-4 h-4" />
-              {t('details', selectedLanguage)}
-            </TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
-          <TabsContent value="overview" className="flex-1 overflow-y-auto p-4 m-0">
-            <div className="max-w-2xl mx-auto space-y-4">
+          <TabsContent value="overview" className="flex-1 overflow-y-auto p-4 m-0 flex flex-col">
+            <div className="max-w-2xl mx-auto space-y-4 flex-1 flex flex-col">
               {/* [Designer Kim] 프리미엄 배지 수집 상태 섹션 추가 */}
-              <div className="relative overflow-hidden p-4 border rounded-2xl bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 border-indigo-100/30 backdrop-blur-sm group">
+              <div className="relative overflow-hidden p-4 border rounded-2xl bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 border-indigo-100/30 backdrop-blur-sm group flex-shrink-0">
                 <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:scale-110 transition-transform duration-700">
                   <Trophy className="w-12 h-12 text-indigo-500" />
                 </div>
@@ -380,8 +376,8 @@ export default function LandmarkDetailDialog({
                 </div>
               </div>
 
-              <div className="pt-2 min-h-fit">
-                <p className="text-sm leading-relaxed text-muted-foreground font-medium whitespace-pre-wrap">
+              <div className="pt-2 flex-1 overflow-y-auto bg-muted/10 rounded-xl p-4 border border-dashed border-muted-foreground/10">
+                <p className="text-base leading-relaxed text-muted-foreground font-medium whitespace-pre-wrap">
                   {selectedGuide
                     ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description')
                     : getTranslatedContent(landmark, selectedLanguage, 'description')}

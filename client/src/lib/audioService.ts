@@ -465,13 +465,21 @@ export class AudioService {
       this.synthesis.resume();
     }
 
-    // 재개 명령 후 150ms 뒤에도 여전히 멈춰있거나 소리가 안 나오는 경우(일부 브라우저 버그), 강제로 다시 재생 시작
+    // [Bug Doctor] 2단계: 재개 명령 후 150ms 뒤에도 여전히 멈춰있거나 소리가 안 나오는 경우, 강제로 다시 'speak' 시작
     setTimeout(() => {
       if (!this.isPausedInternal) {
         // 1. Web Speech API (Native TTS) 체크
-        if (this.synthesis.paused) {
-          console.log('[AudioService] 🔄 Native Resume failed, forcing restart...');
+        // synthesis.paused가 true이거나 speaking이 false인데 문장 모드인 경우
+        if (this.synthesis.paused || (!this.synthesis.speaking && this.isSentenceMode)) {
+          console.log('[AudioService] 🔄 Native Resume failed or stalled, forcing absolute play...');
+
+          // 이미 speaking 중이라면 cancel 먼저 수행
+          if (this.synthesis.speaking) {
+            this.synthesis.cancel();
+          }
+
           if (this.isSentenceMode) {
+            // 현재 문장부터 다시 시작
             this.playNextSentence(this.openaiSentenceLanguage || 'ko', this.currentRate);
           } else if (this.currentUtterance) {
             this.synthesis.speak(this.currentUtterance);
