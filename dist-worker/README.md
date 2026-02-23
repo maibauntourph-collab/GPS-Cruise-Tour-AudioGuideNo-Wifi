@@ -1,1 +1,0 @@
-This folder contains the built output assets for the worker "gps-audio-guide-no-wifi" generated at 2026-02-19T14:08:01.433Z.

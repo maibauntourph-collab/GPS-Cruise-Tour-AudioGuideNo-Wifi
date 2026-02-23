@@ -370,7 +370,7 @@ export default function LandmarkDetailDialog({
 
             {/* Overview Tab */}
             <TabsContent value="overview" className="flex-1 overflow-y-auto p-4 m-0 flex flex-col">
-              <div className="max-w-2xl mx-auto space-y-4 flex-1 flex flex-col">
+              <div className="max-w-full mx-auto space-y-4 flex-1 flex flex-col">
                 {/* [Designer Kim] 프리미엄 배지 수집 상태 섹션 추가 */}
                 <div className="relative overflow-hidden p-4 border rounded-2xl bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 border-indigo-100/30 backdrop-blur-sm group flex-shrink-0">
                   <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:scale-110 transition-transform duration-700">
@@ -640,7 +640,7 @@ export default function LandmarkDetailDialog({
 
             {/* Guides Tab */}
             <TabsContent value="guides" className="flex-1 overflow-y-auto p-4 m-0">
-              <div className="max-w-2xl mx-auto space-y-4">
+              <div className="max-w-full mx-auto space-y-4">
                 <div className="grid gap-3">
                   {/* Default AI Guide */}
                   <div
@@ -848,7 +848,7 @@ export default function LandmarkDetailDialog({
 
             {/* Booking Tab - Payment & Reservations */}
             <TabsContent value="booking" className="flex-1 overflow-y-auto p-4 m-0">
-              <div className="max-w-2xl mx-auto space-y-4">
+              <div className="max-w-full mx-auto space-y-4">
                 {/* Ticket & Tour Booking - for Activities and Landmarks */}
                 {(landmark.category === 'Activity' || (landmark.category !== 'Restaurant' && landmark.category !== 'Gift Shop' && landmark.category !== 'Shop')) ? (
                   <div className="p-4 border rounded-xl bg-gradient-to-br from-background to-muted/30 shadow-sm space-y-4">
@@ -1253,7 +1253,8 @@ export default function LandmarkDetailDialog({
               </div>
             </TabsContent>
           </Tabs>
-      </DialogContent >
+        </div>
+      </DialogContent>
     </Dialog >
   );
 }

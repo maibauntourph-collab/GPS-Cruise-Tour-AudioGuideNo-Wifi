@@ -34,7 +34,9 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,mp3}'],
-        maximumFileSizeToCacheInBytes: 20000000 // Increased to 20MB for audio files
+        maximumFileSizeToCacheInBytes: 20000000, // Increased to 20MB for audio files
+        skipWaiting: true,
+        clientsClaim: true
       },
       devOptions: {
         enabled: true,

@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development SESSION_SECRET=devsecret123456789012345678901234 tsx --env-file=.env server/index.ts",
-    "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist-server",
+    "clean": "node -e \"const fs = require('fs'); ['dist', 'dist-server', 'dist-worker'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
+    "build": "npm run clean && vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist-server",
     "build:worker": "wrangler deploy --dry-run --outdir=dist-worker",
     "dev:worker": "wrangler dev",
-    "deploy": "wrangler deploy",
+    "deploy": "npm run build && wrangler deploy",
     "start": "cross-env NODE_ENV=production SESSION_SECRET=prodsecret12345678901234567890123 node dist-server/index.js",
     "check": "tsc",
     "db:push": "drizzle-kit push",
