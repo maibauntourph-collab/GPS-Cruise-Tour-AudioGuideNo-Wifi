@@ -194,7 +194,7 @@ export default function RoleSelection() {
                       import('@/lib/audioService').then(({ audioService }) => audioService.unlockAudio());
                       handleRoleSelect(role.path, role.id);
                     }}
-                    className={`w-full group relative p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/[0.08] transition-all duration-500 text-left overflow-hidden flex flex-col justify-between h-64 hover:scale-[1.02] hover:${role.hoverColor} hover:shadow-2xl backdrop-blur-sm`}
+                    className={`w-full group relative p-8 rounded-[2.5rem] glass-premium aurora-border-premium border border-white/10 hover:bg-white/[0.08] transition-all duration-500 text-left overflow-hidden flex flex-col justify-between h-64 hover:scale-[1.02] hover:${role.hoverColor} hover:shadow-2xl backdrop-blur-sm`}
                   >
                     <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${role.color} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-700`} />
 
