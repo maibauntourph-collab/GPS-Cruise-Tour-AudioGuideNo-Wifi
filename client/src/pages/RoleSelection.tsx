@@ -132,15 +132,26 @@ export default function RoleSelection() {
             </span>
           </motion.div>
 
-          <motion.button
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            onClick={toggleLanguage}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all backdrop-blur-md"
-          >
-            <Languages className="w-4 h-4 text-blue-400" />
-            <span className="text-sm font-bold uppercase">{selectedLanguage}</span>
-          </motion.button>
+          <div className="flex items-center gap-2">
+            {/* 🚀 [Server Park] Deployment Timestamp for verification */}
+            <Badge
+              variant="outline"
+              className="px-2 py-0.5 h-6 text-[9px] font-mono bg-blue-500/10 text-blue-400 border-blue-500/30 backdrop-blur-md rounded-full whitespace-nowrap hidden xs:flex items-center gap-1 shadow-[0_0_10px_rgba(59,130,246,0.1)]"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+              Dep: 2026-02-23 21:38
+            </Badge>
+
+            <motion.button
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all backdrop-blur-md"
+            >
+              <Languages className="w-4 h-4 text-blue-400" />
+              <span className="text-sm font-bold uppercase">{selectedLanguage}</span>
+            </motion.button>
+          </div>
         </div>
       </header>
 
