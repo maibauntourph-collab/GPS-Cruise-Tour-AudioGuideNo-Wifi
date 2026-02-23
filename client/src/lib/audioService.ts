@@ -30,12 +30,15 @@ export class AudioService {
   private voiceCache: Map<string, SpeechSynthesisVoice> = new Map();
   // Suppression set moved to window level in helper methods
 
-  // MP3 Audio properties
   private audioElement: HTMLAudioElement | null = null;
   private audioMode: AudioMode = 'auto';
   private downloadProgress: Map<string, AudioDownloadProgress> = new Map();
   private onDownloadProgressChange: ((progress: Map<string, AudioDownloadProgress>) => void) | null = null;
   private onStateChange: ((isSpeaking: boolean) => void) | null = null;
+
+  // [Bug Doctor] AudioContext 싱글톤 관리
+  private audioContext: AudioContext | null = null;
+  private silentOscillator: OscillatorNode | null = null;
 
   constructor() {
     this.synthesis = window.speechSynthesis;
@@ -82,14 +85,20 @@ export class AudioService {
    * onvoiceschanged 이벤트가 발생하면 즉시 반영되지만, 해당 이벤트가
    * 지원되지 않는 환경을 위한 폴백 전략입니다.
    */
-  private loadVoicesWithRetry(attempt: number = 0, maxAttempts: number = 5) {
+  private loadVoicesWithRetry(attempt: number = 0, maxAttempts: number = 10) {
     this.voices = this.synthesis.getVoices();
 
     if (this.voices.length === 0 && attempt < maxAttempts) {
-      // 음성 목록이 아직 준비되지 않았으면 200ms 후 재시도
-      setTimeout(() => this.loadVoicesWithRetry(attempt + 1, maxAttempts), 200);
+      // 음성 목록이 아직 준비되지 않았으면 시도 횟수에 따라 간격을 늘려가며 재시도
+      const delay = Math.min(200 * (attempt + 1), 1000);
+      setTimeout(() => this.loadVoicesWithRetry(attempt + 1, maxAttempts), delay);
     } else if (this.voices.length > 0) {
       console.log(`[AudioService] ✅ ${this.voices.length}개 음성 로딩 완료 (시도 ${attempt + 1}회)`);
+      // 한국어 음성이 있는지 최종 확인
+      const hasKo = this.voices.some(v => v.lang.startsWith('ko'));
+      if (!hasKo && attempt === maxAttempts - 1) {
+        console.warn('[AudioService] ⚠️ 한국어 음성(ko-KR)을 찾을 수 없습니다. 폴백 음성을 사용합니다.');
+      }
     }
   }
 
@@ -445,8 +454,30 @@ export class AudioService {
   // Unified resume for all active modes
   resume() {
     this.isPausedInternal = false;
-    this.resumeSpeech();
+
+    // [Bug Doctor] 일시정지 후 재개 안됨 현상 해결을 위한 'Force Resume' 전략
+    if (this.synthesis.paused) {
+      this.synthesis.resume();
+
+      // 재개 명령 후 100ms 뒤에도 여전히 멈춰있다면(일부 브라우저 버그), 강제로 다시 재생 시작
+      setTimeout(() => {
+        if (this.synthesis.paused && !this.isPausedInternal) {
+          console.log('[AudioService] 🔄 Resume failed, forcing restart from current sentence...');
+          if (this.isSentenceMode) {
+            this.playNextSentence(this.openaiSentenceLanguage || 'ko', this.currentRate);
+          } else if (this.currentUtterance) {
+            this.synthesis.speak(this.currentUtterance);
+          }
+        }
+      }, 100);
+    }
+
     this.resumeMP3();
+
+    // AudioContext 재개
+    if (this.audioContext && this.audioContext.state === 'suspended') {
+      this.audioContext.resume().catch(console.error);
+    }
   }
 
   isPaused(): boolean {
@@ -513,71 +544,59 @@ export class AudioService {
 
   // Unlock audio engine (call from user gesture)
   async unlockAudio() {
-    if (this.isUnlocked) return;
+    if (this.isUnlocked && this.audioContext?.state === 'running') return;
 
     console.log('[AudioService] 🔓 [Bug Doctor] 모바일 안정성을 위한 오디오 엔진 정밀 잠금 해제 시작...');
 
     try {
-      // 1. Web Speech API (TTS) 잠금 해제
-      // 모바일 브라우저에서는 빈 문장을 '사용자 제스처 내에서' 동기적으로 실행해야 합니다.
+      // 1. Web Audio API Context 싱글톤 활성화
+      const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
+      if (AudioContextClass) {
+        if (!this.audioContext) {
+          this.audioContext = new AudioContextClass();
+        }
+
+        if (this.audioContext.state === 'suspended') {
+          console.log('[AudioService] 🔄 Resuming AudioContext from suspended state...');
+          await this.audioContext.resume();
+        }
+
+        // 아주 짧은 무음 비프음을 생성하여 하드웨어 채널을 점유합니다.
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+        gainNode.gain.value = 0.0001;
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+        oscillator.start(0);
+        oscillator.stop(0.1);
+
+        console.log(`[AudioService] ✅ Web Audio Context (${this.audioContext.state}) activated`);
+      }
+
+      // 2. Web Speech API (TTS) 잠금 해제 - 빈 문장 동기 재생
       const utterance = new SpeechSynthesisUtterance(' ');
       utterance.volume = 0;
       this.synthesis.speak(utterance);
 
-      // 2. Web Audio API Context 잠금 해제
-      // 오디오 컨텍스트가 'suspended' 상태인 경우 강제로 resume 시킵니다.
-      const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
-      if (AudioContextClass) {
-        const audioCtx = new AudioContextClass();
-        if (audioCtx.state === 'suspended') {
-          console.log('[AudioService] 🔄 Resuming suspended AudioContext...');
-          await audioCtx.resume();
-        }
-
-        // 아주 짧은 무음 비프음을 생성하여 하드웨어 채널을 점유합니다.
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        gainNode.gain.value = 0.0001; // Tiny volume to ensure it's not discarded
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        oscillator.start(0);
-        oscillator.stop(0.1);
-
-        console.log(`[AudioService] ✅ Web Audio Context (${audioCtx.state}) unlocked`);
-      }
-
       // 3. HTML5 Audio (MP3) 잠금 해제
-      // 무음 Data URI를 사용하여 오디오 엘리먼트 가동
       const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
       silentAudio.volume = 0;
+      await silentAudio.play().catch(() => { /* ignore */ });
 
-      await silentAudio.play()
-        .then(() => {
-          this.isUnlocked = true;
-          console.log('[AudioService] ✅ HTML Audio engine unlocked successfully');
-        })
-        .catch(err => {
-          console.warn('[AudioService] ⚠️ HTML Audio unlock failed via Data URI, forcing fallback:', err);
-          this.isUnlocked = true;
-        });
+      this.isUnlocked = true;
 
-      // 4. 기존에 꼬여있을 수 있는 음성 엔진 초기화
-      if (this.synthesis.speaking) {
-        this.synthesis.cancel();
-      }
-
-      // 5. [Bug Doctor] unlockAudio 시점에 음성 목록 재로딩
-      // 사용자 제스처 이후에 음성 목록이 갱신되는 브라우저 대응
+      // 4. [Bug Doctor] 음성 목록 최종 재로딩
       this.loadVoicesWithRetry();
+
     } catch (e) {
       console.error('[AudioService] ❌ [Bug Doctor] 오디오 엔진 통합 잠금 해제 실패:', e);
     }
   }
 
   // Helper to prevent SpeechSynthesis from timing out on long texts
-  // (Chrome/Safari bug where it stops after ~15 seconds)
   private keepAlive() {
     if (this.synthesis.speaking && !this.synthesis.paused) {
+      // [Bug Doctor] iOS/Mac Safari 호환성을 위한 일시정지 후 즉시 재개 전략
       this.synthesis.pause();
       this.synthesis.resume();
       this.playbackTimer = setTimeout(() => this.keepAlive(), 10000);
