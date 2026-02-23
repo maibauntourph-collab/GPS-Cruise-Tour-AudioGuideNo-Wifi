@@ -786,12 +786,12 @@ export default function UnifiedFloatingCard({
       style={{
         zIndex,
       }}
-      className={`fixed bottom-24 right-4 w-[calc(100vw-32px)] sm:w-[420px] max-h-[calc(100vh-180px)] flex flex-col bg-background/95 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl overflow-hidden transition-all duration-300 ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100'}`}
+      className={`fixed bottom-24 right-4 w-[calc(100vw-32px)] sm:w-[360px] max-h-[calc(100vh-180px)] flex flex-col bg-background/95 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl overflow-hidden transition-all duration-300 ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100'}`}
       data-testid="unified-floating-card"
     >
       {/* CARD HEADER - Navigation & Title */}
-      <div className="flex items-center justify-between p-3 sm:p-4 border-b bg-muted/30">
-        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pr-2 flex-grow">
+      <div className="flex items-center justify-between p-2 sm:p-3 border-b bg-muted/30">
+        <div className="flex items-center gap-0.5 overflow-x-auto no-scrollbar pr-1 flex-grow">
           <Button
             variant={activeTab === 'landmark' ? 'default' : 'ghost'}
             size="sm"
@@ -921,10 +921,10 @@ export default function UnifiedFloatingCard({
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                       </svg>
                       <div className="flex-1">
-                        <h5 className="font-semibold text-purple-900 dark:text-purple-100 mb-1">
+                        <h5 className="font-semibold text-purple-900 dark:text-purple-100 mb-0.5 text-sm">
                           {selectedLanguage === 'ko' ? 'AI 추천 이유' : 'AI Recommendation'}
                         </h5>
-                        <p className="text-[13px] sm:text-sm text-purple-800 dark:text-purple-200 leading-relaxed">
+                        <p className="text-[12px] sm:text-[13px] text-purple-800 dark:text-purple-200 leading-relaxed">
                           {aiRecommendation.explanation}
                         </p>
                         <div className="mt-2 text-xs text-purple-700 dark:text-purple-300">
@@ -1494,11 +1494,11 @@ export default function UnifiedFloatingCard({
                 {city?.cruisePort && (
                   <Tabs defaultValue="info" className="w-full flex flex-col flex-1 min-h-0">
                     {/* [Bug Doctor] 탭 리스트가 모바일에서 잘리지 않도록 스크롤 가능하게 변경합니다. */}
-                    <div className="overflow-x-auto scrollbar-hide -mx-4 px-4 pb-1">
-                      <TabsList className="inline-flex w-auto min-w-full justify-start md:grid md:grid-cols-4 md:w-full">
+                    <div className="overflow-x-auto no-scrollbar -mx-2 px-2 pb-1">
+                      <TabsList className="inline-flex w-auto min-w-full justify-start md:grid md:grid-cols-4 md:w-full gap-0.5 p-0.5">
                         <TabsTrigger value="info" className="text-xs whitespace-nowrap px-3">{t('info', selectedLanguage)}</TabsTrigger>
-                        <TabsTrigger value="route" className="text-xs whitespace-nowrap px-3">{t('route', selectedLanguage)}</TabsTrigger>
-                        <TabsTrigger value="cruise" className="text-xs whitespace-nowrap px-3">{t('cruiseTerminal', selectedLanguage)}</TabsTrigger>
+                        <TabsTrigger value="transport" className="text-xs whitespace-nowrap px-3">{t('route', selectedLanguage)}</TabsTrigger>
+                        <TabsTrigger value="tips" className="text-xs whitespace-nowrap px-3">{t('cruiseTerminal', selectedLanguage)}</TabsTrigger>
                         <TabsTrigger value="list" className="text-xs whitespace-nowrap px-3">{t('nearby', selectedLanguage)}</TabsTrigger>
                       </TabsList>
                     </div>

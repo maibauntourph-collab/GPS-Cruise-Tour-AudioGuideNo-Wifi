@@ -22153,10 +22153,10 @@ async function getIndexHtml(c) {
   }
   return null;
 }
-app.get("/", async (c) => {
+app.get("/", async (c, next) => {
   const html = await getIndexHtml(c);
   if (html) return c.html(html);
-  return c.text("index.html not found in assets", 404);
+  return next();
 });
 app.get("/*", async (c, next) => {
   const path3 = c.req.path;

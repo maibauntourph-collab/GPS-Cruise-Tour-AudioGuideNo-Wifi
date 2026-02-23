@@ -48,7 +48,7 @@ import { Landmark, City } from '@shared/schema';
 import { getMatchedCityId, checkProximity } from '@/lib/locationService';
 import { LANDING_DATA } from '@/data/landingData';
 import { useLanguage } from '@/context/LanguageContext';
-import { Landmark as LandmarkIcon, Activity as ActivityIcon, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon, Headphones as AudioIcon, Ticket, Navigation, Play, Pause, Minus, ZoomIn, Settings, Star } from 'lucide-react';
+import { Landmark as LandmarkIcon, Activity as ActivityIcon, Ship, Utensils, ShoppingBag, MapPin, Plane, Hotel, Navigation2, List, Search, Loader2, Flag, Circle, Clock, Route, Camera, User, TrendingUp, X, QrCode, Share2, Download, Cat, EyeOff, Menu, AudioLines, Image as ImageIcon, Headphones as AudioIcon, Ticket, Navigation, Play, Pause, Minus, ZoomIn, Settings, Star, SlidersHorizontal } from 'lucide-react';
 import { offlineStorage } from '@/lib/offlineStorage';
 import { syncService } from '@/lib/syncService';
 import { Input } from '@/components/ui/input';
@@ -1431,7 +1431,7 @@ export default function Home() {
                 data-testid="button-menu-toggle"
                 className="h-8 w-8"
               >
-                <Menu className="h-4 w-4" />
+                <Settings className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -2568,7 +2568,7 @@ export default function Home() {
                     className="h-9 w-9 border-primary/30 bg-white/80 backdrop-blur-sm shadow-sm"
                     data-testid="button-mobile-more-menu"
                   >
-                    <Menu className="h-5 w-5 text-primary" />
+                    <SlidersHorizontal className="h-5 w-5 text-primary" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[85vw] max-w-[360px] p-5 z-[3000] border-none shadow-2xl bg-white/60 backdrop-blur-2xl rounded-[2.5rem]" align="end" sideOffset={8}>

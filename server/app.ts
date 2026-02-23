@@ -89,10 +89,10 @@ async function getIndexHtml(c: Context) {
 }
 
 // 2. 루트 및 SPA 라우팅 (API가 아닌 모든 경로는 index.html 서빙)
-app.get("/", async (c) => {
+app.get("/", async (c, next) => {
     const html = await getIndexHtml(c);
     if (html) return c.html(html);
-    return c.text("index.html not found in assets", 404);
+    return next();
 });
 
 // 3. 정적 자산 서빙 (assets/*, *.js, *.css 등)
