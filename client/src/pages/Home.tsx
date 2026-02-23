@@ -154,6 +154,22 @@ export default function Home() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, [isAnyOverlayOpen, closeAllOverlays]);
 
+  // 🚑 [Bug Doctor] 바디 락 강제 복구 가드 (Style Guard)
+  // 학생 여러분, Radix UI 등 외부 라이브러리가 바디 스타일을 제때 복구하지 못할 때를 대비한 안전장치입니다.
+  useEffect(() => {
+    if (!isAnyOverlayOpen()) {
+      const timer = setTimeout(() => {
+        if (!isAnyOverlayOpen()) {
+          console.log("🚑 [Style Guard] No overlays open. Ensuring body interaction is restored.");
+          document.body.style.pointerEvents = 'auto';
+          document.body.style.overflow = 'auto';
+          document.body.removeAttribute('data-scroll-locked');
+        }
+      }, 300); // 팝업 닫기 애니메이션 대기
+      return () => clearTimeout(timer);
+    }
+  }, [isAnyOverlayOpen]);
+
   // GPS enabled state (persisted to localStorage)
   const [gpsEnabled, setGpsEnabled] = useState(() => {
     const saved = localStorage.getItem('gps-enabled');

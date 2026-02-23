@@ -284,7 +284,7 @@ export default function LandmarkDetailDialog({
   if (!landmark) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleDialogClose}>
+    <Dialog open={isOpen} onOpenChange={handleDialogClose} modal={false}>
       <DialogContent className="max-w-6xl w-[90vw] h-[90vh] p-0 gap-0 overflow-hidden">
         <DialogHeader className="p-4 pb-3 border-b flex-shrink-0">
           <DialogDescription className="sr-only">
