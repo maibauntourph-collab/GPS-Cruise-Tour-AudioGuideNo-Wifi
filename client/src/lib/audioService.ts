@@ -272,24 +272,29 @@ export class AudioService {
       }
     }
 
-    // Get all language variants to search (especially important for Spanish)
+    // [Bug Doctor] 언어 코드 정규화 (ko-KR, ko_KR, KO_KR 등 모두 대응)
+    const normalize = (code: string) => code.toLowerCase().replace('_', '-');
+    const normTarget = normalize(langCode);
+    const normBase = normTarget.split('-')[0];
     const langVariants = this.getLanguageVariants(langCode);
+    const normVariants = langVariants.map(normalize);
 
     // Filter voices for the target language (including all variants)
     const matchingVoices = this.voices.filter(v => {
-      const voiceBaseLang = v.lang.split('-')[0];
-      return langVariants.some(variant => v.lang === variant) || voiceBaseLang === baseLang;
+      const vNorm = normalize(v.lang);
+      const vBase = vNorm.split('-')[0];
+      return normVariants.includes(vNorm) || vBase === normBase;
     });
 
     if (matchingVoices.length === 0) {
-      // Avoid infinite recursion if English is also missing
-      if (langCode === 'en-US') {
-        this.debugWarnOnce('en-uss-missing', '[AudioService] Critical: No voices available, even for English.');
+      if (normTarget === 'en-us') {
+        this.debugWarnOnce('en-uss-missing', `[AudioService] Critical: No voices available for ${langCode}. Total voices: ${this.voices.length}`);
+        // 최후의 수단: 첫 번째 음성이라도 반환
         return this.voices[0] || null;
       }
 
       // LAST RESORT FALLBACK
-      this.debugWarnOnce(`missing-${langCode}`, `[AudioService] No voices found for ${langCode}, falling back to English`);
+      this.debugWarnOnce(`missing-${langCode}`, `[AudioService] No matching voices for ${langCode} (${normTarget}), falling back to English`);
       return this.getVoiceForLanguage('en-US');
     }
 
@@ -349,7 +354,7 @@ export class AudioService {
     scoredVoices.sort((a, b) => b.score - a.score);
 
     // Log the selected voice for debugging (only once per language)
-    this.debugLogOnce(`selected-${langCode}`, `[AudioService] Selected voice for ${langCode}: ${scoredVoices[0].voice.name} (score: ${scoredVoices[0].score})`);
+    this.debugLogOnce(`selected-${langCode}`, `[AudioService] Selected voice for ${langCode}: ${scoredVoices[0].voice.name} (Lang: ${scoredVoices[0].voice.lang}, Score: ${scoredVoices[0].score})`);
 
     // Update cache
     this.voiceCache.set(langCode, scoredVoices[0].voice);
