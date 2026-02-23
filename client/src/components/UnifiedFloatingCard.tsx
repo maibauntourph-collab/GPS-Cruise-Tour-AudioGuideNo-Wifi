@@ -1079,9 +1079,10 @@ export default function UnifiedFloatingCard({
                                     const name = getTranslatedContent(selectedLandmark, selectedLanguage, 'name');
                                     window.open(getAirbnbUrl(name), '_blank', 'noopener,noreferrer');
                                   }}
+                                  title={selectedLanguage === 'ko' ? '명소 주변 숙소 찾기' : 'Find nearby stays'}
                                 >
                                   <Hotel className="w-3.5 h-3.5" />
-                                  Airbnb
+                                  <span>{selectedLanguage === 'ko' ? '숙소 (Airbnb)' : 'Stay'}</span>
                                 </Button>
                                 {/* [연구소장 가이드] 가격 비교 테이블 및 다중 플랫폼 예약 구현 */}
                                 {selectedLanguage === 'ko' ? (

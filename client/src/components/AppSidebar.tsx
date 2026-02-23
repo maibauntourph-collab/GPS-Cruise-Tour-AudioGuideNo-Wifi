@@ -78,9 +78,9 @@ export function AppSidebar({
 }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="p-3 sm:p-4 md:p-0">
-        <Card className="md:border-0 md:bg-transparent md:shadow-none">
-          <div className="p-3 sm:p-4 md:p-0">
+      <SidebarContent className="p-0 overflow-y-auto max-h-screen no-scrollbar">
+        <Card className="md:border-0 md:bg-transparent md:shadow-none border-0 rounded-none shadow-none">
+          <div className="p-3 sm:p-4 md:p-3 space-y-1">
             <SidebarGroup>
               <SidebarGroupLabel className="text-sm sm:text-base flex flex-col items-start h-auto py-2">
                 <span>GPS Audio Guide</span>

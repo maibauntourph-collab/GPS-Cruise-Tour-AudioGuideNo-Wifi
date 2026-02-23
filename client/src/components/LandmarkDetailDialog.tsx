@@ -116,12 +116,17 @@ export default function LandmarkDetailDialog({
 
   // Handle dialog close - stop all audio first
   const handleDialogClose = () => {
-    setCurrentSentenceIndex(-1);
-    setIsPlaying(false);
-    setIsPaused(false);
-    audioService.stopSentences();
-    audioService.stop();
-    audioService.stopMP3();
+    // [Designer Kim] 시뮬레이션 중인 경우 오디오를 끄지 않고 백그라운드에서 유지합니다.
+    const isSimulating = localStorage.getItem('simulation-active') === 'true';
+
+    if (!isSimulating) {
+      setCurrentSentenceIndex(-1);
+      setIsPlaying(false);
+      setIsPaused(false);
+      audioService.stopSentences();
+      audioService.stop();
+      audioService.stopMP3();
+    }
     onClose();
   };
 
@@ -325,9 +330,12 @@ export default function LandmarkDetailDialog({
               <Users className="w-4 h-4" />
               {selectedLanguage === 'ko' ? '가이드' : 'Guides'}
             </TabsTrigger>
-            <TabsTrigger value="photos" className="gap-2">
-              <ImageIcon className="w-4 h-4" />
-              {t('photos', selectedLanguage)}
+            <TabsTrigger value="photos" className="gap-2" onClick={() => {
+              // [Designer Kim] MyPic 탭 클릭 시 자동으로 해당 위치 사진 반영 유도
+              console.log('[MyPic] Auto-syncing photos for landmark:', landmark.id);
+            }}>
+              <Camera className="w-4 h-4" />
+              MyPic
             </TabsTrigger>
             <TabsTrigger value="booking" className="gap-2">
               <CreditCard className="w-4 h-4" />
@@ -392,11 +400,12 @@ export default function LandmarkDetailDialog({
                   <Button
                     onClick={() => onAddToTour(landmark)}
                     variant="outline"
-                    className="w-full gap-2"
+                    className="w-full gap-2 border-primary/30 text-primary hover:bg-primary/5"
                     disabled={isInTour}
                     data-testid="button-add-to-tour-dialog"
                   >
                     <MapPinned className="w-4 h-4" />
+                    <span className="font-semibold">{selectedLanguage === 'ko' ? '안내추가 (투어)' : 'Add to Guide'}</span>
                   </Button>
                 )}
 
@@ -784,9 +793,10 @@ export default function LandmarkDetailDialog({
                       {selectedLanguage === 'ko' ? '표시할 사진이 없습니다.' : 'No photos to display.'}
                     </p>
                     <Button
-                      variant="link"
+                      variant="ghost"
                       size="sm"
                       onClick={() => document.getElementById('mypic-upload')?.click()}
+                      className="text-primary hover:bg-primary/5"
                     >
                       {selectedLanguage === 'ko' ? '첫 사진 업로드하기' : 'Upload your first photo'}
                     </Button>
