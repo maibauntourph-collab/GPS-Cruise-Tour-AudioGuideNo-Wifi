@@ -2903,7 +2903,10 @@ export default function Home() {
                 });
               }}
               selectedLandmark={selectedLandmark}
-              onLandmarkSelect={setSelectedLandmark}
+              onLandmarkSelect={(landmark) => {
+                setIsManualSelection(true);
+                setSelectedLandmark(landmark);
+              }}
               onShowList={() => {
                 // Show the list panel when tooltip is clicked
                 setIsCardMinimized(false);
@@ -3106,6 +3109,7 @@ export default function Home() {
             onLandmarkSelect={(l) => {
               setIsManualSelection(true);
               setSelectedLandmark(l);
+              setIsCardMinimized(false);
             }}
             onLandmarkClose={() => {
               setSelectedLandmark(null);
@@ -3152,10 +3156,7 @@ export default function Home() {
             landmarks={landmarks}
             userPosition={effectivePosition}
             onLandmarkRoute={handleLandmarkRoute}
-            onLandmarkSelect={(landmark) => {
-              setSelectedLandmark(landmark);
-              setIsCardMinimized(false);
-            }}
+
             spokenLandmarks={spokenLandmarks}
             showLandmarks={showLandmarks}
             showActivities={showActivities}
