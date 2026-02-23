@@ -501,29 +501,35 @@ export class AudioService {
       }
     }
 
-    // [Bug Doctor] 4단계: 상태 안정화 체크 (300ms 지연)
-    // 150ms에서 300ms로 늘려 브라우저가 처리를 완료할 시간을 충분히 줍니다.
+    // [Bug Doctor] 4단계: 상태 안정화 체크 및 강제 재기동 (Watchdog)
+    // 300ms 지연 후에도 엔진이 응답하지 않으면 죽었다고 판단하고 하드 리셋을 수행합니다.
     setTimeout(() => {
       if (!this.isPausedInternal) {
-        console.log(`[AudioService] 🧪 Stabilizer check - Context: ${this.audioContext?.state}, AudioPaused: ${this.audioElement?.paused}`);
+        console.log(`[AudioService] 🧪 Stabilizer check - Context: ${this.audioContext?.state}, AudioPaused: ${this.audioElement?.paused}, TTS Speaking: ${this.synthesis.speaking}`);
 
-        // Native TTS 체크 및 강제 재기동
-        if (this.synthesis.paused || (!this.synthesis.speaking && this.isSentenceMode)) {
-          console.log('[AudioService] 🔄 Native Resume stalled, forcing current sentence restart...');
-          if (this.synthesis.speaking) this.synthesis.cancel();
+        // Native TTS 체크 및 강제 재기동 (좀비 상태 돌파)
+        const isNativeTTSPossibleFail = this.isSentenceMode && !this.clovaSentenceMode && !this.openaiSentenceMode;
 
-          if (this.isSentenceMode) {
-            this.playNextSentence(this.openaiSentenceLanguage || 'ko', this.currentRate);
-          } else if (this.currentUtterance) {
-            this.synthesis.speak(this.currentUtterance);
-          }
+        if (isNativeTTSPossibleFail && (this.synthesis.paused || !this.synthesis.speaking)) {
+          console.log('[AudioService] 🚑 [Bug Doctor] TTS Resume stalled, forcing Hard Reset from index:', this.sentenceIndex);
+
+          this.synthesis.cancel(); // 좀비 엔진 강제 종료
+
+          // 동기적으로 즉시 재시작
+          setTimeout(() => {
+            if (!this.isPausedInternal && this.isSentenceMode) {
+              // 멈췄던 그 문장(sentenceIndex)부터 다시 읽게 합니다.
+              this.speakCurrentSentence();
+              console.log("[AudioService] 🚀 [Bug Doctor] Hard Reset successful: Resuming from sentence", this.sentenceIndex);
+            }
+          }, 50);
         }
 
-        // HTML5 Audio(MP3 등) 체크 및 강제 재개 (currentTime 유지)
+        // HTML5 Audio(MP3/Clova/OpenAI) 체크 및 강제 재개
         if (this.audioElement && this.audioElement.paused && (this.clovaSentenceMode || this.openaiSentenceMode || this.isMP3Playing)) {
-          console.log('[AudioService] 🔄 Audio stalled during resume, final kickstart...');
+          console.log('[AudioService] 🔄 Audio stalled during resume, final kickstart at time:', this.audioElement.currentTime);
           this.audioElement.play().catch(e => {
-            console.error('[AudioService] Final kickstart failed:', e);
+            console.error('[AudioService] ❌ Final kickstart failed:', e);
           });
         }
       }
@@ -532,6 +538,15 @@ export class AudioService {
 
     // MP3 전용 로직 호출 (상태 동기화)
     this.resumeMP3();
+  }
+
+  // [Bug Doctor] 현재 문장 인덱스부터 다시 읽어주는 도우미 함수
+  private speakCurrentSentence() {
+    if (!this.sentences || this.sentences.length === 0) return;
+    console.log(`[AudioService] 🎤 Speaking sentence at index: ${this.sentenceIndex}`);
+    this.isSentenceMode = true;
+    // playNextSentence(lang, rate, skipNextIndexIncrement) - skip increment to stay on current sentence
+    this.playNextSentence(this.openaiSentenceLanguage || 'ko', this.currentRate, true);
   }
 
   isPaused(): boolean {
@@ -706,7 +721,7 @@ export class AudioService {
     this.playNextSentence(language, rate);
   }
 
-  private playNextSentence(language: string, rate: number) {
+  private playNextSentence(language: string, rate: number, skipIncrement: boolean = false) {
     if (!this.isSentenceMode || this.sentenceIndex >= this.sentences.length) {
       // All sentences done
       this.isSentenceMode = false;
@@ -734,7 +749,9 @@ export class AudioService {
     }
 
     this.currentUtterance.onend = () => {
-      this.sentenceIndex++;
+      if (!skipIncrement) {
+        this.sentenceIndex++;
+      }
 
       // Notify next sentence if available
       if (this.onSentenceChange && this.sentenceIndex < this.sentences.length) {
