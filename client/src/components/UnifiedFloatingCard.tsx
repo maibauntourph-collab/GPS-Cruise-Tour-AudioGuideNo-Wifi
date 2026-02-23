@@ -786,85 +786,82 @@ export default function UnifiedFloatingCard({
       style={{
         zIndex,
       }}
-      className={`fixed bottom-24 right-4 w-[calc(100vw-32px)] sm:w-[360px] max-h-[calc(100vh-180px)] flex flex-col bg-background/95 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl overflow-hidden transition-all duration-300 ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100'}`}
+      className={`fixed bottom-24 right-4 w-[calc(100vw-32px)] sm:w-[380px] max-h-[calc(100vh-180px)] flex flex-col bg-background/80 backdrop-blur-2xl border border-white/30 shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-[2.5rem] overflow-hidden transition-all duration-500 ease-in-out ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20 scale-95' : 'opacity-100 translate-y-0 scale-100'}`}
       data-testid="unified-floating-card"
     >
       {/* CARD HEADER - Navigation & Title */}
-      <div className="flex items-center justify-between p-2 sm:p-3 border-b bg-muted/30">
-        <div className="flex items-center gap-0.5 overflow-x-auto no-scrollbar pr-1 flex-grow">
+      <div className="flex items-center justify-between p-2 sm:p-4 border-b border-white/10 bg-white/5">
+        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pr-2 flex-grow scroll-smooth">
           <Button
             variant={activeTab === 'landmark' ? 'default' : 'ghost'}
             size="sm"
+            className={`flex-shrink-0 h-9 px-3 rounded-full transition-all duration-200 ${activeTab === 'landmark' ? 'bg-primary shadow-lg shadow-primary/25' : 'hover:bg-white/10 text-muted-foreground'}`}
             onClick={(e) => {
               e.stopPropagation();
               setActiveTab('landmark');
             }}
-            className="flex-shrink-0"
-            data-testid="button-tab-landmark"
           >
-            {selectedLanguage === 'ko' ? '정보' : 'Info'}
+            <LandmarkIcon className="w-4 h-4 mr-1.5" />
+            <span className="text-[11px] sm:text-xs font-semibold whitespace-nowrap">
+              {t('landmarkInfo', selectedLanguage)}
+            </span>
           </Button>
 
-          <Button
-            variant={activeTab === 'tour' ? 'default' : 'ghost'}
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveTab('tour');
-            }}
-            className="flex-shrink-0"
-            data-testid="button-tab-tour"
-          >
-            {selectedLanguage === 'ko' ? '경로' : 'Tour'}
-          </Button>
-
-          {city?.cruisePort && (
+          {showCruisePort && city?.cruisePort && (
             <Button
               variant={activeTab === 'cruise' ? 'default' : 'ghost'}
               size="sm"
+              className={`flex-shrink-0 h-9 px-3 rounded-full transition-all duration-200 ${activeTab === 'cruise' ? 'bg-indigo-600 shadow-lg shadow-indigo-600/25' : 'hover:bg-white/10 text-muted-foreground'}`}
               onClick={(e) => {
                 e.stopPropagation();
                 setActiveTab('cruise');
               }}
-              className="flex-shrink-0"
-              data-testid="button-tab-cruise"
             >
-              {selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal'}
+              <Ship className="w-4 h-4 mr-1.5" />
+              <span className="text-[11px] sm:text-xs font-semibold whitespace-nowrap">
+                {t('cruisePort', selectedLanguage)}
+              </span>
             </Button>
           )}
 
           <Button
             variant={activeTab === 'list' ? 'default' : 'ghost'}
             size="sm"
+            className={`flex-shrink-0 h-9 px-3 rounded-full transition-all duration-200 ${activeTab === 'list' ? 'bg-emerald-600 shadow-lg shadow-emerald-600/25' : 'hover:bg-white/10 text-muted-foreground'}`}
             onClick={(e) => {
               e.stopPropagation();
               setActiveTab('list');
             }}
-            className="flex-shrink-0"
-            data-testid="button-tab-list"
           >
-            {selectedLanguage === 'ko' ? '주변' : 'Nearby'}
+            <List className="w-4 h-4 mr-1.5" />
+            <span className="text-[11px] sm:text-xs font-semibold whitespace-nowrap">
+              {t('list', selectedLanguage)}
+            </span>
           </Button>
 
-          {/* [적요] 갤러리 탭은 MyPic(LandmarkDetailDialog)으로 이동됨 — 라우터 맵에서 제거 */}
+          <Button
+            variant={activeTab === 'tour' ? 'default' : 'ghost'}
+            size="sm"
+            className={`flex-shrink-0 h-9 px-3 rounded-full transition-all duration-200 ${activeTab === 'tour' ? 'bg-orange-600 shadow-lg shadow-orange-600/25' : 'hover:bg-white/10 text-muted-foreground'}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveTab('tour');
+            }}
+          >
+            <MapPinned className="w-4 h-4 mr-1.5" />
+            <span className="text-[11px] sm:text-xs font-semibold whitespace-nowrap">
+              {t('myTour', selectedLanguage)}
+              {tourStops.length > 0 && (
+                <Badge variant="secondary" className="ml-1.5 px-1.5 py-0 min-w-[1.2rem] h-[1.2rem] flex items-center justify-center bg-white/20 text-white border-none text-[10px]">
+                  {tourStops.length}
+                </Badge>
+              )}
+            </span>
+          </Button>
         </div>
 
-        <div className="flex items-center gap-1 pl-2 border-l">
-          {activeTab === 'tour' && tourStops.length > 0 && (
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={(e) => {
-                e.stopPropagation();
-                // TODO: 경로 최적화 기능 연결
-              }}
-              className="h-8 w-8 text-primary border-primary/30"
-              data-testid="button-optimize-route"
-            >
-              <Wand2 className="w-4 h-4" />
-            </Button>
-          )}
-
+        {/* 닫기 버튼 및 추가 액션 영역 */}
+        <div className="flex items-center gap-1.5 ml-2">
           {activeTab === 'landmark' && selectedLandmark && (
             <Button
               variant="ghost"
@@ -878,8 +875,7 @@ export default function UnifiedFloatingCard({
                   onAddToTour?.(selectedLandmark);
                 }
               }}
-              className={`h-8 w-8 ${tourStops.some(stop => stop.id === selectedLandmark.id) ? 'text-red-500 hover:text-red-600' : 'text-primary hover:text-primary'}`}
-              data-testid="button-header-toggle-tour"
+              className={`h-9 w-9 rounded-full transition-all active:scale-90 ${tourStops.some(stop => stop.id === selectedLandmark.id) ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}
             >
               {tourStops.some(stop => stop.id === selectedLandmark.id) ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
             </Button>
@@ -888,12 +884,12 @@ export default function UnifiedFloatingCard({
           <Button
             variant="ghost"
             size="icon"
+            className="h-9 w-9 rounded-full bg-black/5 hover:bg-black/10 text-muted-foreground transition-all active:scale-90"
             onClick={(e) => {
               e.stopPropagation();
-              onLandmarkClose?.();
+              onLandmarkClose();
+              if (showCruisePort) onCruisePortClose?.();
             }}
-            className="h-8 w-8 text-muted-foreground hover:text-foreground"
-            data-testid="button-header-close"
           >
             <X className="w-4 h-4" />
           </Button>

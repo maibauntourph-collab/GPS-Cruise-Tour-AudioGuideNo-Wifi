@@ -1406,7 +1406,7 @@ export default function Home() {
             lng: location.lng
           });
           toast({
-            title: selectedLanguage === 'ko' ? '異쒕컻吏 ?ㅼ젙' : 'Start point set ',
+            title: selectedLanguage === 'ko' ? '출발지 설정' : 'Start point set ',
             description: location.name
           });
         }}
@@ -1528,26 +1528,24 @@ export default function Home() {
           }}>
             <Tooltip>
               <TooltipTrigger asChild>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={(startingPoint || endPoint) ? "default" : "outline"}
-                    size="sm"
-                    className={`h-7 gap-1 px-2 ${(startingPoint || endPoint) ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' : ''}`}
-                    data-testid="button-starting-point"
-                  >
-                    <div className="flex items-center gap-0.5">
-                      <Circle className={`w-2.5 h-2.5 ${startingPoint ? 'fill-white' : ''}`} />
-                      <span className="text-[10px]">시작</span>
-                      <Flag className={`w-2.5 h-2.5 ${endPoint ? 'fill-white' : ''}`} />
-                    </div>
-                    <span className="hidden sm:inline text-xs">
-                      {selectedLanguage === 'ko' ? '출발/도착' : 'Start/End'}
-                    </span>
-                  </Button>
-                </PopoverTrigger>
+                <Button
+                  variant={(startingPoint || endPoint) ? "default" : "outline"}
+                  size="sm"
+                  className={`h-7 gap-1 px-2 ${(startingPoint || endPoint) ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' : ''}`}
+                  data-testid="button-starting-point"
+                >
+                  <div className="flex items-center gap-0.5">
+                    <Circle className={`w-2.5 h-2.5 ${startingPoint ? 'fill-white' : ''}`} />
+                    <span className="text-[10px]">시작</span>
+                    <Flag className={`w-2.5 h-2.5 ${endPoint ? 'fill-white' : ''}`} />
+                  </div>
+                  <span className="hidden sm:inline text-xs">
+                    {selectedLanguage === 'ko' ? '출발/도착' : 'Start/End'}
+                  </span>
+                </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>{selectedLanguage === 'ko' ? '異쒕컻吏/?꾩갑吏 諛?異쒕컻 ?쒓컙 ?ㅼ젙' : 'Set Start/End Points & Departure Time'}</p>
+                <p>{selectedLanguage === 'ko' ? '출발지/도착지 및 출발 시간 설정' : 'Set Start/End Points & Departure Time'}</p>
               </TooltipContent>
             </Tooltip>
             <PopoverContent className="w-80 p-2 z-[9999] max-h-[70vh] overflow-y-auto" align="start">
@@ -2063,13 +2061,13 @@ export default function Home() {
                           lng: position.longitude
                         });
                         toast({
-                          title: selectedLanguage === 'ko' ? '?꾩갑吏 ?ㅼ젙' : 'End point set',
+                          title: selectedLanguage === 'ko' ? '도착지 설정' : 'End point set',
                           description: t('myLocation', selectedLanguage)
                         });
                       } else {
                         toast({
-                          title: selectedLanguage === 'ko' ? '?꾩튂 ?뺣낫 ?꾩슂' : 'Location Required',
-                          description: selectedLanguage === 'ko' ? 'GPS ?꾩튂瑜뺤씤?놁뒿?덈떎' : 'GPS location not available',
+                          title: selectedLanguage === 'ko' ? '위치 정보 필요' : 'Location Required',
+                          description: selectedLanguage === 'ko' ? 'GPS 위치를 확인할 수 없습니다' : 'GPS location not available',
                           variant: 'destructive'
                         });
                       }
@@ -2091,14 +2089,14 @@ export default function Home() {
                       setIsSelectingHotelOnMap(false);
                       setIsStartingPointPopoverOpen(false);
                       toast({
-                        title: selectedLanguage === 'ko' ? '?꾩갑吏 ?좏깮' : 'Select End Point',
-                        description: selectedLanguage === 'ko' ? '吏?꾩뿉?꾩튂瑜?븯?몄슂' : 'Tap on map to set location'
+                        title: selectedLanguage === 'ko' ? '도착지 선택' : 'Select End Point',
+                        description: selectedLanguage === 'ko' ? '지도에서 위치를 탭하세요' : 'Tap on map to set location'
                       });
                     }}
                     data-testid="button-end-select-map"
                   >
                     <MapPin className="w-4 h-4 text-red-500" />
-                    {selectedLanguage === 'ko' ? '吏?꾩뿉?좏깮' : 'Select on map'}
+                    {selectedLanguage === 'ko' ? '지도에서 선택' : 'Select on map'}
                   </Button>
 
                   {/* City-specific end points */}
@@ -2121,7 +2119,7 @@ export default function Home() {
                                 onClick={() => {
                                   setEndPoint({ ...airport, id: `end_${airport.id}` });
                                   toast({
-                                    title: selectedLanguage === 'ko' ? '?꾩갑吏 ?ㅼ젙' : 'End point set',
+                                    title: selectedLanguage === 'ko' ? '도착지 설정' : 'End point set',
                                     description: getStartingPointName(airport, selectedLanguage)
                                   });
                                 }}
@@ -2147,7 +2145,7 @@ export default function Home() {
                                 onClick={() => {
                                   setEndPoint({ ...terminal, id: `end_${terminal.id}` });
                                   toast({
-                                    title: selectedLanguage === 'ko' ? '?꾩갑吏 ?ㅼ젙' : 'End point set',
+                                    title: selectedLanguage === 'ko' ? '도착지 설정' : 'End point set',
                                     description: getStartingPointName(terminal, selectedLanguage)
                                   });
                                 }}
@@ -2164,7 +2162,7 @@ export default function Home() {
                         {cityPoints.trainStations.length > 0 && (
                           <div className="space-y-1">
                             <p className="text-xs text-muted-foreground font-medium">
-                              {selectedLanguage === 'ko' ? '湲곗감' : 'Train Station'}
+                              {selectedLanguage === 'ko' ? '기차역' : 'Train Station'}
                             </p>
                             {cityPoints.trainStations.map((station) => (
                               <Button
@@ -2175,7 +2173,7 @@ export default function Home() {
                                 onClick={() => {
                                   setEndPoint({ ...station, id: `end_${station.id}` });
                                   toast({
-                                    title: selectedLanguage === 'ko' ? '?꾩갑吏 ?ㅼ젙' : 'End point set',
+                                    title: selectedLanguage === 'ko' ? '도착지 설정' : 'End point set',
                                     description: getStartingPointName(station, selectedLanguage)
                                   });
                                 }}
@@ -2218,7 +2216,7 @@ export default function Home() {
 
                   <div className="space-y-2">
                     <p className="text-xs text-muted-foreground">
-                      {selectedLanguage === 'ko' ? '異쒕컻 ?덉젙 ?쒓컙?좏깮?섎㈃ ?대떦 ?쒓컙?援먰넻?곹솴?덉륫?⑸땲' : 'Select departure time to estimate traffic conditions.'}
+                      {selectedLanguage === 'ko' ? '출발 예정 시간을 선택하면 해당 시간의 교통 상황을 예측합니다' : 'Select departure time to estimate traffic conditions.'}
                     </p>
 
                     {/* Use Current Time */}
@@ -2265,7 +2263,7 @@ export default function Home() {
                     {/* Custom Time Input */}
                     <div className="flex items-center gap-2">
                       <span className="text-xs text-muted-foreground w-16">
-                        {selectedLanguage === 'ko' ? '吏곸젒 ?낅젰' : 'Custom'}
+                        {selectedLanguage === 'ko' ? '직접 입력' : 'Custom'}
                       </span>
                       <input
                         type="time"
@@ -2289,7 +2287,7 @@ export default function Home() {
                     {/* Day of Week Selection */}
                     <div className="space-y-1">
                       <p className="text-[10px] text-muted-foreground">
-                        {selectedLanguage === 'ko' ? '?붿씪 ?좏깮 (二쇰쭚? 援먰넻?됱씠 ?ㅻ쫭?덈떎)' : 'Select day (weekends have different traffic)'}
+                        {selectedLanguage === 'ko' ? '요일 선택 (주말은 교통량이 다름)' : 'Select day (weekends have different traffic)'}
                       </p>
                       <div className="flex gap-1">
                         {[
@@ -2703,7 +2701,7 @@ export default function Home() {
         </header>
 
         <div className="relative flex-1 overflow-hidden flex flex-col">
-          {/* [Designer Kim] Magic Transition Overlay: Startup -> Landing ?꾪솚 遺?쒕윭?붿씠?몄븘*/}
+          {/* [Designer Kim] Magic Transition Overlay: Startup -> Landing 전환 블러레이어*/}
           <AnimatePresence>
             {isStartupTransitioning && (
               <motion.div
@@ -2760,7 +2758,7 @@ export default function Home() {
                 });
                 setIsSelectingHotelOnMap(false);
                 toast({
-                  title: selectedLanguage === 'ko' ? '異쒕컻吏 ?ㅼ젙' : 'Start point set ',
+                  title: selectedLanguage === 'ko' ? '출발지 설정' : 'Start point set ',
                   description: t('hotel', selectedLanguage)
                 });
               }}
@@ -2768,14 +2766,14 @@ export default function Home() {
                 setEndPoint({
                   id: 'end_location',
                   type: 'hotel',
-                  name: selectedLanguage === 'ko' ? '?꾩갑吏' : 'End Point',
+                  name: selectedLanguage === 'ko' ? '도착지' : 'End Point',
                   lat,
                   lng
                 });
                 setIsSelectingEndPointOnMap(false);
                 toast({
-                  title: selectedLanguage === 'ko' ? '?꾩갑吏 ?ㅼ젙' : 'End point set ',
-                  description: selectedLanguage === 'ko' ? '吏?꾩뿉?좏깮' : 'Selected on map'
+                  title: selectedLanguage === 'ko' ? '도착지 설정' : 'End point set ',
+                  description: selectedLanguage === 'ko' ? '지도에서선택' : 'Selected on map'
                 });
               }}
               selectedLandmark={selectedLandmark}
@@ -2788,7 +2786,7 @@ export default function Home() {
               showTourOnly={showTourOnly}
               tourStopIds={tourStops.map(s => s.id)}
               isMobile={isMobile}
-              isCarNavZoomMode={isCarNavZoomMode} // [異붽?] 移대퉥 以?踰꾪듉 ?곹깭 ?꾨떖
+              isCarNavZoomMode={isCarNavZoomMode} // [추가] 카내비 줌버튼 상태 전달
             />
 
             {/* Tour Filter Button - next to zoom controls */}
@@ -2814,7 +2812,7 @@ export default function Home() {
                   </TooltipTrigger>
                   <TooltipContent side="right">
                     <p>{selectedLanguage === 'ko'
-                      ? (showTourOnly ? '紐⑤뱺 ?μ냼 蹂닿린' : '?ъ뼱 ?μ냼留?蹂닿린')
+                      ? (showTourOnly ? '모든 장소 보기' : '투어 장소만 보기')
                       : (showTourOnly ? 'Show All Places' : 'Show Tour Only')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -2965,10 +2963,10 @@ export default function Home() {
         </div>
       </div >
 
-      {/* [?곌뎄?뚯옣 媛?대뱶: ?대퉬寃뚯씠?꾩슜 紐⑤뱶 ?곸슜]
-          학생 여러분 isNavigationOnlyMode媛 耳쒖졇 ?덈떎硫?
-          ?ъ슜?먯뿉寃?吏?꾨쭔 蹂댁뿬二쇨린 ?꾪빐 ?ㅻ챸 ?⑤꼸(UnifiedFloatingCard)?뚮뜑留곹븯吏 ?딆뒿?덈떎.
-           ?ㅻ뵒?ㅻ뒗 ?ㅼ뿉怨꾩냽 ?섏삤怨덉뼱?섍쿋二? */}
+      {/* [연구소장 가이드: 내비게이션용 모드 적용]
+          학생 여러분 isNavigationOnlyMode가 켜져 있다면
+          사용자에게 지도만 보여주기 위해 설명 패널(UnifiedFloatingCard)은 렌더링하지 않습니다.
+           오디오는 여전히 계속 나올거겠쥬? */}
       {
         (!isNavigationOnlyMode || temporaryShowCard || selectedLandmark) && (
           <UnifiedFloatingCard
@@ -3015,7 +3013,7 @@ export default function Home() {
               const landmark = filteredLandmarks.find(l => l.id === landmarkId);
               if (landmark) {
                 // Now set selected landmark
-                setIsManualSelection(true); // 吏곸젒 ?대┃?덉쑝誘濡섎룞 ?좏깮 紐⑤뱶
+                setIsManualSelection(true); // 직접 클릭했으므로 수동 선택 모드
                 setSelectedLandmark(landmark);
               }
             }}
@@ -3190,7 +3188,7 @@ export default function Home() {
                     <option value="zh">中文</option>
                     <option value="ja">日本語</option>
                     <option value="pt">Português</option>
-                    <option value="ru">克龜橘</option>
+                    <option value="ru">Русский</option>
                   </select>
                 </div>
 
@@ -3265,7 +3263,7 @@ export default function Home() {
               onClick={() => {
                 setShowDirectionsDialog(false);
                 setPendingLandmark(null);
-                // 由ъ뒪?몃? ?ㅼ떆 ?쒖떆
+                // 리스트를 다시 표시
                 setForceShowCard(true);
                 setTimeout(() => setForceShowCard(false), 100);
               }}
@@ -3329,7 +3327,7 @@ export default function Home() {
           setShowAudioDownloadDialog(true);
         }}
         onClose={() => {
-          console.log("?럷截?[Dodari] Welcome Screen Handled. Releasing sequence lock.");
+          console.log("도다리[Dodari] Welcome Screen Handled. Releasing sequence lock.");
           setIsWelcomeHandled(true);
         }}
       />
@@ -3374,18 +3372,18 @@ export default function Home() {
         selectedLanguage={selectedLanguage}
       />
 
-      {/* [강의 노트: ?щ━?먯씠?꾩슜 李쎄뎄]
-          학생 여러분 ?댁젣 ?곕━媛 留뚮뱺 ??쒕낫?쒕? ?ㅼ젣 ?붾㈃遺숈뿬遊낆떆
-          DialogContent ?덉뿉 CreatorDashboard 而댄룷?뚰듃瑜?諛곗튂?섏뿬
-          ?ъ슜?먭? 踰꾪듉?뚮뚮쭔 ?섑섎룄濡ㅺ퀎?덉뒿?덈떎. */}
+      {/* [강의 노트: 크리에이터용 창구]
+          학생 여러분 이제 우리가 만든 대시보드를 실제 화면붙여봅시다
+          DialogContent 안에 CreatorDashboard 컴포넌트를 배치하여
+          사용자가 버튼만 누르도록 계했습니다. */}
       <Dialog open={showCreatorDashboard} onOpenChange={setShowCreatorDashboard}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden">
           <CreatorDashboard />
         </DialogContent>
       </Dialog>
 
-      {/* [?붿옄?대꼫 ?댁쓽 留ㅼ쭅 UI: ?먮룞 ?쒕뵫 ?ㅼ씠?쇰줈洹?- ?꾨━誘몄뾼 ?쒓컖 怨좊룄 */}
-      {/* ?럷截?[Dodari] ?쒗媛뺤젣: ?곗뺨 ?붾㈃ 泥섎━ ?꾨즺(isWelcomeHandled) AND ?ㅽ몄뾽 ?ㅼ씠?쇰줈洹놁쓬(!showStartupDialog) ?꾩닔 */}
+      {/* [디자이너 이의 매직 UI: 자동 랜딩 다이얼로그- 프리미엄 시각 고도 */}
+      {/* 도다리[Dodari] 전환강제: 시작 화면 처리 완료(isWelcomeHandled) AND 스타트업 다이얼로그(!showStartupDialog) 필수 */}
       <Dialog
         open={!!landingCityId && isWelcomeHandled && !showStartupDialog}
         onOpenChange={(open) => !open && setLandingCityId(null)}
@@ -3393,7 +3391,7 @@ export default function Home() {
         <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none bg-transparent shadow-2xl scale-100 transition-transform duration-500 ease-out">
           {(() => {
             const landingCity = cities.find(c => c.id === landingCityId);
-            // ?럷截?[Data Sync] DB ?곗꽑(landingCity?.landingContent), ?놁쑝硫섎뱶肄붾뵫(LANDING_DATA) Fallback
+            // 도다리[Data Sync] DB 우선(landingCity?.landingContent), 없으면하드코딩(LANDING_DATA) Fallback
             const landingContentSource = (landingCity as any)?.landingContent || (landingCityId ? LANDING_DATA[landingCityId] : null);
 
             if (!landingCityId || !landingContentSource) return null;
@@ -3402,7 +3400,7 @@ export default function Home() {
 
             return (
               <div className="relative w-full overflow-hidden rounded-3xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-white/20 transition-all animate-in fade-in zoom-in-95 duration-500">
-                {/* ?덈줈 ?대?吏 ?뱀뀡: Ken Burns ?④낵 ?곸슜 */}
+                {/* 새로 이미지 섹션: Ken Burns 효과 적용 */}
                 <div className="relative h-72 w-full overflow-hidden">
                   <img
                     src={content?.heroImage}
@@ -3411,7 +3409,7 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-                  {/* ?リ린 踰꾪듉: 留덉씠?щ줈 ?명꽣?숈뀡 */}
+                  {/* 닫기 버튼: 마이크로 인터랙션 */}
                   <button
                     onClick={() => setLandingCityId(null)}
                     className="absolute top-5 right-5 p-2.5 rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-md border border-white/10 transition-all active:scale-90"
@@ -3430,7 +3428,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* 肄섑뀗痢뱀뀡: ?몃젴??댄룷洹몃옒諛?踰꾪듉 湲濡쒖슦 */}
+                {/* 콘텐츠 섹션: 트렌디한 포그라피와 버튼 길러우 */}
                 <div className="p-10 text-center">
                   <p className="text-slate-600 dark:text-slate-300 mb-10 leading-relaxed font-semibold text-lg drop-shadow-sm">
                     {content?.subTitle}
@@ -3445,7 +3443,7 @@ export default function Home() {
                       }}
                     >
                       <span className="relative z-10 flex items-center justify-center gap-2">
-                        {language === 'ko' ? '吏湲숈썝 ?먰뿕?섍린' : 'Explore Paradise Now'}
+                        {language === 'ko' ? '지금 바로 체험하기' : 'Explore Paradise Now'}
                         <div className="w-2 h-2 rounded-full bg-white animate-ping" />
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />

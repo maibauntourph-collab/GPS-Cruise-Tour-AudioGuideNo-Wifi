@@ -1,0 +1,740 @@
+{
+  "hardcoded": [],
+  "server": [
+    {
+      "id": "london_item_50",
+      "name": "런던 프리미엄 Activity 추천 51",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_성산_일출봉",
+      "name": "성산 일출봉",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_108",
+      "name": "SEOUL Premium Landmark 108",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_28",
+      "name": "SEOUL Premium Landmark 28",
+      "type": "Placeholder"
+    },
+    {
+      "id": "도쿄-demo-1",
+      "name": "도쿄의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "new-york_item_15",
+      "name": "뉴욕 프리미엄 Shopping 추천 16",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_item_99",
+      "name": "TOKYO Premium Shopping 99",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_24",
+      "name": "싱가포르 프리미엄 Landmark 추천 25",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_item_31",
+      "name": "로마 프리미엄 Shopping 추천 32",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_item_27",
+      "name": "제주특별자치도 프리미엄 Shopping 추천 28",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_item_11",
+      "name": "로마 프리미엄 Shopping 추천 12",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_포트넘_앤_메이슨_피카딜리_fortnum_mason_p",
+      "name": "포트넘 앤 메이슨, 피카딜리 (Fortnum & Mason, Piccadilly)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_item_43",
+      "name": "바르셀로나 프리미엄 Shopping 추천 44",
+      "type": "Placeholder"
+    },
+    {
+      "id": "new-york_item_55",
+      "name": "뉴욕 프리미엄 Shopping 추천 56",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_64",
+      "name": "싱가포르 프리미엄 Landmark 추천 65",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_16",
+      "name": "부산광역시 프리미엄 Landmark 추천 17",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_f1963_복합문화공간_f1963",
+      "name": "F1963 (복합문화공간 F1963)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "바르셀로나-demo-1",
+      "name": "바르셀로나의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "제주특별자치도-demo-1",
+      "name": "제주특별자치도의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_76",
+      "name": "부산광역시 프리미엄 Landmark 추천 77",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_더_리츠_런던_애프터눈_티_afternoon_tea_a",
+      "name": "더 리츠 런던 애프터눈 티 (Afternoon Tea at The Ritz London)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_해동용궁사_haedong_yonggungsa_templ",
+      "name": "해동용궁사 (Haedong Yonggungsa Temple)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_item_47",
+      "name": "제주특별자치도 프리미엄 Shopping 추천 48",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_0",
+      "name": "런던 프리미엄 Landmark 추천 1",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_52",
+      "name": "파리 프리미엄 Landmark 추천 53",
+      "type": "Placeholder"
+    },
+    {
+      "id": "bus_gamcheon",
+      "name": "감천문화마을 (Gamcheon Culture Village)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "new-york_item_95",
+      "name": "뉴욕 프리미엄 Shopping 추천 96",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_item_103",
+      "name": "바르셀로나 프리미엄 Shopping 추천 104",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_10",
+      "name": "런던 프리미엄 Activity 추천 11",
+      "type": "Placeholder"
+    },
+    {
+      "id": "서울특별시-demo-1",
+      "name": "서울특별시의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_70",
+      "name": "런던 프리미엄 Activity 추천 71",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_item_83",
+      "name": "바르셀로나 프리미엄 Shopping 추천 84",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_72",
+      "name": "파리 프리미엄 Landmark 추천 73",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_아벤티노_열쇠_구멍_aventine_keyhole",
+      "name": "아벤티노 열쇠 구멍 (Aventine Keyhole)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_콜로세움_로마_포럼_colosseum_roman_for",
+      "name": "콜로세움 & 로마 포럼 (Colosseum & Roman Forum)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_웨스트민스터_애비_westminster_abbey",
+      "name": "웨스트민스터 애비 (Westminster Abbey)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_12",
+      "name": "파리 프리미엄 Landmark 추천 13",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_보르게세_미술관_보르게세_공원_galleria_borg",
+      "name": "보르게세 미술관 & 보르게세 공원 (Galleria Borghese & Borghese Gardens)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_raffles_hotel_singapore",
+      "name": "Raffles Hotel Singapore",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_106",
+      "name": "부산광역시 프리미엄 Activity 추천 107",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_구엘_공원_park_gell",
+      "name": "구엘 공원 (Park Güell)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_item_23",
+      "name": "바르셀로나 프리미엄 Shopping 추천 24",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_해동_용궁사_haedong_yonggungsa_temp",
+      "name": "해동 용궁사 (Haedong Yonggungsa Temple)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_6",
+      "name": "부산광역시 프리미엄 Activity 추천 7",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_제주돌문화공원",
+      "name": "제주돌문화공원",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_26",
+      "name": "부산광역시 프리미엄 Activity 추천 27",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_경복궁_경회루_gyeonghoeru_pavilion_g",
+      "name": "경복궁 경회루 (Gyeonghoeru Pavilion, Gyeongbokgung Palace)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_바티칸_박물관_시스티나_예배당_vatican_museu",
+      "name": "바티칸 박물관 & 시스티나 예배당 (Vatican Museums & Sistine Chapel)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_66",
+      "name": "부산광역시 프리미엄 Activity 추천 67",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_56",
+      "name": "부산광역시 프리미엄 Landmark 추천 57",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_팀랩_플래닛_도쿄_dmm_teamlab_planets_",
+      "name": "팀랩 플래닛 도쿄 DMM (teamLab Planets TOKYO DMM)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "new-york_item_75",
+      "name": "뉴욕 프리미엄 Shopping 추천 76",
+      "type": "Placeholder"
+    },
+    {
+      "id": "파리-demo-1",
+      "name": "파리의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_78",
+      "name": "SEOUL Premium Activity 78",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_경복궁_gyeongbokgung_palace",
+      "name": "경복궁 (Gyeongbokgung Palace)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_새벽_투어",
+      "name": "바티칸 박물관 & 시스티나 예배당 프라이빗 새벽 투어",
+      "type": "Placeholder"
+    },
+    {
+      "id": "lon_tower_bridge",
+      "name": "타워 브리지 (Tower Bridge)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "로마-demo-1",
+      "name": "로마의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_96",
+      "name": "부산광역시 프리미엄 Landmark 추천 97",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_item_67",
+      "name": "제주특별자치도 프리미엄 Shopping 추천 68",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_104",
+      "name": "싱가포르 프리미엄 Landmark 추천 105",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rom_colosseum",
+      "name": "콜로세움 (Colosseum)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_item_7",
+      "name": "제주특별자치도 프리미엄 Shopping 추천 8",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_item_87",
+      "name": "제주특별자치도 프리미엄 Shopping 추천 88",
+      "type": "Placeholder"
+    },
+    {
+      "id": "la-cittadella-subdivision",
+      "name": "La Cittadella Subdivision",
+      "type": "Empty"
+    },
+    {
+      "id": "런던-demo-1",
+      "name": "런던의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "gaisano-grand-mall-talamban",
+      "name": "Gaisano Grand Mall Talamban",
+      "type": "Empty"
+    },
+    {
+      "id": "paris_item_2",
+      "name": "파리 프리미엄 Activity 추천 3",
+      "type": "Placeholder"
+    },
+    {
+      "id": "부산광역시-demo-1",
+      "name": "부산광역시의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_62",
+      "name": "파리 프리미엄 Activity 추천 63",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_item_39",
+      "name": "TOKYO Premium Shopping 39",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_item_59",
+      "name": "TOKYO Premium Shopping 59",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_82",
+      "name": "파리 프리미엄 Activity 추천 83",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rom_trevi",
+      "name": "트레비 분수 (Trevi Fountain)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "par_eiffel",
+      "name": "에펠탑 (Eiffel Tower)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_4",
+      "name": "싱가포르 프리미엄 Landmark 추천 5",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_item_79",
+      "name": "TOKYO Premium Shopping 79",
+      "type": "Placeholder"
+    },
+    {
+      "id": "싱가포르-demo-1",
+      "name": "싱가포르의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_38",
+      "name": "SEOUL Premium Activity 38",
+      "type": "Placeholder"
+    },
+    {
+      "id": "par_louvre",
+      "name": "루브르 박물관 (Louvre Museum)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_item_19",
+      "name": "TOKYO Premium Shopping 19",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_32",
+      "name": "파리 프리미엄 Landmark 추천 33",
+      "type": "Placeholder"
+    },
+    {
+      "id": "new-york_item_35",
+      "name": "뉴욕 프리미엄 Shopping 추천 36",
+      "type": "Placeholder"
+    },
+    {
+      "id": "뉴욕-demo-1",
+      "name": "뉴욕의 숨겨진 보석",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_44",
+      "name": "싱가포르 프리미엄 Landmark 추천 45",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_item_51",
+      "name": "로마 프리미엄 Shopping 추천 52",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_사그라다_파밀리아_sagrada_familia",
+      "name": "사그라다 파밀리아 (Sagrada Familia)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_item_63",
+      "name": "바르셀로나 프리미엄 Shopping 추천 64",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_68",
+      "name": "SEOUL Premium Landmark 68",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_item_71",
+      "name": "로마 프리미엄 Shopping 추천 72",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_46",
+      "name": "부산광역시 프리미엄 Activity 추천 47",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_18",
+      "name": "SEOUL Premium Activity 18",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_86",
+      "name": "부산광역시 프리미엄 Activity 추천 87",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_84",
+      "name": "싱가포르 프리미엄 Landmark 추천 85",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_88",
+      "name": "SEOUL Premium Landmark 88",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_92",
+      "name": "파리 프리미엄 Landmark 추천 93",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_item_91",
+      "name": "로마 프리미엄 Shopping 추천 92",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_98",
+      "name": "SEOUL Premium Activity 98",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_item_107",
+      "name": "제주특별자치도 프리미엄 Shopping 추천 108",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_58",
+      "name": "SEOUL Premium Activity 58",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_90",
+      "name": "런던 프리미엄 Activity 추천 91",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_14",
+      "name": "싱가포르 프리미엄 Activity 추천 15",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_item_3",
+      "name": "바르셀로나 프리미엄 Shopping 추천 4",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_item_36",
+      "name": "부산광역시 프리미엄 Landmark 추천 37",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_22",
+      "name": "파리 프리미엄 Activity 추천 23",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_20",
+      "name": "런던 프리미엄 Landmark 추천 21",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_48",
+      "name": "SEOUL Premium Landmark 48",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_30",
+      "name": "런던 프리미엄 Activity 추천 31",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_34",
+      "name": "싱가포르 프리미엄 Activity 추천 35",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_40",
+      "name": "런던 프리미엄 Landmark 추천 41",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_42",
+      "name": "파리 프리미엄 Activity 추천 43",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_54",
+      "name": "싱가포르 프리미엄 Activity 추천 55",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_60",
+      "name": "런던 프리미엄 Landmark 추천 61",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_74",
+      "name": "싱가포르 프리미엄 Activity 추천 75",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_item_8",
+      "name": "SEOUL Premium Landmark 8",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_80",
+      "name": "런던 프리미엄 Landmark 추천 81",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_item_94",
+      "name": "싱가포르 프리미엄 Activity 추천 95",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_item_100",
+      "name": "런던 프리미엄 Landmark 추천 101",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_item_102",
+      "name": "파리 프리미엄 Activity 추천 103",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_콜로세움_colosseum",
+      "name": "콜로세움 (Colosseum)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_판테온_pantheon",
+      "name": "판테온 (Pantheon)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_북촌한옥마을_전통_차_체험_bukchon_hanok_v",
+      "name": "북촌한옥마을 & 전통 차 체험 (Bukchon Hanok Village & Traditional Tea Ceremony)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_긴자_",
+      "name": "긴자 (銀座)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_황궁_동어원_",
+      "name": "황궁 동어원 (皇居東御苑)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_템스강_프라이빗_선셋_크루즈_private_thames",
+      "name": "템스강 프라이빗 선셋 크루즈 (Private Thames River Cruise at Sunset)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_이른_아침_투어",
+      "name": "바티칸 박물관 & 시스티나 예배당 프라이빗 이른 아침 투어 (Private Vatican Museums & Sistine Chapel Early Morning Tour)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "london_웨스트민스터_사원_westminster_abbey",
+      "name": "웨스트민스터 사원 (Westminster Abbey)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_gardens_by_the_bay_supertree_g",
+      "name": "Gardens by the Bay (Supertree Grove & Cloud Forest)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "barcelona_프라이빗_선셋_요트_크루즈_private_sunset_",
+      "name": "프라이빗 선셋 요트 크루즈 (Private Sunset Yacht Cruise)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "singapore_national_gallery_singapore",
+      "name": "National Gallery Singapore",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_더베이_101_the_bay_101",
+      "name": "더베이 101 (The Bay 101)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "new-york_the_met_cloisters",
+      "name": "The Met Cloisters",
+      "type": "Placeholder"
+    },
+    {
+      "id": "jeju_비자림",
+      "name": "비자림",
+      "type": "Placeholder"
+    },
+    {
+      "id": "new-york_tenement_museum",
+      "name": "Tenement Museum",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_더베이_101_요트클럽_다이닝_the_bay_101_y",
+      "name": "더베이 101 요트클럽 & 다이닝 (The Bay 101 Yacht Club & Dining)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "busan_감천문화마을_gamcheon_culture_villag",
+      "name": "감천문화마을 (Gamcheon Culture Village)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_메이지_진구_신사_",
+      "name": "메이지 진구 신사 (明治神宮)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_시부야_스카이_시부야_스크램블_교차로_",
+      "name": "시부야 스카이 & 시부야 스크램블 교차로 (渋谷スカイ & 渋谷スクランブル交差点)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "rome_더_판테온_로마_the_pantheon_rome",
+      "name": "더 판테온, 로마 (The Pantheon, Rome)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "lon_big_ben",
+      "name": "빅벤과 국회의사당 (Big Ben & Parliament)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_베르사유_궁전_거울의_방_galerie_des_glac",
+      "name": "베르사유 궁전 - 거울의 방 (Galerie des Glaces)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "paris_요트_드_파리_럭셔리_프라이빗_세느강_디너_크루즈",
+      "name": "요트 드 파리 - 럭셔리 프라이빗 세느강 디너 크루즈",
+      "type": "Placeholder"
+    },
+    {
+      "id": "seoul_리움미술관_leeum_museum_of_art",
+      "name": "리움미술관 (Leeum Museum of Art)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "talamban-post-office",
+      "name": "Talamban Post Office",
+      "type": "Empty"
+    },
+    {
+      "id": "jeju_한라산_국립공원_어승생악_탐방로",
+      "name": "한라산 국립공원 (어승생악 탐방로)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "tokyo_sensoji_nanobanana",
+      "name": "센소지 (Senso-ji Temple)",
+      "type": "Placeholder"
+    },
+    {
+      "id": "new-york_grand_central_terminal",
+      "name": "Grand Central Terminal",
+      "type": "Placeholder"
+    }
+  ]
+}

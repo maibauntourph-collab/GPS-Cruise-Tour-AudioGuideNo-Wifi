@@ -262,7 +262,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     pause: '일시정지',
     resume: '재개',
     speed: '속도',
-    detailedInformation: 'MyPic',
+    detailedInformation: '상세 정보',
     close: '닫기',
     navigate: '길찾기',
     photos: '사진',

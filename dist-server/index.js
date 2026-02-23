@@ -22170,12 +22170,20 @@ app.get("/*", async (c, next) => {
       const m = await import("__STATIC_CONTENT_MANIFEST");
       manifest = m.default ? typeof m.default === "string" ? JSON.parse(m.default) : m.default : m;
     } catch (e) {
+      console.warn("[Worker] Manifest load failed during asset check");
     }
-    const res = await workerServeStatic({ root: "./", manifest })(c, next);
-    if (res && res.status !== 404) return res;
+    try {
+      const res = await workerServeStatic({ root: "./", manifest })(c, next);
+      if (res && res.status !== 404) return res;
+    } catch (e) {
+      console.error(`[Worker] Error serving asset ${path3}:`, e);
+    }
+    console.error(`[Worker] ASSET NOT FOUND: ${path3}`);
+    return c.text("Asset not found", 404);
   }
   const html = await getIndexHtml(c);
   if (html) return c.html(html);
+  console.error(`[Worker] PATH NOT FOUND (Fallback failed): ${path3}`);
   return next();
 });
 var app_default = app;

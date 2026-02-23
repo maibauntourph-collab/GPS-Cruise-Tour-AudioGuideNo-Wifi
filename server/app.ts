@@ -113,19 +113,29 @@ app.get("/*", async (c, next) => {
             // @ts-ignore
             const m = await import("__STATIC_CONTENT_MANIFEST");
             manifest = m.default ? (typeof m.default === 'string' ? JSON.parse(m.default) : m.default) : m;
-        } catch (e) { }
+        } catch (e) {
+            console.warn("[Worker] Manifest load failed during asset check");
+        }
 
         // 정적 파일 서빙 시도
-        const res = await workerServeStatic({ root: "./", manifest })(c, next);
+        try {
+            const res = await workerServeStatic({ root: "./", manifest })(c, next);
+            if (res && res.status !== 404) return res;
+        } catch (e) {
+            console.error(`[Worker] Error serving asset ${path}:`, e);
+        }
 
-        // 파일이 발견되면 반환, 아니면 SPA 폴백으로 이동
-        if (res && res.status !== 404) return res;
+        // [중요] 자산(.js, .css 등)인데 파일을 못 찾은 경우(404)
+        // 여기서 SPA 폴백(index.html)을 수행하면 브라우저가 JS 대신 HTML을 읽어 Syntax Error가 발생하므로 바로 404를 반환
+        console.error(`[Worker] ASSET NOT FOUND: ${path}`);
+        return c.text("Asset not found", 404);
     }
 
-    // [SPA Fallback] 파일이 없거나 자산이 아닌 경로(예: /home, /admin 등)는 index.html 서빙
+    // [SPA Fallback] 파일이 없거나 자산이 아닌 일반 경로(예: /home, /admin 등)는 index.html 서빙
     const html = await getIndexHtml(c);
     if (html) return c.html(html);
 
+    console.error(`[Worker] PATH NOT FOUND (Fallback failed): ${path}`);
     return next();
 });
 
