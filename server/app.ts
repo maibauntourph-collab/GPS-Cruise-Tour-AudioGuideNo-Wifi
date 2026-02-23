@@ -90,12 +90,13 @@ async function getIndexHtml(c: Context) {
 
 // 2. 루트 및 SPA 라우팅 (API가 아닌 모든 경로는 index.html 서빙)
 app.get("/", async (c, next) => {
+    // [Fix] root URL should serve index.html directly
     const html = await getIndexHtml(c);
     if (html) return c.html(html);
     return next();
 });
 
-// 3. 정적 자산 서빙 (assets/*, *.js, *.css 등)
+// 3. 정적 자산 서빙 및 SPA 폴백 (assets/*, *.js, *.css 등)
 app.get("/*", async (c, next) => {
     const path = c.req.path;
     const workerEnv = c.env as any;
@@ -103,7 +104,7 @@ app.get("/*", async (c, next) => {
     // API 요청은 통과
     if (path.startsWith("/api/")) return next();
 
-    // 정적 자산인 경우 (확장자가 있거나 /assets/ 경로인 경우)
+    // 정적 자산 판별 (확장자가 있거나 /assets/ 경로인 경우)
     const isAsset = path.includes(".") || path.startsWith("/assets/");
 
     if (isAsset && workerEnv?.__STATIC_CONTENT) {
@@ -112,7 +113,8 @@ app.get("/*", async (c, next) => {
         try {
             // @ts-ignore
             const m = await import("__STATIC_CONTENT_MANIFEST");
-            manifest = m.default ? (typeof m.default === 'string' ? JSON.parse(m.default) : m.default) : m;
+            const manifestStr = m.default || m;
+            manifest = typeof manifestStr === 'string' ? JSON.parse(manifestStr) : manifestStr;
         } catch (e) {
             console.warn("[Worker] Manifest load failed during asset check");
         }
@@ -120,18 +122,24 @@ app.get("/*", async (c, next) => {
         // 정적 파일 서빙 시도
         try {
             const res = await workerServeStatic({ root: "./", manifest })(c, next);
+            // 404가 아니면 해당 파일 반환
             if (res && res.status !== 404) return res;
         } catch (e) {
             console.error(`[Worker] Error serving asset ${path}:`, e);
         }
 
-        // [중요] 자산(.js, .css 등)인데 파일을 못 찾은 경우(404)
-        // 여기서 SPA 폴백(index.html)을 수행하면 브라우저가 JS 대신 HTML을 읽어 Syntax Error가 발생하므로 바로 404를 반환
-        console.error(`[Worker] ASSET NOT FOUND: ${path}`);
-        return c.text("Asset not found", 404);
+        // 자산(.js, .css 등)인데 파일을 못 찾은 경우(404)
+        // 브라우저가 JS 대신 HTML을 읽어 Syntax Error가 발생하는 것을 방지하기 위해 404 반환
+        if (path.includes(".")) {
+            console.error(`[Worker] ASSET NOT FOUND: ${path}`);
+            return c.text("Asset not found", 404);
+        }
     }
 
-    // [SPA Fallback] 파일이 없거나 자산이 아닌 일반 경로(예: /home, /admin 등)는 index.html 서빙
+    // [SPA Fallback] 
+    // 파일이 없거나 자산이 아닌 일반 경로(예: /home, /admin 등)는 index.html 서빙
+    // [Fix] Ensure /home etc. always returns index.html for React Router to handle
+    console.log(`[Worker] SPA Fallback triggered for: ${path}`);
     const html = await getIndexHtml(c);
     if (html) return c.html(html);
 

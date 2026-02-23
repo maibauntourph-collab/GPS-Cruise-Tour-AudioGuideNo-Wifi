@@ -86,6 +86,74 @@ export default function Home() {
     };
   }, []);
 
+  // 🚑 [Bug Doctor] 모바일 뒤로가기 버튼 처리 로직 (Browser History Sync)
+  // 학생 여러분, SPA에서 모바일 뒤로가기는 앱 종료 방지를 위해 필수적인 UX 처리입니다.
+  const isAnyOverlayOpen = useCallback(() => {
+    return !!(
+      selectedLandmark ||
+      showMenu ||
+      showAIRecommend ||
+      showQrDialog ||
+      showCreatorDashboard ||
+      showLoginDialog ||
+      showDirectionsDialog ||
+      showAudioDownloadDialog ||
+      showUpdateStats ||
+      showStartupDialog ||
+      landingCityId ||
+      showBackgroundGuideDialog ||
+      showSaveRouteDialog
+    );
+  }, [
+    selectedLandmark, showMenu, showAIRecommend, showQrDialog,
+    showCreatorDashboard, showLoginDialog, showDirectionsDialog,
+    showAudioDownloadDialog, showUpdateStats, showStartupDialog,
+    landingCityId, showBackgroundGuideDialog, showSaveRouteDialog
+  ]);
+
+  const closeAllOverlays = useCallback(() => {
+    setSelectedLandmark(null);
+    setShowMenu(false);
+    setShowAIRecommend(false);
+    setShowQrDialog(false);
+    setShowCreatorDashboard(false);
+    setShowLoginDialog(false);
+    setShowDirectionsDialog(false);
+    setShowAudioDownloadDialog(false);
+    setShowUpdateStats(false);
+    setShowStartupDialog(false);
+    setLandingCityId(null);
+    setShowBackgroundGuideDialog(false);
+    setShowSaveRouteDialog(false);
+    setIsCardMinimized(false);
+    setTemporaryShowCard(false);
+    setPendingLandmark(null);
+  }, []);
+
+  // 오버레이 상태 변화 감지 및 히스토리 푸시
+  useEffect(() => {
+    if (isAnyOverlayOpen()) {
+      // 현재 히스토리 상태를 체크하여 중복 푸시 방지
+      if (window.history.state?.ui !== 'overlay') {
+        console.log("🚑 [History Manager] Overlay opened. Pushing state.");
+        window.history.pushState({ ui: 'overlay' }, '');
+      }
+    }
+  }, [isAnyOverlayOpen]);
+
+  // 뒤로가기(popstate) 발생 시 처리
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (isAnyOverlayOpen()) {
+        console.log("🚑 [History Manager] Pop state detected. Closing overlays.");
+        closeAllOverlays();
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [isAnyOverlayOpen, closeAllOverlays]);
+
   // GPS enabled state (persisted to localStorage)
   const [gpsEnabled, setGpsEnabled] = useState(() => {
     const saved = localStorage.getItem('gps-enabled');
@@ -1459,7 +1527,7 @@ export default function Home() {
               className="px-2 py-0.5 h-6 text-[9px] font-mono bg-indigo-500/10 text-indigo-500 border-indigo-500/30 backdrop-blur-md rounded-full whitespace-nowrap hidden xs:flex items-center gap-1 shadow-[0_0_10px_rgba(99,102,241,0.1)]"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-              Dep: 2026-02-23 21:48
+              Dep: 2026-02-23 21:55
             </Badge>
           </div>
 
@@ -3026,11 +3094,13 @@ export default function Home() {
             onOpenMyRoutes={() => window.location.href = '/my-routes'}
             aiRecommendation={aiRecommendation}
             onLandmarkClick={(landmarkId) => {
-              const landmark = filteredLandmarks.find(l => l.id === landmarkId);
+              // @ts-ignore - filteredLandmarks might be in outer scope or needed
+              const landmark = landmarks.find(l => l.id === landmarkId);
               if (landmark) {
                 // Now set selected landmark
                 setIsManualSelection(true); // 직접 클릭했으므로 수동 선택 모드
                 setSelectedLandmark(landmark);
+                setIsCardMinimized(false);
               }
             }}
             landmarks={landmarks}
