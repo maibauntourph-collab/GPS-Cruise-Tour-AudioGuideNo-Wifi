@@ -786,7 +786,7 @@ export default function UnifiedFloatingCard({
       style={{
         zIndex,
       }}
-      className={`fixed bottom-24 right-4 w-[calc(100vw-32px)] sm:w-[380px] max-h-[calc(100vh-180px)] flex flex-col bg-background/80 backdrop-blur-2xl border border-white/30 shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-[2.5rem] overflow-hidden transition-all duration-500 ease-in-out ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20 scale-95' : 'opacity-100 translate-y-0 scale-100'}`}
+      className={`fixed bottom-24 right-4 ${activeTab === 'landmark' ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col bg-background/80 backdrop-blur-2xl border border-white/30 shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-[2.5rem] overflow-hidden transition-all duration-500 ease-in-out ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20 scale-95' : 'opacity-100 translate-y-0 scale-100'}`}
       data-testid="unified-floating-card"
     >
       {/* CARD HEADER - Navigation & Title */}

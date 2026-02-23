@@ -463,19 +463,33 @@ export class AudioService {
     // [Bug Doctor] 일시정지 후 재개 안됨 현상 해결을 위한 'Force Resume' 전략
     if (this.synthesis.paused) {
       this.synthesis.resume();
+    }
 
-      // 재개 명령 후 100ms 뒤에도 여전히 멈춰있다면(일부 브라우저 버그), 강제로 다시 재생 시작
-      setTimeout(() => {
-        if (this.synthesis.paused && !this.isPausedInternal) {
-          console.log('[AudioService] 🔄 Resume failed, forcing restart from current sentence...');
+    // 재개 명령 후 150ms 뒤에도 여전히 멈춰있거나 소리가 안 나오는 경우(일부 브라우저 버그), 강제로 다시 재생 시작
+    setTimeout(() => {
+      if (!this.isPausedInternal) {
+        // 1. Web Speech API (Native TTS) 체크
+        if (this.synthesis.paused) {
+          console.log('[AudioService] 🔄 Native Resume failed, forcing restart...');
           if (this.isSentenceMode) {
             this.playNextSentence(this.openaiSentenceLanguage || 'ko', this.currentRate);
           } else if (this.currentUtterance) {
             this.synthesis.speak(this.currentUtterance);
           }
         }
-      }, 100);
-    }
+
+        // 2. Clova/OpenAI (HTML5 Audio) 체크
+        if (this.audioElement && this.audioElement.paused && (this.clovaSentenceMode || this.openaiSentenceMode)) {
+          console.log('[AudioService] 🔄 HTML5 Audio Resume failed, forcing play...');
+          this.audioElement.play().catch(e => {
+            console.error('[AudioService] Force audio play failed:', e);
+            // 최후의 수단: 다음 문장으로 넘어가기
+            if (this.clovaSentenceMode) this.playNextClovaSentence(this.clovaSessionId);
+            if (this.openaiSentenceMode) this.playNextOpenAISentence(this.openaiSessionId);
+          });
+        }
+      }
+    }, 150);
 
     this.resumeMP3();
 
