@@ -501,9 +501,15 @@ export class AudioService {
 
     this.resumeMP3();
 
-    // AudioContext 재개
+    // [Bug Doctor] 교수님 가이드 반영: AudioContext 재개 로직 강화
     if (this.audioContext && this.audioContext.state === 'suspended') {
-      this.audioContext.resume().catch(console.error);
+      this.audioContext.resume().then(() => {
+        console.log('[AudioService] ✅ AudioContext resumed successfully');
+      }).catch(err => {
+        console.error('[AudioService] ❌ AudioContext resume failed:', err);
+      });
+    } else if (this.audioContext) {
+      console.log('[AudioService] ℹ️ AudioContext state is already:', this.audioContext.state);
     }
   }
 
