@@ -1456,14 +1456,14 @@ export default function Home() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl font-bold text-indigo-700 dark:text-indigo-400">
               <Navigation2 className="w-6 h-6 animate-pulse" />
-              {selectedLanguage === 'ko' ? '?ㅻ쭏媛?대뱶 紐⑤뱶' : 'Smart Guide Mode'}
+              {selectedLanguage === 'ko' ? '스마트가이드 모드' : 'Smart Guide Mode'}
             </DialogTitle>
             <DialogDescription className="pt-2 text-base leading-relaxed">
               {selectedLanguage === 'ko' ? '목적지를 설정하지 않아도 주변 명소를 지나갈 때 자동으로 오디오 가이드를 들으시겠습니까?' : 'Would you like to hear audio guides automatically when passing nearby landmarks, even without a set destination?'}
               <br />
               <span className="text-sm text-muted-foreground mt-2 inline-block">
                 {selectedLanguage === 'ko'
-                  ? '諛깃렇?쇱슫?쒖뿉?쒕룄 GPS 湲곕뒫?ъ슜?섏뿬 媛?대뱶瑜?吏?랁빀?덈떎.'
+                  ? '백그라운드에서도 GPS 기능을 사용하여 가이드를 지속합니다.'
                   : 'Uses GPS in the background to continue providing guidance.'}
               </span>
             </DialogDescription>
@@ -1581,18 +1581,18 @@ export default function Home() {
                 size="sm"
                 className="h-7 gap-1 px-2"
                 onClick={() => {
-                  // 移대뱶媛 理쒖냼?붾릺?덉쓣 
+                  // 카드가 최소화되어있을 때 
                   if (isCardMinimized) {
-                    // 紐⑸줉留쒖떆 (?щ（利?뎄 ?뺣낫蹂꾨룄 踰꾪듉?쇰줈)
+                    // 목록표시 (크루즈터미널 정보별도 버튼으로)
                     setShowCruisePort(false);
                     setIsCardMinimized(false);
                   } else {
-                    // 移대뱶媛 ?쇱퀜?덉쓣 
+                    // 카드가 펼쳐있을 때 
                     if (showCruisePort) {
-                      // ?щ（利?뎄 ?뺣낫媛 ?쒖떆 以묒씠硫꾧퀬 紐⑸줉留쒖떆
+                      // 크루즈터미널 정보가 표시 중이면 목록표시
                       setShowCruisePort(false);
                     } else {
-                      // 紐⑸줉留쒖떆 以묒씠硫?移대뱶 理쒖냼
+                      // 목록표시 중이면 카드 최소화
                       setIsCardMinimized(true);
                     }
                   }
@@ -3633,7 +3633,7 @@ export default function Home() {
                 }}
               >
                 <Download className="h-4 w-4" />
-                {selectedLanguage === 'ko' ? '留곹겕 蹂듭궗' : 'Copy Link'}
+                {selectedLanguage === 'ko' ? '링크 복사' : 'Copy Link'}
               </Button>
               <Button
                 className="flex-1 gap-2 bg-purple-600 hover:bg-purple-700"
@@ -3642,12 +3642,12 @@ export default function Home() {
                     navigator.share({ title: 'GPS Tour Guide', url: window.location.origin });
                   } else {
                     navigator.clipboard?.writeText(window.location.origin);
-                    toast({ title: selectedLanguage === 'ko' ? '怨듭쑀' : 'Shared!' });
+                    toast({ title: selectedLanguage === 'ko' ? '공유' : 'Shared!' });
                   }
                 }}
               >
                 <Share2 className="h-4 w-4" />
-                {selectedLanguage === 'ko' ? '怨듭쑀?섍린' : 'Share'}
+                {selectedLanguage === 'ko' ? '공유하기' : 'Share'}
               </Button>
             </div>
           </div>
