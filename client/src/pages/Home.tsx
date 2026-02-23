@@ -3106,7 +3106,10 @@ export default function Home() {
             landmarks={landmarks}
             userPosition={effectivePosition}
             onLandmarkRoute={handleLandmarkRoute}
-            onLandmarkSelect={setSelectedLandmark}
+            onLandmarkSelect={(landmark) => {
+              setSelectedLandmark(landmark);
+              setIsCardMinimized(false);
+            }}
             spokenLandmarks={spokenLandmarks}
             showLandmarks={showLandmarks}
             showActivities={showActivities}
