@@ -42,11 +42,11 @@ export default function LandmarkList({
   const landmarksWithDistance = landmarks.map((landmark) => {
     const distance = userPosition
       ? calculateDistance(
-          userPosition.latitude,
-          userPosition.longitude,
-          landmark.lat,
-          landmark.lng
-        )
+        userPosition.latitude,
+        userPosition.longitude,
+        landmark.lat,
+        landmark.lng
+      )
       : null;
     return { landmark, distance };
   });
@@ -60,10 +60,10 @@ export default function LandmarkList({
   const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    
+
     const maxX = viewportWidth - elementWidth - 32;
     const maxY = viewportHeight - elementHeight - 32;
-    
+
     return {
       x: Math.max(0, Math.min(x, maxX)),
       y: Math.max(0, Math.min(y, maxY))
@@ -72,26 +72,26 @@ export default function LandmarkList({
 
   const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
     if (!cardRef.current) return;
-    
+
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    
+
     setHasMoved(true);
     const newX = clientX - dragStart.x;
     const newY = clientY - dragStart.y;
-    
+
     const cardWidth = cardRef.current.offsetWidth;
     const cardHeight = cardRef.current.offsetHeight;
-    
+
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    
+
     const maxX = viewportWidth - cardWidth - 32;
     const maxY = viewportHeight - cardHeight - 32;
-    
+
     const clampedX = Math.max(0, Math.min(newX, maxX));
     const clampedY = Math.max(0, Math.min(newY, maxY));
-    
+
     setTranslate({ x: clampedX, y: clampedY });
   }, [dragStart.x, dragStart.y]);
 
@@ -117,19 +117,19 @@ export default function LandmarkList({
 
   const handleStart = (e: ReactMouseEvent | ReactTouchEvent) => {
     const target = e.target as HTMLElement;
-    
+
     if (target.closest('button') || !target.closest('[data-drag-handle]')) {
       return;
     }
-    
+
     // Prevent default to avoid ghost click on mobile
     if ('touches' in e) {
       e.preventDefault();
     }
-    
+
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    
+
     setIsDragging(true);
     setHasMoved(false);
     setDragStart({
@@ -208,7 +208,7 @@ export default function LandmarkList({
       data-testid="card-landmarklist-container"
     >
       <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl max-h-80 overflow-y-auto">
-        <div 
+        <div
           className="p-4 border-b flex items-center justify-between"
           data-drag-handle
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
@@ -237,9 +237,9 @@ export default function LandmarkList({
         </div>
         <div className="divide-y">
           {sortedLandmarks.map(({ landmark, distance }) => (
-            <div 
-              key={landmark.id} 
-              className="p-4 hover-elevate cursor-pointer" 
+            <div
+              key={landmark.id}
+              className="p-4 aurora-border-premium cursor-pointer m-2 rounded-xl glass-premium"
               data-testid={`card-landmark-${landmark.id}`}
               onClick={() => onLandmarkSelect?.(landmark)}
             >
