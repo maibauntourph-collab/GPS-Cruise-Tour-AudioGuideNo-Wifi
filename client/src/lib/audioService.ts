@@ -526,7 +526,7 @@ export class AudioService {
         }
 
         // HTML5 Audio(MP3/Clova/OpenAI) 체크 및 강제 재개
-        if (this.audioElement && this.audioElement.paused && (this.clovaSentenceMode || this.openaiSentenceMode || this.isMP3Playing)) {
+        if (this.audioElement && this.audioElement.paused && (this.clovaSentenceMode || this.openaiSentenceMode || this.isMP3Playing())) {
           console.log('[AudioService] 🔄 Audio stalled during resume, final kickstart at time:', this.audioElement.currentTime);
           this.audioElement.play().catch(e => {
             console.error('[AudioService] ❌ Final kickstart failed:', e);
