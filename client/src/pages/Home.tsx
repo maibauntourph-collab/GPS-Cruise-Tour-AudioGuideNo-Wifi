@@ -26,6 +26,7 @@ import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import LoginDialog from '@/components/LoginDialog';
 import SaveRouteDialog from '@/components/SaveRouteDialog';
 import CreatorDashboard from '@/components/CreatorDashboard';
+import AchievementToast from '@/components/AchievementToast';
 import { parseQRData } from '@/lib/qrUtils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 
@@ -424,6 +425,8 @@ export default function Home() {
 
   const hasArrivedAtDestination = distanceToSelected !== null && distanceToSelected <= arrivalRadius;
 
+  const [activeAchievement, setActiveAchievement] = useState<Landmark | null>(null);
+
   // 도착 자동 내레이션 트리거
   useEffect(() => {
     if (hasArrivedAtDestination && selectedLandmark && !isManualSelection) {
@@ -439,8 +442,10 @@ export default function Home() {
 
         // [Get It! Badge Popup] 미방문 명소인 경우 배지 팝업 트리거
         if (!isVisited(selectedLandmark.id)) {
-          console.log(`🎯 [Badge Logic] Triggering badge popup for ${selectedLandmark.id}`);
-          setActiveBadgeLandmark(selectedLandmark);
+          console.log(`🎯 [Badge Logic] Triggering badge toast for ${selectedLandmark.id}`);
+          setActiveAchievement(selectedLandmark);
+          // Optional: If you still want the popup call this too
+          // setActiveBadgeLandmark(selectedLandmark);
         }
       }
     }
@@ -1454,7 +1459,7 @@ export default function Home() {
               className="px-2 py-0.5 h-6 text-[9px] font-mono bg-indigo-500/10 text-indigo-500 border-indigo-500/30 backdrop-blur-md rounded-full whitespace-nowrap hidden xs:flex items-center gap-1 shadow-[0_0_10px_rgba(99,102,241,0.1)]"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-              Dep: 2026-02-23 20:10
+              Dep: 2026-02-23 20:26
             </Badge>
           </div>
 
@@ -3640,6 +3645,14 @@ export default function Home() {
           </div>
         </DialogContent>
       </Dialog>
+      {/* Achievement Toast */}
+      {activeAchievement && (
+        <AchievementToast
+          landmark={activeAchievement}
+          language={selectedLanguage}
+          onClose={() => setActiveAchievement(null)}
+        />
+      )}
     </>
   );
 }
