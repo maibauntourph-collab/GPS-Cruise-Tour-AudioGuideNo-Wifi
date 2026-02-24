@@ -4,7 +4,13 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { VitePWA } from "vite-plugin-pwa";
 
+const now = new Date();
+const deployDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
 export default defineConfig({
+  define: {
+    __DEPLOY_DATE__: JSON.stringify(deployDate),
+  },
   plugins: [
     react(),
     runtimeErrorOverlay(),

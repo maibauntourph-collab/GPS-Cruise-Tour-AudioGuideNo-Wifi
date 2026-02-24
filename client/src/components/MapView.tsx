@@ -882,10 +882,7 @@ export default function MapView({
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    // [적요] 툴팁 클릭 시 리스트 패널을 먼저 열고 랜드마크를 선택하여 상세 카드를 노출합니다.
-                    if (onShowList) {
-                      onShowList();
-                    }
+                    // [적요] 툴팁 클릭 시 랜드마크를 선택하여 상세 카드를 노출합니다. (리스트 자동 호출 제거)
                     if (onLandmarkSelect) {
                       onLandmarkSelect(landmark);
                     }

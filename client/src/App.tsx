@@ -19,6 +19,7 @@ const TourLeaderView = lazy(() => import("@/pages/TourLeaderView"));
 const MyRoutes = lazy(() => import("./pages/MyRoutes"));
 const ProductList = lazy(() => import("./pages/ProductList"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+import DesignPreview from "@/pages/DesignPreview";
 
 // Loading fallback component
 function PageLoader() {
@@ -45,6 +46,7 @@ function Router() {
         <Route path="/my-routes" component={MyRoutes} />
         <Route path="/products" component={ProductList} />
         <Route path="/product/:id" component={ProductDetail} />
+        <Route path="/design-preview" component={DesignPreview} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

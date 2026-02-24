@@ -1569,7 +1569,7 @@ export default function Home() {
               className="px-2 py-0.5 h-6 text-[9px] font-mono bg-indigo-500/10 text-indigo-500 border-indigo-500/30 backdrop-blur-md rounded-full whitespace-nowrap hidden xs:flex items-center gap-1 shadow-[0_0_10px_rgba(99,102,241,0.1)]"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-              Dep: 2026-02-23 21:55
+              Dep: {__DEPLOY_DATE__}
             </Badge>
           </div>
 
@@ -2906,6 +2906,7 @@ export default function Home() {
               onLandmarkSelect={(landmark) => {
                 setIsManualSelection(true);
                 setSelectedLandmark(landmark);
+                setIsCardMinimized(false);
               }}
               onShowList={() => {
                 // Show the list panel when tooltip is clicked

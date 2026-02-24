@@ -801,137 +801,6 @@ var init_ogService = __esm({
   }
 });
 
-// server/lib/clova.ts
-var clova_exports = {};
-__export(clova_exports, {
-  CLOVA_VOICES: () => CLOVA_VOICES,
-  DEFAULT_CLOVA_VOICE_BY_LANGUAGE: () => DEFAULT_CLOVA_VOICE_BY_LANGUAGE,
-  generateAndSaveClovaTTS: () => generateAndSaveClovaTTS,
-  generateClovaTTS: () => generateClovaTTS,
-  getClovaVoicesForLanguage: () => getClovaVoicesForLanguage
-});
-import * as crypto2 from "node:crypto";
-function getClovaVoicesForLanguage(language) {
-  const langMapping = {
-    ko: "ko",
-    en: "en",
-    ja: "ja",
-    zh: "zh",
-    es: "es"
-  };
-  const targetLang = langMapping[language] || "en";
-  return Object.keys(CLOVA_VOICES).filter(
-    (key) => CLOVA_VOICES[key].language === targetLang
-  );
-}
-async function generateClovaTTS(text2, voiceId = "nara", speed = 0, pitch = 0, volume = 0) {
-  const clientId = env.NAVER_CLIENT_ID;
-  const clientSecret = env.NAVER_CLIENT_SECRET;
-  if (!clientId || !clientSecret) {
-    throw new Error("NAVER_CLIENT_ID and NAVER_CLIENT_SECRET must be set");
-  }
-  const params = new URLSearchParams({
-    speaker: voiceId,
-    text: text2,
-    volume: volume.toString(),
-    speed: speed.toString(),
-    pitch: pitch.toString(),
-    format: "mp3"
-  });
-  const response = await fetch(CLOVA_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "X-NCP-APIGW-API-KEY-ID": clientId,
-      "X-NCP-APIGW-API-KEY": clientSecret
-    },
-    body: params.toString()
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`CLOVA TTS API error: ${response.status} - ${errorText}`);
-  }
-  const arrayBuffer = await response.arrayBuffer();
-  const audioBuffer = Buffer.from(arrayBuffer);
-  return {
-    audioBuffer,
-    contentType: "audio/mpeg",
-    voiceId
-  };
-}
-async function generateAndSaveClovaTTS(landmarkId, text2, language = "ko", voiceId) {
-  const selectedVoice = voiceId || DEFAULT_CLOVA_VOICE_BY_LANGUAGE[language] || "nara";
-  const result = await generateClovaTTS(text2, selectedVoice);
-  const base64Audio = result.audioBuffer.toString("base64");
-  const dataUri = `data:audio/mp3;base64,${base64Audio}`;
-  const checksum = crypto2.createHash("md5").update(result.audioBuffer).digest("hex");
-  return {
-    audioUrl: dataUri,
-    voiceId: selectedVoice,
-    sizeBytes: result.audioBuffer.length,
-    checksum
-  };
-}
-var CLOVA_API_URL, CLOVA_VOICES, DEFAULT_CLOVA_VOICE_BY_LANGUAGE;
-var init_clova = __esm({
-  "server/lib/clova.ts"() {
-    "use strict";
-    init_env();
-    CLOVA_API_URL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
-    CLOVA_VOICES = {
-      nara: { name: "Nara", nameKo: "\uB098\uB77C", gender: "female", language: "ko", description: "Korean female voice" },
-      nara_call: { name: "Nara Call", nameKo: "\uB098\uB77C (\uC804\uD654)", gender: "female", language: "ko", description: "Korean female voice for call" },
-      nminsang: { name: "Minsang", nameKo: "\uBBFC\uC0C1", gender: "male", language: "ko", description: "Korean male voice" },
-      nhajun: { name: "Hajun", nameKo: "\uD558\uC900", gender: "male", language: "ko", description: "Korean child male voice" },
-      ndain: { name: "Dain", nameKo: "\uB2E4\uC778", gender: "female", language: "ko", description: "Korean child female voice" },
-      njiyun: { name: "Jiyun", nameKo: "\uC9C0\uC724", gender: "female", language: "ko", description: "Korean female voice" },
-      nsujin: { name: "Sujin", nameKo: "\uC218\uC9C4", gender: "female", language: "ko", description: "Korean female voice" },
-      njinho: { name: "Jinho", nameKo: "\uC9C4\uD638", gender: "male", language: "ko", description: "Korean male voice" },
-      njihun: { name: "Jihun", nameKo: "\uC9C0\uD6C8", gender: "male", language: "ko", description: "Korean male voice" },
-      njooahn: { name: "Jooahn", nameKo: "\uC8FC\uC548", gender: "male", language: "ko", description: "Korean male voice" },
-      nseonhee: { name: "Seonhee", nameKo: "\uC120\uD76C", gender: "female", language: "ko", description: "Korean female voice" },
-      njiyoung: { name: "Jiyoung", nameKo: "\uC9C0\uC601", gender: "female", language: "ko", description: "Korean female voice" },
-      nsiyoon: { name: "Siyoon", nameKo: "\uC2DC\uC724", gender: "male", language: "ko", description: "Korean male voice" },
-      ngaram: { name: "Garam", nameKo: "\uAC00\uB78C", gender: "female", language: "ko", description: "Korean child female voice" },
-      ntomoko: { name: "Tomoko", nameKo: "\uD1A0\uBAA8\uCF54", gender: "female", language: "ja", description: "Japanese female voice" },
-      nnaomi: { name: "Naomi", nameKo: "\uB098\uC624\uBBF8", gender: "female", language: "ja", description: "Japanese female voice" },
-      nsayuri: { name: "Sayuri", nameKo: "\uC0AC\uC720\uB9AC", gender: "female", language: "ja", description: "Japanese female voice" },
-      ngoeun: { name: "Goeun", nameKo: "\uACE0\uC740", gender: "female", language: "ko", description: "Korean female voice" },
-      neunyoung: { name: "Eunyoung", nameKo: "\uC740\uC601", gender: "female", language: "ko", description: "Korean female voice" },
-      nsunkyung: { name: "Sunkyung", nameKo: "\uC120\uACBD", gender: "female", language: "ko", description: "Korean female voice" },
-      nyujin: { name: "Yujin", nameKo: "\uC720\uC9C4", gender: "female", language: "ko", description: "Korean female voice" },
-      ntaejin: { name: "Taejin", nameKo: "\uD0DC\uC9C4", gender: "male", language: "ko", description: "Korean male voice" },
-      nyoungil: { name: "Youngil", nameKo: "\uC601\uC77C", gender: "male", language: "ko", description: "Korean male voice" },
-      nseungpyo: { name: "Seungpyo", nameKo: "\uC2B9\uD45C", gender: "male", language: "ko", description: "Korean male voice" },
-      nwontak: { name: "Wontak", nameKo: "\uC6D0\uD0C1", gender: "male", language: "ko", description: "Korean male voice" },
-      dara_ang: { name: "Dara (Angry)", nameKo: "\uB2E4\uB77C (\uBD84\uB178)", gender: "female", language: "ko", description: "Korean female voice with angry emotion" },
-      nsunhee: { name: "Sunhee", nameKo: "\uC21C\uD76C", gender: "female", language: "ko", description: "Korean female voice" },
-      nmammon: { name: "Mammon", nameKo: "\uB9C8\uBAAC", gender: "male", language: "ko", description: "Korean male voice" },
-      nwoof: { name: "Woof", nameKo: "\uC6B0\uD504", gender: "male", language: "ko", description: "Korean male voice" },
-      njoonyoung: { name: "Joonyoung", nameKo: "\uC900\uC601", gender: "male", language: "ko", description: "Korean male voice" },
-      clara: { name: "Clara", nameKo: "\uD074\uB77C\uB77C", gender: "female", language: "en", description: "English female voice" },
-      matt: { name: "Matt", nameKo: "\uB9E4\uD2B8", gender: "male", language: "en", description: "English male voice" },
-      shinji: { name: "Shinji", nameKo: "\uC2E0\uC9C0", gender: "male", language: "ja", description: "Japanese male voice" },
-      meimei: { name: "Meimei", nameKo: "\uBA54\uC774\uBA54\uC774", gender: "female", language: "zh", description: "Chinese female voice" },
-      liangliang: { name: "Liangliang", nameKo: "\uB7C9\uB7C9", gender: "male", language: "zh", description: "Chinese male voice" },
-      jose: { name: "Jose", nameKo: "\uD638\uC138", gender: "male", language: "es", description: "Spanish male voice" },
-      carmen: { name: "Carmen", nameKo: "\uCE74\uB974\uBA58", gender: "female", language: "es", description: "Spanish female voice" }
-    };
-    DEFAULT_CLOVA_VOICE_BY_LANGUAGE = {
-      ko: "nara",
-      en: "clara",
-      ja: "ntomoko",
-      zh: "meimei",
-      es: "carmen",
-      fr: "clara",
-      de: "clara",
-      it: "clara",
-      pt: "clara",
-      ru: "clara"
-    };
-  }
-});
-
 // server/lib/openai.ts
 var openai_exports = {};
 __export(openai_exports, {
@@ -943,7 +812,7 @@ __export(openai_exports, {
   recommendTourItinerary: () => recommendTourItinerary2
 });
 import OpenAI from "openai";
-import * as crypto3 from "node:crypto";
+import * as crypto2 from "node:crypto";
 function getOpenAI() {
   if (openaiInstance) return openaiInstance;
   const apiKey = env.OPENAI_API_KEY;
@@ -973,7 +842,7 @@ async function generateLandmarkAudio(landmarkId, text2, language = "en", preferr
       });
       buffer = Buffer.from(await mp3Response.arrayBuffer());
     }
-    const checksum = crypto3.createHash("md5").update(buffer).digest("hex");
+    const checksum = crypto2.createHash("md5").update(buffer).digest("hex");
     const base64Audio = buffer.toString("base64");
     const dataUri = `data:audio/mp3;base64,${base64Audio}`;
     const fileName = `${landmarkId}-${language}-${checksum.slice(0, 8)}.mp3`;
@@ -1148,7 +1017,12 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { VitePWA } from "vite-plugin-pwa";
+var now = /* @__PURE__ */ new Date();
+var deployDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 var vite_config_default = defineConfig({
+  define: {
+    __DEPLOY_DATE__: JSON.stringify(deployDate)
+  },
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -21312,7 +21186,7 @@ var settlementService = {
 
 // server/routes.ts
 init_env();
-import crypto4 from "node:crypto";
+import crypto3 from "node:crypto";
 import Stripe2 from "stripe";
 var stripeInstance = null;
 function getStripe() {
@@ -21595,7 +21469,7 @@ function registerRoutes(app2) {
         version,
         downloadedAt: (/* @__PURE__ */ new Date()).toISOString()
       };
-      const contentHash = crypto4.createHash("md5").update(JSON.stringify({ version, cityId, count: cityLandmarks.length })).digest("hex");
+      const contentHash = crypto3.createHash("md5").update(JSON.stringify({ version, cityId, count: cityLandmarks.length })).digest("hex");
       const etag = `"${contentHash}"`;
       if (clientEtag === etag) {
         return c.body(null, 304);
@@ -21772,25 +21646,6 @@ function registerRoutes(app2) {
       return c.json({ success: true });
     } catch (e) {
       return c.json({ error: "Failed to delete landmark" }, 500);
-    }
-  });
-  app2.post("/api/tts/clova/generate", async (c) => {
-    try {
-      const { generateClovaTTS: generateClovaTTS2, DEFAULT_CLOVA_VOICE_BY_LANGUAGE: DEFAULT_CLOVA_VOICE_BY_LANGUAGE2 } = await Promise.resolve().then(() => (init_clova(), clova_exports));
-      const { text: text2, voice, language, speed, pitch, volume } = await c.req.json();
-      if (!text2) return c.json({ error: "Text is required" }, 400);
-      const selectedVoice = voice || DEFAULT_CLOVA_VOICE_BY_LANGUAGE2[language || "ko"] || "nara";
-      const result = await generateClovaTTS2(text2, selectedVoice, speed || 0, pitch || 0, volume || 0);
-      const uint8 = new Uint8Array(result.audioBuffer);
-      return new Response(uint8, {
-        headers: {
-          "Content-Type": result.contentType,
-          "Content-Length": result.audioBuffer.length.toString(),
-          "X-Voice-Id": result.voiceId
-        }
-      });
-    } catch (e) {
-      return c.json({ error: e.message || "TTS Failed" }, 500);
     }
   });
   app2.post("/api/tts/openai/generate", async (c) => {
