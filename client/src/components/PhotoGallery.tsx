@@ -75,7 +75,7 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
   return (
     <>
       <motion.div
-        className="grid grid-cols-3 gap-3"
+        className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -84,16 +84,16 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
           <motion.button
             key={index}
             variants={itemVariants}
-            whileHover={{ scale: 1.05 }} // 호버 시 살짝 커지는 효과
-            whileTap={{ scale: 0.95 }}   // 클릭 시 살짝 작아지는 효과
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setSelectedIndex(index)}
-            className="relative aspect-square overflow-hidden rounded-xl border border-white/20 shadow-sm transition-shadow hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="relative w-20 h-20 shrink-0 overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E9633F]/50"
             data-testid={`button-photo-${index}`}
           >
             {errorIndices.has(index) || (photo && photo.includes('placeholder.png')) ? (
               <ImageFallback className="h-full w-full" />
             ) : (
-              <div className="h-full w-full bg-muted/30 animate-pulse-subtle">
+              <div className="h-full w-full">
                 <img
                   src={photo}
                   alt={`${title} - Photo ${index + 1}`}
@@ -103,7 +103,7 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
                 />
               </div>
             )}
-            <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors" />
+            <div className="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors" />
           </motion.button>
         ))}
       </motion.div>
