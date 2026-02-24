@@ -62,8 +62,8 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Landmark, GpsPosition, City, CruisePort, TransportOption } from '@shared/schema';
-import { getTranslatedContent, t } from '@/lib/i18n';
-import { audioService } from '@/lib/audio-service';
+import { getTranslatedContent, t } from '@/lib/translations';
+import { audioService } from '@/lib/audioService';
 import LandmarkDetailDialog from './LandmarkDetailDialog';
 
 interface UnifiedFloatingCardProps {
@@ -154,12 +154,12 @@ interface UnifiedFloatingCardProps {
 
 function getCruisePortTranslation(cruisePort: CruisePort | null | undefined, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
   if (!cruisePort) return '';
-  if (language === 'ko' && cruisePort.translations?.ko) return cruisePort.translations.ko[field];
+  if (language === 'ko' && cruisePort.translations?.ko) return cruisePort.translations.ko[field] || '';
   return cruisePort[field] || '';
 }
 
 function getTransportTranslation(transport: TransportOption, language: string, field: 'name' | 'from' | 'to' | 'duration' | 'price' | 'tips'): string {
-  if (language === 'ko' && transport.translations?.ko) return transport.translations.ko[field];
+  if (language === 'ko' && transport.translations?.ko) return transport.translations.ko[field] || '';
   return transport[field] || '';
 }
 
@@ -238,11 +238,11 @@ export function UnifiedFloatingCard({
 
   // Update playback state
   useEffect(() => {
-    const sub = audioService.state$.subscribe(state => {
-      setIsPlaying(state.status === 'playing' || state.status === 'paused');
-      setIsPaused(state.status === 'paused');
+    audioService.setOnStateChange((speaking: boolean) => {
+      setIsPlaying(speaking);
+      setIsPaused(audioService.isPaused());
     });
-    return () => sub.unsubscribe();
+    return () => audioService.setOnStateChange(null);
   }, []);
 
   const handlePlayAudio = (e: React.MouseEvent) => {
@@ -259,17 +259,17 @@ export function UnifiedFloatingCard({
       const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
         getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
       if (text) {
-        audioService.playTts(text, selectedLanguage);
+        audioService.playText(text, selectedLanguage, playbackRate);
       }
     }
   };
 
   const calculateDistance = (pos1: GpsPosition, pos2: { lat: number; lng: number }) => {
     const R = 6371e3; // Earth radius in meters
-    const phi1 = (pos1.lat * Math.PI) / 180;
+    const phi1 = (pos1.latitude * Math.PI) / 180;
     const phi2 = (pos2.lat * Math.PI) / 180;
-    const deltaPhi = ((pos2.lat - pos1.lat) * Math.PI) / 180;
-    const deltaLambda = ((pos2.lng - pos1.lng) * Math.PI) / 180;
+    const deltaPhi = ((pos2.lat - pos1.latitude) * Math.PI) / 180;
+    const deltaLambda = ((pos2.lng - pos1.longitude) * Math.PI) / 180;
 
     const a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
       Math.cos(phi1) * Math.cos(phi2) *
@@ -349,48 +349,53 @@ export function UnifiedFloatingCard({
   return (
     <div
       style={{ zIndex }}
-      className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-[2.5rem] overflow-hidden transition-all duration-500 ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100'}`}
+      className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100'}`}
     >
       {/* HEADER */}
       <div className="p-4 flex items-center justify-between border-b bg-white/50 backdrop-blur-md">
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-          {!selectedLandmark && (
-            <>
-              <Button
-                variant={activeTab === 'list' ? 'default' : 'ghost'}
-                size="sm"
-                className={`rounded-full h-8 px-3 ${activeTab === 'list' ? 'bg-indigo-600' : ''}`}
-                onClick={() => setActiveTab('list')}
-              >
-                <List className="w-4 h-4 mr-1" />
-                <span className="text-xs">{t('list', selectedLanguage)}</span>
-              </Button>
-              {showCruisePort && (
-                <Button
-                  variant={activeTab === 'cruise' ? 'default' : 'ghost'}
-                  size="sm"
-                  className={`rounded-full h-8 px-3 ${activeTab === 'cruise' ? 'bg-indigo-600' : ''}`}
-                  onClick={() => setActiveTab('cruise')}
-                >
-                  <Ship className="w-4 h-4 mr-1" />
-                  <span className="text-xs">{t('cruisePort', selectedLanguage)}</span>
-                </Button>
-              )}
-              <Button
-                variant={activeTab === 'tour' ? 'default' : 'ghost'}
-                size="sm"
-                className={`rounded-full h-8 px-3 ${activeTab === 'tour' ? 'bg-indigo-600' : ''}`}
-                onClick={() => setActiveTab('tour')}
-              >
-                <MapPinned className="w-4 h-4 mr-1" />
-                <span className="text-xs">{t('myTour', selectedLanguage)}</span>
-              </Button>
-            </>
+          <Button
+            variant={activeTab === 'list' ? 'default' : 'ghost'}
+            size="sm"
+            className={`rounded-full h-8 px-3 ${activeTab === 'list' ? 'bg-indigo-600 font-bold' : ''}`}
+            onClick={() => {
+              setActiveTab('list');
+              onLandmarkClose();
+            }}
+          >
+            <List className="w-4 h-4 mr-1" />
+            <span className="text-xs">{t('list', selectedLanguage)}</span>
+          </Button>
+          {showCruisePort && (
+            <Button
+              variant={activeTab === 'cruise' ? 'default' : 'ghost'}
+              size="sm"
+              className={`rounded-full h-8 px-3 ${activeTab === 'cruise' ? 'bg-indigo-600 font-bold' : ''}`}
+              onClick={() => {
+                setActiveTab('cruise');
+                onLandmarkClose();
+              }}
+            >
+              <Ship className="w-4 h-4 mr-1" />
+              <span className="text-xs">{t('cruisePort', selectedLanguage)}</span>
+            </Button>
           )}
+          <Button
+            variant={activeTab === 'tour' ? 'default' : 'ghost'}
+            size="sm"
+            className={`rounded-full h-8 px-3 ${activeTab === 'tour' ? 'bg-indigo-600 font-bold' : ''}`}
+            onClick={() => {
+              setActiveTab('tour');
+              onLandmarkClose();
+            }}
+          >
+            <MapPinned className="w-4 h-4 mr-1" />
+            <span className="text-xs">{t('myTour', selectedLanguage)}</span>
+          </Button>
           {selectedLandmark && (
-            <div className="flex items-center gap-2">
-              <LandmarkIcon className="w-4 h-4 text-indigo-600" />
-              <span className="text-sm font-bold truncate max-w-[150px]">
+            <div className="flex items-center gap-1 bg-indigo-50 px-2 py-1 rounded-full border border-indigo-100 ml-2">
+              <LandmarkIcon className="w-3.5 h-3.5 text-indigo-600" />
+              <span className="text-[10px] font-bold text-indigo-900 truncate max-w-[80px]">
                 {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
               </span>
             </div>
@@ -561,6 +566,3 @@ export function UnifiedFloatingCard({
   );
 }
 
-// Sub-components like Train, Car are needed if icons are used
-const Train = (props: any) => <Bus {...props} />;
-const Car = (props: any) => <Bus {...props} />;

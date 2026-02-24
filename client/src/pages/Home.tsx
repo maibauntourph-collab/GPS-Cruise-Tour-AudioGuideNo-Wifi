@@ -14,7 +14,7 @@ import {
   AlertDialogTitle
 } from '@/components/ui/alert-dialog';
 import MapView, { resetMapInteraction } from '@/components/MapView';
-import UnifiedFloatingCard from '@/components/UnifiedFloatingCard';
+import { UnifiedFloatingCard } from '@/components/UnifiedFloatingCard';
 import MenuDialog from '@/components/MenuDialog';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import InstallPrompt from '@/components/InstallPrompt';
