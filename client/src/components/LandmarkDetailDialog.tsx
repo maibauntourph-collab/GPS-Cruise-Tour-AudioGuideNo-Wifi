@@ -280,7 +280,7 @@ export default function LandmarkDetailDialog({
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogClose} modal={false}>
       <DialogContent
-        className="max-h-[85vh] p-0 overflow-hidden flex flex-col border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-t-[32px] sm:rounded-[32px] bottom-0 sm:bottom-auto w-[100vw] sm:w-[95vw] sm:max-w-4xl no-overlay"
+        className="max-h-[85vh] sm:max-h-[92vh] p-0 overflow-hidden flex flex-col border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-t-[32px] sm:rounded-[32px] bottom-0 sm:bottom-auto w-[100vw] sm:w-[95vw] sm:max-w-4xl no-overlay"
       >
         <div className="grid grid-cols-1 md:grid-cols-[1fr,1.2fr] h-full overflow-hidden w-full max-w-full box-border">
           <DialogHeader className="p-4 pb-3 border-b flex-shrink-0">

@@ -431,37 +431,42 @@ export class AudioService {
     if (this.audioContext) {
       console.log(`[AudioService] 🔍 Context state before resume: ${this.audioContext.state}`);
       if (this.audioContext.state === 'suspended') {
-        this.audioContext.resume().then(() => {
+        try {
+          await this.audioContext.resume();
           console.log('[AudioService] ✅ AudioContext resumed');
-        }).catch(err => {
+        } catch (err) {
           console.error('[AudioService] ❌ AudioContext resume failed:', err);
-        });
+        }
       }
     }
 
     // 2. Web Speech API (TTS) 재개
+    // [Bug Doctor] 일부 브라우저에서는 resume()만으로 부족할 수 있어 cancel 후 다시 시작하는 로직이 Watchdog에 포함됨
     if (this.synthesis.paused) {
       console.log('[AudioService] 🔄 Resuming Web Speech Synthesis...');
       this.synthesis.resume();
     }
 
     // 3. HTML5 Audio (MP3/OpenAI) 재개
-    if (this.audioElement?.paused) {
+    if (this.audioElement && this.audioElement.paused) {
       console.log(`[AudioService] 🔍 Audio Element - readyState: ${this.audioElement.readyState}, currentTime: ${this.audioElement.currentTime}`);
-      this.audioElement.play().then(() => {
+      try {
+        await this.audioElement.play();
         console.log('[AudioService] ✅ Audio Element resumed successfully');
-      }).catch(error => {
+      } catch (error) {
         console.error('[AudioService] ❌ Audio Element play failed:', error);
-      });
+        // [Bug Doctor] 만약 DOMException: The play() request was interrupted by a call to pause() 에러 발생 시 재시도 고려
+      }
     }
 
-    // 4. Watchdog: 300ms 후 상태 체크 및 강제 재기동 (좀비 TTS 방지)
+    // 4. Watchdog: 200ms 후 상태 체크 및 강제 재기동 (좀비 TTS 방지)
+    // 기존 300ms에서 200ms로 단축하여 더 빠른 응답 제공
     setTimeout(() => {
-      if (this.isPausedInternal) return; // 그 사이 다시 정지됐으면 무시
+      if (this.isPausedInternal) return;
 
-      console.log(`[AudioService] 🧪 Stabilizer - Context: ${this.audioContext?.state}, AudioPaused: ${this.audioElement ? this.audioElement.paused : 'N/A'}, TTS: ${this.synthesis.speaking}`);
+      console.log(`[AudioService] 🧪 Stabilizer Phase 1 - Context: ${this.audioContext?.state}, AudioPaused: ${this.audioElement ? this.audioElement.paused : 'N/A'}, TTS: ${this.synthesis.speaking}`);
 
-      // Native TTS 좀비 체크 (System TTS 모드인 경우)
+      // Native TTS 좀비 체크
       if (this.isSentenceMode && !this.openaiSentenceMode) {
         if (this.synthesis.paused || !this.synthesis.speaking) {
           console.log('[AudioService] 🚑 TTS stalled → Hard Reset from sentence:', this.sentenceIndex);
@@ -469,28 +474,19 @@ export class AudioService {
           setTimeout(() => {
             if (!this.isPausedInternal && this.isSentenceMode) {
               this.speakCurrentSentence();
-              console.log('[AudioService] 🚀 Hard Reset success: sentence', this.sentenceIndex);
             }
-          }, 50);
+          }, 100);
         }
       }
 
-      // OpenAI 재개 실패 시 현재 문장부터 재시작 (세션 보호 적용)
-      if (this.openaiSentenceMode && (!this.audioElement || this.audioElement.paused)) {
-        console.log('[AudioService] 🚑 OpenAI stalled → restarting from sentence:', this.openaiSentenceIndex);
-        this.playNextOpenAISentence(this.openaiSessionId);
-      }
-
-      // HTML5 Audio 최종 킥스타트 (MP3 포함)
-      if (this.audioElement?.paused && (this.openaiSentenceMode || this.isMP3Playing())) {
-        console.log('[AudioService] 🔄 Final kickstart at time:', this.audioElement.currentTime);
-        this.audioElement.play().catch(e => {
-          console.error('[AudioService] ❌ Final kickstart failed:', e);
-        });
+      // OpenAI/MP3 재입력 (Kickstart)
+      if ((this.openaiSentenceMode || this.isMP3Playing()) && this.audioElement?.paused) {
+        console.log('[AudioService] 🚑 Audio stalled → Final kickstart');
+        this.audioElement?.play().catch(e => console.error('[AudioService] ❌ Kickstart failed:', e));
       }
 
       this.notifyStateChange();
-    }, 300);
+    }, 200);
 
     this.resumeMP3();
   }
