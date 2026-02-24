@@ -1877,7 +1877,7 @@ function AudioGenerationTab({ cities, landmarks }: { cities: DbCity[]; landmarks
             MP3 오디오 사전 생성
           </CardTitle>
           <CardDescription>
-            CLOVA TTS를 사용하여 랜드마크 설명 오디오를 미리 생성합니다.
+            AI TTS(OpenAI/기본)를 사용하여 랜드마크 설명 오디오를 미리 생성합니다.
             생성된 오디오는 오프라인에서도 사용할 수 있습니다.
           </CardDescription>
         </CardHeader>

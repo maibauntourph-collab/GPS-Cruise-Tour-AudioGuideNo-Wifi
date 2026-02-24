@@ -621,12 +621,7 @@ export default function UnifiedFloatingCard({
         setIsPaused(false);
       };
 
-      if (audioMode === 'clova') {
-        const success = await audioService.playClovaTTS(text, selectedLanguage, onEnd);
-        if (!success) {
-          audioService.playText(text, selectedLanguage, playbackRate, onEnd);
-        }
-      } else if (audioMode === 'openai') {
+      if (audioMode === 'openai') {
         const success = await audioService.playOpenAISentences(text, selectedLanguage, undefined, onEnd);
         if (!success) {
           audioService.playText(text, selectedLanguage, playbackRate, onEnd);

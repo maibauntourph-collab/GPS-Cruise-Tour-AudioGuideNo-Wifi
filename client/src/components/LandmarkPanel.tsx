@@ -57,11 +57,11 @@ export default function LandmarkPanel({
   const clampTranslate = useCallback((x: number, y: number, elementWidth: number, elementHeight: number) => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    
+
     // Calculate max offsets from center (50%)
     const maxX = (viewportWidth - elementWidth) / 2;
     const maxY = (viewportHeight - elementHeight) / 2;
-    
+
     return {
       x: Math.max(-maxX, Math.min(x, maxX)),
       y: Math.max(-maxY, Math.min(y, maxY))
@@ -78,17 +78,17 @@ export default function LandmarkPanel({
 
   const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
     if (!cardRef.current) return;
-    
+
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    
+
     setHasMoved(true);
     const newX = clientX - dragStart.x;
     const newY = clientY - dragStart.y;
-    
+
     const cardWidth = cardRef.current.offsetWidth;
     const cardHeight = cardRef.current.offsetHeight;
-    
+
     const clamped = clampTranslate(newX, newY, cardWidth, cardHeight);
     setTranslate(clamped);
   }, [dragStart.x, dragStart.y, clampTranslate]);
@@ -115,25 +115,25 @@ export default function LandmarkPanel({
 
   const handleStart = (e: ReactMouseEvent | ReactTouchEvent) => {
     const target = e.target as HTMLElement;
-    
-    if (target.closest('button') || 
-        target.closest('[class*="leaflet"]') || 
-        target.closest('[data-no-drag]')) {
+
+    if (target.closest('button') ||
+      target.closest('[class*="leaflet"]') ||
+      target.closest('[data-no-drag]')) {
       return;
     }
-    
+
     if (!target.closest('[data-drag-handle]')) {
       return;
     }
-    
+
     // Prevent default to avoid ghost click on mobile
     if ('touches' in e) {
       e.preventDefault();
     }
-    
+
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    
+
     setIsDragging(true);
     setHasMoved(false);
     setDragStart({
@@ -155,39 +155,60 @@ export default function LandmarkPanel({
 
   const handlePlayPause = async () => {
     const detailedText = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
-    
+
     if (!detailedText) {
       return;
     }
 
     if (isPlaying) {
       if (audioService.isPaused()) {
-        audioService.resumeSpeech();
+        const audioMode = audioService.getAudioMode();
+        if (audioMode === 'openai') {
+          const success = await audioService.playOpenAISentences(detailedText, selectedLanguage, undefined, () => {
+            setIsPlaying(false);
+            setIsPaused(false);
+          });
+          if (!success) {
+            audioService.playText(detailedText, selectedLanguage, playbackRate, () => {
+              setIsPlaying(false);
+              setIsPaused(false);
+            });
+          }
+        } else {
+          audioService.playText(detailedText, selectedLanguage, playbackRate, () => {
+            setIsPlaying(false);
+            setIsPaused(false);
+          });
+        }
       } else {
         audioService.pauseSpeech();
         audioService.stop();
         audioService.stopMP3();
         setIsPlaying(false);
+        setIsPaused(true);
       }
     } else {
       const audioMode = audioService.getAudioMode();
-      
-      if (audioMode === 'clova') {
-        setIsPlaying(true);
-        const success = await audioService.playClovaTTS(detailedText, selectedLanguage, () => {
+      setIsPlaying(true);
+      setIsPaused(false);
+
+      if (audioMode === 'openai') {
+        const success = await audioService.playOpenAISentences(detailedText, selectedLanguage, undefined, () => {
           setIsPlaying(false);
+          setIsPaused(false);
         });
         if (!success) {
           // Fallback to system TTS
           audioService.playText(detailedText, selectedLanguage, playbackRate, () => {
             setIsPlaying(false);
+            setIsPaused(false);
           });
         }
       } else {
         audioService.playText(detailedText, selectedLanguage, playbackRate, () => {
           setIsPlaying(false);
+          setIsPaused(false);
         });
-        setIsPlaying(true);
       }
     }
   };
@@ -196,10 +217,10 @@ export default function LandmarkPanel({
     const newRate = value[0];
     setPlaybackRate(newRate);
     audioService.setRate(newRate);
-    
-    // Rate change only works for non-CLOVA modes
+
+    // Rate change only works for system TTS mode
     const audioMode = audioService.getAudioMode();
-    if (audioMode !== 'clova' && isPlaying && !audioService.isPaused()) {
+    if (audioMode === 'tts' && isPlaying && !audioService.isPaused()) {
       const detailedText = getTranslatedContent(landmark, selectedLanguage, 'detailedDescription');
       if (detailedText) {
         audioService.playText(detailedText, selectedLanguage, newRate, () => {
@@ -277,7 +298,7 @@ export default function LandmarkPanel({
     >
       <Card className="p-4 bg-background border overflow-y-auto max-h-[calc(100vh-32px)]" data-testid="panel-landmark-details">
         {/* Header */}
-        <div 
+        <div
           className="flex items-start justify-between mb-3"
           data-drag-handle
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
@@ -497,12 +518,12 @@ export default function LandmarkPanel({
                   onClick={(e) => {
                     e.stopPropagation();
                     const searchQuery = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                    
+
                     // Language mapping for each platform
                     const gygLang = selectedLanguage === 'es' ? 'es' : selectedLanguage === 'fr' ? 'fr' : selectedLanguage === 'de' ? 'de' : selectedLanguage === 'it' ? 'it' : selectedLanguage === 'pt' ? 'pt-BR' : selectedLanguage === 'ko' ? 'ko' : selectedLanguage === 'ja' ? 'ja' : selectedLanguage === 'zh' ? 'zh' : 'en';
                     const viatorLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-BR' : selectedLanguage === 'ja' ? 'ja-JP' : 'en-US';
                     const klookLang = selectedLanguage === 'es' ? 'es-ES' : selectedLanguage === 'fr' ? 'fr-FR' : selectedLanguage === 'de' ? 'de-DE' : selectedLanguage === 'it' ? 'it-IT' : selectedLanguage === 'pt' ? 'pt-PT' : selectedLanguage === 'ko' ? 'ko' : selectedLanguage === 'ja' ? 'ja' : selectedLanguage === 'zh' ? 'zh-CN' : selectedLanguage === 'th' ? 'th-TH' : selectedLanguage === 'vi' ? 'vi-VN' : selectedLanguage === 'id' ? 'id-ID' : 'en-US';
-                    
+
                     const urls = {
                       'GetYourGuide': `https://www.getyourguide.com/${gygLang}/s/?q=${searchQuery}`,
                       'Viator': `https://www.viator.com/${viatorLang}/search?q=${searchQuery}`,

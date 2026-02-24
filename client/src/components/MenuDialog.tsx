@@ -7,12 +7,12 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { 
-  Volume2, 
-  VolumeX, 
-  WifiOff, 
-  Wifi, 
-  Navigation as NavIcon, 
+import {
+  Volume2,
+  VolumeX,
+  WifiOff,
+  Wifi,
+  Navigation as NavIcon,
   Route,
   X,
   MapPin,
@@ -43,15 +43,6 @@ import { t, getTranslatedContent } from '@/lib/translations';
 import { useState, useEffect } from 'react';
 import { audioService, type AudioMode } from '@/lib/audioService';
 
-interface ClovaVoice {
-  id: string;
-  name: string;
-  nameKo: string;
-  gender: string;
-  language: string;
-  description: string;
-}
-
 interface VoiceInfo {
   voice: SpeechSynthesisVoice;
   quality: 'premium' | 'standard';
@@ -60,20 +51,20 @@ interface VoiceInfo {
 
 function analyzeVoice(voice: SpeechSynthesisVoice): VoiceInfo {
   const nameLower = voice.name.toLowerCase();
-  
+
   const premiumKeywords = ['neural', 'wavenet', 'premium', 'enhanced', 'natural', 'high-quality', 'google'];
   const isPremium = premiumKeywords.some(keyword => nameLower.includes(keyword));
-  
+
   const femaleKeywords = ['female', 'woman', 'girl', 'zira', 'hazel', 'susan', 'heera', 'hedda', 'helia', 'lucia', 'paulina', 'sabina', 'monica', 'laura', 'elsa', 'cosette', 'caroline', 'julie', 'amelie', 'kyoko', 'o-ren', 'mei-jia', 'yuna', 'sora'];
   const maleKeywords = ['male', 'man', 'david', 'mark', 'richard', 'george', 'daniel', 'sean', 'james', 'rishi', 'pablo', 'jorge', 'luca', 'thomas', 'guillaume', 'otoya', 'ting-ting'];
-  
+
   let gender: 'male' | 'female' | 'unknown' = 'unknown';
   if (femaleKeywords.some(k => nameLower.includes(k))) {
     gender = 'female';
   } else if (maleKeywords.some(k => nameLower.includes(k))) {
     gender = 'male';
   }
-  
+
   return {
     voice,
     quality: isPremium ? 'premium' : 'standard',
@@ -84,7 +75,7 @@ function analyzeVoice(voice: SpeechSynthesisVoice): VoiceInfo {
 interface MenuDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  
+
   // Audio
   audioEnabled: boolean;
   onToggleAudio: () => void;
@@ -92,26 +83,26 @@ interface MenuDialogProps {
   speechRate: number;
   onSpeechRateChange: (rate: number) => void;
   onTestAudio?: () => void;
-  
+
   // City & Language
   cities: City[];
   selectedCityId: string;
   onCityChange: (cityId: string) => void;
   selectedLanguage: string;
   onLanguageChange: (lang: string) => void;
-  
+
   // Navigation
   activeRoute: any;
   onClearRoute: () => void;
-  
+
   // Offline
   offlineMode: boolean;
   onToggleOfflineMode: (checked: boolean) => void;
-  
+
   // GPS
   gpsEnabled: boolean;
   onToggleGps: (checked: boolean) => void;
-  
+
   // Progress
   totalLandmarks: number;
   cityName?: string;
@@ -119,11 +110,11 @@ interface MenuDialogProps {
   onLandmarkClick?: (landmark: Landmark) => void;
   searchedLocations?: Array<{ id: string; name: string; lat: number; lng: number }>;
   onSearchedLocationClick?: (location: { id: string; name: string; lat: number; lng: number }) => void;
-  
+
   // Tour
   tourStops: Landmark[];
-  tourRouteInfo: { 
-    distance: number; 
+  tourRouteInfo: {
+    distance: number;
     duration: number;
     segments?: Array<{ from: string; to: string; distance: number; duration: number }>;
   } | null;
@@ -131,11 +122,11 @@ interface MenuDialogProps {
   onClearTour: () => void;
   tourTimePerStop: number;
   onTourTimePerStopChange: (time: number) => void;
-  
+
   // Offline Data
   onDownloadData: (password: string) => Promise<void>;
   onUploadData: (file: File, password: string) => Promise<void>;
-  
+
   // MP3 Audio Download
   onOpenAudioDownload?: () => void;
 }
@@ -181,21 +172,18 @@ export default function MenuDialog({
   const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedSystemVoice, setSelectedSystemVoice] = useState<string>('');
   const [audioMode, setAudioMode] = useState<AudioMode>(audioService.getAudioMode());
-  const [clovaVoices, setClovaVoices] = useState<ClovaVoice[]>([]);
-  const [selectedClovaVoice, setSelectedClovaVoice] = useState<string>('');
-  const [loadingClovaVoices, setLoadingClovaVoices] = useState(false);
-  
+
   // Voice filter states
   const [qualityFilter, setQualityFilter] = useState<'all' | 'premium' | 'standard'>('all');
   const [genderFilter, setGenderFilter] = useState<'all' | 'male' | 'female'>('all');
   const [connectionFilter, setConnectionFilter] = useState<'all' | 'online' | 'local'>('all');
-  
+
   useEffect(() => {
     if (isOpen) {
       const loadVoices = () => {
         const voices = audioService.getVoicesForLanguage(selectedLanguage);
         setSystemVoices(voices);
-        
+
         const savedVoice = audioService.getSelectedVoiceName(selectedLanguage);
         if (savedVoice) {
           setSelectedSystemVoice(savedVoice);
@@ -203,69 +191,28 @@ export default function MenuDialog({
           setSelectedSystemVoice(voices[0].name);
         }
       };
-      
+
       loadVoices();
-      
+
       if (speechSynthesis.onvoiceschanged !== undefined) {
         speechSynthesis.onvoiceschanged = loadVoices;
       }
-      
+
       const timer = setTimeout(loadVoices, 500);
       return () => clearTimeout(timer);
     }
   }, [isOpen, selectedLanguage]);
-  
-  const loadClovaVoices = async () => {
-    setLoadingClovaVoices(true);
-    try {
-      const response = await fetch(`/api/tts/clova/voices?language=${selectedLanguage}`);
-      if (response.ok) {
-        const data = await response.json();
-        setClovaVoices(data.voices || []);
-        // Load saved voice or use default
-        const savedClovaVoice = audioService.getSelectedClovaVoice(selectedLanguage);
-        if (savedClovaVoice) {
-          setSelectedClovaVoice(savedClovaVoice);
-        } else if (data.default) {
-          setSelectedClovaVoice(data.default);
-        }
-      }
-    } catch (error) {
-      console.error('Failed to load CLOVA voices:', error);
-    } finally {
-      setLoadingClovaVoices(false);
-    }
-  };
-  
-  const handleClovaVoiceChange = (voiceId: string) => {
-    setSelectedClovaVoice(voiceId);
-    audioService.setClovaVoiceForLanguage(selectedLanguage, voiceId);
-  };
-  
-  useEffect(() => {
-    if (isOpen && audioMode === 'clova') {
-      loadClovaVoices();
-    }
-  }, [isOpen, selectedLanguage, audioMode]);
-  
+
   const handleAudioModeChange = (mode: AudioMode) => {
     setAudioMode(mode);
     audioService.setAudioMode(mode);
-    if (mode === 'clova' && clovaVoices.length === 0) {
-      loadClovaVoices();
-    }
   };
-  
-  const testClovaVoice = async (voiceId?: string) => {
-    const text = selectedLanguage === 'ko' ? '안녕하세요! CLOVA 음성 테스트입니다.' : 'Hello! This is a CLOVA voice test.';
-    await audioService.playClovaTTS(text, selectedLanguage, undefined, voiceId || selectedClovaVoice);
-  };
-  
+
   const handleSystemVoiceChange = (voiceName: string) => {
     setSelectedSystemVoice(voiceName);
     audioService.setVoiceForLanguage(selectedLanguage, voiceName);
   };
-  
+
   const testTexts: Record<string, string> = {
     'en': 'Hello! This is a test.',
     'ko': '안녕하세요! 테스트입니다.',
@@ -278,11 +225,11 @@ export default function MenuDialog({
     'pt': 'Olá! Teste de voz.',
     'ru': 'Привет! Тест.'
   };
-  
+
   const previewVoice = (voiceName: string) => {
     const text = testTexts[selectedLanguage] || testTexts['en'];
     audioService.stop();
-    
+
     const voice = systemVoices.find(v => v.name === voiceName);
     if (voice) {
       const utterance = new SpeechSynthesisUtterance(text);
@@ -292,7 +239,7 @@ export default function MenuDialog({
       speechSynthesis.speak(utterance);
     }
   };
-  
+
   // Apply filters to voice list
   const voiceInfoList = systemVoices.map(analyzeVoice).filter(info => {
     // Quality filter
@@ -304,7 +251,7 @@ export default function MenuDialog({
     if (connectionFilter === 'local' && !info.voice.localService) return false;
     return true;
   });
-  
+
   // Count voices by category for filter badges
   const allVoiceInfo = systemVoices.map(analyzeVoice);
   const voiceCounts = {
@@ -409,9 +356,9 @@ export default function MenuDialog({
 
                 <div className="space-y-2 pt-2 border-t">
                   <Label className="text-xs font-medium">{t('progress', selectedLanguage)}</Label>
-                  <ProgressStats 
-                    totalLandmarks={totalLandmarks} 
-                    cityName={cityName} 
+                  <ProgressStats
+                    totalLandmarks={totalLandmarks}
+                    cityName={cityName}
                     selectedLanguage={selectedLanguage}
                     landmarks={landmarks}
                     tourStops={tourStops}
@@ -476,235 +423,143 @@ export default function MenuDialog({
                       </Label>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <RadioGroupItem value="clova" id="menu-mode-clova" data-testid="radio-mode-clova" />
-                      <Label htmlFor="menu-mode-clova" className="text-[10px] cursor-pointer flex items-center gap-0.5">
-                        <Cloud className="w-2.5 h-2.5" />
-                        CLOVA
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-1">
                       <RadioGroupItem value="mp3" id="menu-mode-mp3" data-testid="radio-mode-mp3" />
                       <Label htmlFor="menu-mode-mp3" className="text-[10px] cursor-pointer">MP3</Label>
                     </div>
                   </RadioGroup>
                 </div>
 
-                {/* CLOVA Voice Selection - Show only when CLOVA mode is selected */}
-                {audioMode === 'clova' && (
+                {/* System TTS Voice Selection Cards - Show only when TTS mode is selected */}
+                {audioMode === 'tts' && (
                   <div className="space-y-2 pt-2 border-t">
                     <div className="flex items-center justify-between">
                       <Label className="text-xs font-medium flex items-center gap-1">
-                        <Cloud className="w-3 h-3" />
-                        {selectedLanguage === 'ko' ? 'CLOVA 음성' : 'CLOVA Voice'}
+                        <Mic className="w-3 h-3" />
+                        {selectedLanguage === 'ko' ? 'TTS 음성' : 'TTS Voice'}
                       </Label>
-                      <Badge variant="secondary" className="text-[10px]">
-                        {loadingClovaVoices ? '...' : `${clovaVoices.length}`}
-                      </Badge>
+                      <div className="flex items-center gap-1">
+                        <Badge variant="outline" className="text-[10px]">
+                          {voiceInfoList.length}/{voiceCounts.total}
+                        </Badge>
+                      </div>
                     </div>
-                    
-                    {loadingClovaVoices ? (
-                      <div className="text-center py-2 text-muted-foreground text-xs">
-                        {selectedLanguage === 'ko' ? '로딩 중...' : 'Loading...'}
-                      </div>
-                    ) : clovaVoices.length > 0 ? (
-                      <div className="grid grid-cols-2 gap-2">
-                        {clovaVoices.map((voice) => {
-                          const isSelected = selectedClovaVoice === voice.id;
-                          
-                          return (
-                            <button
-                              key={voice.id}
-                              onClick={() => handleClovaVoiceChange(voice.id)}
-                              className={`
-                                relative flex flex-col w-full p-2 rounded-md border transition-all
-                                text-left cursor-pointer
-                                ${isSelected 
-                                  ? 'border-primary bg-primary/5' 
-                                  : 'border-border bg-card hover:border-primary/50'
-                                }
-                              `}
-                              aria-pressed={isSelected}
-                              data-testid={`card-clova-voice-${voice.id}`}
-                            >
-                              {isSelected && (
-                                <div className="absolute top-1 right-1">
-                                  <Check className="w-2.5 h-2.5 text-primary" />
-                                </div>
-                              )}
-                              
-                              <div className="flex items-center gap-1 mb-1">
-                                <User className={`w-2.5 h-2.5 flex-shrink-0 ${
-                                  voice.gender === 'female' ? 'text-pink-500' : 
-                                  voice.gender === 'male' ? 'text-blue-500' : 
-                                  'text-muted-foreground'
-                                }`} />
-                                <span className="font-medium text-[10px] truncate">
-                                  {selectedLanguage === 'ko' ? voice.nameKo : voice.name}
-                                </span>
-                              </div>
-                              
-                              <div className="flex items-center justify-between">
-                                <Badge variant="outline" className="text-[8px] px-1 py-0 h-3">
-                                  {voice.language.toUpperCase()}
-                                </Badge>
-                                
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="h-4 w-4 p-0"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    testClovaVoice(voice.id);
-                                  }}
-                                  title={selectedLanguage === 'ko' ? '미리듣기' : 'Preview'}
-                                  data-testid={`button-clova-preview-${voice.id}`}
-                                >
-                                  <Play className="w-2.5 h-2.5" />
-                                </Button>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    ) : (
-                      <div className="text-center py-2 text-muted-foreground text-xs">
-                        {selectedLanguage === 'ko' ? '사용 가능한 CLOVA 음성이 없습니다' : 'No CLOVA voices available'}
-                      </div>
-                    )}
-                  </div>
-                )}
 
-                {/* System TTS Voice Selection Cards - Show only when TTS mode is selected */}
-                {audioMode === 'tts' && (
-                <div className="space-y-2 pt-2 border-t">
-                  <div className="flex items-center justify-between">
-                    <Label className="text-xs font-medium flex items-center gap-1">
-                      <Mic className="w-3 h-3" />
-                      {selectedLanguage === 'ko' ? 'TTS 음성' : 'TTS Voice'}
-                    </Label>
-                    <div className="flex items-center gap-1">
-                      <Badge variant="outline" className="text-[10px]">
-                        {voiceInfoList.length}/{voiceCounts.total}
-                      </Badge>
+                    {/* Voice Filters */}
+                    <div className="space-y-1.5">
+                      {/* Quality Filter */}
+                      <div className="flex items-center gap-1 flex-wrap">
+                        <span className="text-[10px] text-muted-foreground w-10">
+                          {selectedLanguage === 'ko' ? '품질' : 'Quality'}
+                        </span>
+                        <Button
+                          variant={qualityFilter === 'all' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px]"
+                          onClick={() => setQualityFilter('all')}
+                          data-testid="filter-quality-all"
+                        >
+                          {selectedLanguage === 'ko' ? '전체' : 'All'}
+                        </Button>
+                        <Button
+                          variant={qualityFilter === 'premium' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px] gap-0.5"
+                          onClick={() => setQualityFilter('premium')}
+                          data-testid="filter-quality-premium"
+                        >
+                          <Sparkles className="w-2.5 h-2.5" />
+                          Premium ({voiceCounts.premium})
+                        </Button>
+                        <Button
+                          variant={qualityFilter === 'standard' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px]"
+                          onClick={() => setQualityFilter('standard')}
+                          data-testid="filter-quality-standard"
+                        >
+                          Standard ({voiceCounts.standard})
+                        </Button>
+                      </div>
+
+                      {/* Gender Filter */}
+                      <div className="flex items-center gap-1 flex-wrap">
+                        <span className="text-[10px] text-muted-foreground w-10">
+                          {selectedLanguage === 'ko' ? '성별' : 'Gender'}
+                        </span>
+                        <Button
+                          variant={genderFilter === 'all' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px]"
+                          onClick={() => setGenderFilter('all')}
+                          data-testid="filter-gender-all"
+                        >
+                          {selectedLanguage === 'ko' ? '전체' : 'All'}
+                        </Button>
+                        <Button
+                          variant={genderFilter === 'male' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px] gap-0.5"
+                          onClick={() => setGenderFilter('male')}
+                          data-testid="filter-gender-male"
+                        >
+                          <User className="w-2.5 h-2.5 text-blue-500" />
+                          {selectedLanguage === 'ko' ? '남성' : 'Male'} ({voiceCounts.male})
+                        </Button>
+                        <Button
+                          variant={genderFilter === 'female' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px] gap-0.5"
+                          onClick={() => setGenderFilter('female')}
+                          data-testid="filter-gender-female"
+                        >
+                          <User className="w-2.5 h-2.5 text-pink-500" />
+                          {selectedLanguage === 'ko' ? '여성' : 'Female'} ({voiceCounts.female})
+                        </Button>
+                      </div>
+
+                      {/* Connection Filter */}
+                      <div className="flex items-center gap-1 flex-wrap">
+                        <span className="text-[10px] text-muted-foreground w-10">
+                          {selectedLanguage === 'ko' ? '연결' : 'Type'}
+                        </span>
+                        <Button
+                          variant={connectionFilter === 'all' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px]"
+                          onClick={() => setConnectionFilter('all')}
+                          data-testid="filter-connection-all"
+                        >
+                          {selectedLanguage === 'ko' ? '전체' : 'All'}
+                        </Button>
+                        <Button
+                          variant={connectionFilter === 'online' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px] gap-0.5"
+                          onClick={() => setConnectionFilter('online')}
+                          data-testid="filter-connection-online"
+                        >
+                          <Wifi className="w-2.5 h-2.5" />
+                          Online ({voiceCounts.online})
+                        </Button>
+                        <Button
+                          variant={connectionFilter === 'local' ? 'default' : 'outline'}
+                          size="sm"
+                          className="h-5 px-2 text-[10px] gap-0.5"
+                          onClick={() => setConnectionFilter('local')}
+                          data-testid="filter-connection-local"
+                        >
+                          <WifiOff className="w-2.5 h-2.5" />
+                          Local ({voiceCounts.local})
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                  
-                  {/* Voice Filters */}
-                  <div className="space-y-1.5">
-                    {/* Quality Filter */}
-                    <div className="flex items-center gap-1 flex-wrap">
-                      <span className="text-[10px] text-muted-foreground w-10">
-                        {selectedLanguage === 'ko' ? '품질' : 'Quality'}
-                      </span>
-                      <Button
-                        variant={qualityFilter === 'all' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px]"
-                        onClick={() => setQualityFilter('all')}
-                        data-testid="filter-quality-all"
-                      >
-                        {selectedLanguage === 'ko' ? '전체' : 'All'}
-                      </Button>
-                      <Button
-                        variant={qualityFilter === 'premium' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px] gap-0.5"
-                        onClick={() => setQualityFilter('premium')}
-                        data-testid="filter-quality-premium"
-                      >
-                        <Sparkles className="w-2.5 h-2.5" />
-                        Premium ({voiceCounts.premium})
-                      </Button>
-                      <Button
-                        variant={qualityFilter === 'standard' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px]"
-                        onClick={() => setQualityFilter('standard')}
-                        data-testid="filter-quality-standard"
-                      >
-                        Standard ({voiceCounts.standard})
-                      </Button>
-                    </div>
-                    
-                    {/* Gender Filter */}
-                    <div className="flex items-center gap-1 flex-wrap">
-                      <span className="text-[10px] text-muted-foreground w-10">
-                        {selectedLanguage === 'ko' ? '성별' : 'Gender'}
-                      </span>
-                      <Button
-                        variant={genderFilter === 'all' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px]"
-                        onClick={() => setGenderFilter('all')}
-                        data-testid="filter-gender-all"
-                      >
-                        {selectedLanguage === 'ko' ? '전체' : 'All'}
-                      </Button>
-                      <Button
-                        variant={genderFilter === 'male' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px] gap-0.5"
-                        onClick={() => setGenderFilter('male')}
-                        data-testid="filter-gender-male"
-                      >
-                        <User className="w-2.5 h-2.5 text-blue-500" />
-                        {selectedLanguage === 'ko' ? '남성' : 'Male'} ({voiceCounts.male})
-                      </Button>
-                      <Button
-                        variant={genderFilter === 'female' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px] gap-0.5"
-                        onClick={() => setGenderFilter('female')}
-                        data-testid="filter-gender-female"
-                      >
-                        <User className="w-2.5 h-2.5 text-pink-500" />
-                        {selectedLanguage === 'ko' ? '여성' : 'Female'} ({voiceCounts.female})
-                      </Button>
-                    </div>
-                    
-                    {/* Connection Filter */}
-                    <div className="flex items-center gap-1 flex-wrap">
-                      <span className="text-[10px] text-muted-foreground w-10">
-                        {selectedLanguage === 'ko' ? '연결' : 'Type'}
-                      </span>
-                      <Button
-                        variant={connectionFilter === 'all' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px]"
-                        onClick={() => setConnectionFilter('all')}
-                        data-testid="filter-connection-all"
-                      >
-                        {selectedLanguage === 'ko' ? '전체' : 'All'}
-                      </Button>
-                      <Button
-                        variant={connectionFilter === 'online' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px] gap-0.5"
-                        onClick={() => setConnectionFilter('online')}
-                        data-testid="filter-connection-online"
-                      >
-                        <Wifi className="w-2.5 h-2.5" />
-                        Online ({voiceCounts.online})
-                      </Button>
-                      <Button
-                        variant={connectionFilter === 'local' ? 'default' : 'outline'}
-                        size="sm"
-                        className="h-5 px-2 text-[10px] gap-0.5"
-                        onClick={() => setConnectionFilter('local')}
-                        data-testid="filter-connection-local"
-                      >
-                        <WifiOff className="w-2.5 h-2.5" />
-                        Local ({voiceCounts.local})
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  {voiceInfoList.length > 0 ? (
-                    <div className="grid grid-cols-2 gap-2">
+
+                    {voiceInfoList.length > 0 ? (
+                      <div className="grid grid-cols-2 gap-2">
                         {voiceInfoList.map((info) => {
                           const isSelected = selectedSystemVoice === info.voice.name;
                           const voiceSlug = info.voice.name.replace(/\s+/g, '-').toLowerCase();
-                          
+
                           return (
                             <button
                               key={info.voice.name}
@@ -712,8 +567,8 @@ export default function MenuDialog({
                               className={`
                                 relative flex flex-col w-full p-2 rounded-md border transition-all
                                 text-left cursor-pointer
-                                ${isSelected 
-                                  ? 'border-primary bg-primary/5' 
+                                ${isSelected
+                                  ? 'border-primary bg-primary/5'
                                   : 'border-border bg-card hover:border-primary/50'
                                 }
                               `}
@@ -725,31 +580,30 @@ export default function MenuDialog({
                                   <Check className="w-3 h-3 text-primary" />
                                 </div>
                               )}
-                              
+
                               <div className="flex items-center gap-1.5 mb-1.5">
-                                <User className={`w-3 h-3 flex-shrink-0 ${
-                                  info.gender === 'female' ? 'text-pink-500' : 
-                                  info.gender === 'male' ? 'text-blue-500' : 
-                                  'text-muted-foreground'
-                                }`} />
+                                <User className={`w-3 h-3 flex-shrink-0 ${info.gender === 'female' ? 'text-pink-500' :
+                                    info.gender === 'male' ? 'text-blue-500' :
+                                      'text-muted-foreground'
+                                  }`} />
                                 <span className="font-medium text-xs truncate" title={info.voice.name}>
                                   {info.voice.name.split(' ').slice(0, 2).join(' ')}
                                 </span>
                               </div>
-                              
+
                               <div className="flex flex-wrap gap-0.5 mb-1.5">
                                 <Badge variant="outline" className="text-[9px] px-1 py-0 h-4">
                                   {info.voice.lang}
                                 </Badge>
-                                <Badge 
-                                  variant={info.quality === 'premium' ? 'default' : 'secondary'} 
+                                <Badge
+                                  variant={info.quality === 'premium' ? 'default' : 'secondary'}
                                   className="text-[9px] px-1 py-0 h-4 gap-0.5"
                                 >
                                   {info.quality === 'premium' && <Sparkles className="w-2 h-2" />}
                                   {info.quality === 'premium' ? 'P' : 'S'}
                                 </Badge>
                               </div>
-                              
+
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-0.5 text-[9px] text-muted-foreground">
                                   {info.voice.localService ? (
@@ -758,7 +612,7 @@ export default function MenuDialog({
                                     <Wifi className="w-2.5 h-2.5" />
                                   )}
                                 </div>
-                                
+
                                 <Button
                                   variant="ghost"
                                   size="sm"
@@ -776,33 +630,33 @@ export default function MenuDialog({
                             </button>
                           );
                         })}
-                    </div>
-                  ) : (
-                    <div className="text-center py-4 space-y-2">
-                      <p className="text-xs text-muted-foreground">
-                        {voiceCounts.total === 0 
-                          ? (selectedLanguage === 'ko' ? '사용 가능한 음성이 없습니다' : 'No voices available for this language')
-                          : (selectedLanguage === 'ko' ? '필터 조건에 맞는 음성이 없습니다' : 'No voices match the current filters')
-                        }
-                      </p>
-                      {voiceCounts.total > 0 && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-[10px] h-6"
-                          onClick={() => {
-                            setQualityFilter('all');
-                            setGenderFilter('all');
-                            setConnectionFilter('all');
-                          }}
-                          data-testid="button-reset-filters"
-                        >
-                          {selectedLanguage === 'ko' ? '필터 초기화' : 'Reset Filters'}
-                        </Button>
-                      )}
-                    </div>
-                  )}
-                </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-4 space-y-2">
+                        <p className="text-xs text-muted-foreground">
+                          {voiceCounts.total === 0
+                            ? (selectedLanguage === 'ko' ? '사용 가능한 음성이 없습니다' : 'No voices available for this language')
+                            : (selectedLanguage === 'ko' ? '필터 조건에 맞는 음성이 없습니다' : 'No voices match the current filters')
+                          }
+                        </p>
+                        {voiceCounts.total > 0 && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-[10px] h-6"
+                            onClick={() => {
+                              setQualityFilter('all');
+                              setGenderFilter('all');
+                              setConnectionFilter('all');
+                            }}
+                            data-testid="button-reset-filters"
+                          >
+                            {selectedLanguage === 'ko' ? '필터 초기화' : 'Reset Filters'}
+                          </Button>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 )}
 
                 {onTestAudio && (

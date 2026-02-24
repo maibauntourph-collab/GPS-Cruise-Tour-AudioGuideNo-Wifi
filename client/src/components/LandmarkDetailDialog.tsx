@@ -76,6 +76,129 @@ export default function LandmarkDetailDialog({
     return AudioService.splitIntoSentences(currentDetailedDescription);
   }, [currentDetailedDescription]);
 
+  // Handle dialog close - stop all audio first
+  const handleDialogClose = () => {
+    // [Designer Kim] 시뮬레이션 중인 경우 오디오를 끄지 않고 백그라운드에서 유지합니다.
+    const isSimulating = localStorage.getItem('simulation-active') === 'true';
+
+    if (!isSimulating) {
+      setCurrentSentenceIndex(-1);
+      setIsPlaying(false);
+      setIsPaused(false);
+      audioService.stopSentences();
+      audioService.stop();
+      audioService.stopMP3();
+    }
+    onClose();
+  };
+
+  /**
+   * [코다리부장 & 회계부장 합동 브리핑]
+   * 대표님, 이 함수가 바로 '돈을 벌어다 주는' 핵심 로직입니다.
+   * 1. 우리가 만든 서버 API에 결제 세션 생성을 요청하고,
+   * 2. Stripe가 준 안전한 결제 주소(URL)로 고객을 보내면 끝!
+   */
+  const handleStripeCheckout = async () => {
+    if (!landmark) return;
+    try {
+      const response = await fetch('/api/payments/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          landmarkId: landmark.id,
+          creatorId: 'default-creator', // 실제로는 콘텐츠 제작자 ID
+          userId: 'test-user', // 실제로는 현재 로그인한 사용자 ID
+          amount: 4.99, // 기본 패키지 가격 (€)
+          name: `${getTranslatedContent(landmark, selectedLanguage, 'name')} 프리미엄 가이드`
+        }),
+      });
+
+      const { url, error } = await response.json();
+      if (url) {
+        window.location.href = url; // [코다리부장] 고객을 안전한 Stripe 결제창으로 이동시킵니다!
+      } else {
+        throw new Error(error || '세션 생성 실패');
+      }
+    } catch (error) {
+      console.error('[회계부장 긴급] 결제 시작 중 오류 발생:', error);
+      alert('결제 창을 열지 못했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  };
+
+  const handlePlayAudio = async () => {
+    // If playing and not paused, then pause
+    if (isPlaying && !isPaused) {
+      audioService.pause();
+      setIsPaused(true);
+      return;
+    }
+
+    // If already paused, then resume
+    if (isPlaying && isPaused) {
+      audioService.resume();
+      setIsPaused(false);
+      return;
+    }
+
+    // Otherwise, start fresh
+    const textToPlay = audioContentType === 'summary'
+      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : getTranslatedContent(landmark, selectedLanguage, 'description'))
+      : currentDetailedDescription;
+
+    if (!textToPlay) return;
+
+    const audioMode = audioService.getAudioMode();
+
+    const onPlaybackEnd = () => {
+      setIsPlaying(false);
+      setIsPaused(false);
+      setCurrentSentenceIndex(-1);
+    };
+
+    if (audioMode === 'openai') {
+      setIsPlaying(true);
+      setIsPaused(false);
+      const success = await audioService.playOpenAISentences(
+        textToPlay,
+        selectedLanguage,
+        (index) => setCurrentSentenceIndex(index),
+        onPlaybackEnd
+      );
+      if (!success) {
+        // Fallback to system TTS if OpenAI fails
+        audioService.playSentences(
+          textToPlay,
+          selectedLanguage,
+          playbackRate,
+          (index) => setCurrentSentenceIndex(index),
+          onPlaybackEnd
+        );
+      }
+    } else {
+      // Use sentence-by-sentence playback with highlighting for TTS/Auto/MP3 modes
+      setIsPlaying(true);
+      setIsPaused(false);
+      audioService.playSentences(
+        textToPlay,
+        selectedLanguage,
+        playbackRate,
+        (index) => setCurrentSentenceIndex(index),
+        onPlaybackEnd
+      );
+    }
+  };
+
+  const handleRestartAudio = () => {
+    audioService.stopSentences();
+    audioService.stop();
+    audioService.stopMP3();
+    setIsPlaying(false);
+    setIsPaused(false);
+    setCurrentSentenceIndex(-1);
+    // Use setTimeout to ensure state is processed before restarting
+    setTimeout(() => handlePlayAudio(), 100);
+  };
+
   // [Bug Doctor] 모바일 바디 락(pointer-events: none) 및 스크롤 락 완전 박멸 로직
   useEffect(() => {
     if (isOpen) {
@@ -136,163 +259,12 @@ export default function LandmarkDetailDialog({
     }
   }, [audioContentType]);
 
-  // Handle dialog close - stop all audio first
-  const handleDialogClose = () => {
-    // [Designer Kim] 시뮬레이션 중인 경우 오디오를 끄지 않고 백그라운드에서 유지합니다.
-    const isSimulating = localStorage.getItem('simulation-active') === 'true';
-
-    if (!isSimulating) {
-      setCurrentSentenceIndex(-1);
-      setIsPlaying(false);
-      setIsPaused(false);
-      audioService.stopSentences();
-      audioService.stop();
-      audioService.stopMP3();
-    }
-    onClose();
-  };
-
-  /**
-   * [코다리부장 & 회계부장 합동 브리핑]
-   * 대표님, 이 함수가 바로 '돈을 벌어다 주는' 핵심 로직입니다.
-   * 1. 우리가 만든 서버 API에 결제 세션 생성을 요청하고,
-   * 2. Stripe가 준 안전한 결제 주소(URL)로 고객을 보내면 끝!
-   */
-  const handleStripeCheckout = async () => {
-    if (!landmark) return;
-    try {
-      const response = await fetch('/api/payments/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          landmarkId: landmark.id,
-          creatorId: 'default-creator', // 실제로는 콘텐츠 제작자 ID
-          userId: 'test-user', // 실제로는 현재 로그인한 사용자 ID
-          amount: 4.99, // 기본 패키지 가격 (€)
-          name: `${getTranslatedContent(landmark, selectedLanguage, 'name')} 프리미엄 가이드`
-        }),
-      });
-
-      const { url, error } = await response.json();
-      if (url) {
-        window.location.href = url; // [코다리부장] 고객을 안전한 Stripe 결제창으로 이동시킵니다!
-      } else {
-        throw new Error(error || '세션 생성 실패');
-      }
-    } catch (error) {
-      console.error('[회계부장 긴급] 결제 시작 중 오류 발생:', error);
-      alert('결제 창을 열지 못했습니다. 잠시 후 다시 시도해주세요.');
-    }
-  };
 
 
 
-  const handlePlayAudio = async () => {
-    // If playing and not paused, then pause
-    if (isPlaying && !isPaused) {
-      audioService.pause();
-      setIsPaused(true);
-      return;
-    }
 
-    // If already paused, then resume
-    if (isPlaying && isPaused) {
-      audioService.resume();
-      setIsPaused(false);
-      return;
-    }
 
-    // Otherwise, start fresh
-    const textToPlay = audioContentType === 'summary'
-      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : getTranslatedContent(landmark, selectedLanguage, 'description'))
-      : currentDetailedDescription;
 
-    if (!textToPlay) return;
-
-    const audioMode = audioService.getAudioMode();
-
-    if (audioMode === 'clova') {
-      setIsPlaying(true);
-      setIsPaused(false);
-      const success = await audioService.playClovaSentences(
-        textToPlay,
-        selectedLanguage,
-        (index) => setCurrentSentenceIndex(index),
-        () => {
-          setIsPlaying(false);
-          setIsPaused(false);
-          setCurrentSentenceIndex(-1);
-        }
-      );
-      if (!success) {
-        // Fallback to system TTS if CLOVA fails
-        audioService.playSentences(
-          textToPlay,
-          selectedLanguage,
-          playbackRate,
-          (index) => setCurrentSentenceIndex(index),
-          () => {
-            setIsPlaying(false);
-            setIsPaused(false);
-            setCurrentSentenceIndex(-1);
-          }
-        );
-      }
-    } else if (audioMode === 'openai') {
-      setIsPlaying(true);
-      setIsPaused(false);
-      const success = await audioService.playOpenAISentences(
-        textToPlay,
-        selectedLanguage,
-        (index) => setCurrentSentenceIndex(index),
-        () => {
-          setIsPlaying(false);
-          setIsPaused(false);
-          setCurrentSentenceIndex(-1);
-        }
-      );
-      if (!success) {
-        // Fallback to system TTS if OpenAI fails
-        audioService.playSentences(
-          textToPlay,
-          selectedLanguage,
-          playbackRate,
-          (index) => setCurrentSentenceIndex(index),
-          () => {
-            setIsPlaying(false);
-            setIsPaused(false);
-            setCurrentSentenceIndex(-1);
-          }
-        );
-      }
-    } else {
-      // Use sentence-by-sentence playback with highlighting for TTS/Auto/MP3 modes
-      setIsPlaying(true);
-      setIsPaused(false);
-      audioService.playSentences(
-        textToPlay,
-        selectedLanguage,
-        playbackRate,
-        (index) => setCurrentSentenceIndex(index),
-        () => {
-          setIsPlaying(false);
-          setIsPaused(false);
-          setCurrentSentenceIndex(-1);
-        }
-      );
-    }
-  };
-
-  const handleRestartAudio = () => {
-    audioService.stopSentences();
-    audioService.stop();
-    audioService.stopMP3();
-    setIsPlaying(false);
-    setIsPaused(false);
-    setCurrentSentenceIndex(-1);
-    // Use setTimeout to ensure state is processed before restarting
-    setTimeout(() => handlePlayAudio(), 100);
-  };
 
   // Sentences for current playing content
   const activeSentences = useMemo(() => {
@@ -566,7 +538,7 @@ export default function LandmarkDetailDialog({
                         </Button>
                       </div>
                     </div>
-                    {isPlaying && audioService.getAudioMode() !== 'clova' && (
+                    {isPlaying && audioService.getAudioMode() === 'tts' && (
                       <select
                         value={playbackRate}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -1255,6 +1227,6 @@ export default function LandmarkDetailDialog({
           </Tabs>
         </div>
       </DialogContent>
-    </Dialog >
+    </Dialog>
   );
 }

@@ -38,7 +38,7 @@ export default function AudioDownloadDialog({
   landmarks,
   selectedLanguage
 }: AudioDownloadDialogProps) {
-  const [selectedVoice, setSelectedVoice] = useState<VoiceId>(() => 
+  const [selectedVoice, setSelectedVoice] = useState<VoiceId>(() =>
     getSavedVoice() || getVoiceForLanguage(selectedLanguage)
   );
   const [isDownloading, setIsDownloading] = useState(false);
@@ -91,7 +91,7 @@ export default function AudioDownloadDialog({
   const downloadAllAudio = async () => {
     setIsDownloading(true);
     const landmarksToDownload = landmarks.filter(l => !cachedLandmarks.has(l.id));
-    
+
     const statuses: DownloadStatus[] = landmarksToDownload.map(l => ({
       landmarkId: l.id,
       landmarkName: getTranslatedContent(l, selectedLanguage, 'name') || l.name,
@@ -104,8 +104,8 @@ export default function AudioDownloadDialog({
 
     for (let i = 0; i < landmarksToDownload.length; i++) {
       const landmark = landmarksToDownload[i];
-      
-      setDownloadStatuses(prev => prev.map(s => 
+
+      setDownloadStatuses(prev => prev.map(s =>
         s.landmarkId === landmark.id ? { ...s, status: 'downloading' } : s
       ));
 
@@ -133,14 +133,14 @@ export default function AudioDownloadDialog({
         }
 
         const result = await response.json();
-        
+
         const audioResponse = await fetch(result.audioUrl);
         if (!audioResponse.ok) {
           throw new Error('Failed to download audio file');
         }
 
         const audioBlob = await audioResponse.blob();
-        
+
         await offlineStorage.saveAudio({
           landmarkId: landmark.id,
           language: selectedLanguage,
@@ -151,21 +151,21 @@ export default function AudioDownloadDialog({
           voiceId: selectedVoice
         });
 
-        setDownloadStatuses(prev => prev.map(s => 
+        setDownloadStatuses(prev => prev.map(s =>
           s.landmarkId === landmark.id ? { ...s, status: 'complete' } : s
         ));
-        
+
         setCachedLandmarks(prev => new Set(Array.from(prev).concat(landmark.id)));
       } catch (error: any) {
         console.error(`Failed to download audio for ${landmark.id}:`, error);
-        setDownloadStatuses(prev => prev.map(s => 
+        setDownloadStatuses(prev => prev.map(s =>
           s.landmarkId === landmark.id ? { ...s, status: 'error', error: error.message } : s
         ));
       }
 
       completed++;
       setOverallProgress((completed / total) * 100);
-      
+
       await new Promise(resolve => setTimeout(resolve, 300));
     }
 
@@ -185,7 +185,7 @@ export default function AudioDownloadDialog({
     try {
       const zip = new JSZip();
       const landmarksToDl = landmarks.filter(l => cachedLandmarks.has(l.id));
-      
+
       if (landmarksToDl.length === 0) {
         alert(selectedLanguage === 'ko' ? '먼저 오디오를 다운로드하세요' : 'Please download audio files first');
         setIsZipDownloading(false);
@@ -195,7 +195,7 @@ export default function AudioDownloadDialog({
       // 폴더 구조: Country/City/Language/
       const languageName = languageNames[selectedLanguage] || selectedLanguage;
       const folderPath = `${country}/${cityName}/${languageName}`;
-      
+
       for (const landmark of landmarksToDl) {
         const audio = await offlineStorage.getAudio(landmark.id, selectedLanguage);
         if (audio && audio.audioBlob) {
@@ -235,7 +235,7 @@ export default function AudioDownloadDialog({
             {selectedLanguage === 'ko' ? 'MP3 오디오 다운로드' : 'Download MP3 Audio'}
           </DialogTitle>
           <DialogDescription>
-            {selectedLanguage === 'ko' 
+            {selectedLanguage === 'ko'
               ? `${cityName} 오프라인 오디오 가이드`
               : `Offline audio guide for ${cityName}`
             }
@@ -268,10 +268,10 @@ export default function AudioDownloadDialog({
 
           <div className="space-y-2">
             <label className="text-sm font-medium">
-              {selectedLanguage === 'ko' ? 'CLOVA Voice 선택' : 'Select CLOVA Voice'}
+              {selectedLanguage === 'ko' ? 'AI TTS 음성 선택' : 'Select AI TTS Voice'}
             </label>
-            <Select 
-              value={selectedVoice} 
+            <Select
+              value={selectedVoice}
               onValueChange={(v) => setSelectedVoice(v as VoiceId)}
               disabled={isDownloading}
             >
@@ -300,9 +300,9 @@ export default function AudioDownloadDialog({
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
-              {selectedLanguage === 'ko' 
-                ? `CLOVA Voice: ${voiceInfo.nameKo} (${voiceInfo.descriptionKo})`
-                : `CLOVA Voice: ${voiceInfo.name} (${voiceInfo.description})`
+              {selectedLanguage === 'ko'
+                ? `AI TTS 음성: ${voiceInfo.nameKo} (${voiceInfo.descriptionKo})`
+                : `AI TTS Voice: ${voiceInfo.name} (${voiceInfo.description})`
               }
             </p>
           </div>
@@ -320,8 +320,8 @@ export default function AudioDownloadDialog({
           {downloadStatuses.length > 0 && (
             <div className="max-h-40 overflow-y-auto space-y-1 border rounded-md p-2">
               {downloadStatuses.map((status) => (
-                <div 
-                  key={status.landmarkId} 
+                <div
+                  key={status.landmarkId}
                   className="flex items-center justify-between text-xs py-1"
                 >
                   <span className="truncate flex-1 mr-2">{status.landmarkName}</span>
@@ -373,7 +373,7 @@ export default function AudioDownloadDialog({
               ) : (
                 <>
                   <Download className="w-4 h-4 mr-2" />
-                  {selectedLanguage === 'ko' 
+                  {selectedLanguage === 'ko'
                     ? `${uncachedCount}개 오디오 다운로드`
                     : `Download ${uncachedCount} Audio Files`
                   }
@@ -397,7 +397,7 @@ export default function AudioDownloadDialog({
                 ) : (
                   <>
                     <Package className="w-4 h-4 mr-2" />
-                    {selectedLanguage === 'ko' 
+                    {selectedLanguage === 'ko'
                       ? `ZIP 다운로드 (${country}/${cityName})`
                       : `Download ZIP (${country}/${cityName})`
                     }
@@ -405,7 +405,7 @@ export default function AudioDownloadDialog({
                 )}
               </Button>
             )}
-            
+
             {cachedLandmarks.size > 0 && (
               <Button
                 variant="outline"

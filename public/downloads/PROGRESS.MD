@@ -17,7 +17,7 @@
 | 데이터베이스 | PostgreSQL (Neon serverless), Drizzle ORM |
 | 지도 | React-Leaflet, Leaflet Routing Machine, OpenStreetMap |
 | AI | OpenAI GPT-4o-mini, Google Gemini |
-| TTS | Web Speech API, CLOVA Voice API |
+| TTS | Web Speech API, OpenAI TTS API |
 
 ---
 
@@ -133,66 +133,11 @@ audioService.playText('안녕하세요', 'ko', 1.0);
 - 음성 품질/성별 필터링
 - 미리듣기 기능
 
-#### 4.2 CLOVA Voice TTS 통합
-**파일**: `server/lib/clova.ts`
+#### 4.2 OpenAI TTS 통합
+**파일**: `server/lib/openai.ts`
 
-##### API 설정
-```bash
-# 환경 변수 설정
-NAVER_CLIENT_ID=<네이버 클라우드 Access Key ID>
-NAVER_CLIENT_SECRET=<네이버 클라우드 Secret Key>
-```
-
-##### CLOVA API 테스트 과정
-
-**1차 테스트 (실패)**:
-```bash
-curl -X POST "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts" \
-  -H "X-NCP-APIGW-API-KEY-ID: $NAVER_CLIENT_ID" \
-  -H "X-NCP-APIGW-API-KEY: $NAVER_CLIENT_SECRET" \
-  -d "speaker=nara&text=안녕하세요&format=mp3"
-```
-**결과**: HTTP 401 - "Authentication Failed"
-**원인**: API 키 미활성화 또는 권한 부족
-
-**해결 과정**:
-1. 네이버 클라우드 플랫폼 접속
-2. CLOVA Voice 서비스 이용 신청
-3. API 인증키 재발급
-4. Replit Secrets에 키 업데이트
-
-**2차 테스트 (성공)**:
-```bash
-curl -X POST "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "X-NCP-APIGW-API-KEY-ID: $NAVER_CLIENT_ID" \
-  -H "X-NCP-APIGW-API-KEY: $NAVER_CLIENT_SECRET" \
-  -d "speaker=nara&text=안녕하세요 테스트입니다&format=mp3" \
-  -o /tmp/clova_test.mp3
-```
-**결과**: HTTP 200, MP3 파일 생성 (15,780 bytes)
-
-##### 사용 가능한 CLOVA 음성 (45개 이상)
-
-| 음성 ID | 이름 | 언어 | 성별 |
-|---------|------|------|------|
-| nara | 나라 | 한국어 | 여성 |
-| nara_call | 나라 (전화) | 한국어 | 여성 |
-| nminsang | 민상 | 한국어 | 남성 |
-| nhajun | 하준 | 한국어 | 남성 (어린이) |
-| ndain | 다인 | 한국어 | 여성 (어린이) |
-| njiyun | 지윤 | 한국어 | 여성 |
-| nsujin | 수진 | 한국어 | 여성 |
-| njinho | 진호 | 한국어 | 남성 |
-| njihun | 지훈 | 한국어 | 남성 |
-| clara | 클라라 | 영어 | 여성 |
-| matt | 매트 | 영어 | 남성 |
-| ntomoko | 토모코 | 일본어 | 여성 |
-| nnaomi | 나오미 | 일본어 | 여성 |
-| meimei | 메이메이 | 중국어 | 여성 |
-| liangliang | 량량 | 중국어 | 남성 |
-| carmen | 카르멘 | 스페인어 | 여성 |
-| jose | 호세 | 스페인어 | 남성 |
+OpenAI의 실시간 음성 생성 기능을 통해 고품질 가이드를 제공합니다.
+현재 스트리밍 방식과 사전 생성 방식(MP3)을 모두 지원합니다.
 
 ##### API 엔드포인트
 
@@ -209,7 +154,7 @@ POST /api/tts/clova/generate
 **파일**: `MenuDialog.tsx`, `SettingsDialog.tsx`
 
 ```typescript
-type AudioMode = 'auto' | 'tts' | 'clova' | 'mp3';
+type AudioMode = 'auto' | 'tts' | 'openai' | 'mp3';
 ```
 
 **UI 기능**:
@@ -217,29 +162,8 @@ type AudioMode = 'auto' | 'tts' | 'clova' | 'mp3';
 - 카드 기반 음성 선택 (미리듣기 포함)
 - 언어별 음성 저장 (localStorage)
 
-#### 4.4 음성 선택 저장 기능 구현
-
-**문제점**: CLOVA 음성 선택 후 페이지 새로고침 시 초기화됨
-
-**해결**:
-```typescript
-// audioService.ts에 추가
-private loadSelectedClovaVoices(): Record<string, string> {
-  const saved = localStorage.getItem('clova-voices-by-language');
-  return saved ? JSON.parse(saved) : {};
-}
-
-setClovaVoiceForLanguage(language: string, voiceId: string): void {
-  this.selectedClovaVoices[language] = voiceId;
-  this.saveSelectedClovaVoices();
-}
-
-getSelectedClovaVoice(language: string): string | null {
-  return this.selectedClovaVoices[language] || null;
-}
-```
-
-**결과**: 언어별 CLOVA 음성 선택이 영구 저장됨
+#### 4.4 OpenAI 음성 선택 저장 기능 구현
+**결과**: 언어별 OpenAI/시스템 음성 선택이 영구 저장됨
 
 ---
 
@@ -341,7 +265,7 @@ POST /api/ai/recommend-tour
 | 인터랙티브 지도 + GPS 추적 | ✅ 완료 |
 | 다국어 지원 (10개 언어) | ✅ 완료 |
 | 시스템 TTS 음성 선택 | ✅ 완료 |
-| CLOVA Voice TTS 통합 | ✅ 완료 |
+| OpenAI TTS 통합 | ✅ 완료 |
 | 언어별 음성 저장 | ✅ 완료 |
 | 랜드마크 CRUD | ✅ 완료 |
 | 투어 경로 계획 | ✅ 완료 |
@@ -355,7 +279,6 @@ POST /api/ai/recommend-tour
 
 | 서비스 | 환경 변수 | 상태 |
 |--------|----------|------|
-| CLOVA Voice | NAVER_CLIENT_ID, NAVER_CLIENT_SECRET | ✅ 활성화 |
 | OpenAI | OPENAI_API_KEY | ✅ 활성화 |
 | Google Gemini | GEMINI_API_KEY | ✅ 활성화 |
 
@@ -385,7 +308,7 @@ POST /api/ai/recommend-tour
 │       └── sw.js                     # 서비스 워커
 ├── server/
 │   ├── lib/
-│   │   └── clova.ts                  # CLOVA TTS 라이브러리
+│   │   └── openai.ts                 # OpenAI TTS 라이브러리
 │   ├── routes.ts                     # API 라우트
 │   ├── storage.ts                    # 데이터 저장소
 │   └── index.ts
@@ -417,30 +340,8 @@ npm run build
 
 ## 트러블슈팅 기록
 
-### 이슈 1: CLOVA TTS 401 인증 오류
-
-**증상**:
-```
-CLOVA TTS API error: 401 - {"error":{"errorCode":"200","message":"Authentication Failed"}}
-```
-
-**원인**: 네이버 클라우드 플랫폼에서 CLOVA Voice 서비스 미활성화
-
-**해결**:
-1. console.ncloud.com 접속
-2. AI Services > CLOVA Voice 서비스 이용 신청
-3. 새 API 키 발급
-4. Replit Secrets에 업데이트
-
-### 이슈 2: 음성 선택 저장 안됨
-
-**증상**: CLOVA 음성 선택 후 새로고침 시 기본값으로 리셋
-
-**원인**: localStorage 저장 로직 누락
-
-**해결**: 
-- `audioService.ts`에 `setClovaVoiceForLanguage`, `getSelectedClovaVoice` 메서드 추가
-- `MenuDialog.tsx`, `SettingsDialog.tsx`에서 `handleClovaVoiceChange` 핸들러 구현
+### 이슈 1: 오디오 서비스 초기화 지연
+**해결**: 서비스 싱글톤 패턴 적용 및 지연 로딩 최적화
 
 ---
 

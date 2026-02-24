@@ -585,32 +585,7 @@ export function registerRoutes(app: Hono<any>) {
     }
   });
 
-  // TTS Routes (Streaming)
-  app.post("/api/tts/clova/generate", async (c) => {
-    try {
-      const { generateClovaTTS, DEFAULT_CLOVA_VOICE_BY_LANGUAGE } = await import("./lib/clova");
-      const { text, voice, language, speed, pitch, volume } = await c.req.json();
-
-      if (!text) return c.json({ error: "Text is required" }, 400);
-
-      const selectedVoice = voice || DEFAULT_CLOVA_VOICE_BY_LANGUAGE[language || 'ko'] || 'nara';
-      const result = await generateClovaTTS(text, selectedVoice, speed || 0, pitch || 0, volume || 0);
-
-      // [연구소장 노트: Hono는 Node.js Buffer를 직접 받지 않으므로 Uint8Array로 변환 후 Response 객체 반환]
-      const uint8 = new Uint8Array(result.audioBuffer);
-      return new Response(uint8, {
-        headers: {
-          'Content-Type': result.contentType,
-          'Content-Length': result.audioBuffer.length.toString(),
-          'X-Voice-Id': result.voiceId,
-        }
-      });
-    } catch (e: any) {
-      return c.json({ error: e.message || "TTS Failed" }, 500);
-    }
-  });
-
-  // Streaming OpenAI TTS
+  // OpenAI TTS Routes (Streaming)
   app.post("/api/tts/openai/generate", async (c) => {
     try {
       const { generateLandmarkAudio } = await import("./lib/openai");

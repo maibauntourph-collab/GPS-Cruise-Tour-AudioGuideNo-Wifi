@@ -1,6 +1,6 @@
 import { offlineStorage } from './offlineStorage';
 
-export type AudioMode = 'auto' | 'mp3' | 'tts' | 'clova' | 'openai';
+export type AudioMode = 'auto' | 'mp3' | 'tts' | 'openai';
 
 interface AudioDownloadProgress {
   landmarkId: string;
@@ -24,7 +24,6 @@ export class AudioService {
   private onSentenceEnd: (() => void) | null = null;
   private isSentenceMode: boolean = false;
   private selectedVoicesByLanguage: Map<string, string> = new Map(); // language -> voice name
-  private selectedClovaVoicesByLanguage: Map<string, string> = new Map(); // language -> CLOVA voice id
   private isUnlocked: boolean = false;
   private isPausedInternal: boolean = false;
   private voiceCache: Map<string, SpeechSynthesisVoice> = new Map();
@@ -56,13 +55,12 @@ export class AudioService {
 
     // Load saved audio mode
     const savedMode = localStorage.getItem('audio-mode') as AudioMode;
-    if (savedMode && ['auto', 'mp3', 'tts', 'clova', 'openai'].includes(savedMode)) {
+    if (savedMode && ['auto', 'mp3', 'tts', 'openai'].includes(savedMode)) {
       this.audioMode = savedMode;
     }
 
     // Load saved voice selections per language
     this.loadSelectedVoices();
-    this.loadSelectedClovaVoices();
 
     // [Bug Doctor] 음성 목록 로딩 — 브라우저마다 getVoices() 반환 시점이 다름
     // Chrome은 비동기, Firefox/Safari는 동기적으로 반환하는 경우가 많습니다.
@@ -124,46 +122,8 @@ export class AudioService {
       });
       localStorage.setItem('tts-voices-by-language', JSON.stringify(obj));
     } catch (e) {
-      console.error('[AudioService] Failed to save voices:', e);
+      // ignore
     }
-  }
-
-  private loadSelectedClovaVoices() {
-    try {
-      const saved = localStorage.getItem('clova-voices-by-language');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        Object.entries(parsed).forEach(([lang, voiceId]) => {
-          this.selectedClovaVoicesByLanguage.set(lang, voiceId as string);
-        });
-      }
-    } catch (e) {
-      console.error('[AudioService] Failed to load saved CLOVA voices:', e);
-    }
-  }
-
-  private saveSelectedClovaVoices() {
-    try {
-      const obj: Record<string, string> = {};
-      this.selectedClovaVoicesByLanguage.forEach((voiceId, lang) => {
-        obj[lang] = voiceId;
-      });
-      localStorage.setItem('clova-voices-by-language', JSON.stringify(obj));
-    } catch (e) {
-      console.error('[AudioService] Failed to save CLOVA voices:', e);
-    }
-  }
-
-  // Get saved CLOVA voice for language
-  getSelectedClovaVoice(language: string): string | undefined {
-    return this.selectedClovaVoicesByLanguage.get(language);
-  }
-
-  // Set CLOVA voice for language
-  setClovaVoiceForLanguage(language: string, voiceId: string) {
-    this.selectedClovaVoicesByLanguage.set(language, voiceId);
-    this.saveSelectedClovaVoices();
-    this.debugLogOnce(`clova-set-${language}`, `[AudioService] Saved CLOVA voice for ${language}: ${voiceId}`);
   }
 
   // Get all available voices
@@ -483,7 +443,7 @@ export class AudioService {
       this.synthesis.resume();
     }
 
-    // [Bug Doctor] 3단계: HTML5 Audio (MP3/Clova/OpenAI) 재개
+    // [Bug Doctor] 3단계: HTML5 Audio (MP3/OpenAI) 재개
     // [중요] await를 제거하여 브라우저 정책으로 인한 Pending 무한 대기를 방지합니다.
     if (this.audioElement) {
       console.log(`[AudioService] 🔍 Audio Element - paused: ${this.audioElement.paused}, readyState: ${this.audioElement.readyState}, currentTime: ${this.audioElement.currentTime}`);
@@ -508,7 +468,7 @@ export class AudioService {
         console.log(`[AudioService] 🧪 Stabilizer check - Context: ${this.audioContext?.state}, AudioPaused: ${this.audioElement?.paused}, TTS Speaking: ${this.synthesis.speaking}`);
 
         // Native TTS 체크 및 강제 재기동 (좀비 상태 돌파)
-        const isNativeTTSPossibleFail = this.isSentenceMode && !this.clovaSentenceMode && !this.openaiSentenceMode;
+        const isNativeTTSPossibleFail = this.isSentenceMode && !this.openaiSentenceMode;
 
         if (isNativeTTSPossibleFail && (this.synthesis.paused || !this.synthesis.speaking)) {
           console.log('[AudioService] 🚑 [Bug Doctor] TTS Resume stalled, forcing Hard Reset from index:', this.sentenceIndex);
@@ -525,8 +485,8 @@ export class AudioService {
           }, 50);
         }
 
-        // HTML5 Audio(MP3/Clova/OpenAI) 체크 및 강제 재개
-        if (this.audioElement && this.audioElement.paused && (this.clovaSentenceMode || this.openaiSentenceMode || this.isMP3Playing())) {
+        // HTML5 Audio(MP3/OpenAI) 체크 및 강제 재개
+        if (this.audioElement && this.audioElement.paused && (this.openaiSentenceMode || this.isMP3Playing())) {
           console.log('[AudioService] 🔄 Audio stalled during resume, final kickstart at time:', this.audioElement.currentTime);
           this.audioElement.play().catch(e => {
             console.error('[AudioService] ❌ Final kickstart failed:', e);
@@ -589,7 +549,7 @@ export class AudioService {
   }
 
   isSpeaking(): boolean {
-    const speaking = this.synthesis.speaking || this.isMP3Playing() || this.clovaSentenceMode || (this.isPausedInternal && (this.synthesis.paused || this.isMP3Paused()));
+    const speaking = this.synthesis.speaking || this.isMP3Playing() || this.openaiSentenceMode || (this.isPausedInternal && (this.synthesis.paused || this.isMP3Paused()));
     return !!speaking;
   }
 
@@ -788,7 +748,6 @@ export class AudioService {
     this.sentenceIndex = 0;
     this.onSentenceChange = null;
     this.onSentenceEnd = null;
-    this.stopClovaSentences();
     this.stopOpenAISentences();
     this.stop();
   }
@@ -811,7 +770,6 @@ export class AudioService {
     onEnd?: () => void
   ): Promise<boolean> {
     this.stopOpenAISentences();
-    this.stopClovaSentences();
     this.stopMP3();
     this.stop();
 
@@ -960,198 +918,6 @@ export class AudioService {
     }
   }
 
-  // ==================== CLOVA Sentence-by-Sentence Methods ====================
-
-  private clovaSentenceMode: boolean = false;
-  private clovaSentences: string[] = [];
-  private clovaSentenceIndex: number = 0;
-  private clovaSentenceLanguage: string = 'ko';
-  private onClovaSentenceChange: ((index: number) => void) | null = null;
-  private onClovaSentenceEnd: (() => void) | null = null;
-  private clovaAbortController: AbortController | null = null;
-  private clovaSessionId: number = 0;
-
-  async playClovaSentences(
-    text: string,
-    language: string = 'ko',
-    onSentenceChange?: (index: number) => void,
-    onEnd?: () => void
-  ): Promise<boolean> {
-    // Stop any existing playback
-    this.stopClovaSentences();
-    this.stopMP3();
-    this.stop();
-
-    // Split into sentences
-    this.clovaSentences = AudioService.splitIntoSentences(text);
-    if (this.clovaSentences.length === 0) {
-      return false;
-    }
-
-    this.clovaSentenceIndex = 0;
-    this.clovaSentenceLanguage = language;
-    this.clovaSentenceMode = true;
-    this.onClovaSentenceChange = onSentenceChange || null;
-    this.onClovaSentenceEnd = onEnd || null;
-    this.clovaSessionId++;
-
-    // Notify first sentence
-    if (this.onClovaSentenceChange) {
-      this.onClovaSentenceChange(0);
-    }
-
-    // Start playing first sentence
-    this.playNextClovaSentence(this.clovaSessionId);
-    return true;
-  }
-
-  private async playNextClovaSentence(sessionId: number): Promise<void> {
-    // Guard: check if session is still valid
-    if (sessionId !== this.clovaSessionId || !this.clovaSentenceMode) {
-      return;
-    }
-
-    if (this.clovaSentenceIndex >= this.clovaSentences.length) {
-      // All sentences done
-      this.clovaSentenceMode = false;
-      if (this.onClovaSentenceEnd) {
-        this.onClovaSentenceEnd();
-      }
-      this.onClovaSentenceChange = null;
-      this.onClovaSentenceEnd = null;
-      return;
-    }
-
-    const sentence = this.clovaSentences[this.clovaSentenceIndex];
-    const voiceId = this.getSelectedClovaVoice(this.clovaSentenceLanguage) || 'nara';
-    const currentSessionId = this.clovaSessionId;
-    // Include voiceId in cache key to distinguish between different voices for the same text
-    const cacheKey = `clova-${voiceId}-${sentence.slice(0, 40)}`;
-
-    try {
-      // 1. Check Offline Cache First
-      const cached = await offlineStorage.getAudio(cacheKey, this.clovaSentenceLanguage);
-      if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
-
-      if (cached) {
-        console.log(`[AudioService] Using cached CLOVA sentence audio (${voiceId})`);
-        this.playAudioBlob(cached.audioBlob, currentSessionId, () => {
-          this.clovaSentenceIndex++;
-          if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
-            this.onClovaSentenceChange(this.clovaSentenceIndex);
-          }
-          this.playNextClovaSentence(currentSessionId);
-        });
-        return;
-      }
-
-      // 2. Fetch from API if not cached
-      this.clovaAbortController = new AbortController();
-
-      const response = await fetch('/api/tts/clova/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text: sentence,
-          language: this.clovaSentenceLanguage,
-          voice: voiceId,
-          speed: 0,
-          pitch: 0,
-          volume: 0
-        }),
-        signal: this.clovaAbortController.signal
-      });
-
-      // Check if still valid after async operation
-      if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) {
-        return;
-      }
-
-      if (!response.ok) {
-        console.error('[AudioService] CLOVA sentence TTS error:', response.status);
-        // Try next sentence anyway
-        this.clovaSentenceIndex++;
-        if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
-          this.onClovaSentenceChange(this.clovaSentenceIndex);
-        }
-        this.playNextClovaSentence(currentSessionId);
-        return;
-      }
-
-      const audioBlob = await response.blob();
-
-      // Check again after getting blob
-      if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) {
-        return;
-      }
-
-      // 3. Save to Offline Cache
-      try {
-        await offlineStorage.saveAudio({
-          landmarkId: cacheKey,
-          language: this.clovaSentenceLanguage,
-          audioBlob: audioBlob,
-          duration: Math.ceil(sentence.length / 10), // Approximate duration
-          sizeBytes: audioBlob.size,
-          voiceId: voiceId
-        });
-      } catch (e) {
-        console.warn('[AudioService] Failed to cache CLOVA audio:', e);
-      }
-
-      // 4. Play
-      this.playAudioBlob(audioBlob, currentSessionId, () => {
-        this.clovaSentenceIndex++;
-        if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
-          this.onClovaSentenceChange(this.clovaSentenceIndex);
-        }
-        this.playNextClovaSentence(currentSessionId);
-      });
-
-    } catch (error: any) {
-      // Ignore abort errors
-      if (error?.name === 'AbortError') {
-        return;
-      }
-      this.debugWarnOnce('clova-error', `[AudioService] CLOVA sentence error: ${error}`);
-
-      // Guard against stale callbacks
-      if (currentSessionId !== this.clovaSessionId || !this.clovaSentenceMode) return;
-
-      // Try next sentence
-      this.clovaSentenceIndex++;
-      if (this.onClovaSentenceChange && this.clovaSentenceIndex < this.clovaSentences.length) {
-        this.onClovaSentenceChange(this.clovaSentenceIndex);
-      }
-      this.playNextClovaSentence(currentSessionId);
-    }
-  }
-
-  stopClovaSentences() {
-    // Increment session ID to invalidate any pending operations
-    this.clovaSessionId++;
-    this.clovaSentenceMode = false;
-    this.clovaSentences = [];
-    this.clovaSentenceIndex = 0;
-    this.onClovaSentenceChange = null;
-    this.onClovaSentenceEnd = null;
-
-    // Abort any pending fetch
-    if (this.clovaAbortController) {
-      this.clovaAbortController.abort();
-      this.clovaAbortController = null;
-    }
-
-    // Stop and cleanup audio element
-    if (this.audioElement) {
-      this.audioElement.pause();
-      this.audioElement.onended = null;
-      this.audioElement.onerror = null;
-      this.audioElement.src = '';
-      this.audioElement = null;
-    }
-  }
-
   // ==================== MP3 Audio Methods ====================
 
   // Set audio mode preference
@@ -1244,15 +1010,6 @@ export class AudioService {
       return;
     }
 
-    if (this.audioMode === 'clova') {
-      // Force CLOVA TTS mode
-      const success = await this.playClovaTTS(text, language, onEnd);
-      if (success) {
-        this.spokenLandmarks.add(landmarkId);
-      }
-      return;
-    }
-
     if (this.audioMode === 'mp3' || this.audioMode === 'auto') {
       // Try MP3 first
       const success = await this.playMP3(landmarkId, language, audioUrl, onEnd);
@@ -1268,62 +1025,6 @@ export class AudioService {
         this.playText(text, language, this.currentRate, onEnd);
         this.spokenLandmarks.add(landmarkId);
       }
-    }
-  }
-
-  // Play CLOVA Voice TTS
-  async playClovaTTS(
-    text: string,
-    language: string = 'ko',
-    onEnd?: () => void,
-    voiceId?: string
-  ): Promise<boolean> {
-    try {
-      this.stopMP3();
-      this.stop();
-
-      // Use provided voiceId or fall back to saved voice for this language
-      const effectiveVoiceId = voiceId || this.getSelectedClovaVoice(language);
-
-      const response = await fetch('/api/tts/clova/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text,
-          language,
-          voice: effectiveVoiceId,
-          speed: 0,
-          pitch: 0,
-          volume: 0
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`CLOVA TTS error: ${response.status}`);
-      }
-
-      const audioBlob = await response.blob();
-      const objectUrl = URL.createObjectURL(audioBlob);
-
-      this.audioElement = new Audio(objectUrl);
-
-      this.audioElement.onended = () => {
-        URL.revokeObjectURL(objectUrl);
-        onEnd?.();
-      };
-
-      this.audioElement.onerror = () => {
-        URL.revokeObjectURL(objectUrl);
-        console.error('[AudioService] Error playing CLOVA TTS');
-      };
-
-      this.audioElement.playbackRate = this.currentRate;
-      await this.audioElement.play();
-      console.log(`[AudioService] Playing CLOVA TTS (${language})`);
-      return true;
-    } catch (error) {
-      console.error('[AudioService] CLOVA TTS error:', error);
-      return false;
     }
   }
 
@@ -1542,7 +1243,6 @@ export class AudioService {
   stopAll() {
     this.stopMP3();
     this.stop();
-    this.clovaSentenceMode = false;
     this.notifyStateChange();
   }
 

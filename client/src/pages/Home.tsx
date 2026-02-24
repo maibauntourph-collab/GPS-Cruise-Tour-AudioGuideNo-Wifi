@@ -864,7 +864,7 @@ export default function Home() {
     if (audioEnabled) {
       // Remove test-audio id so it can be played again
       audioService.removeLandmark('test-audio');
-      // Use playAuto to respect audio mode (CLOVA, MP3, TTS, Auto)
+      // Use playAuto to respect audio mode (MP3, TTS, Auto)
       audioService.playAuto('test-audio', message, selectedLanguage);
     }
   };
