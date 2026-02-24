@@ -144,6 +144,12 @@ export default function LandmarkPanel({
     audioService.setRate(rate);
   };
 
+  const handleNavigate = () => {
+    if (landmark) {
+      onNavigate(landmark);
+    }
+  };
+
   const SectionHeader = ({ title }: { title: string }) => (
     <div className="flex items-center gap-2 mb-3 mt-6">
       <div className="w-2 h-2 bg-[#E9633F] rounded-[1px]" />
@@ -297,8 +303,8 @@ export default function LandmarkPanel({
                     key={rate}
                     onClick={() => handleRateChange(rate)}
                     className={`h-7 px-2.5 rounded-lg text-[10px] font-black transition-all ${playbackRate === rate
-                        ? 'bg-[#E9633F] text-white shadow-md'
-                        : 'bg-white text-gray-400 hover:text-gray-600 border border-gray-100'
+                      ? 'bg-[#E9633F] text-white shadow-md'
+                      : 'bg-white text-gray-400 hover:text-gray-600 border border-gray-100'
                       }`}
                   >
                     {rate.toFixed(1)}x
