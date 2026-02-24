@@ -301,6 +301,8 @@ export default function UnifiedFloatingCard({
       }
     };
   const [activeTab, setActiveTab] = useState<string>('list');
+  // [Designer Kim] 마지막으로 머물렀던 탭을 기억하여 랜드마크 상세 창을 닫을 때 복귀합니다.
+  const [previousTab, setPreviousTab] = useState<string>('list');
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.2);
@@ -387,15 +389,17 @@ export default function UnifiedFloatingCard({
   useEffect(() => {
     if (selectedLandmark) {
       if (activeTab !== 'landmark') {
+        // [Designer Kim] 상세 창으로 가기 전 현재 탭을 기억해둡니다.
+        setPreviousTab(activeTab);
         setActiveTab('landmark');
       }
     } else {
       if (activeTab === 'landmark') {
-        // If landmark tab was active and landmark is closed, switch to list
-        setActiveTab('list');
+        // [Designer Kim] 랜드마크 창이 닫히면 이전에 있던 탭으로 복귀합니다.
+        setActiveTab(previousTab);
       }
     }
-  }, [selectedLandmark, activeTab]);
+  }, [selectedLandmark, activeTab, previousTab]);
 
   // Auto-switch to list tab when cruise port is closed
   useEffect(() => {
