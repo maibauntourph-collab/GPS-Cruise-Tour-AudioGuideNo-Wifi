@@ -275,7 +275,7 @@ export default function Home() {
   // 1. isNavigationOnlyMode: 불필요한 설명을 끄고 지도에 집중하는 모드
   // 2. isCarNavZoomMode: 자동차 네비게이션처럼 초근접 줌을 활성화하는 모드
   // 3. simulationAudioSettings: 시뮬레이션 시 재생 관련 옵션
-  const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
+  const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(true);
   const [isCarNavZoomMode, setIsCarNavZoomMode] = useState(false);
   const [simulationAudioSettings, setSimulationAudioSettings] = useState({
     resumePlayback: true,    // 이전 위치에서 이어 듣기
