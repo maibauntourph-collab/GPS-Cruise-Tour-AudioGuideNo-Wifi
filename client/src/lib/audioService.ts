@@ -420,83 +420,78 @@ export class AudioService {
     this.pauseMP3();
   }
 
-  // Unified resume for all active modes
+  // =====================================================================
+  // [Fix] resume() - OpenAI/TTS 일시정지 후 재개 완전 최적화 (CLOVA 제거 버전)
+  // =====================================================================
   async resume() {
-    console.log('[AudioService] 🔄 [Bug Doctor] Resume sequence initiated (Current Time:', this.audioElement?.currentTime, ')');
+    console.log('[AudioService] 🔄 Resume sequence initiated (currentTime:', this.audioElement ? this.audioElement.currentTime : 'N/A', ')');
     this.isPausedInternal = false;
 
-    // [Bug Doctor] 1단계: AudioContext 강제 활성화 (상태 확인 로그 추가)
+    // 1. AudioContext 활성화 (모바일 브라우저 정책 대응)
     if (this.audioContext) {
       console.log(`[AudioService] 🔍 Context state before resume: ${this.audioContext.state}`);
       if (this.audioContext.state === 'suspended') {
         this.audioContext.resume().then(() => {
-          console.log("[AudioService] ✅ Context resumed successfully");
+          console.log('[AudioService] ✅ AudioContext resumed');
         }).catch(err => {
-          console.error("[AudioService] ❌ Context resume failed:", err);
+          console.error('[AudioService] ❌ AudioContext resume failed:', err);
         });
       }
     }
 
-    // [Bug Doctor] 2단계: Web Speech API (TTS) 엔진 깨우기
+    // 2. Web Speech API (TTS) 재개
     if (this.synthesis.paused) {
-      console.log("[AudioService] 🔄 Resuming Web Speech Synthesis...");
+      console.log('[AudioService] 🔄 Resuming Web Speech Synthesis...');
       this.synthesis.resume();
     }
 
-    // [Bug Doctor] 3단계: HTML5 Audio (MP3/OpenAI) 재개
-    // [중요] await를 제거하여 브라우저 정책으로 인한 Pending 무한 대기를 방지합니다.
-    if (this.audioElement) {
-      console.log(`[AudioService] 🔍 Audio Element - paused: ${this.audioElement.paused}, readyState: ${this.audioElement.readyState}, currentTime: ${this.audioElement.currentTime}`);
-
-      if (this.audioElement.paused) {
-        this.audioElement.play().then(() => {
-          console.log("[AudioService] ✅ Audio Element playback resumed successfully");
-        }).catch(error => {
-          console.error("[AudioService] ❌ Audio Element play failed:", error);
-          // [Bug Doctor] 최후의 수단: 만약 ReadyState가 낮다면 다시 로드하지 않고 기다렸다가 시도
-          if (this.audioElement && this.audioElement.readyState < 2) {
-            console.log("[AudioService] ⏳ Audio not ready, will retry in stabilizer check...");
-          }
-        });
-      }
+    // 3. HTML5 Audio (MP3/OpenAI) 재개
+    if (this.audioElement?.paused) {
+      console.log(`[AudioService] 🔍 Audio Element - readyState: ${this.audioElement.readyState}, currentTime: ${this.audioElement.currentTime}`);
+      this.audioElement.play().then(() => {
+        console.log('[AudioService] ✅ Audio Element resumed successfully');
+      }).catch(error => {
+        console.error('[AudioService] ❌ Audio Element play failed:', error);
+      });
     }
 
-    // [Bug Doctor] 4단계: 상태 안정화 체크 및 강제 재기동 (Watchdog)
-    // 300ms 지연 후에도 엔진이 응답하지 않으면 죽었다고 판단하고 하드 리셋을 수행합니다.
+    // 4. Watchdog: 300ms 후 상태 체크 및 강제 재기동 (좀비 TTS 방지)
     setTimeout(() => {
-      if (!this.isPausedInternal) {
-        console.log(`[AudioService] 🧪 Stabilizer check - Context: ${this.audioContext?.state}, AudioPaused: ${this.audioElement?.paused}, TTS Speaking: ${this.synthesis.speaking}`);
+      if (this.isPausedInternal) return; // 그 사이 다시 정지됐으면 무시
 
-        // Native TTS 체크 및 강제 재기동 (좀비 상태 돌파)
-        const isNativeTTSPossibleFail = this.isSentenceMode && !this.openaiSentenceMode;
+      console.log(`[AudioService] 🧪 Stabilizer - Context: ${this.audioContext?.state}, AudioPaused: ${this.audioElement ? this.audioElement.paused : 'N/A'}, TTS: ${this.synthesis.speaking}`);
 
-        if (isNativeTTSPossibleFail && (this.synthesis.paused || !this.synthesis.speaking)) {
-          console.log('[AudioService] 🚑 [Bug Doctor] TTS Resume stalled, forcing Hard Reset from index:', this.sentenceIndex);
-
-          this.synthesis.cancel(); // 좀비 엔진 강제 종료
-
-          // 동기적으로 즉시 재시작
+      // Native TTS 좀비 체크 (System TTS 모드인 경우)
+      if (this.isSentenceMode && !this.openaiSentenceMode) {
+        if (this.synthesis.paused || !this.synthesis.speaking) {
+          console.log('[AudioService] 🚑 TTS stalled → Hard Reset from sentence:', this.sentenceIndex);
+          this.synthesis.cancel();
           setTimeout(() => {
             if (!this.isPausedInternal && this.isSentenceMode) {
-              // 멈췄던 그 문장(sentenceIndex)부터 다시 읽게 합니다.
               this.speakCurrentSentence();
-              console.log("[AudioService] 🚀 [Bug Doctor] Hard Reset successful: Resuming from sentence", this.sentenceIndex);
+              console.log('[AudioService] 🚀 Hard Reset success: sentence', this.sentenceIndex);
             }
           }, 50);
         }
-
-        // HTML5 Audio(MP3/OpenAI) 체크 및 강제 재개
-        if (this.audioElement && this.audioElement.paused && (this.openaiSentenceMode || this.isMP3Playing())) {
-          console.log('[AudioService] 🔄 Audio stalled during resume, final kickstart at time:', this.audioElement.currentTime);
-          this.audioElement.play().catch(e => {
-            console.error('[AudioService] ❌ Final kickstart failed:', e);
-          });
-        }
       }
+
+      // OpenAI 재개 실패 시 현재 문장부터 재시작 (세션 보호 적용)
+      if (this.openaiSentenceMode && (!this.audioElement || this.audioElement.paused)) {
+        console.log('[AudioService] 🚑 OpenAI stalled → restarting from sentence:', this.openaiSentenceIndex);
+        this.playNextOpenAISentence(this.openaiSessionId);
+      }
+
+      // HTML5 Audio 최종 킥스타트 (MP3 포함)
+      if (this.audioElement?.paused && (this.openaiSentenceMode || this.isMP3Playing())) {
+        console.log('[AudioService] 🔄 Final kickstart at time:', this.audioElement.currentTime);
+        this.audioElement.play().catch(e => {
+          console.error('[AudioService] ❌ Final kickstart failed:', e);
+        });
+      }
+
       this.notifyStateChange();
     }, 300);
 
-    // MP3 전용 로직 호출 (상태 동기화)
     this.resumeMP3();
   }
 
@@ -813,13 +808,20 @@ export class AudioService {
 
       if (cached) {
         console.log('[AudioService] Using cached OpenAI sentence audio');
-        this.playAudioBlob(cached.audioBlob, currentSessionId, () => {
-          this.openaiSentenceIndex++;
-          if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
-            this.onOpenAISentenceChange(this.openaiSentenceIndex);
+        this.playAudioBlob(
+          cached.audioBlob,
+          'openai',
+          currentSessionId,
+          () => this.openaiSessionId,
+          () => this.openaiSentenceMode,
+          () => {
+            this.openaiSentenceIndex++;
+            if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
+              this.onOpenAISentenceChange(this.openaiSentenceIndex);
+            }
+            this.playNextOpenAISentence(currentSessionId);
           }
-          this.playNextOpenAISentence(currentSessionId);
-        });
+        );
         return;
       }
 
@@ -864,14 +866,20 @@ export class AudioService {
         console.warn('[AudioService] Failed to cache OpenAI audio:', e);
       }
 
-      // 4. Play
-      this.playAudioBlob(audioBlob, currentSessionId, () => {
-        this.openaiSentenceIndex++;
-        if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
-          this.onOpenAISentenceChange(this.openaiSentenceIndex);
+      this.playAudioBlob(
+        audioBlob,
+        'openai',
+        currentSessionId,
+        () => this.openaiSessionId,
+        () => this.openaiSentenceMode,
+        () => {
+          this.openaiSentenceIndex++;
+          if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
+            this.onOpenAISentenceChange(this.openaiSentenceIndex);
+          }
+          this.playNextOpenAISentence(currentSessionId);
         }
-        this.playNextOpenAISentence(currentSessionId);
-      });
+      );
     } catch (error: any) {
       if (error?.name === 'AbortError') return;
       console.error('[AudioService] OpenAI sentence error:', error);
@@ -881,7 +889,18 @@ export class AudioService {
     }
   }
 
-  private playAudioBlob(blob: Blob, sessionId: number, onEnded: () => void) {
+  // =====================================================================
+  // [Fix] playAudioBlob - 모드별 세션 검증 주입식 로직 (CLOVA 제거 대응)
+  // caller가 세션 검증 로직을 주입하여 각 모드에서 올바른 라이프사이클을 체크함
+  // =====================================================================
+  private playAudioBlob(
+    blob: Blob,
+    mode: 'openai',
+    sessionId: number,
+    getSessionId: () => number,
+    getSentenceMode: () => boolean,
+    onEnded: () => void
+  ) {
     const objectUrl = URL.createObjectURL(blob);
     if (this.audioElement) {
       this.audioElement.pause();
@@ -891,13 +910,16 @@ export class AudioService {
     this.audioElement = new Audio(objectUrl);
     this.audioElement.onended = () => {
       URL.revokeObjectURL(objectUrl);
-      if (sessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+      // 세션ID와 sentenceMode를 주입받은 함수로 체크
+      if (sessionId !== getSessionId() || !getSentenceMode()) return;
       onEnded();
     };
 
     this.audioElement.play().catch(e => {
-      this.debugWarnOnce('openai-play-error', `[AudioService] OpenAI Playback error: ${e}`);
+      this.debugWarnOnce(`${mode}-play-error`, `[AudioService] ${mode} playback error: ${e}`);
       URL.revokeObjectURL(objectUrl);
+      // 에러 발생 시에도 다음으로 넘어가도록 유도 (혹은 세션 체크 후 진행)
+      if (sessionId !== getSessionId() || !getSentenceMode()) return;
       onEnded();
     });
   }
