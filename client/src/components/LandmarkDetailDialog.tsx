@@ -12,7 +12,7 @@ import { audioService, AudioService } from '@/lib/audioService';
 import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
 import { useQuery } from '@tanstack/react-query';
 import { User, DbLandmarkGuide } from '@shared/schema';
-import { Users, Headphones, Check } from 'lucide-react';
+import { Users, Headphones, Check, User as UserIcon } from 'lucide-react';
 
 interface LandmarkDetailDialogProps {
   landmark: Landmark | null;
@@ -727,74 +727,90 @@ export default function LandmarkDetailDialog({
                 </div>
 
                 {/* Photos Display */}
-                <div className="space-y-4">
-                  {landmark?.category === 'Restaurant' && landmark?.restaurantPhotos ? (
-                    <Tabs defaultValue="exterior" className="w-full">
-                      <TabsList className="grid w-full grid-cols-3">
-                        <TabsTrigger value="exterior">{t('exteriorPhotos', selectedLanguage)}</TabsTrigger>
-                        <TabsTrigger value="interior">{t('interiorPhotos', selectedLanguage)}</TabsTrigger>
-                        <TabsTrigger value="menu">{t('menuPhotos', selectedLanguage)}</TabsTrigger>
-                      </TabsList>
-                      <TabsContent value="exterior" className="mt-4">
-                        {landmark?.restaurantPhotos?.exterior && landmark.restaurantPhotos.exterior.length > 0 ? (
-                          <PhotoGallery
-                            photos={landmark.restaurantPhotos.exterior}
-                            title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('exteriorPhotos', selectedLanguage)}`}
-                          />
-                        ) : (
-                          <p className="text-sm text-muted-foreground text-center py-8">
-                            No exterior photos available
-                          </p>
-                        )}
-                      </TabsContent>
-                      <TabsContent value="interior" className="mt-4">
-                        {landmark?.restaurantPhotos?.interior && landmark.restaurantPhotos.interior.length > 0 ? (
-                          <PhotoGallery
-                            photos={landmark.restaurantPhotos.interior}
-                            title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('interiorPhotos', selectedLanguage)}`}
-                          />
-                        ) : (
-                          <p className="text-sm text-muted-foreground text-center py-8">
-                            No interior photos available
-                          </p>
-                        )}
-                      </TabsContent>
-                      <TabsContent value="menu" className="mt-4">
-                        {landmark?.restaurantPhotos?.menu && landmark.restaurantPhotos.menu.length > 0 ? (
-                          <PhotoGallery
-                            photos={landmark.restaurantPhotos.menu}
-                            title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('menuPhotos', selectedLanguage)}`}
-                          />
-                        ) : (
-                          <p className="text-sm text-muted-foreground text-center py-8">
-                            No menu photos available
-                          </p>
-                        )}
-                      </TabsContent>
-                    </Tabs>
-                  ) : landmark?.photos && landmark.photos.length > 0 ? (
-                    <PhotoGallery
-                      photos={landmark.photos}
-                      title={getTranslatedContent(landmark, selectedLanguage, 'name')}
-                    />
-                  ) : (
-                    <div className="text-center py-12 border-2 border-dashed rounded-xl flex flex-col items-center gap-3">
+                <div className="space-y-6">
+                  {/* Category 1: Landmark Photos */}
+                  <div className="space-y-3">
+                    <h6 className="font-bold text-sm flex items-center gap-2 text-muted-foreground uppercase tracking-wider">
+                      <LandmarkIcon className="w-4 h-4" />
+                      {t('landmarkPhotos', selectedLanguage)}
+                    </h6>
+                    <div className="bg-muted/10 rounded-xl p-3 border border-muted/20">
+                      {landmark?.category === 'Restaurant' && landmark?.restaurantPhotos ? (
+                        <Tabs defaultValue="exterior" className="w-full">
+                          <TabsList className="grid w-full grid-cols-3 bg-muted/20 h-8">
+                            <TabsTrigger value="exterior" className="text-xs h-7">{t('exteriorPhotos', selectedLanguage)}</TabsTrigger>
+                            <TabsTrigger value="interior" className="text-xs h-7">{t('interiorPhotos', selectedLanguage)}</TabsTrigger>
+                            <TabsTrigger value="menu" className="text-xs h-7">{t('menuPhotos', selectedLanguage)}</TabsTrigger>
+                          </TabsList>
+                          <TabsContent value="exterior" className="mt-3">
+                            {landmark?.restaurantPhotos?.exterior && landmark.restaurantPhotos.exterior.length > 0 ? (
+                              <PhotoGallery
+                                photos={landmark.restaurantPhotos.exterior}
+                                title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('exteriorPhotos', selectedLanguage)}`}
+                              />
+                            ) : (
+                              <p className="text-xs text-muted-foreground text-center py-4">{t('noPhotos', selectedLanguage) || 'No exterior photos available'}</p>
+                            )}
+                          </TabsContent>
+                          <TabsContent value="interior" className="mt-3">
+                            {landmark?.restaurantPhotos?.interior && landmark.restaurantPhotos.interior.length > 0 ? (
+                              <PhotoGallery
+                                photos={landmark.restaurantPhotos.interior}
+                                title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('interiorPhotos', selectedLanguage)}`}
+                              />
+                            ) : (
+                              <p className="text-xs text-muted-foreground text-center py-4">{t('noPhotos', selectedLanguage) || 'No interior photos available'}</p>
+                            )}
+                          </TabsContent>
+                          <TabsContent value="menu" className="mt-3">
+                            {landmark?.restaurantPhotos?.menu && landmark.restaurantPhotos.menu.length > 0 ? (
+                              <PhotoGallery
+                                photos={landmark.restaurantPhotos.menu}
+                                title={`${getTranslatedContent(landmark, selectedLanguage, 'name')} - ${t('menuPhotos', selectedLanguage)}`}
+                              />
+                            ) : (
+                              <p className="text-xs text-muted-foreground text-center py-4">{t('noPhotos', selectedLanguage) || 'No menu photos available'}</p>
+                            )}
+                          </TabsContent>
+                        </Tabs>
+                      ) : landmark?.photos && landmark.photos.length > 0 ? (
+                        <PhotoGallery
+                          photos={landmark.photos}
+                          title={getTranslatedContent(landmark, selectedLanguage, 'name')}
+                        />
+                      ) : (
+                        <div className="text-center py-8">
+                          <ImageIcon className="w-6 h-6 text-muted-foreground mx-auto mb-2 opacity-50" />
+                          <p className="text-xs text-muted-foreground">{t('noPhotos', selectedLanguage) || 'No landmark photos available'}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Category 2: My Photos (MyPic) */}
+                  <div className="space-y-3">
+                    <h6 className="font-bold text-sm flex items-center gap-2 text-muted-foreground uppercase tracking-wider">
+                      <UserIcon className="w-4 h-4" />
+                      {t('myPhotos', selectedLanguage)}
+                    </h6>
+                    <div className="text-center py-10 border-2 border-dashed rounded-xl flex flex-col items-center gap-3 bg-muted/5">
                       <div className="bg-muted p-3 rounded-full">
-                        <ImageIcon className="w-6 h-6 text-muted-foreground" />
+                        <Camera className="w-6 h-6 text-muted-foreground" />
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        {selectedLanguage === 'ko' ? '표시할 사진이 없습니다.' : 'No photos to display.'}
+                      <p className="text-sm text-muted-foreground font-medium">
+                        {selectedLanguage === 'ko' ? '이 장소에서의 당신만의 사진을 담아보세요.' : 'Capture your own photos at this place.'}
                       </p>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => document.getElementById('mypic-upload')?.click()}
-                        className="text-primary hover:bg-primary/5"
+                        className="text-primary hover:bg-primary/5 h-8 gap-2"
                       >
-                        {selectedLanguage === 'ko' ? '첫 사진 업로드하기' : 'Upload your first photo'}
+                        <Upload className="w-4 h-4" />
+                        {selectedLanguage === 'ko' ? '첫 사진 업로드' : 'Upload first photo'}
                       </Button>
                     </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* [적요] MyPic GPS 연동 안내 */}
