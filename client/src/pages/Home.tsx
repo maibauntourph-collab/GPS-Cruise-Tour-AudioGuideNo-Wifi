@@ -2908,11 +2908,6 @@ export default function Home() {
                 setSelectedLandmark(landmark);
                 setIsCardMinimized(false);
               }}
-              onShowList={() => {
-                // Show the list panel when tooltip is clicked
-                setIsCardMinimized(false);
-                setShowCruisePort(false);
-              }}
               showTourOnly={showTourOnly}
               tourStopIds={tourStops.map(s => s.id)}
               isMobile={isMobile}
@@ -3113,13 +3108,12 @@ export default function Home() {
               setIsCardMinimized(false);
             }}
             onLandmarkClose={() => {
+              // [Designer Kim] 랜드마크 팝업/카드 닫기 원칙: 카드 닫기 시 즉시 명소 목록(List)으로 복귀
+              // 내부적으로 UnifiedFloatingCard의 previousTab 로직이 작동하여 list/tour 탭으로 돌아갑니다.
               setSelectedLandmark(null);
               setIsManualSelection(false);
-              // [Designer Kim] 카드를 닫으면 완전히 숨기기 위해 최소화 상태로 전환합니다.
-              setIsCardMinimized(true);
-              // [Designer Kim] 카드를 닫으면 임시 표시 상태 해제
+              setIsCardMinimized(false);
               setTemporaryShowCard(false);
-              // 🚑 [Bug Doctor] 카드 닫기 시 오디오 즉시 중지 정책 반영
               audioService.stopAll();
             }}
             onNavigate={handleLandmarkRoute}
