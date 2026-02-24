@@ -49,7 +49,6 @@ const createBlinkingIcon = (color: string) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        animation: pinBlink 1s ease-in-out infinite;
       ">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="transform: rotate(45deg);">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -63,30 +62,7 @@ const createBlinkingIcon = (color: string) => {
         border-radius: 50%;
         top: -8px;
         left: -8px;
-        animation: pulse-ring 1s ease-out infinite;
       "></div>
-      <style>
-        @keyframes pinBlink {
-          0%, 100% {
-            opacity: 1;
-            transform: rotate(-45deg) scale(1);
-          }
-          50% {
-            opacity: 0.6;
-            transform: rotate(-45deg) scale(1.1);
-          }
-        }
-        @keyframes pulse-ring {
-          0% {
-            transform: scale(0.6);
-            opacity: 0.8;
-          }
-          100% {
-            transform: scale(1.8);
-            opacity: 0;
-          }
-        }
-      </style>
     `,
     iconSize: [32, 32],
     iconAnchor: [16, 32],
@@ -855,7 +831,7 @@ export default function MapView({
 
           return (
             <Marker
-              key={`${landmark.id} -${isSelected ? 'selected' : isInTour ? 'intour' : 'normal'} `}
+              key={landmark.id}
               position={[landmark.lat, landmark.lng]}
               icon={icon}
               ref={(marker) => {

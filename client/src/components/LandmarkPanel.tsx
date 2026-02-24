@@ -289,14 +289,13 @@ export default function LandmarkPanel({
         top: '50%',
         zIndex,
         width: '24rem',
-        maxHeight: 'calc(100vh - 32px)',
         userSelect: 'none',
         transform: `translate(calc(-50% + ${translate.x}px), calc(-50% + ${translate.y}px))`
       }}
       onClick={handleCardClick}
       data-testid="card-landmark-container"
     >
-      <Card className="p-4 bg-background border overflow-y-auto max-h-[calc(100vh-32px)]" data-testid="panel-landmark-details">
+      <Card className="p-4 bg-background border overflow-y-auto" data-testid="panel-landmark-details">
         {/* Header */}
         <div
           className="flex items-start justify-between mb-3"
