@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark } from '@shared/schema';
-import { Navigation, MapPin, X, Play, Pause, Ticket, ExternalLink, Minus, MapPinned, Info, Search, Globe, Library } from 'lucide-react';
+import { Navigation, MapPin, X, Play, Pause, Ticket, ExternalLink, Minus, MapPinned, Info, Search, Globe, Library, Clock, Activity as ActivityIcon, ChefHat, ShoppingBag } from 'lucide-react';
 import PhotoGallery from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
@@ -232,9 +232,13 @@ export default function LandmarkPanel({
         <section className="bg-gray-50/30 p-4 rounded-2xl border border-gray-100/50 mt-4">
           <div className="flex gap-2">
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                window.open(`https://${selectedLanguage === 'ko' ? 'ko' : 'en'}.wikipedia.org/wiki/${encodeURIComponent(name)}`, '_blank');
+                const url = `https://${selectedLanguage === 'ko' ? 'ko' : 'en'}.wikipedia.org/wiki/${encodeURIComponent(name)}`;
+                console.log('🚀 [Diagnostic] Clicked Wiki Link:', url);
+                window.open(url, '_blank');
               }}
               className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
             >
@@ -242,9 +246,13 @@ export default function LandmarkPanel({
               <span className="text-[11px] font-bold">Wiki</span>
             </button>
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                window.open(`https://www.google.com/search?q=${encodeURIComponent(name)}+관광정보`, '_blank');
+                const url = `https://www.google.com/search?q=${encodeURIComponent(name)}+관광정보`;
+                console.log('🚀 [Diagnostic] Clicked Tourism Info Link:', url);
+                window.open(url, '_blank');
               }}
               className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
             >
@@ -252,9 +260,13 @@ export default function LandmarkPanel({
               <span className="text-[11px] font-bold">관광정보</span>
             </button>
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                window.open(`https://www.google.com/search?q=${encodeURIComponent(name)}`, '_blank');
+                const url = `https://www.google.com/search?q=${encodeURIComponent(name)}`;
+                console.log('🚀 [Diagnostic] Clicked Search Link:', url);
+                window.open(url, '_blank');
               }}
               className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
             >
@@ -291,20 +303,7 @@ export default function LandmarkPanel({
           </div>
         </section>
 
-        {/* Info Sections */}
-        <section>
-          <SectionHeader title={t('category', selectedLanguage)} />
-          <p className="text-[13px] text-[#555] leading-relaxed font-medium">
-            {getTranslatedContent(landmark, selectedLanguage, 'description')}
-          </p>
-        </section>
-
-        <section>
-          <SectionHeader title={t('historicalInfo', selectedLanguage)} />
-          <p className="text-[13px] text-[#555] leading-relaxed">
-            {getTranslatedContent(landmark, selectedLanguage, 'historicalInfo')}
-          </p>
-        </section>
+        {/* Info Sections - REMOVED redundant sections as they are now under Reservation */}
 
         {landmark.architect && (
           <section>
@@ -357,19 +356,84 @@ export default function LandmarkPanel({
           </section>
         )}
 
-        {/* Reservation Section - Expanded with MyRealTrip, Trip.com, Klook, GetYourGuide, Viator */}
+        {/* Reservation Section - Expanded with Detailed Sections per user request */}
         <section className="bg-white p-5 rounded-[24px] border border-gray-100 shadow-sm mt-6">
           <SectionHeader title="Reservation & Booking" />
 
-          {/* Landmark Description under Title */}
-          <div className="mb-6 p-4 bg-[#FFF9F5] rounded-xl border border-[#FFE7D0]/30">
-            <p className="text-[13px] text-[#714B40] leading-relaxed font-medium">
-              {getTranslatedContent(landmark, selectedLanguage, 'description')}
-              <br />
-              <span className="text-[11px] text-[#A68A80] mt-2 block">
-                명소 방문을 위한 활동, 레스토랑, 쇼핑몰 정보를 아래 플랫폼에서 확인해 보세요.
-              </span>
-            </p>
+          {/* Detailed Info Sections - Grouped before Booking Links */}
+          <div className="space-y-4 mb-6">
+            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-2 mb-2">
+                <Info className="w-4 h-4 text-[#E9633F]" />
+                <span className="text-[13px] font-bold text-slate-700">상세 정보 (Detailed Info)</span>
+              </div>
+              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
+                {getTranslatedContent(landmark, selectedLanguage, 'description')}
+              </p>
+            </div>
+
+            <div className="p-4 bg-[#F1F5F9] rounded-2xl border border-slate-200 shadow-inner">
+              <div className="flex items-center gap-2 mb-2">
+                <Info className="w-4 h-4 text-[#E9633F]" />
+                <span className="text-[13px] font-bold text-slate-700">역사 / 나레이션 (History & Narration)</span>
+              </div>
+              <div className="text-[12px] text-slate-600 leading-relaxed pl-6 space-y-2">
+                <p className="font-medium">"{getTranslatedContent(landmark, selectedLanguage, 'narration')}"</p>
+                {landmark.historicalInfo && (
+                  <p className="pt-2 border-t border-slate-200 mt-2">{landmark.historicalInfo}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-2 mb-2">
+                <Clock className="w-4 h-4 text-[#E9633F]" />
+                <span className="text-[13px] font-bold text-slate-700">오픈시간 (Open Hours)</span>
+              </div>
+              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
+                {landmark.openingHours || '일반적인 운영 시간: 09:00 - 18:00 (시즌별 상이)'}
+              </p>
+            </div>
+
+            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-2 mb-2">
+                <ActivityIcon className="w-4 h-4 text-[#E9633F]" />
+                <span className="text-[13px] font-bold text-slate-700">액티비티 설명 (Activities)</span>
+              </div>
+              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
+                다양한 현지 액티비티 및 투어 프로그램이 준비되어 있습니다.
+              </p>
+            </div>
+
+            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-2 mb-2">
+                <ChefHat className="w-4 h-4 text-[#E9633F]" />
+                <span className="text-[13px] font-bold text-slate-700">레스토랑 정보 (Restaurants)</span>
+              </div>
+              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
+                주변의 엄선된 맛집 정보를 확인하실 수 있습니다.
+              </p>
+            </div>
+
+            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-2 mb-2">
+                <Navigation className="w-4 h-4 text-[#E9633F]" />
+                <span className="text-[13px] font-bold text-slate-700">투어 설명 (Tour Details)</span>
+              </div>
+              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
+                전문 가이드와 함께하는 심도 깊은 투어를 경험해 보세요.
+              </p>
+            </div>
+
+            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-2 mb-2">
+                <ShoppingBag className="w-4 h-4 text-[#E9633F]" />
+                <span className="text-[13px] font-bold text-slate-700">쇼핑샵 설명 (Shopping)</span>
+              </div>
+              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
+                지역 특산물과 기념품을 만나보실 수 있는 쇼핑 스팟입니다.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-2">
@@ -382,9 +446,13 @@ export default function LandmarkPanel({
             ].map((platform) => (
               <button
                 key={platform.name}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   const query = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                  window.open(`https://www.google.com/search?q=${platform.query}+${query}`, '_blank');
+                  const url = `https://www.google.com/search?q=${platform.query}+${query}`;
+                  console.log(`Opening ${platform.name}:`, url);
+                  window.open(url, '_blank');
                 }}
                 className="w-full h-12 bg-gray-50/50 hover:bg-white hover:border-[#E9633F]/30 border border-transparent rounded-xl px-4 flex items-center justify-between group transition-all"
               >
