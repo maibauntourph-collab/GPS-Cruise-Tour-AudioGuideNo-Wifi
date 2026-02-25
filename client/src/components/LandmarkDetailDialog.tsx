@@ -33,6 +33,8 @@ export default function LandmarkDetailDialog({
   isInTour = false,
   selectedLanguage = 'en'
 }: LandmarkDetailDialogProps) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
   const [forceShowCard, setForceShowCard] = useState(true);
   const [playbackRate, setPlaybackRate] = useState(1.0);

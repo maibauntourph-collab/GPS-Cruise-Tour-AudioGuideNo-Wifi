@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark } from '@shared/schema';
-import { Navigation, MapPin, X, Play, Pause, Ticket, ExternalLink, Minus, MapPinned, Info } from 'lucide-react';
+import { Navigation, MapPin, X, Play, Pause, Ticket, ExternalLink, Minus, MapPinned, Info, Search, Globe, Library } from 'lucide-react';
 import PhotoGallery from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
@@ -217,7 +217,7 @@ export default function LandmarkPanel({
           )}
         </div>
 
-        {/* Sections */}
+        {/* Photos Section */}
         <section>
           <SectionHeader title={t('photos', selectedLanguage)} />
           <div className="rounded-2xl overflow-hidden" data-no-drag>
@@ -228,6 +228,43 @@ export default function LandmarkPanel({
           </div>
         </section>
 
+        {/* [NEW] External Links Section - Added for quick access to Wiki, Tourism info, and Google Search */}
+        <section className="bg-gray-50/30 p-4 rounded-2xl border border-gray-100/50 mt-4">
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                window.open(`https://${selectedLanguage === 'ko' ? 'ko' : 'en'}.wikipedia.org/wiki/${encodeURIComponent(name)}`, '_blank');
+              }}
+              className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
+            >
+              <Library className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-bold">Wiki</span>
+            </button>
+            <button
+              onClick={() => {
+                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(name)}+관광정보`, '_blank');
+              }}
+              className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-bold">관광정보</span>
+            </button>
+            <button
+              onClick={() => {
+                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(name)}`, '_blank');
+              }}
+              className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-bold">검색</span>
+            </button>
+          </div>
+        </section>
+
+        {/* Location Section */}
         <section>
           <SectionHeader title={t('location', selectedLanguage)} />
           <div className="rounded-2xl overflow-hidden border border-gray-100 h-36 relative shadow-inner" data-no-drag>
@@ -254,6 +291,7 @@ export default function LandmarkPanel({
           </div>
         </section>
 
+        {/* Info Sections */}
         <section>
           <SectionHeader title={t('category', selectedLanguage)} />
           <p className="text-[13px] text-[#555] leading-relaxed font-medium">
@@ -277,7 +315,7 @@ export default function LandmarkPanel({
           </section>
         )}
 
-        {/* Audio (상세 정보) */}
+        {/* Audio Section */}
         {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') && (
           <section className="bg-[#FFF8F6] p-5 rounded-[20px] border border-[#FFE7E0] mt-8">
             <div className="flex items-center justify-between mb-4">
@@ -319,29 +357,50 @@ export default function LandmarkPanel({
           </section>
         )}
 
-        {/* Booking */}
-        <section className="bg-gray-50/50 p-5 rounded-[20px] border border-gray-100">
-          <SectionHeader title={t('bookTickets', selectedLanguage)} />
-          <div className="space-y-2">
-            {['GetYourGuide', 'Viator', 'Klook'].map((platform) => (
+        {/* Reservation Section - Expanded with MyRealTrip, Trip.com, Klook, GetYourGuide, Viator */}
+        <section className="bg-white p-5 rounded-[24px] border border-gray-100 shadow-sm mt-6">
+          <SectionHeader title="Reservation & Booking" />
+
+          {/* Landmark Description under Title */}
+          <div className="mb-6 p-4 bg-[#FFF9F5] rounded-xl border border-[#FFE7D0]/30">
+            <p className="text-[13px] text-[#714B40] leading-relaxed font-medium">
+              {getTranslatedContent(landmark, selectedLanguage, 'description')}
+              <br />
+              <span className="text-[11px] text-[#A68A80] mt-2 block">
+                명소 방문을 위한 활동, 레스토랑, 쇼핑몰 정보를 아래 플랫폼에서 확인해 보세요.
+              </span>
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2">
+            {[
+              { name: '마이리얼트립', query: '마이리얼트립' },
+              { name: '트립닷컴', query: '트립닷컴' },
+              { name: 'Klook', query: '클룩' },
+              { name: 'GetYourGuide', query: 'GetYourGuide' },
+              { name: 'Viator', query: 'Viator' }
+            ].map((platform) => (
               <button
-                key={platform}
+                key={platform.name}
                 onClick={() => {
                   const query = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                  window.open(`https://www.google.com/search?q=${platform}+${query}`, '_blank');
+                  window.open(`https://www.google.com/search?q=${platform.query}+${query}`, '_blank');
                 }}
-                className="w-full h-11 bg-white border border-gray-100 rounded-xl px-4 flex items-center justify-between group hover:bg-gray-50 transition-all"
+                className="w-full h-12 bg-gray-50/50 hover:bg-white hover:border-[#E9633F]/30 border border-transparent rounded-xl px-4 flex items-center justify-between group transition-all"
               >
-                <div className="flex items-center gap-2">
-                  <ExternalLink className="w-3.5 h-3.5 text-gray-300 group-hover:text-gray-400" />
-                  <span className="text-[12px] font-bold text-gray-600">{platform}에서 예약</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm text-[#E9633F]">
+                    <Ticket className="w-4 h-4" />
+                  </div>
+                  <span className="text-[13px] font-bold text-gray-700">{platform.name}</span>
                 </div>
+                <ExternalLink className="w-3.5 h-3.5 text-gray-300 group-hover:text-[#E9633F] transition-colors" />
               </button>
             ))}
           </div>
         </section>
 
-        {/* Fix spacer */}
+        {/* Spacer */}
         <div className="h-6" />
       </div>
 
