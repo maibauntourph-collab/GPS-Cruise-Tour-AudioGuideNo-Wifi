@@ -22033,7 +22033,12 @@ app.get("/*", async (c, next) => {
     }
     try {
       const res = await workerServeStatic({ root: "./", manifest })(c, next);
-      if (res && res.status !== 404) return res;
+      if (res && res.status !== 404) {
+        if (path3.startsWith("/assets/") || path3.match(/\.(js|css|png|jpg|jpeg|gif|webp|svg|ico|woff2?)$/)) {
+          c.header("Cache-Control", "public, max-age=31536000, immutable");
+        }
+        return res;
+      }
     } catch (e) {
       console.error(`[Worker] Error serving asset ${path3}:`, e);
     }

@@ -53,8 +53,13 @@ const itemVariants = {
 export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [errorIndices, setErrorIndices] = useState<Set<number>>(new Set());
+  const [loadedIndices, setLoadedIndices] = useState<Set<number>>(new Set());
 
   if (!photos || photos.length === 0) return null;
+
+  const handleImageLoad = (index: number) => {
+    setLoadedIndices(prev => new Set(prev).add(index));
+  };
 
   const handlePrevious = () => {
     if (selectedIndex !== null && selectedIndex > 0) {
@@ -87,9 +92,22 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setSelectedIndex(index)}
-            className="relative w-20 h-20 shrink-0 overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E9633F]/50"
+            className="relative w-24 h-24 shrink-0 overflow-hidden rounded-2xl border border-gray-100 bg-gray-50/50 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E9633F]/50"
             data-testid={`button-photo-${index}`}
           >
+            {/* [Designer Kim] Skeleton UI with Pulse Effect */}
+            <AnimatePresence>
+              {!loadedIndices.has(index) && !errorIndices.has(index) && (
+                <motion.div
+                  initial={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse flex items-center justify-center"
+                >
+                  <div className="w-8 h-8 rounded-full bg-white/20" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {errorIndices.has(index) || (photo && photo.includes('placeholder.png')) ? (
               <ImageFallback className="h-full w-full" />
             ) : (
@@ -97,8 +115,10 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
                 <img
                   src={photo}
                   alt={`${title} - Photo ${index + 1}`}
-                  className="h-full w-full object-cover"
+                  className={`h-full w-full object-cover transition-opacity duration-700 ${loadedIndices.has(index) ? 'opacity-100' : 'opacity-0'}`}
                   loading="lazy"
+                  decoding="async"
+                  onLoad={() => handleImageLoad(index)}
                   onError={() => handleImageError(index)}
                 />
               </div>

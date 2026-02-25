@@ -123,8 +123,16 @@ app.get("/*", async (c, next) => {
         try {
             const res = await workerServeStatic({ root: "./", manifest })(c, next);
             // 404가 아니면 해당 파일 반환
-            if (res && res.status !== 404) return res;
+            if (res && res.status !== 404) {
+                // [Server Park] 정적 자산(assets/* 및 공통 확장자)에 대해 강력한 캐싱 정책 적용 (1년)
+                // immutable: 파일명이 바뀌지 않는 한(Vite 빌드 특성) 서버 확인 없이 캐시 사용
+                if (path.startsWith("/assets/") || path.match(/\.(js|css|png|jpg|jpeg|gif|webp|svg|ico|woff2?)$/)) {
+                    c.header("Cache-Control", "public, max-age=31536000, immutable");
+                }
+                return res;
+            }
         } catch (e) {
+
             console.error(`[Worker] Error serving asset ${path}:`, e);
         }
 
