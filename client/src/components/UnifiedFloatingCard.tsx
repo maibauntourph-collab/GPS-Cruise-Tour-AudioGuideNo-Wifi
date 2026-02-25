@@ -353,57 +353,51 @@ export function UnifiedFloatingCard({
     >
       {/* HEADER */}
       <div className="p-4 flex items-center justify-between border-b bg-white/50 backdrop-blur-md">
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth">
           <Button
             variant={activeTab === 'list' ? 'default' : 'ghost'}
             size="sm"
-            className={`rounded-full h-8 px-3 ${activeTab === 'list' ? 'bg-indigo-600 font-bold' : ''}`}
-            onClick={() => {
-              setActiveTab('list');
-              onLandmarkClose();
-            }}
+            className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'list' ? 'bg-[#E9633F] text-white font-black shadow-lg shadow-orange-100' : 'text-gray-500 hover:bg-gray-100'}`}
+            onClick={() => setActiveTab('list')}
           >
-            <List className="w-4 h-4 mr-1" />
-            <span className="text-xs">{t('list', selectedLanguage)}</span>
+            <List className="w-4 h-4 mr-1.5" />
+            <span className="text-xs tracking-tight">{t('list', selectedLanguage)}</span>
           </Button>
           {showCruisePort && (
             <Button
               variant={activeTab === 'cruise' ? 'default' : 'ghost'}
               size="sm"
-              className={`rounded-full h-8 px-3 ${activeTab === 'cruise' ? 'bg-indigo-600 font-bold' : ''}`}
-              onClick={() => {
-                setActiveTab('cruise');
-                onLandmarkClose();
-              }}
+              className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'cruise' ? 'bg-[#E9633F] text-white font-black shadow-lg shadow-orange-100' : 'text-gray-500 hover:bg-gray-100'}`}
+              onClick={() => setActiveTab('cruise')}
             >
-              <Ship className="w-4 h-4 mr-1" />
-              <span className="text-xs">{t('cruisePort', selectedLanguage)}</span>
+              <Ship className="w-4 h-4 mr-1.5" />
+              <span className="text-xs tracking-tight">{t('cruisePort', selectedLanguage)}</span>
             </Button>
           )}
           <Button
             variant={activeTab === 'tour' ? 'default' : 'ghost'}
             size="sm"
-            className={`rounded-full h-8 px-3 ${activeTab === 'tour' ? 'bg-indigo-600 font-bold' : ''}`}
-            onClick={() => {
-              setActiveTab('tour');
-              onLandmarkClose();
-            }}
+            className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'tour' ? 'bg-[#E9633F] text-white font-black shadow-lg shadow-orange-100' : 'text-gray-500 hover:bg-gray-100'}`}
+            onClick={() => setActiveTab('tour')}
           >
-            <MapPinned className="w-4 h-4 mr-1" />
-            <span className="text-xs">{t('myTour', selectedLanguage)}</span>
+            <MapPinned className="w-4 h-4 mr-1.5" />
+            <span className="text-xs tracking-tight">{t('myTour', selectedLanguage)}</span>
           </Button>
+        </div>
+        <div className="flex items-center gap-2 ml-2">
           {selectedLandmark && (
-            <div className="flex items-center gap-1 bg-indigo-50 px-2 py-1 rounded-full border border-indigo-100 ml-2">
-              <LandmarkIcon className="w-3.5 h-3.5 text-indigo-600" />
-              <span className="text-[10px] font-bold text-indigo-900 truncate max-w-[80px]">
+            <div className="flex items-center gap-1.5 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-100 animate-in fade-in zoom-in duration-300">
+              <LandmarkIcon className="w-3.5 h-3.5 text-[#E9633F]" />
+              <span className="text-[10px] font-bold text-[#E9633F] truncate max-w-[60px]">
                 {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
               </span>
             </div>
           )}
+          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100" onClick={() => onLandmarkClose()}>
+            <X className="w-5 h-5" />
+          </Button>
         </div>
-        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => onLandmarkClose()}>
-          <X className="w-5 h-5" />
-        </Button>
+
       </div>
 
       <AnimatePresence>

@@ -3,7 +3,9 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark } from '@shared/schema';
-import { Navigation, MapPin, X, Play, Pause, Ticket, ExternalLink, Minus, MapPinned, Info, Search, Globe, Library, Clock, Activity as ActivityIcon, ChefHat, ShoppingBag } from 'lucide-react';
+import { Navigation, MapPin, X, Play, Pause, Ticket, ExternalLink, Minus, MapPinned, Info, Search, Globe, Library, Clock, Activity as ActivityIcon, ChefHat, ShoppingBag, SlidersHorizontal, Image as ImageIcon } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+
 import PhotoGallery from './PhotoGallery';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
@@ -150,12 +152,16 @@ export default function LandmarkPanel({
     }
   };
 
-  const SectionHeader = ({ title }: { title: string }) => (
-    <div className="flex items-center gap-2 mb-3 mt-6">
-      <div className="w-2 h-2 bg-[#E9633F] rounded-[1px]" />
-      <h3 className="font-bold text-sm text-[#444] tracking-tight">{title}</h3>
+  const SectionHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
+    <div className="flex items-center gap-2 mb-3 mt-6 group/header">
+      <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-orange-50 text-[#E9633F] group-hover/header:scale-110 transition-transform">
+        {Icon ? <Icon className="w-4 h-4" /> : <div className="w-2 h-2 bg-[#E9633F] rounded-[1px]" />}
+      </div>
+      <h3 className="font-bold text-[14px] text-[#444] tracking-tight">{title}</h3>
+      <div className="flex-1 h-[1px] bg-gradient-to-r from-gray-100 to-transparent ml-2" />
     </div>
   );
+
 
   const renderFullCard = () => (
     <div
@@ -174,12 +180,13 @@ export default function LandmarkPanel({
     >
       {/* Header */}
       <div
-        className="p-5 pb-2 flex items-start justify-between bg-white/80 backdrop-blur-md sticky top-0 z-20"
+        className="p-5 pb-3 flex items-start justify-between bg-gradient-to-r from-orange-50/50 to-white/80 backdrop-blur-md sticky top-0 z-20 border-b border-orange-100/30"
         data-drag-handle
         style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         onMouseDown={handleStart}
         onTouchStart={handleStart}
       >
+
         <div className="flex-1 pr-4">
           <h2 className="text-[20px] font-black text-[#1a1a1a] leading-tight mb-1">
             {getTranslatedContent(landmark, selectedLanguage, 'name')}
@@ -204,9 +211,9 @@ export default function LandmarkPanel({
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-5 pt-0 space-y-2 scrollbar-hide">
+      <div className="flex-1 overflow-y-auto p-5 pt-2 space-y-2 scrollbar-hide">
         {/* Badges */}
-        <div className="flex gap-2 mt-2">
+        <div className="flex gap-2">
           <Badge variant="outline" className="h-7 px-3 rounded-full border-[#E9633F]/20 bg-[#E9633F]/5 text-[#E9633F] font-bold text-[10px]">
             {landmark.category}
           </Badge>
@@ -217,226 +224,11 @@ export default function LandmarkPanel({
           )}
         </div>
 
-        {/* Photos Section */}
-        <section>
-          <SectionHeader title={t('photos', selectedLanguage)} />
-          <div className="rounded-2xl overflow-hidden" data-no-drag>
-            <PhotoGallery
-              photos={landmark.photos || []}
-              title={getTranslatedContent(landmark, selectedLanguage, 'name')}
-            />
-          </div>
-        </section>
+        {/* [DESIGNER KIM] 1. Reservation Section (Primary Action) */}
+        <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
+          <SectionHeader title="Reservation & Booking" icon={Ticket} />
 
-        {/* [NEW] External Links Section - Added for quick access to Wiki, Tourism info, and Google Search */}
-        <section className="bg-gray-50/30 p-4 rounded-2xl border border-gray-100/50 mt-4">
-          <div className="flex gap-2">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                const url = `https://${selectedLanguage === 'ko' ? 'ko' : 'en'}.wikipedia.org/wiki/${encodeURIComponent(name)}`;
-                console.log('🚀 [Diagnostic] Clicked Wiki Link:', url);
-                window.open(url, '_blank');
-              }}
-              className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
-            >
-              <Library className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-bold">Wiki</span>
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                const url = `https://www.google.com/search?q=${encodeURIComponent(name)}+관광정보`;
-                console.log('🚀 [Diagnostic] Clicked Tourism Info Link:', url);
-                window.open(url, '_blank');
-              }}
-              className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
-            >
-              <Globe className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-bold">관광정보</span>
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                const url = `https://www.google.com/search?q=${encodeURIComponent(name)}`;
-                console.log('🚀 [Diagnostic] Clicked Search Link:', url);
-                window.open(url, '_blank');
-              }}
-              className="flex-1 h-10 bg-white border border-gray-100 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:shadow-sm transition-all text-gray-600 hover:text-[#E9633F]"
-            >
-              <Search className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-bold">검색</span>
-            </button>
-          </div>
-        </section>
-
-        {/* Location Section */}
-        <section>
-          <SectionHeader title={t('location', selectedLanguage)} />
-          <div className="rounded-2xl overflow-hidden border border-gray-100 h-36 relative shadow-inner" data-no-drag>
-            <MapContainer
-              key={landmark.id}
-              center={[landmark.lat, landmark.lng]}
-              zoom={16}
-              style={{ height: '100%', width: '100%' }}
-              scrollWheelZoom={false}
-              zoomControl={false}
-              dragging={!isDragging}
-            >
-              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              <Marker
-                position={[landmark.lat, landmark.lng]}
-                icon={L.divIcon({
-                  className: 'custom-marker',
-                  html: `<div style="background: #E9633F; width: 14px; height: 14px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(233, 99, 63, 0.4);"></div>`,
-                  iconSize: [14, 14],
-                  iconAnchor: [7, 7],
-                })}
-              />
-            </MapContainer>
-          </div>
-        </section>
-
-        {/* Info Sections - REMOVED redundant sections as they are now under Reservation */}
-
-        {landmark.architect && (
-          <section>
-            <SectionHeader title={t('architect', selectedLanguage)} />
-            <p className="text-[12px] text-gray-500 font-medium italic">
-              {landmark.architect}
-            </p>
-          </section>
-        )}
-
-        {/* Audio Section */}
-        {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') && (
-          <section className="bg-[#FFF8F6] p-5 rounded-[20px] border border-[#FFE7E0] mt-8">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-[#E9633F] rounded-full" />
-                <span className="font-bold text-[13px] text-[#E9633F]">{t('detailedInformation', selectedLanguage)}</span>
-              </div>
-              <span className="text-[10px] font-bold text-[#E9633F]/60 tracking-wider uppercase">{playbackRate.toFixed(1)}x</span>
-            </div>
-
-            <div className="flex items-center gap-3 mb-5">
-              <button
-                onClick={handlePlayPause}
-                className="h-10 px-6 rounded-full bg-[#E9633F] text-white flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_4px_12px_rgba(233,99,63,0.3)]"
-              >
-                {isPlaying && !isPaused ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
-                <span className="font-bold text-sm tracking-tighter">재생</span>
-              </button>
-
-              <div className="flex gap-1 overflow-x-auto py-1 scrollbar-hide">
-                {[0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map((rate) => (
-                  <button
-                    key={rate}
-                    onClick={() => handleRateChange(rate)}
-                    className={`h-7 px-2.5 rounded-lg text-[10px] font-black transition-all ${playbackRate === rate
-                      ? 'bg-[#E9633F] text-white shadow-md'
-                      : 'bg-white text-gray-400 hover:text-gray-600 border border-gray-100'
-                      }`}
-                  >
-                    {rate.toFixed(1)}x
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <p className="text-[12px] text-[#714B40] leading-relaxed font-medium">
-              {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}
-            </p>
-          </section>
-        )}
-
-        {/* Reservation Section - Expanded with Detailed Sections per user request */}
-        <section className="bg-white p-5 rounded-[24px] border border-gray-100 shadow-sm mt-6">
-          <SectionHeader title="Reservation & Booking" />
-
-          {/* Detailed Info Sections - Grouped before Booking Links */}
-          <div className="space-y-4 mb-6">
-            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
-              <div className="flex items-center gap-2 mb-2">
-                <Info className="w-4 h-4 text-[#E9633F]" />
-                <span className="text-[13px] font-bold text-slate-700">상세 정보 (Detailed Info)</span>
-              </div>
-              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
-                {getTranslatedContent(landmark, selectedLanguage, 'description')}
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#F1F5F9] rounded-2xl border border-slate-200 shadow-inner">
-              <div className="flex items-center gap-2 mb-2">
-                <Info className="w-4 h-4 text-[#E9633F]" />
-                <span className="text-[13px] font-bold text-slate-700">역사 / 나레이션 (History & Narration)</span>
-              </div>
-              <div className="text-[12px] text-slate-600 leading-relaxed pl-6 space-y-2">
-                <p className="font-medium">"{getTranslatedContent(landmark, selectedLanguage, 'narration')}"</p>
-                {landmark.historicalInfo && (
-                  <p className="pt-2 border-t border-slate-200 mt-2">{landmark.historicalInfo}</p>
-                )}
-              </div>
-            </div>
-
-            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
-              <div className="flex items-center gap-2 mb-2">
-                <Clock className="w-4 h-4 text-[#E9633F]" />
-                <span className="text-[13px] font-bold text-slate-700">오픈시간 (Open Hours)</span>
-              </div>
-              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
-                {landmark.openingHours || '일반적인 운영 시간: 09:00 - 18:00 (시즌별 상이)'}
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
-              <div className="flex items-center gap-2 mb-2">
-                <ActivityIcon className="w-4 h-4 text-[#E9633F]" />
-                <span className="text-[13px] font-bold text-slate-700">액티비티 설명 (Activities)</span>
-              </div>
-              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
-                다양한 현지 액티비티 및 투어 프로그램이 준비되어 있습니다.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
-              <div className="flex items-center gap-2 mb-2">
-                <ChefHat className="w-4 h-4 text-[#E9633F]" />
-                <span className="text-[13px] font-bold text-slate-700">레스토랑 정보 (Restaurants)</span>
-              </div>
-              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
-                주변의 엄선된 맛집 정보를 확인하실 수 있습니다.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
-              <div className="flex items-center gap-2 mb-2">
-                <Navigation className="w-4 h-4 text-[#E9633F]" />
-                <span className="text-[13px] font-bold text-slate-700">투어 설명 (Tour Details)</span>
-              </div>
-              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
-                전문 가이드와 함께하는 심도 깊은 투어를 경험해 보세요.
-              </p>
-            </div>
-
-            <div className="p-4 bg-[#F8FAFC] rounded-2xl border border-slate-100">
-              <div className="flex items-center gap-2 mb-2">
-                <ShoppingBag className="w-4 h-4 text-[#E9633F]" />
-                <span className="text-[13px] font-bold text-slate-700">쇼핑샵 설명 (Shopping)</span>
-              </div>
-              <p className="text-[12px] text-slate-500 leading-relaxed pl-6">
-                지역 특산물과 기념품을 만나보실 수 있는 쇼핑 스팟입니다.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-2 mt-2">
             {[
               { name: '마이리얼트립', query: '마이리얼트립' },
               { name: '트립닷컴', query: '트립닷컴' },
@@ -451,13 +243,13 @@ export default function LandmarkPanel({
                   e.stopPropagation();
                   const query = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
                   const url = `https://www.google.com/search?q=${platform.query}+${query}`;
-                  console.log(`Opening ${platform.name}:`, url);
+                  console.log(`🚀 [Designer Kim] Opening ${platform.name}:`, url);
                   window.open(url, '_blank');
                 }}
-                className="w-full h-12 bg-gray-50/50 hover:bg-white hover:border-[#E9633F]/30 border border-transparent rounded-xl px-4 flex items-center justify-between group transition-all"
+                className="w-full h-12 bg-gray-50/30 hover:bg-white hover:border-[#E9633F]/30 hover:shadow-md border border-transparent rounded-xl px-4 flex items-center justify-between group transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm text-[#E9633F]">
+                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm text-[#E9633F] group-hover:scale-110 transition-transform">
                     <Ticket className="w-4 h-4" />
                   </div>
                   <span className="text-[13px] font-bold text-gray-700">{platform.name}</span>
@@ -468,29 +260,256 @@ export default function LandmarkPanel({
           </div>
         </section>
 
+        {/* [DESIGNER KIM] 2. Detailed Info & Narration */}
+        <div className="space-y-4 pt-2">
+          <div className="p-5 bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-100 shadow-sm">
+            <div className="flex items-center gap-2 mb-3">
+              <Info className="w-4 h-4 text-[#E9633F]" />
+              <span className="text-[14px] font-bold text-slate-800">상세 설명 (Introduction)</span>
+            </div>
+            <p className="text-[12.5px] text-slate-600 leading-relaxed pl-1">
+              {getTranslatedContent(landmark, selectedLanguage, 'description')}
+            </p>
+          </div>
+
+          <div className="p-6 bg-[#1a1a1a] text-white rounded-[32px] shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#E9633F]/10 rounded-full -mr-16 -mt-16 blur-3xl" />
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1.5 h-6 bg-[#E9633F] rounded-full" />
+              <span className="text-[14px] font-bold tracking-tight">역사 / 나레이션 (History)</span>
+            </div>
+            <div className="relative z-10 space-y-3">
+              <p className="text-[15px] font-medium leading-relaxed font-serif italic text-white/90">
+                "{getTranslatedContent(landmark, selectedLanguage, 'narration')}"
+              </p>
+              {landmark.historicalInfo && (
+                <p className="text-[12px] text-white/60 leading-relaxed pt-3 border-t border-white/10">
+                  {landmark.historicalInfo}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* [DESIGNER KIM] 3. Photos Section */}
+        <section className="pt-4">
+          <SectionHeader title={t('photos', selectedLanguage)} icon={ImageIcon} />
+          <div className="rounded-3xl overflow-hidden shadow-lg" data-no-drag>
+            <PhotoGallery
+              photos={landmark.photos || []}
+              title={getTranslatedContent(landmark, selectedLanguage, 'name')}
+            />
+          </div>
+        </section>
+
+        {/* [DESIGNER KIM] 4. Operational Info (Clock, Activity, etc.) */}
+        <div className="grid grid-cols-1 gap-3 pt-4">
+          <div className="p-4 bg-orange-50/30 rounded-2xl border border-orange-100/50 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-[#E9633F] shrink-0">
+              <Clock className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold text-[#E9633F]/70 uppercase tracking-wider mb-0.5">운영 시간 (Hours)</p>
+              <p className="text-[13px] font-bold text-gray-700">{landmark.openingHours || '09:00 - 18:00 (시즌별 상이)'}</p>
+            </div>
+          </div>
+
+          <div className="p-4 bg-blue-50/30 rounded-2xl border border-blue-100/50 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-blue-500 shrink-0">
+              <ActivityIcon className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold text-blue-500/70 uppercase tracking-wider mb-0.5">액티비티 (Activities)</p>
+              <p className="text-[13px] font-bold text-gray-700">추천 액티비티 및 체험 프로그램</p>
+            </div>
+          </div>
+
+          <div className="p-4 bg-rose-50/30 rounded-2xl border border-rose-100/50 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-rose-500 shrink-0">
+              <ChefHat className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-[11px] font-bold text-rose-500/70 uppercase tracking-wider mb-0.5">맛집 정보 (Restaurants)</p>
+              <p className="text-[13px] font-bold text-gray-700">주변 엄선된 미식 스팟</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="p-4 bg-indigo-50/30 rounded-2xl border border-indigo-100/50">
+              <Navigation className="w-5 h-5 text-indigo-500 mb-2" />
+              <p className="text-[11px] font-bold text-indigo-500/70 uppercase tracking-wider mb-0.5">투어 (Tour)</p>
+              <p className="text-[12px] font-bold text-gray-700">전문 가이드 투어</p>
+            </div>
+            <div className="p-4 bg-emerald-50/30 rounded-2xl border border-emerald-100/50">
+              <ShoppingBag className="w-5 h-5 text-emerald-500 mb-2" />
+              <p className="text-[11px] font-bold text-emerald-500/70 uppercase tracking-wider mb-0.5">쇼핑 (Shopping)</p>
+              <p className="text-[12px] font-bold text-gray-700">기념품 및 쇼핑 스팟</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Audio Guide Section (AudioBox Style) */}
+        {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') && (
+          <section className="bg-gradient-to-br from-[#FFF8F6] to-white p-6 rounded-[32px] border border-[#FFE7E0] shadow-sm mt-6">
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#E9633F] flex items-center justify-center text-white shadow-lg shadow-orange-100">
+                  <Play className="w-5 h-5 fill-current" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-[15px] text-gray-800">오디오 가이드</h4>
+                  <p className="text-[11px] text-gray-400 font-medium">상세한 현장 설명을 들어보세요</p>
+                </div>
+              </div>
+              <Badge variant="outline" className="h-6 px-2.5 rounded-full border-[#E9633F]/20 bg-white text-[#E9633F] font-black text-[10px]">
+                {playbackRate.toFixed(1)}x
+              </Badge>
+            </div>
+
+            <div className="flex items-center gap-3 mb-6">
+              <button
+                onClick={handlePlayPause}
+                className="flex-1 h-14 rounded-2xl bg-[#E9633F] text-white flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-orange-100"
+              >
+                {isPlaying && !isPaused ? <Pause className="w-6 h-6 fill-white" /> : <Play className="w-6 h-6 fill-white" />}
+                <span className="font-bold text-base tracking-tight">{isPlaying && !isPaused ? '일시정지' : '가이드 듣기'}</span>
+              </button>
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button className="h-14 w-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#E9633F] transition-colors shadow-sm">
+                    <SlidersHorizontal className="w-6 h-6" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-48 p-2 rounded-2xl" side="top" align="end">
+                  <div className="grid grid-cols-3 gap-1">
+                    {[0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map((rate) => (
+                      <button
+                        key={rate}
+                        onClick={() => handleRateChange(rate)}
+                        className={`h-10 rounded-xl text-[11px] font-black transition-all ${playbackRate === rate
+                          ? 'bg-[#E9633F] text-white'
+                          : 'hover:bg-gray-50 text-gray-500'
+                          }`}
+                      >
+                        {rate.toFixed(1)}x
+                      </button>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+
+            <p className="text-[13px] text-[#714B40] leading-relaxed font-medium bg-white/50 p-4 rounded-2xl border border-white/50 italic">
+              "{getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')}"
+            </p>
+          </section>
+        )}
+
+        {/* Location Section */}
+        <section className="pt-4">
+          <SectionHeader title={t('location', selectedLanguage)} icon={MapPin} />
+          <div className="rounded-[32px] overflow-hidden border border-gray-100 h-48 relative shadow-inner mt-2" data-no-drag>
+            <MapContainer
+              key={landmark.id}
+              center={[landmark.lat, landmark.lng]}
+              zoom={16}
+              style={{ height: '100%', width: '100%' }}
+              scrollWheelZoom={false}
+              zoomControl={false}
+              dragging={!isDragging}
+            >
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+              <Marker
+                position={[landmark.lat, landmark.lng]}
+                icon={L.divIcon({
+                  className: 'custom-marker',
+                  html: `
+                    <div style="position: relative; width: 40px; height: 40px; transform: translate(-13px, -40px);">
+                      <div style="position: absolute; width: 40px; height: 40px; background: #E9633F; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 4px 12px rgba(233, 99, 63, 0.4);"></div>
+                      <div style="position: absolute; width: 14px; height: 14px; background: white; border-radius: 50%; top: 10px; left: 13px;"></div>
+                    </div>
+                  `,
+                  iconSize: [40, 40],
+                  iconAnchor: [20, 20],
+                })}
+              />
+            </MapContainer>
+            <div className="absolute bottom-4 right-4 z-[1000]">
+              <button
+                onClick={() => window.open(`https://www.google.com/maps?q=${landmark.lat},${landmark.lng}`, '_blank')}
+                className="bg-white/90 backdrop-blur-md px-4 h-9 rounded-full shadow-lg border border-white flex items-center gap-2 text-[11px] font-bold text-gray-700 hover:bg-white transition-all"
+              >
+                <Globe className="w-3.5 h-3.5 text-[#E9633F]" />
+                Google Maps
+              </button>
+            </div>
+          </div>
+
+          {/* Wiki/Search Quick Links */}
+          <div className="flex gap-2 mt-3">
+            <button
+              onClick={() => {
+                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                window.open(`https://${selectedLanguage === 'ko' ? 'ko' : 'en'}.wikipedia.org/wiki/${encodeURIComponent(name)}`, '_blank');
+              }}
+              className="flex-1 h-10 bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 rounded-xl flex items-center justify-center gap-2 transition-all text-[11px] font-bold text-gray-500"
+            >
+              <Library className="w-3.5 h-3.5" />
+              Wikipedia
+            </button>
+            <button
+              onClick={() => {
+                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(name)}`, '_blank');
+              }}
+              className="flex-1 h-10 bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 rounded-xl flex items-center justify-center gap-2 transition-all text-[11px] font-bold text-gray-500"
+            >
+              <Search className="w-3.5 h-3.5" />
+              Google Search
+            </button>
+          </div>
+        </section>
+
+        {landmark.architect && (
+          <section className="pt-2 border-t border-gray-50 mt-8">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Architectural design by</span>
+            </div>
+            <p className="text-[13px] text-gray-500 font-bold italic font-serif">
+              {landmark.architect}
+            </p>
+          </section>
+        )}
+
+
         {/* Spacer */}
         <div className="h-6" />
       </div>
 
       {/* Footer Actions */}
-      <div className="p-5 pt-3 border-t border-gray-50 bg-white/90 backdrop-blur-md flex gap-3">
+      <div className="p-5 pt-3 border-t border-gray-100 bg-white/90 backdrop-blur-md flex gap-3">
         <button
           onClick={handleNavigate}
-          className="flex-1 h-12 bg-[#E9633F] text-white rounded-2xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_8px_20px_rgba(233,99,63,0.3)]"
+          className="flex-1 h-14 bg-[#E9633F] text-white rounded-2xl flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-orange-100"
         >
-          <Navigation className="w-4 h-4 fill-white" />
-          <span className="font-bold text-[15px] tracking-tight">길안내</span>
+          <Navigation className="w-5 h-5 fill-white" />
+          <span className="font-bold text-base tracking-tight">길안내 시작</span>
         </button>
         {onAddToTour && (
           <button
             onClick={() => onAddToTour(landmark)}
-            className="flex-1 h-12 bg-white border-2 border-gray-100 text-gray-600 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-50 active:scale-[0.98] transition-all"
+            className={`flex-1 h-14 rounded-2xl border-2 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all ${isInTour
+              ? 'bg-white border-gray-200 text-gray-400'
+              : 'bg-white border-[#E9633F] text-[#E9633F] shadow-lg shadow-orange-50'
+              }`}
           >
-            <span className="text-gray-300 font-light text-xl">+</span>
-            <span className="font-bold text-[15px] tracking-tight">{isInTour ? '제거' : '투어 추가'}</span>
+            <span className="font-bold text-[20px] mb-0.5">{isInTour ? '−' : '+'}</span>
+            <span className="font-bold text-base tracking-tight">{isInTour ? '투어에서 제거' : '투어에 담기'}</span>
           </button>
         )}
       </div>
+
     </div>
   );
 
