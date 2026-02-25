@@ -1135,6 +1135,7 @@ async function setupVite(app2, server2) {
     }
     try {
       const clientTemplate = path2.join(__dirname, "..", "client", "index.html");
+      console.log(`[Vite] Serving template from ${clientTemplate}`);
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
@@ -22041,10 +22042,10 @@ app.get("/*", async (c, next) => {
       return c.text("Asset not found", 404);
     }
   }
-  console.log(`[Worker] SPA Fallback triggered for: ${path3}`);
+  console.log(`[Worker] SPA Fallback requested for: ${path3}. workerEnv: ${!!workerEnv}`);
   const html = await getIndexHtml(c);
   if (html) return c.html(html);
-  console.error(`[Worker] PATH NOT FOUND (Fallback failed): ${path3}`);
+  console.log(`[Worker] FALLBACK NEXT() for: ${path3}`);
   return next();
 });
 var app_default = app;
