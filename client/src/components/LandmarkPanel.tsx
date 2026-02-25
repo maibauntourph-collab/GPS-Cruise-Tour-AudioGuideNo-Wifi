@@ -228,7 +228,9 @@ export default function LandmarkPanel({
           )}
         </div>
 
-        {/* [DESIGNER KIM] 2. History & Narration (With External Links) */}
+        {/* 📚 [Designer Kim / 강의 적요] 역사 및 나레이션 섹션
+             사용자가 현장의 깊이 있는 이야기를 들을 수 있도록 나레이션을 전면에 배치하고,
+             추가 정보(Wikipedia, 관광국 등)를 바로 하단에 배치하여 정보 탐색의 흐름을 끊지 않게 설계했습니다. */}
         <div className="space-y-4 pt-2">
           <div className="p-6 bg-[#1a1a1a] text-white rounded-[32px] shadow-xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#E9633F]/10 rounded-full -mr-16 -mt-16 blur-3xl" />
@@ -247,7 +249,7 @@ export default function LandmarkPanel({
               )}
             </div>
 
-            {/* [PROFESSOR REQUEST] External Links Group below Narration */}
+            {/* [교수님 요청 사항 반영] 나레이션 하단 외부 링크 그룹 */}
             <div className="grid grid-cols-3 gap-2 mt-6 pt-6 border-t border-white/10">
               <Button
                 variant="ghost"
@@ -289,7 +291,8 @@ export default function LandmarkPanel({
           </div>
         </div>
 
-        {/* [DESIGNER KIM] 3. Detailed Info (After Narration) */}
+        {/* 📋 [Designer Kim / 강의 적요] 상세 설명 섹션
+             나레이션 뒤에 보완된 상세 정보를 배치하여, 감성적인 이야기 후 구체적인 지식을 얻을 수 있도록 구성했습니다. */}
         <section className="pt-2">
           <SectionHeader title="Detailed Information" icon={Info} />
           <div className="p-5 bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-100 shadow-sm">
@@ -299,7 +302,9 @@ export default function LandmarkPanel({
           </div>
         </section>
 
-        {/* [DESIGNER KIM] 4. Reservation Section (Right Side Priority) */}
+        {/* 🎫 [Designer Kim / 강의 적요] 티켓 및 예약 섹션
+             앱의 최종 목적인 '예약'을 명확하게 인지시키기 위해 별도의 카드 형태 섹션으로 분리하고,
+             주요 5대 플랫폼으로의 빠른 접근을 보장합니다. */}
         <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
           <SectionHeader title="Tickets & Reservation" icon={Ticket} />
           <div className="grid grid-cols-1 gap-2 mt-2">
