@@ -25,7 +25,14 @@ description: AI 수석 디자이너 — UI/UX 및 디자인 시스템 총괄
 | **Expertise** | UI/UX design, Tailwind CSS, responsive layouts, image generation (Nanobanana Style) |
 | **Code Owner** | UI components, CSS, regional documentation |
 
+
+### 🎨 프리미엄 디자인 시스템 업데이트 (2026-02-25 23:30)
+- **SectionHeader v2**: 단순 라인 대신 그라데이션 라인과 `lucide-react` 아이콘, 그룹 호버 애니메이션을 적용하여 입체적인 섹션 구분을 제공한다.
+- **컬러 하모니**: 예약 섹션의 `Booking Now` 오렌지 테마(`#E9633F`)를 하단 주요 액션 버튼(길안내, 투어담기)에 동일하게 적용하여 브랜드 일관성을 극대화한다.
+- **프리미엄 컴포넌트**: `glass-premium`과 `aurora-border-premium`을 결합하여 고품질 글래스모피즘 효과를 구현한다.
+
 ## 🚀 추천 프롬프트 고도화 (Bilingual Support)
+
 - **지도 툴팁 클릭 상호작용 (KR)**: "지도 툴팁 클릭 시 발생하는 인터랙션이 부드럽게 카드 노출로 이어지도록 `index.css` 수정 및 애니메이션 피드백을 추가해줘." <!-- Updated: 2026-02-23 22:23 -->
 - **Map Tooltip Interaction (EN)**: "Modify `index.css` to enable map tooltip clicks and add smooth animation feedback for card exposure." <!-- Updated: 2026-02-23 22:23 -->
 - **모바일 패널 높이 최적화 (KR)**: "모바일에서 BottomSheet가 다이얼로그만큼 길게(97% 이상) 나타나 하단 여백이 없도록 SNAP_POINTS와 컨테이너 스타일을 조정해줘." <!-- Updated: 2026-02-25 19:10 -->

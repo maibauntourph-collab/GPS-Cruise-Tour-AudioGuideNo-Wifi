@@ -1586,7 +1586,9 @@ export default function Home() {
                   setSelectedLandmark(null);
                   setShowCruisePort(false);
                   setIsCardMinimized(false);
+                  setForceShowCard(true); // [추가] 가시성 강제 활성화
                   setTemporaryShowCard(true);
+
                   // 명시적으로 목록 탭이 보이도록 강제 호출 로직이 UnifiedFloatingCard 내부에 있음
                 }}
                 data-testid="button-toggle-list"

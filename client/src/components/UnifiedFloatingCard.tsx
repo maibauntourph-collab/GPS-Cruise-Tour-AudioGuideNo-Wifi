@@ -150,7 +150,9 @@ interface UnifiedFloatingCardProps {
   // 🛰️ [Server Park] Minimal Transit UI props
   showMinimalTransitUI?: boolean;
   onToggleMinimalTransitUI?: () => void;
+  forceShowList?: boolean;
 }
+
 
 function getCruisePortTranslation(cruisePort: CruisePort | null | undefined, language: string, field: 'portName' | 'distanceFromCity' | 'recommendedDuration' | 'tips'): string {
   if (!cruisePort) return '';
