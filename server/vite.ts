@@ -61,6 +61,7 @@ export async function setupVite(app: Hono<any>, server: Server): Promise<ViteDev
 
     try {
       const clientTemplate = path.join(__dirname, "..", "client", "index.html");
+      console.log(`[Vite] Serving template from ${clientTemplate}`);
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,

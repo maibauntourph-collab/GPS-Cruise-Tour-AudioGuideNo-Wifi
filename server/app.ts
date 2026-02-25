@@ -139,11 +139,11 @@ app.get("/*", async (c, next) => {
     // [SPA Fallback] 
     // 파일이 없거나 자산이 아닌 일반 경로(예: /home, /admin 등)는 index.html 서빙
     // [Fix] Ensure /home etc. always returns index.html for React Router to handle
-    console.log(`[Worker] SPA Fallback triggered for: ${path}`);
+    console.log(`[Worker] SPA Fallback requested for: ${path}. workerEnv: ${!!workerEnv}`);
     const html = await getIndexHtml(c);
     if (html) return c.html(html);
 
-    console.error(`[Worker] PATH NOT FOUND (Fallback failed): ${path}`);
+    console.log(`[Worker] FALLBACK NEXT() for: ${path}`);
     return next();
 });
 
