@@ -151,6 +151,8 @@ interface UnifiedFloatingCardProps {
   showMinimalTransitUI?: boolean;
   onToggleMinimalTransitUI?: () => void;
   forceShowList?: boolean;
+  isCardMinimized?: boolean;
+  onToggleMinimized?: () => void;
 }
 
 
@@ -438,6 +440,36 @@ export function UnifiedFloatingCard({
                   <p className="text-sm text-slate-600 dark:text-slate-400">
                     {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
                   </p>
+
+                  <div className="grid grid-cols-3 gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D]"
+                      onClick={() => window.open(getWikiUrl(getTranslatedContent(selectedLandmark, selectedLanguage, 'name'), selectedLanguage), '_blank')}
+                    >
+                      <BookOpen className="w-4 h-4 text-blue-500" />
+                      <span className="text-[10px] font-bold">Wikipedia</span>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D]"
+                      onClick={() => window.open(getGoogleSearchUrl(`${getTranslatedContent(selectedLandmark, selectedLanguage, 'name')} tourism info`), '_blank')}
+                    >
+                      <Info className="w-4 h-4 text-green-500" />
+                      <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '관광정보' : 'Tourism'}</span>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D]"
+                      onClick={() => window.open(getGoogleSearchUrl(getTranslatedContent(selectedLandmark, selectedLanguage, 'name')), '_blank')}
+                    >
+                      <Search className="w-4 h-4 text-orange-500" />
+                      <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '구글검색' : 'Search'}</span>
+                    </Button>
+                  </div>
 
                   <div className="flex gap-2">
                     <Button size="sm" onClick={handlePlayAudio} className="flex-1 gap-2">

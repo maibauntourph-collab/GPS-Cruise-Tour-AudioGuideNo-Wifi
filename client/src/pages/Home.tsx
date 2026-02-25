@@ -611,12 +611,13 @@ export default function Home() {
     const isAnyStartupDialogOpen = !!(showStartupDialog || landingCityId || showMenu);
 
     if (hasCheckedForStartup && !isAnyStartupDialogOpen) {
-      console.log("🚑 [Bug Doctor] All startup/onboarding closed. Forcing Landmark List visibility.");
-      // 약간의 지연을 주어 지도 로딩과 겹치지 않게 합니다.
+      console.log("🚑 [Bug Doctor] All startup/onboarding closed. Forces Landmark List visibility.");
+      // 🚨 [교수님 지시사항] 웰컴 화면이 끝나면 반드시 '목록'이 보여야 합니다.
       const timer = setTimeout(() => {
-        setIsNavigationOnlyMode(false);
-        setForceShowCard(true);
-        setTemporaryShowCard(true);
+        setIsNavigationOnlyMode(false); // 네비게이션 전용 모드 해제
+        setForceShowCard(true); // 카드 강제 노출
+        setTemporaryShowCard(true); // 임시 노출 상태 활성화
+        setIsCardMinimized(false); // 최소화 해제
       }, 500);
       return () => clearTimeout(timer);
     }
@@ -2977,6 +2978,42 @@ export default function Home() {
               selectedLanguage={selectedLanguage}
             />
 
+            {/* 
+              ✅ [Bug Doctor] '목록' 플로팅 버튼 - 항상 표시 (독립 위치)
+              @에이? Designer Kim (디자인), Bug Doctor (로직)
+              
+              [교수님 지시사항]
+              - 목록 아이콘이 block 상태라 기능이 비활성화된 문제를 해결합니다.
+              - 이 버튼은 시뮬레이션 바와 분리된 독립 요소입니다.
+              - 랜딩 시 항상 화면 하단 중앙에 떠 있어야 합니다.
+              - 클릭하면 isNavigationOnlyMode를 false, forceShowCard를 true로 설정하여
+                UnifiedFloatingCard (목록 카드)가 즉시 나타납니다.
+              
+              [조건] 카드가 숨겨진 상태일 때만 이 버튼을 표시합니다.
+              (카드가 이미 보이면 버튼이 겹쳐 보이지 않아야 하기 때문)
+            */}
+            {(isNavigationOnlyMode || (!forceShowCard && !selectedLandmark)) && (
+              <div
+                className="absolute bottom-28 left-1/2 -translate-x-1/2 z-[1500] animate-in slide-in-from-bottom-4 fade-in duration-500"
+                style={{ pointerEvents: 'auto' }}
+              >
+                <Button
+                  className="h-12 px-6 rounded-full shadow-2xl bg-white text-slate-700 border-2 border-orange-200 hover:bg-orange-50 hover:border-orange-400 transition-all duration-300 flex items-center gap-3 active:scale-90 font-bold"
+                  onClick={() => {
+                    // [Bug Doctor] 목록 카드 강제 활성화
+                    console.log("🚑 [Bug Doctor] '목록' 버튼 클릭됨: isNavigationOnlyMode 해제, 카드 강제 노출");
+                    setIsNavigationOnlyMode(false);
+                    setForceShowCard(true);
+                    setIsCardMinimized(false);
+                    setTemporaryShowCard(true);
+                  }}
+                >
+                  <List className="w-5 h-5 text-orange-500" />
+                  <span className="text-sm">{selectedLanguage === 'ko' ? '명소 목록' : 'Landmark List'}</span>
+                </Button>
+              </div>
+            )}
+
             {/* 🛰️ [Server Park] 가상 투어 시뮬레이션 바 */}
             {isSimulationMode && (
               <div
@@ -3097,6 +3134,27 @@ export default function Home() {
                       }}
                     >
                       <X className="w-5 h-5" />
+                    </Button>
+                    {/* [목록 버튼: 교수님 지시사항 핵심] 
+              단순히 아이콘만 있는 것이 아니라 사용자가 '목록'임을 확실히 알 수 있도록 
+              텍스트와 함께 강제 노출 로직이 연결되어야 합니다.
+          */}
+                    <Button
+                      variant="secondary"
+                      className={`h-12 px-6 rounded-2xl shadow-2xl border-2 transition-all duration-300 flex items-center gap-3 active:scale-90 ${forceShowCard && !isCardMinimized
+                        ? 'bg-orange-500 text-white border-orange-400'
+                        : 'bg-white/90 backdrop-blur-md text-slate-700 border-white'
+                        }`}
+                      onClick={() => {
+                        setIsNavigationOnlyMode(false);
+                        setForceShowCard(true);
+                        setIsCardMinimized(false);
+                        setTemporaryShowCard(true);
+                        console.log("🚑 [Bug Doctor] '목록' 버튼 클릭: 가시성 강제 활성화");
+                      }}
+                    >
+                      <List className={`w-5 h-5 ${forceShowCard && !isCardMinimized ? 'animate-pulse' : ''}`} />
+                      <span className="font-bold text-sm">목록 (List)</span>
                     </Button>
                   </div>
                 </Card>

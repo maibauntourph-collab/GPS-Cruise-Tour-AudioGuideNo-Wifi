@@ -432,6 +432,43 @@ export default function LandmarkDetailDialog({
                       </div>
                     </div>
                   </div>
+
+                  {/* 🌐 [Bug Doctor] Information Buttons Added Exactly as Requested */}
+                  <div className="bg-white/60 rounded-3xl p-5 border border-white/80 space-y-4">
+                    <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
+                      <Globe className="w-4 h-4" />
+                      {selectedLanguage === 'ko' ? '추가 탐색' : 'Explore More'}
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-[#E67E22] hover:bg-orange-50/20 active:scale-95 transition-all"
+                        onClick={() => window.open(getWikiUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage), '_blank')}
+                      >
+                        <BookOpen className="w-4 h-4 text-blue-500" />
+                        <span className="text-[10px] font-bold">Wikipedia</span>
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-[#E67E22] hover:bg-orange-50/20 active:scale-95 transition-all"
+                        onClick={() => window.open(getGoogleSearchUrl(`${getTranslatedContent(landmark, selectedLanguage, 'name')} tourism info`), '_blank')}
+                      >
+                        <Info className="w-4 h-4 text-green-500" />
+                        <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '관광정보' : 'Tourism'}</span>
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-[#E67E22] hover:bg-orange-50/20 active:scale-95 transition-all"
+                        onClick={() => window.open(getGoogleSearchUrl(getTranslatedContent(landmark, selectedLanguage, 'name')), '_blank')}
+                      >
+                        <Search className="w-4 h-4 text-orange-500" />
+                        <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '구글검색' : 'Search'}</span>
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
 
@@ -446,24 +483,44 @@ export default function LandmarkDetailDialog({
                 </div>
 
                 <div className="px-4 space-y-3">
+                  {/* [Bug Doctor] Detailed Description placed below reservation title as requested */}
+                  <div className="p-4 bg-orange-50/30 rounded-2xl border border-orange-100 text-sm text-[#5D574D] leading-relaxed">
+                    <p className="font-medium">
+                      {selectedLanguage === 'ko'
+                        ? '기항지에서의 특별한 경험을 놓치지 마세요. 아래 제휴 플랫폼을 통해 현지 티켓 및 액티비티를 손쉽게 예약하실 수 있습니다.'
+                        : 'Don\'t miss out on special experiences. Best deals via our platform partners.'}
+                    </p>
+                  </div>
+
                   {[
-                    { name: 'Klook (Expert)', icon: <ExternalLink className="w-4 h-4 text-orange-400" />, url: getKlookUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
+                    { name: 'MyRealTrip (마이리얼트립)', icon: <ExternalLink className="w-4 h-4 text-[#2B96ED]" />, url: getMyRealTripUrl(getTranslatedContent(landmark, selectedLanguage, 'name')) },
+                    { name: 'Trip.com (트립닷컴)', icon: <ExternalLink className="w-4 h-4 text-blue-600" />, url: getTripUrl(getTranslatedContent(landmark, selectedLanguage, 'name')) },
+                    { name: 'Klook (클룩)', icon: <ExternalLink className="w-4 h-4 text-[#E9633F]" />, url: getKlookUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
                     { name: 'GetYourGuide', icon: <ExternalLink className="w-4 h-4 text-red-400" />, url: getGYGUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
-                    { name: 'Viator Inc (Tripadvisor)', icon: <ExternalLink className="w-4 h-4 text-blue-400" />, url: getViatorUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) }
+                    { name: 'Viator Inc', icon: <ExternalLink className="w-4 h-4 text-blue-400" />, url: getViatorUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) }
                   ].map((option, i) => (
                     <Button
                       key={i}
                       variant="outline"
-                      className={`w-full justify-between items-center h-16 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group ${i === 0 ? 'border-[#E67E22] bg-orange-50/30' : ''}`}
-                      onClick={() => window.open(option.url, '_blank')}
+                      className={`w-full justify-between items-center h-16 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group ${i === 0 ? 'border-[#2B96ED] bg-blue-50/10' : ''}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log(`🔗 [Link Diagnostic] Opening: ${option.name}, URL: ${option.url}`);
+                        const win = window.open(option.url, '_blank', 'noopener,noreferrer');
+                        if (!win) {
+                          console.error("🚑 [Bug Doctor] Popup blocked for " + option.name);
+                          alert(selectedLanguage === 'ko' ? '팝업 차단이 감지되었습니다. 허용 후 다시 시도해주세요.' : 'Popup blocked. Please allow popups and try again.');
+                        }
+                      }}
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-[#FCF9F6] flex items-center justify-center group-hover:bg-orange-50">
                           {option.icon}
                         </div>
-                        <span className="font-bold">{option.name}</span>
+                        <span className="font-bold text-xs sm:text-sm">{option.name}</span>
                       </div>
-                      <div className="bg-[#E67E22]/10 px-3 py-1 rounded-full text-[10px] font-bold text-[#E67E22]">Book Now</div>
+                      <div className={`px-3 py-1 rounded-full text-[10px] font-bold ${i === 0 ? 'bg-blue-100 text-[#2B96ED]' : 'bg-[#E67E22]/10 text-[#E67E22]'}`}>Book</div>
                     </Button>
                   ))}
                 </div>
