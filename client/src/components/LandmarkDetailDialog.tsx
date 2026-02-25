@@ -78,15 +78,16 @@ export default function LandmarkDetailDialog({
     onClose();
   };
 
-  const handlePlayAudio = async () => {
-    if (isPlaying && !isPaused) {
+  const handlePlayAudio = async (startIndex: number = -1) => {
+    if (isPlaying && !isPaused && startIndex === -1) {
       audioService.pause();
       setIsPaused(true);
       return;
     }
 
-    if (isPlaying && isPaused) {
-      audioService.resume();
+    if (isPlaying && isPaused && startIndex === -1) {
+      // Re-initialize from current index for better sync
+      handlePlayAudio(currentSentenceIndex);
       setIsPaused(false);
       return;
     }
@@ -97,6 +98,7 @@ export default function LandmarkDetailDialog({
 
     if (!textToPlay) return;
 
+    const useIndex = startIndex !== -1 ? startIndex : 0;
     const audioMode = audioService.getAudioMode();
 
     const onPlaybackEnd = () => {
@@ -112,7 +114,8 @@ export default function LandmarkDetailDialog({
         textToPlay,
         selectedLanguage,
         (index) => setCurrentSentenceIndex(index),
-        onPlaybackEnd
+        onPlaybackEnd,
+        useIndex
       );
       if (!success) {
         audioService.playSentences(
@@ -120,7 +123,8 @@ export default function LandmarkDetailDialog({
           selectedLanguage,
           playbackRate,
           (index) => setCurrentSentenceIndex(index),
-          onPlaybackEnd
+          onPlaybackEnd,
+          useIndex
         );
       }
     } else {
@@ -131,7 +135,8 @@ export default function LandmarkDetailDialog({
         selectedLanguage,
         playbackRate,
         (index) => setCurrentSentenceIndex(index),
-        onPlaybackEnd
+        onPlaybackEnd,
+        useIndex
       );
     }
   };
@@ -264,11 +269,12 @@ export default function LandmarkDetailDialog({
                     {activeSentences.length > 0 ? (
                       activeSentences.map((sentence: string, index: number) => {
                         const isCurrentSentence = currentSentenceIndex === index;
+                        const showHighlight = isCurrentSentence && (!isPaused || !isPlaying);
                         const isReadSentence = currentSentenceIndex > index && isPlaying;
                         return (
                           <span
                             key={index}
-                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${isCurrentSentence
+                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${showHighlight
                               ? 'bg-[#ccff00] font-bold shadow-sm text-black'
                               : isReadSentence
                                 ? 'opacity-60'
@@ -301,7 +307,7 @@ export default function LandmarkDetailDialog({
                     <div className="flex flex-col gap-4">
                       <div className="flex items-center gap-3">
                         <Button
-                          onClick={handlePlayAudio}
+                          onClick={() => handlePlayAudio()}
                           className="flex-1 h-14 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-2xl gap-3 font-bold shadow-lg shadow-orange-100 transition-all active:scale-95"
                         >
                           {isPlaying && !isPaused ? <Pause className="w-6 h-6 fill-white" /> : <Play className="w-6 h-6 fill-white" />}
@@ -326,6 +332,10 @@ export default function LandmarkDetailDialog({
                             onClick={() => {
                               setPlaybackRate(rate);
                               audioService.setRate(rate);
+                              if (isPlaying && !isPaused) {
+                                // Restart from current sentence with new rate
+                                handlePlayAudio(currentSentenceIndex);
+                              }
                             }}
                           >
                             {rate}x
@@ -371,13 +381,22 @@ export default function LandmarkDetailDialog({
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      {landmark.architect && (
-                        <div className="space-y-1">
-                          <p className="text-[10px] text-[#A8A294] font-bold uppercase">{selectedLanguage === 'ko' ? '건축가' : 'Architect'}</p>
-                          <p className="text-sm font-bold text-[#5D574D]">{landmark.architect}</p>
-                        </div>
-                      )}
+                      <div className="w-full h-24 rounded-2xl overflow-hidden border border-[#E0DBCF] shadow-sm">
+                        {landmark.photos?.[0] ? (
+                          <img src={landmark.photos[0]} alt="" className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-slate-100 flex items-center justify-center">
+                            <ImageIcon className="w-8 h-8 text-slate-300" />
+                          </div>
+                        )}
+                      </div>
                       <div className="space-y-1">
+                        {landmark.architect && (
+                          <>
+                            <p className="text-[10px] text-[#A8A294] font-bold uppercase">{selectedLanguage === 'ko' ? '건축가' : 'Architect'}</p>
+                            <p className="text-sm font-bold text-[#5D574D]">{landmark.architect}</p>
+                          </>
+                        )}
                         <p className="text-[10px] text-[#A8A294] font-bold uppercase">{selectedLanguage === 'ko' ? '좌표' : 'GPS'}</p>
                         <p className="text-[10px] font-mono font-bold text-[#3498DB]">{landmark.lat.toFixed(4)}, {landmark.lng.toFixed(4)}</p>
                       </div>
@@ -416,14 +435,14 @@ export default function LandmarkDetailDialog({
 
                 <div className="px-4 space-y-3">
                   {[
+                    { name: 'Klook (Expert)', icon: <ExternalLink className="w-4 h-4 text-orange-400" />, url: getKlookUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
                     { name: 'GetYourGuide', icon: <ExternalLink className="w-4 h-4 text-red-400" />, url: getGYGUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
-                    { name: 'Viator (Tripadvisor)', icon: <ExternalLink className="w-4 h-4 text-blue-400" />, url: getViatorUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
-                    { name: 'Klook (Expert)', icon: <ExternalLink className="w-4 h-4 text-orange-400" />, url: getKlookUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) }
+                    { name: 'Viator Inc (Tripadvisor)', icon: <ExternalLink className="w-4 h-4 text-blue-400" />, url: getViatorUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) }
                   ].map((option, i) => (
                     <Button
                       key={i}
                       variant="outline"
-                      className="w-full justify-between items-center h-16 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group"
+                      className={`w-full justify-between items-center h-16 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group ${i === 0 ? 'border-[#E67E22] bg-orange-50/30' : ''}`}
                       onClick={() => window.open(option.url, '_blank')}
                     >
                       <div className="flex items-center gap-3">

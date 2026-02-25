@@ -647,7 +647,8 @@ export class AudioService {
     language: string = 'en',
     rate: number = 1.0,
     onSentenceChange?: (index: number) => void,
-    onEnd?: () => void
+    onEnd?: () => void,
+    startIndex: number = 0
   ) {
     if (this.playbackTimer) {
       clearTimeout(this.playbackTimer);
@@ -658,15 +659,15 @@ export class AudioService {
     this.currentUtterance = null;
 
     this.sentences = AudioService.splitIntoSentences(text);
-    this.sentenceIndex = 0;
+    this.sentenceIndex = startIndex;
     this.onSentenceChange = onSentenceChange || null;
     this.onSentenceEnd = onEnd || null;
     this.isSentenceMode = true;
     this.currentRate = rate;
 
-    // Notify first sentence
+    // Notify starting sentence
     if (this.onSentenceChange) {
-      this.onSentenceChange(0);
+      this.onSentenceChange(this.sentenceIndex);
     }
 
     this.playNextSentence(language, rate);
@@ -758,7 +759,8 @@ export class AudioService {
     text: string,
     language: string = 'en',
     onSentenceChange?: (index: number) => void,
-    onEnd?: () => void
+    onEnd?: () => void,
+    startIndex: number = 0
   ): Promise<boolean> {
     this.stopOpenAISentences();
     this.stopMP3();
@@ -767,7 +769,7 @@ export class AudioService {
     this.openaiSentences = AudioService.splitIntoSentences(text);
     if (this.openaiSentences.length === 0) return false;
 
-    this.openaiSentenceIndex = 0;
+    this.openaiSentenceIndex = startIndex;
     this.openaiSentenceLanguage = language;
     this.openaiSentenceMode = true;
     this.onOpenAISentenceChange = onSentenceChange || null;
@@ -775,7 +777,7 @@ export class AudioService {
     this.openaiSessionId++;
 
     if (this.onOpenAISentenceChange) {
-      this.onOpenAISentenceChange(0);
+      this.onOpenAISentenceChange(this.openaiSentenceIndex);
     }
 
     this.playNextOpenAISentence(this.openaiSessionId);
