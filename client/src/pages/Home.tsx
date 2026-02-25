@@ -597,9 +597,16 @@ export default function Home() {
     showUpdateStats, showStartupDialog, showBackgroundGuideDialog, showSaveRouteDialog
   ]);
   const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
-  // 🚑 [Bug Doctor] 웰컴 온보딩 및 스타트업 다이얼로그 종료 시 리스트 자동 노출
-  // 학생 여러분, 사용자가 '확인'을 누르거나 다이얼로그가 닫히는 모든 경로에서
-  // 리스트가 자동으로 나타나도록 2중 안전장치를 마련합니다.
+  {/* 
+    ## [교수님 지시사항 반영 상세 적요]
+    1. @에이? (추천 에이전트 및 스킬)
+       - 추천 에이전트: **Bug Doctor (AI 프로그램 디버깅 전문가)**
+       - 사용 스킬: `bug_doctor`
+       - 관련 MCP: `sequential-thinking` (다이얼로그 상태 전이 추론)
+    2. 수정/추가 사유:
+       - 웰컴 온보딩이나 시티 선택 다이얼로그가 닫혔음에도 명소 리스트가 나타나지 않아 사용자가 헤매는 현상을 방지합니다.
+       - 모든 시작 다이얼로그가 종료되면 시스템이 자동으로 `setIsNavigationOnlyMode(false)`와 `setForceShowCard(true)`를 실행하여 지체 없이 콘텐츠를 제공하는 '2중 가시성 안전장치'입니다.
+  */}
   useEffect(() => {
     const isAnyStartupDialogOpen = !!(showStartupDialog || landingCityId || showMenu);
 
