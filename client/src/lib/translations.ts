@@ -276,7 +276,7 @@ const uiTranslations: Record<string, Record<string, string>> = {
     historicalInfo: '역사 정보',
     city: '도시',
     language: '언어',
-    audioGuide: '오디오 가이드',
+    audioGuide: '나레이션',
     offlineMode: '오프라인 모드',
     testAudio: '오디오 테스트',
     clearRoute: '경로 지우기',

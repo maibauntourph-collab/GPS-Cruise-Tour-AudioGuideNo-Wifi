@@ -38,7 +38,7 @@ export default function LandmarkDetailDialog({
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
   const [selectedGuideId, setSelectedGuideId] = useState<string | null>(null);
-  const [audioContentType, setAudioContentType] = useState<'summary' | 'narration'>('summary');
+  const [audioContentType, setAudioContentType] = useState<'summary' | 'narration'>('narration');
   const [activeTab, setActiveTab] = useState<string>('history');
 
   // Fetch guides for this landmark
@@ -216,7 +216,7 @@ export default function LandmarkDetailDialog({
             <div className="px-4 pt-4 bg-[#FCF9F6] border-b">
               <TabsList className="grid w-full grid-cols-3 bg-[#EFEBE6] rounded-xl p-1 h-11">
                 <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
-                  {selectedLanguage === 'ko' ? '역사/오디오' : 'History/Audio'}
+                  {selectedLanguage === 'ko' ? '역사/나레이션' : 'History/Narration'}
                 </TabsTrigger>
                 <TabsTrigger value="details" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '지도/정보' : 'Map/Info'}
@@ -269,7 +269,7 @@ export default function LandmarkDetailDialog({
                           <span
                             key={index}
                             className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${isCurrentSentence
-                              ? 'bg-orange-200/60 font-semibold shadow-sm text-[#D35400]'
+                              ? 'bg-[#ccff00] font-bold shadow-sm text-black'
                               : isReadSentence
                                 ? 'opacity-60'
                                 : 'bg-transparent'
@@ -293,7 +293,7 @@ export default function LandmarkDetailDialog({
                         <div className="w-9 h-9 rounded-full bg-[#E67E22] flex items-center justify-center text-white shadow-md">
                           <Headphones className="w-5 h-5" />
                         </div>
-                        <span className="font-bold text-[#E67E22] text-sm">{selectedLanguage === 'ko' ? '오디오 가이드' : 'Audio Guide'}</span>
+                        <span className="font-bold text-[#E67E22] text-sm">{selectedLanguage === 'ko' ? '나레이션 가이드' : 'Narration Guide'}</span>
                       </div>
                       <Badge variant="outline" className="text-[10px] border-[#E67E22] text-[#E67E22] bg-white px-2 h-5">{playbackRate}x Speed</Badge>
                     </div>
