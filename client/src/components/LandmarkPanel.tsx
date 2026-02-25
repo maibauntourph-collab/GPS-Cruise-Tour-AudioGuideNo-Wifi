@@ -228,12 +228,19 @@ export default function LandmarkPanel({
           )}
         </div>
 
-        {/* 📚 [Designer Kim / 강의 적요] 역사 및 나레이션 섹션
-             [교수님 지시사항 반영] 나레이션 정보와 오디오 가이드 버튼 이전에 외부 지식(Wiki 등)을 
-             먼저 탐색할 수 있도록 링크 그룹을 최상단으로 배치했습니다. */}
+        {/* 
+          ## [교수님 지시사항 반영 상세 적요]
+          1. @에이? (추천 에이전트 및 스킬)
+             - 추천 에이전트: **Designer Kim (AI 수석 디자이너)**
+             - 사용 스킬: `designer_kim`
+             - 관련 MCP: `sequential-thinking` (레이아웃 계층 최적화 추론)
+          2. 수정/추가 사유:
+             - 역사 탭에서 Wikipedia 등 지식 탐색 링크가 나레이션 재생 버튼보다 '위에' 있어야 한다는 교수님의 철학을 반영했습니다.
+             - 사용자가 지식을 먼저 습득하고 감성적인 나레이션을 듣는 '선학습 후감상'의 교육적 동선을 구현했습니다.
+        */}
         <div className="space-y-4 pt-2">
           {/* [교수님 지시 핵심] 나레이션/재생버튼 상단 링크 그룹 */}
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-2 px-1 mb-4">
             <Button
               variant="outline"
               size="sm"
