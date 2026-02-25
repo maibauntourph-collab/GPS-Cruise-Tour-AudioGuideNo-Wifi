@@ -153,14 +153,18 @@ export default function LandmarkPanel({
   };
 
   const SectionHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="flex items-center gap-2 mb-3 mt-6 group/header">
-      <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-orange-50 text-[#E9633F] group-hover/header:scale-110 transition-transform">
-        {Icon ? <Icon className="w-4 h-4" /> : <div className="w-2 h-2 bg-[#E9633F] rounded-[1px]" />}
+    <div className="flex items-center gap-3 mb-5 mt-8 group/header">
+      <div className="relative">
+        <div className="w-1.5 h-6 bg-gradient-to-b from-[#E9633F] to-[#ff8f70] rounded-full shadow-[0_0_10px_rgba(233,99,63,0.3)] transition-all group-hover/header:h-8" />
       </div>
-      <h3 className="font-bold text-[14px] text-[#444] tracking-tight">{title}</h3>
+      <div className="flex items-center gap-2">
+        {Icon && <div className="text-[#E9633F] opacity-80 transition-transform group-hover/header:scale-110"><Icon className="w-4.5 h-4.5" /></div>}
+        <h3 className="font-black text-sm text-[#333] tracking-tighter uppercase">{title}</h3>
+      </div>
       <div className="flex-1 h-[1px] bg-gradient-to-r from-gray-100 to-transparent ml-2" />
     </div>
   );
+
 
 
   const renderFullCard = () => (
