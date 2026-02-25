@@ -184,11 +184,11 @@ export default function LandmarkDetailDialog({
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogClose} modal={false}>
       <DialogContent
-        className="p-0 overflow-hidden flex flex-col border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-t-[32px] sm:rounded-[32px] bottom-0 sm:bottom-auto w-[100vw] sm:w-[90vw] md:w-[85vw] lg:w-[80vw] sm:max-w-4xl max-h-[90vh] sm:max-h-[92vh] no-overlay transition-all duration-300 ease-in-out"
+        className="p-0 overflow-hidden flex flex-col border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-t-[32px] sm:rounded-[32px] bottom-0 sm:bottom-auto w-[98vw] sm:w-[90vw] md:w-[85vw] lg:w-[80vw] sm:max-w-4xl h-[98vh] sm:h-auto sm:max-h-[92vh] no-overlay transition-all duration-300 ease-in-out left-1/2 -translate-x-1/2"
       >
         <div className="flex flex-col h-full overflow-hidden w-full max-w-full box-border">
-          {/* Header Section */}
-          <DialogHeader className="p-4 pb-3 border-b flex-shrink-0 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
+          {/* Header Section - Fixed at top */}
+          <DialogHeader className="p-4 pb-3 border-b shrink-0 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
             <DialogDescription className="sr-only">
               Detailed information about this landmark
             </DialogDescription>
@@ -205,7 +205,7 @@ export default function LandmarkDetailDialog({
                   <span className="line-clamp-1 opacity-80">{getTranslatedContent(landmark, selectedLanguage, 'description')}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 h-8">
                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={handleDialogClose}>
                   <RotateCcw className="w-4 h-4 text-[#A8A294]" />
                 </Button>
@@ -216,9 +216,9 @@ export default function LandmarkDetailDialog({
             </div>
           </DialogHeader>
 
-          {/* Navigation Tabs */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden">
-            <div className="px-4 pt-4 bg-[#FCF9F6] border-b">
+          {/* Navigation Tabs - Middle Content area should be scrollable */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden min-h-0">
+            <div className="px-4 pt-4 bg-[#FCF9F6] border-b shrink-0">
               <TabsList className="grid w-full grid-cols-3 bg-[#EFEBE6] rounded-xl p-1 h-11">
                 <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '역사/나레이션' : 'History/Narration'}
@@ -232,18 +232,17 @@ export default function LandmarkDetailDialog({
               </TabsList>
             </div>
 
-            <div className="flex-1 overflow-y-auto bg-[#FCF9F6] scroll-smooth">
-
+            <div className="flex-1 overflow-y-auto bg-[#FCF9F6] scroll-smooth custom-scrollbar">
               {/* History & Audio Tab */}
-              <TabsContent value="history" className="p-0 m-0 space-y-6 pb-24">
-                {/* Photo Gallery - Integration of Long-form element */}
+              <TabsContent value="history" className="p-0 m-0 space-y-6 pb-32">
+                {/* Photo Gallery */}
                 <div className="px-4 pt-6 space-y-2">
                   <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
                     <ImageIcon className="w-4 h-4" />
                     {selectedLanguage === 'ko' ? '대표 사진' : 'Featured Photos'}
                   </div>
                   <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-                    {(landmark?.photos || []).length > 0 ? (
+                    {(landmark.photos && landmark.photos.length > 0) ? (
                       landmark.photos.map((photo, idx) => (
                         <div key={idx} className="w-28 h-28 rounded-2xl bg-[#EFEBE6] flex-shrink-0 overflow-hidden border border-[#E0DBCF] shadow-sm">
                           <img src={photo} alt={`Photo ${idx}`} className="w-full h-full object-cover transition-transform hover:scale-110 duration-500" />
@@ -333,7 +332,6 @@ export default function LandmarkDetailDialog({
                               setPlaybackRate(rate);
                               audioService.setRate(rate);
                               if (isPlaying && !isPaused) {
-                                // Restart from current sentence with new rate
                                 handlePlayAudio(currentSentenceIndex);
                               }
                             }}
@@ -348,7 +346,7 @@ export default function LandmarkDetailDialog({
               </TabsContent>
 
               {/* Map & Detail Tab */}
-              <TabsContent value="details" className="p-0 m-0 space-y-6 pb-24">
+              <TabsContent value="details" className="p-0 m-0 space-y-6 pb-32">
                 {/* Location Map */}
                 <div className="px-4 pt-6 space-y-3">
                   <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
@@ -403,7 +401,7 @@ export default function LandmarkDetailDialog({
                     </div>
                   </div>
 
-                  {/* Operational Info (if applicable) */}
+                  {/* Operational Info */}
                   <div className="bg-white/60 rounded-3xl p-5 border border-white/80 space-y-3">
                     <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
                       <Clock className="w-4 h-4" />
@@ -424,7 +422,7 @@ export default function LandmarkDetailDialog({
               </TabsContent>
 
               {/* Booking & Ticket Tab */}
-              <TabsContent value="booking" className="p-0 m-0 space-y-6 pb-24">
+              <TabsContent value="booking" className="p-0 m-0 space-y-6 pb-32">
                 <div className="px-4 pt-6 text-center space-y-2">
                   <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#E67E22] shadow-sm">
                     <Ticket className="w-8 h-8" />
@@ -456,7 +454,6 @@ export default function LandmarkDetailDialog({
                   ))}
                 </div>
 
-                {/* Booking Notice */}
                 <div className="px-6 py-4">
                   <div className="p-4 rounded-2xl border border-blue-100 bg-blue-50/50 flex gap-3">
                     <Info className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
@@ -471,8 +468,8 @@ export default function LandmarkDetailDialog({
             </div>
           </Tabs>
 
-          {/* Sticky Footer - Persistent across all tabs */}
-          <div className="p-4 bg-white/90 backdrop-blur-xl border-t flex gap-3 h-22 items-center shrink-0 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+          {/* Sticky Footer - Always visible at bottom */}
+          <div className="p-4 bg-white/90 backdrop-blur-xl border-t shrink-0 flex gap-3 h-24 items-center shadow-[0_-10px_20px_rgba(0,0,0,0.02)] z-50">
             <Button
               onClick={() => onNavigate(landmark)}
               className="flex-1 h-14 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-2xl gap-2 font-bold shadow-xl shadow-orange-100 transition-all active:scale-[0.97]"

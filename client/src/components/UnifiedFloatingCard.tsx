@@ -479,8 +479,8 @@ export function UnifiedFloatingCard({
                     onChange={(e) => setLandmarkSearchQuery(e.target.value)}
                   />
                 </div>
-                <div className="flex-1 space-y-3">
-                  {filteredListLandmarks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map(({ landmark, distance }) => (
+                <div className="flex-1 space-y-3 overflow-y-auto pr-1">
+                  {filteredListLandmarks.map(({ landmark, distance }) => (
                     <div
                       key={landmark.id}
                       className="p-3 bg-white dark:bg-slate-800 rounded-xl border hover:shadow-md transition-all cursor-pointer flex items-center justify-between"
@@ -501,18 +501,6 @@ export function UnifiedFloatingCard({
                     </div>
                   ))}
                 </div>
-                {/* Pagination */}
-                {filteredListLandmarks.length > itemsPerPage && (
-                  <div className="flex items-center justify-between pt-2 border-t">
-                    <Button variant="ghost" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage(p => p - 1)}>
-                      <ChevronLeft className="w-4 h-4" />
-                    </Button>
-                    <span className="text-xs">{currentPage} / {Math.ceil(filteredListLandmarks.length / itemsPerPage)}</span>
-                    <Button variant="ghost" size="sm" disabled={currentPage === Math.ceil(filteredListLandmarks.length / itemsPerPage)} onClick={() => setCurrentPage(p => p + 1)}>
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
-                  </div>
-                )}
               </div>
             )}
 

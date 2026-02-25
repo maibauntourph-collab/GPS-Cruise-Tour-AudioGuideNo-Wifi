@@ -251,7 +251,7 @@ export default function Home() {
   const [isSearchingLocation, setIsSearchingLocation] = useState(false);
   const [searchedLocations, setSearchedLocations] = useState<Array<{ id: string; name: string; lat: number; lng: number }>>([]);
   const [showMenu, setShowMenu] = useState(false);
-  const [forceShowCard, setForceShowCard] = useState(false);
+  const [forceShowCard, setForceShowCard] = useState(true);
   const [isCardMinimized, setIsCardMinimized] = useState(false);
   const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
@@ -275,7 +275,7 @@ export default function Home() {
   // 1. isNavigationOnlyMode: 불필요한 설명을 끄고 지도에 집중하는 모드
   // 2. isCarNavZoomMode: 자동차 네비게이션처럼 초근접 줌을 활성화하는 모드
   // 3. simulationAudioSettings: 시뮬레이션 시 재생 관련 옵션
-  const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(true);
+  const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
   const [isCarNavZoomMode, setIsCarNavZoomMode] = useState(false);
   const [simulationAudioSettings, setSimulationAudioSettings] = useState({
     resumePlayback: true,    // 이전 위치에서 이어 듣기
@@ -1581,22 +1581,13 @@ export default function Home() {
                 size="sm"
                 className="h-7 gap-1 px-2"
                 onClick={() => {
-                  // 카드가 최소화되어있을 때 
-                  if (isCardMinimized) {
-                    // 목록표시 (크루즈터미널 정보별도 버튼으로)
-                    setShowCruisePort(false);
-                    setIsCardMinimized(false);
-                  } else {
-                    // 카드가 펼쳐있을 때 
-                    if (showCruisePort) {
-                      // 크루즈터미널 정보가 표시 중이면 목록표시
-                      setShowCruisePort(false);
-                    } else {
-                      // 목록표시 중이면 카드 최소화
-                      setIsCardMinimized(true);
-                    }
-                  }
+                  // [강의 노트] 사용자가 상단 '목록' 버튼을 누르면 
+                  // 현재 열려있는 상세 카드가 있다면 닫고(null), 명소 목록이 나오도록 합니다.
+                  setSelectedLandmark(null);
+                  setShowCruisePort(false);
+                  setIsCardMinimized(false);
                   setTemporaryShowCard(true);
+                  // 명시적으로 목록 탭이 보이도록 강제 호출 로직이 UnifiedFloatingCard 내부에 있음
                 }}
                 data-testid="button-toggle-list"
               >
