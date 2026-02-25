@@ -597,7 +597,23 @@ export default function Home() {
     showUpdateStats, showStartupDialog, showBackgroundGuideDialog, showSaveRouteDialog
   ]);
   const [savedTourData, setSavedTourData] = useState(() => getSavedTourData());
-  // [중요: isWelcomeHandled220부근에정의TDZ 방지를위해 사용 전에 선언]
+  // 🚑 [Bug Doctor] 웰컴 온보딩 및 스타트업 다이얼로그 종료 시 리스트 자동 노출
+  // 학생 여러분, 사용자가 '확인'을 누르거나 다이얼로그가 닫히는 모든 경로에서
+  // 리스트가 자동으로 나타나도록 2중 안전장치를 마련합니다.
+  useEffect(() => {
+    const isAnyStartupDialogOpen = !!(showStartupDialog || landingCityId || showMenu);
+
+    if (hasCheckedForStartup && !isAnyStartupDialogOpen) {
+      console.log("🚑 [Bug Doctor] All startup/onboarding closed. Forcing Landmark List visibility.");
+      // 약간의 지연을 주어 지도 로딩과 겹치지 않게 합니다.
+      const timer = setTimeout(() => {
+        setIsNavigationOnlyMode(false);
+        setForceShowCard(true);
+        setTemporaryShowCard(true);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [showStartupDialog, landingCityId, showMenu, hasCheckedForStartup]);
 
   // 🔮 [Dodari] 진입 InstallPrompt(웰컴)를 위한 짧은 대기 후 StartupDialog 호출 여부 결정
   // 🔮 [Dodari] 진입 InstallPrompt(웰컴) 완료 시 시퀀스 시작
