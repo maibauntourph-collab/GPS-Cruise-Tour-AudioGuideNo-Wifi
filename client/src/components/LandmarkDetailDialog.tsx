@@ -237,23 +237,35 @@ export default function LandmarkDetailDialog({
             <div className="flex-1 overflow-y-auto bg-[#FCF9F6] scroll-smooth custom-scrollbar">
               {/* History & Audio Tab */}
               <TabsContent value="history" className="p-0 m-0 space-y-6 pb-32">
-                {/* Photo Gallery */}
-                <div className="px-4 pt-6 space-y-2">
-                  <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                    <ImageIcon className="w-4 h-4" />
-                    {selectedLanguage === 'ko' ? '대표 사진' : 'Featured Photos'}
+                {/* 
+                  [교수님 지시사항 반영 상세 적요]
+                  1. @에이? (추천 에이전트 및 스킬)
+                     - 추천 에이전트: Designer Kim (AI 수석 디자이너)
+                     - 사용 스킬: `designer_kim` (UI 계층 구조 및 시각적 리듬 최적화)
+                  2. 디자인 의도:
+                     - '대표 사진' 섹션을 상단에 배치하여 시각적 몰입감을 먼저 제공합니다.
+                     - 스크롤 시 부드럽게 넘어가도록 `scrollbar-hide`와 `snap-x` 속성을 고려하였습니다.
+                */}
+                <div className="px-4 pt-6 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-[#E67E22] font-extrabold text-sm tracking-tight">
+                      <ImageIcon className="w-4.5 h-4.5" />
+                      {selectedLanguage === 'ko' ? '명소 갤러리' : 'Landmark Gallery'}
+                    </div>
+                    <span className="text-[10px] text-[#A8A294] font-bold bg-[#EFEBE6] px-2 py-0.5 rounded-full uppercase">Premium View</span>
                   </div>
-                  <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+
+                  <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide snap-marker">
                     {(landmark.photos && landmark.photos.length > 0) ? (
                       landmark.photos.map((photo, idx) => (
-                        <div key={idx} className="w-28 h-28 rounded-2xl bg-[#EFEBE6] flex-shrink-0 overflow-hidden border border-[#E0DBCF] shadow-sm">
-                          <img src={photo} alt={`Photo ${idx}`} className="w-full h-full object-cover transition-transform hover:scale-110 duration-500" />
+                        <div key={idx} className="w-32 h-32 rounded-[24px] bg-[#EFEBE6] flex-shrink-0 overflow-hidden border-2 border-white shadow-md transition-all hover:scale-105 active:scale-95 duration-300 group">
+                          <img src={photo} alt={`Photo ${idx}`} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-700" />
                         </div>
                       ))
                     ) : (
                       [1, 2, 3].map((i) => (
-                        <div key={i} className="w-28 h-28 rounded-2xl bg-[#EFEBE6] flex-shrink-0 flex items-center justify-center border border-[#E0DBCF]">
-                          <ImageIcon className="w-8 h-8 text-[#A8A294]" />
+                        <div key={i} className="w-32 h-32 rounded-[24px] bg-[#EFEBE6] flex-shrink-0 flex items-center justify-center border-2 border-dashed border-[#A8A294]/30">
+                          <ImageIcon className="w-10 h-10 text-[#A8A294]/40" />
                         </div>
                       ))
                     )}

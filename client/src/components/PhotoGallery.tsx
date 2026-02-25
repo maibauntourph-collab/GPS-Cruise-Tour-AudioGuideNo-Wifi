@@ -95,15 +95,37 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
             className="relative w-24 h-24 shrink-0 overflow-hidden rounded-2xl border border-gray-100 bg-gray-50/50 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E9633F]/50"
             data-testid={`button-photo-${index}`}
           >
-            {/* [Designer Kim] Skeleton UI with Pulse Effect */}
+            {/* 
+              ## [Designer Kim / 교수님 지시사항 적요]
+              1. @에이? (추천 에이전트 및 스킬)
+                 - 추천 에이전트: Designer Kim (AI 수석 디자이너)
+                 - 사용 스킬: `designer_kim` (프리미엄 스켈레톤 UI 디자인)
+              2. 디자인 포인트:
+                 - 단순한 단색 pulse가 아닌, 은은한 그라데이션과 고광택 효과를 주어 'Premium'한 느낌을 강조했습니다.
+                 - 로딩 중에도 사용자에게 '디자인된 공간'임을 인지시켜 이탈률을 줄이는 전략입니다.
+            */}
             <AnimatePresence>
               {!loadedIndices.has(index) && !errorIndices.has(index) && (
                 <motion.div
                   initial={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse flex items-center justify-center"
+                  className="absolute inset-0 bg-[#F5F2EE] overflow-hidden"
                 >
-                  <div className="w-8 h-8 rounded-full bg-white/20" />
+                  <motion.div
+                    animate={{
+                      x: ['-100%', '100%'],
+                      opacity: [0.3, 0.6, 0.3]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-white/40 backdrop-blur-sm border border-white/20 shadow-sm animate-pulse" />
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
