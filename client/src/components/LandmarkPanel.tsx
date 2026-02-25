@@ -303,10 +303,12 @@ export default function LandmarkPanel({
         </section>
 
         {/* 🎫 [Designer Kim / 강의 적요] 티켓 및 예약 섹션
-             앱의 최종 목적인 '예약'을 명확하게 인지시키기 위해 별도의 카드 형태 섹션으로 분리하고,
-             주요 5대 플랫폼으로의 빠른 접근을 보장합니다. */}
+             사용자가 티켓 정보를 확인하고 즉시 예약할 수 있도록 플랫폼 버튼과 상세 설명을 하나로 통합했습니다.
+             교수님의 요청에 따라 예약 버튼군 바로 하단에 상세 구매 가이드를 배치했습니다. */}
         <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
           <SectionHeader title="Tickets & Reservation" icon={Ticket} />
+
+          {/* 예약 플랫폼 버튼 그룹 */}
           <div className="grid grid-cols-1 gap-2 mt-2">
             {[
               { name: '마이리얼트립', query: '마이리얼트립' },
@@ -338,6 +340,17 @@ export default function LandmarkPanel({
                 </div>
               </button>
             ))}
+          </div>
+
+          {/* [교수님 요청 사항 핵심 반영] 티켓 구매를 위한 상세 정보 (Information Guide) */}
+          <div className="mt-6 p-5 bg-orange-50/30 rounded-2xl border border-orange-100/50">
+            <div className="flex items-center gap-2 mb-3">
+              <Info className="w-4 h-4 text-[#E9633F]" />
+              <span className="text-[12px] font-black text-[#E9633F] uppercase tracking-tighter">티켓 구매 상세 안내 (Purchase Guide)</span>
+            </div>
+            <p className="text-[13px] text-gray-600 leading-relaxed font-medium break-keep">
+              {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') || getTranslatedContent(landmark, selectedLanguage, 'description')}
+            </p>
           </div>
         </section>
 
