@@ -229,9 +229,49 @@ export default function LandmarkPanel({
         </div>
 
         {/* 📚 [Designer Kim / 강의 적요] 역사 및 나레이션 섹션
-             사용자가 현장의 깊이 있는 이야기를 들을 수 있도록 나레이션을 전면에 배치하고,
-             추가 정보(Wikipedia, 관광국 등)를 바로 하단에 배치하여 정보 탐색의 흐름을 끊지 않게 설계했습니다. */}
+             [교수님 지시사항 반영] 나레이션 정보와 오디오 가이드 버튼 이전에 외부 지식(Wiki 등)을 
+             먼저 탐색할 수 있도록 링크 그룹을 최상단으로 배치했습니다. */}
         <div className="space-y-4 pt-2">
+          {/* [교수님 지시 핵심] 나레이션/재생버튼 상단 링크 그룹 */}
+          <div className="grid grid-cols-3 gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-10 rounded-xl bg-gray-50/50 border-gray-100 text-gray-600 hover:text-[#E9633F] hover:bg-white hover:border-[#E9633F]/30 gap-2 transition-all shadow-sm"
+              onClick={() => {
+                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                window.open(`https://${selectedLanguage === 'ko' ? 'ko' : 'en'}.wikipedia.org/wiki/${encodeURIComponent(name)}`, '_blank');
+              }}
+            >
+              <Library className="w-3.5 h-3.5 text-[#E9633F]" />
+              <span className="text-[10px] font-bold">Wikipedia</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-10 rounded-xl bg-gray-50/50 border-gray-100 text-gray-600 hover:text-[#E9633F] hover:bg-white hover:border-[#E9633F]/30 gap-2 transition-all shadow-sm"
+              onClick={() => {
+                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                window.open(`http://www.turismoroma.it/search/node/${encodeURIComponent(name)}`, '_blank');
+              }}
+            >
+              <Globe className="w-3.5 h-3.5 text-blue-400" />
+              <span className="text-[10px] font-bold">Tourism</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-10 rounded-xl bg-gray-50/50 border-gray-100 text-gray-600 hover:text-[#E9633F] hover:bg-white hover:border-[#E9633F]/30 gap-2 transition-all shadow-sm"
+              onClick={() => {
+                const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(name)}`, '_blank');
+              }}
+            >
+              <Search className="w-3.5 h-3.5 text-indigo-400" />
+              <span className="text-[10px] font-bold">Search</span>
+            </Button>
+          </div>
+
           <div className="p-6 bg-[#1a1a1a] text-white rounded-[32px] shadow-xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#E9633F]/10 rounded-full -mr-16 -mt-16 blur-3xl" />
             <div className="flex items-center gap-2 mb-4">
@@ -247,46 +287,6 @@ export default function LandmarkPanel({
                   {landmark.historicalInfo}
                 </p>
               )}
-            </div>
-
-            {/* [교수님 요청 사항 반영] 나레이션 하단 외부 링크 그룹 */}
-            <div className="grid grid-cols-3 gap-2 mt-6 pt-6 border-t border-white/10">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white/80 gap-2"
-                onClick={() => {
-                  const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                  window.open(`https://${selectedLanguage === 'ko' ? 'ko' : 'en'}.wikipedia.org/wiki/${encodeURIComponent(name)}`, '_blank');
-                }}
-              >
-                <Library className="w-3.5 h-3.5" />
-                <span className="text-[10px] font-bold">Wikipedia</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white/80 gap-2"
-                onClick={() => {
-                  const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                  window.open(`http://www.turismoroma.it/search/node/${encodeURIComponent(name)}`, '_blank');
-                }}
-              >
-                <Globe className="w-3.5 h-3.5" />
-                <span className="text-[10px] font-bold">Tourism</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white/80 gap-2"
-                onClick={() => {
-                  const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                  window.open(`https://www.google.com/search?q=${encodeURIComponent(name)}`, '_blank');
-                }}
-              >
-                <Search className="w-3.5 h-3.5" />
-                <span className="text-[10px] font-bold">Search</span>
-              </Button>
             </div>
           </div>
         </div>
