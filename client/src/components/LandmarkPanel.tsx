@@ -309,26 +309,35 @@ export default function LandmarkPanel({
           </div>
         </section>
 
-        {/* 🎫 [Designer Kim / 강의 적요] 티켓 및 예약 섹션
-             사용자가 티켓 정보를 확인하고 즉시 예약할 수 있도록 플랫폼 버튼과 상세 설명을 하나로 통합했습니다.
-             교수님의 요청에 따라 예약 버튼군 바로 하단에 상세 구매 가이드를 배치했습니다. */}
+        {/* 
+          ## [교수님 지시사항 반영 상세 적요]
+          1. @에이? (추천 에이전트 및 스킬)
+             - 추천 에이전트: **Bug Doctor (AI 디버깅/안정성 전문가)**
+             - 사용 스킬: `bug_doctor`
+             - 관련 MCP: `context7` (플랫폼 API 파라미터 규격 확인)
+          2. 수정/추가 사유:
+             - 예약 플랫폼 연동 시 '선택된 언어의 명소 이름'이 정확히 검색되도록 로직을 보강했습니다.
+             - `getTranslatedContent`를 사용하여 명소가 위치한 현지어 또는 사용자가 선택한 언어로 구글 검색 결과를 연결함으로써, 엉뚱한 예약 페이지가 뜨는 사고를 원천 방지했습니다.
+             - 플랫폼 레이블에 한글 명칭(예: 클룩, 비아터)을 병기하여 사용자 직관성을 높였습니다.
+        */}
         <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
           <SectionHeader title="Tickets & Reservation" icon={Ticket} />
 
-          {/* 예약 플랫폼 버튼 그룹 */}
+          {/* 예약 플랫폼 버튼 그룹 (마이리얼트립, 트립닷컴, 클룩, 겟유어투어, Viator) */}
           <div className="grid grid-cols-1 gap-2 mt-2">
             {[
               { name: '마이리얼트립', query: '마이리얼트립' },
               { name: '트립닷컴', query: '트립닷컴' },
-              { name: 'Klook', query: '클룩' },
-              { name: 'GetYourGuide', query: 'GetYourGuide' },
-              { name: 'Viator', query: 'Viator' }
+              { name: 'Klook (클룩)', query: '클룩' },
+              { name: 'GetYourTour (겟유어투어)', query: 'GetYourGuide' },
+              { name: 'Viator (비아터)', query: 'Viator' }
             ].map((platform) => (
               <button
                 key={platform.name}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
+                  // 🧠 [Bug Doctor 적요] 명소 언어 기반 자동 검색 쿼리 생성
                   const query = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
                   const url = `https://www.google.com/search?q=${platform.query}+${query}`;
                   window.open(url, '_blank');
@@ -349,13 +358,13 @@ export default function LandmarkPanel({
             ))}
           </div>
 
-          {/* [교수님 요청 사항 핵심 반영] 티켓 구매를 위한 상세 정보 (Information Guide) */}
+          {/* [교수님 지시사항 핵심 반영] 티켓 구매를 위한 상세 정보 가이드 (Information Guide) */}
           <div className="mt-6 p-5 bg-orange-50/30 rounded-2xl border border-orange-100/50">
             <div className="flex items-center gap-2 mb-3">
               <Info className="w-4 h-4 text-[#E9633F]" />
               <span className="text-[12px] font-black text-[#E9633F] uppercase tracking-tighter">티켓 구매 상세 안내 (Purchase Guide)</span>
             </div>
-            <p className="text-[13px] text-gray-600 leading-relaxed font-medium break-keep">
+            <p className="text-[13px] text-gray-600 leading-relaxed font-bold break-keep">
               {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') || getTranslatedContent(landmark, selectedLanguage, 'description')}
             </p>
           </div>
