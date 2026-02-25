@@ -1582,14 +1582,15 @@ export default function Home() {
                 className="h-7 gap-1 px-2"
                 onClick={() => {
                   // [강의 노트] 사용자가 상단 '목록' 버튼을 누르면 
-                  // 현재 열려있는 상세 카드가 있다면 닫고(null), 명소 목록이 나오도록 합니다.
+                  // 1. 현재 열려있는 상세 카드가 있다면 닫고(null), 
+                  // 2. 가시성을 방해하는 내비게이션 전용 모드 등을 해제하여
+                  // 3. 명소 목록이 즉시 화면에 나타나도록 보장합니다.
                   setSelectedLandmark(null);
                   setShowCruisePort(false);
                   setIsCardMinimized(false);
-                  setForceShowCard(true); // [추가] 가시성 강제 활성화
+                  setIsNavigationOnlyMode(false); // [강제] 가시성 방해 요소 해제
+                  setForceShowCard(true); // [강제] 가시성 플래그 활성화
                   setTemporaryShowCard(true);
-
-                  // 명시적으로 목록 탭이 보이도록 강제 호출 로직이 UnifiedFloatingCard 내부에 있음
                 }}
                 data-testid="button-toggle-list"
               >
@@ -1603,6 +1604,7 @@ export default function Home() {
               <p>{selectedLanguage === 'ko' ? '명소 목록 표시/숨기기' : 'Show/Hide Landmark List'}</p>
             </TooltipContent>
           </Tooltip>
+
 
           {/* [?곸슂] ?꾩튂濡대룞 踰꾪듉 GPS ?꾩튂媛 ?덉쓣 ?뚮쭔 ?쒖떆 */}
           {position && (
