@@ -33,8 +33,8 @@ export default function LandmarkDetailDialog({
   isInTour = false,
   selectedLanguage = 'en'
 }: LandmarkDetailDialogProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
+  const [forceShowCard, setForceShowCard] = useState(true);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
   const [selectedGuideId, setSelectedGuideId] = useState<string | null>(null);
@@ -258,40 +258,8 @@ export default function LandmarkDetailDialog({
                   </div>
                 </div>
 
-                {/* History Content */}
-                <div className="px-5 space-y-3">
-                  <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                    <BookOpen className="w-4 h-4" />
-                    {selectedLanguage === 'ko' ? '역사적 정보' : 'Historical Insights'}
-                  </div>
-                  <div className="text-[15px] leading-relaxed text-[#5D574D] font-medium bg-white/40 p-4 rounded-2xl border border-white/60">
-                    {activeSentences.length > 0 ? (
-                      activeSentences.map((sentence: string, index: number) => {
-                        const isCurrentSentence = currentSentenceIndex === index;
-                        const showHighlight = isCurrentSentence && (!isPaused || !isPlaying);
-                        const isReadSentence = currentSentenceIndex > index && isPlaying;
-                        return (
-                          <span
-                            key={index}
-                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${showHighlight
-                              ? 'bg-[#ccff00] font-bold shadow-sm text-black'
-                              : isReadSentence
-                                ? 'opacity-60'
-                                : 'bg-transparent'
-                              }`}
-                          >
-                            {sentence}{' '}
-                          </span>
-                        );
-                      })
-                    ) : (
-                      getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')
-                    )}
-                  </div>
-                </div>
-
-                {/* Audio Box */}
-                <div className="px-4">
+                {/* Audio Box - Moved above history text per user request */}
+                <div className="px-4 pt-6">
                   <div className="rounded-2xl border border-[#FDEBD0] bg-orange-50/50 p-5 space-y-5 backdrop-blur-sm">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
@@ -341,6 +309,38 @@ export default function LandmarkDetailDialog({
                         ))}
                       </div>
                     </div>
+                  </div>
+                </div>
+
+                {/* History Content */}
+                <div className="px-5 space-y-3">
+                  <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
+                    <BookOpen className="w-4 h-4" />
+                    {selectedLanguage === 'ko' ? '역사적 정보' : 'Historical Insights'}
+                  </div>
+                  <div className="text-[15px] leading-relaxed text-[#5D574D] font-medium bg-white/40 p-4 rounded-2xl border border-white/60">
+                    {activeSentences.length > 0 ? (
+                      activeSentences.map((sentence: string, index: number) => {
+                        const isCurrentSentence = currentSentenceIndex === index;
+                        const showHighlight = isCurrentSentence && (!isPaused || !isPlaying);
+                        const isReadSentence = currentSentenceIndex > index && isPlaying;
+                        return (
+                          <span
+                            key={index}
+                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${showHighlight
+                              ? 'bg-[#ccff00] font-bold shadow-sm text-black'
+                              : isReadSentence
+                                ? 'opacity-60'
+                                : 'bg-transparent'
+                              }`}
+                          >
+                            {sentence}{' '}
+                          </span>
+                        );
+                      })
+                    ) : (
+                      getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')
+                    )}
                   </div>
                 </div>
               </TabsContent>
