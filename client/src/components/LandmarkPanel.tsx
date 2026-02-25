@@ -153,7 +153,7 @@ export default function LandmarkPanel({
   };
 
   const SectionHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="flex items-center gap-3 mb-5 mt-8 group/header">
+    <div className="flex items-center gap-3 mb-4 mt-6 group/header">
       <div className="relative">
         <div className="w-1.5 h-6 bg-gradient-to-b from-[#E9633F] to-[#ff8f70] rounded-full shadow-[0_0_10px_rgba(233,99,63,0.3)] transition-all group-hover/header:h-8" />
       </div>
@@ -228,54 +228,8 @@ export default function LandmarkPanel({
           )}
         </div>
 
-        {/* [DESIGNER KIM] 1. Reservation Section (Primary Action) */}
-        <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
-          <SectionHeader title="Reservation & Booking" icon={Ticket} />
-
-          <div className="grid grid-cols-1 gap-2 mt-2">
-            {[
-              { name: '마이리얼트립', query: '마이리얼트립' },
-              { name: '트립닷컴', query: '트립닷컴' },
-              { name: 'Klook', query: '클룩' },
-              { name: 'GetYourGuide', query: 'GetYourGuide' },
-              { name: 'Viator', query: 'Viator' }
-            ].map((platform) => (
-              <button
-                key={platform.name}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  const query = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
-                  const url = `https://www.google.com/search?q=${platform.query}+${query}`;
-                  console.log(`🚀 [Designer Kim] Opening ${platform.name}:`, url);
-                  window.open(url, '_blank');
-                }}
-                className="w-full h-12 bg-gray-50/30 hover:bg-white hover:border-[#E9633F]/30 hover:shadow-md border border-transparent rounded-xl px-4 flex items-center justify-between group transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm text-[#E9633F] group-hover:scale-110 transition-transform">
-                    <Ticket className="w-4 h-4" />
-                  </div>
-                  <span className="text-[13px] font-bold text-gray-700">{platform.name}</span>
-                </div>
-                <ExternalLink className="w-3.5 h-3.5 text-gray-300 group-hover:text-[#E9633F] transition-colors" />
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* [DESIGNER KIM] 2. Detailed Info & Narration */}
+        {/* [DESIGNER KIM] 2. History & Narration (With External Links) */}
         <div className="space-y-4 pt-2">
-          <div className="p-5 bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-100 shadow-sm">
-            <div className="flex items-center gap-2 mb-3">
-              <Info className="w-4 h-4 text-[#E9633F]" />
-              <span className="text-[14px] font-bold text-slate-800">상세 설명 (Introduction)</span>
-            </div>
-            <p className="text-[12.5px] text-slate-600 leading-relaxed pl-1">
-              {getTranslatedContent(landmark, selectedLanguage, 'description')}
-            </p>
-          </div>
-
           <div className="p-6 bg-[#1a1a1a] text-white rounded-[32px] shadow-xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#E9633F]/10 rounded-full -mr-16 -mt-16 blur-3xl" />
             <div className="flex items-center gap-2 mb-4">
@@ -292,8 +246,95 @@ export default function LandmarkPanel({
                 </p>
               )}
             </div>
+
+            {/* [PROFESSOR REQUEST] External Links Group below Narration */}
+            <div className="grid grid-cols-3 gap-2 mt-6 pt-6 border-t border-white/10">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white/80 gap-2"
+                onClick={() => {
+                  const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                  window.open(`https://${selectedLanguage === 'ko' ? 'ko' : 'en'}.wikipedia.org/wiki/${encodeURIComponent(name)}`, '_blank');
+                }}
+              >
+                <Library className="w-3.5 h-3.5" />
+                <span className="text-[10px] font-bold">Wikipedia</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white/80 gap-2"
+                onClick={() => {
+                  const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                  window.open(`http://www.turismoroma.it/search/node/${encodeURIComponent(name)}`, '_blank');
+                }}
+              >
+                <Globe className="w-3.5 h-3.5" />
+                <span className="text-[10px] font-bold">Tourism</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white/80 gap-2"
+                onClick={() => {
+                  const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                  window.open(`https://www.google.com/search?q=${encodeURIComponent(name)}`, '_blank');
+                }}
+              >
+                <Search className="w-3.5 h-3.5" />
+                <span className="text-[10px] font-bold">Search</span>
+              </Button>
+            </div>
           </div>
         </div>
+
+        {/* [DESIGNER KIM] 3. Detailed Info (After Narration) */}
+        <section className="pt-2">
+          <SectionHeader title="Detailed Information" icon={Info} />
+          <div className="p-5 bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-100 shadow-sm">
+            <p className="text-[13px] text-slate-600 leading-relaxed font-normal">
+              {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') || getTranslatedContent(landmark, selectedLanguage, 'description')}
+            </p>
+          </div>
+        </section>
+
+        {/* [DESIGNER KIM] 4. Reservation Section (Right Side Priority) */}
+        <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
+          <SectionHeader title="Tickets & Reservation" icon={Ticket} />
+          <div className="grid grid-cols-1 gap-2 mt-2">
+            {[
+              { name: '마이리얼트립', query: '마이리얼트립' },
+              { name: '트립닷컴', query: '트립닷컴' },
+              { name: 'Klook', query: '클룩' },
+              { name: 'GetYourGuide', query: 'GetYourGuide' },
+              { name: 'Viator', query: 'Viator' }
+            ].map((platform) => (
+              <button
+                key={platform.name}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  const query = encodeURIComponent(getTranslatedContent(landmark, selectedLanguage, 'name'));
+                  const url = `https://www.google.com/search?q=${platform.query}+${query}`;
+                  window.open(url, '_blank');
+                }}
+                className="w-full h-12 bg-gray-50/30 hover:bg-white hover:border-[#E9633F]/30 hover:shadow-md border border-transparent rounded-xl px-4 flex items-center justify-between group transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm text-[#E9633F] group-hover:scale-110 transition-transform">
+                    <Ticket className="w-4 h-4" />
+                  </div>
+                  <span className="text-[13px] font-bold text-gray-700">{platform.name}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold text-[#E9633F] opacity-0 group-hover:opacity-100 transition-opacity">Book Now</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-gray-300 group-hover:text-[#E9633F] transition-colors" />
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
 
         {/* [DESIGNER KIM] 3. Photos Section */}
         <section className="pt-4">
