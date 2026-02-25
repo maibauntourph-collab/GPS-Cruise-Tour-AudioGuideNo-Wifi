@@ -39,6 +39,7 @@ export default function LandmarkDetailDialog({
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
   const [selectedGuideId, setSelectedGuideId] = useState<string | null>(null);
   const [audioContentType, setAudioContentType] = useState<'summary' | 'narration'>('summary');
+  const [activeTab, setActiveTab] = useState<string>('history');
 
   // Fetch guides for this landmark
   const { data: guides = [] } = useQuery<DbLandmarkGuide[]>({
@@ -54,14 +55,6 @@ export default function LandmarkDetailDialog({
   const selectedGuide = useMemo(() => {
     return guides.find(g => g.id === selectedGuideId) || null;
   }, [guides, selectedGuideId]);
-
-  // Use guide's content if selected, otherwise fallback to landmark's content
-  const currentNarration = useMemo(() => {
-    if (selectedGuide) {
-      return getTranslatedContent(selectedGuide as any, selectedLanguage, 'narration');
-    }
-    return getTranslatedContent(landmark as any, selectedLanguage, 'narration');
-  }, [landmark, selectedGuide, selectedLanguage]);
 
   const currentDetailedDescription = useMemo(() => {
     if (selectedGuide) {
@@ -83,33 +76,6 @@ export default function LandmarkDetailDialog({
       audioService.stopMP3();
     }
     onClose();
-  };
-
-  const handleStripeCheckout = async () => {
-    if (!landmark) return;
-    try {
-      const response = await fetch('/api/payments/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          landmarkId: landmark.id,
-          creatorId: 'default-creator',
-          userId: 'test-user',
-          amount: 4.99,
-          name: `${getTranslatedContent(landmark, selectedLanguage, 'name')} 프리미엄 가이드`
-        }),
-      });
-
-      const { url, error } = await response.json();
-      if (url) {
-        window.location.href = url;
-      } else {
-        throw new Error(error || '세션 생성 실패');
-      }
-    } catch (error) {
-      console.error('[회계부장 긴급] 결제 시작 중 오류 발생:', error);
-      alert('결제 창을 열지 못했습니다. 잠시 후 다시 시도해주세요.');
-    }
   };
 
   const handlePlayAudio = async () => {
@@ -186,52 +152,19 @@ export default function LandmarkDetailDialog({
         document.body.style.pointerEvents = 'auto';
         document.body.style.overflow = 'auto';
         document.body.removeAttribute('data-scroll-locked');
-
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'style' || mutation.attributeName === 'data-scroll-locked') {
-              if (document.body.style.pointerEvents === 'none') {
-                document.body.style.pointerEvents = 'auto';
-              }
-              if (document.body.style.overflow === 'hidden') {
-                document.body.style.overflow = 'auto';
-              }
-              document.body.removeAttribute('data-scroll-locked');
-            }
-          });
-        });
-
-        observer.observe(document.body, { attributes: true });
-        return () => {
-          observer.disconnect();
-          document.body.style.pointerEvents = 'auto';
-          document.body.style.overflow = 'auto';
-        };
       }, 0);
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen && landmark && !isPlaying) {
+    if (isOpen && landmark && !isPlaying && activeTab === 'history') {
       const timer = setTimeout(() => {
         handlePlayAudio();
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [isOpen, landmark?.id]);
-
-  useEffect(() => {
-    if (isPlaying || isPaused) {
-      audioService.stopSentences();
-      audioService.stop();
-      audioService.stopMP3();
-      setIsPlaying(false);
-      setIsPaused(false);
-      setCurrentSentenceIndex(-1);
-      setTimeout(() => handlePlayAudio(), 100);
-    }
-  }, [audioContentType]);
+  }, [isOpen, landmark?.id, activeTab]);
 
   const activeSentences = useMemo(() => {
     const text = audioContentType === 'summary'
@@ -246,9 +179,10 @@ export default function LandmarkDetailDialog({
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogClose} modal={false}>
       <DialogContent
-        className="p-0 overflow-hidden flex flex-col border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-t-[32px] sm:rounded-[32px] bottom-0 sm:bottom-auto w-[100vw] sm:w-[95vw] sm:max-w-4xl max-h-[85vh] sm:max-h-[92vh] no-overlay"
+        className="p-0 overflow-hidden flex flex-col border-none shadow-2xl bg-white/95 backdrop-blur-md rounded-t-[32px] sm:rounded-[32px] bottom-0 sm:bottom-auto w-[100vw] sm:w-[90vw] md:w-[85vw] lg:w-[80vw] sm:max-w-4xl max-h-[90vh] sm:max-h-[92vh] no-overlay transition-all duration-300 ease-in-out"
       >
         <div className="flex flex-col h-full overflow-hidden w-full max-w-full box-border">
+          {/* Header Section */}
           <DialogHeader className="p-4 pb-3 border-b flex-shrink-0 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
             <DialogDescription className="sr-only">
               Detailed information about this landmark
@@ -259,223 +193,283 @@ export default function LandmarkDetailDialog({
                   {getTranslatedContent(landmark, selectedLanguage, 'name')}
                 </DialogTitle>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <span>{landmark?.category}</span>
+                  <Badge variant="outline" className="bg-[#FFF1EB] text-[#E67E22] border-[#FFE0D1] py-0 px-2 rounded-full text-[10px] font-bold">
+                    {landmark?.category}
+                  </Badge>
                   <span>•</span>
-                  <span className="line-clamp-1">{getTranslatedContent(landmark, selectedLanguage, 'description')}</span>
+                  <span className="line-clamp-1 opacity-80">{getTranslatedContent(landmark, selectedLanguage, 'description')}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1">
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={handleDialogClose}>
-                  <RotateCcw className="w-4 h-4" />
+              <div className="flex items-center gap-1.5">
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={handleDialogClose}>
+                  <RotateCcw className="w-4 h-4 text-[#A8A294]" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={handleDialogClose}>
-                  <RotateCcw className="w-4 h-4 rotate-90" />
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={handleDialogClose}>
+                  <Navigation className="w-4 h-4 text-[#E67E22]" />
                 </Button>
               </div>
             </div>
           </DialogHeader>
 
-          <div className="flex-1 overflow-y-auto bg-[#FCF9F6]">
-            {/* Action Badges */}
-            <div className="px-4 py-3 flex gap-2">
-              <Badge variant="outline" className="bg-[#FFF1EB] text-[#E67E22] border-[#FFE0D1] px-3 py-1 rounded-full text-xs font-bold">
-                {landmark?.category}
-              </Badge>
-              <Badge variant="outline" className="bg-[#F0F4FF] text-[#3498DB] border-[#D1E0FF] px-3 py-1 rounded-full text-xs font-bold flex gap-1 items-center">
-                <Globe className="w-3 h-3" />
-                1506
-              </Badge>
+          {/* Navigation Tabs */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden">
+            <div className="px-4 pt-4 bg-[#FCF9F6] border-b">
+              <TabsList className="grid w-full grid-cols-3 bg-[#EFEBE6] rounded-xl p-1 h-11">
+                <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
+                  {selectedLanguage === 'ko' ? '역사/오디오' : 'History/Audio'}
+                </TabsTrigger>
+                <TabsTrigger value="details" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
+                  {selectedLanguage === 'ko' ? '지도/정보' : 'Map/Info'}
+                </TabsTrigger>
+                <TabsTrigger value="booking" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
+                  {selectedLanguage === 'ko' ? '티켓/예약' : 'Book/Ticket'}
+                </TabsTrigger>
+              </TabsList>
             </div>
 
-            {/* Photos Section */}
-            <div className="px-4 py-2 space-y-2">
-              <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#E67E22]" />
-                {selectedLanguage === 'ko' ? '사진' : 'Photos'}
-              </div>
-              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-                {(landmark?.photos || []).map((photo, idx) => (
-                  <div key={idx} className="w-24 h-24 rounded-xl bg-[#EFEBE6] flex-shrink-0 overflow-hidden flex items-center justify-center border border-[#E0DBCF]">
-                    <img src={photo} alt={`Photo ${idx}`} className="w-full h-full object-cover" />
+            <div className="flex-1 overflow-y-auto bg-[#FCF9F6] scroll-smooth">
+
+              {/* History & Audio Tab */}
+              <TabsContent value="history" className="p-0 m-0 space-y-6 pb-24">
+                {/* Photo Gallery - Integration of Long-form element */}
+                <div className="px-4 pt-6 space-y-2">
+                  <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
+                    <ImageIcon className="w-4 h-4" />
+                    {selectedLanguage === 'ko' ? '대표 사진' : 'Featured Photos'}
                   </div>
-                ))}
-                {(!landmark?.photos || landmark.photos.length === 0) && (
-                  [1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-24 h-24 rounded-xl bg-[#EFEBE6] flex-shrink-0 flex items-center justify-center border border-[#E0DBCF]">
-                      <ImageIcon className="w-8 h-8 text-[#A8A294]" />
+                  <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                    {(landmark?.photos || []).length > 0 ? (
+                      landmark.photos.map((photo, idx) => (
+                        <div key={idx} className="w-28 h-28 rounded-2xl bg-[#EFEBE6] flex-shrink-0 overflow-hidden border border-[#E0DBCF] shadow-sm">
+                          <img src={photo} alt={`Photo ${idx}`} className="w-full h-full object-cover transition-transform hover:scale-110 duration-500" />
+                        </div>
+                      ))
+                    ) : (
+                      [1, 2, 3].map((i) => (
+                        <div key={i} className="w-28 h-28 rounded-2xl bg-[#EFEBE6] flex-shrink-0 flex items-center justify-center border border-[#E0DBCF]">
+                          <ImageIcon className="w-8 h-8 text-[#A8A294]" />
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                {/* History Content */}
+                <div className="px-5 space-y-3">
+                  <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
+                    <BookOpen className="w-4 h-4" />
+                    {selectedLanguage === 'ko' ? '역사적 정보' : 'Historical Insights'}
+                  </div>
+                  <div className="text-[15px] leading-relaxed text-[#5D574D] font-medium bg-white/40 p-4 rounded-2xl border border-white/60">
+                    {activeSentences.length > 0 ? (
+                      activeSentences.map((sentence: string, index: number) => {
+                        const isCurrentSentence = currentSentenceIndex === index;
+                        const isReadSentence = currentSentenceIndex > index && isPlaying;
+                        return (
+                          <span
+                            key={index}
+                            className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${isCurrentSentence
+                              ? 'bg-orange-200/60 font-semibold shadow-sm text-[#D35400]'
+                              : isReadSentence
+                                ? 'opacity-60'
+                                : 'bg-transparent'
+                              }`}
+                          >
+                            {sentence}{' '}
+                          </span>
+                        );
+                      })
+                    ) : (
+                      getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')
+                    )}
+                  </div>
+                </div>
+
+                {/* Audio Box */}
+                <div className="px-4">
+                  <div className="rounded-2xl border border-[#FDEBD0] bg-orange-50/50 p-5 space-y-5 backdrop-blur-sm">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-9 h-9 rounded-full bg-[#E67E22] flex items-center justify-center text-white shadow-md">
+                          <Headphones className="w-5 h-5" />
+                        </div>
+                        <span className="font-bold text-[#E67E22] text-sm">{selectedLanguage === 'ko' ? '오디오 가이드' : 'Audio Guide'}</span>
+                      </div>
+                      <Badge variant="outline" className="text-[10px] border-[#E67E22] text-[#E67E22] bg-white px-2 h-5">{playbackRate}x Speed</Badge>
                     </div>
-                  ))
-                )}
-              </div>
-            </div>
 
-            {/* Location Map Section */}
-            <div className="px-4 py-4 space-y-2">
-              <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#E67E22]" />
-                {selectedLanguage === 'ko' ? '위치' : 'Location'}
-              </div>
-              <div
-                className="w-full h-24 rounded-xl relative overflow-hidden bg-[#F0F4ED] border border-[#D5E0D1] cursor-pointer"
-                onClick={() => window.open(`https://www.google.com/maps?q=${landmark.lat},${landmark.lng}`, '_blank')}
-              >
-                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#34A853 0.5px, transparent 0.5px)', backgroundSize: '10px 10px' }} />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-6 h-6 bg-[#EA4335] rounded-full flex items-center justify-center shadow-lg">
-                    <MapPin className="w-4 h-4 text-white" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Content Section */}
-            <div className="px-4 py-2 space-y-4">
-              <div className="space-y-2">
-                <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#E67E22]" />
-                  {selectedLanguage === 'ko' ? '카테고리' : 'Category'}
-                </div>
-                <p className="text-sm leading-relaxed text-[#5D574D]">
-                  {getTranslatedContent(landmark, selectedLanguage, 'description')}
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#E67E22]" />
-                  {selectedLanguage === 'ko' ? '역사적 정보' : 'Historical Info'}
-                </div>
-                <div className="text-sm leading-relaxed text-[#5D574D]">
-                  {activeSentences.length > 0 ? (
-                    activeSentences.map((sentence: string, index: number) => {
-                      const isCurrentSentence = currentSentenceIndex === index;
-                      const isReadSentence = currentSentenceIndex > index && isPlaying;
-                      return (
-                        <span
-                          key={index}
-                          className={`inline rounded-sm px-0.5 transition-all duration-300 ease-in-out ${isCurrentSentence
-                            ? 'bg-yellow-300/50 font-medium shadow-sm'
-                            : isReadSentence
-                              ? 'bg-green-300/30'
-                              : 'bg-transparent'
-                            }`}
+                    <div className="flex flex-col gap-4">
+                      <div className="flex items-center gap-3">
+                        <Button
+                          onClick={handlePlayAudio}
+                          className="flex-1 h-14 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-2xl gap-3 font-bold shadow-lg shadow-orange-100 transition-all active:scale-95"
                         >
-                          {sentence}{' '}
-                        </span>
-                      );
-                    })
-                  ) : (
-                    getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')
-                  )}
-                </div>
-              </div>
+                          {isPlaying && !isPaused ? <Pause className="w-6 h-6 fill-white" /> : <Play className="w-6 h-6 fill-white" />}
+                          <span className="text-base">{selectedLanguage === 'ko' ? (isPlaying && !isPaused ? '일시정지' : '재생 시작') : (isPlaying && !isPaused ? 'Pause' : 'Start Play')}</span>
+                        </Button>
+                        <Button
+                          onClick={handleRestartAudio}
+                          variant="ghost"
+                          size="icon"
+                          className="h-14 w-14 rounded-2xl bg-white border border-[#FDEBD0] text-[#E67E22] shadow-sm"
+                        >
+                          <RotateCcw className="w-6 h-6" />
+                        </Button>
+                      </div>
 
-              {landmark.architect && (
-                <div className="space-y-2">
+                      <div className="flex gap-2 justify-between">
+                        {[0.8, 1.0, 1.2, 1.5, 2.0].map((rate) => (
+                          <Button
+                            key={rate}
+                            variant="outline"
+                            className={`flex-1 h-9 text-[11px] font-bold rounded-xl border-[#EFEBE6] transition-all ${playbackRate === rate ? 'bg-[#E67E22] text-white border-[#E67E22] shadow-md' : 'bg-white text-[#A8A294]'}`}
+                            onClick={() => {
+                              setPlaybackRate(rate);
+                              audioService.setRate(rate);
+                            }}
+                          >
+                            {rate}x
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+
+              {/* Map & Detail Tab */}
+              <TabsContent value="details" className="p-0 m-0 space-y-6 pb-24">
+                {/* Location Map */}
+                <div className="px-4 pt-6 space-y-3">
                   <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#E67E22]" />
-                    {selectedLanguage === 'ko' ? '건축가' : 'Architect'}
+                    <MapPinned className="w-4 h-4" />
+                    {selectedLanguage === 'ko' ? '실시간 위치' : 'Live Location'}
                   </div>
-                  <p className="text-sm font-medium text-[#4A90E2]">
-                    {landmark.architect}
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Audio Box */}
-            <div className="px-4 py-6">
-              <div className="rounded-2xl border border-[#FDEBD0] bg-[#FFF9F2] p-4 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#E67E22]" />
-                    {selectedLanguage === 'ko' ? '상세 정보' : 'Detailed Info'}
-                  </div>
-                  <span className="text-[10px] text-[#A8A294] font-mono">{playbackRate}x</span>
-                </div>
-
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <Button
-                      onClick={handlePlayAudio}
-                      className="h-12 w-32 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-xl gap-2 font-bold shadow-lg"
-                    >
-                      {isPlaying && !isPaused ? <Pause className="w-5 h-5 fill-white" /> : <Play className="w-5 h-5 fill-white" />}
-                      {selectedLanguage === 'ko' ? (isPlaying && !isPaused ? '일시정지' : '재생') : (isPlaying && !isPaused ? 'Pause' : 'Play')}
-                    </Button>
-                    <Button
-                      onClick={handleRestartAudio}
-                      variant="ghost"
-                      size="icon"
-                      className="h-10 w-10 text-[#E67E22]"
-                    >
-                      <RotateCcw className="w-5 h-5" />
-                    </Button>
-                  </div>
-
-                  <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-hide">
-                    {[0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map((rate) => (
-                      <Button
-                        key={rate}
-                        variant="outline"
-                        size="sm"
-                        className={`min-w-[40px] h-7 text-[10px] p-0 rounded-md border-[#EFEBE6] ${playbackRate === rate ? 'bg-[#E67E22] text-white border-[#E67E22]' : 'bg-white text-[#A8A294]'}`}
-                        onClick={() => {
-                          setPlaybackRate(rate);
-                          audioService.setRate(rate);
-                        }}
-                      >
-                        {rate}x
-                      </Button>
-                    ))}
+                  <div
+                    className="w-full h-40 rounded-3xl relative overflow-hidden bg-white border-2 border-white shadow-xl cursor-pointer transition-transform active:scale-[0.98]"
+                    onClick={() => window.open(`https://www.google.com/maps?q=${landmark.lat},${landmark.lng}`, '_blank')}
+                  >
+                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#34A853 1px, transparent 1px)', backgroundSize: '15px 15px' }} />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                      <div className="relative">
+                        <div className="absolute -inset-4 bg-red-400/20 rounded-full animate-ping" />
+                        <div className="w-10 h-10 bg-[#EA4335] rounded-full flex items-center justify-center shadow-lg border-2 border-white relative">
+                          <MapPin className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-bold text-[#EA4335] bg-white px-2 py-0.5 rounded-full shadow-sm">View on Google Maps</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Ticket Booking */}
-            <div className="px-4 pb-24">
-              <div className="rounded-2xl border border-[#FDEBD0] bg-[#FFF9F2] p-4 space-y-4">
-                <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#E67E22]" />
-                  {selectedLanguage === 'ko' ? '티켓 예약' : 'Book Tickets'}
+                {/* Technical/Architect Info */}
+                <div className="px-4 space-y-4">
+                  <div className="bg-white/60 rounded-3xl p-5 border border-white/80 space-y-4">
+                    <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm border-b border-orange-100 pb-2">
+                      <LandmarkIcon className="w-4 h-4" />
+                      {selectedLanguage === 'ko' ? '건축 정보' : 'Architecture'}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      {landmark.architect && (
+                        <div className="space-y-1">
+                          <p className="text-[10px] text-[#A8A294] font-bold uppercase">{selectedLanguage === 'ko' ? '건축가' : 'Architect'}</p>
+                          <p className="text-sm font-bold text-[#5D574D]">{landmark.architect}</p>
+                        </div>
+                      )}
+                      <div className="space-y-1">
+                        <p className="text-[10px] text-[#A8A294] font-bold uppercase">{selectedLanguage === 'ko' ? '좌표' : 'GPS'}</p>
+                        <p className="text-[10px] font-mono font-bold text-[#3498DB]">{landmark.lat.toFixed(4)}, {landmark.lng.toFixed(4)}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Operational Info (if applicable) */}
+                  <div className="bg-white/60 rounded-3xl p-5 border border-white/80 space-y-3">
+                    <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-sm">
+                      <Clock className="w-4 h-4" />
+                      {selectedLanguage === 'ko' ? '운용 정보' : 'Operation'}
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-[#A8A294]">{selectedLanguage === 'ko' ? '운영 시간' : 'Hours'}</span>
+                        <span className="font-bold text-[#5D574D]">{landmark.openingHours || 'Sunrise - Sunset'}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-[#A8A294]">{selectedLanguage === 'ko' ? '입장료' : 'Entry Fee'}</span>
+                        <span className="font-bold text-[#E67E22]">{landmark.priceRange || 'Contact local operator'}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+
+              {/* Booking & Ticket Tab */}
+              <TabsContent value="booking" className="p-0 m-0 space-y-6 pb-24">
+                <div className="px-4 pt-6 text-center space-y-2">
+                  <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#E67E22] shadow-sm">
+                    <Ticket className="w-8 h-8" />
+                  </div>
+                  <h4 className="font-bold text-lg text-[#5D574D]">{selectedLanguage === 'ko' ? '티켓 및 액티비티' : 'Tickets & Activities'}</h4>
+                  <p className="text-xs text-[#A8A294] px-4 whitespace-nowrap">{selectedLanguage === 'ko' ? '플랫폼 파트너를 통한 최저가 예약' : 'Best deals via our platform partners'}</p>
                 </div>
 
-                <div className="space-y-2">
+                <div className="px-4 space-y-3">
                   {[
-                    { name: 'GetYourGuide에서 예약', url: getGYGUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
-                    { name: 'Viator에서 예약', url: getViatorUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
-                    { name: 'Klook에서 예약', url: getKlookUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) }
+                    { name: 'GetYourGuide', icon: <ExternalLink className="w-4 h-4 text-red-400" />, url: getGYGUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
+                    { name: 'Viator (Tripadvisor)', icon: <ExternalLink className="w-4 h-4 text-blue-400" />, url: getViatorUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
+                    { name: 'Klook (Expert)', icon: <ExternalLink className="w-4 h-4 text-orange-400" />, url: getKlookUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) }
                   ].map((option, i) => (
                     <Button
                       key={i}
                       variant="outline"
-                      className="w-full justify-start gap-3 h-12 bg-white border-[#EFEBE6] text-[#5D574D] rounded-xl hover:bg-[#FCF9F6] text-sm font-medium"
+                      className="w-full justify-between items-center h-16 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group"
                       onClick={() => window.open(option.url, '_blank')}
                     >
-                      <ExternalLink className="w-4 h-4 text-[#A8A294]" />
-                      {option.name}
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[#FCF9F6] flex items-center justify-center group-hover:bg-orange-50">
+                          {option.icon}
+                        </div>
+                        <span className="font-bold">{option.name}</span>
+                      </div>
+                      <div className="bg-[#E67E22]/10 px-3 py-1 rounded-full text-[10px] font-bold text-[#E67E22]">Book Now</div>
                     </Button>
                   ))}
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <div className="p-4 bg-white/80 backdrop-blur-md border-t flex gap-3 h-20 items-center shrink-0">
+                {/* Booking Notice */}
+                <div className="px-6 py-4">
+                  <div className="p-4 rounded-2xl border border-blue-100 bg-blue-50/50 flex gap-3">
+                    <Info className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                    <p className="text-[10px] text-blue-600/80 leading-normal">
+                      {selectedLanguage === 'ko'
+                        ? '예약 시 파트너사로부터 소정의 수수료를 지급받을 수 있으며, 이는 투어 콘텐츠 개발에 사용됩니다.'
+                        : 'Booking via these links helps support our content development through small affiliate commissions at no extra cost to you.'}
+                    </p>
+                  </div>
+                </div>
+              </TabsContent>
+            </div>
+          </Tabs>
+
+          {/* Sticky Footer - Persistent across all tabs */}
+          <div className="p-4 bg-white/90 backdrop-blur-xl border-t flex gap-3 h-22 items-center shrink-0 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
             <Button
               onClick={() => onNavigate(landmark)}
-              className="flex-1 h-12 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-xl gap-2 font-bold shadow-lg shadow-orange-200"
+              className="flex-1 h-14 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-2xl gap-2 font-bold shadow-xl shadow-orange-100 transition-all active:scale-[0.97]"
             >
               <Navigation className="w-5 h-5" />
-              {selectedLanguage === 'ko' ? '길 안내' : 'Directions'}
+              <span className="text-base">{selectedLanguage === 'ko' ? '길 안내 시작' : 'Get Directions'}</span>
             </Button>
             <Button
               onClick={() => onAddToTour?.(landmark)}
               variant="outline"
-              className="flex-1 h-12 border-[#EFEBE6] text-[#5D574D] rounded-xl font-bold hover:bg-[#FCF9F6]"
+              className="flex-[0.6] h-14 border-2 border-[#EFEBE6] text-[#5D574D] rounded-2xl font-bold bg-white hover:bg-[#FCF9F6] transition-all active:scale-[0.97]"
             >
-              + {selectedLanguage === 'ko' ? '투어 추가' : 'Add to Tour'}
+              <div className="flex flex-col items-center">
+                <span className="text-lg leading-tight">+</span>
+                <span className="text-[10px] uppercase font-black">{selectedLanguage === 'ko' ? '투어 담기' : 'Add to Tour'}</span>
+              </div>
             </Button>
           </div>
         </div>
