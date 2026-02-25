@@ -1605,16 +1605,18 @@ export default function Home() {
                 size="sm"
                 className="h-7 gap-1 px-2"
                 onClick={() => {
-                  // [강의 노트] 사용자가 상단 '목록' 버튼을 누르면 
-                  // 1. 현재 열려있는 상세 카드가 있다면 닫고(null), 
-                  // 2. 가시성을 방해하는 내비게이션 전용 모드 등을 해제하여
-                  // 3. 명소 목록이 즉시 화면에 나타나도록 보장합니다.
+                  // [Bug Doctor 2026-02-26] 목록 뺄킼 클릭 시 카드 강제 표시
+                  // 1. 상세 커드 닫기
                   setSelectedLandmark(null);
                   setShowCruisePort(false);
+                  // 2. 가시성 방해 요소 전샀 해제
                   setIsCardMinimized(false);
-                  setIsNavigationOnlyMode(false); // [강제] 가시성 방해 요소 해제
-                  setForceShowCard(true); // [강제] 가시성 플래그 활성화
+                  setIsNavigationOnlyMode(false);
+                  // 3. [핵심] 카드 렌더링 플래그 사용
+                  setForceShowCard(true);
                   setTemporaryShowCard(true);
+                  // 4. 브라우저에서 탭이 list로 이동하도록 컬스텀 이벤트
+                  window.dispatchEvent(new CustomEvent('force-show-list-tab'));
                 }}
                 data-testid="button-toggle-list"
               >

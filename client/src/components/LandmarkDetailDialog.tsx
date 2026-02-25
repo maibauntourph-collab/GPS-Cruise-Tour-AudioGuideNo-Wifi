@@ -80,7 +80,12 @@ export default function LandmarkDetailDialog({
     onClose();
   };
 
-  const handlePlayAudio = async (startIndex: number = -1) => {
+  // [Bug Doctor] rateOverride: 속도 버튼 클릭 시 state 갱신 전에 직접 rate 전달용
+  // 이렇게 하면 setPlaybackRate 비동기 문제 없이 즉시 해당 속도로 재생됨.
+  const handlePlayAudio = async (startIndex: number = -1, rateOverride?: number) => {
+    // [적요] rateOverride가 있으면 그걸 사용, 없으면 현재 state 값 사용
+    const effectiveRate = rateOverride ?? playbackRate;
+
     if (isPlaying && !isPaused && startIndex === -1) {
       audioService.pause();
       setIsPaused(true);
@@ -88,7 +93,6 @@ export default function LandmarkDetailDialog({
     }
 
     if (isPlaying && isPaused && startIndex === -1) {
-      // Re-initialize from current index for better sync
       handlePlayAudio(currentSentenceIndex);
       setIsPaused(false);
       return;
@@ -120,10 +124,11 @@ export default function LandmarkDetailDialog({
         useIndex
       );
       if (!success) {
+        // [적요] openai 실패 시 TTS fallback - effectiveRate 사용
         audioService.playSentences(
           textToPlay,
           selectedLanguage,
-          playbackRate,
+          effectiveRate,
           (index) => setCurrentSentenceIndex(index),
           onPlaybackEnd,
           useIndex
@@ -132,10 +137,11 @@ export default function LandmarkDetailDialog({
     } else {
       setIsPlaying(true);
       setIsPaused(false);
+      // [Bug Doctor] playbackRate → effectiveRate 로 교체: 즉시 반영
       audioService.playSentences(
         textToPlay,
         selectedLanguage,
-        playbackRate,
+        effectiveRate,
         (index) => setCurrentSentenceIndex(index),
         onPlaybackEnd,
         useIndex
@@ -311,10 +317,14 @@ export default function LandmarkDetailDialog({
                             variant="outline"
                             className={`flex-1 h-9 text-[11px] font-bold rounded-xl border-[#EFEBE6] transition-all ${playbackRate === rate ? 'bg-[#E67E22] text-white border-[#E67E22] shadow-md' : 'bg-white text-[#A8A294]'}`}
                             onClick={() => {
+                              // [Bug Doctor] rate를 직접 전달 → state 비동기 문제 없이 즉시 적용
+                              // [적요] setPlaybackRate는 비동기이므로 handlePlayAudio에
+                              // rate를 직접 넘겨서 effectiveRate로 바로 사용하게 함
                               setPlaybackRate(rate);
                               audioService.setRate(rate);
                               if (isPlaying && !isPaused) {
-                                handlePlayAudio(currentSentenceIndex);
+                                // 중요: rate를 2번째 인자로 직접 전달!
+                                handlePlayAudio(currentSentenceIndex, rate);
                               }
                             }}
                           >
@@ -355,6 +365,67 @@ export default function LandmarkDetailDialog({
                     ) : (
                       getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')
                     )}
+                  </div>
+                </div>
+
+                {/* ✅ [Bug Doctor + Designer Kim] 역사 탭 하단 더 알아보기 링크
+                    @에이? Bug Doctor (로직), Designer Kim (UI)
+                    [적요] 나레이션 완료 후 사용자가 외부에서 추가 정보를 탐색할 수 있도록
+                    Wikipedia / 관광정보 / Google 검색 3개 버튼을 3열 그리드로 제공.
+                    getWikiUrl · getGoogleSearchUrl 은 affiliateConfig.ts에 정의됨.
+                */}
+                <div className="px-4 pb-8 space-y-2">
+                  <div className="flex items-center gap-1.5 text-[#E67E22] font-bold text-xs">
+                    <Globe className="w-3.5 h-3.5" />
+                    {selectedLanguage === 'ko' ? '더 알아보기' : 'Explore More'}
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+
+                    {/* Wikipedia 버튼 */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-blue-400 hover:bg-blue-50 transition-all active:scale-95"
+                      onClick={() => {
+                        const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                        const win = window.open(getWikiUrl(name, selectedLanguage), '_blank', 'noopener,noreferrer');
+                        if (!win) alert(selectedLanguage === 'ko' ? '팝업 차단됨. 브라우저 허용 후 재시도' : 'Popup blocked. Please allow popups.');
+                      }}
+                    >
+                      <BookOpen className="w-4 h-4 text-blue-500" />
+                      <span className="text-[10px] font-bold">Wikipedia</span>
+                    </Button>
+
+                    {/* 관광정보 버튼 */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-green-400 hover:bg-green-50 transition-all active:scale-95"
+                      onClick={() => {
+                        const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                        const win = window.open(getGoogleSearchUrl(`${name} tourism info`), '_blank', 'noopener,noreferrer');
+                        if (!win) alert(selectedLanguage === 'ko' ? '팝업 차단됨. 브라우저 허용 후 재시도' : 'Popup blocked. Please allow popups.');
+                      }}
+                    >
+                      <Info className="w-4 h-4 text-green-500" />
+                      <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '관광정보' : 'Tourism'}</span>
+                    </Button>
+
+                    {/* Google 검색 버튼 */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-orange-400 hover:bg-orange-50 transition-all active:scale-95"
+                      onClick={() => {
+                        const name = getTranslatedContent(landmark, selectedLanguage, 'name');
+                        const win = window.open(getGoogleSearchUrl(name), '_blank', 'noopener,noreferrer');
+                        if (!win) alert(selectedLanguage === 'ko' ? '팝업 차단됨. 브라우저 허용 후 재시도' : 'Popup blocked. Please allow popups.');
+                      }}
+                    >
+                      <Search className="w-4 h-4 text-orange-500" />
+                      <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? 'Google' : 'Search'}</span>
+                    </Button>
+
                   </div>
                 </div>
               </TabsContent>
@@ -492,37 +563,100 @@ export default function LandmarkDetailDialog({
                     </p>
                   </div>
 
-                  {[
-                    { name: 'MyRealTrip (마이리얼트립)', icon: <ExternalLink className="w-4 h-4 text-[#2B96ED]" />, url: getMyRealTripUrl(getTranslatedContent(landmark, selectedLanguage, 'name')) },
-                    { name: 'Trip.com (트립닷컴)', icon: <ExternalLink className="w-4 h-4 text-blue-600" />, url: getTripUrl(getTranslatedContent(landmark, selectedLanguage, 'name')) },
-                    { name: 'Klook (클룩)', icon: <ExternalLink className="w-4 h-4 text-[#E9633F]" />, url: getKlookUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
-                    { name: 'GetYourGuide', icon: <ExternalLink className="w-4 h-4 text-red-400" />, url: getGYGUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) },
-                    { name: 'Viator Inc', icon: <ExternalLink className="w-4 h-4 text-blue-400" />, url: getViatorUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage) }
-                  ].map((option, i) => (
-                    <Button
-                      key={i}
-                      variant="outline"
-                      className={`w-full justify-between items-center h-16 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group ${i === 0 ? 'border-[#2B96ED] bg-blue-50/10' : ''}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log(`🔗 [Link Diagnostic] Opening: ${option.name}, URL: ${option.url}`);
-                        const win = window.open(option.url, '_blank', 'noopener,noreferrer');
-                        if (!win) {
-                          console.error("🚑 [Bug Doctor] Popup blocked for " + option.name);
-                          alert(selectedLanguage === 'ko' ? '팝업 차단이 감지되었습니다. 허용 후 다시 시도해주세요.' : 'Popup blocked. Please allow popups and try again.');
-                        }
-                      }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[#FCF9F6] flex items-center justify-center group-hover:bg-orange-50">
-                          {option.icon}
+                  {/* [Bug Doctor 2026-02-26]
+                   * searchName: 영어 이름 우선, 없으면 현재 언어 이름으로 fallback
+                   * 이유: Klook/Viator/Trip.com 등 글로벌 플랫폼은 영어로 검색해야 결과 풍부
+                   */}
+                  {(() => {
+                    // [적요] 영어 이름을 검색에 사용 (글로벌 플랫폼 검색 최적화)
+                    const searchName = getTranslatedContent(landmark, 'en', 'name') ||
+                      getTranslatedContent(landmark, selectedLanguage, 'name');
+                    return [
+                      {
+                        name: 'MyRealTrip (마이리얼트립)',
+                        icon: <ExternalLink className="w-4 h-4 text-[#2B96ED]" />,
+                        // [적요] MyRealTrip은 한국어 이름으로 검색 (한국 플랫폼)
+                        url: getMyRealTripUrl(getTranslatedContent(landmark, 'ko', 'name') || searchName),
+                        tip: '🇰🇷 한국어 지원 · 한국 카드 결제 · 취소 정책 상품별 상이',
+                        tipEn: '🇰🇷 Korean only · Korean card required · Cancellation varies per product',
+                        color: 'text-[#2B96ED]',
+                        badge: 'bg-blue-100 text-[#2B96ED]',
+                      },
+                      {
+                        name: 'GetYourGuide',
+                        icon: <ExternalLink className="w-4 h-4 text-red-400" />,
+                        // [적요] 영어 이름으로 검색 - 글로벌 플랫폼
+                        url: getGYGUrl(searchName, 'en'),
+                        tip: '✅ 48시간 전 무료취소 · 글로벌 카드 가능 · 즉시 확정',
+                        tipEn: '✅ Free cancel 48h before · Global cards OK · Instant confirmation',
+                        color: 'text-red-400',
+                        badge: 'bg-red-50 text-red-400',
+                      },
+                      {
+                        name: 'Trip.com (트립닷컴)',
+                        icon: <ExternalLink className="w-4 h-4 text-blue-600" />,
+                        // [적요] 영어 이름으로 검색 - Trip.com 글로벌
+                        url: getTripUrl(searchName),
+                        tip: '💰 포인트 적립 가능 · 취소정책 상품별 확인 필수',
+                        tipEn: '💰 Points rewards · Check cancellation policy per item',
+                        color: 'text-blue-600',
+                        badge: 'bg-blue-50 text-blue-600',
+                      },
+                      {
+                        name: 'Klook (클룩)',
+                        icon: <ExternalLink className="w-4 h-4 text-[#E9633F]" />,
+                        // [적요] 영어 이름으로 검색 - Klook 글로벌 검색 최적화
+                        url: getKlookUrl(searchName, 'en-US'),
+                        tip: '📱 모바일 바우처 즉시 발급 · 아시아 여행 특화 · 즉시 확정',
+                        tipEn: '📱 Instant mobile voucher · Asia-focused · Instant confirmation',
+                        color: 'text-[#E9633F]',
+                        badge: 'bg-orange-50 text-[#E9633F]',
+                      },
+                      {
+                        name: 'Viator Inc',
+                        icon: <ExternalLink className="w-4 h-4 text-blue-400" />,
+                        // [적요] 영어 이름으로 검색 - Viator 영어 특화
+                        url: getViatorUrl(searchName, 'en-US'),
+                        tip: '🌍 TripAdvisor 계열 · 24시간 전 무료취소 · 영어 위주',
+                        tipEn: '🌍 TripAdvisor company · Free cancel 24h before · English-focused',
+                        color: 'text-blue-400',
+                        badge: 'bg-blue-50 text-blue-400',
+                      },
+                    ].map((option, i) => (
+                      <Button
+                        key={i}
+                        variant="outline"
+                        className={`w-full justify-between items-center h-auto py-3 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group ${i === 0 ? 'border-[#2B96ED] bg-blue-50/10' : ''}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log(`🔗 [Link Diagnostic] Opening: ${option.name}, URL: ${option.url}`);
+                          const win = window.open(option.url, '_blank', 'noopener,noreferrer');
+                          if (!win) {
+                            console.error("🚑 [Bug Doctor] Popup blocked for " + option.name);
+                            alert(selectedLanguage === 'ko' ? '팝업 차단이 감지되었습니다. 허용 후 다시 시도해주세요.' : 'Popup blocked. Please allow popups and try again.');
+                          }
+                        }}
+                      >
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          <div className="w-10 h-10 rounded-xl bg-[#FCF9F6] flex items-center justify-center shrink-0 group-hover:bg-orange-50">
+                            {option.icon}
+                          </div>
+                          {/* [적요] 플랫폼명 + 주의사항 2행 구조 */}
+                          <div className="flex flex-col items-start gap-0.5 min-w-0">
+                            <span className="font-bold text-xs sm:text-sm">{option.name}</span>
+                            <span className={`text-[9px] font-medium leading-tight ${option.color} opacity-80 truncate max-w-[200px]`}>
+                              {selectedLanguage === 'ko' ? option.tip : option.tipEn}
+                            </span>
+                          </div>
                         </div>
-                        <span className="font-bold text-xs sm:text-sm">{option.name}</span>
-                      </div>
-                      <div className={`px-3 py-1 rounded-full text-[10px] font-bold ${i === 0 ? 'bg-blue-100 text-[#2B96ED]' : 'bg-[#E67E22]/10 text-[#E67E22]'}`}>Book</div>
-                    </Button>
-                  ))}
+                        <div className={`px-3 py-1 rounded-full text-[10px] font-bold shrink-0 ml-1 ${option.badge}`}>Book</div>
+                      </Button>
+                    ))
+                    // [적요] IIFE(즉시실행함수) 닫는 괄호
+                  })()
+                  }
+
                 </div>
 
                 <div className="px-6 py-4">

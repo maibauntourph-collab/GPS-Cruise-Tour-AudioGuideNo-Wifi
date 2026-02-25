@@ -111,45 +111,46 @@ export default function RoleSelection() {
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
 
-      {/* Header Container - FIXED/STICKY */}
+      {/* Header Container - FIXED/STICKY - [Designer Kim] 반응형 수정 2026-02-26 */}
       <header className="sticky top-0 z-50 w-full bg-[#0f172a]/80 backdrop-blur-xl border-b border-white/5">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
           <motion.div
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            className="flex items-center gap-3"
+            className="flex items-center gap-2 sm:gap-3"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
-              <Navigation className="w-6 h-6 text-white" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <Navigation className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
-            <span className="text-xl font-black tracking-tighter uppercase italic">
+            <span className="text-base sm:text-xl font-black tracking-tighter uppercase italic">
               GPS Cruise <span className="text-blue-500">Tour</span>
-              {/* [강의 노트: 서브 브랜드 네임 반영]
-                  사용자 경험의 깊이를 더하기 위해 '여행의 네비게이터'라는 감성적인 서브 타이틀을 추가했습니다. */}
-              <span className="block text-[8px] tracking-[0.4em] text-blue-400 opacity-60 font-medium not-italic">
+              {/* [적요] 서브 타이틀 - 모바일에서는 함축 */}
+              <span className="hidden xs:block text-[8px] tracking-[0.4em] text-blue-400 opacity-60 font-medium not-italic">
                 {selectedLanguage === 'ko' ? '여행의 네비게이터' : 'Travel Navigator'}
               </span>
             </span>
           </motion.div>
 
-          <div className="flex items-center gap-2">
-            {/* 🚀 [Server Park] Deployment Timestamp for verification */}
+          {/* [적요] 우측 영역: 모바일 대응 gap 조정 */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* 파배 배지: 모바일(xs) 에서는 숨김 → 화면 예약 */}
             <Badge
               variant="outline"
-              className="px-2 py-0.5 h-6 text-[9px] font-mono bg-blue-500/10 text-blue-400 border-blue-500/30 backdrop-blur-md rounded-full whitespace-nowrap flex items-center gap-1 shadow-[0_0_10px_rgba(59,130,246,0.1)]"
+              className="px-1.5 sm:px-2 py-0.5 h-6 text-[9px] font-mono bg-cyan-500/10 text-cyan-400 border-cyan-500/30 backdrop-blur-md rounded-full whitespace-nowrap hidden sm:flex items-center gap-1 shadow-[0_0_10px_rgba(6,182,212,0.1)]"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               Dep: {__DEPLOY_DATE__}
             </Badge>
 
+            {/* [적요] 언어 버튼: 모바일에서는 아이콘+텍스트 충분한 크기로 */}
             <motion.button
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all backdrop-blur-md"
+              className="flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all backdrop-blur-md"
             >
-              <Languages className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-bold uppercase">{selectedLanguage}</span>
+              <Languages className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400 shrink-0" />
+              <span className="text-xs sm:text-sm font-bold uppercase">{selectedLanguage}</span>
             </motion.button>
           </div>
         </div>
