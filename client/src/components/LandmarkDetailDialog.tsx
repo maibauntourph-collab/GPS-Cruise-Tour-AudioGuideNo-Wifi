@@ -5,11 +5,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award, Camera, Smile, Upload, Download } from 'lucide-react';
+import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award, Camera, Smile, Upload, Download, ShoppingBag, Package } from 'lucide-react';
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
 import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
+import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
 import { useQuery } from '@tanstack/react-query';
 import { User, DbLandmarkGuide } from '@shared/schema';
 import { Users, Headphones, Check, User as UserIcon } from 'lucide-react';
@@ -227,7 +228,7 @@ export default function LandmarkDetailDialog({
           {/* Navigation Tabs - Middle Content area should be scrollable */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden min-h-0">
             <div className="px-4 pt-4 bg-[#FCF9F6] border-b shrink-0">
-              <TabsList className="grid w-full grid-cols-3 bg-[#EFEBE6] rounded-xl p-1 h-11">
+              <TabsList className="grid w-full grid-cols-4 bg-[#EFEBE6] rounded-xl p-1 h-11">
                 <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '역사/나레이션' : 'History/Narration'}
                 </TabsTrigger>
@@ -236,6 +237,9 @@ export default function LandmarkDetailDialog({
                 </TabsTrigger>
                 <TabsTrigger value="booking" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '티켓/예약' : 'Book/Ticket'}
+                </TabsTrigger>
+                <TabsTrigger value="shopping" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
+                  {selectedLanguage === 'ko' ? '기념품' : 'Shopping'}
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -666,6 +670,142 @@ export default function LandmarkDetailDialog({
                       {selectedLanguage === 'ko'
                         ? '예약 시 파트너사로부터 소정의 수수료를 지급받을 수 있으며, 이는 투어 콘텐츠 개발에 사용됩니다.'
                         : 'Booking via these links helps support our content development through small affiliate commissions at no extra cost to you.'}
+                    </p>
+                  </div>
+                </div>
+              </TabsContent>
+
+              {/* Shopping & Souvenirs Tab */}
+              <TabsContent value="shopping" className="p-0 m-0 space-y-6 pb-32">
+                <div className="px-4 pt-6 text-center space-y-2">
+                  <div className="w-16 h-16 bg-[#FDF2F2] rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#E67E22] shadow-sm">
+                    <ShoppingBag className="w-8 h-8" />
+                  </div>
+                  <h4 className="font-bold text-lg text-[#5D574D]">{selectedLanguage === 'ko' ? '로컬 프리미엄 기프트' : 'Local Premium Gifts'}</h4>
+                  <p className="text-xs text-[#A8A294] px-4">{selectedLanguage === 'ko' ? '장인의 정신이 깃든 엄선된 기념품을 만나보세요' : 'Discover curated souvenirs from local artisans'}</p>
+                </div>
+
+                <div className="px-4 grid grid-cols-1 gap-4">
+                  {(() => {
+                    const landmarkName = getTranslatedContent(landmark, 'en', 'name');
+                    // 이 부분은 실제로는 useQuery를 사용하여 실시간으로 가져와야 하지만, 
+                    // 컴포넌트 구조 유지를 위해 현재는 Mock 데이터를 직접 참조하도록 로직 구성
+                    const { data: shopifyProducts = [] } = useQuery<ShopifyProduct[]>({
+                      queryKey: [`/api/shopify/products/${landmarkName}`],
+                      queryFn: () => getShopifyProducts(landmarkName),
+                      enabled: !!landmarkName,
+                    });
+
+                    if (shopifyProducts.length === 0) {
+                      return (
+                        <div className="py-12 text-center border-2 border-dashed border-[#EFEBE6] rounded-3xl">
+                          <Package className="w-10 h-10 text-[#A8A294]/30 mx-auto mb-2" />
+                          <p className="text-xs text-[#A8A294] font-medium">
+                            {selectedLanguage === 'ko' ? '준비된 상품이 없습니다.' : 'Coming soon for this location.'}
+                          </p>
+                        </div>
+                      );
+                    }
+
+                    return shopifyProducts.map((product) => (
+                      <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
+                        <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
+                          <img src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
+                        </div>
+                        <div className="flex-1 flex flex-col justify-between min-w-0">
+                          <div>
+                            <h5 className="font-bold text-sm text-[#5D574D] line-clamp-1">{product.title}</h5>
+                            <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
+                          </div>
+                          <div className="flex items-center justify-between mt-2">
+                            <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
+                            <Button
+                              size="sm"
+                              className="h-8 px-4 bg-[#5D574D] hover:bg-[#433E37] text-white rounded-xl text-[10px] font-bold gap-1.5 transition-all"
+                              onClick={() => window.open(product.checkoutUrl, '_blank')}
+                            >
+                              <CreditCard className="w-3 h-3" />
+                              {selectedLanguage === 'ko' ? '지금 구매' : 'Buy Now'}
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+
+                <div className="px-6 py-4">
+                  <div className="p-4 rounded-2xl border border-gray-100 bg-[#FCF9F6] flex gap-3">
+                    <Globe className="w-5 h-5 text-[#A8A294] shrink-0 mt-0.5" />
+                    <p className="text-[9px] text-[#A8A294] leading-normal uppercase font-black">
+                      Powered by Shopify Storefront
+                    </p>
+                  </div>
+                </div>
+              </TabsContent>
+
+              {/* Shopping & Souvenirs Tab */}
+              <TabsContent value="shopping" className="p-0 m-0 space-y-6 pb-32">
+                <div className="px-4 pt-6 text-center space-y-2">
+                  <div className="w-16 h-16 bg-[#FDF2F2] rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#E67E22] shadow-sm">
+                    <ShoppingBag className="w-8 h-8" />
+                  </div>
+                  <h4 className="font-bold text-lg text-[#5D574D]">{selectedLanguage === 'ko' ? '로컬 프리미엄 기프트' : 'Local Premium Gifts'}</h4>
+                  <p className="text-xs text-[#A8A294] px-4">{selectedLanguage === 'ko' ? '장인의 정신이 깃든 엄선된 기념품을 만나보세요' : 'Discover curated souvenirs from local artisans'}</p>
+                </div>
+
+                <div className="px-4 grid grid-cols-1 gap-4">
+                  {(() => {
+                    const landmarkName = getTranslatedContent(landmark, 'en', 'name');
+                    const { data: shopifyProducts = [] } = useQuery<ShopifyProduct[]>({
+                      queryKey: [`/api/shopify/products/${landmarkName}`],
+                      queryFn: () => getShopifyProducts(landmarkName),
+                      enabled: !!landmarkName,
+                    });
+
+                    if (shopifyProducts.length === 0) {
+                      return (
+                        <div className="py-12 text-center border-2 border-dashed border-[#EFEBE6] rounded-3xl">
+                          <Package className="w-10 h-10 text-[#A8A294]/30 mx-auto mb-2" />
+                          <p className="text-xs text-[#A8A294] font-medium">
+                            {selectedLanguage === 'ko' ? '준비된 상품이 없습니다.' : 'Coming soon for this location.'}
+                          </p>
+                        </div>
+                      );
+                    }
+
+                    return shopifyProducts.map((product) => (
+                      <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
+                        <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
+                          <img src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
+                        </div>
+                        <div className="flex-1 flex flex-col justify-between min-w-0">
+                          <div>
+                            <h5 className="font-bold text-sm text-[#5D574D] line-clamp-1">{product.title}</h5>
+                            <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
+                          </div>
+                          <div className="flex items-center justify-between mt-2">
+                            <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
+                            <Button
+                              size="sm"
+                              className="h-8 px-4 bg-[#5D574D] hover:bg-[#433E37] text-white rounded-xl text-[10px] font-bold gap-1.5 transition-all"
+                              onClick={() => window.open(product.checkoutUrl, '_blank')}
+                            >
+                              <CreditCard className="w-3 h-3" />
+                              {selectedLanguage === 'ko' ? '지금 구매' : 'Buy Now'}
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+
+                <div className="px-6 py-4">
+                  <div className="p-4 rounded-2xl border border-gray-100 bg-[#FCF9F6] flex gap-3">
+                    <Globe className="w-5 h-5 text-[#A8A294] shrink-0 mt-0.5" />
+                    <p className="text-[9px] text-[#A8A294] leading-normal uppercase font-black">
+                      Powered by Shopify Storefront
                     </p>
                   </div>
                 </div>

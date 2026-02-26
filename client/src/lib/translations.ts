@@ -253,7 +253,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     downloadError: 'Download Error',
     nativeVoiceMissing: 'Native voice for {lang} is missing on this device.',
     suggestHighQualityVoice: 'Would you like to switch to AI TTS (OpenAI) mode for better guidance?',
-    booking: 'Booking'
+    booking: 'Booking',
+    shopping: 'Shopping',
+    localProducts: 'Local Souvenirs',
+    buyNow: 'Buy Now'
   },
   ko: {
     landmarks: '명소',
@@ -480,7 +483,10 @@ const uiTranslations: Record<string, Record<string, string>> = {
     downloadError: '다운로드 오류',
     nativeVoiceMissing: '현재 기기에 {lang} 음성이 설치되어 있지 않습니다.',
     suggestHighQualityVoice: '더 자연스러운 안내를 위해 고품질(OpenAI) 모드로 전환하시겠습니까?',
-    booking: '예약'
+    booking: '예약',
+    shopping: '기념품 숍',
+    localProducts: '로컬 장인 상품',
+    buyNow: '지금 구매'
   },
   es: {
     landmarks: 'Monumentos',
