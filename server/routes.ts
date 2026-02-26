@@ -211,6 +211,17 @@ export function registerRoutes(app: Hono<any>) {
     }
   });
 
+  // [Fix: API Route Mismatch] Add support for /api/cities/:id/landmarks
+  app.get("/api/cities/:id/landmarks", async (c) => {
+    try {
+      const cityId = c.req.param("id");
+      const landmarks = await storage.getLandmarks(cityId);
+      return c.json(landmarks);
+    } catch (error) {
+      return c.json({ error: "Failed to fetch landmarks" }, 500);
+    }
+  });
+
   app.get("/api/landmarks/:id", async (c) => {
     try {
       const landmark = await storage.getLandmark(c.req.param("id"));
