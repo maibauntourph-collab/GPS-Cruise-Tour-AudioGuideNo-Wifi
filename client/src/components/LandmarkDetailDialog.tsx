@@ -50,6 +50,13 @@ export default function LandmarkDetailDialog({
     enabled: !!landmark,
   });
 
+  const landmarkNameForShopify = landmark ? getTranslatedContent(landmark as any, 'en', 'name') : '';
+  const { data: shopifyProducts = [] } = useQuery<ShopifyProduct[]>({
+    queryKey: [`/api/shopify/products/${landmarkNameForShopify}`],
+    queryFn: () => getShopifyProducts(landmarkNameForShopify),
+    enabled: !!landmarkNameForShopify && activeTab === 'shopping',
+  });
+
   // Reset selected guide when landmark changes
   useEffect(() => {
     setSelectedGuideId(null);
@@ -687,15 +694,6 @@ export default function LandmarkDetailDialog({
 
                 <div className="px-4 grid grid-cols-1 gap-4">
                   {(() => {
-                    const landmarkName = getTranslatedContent(landmark, 'en', 'name');
-                    // 이 부분은 실제로는 useQuery를 사용하여 실시간으로 가져와야 하지만, 
-                    // 컴포넌트 구조 유지를 위해 현재는 Mock 데이터를 직접 참조하도록 로직 구성
-                    const { data: shopifyProducts = [] } = useQuery<ShopifyProduct[]>({
-                      queryKey: [`/api/shopify/products/${landmarkName}`],
-                      queryFn: () => getShopifyProducts(landmarkName),
-                      enabled: !!landmarkName,
-                    });
-
                     if (shopifyProducts.length === 0) {
                       return (
                         <div className="py-12 text-center border-2 border-dashed border-[#EFEBE6] rounded-3xl">
