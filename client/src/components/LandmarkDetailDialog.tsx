@@ -50,11 +50,12 @@ export default function LandmarkDetailDialog({
     enabled: !!landmark,
   });
 
+  // [Bug Doctor] Shopify 제품 정보를 위한 쿼리를 최상위로 이동 (Error #310 해결)
   const landmarkNameForShopify = landmark ? getTranslatedContent(landmark as any, 'en', 'name') : '';
   const { data: shopifyProducts = [] } = useQuery<ShopifyProduct[]>({
     queryKey: [`/api/shopify/products/${landmarkNameForShopify}`],
     queryFn: () => getShopifyProducts(landmarkNameForShopify),
-    enabled: !!landmarkNameForShopify && activeTab === 'shopping',
+    enabled: !!landmarkNameForShopify && isOpen, // 다이얼로그가 열려 있을 때만 활성화
   });
 
   // Reset selected guide when landmark changes
@@ -694,73 +695,6 @@ export default function LandmarkDetailDialog({
 
                 <div className="px-4 grid grid-cols-1 gap-4">
                   {(() => {
-                    if (shopifyProducts.length === 0) {
-                      return (
-                        <div className="py-12 text-center border-2 border-dashed border-[#EFEBE6] rounded-3xl">
-                          <Package className="w-10 h-10 text-[#A8A294]/30 mx-auto mb-2" />
-                          <p className="text-xs text-[#A8A294] font-medium">
-                            {selectedLanguage === 'ko' ? '준비된 상품이 없습니다.' : 'Coming soon for this location.'}
-                          </p>
-                        </div>
-                      );
-                    }
-
-                    return shopifyProducts.map((product) => (
-                      <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
-                        <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
-                          <img src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
-                        </div>
-                        <div className="flex-1 flex flex-col justify-between min-w-0">
-                          <div>
-                            <h5 className="font-bold text-sm text-[#5D574D] line-clamp-1">{product.title}</h5>
-                            <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
-                          </div>
-                          <div className="flex items-center justify-between mt-2">
-                            <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
-                            <Button
-                              size="sm"
-                              className="h-8 px-4 bg-[#5D574D] hover:bg-[#433E37] text-white rounded-xl text-[10px] font-bold gap-1.5 transition-all"
-                              onClick={() => window.open(product.checkoutUrl, '_blank')}
-                            >
-                              <CreditCard className="w-3 h-3" />
-                              {selectedLanguage === 'ko' ? '지금 구매' : 'Buy Now'}
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    ));
-                  })()}
-                </div>
-
-                <div className="px-6 py-4">
-                  <div className="p-4 rounded-2xl border border-gray-100 bg-[#FCF9F6] flex gap-3">
-                    <Globe className="w-5 h-5 text-[#A8A294] shrink-0 mt-0.5" />
-                    <p className="text-[9px] text-[#A8A294] leading-normal uppercase font-black">
-                      Powered by Shopify Storefront
-                    </p>
-                  </div>
-                </div>
-              </TabsContent>
-
-              {/* Shopping & Souvenirs Tab */}
-              <TabsContent value="shopping" className="p-0 m-0 space-y-6 pb-32">
-                <div className="px-4 pt-6 text-center space-y-2">
-                  <div className="w-16 h-16 bg-[#FDF2F2] rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#E67E22] shadow-sm">
-                    <ShoppingBag className="w-8 h-8" />
-                  </div>
-                  <h4 className="font-bold text-lg text-[#5D574D]">{selectedLanguage === 'ko' ? '로컬 프리미엄 기프트' : 'Local Premium Gifts'}</h4>
-                  <p className="text-xs text-[#A8A294] px-4">{selectedLanguage === 'ko' ? '장인의 정신이 깃든 엄선된 기념품을 만나보세요' : 'Discover curated souvenirs from local artisans'}</p>
-                </div>
-
-                <div className="px-4 grid grid-cols-1 gap-4">
-                  {(() => {
-                    const landmarkName = getTranslatedContent(landmark, 'en', 'name');
-                    const { data: shopifyProducts = [] } = useQuery<ShopifyProduct[]>({
-                      queryKey: [`/api/shopify/products/${landmarkName}`],
-                      queryFn: () => getShopifyProducts(landmarkName),
-                      enabled: !!landmarkName,
-                    });
-
                     if (shopifyProducts.length === 0) {
                       return (
                         <div className="py-12 text-center border-2 border-dashed border-[#EFEBE6] rounded-3xl">
