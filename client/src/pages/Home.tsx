@@ -1058,7 +1058,7 @@ export default function Home() {
                     [1, 2, 3, 4].map(i => (
                       <div key={i} className="h-40 rounded-2xl bg-slate-100 animate-pulse" />
                     ))
-                  ) : (() => {
+                  ) : cities.filter(c => {
                     // [Bug Doctor] 검색 시 다국어(한국어) 입력을 영어 이름으로 변환하여 매칭을 돕는 매핑 테이블
                     const KOREAN_CITY_MAP: Record<string, string[]> = {
                       'roma': ['로마'],
@@ -1076,55 +1076,51 @@ export default function Home() {
                     };
 
                     const searchLower = citySearchQuery.toLowerCase();
-                    const filterCities = cities.filter(c => {
-                      const nameLower = c.name.toLowerCase();
-                      const countryLower = c.country.toLowerCase();
-                      const citySlug = nameLower.replace(/[\s_]+/g, '-');
+                    const nameLower = c.name.toLowerCase();
+                    const countryLower = c.country.toLowerCase();
+                    const citySlug = nameLower.replace(/[\s_]+/g, '-');
 
-                      const matchDirect = nameLower.includes(searchLower) || countryLower.includes(searchLower);
-                      const matchKorean = KOREAN_CITY_MAP[citySlug] && KOREAN_CITY_MAP[citySlug].some(koreanName => koreanName.includes(searchLower));
+                    const matchDirect = nameLower.includes(searchLower) || countryLower.includes(searchLower);
+                    const matchKorean = KOREAN_CITY_MAP[citySlug] && KOREAN_CITY_MAP[citySlug].some(koreanName => koreanName.includes(searchLower));
 
-                      return matchDirect || matchKorean;
-                    });
+                    return matchDirect || matchKorean;
+                  }).map((city) => {
+                    // [Bug Doctor] city.id가 UUID 등일 경우를 대비해 name을 slug로 변환하여 매칭합니다. (예: "Kuala Lumpur" -> "kuala-lumpur")
+                    const citySlug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
+                    const landingContent = (city as any)?.landingContent || LANDING_DATA[citySlug] || LANDING_DATA[city.id];
 
-                    return filterCities.map((city) => {
-                      // [Bug Doctor] city.id가 UUID 등일 경우를 대비해 name을 slug로 변환하여 매칭합니다. (예: "Kuala Lumpur" -> "kuala-lumpur")
-                      const citySlug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
-                      const landingContent = (city as any)?.landingContent || LANDING_DATA[citySlug] || LANDING_DATA[city.id];
+                    const content = landingContent?.[selectedLanguage] || landingContent?.['en'];
+                    // 기본 이미지 (로마 콜로세움) 대신 각 도시의 랜딩 이미지를 활용합니다.
+                    const cityImage = content?.heroImage || 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70';
 
-                      const content = landingContent?.[selectedLanguage] || landingContent?.['en'];
-                      // 기본 이미지 (로마 콜로세움) 대신 각 도시의 랜딩 이미지를 활용합니다.
-                      const cityImage = content?.heroImage || 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70';
-
-                      return (
-                        <button
-                          key={city.id}
-                          className={`relative rounded-2xl overflow-hidden h-40 group shadow-md hover:shadow-xl transition-all active:scale-95 ${selectedCityId === city.id ? 'ring-3 ring-orange-500 ring-offset-2' : ''}`}
-                          onClick={() => {
-                            // [적요] 도시 선택 → 도시 변경 → 카드 닫기 → list 모드 진입
-                            handleCityChange(city.id);
-                            setShowCountrySelector(false);
-                            setTimeout(() => transitionTo('list'), 200);
-                          }}
-                        >
-                          {/* 배경: 도시별 Unsplash 이미지 */}
-                          <img
-                            src={cityImage}
-                            alt={city.name}
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                          <div className="absolute bottom-3 left-3 text-left">
-                            <div className="text-white font-black text-base leading-tight drop-shadow">{city.name}</div>
-                            <div className="text-white/80 text-xs font-medium">{city.country}</div>
-                          </div>
-                          {selectedCityId === city.id && (
-                            <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-black px-2 py-1 rounded-full shadow">✓</div>
-                          )}
-                        </button>
-                      );
-                    });
-                  })()}
+                    return (
+                      <button
+                        key={city.id}
+                        className={`relative rounded-2xl overflow-hidden h-40 group shadow-md hover:shadow-xl transition-all active:scale-95 ${selectedCityId === city.id ? 'ring-3 ring-orange-500 ring-offset-2' : ''}`}
+                        onClick={() => {
+                          // [적요] 도시 선택 → 도시 변경 → 카드 닫기 → list 모드 진입
+                          handleCityChange(city.id);
+                          setShowCountrySelector(false);
+                          setTimeout(() => transitionTo('list'), 200);
+                        }}
+                      >
+                        {/* 배경: 도시별 Unsplash 이미지 */}
+                        <img
+                          src={cityImage}
+                          alt={city.name}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        <div className="absolute bottom-3 left-3 text-left">
+                          <div className="text-white font-black text-base leading-tight drop-shadow">{city.name}</div>
+                          <div className="text-white/80 text-xs font-medium">{city.country}</div>
+                        </div>
+                        {selectedCityId === city.id && (
+                          <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-black px-2 py-1 rounded-full shadow">✓</div>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* CTA 버튼 */}
