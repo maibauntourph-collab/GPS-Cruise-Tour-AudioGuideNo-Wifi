@@ -9,6 +9,7 @@ export interface DeviceCapabilities {
   cores?: number;
   connectionType?: string;
   isMobile: boolean;
+  maxMarkers: number;
 }
 
 /**
@@ -16,17 +17,17 @@ export interface DeviceCapabilities {
  */
 export function detectDeviceCapabilities(): DeviceCapabilities {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  
+
   // Check device memory (in GB)
   const memory = (navigator as any).deviceMemory;
-  
+
   // Check CPU cores
   const cores = navigator.hardwareConcurrency;
-  
+
   // Check network connection type
   const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
   const connectionType = connection?.effectiveType;
-  
+
   // Determine if device is low-end
   // Low-end criteria:
   // - Memory <= 2GB OR
@@ -37,13 +38,16 @@ export function detectDeviceCapabilities(): DeviceCapabilities {
     (cores !== undefined && cores <= 2) ||
     (connectionType === '2g' || connectionType === 'slow-2g')
   );
-  
+
+  const maxMarkers = getMaxMarkersToRender(isLowEnd);
+
   return {
     isLowEnd,
     memory,
     cores,
     connectionType,
-    isMobile
+    isMobile,
+    maxMarkers
   };
 }
 

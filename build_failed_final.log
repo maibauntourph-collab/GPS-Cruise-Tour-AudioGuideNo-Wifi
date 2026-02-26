@@ -1,0 +1,64 @@
+
+> rest-express@1.0.0 build
+> npm run clean && vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist-server
+
+
+> rest-express@1.0.0 clean
+> node scripts/clean.js
+
+[36mvite v5.4.20 [32mbuilding for production...[36m[39m
+transforming...
+
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+[32m✓[39m 2188 modules transformed.
+rendering chunks...
+[1m[33m[plugin:vite:reporter][39m[22m [33m[plugin vite:reporter] 
+(!) E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/lib/audioService.ts is dynamically imported by E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/pages/RoleSelection.tsx, E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/pages/RoleSelection.tsx but also statically imported by E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/components/LandmarkDetailDialog.tsx, E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/components/MenuDialog.tsx, E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/components/StartupDialog.tsx, E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/components/UnifiedFloatingCard.tsx, E:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/pages/Home.tsx, dynamic import will not move module into another chunk.
+[39m
+computing gzip size...
+[2m../dist/[22m[32mregisterSW.js                                  [39m[1m[2m  0.13 kB[22m[1m[22m
+[2m../dist/[22m[32mmanifest.webmanifest                           [39m[1m[2m  0.26 kB[22m[1m[22m
+[2m../dist/[22m[32mindex.html                                     [39m[1m[2m  2.08 kB[22m[1m[22m[2m │ gzip:   1.10 kB[22m
+[2m../dist/[22m[35massets/index-Bfhdkjvq.css                      [39m[1m[2m145.74 kB[22m[1m[22m[2m │ gzip:  22.73 kB[22m
+[2m../dist/[22m[36massets/arrow-left-6lNwO_sC.js                  [39m[1m[2m  0.33 kB[22m[1m[22m[2m │ gzip:   0.26 kB[22m
+[2m../dist/[22m[36massets/circle-check-CD2axh2Y.js                [39m[1m[2m  0.34 kB[22m[1m[22m[2m │ gzip:   0.27 kB[22m
+[2m../dist/[22m[36massets/trending-up-bdB8YpIs.js                 [39m[1m[2m  0.37 kB[22m[1m[22m[2m │ gzip:   0.29 kB[22m
+[2m../dist/[22m[36massets/globe-D0_5PyIY.js                       [39m[1m[2m  0.41 kB[22m[1m[22m[2m │ gzip:   0.29 kB[22m
+[2m../dist/[22m[36massets/calendar-CbDQQj8O.js                    [39m[1m[2m  0.43 kB[22m[1m[22m[2m │ gzip:   0.30 kB[22m
+[2m../dist/[22m[36massets/share-2-JnYdLkXX.js                     [39m[1m[2m  0.52 kB[22m[1m[22m[2m │ gzip:   0.33 kB[22m
+[2m../dist/[22m[36massets/trash-2-_hgC0n25.js                     [39m[1m[2m  0.53 kB[22m[1m[22m[2m │ gzip:   0.35 kB[22m
+[2m../dist/[22m[36massets/aspect-ratio-D0GX3QoQ.js                [39m[1m[2m  0.74 kB[22m[1m[22m[2m │ gzip:   0.53 kB[22m
+[2m../dist/[22m[36massets/utensils-lEPCMH1p.js                    [39m[1m[2m  0.78 kB[22m[1m[22m[2m │ gzip:   0.40 kB[22m
+[2m../dist/[22m[36massets/textarea-DNoM2jVi.js                    [39m[1m[2m  0.94 kB[22m[1m[22m[2m │ gzip:   0.57 kB[22m
+[2m../dist/[22m[36massets/pencil-yVvFOUI7.js                      [39m[1m[2m  1.63 kB[22m[1m[22m[2m │ gzip:   0.61 kB[22m
+[2m../dist/[22m[36massets/ProductList-D7Iec2Jb.js                 [39m[1m[2m  3.19 kB[22m[1m[22m[2m │ gzip:   1.33 kB[22m
+[2m../dist/[22m[36massets/GuideView-CK5H33IE.js                   [39m[1m[2m  3.50 kB[22m[1m[22m[2m │ gzip:   1.55 kB[22m
+[2m../dist/[22m[36massets/ProductDetail-Cf6nw69l.js               [39m[1m[2m  5.91 kB[22m[1m[22m[2m │ gzip:   2.39 kB[22m
+[2m../dist/[22m[36massets/MyRoutes-DNv6PfyH.js                    [39m[1m[2m  5.92 kB[22m[1m[22m[2m │ gzip:   2.34 kB[22m
+[2m../dist/[22m[36massets/LandmarkFormDialog-BpaMy--4.js          [39m[1m[2m  6.96 kB[22m[1m[22m[2m │ gzip:   2.49 kB[22m
+[2m../dist/[22m[36massets/AdminLanding_20260221_0625-fULB3sRn.js  [39m[1m[2m  9.33 kB[22m[1m[22m[2m │ gzip:   3.75 kB[22m
+[2m../dist/[22m[36massets/alert-dialog-ByjOxrh8.js                [39m[1m[2m 11.33 kB[22m[1m[22m[2m │ gzip:   3.78 kB[22m
+[2m../dist/[22m[36massets/index-7bX2f2SF.js                       [39m[1m[2m 16.61 kB[22m[1m[22m[2m │ gzip:   5.77 kB[22m
+[2m../dist/[22m[36massets/TourLeaderView-BZyj-JXl.js              [39m[1m[2m 23.65 kB[22m[1m[22m[2m │ gzip:   6.23 kB[22m
+[2m../dist/[22m[36massets/index-Dd49Ek7G.js                       [39m[1m[2m 24.13 kB[22m[1m[22m[2m │ gzip:   8.50 kB[22m
+[2m../dist/[22m[36massets/select-BFShAwgY.js                      [39m[1m[2m 36.01 kB[22m[1m[22m[2m │ gzip:  12.13 kB[22m
+[2m../dist/[22m[36massets/Admin-sk7umIA5.js                       [39m[1m[2m 67.39 kB[22m[1m[22m[2m │ gzip:  17.21 kB[22m
+[2m../dist/[22m[36massets/index-CABhPQQs.js                       [39m[1m[33m518.88 kB[39m[22m[2m │ gzip: 170.82 kB[22m
+[2m../dist/[22m[36massets/Home-By0eGDcZ.js                        [39m[1m[33m984.46 kB[39m[22m[2m │ gzip: 205.04 kB[22m
+[33m
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[32m✓ built in 8.04s[39m
+
+PWA v1.2.0
+mode      generateSW
+precache  44 entries (2900.43 KiB)
+files generated
+  ../dist/sw.js
+  ../dist/workbox-8c29f6e4.js
+
+  dist-server\index.js  5.0mb
+
+Done in 747ms

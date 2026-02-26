@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development SESSION_SECRET=devsecret123456789012345678901234 tsx --env-file=.env server/index.ts",
-    "clean": "node -e \"const fs = require('fs'); ['dist', 'dist-server', 'dist-worker'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
+    "clean": "node scripts/clean.js",
     "build": "npm run clean && vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist-server",
     "build:worker": "wrangler deploy --dry-run --outdir=dist-worker",
     "dev:worker": "wrangler dev",
@@ -130,5 +130,10 @@
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }

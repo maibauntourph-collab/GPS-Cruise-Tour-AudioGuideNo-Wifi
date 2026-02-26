@@ -146,6 +146,11 @@ interface UnifiedFloatingCardProps {
   isSimulationMode?: boolean;
   onToggleSimulation?: () => void;
   playInBackground?: boolean;
+  simulationSpeed?: number;
+  onSimulationSpeedChange?: (speed: number) => void;
+  onSimulationPauseToggle?: () => void;
+  isSimulationPaused?: boolean;
+  onOpenAIRecommend?: () => void;
 
   // 🛰️ [Server Park] Minimal Transit UI props
   showMinimalTransitUI?: boolean;
@@ -153,6 +158,9 @@ interface UnifiedFloatingCardProps {
   forceShowList?: boolean;
   isCardMinimized?: boolean;
   onToggleMinimized?: () => void;
+
+  // Cruise Port extensions
+  onToggleCruisePort?: () => void;
 }
 
 
@@ -227,8 +235,7 @@ export function UnifiedFloatingCard({
   onToggleMinimized
 }: UnifiedFloatingCardProps) {
   const [activeTab, setActiveTab] = useState<'list' | 'cruise' | 'tour'>('list');
-  // [Bug Doctor] 내부 최소화 상태: 외부 isCardMinimized와 동기화
-  const [isMinimized, setIsMinimized] = useState(false);
+  // [Bug Doctor] 내부 최소화 상태: 외부 isCardMinimized와 동기화 (로컬 상태 제거)
   const [showTransitDetails, setShowTransitDetails] = useState(false);
   const [landmarkSearchQuery, setLandmarkSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -369,7 +376,7 @@ export function UnifiedFloatingCard({
   return (
     <div
       style={{ zIndex }}
-      className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ${isMinimized ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100'}`}
+      className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ${isCardMinimized ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100'}`}
     >
       {/* HEADER */}
       <div className="p-4 flex items-center justify-between border-b bg-white/50 backdrop-blur-md">

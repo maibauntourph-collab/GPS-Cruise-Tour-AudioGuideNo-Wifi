@@ -129,6 +129,13 @@ interface MenuDialogProps {
 
   // MP3 Audio Download
   onOpenAudioDownload?: () => void;
+
+  // Background Guide & Admin
+  isBackgroundGuideEnabled?: boolean;
+  onToggleBackgroundGuide?: (enabled: boolean) => void;
+  showUpdateStats?: () => void;
+  showQrDialog?: () => void;
+  showCreatorDashboard?: () => void;
 }
 
 export default function MenuDialog({
@@ -583,8 +590,8 @@ export default function MenuDialog({
 
                               <div className="flex items-center gap-1.5 mb-1.5">
                                 <User className={`w-3 h-3 flex-shrink-0 ${info.gender === 'female' ? 'text-pink-500' :
-                                    info.gender === 'male' ? 'text-blue-500' :
-                                      'text-muted-foreground'
+                                  info.gender === 'male' ? 'text-blue-500' :
+                                    'text-muted-foreground'
                                   }`} />
                                 <span className="font-medium text-xs truncate" title={info.voice.name}>
                                   {info.voice.name.split(' ').slice(0, 2).join(' ')}

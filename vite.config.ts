@@ -1,11 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { fileURLToPath } from "url";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { VitePWA } from "vite-plugin-pwa";
 
 const now = new Date();
 const deployDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   define: {
@@ -16,51 +19,37 @@ export default defineConfig({
     runtimeErrorOverlay(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'icon.svg'],
+      injectRegister: 'auto',
       manifest: {
         name: 'GPS Audio Guide',
         short_name: 'GPS Guide',
-        description: 'Explore world cities with GPS-guided audio narration',
         theme_color: '#e8633f',
-        background_color: '#ffffff',
-        display: 'standalone',
-        orientation: 'portrait',
         icons: [
           {
             src: 'icon.svg',
             sizes: '192x192',
-            type: 'image/svg+xml'
-          },
-          {
-            src: 'icon.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml'
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
           }
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,mp3}'],
-        maximumFileSizeToCacheInBytes: 20000000, // Increased to 20MB for audio files
-        skipWaiting: true,
-        clientsClaim: true
-      },
-      devOptions: {
-        enabled: true,
-        type: 'module',
-      },
+        globPatterns: ['**/*.{js,css,html,svg,png,mp3}'],
+        cleanupOutdatedCaches: true
+      }
     }),
   ],
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      "@": path.resolve(__dirname, "client/src"),
+      "@shared": path.resolve(__dirname, "shared"),
+      "@assets": path.resolve(__dirname, "attached_assets"),
     },
     dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
   },
-  root: path.resolve(import.meta.dirname, "client"),
+  root: "./client",
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist"),
+    outDir: "../dist",
     emptyOutDir: true,
   },
   server: {

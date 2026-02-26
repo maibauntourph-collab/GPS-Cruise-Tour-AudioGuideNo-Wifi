@@ -1015,10 +1015,12 @@ import { createServer as createViteServer, createLogger } from "vite";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { fileURLToPath } from "url";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { VitePWA } from "vite-plugin-pwa";
 var now = /* @__PURE__ */ new Date();
 var deployDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+var __dirname = path.dirname(fileURLToPath(import.meta.url));
 var vite_config_default = defineConfig({
   define: {
     __DEPLOY_DATE__: JSON.stringify(deployDate)
@@ -1028,52 +1030,37 @@ var vite_config_default = defineConfig({
     runtimeErrorOverlay(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "icon.svg"],
+      injectRegister: "auto",
       manifest: {
         name: "GPS Audio Guide",
         short_name: "GPS Guide",
-        description: "Explore world cities with GPS-guided audio narration",
         theme_color: "#e8633f",
-        background_color: "#ffffff",
-        display: "standalone",
-        orientation: "portrait",
         icons: [
           {
             src: "icon.svg",
             sizes: "192x192",
-            type: "image/svg+xml"
-          },
-          {
-            src: "icon.svg",
-            sizes: "512x512",
-            type: "image/svg+xml"
+            type: "image/svg+xml",
+            purpose: "any maskable"
           }
         ]
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,json,mp3}"],
-        maximumFileSizeToCacheInBytes: 2e7,
-        // Increased to 20MB for audio files
-        skipWaiting: true,
-        clientsClaim: true
-      },
-      devOptions: {
-        enabled: true,
-        type: "module"
+        globPatterns: ["**/*.{js,css,html,svg,png,mp3}"],
+        cleanupOutdatedCaches: true
       }
     })
   ],
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets")
+      "@": path.resolve(__dirname, "client/src"),
+      "@shared": path.resolve(__dirname, "shared"),
+      "@assets": path.resolve(__dirname, "attached_assets")
     },
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"]
   },
-  root: path.resolve(import.meta.dirname, "client"),
+  root: "./client",
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist"),
+    outDir: "../dist",
     emptyOutDir: true
   },
   server: {
@@ -1093,11 +1080,11 @@ var vite_config_default = defineConfig({
 // server/vite.ts
 init_ogService();
 import { nanoid } from "nanoid";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath as fileURLToPath2 } from "node:url";
 import { serveStatic as honoServeStatic } from "@hono/node-server/serve-static";
 console.log("[DEBUG] server/vite.ts loading...");
-var __filename = fileURLToPath(import.meta.url);
-var __dirname = path2.dirname(__filename);
+var __filename = fileURLToPath2(import.meta.url);
+var __dirname2 = path2.dirname(__filename);
 var viteLogger = createLogger();
 function log(message, source = "express") {
   const formattedTime = (/* @__PURE__ */ new Date()).toLocaleTimeString("en-US", {
@@ -1134,7 +1121,7 @@ async function setupVite(app2, server2) {
       return next();
     }
     try {
-      const clientTemplate = path2.join(__dirname, "..", "client", "index.html");
+      const clientTemplate = path2.join(__dirname2, "..", "client", "index.html");
       console.log(`[Vite] Serving template from ${clientTemplate}`);
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
