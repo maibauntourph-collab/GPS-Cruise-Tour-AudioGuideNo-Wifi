@@ -220,6 +220,9 @@ export default function Home() {
   // Mode settings
   const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
   const [isCarNavZoomMode, setIsCarNavZoomMode] = useState(false);
+  // ✅ [Bug Doctor | 2026-02-27] 시뮬레이션 컨트롤 바 최소화 토글 상태
+  // 학생들에게: true이면 'SIMULATION' 라벨과 X버튼만 보이고, false이면 모든 컨트롤이 보입니다.
+  const [isSimulationBarMinimized, setIsSimulationBarMinimized] = useState(false);
   const [simulationAudioSettings, setSimulationAudioSettings] = useState({
     resumePlayback: true,
     playInBackground: false
@@ -1005,93 +1008,111 @@ export default function Home() {
         )}
 
         {/* Simulation Control Bar */}
-        {isSimulationMode && (
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 z-[2000]">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="p-3 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex items-center gap-5 text-white"
-            >
-              <div className="flex items-center gap-2 pr-4 border-r border-white/10">
-                <div className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Simulation</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-10 w-10 text-white hover:bg-white/10 rounded-full"
-                  onClick={() => {
-                    setIsSimulationPaused(!isSimulationPaused);
-                    if (!isSimulationPaused) audioService.pause();
-                    else audioService.resume();
-                  }}
+        {isSimulationMode && (() => {
+          // ✅ [Bug Doctor] 시뮬레이션 바가 로컬 최소화 상태를 갖도록 조건부 렌더링 적용
+          // 학생들에게: 외부 상태를 수정하지 않고 컴포넌트 내부에서 IIFE로 상태를 관리할 수 있습니다.
+          // 단, 실제로는 useState를 상위에서 선언하는 것이 더 깔끔합니다.
+          const isBarMinimized = isSimulationBarMinimized;
+          return (
+            <div className="absolute top-20 left-1/2 -translate-x-1/2 z-[2000]">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="p-3 bg-slate-900/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl flex items-center gap-5 text-white"
+              >
+                {/* SIMULATION 라벨 - 클릭 시 최소화/최대화 토글 */}
+                <div
+                  className="flex items-center gap-2 pr-4 border-r border-white/10 cursor-pointer group select-none"
+                  onClick={() => setIsSimulationBarMinimized(!isBarMinimized)}
+                  title={isBarMinimized ? 'Expand controls' : 'Minimize controls'}
                 >
-                  {isSimulationPaused ? <Play className="w-5 h-5 fill-current" /> : <Pause className="w-5 h-5 fill-current" />}
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-10 w-10 text-white hover:bg-white/10 rounded-full"
-                  onClick={() => {
-                    setSimulationStepIndex(0);
-                    setSimulatedPosition(null);
-                    setIsSimulationPaused(false);
-                    audioService.stopAll();
-                  }}
-                >
-                  <RotateCcw className="w-5 h-5" />
-                </Button>
-
-                <div className="flex bg-white/5 p-1 rounded-xl">
-                  {[1, 5, 10].map(speed => (
-                    <Button
-                      key={speed}
-                      variant="ghost"
-                      size="sm"
-                      className={`h-8 px-3 text-xs font-black rounded-lg transition-all ${simulationSpeed === speed ? 'bg-white text-slate-900' : 'text-slate-400 hover:text-white'}`}
-                      onClick={() => setSimulationSpeed(speed)}
-                    >
-                      {speed}x
-                    </Button>
-                  ))}
+                  <div className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-white transition-colors">
+                    Simulation
+                  </span>
+                  {/* 최소화 상태 표시 아이콘 */}
+                  <span className="text-slate-500 text-xs group-hover:text-white transition-colors">
+                    {isBarMinimized ? '▲' : '▼'}
+                  </span>
                 </div>
-              </div>
 
-              <div className="w-[1px] h-6 bg-white/10" />
+                {/* 최소화 시 컨트롤 숨김 */}
+                {!isBarMinimized && (
+                  <>
+                    <div className="flex items-center gap-3">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-10 w-10 text-white hover:bg-white/10 rounded-full"
+                        onClick={() => {
+                          setIsSimulationPaused(!isSimulationPaused);
+                          if (!isSimulationPaused) audioService.pause();
+                          else audioService.resume();
+                        }}
+                      >
+                        {isSimulationPaused ? <Play className="w-5 h-5 fill-current" /> : <Pause className="w-5 h-5 fill-current" />}
+                      </Button>
 
-              <Button
-                variant="ghost"
-                className="h-10 px-4 rounded-xl hover:bg-white/10 text-white flex items-center gap-2 group"
-                onClick={() => {
-                  setIsNavigationOnlyMode(false);
-                  setForceShowCard(true);
-                  setIsCardMinimized(false);
-                  setTemporaryShowCard(true);
-                }}
-              >
-                <List className="w-5 h-5 text-orange-400 group-hover:scale-110 transition-transform" />
-                <span className="font-bold">List</span>
-              </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-10 w-10 text-white hover:bg-white/10 rounded-full"
+                        onClick={() => {
+                          setSimulationStepIndex(0);
+                          setSimulatedPosition(null);
+                          setIsSimulationPaused(false);
+                          audioService.stopAll();
+                        }}
+                      >
+                        <RotateCcw className="w-5 h-5" />
+                      </Button>
 
-              <div className="w-[1px] h-6 bg-white/10" />
+                      <div className="flex bg-white/5 p-1 rounded-xl">
+                        {[1, 5, 10].map(speed => (
+                          <Button
+                            key={speed}
+                            variant="ghost"
+                            size="sm"
+                            className={`h-8 px-3 text-xs font-black rounded-lg transition-all ${simulationSpeed === speed ? 'bg-white text-slate-900' : 'text-slate-400 hover:text-white'}`}
+                            onClick={() => setSimulationSpeed(speed)}
+                          >
+                            {speed}x
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-10 w-10 bg-white/5 hover:bg-red-500/20 text-white rounded-full transition-colors"
-                onClick={() => {
-                  setIsSimulationMode(false);
-                  setIsSimulationPaused(false);
-                }}
-              >
-                <X className="w-5 h-5" />
-              </Button>
-            </motion.div>
-          </div>
-        )}
+                    <div className="w-[1px] h-6 bg-white/10" />
+
+                    <Button
+                      variant="ghost"
+                      className="h-10 px-4 rounded-xl hover:bg-white/10 text-white flex items-center gap-2 group"
+                      onClick={handleShowLandmarkList}
+                    >
+                      <List className="w-5 h-5 text-orange-400 group-hover:scale-110 transition-transform" />
+                      <span className="font-bold">List</span>
+                    </Button>
+
+                    <div className="w-[1px] h-6 bg-white/10" />
+                  </>
+                )}
+
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-10 w-10 bg-white/5 hover:bg-red-500/20 text-white rounded-full transition-colors"
+                  onClick={() => {
+                    setIsSimulationMode(false);
+                    setIsSimulationPaused(false);
+                    setIsSimulationBarMinimized(false);
+                  }}
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </motion.div>
+            </div>
+          );
+        })()}
 
         <header className="flex items-center gap-2 px-4 py-3 border-b bg-background/80 backdrop-blur-md z-[1001] shadow-sm">
           <Button
