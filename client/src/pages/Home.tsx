@@ -231,6 +231,9 @@ export default function Home() {
   const [showTourOnly, setShowTourOnly] = useState(false);
   const [pendingLandmark, setPendingLandmark] = useState<Landmark | null>(null);
   const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
+  // [신기능 | 2026-02-27] 랜딩 전 국가/도시 선택 카드 표시 상태
+  // 학생들: 앱 시작 시 이 flag가 true가 되면 국가 선택 카드를 보여줍니다.
+  const [showCountrySelector, setShowCountrySelector] = useState(false);
 
   // Stats
   const [showUpdateStats, setShowUpdateStats] = useState(false);
@@ -367,12 +370,12 @@ export default function Home() {
   useEffect(() => {
     if (isWelcomeHandled && !showStartupDialog && !landingCityId && !selectedLandmark && !isSimulationMode) {
       const timer = setTimeout(() => {
-        // [적요] appMode를 'list'로 전환하면 isCardVisible=true, 카드 자동 슬라이드 업
-        transitionTo('list');
-      }, 1500);
+        // [적요] 국가 선택 카드를 먼저 보여주고, 선택 후 list 모드로 전환합니다.
+        setShowCountrySelector(true);
+      }, 500);
       return () => clearTimeout(timer);
     }
-  }, [isWelcomeHandled, showStartupDialog, landingCityId, selectedLandmark, isSimulationMode, transitionTo]);
+  }, [isWelcomeHandled, showStartupDialog, landingCityId, selectedLandmark, isSimulationMode]);
 
   // [Dodari] Magic Landing Trigger
   useEffect(() => {
@@ -972,6 +975,89 @@ export default function Home() {
           isGpsLoading={isLoading}
         />
 
+        {/* ✅ [신기능 | 2026-02-27] 국가/도시 선택 카드 (랜딩 전 표시)
+            학생들: AnimatePresence + motion.div 조합으로 부드러운 슬라이드-업 애니메이션을 구현합니다.
+            플로우: StartupDialog 완료 → 0.5초 후 이 카드 표시 → 도시 선택 → list 모드 */}
+        <AnimatePresence>
+          {showCountrySelector && (
+            <motion.div
+              key="country-selector"
+              initial={{ y: '100%', opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: '100%', opacity: 0 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+              className="fixed inset-0 flex flex-col justify-end"
+              style={{ zIndex: 3500, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}
+            >
+              <div className="bg-white rounded-t-3xl shadow-2xl p-6 pb-10 max-h-[88vh] overflow-y-auto">
+                {/* 상단 핸들 바 */}
+                <div className="w-12 h-1.5 rounded-full bg-slate-200 mx-auto mb-5" />
+                {/* 헤더 */}
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h2 className="text-2xl font-black text-slate-800">
+                      🌍 {selectedLanguage === 'ko' ? '여행지를 선택하세요' : 'Select Destination'}
+                    </h2>
+                    <p className="text-sm text-slate-400 mt-1">
+                      {selectedLanguage === 'ko' ? '크루즈 기항지 오디오 가이드' : 'Cruise Port Audio Guide'}
+                    </p>
+                  </div>
+                  <button
+                    className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors font-bold"
+                    onClick={() => { setShowCountrySelector(false); transitionTo('list'); }}
+                  >✕</button>
+                </div>
+
+                {/* 도시 카드 그리드 */}
+                <div className="grid grid-cols-2 gap-3 mb-5">
+                  {cities.length === 0 ? (
+                    // 로딩 스켈레톤
+                    [1, 2, 3, 4].map(i => (
+                      <div key={i} className="h-40 rounded-2xl bg-slate-100 animate-pulse" />
+                    ))
+                  ) : (
+                    cities.map((city) => (
+                      <button
+                        key={city.id}
+                        className={`relative rounded-2xl overflow-hidden h-40 group shadow-md hover:shadow-xl transition-all active:scale-95 ${selectedCityId === city.id ? 'ring-3 ring-orange-500 ring-offset-2' : ''}`}
+                        onClick={() => {
+                          // [적요] 도시 선택 → 도시 변경 → 카드 닫기 → list 모드 진입
+                          handleCityChange(city.id);
+                          setShowCountrySelector(false);
+                          setTimeout(() => transitionTo('list'), 200);
+                        }}
+                      >
+                        {/* 배경: 도시별 Unsplash 이미지 */}
+                        <img
+                          src={`https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70`}
+                          alt={city.name}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        <div className="absolute bottom-3 left-3 text-left">
+                          <div className="text-white font-black text-base leading-tight drop-shadow">{city.name}</div>
+                          <div className="text-white/80 text-xs font-medium">{city.country}</div>
+                        </div>
+                        {selectedCityId === city.id && (
+                          <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-black px-2 py-1 rounded-full shadow">✓</div>
+                        )}
+                      </button>
+                    ))
+                  )}
+                </div>
+
+                {/* CTA 버튼 */}
+                <button
+                  className="w-full h-14 rounded-2xl bg-gradient-to-r from-orange-500 to-rose-500 text-white font-black text-lg shadow-lg shadow-orange-200 active:scale-95 transition-all hover:shadow-xl"
+                  onClick={() => { setShowCountrySelector(false); transitionTo('list'); }}
+                >
+                  {selectedLanguage === 'ko' ? '🗺️ 랜드마크 목록 보기' : '🗺️ View Landmark List'}
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Action Bar - Top Center */}
         {!isSimulationMode && (
           <div className="absolute top-6 left-1/2 -translate-x-1/2 z-[2000] w-fit">
@@ -1240,8 +1326,8 @@ export default function Home() {
         </main>
 
         {/* ✅ [마스터 모드 | 2026-02-27]
-             isCardVisible = appMode !== 'map' | | isSimulationMode
-             이제 forceShowCard / isNavigationOnlyMode 없이 단일 변수로 제어됩니다 */}
+             isCardVisible = appMode !== 'map' 이면 카드 표시
+             학생들: isCardVisible 하나로 카드 on/off를 결정합니다 */}
         {isCardVisible && (
           <UnifiedFloatingCard
             forceShowList={appMode === 'list'}
@@ -1249,15 +1335,14 @@ export default function Home() {
             onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
             selectedLandmark={selectedLandmark}
             onLandmarkSelect={(l: Landmark) => {
-              // [적요] 리스트에서 랜드마크 선택 시
-              // 이전 모드(prevAppModeRef)를 list로 기록한 후 detail로 진입
+              // [적요] 리스트에서 랜드마크 선택 → detail 모드 진입
               prevAppModeRef.current = appMode;
               setSelectedLandmark(l);
               setAppMode('detail');
               setIsCardMinimized(false);
             }}
             onLandmarkClose={() => {
-              // [적요] 랜드마크 닫기: 이전 모드로 복귀 (list에서 왔으면 list, 지도에서 왔으면 map)
+              // [적요] 랜드마크 닫기: list에서 왔으면 list로, 지도에서 왔으면 map으로 복귀
               setSelectedLandmark(null);
               setAppMode(prevAppModeRef.current === 'list' ? 'list' : 'map');
             }}
@@ -1278,6 +1363,17 @@ export default function Home() {
             onSimulationPauseToggle={() => setIsSimulationPaused(!isSimulationPaused)}
             isSimulationPaused={isSimulationPaused}
             onOpenAIRecommend={() => setShowAIRecommend(true)}
+            // ✅ [버그수정 | 2026-02-27] spokenLandmarks.has() 크래시 방지
+            // interface에 required로 선언된 prop은 반드시 전달해야 합니다!
+            spokenLandmarks={spokenLandmarks}
+            showLandmarks={showLandmarks}
+            showActivities={showActivities}
+            showRestaurants={showRestaurants}
+            showGiftShops={showGiftShops}
+            onToggleLandmarks={() => setShowLandmarks(!showLandmarks)}
+            onToggleActivities={() => setShowActivities(!showActivities)}
+            onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
+            onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
           />
         )}
 
