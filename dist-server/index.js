@@ -21328,6 +21328,15 @@ function registerRoutes(app2) {
       return c.json({ error: "Failed to fetch landmarks" }, 500);
     }
   });
+  app2.get("/api/cities/:id/landmarks", async (c) => {
+    try {
+      const cityId = c.req.param("id");
+      const landmarks2 = await storage.getLandmarks(cityId);
+      return c.json(landmarks2);
+    } catch (error) {
+      return c.json({ error: "Failed to fetch landmarks" }, 500);
+    }
+  });
   app2.get("/api/landmarks/:id", async (c) => {
     try {
       const landmark = await storage.getLandmark(c.req.param("id"));
