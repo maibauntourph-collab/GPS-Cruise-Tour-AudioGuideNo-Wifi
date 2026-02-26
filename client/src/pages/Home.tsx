@@ -1190,7 +1190,7 @@ export default function Home() {
           </div>
         </main>
 
-        {(!isNavigationOnlyMode || temporaryShowCard || selectedLandmark) && (
+        {(!isNavigationOnlyMode || temporaryShowCard || selectedLandmark || forceShowCard) && (
           <UnifiedFloatingCard
             forceShowList={forceShowCard}
             isCardMinimized={isCardMinimized}

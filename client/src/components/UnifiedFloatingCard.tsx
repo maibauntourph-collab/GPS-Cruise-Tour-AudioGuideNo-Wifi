@@ -253,8 +253,6 @@ export function UnifiedFloatingCard({
   const tourItemsPerPage = 10;
 
   // [Bug Doctor 2026-02-26] '목록' 버튼 클릭 시 list 탭으로 강제 전환
-  // Home.tsx의 목록 버튼이 'force-show-list-tab' 이벤트를 발행하면
-  // 이 컴포넌트에서 수신하여 탭을 'list'로 전환합니다.
   useEffect(() => {
     const handleForceShowList = () => {
       setActiveTab('list');
@@ -262,6 +260,13 @@ export function UnifiedFloatingCard({
     window.addEventListener('force-show-list-tab', handleForceShowList);
     return () => window.removeEventListener('force-show-list-tab', handleForceShowList);
   }, []);
+
+  // [Bug Doctor] forceShowList prop이 true가 되면 강제로 list 탭으로 이동
+  useEffect(() => {
+    if (forceShowList) {
+      setActiveTab('list');
+    }
+  }, [forceShowList]);
 
   // Update playback state
   useEffect(() => {
