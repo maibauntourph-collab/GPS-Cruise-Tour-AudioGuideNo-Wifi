@@ -97,6 +97,7 @@ import MenuDialog from '@/components/MenuDialog';
 import StartupDialog from '@/components/StartupDialog';
 import AIRecommendDialog from '@/components/AIRecommendDialog';
 import AudioDownloadDialog from '@/components/AudioDownloadDialog';
+import { CitySelector } from '@/components/CitySelector';
 
 // Landing Data fallback if schema doesn't export it
 const LANDING_DATA: Record<string, any> = {
@@ -1296,35 +1297,56 @@ export default function Home() {
           );
         })()}
 
-        <header className="flex items-center gap-2 px-4 py-3 border-b bg-background/80 backdrop-blur-md z-[1001] shadow-sm">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setShowMenu(true)}
-            className="h-9 w-9 bg-slate-100 hover:bg-slate-200 rounded-xl"
-          >
-            <Settings className="h-5 w-5 text-slate-600" />
-          </Button>
-
-          <h1 className="font-serif font-black text-xl tracking-tight text-slate-800 flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            Cruise Guide
-          </h1>
+        <header className="flex items-center justify-between px-4 py-3 border-b bg-background/80 backdrop-blur-md z-[1001] shadow-sm">
+          <div className="flex items-center gap-4">
+            <h1 className="font-serif font-black text-xl tracking-tight text-slate-800 flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              Cruise Guide
+            </h1>
+            <div className="hidden sm:block">
+              <CitySelector
+                cities={cities}
+                selectedCityId={selectedCityId}
+                onCityChange={handleCityChange}
+                selectedLanguage={selectedLanguage}
+              />
+            </div>
+          </div>
 
           <div className="ml-auto flex items-center gap-2">
-            <Badge variant="outline" className="px-3 py-1 bg-indigo-500/5 text-indigo-600 border-indigo-200 font-mono text-[10px] hidden sm:flex items-center gap-1.5 rounded-full">
-              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-              LIVE: {__DEPLOY_DATE__.split(' ')[0]}
-            </Badge>
+            <div className="hidden sm:block">
+              <Badge variant="outline" className="px-3 py-1 bg-indigo-500/5 text-indigo-600 border-indigo-200 font-mono text-[10px] flex items-center gap-1.5 rounded-full">
+                <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                LIVE: {__DEPLOY_DATE__.split(' ')[0]}
+              </Badge>
+            </div>
 
             {isMobile && (
+              <div className="flex items-center gap-2">
+                <CitySelector
+                  cities={cities}
+                  selectedCityId={selectedCityId}
+                  onCityChange={handleCityChange}
+                  selectedLanguage={selectedLanguage}
+                />
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-9 w-9 rounded-xl border-slate-200"
+                  onClick={() => setShowMenu(true)}
+                >
+                  <SlidersHorizontal className="h-5 w-5 text-slate-600" />
+                </Button>
+              </div>
+            )}
+            {!isMobile && (
               <Button
-                variant="outline"
+                variant="ghost"
                 size="icon"
-                className="h-9 w-9 rounded-xl border-slate-200"
                 onClick={() => setShowMenu(true)}
+                className="h-9 w-9 bg-slate-100 hover:bg-slate-200 rounded-xl"
               >
-                <SlidersHorizontal className="h-5 w-5 text-slate-600" />
+                <Settings className="h-5 w-5 text-slate-600" />
               </Button>
             )}
           </div>
@@ -1389,7 +1411,7 @@ export default function Home() {
 
             {/* 캫드가 단힐 상태에서 'VIEW LIST' 버튼 표시 */}
             {isCardMinimized && appMode !== 'map' && (
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[1500]">
+              <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 z-[1500]">
                 <Button
                   className="h-14 px-8 rounded-full shadow-2xl bg-white text-slate-800 border-2 border-primary/20 hover:border-primary/50 transition-all flex items-center gap-3 active:scale-95 font-black text-lg"
                   onClick={handleShowLandmarkList}

@@ -1558,6 +1558,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Translate text via OpenAI
+  app.post("/api/translate", async (req, res) => {
+    try {
+      const { text, targetLanguage } = req.body;
+      if (!text || !targetLanguage) {
+        return res.status(400).json({ error: "Text and targetLanguage are required" });
+      }
+
+      const { getOpenAI } = await import("./lib/openai");
+      const openai = getOpenAI();
+
+      if (!openai) {
+        return res.json({ translatedText: text });
+      }
+
+      const prompt = `Translate the following text to language code '${targetLanguage}'. If it's already in that language, just return the text as is. ONLY return the translated text without any quotes or explanations.\n\nText:\n${text}`;
+
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.3
+      });
+
+      const translatedText = response.choices[0].message.content?.trim() || text;
+      res.json({ translatedText });
+    } catch (error: any) {
+      console.error('Translation error:', error);
+      res.status(500).json({ error: error.message || "Failed to translate text" });
+    }
+  });
+
   // Generate OpenAI TTS audio (streaming)
   app.post("/api/tts/openai/generate", async (req, res) => {
     try {

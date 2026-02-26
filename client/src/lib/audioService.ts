@@ -334,10 +334,50 @@ export class AudioService {
     return this.voices.some(v => v.lang.startsWith(baseLang));
   }
 
-  speak(text: string, landmarkId: string, language: string = 'en') {
+  // Helper internally used to translate text if needed
+  private async getTranslatedText(text: string, targetLanguage: string): Promise<string> {
+    if (!text || text.trim() === '') return text;
+
+    const safeTextKey = text.replace(/[^a-zA-Z0-9가-힣]/g, '').substring(0, 30);
+    const cacheKey = `trans_${targetLanguage}_${safeTextKey}`;
+
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) return cached;
+    } catch (e) {
+      console.warn('LocalStorage error', e);
+    }
+
+    try {
+      const res = await fetch('/api/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, targetLanguage })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.translatedText) {
+          try {
+            localStorage.setItem(cacheKey, data.translatedText);
+          } catch (e) {
+            console.warn('LocalStorage error', e);
+          }
+          return data.translatedText;
+        }
+      }
+    } catch (e) {
+      console.error('Translation API failed', e);
+    }
+
+    return text;
+  }
+
+  async speak(text: string, landmarkId: string, language: string = 'en') {
     if (!this.isEnabled || this.spokenLandmarks.has(landmarkId)) {
       return;
     }
+
+    text = await this.getTranslatedText(text, language);
 
     this.synthesis.cancel();
 
@@ -359,7 +399,7 @@ export class AudioService {
   }
 
   // Play text with speed control (for panel TTS)
-  playText(text: string, language: string = 'en', rate: number = 1.0, onEnd?: () => void) {
+  async playText(text: string, language: string = 'en', rate: number = 1.0, onEnd?: () => void) {
     if (this.playbackTimer) {
       clearTimeout(this.playbackTimer);
       this.playbackTimer = null;
@@ -372,6 +412,8 @@ export class AudioService {
     if (!this.hasNativeVoice(language)) {
       this.debugWarnOnce(`native-missing-${language}`, `[AudioService] Native voice missing for ${language}. Guidance may be suboptimal.`);
     }
+
+    text = await this.getTranslatedText(text, language);
 
     this.playbackTimer = setTimeout(() => {
       this.currentUtterance = new SpeechSynthesisUtterance(text);
@@ -765,6 +807,8 @@ export class AudioService {
     this.stopOpenAISentences();
     this.stopMP3();
     this.stop();
+
+    text = await this.getTranslatedText(text, language);
 
     this.openaiSentences = AudioService.splitIntoSentences(text);
     if (this.openaiSentences.length === 0) return false;

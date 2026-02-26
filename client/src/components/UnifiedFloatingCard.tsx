@@ -41,6 +41,7 @@ import {
   Car,
   Plus
 } from 'lucide-react';
+import { useLiveTranslation } from '@/hooks/useLiveTranslation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -248,6 +249,14 @@ export function UnifiedFloatingCard({
   const [isPaused, setIsPaused] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
+
+  const nameFallback = getTranslatedContent(selectedLandmark, selectedLanguage, 'name');
+  const descFallback = getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
+  const detailFallback = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription');
+
+  const translatedName = useLiveTranslation(nameFallback, selectedLanguage);
+  const translatedDesc = useLiveTranslation(descFallback, selectedLanguage);
+  const translatedDetail = useLiveTranslation(detailFallback, selectedLanguage);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
   const [tourAddedInDialog, setTourAddedInDialog] = useState(false);
   const listScrollRef = useRef<HTMLDivElement>(null);
@@ -509,7 +518,7 @@ export function UnifiedFloatingCard({
                   )}
 
                   <p className="text-sm text-slate-600 dark:text-slate-400">
-                    {getTranslatedContent(selectedLandmark, selectedLanguage, 'description')}
+                    {translatedDesc}
                   </p>
 
 
@@ -524,10 +533,10 @@ export function UnifiedFloatingCard({
                     </Button>
                   </div>
 
-                  {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') && (
+                  {translatedDetail && (
                     <div className="pt-3 border-t">
                       <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-                        {getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription')}
+                        {translatedDetail}
                       </p>
                     </div>
                   )}

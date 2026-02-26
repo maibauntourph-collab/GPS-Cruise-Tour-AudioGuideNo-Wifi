@@ -12,6 +12,7 @@ import { audioService, AudioService } from '@/lib/audioService';
 import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
 import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
 import { useQuery } from '@tanstack/react-query';
+import { useLiveTranslation } from '@/hooks/useLiveTranslation';
 import { User, DbLandmarkGuide } from '@shared/schema';
 import { Users, Headphones, Check, User as UserIcon } from 'lucide-react';
 
@@ -43,6 +44,12 @@ export default function LandmarkDetailDialog({
   const [selectedGuideId, setSelectedGuideId] = useState<string | null>(null);
   const [audioContentType, setAudioContentType] = useState<'summary' | 'narration'>('narration');
   const [activeTab, setActiveTab] = useState<string>('history');
+
+  const nameFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'name') : '';
+  const descFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'description') : '';
+
+  const translatedName = useLiveTranslation(nameFallback, selectedLanguage);
+  const translatedDesc = useLiveTranslation(descFallback, selectedLanguage);
 
   // Fetch guides for this landmark
   const { data: guides = [] } = useQuery<DbLandmarkGuide[]>({
@@ -211,22 +218,27 @@ export default function LandmarkDetailDialog({
             </DialogDescription>
             <div className="flex items-center justify-between gap-4">
               <div className="flex-1">
-                <DialogTitle className="text-xl font-bold mb-1" data-testid="text-landmark-detail-name">
-                  {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                <DialogTitle className="text-xl sm:text-2xl font-bold p-0 mb-1 leading-tight line-clamp-2">
+                  {translatedName}
                 </DialogTitle>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <Badge variant="outline" className="bg-[#FFF1EB] text-[#E67E22] border-[#FFE0D1] py-0 px-2 rounded-full text-[10px] font-bold">
-                    {landmark?.category}
-                  </Badge>
-                  <span>•</span>
-                  <span className="line-clamp-1 opacity-80">{getTranslatedContent(landmark, selectedLanguage, 'description')}</span>
+                <div className="flex flex-col gap-1 mt-1">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Badge variant="outline" className="bg-[#FFF1EB] text-[#E67E22] border-[#FFE0D1] py-0 px-2 rounded-full text-[10px] font-bold">
+                      {landmark?.category}
+                    </Badge>
+                  </div>
+                  {translatedDesc && (
+                    <div className="flex items-center gap-2 hidden sm:flex">
+                      <span className="line-clamp-1 opacity-80">{translatedDesc}</span>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex items-center gap-1.5 h-8">
                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={handleDialogClose}>
                   <RotateCcw className="w-4 h-4 text-[#A8A294]" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={handleDialogClose}>
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={() => onNavigate(landmark!)}>
                   <Navigation className="w-4 h-4 text-[#E67E22]" />
                 </Button>
               </div>
@@ -827,7 +839,7 @@ export default function LandmarkDetailDialog({
             </Button>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </DialogContent >
+    </Dialog >
   );
 }
