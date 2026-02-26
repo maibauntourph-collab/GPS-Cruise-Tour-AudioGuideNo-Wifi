@@ -256,7 +256,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     booking: 'Booking',
     shopping: 'Shopping',
     localProducts: 'Local Souvenirs',
-    buyNow: 'Buy Now'
+    buyNow: 'Buy Now',
+    shoppingTeaser: 'Discover handcrafted local gifts, even offline.',
+    newFeature: 'NEW'
   },
   ko: {
     landmarks: '명소',
@@ -486,7 +488,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     booking: '예약',
     shopping: '기념품 숍',
     localProducts: '로컬 장인 상품',
-    buyNow: '지금 구매'
+    buyNow: '지금 구매',
+    shoppingTeaser: '장인이 만든 명소 기념품을 오프라인에서도 만나보세요',
+    newFeature: 'NEW'
   },
   es: {
     landmarks: 'Monumentos',

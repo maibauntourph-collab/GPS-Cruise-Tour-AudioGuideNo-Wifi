@@ -8,7 +8,7 @@ import {
   MapPin, History, Route, Clock, Navigation,
   Loader2, Sparkles, Shield, User, Users, Store,
   Globe, Plane, Ship, Activity, Compass, ChevronRight,
-  Languages, Heart
+  Languages, Heart, ShoppingBag
 } from 'lucide-react';
 import InstallPrompt from '@/components/InstallPrompt';
 import { getSavedTourData, SavedTourData } from '@/components/StartupDialog';
@@ -222,12 +222,24 @@ export default function RoleSelection() {
                         )}
                       </div>
 
-                      <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors">
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors flex items-center gap-2">
+                        {role.id === 'traveler' && (
+                          <div className="flex items-center gap-1 bg-amber-500/20 text-amber-400 text-[10px] px-2 py-0.5 rounded-full border border-amber-500/30 animate-pulse">
+                            <ShoppingBag className="w-3 h-3" />
+                            {t('newFeature', selectedLanguage)}
+                          </div>
+                        )}
                         {selectedLanguage === 'ko' ? role.title.ko : role.title.en}
                       </h3>
                       <p className="text-sm text-gray-400 line-clamp-2 leading-relaxed mb-4">
                         {selectedLanguage === 'ko' ? role.desc.ko : role.desc.en}
                       </p>
+                      {role.id === 'traveler' && (
+                        <p className="text-[10px] text-blue-400/80 font-medium flex items-center gap-1.5 mt-auto mb-4 bg-blue-500/5 p-2 rounded-xl border border-blue-500/10">
+                          <Sparkles className="w-3 h-3" />
+                          {t('shoppingTeaser', selectedLanguage)}
+                        </p>
+                      )}
                     </div>
 
                     <div className="relative z-10 flex items-center justify-between">
