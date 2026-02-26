@@ -232,9 +232,12 @@ export function UnifiedFloatingCard({
   // ✅ [Bug Doctor] 외부 카드 상태 props - 이것이 없으면 버튼 클릭이 카드에 반영 안 됨!
   forceShowList = false,
   isCardMinimized = false,
-  onToggleMinimized
+  onToggleMinimized,
+  // [교수님 지시] AI 추천 다이얼로그를 열기 위한 콜백 — AI Pick 탭에서 사용
+  onOpenAIRecommend,
 }: UnifiedFloatingCardProps) {
-  const [activeTab, setActiveTab] = useState<'list' | 'cruise' | 'tour'>('list');
+  // [교수님 지시] 탭 타입에 'ai' 추가 — AI 추천 탭 지원
+  const [activeTab, setActiveTab] = useState<'list' | 'cruise' | 'tour' | 'ai'>('list');
   // [Bug Doctor] 내부 최소화 상태: 외부 isCardMinimized와 동기화 (로컬 상태 제거)
   const [showTransitDetails, setShowTransitDetails] = useState(false);
   const [landmarkSearchQuery, setLandmarkSearchQuery] = useState('');
@@ -343,8 +346,12 @@ export function UnifiedFloatingCard({
     return result.sort((a, b) => (a.distance || 0) - (b.distance || 0));
   }, [landmarks, userPosition, landmarkSearchQuery, showLandmarks, showActivities, showRestaurants, showGiftShops, selectedLanguage]);
 
+  // [Bug Doctor 수정] 리스트에서 랜드마크 클릭 시:
+  // 1) 부모(Home.tsx)에 선택 알림 → selectedLandmark prop 업데이트
+  // 2) 즉시 LandmarkDetailDialog를 열어 사용자 피드백 보장
   const handleLandmarkClick = (landmark: Landmark) => {
     onLandmarkSelect?.(landmark);
+    setShowDetailDialog(true);
   };
 
   const getTrafficInfo = (lang: string, time?: Date | null) => {
@@ -387,11 +394,20 @@ export function UnifiedFloatingCard({
       {/* HEADER */}
       <div className="p-4 flex items-center justify-between border-b bg-white/50 backdrop-blur-md">
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth">
+          {/* [교수님 지시] 목록(리스트) 탭 버튼 — 클릭 시 랜드마크 상세 닫고 목록 표시 */}
           <Button
             variant={activeTab === 'list' ? 'default' : 'ghost'}
             size="sm"
             className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'list' ? 'bg-[#E9633F] text-white font-black shadow-lg shadow-orange-100' : 'text-gray-500 hover:bg-gray-100'}`}
-            onClick={() => setActiveTab('list')}
+            onClick={() => {
+              setActiveTab('list');
+              // [핵심] 헤더 목록 아이콘 클릭 시 현재 열려있는 랜드마크 상세를 닫아
+              // 리스트가 바로 보이도록 처리합니다.
+              if (selectedLandmark) {
+                setShowDetailDialog(false);
+                onLandmarkClose();
+              }
+            }}
           >
             <List className="w-4 h-4 mr-1.5" />
             <span className="text-xs tracking-tight">{t('list', selectedLanguage)}</span>
@@ -415,6 +431,16 @@ export function UnifiedFloatingCard({
           >
             <MapPinned className="w-4 h-4 mr-1.5" />
             <span className="text-xs tracking-tight">{t('myTour', selectedLanguage)}</span>
+          </Button>
+          {/* [교수님 지시] AI 추천 탭 — My Tour 다음에 배치 */}
+          <Button
+            variant={activeTab === 'ai' ? 'default' : 'ghost'}
+            size="sm"
+            className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'ai' ? 'bg-purple-600 text-white font-black shadow-lg shadow-purple-100' : 'text-gray-500 hover:bg-gray-100'}`}
+            onClick={() => setActiveTab('ai')}
+          >
+            <Wand2 className="w-4 h-4 mr-1.5" />
+            <span className="text-xs tracking-tight">{selectedLanguage === 'ko' ? 'AI 추천' : 'AI Pick'}</span>
           </Button>
         </div>
         <div className="flex items-center gap-2 ml-2">
@@ -544,22 +570,96 @@ export function UnifiedFloatingCard({
             {activeTab === 'tour' && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h5 className="font-bold text-sm">내 투어 ({tourStops.length})</h5>
+                  <h5 className="font-bold text-sm">{selectedLanguage === 'ko' ? `내 투어 (${tourStops.length})` : `My Tour (${tourStops.length})`}</h5>
                   <Button size="sm" className="bg-indigo-600 rounded-full h-7 text-xs" onClick={() => onToggleSimulation?.()}>
-                    {isSimulationMode ? '중단' : '시작'}
+                    {isSimulationMode ? (selectedLanguage === 'ko' ? '중단' : 'Stop') : (selectedLanguage === 'ko' ? '시작' : 'Start')}
                   </Button>
                 </div>
-                <div className="space-y-2">
-                  {tourStops.map((stop, idx) => (
-                    <div key={stop.id} className="flex items-center gap-2 p-2 bg-muted rounded-lg">
-                      <span className="w-5 h-5 rounded-full bg-slate-200 text-[10px] flex items-center justify-center font-bold">{idx + 1}</span>
-                      <span className="text-xs font-medium truncate flex-1">{getTranslatedContent(stop, selectedLanguage, 'name')}</span>
-                      <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => onRemoveTourStop?.(stop.id)}>
-                        <X className="w-3 h-3 text-red-500" />
-                      </Button>
-                    </div>
-                  ))}
+                {tourStops.length === 0 ? (
+                  <div className="py-10 text-center text-muted-foreground">
+                    <MapPinned className="w-8 h-8 mx-auto mb-2 opacity-30" />
+                    <p className="text-xs">{selectedLanguage === 'ko' ? '지도에서 명소를 추가하세요' : 'Add landmarks from the map'}</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {tourStops.map((stop, idx) => (
+                      <div key={stop.id} className="flex items-center gap-2 p-2 bg-muted rounded-lg">
+                        <span className="w-5 h-5 rounded-full bg-slate-200 text-[10px] flex items-center justify-center font-bold">{idx + 1}</span>
+                        <span className="text-xs font-medium truncate flex-1">{getTranslatedContent(stop, selectedLanguage, 'name')}</span>
+                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => onRemoveTourStop?.(stop.id)}>
+                          <X className="w-3 h-3 text-red-500" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* [교수님 지시] AI Suggest 탭 컨텐츠 패널
+                AI 추천 결과가 있으면 itinerary 목록을 표시하고,
+                없으면 사용자에게 AI 추천 시작 버튼을 제공합니다. */}
+            {activeTab === 'ai' && (
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                    <Wand2 className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-sm text-slate-800">
+                      {selectedLanguage === 'ko' ? 'AI 투어 추천' : 'AI Tour Recommendation'}
+                    </h5>
+                    <p className="text-[10px] text-muted-foreground">
+                      {selectedLanguage === 'ko' ? 'GPT가 최적 경로를 제안합니다' : 'GPT suggests the optimal route'}
+                    </p>
+                  </div>
                 </div>
+
+                {aiRecommendation ? (
+                  <div className="space-y-3">
+                    <div className="p-3 bg-purple-50 rounded-xl border border-purple-100 text-xs text-purple-800 leading-relaxed">
+                      {aiRecommendation.explanation}
+                    </div>
+                    <div className="space-y-2">
+                      {aiRecommendation.itinerary.map((item, idx) => {
+                        const lm = landmarks.find(l => l.id === item.landmarkId);
+                        if (!lm) return null;
+                        return (
+                          <div
+                            key={item.landmarkId}
+                            className="flex items-center gap-2 p-2 bg-white rounded-lg border cursor-pointer hover:shadow-sm transition-all"
+                            onClick={() => handleLandmarkClick(lm)}
+                          >
+                            <span className="w-5 h-5 rounded-full bg-purple-100 text-purple-700 text-[10px] flex items-center justify-center font-bold shrink-0">{item.order}</span>
+                            <span className="text-xs font-medium truncate">{getTranslatedContent(lm, selectedLanguage, 'name')}</span>
+                            <Navigation className="w-3 h-3 text-muted-foreground ml-auto shrink-0" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <p className="text-[10px] text-center text-muted-foreground">
+                      ⏱ {selectedLanguage === 'ko' ? `총 예상 시간: ${aiRecommendation.totalEstimatedTime}분` : `Est. time: ${aiRecommendation.totalEstimatedTime} min`}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center gap-4 py-8">
+                    <div className="w-16 h-16 rounded-full bg-purple-50 border-2 border-purple-100 flex items-center justify-center">
+                      <Wand2 className="w-7 h-7 text-purple-400" />
+                    </div>
+                    <p className="text-xs text-center text-muted-foreground px-4">
+                      {selectedLanguage === 'ko'
+                        ? 'AI가 현재 명소 목록을 분석하여 최적의 투어 순서를 추천해 드립니다.'
+                        : 'AI will analyze current landmarks and suggest the optimal tour order.'}
+                    </p>
+                    <Button
+                      className="bg-purple-600 hover:bg-purple-700 text-white rounded-full px-6 h-10 gap-2 shadow-md shadow-purple-200"
+                      onClick={() => { onOpenAIRecommend?.(); }}
+                    >
+                      <Wand2 className="w-4 h-4" />
+                      {selectedLanguage === 'ko' ? 'AI 투어 추천 받기' : 'Get AI Suggestion'}
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
           </div>

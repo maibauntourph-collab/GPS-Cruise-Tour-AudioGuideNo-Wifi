@@ -189,12 +189,36 @@ export default function Home() {
 
   // UI States
   const [isCardMinimized, setIsCardMinimized] = useState(false);
+  // ✅ [마스터 모드 시스템 | 2026-02-27] AppMode 단일 상태로 UI를 통합 제어합니다.
+  // 학생들에게: 기존에 4개 상태(isNavigationOnlyMode, forceShowCard, temporaryShowCard, isCardMinimized)가
+  // 서로 충돌하던 것을 **하나의 명확한 모드**로 통합했습니다. 이것이 '상태 머신(State Machine)'입니다!
+  // map     → 지도만 보이고 카드는 숨김 (기본 상태)
+  // list    → 랜드마크 목록 카드 표시
+  // detail  → 특정 랜드마크 상세 카드 표시
+  // nav     → 길 안내 전용 모드 (지도 확대)
+  // simulation → 시뮬레이션 모드
+  type AppMode = 'map' | 'list' | 'detail' | 'nav' | 'simulation';
+  const [appMode, setAppMode] = useState<AppMode>('map');
+  // 뒤로가기를 위해 이전 모드를 기억합니다. (예: list → detail → 뒤로 → list)
+  const prevAppModeRef = useRef<AppMode>('map');
+
+  // 모드를 전환하는 안전한 헬퍼 함수: 이전 모드를 항상 저장합니다.
+  const transitionTo = useCallback((nextMode: AppMode) => {
+    prevAppModeRef.current = appMode;
+    setAppMode(nextMode);
+    // [적요] 모드 전환 시 카드 최소화 해제 (list/detail 진입 시 항상 카드가 펼쳐짐)
+    if (nextMode !== 'map') setIsCardMinimized(false);
+  }, [appMode]);
+
+  // [파생 상태] 카드가 보여야 하는지를 appMode 하나로 결정합니다.
+  // 학생들: 이제 버튼 하나 = setAppMode 한 줄이면 끝입니다!
+  const isCardVisible = appMode !== 'map' || isSimulationMode;
+
   const [showMinimalTransitUI, setShowMinimalTransitUI] = useState(false);
   const [activeRoute, setActiveRoute] = useState<Landmark | null>(null);
   const [routeInfo, setRouteInfo] = useState<any>(null);
   const [isManualSelection, setIsManualSelection] = useState(false);
   const [hasArrivedAtDestination, setHasArrivedAtDestination] = useState(false);
-  const [forceShowCard, setForceShowCard] = useState(false);
   const [showUpdatePrompt, setShowUpdatePrompt] = useState(false);
   const [showQrDialog, setShowQrDialog] = useState(false);
   const [showCreatorDashboard, setShowCreatorDashboard] = useState(false);
@@ -218,11 +242,10 @@ export default function Home() {
   const userHasInteractedRef = useRef(false);
 
   // Mode settings
-  const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
   const [isCarNavZoomMode, setIsCarNavZoomMode] = useState(false);
   // ✅ [Bug Doctor | 2026-02-27] 시뮬레이션 컨트롤 바 최소화 토글 상태
-  // 학생들에게: true이면 'SIMULATION' 라벨과 X버튼만 보이고, false이면 모든 컨트롤이 보입니다.
   const [isSimulationBarMinimized, setIsSimulationBarMinimized] = useState(false);
+  // [하위 호환성] 시뮬레이션 관련 기존 설정 유지
   const [simulationAudioSettings, setSimulationAudioSettings] = useState({
     resumePlayback: true,
     playInBackground: false
@@ -238,7 +261,7 @@ export default function Home() {
   const [lastUIAction, setLastUIAction] = useState<'NONE' | 'CITY_CHANGE' | 'STARTUP_FINISH'>('NONE');
   const [isBackgroundGuideEnabled, setIsBackgroundGuideEnabled] = useState(false);
   const [showBackgroundGuideDialog, setShowBackgroundGuideDialog] = useState(false);
-  const [temporaryShowCard, setTemporaryShowCard] = useState(false);
+  // [하위 호환성] Dodari Architecture states
 
   // Queries
   const { data: cities = [], isLoading: citiesLoading } = useQuery<City[]>({
@@ -309,21 +332,14 @@ export default function Home() {
     setLastUIAction('CITY_CHANGE');
   }, []);
 
-  // ✅ [Bug Doctor | 2026-02-27] 마스터 가시성 핸들러
-  // » 이 함수 하나로 'List' 버튼 클릭 시 명시되는 모든 상태를 원자적으로 리셋해 서로 간섭을 방지할 수 있으며
-  // » 학생들은 '무엇이 필요한지' 연듄하는 코드보다 '어떻게 다 맞춰 실행하는지' 연듄하는 코드를 선호하세요 공교수님 한마디: atomicity
+  // ✅ [마스터 모드 시스템 | 2026-02-27] List 버튼 클릭 핸들러
+  // 학생들에게: 이제 setAppMode 한 줄이면 끝입니다! 기존 4줄 코드를 1줄로 줄였습니다.
+  // 예시: transitionTo('list') 하면 자동으로 isCardMinimized=false가 되고, 카드가 표시됩니다.
   const handleShowLandmarkList = useCallback(() => {
-    // 1. 네비게이션 전용 모드 해제
-    setIsNavigationOnlyMode(false);
-    // 2. 반드시 커드 표시
-    setIsCardMinimized(false);
-    // 3. 강제 노출 플래그 활성화
-    setForceShowCard(true);
-    // 4. 임시 열기 플래그도 활성화
-    setTemporaryShowCard(true);
-    // 5. 하위 컴포넌트(커드)에 리스트 탭으로 전환 신호 발사
+    transitionTo('list');
+    // 하위 컴포넌트(UnifiedFloatingCard)에 리스트 탭 포커스 신호 발사
     window.dispatchEvent(new CustomEvent('force-show-list-tab'));
-  }, []);
+  }, [transitionTo]);
 
   // [Bug Doctor] Style Guard: Modal closing might leave body scroll locked
   useEffect(() => {
@@ -346,18 +362,17 @@ export default function Home() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // [Dodari] Auto-Show Landmark List after sequence
+  // [Dodari] 시작 시퀀스 완료 후 랜드마크 목록 자동 표시
+  // 학생들: isWelcomeHandled가 true가 되면 (=시작 안내 끝), 1.5초 후 list 모드로 자동 진입
   useEffect(() => {
     if (isWelcomeHandled && !showStartupDialog && !landingCityId && !selectedLandmark && !isSimulationMode) {
       const timer = setTimeout(() => {
-        setIsNavigationOnlyMode(false);
-        setIsCardMinimized(false);
-        setForceShowCard(true);
-        setTimeout(() => setForceShowCard(false), 100);
+        // [적요] appMode를 'list'로 전환하면 isCardVisible=true, 카드 자동 슬라이드 업
+        transitionTo('list');
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [isWelcomeHandled, showStartupDialog, landingCityId, selectedLandmark, isSimulationMode]);
+  }, [isWelcomeHandled, showStartupDialog, landingCityId, selectedLandmark, isSimulationMode, transitionTo]);
 
   // [Dodari] Magic Landing Trigger
   useEffect(() => {
@@ -398,9 +413,8 @@ export default function Home() {
       setActiveRoute(pendingLandmark);
       setIsManualSelection(false);
       setHasArrivedAtDestination(false);
-      setIsCardMinimized(false);
-      setForceShowCard(true);
-      setTimeout(() => setForceShowCard(false), 2000);
+      // [적요] 인앱 길 안내 시 nav 모드로 전환 (이전에 forceShowCard 플래그 필요 없음)
+      transitionTo('nav');
     }
     setShowDirectionsDialog(false);
   };
@@ -776,8 +790,8 @@ export default function Home() {
 
       const imageData = canvas.toDataURL('image/png', 0.9);
       setCapturedRouteImage(imageData);
-      setForceShowCard(true);
-      setIsCardMinimized(false);
+      // [적요] 라우트 캡처 후 list 모드로 전환 (컴포넌트가 보임)
+      transitionTo('list');
 
       toast({
         title: selectedLanguage === 'ko' ? '경로 캡쳐 완료' : 'Route Captured',
@@ -981,6 +995,9 @@ export default function Home() {
                 variant="ghost"
                 className="h-10 px-6 rounded-full bg-indigo-600/90 text-white font-black hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-500/30 flex items-center gap-2 transition-all active:scale-95"
                 onClick={() => {
+                  // [적요] Start 버튼: simulation 모드로 전환
+                  // prevMode 를 map으로 저장하고 simulation으로 진입
+                  transitionTo('simulation');
                   setIsSimulationMode(true);
                   setIsSimulationPaused(false);
                   toast({
@@ -1102,9 +1119,11 @@ export default function Home() {
                   size="icon"
                   className="h-10 w-10 bg-white/5 hover:bg-red-500/20 text-white rounded-full transition-colors"
                   onClick={() => {
+                    // [적요] 시뮬레이션 종료 시 map 모드로 복관
                     setIsSimulationMode(false);
                     setIsSimulationPaused(false);
                     setIsSimulationBarMinimized(false);
+                    setAppMode('map');
                   }}
                 >
                   <X className="w-5 h-5" />
@@ -1193,16 +1212,20 @@ export default function Home() {
               }}
               selectedLandmark={selectedLandmark}
               onLandmarkSelect={(l) => {
+                // [적요] 지도에서 마커 탭 시 detail 모드로 진입
+                // prevAppModeRef를 현재 모드로 기록 (map 또는 list)
                 setIsManualSelection(true);
+                prevAppModeRef.current = appMode;
                 setSelectedLandmark(l);
+                setAppMode('detail');
                 setIsCardMinimized(false);
               }}
               isMobile={isMobile}
               isCarNavZoomMode={isCarNavZoomMode}
             />
 
-            {/* List Toggle Floating - Hidden when card is visible */}
-            {isCardMinimized && !selectedLandmark && (
+            {/* 캫드가 단힐 상태에서 'VIEW LIST' 버튼 표시 */}
+            {isCardMinimized && appMode !== 'map' && (
               <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[1500]">
                 <Button
                   className="h-14 px-8 rounded-full shadow-2xl bg-white text-slate-800 border-2 border-primary/20 hover:border-primary/50 transition-all flex items-center gap-3 active:scale-95 font-black text-lg"
@@ -1216,15 +1239,28 @@ export default function Home() {
           </div>
         </main>
 
-        {/* ✅ [Bug Doctor] forceShowCard=true이면 무조건 렌더링하도록 조건 강화 */}
-        {(forceShowCard || !isNavigationOnlyMode || temporaryShowCard || selectedLandmark) && (
+        {/* ✅ [마스터 모드 | 2026-02-27]
+             isCardVisible = appMode !== 'map' | | isSimulationMode
+             이제 forceShowCard / isNavigationOnlyMode 없이 단일 변수로 제어됩니다 */}
+        {isCardVisible && (
           <UnifiedFloatingCard
-            forceShowList={forceShowCard}
+            forceShowList={appMode === 'list'}
             isCardMinimized={isCardMinimized}
             onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
             selectedLandmark={selectedLandmark}
-            onLandmarkSelect={(l: Landmark) => { setSelectedLandmark(l); setIsCardMinimized(false); }}
-            onLandmarkClose={() => { setSelectedLandmark(null); setIsCardMinimized(false); setTemporaryShowCard(false); }}
+            onLandmarkSelect={(l: Landmark) => {
+              // [적요] 리스트에서 랜드마크 선택 시
+              // 이전 모드(prevAppModeRef)를 list로 기록한 후 detail로 진입
+              prevAppModeRef.current = appMode;
+              setSelectedLandmark(l);
+              setAppMode('detail');
+              setIsCardMinimized(false);
+            }}
+            onLandmarkClose={() => {
+              // [적요] 랜드마크 닫기: 이전 모드로 복귀 (list에서 왔으면 list, 지도에서 왔으면 map)
+              setSelectedLandmark(null);
+              setAppMode(prevAppModeRef.current === 'list' ? 'list' : 'map');
+            }}
             landmarks={landmarks}
             tourStops={tourStops}
             onAddToTour={handleAddToTour}
