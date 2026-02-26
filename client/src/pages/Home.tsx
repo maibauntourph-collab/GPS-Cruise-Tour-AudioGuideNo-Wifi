@@ -1058,11 +1058,36 @@ export default function Home() {
                     [1, 2, 3, 4].map(i => (
                       <div key={i} className="h-40 rounded-2xl bg-slate-100 animate-pulse" />
                     ))
-                  ) : (
-                    cities.filter(c =>
-                      c.name.toLowerCase().includes(citySearchQuery.toLowerCase()) ||
-                      c.country.toLowerCase().includes(citySearchQuery.toLowerCase())
-                    ).map((city) => {
+                  ) : (() => {
+                    // [Bug Doctor] 검색 시 다국어(한국어) 입력을 영어 이름으로 변환하여 매칭을 돕는 매핑 테이블
+                    const KOREAN_CITY_MAP: Record<string, string[]> = {
+                      'roma': ['로마'],
+                      'rome': ['로마'],
+                      'venice': ['베네치아', '베니스'],
+                      'paris': ['파리'],
+                      'london': ['런던'],
+                      'barcelona': ['바르셀로나'],
+                      'penang': ['페낭'],
+                      'singapore': ['싱가포르', '싱가폴'],
+                      'cebu': ['세부'],
+                      'naples': ['나폴리'],
+                      'kuala-lumpur': ['쿠알라룸푸르', '쿠알라 룸푸르'],
+                      'phuket': ['푸껫', '푸켓']
+                    };
+
+                    const searchLower = citySearchQuery.toLowerCase();
+                    const filterCities = cities.filter(c => {
+                      const nameLower = c.name.toLowerCase();
+                      const countryLower = c.country.toLowerCase();
+                      const citySlug = nameLower.replace(/[\s_]+/g, '-');
+
+                      const matchDirect = nameLower.includes(searchLower) || countryLower.includes(searchLower);
+                      const matchKorean = KOREAN_CITY_MAP[citySlug] && KOREAN_CITY_MAP[citySlug].some(koreanName => koreanName.includes(searchLower));
+
+                      return matchDirect || matchKorean;
+                    });
+
+                    return filterCities.map((city) => {
                       // [Bug Doctor] city.id가 UUID 등일 경우를 대비해 name을 slug로 변환하여 매칭합니다. (예: "Kuala Lumpur" -> "kuala-lumpur")
                       const citySlug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
                       const landingContent = (city as any)?.landingContent || LANDING_DATA[citySlug] || LANDING_DATA[city.id];
@@ -1097,9 +1122,9 @@ export default function Home() {
                             <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-black px-2 py-1 rounded-full shadow">✓</div>
                           )}
                         </button>
-                      )
-                    })
-                  )}
+                      );
+                    });
+                  })()}
                 </div>
 
                 {/* CTA 버튼 */}

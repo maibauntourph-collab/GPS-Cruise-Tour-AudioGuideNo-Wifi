@@ -320,6 +320,21 @@ export function UnifiedFloatingCard({
     return `${(meters / 1000).toFixed(1)}km`;
   };
 
+  const formatWalkTime = (meters: number, lang: string) => {
+    const minutes = Math.ceil(meters / 84); // Roughly 5km/h walking speed
+    if (lang === 'ko') {
+      if (minutes < 60) return `도보 ${minutes}분`;
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      return `도보 ${hours}시간 ${mins}분`;
+    } else {
+      if (minutes < 60) return `${minutes} min walk`;
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      return `${hours}h ${mins}m walk`;
+    }
+  };
+
   const filteredListLandmarks = useMemo(() => {
     let result = landmarks.map(landmark => ({
       landmark,
@@ -547,7 +562,7 @@ export function UnifiedFloatingCard({
                         </div>
                         <div className="min-w-0">
                           <h5 className="text-sm font-semibold truncate">{getTranslatedContent(landmark, selectedLanguage, 'name')}</h5>
-                          {distance !== null && <p className="text-[10px] text-muted-foreground">{formatDistance(distance)} • {landmark.category}</p>}
+                          {distance !== null && <p className="text-[10px] text-muted-foreground">{formatDistance(distance)} • {formatWalkTime(distance, selectedLanguage)} • {landmark.category}</p>}
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
