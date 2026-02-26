@@ -101,8 +101,39 @@ import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 // Landing Data fallback if schema doesn't export it
 const LANDING_DATA: Record<string, any> = {
   'venice': {
-    'ko': { title: '물 위의 도시, 베네치아', subTitle: '곤돌라와 함께하는 낭만 여행', heroImage: 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f' },
-    'en': { title: 'Venice, City of Water', subTitle: 'Romantic journey with gondolas', heroImage: 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f' }
+    'ko': { title: '물 위의 도시, 베네치아', subTitle: '곤돌라와 함께하는 낭만 여행', heroImage: 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?w=400&q=70' },
+    'en': { title: 'Venice, City of Water', subTitle: 'Romantic journey with gondolas', heroImage: 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?w=400&q=70' }
+  },
+  'rome': {
+    'ko': { title: '영원한 도시, 로마', subTitle: '고대 로마의 숨결을 느끼다', heroImage: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70' },
+    'en': { title: 'Rome, The Eternal City', subTitle: 'Feel the breath of Ancient Rome', heroImage: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70' }
+  },
+  'paris': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&q=70' }
+  },
+  'london': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&q=70' }
+  },
+  'barcelona': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&q=70' }
+  },
+  'penang': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1596701540321-7299723bd739?w=400&q=70' }
+  },
+  'singapore': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=400&q=70' }
+  },
+  'cebu': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=400&q=70' }
+  },
+  'naples': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1588614959060-4d144f28b207?w=400&q=70' }
+  },
+  'kuala-lumpur': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1596422846543-74c6fc1e4b6e?w=400&q=70' }
+  },
+  'phuket': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1589394815804-964ce0ff96c7?w=400&q=70' }
   }
 };
 import LoginDialog from '@/components/LoginDialog';
@@ -234,6 +265,7 @@ export default function Home() {
   // [신기능 | 2026-02-27] 랜딩 전 국가/도시 선택 카드 표시 상태
   // 학생들: 앱 시작 시 이 flag가 true가 되면 국가 선택 카드를 보여줍니다.
   const [showCountrySelector, setShowCountrySelector] = useState(false);
+  const [citySearchQuery, setCitySearchQuery] = useState('');
 
   // Stats
   const [showUpdateStats, setShowUpdateStats] = useState(false);
@@ -1008,6 +1040,17 @@ export default function Home() {
                   >✕</button>
                 </div>
 
+                {/* 도시 검색창 추가 */}
+                <div className="relative mb-4">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <Input
+                    placeholder={selectedLanguage === 'ko' ? '목적지 검색...' : 'Search destination...'}
+                    className="pl-9 h-10 bg-slate-100 border-none rounded-xl"
+                    value={citySearchQuery}
+                    onChange={(e) => setCitySearchQuery(e.target.value)}
+                  />
+                </div>
+
                 {/* 도시 카드 그리드 */}
                 <div className="grid grid-cols-2 gap-3 mb-5">
                   {cities.length === 0 ? (
@@ -1016,33 +1059,46 @@ export default function Home() {
                       <div key={i} className="h-40 rounded-2xl bg-slate-100 animate-pulse" />
                     ))
                   ) : (
-                    cities.map((city) => (
-                      <button
-                        key={city.id}
-                        className={`relative rounded-2xl overflow-hidden h-40 group shadow-md hover:shadow-xl transition-all active:scale-95 ${selectedCityId === city.id ? 'ring-3 ring-orange-500 ring-offset-2' : ''}`}
-                        onClick={() => {
-                          // [적요] 도시 선택 → 도시 변경 → 카드 닫기 → list 모드 진입
-                          handleCityChange(city.id);
-                          setShowCountrySelector(false);
-                          setTimeout(() => transitionTo('list'), 200);
-                        }}
-                      >
-                        {/* 배경: 도시별 Unsplash 이미지 */}
-                        <img
-                          src={`https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70`}
-                          alt={city.name}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                        <div className="absolute bottom-3 left-3 text-left">
-                          <div className="text-white font-black text-base leading-tight drop-shadow">{city.name}</div>
-                          <div className="text-white/80 text-xs font-medium">{city.country}</div>
-                        </div>
-                        {selectedCityId === city.id && (
-                          <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-black px-2 py-1 rounded-full shadow">✓</div>
-                        )}
-                      </button>
-                    ))
+                    cities.filter(c =>
+                      c.name.toLowerCase().includes(citySearchQuery.toLowerCase()) ||
+                      c.country.toLowerCase().includes(citySearchQuery.toLowerCase())
+                    ).map((city) => {
+                      // [Bug Doctor] city.id가 UUID 등일 경우를 대비해 name을 slug로 변환하여 매칭합니다. (예: "Kuala Lumpur" -> "kuala-lumpur")
+                      const citySlug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
+                      const landingContent = (city as any)?.landingContent || LANDING_DATA[citySlug] || LANDING_DATA[city.id];
+
+                      const content = landingContent?.[selectedLanguage] || landingContent?.['en'];
+                      // 기본 이미지 (로마 콜로세움) 대신 각 도시의 랜딩 이미지를 활용합니다.
+                      const cityImage = content?.heroImage || 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70';
+
+                      return (
+                        <button
+                          key={city.id}
+                          className={`relative rounded-2xl overflow-hidden h-40 group shadow-md hover:shadow-xl transition-all active:scale-95 ${selectedCityId === city.id ? 'ring-3 ring-orange-500 ring-offset-2' : ''}`}
+                          onClick={() => {
+                            // [적요] 도시 선택 → 도시 변경 → 카드 닫기 → list 모드 진입
+                            handleCityChange(city.id);
+                            setShowCountrySelector(false);
+                            setTimeout(() => transitionTo('list'), 200);
+                          }}
+                        >
+                          {/* 배경: 도시별 Unsplash 이미지 */}
+                          <img
+                            src={cityImage}
+                            alt={city.name}
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                          <div className="absolute bottom-3 left-3 text-left">
+                            <div className="text-white font-black text-base leading-tight drop-shadow">{city.name}</div>
+                            <div className="text-white/80 text-xs font-medium">{city.country}</div>
+                          </div>
+                          {selectedCityId === city.id && (
+                            <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-black px-2 py-1 rounded-full shadow">✓</div>
+                          )}
+                        </button>
+                      )
+                    })
                   )}
                 </div>
 
@@ -1349,6 +1405,14 @@ export default function Home() {
             landmarks={landmarks}
             tourStops={tourStops}
             onAddToTour={handleAddToTour}
+            onRemoveTourStop={(id) => {
+              setTourStops(tourStops.filter(s => s.id !== id));
+              setTourStopDurations(prev => {
+                const updated = { ...prev };
+                delete updated[id];
+                return updated;
+              });
+            }}
             userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
             selectedLanguage={selectedLanguage}
             onNavigate={handleLandmarkRoute}

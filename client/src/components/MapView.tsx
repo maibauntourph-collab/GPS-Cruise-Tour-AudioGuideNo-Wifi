@@ -564,6 +564,12 @@ function estimateWalkingTime(distanceMeters: number): number {
 }
 
 function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, startingPoint, endPoint, selectedLanguage = 'en', onSegmentInfoUpdate }: TourRoutingMachineProps) {
+  // ✅ [Bug Doctor 2026-02-27] 무한 루프(Maximum update depth) 방지용 최신 callback ref
+  const latestCallbacks = useRef({ onTourRouteFound, onSegmentInfoUpdate });
+  useEffect(() => {
+    latestCallbacks.current = { onTourRouteFound, onSegmentInfoUpdate };
+  }, [onTourRouteFound, onSegmentInfoUpdate]);
+
   // Simple local calculation - no map controls added, no event interference
   useEffect(() => {
     const hasStartingPoint = startingPoint && startingPoint.lat && startingPoint.lng;
@@ -571,11 +577,11 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, starting
 
     // Don't calculate when there's an active navigation route or not enough stops
     if (tourStops.length < minStopsNeeded || activeRoute) {
-      if (onSegmentInfoUpdate) {
-        onSegmentInfoUpdate([]);
+      if (latestCallbacks.current.onSegmentInfoUpdate) {
+        latestCallbacks.current.onSegmentInfoUpdate([]);
       }
-      if (onTourRouteFound) {
-        onTourRouteFound(null);
+      if (latestCallbacks.current.onTourRouteFound) {
+        latestCallbacks.current.onTourRouteFound(null);
       }
       return;
     }
@@ -620,12 +626,12 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, starting
     }
 
     // Notify parent components
-    if (onSegmentInfoUpdate) {
-      onSegmentInfoUpdate(segments);
+    if (latestCallbacks.current.onSegmentInfoUpdate) {
+      latestCallbacks.current.onSegmentInfoUpdate(segments);
     }
 
-    if (onTourRouteFound) {
-      onTourRouteFound({
+    if (latestCallbacks.current.onTourRouteFound) {
+      latestCallbacks.current.onTourRouteFound({
         summary: { totalDistance, totalTime: totalDuration },
         coordinates: waypoints,
         legs: segments.map(seg => ({
@@ -635,7 +641,7 @@ function TourRoutingMachine({ tourStops, onTourRouteFound, activeRoute, starting
         isFallback: true
       });
     }
-  }, [tourStops, onTourRouteFound, activeRoute, startingPoint, endPoint, selectedLanguage, onSegmentInfoUpdate]);
+  }, [tourStops, activeRoute, startingPoint, endPoint, selectedLanguage]); // [핵심] 콜백 함수는 의존성(dependency) 배열에서 제거
 
   return null;
 }

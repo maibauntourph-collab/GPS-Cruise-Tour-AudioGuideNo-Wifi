@@ -38,7 +38,8 @@ import {
   FolderOpen,
   Square,
   Train,
-  Car
+  Car,
+  Plus
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -549,9 +550,26 @@ export function UnifiedFloatingCard({
                           {distance !== null && <p className="text-[10px] text-muted-foreground">{formatDistance(distance)} • {landmark.category}</p>}
                         </div>
                       </div>
-                      <Button variant="ghost" size="icon" className="h-8 w-8" onClick={(e) => { e.stopPropagation(); onLandmarkRoute(landmark); }}>
-                        <Navigation className="w-4 h-4" />
-                      </Button>
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className={`h-8 w-8 ${tourStops?.some(stop => stop.id === landmark.id) ? 'text-indigo-600 bg-indigo-50 hover:bg-indigo-100' : 'text-gray-400 hover:text-indigo-600 hover:bg-indigo-50'}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (tourStops?.some(stop => stop.id === landmark.id)) {
+                              onRemoveTourStop?.(landmark.id);
+                            } else {
+                              onAddToTour?.(landmark);
+                            }
+                          }}
+                        >
+                          {tourStops?.some(stop => stop.id === landmark.id) ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                        </Button>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-[#E9633F]" onClick={(e) => { e.stopPropagation(); onLandmarkRoute(landmark); }}>
+                          <Navigation className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </div>
                   ))}
                 </div>
