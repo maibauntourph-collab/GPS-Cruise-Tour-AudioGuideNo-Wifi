@@ -306,6 +306,22 @@ export default function Home() {
     setLastUIAction('CITY_CHANGE');
   }, []);
 
+  // ✅ [Bug Doctor | 2026-02-27] 마스터 가시성 핸들러
+  // » 이 함수 하나로 'List' 버튼 클릭 시 명시되는 모든 상태를 원자적으로 리셋해 서로 간섭을 방지할 수 있으며
+  // » 학생들은 '무엇이 필요한지' 연듄하는 코드보다 '어떻게 다 맞춰 실행하는지' 연듄하는 코드를 선호하세요 공교수님 한마디: atomicity
+  const handleShowLandmarkList = useCallback(() => {
+    // 1. 네비게이션 전용 모드 해제
+    setIsNavigationOnlyMode(false);
+    // 2. 반드시 커드 표시
+    setIsCardMinimized(false);
+    // 3. 강제 노출 플래그 활성화
+    setForceShowCard(true);
+    // 4. 임시 열기 플래그도 활성화
+    setTemporaryShowCard(true);
+    // 5. 하위 컴포넌트(커드)에 리스트 탭으로 전환 신호 발사
+    window.dispatchEvent(new CustomEvent('force-show-list-tab'));
+  }, []);
+
   // [Bug Doctor] Style Guard: Modal closing might leave body scroll locked
   useEffect(() => {
     const isAnyModalOpen = showMenu || showStartupDialog || !!landingCityId || showAIRecommend || showLoginDialog || showSaveRouteDialog || showUpdateStats || showQrDialog;
@@ -950,13 +966,7 @@ export default function Home() {
               <Button
                 variant="ghost"
                 className="h-10 px-5 rounded-full hover:bg-white/40 text-slate-700 font-bold flex items-center gap-2 transition-all active:scale-95 group"
-                onClick={() => {
-                  setIsNavigationOnlyMode(false);
-                  setForceShowCard(true);
-                  setIsCardMinimized(false);
-                  setTemporaryShowCard(true);
-                  window.dispatchEvent(new CustomEvent('force-show-list-tab'));
-                }}
+                onClick={handleShowLandmarkList}
               >
                 <List className="w-5 h-5 text-orange-500 group-hover:rotate-12 transition-transform" />
                 <span>List</span>
@@ -1175,12 +1185,7 @@ export default function Home() {
               <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[1500]">
                 <Button
                   className="h-14 px-8 rounded-full shadow-2xl bg-white text-slate-800 border-2 border-primary/20 hover:border-primary/50 transition-all flex items-center gap-3 active:scale-95 font-black text-lg"
-                  onClick={() => {
-                    setIsNavigationOnlyMode(false);
-                    setForceShowCard(true);
-                    setIsCardMinimized(false);
-                    setTemporaryShowCard(true);
-                  }}
+                  onClick={handleShowLandmarkList}
                 >
                   <List className="w-6 h-6 text-primary" />
                   <span>VIEW LIST</span>
@@ -1190,7 +1195,8 @@ export default function Home() {
           </div>
         </main>
 
-        {(!isNavigationOnlyMode || temporaryShowCard || selectedLandmark || forceShowCard) && (
+        {/* ✅ [Bug Doctor] forceShowCard=true이면 무조건 렌더링하도록 조건 강화 */}
+        {(forceShowCard || !isNavigationOnlyMode || temporaryShowCard || selectedLandmark) && (
           <UnifiedFloatingCard
             forceShowList={forceShowCard}
             isCardMinimized={isCardMinimized}
@@ -1205,7 +1211,7 @@ export default function Home() {
             selectedLanguage={selectedLanguage}
             onNavigate={handleLandmarkRoute}
             onLandmarkRoute={handleLandmarkRoute}
-            city={selectedCity}
+            city={selectedCity || undefined}
             showCruisePort={showCruisePort}
             onToggleCruisePort={() => setShowCruisePort(!showCruisePort)}
             isSimulationMode={isSimulationMode}
@@ -1226,7 +1232,7 @@ export default function Home() {
             selectedCityId={selectedCityId}
             onCityChange={handleCityChange}
             selectedLanguage={selectedLanguage}
-            onLanguageChange={setSelectedLanguage}
+            onLanguageChange={(lang: any) => setSelectedLanguage(lang)}
             cities={cities}
             audioEnabled={audioEnabled}
             onToggleAudio={handleToggleAudio}

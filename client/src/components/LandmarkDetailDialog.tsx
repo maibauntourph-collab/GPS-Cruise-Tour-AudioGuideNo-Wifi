@@ -696,14 +696,57 @@ export default function LandmarkDetailDialog({
                 <div className="px-4 grid grid-cols-1 gap-4">
                   {(() => {
                     if (shopifyProducts.length === 0) {
-                      return (
-                        <div className="py-12 text-center border-2 border-dashed border-[#EFEBE6] rounded-3xl">
-                          <Package className="w-10 h-10 text-[#A8A294]/30 mx-auto mb-2" />
-                          <p className="text-xs text-[#A8A294] font-medium">
-                            {selectedLanguage === 'ko' ? '준비된 상품이 없습니다.' : 'Coming soon for this location.'}
-                          </p>
+                      // ✅ [Bug Doctor | 2026-02-27] Shopify API가 없을 때 샘플 데이터로 쇼핑탭 시연
+                      // 학생들에게 설명: 실제 API 연동 전 UI/UX를 미리 시연하기 위해 mockup 데이터를 사용합니다.
+                      const sampleProducts = [
+                        {
+                          id: 'sample-1',
+                          title: selectedLanguage === 'ko' ? '로마 콜로세움 역사 엽서 세트' : 'Colosseum History Postcard Set',
+                          description: selectedLanguage === 'ko' ? '고퀄리티 인쇄 엽서 10장 세트 - 현지 아티스트 제작' : '10-piece premium quality postcards by local artists',
+                          price: '12.99',
+                          currencyCode: 'USD',
+                          image: 'https://images.unsplash.com/photo-1552249006-e9bd79ac2b19?w=200&h=200&fit=crop',
+                          checkoutUrl: 'https://shopify.com',
+                        },
+                        {
+                          id: 'sample-2',
+                          title: selectedLanguage === 'ko' ? '이탈리아 프리미엄 올리브 오일 (500ml)' : 'Italian Premium Extra Virgin Olive Oil 500ml',
+                          description: selectedLanguage === 'ko' ? '지역 농장에서 직접 수확한 최상급 올리브 오일' : 'Cold-pressed from local family farms, award-winning quality',
+                          price: '28.00',
+                          currencyCode: 'USD',
+                          image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=200&h=200&fit=crop',
+                          checkoutUrl: 'https://shopify.com',
+                        },
+                        {
+                          id: 'sample-3',
+                          title: selectedLanguage === 'ko' ? '핸드메이드 도자기 기념 컵' : 'Handmade Ceramic Souvenir Mug',
+                          description: selectedLanguage === 'ko' ? '현지 도예 장인이 직접 제작한 한정판 머그컵' : 'Limited edition mug crafted by local ceramic artisans',
+                          price: '22.50',
+                          currencyCode: 'USD',
+                          image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=200&h=200&fit=crop',
+                          checkoutUrl: 'https://shopify.com',
+                        },
+                      ];
+                      return sampleProducts.map((product) => (
+                        <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
+                          <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
+                            <img src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
+                          </div>
+                          <div className="flex-1 flex flex-col justify-between min-w-0">
+                            <div>
+                              <div className="flex items-center gap-1 mb-1">
+                                <span className="text-[9px] bg-orange-100 text-orange-600 font-black px-2 py-0.5 rounded-full">SAMPLE</span>
+                              </div>
+                              <h5 className="font-bold text-sm text-[#5D574D] line-clamp-2">{product.title}</h5>
+                              <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
+                            </div>
+                            <div className="flex items-center justify-between mt-2">
+                              <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
+                              <span className="text-[9px] text-gray-400 italic">{selectedLanguage === 'ko' ? '샘플 상품' : 'Sample Product'}</span>
+                            </div>
+                          </div>
                         </div>
-                      );
+                      ));
                     }
 
                     return shopifyProducts.map((product) => (

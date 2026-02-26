@@ -376,12 +376,13 @@ export function UnifiedFloatingCard({
     }
   }, [selectedLandmark]);
 
-  const zIndex = isTransitMode ? 50 : 20;
+  // ✅ [Bug Doctor] MapView(z:400)보다 훨씬 높은 z-index(5000)를 부여하여 가려짐 방지
+  const zIndex = 5000;
 
   return (
     <div
       style={{ zIndex }}
-      className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ${isCardMinimized ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100'}`}
+      className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ${isCardMinimized && !forceShowList ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100 translate-y-0'}`}
     >
       {/* HEADER */}
       <div className="p-4 flex items-center justify-between border-b bg-white/50 backdrop-blur-md">
