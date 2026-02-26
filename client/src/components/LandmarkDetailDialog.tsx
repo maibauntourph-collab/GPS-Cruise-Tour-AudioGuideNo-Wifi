@@ -696,34 +696,52 @@ export default function LandmarkDetailDialog({
                 <div className="px-4 grid grid-cols-1 gap-4">
                   {(() => {
                     if (shopifyProducts.length === 0) {
-                      // ✅ [Bug Doctor | 2026-02-27] Shopify API가 없을 때 샘플 데이터로 쇼핑탭 시연
-                      // 학생들에게 설명: 실제 API 연동 전 UI/UX를 미리 시연하기 위해 mockup 데이터를 사용합니다.
+                      // ✅ [Bug Doctor | 2026-02-27] Shopify API가 없을 때 여행 관련 샘플 상품 표시
+                      // 학생들에게: 실제 Shopify 연동 전 여행 상품 카테고리로 UI/UX를 시연합니다.
                       const sampleProducts = [
                         {
-                          id: 'sample-1',
-                          title: selectedLanguage === 'ko' ? '로마 콜로세움 역사 엽서 세트' : 'Colosseum History Postcard Set',
-                          description: selectedLanguage === 'ko' ? '고퀄리티 인쇄 엽서 10장 세트 - 현지 아티스트 제작' : '10-piece premium quality postcards by local artists',
-                          price: '12.99',
+                          id: 'travel-1',
+                          title: selectedLanguage === 'ko' ? '🎧 크루즈 오디오 가이드 이어폰 세트' : '🎧 Cruise Audio Guide Earphone Set',
+                          description: selectedLanguage === 'ko' ? '노이즈 캔슬링 내장 고품질 여행용 이어폰 - 오디오 투어 전용' : 'Premium noise-cancelling earphones for audio tour experiences',
+                          price: '34.99',
                           currencyCode: 'USD',
-                          image: 'https://images.unsplash.com/photo-1552249006-e9bd79ac2b19?w=200&h=200&fit=crop',
+                          image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop',
                           checkoutUrl: 'https://shopify.com',
                         },
                         {
-                          id: 'sample-2',
-                          title: selectedLanguage === 'ko' ? '이탈리아 프리미엄 올리브 오일 (500ml)' : 'Italian Premium Extra Virgin Olive Oil 500ml',
-                          description: selectedLanguage === 'ko' ? '지역 농장에서 직접 수확한 최상급 올리브 오일' : 'Cold-pressed from local family farms, award-winning quality',
-                          price: '28.00',
+                          id: 'travel-2',
+                          title: selectedLanguage === 'ko' ? '🗺️ 유럽 기항지 여행 가이드북 (한·영)' : '🗺️ European Port City Travel Guidebook (EN/KO)',
+                          description: selectedLanguage === 'ko' ? '크루즈 기항지 30개 도시 수록 · 오프라인 지도 포함' : '30 cruise port cities covered · Offline maps included',
+                          price: '19.90',
                           currencyCode: 'USD',
-                          image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=200&h=200&fit=crop',
+                          image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=200&h=200&fit=crop',
                           checkoutUrl: 'https://shopify.com',
                         },
                         {
-                          id: 'sample-3',
-                          title: selectedLanguage === 'ko' ? '핸드메이드 도자기 기념 컵' : 'Handmade Ceramic Souvenir Mug',
-                          description: selectedLanguage === 'ko' ? '현지 도예 장인이 직접 제작한 한정판 머그컵' : 'Limited edition mug crafted by local ceramic artisans',
-                          price: '22.50',
+                          id: 'travel-3',
+                          title: selectedLanguage === 'ko' ? '🧳 프리미엄 여행용 짐표 세트 (10개)' : '🧳 Premium Luggage Tag Set (Pack of 10)',
+                          description: selectedLanguage === 'ko' ? '크루즈 여행 필수품 · 방수 · RFID 차단 기능' : 'Cruise travel essential · Waterproof · RFID blocking',
+                          price: '14.50',
                           currencyCode: 'USD',
-                          image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=200&h=200&fit=crop',
+                          image: 'https://images.unsplash.com/photo-1553531889-e6cf4d692b1b?w=200&h=200&fit=crop',
+                          checkoutUrl: 'https://shopify.com',
+                        },
+                        {
+                          id: 'travel-4',
+                          title: selectedLanguage === 'ko' ? '📡 글로벌 여행용 eSIM (15일, 유럽 30국)' : '📡 Global Travel eSIM (15 Days, 30 EU Countries)',
+                          description: selectedLanguage === 'ko' ? '크루즈 기항지 전 지역 데이터 지원 · 즉시 개통' : 'Works at all cruise ports in Europe · Instant activation',
+                          price: '29.00',
+                          currencyCode: 'USD',
+                          image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=200&h=200&fit=crop',
+                          checkoutUrl: 'https://shopify.com',
+                        },
+                        {
+                          id: 'travel-5',
+                          title: selectedLanguage === 'ko' ? '☂️ 크루즈 여행자 보험 (7일)' : '☂️ Cruise Traveler Insurance (7 Days)',
+                          description: selectedLanguage === 'ko' ? '기항지 액티비티 및 응급처치 포함 · 실시간 지원' : 'Covers port excursions & emergencies · 24/7 support',
+                          price: '18.00',
+                          currencyCode: 'USD',
+                          image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=200&h=200&fit=crop',
                           checkoutUrl: 'https://shopify.com',
                         },
                       ];
@@ -735,14 +753,14 @@ export default function LandmarkDetailDialog({
                           <div className="flex-1 flex flex-col justify-between min-w-0">
                             <div>
                               <div className="flex items-center gap-1 mb-1">
-                                <span className="text-[9px] bg-orange-100 text-orange-600 font-black px-2 py-0.5 rounded-full">SAMPLE</span>
+                                <span className="text-[9px] bg-blue-100 text-blue-600 font-black px-2 py-0.5 rounded-full">✈️ TRAVEL</span>
                               </div>
                               <h5 className="font-bold text-sm text-[#5D574D] line-clamp-2">{product.title}</h5>
                               <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
                             </div>
                             <div className="flex items-center justify-between mt-2">
                               <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
-                              <span className="text-[9px] text-gray-400 italic">{selectedLanguage === 'ko' ? '샘플 상품' : 'Sample Product'}</span>
+                              <span className="text-[9px] text-gray-400 italic">{selectedLanguage === 'ko' ? '샘플 여행상품' : 'Sample'}</span>
                             </div>
                           </div>
                         </div>
