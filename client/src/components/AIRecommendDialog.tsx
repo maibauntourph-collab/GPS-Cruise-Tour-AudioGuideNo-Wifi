@@ -123,6 +123,11 @@ export default function AIRecommendDialog({
   const getRecommendedLandmarks = (): Landmark[] => {
     if (!recommendation) return [];
 
+    const allRecommended = recommendation.itinerary
+      .sort((a, b) => a.order - b.order)
+      .map(item => landmarks.find(l => l.id === item.landmarkId))
+      .filter((l): l is Landmark => l !== undefined);
+
     // Apply category filter to results
     if (selectedCategories.length === 0) {
       return allRecommended;
