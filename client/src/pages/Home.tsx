@@ -1558,7 +1558,7 @@ export default function Home() {
             selectedLanguage={selectedLanguage}
             onNavigate={handleLandmarkRoute}
             onLandmarkRoute={handleLandmarkRoute}
-            city={selectedCity || undefined}
+            city={selectedCity || null}
             showCruisePort={showCruisePort}
             onToggleCruisePort={() => setShowCruisePort(!showCruisePort)}
             isSimulationMode={isSimulationMode}
