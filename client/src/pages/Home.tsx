@@ -997,6 +997,11 @@ export default function Home() {
     <TooltipProvider>
       <div className="flex w-full flex-1 flex-col h-screen overflow-hidden bg-background">
         {/* Startup Dialog */}
+        {/* 
+          [교수님 노트: 컴포넌트 간의 대화 - Props Drilling 해결]
+          @에이? "부모인 Home에서 관리하는 setSelectedLanguage 함수를 자식인 StartupDialog에 
+          onLanguageChange라는 이름의 프롭으로 주입해주는 모습입니다. 이것이 리액트의 기본적인 데이터 흐름이죠."
+        */}
         <StartupDialog
           isOpen={showStartupDialog}
           onClose={handleStartupClose}

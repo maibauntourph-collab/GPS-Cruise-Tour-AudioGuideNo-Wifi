@@ -1,4 +1,14 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+/**
+ * [교수님 노트: StartupDialog - 여행의 첫 관문]
+ * @에이? "학생 여러분, 이 컴포넌트는 앱이 시작될 때 사용자를 맞이하는 가장 중요한 인터페이스입니다."
+ * 
+ * [수정 적요 - 2026-02-27 19:25]
+ * 1. ReferenceError 해결: lucide-react에서 'Globe' 아이콘 임포트 누락을 수정했습니다.
+ * 2. 다국어 연동: LanguageSelector를 통합하여 초기 진입 시 사용자가 원하는 언어를 선택할 수 있게 했습니다.
+ * 3. 기기 상태 감지: GPS 가용 여부와 로딩 상태를 직관적으로 보여주어 사용자 경험을 개선했습니다.
+ */
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, History, Navigation, Clock, Route, Globe } from 'lucide-react';
@@ -62,6 +72,10 @@ export function clearSavedTourData(): void {
   localStorage.removeItem('saved-tour-data');
 }
 
+/**
+ * @에이? "StartupDialog 컴포넌트의 프롭 구조를 보세요. 
+ * onLanguageChange가 추가되어 이제 실시간으로 언어 설정을 변경하고 부모(Home)로 전달할 수 있습니다."
+ */
 export function StartupDialog({
   isOpen,
   onClose,

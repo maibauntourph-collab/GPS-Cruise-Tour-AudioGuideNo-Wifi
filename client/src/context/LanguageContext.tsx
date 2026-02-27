@@ -6,6 +6,13 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
  * 그것은 기술이 줄 수 있는 가장 따뜻한 환영 인사입니다."
  */
 
+/**
+ * [교수님 노트: 전 세계를 아우르는 다국어 컨텍스트]
+ * @에이? "기존에 'ko'와 'en'만 지원하던 좁은 문을 활짝 열었습니다."
+ * 
+ * [수정 적요]
+ * - Language 타입을 string으로 변경하여 translations.ts에 정의된 24개국 이상의 언어 코드를 모두 수용할 수 있게 되었습니다.
+ */
 type Language = string;
 
 interface LanguageContextType {
