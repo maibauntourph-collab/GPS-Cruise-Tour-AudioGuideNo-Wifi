@@ -82,7 +82,7 @@ export default function AIRecommendDialog({
     setRecommendation(null);
 
     try {
-      const filteredLandmarks = getFilteredLandmarks(recommendationType);
+      const filteredLandmarks = getFilteredLandmarks(selectedCategories);
 
       if (filteredLandmarks.length === 0) {
         setError(t('noLandmarksFound', selectedLanguage));
@@ -123,27 +123,18 @@ export default function AIRecommendDialog({
   const getRecommendedLandmarks = (): Landmark[] => {
     if (!recommendation) return [];
 
-    const allRecommended = recommendation.itinerary
-      .sort((a, b) => a.order - b.order)
-      .map(item => landmarks.find(l => l.id === item.landmarkId))
-      .filter((l): l is Landmark => l !== undefined);
-
     // Apply category filter to results
-    if (recommendationType === 'all') {
+    if (selectedCategories.length === 0) {
       return allRecommended;
     }
 
     return allRecommended.filter(l => {
-      switch (recommendationType) {
-        case 'landmarks':
-          return l.category !== 'Activity' && l.category !== 'Restaurant' && l.category !== 'Gift Shop';
-        case 'restaurants':
-          return l.category === 'Restaurant';
-        case 'activities':
-          return l.category === 'Activity';
-        default:
-          return true;
-      }
+      if (selectedCategories.includes('landmarks') &&
+        l.category !== 'Activity' && l.category !== 'Restaurant' && l.category !== 'Gift Shop') return true;
+      if (selectedCategories.includes('restaurants') && l.category === 'Restaurant') return true;
+      if (selectedCategories.includes('activities') && l.category === 'Activity') return true;
+      if (selectedCategories.includes('shopping') && l.category === 'Gift Shop') return true;
+      return false;
     });
   };
 
