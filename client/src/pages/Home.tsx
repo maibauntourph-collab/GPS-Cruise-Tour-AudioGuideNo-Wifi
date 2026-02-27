@@ -1176,14 +1176,112 @@ export default function Home() {
 
               <div className="w-[1px] h-6 bg-slate-300/50" />
 
-              <Button
-                variant="ghost"
-                className="h-10 px-5 rounded-full hover:bg-white/40 text-slate-700 font-bold flex items-center gap-2 transition-all active:scale-95"
-                onClick={() => setIsStartingPointPopoverOpen(true)}
-              >
-                <Route className="w-5 h-5 text-emerald-500" />
-                <span>Route</span>
-              </Button>
+              <Popover open={isStartingPointPopoverOpen} onOpenChange={setIsStartingPointPopoverOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="h-10 px-5 rounded-full hover:bg-white/40 text-slate-700 font-bold flex items-center gap-2 transition-all active:scale-95"
+                  >
+                    <Route className="w-5 h-5 text-emerald-500" />
+                    <span>Route</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-80 rounded-3xl shadow-2xl p-4 border-none bg-white/95 backdrop-blur-xl" align="center" sideOffset={15}>
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="p-2 bg-emerald-100 rounded-full">
+                      <Route className="w-4 h-4 text-emerald-600" />
+                    </div>
+                    <h3 className="font-bold text-lg text-slate-800">
+                      {selectedLanguage === 'ko' ? '출발지 설정' : 'Starting Point'}
+                    </h3>
+                  </div>
+
+                  <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start gap-3 h-auto py-3 rounded-xl border-emerald-200 bg-emerald-50/50 hover:bg-emerald-100 transition-colors"
+                      onClick={() => {
+                        if (effectivePosition) {
+                          setStartingPoint({
+                            id: 'my_location',
+                            type: 'my_location',
+                            name: selectedLanguage === 'ko' ? '내 위치' : 'My Location',
+                            lat: effectivePosition.latitude,
+                            lng: effectivePosition.longitude
+                          });
+                          setIsStartingPointPopoverOpen(false);
+                          toast({ title: selectedLanguage === 'ko' ? '출발지 설정 완료' : 'Starting point set' });
+                        } else {
+                          toast({
+                            title: selectedLanguage === 'ko' ? 'GPS 권한 필요' : 'GPS Required',
+                            variant: 'destructive'
+                          });
+                        }
+                      }}
+                    >
+                      <MapPin className="w-5 h-5 text-emerald-600" />
+                      <div className="text-left">
+                        <div className="font-bold text-slate-800">{selectedLanguage === 'ko' ? '현재 위치 (GPS)' : 'Current Location (GPS)'}</div>
+                        <div className="text-xs text-slate-500 font-medium">{selectedLanguage === 'ko' ? '가장 정확한 경로 탐색' : 'Most accurate routing'}</div>
+                      </div>
+                    </Button>
+
+                    {selectedCityId && getCityStartingPoints(selectedCityId) && (
+                      <div className="pt-2">
+                        <div className="text-[11px] font-black text-slate-400 uppercase tracking-widest px-1 mb-2">
+                          {selectedLanguage === 'ko' ? '주요 거점' : 'Major Hubs'}
+                        </div>
+                        <div className="space-y-1">
+                          {[
+                            ...getCityStartingPoints(selectedCityId)!.cruiseTerminals,
+                            ...getCityStartingPoints(selectedCityId)!.airports,
+                            ...getCityStartingPoints(selectedCityId)!.trainStations
+                          ].map(point => (
+                            <Button
+                              key={point.id}
+                              variant="ghost"
+                              className="w-full justify-start gap-3 h-auto py-2.5 rounded-xl hover:bg-slate-100 group"
+                              onClick={() => {
+                                setStartingPoint(point);
+                                setIsStartingPointPopoverOpen(false);
+                                toast({
+                                  title: selectedLanguage === 'ko' ? '출발지 설정 완료' : 'Starting point set',
+                                  description: getStartingPointName(point, selectedLanguage)
+                                });
+                              }}
+                            >
+                              <div className="p-1.5 rounded-full bg-slate-100 group-hover:bg-white transition-colors">
+                                {point.type === 'cruise_terminal' && <Ship className="w-4 h-4 text-blue-500" />}
+                                {point.type === 'airport' && <Plane className="w-4 h-4 text-sky-500" />}
+                                {point.type === 'train_station' && <Navigation2 className="w-4 h-4 text-indigo-500" />}
+                              </div>
+                              <span className="text-sm font-semibold text-slate-700">{getStartingPointName(point, selectedLanguage)}</span>
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {startingPoint && (
+                    <div className="mt-4 pt-4 border-t border-slate-100">
+                      <Button
+                        variant="outline"
+                        className="w-full h-11 text-red-500 font-bold hover:text-red-600 hover:bg-red-50 border-red-100 rounded-xl"
+                        onClick={() => {
+                          setStartingPoint(null);
+                          setEndPoint(null);
+                          setActiveRoute(null);
+                          setIsStartingPointPopoverOpen(false);
+                          toast({ title: selectedLanguage === 'ko' ? '경로가 초기화되었습니다' : 'Route cleared' });
+                        }}
+                      >
+                        {selectedLanguage === 'ko' ? '경로 초기화' : 'Clear Route'}
+                      </Button>
+                    </div>
+                  )}
+                </PopoverContent>
+              </Popover>
             </motion.div>
           </div>
         )}
