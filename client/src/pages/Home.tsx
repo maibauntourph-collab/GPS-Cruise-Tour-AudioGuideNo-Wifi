@@ -1138,7 +1138,7 @@ export default function Home() {
 
         {/* Action Bar - Top Center */}
         {!isSimulationMode && (
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 z-[2000] w-fit">
+          <div className="absolute top-[60px] left-1/2 -translate-x-1/2 z-[2000] w-fit">
             <motion.div
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
