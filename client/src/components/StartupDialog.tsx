@@ -116,6 +116,25 @@ export default function StartupDialog({
           {/* [교수님 지시] "dont use that card" - GPS 직접 시작 카드 제거 */}
           {/* 이전 GPS 커다란 카드를 제거하고, 도시 직접 선택으로 유도하기 위해 하단 버튼만 남깁니다. */}
 
+          {/* [NEW] Language Selection Card - Activated & Premium Styling */}
+          <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-500">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-1.5 rounded-full bg-primary/10 text-primary">
+                <Globe className="w-4 h-4" />
+              </div>
+              <h3 className="font-bold text-sm">
+                {selectedLanguage === 'ko' ? '언어 설정' : 'Language Settings'}
+              </h3>
+            </div>
+            <LanguageSelector
+              selectedLanguage={selectedLanguage}
+              onLanguageChange={onLanguageChange}
+            />
+            <p className="mt-2 text-[10px] text-muted-foreground italic text-center">
+              {selectedLanguage === 'ko' ? '* 선택하신 언어로 모든 가이드가 실시간 번역됩니다' : '* All guides will be translated in real-time'}
+            </p>
+          </div>
+
           {/* Restore Tour Option */}
           {savedTourData && savedTourData.tourStops.length > 0 && (
             <button
