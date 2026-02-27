@@ -434,7 +434,10 @@ export function UnifiedFloatingCard({
               }
             }}
           >
-            <List className="w-4 h-4 mr-1.5" />
+            {/* [교수님 지시] 리스트 아이콘 활성화 강조 */}
+            <div className={`mr-1.5 p-1 rounded-sm transition-all ${activeTab === 'list' ? 'bg-white/20' : ''}`}>
+              <List className={`w-4 h-4 ${activeTab === 'list' ? 'animate-pulse scale-110' : ''}`} />
+            </div>
             <span className="text-xs tracking-tight">{t('list', selectedLanguage)}</span>
           </Button>
           {showCruisePort && (
@@ -454,7 +457,10 @@ export function UnifiedFloatingCard({
             className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'tour' ? 'bg-[#E9633F] text-white font-black shadow-lg shadow-orange-100' : 'text-gray-500 hover:bg-gray-100'}`}
             onClick={() => setActiveTab('tour')}
           >
-            <MapPinned className="w-4 h-4 mr-1.5" />
+            {/* [교수님 지시] 경로(My Tour) 아이콘 활성화 강조 */}
+            <div className={`mr-1.5 p-1 rounded-sm transition-all ${activeTab === 'tour' ? 'bg-white/20' : ''}`}>
+              <MapPinned className={`w-4 h-4 ${activeTab === 'tour' ? 'animate-pulse scale-110' : ''}`} />
+            </div>
             <span className="text-xs tracking-tight">{t('myTour', selectedLanguage)}</span>
           </Button>
           {/* [교수님 지시] AI 추천 탭 — My Tour 다음에 배치 */}
@@ -613,8 +619,22 @@ export function UnifiedFloatingCard({
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h5 className="font-bold text-sm">{selectedLanguage === 'ko' ? `내 투어 (${tourStops.length})` : `My Tour (${tourStops.length})`}</h5>
-                  <Button size="sm" className="bg-indigo-600 rounded-full h-7 text-xs" onClick={() => onToggleSimulation?.()}>
-                    {isSimulationMode ? (selectedLanguage === 'ko' ? '중단' : 'Stop') : (selectedLanguage === 'ko' ? '시작' : 'Start')}
+                  <Button
+                    size="sm"
+                    className={`rounded-full h-8 text-xs font-black transition-all duration-300 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-100 ring-2 ring-red-100' : 'bg-[#E9633F] hover:bg-[#D55232] shadow-lg shadow-orange-100 ring-2 ring-orange-100'}`}
+                    onClick={() => onToggleSimulation?.()}
+                  >
+                    {isSimulationMode ? (
+                      <div className="flex items-center gap-1.5">
+                        <Square className="w-3 h-3 fill-current" />
+                        <span>{selectedLanguage === 'ko' ? '중단' : 'Stop'}</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1.5">
+                        <Play className="w-3 h-3 fill-current" />
+                        <span>{selectedLanguage === 'ko' ? '시작' : 'Start'}</span>
+                      </div>
+                    )}
                   </Button>
                 </div>
                 {tourStops.length === 0 ? (

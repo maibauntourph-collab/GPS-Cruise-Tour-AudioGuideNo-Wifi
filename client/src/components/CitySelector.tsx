@@ -100,6 +100,15 @@ export function CitySelector({ cities, selectedCityId, onCityChange, selectedLan
           </SelectContent>
         </Select>
       </div>
+
+      {/* [NEW] Country Remarks Section */}
+      {selectedCity?.remarks && (
+        <div className="ml-2 px-3 py-1 bg-primary/5 border border-primary/10 rounded-full animate-in fade-in slide-in-from-left-2 duration-300">
+          <span className="text-[10px] font-bold text-primary/70 italic">
+            " {selectedCity.remarks} "
+          </span>
+        </div>
+      )}
     </div>
   );
 }

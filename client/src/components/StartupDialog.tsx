@@ -113,41 +113,8 @@ export default function StartupDialog({
         </DialogHeader>
 
         <div className="space-y-3 mt-4">
-          {/* GPS Option */}
-          <button
-            onClick={() => {
-              onSelectGPS();
-              audioService.unlockAudio();
-            }}
-            disabled={isGpsLoading}
-            className="w-full p-4 rounded-lg border-2 border-primary/20 hover:border-primary/50 hover:bg-primary/5 transition-all text-left group"
-            data-testid="button-start-gps"
-          >
-            <div className="flex items-start gap-3">
-              <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold mb-1">
-                  {selectedLanguage === 'ko' ? '현재 위치에서 시작' : 'Start from Current Location'}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {isGpsLoading
-                    ? (selectedLanguage === 'ko' ? 'GPS 위치 확인 중...' : 'Getting GPS location...')
-                    : isGpsAvailable
-                      ? (selectedLanguage === 'ko' ? 'GPS로 현재 위치를 탐색하고 근처 관광지를 찾습니다' : 'Use GPS to find nearby attractions')
-                      : (selectedLanguage === 'ko' ? 'GPS를 사용할 수 없습니다. 도시를 수동으로 선택합니다' : 'GPS unavailable. Select city manually')
-                  }
-                </p>
-                {isGpsAvailable && !isGpsLoading && (
-                  <Badge variant="secondary" className="mt-2 gap-1">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    {selectedLanguage === 'ko' ? 'GPS 사용 가능' : 'GPS Available'}
-                  </Badge>
-                )}
-              </div>
-            </div>
-          </button>
+          {/* [교수님 지시] "dont use that card" - GPS 직접 시작 카드 제거 */}
+          {/* 이전 GPS 커다란 카드를 제거하고, 도시 직접 선택으로 유도하기 위해 하단 버튼만 남깁니다. */}
 
           {/* Restore Tour Option */}
           {savedTourData && savedTourData.tourStops.length > 0 && (

@@ -64,6 +64,7 @@ export const citySchema = z.object({
   zoom: z.number().default(14),
   cruisePort: cruisePortSchema.optional(), // Optional cruise port information
   defaultGuideId: z.string().optional(), // Default guide (creator) for this city
+  remarks: z.string().optional(), // [NEW] Country/City specific remarks
 });
 
 export type City = z.infer<typeof citySchema>;
@@ -167,6 +168,7 @@ export const cities = pgTable("cities", {
   lng: doublePrecision("lng").notNull(),
   zoom: integer("zoom").default(14),
   cruisePort: json("cruise_port"), // JSON for cruise port data
+  remarks: text("remarks"), // [NEW] Country specific remarks/notices
   landingContent: json("landing_content"), // 🎖️ [Query Master] Magic Landing Visuals (Title, SubTitle, HeroImage)
   defaultGuideId: varchar("default_guide_id"), // Global instructor ID for this city
   createdAt: timestamp("created_at").notNull().defaultNow(),
