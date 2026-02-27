@@ -1,10 +1,11 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, History, Navigation, Clock, Route } from 'lucide-react';
+import { MapPin, History, Navigation, Clock, Route, Globe } from 'lucide-react';
 import { Landmark, City } from '@shared/schema';
 import { getTranslatedContent } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
+import { LanguageSelector } from './LanguageSelector';
 
 export interface SavedTourData {
   cityId: string;
@@ -22,6 +23,7 @@ interface StartupDialogProps {
   onRestoreTour: (data: SavedTourData) => void;
   savedTourData: SavedTourData | null;
   selectedLanguage: string;
+  onLanguageChange: (lang: string) => void;
   isGpsAvailable: boolean;
   isGpsLoading: boolean;
 }
@@ -60,13 +62,14 @@ export function clearSavedTourData(): void {
   localStorage.removeItem('saved-tour-data');
 }
 
-export default function StartupDialog({
+export function StartupDialog({
   isOpen,
   onClose,
   onSelectGPS,
   onRestoreTour,
   savedTourData,
   selectedLanguage,
+  onLanguageChange,
   isGpsAvailable,
   isGpsLoading
 }: StartupDialogProps) {
@@ -199,3 +202,5 @@ export default function StartupDialog({
     </Dialog>
   );
 }
+
+export default StartupDialog;

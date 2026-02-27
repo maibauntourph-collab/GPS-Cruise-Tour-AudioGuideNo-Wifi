@@ -1004,6 +1004,7 @@ export default function Home() {
           onRestoreTour={handleRestoreTour}
           savedTourData={null}
           selectedLanguage={selectedLanguage}
+          onLanguageChange={(lang) => setSelectedLanguage(lang)}
           isGpsAvailable={!!position}
           isGpsLoading={isLoading}
         />

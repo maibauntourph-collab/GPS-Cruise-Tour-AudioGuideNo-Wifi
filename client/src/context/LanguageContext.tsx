@@ -6,7 +6,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
  * 그것은 기술이 줄 수 있는 가장 따뜻한 환영 인사입니다."
  */
 
-type Language = 'ko' | 'en';
+type Language = string;
 
 interface LanguageContextType {
     language: Language;
