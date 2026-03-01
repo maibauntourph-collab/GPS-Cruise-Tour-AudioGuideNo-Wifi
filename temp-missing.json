@@ -1,0 +1,52 @@
+[
+  {
+    "id": "london_item_50",
+    "cityId": "london",
+    "name": "런던 프리미엄 Activity 추천 51"
+  },
+  {
+    "id": "seoul_item_28",
+    "cityId": "seoul",
+    "name": "SEOUL Premium Landmark 28"
+  },
+  {
+    "id": "도쿄-demo-1",
+    "cityId": "tokyo",
+    "name": "도쿄의 숨겨진 보석"
+  },
+  {
+    "id": "new-york_item_15",
+    "cityId": "new-york",
+    "name": "뉴욕 프리미엄 Shopping 추천 16"
+  },
+  {
+    "id": "tokyo_item_99",
+    "cityId": "tokyo",
+    "name": "TOKYO Premium Shopping 99"
+  },
+  {
+    "id": "singapore_item_24",
+    "cityId": "singapore",
+    "name": "싱가포르 프리미엄 Landmark 추천 25"
+  },
+  {
+    "id": "rome_item_31",
+    "cityId": "rome",
+    "name": "로마 프리미엄 Shopping 추천 32"
+  },
+  {
+    "id": "jeju_item_27",
+    "cityId": "jeju",
+    "name": "제주특별자치도 프리미엄 Shopping 추천 28"
+  },
+  {
+    "id": "rome_item_11",
+    "cityId": "rome",
+    "name": "로마 프리미엄 Shopping 추천 12"
+  },
+  {
+    "id": "london_포트넘_앤_메이슨_피카딜리_fortnum_mason_p",
+    "cityId": "london",
+    "name": "포트넘 앤 메이슨, 피카딜리 (Fortnum & Mason, Piccadilly)"
+  }
+]

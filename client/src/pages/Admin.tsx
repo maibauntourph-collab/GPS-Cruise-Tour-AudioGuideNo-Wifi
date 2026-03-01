@@ -46,7 +46,9 @@ import {
   Image as ImageIcon,
   History,
   Info,
-  Type
+  Type,
+  Settings,
+  Wand2
 } from 'lucide-react';
 import { AIDiscoveryDialog } from '@/components/AIDiscoveryDialog';
 import { Badge } from '@/components/ui/badge';
@@ -168,6 +170,19 @@ export default function Admin() {
   const [userDetailOpen, setUserDetailOpen] = useState(false);
   const [isAIDiscoveryOpen, setIsAIDiscoveryOpen] = useState(false);
   const [, setLocation] = useLocation();
+
+  // [AI Narration & Settings]
+  const [apiKey, setApiKey] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('GEMINI_API_KEY') || '';
+    }
+    return '';
+  });
+
+  const saveApiKey = () => {
+    localStorage.setItem('GEMINI_API_KEY', apiKey);
+    toast({ title: 'API Key Saved', description: '제미나이(Gemini) API Key가 로컬에 안전하게 저장되었습니다.' });
+  };
 
   // [적요: 인증 확인 쿼리]
   // 현재 접속한 사용자의 정보를 실시간으로 확인합니다.
@@ -319,6 +334,27 @@ export default function Admin() {
     onError: () => toast({ title: 'Failed to delete landmark', variant: 'destructive' })
   });
 
+  // [적요: 랜드마크 내레이션 자동 생성 (AI)]
+  const generateNarrationMutation = useMutation({
+    mutationFn: async (landmarkId: string) => {
+      const res = await fetch(`/api/admin/landmarks/${landmarkId}/generate-narration`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ apiKey })
+      });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || '나레이션 생성에 실패했습니다.');
+      }
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/landmarks'] });
+      toast({ title: '내레이션 생성 완료', description: 'AI가 성공적으로 코믹 내레이션을 작성했습니다.' });
+    },
+    onError: (err: any) => toast({ title: '생성 실패', description: err.message, variant: 'destructive' })
+  });
+
   const filteredLandmarks = landmarks.filter(l => {
     const searchLower = searchTerm.toLowerCase();
     const matchesSearch = l.name.toLowerCase().includes(searchLower) ||
@@ -467,6 +503,10 @@ export default function Admin() {
             <TabsTrigger value="marketing" data-testid="tab-marketing">
               <Megaphone className="h-4 w-4 mr-2" />
               마케팅 대시보드
+            </TabsTrigger>
+            <TabsTrigger value="settings" data-testid="tab-settings">
+              <Settings className="h-4 w-4 mr-2" />
+              Settings
             </TabsTrigger>
           </TabsList>
 
@@ -649,7 +689,22 @@ export default function Admin() {
                           {landmark.lat.toFixed(4)}, {landmark.lng.toFixed(4)}
                         </p>
                       </div>
-                      <div className="flex gap-1">
+                      <div className="flex gap-1 items-center">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-xs h-8 px-2 border-primary/30 text-primary hover:bg-primary/10"
+                          title="Generate AI Narration (3분 썰 & 화장실 꿀팁)"
+                          onClick={() => generateNarrationMutation.mutate(landmark.id)}
+                          disabled={generateNarrationMutation.isPending}
+                        >
+                          {generateNarrationMutation.isPending ? (
+                            <Loader2 className="h-3 w-3 animate-spin mr-1" />
+                          ) : (
+                            <Wand2 className="h-3 w-3 mr-1" />
+                          )}
+                          Make Story
+                        </Button>
                         <Button variant="ghost" size="icon" onClick={() => setEditingLandmark(landmark)} data-testid={`edit-landmark-${landmark.id}`}>
                           <Pencil className="h-4 w-4" />
                         </Button>
@@ -1016,6 +1071,41 @@ export default function Admin() {
                 )}
               </div>
             )}
+          </TabsContent>
+
+          <TabsContent value="settings">
+            <Card className="max-w-2xl">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Settings className="h-5 w-5" />
+                  시스템 설정
+                </CardTitle>
+                <CardDescription>
+                  내레이션 자동 생성 등 AI 기능을 활용하기 위해 API Key를 설정합니다. (키는 브라우저 로컬 스토리지에만 보관됩니다)
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label>Gemini API Key</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="password"
+                      value={apiKey}
+                      onChange={(e) => setApiKey(e.target.value)}
+                      placeholder="AIZ..."
+                      className="font-mono flex-1"
+                    />
+                    <Button onClick={saveApiKey}>
+                      <Save className="h-4 w-4 mr-2" />
+                      저장
+                    </Button>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Google AI Studio에서 발급받은 Gemini API 키를 입력하세요.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </main>

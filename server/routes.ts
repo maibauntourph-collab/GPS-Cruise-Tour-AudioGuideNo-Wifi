@@ -596,6 +596,56 @@ export function registerRoutes(app: Hono<any>) {
     }
   });
 
+  // Admin: Generate Narration for a single Landmark
+  adminCallback.post("/landmarks/:id/generate-narration", async (c) => {
+    try {
+      const id = c.req.param("id");
+      const { apiKey } = await c.req.json();
+
+      const [landmark] = await db.select().from(landmarks).where(eq(landmarks.id, id));
+      if (!landmark) return c.json({ error: "Landmark not found" }, 404);
+
+      if (!apiKey) return c.json({ error: "API Key is required" }, 400);
+
+      // Execute generation inside a child process or imported function (using child_process to reuse logic or directly calling an ai service via a generic prompt)
+      // We will implement a simplified fallback call using the imported GoogleGenAI
+      const { GoogleGenAI } = await import("@google/genai");
+      const ai = new GoogleGenAI({ apiKey });
+
+      const SYSTEM_PROMPT = `
+당신은 최고의 입담을 자랑하는 현지 여행 가이드 'Story Teller Lee' 이자 마케팅 천재 'Marketer Song' 입니다. 
+[랜드마크 정보]를 바탕으로 3분 썰, 화장실 꿀팁, 실내/실외 듀얼 원픽, 줌인 오프라인 길안내가 포함된 스토리텔링 내레이션 대본을 작성해 주세요. (마크다운 외 포맷팅 없음)
+`;
+      const userPrompt = `
+[랜드마크 정보]
+- 이름: ${landmark.name}
+- 설명: ${landmark.description || '정보 없음'}
+- 부가정보: ${landmark.detailedDescription || '정보 없음'}
+`;
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: [{ role: "user", parts: [{ text: SYSTEM_PROMPT + "\\n" + userPrompt }] }]
+      });
+
+      let text = response.text;
+      if (!text && response.candidates && response.candidates[0]?.content?.parts?.[0]?.text) {
+        text = response.candidates[0].content.parts[0].text;
+      }
+
+      if (!text) throw new Error("Empty AI response");
+
+      const [updated] = await db.update(landmarks).set({
+        narration: text,
+        updatedAt: new Date()
+      }).where(eq(landmarks.id, id)).returning();
+
+      return c.json(updated);
+    } catch (e: any) {
+      console.error("[Generate Narration Error]", e);
+      return c.json({ error: "Failed to generate narration: " + e.message }, 500);
+    }
+  });
+
   // OpenAI TTS Routes (Streaming)
   app.post("/api/tts/openai/generate", async (c) => {
     try {

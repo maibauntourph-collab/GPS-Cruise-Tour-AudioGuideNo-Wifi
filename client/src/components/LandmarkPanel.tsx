@@ -218,8 +218,15 @@ export default function LandmarkPanel({
       <div className="flex-1 overflow-y-auto p-5 pt-2 space-y-2 scrollbar-hide">
         {/* Badges */}
         <div className="flex gap-2">
-          <Badge variant="outline" className="h-7 px-3 rounded-full border-[#E9633F]/20 bg-[#E9633F]/5 text-[#E9633F] font-bold text-[10px]">
-            {landmark.category}
+          <Badge
+            variant="outline"
+            className={`h-7 px-3 rounded-full font-bold text-[10px] ${landmark.category === 'Restaurant' ? 'border-orange-200 bg-orange-50/50 text-orange-600' :
+                landmark.category === 'Activity' ? 'border-emerald-200 bg-emerald-50/50 text-emerald-600' :
+                  landmark.category === 'Gift Shop' ? 'border-purple-200 bg-purple-50/50 text-purple-600' :
+                    'border-blue-200 bg-blue-50/50 text-blue-600'
+              }`}
+          >
+            {landmark.category || t('landmark', selectedLanguage)}
           </Badge>
           {landmark.yearBuilt && (
             <Badge variant="outline" className="h-7 px-3 rounded-full border-gray-100 bg-gray-50/50 text-gray-500 font-bold text-[10px] gap-1">
@@ -393,35 +400,35 @@ export default function LandmarkPanel({
             </div>
           </div>
 
-          <div className="p-4 bg-blue-50/30 rounded-2xl border border-blue-100/50 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-blue-500 shrink-0">
+          <div className="p-4 bg-emerald-50/30 rounded-2xl border border-emerald-100/50 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-emerald-600 shrink-0">
               <ActivityIcon className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-blue-500/70 uppercase tracking-wider mb-0.5">액티비티 (Activities)</p>
+              <p className="text-[11px] font-bold text-emerald-600/70 uppercase tracking-wider mb-0.5">액티비티 (Activities)</p>
               <p className="text-[13px] font-bold text-gray-700">추천 액티비티 및 체험 프로그램</p>
             </div>
           </div>
 
-          <div className="p-4 bg-rose-50/30 rounded-2xl border border-rose-100/50 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-rose-500 shrink-0">
+          <div className="p-4 bg-orange-50/30 rounded-2xl border border-orange-100/50 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-orange-600 shrink-0">
               <ChefHat className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-[11px] font-bold text-rose-500/70 uppercase tracking-wider mb-0.5">맛집 정보 (Restaurants)</p>
+              <p className="text-[11px] font-bold text-orange-600/70 uppercase tracking-wider mb-0.5">맛집 정보 (Restaurants)</p>
               <p className="text-[13px] font-bold text-gray-700">주변 엄선된 미식 스팟</p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <div className="p-4 bg-indigo-50/30 rounded-2xl border border-indigo-100/50">
-              <Navigation className="w-5 h-5 text-indigo-500 mb-2" />
-              <p className="text-[11px] font-bold text-indigo-500/70 uppercase tracking-wider mb-0.5">투어 (Tour)</p>
+            <div className="p-4 bg-blue-50/30 rounded-2xl border border-blue-100/50">
+              <Navigation className="w-5 h-5 text-blue-600 mb-2" />
+              <p className="text-[11px] font-bold text-blue-600/70 uppercase tracking-wider mb-0.5">투어 (Tour)</p>
               <p className="text-[12px] font-bold text-gray-700">전문 가이드 투어</p>
             </div>
-            <div className="p-4 bg-emerald-50/30 rounded-2xl border border-emerald-100/50">
-              <ShoppingBag className="w-5 h-5 text-emerald-500 mb-2" />
-              <p className="text-[11px] font-bold text-emerald-500/70 uppercase tracking-wider mb-0.5">쇼핑 (Shopping)</p>
+            <div className="p-4 bg-purple-50/30 rounded-2xl border border-purple-100/50">
+              <ShoppingBag className="w-5 h-5 text-purple-600 mb-2" />
+              <p className="text-[11px] font-bold text-purple-600/70 uppercase tracking-wider mb-0.5">쇼핑 (Shopping)</p>
               <p className="text-[12px] font-bold text-gray-700">기념품 및 쇼핑 스팟</p>
             </div>
           </div>

@@ -883,11 +883,7 @@ export class AudioService {
 
       if (!response.ok) {
         console.error('[AudioService] OpenAI sentence TTS error:', response.status);
-        this.openaiSentenceIndex++;
-        if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
-          this.onOpenAISentenceChange(this.openaiSentenceIndex);
-        }
-        this.playNextOpenAISentence(currentSessionId);
+        this.fallbackToNativeTTS(sentence, currentSessionId);
         return;
       }
 
@@ -926,9 +922,31 @@ export class AudioService {
       if (error?.name === 'AbortError') return;
       console.error('[AudioService] OpenAI sentence error:', error);
       if (currentSessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
-      this.openaiSentenceIndex++;
-      this.playNextOpenAISentence(currentSessionId);
+
+      // Fallback to native TTS on network error
+      this.fallbackToNativeTTS(sentence, currentSessionId);
     }
+  }
+
+  /**
+   * [Bug Doctor] OpenAI TTS 실패 시 네이티브 TTS로 즉시 전환하는 폴백 로직
+   */
+  private fallbackToNativeTTS(sentence: string, sessionId: number) {
+    if (sessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+
+    console.log('[AudioService] 🚑 OpenAI TTS failed. Falling back to Native TTS for current sentence.');
+
+    // 네이티브 TTS로 현재 문장 재생
+    this.playText(sentence, this.openaiSentenceLanguage, this.currentRate, () => {
+      // 재생 완료 후 세션 및 모드 체크
+      if (sessionId !== this.openaiSessionId || !this.openaiSentenceMode) return;
+
+      this.openaiSentenceIndex++;
+      if (this.onOpenAISentenceChange && this.openaiSentenceIndex < this.openaiSentences.length) {
+        this.onOpenAISentenceChange(this.openaiSentenceIndex);
+      }
+      this.playNextOpenAISentence(sessionId);
+    });
   }
 
   // =====================================================================

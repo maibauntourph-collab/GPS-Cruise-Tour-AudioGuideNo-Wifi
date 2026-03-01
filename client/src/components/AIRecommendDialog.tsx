@@ -158,13 +158,20 @@ export default function AIRecommendDialog({
   const getCategoryIcon = (category: string | null | undefined) => {
     if (category === 'Restaurant') return <Utensils className="w-3.5 h-3.5" />;
     if (category === 'Activity') return <Activity className="w-3.5 h-3.5" />;
+    if (category === 'Gift Shop') return <Zap className="w-3.5 h-3.5" />;
     return <LandmarkIcon className="w-3.5 h-3.5" />;
   };
 
   const getCategoryColor = (category: string | null | undefined) => {
+    // [교수님 테마 가이드: 시각적 직관성 확보]
+    // Landmark: Blue (신뢰와 깊이)
+    // Activity: Emerald/Green (에너지와 활력)
+    // Restaurant: Orange (식욕과 즐거움)
+    // Gift Shop: Purple (특별함과 감동)
     if (category === 'Restaurant') return 'bg-orange-500/10 text-orange-600 border-orange-200';
-    if (category === 'Activity') return 'bg-blue-500/10 text-blue-600 border-blue-200';
-    return 'bg-amber-500/10 text-amber-700 border-amber-200';
+    if (category === 'Activity') return 'bg-emerald-500/10 text-emerald-600 border-emerald-200';
+    if (category === 'Gift Shop') return 'bg-purple-500/10 text-purple-600 border-purple-200';
+    return 'bg-blue-500/10 text-blue-600 border-blue-200';
   };
 
   const recommendedLandmarks = getRecommendedLandmarks();
@@ -191,16 +198,19 @@ export default function AIRecommendDialog({
               </label>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { id: 'landmarks', icon: LandmarkIcon, label: t('landmarks', selectedLanguage) },
-                  { id: 'restaurants', icon: Utensils, label: t('restaurants', selectedLanguage) },
-                  { id: 'activities', icon: Activity, label: t('activities', selectedLanguage) },
-                  { id: 'shopping', icon: Zap, label: selectedLanguage === 'ko' ? '쇼핑' : 'Shopping' }
+                  { id: 'landmarks', icon: LandmarkIcon, label: t('landmarks', selectedLanguage), color: 'blue' },
+                  { id: 'restaurants', icon: Utensils, label: t('restaurants', selectedLanguage), color: 'orange' },
+                  { id: 'activities', icon: Activity, label: t('activities', selectedLanguage), color: 'emerald' },
+                  { id: 'shopping', icon: Zap, label: selectedLanguage === 'ko' ? '쇼핑' : 'Shopping', color: 'purple' }
                 ].map((cat) => (
                   <Button
                     key={cat.id}
                     variant={selectedCategories.includes(cat.id as CategoryType) ? 'default' : 'outline'}
                     size="sm"
-                    className={`h-9 justify-start gap-2 transition-all ${selectedCategories.includes(cat.id as CategoryType) ? 'ring-2 ring-primary/20 shadow-md' : 'hover:bg-primary/5'}`}
+                    className={`h-9 justify-start gap-2 transition-all ${selectedCategories.includes(cat.id as CategoryType)
+                        ? `ring-2 ring-${cat.color}-500/20 shadow-md bg-${cat.color}-600 hover:bg-${cat.color}-700 border-none text-white`
+                        : 'hover:bg-primary/5'
+                      }`}
                     onClick={() => {
                       if (selectedCategories.includes(cat.id as CategoryType)) {
                         setSelectedCategories(selectedCategories.filter(c => c !== cat.id));

@@ -592,63 +592,99 @@ export default function LandmarkDetailDialog({
                    * 이유: Klook/Viator/Trip.com 등 글로벌 플랫폼은 영어로 검색해야 결과 풍부
                    */}
                   {(() => {
-                    // [적요] 영어 이름을 검색에 사용 (글로벌 플랫폼 검색 최적화)
+                    // [적요] 영문명을 기본 검색어로 사용하되 글로벌 플랫폼 검색에 최적화
                     const searchName = getTranslatedContent(landmark, 'en', 'name') ||
                       getTranslatedContent(landmark, selectedLanguage, 'name');
-                    return [
+
+                    // [Bug Doctor] 모든 제휴 플랫폼 정의
+                    const allPlatforms = [
                       {
+                        id: 'myrealtrip',
                         name: 'MyRealTrip (마이리얼트립)',
                         icon: <ExternalLink className="w-4 h-4 text-[#2B96ED]" />,
-                        // [적요] MyRealTrip은 한국어 이름으로 검색 (한국 플랫폼)
                         url: getMyRealTripUrl(getTranslatedContent(landmark, 'ko', 'name') || searchName),
-                        tip: '🇰🇷 한국어 지원 · 한국 카드 결제 · 취소 정책 상품별 상이',
-                        tipEn: '🇰🇷 Korean only · Korean card required · Cancellation varies per product',
+                        tip: '🇰🇷 한국 결제 특화 · 취소 정책 상품별 상이',
+                        tipEn: '🇰🇷 Korean card required · Cancellation varies',
                         color: 'text-[#2B96ED]',
                         badge: 'bg-blue-100 text-[#2B96ED]',
                       },
                       {
-                        name: 'GetYourGuide',
-                        icon: <ExternalLink className="w-4 h-4 text-red-400" />,
-                        // [적요] 영어 이름으로 검색 - 글로벌 플랫폼
-                        url: getGYGUrl(searchName, 'en'),
-                        tip: '✅ 48시간 전 무료취소 · 글로벌 카드 가능 · 즉시 확정',
-                        tipEn: '✅ Free cancel 48h before · Global cards OK · Instant confirmation',
-                        color: 'text-red-400',
-                        badge: 'bg-red-50 text-red-400',
-                      },
-                      {
-                        name: 'Trip.com (트립닷컴)',
-                        icon: <ExternalLink className="w-4 h-4 text-blue-600" />,
-                        // [적요] 영어 이름으로 검색 - Trip.com 글로벌
-                        url: getTripUrl(searchName),
-                        tip: '💰 포인트 적립 가능 · 취소정책 상품별 확인 필수',
-                        tipEn: '💰 Points rewards · Check cancellation policy per item',
-                        color: 'text-blue-600',
-                        badge: 'bg-blue-50 text-blue-600',
-                      },
-                      {
+                        id: 'klook',
                         name: 'Klook (클룩)',
                         icon: <ExternalLink className="w-4 h-4 text-[#E9633F]" />,
-                        // [적요] 영어 이름으로 검색 - Klook 글로벌 검색 최적화
-                        url: getKlookUrl(searchName, 'en-US'),
-                        tip: '📱 모바일 바우처 즉시 발급 · 아시아 여행 특화 · 즉시 확정',
-                        tipEn: '📱 Instant mobile voucher · Asia-focused · Instant confirmation',
+                        url: getKlookUrl(searchName, selectedLanguage),
+                        tip: '📱 아시아 특화 · 모바일 바우처 즉시 발급',
+                        tipEn: '📱 Asia-focused · Instant mobile voucher',
                         color: 'text-[#E9633F]',
                         badge: 'bg-orange-50 text-[#E9633F]',
                       },
                       {
+                        id: 'getyourguide',
+                        name: 'GetYourGuide',
+                        icon: <ExternalLink className="w-4 h-4 text-red-400" />,
+                        url: getGYGUrl(searchName, selectedLanguage),
+                        tip: '✅ 유럽 특화 · 48시간 전 무료취소',
+                        tipEn: '✅ Europe-focused · Free cancel 48h before',
+                        color: 'text-red-400',
+                        badge: 'bg-red-50 text-red-400',
+                      },
+                      {
+                        id: 'trip',
+                        name: 'Trip.com (트립닷컴)',
+                        icon: <ExternalLink className="w-4 h-4 text-blue-600" />,
+                        url: getTripUrl(searchName),
+                        tip: '💰 중화권 특화 · 포인트 적립',
+                        tipEn: '💰 Asia-focused · Points rewards',
+                        color: 'text-blue-600',
+                        badge: 'bg-blue-50 text-blue-600',
+                      },
+                      {
+                        id: 'viator',
                         name: 'Viator Inc',
                         icon: <ExternalLink className="w-4 h-4 text-blue-400" />,
-                        // [적요] 영어 이름으로 검색 - Viator 영어 특화
-                        url: getViatorUrl(searchName, 'en-US'),
-                        tip: '🌍 TripAdvisor 계열 · 24시간 전 무료취소 · 영어 위주',
-                        tipEn: '🌍 TripAdvisor company · Free cancel 24h before · English-focused',
+                        url: getViatorUrl(searchName, selectedLanguage),
+                        tip: '🌍 미주 특화 · TripAdvisor 파트너',
+                        tipEn: '🌍 Americas-focused · TripAdvisor company',
                         color: 'text-blue-400',
                         badge: 'bg-blue-50 text-blue-400',
                       },
-                    ].map((option, i) => (
+                    ];
+
+                    // [적요] 언어별 노출 우선순위 결정
+                    let recommendedIds: string[] = [];
+
+                    switch (selectedLanguage) {
+                      case 'ko':
+                        // 한국어: 마이리얼트립, 클룩, 트립닷컴, 겟유어가이드
+                        recommendedIds = ['myrealtrip', 'klook', 'trip', 'getyourguide'];
+                        break;
+                      case 'ja':
+                      case 'zh':
+                      case 'th':
+                      case 'vi':
+                      case 'id':
+                        // 아시아권: 클룩, 트립닷컴, 겟유어가이드
+                        recommendedIds = ['klook', 'trip', 'getyourguide'];
+                        break;
+                      case 'en':
+                      case 'es':
+                      case 'fr':
+                      case 'de':
+                      case 'it':
+                      default:
+                        // 영미권/유럽 등: 겟유어가이드, 비아터, 클룩
+                        recommendedIds = ['getyourguide', 'viator', 'klook'];
+                        break;
+                    }
+
+                    // 우선순위에 따라 플랫폼을 선별하고 정렬
+                    const recommendedPlatforms = recommendedIds.map(
+                      id => allPlatforms.find(p => p.id === id)!
+                    );
+
+                    return recommendedPlatforms.map((option, i) => (
                       <Button
-                        key={i}
+                        key={option.id}
                         variant="outline"
                         className={`w-full justify-between items-center h-auto py-3 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group ${i === 0 ? 'border-[#2B96ED] bg-blue-50/10' : ''}`}
                         onClick={(e) => {
@@ -666,9 +702,16 @@ export default function LandmarkDetailDialog({
                           <div className="w-10 h-10 rounded-xl bg-[#FCF9F6] flex items-center justify-center shrink-0 group-hover:bg-orange-50">
                             {option.icon}
                           </div>
-                          {/* [적요] 플랫폼명 + 주의사항 2행 구조 */}
+                          {/* [적요] 1순위 항목은 추천 뱃지 표시 */}
                           <div className="flex flex-col items-start gap-0.5 min-w-0">
-                            <span className="font-bold text-xs sm:text-sm">{option.name}</span>
+                            <div className="flex items-center gap-1.5">
+                              <span className="font-bold text-xs sm:text-sm">{option.name}</span>
+                              {i === 0 && (
+                                <span className="text-[8px] bg-[#E67E22] text-white px-1.5 py-0.5 rounded-sm font-black tracking-wide uppercase">
+                                  {selectedLanguage === 'ko' ? '추천' : 'Best'}
+                                </span>
+                              )}
+                            </div>
                             <span className={`text-[9px] font-medium leading-tight ${option.color} opacity-80 truncate max-w-[200px]`}>
                               {selectedLanguage === 'ko' ? option.tip : option.tipEn}
                             </span>
@@ -676,10 +719,8 @@ export default function LandmarkDetailDialog({
                         </div>
                         <div className={`px-3 py-1 rounded-full text-[10px] font-bold shrink-0 ml-1 ${option.badge}`}>Book</div>
                       </Button>
-                    ))
-                    // [적요] IIFE(즉시실행함수) 닫는 괄호
-                  })()
-                  }
+                    ));
+                  })()}
 
                 </div>
 

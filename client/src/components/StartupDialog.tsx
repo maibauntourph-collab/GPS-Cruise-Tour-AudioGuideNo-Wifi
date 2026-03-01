@@ -133,7 +133,7 @@ export function StartupDialog({
           {/* [교수님 지시] "dont use that card" - GPS 직접 시작 카드 제거 */}
           {/* 이전 GPS 커다란 카드를 제거하고, 도시 직접 선택으로 유도하기 위해 하단 버튼만 남깁니다. */}
 
-          {/* [NEW] Language Selection Card - Activated & Premium Styling */}
+          {/* [교수님 지시 | 2026-02-27] 나라 선택 플로팅 카드는 현재 사용하지 않기로 하여 주석 처리합니다.
           <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-500">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-1.5 rounded-full bg-primary/10 text-primary">
@@ -151,6 +151,7 @@ export function StartupDialog({
               {selectedLanguage === 'ko' ? '* 선택하신 언어로 모든 가이드가 실시간 번역됩니다' : '* All guides will be translated in real-time'}
             </p>
           </div>
+          */}
 
           {/* Restore Tour Option */}
           {savedTourData && savedTourData.tourStops.length > 0 && (
@@ -199,18 +200,27 @@ export function StartupDialog({
             </button>
           )}
 
-          {/* Skip button */}
-          <Button
-            variant="ghost"
-            className="w-full"
-            onClick={() => {
-              onClose();
-              audioService.unlockAudio();
-            }}
-            data-testid="button-skip-startup"
-          >
-            {selectedLanguage === 'ko' ? '도시 직접 선택하기' : 'Select City Directly'}
-          </Button>
+          {/* [교수님 지시 | 2026-02-27] 도시 직접 선택 버튼을 비활성화하고 안내 Remark로 대체합니다. */}
+          <div className="text-center py-4 border-t border-gray-100 flex flex-col gap-2">
+            <p className="text-[11px] text-muted-foreground font-medium italic">
+              {selectedLanguage === 'ko'
+                ? '💡 팁: 도시는 메인 화면에서 직접 검색하고 선택하실 수 있습니다'
+                : '💡 Tip: You can search and select cities directly from the main screen'}
+            </p>
+            {/* 
+            <Button
+              variant="ghost"
+              className="w-full"
+              onClick={() => {
+                onClose();
+                audioService.unlockAudio();
+              }}
+              data-testid="button-skip-startup"
+            >
+              {selectedLanguage === 'ko' ? '도시 직접 선택하기' : 'Select City Directly'}
+            </Button>
+            */}
+          </div>
         </div>
       </DialogContent>
     </Dialog>

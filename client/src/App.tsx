@@ -42,7 +42,9 @@ function Router() {
         <Route path="/guide" component={GuideView} />
         <Route path="/tour-leader" component={TourLeaderView} />
         <Route path="/admin" component={AdminLanding} />
+        <Route path="/admin/" component={AdminLanding} />
         <Route path="/admin/dashboard" component={Admin} />
+        <Route path="/admin/dashboard/" component={Admin} />
         <Route path="/my-routes" component={MyRoutes} />
         <Route path="/products" component={ProductList} />
         <Route path="/product/:id" component={ProductDetail} />

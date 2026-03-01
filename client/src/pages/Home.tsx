@@ -398,15 +398,19 @@ export default function Home() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // [Dodari] 시작 시퀀스 완료 후 랜드마크 목록 자동 표시
-  // 학생들: isWelcomeHandled가 true가 되면 (=시작 안내 끝), 1.5초 후 list 모드로 자동 진입
+  // [교수님 지시 | 2026-02-27] Welcome Landing Page 자동 활성화를 중단합니다. 
+  // 대신 사용자가 필요할 때 직접 접근하도록 유도하는 Remark를 남깁니다.
   useEffect(() => {
     if (isWelcomeHandled && !showStartupDialog && !landingCityId && !selectedLandmark && !isSimulationMode) {
+      /* 
       const timer = setTimeout(() => {
         // [적요] 국가 선택 카드를 먼저 보여주고, 선택 후 list 모드로 전환합니다.
         setShowCountrySelector(true);
       }, 500);
       return () => clearTimeout(timer);
+      */
+      // 바로 목록 모드로 진입하거나 대기 상태로 유지합니다.
+      transitionTo('list');
     }
   }, [isWelcomeHandled, showStartupDialog, landingCityId, selectedLandmark, isSimulationMode]);
 
@@ -1648,35 +1652,15 @@ export default function Home() {
           }}
         />
 
-        {/* [디자이너 이의 매직 UI: 자동 랜딩 다이얼로그] */}
+        {/* [교수님 지시 | 2026-02-27] 자동 랜딩 다이얼로그(Welcome Landing Page)를 비활성화합니다. 
+             사용자가 직접 탐색하는 경험을 우선시하며, 필요 시 수동으로 활성화할 수 있도록 리마크 처리했습니다. */}
+        {/* 
         <Dialog open={!!landingCityId && isWelcomeHandled && !showStartupDialog} onOpenChange={(open) => !open && setLandingCityId(null)}>
           <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-none bg-transparent shadow-2xl">
-            {(() => {
-              const landingCity = cities.find(c => c.id === landingCityId);
-              const landingContentSource = (landingCity as any)?.landingContent || (landingCityId ? LANDING_DATA[landingCityId] : null);
-              if (!landingCityId || !landingContentSource) return null;
-              const content = landingContentSource[selectedLanguage] || landingContentSource['en'];
-              return (
-                <div className="relative w-full overflow-hidden rounded-3xl bg-white/90 backdrop-blur-xl transition-all animate-in fade-in zoom-in-95 duration-500">
-                  <div className="relative h-64 w-full overflow-hidden">
-                    <img src={content?.heroImage} alt="Welcome" className="h-full w-full object-cover animate-ken-burns" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                    <div className="absolute bottom-6 left-6 text-white">
-                      <h2 className="text-3xl font-black mb-1">{content?.title}</h2>
-                      <p className="text-sm font-medium opacity-90">{content?.subTitle}</p>
-                    </div>
-                    <button onClick={() => setLandingCityId(null)} className="absolute top-4 right-4 p-2 rounded-full bg-black/20 text-white"><X className="w-5 h-5" /></button>
-                  </div>
-                  <div className="p-8">
-                    <Button className="w-full h-14 rounded-2xl text-xl font-black shadow-xl bg-primary" onClick={() => { handleCityChange(landingCityId!); setLandingCityId(null); }}>
-                      {selectedLanguage === 'ko' ? '체험하기' : 'Explore Now'}
-                    </Button>
-                  </div>
-                </div>
-              );
-            })()}
+            ... (생략) ...
           </DialogContent>
         </Dialog>
+        */}
 
         {/* [중요] QR/공유 다이얼로그 */}
         <Dialog open={showQrDialog} onOpenChange={setShowQrDialog}>
