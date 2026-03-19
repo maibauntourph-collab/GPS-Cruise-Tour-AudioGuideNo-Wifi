@@ -348,7 +348,7 @@ export default function MenuDialog({
                       data-testid="button-download-data"
                       className="text-xs h-8"
                     >
-                      Download
+                      {t('download', selectedLanguage)}
                     </Button>
                     <Button
                       variant="outline"
@@ -360,7 +360,34 @@ export default function MenuDialog({
                       data-testid="button-upload-data"
                       className="text-xs h-8"
                     >
-                      Upload
+                      {t('upload', selectedLanguage)}
+                    </Button>
+                  </div>
+
+                  {/* [Dodari | 2026-03-20] 📍 "No-WiFi" 오프라인 준비 패널 (Remarks 추가)
+                      학생들: 이 패널은 사용자가 사전에 데이터를 한꺼번에 다운로드(Pre-fetch)할 수 있게 도와줍니다. */}
+                  <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-2xl border border-emerald-100 mt-2">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-emerald-100 rounded-xl">
+                        <Cloud className="w-5 h-5 text-emerald-600" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-slate-800 text-xs">
+                          {t('prepareOffline', selectedLanguage)}
+                        </div>
+                        <div className="text-[10px] text-slate-400 font-medium">
+                          {t('prepareOfflineDesc', selectedLanguage)}
+                        </div>
+                      </div>
+                    </div>
+                    <Button
+                      size="sm"
+                      className="rounded-xl h-8 px-3 bg-emerald-600 hover:bg-emerald-700 text-xs"
+                      onClick={() => {
+                        onPreFetchOfflineData?.();
+                      }}
+                    >
+                      {t('ready', selectedLanguage)}
                     </Button>
                   </div>
                 </div>

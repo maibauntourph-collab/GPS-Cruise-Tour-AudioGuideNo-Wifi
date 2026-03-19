@@ -30,7 +30,10 @@ async function generatePrompts() {
     try {
         // [적요] 데이터 필터링: 사진이 부족한(5장 미만) 랜드마크 294개를 추출합니다.
         const allLandmarks = await db.select().from(landmarksTable);
-        const targets = allLandmarks.filter(l => !l.photos || (Array.isArray(l.photos) && l.photos.length < 5));
+        // [테스트 적요] 최초 실행 시 상위 10개만 우선 처리하여 결과를 확인합니다.
+        const targets = allLandmarks
+            .filter(l => !l.photos || (Array.isArray(l.photos) && l.photos.length < 5))
+            .slice(0, 10);
 
         console.log(`🎯 대상 선정: 총 ${targets.length}개의 랜드마크가 리뉴얼 대상입니다.`);
 
@@ -52,12 +55,17 @@ async function generatePrompts() {
                 4. Concept D (역동적 시점): 드론 시점에서 내려다본 웅장한 풍경.
                 5. Concept E (디테일/질감): 건축물의 조각이나 석재의 질감을 강조한 매크로 뷰.
 
+                6. Concept F (한글 적요): 해당 명소의 역사적 배경이나 관광 팁을 학생들도 이해하기 쉬운 친절한 한글(3-5문장)로 요약해라.
+                
                 랜드마크 리스트:
                 ${batch.map(l => `- ${l.name} (ID: ${l.id}, 설명: ${l.description})`).join('\n')}
 
                 출력 형식: 반드시 아래 구조의 순수 JSON 객체여야 함 (다른 설명 생략):
                 {
-                  "landmark_id": ["프롬프트1", "프롬프트2", "프롬프트3", "프롬프트4", "프롬프트5"]
+                  "landmark_id": {
+                    "prompts": ["프롬프트1", "프롬프트2", "프롬프트3", "프롬프트4", "프롬프트5"],
+                    "remarks_ko": "여기에 한글 적요를 작성해라."
+                  }
                 }
             `;
 

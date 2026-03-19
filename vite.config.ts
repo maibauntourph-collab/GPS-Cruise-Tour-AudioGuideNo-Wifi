@@ -56,7 +56,7 @@ export default defineConfig({
             // 📡 [Server Park | 2026-03-20] Neon DB API 데이터 오프라인 캐싱
             // 학생들에게: No-WiFi 환경에서도 앱이 동작하도록 우리 API 응답도 브라우저에 저장합니다!
             urlPattern: /\/api\/(landmarks|cities).*/,
-            handler: 'NetworkFirst', // 평소엔 최신 데이터를, 오프라인 시엔 저장된 걸 씁니다.
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'api-data',
               expiration: {
@@ -65,6 +65,25 @@ export default defineConfig({
               },
               cacheableResponse: {
                 statuses: [0, 200],
+              },
+            },
+          },
+          {
+            // 🎨 [Designer Kim | 2026-03-20] 구글 폰트 및 스타일 캐싱 (Premium UX)
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'google-fonts-stylesheets',
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-webfonts',
+              expiration: {
+                maxEntries: 20,
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
               },
             },
           },

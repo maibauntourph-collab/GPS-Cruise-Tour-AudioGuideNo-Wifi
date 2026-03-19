@@ -295,6 +295,18 @@ export function registerRoutes(app: Hono<any>) {
           ko: {
             name: place.displayName?.text,
             narration: place.editorialSummary?.text || "설명이 준비 중입니다."
+          },
+          en: {
+            name: place.displayName?.text, // Google API responses often match based on query, we assume these are good defaults
+            narration: place.editorialSummary?.text || "Description coming soon."
+          },
+          'zh-CN': {
+            name: place.displayName?.text,
+            narration: place.editorialSummary?.text || "描述即将推出。"
+          },
+          'zh-TW': {
+            name: place.displayName?.text,
+            narration: place.editorialSummary?.text || "描述即將推出。"
           }
         }
       };
