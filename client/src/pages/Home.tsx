@@ -503,13 +503,42 @@ export default function Home() {
     });
   };
 
-  const handleToggleOfflineMode = (checked: boolean) => {
-    setOfflineMode(checked);
-  };
-
   const handleToggleGps = (checked: boolean) => {
     setGpsEnabled(checked);
     localStorage.setItem('gps-enabled', String(checked));
+  };
+
+  // [Dodari | 2026-03-20] 📍 "No-WiFi" 원클릭 오프라인 준비
+  // 학생들에게: 실제 여행지에 도착하기 전, 호텔 WiFi에서 이 버튼을 누르면
+  // 모든 랜드마크 데이터가 브라우저에 '박제'되어 인터넷 없이도 투어가 가능해집니다.
+  const handlePreFetchOfflineData = async () => {
+    if (!selectedCityId) return;
+
+    toast({
+      title: selectedLanguage === 'ko' ? "📥 오프라인 데이터 다운로드 중..." : "📥 Downloading Offline Data...",
+      description: `${selectedCity?.name}의 모든 명소 정보를 기기에 저장하고 있습니다.`,
+    });
+
+    try {
+      // 1. 랜드마크 데이터 페치 (vite.config.ts의 PWA 캐싱 룰이 이를 가로채서 저장합니다)
+      await fetch(`/api/cities/${selectedCityId}/landmarks`);
+
+      // 2. 도시 정보 페치
+      await fetch(`/api/cities`);
+
+      toast({
+        title: selectedLanguage === 'ko' ? "🌟 오프라인 준비 완료!" : "🌟 Ready for Offline Tour!",
+        description: "이제 인터넷이 끊겨도 이 도시의 가이드를 즐기실 수 있습니다.",
+        className: "bg-emerald-500 text-white border-none",
+      });
+    } catch (error) {
+      console.error('Offline Pre-fetch error:', error);
+      toast({
+        title: "다운로드 실패",
+        description: "네트워크 상태를 확인해 주세요.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleDownloadData = async (password: string) => {
@@ -1674,6 +1703,7 @@ export default function Home() {
             offlineMode={offlineMode}
             onToggleOfflineMode={handleToggleOfflineMode}
             onDownloadData={handleDownloadData}
+            onPreFetchOfflineData={handlePreFetchOfflineData}
             onUploadData={handleUploadData}
             onTestAudio={handleTestAudio}
             activeRoute={activeRoute}
