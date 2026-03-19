@@ -1053,6 +1053,7 @@ var vite_config_default = defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
+            // 🗺️ [Kodari | 2026-03-20] OSM 지도 타일 오프라인 캐싱
             urlPattern: /^https:\/\/tile\.openstreetmap\.org\/.*/,
             handler: "CacheFirst",
             options: {
@@ -1064,6 +1065,43 @@ var vite_config_default = defineConfig({
               },
               cacheableResponse: {
                 statuses: [0, 200]
+              }
+            }
+          },
+          {
+            // 📡 [Server Park | 2026-03-20] Neon DB API 데이터 오프라인 캐싱
+            // 학생들에게: No-WiFi 환경에서도 앱이 동작하도록 우리 API 응답도 브라우저에 저장합니다!
+            urlPattern: /\/api\/(landmarks|cities).*/,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "api-data",
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 7
+                // 7 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            // 🎨 [Designer Kim | 2026-03-20] 구글 폰트 및 스타일 캐싱 (Premium UX)
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "google-fonts-stylesheets"
+            }
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "google-fonts-webfonts",
+              expiration: {
+                maxEntries: 20,
+                maxAgeSeconds: 60 * 60 * 24 * 365
+                // 1 year
               }
             }
           }
@@ -24572,6 +24610,126 @@ function registerRoutes(app2) {
       });
     } catch (error) {
       return c.json({ hasUpdates: false });
+    }
+  });
+  app2.get("/api/geocoding/search", async (c) => {
+    const query = c.req.query("q");
+    const lang = c.req.query("lang") || "ko";
+    if (!query) return c.json({ error: "\uC8FC\uC11D: \uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
+    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) {
+      console.error("[Geocoding] GOOGLE_MAPS_API_KEY\uAC00 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.");
+      return c.json({ error: "\uC9C0\uC624\uCF54\uB529 \uC11C\uBE44\uC2A4\uB97C \uC77C\uC2DC\uC801\uC73C\uB85C \uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4." }, 503);
+    }
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${apiKey}&language=${lang}`
+      );
+      const data = await response.json();
+      if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
+        console.error("[Google Maps API Error]", data.status, data.error_message);
+        return c.json({ error: `Google API \uC624\uB958: ${data.status}` }, 500);
+      }
+      const results = (data.results || []).map((item) => ({
+        name: item.formatted_address,
+        lat: item.geometry.location.lat,
+        lng: item.geometry.location.lng
+      }));
+      return c.json(results);
+    } catch (error) {
+      console.error("[Geocoding Proxy Error]", error);
+      return c.json({ error: "\uC11C\uBC84 \uB0B4\uBD80 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4." }, 500);
+    }
+  });
+  app2.get("/api/places/search", async (c) => {
+    const query = c.req.query("q");
+    if (!query) return c.json({ error: "\uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
+    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) {
+      console.error("[Places] API \uD0A4\uAC00 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.");
+      return c.json({ error: "\uC7A5\uC18C \uAC80\uC0C9 \uC11C\uBE44\uC2A4\uB97C \uC77C\uC2DC\uC801\uC73C\uB85C \uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4." }, 503);
+    }
+    try {
+      const response = await fetch("https://places.googleapis.com/v1/places:searchText", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Goog-Api-Key": apiKey,
+          "X-Goog-FieldMask": "places.id,places.displayName,places.formattedAddress,places.location,places.photos,places.rating"
+        },
+        body: JSON.stringify({ textQuery: query, languageCode: "ko" })
+      });
+      const data = await response.json();
+      const results = (data.places || []).map((p) => ({
+        placeId: p.id,
+        name: p.displayName?.text || "\uC54C \uC218 \uC5C6\uB294 \uC7A5\uC18C",
+        address: p.formattedAddress,
+        lat: p.location?.latitude,
+        lng: p.location?.longitude,
+        rating: p.rating,
+        photoReference: p.photos?.[0]?.name
+        // 사진 조회를 위한 참조값
+      }));
+      return c.json(results);
+    } catch (error) {
+      console.error("[Places Search Error]", error);
+      return c.json({ error: "\uC7A5\uC18C \uAC80\uC0C9 \uC911 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4." }, 500);
+    }
+  });
+  app2.post("/api/landmarks/sync", async (c) => {
+    const { placeId, cityId, category } = await c.req.json();
+    if (!placeId || !cityId) return c.json({ error: "placeId\uC640 cityId\uAC00 \uB204\uB77D\uB418\uC5C8\uC2B5\uB2C8\uB2E4." }, 400);
+    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) return c.json({ error: "API \uD0A4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4." }, 503);
+    try {
+      const detailRes = await fetch(`https://places.googleapis.com/v1/places/${placeId}`, {
+        headers: {
+          "X-Goog-Api-Key": apiKey,
+          "X-Goog-FieldMask": "id,displayName,formattedAddress,location,editorialSummary,regularOpeningHours,photos"
+        }
+      });
+      const place = await detailRes.json();
+      if (!place.id) throw new Error("Google Place \uB370\uC774\uD130\uB97C \uAC00\uC838\uC624\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4.");
+      const landmarkData = {
+        id: `g_${place.id}`,
+        // Google ID임을 표시하는 접두사
+        cityId,
+        name: place.displayName?.text || "\uC0C8\uB85C\uC6B4 \uBA85\uC18C",
+        lat: place.location.latitude,
+        lng: place.location.longitude,
+        radius: 50,
+        // GPS 감지 반경 기본 50m
+        category: category || "Tourist Attraction",
+        description: place.formattedAddress,
+        narration: place.editorialSummary?.text || `${place.displayName?.text}\uC740(\uB294) \uC815\uB9D0 \uBA4B\uC9C4 \uACF3\uC785\uB2C8\uB2E4!`,
+        photos: place.photos?.slice(0, 3).map((ph) => ph.name) || [],
+        // 최대 3장만 저장
+        openingHours: place.regularOpeningHours?.weekdayDescriptions?.join(", "),
+        translations: {
+          ko: {
+            name: place.displayName?.text,
+            narration: place.editorialSummary?.text || "\uC124\uBA85\uC774 \uC900\uBE44 \uC911\uC785\uB2C8\uB2E4."
+          },
+          en: {
+            name: place.displayName?.text,
+            // Google API responses often match based on query, we assume these are good defaults
+            narration: place.editorialSummary?.text || "Description coming soon."
+          },
+          "zh-CN": {
+            name: place.displayName?.text,
+            narration: place.editorialSummary?.text || "\u63CF\u8FF0\u5373\u5C06\u63A8\u51FA\u3002"
+          },
+          "zh-TW": {
+            name: place.displayName?.text,
+            narration: place.editorialSummary?.text || "\u63CF\u8FF0\u5373\u5C07\u63A8\u51FA\u3002"
+          }
+        }
+      };
+      const synced = await storage.createLandmark(landmarkData);
+      return c.json({ success: true, landmark: synced });
+    } catch (error) {
+      console.error("[Landmark Sync Error]", error);
+      return c.json({ error: "\uB370\uC774\uD130 \uB3D9\uAE30\uD654 \uC911 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4." }, 500);
     }
   });
   app2.get("/api/cities/:id", async (c) => {
