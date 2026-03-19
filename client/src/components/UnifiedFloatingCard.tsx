@@ -161,7 +161,8 @@ interface UnifiedFloatingCardProps {
   isCardMinimized?: boolean;
   onToggleMinimized?: () => void;
 
-  // Cruise Port extensions
+  // [Marketer Song] 국가별 맞춤 추천을 위한 사용자 국적 코드 (e.g. "US", "JP", "CN", "TW", "KR")
+  userRegion?: string;
   onToggleCruisePort?: () => void;
 }
 
@@ -242,6 +243,7 @@ export function UnifiedFloatingCard({
   simulationSpeed = 1,
   onSimulationPauseToggle,
   onSimulationSpeedChange,
+  userRegion = 'US', // [Marketer Song] 기본값은 글로벌 표준
 }: UnifiedFloatingCardProps) {
   // [교수님 지시] 탭 타입에 'ai' 추가 — AI 추천 탭 지원
   const [activeTab, setActiveTab] = useState<'list' | 'cruise' | 'tour' | 'ai'>('list');
@@ -372,9 +374,16 @@ export function UnifiedFloatingCard({
       return showLandmarks; // Default for 'Landmark' category
     });
 
-    // Sort by distance
-    return result.sort((a, b) => (a.distance || 0) - (b.distance || 0));
-  }, [landmarks, userPosition, landmarkSearchQuery, showLandmarks, showActivities, showRestaurants, showGiftShops, selectedLanguage]);
+    // [Marketer Song | 2026-03-20] 🌏 글로벌 맞춤 추천 정렬 로직
+    // 학생들에게: 단순히 거리순이 아니라, 사용자의 국적 취향(targetNations)을 최우선으로 고려합니다.
+    return result.sort((a, b) => {
+      const aMatch = a.landmark.targetNations?.includes(userRegion) ? 1 : 0;
+      const bMatch = b.landmark.targetNations?.includes(userRegion) ? 1 : 0;
+
+      if (aMatch !== bMatch) return bMatch - aMatch; // 추천 대상이면 상단으로!
+      return (a.distance || 0) - (b.distance || 0); // 그 다음 거리순
+    });
+  }, [landmarks, userPosition, landmarkSearchQuery, showLandmarks, showActivities, showRestaurants, showGiftShops, selectedLanguage, userRegion]);
 
   // [Bug Doctor 수정] 리스트에서 랜드마크 클릭 시:
   // 1) 부모(Home.tsx)에 선택 알림 → selectedLandmark prop 업데이트
@@ -580,8 +589,15 @@ export function UnifiedFloatingCard({
                         <div className="w-10 h-10 rounded-lg bg-muted overflow-hidden flex-shrink-0">
                           {landmark.photos?.[0] && <img src={landmark.photos[0]} alt="" className="w-full h-full object-cover" />}
                         </div>
-                        <div className="min-w-0">
-                          <h5 className="text-sm font-semibold truncate">{getTranslatedContent(landmark, selectedLanguage, 'name')}</h5>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-1.5">
+                            <h5 className="text-sm font-semibold truncate">{getTranslatedContent(landmark, selectedLanguage, 'name')}</h5>
+                            {landmark.targetNations?.includes(userRegion) && (
+                              <Badge variant="outline" className="h-4 px-1 text-[8px] bg-orange-50 text-orange-600 border-orange-200 font-black animate-pulse">
+                                {userRegion} PICK ✨
+                              </Badge>
+                            )}
+                          </div>
                           {distance !== null && <p className="text-[10px] text-muted-foreground">{formatDistance(distance)} • {formatWalkTime(distance, selectedLanguage)} • {landmark.category}</p>}
                         </div>
                       </div>

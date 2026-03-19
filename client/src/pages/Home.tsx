@@ -248,6 +248,25 @@ export default function Home() {
   // simulation → 시뮬레이션 모드
   type AppMode = 'map' | 'list' | 'detail' | 'nav' | 'simulation';
   const [appMode, setAppMode] = useState<AppMode>('map');
+
+  // [Marketer Song | 2026-03-20] 🌏 글로벌 맞춤 추천을 위한 사용자 국적 판별
+  // 학생들에게: 사용자의 브라우저 설정이나 시간대를 분석해 '관심사'를 미리 예측하는 지능형 대시보드입니다.
+  const [userRegion, setUserRegion] = useState<string>(() => {
+    const lang = navigator.language.toLowerCase();
+    if (lang.includes('ja')) return 'JP';
+    if (lang.includes('zh-tw') || lang.includes('zh-hk')) return 'TW';
+    if (lang.includes('zh')) return 'CN';
+    if (lang.includes('ko')) return 'KR';
+    // 시간대 분석을 통한 보강 (e.g. 미국, 유럽 등)
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if (tz.includes('America')) return 'US';
+      if (tz.includes('Europe')) return 'EU';
+      if (tz.includes('Tokyo')) return 'JP';
+      if (tz.includes('Seoul')) return 'KR';
+    } catch (e) { }
+    return 'US'; // 기본값은 글로벌 표준(영어권)
+  });
   // 뒤로가기를 위해 이전 모드를 기억합니다. (예: list → detail → 뒤로 → list)
   const prevAppModeRef = useRef<AppMode>('map');
 
@@ -1706,6 +1725,7 @@ export default function Home() {
           onToggleActivities={() => setShowActivities(!showActivities)}
           onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
           onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
+          userRegion={userRegion}
         />
 
         {/* Other Overlays */}
@@ -1755,6 +1775,7 @@ export default function Home() {
           cityName={selectedCity?.name || ''}
           selectedLanguage={selectedLanguage}
           userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
+          userRegion={userRegion}
           onAddToTour={(recommendedLandmarks) => {
             const newStops = recommendedLandmarks.filter(
               l => !tourStops.some(s => s.id === l.id)

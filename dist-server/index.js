@@ -205,7 +205,9 @@ var init_schema = __esm({
       price: z.number().nullable().optional(),
       // Price in EUR for the premium guide
       createdAt: z.union([z.string(), z.date()]).optional(),
-      updatedAt: z.union([z.string(), z.date()]).optional()
+      updatedAt: z.union([z.string(), z.date()]).optional(),
+      targetNations: z.array(z.string()).nullable().optional()
+      // 🌏 [NEW] Target nations for recommendations (e.g. ["US", "JP", "TW"])
     });
     gpsPositionSchema = z.object({
       latitude: z.number(),
@@ -269,6 +271,8 @@ var init_schema = __esm({
       // Array of strings
       isPremium: boolean("is_premium").notNull().default(false),
       price: doublePrecision("price"),
+      targetNations: json("target_nations").$type(),
+      // 🌏 [NEW] Specific nations to recommend this landmark to
       createdAt: timestamp("created_at").notNull().defaultNow(),
       updatedAt: timestamp("updated_at").notNull().defaultNow()
     });
@@ -870,7 +874,7 @@ async function generateLandmarkAudio(landmarkId, text2, language = "en", preferr
     throw new Error("Failed to generate audio");
   }
 }
-async function recommendTourItinerary2(landmarks2, userPosition, language = "en") {
+async function recommendTourItinerary2(landmarks2, userPosition, language = "en", userRegion) {
   try {
     const landmarkInfo = landmarks2.map((l) => ({
       id: l.id,
@@ -878,7 +882,9 @@ async function recommendTourItinerary2(landmarks2, userPosition, language = "en"
       category: l.category,
       lat: l.lat,
       lng: l.lng,
-      description: l.description
+      description: l.description,
+      targetNations: l.targetNations
+      // ✅ [Phase 4] 국적 필터 정보 포함
     }));
     const systemPrompt = language === "ko" ? "\uB2F9\uC2E0\uC740 \uC5EC\uD589 \uC804\uBB38\uAC00\uC785\uB2C8\uB2E4. \uC8FC\uC5B4\uC9C4 \uAD00\uAD11\uC9C0 \uC815\uBCF4\uB97C \uBD84\uC11D\uD558\uC5EC \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD558\uC138\uC694." : language === "es" ? "Eres un experto en viajes. Analiza los lugares tur\xEDsticos dados y recomienda el mejor itinerario de tour." : language === "fr" ? "Vous \xEAtes un expert en voyages. Analysez les lieux touristiques donn\xE9s et recommandez le meilleur itin\xE9raire de visite." : language === "de" ? "Sie sind ein Reiseexperte. Analysieren Sie die gegebenen Sehensw\xFCrdigkeiten und empfehlen Sie die beste Reiseroute." : language === "it" ? "Sei un esperto di viaggi. Analizza i luoghi turistici dati e consiglia il miglior itinerario di tour." : language === "zh" ? "\u60A8\u662F\u65C5\u884C\u4E13\u5BB6\u3002\u5206\u6790\u7ED9\u5B9A\u7684\u65C5\u6E38\u666F\u70B9\u5E76\u63A8\u8350\u6700\u4F73\u65C5\u6E38\u884C\u7A0B\u3002" : language === "ja" ? "\u3042\u306A\u305F\u306F\u65C5\u884C\u306E\u5C02\u9580\u5BB6\u3067\u3059\u3002\u4E0E\u3048\u3089\u308C\u305F\u89B3\u5149\u5730\u60C5\u5831\u3092\u5206\u6790\u3057\u3001\u6700\u9069\u306A\u30C4\u30A2\u30FC\u884C\u7A0B\u3092\u63A8\u85A6\u3057\u3066\u304F\u3060\u3055\u3044\u3002" : language === "pt" ? "Voc\xEA \xE9 um especialista em viagens. Analise os pontos tur\xEDsticos dados e recomende o melhor itiner\xE1rio de tour." : language === "ru" ? "\u0412\u044B \u044D\u043A\u0441\u043F\u0435\u0440\u0442 \u043F\u043E \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044F\u043C. \u041F\u0440\u043E\u0430\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u0443\u0439\u0442\u0435 \u0434\u0430\u043D\u043D\u044B\u0435 \u0442\u0443\u0440\u0438\u0441\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u043C\u0435\u0441\u0442\u0430 \u0438 \u043F\u043E\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0439\u0442\u0435 \u043B\u0443\u0447\u0448\u0438\u0439 \u043C\u0430\u0440\u0448\u0440\u0443\u0442 \u0442\u0443\u0440\u0430." : "You are a travel expert. Analyze the given tourist attractions and recommend the best tour itinerary.";
     const userPrompt = language === "ko" ? `\uB2E4\uC74C \uAD00\uAD11\uC9C0\uB4E4\uC744 \uAE30\uBC18\uC73C\uB85C \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD574\uC8FC\uC138\uC694. \uC9C0\uB9AC\uC801 \uC704\uCE58, \uCE74\uD14C\uACE0\uB9AC, \uC5ED\uC0AC\uC801 \uC911\uC694\uB3C4\uB97C \uACE0\uB824\uD558\uC5EC \uD6A8\uC728\uC801\uC778 \uC21C\uC11C\uB97C \uC81C\uC548\uD558\uC138\uC694.
@@ -887,6 +893,7 @@ async function recommendTourItinerary2(landmarks2, userPosition, language = "en"
 ${JSON.stringify(landmarkInfo, null, 2)}
 
 ${userPosition ? `\uC0AC\uC6A9\uC790 \uD604\uC7AC \uC704\uCE58: \uC704\uB3C4 ${userPosition.latitude}, \uACBD\uB3C4 ${userPosition.longitude}` : ""}
+${userRegion ? `\uC0AC\uC6A9\uC790 \uAD6D\uC801/\uC9C0\uC5ED: ${userRegion} (\uC774 \uC9C0\uC5ED \uC0AC\uC6A9\uC790\uB4E4\uC5D0\uAC8C \uCD94\uCC9C\uB41C 'targetNations' \uD3EC\uD568 \uC7A5\uC18C\uB97C \uCD5C\uC6B0\uC120\uC73C\uB85C \uACE0\uB824\uD558\uC138\uC694)` : ""}
 
 \uC751\uB2F5\uC740 \uBC18\uB4DC\uC2DC \uB2E4\uC74C JSON \uD615\uC2DD\uC73C\uB85C \uD574\uC8FC\uC138\uC694:
 {
@@ -899,6 +906,7 @@ Landmark list:
 ${JSON.stringify(landmarkInfo, null, 2)}
 
 ${userPosition ? `User current location: latitude ${userPosition.latitude}, longitude ${userPosition.longitude}` : ""}
+${userRegion ? `User Region: ${userRegion} (Prioritize landmarks where 'targetNations' includes this region)` : ""}
 
 Respond in this exact JSON format:
 {
@@ -24012,7 +24020,7 @@ function getAI() {
   }
   return aiInstance;
 }
-async function recommendTourItinerary(landmarks2, userPosition, language = "en") {
+async function recommendTourItinerary(landmarks2, userPosition, language = "en", userRegion) {
   try {
     const landmarkInfo = landmarks2.map((l) => ({
       id: l.id,
@@ -24021,7 +24029,9 @@ async function recommendTourItinerary(landmarks2, userPosition, language = "en")
       lat: l.lat,
       lng: l.lng,
       description: l.description,
-      isPremium: l.isPremium
+      isPremium: l.isPremium,
+      targetNations: l.targetNations
+      // ✅ [Phase 4] 국적 필터 정보 포함
     }));
     const systemPrompt = language === "ko" ? "\uB2F9\uC2E0\uC740 \uC138\uACC4\uC801\uC778 \uC5EC\uD589 \uAC00\uC774\uB4DC \uC804\uBB38\uAC00\uC785\uB2C8\uB2E4. \uC81C\uACF5\uB41C \uBA85\uC18C \uC815\uBCF4\uB97C \uBD84\uC11D\uD558\uC5EC \uCD5C\uC801\uC758 \uD22C\uC5B4 \uC77C\uC815\uC744 \uCD94\uCC9C\uD558\uC138\uC694. \uD504\uB9AC\uBBF8\uC5C4(Premium) \uAC00\uC774\uB4DC\uAC00 \uC788\uB294 \uC7A5\uC18C\uB294 \uB354 \uAE4A\uC774 \uC788\uB294 \uC815\uBCF4\uB97C \uC81C\uACF5\uD558\uBBC0\uB85C \uC6B0\uC120\uC801\uC73C\uB85C \uACE0\uB824\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4." : "You are a world-class travel guide expert. Analyze the provided landmark information and recommend the best tour itinerary. Landmarks with Premium guides offer more in-depth information and can be prioritized.";
     const userPrompt = language === "ko" ? `${systemPrompt}
@@ -24035,6 +24045,7 @@ async function recommendTourItinerary(landmarks2, userPosition, language = "en")
 ${JSON.stringify(landmarkInfo, null, 2)}
 
 ${userPosition ? `\uC0AC\uC6A9\uC790 \uD604\uC7AC \uC704\uCE58: \uC704\uB3C4 ${userPosition.latitude}, \uACBD\uB3C4 ${userPosition.longitude}` : ""}
+${userRegion ? `\uC0AC\uC6A9\uC790 \uAD6D\uC801/\uC9C0\uC5ED: ${userRegion} (\uC774 \uC9C0\uC5ED \uC0AC\uC6A9\uC790\uB4E4\uC5D0\uAC8C \uCD94\uCC9C\uB41C 'targetNations' \uD3EC\uD568 \uC7A5\uC18C\uB97C \uCD5C\uC6B0\uC120\uC73C\uB85C \uACE0\uB824\uD558\uC138\uC694)` : ""}
 
 \uC751\uB2F5\uC740 \uBC18\uB4DC\uC2DC \uB2E4\uC74C JSON \uD615\uC2DD\uC73C\uB85C \uD574\uC8FC\uC138\uC694 (\uB2E4\uB978 \uD14D\uC2A4\uD2B8 \uC5C6\uC774 JSON\uB9CC):
 {
@@ -24052,6 +24063,7 @@ Landmark list:
 ${JSON.stringify(landmarkInfo, null, 2)}
 
 ${userPosition ? `User current location: latitude ${userPosition.latitude}, longitude ${userPosition.longitude}` : ""}
+${userRegion ? `User Region: ${userRegion} (Prioritize landmarks where 'targetNations' includes this region)` : ""}
 
 Respond with ONLY this exact JSON format (no other text):
 {
@@ -25382,33 +25394,28 @@ function registerRoutes(app2) {
   });
   app2.post("/api/ai/recommend-tour", async (c) => {
     try {
-      const { cityId, language, userPosition, filterType } = await c.req.json();
+      const { cityId, language, userPosition, categories, userRegion } = await c.req.json();
       if (!cityId) {
         return c.json({ error: "City ID is required" }, 400);
       }
       let cityLandmarks = await storage.getLandmarks(cityId);
-      if (filterType && filterType !== "all") {
-        switch (filterType) {
-          case "landmarks":
-            cityLandmarks = cityLandmarks.filter(
-              (l) => l.category !== "Activity" && l.category !== "Restaurant" && l.category !== "Gift Shop"
-            );
-            break;
-          case "restaurants":
-            cityLandmarks = cityLandmarks.filter((l) => l.category === "Restaurant");
-            break;
-          case "activities":
-            cityLandmarks = cityLandmarks.filter((l) => l.category === "Activity");
-            break;
-        }
+      if (categories && categories.length > 0) {
+        cityLandmarks = cityLandmarks.filter((l) => {
+          if (categories.includes("landmarks") && l.category !== "Activity" && l.category !== "Restaurant" && l.category !== "Gift Shop") return true;
+          if (categories.includes("restaurants") && l.category === "Restaurant") return true;
+          if (categories.includes("activities") && l.category === "Activity") return true;
+          if (categories.includes("shopping") && l.category === "Gift Shop") return true;
+          return false;
+        });
       }
       if (cityLandmarks.length === 0) {
-        return c.json({ error: "No landmarks found for this city with the selected filter" }, 404);
+        return c.json({ error: "No landmarks found for this city with the selected filters" }, 404);
       }
       const recommendation = await recommendTourItinerary(
         cityLandmarks,
         userPosition,
-        language || "en"
+        language || "en",
+        userRegion
       );
       const validLandmarkIds = new Set(cityLandmarks.map((l) => l.id));
       const idLookupMap = /* @__PURE__ */ new Map();

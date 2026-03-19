@@ -1102,7 +1102,7 @@ export function registerRoutes(app: Hono<any>) {
   // Gemini API를 활용하여 랜드마크 조합과 순서를 지능적으로 결정합니다.
   app.post("/api/ai/recommend-tour", async (c) => {
     try {
-      const { cityId, language, userPosition, filterType } = await c.req.json();
+      const { cityId, language, userPosition, categories, userRegion } = await c.req.json();
 
       if (!cityId) {
         return c.json({ error: "City ID is required" }, 400);
@@ -1111,34 +1111,28 @@ export function registerRoutes(app: Hono<any>) {
       // [적요] 도시별 랜드마크 목록 조회
       let cityLandmarks = await storage.getLandmarks(cityId);
 
-      // [적요] 카테고리 필터 적용 (전체/명소/맛집/액티비티)
-      if (filterType && filterType !== 'all') {
-        switch (filterType) {
-          case 'landmarks':
-            cityLandmarks = cityLandmarks.filter(l =>
-              l.category !== 'Activity' &&
-              l.category !== 'Restaurant' &&
-              l.category !== 'Gift Shop'
-            );
-            break;
-          case 'restaurants':
-            cityLandmarks = cityLandmarks.filter(l => l.category === 'Restaurant');
-            break;
-          case 'activities':
-            cityLandmarks = cityLandmarks.filter(l => l.category === 'Activity');
-            break;
-        }
+      // [적요] 카테고리 필터 적용 (배열 기반 복수 선택 지원)
+      if (categories && categories.length > 0) {
+        cityLandmarks = cityLandmarks.filter(l => {
+          if (categories.includes('landmarks') &&
+            l.category !== 'Activity' && l.category !== 'Restaurant' && l.category !== 'Gift Shop') return true;
+          if (categories.includes('restaurants') && l.category === 'Restaurant') return true;
+          if (categories.includes('activities') && l.category === 'Activity') return true;
+          if (categories.includes('shopping') && l.category === 'Gift Shop') return true;
+          return false;
+        });
       }
 
       if (cityLandmarks.length === 0) {
-        return c.json({ error: "No landmarks found for this city with the selected filter" }, 404);
+        return c.json({ error: "No landmarks found for this city with the selected filters" }, 404);
       }
 
-      // [적요] Gemini AI를 통한 최적 투어 코스 생성
+      // [적요] Gemini AI를 통한 최적 투어 코스 생성 (국적 정보 포함)
       const recommendation = await recommendTourItinerary(
         cityLandmarks,
         userPosition,
-        language || 'en'
+        language || 'en',
+        userRegion
       );
 
       // [적요] AI가 추천한 랜드마크 ID 유효성 검증 및 유연한 매칭

@@ -32,7 +32,8 @@ export interface TourRecommendation {
 export async function recommendTourItinerary(
   landmarks: Landmark[],
   userPosition?: { latitude: number; longitude: number },
-  language: string = 'en'
+  language: string = 'en',
+  userRegion?: string
 ): Promise<TourRecommendation> {
   try {
     const landmarkInfo = landmarks.map(l => ({
@@ -42,7 +43,8 @@ export async function recommendTourItinerary(
       lat: l.lat,
       lng: l.lng,
       description: l.description,
-      isPremium: l.isPremium
+      isPremium: l.isPremium,
+      targetNations: l.targetNations // ✅ [Phase 4] 국적 필터 정보 포함
     }));
 
     const systemPrompt = language === 'ko'
@@ -61,6 +63,7 @@ export async function recommendTourItinerary(
 ${JSON.stringify(landmarkInfo, null, 2)}
 
 ${userPosition ? `사용자 현재 위치: 위도 ${userPosition.latitude}, 경도 ${userPosition.longitude}` : ''}
+${userRegion ? `사용자 국적/지역: ${userRegion} (이 지역 사용자들에게 추천된 'targetNations' 포함 장소를 최우선으로 고려하세요)` : ''}
 
 응답은 반드시 다음 JSON 형식으로 해주세요 (다른 텍스트 없이 JSON만):
 {
@@ -79,6 +82,7 @@ Landmark list:
 ${JSON.stringify(landmarkInfo, null, 2)}
 
 ${userPosition ? `User current location: latitude ${userPosition.latitude}, longitude ${userPosition.longitude}` : ''}
+${userRegion ? `User Region: ${userRegion} (Prioritize landmarks where 'targetNations' includes this region)` : ''}
 
 Respond with ONLY this exact JSON format (no other text):
 {

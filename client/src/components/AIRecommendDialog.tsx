@@ -31,6 +31,7 @@ interface AIRecommendDialogProps {
   landmarks: Landmark[];
   selectedLanguage: string;
   userPosition?: { latitude: number; longitude: number } | null;
+  userRegion?: string;
   onAddToTour: (landmarks: Landmark[]) => void;
   onSelectLandmark: (landmark: Landmark) => void;
 }
@@ -54,6 +55,7 @@ export default function AIRecommendDialog({
   landmarks,
   selectedLanguage,
   userPosition,
+  userRegion,
   onAddToTour,
   onSelectLandmark
 }: AIRecommendDialogProps) {
@@ -97,6 +99,7 @@ export default function AIRecommendDialog({
           latitude: userPosition.latitude,
           longitude: userPosition.longitude
         } : undefined,
+        userRegion,
         categories: selectedCategories
       });
 
@@ -208,8 +211,8 @@ export default function AIRecommendDialog({
                     variant={selectedCategories.includes(cat.id as CategoryType) ? 'default' : 'outline'}
                     size="sm"
                     className={`h-9 justify-start gap-2 transition-all ${selectedCategories.includes(cat.id as CategoryType)
-                        ? `ring-2 ring-${cat.color}-500/20 shadow-md bg-${cat.color}-600 hover:bg-${cat.color}-700 border-none text-white`
-                        : 'hover:bg-primary/5'
+                      ? `ring-2 ring-${cat.color}-500/20 shadow-md bg-${cat.color}-600 hover:bg-${cat.color}-700 border-none text-white`
+                      : 'hover:bg-primary/5'
                       }`}
                     onClick={() => {
                       if (selectedCategories.includes(cat.id as CategoryType)) {
