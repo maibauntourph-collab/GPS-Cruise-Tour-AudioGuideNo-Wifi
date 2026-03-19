@@ -514,64 +514,39 @@ export default function Home() {
 
   // [Dodari | 2026-03-20] 📍 "No-WiFi" 원클릭 오프라인 준비 (한·중·영 지원)
   // 학생들에게: 실제 여행지에 도착하기 전, 이 버튼을 누르면 데이터가 브라우저에 저장됩니다.
+  // 중국어의 경우 간체(zh-CN)와 번체(zh-TW)를 모두 고려하여 메시지를 출력합니다.
   const handlePreFetchOfflineData = async () => {
     if (!selectedCityId) return;
 
     toast({
       title: selectedLanguage === 'ko' ? "📥 오프라인 데이터 다운로드 중..." :
-        selectedLanguage === 'zh' ? "📥 正在下载离线数据..." : "📥 Downloading Offline Data...",
-      description: `${selectedCity?.name}의 모든 명소 정보를 기기에 저장하고 있습니다.`,
+        selectedLanguage === 'zh-CN' ? "📥 正在下载离线数据..." :
+          selectedLanguage === 'zh-TW' ? "📥 正在下載離線數據..." : "📥 Downloading Offline Data...",
+      description: selectedLanguage === 'ko' ? `${selectedCity?.name}의 모든 명소 정보를 기기에 저장하고 있습니다.` :
+        selectedLanguage === 'zh-CN' ? `正在将 ${selectedCity?.name} 的所有景点信息保存到设备。` :
+          selectedLanguage === 'zh-TW' ? `正在將 ${selectedCity?.name} 的所有景點資訊保存到設備。` :
+            `Saving all landmark information for ${selectedCity?.name} to your device.`,
     });
 
     try {
+      // PWA 캐시 발동을 위한 페치
       await fetch(`/api/cities/${selectedCityId}/landmarks`);
       await fetch(`/api/cities`);
 
       toast({
         title: selectedLanguage === 'ko' ? "🌟 오프라인 준비 완료!" :
-          selectedLanguage === 'zh' ? "🌟 离线准备就绪！" : "🌟 Ready for Offline Tour!",
+          selectedLanguage === 'zh-CN' ? "🌟 离线准备就绪！" :
+            selectedLanguage === 'zh-TW' ? "🌟 離線準備就緒！" : "🌟 Ready for Offline Tour!",
         description: selectedLanguage === 'ko' ? "이제 인터넷이 끊겨도 이 도시의 가이드를 즐기실 수 있습니다." :
-          selectedLanguage === 'zh' ? "现在即使没有网络，您也可以享受该城市的导览。" : "You can now enjoy the guide even without an internet connection.",
+          selectedLanguage === 'zh-CN' ? "现在即使没有网络，您也可以享受该城市的导览。" :
+            selectedLanguage === 'zh-TW' ? "現在即使沒有網絡，您也可以享受該城市的導覽。" : "You can now enjoy the guide even without an internet connection.",
         className: "bg-emerald-500 text-white border-none",
       });
     } catch (error) {
       console.error('Offline Pre-fetch error:', error);
       toast({
-        title: selectedLanguage === 'zh' ? "下载失败" : "다운로드 실패",
-        description: selectedLanguage === 'zh' ? "请检查网络状态。" : "네트워크 상태를 확인해 주세요.",
-        variant: "destructive"
-      });
-    }
-  };
-
-  // [Dodari | 2026-03-20] 📍 "No-WiFi" 원클릭 오프라인 준비
-  // 학생들에게: 실제 여행지에 도착하기 전, 호텔 WiFi에서 이 버튼을 누르면
-  // 모든 랜드마크 데이터가 브라우저에 '박제'되어 인터넷 없이도 투어가 가능해집니다.
-  const handlePreFetchOfflineData = async () => {
-    if (!selectedCityId) return;
-
-    toast({
-      title: selectedLanguage === 'ko' ? "📥 오프라인 데이터 다운로드 중..." : "📥 Downloading Offline Data...",
-      description: `${selectedCity?.name}의 모든 명소 정보를 기기에 저장하고 있습니다.`,
-    });
-
-    try {
-      // 1. 랜드마크 데이터 페치 (vite.config.ts의 PWA 캐싱 룰이 이를 가로채서 저장합니다)
-      await fetch(`/api/cities/${selectedCityId}/landmarks`);
-
-      // 2. 도시 정보 페치
-      await fetch(`/api/cities`);
-
-      toast({
-        title: selectedLanguage === 'ko' ? "🌟 오프라인 준비 완료!" : "🌟 Ready for Offline Tour!",
-        description: "이제 인터넷이 끊겨도 이 도시의 가이드를 즐기실 수 있습니다.",
-        className: "bg-emerald-500 text-white border-none",
-      });
-    } catch (error) {
-      console.error('Offline Pre-fetch error:', error);
-      toast({
-        title: "다운로드 실패",
-        description: "네트워크 상태를 확인해 주세요.",
+        title: (selectedLanguage === 'zh-CN' || selectedLanguage === 'zh-TW') ? "下载失败 / 下載失敗" : "다운로드 실패",
+        description: (selectedLanguage === 'zh-CN' || selectedLanguage === 'zh-TW') ? "请检查网络状态 / 請檢查網絡狀態" : "네트워크 상태를 확인해 주세요.",
         variant: "destructive"
       });
     }
