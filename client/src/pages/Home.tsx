@@ -204,7 +204,18 @@ export default function Home() {
   const [simulationSpeed, setSimulationSpeed] = useState(1);
   const [simulationStepIndex, setSimulationStepIndex] = useState(0);
   const [simulatedPosition, setSimulatedPosition] = useState<{ latitude: number; longitude: number } | null>(null);
-  const [spokenLandmarks, setSpokenLandmarks] = useState<Set<string>>(new Set());
+  // [Kodari | 2026-03-20] 📍 오프라인 투어 상태 영구 저장 (No-WiFi 핵심)
+  // 학생들에게: 사용자가 앱을 껐다 켜도 어디를 다녀왔는지 기억해야 합니다.
+  // localStorage를 활용해 '이미 안내받은 명소' 목록을 영구적으로 관리합니다.
+  const [spokenLandmarks, setSpokenLandmarks] = useState<Set<string>>(() => {
+    const saved = localStorage.getItem('nowifigps_spoken_landmarks');
+    return saved ? new Set(JSON.parse(saved)) : new Set();
+  });
+
+  // [Server Park] 안내 상태가 바뀔 때마다 로컬 저장소에 동기화합니다.
+  useEffect(() => {
+    localStorage.setItem('nowifigps_spoken_landmarks', JSON.stringify(Array.from(spokenLandmarks)));
+  }, [spokenLandmarks]);
 
   // Search and selection
   const [locationSearchQuery, setLocationSearchQuery] = useState('');
