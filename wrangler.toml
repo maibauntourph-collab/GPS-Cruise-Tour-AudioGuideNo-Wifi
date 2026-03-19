@@ -11,12 +11,18 @@ binding = "DB"
 database_name = "gps-guide-db"
 database_id = "a7f2920b-f030-4b4c-9f37-35344956f553"
 
+# [Avengers Team] 환경별 배포 설정 (Multi-Environment Setup)
+
+[env.staging]
+name = "gps-audio-guide-staging"
+vars = { NODE_ENV = "staging" }
+
+[env.production]
+name = "gps-audio-guide-no-wifi"
+vars = { NODE_ENV = "production" }
+
 [site]
 bucket = "./dist"
-
-# [build]
-# command = "npm run build"
-# watch_dir = "server"
 
 [triggers]
 crons = ["0 * * * *"]
