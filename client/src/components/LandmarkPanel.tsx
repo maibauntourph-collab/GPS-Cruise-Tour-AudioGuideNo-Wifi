@@ -221,9 +221,9 @@ export default function LandmarkPanel({
           <Badge
             variant="outline"
             className={`h-7 px-3 rounded-full font-bold text-[10px] ${landmark.category === 'Restaurant' ? 'border-orange-200 bg-orange-50/50 text-orange-600' :
-                landmark.category === 'Activity' ? 'border-emerald-200 bg-emerald-50/50 text-emerald-600' :
-                  landmark.category === 'Gift Shop' ? 'border-purple-200 bg-purple-50/50 text-purple-600' :
-                    'border-blue-200 bg-blue-50/50 text-blue-600'
+              landmark.category === 'Activity' ? 'border-emerald-200 bg-emerald-50/50 text-emerald-600' :
+                landmark.category === 'Gift Shop' ? 'border-purple-200 bg-purple-50/50 text-purple-600' :
+                  'border-blue-200 bg-blue-50/50 text-blue-600'
               }`}
           >
             {landmark.category || t('landmark', selectedLanguage)}
@@ -308,7 +308,7 @@ export default function LandmarkPanel({
         {/* 📋 [Designer Kim / 강의 적요] 상세 설명 섹션
              나레이션 뒤에 보완된 상세 정보를 배치하여, 감성적인 이야기 후 구체적인 지식을 얻을 수 있도록 구성했습니다. */}
         <section className="pt-2">
-          <SectionHeader title="Detailed Information" icon={Info} />
+          <SectionHeader title="장소 정보 (Place Info)" icon={Info} />
           <div className="p-5 bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-100 shadow-sm">
             <p className="text-[13px] text-slate-600 leading-relaxed font-normal">
               {getTranslatedContent(landmark, selectedLanguage, 'detailedDescription') || getTranslatedContent(landmark, selectedLanguage, 'description')}
@@ -328,7 +328,7 @@ export default function LandmarkPanel({
              - 플랫폼 레이블에 한글 명칭(예: 클룩, 비아터)을 병기하여 사용자 직관성을 높였습니다.
         */}
         <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
-          <SectionHeader title="Tickets & Reservation" icon={Ticket} />
+          <SectionHeader title="추천 투어 (Recommended Tours)" icon={Ticket} />
 
           {/* 예약 플랫폼 버튼 그룹 (마이리얼트립, 트립닷컴, 클룩, 겟유어투어, Viator) */}
           <div className="grid grid-cols-1 gap-2 mt-2">
@@ -377,9 +377,8 @@ export default function LandmarkPanel({
           </div>
         </section>
 
-        {/* [DESIGNER KIM] 3. Photos Section */}
         <section className="pt-4">
-          <SectionHeader title={t('photos', selectedLanguage)} icon={ImageIcon} />
+          <SectionHeader title="사진/영상 (Photos & Media)" icon={ImageIcon} />
           <div className="rounded-3xl overflow-hidden shadow-lg" data-no-drag>
             <PhotoGallery
               photos={landmark.photos || []}
@@ -443,7 +442,7 @@ export default function LandmarkPanel({
                   <Play className="w-5 h-5 fill-current" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-[15px] text-gray-800">오디오 가이드</h4>
+                  <h4 className="font-bold text-[15px] text-gray-800">가이드 텍스트 (Guide Text)</h4>
                   <p className="text-[11px] text-gray-400 font-medium">상세한 현장 설명을 들어보세요</p>
                 </div>
               </div>

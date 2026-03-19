@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award, Camera, Smile, Upload, Download, ShoppingBag, Package } from 'lucide-react';
+import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award, Camera, Smile, Upload, Download, ShoppingBag, Package, TrendingUp } from 'lucide-react';
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
@@ -462,20 +462,46 @@ export default function LandmarkDetailDialog({
                     <MapPinned className="w-4 h-4" />
                     {selectedLanguage === 'ko' ? '실시간 위치' : 'Live Location'}
                   </div>
-                  <div
-                    className="w-full h-40 rounded-3xl relative overflow-hidden bg-white border-2 border-white shadow-xl cursor-pointer transition-transform active:scale-[0.98]"
-                    onClick={() => window.open(`https://www.google.com/maps?q=${landmark.lat},${landmark.lng}`, '_blank')}
-                  >
-                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#34A853 1px, transparent 1px)', backgroundSize: '15px 15px' }} />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                      <div className="relative">
-                        <div className="absolute -inset-4 bg-red-400/20 rounded-full animate-ping" />
-                        <div className="w-10 h-10 bg-[#EA4335] rounded-full flex items-center justify-center shadow-lg border-2 border-white relative">
-                          <MapPin className="w-6 h-6 text-white" />
-                        </div>
-                      </div>
-                      <span className="text-[10px] font-bold text-[#EA4335] bg-white px-2 py-0.5 rounded-full shadow-sm">View on Google Maps</span>
-                    </div>
+                  <div className="flex flex-col gap-2 w-full">
+                    <button
+                      onClick={() => {
+                        const isChinese = selectedLanguage.startsWith('zh');
+                        const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name');
+                        if (isChinese) {
+                          // [어벤져스 팀 | 2026-03-20] 🇨🇳 Amap(高德지도) 내비게이션(길찾기) 딥링크
+                          const amapRouteUrl = `amapuri://route/plan/?did=BGVIS1&dlat=${landmark.lat}&dlon=${landmark.lng}&dname=${encodeURIComponent(landmarkName)}&dev=0&t=2`;
+                          const amapWebRouteUrl = `https://uri.amap.com/navigation?to=${landmark.lng},${landmark.lat},${encodeURIComponent(landmarkName)}&mode=walk&policy=1&src=mypage&coordinate=wgs84&callnative=1`;
+
+                          window.location.href = amapRouteUrl;
+                          setTimeout(() => {
+                            window.open(amapWebRouteUrl, '_blank');
+                          }, 500);
+                        } else {
+                          window.open(`https://www.google.com/maps/dir/?api=1&destination=${landmark.lat},${landmark.lng}&travelmode=walking`, '_blank');
+                        }
+                      }}
+                      className="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-2xl bg-[#f85108] hover:bg-[#e04807] text-white text-base font-bold transition-all shadow-lg active:scale-[0.98]"
+                    >
+                      <Navigation className="w-5 h-5" />
+                      {selectedLanguage.startsWith('zh') ? '高德地图 导航 (Amap Navi)' : 'Get Directions'}
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        const isChinese = selectedLanguage.startsWith('zh');
+                        const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name');
+                        if (isChinese) {
+                          const amapWebUrl = `https://uri.amap.com/marker?position=${landmark.lng},${landmark.lat}&name=${encodeURIComponent(landmarkName)}&coordinate=wgs84&callnative=1`;
+                          window.open(amapWebUrl, '_blank');
+                        } else {
+                          window.open(`https://www.google.com/maps?q=${landmark.lat},${landmark.lng}`, '_blank');
+                        }
+                      }}
+                      className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-2xl bg-white/80 hover:bg-white text-[#4A443A] text-sm font-medium transition-colors border border-[#A8A294]/20"
+                    >
+                      <MapPin className="w-4 h-4 text-[#34A853]" />
+                      {selectedLanguage.startsWith('zh') ? '在地图中查看 (Map View)' : 'View on Maps'}
+                    </button>
                   </div>
                 </div>
 
@@ -576,6 +602,33 @@ export default function LandmarkDetailDialog({
                   <h4 className="font-bold text-lg text-[#5D574D]">{selectedLanguage === 'ko' ? '티켓 및 액티비티' : 'Tickets & Activities'}</h4>
                   <p className="text-xs text-[#A8A294] px-4 whitespace-nowrap">{selectedLanguage === 'ko' ? '플랫폼 파트너를 통한 최저가 예약' : 'Best deals via our platform partners'}</p>
                 </div>
+
+                {/* [어벤져스 팀 | 2026-03-20] 실시간 동기화된 최저가 예약 버튼 활성화 */}
+                {landmark.reservationUrl && (
+                  <div className="mx-4 mb-6 p-4 rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-700 text-white shadow-xl shadow-indigo-200 animate-in fade-in slide-in-from-bottom-2 duration-500">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <Badge className="bg-white/20 text-white border-none">Best Price</Badge>
+                        <span className="text-xs font-bold opacity-80 uppercase tracking-wider">Recommended</span>
+                      </div>
+                      <TrendingUp className="w-4 h-4 opacity-50" />
+                    </div>
+                    <h3 className="text-lg font-black mb-1">
+                      {selectedLanguage === 'ko' ? '최저가 보장 예약' : 'Lowest Price Guaranteed'}
+                    </h3>
+                    <p className="text-xs opacity-70 mb-4 leading-relaxed">
+                      {selectedLanguage === 'ko'
+                        ? '글로벌 플랫폼을 통한 공식 예약 링크입니다. 수수료 없이 안전하게 예약하세요.'
+                        : 'Official link through global platforms. Book safely with no hidden fees.'}
+                    </p>
+                    <Button
+                      className="w-full bg-white text-indigo-700 hover:bg-slate-50 font-black h-12 rounded-xl shadow-lg border-none"
+                      onClick={() => window.open(landmark.reservationUrl!, '_blank')}
+                    >
+                      {selectedLanguage === 'ko' ? '지금 바로 예약하기' : 'Book Now'}
+                    </Button>
+                  </div>
+                )}
 
                 <div className="px-4 space-y-3">
                   {/* [Bug Doctor] Detailed Description placed below reservation title as requested */}

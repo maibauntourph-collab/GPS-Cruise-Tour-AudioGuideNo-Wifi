@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, useMap, Polyline, Popup, useMapEvents, Tooltip } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap, Polyline, Popup, useMapEvents, Tooltip, ZoomControl } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { Landmark, GpsPosition } from '@shared/schema';
 import { getTranslatedContent } from '@/lib/translations';
+import { wgs84ToGcj02 } from '@/lib/coordTransform';
 
 const ROME_CENTER: [number, number] = [41.8902, 12.4922];
 
@@ -790,12 +791,13 @@ export default function MapView({
       center={cityCenter || ROME_CENTER}
       zoom={cityZoom || 14}
       className="h-full w-full"
-      zoomControl={true}
+      zoomControl={false}
       scrollWheelZoom={true}
       doubleClickZoom={true}
       touchZoom={true}
       dragging={true}
     >
+      <ZoomControl position="bottomright" />
       <UserInteractionTracker />
       <UserLocationUpdater position={userPosition} isCarNavZoomMode={isCarNavZoomMode} />
       <CityUpdater center={cityCenter} zoom={cityZoom} />
@@ -808,10 +810,18 @@ export default function MapView({
         onHotelLocationSelected={onHotelLocationSelected}
         onEndPointLocationSelected={onEndPointLocationSelected}
       />
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      {/* [어벤져스 팀 | 2026-03-20] 🇨🇳 중국어 환경 시 Amap(高德地图) 타일 사용 */}
+      {selectedLanguage?.startsWith('zh') ? (
+        <TileLayer
+          attribution='&copy; <a href="https://www.amap.com/">Amap</a>'
+          url="https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}"
+        />
+      ) : (
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+      )}
 
       {landmarks
         .filter(landmark => !showTourOnly || tourStopIds.includes(landmark.id))
@@ -835,10 +845,13 @@ export default function MapView({
           // Use normal icon for all (tooltip will blink for tour items instead of pin)
           const icon = isActivity ? activityIcon : isRestaurant ? restaurantIcon : isGiftShop ? giftShopIcon : landmarkIcon;
 
+          const isAmap = selectedLanguage?.startsWith('zh');
+          const [displayLat, displayLng] = isAmap ? wgs84ToGcj02(landmark.lat, landmark.lng) : [landmark.lat, landmark.lng];
+
           return (
             <Marker
               key={landmark.id}
-              position={[landmark.lat, landmark.lng]}
+              position={[displayLat, displayLng]}
               icon={icon}
               ref={(marker) => {
                 if (marker) {
@@ -935,7 +948,7 @@ export default function MapView({
 
       {userPosition && (
         <Marker
-          position={[userPosition.latitude, userPosition.longitude]}
+          position={selectedLanguage?.startsWith('zh') ? wgs84ToGcj02(userPosition.latitude, userPosition.longitude) : [userPosition.latitude, userPosition.longitude]}
           icon={userLocationIcon}
         />
       )}
@@ -961,22 +974,22 @@ export default function MapView({
       {/* Starting Point Marker */}
       {startingPoint && startingPoint.lat && startingPoint.lng && (
         <Marker
-          position={[startingPoint.lat, startingPoint.lng]}
+          position={selectedLanguage?.startsWith('zh') ? wgs84ToGcj02(startingPoint.lat, startingPoint.lng) : [startingPoint.lat, startingPoint.lng]}
           icon={L.divIcon({
-            html: `< div data - testid="marker-starting-point" style = "
-background: ${startingPoint.type === 'airport' ? '#0ea5e9' : startingPoint.type === 'cruise_terminal' ? '#14b8a6' : startingPoint.type === 'hotel' ? '#a855f7' : '#22c55e'};
-width: 32px;
-height: 32px;
-border - radius: 50 %;
-border: 3px solid white;
-box - shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-display: flex;
-align - items: center;
-justify - content: center;
-color: white;
-font - size: 14px;
-font - weight: bold;
-">S</div>`,
+            html: `<div data-testid="marker-starting-point" style="
+              background: ${startingPoint.type === 'airport' ? '#0ea5e9' : startingPoint.type === 'cruise_terminal' ? '#14b8a6' : startingPoint.type === 'hotel' ? '#a855f7' : '#22c55e'};
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              border: 3px solid white;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              font-size: 14px;
+              font-weight: bold;
+            ">S</div>`,
             className: 'starting-point-marker',
             iconSize: [32, 32],
             iconAnchor: [16, 16],
@@ -995,16 +1008,15 @@ font - weight: bold;
               </div>
             </div>
           </Popup>
-        </Marker >
+        </Marker>
       )}
 
       {/* End Point Marker */}
-      {
-        endPoint && endPoint.lat && endPoint.lng && (
-          <Marker
-            position={[endPoint.lat, endPoint.lng]}
-            icon={L.divIcon({
-              html: `<div data-testid="marker-end-point" style="
+      {endPoint && endPoint.lat && endPoint.lng && (
+        <Marker
+          position={selectedLanguage?.startsWith('zh') ? wgs84ToGcj02(endPoint.lat, endPoint.lng) : [endPoint.lat, endPoint.lng]}
+          icon={L.divIcon({
+            html: `<div data-testid="marker-end-point" style="
               background: ${endPoint.type === 'airport' ? '#0ea5e9' : endPoint.type === 'cruise_terminal' ? '#14b8a6' : endPoint.type === 'hotel' ? '#a855f7' : '#ef4444'};
               width: 32px;
               height: 32px;
@@ -1018,27 +1030,26 @@ font - weight: bold;
               font-size: 14px;
               font-weight: bold;
             ">E</div>`,
-              className: 'end-point-marker',
-              iconSize: [32, 32],
-              iconAnchor: [16, 16],
-            })}
-          >
-            <Popup>
-              <div className="text-sm font-medium">
-                {selectedLanguage === 'ko' ? '도착지' : 'End Point'}
-                <div className="text-xs text-muted-foreground mt-1">
-                  {endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
-                    endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
-                      endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
-                        endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
-                          endPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
-                            (selectedLanguage === 'ko' ? '도착지' : 'End')}
-                </div>
+            className: 'end-point-marker',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+          })}
+        >
+          <Popup>
+            <div className="text-sm font-medium">
+              {selectedLanguage === 'ko' ? '도착지' : 'End Point'}
+              <div className="text-xs text-muted-foreground mt-1">
+                {endPoint.type === 'airport' ? (selectedLanguage === 'ko' ? '공항' : 'Airport') :
+                  endPoint.type === 'cruise_terminal' ? (selectedLanguage === 'ko' ? '크루즈 터미널' : 'Cruise Terminal') :
+                    endPoint.type === 'hotel' ? (selectedLanguage === 'ko' ? '호텔' : 'Hotel') :
+                      endPoint.type === 'my_location' ? (selectedLanguage === 'ko' ? '내 위치' : 'My Location') :
+                        endPoint.type === 'train_station' ? (selectedLanguage === 'ko' ? '기차역' : 'Train Station') :
+                          (selectedLanguage === 'ko' ? '도착지' : 'End')}
               </div>
-            </Popup>
-          </Marker>
-        )
-      }
+            </div>
+          </Popup>
+        </Marker>
+      )}
 
       {/* Selected Landmark Flag Marker */}
       {
@@ -1056,7 +1067,9 @@ font - weight: bold;
           opacity와 weight를 조절하여 배경 지도와 조화를 이루도록 디자인했습니다. */}
       {tourStops.length >= 2 && (
         <Polyline
-          positions={tourStops.map(stop => [stop.lat, stop.lng])}
+          positions={tourStops.map(stop => {
+            return (selectedLanguage?.startsWith('zh') ? wgs84ToGcj02(stop.lat, stop.lng) : [stop.lat, stop.lng]) as [number, number];
+          })}
           pathOptions={{
             color: 'hsl(14, 85%, 55%)',
             weight: 4,
@@ -1071,22 +1084,26 @@ font - weight: bold;
           랜드마크 중 사진 데이터가 있는 경우  thumbnails를 지도에 직접 뿌려줍니다. */}
       {landmarks
         .filter(l => l.photos && l.photos.length > 0)
-        .map(l => (
-          <Marker
-            key={`photo-${l.id}`}
-            position={[l.lat, l.lng]}
-            icon={createPhotoIcon(l.photos![0])}
-            eventHandlers={{
-              click: () => onLandmarkSelect?.(l)
-            }}
-            zIndexOffset={100}
-          >
-            <Tooltip direction="bottom" offset={[0, 20]}>
-              <span className="text-[10px] font-bold">{getTranslatedContent(l, selectedLanguage, 'name')}</span>
-            </Tooltip>
-          </Marker>
-        ))
-      }
+        .map(l => {
+          const isAmap = selectedLanguage?.startsWith('zh');
+          const [displayLat, displayLng] = isAmap ? wgs84ToGcj02(l.lat, l.lng) : [l.lat, l.lng];
+
+          return (
+            <Marker
+              key={`photo-${l.id}`}
+              position={[displayLat, displayLng]}
+              icon={createPhotoIcon(l.photos![0])}
+              eventHandlers={{
+                click: () => onLandmarkSelect?.(l)
+              }}
+              zIndexOffset={100}
+            >
+              <Tooltip direction="bottom" offset={[0, 20]}>
+                <span className="text-[10px] font-bold">{getTranslatedContent(l, selectedLanguage, 'name')}</span>
+              </Tooltip>
+            </Marker>
+          );
+        })}
 
     </MapContainer >
   );

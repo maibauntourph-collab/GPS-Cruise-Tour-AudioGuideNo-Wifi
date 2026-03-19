@@ -101,6 +101,12 @@ import { CitySelector } from '@/components/CitySelector';
 
 // Landing Data fallback if schema doesn't export it
 const LANDING_DATA: Record<string, any> = {
+  'seoul': {
+    'ko': { title: '역동적인 도시, 서울', subTitle: '과거와 미래가 공존하는 특별한 여정', heroImage: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80' },
+    'en': { title: 'Dynamic Seoul', subTitle: 'A journey where past and future coexist', heroImage: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80' },
+    'zh-CN': { title: '动态首尔', subTitle: '过去与未来共存的特别旅程', heroImage: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80' },
+    'zh-TW': { title: '動態首爾', subTitle: '過去與未來共存의 특별한 旅程', heroImage: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80' }
+  },
   'venice': {
     'ko': { title: '물 위의 도시, 베네치아', subTitle: '곤돌라와 함께하는 낭만 여행', heroImage: 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?w=400&q=70' },
     'en': { title: 'Venice, City of Water', subTitle: 'Romantic journey with gondolas', heroImage: 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?w=400&q=70' }
@@ -173,7 +179,7 @@ export default function Home() {
   // State
   const [position, setPosition] = useState<GeolocationPosition | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCityId, setSelectedCityId] = useState<string>('default');
+  const [selectedCityId, setSelectedCityId] = useState<string>('seoul');
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [showMenu, setShowMenu] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(true);
@@ -409,21 +415,18 @@ export default function Home() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // [교수님 지시 | 2026-02-27] Welcome Landing Page 자동 활성화를 중단합니다. 
-  // 대신 사용자가 필요할 때 직접 접근하도록 유도하는 Remark를 남깁니다.
+  // [어벤져스 팀 | 2026-03-20] 🇰🇷 서울 랜딩 최적화: 첫 방문 시 서울의 첫 번째 명소를 자동 노출합니다.
   useEffect(() => {
-    if (isWelcomeHandled && !showStartupDialog && !landingCityId && !selectedLandmark && !isSimulationMode) {
-      /* 
-      const timer = setTimeout(() => {
-        // [적요] 국가 선택 카드를 먼저 보여주고, 선택 후 list 모드로 전환합니다.
-        setShowCountrySelector(true);
-      }, 500);
-      return () => clearTimeout(timer);
-      */
-      // 바로 목록 모드로 진입하거나 대기 상태로 유지합니다.
-      transitionTo('list');
+    if (isWelcomeHandled && !showStartupDialog && !landingCityId && !isSimulationMode) {
+      if (selectedCityId === 'seoul' && landmarks && landmarks.length > 0 && !selectedLandmark) {
+        // [적요] 첫 번째 명소(예: 경복궁)를 자동으로 선택하고 상세(detail) 모드로 전환합니다.
+        setSelectedLandmark(landmarks[0]);
+        transitionTo('detail');
+      } else if (!selectedLandmark) {
+        transitionTo('list');
+      }
     }
-  }, [isWelcomeHandled, showStartupDialog, landingCityId, selectedLandmark, isSimulationMode]);
+  }, [isWelcomeHandled, showStartupDialog, landingCityId, selectedLandmark, isSimulationMode, selectedCityId, landmarks, transitionTo]);
 
   // [Dodari] Magic Landing Trigger
   useEffect(() => {
@@ -474,6 +477,21 @@ export default function Home() {
     if (pendingLandmark) {
       const url = `https://www.google.com/maps/dir/?api=1&destination=${pendingLandmark.lat},${pendingLandmark.lng}&travelmode=walking`;
       window.open(url, '_blank');
+    }
+    setShowDirectionsDialog(false);
+  };
+
+  const openAmap = () => {
+    if (pendingLandmark) {
+      // [어벤져스 팀 | 2026-03-20] 🇨🇳 Amap(高德地图) 내비게이션(길찾기) 딥링크
+      const landmarkName = getTranslatedContent(pendingLandmark as any, selectedLanguage, 'name');
+      const amapRouteUrl = `amapuri://route/plan/?did=BGVIS1&dlat=${pendingLandmark.lat}&dlon=${pendingLandmark.lng}&dname=${encodeURIComponent(landmarkName)}&dev=0&t=2`;
+      const amapWebRouteUrl = `https://uri.amap.com/navigation?to=${pendingLandmark.lng},${pendingLandmark.lat},${encodeURIComponent(landmarkName)}&mode=walk&policy=1&src=mypage&coordinate=wgs84&callnative=1`;
+
+      window.location.href = amapRouteUrl;
+      setTimeout(() => {
+        window.open(amapWebRouteUrl, '_blank');
+      }, 500);
     }
     setShowDirectionsDialog(false);
   };
@@ -1619,8 +1637,8 @@ export default function Home() {
               isCarNavZoomMode={isCarNavZoomMode}
             />
 
-            {/* 캫드가 단힐 상태에서 'VIEW LIST' 버튼 표시 */}
-            {isCardMinimized && appMode !== 'map' && (
+            {/* [적요] 카드가 최소화된 상태(IsCardMinimized)일 때만 하단에 리스트 보기 버튼을 노출합니다. */}
+            {isCardMinimized && (
               <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 z-[1500]">
                 <Button
                   className="h-14 px-8 rounded-full shadow-2xl bg-white text-slate-800 border-2 border-primary/20 hover:border-primary/50 transition-all flex items-center gap-3 active:scale-95 font-black text-lg"
@@ -1634,65 +1652,61 @@ export default function Home() {
           </div>
         </main>
 
-        {/* ✅ [마스터 모드 | 2026-02-27]
-             isCardVisible = appMode !== 'map' 이면 카드 표시
-             학생들: isCardVisible 하나로 카드 on/off를 결정합니다 */}
-        {isCardVisible && (
-          <UnifiedFloatingCard
-            forceShowList={appMode === 'list'}
-            isCardMinimized={isCardMinimized}
-            onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
-            selectedLandmark={selectedLandmark}
-            onLandmarkSelect={(l: Landmark) => {
-              // [적요] 리스트에서 랜드마크 선택 → detail 모드 진입
-              prevAppModeRef.current = appMode;
-              setSelectedLandmark(l);
-              setAppMode('detail');
-              setIsCardMinimized(false);
-            }}
-            onLandmarkClose={() => {
-              // [적요] 랜드마크 닫기: list에서 왔으면 list로, 지도에서 왔으면 map으로 복귀
-              setSelectedLandmark(null);
-              setAppMode(prevAppModeRef.current === 'list' ? 'list' : 'map');
-            }}
-            landmarks={landmarks}
-            tourStops={tourStops}
-            onAddToTour={handleAddToTour}
-            onRemoveTourStop={(id) => {
-              setTourStops(tourStops.filter(s => s.id !== id));
-              setTourStopDurations(prev => {
-                const updated = { ...prev };
-                delete updated[id];
-                return updated;
-              });
-            }}
-            userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
-            selectedLanguage={selectedLanguage}
-            onNavigate={handleLandmarkRoute}
-            onLandmarkRoute={handleLandmarkRoute}
-            city={selectedCity || null}
-            showCruisePort={showCruisePort}
-            onToggleCruisePort={() => setShowCruisePort(!showCruisePort)}
-            isSimulationMode={isSimulationMode}
-            simulationSpeed={simulationSpeed}
-            onSimulationSpeedChange={setSimulationSpeed}
-            onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
-            onSimulationPauseToggle={() => setIsSimulationPaused(!isSimulationPaused)}
-            isSimulationPaused={isSimulationPaused}
-            onOpenAIRecommend={() => setShowAIRecommend(true)}
-            // ✅ [버그수정 | 2026-02-27] spokenLandmarks.has() 크래시 방지
-            // interface에 required로 선언된 prop은 반드시 전달해야 합니다!
-            spokenLandmarks={spokenLandmarks}
-            showLandmarks={showLandmarks}
-            showActivities={showActivities}
-            showRestaurants={showRestaurants}
-            showGiftShops={showGiftShops}
-            onToggleLandmarks={() => setShowLandmarks(!showLandmarks)}
-            onToggleActivities={() => setShowActivities(!showActivities)}
-            onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
-            onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
-          />
-        )}
+        {/* ✅ [마스터 모드 | Designer Kim] UnifiedFloatingCard 통합UI
+             학생들: 이제 모든 모드(map, list, detail, tour)를 이 하나의 카드에서 처리합니다.
+             웰컴 카드를 위해 항상 렌더링하도록 설정했습니다. */}
+        <UnifiedFloatingCard
+          forceShowList={appMode === 'list'}
+          isCardMinimized={isCardMinimized}
+          onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
+          selectedLandmark={selectedLandmark}
+          onLandmarkSelect={(l: Landmark) => {
+            // [적요] 리스트에서 랜드마크 선택 → detail 모드 진입
+            prevAppModeRef.current = appMode;
+            setSelectedLandmark(l);
+            setAppMode('detail');
+            setIsCardMinimized(false);
+          }}
+          onLandmarkClose={() => {
+            // [적요] 랜드마크 닫기: list에서 왔으면 list로, 지도에서 왔으면 map으로 복귀
+            setSelectedLandmark(null);
+            setAppMode(prevAppModeRef.current === 'list' ? 'list' : 'map');
+          }}
+          landmarks={landmarks}
+          tourStops={tourStops}
+          onAddToTour={handleAddToTour}
+          onRemoveTourStop={(id) => {
+            setTourStops(tourStops.filter(s => s.id !== id));
+            setTourStopDurations(prev => {
+              const updated = { ...prev };
+              delete updated[id];
+              return updated;
+            });
+          }}
+          userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
+          selectedLanguage={selectedLanguage}
+          onNavigate={handleLandmarkRoute}
+          onLandmarkRoute={handleLandmarkRoute}
+          city={selectedCity || null}
+          showCruisePort={showCruisePort}
+          onToggleCruisePort={() => setShowCruisePort(!showCruisePort)}
+          isSimulationMode={isSimulationMode}
+          simulationSpeed={simulationSpeed}
+          onSimulationSpeedChange={setSimulationSpeed}
+          onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
+          onSimulationPauseToggle={() => setIsSimulationPaused(!isSimulationPaused)}
+          isSimulationPaused={isSimulationPaused}
+          onOpenAIRecommend={() => setShowAIRecommend(true)}
+          spokenLandmarks={spokenLandmarks}
+          showLandmarks={showLandmarks}
+          showActivities={showActivities}
+          showRestaurants={showRestaurants}
+          showGiftShops={showGiftShops}
+          onToggleLandmarks={() => setShowLandmarks(!showLandmarks)}
+          onToggleActivities={() => setShowActivities(!showActivities)}
+          onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
+          onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
+        />
 
         {/* Other Overlays */}
         {showMenu && (
@@ -1785,6 +1799,23 @@ export default function Home() {
         <LoginDialog isOpen={showLoginDialog} onClose={() => setShowLoginDialog(false)} language={selectedLanguage} />
         <OfflineIndicator />
         <InstallPrompt selectedLanguage={selectedLanguage} onClose={() => setIsWelcomeHandled(true)} />
+
+        {/* [어벤져스 팀 | ACTIVATE KEY FUNCTION] StartupDialog를 활성화하여 여행의 첫 관문을 복구합니다. */}
+        <StartupDialog
+          isOpen={showStartupDialog}
+          onClose={() => setShowStartupDialog(false)}
+          onSelectGPS={() => setGpsEnabled(true)}
+          onRestoreTour={(data) => {
+            handleCityChange(data.cityId);
+            // [적요] 저장된 투어 데이터 복원 로직이 추가로 필요할 수 있습니다.
+            setShowStartupDialog(false);
+          }}
+          savedTourData={null} // 로컬 스토리지에서 직접 가져오도록 수정 가능
+          selectedLanguage={selectedLanguage}
+          onLanguageChange={setSelectedLanguage}
+          isGpsAvailable={gpsEnabled}
+          isGpsLoading={isLoading}
+        />
       </div>
 
       {/* Navigation App Choice */}
@@ -1804,12 +1835,16 @@ export default function Home() {
               </div>
               <Badge className="bg-white/20 text-white border-none">Best</Badge>
             </Button>
-            <div className="grid grid-cols-2 gap-3">
-              <Button onClick={openGoogleMaps} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <Button onClick={openAmap} variant="outline" className="h-14 rounded-2xl border-orange-200 bg-orange-50/30 hover:bg-orange-50 flex items-center gap-2 group transition-all">
+                <MapPin className="w-5 h-5 text-orange-600 group-hover:scale-110 transition-transform" />
+                <span className="font-bold">{selectedLanguage?.startsWith('zh') ? '高德地图 (Amap)' : 'Amap'}</span>
+              </Button>
+              <Button onClick={openGoogleMaps} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-green-600" />
                 <span>Google Maps</span>
               </Button>
-              <Button onClick={openWaze} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-3">
+              <Button onClick={openWaze} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-2">
                 <Navigation2 className="w-5 h-5 text-sky-500" />
                 <span>Waze</span>
               </Button>

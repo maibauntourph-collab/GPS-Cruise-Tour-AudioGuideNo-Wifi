@@ -237,6 +237,11 @@ export function UnifiedFloatingCard({
   onToggleMinimized,
   // [교수님 지시] AI 추천 다이얼로그를 열기 위한 콜백 — AI Pick 탭에서 사용
   onOpenAIRecommend,
+  // [Bug Doctor | 2026-03-20] 시뮬레이션 제어를 위한 필수 Props 누락분 추가
+  isSimulationPaused = false,
+  simulationSpeed = 1,
+  onSimulationPauseToggle,
+  onSimulationSpeedChange,
 }: UnifiedFloatingCardProps) {
   // [교수님 지시] 탭 타입에 'ai' 추가 — AI 추천 탭 지원
   const [activeTab, setActiveTab] = useState<'list' | 'cruise' | 'tour' | 'ai'>('list');
@@ -621,26 +626,99 @@ export function UnifiedFloatingCard({
                   <h5 className="font-bold text-sm">{selectedLanguage === 'ko' ? `내 투어 (${tourStops.length})` : `My Tour (${tourStops.length})`}</h5>
                   <Button
                     size="sm"
-                    className={`rounded-full h-8 text-xs font-black transition-all duration-300 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-100 ring-2 ring-red-100' : 'bg-[#E9633F] hover:bg-[#D55232] shadow-lg shadow-orange-100 ring-2 ring-orange-100'}`}
+                    className={`rounded-full h-8 px-4 text-[10px] font-black tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 ring-2 ring-red-100' : 'bg-gradient-to-r from-[#E9633F] to-[#FF8A65] text-white shadow-xl shadow-orange-100 ring-2 ring-orange-100'}`}
                     onClick={() => onToggleSimulation?.()}
                   >
                     {isSimulationMode ? (
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1.5 uppercase">
                         <Square className="w-3 h-3 fill-current" />
                         <span>{selectedLanguage === 'ko' ? '중단' : 'Stop'}</span>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1.5 uppercase">
                         <Play className="w-3 h-3 fill-current" />
-                        <span>{selectedLanguage === 'ko' ? '시작' : 'Start'}</span>
+                        <span>{selectedLanguage === 'ko' ? '투어 시작' : 'Start'}</span>
                       </div>
                     )}
                   </Button>
                 </div>
+
+                {/* [DESIGNER KIM] 시뮬레이션 모드 시 상세 컨트롤 바 노출 (통합 UI) */}
+                {isSimulationMode && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    className="overflow-hidden bg-slate-900/5 rounded-2xl border border-slate-200/50 p-3 space-y-3"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 rounded-full bg-white shadow-sm border"
+                          onClick={() => onSimulationPauseToggle?.()}
+                        >
+                          {isSimulationPaused ? <Play className="w-3.5 h-3.5 text-indigo-600 fill-current" /> : <Pause className="w-3.5 h-3.5 text-indigo-600 fill-current" />}
+                        </Button>
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
+                          {isSimulationPaused ? (selectedLanguage === 'ko' ? '일시정지됨' : 'Paused') : (selectedLanguage === 'ko' ? '진행 중' : 'Simulating')}
+                        </span>
+                      </div>
+
+                      <div className="flex bg-white p-0.5 rounded-lg border shadow-sm">
+                        {[1, 5, 10].map(speed => (
+                          <Button
+                            key={speed}
+                            variant="ghost"
+                            size="sm"
+                            className={`h-6 px-2 text-[9px] font-black rounded-md transition-all ${simulationSpeed === speed ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-400 hover:text-slate-800'}`}
+                            onClick={() => onSimulationSpeedChange?.(speed)}
+                          >
+                            {speed}x
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
                 {tourStops.length === 0 ? (
-                  <div className="py-10 text-center text-muted-foreground">
-                    <MapPinned className="w-8 h-8 mx-auto mb-2 opacity-30" />
-                    <p className="text-xs">{selectedLanguage === 'ko' ? '지도에서 명소를 추가하세요' : 'Add landmarks from the map'}</p>
+                  <div className="py-10 flex flex-col items-center text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    {/* [DESIGNER KIM] 웰컴 카드 - 프리미엄 아이콘 배치 */}
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full animate-pulse" />
+                      <div className="relative w-20 h-20 rounded-3xl glass-premium aurora-border-premium flex items-center justify-center shadow-xl">
+                        <MapPinned className="w-10 h-10 text-primary animate-bounce-slow" />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 px-4">
+                      <h6 className="font-black text-lg text-slate-800 tracking-tight">
+                        {selectedLanguage === 'ko' ? '나만의 여행을 시작하세요' : 'Start Your Personal Tour'}
+                      </h6>
+                      <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                        {selectedLanguage === 'ko'
+                          ? '지도에서 가고 싶은 명소의 + 버튼을 눌러\n나만의 맞춤 투어 경로를 만들어보세요!'
+                          : 'Click the + button on the map to add\nlandmarks to your personal tour route!'}
+                      </p>
+                    </div>
+
+                    {/* [적요] 학생들을 위한 코드 설명: Empty State는 서비스의 'First Action'을 명확히 유도해야 합니다. */}
+                    <div className="w-full pt-4 border-t border-slate-100/50">
+                      <div className="grid grid-cols-2 gap-3 px-2">
+                        <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-left">
+                          <div className="w-6 h-6 rounded-lg bg-orange-100 flex items-center justify-center mb-2">
+                            <Plus className="w-3.5 h-3.5 text-orange-600" />
+                          </div>
+                          <p className="text-[10px] font-bold text-slate-700">{selectedLanguage === 'ko' ? '명소 추가' : 'Add Spot'}</p>
+                        </div>
+                        <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-left">
+                          <div className="w-6 h-6 rounded-lg bg-indigo-100 flex items-center justify-center mb-2">
+                            <Play className="w-3.5 h-3.5 text-indigo-600" />
+                          </div>
+                          <p className="text-[10px] font-bold text-slate-700">{selectedLanguage === 'ko' ? '투어 시작' : 'Start Tour'}</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   <div className="space-y-2">

@@ -11,39 +11,36 @@ import path from 'path';
 // 파리/로마/바르셀로나 -> TheFork (thefork.com)
 // 싱가포르 -> Chope (chope.co)
 
-function generateBookingUrl(cityId: string, name: string): string {
+function generateBookingUrl(cityId: string, name: string, category: string): string {
     const query = encodeURIComponent(name);
 
-    switch (cityId) {
-        case 'seoul':
-        case 'busan':
-        case 'jeju':
-            return `https://app.catchtable.net/search/result?keyword=${query}`;
-
-        case 'tokyo':
-            return `https://www.tablecheck.com/en/shops/search?utf8=%E2%9C%93&q=${query}`;
-
-        case 'new-york':
-            return `https://www.opentable.com/s?dateTime=2024-06-01T19%3A00%3A00&covers=2&metroId=8&term=${query}`;
-
-        case 'london':
-            return `https://www.opentable.co.uk/s?dateTime=2024-06-01T19%3A00%3A00&covers=2&metroId=72&term=${query}`;
-
-        case 'paris':
-            return `https://www.thefork.com/search?cityId=415144&restaurantName=${query}`;
-
-        case 'rome':
-            return `https://www.thefork.com/search?cityId=328021&restaurantName=${query}`;
-
-        case 'barcelona':
-            return `https://www.thefork.com/search?cityId=328011&restaurantName=${query}`;
-
-        case 'singapore':
-            return `https://www.chope.co/singapore-restaurants/search?q=${query}`;
-
-        default:
-            // Fallback
-            return `https://www.google.com/search?q=${query}+reservations`;
+    if (category === 'Restaurant') {
+        switch (cityId) {
+            case 'seoul':
+            case 'busan':
+            case 'jeju':
+                return `https://app.catchtable.net/search/result?keyword=${query}`;
+            case 'tokyo':
+                return `https://www.tablecheck.com/en/shops/search?utf8=%E2%9C%93&q=${query}`;
+            case 'new-york':
+                return `https://www.opentable.com/s?term=${query}`;
+            case 'london':
+                return `https://www.opentable.co.uk/s?term=${query}`;
+            case 'paris':
+            case 'rome':
+            case 'barcelona':
+                return `https://www.thefork.com/search?restaurantName=${query}`;
+            default:
+                return `https://www.google.com/search?q=${query}+reservations`;
+        }
+    } else {
+        // [어벤져스 팀] 랜드마크용 제휴 플랫폼 (GetYourGuide, Klook, Trip.com)
+        // 한국 지역은 Klook/Trip.com이 강세, 유럽/미국은 GetYourGuide가 강세
+        if (['seoul', 'busan', 'jeju', 'tokyo', 'singapore'].includes(cityId)) {
+            return `https://www.klook.com/en-US/search?query=${query}`;
+        } else {
+            return `https://www.getyourguide.com/s?q=${query}`;
+        }
     }
 }
 
@@ -51,24 +48,23 @@ async function run() {
     console.log('Starting reservationUrl update to global booking platforms...\n');
 
     const targetLandmarks = await db.query.landmarks.findMany({
-        where: inArray(landmarks.category, ['Restaurant'])
+        where: inArray(landmarks.category, ['Restaurant', 'Landmark', 'Activity'])
     });
 
-    console.log(`Found ${targetLandmarks.length} Restaurant landmarks.`);
+    console.log(`Found ${targetLandmarks.length} target landmarks (Restaurant, Landmark, Activity).`);
     let successCount = 0;
 
     const report: string[] = [];
-    report.push('# 레스토랑 예약 URL 플랫폼 전환 결과\n');
-    report.push('| 랜드마크 | 도시 | 전환 전 (기존 URL) | 전환 후 (플랫폼 URL) |');
+    report.push('# 랜드마크 및 레스토랑 예약 URL 플랫폼 전환 결과\n');
+    report.push('| 랜드마크 | 도시 | 카테고리 | 전환 후 (플랫폼 URL) |');
     report.push('|---|---|---|---|');
 
     for (let i = 0; i < targetLandmarks.length; i++) {
         const lm = targetLandmarks[i];
         const oldUrl = lm.reservationUrl || 'N/A';
 
-        // We want to apply the platform search URL to all to unify the UX, 
-        // replacing the directly scraped ones from yesterday.
-        const newUrl = generateBookingUrl(lm.cityId, lm.name);
+        // [어벤져스 팀 | 2026-03-20] 플랫폼 검색 URL 생성 (UX 통일 및 제휴 수익화)
+        const newUrl = generateBookingUrl(lm.cityId, lm.name, lm.category || 'Landmark');
 
         await db.update(landmarks)
             .set({
@@ -78,7 +74,7 @@ async function run() {
             .where(eq(landmarks.id, lm.id));
 
         successCount++;
-        report.push(`| ${lm.name} | ${lm.cityId} | ${oldUrl} | ${newUrl} |`);
+        report.push(`| ${lm.name} | ${lm.cityId} | ${lm.category} | [Link](${newUrl}) |`);
     }
 
     const reportPath = path.join(process.cwd(), 'docs', 'reservation_url_update_report.md');

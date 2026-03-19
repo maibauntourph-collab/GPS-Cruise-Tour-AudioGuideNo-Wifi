@@ -91,9 +91,9 @@
   --chart-4: 220 60% 50%;
   --chart-5: 280 65% 55%;
 
-  --font-sans: Inter, system-ui, -apple-system, sans-serif;
-  --font-serif: Playfair Display, Georgia, serif;
-  --font-mono: ui-monospace, monospace;
+  --font-sans: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans CN', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', 'Songti SC', 'Source Han Serif CN', Georgia, serif;
+  --font-mono: ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --radius: .5rem;
   /* 8px */
   --shadow-2xs: 0px 1px 2px 0px hsl(220 15% 25% / 0.05);
@@ -278,6 +278,16 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* [Designer Kim] 중국어(간체) 전용 폰트 최적화 */
+  :root:lang(zh-CN) {
+    --font-sans: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
+  }
+
+  /* [Designer Kim] 중국어(번체) 전용 폰트 최적화 */
+  :root:lang(zh-TW) {
+    --font-sans: 'PingFang TC', 'Hiragino Sans CNS', 'Microsoft JhengHei', 'Source Han Sans TW', sans-serif;
   }
 }
 

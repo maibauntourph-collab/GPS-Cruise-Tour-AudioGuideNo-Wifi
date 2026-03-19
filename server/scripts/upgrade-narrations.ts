@@ -54,23 +54,24 @@ async function upgradeNarration(lm: any) {
 `;
     }
 
-    const prompt = `
-당신은 세계 최고의 여행 스토리텔러 가이드 'Story Teller Lee(에피소드 마스터)'입니다.
-다음은 랜드마크/액티비티/식당/쇼핑 정보입니다.
-도시: ${lm.cityId}
-이름: ${lm.name}
-카테고리: ${lm.category}
-
-[기존 설명 베이스]
-${lm.narration || lm.description || "정보가 거의 없다면 해당 명소의 역사와 최신 특징을 스스로 웹/사전 지식 기반으로 대폭 보강하여 풍부하게 작성할 것"}
-
-[추가 요청 사항]
-1. 위 기존 내용을 바탕으로 "지금 이곳에 서 있는 것처럼", "말하듯 자연스러운" 대화체 가이드 톤으로 완벽하게 창작하세요.
-${focusInstructions}
-5. 딱딱한 정보 나열식 설명은 절대 금지합니다. "짜잔! 여러분...", "고개를 한껏 젖혀 위를 보세요!" 같은 역동적이고 유머러스한 어투를 적극 활용하세요.
-
-응답 형식은 다른 인사말 없이 오직 '내레이션 본문' 만 마크다운 형태로 텍스트 출력하세요. (JSON 사용 안함)
-`;
+    const prompt = ` 당신은 세계 최고의 여행 스토리텔러 가이드 'Story Teller Lee(에피소드 마스터)'입니다.
+ 당신의 임무는 지루한 위키백과식 설명을 배꼽 잡는 에피소드와 감동적인 역사 비화로 바꾸는 것입니다.
+ 
+ 다음은 랜드마크/액티비티/식당/쇼핑 정보입니다.
+ 도시: ${lm.cityId}
+ 이름: ${lm.name}
+ 카테고리: ${lm.category}
+ 
+ [필수 요구사항]
+ 1. "지금 이곳 ${lm.name} 앞에 서 있는 것처럼" 생동감 있게 작성하세요.
+ 2. "짜잔!", "오른쪽을 한번 보세요", "이 소리 들리시나요?" 같은 역동적인 표현을 사용하세요.
+ 3. 단순히 정보를 나열하지 말고, 건축가나 역사적 인물의 기행, 혹은 현지인만 아는 '진짜 이야기'를 약 600~800자 분량으로 풍부하게 작성하세요.
+ 4. 🍽️ 먹고 🎭 즐기고 🛍️ 쇼핑할 '원픽 팁'을 반드시 포함하세요.
+ 5. 마지막에는 [One-Pick 인생샷 스팟]을 하나 강력 추천하며 마무리하세요.
+ 
+ [기존 설명 베이스]
+ ${lm.narration || lm.description || "정보가 부족하다면 웹 지식을 활용하여 서울의 대표 명소로서의 권위를 담아 창작할 것"}
+ `;
 
     try {
         const response = await openai.chat.completions.create({
@@ -91,20 +92,21 @@ async function run() {
     console.log('==================================================');
     console.log('🎙️ [진행상황 보고] Story Teller Lee - 전체 348개 내레이션 대규모 업그레이드 시작 🎙️');
     console.log('==================================================');
-    console.log('목표: 생동감 있는 스토리텔링 + 꼭 먹어야/즐겨야/사야 할 로컬 팁 의무 반영\n');
+    console.log('서울(Seoul) 핵심 명소 24개 우선 업그레이드 모드 활성화\n');
 
-    const allLandmarks = await db.query.landmarks.findMany();
-    console.log(`총 ${allLandmarks.length}개의 랜드마크 데이터를 가져왔습니다. 변환을 시작합니다...\n`);
+    const allLandmarks = await db.query.landmarks.findMany({
+        where: eq(landmarks.cityId, 'seoul')
+    });
+    console.log(`서울 지역 총 ${allLandmarks.length}개의 랜드마크 데이터를 가져왔습니다. 변환을 시작합니다...\n`);
 
     let successCount = 0;
 
-    // To avoid hitting rate limits easily, we process sequentially with a small delay
     for (let i = 0; i < allLandmarks.length; i++) {
         const lm = allLandmarks[i];
 
-        // Check if already upgraded to avoid double billing just in case
-        if (lm.narration && lm.narration.includes('🍽️')) {
-            console.log(`[${i + 1}/${allLandmarks.length}] ${lm.name} - 이미 업그레이드 됨. (Skip)`);
+        // [Dodari] 이미 충분히 긴 나레이션이 있다면 스킵 (중복 과금 방지)
+        if (lm.narration && lm.narration.length > 500 && lm.narration.includes('🍽️')) {
+            console.log(`[${i + 1}/${allLandmarks.length}] ${lm.name} - 이미 고도화 됨. (Skip)`);
             continue;
         }
 
