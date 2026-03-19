@@ -503,9 +503,45 @@ export default function Home() {
     });
   };
 
+  const handleToggleOfflineMode = (checked: boolean) => {
+    setOfflineMode(checked);
+  };
+
   const handleToggleGps = (checked: boolean) => {
     setGpsEnabled(checked);
     localStorage.setItem('gps-enabled', String(checked));
+  };
+
+  // [Dodari | 2026-03-20] 📍 "No-WiFi" 원클릭 오프라인 준비 (한·중·영 지원)
+  // 학생들에게: 실제 여행지에 도착하기 전, 이 버튼을 누르면 데이터가 브라우저에 저장됩니다.
+  const handlePreFetchOfflineData = async () => {
+    if (!selectedCityId) return;
+
+    toast({
+      title: selectedLanguage === 'ko' ? "📥 오프라인 데이터 다운로드 중..." :
+        selectedLanguage === 'zh' ? "📥 正在下载离线数据..." : "📥 Downloading Offline Data...",
+      description: `${selectedCity?.name}의 모든 명소 정보를 기기에 저장하고 있습니다.`,
+    });
+
+    try {
+      await fetch(`/api/cities/${selectedCityId}/landmarks`);
+      await fetch(`/api/cities`);
+
+      toast({
+        title: selectedLanguage === 'ko' ? "🌟 오프라인 준비 완료!" :
+          selectedLanguage === 'zh' ? "🌟 离线准备就绪！" : "🌟 Ready for Offline Tour!",
+        description: selectedLanguage === 'ko' ? "이제 인터넷이 끊겨도 이 도시의 가이드를 즐기실 수 있습니다." :
+          selectedLanguage === 'zh' ? "现在即使没有网络，您也可以享受该城市的导览。" : "You can now enjoy the guide even without an internet connection.",
+        className: "bg-emerald-500 text-white border-none",
+      });
+    } catch (error) {
+      console.error('Offline Pre-fetch error:', error);
+      toast({
+        title: selectedLanguage === 'zh' ? "下载失败" : "다운로드 실패",
+        description: selectedLanguage === 'zh' ? "请检查网络状态。" : "네트워크 상태를 확인해 주세요.",
+        variant: "destructive"
+      });
+    }
   };
 
   // [Dodari | 2026-03-20] 📍 "No-WiFi" 원클릭 오프라인 준비

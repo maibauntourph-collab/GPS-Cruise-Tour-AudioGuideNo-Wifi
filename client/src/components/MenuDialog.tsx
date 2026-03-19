@@ -130,6 +130,9 @@ interface MenuDialogProps {
   // MP3 Audio Download
   onOpenAudioDownload?: () => void;
 
+  // [Kodari | 2026-03-20] "No-WiFi" 오프라인 준비 핸들러 추가
+  onPreFetchOfflineData?: () => void;
+
   // Background Guide & Admin
   isBackgroundGuideEnabled?: boolean;
   onToggleBackgroundGuide?: (enabled: boolean) => void;
@@ -172,7 +175,8 @@ export default function MenuDialog({
   onTourTimePerStopChange,
   onDownloadData,
   onUploadData,
-  onOpenAudioDownload
+  onOpenAudioDownload,
+  onPreFetchOfflineData
 }: MenuDialogProps) {
   const [showOfflineDialog, setShowOfflineDialog] = useState(false);
   const [offlineMode2, setOfflineMode2] = useState<'download' | 'upload'>('download');
