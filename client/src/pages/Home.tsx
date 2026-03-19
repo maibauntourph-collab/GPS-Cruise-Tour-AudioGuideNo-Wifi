@@ -713,25 +713,37 @@ export default function Home() {
 
     if (nearest) {
       const { landmark, distance } = nearest;
+
+      // [Cruise Navigator | 2026-03-20] 📍 새로운 랜드마크 발견 및 오디오 트리거
+      // 학생들에게: 사용자가 설정된 반경(landmark.radius) 내로 진입하면 이 로직이 작동합니다.
+      // No-WiFi 환경에서도 로컬에 저장된 음성 데이터를 즉시 재생하여 끊김 없는 가이드를 제공합니다.
+
       const name = getTranslatedContent(landmark, selectedLanguage, 'name');
       const narrationText = getTranslatedContent(landmark, selectedLanguage, 'narration') || getTranslatedContent(landmark, selectedLanguage, 'description');
 
+      // 오디오 서비스 실행 (중복 재생 방지 로직은 서비스 내부와 spokenLandmarks에서 관리)
       audioService.playAuto(
         landmark.id,
         `${name}. ${narrationText}`,
         selectedLanguage
       );
 
+      // 들은 명소 목록에 추가
       setSpokenLandmarks(prev => new Set(Array.from(prev).concat(landmark.id)));
 
+      // 처음 방문하는 곳이라면 축하 팝업과 함께 기록
       if (!isVisited(landmark.id)) {
         markVisited(landmark.id);
+
+        // [Kodari] 사용자에게 발견 소식을 더 명확하게 알립니다.
         toast({
-          title: selectedLanguage === 'ko' ? '새로운 장소 발견!' : 'New Place Discovered!',
-          description: name,
+          title: selectedLanguage === 'ko' ? "🌟 새로운 명소 도착!" : "🌟 New Landmark Reached!",
+          description: `"${name}" 근처에 도착했습니다. 안내 방송을 시작합니다.`,
+          className: "bg-primary text-primary-foreground border-none shadow-2xl",
         });
       }
 
+      // 지도를 해당 위치로 포커싱하고 상세 카드 열기
       setSelectedLandmark(landmark);
       setIsCardMinimized(false);
     } else {

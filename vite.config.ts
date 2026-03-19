@@ -38,6 +38,7 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
+            // 🗺️ [Kodari | 2026-03-20] OSM 지도 타일 오프라인 캐싱
             urlPattern: /^https:\/\/tile\.openstreetmap\.org\/.*/,
             handler: 'CacheFirst',
             options: {
@@ -45,6 +46,22 @@ export default defineConfig({
               expiration: {
                 maxEntries: 500,
                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            // 📡 [Server Park | 2026-03-20] Neon DB API 데이터 오프라인 캐싱
+            // 학생들에게: No-WiFi 환경에서도 앱이 동작하도록 우리 API 응답도 브라우저에 저장합니다!
+            urlPattern: /\/api\/(landmarks|cities).*/,
+            handler: 'NetworkFirst', // 평소엔 최신 데이터를, 오프라인 시엔 저장된 걸 씁니다.
+            options: {
+              cacheName: 'api-data',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
               },
               cacheableResponse: {
                 statuses: [0, 200],
