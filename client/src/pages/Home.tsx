@@ -759,43 +759,82 @@ export default function Home() {
     }
   }, [effectivePosition, landmarks, audioEnabled, spokenLandmarks, selectedLanguage, offlineMode]);
 
-  // Location search
+  // [Cruise Navigator | 2026-03-20] 로컬 데이터 우선 위치 검색 핸들러
+  // 학생들에게: 사용자 요청에 따라, 이제 우리 Neon DB에 저장된 데이터를 먼저 검색합니다. 
+  // 외부 API 호출을 줄여 비용을 아끼고 속도를 높이는 '로컬 퍼스트(Local-first)' 전략입니다!
   const handleLocationSearch = async () => {
     if (!locationSearchQuery.trim() || !selectedCity) return;
 
     setIsSearchingLocation(true);
     try {
-      const cityLat = selectedCity.lat;
-      const cityLng = selectedCity.lng;
-      const viewbox = `${cityLng - 0.5},${cityLat + 0.5},${cityLng + 0.5},${cityLat - 0.5}`;
+      // 1. [Kodari] 먼저 우리 Neon DB에서 해당 도시의 랜드마크를 가져와 검색합니다.
+      const localResponse = await fetch(`/api/landmarks?cityId=${selectedCity.id}`);
+      if (localResponse.ok) {
+        const localLandmarks = await localResponse.json();
+        // 검색어와 일치하는 명소 필터링
+        const filtered = localLandmarks.filter((l: any) =>
+          l.name.toLowerCase().includes(locationSearchQuery.toLowerCase())
+        );
 
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?` +
-        `q=${encodeURIComponent(locationSearchQuery)}&` +
-        `format=json&` +
-        `limit=5&` +
-        `viewbox=${viewbox}&` +
-        `bounded=1`,
-        {
-          headers: {
-            'Accept-Language': selectedLanguage
-          }
+        if (filtered.length > 0) {
+          console.log('로컬 DB에서 검색 결과 발견!');
+          setLocationSearchResults(filtered);
+          setIsSearchingLocation(false);
+          return; // 로컬에 있으면 구글을 부르지 않고 여기서 끝냅니다.
         }
+      }
+
+      // 2. [Server Park] 로컬에 없을 때만 예외적으로 Google Places를 호출합니다.
+      // (단, 위경도 일괄 업데이트 작업이 완료된 후에는 이 로직도 최소화될 예정입니다.)
+      const response = await fetch(
+        `/api/places/search?q=${encodeURIComponent(locationSearchQuery)}&lang=${selectedLanguage}`
       );
 
       if (response.ok) {
-        const data = await response.json();
-        const results = data.map((item: any) => ({
-          name: item.display_name.split(',').slice(0, 2).join(', '),
-          lat: parseFloat(item.lat),
-          lng: parseFloat(item.lon)
-        }));
+        const results = await response.json();
         setLocationSearchResults(results);
+      } else {
+        const errorData = await response.json();
+        console.error('검색 실패:', errorData.error);
+        toast({
+          title: "검색 오류",
+          description: "장소 검색 중 서버 오류가 발생했습니다.",
+          variant: "destructive"
+        });
       }
     } catch (error) {
       console.error('Location search error:', error);
     } finally {
       setIsSearchingLocation(false);
+    }
+  };
+
+  // [Kodari | 2026-03-20] 검색된 장소를 우리 Neon DB와 동기화하는 함수
+  // 학생들에게: 구글 데이터를 우리 DB로 '영구 저장'하여 나중에 오프라인에서도 사용할 수 있게 만듭니다.
+  const syncPlaceToLandmark = async (place: any) => {
+    if (!selectedCity) return;
+
+    try {
+      const response = await fetch('/api/landmarks/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          placeId: place.placeId,
+          cityId: selectedCity.id,
+          category: 'Search Result'
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        toast({
+          title: "동기화 완료",
+          description: `${place.name}이(가) 우리 데이터베이스에 저장되었습니다.`
+        });
+        // 저장된 후 랜드마크 목록을 새로고침하거나 선택된 위치로 이동 로직...
+      }
+    } catch (error) {
+      console.error('Sync Error:', error);
     }
   };
 

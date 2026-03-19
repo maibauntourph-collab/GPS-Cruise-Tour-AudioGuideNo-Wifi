@@ -172,6 +172,142 @@ export function registerRoutes(app: Hono<any>) {
     }
   });
 
+  // [Server Park | 2026-03-20] Google Maps 지오코딩 프록시 엔드포인트
+  // 학생들에게: 프론트엔드에서 API 키를 직접 쓰면 보안에 취약하므로, 서버를 거쳐서 호출하는 '프록시(Proxy)' 패턴을 사용합니다.
+  app.get("/api/geocoding/search", async (c) => {
+    const query = c.req.query("q");
+    const lang = c.req.query("lang") || "ko";
+
+    if (!query) return c.json({ error: "주석: 검색어가 필요합니다." }, 400);
+
+    // 환경 변수에서 구글 맵스 API 키를 가져옵니다.
+    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) {
+      console.error("[Geocoding] GOOGLE_MAPS_API_KEY가 설정되지 않았습니다.");
+      return c.json({ error: "지오코딩 서비스를 일시적으로 사용할 수 없습니다." }, 503);
+    }
+
+    try {
+      // Google Maps Geocoding API 호출
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${apiKey}&language=${lang}`
+      );
+      const data: any = await response.json();
+
+      if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
+        console.error("[Google Maps API Error]", data.status, data.error_message);
+        return c.json({ error: `Google API 오류: ${data.status}` }, 500);
+      }
+
+      // Nominatim 형식과 유사하게 결과 매핑 (호환성 유지)
+      const results = (data.results || []).map((item: any) => ({
+        name: item.formatted_address,
+        lat: item.geometry.location.lat,
+        lng: item.geometry.location.lng
+      }));
+
+      return c.json(results);
+    } catch (error) {
+      console.error("[Geocoding Proxy Error]", error);
+      return c.json({ error: "서버 내부 오류가 발생했습니다." }, 500);
+    }
+  });
+
+  // [Server Park | 2026-03-20] Google Places 검색 프록시
+  // 학생들에게: 장소의 이름, 사진, 평점 등 풍부한 정보를 가져오기 위해 Google Places API(New)를 사용합니다.
+  app.get("/api/places/search", async (c) => {
+    const query = c.req.query("q");
+    if (!query) return c.json({ error: "검색어가 필요합니다." }, 400);
+
+    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) {
+      console.error("[Places] API 키가 설정되지 않았습니다.");
+      return c.json({ error: "장소 검색 서비스를 일시적으로 사용할 수 없습니다." }, 503);
+    }
+
+    try {
+      // Google Places API (New) 호출 - 필드 마스크를 통해 필요한 데이터만 쏙쏙 가져옵니다.
+      const response = await fetch("https://places.googleapis.com/v1/places:searchText", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Goog-Api-Key": apiKey,
+          "X-Goog-FieldMask": "places.id,places.displayName,places.formattedAddress,places.location,places.photos,places.rating"
+        },
+        body: JSON.stringify({ textQuery: query, languageCode: "ko" })
+      });
+
+      const data: any = await response.json();
+
+      // 프론트엔드에서 쓰기 편하게 데이터를 정규화(Normalization) 합니다.
+      const results = (data.places || []).map((p: any) => ({
+        placeId: p.id,
+        name: p.displayName?.text || "알 수 없는 장소",
+        address: p.formattedAddress,
+        lat: p.location?.latitude,
+        lng: p.location?.longitude,
+        rating: p.rating,
+        photoReference: p.photos?.[0]?.name // 사진 조회를 위한 참조값
+      }));
+
+      return c.json(results);
+    } catch (error) {
+      console.error("[Places Search Error]", error);
+      return c.json({ error: "장소 검색 중 오류가 발생했습니다." }, 500);
+    }
+  });
+
+  // [Query Master | 2026-03-20] Google 데이터를 우리 Neon DB와 동기화
+  // 학생들에게: 구글에서 찾은 멋진 장소를 우리 DB에 '저장'하여 오프라인에서도 볼 수 있게 만듭니다.
+  app.post("/api/landmarks/sync", async (c) => {
+    const { placeId, cityId, category } = await c.req.json();
+    if (!placeId || !cityId) return c.json({ error: "placeId와 cityId가 누락되었습니다." }, 400);
+
+    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    if (!apiKey) return c.json({ error: "API 키가 없습니다." }, 503);
+
+    try {
+      // 1. 장소 상세 정보 조회 (설명, 사진 등 더 자세한 내용)
+      const detailRes = await fetch(`https://places.googleapis.com/v1/places/${placeId}`, {
+        headers: {
+          "X-Goog-Api-Key": apiKey,
+          "X-Goog-FieldMask": "id,displayName,formattedAddress,location,editorialSummary,regularOpeningHours,photos"
+        }
+      });
+      const place = await detailRes.json() as any;
+
+      if (!place.id) throw new Error("Google Place 데이터를 가져오지 못했습니다.");
+
+      // 2. 우리 DB 스키마(Landmark) 구조에 맞춰 변환
+      const landmarkData = {
+        id: `g_${place.id}`, // Google ID임을 표시하는 접두사
+        cityId,
+        name: place.displayName?.text || "새로운 명소",
+        lat: place.location.latitude,
+        lng: place.location.longitude,
+        radius: 50, // GPS 감지 반경 기본 50m
+        category: category || "Tourist Attraction",
+        description: place.formattedAddress,
+        narration: place.editorialSummary?.text || `${place.displayName?.text}은(는) 정말 멋진 곳입니다!`,
+        photos: place.photos?.slice(0, 3).map((ph: any) => ph.name) || [], // 최대 3장만 저장
+        openingHours: place.regularOpeningHours?.weekdayDescriptions?.join(", "),
+        translations: {
+          ko: {
+            name: place.displayName?.text,
+            narration: place.editorialSummary?.text || "설명이 준비 중입니다."
+          }
+        }
+      };
+
+      // 3. Neon DB에 저장 (이미 있으면 업데이트하거나 새로 생성)
+      const synced = await storage.createLandmark(landmarkData);
+      return c.json({ success: true, landmark: synced });
+    } catch (error) {
+      console.error("[Landmark Sync Error]", error);
+      return c.json({ error: "데이터 동기화 중 오류가 발생했습니다." }, 500);
+    }
+  });
+
   app.get("/api/cities/:id", async (c) => {
     try {
       const city = await storage.getCity(c.req.param("id"));
