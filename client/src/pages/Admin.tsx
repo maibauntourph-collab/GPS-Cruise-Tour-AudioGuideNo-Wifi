@@ -194,9 +194,9 @@ export default function Admin() {
     staleTime: 0 // Always check auth for admin page
   });
 
-  // [NEW] Branding Settings State
   const [watermarkUrl, setWatermarkUrl] = useState('');
   const [watermarkOpacity, setWatermarkOpacity] = useState(0.1);
+  const [activeLayout, setActiveLayout] = useState('modern');
 
   // Fetch initial branding settings
   useQuery({
@@ -212,14 +212,21 @@ export default function Admin() {
     enabled: !!authData?.user,
   } as any);
 
+  const { data: layoutData } = useQuery<{ value: string }>({
+    queryKey: ['/api/settings/active_layout_version'],
+    enabled: !!authData?.user,
+  } as any);
+
   useEffect(() => {
     if (opacityData?.value) setWatermarkOpacity(parseFloat(opacityData.value));
-  }, [opacityData]);
+    if (layoutData?.value) setActiveLayout(layoutData.value);
+  }, [opacityData, layoutData]);
 
   const saveBrandingSettings = useMutation({
     mutationFn: async () => {
       await apiRequest('PATCH', '/api/settings/landing_watermark_url', { value: watermarkUrl });
       await apiRequest('PATCH', '/api/settings/landing_watermark_opacity', { value: String(watermarkOpacity) });
+      await apiRequest('PATCH', '/api/settings/active_layout_version', { value: activeLayout });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [/^\/api\/settings\//] });
@@ -1111,16 +1118,41 @@ export default function Admin() {
 
             <Card className="max-w-2xl mb-6">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <ImageIcon className="h-5 w-5 text-primary" />
-                  비주얼 브랜딩 (Visual Branding)
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Palette className="w-5 h-5 text-orange-500" />
+                  Visual Branding & Layout
                 </CardTitle>
-                <CardDescription>
-                  랜딩 페이지 배경에 표시될 워터마크 이미지를 설정합니다. 투명도를 조절하여 프리미엄 감성을 더하세요.
-                </CardDescription>
+                <CardDescription>랜딩 페이지의 시각적 아이덴티티와 레이아웃 모드를 설정합니다.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid gap-4">
+                <div className="space-y-4 pt-2">
+                  <label className="text-sm font-bold flex items-center gap-2">
+                    <Layout className="w-4 h-4 text-slate-400" />
+                    Layout Mode (레이아웃 모드)
+                  </label>
+                  <div className="flex bg-slate-100 p-1 rounded-xl w-fit">
+                    <button
+                      className={`px-6 py-2 rounded-lg text-sm font-black transition-all ${activeLayout === 'classic' ? 'bg-white shadow text-orange-600' : 'text-slate-500 hover:text-slate-800'}`}
+                      onClick={() => setActiveLayout('classic')}
+                    >
+                      Classic (상단바)
+                    </button>
+                    <button
+                      className={`px-6 py-2 rounded-lg text-sm font-black transition-all ${activeLayout === 'modern' ? 'bg-white shadow text-orange-600' : 'text-slate-500 hover:text-slate-800'}`}
+                      onClick={() => setActiveLayout('modern')}
+                    >
+                      Modern (원카드)
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    * Classic: 상단에 리스트/시뮬레이션 바 노출<br />
+                    * Modern: 모든 기능을 우하단 플로팅 카드 헤더로 통합
+                  </p>
+                </div>
+
+                <Separator className="bg-slate-100" />
+
+                <div className="space-y-3">
                   <div className="space-y-2">
                     <Label htmlFor="watermark-url">워터마크 이미지 URL</Label>
                     <div className="flex gap-2">

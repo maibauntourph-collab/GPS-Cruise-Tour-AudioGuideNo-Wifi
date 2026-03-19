@@ -3,10 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import {
   Settings,
   List,
-  Navigation2,
+  Navigation,
+  Milestone,
   Play,
   Pause,
   RotateCcw,
+  ChevronRight,
   X,
   Volume2,
   Clock,
@@ -309,6 +311,12 @@ export default function Home() {
 
   const watermarkUrl = watermarkUrlData?.value;
   const watermarkOpacity = parseFloat(watermarkOpacityData?.value || '0.1');
+
+  // [NEW] Layout Version Setting
+  const { data: layoutSettingData } = useQuery<any>({
+    queryKey: ['/api/settings/active_layout_version'],
+  });
+  const activeLayout = layoutSettingData?.value || 'modern';
   const [showDirectionsDialog, setShowDirectionsDialog] = useState(false);
   // [신기능 | 2026-02-27] 랜딩 전 국가/도시 선택 카드 표시 상태
   // 학생들: 앱 시작 시 이 flag가 true가 되면 국가 선택 카드를 보여줍니다.
@@ -1462,6 +1470,48 @@ export default function Home() {
           </div>
         </header>
 
+        {/* ✅ [Avengers Team | Bug Doctor] Classic Layout용 상단 컨트롤 바 복원 (조건부) */}
+        {activeLayout === 'classic' && (
+          <div className="absolute top-[80px] left-1/2 -translate-x-1/2 z-[1000] flex gap-2 pointer-events-auto">
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="flex gap-2 p-1 bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl"
+            >
+              <Button
+                variant="ghost"
+                className="h-12 px-6 rounded-xl hover:bg-orange-50 text-slate-800 flex items-center gap-2 group transition-all"
+                onClick={handleShowLandmarkList}
+              >
+                <List className="w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform" />
+                <span className="font-bold">List</span>
+              </Button>
+
+              <div className="w-[1px] h-6 self-center bg-slate-200" />
+
+              <Button
+                variant="ghost"
+                className={`h-12 px-6 rounded-xl flex items-center gap-2 group transition-all ${isSimulationMode ? 'bg-orange-500 text-white hover:bg-orange-600' : 'hover:bg-orange-50 text-slate-800'}`}
+                onClick={() => setIsSimulationMode(!isSimulationMode)}
+              >
+                <Navigation className={`w-5 h-5 group-hover:scale-110 transition-transform ${isSimulationMode ? 'text-white' : 'text-orange-500'}`} />
+                <span className="font-bold">Start</span>
+              </Button>
+
+              <div className="w-[1px] h-6 self-center bg-slate-200" />
+
+              <Button
+                variant="ghost"
+                className={`h-12 px-6 rounded-xl flex items-center gap-2 group transition-all ${showCruisePort ? 'bg-rose-500 text-white hover:bg-rose-600' : 'hover:bg-rose-50 text-slate-800'}`}
+                onClick={() => setShowCruisePort(!showCruisePort)}
+              >
+                <Milestone className={`w-5 h-5 group-hover:scale-110 transition-transform ${showCruisePort ? 'text-white' : 'text-rose-500'}`} />
+                <span className="font-bold">Route</span>
+              </Button>
+            </motion.div>
+          </div>
+        )}
+
         <main className="relative flex-1 overflow-hidden">
           <AnimatePresence>
             {isStartupTransitioning && (
@@ -1550,9 +1600,9 @@ export default function Home() {
             setIsCardMinimized(false);
           }}
           onLandmarkClose={() => {
-            // [적요] 랜드마크 닫기: list에서 왔으면 list로, 지도에서 왔으면 map으로 복귀
+            // [적요] 랜드마크 닫기: 사용자의 요청에 따라 랜딩 페이지(/)로 복귀합니다.
             setSelectedLandmark(null);
-            setAppMode(prevAppModeRef.current === 'list' ? 'list' : 'map');
+            setLocation('/');
           }}
           landmarks={landmarks}
           tourStops={tourStops}
@@ -1589,6 +1639,7 @@ export default function Home() {
           onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
           onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
           userRegion={userRegion}
+          activeLayout={activeLayout}
         />
 
         {/* Other Overlays */}
@@ -1744,7 +1795,7 @@ export default function Home() {
                 <span>Google Maps</span>
               </Button>
               <Button onClick={openWaze} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-2">
-                <Navigation2 className="w-5 h-5 text-sky-500" />
+                <Navigation className="w-5 h-5 text-sky-500" />
                 <span>Waze</span>
               </Button>
             </div>

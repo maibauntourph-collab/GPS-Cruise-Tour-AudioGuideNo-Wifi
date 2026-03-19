@@ -164,6 +164,9 @@ interface UnifiedFloatingCardProps {
   // [Marketer Song] 국가별 맞춤 추천을 위한 사용자 국적 코드 (e.g. "US", "JP", "CN", "TW", "KR")
   userRegion?: string;
   onToggleCruisePort?: () => void;
+
+  // Layout Toggle
+  activeLayout?: string;
 }
 
 
@@ -209,6 +212,8 @@ export function UnifiedFloatingCard({
   onToggleActivities,
   onToggleRestaurants,
   onToggleGiftShops,
+  userRegion = 'US',
+  activeLayout = 'modern',
   tourStops = [],
   tourRouteInfo,
   onRemoveTourStop,
@@ -232,18 +237,14 @@ export function UnifiedFloatingCard({
   playInBackground = false,
   showMinimalTransitUI = false,
   onToggleMinimalTransitUI,
-  // ✅ [Bug Doctor] 외부 카드 상태 props - 이것이 없으면 버튼 클릭이 카드에 반영 안 됨!
   forceShowList = false,
   isCardMinimized = false,
   onToggleMinimized,
-  // [교수님 지시] AI 추천 다이얼로그를 열기 위한 콜백 — AI Pick 탭에서 사용
   onOpenAIRecommend,
-  // [Bug Doctor | 2026-03-20] 시뮬레이션 제어를 위한 필수 Props 누락분 추가
   isSimulationPaused = false,
   simulationSpeed = 1,
   onSimulationPauseToggle,
   onSimulationSpeedChange,
-  userRegion = 'US', // [Marketer Song] 기본값은 글로벌 표준
 }: UnifiedFloatingCardProps) {
   // [교수님 지시] 탭 타입에 'ai' 추가 — AI 추천 탭 지원
   const [activeTab, setActiveTab] = useState<'list' | 'cruise' | 'tour' | 'ai'>('list');
@@ -431,77 +432,99 @@ export function UnifiedFloatingCard({
       className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ${isCardMinimized && !forceShowList ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100 translate-y-0'}`}
     >
       {/* [Avengers Team] GLOBAL CONTROL TOWER (Merged from Top Bar) */}
-      <div className="p-2.5 bg-white/40 backdrop-blur-xl border-b border-white/20 flex items-center justify-between gap-2 overflow-hidden">
-        <div className="flex items-center gap-1.5 flex-1 min-w-0">
-          {/* [적요] Start/Stop Simulation 통합 버튼 */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className={`h-9 px-4 rounded-full flex-shrink-0 transition-all active:scale-95 group font-black ${isSimulationMode ? 'bg-red-50 text-red-600 hover:bg-red-100 border border-red-100' : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200'}`}
-            onClick={onToggleSimulation}
-          >
-            {isSimulationMode ? (
-              <>
-                <Square className="w-3.5 h-3.5 mr-1.5 fill-current" />
-                <span className="text-[11px] uppercase tracking-tighter">Exit</span>
-              </>
-            ) : (
-              <>
-                <Play className="w-3.5 h-3.5 mr-1.5 fill-current" />
-                <span className="text-[11px] uppercase tracking-tighter">Start</span>
-              </>
-            )}
-          </Button>
+      {activeLayout !== 'classic' && (
+        <div className="p-2.5 bg-white/40 backdrop-blur-xl border-b border-white/20 flex items-center justify-between gap-2 overflow-hidden">
+          <div className="flex items-center gap-1.5 flex-1 min-w-0">
+            {/* [적요] Start/Stop Simulation 통합 버튼 */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className={`h-9 px-4 rounded-full flex-shrink-0 transition-all active:scale-95 group font-black ${isSimulationMode ? 'bg-red-50 text-red-600 hover:bg-red-100 border border-red-100' : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200'}`}
+              onClick={onToggleSimulation}
+            >
+              {isSimulationMode ? (
+                <>
+                  <Square className="w-3.5 h-3.5 mr-1.5 fill-current" />
+                  <span className="text-[11px] uppercase tracking-tighter">Exit</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-3.5 h-3.5 mr-1.5 fill-current" />
+                  <span className="text-[11px] uppercase tracking-tighter">Start</span>
+                </>
+              )}
+            </Button>
 
-          <div className="w-[1px] h-5 bg-slate-400/20" />
+            <div className="w-[1px] h-5 bg-slate-400/20" />
 
-          {/* [적요] Route/Starting Point 통합 버튼 */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className={`h-9 px-4 rounded-full flex-shrink-0 transition-all active:scale-95 group font-bold border border-emerald-100/50 ${startingPoint ? 'bg-emerald-50 text-emerald-600' : 'bg-white/60 text-slate-700 hover:bg-white'} shadow-sm`}
-            onClick={onOpenStartEndPointDialog}
-          >
-            <MapPin className={`w-3.5 h-3.5 mr-1.5 ${startingPoint ? 'text-emerald-600' : 'text-emerald-500'}`} />
-            <span className="text-[11px] uppercase tracking-tighter">
-              {startingPoint ? (startingPoint.name || 'Set') : 'Route'}
-            </span>
-          </Button>
-
-          {isSimulationMode && (
-            <div className="flex items-center gap-1 animate-in slide-in-from-left duration-500">
-              <div className="w-[1px] h-5 bg-slate-400/20" />
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8 rounded-full bg-white/60 text-indigo-600 border border-indigo-50"
-                onClick={onSimulationPauseToggle}
-              >
-                {isSimulationPaused ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5 fill-current" />}
-              </Button>
-            </div>
-          )}
-        </div>
-
-        <div className="flex items-center gap-1">
-          {selectedLandmark && (
-            <div className="flex items-center gap-1.5 bg-orange-50 px-2 py-1 rounded-full border border-orange-100 animate-in fade-in zoom-in duration-300">
-              <LandmarkIcon className="w-3 h-3 text-[#E9633F]" />
-              <span className="text-[9px] font-black text-[#E9633F] truncate max-w-[50px] uppercase">
-                {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+            {/* [적요] Route/Starting Point 통합 버튼 */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className={`h-9 px-4 rounded-full flex-shrink-0 transition-all active:scale-95 group font-bold border border-emerald-100/50 ${startingPoint ? 'bg-emerald-50 text-emerald-600' : 'bg-white/60 text-slate-700 hover:bg-white'} shadow-sm`}
+              onClick={onOpenStartEndPointDialog}
+            >
+              <MapPin className={`w-3.5 h-3.5 mr-1.5 ${startingPoint ? 'text-emerald-600' : 'text-emerald-500'}`} />
+              <span className="text-[11px] uppercase tracking-tighter">
+                {startingPoint ? (startingPoint.name || 'Set') : 'Route'}
               </span>
-            </div>
-          )}
+            </Button>
+
+            {isSimulationMode && (
+              <div className="flex items-center gap-1 animate-in slide-in-from-left duration-500">
+                <div className="w-[1px] h-5 bg-slate-400/20" />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 rounded-full bg-white/60 text-indigo-600 border border-indigo-50"
+                  onClick={onSimulationPauseToggle}
+                >
+                  {isSimulationPaused ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5 fill-current" />}
+                </Button>
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center gap-1">
+            {selectedLandmark && (
+              <div className="flex items-center gap-1.5 bg-orange-50 px-2 py-1 rounded-full border border-orange-100 animate-in fade-in zoom-in duration-300">
+                <LandmarkIcon className="w-3 h-3 text-[#E9633F]" />
+                <span className="text-[9px] font-black text-[#E9633F] truncate max-w-[50px] uppercase">
+                  {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+                </span>
+              </div>
+            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white/80"
+              onClick={onLandmarkClose}
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* [Avengers Team] Classic 모드일 때도 랜드마크 선택 중이라면 최소한의 닫기 버튼 헤더 노출 */}
+      {activeLayout === 'classic' && selectedLandmark && (
+        <div className="p-2 bg-white/60 backdrop-blur-md border-b border-white/20 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 bg-orange-50 px-3 py-1 rounded-full border border-orange-100 ml-1">
+            <LandmarkIcon className="w-3.5 h-3.5 text-[#E9633F]" />
+            <span className="text-[10px] font-black text-[#E9633F] uppercase tracking-tight">
+              {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
+            </span>
+          </div>
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white/80"
+            className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600"
             onClick={onLandmarkClose}
           >
             <X className="w-4 h-4" />
           </Button>
         </div>
-      </div>
+      )}
 
       {/* TABS HEADER */}
       <div className="px-4 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth border-b bg-white/20">

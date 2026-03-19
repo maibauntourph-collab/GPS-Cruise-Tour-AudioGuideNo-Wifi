@@ -16,10 +16,18 @@ database_id = "a7f2920b-f030-4b4c-9f37-35344956f553"
 [env.staging]
 name = "gps-audio-guide-staging"
 vars = { NODE_ENV = "staging" }
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "gps-guide-db"
+database_id = "a7f2920b-f030-4b4c-9f37-35344956f553"
 
 [env.production]
 name = "gps-audio-guide-no-wifi"
 vars = { NODE_ENV = "production" }
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "gps-guide-db"
+database_id = "a7f2920b-f030-4b4c-9f37-35344956f553"
 
 [site]
 bucket = "./dist"
