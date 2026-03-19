@@ -130,6 +130,7 @@ export const landmarkSchema = z.object({
   price: z.number().nullable().optional(), // Price in EUR for the premium guide
   createdAt: z.union([z.string(), z.date()]).optional(),
   updatedAt: z.union([z.string(), z.date()]).optional(),
+  targetNations: z.array(z.string()).nullable().optional(), // 🌏 [NEW] Target nations for recommendations (e.g. ["US", "JP", "TW"])
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;
@@ -214,6 +215,7 @@ export const landmarks = pgTable("landmarks", {
   paymentMethods: json("payment_methods").$type<string[] | null>(), // Array of strings
   isPremium: boolean("is_premium").notNull().default(false),
   price: doublePrecision("price"),
+  targetNations: json("target_nations").$type<string[] | null>(), // 🌏 [NEW] Specific nations to recommend this landmark to
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
