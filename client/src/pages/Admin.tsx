@@ -194,6 +194,40 @@ export default function Admin() {
     staleTime: 0 // Always check auth for admin page
   });
 
+  // [NEW] Branding Settings State
+  const [watermarkUrl, setWatermarkUrl] = useState('');
+  const [watermarkOpacity, setWatermarkOpacity] = useState(0.1);
+
+  // Fetch initial branding settings
+  useQuery({
+    queryKey: ['/api/settings/landing_watermark_url'],
+    enabled: !!authData?.user,
+    onSuccess: (data: any) => {
+      if (data?.value) setWatermarkUrl(data.value);
+    }
+  } as any);
+
+  const { data: opacityData } = useQuery<{ value: string }>({
+    queryKey: ['/api/settings/landing_watermark_opacity'],
+    enabled: !!authData?.user,
+  } as any);
+
+  useEffect(() => {
+    if (opacityData?.value) setWatermarkOpacity(parseFloat(opacityData.value));
+  }, [opacityData]);
+
+  const saveBrandingSettings = useMutation({
+    mutationFn: async () => {
+      await apiRequest('PATCH', '/api/settings/landing_watermark_url', { value: watermarkUrl });
+      await apiRequest('PATCH', '/api/settings/landing_watermark_opacity', { value: String(watermarkOpacity) });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [/^\/api\/settings\//] });
+      toast({ title: '브랜딩 설정이 완료되었습니다', description: '랜딩 페이지에 워터마크가 실시간 반영되었습니다. 🎨' });
+    },
+    onError: () => toast({ title: '설정 저장 실패', variant: 'destructive' })
+  });
+
   // [쿼리 마스터의 데이터 로딩 비법]
   // "데이터를 부를 때는 '누구인가?'를 먼저 물어야 합니다. 
   // 'admin'은 물론, 우리 'shop_owner(코다리부장)'와 'creator' 동료들도 각자의 권한에 맞는 데이터를 볼 수 있어야 하죠."
@@ -1074,6 +1108,71 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="settings">
+
+            <Card className="max-w-2xl mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ImageIcon className="h-5 w-5 text-primary" />
+                  비주얼 브랜딩 (Visual Branding)
+                </CardTitle>
+                <CardDescription>
+                  랜딩 페이지 배경에 표시될 워터마크 이미지를 설정합니다. 투명도를 조절하여 프리미엄 감성을 더하세요.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="watermark-url">워터마크 이미지 URL</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="watermark-url"
+                        placeholder="https://example.com/logo.png"
+                        value={watermarkUrl}
+                        onChange={(e) => setWatermarkUrl(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <Label htmlFor="watermark-opacity">이미지 투명도 ({Math.round(watermarkOpacity * 100)}%)</Label>
+                    </div>
+                    <Input
+                      id="watermark-opacity"
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      value={watermarkOpacity}
+                      onChange={(e) => setWatermarkOpacity(parseFloat(e.target.value))}
+                      className="cursor-pointer"
+                    />
+                  </div>
+
+                  {watermarkUrl && (
+                    <div className="mt-4 p-4 border rounded-lg bg-slate-50 flex items-center justify-center min-h-[100px] relative overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center opacity-20 text-[10px] pointer-events-none">PREVIEW AREA</div>
+                      <img
+                        src={watermarkUrl}
+                        alt="Watermark Preview"
+                        style={{ opacity: watermarkOpacity }}
+                        className="max-h-24 w-auto object-contain z-10"
+                        onError={(e) => (e.currentTarget.style.display = 'none')}
+                      />
+                    </div>
+                  )}
+
+                  <Button
+                    onClick={() => saveBrandingSettings.mutate()}
+                    disabled={saveBrandingSettings.isPending}
+                    className="w-full h-11"
+                  >
+                    {saveBrandingSettings.isPending ? "저장 중..." : "브랜딩 설정 저장"}
+                    <Save className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card className="max-w-2xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">

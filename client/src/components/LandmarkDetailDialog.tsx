@@ -241,6 +241,16 @@ export default function LandmarkDetailDialog({
                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={() => onNavigate(landmark!)}>
                   <Navigation className="w-4 h-4 text-[#E67E22]" />
                 </Button>
+                {/* [Designer Kim] 프리미엄 닫기 아이콘 추가 - 사용자의 'RIGHT HEAD' 요청 반영 */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 rounded-full bg-red-50 border border-red-100 text-red-500 hover:bg-red-500 hover:text-white transition-colors"
+                  onClick={handleDialogClose}
+                  title={selectedLanguage === 'ko' ? '닫기' : 'Close'}
+                >
+                  <div className="font-bold text-lg">✕</div>
+                </Button>
               </div>
             </div>
           </DialogHeader>

@@ -430,78 +430,126 @@ export function UnifiedFloatingCard({
       style={{ zIndex }}
       className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ${isCardMinimized && !forceShowList ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100 translate-y-0'}`}
     >
-      {/* HEADER */}
-      <div className="p-4 flex items-center justify-between border-b bg-white/50 backdrop-blur-md">
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth">
-          {/* [교수님 지시] 목록(리스트) 탭 버튼 — 클릭 시 랜드마크 상세 닫고 목록 표시 */}
+      {/* [Avengers Team] GLOBAL CONTROL TOWER (Merged from Top Bar) */}
+      <div className="p-2.5 bg-white/40 backdrop-blur-xl border-b border-white/20 flex items-center justify-between gap-2 overflow-hidden">
+        <div className="flex items-center gap-1.5 flex-1 min-w-0">
+          {/* [적요] Start/Stop Simulation 통합 버튼 */}
           <Button
-            variant={activeTab === 'list' ? 'default' : 'ghost'}
+            variant="ghost"
             size="sm"
-            className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'list' ? 'bg-[#E9633F] text-white font-black shadow-lg shadow-orange-100' : 'text-gray-500 hover:bg-gray-100'}`}
-            onClick={() => {
-              setActiveTab('list');
-              // [핵심] 헤더 목록 아이콘 클릭 시 현재 열려있는 랜드마크 상세를 닫아
-              // 리스트가 바로 보이도록 처리합니다.
-              if (selectedLandmark) {
-                setShowDetailDialog(false);
-                onLandmarkClose();
-              }
-            }}
+            className={`h-9 px-4 rounded-full flex-shrink-0 transition-all active:scale-95 group font-black ${isSimulationMode ? 'bg-red-50 text-red-600 hover:bg-red-100 border border-red-100' : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200'}`}
+            onClick={onToggleSimulation}
           >
-            {/* [교수님 지시] 리스트 아이콘 활성화 강조 */}
-            <div className={`mr-1.5 p-1 rounded-sm transition-all ${activeTab === 'list' ? 'bg-white/20' : ''}`}>
-              <List className={`w-4 h-4 ${activeTab === 'list' ? 'animate-pulse scale-110' : ''}`} />
-            </div>
-            <span className="text-xs tracking-tight">{t('list', selectedLanguage)}</span>
+            {isSimulationMode ? (
+              <>
+                <Square className="w-3.5 h-3.5 mr-1.5 fill-current" />
+                <span className="text-[11px] uppercase tracking-tighter">Exit</span>
+              </>
+            ) : (
+              <>
+                <Play className="w-3.5 h-3.5 mr-1.5 fill-current" />
+                <span className="text-[11px] uppercase tracking-tighter">Start</span>
+              </>
+            )}
           </Button>
-          {showCruisePort && (
-            <Button
-              variant={activeTab === 'cruise' ? 'default' : 'ghost'}
-              size="sm"
-              className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'cruise' ? 'bg-[#E9633F] text-white font-black shadow-lg shadow-orange-100' : 'text-gray-500 hover:bg-gray-100'}`}
-              onClick={() => setActiveTab('cruise')}
-            >
-              <Ship className="w-4 h-4 mr-1.5" />
-              <span className="text-xs tracking-tight">{t('cruisePort', selectedLanguage)}</span>
-            </Button>
+
+          <div className="w-[1px] h-5 bg-slate-400/20" />
+
+          {/* [적요] Route/Starting Point 통합 버튼 */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className={`h-9 px-4 rounded-full flex-shrink-0 transition-all active:scale-95 group font-bold border border-emerald-100/50 ${startingPoint ? 'bg-emerald-50 text-emerald-600' : 'bg-white/60 text-slate-700 hover:bg-white'} shadow-sm`}
+            onClick={onOpenStartEndPointDialog}
+          >
+            <MapPin className={`w-3.5 h-3.5 mr-1.5 ${startingPoint ? 'text-emerald-600' : 'text-emerald-500'}`} />
+            <span className="text-[11px] uppercase tracking-tighter">
+              {startingPoint ? (startingPoint.name || 'Set') : 'Route'}
+            </span>
+          </Button>
+
+          {isSimulationMode && (
+            <div className="flex items-center gap-1 animate-in slide-in-from-left duration-500">
+              <div className="w-[1px] h-5 bg-slate-400/20" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-full bg-white/60 text-indigo-600 border border-indigo-50"
+                onClick={onSimulationPauseToggle}
+              >
+                {isSimulationPaused ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5 fill-current" />}
+              </Button>
+            </div>
           )}
-          <Button
-            variant={activeTab === 'tour' ? 'default' : 'ghost'}
-            size="sm"
-            className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'tour' ? 'bg-[#E9633F] text-white font-black shadow-lg shadow-orange-100' : 'text-gray-500 hover:bg-gray-100'}`}
-            onClick={() => setActiveTab('tour')}
-          >
-            {/* [교수님 지시] 경로(My Tour) 아이콘 활성화 강조 */}
-            <div className={`mr-1.5 p-1 rounded-sm transition-all ${activeTab === 'tour' ? 'bg-white/20' : ''}`}>
-              <MapPinned className={`w-4 h-4 ${activeTab === 'tour' ? 'animate-pulse scale-110' : ''}`} />
-            </div>
-            <span className="text-xs tracking-tight">{t('myTour', selectedLanguage)}</span>
-          </Button>
-          {/* [교수님 지시] AI 추천 탭 — My Tour 다음에 배치 */}
-          <Button
-            variant={activeTab === 'ai' ? 'default' : 'ghost'}
-            size="sm"
-            className={`rounded-full h-8 px-4 flex-shrink-0 transition-all ${activeTab === 'ai' ? 'bg-purple-600 text-white font-black shadow-lg shadow-purple-100' : 'text-gray-500 hover:bg-gray-100'}`}
-            onClick={() => setActiveTab('ai')}
-          >
-            <Wand2 className="w-4 h-4 mr-1.5" />
-            <span className="text-xs tracking-tight">{selectedLanguage === 'ko' ? 'AI 추천' : 'AI Pick'}</span>
-          </Button>
         </div>
-        <div className="flex items-center gap-2 ml-2">
+
+        <div className="flex items-center gap-1">
           {selectedLandmark && (
-            <div className="flex items-center gap-1.5 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-100 animate-in fade-in zoom-in duration-300">
-              <LandmarkIcon className="w-3.5 h-3.5 text-[#E9633F]" />
-              <span className="text-[10px] font-bold text-[#E9633F] truncate max-w-[60px]">
+            <div className="flex items-center gap-1.5 bg-orange-50 px-2 py-1 rounded-full border border-orange-100 animate-in fade-in zoom-in duration-300">
+              <LandmarkIcon className="w-3 h-3 text-[#E9633F]" />
+              <span className="text-[9px] font-black text-[#E9633F] truncate max-w-[50px] uppercase">
                 {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
               </span>
             </div>
           )}
-          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100" onClick={() => onLandmarkClose()}>
-            <X className="w-5 h-5" />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white/80"
+            onClick={onLandmarkClose}
+          >
+            <X className="w-4 h-4" />
           </Button>
         </div>
+      </div>
 
+      {/* TABS HEADER */}
+      <div className="px-4 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth border-b bg-white/20">
+        {/* [교수님 지시] 목록(리스트) 탭 버튼 — 클릭 시 랜드마크 상세 닫고 목록 표시 */}
+        <Button
+          variant={activeTab === 'list' ? 'default' : 'ghost'}
+          size="sm"
+          className={`rounded-full h-7 px-3 flex-shrink-0 transition-all ${activeTab === 'list' ? 'bg-[#E9633F] text-white font-black shadow-md' : 'text-gray-500 hover:bg-gray-100'}`}
+          onClick={() => {
+            setActiveTab('list');
+            if (selectedLandmark) {
+              setShowDetailDialog(false);
+              onLandmarkClose();
+            }
+          }}
+        >
+          <List className="w-3.5 h-3.5 mr-1" />
+          <span className="text-[10px] uppercase tracking-wider">{t('list', selectedLanguage)}</span>
+        </Button>
+        {showCruisePort && (
+          <Button
+            variant={activeTab === 'cruise' ? 'default' : 'ghost'}
+            size="sm"
+            className={`rounded-full h-7 px-3 flex-shrink-0 transition-all ${activeTab === 'cruise' ? 'bg-[#E9633F] text-white font-black shadow-md' : 'text-gray-500 hover:bg-gray-100'}`}
+            onClick={() => setActiveTab('cruise')}
+          >
+            <Ship className="w-3.5 h-3.5 mr-1" />
+            <span className="text-[10px] uppercase tracking-wider">{t('cruisePort', selectedLanguage)}</span>
+          </Button>
+        )}
+        <Button
+          variant={activeTab === 'tour' ? 'default' : 'ghost'}
+          size="sm"
+          className={`rounded-full h-7 px-3 flex-shrink-0 transition-all ${activeTab === 'tour' ? 'bg-[#E9633F] text-white font-black shadow-md' : 'text-gray-500 hover:bg-gray-100'}`}
+          onClick={() => setActiveTab('tour')}
+        >
+          <MapPinned className="w-3.5 h-3.5 mr-1" />
+          <span className="text-[10px] uppercase tracking-wider">{t('myTour', selectedLanguage)}</span>
+        </Button>
+        <Button
+          variant={activeTab === 'ai' ? 'default' : 'ghost'}
+          size="sm"
+          className={`rounded-full h-7 px-3 flex-shrink-0 transition-all ${activeTab === 'ai' ? 'bg-purple-600 text-white font-black shadow-md' : 'text-gray-500 hover:bg-gray-100'}`}
+          onClick={() => setActiveTab('ai')}
+        >
+          <Wand2 className="w-3.5 h-3.5 mr-1" />
+          <span className="text-[10px] uppercase tracking-wider">AI Pick</span>
+        </Button>
       </div>
 
       <AnimatePresence>

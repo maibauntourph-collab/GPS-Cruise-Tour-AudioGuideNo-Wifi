@@ -31,6 +31,7 @@ __export(schema_exports, {
   insertRoutePhotoSchema: () => insertRoutePhotoSchema,
   insertSavedRouteSchema: () => insertSavedRouteSchema,
   insertSettlementSchema: () => insertSettlementSchema,
+  insertSiteSettingSchema: () => insertSiteSettingSchema,
   insertTourScheduleSchema: () => insertTourScheduleSchema,
   insertTransactionSchema: () => insertTransactionSchema,
   insertUpdateStatsSchema: () => insertUpdateStatsSchema,
@@ -55,6 +56,7 @@ __export(schema_exports, {
   savedRoutesRelations: () => savedRoutesRelations,
   settlements: () => settlements,
   settlementsRelations: () => settlementsRelations,
+  siteSettings: () => siteSettings,
   tourSchedules: () => tourSchedules,
   transactions: () => transactions,
   transactionsRelations: () => transactionsRelations,
@@ -73,7 +75,7 @@ import { z } from "zod";
 import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, json, unique, serial } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
-var transportOptionSchema, cruisePortSchema, citySchema, languageSchema, translationContentSchema, translationsSchema, landmarkSchema, gpsPositionSchema, waypointSchema, cities, landmarks, citiesBackup, landmarksBackup, landmarkGuides, dataVersions, visitedLandmarks, landmarkAudio, users, userIdentities, tourSchedules, citiesRelations, landmarksRelations, visitedLandmarksRelations, usersRelations, userIdentitiesRelations, landmarkAudioRelations, groupMembers, savedRoutes, routePhotos, creatorEarnings, transactions, settlements, marketingContents, updateStats, insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, insertLandmarkAudioSchema, insertTourScheduleSchema, insertGroupMemberSchema, insertUserSchema, insertUserIdentitySchema, insertSavedRouteSchema, insertRoutePhotoSchema, insertCreatorEarningsSchema, insertTransactionSchema, insertSettlementSchema, insertMarketingContentSchema, insertLandmarkGuideSchema, insertUpdateStatsSchema, creatorEarningsRelations, transactionsRelations, settlementsRelations, marketingContentsRelations, landmarkGuidesRelations, savedRoutesRelations, routePhotosRelations, routeStopSchema;
+var transportOptionSchema, cruisePortSchema, citySchema, languageSchema, translationContentSchema, translationsSchema, landmarkSchema, gpsPositionSchema, waypointSchema, cities, landmarks, citiesBackup, landmarksBackup, landmarkGuides, dataVersions, visitedLandmarks, landmarkAudio, users, userIdentities, tourSchedules, citiesRelations, landmarksRelations, visitedLandmarksRelations, usersRelations, userIdentitiesRelations, landmarkAudioRelations, groupMembers, savedRoutes, routePhotos, creatorEarnings, transactions, settlements, marketingContents, updateStats, insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, insertLandmarkAudioSchema, insertTourScheduleSchema, siteSettings, insertSiteSettingSchema, insertGroupMemberSchema, insertUserSchema, insertUserIdentitySchema, insertSavedRouteSchema, insertRoutePhotoSchema, insertCreatorEarningsSchema, insertTransactionSchema, insertSettlementSchema, insertMarketingContentSchema, insertLandmarkGuideSchema, insertUpdateStatsSchema, creatorEarningsRelations, transactionsRelations, settlementsRelations, marketingContentsRelations, landmarkGuidesRelations, savedRoutesRelations, routePhotosRelations, routeStopSchema;
 var init_schema = __esm({
   "shared/schema.ts"() {
     "use strict";
@@ -585,6 +587,12 @@ var init_schema = __esm({
       createdAt: true,
       updatedAt: true
     });
+    siteSettings = pgTable("site_settings", {
+      key: varchar("key", { length: 255 }).primaryKey(),
+      value: text("value").notNull(),
+      updatedAt: timestamp("updated_at", { withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull()
+    });
+    insertSiteSettingSchema = createInsertSchema(siteSettings);
     insertGroupMemberSchema = createInsertSchema(groupMembers).omit({
       id: true,
       createdAt: true,
@@ -23326,6 +23334,7 @@ var MemStorage = class {
   userIdentitiesMap = /* @__PURE__ */ new Map();
   citiesMap = /* @__PURE__ */ new Map();
   landmarksMap = /* @__PURE__ */ new Map();
+  siteSettingsMap = /* @__PURE__ */ new Map();
   nextUserId = 1;
   nextIdentityId = 1;
   constructor() {
@@ -23828,6 +23837,33 @@ var MemStorage = class {
       throw error;
     }
   }
+  // [NEW] Site Settings implementation (Hybrid Memory + DB)
+  async getSiteSetting(key) {
+    if (env.NOWIFIGPSTOURS) {
+      try {
+        const { siteSettings: siteSettings2 } = await Promise.resolve().then(() => (init_schema(), schema_exports));
+        const [setting] = await db.select().from(siteSettings2).where(eq2(siteSettings2.key, key));
+        if (setting) return setting.value;
+      } catch (e) {
+        console.warn(`[Storage] DB access failed for getSiteSetting (${key}), falling back to memory:`, e);
+      }
+    }
+    return this.siteSettingsMap.get(key);
+  }
+  async updateSiteSetting(key, value) {
+    if (env.NOWIFIGPSTOURS) {
+      try {
+        const { siteSettings: siteSettings2 } = await Promise.resolve().then(() => (init_schema(), schema_exports));
+        await db.insert(siteSettings2).values({ key, value }).onConflictDoUpdate({
+          target: siteSettings2.key,
+          set: { value, updatedAt: /* @__PURE__ */ new Date() }
+        });
+      } catch (e) {
+        console.error(`[Storage] DB update failed for site setting ${key}:`, e);
+      }
+    }
+    this.siteSettingsMap.set(key, value);
+  }
 };
 var storage = new MemStorage();
 
@@ -23984,6 +24020,13 @@ function setupAuthRoutes(app2) {
     if (typeof session.destroy === "function") session.destroy();
     return c.json({ success: true });
   });
+}
+async function requireAuth(c, next) {
+  const session = c.get("session");
+  if (!session.get("userId")) {
+    return c.json({ error: "Authentication required" }, 401);
+  }
+  await next();
 }
 function requireRole(...roles) {
   return async (c, next) => {
@@ -24552,6 +24595,20 @@ function registerRoutes(app2) {
   app2.get("/api/health", async (c) => {
     const health = await dbCheckService.checkConnection();
     return c.json(health, health.status === "healthy" ? 200 : 503);
+  });
+  app2.get("/api/settings/:key", async (c) => {
+    const key = c.req.param("key");
+    const value = await storage.getSiteSetting(key);
+    return c.json({ key, value: value || null });
+  });
+  app2.patch("/api/settings/:key", requireAuth, requireRole(["admin"]), async (c) => {
+    const key = c.req.param("key");
+    const { value } = await c.req.json();
+    if (value === void 0) {
+      return c.json({ error: "Missing value" }, 400);
+    }
+    await storage.updateSiteSetting(key, String(value));
+    return c.json({ success: true, key, value });
   });
   app2.get("/api/debug-routes", (c) => {
     const routes = app2.routes.map((r) => ({

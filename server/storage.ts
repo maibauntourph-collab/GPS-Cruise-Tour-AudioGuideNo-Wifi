@@ -60,6 +60,9 @@ export interface IStorage {
   // Guide methods
   getLandmarkGuides(landmarkId: string): Promise<DbLandmarkGuide[]>;
   createLandmarkGuide(guide: InsertLandmarkGuide): Promise<DbLandmarkGuide>;
+  // [NEW] Site Settings methods
+  getSiteSetting(key: string): Promise<string | undefined>;
+  updateSiteSetting(key: string, value: string): Promise<void>;
 }
 
 // Hardcoded CITIES and LANDMARKS moved to separate files in server/data/
@@ -71,6 +74,7 @@ export class MemStorage implements IStorage {
   private userIdentitiesMap: Map<string, UserIdentity> = new Map();
   private citiesMap: Map<string, City> = new Map();
   private landmarksMap: Map<string, Landmark> = new Map();
+  private siteSettingsMap: Map<string, string> = new Map();
   private nextUserId: number = 1;
   private nextIdentityId: number = 1;
 
@@ -736,6 +740,41 @@ export class MemStorage implements IStorage {
       console.error('[AI DB Manager] DB create landmark guide failed:', error);
       throw error;
     }
+  }
+
+  // [NEW] Site Settings implementation (Hybrid Memory + DB)
+  async getSiteSetting(key: string): Promise<string | undefined> {
+    // 1. Check database if enabled
+    if (env.NOWIFIGPSTOURS) {
+      try {
+        const { siteSettings } = await import("@shared/schema");
+        const [setting] = await db.select().from(siteSettings).where(eq(siteSettings.key, key));
+        if (setting) return setting.value;
+      } catch (e) {
+        console.warn(`[Storage] DB access failed for getSiteSetting (${key}), falling back to memory:`, e);
+      }
+    }
+    // 2. Fallback to memory
+    return this.siteSettingsMap.get(key);
+  }
+
+  async updateSiteSetting(key: string, value: string): Promise<void> {
+    // 1. Update database if enabled
+    if (env.NOWIFIGPSTOURS) {
+      try {
+        const { siteSettings } = await import("@shared/schema");
+        await db.insert(siteSettings)
+          .values({ key, value })
+          .onConflictDoUpdate({
+            target: siteSettings.key,
+            set: { value, updatedAt: new Date() }
+          });
+      } catch (e) {
+        console.error(`[Storage] DB update failed for site setting ${key}:`, e);
+      }
+    }
+    // 2. Update memory
+    this.siteSettingsMap.set(key, value);
   }
 }
 

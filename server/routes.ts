@@ -49,6 +49,25 @@ export function registerRoutes(app: Hono<any>) {
     return c.json(health, health.status === 'healthy' ? 200 : 503);
   });
 
+  // [NEW] Site Settings Endpoints
+  app.get("/api/settings/:key", async (c) => {
+    const key = c.req.param("key");
+    const value = await storage.getSiteSetting(key);
+    return c.json({ key, value: value || null });
+  });
+
+  app.patch("/api/settings/:key", requireAuth, requireRole(["admin"]), async (c) => {
+    const key = c.req.param("key");
+    const { value } = await c.req.json();
+
+    if (value === undefined) {
+      return c.json({ error: "Missing value" }, 400);
+    }
+
+    await storage.updateSiteSetting(key, String(value));
+    return c.json({ success: true, key, value });
+  });
+
   // [Vercel Debug] Routes check - Hono specific
   app.get("/api/debug-routes", (c) => {
     // Hono exposes routes via app.routes

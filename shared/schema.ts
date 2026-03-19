@@ -578,6 +578,23 @@ export const insertTourScheduleSchema = createInsertSchema(tourSchedules).omit({
   updatedAt: true,
 });
 
+/**
+ * [연구소장 노트: 사이트 글로벌 설정 테이블]
+ * 서비스 전체에 적용되는 설정들(워터마크 URL, 점검 모드 등)을 키-값 쌍으로 저장합니다.
+ * 관리자 페이지에서 실시간으로 플랫폼의 '분위기'를 바꿀 수 있는 핵심 장치입니다.
+ */
+export const siteSettings = pgTable("site_settings", {
+  key: varchar("key", { length: 255 }).primaryKey(),
+  value: text("value").notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+});
+
+export const insertSiteSettingSchema = createInsertSchema(siteSettings);
+export type SiteSetting = typeof siteSettings.$inferSelect;
+export type InsertSiteSetting = z.infer<typeof insertSiteSettingSchema>;
+
 export const insertGroupMemberSchema = createInsertSchema(groupMembers).omit({
   id: true,
   createdAt: true,
