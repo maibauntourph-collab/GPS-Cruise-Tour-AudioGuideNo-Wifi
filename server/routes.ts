@@ -8,7 +8,7 @@ import { z } from "zod";
 import { requireAuth, requireRole } from "./auth";
 import { db } from "./db";
 import { eq, desc, sql, and } from "drizzle-orm";
-import { generateCityInfo, recommendTourItinerary } from "./lib/gemini";
+import { generateCityInfo, recommendTourItinerary, translateText } from "./lib/gemini";
 import { automationService } from "./services/automationService";
 import { dbCheckService } from "./services/dbCheckService";
 import { settlementService } from "./services/settlementService";
@@ -194,11 +194,6 @@ export function registerRoutes(app: Hono<any>) {
       );
       const data: any = await response.json();
 
-      if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
-        console.error("[Google Maps API Error]", data.status, data.error_message);
-        return c.json({ error: `Google API 오류: ${data.status}` }, 500);
-      }
-
       // Nominatim 형식과 유사하게 결과 매핑 (호환성 유지)
       const results = (data.results || []).map((item: any) => ({
         name: item.formatted_address,
@@ -209,7 +204,23 @@ export function registerRoutes(app: Hono<any>) {
       return c.json(results);
     } catch (error) {
       console.error("[Geocoding Proxy Error]", error);
-      return c.json({ error: "서버 내부 오류가 발생했습니다." }, 500);
+      return c.json({ error: "지오코딩 서비스 연동 중 오류가 발생했습니다." }, 500);
+    }
+  });
+
+  // [Story Teller Lee] 실시간 번역 API: 404 오류 해결 및 글로벌 가이드 지원
+  app.post("/api/translate", async (c) => {
+    try {
+      const { text, targetLanguage } = await c.req.json();
+      if (!text || !targetLanguage) {
+        return c.json({ error: "Text and targetLanguage are required" }, 400);
+      }
+
+      const translatedText = await translateText(text, targetLanguage);
+      return c.json({ translatedText });
+    } catch (error) {
+      console.error("Translation API error:", error);
+      return c.json({ error: "Translation failed" }, 500);
     }
   });
 

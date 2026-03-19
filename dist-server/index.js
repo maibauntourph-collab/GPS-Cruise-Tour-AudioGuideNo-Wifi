@@ -24188,6 +24188,35 @@ async function generateCityInfo(query, language = "ko") {
     return mockGenerateCityInfo(query);
   }
 }
+async function translateText(text2, targetLanguage) {
+  const ai = getAI();
+  if (!ai) {
+    console.warn("[Gemini] API Client not ready for translation. Returning original text.");
+    return text2;
+  }
+  try {
+    const prompt = `Translate the following text into '${targetLanguage}'. 
+    Maintain the emotional tone and context of a friendly travel guide. 
+    Respond ONLY with the translated text, no other comments.
+
+    Text to translate:
+    ${text2}`;
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: [{ role: "user", parts: [{ text: prompt }] }]
+    });
+    let translated = "";
+    if (response.text) {
+      translated = response.text;
+    } else if (response.candidates && response.candidates[0]?.content?.parts?.[0]?.text) {
+      translated = response.candidates[0].content.parts[0].text;
+    }
+    return translated.trim() || text2;
+  } catch (error) {
+    console.error("Translation failed:", error);
+    return text2;
+  }
+}
 function mockGenerateCityInfo(query) {
   const q = query.toLowerCase();
   if (q.includes("pusan") || q.includes("busan") || q.includes("\uBD80\uC0B0")) {
@@ -24626,10 +24655,6 @@ function registerRoutes(app2) {
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${apiKey}&language=${lang}`
       );
       const data = await response.json();
-      if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
-        console.error("[Google Maps API Error]", data.status, data.error_message);
-        return c.json({ error: `Google API \uC624\uB958: ${data.status}` }, 500);
-      }
       const results = (data.results || []).map((item) => ({
         name: item.formatted_address,
         lat: item.geometry.location.lat,
@@ -24638,7 +24663,20 @@ function registerRoutes(app2) {
       return c.json(results);
     } catch (error) {
       console.error("[Geocoding Proxy Error]", error);
-      return c.json({ error: "\uC11C\uBC84 \uB0B4\uBD80 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4." }, 500);
+      return c.json({ error: "\uC9C0\uC624\uCF54\uB529 \uC11C\uBE44\uC2A4 \uC5F0\uB3D9 \uC911 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4." }, 500);
+    }
+  });
+  app2.post("/api/translate", async (c) => {
+    try {
+      const { text: text2, targetLanguage } = await c.req.json();
+      if (!text2 || !targetLanguage) {
+        return c.json({ error: "Text and targetLanguage are required" }, 400);
+      }
+      const translatedText = await translateText(text2, targetLanguage);
+      return c.json({ translatedText });
+    } catch (error) {
+      console.error("Translation API error:", error);
+      return c.json({ error: "Translation failed" }, 500);
     }
   });
   app2.get("/api/places/search", async (c) => {

@@ -266,6 +266,44 @@ export async function generateCityInfo(
   }
 }
 
+// [Story Teller Lee] 실시간 번역 엔진: 현지의 생생한 숨결을 그대로 전달합니다.
+export async function translateText(
+  text: string,
+  targetLanguage: string
+): Promise<string> {
+  const ai = getAI();
+  if (!ai) {
+    console.warn("[Gemini] API Client not ready for translation. Returning original text.");
+    return text;
+  }
+
+  try {
+    const prompt = `Translate the following text into '${targetLanguage}'. 
+    Maintain the emotional tone and context of a friendly travel guide. 
+    Respond ONLY with the translated text, no other comments.
+
+    Text to translate:
+    ${text}`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    });
+
+    let translated = "";
+    if (response.text) {
+      translated = response.text;
+    } else if (response.candidates && response.candidates[0]?.content?.parts?.[0]?.text) {
+      translated = response.candidates[0].content.parts[0].text;
+    }
+
+    return translated.trim() || text;
+  } catch (error) {
+    console.error('Translation failed:', error);
+    return text; // Fallback to original text on error
+  }
+}
+
 // Mock Data Generator for verification and offline usage
 function mockGenerateCityInfo(query: string): CityInfo {
   const q = query.toLowerCase();
