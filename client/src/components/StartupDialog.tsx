@@ -1,21 +1,18 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 /**
- * [교수님 노트: StartupDialog - 여행의 첫 관문]
- * @에이? "학생 여러분, 이 컴포넌트는 앱이 시작될 때 사용자를 맞이하는 가장 중요한 인터페이스입니다."
- * 
- * [수정 적요 - 2026-02-27 19:25]
- * 1. ReferenceError 해결: lucide-react에서 'Globe' 아이콘 임포트 누락을 수정했습니다.
- * 2. 다국어 연동: LanguageSelector를 통합하여 초기 진입 시 사용자가 원하는 언어를 선택할 수 있게 했습니다.
- * 3. 기기 상태 감지: GPS 가용 여부와 로딩 상태를 직관적으로 보여주어 사용자 경험을 개선했습니다.
+ * [교수님 노트: StartupDialog - 여행의 첫 관문 (클래식 랜딩 버전)]
+ * @에이? "학생 여러분, 이 컴포넌트는 이제 '클래식 랜딩 페이지' 역할을 수행합니다.
+ * 사용자가 접속하자마자 국가와 도시, 그리고 언어를 한 곳에서 선택할 수 있도록 개편되었습니다."
  */
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, History, Navigation, Clock, Route, Globe } from 'lucide-react';
+import { MapPin, History, Navigation, Clock, Route, Globe, ChevronRight } from 'lucide-react';
 import { Landmark, City } from '@shared/schema';
 import { getTranslatedContent } from '@/lib/translations';
 import { audioService } from '@/lib/audioService';
 import { LanguageSelector } from './LanguageSelector';
+import { CitySelector } from './CitySelector';
 
 export interface SavedTourData {
   cityId: string;
@@ -36,56 +33,23 @@ interface StartupDialogProps {
   onLanguageChange: (lang: string) => void;
   isGpsAvailable: boolean;
   isGpsLoading: boolean;
+  cities: City[];
+  selectedCityId: string;
+  onCityChange: (cityId: string) => void;
 }
 
-export function getSavedTourData(): SavedTourData | null {
-  try {
-    const saved = localStorage.getItem('saved-tour-data');
-    if (saved) {
-      return JSON.parse(saved);
-    }
-  } catch (e) {
-    console.error('Failed to parse saved tour data:', e);
-  }
-  return null;
-}
-
-export function saveTourData(
-  cityId: string,
-  cityName: string,
-  tourStops: Landmark[],
-  tourTimePerStop: number,
-  selectedLanguage: string
-): void {
-  const data: SavedTourData = {
-    cityId,
-    cityName,
-    tourStops: tourStops.map(stop => stop.id),
-    tourStopNames: tourStops.map(stop => getTranslatedContent(stop, selectedLanguage, 'name')),
-    savedAt: new Date().toISOString(),
-    tourTimePerStop
-  };
-  localStorage.setItem('saved-tour-data', JSON.stringify(data));
-}
-
-export function clearSavedTourData(): void {
-  localStorage.removeItem('saved-tour-data');
-}
-
-/**
- * @에이? "StartupDialog 컴포넌트의 프롭 구조를 보세요. 
- * onLanguageChange가 추가되어 이제 실시간으로 언어 설정을 변경하고 부모(Home)로 전달할 수 있습니다."
- */
 export function StartupDialog({
   isOpen,
   onClose,
-  onSelectGPS,
   onRestoreTour,
   savedTourData,
   selectedLanguage,
   onLanguageChange,
   isGpsAvailable,
-  isGpsLoading
+  isGpsLoading,
+  cities,
+  selectedCityId,
+  onCityChange
 }: StartupDialogProps) {
   const formatDate = (dateStr: string) => {
     try {
@@ -111,7 +75,7 @@ export function StartupDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md" data-testid="dialog-startup">
+      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto" data-testid="dialog-startup">
         <DialogHeader>
           <DialogTitle className="flex flex-col text-xl">
             <div className="flex items-center gap-2">
@@ -124,34 +88,63 @@ export function StartupDialog({
           </DialogTitle>
           <DialogDescription>
             {selectedLanguage === 'ko'
-              ? '어떻게 시작하시겠습니까?'
-              : 'How would you like to start?'}
+              ? '가장 먼저 여행하실 국가와 명소를 선택해 주세요.'
+              : 'Please select your destination and language to start.'}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-3 mt-4">
-          {/* [교수님 지시] "dont use that card" - GPS 직접 시작 카드 제거 */}
-          {/* 이전 GPS 커다란 카드를 제거하고, 도시 직접 선택으로 유도하기 위해 하단 버튼만 남깁니다. */}
-
-          {/* [교수님 지시 | 2026-02-27] 나라 선택 플로팅 카드는 현재 사용하지 않기로 하여 주석 처리합니다.
-          <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-500">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="p-1.5 rounded-full bg-primary/10 text-primary">
-                <Globe className="w-4 h-4" />
+        <div className="space-y-4 mt-4">
+          {/* [NEW] Classic Landing: Country & City Selection First */}
+          <div className="p-5 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="flex items-center gap-2 mb-4 border-b border-primary/10 pb-2">
+              <div className="p-1.5 rounded-full bg-primary/20 text-primary">
+                <MapPin className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-sm">
-                {selectedLanguage === 'ko' ? '언어 설정' : 'Language Settings'}
+              <h3 className="font-bold text-base text-primary">
+                {selectedLanguage === 'ko' ? '여행지 선택' : 'Select Destination'}
               </h3>
             </div>
-            <LanguageSelector
-              selectedLanguage={selectedLanguage}
-              onLanguageChange={onLanguageChange}
-            />
-            <p className="mt-2 text-[10px] text-muted-foreground italic text-center">
-              {selectedLanguage === 'ko' ? '* 선택하신 언어로 모든 가이드가 실시간 번역됩니다' : '* All guides will be translated in real-time'}
-            </p>
+
+            <div className="flex flex-col gap-4">
+              <CitySelector
+                cities={cities}
+                selectedCityId={selectedCityId}
+                onCityChange={onCityChange}
+                selectedLanguage={selectedLanguage}
+              />
+
+              <div className="pt-2 border-t border-primary/5">
+                <p className="text-[11px] text-muted-foreground font-medium mb-3 flex items-center gap-1">
+                  <Globe className="w-3 h-3" />
+                  {selectedLanguage === 'ko' ? '시스템 언어' : 'System Language'}
+                </p>
+                <LanguageSelector
+                  selectedLanguage={selectedLanguage}
+                  onLanguageChange={onLanguageChange}
+                />
+              </div>
+            </div>
+
+            <Button
+              className="w-full mt-5 h-12 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold shadow-md group"
+              onClick={() => {
+                onClose();
+                audioService.unlockAudio();
+              }}
+            >
+              <span>{selectedLanguage === 'ko' ? '이 도시로 투어 시작하기' : 'Start Tour for this City'}</span>
+              <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </div>
-          */}
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-gray-100" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white px-2 text-muted-foreground">Or</span>
+            </div>
+          </div>
 
           {/* Restore Tour Option */}
           {savedTourData && savedTourData.tourStops.length > 0 && (
@@ -169,57 +162,37 @@ export function StartupDialog({
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-semibold">
+                    <h3 className="font-semibold text-sm">
                       {selectedLanguage === 'ko' ? '이전 투어 이어하기' : 'Continue Previous Tour'}
                     </h3>
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-[10px]">
                       {formatDate(savedTourData.savedAt)}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">
+                  <p className="text-xs text-muted-foreground mb-2">
                     {savedTourData.cityName}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="gap-1 text-xs">
-                      <Route className="w-3 h-3" />
+                    <Badge variant="secondary" className="gap-1 text-[10px] px-1.5 py-0">
+                      <Route className="w-2.5 h-2.5" />
                       {savedTourData.tourStops.length} {selectedLanguage === 'ko' ? '개 장소' : 'stops'}
                     </Badge>
-                    <Badge variant="secondary" className="gap-1 text-xs">
-                      <Clock className="w-3 h-3" />
+                    <Badge variant="secondary" className="gap-1 text-[10px] px-1.5 py-0">
+                      <Clock className="w-2.5 h-2.5" />
                       {savedTourData.tourTimePerStop}{selectedLanguage === 'ko' ? '분/장소' : 'min/stop'}
                     </Badge>
                   </div>
-                  {savedTourData.tourStopNames.length > 0 && (
-                    <div className="mt-2 text-xs text-muted-foreground">
-                      {savedTourData.tourStopNames.slice(0, 3).join(' → ')}
-                      {savedTourData.tourStopNames.length > 3 && ` +${savedTourData.tourStopNames.length - 3}`}
-                    </div>
-                  )}
                 </div>
               </div>
             </button>
           )}
 
-          {/* [교수님 지시 | 2026-02-27] 도시 직접 선택 버튼을 비활성화하고 안내 Remark로 대체합니다. */}
-          <div className="text-center py-4 border-t border-gray-100 flex flex-col gap-2">
-            <p className="text-[11px] text-muted-foreground font-medium italic">
+          <div className="text-center py-2">
+            <p className="text-[10px] text-muted-foreground font-medium italic">
               {selectedLanguage === 'ko'
-                ? '💡 팁: 도시는 메인 화면에서 직접 검색하고 선택하실 수 있습니다'
-                : '💡 Tip: You can search and select cities directly from the main screen'}
+                ? '💡 실시간 GPS 기반 오디오 가이드가 자동으로 제공됩니다'
+                : '💡 Real-time GPS audio guide will be provided automatically'}
             </p>
-            {/* 
-            <Button
-              variant="ghost"
-              className="w-full"
-              onClick={() => {
-                onClose();
-                audioService.unlockAudio();
-              }}
-              data-testid="button-skip-startup"
-            >
-              {selectedLanguage === 'ko' ? '도시 직접 선택하기' : 'Select City Directly'}
-            </Button>
-            */}
           </div>
         </div>
       </DialogContent>

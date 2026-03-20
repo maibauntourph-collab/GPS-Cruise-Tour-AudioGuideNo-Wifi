@@ -344,7 +344,7 @@ export default function Home() {
 
   // Dodari Architecture states
   const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
-  const [showStartupDialog, setShowStartupDialog] = useState(false);
+  const [showStartupDialog, setShowStartupDialog] = useState(true); // [교수님 지시] 클래식 랜딩을 위해 항상 켬
   const [isStartupTransitioning, setIsStartupTransitioning] = useState(false);
   const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
   const [landingCityId, setLandingCityId] = useState<string | null>(null);
@@ -1742,14 +1742,16 @@ export default function Home() {
           onSelectGPS={() => setGpsEnabled(true)}
           onRestoreTour={(data) => {
             handleCityChange(data.cityId);
-            // [적요] 저장된 투어 데이터 복원 로직이 추가로 필요할 수 있습니다.
             setShowStartupDialog(false);
           }}
-          savedTourData={null} // 로컬 스토리지에서 직접 가져오도록 수정 가능
+          savedTourData={null}
           selectedLanguage={selectedLanguage}
           onLanguageChange={setSelectedLanguage}
           isGpsAvailable={gpsEnabled}
           isGpsLoading={isLoading}
+          cities={cities}
+          selectedCityId={selectedCityId}
+          onCityChange={handleCityChange}
         />
       </div>
 
