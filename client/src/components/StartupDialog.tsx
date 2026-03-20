@@ -200,4 +200,21 @@ export function StartupDialog({
   );
 }
 
+/**
+ * [교수님 노트: 투어 데이터 복원 유틸리티]
+ * 이 함수는 로컬 스토리지에 안전하게 저장된 이전 여행 기록을 불러옵니다.
+ * 사용자가 앱을 닫았다가 다시 켰을 때, 이전에 계획했던 투어를 그대로 이어갈 수 있게 돕는 고마운 친구죠.
+ */
+export function getSavedTourData(): SavedTourData | null {
+  try {
+    const saved = localStorage.getItem('saved_tour_data');
+    if (saved) {
+      return JSON.parse(saved);
+    }
+  } catch (error) {
+    console.error('Failed to parse saved tour data:', error);
+  }
+  return null;
+}
+
 export default StartupDialog;

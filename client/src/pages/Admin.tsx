@@ -91,47 +91,6 @@ interface MarketingContent {
   updatedAt: string;
 }
 
-interface DbCity {
-  id: string;
-  name: string;
-  country: string;
-  lat: number;
-  lng: number;
-  zoom: number | null;
-  cruisePort: any;
-  defaultGuideId: string | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface DbLandmark {
-  id: string;
-  cityId: string;
-  name: string;
-  lat: number;
-  lng: number;
-  radius: number;
-  narration: string;
-  description: string | null;
-  category: string | null;
-  detailedDescription: string | null;
-  photos: string[] | null;
-  historicalInfo: string | null;
-  yearBuilt: string | null;
-  architect: string | null;
-  translations: any;
-  openingHours: string | null;
-  priceRange: string | null;
-  cuisine: string | null;
-  reservationUrl: string | null;
-  phoneNumber: string | null;
-  menuHighlights: string[] | null;
-  restaurantPhotos: any;
-  paymentMethods: string[] | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
 /**
  * [학습 가이드: 관리자(Admin) 페이지 대시보드]
  * 이 컴포넌트는 모든 마스터 데이터를 관리하고 통계를 확인하는 '관제 센터'입니다.
@@ -151,8 +110,8 @@ export default function Admin() {
   const [selectedCityFilter, setSelectedCityFilter] = useState<string>('all');
 
   // [적요: CRUD 상태] 현재 수정 중인 데이터 정보와 등록 모달의 열림 상태를 관리합니다.
-  const [editingCity, setEditingCity] = useState<DbCity | null>(null);
-  const [editingLandmark, setEditingLandmark] = useState<DbLandmark | null>(null);
+  const [editingCity, setEditingCity] = useState<City | null>(null);
+  const [editingLandmark, setEditingLandmark] = useState<Landmark | null>(null);
   const [isCreateCityOpen, setIsCreateCityOpen] = useState(false);
   const [isCreateLandmarkOpen, setIsCreateLandmarkOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'city' | 'landmark'; id: string; name: string } | null>(null);
@@ -238,12 +197,12 @@ export default function Admin() {
   // [쿼리 마스터의 데이터 로딩 비법]
   // "데이터를 부를 때는 '누구인가?'를 먼저 물어야 합니다. 
   // 'admin'은 물론, 우리 'shop_owner(코다리부장)'와 'creator' 동료들도 각자의 권한에 맞는 데이터를 볼 수 있어야 하죠."
-  const { data: cities = [], isLoading: loadingCities } = useQuery<DbCity[]>({
+  const { data: cities = [], isLoading: loadingCities } = useQuery<City[]>({
     queryKey: ['/api/admin/cities'],
     enabled: !!authData?.user && ['admin', 'shop_owner', 'creator'].includes(authData.user.role || '')
   });
 
-  const { data: landmarks = [], isLoading: loadingLandmarks } = useQuery<DbLandmark[]>({
+  const { data: landmarks = [], isLoading: loadingLandmarks } = useQuery<Landmark[]>({
     queryKey: ['/api/admin/landmarks'],
     enabled: !!authData?.user && ['admin', 'shop_owner', 'creator'].includes(authData.user.role || '')
   });
