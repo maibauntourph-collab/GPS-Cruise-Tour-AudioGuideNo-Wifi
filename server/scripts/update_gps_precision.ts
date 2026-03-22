@@ -1,3 +1,4 @@
+import 'dotenv/config';
 
 import { db } from "../db";
 import { landmarks as landmarksTable } from "../../shared/schema";
@@ -5,6 +6,14 @@ import { eq, sql } from "drizzle-orm";
 
 async function updateGpsPrecision() {
     console.log("📍 [Avengers Team] 랜드마크 고정밀 GPS 좌표(Google Precision) 업데이트를 시작합니다...");
+
+    // [Query Master] 컬럼 부재 시 자동 추가 (SQL Injection 방지를 위해 sql 템플릿 사용)
+    try {
+        await db.execute(sql`ALTER TABLE landmarks ADD COLUMN IF NOT EXISTS target_nations jsonb`);
+        console.log("✅ [DB] 'target_nations' 컬럼 상태 확인 완료.");
+    } catch (e: any) {
+        console.warn("⚠️ [DB] 컬럼 추가 시도 중 경고 (이미 존재할 수 있음):", e.message);
+    }
 
     // [Cruiser Navigator Kim] 항해사가 검수한 정밀 좌표 리스트 (소수점 6자리 이상)
     const precisionData: Record<string, { lat: number, lng: number }> = {
@@ -54,6 +63,6 @@ async function updateGpsPrecision() {
 }
 
 updateGpsPrecision().then(() => process.exit(0)).catch(err => {
-    console.error("❌ GPS 업데이트 실패:", err);
+    console.error("❌ GPS 업데이트 실패:", err.message);
     process.exit(1);
 });

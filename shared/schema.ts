@@ -812,3 +812,14 @@ export const followsRelations = relations(follows, ({ one }) => ({
 
 export type DbCityBackup = typeof citiesBackup.$inferSelect;
 export type DbLandmarkBackup = typeof landmarksBackup.$inferSelect;
+
+// [Temporary Fix] Dummy tables to prevent drizzle-kit from dropping existing DB tables and asking for confirmation
+export const appSettings = pgTable("app_settings", {
+  id: varchar("id").primaryKey(),
+  config: json("config"),
+});
+
+export const spots = pgTable("spots", {
+  id: varchar("id").primaryKey(),
+  name: varchar("name"),
+});
