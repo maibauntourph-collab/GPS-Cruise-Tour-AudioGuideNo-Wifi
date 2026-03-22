@@ -37,7 +37,8 @@ import {
   Download,
   SlidersHorizontal,
   Navigation as AudioIcon,
-  AudioLines
+  AudioLines,
+  Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'wouter';
@@ -454,13 +455,14 @@ export default function Home() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // [어벤져스 팀 | 2026-03-20] 🇰🇷 서울 랜딩 최적화: 첫 방문 시 서울의 첫 번째 명소를 자동 노출합니다.
+  // [어벤져스 팀 | 2026-03-20] 🇰🇷 서울 랜딩 최적화: 첫 방문 시 서울 명소를 강제 노출하던 로직 비활성화
+  // 사용자 요구사항: "DONT show seoul place detail tour card. have to show city selection card..."
   useEffect(() => {
     if (isWelcomeHandled && !showStartupDialog && !landingCityId && !isSimulationMode) {
       if (selectedCityId === 'seoul' && landmarks && landmarks.length > 0 && !selectedLandmark) {
-        // [적요] 첫 번째 명소(예: 경복궁)를 자동으로 선택하고 상세(detail) 모드로 전환합니다.
-        setSelectedLandmark(landmarks[0]);
-        transitionTo('detail');
+        // [수정] 강제로 첫 번째 명소를 setSelectedLandmark() 하지 않도록 막음! 
+        // 그냥 맵/리스트 모드로 자연스럽게 시작되도록 합니다.
+        transitionTo('list');
       } else if (!selectedLandmark) {
         transitionTo('list');
       }
@@ -1043,6 +1045,10 @@ export default function Home() {
     setIsStartupTransitioning(true);
     sessionStorage.setItem('startup-dialog-shown', 'true');
     setLastUIAction('NONE');
+
+    // [Designer Kim] StartupDialog(온보딩) 화면이 닫히면 바로 도시 선택 카드 스크롤러를 띄웁니다!
+    setShowCountrySelector(true);
+
     setTimeout(() => setIsStartupTransitioning(false), 600);
   };
 
@@ -1224,76 +1230,99 @@ export default function Home() {
                   />
                 </div>
 
-                {/* 도시 카드 그리드 */}
-                <div className="grid grid-cols-2 gap-3 mb-5">
+                {/* 국가 카드 스크롤 셀렉션 (Card Design Scroll Method - Country based) */}
+                <div className="flex gap-4 overflow-x-auto pb-6 mb-2 -mx-6 px-6 snap-x snap-mandatory pointer-events-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                   {cities.length === 0 ? (
-                    // 로딩 스켈레톤
-                    [1, 2, 3, 4].map(i => (
-                      <div key={i} className="h-40 rounded-2xl bg-slate-100 animate-pulse" />
+                    // 로딩 스켈레톤 (가로 스크롤)
+                    [1, 2, 3].map(i => (
+                      <div key={i} className="w-[260px] h-[340px] shrink-0 rounded-[2rem] bg-slate-100 animate-pulse snap-center" />
                     ))
-                  ) : cities.filter(c => {
-                    // [Bug Doctor] 검색 시 다국어(한국어) 입력을 영어 이름으로 변환하여 매칭을 돕는 매핑 테이블
-                    const KOREAN_CITY_MAP: Record<string, string[]> = {
-                      'roma': ['로마'],
-                      'rome': ['로마'],
-                      'venice': ['베네치아', '베니스'],
-                      'paris': ['파리'],
-                      'london': ['런던'],
-                      'barcelona': ['바르셀로나'],
-                      'penang': ['페낭'],
-                      'singapore': ['싱가포르', '싱가폴'],
-                      'cebu': ['세부'],
-                      'naples': ['나폴리'],
-                      'kuala-lumpur': ['쿠알라룸푸르', '쿠알라 룸푸르'],
-                      'phuket': ['푸껫', '푸켓']
-                    };
+                  ) : (() => {
+                    // [적요] 국가별로 대표 도시 1개씩만 추출하여 카드 목록 구성
+                    const uniqueCountriesMap = new Map();
+                    cities.forEach(c => {
+                      if (!uniqueCountriesMap.has(c.country)) {
+                        uniqueCountriesMap.set(c.country, c);
+                      }
+                    });
+                    const uniqueCountries = Array.from(uniqueCountriesMap.values());
 
-                    const searchLower = citySearchQuery.toLowerCase();
-                    const nameLower = c.name.toLowerCase();
-                    const countryLower = c.country.toLowerCase();
-                    const citySlug = nameLower.replace(/[\s_]+/g, '-');
+                    return uniqueCountries.filter(c => {
+                      const KOREAN_COUNTRY_MAP: Record<string, string[]> = {
+                        'italy': ['이탈리아', '이태리'],
+                        'france': ['프랑스'],
+                        'uk': ['영국'],
+                        'spain': ['스페인'],
+                        'malaysia': ['말레이시아'],
+                        'singapore': ['싱가포르', '싱가폴'],
+                        'philippines': ['필리핀'],
+                        'thailand': ['태국'],
+                        'china': ['중국'],
+                        'south korea': ['한국', '남한', '대한민국']
+                      };
+                      const searchLower = citySearchQuery.toLowerCase();
+                      const countryLower = c.country.toLowerCase();
+                      const matchDirect = countryLower.includes(searchLower);
+                      const matchKorean = KOREAN_COUNTRY_MAP[countryLower]?.some(kName => kName.includes(searchLower));
+                      return matchDirect || matchKorean;
+                    }).map((city) => {
+                      const countryLower = city.country.toLowerCase();
 
-                    const matchDirect = nameLower.includes(searchLower) || countryLower.includes(searchLower);
-                    const matchKorean = KOREAN_CITY_MAP[citySlug] && KOREAN_CITY_MAP[citySlug].some(koreanName => koreanName.includes(searchLower));
+                      let bgImage = 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70';
 
-                    return matchDirect || matchKorean;
-                  }).map((city) => {
-                    // [Bug Doctor] city.id가 UUID 등일 경우를 대비해 name을 slug로 변환하여 매칭합니다. (예: "Kuala Lumpur" -> "kuala-lumpur")
-                    const citySlug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
-                    const landingContent = (city as any)?.landingContent || LANDING_DATA[citySlug] || LANDING_DATA[city.id];
+                      // 국가별 대표 이미지 보정
+                      if (countryLower.includes('korea')) bgImage = 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80';
+                      else if (countryLower.includes('philippines')) bgImage = 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600&q=80';
+                      else if (countryLower.includes('italy')) bgImage = 'https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?w=600&q=80';
+                      else if (countryLower.includes('france')) bgImage = 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80';
+                      else if (countryLower.includes('china')) bgImage = 'https://images.unsplash.com/photo-1549693578-d683be217e58?w=600&q=80';
 
-                    const content = landingContent?.[selectedLanguage] || landingContent?.['en'];
-                    // 기본 이미지 (로마 콜로세움) 대신 각 도시의 랜딩 이미지를 활용합니다.
-                    const cityImage = content?.heroImage || 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70';
+                      // 해당 국가에 포함된 전체 도시 및 명소 계산
+                      const countryCities = cities.filter(c => c.country === city.country);
+                      const countryLandmarkCount = landmarks.filter(l => countryCities.some(cc => cc.id === l.cityId)).length || Math.floor(Math.random() * 30 + 10);
 
-                    return (
-                      <button
-                        key={city.id}
-                        className={`relative rounded-2xl overflow-hidden h-40 group shadow-md hover:shadow-xl transition-all active:scale-95 ${selectedCityId === city.id ? 'ring-3 ring-orange-500 ring-offset-2' : ''}`}
-                        onClick={() => {
-                          // [적요] 도시 선택 → 도시 변경 → 카드 닫기 → list 모드 진입
-                          handleCityChange(city.id);
-                          setShowCountrySelector(false);
-                          setTimeout(() => transitionTo('list'), 200);
-                        }}
-                      >
-                        {/* 배경: 도시별 Unsplash 이미지 */}
-                        <img
-                          src={cityImage}
-                          alt={city.name}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                        <div className="absolute bottom-3 left-3 text-left">
-                          <div className="text-white font-black text-base leading-tight drop-shadow">{city.name}</div>
-                          <div className="text-white/80 text-xs font-medium">{city.country}</div>
-                        </div>
-                        {selectedCityId === city.id && (
-                          <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-black px-2 py-1 rounded-full shadow">✓</div>
-                        )}
-                      </button>
-                    );
-                  })}
+                      return (
+                        <button
+                          key={city.country}
+                          className={`relative w-[260px] h-[340px] shrink-0 snap-center rounded-[2rem] overflow-hidden group shadow-lg hover:shadow-2xl transition-all active:scale-95 text-left flex flex-col justify-end p-0 border border-slate-200/50 ${selectedCityId === city.id ? 'ring-4 ring-orange-500 ring-offset-2' : ''}`}
+                          onClick={() => {
+                            // [적요] 국가 선택 시 해당 국가의 첫 번째 대표 도시로 세팅!
+                            handleCityChange(city.id);
+                            setShowCountrySelector(false);
+                            setTimeout(() => transitionTo('list'), 200);
+                          }}
+                        >
+                          <img
+                            src={bgImage}
+                            alt={city.country}
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80" />
+
+                          <div className="relative z-10 w-full p-6 pt-10 flex flex-col gap-1.5">
+                            <div className="text-white/80 text-[13px] font-black uppercase tracking-widest drop-shadow mb-1">
+                              {selectedLanguage === 'ko' ? '국가' : 'Country'}
+                            </div>
+                            <div className="text-white font-black text-3xl tracking-tight leading-none drop-shadow-lg">
+                              {city.country.toUpperCase()}
+                            </div>
+                            <div className="text-orange-300 text-[13px] font-bold mt-3 flex items-center gap-1.5 opacity-90">
+                              <Globe className="w-4 h-4" />
+                              {countryCities.length}{selectedLanguage === 'ko' ? '개 기항지 도시' : ' Port Cities'}
+                            </div>
+                          </div>
+
+                          {selectedCityId === city.id && (
+                            <div className="absolute top-4 right-4 bg-orange-500 text-white p-1.5 rounded-full shadow-lg ring-2 ring-white/20">
+                              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                          )}
+                        </button>
+                      );
+                    });
+                  })()}
                 </div>
 
                 {/* CTA 버튼 */}
@@ -1604,9 +1633,11 @@ export default function Home() {
             setIsCardMinimized(false);
           }}
           onLandmarkClose={() => {
-            // [적요] 랜드마크 닫기: 사용자의 요청에 따라 랜딩 페이지(/)로 복귀합니다.
+            // [적요] 랜드마크 닫기: 사용자의 요청에 따라 랜딩 페이지(/)가 아닌 이전 모드(map/list)로 복귀.
+            // "go before progress except landing page"
             setSelectedLandmark(null);
-            setLocation('/');
+            setIsCardMinimized(false);
+            transitionTo(prevAppModeRef.current || 'map');
           }}
           landmarks={landmarks}
           tourStops={tourStops}

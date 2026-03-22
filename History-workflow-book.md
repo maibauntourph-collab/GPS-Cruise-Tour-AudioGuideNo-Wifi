@@ -60,8 +60,275 @@ Hono 프레임워크를 사용하여 API 엔드포인트를 구축했습니다.
 
 ---
 
-## 🔖 제 2장: 여행지의 숨겨진 이야기 - 정밀 좌표 업데이트와 빌드 최적화
-> **다음 목표:** 랜드마크의 GPS 감지 정확도를 높이기 위한 정밀 좌표 데이터 업데이트와 전체 빌드(`npm run build`) 테스트를 진행합니다.
+## 🔖 제 2장: Git의 미로 탈출기 - SSH에서 HTTPS로의 대전환
+
+> 📅 **기록일:** 2026년 3월 23일 (월) 02:20 ~ 02:36
+> 👨‍🏫 **담당 에이전트:** Dodari (지휘), Server Park (인프라)
+
+### 🎓 교수님의 한 마디
+> *"학생 여러분, 코드를 잘 짜는 것만큼 중요한 것이 바로 '협업 도구'를 잘 다루는 것입니다. 오늘은 Git의 원격 저장소(Remote Repository)와 인증(Authentication) 방식에 대해 실전으로 배워봅시다!"*
 
 ---
-*(교수님의 응원: "첫 번째 고개를 넘었군요! 이제 우리의 가이드가 명소 바로 앞에서 정확하게 이야기를 시작할 수 있도록 조율해 봅시다.")*
+
+### 📖 상황 설명: 왜 `git push`가 실패했을까?
+
+처음에 `git push origin main` 명령을 실행했더니 이런 오류가 나왔어요:
+
+```
+Please make sure you have the correct access rights and the repository exists.
+```
+
+**원인 분석표:**
+
+| 단계 | 시도한 방법 | 결과 | 원인 |
+|------|------------|------|------|
+| 1차 | SSH 방식 (`git@github.com:...`) | ❌ SSH 키 인증 실패 | SSH 키가 등록되지 않음 |
+| 2차 | HTTPS + 잘못된 저장소명 | ❌ Repository not found | URL 오타 |
+| 3차 | HTTPS + 첫 번째 PAT 토큰 | ❌ Invalid token | 토큰 권한 부족 |
+| 4차 | HTTPS + 두 번째 PAT 토큰 | ✅ **Push 성공!** | 올바른 토큰 + Force |
+
+### 🔑 핵심 개념 1: SSH vs HTTPS 인증 방식
+
+```
+# SSH 방식 (SSH 키 파일이 있어야 함)
+git@github.com:maibauntourph-collab/nowifigps.tours.git
+
+# HTTPS 방식 (토큰 또는 아이디/비번으로 인증)
+https://github.com/maibauntourph-collab/GPS-Cruise-Tour-AudioGuideNo-Wifi.git
+```
+
+> 💡 **학생 포인트:** SSH는 마치 건물 출입카드처럼, 한 번 등록하면 편하지만 카드(키)를 잃어버리면 못 들어갑니다. HTTPS는 매번 비밀번호를 입력하는 방식이에요.
+
+### 🔑 핵심 개념 2: GitHub PAT (Personal Access Token)
+
+GitHub는 보안상 이유로 일반 비밀번호 대신 **PAT(개인 액세스 토큰)**을 사용합니다.
+
+```bash
+# PAT를 URL에 임베드하는 방법 (사용 후 즉시 제거!)
+git remote set-url origin https://ghp_YOUR_TOKEN@github.com/계정/저장소.git
+git push origin main
+```
+
+> ⚠️ **보안 경고:** 토큰을 채팅이나 코드에 직접 넣으면 절대 안 됩니다! 이번 세션에서 두 개의 토큰이 노출되어 즉시 폐기 조치가 필요했습니다.
+
+### 🔑 핵심 개념 3: `--force-with-lease` (안전한 강제 Push)
+
+브랜치가 **diverged** 상태일 때 (로컬과 원격 히스토리가 달라졌을 때) 사용합니다.
+
+```bash
+# 일반 force push (위험 - 원격 변경사항 강제 덮어씀)
+git push --force
+
+# 안전한 force push (내가 마지막으로 가져온 이후 원격 변경이 없을 때만 허용)
+git push --force-with-lease   ← 이것을 사용!
+```
+
+### ✅ 제 2장 결과
+- **최종 상태:** `62e4011 (HEAD -> main, origin/main)` 로컬 = 원격 ✅
+- **Remote URL:** HTTPS 방식으로 안전하게 재설정 (토큰 제거)
+- **교훈:** SSH 키는 미리 등록해두자! PAT는 절대 채팅에 붙여넣지 말자!
+
+---
+
+## 🔖 제 3장: 건강검진의 날 - 프로젝트 현황 전체 점검
+
+> 📅 **기록일:** 2026년 3월 23일 (월) 02:37 ~ 02:40
+> 👨‍🏫 **담당 에이전트:** Dodari (지휘), Kodari (기록)
+
+### 🎓 교수님의 한 마디
+> *"코드를 무조건 짜기 전에 '지금 어디 와 있는가?'를 파악하는 것이 시니어 개발자의 습관입니다. 마치 의사가 진단을 먼저 하듯이요!"*
+
+---
+
+### 📋 진단 내역 (체크리스트)
+
+```bash
+git status          # 현재 git 상태
+git log --oneline   # 최근 커밋 기록
+git remote -v       # 원격 저장소 주소
+ls -la              # 폴더 구조  
+cat 명령.md         # 이전 작업 기록
+```
+
+### 📊 진단 결과
+
+| 항목 | 상태 | 비고 |
+|------|------|------|
+| Git 동기화 | ✅ 완료 | `origin/main` 일치 |
+| 프로젝트 구조 | ✅ 정상 | client/server/shared 분리 |
+| 미완료 작업 | ⚠️ 4개 | 아래 목록 참조 |
+| TypeScript 오류 | ❌ 있음 | `tsc_full_errors.log` 30KB |
+
+### 📌 미완료 작업 로드맵 (발견)
+
+```
+1. 🔴 GPS 정밀 좌표 업데이트 (server/scripts/update_gps_precision.ts)
+2. 🔴 오프라인 PWA TTS 다국어 테스트 (ko/en/zh)
+3. 🔴 npm run build 빌드 최적화
+4. 🔴 마케팅 기술서 수익 모델 보완
+5. 🟡 StartupDialog 리팩토링 (태국어 추가)
+```
+
+---
+
+## 🔖 제 4장: 글로벌 환영 인사 - 랜딩 페이지에 태국어(🇹🇭 ไทย) 추가
+
+> 📅 **기록일:** 2026년 3월 23일 (월) 02:40 ~ 02:47
+> 👨‍🏫 **담당 에이전트:** Designer Kim (UI), Dodari (지휘)
+
+### 🎓 교수님의 한 마디
+> *"태국은 아시아 크루즈 여행의 핵심 기항지입니다. 방콕, 푸켓, 파타야... 태국 관광객이 앱을 열었을 때 모국어로 환영받는다면 얼마나 감동적일까요? 오늘은 그 '따뜻한 첫 인상'을 코드로 만들어봅시다!"*
+
+---
+
+### 📱 디자인 레퍼런스 (Frame 1: Onboarding)
+
+참조 이미지의 Frame 1을 기반으로 구현했습니다:
+
+```
+┌─────────────────────┐
+│  ① onboarding       │
+│                     │
+│    🟠 [MapPin]      │
+│                     │
+│  WiFi 없어도 OK     │ ← 언어별로 변경
+│                     │
+│  GPS 기반 오디오..  │ ← 설명 텍스트
+│                     │
+│   ● ○ ○            │ ← 진행 도트
+│                     │
+│  [   다음 ➔   ]    │ ← 버튼
+│     건너뛰기        │
+└─────────────────────┘
+```
+
+### 🛠️ 수정 파일 1: `StartupDialog.tsx` - 핵심 수정
+
+**핵심 아이디어: `getLangText()` 헬퍼 함수 도입**
+
+기존 코드의 문제점:
+```tsx
+// ❌ 나쁜 패턴: 언어가 늘어날수록 if-else가 계속 길어짐
+{selectedLanguage === 'ko' ? 'WiFi 없어도 OK' : 'WiFi Free Guide'}
+```
+
+개선된 코드:
+```tsx
+// ✅ 좋은 패턴: 헬퍼 함수로 언어 텍스트를 한 곳에서 관리
+function getLangText(lang: string, ko: string, en: string, th: string): string {
+  if (lang === 'ko') return ko;   // 🇰🇷 한국어
+  if (lang === 'th') return th;   // 🇹🇭 태국어
+  return en;                       // 🌍 기본값: 영어
+}
+
+// 사용 예시
+{getLangText(
+  selectedLanguage,
+  'WiFi 없어도 OK',        // 🇰🇷 한국어
+  'WiFi Free Guide',        // 🇬🇧 영어  
+  'ไม่ต้องใช้ WiFi ก็ได้'  // 🇹🇭 태국어: "WiFi 없어도 돼요"
+)}
+```
+
+> 💡 **학생 포인트:** 이런 패턴을 **"단일 책임 원칙(SRP)"**이라고 합니다. 언어 텍스트 관리는 `getLangText` 하나만 책임지게 하는 것이죠. 나중에 일본어를 추가할 때도 이 함수만 수정하면 됩니다!
+
+**추가된 태국어 텍스트 전체:**
+
+| 위치 | 태국어(ไทย) | 한국어 의미 |
+|------|------------|------------|
+| 제목 | `ไม่ต้องใช้ WiFi ก็ได้` | WiFi 없어도 돼요 |
+| 설명 1줄 | `คู่มือเสียง GPS อัตโนมัติ` | GPS 음성 가이드 자동 |
+| 설명 2줄 | `เล่นอัตโนมัติที่ท่าเรือทั่วโลก` | 전 세계 항구에서 자동 재생 |
+| 설명 3줄 | `โดยไม่ต้องใช้อินเทอร์เน็ต` | 인터넷 없이도 |
+| 다음 버튼 | `ถัดไป ➔` | 다음 |
+| 건너뛰기 | `ข้ามไป` | 건너뛰기 |
+
+---
+
+### 🛠️ 수정 파일 2: `LanguageContext.tsx` - 자동 언어 감지 강화
+
+**기존 코드의 한계:**
+```tsx
+// ❌ ko 아니면 무조건 en으로 처리 (태국 사용자도 영어로 시작됨)
+const initialLang = browserLang === 'ko' ? 'ko' : 'en';
+```
+
+**개선된 코드:**
+```tsx
+// ✅ 7개 언어 자동 감지로 확장
+const langPrefix = browserLang.split('-')[0];
+let initialLang = 'en';                              // 기본값
+
+if (langPrefix === 'ko') initialLang = 'ko';         // 🇰🇷 한국어
+else if (langPrefix === 'th') initialLang = 'th';    // 🇹🇭 태국어 (신규!)
+else if (langPrefix === 'ja') initialLang = 'ja';    // 🇯🇵 일본어
+else if (langPrefix === 'zh') initialLang = 'zh-CN'; // 🇨🇳 중국어 간체
+else if (langPrefix === 'vi') initialLang = 'vi';    // 🇻🇳 베트남어
+else if (langPrefix === 'id') initialLang = 'id';    // 🇮🇩 인도네시아어
+```
+
+> 💡 **학생 포인트:** `navigator.language`는 브라우저의 언어 설정을 반환합니다. 태국 사용자 기기는 `'th-TH'`를 반환하고, `split('-')[0]`으로 `'th'`만 추출합니다. 이제 태국 사용자는 앱을 켜자마자 태국어 화면을 보게 됩니다!
+
+### ✅ 제 4장 결과
+
+```
+변경 파일: 2개
+- client/src/components/StartupDialog.tsx  ← Frame 1 태국어 완성
+- client/src/context/LanguageContext.tsx   ← 7개 언어 자동 감지
+```
+
+---
+
+## 🔖 제 5장: GPS 스크립트 오류 진단 - DB 연결의 벽
+
+> 📅 **기록일:** 2026년 3월 23일 (월) 02:40 ~ 진행 중
+> 👨‍🏫 **담당 에이전트:** Query Master (데이터), Bug Doctor (진단)
+
+### 🎓 교수님의 한 마디
+> *"스크립트가 실패했다고 당황하지 마세요! 오류 메시지는 시스템이 우리에게 보내는 '구조 신호'입니다. 침착하게 읽고 원인을 찾아봅시다."*
+
+---
+
+### 🔍 오류 상황
+
+```bash
+npx tsx server/scripts/update_gps_precision.ts
+# Exit code: 1 (실패)
+```
+
+**예상 원인:**
+```
+┌─────────────────────────────────────┐
+│  가능한 원인들                       │
+│                                     │
+│  1. DB_URL 환경 변수 미설정 (.env)  │
+│  2. NeonDB 연결 타임아웃             │
+│  3. DB 테이블 스키마 불일치          │
+│  4. TypeScript 컴파일 오류           │
+└─────────────────────────────────────┘
+```
+
+> 💡 **학생 포인트:** 서버 스크립트는 항상 `.env` 파일의 환경 변수를 필요로 합니다. 특히 DB 연결 문자열(`DATABASE_URL`)이 없으면 바로 실패합니다. 이는 마치 열쇠 없이 금고를 열려는 것과 같아요!
+
+### 📌 다음 진단 단계
+- [ ] `.env` 파일 `DATABASE_URL` 확인
+- [ ] `npx tsx server/scripts/update_gps_precision.ts 2>&1` 전체 오류 메시지 분석
+- [ ] NeonDB 콘솔에서 연결 상태 확인
+
+---
+
+## 📈 전체 프로젝트 진행 현황 (2026-03-23 기준)
+
+```
+📦 GPS Cruise Tour Audio Guide (No-WiFi)
+├── ✅ 소셜 기능 (Likes/Follows)         [제 1장 완료]
+├── ✅ Git 원격 저장소 설정              [제 2장 완료]
+├── ✅ 랜딩 페이지 태국어(🇹🇭) 추가     [제 4장 완료]
+├── ⏳ GPS 정밀 좌표 업데이트            [제 5장 진행 중]
+├── ⬜ PWA TTS 다국어 테스트            [미착수]
+├── ⬜ npm run build 최적화             [미착수]
+└── ⬜ 마케팅 기술서 보완               [미착수]
+```
+
+---
+*(교수님의 응원: "여러분은 아주 잘 하고 있어요! 실수와 오류가 있어도 괜찮습니다. 중요한 건 기록하고, 분석하고, 더 나은 방법을 찾아가는 과정입니다. 계속 전진합시다! 🚀")*

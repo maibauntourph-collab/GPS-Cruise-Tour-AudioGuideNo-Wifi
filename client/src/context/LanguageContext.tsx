@@ -26,9 +26,29 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const [language, setLanguage] = useState<Language>('en');
 
     useEffect(() => {
-        // [적요] 기기 언어 자동 감지 로직
-        const browserLang = navigator.language.split('-')[0];
-        const initialLang: Language = browserLang === 'ko' ? 'ko' : 'en';
+        /**
+         * [교수님 노트: 기기 언어 자동 감지 로직 - 2026-03-23 업데이트]
+         * navigator.language는 브라우저의 현재 언어 설정을 반환합니다.
+         * 예) 'th-TH' → split('-')[0] → 'th' (태국어)
+         *     'ko-KR' → 'ko' (한국어)
+         *     'zh-CN' → 'zh' → 중국어는 복잡하므로 별도 처리
+         *
+         * [수정 적요] 태국어(th) 자동 감지 추가 → 태국 사용자는 처음부터 태국어로 시작
+         */
+        const browserLang = navigator.language.toLowerCase();
+        const langPrefix = browserLang.split('-')[0];
+
+        // 지원 언어 자동 매핑: 감지된 언어 → 앱 언어 코드
+        let initialLang: Language = 'en'; // 기본값: 영어
+        if (langPrefix === 'ko') initialLang = 'ko';           // 🇰🇷 한국어
+        else if (langPrefix === 'th') initialLang = 'th';       // 🇹🇭 태국어 (신규 추가!)
+        else if (langPrefix === 'ja') initialLang = 'ja';       // 🇯🇵 일본어
+        else if (browserLang.startsWith('zh-tw') || browserLang.startsWith('zh-hk'))
+            initialLang = 'zh-TW';                              // 🇹🇼 번체 중국어
+        else if (langPrefix === 'zh') initialLang = 'zh-CN';   // 🇨🇳 간체 중국어
+        else if (langPrefix === 'vi') initialLang = 'vi';       // 🇻🇳 베트남어
+        else if (langPrefix === 'id') initialLang = 'id';       // 🇮🇩 인도네시아어
+
         setLanguage(initialLang);
         console.log(`🌐 [LanguageContext] 기기 언어 감지: ${browserLang} -> 적용: ${initialLang}`);
     }, []);
