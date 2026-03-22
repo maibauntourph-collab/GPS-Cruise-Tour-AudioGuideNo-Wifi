@@ -1,6 +1,6 @@
-import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio, type User, type InsertUser, type UserIdentity, type InsertUserIdentity, type SavedRoute, type InsertSavedRoute, type RoutePhoto, type InsertRoutePhoto, type DbLandmarkGuide, type InsertLandmarkGuide } from "@shared/schema";
+import { type Landmark, type City, type VisitedLandmark, type InsertVisitedLandmark, type LandmarkAudio, type InsertLandmarkAudio, type User, type InsertUser, type UserIdentity, type InsertUserIdentity, type SavedRoute, type InsertSavedRoute, type RoutePhoto, type InsertRoutePhoto, type DbLandmarkGuide, type InsertLandmarkGuide, type Like, type InsertLike, type Follow, type InsertFollow } from "@shared/schema";
 import { db } from "./db";
-import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, cities as citiesTable, users, userIdentities, savedRoutes, routePhotos } from "@shared/schema";
+import { visitedLandmarks, landmarkAudio as landmarkAudioTable, landmarks as landmarksTable, cities as citiesTable, users, userIdentities, savedRoutes, routePhotos, likes, follows } from "@shared/schema";
 import { eq, count, and, sql, notInArray, desc } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
 import { CITIES } from './data/cities';
@@ -60,6 +60,13 @@ export interface IStorage {
   // Guide methods
   getLandmarkGuides(landmarkId: string): Promise<DbLandmarkGuide[]>;
   createLandmarkGuide(guide: InsertLandmarkGuide): Promise<DbLandmarkGuide>;
+  // [NEW] Likes & Follows methods
+  getLikes(userId: string): Promise<Like[]>;
+  addLike(like: InsertLike): Promise<Like>;
+  removeLike(userId: string, targetId: string, targetType: string): Promise<void>;
+  getFollows(followerId: string): Promise<Follow[]>;
+  addFollow(follow: InsertFollow): Promise<Follow>;
+  removeFollow(followerId: string, followingId: string): Promise<void>;
   // [NEW] Site Settings methods
   getSiteSetting(key: string): Promise<string | undefined>;
   updateSiteSetting(key: string, value: string): Promise<void>;
@@ -738,6 +745,94 @@ export class MemStorage implements IStorage {
       return newGuide;
     } catch (error) {
       console.error('[AI DB Manager] DB create landmark guide failed:', error);
+      throw error;
+    }
+  }
+
+  // [NEW] Likes & Follows Implementation
+  async getLikes(userId: string): Promise<Like[]> {
+    try {
+      return await db.select().from(likes).where(eq(likes.userId, userId));
+    } catch (error) {
+      console.warn('[Storage] DB fetch failed for likes:', error);
+      return [];
+    }
+  }
+
+  async addLike(like: InsertLike): Promise<Like> {
+    try {
+      const [newLike] = await db.insert(likes).values(like).onConflictDoNothing().returning();
+      if (!newLike) {
+        // If it already exists, return the existing one
+        const [existing] = await db.select().from(likes).where(
+          and(
+            eq(likes.userId, like.userId),
+            eq(likes.targetId, like.targetId),
+            eq(likes.targetType, like.targetType)
+          )
+        );
+        return existing;
+      }
+      return newLike;
+    } catch (error) {
+      console.error('[Storage] DB create like failed:', error);
+      throw error;
+    }
+  }
+
+  async removeLike(userId: string, targetId: string, targetType: string): Promise<void> {
+    try {
+      await db.delete(likes).where(
+        and(
+          eq(likes.userId, userId),
+          eq(likes.targetId, targetId),
+          eq(likes.targetType, targetType)
+        )
+      );
+    } catch (error) {
+      console.error('[Storage] DB delete like failed:', error);
+      throw error;
+    }
+  }
+
+  async getFollows(followerId: string): Promise<Follow[]> {
+    try {
+      return await db.select().from(follows).where(eq(follows.followerId, followerId));
+    } catch (error) {
+      console.warn('[Storage] DB fetch failed for follows:', error);
+      return [];
+    }
+  }
+
+  async addFollow(follow: InsertFollow): Promise<Follow> {
+    try {
+      const [newFollow] = await db.insert(follows).values(follow).onConflictDoNothing().returning();
+      if (!newFollow) {
+        const [existing] = await db.select().from(follows).where(
+          and(
+            eq(follows.followerId, follow.followerId),
+            eq(follows.followingId, follow.followingId)
+          )
+        );
+        return existing;
+      }
+      return newFollow;
+    } catch (error) {
+      console.error('[Storage] DB create follow failed:', error);
+      throw error;
+    }
+  }
+
+  async removeFollow(followerId: string, followingId: string): Promise<void> {
+    try {
+      await db.delete(follows).where(
+        and(
+          eq(follows.followerId, followerId),
+          eq(follows.followingId, followingId)
+        )
+      );
+    } catch (error) {
+      console.error('[Storage] DB delete follow failed:', error);
       throw error;
     }
   }

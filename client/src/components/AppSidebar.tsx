@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +13,7 @@ import { Card } from '@/components/ui/card';
 import { CitySelector } from './CitySelector';
 import { LanguageSelector } from './LanguageSelector';
 import { ProgressStats } from './ProgressStats';
-import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, Route, X, MapPin, Settings } from 'lucide-react';
+import { Volume2, VolumeX, WifiOff, Wifi, Navigation as NavIcon, Route, X, MapPin, Settings, Heart, Users } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -162,6 +163,30 @@ export function AppSidebar({
                     <SidebarMenuButton onClick={onOpenSettings} data-testid="button-open-settings">
                       <Settings className="w-4 h-4" />
                       <span>{t('settings', selectedLanguage)}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+
+            <SidebarGroup>
+              <SidebarGroupLabel>{selectedLanguage === 'ko' ? '나의 활동' : 'My Activity'}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link href="/likes">
+                        <Heart className="w-4 h-4" />
+                        <span>{selectedLanguage === 'ko' ? '좋아요' : 'Likes'}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link href="/follows">
+                        <Users className="w-4 h-4" />
+                        <span>{selectedLanguage === 'ko' ? '팔로잉' : 'Following'}</span>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>

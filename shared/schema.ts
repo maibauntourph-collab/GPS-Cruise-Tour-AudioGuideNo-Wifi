@@ -62,9 +62,12 @@ export const citySchema = z.object({
   lat: z.number(),
   lng: z.number(),
   zoom: z.number().default(14),
-  cruisePort: cruisePortSchema.optional(), // Optional cruise port information
-  defaultGuideId: z.string().optional(), // Default guide (creator) for this city
-  remarks: z.string().optional(), // [NEW] Country/City specific remarks
+  cruisePort: cruisePortSchema.nullable().optional(), // Optional cruise port information
+  defaultGuideId: z.string().nullable().optional(), // Default guide (creator) for this city
+  remarks: z.string().nullable().optional(), // [NEW] Country/City specific remarks
+  landingContent: z.any().nullable().optional(), // landing visuals
+  createdAt: z.union([z.string(), z.date()]).optional(),
+  updatedAt: z.union([z.string(), z.date()]).optional(),
 });
 
 export type City = z.infer<typeof citySchema>;
@@ -154,6 +157,27 @@ export const waypointSchema = z.object({
 export type Waypoint = z.infer<typeof waypointSchema>;
 
 // Drizzle ORM Tables for Database
+
+// Follow schema
+export const follows = pgTable("follows", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  followerId: varchar("follower_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  followingId: varchar("following_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, (table) => ({
+  uniqueFollowerFollowing: unique().on(table.followerId, table.followingId),
+}));
+
+// Like schema
+export const likes = pgTable("likes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  targetId: varchar("target_id").notNull(), // landmarkId or routeId
+  targetType: varchar("target_type").notNull(), // 'landmark' or 'route'
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, (table) => ({
+  uniqueUserTarget: unique().on(table.userId, table.targetId, table.targetType),
+}));
 
 /**
  * [연구소장 노트: 도시 데이터 설계]
@@ -744,6 +768,47 @@ export type Transaction = typeof transactions.$inferSelect;
 export type Settlement = typeof settlements.$inferSelect;
 export type MarketingContent = typeof marketingContents.$inferSelect;
 export type DbLandmarkGuide = typeof landmarkGuides.$inferSelect;
+
+// [NEW] Likes & Follows Schemas
+export const insertLikeSchema = createInsertSchema(likes).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertFollowSchema = createInsertSchema(follows).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertLike = z.infer<typeof insertLikeSchema>;
+export type InsertFollow = z.infer<typeof insertFollowSchema>;
+export type Like = typeof likes.$inferSelect;
+export type Follow = typeof follows.$inferSelect;
+
+// [NEW] Likes & Follows Relations
+export const likesRelations = relations(likes, ({ one }) => ({
+  user: one(users, {
+    fields: [likes.userId],
+    references: [users.id],
+  }),
+}));
+
+export const followsRelations = relations(follows, ({ one }) => ({
+  follower: one(users, {
+    fields: [follows.followerId],
+    references: [users.id],
+    relationName: "following",
+  }),
+  following: one(users, {
+    fields: [follows.followingId],
+    references: [users.id],
+    relationName: "followers",
+  }),
+}));
+
+// Update Users relations to include likes and follows
+// Note: We need to redefine usersRelations to include these new relations if we want two-way type safety,
+// but for now, defining the one-way relation from the child table is sufficient for Drizzle.
 
 export type DbCityBackup = typeof citiesBackup.$inferSelect;
 export type DbLandmarkBackup = typeof landmarksBackup.$inferSelect;

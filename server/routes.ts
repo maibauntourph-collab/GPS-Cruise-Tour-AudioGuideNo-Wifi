@@ -2,7 +2,7 @@
 import { Hono } from "hono";
 import { type Server } from "node:http";
 import { storage } from "./storage";
-import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats } from "@shared/schema";
+import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats, insertLikeSchema, insertFollowSchema } from "@shared/schema";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { requireAuth, requireRole } from "./auth";
@@ -1215,6 +1215,104 @@ export function registerRoutes(app: Hono<any>) {
       return c.json({ error: errorMessage }, 500);
     }
   });
+
+  // [NEW] Likes Routes
+  const likesRoute = new Hono();
+  
+  likesRoute.get("/", async (c) => {
+    try {
+      const userId = (c as any).get('session')?.get?.("userId");
+      if (!userId) return c.json({ error: "Auth required" }, 401);
+      
+      const likes = await storage.getLikes(userId);
+      return c.json(likes);
+    } catch (e) {
+      return c.json({ error: "Failed to fetch likes" }, 500);
+    }
+  });
+
+  likesRoute.post("/", async (c) => {
+    try {
+      const userId = (c as any).get('session')?.get?.("userId");
+      if (!userId) return c.json({ error: "Auth required" }, 401);
+
+      const body = await c.req.json();
+      // Enforce userId from session
+      const likeData = { ...body, userId };
+      
+      const newLike = await storage.addLike(likeData);
+      return c.json(newLike, 201);
+    } catch (e) {
+      console.error(e);
+      return c.json({ error: "Failed to create like" }, 500);
+    }
+  });
+
+  likesRoute.delete("/", async (c) => {
+    try {
+      const userId = (c as any).get('session')?.get?.("userId");
+      if (!userId) return c.json({ error: "Auth required" }, 401);
+
+      const targetId = c.req.query("targetId");
+      const targetType = c.req.query("targetType");
+
+      if (!targetId || !targetType) {
+        return c.json({ error: "targetId and targetType are required" }, 400);
+      }
+
+      await storage.removeLike(userId, targetId, targetType);
+      return c.json({ success: true });
+    } catch (e) {
+      return c.json({ error: "Failed to remove like" }, 500);
+    }
+  });
+
+  app.route("/api/likes", likesRoute);
+
+  // [NEW] Follows Routes
+  const followsRoute = new Hono();
+
+  followsRoute.get("/", async (c) => {
+    try {
+      const userId = (c as any).get('session')?.get?.("userId");
+      if (!userId) return c.json({ error: "Auth required" }, 401);
+
+      const follows = await storage.getFollows(userId);
+      return c.json(follows);
+    } catch (e) {
+      return c.json({ error: "Failed to fetch follows" }, 500);
+    }
+  });
+
+  followsRoute.post("/", async (c) => {
+    try {
+      const userId = (c as any).get('session')?.get?.("userId");
+      if (!userId) return c.json({ error: "Auth required" }, 401);
+
+      const body = await c.req.json();
+      const followData = { ...body, followerId: userId };
+
+      const newFollow = await storage.addFollow(followData);
+      return c.json(newFollow, 201);
+    } catch (e) {
+      return c.json({ error: "Failed to create follow" }, 500);
+    }
+  });
+
+  followsRoute.delete("/:followingId", async (c) => {
+    try {
+      const userId = (c as any).get('session')?.get?.("userId");
+      if (!userId) return c.json({ error: "Auth required" }, 401);
+
+      const followingId = c.req.param("followingId");
+      await storage.removeFollow(userId, followingId);
+      return c.json({ success: true });
+    } catch (e) {
+      return c.json({ error: "Failed to remove follow" }, 500);
+    }
+  });
+
+  app.route("/api/follows", followsRoute);
 
   // Static files for uploads (if not handled by Vite/Nginx)
   // In Hono node-server, we can use serveStatic.

@@ -74,12 +74,14 @@ export default function LandmarkDetailDialog({
     return guides.find(g => g.id === selectedGuideId) || null;
   }, [guides, selectedGuideId]);
 
-  const currentDetailedDescription = useMemo(() => {
+  const currentDetailedDescriptionFallback = useMemo(() => {
     if (selectedGuide) {
       return getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription');
     }
     return getTranslatedContent(landmark as any, selectedLanguage, 'detailedDescription');
   }, [landmark, selectedGuide, selectedLanguage]);
+
+  const currentDetailedDescription = useLiveTranslation(currentDetailedDescriptionFallback, selectedLanguage);
 
   // Handle dialog close - stop all audio first
   const handleDialogClose = () => {
@@ -115,7 +117,7 @@ export default function LandmarkDetailDialog({
     }
 
     const textToPlay = audioContentType === 'summary'
-      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : getTranslatedContent(landmark, selectedLanguage, 'description'))
+      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : translatedDesc)
       : currentDetailedDescription;
 
     if (!textToPlay) return;
@@ -197,11 +199,11 @@ export default function LandmarkDetailDialog({
 
   const activeSentences = useMemo(() => {
     const text = audioContentType === 'summary'
-      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : getTranslatedContent(landmark, selectedLanguage, 'description'))
+      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : translatedDesc)
       : currentDetailedDescription;
     if (!text) return [];
     return AudioService.splitIntoSentences(text);
-  }, [landmark, selectedGuide, selectedLanguage, audioContentType, currentDetailedDescription]);
+  }, [landmark, selectedGuide, selectedLanguage, audioContentType, currentDetailedDescription, translatedDesc]);
 
   if (!landmark) return null;
 
@@ -397,7 +399,7 @@ export default function LandmarkDetailDialog({
                         );
                       })
                     ) : (
-                      getTranslatedContent(landmark, selectedLanguage, 'detailedDescription')
+                      currentDetailedDescription
                     )}
                   </div>
                 </div>

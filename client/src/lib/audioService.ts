@@ -172,6 +172,8 @@ export class AudioService {
       'pt': 'pt-PT',
       'ru': 'ru-RU',
       'zh': 'zh-CN',
+      'zh-CN': 'zh-CN',
+      'zh-TW': 'zh-TW',
       'ja': 'ja-JP',
       'ko': 'ko-KR',
       'ar': 'ar-SA',
@@ -190,7 +192,9 @@ export class AudioService {
       'id': 'id-ID'
     };
 
-    return langMap[language] || 'en-US';
+    if (langMap[language]) return langMap[language];
+    if (language.includes('-')) return language;
+    return 'en-US';
   }
 
   // Get all possible language codes for broader voice selection

@@ -21,6 +21,9 @@ const ProductList = lazy(() => import("./pages/ProductList"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 import DesignPreview from "@/pages/DesignPreview";
 
+import Likes from "@/pages/Likes";
+import Follows from "@/pages/Follows";
+
 // Loading fallback component
 function PageLoader() {
   return (
@@ -49,6 +52,8 @@ function Router() {
         <Route path="/products" component={ProductList} />
         <Route path="/product/:id" component={ProductDetail} />
         <Route path="/design-preview" component={DesignPreview} />
+        <Route path="/likes" component={Likes} />
+        <Route path="/follows" component={Follows} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

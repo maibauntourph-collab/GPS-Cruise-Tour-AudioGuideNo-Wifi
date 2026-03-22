@@ -48,8 +48,11 @@ import {
   Info,
   Type,
   Settings,
-  Wand2
+  Wand2,
+  Palette,
+  Layout
 } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 import { AIDiscoveryDialog } from '@/components/AIDiscoveryDialog';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -271,7 +274,7 @@ export default function Admin() {
   });
 
   const createCityMutation = useMutation({
-    mutationFn: (data: Partial<DbCity>) => apiRequest('POST', '/api/admin/cities', data),
+    mutationFn: (data: Partial<City>) => apiRequest('POST', '/api/admin/cities', data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/stats'] });
@@ -282,7 +285,7 @@ export default function Admin() {
   });
 
   const updateCityMutation = useMutation({
-    mutationFn: (data: Partial<DbCity>) => apiRequest('PUT', `/api/admin/cities/${data.id}`, data),
+    mutationFn: (data: Partial<City>) => apiRequest('PUT', `/api/admin/cities/${data.id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
       setEditingCity(null);
@@ -303,7 +306,7 @@ export default function Admin() {
   });
 
   const createLandmarkMutation = useMutation({
-    mutationFn: (data: Partial<DbLandmark>) => apiRequest('POST', '/api/admin/landmarks', data),
+    mutationFn: (data: Partial<Landmark>) => apiRequest('POST', '/api/admin/landmarks', data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/admin/landmarks'] });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/stats'] });
@@ -314,7 +317,7 @@ export default function Admin() {
   });
 
   const updateLandmarkMutation = useMutation({
-    mutationFn: (data: Partial<DbLandmark>) => apiRequest('PUT', `/api/admin/landmarks/${data.id}`, data),
+    mutationFn: (data: Partial<Landmark>) => apiRequest('PUT', `/api/admin/landmarks/${data.id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/admin/landmarks'] });
       setEditingLandmark(null);
@@ -1273,8 +1276,8 @@ export default function Admin() {
 interface CityFormDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  city: DbCity | null;
-  onSave: (data: Partial<DbCity>) => void;
+  city: City | null;
+  onSave: (data: Partial<City>) => void;
   isPending: boolean;
 }
 
@@ -1446,9 +1449,9 @@ function CityFormDialog({ isOpen, onClose, city, onSave, isPending }: CityFormDi
 interface LandmarkFormDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  landmark: DbLandmark | null;
-  cities: DbCity[];
-  onSave: (data: Partial<DbLandmark>) => void;
+  landmark: Landmark | null;
+  cities: City[];
+  onSave: (data: Partial<Landmark>) => void;
   isPending: boolean;
 }
 
@@ -1965,7 +1968,7 @@ interface AudioStatusResponse {
   landmarks: AudioStatusItem[];
 }
 
-function AudioGenerationTab({ cities, landmarks }: { cities: DbCity[]; landmarks: DbLandmark[] }) {
+function AudioGenerationTab({ cities, landmarks }: { cities: City[]; landmarks: Landmark[] }) {
   const { toast } = useToast();
   const [selectedCity, setSelectedCity] = useState<string>('all');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('ko');
