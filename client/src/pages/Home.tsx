@@ -101,9 +101,50 @@ import AIRecommendDialog from '@/components/AIRecommendDialog';
 import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import { CitySelector } from '@/components/CitySelector';
 
-import { LANDING_DATA } from '@/lib/landingData';
-import { CitySelectTab } from '@/components/CitySelectTab';
-import { SubscriptionPlan } from '@/components/SubscriptionPlan';
+// Landing Data fallback if schema doesn't export it
+const LANDING_DATA: Record<string, any> = {
+  'seoul': {
+    'ko': { title: '역동적인 도시, 서울', subTitle: '과거와 미래가 공존하는 특별한 여정', heroImage: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80' },
+    'en': { title: 'Dynamic Seoul', subTitle: 'A journey where past and future coexist', heroImage: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80' },
+    'zh-CN': { title: '动态首尔', subTitle: '过去与未来共存的特别旅程', heroImage: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80' },
+    'zh-TW': { title: '動態首爾', subTitle: '過去與未來共存의 특별한 旅程', heroImage: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80' }
+  },
+  'venice': {
+    'ko': { title: '물 위의 도시, 베네치아', subTitle: '곤돌라와 함께하는 낭만 여행', heroImage: 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?w=400&q=70' },
+    'en': { title: 'Venice, City of Water', subTitle: 'Romantic journey with gondolas', heroImage: 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?w=400&q=70' }
+  },
+  'rome': {
+    'ko': { title: '영원한 도시, 로마', subTitle: '고대 로마의 숨결을 느끼다', heroImage: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70' },
+    'en': { title: 'Rome, The Eternal City', subTitle: 'Feel the breath of Ancient Rome', heroImage: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70' }
+  },
+  'paris': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&q=70' }
+  },
+  'london': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&q=70' }
+  },
+  'barcelona': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400&q=70' }
+  },
+  'penang': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1596701540321-7299723bd739?w=400&q=70' }
+  },
+  'singapore': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=400&q=70' }
+  },
+  'cebu': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=400&q=70' }
+  },
+  'naples': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1588614959060-4d144f28b207?w=400&q=70' }
+  },
+  'kuala-lumpur': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1596422846543-74c6fc1e4b6e?w=400&q=70' }
+  },
+  'phuket': {
+    'en': { heroImage: 'https://images.unsplash.com/photo-1589394815804-964ce0ff96c7?w=400&q=70' }
+  }
+};
 import LoginDialog from '@/components/LoginDialog';
 import SaveRouteDialog from '@/components/SaveRouteDialog';
 import OfflineIndicator from '@/components/OfflineIndicator';
@@ -1117,152 +1158,7 @@ export default function Home() {
 
   return (
     <TooltipProvider>
-        {/* Main Content Area based on Tab Selector */}
-        <div className="flex-1 overflow-y-auto relative">
-          <AnimatePresence mode="wait">
-            {mainTab === 'city' && (
-              <motion.div
-                key="city-tab"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="h-full"
-              >
-                <CitySelectTab
-                  cities={cities}
-                  selectedCityId={selectedCityId}
-                  onCityChange={handleCityChange}
-                  selectedLanguage={selectedLanguage}
-                  onLanguageChange={setSelectedLanguage}
-                  onTransitionToList={() => {
-                    setMainTab('map');
-                    transitionTo('list');
-                  }}
-                />
-              </motion.div>
-            )}
-
-            {mainTab === 'map' && (
-              <motion.div
-                key="map-tab"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="h-full relative overflow-hidden"
-              >
-                <div className="h-full w-full">
-                  <MapView
-                    landmarks={landmarks}
-                    onLandmarkSelect={handleLandmarkSelect}
-                    selectedLandmarkId={selectedLandmark?.id}
-                    userPosition={effectivePosition}
-                    isLoading={isLoading}
-                    city={selectedCity}
-                    activeRoute={activeRoute}
-                    tourRouteInfo={tourRouteInfo}
-                    tourStops={tourStops}
-                    appMode={appMode}
-                    isSimulationMode={isSimulationMode}
-                    simulatedPosition={simulatedPosition}
-                  />
-                  
-                  {/* Floating Elements on Map Tab */}
-                  <UnifiedFloatingCard
-                    appMode={appMode}
-                    selectedLandmark={selectedLandmark}
-                    landmarks={landmarks}
-                    onClose={() => transitionTo('map')}
-                    onSelectLandmark={handleLandmarkSelect}
-                    selectedCity={selectedCity}
-                    availableCities={cities}
-                    onCityChange={handleCityChange}
-                    onStartNavigation={handleStartNavigation}
-                    onSimulate={handleSimulate}
-                    isSimulationMode={isSimulationMode}
-                    simulationStepIndex={simulationStepIndex}
-                    citySearchQuery={locationSearchQuery}
-                    onSearchChange={setLocationSearchQuery}
-                    onClearTour={handleClearTour}
-                    tourStops={tourStops}
-                    onUpdateTourStops={setTourStops}
-                    tourRouteInfo={tourRouteInfo}
-                    tourTimePerStop={tourTimePerStop}
-                    onTimePerStopChange={setTourTimePerStop}
-                    onPlayStop={handlePlayLandmark}
-                    playingLandmarkId={playingLandmarkId}
-                    isSimulationPaused={isSimulationPaused}
-                    onToggleSimulationPause={setIsSimulationPaused}
-                    simulationSpeed={simulationSpeed}
-                    onSimulationSpeedChange={setSimulationSpeed}
-                  />
-
-                  {/* Simulation Bar Overlay */}
-                  {isSimulationMode && (
-                    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[2000]">
-                       {/* (Simulation control logic omitted for brevity, keeping existing if needed) */}
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            )}
-
-            {mainTab === 'plan' && (
-              <motion.div
-                key="plan-tab"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                className="h-full"
-              >
-                <SubscriptionPlan 
-                  onBack={() => setMainTab('city')}
-                  selectedLanguage={selectedLanguage}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Bottom Navigation Bar - 디자인 프레임워크 반영 */}
-        <div className="h-[80px] bg-white border-t border-slate-100 flex items-center justify-around px-6 pb-2 safe-area-bottom z-[3000]">
-          <button 
-            onClick={() => setMainTab('city')}
-            className={`flex flex-col items-center gap-1 transition-all ${mainTab === 'city' ? 'text-[#E85D36]' : 'text-slate-300'}`}
-          >
-            <div className={`p-2 rounded-2xl ${mainTab === 'city' ? 'bg-orange-50' : ''}`}>
-              <Ship className={`w-6 h-6 ${mainTab === 'city' ? 'stroke-[2.5]' : ''}`} />
-            </div>
-            <span className="text-[10px] font-black uppercase tracking-tighter">
-              {selectedLanguage === 'ko' ? '도시' : 'City'}
-            </span>
-          </button>
-
-          <button 
-            onClick={() => setMainTab('map')}
-            className={`flex flex-col items-center gap-1 transition-all ${mainTab === 'map' ? 'text-[#E85D36]' : 'text-slate-300'}`}
-          >
-            <div className={`p-2 rounded-2xl ${mainTab === 'map' ? 'bg-orange-50' : ''}`}>
-              <Navigation className={`w-6 h-6 ${mainTab === 'map' ? 'stroke-[2.5]' : ''}`} />
-            </div>
-            <span className="text-[10px] font-black uppercase tracking-tighter">
-              {selectedLanguage === 'ko' ? '지도' : 'Map'}
-            </span>
-          </button>
-
-          <button 
-            onClick={() => setMainTab('plan')}
-            className={`flex flex-col items-center gap-1 transition-all ${mainTab === 'plan' ? 'text-[#E85D36]' : 'text-slate-300'}`}
-          >
-            <div className={`p-2 rounded-2xl ${mainTab === 'plan' ? 'bg-orange-50' : ''}`}>
-              <User className={`w-6 h-6 ${mainTab === 'plan' ? 'stroke-[2.5]' : ''}`} />
-            </div>
-            <span className="text-[10px] font-black uppercase tracking-tighter">
-              {selectedLanguage === 'ko' ? '내 플랜' : 'My Plan'}
-            </span>
-          </button>
-        </div>
-      </div>
-    <div className="flex w-full flex-1 flex-col h-screen overflow-hidden bg-background">
+      <div className="flex w-full flex-1 flex-col h-screen overflow-hidden bg-background">
         {/* Startup Dialog */}
         {/* 
           [교수님 노트: 컴포넌트 간의 대화 - Props Drilling 해결]
@@ -1863,60 +1759,58 @@ export default function Home() {
         />
       </div>
 
-      {/* [Designer Kim] 프리미엄 백그라운드 워터마크 레이어 */ }
-  {
-    watermarkUrl && (
-      <div
-        className="fixed inset-0 pointer-events-none z-[1] overflow-hidden flex items-center justify-center"
-        style={{ mixBlendMode: 'multiply' }}
-      >
-        <img
-          src={watermarkUrl}
-          alt="Site Watermark"
-          className="w-3/4 md:w-1/2 object-contain select-none transition-opacity duration-1000"
-          style={{ opacity: watermarkOpacity }}
-        />
-      </div>
-    )
-  }
-
-  {/* Navigation App Choice */ }
-  <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
-    <AlertDialogContent className="rounded-3xl border-none shadow-2xl bg-white/95 backdrop-blur-xl">
-      <AlertDialogHeader>
-        <AlertDialogTitle className="text-2xl font-black text-slate-800">Navigate Course</AlertDialogTitle>
-        <AlertDialogDescription className="text-slate-500 font-medium">
-          Choose your preferred navigation guide for <b>{pendingLandmark ? getTranslatedContent(pendingLandmark, selectedLanguage, 'name') : ''}</b>.
-        </AlertDialogDescription>
-      </AlertDialogHeader>
-      <div className="grid grid-cols-1 gap-3 py-4">
-        <Button onClick={useInAppNavigation} className="h-14 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg flex items-center justify-between px-6 shadow-lg shadow-indigo-200">
-          <div className="flex items-center gap-3">
-            <AudioLines className="w-6 h-6" />
-            <span>Audio Guide Map</span>
-          </div>
-          <Badge className="bg-white/20 text-white border-none">Best</Badge>
-        </Button>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <Button onClick={openAmap} variant="outline" className="h-14 rounded-2xl border-orange-200 bg-orange-50/30 hover:bg-orange-50 flex items-center gap-2 group transition-all">
-            <MapPin className="w-5 h-5 text-orange-600 group-hover:scale-110 transition-transform" />
-            <span className="font-bold">{selectedLanguage?.startsWith('zh') ? '高德地图 (Amap)' : 'Amap'}</span>
-          </Button>
-          <Button onClick={openGoogleMaps} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-green-600" />
-            <span>Google Maps</span>
-          </Button>
-          <Button onClick={openWaze} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-2">
-            <Navigation className="w-5 h-5 text-sky-500" />
-            <span>Waze</span>
-          </Button>
+      {/* [Designer Kim] 프리미엄 백그라운드 워터마크 레이어 */}
+      {watermarkUrl && (
+        <div
+          className="fixed inset-0 pointer-events-none z-[1] overflow-hidden flex items-center justify-center"
+          style={{ mixBlendMode: 'multiply' }}
+        >
+          <img
+            src={watermarkUrl}
+            alt="Site Watermark"
+            className="w-3/4 md:w-1/2 object-contain select-none transition-opacity duration-1000"
+            style={{ opacity: watermarkOpacity }}
+          />
         </div>
-      </div>
-      <AlertDialogFooter>
-        <Button variant="ghost" onClick={() => setShowDirectionsDialog(false)} className="w-full h-12 rounded-xl text-slate-400 font-bold">Cancel</Button>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
-    </TooltipProvider >
+      )}
+
+      {/* Navigation App Choice */}
+      <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
+        <AlertDialogContent className="rounded-3xl border-none shadow-2xl bg-white/95 backdrop-blur-xl">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-2xl font-black text-slate-800">Navigate Course</AlertDialogTitle>
+            <AlertDialogDescription className="text-slate-500 font-medium">
+              Choose your preferred navigation guide for <b>{pendingLandmark ? getTranslatedContent(pendingLandmark, selectedLanguage, 'name') : ''}</b>.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="grid grid-cols-1 gap-3 py-4">
+            <Button onClick={useInAppNavigation} className="h-14 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg flex items-center justify-between px-6 shadow-lg shadow-indigo-200">
+              <div className="flex items-center gap-3">
+                <AudioLines className="w-6 h-6" />
+                <span>Audio Guide Map</span>
+              </div>
+              <Badge className="bg-white/20 text-white border-none">Best</Badge>
+            </Button>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <Button onClick={openAmap} variant="outline" className="h-14 rounded-2xl border-orange-200 bg-orange-50/30 hover:bg-orange-50 flex items-center gap-2 group transition-all">
+                <MapPin className="w-5 h-5 text-orange-600 group-hover:scale-110 transition-transform" />
+                <span className="font-bold">{selectedLanguage?.startsWith('zh') ? '高德地图 (Amap)' : 'Amap'}</span>
+              </Button>
+              <Button onClick={openGoogleMaps} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-green-600" />
+                <span>Google Maps</span>
+              </Button>
+              <Button onClick={openWaze} variant="outline" className="h-14 rounded-2xl border-slate-200 hover:bg-slate-50 flex items-center gap-2">
+                <Navigation className="w-5 h-5 text-sky-500" />
+                <span>Waze</span>
+              </Button>
+            </div>
+          </div>
+          <AlertDialogFooter>
+            <Button variant="ghost" onClick={() => setShowDirectionsDialog(false)} className="w-full h-12 rounded-xl text-slate-400 font-bold">Cancel</Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </TooltipProvider>
   );
 }
