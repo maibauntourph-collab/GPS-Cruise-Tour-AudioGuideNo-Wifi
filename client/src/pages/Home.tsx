@@ -345,9 +345,16 @@ export default function Home() {
   });
 
   // Dodari Architecture states
-  const [isWelcomeHandled, setIsWelcomeHandled] = useState(false);
-  const [showStartupDialog, setShowStartupDialog] = useState(true); // [교수님 지시] 클래식 랜딩을 위해 항상 켬
+  const [isWelcomeHandled, setIsWelcomeHandled] = useState(false); // [교수님 지석] PWA 온보딩 처리 여부
+  const [showStartupDialog, setShowStartupDialog] = useState(false); // [어벤져스 팀] 온보딩 후에 시작 다이얼로그 노출
   const [isStartupTransitioning, setIsStartupTransitioning] = useState(false);
+
+  // [Dodari Logic] PWA 온보딩이 닫히면(isWelcomeHandled=true) 시작 다이얼로그를 띄웁니다.
+  useEffect(() => {
+    if (isWelcomeHandled) {
+      setShowStartupDialog(true);
+    }
+  }, [isWelcomeHandled]);
   const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
   const [landingCityId, setLandingCityId] = useState<string | null>(null);
   const [hasShownLandingThisSession, setHasShownLandingThisSession] = useState<Set<string>>(new Set());

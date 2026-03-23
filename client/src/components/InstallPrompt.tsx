@@ -278,31 +278,15 @@ export default function InstallPrompt({ selectedLanguage = 'ko', onDownloadClick
     setIsStandalone(checkStandalone);
 
     if (checkStandalone) {
+      if (onClose) onClose();
       return;
     }
 
-    // 🎖️ [Dodari] User Requirement: "Welcome Screen First ALWAYS"
-    // 기존의 localStorage(영구 저장) 로직은 "이미 봤으면 안 뜸"을 유발하므로,
-    // 세션 단위(sessionStorage)로 변경하여 "앱을 켤 때마다 무조건" 뜨도록 수정합니다.
     const hasShownSession = sessionStorage.getItem('pwa-welcome-shown');
 
-    // const hasSeenPrompt = localStorage.getItem('pwa-install-seen');
-    // const dismissedAt = localStorage.getItem('pwa-install-dismissed-at');
-    // const shouldShowAgain = !dismissedAt || (Date.now() - parseInt(dismissedAt)) > 24 * 60 * 60 * 1000;
-
     if (!hasShownSession) {
-      // 🎖️ [Dodari] "무조건 첫 화면" 지침 준수
-      // 주의: 여기서 바로 sessionStorage를 세팅하면 새로고침 시 사라집니다.
-      // 사용자가 "닫기"나 "설치"를 눌렀을 때만 세팅하도록 변경합니다.
       setShowPrompt(true);
     } else {
-      // 🎖️ [Dodari] 이번 세션에서 이미 봤다면 바로 락 해제
-      /* 
-       * [Critical Fix]: If the user refreshed, hasShownSession might be true. 
-       * But if they didn't actually interact, we might want to show it again?
-       * For now, strict session-based: if flag is there, don't show.
-       * The fix is in NOT setting it immediately above.
-       */
       if (onClose) onClose();
     }
 
