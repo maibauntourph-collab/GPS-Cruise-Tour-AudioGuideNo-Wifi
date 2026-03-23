@@ -10,7 +10,7 @@ import app from "./app";
 
 // [적요: @hono/node-server의 serve()는 내부적으로 listen을 자동 호출]
 // port 옵션을 serve()에 직접 전달. 중복 listen 금지!
-const PORT = Number(process.env.PORT) || 5000;
+const PORT = Number(process.env.PORT) || 4000;
 
 // [Fix: Race Condition] 
 // Create server manually to setup Vite BEFORE listening

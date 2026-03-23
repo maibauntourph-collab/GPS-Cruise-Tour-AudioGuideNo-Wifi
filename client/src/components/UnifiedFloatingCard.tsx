@@ -160,6 +160,7 @@ interface UnifiedFloatingCardProps {
   forceShowList?: boolean;
   isCardMinimized?: boolean;
   onToggleMinimized?: () => void;
+  onMinimizeToMenu?: () => void;
 
   // [Marketer Song] 국가별 맞춤 추천을 위한 사용자 국적 코드 (e.g. "US", "JP", "CN", "TW", "KR")
   userRegion?: string;
@@ -240,6 +241,7 @@ export function UnifiedFloatingCard({
   forceShowList = false,
   isCardMinimized = false,
   onToggleMinimized,
+  onMinimizeToMenu,
   onOpenAIRecommend,
   isSimulationPaused = false,
   simulationSpeed = 1,
@@ -902,6 +904,7 @@ export function UnifiedFloatingCard({
         }}
         onNavigate={onNavigate}
         onAddToTour={onAddToTour}
+        onMinimizeToMenu={onMinimizeToMenu}
         isInTour={isInTour}
         selectedLanguage={selectedLanguage}
       />

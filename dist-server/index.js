@@ -1298,6 +1298,7 @@ import { createServer } from "node:http";
 // server/app.ts
 import { Hono as Hono2 } from "hono";
 import { logger } from "hono/logger";
+import { cors } from "hono/cors";
 import { sessionMiddleware, CookieStore } from "hono-sessions";
 
 // server/routes.ts
@@ -24204,7 +24205,7 @@ function requireRole(...roles) {
 
 // server/routes.ts
 init_db();
-import { eq as eq5, desc as desc2, sql as sql5 } from "drizzle-orm";
+import { eq as eq6, desc as desc2, sql as sql5 } from "drizzle-orm";
 
 // server/lib/gemini.ts
 init_env();
@@ -24655,6 +24656,109 @@ ${prompt}`;
 };
 var automationService = new AutomationService();
 
+// server/lib/autoTranslate.ts
+init_openai();
+init_db();
+init_schema();
+import { eq as eq4 } from "drizzle-orm";
+var SUPPORTED_LANGUAGES = {
+  en: "English",
+  ko: "Korean",
+  ja: "Japanese",
+  "zh-CN": "Simplified Chinese",
+  "zh-TW": "Traditional Chinese",
+  th: "Thai",
+  vi: "Vietnamese",
+  id: "Indonesian",
+  es: "Spanish",
+  fr: "French",
+  de: "German",
+  it: "Italian",
+  pt: "Portuguese",
+  ru: "Russian",
+  ar: "Arabic",
+  hi: "Hindi",
+  tr: "Turkish",
+  nl: "Dutch",
+  pl: "Polish",
+  sv: "Swedish",
+  da: "Danish",
+  fi: "Finnish",
+  no: "Norwegian",
+  el: "Greek"
+};
+async function translateToAllLanguages(name, narration, description, detailedDescription) {
+  const openai = getOpenAI();
+  if (!openai) {
+    console.warn("[autoTranslate] OpenAI key not set. Returning English only.");
+    return {
+      en: { name, narration, description, detailedDescription }
+    };
+  }
+  const languageList = Object.entries(SUPPORTED_LANGUAGES).map(([code, langName]) => `"${code}": "${langName}"`).join(", ");
+  const prompt = `
+You are a professional multilingual travel content translator.
+Translate the following landmark information into ALL 24 languages listed below.
+Preserve proper nouns (place names, historical figures, etc.) appropriately for each language.
+Return ONLY valid JSON with no extra text.
+
+Languages to translate into:
+{ ${languageList} }
+
+Source content to translate:
+- name: "${name}"
+- narration: "${narration.substring(0, 1500)}"
+- description: "${description?.substring(0, 500) || ""}"
+- detailedDescription: "${detailedDescription?.substring(0, 800) || ""}"
+
+Return format (JSON object with language codes as keys):
+{
+  "en": { "name": "...", "narration": "...", "description": "...", "detailedDescription": "..." },
+  "ko": { "name": "...", "narration": "...", "description": "...", "detailedDescription": "..." },
+  ... (all 24 languages)
+}
+`.trim();
+  try {
+    console.log(`[autoTranslate] Translating "${name}" into 24 languages via GPT-4o...`);
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: prompt }],
+      response_format: { type: "json_object" },
+      // [적요] max_tokens 충분히 설정 - 24개 언어 × 4개 필드
+      max_tokens: 16e3,
+      temperature: 0.3
+      // 낮은 온도 = 일관된 번역
+    });
+    const raw = response.choices[0].message.content || "{}";
+    const parsed = JSON.parse(raw);
+    const langCount = Object.keys(parsed).length;
+    console.log(`[autoTranslate] \u2705 Translated into ${langCount} languages successfully.`);
+    return parsed;
+  } catch (error) {
+    console.error("[autoTranslate] GPT translation failed:", error?.message);
+    return {
+      en: { name, narration, description, detailedDescription }
+    };
+  }
+}
+async function autoTranslateLandmark(landmarkId, sourceData) {
+  try {
+    const translations = await translateToAllLanguages(
+      sourceData.name,
+      sourceData.narration,
+      sourceData.description || "",
+      sourceData.detailedDescription || ""
+    );
+    await db.update(landmarks).set({
+      translations,
+      updatedAt: /* @__PURE__ */ new Date()
+    }).where(eq4(landmarks.id, landmarkId));
+    console.log(`[autoTranslate] \u2705 NeonDB updated: landmark ${landmarkId} with ${Object.keys(translations).length} language translations.`);
+  } catch (error) {
+    console.error(`[autoTranslate] \u274C Failed to auto-translate landmark ${landmarkId}:`, error?.message);
+  }
+}
+
 // server/services/dbCheckService.ts
 init_db();
 import { sql as sql3 } from "drizzle-orm";
@@ -24681,7 +24785,7 @@ var dbCheckService = new DbCheckService();
 // server/services/settlementService.ts
 init_db();
 init_schema();
-import { eq as eq4, sql as sql4 } from "drizzle-orm";
+import { eq as eq5, sql as sql4 } from "drizzle-orm";
 var SettlementService = class {
   /**
    * [적요] 파트너 수익 배분 처리
@@ -24690,7 +24794,7 @@ var SettlementService = class {
   static async processPartnerReward(transactionId) {
     console.log(`\u{1F4B0} [Accounting Manager] \uACB0\uC81C \uAC74\uC5D0 \uB300\uD55C \uC218\uC775 \uC815\uC0B0\uC744 \uC2DC\uC791\uD569\uB2C8\uB2E4: ${transactionId}`);
     const tx = await db.query.transactions.findFirst({
-      where: eq4(transactions.id, transactionId)
+      where: eq5(transactions.id, transactionId)
     });
     if (!tx || tx.status !== "completed") {
       console.error("\u274C \uC644\uB8CC\uB418\uC9C0 \uC54A\uC740 \uACB0\uC81C \uAC74\uC774\uAC70\uB098 \uC874\uC7AC\uD558\uC9C0 \uC54A\uB294 \uD2B8\uB79C\uC7AD\uC158\uC785\uB2C8\uB2E4.");
@@ -24703,7 +24807,7 @@ var SettlementService = class {
       totalBalance: sql4`${creatorEarnings.totalBalance} + ${partnerReward}`,
       totalEarned: sql4`${creatorEarnings.totalEarned} + ${partnerReward}`,
       updatedAt: /* @__PURE__ */ new Date()
-    }).where(eq4(creatorEarnings.userId, tx.userId));
+    }).where(eq5(creatorEarnings.userId, tx.userId));
     console.log(`\u2705 \uD30C\uD2B8\uB108 \uC9C0\uAC11\uC5D0 ${partnerReward}\uC6D0\uC774 \uC131\uACF5\uC801\uC73C\uB85C \uC801\uB9BD\uB418\uC5C8\uC2B5\uB2C8\uB2E4.`);
   }
   /**
@@ -24830,7 +24934,7 @@ function registerRoutes(app2) {
   app2.get("/api/debug/db-landmark/:id", async (c) => {
     const id = c.req.param("id");
     try {
-      const result = await db.select().from(landmarks).where(eq5(landmarks.id, id));
+      const result = await db.select().from(landmarks).where(eq6(landmarks.id, id));
       return c.json(result);
     } catch (error) {
       return c.json({ error: error.message }, 500);
@@ -25124,12 +25228,12 @@ function registerRoutes(app2) {
     try {
       const cityId = c.req.param("cityId");
       const clientEtag = c.req.header("if-none-match");
-      const [cityData] = await db.select().from(cities).where(eq5(cities.id, cityId));
+      const [cityData] = await db.select().from(cities).where(eq6(cities.id, cityId));
       if (!cityData) {
         return c.json({ error: "City not found" }, 404);
       }
-      const cityLandmarks = await db.select().from(landmarks).where(eq5(landmarks.cityId, cityId));
-      const [versionRecord] = await db.select().from(dataVersions).where(eq5(dataVersions.entityType, "all"));
+      const cityLandmarks = await db.select().from(landmarks).where(eq6(landmarks.cityId, cityId));
+      const [versionRecord] = await db.select().from(dataVersions).where(eq6(dataVersions.entityType, "all"));
       const version = versionRecord?.version || 1;
       const packageData = {
         city: {
@@ -25193,7 +25297,7 @@ function registerRoutes(app2) {
       }).from(cities);
       const citiesWithStats = await Promise.all(
         allCities.map(async (city) => {
-          const cityLandmarks = await db.select().from(landmarks).where(eq5(landmarks.cityId, city.id));
+          const cityLandmarks = await db.select().from(landmarks).where(eq6(landmarks.cityId, city.id));
           return {
             ...city,
             landmarkCount: cityLandmarks.length
@@ -25260,7 +25364,7 @@ function registerRoutes(app2) {
       const [updated] = await db.update(cities).set({
         ...body,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq5(cities.id, id)).returning();
+      }).where(eq6(cities.id, id)).returning();
       if (!updated) return c.json({ error: "City not found" }, 404);
       return c.json(updated);
     } catch (e) {
@@ -25270,9 +25374,9 @@ function registerRoutes(app2) {
   adminCallback.delete("/cities/:id", async (c) => {
     try {
       const id = c.req.param("id");
-      const marks = await db.select().from(landmarks).where(eq5(landmarks.cityId, id));
+      const marks = await db.select().from(landmarks).where(eq6(landmarks.cityId, id));
       if (marks.length > 0) return c.json({ error: "Cannot delete city with landmarks" }, 400);
-      const [deleted] = await db.delete(cities).where(eq5(cities.id, id)).returning();
+      const [deleted] = await db.delete(cities).where(eq6(cities.id, id)).returning();
       if (!deleted) return c.json({ error: "City not found" }, 404);
       return c.json({ success: true });
     } catch (e) {
@@ -25320,6 +25424,15 @@ function registerRoutes(app2) {
       automationService.generatePromotionContent(newLandmark).catch((err) => {
         console.error("Marketing generation failed:", err);
       });
+      const landmarkForT = newLandmark;
+      autoTranslateLandmark(landmarkForT.id, {
+        name: landmarkForT.name,
+        narration: landmarkForT.narration || "",
+        description: landmarkForT.description,
+        detailedDescription: landmarkForT.detailedDescription
+      }).catch((err) => {
+        console.error("Auto Translate failed:", err);
+      });
       return c.json(newLandmark, 201);
     } catch (error) {
       if (error?.code === "23505") return c.json({ error: "Landmark ID exists" }, 409);
@@ -25333,7 +25446,7 @@ function registerRoutes(app2) {
       const [updated] = await db.update(landmarks).set({
         ...body,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq5(landmarks.id, id)).returning();
+      }).where(eq6(landmarks.id, id)).returning();
       if (!updated) return c.json({ error: "Landmark not found" }, 404);
       return c.json(updated);
     } catch (e) {
@@ -25343,7 +25456,7 @@ function registerRoutes(app2) {
   adminCallback.delete("/landmarks/:id", async (c) => {
     try {
       const id = c.req.param("id");
-      const [deleted] = await db.delete(landmarks).where(eq5(landmarks.id, id)).returning();
+      const [deleted] = await db.delete(landmarks).where(eq6(landmarks.id, id)).returning();
       if (!deleted) return c.json({ error: "Landmark not found" }, 404);
       return c.json({ success: true });
     } catch (e) {
@@ -25354,7 +25467,7 @@ function registerRoutes(app2) {
     try {
       const id = c.req.param("id");
       const { apiKey } = await c.req.json();
-      const [landmark] = await db.select().from(landmarks).where(eq5(landmarks.id, id));
+      const [landmark] = await db.select().from(landmarks).where(eq6(landmarks.id, id));
       if (!landmark) return c.json({ error: "Landmark not found" }, 404);
       if (!apiKey) return c.json({ error: "API Key is required" }, 400);
       const { GoogleGenAI: GoogleGenAI2 } = await import("@google/genai");
@@ -25381,7 +25494,7 @@ function registerRoutes(app2) {
       const [updated] = await db.update(landmarks).set({
         narration: text2,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq5(landmarks.id, id)).returning();
+      }).where(eq6(landmarks.id, id)).returning();
       return c.json(updated);
     } catch (e) {
       console.error("[Generate Narration Error]", e);
@@ -25413,7 +25526,7 @@ function registerRoutes(app2) {
   tourLeader.get("/schedules", async (c) => {
     try {
       const tourId = c.req.query("tourId") || "default";
-      const schedules = await db.select().from(tourSchedules).where(eq5(tourSchedules.tourId, tourId)).orderBy(tourSchedules.orderIndex);
+      const schedules = await db.select().from(tourSchedules).where(eq6(tourSchedules.tourId, tourId)).orderBy(tourSchedules.orderIndex);
       return c.json(schedules);
     } catch (e) {
       return c.json({ error: "Failed to fetch schedules" }, 500);
@@ -25444,7 +25557,7 @@ function registerRoutes(app2) {
       const [updated] = await db.update(tourSchedules).set({
         ...body,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq5(tourSchedules.id, id)).returning();
+      }).where(eq6(tourSchedules.id, id)).returning();
       if (!updated) return c.json({ error: "Schedule not found" }, 404);
       return c.json(updated);
     } catch (e) {
@@ -25454,7 +25567,7 @@ function registerRoutes(app2) {
   tourLeader.delete("/schedules/:id", async (c) => {
     try {
       const id = c.req.param("id");
-      const [deleted] = await db.delete(tourSchedules).where(eq5(tourSchedules.id, id)).returning();
+      const [deleted] = await db.delete(tourSchedules).where(eq6(tourSchedules.id, id)).returning();
       if (!deleted) return c.json({ error: "Schedule not found" }, 404);
       return c.json({ success: true });
     } catch (e) {
@@ -25561,7 +25674,7 @@ function registerRoutes(app2) {
   adminCallback.patch("/users/:id/role", async (c) => {
     const id = c.req.param("id");
     const { role } = await c.req.json();
-    const [updated] = await db.update(users).set({ role }).where(eq5(users.id, id)).returning();
+    const [updated] = await db.update(users).set({ role }).where(eq6(users.id, id)).returning();
     return c.json(updated || { error: "Not found" }, updated ? 200 : 404);
   });
   adminCallback.get("/marketing-contents", async (c) => {
@@ -25572,7 +25685,7 @@ function registerRoutes(app2) {
         landmarkName: landmarks.name,
         content: marketingContents.content,
         updatedAt: marketingContents.updatedAt
-      }).from(marketingContents).innerJoin(landmarks, eq5(marketingContents.landmarkId, landmarks.id)).orderBy(desc2(marketingContents.updatedAt));
+      }).from(marketingContents).innerJoin(landmarks, eq6(marketingContents.landmarkId, landmarks.id)).orderBy(desc2(marketingContents.updatedAt));
       return c.json(results);
     } catch (e) {
       return c.json({ error: "Failed" }, 500);
@@ -25763,6 +25876,25 @@ var log2 = (message, source = "APP") => {
   console.log(`[${time}] [${source}] ${message}`);
 };
 var app = new Hono2();
+app.use("*", cors({
+  origin: (origin) => {
+    if (!origin || origin.includes("localhost") || origin.includes("127.0.0.1") || origin.includes("workers.dev")) {
+      return origin || "*";
+    }
+    return "*";
+  },
+  allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  credentials: true,
+  exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
+  maxAge: 600
+}));
+app.use("*", async (c, next) => {
+  await next();
+  c.header("Content-Security-Policy", "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https://*; frame-ancestors *; img-src 'self' data: https: http:;");
+  c.header("X-Frame-Options", "ALLOWALL");
+  c.header("Access-Control-Allow-Origin", c.req.header("Origin") || "*");
+});
 app.use("*", logger());
 var store = new CookieStore();
 app.use("*", async (c, next) => {

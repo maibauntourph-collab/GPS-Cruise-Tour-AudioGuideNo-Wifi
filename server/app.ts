@@ -16,20 +16,40 @@ const log = (message: string, source = "APP") => {
 
 const app = new Hono<{ Variables: Variables }>();
 
-// [Security Fix | 🎖️] Antigravity 프리뷰 환경 지원을 위한 CORS 및 오리진 허용
+// [Security Fix | 🎖️] Antigravity 프리뷰 및 로컬 개발 환경 지원을 위한 CORS 및 오리진 허용
 app.use("*", cors({
-    origin: "*",
+    origin: (origin) => {
+        // [적요] credentials: true 설정 시 origin은 '*'이 될 수 없습니다. 
+        // 요청된 origin이 있으면 그것을 반환하고, 없으면 명시적으로 허용하는 도메인을 지정합니다.
+        if (!origin) return origin; 
+        if (origin.includes("localhost") || origin.includes("127.0.0.1") || origin.includes("workers.dev")) {
+            return origin;
+        }
+        return origin; // 개발 중에는 모든 오리진 허용 (배포 시 제한 권장)
+    },
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowHeaders: ["Content-Type", "Authorization"],
+    allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     credentials: true,
+    exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
+    maxAge: 600,
 }));
 
-// 모든 응답에 대해 프레임 임베딩 허용 (frame-ancestors *)
+// [UX Fix] 모든 응답에 대해 프레임 임베딩 및 로컬 리소스 로드 허용
 app.use("*", async (c, next) => {
     await next();
-    c.header("Content-Security-Policy", "frame-ancestors *;");
+    // [적요] CSP 설정을 강화하여 localhost 환경 및 지도 데이터(OSM)를 허용합니다.
+    // frame-ancestors * 를 통해 다른 사이트(예: Replit/Antigravity 프리뷰)에서의 임베딩을 허용합니다.
+    const csp = [
+        "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https:*;",
+        "frame-ancestors *;",
+        "img-src 'self' data: https: http: *.openstreetmap.org;",
+        "connect-src 'self' http://localhost:* ws://localhost:* https:* *.openstreetmap.org;",
+        "font-src 'self' data: https:;",
+        "worker-src 'self' blob:;"
+    ].join(" ");
+    
+    c.header("Content-Security-Policy", csp);
     c.header("X-Frame-Options", "ALLOWALL");
-    c.res.headers.delete("X-Frame-Options");
 });
 
 // Middleware

@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { Download, Search, Lock } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Download, Lock, Map, User, Home as HomeIcon } from 'lucide-react';
 import { City } from '@shared/schema';
 import { LANDING_DATA } from '@/lib/landingData';
 import { t } from '@/lib/translations';
 
 /**
- * [교수님 노트: CitySelectTab - 다국어 완전 지원 버전]
+ * [교수님 노트: CitySelectTab - ② City Select 화면 (이미지 디자인 완전 구현)]
  * @에이? "학생 여러분, 이 컴포넌트는 사용자가 기항지를 선택하는 가장 중요한 첫 화면입니다."
  *
- * [수정 적요 - 2026-03-23 09:51]
- * - isKo 2진 스위치 → t(key, selectedLanguage) 함수 방식으로 전환
- * - 25개 언어 모두 translations.ts의 키를 통해 자동 번역됩니다.
- * - CitySelectTab이 열리면 언어를 변경할 수 있는 빠른 스위처(ko/en/zh) 유지
+ * [수정 적요 - 2026-03-23 23:02]
+ * - 이미지 ② city select 화면과 1:1 매칭되도록 전면 재설계
+ * - PWA 설치 배너 (다크 배경, 오렌지 다운로드 아이콘)
+ * - 기항지 가이드 헤더 + 한/EN/中 언어 토글
+ * - 카테고리 탭: 전체/아시아/유럽/크루즈 추천
+ * - 도시 카드: 배경 이미지 + 자물쇠 아이콘 + 도시명/국가명/통계
+ * - 바텀 내비게이션: 도시/지도/내 플랜
  */
 
 export interface CitySelectTabProps {
@@ -22,82 +24,111 @@ export interface CitySelectTabProps {
     selectedLanguage: string;
     onLanguageChange: (lang: string) => void;
     onTransitionToList: () => void;
+    /** 바텀 탭 전환 콜백 */
+    onTabChange?: (tab: 'city' | 'map' | 'plan') => void;
+    /** 현재 활성 바텀 탭 */
+    activeBottomTab?: 'city' | 'map' | 'plan';
 }
 
-// [적요] 다국어 카테고리 레이블 - t() 함수 키 매핑
-const CATEGORY_KEYS = {
-    all: 'all',
-    asia: 'asia',
-    europe: 'europe',
-    recommended: 'recommended',
-} as const;
-
-// [적요] 카테고리 레이블 fallback (translations.ts에 없을 경우 대비)
+// [적요] 카테고리 레이블 (이미지와 동일 한국어 기준)
 const CATEGORY_FALLBACK: Record<string, Record<string, string>> = {
-    all: { ko: '전체', en: 'All', th: 'ทั้งหมด', ja: '全て', 'zh-CN': '全部', 'zh-TW': '全部' },
-    asia: { ko: '아시아', en: 'Asia', th: 'เอเชีย', ja: 'アジア', 'zh-CN': '亚洲', 'zh-TW': '亞洲' },
-    europe: { ko: '유럽', en: 'Europe', th: 'ยุโรป', ja: 'ヨーロッパ', 'zh-CN': '欧洲', 'zh-TW': '歐洲' },
-    recommended: { ko: '크루즈 추천', en: 'Recommended', th: 'แนะนำ', ja: 'おすすめ', 'zh-CN': '推荐', 'zh-TW': '推薦' },
+    all: { ko: '전체', en: 'All', 'zh-CN': '全部', ja: '全て', th: 'ทั้งหมด' },
+    asia: { ko: '아시아', en: 'Asia', 'zh-CN': '亚洲', ja: 'アジア', th: 'เอเชีย' },
+    europe: { ko: '유럽', en: 'Europe', 'zh-CN': '欧洲', ja: 'ヨーロッパ', th: 'ยุโรป' },
+    recommended: { ko: '크루즈 추천', en: 'Recommended', 'zh-CN': '推荐', ja: 'おすすめ', th: 'แนะนำ' },
 };
 
-// [적요] 카테고리 레이블 반환 헬퍼 — translations.ts 우선, 없으면 fallback
-function getCategoryLabel(category: string, lang: string): string {
-    const tKey = t(category, lang);
-    if (tKey && tKey !== category) return tKey; // translations.ts에 존재하면 사용
-    return CATEGORY_FALLBACK[category]?.[lang] || CATEGORY_FALLBACK[category]?.['en'] || category;
-}
-
-// [적요] landmarks 개수 / 시간 / 언어 수 설명 문구 다국어 헬퍼
-function getStatsLabel(lang: string): string {
-    const stats: Record<string, string> = {
-        ko: '랜드마크 24개 · 약 6시간 · 10개 언어',
-        ja: 'ランドマーク24か所・約6時間・10言語',
-        'zh-CN': '24个地标 · 约6小时 · 10种语言',
-        'zh-TW': '24個景點 · 約6小時 · 10種語言',
-        th: '24 แห่ง · ประมาณ 6 ชั่วโมง · 10 ภาษา',
-        vi: '24 địa điểm · ~6 tiếng · 10 ngôn ngữ',
-        id: '24 landmark · ~6 jam · 10 bahasa',
-        es: '24 lugares · ~6 horas · 10 idiomas',
-        fr: '24 sites · ~6 heures · 10 langues',
-        de: '24 Orte · ~6 Stunden · 10 Sprachen',
-        it: '24 luoghi · ~6 ore · 10 lingue',
-        pt: '24 locais · ~6 horas · 10 idiomas',
-        ru: '24 места · ~6 часов · 10 языков',
-        ar: '24 موقعاً · ~6 ساعات · 10 لغات',
-    };
-    return stats[lang] || '24 landmarks · 6 hours · 10 languages';
-}
-
-// [적요] PWA 홈화면 추가 안내 문구 다국어 헬퍼
-function getInstallLabels(lang: string) {
-    const labels: Record<string, { prompt: string; benefit: string; desc: string; btn: string }> = {
-        ko: { prompt: '홈화면에 추가하면', benefit: '완전 오프라인!', desc: '한 번 저장하면 WiFi 없이도 자동 재생', btn: '설치' },
-        ja: { prompt: 'ホーム画面に追加', benefit: '完全オフライン!', desc: '一度保存すればWiFiなしで自動再生', btn: 'インストール' },
-        'zh-CN': { prompt: '添加到主屏幕', benefit: '完全离线!', desc: '保存一次后无需WiFi即可自动播放', btn: '安装' },
-        'zh-TW': { prompt: '加入主畫面', benefit: '完全離線!', desc: '儲存一次後無需WiFi即可自動播放', btn: '安裝' },
-        th: { prompt: 'เพิ่มหน้าจอหลัก', benefit: 'ออฟไลน์ 100%!', desc: 'บันทึกครั้งเดียว เล่นอัตโนมัติไม่ต้องใช้ WiFi', btn: 'ติดตั้ง' },
-        vi: { prompt: 'Thêm vào màn hình chính', benefit: 'Hoàn toàn Offline!', desc: 'Lưu một lần, tự động phát không cần WiFi', btn: 'Cài đặt' },
-        id: { prompt: 'Tambah ke layar utama', benefit: 'Offline Penuh!', desc: 'Simpan sekali, putar otomatis tanpa WiFi', btn: 'Pasang' },
-        es: { prompt: 'Agregar a inicio', benefit: '¡100% Offline!', desc: 'Guárdalo una vez, se reproduce sin WiFi', btn: 'Instalar' },
-        fr: { prompt: 'Ajouter à l\'accueil', benefit: '100% Hors-ligne!', desc: 'Sauvegardez une fois, lecture automatique sans WiFi', btn: 'Installer' },
-        de: { prompt: 'Zum Startbildschirm', benefit: '100% Offline!', desc: 'Einmal speichern, ohne WLAN abspielen', btn: 'Installieren' },
-        it: { prompt: 'Aggiungi a home', benefit: '100% Offline!', desc: 'Salvato una volta, riproduce senza WiFi', btn: 'Installa' },
-        pt: { prompt: 'Adicionar ao início', benefit: '100% Offline!', desc: 'Salve uma vez, toca sem WiFi', btn: 'Instalar' },
-        ru: { prompt: 'Добавить на экран', benefit: '100% Офлайн!', desc: 'Сохраните один раз — воспроизводится без WiFi', btn: 'Установить' },
-    };
-    return labels[lang] || { prompt: 'Add to home screen', benefit: '100% Offline!', desc: 'Auto plays without WiFi after initial save', btn: 'Install' };
+function getCategoryLabel(cat: string, lang: string): string {
+    const tKey = t(cat, lang);
+    if (tKey && tKey !== cat) return tKey;
+    return CATEGORY_FALLBACK[cat]?.[lang] || CATEGORY_FALLBACK[cat]?.['en'] || cat;
 }
 
 // [적요] 섹션 헤더(Port Guide) 다국어
 function getPortGuideLabel(lang: string): string {
-    const labels: Record<string, string> = {
+    return {
         ko: '기항지 가이드', ja: '寄港地ガイド', 'zh-CN': '港口指南', 'zh-TW': '港口指南',
         th: 'คู่มือท่าเรือ', vi: 'Hướng dẫn cảng', id: 'Panduan Pelabuhan',
         es: 'Guía de Puerto', fr: 'Guide des Ports', de: 'Hafenführer',
         it: 'Guida Portuale', pt: 'Guia de Portos', ru: 'Путеводитель по Портам',
         ar: 'دليل الموانئ',
+    }[lang] || 'Port Guide';
+}
+
+// [적요] 통계 문구 다국어 헬퍼
+function getStatsLabel(city: City, lang: string): string {
+    const landmarkCount = (city as any).landmarkCount || 24;
+    const hours = (city as any).hours || 6;
+    const langCount = (city as any).langCount || 10;
+
+    const stats: Record<string, string> = {
+        ko: `랜드마크 ${landmarkCount}개 · 약 ${hours}시간 · ${langCount}개 언어`,
+        ja: `ランドマーク${landmarkCount}か所・約${hours}時間・${langCount}言語`,
+        'zh-CN': `${landmarkCount}个地标 · 约${hours}小时 · ${langCount}种语言`,
+        'zh-TW': `${landmarkCount}個景點 · 約${hours}小時 · ${langCount}種語言`,
+        th: `${landmarkCount} แห่ง · ประมาณ ${hours} ชั่วโมง · ${langCount} ภาษา`,
     };
-    return labels[lang] || 'Port Guide';
+    return stats[lang] || `${landmarkCount} landmarks · ${hours} hours · ${langCount} languages`;
+}
+
+// [적요] PWA 홈화면 추가 안내 문구 다국어
+function getInstallLabels(lang: string) {
+    return ({
+        ko: { prompt: '홈화면에 추가하면', benefit: '완전 오프라인!', desc: '한 번 저장하면 WiFi 없이도 사용 가능', btn: '설치' },
+        ja: { prompt: 'ホーム画面に追加', benefit: '完全オフライン!', desc: '一度保存すればWiFiなしで自動再生', btn: 'インストール' },
+        'zh-CN': { prompt: '添加到主屏幕', benefit: '完全离线!', desc: '保存一次后无需WiFi即可自动播放', btn: '安装' },
+        'zh-TW': { prompt: '加入主畫面', benefit: '完全離線!', desc: '儲存一次後無需WiFi即可自動播放', btn: '安裝' },
+        th: { prompt: 'เพิ่มหน้าจอหลัก', benefit: 'ออฟไลน์ 100%!', desc: 'บันทึกครั้งเดียว เล่นอัตโนมัติไม่ต้องใช้ WiFi', btn: 'ติดตั้ง' },
+    } as Record<string, { prompt: string; benefit: string; desc: string; btn: string }>)[lang]
+        || { prompt: 'Add to home screen', benefit: '100% Offline!', desc: 'Auto plays without WiFi after initial save', btn: 'Install' };
+}
+
+// [적요] 도시의 대륙/카테고리 분류 헬퍼
+function getCityCategory(city: City): 'asia' | 'europe' | 'recommended' {
+    const asianCountries = ['South Korea', 'Japan', 'China', 'Thailand', 'Singapore', 'Malaysia', 'Philippines', 'Vietnam', 'Indonesia', 'Taiwan'];
+    const europeanCountries = ['Italy', 'France', 'Spain', 'Germany', 'UK', 'Greece', 'Portugal', 'Netherlands', 'Croatia', 'Turkey'];
+    if (asianCountries.includes(city.country)) return 'asia';
+    if (europeanCountries.includes(city.country)) return 'europe';
+    return 'recommended';
+}
+
+// [적요] 도시명 → 배경 이미지 URL 헬퍼
+const CITY_IMAGES: Record<string, string> = {
+    'rome': 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=70',
+    'venice': 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?w=600&q=70',
+    'paris': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=70',
+    'london': 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=70',
+    'barcelona': 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=70',
+    'naples': 'https://images.unsplash.com/photo-1588614959060-4d144f28b207?w=600&q=70',
+    'shanghai': 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=600&q=70',
+    'seoul': 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=600&q=70',
+    'singapore': 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&q=70',
+    'penang': 'https://images.unsplash.com/photo-1596701540321-7299723bd739?w=600&q=70',
+    'phuket': 'https://images.unsplash.com/photo-1589394815804-964ce0ff96c7?w=600&q=70',
+    'cebu': 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600&q=70',
+    'kuala-lumpur': 'https://images.unsplash.com/photo-1596422846543-74c6fc1e4b6e?w=600&q=70',
+};
+
+function getCityImage(city: City): string {
+    const slug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
+    const citySlug = city.id?.toLowerCase().replace(/[\s_]+/g, '-');
+    const landingContent = LANDING_DATA[slug] || LANDING_DATA[citySlug || ''] || LANDING_DATA[city.id];
+    const heroImage = landingContent?.['en']?.heroImage || landingContent?.['ko']?.heroImage;
+    return heroImage || CITY_IMAGES[slug] || CITY_IMAGES[citySlug || ''] || 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=70';
+}
+
+// [적요] 도시 현지 이름 (중국어 표기 등)
+function getCityLocalName(city: City, lang: string): string {
+    const localNames: Record<string, Record<string, string>> = {
+        'shanghai': { 'zh-CN': '上海 (Shanghai)', 'zh-TW': '上海 (Shanghai)', 'ko': '상하이 (吳淞港), 중국', 'en': 'Shanghai, China' },
+        'rome': { 'ko': '로마, 이탈리아', 'en': 'Rome, Italy', 'zh-CN': '罗马, 意大利', 'ja': 'ローマ、イタリア' },
+        'seoul': { 'ko': '서울, 한국', 'en': 'Seoul, South Korea', 'zh-CN': '首尔, 韩国' },
+        'venice': { 'ko': '베네치아, 이탈리아', 'en': 'Venice, Italy', 'zh-CN': '威尼斯, 意大利' },
+        'paris': { 'ko': '파리, 프랑스', 'en': 'Paris, France', 'zh-CN': '巴黎, 法国' },
+        'singapore': { 'ko': '싱가포르', 'en': 'Singapore', 'zh-CN': '新加坡' },
+    };
+    const slug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
+    return localNames[slug]?.[lang] || localNames[slug]?.['en'] || `${city.name}, ${city.country}`;
 }
 
 export function CitySelectTab({
@@ -106,169 +137,252 @@ export function CitySelectTab({
     onCityChange,
     selectedLanguage,
     onLanguageChange,
-    onTransitionToList
+    onTransitionToList,
+    onTabChange,
+    activeBottomTab = 'city',
 }: CitySelectTabProps) {
     const [category, setCategory] = useState<'all' | 'asia' | 'europe' | 'recommended'>('all');
-    const [citySearchQuery, setCitySearchQuery] = useState('');
 
-    // [적요] 한국어/영어 2진 스위치 제거 → t() 함수로 완전 대체됩니다.
     const installLabels = getInstallLabels(selectedLanguage);
 
-    // [Bug Doctor] 다국어 도시명 검색 매핑 테이블 (한국어/일본어/중국어 포함)
-    const MULTILANG_CITY_MAP: Record<string, string[]> = {
-        'roma': ['로마', 'ローマ', '罗马'],
-        'rome': ['로마', 'ローマ', '罗马'],
-        'venice': ['베네치아', '베니스', 'ベネチア', '威尼斯'],
-        'paris': ['파리', 'パリ', '巴黎'],
-        'london': ['런던', 'ロンドン', '伦敦'],
-        'barcelona': ['바르셀로나', 'バルセロナ', '巴塞罗那'],
-        'penang': ['페낭', 'ペナン', '槟城'],
-        'singapore': ['싱가포르', 'シンガポール', '新加坡'],
-        'cebu': ['세부', 'セブ', '宿务'],
-        'naples': ['나폴리', 'ナポリ', '那不勒斯'],
-        'kuala-lumpur': ['쿠알라룸푸르', 'クアラルンプール', '吉隆坡'],
-        'phuket': ['푸껫', 'プーケット', '普吉岛'],
-    };
-
+    // [적요] 카테고리 필터링
     const filteredCities = cities.filter(c => {
-        const searchLower = citySearchQuery.toLowerCase();
-        const nameLower = c.name.toLowerCase();
-        const countryLower = c.country.toLowerCase();
-        const citySlug = nameLower.replace(/[\s_]+/g, '-');
-
-        const matchDirect = nameLower.includes(searchLower) || countryLower.includes(searchLower);
-        const matchMultiLang = MULTILANG_CITY_MAP[citySlug]?.some(name => name.includes(searchLower));
-
-        return matchDirect || matchMultiLang;
+        if (category === 'all') return true;
+        return getCityCategory(c) === category;
     });
 
+    // [적요] 바텀 탭 아이콘 및 레이블
+    const bottomTabs = [
+        {
+            id: 'city' as const,
+            icon: <HomeIcon className="w-5 h-5" />,
+            label: selectedLanguage === 'ko' ? '도시' : selectedLanguage.startsWith('zh') ? '城市' : 'Cities',
+        },
+        {
+            id: 'map' as const,
+            icon: <Map className="w-5 h-5" />,
+            label: selectedLanguage === 'ko' ? '지도' : selectedLanguage.startsWith('zh') ? '地图' : 'Map',
+        },
+        {
+            id: 'plan' as const,
+            icon: <User className="w-5 h-5" />,
+            label: selectedLanguage === 'ko' ? '내 플랜' : selectedLanguage.startsWith('zh') ? '我的计划' : 'My Plan',
+        },
+    ];
+
     return (
-        <div className="bg-white min-h-full pb-8">
-            {/* [적요] PWA 설치 안내 배너 - 다국어 지원 */}
-            <div className="px-4 py-4 mt-2">
-                <div className="bg-[#242424] rounded-3xl p-5 flex items-center justify-between shadow-xl">
-                    <div className="flex gap-4 items-center">
-                        <div className="w-12 h-12 bg-orange-500/20 rounded-2xl flex items-center justify-center shrink-0">
-                            <Download className="w-6 h-6 outline-none text-[#E85D36]" />
-                        </div>
-                        <div>
-                            <div className="text-white font-bold text-[15px]">
-                                {installLabels.prompt}
-                            </div>
-                            <div className="text-[#E85D36] font-black text-[17px] mb-1">
-                                {installLabels.benefit}
-                            </div>
-                            <p className="text-slate-400 text-[10px] leading-tight font-medium">
-                                {installLabels.desc}
-                            </p>
-                        </div>
-                    </div>
-                    <button className="bg-[#E85D36] text-white text-[11px] font-bold px-4 py-2 rounded-xl active:scale-95 shrink-0 ml-2">
-                        {installLabels.btn}
-                    </button>
-                </div>
-            </div>
+        // [적요] 배경을 투명(bg-transparent)하게 하여 뒤의 시나리오가 비치도록 설정 (Clear Mask)
+        <div className="flex flex-col h-full bg-transparent">
+            {/* 스크롤 가능한 본문 영역 */}
+            <div className="flex-1 overflow-y-auto pb-24 scrollbar-hide">
 
-            <div className="px-6 py-2 pb-4">
-                <div className="flex items-center justify-between mb-4">
-                    {/* [적요] 섹션 헤더 - t() / 다국어 헬퍼 함수 사용 */}
-                    <h2 className="text-2xl font-black text-slate-800 tracking-tight">
-                        {getPortGuideLabel(selectedLanguage)}
-                    </h2>
-                    {/* [적요] 언어 빠른 전환 버튼 (ko/en/zh 3개) - LanguageSelector의 축소 버전 */}
-                    <div className="flex bg-slate-100 p-1 rounded-full border border-slate-200 shadow-sm">
-                        <button
-                            onClick={() => onLanguageChange('ko')}
-                            className={`w-9 h-9 rounded-full text-xs font-bold transition-all ${selectedLanguage === 'ko' ? 'bg-[#E85D36] text-white shadow-md' : 'text-slate-600 hover:bg-slate-200'}`}
-                        >
-                            한
-                        </button>
-                        <button
-                            onClick={() => onLanguageChange('en')}
-                            className={`w-9 h-9 rounded-full text-xs font-bold transition-all ${selectedLanguage === 'en' ? 'bg-[#E85D36] text-white shadow-md' : 'text-slate-600 hover:bg-slate-200'}`}
-                        >
-                            EN
-                        </button>
-                        <button
-                            onClick={() => onLanguageChange('zh-CN')}
-                            className={`w-9 h-9 rounded-full text-xs font-bold transition-all ${selectedLanguage.startsWith('zh') ? 'bg-[#E85D36] text-white shadow-md' : 'text-slate-600 hover:bg-slate-200'}`}
-                        >
-                            中
+                {/* ─────────────────────────────────── */}
+                {/* [적요] ① PWA 설치 안내 배너 - 다크 배경 */}
+                {/* ─────────────────────────────────── */}
+                <div className="px-4 pt-4 pb-2">
+                    <div className="bg-[#242424]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-4 flex items-center justify-between shadow-lg">
+                        <div className="flex gap-3 items-center flex-1 min-w-0">
+                            {/* 오렌지 다운로드 아이콘 박스 */}
+                            <div className="w-11 h-11 bg-[#E85D36] rounded-2xl flex items-center justify-center shrink-0">
+                                <Download className="w-5 h-5 text-white" />
+                            </div>
+                            <div className="min-w-0">
+                                <div className="text-white font-bold text-[13px] leading-tight">
+                                    {installLabels.prompt}
+                                </div>
+                                <div className="text-[#E85D36] font-black text-[15px] leading-tight">
+                                    {installLabels.benefit}
+                                </div>
+                                <p className="text-slate-400 text-[10px] leading-tight mt-0.5 font-medium">
+                                    {installLabels.desc}
+                                </p>
+                            </div>
+                        </div>
+                        {/* 설치 버튼 */}
+                        <button className="bg-[#E85D36] text-white text-[11px] font-black px-4 py-2 rounded-xl active:scale-95 shrink-0 ml-3">
+                            {installLabels.btn}
                         </button>
                     </div>
                 </div>
 
-                {/* [적요] 카테고리 필터 탭 - getCategoryLabel()로 모든 언어 지원 */}
-                <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-6 px-6">
-                    {(['all', 'asia', 'europe', 'recommended'] as const).map(cat => (
-                        <button
-                            key={cat}
-                            onClick={() => setCategory(cat)}
-                            className={`whitespace-nowrap px-4 py-2 rounded-full text-[13px] font-bold transition-colors ${category === cat ? 'bg-[#E85D36] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
-                        >
-                            {getCategoryLabel(cat, selectedLanguage)}
-                        </button>
-                    ))}
+                {/* ─────────────────────────────────── */}
+                {/* [적요] ② 헤더 - 기항지 가이드 + 언어 토글 */}
+                {/* ─────────────────────────────────── */}
+                <div className="px-5 pt-4 pb-2">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-[22px] font-black text-slate-800 tracking-tight">
+                            {getPortGuideLabel(selectedLanguage)}
+                        </h2>
+                        {/* 한 / EN / 中 언어 토글 버튼 */}
+                        <div className="flex bg-slate-100 p-1 rounded-full border border-slate-200 shadow-sm">
+                            <button
+                                onClick={() => onLanguageChange('ko')}
+                                className={`w-9 h-9 rounded-full text-[11px] font-black transition-all ${selectedLanguage === 'ko'
+                                    ? 'bg-[#E85D36] text-white shadow-md'
+                                    : 'text-slate-500 hover:bg-slate-200'
+                                    }`}
+                            >
+                                한
+                            </button>
+                            <button
+                                onClick={() => onLanguageChange('en')}
+                                className={`w-9 h-9 rounded-full text-[11px] font-black transition-all ${selectedLanguage === 'en'
+                                    ? 'bg-[#E85D36] text-white shadow-md'
+                                    : 'text-slate-500 hover:bg-slate-200'
+                                    }`}
+                            >
+                                EN
+                            </button>
+                            <button
+                                onClick={() => onLanguageChange('zh-CN')}
+                                className={`w-9 h-9 rounded-full text-[11px] font-black transition-all ${selectedLanguage.startsWith('zh')
+                                    ? 'bg-[#E85D36] text-white shadow-md'
+                                    : 'text-slate-500 hover:bg-slate-200'
+                                    }`}
+                            >
+                                中
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* ─────────────────────────────────── */}
+                    {/* [적요] ③ 카테고리 필터 탭 */}
+                    {/* ─────────────────────────────────── */}
+                    <div className="flex gap-2 mt-3 overflow-x-auto pb-1 scrollbar-hide">
+                        {(['all', 'asia', 'europe', 'recommended'] as const).map(cat => (
+                            <button
+                                key={cat}
+                                onClick={() => setCategory(cat)}
+                                className={`whitespace-nowrap px-4 py-2 rounded-full text-[13px] font-bold transition-all shrink-0 ${category === cat
+                                    ? 'bg-[#E85D36] text-white shadow-sm'
+                                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                    }`}
+                            >
+                                {getCategoryLabel(cat, selectedLanguage)}
+                            </button>
+                        ))}
+                    </div>
                 </div>
+
+                {/* ─────────────────────────────────── */}
+                {/* [적요] ④ 도시 카드 목록 */}
+                {/* ─────────────────────────────────── */}
+                <div className="px-4 mt-3 space-y-4">
+                    {filteredCities.length === 0 ? (
+                        // 로딩 스켈레톤
+                        [1, 2, 3].map(i => (
+                            <div key={i} className="w-full h-[200px] rounded-[2rem] bg-slate-100 animate-pulse" />
+                        ))
+                    ) : (
+                        filteredCities.map((city, idx) => {
+                            const cityImage = getCityImage(city);
+                            // [적요] 카드 배경색 - 이미지와 유사하게 파스텔 배경 적용
+                            const bgColors = [
+                                '#fcd2c8', // 연한 살몬핑크 (ROME)
+                                '#c9e1f5', // 연한 스카이블루 (SHANGHAI)
+                                '#d0f0c0', // 연한 민트그린
+                                '#fce5cd', // 연한 피치
+                            ];
+                            const bgCol = bgColors[idx % bgColors.length];
+                            const isLocked = idx > 0; // 첫 번째 도시만 잠금 해제
+                            const isSelected = city.id === selectedCityId;
+
+                            return (
+                                <button
+                                    key={city.id}
+                                    id={`city-card-${city.id}`}
+                                    onClick={() => {
+                                        onCityChange(city.id);
+                                        onTransitionToList();
+                                    }}
+                                    className={`w-full relative bg-white/40 backdrop-blur-md border rounded-[2rem] shadow-sm hover:shadow-md transition-all active:scale-[0.98] overflow-hidden flex flex-col ${isSelected
+                                        ? 'border-[#E85D36] border-2 shadow-[#E85D36]/10'
+                                        : 'border-white/20'
+                                        }`}
+                                >
+                                    {/* 카드 상단: 배경 이미지 영역 */}
+                                    <div className="mx-4 mt-4 h-[110px] rounded-2xl overflow-hidden relative">
+                                        {/* 파스텔 배경 */}
+                                        <div
+                                            className="absolute inset-0"
+                                            style={{ backgroundColor: bgCol }}
+                                        />
+                                        {/* 실 이미지 오버레이 (mix-blend로 색감 유지) */}
+                                        <img
+                                            src={cityImage}
+                                            alt={city.name}
+                                            className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-multiply"
+                                            loading="lazy"
+                                        />
+                                        {/* 도시명 큰 텍스트 (이미지처럼 영문 대문자) */}
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <span className="text-[28px] font-black tracking-[0.15em] uppercase text-white/70 drop-shadow select-none">
+                                                {city.name.toUpperCase()}
+                                            </span>
+                                        </div>
+                                        {/* 언어 뱃지 (상단 우측 - 선택 언어) */}
+                                        {selectedLanguage.startsWith('zh') && (
+                                            <div className="absolute top-2 right-2 bg-[#E85D36] text-white text-[9px] font-black px-2 py-0.5 rounded-full">
+                                                中文
+                                            </div>
+                                        )}
+                                        {/* 자물쇠 아이콘 (잠긴 도시) */}
+                                        {isLocked && (
+                                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm p-1.5 rounded-full">
+                                                <Lock className="w-4 h-4 text-white" />
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* 카드 하단: 도시 정보 */}
+                                    <div className="px-5 py-3 pb-4 text-left bg-transparent">
+                                        <div className="text-[16px] font-black text-slate-800 leading-tight mb-0.5">
+                                            {getCityLocalName(city, selectedLanguage)}
+                                        </div>
+                                        <div className="text-[11px] text-slate-700 font-bold whitespace-nowrap opacity-80">
+                                            {getStatsLabel(city, selectedLanguage)}
+                                        </div>
+                                    </div>
+                                </button>
+                            );
+                        })
+                    )}
+                </div>
+
+                {/* 하단 여백 (바텀 네비 공간) */}
+                <div className="h-6" />
             </div>
 
-            {/* [적요] 도시 카드 목록 */}
-            <div className="px-6 space-y-4">
-                {filteredCities.map((city, idx) => {
-                    const citySlug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
-                    const landingContent = (city as any)?.landingContent || LANDING_DATA[citySlug] || LANDING_DATA[city.id];
-                    // [적요] 선택 언어 → 영어 → 기본값 순으로 fallback
-                    const content = landingContent?.[selectedLanguage] || landingContent?.['en'];
-                    const cityImage = content?.heroImage || 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70';
-
-                    const colors = ['bg-[#fcd2c8]', 'bg-[#c9e1f5]', 'bg-[#d0f0c0]', 'bg-[#fce5cd]'];
-                    const bgCol = colors[idx % colors.length];
-                    const isLocked = idx > 0;
-
-                    return (
-                        <button
-                            key={city.id}
-                            onClick={() => {
-                                onCityChange(city.id);
-                                onTransitionToList();
-                            }}
-                            className="w-full relative bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-md transition-all pt-5 flex flex-col active:scale-[0.98] overflow-hidden"
-                        >
-                            <div className={`mx-5 h-[100px] rounded-2xl flex flex-col items-center justify-center relative overflow-hidden`}>
-                                <div className="absolute inset-0 z-0">
-                                    <img src={cityImage} className="w-full h-full object-cover opacity-60 mix-blend-overlay" alt={city.name} />
-                                    <div className={`absolute inset-0 ${bgCol} mix-blend-multiply opacity-80`} />
-                                </div>
-                                <div className="relative z-10 text-center">
-                                    {/* [적요] 언어 코드 표시 - 선택 언어를 카드 상단에 표시 */}
-                                    <div className="text-white/80 text-[10px] font-bold uppercase tracking-widest mb-1 shadow-black blur-0">
-                                        {selectedLanguage.startsWith('zh') ? '中文' : selectedLanguage.toUpperCase()}
-                                    </div>
-                                    <div className="text-white text-[28px] font-black tracking-widest uppercase drop-shadow-md">
-                                        {city.name}
-                                    </div>
-                                </div>
-
-                                {isLocked && (
-                                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-900/60 backdrop-blur-md p-1.5 rounded-full z-20">
-                                        <Lock className="w-4 h-4 text-white" />
-                                    </div>
+            {/* ─────────────────────────────────── */}
+            {/* [적요] ⑤ 바텀 내비게이션 바                */}
+            {/* ─────────────────────────────────── */}
+            <div className="fixed bottom-0 left-0 right-0 bg-white/60 backdrop-blur-2xl border-t border-white/20 shadow-lg z-50">
+                <div className="flex">
+                    {bottomTabs.map(tab => {
+                        const isActive = activeBottomTab === tab.id;
+                        return (
+                            <button
+                                key={tab.id}
+                                id={`bottom-tab-${tab.id}`}
+                                onClick={() => onTabChange?.(tab.id)}
+                                className="flex-1 flex flex-col items-center justify-center py-3 gap-1 transition-colors"
+                            >
+                                <span className={isActive ? 'text-[#E85D36]' : 'text-slate-400'}>
+                                    {tab.icon}
+                                </span>
+                                <span className={`text-[10px] font-bold ${isActive ? 'text-[#E85D36]' : 'text-slate-400'}`}>
+                                    {tab.label}
+                                </span>
+                                {/* 활성 도트 표시 */}
+                                {isActive && (
+                                    <span className="w-1 h-1 rounded-full bg-[#E85D36]" />
                                 )}
-                            </div>
-
-                            <div className="p-5 text-left bg-white relative z-20">
-                                <div className="text-[17px] font-black text-slate-800 mb-1">
-                                    {/* [적요] content?.title은 선택 언어로 번역된 도시명 */}
-                                    {content?.title || city.name}{', '}{city.country}
-                                </div>
-                                <div className="text-[11px] font-medium text-slate-400">
-                                    {/* [적요] getStatsLabel()로 25개 언어 통계 문구 반환 */}
-                                    {getStatsLabel(selectedLanguage)}
-                                </div>
-                            </div>
-                        </button>
-                    );
-                })}
+                            </button>
+                        );
+                    })}
+                </div>
+                {/* iOS 하단 안전 영역 */}
+                <div className="h-safe-area-inset-bottom" />
             </div>
         </div>
     );

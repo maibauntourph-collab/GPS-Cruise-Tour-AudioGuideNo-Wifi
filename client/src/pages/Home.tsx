@@ -102,6 +102,7 @@ import AIRecommendDialog from '@/components/AIRecommendDialog';
 import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import { CitySelector } from '@/components/CitySelector';
 import { CountryScrollSelector } from '@/components/CountryScrollSelector';
+import { CitySelectTab } from '@/components/CitySelectTab';
 
 // Landing Data fallback if schema doesn't export it
 const LANDING_DATA: Record<string, any> = {
@@ -252,7 +253,10 @@ export default function Home() {
   // simulation → 시뮬레이션 모드
   type AppMode = 'map' | 'list' | 'detail' | 'nav' | 'simulation';
   const [appMode, setAppMode] = useState<AppMode>('map');
+  // [적요] 바텀 내비게이션 활성 탭 상태 - city/map/plan
   const [mainTab, setMainTab] = useState<'city' | 'map' | 'plan'>('city');
+  // [적요] city 탭 활성화 추적 (showCountrySelector와 연동)
+  const [activeCityScreen, setActiveCityScreen] = useState(false);
 
   // [Marketer Song | 2026-03-20] 🌏 글로벌 맞춤 추천을 위한 사용자 국적 판별
   // 학생들에게: 사용자의 브라우저 설정이나 시간대를 분석해 '관심사'를 미리 예측하는 지능형 대시보드입니다.
@@ -346,7 +350,7 @@ export default function Home() {
   });
 
   // Dodari Architecture states
-  const [isWelcomeHandled, setIsWelcomeHandled] = useState(false); // [교수님 지석] PWA 온보딩 처리 여부
+  const [isWelcomeHandled, setIsWelcomeHandled] = useState(true); // [2026-03-23] 온보딩 건너뛰기: 즉시 랜딩 카드 노출
   const [showStartupDialog, setShowStartupDialog] = useState(false); // [어벤져스 팀] 온보딩 후에 시작 다이얼로그 노출
   const [isStartupTransitioning, setIsStartupTransitioning] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<string>('');
@@ -1181,171 +1185,56 @@ export default function Home() {
           @에이? "부모인 Home에서 관리하는 setSelectedLanguage 함수를 자식인 StartupDialog에 
           onLanguageChange라는 이름의 프롭으로 주입해주는 모습입니다. 이것이 리액트의 기본적인 데이터 흐름이죠."
         */}
-        <StartupDialog
-          isOpen={showStartupDialog}
-          onClose={handleStartupClose}
-          onSelectGPS={handleSelectGPS}
-          onRestoreTour={handleRestoreTour}
-          savedTourData={null}
-          selectedLanguage={selectedLanguage}
-          onLanguageChange={(lang) => setSelectedLanguage(lang)}
-          isGpsAvailable={!!position}
-          isGpsLoading={isLoading}
-          cities={cities}
-          selectedCityId={selectedCityId}
-          onCityChange={handleCityChange}
-        />
+        {/* [2026-03-23 | 통합 레이아웃] 언어 선택 + 나라/도시 카드를 병합하여 팝업 없는 매끄러운 UX 제공 */}
+        {/* Startup Dialog 제거됨: 이제 바로 나라/도시 카드가 보입니다. */}
 
-        {/* ✅ [신기능 | 2026-02-27] 국가/도시 선택 카드 (랜딩 전 표시)
-            학생들: AnimatePresence + motion.div 조합으로 부드러운 슬라이드-업 애니메이션을 구현합니다.
-            플로우: StartupDialog 완료 → 0.5초 후 이 카드 표시 → 도시 선택 → list 모드 */}
+        {/* ════════════════════════════════════════════════════════════
+             [적요 - 2026-03-23 23:02] ② City Select 전체 화면 모드
+             이미지의 city select 화면과 1:1 매칭:
+             - PWA 배너 / 기항지 가이드 헤더 / 한:EN:中 언어 토글
+             - 카테고리 탭 / 도시 카드 목록 / 바텀 내비게이션
+             showCountrySelector = true 일 때 지도 위에 full-screen으로 덮어씁니다.
+        ════════════════════════════════════════════════════════════ */}
         <AnimatePresence>
           {showCountrySelector && (
             <motion.div
-              key="country-selector"
-              initial={{ y: '100%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: '100%', opacity: 0 }}
-              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-              className="fixed inset-0 flex flex-col justify-end"
-              style={{ zIndex: 3500, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}
+              key="city-select-screen"
+              initial={{ x: '100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '100%', opacity: 0 }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed inset-0 z-[5000] bg-white/40 backdrop-blur-2xl"
             >
-              <div className="bg-white rounded-t-3xl shadow-2xl p-6 pb-10 max-h-[88vh] overflow-y-auto">
-                {/* 상단 핸들 바 */}
-                <div className="w-12 h-1.5 rounded-full bg-slate-200 mx-auto mb-5" />
-                {/* 헤더 */}
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h2 className="text-2xl font-black text-slate-800">
-                      🌍 {selectedLanguage === 'ko' ? '여행지를 선택하세요' : 'Select Destination'}
-                    </h2>
-                    <p className="text-sm text-slate-400 mt-1">
-                      {selectedLanguage === 'ko' ? '크루즈 기항지 오디오 가이드' : 'Cruise Port Audio Guide'}
-                    </p>
-                  </div>
-                  <button
-                    className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors font-bold"
-                    onClick={() => { setShowCountrySelector(false); transitionTo('list'); }}
-                  >✕</button>
-                </div>
-
-                {/* 도시 검색창 추가 */}
-                <div className="relative mb-4">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                  <Input
-                    placeholder={selectedLanguage === 'ko' ? '목적지 검색...' : 'Search destination...'}
-                    className="pl-9 h-10 bg-slate-100 border-none rounded-xl"
-                    value={citySearchQuery}
-                    onChange={(e) => setCitySearchQuery(e.target.value)}
-                  />
-                </div>
-
-                {/* 국가 카드 스크롤 셀렉션 (Card Design Scroll Method - Country based) */}
-                <div className="flex gap-4 overflow-x-auto pb-6 mb-2 -mx-6 px-6 snap-x snap-mandatory pointer-events-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                  {cities.length === 0 ? (
-                    // 로딩 스켈레톤 (가로 스크롤)
-                    [1, 2, 3].map(i => (
-                      <div key={i} className="w-[260px] h-[340px] shrink-0 rounded-[2rem] bg-slate-100 animate-pulse snap-center" />
-                    ))
-                  ) : (() => {
-                    // [적요] 국가별로 대표 도시 1개씩만 추출하여 카드 목록 구성
-                    const uniqueCountriesMap = new Map();
-                    cities.forEach(c => {
-                      if (!uniqueCountriesMap.has(c.country)) {
-                        uniqueCountriesMap.set(c.country, c);
-                      }
-                    });
-                    const uniqueCountries = Array.from(uniqueCountriesMap.values());
-
-                    return uniqueCountries.filter(c => {
-                      const KOREAN_COUNTRY_MAP: Record<string, string[]> = {
-                        'italy': ['이탈리아', '이태리'],
-                        'france': ['프랑스'],
-                        'uk': ['영국'],
-                        'spain': ['스페인'],
-                        'malaysia': ['말레이시아'],
-                        'singapore': ['싱가포르', '싱가폴'],
-                        'philippines': ['필리핀'],
-                        'thailand': ['태국'],
-                        'china': ['중국'],
-                        'south korea': ['한국', '남한', '대한민국']
-                      };
-                      const searchLower = citySearchQuery.toLowerCase();
-                      const countryLower = c.country.toLowerCase();
-                      const matchDirect = countryLower.includes(searchLower);
-                      const matchKorean = KOREAN_COUNTRY_MAP[countryLower]?.some(kName => kName.includes(searchLower));
-                      return matchDirect || matchKorean;
-                    }).map((city) => {
-                      const countryLower = city.country.toLowerCase();
-
-                      let bgImage = 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&q=70';
-
-                      // 국가별 대표 이미지 보정
-                      if (countryLower.includes('korea')) bgImage = 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80';
-                      else if (countryLower.includes('philippines')) bgImage = 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600&q=80';
-                      else if (countryLower.includes('italy')) bgImage = 'https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?w=600&q=80';
-                      else if (countryLower.includes('france')) bgImage = 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80';
-                      else if (countryLower.includes('china')) bgImage = 'https://images.unsplash.com/photo-1549693578-d683be217e58?w=600&q=80';
-
-                      // 해당 국가에 포함된 전체 도시 및 명소 계산
-                      const countryCities = cities.filter(c => c.country === city.country);
-                      const countryLandmarkCount = landmarks.filter(l => countryCities.some(cc => cc.id === l.cityId)).length || Math.floor(Math.random() * 30 + 10);
-
-                      return (
-                        <button
-                          key={city.country}
-                          className={`relative w-[260px] h-[340px] shrink-0 snap-center rounded-[2rem] overflow-hidden group shadow-lg hover:shadow-2xl transition-all active:scale-95 text-left flex flex-col justify-end p-0 border border-slate-200/50 ${selectedCityId === city.id ? 'ring-4 ring-orange-500 ring-offset-2' : ''}`}
-                          onClick={() => {
-                            // [적요] 국가 선택 시 해당 국가의 첫 번째 대표 도시로 세팅!
-                            handleCityChange(city.id);
-                            setShowCountrySelector(false);
-                            setTimeout(() => transitionTo('list'), 200);
-                          }}
-                        >
-                          <img
-                            src={bgImage}
-                            alt={city.country}
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80" />
-
-                          <div className="relative z-10 w-full p-6 pt-10 flex flex-col gap-1.5">
-                            <div className="text-white/80 text-[13px] font-black uppercase tracking-widest drop-shadow mb-1">
-                              {selectedLanguage === 'ko' ? '국가' : 'Country'}
-                            </div>
-                            <div className="text-white font-black text-3xl tracking-tight leading-none drop-shadow-lg">
-                              {city.country.toUpperCase()}
-                            </div>
-                            <div className="text-orange-300 text-[13px] font-bold mt-3 flex items-center gap-1.5 opacity-90">
-                              <Globe className="w-4 h-4" />
-                              {countryCities.length}{selectedLanguage === 'ko' ? '개 기항지 도시' : ' Port Cities'}
-                            </div>
-                          </div>
-
-                          {selectedCityId === city.id && (
-                            <div className="absolute top-4 right-4 bg-orange-500 text-white p-1.5 rounded-full shadow-lg ring-2 ring-white/20">
-                              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                              </svg>
-                            </div>
-                          )}
-                        </button>
-                      );
-                    });
-                  })()}
-                </div>
-
-                {/* CTA 버튼 */}
-                <button
-                  className="w-full h-14 rounded-2xl bg-gradient-to-r from-orange-500 to-rose-500 text-white font-black text-lg shadow-lg shadow-orange-200 active:scale-95 transition-all hover:shadow-xl"
-                  onClick={() => { setShowCountrySelector(false); transitionTo('list'); }}
-                >
-                  {selectedLanguage === 'ko' ? '🗺️ 랜드마크 목록 보기' : '🗺️ View Landmark List'}
-                </button>
-              </div>
+              <CitySelectTab
+                cities={cities}
+                selectedCityId={selectedCityId}
+                onCityChange={handleCityChange}
+                selectedLanguage={selectedLanguage}
+                onLanguageChange={(lang) => setSelectedLanguage(lang as any)}
+                onTransitionToList={() => {
+                  // [적요] 도시 선택 후 → city 화면 닫고 landmark 리스트로 이동
+                  setShowCountrySelector(false);
+                  setTimeout(() => transitionTo('list'), 200);
+                }}
+                activeBottomTab={mainTab}
+                onTabChange={(tab) => {
+                  setMainTab(tab);
+                  if (tab === 'map') {
+                    // [적요] 지도 탭 → city select 화면 닫고 지도로 이동
+                    setShowCountrySelector(false);
+                    transitionTo('map');
+                  } else if (tab === 'plan') {
+                    // [적요] 내 플랜 탭 → city select 닫고 리스트로 이동
+                    setShowCountrySelector(false);
+                    transitionTo('list');
+                  }
+                  // city 탭이면 그대로 유지
+                }}
+              />
             </motion.div>
           )}
         </AnimatePresence>
+        {/* [적요] 구 바텀시트 코드 제거 완료 - CitySelectTab full-screen으로 대체됨 */}
 
         {/* [Avengers Team] 상단 바를 제거하고 UnifiedFloatingCard로 기능을 통합하였습니다. (Merge One Card) */}
 
@@ -1649,6 +1538,13 @@ export default function Home() {
             setIsCardMinimized(false);
             transitionTo(prevAppModeRef.current || 'map');
           }}
+          onMinimizeToMenu={() => {
+            // [적요] 메뉴로 최소화: 명소 선택 해제 후 국가/도시 선택 메뉴 노출
+            setSelectedLandmark(null);
+            setIsCardMinimized(false);
+            transitionTo('map');
+            setShowCountrySelector(true);
+          }}
           landmarks={landmarks}
           tourStops={tourStops}
           onAddToTour={handleAddToTour}
@@ -1807,45 +1703,7 @@ export default function Home() {
           />
         )}
 
-        {/* [Designer Kim | 🎖️] 국가 선택 카드 스크롤 화면 */}
-        <Dialog open={showCountrySelector} onOpenChange={setShowCountrySelector}>
-          <DialogContent className="max-w-[450px] w-full p-0 overflow-hidden border-0 bg-white/95 backdrop-blur-xl rounded-[3rem] shadow-2xl h-auto max-h-[90vh] flex flex-col items-center justify-center [&>button]:hidden">
-            <CountryScrollSelector
-              countries={Array.from(new Set(cities.filter(c => c.country).map(c => c.country))).sort()}
-              cities={cities}
-              selectedCityId={selectedCityId}
-              onLanguageChange={setSelectedLanguage}
-              onCityChange={(cityId: string) => {
-                handleCityChange(cityId);
-                setShowCountrySelector(false);
-                transitionTo('list');
-              }}
-              selectedCountry={selectedCountry}
-              onCountrySelect={setSelectedCountry}
-              selectedLanguage={selectedLanguage}
-              onNext={() => {
-                // 국가 선택 후 도시를 선택할 수 있도록, 
-                // 첫 번째 도시로 이동 후 리스트 화면으로 넘기되 사용자가 헤더/메뉴에서 시티를 고를 수 있도록 넘깁니다.
-                // 또는 나중에 도시 선택 모달을 추가로 연동할 수 있음
-                const firstCity = cities.find(c => c.country === selectedCountry);
-                if (firstCity) {
-                  handleCityChange(firstCity.id);
-                  setShowCountrySelector(false);
-                  transitionTo('list'); // 맵/리스트 모드로 전이
-                }
-              }}
-            />
-            <div className="pb-8">
-              <Button
-                variant="ghost"
-                className="text-slate-400 font-bold"
-                onClick={() => setShowCountrySelector(false)}
-              >
-                {selectedLanguage === 'ko' ? '나중에 선택하기' : 'Skip for now'}
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
+        {/* [2026-03-23 | 통합 완료] 이제 모든 선택(TTS/Port/City)은 상단의 AnimatePresence 섹션에서 하나로 처리됩니다. */}
       </div>
 
       {/* [Designer Kim] 프리미엄 백그라운드 워터마크 레이어 */}
