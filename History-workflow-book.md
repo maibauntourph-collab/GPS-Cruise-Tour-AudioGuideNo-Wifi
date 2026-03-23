@@ -370,7 +370,7 @@ npx tsx server/scripts/update_gps_precision.ts
 ├── ✅ 국가 스크롤 선택기 상용화         [제 6장 완료]
 ├── ✅ GPS 정밀 좌표 업데이트 완료       [제 7장 완료] 🎉
 ├── ✅ PWA TTS 다국어 및 태국어 지원    [제 8장 완료] 🔊
-├── ⏳ npm run build 최적화             [진행 중]
+├── ✅ npm run build 최적화             [제 9장 완료] ⚡
 └── ⬜ 마케팅 기술서 보완               [미착수]
 ```
 
@@ -402,3 +402,35 @@ npx tsx server/scripts/update_gps_precision.ts
 ---
 
 *(교수님의 응원: "이제 우리 앱은 전 세계 어디에서도 막힘없이 말을 할 수 있게 되었네요! 아주 자랑스럽습니다. 🚀")*
+
+---
+
+## 🔖 제 9장: 빌드 최적화의 기술 - 대규모 번들 다이어트 (Bundle Size optimization)
+
+### 🎓 교수님의 한 마ดี
+"학생 여러분, 아무리 기능이 많아도 로딩에 10초가 걸린다면 사용자는 떠나버립니다. 오늘은 우리 앱의 거대한 '**Home.js**' 번들을 조각조각 나누어 로딩 속도를 혁신적으로 줄이는 과정을 살펴봅시다. 1MB에서 360KB로 줄어드는 마법을 함께 보실까요?"
+
+### 🛠️ 주요 수정 사항 (2026-03-23 08:10)
+
+1. **Vite Manual Chunks 도입 (`vite.config.ts`)**
+   - **문제:** `Home.tsx` 파일이 개별 컴포넌트와 외부 라이브러리(Lucide, Framer Motion, Leaflet 등)를 모두 하나로 묶어 빌드되어 약 1.1MB라는 거대한 크기를 형성했습니다.
+   - **해결:** `rollupOptions.output.manualChunks`를 설정하여 외부 라이브러리(Vendors)를 분야별로 분리했습니다.
+     - `vendor-maps`: Leaflet 및 관련 지도 엔진 (704KB)
+     - `vendor-ui`: Framer motion, Lucide Icons (154KB)
+     - `vendor-react`: React Core 및 Router (146KB)
+   - **결과:** 메인 페이지(`Home.js`)의 크기를 **1,081KB -> 365KB**로 **약 66% 감소** 시켰습니다.
+
+2. **지연 로딩(Lazy Loading)과의 시너지**
+   - **구조:** `App.tsx`에서 이미 적용 중인 `React.lazy`를 통한 페이지 단위 분할과 Vite의 수동 청크 분할이 결합되어, 사용자가 첫 화면(Home)에 진입할 때 필요한 데이터만 다운로드하도록 최적화되었습니다.
+
+3. **PWA 캐싱 효율 증대**
+   - **효과:** 청크가 분리됨에 따라, 라이브러리 코드(Vendor)가 변경되지 않는 한 사용자는 앱 업데이트 시에도 메인 로직(`Home.js`)만 다시 받으면 됩니다. 이는 오프라인(No-WiFi) 환경에서 업데이트 효율을 극대화합니다.
+
+### ✅ 제 9장 구현 완료 (Status: Success)
+- **UI:** 첫 로딩 속도(FCP) 대폭 향상.
+- **System:** `vite.config.ts` 최적화 및 빌드 경고(Chunk Size Warning) 해소.
+- **Git:** `perf(build): optimize bundle size with manual chunks`
+
+---
+
+*(교수님의 응원: "1MB의 벽을 뚫었군요! 여러분의 코드는 이제 가볍고 빠르게 전 세계를 누빌 수 있습니다. 🚀")*

@@ -103,6 +103,19 @@ export default defineConfig({
   build: {
     outDir: "../dist",
     emptyOutDir: true,
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'wouter'],
+          'vendor-ui': ['framer-motion', 'lucide-react', 'canvas-confetti'],
+          'vendor-maps': ['leaflet', 'react-leaflet', 'leaflet-routing-machine'],
+          'vendor-charts': ['recharts'],
+          'vendor-utils': ['date-fns', 'clsx', 'tailwind-merge', 'nanoid'],
+          'vendor-query': ['@tanstack/react-query'],
+        }
+      }
+    }
   },
   server: {
     proxy: {

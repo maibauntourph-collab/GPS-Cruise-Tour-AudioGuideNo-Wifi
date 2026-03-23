@@ -11,6 +11,7 @@ var __export = (target, all) => {
 // shared/schema.ts
 var schema_exports = {};
 __export(schema_exports, {
+  appSettings: () => appSettings,
   cities: () => cities,
   citiesBackup: () => citiesBackup,
   citiesRelations: () => citiesRelations,
@@ -63,6 +64,7 @@ __export(schema_exports, {
   settlements: () => settlements,
   settlementsRelations: () => settlementsRelations,
   siteSettings: () => siteSettings,
+  spots: () => spots,
   tourSchedules: () => tourSchedules,
   transactions: () => transactions,
   transactionsRelations: () => transactionsRelations,
@@ -81,7 +83,7 @@ import { z } from "zod";
 import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, json, unique, serial } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
-var transportOptionSchema, cruisePortSchema, citySchema, languageSchema, translationContentSchema, translationsSchema, landmarkSchema, gpsPositionSchema, waypointSchema, follows, likes, cities, landmarks, citiesBackup, landmarksBackup, landmarkGuides, dataVersions, visitedLandmarks, landmarkAudio, users, userIdentities, tourSchedules, citiesRelations, landmarksRelations, visitedLandmarksRelations, usersRelations, userIdentitiesRelations, landmarkAudioRelations, groupMembers, savedRoutes, routePhotos, creatorEarnings, transactions, settlements, marketingContents, updateStats, insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, insertLandmarkAudioSchema, insertTourScheduleSchema, siteSettings, insertSiteSettingSchema, insertGroupMemberSchema, insertUserSchema, insertUserIdentitySchema, insertSavedRouteSchema, insertRoutePhotoSchema, insertCreatorEarningsSchema, insertTransactionSchema, insertSettlementSchema, insertMarketingContentSchema, insertLandmarkGuideSchema, insertUpdateStatsSchema, creatorEarningsRelations, transactionsRelations, settlementsRelations, marketingContentsRelations, landmarkGuidesRelations, savedRoutesRelations, routePhotosRelations, routeStopSchema, insertLikeSchema, insertFollowSchema, likesRelations, followsRelations;
+var transportOptionSchema, cruisePortSchema, citySchema, languageSchema, translationContentSchema, translationsSchema, landmarkSchema, gpsPositionSchema, waypointSchema, follows, likes, cities, landmarks, citiesBackup, landmarksBackup, landmarkGuides, dataVersions, visitedLandmarks, landmarkAudio, users, userIdentities, tourSchedules, citiesRelations, landmarksRelations, visitedLandmarksRelations, usersRelations, userIdentitiesRelations, landmarkAudioRelations, groupMembers, savedRoutes, routePhotos, creatorEarnings, transactions, settlements, marketingContents, updateStats, insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, insertLandmarkAudioSchema, insertTourScheduleSchema, siteSettings, insertSiteSettingSchema, insertGroupMemberSchema, insertUserSchema, insertUserIdentitySchema, insertSavedRouteSchema, insertRoutePhotoSchema, insertCreatorEarningsSchema, insertTransactionSchema, insertSettlementSchema, insertMarketingContentSchema, insertLandmarkGuideSchema, insertUpdateStatsSchema, creatorEarningsRelations, transactionsRelations, settlementsRelations, marketingContentsRelations, landmarkGuidesRelations, savedRoutesRelations, routePhotosRelations, routeStopSchema, insertLikeSchema, insertFollowSchema, likesRelations, followsRelations, appSettings, spots;
 var init_schema = __esm({
   "shared/schema.ts"() {
     "use strict";
@@ -742,6 +744,14 @@ var init_schema = __esm({
         relationName: "followers"
       })
     }));
+    appSettings = pgTable("app_settings", {
+      id: varchar("id").primaryKey(),
+      config: json("config")
+    });
+    spots = pgTable("spots", {
+      id: varchar("id").primaryKey(),
+      name: varchar("name")
+    });
   }
 });
 
@@ -1191,7 +1201,20 @@ var vite_config_default = defineConfig({
   root: "./client",
   build: {
     outDir: "../dist",
-    emptyOutDir: true
+    emptyOutDir: true,
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "wouter"],
+          "vendor-ui": ["framer-motion", "lucide-react", "canvas-confetti"],
+          "vendor-maps": ["leaflet", "react-leaflet", "leaflet-routing-machine"],
+          "vendor-charts": ["recharts"],
+          "vendor-utils": ["date-fns", "clsx", "tailwind-merge", "nanoid"],
+          "vendor-query": ["@tanstack/react-query"]
+        }
+      }
+    }
   },
   server: {
     proxy: {
