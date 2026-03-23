@@ -101,6 +101,7 @@ import StartupDialog from '@/components/StartupDialog';
 import AIRecommendDialog from '@/components/AIRecommendDialog';
 import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import { CitySelector } from '@/components/CitySelector';
+import { CountryScrollSelector } from '@/components/CountryScrollSelector';
 
 // Landing Data fallback if schema doesn't export it
 const LANDING_DATA: Record<string, any> = {
@@ -348,11 +349,13 @@ export default function Home() {
   const [isWelcomeHandled, setIsWelcomeHandled] = useState(false); // [교수님 지석] PWA 온보딩 처리 여부
   const [showStartupDialog, setShowStartupDialog] = useState(false); // [어벤져스 팀] 온보딩 후에 시작 다이얼로그 노출
   const [isStartupTransitioning, setIsStartupTransitioning] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<string>('');
 
-  // [Dodari Logic] PWA 온보딩이 닫히면(isWelcomeHandled=true) 시작 다이얼로그를 띄웁니다.
+  // [Dodari Logic | 2026-03-23] PWA 온보딩이 닫히면(isWelcomeHandled=true) 
+  // 기존의 StartupDialog(온보딩)를 생략하고, 바로 국가/도시 선택 다이얼로그를 띄웁니다.
   useEffect(() => {
     if (isWelcomeHandled) {
-      setShowStartupDialog(true);
+      setShowCountrySelector(true);
     }
   }, [isWelcomeHandled]);
   const [hasCheckedForStartup, setHasCheckedForStartup] = useState(false);
@@ -1775,26 +1778,74 @@ export default function Home() {
 
         <LoginDialog isOpen={showLoginDialog} onClose={() => setShowLoginDialog(false)} language={selectedLanguage} />
         <OfflineIndicator />
-        <InstallPrompt selectedLanguage={selectedLanguage} onClose={() => setIsWelcomeHandled(true)} />
+        {/* [Dodari | 🎖️] PWA 온보딩 처리 전까지만 InstallPrompt를 보여줍니다. */}
+        {!isWelcomeHandled && (
+          <InstallPrompt selectedLanguage={selectedLanguage} onClose={() => setIsWelcomeHandled(true)} />
+        )}
 
-        {/* [어벤져스 팀 | ACTIVATE KEY FUNCTION] StartupDialog를 활성화하여 여행의 첫 관문을 복구합니다. */}
-        <StartupDialog
-          isOpen={showStartupDialog}
-          onClose={() => setShowStartupDialog(false)}
-          onSelectGPS={() => setGpsEnabled(true)}
-          onRestoreTour={(data) => {
-            handleCityChange(data.cityId);
-            setShowStartupDialog(false);
-          }}
-          savedTourData={null}
-          selectedLanguage={selectedLanguage}
-          onLanguageChange={setSelectedLanguage}
-          isGpsAvailable={gpsEnabled}
-          isGpsLoading={isLoading}
-          cities={cities}
-          selectedCityId={selectedCityId}
-          onCityChange={handleCityChange}
-        />
+        {/* [어벤져스 팀 | 🎖️] PWA 온보딩이 완료된 후에만 StartupDialog를 마운트하여 ARIA 충돌 및 레이어 간섭을 방지합니다. */}
+        {isWelcomeHandled && showStartupDialog && (
+          <StartupDialog
+            isOpen={showStartupDialog}
+            onClose={() => {
+              setShowStartupDialog(false);
+              setShowCountrySelector(true); // 랜딩 후 국가 선택으로 이동
+            }}
+            onSelectGPS={() => setGpsEnabled(true)}
+            onRestoreTour={(data) => {
+              handleCityChange(data.cityId);
+              setShowStartupDialog(false);
+            }}
+            savedTourData={null}
+            selectedLanguage={selectedLanguage}
+            onLanguageChange={setSelectedLanguage}
+            isGpsAvailable={gpsEnabled}
+            isGpsLoading={isLoading}
+            cities={cities}
+            selectedCityId={selectedCityId}
+            onCityChange={handleCityChange}
+          />
+        )}
+
+        {/* [Designer Kim | 🎖️] 국가 선택 카드 스크롤 화면 */}
+        <Dialog open={showCountrySelector} onOpenChange={setShowCountrySelector}>
+          <DialogContent className="max-w-[450px] w-full p-0 overflow-hidden border-0 bg-white/95 backdrop-blur-xl rounded-[3rem] shadow-2xl h-auto max-h-[90vh] flex flex-col items-center justify-center [&>button]:hidden">
+            <CountryScrollSelector
+              countries={Array.from(new Set(cities.filter(c => c.country).map(c => c.country))).sort()}
+              cities={cities}
+              selectedCityId={selectedCityId}
+              onLanguageChange={setSelectedLanguage}
+              onCityChange={(cityId: string) => {
+                handleCityChange(cityId);
+                setShowCountrySelector(false);
+                transitionTo('list');
+              }}
+              selectedCountry={selectedCountry}
+              onCountrySelect={setSelectedCountry}
+              selectedLanguage={selectedLanguage}
+              onNext={() => {
+                // 국가 선택 후 도시를 선택할 수 있도록, 
+                // 첫 번째 도시로 이동 후 리스트 화면으로 넘기되 사용자가 헤더/메뉴에서 시티를 고를 수 있도록 넘깁니다.
+                // 또는 나중에 도시 선택 모달을 추가로 연동할 수 있음
+                const firstCity = cities.find(c => c.country === selectedCountry);
+                if (firstCity) {
+                  handleCityChange(firstCity.id);
+                  setShowCountrySelector(false);
+                  transitionTo('list'); // 맵/리스트 모드로 전이
+                }
+              }}
+            />
+            <div className="pb-8">
+              <Button
+                variant="ghost"
+                className="text-slate-400 font-bold"
+                onClick={() => setShowCountrySelector(false)}
+              >
+                {selectedLanguage === 'ko' ? '나중에 선택하기' : 'Skip for now'}
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* [Designer Kim] 프리미엄 백그라운드 워터마크 레이어 */}

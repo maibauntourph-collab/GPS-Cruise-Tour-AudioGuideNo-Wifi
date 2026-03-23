@@ -47,9 +47,13 @@ export default function LandmarkDetailDialog({
 
   const nameFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'name') : '';
   const descFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'description') : '';
+  const narrationFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'narration') : '';
+  const detailFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'detailedDescription') : '';
 
   const translatedName = useLiveTranslation(nameFallback, selectedLanguage);
   const translatedDesc = useLiveTranslation(descFallback, selectedLanguage);
+  const translatedNarration = useLiveTranslation(narrationFallback, selectedLanguage);
+  const translatedDetail = useLiveTranslation(detailFallback, selectedLanguage);
 
   // Fetch guides for this landmark
   const { data: guides = [] } = useQuery<DbLandmarkGuide[]>({
@@ -118,7 +122,7 @@ export default function LandmarkDetailDialog({
 
     const textToPlay = audioContentType === 'summary'
       ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : translatedDesc)
-      : currentDetailedDescription;
+      : translatedNarration;
 
     if (!textToPlay) return;
 
@@ -200,10 +204,10 @@ export default function LandmarkDetailDialog({
   const activeSentences = useMemo(() => {
     const text = audioContentType === 'summary'
       ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : translatedDesc)
-      : currentDetailedDescription;
+      : translatedNarration;
     if (!text) return [];
     return AudioService.splitIntoSentences(text);
-  }, [landmark, selectedGuide, selectedLanguage, audioContentType, currentDetailedDescription, translatedDesc]);
+  }, [landmark, selectedGuide, selectedLanguage, audioContentType, translatedDesc, translatedNarration]);
 
   if (!landmark) return null;
 
@@ -399,7 +403,7 @@ export default function LandmarkDetailDialog({
                         );
                       })
                     ) : (
-                      currentDetailedDescription
+                      audioContentType === 'narration' ? translatedNarration : translatedDetail
                     )}
                   </div>
                 </div>

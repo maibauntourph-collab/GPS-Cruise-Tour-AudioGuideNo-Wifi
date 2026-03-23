@@ -143,13 +143,25 @@ export function StartupDialog({
           </div>
         </div>
 
-        <div className="p-8 pb-10 w-full flex flex-col items-center">
+        <div className="p-8 pb-10 w-full flex flex-col items-center gap-4">
+          {/* [적요 - 2026-03-23] 언어 선택기: 첫 화면에서 TTS/UI 언어를 미리 설정합니다.
+              이 선택이 LanguageContext를 통해 전체 앱에 즉시 반영됩니다. */}
+          <div className="w-full bg-slate-50 rounded-2xl px-4 py-3 flex items-center gap-3 border border-slate-100">
+            <span className="text-slate-400 text-sm font-semibold shrink-0">
+              {selectedLanguage === 'ko' ? '🌐 언어' : selectedLanguage === 'th' ? '🌐 ภาษา' : '🌐 Language'}
+            </span>
+            <LanguageSelector
+              selectedLanguage={selectedLanguage}
+              onLanguageChange={onLanguageChange}
+            />
+          </div>
+
           {/* [적요] 다음 버튼 - getLangText()로 3개 언어 지원 */}
           <Button
-            className="w-full h-14 rounded-2xl bg-[#E85D36] hover:bg-[#d6522c] text-white font-bold text-lg mb-4 shadow-lg shadow-orange-500/20 transition-transform active:scale-95"
+            className="w-full h-14 rounded-2xl bg-[#E85D36] hover:bg-[#d6522c] text-white font-bold text-lg shadow-lg shadow-orange-500/20 transition-transform active:scale-95"
             onClick={() => {
               audioService.unlockAudio();
-              onClose(); // 다음 화면(City Select)으로 이동
+              onClose(); // 다음 화면(Country Select)으로 이동
             }}
           >
             {getLangText(

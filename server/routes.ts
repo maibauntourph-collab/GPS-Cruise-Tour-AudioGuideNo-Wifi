@@ -10,6 +10,7 @@ import { db } from "./db";
 import { eq, desc, sql, and } from "drizzle-orm";
 import { generateCityInfo, recommendTourItinerary, translateText } from "./lib/gemini";
 import { automationService } from "./services/automationService";
+import { autoTranslateLandmark } from "./lib/autoTranslate";
 import { dbCheckService } from "./services/dbCheckService";
 import { settlementService } from "./services/settlementService";
 import crypto from "node:crypto";
@@ -738,6 +739,17 @@ export function registerRoutes(app: Hono<any>) {
         console.error("Marketing generation failed:", err);
       });
 
+      // [자동화 닥터] 장소 추가 시 24개 언어 자동 번역 트리거
+      const landmarkForT = newLandmark as unknown as Landmark;
+      autoTranslateLandmark(landmarkForT.id, {
+        name: landmarkForT.name,
+        narration: landmarkForT.narration || "",
+        description: landmarkForT.description,
+        detailedDescription: landmarkForT.detailedDescription
+      }).catch(err => {
+        console.error("Auto Translate failed:", err);
+      });
+
       return c.json(newLandmark, 201);
     } catch (error: any) {
       if (error?.code === '23505') return c.json({ error: "Landmark ID exists" }, 409);
@@ -1218,12 +1230,12 @@ export function registerRoutes(app: Hono<any>) {
 
   // [NEW] Likes Routes
   const likesRoute = new Hono();
-  
+
   likesRoute.get("/", async (c) => {
     try {
       const userId = (c as any).get('session')?.get?.("userId");
       if (!userId) return c.json({ error: "Auth required" }, 401);
-      
+
       const likes = await storage.getLikes(userId);
       return c.json(likes);
     } catch (e) {
@@ -1239,7 +1251,7 @@ export function registerRoutes(app: Hono<any>) {
       const body = await c.req.json();
       // Enforce userId from session
       const likeData = { ...body, userId };
-      
+
       const newLike = await storage.addLike(likeData);
       return c.json(newLike, 201);
     } catch (e) {

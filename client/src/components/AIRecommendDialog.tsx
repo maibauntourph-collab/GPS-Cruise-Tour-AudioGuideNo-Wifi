@@ -197,22 +197,46 @@ export default function AIRecommendDialog({
             {/* Multi-Category Selection */}
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
-                {selectedLanguage === 'ko' ? '추천 카테고리 선택 (복수 선택 가능)' : 'SELECT CATEGORIES (MULTI-SELECT)'}
+                {selectedLanguage === 'ko' ? '추천 카테고리 선택 (복수 선택 가능)' : selectedLanguage === 'es' ? 'SELECCIONAR CATEGORÍAS (SELECCIÓN MÚLTIPLE)' : 'SELECT CATEGORIES (MULTI-SELECT)'}
               </label>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { id: 'landmarks', icon: LandmarkIcon, label: t('landmarks', selectedLanguage), color: 'blue' },
-                  { id: 'restaurants', icon: Utensils, label: t('restaurants', selectedLanguage), color: 'orange' },
-                  { id: 'activities', icon: Activity, label: t('activities', selectedLanguage), color: 'emerald' },
-                  { id: 'shopping', icon: Zap, label: selectedLanguage === 'ko' ? '쇼핑' : 'Shopping', color: 'purple' }
+                  {
+                    id: 'landmarks',
+                    icon: LandmarkIcon,
+                    label: t('landmarks', selectedLanguage),
+                    activeClass: 'ring-blue-500/20 bg-blue-600 hover:bg-blue-700 text-white',
+                    inactiveClass: 'hover:bg-blue-50 text-slate-700 border-slate-200'
+                  },
+                  {
+                    id: 'restaurants',
+                    icon: Utensils,
+                    label: t('restaurants', selectedLanguage),
+                    activeClass: 'ring-orange-500/20 bg-orange-600 hover:bg-orange-700 text-white',
+                    inactiveClass: 'hover:bg-orange-50 text-slate-700 border-slate-200'
+                  },
+                  {
+                    id: 'activities',
+                    icon: Activity,
+                    label: t('activities', selectedLanguage),
+                    activeClass: 'ring-emerald-500/20 bg-emerald-600 hover:bg-emerald-700 text-white',
+                    inactiveClass: 'hover:bg-emerald-50 text-slate-700 border-slate-200'
+                  },
+                  {
+                    id: 'shopping',
+                    icon: Zap,
+                    label: selectedLanguage === 'ko' ? '쇼핑' : selectedLanguage === 'es' ? 'Compras' : 'Shopping',
+                    activeClass: 'ring-purple-500/20 bg-purple-600 hover:bg-purple-700 text-white',
+                    inactiveClass: 'hover:bg-purple-50 text-slate-700 border-slate-200'
+                  }
                 ].map((cat) => (
                   <Button
                     key={cat.id}
                     variant={selectedCategories.includes(cat.id as CategoryType) ? 'default' : 'outline'}
                     size="sm"
-                    className={`h-9 justify-start gap-2 transition-all ${selectedCategories.includes(cat.id as CategoryType)
-                      ? `ring-2 ring-${cat.color}-500/20 shadow-md bg-${cat.color}-600 hover:bg-${cat.color}-700 border-none text-white`
-                      : 'hover:bg-primary/5'
+                    className={`h-9 justify-start gap-2 transition-all shadow-sm ${selectedCategories.includes(cat.id as CategoryType)
+                      ? `ring-2 border-transparent ${cat.activeClass}`
+                      : cat.inactiveClass
                       }`}
                     onClick={() => {
                       if (selectedCategories.includes(cat.id as CategoryType)) {
@@ -222,8 +246,8 @@ export default function AIRecommendDialog({
                       }
                     }}
                   >
-                    <cat.icon className={`w-3.5 h-3.5 ${selectedCategories.includes(cat.id as CategoryType) ? 'animate-pulse' : ''}`} />
-                    <span className="text-xs">{cat.label}</span>
+                    <cat.icon className={`w-3.5 h-3.5 ${selectedCategories.includes(cat.id as CategoryType) ? 'animate-pulse' : 'text-slate-500'}`} />
+                    <span className="text-xs font-semibold">{cat.label}</span>
                   </Button>
                 ))}
               </div>

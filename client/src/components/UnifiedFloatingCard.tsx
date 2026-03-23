@@ -337,18 +337,22 @@ export function UnifiedFloatingCard({
     return `${(meters / 1000).toFixed(1)}km`;
   };
 
+  // [적요 - 2026-03-23] 도보 시간 포맷 - 언어별 다국어 지원
+  // ko=한국어, ja=일본어, zh=중국어, th=태국어, 나머지는 영어 형식
   const formatWalkTime = (meters: number, lang: string) => {
-    const minutes = Math.ceil(meters / 84); // Roughly 5km/h walking speed
+    const minutes = Math.ceil(meters / 84);
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
     if (lang === 'ko') {
-      if (minutes < 60) return `도보 ${minutes}분`;
-      const hours = Math.floor(minutes / 60);
-      const mins = minutes % 60;
-      return `도보 ${hours}시간 ${mins}분`;
+      return minutes < 60 ? `도보 ${minutes}분` : `도보 ${hours}시간 ${mins}분`;
+    } else if (lang === 'ja') {
+      return minutes < 60 ? `徒歩 ${minutes}分` : `徒歩 ${hours}時間${mins}分`;
+    } else if (lang === 'th') {
+      return minutes < 60 ? `เดิน ${minutes} นาที` : `เดิน ${hours} ชม. ${mins} นาที`;
+    } else if (lang.startsWith('zh')) {
+      return minutes < 60 ? `步行 ${minutes}分钟` : `步行 ${hours}小时${mins}分钟`;
     } else {
-      if (minutes < 60) return `${minutes} min walk`;
-      const hours = Math.floor(minutes / 60);
-      const mins = minutes % 60;
-      return `${hours}h ${mins}m walk`;
+      return minutes < 60 ? `${minutes} min walk` : `${hours}h ${mins}m walk`;
     }
   };
 
@@ -602,7 +606,7 @@ export function UnifiedFloatingCard({
                     <div className="p-3 bg-purple-50 rounded-lg border border-purple-100 text-xs">
                       <div className="flex items-center gap-2 mb-1">
                         <Wand2 className="w-3.5 h-3.5 text-purple-600" />
-                        <span className="font-bold text-purple-900">AI 추천</span>
+                        <span className="font-bold text-purple-900">{t('aiTourRecommendation', selectedLanguage)}</span>
                       </div>
                       <p className="text-purple-800">{aiRecommendation.explanation}</p>
                     </div>
@@ -616,11 +620,11 @@ export function UnifiedFloatingCard({
                   <div className="flex gap-2">
                     <Button size="sm" onClick={handlePlayAudio} className="flex-1 gap-2">
                       {isPlaying && !isPaused ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                      {selectedLanguage === 'ko' ? (isPlaying && !isPaused ? '정지' : '듣기') : 'Listen'}
+                      {isPlaying && !isPaused ? t('pause', selectedLanguage) : t('playAudio', selectedLanguage)}
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => setShowDetailDialog(true)} className="flex-1 gap-2">
                       <ImageIcon className="w-4 h-4" />
-                      {selectedLanguage === 'ko' ? '사진' : 'Photos'}
+                      {t('photos', selectedLanguage)}
                     </Button>
                   </div>
 
@@ -710,7 +714,7 @@ export function UnifiedFloatingCard({
             {activeTab === 'tour' && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h5 className="font-bold text-sm">{selectedLanguage === 'ko' ? `내 투어 (${tourStops.length})` : `My Tour (${tourStops.length})`}</h5>
+                  <h5 className="font-bold text-sm">{t('myTour', selectedLanguage) || 'My Tour'} ({tourStops.length})</h5>
                   <Button
                     size="sm"
                     className={`rounded-full h-8 px-4 text-[10px] font-black tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 ring-2 ring-red-100' : 'bg-gradient-to-r from-[#E9633F] to-[#FF8A65] text-white shadow-xl shadow-orange-100 ring-2 ring-orange-100'}`}
@@ -719,12 +723,12 @@ export function UnifiedFloatingCard({
                     {isSimulationMode ? (
                       <div className="flex items-center gap-1.5 uppercase">
                         <Square className="w-3 h-3 fill-current" />
-                        <span>{selectedLanguage === 'ko' ? '중단' : 'Stop'}</span>
+                        <span>{t('stop', selectedLanguage) || 'Stop'}</span>
                       </div>
                     ) : (
                       <div className="flex items-center gap-1.5 uppercase">
                         <Play className="w-3 h-3 fill-current" />
-                        <span>{selectedLanguage === 'ko' ? '투어 시작' : 'Start'}</span>
+                        <span>{t('startRoute', selectedLanguage) || 'Start'}</span>
                       </div>
                     )}
                   </Button>
@@ -748,7 +752,7 @@ export function UnifiedFloatingCard({
                           {isSimulationPaused ? <Play className="w-3.5 h-3.5 text-indigo-600 fill-current" /> : <Pause className="w-3.5 h-3.5 text-indigo-600 fill-current" />}
                         </Button>
                         <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
-                          {isSimulationPaused ? (selectedLanguage === 'ko' ? '일시정지됨' : 'Paused') : (selectedLanguage === 'ko' ? '진행 중' : 'Simulating')}
+                          {isSimulationPaused ? (t('pause', selectedLanguage) || 'Paused') : 'Simulating'}
                         </span>
                       </div>
 
@@ -780,12 +784,10 @@ export function UnifiedFloatingCard({
 
                     <div className="space-y-2 px-4">
                       <h6 className="font-black text-lg text-slate-800 tracking-tight">
-                        {selectedLanguage === 'ko' ? '나만의 여행을 시작하세요' : 'Start Your Personal Tour'}
+                        {t('tourEmptyState', selectedLanguage) || 'Start Your Personal Tour'}
                       </h6>
                       <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                        {selectedLanguage === 'ko'
-                          ? '지도에서 가고 싶은 명소의 + 버튼을 눌러\n나만의 맞춤 투어 경로를 만들어보세요!'
-                          : 'Click the + button on the map to add\nlandmarks to your personal tour route!'}
+                        {t('createRoutePrompt', selectedLanguage) || 'Tap + on the map to build your custom tour route!'}
                       </p>
                     </div>
 
@@ -834,10 +836,10 @@ export function UnifiedFloatingCard({
                   </div>
                   <div>
                     <h5 className="font-bold text-sm text-slate-800">
-                      {selectedLanguage === 'ko' ? 'AI 투어 추천' : 'AI Tour Recommendation'}
+                      {t('aiTourRecommendation', selectedLanguage)}
                     </h5>
                     <p className="text-[10px] text-muted-foreground">
-                      {selectedLanguage === 'ko' ? 'GPT가 최적 경로를 제안합니다' : 'GPT suggests the optimal route'}
+                      {t('aiRecommendationDesc', selectedLanguage)}
                     </p>
                   </div>
                 </div>
@@ -865,7 +867,7 @@ export function UnifiedFloatingCard({
                       })}
                     </div>
                     <p className="text-[10px] text-center text-muted-foreground">
-                      ⏱ {selectedLanguage === 'ko' ? `총 예상 시간: ${aiRecommendation.totalEstimatedTime}분` : `Est. time: ${aiRecommendation.totalEstimatedTime} min`}
+                      ⏱ {t('minutes', selectedLanguage)}: {aiRecommendation.totalEstimatedTime} {t('timeMinutes', selectedLanguage) || 'min'}
                     </p>
                   </div>
                 ) : (
@@ -874,16 +876,14 @@ export function UnifiedFloatingCard({
                       <Wand2 className="w-7 h-7 text-purple-400" />
                     </div>
                     <p className="text-xs text-center text-muted-foreground px-4">
-                      {selectedLanguage === 'ko'
-                        ? 'AI가 현재 명소 목록을 분석하여 최적의 투어 순서를 추천해 드립니다.'
-                        : 'AI will analyze current landmarks and suggest the optimal tour order.'}
+                      {t('aiRecommendationHint', selectedLanguage)}
                     </p>
                     <Button
                       className="bg-purple-600 hover:bg-purple-700 text-white rounded-full px-6 h-10 gap-2 shadow-md shadow-purple-200"
                       onClick={() => { onOpenAIRecommend?.(); }}
                     >
                       <Wand2 className="w-4 h-4" />
-                      {selectedLanguage === 'ko' ? 'AI 투어 추천 받기' : 'Get AI Suggestion'}
+                      {t('getAIRecommendation', selectedLanguage)}
                     </Button>
                   </div>
                 )}

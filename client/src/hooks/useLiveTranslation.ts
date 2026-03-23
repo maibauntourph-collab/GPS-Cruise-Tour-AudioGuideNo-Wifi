@@ -9,6 +9,19 @@ export function useLiveTranslation(text: string | null | undefined, targetLangua
             return;
         }
 
+        // [Bug Doctor | 2026-03-23] 🎖️ 중요: 이미 번역된 텍스트가 대상 언어와 일치한다면 API 호출을 생략합니다.
+        // 현재는 원본 텍스트가 번역본인지 알 수 없으므로, getTranslatedContent가 주는 결과가 null이 아닐 때
+        // 이 훅을 호출하는 곳에서 원본을 유지하게 하거나, 여기서 간단한 언어 감지로 체크합니다.
+        // (단, 여기서는 텍스트가 실시간 응답이 아닐 경우만 수행)
+
+        // 1. 이미 실시간 번역이 불필요한 경우 (이미 해당 언어임)
+        // [적요] 한국어 텍스트인데 타겟이 한국어면 즉시 종료
+        const isKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text || '');
+        if (isKorean && targetLanguage === 'ko') {
+            setTranslated(text);
+            return;
+        }
+
         // Set initial text
         setTranslated(text);
 

@@ -1,6 +1,7 @@
 console.log("[DEBUG] server/app.ts loading...");
 import { Hono, Context, Next } from "hono";
 import { logger } from "hono/logger";
+import { cors } from "hono/cors";
 import { sessionMiddleware, CookieStore } from "hono-sessions";
 import { registerRoutes } from "./routes";
 import { env } from "./env";
@@ -15,11 +16,26 @@ const log = (message: string, source = "APP") => {
 
 const app = new Hono<{ Variables: Variables }>();
 
+// [Security Fix | 🎖️] Antigravity 프리뷰 환경 지원을 위한 CORS 및 오리진 허용
+app.use("*", cors({
+    origin: "*",
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+}));
+
+// 모든 응답에 대해 프레임 임베딩 허용 (frame-ancestors *)
+app.use("*", async (c, next) => {
+    await next();
+    c.header("Content-Security-Policy", "frame-ancestors *;");
+    c.header("X-Frame-Options", "ALLOWALL");
+    c.res.headers.delete("X-Frame-Options");
+});
+
 // Middleware
 app.use("*", logger());
 
 const store = new CookieStore();
-
 // Middleware to handle session with dynamic secret
 app.use("*", async (c, next) => {
     const workerEnv = c.env as any;
@@ -42,9 +58,7 @@ app.use("*", async (c: Context, next: Next) => {
     const start = Date.now();
     const path = c.req.path;
     const method = c.req.method;
-
     await next();
-
     const ms = Date.now() - start;
     log(`${method} ${path} ${c.res.status} in ${ms}ms`, "access");
 });

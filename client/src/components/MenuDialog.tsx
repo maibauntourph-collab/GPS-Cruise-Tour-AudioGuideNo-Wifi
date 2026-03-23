@@ -225,16 +225,32 @@ export default function MenuDialog({
   };
 
   const testTexts: Record<string, string> = {
-    'en': 'Hello! This is a test.',
-    'ko': '안녕하세요! 테스트입니다.',
-    'es': '¡Hola! Es una prueba.',
-    'fr': 'Bonjour! Test vocal.',
-    'de': 'Hallo! Sprachtest.',
-    'it': 'Ciao! Test vocale.',
-    'zh': '你好！测试。',
-    'ja': 'こんにちは！テスト。',
-    'pt': 'Olá! Teste de voz.',
-    'ru': 'Привет! Тест.'
+    'en': 'Hello! This is a test of the audio guide system.',
+    'ko': '안녕하세요! 오디오 가이드 시스템 테스트입니다.',
+    'es': '¡Hola! Esta es una prueba del sistema de audioguía.',
+    'fr': 'Bonjour! Ceci est un test du système d\'audioguide.',
+    'de': 'Hallo! Dies ist ein Test des Audioguide-Systems.',
+    'it': 'Ciao! Questo è un test del sistema di audioguida.',
+    'zh': '你好！这是音频导览系统的测试。',
+    'zh-CN': '你好！这是音频导览系统的测试。',
+    'zh-TW': '你好！這是音訊導覽系統의 測試。',
+    'ja': 'こんにちは！オーディオガイドシステムのテストです。',
+    'pt': 'Olá! Este é um teste do sistema de audioguia.',
+    'ru': 'Привет! Это тест системы аудиогида.',
+    'th': 'สวัสดีครับ! นี่คือการทดสอบระบบออดิโอไกด์',
+    'vi': 'Xin chào! Đây là bản thử nghiệm của hệ thống hướng dẫn âm thanh.',
+    'id': 'Halo! Ini adalah tes sistem panduan audio.',
+    'ar': 'مرحباً! هذا اختبار لنظام الدليل الصوتي.',
+    'hi': 'नमस्ते! यह ऑडियो गाइड सिस्टम का परीक्षण है।',
+    'tr': 'Merhaba! Bu, sesli rehber sisteminin bir testidir.',
+    'nl': 'Hallo! Dit is een test van het audiogidssysteem.',
+    'pl': 'Cześć! To jest test systemu audioprzewodnika.',
+    'sv': 'Hej! Detta är ett test av ljudguidesystemet.',
+    'da': 'Hej! Dette er en test af lydguidesystemet.',
+    'fi': 'Hei! Tämä on ääniohjausjärjestelmän testi.',
+    'no': 'Hei! Dette er en test av lydguidesystemet.',
+    'el': 'Γεια σας! Αυτή είναι μια δοκιμή του συστήματος ακουστικής ξενάγησης.',
+    'cs': 'Ahoj! Toto je test systému zvukového průvodce.'
   };
 
   const previewVoice = (voiceName: string) => {
