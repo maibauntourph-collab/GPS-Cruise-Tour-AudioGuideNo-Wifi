@@ -21,7 +21,7 @@ app.use("*", cors({
     origin: (origin) => {
         // [적요] credentials: true 설정 시 origin은 '*'이 될 수 없습니다. 
         // 요청된 origin이 있으면 그것을 반환하고, 없으면 명시적으로 허용하는 도메인을 지정합니다.
-        if (!origin) return origin; 
+        if (!origin) return origin;
         if (origin.includes("localhost") || origin.includes("127.0.0.1") || origin.includes("workers.dev")) {
             return origin;
         }
@@ -47,7 +47,7 @@ app.use("*", async (c, next) => {
         "font-src 'self' data: https:;",
         "worker-src 'self' blob:;"
     ].join(" ");
-    
+
     c.header("Content-Security-Policy", csp);
     c.header("X-Frame-Options", "ALLOWALL");
 });

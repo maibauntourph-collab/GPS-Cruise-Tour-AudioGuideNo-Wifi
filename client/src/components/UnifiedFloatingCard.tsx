@@ -429,8 +429,8 @@ export function UnifiedFloatingCard({
     }
   }, [selectedLandmark]);
 
-  // ✅ [Bug Doctor] MapView(z:400)보다 훨씬 높은 z-index(5000)를 부여하여 가려짐 방지
-  const zIndex = 5000;
+  // ✅ [Bug Doctor] MapView(z:400)보다 높은 z-index(4000) 부여 (CitySelectTab 5000 보다 아래 유지)
+  const zIndex = 4000;
 
   return (
     <div
@@ -441,27 +441,7 @@ export function UnifiedFloatingCard({
       {activeLayout !== 'classic' && (
         <div className="p-2.5 bg-white/40 backdrop-blur-xl border-b border-white/20 flex items-center justify-between gap-2 overflow-hidden">
           <div className="flex items-center gap-1.5 flex-1 min-w-0">
-            {/* [적요] Start/Stop Simulation 통합 버튼 */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className={`h-9 px-4 rounded-full flex-shrink-0 transition-all active:scale-95 group font-black ${isSimulationMode ? 'bg-red-50 text-red-600 hover:bg-red-100 border border-red-100' : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200'}`}
-              onClick={onToggleSimulation}
-            >
-              {isSimulationMode ? (
-                <>
-                  <Square className="w-3.5 h-3.5 mr-1.5 fill-current" />
-                  <span className="text-[11px] uppercase tracking-tighter">Exit</span>
-                </>
-              ) : (
-                <>
-                  <Play className="w-3.5 h-3.5 mr-1.5 fill-current" />
-                  <span className="text-[11px] uppercase tracking-tighter">Start</span>
-                </>
-              )}
-            </Button>
-
-            <div className="w-[1px] h-5 bg-slate-400/20" />
+            {/* [Designer Kim] 상단 중복 Start/Stop 버튼 제거 (하단 MyTour 탭의 버튼으로 일원화) */}
 
             {/* [적요] Route/Starting Point 통합 버튼 */}
             <Button
@@ -476,19 +456,16 @@ export function UnifiedFloatingCard({
               </span>
             </Button>
 
-            {isSimulationMode && (
-              <div className="flex items-center gap-1 animate-in slide-in-from-left duration-500">
-                <div className="w-[1px] h-5 bg-slate-400/20" />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 rounded-full bg-white/60 text-indigo-600 border border-indigo-50"
-                  onClick={onSimulationPauseToggle}
-                >
-                  {isSimulationPaused ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5 fill-current" />}
-                </Button>
-              </div>
-            )}
+            {/* [Designer Kim] 명확한 Back 버튼으로 대체 (국가/도시 선택 메뉴로 복귀) */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-9 px-3 rounded-full flex-shrink-0 transition-all active:scale-95 text-slate-500 hover:text-slate-800 hover:bg-slate-100 font-bold ml-1"
+              onClick={onMinimizeToMenu}
+            >
+              <ChevronLeft className="w-4 h-4 mr-1" />
+              <span className="text-[11px] uppercase tracking-tighter">Back</span>
+            </Button>
           </div>
 
           <div className="flex items-center gap-1">

@@ -1239,7 +1239,7 @@ export default function Home() {
         {/* [Avengers Team] 상단 바를 제거하고 UnifiedFloatingCard로 기능을 통합하였습니다. (Merge One Card) */}
 
         {/* Simulation Control Bar */}
-        {isSimulationMode && (() => {
+        {false && isSimulationMode && (() => {
           // ✅ [Bug Doctor] 시뮬레이션 바가 로컬 최소화 상태를 갖도록 조건부 렌더링 적용
           // 학생들에게: 외부 상태를 수정하지 않고 컴포넌트 내부에서 IIFE로 상태를 관리할 수 있습니다.
           // 단, 실제로는 useState를 상위에서 선언하는 것이 더 깔끔합니다.
@@ -1400,49 +1400,51 @@ export default function Home() {
               </Button>
             )}
           </div>
-        </header>
+        </header >
 
         {/* ✅ [Avengers Team | Bug Doctor] Classic Layout용 상단 컨트롤 바 복원 (조건부) */}
-        {activeLayout === 'classic' && (
-          <div className="absolute top-[80px] left-1/2 -translate-x-1/2 z-[1000] flex gap-2 pointer-events-auto">
-            <motion.div
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="flex gap-2 p-1 bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl"
-            >
-              <Button
-                variant="ghost"
-                className="h-12 px-6 rounded-xl hover:bg-orange-50 text-slate-800 flex items-center gap-2 group transition-all"
-                onClick={handleShowLandmarkList}
+        {
+          activeLayout === 'classic' && (
+            <div className="absolute top-[80px] left-1/2 -translate-x-1/2 z-[1000] flex gap-2 pointer-events-auto">
+              <motion.div
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className="flex gap-2 p-1 bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl"
               >
-                <List className="w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform" />
-                <span className="font-bold">List</span>
-              </Button>
+                <Button
+                  variant="ghost"
+                  className="h-12 px-6 rounded-xl hover:bg-orange-50 text-slate-800 flex items-center gap-2 group transition-all"
+                  onClick={handleShowLandmarkList}
+                >
+                  <List className="w-5 h-5 text-orange-500 group-hover:scale-110 transition-transform" />
+                  <span className="font-bold">List</span>
+                </Button>
 
-              <div className="w-[1px] h-6 self-center bg-slate-200" />
+                <div className="w-[1px] h-6 self-center bg-slate-200" />
 
-              <Button
-                variant="ghost"
-                className={`h-12 px-6 rounded-xl flex items-center gap-2 group transition-all ${isSimulationMode ? 'bg-orange-500 text-white hover:bg-orange-600' : 'hover:bg-orange-50 text-slate-800'}`}
-                onClick={() => setIsSimulationMode(!isSimulationMode)}
-              >
-                <Navigation className={`w-5 h-5 group-hover:scale-110 transition-transform ${isSimulationMode ? 'text-white' : 'text-orange-500'}`} />
-                <span className="font-bold">Start</span>
-              </Button>
+                <Button
+                  variant="ghost"
+                  className={`h-12 px-6 rounded-xl flex items-center gap-2 group transition-all ${isSimulationMode ? 'bg-orange-500 text-white hover:bg-orange-600' : 'hover:bg-orange-50 text-slate-800'}`}
+                  onClick={() => setIsSimulationMode(!isSimulationMode)}
+                >
+                  <Navigation className={`w-5 h-5 group-hover:scale-110 transition-transform ${isSimulationMode ? 'text-white' : 'text-orange-500'}`} />
+                  <span className="font-bold">Start</span>
+                </Button>
 
-              <div className="w-[1px] h-6 self-center bg-slate-200" />
+                <div className="w-[1px] h-6 self-center bg-slate-200" />
 
-              <Button
-                variant="ghost"
-                className={`h-12 px-6 rounded-xl flex items-center gap-2 group transition-all ${showCruisePort ? 'bg-rose-500 text-white hover:bg-rose-600' : 'hover:bg-rose-50 text-slate-800'}`}
-                onClick={() => setShowCruisePort(!showCruisePort)}
-              >
-                <Milestone className={`w-5 h-5 group-hover:scale-110 transition-transform ${showCruisePort ? 'text-white' : 'text-rose-500'}`} />
-                <span className="font-bold">Route</span>
-              </Button>
-            </motion.div>
-          </div>
-        )}
+                <Button
+                  variant="ghost"
+                  className={`h-12 px-6 rounded-xl flex items-center gap-2 group transition-all ${showCruisePort ? 'bg-rose-500 text-white hover:bg-rose-600' : 'hover:bg-rose-50 text-slate-800'}`}
+                  onClick={() => setShowCruisePort(!showCruisePort)}
+                >
+                  <Milestone className={`w-5 h-5 group-hover:scale-110 transition-transform ${showCruisePort ? 'text-white' : 'text-rose-500'}`} />
+                  <span className="font-bold">Route</span>
+                </Button>
+              </motion.div>
+            </div>
+          )
+        }
 
         <main className="relative flex-1 overflow-hidden">
           <AnimatePresence>
@@ -1584,44 +1586,46 @@ export default function Home() {
         />
 
         {/* Other Overlays */}
-        {showMenu && (
-          <MenuDialog
-            isOpen={showMenu}
-            onClose={() => setShowMenu(false)}
-            selectedCityId={selectedCityId}
-            onCityChange={handleCityChange}
-            selectedLanguage={selectedLanguage}
-            onLanguageChange={(lang: any) => setSelectedLanguage(lang)}
-            cities={cities}
-            audioEnabled={audioEnabled}
-            onToggleAudio={handleToggleAudio}
-            isSpeaking={isSpeaking}
-            speechRate={speechRate}
-            onSpeechRateChange={handleSpeechRateChange}
-            gpsEnabled={gpsEnabled}
-            onToggleGps={handleToggleGps}
-            offlineMode={offlineMode}
-            onToggleOfflineMode={handleToggleOfflineMode}
-            onDownloadData={handleDownloadData}
-            onPreFetchOfflineData={handlePreFetchOfflineData}
-            onUploadData={handleUploadData}
-            onTestAudio={handleTestAudio}
-            activeRoute={activeRoute}
-            onClearRoute={handleClearRoute}
-            totalLandmarks={landmarks.length}
-            tourStops={tourStops}
-            tourRouteInfo={tourRouteInfo}
-            onRemoveTourStop={(id) => setTourStops(tourStops.filter(s => s.id !== id))}
-            onClearTour={handleClearTour}
-            tourTimePerStop={tourTimePerStop}
-            onTourTimePerStopChange={setTourTimePerStop}
-            isBackgroundGuideEnabled={isBackgroundGuideEnabled}
-            onToggleBackgroundGuide={handleSetBackgroundGuide}
-            showUpdateStats={() => setShowUpdateStats(true)}
-            showQrDialog={() => setShowQrDialog(true)}
-            showCreatorDashboard={() => setShowCreatorDashboard(true)}
-          />
-        )}
+        {
+          showMenu && (
+            <MenuDialog
+              isOpen={showMenu}
+              onClose={() => setShowMenu(false)}
+              selectedCityId={selectedCityId}
+              onCityChange={handleCityChange}
+              selectedLanguage={selectedLanguage}
+              onLanguageChange={(lang: any) => setSelectedLanguage(lang)}
+              cities={cities}
+              audioEnabled={audioEnabled}
+              onToggleAudio={handleToggleAudio}
+              isSpeaking={isSpeaking}
+              speechRate={speechRate}
+              onSpeechRateChange={handleSpeechRateChange}
+              gpsEnabled={gpsEnabled}
+              onToggleGps={handleToggleGps}
+              offlineMode={offlineMode}
+              onToggleOfflineMode={handleToggleOfflineMode}
+              onDownloadData={handleDownloadData}
+              onPreFetchOfflineData={handlePreFetchOfflineData}
+              onUploadData={handleUploadData}
+              onTestAudio={handleTestAudio}
+              activeRoute={activeRoute}
+              onClearRoute={handleClearRoute}
+              totalLandmarks={landmarks.length}
+              tourStops={tourStops}
+              tourRouteInfo={tourRouteInfo}
+              onRemoveTourStop={(id) => setTourStops(tourStops.filter(s => s.id !== id))}
+              onClearTour={handleClearTour}
+              tourTimePerStop={tourTimePerStop}
+              onTourTimePerStopChange={setTourTimePerStop}
+              isBackgroundGuideEnabled={isBackgroundGuideEnabled}
+              onToggleBackgroundGuide={handleSetBackgroundGuide}
+              showUpdateStats={() => setShowUpdateStats(true)}
+              showQrDialog={() => setShowQrDialog(true)}
+              showCreatorDashboard={() => setShowCreatorDashboard(true)}
+            />
+          )
+        }
         <AIRecommendDialog
           isOpen={showAIRecommend}
           onClose={() => setShowAIRecommend(false)}
@@ -1675,51 +1679,57 @@ export default function Home() {
         <LoginDialog isOpen={showLoginDialog} onClose={() => setShowLoginDialog(false)} language={selectedLanguage} />
         <OfflineIndicator />
         {/* [Dodari | 🎖️] PWA 온보딩 처리 전까지만 InstallPrompt를 보여줍니다. */}
-        {!isWelcomeHandled && (
-          <InstallPrompt selectedLanguage={selectedLanguage} onClose={() => setIsWelcomeHandled(true)} />
-        )}
+        {
+          !isWelcomeHandled && (
+            <InstallPrompt selectedLanguage={selectedLanguage} onClose={() => setIsWelcomeHandled(true)} />
+          )
+        }
 
         {/* [어벤져스 팀 | 🎖️] PWA 온보딩이 완료된 후에만 StartupDialog를 마운트하여 ARIA 충돌 및 레이어 간섭을 방지합니다. */}
-        {isWelcomeHandled && showStartupDialog && (
-          <StartupDialog
-            isOpen={showStartupDialog}
-            onClose={() => {
-              setShowStartupDialog(false);
-              setShowCountrySelector(true); // 랜딩 후 국가 선택으로 이동
-            }}
-            onSelectGPS={() => setGpsEnabled(true)}
-            onRestoreTour={(data) => {
-              handleCityChange(data.cityId);
-              setShowStartupDialog(false);
-            }}
-            savedTourData={null}
-            selectedLanguage={selectedLanguage}
-            onLanguageChange={setSelectedLanguage}
-            isGpsAvailable={gpsEnabled}
-            isGpsLoading={isLoading}
-            cities={cities}
-            selectedCityId={selectedCityId}
-            onCityChange={handleCityChange}
-          />
-        )}
+        {
+          isWelcomeHandled && showStartupDialog && (
+            <StartupDialog
+              isOpen={showStartupDialog}
+              onClose={() => {
+                setShowStartupDialog(false);
+                setShowCountrySelector(true); // 랜딩 후 국가 선택으로 이동
+              }}
+              onSelectGPS={() => setGpsEnabled(true)}
+              onRestoreTour={(data) => {
+                handleCityChange(data.cityId);
+                setShowStartupDialog(false);
+              }}
+              savedTourData={null}
+              selectedLanguage={selectedLanguage}
+              onLanguageChange={setSelectedLanguage}
+              isGpsAvailable={gpsEnabled}
+              isGpsLoading={isLoading}
+              cities={cities}
+              selectedCityId={selectedCityId}
+              onCityChange={handleCityChange}
+            />
+          )
+        }
 
         {/* [2026-03-23 | 통합 완료] 이제 모든 선택(TTS/Port/City)은 상단의 AnimatePresence 섹션에서 하나로 처리됩니다. */}
-      </div>
+      </div >
 
       {/* [Designer Kim] 프리미엄 백그라운드 워터마크 레이어 */}
-      {watermarkUrl && (
-        <div
-          className="fixed inset-0 pointer-events-none z-[1] overflow-hidden flex items-center justify-center"
-          style={{ mixBlendMode: 'multiply' }}
-        >
-          <img
-            src={watermarkUrl}
-            alt="Site Watermark"
-            className="w-3/4 md:w-1/2 object-contain select-none transition-opacity duration-1000"
-            style={{ opacity: watermarkOpacity }}
-          />
-        </div>
-      )}
+      {
+        watermarkUrl && (
+          <div
+            className="fixed inset-0 pointer-events-none z-[1] overflow-hidden flex items-center justify-center"
+            style={{ mixBlendMode: 'multiply' }}
+          >
+            <img
+              src={watermarkUrl}
+              alt="Site Watermark"
+              className="w-3/4 md:w-1/2 object-contain select-none transition-opacity duration-1000"
+              style={{ opacity: watermarkOpacity }}
+            />
+          </div>
+        )
+      }
 
       {/* Navigation App Choice */}
       <AlertDialog open={showDirectionsDialog} onOpenChange={setShowDirectionsDialog}>
@@ -1758,6 +1768,6 @@ export default function Home() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </TooltipProvider>
+    </TooltipProvider >
   );
 }

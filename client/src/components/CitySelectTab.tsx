@@ -302,21 +302,18 @@ export function CitySelectTab({
                                 >
                                     {/* 카드 상단: 배경 이미지 영역 */}
                                     <div className="mx-4 mt-4 h-[110px] rounded-2xl overflow-hidden relative">
-                                        {/* 파스텔 배경 */}
-                                        <div
-                                            className="absolute inset-0"
-                                            style={{ backgroundColor: bgCol }}
-                                        />
-                                        {/* 실 이미지 오버레이 (mix-blend로 색감 유지) */}
+                                        {/* [Designer Kim] 카드의 투박한 파스텔 배경/필터를 모두 벗기고 원본 이미지로 시인성 확보 */}
                                         <img
                                             src={cityImage}
                                             alt={city.name}
-                                            className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-multiply"
+                                            className="absolute inset-0 w-full h-full object-cover"
                                             loading="lazy"
                                         />
+                                        {/* 텍스트 가독성을 위한 하단 그라디언트만 유지 */}
+                                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                                         {/* 도시명 큰 텍스트 (이미지처럼 영문 대문자) */}
                                         <div className="absolute inset-0 flex items-center justify-center">
-                                            <span className="text-[28px] font-black tracking-[0.15em] uppercase text-white/70 drop-shadow select-none">
+                                            <span className="text-[28px] font-black tracking-[0.15em] uppercase text-white drop-shadow-md select-none">
                                                 {city.name.toUpperCase()}
                                             </span>
                                         </div>

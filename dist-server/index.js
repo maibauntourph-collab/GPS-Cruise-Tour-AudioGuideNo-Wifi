@@ -1219,7 +1219,7 @@ var vite_config_default = defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:8788",
+        target: "http://127.0.0.1:4000",
         changeOrigin: true
       }
     },
@@ -25878,10 +25878,11 @@ var log2 = (message, source = "APP") => {
 var app = new Hono2();
 app.use("*", cors({
   origin: (origin) => {
-    if (!origin || origin.includes("localhost") || origin.includes("127.0.0.1") || origin.includes("workers.dev")) {
-      return origin || "*";
+    if (!origin) return origin;
+    if (origin.includes("localhost") || origin.includes("127.0.0.1") || origin.includes("workers.dev")) {
+      return origin;
     }
-    return "*";
+    return origin;
   },
   allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
@@ -25891,9 +25892,16 @@ app.use("*", cors({
 }));
 app.use("*", async (c, next) => {
   await next();
-  c.header("Content-Security-Policy", "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https://*; frame-ancestors *; img-src 'self' data: https: http:;");
+  const csp = [
+    "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https:*;",
+    "frame-ancestors *;",
+    "img-src 'self' data: https: http: *.openstreetmap.org;",
+    "connect-src 'self' http://localhost:* ws://localhost:* https:* *.openstreetmap.org;",
+    "font-src 'self' data: https:;",
+    "worker-src 'self' blob:;"
+  ].join(" ");
+  c.header("Content-Security-Policy", csp);
   c.header("X-Frame-Options", "ALLOWALL");
-  c.header("Access-Control-Allow-Origin", c.req.header("Origin") || "*");
 });
 app.use("*", logger());
 var store = new CookieStore();
@@ -25999,7 +26007,7 @@ var app_default = app;
 // server/index.ts
 console.log("[DEBUG] server/index.ts starting...");
 console.log("[DEBUG] server/app.ts starting...");
-var PORT = Number(process.env.PORT) || 5e3;
+var PORT = Number(process.env.PORT) || 4e3;
 var server = createServer();
 setupVite(app_default, server).then((vite) => {
   const requestListener = getRequestListener(app_default.fetch);

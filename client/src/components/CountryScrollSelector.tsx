@@ -130,7 +130,8 @@ export function CountryScrollSelector({
                                         alt={country}
                                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                                    {/* 이미지 원본을 가리는 풀커버 레이어를 제거하고, 텍스트 가독성을 위한 최하단 그라디언트만 유지 */}
+                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                                 </div>
 
                                 {/* Content Overlay */}
