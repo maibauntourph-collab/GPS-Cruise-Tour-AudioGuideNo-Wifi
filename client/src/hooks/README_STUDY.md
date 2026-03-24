@@ -7,8 +7,12 @@
 ## ⚖️ 네트워크 & 오프라인 관련 (Connectivity)
 
 ### 📥 [useOfflineDownload.ts](file:///e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/hooks/useOfflineDownload.ts)
-- **설명:** 서버의 데이터를 오프라인에서도 볼 수 있게 로컬 브라우저 저장소에 강제로 내려받는 '일괄 다운로드' 훅입니다.
-- **학생들을 위한 팁:** `fetch`로 데이터를 가져와 `offlineStorage`에 기록하며, 이미지는 `Service Worker`가 캐싱하도록 유도합니다.
+- **설명:** 서버의 데이터를 오프라인에서도 볼 수 있게 로컬 브라우저 저장소에 내려받는 '일괄 다운로드' 훅입니다.
+- **최신 업데이트 (Selective Download):** 전체(Global), 유럽(Europe), 아시아(Asia), 단일 국가(Country) 중 선택적으로 데이터를 받을 수 있는 `scope` 로직이 추가되었습니다.
+- **학생들을 위한 팁:** 
+    1. `scope`에 따라 `cities` 배열을 필터링하여 불필요한 네트워크 요청을 줄입니다.
+    2. 이미지는 `batchSize: 5`로 나누어 병렬 처리하되 브라우저 부하를 방지합니다.
+    3. `fetch(url, { mode: 'no-cors' })`를 통해 외부 이미지(Unsplash 등)를 안전하게 캐싱합니다.
 
 ### 🔌 [useOfflineMode.ts](file:///e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/hooks/useOfflineMode.ts)
 - **설명:** 현재 인터넷 상태에 따라 데이터의 출처(서버 vs 로컬DB)를 자동으로 스위칭합니다.
