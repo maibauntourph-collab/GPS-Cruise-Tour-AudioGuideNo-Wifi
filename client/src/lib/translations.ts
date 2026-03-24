@@ -82,7 +82,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'No Internet',
     prepareOffline: 'Prepare Offline',
     prepareOfflineDesc: 'Enjoy sightseeing without WiFi.',
-    ready: 'Ready'
+    ready: 'Ready',
+    wifiOfflineOk: 'WiFi Offline OK',
+    gpsAutoGuideDesc: 'GPS-based audio guide. Explanations play automatically at ports worldwide without internet.'
   },
   es: {
     landmarks: 'Monumentos',
@@ -123,7 +125,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Sin Internet',
     prepareOffline: 'Preparar Offline',
     prepareOfflineDesc: 'Explora sin conexión a internet.',
-    ready: 'Listo'
+    ready: 'Listo',
+    wifiOfflineOk: 'WiFi Offline OK',
+    gpsAutoGuideDesc: 'Guía de audio GPS. Explicaciones automáticas en puertos de todo el mundo sin internet.'
   },
   fr: {
     landmarks: 'Monuments',
@@ -164,7 +168,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Sans Internet',
     prepareOffline: 'Préparer Offline',
     prepareOfflineDesc: 'Profitez de la visite sans WiFi.',
-    ready: 'Prêt'
+    ready: 'Prêt',
+    wifiOfflineOk: 'WiFi Hors Ligne OK',
+    gpsAutoGuideDesc: 'Guide audio GPS. Explications automatiques dans les ports du monde entier sans internet.'
   },
   de: {
     landmarks: 'Sehenswürdigkeiten',
@@ -205,7 +211,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Kein Internet',
     prepareOffline: 'Offline Vorbereiten',
     prepareOfflineDesc: 'Sehenswürdigkeiten ohne WLAN genießen.',
-    ready: 'Bereit'
+    ready: 'Bereit',
+    wifiOfflineOk: 'WiFi Offline OK',
+    gpsAutoGuideDesc: 'GPS Audioguide. Erklärungen spielen automatisch an Häfen weltweit ohne Internet.'
   },
   it: {
     landmarks: 'Monumenti',
@@ -246,7 +254,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Senza Internet',
     prepareOffline: 'Prepara Offline',
     prepareOfflineDesc: 'Goditi il tour senza Wi-Fi.',
-    ready: 'Pronto'
+    ready: 'Pronto',
+    wifiOfflineOk: 'WiFi Offline OK',
+    gpsAutoGuideDesc: 'Audioguida GPS. Spiegazioni automatiche in tutto il mondo senza internet.'
   },
   pt: {
     landmarks: 'Monumentos',
@@ -287,7 +297,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Sem Internet',
     prepareOffline: 'Preparar Offline',
     prepareOfflineDesc: 'Aproveite o passeio sem WiFi.',
-    ready: 'Pronto'
+    ready: 'Pronto',
+    wifiOfflineOk: 'WiFi Offline OK',
+    gpsAutoGuideDesc: 'Guia de áudio GPS. Explicações automáticas em todo o mundo sem internet.'
   },
   ru: {
     landmarks: 'Достопримечательности',
@@ -328,7 +340,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Без интернета',
     prepareOffline: 'Оффлайн подготовка',
     prepareOfflineDesc: 'Наслаждайтесь осмотром без WiFi.',
-    ready: 'Готово'
+    ready: 'Готово',
+    wifiOfflineOk: 'WiFi Офлайн OK',
+    gpsAutoGuideDesc: 'GPS аудиогид. Автоматические объяснения в портах по всему миру без интернета.'
   },
   'zh-CN': {
     landmarks: '景点',
@@ -369,7 +383,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: '无网络',
     prepareOffline: '准备离线',
     prepareOfflineDesc: '无需 WiFi 即可享受观光。',
-    ready: '准备就绪'
+    ready: '准备就绪',
+    wifiOfflineOk: '无WiFi也OK',
+    gpsAutoGuideDesc: 'GPS音频导游。全球港口自动播报，无需网络。'
   },
   'zh-TW': {
     landmarks: '景點',
@@ -410,7 +426,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: '無網路',
     prepareOffline: '準備離線',
     prepareOfflineDesc: '無需 WiFi 即可享受觀光。',
-    ready: '準備就緒'
+    ready: '準備就緒',
+    wifiOfflineOk: '無WiFi也OK',
+    gpsAutoGuideDesc: 'GPS音頻導遊。全球港口自動播報，無需網絡。'
   },
   ja: {
     landmarks: '観光スポット',
@@ -451,7 +469,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'インターネットなし',
     prepareOffline: 'オフライン準備',
     prepareOfflineDesc: 'WiFiなしで観光を楽しめます。',
-    ready: '準備完了'
+    ready: '準備完了',
+    wifiOfflineOk: 'WiFiなしでもOK',
+    gpsAutoGuideDesc: 'GPSオーディオガイド。世界中の寄港地でインターネットなしで自動解説が流れます。'
   },
   ko: {
     landmarks: '명소',
@@ -492,7 +512,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: '인터넷 없음',
     prepareOffline: '오프라인 준비',
     prepareOfflineDesc: '와이파이 없이도 관광을 즐기세요.',
-    ready: '준비 완료'
+    ready: '준비 완료',
+    wifiOfflineOk: 'WiFi 없어도 OK',
+    gpsAutoGuideDesc: 'GPS 기반 오디오 가이드. 인터넷 없이도 전 세계 기항지에서 자동으로 설명이 재생됩니다.'
   },
   ar: {
     landmarks: 'معالم',
@@ -533,7 +555,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'بدون إنترنت',
     prepareOffline: 'التحضير بدون اتصال',
     prepareOfflineDesc: 'استمتع بالمعالم السياحية بدون WiFi.',
-    ready: 'جاهز'
+    ready: 'جاهز',
+    wifiOfflineOk: 'إنترنت واي فاي غير ضروري',
+    gpsAutoGuideDesc: 'دليل صوتي عبر نظام تحديد المواقع العالمي (GPS). تظهر الشروحات تلقائيًا في موانئ العالم دون إنترنت.'
   },
   hi: {
     landmarks: 'स्थल',
@@ -574,7 +598,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'इंटरनेट नहीं',
     prepareOffline: 'ऑफ़라인 तैयारी',
     prepareOfflineDesc: 'बिना वाईफाई के दर्शनीय स्थलों का आनंद लें।',
-    ready: 'तैयार'
+    ready: 'तैयार',
+    wifiOfflineOk: 'बिना वाईफाई के भी ठीक है',
+    gpsAutoGuideDesc: 'जीपीएस आधारित ऑडियो गाइड। बिना इंटरनेट के भी दुनिया भर के बंदरगाहों पर विवरण अपने आप सुनाई देंगे।'
   },
   tr: {
     landmarks: 'Gezilecek Yerler',
@@ -615,7 +641,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'İnternet Yok',
     prepareOffline: 'Çevrimdışı Hazırla',
     prepareOfflineDesc: 'WiFi olmadan gezinin tadını çıkarın.',
-    ready: 'Hazır'
+    ready: 'Hazır',
+    wifiOfflineOk: 'WiFi Olmasa da Tamam',
+    gpsAutoGuideDesc: 'GPS tabanlı sesli rehber. İnternet olmadan dünya limanlarında otomatik sesli anlatım.'
   },
   nl: {
     landmarks: 'Bezienswaardigheden',
@@ -656,7 +684,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Geen internet',
     prepareOffline: 'Offline Voorbereiden',
     prepareOfflineDesc: 'Geniet van sightseeing zonder WiFi.',
-    ready: 'Klaar'
+    ready: 'Klaar',
+    wifiOfflineOk: 'Zonder WiFi ook OK',
+    gpsAutoGuideDesc: 'GPS-audiogids. Automatische uitleg in havens wereldwijd zonder internet.'
   },
   pl: {
     landmarks: 'Zabytki',
@@ -697,7 +727,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Brak internetu',
     prepareOffline: 'Przygotuj Offline',
     prepareOfflineDesc: 'Ciesz się zwiedzaniem bez WiFi.',
-    ready: 'Gotowe'
+    ready: 'Gotowe',
+    wifiOfflineOk: 'Bez WiFi też OK',
+    gpsAutoGuideDesc: 'Przewodnik audio GPS. Automatyczne opisy w portach na całym świecie bez internetu.'
   },
   sv: {
     landmarks: 'Sevärdheter',
@@ -738,7 +770,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Inget internet',
     prepareOffline: 'Förbered Offline',
     prepareOfflineDesc: 'Njut av sightseeing ohne WiFi.',
-    ready: 'Klar'
+    ready: 'Klar',
+    wifiOfflineOk: 'OK utan WiFi',
+    gpsAutoGuideDesc: 'GPS-audioguide. Automatiska förklaringar i hamnar över hela världen utan internet.'
   },
   da: {
     landmarks: 'Seværdigheder',
@@ -779,7 +813,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Intet internet',
     prepareOffline: 'Forbered Offline',
     prepareOfflineDesc: 'Nyd sightseeing uden WiFi.',
-    ready: 'Klar'
+    ready: 'Klar',
+    wifiOfflineOk: 'OK uden WiFi',
+    gpsAutoGuideDesc: 'GPS-audioguide. Automatiska forklaringer i hamne over hele verden uden internet.'
   },
   fi: {
     landmarks: 'Nähtävyydet',
@@ -820,7 +856,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Ei internetiä',
     prepareOffline: 'Valmistele Offline',
     prepareOfflineDesc: 'Nauti nähtävyyksistä ilman WiFiä.',
-    ready: 'Valmis'
+    ready: 'Valmis',
+    wifiOfflineOk: 'OK ilman WiFiä',
+    gpsAutoGuideDesc: 'GPS-audiopas. Automaattiset selostukset satamissa ympäri maailman ilman internetiä.'
   },
   no: {
     landmarks: 'Severdigheter',
@@ -861,7 +899,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Intet internett',
     prepareOffline: 'Forbered Offline',
     prepareOfflineDesc: 'Nyt sightseeing uten WiFi.',
-    ready: 'Klar'
+    ready: 'Klar',
+    wifiOfflineOk: 'OK uten WiFi',
+    gpsAutoGuideDesc: 'GPS-audioguide. Automatiska forklaringer i havner over hele verden uden internet.'
   },
   el: {
     landmarks: 'Αξιοθέατα',
@@ -902,7 +942,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Χωρίς Internet',
     prepareOffline: 'Προετοιμασία Offline',
     prepareOfflineDesc: 'Απολαύστε τα αξιοθέατα χωρίς WiFi.',
-    ready: 'Έτοιμο'
+    ready: 'Έτοιμο',
+    wifiOfflineOk: 'OK και χωρίς WiFi',
+    gpsAutoGuideDesc: 'GPS οδηγός ήχου. Αυτόματη περιγραφή σε λιμάνια παγκοσμίως χωρίς ίντερνετ.'
   },
   th: {
     landmarks: 'สถานที่สำคัญ',
@@ -943,7 +985,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'ไม่มีอินเทอร์เน็ต',
     prepareOffline: 'เตรียมออฟ라인',
     prepareOfflineDesc: 'ท่องเที่ยวได้โดยไม่ต้องมี WiFi',
-    ready: 'พร้อมแล้ว'
+    ready: 'พร้อมแล้ว',
+    wifiOfflineOk: 'ไม่มี WiFi ก็ OK',
+    gpsAutoGuideDesc: 'คู่มือเสียงระบบ GPS คำบรรยายเล่นอัตโนมัติที่ท่าเรือทั่วโลกโดยไม่ต้องใช้อินเทอร์เน็ต'
   },
   vi: {
     landmarks: 'Địa danh',
@@ -984,7 +1028,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Không có Internet',
     prepareOffline: 'Chuẩn bị Ngoại tuyến',
     prepareOfflineDesc: 'Thưởng thức chuyến đi mà không cần WiFi.',
-    ready: 'Sẵn sàng'
+    ready: 'Sẵn sàng',
+    wifiOfflineOk: 'Không có WiFi vẫn OK',
+    gpsAutoGuideDesc: 'Hướng dẫn âm thanh GPS. Tự động phát tại các cảng trên thế giới mà không cần internet.'
   },
   id: {
     landmarks: 'Landmark',
@@ -1025,7 +1071,9 @@ const uiTranslations: Record<string, Record<string, string>> = {
     noInternet: 'Tanpa Internet',
     prepareOffline: 'Siapkan Offline',
     prepareOfflineDesc: 'Nikmati wisata tanpa WiFi.',
-    ready: 'Siap'
+    ready: 'Siap',
+    wifiOfflineOk: 'Tanpa WiFi juga OK',
+    gpsAutoGuideDesc: 'Panduan audio GPS. Penjelasan otomatis di pelabuhan seluruh dunia tanpa internet.'
   }
 };
 

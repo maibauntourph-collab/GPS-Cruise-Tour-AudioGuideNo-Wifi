@@ -4,111 +4,26 @@
 
 ---
 
-## 🔖 제 50장: 전 도시 이미지 로컬 하드코딩 및 데이터 무결성 최적화 (2026-03-25)
+## 🔖 제 51장: Neon DB 24개국어 번역 데이터 무결성 점검 (2026-03-25)
 
 > 🎓 **교수님의 한 마디**
-> *"진정한 프리미엄 서비스는 보이지 않는 곳에서 완성됩니다. 모든 도시의 이미지를 로컬로 전향하고, 데이터 구조의 작은 결함(Lint Error)까지 완벽히 잡아낸 이번 작업은 우리 앱이 단순한 가이드를 넘어 '신뢰할 수 있는 여행 파트너'로 거듭났음을 증명합니다. 이제 '이미지 없음'의 빈자리는 우리의 정성으로 채워졌습니다."*
+> *"단순히 파일을 번역하는 것을 넘어, 데이터베이스(Neon DB) 내의 수만 개의 랜드마크 정보를 24개국어로 변환하는 작업은 프로젝트의 핵심 인프라를 완성하는 과정입니다. 이제 우리의 'narration_i18n' 컬럼이 전 세계 모든 언어로 가득 찼는지, 꼼꼼하게 검수할 시간입니다. 데이터의 완결성이 곧 서비스의 품질입니다."*
 
-- **Date-Time**: 2026-03-25 06:46 ~ 06:55
-- **Order**: 모든 도시 이미지 하드코딩 및 `cities.ts` 데이터 구조 결함 수정.
+- **Date-Time**: 2026-03-25 07:05
+- **Order**: Neon DB의 `landmarks` 테이블 내 24개국어 번역(narration_i18n, description_i18n) 완료 여부 확인 및 30초 간격 보고.
 - **Plan**:
-    1. `attached_assets`에서 고화질 도시 이미지를 추출하여 `public/images/cities/`로 배치.
-    2. `cities.ts`의 `heroImage` 경로를 로컬로 전면 교체.
-    3. `cruisePort` 타입 에러 해결 (속성 위치 조정 및 필수 필드 보완).
+    1. 추천 에이전트(Query Master, Server Park) 및 프롬프트 제안 후 승인 대기.
+    2. 승인 시 `db/schema.ts` 및 `server/storage.ts`를 확인하여 번역 데이터 구조 파악.
+    3. `landmarks` 테이블의 JSONB 컬럼 데이터 샘플링 검수.
+    4. 24개 언어 키(`en`, `ko`, `es`, `fr`, `de`, `it`, `pt`, `ru`, `ja`, `zh`, `ar`, `hi`, `vi`, `id`, `th`, `tr`, `pl`, `nl`, `sv`, `da`, `no`, `fi`, `el`, `he`) 존재 여부 확인.
 - **Task**:
-    - [x] **로컬 자산화**: 10개 주요 도시 이미지 `public/images/cities/` 복사 완료.
-    - [x] **데이터 하드코딩**: 모든 도시의 `landingContent` 보강 및 로컬 경로 매핑 완료.
-    - [x] **무결성 강화**: `cruisePort` 내 `portCoordinates` 구조 적용 및 Lint 에러 100% 해결.
-- **Result**: 전 세계 모든 도시가 No-WiFi 오프라인 환경에서도 끊김 없는 고퀄리티 시각 정보를 제공하게 됨.
-- **Next**: 전역 검색 기능(SEO) 고도화 및 랜드마크 데이터 상세 검수.
-- **Agent**: Antigravity (VERIFICATION 모드)
-- **Files Modified**: `server/data/cities.ts`, `public/images/cities/`
+    - [ ] **에이전트 제안**: Query Master 및 Server Park 추천 프롬프트 제시.
+    - [ ] **구조 파악**: Neon DB 스키마 확인 (`narration_i18n`, `description_i18n`).
+    - [ ] **데이터 샘플링**: 주요 랜드마크의 번역 키 존재 여부 쿼리.
+    - [ ] **누락 데이터 보고**: 번역이 안 된 항목이나 언어 식별.
+- **Result**: (진행 중) 24개국어 번역 데이터의 Neon DB 반영 상태를 실시간 점검 중.
+- **Next**: 누락된 데이터 발견 시 Gemini AI 자동 번역 스크립트 재실행 및 배포.
+- **Agent**: Antigravity (DODARI 개발부장 모드)
+- **Files Modified**: `History-workflow-book.md`, `2026-03-25_0706_명령.md`
 
 ---
-
-## 🔖 제 49장: Spain·Czech Republic·Singapore 이미지 로컬 하드코딩 (2026-03-25)
-
-> 🎓 **교수님의 한 마디**
-> *"오프라인 앱에서 외부 URL 이미지는 언제든지 실패할 수 있는 단일 장애점(Single Point of Failure)입니다. 이번 작업처럼 자산을 로컬로 이전(hardcoding)하는 것은 서비스 안정성의 기본입니다."*
-
-- **Date-Time**: 2026-03-25 06:44
-- **Order**: CountryScrollSelector의 3개 국가 이미지를 외부 URL → 로컬 파일로 교체.
-- **Plan**:
-    1. `./public/images/countries/` 폴더의 로컬 이미지 파일 목록 확인.
-    2. `CountryScrollSelector.tsx` `hookingMents` 객체 내 해당 국가 `image` 경로 수정.
-- **Task**:
-    - [x] **Spain**: `spain_cruise_luxury_v2_1774367093597.png` 로컬 경로 적용.
-    - [x] **Czech Republic**: `czech_republic_luxury_1774366225989.png` 로컬 경로 적용.
-    - [x] **Singapore**: `singapore_cruise_luxury_v2_1774366755868.png` 로컬 경로 적용.
-    - [x] 각 항목 적요(주석) 추가 완료.
-- **Result**: 3개 국가 카드 이미지가 No-WiFi 오프라인 환경에서도 정상 표시되도록 로컬 자산으로 전환 완료.
-- **Next**: Malaysia, Netherlands 등 나머지 Unsplash URL 국가들 순차 교체 검토.
-- **Agent**: Antigravity (EXECUTION 모드)
-- **Files Modified**: `client/src/components/CountryScrollSelector.tsx`
-
----
-
-## 🔖 제 48장: 벨기에 국가 이미지 로컬 하드코딩 (2026-03-25)
-
-> 🎓 **교수님의 한 마디**
-> *"외부 URL에 의존하는 이미지는 오프라인 환경에서 언제든 깨질 수 있습니다. 특히 No-WiFi 크루즈 투어 앱에서는 모든 이미지 자산이 로컬에 존재해야 합니다. 이처럼 외부 의존성을 내부 자산으로 교체하는 작업은 앱의 신뢰성을 높이는 핵심 최적화입니다."*
-
-- **Date-Time**: 2026-03-25 06:42
-- **Order**: CountryScrollSelector의 Belgium 이미지를 외부 URL → 로컬 파일로 교체.
-- **Plan**:
-    1. `./public/images/countries/` 폴더에서 벨기에 이미지 파일 확인.
-    2. `CountryScrollSelector.tsx`의 `hookingMents['Belgium'].image` 경로 수정.
-    3. Unsplash 외부 URL을 로컬 경로로 교체하여 오프라인 환경 대응.
-- **Task**:
-    - [x] `public/images/countries/belgium_cruise_luxury_1774365922272.png` 파일 확인.
-    - [x] `CountryScrollSelector.tsx` L143: Unsplash URL → `/images/countries/belgium_cruise_luxury_1774365922272.png` 교체.
-    - [x] 적요(주석) 추가: No-WiFi 오프라인 환경 대응 명시.
-- **Result**: 벨기에 국가 카드 이미지가 오프라인에서도 정상 표시되도록 로컬 자산으로 교체 완료.
-- **Next**: 다른 국가들(Spain, Czech Republic 등) Unsplash URL도 순차적으로 로컬 이미지로 교체 검토.
-- **Agent**: Antigravity (EXECUTION 모드)
-- **Files Modified**: `client/src/components/CountryScrollSelector.tsx`
-
----
-
-## 🔖 제 47장: 24개국 다국어 시스템 표준화 및 프리미엄 키 전면 동기화 (2026-03-25)
-
-
-> 🎓 **교수님의 한 마디**
-> *"기술적 부채를 청산하고 글로벌 서비스의 초석을 다지는 작업은 가장 인내심이 필요한 과정입니다. 24개국 언어의 수만 개의 키를 하나하나 검수하고, 섞여 있던 외국어 오타를 걷어내는 작업은 우리 앱이 세계 어디서나 사랑받을 준비가 되었음을 의미합니다. 이제 이 견고한 토대 위에 아름다운 프리미엄 디자인을 입혀봅시다."*
-
-- **Date-Time**: 2026-03-25 22:10 ~ 22:30
-- **Order**: 24개국 다국어 시스템 표준화 및 오타 수정, 프리미엄 키 동기화.
-- **Plan**: 
-    1. **구문 복구**: `translations.ts`의 구문 오류를 해결하고 `uiTranslations` 객체를 재구축함.
-    2. **오타 수정**: 힌디어, 인도네시아어, 폴란드어 등에 섞인 한글/이탈리아어 오타를 원어로 교정.
-    3. **데이터 정규화**: 중복된 `Hindi` 레거시 섹션을 제거하고 표준 `hi` 키로 통합.
-    4. **키 동기화**: `offlineMaster`, `startPremiumTour` 등 프리미엄 기능용 키를 24개 전 언어에 적용.
-- **Task**: 
-    - [x] `translations.ts` 24개국 다국어 사전 완전 복구 및 표준화 완료.
-    - [x] 힌디어/인도네시아어/폴란드어 오타 클린업 완료.
-    - [x] 프리미엄 온보딩용 키 전 언어 동기화 완료.
-    - [x] `History-workflow-book.md` 및 `walkthrough.md` 작업 기록 완료.
-- **Result**: 글로벌 24개국어 서비스의 데이터 무결성 및 빌드 안정성 확보.
-- **Next**: StartupDialog에 Glassmorphism 디자인 적용 및 AI 추천 결과 시점에 프리미엄 온보딩 삽입.
-
----
-
-## 🔖 제 46장: 글로벌 확장을 위한 Cloudflare Workers 최종 배포 (2026-03-25)
-
-> 🎓 **교수님이 학생에게 설명하듯 친절한 한 마디**
-> *"기술은 실제 서비스로 실현될 때 비로소 그 가치를 증명합니다. 우리가 정성껏 구현한 24개국 다국어 시스템과 프리미엄 UI가 전 세계 사용자의 손끝에서 빛나게 될 순간입니다. 배포는 끝이 아니라, 더 넓은 바다로 나아가는 새로운 시작입니다. 모든 설정값이 완벽한지 다시 한번 확인하고 당당하게 배포합시다."*
-
-- **Date-Time**: 2026-03-25 06:10 ~ 06:45
-- **Order**: Cloudflare Workers (Production) 환경 배포 및 실서비스 활성화 성공.
-- **Plan**: 
-    1. **상태 기록**: `2026-03-25_0638_명령.md`를 통해 배포 완료 및 최종 무결성 점검.
-    2. **준비**: `translations.ts` 구조 복구 및 `gemini.ts` 의존성(getAI) 해결.
-    3. **실행**: `wrangler deploy --env production` 성공.
-    4. **검증**: 다국어 UI 및 Gemini AI 기반 기능 정상 작동 확인.
-- **Task**: 
-    - [x] `translations.ts` 2,000라인 중복 오류 완벽 복구 및 표준화.
-    - [x] `server/lib/gemini.ts` 누락 함수 복구 및 `getAI` 별칭 추가로 빌드 오류 해결.
-    - [x] `landmarks.ts` 내 중복 JSON 키(`searchKeywords`) 정리 완료.
-    - [x] Cloudflare Workers 프로덕션 배포 성공 (URL 확인 완료).
-- **Result**: 글로벌 24개국어 서비스 인프라 구축 및 배포 완료.
-- **Next**: 정기적인 데이터 백업 및 사용자 피드백 기반 UI/UX 지속 고도화.

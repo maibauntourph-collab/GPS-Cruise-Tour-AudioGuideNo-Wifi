@@ -235,11 +235,11 @@ export function StartupDialog({
               </motion.div>
 
               <h1 className="text-[28px] font-black text-slate-800 tracking-tight mb-4 text-center">
-                {t('noWaitTour', selectedLanguage) || t('ready', selectedLanguage) || 'Experience Smoothly'}
+                {t('wifiOfflineOk', selectedLanguage) || 'WiFi Offline OK'}
               </h1>
 
-              <p className="text-center text-[15px] font-semibold text-slate-400 leading-relaxed px-4">
-                {t('prepareOfflineDesc', selectedLanguage) || 'Guide starts automatically at ports worldwide without internet.'}
+              <p className="text-center text-[15px] font-semibold text-slate-400 leading-relaxed px-4 break-keep">
+                {t('gpsAutoGuideDesc', selectedLanguage) || 'GPS-based audio guide. Explanations play automatically at ports worldwide without internet.'}
               </p>
 
               <div className="flex gap-2.5 mt-10">
