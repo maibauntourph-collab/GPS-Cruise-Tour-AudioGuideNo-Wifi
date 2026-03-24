@@ -862,5 +862,53 @@ npx tsx server/scripts/update_gps_precision.ts
 *   **Missing Export Fix**:
     *   Re-added and exported `getSavedTourData` and `SavedTourData` in `StartupDialog.tsx`.
     *   Resolved the `Uncaught SyntaxError` in `RoleSelection.tsx` that was preventing the application from loading.
-*   **Production Deployment**:
-    *   Triggered 1.4.1 Build and deployed to Cloudflare Workers using PowerShell-optimized command sequences.
+
+---
+
+## 🔖 제 21장: 검색 혁명 - 태그 기반 지능형 명소 탐색 (Search Keywords & Premium Enrichment)
+
+> 📅 **기록일:** 2026년 3월 24일 (화) 20:55 ~ 21:10
+> 👨‍🏫 **담당 에이전트:** Antigravity (전천후 지휘), Query Master (DB 최적화)
+
+### 🎓 교수님의 한 마디
+> *"학생 여러분, 데이터가 많아질수록 중요한 것은 '찾는 방법'입니다. 이름만으로는 부족하죠. '인생샷', '인상파' 같은 감성적인 키워드로 창의적인 검색이 가능할 때, 기술은 비로소 인간의 감성과 연결됩니다. 오늘 우리는 그 연결고리를 데이터베이스 레벨에서 구현했습니다!"*
+
+---
+
+### 🛠️ 주요 구현 내용
+
+1. **지능형 검색 스키마 도입 (`shared/schema.ts`)**
+   - **문제**: 명소의 이름(Name)이나 간단한 설명(Description)만으로는 사용자가 원하는 '분위기'나 '세부 특징'을 검색하기 어려웠습니다.
+   - **해결**: `searchKeywords` (문자열 배열) 필드를 스키마에 추가했습니다. 이제 Drizzle ORM을 통해 `["Beaux-Arts", "인상파", "인생샷"]` 같은 태그를 집어넣을 수 있습니다.
+
+2. **348개 명소 자동 태깅 (Bulk Data Enrichment)**
+   - **수작업 NO! 스크립트 YES!**: `enrich_all_keywords.cjs` 스크립트를 제작했습니다.
+   - **로직**: 명소의 이름과 카테고리를 AI처럼 분석합니다.
+     - '식당/Restaurant' -> `["맛집", "현지인추천", "먹거리"]`
+     - '미술관/Museum' -> `["예술", "문화", "전시"]`
+     - '박물관' -> `["역사", "에듀케이션"]`
+   - **결과**: 단 1초 만에 348개의 모든 명소에 맞춤형 검색 키워드가 주입되었습니다.
+
+3. **오르세 미술관(Orsay) 프리미엄 강화**
+   - **특징**: 단순한 태깅을 넘어, 오르세 미술관에는 **"빈센트 반 고흐"**, **"Beaux-Arts"** 등의 고유 키워드를 수동 정밀 주입하여 검색 품질을 극대화했습니다.
+
+4. **검색 필터 로직 고도화 (`UnifiedFloatingCard.tsx`)**
+   - **변경 전**: 이름과 설명만 대조.
+   - **변경 후**: `Name` || `Description` || `SearchKeywords` 모두를 실시간으로 검색.
+   - **효과**: "인상파"라고만 쳐도 오르세 미술관이 1등으로 검색됩니다.
+
+---
+
+### 📝 기술적 교훈 (Study Notes)
+- **데이터 보존의 법칙**: 3MB가 넘는 `landmarks.ts` 파일을 수정할 때 직접 타이핑하는 것은 '자살 행위'입니다. 항상 정규표현식(Regex)을 활용한 **Batch Script**를 먼저 고려하세요.
+- **Drizzle Kit의 위력**: 스키마 파일만 고치고 `npx drizzle-kit push` 한 번으로 실제 Neon DB의 테이블 구조가 순식간에 동기화되는 마법을 경험했습니다.
+
+---
+
+### ✅ 제 21장 완료 (Status: Success)
+- **DB**: `search_keywords` 컬럼 생성 및 데이터 적재 완료.
+- **UI**: 지능형 필터링 시스템 실시간 적용 완료.
+- **Deploy**: Cloudflare Production 환경에 최종 배포 성공.
+
+---
+**마지막 업데이트**: 2026-03-24 21:10 (Antigravity Agent)

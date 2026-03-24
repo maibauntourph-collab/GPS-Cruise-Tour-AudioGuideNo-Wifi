@@ -7,6 +7,10 @@ dirs.forEach(dir => {
     const fullPath = path.resolve(process.cwd(), dir);
     if (fs.existsSync(fullPath)) {
         console.log(`Cleaning ${dir}...`);
-        fs.rmSync(fullPath, { recursive: true, force: true });
+        try {
+            fs.rmSync(fullPath, { recursive: true, force: true });
+        } catch (err) {
+            console.warn(`Failed to clean ${dir}: ${err.message}`);
+        }
     }
 });
