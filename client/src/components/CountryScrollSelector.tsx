@@ -67,8 +67,9 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
     'USA': {
         ko: '압도적인 스카이라인과 자유의 상징 뉴욕',
         en: 'Luxury USA: Iconic skylines and symbols of freedom',
-        th: 'สหรัฐอเมริกาที่หรูหรา: เส้นขอบฟ้าที่เป็น사ัญลักษณ์และ사ัญลักษณ์แห่งเส리함',
-        image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1200'
+        th: 'สหรัฐอเมริกาที่หรูหรา: เส้นขอบฟ้าที่เป็นสัญลักษณ์และสัญลักษณ์แห่งเสรีภาพ',
+        // [적요] External URL → 로컬 이미지 (Anchorage/USA)
+        image: '/images/cities/anchorage.jpg'
     },
     'United Kingdom': {
         ko: '전통과 현대가 공존하는 품격 있는 런던 여행',
@@ -96,49 +97,57 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '장엄한 만리장성과 화려한 상하이의 야경',
         en: 'Luxury China: Ancient wonders and glittering modern metropolises',
         th: 'จีนที่หรูหรา: สิ่งมหัศจรรย์โบราณและเมืองที่ทันสมัยที่เปล่งประกาย',
-        image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1200'
+        // [적요] External URL → 로컬 이미지 (Pusan을 임시 사용하거나 다른 아시아 이미지 매핑 - 여기서는 media__1774368725151.png 활용 시도)
+        image: '/images/countries/media__1774368725151.png'
     },
     'Vietnam': {
         ko: '신비로운 하롱베이와 활력 넘치는 베트남의 미소',
         en: 'Luxury Vietnam: Mystical bays and vibrant cultural heritage',
-        th: 'เวียดนามที่หรูหรา: อ่าวที่ลึกลับและมรดกทาง문화전통ที่มีชีวิตชีวา',
-        image: 'https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1200'
+        th: 'เวียดนามที่หรูหรา: อ่าวที่ลึกลับและมรดกทางวัฒนธรรมที่มีชีวิตชีวา',
+        // [적요] External URL → 로컬 이미지 (말레이시아 이미지를 유사 아시아권으로 활용하거나 싱가포르-another 활용)
+        image: '/images/countries/singagpore-another.png'
     },
     'Netherlands': {
         ko: '튤립 로맨스와 운하의 서정이 가득한 네덜란드',
         en: 'Luxury Netherlands: Canal-side elegance and tulip romance',
-        th: '네덜란드ที่หรูหรา: ความสง่างามริมคลองและความโรแมน틱의ดอกทิวลิป',
-        image: 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?q=80&w=1200'
+        th: 'เนเธอร์แลนด์ที่หรูหรา: ความสง่างามริมคลองและความโรแมนติกของดอกทิวลิป',
+        // [적요] External URL → 로컬 이미지 (Amsterdam)
+        image: '/images/cities/amsterdam.jpg'
     },
     'Philippines': {
         ko: '지상 최후의 낙원, 에메랄드빛 필리핀의 휴양지',
         en: 'Luxury Philippines: Paradise islands and emerald crystal waters',
         th: 'ฟิลิปปินส์ที่หรูหรา: เกาะสวรรค์และน้ำใสสีมรกต',
-        image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?q=80&w=1200'
+        // [적요] External URL → 로컬 이미지 (Cebu 시티 이미지가 cities 폴더에 있을 경우 활용 가능하나 현재는 countries 폴더의 pusan image.png 등을 해변물로 임시 활용)
+        image: '/images/countries/pusan image.png'
     },
     'Denmark': {
         ko: '동화 속 풍경과 북유럽 감성의 코펜하겐',
         en: 'Luxury Denmark: Fairy-tale charm and Nordic sophistication',
         th: 'เดนมาร์กที่หรูหรา: เสน่ห์ของเทพนิยายและความซับซ้อนของนอร์ดิก',
-        image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=1200'
+        // [적요] External URL → 로컬 이미지 (Copenhagen)
+        image: '/images/cities/copenhagen.jpg'
     },
     'Norway': {
         ko: '거대한 피오르드와 대자연의 경이로움 오슬로',
         en: 'Luxury Norway: Majestic fjords and breathtaking natural wonders',
         th: 'นอร์เวย์ที่หรูหรา: ฟยอร์ดที่สง่างามและสิ่งมหัศจรรย์ทางธรรมชาติที่น่าทึ่ง',
-        image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1200'
+        // [적요] External URL → 로컬 이미지 (Oslo)
+        image: '/images/cities/oslo.jpg'
     },
     'Hungary': {
         ko: '다뉴브강의 진주, 찬란한 야경의 부다페스트',
         en: 'Luxury Hungary: Pearl of the Danube and glittering architecture',
-        th: 'ฮังการีที่หรูหรา: ไข่มุกแห่งแม่น้ำดานูบและ스ถาปัตยกรรมที่ระยิบระยับ',
-        image: 'https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80&w=1200'
+        th: 'ฮังการีที่หรูหรา: ไข่มุกแห่งแม่น้ำดานูบและสถาปัตยกรรมที่ระยิบระยับ',
+        // [적요] External URL → 로컬 이미지 (Budapest)
+        image: '/images/cities/budapest.jpg'
     },
     'Poland': {
         ko: '중세의 낭만과 고전적 기품의 폴란드',
         en: 'Luxury Poland: Medieval romance and classical elegance',
-        th: 'โปแลนด์ที่หรูหรา: ความโรแมน틱인ยุคกลางและความสง่างามแบบคลาส스ิก',
-        image: 'https://images.unsplash.com/photo-1519197924294-4ba991a11128?q=80&w=1200'
+        th: 'โปแลนด์ที่หรูหรา: ความโรแมนติกในยุคกลางและความสง่างามแบบคลาสสิก',
+        // [적요] External URL → 로컬 이미지 (Warsaw)
+        image: '/images/cities/warsaw.jpg'
     },
     'Belgium': {
         ko: '중세풍 건물과 초콜릿처럼 달콤한 브뤼셀 여행',
@@ -160,7 +169,8 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '정교한 디자인과 정갈한 북유럽의 조화 스톡홀름',
         en: 'Luxury Sweden: Refined design and Nordic harmony',
         th: 'สวีเดนที่หรูหรา: การออกแบบที่ประณีตและความสามัคคีของนอร์ดิก',
-        image: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?q=80&w=1200'
+        // [적요] External URL → 로컬 이미지 (Stockholm)
+        image: '/images/cities/stockholm.jpg'
     }
 };
 

@@ -60,20 +60,20 @@ export async function setupVite(app: Hono<any>, server: Server): Promise<ViteDev
     }
 
     try {
+      const { pathname } = new URL(url);
       const clientTemplate = path.join(__dirname, "..", "client", "index.html");
-      console.log(`[Vite] Serving template from ${clientTemplate}`);
+      console.log(`[Vite] Serving template from ${clientTemplate} for path: ${pathname}`);
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
 
-      // Vite transformation
-      // We use the vite instance created in this scope
-      const page = await vite.transformIndexHtml(url, template);
+      // Vite transformation - use pathname instead of full URL
+      const page = await vite.transformIndexHtml(pathname, template);
 
-      // OG metatags
-      const finalHtml = await ogService.injectMetaTags(page, url);
+      // OG metatags - use pathname for consistent meta generation
+      const finalHtml = await ogService.injectMetaTags(page, pathname);
 
       return c.html(finalHtml);
     } catch (e) {

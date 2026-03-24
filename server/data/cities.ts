@@ -852,12 +852,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Welcome to New York City",
         "subTitle": "The City That Never Sleeps",
-        "heroImage": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1200"
+        "heroImage": "/images/cities/anchorage.jpg"
       },
       "ko": {
         "title": "뉴욕 시티에 오신 것을 환영합니다",
         "subTitle": "잠들지 않는 도시",
-        "heroImage": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1200"
+        "heroImage": "/images/cities/anchorage.jpg"
       }
     },
     "defaultGuideId": null,
@@ -955,12 +955,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Civitavecchia: Gateway to Rome",
         "subTitle": "Charming Port City and Your Journey's Start",
-        "heroImage": "https://images.unsplash.com/photo-1624835848527-0c7da796a5af?w=1200"
+        "heroImage": "/images/cities/rome.jpg"
       },
       "ko": {
         "title": "치비타베키아: 로마로 가는 관문",
         "subTitle": "항구 도시의 매력과 편안한 여행의 시작",
-        "heroImage": "https://images.unsplash.com/photo-1624835848527-0c7da796a5af?w=1200"
+        "heroImage": "/images/cities/rome.jpg"
       }
     },
     "defaultGuideId": null,
