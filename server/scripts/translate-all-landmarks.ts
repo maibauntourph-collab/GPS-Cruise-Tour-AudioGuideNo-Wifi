@@ -37,7 +37,7 @@ async function retryWithBackoff<T>(
 
 async function run() {
     console.log("🚀 [Bulk Translate] Fetching all landmarks from Neon DB...");
-    const allLandmarks = await db.select().from(schema.landmarks).limit(3);
+    const allLandmarks = await db.select().from(schema.landmarks);
     console.log(`📊 Found ${allLandmarks.length} landmarks. Starting 24-language translation...`);
 
     let successCount = 0;
@@ -68,8 +68,8 @@ async function run() {
                 });
             });
             successCount++;
-            // [교수님 노트] API 부하 조절을 위한 골든 타임 (1.5초 휴식)
-            await new Promise(r => setTimeout(r, 1500));
+            // [교수님 노트] API 부하 조절을 위한 골든 타임 (3초 휴식)
+            await new Promise(r => setTimeout(r, 3000));
         } catch (e: any) {
             console.error(`[${i + 1}/${allLandmarks.length}] ❌ Error translating ${l.name}:`, e?.message);
             failCount++;
