@@ -11,17 +11,16 @@
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { MapPin, Smartphone, Download, CheckCircle2, Globe, Map, AudioLines, CreditCard } from 'lucide-react';
+import { MapPin, Smartphone, Download, CheckCircle2, Globe, Map, AudioLines, CreditCard, X } from 'lucide-react';
 import { City } from '@shared/schema';
 import { audioService } from '@/lib/audioService';
 import { LanguageSelector } from './LanguageSelector';
 import { useOfflineDownload } from '@/hooks/useOfflineDownload';
+import { t } from '@/lib/translations';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ShieldCheck } from 'lucide-react';
 
-function getLangText(lang: string, ko: string, en: string, th: string): string {
-  if (lang === 'ko') return ko;
-  if (lang === 'th') return th;
-  return en;
-}
+// [삭제] getLangText 대신 중앙 집중식 t() 사용
 
 export interface SavedTourData {
   cityId: string;
@@ -87,9 +86,9 @@ export function StartupDialog({
   const getStatusText = () => {
     if (!isDownloading) return '';
     const { status, current, total } = progress;
-    if (status === 'fetching_cities') return getLangText(selectedLanguage, '도시 정보 확인 중...', 'Checking cities...', 'กำลังตรวจสอบเมือง...');
-    if (status === 'fetching_landmarks') return getLangText(selectedLanguage, `가이드 다운로드 (${current}/${total})`, `Downloading Guides (${current}/${total})`, `ดาวน์โหลดคู่มือ (${current}/${total})`);
-    if (status === 'caching_images') return getLangText(selectedLanguage, `현장 사진 최적화 중 (${current}/${total})`, `Optimizing Photos (${current}/${total})`, `ปรับรูปภาพให้เหมาะสม (${current}/${total})`);
+    if (status === 'fetching_cities') return t('checkingCities', selectedLanguage) || 'Checking cities...';
+    if (status === 'fetching_landmarks') return `${t('downloadingGuides', selectedLanguage) || 'Downloading Guides'} (${current}/${total})`;
+    if (status === 'caching_images') return `${t('optimizingPhotos', selectedLanguage) || 'Optimizing Photos'} (${current}/${total})`;
     return '';
   };
 
@@ -99,121 +98,152 @@ export function StartupDialog({
         <DialogTitle className="sr-only">Premium Tour Onboarding</DialogTitle>
         <DialogDescription className="sr-only">Experience the world without boundaries</DialogDescription>
 
-        {step === 1 ? (
-          <div className="flex-1 flex flex-col items-center bg-[#F8F9FA] overflow-y-auto">
-            {/* Top Branding Section */}
-            <div className="w-full bg-[#E85D36] p-8 pb-10 flex flex-col items-center rounded-b-[3rem] shadow-xl text-white relative shrink-0">
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors z-10"
-              >
-                <span className="text-xl">×</span>
-              </button>
+        <AnimatePresence mode="wait">
+          {step === 1 ? (
+            <motion.div
+              key="step1"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="flex-1 flex flex-col items-center bg-[#F8F9FA]/50 backdrop-blur-sm overflow-y-auto"
+            >
+              {/* Top Branding Section */}
+              <div className="w-full bg-gradient-to-br from-[#E85D36] to-[#ff7e5a] p-8 pb-10 flex flex-col items-center rounded-b-[3.5rem] shadow-2xl text-white relative shrink-0">
+                <button
+                  onClick={onClose}
+                  className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all z-10"
+                >
+                  <X className="w-5 h-5" />
+                </button>
 
-              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-md">
-                <Globe className="w-8 h-8 text-white animate-pulse" />
+                <motion.div
+                  initial={{ scale: 0.8, rotate: -10 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  className="w-20 h-20 bg-white/20 rounded-[2rem] flex items-center justify-center mb-6 backdrop-blur-xl border border-white/30 shadow-inner"
+                >
+                  <Globe className="w-10 h-10 text-white" />
+                </motion.div>
+
+                <h1 className="text-[22px] font-black tracking-tight leading-tight text-center mb-6">
+                  {t('personalAiGuide', selectedLanguage) || 'Your Personal AI Guide'}
+                </h1>
+
+                <div className="flex bg-white/10 p-1 rounded-2xl backdrop-blur-xl w-full max-w-[320px] border border-white/20 shadow-lg">
+                  <div className="flex-1 bg-white/90 backdrop-blur-md text-[#E85D36] py-2.5 rounded-xl flex items-center justify-center gap-2 font-black text-xs shadow-sm">
+                    {t('offlineMaster', selectedLanguage) || 'Offline Master'}
+                  </div>
+                  <div className="flex-1 text-white py-2.5 rounded-xl flex items-center justify-center gap-2 font-bold text-xs opacity-90">
+                    <ShieldCheck className="w-4 h-4" />
+                    {t('noInternet', selectedLanguage) || 'No Internet'}
+                  </div>
+                </div>
               </div>
 
-              <h1 className="text-[20px] font-black tracking-tight leading-tight text-center mb-4">
-                {getLangText(selectedLanguage, '당신의 AI 개인 가이드', 'Your Personal AI Guide', 'ไกด์ส่วนตัว AI ของคุณ')}
+              {/* Feature Hooking Section */}
+              <div className="w-full px-6 pt-8 flex flex-col gap-4">
+                <p className="text-center text-[11px] font-black text-[#E85D36] uppercase tracking-[0.2em] mb-1 opacity-80">
+                  {t('whyPremium', selectedLanguage) || 'Why Premium Tour?'}
+                </p>
+
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  className="bg-white/80 backdrop-blur-md p-5 rounded-[2rem] shadow-sm border border-orange-100 flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center shrink-0 shadow-inner">
+                    <CheckCircle2 className="w-5 h-5 text-[#E85D36]" />
+                  </div>
+                  <div>
+                    <h4 className="text-[14px] font-black text-slate-800 mb-0.5">
+                      {t('saveGuideCost', selectedLanguage) || 'Save $200 on Local Guides'}
+                    </h4>
+                    <p className="text-[11px] font-semibold text-slate-400">
+                      {t('saveGuideCostDesc', selectedLanguage) || 'Professional commentary without expensive costs.'}
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Download Plan Selection */}
+                <div className="mt-4">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 px-2">
+                    {t('selectDownloadScope', selectedLanguage) || 'Select Download Scope'}
+                  </p>
+                  <div className="grid grid-cols-2 gap-3 pb-8">
+                    {[
+                      { id: 'all', key: 'globalExplorer', size: '~200MB' },
+                      { id: 'europe', key: 'grandEurope', size: '~120MB' },
+                      { id: 'asia', key: 'asiaSpecial', size: '~50MB' },
+                      { id: 'country', key: 'countryOnly', size: '~10MB' },
+                    ].map((plan) => (
+                      <motion.button
+                        key={plan.id}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setSelectedScope({ type: plan.id as any })}
+                        className={`flex flex-col items-start justify-between p-4 rounded-[2rem] border-2 transition-all duration-300 relative overflow-hidden ${selectedScope.type === plan.id
+                          ? 'border-[#E85D36] bg-white shadow-xl shadow-orange-500/10'
+                          : 'border-white bg-white/50 backdrop-blur-sm opacity-70 hover:opacity-100 shadow-sm'
+                          }`}
+                      >
+                        <div className="flex items-center gap-2.5 mb-2">
+                          <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${selectedScope.type === plan.id ? 'border-[#E85D36]' : 'border-slate-200'}`}>
+                            {selectedScope.type === plan.id && <motion.div layoutId="plan-dot" className="w-2 h-2 rounded-full bg-[#E85D36]" />}
+                          </div>
+                          <span className={`text-[11px] font-black leading-tight transition-colors ${selectedScope.type === plan.id ? 'text-slate-800' : 'text-slate-500'}`}>
+                            {t(plan.key, selectedLanguage) || plan.id}
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-bold text-slate-400 tabular-nums bg-slate-50 border border-slate-100 px-2 py-0.5 rounded-full">
+                          {plan.size}
+                        </span>
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="step2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex-1 flex flex-col items-center justify-center p-10"
+            >
+              <motion.div
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="w-28 h-28 bg-[#E85D36] rounded-[2.5rem] flex items-center justify-center mb-10 shadow-2xl shadow-orange-500/30 border-4 border-white"
+              >
+                <MapPin className="w-14 h-14 text-white stroke-[2.5]" />
+              </motion.div>
+
+              <h1 className="text-[28px] font-black text-slate-800 tracking-tight mb-4 text-center">
+                {t('noWaitTour', selectedLanguage) || t('ready', selectedLanguage) || 'Experience Smoothly'}
               </h1>
 
-              <div className="flex bg-white/10 p-1 rounded-2xl backdrop-blur-md w-full max-w-[300px] border border-white/20">
-                <div className="flex-1 bg-white text-[#E85D36] py-2 rounded-xl flex items-center justify-center gap-2 font-black text-xs shadow-sm">
-                  {getLangText(selectedLanguage, '오프라인 마스터', 'Offline Master', 'มาสเตอร์ออฟไลน์')}
-                </div>
-                <div className="flex-1 text-white py-2 rounded-xl flex items-center justify-center gap-2 font-bold text-xs opacity-90">
-                  <ShieldCheck className="w-3 h-3" />
-                  {getLangText(selectedLanguage, '인터넷 불필요', 'No Internet', 'ไม่ต้องเน็ต')}
-                </div>
-              </div>
-            </div>
-
-            {/* Feature Hooking Section */}
-            <div className="w-full px-6 pt-8 flex flex-col gap-3">
-              <p className="text-center text-[12px] font-black text-[#E85D36] uppercase tracking-widest mb-1">
-                {getLangText(selectedLanguage, '왜 투어 세트를 예약해야 하나요?', 'Why Premium Tour?', 'ทำไมต้องพรีเมียม?')}
+              <p className="text-center text-[15px] font-semibold text-slate-400 leading-relaxed px-4">
+                {t('prepareOfflineDesc', selectedLanguage) || 'Guide starts automatically at ports worldwide without internet.'}
               </p>
 
-              <div className="bg-white p-4 rounded-2xl shadow-sm border border-orange-100 flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-4 h-4 text-[#E85D36]" />
-                </div>
-                <div>
-                  <h4 className="text-[13px] font-black text-slate-800">
-                    {getLangText(selectedLanguage, '현지 가이드 비용 $200 절약', 'Save $200 on Local Guides', 'ประหยัดเงิน $200 สำหรับไกด์ท้องถิ่น')}
-                  </h4>
-                  <p className="text-[11px] font-medium text-slate-500">
-                    {getLangText(selectedLanguage, '비싼 현지 가이드 없이도 전문가의 설명을 듣습니다.', 'Professional commentary without expensive costs.', 'คำบรรยายระดับมืออาชีพโดยไม่ต้องเสียเงินแพงๆ')}
-                  </p>
-                </div>
+              <div className="flex gap-2.5 mt-10">
+                <div className="w-2 h-2 rounded-full bg-slate-200" />
+                <motion.div
+                  layoutId="indicator"
+                  className="w-6 h-2 rounded-full bg-[#E85D36]"
+                />
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-              {/* [NEW] Download Plan Selection */}
-              <div className="mt-4">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 px-1">
-                  {getLangText(selectedLanguage, '프리미엄 다운로드 범위 선택', 'Select Download Scope', 'เลือกแผนการดาวน์โหลด')}
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { id: 'all', label: { ko: '글로벌 익스플로러', en: 'Global Explorer', th: 'แผนที่ทั่วโลก' }, size: '~200MB' },
-                    { id: 'europe', label: { ko: '유럽 전체투어', en: 'Grand Europe', th: 'ทัวร์ยุโรป' }, size: '~120MB' },
-                    { id: 'asia', label: { ko: '아시아 정복', en: 'Asia Special', th: 'เอเชียสเปเชียล' }, size: '~50MB' },
-                    { id: 'country', label: { ko: `${currentCountry.substring(0, 6)}.. 전용`, en: `${currentCountry.substring(0, 6)}.. Only`, th: `${currentCountry.substring(0, 6)}` }, size: '~10MB' },
-                  ].map((plan) => (
-                    <button
-                      key={plan.id}
-                      onClick={() => setSelectedScope({ type: plan.id as any })}
-                      className={`flex flex-col items-start justify-between p-3 rounded-2xl border-2 transition-all ${selectedScope.type === plan.id
-                        ? 'border-[#E85D36] bg-orange-50/50 shadow-md scale-[1.02]'
-                        : 'border-slate-100 bg-white opacity-70 hover:opacity-100'
-                        }`}
-                    >
-                      <div className="flex items-center gap-2 mb-1">
-                        <div className={`w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center shrink-0 ${selectedScope.type === plan.id ? 'border-[#E85D36]' : 'border-slate-300'}`}>
-                          {selectedScope.type === plan.id && <div className="w-1.5 h-1.5 rounded-full bg-[#E85D36]" />}
-                        </div>
-                        <span className={`text-[10px] font-black leading-tight ${selectedScope.type === plan.id ? 'text-slate-800' : 'text-slate-500'}`}>
-                          {getLangText(selectedLanguage, plan.label.ko, plan.label.en, plan.label.th)}
-                        </span>
-                      </div>
-                      <span className="text-[9px] font-bold text-slate-400 tabular-nums bg-slate-100 px-1.5 py-0.5 rounded-md">
-                        {plan.size}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="flex-1 flex flex-col items-center justify-center p-8 mt-10">
-            <div className="w-24 h-24 bg-[#E85D36] rounded-[2rem] flex items-center justify-center mb-8 shadow-lg shadow-orange-500/30">
-              <MapPin className="w-12 h-12 text-white stroke-[2.5]" />
-            </div>
-
-            <h1 className="text-[26px] font-black text-slate-800 tracking-tight mb-4 text-center">
-              {getLangText(selectedLanguage, '기다림 없는 투어', 'Zero-Wait Tour', 'ทัวร์ไม่ต้องรอ')}
-            </h1>
-
-            <p className="text-center text-[15px] font-medium text-slate-500 leading-relaxed px-2">
-              {getLangText(selectedLanguage,
-                '인터넷 없이도 전 세계 기항지에서 자동으로 가이드가 시작됩니다.',
-                'Guide starts automatically at ports worldwide without internet.',
-                'ไกด์เริ่มต้นโดยอัตโนมัติทั่วโลกโดยไม่ต้องใช้อินเทอร์เน็ต'
-              )}
-            </p>
-
-            <div className="flex gap-2 mt-8 mb-4">
-              <div className="w-2 h-2 rounded-full bg-slate-200" />
-              <div className="w-5 h-2 rounded-full bg-[#E85D36]" />
-            </div>
-          </div>
-        )}
-
-        <div className="p-6 pb-8 w-full flex flex-col items-center gap-3 bg-[#F8F9FA] rounded-t-[2.5rem] border-t border-slate-100 shadow-[0_-10px_30px_rgba(0,0,0,0.02)] shrink-0">
-          <div className="w-full bg-white rounded-xl px-4 py-2.5 flex items-center gap-3 border border-slate-200 shadow-sm">
-            <Globe className="w-4 h-4 text-slate-400" />
+        <div className="p-8 w-full flex flex-col items-center gap-4 bg-white/80 backdrop-blur-xl rounded-t-[3.5rem] border-t border-white shadow-[0_-15px_40px_rgba(0,0,0,0.03)] shrink-0 z-20">
+          <div className="w-full bg-slate-50 rounded-2xl px-5 py-3 flex items-center gap-4 border border-slate-100">
+            <Globe className="w-5 h-5 text-slate-400" />
             <LanguageSelector
               selectedLanguage={selectedLanguage}
               onLanguageChange={onLanguageChange}
@@ -221,59 +251,70 @@ export function StartupDialog({
           </div>
 
           <Button
-            className="w-full h-14 rounded-xl bg-[#E85D36] hover:bg-[#d6522c] text-white font-black text-lg shadow-xl shadow-orange-500/30 transition-transform active:scale-95 flex flex-col items-center justify-center gap-0.5 relative overflow-hidden"
+            className="w-full h-16 rounded-2xl bg-[#E85D36] hover:bg-[#d6522c] text-white font-black text-lg shadow-2xl shadow-orange-500/40 transition-all active:scale-[0.98] flex flex-col items-center justify-center gap-0.5 relative overflow-hidden group border-b-4 border-orange-700"
             onClick={handleNext}
             disabled={isDownloading}
           >
             {isDownloading ? (
               <div className="flex flex-col items-center gap-1">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span className="text-sm tracking-tight">{getLangText(selectedLanguage, '프리미엄 데이터 구축 중...', 'Building Data...', 'กำลังสร้างข้อมูล...')}</span>
+                <div className="flex items-center gap-3">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                    className="w-4 h-4 border-3 border-white/30 border-t-white rounded-full"
+                  />
+                  <span className="text-sm tracking-tight">{t('buildingData', selectedLanguage) || 'Building Data...'}</span>
                 </div>
-                <span className="text-[9px] font-medium opacity-80 uppercase tracking-widest">{getStatusText()}</span>
+                <span className="text-[10px] font-bold opacity-80 uppercase tracking-widest">{getStatusText()}</span>
               </div>
             ) : (
-              <>
-                <div className="flex items-center gap-3">
-                  <Download className="w-5 h-5" />
-                  <span className="tracking-tight">{step === 1 ? getLangText(selectedLanguage, '프리미엄 투어 시작', 'Start Premium Tour', 'เริ่มพรีเมียมทัวร์') : getLangText(selectedLanguage, '탐험 시작', 'Start Exploring', 'เริ่มการสำรวจ')}</span>
-                </div>
-              </>
+              <div className="flex items-center gap-4">
+                <Download className="w-6 h-6 group-hover:bounce" />
+                <span className="tracking-tight text-xl">
+                  {step === 1 ? (t('startPremiumTour', selectedLanguage) || 'Start Premium Tour') : (t('done', selectedLanguage) || 'Start Exploring')}
+                </span>
+              </div>
             )}
 
             {isDownloading && (
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
-                <div
-                  className="h-full bg-white transition-all duration-300"
-                  style={{ width: `${(progress.current / (progress.total || 1)) * 100}%` }}
+              <div className="absolute bottom-0 left-0 w-full h-1.5 bg-black/10">
+                <motion.div
+                  className="h-full bg-white"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(progress.current / (progress.total || 1)) * 100}%` }}
+                  transition={{ duration: 0.5 }}
                 />
               </div>
             )}
           </Button>
 
           {isComplete && step === 1 && (
-            <div className="flex items-center gap-2 text-emerald-600 font-bold text-[11px] animate-bounce">
-              <CheckCircle2 className="w-3 h-3" />
-              {getLangText(selectedLanguage, '오프라인 저장 완료!', 'Offline Storage Ready!', 'บันทึกออฟไลน์แล้ว!')}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center gap-2 text-emerald-600 font-bold text-xs"
+            >
+              <CheckCircle2 className="w-4 h-4" />
+              {t('offlineStorageReady', selectedLanguage) || 'Offline Storage Ready!'}
+            </motion.div>
           )}
 
-          <div className="flex w-full gap-2 mt-1">
+          <div className="flex w-full gap-3 mt-1">
             <button
-              className="flex-1 h-10 rounded-lg flex items-center justify-center bg-white border border-slate-200 text-slate-400 font-bold hover:text-slate-600 active:scale-95 transition-all text-[11px]"
+              className="flex-1 h-12 rounded-xl flex items-center justify-center bg-white border border-slate-200 text-slate-400 font-black hover:text-slate-600 hover:border-slate-300 active:scale-95 transition-all text-sm"
               onClick={() => {
                 audioService.unlockAudio();
                 onClose();
               }}
             >
-              {getLangText(selectedLanguage, '나중에 하기', 'Maybe Later', 'ไว้ทีหลัง')}
+              {t('maybeLater', selectedLanguage) || 'Maybe Later'}
             </button>
-            <div className="flex-[1.5] flex items-center justify-center bg-slate-100 rounded-lg px-2 text-[9px] font-bold text-slate-400 text-center leading-tight">
-              {getLangText(selectedLanguage, '로밍 데이터 무제한 절약', 'Unlimited Roaming Data Saved', 'ประหยัดข้อมูลโรมมิ่งแบบไม่อั้น')}
+            <div className="flex-[1.5] flex items-center justify-center bg-emerald-50 rounded-xl px-4 text-[10px] font-black text-emerald-600/80 text-center leading-tight border border-emerald-100 shadow-sm">
+              {t('unlimitedRoamingSaved', selectedLanguage) || 'Unlimited Roaming Saved'}
             </div>
           </div>
         </div>
+
       </DialogContent>
     </Dialog>
   );
