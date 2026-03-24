@@ -66,7 +66,7 @@ import {
 } from '@/components/ui/popover';
 import { Landmark, GpsPosition, City, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
-import { audioService } from '@/lib/audioService';
+import { audioService, AudioService } from '@/lib/audioService';
 import LandmarkDetailDialog from './LandmarkDetailDialog';
 
 interface UnifiedFloatingCardProps {
@@ -169,6 +169,14 @@ interface UnifiedFloatingCardProps {
 
   // Layout Toggle
   activeLayout?: string;
+
+  // 🛰️ GPS Mode
+  gpsMode?: 'real' | 'simulation';
+  onGpsModeChange?: (mode: 'real' | 'simulation') => void;
+
+  // 🛰️ Navigation Route
+  activeRoute?: Landmark | null;
+  handleClearRoute?: () => void;
 }
 
 
@@ -248,6 +256,10 @@ export function UnifiedFloatingCard({
   simulationSpeed = 1,
   onSimulationPauseToggle,
   onSimulationSpeedChange,
+  gpsMode = 'real',
+  onGpsModeChange,
+  activeRoute,
+  handleClearRoute,
 }: UnifiedFloatingCardProps) {
   const { ref: detailScrollRef, onMouseDown: onDetailMouseDown, isDragging: isDetailDragging } = useDragScroll('vertical');
   const { ref: mainScrollRef, onMouseDown: onMainMouseDown, isDragging: isMainDragging } = useDragScroll('vertical');
@@ -264,6 +276,8 @@ export function UnifiedFloatingCard({
   const [isPaused, setIsPaused] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [audioContentType, setAudioContentType] = useState<'summary' | 'narration'>('narration');
+  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
 
   const nameFallback = getTranslatedContent(selectedLandmark, selectedLanguage, 'name');
   const descFallback = getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
@@ -300,6 +314,8 @@ export function UnifiedFloatingCard({
     audioService.setOnStateChange((speaking: boolean) => {
       setIsPlaying(speaking);
       setIsPaused(audioService.isPaused());
+      // [적요] 음성 서비스와 현재 문장 인덱스 동기화
+      setCurrentSentenceIndex(audioService.getCurrentSentenceIndex());
     });
     return () => audioService.setOnStateChange(null);
   }, []);
@@ -315,10 +331,22 @@ export function UnifiedFloatingCard({
         audioService.pause();
       }
     } else {
-      const text = getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') ||
-        getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
+      const text = audioContentType === 'summary'
+        ? (getTranslatedContent(selectedLandmark, selectedLanguage, 'description'))
+        : (getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') || getTranslatedContent(selectedLandmark, selectedLanguage, 'narration'));
+
       if (text) {
-        audioService.playText(text, selectedLanguage, playbackRate);
+        audioService.playSentences(
+          text,
+          selectedLanguage,
+          playbackRate,
+          (index) => setCurrentSentenceIndex(index),
+          () => {
+            setIsPlaying(false);
+            setIsPaused(false);
+            setCurrentSentenceIndex(-1);
+          }
+        );
       }
     }
   };
@@ -587,12 +615,35 @@ export function UnifiedFloatingCard({
                 className="absolute inset-0 z-50 bg-white dark:bg-slate-900 p-4 overflow-y-auto custom-scrollbar cursor-grab active:cursor-grabbing selection:bg-none"
               >
                 <div className="space-y-4">
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-center justify-between">
                     <div>
                       <h4 className="font-bold text-lg leading-tight">
                         {getTranslatedContent(selectedLandmark, selectedLanguage, 'name')}
                       </h4>
                       <Badge variant="secondary" className="mt-1">{selectedLandmark.category}</Badge>
+                    </div>
+                    {/* [DESIGNER KIM] 요약/상세 나레이션 토글 추가 */}
+                    <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200 shadow-inner">
+                      <button
+                        onClick={() => {
+                          setAudioContentType('summary');
+                          if (isPlaying) audioService.stop();
+                        }}
+                        className={`px-2 py-0.5 rounded-md text-[9px] font-bold transition-all ${audioContentType === 'summary' ? 'bg-white text-[#E9633F] shadow-sm' : 'text-slate-400'}`}
+                        title={selectedLanguage === 'ko' ? '요약' : 'Summary'}
+                      >
+                        Sum
+                      </button>
+                      <button
+                        onClick={() => {
+                          setAudioContentType('narration');
+                          if (isPlaying) audioService.stop();
+                        }}
+                        className={`px-2 py-0.5 rounded-md text-[9px] font-bold transition-all ${audioContentType === 'narration' ? 'bg-white text-[#E9633F] shadow-sm' : 'text-slate-400'}`}
+                        title={selectedLanguage === 'ko' ? '상세' : 'Full'}
+                      >
+                        Full
+                      </button>
                     </div>
                   </div>
 
@@ -622,13 +673,28 @@ export function UnifiedFloatingCard({
                     </Button>
                   </div>
 
-                  {translatedDetail && (
-                    <div className="pt-3 border-t">
-                      <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-                        {translatedDetail}
-                      </p>
-                    </div>
-                  )}
+                  {(() => {
+                    const text = audioContentType === 'summary'
+                      ? translatedDesc
+                      : translatedDetail;
+                    if (!text) return null;
+                    const sentences = AudioService.splitIntoSentences(text);
+
+                    return (
+                      <div className="pt-3 border-t">
+                        <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                          {sentences.map((s: string, i: number) => (
+                            <span
+                              key={i}
+                              className={`transition-all duration-300 ${currentSentenceIndex === i ? 'bg-yellow-200 font-bold' : ''}`}
+                            >
+                              {s}{' '}
+                            </span>
+                          ))}
+                        </p>
+                      </div>
+                    );
+                  })()}
                 </div>
               </motion.div>
             )}
@@ -717,12 +783,47 @@ export function UnifiedFloatingCard({
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h5 className="font-bold text-sm">{t('myTour', selectedLanguage) || 'My Tour'} ({tourStops.length})</h5>
+
+                  {/* [적요] GPS 모드 선택기 - 실시간 vs 시뮬레이션 */}
+                  <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-full border border-slate-200 shadow-inner">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className={`h-7 px-3 rounded-full text-[9px] font-black uppercase tracking-tighter transition-all ${gpsMode === 'real' ? 'bg-white text-emerald-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                      onClick={() => onGpsModeChange?.('real')}
+                    >
+                      <Navigation className="w-3 h-3 mr-1" />
+                      Real GPS
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className={`h-7 px-3 rounded-full text-[9px] font-black uppercase tracking-tighter transition-all ${gpsMode === 'simulation' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                      onClick={() => onGpsModeChange?.('simulation')}
+                    >
+                      <Car className="w-3 h-3 mr-1" />
+                      Sim
+                    </Button>
+                  </div>
+
                   <Button
                     size="sm"
-                    className={`rounded-full h-8 px-4 text-[10px] font-black tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 ${isSimulationMode ? 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 ring-2 ring-red-100' : 'bg-gradient-to-r from-[#E9633F] to-[#FF8A65] text-white shadow-xl shadow-orange-100 ring-2 ring-orange-100'}`}
-                    onClick={() => onToggleSimulation?.()}
+                    className={`rounded-full h-8 px-4 text-[10px] font-black tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 ${(isSimulationMode || (gpsMode === 'real' && activeRoute)) ? 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 ring-2 ring-red-100' : 'bg-gradient-to-r from-[#E9633F] to-[#FF8A65] text-white shadow-xl shadow-orange-100 ring-2 ring-orange-100'}`}
+                    onClick={() => {
+                      if (gpsMode === 'simulation') {
+                        onToggleSimulation?.();
+                      } else {
+                        // Real mode start logic (navigate to first stop or active route)
+                        if (activeRoute) {
+                          handleClearRoute?.();
+                          onLandmarkClose?.();
+                        } else if (tourStops.length > 0) {
+                          onNavigate(tourStops[0]);
+                        }
+                      }
+                    }}
                   >
-                    {isSimulationMode ? (
+                    {(isSimulationMode || (gpsMode === 'real' && activeRoute)) ? (
                       <div className="flex items-center gap-1.5 uppercase">
                         <Square className="w-3 h-3 fill-current" />
                         <span>{t('stop', selectedLanguage) || 'Stop'}</span>

@@ -127,7 +127,7 @@ export default function LandmarkDetailDialog({
 
     const textToPlay = audioContentType === 'summary'
       ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : translatedDesc)
-      : translatedNarration;
+      : (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription') : translatedDetail);
 
     if (!textToPlay) return;
 
@@ -209,7 +209,7 @@ export default function LandmarkDetailDialog({
   const activeSentences = useMemo(() => {
     const text = audioContentType === 'summary'
       ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : translatedDesc)
-      : translatedNarration;
+      : (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription') : translatedDetail);
     if (!text) return [];
     return AudioService.splitIntoSentences(text);
   }, [landmark, selectedGuide, selectedLanguage, audioContentType, translatedDesc, translatedNarration]);
@@ -361,6 +361,26 @@ export default function LandmarkDetailDialog({
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5">
+                        <div className="flex bg-[#EFEBE6] p-0.5 rounded-lg border border-[#DCD7CC] mr-1">
+                          <button
+                            onClick={() => {
+                              setAudioContentType('summary');
+                              if (isPlaying) handleRestartAudio();
+                            }}
+                            className={`px-3 py-1 rounded-md text-[10px] font-bold transition-all ${audioContentType === 'summary' ? 'bg-[#E67E22] text-white shadow-sm' : 'text-[#A8A294]'}`}
+                          >
+                            {selectedLanguage === 'ko' ? '요약 가이드' : 'Summary'}
+                          </button>
+                          <button
+                            onClick={() => {
+                              setAudioContentType('narration');
+                              if (isPlaying) handleRestartAudio();
+                            }}
+                            className={`px-3 py-1 rounded-md text-[10px] font-bold transition-all ${audioContentType === 'narration' ? 'bg-[#E67E22] text-white shadow-sm' : 'text-[#A8A294]'}`}
+                          >
+                            {selectedLanguage === 'ko' ? '상세 역사' : 'Full Insight'}
+                          </button>
+                        </div>
                         <Badge variant="outline" className="text-[10px] border-[#E67E22] text-[#E67E22] bg-white px-2 h-5">{playbackRate}x Speed</Badge>
                       </div>
                     </div>
@@ -473,7 +493,7 @@ export default function LandmarkDetailDialog({
                         );
                       })
                     ) : (
-                      audioContentType === 'narration' ? translatedNarration : translatedDetail
+                      audioContentType === 'summary' ? translatedDesc : translatedDetail
                     )}
                   </div>
                 </div>

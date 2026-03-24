@@ -161,6 +161,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { t, getTranslatedContent } from '@/lib/translations';
 import { calculateDistance, checkProximity } from '@/lib/geoUtils';
 import { audioService } from '@/lib/audioService';
+import { useGeoLocation } from '@/hooks/useGeoLocation';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { useDeviceCapabilities } from '@/hooks/useDeviceDetection';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
@@ -211,6 +212,7 @@ export default function Home() {
 
   // New features state
   const [isSimulationMode, setIsSimulationMode] = useState(false);
+  const [gpsMode, setGpsMode] = useState<'real' | 'simulation'>('real');
   const [isSimulationPaused, setIsSimulationPaused] = useState(false);
   const [simulationSpeed, setSimulationSpeed] = useState(1);
   const [simulationStepIndex, setSimulationStepIndex] = useState(0);
@@ -388,9 +390,24 @@ export default function Home() {
   const isMobile = useMemo(() => deviceCapabilities.isMobile, [deviceCapabilities.isMobile]);
   const maxMarkers = useMemo(() => deviceCapabilities.maxMarkers, [deviceCapabilities.maxMarkers]);
 
-  const effectivePosition = isSimulationMode && simulatedPosition
+  const effectivePosition = (gpsMode === 'simulation' && simulatedPosition)
     ? simulatedPosition
     : (position?.coords ? { latitude: position.coords.latitude, longitude: position.coords.longitude, accuracy: position.coords.accuracy } : null);
+
+  // [교수님의 한마디: useGeoLocation - ③ 실시간 GPS 항해사]
+  // gpsMode가 'real'일 때만 실제 GPS를 사용하고, 'simulation'일 때는 simulatedPosition을 전달합니다.
+  const { position: geoPosition, isLoading: geoLoading } = useGeoLocation(
+    gpsEnabled && gpsMode === 'real',
+    gpsMode === 'simulation' ? simulatedPosition : null
+  );
+
+  // Sync geoPosition to position state for backward compatibility
+  useEffect(() => {
+    if (geoPosition) {
+      setPosition({ coords: geoPosition } as GeolocationPosition);
+      setIsLoading(false);
+    }
+  }, [geoPosition]);
 
   // Effects
   useEffect(() => {
@@ -1560,11 +1577,17 @@ export default function Home() {
           }}
           userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
           selectedLanguage={selectedLanguage}
-          onNavigate={handleLandmarkRoute}
+          onLandmarkSelect={setSelectedLandmark}
+          onLandmarkClose={() => setSelectedLandmark(null)}
+          onNavigate={(landmark) => {
+            setActiveRoute(landmark);
+            transitionTo('nav');
+          }}
           onLandmarkRoute={handleLandmarkRoute}
           city={selectedCity || null}
           showCruisePort={showCruisePort}
           onToggleCruisePort={() => setShowCruisePort(!showCruisePort)}
+          onCruisePortClose={() => setShowCruisePort(false)}
           isSimulationMode={isSimulationMode}
           simulationSpeed={simulationSpeed}
           onSimulationSpeedChange={setSimulationSpeed}
@@ -1583,6 +1606,19 @@ export default function Home() {
           onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
           userRegion={userRegion}
           activeLayout={activeLayout}
+          gpsMode={gpsMode}
+          onGpsModeChange={setGpsMode}
+          activeRoute={activeRoute}
+          handleClearRoute={handleClearRoute}
+          tourRouteInfo={tourRouteInfo}
+          tourTimePerStop={tourTimePerStop}
+          tourStopDurations={tourStopDurations}
+          onUpdateStopDuration={handleUpdateStopDuration}
+          onSaveRoute={() => setShowSaveRouteDialog(true)}
+          startingPoint={startingPoint}
+          endPoint={endPoint}
+          onOpenStartEndPointDialog={() => setIsStartingPointPopoverOpen(true)}
+          capturedRouteImage={capturedRouteImage}
         />
 
         {/* Other Overlays */}

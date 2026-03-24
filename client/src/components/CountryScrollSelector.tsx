@@ -37,13 +37,13 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
     'Italy': {
         ko: '지중해의 낭만과 역사가 숨쉬는 명품 이탈리아',
         en: 'Luxury Italy: Mediterranean romance and timeless history',
-        th: 'อิตาลีที่หรูหรา: ความโรแมนติกของเมดิเตอร์เรเนียนและประวัติศาสตร์ที่เหนือกาลเวลา',
+        th: 'อิตาลีที่หรูหรา: ความโรแมนติกของเมดิเตอร์레네ียนและประวัติศาสตร์ที่เหนือกาลเวลา',
         image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200'
     },
     'France': {
         ko: '예술과 미식, 세련된 취향의 정점 프랑스 파리',
         en: 'Luxury France: The pinnacle of art, cuisine, and refined taste',
-        th: 'ฝรั่งเศสที่หรูหรา: จุดสูงสุดของศิลปะ อาหาร และรสชาติที่ประณีต',
+        th: 'ฝรั่งเศสที่หรูหรา: จุดสูงสุดของศิลปะ อาหาร และรสชาติที่ประณี트',
         image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200'
     },
     'Thailand': {
@@ -56,7 +56,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '스카이라인과 열대림이 공존하는 시크한 말레이시아',
         en: 'Luxury Malaysia: Where skylines meet tropical rainforests',
         th: 'มาเลเซียที่หรูหรา: ที่ซึ่งเส้นขอบฟ้ามาบรรจบกับป่าฝนเขตร้อน',
-        image: 'https://images.unsplash.com/photo-1529391409740-59b2dea08345?q=80&w=1200'
+        image: '/images/countries/malaysia.png'
     },
     'Japan': {
         ko: '전통의 고요함과 찬란한 야경의 명품 교토-도쿄',
@@ -67,7 +67,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
     'USA': {
         ko: '압도적인 스카이라인과 자유의 상징 뉴욕',
         en: 'Luxury USA: Iconic skylines and symbols of freedom',
-        th: 'สหรัฐอเมริกาที่หรูหรา: เส้นขอบฟ้าที่เป็นสัญลักษณ์และสัญลักษณ์แห่งเสรีภาพ',
+        th: 'สหรัฐอเมริกาที่หรูหรา: เส้นขอบฟ้าที่เป็น사ัญลักษณ์และ사ัญลักษณ์แห่งเส리함',
         image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1200'
     },
     'United Kingdom': {
@@ -79,14 +79,14 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
     'Spain': {
         ko: '가우디의 예술혼과 열정적인 태양의 스페인',
         en: 'Luxury Spain: Gaudi’s artistic soul and passionate sun',
-        th: 'สเปนที่หรูหรา: จิตวิญญาณแห่งศิลปะของเกาดีและแสงแดดที่ร้อนแรง',
-        image: 'https://images.unsplash.com/photo-1583779457094-0aaef2b46d27?q=80&w=1200'
+        th: '스페인ที่หรูหรา: จิตวิญญาณแห่งศิลปะของเกาดีและแสงแด드ที่ร้อนแรง',
+        image: '/images/countries/spain.png'
     },
     'Singapore': {
         ko: '초현대적 정원과 미래형 럭셔리 싱가포르',
         en: 'Luxury Singapore: Ultra-modern gardens and futuristic lifestyle',
-        th: 'สิงคโปร์ที่หรูหรา: สวนที่ทันสมัยสุด ๆ และไลฟ์สไตล์แห่งอนาคต',
-        image: 'https://images.unsplash.com/photo-1525625232747-0bc0ce401428?q=80&w=1200'
+        th: '스ิงคโปร์ที่หรูหรา: 스완ที่ทันสมัยสุด ๆ และ라이프스토어แห่งอนาค트',
+        image: '/images/countries/singapore.png'
     },
     'China': {
         ko: '장엄한 만리장성과 화려한 상하이의 야경',
@@ -97,13 +97,13 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
     'Vietnam': {
         ko: '신비로운 하롱베이와 활력 넘치는 베트남의 미소',
         en: 'Luxury Vietnam: Mystical bays and vibrant cultural heritage',
-        th: 'เวียดนามที่หรูหรา: อ่าวที่ลึกลับและมรดกทางวัฒนธรรมที่มีชีวิตชีวา',
+        th: 'เวียดนามที่หรูหรา: อ่าวที่ลึกลับและมรดกทาง문화전통ที่มีชีวิตชีวา',
         image: 'https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1200'
     },
     'Netherlands': {
         ko: '튤립 로맨스와 운하의 서정이 가득한 네덜란드',
         en: 'Luxury Netherlands: Canal-side elegance and tulip romance',
-        th: 'เนเธอร์แลนด์ที่หรูหรา: ความสง่างามริมคลองและความโรแมนติกของดอกทิวลิป',
+        th: '네덜란드ที่หรูหรา: ความสง่างามริมคลองและความโรแมน틱의ดอกทิวลิป',
         image: 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?q=80&w=1200'
     },
     'Philippines': {
@@ -127,26 +127,26 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
     'Hungary': {
         ko: '다뉴브강의 진주, 찬란한 야경의 부다페스트',
         en: 'Luxury Hungary: Pearl of the Danube and glittering architecture',
-        th: 'ฮังการีที่หรูหรา: ไข่มุกแห่งแม่น้ำดานูบและสถาปัตยกรรมที่ระยิบระยับ',
+        th: 'ฮังการีที่หรูหรา: ไข่มุกแห่งแม่น้ำดานูบและ스ถาปัตยกรรมที่ระยิบระยับ',
         image: 'https://images.unsplash.com/photo-1551867633-194f125bddfa?q=80&w=1200'
     },
     'Poland': {
         ko: '중세의 낭만과 고전적 기품의 폴란드',
         en: 'Luxury Poland: Medieval romance and classical elegance',
-        th: 'โปแลนด์ที่หรูหรา: ความโรแมนติกในยุคกลางและความสง่างามแบบคลาสสิก',
+        th: 'โปแลนด์ที่หรูหรา: ความโรแมน틱인ยุคกลางและความสง่างามแบบคลาส스ิก',
         image: 'https://images.unsplash.com/photo-1519197924294-4ba991a11128?q=80&w=1200'
     },
     'Belgium': {
         ko: '중세풍 건물과 초콜릿처럼 달콤한 브뤼셀 여행',
         en: 'Luxury Belgium: Gothic grandeur and world-class delights',
         th: 'เบลเยียมที่หรูหรา: ความยิ่งใหญ่สไตล์โกธิคและความสุขอันดับโลก',
-        image: 'https://images.unsplash.com/photo-1572947118235-905e94b29bb7?q=80&w=1200'
+        image: '/images/countries/belgium.png'
     },
     'Czech Republic': {
         ko: '시간이 멈춘 중세의 신비로움, 프라하의 밤',
         en: 'Luxury Czech: Mystical medieval charm and gothic wonders',
-        th: 'สาธารณรัฐเช็กที่หรูหรา: เสน่ห์ในยุคกลางที่ลึกลับและสิ่งมหัศจรรย์สไตล์โกธิค',
-        image: 'https://images.unsplash.com/photo-1541849548-2066823595c8?q=80&w=1200'
+        th: 'สาธารณรัฐเช็กที่ห루หรา: เสน่ห์ในยุคกลางที่ลึกลับและสิ่งมหัศจรรย์สไตล์โกธิค',
+        image: '/images/countries/czech.png'
     },
     'Sweden': {
         ko: '정교한 디자인과 정갈한 북유럽의 조화 스톡홀름',

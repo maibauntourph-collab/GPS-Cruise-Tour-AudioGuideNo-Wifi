@@ -6,12 +6,19 @@ import { GpsPosition } from '@shared/schema';
  * @에이? "이 훅은 브라우저의 GPS 센서를 React와 연결해 줍니다. 
  * 위도와 경도를 실시간으로 추적하여 목적지까지의 거리를 계산하죠."
  */
-export function useGeoLocation(enabled: boolean = true) {
+export function useGeoLocation(enabled: boolean = true, simulatedPosition: GpsPosition | null = null) {
   const [position, setPosition] = useState<GpsPosition | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (simulatedPosition) {
+      setPosition(simulatedPosition);
+      setError(null);
+      setIsLoading(false);
+      return;
+    }
+
     if (!enabled) {
       setPosition(null);
       setError(null);
@@ -63,7 +70,7 @@ export function useGeoLocation(enabled: boolean = true) {
     return () => {
       navigator.geolocation.clearWatch(watchId);
     };
-  }, [enabled]);
+  }, [enabled, simulatedPosition]);
 
   return { position, error, isLoading };
 }
