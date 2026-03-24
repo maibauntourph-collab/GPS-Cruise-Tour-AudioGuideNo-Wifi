@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback, MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent } from 'react';
+import { useDragScroll } from '@/hooks/useDragScroll';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -38,6 +39,7 @@ export default function LandmarkList({
   const [hasMoved, setHasMoved] = useState(false);
   const [lastCardHeight, setLastCardHeight] = useState(320);
   const cardRef = useRef<HTMLDivElement>(null);
+  const { ref: scrollRef, onMouseDown: handleDragScroll, isDragging: isDragScrolling } = useDragScroll('vertical');
 
   const landmarksWithDistance = landmarks.map((landmark) => {
     const distance = userPosition
@@ -207,7 +209,11 @@ export default function LandmarkList({
       onClick={handleCardClick}
       data-testid="card-landmarklist-container"
     >
-      <Card className="backdrop-blur-md bg-background/90 border-2 shadow-xl max-h-80 overflow-y-auto">
+      <Card
+        ref={scrollRef}
+        onMouseDown={handleDragScroll}
+        className="backdrop-blur-md bg-background/90 border-2 shadow-xl max-h-80 overflow-y-auto cursor-grab active:cursor-grabbing selection:bg-none"
+      >
         <div
           className="p-4 border-b flex items-center justify-between"
           data-drag-handle
@@ -241,7 +247,7 @@ export default function LandmarkList({
               key={landmark.id}
               className="p-4 aurora-border-premium cursor-pointer m-2 rounded-xl glass-premium"
               data-testid={`card-landmark-${landmark.id}`}
-              onClick={() => onLandmarkSelect?.(landmark)}
+              onClick={() => !isDragScrolling && onLandmarkSelect?.(landmark)}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">

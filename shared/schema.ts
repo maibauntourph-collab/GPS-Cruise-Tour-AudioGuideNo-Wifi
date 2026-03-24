@@ -134,6 +134,7 @@ export const landmarkSchema = z.object({
   createdAt: z.union([z.string(), z.date()]).optional(),
   updatedAt: z.union([z.string(), z.date()]).optional(),
   targetNations: z.array(z.string()).nullable().optional(), // 🌏 [NEW] Target nations for recommendations (e.g. ["US", "JP", "TW"])
+  searchKeywords: z.array(z.string()).nullable().optional(), // 🔍 [NEW] Search keywords/tags
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;
@@ -240,6 +241,7 @@ export const landmarks = pgTable("landmarks", {
   isPremium: boolean("is_premium").notNull().default(false),
   price: doublePrecision("price"),
   targetNations: json("target_nations").$type<string[] | null>(), // 🌏 [NEW] Specific nations to recommend this landmark to
+  searchKeywords: json("search_keywords").$type<string[] | null>(), // 🔍 [NEW] Search keywords/tags
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
@@ -289,6 +291,7 @@ export const landmarksBackup = pgTable("landmarks_backup", {
   paymentMethods: json("payment_methods"),
   isPremium: boolean("is_premium").notNull().default(false),
   price: doublePrecision("price"),
+  searchKeywords: json("search_keywords"),
   backupAt: timestamp("backup_at").notNull().defaultNow(),
 });
 

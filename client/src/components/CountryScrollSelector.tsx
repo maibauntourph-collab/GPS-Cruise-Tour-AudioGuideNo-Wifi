@@ -56,7 +56,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '스카이라인과 열대림이 공존하는 시크한 말레이시아',
         en: 'Luxury Malaysia: Where skylines meet tropical rainforests',
         th: 'มาเลเซียที่หรูหรา: ที่ซึ่งเส้นขอบฟ้ามาบรรจบกับป่าฝนเขตร้อน',
-        image: 'https://images.unsplash.com/photo-1507457379470-08b8006tc021?q=80&w=1200'
+        image: 'https://images.unsplash.com/photo-1529391409740-59b2dea08345?q=80&w=1200'
     },
     'Japan': {
         ko: '전통의 고요함과 찬란한 야경의 명품 교토-도쿄',
@@ -146,7 +146,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '시간이 멈춘 중세의 신비로움, 프라하의 밤',
         en: 'Luxury Czech: Mystical medieval charm and gothic wonders',
         th: 'สาธารณรัฐเช็กที่หรูหรา: เสน่ห์ในยุคกลางที่ลึกลับและสิ่งมหัศจรรย์สไตล์โกธิค',
-        image: 'https://images.unsplash.com/photo-1513807016779-d51ced0c6d7e?q=80&w=1200'
+        image: 'https://images.unsplash.com/photo-1541849548-2066823595c8?q=80&w=1200'
     },
     'Sweden': {
         ko: '정교한 디자인과 정갈한 북유럽의 조화 스톡홀름',

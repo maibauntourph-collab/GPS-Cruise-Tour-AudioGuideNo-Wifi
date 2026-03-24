@@ -41,6 +41,7 @@ import {
   Car,
   Plus
 } from 'lucide-react';
+import { useDragScroll } from '@/hooks/useDragScroll';
 import { useLiveTranslation } from '@/hooks/useLiveTranslation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -248,6 +249,10 @@ export function UnifiedFloatingCard({
   onSimulationPauseToggle,
   onSimulationSpeedChange,
 }: UnifiedFloatingCardProps) {
+  const { ref: detailScrollRef, onMouseDown: onDetailMouseDown, isDragging: isDetailDragging } = useDragScroll('vertical');
+  const { ref: mainScrollRef, onMouseDown: onMainMouseDown, isDragging: isMainDragging } = useDragScroll('vertical');
+  const { ref: listScrollRef, onMouseDown: onListMouseDown, isDragging: isListDragging } = useDragScroll('vertical');
+
   // [교수님 지시] 탭 타입에 'ai' 추가 — AI 추천 탭 지원
   const [activeTab, setActiveTab] = useState<'list' | 'cruise' | 'tour' | 'ai'>('list');
   // [Bug Doctor] 내부 최소화 상태: 외부 isCardMinimized와 동기화 (로컬 상태 제거)
@@ -269,7 +274,6 @@ export function UnifiedFloatingCard({
   const translatedDetail = useLiveTranslation(detailFallback, selectedLanguage);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
   const [tourAddedInDialog, setTourAddedInDialog] = useState(false);
-  const listScrollRef = useRef<HTMLDivElement>(null);
 
   const itemsPerPage = 5;
   const transportItemsPerPage = 3;
@@ -367,10 +371,12 @@ export function UnifiedFloatingCard({
     // Filter by search query
     if (landmarkSearchQuery) {
       const query = landmarkSearchQuery.toLowerCase();
-      result = result.filter(({ landmark }) =>
-        getTranslatedContent(landmark, selectedLanguage, 'name').toLowerCase().includes(query) ||
-        getTranslatedContent(landmark, selectedLanguage, 'description').toLowerCase().includes(query)
-      );
+      result = result.filter(({ landmark }) => {
+        const nameMatch = getTranslatedContent(landmark, selectedLanguage, 'name').toLowerCase().includes(query);
+        const descMatch = getTranslatedContent(landmark, selectedLanguage, 'description').toLowerCase().includes(query);
+        const keywordsMatch = landmark.searchKeywords?.some((k: string) => k.toLowerCase().includes(query)) || false;
+        return nameMatch || descMatch || keywordsMatch;
+      });
     }
 
     // Filter by categories
@@ -396,6 +402,7 @@ export function UnifiedFloatingCard({
   // 1) 부모(Home.tsx)에 선택 알림 → selectedLandmark prop 업데이트
   // 2) 즉시 LandmarkDetailDialog를 열어 사용자 피드백 보장
   const handleLandmarkClick = (landmark: Landmark) => {
+    if (isListDragging) return; // 드래그 중에는 클릭 무시
     onLandmarkSelect?.(landmark);
     setShowDetailDialog(true);
   };
@@ -571,11 +578,13 @@ export function UnifiedFloatingCard({
             {selectedLandmark && (
               <motion.div
                 key="detail"
+                ref={detailScrollRef}
+                onMouseDown={onDetailMouseDown}
                 initial={{ y: '100%' }}
                 animate={{ y: 0 }}
                 exit={{ y: '100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="absolute inset-0 z-50 bg-white dark:bg-slate-900 p-4 overflow-y-auto custom-scrollbar"
+                className="absolute inset-0 z-50 bg-white dark:bg-slate-900 p-4 overflow-y-auto custom-scrollbar cursor-grab active:cursor-grabbing selection:bg-none"
               >
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
@@ -626,7 +635,11 @@ export function UnifiedFloatingCard({
           </AnimatePresence>
 
           {/* MAIN CONTENT LAYER */}
-          <div className={`flex-1 flex flex-col p-4 overflow-y-auto custom-scrollbar transition-opacity duration-300 ${selectedLandmark ? 'opacity-20 pointer-events-none' : 'opacity-100'}`}>
+          <div
+            ref={mainScrollRef}
+            onMouseDown={onMainMouseDown}
+            className={`flex-1 flex flex-col p-4 overflow-y-auto custom-scrollbar transition-opacity duration-300 ${selectedLandmark ? 'opacity-20 pointer-events-none' : 'opacity-100'} cursor-grab active:cursor-grabbing selection:bg-none`}
+          >
             {activeTab === 'list' && (
               <div className="space-y-4 flex flex-col h-full">
                 <div className="relative">
@@ -638,7 +651,11 @@ export function UnifiedFloatingCard({
                     onChange={(e) => setLandmarkSearchQuery(e.target.value)}
                   />
                 </div>
-                <div className="flex-1 space-y-3 overflow-y-auto pr-1">
+                <div
+                  ref={listScrollRef}
+                  onMouseDown={onListMouseDown}
+                  className="flex-1 space-y-3 overflow-y-auto pr-1 cursor-grab active:cursor-grabbing"
+                >
                   {filteredListLandmarks.map(({ landmark, distance }) => (
                     <div
                       key={landmark.id}

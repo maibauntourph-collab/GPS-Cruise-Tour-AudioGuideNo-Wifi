@@ -488,17 +488,32 @@ function CityUpdater({ center, zoom }: { center?: [number, number]; zoom?: numbe
   return null;
 }
 
-function MapResizer({ isCompact, sidebarOpen }: { isCompact?: boolean; sidebarOpen?: boolean }) {
+function MapResizer() {
   const map = useMap();
 
   useEffect(() => {
-    // Delay to allow CSS transition to complete
-    const timer = setTimeout(() => {
-      map.invalidateSize();
-    }, 300);
+    const container = map.getContainer();
+    if (!container) return;
 
-    return () => clearTimeout(timer);
-  }, [isCompact, sidebarOpen, map]);
+    // [Bug Doctor | 2026-03-24] ResizeObserver를 사용하여 컨테이너 크기 변경을 감지합니다.
+    // 기존의 props 기반 invalidateSize()보다 훨씬 견고하게 지도가 깨짐 없이 꽉 차도록 보장합니다.
+    const resizeObserver = new ResizeObserver(() => {
+      window.requestAnimationFrame(() => {
+        if (map && (map as any)._loaded) {
+          map.invalidateSize();
+        }
+      });
+    });
+
+    resizeObserver.observe(container);
+
+    // 초기 마운트 시 즉시 한 번 갱신합니다.
+    map.invalidateSize();
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [map]);
 
   return null;
 }
