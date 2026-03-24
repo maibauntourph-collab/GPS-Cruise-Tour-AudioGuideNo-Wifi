@@ -1,8 +1,7 @@
 import { type Landmark } from "../../shared/schema";
 
 export const LANDMARKS: Landmark[] = [
-  {
-    "id": "busan_item_76",
+  {"id": "busan_item_76",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Landmark 추천 77",
     "lat": 0,
@@ -38,8 +37,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.729Z",
     "updatedAt": "2026-02-24T19:00:26.294Z"
   },
-  {
-    "id": "castel_santangelo",
+  {"id": "castel_santangelo",
     "cityId": "rome",
     "name": "Castel Sant'Angelo",
     "lat": 41.903065,
@@ -161,8 +159,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:24.691Z",
     "updatedAt": "2026-02-28T12:00:16.013Z"
   },
-  {
-    "id": "seoul_item_98",
+  {"id": "seoul_item_98",
     "cityId": "seoul",
     "name": "SEOUL Premium Activity 98",
     "lat": 0,
@@ -198,8 +195,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.171Z",
     "updatedAt": "2026-02-22T18:28:04.544Z"
   },
-  {
-    "id": "new-york_item_65",
+  {"id": "new-york_item_65",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Restaurant 추천 66",
     "lat": 0,
@@ -235,8 +231,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.017Z",
     "updatedAt": "2026-02-28T12:00:15.272Z"
   },
-  {
-    "id": "seoul_item_58",
+  {"id": "seoul_item_58",
     "cityId": "seoul",
     "name": "SEOUL Premium Activity 58",
     "lat": 0,
@@ -272,8 +267,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.448Z",
     "updatedAt": "2026-02-22T18:23:42.115Z"
   },
-  {
-    "id": "바르셀로나-demo-2",
+  {"id": "바르셀로나-demo-2",
     "cityId": "barcelona",
     "name": "바르셀로나의 맛집 골목",
     "lat": 0.1,
@@ -309,8 +303,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.519Z",
     "updatedAt": "2026-02-22T18:05:56.899Z"
   },
-  {
-    "id": "singapore_item_14",
+  {"id": "singapore_item_14",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Activity 추천 15",
     "lat": 0,
@@ -346,8 +339,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.474Z",
     "updatedAt": "2026-02-22T18:06:04.187Z"
   },
-  {
-    "id": "london_더_울즐리_the_wolseley",
+  {"id": "london_더_울즐리_the_wolseley",
     "cityId": "london",
     "name": "더 울즐리 (The Wolseley)",
     "lat": 51.5085,
@@ -384,8 +376,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:44:36.243Z",
     "updatedAt": "2026-02-22T18:05:57.792Z"
   },
-  {
-    "id": "busan_item_36",
+  {"id": "busan_item_36",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Landmark 추천 37",
     "lat": 0,
@@ -421,8 +412,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.977Z",
     "updatedAt": "2026-02-22T18:05:58.046Z"
   },
-  {
-    "id": "seoul_item_108",
+  {"id": "seoul_item_108",
     "cityId": "seoul",
     "name": "SEOUL Premium Landmark 108",
     "lat": 0,
@@ -458,8 +448,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.835Z",
     "updatedAt": "2026-02-28T12:00:16.773Z"
   },
-  {
-    "id": "london_item_30",
+  {"id": "london_item_30",
     "cityId": "london",
     "name": "런던 프리미엄 Activity 추천 31",
     "lat": 0,
@@ -495,8 +484,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.591Z",
     "updatedAt": "2026-02-22T18:06:04.377Z"
   },
-  {
-    "id": "london_item_40",
+  {"id": "london_item_40",
     "cityId": "london",
     "name": "런던 프리미엄 Landmark 추천 41",
     "lat": 0,
@@ -532,8 +520,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.276Z",
     "updatedAt": "2026-02-22T18:06:04.515Z"
   },
-  {
-    "id": "paris_item_42",
+  {"id": "paris_item_42",
     "cityId": "paris",
     "name": "파리 프리미엄 Activity 추천 43",
     "lat": 0,
@@ -569,8 +556,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.404Z",
     "updatedAt": "2026-02-22T18:06:04.577Z"
   },
-  {
-    "id": "singapore_item_54",
+  {"id": "singapore_item_54",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Activity 추천 55",
     "lat": 0,
@@ -606,8 +592,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.189Z",
     "updatedAt": "2026-02-22T18:06:04.643Z"
   },
-  {
-    "id": "tokyo_item_99",
+  {"id": "tokyo_item_99",
     "cityId": "tokyo",
     "name": "TOKYO Premium Shopping 99",
     "lat": 0,
@@ -643,8 +628,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.235Z",
     "updatedAt": "2026-02-28T12:00:18.249Z"
   },
-  {
-    "id": "london_item_60",
+  {"id": "london_item_60",
     "cityId": "london",
     "name": "런던 프리미엄 Landmark 추천 61",
     "lat": 0,
@@ -680,8 +664,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.602Z",
     "updatedAt": "2026-02-22T18:06:04.769Z"
   },
-  {
-    "id": "singapore_item_74",
+  {"id": "singapore_item_74",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Activity 추천 75",
     "lat": 0,
@@ -717,8 +700,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.599Z",
     "updatedAt": "2026-02-22T18:06:04.830Z"
   },
-  {
-    "id": "barcelona_item_83",
+  {"id": "barcelona_item_83",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Shopping 추천 84",
     "lat": 0,
@@ -754,8 +736,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.190Z",
     "updatedAt": "2026-02-23T02:01:03.068Z"
   },
-  {
-    "id": "seoul_item_68",
+  {"id": "seoul_item_68",
     "cityId": "seoul",
     "name": "SEOUL Premium Landmark 68",
     "lat": 0,
@@ -791,8 +772,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.216Z",
     "updatedAt": "2026-02-22T18:24:12.459Z"
   },
-  {
-    "id": "rome_item_71",
+  {"id": "rome_item_71",
     "cityId": "rome",
     "name": "로마 프리미엄 Shopping 추천 72",
     "lat": 0,
@@ -828,8 +808,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.405Z",
     "updatedAt": "2026-02-22T18:06:02.696Z"
   },
-  {
-    "id": "busan_item_46",
+  {"id": "busan_item_46",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Activity 추천 47",
     "lat": 0,
@@ -865,8 +844,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.670Z",
     "updatedAt": "2026-02-22T18:06:02.759Z"
   },
-  {
-    "id": "seoul_item_18",
+  {"id": "seoul_item_18",
     "cityId": "seoul",
     "name": "SEOUL Premium Activity 18",
     "lat": 0,
@@ -902,8 +880,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.747Z",
     "updatedAt": "2026-02-22T18:25:45.244Z"
   },
-  {
-    "id": "paris_item_52",
+  {"id": "paris_item_52",
     "cityId": "paris",
     "name": "파리 프리미엄 Landmark 추천 53",
     "lat": 0,
@@ -939,8 +916,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.060Z",
     "updatedAt": "2026-02-23T02:01:01.555Z"
   },
-  {
-    "id": "london_포트넘_앤_메이슨_피카딜리_fortnum_mason_p",
+  {"id": "london_포트넘_앤_메이슨_피카딜리_fortnum_mason_p",
     "cityId": "london",
     "name": "포트넘 앤 메이슨, 피카딜리 (Fortnum & Mason, Piccadilly)",
     "lat": 51.5097,
@@ -977,8 +953,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:44:36.443Z",
     "updatedAt": "2026-02-28T12:00:18.987Z"
   },
-  {
-    "id": "singapore_item_94",
+  {"id": "singapore_item_94",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Activity 추천 95",
     "lat": 0,
@@ -1014,8 +989,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.913Z",
     "updatedAt": "2026-02-22T18:06:05.047Z"
   },
-  {
-    "id": "london_item_100",
+  {"id": "london_item_100",
     "cityId": "london",
     "name": "런던 프리미엄 Landmark 추천 101",
     "lat": 0,
@@ -1051,8 +1025,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.300Z",
     "updatedAt": "2026-02-22T18:06:05.170Z"
   },
-  {
-    "id": "singapore_item_24",
+  {"id": "singapore_item_24",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Landmark 추천 25",
     "lat": 0,
@@ -1088,8 +1061,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.200Z",
     "updatedAt": "2026-02-28T12:00:18.738Z"
   },
-  {
-    "id": "rome_콜로세움_colosseum",
+  {"id": "rome_콜로세움_colosseum",
     "cityId": "rome",
     "name": "콜로세움 (Colosseum)",
     "lat": 41.890251,
@@ -1126,8 +1098,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:36:24.996Z",
     "updatedAt": "2026-02-22T18:06:05.295Z"
   },
-  {
-    "id": "seoul_북촌한옥마을_전통_차_체험_bukchon_hanok_v",
+  {"id": "seoul_북촌한옥마을_전통_차_체험_bukchon_hanok_v",
     "cityId": "seoul",
     "name": "북촌한옥마을 & 전통 차 체험 (Bukchon Hanok Village & Traditional Tea Ceremony)",
     "lat": 37.5828,
@@ -1164,8 +1135,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:43:16.804Z",
     "updatedAt": "2026-02-22T18:06:05.542Z"
   },
-  {
-    "id": "rome_젤라테리아_델_테아트로_gelateria_del_tea",
+  {"id": "rome_젤라테리아_델_테아트로_gelateria_del_tea",
     "cityId": "rome",
     "name": "젤라테리아 델 테아트로 (Gelateria del Teatro)",
     "lat": 41.900985,
@@ -1202,8 +1172,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:36:25.335Z",
     "updatedAt": "2026-02-22T18:06:05.668Z"
   },
-  {
-    "id": "tokyo_나리사와_narisawa",
+  {"id": "tokyo_나리사와_narisawa",
     "cityId": "tokyo",
     "name": "나리사와 (Narisawa)",
     "lat": 35.6644,
@@ -1240,8 +1209,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:43:57.049Z",
     "updatedAt": "2026-02-22T18:06:05.858Z"
   },
-  {
-    "id": "tokyo_황궁_동어원_",
+  {"id": "tokyo_황궁_동어원_",
     "cityId": "tokyo",
     "name": "황궁 동어원 (皇居東御苑)",
     "lat": 35.6883,
@@ -1278,8 +1246,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:43:56.984Z",
     "updatedAt": "2026-02-22T18:06:05.796Z"
   },
-  {
-    "id": "rome_아르만도_알_판테온_armando_al_pantheon",
+  {"id": "rome_아르만도_알_판테온_armando_al_pantheon",
     "cityId": "rome",
     "name": "아르만도 알 판테온 (Armando al Pantheon)",
     "lat": 41.8993,
@@ -1316,8 +1283,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:45:15.051Z",
     "updatedAt": "2026-02-22T18:06:06.423Z"
   },
-  {
-    "id": "rome_item_61",
+  {"id": "rome_item_61",
     "cityId": "rome",
     "name": "로마 프리미엄 Restaurant 추천 62",
     "lat": 0,
@@ -1353,8 +1319,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.665Z",
     "updatedAt": "2026-02-28T12:00:19.215Z"
   },
-  {
-    "id": "barcelona_item_13",
+  {"id": "barcelona_item_13",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Restaurant 추천 14",
     "lat": 0,
@@ -1390,8 +1355,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.409Z",
     "updatedAt": "2026-02-22T18:06:01.380Z"
   },
-  {
-    "id": "singapore_gardens_by_the_bay_supertree_g",
+  {"id": "singapore_gardens_by_the_bay_supertree_g",
     "cityId": "singapore",
     "name": "Gardens by the Bay (Supertree Grove & Cloud Forest)",
     "lat": 1.2816,
@@ -1428,8 +1392,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:51:19.157Z",
     "updatedAt": "2026-02-22T18:06:06.485Z"
   },
-  {
-    "id": "바르셀로나-demo-1",
+  {"id": "바르셀로나-demo-1",
     "cityId": "barcelona",
     "name": "바르셀로나의 숨겨진 보석",
     "lat": 0,
@@ -1465,8 +1428,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.452Z",
     "updatedAt": "2026-02-28T12:00:19.936Z"
   },
-  {
-    "id": "제주특별자치도-demo-1",
+  {"id": "제주특별자치도-demo-1",
     "cityId": "jeju",
     "name": "제주특별자치도의 숨겨진 보석",
     "lat": 0,
@@ -1502,8 +1464,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.844Z",
     "updatedAt": "2026-02-28T12:00:19.689Z"
   },
-  {
-    "id": "barcelona_프라이빗_선셋_요트_크루즈_private_sunset_",
+  {"id": "barcelona_프라이빗_선셋_요트_크루즈_private_sunset_",
     "cityId": "barcelona",
     "name": "프라이빗 선셋 요트 크루즈 (Private Sunset Yacht Cruise)",
     "lat": 41.3758,
@@ -1540,8 +1501,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:50:28.299Z",
     "updatedAt": "2026-02-22T18:06:06.674Z"
   },
-  {
-    "id": "new-york_item_5",
+  {"id": "new-york_item_5",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Restaurant 추천 6",
     "lat": 0,
@@ -1577,8 +1537,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.786Z",
     "updatedAt": "2026-02-25T02:01:02.249Z"
   },
-  {
-    "id": "busan_더베이_101_the_bay_101",
+  {"id": "busan_더베이_101_the_bay_101",
     "cityId": "busan",
     "name": "더베이 101 (The Bay 101)",
     "lat": 35.1633,
@@ -1615,8 +1574,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:51:51.139Z",
     "updatedAt": "2026-02-22T18:06:06.858Z"
   },
-  {
-    "id": "london_item_0",
+  {"id": "london_item_0",
     "cityId": "london",
     "name": "런던 프리미엄 Landmark 추천 1",
     "lat": 0,
@@ -1652,8 +1610,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.416Z",
     "updatedAt": "2026-02-28T12:00:20.884Z"
   },
-  {
-    "id": "new-york_the_met_cloisters",
+  {"id": "new-york_the_met_cloisters",
     "cityId": "new-york",
     "name": "The Met Cloisters",
     "lat": 40.8652,
@@ -1690,8 +1647,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:56:27.658Z",
     "updatedAt": "2026-02-22T18:32:37.763Z"
   },
-  {
-    "id": "london_더_리츠_런던_애프터눈_티_afternoon_tea_a",
+  {"id": "london_더_리츠_런던_애프터눈_티_afternoon_tea_a",
     "cityId": "london",
     "name": "더 리츠 런던 애프터눈 티 (Afternoon Tea at The Ritz London)",
     "lat": 51.5065,
@@ -1728,8 +1684,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:44:36.379Z",
     "updatedAt": "2026-02-28T12:00:20.164Z"
   },
-  {
-    "id": "new-york_item_15",
+  {"id": "new-york_item_15",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Shopping 추천 16",
     "lat": 0,
@@ -1765,8 +1720,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.539Z",
     "updatedAt": "2026-02-28T12:00:20.657Z"
   },
-  {
-    "id": "new-york_tenement_museum",
+  {"id": "new-york_tenement_museum",
     "cityId": "new-york",
     "name": "Tenement Museum",
     "lat": 40.7188,
@@ -1803,8 +1757,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:56:27.787Z",
     "updatedAt": "2026-02-22T18:33:17.718Z"
   },
-  {
-    "id": "new-york_item_95",
+  {"id": "new-york_item_95",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Shopping 추천 96",
     "lat": 0,
@@ -1840,8 +1793,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.978Z",
     "updatedAt": "2026-02-28T12:00:21.847Z"
   },
-  {
-    "id": "busan_감천문화마을_gamcheon_culture_villag",
+  {"id": "busan_감천문화마을_gamcheon_culture_villag",
     "cityId": "busan",
     "name": "감천문화마을 (Gamcheon Culture Village)",
     "lat": 35.0934,
@@ -1878,8 +1830,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:34:24.447Z",
     "updatedAt": "2026-02-22T18:06:07.614Z"
   },
-  {
-    "id": "tokyo_메이지_진구_신사_",
+  {"id": "tokyo_메이지_진구_신사_",
     "cityId": "tokyo",
     "name": "메이지 진구 신사 (明治神宮)",
     "lat": 35.6763,
@@ -1916,8 +1867,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:43:36.771Z",
     "updatedAt": "2026-02-22T18:06:07.805Z"
   },
-  {
-    "id": "bus_gamcheon",
+  {"id": "bus_gamcheon",
     "cityId": "busan",
     "name": "감천문화마을 (Gamcheon Culture Village)",
     "lat": 35.0975,
@@ -1953,8 +1903,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.339Z",
     "updatedAt": "2026-02-28T12:00:21.362Z"
   },
-  {
-    "id": "lon_big_ben",
+  {"id": "lon_big_ben",
     "cityId": "london",
     "name": "빅벤과 국회의사당 (Big Ben & Parliament)",
     "lat": 51.5007,
@@ -1990,8 +1939,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:00.774Z",
     "updatedAt": "2026-02-22T18:34:16.619Z"
   },
-  {
-    "id": "rome_트라토리아_다_엔조_알_29_trattoria_da_e",
+  {"id": "rome_트라토리아_다_엔조_알_29_trattoria_da_e",
     "cityId": "rome",
     "name": "트라토리아 다 엔조 알 29 (Trattoria Da Enzo al 29)",
     "lat": 41.888772,
@@ -2028,8 +1976,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:36:25.156Z",
     "updatedAt": "2026-02-25T12:01:08.461Z"
   },
-  {
-    "id": "seoul_리움미술관_leeum_museum_of_art",
+  {"id": "seoul_리움미술관_leeum_museum_of_art",
     "cityId": "seoul",
     "name": "리움미술관 (Leeum Museum of Art)",
     "lat": 37.5366,
@@ -2066,8 +2013,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:42:52.103Z",
     "updatedAt": "2026-02-22T18:06:08.311Z"
   },
-  {
-    "id": "rome_아벤티노_열쇠_구멍_aventine_keyhole",
+  {"id": "rome_아벤티노_열쇠_구멍_aventine_keyhole",
     "cityId": "rome",
     "name": "아벤티노 열쇠 구멍 (Aventine Keyhole)",
     "lat": 41.884167,
@@ -2104,8 +2050,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:36:25.216Z",
     "updatedAt": "2026-02-25T19:01:03.998Z"
   },
-  {
-    "id": "barcelona_item_43",
+  {"id": "barcelona_item_43",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Shopping 추천 44",
     "lat": 0,
@@ -2141,8 +2086,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.476Z",
     "updatedAt": "2026-02-23T02:00:58.905Z"
   },
-  {
-    "id": "talamban-post-office",
+  {"id": "talamban-post-office",
     "cityId": "cebu",
     "name": "Talamban Post Office",
     "lat": 10.3715,
@@ -2178,8 +2122,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-15T18:12:17.656Z",
     "updatedAt": "2026-02-22T18:36:04.784Z"
   },
-  {
-    "id": "tokyo_sensoji_nanobanana",
+  {"id": "tokyo_sensoji_nanobanana",
     "cityId": "tokyo",
     "name": "센소지 (Senso-ji Temple)",
     "lat": 35.7148,
@@ -2214,8 +2157,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-15T11:03:36.307Z",
     "updatedAt": "2026-02-22T18:28:52.674Z"
   },
-  {
-    "id": "jeju_item_47",
+  {"id": "jeju_item_47",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Shopping 추천 48",
     "lat": 0,
@@ -2251,8 +2193,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.740Z",
     "updatedAt": "2026-02-28T12:00:23.262Z"
   },
-  {
-    "id": "new-york_grand_central_terminal",
+  {"id": "new-york_grand_central_terminal",
     "cityId": "new-york",
     "name": "Grand Central Terminal",
     "lat": 40.7527,
@@ -2289,8 +2230,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:56:27.850Z",
     "updatedAt": "2026-02-22T18:33:27.238Z"
   },
-  {
-    "id": "singapore_item_64",
+  {"id": "singapore_item_64",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Landmark 추천 65",
     "lat": 0,
@@ -2326,8 +2266,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.954Z",
     "updatedAt": "2026-02-23T02:00:59.392Z"
   },
-  {
-    "id": "paris_르_상크_le_cinq_포시즌스_호텔_조르주_v_파리",
+  {"id": "paris_르_상크_le_cinq_포시즌스_호텔_조르주_v_파리",
     "cityId": "paris",
     "name": "르 상크 (Le Cinq) - 포시즌스 호텔 조르주 V 파리",
     "lat": 48.8696,
@@ -2364,8 +2303,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:46:31.084Z",
     "updatedAt": "2026-02-28T12:00:23.740Z"
   },
-  {
-    "id": "tokyo_긴자_코쥬_",
+  {"id": "tokyo_긴자_코쥬_",
     "cityId": "tokyo",
     "name": "긴자 코쥬 (銀座 小十)",
     "lat": 35.6726,
@@ -2404,8 +2342,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:43:36.836Z",
     "updatedAt": "2026-02-28T13:46:28.365Z"
   },
-  {
-    "id": "paris_item_72",
+  {"id": "paris_item_72",
     "cityId": "paris",
     "name": "파리 프리미엄 Landmark 추천 73",
     "lat": 0,
@@ -2441,8 +2378,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.470Z",
     "updatedAt": "2026-02-28T12:00:23.967Z"
   },
-  {
-    "id": "seoul_경복궁_gyeongbokgung_palace",
+  {"id": "seoul_경복궁_gyeongbokgung_palace",
     "cityId": "seoul",
     "name": "경복궁 (Gyeongbokgung Palace)",
     "lat": 37.577602,
@@ -2479,8 +2415,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:43:16.642Z",
     "updatedAt": "2026-02-24T03:01:02.777Z"
   },
-  {
-    "id": "london_restaurant_dishoom",
+  {"id": "london_restaurant_dishoom",
     "cityId": "london",
     "name": "Dishoom",
     "lat": 51.5142,
@@ -2535,8 +2470,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:41.266Z",
     "updatedAt": "2026-02-28T13:49:29.361Z"
   },
-  {
-    "id": "new-york_item_105",
+  {"id": "new-york_item_105",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Restaurant 추천 106",
     "lat": 0,
@@ -2572,8 +2506,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.643Z",
     "updatedAt": "2026-02-28T12:00:22.779Z"
   },
-  {
-    "id": "barcelona_item_53",
+  {"id": "barcelona_item_53",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Restaurant 추천 54",
     "lat": 0,
@@ -2609,8 +2542,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.125Z",
     "updatedAt": "2026-02-28T12:00:23.501Z"
   },
-  {
-    "id": "viking_ship_museum",
+  {"id": "viking_ship_museum",
     "cityId": "oslo",
     "name": "Viking Ship Museum",
     "lat": 59.904722,
@@ -2679,8 +2611,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:29.859Z",
     "updatedAt": "2026-02-28T12:00:24.900Z"
   },
-  {
-    "id": "london_restaurant_padella",
+  {"id": "london_restaurant_padella",
     "cityId": "london",
     "name": "Padella",
     "lat": 51.5056,
@@ -2731,8 +2662,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:41.628Z",
     "updatedAt": "2026-02-28T13:46:59.583Z"
   },
-  {
-    "id": "singapore_raffles_hotel_singapore",
+  {"id": "singapore_raffles_hotel_singapore",
     "cityId": "singapore",
     "name": "Raffles Hotel Singapore",
     "lat": 1.2954,
@@ -2769,8 +2699,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:51:19.044Z",
     "updatedAt": "2026-02-28T12:00:25.614Z"
   },
-  {
-    "id": "barcelona_구엘_공원_park_gell",
+  {"id": "barcelona_구엘_공원_park_gell",
     "cityId": "barcelona",
     "name": "구엘 공원 (Park Güell)",
     "lat": 41.4137,
@@ -2807,8 +2736,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:50:28.164Z",
     "updatedAt": "2026-02-28T12:00:25.367Z"
   },
-  {
-    "id": "rome_보르게세_미술관_보르게세_공원_galleria_borg",
+  {"id": "rome_보르게세_미술관_보르게세_공원_galleria_borg",
     "cityId": "rome",
     "name": "보르게세 미술관 & 보르게세 공원 (Galleria Borghese & Borghese Gardens)",
     "lat": 41.9089,
@@ -2845,8 +2773,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:45:15.179Z",
     "updatedAt": "2026-02-28T12:00:24.659Z"
   },
-  {
-    "id": "barcelona_item_23",
+  {"id": "barcelona_item_23",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Shopping 추천 24",
     "lat": 0,
@@ -2882,8 +2809,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.137Z",
     "updatedAt": "2026-02-28T12:00:26.080Z"
   },
-  {
-    "id": "paris_restaurant_pink_mamma",
+  {"id": "paris_restaurant_pink_mamma",
     "cityId": "paris",
     "name": "Pink Mamma",
     "lat": 48.8814,
@@ -2934,8 +2860,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:41.148Z",
     "updatedAt": "2026-02-28T12:00:25.854Z"
   },
-  {
-    "id": "busan_item_26",
+  {"id": "busan_item_26",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Activity 추천 27",
     "lat": 0,
@@ -2971,8 +2896,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.329Z",
     "updatedAt": "2026-02-28T12:00:26.798Z"
   },
-  {
-    "id": "jeju_제주돌문화공원",
+  {"id": "jeju_제주돌문화공원",
     "cityId": "jeju",
     "name": "제주돌문화공원",
     "lat": 33.435,
@@ -3009,8 +2933,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:52:26.923Z",
     "updatedAt": "2026-02-28T12:00:26.319Z"
   },
-  {
-    "id": "rome_바티칸_박물관_시스티나_예배당_vatican_museu",
+  {"id": "rome_바티칸_박물관_시스티나_예배당_vatican_museu",
     "cityId": "rome",
     "name": "바티칸 박물관 & 시스티나 예배당 (Vatican Museums & Sistine Chapel)",
     "lat": 41.906399,
@@ -3047,8 +2970,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:36:25.276Z",
     "updatedAt": "2026-02-28T12:00:26.558Z"
   },
-  {
-    "id": "barcelona_item_73",
+  {"id": "barcelona_item_73",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Restaurant 추천 74",
     "lat": 0,
@@ -3084,8 +3006,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.533Z",
     "updatedAt": "2026-02-22T18:06:01.518Z"
   },
-  {
-    "id": "seoul_item_28",
+  {"id": "seoul_item_28",
     "cityId": "seoul",
     "name": "SEOUL Premium Landmark 28",
     "lat": 0,
@@ -3121,8 +3042,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.456Z",
     "updatedAt": "2026-02-28T12:00:17.509Z"
   },
-  {
-    "id": "서울특별시-demo-2",
+  {"id": "서울특별시-demo-2",
     "cityId": "seoul",
     "name": "서울특별시의 맛집 골목",
     "lat": 0.1,
@@ -3158,8 +3078,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:50:32.063Z",
     "updatedAt": "2026-02-28T12:00:19.461Z"
   },
-  {
-    "id": "도쿄-demo-2",
+  {"id": "도쿄-demo-2",
     "cityId": "tokyo",
     "name": "도쿄의 맛집 골목",
     "lat": 0.1,
@@ -3195,8 +3114,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:46.997Z",
     "updatedAt": "2026-02-28T12:00:20.411Z"
   },
-  {
-    "id": "barcelona_item_103",
+  {"id": "barcelona_item_103",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Shopping 추천 104",
     "lat": 0,
@@ -3232,8 +3150,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.507Z",
     "updatedAt": "2026-02-28T12:00:21.608Z"
   },
-  {
-    "id": "rome_item_11",
+  {"id": "rome_item_11",
     "cityId": "rome",
     "name": "로마 프리미엄 Shopping 추천 12",
     "lat": 0,
@@ -3269,8 +3186,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.236Z",
     "updatedAt": "2026-02-28T12:00:21.123Z"
   },
-  {
-    "id": "new-york_item_85",
+  {"id": "new-york_item_85",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Restaurant 추천 86",
     "lat": 0,
@@ -3306,8 +3222,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.318Z",
     "updatedAt": "2026-02-28T12:00:22.086Z"
   },
-  {
-    "id": "도쿄-demo-1",
+  {"id": "도쿄-demo-1",
     "cityId": "tokyo",
     "name": "도쿄의 숨겨진 보석",
     "lat": 0,
@@ -3343,8 +3258,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:46.925Z",
     "updatedAt": "2026-02-28T12:00:23.035Z"
   },
-  {
-    "id": "rome_콜로세움_로마_포럼_colosseum_roman_for",
+  {"id": "rome_콜로세움_로마_포럼_colosseum_roman_for",
     "cityId": "rome",
     "name": "콜로세움 & 로마 포럼 (Colosseum & Roman Forum)",
     "lat": 41.8902,
@@ -3381,8 +3295,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:45:14.891Z",
     "updatedAt": "2026-02-28T12:00:24.420Z"
   },
-  {
-    "id": "로마-demo-1",
+  {"id": "로마-demo-1",
     "cityId": "rome",
     "name": "로마의 숨겨진 보석",
     "lat": 0,
@@ -3418,8 +3331,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.190Z",
     "updatedAt": "2026-02-28T12:00:27.753Z"
   },
-  {
-    "id": "lon_tower_bridge",
+  {"id": "lon_tower_bridge",
     "cityId": "london",
     "name": "타워 브리지 (Tower Bridge)",
     "lat": 51.5055,
@@ -3455,8 +3367,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:00.882Z",
     "updatedAt": "2026-02-28T12:00:27.992Z"
   },
-  {
-    "id": "busan_item_96",
+  {"id": "busan_item_96",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Landmark 추천 97",
     "lat": 0,
@@ -3492,8 +3403,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.042Z",
     "updatedAt": "2026-02-28T12:00:27.515Z"
   },
-  {
-    "id": "런던-demo-2",
+  {"id": "런던-demo-2",
     "cityId": "london",
     "name": "런던의 맛집 골목",
     "lat": 0.1,
@@ -3529,8 +3439,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.125Z",
     "updatedAt": "2026-02-28T12:00:28.230Z"
   },
-  {
-    "id": "singapore_national_kitchen_by_violet_oon",
+  {"id": "singapore_national_kitchen_by_violet_oon",
     "cityId": "singapore",
     "name": "National Kitchen by Violet Oon",
     "lat": 1.2965,
@@ -3567,8 +3476,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:51:19.221Z",
     "updatedAt": "2026-02-28T12:00:25.140Z"
   },
-  {
-    "id": "seoul_item_78",
+  {"id": "seoul_item_78",
     "cityId": "seoul",
     "name": "SEOUL Premium Activity 78",
     "lat": 0,
@@ -3604,8 +3512,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.858Z",
     "updatedAt": "2026-02-28T12:00:27.038Z"
   },
-  {
-    "id": "busan_f1963_복합문화공간_f1963",
+  {"id": "busan_f1963_복합문화공간_f1963",
     "cityId": "busan",
     "name": "F1963 (복합문화공간 F1963)",
     "lat": 35.1843,
@@ -3642,8 +3549,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:51:51.021Z",
     "updatedAt": "2026-02-28T12:00:27.277Z"
   },
-  {
-    "id": "busan_item_106",
+  {"id": "busan_item_106",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Activity 추천 107",
     "lat": 0,
@@ -3679,8 +3585,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.707Z",
     "updatedAt": "2026-02-23T19:00:36.271Z"
   },
-  {
-    "id": "la-cittadella-subdivision",
+  {"id": "la-cittadella-subdivision",
     "cityId": "cebu",
     "name": "La Cittadella Subdivision",
     "lat": 10.3685,
@@ -3716,8 +3621,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-15T18:12:17.439Z",
     "updatedAt": "2026-02-22T18:35:35.071Z"
   },
-  {
-    "id": "paris_item_12",
+  {"id": "paris_item_12",
     "cityId": "paris",
     "name": "파리 프리미엄 Landmark 추천 13",
     "lat": 0,
@@ -3753,8 +3657,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.305Z",
     "updatedAt": "2026-02-28T12:00:28.708Z"
   },
-  {
-    "id": "rome_restaurant_la_pergola",
+  {"id": "rome_restaurant_la_pergola",
     "cityId": "rome",
     "name": "La Pergola",
     "lat": 41.9171,
@@ -3851,8 +3754,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:40.185Z",
     "updatedAt": "2026-02-28T12:00:28.470Z"
   },
-  {
-    "id": "glacier_bay",
+  {"id": "glacier_bay",
     "cityId": "anchorage",
     "name": "Glacier Bay National Park",
     "lat": 58.665806,
@@ -3921,8 +3823,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:27.231Z",
     "updatedAt": "2026-02-28T12:00:28.935Z"
   },
-  {
-    "id": "louvre-skip-line-tour",
+  {"id": "louvre-skip-line-tour",
     "cityId": "paris",
     "name": "Louvre Skip-the-Line Guided Tour",
     "lat": 48.8606,
@@ -3983,8 +3884,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.505Z",
     "updatedAt": "2026-02-28T12:00:29.162Z"
   },
-  {
-    "id": "런던-demo-1",
+  {"id": "런던-demo-1",
     "cityId": "london",
     "name": "런던의 숨겨진 보석",
     "lat": 0,
@@ -4020,8 +3920,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.062Z",
     "updatedAt": "2026-02-22T18:15:28.886Z"
   },
-  {
-    "id": "london_restaurant_hawksmoor",
+  {"id": "london_restaurant_hawksmoor",
     "cityId": "london",
     "name": "Hawksmoor Seven Dials",
     "lat": 51.5141,
@@ -4072,8 +3971,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:41.745Z",
     "updatedAt": "2026-02-22T20:00:58.191Z"
   },
-  {
-    "id": "rome_item_81",
+  {"id": "rome_item_81",
     "cityId": "rome",
     "name": "로마 프리미엄 Restaurant 추천 82",
     "lat": 0,
@@ -4109,8 +4007,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.062Z",
     "updatedAt": "2026-02-23T19:00:36.308Z"
   },
-  {
-    "id": "san-isidro-parish-talamban",
+  {"id": "san-isidro-parish-talamban",
     "cityId": "cebu",
     "name": "San Isidro Parish Church",
     "lat": 10.3665,
@@ -4147,8 +4044,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-15T18:12:17.507Z",
     "updatedAt": "2026-02-22T20:00:58.274Z"
   },
-  {
-    "id": "gaisano-grand-mall-talamban",
+  {"id": "gaisano-grand-mall-talamban",
     "cityId": "cebu",
     "name": "Gaisano Grand Mall Talamban",
     "lat": 10.3705,
@@ -4184,8 +4080,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-15T18:12:17.583Z",
     "updatedAt": "2026-02-22T18:35:54.604Z"
   },
-  {
-    "id": "파리-demo-2",
+  {"id": "파리-demo-2",
     "cityId": "paris",
     "name": "파리의 맛집 골목",
     "lat": 0.1,
@@ -4221,8 +4116,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.389Z",
     "updatedAt": "2026-02-22T18:14:58.491Z"
   },
-  {
-    "id": "busan_해동_용궁사_haedong_yonggungsa_temp",
+  {"id": "busan_해동_용궁사_haedong_yonggungsa_temp",
     "cityId": "busan",
     "name": "해동 용궁사 (Haedong Yonggungsa Temple)",
     "lat": 35.2181,
@@ -4259,8 +4153,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:51:50.955Z",
     "updatedAt": "2026-02-23T19:00:36.322Z"
   },
-  {
-    "id": "제주특별자치도-demo-2",
+  {"id": "제주특별자치도-demo-2",
     "cityId": "jeju",
     "name": "제주특별자치도의 맛집 골목",
     "lat": 0.1,
@@ -4296,8 +4189,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.909Z",
     "updatedAt": "2026-02-22T18:15:59.672Z"
   },
-  {
-    "id": "singapore-night-safari",
+  {"id": "singapore-night-safari",
     "cityId": "singapore",
     "name": "Night Safari Experience",
     "lat": 1.4043,
@@ -4361,8 +4253,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:35.340Z",
     "updatedAt": "2026-02-22T20:00:58.365Z"
   },
-  {
-    "id": "paris_item_62",
+  {"id": "paris_item_62",
     "cityId": "paris",
     "name": "파리 프리미엄 Activity 추천 63",
     "lat": 0,
@@ -4398,8 +4289,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.730Z",
     "updatedAt": "2026-02-22T18:06:00.151Z"
   },
-  {
-    "id": "tokyo_item_39",
+  {"id": "tokyo_item_39",
     "cityId": "tokyo",
     "name": "TOKYO Premium Shopping 39",
     "lat": 0,
@@ -4435,8 +4325,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.212Z",
     "updatedAt": "2026-02-22T18:19:37.584Z"
   },
-  {
-    "id": "paris_item_82",
+  {"id": "paris_item_82",
     "cityId": "paris",
     "name": "파리 프리미엄 Activity 추천 83",
     "lat": 0,
@@ -4472,8 +4361,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.126Z",
     "updatedAt": "2026-02-22T18:06:00.286Z"
   },
-  {
-    "id": "rom_trevi",
+  {"id": "rom_trevi",
     "cityId": "rome",
     "name": "트레비 분수 (Trevi Fountain)",
     "lat": 41.9009,
@@ -4509,8 +4397,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.045Z",
     "updatedAt": "2026-02-22T18:06:00.483Z"
   },
-  {
-    "id": "par_eiffel",
+  {"id": "par_eiffel",
     "cityId": "paris",
     "name": "에펠탑 (Eiffel Tower)",
     "lat": 48.8584,
@@ -4546,8 +4433,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.160Z",
     "updatedAt": "2026-02-22T18:16:50.259Z"
   },
-  {
-    "id": "rome_item_1",
+  {"id": "rome_item_1",
     "cityId": "rome",
     "name": "로마 프리미엄 Restaurant 추천 2",
     "lat": 0,
@@ -4583,8 +4469,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.505Z",
     "updatedAt": "2026-02-22T18:06:00.421Z"
   },
-  {
-    "id": "tokyo_item_79",
+  {"id": "tokyo_item_79",
     "cityId": "tokyo",
     "name": "TOKYO Premium Shopping 79",
     "lat": 0,
@@ -4620,8 +4505,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.923Z",
     "updatedAt": "2026-02-22T18:22:57.144Z"
   },
-  {
-    "id": "singapore_item_4",
+  {"id": "singapore_item_4",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Landmark 추천 5",
     "lat": 0,
@@ -4657,8 +4541,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.715Z",
     "updatedAt": "2026-02-22T18:06:00.618Z"
   },
-  {
-    "id": "magellans-cross",
+  {"id": "magellans-cross",
     "cityId": "cebu",
     "name": "Magellan's Cross",
     "lat": 10.2936,
@@ -4700,8 +4583,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:30.107Z",
     "updatedAt": "2026-02-22T20:00:58.449Z"
   },
-  {
-    "id": "new-york_item_25",
+  {"id": "new-york_item_25",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Restaurant 추천 26",
     "lat": 0,
@@ -4737,8 +4619,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.264Z",
     "updatedAt": "2026-02-24T02:00:33.750Z"
   },
-  {
-    "id": "jeju_성산_일출봉",
+  {"id": "jeju_성산_일출봉",
     "cityId": "jeju",
     "name": "성산 일출봉",
     "lat": 33.4627,
@@ -4775,8 +4656,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:52:26.671Z",
     "updatedAt": "2026-02-24T02:00:29.701Z"
   },
-  {
-    "id": "roman_forum",
+  {"id": "roman_forum",
     "cityId": "rome",
     "name": "Roman Forum",
     "lat": 41.892464,
@@ -4903,8 +4783,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T11:40:38.856Z",
     "updatedAt": "2026-02-22T20:00:58.549Z"
   },
-  {
-    "id": "chinatown-heritage-centre",
+  {"id": "chinatown-heritage-centre",
     "cityId": "singapore",
     "name": "Chinatown Heritage Centre",
     "lat": 1.283611,
@@ -4960,8 +4839,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:31.427Z",
     "updatedAt": "2026-02-22T20:00:58.630Z"
   },
-  {
-    "id": "jeju_item_57",
+  {"id": "jeju_item_57",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Restaurant 추천 58",
     "lat": 0,
@@ -4997,8 +4875,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.384Z",
     "updatedAt": "2026-02-24T02:00:35.532Z"
   },
-  {
-    "id": "oslo_opera_house",
+  {"id": "oslo_opera_house",
     "cityId": "oslo",
     "name": "Oslo Opera House",
     "lat": 59.907222,
@@ -5067,8 +4944,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:29.986Z",
     "updatedAt": "2026-02-22T20:00:58.795Z"
   },
-  {
-    "id": "sacre_coeur",
+  {"id": "sacre_coeur",
     "cityId": "paris",
     "name": "Sacré-Cœur Basilica",
     "lat": 48.886452,
@@ -5125,8 +5001,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:25.302Z",
     "updatedAt": "2026-02-22T20:00:58.710Z"
   },
-  {
-    "id": "tokyo_item_109",
+  {"id": "tokyo_item_109",
     "cityId": "tokyo",
     "name": "TOKYO Premium Restaurant 109",
     "lat": 0,
@@ -5162,8 +5037,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.900Z",
     "updatedAt": "2026-02-22T18:25:13.375Z"
   },
-  {
-    "id": "jeju_item_97",
+  {"id": "jeju_item_97",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Restaurant 추천 98",
     "lat": 0,
@@ -5199,8 +5073,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.106Z",
     "updatedAt": "2026-02-24T02:00:35.704Z"
   },
-  {
-    "id": "versailles",
+  {"id": "versailles",
     "cityId": "paris",
     "name": "Palace of Versailles",
     "lat": 48.804865,
@@ -5257,8 +5130,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:25.420Z",
     "updatedAt": "2026-02-22T20:00:58.879Z"
   },
-  {
-    "id": "busan_item_56",
+  {"id": "busan_item_56",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Landmark 추천 57",
     "lat": 0,
@@ -5294,8 +5166,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.319Z",
     "updatedAt": "2026-02-24T02:00:38.655Z"
   },
-  {
-    "id": "로마-demo-2",
+  {"id": "로마-demo-2",
     "cityId": "rome",
     "name": "로마의 맛집 골목",
     "lat": 0.1,
@@ -5331,8 +5202,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.256Z",
     "updatedAt": "2026-02-22T18:15:39.898Z"
   },
-  {
-    "id": "par_louvre",
+  {"id": "par_louvre",
     "cityId": "paris",
     "name": "루브르 박물관 (Louvre Museum)",
     "lat": 48.8606,
@@ -5368,8 +5238,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.232Z",
     "updatedAt": "2026-02-22T18:16:15.848Z"
   },
-  {
-    "id": "park_guell",
+  {"id": "park_guell",
     "cityId": "barcelona",
     "name": "Park Güell",
     "lat": 41.414495,
@@ -5438,8 +5307,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:27.716Z",
     "updatedAt": "2026-02-22T20:00:59.049Z"
   },
-  {
-    "id": "tokyo_item_19",
+  {"id": "tokyo_item_19",
     "cityId": "tokyo",
     "name": "TOKYO Premium Shopping 19",
     "lat": 0,
@@ -5475,8 +5343,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.812Z",
     "updatedAt": "2026-02-22T18:19:39.703Z"
   },
-  {
-    "id": "khoo-kongsi",
+  {"id": "khoo-kongsi",
     "cityId": "penang",
     "name": "Khoo Kongsi",
     "lat": 5.416389,
@@ -5520,8 +5387,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:32.023Z",
     "updatedAt": "2026-02-24T03:00:58.815Z"
   },
-  {
-    "id": "anchorage_museum",
+  {"id": "anchorage_museum",
     "cityId": "anchorage",
     "name": "Anchorage Museum",
     "lat": 61.217649,
@@ -5590,8 +5456,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.855Z",
     "updatedAt": "2026-02-22T20:00:59.211Z"
   },
-  {
-    "id": "sagrada_familia",
+  {"id": "sagrada_familia",
     "cityId": "barcelona",
     "name": "Sagrada Familia",
     "lat": 41.403629,
@@ -5660,8 +5525,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:27.595Z",
     "updatedAt": "2026-02-22T20:00:59.294Z"
   },
-  {
-    "id": "london-eye-fast-track",
+  {"id": "london-eye-fast-track",
     "cityId": "london",
     "name": "London Eye Fast-Track Experience",
     "lat": 51.5033,
@@ -5722,8 +5586,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.871Z",
     "updatedAt": "2026-02-22T20:00:59.377Z"
   },
-  {
-    "id": "rome_restaurant_armando_al_pantheon",
+  {"id": "rome_restaurant_armando_al_pantheon",
     "cityId": "rome",
     "name": "Armando al Pantheon",
     "lat": 41.8986,
@@ -5831,8 +5694,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:39.943Z",
     "updatedAt": "2026-02-22T20:00:59.545Z"
   },
-  {
-    "id": "alaska_wildlife_center",
+  {"id": "alaska_wildlife_center",
     "cityId": "anchorage",
     "name": "Alaska Wildlife Conservation Center",
     "lat": 60.821359,
@@ -5901,8 +5763,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.737Z",
     "updatedAt": "2026-02-22T20:00:59.629Z"
   },
-  {
-    "id": "basilica-santo-nino",
+  {"id": "basilica-santo-nino",
     "cityId": "cebu",
     "name": "Basilica Minore del Santo Niño",
     "lat": 10.2942,
@@ -5944,8 +5805,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:30.224Z",
     "updatedAt": "2026-02-22T20:00:59.709Z"
   },
-  {
-    "id": "seoul_경복궁_경회루_gyeonghoeru_pavilion_g",
+  {"id": "seoul_경복궁_경회루_gyeonghoeru_pavilion_g",
     "cityId": "seoul",
     "name": "경복궁 경회루 (Gyeonghoeru Pavilion, Gyeongbokgung Palace)",
     "lat": 37.5801,
@@ -5982,8 +5842,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:42:51.917Z",
     "updatedAt": "2026-02-24T03:01:00.884Z"
   },
-  {
-    "id": "fort-san-pedro",
+  {"id": "fort-san-pedro",
     "cityId": "cebu",
     "name": "Fort San Pedro",
     "lat": 10.292222,
@@ -6027,8 +5886,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:30.343Z",
     "updatedAt": "2026-02-22T20:00:59.960Z"
   },
-  {
-    "id": "new-york_item_75",
+  {"id": "new-york_item_75",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Shopping 추천 76",
     "lat": 0,
@@ -6064,8 +5922,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.666Z",
     "updatedAt": "2026-02-24T19:00:25.365Z"
   },
-  {
-    "id": "cebu-island-hopping",
+  {"id": "cebu-island-hopping",
     "cityId": "cebu",
     "name": "Island Hopping Tour",
     "lat": 10.3157,
@@ -6116,8 +5973,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:38.109Z",
     "updatedAt": "2026-02-22T20:01:00.040Z"
   },
-  {
-    "id": "jeju_item_17",
+  {"id": "jeju_item_17",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Restaurant 추천 18",
     "lat": 0,
@@ -6153,8 +6009,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.669Z",
     "updatedAt": "2026-02-24T03:01:02.443Z"
   },
-  {
-    "id": "rome_restaurant_antico_arco",
+  {"id": "rome_restaurant_antico_arco",
     "cityId": "rome",
     "name": "Antico Arco",
     "lat": 41.8853,
@@ -6250,8 +6105,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:40.542Z",
     "updatedAt": "2026-02-22T20:01:00.204Z"
   },
-  {
-    "id": "colosseum",
+  {"id": "colosseum",
     "cityId": "rome",
     "name": "Colosseum",
     "lat": 41.890251,
@@ -6381,8 +6235,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T11:40:38.720Z",
     "updatedAt": "2026-02-22T20:01:00.371Z"
   },
-  {
-    "id": "new-york_item_35",
+  {"id": "new-york_item_35",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Shopping 추천 36",
     "lat": 0,
@@ -6418,8 +6271,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.912Z",
     "updatedAt": "2026-02-22T18:06:01.255Z"
   },
-  {
-    "id": "뉴욕-demo-1",
+  {"id": "뉴욕-demo-1",
     "cityId": "new-york",
     "name": "뉴욕의 숨겨진 보석",
     "lat": 0,
@@ -6455,8 +6307,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.972Z",
     "updatedAt": "2026-02-22T18:16:30.838Z"
   },
-  {
-    "id": "fort-cornwallis",
+  {"id": "fort-cornwallis",
     "cityId": "penang",
     "name": "Fort Cornwallis",
     "lat": 5.421667,
@@ -6500,8 +6351,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:31.904Z",
     "updatedAt": "2026-02-22T20:01:00.535Z"
   },
-  {
-    "id": "singapore_item_44",
+  {"id": "singapore_item_44",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Landmark 추천 45",
     "lat": 0,
@@ -6537,8 +6387,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.540Z",
     "updatedAt": "2026-02-22T18:06:01.446Z"
   },
-  {
-    "id": "jeju_item_27",
+  {"id": "jeju_item_27",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Shopping 추천 28",
     "lat": 0,
@@ -6574,8 +6423,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.392Z",
     "updatedAt": "2026-02-24T12:00:43.029Z"
   },
-  {
-    "id": "tokyo_item_49",
+  {"id": "tokyo_item_49",
     "cityId": "tokyo",
     "name": "TOKYO Premium Restaurant 49",
     "lat": 0,
@@ -6611,8 +6459,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.866Z",
     "updatedAt": "2026-02-22T18:22:32.110Z"
   },
-  {
-    "id": "old_town_square",
+  {"id": "old_town_square",
     "cityId": "prague",
     "name": "Old Town Square",
     "lat": 50.087465,
@@ -6681,8 +6528,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:28.460Z",
     "updatedAt": "2026-02-22T20:01:00.899Z"
   },
-  {
-    "id": "new-york_item_55",
+  {"id": "new-york_item_55",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Shopping 추천 56",
     "lat": 0,
@@ -6718,8 +6564,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.255Z",
     "updatedAt": "2026-02-24T12:00:43.505Z"
   },
-  {
-    "id": "pantheon",
+  {"id": "pantheon",
     "cityId": "rome",
     "name": "Pantheon",
     "lat": 41.898609,
@@ -6842,8 +6687,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:24.207Z",
     "updatedAt": "2026-02-22T20:01:01.065Z"
   },
-  {
-    "id": "rome_item_51",
+  {"id": "rome_item_51",
     "cityId": "rome",
     "name": "로마 프리미엄 Shopping 추천 52",
     "lat": 0,
@@ -6879,8 +6723,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.996Z",
     "updatedAt": "2026-02-22T18:06:01.769Z"
   },
-  {
-    "id": "vasa_museum",
+  {"id": "vasa_museum",
     "cityId": "stockholm",
     "name": "Vasa Museum",
     "lat": 59.327939,
@@ -6949,8 +6792,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:29.086Z",
     "updatedAt": "2026-02-22T18:23:12.292Z"
   },
-  {
-    "id": "barcelona_item_93",
+  {"id": "barcelona_item_93",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Restaurant 추천 94",
     "lat": 0,
@@ -6986,8 +6828,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.849Z",
     "updatedAt": "2026-02-22T18:06:02.106Z"
   },
-  {
-    "id": "gamla_stan",
+  {"id": "gamla_stan",
     "cityId": "stockholm",
     "name": "Gamla Stan",
     "lat": 59.325,
@@ -7056,8 +6897,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:29.222Z",
     "updatedAt": "2026-02-22T18:20:00.391Z"
   },
-  {
-    "id": "kl-food-street-tour",
+  {"id": "kl-food-street-tour",
     "cityId": "kuala-lumpur",
     "name": "Kuala Lumpur Street Food Tour",
     "lat": 3.1478,
@@ -7108,8 +6948,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:39.334Z",
     "updatedAt": "2026-02-22T19:01:04.783Z"
   },
-  {
-    "id": "rome/borghese-gallery",
+  {"id": "rome/borghese-gallery",
     "cityId": "rome",
     "name": "Borghese Gallery and Park",
     "lat": 41.9142,
@@ -7156,8 +6995,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-22T18:05:47.524Z",
     "updatedAt": "2026-02-22T18:17:19.903Z"
   },
-  {
-    "id": "vatican_museums",
+  {"id": "vatican_museums",
     "cityId": "rome",
     "name": "Vatican Museums",
     "lat": 41.906487,
@@ -7282,8 +7120,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:24.447Z",
     "updatedAt": "2026-02-22T18:23:33.193Z"
   },
-  {
-    "id": "paris-wine-tasting",
+  {"id": "paris-wine-tasting",
     "cityId": "paris",
     "name": "French Wine Tasting Experience",
     "lat": 48.8584,
@@ -7347,8 +7184,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:34.721Z",
     "updatedAt": "2026-02-22T18:23:52.502Z"
   },
-  {
-    "id": "george-town-unesco-site",
+  {"id": "george-town-unesco-site",
     "cityId": "penang",
     "name": "George Town UNESCO Site",
     "lat": 5.414167,
@@ -7404,8 +7240,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:32.258Z",
     "updatedAt": "2026-02-22T18:11:40.095Z"
   },
-  {
-    "id": "thames-river-cruise",
+  {"id": "thames-river-cruise",
     "cityId": "london",
     "name": "Thames River Sightseeing Cruise",
     "lat": 51.5007,
@@ -7469,8 +7304,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:34.848Z",
     "updatedAt": "2026-02-22T19:01:04.869Z"
   },
-  {
-    "id": "notre_dame",
+  {"id": "notre_dame",
     "cityId": "paris",
     "name": "Notre-Dame Cathedral",
     "lat": 48.852966,
@@ -7584,8 +7418,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:25.055Z",
     "updatedAt": "2026-02-22T18:18:07.964Z"
   },
-  {
-    "id": "afternoon-tea-london",
+  {"id": "afternoon-tea-london",
     "cityId": "london",
     "name": "Traditional Afternoon Tea Experience",
     "lat": 51.5074,
@@ -7649,8 +7482,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:34.968Z",
     "updatedAt": "2026-02-22T18:24:02.136Z"
   },
-  {
-    "id": "tops-lookout",
+  {"id": "tops-lookout",
     "cityId": "cebu",
     "name": "TOPS Lookout",
     "lat": 10.350278,
@@ -7694,8 +7526,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:30.463Z",
     "updatedAt": "2026-02-22T18:18:17.271Z"
   },
-  {
-    "id": "tokyo_item_69",
+  {"id": "tokyo_item_69",
     "cityId": "tokyo",
     "name": "TOKYO Premium Restaurant 69",
     "lat": 0,
@@ -7731,8 +7562,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.278Z",
     "updatedAt": "2026-02-22T18:24:22.000Z"
   },
-  {
-    "id": "penang-street-food-tour",
+  {"id": "penang-street-food-tour",
     "cityId": "penang",
     "name": "Penang Street Food Tour",
     "lat": 5.4141,
@@ -7796,8 +7626,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:35.593Z",
     "updatedAt": "2026-02-22T19:01:04.949Z"
   },
-  {
-    "id": "colosseum-underground-tour",
+  {"id": "colosseum-underground-tour",
     "cityId": "rome",
     "name": "Colosseum Underground Tour",
     "lat": 41.8902,
@@ -7900,8 +7729,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:36.389Z",
     "updatedAt": "2026-02-22T18:24:44.890Z"
   },
-  {
-    "id": "phuket-sunset-cruise",
+  {"id": "phuket-sunset-cruise",
     "cityId": "phuket",
     "name": "Phang Nga Bay Sunset Cruise",
     "lat": 8.2762,
@@ -7962,8 +7790,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:36.272Z",
     "updatedAt": "2026-02-22T19:01:05.034Z"
   },
-  {
-    "id": "oslob-whale-shark",
+  {"id": "oslob-whale-shark",
     "cityId": "cebu",
     "name": "Oslob Whale Shark Watching",
     "lat": 9.5,
@@ -8013,8 +7840,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:38.235Z",
     "updatedAt": "2026-02-22T18:25:04.910Z"
   },
-  {
-    "id": "casa_batllo",
+  {"id": "casa_batllo",
     "cityId": "barcelona",
     "name": "Casa Batlló",
     "lat": 41.391638,
@@ -8083,8 +7909,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:27.837Z",
     "updatedAt": "2026-02-22T19:01:05.202Z"
   },
-  {
-    "id": "tokyo_item_9",
+  {"id": "tokyo_item_9",
     "cityId": "tokyo",
     "name": "TOKYO Premium Restaurant 9",
     "lat": 0,
@@ -8120,8 +7945,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.108Z",
     "updatedAt": "2026-02-22T18:25:26.324Z"
   },
-  {
-    "id": "rome/aroma-restaurant",
+  {"id": "rome/aroma-restaurant",
     "cityId": "rome",
     "name": "Aroma Restaurant",
     "lat": 41.8906,
@@ -8168,8 +7992,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-22T18:05:47.586Z",
     "updatedAt": "2026-02-22T19:01:05.286Z"
   },
-  {
-    "id": "old-phuket-town-walk",
+  {"id": "old-phuket-town-walk",
     "cityId": "phuket",
     "name": "Old Phuket Town Cultural Walk",
     "lat": 7.8804,
@@ -8220,8 +8043,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:39.696Z",
     "updatedAt": "2026-02-22T18:10:09.396Z"
   },
-  {
-    "id": "harry-potter-studio-tour",
+  {"id": "harry-potter-studio-tour",
     "cityId": "london",
     "name": "Warner Bros. Studio Tour London - Harry Potter",
     "lat": 51.6903,
@@ -8282,8 +8104,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.741Z",
     "updatedAt": "2026-02-22T18:18:37.808Z"
   },
-  {
-    "id": "borghese-gift-shop-rome",
+  {"id": "borghese-gift-shop-rome",
     "cityId": "rome",
     "name": "Borghese Souvenir Gallery",
     "lat": 41.9009,
@@ -8380,8 +8201,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:36.754Z",
     "updatedAt": "2026-02-22T18:25:54.411Z"
   },
-  {
-    "id": "rome-vespa-tour",
+  {"id": "rome-vespa-tour",
     "cityId": "rome",
     "name": "Vespa Tour of Rome",
     "lat": 41.9028,
@@ -8484,8 +8304,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:36.509Z",
     "updatedAt": "2026-02-22T18:25:35.309Z"
   },
-  {
-    "id": "singapore_item_84",
+  {"id": "singapore_item_84",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Landmark 추천 85",
     "lat": 0,
@@ -8521,8 +8340,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.252Z",
     "updatedAt": "2026-02-22T18:06:03.125Z"
   },
-  {
-    "id": "london_item_10",
+  {"id": "london_item_10",
     "cityId": "london",
     "name": "런던 프리미엄 Activity 추천 11",
     "lat": 0,
@@ -8558,8 +8376,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.173Z",
     "updatedAt": "2026-02-23T02:01:02.401Z"
   },
-  {
-    "id": "singapore-flyer",
+  {"id": "singapore-flyer",
     "cityId": "singapore",
     "name": "Singapore Flyer",
     "lat": 1.28925,
@@ -8603,8 +8420,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:31.301Z",
     "updatedAt": "2026-02-22T18:26:03.409Z"
   },
-  {
-    "id": "penang-trishaw-tour",
+  {"id": "penang-trishaw-tour",
     "cityId": "penang",
     "name": "Heritage Trishaw Tour",
     "lat": 5.4164,
@@ -8668,8 +8484,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:35.715Z",
     "updatedAt": "2026-02-22T18:10:19.143Z"
   },
-  {
-    "id": "st_peters_basilica",
+  {"id": "st_peters_basilica",
     "cityId": "rome",
     "name": "St. Peter's Basilica",
     "lat": 41.902168,
@@ -8791,8 +8606,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:24.571Z",
     "updatedAt": "2026-02-22T19:01:05.371Z"
   },
-  {
-    "id": "buckingham_palace",
+  {"id": "buckingham_palace",
     "cityId": "london",
     "name": "Buckingham Palace",
     "lat": 51.501476,
@@ -8906,8 +8720,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:25.903Z",
     "updatedAt": "2026-02-22T18:18:58.082Z"
   },
-  {
-    "id": "moulin-rouge-show",
+  {"id": "moulin-rouge-show",
     "cityId": "paris",
     "name": "Moulin Rouge Cabaret Show",
     "lat": 48.8841,
@@ -8968,8 +8781,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.387Z",
     "updatedAt": "2026-02-22T18:26:33.427Z"
   },
-  {
-    "id": "eiffel_tower",
+  {"id": "eiffel_tower",
     "cityId": "paris",
     "name": "Eiffel Tower",
     "lat": 48.858093,
@@ -9085,8 +8897,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:24.812Z",
     "updatedAt": "2026-02-22T19:01:05.534Z"
   },
-  {
-    "id": "rome_item_91",
+  {"id": "rome_item_91",
     "cityId": "rome",
     "name": "로마 프리미엄 Shopping 추천 92",
     "lat": 0,
@@ -9122,8 +8933,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.716Z",
     "updatedAt": "2026-02-22T18:06:03.512Z"
   },
-  {
-    "id": "rijksmuseum",
+  {"id": "rijksmuseum",
     "cityId": "amsterdam",
     "name": "Rijksmuseum",
     "lat": 52.359998,
@@ -9192,8 +9002,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:27.470Z",
     "updatedAt": "2026-02-22T18:26:43.691Z"
   },
-  {
-    "id": "taoist-temple",
+  {"id": "taoist-temple",
     "cityId": "cebu",
     "name": "Cebu Taoist Temple",
     "lat": 10.334,
@@ -9235,8 +9044,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-22T18:05:56.590Z",
     "updatedAt": "2026-02-22T18:27:23.382Z"
   },
-  {
-    "id": "tower_bridge",
+  {"id": "tower_bridge",
     "cityId": "london",
     "name": "Tower Bridge",
     "lat": 51.5055,
@@ -9350,8 +9158,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:25.778Z",
     "updatedAt": "2026-02-22T19:01:05.703Z"
   },
-  {
-    "id": "singapore-river-cruise",
+  {"id": "singapore-river-cruise",
     "cityId": "singapore",
     "name": "Singapore River Bumboat Cruise",
     "lat": 1.2875,
@@ -9401,8 +9208,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:38.597Z",
     "updatedAt": "2026-02-22T18:27:03.746Z"
   },
-  {
-    "id": "london_eye",
+  {"id": "london_eye",
     "cityId": "london",
     "name": "London Eye",
     "lat": 51.503399,
@@ -9519,8 +9325,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.022Z",
     "updatedAt": "2026-02-22T19:01:05.871Z"
   },
-  {
-    "id": "palace_of_culture",
+  {"id": "palace_of_culture",
     "cityId": "warsaw",
     "name": "Palace of Culture and Science",
     "lat": 52.231667,
@@ -9589,8 +9394,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:28.962Z",
     "updatedAt": "2026-02-22T18:31:29.677Z"
   },
-  {
-    "id": "jeju_item_67",
+  {"id": "jeju_item_67",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Shopping 추천 68",
     "lat": 0,
@@ -9626,8 +9430,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.149Z",
     "updatedAt": "2026-02-24T19:00:26.115Z"
   },
-  {
-    "id": "karon-viewpoint",
+  {"id": "karon-viewpoint",
     "cityId": "phuket",
     "name": "Karon Viewpoint",
     "lat": 7.820833,
@@ -9671,8 +9474,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:33.786Z",
     "updatedAt": "2026-02-22T18:27:43.264Z"
   },
-  {
-    "id": "tokyo_item_29",
+  {"id": "tokyo_item_29",
     "cityId": "tokyo",
     "name": "TOKYO Premium Restaurant 29",
     "lat": 0,
@@ -9708,8 +9510,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.521Z",
     "updatedAt": "2026-02-22T18:20:30.148Z"
   },
-  {
-    "id": "rome_restaurant_roscioli",
+  {"id": "rome_restaurant_roscioli",
     "cityId": "rome",
     "name": "Roscioli",
     "lat": 41.8947,
@@ -9807,8 +9608,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:40.065Z",
     "updatedAt": "2026-02-22T18:27:54.521Z"
   },
-  {
-    "id": "warsaw_old_town",
+  {"id": "warsaw_old_town",
     "cityId": "warsaw",
     "name": "Warsaw Old Town",
     "lat": 52.249722,
@@ -9877,8 +9677,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:28.838Z",
     "updatedAt": "2026-02-22T19:01:05.959Z"
   },
-  {
-    "id": "paris_restaurant_lami_jean",
+  {"id": "paris_restaurant_lami_jean",
     "cityId": "paris",
     "name": "L'Ami Jean",
     "lat": 48.8579,
@@ -9929,8 +9728,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:40.911Z",
     "updatedAt": "2026-02-22T18:28:22.987Z"
   },
-  {
-    "id": "arc_triomphe",
+  {"id": "arc_triomphe",
     "cityId": "paris",
     "name": "Arc de Triomphe",
     "lat": 48.873787,
@@ -10044,8 +9842,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:25.178Z",
     "updatedAt": "2026-02-22T20:00:56.834Z"
   },
-  {
-    "id": "jeju_item_107",
+  {"id": "jeju_item_107",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Shopping 추천 108",
     "lat": 0,
@@ -10081,8 +9878,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.772Z",
     "updatedAt": "2026-02-22T18:06:03.937Z"
   },
-  {
-    "id": "london_item_90",
+  {"id": "london_item_90",
     "cityId": "london",
     "name": "런던 프리미엄 Activity 추천 91",
     "lat": 0,
@@ -10118,8 +9914,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.648Z",
     "updatedAt": "2026-02-22T18:05:56.651Z"
   },
-  {
-    "id": "london_restaurant_the_ledbury",
+  {"id": "london_restaurant_the_ledbury",
     "cityId": "london",
     "name": "The Ledbury",
     "lat": 51.5104,
@@ -10171,8 +9966,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:41.390Z",
     "updatedAt": "2026-02-28T13:48:09.630Z"
   },
-  {
-    "id": "central-market-kl",
+  {"id": "central-market-kl",
     "cityId": "kuala-lumpur",
     "name": "Central Market",
     "lat": 3.145833,
@@ -10228,8 +10022,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:33.239Z",
     "updatedAt": "2026-02-22T20:00:57.170Z"
   },
-  {
-    "id": "similan-islands",
+  {"id": "similan-islands",
     "cityId": "phuket",
     "name": "Similan Islands",
     "lat": 8.6494,
@@ -10290,8 +10083,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:34.193Z",
     "updatedAt": "2026-02-22T18:10:39.234Z"
   },
-  {
-    "id": "roman-food-tour",
+  {"id": "roman-food-tour",
     "cityId": "rome",
     "name": "Traditional Roman Food Tour",
     "lat": 41.8967,
@@ -10397,8 +10189,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:34.439Z",
     "updatedAt": "2026-02-22T18:10:50.439Z"
   },
-  {
-    "id": "wat-chalong",
+  {"id": "wat-chalong",
     "cityId": "phuket",
     "name": "Wat Chalong",
     "lat": 7.845556,
@@ -10442,8 +10233,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:33.646Z",
     "updatedAt": "2026-02-22T18:21:01.204Z"
   },
-  {
-    "id": "barcelona_item_3",
+  {"id": "barcelona_item_3",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Shopping 추천 4",
     "lat": 0,
@@ -10479,8 +10269,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.648Z",
     "updatedAt": "2026-02-22T18:05:57.479Z"
   },
-  {
-    "id": "kawasan-canyoneering",
+  {"id": "kawasan-canyoneering",
     "cityId": "cebu",
     "name": "Canyoneering Adventure at Kawasan Falls",
     "lat": 9.8167,
@@ -10530,8 +10319,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:38.357Z",
     "updatedAt": "2026-02-22T20:00:57.692Z"
   },
-  {
-    "id": "london_item_20",
+  {"id": "london_item_20",
     "cityId": "london",
     "name": "런던 프리미엄 Landmark 추천 21",
     "lat": 0,
@@ -10567,8 +10355,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.928Z",
     "updatedAt": "2026-02-22T18:06:04.254Z"
   },
-  {
-    "id": "louvre",
+  {"id": "louvre",
     "cityId": "paris",
     "name": "Louvre Museum",
     "lat": 48.860294,
@@ -10682,8 +10469,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:24.935Z",
     "updatedAt": "2026-02-22T20:00:57.942Z"
   },
-  {
-    "id": "seoul_item_48",
+  {"id": "seoul_item_48",
     "cityId": "seoul",
     "name": "SEOUL Premium Landmark 48",
     "lat": 0,
@@ -10719,8 +10505,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.803Z",
     "updatedAt": "2026-02-22T18:29:11.347Z"
   },
-  {
-    "id": "paris_item_22",
+  {"id": "paris_item_22",
     "cityId": "paris",
     "name": "파리 프리미엄 Activity 추천 23",
     "lat": 0,
@@ -10756,8 +10541,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.055Z",
     "updatedAt": "2026-02-22T18:06:04.314Z"
   },
-  {
-    "id": "big-buddha-phuket",
+  {"id": "big-buddha-phuket",
     "cityId": "phuket",
     "name": "Big Buddha Phuket",
     "lat": 7.827582,
@@ -10801,8 +10585,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:33.358Z",
     "updatedAt": "2026-02-22T20:00:58.965Z"
   },
-  {
-    "id": "anne_frank_house",
+  {"id": "anne_frank_house",
     "cityId": "amsterdam",
     "name": "Anne Frank House",
     "lat": 52.375218,
@@ -10871,8 +10654,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:27.350Z",
     "updatedAt": "2026-02-22T18:21:19.855Z"
   },
-  {
-    "id": "singapore_item_34",
+  {"id": "singapore_item_34",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Activity 추천 35",
     "lat": 0,
@@ -10908,8 +10690,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.847Z",
     "updatedAt": "2026-02-22T18:06:04.450Z"
   },
-  {
-    "id": "rom_colosseum",
+  {"id": "rom_colosseum",
     "cityId": "rome",
     "name": "콜로세움 (Colosseum)",
     "lat": 41.8902,
@@ -10945,8 +10726,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:00.958Z",
     "updatedAt": "2026-02-24T20:00:26.131Z"
   },
-  {
-    "id": "kek-lok-si-temple",
+  {"id": "kek-lok-si-temple",
     "cityId": "penang",
     "name": "Kek Lok Si Temple",
     "lat": 5.399167,
@@ -10990,8 +10770,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:31.782Z",
     "updatedAt": "2026-02-22T18:21:29.280Z"
   },
-  {
-    "id": "prague_castle",
+  {"id": "prague_castle",
     "cityId": "prague",
     "name": "Prague Castle",
     "lat": 50.090833,
@@ -11060,8 +10839,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:28.323Z",
     "updatedAt": "2026-02-22T20:00:59.129Z"
   },
-  {
-    "id": "penang-hill",
+  {"id": "penang-hill",
     "cityId": "penang",
     "name": "Penang Hill",
     "lat": 5.422778,
@@ -11105,8 +10883,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:32.141Z",
     "updatedAt": "2026-02-22T18:21:48.925Z"
   },
-  {
-    "id": "gardens-light-show-singapore",
+  {"id": "gardens-light-show-singapore",
     "cityId": "singapore",
     "name": "Gardens by the Bay Light Show",
     "lat": 1.2816,
@@ -11170,8 +10947,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:35.469Z",
     "updatedAt": "2026-02-22T20:00:59.461Z"
   },
-  {
-    "id": "rome_restaurant_flavio_al_velavevodetto",
+  {"id": "rome_restaurant_flavio_al_velavevodetto",
     "cityId": "rome",
     "name": "Flavio al Velavevodetto",
     "lat": 41.8813,
@@ -11267,8 +11043,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:40.424Z",
     "updatedAt": "2026-02-22T18:13:05.237Z"
   },
-  {
-    "id": "trastevere-artisan-shop-rome",
+  {"id": "trastevere-artisan-shop-rome",
     "cityId": "rome",
     "name": "Trastevere Artisan Boutique",
     "lat": 41.8897,
@@ -11365,8 +11140,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.146Z",
     "updatedAt": "2026-02-22T18:29:20.332Z"
   },
-  {
-    "id": "gardens-by-the-bay",
+  {"id": "gardens-by-the-bay",
     "cityId": "singapore",
     "name": "Gardens by the Bay",
     "lat": 1.281563,
@@ -11411,8 +11185,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:31.182Z",
     "updatedAt": "2026-02-22T20:00:59.795Z"
   },
-  {
-    "id": "petronas-towers",
+  {"id": "petronas-towers",
     "cityId": "kuala-lumpur",
     "name": "Petronas Twin Towers",
     "lat": 3.157764,
@@ -11457,8 +11230,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:32.620Z",
     "updatedAt": "2026-02-22T18:29:29.942Z"
   },
-  {
-    "id": "서울특별시-demo-1",
+  {"id": "서울특별시-demo-1",
     "cityId": "seoul",
     "name": "서울특별시의 숨겨진 보석",
     "lat": 0,
@@ -11494,8 +11266,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:50:31.987Z",
     "updatedAt": "2026-02-23T02:01:02.738Z"
   },
-  {
-    "id": "thean-hou-temple",
+  {"id": "thean-hou-temple",
     "cityId": "kuala-lumpur",
     "name": "Thean Hou Temple",
     "lat": 3.1225,
@@ -11551,8 +11322,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:32.857Z",
     "updatedAt": "2026-02-22T18:13:12.062Z"
   },
-  {
-    "id": "trevi_fountain",
+  {"id": "trevi_fountain",
     "cityId": "rome",
     "name": "Trevi Fountain",
     "lat": 41.900932,
@@ -11679,8 +11449,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:24.081Z",
     "updatedAt": "2026-02-22T18:21:58.411Z"
   },
-  {
-    "id": "seoul_item_8",
+  {"id": "seoul_item_8",
     "cityId": "seoul",
     "name": "SEOUL Premium Landmark 8",
     "lat": 0,
@@ -11716,8 +11485,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.040Z",
     "updatedAt": "2026-02-22T18:11:59.025Z"
   },
-  {
-    "id": "piazza-navona-crafts-rome",
+  {"id": "piazza-navona-crafts-rome",
     "cityId": "rome",
     "name": "Piazza Navona Craft Gallery",
     "lat": 41.8992,
@@ -11814,8 +11582,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.266Z",
     "updatedAt": "2026-02-22T20:00:59.876Z"
   },
-  {
-    "id": "jeju_item_77",
+  {"id": "jeju_item_77",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Restaurant 추천 78",
     "lat": 0,
@@ -11851,8 +11618,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.794Z",
     "updatedAt": "2026-02-22T18:06:04.897Z"
   },
-  {
-    "id": "phi-phi-island-tour",
+  {"id": "phi-phi-island-tour",
     "cityId": "phuket",
     "name": "Phi Phi Islands Day Trip",
     "lat": 7.7407,
@@ -11903,8 +11669,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:39.578Z",
     "updatedAt": "2026-02-22T18:12:09.687Z"
   },
-  {
-    "id": "singapore-hawker-food-tour",
+  {"id": "singapore-hawker-food-tour",
     "cityId": "singapore",
     "name": "Hawker Center Food Tour",
     "lat": 1.2884,
@@ -11954,8 +11719,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:38.716Z",
     "updatedAt": "2026-02-22T18:14:10.380Z"
   },
-  {
-    "id": "big_ben",
+  {"id": "big_ben",
     "cityId": "london",
     "name": "Big Ben",
     "lat": 51.500786,
@@ -12070,8 +11834,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:25.655Z",
     "updatedAt": "2026-02-22T18:29:59.443Z"
   },
-  {
-    "id": "westminster_abbey",
+  {"id": "westminster_abbey",
     "cityId": "london",
     "name": "Westminster Abbey",
     "lat": 51.499361,
@@ -12128,8 +11891,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.144Z",
     "updatedAt": "2026-02-22T18:30:09.267Z"
   },
-  {
-    "id": "london_item_80",
+  {"id": "london_item_80",
     "cityId": "london",
     "name": "런던 프리미엄 Landmark 추천 81",
     "lat": 0,
@@ -12165,8 +11927,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.996Z",
     "updatedAt": "2026-02-22T18:06:04.980Z"
   },
-  {
-    "id": "klcc-aquarium",
+  {"id": "klcc-aquarium",
     "cityId": "kuala-lumpur",
     "name": "Aquaria KLCC Underwater Experience",
     "lat": 3.1542,
@@ -12217,8 +11978,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:39.456Z",
     "updatedAt": "2026-02-22T18:12:30.778Z"
   },
-  {
-    "id": "west-end-theatre-show",
+  {"id": "west-end-theatre-show",
     "cityId": "london",
     "name": "West End Theatre Show",
     "lat": 51.5114,
@@ -12279,8 +12039,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.990Z",
     "updatedAt": "2026-02-22T20:01:00.120Z"
   },
-  {
-    "id": "georgetown-street-art",
+  {"id": "georgetown-street-art",
     "cityId": "penang",
     "name": "Georgetown Street Art Tour",
     "lat": 5.4141,
@@ -12331,8 +12090,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:38.835Z",
     "updatedAt": "2026-02-22T18:12:51.616Z"
   },
-  {
-    "id": "paris_item_102",
+  {"id": "paris_item_102",
     "cityId": "paris",
     "name": "파리 프리미엄 Activity 추천 103",
     "lat": 0,
@@ -12368,8 +12126,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.441Z",
     "updatedAt": "2026-02-22T18:06:05.232Z"
   },
-  {
-    "id": "penang-national-park",
+  {"id": "penang-national-park",
     "cityId": "penang",
     "name": "Penang National Park",
     "lat": 5.46,
@@ -12430,8 +12187,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:32.499Z",
     "updatedAt": "2026-02-22T18:22:09.955Z"
   },
-  {
-    "id": "northern_lights_point",
+  {"id": "northern_lights_point",
     "cityId": "anchorage",
     "name": "Northern Lights Viewing Area",
     "lat": 64.837778,
@@ -12500,8 +12256,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:27.106Z",
     "updatedAt": "2026-02-22T18:22:21.239Z"
   },
-  {
-    "id": "kenai_fjords",
+  {"id": "kenai_fjords",
     "cityId": "anchorage",
     "name": "Kenai Fjords National Park",
     "lat": 59.909722,
@@ -12570,8 +12325,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.975Z",
     "updatedAt": "2026-02-22T20:01:00.289Z"
   },
-  {
-    "id": "st_pauls_cathedral",
+  {"id": "st_pauls_cathedral",
     "cityId": "london",
     "name": "St. Paul's Cathedral",
     "lat": 51.513845,
@@ -12628,8 +12382,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.379Z",
     "updatedAt": "2026-02-22T20:01:00.453Z"
   },
-  {
-    "id": "rome_판테온_pantheon",
+  {"id": "rome_판테온_pantheon",
     "cityId": "rome",
     "name": "판테온 (Pantheon)",
     "lat": 41.898611,
@@ -12666,8 +12419,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:36:25.089Z",
     "updatedAt": "2026-02-22T18:06:05.419Z"
   },
-  {
-    "id": "tivoli_gardens",
+  {"id": "tivoli_gardens",
     "cityId": "copenhagen",
     "name": "Tivoli Gardens",
     "lat": 55.673686,
@@ -12736,8 +12488,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:29.738Z",
     "updatedAt": "2026-02-22T20:01:00.615Z"
   },
-  {
-    "id": "whale-shark-watching-cebu",
+  {"id": "whale-shark-watching-cebu",
     "cityId": "cebu",
     "name": "Whale Shark Watching in Oslob",
     "lat": 9.5137,
@@ -12801,8 +12552,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:35.210Z",
     "updatedAt": "2026-02-22T20:01:00.700Z"
   },
-  {
-    "id": "little_mermaid",
+  {"id": "little_mermaid",
     "cityId": "copenhagen",
     "name": "The Little Mermaid",
     "lat": 55.692871,
@@ -12871,8 +12621,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:29.454Z",
     "updatedAt": "2026-02-22T18:30:48.214Z"
   },
-  {
-    "id": "seoul_정식당_서울_jungsik_seoul",
+  {"id": "seoul_정식당_서울_jungsik_seoul",
     "cityId": "seoul",
     "name": "정식당 서울 (Jungsik Seoul)",
     "lat": 37.525501,
@@ -12909,8 +12658,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:43:16.739Z",
     "updatedAt": "2026-02-22T18:06:05.602Z"
   },
-  {
-    "id": "tokyo_긴자_",
+  {"id": "tokyo_긴자_",
     "cityId": "tokyo",
     "name": "긴자 (銀座)",
     "lat": 35.6714,
@@ -12947,8 +12695,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:43:57.181Z",
     "updatedAt": "2026-02-22T18:06:05.730Z"
   },
-  {
-    "id": "sentosa-island",
+  {"id": "sentosa-island",
     "cityId": "singapore",
     "name": "Sentosa Island",
     "lat": 1.249404,
@@ -13004,8 +12751,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:31.664Z",
     "updatedAt": "2026-02-22T20:01:00.792Z"
   },
-  {
-    "id": "jeju_item_7",
+  {"id": "jeju_item_7",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Shopping 추천 8",
     "lat": 0,
@@ -13041,8 +12787,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.958Z",
     "updatedAt": "2026-02-24T20:00:26.228Z"
   },
-  {
-    "id": "national-museum-singapore",
+  {"id": "national-museum-singapore",
     "cityId": "singapore",
     "name": "National Museum of Singapore",
     "lat": 1.296667,
@@ -13098,8 +12843,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:31.545Z",
     "updatedAt": "2026-02-22T18:31:30.053Z"
   },
-  {
-    "id": "london_템스강_프라이빗_선셋_크루즈_private_thames",
+  {"id": "london_템스강_프라이빗_선셋_크루즈_private_thames",
     "cityId": "london",
     "name": "템스강 프라이빗 선셋 크루즈 (Private Thames River Cruise at Sunset)",
     "lat": 51.5074,
@@ -13136,8 +12880,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:44:31.658Z",
     "updatedAt": "2026-02-22T18:06:06.176Z"
   },
-  {
-    "id": "london_스케치_sketch_더_렉처_룸_라이브러리_the_le",
+  {"id": "london_스케치_sketch_더_렉처_룸_라이브러리_the_le",
     "cityId": "london",
     "name": "스케치 (Sketch) - 더 렉처 룸 & 라이브러리 (The Lecture Room & Library)",
     "lat": 51.5144,
@@ -13178,8 +12921,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:44:31.595Z",
     "updatedAt": "2026-02-28T13:48:31.813Z"
   },
-  {
-    "id": "jeju_item_37",
+  {"id": "jeju_item_37",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Restaurant 추천 38",
     "lat": 0,
@@ -13215,8 +12957,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.059Z",
     "updatedAt": "2026-02-25T02:01:00.530Z"
   },
-  {
-    "id": "pinang-peranakan-mansion",
+  {"id": "pinang-peranakan-mansion",
     "cityId": "penang",
     "name": "Pinang Peranakan Mansion",
     "lat": 5.420278,
@@ -13277,8 +13018,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:32.378Z",
     "updatedAt": "2026-02-22T18:31:40.384Z"
   },
-  {
-    "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_이른_아침_투어",
+  {"id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_이른_아침_투어",
     "cityId": "rome",
     "name": "바티칸 박물관 & 시스티나 예배당 프라이빗 이른 아침 투어 (Private Vatican Museums & Sistine Chapel Early Morning Tour)",
     "lat": 41.9064,
@@ -13315,8 +13055,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:45:15.116Z",
     "updatedAt": "2026-02-22T18:06:06.235Z"
   },
-  {
-    "id": "london_웨스트민스터_사원_westminster_abbey",
+  {"id": "london_웨스트민스터_사원_westminster_abbey",
     "cityId": "london",
     "name": "웨스트민스터 사원 (Westminster Abbey)",
     "lat": 51.4994,
@@ -13353,8 +13092,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:44:36.176Z",
     "updatedAt": "2026-02-22T18:06:06.299Z"
   },
-  {
-    "id": "singapore_item_104",
+  {"id": "singapore_item_104",
     "cityId": "singapore",
     "name": "싱가포르 프리미엄 Landmark 추천 105",
     "lat": 0,
@@ -13390,8 +13128,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:08.579Z",
     "updatedAt": "2026-02-25T02:01:01.759Z"
   },
-  {
-    "id": "old-phuket-town",
+  {"id": "old-phuket-town",
     "cityId": "phuket",
     "name": "Old Phuket Town",
     "lat": 7.883889,
@@ -13447,8 +13184,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:33.952Z",
     "updatedAt": "2026-02-22T18:32:00.071Z"
   },
-  {
-    "id": "seine-river-cruise",
+  {"id": "seine-river-cruise",
     "cityId": "paris",
     "name": "Seine River Dinner Cruise",
     "lat": 48.8606,
@@ -13512,8 +13248,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:34.600Z",
     "updatedAt": "2026-02-22T18:32:18.447Z"
   },
-  {
-    "id": "singapore_national_gallery_singapore",
+  {"id": "singapore_national_gallery_singapore",
     "cityId": "singapore",
     "name": "National Gallery Singapore",
     "lat": 1.2908,
@@ -13550,8 +13285,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:51:19.284Z",
     "updatedAt": "2026-02-22T18:06:06.734Z"
   },
-  {
-    "id": "london_item_50",
+  {"id": "london_item_50",
     "cityId": "london",
     "name": "런던 프리미엄 Activity 추천 51",
     "lat": 0,
@@ -13587,8 +13321,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.931Z",
     "updatedAt": "2026-02-25T03:00:42.604Z"
   },
-  {
-    "id": "jeju_비자림",
+  {"id": "jeju_비자림",
     "cityId": "jeju",
     "name": "비자림",
     "lat": 33.5133,
@@ -13625,8 +13358,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:52:26.794Z",
     "updatedAt": "2026-02-22T18:32:48.283Z"
   },
-  {
-    "id": "new-york_le_bernardin",
+  {"id": "new-york_le_bernardin",
     "cityId": "new-york",
     "name": "Le Bernardin",
     "lat": 40.7615,
@@ -13664,8 +13396,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:56:27.722Z",
     "updatedAt": "2026-02-28T13:48:40.965Z"
   },
-  {
-    "id": "jeju_밀본_제주_milbon_jeju",
+  {"id": "jeju_밀본_제주_milbon_jeju",
     "cityId": "jeju",
     "name": "밀본 제주 (Milbon Jeju)",
     "lat": 33.4862,
@@ -13702,8 +13433,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:52:26.859Z",
     "updatedAt": "2026-02-22T18:32:57.758Z"
   },
-  {
-    "id": "chinatown-night-market-kl",
+  {"id": "chinatown-night-market-kl",
     "cityId": "kuala-lumpur",
     "name": "Chinatown Night Market Walk",
     "lat": 3.1412,
@@ -13764,8 +13494,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:35.985Z",
     "updatedAt": "2026-02-22T18:33:08.527Z"
   },
-  {
-    "id": "busan_더베이_101_요트클럽_다이닝_the_bay_101_y",
+  {"id": "busan_더베이_101_요트클럽_다이닝_the_bay_101_y",
     "cityId": "busan",
     "name": "더베이 101 요트클럽 & 다이닝 (The Bay 101 Yacht Club & Dining)",
     "lat": 35.1578,
@@ -13802,8 +13531,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:34:24.383Z",
     "updatedAt": "2026-02-22T18:06:07.360Z"
   },
-  {
-    "id": "british_museum",
+  {"id": "british_museum",
     "cityId": "london",
     "name": "British Museum",
     "lat": 51.519413,
@@ -13860,8 +13588,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.261Z",
     "updatedAt": "2026-02-22T20:01:00.980Z"
   },
-  {
-    "id": "sirao-flower-garden",
+  {"id": "sirao-flower-garden",
     "cityId": "cebu",
     "name": "Sirao Flower Garden",
     "lat": 10.386111,
@@ -13922,8 +13649,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:30.828Z",
     "updatedAt": "2026-02-22T20:01:01.145Z"
   },
-  {
-    "id": "batu-caves",
+  {"id": "batu-caves",
     "cityId": "kuala-lumpur",
     "name": "Batu Caves",
     "lat": 3.237222,
@@ -13967,8 +13693,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:32.739Z",
     "updatedAt": "2026-02-22T18:22:42.154Z"
   },
-  {
-    "id": "phuket-cooking-class",
+  {"id": "phuket-cooking-class",
     "cityId": "phuket",
     "name": "Thai Cooking Class Experience",
     "lat": 7.8936,
@@ -14019,8 +13744,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:39.823Z",
     "updatedAt": "2026-02-22T18:33:46.784Z"
   },
-  {
-    "id": "seoul_권숙수_kwon_sook_soo",
+  {"id": "seoul_권숙수_kwon_sook_soo",
     "cityId": "seoul",
     "name": "권숙수 (Kwon Sook Soo)",
     "lat": 37.5255,
@@ -14057,8 +13781,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:42:52.039Z",
     "updatedAt": "2026-02-28T13:48:48.394Z"
   },
-  {
-    "id": "london_item_70",
+  {"id": "london_item_70",
     "cityId": "london",
     "name": "런던 프리미엄 Activity 추천 71",
     "lat": 0,
@@ -14094,8 +13817,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.343Z",
     "updatedAt": "2026-02-25T03:00:44.579Z"
   },
-  {
-    "id": "barcelona_디스프루타르_disfrutar",
+  {"id": "barcelona_디스프루타르_disfrutar",
     "cityId": "barcelona",
     "name": "디스프루타르 (Disfrutar)",
     "lat": 41.3888,
@@ -14132,8 +13854,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:50:28.100Z",
     "updatedAt": "2026-02-22T18:22:52.648Z"
   },
-  {
-    "id": "kl-tower",
+  {"id": "kl-tower",
     "cityId": "kuala-lumpur",
     "name": "KL Tower",
     "lat": 3.152778,
@@ -14189,8 +13910,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:33.121Z",
     "updatedAt": "2026-02-22T18:23:02.690Z"
   },
-  {
-    "id": "tokyo_시부야_스카이_시부야_스크램블_교차로_",
+  {"id": "tokyo_시부야_스카이_시부야_스크램블_교차로_",
     "cityId": "tokyo",
     "name": "시부야 스카이 & 시부야 스크램블 교차로 (渋谷スカイ & 渋谷スクランブル交差点)",
     "lat": 35.6588,
@@ -14227,8 +13947,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:43:36.899Z",
     "updatedAt": "2026-02-22T18:06:07.680Z"
   },
-  {
-    "id": "rome_item_21",
+  {"id": "rome_item_21",
     "cityId": "rome",
     "name": "로마 프리미엄 Restaurant 추천 22",
     "lat": 0,
@@ -14264,8 +13983,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.991Z",
     "updatedAt": "2026-02-23T02:00:56.891Z"
   },
-  {
-    "id": "phi-phi-islands",
+  {"id": "phi-phi-islands",
     "cityId": "phuket",
     "name": "Phi Phi Islands",
     "lat": 7.740833,
@@ -14321,8 +14039,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:34.072Z",
     "updatedAt": "2026-02-22T18:23:23.051Z"
   },
-  {
-    "id": "rome_더_판테온_로마_the_pantheon_rome",
+  {"id": "rome_더_판테온_로마_the_pantheon_rome",
     "cityId": "rome",
     "name": "더 판테온, 로마 (The Pantheon, Rome)",
     "lat": 41.8986,
@@ -14359,8 +14076,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:45:38.523Z",
     "updatedAt": "2026-02-22T18:06:07.990Z"
   },
-  {
-    "id": "rome_아로마_레스토랑_팔라초_만프레디",
+  {"id": "rome_아로마_레스토랑_팔라초_만프레디",
     "cityId": "rome",
     "name": "아로마 레스토랑 (팔라초 만프레디)",
     "lat": 41.8906,
@@ -14397,8 +14113,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:45:38.587Z",
     "updatedAt": "2026-02-22T18:06:07.865Z"
   },
-  {
-    "id": "grand_place",
+  {"id": "grand_place",
     "cityId": "brussels",
     "name": "Grand Place",
     "lat": 50.846574,
@@ -14467,8 +14182,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:28.078Z",
     "updatedAt": "2026-02-22T18:34:06.342Z"
   },
-  {
-    "id": "paris_베르사유_궁전_거울의_방_galerie_des_glac",
+  {"id": "paris_베르사유_궁전_거울의_방_galerie_des_glac",
     "cityId": "paris",
     "name": "베르사유 궁전 - 거울의 방 (Galerie des Glaces)",
     "lat": 48.8048,
@@ -14505,8 +14219,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:46:31.020Z",
     "updatedAt": "2026-02-22T18:06:08.119Z"
   },
-  {
-    "id": "jeju_item_87",
+  {"id": "jeju_item_87",
     "cityId": "jeju",
     "name": "제주특별자치도 프리미엄 Shopping 추천 88",
     "lat": 0,
@@ -14542,8 +14255,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.447Z",
     "updatedAt": "2026-02-25T12:01:07.503Z"
   },
-  {
-    "id": "paris_요트_드_파리_럭셔리_프라이빗_세느강_디너_크루즈",
+  {"id": "paris_요트_드_파리_럭셔리_프라이빗_세느강_디너_크루즈",
     "cityId": "paris",
     "name": "요트 드 파리 - 럭셔리 프라이빗 세느강 디너 크루즈",
     "lat": 48.8617,
@@ -14580,8 +14292,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:46:31.204Z",
     "updatedAt": "2026-02-22T18:06:08.245Z"
   },
-  {
-    "id": "barcelona_item_63",
+  {"id": "barcelona_item_63",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Shopping 추천 64",
     "lat": 0,
@@ -14617,8 +14328,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.809Z",
     "updatedAt": "2026-02-22T18:06:02.364Z"
   },
-  {
-    "id": "island-hopping-cebu",
+  {"id": "island-hopping-cebu",
     "cityId": "cebu",
     "name": "Island Hopping Adventure",
     "lat": 10.3157,
@@ -14682,8 +14392,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:35.091Z",
     "updatedAt": "2026-02-22T18:24:35.100Z"
   },
-  {
-    "id": "denali_national_park",
+  {"id": "denali_national_park",
     "cityId": "anchorage",
     "name": "Denali National Park",
     "lat": 63.1297,
@@ -14752,8 +14461,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.497Z",
     "updatedAt": "2026-02-22T18:24:55.528Z"
   },
-  {
-    "id": "parliament_building",
+  {"id": "parliament_building",
     "cityId": "budapest",
     "name": "Hungarian Parliament Building",
     "lat": 47.507222,
@@ -14822,8 +14530,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:28.587Z",
     "updatedAt": "2026-02-22T18:25:15.316Z"
   },
-  {
-    "id": "musee_dorsay",
+  {"id": "musee_dorsay",
     "cityId": "paris",
     "name": "Musée d'Orsay",
     "lat": 48.86,
@@ -14880,8 +14587,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:25.538Z",
     "updatedAt": "2026-02-22T18:34:37.430Z"
   },
-  {
-    "id": "rome_item_31",
+  {"id": "rome_item_31",
     "cityId": "rome",
     "name": "로마 프리미엄 Shopping 추천 32",
     "lat": 0,
@@ -14917,8 +14623,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.655Z",
     "updatedAt": "2026-02-23T02:00:57.739Z"
   },
-  {
-    "id": "penang-hill-cable-car",
+  {"id": "penang-hill-cable-car",
     "cityId": "penang",
     "name": "Penang Hill Funicular Railway Experience",
     "lat": 5.4239,
@@ -14969,8 +14674,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:38.955Z",
     "updatedAt": "2026-02-22T18:29:39.615Z"
   },
-  {
-    "id": "batu-caves-tour",
+  {"id": "batu-caves-tour",
     "cityId": "kuala-lumpur",
     "name": "Batu Caves Temple Tour",
     "lat": 3.2379,
@@ -15021,8 +14725,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:39.214Z",
     "updatedAt": "2026-02-22T18:29:49.972Z"
   },
-  {
-    "id": "atomium",
+  {"id": "atomium",
     "cityId": "brussels",
     "name": "Atomium",
     "lat": 50.894941,
@@ -15091,8 +14794,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:27.961Z",
     "updatedAt": "2026-02-22T18:34:55.390Z"
   },
-  {
-    "id": "paris_item_2",
+  {"id": "paris_item_2",
     "cityId": "paris",
     "name": "파리 프리미엄 Activity 추천 3",
     "lat": 0,
@@ -15128,8 +14830,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.582Z",
     "updatedAt": "2026-02-22T18:05:59.777Z"
   },
-  {
-    "id": "vatican-gifts-rome",
+  {"id": "vatican-gifts-rome",
     "cityId": "rome",
     "name": "Vatican Treasures Shop",
     "lat": 41.9022,
@@ -15226,8 +14927,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:36.876Z",
     "updatedAt": "2026-02-22T18:26:22.966Z"
   },
-  {
-    "id": "paris_restaurant_septime",
+  {"id": "paris_restaurant_septime",
     "cityId": "paris",
     "name": "Septime",
     "lat": 48.8532,
@@ -15277,8 +14977,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:40.794Z",
     "updatedAt": "2026-02-23T02:00:58.073Z"
   },
-  {
-    "id": "taoist-temple-cebu",
+  {"id": "taoist-temple-cebu",
     "cityId": "cebu",
     "name": "Taoist Temple",
     "lat": 10.346667,
@@ -15339,8 +15038,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:30.580Z",
     "updatedAt": "2026-02-22T18:35:24.656Z"
   },
-  {
-    "id": "부산광역시-demo-1",
+  {"id": "부산광역시-demo-1",
     "cityId": "busan",
     "name": "부산광역시의 숨겨진 보석",
     "lat": 0,
@@ -15376,8 +15074,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.713Z",
     "updatedAt": "2026-02-22T18:15:49.938Z"
   },
-  {
-    "id": "tokyo_item_89",
+  {"id": "tokyo_item_89",
     "cityId": "tokyo",
     "name": "TOKYO Premium Restaurant 89",
     "lat": 0,
@@ -15413,8 +15110,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.580Z",
     "updatedAt": "2026-02-22T18:26:53.494Z"
   },
-  {
-    "id": "nyhavn",
+  {"id": "nyhavn",
     "cityId": "copenhagen",
     "name": "Nyhavn",
     "lat": 55.680087,
@@ -15483,8 +15179,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:29.612Z",
     "updatedAt": "2026-02-22T18:35:15.880Z"
   },
-  {
-    "id": "busan_item_6",
+  {"id": "busan_item_6",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Activity 추천 7",
     "lat": 0,
@@ -15520,8 +15215,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:01.893Z",
     "updatedAt": "2026-02-23T19:00:36.349Z"
   },
-  {
-    "id": "tokyo_item_59",
+  {"id": "tokyo_item_59",
     "cityId": "tokyo",
     "name": "TOKYO Premium Shopping 59",
     "lat": 0,
@@ -15557,8 +15251,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:05.512Z",
     "updatedAt": "2026-02-22T18:20:55.965Z"
   },
-  {
-    "id": "nyonya-cooking-class",
+  {"id": "nyonya-cooking-class",
     "cityId": "penang",
     "name": "Traditional Nyonya Cooking Class",
     "lat": 5.4164,
@@ -15609,8 +15302,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:39.077Z",
     "updatedAt": "2026-02-22T18:27:13.932Z"
   },
-  {
-    "id": "jeju_한라산_국립공원_어승생악_탐방로",
+  {"id": "jeju_한라산_국립공원_어승생악_탐방로",
     "cityId": "jeju",
     "name": "한라산 국립공원 (어승생악 탐방로)",
     "lat": 33.3986,
@@ -15647,8 +15339,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:52:26.606Z",
     "updatedAt": "2026-02-22T18:31:08.602Z"
   },
-  {
-    "id": "rome_item_41",
+  {"id": "rome_item_41",
     "cityId": "rome",
     "name": "로마 프리미엄 Restaurant 추천 42",
     "lat": 0,
@@ -15684,8 +15375,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.338Z",
     "updatedAt": "2026-02-23T20:00:52.488Z"
   },
-  {
-    "id": "patong-beach",
+  {"id": "patong-beach",
     "cityId": "phuket",
     "name": "Patong Beach",
     "lat": 7.895,
@@ -15729,8 +15419,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:33.528Z",
     "updatedAt": "2026-02-22T18:27:32.812Z"
   },
-  {
-    "id": "cebu-heritage-monument",
+  {"id": "cebu-heritage-monument",
     "cityId": "cebu",
     "name": "Cebu Heritage Monument",
     "lat": 10.294167,
@@ -15791,8 +15480,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:30.700Z",
     "updatedAt": "2026-02-22T18:36:13.379Z"
   },
-  {
-    "id": "busan_item_66",
+  {"id": "busan_item_66",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Activity 추천 67",
     "lat": 0,
@@ -15828,8 +15516,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:06.084Z",
     "updatedAt": "2026-02-23T20:00:52.846Z"
   },
-  {
-    "id": "marina-bay-sands",
+  {"id": "marina-bay-sands",
     "cityId": "singapore",
     "name": "Marina Bay Sands",
     "lat": 1.2837,
@@ -15874,8 +15561,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:30.946Z",
     "updatedAt": "2026-02-22T18:36:32.946Z"
   },
-  {
-    "id": "rome_restaurant_da_enzo",
+  {"id": "rome_restaurant_da_enzo",
     "cityId": "rome",
     "name": "Da Enzo al 29",
     "lat": 41.8868,
@@ -15971,8 +15657,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:40.305Z",
     "updatedAt": "2026-02-22T18:28:13.710Z"
   },
-  {
-    "id": "tokyo_팀랩_플래닛_도쿄_dmm_teamlab_planets_",
+  {"id": "tokyo_팀랩_플래닛_도쿄_dmm_teamlab_planets_",
     "cityId": "tokyo",
     "name": "팀랩 플래닛 도쿄 DMM (teamLab Planets TOKYO DMM)",
     "lat": 35.6601,
@@ -16009,8 +15694,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:43:57.115Z",
     "updatedAt": "2026-02-23T20:00:52.862Z"
   },
-  {
-    "id": "paris_restaurant_chez_janou",
+  {"id": "paris_restaurant_chez_janou",
     "cityId": "paris",
     "name": "Chez Janou",
     "lat": 48.8554,
@@ -16061,8 +15745,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:41.029Z",
     "updatedAt": "2026-02-22T18:28:33.091Z"
   },
-  {
-    "id": "vatican-night-tour",
+  {"id": "vatican-night-tour",
     "cityId": "rome",
     "name": "Vatican Museums Night Tour",
     "lat": 41.9065,
@@ -16168,8 +15851,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:34.312Z",
     "updatedAt": "2026-02-22T18:32:09.434Z"
   },
-  {
-    "id": "busan_해동용궁사_haedong_yonggungsa_templ",
+  {"id": "busan_해동용궁사_haedong_yonggungsa_templ",
     "cityId": "busan",
     "name": "해동용궁사 (Haedong Yonggungsa Temple)",
     "lat": 35.216,
@@ -16206,8 +15888,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:34:24.253Z",
     "updatedAt": "2026-02-23T02:01:01.063Z"
   },
-  {
-    "id": "batu-caves-tour-kl",
+  {"id": "batu-caves-tour-kl",
     "cityId": "kuala-lumpur",
     "name": "Batu Caves Cultural Tour",
     "lat": 3.2379,
@@ -16268,8 +15949,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:35.835Z",
     "updatedAt": "2026-02-22T18:36:53.700Z"
   },
-  {
-    "id": "london_restaurant_st_john",
+  {"id": "london_restaurant_st_john",
     "cityId": "london",
     "name": "St. JOHN",
     "lat": 51.5204,
@@ -16319,8 +15999,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:41.508Z",
     "updatedAt": "2026-02-22T18:29:02.428Z"
   },
-  {
-    "id": "new-york_item_45",
+  {"id": "new-york_item_45",
     "cityId": "new-york",
     "name": "뉴욕 프리미엄 Restaurant 추천 46",
     "lat": 0,
@@ -16356,8 +16035,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.604Z",
     "updatedAt": "2026-02-23T02:00:59.068Z"
   },
-  {
-    "id": "merlion-park",
+  {"id": "merlion-park",
     "cityId": "singapore",
     "name": "Merlion Park",
     "lat": 1.286915,
@@ -16402,8 +16080,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:31.065Z",
     "updatedAt": "2026-02-22T18:37:03.252Z"
   },
-  {
-    "id": "rome-cooking-class",
+  {"id": "rome-cooking-class",
     "cityId": "rome",
     "name": "Roman Cuisine Cooking Class",
     "lat": 41.8967,
@@ -16506,8 +16183,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:36.627Z",
     "updatedAt": "2026-02-22T18:37:13.751Z"
   },
-  {
-    "id": "colosseum-memories-rome",
+  {"id": "colosseum-memories-rome",
     "cityId": "rome",
     "name": "Colosseum Memories",
     "lat": 41.8902,
@@ -16604,8 +16280,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.005Z",
     "updatedAt": "2026-02-22T18:37:23.769Z"
   },
-  {
-    "id": "싱가포르-demo-1",
+  {"id": "싱가포르-demo-1",
     "cityId": "singapore",
     "name": "싱가포르의 숨겨진 보석",
     "lat": 0,
@@ -16641,8 +16316,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.583Z",
     "updatedAt": "2026-02-22T18:06:00.750Z"
   },
-  {
-    "id": "seoul_item_38",
+  {"id": "seoul_item_38",
     "cityId": "seoul",
     "name": "SEOUL Premium Activity 38",
     "lat": 0,
@@ -16678,8 +16352,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:04.124Z",
     "updatedAt": "2026-02-22T18:23:35.598Z"
   },
-  {
-    "id": "paris_restaurant_le_comptoir",
+  {"id": "paris_restaurant_le_comptoir",
     "cityId": "paris",
     "name": "Le Comptoir du Relais",
     "lat": 48.8517,
@@ -16730,8 +16403,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:40.663Z",
     "updatedAt": "2026-02-22T18:37:45.163Z"
   },
-  {
-    "id": "mendenhall_glacier",
+  {"id": "mendenhall_glacier",
     "cityId": "anchorage",
     "name": "Mendenhall Glacier",
     "lat": 58.441667,
@@ -16800,8 +16472,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:26.617Z",
     "updatedAt": "2026-02-22T18:30:18.332Z"
   },
-  {
-    "id": "부산광역시-demo-2",
+  {"id": "부산광역시-demo-2",
     "cityId": "busan",
     "name": "부산광역시의 맛집 골목",
     "lat": 0.1,
@@ -16837,8 +16508,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.778Z",
     "updatedAt": "2026-02-22T18:16:09.339Z"
   },
-  {
-    "id": "파리-demo-1",
+  {"id": "파리-demo-1",
     "cityId": "paris",
     "name": "파리의 숨겨진 보석",
     "lat": 0,
@@ -16874,8 +16544,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.325Z",
     "updatedAt": "2026-02-24T02:00:39.010Z"
   },
-  {
-    "id": "charles_bridge",
+  {"id": "charles_bridge",
     "cityId": "prague",
     "name": "Charles Bridge",
     "lat": 50.086389,
@@ -16944,8 +16613,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:28.202Z",
     "updatedAt": "2026-02-22T18:30:28.301Z"
   },
-  {
-    "id": "chain_bridge",
+  {"id": "chain_bridge",
     "cityId": "budapest",
     "name": "Chain Bridge",
     "lat": 47.498611,
@@ -17014,8 +16682,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:28.718Z",
     "updatedAt": "2026-02-22T18:30:38.693Z"
   },
-  {
-    "id": "london_웨스트민스터_애비_westminster_abbey",
+  {"id": "london_웨스트민스터_애비_westminster_abbey",
     "cityId": "london",
     "name": "웨스트민스터 애비 (Westminster Abbey)",
     "lat": 51.4994,
@@ -17052,8 +16719,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:44:31.532Z",
     "updatedAt": "2026-02-24T03:00:59.160Z"
   },
-  {
-    "id": "paris_item_32",
+  {"id": "paris_item_32",
     "cityId": "paris",
     "name": "파리 프리미엄 Landmark 추천 33",
     "lat": 0,
@@ -17089,8 +16755,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.720Z",
     "updatedAt": "2026-02-22T18:06:01.194Z"
   },
-  {
-    "id": "spanish_steps",
+  {"id": "spanish_steps",
     "cityId": "rome",
     "name": "Spanish Steps",
     "lat": 41.905991,
@@ -17213,8 +16878,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:24.327Z",
     "updatedAt": "2026-02-22T18:30:58.350Z"
   },
-  {
-    "id": "phuket-snorkeling-tour",
+  {"id": "phuket-snorkeling-tour",
     "cityId": "phuket",
     "name": "Coral Island Snorkeling Tour",
     "lat": 7.7394,
@@ -17275,8 +16939,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:36.152Z",
     "updatedAt": "2026-02-22T18:38:28.398Z"
   },
-  {
-    "id": "gardens-by-the-bay-night",
+  {"id": "gardens-by-the-bay-night",
     "cityId": "singapore",
     "name": "Gardens by the Bay Night Tour",
     "lat": 1.2816,
@@ -17326,8 +16989,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:38.478Z",
     "updatedAt": "2026-02-22T18:38:57.602Z"
   },
-  {
-    "id": "싱가포르-demo-2",
+  {"id": "싱가포르-demo-2",
     "cityId": "singapore",
     "name": "싱가포르의 맛집 골목",
     "lat": 0.1,
@@ -17363,8 +17025,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:47.647Z",
     "updatedAt": "2026-02-24T03:01:01.761Z"
   },
-  {
-    "id": "paris-catacombs-tour",
+  {"id": "paris-catacombs-tour",
     "cityId": "paris",
     "name": "Paris Catacombs Tour",
     "lat": 48.8338,
@@ -17425,8 +17086,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:11:37.623Z",
     "updatedAt": "2026-02-22T18:38:47.975Z"
   },
-  {
-    "id": "busan_item_16",
+  {"id": "busan_item_16",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Landmark 추천 17",
     "lat": 0,
@@ -17462,8 +17122,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:02.605Z",
     "updatedAt": "2026-02-23T02:00:59.717Z"
   },
-  {
-    "id": "뉴욕-demo-2",
+  {"id": "뉴욕-demo-2",
     "cityId": "new-york",
     "name": "뉴욕의 맛집 골목",
     "lat": 0.1,
@@ -17499,8 +17158,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T12:57:48.037Z",
     "updatedAt": "2026-02-22T18:16:40.419Z"
   },
-  {
-    "id": "barcelona_item_33",
+  {"id": "barcelona_item_33",
     "cityId": "barcelona",
     "name": "바르셀로나 프리미엄 Restaurant 추천 34",
     "lat": 0,
@@ -17536,8 +17194,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:03.783Z",
     "updatedAt": "2026-02-22T18:06:01.643Z"
   },
-  {
-    "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_새벽_투어",
+  {"id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_새벽_투어",
     "cityId": "rome",
     "name": "바티칸 박물관 & 시스티나 예배당 프라이빗 새벽 투어",
     "lat": 41.9065,
@@ -17574,8 +17231,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-14T00:45:38.651Z",
     "updatedAt": "2026-02-24T12:00:43.975Z"
   },
-  {
-    "id": "barcelona_사그라다_파밀리아_sagrada_familia",
+  {"id": "barcelona_사그라다_파밀리아_sagrada_familia",
     "cityId": "barcelona",
     "name": "사그라다 파밀리아 (Sagrada Familia)",
     "lat": 41.4036,
@@ -17612,8 +17268,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-13T13:50:28.035Z",
     "updatedAt": "2026-02-22T18:06:01.955Z"
   },
-  {
-    "id": "busan_item_86",
+  {"id": "busan_item_86",
     "cityId": "busan",
     "name": "부산광역시 프리미엄 Activity 추천 87",
     "lat": 0,
@@ -17649,8 +17304,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.382Z",
     "updatedAt": "2026-02-22T18:06:03.061Z"
   },
-  {
-    "id": "seoul_item_88",
+  {"id": "seoul_item_88",
     "cityId": "seoul",
     "name": "SEOUL Premium Landmark 88",
     "lat": 0,
@@ -17686,8 +17340,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.513Z",
     "updatedAt": "2026-02-22T18:26:14.497Z"
   },
-  {
-    "id": "paris_item_92",
+  {"id": "paris_item_92",
     "cityId": "paris",
     "name": "파리 프리미엄 Landmark 추천 93",
     "lat": 0,
@@ -17723,8 +17376,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": "2026-02-12T13:05:07.779Z",
     "updatedAt": "2026-02-22T18:06:03.385Z"
   },
-  {
-    "id": "rome_item_101",
+  {"id": "rome_item_101",
     "cityId": "rome",
     "name": "로마 프리미엄 Restaurant 추천 102",
     "lat": 0,
