@@ -9,7 +9,18 @@ export const CITIES: City[] = [
     "lng": 100.3327,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Welcome to Penang",
+        "subTitle": "The Pearl of the Orient: Heritage and Gastronomy",
+        "heroImage": "/images/countries/malaysia_luxury.png"
+      },
+      "ko": {
+        "title": "동양의 진주, 페낭에 오신 것을 환영합니다",
+        "subTitle": "유네스코 유산과 식도락의 천국",
+        "heroImage": "/images/countries/malaysia_luxury.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:38.317Z"),
     "updatedAt": new Date("2026-02-22T18:05:45.060Z")
@@ -22,7 +33,18 @@ export const CITIES: City[] = [
     "lng": 101.6869,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Discover Kuala Lumpur",
+        "subTitle": "Modern Elegance and Tropical Charm",
+        "heroImage": "/images/countries/malaysia_luxury.png"
+      },
+      "ko": {
+        "title": "쿠알라룸푸르를 발견하세요",
+        "subTitle": "현대적인 우아함과 열대의 매력",
+        "heroImage": "/images/countries/malaysia_luxury.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:38.447Z"),
     "updatedAt": new Date("2026-02-22T18:05:45.145Z")
@@ -193,12 +215,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Welcome to the Eternal City, Rome",
         "subTitle": "Your Offline Guide to Rome's History and Art",
-        "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200"
+        "heroImage": "/images/cities/rome.jpg"
       },
       "ko": {
         "title": "영원한 도시, 로마에 오신 것을 환영합니다",
         "subTitle": "인터넷 없이도 즐기는 로마의 역사와 예술 가이드",
-        "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200"
+        "heroImage": "/images/cities/rome.jpg"
       }
     },
     "defaultGuideId": null,
@@ -213,7 +235,18 @@ export const CITIES: City[] = [
     "lng": 2.3522,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Bienvenue à Paris",
+        "subTitle": "The City of Light and Art",
+        "heroImage": "/images/countries/france_luxury.png"
+      },
+      "ko": {
+        "title": "빛의 도시, 파리에 오신 것을 환영합니다",
+        "subTitle": "예술과 낭만이 가득한 시간",
+        "heroImage": "/images/countries/france_luxury.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:36.293Z"),
     "updatedAt": new Date("2026-02-22T18:05:44.185Z")
@@ -571,12 +604,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Paradise Found: Cebu City",
         "subTitle": "Beautiful Island of Beaches and Heritage Sites",
-        "heroImage": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200"
+        "heroImage": "/images/cities/cebu.jpg"
       },
       "ko": {
         "title": "에메랄드빛 낙원, 세부",
         "subTitle": "해변과 역사적 유산이 공존하는 아름다운 섬",
-        "heroImage": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200"
+        "heroImage": "/images/cities/cebu.jpg"
       }
     },
     "defaultGuideId": null,
@@ -617,7 +650,18 @@ export const CITIES: City[] = [
         }
       }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Singapore: The Future City",
+        "subTitle": "Unparalleled Gardens and High-Tech Luxury",
+        "heroImage": "/images/cities/singapore.jpg"
+      },
+      "ko": {
+        "title": "미래 도시, 싱가포르",
+        "subTitle": "차원이 다른 정원과 하이테크 럭셔리",
+        "heroImage": "/images/cities/singapore.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:38.190Z"),
     "updatedAt": new Date("2026-02-22T18:05:44.996Z")
@@ -656,11 +700,24 @@ export const CITIES: City[] = [
     "lng": 139.6503,
     "zoom": 11,
     "cruisePort": {
-      "name": "Yokohama Port",
-      "lat": 35.4542,
-      "lng": 139.6472
+      "portName": "Yokohama Port",
+      "portCoordinates": {
+        "lat": 35.4542,
+        "lng": 139.6472
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Tokyo: The Electric City",
+        "subTitle": "Bustling Streets and Hidden Shrines",
+        "heroImage": "/images/landmarks/sensoji_nanobanana.png"
+      },
+      "ko": {
+        "title": "도쿄: 일렉트릭 시티",
+        "subTitle": "분주한 거리와 숨겨진 신사들",
+        "heroImage": "/images/landmarks/sensoji_nanobanana.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T12:57:20.925Z"),
     "updatedAt": new Date("2026-02-22T18:05:45.331Z")
@@ -673,11 +730,24 @@ export const CITIES: City[] = [
     "lng": 129.0756,
     "zoom": 11,
     "cruisePort": {
-      "name": "Busan International Cruise Terminal",
-      "lat": 35.0987,
-      "lng": 129.0403
+      "portName": "Busan International Cruise Terminal",
+      "portCoordinates": {
+        "lat": 35.0987,
+        "lng": 129.0403
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Busan: Dynamic Korea",
+        "subTitle": "Beautiful Beaches and Coastal Charms",
+        "heroImage": "/images/countries/korea_luxury.png"
+      },
+      "ko": {
+        "title": "부산: 다이나믹 코리아",
+        "subTitle": "아름다운 해변과 해안의 매력",
+        "heroImage": "/images/countries/korea_luxury.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T12:57:20.997Z"),
     "updatedAt": new Date("2026-02-22T18:05:45.390Z")
@@ -690,7 +760,18 @@ export const CITIES: City[] = [
     "lng": 4.3517,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Brussels: Heart of Europe",
+        "subTitle": "Sweet Delights and Gothic Grandeur",
+        "heroImage": "/images/cities/brussels.jpg"
+      },
+      "ko": {
+        "title": "브뤼셀: 유럽의 심장",
+        "subTitle": "달콤한 즐거움과 고딕 양식의 웅장함",
+        "heroImage": "/images/cities/brussels.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:37.160Z"),
     "updatedAt": new Date("2026-02-22T18:05:44.510Z")
@@ -703,7 +784,18 @@ export const CITIES: City[] = [
     "lng": 14.4378,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Prague: The City of a Hundred Spires",
+        "subTitle": "Enchanting Medieval Architecture",
+        "heroImage": "/images/cities/prague.jpg"
+      },
+      "ko": {
+        "title": "프라하: 백 개의 첨탑 도시",
+        "subTitle": "매혹적인 중세 건축의 향연",
+        "heroImage": "/images/cities/prague.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:37.287Z"),
     "updatedAt": new Date("2026-02-22T18:05:44.574Z")
@@ -716,11 +808,24 @@ export const CITIES: City[] = [
     "lng": 126.5312,
     "zoom": 10,
     "cruisePort": {
-      "name": "Jeju Cruise Terminal",
-      "lat": 33.5283,
-      "lng": 126.5412
+      "portName": "Jeju Cruise Terminal",
+      "portCoordinates": {
+        "lat": 33.5283,
+        "lng": 126.5412
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Jeju Island: Volcanic Paradise",
+        "subTitle": "Hallasan Mountain and Pristine Nature",
+        "heroImage": "/images/countries/korea.png"
+      },
+      "ko": {
+        "title": "제주도: 화산의 낙원",
+        "subTitle": "한라산과 태고의 자연",
+        "heroImage": "/images/countries/korea.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T12:57:21.056Z"),
     "updatedAt": new Date("2026-02-22T18:05:45.452Z")
@@ -733,11 +838,24 @@ export const CITIES: City[] = [
     "lng": -74.006,
     "zoom": 11,
     "cruisePort": {
-      "name": "Manhattan Cruise Terminal",
-      "lat": 40.7695,
-      "lng": -73.9972
+      "portName": "Manhattan Cruise Terminal",
+      "portCoordinates": {
+        "lat": 40.7695,
+        "lng": -73.9972
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Welcome to New York City",
+        "subTitle": "The City That Never Sleeps",
+        "heroImage": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1200"
+      },
+      "ko": {
+        "title": "뉴욕 시티에 오신 것을 환영합니다",
+        "subTitle": "잠들지 않는 도시",
+        "heroImage": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1200"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T12:57:21.116Z"),
     "updatedAt": new Date("2026-02-22T18:05:45.512Z")
@@ -750,11 +868,24 @@ export const CITIES: City[] = [
     "lng": 100.5018,
     "zoom": 11,
     "cruisePort": {
-      "name": "Laem Chabang Port",
-      "lat": 13.0801,
-      "lng": 100.9103
+      "portName": "Laem Chabang Port",
+      "portCoordinates": {
+        "lat": 13.0801,
+        "lng": 100.9103
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Bangkok: The Vibrant Capital",
+        "subTitle": "Golden Temples and Bustling Markets",
+        "heroImage": "/images/countries/thailand.png"
+      },
+      "ko": {
+        "title": "방콕: 활기찬 수도",
+        "subTitle": "황금빛 사원과 분주한 시장",
+        "heroImage": "/images/countries/thailand.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T12:57:21.177Z"),
     "updatedAt": new Date("2026-02-22T18:05:45.575Z")
@@ -791,7 +922,18 @@ export const CITIES: City[] = [
         }
       }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Welcome to Stockholm",
+        "subTitle": "Venice of the North: Design and History",
+        "heroImage": "/images/cities/stockholm.jpg"
+      },
+      "ko": {
+        "title": "스톡홀름에 오신 것을 환영합니다",
+        "subTitle": "북유럽의 베네치아: 디자인과 역사",
+        "heroImage": "/images/cities/stockholm.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:37.665Z"),
     "updatedAt": new Date("2026-02-22T18:05:44.755Z")

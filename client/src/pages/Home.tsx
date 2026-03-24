@@ -109,6 +109,7 @@ import LoginDialog from '@/components/LoginDialog';
 import SaveRouteDialog from '@/components/SaveRouteDialog';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import InstallPrompt from '@/components/InstallPrompt';
+import PremiumOnboarding from '@/components/PremiumOnboarding';
 import UpdatePrompt from '@/components/UpdatePrompt';
 import AchievementToast from '@/components/AchievementToast';
 import CreatorDashboard from '@/components/CreatorDashboard';
@@ -165,6 +166,9 @@ export default function Home() {
   const [showCruisePort, setShowCruisePort] = useState(false);
   const [showAIRecommend, setShowAIRecommend] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<string | null>(null);
+  // [프리미엄 온보딩] AI 추천 일정 적용 직후 노출됩니다.
+  const [showPremiumOnboarding, setShowPremiumOnboarding] = useState(false);
+  const [premiumOnboardingCount, setPremiumOnboardingCount] = useState(0);
   const [activeAchievement, setActiveAchievement] = useState<Landmark | null>(null);
 
   // New features state
@@ -1650,7 +1654,30 @@ export default function Home() {
             setSelectedLandmark(landmark);
             setShowAIRecommend(false);
           }}
+          onTourApplied={(count) => {
+            // [프리미엄 온보딩] AI 추천 일정 적용 완료 직후 프리미엄 다이얼로그를 표시합니다.
+            // 학생들에게: 사용자가 AI 가치를 체감한 바로 이 순간을 활용하는 '계단 마케팅'입니다.
+            setPremiumOnboardingCount(count);
+            setShowPremiumOnboarding(true);
+          }}
         />
+
+        {
+          /* [프리미엄 온보딩] AI 추천 일정 적용 직후 노출됩니다. */
+          showPremiumOnboarding && (
+            <PremiumOnboarding
+              isOpen={showPremiumOnboarding}
+              onClose={() => setShowPremiumOnboarding(false)}
+              onStartPremium={() => {
+                setShowPremiumOnboarding(false);
+                // 프리미엄 투어 시작: StartupDialog를 다시 엽니다.
+                setShowStartupDialog(true);
+              }}
+              selectedLanguage={selectedLanguage}
+              recommendedCount={premiumOnboardingCount}
+            />
+          )
+        }
 
         {/* [교수님 지시 | 2026-02-27] 자동 랜딩 다이얼로그(Welcome Landing Page)를 비활성화합니다. 
              사용자가 직접 탐색하는 경험을 우선시하며, 필요 시 수동으로 활성화할 수 있도록 리마크 처리했습니다. */}

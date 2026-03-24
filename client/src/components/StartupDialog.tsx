@@ -94,7 +94,7 @@ export function StartupDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={() => { }}>
-      <DialogContent className="max-w-[400px] w-[90vw] p-0 overflow-hidden border-0 bg-white rounded-[2.5rem] shadow-2xl h-[90vh] max-h-[850px] flex flex-col justify-between [&>button]:hidden">
+      <DialogContent className="max-w-[400px] w-[90vw] p-0 overflow-hidden border border-white/40 bg-white/90 backdrop-blur-3xl rounded-[2.5rem] shadow-glass h-[90vh] max-h-[850px] flex flex-col justify-between [&>button]:hidden ring-1 ring-black/5">
         <DialogTitle className="sr-only">Premium Tour Onboarding</DialogTitle>
         <DialogDescription className="sr-only">Experience the world without boundaries</DialogDescription>
 
@@ -105,7 +105,7 @@ export function StartupDialog({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="flex-1 flex flex-col items-center bg-[#F8F9FA]/50 backdrop-blur-sm overflow-y-auto"
+              className="flex-1 flex flex-col items-center bg-white/40 backdrop-blur-2xl overflow-y-auto"
             >
               {/* Top Branding Section */}
               <div className="w-full bg-gradient-to-br from-[#E85D36] to-[#ff7e5a] p-8 pb-10 flex flex-col items-center rounded-b-[3.5rem] shadow-2xl text-white relative shrink-0">

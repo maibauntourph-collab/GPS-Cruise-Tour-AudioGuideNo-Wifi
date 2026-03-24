@@ -34,6 +34,8 @@ interface AIRecommendDialogProps {
   userRegion?: string;
   onAddToTour: (landmarks: Landmark[]) => void;
   onSelectLandmark: (landmark: Landmark) => void;
+  /** [프리미엄 온보딩] AI 추천 일정 적용 직후 호출됩니다. recommendedCount를 전달합니다. */
+  onTourApplied?: (recommendedCount: number) => void;
 }
 
 interface TourRecommendation {
@@ -57,7 +59,8 @@ export default function AIRecommendDialog({
   userPosition,
   userRegion,
   onAddToTour,
-  onSelectLandmark
+  onSelectLandmark,
+  onTourApplied // [프리미엄 온보딩] 추천 일정 적용 완료 콜백
 }: AIRecommendDialogProps) {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -155,6 +158,11 @@ export default function AIRecommendDialog({
         description: `${recommendedLandmarks.length} ${t('landmarksAddedToTour', selectedLanguage)}`,
       });
       onClose();
+      // [프리미엄 온보딩] 투어 적용 완료 직후, 추천 명소 수와 함께 콜백을 발화합니다.
+      // 학생들에게: 이 시점이 바로 사용자가 AI 가치를 체감한 'Aha! Moment'입니다!
+      if (onTourApplied) {
+        onTourApplied(recommendedLandmarks.length);
+      }
     }
   };
 
