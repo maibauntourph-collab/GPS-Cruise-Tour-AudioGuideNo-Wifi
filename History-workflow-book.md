@@ -828,3 +828,28 @@ npx tsx server/scripts/update_gps_precision.ts
 *   **토큰 사용**: 약 15,000 Tokens (고밀도 UI 및 로직 수정)
 
 ---
+
+## Chapter 22: UI Recommendation & Study Guide Refinement (2026-03-24)
+
+### 1. 주문 (Order)
+*   사용자가 가장 선호하는 다운로드 플랜에 '추천(Recommended)' 표시 추가.
+*   `README_STUDY.md`에 최신 선택적 다운로드 로직 설명 반영.
+*   전체 애플리케이션 빌드 및 배포(`npm run deploy`).
+
+### 2. 진행 사항 (Progress)
+*   **`StartupDialog.tsx` 시각적 개선**: '유럽 전체투어(Grand Europe)' 플랜에 "TOP" 뱃지 및 강조 효과 적용하여 사용자 선택 유도.
+*   **`README_STUDY.md` 업데이트**: `useOfflineDownload`의 스코프 필터링(Global, Europe, Asia, Country) 및 배치 처리 로직을 학생용으로 상세 기술.
+*   **배포 프로세스 실행**: `npm run deploy`를 통해 프로덕션 빌드 및 Cloudflare Workers 배포 진행.
+*   **Git 최종 배포**: 모든 수정 사항을 `main` 브랜치에 푸시 완료.
+
+### 3. 결과 (Result)
+*   사용자에게 가장 적합한 옵션을 명확히 제시하여 의사결정을 돕는 UX 완성.
+*   교육용 문서인 `README_STUDY.md`를 통해 프로젝트 가이드 코드의 학습 가치 증대.
+*   최종 안정화된 버전을 프로덕션 환경에 성공적으로 배포.
+
+### 4. 사용 토큰 및 에이전트 보고
+*   **수행 에이전트**: Server Park (백엔드/배포), Designer Kim (UI/UX)
+*   **MCP 사용**: `sequential-thinking` (설계)
+*   **토큰 사용**: 약 10,000 Tokens (빌드 및 배포 로그 포함)
+
+---
