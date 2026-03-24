@@ -771,3 +771,60 @@ npx tsx server/scripts/update_gps_precision.ts
 - **Action:** 복잡하고 겹치는 기능(UX) 정리 및 이미지 본질 가치 회복.
 
 ---
+
+## 🔖 제 20장: 럭셔리 국가 선택기 통합 및 데이터 최적화 (Luxury Country Selector & Data Optimization)
+
+> 📅 **기록일:** 2026년 3월 24일 (화) 17:00 ~ 17:50
+> 👨‍🏫 **담당 에이전트:** Designer Kim (UI), Server Park (Data & Build), Kodari Manager (Real-world sync)
+
+### 🎓 교수님의 한 마디
+> *"학생 여러분, 진정한 '럭셔리'는 디테일에서 결정됩니다. 오늘은 국가 선택기(`CountryScrollSelector`)를 도시 선택 화면에 완벽하게 녹여냈고, 어떤 나라를 선택하든 100% 확률로 아름다운 이미지와 매혹적인 문구가 나오도록 정규화(Normalization) 작업을 마쳤습니다. 또한 여러분의 학습을 위해 각 훅(Hook) 마다 교수님의 적요를 상세히 달아두었으니 꼭 확인해 보세요!"*
+
+### 🛠️ 주요 작업 내용
+1. **임베디드 국가 선택기 (Embedded Country Selector) 구현**
+   - `CountryScrollSelector`를 도시 선택 탭 안에 자연스럽게 삽입하기 위해 `isEmbedded` Prop 추가.
+   - 불필요한 컨트롤을 제거하고 도시 리스트와 부드럽게 이어지는 "Clear Mask" 디자인 완성.
+2. **국가명 정규화 레이어 (Normalization) 구축**
+   - DB의 한글 국가명(예: '대한민국')과 이미지 수집용 영문명('South Korea')이 100% 매칭되도록 자동 변환 로직 적용.
+   - 모든 지원 국가(21개국+)에 대해 고화질 이미지 및 현지화된 후킹 멘트(KO/EN/TH) 데이터 적재 완료.
+3. **학습용 훅(Hooks) 가이드 제작 및 적요 반영**
+   - [`README_STUDY.md`](file:///e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/client/src/hooks/README_STUDY.md)를 통해 모든 커스텀 훅의 역할을 학생 눈높이에서 설명.
+   - 각 훅 파일 상단에 **[교수님의 한마디]** 주석을 추가하여 코드의 의도와 학습 포인트를 명시.
+4. **오프라인 다운로드 고도화 및 빌드 검증**
+   - `useOfflineDownload.ts`에 이미지 배치(Batch) 다운로드 로직을 추가하여 안정성 확보.
+   - 최종 프로덕션 빌드 완료: 약 **4.5 MB** 규모의 최적화된 클라이언트 번들 생성 확인.
+
+### ✅ 제 20장 결과
+- **Status:** Success
+- **Action:** 럭셔리 국가 선택기 통합 완료 및 학계용 적요 반영 성공.
+- **Client Size:** ~4.5 MB (49 entries precached for PWA)
+
+---
+
+## Chapter 21: Premium Selective Downloads & Hooking Ments (2026-03-24)
+
+### 1. 주문 (Order)
+*   사용자가 자신의 여행 범위(전체, 유럽, 아시아, 특정 국가)에 맞춰 데이터를 선택적으로 다운로드할 수 있는 기능 구현.
+*   사용자 참여를 유도하는 강력한 '후킹(Hooking)' 멘트와 프리미엄 디자인 적용 요청.
+
+### 2. 진행 사항 (Progress)
+*   **구현 계획서(Korean) 업데이트**: '유럽' 지역 추가 및 다운로드 데이터 범주화 계획 수립.
+*   **`useOfflineDownload.ts` 고도화**: 
+    *   `DownloadScope` 타입 확장 (All, Asia, Europe, Country).
+    *   지역별 국가 매핑 로직 추가 및 이미지 배치 처리 최적화.
+    *   TypeScript 타입 에러(implicit any) 완전 해결.
+*   **`StartupDialog.tsx` 프리미엄 개편**:
+    *   글래스모피즘 기반의 '다운로드 플랜' 선택 카드 UI 구현.
+    *   마케팅 후킹 멘트 적용: "현지 가이드 비용 $200 절약", "인터넷 없는 자유로움".
+    *   태국어/한국어/영어 다국어 텍스트 완벽 지원.
+
+### 3. 결과 (Result)
+*   사용자는 이제 ~200MB(전체)부터 ~10MB(단일 국가)까지 상황에 맞는 데이터 용량을 선택하여 효율적으로 오프라인 모드를 준비할 수 있습니다.
+*   강화된 마케팅 메시지를 통해 서비스의 유료 가치와 편리함을 온보딩 단계에서 효과적으로 전달합니다.
+
+### 4. 사용 토큰 및 에이전트 보고
+*   **수행 에이전트**: Server Park (백엔드/훅), Designer Kim (UI/UX)
+*   **MCP 사용**: `sequential-thinking` (로직 설계), `context7` (디자인 영감)
+*   **토큰 사용**: 약 15,000 Tokens (고밀도 UI 및 로직 수정)
+
+---

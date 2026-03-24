@@ -44,7 +44,22 @@ export default defineConfig({
             options: {
               cacheName: 'map-tiles',
               expiration: {
-                maxEntries: 500,
+                maxEntries: 1000, // Increased for better coverage
+                maxAgeSeconds: 60 * 60 * 24 * 90, // 90 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            // 🖼️ [Designer Kim | 2026-03-24] 외부 이미지 (Unsplash 등) 캐싱
+            urlPattern: /^https:\/\/(images\.unsplash\.com|source\.unsplash\.com)\/.*/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'external-images',
+              expiration: {
+                maxEntries: 200,
                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
               },
               cacheableResponse: {
@@ -53,15 +68,31 @@ export default defineConfig({
             },
           },
           {
-            // 📡 [Server Park | 2026-03-20] Neon DB API 데이터 오프라인 캐싱
-            // 학생들에게: No-WiFi 환경에서도 앱이 동작하도록 우리 API 응답도 브라우저에 저장합니다!
+            // 📡 [Server Park | 2026-03-24] API 데이터 오프라인 캐싱 (StaleWhileRevalidate)
+            // No-WiFi 환경에서 즉시 로딩을 위해 SWR 전략을 사용합니다.
             urlPattern: /\/api\/(landmarks|cities).*/,
-            handler: 'NetworkFirst',
+            handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'api-data',
               expiration: {
-                maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+                maxEntries: 200,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            // 🌐 [Bug Doctor | 2026-03-24] 번역 API 캐싱
+            // 번역 데이터는 정적이므로 한번 로딩되면 캐시에서 바로 가져옵니다.
+            urlPattern: /\/api\/translate.*/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'translation-data',
+              expiration: {
+                maxEntries: 500,
+                maxAgeSeconds: 60 * 60 * 24 * 180, // 180 days
               },
               cacheableResponse: {
                 statuses: [0, 200],

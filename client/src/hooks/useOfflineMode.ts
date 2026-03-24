@@ -9,6 +9,14 @@ interface DownloadProgress {
   message?: string;
 }
 
+/**
+ * [교수님의 한마디: useOfflineMode - ② 오프라인 모드 지휘자]
+ * @에이? "학생 여러분, 이 훅은 우리 앱의 심장과 같습니다. 인터넷이 끊겨도 
+ * 당황하지 않고 미리 저장된 로컬 데이터를 꺼내와 앱을 멈추지 않게 하죠!"
+ * 
+ * [수정 적요 - 2026-03-24]
+ * - 현재 네트워크 상태(Online/Offline)를 감시하고 데이터 소스를 자동 전환
+ */
 export function useOfflineMode() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [downloadedCities, setDownloadedCities] = useState<CityMetadata[]>([]);

@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { GpsPosition } from '@shared/schema';
 
+/**
+ * [교수님의 한마디: useGeoLocation - ③ 실시간 GPS 항해사]
+ * @에이? "이 훅은 브라우저의 GPS 센서를 React와 연결해 줍니다. 
+ * 위도와 경도를 실시간으로 추적하여 목적지까지의 거리를 계산하죠."
+ */
 export function useGeoLocation(enabled: boolean = true) {
   const [position, setPosition] = useState<GpsPosition | null>(null);
   const [error, setError] = useState<string | null>(null);

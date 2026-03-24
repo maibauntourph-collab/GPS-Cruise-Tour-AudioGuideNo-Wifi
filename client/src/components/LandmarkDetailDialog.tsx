@@ -46,6 +46,9 @@ export default function LandmarkDetailDialog({
   const [selectedGuideId, setSelectedGuideId] = useState<string | null>(null);
   const [audioContentType, setAudioContentType] = useState<'summary' | 'narration'>('narration');
   const [activeTab, setActiveTab] = useState<string>('history');
+  const [showManualNarrationMenu, setShowManualNarrationMenu] = useState(false);
+  const [manualTranslationSource, setManualTranslationSource] = useState<'original' | 'live'>('live');
+  const [manualTtsVoice, setManualTtsVoice] = useState<'auto' | 'google' | 'native'>('auto');
 
   const nameFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'name') : '';
   const descFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'description') : '';
@@ -346,10 +349,57 @@ export default function LandmarkDetailDialog({
                         <div className="w-9 h-9 rounded-full bg-[#E67E22] flex items-center justify-center text-white shadow-md">
                           <Headphones className="w-5 h-5" />
                         </div>
-                        <span className="font-bold text-[#E67E22] text-sm">{selectedLanguage === 'ko' ? '나레이션 가이드' : 'Narration Guide'}</span>
+                        <div className="flex flex-col">
+                          <span className="font-bold text-[#E67E22] text-sm">{selectedLanguage === 'ko' ? '나레이션 가이드' : 'Narration Guide'}</span>
+                          <button
+                            onClick={() => setShowManualNarrationMenu(!showManualNarrationMenu)}
+                            className="text-[9px] text-[#A8A294] font-bold flex items-center gap-1 hover:text-[#E67E22] transition-colors"
+                          >
+                            <Globe className="w-2.5 h-2.5" />
+                            {selectedLanguage === 'ko' ? '번역 및 TTS 수동 설정' : 'Manual Translation & TTS'}
+                          </button>
+                        </div>
                       </div>
-                      <Badge variant="outline" className="text-[10px] border-[#E67E22] text-[#E67E22] bg-white px-2 h-5">{playbackRate}x Speed</Badge>
+                      <div className="flex items-center gap-1.5">
+                        <Badge variant="outline" className="text-[10px] border-[#E67E22] text-[#E67E22] bg-white px-2 h-5">{playbackRate}x Speed</Badge>
+                      </div>
                     </div>
+
+                    {showManualNarrationMenu && (
+                      <div className="bg-white/60 rounded-xl p-3 border border-orange-100 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="text-[10px] font-bold text-slate-500">{selectedLanguage === 'ko' ? '번역 소스' : 'Translation Source'}</span>
+                          <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                            <button
+                              onClick={() => setManualTranslationSource('live')}
+                              className={`px-3 py-1 rounded-md text-[9px] font-bold transition-all ${manualTranslationSource === 'live' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-400'}`}
+                            >
+                              AI Live
+                            </button>
+                            <button
+                              onClick={() => setManualTranslationSource('original')}
+                              className={`px-3 py-1 rounded-md text-[9px] font-bold transition-all ${manualTranslationSource === 'original' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-400'}`}
+                            >
+                              Original
+                            </button>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="text-[10px] font-bold text-slate-500">{selectedLanguage === 'ko' ? 'TTS 엔진' : 'TTS Engine'}</span>
+                          <div className="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                            {(['auto', 'google', 'native'] as const).map((v) => (
+                              <button
+                                key={v}
+                                onClick={() => setManualTtsVoice(v)}
+                                className={`px-2 py-1 rounded-md text-[9px] font-bold transition-all capitalize ${manualTtsVoice === v ? 'bg-white text-orange-600 shadow-sm' : 'text-slate-400'}`}
+                              >
+                                {v}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="flex flex-col gap-4">
                       <div className="flex items-center gap-3">
@@ -951,11 +1001,24 @@ export default function LandmarkDetailDialog({
           {/* Sticky Footer - Always visible at bottom */}
           <div className="p-4 bg-white/90 backdrop-blur-xl border-t shrink-0 flex gap-3 h-24 items-center shadow-[0_-10px_20px_rgba(0,0,0,0.02)] z-50">
             <Button
-              onClick={() => onNavigate(landmark)}
+              onClick={() => {
+                const isChinese = selectedLanguage.startsWith('zh');
+                if (isChinese) {
+                  const landmarkName = getTranslatedContent(landmark!, selectedLanguage, 'name');
+                  const amapRouteUrl = `amapuri://route/plan/?did=BGVIS1&dlat=${landmark!.lat}&dlon=${landmark!.lng}&dname=${encodeURIComponent(landmarkName)}&dev=0&t=2`;
+                  window.location.href = amapRouteUrl;
+                } else {
+                  // [교수님 요청] 길 안내 시작 클릭 시 구글맵으로 직접 연결하여 사용자 편의성 극대화
+                  window.open(`https://www.google.com/maps/dir/?api=1&destination=${landmark!.lat},${landmark!.lng}&travelmode=walking`, '_blank');
+                }
+              }}
               className="flex-1 h-14 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-2xl gap-2 font-bold shadow-xl shadow-orange-100 transition-all active:scale-[0.97]"
             >
               <Navigation className="w-5 h-5" />
-              <span className="text-base">{selectedLanguage === 'ko' ? '길 안내 시작' : 'Get Directions'}</span>
+              <div className="flex flex-col items-center">
+                <span className="text-base leading-tight">{selectedLanguage === 'ko' ? '길 안내 시작' : 'Get Directions'}</span>
+                <span className="text-[9px] opacity-70 font-medium">Google Maps</span>
+              </div>
             </Button>
             <Button
               onClick={() => onAddToTour?.(landmark)}

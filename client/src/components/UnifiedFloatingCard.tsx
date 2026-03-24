@@ -481,7 +481,13 @@ export function UnifiedFloatingCard({
               variant="ghost"
               size="icon"
               className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white/80"
-              onClick={onLandmarkClose}
+              onClick={() => {
+                if (selectedLandmark) {
+                  onLandmarkClose();
+                } else if (onMinimizeToMenu) {
+                  onMinimizeToMenu();
+                }
+              }}
             >
               <X className="w-4 h-4" />
             </Button>

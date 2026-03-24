@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * [교수님의 한마디: useLiveTranslation - ⑤ AI 실시간 번역기]
+ * @에이? "학생 여러분, 이 훅은 외국어 설명을 우리말로 즉시 바꿔주는 마법사입니다. 
+ * API 호출을 최소화하기 위해 내부적으로 캐싱(Cache) 처리도 하고 있답니다!"
+ */
 export function useLiveTranslation(text: string | null | undefined, targetLanguage: string): string {
     const [translated, setTranslated] = useState(text || '');
 

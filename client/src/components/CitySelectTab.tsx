@@ -3,6 +3,7 @@ import { Download, Lock, Map, User, Home as HomeIcon } from 'lucide-react';
 import { City } from '@shared/schema';
 import { LANDING_DATA } from '@/lib/landingData';
 import { t } from '@/lib/translations';
+import { CountryScrollSelector } from './CountryScrollSelector';
 
 /**
  * [교수님 노트: CitySelectTab - ② City Select 화면 (이미지 디자인 완전 구현)]
@@ -107,6 +108,18 @@ const CITY_IMAGES: Record<string, string> = {
     'phuket': 'https://images.unsplash.com/photo-1589394815804-964ce0ff96c7?w=600&q=70',
     'cebu': 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600&q=70',
     'kuala-lumpur': 'https://images.unsplash.com/photo-1596422846543-74c6fc1e4b6e?w=600&q=70',
+    'anchorage': 'https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=600&q=70',
+    'amsterdam': 'https://images.unsplash.com/photo-1512470876302-972fad2aa9dd?w=600&q=70',
+    'budapest': 'https://images.unsplash.com/photo-1551867633-194f125bddfa?w=600&q=70',
+    'warsaw': 'https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=600&q=70',
+    'copenhagen': 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=600&q=70',
+    'oslo': 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&q=70',
+    'busan': 'https://images.unsplash.com/photo-1590634159396-e24227914099?w=600&q=70',
+    'jeju': 'https://images.unsplash.com/photo-1542385151-efd9000785a0?w=600&q=70',
+    'brussels': 'https://images.unsplash.com/photo-1541344999736-83eca872977a?w=600&q=70',
+    'prague': 'https://images.unsplash.com/photo-1513807016779-d51ced0c6d7e?w=600&q=70',
+    'stockholm': 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=600&q=70',
+    'philippines': 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600&q=70',
 };
 
 function getCityImage(city: City): string {
@@ -126,6 +139,12 @@ function getCityLocalName(city: City, lang: string): string {
         'venice': { 'ko': '베네치아, 이탈리아', 'en': 'Venice, Italy', 'zh-CN': '威尼斯, 意大利' },
         'paris': { 'ko': '파리, 프랑스', 'en': 'Paris, France', 'zh-CN': '巴黎, 法国' },
         'singapore': { 'ko': '싱가포르', 'en': 'Singapore', 'zh-CN': '新加坡' },
+        'copenhagen': { 'ko': '코펜하겐, 덴마크', 'en': 'Copenhagen, Denmark', 'zh-CN': '哥本哈根, 丹麦' },
+        'stockholm': { 'ko': '스톡홀름, 스웨덴', 'en': 'Stockholm, Sweden', 'zh-CN': '斯德哥尔摩, 瑞典' },
+        'busan': { 'ko': '부산, 한국', 'en': 'Busan, South Korea', 'zh-CN': '釜山, 韩国' },
+        'jeju': { 'ko': '제주도, 한국', 'en': 'Jeju, South Korea', 'zh-CN': '济州岛, 韩国' },
+        'bangkok': { 'ko': '방콕, 태국', 'en': 'Bangkok, Thailand', 'zh-CN': '曼谷, 泰国' },
+        'phuket': { 'ko': '푸켓, 태국', 'en': 'Phuket, Thailand', 'zh-CN': '普吉岛, 泰国' },
     };
     const slug = city.name.toLowerCase().replace(/[\s_]+/g, '-');
     return localNames[slug]?.[lang] || localNames[slug]?.['en'] || `${city.name}, ${city.country}`;
@@ -142,11 +161,22 @@ export function CitySelectTab({
     activeBottomTab = 'city',
 }: CitySelectTabProps) {
     const [category, setCategory] = useState<'all' | 'asia' | 'europe' | 'recommended'>('all');
+    const [selectedCountry, setSelectedCountry] = useState<string>('All');
 
     const installLabels = getInstallLabels(selectedLanguage);
 
-    // [적요] 카테고리 필터링
+    // [적요] 국가 목록 추출
+    const countries = React.useMemo(() => {
+        const countrySet = new Set(cities.map(c => c.country));
+        return ['All', ...Array.from(countrySet).sort()];
+    }, [cities]);
+
+    // [적요] 카테고리/국가 필터링
     const filteredCities = cities.filter(c => {
+        // 1. 국가 필터
+        if (selectedCountry !== 'All' && c.country !== selectedCountry) return false;
+
+        // 2. 카테고리 필터
         if (category === 'all') return true;
         return getCityCategory(c) === category;
     });
@@ -171,7 +201,6 @@ export function CitySelectTab({
     ];
 
     return (
-        // [적요] 배경을 투명(bg-transparent)하게 하여 뒤의 시나리오가 비치도록 설정 (Clear Mask)
         <div className="flex flex-col h-full bg-transparent">
             {/* 스크롤 가능한 본문 영역 */}
             <div className="flex-1 overflow-y-auto pb-24 scrollbar-hide">
@@ -265,6 +294,43 @@ export function CitySelectTab({
                 </div>
 
                 {/* ─────────────────────────────────── */}
+                {/* [적요] ②-1 국가별 럭셔리 카드 스크롤      */}
+                {/* ─────────────────────────────────── */}
+                <div className="mt-2">
+                    <CountryScrollSelector
+                        countries={countries.filter(c => c !== 'All')}
+                        selectedCountry={selectedCountry}
+                        onCountrySelect={(country) => {
+                            if (selectedCountry === country) {
+                                setSelectedCountry('All');
+                            } else {
+                                setSelectedCountry(country);
+                                // 국가 선택 시 해당 국가의 첫 번째 도시로 자동 스크롤(선택은 안함)
+                                const firstCity = cities.find(c => c.country === country);
+                                if (firstCity) {
+                                    const element = document.getElementById(`city-card-${firstCity.id}`);
+                                    element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }
+                        }}
+                        selectedLanguage={selectedLanguage}
+                        onLanguageChange={onLanguageChange}
+                        onNext={() => {
+                            // 국가 카드에서 '도시 선택' 클릭 시 첫 번째 도시 선택 후 리스트로 이동
+                            const firstCity = filteredCities[0];
+                            if (firstCity) {
+                                onCityChange(firstCity.id);
+                                onTransitionToList();
+                            }
+                        }}
+                        cities={cities}
+                        selectedCityId={selectedCityId}
+                        onCityChange={onCityChange}
+                        isEmbedded={true}
+                    />
+                </div>
+
+                {/* ─────────────────────────────────── */}
                 {/* [적요] ④ 도시 카드 목록 */}
                 {/* ─────────────────────────────────── */}
                 <div className="px-4 mt-3 space-y-4">
@@ -276,14 +342,6 @@ export function CitySelectTab({
                     ) : (
                         filteredCities.map((city, idx) => {
                             const cityImage = getCityImage(city);
-                            // [적요] 카드 배경색 - 이미지와 유사하게 파스텔 배경 적용
-                            const bgColors = [
-                                '#fcd2c8', // 연한 살몬핑크 (ROME)
-                                '#c9e1f5', // 연한 스카이블루 (SHANGHAI)
-                                '#d0f0c0', // 연한 민트그린
-                                '#fce5cd', // 연한 피치
-                            ];
-                            const bgCol = bgColors[idx % bgColors.length];
                             const isLocked = idx > 0; // 첫 번째 도시만 잠금 해제
                             const isSelected = city.id === selectedCityId;
 
@@ -302,28 +360,23 @@ export function CitySelectTab({
                                 >
                                     {/* 카드 상단: 배경 이미지 영역 */}
                                     <div className="mx-4 mt-4 h-[110px] rounded-2xl overflow-hidden relative">
-                                        {/* [Designer Kim] 카드의 투박한 파스텔 배경/필터를 모두 벗기고 원본 이미지로 시인성 확보 */}
                                         <img
                                             src={cityImage}
                                             alt={city.name}
                                             className="absolute inset-0 w-full h-full object-cover"
                                             loading="lazy"
                                         />
-                                        {/* 텍스트 가독성을 위한 하단 그라디언트만 유지 */}
                                         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                                        {/* 도시명 큰 텍스트 (이미지처럼 영문 대문자) */}
                                         <div className="absolute inset-0 flex items-center justify-center">
                                             <span className="text-[28px] font-black tracking-[0.15em] uppercase text-white drop-shadow-md select-none">
                                                 {city.name.toUpperCase()}
                                             </span>
                                         </div>
-                                        {/* 언어 뱃지 (상단 우측 - 선택 언어) */}
                                         {selectedLanguage.startsWith('zh') && (
                                             <div className="absolute top-2 right-2 bg-[#E85D36] text-white text-[9px] font-black px-2 py-0.5 rounded-full">
                                                 中文
                                             </div>
                                         )}
-                                        {/* 자물쇠 아이콘 (잠긴 도시) */}
                                         {isLocked && (
                                             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm p-1.5 rounded-full">
                                                 <Lock className="w-4 h-4 text-white" />
@@ -346,13 +399,9 @@ export function CitySelectTab({
                     )}
                 </div>
 
-                {/* 하단 여백 (바텀 네비 공간) */}
                 <div className="h-6" />
             </div>
 
-            {/* ─────────────────────────────────── */}
-            {/* [적요] ⑤ 바텀 내비게이션 바                */}
-            {/* ─────────────────────────────────── */}
             <div className="fixed bottom-0 left-0 right-0 bg-white/60 backdrop-blur-2xl border-t border-white/20 shadow-lg z-50">
                 <div className="flex">
                     {bottomTabs.map(tab => {
@@ -370,7 +419,6 @@ export function CitySelectTab({
                                 <span className={`text-[10px] font-bold ${isActive ? 'text-[#E85D36]' : 'text-slate-400'}`}>
                                     {tab.label}
                                 </span>
-                                {/* 활성 도트 표시 */}
                                 {isActive && (
                                     <span className="w-1 h-1 rounded-full bg-[#E85D36]" />
                                 )}
@@ -378,7 +426,6 @@ export function CitySelectTab({
                         );
                     })}
                 </div>
-                {/* iOS 하단 안전 영역 */}
                 <div className="h-safe-area-inset-bottom" />
             </div>
         </div>
