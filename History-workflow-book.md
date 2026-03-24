@@ -478,3 +478,10 @@ public resolvePlaybackLanguage(text: string, requestedLanguage: string): string 
 - **Task**: generate-keywords.ts 스크립트 작성 중
 - **Result**: 스크립트 생성 시도 중
 - **Next**: 스크립트 실행 및 DB 업데이트 결과 보고
+
+## [2026-03-25 04:57:41]
+- **Order**: Step 3 (롱테일 키워드 생성 및 DB 주입) 최종 실행 시작
+- **Plan**: server/scripts/generate-keywords.ts 스크립트 작성 및 럭키(전체) 실행. 랜드마크별 AI 기반 롱테일 키워드 20개 자동 생성 및 NeonDB 반영.
+- **Task**: generate-keywords.ts 스크립트 작성 및 실행
+- **Result**: 스크립트 작성 완료 및 실행 준비
+- **Next**: 실행 결과 보고 및 10분 단위 자동 커밋/푸시 수행
