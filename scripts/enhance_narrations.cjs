@@ -12,20 +12,20 @@ const HOOKS = {
 };
 
 function enhance() {
-    console.log('--- 🧭 Simple Regex Narration Enhancement ---');
+    console.log('--- 🧭 Final Narration Enhancement Check ---');
     let content = fs.readFileSync(LANDMARKS_FILE, 'utf-8');
 
-    // Split into items by name field as an anchor
-    const items = content.split(/\{\n    "id":/);
-    console.log(`Found ${items.length - 1} items.`);
+    // Split into items by the common separator: newline + two spaces + opening brace
+    const parts = content.split(/\n  \{/);
+    console.log(`Processing ${parts.length - 1} landmark blocks...`);
 
-    const processed = [items[0]];
-    for (let i = 1; i < items.length; i++) {
-        let item = '{\n    "id":' + items[i];
+    const result = [parts[0]];
+    for (let i = 1; i < parts.length; i++) {
+        let block = '\n  {' + parts[i];
 
         // Find name and category
-        const nameMatch = item.match(/"name":\s*"(.*?)"/);
-        const categoryMatch = item.match(/"category":\s*"(.*?)"/);
+        const nameMatch = block.match(/"name":\s*"(.*?)"/);
+        const categoryMatch = block.match(/"category":\s*"(.*?)"/);
 
         if (nameMatch && categoryMatch) {
             const name = nameMatch[1];
@@ -36,26 +36,27 @@ function enhance() {
             if (category.includes('Restaurant') || category.includes('Food')) h = HOOKS.Food;
             if (category.includes('Shopping')) h = HOOKS.Shopping;
 
-            // Direct replace for generic/short narration strings
-            item = item.replace(/"narration":\s*"([\s\S]*?)"/, (match, oldN) => {
-                if (oldN.includes("반갑습니다!") || oldN.length < 200) {
+            // Enforce update for narration
+            block = block.replace(/"narration":\s*"([\s\S]*?)"/, (m, n) => {
+                // If generic or too short, replace
+                if (n.includes("반갑습니다!") || n.length < 200) {
                     const newN = `${name}에 오신 것을 환영합니다! ${h} ${HOOKS.History} Kenneth Cruise Guide와 함께 이곳의 숨겨진 비밀을 탐험해보세요.`;
                     return `"narration": ${JSON.stringify(newN)}`;
                 }
-                return match;
+                return m;
             });
 
-            // Update translations
-            item = item.replace(/"ko":\s*\{([\s\S]*?)"narration":\s*"([\s\S]*?)"/, (match, pre, n) => {
-                const newKN = `${name}의 풍성한 스토리! ${h} ${HOOKS.History} 역사, 맛집, 쇼핑 정보를 절대 놓치지 마세요.`;
+            // Enforce update for KO translation
+            block = block.replace(/"ko":\s*\{([\s\S]*?)"narration":\s*"([\s\S]*?)"/, (m, pre, n) => {
+                const newKN = `${name} 명소 가이드! ${h} ${HOOKS.History} 상세한 역사와 팁을 만나보세요.`;
                 return `"ko": {${pre}"narration": ${JSON.stringify(newKN)}`;
             });
         }
-        processed.push(item);
+        result.push(block);
     }
 
-    fs.writeFileSync(LANDMARKS_FILE, processed.join(''));
-    console.log('✅ Final Enhancement complete.');
+    fs.writeFileSync(LANDMARKS_FILE, result.join(''));
+    console.log('✅ Enhancement complete.');
 }
 
 enhance();
