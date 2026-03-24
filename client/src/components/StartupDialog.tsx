@@ -47,6 +47,12 @@ export interface StartupDialogProps {
   cities: City[];
   selectedCityId: string;
   onCityChange: (cityId: string) => void;
+  // [프리미엄 로직] Home.tsx에서 전달하는 추가 Props들
+  onSelectGPS?: () => void;
+  onRestoreTour?: (data: { cityId: string; tourStops: string[]; tourTimePerStop: number }) => void;
+  savedTourData?: any;
+  isGpsAvailable?: boolean;
+  isGpsLoading?: boolean;
 }
 
 export function StartupDialog({
@@ -56,6 +62,12 @@ export function StartupDialog({
   onLanguageChange,
   cities,
   selectedCityId,
+  onCityChange,
+  onSelectGPS,
+  onRestoreTour,
+  savedTourData,
+  isGpsAvailable,
+  isGpsLoading
 }: StartupDialogProps) {
   const [step, setStep] = useState(1);
   const [selectedScope, setSelectedScope] = useState<{ type: 'all' | 'asia' | 'europe' | 'country' }>({ type: 'all' });

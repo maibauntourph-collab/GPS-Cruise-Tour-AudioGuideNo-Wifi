@@ -701,6 +701,7 @@ export const CITIES: City[] = [
     "zoom": 11,
     "cruisePort": {
       "portName": "Yokohama Port",
+      "recommendedLandmarks": ["sensoji-temple", "tokyo-skytree"],
       "portCoordinates": {
         "lat": 35.4542,
         "lng": 139.6472
@@ -731,6 +732,7 @@ export const CITIES: City[] = [
     "zoom": 11,
     "cruisePort": {
       "portName": "Busan International Cruise Terminal",
+      "recommendedLandmarks": ["haedong-yonggungsa", "gamcheon-culture-village"],
       "portCoordinates": {
         "lat": 35.0987,
         "lng": 129.0403
@@ -809,6 +811,7 @@ export const CITIES: City[] = [
     "zoom": 10,
     "cruisePort": {
       "portName": "Jeju Cruise Terminal",
+      "recommendedLandmarks": ["hallasan-national-park", "seongsan-ilchulbong"],
       "portCoordinates": {
         "lat": 33.5283,
         "lng": 126.5412
@@ -839,6 +842,7 @@ export const CITIES: City[] = [
     "zoom": 11,
     "cruisePort": {
       "portName": "Manhattan Cruise Terminal",
+      "recommendedLandmarks": ["statue-of-liberty", "empire-state-building"],
       "portCoordinates": {
         "lat": 40.7695,
         "lng": -73.9972
@@ -869,6 +873,7 @@ export const CITIES: City[] = [
     "zoom": 11,
     "cruisePort": {
       "portName": "Laem Chabang Port",
+      "recommendedLandmarks": ["grand-palace", "wat-arun"],
       "portCoordinates": {
         "lat": 13.0801,
         "lng": 100.9103

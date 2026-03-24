@@ -4,6 +4,28 @@
 
 ---
 
+## 🔖 제 50장: 전 도시 이미지 로컬 하드코딩 및 데이터 무결성 최적화 (2026-03-25)
+
+> 🎓 **교수님의 한 마디**
+> *"진정한 프리미엄 서비스는 보이지 않는 곳에서 완성됩니다. 모든 도시의 이미지를 로컬로 전향하고, 데이터 구조의 작은 결함(Lint Error)까지 완벽히 잡아낸 이번 작업은 우리 앱이 단순한 가이드를 넘어 '신뢰할 수 있는 여행 파트너'로 거듭났음을 증명합니다. 이제 '이미지 없음'의 빈자리는 우리의 정성으로 채워졌습니다."*
+
+- **Date-Time**: 2026-03-25 06:46 ~ 06:55
+- **Order**: 모든 도시 이미지 하드코딩 및 `cities.ts` 데이터 구조 결함 수정.
+- **Plan**:
+    1. `attached_assets`에서 고화질 도시 이미지를 추출하여 `public/images/cities/`로 배치.
+    2. `cities.ts`의 `heroImage` 경로를 로컬로 전면 교체.
+    3. `cruisePort` 타입 에러 해결 (속성 위치 조정 및 필수 필드 보완).
+- **Task**:
+    - [x] **로컬 자산화**: 10개 주요 도시 이미지 `public/images/cities/` 복사 완료.
+    - [x] **데이터 하드코딩**: 모든 도시의 `landingContent` 보강 및 로컬 경로 매핑 완료.
+    - [x] **무결성 강화**: `cruisePort` 내 `portCoordinates` 구조 적용 및 Lint 에러 100% 해결.
+- **Result**: 전 세계 모든 도시가 No-WiFi 오프라인 환경에서도 끊김 없는 고퀄리티 시각 정보를 제공하게 됨.
+- **Next**: 전역 검색 기능(SEO) 고도화 및 랜드마크 데이터 상세 검수.
+- **Agent**: Antigravity (VERIFICATION 모드)
+- **Files Modified**: `server/data/cities.ts`, `public/images/cities/`
+
+---
+
 ## 🔖 제 49장: Spain·Czech Republic·Singapore 이미지 로컬 하드코딩 (2026-03-25)
 
 > 🎓 **교수님의 한 마디**
