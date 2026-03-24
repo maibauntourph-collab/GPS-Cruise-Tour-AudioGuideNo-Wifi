@@ -36,7 +36,6 @@ const LANGUAGES = [
   { code: 'fi', name: 'Suomi', flag: '🇫🇮', speechLang: 'fi-FI' },
   { code: 'no', name: 'Norsk', flag: '🇳🇴', speechLang: 'nb-NO' },
   { code: 'el', name: 'Ελληνικά', flag: '🇬🇷', speechLang: 'el-GR' },
-  { code: 'cs', name: 'Čeština', flag: '🇨🇿', speechLang: 'cs-CZ' },
   { code: 'th', name: 'ไทย', flag: '🇹🇭', speechLang: 'th-TH' },
   { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳', speechLang: 'vi-VN' },
   { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩', speechLang: 'id-ID' },

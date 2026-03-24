@@ -17,9 +17,9 @@
     3. **컴포넌트 반영**: `LanguageContext`와 연동하여 UI 전역에 다국어 반영.
 - **Task**: 
     - [x] 명령 파일(`2026-03-25_0531_명령.md`) 생성 및 에이전트(Designer Kim, Dodari) 추천 완료.
-    - [/] 24개국어 UI 번역 데이터 구조 설계 중.
-- **Result**: 진행 중.
-- **Next**: `implementation_plan.md` 승인 후 코드 반영.
+    - [x] 24개국어 UI 번역 데이터(`translations.ts`) 및 리스트(`LanguageSelector.tsx`) 연동 완료.
+- **Result**: 24개국 (베트남어, 힌디어 등 포함) UI 하드코딩 시스템 구축 완료 및 정비 성공.
+- **Next**: 전용 관리 대시보드 연동 및 랜드마크 데이터 무결성 상시 점검.
 
 ---
 
