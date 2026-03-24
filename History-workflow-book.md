@@ -853,3 +853,14 @@ npx tsx server/scripts/update_gps_precision.ts
 *   **토큰 사용**: 약 10,000 Tokens (빌드 및 배포 로그 포함)
 
 ---
+
+### Chapter 24: Runtime Hotfixes - CSP & Export Synchronization (2026-03-24)
+
+*   **CSP Security Policy Update**:
+    *   Revised `server/app.ts` to allow `unpkg.com` for Leaflet styles and `images.unsplash.com` for remote asset fetching.
+    *   Added explicit `style-src` and updated `connect-src` to prevent runtime blocking of critical map and photo resources.
+*   **Missing Export Fix**:
+    *   Re-added and exported `getSavedTourData` and `SavedTourData` in `StartupDialog.tsx`.
+    *   Resolved the `Uncaught SyntaxError` in `RoleSelection.tsx` that was preventing the application from loading.
+*   **Production Deployment**:
+    *   Triggered 1.4.1 Build and deployed to Cloudflare Workers using PowerShell-optimized command sequences.

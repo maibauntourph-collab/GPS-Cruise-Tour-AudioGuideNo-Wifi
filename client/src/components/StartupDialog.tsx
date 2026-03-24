@@ -23,7 +23,24 @@ function getLangText(lang: string, ko: string, en: string, th: string): string {
   return en;
 }
 
-interface StartupDialogProps {
+export interface SavedTourData {
+  cityId: string;
+  cityName: string;
+  tourStops: string[];
+  savedAt: string;
+}
+
+export function getSavedTourData(): SavedTourData | null {
+  const data = localStorage.getItem('saved-tour-progress');
+  if (!data) return null;
+  try {
+    return JSON.parse(data);
+  } catch {
+    return null;
+  }
+}
+
+export interface StartupDialogProps {
   isOpen: boolean;
   onClose: () => void;
   selectedLanguage: string;
@@ -148,8 +165,8 @@ export function StartupDialog({
                       key={plan.id}
                       onClick={() => setSelectedScope({ type: plan.id as any })}
                       className={`flex flex-col items-start justify-between p-3 rounded-2xl border-2 transition-all ${selectedScope.type === plan.id
-                          ? 'border-[#E85D36] bg-orange-50/50 shadow-md scale-[1.02]'
-                          : 'border-slate-100 bg-white opacity-70 hover:opacity-100'
+                        ? 'border-[#E85D36] bg-orange-50/50 shadow-md scale-[1.02]'
+                        : 'border-slate-100 bg-white opacity-70 hover:opacity-100'
                         }`}
                     >
                       <div className="flex items-center gap-2 mb-1">

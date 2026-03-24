@@ -37,14 +37,14 @@ app.use("*", cors({
 // [UX Fix] 모든 응답에 대해 프레임 임베딩 및 로컬 리소스 로드 허용
 app.use("*", async (c, next) => {
     await next();
-    // [적요] CSP 설정을 강화하여 localhost 환경 및 지도 데이터(OSM)를 허용합니다.
-    // frame-ancestors * 를 통해 다른 사이트(예: Replit/Antigravity 프리뷰)에서의 임베딩을 허용합니다.
+    // [적요] CSP 설정을 강화하여 localhost 환경 및 지도 데이터(OSM), 외부 리소스(Leaflet, Unsplash)를 허용합니다.
     const csp = [
-        "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https:*;",
+        "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https:;",
         "frame-ancestors *;",
-        "img-src 'self' data: https: http: *.openstreetmap.org;",
-        "connect-src 'self' http://localhost:* ws://localhost:* https:* *.openstreetmap.org;",
+        "img-src 'self' data: https: http: *.openstreetmap.org images.unsplash.com;",
+        "connect-src 'self' http://localhost:* ws://localhost:* https: *.openstreetmap.org images.unsplash.com unpkg.com;",
         "font-src 'self' data: https:;",
+        "style-src 'self' 'unsafe-inline' https: unpkg.com;",
         "worker-src 'self' blob:;"
     ].join(" ");
 
