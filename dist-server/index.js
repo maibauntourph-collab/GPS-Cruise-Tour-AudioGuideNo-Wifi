@@ -26284,6 +26284,7 @@ app.use("*", async (c, next) => {
     "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https:",
     "frame-ancestors *",
     "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com",
+    "media-src 'self' data:",
     "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com",
     "font-src 'self' data: https:",
     "style-src 'self' 'unsafe-inline' https: unpkg.com",

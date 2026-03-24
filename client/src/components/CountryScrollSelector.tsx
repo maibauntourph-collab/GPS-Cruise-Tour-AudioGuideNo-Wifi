@@ -80,13 +80,13 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '가우디의 예술혼과 열정적인 태양의 스페인',
         en: 'Luxury Spain: Gaudi’s artistic soul and passionate sun',
         th: '스페인ที่หรูหรา: จิตวิญญาณแห่งศิลปะของเกาดีและแสงแด드ที่ร้อนแรง',
-        image: '/images/countries/spain.png'
+        image: 'https://images.unsplash.com/photo-1539037116277-4db20202d0d4?q=80&w=1200'
     },
     'Singapore': {
         ko: '초현대적 정원과 미래형 럭셔리 싱가포르',
         en: 'Luxury Singapore: Ultra-modern gardens and futuristic lifestyle',
         th: '스ิงคโปร์ที่หรูหรา: 스완ที่ทันสมัยสุด ๆ และ라이프스토어แห่งอนาค트',
-        image: '/images/countries/singapore.png'
+        image: 'https://images.unsplash.com/photo-1563293750-2c21458a2214?q=80&w=1200'
     },
     'China': {
         ko: '장엄한 만리장성과 화려한 상하이의 야경',
@@ -140,13 +140,13 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '중세풍 건물과 초콜릿처럼 달콤한 브뤼셀 여행',
         en: 'Luxury Belgium: Gothic grandeur and world-class delights',
         th: 'เบลเยียมที่หรูหรา: ความยิ่งใหญ่สไตล์โกธิคและความสุขอันดับโลก',
-        image: '/images/countries/belgium.png'
+        image: 'https://images.unsplash.com/photo-1558230344-9f7988350567?q=80&w=1200'
     },
     'Czech Republic': {
         ko: '시간이 멈춘 중세의 신비로움, 프라하의 밤',
         en: 'Luxury Czech: Mystical medieval charm and gothic wonders',
         th: 'สาธารณรัฐเช็กที่หรูหรา: เสน่ห์ในยุคกลางที่ลึกลับและสิ่งมหัศจรรย์สไตล์โกธิค',
-        image: '/images/countries/czech.png'
+        image: 'https://images.unsplash.com/photo-1519671482749-3096263432ce?q=80&w=1200'
     },
     'Sweden': {
         ko: '정교한 디자인과 정갈한 북유럽의 조화 스톡홀름',
