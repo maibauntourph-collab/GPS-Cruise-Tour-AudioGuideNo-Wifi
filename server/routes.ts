@@ -413,6 +413,8 @@ export function registerRoutes(app: Hono<any>) {
 
       return c.json({
         ...landmark,
+        narrationI18n: (landmark as any).narrationI18n || {},
+        descriptionI18n: (landmark as any).descriptionI18n || {},
         guides: guides.map(g => ({
           id: g.id,
           userId: g.userId,
@@ -533,6 +535,8 @@ export function registerRoutes(app: Hono<any>) {
           yearBuilt: l.yearBuilt,
           architect: l.architect,
           translations: l.translations,
+          narrationI18n: (l as any).narrationI18n,
+          descriptionI18n: (l as any).descriptionI18n,
           openingHours: l.openingHours,
           priceRange: l.priceRange,
           cuisine: l.cuisine,

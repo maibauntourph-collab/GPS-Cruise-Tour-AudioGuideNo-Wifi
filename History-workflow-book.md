@@ -185,7 +185,7 @@
 > 🎓 **교수님의 한 마디**
 > *"학생 여러분, 뜻밖의 제약(Quota Limit)은 개발자의 기지를 발휘할 기회입니다. 429 에러 앞에서도 당황하지 않고, 신뢰할 수 있는 고화질 CDN(Unsplash) 링크로 신속하게 우회하여 사용자에게 빈 화면을 보여주지 않은 점은 매우 훌륭한 실무 대처 능력이었습니다!"*
 
-- **Date-Time**: 2026-03-25 02:50 ~ 02:55
+- **Date-Time**: 2026-03-25 05:15: Planning multi-language translation (24 languages) for Neon DB. Proposed transition to Gemini API or enhanced retry logic for stability.
 - **Order**: 스페인, 싱가포르, 벨기에, 체코의 이미지 경로 복구 및 AI 생성 한계 극복.
 - **Plan**: AI 이미지 생성 쿼터(약 93시간) 초과로 로컬 자산 생성이 불가함에 따라, 해당 국가들의 도시/국가 카드 이미지를 검증된 고화질 Unsplash 링크로 임시 매핑함.
 - **Task**: 
@@ -272,7 +272,25 @@
     - [PLAN] 추천 에이전트(Server Park, Dodari) 및 프롬프트 제안.
     - [PLAN] 사용자 승인 대기.
 - **Result**: `UnifiedFloatingCard.tsx`와 `Home.tsx` 수정을 통해 닫기(X) 버튼 클릭 시 랜딩 페이지 이동을 차단하고 카드 최소화(`onToggleMinimized`) 기능을 구현함. 최소화 상태에서 주황색 Navigation FAB과 리스트 버튼을 노출하여 사용자 편의성을 높임.
-- **Next**: 다국어 나레이션 엔진 및 DB 스키마 연동 작업(제 37장 예정)으로 진행. (플로팅 카드 최소화 기능은 안정화됨)
+- **Next**: 다국어 나레이션 엔진 및 DB 스키마 연동 작업(제 37장 시작) — `landmarks` 테이블 다국어 전용 JSONB 컬럼 추가 및 데이터 이관.
+
+---
+
+## 🔖 제 37장: 다국어(i18n) DB 스키마 마이그레이션 및 데이터 이관 (2026-03-25)
+
+> 🎓 **교수님의 한 마디**
+> *"데이터베이스 스키마 변경은 비행 중인 비행기의 엔진을 교체하는 것과 같습니다. 아주 신중해야 하죠! 기존 `translations`의 거대한 JSON에서 `narration_i18n`이라는 전용 공간으로 데이터를 옮기는 이번 작업은 서비스 성능과 확장성 두 마리 토끼를 잡는 아주 훌륭한 시도입니다."*
+
+- **Date-Time**: 2026-03-25 05:05
+- **Order**: `landmarks` 테이블에 다국어 전용 컬럼(`narration_i18n`, `description_i18n`) 추가 및 기존 데이터 마이그레이션.
+- **Plan**: `migrations/0001_add_i18n_columns.sql` 스크립트를 사용하여 Neon DB에 컬럼을 추가하고, `jsonb_each` 및 `jsonb_object_agg` 함수를 이용해 기존 통합 JSON 데이터를 언어별 전용 맵으로 재구성하여 이관함.
+- **Task**: 
+    - [x] `shared/schema.ts` 내 Drizzle 스키마 정의 업데이트 확인.
+    - [x] `migrations/0001_add_i18n_columns.sql` SQL 스크립트 작성 및 검토 완료.
+    - [/] Neon DB 콘솔을 통한 SQL 실행 및 마이그레이션 결과 검증.
+    - [ ] 서버 API(`landmarks` 조회 로직)에서 신규 다국어 컬럼 우선 참조하도록 수정.
+- **Result**: 마이그레이션 설계 및 SQL 스크립트 준비 완료. 실행 대기 중.
+- **Next**: 사용자 승인 후 실제 DB 반영 및 서버 로직 업데이트 진행.
 
 ---
 
@@ -485,3 +503,25 @@ public resolvePlaybackLanguage(text: string, requestedLanguage: string): string 
 - **Task**: generate-keywords.ts 스크립트 작성 및 실행
 - **Result**: 스크립트 작성 완료 및 실행 준비
 - **Next**: 실행 결과 보고 및 10분 단위 자동 커밋/푸시 수행
+
+---
+
+## 🔖 제 42장: Neon DB 다국어(24개국어) 일괄 번역 및 인젝션 자동화 (2026-03-25)
+
+> 🎓 **교수님의 한 마디**
+> *"단순한 데이터 적재를 넘어, 전 세계 모든 여행자가 자기 나라 말로 우리 가이드를 듣게 되는 순간입니다. 이전의 기술적 제약(API Quota)을 극복하고, Gemini API와 강화된 재시도 로직을 결합하여 중단 없는 글로벌 서비스를 실현하는 이 과정은 아키텍처의 완성도를 한 단계 높이는 일입니다."*
+
+- **Date-Time**: 2026-03-25 05:15 ~ 진행 중
+- **Order**: 다국어 랜드마크 번역 및 Neon DB(`narration_i18n`, `description_i18n`) 최종 적용 방법론 제안.
+- **Plan**: 
+    1. **전략 수립**: 기존 `translate:all` 스크립트를 Gemini 1.5 API 기반으로 전환하거나 Rate Limit 대응 로직을 강화함.
+    2. **우선순위 설정**: 한국어, 영어, 일본어, 중국어 등 주요 6개 국어를 우선적으로 최적화하여 적재.
+    3. **데이터 무결성**: Neon DB의 JSONB 컬럼에 정확한 데이터가 들어갔는지 수동 및 자동 검증 병행.
+- **Task**: 
+    - [PLAN] `implementation_plan.md`를 통한 다국어 번역 및 DB 인젝션 설계도 작성 완료.
+    - [PLAN] 추천 에이전트(Dodari, Server Park, Automation Doctor) 및 실행 프롬프트 제안.
+    - [PLAN] 사용자 승인 및 API 설정 확인 대기.
+- **Result**: 계획 수립 및 히스토리 기록 완료. 사용자 승인 시 즉시 번역 봇 가동 준비 완료.
+- **Next**: 사용자 승인 후 실제 번역 스크립트 수정 및 24개국어 벌크 업데이트 실행.
+2 0 2 6 - 0 3 - 2 5   0 5 : 0 6   |   O r d e r :   F i x   B r o w s e r   S e c u r i t y   E r r o r   |   P l a n :   I n v e s t i g a t e   l o c a l h o s t : 4 0 0 0   u s a g e   a n d   C O R S / C S P   s e t t i n g s   |   T a s k :   C o d e b a s e   a n a l y s i s   f o r   U R L   l o a d i n g   i s s u e   |   R e s u l t :   I n i t i a t e d   |   N e x t :   I m p l e m e n t   f i x   b a s e d   o n   a n a l y s i s  
+ 

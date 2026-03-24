@@ -13,6 +13,7 @@
  */
 
 import { getOpenAI } from "./openai";
+import { getGemini, translateWithGemini } from "./gemini";
 import { db } from "../db";
 import { landmarks } from "@shared/schema";
 import { eq } from "drizzle-orm";
@@ -57,32 +58,16 @@ interface TranslationContent {
 type AllTranslations = Record<string, TranslationContent>;
 
 /**
- * [교수님 노트: OpenAI를 이용한 일괄 번역 함수]
- * 한 번의 API 호출로 24개 언어를 모두 번역하여 비용/시간을 절약합니다.
- * GPT-4o의 JSON mode를 활용하여 구조화된 결과를 받아옵니다.
- *
- * @param name - 장소 이름 (주로 한국어 또는 영어 원본)
- * @param narration - 오디오 나레이션 원본 텍스트
- * @param description - 짧은 설명 원본
- * @param detailedDescription - 상세 설명 원본
- * @returns 24개 언어 번역 결과 객체
+ * [교수님 노트: AI를 이용한 일괄 번역 함수]
+ * OpenAI(GPT-4o) 또는 Gemini를 선택적으로 사용하여 24개 언어를 번역합니다.
  */
 export async function translateToAllLanguages(
     name: string,
     narration: string,
     description: string,
-    detailedDescription: string
+    detailedDescription: string,
+    engine: 'openai' | 'gemini' = 'gemini'
 ): Promise<AllTranslations> {
-    const openai = getOpenAI();
-
-    // [적요] OpenAI 키가 없을 경우 영어만 반환 (개발 환경 fallback)
-    if (!openai) {
-        console.warn("[autoTranslate] OpenAI key not set. Returning English only.");
-        return {
-            en: { name, narration, description, detailedDescription },
-        };
-    }
-
     const languageList = Object.entries(SUPPORTED_LANGUAGES)
         .map(([code, langName]) => `"${code}": "${langName}"`)
         .join(", ");
@@ -111,26 +96,29 @@ Return format (JSON object with language codes as keys):
 `.trim();
 
     try {
-        console.log(`[autoTranslate] Translating "${name}" into 24 languages via GPT-4o...`);
+        let raw = "{}";
+        if (engine === 'gemini') {
+            console.log(`[autoTranslate] Translating "${name}" via Gemini 2.0 Flash...`);
+            raw = await translateWithGemini(prompt);
+        } else {
+            const openai = getOpenAI();
+            if (!openai) throw new Error("OpenAI not configured");
+            console.log(`[autoTranslate] Translating "${name}" via GPT-4o...`);
+            const response = await openai.chat.completions.create({
+                model: "gpt-4o",
+                messages: [{ role: "user", content: prompt }],
+                response_format: { type: "json_object" },
+                max_tokens: 16000,
+                temperature: 0.3,
+            });
+            raw = response.choices[0].message.content || "{}";
+        }
 
-        const response = await openai.chat.completions.create({
-            model: "gpt-4o",
-            messages: [{ role: "user", content: prompt }],
-            response_format: { type: "json_object" },
-            // [적요] max_tokens 충분히 설정 - 24개 언어 × 4개 필드
-            max_tokens: 16000,
-            temperature: 0.3, // 낮은 온도 = 일관된 번역
-        });
-
-        const raw = response.choices[0].message.content || "{}";
         const parsed: AllTranslations = JSON.parse(raw);
-
-        const langCount = Object.keys(parsed).length;
-        console.log(`[autoTranslate] ✅ Translated into ${langCount} languages successfully.`);
+        console.log(`[autoTranslate] ✅ Translated into ${Object.keys(parsed).length} languages successfully.`);
         return parsed;
     } catch (error: any) {
-        console.error("[autoTranslate] GPT translation failed:", error?.message);
-        // [적요] 실패 시 원본 데이터만 영어로 반환
+        console.error(`[autoTranslate] ${engine} translation failed:`, error?.message);
         return {
             en: { name, narration, description, detailedDescription },
         };

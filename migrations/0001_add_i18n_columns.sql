@@ -48,9 +48,14 @@ WHERE translations IS NOT NULL
 SELECT
   id,
   name,
-  CASE WHEN narration_i18n IS NOT NULL THEN jsonb_object_keys(narration_i18n)::text ELSE 'EMPTY' END AS available_narration_langs,
-  CASE WHEN description_i18n IS NOT NULL THEN jsonb_object_keys(description_i18n)::text ELSE 'EMPTY' END AS available_desc_langs
+  CASE WHEN narration_i18n IS NOT NULL AND jsonb_typeof(narration_i18n) = 'object' 
+       THEN (SELECT string_agg(k, ', ') FROM jsonb_object_keys(narration_i18n) k) 
+       ELSE 'EMPTY' END AS available_narration_langs,
+  CASE WHEN description_i18n IS NOT NULL AND jsonb_typeof(description_i18n) = 'object' 
+       THEN (SELECT string_agg(k, ', ') FROM jsonb_object_keys(description_i18n) k) 
+       ELSE 'EMPTY' END AS available_desc_langs
 FROM landmarks
+WHERE narration_i18n IS NOT NULL OR description_i18n IS NOT NULL
 LIMIT 10;
 
 -- ============================================================
