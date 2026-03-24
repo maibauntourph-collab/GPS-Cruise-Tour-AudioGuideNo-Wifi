@@ -151,21 +151,26 @@ export default function LandmarkDetailDialog({
       setCurrentSentenceIndex(-1);
     };
 
+    // [Bug Doctor 2026-03-25] 번역 실패 시 TTS 언어 불일치 방지
+    // No-WiFi 환경에서 번역이 실패하면 영어 텍스트가 남는데, 이를 러시아어 음성 등으로
+    // 읽으면 매우 어색합니다. resolvePlaybackLanguage()로 실제 텍스트 언어를 감지합니다.
+    const effectivePlaybackLang = audioService.resolvePlaybackLanguage(textToPlay, selectedLanguage);
+
     if (audioMode === 'openai') {
       setIsPlaying(true);
       setIsPaused(false);
       const success = await audioService.playOpenAISentences(
         textToPlay,
-        selectedLanguage,
+        effectivePlaybackLang,
         (index) => setCurrentSentenceIndex(index),
         onPlaybackEnd,
         useIndex
       );
       if (!success) {
-        // [적요] openai 실패 시 TTS fallback - effectiveRate 사용
+        // [적요] openai 실패 시 TTS fallback - effectiveRate 및 감지된 언어 사용
         audioService.playSentences(
           textToPlay,
-          selectedLanguage,
+          effectivePlaybackLang,
           effectiveRate,
           (index) => setCurrentSentenceIndex(index),
           onPlaybackEnd,
@@ -175,10 +180,10 @@ export default function LandmarkDetailDialog({
     } else {
       setIsPlaying(true);
       setIsPaused(false);
-      // [Bug Doctor] playbackRate → effectiveRate 로 교체: 즉시 반영
+      // [Bug Doctor] playbackRate → effectiveRate 로 교체. 언어도 감지된 실제 언어 사용
       audioService.playSentences(
         textToPlay,
-        selectedLanguage,
+        effectivePlaybackLang,
         effectiveRate,
         (index) => setCurrentSentenceIndex(index),
         onPlaybackEnd,

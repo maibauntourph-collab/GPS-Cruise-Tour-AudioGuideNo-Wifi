@@ -16,7 +16,7 @@ import { env } from "./env";
 export interface IStorage {
   getCities(): Promise<City[]>;
   getCity(id: string): Promise<City | undefined>;
-  getLandmarks(cityId?: string): Promise<Landmark[]>;
+  getLandmarks(cityId?: string, search?: string): Promise<Landmark[]>;
   getLandmark(id: string): Promise<Landmark | undefined>;
   // Visited landmarks methods
   markLandmarkVisited(landmarkId: string, sessionId?: string): Promise<VisitedLandmark>;
@@ -121,7 +121,7 @@ export class MemStorage implements IStorage {
     }
   }
 
-  async getLandmarks(cityId?: string): Promise<Landmark[]> {
+  async getLandmarks(cityId?: string, search?: string): Promise<Landmark[]> {
     // [연구소장 디버그] 명소 데이터 취득 경로 추적
     const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
     const hardcodedIds = hardcodedLandmarks.map(l => l.id);
@@ -138,23 +138,42 @@ export class MemStorage implements IStorage {
       console.log(`[Storage Debug] Database landmarks found (excluding hardcoded): ${dbLandmarks.length}`);
 
       // Combine all sources: hardcoded, memory, and database
-      const allLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values()), ...dbLandmarks];
+      let allLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values()), ...dbLandmarks];
       console.log(`[Storage Debug] Total combined landmarks: ${allLandmarks.length}`);
 
       if (cityId) {
-        const filtered = allLandmarks.filter(landmark => landmark.cityId === cityId);
-        console.log(`[Storage Debug] Filtered landmarks for city ${cityId}: ${filtered.length}`);
-        return filtered;
+        allLandmarks = allLandmarks.filter(landmark => landmark.cityId === cityId);
+        console.log(`[Storage Debug] Filtered landmarks for city ${cityId}: ${allLandmarks.length}`);
       }
+
+      if (search) {
+        const query = search.toLowerCase();
+        allLandmarks = allLandmarks.filter(l =>
+          l.name.toLowerCase().includes(query) ||
+          (l.searchKeywords?.some(k => k.toLowerCase().includes(query)))
+        );
+        console.log(`[Storage Debug] Filtered landmarks by search "${search}": ${allLandmarks.length}`);
+      }
+
       return allLandmarks;
     } catch (error) {
       // If DB query fails, fall back to hardcoded + memory data
       console.error('[Storage Error] DB access failed for getLandmarks:', error);
-      const fallbackLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values())];
+      let fallbackLandmarks = [...hardcodedLandmarks, ...Array.from(this.landmarksMap.values())];
       console.log(`[Storage Debug] Fallback landmarks: ${fallbackLandmarks.length}`);
+
       if (cityId) {
-        return fallbackLandmarks.filter(landmark => landmark.cityId === cityId);
+        fallbackLandmarks = fallbackLandmarks.filter(landmark => landmark.cityId === cityId);
       }
+
+      if (search) {
+        const query = search.toLowerCase();
+        fallbackLandmarks = fallbackLandmarks.filter(l =>
+          l.name.toLowerCase().includes(query) ||
+          (l.searchKeywords?.some(k => k.toLowerCase().includes(query)))
+        );
+      }
+
       return fallbackLandmarks;
     }
   }
@@ -670,9 +689,10 @@ export class MemStorage implements IStorage {
 
   async updateCity(id: string, updates: Partial<City>): Promise<City | undefined> {
     try {
+      const { createdAt, updatedAt, ...rest } = updates;
       const [updated] = await db
         .update(citiesTable)
-        .set({ ...updates, updatedAt: new Date() })
+        .set({ ...rest, updatedAt: new Date() } as any)
         .where(eq(citiesTable.id, id))
         .returning();
       return updated as City;
@@ -694,7 +714,7 @@ export class MemStorage implements IStorage {
       const { createdAt, updatedAt, ...rest } = updates;
       const [updated] = await db
         .update(landmarksTable)
-        .set({ ...rest, updatedAt: new Date() })
+        .set({ ...rest, updatedAt: new Date() } as any)
         .where(eq(landmarksTable.id, id))
         .returning();
       return updated as unknown as Landmark;

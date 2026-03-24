@@ -1477,15 +1477,27 @@ export default function Home() {
               isCarNavZoomMode={isCarNavZoomMode}
             />
 
-            {/* [적요] 카드가 최소화된 상태(IsCardMinimized)일 때만 하단에 리스트 보기 버튼을 노출합니다. */}
+            {/* [적요 2026-03-25 03:26] 카드가 최소화된 상태(IsCardMinimized)일 때
+                경로(route) 아이콘 FAB + 리스트 보기 버튼을 하단에 노출합니다.
+                학생들에게: 이 FAB은 X 닫기 버튼으로 카드를 최소화했을 때 표시되며,
+                클릭하면 카드가 다시 확장(onToggleMinimized)됩니다. */}
             {isCardMinimized && (
-              <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 z-[1500]">
+              <div className="absolute bottom-[20px] right-4 z-[1500] flex flex-col items-end gap-3">
+                {/* 경로(route) 아이콘 FAB — 프리미엄 디자인 */}
                 <Button
-                  className="h-14 px-8 rounded-full shadow-2xl bg-white text-slate-800 border-2 border-primary/20 hover:border-primary/50 transition-all flex items-center gap-3 active:scale-95 font-black text-lg"
+                  className="h-14 w-14 rounded-full shadow-2xl bg-gradient-to-br from-[#E9633F] to-[#FF8A65] text-white hover:from-[#d4562f] hover:to-[#f07a55] transition-all flex items-center justify-center active:scale-95 ring-4 ring-orange-100/50"
+                  onClick={() => setIsCardMinimized(false)}
+                  title={selectedLanguage === 'ko' ? '가이드 카드 열기' : 'Open Guide Card'}
+                >
+                  <Navigation className="w-6 h-6" />
+                </Button>
+                {/* 리스트 보기 보조 버튼 */}
+                <Button
+                  className="h-10 px-5 rounded-full shadow-xl bg-white text-slate-800 border border-primary/20 hover:border-primary/50 transition-all flex items-center gap-2 active:scale-95 font-bold text-sm"
                   onClick={handleShowLandmarkList}
                 >
-                  <List className="w-6 h-6 text-primary" />
-                  <span>VIEW LIST</span>
+                  <List className="w-4 h-4 text-primary" />
+                  <span className="text-xs">{selectedLanguage === 'ko' ? '목록' : 'LIST'}</span>
                 </Button>
               </div>
             )}

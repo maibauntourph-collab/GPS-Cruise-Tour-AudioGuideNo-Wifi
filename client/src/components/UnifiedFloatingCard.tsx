@@ -342,10 +342,11 @@ export function UnifiedFloatingCard({
         const fallbackText = getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') || getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
         if (fallbackText) {
           setAudioContentType('summary');
-          // Restart with summary text
+          // [Bug Doctor 2026-03-25] 텍스트 실제 언어 감지 후 TTS 음성 선택
+          const fallbackPlayLang = audioService.resolvePlaybackLanguage(fallbackText, selectedLanguage);
           audioService.playSentences(
             fallbackText,
-            selectedLanguage,
+            fallbackPlayLang,
             playbackRate,
             (index) => setCurrentSentenceIndex(index),
             () => {
@@ -359,9 +360,12 @@ export function UnifiedFloatingCard({
       }
 
       if (text) {
+        // [Bug Doctor 2026-03-25] 번역 실패 시 TTS 언어 불일치 방지
+        // resolvePlaybackLanguage가 실제 텍스트 언어를 감지하여 적절한 TTS 음성을 선택합니다.
+        const playLang = audioService.resolvePlaybackLanguage(text, selectedLanguage);
         audioService.playSentences(
           text,
-          selectedLanguage,
+          playLang,
           playbackRate,
           (index) => setCurrentSentenceIndex(index),
           () => {
@@ -535,15 +539,16 @@ export function UnifiedFloatingCard({
                 </span>
               </div>
             )}
+            {/* [Designer Kim 2026-03-25 03:33] X 닫기 버튼 동작 일괄 변경:
+                - 랜드마크 선택 여부와 관계없이 X 클릭 시 무조건 카드를 아래로 최소화합니다.
+                - 사용자는 우측 하단의 경로(Navigation) 아이콘을 통해 다시 카드를 열 수 있습니다. */}
             <Button
               variant="ghost"
               size="icon"
               className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white/80"
               onClick={() => {
-                if (selectedLandmark) {
-                  onLandmarkClose();
-                } else if (onMinimizeToMenu) {
-                  onMinimizeToMenu();
+                if (onToggleMinimized) {
+                  onToggleMinimized();
                 }
               }}
             >
@@ -566,7 +571,11 @@ export function UnifiedFloatingCard({
             variant="ghost"
             size="icon"
             className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600"
-            onClick={onLandmarkClose}
+            onClick={() => {
+              if (onToggleMinimized) {
+                onToggleMinimized();
+              }
+            }}
           >
             <X className="w-4 h-4" />
           </Button>

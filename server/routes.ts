@@ -57,7 +57,7 @@ export function registerRoutes(app: Hono<any>) {
     return c.json({ key, value: value || null });
   });
 
-  app.patch("/api/settings/:key", requireAuth, requireRole(["admin"]), async (c) => {
+  app.patch("/api/settings/:key", requireAuth, requireRole("admin"), async (c) => {
     const key = c.req.param("key");
     const { value } = await c.req.json();
 
@@ -383,7 +383,8 @@ export function registerRoutes(app: Hono<any>) {
   app.get("/api/landmarks", async (c) => {
     try {
       const cityId = c.req.query("cityId");
-      const landmarks = await storage.getLandmarks(cityId);
+      const search = c.req.query("search");
+      const landmarks = await storage.getLandmarks(cityId, search);
       return c.json(landmarks);
     } catch (error) {
       return c.json({ error: "Failed to fetch landmarks" }, 500);

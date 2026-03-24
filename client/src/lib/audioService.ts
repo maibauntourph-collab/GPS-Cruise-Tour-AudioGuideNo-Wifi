@@ -197,6 +197,77 @@ export class AudioService {
     return 'en-US';
   }
 
+  /**
+   * [교수님 노트 2026-03-25] TTS 음성-텍스트 언어 불일치 방지 핵심 로직
+   * 
+   * 문제: No-WiFi 환경에서 번역 API가 실패하면, 텍스트는 영어 그대로인데
+   *       TTS 음성은 러시아어(ru-RU) 등으로 설정되어 어색하게 읽힙니다.
+   * 
+   * 해결: 텍스트의 실제 유니코드 문자 범위를 분석해서 언어를 감지합니다.
+   *       감지된 언어와 요청된 언어가 다르면, 실제 텍스트 언어의 음성을 사용합니다.
+   * 
+   * @param text - 실제 재생될 텍스트
+   * @returns 감지된 언어 코드 (BCP-47 형식 예: 'en', 'ko', 'ja')
+   */
+  public detectTextLanguage(text: string): string {
+    if (!text || text.trim().length === 0) return 'en';
+
+    // [적요] 유니코드 범위로 언어 감지
+    const koreanChars = (text.match(/[가-힣ㄱ-ㅎㅏ-ㅣ]/g) || []).length;
+    const japaneseChars = (text.match(/[\u3040-\u30FF\u31F0-\u31FF]/g) || []).length;
+    const chineseChars = (text.match(/[\u4E00-\u9FFF\u3400-\u4DBF]/g) || []).length;
+    const arabicChars = (text.match(/[\u0600-\u06FF]/g) || []).length;
+    const cyrillicChars = (text.match(/[\u0400-\u04FF]/g) || []).length;
+    const thaiChars = (text.match(/[\u0E00-\u0E7F]/g) || []).length;
+    const devanagariChars = (text.match(/[\u0900-\u097F]/g) || []).length;
+    const total = text.replace(/\s/g, '').length || 1;
+
+    // 5% 이상이면 해당 언어로 판정
+    if (koreanChars / total > 0.05) return 'ko';
+    if (japaneseChars / total > 0.05) return 'ja';
+    if (arabicChars / total > 0.05) return 'ar';
+    if (cyrillicChars / total > 0.05) return 'ru';
+    if (thaiChars / total > 0.05) return 'th';
+    if (devanagariChars / total > 0.05) return 'hi';
+    // 한자: 일본어 히라가나/가타카나가 없으면 중국어
+    if (chineseChars / total > 0.05) return japaneseChars > 0 ? 'ja' : 'zh';
+
+    return 'en'; // 기본값: 영어
+  }
+
+  /**
+   * [교수님 노트] TTS 재생 시 언어 결정 로직
+   * 
+   * 번역이 성공하면 → 번역 언어(targetLanguage)의 TTS 음성 사용
+   * 번역이 실패해서 원본 영어가 남으면 → 영어 TTS 음성 사용 (불일치 방지!)
+   * 
+   * @param text - 실제 재생될 텍스트  
+   * @param requestedLanguage - 사용자가 설정한 UI 언어
+   * @returns TTS에 실제 사용할 언어 코드
+   */
+  public resolvePlaybackLanguage(text: string, requestedLanguage: string): string {
+    const detectedLang = this.detectTextLanguage(text);
+    const requestedBase = requestedLanguage.split('-')[0];
+
+    // 감지된 언어와 요청 언어가 같으면 그대로 사용
+    if (detectedLang === requestedBase) return requestedLanguage;
+
+    // 감지된 언어가 영어(en)이고 요청 언어가 라틴 계열이면 요청 언어 유지
+    // (예: 'fr', 'de', 'es' 등은 라틴 문자 사용 → 영어 텍스트를 해당 언어 음성으로 읽어도 비교적 자연스러움)
+    const latinLanguages = ['fr', 'de', 'es', 'it', 'pt', 'nl', 'pl', 'sv', 'da', 'fi', 'no', 'el', 'cs'];
+    if (detectedLang === 'en' && latinLanguages.includes(requestedBase)) return requestedLanguage;
+
+    // 감지된 언어가 영어인데 요청 언어가 비라틴 계열(ru, ko, ja 등)이면 → 영어로 오버라이드
+    // 이 경우는 번역이 실패했다는 뜻이므로 영어 TTS로 읽어야 자연스러움
+    if (detectedLang === 'en') {
+      console.log(`[AudioService] 🔧 Language Override: text is English but UI lang is '${requestedLanguage}'. Using en-US voice.`);
+      return 'en';
+    }
+
+    // 그 외: 감지된 언어 사용 (번역된 텍스트와 TTS 동기화)
+    return detectedLang;
+  }
+
   // Get all possible language codes for broader voice selection
   private getLanguageVariants(langCode: string): string[] {
     const baseLang = langCode.split('-')[0];

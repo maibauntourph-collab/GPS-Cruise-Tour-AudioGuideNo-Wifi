@@ -113,7 +113,7 @@ const CITY_IMAGES: Record<string, string> = {
     'budapest': '/images/countries/hungary_luxury.png',
     'warsaw': '/images/countries/poland_luxury.png',
     'copenhagen': '/images/countries/denmark_luxury.png',
-    'oslo': '/images/countries/norway_luxury.png',
+    'oslo': 'https://images.unsplash.com/photo-1513519964645-0ad339ddfbdf?q=80&w=1200',
     'busan': '/images/countries/south_korea.png',
     'jeju': '/images/countries/south_korea.png',
     'brussels': 'https://images.unsplash.com/photo-1558230344-9f7988350567?q=80&w=1200',
@@ -165,20 +165,24 @@ export function CitySelectTab({
 
     const installLabels = getInstallLabels(selectedLanguage);
 
-    // [적요] 국가 목록 추출
+    // [적요] 국가 목록 추출 (카테고리 연동)
     const countries = React.useMemo(() => {
-        const countrySet = new Set(cities.map(c => c.country));
+        const filteredForCategory = category === 'all'
+            ? cities
+            : cities.filter(c => getCityCategory(c) === category);
+        const countrySet = new Set(filteredForCategory.map(c => c.country));
         return ['All', ...Array.from(countrySet).sort()];
-    }, [cities]);
+    }, [cities, category]);
 
     // [적요] 카테고리/국가 필터링
     const filteredCities = cities.filter(c => {
-        // 1. 국가 필터
+        // 1. 카테고리 필터
+        if (category !== 'all' && getCityCategory(c) !== category) return false;
+
+        // 2. 국가 필터
         if (selectedCountry !== 'All' && c.country !== selectedCountry) return false;
 
-        // 2. 카테고리 필터
-        if (category === 'all') return true;
-        return getCityCategory(c) === category;
+        return true;
     });
 
     // [적요] 바텀 탭 아이콘 및 레이블
@@ -281,7 +285,10 @@ export function CitySelectTab({
                         {(['all', 'asia', 'europe', 'recommended'] as const).map(cat => (
                             <button
                                 key={cat}
-                                onClick={() => setCategory(cat)}
+                                onClick={() => {
+                                    setCategory(cat);
+                                    setSelectedCountry('All');
+                                }}
                                 className={`whitespace-nowrap px-4 py-2 rounded-full text-[13px] font-bold transition-all shrink-0 ${category === cat
                                     ? 'bg-[#E85D36] text-white shadow-sm'
                                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'

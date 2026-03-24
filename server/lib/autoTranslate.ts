@@ -163,16 +163,27 @@ export async function autoTranslateLandmark(
             sourceData.detailedDescription || ""
         );
 
-        // [적요] NeonDB translations 컬럼 업데이트
+        // [Server Park 2026-03-25] 신규 다국어 스키마 전용 컬럼 데이터 생성
+        const narrationI18n: Record<string, string> = {};
+        const descriptionI18n: Record<string, string> = {};
+
+        for (const [lang, content] of Object.entries(translations)) {
+            if (content.narration) narrationI18n[lang] = content.narration;
+            if (content.description) descriptionI18n[lang] = content.description;
+        }
+
+        // [적요] NeonDB translations 및 전용 I18n 컬럼 업데이트
         await db
             .update(landmarks)
             .set({
                 translations: translations as any,
+                narrationI18n: narrationI18n as any,
+                descriptionI18n: descriptionI18n as any,
                 updatedAt: new Date(),
             })
             .where(eq(landmarks.id, landmarkId));
 
-        console.log(`[autoTranslate] ✅ NeonDB updated: landmark ${landmarkId} with ${Object.keys(translations).length} language translations.`);
+        console.log(`[autoTranslate] ✅ NeonDB updated: landmark ${landmarkId} with ${Object.keys(translations).length} language translations (incl. narrationI18n).`);
     } catch (error: any) {
         // [적요] 번역 실패는 랜드마크 저장을 막지 않음 (비동기 처리)
         console.error(`[autoTranslate] ❌ Failed to auto-translate landmark ${landmarkId}:`, error?.message);

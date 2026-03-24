@@ -98,6 +98,20 @@ export const translationsSchema = z.record(z.string(), translationContentSchema)
 
 export type Translations = z.infer<typeof translationsSchema>;
 
+/**
+ * [Server Park 2026-03-25] 🌏 나레이션 전용 다국어 JSONB 타입
+ *
+ * 학생들에게: translations 컬럼이 모든 필드(name, narration, description...)를 담는 '큰 집'이라면,
+ * NarrationI18n은 나레이션 텍스트만 담는 '전용 방'입니다.
+ * 구조: { "ko": "...", "ja": "...", "en": "...", "fr": "..." }
+ *
+ * 장점:
+ * 1. DB 레벨에서 특정 언어 나레이션만 쿼리 가능 (성능 최적화)
+ * 2. TTS 엔진에 바로 전달 가능한 순수 텍스트 맵
+ * 3. 번역 작업 현황 파악 용이 (어떤 언어가 번역되었는지 한눈에)
+ */
+export type NarrationI18n = Record<string, string>;
+
 // Landmark/POI schema
 export const landmarkSchema = z.object({
   id: z.string(),
@@ -109,7 +123,13 @@ export const landmarkSchema = z.object({
   narration: z.string(),
   description: z.string().nullable().optional(),
   category: z.string().nullable().optional(),
+  // [Server Park 2026-03-25] 기존 통합 번역 컬럼 (하위 호환성 유지)
   translations: translationsSchema,
+  // [Server Park 2026-03-25] 🌏 나레이션 전용 다국어 컬럼 (신규)
+  // narrationI18n: TTS에 바로 쓰는 나레이션 텍스트만 담는 맵 { ko: '...', ja: '...' }
+  // descriptionI18n: UI 표시용 짧은 설명 텍스트 맵
+  narrationI18n: z.record(z.string(), z.string()).nullable().optional(),
+  descriptionI18n: z.record(z.string(), z.string()).nullable().optional(),
   detailedDescription: z.string().nullable().optional(), // Long 5-minute reading content
   photos: z.array(z.string()).nullable().optional(), // Array of photo URLs
   historicalInfo: z.string().nullable().optional(), // Extended historical information
@@ -133,8 +153,8 @@ export const landmarkSchema = z.object({
   price: z.number().nullable().optional(), // Price in EUR for the premium guide
   createdAt: z.union([z.string(), z.date()]).optional(),
   updatedAt: z.union([z.string(), z.date()]).optional(),
-  targetNations: z.array(z.string()).nullable().optional(), // 🌏 [NEW] Target nations for recommendations (e.g. ["US", "JP", "TW"])
-  searchKeywords: z.array(z.string()).nullable().optional(), // 🔍 [NEW] Search keywords/tags
+  targetNations: z.array(z.string()).nullable().optional(), // 🌏 Target nations for recommendations (e.g. ["US", "JP", "TW"])
+  searchKeywords: z.array(z.string()).nullable().optional(), // 🔍 Search keywords/tags
 });
 
 export type Landmark = z.infer<typeof landmarkSchema>;
@@ -208,6 +228,18 @@ export const cities = pgTable("cities", {
  * - narration: AI가 생성한 생생한 이야기 본문입니다.
  * - translations: 다국어 지원을 위해 번역 데이터를 JSONB 형식으로 통째로 보관합니다.
  */
+/**
+ * [Server Park + Dodari 2026-03-25] 🌏 다국어 나레이션 확장 설계
+ *
+ * 데이터 계층 구조 (우선순위 순서):
+ * 1. narration_i18n   → TTS 전용 나레이션 텍스트 맵 { ko: '...', ja: '...' }
+ * 2. description_i18n → UI 표시용 짧은 설명 맵 { ko: '...', ja: '...' }
+ * 3. translations     → 기존 통합 번역 데이터 (하위 호환성 - narration, name 등 포함)
+ * 4. narration        → 영어 나레이션 기본값 (최우선 fallback)
+ *
+ * 학생들에게: 이 구조는 '위에서 아래로 내려오는 폭포(Waterfall)' 패턴입니다!
+ * 위에 있는 데이터일수록 더 정확하고 전용화된 데이터이며, 없으면 다음 단계로 내려갑니다.
+ */
 export const landmarks = pgTable("landmarks", {
   id: varchar("id").primaryKey(),
   cityId: varchar("city_id").notNull(),
@@ -223,8 +255,13 @@ export const landmarks = pgTable("landmarks", {
   historicalInfo: text("historical_info"),
   yearBuilt: varchar("year_built"),
   architect: varchar("architect"),
-  translations: json("translations"), // JSONB for all language translations
-  // [교육용 주석] 식당/카페 전용 필드들입니다. 
+  // [Server Park 2026-03-25] 강타입 적용: Translations 인터페이스로 엄격하게 관리
+  translations: json("translations").$type<Translations | null>(), // 기존 통합 번역 (하위 호환)
+  // [Server Park 2026-03-25] 🌏 나레이션 전용 다국어 컬럼 (신규 추가)
+  // DB ALTER TABLE 마이그레이션 필요: migrations/0001_add_i18n_columns.sql 참고
+  narrationI18n: json("narration_i18n").$type<NarrationI18n | null>(), // TTS 나레이션 맵
+  descriptionI18n: json("description_i18n").$type<NarrationI18n | null>(), // UI 설명 맵
+  // [교육용 주석] 식당/카페 전용 필드들입니다.
   // 장소의 유형에 따라 일부 필드만 사용될 수도 있는 '유연한 설계' 패턴입니다.
   openingHours: varchar("opening_hours"),
   priceRange: varchar("price_range"),
@@ -240,8 +277,8 @@ export const landmarks = pgTable("landmarks", {
   paymentMethods: json("payment_methods").$type<string[] | null>(), // Array of strings
   isPremium: boolean("is_premium").notNull().default(false),
   price: doublePrecision("price"),
-  targetNations: json("target_nations").$type<string[] | null>(), // 🌏 [NEW] Specific nations to recommend this landmark to
-  searchKeywords: json("search_keywords").$type<string[] | null>(), // 🔍 [NEW] Search keywords/tags
+  targetNations: json("target_nations").$type<string[] | null>(), // 🌏 Specific nations to recommend this landmark to
+  searchKeywords: json("search_keywords").$type<string[] | null>(), // 🔍 Search keywords/tags
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

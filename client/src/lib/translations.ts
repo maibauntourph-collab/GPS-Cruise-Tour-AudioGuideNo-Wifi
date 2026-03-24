@@ -6,7 +6,16 @@ export function getTranslatedContent(
   field: 'name' | 'narration' | 'description' | 'detailedDescription' | 'historicalInfo'
 ): string {
   if (!landmark) return '';
-  // Check if translations exist
+
+  // [Server Park 2026-03-25] 1순위: 전용 I18n 컬럼 확인 (narrationI18n, descriptionI18n)
+  if (field === 'narration' && landmark.narrationI18n && landmark.narrationI18n[language]) {
+    return landmark.narrationI18n[language];
+  }
+  if (field === 'description' && landmark.descriptionI18n && landmark.descriptionI18n[language]) {
+    return landmark.descriptionI18n[language];
+  }
+
+  // 2순위: 기존 통합 translations 컬럼 확인 (하위 호환성)
   if (landmark.translations && landmark.translations[language]) {
     const translation = landmark.translations[language];
     if (translation && translation[field]) {
@@ -14,15 +23,26 @@ export function getTranslatedContent(
     }
   }
 
-  // Fallback to English if available
-  if (language !== 'en' && landmark.translations && landmark.translations['en']) {
-    const englishTranslation = landmark.translations['en'];
-    if (englishTranslation && englishTranslation[field]) {
-      return englishTranslation[field] as string;
+  // 3순위: 기본 언어(영어)로 Fallback
+  if (language !== 'en') {
+    // 전용 컬럼 영어 Fallback
+    if (field === 'narration' && landmark.narrationI18n && landmark.narrationI18n['en']) {
+      return landmark.narrationI18n['en'];
+    }
+    if (field === 'description' && landmark.descriptionI18n && landmark.descriptionI18n['en']) {
+      return landmark.descriptionI18n['en'];
+    }
+
+    // 기존 통합 컬럼 영어 Fallback
+    if (landmark.translations && landmark.translations['en']) {
+      const englishTranslation = landmark.translations['en'];
+      if (englishTranslation && englishTranslation[field]) {
+        return englishTranslation[field] as string;
+      }
     }
   }
 
-  // Fallback to default values
+  // 4순위: 객체 최상위 기본 필드 반환
   return landmark[field] || '';
 }
 
