@@ -13,12 +13,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Welcome to Penang",
         "subTitle": "The Pearl of the Orient: Heritage and Gastronomy",
-        "heroImage": "/images/countries/malaysia_luxury.png"
+        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
       },
       "ko": {
         "title": "동양의 진주, 페낭에 오신 것을 환영합니다",
         "subTitle": "유네스코 유산과 식도락의 천국",
-        "heroImage": "/images/countries/malaysia_luxury.png"
+        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
       }
     },
     "defaultGuideId": null,
@@ -37,12 +37,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Discover Kuala Lumpur",
         "subTitle": "Modern Elegance and Tropical Charm",
-        "heroImage": "/images/countries/malaysia_luxury.png"
+        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
       },
       "ko": {
         "title": "쿠알라룸푸르를 발견하세요",
         "subTitle": "현대적인 우아함과 열대의 매력",
-        "heroImage": "/images/countries/malaysia_luxury.png"
+        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
       }
     },
     "defaultGuideId": null,
@@ -239,12 +239,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Bienvenue à Paris",
         "subTitle": "The City of Light and Art",
-        "heroImage": "/images/countries/france_luxury.png"
+        "heroImage": "/images/cities/brussels.jpg"
       },
       "ko": {
         "title": "빛의 도시, 파리에 오신 것을 환영합니다",
         "subTitle": "예술과 낭만이 가득한 시간",
-        "heroImage": "/images/countries/france_luxury.png"
+        "heroImage": "/images/cities/brussels.jpg"
       }
     },
     "defaultGuideId": null,

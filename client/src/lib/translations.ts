@@ -42,7 +42,7 @@ export function getTranslatedContent(
   return landmark[field] || '';
 }
 
-const uiTranslations: Record<string, Record<string, string>> = {
+export const uiTranslations: Record<string, Record<string, string>> = {
   en: {
     landmarks: 'Landmarks',
     activities: 'Activities',
@@ -104,7 +104,16 @@ const uiTranslations: Record<string, Record<string, string>> = {
     downloadAudio: 'Download Audio',
     selectLanguage: 'Select Language',
     startDownload: 'Start Download',
-    selectCityFirst: 'Proceed to select a city and download audio'
+    selectCityFirst: 'Proceed to select a city and download audio',
+    offlinePreparation: 'Offline Preparation',
+    downloadTranslations: 'Download All Translations',
+    downloading: 'Downloading...',
+    installWebApp: 'Install Web App',
+    offlineReady: 'Offline Ready!',
+    downloadComplete: 'Download Complete',
+    preparingAssets: 'Preparing assets for offline use...',
+    allTranslationsCached: 'All language translations have been saved locally.',
+    pwaReadyToInstall: 'App is ready to be installed on your device.'
   },
   es: {
     landmarks: 'Monumentos',
@@ -554,7 +563,16 @@ const uiTranslations: Record<string, Record<string, string>> = {
     downloadAudio: '오디오 다운로드',
     selectLanguage: '언어 선택',
     startDownload: '다운로드 시작',
-    selectCityFirst: '계속하기를 눌러 도시를 선택한 후 다운로드하세요'
+    selectCityFirst: '계속하기를 눌러 도시를 선택한 후 다운로드하세요',
+    offlinePreparation: '오프라인 준비',
+    downloadTranslations: '모든 번역 다운로드',
+    downloading: '다운로드 중...',
+    installWebApp: '웹 앱 설치',
+    offlineReady: '오프라인 준비 완료!',
+    downloadComplete: '다운로드 완료',
+    preparingAssets: '오프라인 사용을 위한 에셋을 준비 중입니다...',
+    allTranslationsCached: '모든 언어 번역 데이터가 로컬에 저장되었습니다.',
+    pwaReadyToInstall: '앱을 기기에 설치할 준비가 되었습니다.'
   },
   ar: {
     landmarks: 'معالم',
