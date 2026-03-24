@@ -4,8 +4,8 @@
  * 각 국가의 매력을 한눈에 보여주는 '후킹 멘트(Hooking Ment)'와 프리미엄 이미지를 활용해 
  * 사용자의 여행 기대감을 극대화하는 UX의 핵심입니다."
  */
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 import { Globe, ArrowRight, MapPin } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -140,7 +140,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '중세풍 건물과 초콜릿처럼 달콤한 브뤼셀 여행',
         en: 'Luxury Belgium: Gothic grandeur and world-class delights',
         th: 'เบลเยียมที่หรูหรา: ความยิ่งใหญ่สไตล์โกธิคและความสุขอันดับโลก',
-        image: 'https://images.unsplash.com/photo-1541344999736-83eca872977a?q=80&w=1200'
+        image: 'https://images.unsplash.com/photo-1572947118235-905e94b29bb7?q=80&w=1200'
     },
     'Czech Republic': {
         ko: '시간이 멈춘 중세의 신비로움, 프라하의 밤',
@@ -215,6 +215,41 @@ export function CountryScrollSelector({
         return data.image;
     };
 
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollStart, setScrollStart] = useState(0);
+
+    // [Mouse Wheel Scroll] 가로 방향 휠 스크롤 구현
+    const handleWheel = (e: React.WheelEvent) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            if (scrollRef.current) {
+                scrollRef.current.scrollBy({ left: e.deltaY * 1.5, behavior: 'auto' });
+            }
+        }
+    };
+
+    // [Pick & Grab] 마우스 드래그 스크롤 구현
+    const handleMouseDown = (e: React.MouseEvent) => {
+        setIsDragging(true);
+        if (scrollRef.current) {
+            setStartX(e.pageX - scrollRef.current.offsetLeft);
+            setScrollStart(scrollRef.current.scrollLeft);
+        }
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!isDragging || !scrollRef.current) return;
+        e.preventDefault();
+        const x = e.pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 2; // 스크롤 감도 조정
+        scrollRef.current.scrollLeft = scrollStart - walk;
+    };
+
+    const stopDragging = () => {
+        setIsDragging(false);
+    };
+
     return (
         <div className={`flex flex-col w-full max-w-full overflow-hidden ${isEmbedded ? 'gap-2 py-0' : 'gap-6 py-4'}`}>
             {!isEmbedded && (
@@ -234,8 +269,16 @@ export function CountryScrollSelector({
                 </div>
             )}
 
-            {/* horizontal scroll container */}
-            <div className="flex overflow-x-auto gap-4 px-6 pb-6 no-scrollbar snap-x snap-mandatory">
+            {/* horizontal scroll container - [Drag & Wheel Support] */}
+            <div
+                ref={scrollRef}
+                onWheel={handleWheel}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={stopDragging}
+                onMouseLeave={stopDragging}
+                className={`flex overflow-x-auto gap-4 px-6 pb-6 no-scrollbar snap-x snap-mandatory ${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
+            >
                 {countries.map((country, index) => {
                     const isSelected = selectedCountry === country;
                     return (
