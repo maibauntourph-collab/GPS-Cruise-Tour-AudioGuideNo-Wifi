@@ -56,7 +56,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '스카이라인과 열대림이 공존하는 시크한 말레이시아',
         en: 'Luxury Malaysia: Where skylines meet tropical rainforests',
         th: 'มาเลเซียที่หรูหรา: ที่ซึ่งเส้นขอบฟ้ามาบรรจบกับป่าฝนเขตร้อน',
-        image: '/images/countries/malaysia.png'
+        image: '/images/countries/malaysia_luxury.png'
     },
     'Japan': {
         ko: '전통의 고요함과 찬란한 야경의 명품 교토-도쿄',
@@ -145,7 +145,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
     'Czech Republic': {
         ko: '시간이 멈춘 중세의 신비로움, 프라하의 밤',
         en: 'Luxury Czech: Mystical medieval charm and gothic wonders',
-        th: 'สาธารณรัฐเช็กที่ห루หรา: เสน่ห์ในยุคกลางที่ลึกลับและสิ่งมหัศจรรย์สไตล์โกธิค',
+        th: 'สาธารณรัฐเช็กที่หรูหรา: เสน่ห์ในยุคกลางที่ลึกลับและสิ่งมหัศจรรย์สไตล์โกธิค',
         image: '/images/countries/czech.png'
     },
     'Sweden': {

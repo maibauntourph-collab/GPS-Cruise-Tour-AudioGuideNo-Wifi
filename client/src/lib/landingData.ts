@@ -6,8 +6,8 @@ export const LANDING_DATA: Record<string, any> = {
         'zh-TW': { title: '動態首爾', subTitle: '過去與未來共存의 특별한 旅程', heroImage: '/images/countries/south_korea.png' }
     },
     'venice': {
-        'ko': { title: '물 위의 도시, 베네치아', subTitle: '곤돌라와 함께하는 낭만 여행', heroImage: 'https://images.unsplash.com/photo-1453747063559-36695c8771bd?w=800&q=80' },
-        'en': { title: 'Venice, City of Water', subTitle: 'Romantic journey with gondolas', heroImage: 'https://images.unsplash.com/photo-1453747063559-36695c8771bd?w=800&q=80' }
+        'ko': { title: '물 위의 도시, 베네치아', subTitle: '곤돌라와 함께하는 낭만 여행', heroImage: '/images/countries/italy_luxury.png' },
+        'en': { title: 'Venice, City of Water', subTitle: 'Romantic journey with gondolas', heroImage: '/images/countries/italy_luxury.png' }
     },
     'rome': {
         'ko': { title: '영원한 도시, 로마', subTitle: '고대 로마의 숨결을 느끼다', heroImage: '/images/landmarks/colosseum_luxury.png' },
@@ -20,19 +20,19 @@ export const LANDING_DATA: Record<string, any> = {
         'en': { heroImage: '/images/landmarks/big_ben_nanobanana.png' }
     },
     'barcelona': {
-        'en': { heroImage: '/images/landmarks/sagrada_familia.png' }
+        'en': { heroImage: '/images/countries/spain.png' }
     },
     'penang': {
         'en': { heroImage: '/images/countries/malaysia_luxury.png' }
     },
     'singapore': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1563293750-2c21458a2214?q=80&w=1200' }
+        'en': { heroImage: '/images/countries/singapore.png' }
     },
     'cebu': {
         'en': { heroImage: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800&q=80' }
     },
     'naples': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1588614959060-4d144f28b207?w=800&q=80' }
+        'en': { heroImage: '/images/countries/italy_luxury.png' }
     },
     'kuala-lumpur': {
         'en': { heroImage: '/images/countries/malaysia_luxury.png' }
@@ -41,9 +41,9 @@ export const LANDING_DATA: Record<string, any> = {
         'en': { heroImage: '/images/countries/thailand.png' }
     },
     'brussels': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1558230344-9f7988350567?q=80&w=1200' }
+        'en': { heroImage: '/images/countries/belgium.png' }
     },
     'prague': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1519671482749-3096263432ce?q=80&w=1200' }
+        'en': { heroImage: '/images/countries/czech.png' }
     }
 };
