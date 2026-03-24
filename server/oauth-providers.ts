@@ -5,7 +5,7 @@ import { env } from "./env";
 function getBaseUrl(): string {
   return env.REPLIT_DEV_DOMAIN
     ? `https://${env.REPLIT_DEV_DOMAIN}`
-    : `http://localhost:5001`;
+    : `http://localhost:4000`;
 }
 
 class GoogleProvider implements OAuthProvider {

@@ -32,31 +32,36 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '현대적 혁신과 고궁의 품격이 어우러진 럭셔리 서울',
         en: 'Luxury Seoul: Where modern innovation meets royal dignity',
         th: 'โซลที่หรูหรา: ที่ซึ่งนวัตกรรมสมัยใหม่มาพบกับความสง่างามของราชวงศ์',
-        image: '/images/countries/south_korea.png'
+        // [적요] 경로 수정: south_korea.png -> jeju island.png (존재하는 파일)
+        image: '/images/countries/jeju island.png'
     },
     'Italy': {
         ko: '지중해의 낭만과 역사가 숨쉬는 명품 이탈리아',
         en: 'Luxury Italy: Mediterranean romance and timeless history',
-        th: 'อิตาลีที่หรูหรา: ความโรแมนติกของเมดิเตอร์레네ียนและประวัติศาสตร์ที่เหนือกาลเวลา',
-        image: '/images/countries/italy_luxury.png'
+        th: 'อิตาลีที่หรูหรา: ความโรแมนติกของเมดิเตอร์เรเนียนและประวัติศาสตร์ที่เหนือกาลเวลา',
+        // [적요] Italy 전용 이미지가 부재하므로 로마 시티 이미지 활용
+        image: '/images/cities/rome.jpg'
     },
     'France': {
         ko: '예술과 미식, 세련된 취향의 정점 프랑스 파리',
         en: 'Luxury France: The pinnacle of art, cuisine, and refined taste',
-        th: 'ฝรั่งเศสที่หรูหรา: จุดสูงสุดของศิลปะ อาหาร และรสชาติที่ประณี트',
-        image: '/images/countries/france_luxury.png'
+        th: 'ฝรั่งเศสที่หรูหรา: จุดสูงสุดของศิลปะ อาหาร และรสชาติที่ประณีต',
+        // [적요] France 전용 이미지가 부재하므로 브뤼셀 이미지(인접국/건축물) 활용
+        image: '/images/cities/brussels.jpg'
     },
     'Thailand': {
         ko: '에메랄드빛 바다와 황금빛 사원의 럭셔리 휴양지',
         en: 'Luxury Thailand: Emerald seas and majestic golden temples',
         th: 'ไทยที่หรูหรา: ทะเลสีมรกตและวัดสีทองที่งดงาม',
-        image: '/images/countries/thailand.png'
+        // [적요] Thailand 전용 이미지가 부재하므로 싱가포르-another 활용
+        image: '/images/countries/singagpore-another.png'
     },
     'Malaysia': {
         ko: '스카이라인과 열대림이 공존하는 시크한 말레이시아',
         en: 'Luxury Malaysia: Where skylines meet tropical rainforests',
         th: 'มาเลเซียที่หรูหรา: ที่ซึ่งเส้นขอบฟ้ามาบรรจบกับป่าฝนเขตร้อน',
-        image: '/images/countries/malaysia_luxury.png'
+        // [적요] 경로 수정: 파일명에 타임스탬프 포함된 것으로 교체
+        image: '/images/countries/malaysia_cruise_luxury_1774366524365.png'
     },
     'Japan': {
         ko: '전통의 고요함과 찬란한 야경의 명품 교토-도쿄',
