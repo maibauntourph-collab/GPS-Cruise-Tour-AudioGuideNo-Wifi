@@ -816,7 +816,7 @@ export default function MapView({
       <UserInteractionTracker />
       <UserLocationUpdater position={userPosition} isCarNavZoomMode={isCarNavZoomMode} />
       <CityUpdater center={cityCenter} zoom={cityZoom} />
-      <MapResizer isCompact={isCompact} sidebarOpen={sidebarOpen} />
+      <MapResizer />
       <SelectedLandmarkUpdater landmark={selectedLandmark || null} isMobile={!!isMobile} />
       <GestureHandling selectedLanguage={selectedLanguage} />
       <MapClickHandler

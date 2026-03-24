@@ -36,8 +36,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.729Z",
-    "updatedAt": "2026-02-24T19:00:26.294Z"
+    "createdAt": new Date("2026-02-12T13:05:06.729Z"),
+    "updatedAt": new Date("2026-02-24T19:00:26.294Z")
   },
   {
     "id": "castel_santangelo",
@@ -160,8 +160,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.691Z",
-    "updatedAt": "2026-02-28T12:00:16.013Z"
+    "createdAt": new Date("2026-02-12T12:11:24.691Z"),
+    "updatedAt": new Date("2026-02-28T12:00:16.013Z")
   },
   {
     "id": "seoul_item_98",
@@ -198,8 +198,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.171Z",
-    "updatedAt": "2026-02-22T18:28:04.544Z"
+    "createdAt": new Date("2026-02-12T13:05:08.171Z"),
+    "updatedAt": new Date("2026-02-22T18:28:04.544Z")
   },
   {
     "id": "new-york_item_65",
@@ -236,8 +236,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.017Z",
-    "updatedAt": "2026-02-28T12:00:15.272Z"
+    "createdAt": new Date("2026-02-12T13:05:06.017Z"),
+    "updatedAt": new Date("2026-02-28T12:00:15.272Z")
   },
   {
     "id": "seoul_item_58",
@@ -274,8 +274,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.448Z",
-    "updatedAt": "2026-02-22T18:23:42.115Z"
+    "createdAt": new Date("2026-02-12T13:05:05.448Z"),
+    "updatedAt": new Date("2026-02-22T18:23:42.115Z")
   },
   {
     "id": "바르셀로나-demo-2",
@@ -312,8 +312,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.519Z",
-    "updatedAt": "2026-02-22T18:05:56.899Z"
+    "createdAt": new Date("2026-02-12T12:57:47.519Z"),
+    "updatedAt": new Date("2026-02-22T18:05:56.899Z")
   },
   {
     "id": "singapore_item_14",
@@ -350,8 +350,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.474Z",
-    "updatedAt": "2026-02-22T18:06:04.187Z"
+    "createdAt": new Date("2026-02-12T13:05:02.474Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.187Z")
   },
   {
     "id": "london_더_울즐리_the_wolseley",
@@ -389,8 +389,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:44:36.243Z",
-    "updatedAt": "2026-02-22T18:05:57.792Z"
+    "createdAt": new Date("2026-02-14T00:44:36.243Z"),
+    "updatedAt": new Date("2026-02-22T18:05:57.792Z")
   },
   {
     "id": "busan_item_36",
@@ -427,8 +427,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.977Z",
-    "updatedAt": "2026-02-22T18:05:58.046Z"
+    "createdAt": new Date("2026-02-12T13:05:03.977Z"),
+    "updatedAt": new Date("2026-02-22T18:05:58.046Z")
   },
   {
     "id": "seoul_item_108",
@@ -465,8 +465,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.835Z",
-    "updatedAt": "2026-02-28T12:00:16.773Z"
+    "createdAt": new Date("2026-02-12T13:05:08.835Z"),
+    "updatedAt": new Date("2026-02-28T12:00:16.773Z")
   },
   {
     "id": "london_item_30",
@@ -503,8 +503,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.591Z",
-    "updatedAt": "2026-02-22T18:06:04.377Z"
+    "createdAt": new Date("2026-02-12T13:05:03.591Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.377Z")
   },
   {
     "id": "london_item_40",
@@ -541,8 +541,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.276Z",
-    "updatedAt": "2026-02-22T18:06:04.515Z"
+    "createdAt": new Date("2026-02-12T13:05:04.276Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.515Z")
   },
   {
     "id": "paris_item_42",
@@ -579,8 +579,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.404Z",
-    "updatedAt": "2026-02-22T18:06:04.577Z"
+    "createdAt": new Date("2026-02-12T13:05:04.404Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.577Z")
   },
   {
     "id": "singapore_item_54",
@@ -617,8 +617,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.189Z",
-    "updatedAt": "2026-02-22T18:06:04.643Z"
+    "createdAt": new Date("2026-02-12T13:05:05.189Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.643Z")
   },
   {
     "id": "tokyo_item_99",
@@ -655,8 +655,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.235Z",
-    "updatedAt": "2026-02-28T12:00:18.249Z"
+    "createdAt": new Date("2026-02-12T13:05:08.235Z"),
+    "updatedAt": new Date("2026-02-28T12:00:18.249Z")
   },
   {
     "id": "london_item_60",
@@ -693,8 +693,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.602Z",
-    "updatedAt": "2026-02-22T18:06:04.769Z"
+    "createdAt": new Date("2026-02-12T13:05:05.602Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.769Z")
   },
   {
     "id": "singapore_item_74",
@@ -731,8 +731,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.599Z",
-    "updatedAt": "2026-02-22T18:06:04.830Z"
+    "createdAt": new Date("2026-02-12T13:05:06.599Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.830Z")
   },
   {
     "id": "barcelona_item_83",
@@ -769,8 +769,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.190Z",
-    "updatedAt": "2026-02-23T02:01:03.068Z"
+    "createdAt": new Date("2026-02-12T13:05:07.190Z"),
+    "updatedAt": new Date("2026-02-23T02:01:03.068Z")
   },
   {
     "id": "seoul_item_68",
@@ -807,8 +807,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.216Z",
-    "updatedAt": "2026-02-22T18:24:12.459Z"
+    "createdAt": new Date("2026-02-12T13:05:06.216Z"),
+    "updatedAt": new Date("2026-02-22T18:24:12.459Z")
   },
   {
     "id": "rome_item_71",
@@ -845,8 +845,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.405Z",
-    "updatedAt": "2026-02-22T18:06:02.696Z"
+    "createdAt": new Date("2026-02-12T13:05:06.405Z"),
+    "updatedAt": new Date("2026-02-22T18:06:02.696Z")
   },
   {
     "id": "busan_item_46",
@@ -883,8 +883,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.670Z",
-    "updatedAt": "2026-02-22T18:06:02.759Z"
+    "createdAt": new Date("2026-02-12T13:05:04.670Z"),
+    "updatedAt": new Date("2026-02-22T18:06:02.759Z")
   },
   {
     "id": "seoul_item_18",
@@ -921,8 +921,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.747Z",
-    "updatedAt": "2026-02-22T18:25:45.244Z"
+    "createdAt": new Date("2026-02-12T13:05:02.747Z"),
+    "updatedAt": new Date("2026-02-22T18:25:45.244Z")
   },
   {
     "id": "paris_item_52",
@@ -959,8 +959,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.060Z",
-    "updatedAt": "2026-02-23T02:01:01.555Z"
+    "createdAt": new Date("2026-02-12T13:05:05.060Z"),
+    "updatedAt": new Date("2026-02-23T02:01:01.555Z")
   },
   {
     "id": "london_포트넘_앤_메이슨_피카딜리_fortnum_mason_p",
@@ -998,8 +998,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:44:36.443Z",
-    "updatedAt": "2026-02-28T12:00:18.987Z"
+    "createdAt": new Date("2026-02-14T00:44:36.443Z"),
+    "updatedAt": new Date("2026-02-28T12:00:18.987Z")
   },
   {
     "id": "singapore_item_94",
@@ -1036,8 +1036,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.913Z",
-    "updatedAt": "2026-02-22T18:06:05.047Z"
+    "createdAt": new Date("2026-02-12T13:05:07.913Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.047Z")
   },
   {
     "id": "london_item_100",
@@ -1074,8 +1074,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.300Z",
-    "updatedAt": "2026-02-22T18:06:05.170Z"
+    "createdAt": new Date("2026-02-12T13:05:08.300Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.170Z")
   },
   {
     "id": "singapore_item_24",
@@ -1112,8 +1112,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.200Z",
-    "updatedAt": "2026-02-28T12:00:18.738Z"
+    "createdAt": new Date("2026-02-12T13:05:03.200Z"),
+    "updatedAt": new Date("2026-02-28T12:00:18.738Z")
   },
   {
     "id": "rome_콜로세움_colosseum",
@@ -1151,8 +1151,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:36:24.996Z",
-    "updatedAt": "2026-02-22T18:06:05.295Z"
+    "createdAt": new Date("2026-02-13T13:36:24.996Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.295Z")
   },
   {
     "id": "seoul_북촌한옥마을_전통_차_체험_bukchon_hanok_v",
@@ -1190,8 +1190,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:43:16.804Z",
-    "updatedAt": "2026-02-22T18:06:05.542Z"
+    "createdAt": new Date("2026-02-13T13:43:16.804Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.542Z")
   },
   {
     "id": "rome_젤라테리아_델_테아트로_gelateria_del_tea",
@@ -1229,8 +1229,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:36:25.335Z",
-    "updatedAt": "2026-02-22T18:06:05.668Z"
+    "createdAt": new Date("2026-02-13T13:36:25.335Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.668Z")
   },
   {
     "id": "tokyo_나리사와_narisawa",
@@ -1268,8 +1268,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:43:57.049Z",
-    "updatedAt": "2026-02-22T18:06:05.858Z"
+    "createdAt": new Date("2026-02-13T13:43:57.049Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.858Z")
   },
   {
     "id": "tokyo_황궁_동어원_",
@@ -1307,8 +1307,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:43:56.984Z",
-    "updatedAt": "2026-02-22T18:06:05.796Z"
+    "createdAt": new Date("2026-02-13T13:43:56.984Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.796Z")
   },
   {
     "id": "rome_아르만도_알_판테온_armando_al_pantheon",
@@ -1346,8 +1346,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:45:15.051Z",
-    "updatedAt": "2026-02-22T18:06:06.423Z"
+    "createdAt": new Date("2026-02-13T13:45:15.051Z"),
+    "updatedAt": new Date("2026-02-22T18:06:06.423Z")
   },
   {
     "id": "rome_item_61",
@@ -1384,8 +1384,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.665Z",
-    "updatedAt": "2026-02-28T12:00:19.215Z"
+    "createdAt": new Date("2026-02-12T13:05:05.665Z"),
+    "updatedAt": new Date("2026-02-28T12:00:19.215Z")
   },
   {
     "id": "barcelona_item_13",
@@ -1422,8 +1422,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.409Z",
-    "updatedAt": "2026-02-22T18:06:01.380Z"
+    "createdAt": new Date("2026-02-12T13:05:02.409Z"),
+    "updatedAt": new Date("2026-02-22T18:06:01.380Z")
   },
   {
     "id": "singapore_gardens_by_the_bay_supertree_g",
@@ -1461,8 +1461,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:51:19.157Z",
-    "updatedAt": "2026-02-22T18:06:06.485Z"
+    "createdAt": new Date("2026-02-13T13:51:19.157Z"),
+    "updatedAt": new Date("2026-02-22T18:06:06.485Z")
   },
   {
     "id": "바르셀로나-demo-1",
@@ -1499,8 +1499,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.452Z",
-    "updatedAt": "2026-02-28T12:00:19.936Z"
+    "createdAt": new Date("2026-02-12T12:57:47.452Z"),
+    "updatedAt": new Date("2026-02-28T12:00:19.936Z")
   },
   {
     "id": "제주특별자치도-demo-1",
@@ -1537,8 +1537,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.844Z",
-    "updatedAt": "2026-02-28T12:00:19.689Z"
+    "createdAt": new Date("2026-02-12T12:57:47.844Z"),
+    "updatedAt": new Date("2026-02-28T12:00:19.689Z")
   },
   {
     "id": "barcelona_프라이빗_선셋_요트_크루즈_private_sunset_",
@@ -1576,8 +1576,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:50:28.299Z",
-    "updatedAt": "2026-02-22T18:06:06.674Z"
+    "createdAt": new Date("2026-02-13T13:50:28.299Z"),
+    "updatedAt": new Date("2026-02-22T18:06:06.674Z")
   },
   {
     "id": "new-york_item_5",
@@ -1614,8 +1614,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.786Z",
-    "updatedAt": "2026-02-25T02:01:02.249Z"
+    "createdAt": new Date("2026-02-12T13:05:01.786Z"),
+    "updatedAt": new Date("2026-02-25T02:01:02.249Z")
   },
   {
     "id": "busan_더베이_101_the_bay_101",
@@ -1653,8 +1653,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:51:51.139Z",
-    "updatedAt": "2026-02-22T18:06:06.858Z"
+    "createdAt": new Date("2026-02-13T13:51:51.139Z"),
+    "updatedAt": new Date("2026-02-22T18:06:06.858Z")
   },
   {
     "id": "london_item_0",
@@ -1691,8 +1691,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.416Z",
-    "updatedAt": "2026-02-28T12:00:20.884Z"
+    "createdAt": new Date("2026-02-12T13:05:01.416Z"),
+    "updatedAt": new Date("2026-02-28T12:00:20.884Z")
   },
   {
     "id": "new-york_the_met_cloisters",
@@ -1730,8 +1730,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:56:27.658Z",
-    "updatedAt": "2026-02-22T18:32:37.763Z"
+    "createdAt": new Date("2026-02-13T13:56:27.658Z"),
+    "updatedAt": new Date("2026-02-22T18:32:37.763Z")
   },
   {
     "id": "london_더_리츠_런던_애프터눈_티_afternoon_tea_a",
@@ -1769,8 +1769,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:44:36.379Z",
-    "updatedAt": "2026-02-28T12:00:20.164Z"
+    "createdAt": new Date("2026-02-14T00:44:36.379Z"),
+    "updatedAt": new Date("2026-02-28T12:00:20.164Z")
   },
   {
     "id": "new-york_item_15",
@@ -1807,8 +1807,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.539Z",
-    "updatedAt": "2026-02-28T12:00:20.657Z"
+    "createdAt": new Date("2026-02-12T13:05:02.539Z"),
+    "updatedAt": new Date("2026-02-28T12:00:20.657Z")
   },
   {
     "id": "new-york_tenement_museum",
@@ -1846,8 +1846,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:56:27.787Z",
-    "updatedAt": "2026-02-22T18:33:17.718Z"
+    "createdAt": new Date("2026-02-13T13:56:27.787Z"),
+    "updatedAt": new Date("2026-02-22T18:33:17.718Z")
   },
   {
     "id": "new-york_item_95",
@@ -1884,8 +1884,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.978Z",
-    "updatedAt": "2026-02-28T12:00:21.847Z"
+    "createdAt": new Date("2026-02-12T13:05:07.978Z"),
+    "updatedAt": new Date("2026-02-28T12:00:21.847Z")
   },
   {
     "id": "busan_감천문화마을_gamcheon_culture_villag",
@@ -1923,8 +1923,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:34:24.447Z",
-    "updatedAt": "2026-02-22T18:06:07.614Z"
+    "createdAt": new Date("2026-02-14T00:34:24.447Z"),
+    "updatedAt": new Date("2026-02-22T18:06:07.614Z")
   },
   {
     "id": "tokyo_메이지_진구_신사_",
@@ -1962,8 +1962,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:43:36.771Z",
-    "updatedAt": "2026-02-22T18:06:07.805Z"
+    "createdAt": new Date("2026-02-14T00:43:36.771Z"),
+    "updatedAt": new Date("2026-02-22T18:06:07.805Z")
   },
   {
     "id": "bus_gamcheon",
@@ -2000,8 +2000,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.339Z",
-    "updatedAt": "2026-02-28T12:00:21.362Z"
+    "createdAt": new Date("2026-02-12T13:05:01.339Z"),
+    "updatedAt": new Date("2026-02-28T12:00:21.362Z")
   },
   {
     "id": "lon_big_ben",
@@ -2038,8 +2038,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:00.774Z",
-    "updatedAt": "2026-02-22T18:34:16.619Z"
+    "createdAt": new Date("2026-02-12T13:05:00.774Z"),
+    "updatedAt": new Date("2026-02-22T18:34:16.619Z")
   },
   {
     "id": "rome_트라토리아_다_엔조_알_29_trattoria_da_e",
@@ -2077,8 +2077,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:36:25.156Z",
-    "updatedAt": "2026-02-25T12:01:08.461Z"
+    "createdAt": new Date("2026-02-13T13:36:25.156Z"),
+    "updatedAt": new Date("2026-02-25T12:01:08.461Z")
   },
   {
     "id": "seoul_리움미술관_leeum_museum_of_art",
@@ -2116,8 +2116,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:42:52.103Z",
-    "updatedAt": "2026-02-22T18:06:08.311Z"
+    "createdAt": new Date("2026-02-14T00:42:52.103Z"),
+    "updatedAt": new Date("2026-02-22T18:06:08.311Z")
   },
   {
     "id": "rome_아벤티노_열쇠_구멍_aventine_keyhole",
@@ -2155,8 +2155,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:36:25.216Z",
-    "updatedAt": "2026-02-25T19:01:03.998Z"
+    "createdAt": new Date("2026-02-13T13:36:25.216Z"),
+    "updatedAt": new Date("2026-02-25T19:01:03.998Z")
   },
   {
     "id": "barcelona_item_43",
@@ -2193,8 +2193,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.476Z",
-    "updatedAt": "2026-02-23T02:00:58.905Z"
+    "createdAt": new Date("2026-02-12T13:05:04.476Z"),
+    "updatedAt": new Date("2026-02-23T02:00:58.905Z")
   },
   {
     "id": "talamban-post-office",
@@ -2231,8 +2231,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-15T18:12:17.656Z",
-    "updatedAt": "2026-02-22T18:36:04.784Z"
+    "createdAt": new Date("2026-02-15T18:12:17.656Z"),
+    "updatedAt": new Date("2026-02-22T18:36:04.784Z")
   },
   {
     "id": "tokyo_sensoji_nanobanana",
@@ -2268,8 +2268,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-15T11:03:36.307Z",
-    "updatedAt": "2026-02-22T18:28:52.674Z"
+    "createdAt": new Date("2026-02-15T11:03:36.307Z"),
+    "updatedAt": new Date("2026-02-22T18:28:52.674Z")
   },
   {
     "id": "jeju_item_47",
@@ -2306,8 +2306,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.740Z",
-    "updatedAt": "2026-02-28T12:00:23.262Z"
+    "createdAt": new Date("2026-02-12T13:05:04.740Z"),
+    "updatedAt": new Date("2026-02-28T12:00:23.262Z")
   },
   {
     "id": "new-york_grand_central_terminal",
@@ -2345,8 +2345,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:56:27.850Z",
-    "updatedAt": "2026-02-22T18:33:27.238Z"
+    "createdAt": new Date("2026-02-13T13:56:27.850Z"),
+    "updatedAt": new Date("2026-02-22T18:33:27.238Z")
   },
   {
     "id": "singapore_item_64",
@@ -2383,8 +2383,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.954Z",
-    "updatedAt": "2026-02-23T02:00:59.392Z"
+    "createdAt": new Date("2026-02-12T13:05:05.954Z"),
+    "updatedAt": new Date("2026-02-23T02:00:59.392Z")
   },
   {
     "id": "paris_르_상크_le_cinq_포시즌스_호텔_조르주_v_파리",
@@ -2422,8 +2422,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:46:31.084Z",
-    "updatedAt": "2026-02-28T12:00:23.740Z"
+    "createdAt": new Date("2026-02-14T00:46:31.084Z"),
+    "updatedAt": new Date("2026-02-28T12:00:23.740Z")
   },
   {
     "id": "tokyo_긴자_코쥬_",
@@ -2463,8 +2463,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:43:36.836Z",
-    "updatedAt": "2026-02-28T13:46:28.365Z"
+    "createdAt": new Date("2026-02-14T00:43:36.836Z"),
+    "updatedAt": new Date("2026-02-28T13:46:28.365Z")
   },
   {
     "id": "paris_item_72",
@@ -2501,8 +2501,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.470Z",
-    "updatedAt": "2026-02-28T12:00:23.967Z"
+    "createdAt": new Date("2026-02-12T13:05:06.470Z"),
+    "updatedAt": new Date("2026-02-28T12:00:23.967Z")
   },
   {
     "id": "seoul_경복궁_gyeongbokgung_palace",
@@ -2540,8 +2540,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:43:16.642Z",
-    "updatedAt": "2026-02-24T03:01:02.777Z"
+    "createdAt": new Date("2026-02-13T13:43:16.642Z"),
+    "updatedAt": new Date("2026-02-24T03:01:02.777Z")
   },
   {
     "id": "london_restaurant_dishoom",
@@ -2597,8 +2597,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:41.266Z",
-    "updatedAt": "2026-02-28T13:49:29.361Z"
+    "createdAt": new Date("2026-02-12T12:11:41.266Z"),
+    "updatedAt": new Date("2026-02-28T13:49:29.361Z")
   },
   {
     "id": "new-york_item_105",
@@ -2635,8 +2635,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.643Z",
-    "updatedAt": "2026-02-28T12:00:22.779Z"
+    "createdAt": new Date("2026-02-12T13:05:08.643Z"),
+    "updatedAt": new Date("2026-02-28T12:00:22.779Z")
   },
   {
     "id": "barcelona_item_53",
@@ -2673,8 +2673,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.125Z",
-    "updatedAt": "2026-02-28T12:00:23.501Z"
+    "createdAt": new Date("2026-02-12T13:05:05.125Z"),
+    "updatedAt": new Date("2026-02-28T12:00:23.501Z")
   },
   {
     "id": "viking_ship_museum",
@@ -2744,8 +2744,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:29.859Z",
-    "updatedAt": "2026-02-28T12:00:24.900Z"
+    "createdAt": new Date("2026-02-12T12:11:29.859Z"),
+    "updatedAt": new Date("2026-02-28T12:00:24.900Z")
   },
   {
     "id": "london_restaurant_padella",
@@ -2797,8 +2797,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:41.628Z",
-    "updatedAt": "2026-02-28T13:46:59.583Z"
+    "createdAt": new Date("2026-02-12T12:11:41.628Z"),
+    "updatedAt": new Date("2026-02-28T13:46:59.583Z")
   },
   {
     "id": "singapore_raffles_hotel_singapore",
@@ -2836,8 +2836,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:51:19.044Z",
-    "updatedAt": "2026-02-28T12:00:25.614Z"
+    "createdAt": new Date("2026-02-13T13:51:19.044Z"),
+    "updatedAt": new Date("2026-02-28T12:00:25.614Z")
   },
   {
     "id": "barcelona_구엘_공원_park_gell",
@@ -2875,8 +2875,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:50:28.164Z",
-    "updatedAt": "2026-02-28T12:00:25.367Z"
+    "createdAt": new Date("2026-02-13T13:50:28.164Z"),
+    "updatedAt": new Date("2026-02-28T12:00:25.367Z")
   },
   {
     "id": "rome_보르게세_미술관_보르게세_공원_galleria_borg",
@@ -2914,8 +2914,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:45:15.179Z",
-    "updatedAt": "2026-02-28T12:00:24.659Z"
+    "createdAt": new Date("2026-02-13T13:45:15.179Z"),
+    "updatedAt": new Date("2026-02-28T12:00:24.659Z")
   },
   {
     "id": "barcelona_item_23",
@@ -2952,8 +2952,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.137Z",
-    "updatedAt": "2026-02-28T12:00:26.080Z"
+    "createdAt": new Date("2026-02-12T13:05:03.137Z"),
+    "updatedAt": new Date("2026-02-28T12:00:26.080Z")
   },
   {
     "id": "paris_restaurant_pink_mamma",
@@ -3005,8 +3005,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:41.148Z",
-    "updatedAt": "2026-02-28T12:00:25.854Z"
+    "createdAt": new Date("2026-02-12T12:11:41.148Z"),
+    "updatedAt": new Date("2026-02-28T12:00:25.854Z")
   },
   {
     "id": "busan_item_26",
@@ -3043,8 +3043,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.329Z",
-    "updatedAt": "2026-02-28T12:00:26.798Z"
+    "createdAt": new Date("2026-02-12T13:05:03.329Z"),
+    "updatedAt": new Date("2026-02-28T12:00:26.798Z")
   },
   {
     "id": "jeju_제주돌문화공원",
@@ -3082,8 +3082,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:52:26.923Z",
-    "updatedAt": "2026-02-28T12:00:26.319Z"
+    "createdAt": new Date("2026-02-13T13:52:26.923Z"),
+    "updatedAt": new Date("2026-02-28T12:00:26.319Z")
   },
   {
     "id": "rome_바티칸_박물관_시스티나_예배당_vatican_museu",
@@ -3121,8 +3121,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:36:25.276Z",
-    "updatedAt": "2026-02-28T12:00:26.558Z"
+    "createdAt": new Date("2026-02-13T13:36:25.276Z"),
+    "updatedAt": new Date("2026-02-28T12:00:26.558Z")
   },
   {
     "id": "barcelona_item_73",
@@ -3159,8 +3159,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.533Z",
-    "updatedAt": "2026-02-22T18:06:01.518Z"
+    "createdAt": new Date("2026-02-12T13:05:06.533Z"),
+    "updatedAt": new Date("2026-02-22T18:06:01.518Z")
   },
   {
     "id": "seoul_item_28",
@@ -3197,8 +3197,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.456Z",
-    "updatedAt": "2026-02-28T12:00:17.509Z"
+    "createdAt": new Date("2026-02-12T13:05:03.456Z"),
+    "updatedAt": new Date("2026-02-28T12:00:17.509Z")
   },
   {
     "id": "서울특별시-demo-2",
@@ -3235,8 +3235,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:50:32.063Z",
-    "updatedAt": "2026-02-28T12:00:19.461Z"
+    "createdAt": new Date("2026-02-12T12:50:32.063Z"),
+    "updatedAt": new Date("2026-02-28T12:00:19.461Z")
   },
   {
     "id": "도쿄-demo-2",
@@ -3273,8 +3273,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:46.997Z",
-    "updatedAt": "2026-02-28T12:00:20.411Z"
+    "createdAt": new Date("2026-02-12T12:57:46.997Z"),
+    "updatedAt": new Date("2026-02-28T12:00:20.411Z")
   },
   {
     "id": "barcelona_item_103",
@@ -3311,8 +3311,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.507Z",
-    "updatedAt": "2026-02-28T12:00:21.608Z"
+    "createdAt": new Date("2026-02-12T13:05:08.507Z"),
+    "updatedAt": new Date("2026-02-28T12:00:21.608Z")
   },
   {
     "id": "rome_item_11",
@@ -3349,8 +3349,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.236Z",
-    "updatedAt": "2026-02-28T12:00:21.123Z"
+    "createdAt": new Date("2026-02-12T13:05:02.236Z"),
+    "updatedAt": new Date("2026-02-28T12:00:21.123Z")
   },
   {
     "id": "new-york_item_85",
@@ -3387,8 +3387,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.318Z",
-    "updatedAt": "2026-02-28T12:00:22.086Z"
+    "createdAt": new Date("2026-02-12T13:05:07.318Z"),
+    "updatedAt": new Date("2026-02-28T12:00:22.086Z")
   },
   {
     "id": "도쿄-demo-1",
@@ -3425,8 +3425,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:46.925Z",
-    "updatedAt": "2026-02-28T12:00:23.035Z"
+    "createdAt": new Date("2026-02-12T12:57:46.925Z"),
+    "updatedAt": new Date("2026-02-28T12:00:23.035Z")
   },
   {
     "id": "rome_콜로세움_로마_포럼_colosseum_roman_for",
@@ -3464,8 +3464,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:45:14.891Z",
-    "updatedAt": "2026-02-28T12:00:24.420Z"
+    "createdAt": new Date("2026-02-13T13:45:14.891Z"),
+    "updatedAt": new Date("2026-02-28T12:00:24.420Z")
   },
   {
     "id": "로마-demo-1",
@@ -3502,8 +3502,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.190Z",
-    "updatedAt": "2026-02-28T12:00:27.753Z"
+    "createdAt": new Date("2026-02-12T12:57:47.190Z"),
+    "updatedAt": new Date("2026-02-28T12:00:27.753Z")
   },
   {
     "id": "lon_tower_bridge",
@@ -3540,8 +3540,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:00.882Z",
-    "updatedAt": "2026-02-28T12:00:27.992Z"
+    "createdAt": new Date("2026-02-12T13:05:00.882Z"),
+    "updatedAt": new Date("2026-02-28T12:00:27.992Z")
   },
   {
     "id": "busan_item_96",
@@ -3578,8 +3578,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.042Z",
-    "updatedAt": "2026-02-28T12:00:27.515Z"
+    "createdAt": new Date("2026-02-12T13:05:08.042Z"),
+    "updatedAt": new Date("2026-02-28T12:00:27.515Z")
   },
   {
     "id": "런던-demo-2",
@@ -3616,8 +3616,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.125Z",
-    "updatedAt": "2026-02-28T12:00:28.230Z"
+    "createdAt": new Date("2026-02-12T12:57:47.125Z"),
+    "updatedAt": new Date("2026-02-28T12:00:28.230Z")
   },
   {
     "id": "singapore_national_kitchen_by_violet_oon",
@@ -3655,8 +3655,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:51:19.221Z",
-    "updatedAt": "2026-02-28T12:00:25.140Z"
+    "createdAt": new Date("2026-02-13T13:51:19.221Z"),
+    "updatedAt": new Date("2026-02-28T12:00:25.140Z")
   },
   {
     "id": "seoul_item_78",
@@ -3693,8 +3693,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.858Z",
-    "updatedAt": "2026-02-28T12:00:27.038Z"
+    "createdAt": new Date("2026-02-12T13:05:06.858Z"),
+    "updatedAt": new Date("2026-02-28T12:00:27.038Z")
   },
   {
     "id": "busan_f1963_복합문화공간_f1963",
@@ -3732,8 +3732,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:51:51.021Z",
-    "updatedAt": "2026-02-28T12:00:27.277Z"
+    "createdAt": new Date("2026-02-13T13:51:51.021Z"),
+    "updatedAt": new Date("2026-02-28T12:00:27.277Z")
   },
   {
     "id": "busan_item_106",
@@ -3770,8 +3770,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.707Z",
-    "updatedAt": "2026-02-23T19:00:36.271Z"
+    "createdAt": new Date("2026-02-12T13:05:08.707Z"),
+    "updatedAt": new Date("2026-02-23T19:00:36.271Z")
   },
   {
     "id": "la-cittadella-subdivision",
@@ -3808,8 +3808,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-15T18:12:17.439Z",
-    "updatedAt": "2026-02-22T18:35:35.071Z"
+    "createdAt": new Date("2026-02-15T18:12:17.439Z"),
+    "updatedAt": new Date("2026-02-22T18:35:35.071Z")
   },
   {
     "id": "paris_item_12",
@@ -3846,8 +3846,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.305Z",
-    "updatedAt": "2026-02-28T12:00:28.708Z"
+    "createdAt": new Date("2026-02-12T13:05:02.305Z"),
+    "updatedAt": new Date("2026-02-28T12:00:28.708Z")
   },
   {
     "id": "rome_restaurant_la_pergola",
@@ -3945,8 +3945,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.185Z",
-    "updatedAt": "2026-02-28T12:00:28.470Z"
+    "createdAt": new Date("2026-02-12T12:11:40.185Z"),
+    "updatedAt": new Date("2026-02-28T12:00:28.470Z")
   },
   {
     "id": "glacier_bay",
@@ -4016,8 +4016,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:27.231Z",
-    "updatedAt": "2026-02-28T12:00:28.935Z"
+    "createdAt": new Date("2026-02-12T12:11:27.231Z"),
+    "updatedAt": new Date("2026-02-28T12:00:28.935Z")
   },
   {
     "id": "louvre-skip-line-tour",
@@ -4079,8 +4079,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.505Z",
-    "updatedAt": "2026-02-28T12:00:29.162Z"
+    "createdAt": new Date("2026-02-12T12:11:37.505Z"),
+    "updatedAt": new Date("2026-02-28T12:00:29.162Z")
   },
   {
     "id": "런던-demo-1",
@@ -4117,8 +4117,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.062Z",
-    "updatedAt": "2026-02-22T18:15:28.886Z"
+    "createdAt": new Date("2026-02-12T12:57:47.062Z"),
+    "updatedAt": new Date("2026-02-22T18:15:28.886Z")
   },
   {
     "id": "london_restaurant_hawksmoor",
@@ -4170,8 +4170,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:41.745Z",
-    "updatedAt": "2026-02-22T20:00:58.191Z"
+    "createdAt": new Date("2026-02-12T12:11:41.745Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.191Z")
   },
   {
     "id": "rome_item_81",
@@ -4208,8 +4208,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.062Z",
-    "updatedAt": "2026-02-23T19:00:36.308Z"
+    "createdAt": new Date("2026-02-12T13:05:07.062Z"),
+    "updatedAt": new Date("2026-02-23T19:00:36.308Z")
   },
   {
     "id": "san-isidro-parish-talamban",
@@ -4247,8 +4247,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-15T18:12:17.507Z",
-    "updatedAt": "2026-02-22T20:00:58.274Z"
+    "createdAt": new Date("2026-02-15T18:12:17.507Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.274Z")
   },
   {
     "id": "gaisano-grand-mall-talamban",
@@ -4285,8 +4285,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-15T18:12:17.583Z",
-    "updatedAt": "2026-02-22T18:35:54.604Z"
+    "createdAt": new Date("2026-02-15T18:12:17.583Z"),
+    "updatedAt": new Date("2026-02-22T18:35:54.604Z")
   },
   {
     "id": "파리-demo-2",
@@ -4323,8 +4323,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.389Z",
-    "updatedAt": "2026-02-22T18:14:58.491Z"
+    "createdAt": new Date("2026-02-12T12:57:47.389Z"),
+    "updatedAt": new Date("2026-02-22T18:14:58.491Z")
   },
   {
     "id": "busan_해동_용궁사_haedong_yonggungsa_temp",
@@ -4362,8 +4362,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:51:50.955Z",
-    "updatedAt": "2026-02-23T19:00:36.322Z"
+    "createdAt": new Date("2026-02-13T13:51:50.955Z"),
+    "updatedAt": new Date("2026-02-23T19:00:36.322Z")
   },
   {
     "id": "제주특별자치도-demo-2",
@@ -4400,8 +4400,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.909Z",
-    "updatedAt": "2026-02-22T18:15:59.672Z"
+    "createdAt": new Date("2026-02-12T12:57:47.909Z"),
+    "updatedAt": new Date("2026-02-22T18:15:59.672Z")
   },
   {
     "id": "singapore-night-safari",
@@ -4466,8 +4466,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.340Z",
-    "updatedAt": "2026-02-22T20:00:58.365Z"
+    "createdAt": new Date("2026-02-12T12:11:35.340Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.365Z")
   },
   {
     "id": "paris_item_62",
@@ -4504,8 +4504,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.730Z",
-    "updatedAt": "2026-02-22T18:06:00.151Z"
+    "createdAt": new Date("2026-02-12T13:05:05.730Z"),
+    "updatedAt": new Date("2026-02-22T18:06:00.151Z")
   },
   {
     "id": "tokyo_item_39",
@@ -4542,8 +4542,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.212Z",
-    "updatedAt": "2026-02-22T18:19:37.584Z"
+    "createdAt": new Date("2026-02-12T13:05:04.212Z"),
+    "updatedAt": new Date("2026-02-22T18:19:37.584Z")
   },
   {
     "id": "paris_item_82",
@@ -4580,8 +4580,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.126Z",
-    "updatedAt": "2026-02-22T18:06:00.286Z"
+    "createdAt": new Date("2026-02-12T13:05:07.126Z"),
+    "updatedAt": new Date("2026-02-22T18:06:00.286Z")
   },
   {
     "id": "rom_trevi",
@@ -4618,8 +4618,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.045Z",
-    "updatedAt": "2026-02-22T18:06:00.483Z"
+    "createdAt": new Date("2026-02-12T13:05:01.045Z"),
+    "updatedAt": new Date("2026-02-22T18:06:00.483Z")
   },
   {
     "id": "par_eiffel",
@@ -4656,8 +4656,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.160Z",
-    "updatedAt": "2026-02-22T18:16:50.259Z"
+    "createdAt": new Date("2026-02-12T13:05:01.160Z"),
+    "updatedAt": new Date("2026-02-22T18:16:50.259Z")
   },
   {
     "id": "rome_item_1",
@@ -4694,8 +4694,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.505Z",
-    "updatedAt": "2026-02-22T18:06:00.421Z"
+    "createdAt": new Date("2026-02-12T13:05:01.505Z"),
+    "updatedAt": new Date("2026-02-22T18:06:00.421Z")
   },
   {
     "id": "tokyo_item_79",
@@ -4732,8 +4732,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.923Z",
-    "updatedAt": "2026-02-22T18:22:57.144Z"
+    "createdAt": new Date("2026-02-12T13:05:06.923Z"),
+    "updatedAt": new Date("2026-02-22T18:22:57.144Z")
   },
   {
     "id": "singapore_item_4",
@@ -4770,8 +4770,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.715Z",
-    "updatedAt": "2026-02-22T18:06:00.618Z"
+    "createdAt": new Date("2026-02-12T13:05:01.715Z"),
+    "updatedAt": new Date("2026-02-22T18:06:00.618Z")
   },
   {
     "id": "magellans-cross",
@@ -4814,8 +4814,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:30.107Z",
-    "updatedAt": "2026-02-22T20:00:58.449Z"
+    "createdAt": new Date("2026-02-12T12:11:30.107Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.449Z")
   },
   {
     "id": "new-york_item_25",
@@ -4852,8 +4852,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.264Z",
-    "updatedAt": "2026-02-24T02:00:33.750Z"
+    "createdAt": new Date("2026-02-12T13:05:03.264Z"),
+    "updatedAt": new Date("2026-02-24T02:00:33.750Z")
   },
   {
     "id": "jeju_성산_일출봉",
@@ -4891,8 +4891,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:52:26.671Z",
-    "updatedAt": "2026-02-24T02:00:29.701Z"
+    "createdAt": new Date("2026-02-13T13:52:26.671Z"),
+    "updatedAt": new Date("2026-02-24T02:00:29.701Z")
   },
   {
     "id": "roman_forum",
@@ -5020,8 +5020,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T11:40:38.856Z",
-    "updatedAt": "2026-02-22T20:00:58.549Z"
+    "createdAt": new Date("2026-02-12T11:40:38.856Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.549Z")
   },
   {
     "id": "chinatown-heritage-centre",
@@ -5078,8 +5078,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.427Z",
-    "updatedAt": "2026-02-22T20:00:58.630Z"
+    "createdAt": new Date("2026-02-12T12:11:31.427Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.630Z")
   },
   {
     "id": "jeju_item_57",
@@ -5116,8 +5116,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.384Z",
-    "updatedAt": "2026-02-24T02:00:35.532Z"
+    "createdAt": new Date("2026-02-12T13:05:05.384Z"),
+    "updatedAt": new Date("2026-02-24T02:00:35.532Z")
   },
   {
     "id": "oslo_opera_house",
@@ -5187,8 +5187,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:29.986Z",
-    "updatedAt": "2026-02-22T20:00:58.795Z"
+    "createdAt": new Date("2026-02-12T12:11:29.986Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.795Z")
   },
   {
     "id": "sacre_coeur",
@@ -5246,8 +5246,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:25.302Z",
-    "updatedAt": "2026-02-22T20:00:58.710Z"
+    "createdAt": new Date("2026-02-12T12:11:25.302Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.710Z")
   },
   {
     "id": "tokyo_item_109",
@@ -5284,8 +5284,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.900Z",
-    "updatedAt": "2026-02-22T18:25:13.375Z"
+    "createdAt": new Date("2026-02-12T13:05:08.900Z"),
+    "updatedAt": new Date("2026-02-22T18:25:13.375Z")
   },
   {
     "id": "jeju_item_97",
@@ -5322,8 +5322,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.106Z",
-    "updatedAt": "2026-02-24T02:00:35.704Z"
+    "createdAt": new Date("2026-02-12T13:05:08.106Z"),
+    "updatedAt": new Date("2026-02-24T02:00:35.704Z")
   },
   {
     "id": "versailles",
@@ -5381,8 +5381,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:25.420Z",
-    "updatedAt": "2026-02-22T20:00:58.879Z"
+    "createdAt": new Date("2026-02-12T12:11:25.420Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.879Z")
   },
   {
     "id": "busan_item_56",
@@ -5419,8 +5419,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.319Z",
-    "updatedAt": "2026-02-24T02:00:38.655Z"
+    "createdAt": new Date("2026-02-12T13:05:05.319Z"),
+    "updatedAt": new Date("2026-02-24T02:00:38.655Z")
   },
   {
     "id": "로마-demo-2",
@@ -5457,8 +5457,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.256Z",
-    "updatedAt": "2026-02-22T18:15:39.898Z"
+    "createdAt": new Date("2026-02-12T12:57:47.256Z"),
+    "updatedAt": new Date("2026-02-22T18:15:39.898Z")
   },
   {
     "id": "par_louvre",
@@ -5495,8 +5495,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.232Z",
-    "updatedAt": "2026-02-22T18:16:15.848Z"
+    "createdAt": new Date("2026-02-12T13:05:01.232Z"),
+    "updatedAt": new Date("2026-02-22T18:16:15.848Z")
   },
   {
     "id": "park_guell",
@@ -5566,8 +5566,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:27.716Z",
-    "updatedAt": "2026-02-22T20:00:59.049Z"
+    "createdAt": new Date("2026-02-12T12:11:27.716Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.049Z")
   },
   {
     "id": "tokyo_item_19",
@@ -5604,8 +5604,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.812Z",
-    "updatedAt": "2026-02-22T18:19:39.703Z"
+    "createdAt": new Date("2026-02-12T13:05:02.812Z"),
+    "updatedAt": new Date("2026-02-22T18:19:39.703Z")
   },
   {
     "id": "khoo-kongsi",
@@ -5650,8 +5650,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:32.023Z",
-    "updatedAt": "2026-02-24T03:00:58.815Z"
+    "createdAt": new Date("2026-02-12T12:11:32.023Z"),
+    "updatedAt": new Date("2026-02-24T03:00:58.815Z")
   },
   {
     "id": "anchorage_museum",
@@ -5721,8 +5721,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.855Z",
-    "updatedAt": "2026-02-22T20:00:59.211Z"
+    "createdAt": new Date("2026-02-12T12:11:26.855Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.211Z")
   },
   {
     "id": "sagrada_familia",
@@ -5792,8 +5792,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:27.595Z",
-    "updatedAt": "2026-02-22T20:00:59.294Z"
+    "createdAt": new Date("2026-02-12T12:11:27.595Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.294Z")
   },
   {
     "id": "london-eye-fast-track",
@@ -5855,8 +5855,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.871Z",
-    "updatedAt": "2026-02-22T20:00:59.377Z"
+    "createdAt": new Date("2026-02-12T12:11:37.871Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.377Z")
   },
   {
     "id": "rome_restaurant_armando_al_pantheon",
@@ -5965,8 +5965,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:39.943Z",
-    "updatedAt": "2026-02-22T20:00:59.545Z"
+    "createdAt": new Date("2026-02-12T12:11:39.943Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.545Z")
   },
   {
     "id": "alaska_wildlife_center",
@@ -6036,8 +6036,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.737Z",
-    "updatedAt": "2026-02-22T20:00:59.629Z"
+    "createdAt": new Date("2026-02-12T12:11:26.737Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.629Z")
   },
   {
     "id": "basilica-santo-nino",
@@ -6080,8 +6080,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:30.224Z",
-    "updatedAt": "2026-02-22T20:00:59.709Z"
+    "createdAt": new Date("2026-02-12T12:11:30.224Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.709Z")
   },
   {
     "id": "seoul_경복궁_경회루_gyeonghoeru_pavilion_g",
@@ -6119,8 +6119,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:42:51.917Z",
-    "updatedAt": "2026-02-24T03:01:00.884Z"
+    "createdAt": new Date("2026-02-14T00:42:51.917Z"),
+    "updatedAt": new Date("2026-02-24T03:01:00.884Z")
   },
   {
     "id": "fort-san-pedro",
@@ -6165,8 +6165,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:30.343Z",
-    "updatedAt": "2026-02-22T20:00:59.960Z"
+    "createdAt": new Date("2026-02-12T12:11:30.343Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.960Z")
   },
   {
     "id": "new-york_item_75",
@@ -6203,8 +6203,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.666Z",
-    "updatedAt": "2026-02-24T19:00:25.365Z"
+    "createdAt": new Date("2026-02-12T13:05:06.666Z"),
+    "updatedAt": new Date("2026-02-24T19:00:25.365Z")
   },
   {
     "id": "cebu-island-hopping",
@@ -6256,8 +6256,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:38.109Z",
-    "updatedAt": "2026-02-22T20:01:00.040Z"
+    "createdAt": new Date("2026-02-12T12:11:38.109Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.040Z")
   },
   {
     "id": "jeju_item_17",
@@ -6294,8 +6294,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.669Z",
-    "updatedAt": "2026-02-24T03:01:02.443Z"
+    "createdAt": new Date("2026-02-12T13:05:02.669Z"),
+    "updatedAt": new Date("2026-02-24T03:01:02.443Z")
   },
   {
     "id": "rome_restaurant_antico_arco",
@@ -6392,8 +6392,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.542Z",
-    "updatedAt": "2026-02-22T20:01:00.204Z"
+    "createdAt": new Date("2026-02-12T12:11:40.542Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.204Z")
   },
   {
     "id": "colosseum",
@@ -6524,8 +6524,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T11:40:38.720Z",
-    "updatedAt": "2026-02-22T20:01:00.371Z"
+    "createdAt": new Date("2026-02-12T11:40:38.720Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.371Z")
   },
   {
     "id": "new-york_item_35",
@@ -6562,8 +6562,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.912Z",
-    "updatedAt": "2026-02-22T18:06:01.255Z"
+    "createdAt": new Date("2026-02-12T13:05:03.912Z"),
+    "updatedAt": new Date("2026-02-22T18:06:01.255Z")
   },
   {
     "id": "뉴욕-demo-1",
@@ -6600,8 +6600,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.972Z",
-    "updatedAt": "2026-02-22T18:16:30.838Z"
+    "createdAt": new Date("2026-02-12T12:57:47.972Z"),
+    "updatedAt": new Date("2026-02-22T18:16:30.838Z")
   },
   {
     "id": "fort-cornwallis",
@@ -6646,8 +6646,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.904Z",
-    "updatedAt": "2026-02-22T20:01:00.535Z"
+    "createdAt": new Date("2026-02-12T12:11:31.904Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.535Z")
   },
   {
     "id": "singapore_item_44",
@@ -6684,8 +6684,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.540Z",
-    "updatedAt": "2026-02-22T18:06:01.446Z"
+    "createdAt": new Date("2026-02-12T13:05:04.540Z"),
+    "updatedAt": new Date("2026-02-22T18:06:01.446Z")
   },
   {
     "id": "jeju_item_27",
@@ -6722,8 +6722,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.392Z",
-    "updatedAt": "2026-02-24T12:00:43.029Z"
+    "createdAt": new Date("2026-02-12T13:05:03.392Z"),
+    "updatedAt": new Date("2026-02-24T12:00:43.029Z")
   },
   {
     "id": "tokyo_item_49",
@@ -6760,8 +6760,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.866Z",
-    "updatedAt": "2026-02-22T18:22:32.110Z"
+    "createdAt": new Date("2026-02-12T13:05:04.866Z"),
+    "updatedAt": new Date("2026-02-22T18:22:32.110Z")
   },
   {
     "id": "old_town_square",
@@ -6831,8 +6831,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:28.460Z",
-    "updatedAt": "2026-02-22T20:01:00.899Z"
+    "createdAt": new Date("2026-02-12T12:11:28.460Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.899Z")
   },
   {
     "id": "new-york_item_55",
@@ -6869,8 +6869,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.255Z",
-    "updatedAt": "2026-02-24T12:00:43.505Z"
+    "createdAt": new Date("2026-02-12T13:05:05.255Z"),
+    "updatedAt": new Date("2026-02-24T12:00:43.505Z")
   },
   {
     "id": "pantheon",
@@ -6994,8 +6994,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.207Z",
-    "updatedAt": "2026-02-22T20:01:01.065Z"
+    "createdAt": new Date("2026-02-12T12:11:24.207Z"),
+    "updatedAt": new Date("2026-02-22T20:01:01.065Z")
   },
   {
     "id": "rome_item_51",
@@ -7032,8 +7032,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.996Z",
-    "updatedAt": "2026-02-22T18:06:01.769Z"
+    "createdAt": new Date("2026-02-12T13:05:04.996Z"),
+    "updatedAt": new Date("2026-02-22T18:06:01.769Z")
   },
   {
     "id": "vasa_museum",
@@ -7103,8 +7103,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:29.086Z",
-    "updatedAt": "2026-02-22T18:23:12.292Z"
+    "createdAt": new Date("2026-02-12T12:11:29.086Z"),
+    "updatedAt": new Date("2026-02-22T18:23:12.292Z")
   },
   {
     "id": "barcelona_item_93",
@@ -7141,8 +7141,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.849Z",
-    "updatedAt": "2026-02-22T18:06:02.106Z"
+    "createdAt": new Date("2026-02-12T13:05:07.849Z"),
+    "updatedAt": new Date("2026-02-22T18:06:02.106Z")
   },
   {
     "id": "gamla_stan",
@@ -7212,8 +7212,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:29.222Z",
-    "updatedAt": "2026-02-22T18:20:00.391Z"
+    "createdAt": new Date("2026-02-12T12:11:29.222Z"),
+    "updatedAt": new Date("2026-02-22T18:20:00.391Z")
   },
   {
     "id": "kl-food-street-tour",
@@ -7265,8 +7265,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:39.334Z",
-    "updatedAt": "2026-02-22T19:01:04.783Z"
+    "createdAt": new Date("2026-02-12T12:11:39.334Z"),
+    "updatedAt": new Date("2026-02-22T19:01:04.783Z")
   },
   {
     "id": "rome/borghese-gallery",
@@ -7314,8 +7314,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-22T18:05:47.524Z",
-    "updatedAt": "2026-02-22T18:17:19.903Z"
+    "createdAt": new Date("2026-02-22T18:05:47.524Z"),
+    "updatedAt": new Date("2026-02-22T18:17:19.903Z")
   },
   {
     "id": "vatican_museums",
@@ -7441,8 +7441,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.447Z",
-    "updatedAt": "2026-02-22T18:23:33.193Z"
+    "createdAt": new Date("2026-02-12T12:11:24.447Z"),
+    "updatedAt": new Date("2026-02-22T18:23:33.193Z")
   },
   {
     "id": "paris-wine-tasting",
@@ -7507,8 +7507,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:34.721Z",
-    "updatedAt": "2026-02-22T18:23:52.502Z"
+    "createdAt": new Date("2026-02-12T12:11:34.721Z"),
+    "updatedAt": new Date("2026-02-22T18:23:52.502Z")
   },
   {
     "id": "george-town-unesco-site",
@@ -7565,8 +7565,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:32.258Z",
-    "updatedAt": "2026-02-22T18:11:40.095Z"
+    "createdAt": new Date("2026-02-12T12:11:32.258Z"),
+    "updatedAt": new Date("2026-02-22T18:11:40.095Z")
   },
   {
     "id": "thames-river-cruise",
@@ -7631,8 +7631,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:34.848Z",
-    "updatedAt": "2026-02-22T19:01:04.869Z"
+    "createdAt": new Date("2026-02-12T12:11:34.848Z"),
+    "updatedAt": new Date("2026-02-22T19:01:04.869Z")
   },
   {
     "id": "notre_dame",
@@ -7747,8 +7747,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:25.055Z",
-    "updatedAt": "2026-02-22T18:18:07.964Z"
+    "createdAt": new Date("2026-02-12T12:11:25.055Z"),
+    "updatedAt": new Date("2026-02-22T18:18:07.964Z")
   },
   {
     "id": "afternoon-tea-london",
@@ -7813,8 +7813,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:34.968Z",
-    "updatedAt": "2026-02-22T18:24:02.136Z"
+    "createdAt": new Date("2026-02-12T12:11:34.968Z"),
+    "updatedAt": new Date("2026-02-22T18:24:02.136Z")
   },
   {
     "id": "tops-lookout",
@@ -7859,8 +7859,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:30.463Z",
-    "updatedAt": "2026-02-22T18:18:17.271Z"
+    "createdAt": new Date("2026-02-12T12:11:30.463Z"),
+    "updatedAt": new Date("2026-02-22T18:18:17.271Z")
   },
   {
     "id": "tokyo_item_69",
@@ -7897,8 +7897,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.278Z",
-    "updatedAt": "2026-02-22T18:24:22.000Z"
+    "createdAt": new Date("2026-02-12T13:05:06.278Z"),
+    "updatedAt": new Date("2026-02-22T18:24:22.000Z")
   },
   {
     "id": "penang-street-food-tour",
@@ -7963,8 +7963,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.593Z",
-    "updatedAt": "2026-02-22T19:01:04.949Z"
+    "createdAt": new Date("2026-02-12T12:11:35.593Z"),
+    "updatedAt": new Date("2026-02-22T19:01:04.949Z")
   },
   {
     "id": "colosseum-underground-tour",
@@ -8068,8 +8068,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:36.389Z",
-    "updatedAt": "2026-02-22T18:24:44.890Z"
+    "createdAt": new Date("2026-02-12T12:11:36.389Z"),
+    "updatedAt": new Date("2026-02-22T18:24:44.890Z")
   },
   {
     "id": "phuket-sunset-cruise",
@@ -8131,8 +8131,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:36.272Z",
-    "updatedAt": "2026-02-22T19:01:05.034Z"
+    "createdAt": new Date("2026-02-12T12:11:36.272Z"),
+    "updatedAt": new Date("2026-02-22T19:01:05.034Z")
   },
   {
     "id": "oslob-whale-shark",
@@ -8183,8 +8183,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:38.235Z",
-    "updatedAt": "2026-02-22T18:25:04.910Z"
+    "createdAt": new Date("2026-02-12T12:11:38.235Z"),
+    "updatedAt": new Date("2026-02-22T18:25:04.910Z")
   },
   {
     "id": "casa_batllo",
@@ -8254,8 +8254,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:27.837Z",
-    "updatedAt": "2026-02-22T19:01:05.202Z"
+    "createdAt": new Date("2026-02-12T12:11:27.837Z"),
+    "updatedAt": new Date("2026-02-22T19:01:05.202Z")
   },
   {
     "id": "tokyo_item_9",
@@ -8292,8 +8292,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.108Z",
-    "updatedAt": "2026-02-22T18:25:26.324Z"
+    "createdAt": new Date("2026-02-12T13:05:02.108Z"),
+    "updatedAt": new Date("2026-02-22T18:25:26.324Z")
   },
   {
     "id": "rome/aroma-restaurant",
@@ -8341,8 +8341,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-22T18:05:47.586Z",
-    "updatedAt": "2026-02-22T19:01:05.286Z"
+    "createdAt": new Date("2026-02-22T18:05:47.586Z"),
+    "updatedAt": new Date("2026-02-22T19:01:05.286Z")
   },
   {
     "id": "old-phuket-town-walk",
@@ -8394,8 +8394,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:39.696Z",
-    "updatedAt": "2026-02-22T18:10:09.396Z"
+    "createdAt": new Date("2026-02-12T12:11:39.696Z"),
+    "updatedAt": new Date("2026-02-22T18:10:09.396Z")
   },
   {
     "id": "harry-potter-studio-tour",
@@ -8457,8 +8457,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.741Z",
-    "updatedAt": "2026-02-22T18:18:37.808Z"
+    "createdAt": new Date("2026-02-12T12:11:37.741Z"),
+    "updatedAt": new Date("2026-02-22T18:18:37.808Z")
   },
   {
     "id": "borghese-gift-shop-rome",
@@ -8556,8 +8556,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:36.754Z",
-    "updatedAt": "2026-02-22T18:25:54.411Z"
+    "createdAt": new Date("2026-02-12T12:11:36.754Z"),
+    "updatedAt": new Date("2026-02-22T18:25:54.411Z")
   },
   {
     "id": "rome-vespa-tour",
@@ -8661,8 +8661,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:36.509Z",
-    "updatedAt": "2026-02-22T18:25:35.309Z"
+    "createdAt": new Date("2026-02-12T12:11:36.509Z"),
+    "updatedAt": new Date("2026-02-22T18:25:35.309Z")
   },
   {
     "id": "singapore_item_84",
@@ -8699,8 +8699,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.252Z",
-    "updatedAt": "2026-02-22T18:06:03.125Z"
+    "createdAt": new Date("2026-02-12T13:05:07.252Z"),
+    "updatedAt": new Date("2026-02-22T18:06:03.125Z")
   },
   {
     "id": "london_item_10",
@@ -8737,8 +8737,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.173Z",
-    "updatedAt": "2026-02-23T02:01:02.401Z"
+    "createdAt": new Date("2026-02-12T13:05:02.173Z"),
+    "updatedAt": new Date("2026-02-23T02:01:02.401Z")
   },
   {
     "id": "singapore-flyer",
@@ -8783,8 +8783,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.301Z",
-    "updatedAt": "2026-02-22T18:26:03.409Z"
+    "createdAt": new Date("2026-02-12T12:11:31.301Z"),
+    "updatedAt": new Date("2026-02-22T18:26:03.409Z")
   },
   {
     "id": "penang-trishaw-tour",
@@ -8849,8 +8849,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.715Z",
-    "updatedAt": "2026-02-22T18:10:19.143Z"
+    "createdAt": new Date("2026-02-12T12:11:35.715Z"),
+    "updatedAt": new Date("2026-02-22T18:10:19.143Z")
   },
   {
     "id": "st_peters_basilica",
@@ -8973,8 +8973,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.571Z",
-    "updatedAt": "2026-02-22T19:01:05.371Z"
+    "createdAt": new Date("2026-02-12T12:11:24.571Z"),
+    "updatedAt": new Date("2026-02-22T19:01:05.371Z")
   },
   {
     "id": "buckingham_palace",
@@ -9089,8 +9089,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:25.903Z",
-    "updatedAt": "2026-02-22T18:18:58.082Z"
+    "createdAt": new Date("2026-02-12T12:11:25.903Z"),
+    "updatedAt": new Date("2026-02-22T18:18:58.082Z")
   },
   {
     "id": "moulin-rouge-show",
@@ -9152,8 +9152,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.387Z",
-    "updatedAt": "2026-02-22T18:26:33.427Z"
+    "createdAt": new Date("2026-02-12T12:11:37.387Z"),
+    "updatedAt": new Date("2026-02-22T18:26:33.427Z")
   },
   {
     "id": "eiffel_tower",
@@ -9270,8 +9270,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.812Z",
-    "updatedAt": "2026-02-22T19:01:05.534Z"
+    "createdAt": new Date("2026-02-12T12:11:24.812Z"),
+    "updatedAt": new Date("2026-02-22T19:01:05.534Z")
   },
   {
     "id": "rome_item_91",
@@ -9308,8 +9308,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.716Z",
-    "updatedAt": "2026-02-22T18:06:03.512Z"
+    "createdAt": new Date("2026-02-12T13:05:07.716Z"),
+    "updatedAt": new Date("2026-02-22T18:06:03.512Z")
   },
   {
     "id": "rijksmuseum",
@@ -9379,8 +9379,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:27.470Z",
-    "updatedAt": "2026-02-22T18:26:43.691Z"
+    "createdAt": new Date("2026-02-12T12:11:27.470Z"),
+    "updatedAt": new Date("2026-02-22T18:26:43.691Z")
   },
   {
     "id": "taoist-temple",
@@ -9423,8 +9423,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-22T18:05:56.590Z",
-    "updatedAt": "2026-02-22T18:27:23.382Z"
+    "createdAt": new Date("2026-02-22T18:05:56.590Z"),
+    "updatedAt": new Date("2026-02-22T18:27:23.382Z")
   },
   {
     "id": "tower_bridge",
@@ -9539,8 +9539,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:25.778Z",
-    "updatedAt": "2026-02-22T19:01:05.703Z"
+    "createdAt": new Date("2026-02-12T12:11:25.778Z"),
+    "updatedAt": new Date("2026-02-22T19:01:05.703Z")
   },
   {
     "id": "singapore-river-cruise",
@@ -9591,8 +9591,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:38.597Z",
-    "updatedAt": "2026-02-22T18:27:03.746Z"
+    "createdAt": new Date("2026-02-12T12:11:38.597Z"),
+    "updatedAt": new Date("2026-02-22T18:27:03.746Z")
   },
   {
     "id": "london_eye",
@@ -9710,8 +9710,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.022Z",
-    "updatedAt": "2026-02-22T19:01:05.871Z"
+    "createdAt": new Date("2026-02-12T12:11:26.022Z"),
+    "updatedAt": new Date("2026-02-22T19:01:05.871Z")
   },
   {
     "id": "palace_of_culture",
@@ -9781,8 +9781,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:28.962Z",
-    "updatedAt": "2026-02-22T18:31:29.677Z"
+    "createdAt": new Date("2026-02-12T12:11:28.962Z"),
+    "updatedAt": new Date("2026-02-22T18:31:29.677Z")
   },
   {
     "id": "jeju_item_67",
@@ -9819,8 +9819,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.149Z",
-    "updatedAt": "2026-02-24T19:00:26.115Z"
+    "createdAt": new Date("2026-02-12T13:05:06.149Z"),
+    "updatedAt": new Date("2026-02-24T19:00:26.115Z")
   },
   {
     "id": "karon-viewpoint",
@@ -9865,8 +9865,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:33.786Z",
-    "updatedAt": "2026-02-22T18:27:43.264Z"
+    "createdAt": new Date("2026-02-12T12:11:33.786Z"),
+    "updatedAt": new Date("2026-02-22T18:27:43.264Z")
   },
   {
     "id": "tokyo_item_29",
@@ -9903,8 +9903,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.521Z",
-    "updatedAt": "2026-02-22T18:20:30.148Z"
+    "createdAt": new Date("2026-02-12T13:05:03.521Z"),
+    "updatedAt": new Date("2026-02-22T18:20:30.148Z")
   },
   {
     "id": "rome_restaurant_roscioli",
@@ -10003,8 +10003,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.065Z",
-    "updatedAt": "2026-02-22T18:27:54.521Z"
+    "createdAt": new Date("2026-02-12T12:11:40.065Z"),
+    "updatedAt": new Date("2026-02-22T18:27:54.521Z")
   },
   {
     "id": "warsaw_old_town",
@@ -10074,8 +10074,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:28.838Z",
-    "updatedAt": "2026-02-22T19:01:05.959Z"
+    "createdAt": new Date("2026-02-12T12:11:28.838Z"),
+    "updatedAt": new Date("2026-02-22T19:01:05.959Z")
   },
   {
     "id": "paris_restaurant_lami_jean",
@@ -10127,8 +10127,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.911Z",
-    "updatedAt": "2026-02-22T18:28:22.987Z"
+    "createdAt": new Date("2026-02-12T12:11:40.911Z"),
+    "updatedAt": new Date("2026-02-22T18:28:22.987Z")
   },
   {
     "id": "arc_triomphe",
@@ -10243,8 +10243,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:25.178Z",
-    "updatedAt": "2026-02-22T20:00:56.834Z"
+    "createdAt": new Date("2026-02-12T12:11:25.178Z"),
+    "updatedAt": new Date("2026-02-22T20:00:56.834Z")
   },
   {
     "id": "jeju_item_107",
@@ -10281,8 +10281,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.772Z",
-    "updatedAt": "2026-02-22T18:06:03.937Z"
+    "createdAt": new Date("2026-02-12T13:05:08.772Z"),
+    "updatedAt": new Date("2026-02-22T18:06:03.937Z")
   },
   {
     "id": "london_item_90",
@@ -10319,8 +10319,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.648Z",
-    "updatedAt": "2026-02-22T18:05:56.651Z"
+    "createdAt": new Date("2026-02-12T13:05:07.648Z"),
+    "updatedAt": new Date("2026-02-22T18:05:56.651Z")
   },
   {
     "id": "london_restaurant_the_ledbury",
@@ -10373,8 +10373,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:41.390Z",
-    "updatedAt": "2026-02-28T13:48:09.630Z"
+    "createdAt": new Date("2026-02-12T12:11:41.390Z"),
+    "updatedAt": new Date("2026-02-28T13:48:09.630Z")
   },
   {
     "id": "central-market-kl",
@@ -10431,8 +10431,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:33.239Z",
-    "updatedAt": "2026-02-22T20:00:57.170Z"
+    "createdAt": new Date("2026-02-12T12:11:33.239Z"),
+    "updatedAt": new Date("2026-02-22T20:00:57.170Z")
   },
   {
     "id": "similan-islands",
@@ -10494,8 +10494,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:34.193Z",
-    "updatedAt": "2026-02-22T18:10:39.234Z"
+    "createdAt": new Date("2026-02-12T12:11:34.193Z"),
+    "updatedAt": new Date("2026-02-22T18:10:39.234Z")
   },
   {
     "id": "roman-food-tour",
@@ -10602,8 +10602,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:34.439Z",
-    "updatedAt": "2026-02-22T18:10:50.439Z"
+    "createdAt": new Date("2026-02-12T12:11:34.439Z"),
+    "updatedAt": new Date("2026-02-22T18:10:50.439Z")
   },
   {
     "id": "wat-chalong",
@@ -10648,8 +10648,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:33.646Z",
-    "updatedAt": "2026-02-22T18:21:01.204Z"
+    "createdAt": new Date("2026-02-12T12:11:33.646Z"),
+    "updatedAt": new Date("2026-02-22T18:21:01.204Z")
   },
   {
     "id": "barcelona_item_3",
@@ -10686,8 +10686,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.648Z",
-    "updatedAt": "2026-02-22T18:05:57.479Z"
+    "createdAt": new Date("2026-02-12T13:05:01.648Z"),
+    "updatedAt": new Date("2026-02-22T18:05:57.479Z")
   },
   {
     "id": "kawasan-canyoneering",
@@ -10738,8 +10738,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:38.357Z",
-    "updatedAt": "2026-02-22T20:00:57.692Z"
+    "createdAt": new Date("2026-02-12T12:11:38.357Z"),
+    "updatedAt": new Date("2026-02-22T20:00:57.692Z")
   },
   {
     "id": "london_item_20",
@@ -10776,8 +10776,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.928Z",
-    "updatedAt": "2026-02-22T18:06:04.254Z"
+    "createdAt": new Date("2026-02-12T13:05:02.928Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.254Z")
   },
   {
     "id": "louvre",
@@ -10892,8 +10892,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.935Z",
-    "updatedAt": "2026-02-22T20:00:57.942Z"
+    "createdAt": new Date("2026-02-12T12:11:24.935Z"),
+    "updatedAt": new Date("2026-02-22T20:00:57.942Z")
   },
   {
     "id": "seoul_item_48",
@@ -10930,8 +10930,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.803Z",
-    "updatedAt": "2026-02-22T18:29:11.347Z"
+    "createdAt": new Date("2026-02-12T13:05:04.803Z"),
+    "updatedAt": new Date("2026-02-22T18:29:11.347Z")
   },
   {
     "id": "paris_item_22",
@@ -10968,8 +10968,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.055Z",
-    "updatedAt": "2026-02-22T18:06:04.314Z"
+    "createdAt": new Date("2026-02-12T13:05:03.055Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.314Z")
   },
   {
     "id": "big-buddha-phuket",
@@ -11014,8 +11014,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:33.358Z",
-    "updatedAt": "2026-02-22T20:00:58.965Z"
+    "createdAt": new Date("2026-02-12T12:11:33.358Z"),
+    "updatedAt": new Date("2026-02-22T20:00:58.965Z")
   },
   {
     "id": "anne_frank_house",
@@ -11085,8 +11085,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:27.350Z",
-    "updatedAt": "2026-02-22T18:21:19.855Z"
+    "createdAt": new Date("2026-02-12T12:11:27.350Z"),
+    "updatedAt": new Date("2026-02-22T18:21:19.855Z")
   },
   {
     "id": "singapore_item_34",
@@ -11123,8 +11123,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.847Z",
-    "updatedAt": "2026-02-22T18:06:04.450Z"
+    "createdAt": new Date("2026-02-12T13:05:03.847Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.450Z")
   },
   {
     "id": "rom_colosseum",
@@ -11161,8 +11161,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:00.958Z",
-    "updatedAt": "2026-02-24T20:00:26.131Z"
+    "createdAt": new Date("2026-02-12T13:05:00.958Z"),
+    "updatedAt": new Date("2026-02-24T20:00:26.131Z")
   },
   {
     "id": "kek-lok-si-temple",
@@ -11207,8 +11207,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.782Z",
-    "updatedAt": "2026-02-22T18:21:29.280Z"
+    "createdAt": new Date("2026-02-12T12:11:31.782Z"),
+    "updatedAt": new Date("2026-02-22T18:21:29.280Z")
   },
   {
     "id": "prague_castle",
@@ -11278,8 +11278,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:28.323Z",
-    "updatedAt": "2026-02-22T20:00:59.129Z"
+    "createdAt": new Date("2026-02-12T12:11:28.323Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.129Z")
   },
   {
     "id": "penang-hill",
@@ -11324,8 +11324,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:32.141Z",
-    "updatedAt": "2026-02-22T18:21:48.925Z"
+    "createdAt": new Date("2026-02-12T12:11:32.141Z"),
+    "updatedAt": new Date("2026-02-22T18:21:48.925Z")
   },
   {
     "id": "gardens-light-show-singapore",
@@ -11390,8 +11390,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.469Z",
-    "updatedAt": "2026-02-22T20:00:59.461Z"
+    "createdAt": new Date("2026-02-12T12:11:35.469Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.461Z")
   },
   {
     "id": "rome_restaurant_flavio_al_velavevodetto",
@@ -11488,8 +11488,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.424Z",
-    "updatedAt": "2026-02-22T18:13:05.237Z"
+    "createdAt": new Date("2026-02-12T12:11:40.424Z"),
+    "updatedAt": new Date("2026-02-22T18:13:05.237Z")
   },
   {
     "id": "trastevere-artisan-shop-rome",
@@ -11587,8 +11587,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.146Z",
-    "updatedAt": "2026-02-22T18:29:20.332Z"
+    "createdAt": new Date("2026-02-12T12:11:37.146Z"),
+    "updatedAt": new Date("2026-02-22T18:29:20.332Z")
   },
   {
     "id": "gardens-by-the-bay",
@@ -11634,8 +11634,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.182Z",
-    "updatedAt": "2026-02-22T20:00:59.795Z"
+    "createdAt": new Date("2026-02-12T12:11:31.182Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.795Z")
   },
   {
     "id": "petronas-towers",
@@ -11681,8 +11681,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:32.620Z",
-    "updatedAt": "2026-02-22T18:29:29.942Z"
+    "createdAt": new Date("2026-02-12T12:11:32.620Z"),
+    "updatedAt": new Date("2026-02-22T18:29:29.942Z")
   },
   {
     "id": "서울특별시-demo-1",
@@ -11719,8 +11719,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:50:31.987Z",
-    "updatedAt": "2026-02-23T02:01:02.738Z"
+    "createdAt": new Date("2026-02-12T12:50:31.987Z"),
+    "updatedAt": new Date("2026-02-23T02:01:02.738Z")
   },
   {
     "id": "thean-hou-temple",
@@ -11777,8 +11777,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:32.857Z",
-    "updatedAt": "2026-02-22T18:13:12.062Z"
+    "createdAt": new Date("2026-02-12T12:11:32.857Z"),
+    "updatedAt": new Date("2026-02-22T18:13:12.062Z")
   },
   {
     "id": "trevi_fountain",
@@ -11906,8 +11906,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.081Z",
-    "updatedAt": "2026-02-22T18:21:58.411Z"
+    "createdAt": new Date("2026-02-12T12:11:24.081Z"),
+    "updatedAt": new Date("2026-02-22T18:21:58.411Z")
   },
   {
     "id": "seoul_item_8",
@@ -11944,8 +11944,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.040Z",
-    "updatedAt": "2026-02-22T18:11:59.025Z"
+    "createdAt": new Date("2026-02-12T13:05:02.040Z"),
+    "updatedAt": new Date("2026-02-22T18:11:59.025Z")
   },
   {
     "id": "piazza-navona-crafts-rome",
@@ -12043,8 +12043,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.266Z",
-    "updatedAt": "2026-02-22T20:00:59.876Z"
+    "createdAt": new Date("2026-02-12T12:11:37.266Z"),
+    "updatedAt": new Date("2026-02-22T20:00:59.876Z")
   },
   {
     "id": "jeju_item_77",
@@ -12081,8 +12081,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.794Z",
-    "updatedAt": "2026-02-22T18:06:04.897Z"
+    "createdAt": new Date("2026-02-12T13:05:06.794Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.897Z")
   },
   {
     "id": "phi-phi-island-tour",
@@ -12134,8 +12134,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:39.578Z",
-    "updatedAt": "2026-02-22T18:12:09.687Z"
+    "createdAt": new Date("2026-02-12T12:11:39.578Z"),
+    "updatedAt": new Date("2026-02-22T18:12:09.687Z")
   },
   {
     "id": "singapore-hawker-food-tour",
@@ -12186,8 +12186,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:38.716Z",
-    "updatedAt": "2026-02-22T18:14:10.380Z"
+    "createdAt": new Date("2026-02-12T12:11:38.716Z"),
+    "updatedAt": new Date("2026-02-22T18:14:10.380Z")
   },
   {
     "id": "big_ben",
@@ -12303,8 +12303,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:25.655Z",
-    "updatedAt": "2026-02-22T18:29:59.443Z"
+    "createdAt": new Date("2026-02-12T12:11:25.655Z"),
+    "updatedAt": new Date("2026-02-22T18:29:59.443Z")
   },
   {
     "id": "westminster_abbey",
@@ -12362,8 +12362,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.144Z",
-    "updatedAt": "2026-02-22T18:30:09.267Z"
+    "createdAt": new Date("2026-02-12T12:11:26.144Z"),
+    "updatedAt": new Date("2026-02-22T18:30:09.267Z")
   },
   {
     "id": "london_item_80",
@@ -12400,8 +12400,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.996Z",
-    "updatedAt": "2026-02-22T18:06:04.980Z"
+    "createdAt": new Date("2026-02-12T13:05:06.996Z"),
+    "updatedAt": new Date("2026-02-22T18:06:04.980Z")
   },
   {
     "id": "klcc-aquarium",
@@ -12453,8 +12453,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:39.456Z",
-    "updatedAt": "2026-02-22T18:12:30.778Z"
+    "createdAt": new Date("2026-02-12T12:11:39.456Z"),
+    "updatedAt": new Date("2026-02-22T18:12:30.778Z")
   },
   {
     "id": "west-end-theatre-show",
@@ -12516,8 +12516,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.990Z",
-    "updatedAt": "2026-02-22T20:01:00.120Z"
+    "createdAt": new Date("2026-02-12T12:11:37.990Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.120Z")
   },
   {
     "id": "georgetown-street-art",
@@ -12569,8 +12569,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:38.835Z",
-    "updatedAt": "2026-02-22T18:12:51.616Z"
+    "createdAt": new Date("2026-02-12T12:11:38.835Z"),
+    "updatedAt": new Date("2026-02-22T18:12:51.616Z")
   },
   {
     "id": "paris_item_102",
@@ -12607,8 +12607,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.441Z",
-    "updatedAt": "2026-02-22T18:06:05.232Z"
+    "createdAt": new Date("2026-02-12T13:05:08.441Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.232Z")
   },
   {
     "id": "penang-national-park",
@@ -12670,8 +12670,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:32.499Z",
-    "updatedAt": "2026-02-22T18:22:09.955Z"
+    "createdAt": new Date("2026-02-12T12:11:32.499Z"),
+    "updatedAt": new Date("2026-02-22T18:22:09.955Z")
   },
   {
     "id": "northern_lights_point",
@@ -12741,8 +12741,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:27.106Z",
-    "updatedAt": "2026-02-22T18:22:21.239Z"
+    "createdAt": new Date("2026-02-12T12:11:27.106Z"),
+    "updatedAt": new Date("2026-02-22T18:22:21.239Z")
   },
   {
     "id": "kenai_fjords",
@@ -12812,8 +12812,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.975Z",
-    "updatedAt": "2026-02-22T20:01:00.289Z"
+    "createdAt": new Date("2026-02-12T12:11:26.975Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.289Z")
   },
   {
     "id": "st_pauls_cathedral",
@@ -12871,8 +12871,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.379Z",
-    "updatedAt": "2026-02-22T20:01:00.453Z"
+    "createdAt": new Date("2026-02-12T12:11:26.379Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.453Z")
   },
   {
     "id": "rome_판테온_pantheon",
@@ -12910,8 +12910,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:36:25.089Z",
-    "updatedAt": "2026-02-22T18:06:05.419Z"
+    "createdAt": new Date("2026-02-13T13:36:25.089Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.419Z")
   },
   {
     "id": "tivoli_gardens",
@@ -12981,8 +12981,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:29.738Z",
-    "updatedAt": "2026-02-22T20:01:00.615Z"
+    "createdAt": new Date("2026-02-12T12:11:29.738Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.615Z")
   },
   {
     "id": "whale-shark-watching-cebu",
@@ -13047,8 +13047,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.210Z",
-    "updatedAt": "2026-02-22T20:01:00.700Z"
+    "createdAt": new Date("2026-02-12T12:11:35.210Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.700Z")
   },
   {
     "id": "little_mermaid",
@@ -13118,8 +13118,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:29.454Z",
-    "updatedAt": "2026-02-22T18:30:48.214Z"
+    "createdAt": new Date("2026-02-12T12:11:29.454Z"),
+    "updatedAt": new Date("2026-02-22T18:30:48.214Z")
   },
   {
     "id": "seoul_정식당_서울_jungsik_seoul",
@@ -13157,8 +13157,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:43:16.739Z",
-    "updatedAt": "2026-02-22T18:06:05.602Z"
+    "createdAt": new Date("2026-02-13T13:43:16.739Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.602Z")
   },
   {
     "id": "tokyo_긴자_",
@@ -13196,8 +13196,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:43:57.181Z",
-    "updatedAt": "2026-02-22T18:06:05.730Z"
+    "createdAt": new Date("2026-02-13T13:43:57.181Z"),
+    "updatedAt": new Date("2026-02-22T18:06:05.730Z")
   },
   {
     "id": "sentosa-island",
@@ -13254,8 +13254,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.664Z",
-    "updatedAt": "2026-02-22T20:01:00.792Z"
+    "createdAt": new Date("2026-02-12T12:11:31.664Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.792Z")
   },
   {
     "id": "jeju_item_7",
@@ -13292,8 +13292,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.958Z",
-    "updatedAt": "2026-02-24T20:00:26.228Z"
+    "createdAt": new Date("2026-02-12T13:05:01.958Z"),
+    "updatedAt": new Date("2026-02-24T20:00:26.228Z")
   },
   {
     "id": "national-museum-singapore",
@@ -13350,8 +13350,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.545Z",
-    "updatedAt": "2026-02-22T18:31:30.053Z"
+    "createdAt": new Date("2026-02-12T12:11:31.545Z"),
+    "updatedAt": new Date("2026-02-22T18:31:30.053Z")
   },
   {
     "id": "london_템스강_프라이빗_선셋_크루즈_private_thames",
@@ -13389,8 +13389,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:44:31.658Z",
-    "updatedAt": "2026-02-22T18:06:06.176Z"
+    "createdAt": new Date("2026-02-13T13:44:31.658Z"),
+    "updatedAt": new Date("2026-02-22T18:06:06.176Z")
   },
   {
     "id": "london_스케치_sketch_더_렉처_룸_라이브러리_the_le",
@@ -13432,8 +13432,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:44:31.595Z",
-    "updatedAt": "2026-02-28T13:48:31.813Z"
+    "createdAt": new Date("2026-02-13T13:44:31.595Z"),
+    "updatedAt": new Date("2026-02-28T13:48:31.813Z")
   },
   {
     "id": "jeju_item_37",
@@ -13470,8 +13470,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.059Z",
-    "updatedAt": "2026-02-25T02:01:00.530Z"
+    "createdAt": new Date("2026-02-12T13:05:04.059Z"),
+    "updatedAt": new Date("2026-02-25T02:01:00.530Z")
   },
   {
     "id": "pinang-peranakan-mansion",
@@ -13533,8 +13533,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:32.378Z",
-    "updatedAt": "2026-02-22T18:31:40.384Z"
+    "createdAt": new Date("2026-02-12T12:11:32.378Z"),
+    "updatedAt": new Date("2026-02-22T18:31:40.384Z")
   },
   {
     "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_이른_아침_투어",
@@ -13572,8 +13572,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:45:15.116Z",
-    "updatedAt": "2026-02-22T18:06:06.235Z"
+    "createdAt": new Date("2026-02-13T13:45:15.116Z"),
+    "updatedAt": new Date("2026-02-22T18:06:06.235Z")
   },
   {
     "id": "london_웨스트민스터_사원_westminster_abbey",
@@ -13611,8 +13611,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:44:36.176Z",
-    "updatedAt": "2026-02-22T18:06:06.299Z"
+    "createdAt": new Date("2026-02-14T00:44:36.176Z"),
+    "updatedAt": new Date("2026-02-22T18:06:06.299Z")
   },
   {
     "id": "singapore_item_104",
@@ -13649,8 +13649,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.579Z",
-    "updatedAt": "2026-02-25T02:01:01.759Z"
+    "createdAt": new Date("2026-02-12T13:05:08.579Z"),
+    "updatedAt": new Date("2026-02-25T02:01:01.759Z")
   },
   {
     "id": "old-phuket-town",
@@ -13707,8 +13707,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:33.952Z",
-    "updatedAt": "2026-02-22T18:32:00.071Z"
+    "createdAt": new Date("2026-02-12T12:11:33.952Z"),
+    "updatedAt": new Date("2026-02-22T18:32:00.071Z")
   },
   {
     "id": "seine-river-cruise",
@@ -13773,8 +13773,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:34.600Z",
-    "updatedAt": "2026-02-22T18:32:18.447Z"
+    "createdAt": new Date("2026-02-12T12:11:34.600Z"),
+    "updatedAt": new Date("2026-02-22T18:32:18.447Z")
   },
   {
     "id": "singapore_national_gallery_singapore",
@@ -13812,8 +13812,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:51:19.284Z",
-    "updatedAt": "2026-02-22T18:06:06.734Z"
+    "createdAt": new Date("2026-02-13T13:51:19.284Z"),
+    "updatedAt": new Date("2026-02-22T18:06:06.734Z")
   },
   {
     "id": "london_item_50",
@@ -13850,8 +13850,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.931Z",
-    "updatedAt": "2026-02-25T03:00:42.604Z"
+    "createdAt": new Date("2026-02-12T13:05:04.931Z"),
+    "updatedAt": new Date("2026-02-25T03:00:42.604Z")
   },
   {
     "id": "jeju_비자림",
@@ -13889,8 +13889,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:52:26.794Z",
-    "updatedAt": "2026-02-22T18:32:48.283Z"
+    "createdAt": new Date("2026-02-13T13:52:26.794Z"),
+    "updatedAt": new Date("2026-02-22T18:32:48.283Z")
   },
   {
     "id": "new-york_le_bernardin",
@@ -13929,8 +13929,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:56:27.722Z",
-    "updatedAt": "2026-02-28T13:48:40.965Z"
+    "createdAt": new Date("2026-02-13T13:56:27.722Z"),
+    "updatedAt": new Date("2026-02-28T13:48:40.965Z")
   },
   {
     "id": "jeju_밀본_제주_milbon_jeju",
@@ -13968,8 +13968,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:52:26.859Z",
-    "updatedAt": "2026-02-22T18:32:57.758Z"
+    "createdAt": new Date("2026-02-13T13:52:26.859Z"),
+    "updatedAt": new Date("2026-02-22T18:32:57.758Z")
   },
   {
     "id": "chinatown-night-market-kl",
@@ -14031,8 +14031,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.985Z",
-    "updatedAt": "2026-02-22T18:33:08.527Z"
+    "createdAt": new Date("2026-02-12T12:11:35.985Z"),
+    "updatedAt": new Date("2026-02-22T18:33:08.527Z")
   },
   {
     "id": "busan_더베이_101_요트클럽_다이닝_the_bay_101_y",
@@ -14070,8 +14070,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:34:24.383Z",
-    "updatedAt": "2026-02-22T18:06:07.360Z"
+    "createdAt": new Date("2026-02-14T00:34:24.383Z"),
+    "updatedAt": new Date("2026-02-22T18:06:07.360Z")
   },
   {
     "id": "british_museum",
@@ -14129,8 +14129,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.261Z",
-    "updatedAt": "2026-02-22T20:01:00.980Z"
+    "createdAt": new Date("2026-02-12T12:11:26.261Z"),
+    "updatedAt": new Date("2026-02-22T20:01:00.980Z")
   },
   {
     "id": "sirao-flower-garden",
@@ -14192,8 +14192,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:30.828Z",
-    "updatedAt": "2026-02-22T20:01:01.145Z"
+    "createdAt": new Date("2026-02-12T12:11:30.828Z"),
+    "updatedAt": new Date("2026-02-22T20:01:01.145Z")
   },
   {
     "id": "batu-caves",
@@ -14238,8 +14238,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:32.739Z",
-    "updatedAt": "2026-02-22T18:22:42.154Z"
+    "createdAt": new Date("2026-02-12T12:11:32.739Z"),
+    "updatedAt": new Date("2026-02-22T18:22:42.154Z")
   },
   {
     "id": "phuket-cooking-class",
@@ -14291,8 +14291,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:39.823Z",
-    "updatedAt": "2026-02-22T18:33:46.784Z"
+    "createdAt": new Date("2026-02-12T12:11:39.823Z"),
+    "updatedAt": new Date("2026-02-22T18:33:46.784Z")
   },
   {
     "id": "seoul_권숙수_kwon_sook_soo",
@@ -14330,8 +14330,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:42:52.039Z",
-    "updatedAt": "2026-02-28T13:48:48.394Z"
+    "createdAt": new Date("2026-02-14T00:42:52.039Z"),
+    "updatedAt": new Date("2026-02-28T13:48:48.394Z")
   },
   {
     "id": "london_item_70",
@@ -14368,8 +14368,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.343Z",
-    "updatedAt": "2026-02-25T03:00:44.579Z"
+    "createdAt": new Date("2026-02-12T13:05:06.343Z"),
+    "updatedAt": new Date("2026-02-25T03:00:44.579Z")
   },
   {
     "id": "barcelona_디스프루타르_disfrutar",
@@ -14407,8 +14407,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:50:28.100Z",
-    "updatedAt": "2026-02-22T18:22:52.648Z"
+    "createdAt": new Date("2026-02-13T13:50:28.100Z"),
+    "updatedAt": new Date("2026-02-22T18:22:52.648Z")
   },
   {
     "id": "kl-tower",
@@ -14465,8 +14465,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:33.121Z",
-    "updatedAt": "2026-02-22T18:23:02.690Z"
+    "createdAt": new Date("2026-02-12T12:11:33.121Z"),
+    "updatedAt": new Date("2026-02-22T18:23:02.690Z")
   },
   {
     "id": "tokyo_시부야_스카이_시부야_스크램블_교차로_",
@@ -14504,8 +14504,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:43:36.899Z",
-    "updatedAt": "2026-02-22T18:06:07.680Z"
+    "createdAt": new Date("2026-02-14T00:43:36.899Z"),
+    "updatedAt": new Date("2026-02-22T18:06:07.680Z")
   },
   {
     "id": "rome_item_21",
@@ -14542,8 +14542,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.991Z",
-    "updatedAt": "2026-02-23T02:00:56.891Z"
+    "createdAt": new Date("2026-02-12T13:05:02.991Z"),
+    "updatedAt": new Date("2026-02-23T02:00:56.891Z")
   },
   {
     "id": "phi-phi-islands",
@@ -14600,8 +14600,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:34.072Z",
-    "updatedAt": "2026-02-22T18:23:23.051Z"
+    "createdAt": new Date("2026-02-12T12:11:34.072Z"),
+    "updatedAt": new Date("2026-02-22T18:23:23.051Z")
   },
   {
     "id": "rome_더_판테온_로마_the_pantheon_rome",
@@ -14639,8 +14639,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:45:38.523Z",
-    "updatedAt": "2026-02-22T18:06:07.990Z"
+    "createdAt": new Date("2026-02-14T00:45:38.523Z"),
+    "updatedAt": new Date("2026-02-22T18:06:07.990Z")
   },
   {
     "id": "rome_아로마_레스토랑_팔라초_만프레디",
@@ -14678,8 +14678,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:45:38.587Z",
-    "updatedAt": "2026-02-22T18:06:07.865Z"
+    "createdAt": new Date("2026-02-14T00:45:38.587Z"),
+    "updatedAt": new Date("2026-02-22T18:06:07.865Z")
   },
   {
     "id": "grand_place",
@@ -14749,8 +14749,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:28.078Z",
-    "updatedAt": "2026-02-22T18:34:06.342Z"
+    "createdAt": new Date("2026-02-12T12:11:28.078Z"),
+    "updatedAt": new Date("2026-02-22T18:34:06.342Z")
   },
   {
     "id": "paris_베르사유_궁전_거울의_방_galerie_des_glac",
@@ -14788,8 +14788,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:46:31.020Z",
-    "updatedAt": "2026-02-22T18:06:08.119Z"
+    "createdAt": new Date("2026-02-14T00:46:31.020Z"),
+    "updatedAt": new Date("2026-02-22T18:06:08.119Z")
   },
   {
     "id": "jeju_item_87",
@@ -14826,8 +14826,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.447Z",
-    "updatedAt": "2026-02-25T12:01:07.503Z"
+    "createdAt": new Date("2026-02-12T13:05:07.447Z"),
+    "updatedAt": new Date("2026-02-25T12:01:07.503Z")
   },
   {
     "id": "paris_요트_드_파리_럭셔리_프라이빗_세느강_디너_크루즈",
@@ -14865,8 +14865,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:46:31.204Z",
-    "updatedAt": "2026-02-22T18:06:08.245Z"
+    "createdAt": new Date("2026-02-14T00:46:31.204Z"),
+    "updatedAt": new Date("2026-02-22T18:06:08.245Z")
   },
   {
     "id": "barcelona_item_63",
@@ -14903,8 +14903,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.809Z",
-    "updatedAt": "2026-02-22T18:06:02.364Z"
+    "createdAt": new Date("2026-02-12T13:05:05.809Z"),
+    "updatedAt": new Date("2026-02-22T18:06:02.364Z")
   },
   {
     "id": "island-hopping-cebu",
@@ -14969,8 +14969,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.091Z",
-    "updatedAt": "2026-02-22T18:24:35.100Z"
+    "createdAt": new Date("2026-02-12T12:11:35.091Z"),
+    "updatedAt": new Date("2026-02-22T18:24:35.100Z")
   },
   {
     "id": "denali_national_park",
@@ -15040,8 +15040,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.497Z",
-    "updatedAt": "2026-02-22T18:24:55.528Z"
+    "createdAt": new Date("2026-02-12T12:11:26.497Z"),
+    "updatedAt": new Date("2026-02-22T18:24:55.528Z")
   },
   {
     "id": "parliament_building",
@@ -15111,8 +15111,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:28.587Z",
-    "updatedAt": "2026-02-22T18:25:15.316Z"
+    "createdAt": new Date("2026-02-12T12:11:28.587Z"),
+    "updatedAt": new Date("2026-02-22T18:25:15.316Z")
   },
   {
     "id": "musee_dorsay",
@@ -15171,8 +15171,8 @@ export const LANDMARKS: Landmark[] = [
     "isPremium": false,
     "price": null,
 
-    "searchKeywords": ["Beaux-Arts", "인상파 갤러리", "빈센트 반 고흐", "인생샷"],    "createdAt": "2026-02-12T12:11:25.538Z",
-    "updatedAt": "2026-02-22T18:34:37.430Z"
+    "searchKeywords": ["Beaux-Arts", "인상파 갤러리", "빈센트 반 고흐", "인생샷"],    "createdAt": new Date("2026-02-12T12:11:25.538Z"),
+    "updatedAt": new Date("2026-02-22T18:34:37.430Z")
   },
   {
     "id": "rome_item_31",
@@ -15209,8 +15209,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.655Z",
-    "updatedAt": "2026-02-23T02:00:57.739Z"
+    "createdAt": new Date("2026-02-12T13:05:03.655Z"),
+    "updatedAt": new Date("2026-02-23T02:00:57.739Z")
   },
   {
     "id": "penang-hill-cable-car",
@@ -15262,8 +15262,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:38.955Z",
-    "updatedAt": "2026-02-22T18:29:39.615Z"
+    "createdAt": new Date("2026-02-12T12:11:38.955Z"),
+    "updatedAt": new Date("2026-02-22T18:29:39.615Z")
   },
   {
     "id": "batu-caves-tour",
@@ -15315,8 +15315,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:39.214Z",
-    "updatedAt": "2026-02-22T18:29:49.972Z"
+    "createdAt": new Date("2026-02-12T12:11:39.214Z"),
+    "updatedAt": new Date("2026-02-22T18:29:49.972Z")
   },
   {
     "id": "atomium",
@@ -15386,8 +15386,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:27.961Z",
-    "updatedAt": "2026-02-22T18:34:55.390Z"
+    "createdAt": new Date("2026-02-12T12:11:27.961Z"),
+    "updatedAt": new Date("2026-02-22T18:34:55.390Z")
   },
   {
     "id": "paris_item_2",
@@ -15424,8 +15424,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.582Z",
-    "updatedAt": "2026-02-22T18:05:59.777Z"
+    "createdAt": new Date("2026-02-12T13:05:01.582Z"),
+    "updatedAt": new Date("2026-02-22T18:05:59.777Z")
   },
   {
     "id": "vatican-gifts-rome",
@@ -15523,8 +15523,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:36.876Z",
-    "updatedAt": "2026-02-22T18:26:22.966Z"
+    "createdAt": new Date("2026-02-12T12:11:36.876Z"),
+    "updatedAt": new Date("2026-02-22T18:26:22.966Z")
   },
   {
     "id": "paris_restaurant_septime",
@@ -15575,8 +15575,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.794Z",
-    "updatedAt": "2026-02-23T02:00:58.073Z"
+    "createdAt": new Date("2026-02-12T12:11:40.794Z"),
+    "updatedAt": new Date("2026-02-23T02:00:58.073Z")
   },
   {
     "id": "taoist-temple-cebu",
@@ -15638,8 +15638,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:30.580Z",
-    "updatedAt": "2026-02-22T18:35:24.656Z"
+    "createdAt": new Date("2026-02-12T12:11:30.580Z"),
+    "updatedAt": new Date("2026-02-22T18:35:24.656Z")
   },
   {
     "id": "부산광역시-demo-1",
@@ -15676,8 +15676,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.713Z",
-    "updatedAt": "2026-02-22T18:15:49.938Z"
+    "createdAt": new Date("2026-02-12T12:57:47.713Z"),
+    "updatedAt": new Date("2026-02-22T18:15:49.938Z")
   },
   {
     "id": "tokyo_item_89",
@@ -15714,8 +15714,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.580Z",
-    "updatedAt": "2026-02-22T18:26:53.494Z"
+    "createdAt": new Date("2026-02-12T13:05:07.580Z"),
+    "updatedAt": new Date("2026-02-22T18:26:53.494Z")
   },
   {
     "id": "nyhavn",
@@ -15785,8 +15785,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:29.612Z",
-    "updatedAt": "2026-02-22T18:35:15.880Z"
+    "createdAt": new Date("2026-02-12T12:11:29.612Z"),
+    "updatedAt": new Date("2026-02-22T18:35:15.880Z")
   },
   {
     "id": "busan_item_6",
@@ -15823,8 +15823,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:01.893Z",
-    "updatedAt": "2026-02-23T19:00:36.349Z"
+    "createdAt": new Date("2026-02-12T13:05:01.893Z"),
+    "updatedAt": new Date("2026-02-23T19:00:36.349Z")
   },
   {
     "id": "tokyo_item_59",
@@ -15861,8 +15861,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:05.512Z",
-    "updatedAt": "2026-02-22T18:20:55.965Z"
+    "createdAt": new Date("2026-02-12T13:05:05.512Z"),
+    "updatedAt": new Date("2026-02-22T18:20:55.965Z")
   },
   {
     "id": "nyonya-cooking-class",
@@ -15914,8 +15914,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:39.077Z",
-    "updatedAt": "2026-02-22T18:27:13.932Z"
+    "createdAt": new Date("2026-02-12T12:11:39.077Z"),
+    "updatedAt": new Date("2026-02-22T18:27:13.932Z")
   },
   {
     "id": "jeju_한라산_국립공원_어승생악_탐방로",
@@ -15953,8 +15953,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:52:26.606Z",
-    "updatedAt": "2026-02-22T18:31:08.602Z"
+    "createdAt": new Date("2026-02-13T13:52:26.606Z"),
+    "updatedAt": new Date("2026-02-22T18:31:08.602Z")
   },
   {
     "id": "rome_item_41",
@@ -15991,8 +15991,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.338Z",
-    "updatedAt": "2026-02-23T20:00:52.488Z"
+    "createdAt": new Date("2026-02-12T13:05:04.338Z"),
+    "updatedAt": new Date("2026-02-23T20:00:52.488Z")
   },
   {
     "id": "patong-beach",
@@ -16037,8 +16037,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:33.528Z",
-    "updatedAt": "2026-02-22T18:27:32.812Z"
+    "createdAt": new Date("2026-02-12T12:11:33.528Z"),
+    "updatedAt": new Date("2026-02-22T18:27:32.812Z")
   },
   {
     "id": "cebu-heritage-monument",
@@ -16100,8 +16100,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:30.700Z",
-    "updatedAt": "2026-02-22T18:36:13.379Z"
+    "createdAt": new Date("2026-02-12T12:11:30.700Z"),
+    "updatedAt": new Date("2026-02-22T18:36:13.379Z")
   },
   {
     "id": "busan_item_66",
@@ -16138,8 +16138,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:06.084Z",
-    "updatedAt": "2026-02-23T20:00:52.846Z"
+    "createdAt": new Date("2026-02-12T13:05:06.084Z"),
+    "updatedAt": new Date("2026-02-23T20:00:52.846Z")
   },
   {
     "id": "marina-bay-sands",
@@ -16185,8 +16185,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:30.946Z",
-    "updatedAt": "2026-02-22T18:36:32.946Z"
+    "createdAt": new Date("2026-02-12T12:11:30.946Z"),
+    "updatedAt": new Date("2026-02-22T18:36:32.946Z")
   },
   {
     "id": "rome_restaurant_da_enzo",
@@ -16283,8 +16283,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.305Z",
-    "updatedAt": "2026-02-22T18:28:13.710Z"
+    "createdAt": new Date("2026-02-12T12:11:40.305Z"),
+    "updatedAt": new Date("2026-02-22T18:28:13.710Z")
   },
   {
     "id": "tokyo_팀랩_플래닛_도쿄_dmm_teamlab_planets_",
@@ -16322,8 +16322,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:43:57.115Z",
-    "updatedAt": "2026-02-23T20:00:52.862Z"
+    "createdAt": new Date("2026-02-13T13:43:57.115Z"),
+    "updatedAt": new Date("2026-02-23T20:00:52.862Z")
   },
   {
     "id": "paris_restaurant_chez_janou",
@@ -16375,8 +16375,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:41.029Z",
-    "updatedAt": "2026-02-22T18:28:33.091Z"
+    "createdAt": new Date("2026-02-12T12:11:41.029Z"),
+    "updatedAt": new Date("2026-02-22T18:28:33.091Z")
   },
   {
     "id": "vatican-night-tour",
@@ -16483,8 +16483,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:34.312Z",
-    "updatedAt": "2026-02-22T18:32:09.434Z"
+    "createdAt": new Date("2026-02-12T12:11:34.312Z"),
+    "updatedAt": new Date("2026-02-22T18:32:09.434Z")
   },
   {
     "id": "busan_해동용궁사_haedong_yonggungsa_templ",
@@ -16522,8 +16522,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:34:24.253Z",
-    "updatedAt": "2026-02-23T02:01:01.063Z"
+    "createdAt": new Date("2026-02-14T00:34:24.253Z"),
+    "updatedAt": new Date("2026-02-23T02:01:01.063Z")
   },
   {
     "id": "batu-caves-tour-kl",
@@ -16585,8 +16585,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:35.835Z",
-    "updatedAt": "2026-02-22T18:36:53.700Z"
+    "createdAt": new Date("2026-02-12T12:11:35.835Z"),
+    "updatedAt": new Date("2026-02-22T18:36:53.700Z")
   },
   {
     "id": "london_restaurant_st_john",
@@ -16637,8 +16637,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:41.508Z",
-    "updatedAt": "2026-02-22T18:29:02.428Z"
+    "createdAt": new Date("2026-02-12T12:11:41.508Z"),
+    "updatedAt": new Date("2026-02-22T18:29:02.428Z")
   },
   {
     "id": "new-york_item_45",
@@ -16675,8 +16675,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.604Z",
-    "updatedAt": "2026-02-23T02:00:59.068Z"
+    "createdAt": new Date("2026-02-12T13:05:04.604Z"),
+    "updatedAt": new Date("2026-02-23T02:00:59.068Z")
   },
   {
     "id": "merlion-park",
@@ -16722,8 +16722,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:31.065Z",
-    "updatedAt": "2026-02-22T18:37:03.252Z"
+    "createdAt": new Date("2026-02-12T12:11:31.065Z"),
+    "updatedAt": new Date("2026-02-22T18:37:03.252Z")
   },
   {
     "id": "rome-cooking-class",
@@ -16827,8 +16827,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:36.627Z",
-    "updatedAt": "2026-02-22T18:37:13.751Z"
+    "createdAt": new Date("2026-02-12T12:11:36.627Z"),
+    "updatedAt": new Date("2026-02-22T18:37:13.751Z")
   },
   {
     "id": "colosseum-memories-rome",
@@ -16926,8 +16926,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.005Z",
-    "updatedAt": "2026-02-22T18:37:23.769Z"
+    "createdAt": new Date("2026-02-12T12:11:37.005Z"),
+    "updatedAt": new Date("2026-02-22T18:37:23.769Z")
   },
   {
     "id": "싱가포르-demo-1",
@@ -16964,8 +16964,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.583Z",
-    "updatedAt": "2026-02-22T18:06:00.750Z"
+    "createdAt": new Date("2026-02-12T12:57:47.583Z"),
+    "updatedAt": new Date("2026-02-22T18:06:00.750Z")
   },
   {
     "id": "seoul_item_38",
@@ -17002,8 +17002,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:04.124Z",
-    "updatedAt": "2026-02-22T18:23:35.598Z"
+    "createdAt": new Date("2026-02-12T13:05:04.124Z"),
+    "updatedAt": new Date("2026-02-22T18:23:35.598Z")
   },
   {
     "id": "paris_restaurant_le_comptoir",
@@ -17055,8 +17055,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:40.663Z",
-    "updatedAt": "2026-02-22T18:37:45.163Z"
+    "createdAt": new Date("2026-02-12T12:11:40.663Z"),
+    "updatedAt": new Date("2026-02-22T18:37:45.163Z")
   },
   {
     "id": "mendenhall_glacier",
@@ -17126,8 +17126,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:26.617Z",
-    "updatedAt": "2026-02-22T18:30:18.332Z"
+    "createdAt": new Date("2026-02-12T12:11:26.617Z"),
+    "updatedAt": new Date("2026-02-22T18:30:18.332Z")
   },
   {
     "id": "부산광역시-demo-2",
@@ -17164,8 +17164,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.778Z",
-    "updatedAt": "2026-02-22T18:16:09.339Z"
+    "createdAt": new Date("2026-02-12T12:57:47.778Z"),
+    "updatedAt": new Date("2026-02-22T18:16:09.339Z")
   },
   {
     "id": "파리-demo-1",
@@ -17202,8 +17202,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.325Z",
-    "updatedAt": "2026-02-24T02:00:39.010Z"
+    "createdAt": new Date("2026-02-12T12:57:47.325Z"),
+    "updatedAt": new Date("2026-02-24T02:00:39.010Z")
   },
   {
     "id": "charles_bridge",
@@ -17273,8 +17273,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:28.202Z",
-    "updatedAt": "2026-02-22T18:30:28.301Z"
+    "createdAt": new Date("2026-02-12T12:11:28.202Z"),
+    "updatedAt": new Date("2026-02-22T18:30:28.301Z")
   },
   {
     "id": "chain_bridge",
@@ -17344,8 +17344,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:28.718Z",
-    "updatedAt": "2026-02-22T18:30:38.693Z"
+    "createdAt": new Date("2026-02-12T12:11:28.718Z"),
+    "updatedAt": new Date("2026-02-22T18:30:38.693Z")
   },
   {
     "id": "london_웨스트민스터_애비_westminster_abbey",
@@ -17383,8 +17383,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:44:31.532Z",
-    "updatedAt": "2026-02-24T03:00:59.160Z"
+    "createdAt": new Date("2026-02-13T13:44:31.532Z"),
+    "updatedAt": new Date("2026-02-24T03:00:59.160Z")
   },
   {
     "id": "paris_item_32",
@@ -17421,8 +17421,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.720Z",
-    "updatedAt": "2026-02-22T18:06:01.194Z"
+    "createdAt": new Date("2026-02-12T13:05:03.720Z"),
+    "updatedAt": new Date("2026-02-22T18:06:01.194Z")
   },
   {
     "id": "spanish_steps",
@@ -17546,8 +17546,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:24.327Z",
-    "updatedAt": "2026-02-22T18:30:58.350Z"
+    "createdAt": new Date("2026-02-12T12:11:24.327Z"),
+    "updatedAt": new Date("2026-02-22T18:30:58.350Z")
   },
   {
     "id": "phuket-snorkeling-tour",
@@ -17609,8 +17609,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:36.152Z",
-    "updatedAt": "2026-02-22T18:38:28.398Z"
+    "createdAt": new Date("2026-02-12T12:11:36.152Z"),
+    "updatedAt": new Date("2026-02-22T18:38:28.398Z")
   },
   {
     "id": "gardens-by-the-bay-night",
@@ -17661,8 +17661,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:38.478Z",
-    "updatedAt": "2026-02-22T18:38:57.602Z"
+    "createdAt": new Date("2026-02-12T12:11:38.478Z"),
+    "updatedAt": new Date("2026-02-22T18:38:57.602Z")
   },
   {
     "id": "싱가포르-demo-2",
@@ -17699,8 +17699,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:47.647Z",
-    "updatedAt": "2026-02-24T03:01:01.761Z"
+    "createdAt": new Date("2026-02-12T12:57:47.647Z"),
+    "updatedAt": new Date("2026-02-24T03:01:01.761Z")
   },
   {
     "id": "paris-catacombs-tour",
@@ -17762,8 +17762,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:11:37.623Z",
-    "updatedAt": "2026-02-22T18:38:47.975Z"
+    "createdAt": new Date("2026-02-12T12:11:37.623Z"),
+    "updatedAt": new Date("2026-02-22T18:38:47.975Z")
   },
   {
     "id": "busan_item_16",
@@ -17800,8 +17800,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:02.605Z",
-    "updatedAt": "2026-02-23T02:00:59.717Z"
+    "createdAt": new Date("2026-02-12T13:05:02.605Z"),
+    "updatedAt": new Date("2026-02-23T02:00:59.717Z")
   },
   {
     "id": "뉴욕-demo-2",
@@ -17838,8 +17838,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T12:57:48.037Z",
-    "updatedAt": "2026-02-22T18:16:40.419Z"
+    "createdAt": new Date("2026-02-12T12:57:48.037Z"),
+    "updatedAt": new Date("2026-02-22T18:16:40.419Z")
   },
   {
     "id": "barcelona_item_33",
@@ -17876,8 +17876,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:03.783Z",
-    "updatedAt": "2026-02-22T18:06:01.643Z"
+    "createdAt": new Date("2026-02-12T13:05:03.783Z"),
+    "updatedAt": new Date("2026-02-22T18:06:01.643Z")
   },
   {
     "id": "rome_바티칸_박물관_시스티나_예배당_프라이빗_새벽_투어",
@@ -17915,8 +17915,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-14T00:45:38.651Z",
-    "updatedAt": "2026-02-24T12:00:43.975Z"
+    "createdAt": new Date("2026-02-14T00:45:38.651Z"),
+    "updatedAt": new Date("2026-02-24T12:00:43.975Z")
   },
   {
     "id": "barcelona_사그라다_파밀리아_sagrada_familia",
@@ -17954,8 +17954,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-13T13:50:28.035Z",
-    "updatedAt": "2026-02-22T18:06:01.955Z"
+    "createdAt": new Date("2026-02-13T13:50:28.035Z"),
+    "updatedAt": new Date("2026-02-22T18:06:01.955Z")
   },
   {
     "id": "busan_item_86",
@@ -17992,8 +17992,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.382Z",
-    "updatedAt": "2026-02-22T18:06:03.061Z"
+    "createdAt": new Date("2026-02-12T13:05:07.382Z"),
+    "updatedAt": new Date("2026-02-22T18:06:03.061Z")
   },
   {
     "id": "seoul_item_88",
@@ -18030,8 +18030,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.513Z",
-    "updatedAt": "2026-02-22T18:26:14.497Z"
+    "createdAt": new Date("2026-02-12T13:05:07.513Z"),
+    "updatedAt": new Date("2026-02-22T18:26:14.497Z")
   },
   {
     "id": "paris_item_92",
@@ -18068,8 +18068,8 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:07.779Z",
-    "updatedAt": "2026-02-22T18:06:03.385Z"
+    "createdAt": new Date("2026-02-12T13:05:07.779Z"),
+    "updatedAt": new Date("2026-02-22T18:06:03.385Z")
   },
   {
     "id": "rome_item_101",
@@ -18106,7 +18106,7 @@ export const LANDMARKS: Landmark[] = [
     "searchKeywords": ["명소","관광지","필수코스","인생샷"],
     "isPremium": false,
     "price": null,
-    "createdAt": "2026-02-12T13:05:08.377Z",
-    "updatedAt": "2026-02-22T18:06:03.693Z"
+    "createdAt": new Date("2026-02-12T13:05:08.377Z"),
+    "updatedAt": new Date("2026-02-22T18:06:03.693Z")
   }
 ];

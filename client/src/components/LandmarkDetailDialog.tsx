@@ -125,9 +125,20 @@ export default function LandmarkDetailDialog({
       return;
     }
 
+    // [Professor Feedback] "narration" is the core summary!
     const textToPlay = audioContentType === 'summary'
-      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : translatedDesc)
-      : (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription') : translatedDetail);
+      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'narration') : (translatedNarration || translatedDesc))
+      : (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription') : (translatedDetail || translatedNarration || translatedDesc));
+
+    // [Bug Doctor] if narration (full insight) is empty, fallback to summary core (narration)
+    if (!textToPlay && audioContentType === 'narration') {
+      const fallbackText = selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'narration') : (translatedNarration || translatedDesc);
+      if (fallbackText) {
+        setAudioContentType('summary');
+        handlePlayAudio(startIndex, rateOverride);
+        return;
+      }
+    }
 
     if (!textToPlay) return;
 
@@ -361,27 +372,33 @@ export default function LandmarkDetailDialog({
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <div className="flex bg-[#EFEBE6] p-0.5 rounded-lg border border-[#DCD7CC] mr-1">
+                        <div className="flex bg-[#EFEBE6] p-0.5 rounded-lg border border-[#DCD7CC] mr-1 shadow-inner">
                           <button
                             onClick={() => {
                               setAudioContentType('summary');
-                              if (isPlaying) handleRestartAudio();
+                              if (isPlaying) {
+                                audioService.stop();
+                                setTimeout(() => handlePlayAudio(), 100);
+                              }
                             }}
-                            className={`px-3 py-1 rounded-md text-[10px] font-bold transition-all ${audioContentType === 'summary' ? 'bg-[#E67E22] text-white shadow-sm' : 'text-[#A8A294]'}`}
+                            className={`px-3 py-1 rounded-md text-[10px] font-black transition-all duration-200 ${audioContentType === 'summary' ? 'bg-[#E67E22] text-white shadow-md' : 'text-[#A8A294] hover:text-[#E67E22]'}`}
                           >
                             {selectedLanguage === 'ko' ? '요약 가이드' : 'Summary'}
                           </button>
                           <button
                             onClick={() => {
                               setAudioContentType('narration');
-                              if (isPlaying) handleRestartAudio();
+                              if (isPlaying) {
+                                audioService.stop();
+                                setTimeout(() => handlePlayAudio(), 100);
+                              }
                             }}
-                            className={`px-3 py-1 rounded-md text-[10px] font-bold transition-all ${audioContentType === 'narration' ? 'bg-[#E67E22] text-white shadow-sm' : 'text-[#A8A294]'}`}
+                            className={`px-3 py-1 rounded-md text-[10px] font-black transition-all duration-200 ${audioContentType === 'narration' ? 'bg-[#E67E22] text-white shadow-md' : 'text-[#A8A294] hover:text-[#E67E22]'}`}
                           >
                             {selectedLanguage === 'ko' ? '상세 역사' : 'Full Insight'}
                           </button>
                         </div>
-                        <Badge variant="outline" className="text-[10px] border-[#E67E22] text-[#E67E22] bg-white px-2 h-5">{playbackRate}x Speed</Badge>
+                        <Badge variant="outline" className="text-[10px] border-[#E67E22] text-[#E67E22] bg-white px-2 h-5 font-bold">{playbackRate}x Speed</Badge>
                       </div>
                     </div>
 
@@ -493,7 +510,9 @@ export default function LandmarkDetailDialog({
                         );
                       })
                     ) : (
-                      audioContentType === 'summary' ? translatedDesc : translatedDetail
+                      audioContentType === 'summary'
+                        ? (translatedNarration || translatedDesc)
+                        : (translatedDetail || translatedNarration || translatedDesc)
                     )}
                   </div>
                 </div>

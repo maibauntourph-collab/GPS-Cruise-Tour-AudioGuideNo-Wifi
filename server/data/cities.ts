@@ -11,8 +11,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:38.317Z",
-    "updatedAt": "2026-02-22T18:05:45.060Z"
+    "createdAt": new Date("2026-02-12T11:40:38.317Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.060Z")
   },
   {
     "id": "kuala-lumpur",
@@ -24,8 +24,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:38.447Z",
-    "updatedAt": "2026-02-22T18:05:45.145Z"
+    "createdAt": new Date("2026-02-12T11:40:38.447Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.145Z")
   },
   {
     "id": "rome",
@@ -202,8 +202,8 @@ export const CITIES: City[] = [
       }
     },
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:36.162Z",
-    "updatedAt": "2026-02-22T18:05:44.107Z"
+    "createdAt": new Date("2026-02-12T11:40:36.162Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.107Z")
   },
   {
     "id": "paris",
@@ -215,8 +215,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:36.293Z",
-    "updatedAt": "2026-02-22T18:05:44.185Z"
+    "createdAt": new Date("2026-02-12T11:40:36.293Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.185Z")
   },
   {
     "id": "london",
@@ -228,8 +228,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:36.420Z",
-    "updatedAt": "2026-02-22T18:05:44.244Z"
+    "createdAt": new Date("2026-02-12T11:40:36.420Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.244Z")
   },
   {
     "id": "anchorage",
@@ -241,8 +241,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:36.549Z",
-    "updatedAt": "2026-02-22T18:05:44.307Z"
+    "createdAt": new Date("2026-02-12T11:40:36.549Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.307Z")
   },
   {
     "id": "amsterdam",
@@ -254,8 +254,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:36.904Z",
-    "updatedAt": "2026-02-22T18:05:44.367Z"
+    "createdAt": new Date("2026-02-12T11:40:36.904Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.367Z")
   },
   {
     "id": "barcelona",
@@ -480,8 +480,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:37.033Z",
-    "updatedAt": "2026-02-22T18:05:44.432Z"
+    "createdAt": new Date("2026-02-12T11:40:37.033Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.432Z")
   },
   {
     "id": "budapest",
@@ -493,8 +493,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:37.414Z",
-    "updatedAt": "2026-02-22T18:05:44.633Z"
+    "createdAt": new Date("2026-02-12T11:40:37.414Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.633Z")
   },
   {
     "id": "warsaw",
@@ -506,8 +506,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:37.538Z",
-    "updatedAt": "2026-02-22T18:05:44.697Z"
+    "createdAt": new Date("2026-02-12T11:40:37.538Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.697Z")
   },
   {
     "id": "copenhagen",
@@ -543,8 +543,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:37.792Z",
-    "updatedAt": "2026-02-22T18:05:44.817Z"
+    "createdAt": new Date("2026-02-12T11:40:37.792Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.817Z")
   },
   {
     "id": "oslo",
@@ -556,8 +556,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:37.921Z",
-    "updatedAt": "2026-02-22T18:05:44.876Z"
+    "createdAt": new Date("2026-02-12T11:40:37.921Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.876Z")
   },
   {
     "id": "cebu",
@@ -580,8 +580,8 @@ export const CITIES: City[] = [
       }
     },
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:38.057Z",
-    "updatedAt": "2026-02-22T18:05:44.938Z"
+    "createdAt": new Date("2026-02-12T11:40:38.057Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.938Z")
   },
   {
     "id": "singapore",
@@ -619,8 +619,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:38.190Z",
-    "updatedAt": "2026-02-22T18:05:44.996Z"
+    "createdAt": new Date("2026-02-12T11:40:38.190Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.996Z")
   },
   {
     "id": "phuket",
@@ -632,8 +632,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:38.590Z",
-    "updatedAt": "2026-02-22T18:05:45.207Z"
+    "createdAt": new Date("2026-02-12T11:40:38.590Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.207Z")
   },
   {
     "id": "seoul",
@@ -645,8 +645,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T12:43:00.043Z",
-    "updatedAt": "2026-02-22T18:05:45.268Z"
+    "createdAt": new Date("2026-02-12T12:43:00.043Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.268Z")
   },
   {
     "id": "tokyo",
@@ -662,8 +662,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T12:57:20.925Z",
-    "updatedAt": "2026-02-22T18:05:45.331Z"
+    "createdAt": new Date("2026-02-12T12:57:20.925Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.331Z")
   },
   {
     "id": "busan",
@@ -679,8 +679,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T12:57:20.997Z",
-    "updatedAt": "2026-02-22T18:05:45.390Z"
+    "createdAt": new Date("2026-02-12T12:57:20.997Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.390Z")
   },
   {
     "id": "brussels",
@@ -692,8 +692,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:37.160Z",
-    "updatedAt": "2026-02-22T18:05:44.510Z"
+    "createdAt": new Date("2026-02-12T11:40:37.160Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.510Z")
   },
   {
     "id": "prague",
@@ -705,8 +705,8 @@ export const CITIES: City[] = [
     "cruisePort": null,
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:37.287Z",
-    "updatedAt": "2026-02-22T18:05:44.574Z"
+    "createdAt": new Date("2026-02-12T11:40:37.287Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.574Z")
   },
   {
     "id": "jeju",
@@ -722,8 +722,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T12:57:21.056Z",
-    "updatedAt": "2026-02-22T18:05:45.452Z"
+    "createdAt": new Date("2026-02-12T12:57:21.056Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.452Z")
   },
   {
     "id": "new-york",
@@ -739,8 +739,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T12:57:21.116Z",
-    "updatedAt": "2026-02-22T18:05:45.512Z"
+    "createdAt": new Date("2026-02-12T12:57:21.116Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.512Z")
   },
   {
     "id": "bangkok",
@@ -756,8 +756,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T12:57:21.177Z",
-    "updatedAt": "2026-02-22T18:05:45.575Z"
+    "createdAt": new Date("2026-02-12T12:57:21.177Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.575Z")
   },
   {
     "id": "stockholm",
@@ -793,8 +793,8 @@ export const CITIES: City[] = [
     },
     "landingContent": null,
     "defaultGuideId": null,
-    "createdAt": "2026-02-12T11:40:37.665Z",
-    "updatedAt": "2026-02-22T18:05:44.755Z"
+    "createdAt": new Date("2026-02-12T11:40:37.665Z"),
+    "updatedAt": new Date("2026-02-22T18:05:44.755Z")
   },
   {
     "id": "civitavecchia",
@@ -817,7 +817,7 @@ export const CITIES: City[] = [
       }
     },
     "defaultGuideId": null,
-    "createdAt": "2026-02-19T22:50:53.546Z",
-    "updatedAt": "2026-02-22T18:05:45.637Z"
+    "createdAt": new Date("2026-02-19T22:50:53.546Z"),
+    "updatedAt": new Date("2026-02-22T18:05:45.637Z")
   }
 ];

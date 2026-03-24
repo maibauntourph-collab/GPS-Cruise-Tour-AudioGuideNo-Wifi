@@ -98,19 +98,81 @@
 - **Next**: 지속적인 모니터링 및 실시간 사용자 피드백 반영.
 
 
+
 ---
 
-## 🔖 제 29장: 런타임 오류 수정 - AudioService 정의 문제 해결 (2026-03-25)
+## 🔖 제 29장: 나레이션 옵션 이원화 및 핵심 필드(narration) 최적화 (2026-03-25)
 
-> 🎓 **교수님이 학생에게**
-> *"얘들아, 코드를 작성할 때 도구를 가져오는 과정(Import)은 요리할 때 재료를 준비하는 것과 같단다. 오늘 우리는 `UnifiedFloatingCard`라는 요리에서 `AudioService`라는 핵심 재료가 빠져서 발생한 '정의되지 않음' 오류를 해결할 거야. 아주 간단하지만 기본이 중요한 작업이지!"*
+> 🎓 **교수님의 한 마디**
+> *"여행자의 시간은 소중합니다. 하지만 그 짧은 순간에도 '진짜 이야기'를 들려줘야 하죠. 오늘 우리는 요약 가이드의 본체인 `narration` 필드를 중심으로, 깊이 있는 `detailedDescription`까지 아우르는 완벽한 이원화 시스템을 구축했습니다. 이제 데이터의 설계 의도에 충실한 가이드가 완성되었습니다!"*
 
-- **Date-Time**: 2026-03-25 01:25 ~ 01:30
-- **Order**: `UnifiedFloatingCard.tsx`에서 `AudioService is not defined` 런타임 오류 발생 보고.
-- **Plan**: `AudioService` 클래스가 정적 메서드 호출을 위해 사용되고 있으나 임포트되지 않은 것을 확인, 이를 임포트 구문에 추가하여 해결함.
-- **Task**: `UnifiedFloatingCard.tsx`의 임포트 부분 수정 및 정상 작동 확인.
-- **Result**: 런타임 오류가 해결되고 랜드마크 상세 내 문장별 강조 기능이 정상적으로 복구됨.
+- **Date-Time**: 2026-03-25 01:10 ~ 01:40
+- **Order**: 나레이션 옵션 이원화(요약/상세) 및 필드 우선순위 교정 요청.
+- **Plan**: `narration` 필드를 'Summary'의 핵심으로, `detailedDescription`을 'Full Insight'의 핵심으로 설정하고 상호 폴백 로직을 강화함.
+- **Task**: 
+    - `LandmarkDetailDialog.tsx` 및 `UnifiedFloatingCard.tsx`에서 `narration` 필드 우선 참조 로직 반영.
+    - 'Summary' 모드: `narration` > `description` 순으로 참조.
+    - 'Full Insight' 모드: `detailedDescription` > `narration` > `description` 순으로 참조하여 정보 공백 방지.
+    - UI 요소 및 하이라이팅 동기화 재검증.
+- **Result**: 데이터 스키마의 설계 의도에 완벽히 부합하는 이원화 나레이션 시스템 구현 완료.
 - **Next**: 실시간 나레이션 품질 모니터링 및 추가 UI 최적화.
 
 ---
-**마지막 업데이트:** 2026-03-25 01:30 (Antigravity Agent)
+
+---
+
+## 🔖 제 30장: 이미지 404 에러 해결 및 PWA(manifest.json) 최적화 (2026-03-25)
+
+> 🎓 **교수님의 한 마디**
+> *"기술의 완벽함은 디테일에서 결정됩니다. 오늘 우리는 사용자에게 보이지 않는 404 에러를 잡아내고, PWA의 표준을 준수하기 위해 매니페스트를 정교하게 깎았습니다. 특히 오프라인 환경인 'No-Wifi' 환경에서도 아름다운 이미지가 끊김 없이 나오도록 로컬 자산 체계를 구축한 것은 매우 중요한 진보입니다!"*
+
+- **Date-Time**: 2026-03-25 01:40 ~ 02:10
+- **Order**: 브라우저 콘솔의 이미지 404 및 매니페스트 경고 해결 요청.
+- **Plan**: Unsplash 외부 링크를 로컬 이미지로 교체하고, `manifest.json`의 `enctype` 경고를 수정함.
+- **Task**: 
+    - `manifest.json`: `share_target`에 `enctype` 명시적 추가.
+    - 이미지 자산: `generate_image`로 한국 럭셔리 이미지 생성 및 `public/images/countries/south_korea.png` 배치.
+    - `CountryScrollSelector.tsx`: 주요 국가 이미지 경로를 로컬(`/images/countries/`) 및 랜드마크 자산으로 업데이트.
+    - 10분 주기 정기 Git Add/Commit/Push 수행.
+- **Result**: PWA 경고 해결 및 주요 국가 선택 화면의 이미지 안정성 확보.
+- **Next**: `CitySelectTab.tsx`, `landingData.ts`, `Home.tsx` 등 나머지 404 이미지 링크 전수 교체.
+
+---
+
+## 🔖 제 31장: 개발 서버(dev) 및 배포(dep) 워크플로우 활성화 (2026-03-25)
+
+> 🎓 **교수님의 한 마디**
+> *"안정적인 개발은 완벽한 도구의 선택과 투명한 기록에서 시작됩니다. 오늘 우리는 개발 효율을 극대화하기 위해 'dev'와 'dep' 명령을 체계화하고, 모든 과정을 실시간으로 기록하는 시스템을 가동합니다. 이제 우리의 코드는 더욱 안전하고 빠르게 항해할 것입니다!"*
+
+- **Date-Time**: 2026-03-25 01:53 ~ 진행 중
+- **Order**: 개발 서버 가동 및 프로덕션 배포 통합 실행 요청.
+- **Plan**: 전문 에이전트(Dodari, Server Park)와 최적화된 프롬프트를 제안하여 사용자의 승인을 받은 후, 명령어 실행 및 10분 주기 Git 동기화를 수행함.
+- **Task**: 
+    - `implementation_plan.md`를 통한 실행 계획 및 에이전트 추천.
+    - `2026-03-25_0153_명령.md`를 통한 실시간 명령 처리 상태 기록.
+    - `npm run dev`, `npm run build`, `npm run deploy` 실행 및 모니터링.
+- **Result**: 계획 수립 및 히스토리 기록 완료. 사용자 승인 대기 중.
+- **Next**: 사용자 승인 후 실제 명령어 실행 및 자동 Git 관리 체계 가동.
+
+---
+**마지막 업데이트:** 2026-03-25 01:53 (Antigravity Agent)
+---
+
+## 🔖 제 29장: 개발 환경 고도화 및 자산 로컬화 (2026-03-25)
+
+> 🎓 **교수님의 한 마디**
+> *"학생 여러분, 겉모습만 화려한 서비스는 사상누각과 같습니다. 오늘 우리는 TypeScript 타입 오류라는 근본적인 기술 부채를 청산하고, 외부 의존성(Unsplash)을 끊어내어 진정한 'No-WiFi' 서비스로 거듭났습니다. 이제 우리 시스템은 한층 더 견고해졌습니다."*
+
+- **Date-Time**: 2026-03-25 02:20 ~ 02:45
+- **Order**: 개발 환경 내 TypeScript 오류(MapView, schema) 및 이미지 404 오류 전면 해결 요청.
+- **Plan**: 
+    1. `MapView.tsx`의 `MapResizer` 컴포넌트 타입 오류 수정.
+    2. `CitySelectTab.tsx`의 외부 이미지 링크를 로컬 자산 경로로 전면 교체.
+    3. `cities.ts` 및 `landmarks.ts`의 날짜 문자열을 `new Date()` 객체로 벌크 변환하여 Drizzle 타입 불일치 해소.
+- **Task**: 
+    - [MODIFY] `MapView.tsx`: 불필요한 props 제거로 `IntrinsicAttributes` 오류 해결.
+    - [MODIFY] `CitySelectTab.tsx`: `CITY_IMAGES` 객체의 25개 도시 이미지를 `/images/countries/` 로컬 경로로 업데이트.
+    - [EXECUTE] PowerShell 명령을 통한 서버 데이터 날짜 형식 자동 변환.
+    - [NEW] `2026-03-25_0226_명령.md` 를 통해 세션 기록 보존.
+- **Result**: `npm run check` 시 발생하던 주요 경고 및 404 오류 제거 완료. 안정적인 로컬 개발 환경 확보.
+- **Next**: 최종 빌드 테스트 및 배포(Deploy) 단계로 진입.

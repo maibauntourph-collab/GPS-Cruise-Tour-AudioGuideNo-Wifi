@@ -285,6 +285,7 @@ export function UnifiedFloatingCard({
 
   const translatedName = useLiveTranslation(nameFallback, selectedLanguage);
   const translatedDesc = useLiveTranslation(descFallback, selectedLanguage);
+  const translatedNarration = useLiveTranslation(selectedLandmark?.narration || '', selectedLanguage);
   const translatedDetail = useLiveTranslation(detailFallback, selectedLanguage);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
   const [tourAddedInDialog, setTourAddedInDialog] = useState(false);
@@ -331,9 +332,31 @@ export function UnifiedFloatingCard({
         audioService.pause();
       }
     } else {
+      // [Professor Feedback] "narration" is the core summary!
       const text = audioContentType === 'summary'
-        ? (getTranslatedContent(selectedLandmark, selectedLanguage, 'description'))
-        : (getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') || getTranslatedContent(selectedLandmark, selectedLanguage, 'narration'));
+        ? (getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') || getTranslatedContent(selectedLandmark, selectedLanguage, 'description'))
+        : (getTranslatedContent(selectedLandmark, selectedLanguage, 'detailedDescription') || getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') || getTranslatedContent(selectedLandmark, selectedLanguage, 'description'));
+
+      // [Bug Doctor] if narration (full insight) is empty, fallback to summary core (narration)
+      if (!text && audioContentType === 'narration') {
+        const fallbackText = getTranslatedContent(selectedLandmark, selectedLanguage, 'narration') || getTranslatedContent(selectedLandmark, selectedLanguage, 'description');
+        if (fallbackText) {
+          setAudioContentType('summary');
+          // Restart with summary text
+          audioService.playSentences(
+            fallbackText,
+            selectedLanguage,
+            playbackRate,
+            (index) => setCurrentSentenceIndex(index),
+            () => {
+              setIsPlaying(false);
+              setIsPaused(false);
+              setCurrentSentenceIndex(-1);
+            }
+          );
+          return;
+        }
+      }
 
       if (text) {
         audioService.playSentences(
@@ -675,8 +698,8 @@ export function UnifiedFloatingCard({
 
                   {(() => {
                     const text = audioContentType === 'summary'
-                      ? translatedDesc
-                      : translatedDetail;
+                      ? (translatedNarration || translatedDesc)
+                      : (translatedDetail || translatedNarration || translatedDesc);
                     if (!text) return null;
                     const sentences = AudioService.splitIntoSentences(text);
 

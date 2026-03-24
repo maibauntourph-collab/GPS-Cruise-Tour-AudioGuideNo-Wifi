@@ -34,7 +34,7 @@ export interface CitySelectTabProps {
 // [적요] 카테고리 레이블 (이미지와 동일 한국어 기준)
 const CATEGORY_FALLBACK: Record<string, Record<string, string>> = {
     all: { ko: '전체', en: 'All', 'zh-CN': '全部', ja: '全て', th: 'ทั้งหมด' },
-    asia: { ko: '아시아', en: 'Asia', 'zh-CN': '亚洲', ja: 'アジア', th: 'เอเชีย' },
+    asia: { ko: '아시아', en: 'Asia', 'zh-CN': '亚洲', ja: 'アジア', th: '에เชีย' },
     europe: { ko: '유럽', en: 'Europe', 'zh-CN': '欧洲', ja: 'ヨーロッパ', th: 'ยุโรป' },
     recommended: { ko: '크루즈 추천', en: 'Recommended', 'zh-CN': '推荐', ja: 'おすすめ', th: 'แนะนำ' },
 };
@@ -64,7 +64,7 @@ function getStatsLabel(city: City, lang: string): string {
 
     const stats: Record<string, string> = {
         ko: `랜드마크 ${landmarkCount}개 · 약 ${hours}시간 · ${langCount}개 언어`,
-        ja: `ランドマーク${landmarkCount}か所・約${hours}時間・${langCount}言語`,
+        ja: `ランドマーク${landmarkCount}か所・약${hours}시간・${langCount}언어`,
         'zh-CN': `${landmarkCount}个地标 · 约${hours}小时 · ${langCount}种语言`,
         'zh-TW': `${landmarkCount}個景點 · 約${hours}小時 · ${langCount}種語言`,
         th: `${landmarkCount} แห่ง · ประมาณ ${hours} ชั่วโมง · ${langCount} ภาษา`,
@@ -76,10 +76,10 @@ function getStatsLabel(city: City, lang: string): string {
 function getInstallLabels(lang: string) {
     return ({
         ko: { prompt: '홈화면에 추가하면', benefit: '완전 오프라인!', desc: '한 번 저장하면 WiFi 없이도 사용 가능', btn: '설치' },
-        ja: { prompt: 'ホーム画面に追加', benefit: '完全オフライン!', desc: '一度保存すればWiFiなしで自動再生', btn: 'インストール' },
+        ja: { prompt: 'ホーム画面に追加', benefit: '完全オフ라인!', desc: '一度保存すればWiFiなしで自動再生', btn: 'インストール' },
         'zh-CN': { prompt: '添加到主屏幕', benefit: '完全离线!', desc: '保存一次后无需WiFi即可自动播放', btn: '安装' },
         'zh-TW': { prompt: '加入主畫面', benefit: '完全離線!', desc: '儲存一次後無需WiFi即可自動播放', btn: '安裝' },
-        th: { prompt: 'เพิ่มหน้าจอหลัก', benefit: 'ออฟไลน์ 100%!', desc: 'บันทึกครั้งเดียว เล่นอัตโนมัติไม่ต้องใช้ WiFi', btn: 'ติดตั้ง' },
+        th: { prompt: 'เพิ่มหน้าจอหลัก', benefit: 'ออฟ라인 100%!', desc: 'บันทึกครั้งเดียว เล่นอัตโนมัติไม่ต้องใช้ WiFi', btn: 'ติดตั้ง' },
     } as Record<string, { prompt: string; benefit: string; desc: string; btn: string }>)[lang]
         || { prompt: 'Add to home screen', benefit: '100% Offline!', desc: 'Auto plays without WiFi after initial save', btn: 'Install' };
 }
@@ -95,31 +95,31 @@ function getCityCategory(city: City): 'asia' | 'europe' | 'recommended' {
 
 // [적요] 도시명 → 배경 이미지 URL 헬퍼
 const CITY_IMAGES: Record<string, string> = {
-    'rome': 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=70',
-    'venice': 'https://images.unsplash.com/photo-1514890547357-a9ee2887a35f?w=600&q=70',
-    'paris': 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=70',
-    'london': 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=70',
-    'barcelona': 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=70',
-    'naples': 'https://images.unsplash.com/photo-1588614959060-4d144f28b207?w=600&q=70',
-    'shanghai': 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=600&q=70',
-    'seoul': 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=600&q=70',
-    'singapore': 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&q=70',
-    'penang': 'https://images.unsplash.com/photo-1596701540321-7299723bd739?w=600&q=70',
-    'phuket': 'https://images.unsplash.com/photo-1589394815804-964ce0ff96c7?w=600&q=70',
-    'cebu': 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600&q=70',
-    'kuala-lumpur': 'https://images.unsplash.com/photo-1596422846543-74c6fc1e4b6e?w=600&q=70',
-    'anchorage': 'https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=600&q=70',
-    'amsterdam': 'https://images.unsplash.com/photo-1512470876302-972fad2aa9dd?w=600&q=70',
-    'budapest': 'https://images.unsplash.com/photo-1551867633-194f125bddfa?w=600&q=70',
-    'warsaw': 'https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=600&q=70',
-    'copenhagen': 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=600&q=70',
-    'oslo': 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&q=70',
-    'busan': 'https://images.unsplash.com/photo-1590634159396-e24227914099?w=600&q=70',
-    'jeju': 'https://images.unsplash.com/photo-1542385151-efd9000785a0?w=600&q=70',
-    'brussels': 'https://images.unsplash.com/photo-1541344999736-83eca872977a?w=600&q=70',
-    'prague': 'https://images.unsplash.com/photo-1513807016779-d51ced0c6d7e?w=600&q=70',
-    'stockholm': 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=600&q=70',
-    'philippines': 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600&q=70',
+    'rome': '/images/countries/italy_luxury.png',
+    'venice': '/images/countries/italy_luxury.png',
+    'paris': '/images/countries/france_luxury.png',
+    'london': '/images/countries/uk_luxury.png',
+    'barcelona': '/images/landmarks/sagrada_familia.png',
+    'naples': '/images/countries/italy_luxury.png',
+    'shanghai': '/images/countries/china_luxury.png',
+    'seoul': '/images/countries/south_korea.png',
+    'singapore': 'https://images.unsplash.com/photo-1563293750-2c21458a2214?q=80&w=1200',
+    'penang': '/images/countries/malaysia_luxury.png',
+    'phuket': '/images/countries/thailand.png',
+    'cebu': '/images/countries/philippines_luxury.png',
+    'kuala-lumpur': '/images/countries/malaysia_luxury.png',
+    'anchorage': '/images/countries/usa_luxury.png',
+    'amsterdam': '/images/countries/netherlands_luxury.png',
+    'budapest': '/images/countries/hungary_luxury.png',
+    'warsaw': '/images/countries/poland_luxury.png',
+    'copenhagen': '/images/countries/denmark_luxury.png',
+    'oslo': '/images/countries/norway_luxury.png',
+    'busan': '/images/countries/south_korea.png',
+    'jeju': '/images/countries/south_korea.png',
+    'brussels': 'https://images.unsplash.com/photo-1558230344-9f7988350567?q=80&w=1200',
+    'prague': 'https://images.unsplash.com/photo-1519671482749-3096263432ce?q=80&w=1200',
+    'stockholm': '/images/countries/sweden_luxury.png',
+    'philippines': '/images/countries/philippines_luxury.png',
 };
 
 function getCityImage(city: City): string {
@@ -141,7 +141,7 @@ function getCityLocalName(city: City, lang: string): string {
         'singapore': { 'ko': '싱가포르', 'en': 'Singapore', 'zh-CN': '新加坡' },
         'copenhagen': { 'ko': '코펜하겐, 덴마크', 'en': 'Copenhagen, Denmark', 'zh-CN': '哥本哈根, 丹麦' },
         'stockholm': { 'ko': '스톡홀름, 스웨덴', 'en': 'Stockholm, Sweden', 'zh-CN': '斯德哥尔摩, 瑞典' },
-        'busan': { 'ko': '부산, 한국', 'en': 'Busan, South Korea', 'zh-CN': '釜山, 韩国' },
+        'busan': { 'ko': '부산, 한국', 'en': 'Busan, South Korea', 'zh-CN': '釜산, 韩国' },
         'jeju': { 'ko': '제주도, 한국', 'en': 'Jeju, South Korea', 'zh-CN': '济州岛, 韩国' },
         'bangkok': { 'ko': '방콕, 태국', 'en': 'Bangkok, Thailand', 'zh-CN': '曼谷, 泰国' },
         'phuket': { 'ko': '푸켓, 태국', 'en': 'Phuket, Thailand', 'zh-CN': '普吉岛, 泰国' },

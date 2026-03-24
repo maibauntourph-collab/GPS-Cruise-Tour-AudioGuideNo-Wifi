@@ -32,25 +32,25 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '현대적 혁신과 고궁의 품격이 어우러진 럭셔리 서울',
         en: 'Luxury Seoul: Where modern innovation meets royal dignity',
         th: 'โซลที่หรูหรา: ที่ซึ่งนวัตกรรมสมัยใหม่มาพบกับความสง่างามของราชวงศ์',
-        image: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?q=80&w=1200'
+        image: '/images/countries/south_korea.png'
     },
     'Italy': {
         ko: '지중해의 낭만과 역사가 숨쉬는 명품 이탈리아',
         en: 'Luxury Italy: Mediterranean romance and timeless history',
         th: 'อิตาลีที่หรูหรา: ความโรแมนติกของเมดิเตอร์레네ียนและประวัติศาสตร์ที่เหนือกาลเวลา',
-        image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200'
+        image: '/images/countries/italy_luxury.png'
     },
     'France': {
         ko: '예술과 미식, 세련된 취향의 정점 프랑스 파리',
         en: 'Luxury France: The pinnacle of art, cuisine, and refined taste',
         th: 'ฝรั่งเศสที่หรูหรา: จุดสูงสุดของศิลปะ อาหาร และรสชาติที่ประณี트',
-        image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200'
+        image: '/images/countries/france_luxury.png'
     },
     'Thailand': {
         ko: '에메랄드빛 바다와 황금빛 사원의 럭셔리 휴양지',
         en: 'Luxury Thailand: Emerald seas and majestic golden temples',
         th: 'ไทยที่หรูหรา: ทะเลสีมรกตและวัดสีทองที่งดงาม',
-        image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1200'
+        image: '/images/countries/thailand.png'
     },
     'Malaysia': {
         ko: '스카이라인과 열대림이 공존하는 시크한 말레이시아',
@@ -62,7 +62,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '전통의 고요함과 찬란한 야경의 명품 교토-도쿄',
         en: 'Luxury Japan: Zen serenity and dazzling futuristic skylines',
         th: 'ญี่ปุ่นที่หรูหรา: ความสงบแบบเซนและเส้นขอบฟ้าแห่งอนาคตที่ตระการตา',
-        image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1200'
+        image: '/images/landmarks/sensoji_nanobanana.png'
     },
     'USA': {
         ko: '압도적인 스카이라인과 자유의 상징 뉴욕',
@@ -74,7 +74,7 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '전통과 현대가 공존하는 품격 있는 런던 여행',
         en: 'Luxury UK: Sophisticated journey through history and royalty',
         th: 'สหราชอาณาจักรที่หรูหรา: การเดินทางที่ซับซ้อนผ่านประวัติศาสตร์และความเป็นราชวงศ์',
-        image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1200'
+        image: '/images/landmarks/big_ben_nanobanana.png'
     },
     'Spain': {
         ko: '가우디의 예술혼과 열정적인 태양의 스페인',
