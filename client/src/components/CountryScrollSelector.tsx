@@ -73,8 +73,8 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '압도적인 스카이라인과 자유의 상징 뉴욕',
         en: 'Luxury USA: Iconic skylines and symbols of freedom',
         th: 'สหรัฐอเมริกาที่หรูหรา: เส้นขอบฟ้าที่เป็นสัญลักษณ์และสัญลักษณ์แห่งเสรีภาพ',
-        // [적요] External URL → 로컬 이미지 (Anchorage/USA)
-        image: '/images/cities/anchorage.jpg'
+        // [적요] External URL → 로컬 이미지 (USA.PNG 존재함)
+        image: '/images/countries/usa.png'
     },
     'United Kingdom': {
         ko: '전통과 현대가 공존하는 품격 있는 런던 여행',
@@ -86,95 +86,92 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '가우디의 예술혼과 열정적인 태양의 스페인',
         en: 'Luxury Spain: Gaudi’s artistic soul and passionate sun',
         th: '스페인ที่หรูหรา: จิตวิญญาณแห่งศิลปะของเกาดีและแสงแด드ที่ร้อนแรง',
-        // [적요] Unsplash 외부 URL → 로컬 이미지로 교체 (No-WiFi 오프라인 환경 대응)
-        // 파일: public/images/countries/spain_cruise_luxury_v2_1774367093597.png
-        image: '/images/countries/spain_cruise_luxury_v2_1774367093597.png'
+        // [적요] Spain 로컬 이미지 (spain.png 존재함)
+        image: '/images/countries/spain.png'
     },
     'Singapore': {
         ko: '초현대적 정원과 미래형 럭셔리 싱가포르',
         en: 'Luxury Singapore: Ultra-modern gardens and futuristic lifestyle',
         th: '스ิงคโปร์ที่หรูหรา: 스완ที่ทันสมัยสุด ๆ และ라이프스토어แห่งอนาค트',
-        // [적요] Singapore 로컬 이미지 (korea_luxury로 임시 대체 - 싱가포르 전용이 없으므로)
-        image: '/images/countries/korea_luxury.png'
+        // [적요] Singapore 로컬 이미지 (singapore.png 존재함)
+        image: '/images/countries/singapore.png'
     },
     'China': {
         ko: '장엄한 만리장성과 화려한 상하이의 야경',
         en: 'Luxury China: Ancient wonders and glittering modern metropolises',
         th: 'จีนที่หรูหรา: สิ่งมหัศจรรย์โบราณและเมืองที่ทันสมัยที่เปล่งประกาย',
-        // [적요] External URL → 로컬 이미지 (Pusan을 임시 사용하거나 다른 아시아 이미지 매핑 - 여기서는 media__1774368725151.png 활용 시도)
-        image: '/images/countries/media__1774368725151.png'
+        // [적요] China 로컬 이미지 (china.png 존재함)
+        image: '/images/countries/china.png'
     },
     'Vietnam': {
         ko: '신비로운 하롱베이와 활력 넘치는 베트남의 미소',
         en: 'Luxury Vietnam: Mystical bays and vibrant cultural heritage',
         th: 'เวียดนามที่หรูหรา: อ่าวที่ลึกลับและมรดกทางวัฒนธรรมที่มีชีวิตชีวา',
-        // [적요] External URL → 로컬 이미지 (말레이시아 이미지를 유사 아시아권으로 활용하거나 싱가포르-another 활용)
-        image: '/images/countries/singagpore-another.png'
+        // [적요] Vietnam 로컬 이미지 (vietnam.png 존재함)
+        image: '/images/countries/vietnam.png'
     },
     'Netherlands': {
         ko: '튤립 로맨스와 운하의 서정이 가득한 네덜란드',
         en: 'Luxury Netherlands: Canal-side elegance and tulip romance',
         th: 'เนเธอร์แลนด์ที่หรูหรา: ความสง่างามริมคลองและความโรแมนติกของดอกทิวลิป',
-        // [적요] External URL → 로컬 이미지 (Amsterdam)
-        image: '/images/cities/amsterdam.jpg'
+        // [적요] Netherlands 로컬 이미지 (netherlands.png 존재함)
+        image: '/images/countries/netherlands.png'
     },
     'Philippines': {
         ko: '지상 최후의 낙원, 에메랄드빛 필리핀의 휴양지',
         en: 'Luxury Philippines: Paradise islands and emerald crystal waters',
         th: 'ฟิลิปปินส์ที่หรูหรา: เกาะสวรรค์และน้ำใสสีมรกต',
-        // [적요] External URL → 로컬 이미지 (Cebu 시티 이미지가 cities 폴더에 있을 경우 활용 가능하나 현재는 countries 폴더의 pusan image.png 등을 해변물로 임시 활용)
-        image: '/images/countries/pusan image.png'
+        // [적요] Philippines 로컬 이미지 (philippines.png 존재함)
+        image: '/images/countries/philippines.png'
     },
     'Denmark': {
         ko: '동화 속 풍경과 북유럽 감성의 코펜하겐',
         en: 'Luxury Denmark: Fairy-tale charm and Nordic sophistication',
         th: 'เดนมาร์กที่หรูหรา: เสน่ห์ของเทพนิยายและความซับซ้อนของนอร์ดิก',
-        // [적요] External URL → 로컬 이미지 (Copenhagen)
-        image: '/images/cities/copenhagen.jpg'
+        // [적요] Denmark 로컬 이미지 (denmark.png 존재함)
+        image: '/images/countries/denmark.png'
     },
     'Norway': {
         ko: '거대한 피오르드와 대자연의 경이로움 오슬로',
         en: 'Luxury Norway: Majestic fjords and breathtaking natural wonders',
         th: 'นอร์เวย์ที่หรูหรา: ฟยอร์ดที่สง่างามและสิ่งมหัศจรรย์ทางธรรมชาติที่น่าทึ่ง',
-        // [적요] Norway (italy_luxury로 임시 대체)
-        image: '/images/countries/italy_luxury.png'
+        // [적요] Norway 로컬 이미지 (norway.png 존재함)
+        image: '/images/countries/norway.png'
     },
     'Hungary': {
         ko: '다뉴브강의 진주, 찬란한 야경의 부다페스트',
         en: 'Luxury Hungary: Pearl of the Danube and glittering architecture',
         th: 'ฮังการีที่หรูหรา: ไข่มุกแห่งแม่น้ำดานูบและสถาปัตยกรรมที่ระยิบระยับ',
-        // [적요] External URL → 로컬 이미지 (Budapest)
-        image: '/images/cities/budapest.jpg'
+        // [적요] Hungary 로컬 이미지 (hungary.png 존재함)
+        image: '/images/countries/hungary.png'
     },
     'Poland': {
         ko: '중세의 낭만과 고전적 기품의 폴란드',
         en: 'Luxury Poland: Medieval romance and classical elegance',
         th: 'โปแลนด์ที่หรูหรา: ความโรแมนติกในยุคกลางและความสง่างามแบบคลาสสิก',
-        // [적요] External URL → 로컬 이미지 (Warsaw)
-        image: '/images/cities/warsaw.jpg'
+        // [적요] Poland 로컬 이미지 (poland.png 존재함)
+        image: '/images/countries/poland.png'
     },
     'Belgium': {
         ko: '중세풍 건물과 초콜릿처럼 달콤한 브뤼셀 여행',
         en: 'Luxury Belgium: Gothic grandeur and world-class delights',
         th: 'เบลเยียมที่หรูหรา: ความยิ่งใหญ่สไตล์โกธิคและความสุขอันดับโลก',
-        // [적요] Unsplash 외부 URL → 로컬 이미지로 교체 (No-WiFi 오프라인 환경 대응)
-        // 파일: public/images/countries/belgium_cruise_luxury_1774365922272.png
-        image: '/images/countries/belgium_cruise_luxury_1774365922272.png'
+        // [적요] Belgium 로컬 이미지 (belgium.png 존재함)
+        image: '/images/countries/belgium.png'
     },
     'Czech Republic': {
         ko: '시간이 멈춘 중세의 신비로움, 프라하의 밤',
         en: 'Luxury Czech: Mystical medieval charm and gothic wonders',
         th: 'สาธารณรัฐเช็กที่หรูหรา: เสน่ห์ในยุคกลางที่ลึกลับและสิ่งมหัศจรรย์สไตล์โกธิค',
-        // [적요] Unsplash 외부 URL → 로컬 이미지로 교체 (No-WiFi 오프라인 환경 대응)
-        // 파일: public/images/countries/czech_republic_luxury_1774366225989.png
-        image: '/images/countries/czech_republic_luxury_1774366225989.png'
+        // [적요] Czech Republic 로컬 이미지 (czech_republic.png 존재함)
+        image: '/images/countries/czech_republic.png'
     },
     'Sweden': {
         ko: '정교한 디자인과 정갈한 북유럽의 조화 스톡홀름',
         en: 'Luxury Sweden: Refined design and Nordic harmony',
         th: 'สวีเดนที่หรูหรา: การออกแบบที่ประณีตและความสามัคคีของนอร์ดิก',
-        // [적요] External URL → 로컬 이미지 (Stockholm)
-        image: '/images/cities/stockholm.jpg'
+        // [적요] Sweden 로컬 이미지 (sweden.png 존재함)
+        image: '/images/countries/sweden.png'
     }
 };
 

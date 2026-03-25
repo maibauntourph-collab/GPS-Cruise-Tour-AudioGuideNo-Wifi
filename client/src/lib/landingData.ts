@@ -20,16 +20,16 @@ export const LANDING_DATA: Record<string, any> = {
         'en': { heroImage: '/images/landmarks/big_ben_nanobanana.png' }
     },
     'barcelona': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1539037116277-4db20202d0d4?q=80&w=1200' }
+        'en': { heroImage: '/images/cities/barcelona.jpg' }
     },
     'penang': {
         'en': { heroImage: '/images/countries/malaysia_luxury.png' }
     },
     'singapore': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1563293750-2c21458a2214?q=80&w=1200' }
+        'en': { heroImage: '/images/cities/singapore.jpg' }
     },
     'cebu': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800&q=80' }
+        'en': { heroImage: '/images/cities/cebu.jpg' }
     },
     'naples': {
         'en': { heroImage: '/images/countries/italy_luxury.png' }
@@ -41,9 +41,9 @@ export const LANDING_DATA: Record<string, any> = {
         'en': { heroImage: '/images/countries/thailand.png' }
     },
     'brussels': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1558230344-9f7988350567?q=80&w=1200' }
+        'en': { heroImage: '/images/cities/brussels.jpg' }
     },
     'prague': {
-        'en': { heroImage: 'https://images.unsplash.com/photo-1519671482749-3096263432ce?q=80&w=1200' }
+        'en': { heroImage: '/images/cities/prague.jpg' }
     }
 };

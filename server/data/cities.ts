@@ -285,10 +285,21 @@ export const CITIES: City[] = [
     "lng": 4.9041,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Welcome to Amsterdam",
+        "subTitle": "Canals, Culture, and Charms of the Netherlands",
+        "heroImage": "/images/cities/amsterdam.jpg"
+      },
+      "ko": {
+        "title": "암스테르담에 오신 것을 환영합니다",
+        "subTitle": "운하와 예술, 네덜란드의 낭만이 가득한 도시",
+        "heroImage": "/images/cities/amsterdam.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:36.904Z"),
-    "updatedAt": new Date("2026-02-22T18:05:44.367Z")
+    "updatedAt": new Date("2026-03-25T09:45:00.000Z")
   },
   {
     "id": "barcelona",
@@ -524,10 +535,21 @@ export const CITIES: City[] = [
     "lng": 19.0402,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Discover Budapest",
+        "subTitle": "Pearl of the Danube and Radiant Architecture",
+        "heroImage": "/images/cities/budapest.jpg"
+      },
+      "ko": {
+        "title": "부다페스트를 발견하세요",
+        "subTitle": "다뉴브의 진주, 빛나는 야경과 건축의 도시",
+        "heroImage": "/images/cities/budapest.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:37.414Z"),
-    "updatedAt": new Date("2026-02-22T18:05:44.633Z")
+    "updatedAt": new Date("2026-03-25T09:45:00.000Z")
   },
   {
     "id": "warsaw",
