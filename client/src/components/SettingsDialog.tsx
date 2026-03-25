@@ -12,6 +12,7 @@ import { t } from '@/lib/translations';
 import { LanguageSelector } from './LanguageSelector';
 import OfflineDataDialog from './OfflineDataDialog';
 import { audioService, type AudioMode } from '@/lib/audioService';
+import OfflinePrepDialog from './OfflinePrepDialog_20260325_0740';
 
 interface VoiceInfo {
   voice: SpeechSynthesisVoice;
@@ -69,6 +70,7 @@ export default function SettingsDialog({
 }: SettingsDialogProps) {
   const [showOfflineDialog, setShowOfflineDialog] = useState(false);
   const [offlineMode, setOfflineMode] = useState<'download' | 'upload'>('download');
+  const [showOfflinePrep, setShowOfflinePrep] = useState(false);
   const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedSystemVoice, setSelectedSystemVoice] = useState<string>('');
   const [audioMode, setAudioMode] = useState<AudioMode>(audioService.getAudioMode());
@@ -424,28 +426,55 @@ export default function SettingsDialog({
               </Button>
             )}
 
-            {/* Offline Data Backup */}
-            <div className="space-y-2 pt-4 border-t">
-              <Label className="text-sm font-medium">
-                {t('offlineDataBackup', selectedLanguage)}
+            {/* Offline Data Backup & Preparation */}
+            <div className="space-y-3 pt-4 border-t">
+              <Label className="text-sm font-medium flex items-center gap-2">
+                <WifiOff className="w-4 h-4 text-primary" />
+                {t('offlinePreparation', selectedLanguage)}
               </Label>
+
+              {/* Main Offline Prep Button - Premium Look */}
+              <Button
+                variant="outline"
+                className="w-full h-14 justify-between px-4 bg-gradient-to-r from-orange-50 to-white hover:from-orange-100 border-orange-200 rounded-2xl group transition-all"
+                onClick={() => setShowOfflinePrep(true)}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-orange-500 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-sm font-black text-slate-800 lowercase">
+                      {t('offlinePreparation', selectedLanguage)}
+                    </span>
+                    <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                      {t('prepareOfflineDesc', selectedLanguage)}
+                    </span>
+                  </div>
+                </div>
+                <Cloud className="w-5 h-5 text-orange-200 group-hover:text-orange-500 transition-colors" />
+              </Button>
+
+              {/* Legacy Backup Options */}
               <div className="grid grid-cols-2 gap-2">
                 <Button
                   variant="outline"
-                  className="justify-start gap-2"
+                  size="sm"
+                  className="justify-start gap-2 text-xs h-10 rounded-xl"
                   onClick={handleDownloadClick}
                   data-testid="button-download-data"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-3.5 h-3.5" />
                   {t('downloadOfflineData', selectedLanguage)}
                 </Button>
                 <Button
                   variant="outline"
-                  className="justify-start gap-2"
+                  size="sm"
+                  className="justify-start gap-2 text-xs h-10 rounded-xl"
                   onClick={handleUploadClick}
                   data-testid="button-upload-data"
                 >
-                  <Upload className="w-4 h-4" />
+                  <Upload className="w-3.5 h-3.5" />
                   {t('uploadOfflineData', selectedLanguage)}
                 </Button>
               </div>
@@ -460,6 +489,12 @@ export default function SettingsDialog({
         mode={offlineMode}
         onDownload={onDownloadData}
         onUpload={onUploadData}
+        selectedLanguage={selectedLanguage}
+      />
+
+      <OfflinePrepDialog
+        isOpen={showOfflinePrep}
+        onClose={() => setShowOfflinePrep(false)}
         selectedLanguage={selectedLanguage}
       />
     </>

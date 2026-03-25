@@ -1326,15 +1326,16 @@ async function setupVite(app2, server2) {
       return next();
     }
     try {
+      const { pathname: pathname2 } = new URL(url);
       const clientTemplate = path2.join(__dirname2, "..", "client", "index.html");
-      console.log(`[Vite] Serving template from ${clientTemplate}`);
+      console.log(`[Vite] Serving template from ${clientTemplate} for path: ${pathname2}`);
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`
       );
-      const page = await vite.transformIndexHtml(url, template);
-      const finalHtml = await ogService.injectMetaTags(page, url);
+      const page = await vite.transformIndexHtml(pathname2, template);
+      const finalHtml = await ogService.injectMetaTags(page, pathname2);
       return c.html(finalHtml);
     } catch (e) {
       vite.ssrFixStacktrace(e);
@@ -4615,7 +4616,18 @@ var CITIES = [
     "lng": 100.3327,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Welcome to Penang",
+        "subTitle": "The Pearl of the Orient: Heritage and Gastronomy",
+        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
+      },
+      "ko": {
+        "title": "\uB3D9\uC591\uC758 \uC9C4\uC8FC, \uD398\uB0AD\uC5D0 \uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4",
+        "subTitle": "\uC720\uB124\uC2A4\uCF54 \uC720\uC0B0\uACFC \uC2DD\uB3C4\uB77D\uC758 \uCC9C\uAD6D",
+        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:38.317Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:45.060Z")
@@ -4628,7 +4640,18 @@ var CITIES = [
     "lng": 101.6869,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Discover Kuala Lumpur",
+        "subTitle": "Modern Elegance and Tropical Charm",
+        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
+      },
+      "ko": {
+        "title": "\uCFE0\uC54C\uB77C\uB8F8\uD478\uB974\uB97C \uBC1C\uACAC\uD558\uC138\uC694",
+        "subTitle": "\uD604\uB300\uC801\uC778 \uC6B0\uC544\uD568\uACFC \uC5F4\uB300\uC758 \uB9E4\uB825",
+        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:38.447Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:45.145Z")
@@ -4799,12 +4822,12 @@ var CITIES = [
       "en": {
         "title": "Welcome to the Eternal City, Rome",
         "subTitle": "Your Offline Guide to Rome's History and Art",
-        "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200"
+        "heroImage": "/images/cities/rome.jpg"
       },
       "ko": {
         "title": "\uC601\uC6D0\uD55C \uB3C4\uC2DC, \uB85C\uB9C8\uC5D0 \uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4",
         "subTitle": "\uC778\uD130\uB137 \uC5C6\uC774\uB3C4 \uC990\uAE30\uB294 \uB85C\uB9C8\uC758 \uC5ED\uC0AC\uC640 \uC608\uC220 \uAC00\uC774\uB4DC",
-        "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200"
+        "heroImage": "/images/cities/rome.jpg"
       }
     },
     "defaultGuideId": null,
@@ -4819,7 +4842,18 @@ var CITIES = [
     "lng": 2.3522,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Bienvenue \xE0 Paris",
+        "subTitle": "The City of Light and Art",
+        "heroImage": "/images/cities/brussels.jpg"
+      },
+      "ko": {
+        "title": "\uBE5B\uC758 \uB3C4\uC2DC, \uD30C\uB9AC\uC5D0 \uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4",
+        "subTitle": "\uC608\uC220\uACFC \uB0AD\uB9CC\uC774 \uAC00\uB4DD\uD55C \uC2DC\uAC04",
+        "heroImage": "/images/cities/brussels.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:36.293Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:44.185Z")
@@ -5177,12 +5211,12 @@ var CITIES = [
       "en": {
         "title": "Paradise Found: Cebu City",
         "subTitle": "Beautiful Island of Beaches and Heritage Sites",
-        "heroImage": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200"
+        "heroImage": "/images/cities/cebu.jpg"
       },
       "ko": {
         "title": "\uC5D0\uBA54\uB784\uB4DC\uBE5B \uB099\uC6D0, \uC138\uBD80",
         "subTitle": "\uD574\uBCC0\uACFC \uC5ED\uC0AC\uC801 \uC720\uC0B0\uC774 \uACF5\uC874\uD558\uB294 \uC544\uB984\uB2E4\uC6B4 \uC12C",
-        "heroImage": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200"
+        "heroImage": "/images/cities/cebu.jpg"
       }
     },
     "defaultGuideId": null,
@@ -5223,7 +5257,18 @@ var CITIES = [
         }
       }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Singapore: The Future City",
+        "subTitle": "Unparalleled Gardens and High-Tech Luxury",
+        "heroImage": "/images/cities/singapore.jpg"
+      },
+      "ko": {
+        "title": "\uBBF8\uB798 \uB3C4\uC2DC, \uC2F1\uAC00\uD3EC\uB974",
+        "subTitle": "\uCC28\uC6D0\uC774 \uB2E4\uB978 \uC815\uC6D0\uACFC \uD558\uC774\uD14C\uD06C \uB7ED\uC154\uB9AC",
+        "heroImage": "/images/cities/singapore.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:38.190Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:44.996Z")
@@ -5262,11 +5307,25 @@ var CITIES = [
     "lng": 139.6503,
     "zoom": 11,
     "cruisePort": {
-      "name": "Yokohama Port",
-      "lat": 35.4542,
-      "lng": 139.6472
+      "portName": "Yokohama Port",
+      "recommendedLandmarks": ["sensoji-temple", "tokyo-skytree"],
+      "portCoordinates": {
+        "lat": 35.4542,
+        "lng": 139.6472
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Tokyo: The Electric City",
+        "subTitle": "Bustling Streets and Hidden Shrines",
+        "heroImage": "/images/landmarks/sensoji_nanobanana.png"
+      },
+      "ko": {
+        "title": "\uB3C4\uCFC4: \uC77C\uB809\uD2B8\uB9AD \uC2DC\uD2F0",
+        "subTitle": "\uBD84\uC8FC\uD55C \uAC70\uB9AC\uC640 \uC228\uACA8\uC9C4 \uC2E0\uC0AC\uB4E4",
+        "heroImage": "/images/landmarks/sensoji_nanobanana.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T12:57:20.925Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:45.331Z")
@@ -5279,11 +5338,25 @@ var CITIES = [
     "lng": 129.0756,
     "zoom": 11,
     "cruisePort": {
-      "name": "Busan International Cruise Terminal",
-      "lat": 35.0987,
-      "lng": 129.0403
+      "portName": "Busan International Cruise Terminal",
+      "recommendedLandmarks": ["haedong-yonggungsa", "gamcheon-culture-village"],
+      "portCoordinates": {
+        "lat": 35.0987,
+        "lng": 129.0403
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Busan: Dynamic Korea",
+        "subTitle": "Beautiful Beaches and Coastal Charms",
+        "heroImage": "/images/countries/korea_luxury.png"
+      },
+      "ko": {
+        "title": "\uBD80\uC0B0: \uB2E4\uC774\uB098\uBBF9 \uCF54\uB9AC\uC544",
+        "subTitle": "\uC544\uB984\uB2E4\uC6B4 \uD574\uBCC0\uACFC \uD574\uC548\uC758 \uB9E4\uB825",
+        "heroImage": "/images/countries/korea_luxury.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T12:57:20.997Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:45.390Z")
@@ -5296,7 +5369,18 @@ var CITIES = [
     "lng": 4.3517,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Brussels: Heart of Europe",
+        "subTitle": "Sweet Delights and Gothic Grandeur",
+        "heroImage": "/images/cities/brussels.jpg"
+      },
+      "ko": {
+        "title": "\uBE0C\uB93C\uC140: \uC720\uB7FD\uC758 \uC2EC\uC7A5",
+        "subTitle": "\uB2EC\uCF64\uD55C \uC990\uAC70\uC6C0\uACFC \uACE0\uB515 \uC591\uC2DD\uC758 \uC6C5\uC7A5\uD568",
+        "heroImage": "/images/cities/brussels.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:37.160Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:44.510Z")
@@ -5309,7 +5393,18 @@ var CITIES = [
     "lng": 14.4378,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Prague: The City of a Hundred Spires",
+        "subTitle": "Enchanting Medieval Architecture",
+        "heroImage": "/images/cities/prague.jpg"
+      },
+      "ko": {
+        "title": "\uD504\uB77C\uD558: \uBC31 \uAC1C\uC758 \uCCA8\uD0D1 \uB3C4\uC2DC",
+        "subTitle": "\uB9E4\uD639\uC801\uC778 \uC911\uC138 \uAC74\uCD95\uC758 \uD5A5\uC5F0",
+        "heroImage": "/images/cities/prague.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:37.287Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:44.574Z")
@@ -5322,11 +5417,25 @@ var CITIES = [
     "lng": 126.5312,
     "zoom": 10,
     "cruisePort": {
-      "name": "Jeju Cruise Terminal",
-      "lat": 33.5283,
-      "lng": 126.5412
+      "portName": "Jeju Cruise Terminal",
+      "recommendedLandmarks": ["hallasan-national-park", "seongsan-ilchulbong"],
+      "portCoordinates": {
+        "lat": 33.5283,
+        "lng": 126.5412
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Jeju Island: Volcanic Paradise",
+        "subTitle": "Hallasan Mountain and Pristine Nature",
+        "heroImage": "/images/countries/korea.png"
+      },
+      "ko": {
+        "title": "\uC81C\uC8FC\uB3C4: \uD654\uC0B0\uC758 \uB099\uC6D0",
+        "subTitle": "\uD55C\uB77C\uC0B0\uACFC \uD0DC\uACE0\uC758 \uC790\uC5F0",
+        "heroImage": "/images/countries/korea.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T12:57:21.056Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:45.452Z")
@@ -5339,11 +5448,25 @@ var CITIES = [
     "lng": -74.006,
     "zoom": 11,
     "cruisePort": {
-      "name": "Manhattan Cruise Terminal",
-      "lat": 40.7695,
-      "lng": -73.9972
+      "portName": "Manhattan Cruise Terminal",
+      "recommendedLandmarks": ["statue-of-liberty", "empire-state-building"],
+      "portCoordinates": {
+        "lat": 40.7695,
+        "lng": -73.9972
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Welcome to New York City",
+        "subTitle": "The City That Never Sleeps",
+        "heroImage": "/images/cities/anchorage.jpg"
+      },
+      "ko": {
+        "title": "\uB274\uC695 \uC2DC\uD2F0\uC5D0 \uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4",
+        "subTitle": "\uC7A0\uB4E4\uC9C0 \uC54A\uB294 \uB3C4\uC2DC",
+        "heroImage": "/images/cities/anchorage.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T12:57:21.116Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:45.512Z")
@@ -5356,11 +5479,25 @@ var CITIES = [
     "lng": 100.5018,
     "zoom": 11,
     "cruisePort": {
-      "name": "Laem Chabang Port",
-      "lat": 13.0801,
-      "lng": 100.9103
+      "portName": "Laem Chabang Port",
+      "recommendedLandmarks": ["grand-palace", "wat-arun"],
+      "portCoordinates": {
+        "lat": 13.0801,
+        "lng": 100.9103
+      }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Bangkok: The Vibrant Capital",
+        "subTitle": "Golden Temples and Bustling Markets",
+        "heroImage": "/images/countries/thailand.png"
+      },
+      "ko": {
+        "title": "\uBC29\uCF55: \uD65C\uAE30\uCC2C \uC218\uB3C4",
+        "subTitle": "\uD669\uAE08\uBE5B \uC0AC\uC6D0\uACFC \uBD84\uC8FC\uD55C \uC2DC\uC7A5",
+        "heroImage": "/images/countries/thailand.png"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T12:57:21.177Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:45.575Z")
@@ -5397,7 +5534,18 @@ var CITIES = [
         }
       }
     },
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Welcome to Stockholm",
+        "subTitle": "Venice of the North: Design and History",
+        "heroImage": "/images/cities/stockholm.jpg"
+      },
+      "ko": {
+        "title": "\uC2A4\uD1A1\uD640\uB984\uC5D0 \uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4",
+        "subTitle": "\uBD81\uC720\uB7FD\uC758 \uBCA0\uB124\uCE58\uC544: \uB514\uC790\uC778\uACFC \uC5ED\uC0AC",
+        "heroImage": "/images/cities/stockholm.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:37.665Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:44.755Z")
@@ -5414,12 +5562,12 @@ var CITIES = [
       "en": {
         "title": "Civitavecchia: Gateway to Rome",
         "subTitle": "Charming Port City and Your Journey's Start",
-        "heroImage": "https://images.unsplash.com/photo-1624835848527-0c7da796a5af?w=1200"
+        "heroImage": "/images/cities/rome.jpg"
       },
       "ko": {
         "title": "\uCE58\uBE44\uD0C0\uBCA0\uD0A4\uC544: \uB85C\uB9C8\uB85C \uAC00\uB294 \uAD00\uBB38",
         "subTitle": "\uD56D\uAD6C \uB3C4\uC2DC\uC758 \uB9E4\uB825\uACFC \uD3B8\uC548\uD55C \uC5EC\uD589\uC758 \uC2DC\uC791",
-        "heroImage": "https://images.unsplash.com/photo-1624835848527-0c7da796a5af?w=1200"
+        "heroImage": "/images/cities/rome.jpg"
       }
     },
     "defaultGuideId": null,
