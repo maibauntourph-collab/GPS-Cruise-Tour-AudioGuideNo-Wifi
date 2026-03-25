@@ -123,6 +123,7 @@ import { useGeoLocation } from '@/hooks/useGeoLocation';
 import { useVisitedLandmarks } from '@/hooks/useVisitedLandmarks';
 import { useDeviceCapabilities } from '@/hooks/useDeviceDetection';
 import { useServiceWorker } from '@/hooks/useServiceWorker';
+import { useBackgroundReturn } from '@/hooks/useBackgroundReturn';
 import { useToast } from '@/hooks/use-toast';
 import { encryptData, decryptData, downloadEncryptedData, readEncryptedFile } from '@/lib/offlineDataEncryption';
 import { getStartingPointName, getCityStartingPoints } from '@/lib/startingPoints';
@@ -139,6 +140,9 @@ export default function Home() {
   const { isVisited, markVisited } = useVisitedLandmarks();
   const deviceCapabilities = useDeviceCapabilities();
   const { isUpdateAvailable, updateServiceWorker } = useServiceWorker();
+
+  // [제 65장] 다른 앱 사용 시 플로팅 알림/아이콘 지원
+  const { requestPermission } = useBackgroundReturn(selectedLanguage);
 
   // State
   const [position, setPosition] = useState<GeolocationPosition | null>(null);
@@ -478,6 +482,8 @@ export default function Home() {
 
 
   const handleToggleAudio = () => {
+    // 오디오 토글 시 알림 권한도 슬쩍 요청하여 백그라운드 재생 시 유유히 앱으로 돌아올 수 있게 합니다.
+    requestPermission();
     const nextEnabled = !audioEnabled;
     setAudioEnabled(nextEnabled);
     if (!nextEnabled) {

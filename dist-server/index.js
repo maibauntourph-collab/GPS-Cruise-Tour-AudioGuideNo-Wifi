@@ -4892,10 +4892,21 @@ var CITIES = [
     "lng": 4.9041,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Welcome to Amsterdam",
+        "subTitle": "Canals, Culture, and Charms of the Netherlands",
+        "heroImage": "/images/cities/amsterdam.jpg"
+      },
+      "ko": {
+        "title": "\uC554\uC2A4\uD14C\uB974\uB2F4\uC5D0 \uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4",
+        "subTitle": "\uC6B4\uD558\uC640 \uC608\uC220, \uB124\uB35C\uB780\uB4DC\uC758 \uB0AD\uB9CC\uC774 \uAC00\uB4DD\uD55C \uB3C4\uC2DC",
+        "heroImage": "/images/cities/amsterdam.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:36.904Z"),
-    "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:44.367Z")
+    "updatedAt": /* @__PURE__ */ new Date("2026-03-25T09:45:00.000Z")
   },
   {
     "id": "barcelona",
@@ -5131,10 +5142,21 @@ var CITIES = [
     "lng": 19.0402,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Discover Budapest",
+        "subTitle": "Pearl of the Danube and Radiant Architecture",
+        "heroImage": "/images/cities/budapest.jpg"
+      },
+      "ko": {
+        "title": "\uBD80\uB2E4\uD398\uC2A4\uD2B8\uB97C \uBC1C\uACAC\uD558\uC138\uC694",
+        "subTitle": "\uB2E4\uB274\uBE0C\uC758 \uC9C4\uC8FC, \uBE5B\uB098\uB294 \uC57C\uACBD\uACFC \uAC74\uCD95\uC758 \uB3C4\uC2DC",
+        "heroImage": "/images/cities/budapest.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:37.414Z"),
-    "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:44.633Z")
+    "updatedAt": /* @__PURE__ */ new Date("2026-03-25T09:45:00.000Z")
   },
   {
     "id": "warsaw",

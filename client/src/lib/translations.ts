@@ -113,7 +113,8 @@ export const uiTranslations: Record<string, Record<string, string>> = {
     downloadComplete: 'Download Complete',
     preparingAssets: 'Preparing assets for offline use...',
     allTranslationsCached: 'All language translations have been saved locally.',
-    pwaReadyToInstall: 'App is ready to be installed on your device.'
+    pwaReadyToInstall: 'App is ready to be installed on your device.',
+    returnToApp: 'Return to App'
   },
   es: {
     landmarks: 'Monumentos',
@@ -572,7 +573,8 @@ export const uiTranslations: Record<string, Record<string, string>> = {
     downloadComplete: '다운로드 완료',
     preparingAssets: '오프라인 사용을 위한 에셋을 준비 중입니다...',
     allTranslationsCached: '모든 언어 번역 데이터가 로컬에 저장되었습니다.',
-    pwaReadyToInstall: '앱을 기기에 설치할 준비가 되었습니다.'
+    pwaReadyToInstall: 'App을 기기에 설치할 준비가 되었습니다.',
+    returnToApp: '되돌아가기'
   },
   ar: {
     landmarks: 'معالم',

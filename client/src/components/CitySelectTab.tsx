@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Download, Lock, Map, User, Home as HomeIcon } from 'lucide-react';
 import { City } from '@shared/schema';
 import { LANDING_DATA } from '@/lib/landingData';
 import { t } from '@/lib/translations';
 import { CountryScrollSelector } from './CountryScrollSelector';
+import { useOfflineDownload } from '@/hooks/useOfflineDownload';
 
 /**
  * [교수님 노트: CitySelectTab - ② City Select 화면 (이미지 디자인 완전 구현)]
@@ -165,6 +166,41 @@ export function CitySelectTab({
     const [category, setCategory] = useState<'all' | 'asia' | 'europe' | 'recommended'>('all');
     const [selectedCountry, setSelectedCountry] = useState<string>('All');
 
+    // [적요] PWA 설치 및 네온데이터 다운로드 연결
+    const { downloadAllData, isDownloading } = useOfflineDownload();
+    const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+    useEffect(() => {
+        const handler = (e: Event) => {
+            e.preventDefault();
+            setDeferredPrompt(e);
+        };
+        window.addEventListener('beforeinstallprompt', handler);
+        return () => window.removeEventListener('beforeinstallprompt', handler);
+    }, []);
+
+    const handleInstallClick = async () => {
+        // 1. Neon DB 연동: 오프라인 데이터 즉시 다운로드 시작
+        downloadAllData();
+
+        // 2. 바로가기 아이콘 및 앱 등록 (PWA 설치 프롬프트)
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('App Installed (PWA)');
+            }
+            setDeferredPrompt(null);
+        } else {
+            // iOS Safari 등 자동 프롬프트가 지원되지 않는 경우 수동 안내
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                alert(selectedLanguage === 'ko' ? 'Safari 하단 공유 버튼을 눌러 "홈 화면에 추가"를 선택해주세요.' : 'Tap Share in Safari and select "Add to Home Screen".');
+            } else {
+                alert(selectedLanguage === 'ko' ? '이미 앱이 설치되어 있거나 기기가 자동 설치를 지원하지 않습니다. 브라우저 메뉴에서 "앱 설치"를 선택해주세요.' : 'App already installed or auto-install not supported.');
+            }
+        }
+    };
+
     const installLabels = getInstallLabels(selectedLanguage);
 
     // [적요] 국가 목록 추출 (카테고리 연동)
@@ -234,8 +270,12 @@ export function CitySelectTab({
                             </div>
                         </div>
                         {/* 설치 버튼 */}
-                        <button className="bg-[#E85D36] text-white text-[11px] font-black px-4 py-2 rounded-xl active:scale-95 shrink-0 ml-3">
-                            {installLabels.btn}
+                        <button
+                            onClick={handleInstallClick}
+                            disabled={isDownloading}
+                            className={`text-white text-[11px] font-black px-4 py-2 rounded-xl active:scale-95 shrink-0 ml-3 transition-all ${isDownloading ? 'bg-slate-500 cursor-not-allowed' : 'bg-[#E85D36] hover:bg-[#d6522c]'}`}
+                        >
+                            {isDownloading ? (selectedLanguage === 'ko' ? '다운로드 중...' : 'Downloading...') : installLabels.btn}
                         </button>
                     </div>
                 </div>

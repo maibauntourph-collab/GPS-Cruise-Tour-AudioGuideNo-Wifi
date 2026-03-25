@@ -262,30 +262,6 @@ export default function LandmarkDetailDialog({
                 </div>
               </div>
               <div className="flex items-center gap-1.5 h-8">
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={handleDialogClose}>
-                  <RotateCcw className="w-4 h-4 text-[#A8A294]" />
-                </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-[#FCF9F6] border border-[#EFEBE6]" onClick={() => onNavigate(landmark!)}>
-                  <Navigation className="w-4 h-4 text-[#E67E22]" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 rounded-full bg-blue-50 border border-blue-100 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
-                  onClick={() => onMinimizeToMenu?.()}
-                  title={selectedLanguage === 'ko' ? '메뉴로 최소화' : 'Minimize to Menu'}
-                >
-                  <Minimize2 className="w-4 h-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-500 hover:bg-indigo-500 hover:text-white transition-colors"
-                  onClick={() => onMinimizeToMenu?.()}
-                  title={selectedLanguage === 'ko' ? '경로 메뉴' : 'Route Menu'}
-                >
-                  <Route className="w-4 h-4" />
-                </Button>
                 {/* [Designer Kim] 프리미엄 닫기 아이콘 추가 - 사용자의 'RIGHT HEAD' 요청 반영 */}
                 <Button
                   variant="ghost"
@@ -450,7 +426,7 @@ export default function LandmarkDetailDialog({
                           className="flex-1 h-14 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-2xl gap-3 font-bold shadow-lg shadow-orange-100 transition-all active:scale-95"
                         >
                           {isPlaying && !isPaused ? <Pause className="w-6 h-6 fill-white" /> : <Play className="w-6 h-6 fill-white" />}
-                          <span className="text-base">{selectedLanguage === 'ko' ? (isPlaying && !isPaused ? '일시정지' : '재생 시작') : (isPlaying && !isPaused ? 'Pause' : 'Start Play')}</span>
+                          <span className="text-base">{selectedLanguage === 'ko' ? (isPlaying && !isPaused ? '일시정지' : '오디오 시작') : (isPlaying && !isPaused ? 'Pause' : 'Start Audio')}</span>
                         </Button>
                         <Button
                           onClick={handleRestartAudio}

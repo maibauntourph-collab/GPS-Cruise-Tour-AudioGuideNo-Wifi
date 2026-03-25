@@ -455,29 +455,7 @@ export default function SettingsDialog({
                 <Cloud className="w-5 h-5 text-orange-200 group-hover:text-orange-500 transition-colors" />
               </Button>
 
-              {/* Legacy Backup Options */}
-              <div className="grid grid-cols-2 gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="justify-start gap-2 text-xs h-10 rounded-xl"
-                  onClick={handleDownloadClick}
-                  data-testid="button-download-data"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  {t('downloadOfflineData', selectedLanguage)}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="justify-start gap-2 text-xs h-10 rounded-xl"
-                  onClick={handleUploadClick}
-                  data-testid="button-upload-data"
-                >
-                  <Upload className="w-3.5 h-3.5" />
-                  {t('uploadOfflineData', selectedLanguage)}
-                </Button>
-              </div>
+
             </div>
           </div>
         </DialogContent>

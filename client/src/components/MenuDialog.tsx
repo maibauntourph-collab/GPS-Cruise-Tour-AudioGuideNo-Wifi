@@ -353,32 +353,7 @@ export default function MenuDialog({
                     </Label>
                     <Switch checked={gpsEnabled} onCheckedChange={onToggleGps} data-testid="switch-gps" />
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        setOfflineMode2('download');
-                        setShowOfflineDialog(true);
-                      }}
-                      data-testid="button-download-data"
-                      className="text-xs h-8"
-                    >
-                      {t('download', selectedLanguage)}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        setOfflineMode2('upload');
-                        setShowOfflineDialog(true);
-                      }}
-                      data-testid="button-upload-data"
-                      className="text-xs h-8"
-                    >
-                      {t('upload', selectedLanguage)}
-                    </Button>
-                  </div>
+
 
                   {/* [Dodari | 2026-03-20] 📍 "No-WiFi" 오프라인 준비 패널 (Remarks 추가)
                       학생들: 이 패널은 사용자가 사전에 데이터를 한꺼번에 다운로드(Pre-fetch)할 수 있게 도와줍니다. */}
