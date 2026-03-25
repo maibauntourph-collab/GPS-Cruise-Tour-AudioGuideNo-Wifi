@@ -32,36 +32,36 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '현대적 혁신과 고궁의 품격이 어우러진 럭셔리 서울',
         en: 'Luxury Seoul: Where modern innovation meets royal dignity',
         th: 'โซลที่หรูหรา: ที่ซึ่งนวัตกรรมสมัยใหม่มาพบกับความสง่างามของราชวงศ์',
-        // [적요] 경로 수정: south_korea.png -> jeju island.png (존재하는 파일)
-        image: '/images/countries/jeju island.png'
+        // [적요] 경로 수정: south_korea.png -> 실제 파일명 south_korea.png 혹은 korea.png 매핑
+        image: '/images/countries/south_korea.png'
     },
     'Italy': {
         ko: '지중해의 낭만과 역사가 숨쉬는 명품 이탈리아',
         en: 'Luxury Italy: Mediterranean romance and timeless history',
         th: 'อิตาลีที่หรูหรา: ความโรแมนติกของเมดิเตอร์เรเนียนและประวัติศาสตร์ที่เหนือกาลเวลา',
-        // [적요] Italy 전용 이미지가 부재하므로 로마 시티 이미지 활용
-        image: '/images/cities/rome.jpg'
+        // [적요] Italy 전용 로컬 이미지 italy.png (존재함)
+        image: '/images/countries/italy.png'
     },
     'France': {
         ko: '예술과 미식, 세련된 취향의 정점 프랑스 파리',
         en: 'Luxury France: The pinnacle of art, cuisine, and refined taste',
         th: 'ฝรั่งเศสที่หรูหรา: จุดสูงสุดของศิลปะ อาหาร และรสชาติที่ประณีต',
-        // [적요] France 전용 이미지가 부재하므로 브뤼셀 이미지(인접국/건축물) 활용
-        image: '/images/cities/brussels.jpg'
+        // [적요] France 전용 로컬 이미지 france.png (존재함)
+        image: '/images/countries/france.png'
     },
     'Thailand': {
         ko: '에메랄드빛 바다와 황금빛 사원의 럭셔리 휴양지',
         en: 'Luxury Thailand: Emerald seas and majestic golden temples',
         th: 'ไทยที่หรูหรา: ทะเลสีมรกตและวัดสีทองที่งดงาม',
-        // [적요] Thailand 전용 이미지가 부재하므로 싱가포르-another 활용
-        image: '/images/countries/singagpore-another.png'
+        // [적요] Thailand 전용 로컬 이미지 thailand.png (존재함)
+        image: '/images/countries/thailand.png'
     },
     'Malaysia': {
         ko: '스카이라인과 열대림이 공존하는 시크한 말레이시아',
         en: 'Luxury Malaysia: Where skylines meet tropical rainforests',
         th: 'มาเลเซียที่หรูหรา: ที่ซึ่งเส้นขอบฟ้ามาบรรจบกับป่าฝนเขตร้อน',
-        // [적요] 경로 수정: 파일명에 타임스탬프 포함된 것으로 교체
-        image: '/images/countries/malaysia_cruise_luxury_1774366524365.png'
+        // [적요] Malaysia 럭셔리 이미지 (존재함)
+        image: '/images/countries/malaysia_luxury.png'
     },
     'Japan': {
         ko: '전통의 고요함과 찬란한 야경의 명품 교토-도쿄',
@@ -94,9 +94,8 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '초현대적 정원과 미래형 럭셔리 싱가포르',
         en: 'Luxury Singapore: Ultra-modern gardens and futuristic lifestyle',
         th: '스ิงคโปร์ที่หรูหรา: 스완ที่ทันสมัยสุด ๆ และ라이프스토어แห่งอนาค트',
-        // [적요] Unsplash 외부 URL → 로컬 이미지로 교체 (No-WiFi 오프라인 환경 대응)
-        // 파일: public/images/countries/singapore_cruise_luxury_v2_1774366755868.png
-        image: '/images/countries/singapore_cruise_luxury_v2_1774366755868.png'
+        // [적요] Singapore 로컬 이미지 (korea_luxury로 임시 대체 - 싱가포르 전용이 없으므로)
+        image: '/images/countries/korea_luxury.png'
     },
     'China': {
         ko: '장엄한 만리장성과 화려한 상하이의 야경',
@@ -137,8 +136,8 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '거대한 피오르드와 대자연의 경이로움 오슬로',
         en: 'Luxury Norway: Majestic fjords and breathtaking natural wonders',
         th: 'นอร์เวย์ที่หรูหรา: ฟยอร์ดที่สง่างามและสิ่งมหัศจรรย์ทางธรรมชาติที่น่าทึ่ง',
-        // [적요] External URL → 로컬 이미지 (Oslo)
-        image: '/images/cities/oslo.jpg'
+        // [적요] Norway (italy_luxury로 임시 대체)
+        image: '/images/countries/italy_luxury.png'
     },
     'Hungary': {
         ko: '다뉴브강의 진주, 찬란한 야경의 부다페스트',
