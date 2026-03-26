@@ -7,6 +7,10 @@ export interface DownloadProgress {
     total: number;
     current: number;
     status: 'idle' | 'fetching_cities' | 'fetching_landmarks' | 'caching_images' | 'complete' | 'error';
+    currentCountry?: string;
+    currentCity?: string;
+    downloadedBytes?: number;
+    totalBytes?: number;
     error?: string;
 }
 
@@ -66,6 +70,13 @@ export function useOfflineDownload() {
             const allImages: string[] = [];
 
             for (const city of cities) {
+                setProgress((prev: DownloadProgress) => ({
+                    ...prev,
+                    currentCountry: city.country,
+                    currentCity: city.name,
+                    status: 'fetching_landmarks'
+                }));
+
                 const landmarksResponse = await fetch(`/api/landmarks?cityId=${city.id}`);
                 if (!landmarksResponse.ok) continue;
                 const landmarks: Landmark[] = await landmarksResponse.json();
@@ -94,7 +105,13 @@ export function useOfflineDownload() {
                 });
 
                 landmarksDownloaded++;
-                setProgress((prev: DownloadProgress) => ({ ...prev, current: landmarksDownloaded, total: cities.length }));
+                setProgress((prev: DownloadProgress) => ({
+                    ...prev,
+                    current: landmarksDownloaded,
+                    total: cities.length,
+                    currentCountry: city.country,
+                    currentCity: city.name,
+                }));
             }
 
             // 3. 이미지 리소스 브라우저 캐시에 강제 주입
@@ -118,7 +135,7 @@ export function useOfflineDownload() {
                 }));
             }
 
-            setProgress((prev: DownloadProgress) => ({ ...prev, status: 'complete' }));
+            setProgress((prev: DownloadProgress) => ({ ...prev, status: 'complete', currentCountry: undefined, currentCity: undefined }));
             toast({
                 title: scope.type === 'all' ? "전체 데이터 준비 완료" :
                     scope.type === 'asia' ? "아시아 데이터 준비 완료" :

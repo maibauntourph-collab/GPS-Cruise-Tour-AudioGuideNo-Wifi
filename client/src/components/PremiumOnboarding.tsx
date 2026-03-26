@@ -34,7 +34,7 @@ interface PremiumOnboardingProps {
     isOpen: boolean;
     /** 닫기 핸들러 (나중에 할게요) */
     onClose: () => void;
-    /** 프리미엄 시작 핸들러 (StartupDialog 다시 열기) */
+    /** 프리미엄 시작 핸들러 (국가/도시 선택기 열기) */
     onStartPremium: () => void;
     /** 현재 선택된 언어 */
     selectedLanguage: string;

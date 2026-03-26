@@ -13,12 +13,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Welcome to Penang",
         "subTitle": "The Pearl of the Orient: Heritage and Gastronomy",
-        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
+        "heroImage": "/images/cities/penang.jpg"
       },
       "ko": {
         "title": "동양의 진주, 페낭에 오신 것을 환영합니다",
         "subTitle": "유네스코 유산과 식도락의 천국",
-        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
+        "heroImage": "/images/cities/penang.jpg"
       }
     },
     "defaultGuideId": null,
@@ -559,7 +559,18 @@ export const CITIES: City[] = [
     "lng": 21.0122,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Warsaw: Phoenix City",
+        "subTitle": "Beautiful Reconstructed Old Town",
+        "heroImage": "/images/cities/warsaw.jpg"
+      },
+      "ko": {
+        "title": "바르샤바: 불사조의 도시",
+        "subTitle": "아름답게 재건된 구시가지의 매력",
+        "heroImage": "/images/cities/warsaw.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": new Date("2026-02-12T11:40:37.538Z"),
     "updatedAt": new Date("2026-02-22T18:05:44.697Z")
@@ -626,12 +637,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Paradise Found: Cebu City",
         "subTitle": "Beautiful Island of Beaches and Heritage Sites",
-        "heroImage": "/images/cities/cebu.jpg"
+        "heroImage": "/images/cities/cebu.png"
       },
       "ko": {
         "title": "에메랄드빛 낙원, 세부",
         "subTitle": "해변과 역사적 유산이 공존하는 아름다운 섬",
-        "heroImage": "/images/cities/cebu.jpg"
+        "heroImage": "/images/cities/cebu.png"
       }
     },
     "defaultGuideId": null,

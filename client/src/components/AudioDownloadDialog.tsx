@@ -26,6 +26,7 @@ interface DownloadStatus {
   landmarkId: string;
   landmarkName: string;
   status: 'pending' | 'downloading' | 'complete' | 'error';
+  sizeBytes?: number;
   error?: string;
 }
 
@@ -47,6 +48,16 @@ export default function AudioDownloadDialog({
   const [overallProgress, setOverallProgress] = useState(0);
   const [audioStats, setAudioStats] = useState<{ count: number; sizeMB: string } | null>(null);
   const [cachedLandmarks, setCachedLandmarks] = useState<Set<string>>(new Set());
+  const [storageEstimate, setStorageEstimate] = useState<{ quota: number; usage: number; percent: number } | null>(null);
+
+  const updateStorageEstimate = async () => {
+    try {
+      const estimate = await offlineStorage.getStorageEstimate();
+      setStorageEstimate(estimate);
+    } catch (error) {
+      console.warn('Storage estimate failed:', error);
+    }
+  };
 
   // Language name mapping
   const languageNames: Record<string, string> = {
@@ -66,6 +77,7 @@ export default function AudioDownloadDialog({
     if (isOpen) {
       loadAudioStats();
       checkCachedAudio();
+      updateStorageEstimate();
     }
   }, [isOpen, landmarks, selectedLanguage]);
 
@@ -152,7 +164,7 @@ export default function AudioDownloadDialog({
         });
 
         setDownloadStatuses(prev => prev.map(s =>
-          s.landmarkId === landmark.id ? { ...s, status: 'complete' } : s
+          s.landmarkId === landmark.id ? { ...s, status: 'complete', sizeBytes: audioBlob.size } : s
         ));
 
         setCachedLandmarks(prev => new Set(Array.from(prev).concat(landmark.id)));
@@ -263,6 +275,12 @@ export default function AudioDownloadDialog({
                 <span>{selectedLanguage === 'ko' ? '이 도시 다운로드됨' : 'Downloaded for this city'}:</span>
                 <span className="font-medium">{cachedLandmarks.size} / {landmarks.length}</span>
               </div>
+              {storageEstimate && (
+                <div className="flex justify-between text-sm">
+                  <span>{selectedLanguage === 'ko' ? '전체 저장소 예측' : 'Estimated Storage'}:</span>
+                  <span className="font-medium">{(storageEstimate.usage / (1024 * 1024)).toFixed(2)}MB / {(storageEstimate.quota / (1024 * 1024)).toFixed(2)}MB</span>
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -347,6 +365,11 @@ export default function AudioDownloadDialog({
                       <X className="w-3 h-3 mr-1" />
                       {selectedLanguage === 'ko' ? '실패' : 'Failed'}
                     </Badge>
+                  )}
+                  {status.sizeBytes !== undefined && (
+                    <span className="ml-2 text-xs text-slate-500">
+                      {`${(status.sizeBytes / (1024 * 1024)).toFixed(2)}MB`}
+                    </span>
                   )}
                 </div>
               ))}

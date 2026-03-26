@@ -4620,12 +4620,12 @@ var CITIES = [
       "en": {
         "title": "Welcome to Penang",
         "subTitle": "The Pearl of the Orient: Heritage and Gastronomy",
-        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
+        "heroImage": "/images/cities/penang.jpg"
       },
       "ko": {
         "title": "\uB3D9\uC591\uC758 \uC9C4\uC8FC, \uD398\uB0AD\uC5D0 \uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4",
         "subTitle": "\uC720\uB124\uC2A4\uCF54 \uC720\uC0B0\uACFC \uC2DD\uB3C4\uB77D\uC758 \uCC9C\uAD6D",
-        "heroImage": "/images/countries/malaysia_cruise_luxury_1774366524365.png"
+        "heroImage": "/images/cities/penang.jpg"
       }
     },
     "defaultGuideId": null,
@@ -5166,7 +5166,18 @@ var CITIES = [
     "lng": 21.0122,
     "zoom": 13,
     "cruisePort": null,
-    "landingContent": null,
+    "landingContent": {
+      "en": {
+        "title": "Warsaw: Phoenix City",
+        "subTitle": "Beautiful Reconstructed Old Town",
+        "heroImage": "/images/cities/warsaw.jpg"
+      },
+      "ko": {
+        "title": "\uBC14\uB974\uC0E4\uBC14: \uBD88\uC0AC\uC870\uC758 \uB3C4\uC2DC",
+        "subTitle": "\uC544\uB984\uB2F5\uAC8C \uC7AC\uAC74\uB41C \uAD6C\uC2DC\uAC00\uC9C0\uC758 \uB9E4\uB825",
+        "heroImage": "/images/cities/warsaw.jpg"
+      }
+    },
     "defaultGuideId": null,
     "createdAt": /* @__PURE__ */ new Date("2026-02-12T11:40:37.538Z"),
     "updatedAt": /* @__PURE__ */ new Date("2026-02-22T18:05:44.697Z")
@@ -5233,12 +5244,12 @@ var CITIES = [
       "en": {
         "title": "Paradise Found: Cebu City",
         "subTitle": "Beautiful Island of Beaches and Heritage Sites",
-        "heroImage": "/images/cities/cebu.jpg"
+        "heroImage": "/images/cities/cebu.png"
       },
       "ko": {
         "title": "\uC5D0\uBA54\uB784\uB4DC\uBE5B \uB099\uC6D0, \uC138\uBD80",
         "subTitle": "\uD574\uBCC0\uACFC \uC5ED\uC0AC\uC801 \uC720\uC0B0\uC774 \uACF5\uC874\uD558\uB294 \uC544\uB984\uB2E4\uC6B4 \uC12C",
-        "heroImage": "/images/cities/cebu.jpg"
+        "heroImage": "/images/cities/cebu.png"
       }
     },
     "defaultGuideId": null,

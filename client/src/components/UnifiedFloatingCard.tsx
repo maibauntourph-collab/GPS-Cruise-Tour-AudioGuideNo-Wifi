@@ -199,6 +199,66 @@ function getAirbnbUrl(query: string): string {
   return `https://www.airbnb.com/s/${encodeURIComponent(query)}/homes`;
 }
 
+// [Professor Optimization] LandmarkListItem 분리 및 React.memo 적용
+const LandmarkListItem = React.memo(({ 
+  landmark, 
+  distance, 
+  selectedLanguage, 
+  userRegion, 
+  isInTour, 
+  onSelect, 
+  onToggleTour 
+}: { 
+  landmark: Landmark; 
+  distance: number | null; 
+  selectedLanguage: string; 
+  userRegion: string; 
+  isInTour: boolean; 
+  onSelect: (landmark: Landmark) => void; 
+  onToggleTour: (landmark: Landmark) => void;
+}) => {
+  return (
+    <div
+      className="p-3 bg-white dark:bg-slate-800 rounded-xl border hover:shadow-md transition-all cursor-pointer flex items-center justify-between group"
+      onClick={() => onSelect(landmark)}
+    >
+      <div className="flex items-center gap-3 min-w-0 flex-1">
+        <div className="w-10 h-10 rounded-lg bg-muted overflow-hidden flex-shrink-0 border border-slate-100">
+          {landmark.photos?.[0] && <img src={landmark.photos[0]} alt="" className="w-full h-full object-cover transition-transform group-hover:scale-110" />}
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-1.5">
+            <h5 className="text-sm font-semibold truncate">{getTranslatedContent(landmark, selectedLanguage, 'name')}</h5>
+            {landmark.targetNations?.includes(userRegion) && (
+              <Badge variant="outline" className="h-4 px-1 text-[8px] bg-orange-50 text-orange-600 border-orange-200 font-black">
+                {userRegion} PICK ✨
+              </Badge>
+            )}
+          </div>
+          {distance !== null && (
+            <p className="text-[10px] text-muted-foreground truncate">
+              {Math.round(distance < 1000 ? distance : distance / 1000)}{distance < 1000 ? 'm' : 'km'} • {landmark.category}
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="flex items-center gap-1 ml-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className={`h-8 w-8 rounded-full transition-all ${isInTour ? 'text-emerald-600 bg-emerald-50 hover:bg-emerald-100' : 'text-gray-400 hover:text-indigo-600 hover:bg-indigo-50'}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleTour(landmark);
+          }}
+        >
+          {isInTour ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+        </Button>
+      </div>
+    </div>
+  );
+});
+
 export function UnifiedFloatingCard({
   selectedLandmark,
   isTransitMode = false,
@@ -547,8 +607,11 @@ export function UnifiedFloatingCard({
               size="icon"
               className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white/80"
               onClick={() => {
+                // [교수님 수정] 닫기(X) 시 카드를 아예 닫는 대신 '최소화' 상태로 전환합니다.
                 if (onToggleMinimized) {
                   onToggleMinimized();
+                } else if (onLandmarkClose) {
+                  onLandmarkClose();
                 }
               }}
             >
@@ -572,8 +635,11 @@ export function UnifiedFloatingCard({
             size="icon"
             className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600"
             onClick={() => {
+              // [교수님 수정] 닫기(X) 시 최소화 상태로 전환
               if (onToggleMinimized) {
                 onToggleMinimized();
+              } else if (onLandmarkClose) {
+                onLandmarkClose();
               }
             }}
           >
@@ -755,48 +821,22 @@ export function UnifiedFloatingCard({
                   className="flex-1 space-y-3 overflow-y-auto pr-1 cursor-grab active:cursor-grabbing"
                 >
                   {filteredListLandmarks.map(({ landmark, distance }) => (
-                    <div
+                    <LandmarkListItem
                       key={landmark.id}
-                      className="p-3 bg-white dark:bg-slate-800 rounded-xl border hover:shadow-md transition-all cursor-pointer flex items-center justify-between"
-                      onClick={() => handleLandmarkClick(landmark)}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-muted overflow-hidden flex-shrink-0">
-                          {landmark.photos?.[0] && <img src={landmark.photos[0]} alt="" className="w-full h-full object-cover" />}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-1.5">
-                            <h5 className="text-sm font-semibold truncate">{getTranslatedContent(landmark, selectedLanguage, 'name')}</h5>
-                            {landmark.targetNations?.includes(userRegion) && (
-                              <Badge variant="outline" className="h-4 px-1 text-[8px] bg-orange-50 text-orange-600 border-orange-200 font-black animate-pulse">
-                                {userRegion} PICK ✨
-                              </Badge>
-                            )}
-                          </div>
-                          {distance !== null && <p className="text-[10px] text-muted-foreground">{formatDistance(distance)} • {formatWalkTime(distance, selectedLanguage)} • {landmark.category}</p>}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className={`h-8 w-8 ${tourStops?.some(stop => stop.id === landmark.id) ? 'text-indigo-600 bg-indigo-50 hover:bg-indigo-100' : 'text-gray-400 hover:text-indigo-600 hover:bg-indigo-50'}`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (tourStops?.some(stop => stop.id === landmark.id)) {
-                              onRemoveTourStop?.(landmark.id);
-                            } else {
-                              onAddToTour?.(landmark);
-                            }
-                          }}
-                        >
-                          {tourStops?.some(stop => stop.id === landmark.id) ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-[#E9633F]" onClick={(e) => { e.stopPropagation(); onLandmarkRoute(landmark); }}>
-                          <Navigation className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
+                      landmark={landmark}
+                      distance={distance}
+                      selectedLanguage={selectedLanguage}
+                      userRegion={userRegion}
+                      isInTour={tourStops?.some(stop => stop.id === landmark.id) || false}
+                      onSelect={handleLandmarkClick}
+                      onToggleTour={(lm) => {
+                        if (tourStops?.some(stop => stop.id === lm.id)) {
+                          onRemoveTourStop?.(lm.id);
+                        } else {
+                          onAddToTour?.(lm);
+                        }
+                      }}
+                    />
                   ))}
                 </div>
               </div>

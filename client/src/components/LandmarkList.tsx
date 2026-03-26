@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Landmark, GpsPosition } from '@shared/schema';
-import { Navigation, MapPin, Volume2, Info, Activity, Landmark as LandmarkIcon, Minus, List } from 'lucide-react';
+import { Navigation, MapPin, Volume2, Info, Activity, Landmark as LandmarkIcon, Minus, List, X } from 'lucide-react';
 import { calculateDistance, formatDistance } from '@/lib/geoUtils';
 import { getTranslatedContent, t } from '@/lib/translations';
 
@@ -15,6 +15,7 @@ interface LandmarkListProps {
   spokenLandmarks: Set<string>;
   selectedLanguage?: string;
   onLandmarkSelect?: (landmark: Landmark) => void;
+  onClose?: () => void;
 }
 
 export default function LandmarkList({
@@ -24,6 +25,7 @@ export default function LandmarkList({
   spokenLandmarks,
   selectedLanguage = 'en',
   onLandmarkSelect,
+  onClose,
 }: LandmarkListProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [translate, setTranslate] = useState(() => {
@@ -225,21 +227,34 @@ export default function LandmarkList({
             <MapPin className="w-5 h-5 text-primary" />
             {t('landmarks', selectedLanguage)}
           </h3>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (cardRef.current) {
-                setLastCardHeight(cardRef.current.offsetHeight);
-              }
-              setIsMinimized(true);
-            }}
-            className="h-7 w-7 shrink-0"
-            data-testid="button-minimize-landmarklist"
-          >
-            <Minus className="w-4 h-4" />
-          </Button>
+          <div className="flex gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose?.();
+              }}
+              className="h-7 w-7 shrink-0"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (cardRef.current) {
+                  setLastCardHeight(cardRef.current.offsetHeight);
+                }
+                setIsMinimized(true);
+              }}
+              className="h-7 w-7 shrink-0"
+              data-testid="button-minimize-landmarklist"
+            >
+              <Minus className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
         <div className="divide-y">
           {sortedLandmarks.map(({ landmark, distance }) => (
@@ -289,17 +304,6 @@ export default function LandmarkList({
                     data-testid={`button-info-${landmark.id}`}
                   >
                     <Info className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    size="icon"
-                    variant="outline"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onLandmarkRoute(landmark);
-                    }}
-                    data-testid={`button-navigate-${landmark.id}`}
-                  >
-                    <Navigation className="w-4 h-4" />
                   </Button>
                 </div>
               </div>

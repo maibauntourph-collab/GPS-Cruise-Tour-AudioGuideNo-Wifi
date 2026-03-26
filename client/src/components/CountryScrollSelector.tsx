@@ -32,146 +32,146 @@ const hookingMents: Record<string, { ko: string; en: string; th: string; image: 
         ko: '현대적 혁신과 고궁의 품격이 어우러진 럭셔리 서울',
         en: 'Luxury Seoul: Where modern innovation meets royal dignity',
         th: 'โซลที่หรูหรา: ที่ซึ่งนวัตกรรมสมัยใหม่มาพบกับความสง่างามของราชวงศ์',
-        // [적요] 경로 수정: south_korea.png -> 실제 파일명 south_korea.png 혹은 korea.png 매핑
-        image: '/images/countries/south_korea.png'
+        // [적요] 경로 수정: south_korea.webp -> 실제 파일명 south_korea.webp 혹은 korea.webp 매핑
+        image: '/images/countries/south_korea.webp'
     },
     'Italy': {
         ko: '지중해의 낭만과 역사가 숨쉬는 명품 이탈리아',
         en: 'Luxury Italy: Mediterranean romance and timeless history',
         th: 'อิตาลีที่หรูหรา: ความโรแมนติกของเมดิเตอร์เรเนียนและประวัติศาสตร์ที่เหนือกาลเวลา',
-        // [적요] Italy 전용 로컬 이미지 italy.png (존재함)
-        image: '/images/countries/italy.png'
+        // [적요] Italy 전용 로컬 이미지 italy.webp (존재함)
+        image: '/images/countries/italy.webp'
     },
     'France': {
         ko: '예술과 미식, 세련된 취향의 정점 프랑스 파리',
         en: 'Luxury France: The pinnacle of art, cuisine, and refined taste',
         th: 'ฝรั่งเศสที่หรูหรา: จุดสูงสุดของศิลปะ อาหาร และรสชาติที่ประณีต',
-        // [적요] France 전용 로컬 이미지 france.png (존재함)
-        image: '/images/countries/france.png'
+        // [적요] France 전용 로컬 이미지 france.webp (존재함)
+        image: '/images/countries/france.webp'
     },
     'Thailand': {
         ko: '에메랄드빛 바다와 황금빛 사원의 럭셔리 휴양지',
         en: 'Luxury Thailand: Emerald seas and majestic golden temples',
         th: 'ไทยที่หรูหรา: ทะเลสีมรกตและวัดสีทองที่งดงาม',
-        // [적요] Thailand 전용 로컬 이미지 thailand.png (존재함)
-        image: '/images/countries/thailand.png'
+        // [적요] Thailand 전용 로컬 이미지 thailand.webp (존재함)
+        image: '/images/countries/thailand.webp'
     },
     'Malaysia': {
         ko: '스카이라인과 열대림이 공존하는 시크한 말레이시아',
         en: 'Luxury Malaysia: Where skylines meet tropical rainforests',
         th: 'มาเลเซียที่หรูหรา: ที่ซึ่งเส้นขอบฟ้ามาบรรจบกับป่าฝนเขตร้อน',
         // [적요] Malaysia 럭셔리 이미지 (존재함)
-        image: '/images/countries/malaysia_luxury.png'
+        image: '/images/countries/malaysia_luxury.webp'
     },
     'Japan': {
         ko: '전통의 고요함과 찬란한 야경의 명품 교토-도쿄',
         en: 'Luxury Japan: Zen serenity and dazzling futuristic skylines',
         th: 'ญี่ปุ่นที่หรูหรา: ความสงบแบบเซนและเส้นขอบฟ้าแห่งอนาคตที่ตระการตา',
-        image: '/images/landmarks/sensoji_nanobanana.png'
+        image: '/images/landmarks/sensoji_nanobanana.webp'
     },
     'USA': {
         ko: '압도적인 스카이라인과 자유의 상징 뉴욕',
         en: 'Luxury USA: Iconic skylines and symbols of freedom',
         th: 'สหรัฐอเมริกาที่หรูหรา: เส้นขอบฟ้าที่เป็นสัญลักษณ์และสัญลักษณ์แห่งเสรีภาพ',
-        // [적요] External URL → 로컬 이미지 (USA.PNG 존재함)
-        image: '/images/countries/usa.png'
+        // [적요] External URL → 로컬 이미지 (USA.webp 존재함)
+        image: '/images/countries/usa.webp'
     },
     'United Kingdom': {
         ko: '전통과 현대가 공존하는 품격 있는 런던 여행',
         en: 'Luxury UK: Sophisticated journey through history and royalty',
         th: 'สหราชอาณาจักรที่หรูหรา: การเดินทางที่ซับซ้อนผ่านประวัติศาสตร์และความเป็นราชวงศ์',
-        image: '/images/landmarks/big_ben_nanobanana.png'
+        image: '/images/landmarks/big_ben_nanobanana.webp'
     },
     'Spain': {
         ko: '가우디의 예술혼과 열정적인 태양의 스페인',
         en: 'Luxury Spain: Gaudi’s artistic soul and passionate sun',
         th: '스페인ที่หรูหรา: จิตวิญญาณแห่งศิลปะของเกาดีและแสงแด드ที่ร้อนแรง',
-        // [적요] Spain 로컬 이미지 (spain.png 존재함)
-        image: '/images/countries/spain.png'
+        // [적요] Spain 로컬 이미지 (spain.webp 존재함)
+        image: '/images/countries/spain.webp'
     },
     'Singapore': {
         ko: '초현대적 정원과 미래형 럭셔리 싱가포르',
         en: 'Luxury Singapore: Ultra-modern gardens and futuristic lifestyle',
         th: '스ิงคโปร์ที่หรูหรา: 스완ที่ทันสมัยสุด ๆ และ라이프스토어แห่งอนาค트',
-        // [적요] Singapore 로컬 이미지 (singapore.png 존재함)
-        image: '/images/countries/singapore.png'
+        // [적요] Singapore 로컬 이미지 (singapore.webp 존재함)
+        image: '/images/countries/singapore.webp'
     },
     'China': {
         ko: '장엄한 만리장성과 화려한 상하이의 야경',
         en: 'Luxury China: Ancient wonders and glittering modern metropolises',
         th: 'จีนที่หรูหรา: สิ่งมหัศจรรย์โบราณและเมืองที่ทันสมัยที่เปล่งประกาย',
-        // [적요] China 로컬 이미지 (china.png 존재함)
-        image: '/images/countries/china.png'
+        // [적요] China 로컬 이미지 (china.webp 존재함)
+        image: '/images/countries/china.webp'
     },
     'Vietnam': {
         ko: '신비로운 하롱베이와 활력 넘치는 베트남의 미소',
         en: 'Luxury Vietnam: Mystical bays and vibrant cultural heritage',
         th: 'เวียดนามที่หรูหรา: อ่าวที่ลึกลับและมรดกทางวัฒนธรรมที่มีชีวิตชีวา',
-        // [적요] Vietnam 로컬 이미지 (vietnam.png 존재함)
-        image: '/images/countries/vietnam.png'
+        // [적요] Vietnam 로컬 이미지 (vietnam.webp 존재함)
+        image: '/images/countries/vietnam.webp'
     },
     'Netherlands': {
         ko: '튤립 로맨스와 운하의 서정이 가득한 네덜란드',
         en: 'Luxury Netherlands: Canal-side elegance and tulip romance',
         th: 'เนเธอร์แลนด์ที่หรูหรา: ความสง่างามริมคลองและความโรแมนติกของดอกทิวลิป',
-        // [적요] Netherlands 로컬 이미지 (netherlands.png 존재함)
-        image: '/images/countries/netherlands.png'
+        // [적요] Netherlands 로컬 이미지 (netherlands.webp 존재함)
+        image: '/images/countries/netherlands.webp'
     },
     'Philippines': {
         ko: '지상 최후의 낙원, 에메랄드빛 필리핀의 휴양지',
         en: 'Luxury Philippines: Paradise islands and emerald crystal waters',
         th: 'ฟิลิปปินส์ที่หรูหรา: เกาะสวรรค์และน้ำใสสีมรกต',
-        // [적요] Philippines 로컬 이미지 (philippines.png 존재함)
-        image: '/images/countries/philippines.png'
+        // [적요] Philippines 로컬 이미지 (philippines.webp 존재함)
+        image: '/images/countries/philippines.webp'
     },
     'Denmark': {
         ko: '동화 속 풍경과 북유럽 감성의 코펜하겐',
         en: 'Luxury Denmark: Fairy-tale charm and Nordic sophistication',
         th: 'เดนมาร์กที่หรูหรา: เสน่ห์ของเทพนิยายและความซับซ้อนของนอร์ดิก',
-        // [적요] Denmark 로컬 이미지 (denmark.png 존재함)
-        image: '/images/countries/denmark.png'
+        // [적요] Denmark 로컬 이미지 (denmark.webp 존재함)
+        image: '/images/countries/denmark.webp'
     },
     'Norway': {
         ko: '거대한 피오르드와 대자연의 경이로움 오슬로',
         en: 'Luxury Norway: Majestic fjords and breathtaking natural wonders',
         th: 'นอร์เวย์ที่หรูหรา: ฟยอร์ดที่สง่างามและสิ่งมหัศจรรย์ทางธรรมชาติที่น่าทึ่ง',
-        // [적요] Norway 로컬 이미지 (norway.png 존재함)
-        image: '/images/countries/norway.png'
+        // [적요] Norway 로컬 이미지 (norway.webp 존재함)
+        image: '/images/countries/norway.webp'
     },
     'Hungary': {
         ko: '다뉴브강의 진주, 찬란한 야경의 부다페스트',
         en: 'Luxury Hungary: Pearl of the Danube and glittering architecture',
         th: 'ฮังการีที่หรูหรา: ไข่มุกแห่งแม่น้ำดานูบและสถาปัตยกรรมที่ระยิบระยับ',
-        // [적요] Hungary 로컬 이미지 (hungary.png 존재함)
-        image: '/images/countries/hungary.png'
+        // [적요] Hungary 로컬 이미지 (hungary.webp 존재함)
+        image: '/images/countries/hungary.webp'
     },
     'Poland': {
         ko: '중세의 낭만과 고전적 기품의 폴란드',
         en: 'Luxury Poland: Medieval romance and classical elegance',
         th: 'โปแลนด์ที่หรูหรา: ความโรแมนติกในยุคกลางและความสง่างามแบบคลาสสิก',
-        // [적요] Poland 로컬 이미지 (poland.png 존재함)
-        image: '/images/countries/poland.png'
+        // [적요] Poland 로컬 이미지 (poland.webp 존재함)
+        image: '/images/countries/poland.webp'
     },
     'Belgium': {
         ko: '중세풍 건물과 초콜릿처럼 달콤한 브뤼셀 여행',
         en: 'Luxury Belgium: Gothic grandeur and world-class delights',
         th: 'เบลเยียมที่หรูหรา: ความยิ่งใหญ่สไตล์โกธิคและความสุขอันดับโลก',
-        // [적요] Belgium 로컬 이미지 (belgium.png 존재함)
-        image: '/images/countries/belgium.png'
+        // [적요] Belgium 로컬 이미지 (belgium.webp 존재함)
+        image: '/images/countries/belgium.webp'
     },
     'Czech Republic': {
         ko: '시간이 멈춘 중세의 신비로움, 프라하의 밤',
         en: 'Luxury Czech: Mystical medieval charm and gothic wonders',
         th: 'สาธารณรัฐเช็กที่หรูหรา: เสน่ห์ในยุคกลางที่ลึกลับและสิ่งมหัศจรรย์สไตล์โกธิค',
-        // [적요] Czech Republic 로컬 이미지 (czech_republic.png 존재함)
-        image: '/images/countries/czech_republic.png'
+        // [적요] Czech Republic 로컬 이미지 (czech_republic.webp 존재함)
+        image: '/images/countries/czech_republic.webp'
     },
     'Sweden': {
         ko: '정교한 디자인과 정갈한 북유럽의 조화 스톡홀름',
         en: 'Luxury Sweden: Refined design and Nordic harmony',
         th: 'สวีเดนที่หรูหรา: การออกแบบที่ประณีตและความสามัคคีของนอร์ดิก',
-        // [적요] Sweden 로컬 이미지 (sweden.png 존재함)
-        image: '/images/countries/sweden.png'
+        // [적요] Sweden 로컬 이미지 (sweden.webp 존재함)
+        image: '/images/countries/sweden.webp'
     }
 };
 
@@ -314,12 +314,29 @@ export function CountryScrollSelector({
                                 className={`w-[280px] h-[380px] rounded-[2.5rem] overflow-hidden border-0 relative shadow-xl transition-all duration-300 ${isSelected ? 'ring-4 ring-orange-500 ring-offset-4 scale-[1.02]' : 'hover:scale-[1.01]'
                                     }`}
                             >
-                                {/* Background Image */}
-                                <div className="absolute inset-0">
+                                {/* Background Image with Performance Optimization */}
+                                <div className="absolute inset-0 bg-slate-100 dark:bg-slate-800">
                                     <img
                                         src={getCountryImage(country)}
                                         alt={country}
+                                        loading="lazy"
+                                        decoding="async"
+                                        fetchPriority={index < 3 ? "high" : "low"}
                                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                                        onLoad={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            target.style.opacity = '1';
+                                        }}
+                                        onError={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            // [교수님 팁] WebP 로드 실패 시 PNG로 대체하거나 기본 플레이스홀더를 사용합니다.
+                                            if (target.src.endsWith('.webp')) {
+                                                target.src = target.src.replace('.webp', '.png');
+                                            } else if (!target.src.includes('unsplash')) {
+                                                target.src = 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200';
+                                            }
+                                        }}
+                                        style={{ opacity: '0.6', transition: 'opacity 0.5s ease-in-out' }}
                                     />
                                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                                 </div>

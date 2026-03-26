@@ -10,6 +10,27 @@ import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
 import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
+
+function getMobileFriendlyUrl(url: string) {
+  const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+  if (isAndroid) {
+    return url
+      .replace('https://www.', 'https://m.')
+      .replace('https://klook.com', 'https://m.klook.com');
+  }
+
+  if (isIOS) {
+    return url
+      .replace('https://www.', 'https://m.')
+      .replace('https://klook.com', 'https://m.klook.com');
+  }
+
+  return url;
+}
+
 import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
 import { useQuery } from '@tanstack/react-query';
 import { useLiveTranslation } from '@/hooks/useLiveTranslation';
@@ -44,7 +65,6 @@ export default function LandmarkDetailDialog({
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
   const [selectedGuideId, setSelectedGuideId] = useState<string | null>(null);
-  const [audioContentType, setAudioContentType] = useState<'summary' | 'narration'>('narration');
   const [activeTab, setActiveTab] = useState<string>('history');
   const [showManualNarrationMenu, setShowManualNarrationMenu] = useState(false);
   const [manualTranslationSource, setManualTranslationSource] = useState<'original' | 'live'>('live');
@@ -126,18 +146,12 @@ export default function LandmarkDetailDialog({
     }
 
     // [Professor Feedback] "narration" is the core summary!
-    const textToPlay = audioContentType === 'summary'
-      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'narration') : (translatedNarration || translatedDesc))
-      : (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription') : (translatedDetail || translatedNarration || translatedDesc));
+    const textToPlay = selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription') : (translatedDetail || translatedNarration || translatedDesc);
 
-    // [Bug Doctor] if narration (full insight) is empty, fallback to summary core (narration)
-    if (!textToPlay && audioContentType === 'narration') {
+    // [Bug Doctor] if narration (full insight) is empty, fallback to narration core
+    if (!textToPlay) {
       const fallbackText = selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'narration') : (translatedNarration || translatedDesc);
-      if (fallbackText) {
-        setAudioContentType('summary');
-        handlePlayAudio(startIndex, rateOverride);
-        return;
-      }
+      if (!fallbackText) return;
     }
 
     if (!textToPlay) return;
@@ -223,12 +237,24 @@ export default function LandmarkDetailDialog({
   }, [isOpen, landmark?.id, activeTab]);
 
   const activeSentences = useMemo(() => {
-    const text = audioContentType === 'summary'
-      ? (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'description') : translatedDesc)
-      : (selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription') : translatedDetail);
+    const text = selectedGuide ? getTranslatedContent(selectedGuide as any, selectedLanguage, 'detailedDescription') : translatedDetail;
     if (!text) return [];
     return AudioService.splitIntoSentences(text);
-  }, [landmark, selectedGuide, selectedLanguage, audioContentType, translatedDesc, translatedNarration]);
+  }, [landmark, selectedGuide, selectedLanguage, translatedDesc, translatedNarration, translatedDetail]);
+
+  const markShowReturnToApp = () => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('showReturnToApp', 'true');
+  };
+
+  const openExternalUrl = (url: string, target: string = '_blank') => {
+    markShowReturnToApp();
+    const win = window.open(url, target, 'noopener,noreferrer');
+    if (!win) {
+      window.location.href = url;
+    }
+    return win;
+  };
 
   if (!landmark) return null;
 
@@ -283,11 +309,11 @@ export default function LandmarkDetailDialog({
                 <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '역사/나레이션' : 'History/Narration'}
                 </TabsTrigger>
-                <TabsTrigger value="details" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
-                  {selectedLanguage === 'ko' ? '지도/정보' : 'Map/Info'}
-                </TabsTrigger>
                 <TabsTrigger value="booking" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '티켓/예약' : 'Book/Ticket'}
+                </TabsTrigger>
+                <TabsTrigger value="details" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
+                  {selectedLanguage === 'ko' ? '지도/정보' : 'Map/Info'}
                 </TabsTrigger>
                 <TabsTrigger value="shopping" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '기념품' : 'Shopping'}
@@ -353,32 +379,6 @@ export default function LandmarkDetailDialog({
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <div className="flex bg-[#EFEBE6] p-0.5 rounded-lg border border-[#DCD7CC] mr-1 shadow-inner">
-                          <button
-                            onClick={() => {
-                              setAudioContentType('summary');
-                              if (isPlaying) {
-                                audioService.stop();
-                                setTimeout(() => handlePlayAudio(), 100);
-                              }
-                            }}
-                            className={`px-3 py-1 rounded-md text-[10px] font-black transition-all duration-200 ${audioContentType === 'summary' ? 'bg-[#E67E22] text-white shadow-md' : 'text-[#A8A294] hover:text-[#E67E22]'}`}
-                          >
-                            {selectedLanguage === 'ko' ? '요약 가이드' : 'Summary'}
-                          </button>
-                          <button
-                            onClick={() => {
-                              setAudioContentType('narration');
-                              if (isPlaying) {
-                                audioService.stop();
-                                setTimeout(() => handlePlayAudio(), 100);
-                              }
-                            }}
-                            className={`px-3 py-1 rounded-md text-[10px] font-black transition-all duration-200 ${audioContentType === 'narration' ? 'bg-[#E67E22] text-white shadow-md' : 'text-[#A8A294] hover:text-[#E67E22]'}`}
-                          >
-                            {selectedLanguage === 'ko' ? '상세 역사' : 'Full Insight'}
-                          </button>
-                        </div>
                         <Badge variant="outline" className="text-[10px] border-[#E67E22] text-[#E67E22] bg-white px-2 h-5 font-bold">{playbackRate}x Speed</Badge>
                       </div>
                     </div>
@@ -491,9 +491,7 @@ export default function LandmarkDetailDialog({
                         );
                       })
                     ) : (
-                      audioContentType === 'summary'
-                        ? (translatedNarration || translatedDesc)
-                        : (translatedDetail || translatedNarration || translatedDesc)
+                      translatedDetail || translatedNarration || translatedDesc
                     )}
                   </div>
                 </div>
@@ -518,7 +516,7 @@ export default function LandmarkDetailDialog({
                       className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-blue-400 hover:bg-blue-50 transition-all active:scale-95"
                       onClick={() => {
                         const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                        const win = window.open(getWikiUrl(name, selectedLanguage), '_blank', 'noopener,noreferrer');
+                        const win = openExternalUrl(getWikiUrl(name, selectedLanguage), '_blank');
                         if (!win) alert(selectedLanguage === 'ko' ? '팝업 차단됨. 브라우저 허용 후 재시도' : 'Popup blocked. Please allow popups.');
                       }}
                     >
@@ -533,7 +531,7 @@ export default function LandmarkDetailDialog({
                       className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-green-400 hover:bg-green-50 transition-all active:scale-95"
                       onClick={() => {
                         const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                        const win = window.open(getGoogleSearchUrl(`${name} tourism info`), '_blank', 'noopener,noreferrer');
+                        const win = openExternalUrl(getGoogleSearchUrl(`${name} tourism info`), '_blank');
                         if (!win) alert(selectedLanguage === 'ko' ? '팝업 차단됨. 브라우저 허용 후 재시도' : 'Popup blocked. Please allow popups.');
                       }}
                     >
@@ -548,7 +546,7 @@ export default function LandmarkDetailDialog({
                       className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-orange-400 hover:bg-orange-50 transition-all active:scale-95"
                       onClick={() => {
                         const name = getTranslatedContent(landmark, selectedLanguage, 'name');
-                        const win = window.open(getGoogleSearchUrl(name), '_blank', 'noopener,noreferrer');
+                        const win = openExternalUrl(getGoogleSearchUrl(name), '_blank');
                         if (!win) alert(selectedLanguage === 'ko' ? '팝업 차단됨. 브라우저 허용 후 재시도' : 'Popup blocked. Please allow popups.');
                       }}
                     >
@@ -569,21 +567,51 @@ export default function LandmarkDetailDialog({
                     {selectedLanguage === 'ko' ? '실시간 위치' : 'Live Location'}
                   </div>
                   <div className="flex flex-col gap-2 w-full">
+                    <div className="grid grid-cols-3 gap-2">
+                      <button
+                        onClick={() => {
+                          const osmUrl = `https://www.openstreetmap.org/?mlat=${landmark.lat}&mlon=${landmark.lng}#map=17/${landmark.lat}/${landmark.lng}`;
+                          openExternalUrl(osmUrl, '_blank');
+                        }}
+                        className="px-2 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:bg-gray-100"
+                      >
+                        Leaflet
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name');
+                          const amapWebUrl = `https://uri.amap.com/navigation?to=${landmark.lng},${landmark.lat},${encodeURIComponent(landmarkName)}&mode=walk&policy=1&src=mypage&coordinate=wgs84&callnative=1`;
+                          openExternalUrl(amapWebUrl, '_blank');
+                        }}
+                        className="px-2 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:bg-gray-100"
+                      >
+                        Amap
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          openExternalUrl(`https://www.google.com/maps/dir/?api=1&destination=${landmark.lat},${landmark.lng}&travelmode=walking`, '_blank');
+                        }}
+                        className="px-2 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:bg-gray-100"
+                      >
+                        Google Map
+                      </button>
+                    </div>
+
                     <button
                       onClick={() => {
-                        const isChinese = selectedLanguage.startsWith('zh');
                         const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name');
+                        const isChinese = selectedLanguage.startsWith('zh');
                         if (isChinese) {
-                          // [어벤져스 팀 | 2026-03-20] 🇨🇳 Amap(高德지도) 내비게이션(길찾기) 딥링크
+                          markShowReturnToApp();
                           const amapRouteUrl = `amapuri://route/plan/?did=BGVIS1&dlat=${landmark.lat}&dlon=${landmark.lng}&dname=${encodeURIComponent(landmarkName)}&dev=0&t=2`;
-                          const amapWebRouteUrl = `https://uri.amap.com/navigation?to=${landmark.lng},${landmark.lat},${encodeURIComponent(landmarkName)}&mode=walk&policy=1&src=mypage&coordinate=wgs84&callnative=1`;
-
                           window.location.href = amapRouteUrl;
                           setTimeout(() => {
-                            window.open(amapWebRouteUrl, '_blank');
+                            openExternalUrl(`https://uri.amap.com/navigation?to=${landmark.lng},${landmark.lat},${encodeURIComponent(landmarkName)}&mode=walk&policy=1&src=mypage&coordinate=wgs84&callnative=1`, '_blank');
                           }, 500);
                         } else {
-                          window.open(`https://www.google.com/maps/dir/?api=1&destination=${landmark.lat},${landmark.lng}&travelmode=walking`, '_blank');
+                          openExternalUrl(`https://www.google.com/maps/dir/?api=1&destination=${landmark.lat},${landmark.lng}&travelmode=walking`, '_blank');
                         }
                       }}
                       className="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-2xl bg-[#f85108] hover:bg-[#e04807] text-white text-base font-bold transition-all shadow-lg active:scale-[0.98]"
@@ -594,13 +622,12 @@ export default function LandmarkDetailDialog({
 
                     <button
                       onClick={() => {
-                        const isChinese = selectedLanguage.startsWith('zh');
                         const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name');
-                        if (isChinese) {
+                        if (selectedLanguage.startsWith('zh')) {
                           const amapWebUrl = `https://uri.amap.com/marker?position=${landmark.lng},${landmark.lat}&name=${encodeURIComponent(landmarkName)}&coordinate=wgs84&callnative=1`;
-                          window.open(amapWebUrl, '_blank');
+                          openExternalUrl(amapWebUrl, '_blank');
                         } else {
-                          window.open(`https://www.google.com/maps?q=${landmark.lat},${landmark.lng}`, '_blank');
+                          openExternalUrl(`https://www.google.com/maps?q=${landmark.lat},${landmark.lng}`, '_blank');
                         }
                       }}
                       className="flex items-center justify-center gap-2 w-full px-6 py-2 rounded-2xl bg-white/80 hover:bg-white text-[#4A443A] text-sm font-medium transition-colors border border-[#A8A294]/20"
@@ -671,7 +698,7 @@ export default function LandmarkDetailDialog({
                         variant="outline"
                         size="sm"
                         className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-[#E67E22] hover:bg-orange-50/20 active:scale-95 transition-all"
-                        onClick={() => window.open(getWikiUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage), '_blank')}
+                        onClick={() => openExternalUrl(getWikiUrl(getTranslatedContent(landmark, selectedLanguage, 'name'), selectedLanguage), '_blank')}
                       >
                         <BookOpen className="w-4 h-4 text-blue-500" />
                         <span className="text-[10px] font-bold">Wikipedia</span>
@@ -680,7 +707,7 @@ export default function LandmarkDetailDialog({
                         variant="outline"
                         size="sm"
                         className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-[#E67E22] hover:bg-orange-50/20 active:scale-95 transition-all"
-                        onClick={() => window.open(getGoogleSearchUrl(`${getTranslatedContent(landmark, selectedLanguage, 'name')} tourism info`), '_blank')}
+                        onClick={() => openExternalUrl(getGoogleSearchUrl(`${getTranslatedContent(landmark, selectedLanguage, 'name')} tourism info`), '_blank')}
                       >
                         <Info className="w-4 h-4 text-green-500" />
                         <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '관광정보' : 'Tourism'}</span>
@@ -689,7 +716,7 @@ export default function LandmarkDetailDialog({
                         variant="outline"
                         size="sm"
                         className="flex flex-col h-16 gap-1 rounded-xl border-[#EFEBE6] text-[#5D574D] hover:border-[#E67E22] hover:bg-orange-50/20 active:scale-95 transition-all"
-                        onClick={() => window.open(getGoogleSearchUrl(getTranslatedContent(landmark, selectedLanguage, 'name')), '_blank')}
+                        onClick={() => openExternalUrl(getGoogleSearchUrl(getTranslatedContent(landmark, selectedLanguage, 'name')), '_blank')}
                       >
                         <Search className="w-4 h-4 text-orange-500" />
                         <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '구글검색' : 'Search'}</span>
@@ -729,7 +756,7 @@ export default function LandmarkDetailDialog({
                     </p>
                     <Button
                       className="w-full bg-white text-indigo-700 hover:bg-slate-50 font-black h-12 rounded-xl shadow-lg border-none"
-                      onClick={() => window.open(landmark.reservationUrl!, '_blank')}
+                      onClick={() => openExternalUrl(landmark.reservationUrl!, '_blank')}
                     >
                       {selectedLanguage === 'ko' ? '지금 바로 예약하기' : 'Book Now'}
                     </Button>
@@ -849,8 +876,9 @@ export default function LandmarkDetailDialog({
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          console.log(`🔗 [Link Diagnostic] Opening: ${option.name}, URL: ${option.url}`);
-                          const win = window.open(option.url, '_blank', 'noopener,noreferrer');
+                          const mobileUrl = getMobileFriendlyUrl(option.url);
+                          console.log(`🔗 [Link Diagnostic] Opening: ${option.name}, URL: ${option.url}, Mobile URL: ${mobileUrl}`);
+                          const win = openExternalUrl(mobileUrl, '_blank');
                           if (!win) {
                             console.error("🚑 [Bug Doctor] Popup blocked for " + option.name);
                             alert(selectedLanguage === 'ko' ? '팝업 차단이 감지되었습니다. 허용 후 다시 시도해주세요.' : 'Popup blocked. Please allow popups and try again.');
@@ -994,7 +1022,7 @@ export default function LandmarkDetailDialog({
                             <Button
                               size="sm"
                               className="h-8 px-4 bg-[#5D574D] hover:bg-[#433E37] text-white rounded-xl text-[10px] font-bold gap-1.5 transition-all"
-                              onClick={() => window.open(product.checkoutUrl, '_blank')}
+                              onClick={() => openExternalUrl(product.checkoutUrl, '_blank')}
                             >
                               <CreditCard className="w-3 h-3" />
                               {selectedLanguage === 'ko' ? '지금 구매' : 'Buy Now'}
@@ -1042,12 +1070,18 @@ export default function LandmarkDetailDialog({
             </Button>
             <Button
               onClick={() => onAddToTour?.(landmark)}
-              variant="outline"
-              className="flex-[0.6] h-14 border-2 border-[#EFEBE6] text-[#5D574D] rounded-2xl font-bold bg-white hover:bg-[#FCF9F6] transition-all active:scale-[0.97]"
+              variant={isInTour ? "default" : "outline"}
+              className={`flex-[0.6] h-14 border-2 rounded-2xl font-bold transition-all active:scale-[0.97] ${isInTour ? 'bg-indigo-600 hover:bg-indigo-700 text-white border-indigo-600 shadow-lg shadow-indigo-100' : 'border-[#EFEBE6] text-[#5D574D] bg-white hover:bg-[#FCF9F6]'}`}
             >
               <div className="flex flex-col items-center">
-                <span className="text-lg leading-tight">+</span>
-                <span className="text-[10px] uppercase font-black">{selectedLanguage === 'ko' ? '투어 담기' : 'Add to Tour'}</span>
+                <span className="text-lg leading-tight">
+                  {isInTour ? <Check className="w-5 h-5 mb-0.5" /> : '+'}
+                </span>
+                <span className="text-[10px] uppercase font-black">
+                  {isInTour 
+                    ? (selectedLanguage === 'ko' ? '담기 완료' : 'Added') 
+                    : (selectedLanguage === 'ko' ? '투어 담기' : 'Add to Tour')}
+                </span>
               </div>
             </Button>
           </div>

@@ -11,7 +11,7 @@ import {
   Languages, Heart, ShoppingBag
 } from 'lucide-react';
 import InstallPrompt from '@/components/InstallPrompt';
-import { getSavedTourData, SavedTourData } from '@/components/StartupDialog';
+import { getSavedTourData, SavedTourData } from '@/lib/tourStorage';
 import { t } from '@/lib/translations';
 
 /**

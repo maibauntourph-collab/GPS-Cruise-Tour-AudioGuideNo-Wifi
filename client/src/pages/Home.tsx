@@ -97,12 +97,12 @@ import { Landmark, City } from '@shared/schema';
 import MapView from '@/components/MapView';
 import { UnifiedFloatingCard } from '@/components/UnifiedFloatingCard';
 import MenuDialog from '@/components/MenuDialog';
-import StartupDialog from '@/components/StartupDialog';
 import AIRecommendDialog from '@/components/AIRecommendDialog';
 import AudioDownloadDialog from '@/components/AudioDownloadDialog';
 import { CitySelector } from '@/components/CitySelector';
 import { CountryScrollSelector } from '@/components/CountryScrollSelector';
 import { CitySelectTab } from '@/components/CitySelectTab';
+import LandmarkList from '@/components/LandmarkList';
 
 // Landing Data is imported from @/lib/landingData at line 4
 import LoginDialog from '@/components/LoginDialog';
@@ -142,7 +142,11 @@ export default function Home() {
   const { isUpdateAvailable, updateServiceWorker } = useServiceWorker();
 
   // [제 65장] 다른 앱 사용 시 플로팅 알림/아이콘 지원
-  const { requestPermission } = useBackgroundReturn(selectedLanguage);
+  const { requestPermission } = useBackgroundReturn(selectedLanguage, () => {
+    // 외부 앱에서 복귀 시 가이드 복귀 버튼 표시 + 카드 상태 초기화
+    setShowBackgroundReturnPin(true);
+    setIsCardMinimized(false); // 카드가 최소화되지 않은 상태로 복귀
+  });
 
   // State
   const [position, setPosition] = useState<GeolocationPosition | null>(null);
@@ -210,6 +214,7 @@ export default function Home() {
 
   // UI States
   const [isCardMinimized, setIsCardMinimized] = useState(false);
+  const manualClosedLandmarkRef = useRef<string | null>(null);
   // ✅ [마스터 모드 시스템 | 2026-02-27] AppMode 단일 상태로 UI를 통합 제어합니다.
   // 학생들에게: 기존에 4개 상태(isNavigationOnlyMode, forceShowCard, temporaryShowCard, isCardMinimized)가
   // 서로 충돌하던 것을 **하나의 명확한 모드**로 통합했습니다. 이것이 '상태 머신(State Machine)'입니다!
@@ -224,6 +229,12 @@ export default function Home() {
   const [mainTab, setMainTab] = useState<'city' | 'map' | 'plan'>('city');
   // [적요] city 탭 활성화 추적 (showCountrySelector와 연동)
   const [activeCityScreen, setActiveCityScreen] = useState(false);
+
+  // [Background Return] 외부 앱 사용 후 복귀 시 가이드 복귀 버튼 표시
+  const [showBackgroundReturnPin, setShowBackgroundReturnPin] = useState(false);
+
+  // [Floating Landmark List] 도시 선택 시 플로팅 카드로 랜드마크 목록 표시
+  const [showFloatingLandmarkList, setShowFloatingLandmarkList] = useState(false);
 
   // [Marketer Song | 2026-03-20] 🌏 글로벌 맞춤 추천을 위한 사용자 국적 판별
   // 학생들에게: 사용자의 브라우저 설정이나 시간대를 분석해 '관심사'를 미리 예측하는 지능형 대시보드입니다.
@@ -318,8 +329,6 @@ export default function Home() {
 
   // Dodari Architecture states
   const [isWelcomeHandled, setIsWelcomeHandled] = useState(true); // [2026-03-23] 온보딩 건너뛰기: 즉시 랜딩 카드 노출
-  const [showStartupDialog, setShowStartupDialog] = useState(false); // [어벤져스 팀] 온보딩 후에 시작 다이얼로그 노출
-  const [isStartupTransitioning, setIsStartupTransitioning] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<string>('');
 
   // [Dodari Logic | 2026-03-23] PWA 온보딩이 닫히면(isWelcomeHandled=true) 
@@ -425,25 +434,25 @@ export default function Home() {
   // 학생들에게: 이제 setAppMode 한 줄이면 끝입니다! 기존 4줄 코드를 1줄로 줄였습니다.
   // 예시: transitionTo('list') 하면 자동으로 isCardMinimized=false가 되고, 카드가 표시됩니다.
   const handleShowLandmarkList = useCallback(() => {
+    setShowBackgroundReturnPin(false);
     transitionTo('list');
     // 하위 컴포넌트(UnifiedFloatingCard)에 리스트 탭 포커스 신호 발사
     window.dispatchEvent(new CustomEvent('force-show-list-tab'));
   }, [transitionTo]);
 
-  // [Bug Doctor] Style Guard: Modal closing might leave body scroll locked
+  // [Style Guard] Modal closing might leave body scroll locked
   useEffect(() => {
-    const isAnyModalOpen = showMenu || showStartupDialog || !!landingCityId || showAIRecommend || showLoginDialog || showSaveRouteDialog || showUpdateStats || showQrDialog;
+    const isAnyModalOpen = showMenu || !!landingCityId || showAIRecommend || showLoginDialog || showSaveRouteDialog || showUpdateStats || showQrDialog;
     if (!isAnyModalOpen) {
       document.body.style.overflow = 'unset';
       document.body.style.pointerEvents = 'auto';
     }
-  }, [showMenu, showStartupDialog, landingCityId, showAIRecommend, showLoginDialog, showSaveRouteDialog, showUpdateStats, showQrDialog]);
+  }, [showMenu, landingCityId, showAIRecommend, showLoginDialog, showSaveRouteDialog, showUpdateStats, showQrDialog]);
 
   // [Bug Doctor] History Manager: Prevent modal lock
   useEffect(() => {
     const handlePopState = () => {
       setShowMenu(false);
-      setShowStartupDialog(false);
       setLandingCityId(null);
       setShowAIRecommend(false);
     };
@@ -454,7 +463,7 @@ export default function Home() {
   // [어벤져스 팀 | 2026-03-20] 🇰🇷 서울 랜딩 최적화: 첫 방문 시 서울 명소를 강제 노출하던 로직 비활성화
   // 사용자 요구사항: "DONT show seoul place detail tour card. have to show city selection card..."
   useEffect(() => {
-    if (isWelcomeHandled && !showStartupDialog && !landingCityId && !isSimulationMode) {
+    if (isWelcomeHandled && !landingCityId && !isSimulationMode) {
       if (selectedCityId === 'seoul' && landmarks && landmarks.length > 0 && !selectedLandmark) {
         // [수정] 강제로 첫 번째 명소를 setSelectedLandmark() 하지 않도록 막음! 
         // 그냥 맵/리스트 모드로 자연스럽게 시작되도록 합니다.
@@ -463,11 +472,11 @@ export default function Home() {
         transitionTo('list');
       }
     }
-  }, [isWelcomeHandled, showStartupDialog, landingCityId, selectedLandmark, isSimulationMode, selectedCityId, landmarks, transitionTo]);
+  }, [isWelcomeHandled, landingCityId, selectedLandmark, isSimulationMode, selectedCityId, landmarks, transitionTo]);
 
   // [Dodari] Magic Landing Trigger
   useEffect(() => {
-    if (isWelcomeHandled && !showStartupDialog && !landingCityId && effectivePosition && cities.length > 0) {
+    if (isWelcomeHandled && !landingCityId && effectivePosition && cities.length > 0) {
       for (const city of cities) {
         if (hasShownLandingThisSession.has(city.id)) continue;
         const dist = calculateDistance(effectivePosition.latitude, effectivePosition.longitude, city.lat, city.lng);
@@ -478,7 +487,7 @@ export default function Home() {
         }
       }
     }
-  }, [isWelcomeHandled, showStartupDialog, landingCityId, effectivePosition, cities, hasShownLandingThisSession]);
+  }, [isWelcomeHandled, landingCityId, effectivePosition, cities, hasShownLandingThisSession]);
 
 
   const handleToggleAudio = () => {
@@ -512,10 +521,24 @@ export default function Home() {
     setShowDirectionsDialog(false);
   };
 
+  const markShowReturnToApp = () => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('showReturnToApp', 'true');
+  };
+
+  const openExternalUrl = (url: string, target: string = '_blank') => {
+    markShowReturnToApp();
+    const win = window.open(url, target, 'noopener,noreferrer');
+    if (!win) {
+      window.location.href = url;
+    }
+    return win;
+  };
+
   const openGoogleMaps = () => {
     if (pendingLandmark) {
       const url = `https://www.google.com/maps/dir/?api=1&destination=${pendingLandmark.lat},${pendingLandmark.lng}&travelmode=walking`;
-      window.open(url, '_blank');
+      openExternalUrl(url, '_blank');
     }
     setShowDirectionsDialog(false);
   };
@@ -527,9 +550,10 @@ export default function Home() {
       const amapRouteUrl = `amapuri://route/plan/?did=BGVIS1&dlat=${pendingLandmark.lat}&dlon=${pendingLandmark.lng}&dname=${encodeURIComponent(landmarkName)}&dev=0&t=2`;
       const amapWebRouteUrl = `https://uri.amap.com/navigation?to=${pendingLandmark.lng},${pendingLandmark.lat},${encodeURIComponent(landmarkName)}&mode=walk&policy=1&src=mypage&coordinate=wgs84&callnative=1`;
 
+      markShowReturnToApp();
       window.location.href = amapRouteUrl;
       setTimeout(() => {
-        window.open(amapWebRouteUrl, '_blank');
+        openExternalUrl(amapWebRouteUrl, '_blank');
       }, 500);
     }
     setShowDirectionsDialog(false);
@@ -538,7 +562,7 @@ export default function Home() {
   const openWaze = () => {
     if (pendingLandmark) {
       const url = `https://waze.com/ul?ll=${pendingLandmark.lat},${pendingLandmark.lng}&navigate=yes`;
-      window.open(url, '_blank');
+      openExternalUrl(url, '_blank');
     }
     setShowDirectionsDialog(false);
   };
@@ -822,6 +846,11 @@ export default function Home() {
     if (nearest) {
       const { landmark, distance } = nearest;
 
+      // 사용자가 최근 수동으로 닫은 랜드마크라면 자동 재오픈 방지
+      if (manualClosedLandmarkRef.current === landmark.id) {
+        return;
+      }
+
       // [Cruise Navigator | 2026-03-20] 📍 새로운 랜드마크 발견 및 오디오 트리거
       // 학생들에게: 사용자가 설정된 반경(landmark.radius) 내로 진입하면 이 로직이 작동합니다.
       // No-WiFi 환경에서도 로컬에 저장된 음성 데이터를 즉시 재생하여 끊김 없는 가이드를 제공합니다.
@@ -852,8 +881,11 @@ export default function Home() {
       }
 
       // 지도를 해당 위치로 포커싱하고 상세 카드 열기
-      setSelectedLandmark(landmark);
-      setIsCardMinimized(false);
+      // 사용자가 최근 수동으로 닫은 랜드마크라면 자동 재오픈 방지
+      if (manualClosedLandmarkRef.current !== landmark.id) {
+        setSelectedLandmark(landmark);
+        setIsCardMinimized(false);
+      }
     } else {
       spokenLandmarks.forEach(landmarkId => {
         const landmark = landmarks.find(l => l.id === landmarkId);
@@ -1038,17 +1070,6 @@ export default function Home() {
     setTourStopDurations({});
   };
 
-  const handleStartupClose = () => {
-    setShowStartupDialog(false);
-    setIsStartupTransitioning(true);
-    sessionStorage.setItem('startup-dialog-shown', 'true');
-    setLastUIAction('NONE');
-
-    // [Designer Kim] StartupDialog(온보딩) 화면이 닫히면 바로 도시 선택 카드 스크롤러를 띄웁니다!
-    setShowCountrySelector(true);
-
-    setTimeout(() => setIsStartupTransitioning(false), 600);
-  };
 
   const handleSelectGPS = () => {
     audioService.unlockAudio();
@@ -1164,13 +1185,7 @@ export default function Home() {
     <TooltipProvider>
       <div className="flex w-full flex-1 flex-col h-screen overflow-hidden bg-background">
         {/* Startup Dialog */}
-        {/* 
-          [교수님 노트: 컴포넌트 간의 대화 - Props Drilling 해결]
-          @에이? "부모인 Home에서 관리하는 setSelectedLanguage 함수를 자식인 StartupDialog에 
-          onLanguageChange라는 이름의 프롭으로 주입해주는 모습입니다. 이것이 리액트의 기본적인 데이터 흐름이죠."
-        */}
-        {/* [2026-03-23 | 통합 레이아웃] 언어 선택 + 나라/도시 카드를 병합하여 팝업 없는 매끄러운 UX 제공 */}
-        {/* Startup Dialog 제거됨: 이제 바로 나라/도시 카드가 보입니다. */}
+        {/* Startup Dialog removed */}
 
         {/* ════════════════════════════════════════════════════════════
              [적요 - 2026-03-23 23:02] ② City Select 전체 화면 모드
@@ -1196,9 +1211,9 @@ export default function Home() {
                 selectedLanguage={selectedLanguage}
                 onLanguageChange={(lang) => setSelectedLanguage(lang as any)}
                 onTransitionToList={() => {
-                  // [적요] 도시 선택 후 → city 화면 닫고 landmark 리스트로 이동
+                  // [적요] 도시 선택 후 → city 화면 닫고 floating landmark list 표시
                   setShowCountrySelector(false);
-                  setTimeout(() => transitionTo('list'), 200);
+                  setShowFloatingLandmarkList(true);
                 }}
                 activeBottomTab={mainTab}
                 onTabChange={(tab) => {
@@ -1431,22 +1446,6 @@ export default function Home() {
         }
 
         <main className="relative flex-1 overflow-hidden">
-          <AnimatePresence>
-            {isStartupTransitioning && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 z-[2500] bg-white/60 backdrop-blur-xl flex items-center justify-center pointer-events-none"
-              >
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-16 h-16 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
-                  <p className="text-sm font-black text-primary tracking-widest uppercase animate-pulse">Setting Course...</p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
           <div ref={mapContainerRef} className="w-full h-full relative">
             <MapView
               landmarks={filteredLandmarks}
@@ -1487,30 +1486,61 @@ export default function Home() {
               isCarNavZoomMode={isCarNavZoomMode}
             />
 
-            {/* [적요 2026-03-25 03:26] 카드가 최소화된 상태(IsCardMinimized)일 때
-                경로(route) 아이콘 FAB + 리스트 보기 버튼을 하단에 노출합니다.
-                학생들에게: 이 FAB은 X 닫기 버튼으로 카드를 최소화했을 때 표시되며,
-                클릭하면 카드가 다시 확장(onToggleMinimized)됩니다. */}
-            {isCardMinimized && (
-              <div className="absolute bottom-[20px] right-4 z-[1500] flex flex-col items-end gap-3">
-                {/* 경로(route) 아이콘 FAB — 프리미엄 디자인 */}
-                <Button
-                  className="h-14 w-14 rounded-full shadow-2xl bg-gradient-to-br from-[#E9633F] to-[#FF8A65] text-white hover:from-[#d4562f] hover:to-[#f07a55] transition-all flex items-center justify-center active:scale-95 ring-4 ring-orange-100/50"
-                  onClick={() => setIsCardMinimized(false)}
-                  title={selectedLanguage === 'ko' ? '가이드 카드 열기' : 'Open Guide Card'}
+            {/* [적요 2026-03-25 10:59] X 버튼 클릭 시 미니마이즈 → Route 플로팅 아이콘(FAB) 전환
+                - isCardMinimized === true 일 때 Framer Motion으로 부드럽게 등장합니다.
+                - Route 아이콘(lucide): 경로를 상징하는 아이콘으로 변경하여 UX 일관성 확보.
+                - 툴팁 라벨(ROUTE)을 아이콘 왼쪽에 함께 표시합니다.
+                - 클릭하면 setIsCardMinimized(false) → 카드가 다시 열립니다.
+                학생들에게: AnimatePresence + motion.div를 사용해야 퇴장 애니메이션이 작동합니다. */}
+            <AnimatePresence>
+              {isCardMinimized && (
+                <motion.div
+                  key="minimized-route-fab"
+                  initial={{ opacity: 0, scale: 0.6, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.6, y: 20 }}
+                  transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+                  className="absolute bottom-[20px] right-4 z-[1500] flex flex-col items-end gap-3 pointer-events-auto"
                 >
-                  <Navigation className="w-6 h-6" />
-                </Button>
-                {/* 리스트 보기 보조 버튼 */}
-                <Button
-                  className="h-10 px-5 rounded-full shadow-xl bg-white text-slate-800 border border-primary/20 hover:border-primary/50 transition-all flex items-center gap-2 active:scale-95 font-bold text-sm"
-                  onClick={handleShowLandmarkList}
-                >
-                  <List className="w-4 h-4 text-primary" />
-                  <span className="text-xs">{selectedLanguage === 'ko' ? '목록' : 'LIST'}</span>
-                </Button>
-              </div>
-            )}
+                  {/* 🗺️ Route FAB — X 버튼 최소화 후 표시되는 프리미엄 플로팅 버튼 (복구 역할) */}
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.93 }}
+                    className="flex items-center gap-2 pl-4 pr-3 h-14 rounded-full shadow-2xl bg-gradient-to-br from-[#E9633F] to-[#FF8A65] text-white ring-4 ring-orange-100/60 cursor-pointer"
+                    onClick={() => {
+                      setIsCardMinimized(false);
+                      setShowBackgroundReturnPin(false);
+                      setShowFloatingLandmarkList(true);
+                      transitionTo('list');
+                    }}
+                    title={selectedLanguage === 'ko' ? '가이드 카드 열기' : 'Open Guide Card'}
+                  >
+                    <span className="text-[11px] font-black tracking-widest uppercase opacity-90">
+                      RESTORE
+                    </span>
+                    <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+                      <MapPinned className="w-5 h-5 animate-pulse" />
+                    </div>
+                  </motion.button>
+
+                  <motion.button
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.08 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="h-9 px-4 rounded-full shadow-lg bg-white/90 backdrop-blur text-slate-700 border border-orange-100 flex items-center gap-1.5 font-bold text-xs cursor-pointer"
+                    onClick={() => {
+                      setIsCardMinimized(false);
+                      handleShowLandmarkList();
+                    }}
+                  >
+                    <List className="w-3.5 h-3.5 text-[#E9633F]" />
+                    <span>{selectedLanguage === 'ko' ? '목록' : 'LIST'}</span>
+                  </motion.button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </main>
 
@@ -1530,11 +1560,27 @@ export default function Home() {
             setIsCardMinimized(false);
           }}
           onLandmarkClose={() => {
-            // [적요] 랜드마크 닫기: 사용자의 요청에 따라 랜딩 페이지(/)가 아닌 이전 모드(map/list)로 복귀.
-            // "go before progress except landing page"
+            // [교수님 수정] 랜드마크 'X' 닫기 버튼 클릭 시:
+            // 1. 카드를 아예 없애는 것이 아니라 '최소화' 상태로 만듭니다.
+            setIsCardMinimized(true);
+            // 2. 동시에 FAB이 나타날 수 있도록 필요한 상태들을 조정합니다.
+            setShowFloatingLandmarkList(false);
+            setShowBackgroundReturnPin(false);
+            
+            // [교수님 추가] 카드 내부 데이터 초기화 및 모드 전환 (카드를 숨기기 위함)
             setSelectedLandmark(null);
-            setIsCardMinimized(false);
-            transitionTo(prevAppModeRef.current || 'map');
+            transitionTo('map');
+            
+            // [Bug Doctor] 4초 동안 자동 재개방 방지 로직 유지
+            const closedLandmarkId = selectedLandmark?.id;
+            if (closedLandmarkId) {
+              manualClosedLandmarkRef.current = closedLandmarkId;
+              setTimeout(() => {
+                if (manualClosedLandmarkRef.current === closedLandmarkId) {
+                  manualClosedLandmarkRef.current = null;
+                }
+              }, 4000);
+            }
           }}
           onMinimizeToMenu={() => {
             // [적요] 메뉴로 최소화: 명소 선택 해제 후 국가/도시 선택 메뉴 노출
@@ -1676,8 +1722,7 @@ export default function Home() {
               onClose={() => setShowPremiumOnboarding(false)}
               onStartPremium={() => {
                 setShowPremiumOnboarding(false);
-                // 프리미엄 투어 시작: StartupDialog를 다시 엽니다.
-                setShowStartupDialog(true);
+                setShowCountrySelector(true);
               }}
               selectedLanguage={selectedLanguage}
               recommendedCount={premiumOnboardingCount}
@@ -1721,31 +1766,45 @@ export default function Home() {
           )
         }
 
-        {/* [어벤져스 팀 | 🎖️] PWA 온보딩이 완료된 후에만 StartupDialog를 마운트하여 ARIA 충돌 및 레이어 간섭을 방지합니다. */}
-        {
-          isWelcomeHandled && showStartupDialog && (
-            <StartupDialog
-              isOpen={showStartupDialog}
-              onClose={() => {
-                setShowStartupDialog(false);
-                setShowCountrySelector(true); // 랜딩 후 국가 선택으로 이동
-              }}
-              onSelectGPS={() => setGpsEnabled(true)}
-              onRestoreTour={(data) => {
-                handleCityChange(data.cityId);
-                setShowStartupDialog(false);
-              }}
-              savedTourData={null}
-              selectedLanguage={selectedLanguage}
-              onLanguageChange={setSelectedLanguage}
-              isGpsAvailable={gpsEnabled}
-              isGpsLoading={isLoading}
-              cities={cities}
-              selectedCityId={selectedCityId}
-              onCityChange={handleCityChange}
-            />
-          )
-        }
+        {/* [어벤져스 팀 | 🎖️] PWA 온보딩이 완료되었습니다. */}
+
+        {/* [Floating Landmark List] 도시 선택 시 플로팅 카드로 랜드마크 목록 표시 */}
+        {showFloatingLandmarkList && (
+          <LandmarkList
+            landmarks={landmarks}
+            userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
+            onLandmarkRoute={handleLandmarkRoute}
+            spokenLandmarks={spokenLandmarks}
+            selectedLanguage={selectedLanguage}
+            onLandmarkSelect={(landmark) => {
+              setSelectedLandmark(landmark);
+              setShowFloatingLandmarkList(false);
+              transitionTo('detail');
+            }}
+            onClose={() => {
+              setShowFloatingLandmarkList(false);
+              setShowBackgroundReturnPin(false); // 일반 닫기 시 배경 복귀 핀도 숨김
+              // 일반 닫기 시에는 핀 표시하지 않음 (외부 앱 복귀 시에만 표시)
+              transitionTo('map');
+            }}
+          />
+        )}
+
+        {showBackgroundReturnPin && (
+          <button
+            className="fixed bottom-24 right-4 z-[1600] flex items-center gap-2 rounded-full bg-slate-800/90 text-white px-3 py-2 shadow-2xl hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-orange-400 animate-pulse"
+            onClick={() => {
+              setShowBackgroundReturnPin(false);
+              setShowFloatingLandmarkList(true);
+              setIsCardMinimized(false);
+              transitionTo('list');
+            }}
+            title={selectedLanguage === 'ko' ? '외부 앱에서 복귀 - GPS 가이드로 돌아가기' : 'Returned from external app - Return to GPS Guide'}
+          >
+            <span className="text-xs font-bold">{selectedLanguage === 'ko' ? '가이드 복귀' : 'Back to Guide'}</span>
+            <div className="w-2 h-2 rounded-full bg-green-400 animate-ping"></div>
+          </button>
+        )}
 
         {/* [2026-03-23 | 통합 완료] 이제 모든 선택(TTS/Port/City)은 상단의 AnimatePresence 섹션에서 하나로 처리됩니다. */}
       </div >

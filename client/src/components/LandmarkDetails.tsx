@@ -101,16 +101,6 @@ export function LandmarkDetails({
               </div>
             )}
 
-            <div className="pt-4 border-t">
-              <Button 
-                onClick={handleNavigate} 
-                className="w-full gap-2"
-                data-testid="button-navigate-details"
-              >
-                <Navigation className="w-4 h-4" />
-                Get Directions
-              </Button>
-            </div>
           </div>
         </DialogContent>
       )}

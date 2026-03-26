@@ -23,10 +23,13 @@ export const LANDING_DATA: Record<string, any> = {
         'en': { heroImage: '/images/cities/barcelona.jpg' }
     },
     'penang': {
-        'en': { heroImage: '/images/countries/malaysia_luxury.png' }
+        'en': { heroImage: '/images/cities/penang.jpg' }
     },
     'singapore': {
         'en': { heroImage: '/images/cities/singapore.jpg' }
+    },
+    'budapest': {
+        'en': { heroImage: '/images/cities/budapest.jpg' }
     },
     'cebu': {
         'en': { heroImage: '/images/cities/cebu.jpg' }

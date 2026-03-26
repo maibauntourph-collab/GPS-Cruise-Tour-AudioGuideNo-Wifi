@@ -4,9 +4,9 @@ import { t } from '@/lib/translations';
 /**
  * PWA 환경에서 앱이 백그라운드로 전환될 때 복귀할 수 있도록 돕는 Hook입니다.
  * 1. Web Notification API를 사용하여 "되돌아가기" 알림을 표시합니다.
- * 2. (데스크톱 한정) Document Picture-in-Picture API를 통해 플로팅 아이콘을 띄우는 기능도 지원 가능합니다.
+ * 2. 앱 복귀 시 "가이드 복귀" 플로팅 버튼을 자동으로 표시합니다.
  */
-export function useBackgroundReturn(selectedLanguage: string = 'en') {
+export function useBackgroundReturn(selectedLanguage: string = 'en', onShowReturnPin?: () => void) {
     const [permission, setPermission] = useState<NotificationPermission>('default');
 
     useEffect(() => {
@@ -56,7 +56,7 @@ export function useBackgroundReturn(selectedLanguage: string = 'en') {
                     console.error('Notification show failed:', e);
                 }
             } else if (!document.hidden) {
-                // 앱으로 돌아오면 알림 닫기
+                // 앱으로 돌아오면 알림 닫기 + 가이드 복귀 버튼 표시
                 if (activeNotification) activeNotification.close();
                 if ('serviceWorker' in navigator) {
                     try {
@@ -66,6 +66,10 @@ export function useBackgroundReturn(selectedLanguage: string = 'en') {
                     } catch (e) {
                         console.error('Failed to clear notifications:', e);
                     }
+                }
+                // 외부 앱에서 복귀 시 가이드 복귀 버튼 표시
+                if (onShowReturnPin) {
+                    onShowReturnPin();
                 }
             }
         };
