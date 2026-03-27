@@ -1,4 +1,4 @@
-﻿# 📘 Kenneth Cruise Guide 프로젝트 히스토리 북 (History-Workflow-Book)
+# 📘 Kenneth Cruise Guide 프로젝트 히스토리 북 (History-Workflow-Book)
 
 이 문서는 프로젝트의 모든 대화 흐름, 작업 주문, 실행 계획, 그리고 최종 결과를 학생들과 공유하기 위한 기록입니다.
 
@@ -364,3 +364,29 @@
 - **Task**: 파일 분석을 통해 Zod(유효성)와 Drizzle(DB 구조)의 결합체라는 것을 파악 및 교육용 응답 보고서 생성
 - **Result**: 스키마의 본질, 주요 구성(Zod, Drizzle 등), DB와 프론트엔드의 다리 역할에 대한 친절한 설명 완료
 - **Next**: 사용자 추가 질의 대기 및 기능 고도화
+
+---
+
+## 🧪 2026-03-27 20:15 BMAD & LangGraph 설치 및 영업 전략 수립
+
+- **Order**: BMAD 와 LANGRAPH 설치 및 상조회원 전환 5단계 영업 전략 보고서 작성 요청
+- **Plan**: 
+  1. LangGraph JS(@langchain/langgraph) 및 핵심 의존성 설치.
+  2. BMAD 라이브러리(`bmad-method`) 설치 및 환경 구성.
+  3. 상조회원 -> 여행/부킹 전환 5단계 수당 및 수익 시뮬레이션 보고서 작성.
+  4. 영업사원의 가이드/인솔자 전환 모델 포함.
+- **Task**: 
+  - `npm install`을 이용한 엔진 설치 및 6.2.2 버전 확인.
+  - `2026-03-27_GPS_TOURS_Sales_Strategy_Profit_Plan.md` 파일 생성.
+- **Result**: (성공) 패키지 설치 완료 및 현실적 수치를 반영한 5단계 영업 전략 보고서 제출 완료.
+- **Next**: 워크플로우 자동화를 위한 LangGraph 에이전트 설계 및 BMAD 에이전트 커스텀 작업.
+
+---
+
+## 🧪 2026-03-27 20:15 BMAD & LangGraph 설치 및 영업 전략 수립
+
+- **Order**: BMAD 와 LangGraph 설치 및 상조회원 전환 5단계 영업 전략 보고서 작성 요청
+- **Plan**: LangGraph JS 설치 -> BMAD v6.2.2 설치 -> 5단계 수익 시뮬레이션 보고서 작성 (영업사원 가이드/인솔자 전환 모델 포함)
+- **Task**: npm install @langchain/langgraph @langchain/core / npm install -D bmad-method / 보고서 파일 생성
+- **Result**: (성공) 패키지 설치 완료 및 현실적 수치 기반 5단계 영업 전략 보고서 제출 완료 [2026-03-27_GPS_TOURS_Sales_Strategy_Profit_Plan.md]
+- **Next**: LangGraph 에이전트 설계 및 BMAD 커스텀 에이전트 작성
