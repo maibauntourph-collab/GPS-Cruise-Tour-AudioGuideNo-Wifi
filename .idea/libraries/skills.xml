@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="skills">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/.agent/skills.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

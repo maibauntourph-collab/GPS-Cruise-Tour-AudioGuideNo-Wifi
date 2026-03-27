@@ -348,3 +348,19 @@
 - **Task**: frontend/index.html 내 태그 삽입 (client/index.html은 포함 완료 확인)
 - **Result**: GA4 라이브 트래픽 및 행동 추적 로깅 활성화
 - **Next**: 로컬 커밋 및 지속적인 최적화 관리
+
+## 🎧 2026-03-27 13:05 오디오 재생 메커니즘 분석
+
+- **Order**: WHEN I PLAY START AUDIO ,WHAT IS PLAYING?
+- **Plan**: 오디오 재생 버튼이 클릭될 때 선택되는 텍스트, 언어 번역 처리, 그리고 TTS/OpenAI 플레이어의 엔진 동작 원리를 분석하여 보고
+- **Task**: `LandmarkDetailDialog.tsx` 와 `audioService.ts` 를 교차 검증 및 로직 분석
+- **Result**: 다국어 텍스트 감지 로직 및 폭포수(Waterfall) 형태의 번역본 선택 우선순위(Detailed -> Narration -> Desc) 분석 완료
+- **Next**: 프로젝트 내 데이터 모델의 개념 설명(Schema) 요청 대응
+
+## 🗄️ 2026-03-27 13:06 Schema (스키마) 데이터 구조 분석
+
+- **Order**: WHAT IS SCHEMA?
+- **Plan**: 데이터베이스의 뼈대가 되는 `shared/schema.ts` 구조의 목적과 역할을 학생/초보자 눈높이에서 설명
+- **Task**: 파일 분석을 통해 Zod(유효성)와 Drizzle(DB 구조)의 결합체라는 것을 파악 및 교육용 응답 보고서 생성
+- **Result**: 스키마의 본질, 주요 구성(Zod, Drizzle 등), DB와 프론트엔드의 다리 역할에 대한 친절한 설명 완료
+- **Next**: 사용자 추가 질의 대기 및 기능 고도화

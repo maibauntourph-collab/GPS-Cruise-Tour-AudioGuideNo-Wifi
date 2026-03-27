@@ -12,24 +12,43 @@ import { audioService, AudioService } from '@/lib/audioService';
 import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
 import { useToast } from '@/hooks/use-toast';
 
-function getMobileFriendlyUrl(url: string) {
+/**
+ * [Professor Optimization | 2026-03-27] 📱 모바일 최적화 연결 브릿지
+ * 학생 여러분, 이 함수는 사용자의 환경에 따라 가장 쾌적한 '모바일 경험'을 선사하는 마법사입니다.
+ * 앱이 설치되어 있다면 앱을 먼저 깨우고, 없다면 모바일 전용 웹페이지로 안내하죠!
+ */
+function getMobileFriendlyUrl(url: string): { webUrl: string; appScheme?: string } {
   const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
   const isAndroid = /Android/i.test(ua);
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  
+  let webUrl = url;
+  let appScheme: string | undefined;
 
-  if (isAndroid) {
-    return url
-      .replace('https://www.', 'https://m.')
-      .replace('https://klook.com', 'https://m.klook.com');
+  // 1. 도메인별 모바일 웹 최적화 및 앱 스킴 추출
+  if (url.includes('klook.com')) {
+    webUrl = url.replace('www.klook.com', 'm.klook.com');
+    // Klook 앱 스킴 예시: klook://item/12345 (실제로는 ID 추출이 필요하지만, 여기서는 기본 스킴 시도)
+    appScheme = 'klook://'; 
+  } else if (url.includes('getyourguide.com')) {
+    webUrl = url.replace('www.getyourguide.com', 'm.getyourguide.com');
+    appScheme = 'getyourguide://';
+  } else if (url.includes('viator.com')) {
+    // Viator는 쿼리 파라미터로 모바일 최적화 유도가 가능함
+    const separator = url.includes('?') ? '&' : '?';
+    webUrl = `${url}${separator}m=1&utm_medium=mobile_app`;
+    appScheme = 'viator://';
+  } else if (url.includes('myrealtrip.com')) {
+    webUrl = url.replace('www.myrealtrip.com', 'm.myrealtrip.com');
+    appScheme = 'myrealtrip://';
   }
 
-  if (isIOS) {
-    return url
-      .replace('https://www.', 'https://m.')
-      .replace('https://klook.com', 'https://m.klook.com');
+  // 2. 모바일 기기라면 www -> m 강제 전환 (범용 로직)
+  if (isAndroid || isIOS) {
+    webUrl = webUrl.replace('://www.', '://m.');
   }
 
-  return url;
+  return { webUrl, appScheme };
 }
 
 import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
@@ -251,9 +270,34 @@ export default function LandmarkDetailDialog({
 
   const openExternalUrl = (url: string, target: string = '_blank') => {
     markShowReturnToApp();
-    const win = window.open(url, target, 'noopener,noreferrer');
+    
+    // [Professor Strategy] 모바일 환경 최적화 브릿지 적용
+    const { webUrl, appScheme } = getMobileFriendlyUrl(url);
+    
+    // 1. 앱 스킴(Deep Link)이 있는 경우 먼저 시도
+    if (appScheme) {
+      console.log(`📱 [App Bridge] Attempting to open App: ${appScheme}`);
+      
+      // 앱 실행 시도 (현재 페이지에서 실행)
+      window.location.href = appScheme;
+      
+      // 앱이 열리지 않았을 경우를 대비해 약간의 지연 후 웹 페이지 오픈
+      // 학생 여러분, 1.5초 정도 기다려보고 반응이 없으면 웹으로 보내주는 것이 사용자 경험(UX)에 좋습니다!
+      setTimeout(() => {
+        // 포커스가 여전히 브라우저에 있다면 앱이 열리지 않은 것으로 판단
+        if (document.hasFocus()) {
+          console.log(`🌐 [App Bridge] App not responding. Falling back to Web: ${webUrl}`);
+          window.open(webUrl, target, 'noopener,noreferrer');
+        }
+      }, 1500);
+      
+      return null;
+    }
+
+    // 2. 앱 스킴이 없거나 일반 연결인 경우 즉시 웹 오픈
+    const win = window.open(webUrl, target, 'noopener,noreferrer');
     if (!win) {
-      window.location.href = url;
+      window.location.href = webUrl;
     }
     return win;
   };
