@@ -1,8 +1,7 @@
-
 import { Hono } from "hono";
 import { type Server } from "node:http";
 import { storage } from "./storage";
-import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats, insertLikeSchema, insertFollowSchema } from "@shared/schema";
+import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats, insertLikeSchema, insertFollowSchema, commissions } from "@shared/schema";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { requireAuth, requireRole } from "./auth";
@@ -48,6 +47,64 @@ export function registerRoutes(app: Hono<any>) {
   app.get("/api/health", async (c) => {
     const health = await dbCheckService.checkConnection();
     return c.json(health, health.status === 'healthy' ? 200 : 503);
+  });
+
+  // [Partner Center | 2026-03-28] 파트너 실적 조회 API (Kodari & Query Master)
+  app.get("/api/partner/stats", requireAuth, async (c) => {
+    const session = c.get('session');
+    const userId = session.get("userId");
+
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+
+      // @ts-ignore
+      const user = await storage.getUserById(userId);
+      if (!user) return c.json({ error: "User not found" }, 404);
+
+      // 🚨 [Query Master] 실시간 수당 합계 계산 (Confirmed 상태만 현금화 가능 잔액)
+      const sumResult = await db.select({
+        total: sql<number>`SUM(${commissions.amount})`
+      }).from(commissions).where(and(
+        eq(commissions.userId, userId),
+        eq(commissions.status, 'confirmed')
+      ));
+
+      const totalEarnedResult = await db.select({
+        total: sql<number>`SUM(${commissions.amount})`
+      }).from(commissions).where(eq(commissions.userId, userId));
+
+      // 🚨 [Kodari Mart] 내 하위 직접 추천 팀원 수 조회
+      const team = await db.select().from(users).where(eq(users.inviterId, userId));
+
+      return c.json({
+        level: user.agentLevel || 'L0',
+        referralCode: user.referralCode,
+        balance: Number(sumResult[0]?.total || 0),
+        totalEarned: Number(totalEarnedResult[0]?.total || 0),
+        teamSize: team.length,
+        nextLevelProgress: team.length >= 3 ? 100 : Math.round((team.length / 3) * 100), // 가상의 승격 로직
+      });
+    } catch (error) {
+      console.error("[Partner Stats API Error]", error);
+      return c.json({ error: "Failed to fetch partner stats" }, 500);
+    }
+  });
+
+  // [적요] 최근 수당 발생 이력 조회
+  app.get("/api/partner/commissions", requireAuth, async (c) => {
+    const session = c.get('session');
+    const userId = session.get("userId");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+      const history = await db.select()
+        .from(commissions)
+        .where(eq(commissions.userId, userId))
+        .orderBy(desc(commissions.createdAt))
+        .limit(10);
+      return c.json(history);
+    } catch (error) {
+      return c.json({ error: "Failed to fetch commission history" }, 500);
+    }
   });
 
   // [NEW] Site Settings Endpoints

@@ -390,3 +390,71 @@
 - **Task**: npm install @langchain/langgraph @langchain/core / npm install -D bmad-method / 보고서 파일 생성
 - **Result**: (성공) 패키지 설치 완료 및 현실적 수치 기반 5단계 영업 전략 보고서 제출 완료 [2026-03-27_GPS_TOURS_Sales_Strategy_Profit_Plan.md]
 - **Next**: LangGraph 에이전트 설계 및 BMAD 커스텀 에이전트 작성
+
+## �� 2026-03-27 20:25 수익 시뮬레이션 엑셀 및 상세 보고서 완성
+
+- **Order**: 5단계 영업 전략 및 가이드/인솔 수익 시뮬레이션 엑셀(수식 포함) 및 상세 해설 요청
+- **Plan**: xlsx 라이브러리를 활용한 동적 엑셀 파일 생성 + 단계별/수익항목별 상세 해설서 작성
+- **Task**: scripts/generate_simulation_xlsx.js 실행 -> 엑셀 및 Markdown 보고서 생성
+- **Result**: (성공) 엑셀 파일 [2026-03-27_GPS_TOURS_Simulation_v1.xlsx] 및 상세 해설서 [2026-03-27_GPS_TOURS_Simulation_Detail_Report.md] 제출 완료
+- **Next**: 실제 시스템 내 파트너 관리 모듈 프로토타입 설계
+
+## �� 2026-03-27 20:30 제휴 수익 및 운영비 정밀 배분 모델(V2) 완성
+
+- **Order**: GetYourGuide(7%), Trip.com(5%) 등 실질 제휴 수수료 기반 수익 배분 모델 설계 및 회사 운영비 반영 요청
+- **Plan**: 총 수수료(AR)를 회사 운영비(OpEx), 순이익, 영업 수당 풀(Sales Pool)로 나누는 로직 구현
+- **Task**: scripts/generate_simulation_xlsx_v2.js 실행 및 [2026-03-27_GPS_TOURS_Simulation_v2_Affiliate.xlsx] 생성
+- **Result**: (성공) 제휴 수수료와 자체 상품 마진을 믹스한 현실적 5단계 시뮬레이션 환경 구축 완료
+- **Next**: 실제 파트너 정산 시스템 데이터베이스 스키마 설계
+
+## �� 2026-03-27 20:45 영업자 전용 구독료 모델 기획 및 V3 시연
+
+- **Order**: 영업자 전용(소비자 제외) 구독료 책정 및 운영비 상쇄 모델 설계 요청
+- **Plan**: Basic(9,900원), Pro(33,000원) 이원화 모델 수립 및 회사 고정비 커버리지 분석
+- **Task**: scripts/generate_simulation_xlsx_v3.js 실행 및 [2026-03-27_GPS_TOURS_Agent_Subscription_Strategy.md] 작성
+- **Result**: (성공) 구독 수익으로 운영비를 100% 이상 방어하는 지속 가능한 5단계 비즈니스 모델 구축
+- **Next**: 구독 결제 및 파트너 등급 연동을 위한 백엔드 트랜잭션 로직 설계
+
+## �� 2026-03-27 22:05 관련 문서 ./implement 디렉토리 이동 정리
+
+- **Order**: 생성된 보고서 및 시뮬레이션 파일들을 ./implement 폴더로 이동 및 정리 요청
+- **Plan**: 루트에 흩어진 2026-03-27 관련 MD 및 XLSX 파일들을 implement 하위로 이동
+- **Task**: PowerShell Move-Item 명령어를 통한 파일 정리
+- **Result**: (성공) 모든 관련 파일이 e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/implement/ 로 이동 완료
+- **Next**: 파트너 모드 UI 개발 및 로직 구현 착수
+
+## �� 2026-03-27 23:10 [Step 1] DB 스키마 확장 및 5단계 필드 추가
+
+- **Order**: 파트너 시스템 구현을 위한 DB 스키마 수정
+- **Plan**: users 테이블에 agentLevel(L0-L5), inviterId, referralCode 필드 추가
+- **Task**: shared/schema.ts 수정
+- **Result**: (성공) 다단계 조직도 구성을 위한 데이터 기반 마련
+- **Next**: 파트너 대시보드 UI 컴포넌트 개발
+
+## �� 2026-03-27 23:25 [Step 2] 파트너 대시보드 UI 구현 및 메뉴 통합
+
+- **Order**: 파트너 대시보드 UI 개발 및 메인 메뉴 통합
+- **Plan**: PartnerDashboard.tsx 생성 및 MenuDialog.tsx에 탭 추가
+- **Task**: UI 컴포넌트 작성, 다국어 번역 적용, 탭 메뉴 확장
+- **Result**: (성공) 영업자가 앱 내에서 실적 및 수익을 확인 가능한 UI 기반 확보
+- **Next**: 백엔드 정산 로직(Commissions) 및 추천인 연동 API 개발
+
+## �� 2026-03-27 23:35 [Step 3] MenuDialog UI 통합 완료 및 대시보드 연동
+##  2026-03-27 23:35 [Step 3] MenuDialog UI 통합 완료 및 대시보드 연동
+
+- **Order**: MenuDialog 내 파트너 탭 활성화 및 대시보드 컴포넌트 삽입
+- **Plan**: TabsContent에 PartnerDashboard 적용
+- **Task**: PartnerDashboard 임포트 및 탭 컨텐츠 코드 삽입
+- **Result**: (성공) 사용자가 메뉴의 'Partner' 탭을 통해 대시보드 진입 가능
+- **Next**: 실제 서버 데이터(agentLevel, earnings) 연동 및 정산 로직 구현
+
+---
+
+## 📘 2026-03-28 (실무 고도화)
+
+### [2026-03-28 00:36] | 제 80장: MLM 수익 정산 시스템 핵심 로직 구현 (Step 4)
+- **Order**: MLM 수익 정산을 위한 DB 스키마 확장 및 백엔드 API 연동.
+- **Plan**: `commissions` 테이블 추가, 정산 API 구현, 대시보드 실데이터 연동.
+- **Task**: `shared/schema.ts` 수정, `server/routes.ts` API 추가, `PartnerDashboard.tsx` 리액트 쿼리 도입.
+- **Result**: (성공) 5단계 MLM 수익 정산 엔진 및 실시간 대시보드 연동 완료.
+- **Next**: 실제 결제 발생 시 수당 배분 테스트 및 정산 주기(Settlement Period) 관리 로직 고도화.

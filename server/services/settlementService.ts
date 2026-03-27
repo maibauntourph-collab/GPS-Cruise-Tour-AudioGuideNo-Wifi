@@ -5,8 +5,8 @@
 // 4. 낙전 수익: 유효기간이 지난 크레딧을 처리하는 배치 프로세스의 기반을 마련합니다.
 
 import { db } from "../db";
-import { transactions, creatorEarnings, users } from "../../shared/schema";
-import { eq, sql } from "drizzle-orm";
+import { transactions, creatorEarnings, users, commissions } from "../../shared/schema";
+import { eq, sql, desc, and } from "drizzle-orm";
 
 /**
  * [회계 관리자 노트: 파트너 정산 서비스]
@@ -52,6 +52,71 @@ export class SettlementService {
     }
 
     /**
+     * [도다리 부장 2026-03-28] 💸 5단계 MLM 수당 자동 배분 로직
+     * 결제 완료 시 해당 사용자의 추천인 체인(Up-line)을 따라 5단계까지 수당을 지급합니다.
+     */
+    static async processMLMCommissions(transactionId: string) {
+        console.log(`🚀 [MLM Engine] 5단계 수당 배분을 시작합니다: ${transactionId}`);
+
+        const tx = await db.query.transactions.findFirst({
+            where: eq(transactions.id, transactionId)
+        });
+
+        if (!tx || tx.status !== 'completed') {
+            console.error("❌ 정산 대상 트랜잭션이 없거나 완료되지 않았습니다.");
+            return;
+        }
+
+        // 결제한 유저 정보 가져오기 (추천인 확인용)
+        const payer = await db.query.users.findFirst({
+            where: eq(users.id, tx.userId)
+        });
+
+        if (!payer || !payer.inviterId) {
+            console.log("ℹ️ [MLM Engine] 추천인이 없는 사용자입니다. 회사 수익으로 귀속됩니다.");
+            return;
+        }
+
+        // [적요] 수당 배분 비율 (제휴 수수료 수익의 65%가 Sales Pool이며, 이를 5단계로 나눈다고 가정)
+        // V3 시뮬레이션 기반: 7% 수수료 중 65%가 세일즈 풀 (약 4.5% of Sales)
+        // 여기서는 결제액(amount) 대비 가중치를 두어 분배합니다.
+        const rates = [0.10, 0.05, 0.03, 0.02, 0.01]; // L1~L5 (결제액 대비 % 예시)
+
+        let currentInviterId: string | null | undefined = payer.inviterId;
+        const results = [];
+
+        for (let i = 0; i < 5; i++) {
+            if (!currentInviterId) break;
+
+            const inviter = await db.query.users.findFirst({
+                where: eq(users.id, currentInviterId)
+            });
+
+            if (!inviter) break;
+
+            const commissionAmount = tx.amount * rates[i];
+
+            // [적요] 수당 기록 추가 (Drizzle Insert)
+            // @ts-ignore
+            await db.insert(commissions).values({
+                transactionId: tx.id,
+                userId: inviter.id,
+                level: i + 1,
+                amount: commissionAmount,
+                status: 'confirmed' // 실시간 확정 정책
+            });
+
+            console.log(`✅ [MLM L${i + 1}] ${inviter.displayName}님에게 ${commissionAmount.toLocaleString()}원 적립 완료`);
+            results.push({ id: inviter.id, amount: commissionAmount });
+
+            // 다음 상위 추천인으로 이동 (5단계 체인)
+            currentInviterId = inviter.inviterId;
+        }
+
+        return results;
+    }
+
+    /**
      * [적요] 결제 처리 래퍼 메서드
      * Stripe Webhook에서 결제 완료 시 호출됩니다.
      * 사용자ID, 랜드마크ID, 결제금액, 메타데이터를 받아 파트너 수익 분배를 실행합니다.
@@ -90,5 +155,6 @@ export class SettlementService {
 export const settlementService = {
     processPayment: SettlementService.processPayment.bind(SettlementService),
     processPartnerReward: SettlementService.processPartnerReward.bind(SettlementService),
+    processMLMCommissions: SettlementService.processMLMCommissions.bind(SettlementService),
     expireCredits: SettlementService.expireCredits.bind(SettlementService),
 };

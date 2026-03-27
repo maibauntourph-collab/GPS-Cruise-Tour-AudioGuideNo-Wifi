@@ -403,6 +403,10 @@ export const users = pgTable("users", {
   avatar: varchar("avatar"), // Profile picture URL
   locale: varchar("locale", { length: 10 }).default("en"), // User's preferred language
   role: varchar("role", { length: 20 }).default("user"), // 'user', 'guide', 'tour_leader', 'admin'
+  // [Kodari | 2026-03-27] 5단계 영업 관리 필드 추가
+  agentLevel: varchar("agent_level", { length: 10 }).default("L0"), // 'L0'~'L5'
+  inviterId: varchar("inviter_id"), // The person who invited this user (upline)
+  referralCode: varchar("referral_code", { length: 50 }).unique(), // Unique code for inviting others
   lastLoginAt: timestamp("last_login_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
@@ -595,6 +599,28 @@ export const marketingContents = pgTable("marketing_contents", {
 });
 
 /**
+ * [도다리 부장 2026-03-28] 💸 5단계 MLM(다단계) 수당 정산 테이블
+ *
+ * 학생 여러분, 이 테이블이 바로 우리 플랫폼의 '수익 배분기'입니다.
+ * 한 명의 유저가 결제를 하면, 그를 추천한 상위 5단계(L1~L5)의 어드바이저들에게
+ * 각각 약속된 비율(AR 기준)로 수당이 이력이 남게 됩니다.
+ */
+export const commissions = pgTable("commissions", {
+  id: serial("id").primaryKey(),
+  // 어떤 결제 건으로 인해 발생한 수당인지 연결합니다.
+  transactionId: varchar("transaction_id").references(() => transactions.id, { onDelete: 'cascade' }),
+  // 이 수당을 받을 어드바이저(영업자)의 ID입니다.
+  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  // 몇 단계 위 추천인으로서 받은 수당인지 표시합니다. (1 = 직접 추천, 2 = 간접 등)
+  level: integer("level").notNull(),
+  // 실제 지급될 금액입니다.
+  amount: doublePrecision("amount").notNull(),
+  // 수당의 진행 상태입니다. ('pending': 대기, 'confirmed': 확정, 'payout_requested': 출금신청)
+  status: varchar("status", { length: 20 }).notNull().default("pending"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+/**
  * [자동화 닥터의 기록부: 시스템 업데이트 통계]
  * 교수님, 매일 시스템이 얼마나 성장하고 있는지 기록하는 테이블입니다.
  * 로그인 시 유저에게 "오늘 X개의 지역이 추가되었습니다"와 같은 희망적인 소식을 전해줄 수 있습니다.
@@ -695,8 +721,11 @@ export const insertSettlementSchema = createInsertSchema(settlements).omit({ id:
 export const insertMarketingContentSchema = createInsertSchema(marketingContents).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertLandmarkGuideSchema = createInsertSchema(landmarkGuides).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertUpdateStatsSchema = createInsertSchema(updateStats).omit({ id: true, createdAt: true });
+export const insertCommissionSchema = createInsertSchema(commissions).omit({ id: true, createdAt: true });
 
 export type DbUpdateStats = typeof updateStats.$inferSelect;
+export type Commission = typeof commissions.$inferSelect;
+export type InsertCommission = z.infer<typeof insertCommissionSchema>;
 
 export type InsertLandmarkGuide = z.infer<typeof insertLandmarkGuideSchema>;
 
@@ -743,6 +772,17 @@ export const landmarkGuidesRelations = relations(landmarkGuides, ({ one }) => ({
   user: one(users, {
     fields: [landmarkGuides.userId],
     references: [users.id],
+  }),
+}));
+
+export const commissionsRelations = relations(commissions, ({ one }) => ({
+  user: one(users, {
+    fields: [commissions.userId],
+    references: [users.id],
+  }),
+  transaction: one(transactions, {
+    fields: [commissions.transactionId],
+    references: [transactions.id],
   }),
 }));
 

@@ -114,7 +114,16 @@ export const uiTranslations: Record<string, Record<string, string>> = {
     preparingAssets: 'Preparing assets for offline use...',
     allTranslationsCached: 'All language translations have been saved locally.',
     pwaReadyToInstall: 'App is ready to be installed on your device.',
-    returnToApp: 'Return to App'
+    returnToApp: 'Return to App',
+    // [Kodari | 2026-03-27] Partner Center Translations
+    partnerCenter: 'Partner Center',
+    advisor: 'Advisor',
+    balance: 'Balance',
+    requestPayout: 'Request Payout',
+    totalEarned: 'Total Earned',
+    myTeam: 'My Team',
+    viewTree: 'View Tree',
+    referralCode: 'Referral Code'
   },
   es: {
     landmarks: 'Monumentos',
@@ -574,7 +583,16 @@ export const uiTranslations: Record<string, Record<string, string>> = {
     preparingAssets: '오프라인 사용을 위한 에셋을 준비 중입니다...',
     allTranslationsCached: '모든 언어 번역 데이터가 로컬에 저장되었습니다.',
     pwaReadyToInstall: 'App을 기기에 설치할 준비가 되었습니다.',
-    returnToApp: '되돌아가기'
+    returnToApp: '되돌아가기',
+    // [Kodari | 2026-03-27] 파트너 센터 번역 추가
+    partnerCenter: '파트너 센터',
+    advisor: '어드바이저',
+    balance: '출금 가능 잔액',
+    requestPayout: '정산 신청하기',
+    totalEarned: '누적 수익',
+    myTeam: '내 팀 관리',
+    viewTree: '조직도 보기',
+    referralCode: '내 추천 코드'
   },
   ar: {
     landmarks: 'معالم',

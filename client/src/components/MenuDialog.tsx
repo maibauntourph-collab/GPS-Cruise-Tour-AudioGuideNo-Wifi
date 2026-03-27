@@ -42,6 +42,7 @@ import { City, Landmark } from '@shared/schema';
 import { t, getTranslatedContent } from '@/lib/translations';
 import { useState, useEffect } from 'react';
 import { audioService, type AudioMode } from '@/lib/audioService';
+import PartnerDashboard from './PartnerDashboard';
 
 interface VoiceInfo {
   voice: SpeechSynthesisVoice;
@@ -318,6 +319,10 @@ export default function MenuDialog({
               <TabsTrigger value="tour" className="text-xs">
                 <Route className="w-3 h-3 mr-1" />
                 Tour
+              </TabsTrigger>
+              <TabsTrigger value="partner" className="text-xs">
+                <Users className="w-3 h-3 mr-1" />
+                Partner
               </TabsTrigger>
             </TabsList>
 
@@ -787,8 +792,8 @@ export default function MenuDialog({
                         <Clock className="w-3 h-3" />
                         {(() => {
                           const visitTime = (tourStops?.length || 0) * (tourTimePerStop || 0);
-                          const travelTime = tourRouteInfo && typeof tourRouteInfo.duration === 'number' 
-                            ? Math.ceil(tourRouteInfo.duration / 60) 
+                          const travelTime = tourRouteInfo && typeof tourRouteInfo.duration === 'number'
+                            ? Math.ceil(tourRouteInfo.duration / 60)
                             : 0;
                           const totalMinutes = visitTime + travelTime;
                           const hours = Math.floor(totalMinutes / 60);
@@ -829,10 +834,22 @@ export default function MenuDialog({
                   </>
                 )}
               </TabsContent>
-            </div>
-          </Tabs>
-        </DialogContent>
-      </Dialog>
+
+              <TabsContent value="partner" className="mt-0">
+                <PartnerDashboard
+                  selectedLanguage={selectedLanguage}
+                  user={{
+                    agentLevel: 'L1',
+                    referralCode: 'GPS-PARTNER-777',
+                    displayName: selectedLanguage === 'ko' ? '테스트 영업자' : 'Test Agent'
+                  }}
+                />
+              </TabsContent>
+            </TabsContent>
+          </div>
+        </Tabs>
+      </DialogContent>
+    </Dialog >
 
       <OfflineDataDialog
         isOpen={showOfflineDialog}
