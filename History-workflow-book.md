@@ -321,3 +321,21 @@
 - **Task**: UnifiedFloatingCard.tsx의 모드 토글 마크업 삭제 및 Start Route 클릭 이벤트에 사용자 선택 팝업을 뜨게끔 재설계
 - **Result**: 공간 활용도 100% 향상 및 직관적인 경로 추적 UX 설계 완료
 - **Next**: 로컬 테스트 및 커밋
+
+
+## 🚀 2026-03-27 10:52 Start Route 팝업 UI 최적화본 배포
+
+- **Order**: deploy
+- **Plan**: 이전 단계에서 최적화한 모드 선택 다이얼로그(GPS vs SIM) 기능을 운영환경 반영
+- **Task**: npm run deploy 명령어 수행 (Vite 빌드 통과분 Cloudflare 배포)
+- **Result**: 빌드 및 배포 파이프라인 가동 완료 후 결과 응답 대기
+- **Next**: 빌드 성공 브리핑 및 라이브 결과 확인
+
+
+## 👈 2026-03-27 10:59 플로팅 카드 헤더 터치 시 최소화 연동
+
+- **Order**: when touch or tag ,dowm scroll
+- **Plan**: 상단 바 전체 영역에 터치 이벤트를 부여하여 하단 최소화(Scroll Down) 동작 연동
+- **Task**: UnifiedFloatingCard.tsx 헤더 영역에 onClick 삽입 후 onToggleMinimized 호출
+- **Result**: 작은 아이콘을 찾을 필요 없이 상단 바 터치만으로 쾌적한 화면 제어 가능
+- **Next**: 저장소 연동 및 배포 대기

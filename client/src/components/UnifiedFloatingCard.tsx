@@ -611,11 +611,15 @@ export function UnifiedFloatingCard({
       {/* [Avengers Team] GLOBAL CONTROL TOWER (Merged from Top Bar) */}
       {activeLayout !== 'classic' && (
         <div
-          className="p-2.5 bg-white/40 backdrop-blur-xl border-b border-white/20 flex items-center justify-between gap-2 overflow-hidden flex-shrink-0"
+          className="p-2.5 bg-white/40 backdrop-blur-xl border-b border-white/20 flex items-center justify-between gap-2 overflow-hidden flex-shrink-0 cursor-pointer"
           onMouseDown={(e) => {
             if (e.button !== 0) return;
             setIsDraggingCard(true);
             dragStartRef.current = { x: e.clientX, y: e.clientY };
+          }}
+          onClick={(e) => {
+            if ((e.target as HTMLElement).closest('button')) return;
+            onToggleMinimized?.();
           }}
         >
           <div className="flex items-center gap-1.5 flex-1 min-w-0">
