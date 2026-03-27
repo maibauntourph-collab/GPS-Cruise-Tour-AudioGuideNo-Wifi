@@ -458,3 +458,10 @@
 - **Task**: `shared/schema.ts` 수정, `server/routes.ts` API 추가, `PartnerDashboard.tsx` 리액트 쿼리 도입.
 - **Result**: (성공) 5단계 MLM 수익 정산 엔진 및 실시간 대시보드 연동 완료.
 - **Next**: 실제 결제 발생 시 수당 배분 테스트 및 정산 주기(Settlement Period) 관리 로직 고도화.
+
+### [2026-03-28 01:21] | 제 85장: 하부 조직 가시화 및 매력적인 수익 모델 시뮬레이션 (Step 5)
+- **Order**: 하부 조직 트리 구조 및 단계별 구체적인/매력적인 수익 모델 샘플 구현 요청.
+- **Plan**: L1~L5 단계별 성공 경로 리포트 생성, 하부 조직 실적 집계 API 및 대시보드 시각화 연동.
+- **Task**: `attractive_profit_model_v1.md` 작성, `routes.ts` 트리 조회 API 추가, `PartnerDashboard.tsx` 팝업 UI 구현.
+- **Result**: (진행 중)
+- **Next**: 실제 매출 시뮬레이션 데이터를 통한 대시보드 검증.

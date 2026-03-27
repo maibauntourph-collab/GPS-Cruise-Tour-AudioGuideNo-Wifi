@@ -7,7 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
     TrendingUp, Users, Wallet, QrCode, Award,
-    ArrowUpRight, Copy, Share2, Calculator, Info, History, Clock
+    ArrowUpRight, Copy, Share2, Calculator, Info, History, Clock,
+    Milestone, ChevronRight, Target
 } from 'lucide-react';
 import { t } from '@/lib/translations';
 import { useQuery } from '@tanstack/react-query';
@@ -32,6 +33,10 @@ export default function PartnerDashboard({ user, selectedLanguage }: PartnerDash
         queryKey: ['/api/partner/commissions'],
     });
 
+    const { data: partnerTree } = useQuery<any>({
+        queryKey: ['/api/partner/tree'],
+    });
+
     const stats = {
         level: partnerStats?.level || user?.agentLevel || 'L0',
         totalEarned: partnerStats?.totalEarned || 0,
@@ -40,6 +45,15 @@ export default function PartnerDashboard({ user, selectedLanguage }: PartnerDash
         referralCode: partnerStats?.referralCode || user?.referralCode || 'N/A',
         nextLevelProgress: partnerStats?.nextLevelProgress || 0,
     };
+
+    const roadmap = [
+        { rank: 'L1', target: '30만+', benefit: selectedLanguage === 'ko' ? '부업의 시작' : 'Side Hustle' },
+        { rank: 'L2', target: '100만+', benefit: selectedLanguage === 'ko' ? '팀 보너스' : 'Team Bonus' },
+        { rank: 'L3', target: '450만+', benefit: selectedLanguage === 'ko' ? '전업 매니저' : 'Full-time' },
+        { rank: 'L4', target: '1,500만+', benefit: selectedLanguage === 'ko' ? '경제적 자유' : 'Freedom' },
+        { rank: 'L5', target: '3,000만+', benefit: selectedLanguage === 'ko' ? '글로벌 파트너' : 'Global Partner' },
+    ];
+
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(`https://gps.tours/join?ref=${stats.referralCode}`);
@@ -81,6 +95,38 @@ export default function PartnerDashboard({ user, selectedLanguage }: PartnerDash
                     {stats.level} {selectedLanguage === 'ko' ? '어드바이저' : 'Advisor'}
                 </Badge>
             </div>
+
+            {/* Success Roadmap Carousel - [Marketer Song's Touch] */}
+            <div className="space-y-3">
+                <div className="flex items-center gap-2 px-1">
+                    <Milestone className="w-4 h-4 text-primary" />
+                    <h3 className="text-sm font-bold tracking-tight">
+                        {selectedLanguage === 'ko' ? '성공을 향한 로드맵' : 'Success Roadmap'}
+                    </h3>
+                </div>
+                <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-4 px-4 scroll-smooth">
+                    {roadmap.map((item) => (
+                        <div
+                            key={item.rank}
+                            className={`shrink-0 w-36 p-4 rounded-2xl border transition-all duration-300 ${stats.level === item.rank
+                                ? 'bg-primary border-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105'
+                                : 'bg-card border-border/50 hover:border-primary/30'
+                                }`}
+                        >
+                            <div className="flex flex-col gap-1">
+                                <span className={`text-[10px] uppercase font-bold tracking-wider ${stats.level === item.rank ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                                    {item.rank} {selectedLanguage === 'ko' ? '목표' : 'Goal'}
+                                </span>
+                                <span className="text-lg font-black tracking-tighter">₩{item.target}</span>
+                                <span className={`text-[10px] mt-2 font-medium ${stats.level === item.rank ? 'text-primary-foreground' : 'text-primary'}`}>
+                                    {item.benefit}
+                                </span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
 
             {/* Main Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
@@ -144,11 +190,27 @@ export default function PartnerDashboard({ user, selectedLanguage }: PartnerDash
                     </CardHeader>
                     <CardContent className="p-4 pt-0 space-y-4">
                         <div className="flex items-center justify-between">
-                            <div className="text-2xl font-bold">{stats.teamSize}명</div>
-                            <Button size="sm" variant="outline" className="h-8 text-xs">
-                                {selectedLanguage === 'ko' ? '조직도 보기' : 'View Tree'}
-                            </Button>
+                            <div className="flex flex-col">
+                                <div className="text-2xl font-bold">{stats.teamSize}명</div>
+                                <div className="text-[10px] text-muted-foreground">건강한 5단계 조직이 구축되고 있습니다.</div>
+                            </div>
                         </div>
+
+                        {/* Team Distribution Chart Simple - [Kodari's Insight] */}
+                        <div className="flex items-end gap-1.5 h-12 px-2">
+                            {partnerTree?.statsByLevel?.map((count: number, idx: number) => (
+                                <div key={idx} className="flex-1 flex flex-col items-center gap-1">
+                                    <div
+                                        className="w-full bg-blue-500/20 rounded-t-sm transition-all duration-1000"
+                                        style={{ height: `${Math.max(10, (count / (stats.teamSize || 1)) * 100)}%` }}
+                                    >
+                                        <div className="w-full h-full bg-blue-500 rounded-t-sm opacity-60"></div>
+                                    </div>
+                                    <span className="text-[8px] text-muted-foreground font-mono">L{idx + 1}</span>
+                                </div>
+                            )) || [1, 2, 3, 4, 5].map(i => <Skeleton key={i} className="flex-1 h-8" />)}
+                        </div>
+
 
                         {/* Referral Code Box */}
                         <div className="p-3 bg-muted/50 rounded-xl space-y-2">
