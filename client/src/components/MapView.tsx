@@ -764,8 +764,16 @@ export default function MapView({
         if (e.touches.length > 1) return;
 
         touchTimer = setTimeout(() => {
+          if (!landmark || !landmark.id || typeof landmark.lat !== 'number' || typeof landmark.lng !== 'number') {
+            console.warn('MapView: invalid landmark in touchstart add-to-tour', landmark);
+            return;
+          }
           if (onAddToTour) {
-            onAddToTour(landmark);
+            try {
+              onAddToTour(landmark);
+            } catch (error) {
+              console.error('MapView onAddToTour error', error);
+            }
             marker.closePopup();
           }
         }, 1000);
@@ -883,8 +891,16 @@ export default function MapView({
                 mousedown: () => {
                   // Start long press timer
                   longPressTimerRef.current = setTimeout(() => {
+                    if (!landmark || !landmark.id || typeof landmark.lat !== 'number' || typeof landmark.lng !== 'number') {
+                      console.warn('MapView: invalid landmark in mousedown add-to-tour', landmark);
+                      return;
+                    }
                     if (onAddToTour) {
-                      onAddToTour(landmark);
+                      try {
+                        onAddToTour(landmark);
+                      } catch (error) {
+                        console.error('MapView onAddToTour error', error);
+                      }
                     }
                   }, 1000); // 1 second
                 },
@@ -1079,21 +1095,30 @@ export default function MapView({
 
       {/* [강의 노트: Path Tracing 이동 라인]
           학생 여러분, Polyline을 사용하여 투어의 흐름을 지도에 그립니다.
-          opacity와 weight를 조절하여 배경 지도와 조화를 이루도록 디자인했습니다. */}
-      {tourStops.length >= 2 && (
-        <Polyline
-          positions={tourStops.map(stop => {
+          좌표 데이터가 유효하지 않으면 화면이 하얗게(White Screen) 변할 수 있으므로, 
+          반드시 filter를 통해 유효한 위경도 값만 추출해야 합니다. */}
+      {(() => {
+        const validPositions = (tourStops || [])
+          .filter(stop => stop && typeof stop.lat === 'number' && typeof stop.lng === 'number')
+          .map(stop => {
             return (selectedLanguage?.startsWith('zh') ? wgs84ToGcj02(stop.lat, stop.lng) : [stop.lat, stop.lng]) as [number, number];
-          })}
-          pathOptions={{
-            color: 'hsl(14, 85%, 55%)',
-            weight: 4,
-            opacity: 0.6,
-            dashArray: '10, 10',
-            lineJoin: 'round',
-          }}
-        />
-      )}
+          });
+
+        if (validPositions.length < 2) return null;
+
+        return (
+          <Polyline
+            positions={validPositions}
+            pathOptions={{
+              color: 'hsl(14, 85%, 55%)',
+              weight: 4,
+              opacity: 0.6,
+              dashArray: '10, 10',
+              lineJoin: 'round',
+            }}
+          />
+        );
+      })()}
 
       {/* [적요: PhotoMap 사진 마커]
           랜드마크 중 사진 데이터가 있는 경우  thumbnails를 지도에 직접 뿌려줍니다. */}

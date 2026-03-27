@@ -19,8 +19,8 @@ async function simulateGpsTour() {
         console.log(`\n🚶 ${pos.name} (${pos.lat}, ${pos.lng})`);
 
         for (const landmark of allLandmarks) {
-            const lLat = parseFloat(landmark.lat);
-            const lLng = parseFloat(landmark.lng);
+            const lLat = landmark.lat;
+            const lLng = landmark.lng;
             const radius = landmark.radius || 100; // 기본 반경 100m
 
             // 하버사인 공식 (단순화된 거리 계산)

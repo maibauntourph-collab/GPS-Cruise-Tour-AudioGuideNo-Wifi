@@ -1196,7 +1196,7 @@ export function registerRoutes(app: Hono<any>) {
         }
       });
 
-      const processedItinerary = recommendation.itinerary.map(item => {
+      const processedItinerary = recommendation.itinerary.map((item: any) => {
         const originalId = item.landmarkId;
         const resolvedId = idLookupMap.get(originalId);
 
@@ -1211,8 +1211,8 @@ export function registerRoutes(app: Hono<any>) {
       });
 
       const invalidIds = processedItinerary
-        .map(item => item.landmarkId)
-        .filter(id => !validLandmarkIds.has(id));
+        .map((item: any) => item.landmarkId)
+        .filter((id: any) => !validLandmarkIds.has(id));
 
       if (invalidIds.length > 0) {
         console.error('[AI Error] Invalid landmark IDs after resolution attempt:', invalidIds);

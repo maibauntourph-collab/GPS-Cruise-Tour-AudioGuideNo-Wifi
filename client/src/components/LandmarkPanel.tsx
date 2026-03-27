@@ -583,7 +583,17 @@ export default function LandmarkPanel({
         </button>
         {onAddToTour && (
           <button
-            onClick={() => onAddToTour(landmark)}
+            onClick={() => {
+              if (!landmark || !landmark.id || typeof landmark.lat !== 'number' || typeof landmark.lng !== 'number') {
+                console.warn('LandmarkPanel: invalid landmark in onAddToTour', landmark);
+                return;
+              }
+              try {
+                onAddToTour(landmark);
+              } catch (error) {
+                console.error('LandmarkPanel onAddToTour error', error);
+              }
+            }}
             className={`flex-1 h-14 rounded-2xl border-2 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all ${isInTour
               ? 'bg-white border-gray-200 text-gray-400'
               : 'bg-white border-[#E9633F] text-[#E9633F] shadow-lg shadow-orange-50'

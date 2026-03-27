@@ -786,8 +786,10 @@ export default function MenuDialog({
                       <Badge variant="secondary" className="gap-1 text-xs">
                         <Clock className="w-3 h-3" />
                         {(() => {
-                          const visitTime = tourStops.length * tourTimePerStop;
-                          const travelTime = tourRouteInfo ? Math.ceil(tourRouteInfo.duration / 60) : 0;
+                          const visitTime = (tourStops?.length || 0) * (tourTimePerStop || 0);
+                          const travelTime = tourRouteInfo && typeof tourRouteInfo.duration === 'number' 
+                            ? Math.ceil(tourRouteInfo.duration / 60) 
+                            : 0;
                           const totalMinutes = visitTime + travelTime;
                           const hours = Math.floor(totalMinutes / 60);
                           const mins = totalMinutes % 60;
@@ -800,26 +802,29 @@ export default function MenuDialog({
                     </div>
 
                     <div className="space-y-1 max-h-[40vh] overflow-y-auto">
-                      {tourStops.map((landmark, index) => (
-                        <div key={landmark.id} className="flex items-center justify-between p-2 rounded-md bg-muted/50 group hover-elevate">
-                          <div className="flex items-center gap-2 flex-1 min-w-0">
-                            <span className="text-xs font-medium text-muted-foreground">{index + 1}</span>
-                            <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)' }} />
-                            <span className="text-xs truncate">
-                              {getTranslatedContent(landmark, selectedLanguage, 'name')}
-                            </span>
+                      {(tourStops || []).map((landmark, index) => {
+                        if (!landmark || !landmark.id) return null;
+                        return (
+                          <div key={landmark.id} className="flex items-center justify-between p-2 rounded-md bg-muted/50 group hover-elevate">
+                            <div className="flex items-center gap-2 flex-1 min-w-0">
+                              <span className="text-xs font-medium text-muted-foreground">{index + 1}</span>
+                              <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)' }} />
+                              <span className="text-xs truncate">
+                                {getTranslatedContent(landmark, selectedLanguage, 'name') || 'Unknown Landmark'}
+                              </span>
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => onRemoveTourStop(landmark.id)}
+                              className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                              data-testid={`button-remove-tour-${landmark.id}`}
+                            >
+                              <X className="w-3 h-3" />
+                            </Button>
                           </div>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => onRemoveTourStop(landmark.id)}
-                            className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                            data-testid={`button-remove-tour-${landmark.id}`}
-                          >
-                            <X className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </>
                 )}

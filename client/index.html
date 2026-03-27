@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-    <title>GPS 오디오 가이드 - 전 세계 도시 여행 동반자</title>
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <meta name="description" content="GPS 기반 오디오 가이드, 턴바이턴 내비게이션, 오프라인 지도로 전 세계 도시를 여행하세요. 로마, 파리, 런던 등에서 자동으로 재생되는 오디오 가이드를 경험해보세요.">
-    
-    <!-- OG_TAGS_PLACEHOLDER -->
-    <!-- PWA Configuration -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#e8633f" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="GPS Audio Guide" />
-    <link rel="apple-touch-icon" href="/icon.svg" />
-    
-    <!-- [어벤져스 팀 | GFW 대응] Google Fonts 제거 후 로컬 폰트 fallback 사용 -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- Fix React HMR: Ensure single React instance before module loading -->
-    <script>
-      window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || { isDisabled: true };
-      window.__vite_plugin_react_preamble_installed__ = true;
-    </script>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJK383KW08"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-SJK383KW08');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>GPS 오디오 가이드 - 전 세계 도시 여행 동반자</title>
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <meta name="description"
+    content="GPS 기반 오디오 가이드, 턴바이턴 내비게이션, 오프라인 지도로 전 세계 도시를 여행하세요. 로마, 파리, 런던 등에서 자동으로 재생되는 오디오 가이드를 경험해보세요.">
+
+  <!-- OG_TAGS_PLACEHOLDER -->
+  <!-- PWA Configuration -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#e8633f" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="GPS Audio Guide" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
+
+  <!-- [어벤져스 팀 | GFW 대응] Google Fonts 제거 후 로컬 폰트 fallback 사용 -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <!-- Fix React HMR: Ensure single React instance before module loading -->
+  <script>
+    window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || { isDisabled: true };
+    window.__vite_plugin_react_preamble_installed__ = true;
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

@@ -29,6 +29,7 @@ import {
   Ship,
   Hotel,
   MapPin,
+  MapPinned,
   Circle,
   Flag,
   Search,
@@ -264,6 +265,23 @@ export default function Home() {
     // [적요] 모드 전환 시 카드 최소화 해제 (list/detail 진입 시 항상 카드가 펼쳐짐)
     if (nextMode !== 'map') setIsCardMinimized(false);
   }, [appMode]);
+
+  const closeFloatingCard = useCallback(() => {
+    if (selectedLandmark?.id) {
+      manualClosedLandmarkRef.current = selectedLandmark.id;
+      setTimeout(() => {
+        if (manualClosedLandmarkRef.current === selectedLandmark.id) {
+          manualClosedLandmarkRef.current = null;
+        }
+      }, 4000);
+    }
+
+    setShowFloatingLandmarkList(false);
+    setShowBackgroundReturnPin(false);
+    setSelectedLandmark(null);
+    setIsCardMinimized(true);
+    transitionTo('map');
+  }, [transitionTo, selectedLandmark]);
 
   // [파생 상태] 카드가 보여야 하는지를 appMode 하나로 결정합니다.
   // 학생들: 이제 버튼 하나 = setAppMode 한 줄이면 끝입니다!
@@ -1035,24 +1053,53 @@ export default function Home() {
     }
   }, [tourStops.length, selectedLanguage, toast]);
 
-  const handleAddToTour = (landmark: Landmark) => {
-    if (tourStops.some(stop => stop.id === landmark.id)) {
-      setTourStops(tourStops.filter(stop => stop.id !== landmark.id));
-      setTourStopDurations(prev => {
-        const updated = { ...prev };
-        delete updated[landmark.id];
-        return updated;
-      });
-    } else {
-      setTourStops([...tourStops, landmark]);
-      setTourStopDurations(prev => ({
-        ...prev,
-        [landmark.id]: tourTimePerStop
-      }));
-      playClickSound();
+  const handleAddToTour = (landmark: Landmark | null | undefined) => {
+    // [Bug Doctor | 2026-03-26] White Screen 방지: landmark 객체 유효성 검사
+    if (!landmark || typeof landmark.id !== 'string' || landmark.id.trim() === '' || typeof landmark.lat !== 'number' || typeof landmark.lng !== 'number') {
+      console.error('Invalid landmark object provided to handleAddToTour:', landmark);
       toast({
-        description: getTranslatedContent(landmark, selectedLanguage, 'name') + (selectedLanguage === 'ko' ? ' 투어에 추가됨' : ' added to tour'),
-        duration: 2000,
+        title: selectedLanguage === 'ko' ? '명소 정보를 불러오는 중 오류가 발생했습니다' : 'Unable to add to tour: invalid landmark data',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    try {
+      setTourStops(prevStops => {
+        const exists = prevStops.some(stop => stop.id === landmark.id);
+
+        if (exists) {
+          setTourStopDurations(prev => {
+            const updated = { ...prev };
+            delete updated[landmark.id];
+            return updated;
+          });
+          return prevStops.filter(stop => stop.id !== landmark.id);
+        }
+
+        // Insert with dedup and safe field check
+        const nextStops = [...prevStops, landmark];
+        setTourStopDurations(prev => ({
+          ...prev,
+          [landmark.id]: tourTimePerStop || 20
+        }));
+
+        playClickSound();
+
+        const landmarkName = getTranslatedContent(landmark, selectedLanguage, 'name') || 'Landmark';
+        toast({
+          description: `${landmarkName}${selectedLanguage === 'ko' ? ' 투어에 추가됨' : ' added to tour'}`,
+          duration: 2000,
+        });
+
+        return nextStops;
+      });
+    } catch (error) {
+      console.error('Error in handleAddToTour:', error);
+      toast({
+        title: selectedLanguage === 'ko' ? '투어 추가 중 오류' : 'Error adding to tour',
+        description: (error as Error).message || String(error),
+        variant: 'destructive'
       });
     }
   };
@@ -1070,6 +1117,13 @@ export default function Home() {
     setTourStopDurations({});
   };
 
+
+  const handleStartupClose = () => {
+    setLandingCityId(null);
+    setShowMenu(false);
+    setShowAIRecommend(false);
+    // 다른 스타트업 셋업 단계가 있으면 추가
+  };
 
   const handleSelectGPS = () => {
     audioService.unlockAudio();
@@ -1547,10 +1601,18 @@ export default function Home() {
         {/* ✅ [마스터 모드 | Designer Kim] UnifiedFloatingCard 통합UI
              학생들: 이제 모든 모드(map, list, detail, tour)를 이 하나의 카드에서 처리합니다.
              웰컴 카드를 위해 항상 렌더링하도록 설정했습니다. */}
+        {isCardVisible && (
         <UnifiedFloatingCard
           forceShowList={appMode === 'list'}
+          isCardVisible={isCardVisible}
           isCardMinimized={isCardMinimized}
-          onToggleMinimized={() => setIsCardMinimized(!isCardMinimized)}
+          onToggleMinimized={() => {
+            setIsCardMinimized(!isCardMinimized);
+            // [적요] list 모드에서 minimize 시 map 모드로 전환 (forceShowList를 false로 만들기)
+            if (appMode === 'list') {
+              transitionTo('map');
+            }
+          }}
           selectedLandmark={selectedLandmark}
           onLandmarkSelect={(l: Landmark) => {
             // [적요] 리스트에서 랜드마크 선택 → detail 모드 진입
@@ -1559,29 +1621,7 @@ export default function Home() {
             setAppMode('detail');
             setIsCardMinimized(false);
           }}
-          onLandmarkClose={() => {
-            // [교수님 수정] 랜드마크 'X' 닫기 버튼 클릭 시:
-            // 1. 카드를 아예 없애는 것이 아니라 '최소화' 상태로 만듭니다.
-            setIsCardMinimized(true);
-            // 2. 동시에 FAB이 나타날 수 있도록 필요한 상태들을 조정합니다.
-            setShowFloatingLandmarkList(false);
-            setShowBackgroundReturnPin(false);
-            
-            // [교수님 추가] 카드 내부 데이터 초기화 및 모드 전환 (카드를 숨기기 위함)
-            setSelectedLandmark(null);
-            transitionTo('map');
-            
-            // [Bug Doctor] 4초 동안 자동 재개방 방지 로직 유지
-            const closedLandmarkId = selectedLandmark?.id;
-            if (closedLandmarkId) {
-              manualClosedLandmarkRef.current = closedLandmarkId;
-              setTimeout(() => {
-                if (manualClosedLandmarkRef.current === closedLandmarkId) {
-                  manualClosedLandmarkRef.current = null;
-                }
-              }, 4000);
-            }
-          }}
+          onLandmarkClose={closeFloatingCard}
           onMinimizeToMenu={() => {
             // [적요] 메뉴로 최소화: 명소 선택 해제 후 국가/도시 선택 메뉴 노출
             setSelectedLandmark(null);
@@ -1592,6 +1632,7 @@ export default function Home() {
           landmarks={landmarks}
           tourStops={tourStops}
           onAddToTour={handleAddToTour}
+          isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
           onRemoveTourStop={(id) => {
             setTourStops(tourStops.filter(s => s.id !== id));
             setTourStopDurations(prev => {
@@ -1643,6 +1684,7 @@ export default function Home() {
           onOpenStartEndPointDialog={() => setIsStartingPointPopoverOpen(true)}
           capturedRouteImage={capturedRouteImage}
         />
+        )}
 
         {/* Other Overlays */}
         {
@@ -1695,12 +1737,16 @@ export default function Home() {
           userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
           userRegion={userRegion}
           onAddToTour={(recommendedLandmarks) => {
-            const newStops = recommendedLandmarks.filter(
-              l => !tourStops.some(s => s.id === l.id)
-            );
-            if (newStops.length > 0) {
-              setTourStops(prev => [...prev, ...newStops]);
+            const validNewStops = recommendedLandmarks.filter(l => l && l.id && typeof l.lat === 'number' && typeof l.lng === 'number');
+            if (!validNewStops.length) {
+              console.warn('AIRecommendDialog returned invalid landmarks', recommendedLandmarks);
+              return;
             }
+            setTourStops(prev => {
+              const uniqueStops = validNewStops.filter(l => !prev.some(s => s.id === l.id));
+              if (!uniqueStops.length) return prev;
+              return [...prev, ...uniqueStops];
+            });
           }}
           onSelectLandmark={(landmark) => {
             setSelectedLandmark(landmark);
@@ -1781,12 +1827,7 @@ export default function Home() {
               setShowFloatingLandmarkList(false);
               transitionTo('detail');
             }}
-            onClose={() => {
-              setShowFloatingLandmarkList(false);
-              setShowBackgroundReturnPin(false); // 일반 닫기 시 배경 복귀 핀도 숨김
-              // 일반 닫기 시에는 핀 표시하지 않음 (외부 앱 복귀 시에만 표시)
-              transitionTo('map');
-            }}
+            onClose={closeFloatingCard}
           />
         )}
 

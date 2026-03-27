@@ -5,11 +5,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Landmark } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import PhotoGallery from './PhotoGallery';
-import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award, Camera, Smile, Upload, Download, ShoppingBag, Package, TrendingUp, Route, Minimize2 } from 'lucide-react';
+import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, ExternalLink, Clock, Euro, ChefHat, Phone, Utensils, Activity as ActivityIcon, Landmark as LandmarkIcon, Info, Image as ImageIcon, Calendar, CreditCard, Share2, Globe, BookOpen, Search, Home, Trophy, Award, Camera, Smile, Upload, Download, ShoppingBag, Package, TrendingUp, Route, Minimize2, ChevronLeft, ChevronRight } from 'lucide-react';
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
 import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
+import { useToast } from '@/hooks/use-toast';
 
 function getMobileFriendlyUrl(url: string) {
   const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
@@ -58,6 +59,7 @@ export default function LandmarkDetailDialog({
   isInTour = false,
   selectedLanguage = 'en'
 }: LandmarkDetailDialogProps) {
+  const { toast } = useToast();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isNavigationOnlyMode, setIsNavigationOnlyMode] = useState(false);
@@ -265,7 +267,7 @@ export default function LandmarkDetailDialog({
       >
         <div className="flex flex-col h-full overflow-hidden w-full max-w-full box-border">
           {/* Header Section - Fixed at top */}
-          <DialogHeader className="p-4 pb-3 border-b shrink-0 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
+          <DialogHeader className={`p-4 pb-3 border-b shrink-0 bg-white/50 backdrop-blur-sm sticky top-0 z-50 ${isPlaying ? 'hidden' : ''}`}>
             <DialogDescription className="sr-only">
               Detailed information about this landmark
             </DialogDescription>
@@ -302,8 +304,76 @@ export default function LandmarkDetailDialog({
             </div>
           </DialogHeader>
 
-          {/* Navigation Tabs - Middle Content area should be scrollable */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden min-h-0">
+          {/* Minimal Audio Player Mode - Shows when audio is playing */}
+          {isPlaying && (
+            <div className="flex-1 flex flex-col items-center justify-between px-6 py-8 bg-gradient-to-b from-blue-50/50 to-transparent">
+              {/* Top: Landmark Info */}
+              <div className="w-full text-center mb-4">
+                <h2 className="text-2xl font-bold text-slate-800 mb-2">{translatedName}</h2>
+                <p className="text-sm text-slate-600">{landmark?.category}</p>
+              </div>
+
+              {/* Middle: Timeline & Controls */}
+              <div className="w-full flex-1 flex flex-col items-center justify-center space-y-6">
+                {/* Timeline */}
+                <div className="w-full space-y-2">
+                  <div className="flex justify-between text-xs text-slate-600 font-semibold">
+                    <span>0:00</span>
+                    <span>3:58</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-full bg-[#E67E22] rounded-full" style={{ width: '15%' }}></div>
+                  </div>
+                </div>
+
+                {/* Large Play/Pause Button */}
+                <div className="flex items-center gap-6">
+                  <button className="w-12 h-12 rounded-full border-2 border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-all">
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+
+                  <button
+                    onClick={() => handlePlayAudio()}
+                    className="w-20 h-20 rounded-full bg-[#E67E22] flex items-center justify-center text-white shadow-lg hover:bg-[#D66E12] active:scale-95 transition-all"
+                  >
+                    {isPlaying && !isPaused ? (
+                      <Pause className="w-9 h-9 fill-white" />
+                    ) : (
+                      <Play className="w-9 h-9 fill-white ml-1" />
+                    )}
+                  </button>
+
+                  <button className="w-12 h-12 rounded-full border-2 border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-all">
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </div>
+
+                {/* Speed Control */}
+                <button className="text-sm font-bold text-slate-600 bg-slate-100 px-4 py-2 rounded-full hover:bg-slate-200 transition-all">
+                  {playbackRate}x
+                </button>
+              </div>
+
+              {/* Bottom: Action Buttons */}
+              <div className="w-full flex items-center justify-around gap-2 mt-8 pt-4 border-t border-slate-200">
+                <button className="flex-1 flex flex-col items-center gap-1 py-2 text-slate-600 hover:text-[#E67E22] transition-colors">
+                  <Home className="w-5 h-5" />
+                  <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '도시' : 'City'}</span>
+                </button>
+                <button className="flex-1 flex flex-col items-center gap-1 py-2 text-slate-600 hover:text-[#E67E22] transition-colors">
+                  <MapPin className="w-5 h-5" />
+                  <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '지도' : 'Map'}</span>
+                </button>
+                <button className="flex-1 flex flex-col items-center gap-1 py-2 text-slate-600 hover:text-[#E67E22] transition-colors">
+                  <MapPinned className="w-5 h-5" />
+                  <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '내 플레이' : 'My Play'}</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Navigation Tabs - Hidden when audio player is active */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className={`flex-1 flex flex-col overflow-hidden min-h-0 ${isPlaying ? 'hidden' : ''}`}>
             <div className="px-4 pt-4 bg-[#FCF9F6] border-b shrink-0">
               <TabsList className="grid w-full grid-cols-4 bg-[#EFEBE6] rounded-xl p-1 h-11">
                 <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
@@ -1046,8 +1116,8 @@ export default function LandmarkDetailDialog({
             </div>
           </Tabs>
 
-          {/* Sticky Footer - Always visible at bottom */}
-          <div className="p-4 bg-white/90 backdrop-blur-xl border-t shrink-0 flex gap-3 h-24 items-center shadow-[0_-10px_20px_rgba(0,0,0,0.02)] z-50">
+          {/* Main action buttons - shown when audio is not playing */}
+          <div className={`p-4 bg-white/90 backdrop-blur-xl border-t shrink-0 flex gap-3 h-24 items-center shadow-[0_-10px_20px_rgba(0,0,0,0.02)] z-50 ${isPlaying ? 'hidden' : ''}`}>
             <Button
               onClick={() => {
                 const isChinese = selectedLanguage.startsWith('zh');
@@ -1069,7 +1139,25 @@ export default function LandmarkDetailDialog({
               </div>
             </Button>
             <Button
-              onClick={() => onAddToTour?.(landmark)}
+              onClick={() => {
+                if (!landmark || !landmark.id) {
+                  console.warn('LandmarkDetailDialog: invalid landmark for add to tour', landmark);
+                  toast({
+                    title: selectedLanguage === 'ko' ? '투어 추가 실패' : 'Failed to add to tour',
+                    variant: 'destructive'
+                  });
+                  return;
+                }
+                try {
+                  onAddToTour?.(landmark);
+                } catch (error) {
+                  console.error('LandmarkDetailDialog onAddToTour error', error);
+                  toast({
+                    title: selectedLanguage === 'ko' ? '투어 추가 중 오류' : 'Error adding to tour',
+                    variant: 'destructive'
+                  });
+                }
+              }}
               variant={isInTour ? "default" : "outline"}
               className={`flex-[0.6] h-14 border-2 rounded-2xl font-bold transition-all active:scale-[0.97] ${isInTour ? 'bg-indigo-600 hover:bg-indigo-700 text-white border-indigo-600 shadow-lg shadow-indigo-100' : 'border-[#EFEBE6] text-[#5D574D] bg-white hover:bg-[#FCF9F6]'}`}
             >
@@ -1078,15 +1166,15 @@ export default function LandmarkDetailDialog({
                   {isInTour ? <Check className="w-5 h-5 mb-0.5" /> : '+'}
                 </span>
                 <span className="text-[10px] uppercase font-black">
-                  {isInTour 
-                    ? (selectedLanguage === 'ko' ? '담기 완료' : 'Added') 
+                  {isInTour
+                    ? (selectedLanguage === 'ko' ? '담기 완료' : 'Added')
                     : (selectedLanguage === 'ko' ? '투어 담기' : 'Add to Tour')}
                 </span>
               </div>
             </Button>
           </div>
         </div>
-      </DialogContent >
-    </Dialog >
+      </DialogContent>
+    </Dialog>
   );
 }

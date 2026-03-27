@@ -209,58 +209,63 @@ export function AppSidebar({
               </SidebarGroupContent>
             </SidebarGroup>
 
-            {tourStops.length > 0 && (
+            {tourStops && tourStops.length > 0 && (
               <SidebarGroup>
-                <SidebarGroupLabel className="flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <Route className="w-4 h-4" />
-                    {t('tourRoute', selectedLanguage)}
-                  </span>
+                <SidebarGroupLabel className="flex items-center justify-between h-auto py-2">
+                  <div className="flex items-center gap-2">
+                    <Route className="w-4 h-4 text-primary" />
+                    <span className="font-bold">{t('tourRoute', selectedLanguage)}</span>
+                    <Badge variant="secondary" className="h-5 px-1.5 text-[10px] font-black">{tourStops.length}</Badge>
+                  </div>
                   <Button
                     variant="ghost"
-                    size="sm"
+                    size="icon"
                     onClick={onClearTour}
                     data-testid="button-sidebar-clear-tour"
-                    className="h-6 px-2"
+                    className="h-7 w-7 rounded-full hover:bg-destructive/10 hover:text-destructive transition-colors"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </Button>
                 </SidebarGroupLabel>
-                <SidebarGroupContent className="px-2 space-y-2">
+                <SidebarGroupContent className="px-2 space-y-3">
                   {tourRouteInfo && (
-                    <div className="flex gap-2 mb-2">
-                      <Badge variant="outline" className="gap-1 text-xs">
-                        <span>{(tourRouteInfo.distance / 1000).toFixed(1)}km</span>
-                      </Badge>
-                      <Badge variant="outline" className="gap-1 text-xs">
-                        <span>{Math.ceil(tourRouteInfo.duration / 60)}min</span>
-                      </Badge>
+                    <div className="flex gap-2 mb-2 p-2 bg-primary/5 rounded-xl border border-primary/10">
+                      <div className="flex flex-col items-center flex-1">
+                        <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-tighter">Distance</span>
+                        <span className="text-sm font-black text-primary">{(tourRouteInfo.distance / 1000).toFixed(1)}km</span>
+                      </div>
+                      <div className="w-px bg-primary/10" />
+                      <div className="flex flex-col items-center flex-1">
+                        <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-tighter">Duration</span>
+                        <span className="text-sm font-black text-primary">{Math.ceil(tourRouteInfo.duration / 60)}min</span>
+                      </div>
                     </div>
                   )}
-                  <div className="space-y-1">
-                    {tourStops.map((landmark, index) => (
-                      <div key={landmark.id}>
-                        <div className="flex items-center justify-between p-2 rounded-md bg-muted/50 group hover-elevate">
-                          <div className="flex items-center gap-2 flex-1 min-w-0">
-                            <span className="text-xs font-medium text-muted-foreground">{index + 1}</span>
-                            <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)' }} />
-                            <span className="text-sm truncate">
-                              {getTranslatedContent(landmark, selectedLanguage, 'name')}
+                  <div className="space-y-1.5 max-h-[30vh] overflow-y-auto pr-1 no-scrollbar">
+                    {(tourStops || []).filter(s => s && s.id).map((landmark, index) => (
+                      <div key={landmark.id} className="relative">
+                        <div className="flex items-center justify-between p-2 rounded-xl bg-white/50 border border-slate-100 group hover:border-primary/30 hover:bg-white hover:shadow-sm transition-all duration-300">
+                          <div className="flex items-center gap-2.5 flex-1 min-w-0">
+                            <span className="w-5 h-5 rounded-full bg-slate-100 text-[10px] flex items-center justify-center font-black text-slate-500 shrink-0">{index + 1}</span>
+                            <MapPin className="w-3.5 h-3.5 flex-shrink-0" style={{ color: landmark.category === 'Activity' ? 'hsl(195, 85%, 50%)' : 'hsl(14, 85%, 55%)' }} />
+                            <span className="text-[13px] font-medium truncate text-slate-700">
+                              {getTranslatedContent(landmark, selectedLanguage, 'name') || 'Unknown Landmark'}
                             </span>
                           </div>
                           <Button
                             variant="ghost"
-                            size="sm"
+                            size="icon"
                             onClick={() => onRemoveTourStop(landmark.id)}
-                            className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="h-7 w-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/10 hover:text-destructive"
                             data-testid={`button-remove-tour-${landmark.id}`}
                           >
-                            <X className="w-3 h-3" />
+                            <X className="w-3.5 h-3.5" />
                           </Button>
                         </div>
                         {tourRouteInfo?.segments && tourRouteInfo.segments[index] && (
-                          <div className="flex items-center gap-1.5 pl-8 py-1 text-xs text-muted-foreground">
-                            <span>→</span>
+                          <div className="flex items-center gap-2 pl-4 py-1.5 text-[10px] font-bold text-slate-400">
+                            <div className="w-0.5 h-3 bg-slate-100 ml-2" />
+                            <span className="tracking-tighter uppercase">Next:</span>
                             <span>{(tourRouteInfo.segments[index].distance / 1000).toFixed(1)}km</span>
                             <span>•</span>
                             <span>{Math.ceil(tourRouteInfo.segments[index].duration / 60)}min</span>

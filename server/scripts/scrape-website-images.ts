@@ -35,7 +35,7 @@ async function scrapeImages(page: Page, url: string) {
         const uniqueImages = Array.from(new Set([ogImage, ...images].filter(Boolean)));
 
         // Ensure absolute URLs
-        const finalImages = uniqueImages.map((imgUrl: string) => {
+        const finalImages = uniqueImages.filter((imgUrl): imgUrl is string => imgUrl !== null).map((imgUrl: string) => {
             try {
                 return new URL(imgUrl, url).href;
             } catch (e) {

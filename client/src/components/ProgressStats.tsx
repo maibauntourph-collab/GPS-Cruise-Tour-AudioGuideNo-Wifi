@@ -40,9 +40,9 @@ export function ProgressStats({
   const [showListDialog, setShowListDialog] = useState(false);
   const progress = totalLandmarks > 0 ? Math.round((visitedCount / totalLandmarks) * 100) : 0;
 
-  const visitedLandmarkIds = new Set(visitedLandmarks.map(v => v.landmarkId));
-  const visitedLandmarksList = landmarks.filter(l => visitedLandmarkIds.has(l.id));
-  const plannedLandmarks = tourStops.filter(l => !visitedLandmarkIds.has(l.id));
+  const visitedLandmarkIds = new Set((visitedLandmarks || []).map(v => v?.landmarkId).filter(Boolean));
+  const visitedLandmarksList = (landmarks || []).filter(l => l && l.id && visitedLandmarkIds.has(l.id));
+  const plannedLandmarks = (tourStops || []).filter(l => l && l.id && !visitedLandmarkIds.has(l.id));
 
   const handleLandmarkClick = (landmark: Landmark) => {
     setShowListDialog(false);

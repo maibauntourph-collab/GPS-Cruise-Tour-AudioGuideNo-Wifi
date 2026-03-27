@@ -48,8 +48,8 @@ async function updateGpsPrecision() {
         if (precision) {
             await db.update(landmarksTable)
                 .set({
-                    lat: precision.lat.toString(),
-                    lng: precision.lng.toString()
+                    lat: precision.lat,
+                    lng: precision.lng
                 })
                 .where(eq(landmarksTable.id, landmark.id));
 

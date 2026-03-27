@@ -8025,6 +8025,7 @@ var LANDMARKS = [
     "translations": {
       "ko": {
         "name": "\uC13C\uC18C\uC9C0 (Senso-ji Temple)",
+        "narration": "\uC790, \uB208\uC744 \uAC10\uACE0 \uC0C1\uC0C1\uD574\uBCF4\uC138\uC694. \uC9C0\uAE08 \uC5EC\uB7EC\uBD84\uC740 \uB3C4\uCFC4\uC5D0\uC11C \uAC00\uC7A5 \uC624\uB798\uB41C \uC0AC\uCC30, \uC13C\uC18C\uC9C0 \uC55E\uC5D0 \uC11C \uC788\uC2B5\uB2C8\uB2E4. 628\uB144\uC5D0 \uCC3D\uAC74\uB41C \uC774\uACF3\uC740 \uB3C4\uCFC4 \uC0AC\uB78C\uB4E4\uC758 \uB9C8\uC74C\uC758 \uACE0\uD5A5\uACFC\uB3C4 \uAC19\uC740 \uACF3\uC774\uC8E0. \uBD89\uC740 \uC81C\uB4F1\uC774 \uC6C5\uC7A5\uD558\uAC8C \uAC78\uB9B0 \uCE74\uBBF8\uB098\uB9AC\uBAAC\uC774 \uC5EC\uB7EC\uBD84\uC744 \uC555\uB3C4\uD569\uB2C8\uB2E4. '\uCE74\uBBF8\uB098\uB9AC\uBAAC'\uC774\uB77C\uB294 \uC774\uB984\uCC98\uB7FC, \uCC9C\uB465\uC2E0\uC774 \uAE08\uBC29\uC774\uB77C\uB3C4 \uB098\uD0C0\uB0A0 \uB4EF\uD55C \uAE30\uC6B4\uC774 \uB290\uAEF4\uC9C0\uC9C0 \uC54A\uB098\uC694? \uC7A0\uC2DC \uC228\uC744 \uACE0\uB974\uACE0 \uBB38\uC744 \uC9C0\uB098 \uC548\uC73C\uB85C \uBC1C\uAC78\uC74C\uC744 \uC62E\uACA8 \uBCF4\uC138\uC694. \uC5D0\uB3C4\uC2DC\uB300\uC758 \uBD84\uC704\uAE30\uAC00 \uBB3C\uC52C \uD48D\uAE30\uB294 \uB098\uCE74\uBBF8\uC138 \uAC70\uB9AC\uAC00 \uB208\uC55E\uC5D0 \uD3BC\uCCD0\uC9D1\uB2C8\uB2E4. \uD615\uD615\uC0C9\uC0C9\uC758 \uAE30\uB150\uD488\uACFC \uB9DB\uC788\uB294 \uAC04\uC2DD\uAC70\uB9AC\uAC00 \uC720\uD639\uD558\uB294 \uACF3\uC774\uC8E0. \uB530\uB73B\uD55C \uB9CC\uC96C \uD558\uB098, \uC544\uB2C8\uBA74 \uBC14\uC0AD\uD55C \uC13C\uBCA0\uC774 \uD55C \uC870\uAC01\uC744 \uB9DB\uBCF4\uBA70 \uCC9C\uCC9C\uD788 \uAC78\uC5B4\uBCF4\uC138\uC694. \n\n\uB098\uCE74\uBBF8\uC138 \uAC70\uB9AC\uB97C \uC9C0\uB098\uBA74 \uAC70\uB300\uD55C \uD5A5\uB85C\uAC00 \uBCF4\uC785\uB2C8\uB2E4. \uD5A5 \uC5F0\uAE30\uB97C \uC628\uBAB8\uC5D0 \uC42C\uC5B4 \uBCF4\uC138\uC694. \uC544\uD508 \uACF3\uC774 \uC788\uB2E4\uBA74 \uADF8\uACF3\uC5D0 \uC9D1\uC911\uC801\uC73C\uB85C! \uC13C\uC18C\uC9C0\uC758 \uD5A5 \uC5F0\uAE30\uB294 \uD589\uC6B4\uACFC \uAC74\uAC15\uC744 \uAC00\uC838\uB2E4\uC900\uB2E4\uACE0 \uD558\uB2C8\uAE4C\uC694. \uC790, \uC774\uC81C \uB4DC\uB514\uC5B4 \uAE08\uBE5B \uCC2C\uB780\uD55C \uBCF8\uB2F9\uC774 \uB208\uC5D0 \uB4E4\uC5B4\uC635\uB2C8\uB2E4. \uC6C5\uC7A5\uD558\uACE0 \uD654\uB824\uD55C \uBAA8\uC2B5\uC5D0 \uC800\uC808\uB85C \uAC10\uD0C4\uC0AC\uAC00 \uB098\uC624\uC8E0? \uB450 \uC190\uC744 \uBAA8\uC544 \uC870\uC6A9\uD788 \uC18C\uC6D0\uC744 \uBE4C\uC5B4\uBCF4\uC138\uC694. \uC5EC\uB7EC\uBD84\uC758 \uAC04\uC808\uD55C \uB9C8\uC74C\uC774 \uBD80\uCC98\uB2D8\uAED8 \uB2FF\uC744 \uAC70\uC608\uC694. \n\n\uBCF8\uB2F9 \uC606\uC5D0\uB294 \uC544\uB984\uB2E4\uC6B4 \uC624\uCE35\uD0D1\uC774 \uC19F\uC544 \uC788\uC2B5\uB2C8\uB2E4. \uBC24\uC5D0\uB294 \uC870\uBA85\uC774 \uCF1C\uC838 \uB354\uC6B1 \uC2E0\uBE44\uB85C\uC6B4 \uBD84\uC704\uAE30\uB97C \uC790\uC544\uB0B4\uC8E0. \uC13C\uC18C\uC9C0 \uACBD\uB0B4\uB97C \uCC9C\uCC9C\uD788 \uAC70\uB2D0\uBA70 \uC2DC\uAC04\uC744 \uBCF4\uB0B4\uBCF4\uC138\uC694. \uC5ED\uC0AC\uC758 \uC228\uACB0\uACFC \uD568\uAED8 \uB3C4\uCFC4\uC758 \uD65C\uAE30\uCC2C \uC5D0\uB108\uC9C0\uB97C \uB3D9\uC2DC\uC5D0 \uB290\uB084 \uC218 \uC788\uC744 \uAC81\uB2C8\uB2E4. \uC0C1\uC0C1\uD574\uBCF4\uC138\uC694, \uC5EC\uB7EC\uBD84\uC758 \uBC1C \uC544\uB798\uC5D0\uB294 \uC218\uBC31 \uB144\uC758 \uC5ED\uC0AC\uAC00 \uC7A0\uB4E4\uC5B4 \uC788\uACE0, \uB208 \uC55E\uC5D0\uB294 \uCC2C\uB780\uD55C \uD604\uC7AC\uAC00 \uD3BC\uCCD0\uC838 \uC788\uC2B5\uB2C8\uB2E4. \uC13C\uC18C\uC9C0, \uC774 \uD2B9\uBCC4\uD55C \uACF5\uAC04\uC5D0\uC11C \uC78A\uC9C0 \uBABB\uD560 \uCD94\uC5B5\uC744 \uB9CC\uB4E4\uC5B4 \uAC00\uC138\uC694!",
         "description": "\uB3C4\uCFC4\uC5D0\uC11C \uAC00\uC7A5 \uC624\uB798\uB41C \uC0AC\uC6D0\uC774\uC790 \uC544\uC0AC\uCFE0\uC0AC\uC758 \uC0C1\uC9D5."
       }
     },
@@ -24843,8 +24844,8 @@ async function generateCityInfo(cityQuery, language = "ko") {
     return { name: cityQuery, error: "Failed to generate structured data" };
   }
 }
-async function recommendTourItinerary(preferences, language = "ko") {
-  const prompt = `Based on these preferences: ${JSON.stringify(preferences)}, recommend a half-day tour itinerary. 
+async function recommendTourItinerary(landmarks2, userPosition, language = "en", userRegion) {
+  const prompt = `Based on these landmarks: ${JSON.stringify(landmarks2)}, user position: ${JSON.stringify(userPosition)}, region: ${userRegion}, recommend a half-day tour itinerary. 
   Language: ${language}. Return JSON with title, duration, and stops.`;
   const response = await translateWithGemini(prompt);
   return JSON.parse(response);
@@ -24853,12 +24854,22 @@ async function translateText(text2, targetLanguage) {
   const prompt = `Translate the following text to ${targetLanguage}. Return ONLY the translated text as a JSON object: {"translatedText": "..."}
 
 Text: ${text2}`;
-  const responseText = await translateWithGemini(prompt);
   try {
-    const json2 = JSON.parse(responseText);
-    return json2.translatedText || responseText;
-  } catch (e) {
-    return responseText;
+    const responseText = await translateWithGemini(prompt);
+    try {
+      const json2 = JSON.parse(responseText);
+      return json2.translatedText || responseText;
+    } catch (e) {
+      return responseText;
+    }
+  } catch (error) {
+    console.warn(`[Gemini API] Translation failed for "${text2.substring(0, 50)}...":`, error.message || error);
+    if (error.status === 429 || error.message?.includes("quota") || error.message?.includes("Too Many Requests") || error.message?.includes("exceeded your current quota")) {
+      console.warn("[Gemini API] Quota exceeded, returning original text as fallback");
+      return text2;
+    }
+    console.warn("[Gemini API] Other API error, returning original text as fallback");
+    return text2;
   }
 }
 var getAI = getGemini;
@@ -24908,16 +24919,23 @@ var AutomationService = class {
       const fullPrompt = `${systemPrompt}
 
 ${prompt}`;
-      const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: fullPrompt,
-        config: { responseMimeType: "application/json" }
+      const model = ai.getGenerativeModel({
+        model: "gemini-2.0-flash"
       });
-      const content = response?.text;
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 8192,
+          responseMimeType: "application/json"
+        }
+      });
+      const response = await result.response;
+      const content = response.text();
       if (content) {
-        const result = JSON.parse(content);
-        console.log(`[Dr.'s Engine] \uB9C8\uCF00\uD130 \uC3ED\uC758 \uCC3D\uC758\uC801\uC778 \uCF58\uD150\uCE20\uAC00 \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4!`, result);
-        await this.saveGeneratedContent(landmark.id, result);
+        const result2 = JSON.parse(content);
+        console.log(`[Dr.'s Engine] \uB9C8\uCF00\uD130 \uC3ED\uC758 \uCC3D\uC758\uC801\uC778 \uCF58\uD150\uCE20\uAC00 \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4!`, result2);
+        await this.saveGeneratedContent(landmark.id, result2);
       }
     } catch (error) {
       console.error("[Dr.'s Engine] \uC544\uCC28! \uB9C8\uCF00\uD130 \uC3ED\uC774 \uAE00\uC744 \uC4F0\uB294 \uC911\uC5D0 \uC5F0\uD544\uC774 \uBD80\uB7EC\uC84C\uB098\uBD10\uC694(Gemini \uC624\uB958):", error);
@@ -24975,12 +24993,19 @@ ${prompt}`;
       const fullPrompt = `${systemPrompt}
 
 ${prompt}`;
-      const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: fullPrompt,
-        config: { responseMimeType: "application/json" }
+      const model = ai.getGenerativeModel({
+        model: "gemini-2.0-flash"
       });
-      const content = response?.text;
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 8192,
+          responseMimeType: "application/json"
+        }
+      });
+      const response = await result.response;
+      const content = response.text();
       if (content) {
         return JSON.parse(content).landmarks;
       }

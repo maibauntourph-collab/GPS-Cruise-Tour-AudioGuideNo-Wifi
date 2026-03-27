@@ -61,8 +61,13 @@ export async function generateCityInfo(cityQuery: string, language: string = 'ko
 /**
  * [교수님 노트] 사용자 취향에 맞는 투어 경로 추천
  */
-export async function recommendTourItinerary(preferences: any, language: string = 'ko'): Promise<any> {
-  const prompt = `Based on these preferences: ${JSON.stringify(preferences)}, recommend a half-day tour itinerary. 
+export async function recommendTourItinerary(
+  landmarks: any[],
+  userPosition?: { latitude: number; longitude: number },
+  language: string = 'en',
+  userRegion?: string
+): Promise<any> {
+  const prompt = `Based on these landmarks: ${JSON.stringify(landmarks)}, user position: ${JSON.stringify(userPosition)}, region: ${userRegion}, recommend a half-day tour itinerary. 
   Language: ${language}. Return JSON with title, duration, and stops.`;
 
   const response = await translateWithGemini(prompt);
@@ -75,12 +80,30 @@ export async function recommendTourItinerary(preferences: any, language: string 
 export async function translateText(text: string, targetLanguage: string): Promise<string> {
   const prompt = `Translate the following text to ${targetLanguage}. Return ONLY the translated text as a JSON object: {"translatedText": "..."}\n\nText: ${text}`;
 
-  const responseText = await translateWithGemini(prompt);
   try {
-    const json = JSON.parse(responseText);
-    return json.translatedText || responseText;
-  } catch (e) {
-    return responseText;
+    const responseText = await translateWithGemini(prompt);
+    try {
+      const json = JSON.parse(responseText);
+      return json.translatedText || responseText;
+    } catch (e) {
+      return responseText;
+    }
+  } catch (error: any) {
+    // Handle API quota exceeded or other Gemini API errors
+    console.warn(`[Gemini API] Translation failed for "${text.substring(0, 50)}...":`, error.message || error);
+
+    // Check if it's a quota exceeded error (429 status or quota-related message)
+    if (error.status === 429 ||
+        error.message?.includes('quota') ||
+        error.message?.includes('Too Many Requests') ||
+        error.message?.includes('exceeded your current quota')) {
+      console.warn('[Gemini API] Quota exceeded, returning original text as fallback');
+      return text; // Return original text as fallback
+    }
+
+    // For other errors, also return original text to prevent app crashes
+    console.warn('[Gemini API] Other API error, returning original text as fallback');
+    return text;
   }
 }
 

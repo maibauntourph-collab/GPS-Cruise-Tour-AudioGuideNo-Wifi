@@ -38,6 +38,7 @@ import {
   FolderOpen,
   Square,
   Train,
+  Check,
   Car,
   Plus
 } from 'lucide-react';
@@ -162,6 +163,9 @@ interface UnifiedFloatingCardProps {
   isCardMinimized?: boolean;
   onToggleMinimized?: () => void;
   onMinimizeToMenu?: () => void;
+
+  // Visibility control
+  isCardVisible?: boolean;
 
   // [Marketer Song] 국가별 맞춤 추천을 위한 사용자 국적 코드 (e.g. "US", "JP", "CN", "TW", "KR")
   userRegion?: string;
@@ -311,6 +315,7 @@ export function UnifiedFloatingCard({
   isCardMinimized = false,
   onToggleMinimized,
   onMinimizeToMenu,
+  isCardVisible = true,
   onOpenAIRecommend,
   isSimulationPaused = false,
   simulationSpeed = 1,
@@ -321,9 +326,39 @@ export function UnifiedFloatingCard({
   activeRoute,
   handleClearRoute,
 }: UnifiedFloatingCardProps) {
+  if (!isCardVisible) return null;
   const { ref: detailScrollRef, onMouseDown: onDetailMouseDown, isDragging: isDetailDragging } = useDragScroll('vertical');
   const { ref: mainScrollRef, onMouseDown: onMainMouseDown, isDragging: isMainDragging } = useDragScroll('vertical');
   const { ref: listScrollRef, onMouseDown: onListMouseDown, isDragging: isListDragging } = useDragScroll('vertical');
+
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [isDraggingCard, setIsDraggingCard] = useState(false);
+  const dragStartRef = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!isDraggingCard || !dragStartRef.current) return;
+      const dx = event.clientX - dragStartRef.current.x;
+      const dy = event.clientY - dragStartRef.current.y;
+      setDragOffset(prev => ({ x: prev.x + dx, y: prev.y + dy }));
+      dragStartRef.current = { x: event.clientX, y: event.clientY };
+    };
+
+    const handleMouseUp = () => {
+      if (isDraggingCard) {
+        setIsDraggingCard(false);
+        dragStartRef.current = null;
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDraggingCard]);
 
   // [교수님 지시] 탭 타입에 'ai' 추가 — AI 추천 탭 지원
   const [activeTab, setActiveTab] = useState<'list' | 'cruise' | 'tour' | 'ai'>('list');
@@ -556,12 +591,25 @@ export function UnifiedFloatingCard({
 
   return (
     <div
-      style={{ zIndex }}
-      className={`fixed bottom-24 right-4 ${selectedLandmark ? 'w-[calc(100vw-48px)] sm:w-[360px]' : 'w-[calc(100vw-32px)] sm:w-[380px]'} max-h-[calc(100vh-180px)] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ${isCardMinimized && !forceShowList ? 'opacity-0 pointer-events-none translate-y-20' : 'opacity-100 translate-y-0'}`}
+      style={{
+        zIndex,
+        right: 4 - dragOffset.x,
+        bottom: 24 - dragOffset.y,
+        cursor: isDraggingCard ? 'grabbing' : 'grab',
+        display: !isCardVisible ? 'none' : 'flex',
+      }}
+      className={`fixed left-0 right-0 bottom-0 z-[100] ${selectedLandmark ? 'w-full' : 'w-full'} max-h-[85vh] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-t-3xl overflow-hidden transition-all duration-500 ${isCardMinimized ? 'translate-y-[calc(100%-60px)]' : 'translate-y-0'}`}
     >
       {/* [Avengers Team] GLOBAL CONTROL TOWER (Merged from Top Bar) */}
       {activeLayout !== 'classic' && (
-        <div className="p-2.5 bg-white/40 backdrop-blur-xl border-b border-white/20 flex items-center justify-between gap-2 overflow-hidden">
+        <div
+          className="p-2.5 bg-white/40 backdrop-blur-xl border-b border-white/20 flex items-center justify-between gap-2 overflow-hidden flex-shrink-0"
+          onMouseDown={(e) => {
+            if (e.button !== 0) return;
+            setIsDraggingCard(true);
+            dragStartRef.current = { x: e.clientX, y: e.clientY };
+          }}
+        >
           <div className="flex items-center gap-1.5 flex-1 min-w-0">
             {/* [Designer Kim] 상단 중복 Start/Stop 버튼 제거 (하단 MyTour 탭의 버튼으로 일원화) */}
 
@@ -599,23 +647,20 @@ export function UnifiedFloatingCard({
                 </span>
               </div>
             )}
-            {/* [Designer Kim 2026-03-25 03:33] X 닫기 버튼 동작 일괄 변경:
-                - 랜드마크 선택 여부와 관계없이 X 클릭 시 무조건 카드를 아래로 최소화합니다.
+            {/* [Designer Kim 2026-03-25 03:33] 최소화 버튼:
+                - 랜드마크 선택 여부와 관계없이 최소화 클릭 시 카드를 아래로 최소화합니다.
                 - 사용자는 우측 하단의 경로(Navigation) 아이콘을 통해 다시 카드를 열 수 있습니다. */}
             <Button
               variant="ghost"
               size="icon"
               className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white/80"
               onClick={() => {
-                // [교수님 수정] 닫기(X) 시 카드를 아예 닫는 대신 '최소화' 상태로 전환합니다.
                 if (onToggleMinimized) {
                   onToggleMinimized();
-                } else if (onLandmarkClose) {
-                  onLandmarkClose();
                 }
               }}
             >
-              <X className="w-4 h-4" />
+              <Minimize2 className="w-4 h-4" />
             </Button>
           </div>
         </div>
@@ -623,7 +668,7 @@ export function UnifiedFloatingCard({
 
       {/* [Avengers Team] Classic 모드일 때도 랜드마크 선택 중이라면 최소한의 닫기 버튼 헤더 노출 */}
       {activeLayout === 'classic' && selectedLandmark && (
-        <div className="p-2 bg-white/60 backdrop-blur-md border-b border-white/20 flex items-center justify-between">
+        <div className="p-2 bg-white/60 backdrop-blur-md border-b border-white/20 flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-1.5 bg-orange-50 px-3 py-1 rounded-full border border-orange-100 ml-1">
             <LandmarkIcon className="w-3.5 h-3.5 text-[#E9633F]" />
             <span className="text-[10px] font-black text-[#E9633F] uppercase tracking-tight">
@@ -635,21 +680,18 @@ export function UnifiedFloatingCard({
             size="icon"
             className="h-8 w-8 rounded-full text-gray-400 hover:text-gray-600"
             onClick={() => {
-              // [교수님 수정] 닫기(X) 시 최소화 상태로 전환
               if (onToggleMinimized) {
                 onToggleMinimized();
-              } else if (onLandmarkClose) {
-                onLandmarkClose();
               }
             }}
           >
-            <X className="w-4 h-4" />
+            <Minimize2 className="w-4 h-4" />
           </Button>
         </div>
       )}
 
       {/* TABS HEADER */}
-      <div className="px-4 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth border-b bg-white/20">
+      <div className="px-4 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth border-b bg-white/20 flex-shrink-0 order-last">
         {/* [교수님 지시] 목록(리스트) 탭 버튼 — 클릭 시 랜드마크 상세 닫고 목록 표시 */}
         <Button
           variant={activeTab === 'list' ? 'default' : 'ghost'}
@@ -657,6 +699,10 @@ export function UnifiedFloatingCard({
           className={`rounded-full h-7 px-3 flex-shrink-0 transition-all ${activeTab === 'list' ? 'bg-[#E9633F] text-white font-black shadow-md' : 'text-gray-500 hover:bg-gray-100'}`}
           onClick={() => {
             setActiveTab('list');
+            // [적요] LIST 탭 클릭 시 카드 표시
+            if (isCardMinimized) {
+              onToggleMinimized?.();
+            }
             if (selectedLandmark) {
               setShowDetailDialog(false);
               onLandmarkClose();
@@ -681,7 +727,13 @@ export function UnifiedFloatingCard({
           variant={activeTab === 'tour' ? 'default' : 'ghost'}
           size="sm"
           className={`rounded-full h-7 px-3 flex-shrink-0 transition-all ${activeTab === 'tour' ? 'bg-[#E9633F] text-white font-black shadow-md' : 'text-gray-500 hover:bg-gray-100'}`}
-          onClick={() => setActiveTab('tour')}
+          onClick={() => {
+            setActiveTab('tour');
+            // [적요] MYTOUR 탭 클릭 시 카드 표시
+            if (isCardMinimized) {
+              onToggleMinimized?.();
+            }
+          }}
         >
           <MapPinned className="w-3.5 h-3.5 mr-1" />
           <span className="text-[10px] uppercase tracking-wider">{t('myTour', selectedLanguage)}</span>
@@ -698,7 +750,7 @@ export function UnifiedFloatingCard({
       </div>
 
       <AnimatePresence>
-        <div className="flex-1 min-h-0 relative flex flex-col overflow-hidden">
+        <div className="flex-1 min-h-0 relative flex flex-col overflow-hidden order-none">
           {/* LANDMARK DETAIL LAYER */}
           <AnimatePresence mode="wait">
             {selectedLandmark && (
@@ -947,7 +999,7 @@ export function UnifiedFloatingCard({
                     </div>
                   </motion.div>
                 )}
-                {tourStops.length === 0 ? (
+                {(!tourStops || tourStops.length === 0) ? (
                   <div className="py-10 flex flex-col items-center text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
                     {/* [DESIGNER KIM] 웰컴 카드 - 프리미엄 아이콘 배치 */}
                     <div className="relative">
@@ -986,10 +1038,12 @@ export function UnifiedFloatingCard({
                   </div>
                 ) : (
                   <div className="space-y-2">
-                    {tourStops.map((stop, idx) => (
+                    {tourStops.filter(s => s && s.id).map((stop, idx) => (
                       <div key={stop.id} className="flex items-center gap-2 p-2 bg-muted rounded-lg">
                         <span className="w-5 h-5 rounded-full bg-slate-200 text-[10px] flex items-center justify-center font-bold">{idx + 1}</span>
-                        <span className="text-xs font-medium truncate flex-1">{getTranslatedContent(stop, selectedLanguage, 'name')}</span>
+                        <span className="text-xs font-medium truncate flex-1">
+                          {getTranslatedContent(stop, selectedLanguage, 'name') || 'Unknown'}
+                        </span>
                         <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => onRemoveTourStop?.(stop.id)}>
                           <X className="w-3 h-3 text-red-500" />
                         </Button>

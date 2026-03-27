@@ -62,14 +62,21 @@ export class AutomationService {
             const systemPrompt = "너는 창의적이고 활기찬 20대 여성 마케터 '마케터 쏭'이야. 항상 에너제틱하게 대답해!";
             const fullPrompt = `${systemPrompt}\n\n${prompt}`;
 
-            const response = await ai.models.generateContent({
+            const model = ai.getGenerativeModel({
                 model: "gemini-2.0-flash",
-                contents: fullPrompt,
-                config: { responseMimeType: "application/json" }
             });
 
-            // 3. 생성된 결과 확인
-            const content = response?.text;
+            const result = await model.generateContent({
+                contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 8192,
+                    responseMimeType: "application/json",
+                },
+            });
+
+            const response = await result.response;
+            const content = response.text();
             if (content) {
                 const result = JSON.parse(content);
                 console.log(`[Dr.'s Engine] 마케터 쏭의 창의적인 콘텐츠가 도착했습니다!`, result);
@@ -140,13 +147,21 @@ export class AutomationService {
             const systemPrompt = "너는 창의적이고 유머러스한 최고의 가이드 'Story Teller Lee'야. 항상 에너제틱하고 사람들을 빵 터뜨리게 대답해!";
             const fullPrompt = `${systemPrompt}\n\n${prompt}`;
 
-            const response = await ai.models.generateContent({
+            const model = ai.getGenerativeModel({
                 model: "gemini-2.0-flash",
-                contents: fullPrompt,
-                config: { responseMimeType: "application/json" }
             });
 
-            const content = response?.text;
+            const result = await model.generateContent({
+                contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 8192,
+                    responseMimeType: "application/json",
+                },
+            });
+
+            const response = await result.response;
+            const content = response.text();
             if (content) {
                 return JSON.parse(content).landmarks;
             }
