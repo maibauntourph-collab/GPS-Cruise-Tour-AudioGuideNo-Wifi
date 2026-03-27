@@ -267,7 +267,7 @@ export default function LandmarkDetailDialog({
       >
         <div className="flex flex-col h-full overflow-hidden w-full max-w-full box-border">
           {/* Header Section - Fixed at top */}
-          <DialogHeader className={`p-4 pb-3 border-b shrink-0 bg-white/50 backdrop-blur-sm sticky top-0 z-50 ${isPlaying ? 'hidden' : ''}`}>
+          <DialogHeader className="p-4 pb-3 border-b shrink-0 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
             <DialogDescription className="sr-only">
               Detailed information about this landmark
             </DialogDescription>
@@ -304,76 +304,8 @@ export default function LandmarkDetailDialog({
             </div>
           </DialogHeader>
 
-          {/* Minimal Audio Player Mode - Shows when audio is playing */}
-          {isPlaying && (
-            <div className="flex-1 flex flex-col items-center justify-between px-6 py-8 bg-gradient-to-b from-blue-50/50 to-transparent">
-              {/* Top: Landmark Info */}
-              <div className="w-full text-center mb-4">
-                <h2 className="text-2xl font-bold text-slate-800 mb-2">{translatedName}</h2>
-                <p className="text-sm text-slate-600">{landmark?.category}</p>
-              </div>
-
-              {/* Middle: Timeline & Controls */}
-              <div className="w-full flex-1 flex flex-col items-center justify-center space-y-6">
-                {/* Timeline */}
-                <div className="w-full space-y-2">
-                  <div className="flex justify-between text-xs text-slate-600 font-semibold">
-                    <span>0:00</span>
-                    <span>3:58</span>
-                  </div>
-                  <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
-                    <div className="h-full bg-[#E67E22] rounded-full" style={{ width: '15%' }}></div>
-                  </div>
-                </div>
-
-                {/* Large Play/Pause Button */}
-                <div className="flex items-center gap-6">
-                  <button className="w-12 h-12 rounded-full border-2 border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-all">
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-
-                  <button
-                    onClick={() => handlePlayAudio()}
-                    className="w-20 h-20 rounded-full bg-[#E67E22] flex items-center justify-center text-white shadow-lg hover:bg-[#D66E12] active:scale-95 transition-all"
-                  >
-                    {isPlaying && !isPaused ? (
-                      <Pause className="w-9 h-9 fill-white" />
-                    ) : (
-                      <Play className="w-9 h-9 fill-white ml-1" />
-                    )}
-                  </button>
-
-                  <button className="w-12 h-12 rounded-full border-2 border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-all">
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                </div>
-
-                {/* Speed Control */}
-                <button className="text-sm font-bold text-slate-600 bg-slate-100 px-4 py-2 rounded-full hover:bg-slate-200 transition-all">
-                  {playbackRate}x
-                </button>
-              </div>
-
-              {/* Bottom: Action Buttons */}
-              <div className="w-full flex items-center justify-around gap-2 mt-8 pt-4 border-t border-slate-200">
-                <button className="flex-1 flex flex-col items-center gap-1 py-2 text-slate-600 hover:text-[#E67E22] transition-colors">
-                  <Home className="w-5 h-5" />
-                  <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '도시' : 'City'}</span>
-                </button>
-                <button className="flex-1 flex flex-col items-center gap-1 py-2 text-slate-600 hover:text-[#E67E22] transition-colors">
-                  <MapPin className="w-5 h-5" />
-                  <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '지도' : 'Map'}</span>
-                </button>
-                <button className="flex-1 flex flex-col items-center gap-1 py-2 text-slate-600 hover:text-[#E67E22] transition-colors">
-                  <MapPinned className="w-5 h-5" />
-                  <span className="text-[10px] font-bold">{selectedLanguage === 'ko' ? '내 플레이' : 'My Play'}</span>
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Navigation Tabs - Hidden when audio player is active */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className={`flex-1 flex flex-col overflow-hidden min-h-0 ${isPlaying ? 'hidden' : ''}`}>
+          {/* Navigation Tabs - Always visible */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden min-h-0">
             <div className="px-4 pt-4 bg-[#FCF9F6] border-b shrink-0">
               <TabsList className="grid w-full grid-cols-4 bg-[#EFEBE6] rounded-xl p-1 h-11">
                 <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
@@ -1117,62 +1049,106 @@ export default function LandmarkDetailDialog({
           </Tabs>
 
           {/* Main action buttons - shown when audio is not playing */}
-          <div className={`p-4 bg-white/90 backdrop-blur-xl border-t shrink-0 flex gap-3 h-24 items-center shadow-[0_-10px_20px_rgba(0,0,0,0.02)] z-50 ${isPlaying ? 'hidden' : ''}`}>
-            <Button
-              onClick={() => {
-                const isChinese = selectedLanguage.startsWith('zh');
-                if (isChinese) {
-                  const landmarkName = getTranslatedContent(landmark!, selectedLanguage, 'name');
-                  const amapRouteUrl = `amapuri://route/plan/?did=BGVIS1&dlat=${landmark!.lat}&dlon=${landmark!.lng}&dname=${encodeURIComponent(landmarkName)}&dev=0&t=2`;
-                  window.location.href = amapRouteUrl;
-                } else {
-                  // [교수님 요청] 길 안내 시작 클릭 시 구글맵으로 직접 연결하여 사용자 편의성 극대화
-                  window.open(`https://www.google.com/maps/dir/?api=1&destination=${landmark!.lat},${landmark!.lng}&travelmode=walking`, '_blank');
-                }
-              }}
-              className="flex-1 h-14 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-2xl gap-2 font-bold shadow-xl shadow-orange-100 transition-all active:scale-[0.97]"
-            >
-              <Navigation className="w-5 h-5" />
-              <div className="flex flex-col items-center">
-                <span className="text-base leading-tight">{selectedLanguage === 'ko' ? '길 안내 시작' : 'Get Directions'}</span>
-                <span className="text-[9px] opacity-70 font-medium">Google Maps</span>
+          {!isPlaying && (
+            <div className="p-4 bg-white/90 backdrop-blur-xl border-t shrink-0 flex gap-3 h-24 items-center shadow-[0_-10px_20px_rgba(0,0,0,0.02)] z-50">
+              <Button
+                onClick={() => {
+                  const isChinese = selectedLanguage.startsWith('zh');
+                  if (isChinese) {
+                    const landmarkName = getTranslatedContent(landmark!, selectedLanguage, 'name');
+                    const amapRouteUrl = `amapuri://route/plan/?did=BGVIS1&dlat=${landmark!.lat}&dlon=${landmark!.lng}&dname=${encodeURIComponent(landmarkName)}&dev=0&t=2`;
+                    window.location.href = amapRouteUrl;
+                  } else {
+                    // [교수님 요청] 길 안내 시작 클릭 시 구글맵으로 직접 연결하여 사용자 편의성 극대화
+                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${landmark!.lat},${landmark!.lng}&travelmode=walking`, '_blank');
+                  }
+                }}
+                className="flex-1 h-14 bg-[#E67E22] hover:bg-[#D35400] text-white rounded-2xl gap-2 font-bold shadow-xl shadow-orange-100 transition-all active:scale-[0.97]"
+              >
+                <Navigation className="w-5 h-5" />
+                <div className="flex flex-col items-center">
+                  <span className="text-base leading-tight">{selectedLanguage === 'ko' ? '길 안내 시작' : 'Get Directions'}</span>
+                  <span className="text-[9px] opacity-70 font-medium">Google Maps</span>
+                </div>
+              </Button>
+              <Button
+                onClick={() => {
+                  if (!landmark || !landmark.id) {
+                    console.warn('LandmarkDetailDialog: invalid landmark for add to tour', landmark);
+                    toast({
+                      title: selectedLanguage === 'ko' ? '투어 추가 실패' : 'Failed to add to tour',
+                      variant: 'destructive'
+                    });
+                    return;
+                  }
+                  try {
+                    onAddToTour?.(landmark);
+                  } catch (error) {
+                    console.error('LandmarkDetailDialog onAddToTour error', error);
+                    toast({
+                      title: selectedLanguage === 'ko' ? '투어 추가 중 오류' : 'Error adding to tour',
+                      variant: 'destructive'
+                    });
+                  }
+                }}
+                variant={isInTour ? "default" : "outline"}
+                className={`flex-[0.6] h-14 border-2 rounded-2xl font-bold transition-all active:scale-[0.97] ${isInTour ? 'bg-indigo-600 hover:bg-indigo-700 text-white border-indigo-600 shadow-lg shadow-indigo-100' : 'border-[#EFEBE6] text-[#5D574D] bg-white hover:bg-[#FCF9F6]'}`}
+              >
+                <div className="flex flex-col items-center">
+                  <span className="text-lg leading-tight">
+                    {isInTour ? <Check className="w-5 h-5 mb-0.5" /> : '+'}
+                  </span>
+                  <span className="text-[10px] uppercase font-black">
+                    {isInTour
+                      ? (selectedLanguage === 'ko' ? '담기 완료' : 'Added')
+                      : (selectedLanguage === 'ko' ? '투어 담기' : 'Add to Tour')}
+                  </span>
+                </div>
+              </Button>
+            </div>
+          )}
+
+          {/* Compact Minimal Player - Always visible at bottom when playing */}
+          {isPlaying && (
+            <div className="p-4 bg-white/100 backdrop-blur-2xl shrink-0 flex flex-col shadow-[0_-15px_30px_rgba(0,0,0,0.1)] z-50 border-t border-slate-200">
+              {/* Timeline */}
+              <div className="w-full space-y-1.5 mb-2 px-1">
+                <div className="flex justify-between text-[10px] text-slate-500 font-bold mb-1">
+                  <span>0:00</span>
+                  <span>3:58</span>
+                </div>
+                <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div className="h-full bg-[#E67E22] rounded-full" style={{ width: '15%' }}></div>
+                </div>
               </div>
-            </Button>
-            <Button
-              onClick={() => {
-                if (!landmark || !landmark.id) {
-                  console.warn('LandmarkDetailDialog: invalid landmark for add to tour', landmark);
-                  toast({
-                    title: selectedLanguage === 'ko' ? '투어 추가 실패' : 'Failed to add to tour',
-                    variant: 'destructive'
-                  });
-                  return;
-                }
-                try {
-                  onAddToTour?.(landmark);
-                } catch (error) {
-                  console.error('LandmarkDetailDialog onAddToTour error', error);
-                  toast({
-                    title: selectedLanguage === 'ko' ? '투어 추가 중 오류' : 'Error adding to tour',
-                    variant: 'destructive'
-                  });
-                }
-              }}
-              variant={isInTour ? "default" : "outline"}
-              className={`flex-[0.6] h-14 border-2 rounded-2xl font-bold transition-all active:scale-[0.97] ${isInTour ? 'bg-indigo-600 hover:bg-indigo-700 text-white border-indigo-600 shadow-lg shadow-indigo-100' : 'border-[#EFEBE6] text-[#5D574D] bg-white hover:bg-[#FCF9F6]'}`}
-            >
-              <div className="flex flex-col items-center">
-                <span className="text-lg leading-tight">
-                  {isInTour ? <Check className="w-5 h-5 mb-0.5" /> : '+'}
-                </span>
-                <span className="text-[10px] uppercase font-black">
-                  {isInTour
-                    ? (selectedLanguage === 'ko' ? '담기 완료' : 'Added')
-                    : (selectedLanguage === 'ko' ? '투어 담기' : 'Add to Tour')}
-                </span>
+
+              <div className="w-full flex items-center justify-between gap-4 mt-2">
+                <button className="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-all shadow-sm">
+                  {playbackRate}x
+                </button>
+
+                <div className="flex items-center gap-4">
+                  <button className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-all shadow-sm">
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button onClick={() => handlePlayAudio()} className="w-12 h-12 rounded-full bg-[#E67E22] flex items-center justify-center text-white shadow-lg shadow-orange-200 hover:bg-[#D66E12] active:scale-95 transition-all">
+                    {isPlaying && !isPaused ? <Pause className="w-5 h-5 fill-white" /> : <Play className="w-5 h-5 fill-white ml-0.5" />}
+                  </button>
+                  <button className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-all shadow-sm">
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => { audioService.stopSentences(); audioService.stop(); setIsPlaying(false); setIsPaused(false); }}
+                  className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-all border border-slate-200"
+                >
+                  <div className="font-bold text-xs">✕</div>
+                </button>
               </div>
-            </Button>
-          </div>
+            </div>
+          )}
+
         </div>
       </DialogContent>
     </Dialog>

@@ -294,3 +294,12 @@
 - **Task**: 코드 수정 후 npx tsc --noEmit 통과 확인 및 재배포 실행
 - **Result**: 버그 픽스 완료. npm run deploy 재진행 중
 - **Next**: 빌드와 클라우드 배포 모니터링 성공 확인
+
+
+## 🎨 2026-03-27 09:50 UI/UX 개편 - 미니 플레이어 하단 고정
+
+- **Order**: player move to down uper mytour
+- **Plan**: 오디오 재생 상태에서도 하이라이트된 텍스트를 읽을 수 있도록 UI 재배치
+- **Task**: LandmarkDetailDialog.tsx의 플레이어를 컴팩트하게 축소하여 팝업 최하단(MYTOUR 위)으로 고정
+- **Result**: 성공 반영 및 UI 렌더링 즉각 최적화
+- **Next**: 저장소 업데이트 대기
