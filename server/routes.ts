@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { type Server } from "node:http";
 import { storage } from "./storage";
-import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats, insertLikeSchema, insertFollowSchema, commissions } from "@shared/schema";
+import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats, insertLikeSchema, insertFollowSchema, commissions, leads, appointments } from "@shared/schema";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { requireAuth, requireRole } from "./auth";
@@ -19,6 +19,7 @@ import { nanoid } from "nanoid";
 // Hono does not use 'express' imports.
 // We remove multer and use Hono's body parsing.
 import { env } from "./env";
+import { runSalesAutomation } from "./services/automation/salesGraph";
 
 // ...
 // We remove Stripe import here if not used in this block (it is used later).
@@ -1478,7 +1479,55 @@ export function registerRoutes(app: Hono<any>) {
       return c.json({ error: "Failed to fetch partner tree" }, 500);
     }
   });
+
+  // [Automation Doctor 2026-03-28] CRM: 가망 고객 리스트 및 시드 데이터 (상조 가입자 포함)
+  app.get("/api/partner/leads", requireAuth, async (c) => {
+    const session = c.get('session');
+    const userId = session.get("userId");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+
+      let result = await db.select().from(leads).where(eq(leads.agentId, userId));
+
+      // 데모를 위한 시드 데이터 생성 (데이터가 없을 때만)
+      if (result.length === 0) {
+        const demoLeads = [
+          { agentId: userId, name: "김철수 (상조 가입자)", phone: "010-1234-5678", source: "kakao", status: "new" },
+          { agentId: userId, name: "이영희 (예비 크루즈 인솔자)", phone: "010-9876-5432", source: "web", status: "contacted" },
+          { agentId: userId, name: "박지민 (일본 가이드 지원)", phone: "010-1111-2222", source: "manual", status: "meeting" }
+        ];
+        await db.insert(leads).values(demoLeads).execute();
+        result = await db.select().from(leads).where(eq(leads.agentId, userId));
+      }
+
+      return c.json(result);
+    } catch (error) {
+      console.error("Lead fetch error:", error);
+      return c.json({ error: "Failed to fetch leads" }, 500);
+    }
+  });
+
+  // [Automation Doctor 2026-03-28] CRM: 카카오톡 동기화 및 자동 문서화 (LangGraph 연동)
+  app.post("/api/partner/leads/:id/sync", requireAuth, async (c) => {
+    const session = c.get('session');
+    const userId = session.get("userId");
+    const leadId = c.req.param("id");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+
+      // 1. 해당 고객 정보 가져오기
+      const [lead] = await db.select().from(leads).where(eq(leads.id, leadId));
+      if (!lead) return c.json({ error: "Lead not found" }, 404);
+
+      // 2. LangGraph 엔진 실행 (Raw Text 시뮬레이션)
+      const text = `${lead.name} 고객님의 상담 메시지: "5월 서유럽 크루즈 10인 단체 오디오 가이드 도입 희망, 상조 포인트 결제 문의, 수요일 오전 미팅 요청"`;
+
+      const result = await runSalesAutomation(leadId, userId as string, text);
+
+      return c.json({ success: true, analysis: result });
+    } catch (error) {
+      console.error("CRM Automation error:", error);
+      return c.json({ error: "Failed to sync lead with AI" }, 500);
+    }
+  });
 }
-
-
-

@@ -640,6 +640,51 @@ export const updateStats = pgTable("update_stats", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+/**
+ * [Automation Doctor 2026-03-28] 📈 영업사원 가망고객(Leads) 관리 테이블
+ * 
+ * 교수님, 영업의 시작은 고객 관리입니다. 상조 가입자나 잠재 고객 데이터를
+ * 체계적으로 관리하고 카카오톡 상담 내용을 동기화할 수 있는 구조입니다.
+ */
+export const leads = pgTable("leads", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  // 담당 영업사원(어드바이저) ID 입니다.
+  agentId: varchar("agent_id").notNull().references(() => users.id, { onDelete: 'cascade' }),
+  name: varchar("name").notNull(),
+  phone: varchar("phone"),
+  email: varchar("email"),
+  // 유입 경로 (웹, 카카오톡, 수동 입력 등)
+  source: varchar("source").default("web"),
+  // 현재 상태 (신규, 상담중, 미팅예약, 계약완료 등)
+  status: varchar("status").default("new"),
+  notes: text("notes"),
+  // [NEW] 카카오톡 상담 내용 및 요약 정보 (문서화 용도)
+  kakaoSyncData: json("kakao_sync_data"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+/**
+ * [Automation Doctor 2026-03-28] 📅 AI 미팅 예약 및 일정 관리 테이블
+ * 
+ * 챗봇이나 상담을 통해 AI가 자동으로 잡은 미팅 일정을 기록합니다.
+ * 노션이나 슬랙으로 알림을 보낼 때 기준 데이터가 됩니다.
+ */
+export const appointments = pgTable("appointments", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  agentId: varchar("agent_id").notNull().references(() => users.id),
+  leadId: varchar("lead_id").references(() => leads.id, { onDelete: 'cascade' }),
+  title: varchar("title").notNull(),
+  startTime: timestamp("start_time").notNull(),
+  endTime: timestamp("end_time").notNull(),
+  location: varchar("location"),
+  status: varchar("status").default("scheduled"), // 'scheduled', 'completed', 'cancelled'
+  // AI가 분석한 상담 맥락 및 특이사항
+  aiNotes: text("ai_notes"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+
 // Insert schemas
 export const insertCitySchema = createInsertSchema(cities).omit({
   createdAt: true,
