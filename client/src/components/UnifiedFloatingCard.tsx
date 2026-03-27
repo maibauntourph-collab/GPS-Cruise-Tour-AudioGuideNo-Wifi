@@ -65,6 +65,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Landmark, GpsPosition, City, CruisePort, TransportOption } from '@shared/schema';
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService, AudioService } from '@/lib/audioService';
@@ -204,21 +211,21 @@ function getAirbnbUrl(query: string): string {
 }
 
 // [Professor Optimization] LandmarkListItem 분리 및 React.memo 적용
-const LandmarkListItem = React.memo(({ 
-  landmark, 
-  distance, 
-  selectedLanguage, 
-  userRegion, 
-  isInTour, 
-  onSelect, 
-  onToggleTour 
-}: { 
-  landmark: Landmark; 
-  distance: number | null; 
-  selectedLanguage: string; 
-  userRegion: string; 
-  isInTour: boolean; 
-  onSelect: (landmark: Landmark) => void; 
+const LandmarkListItem = React.memo(({
+  landmark,
+  distance,
+  selectedLanguage,
+  userRegion,
+  isInTour,
+  onSelect,
+  onToggleTour
+}: {
+  landmark: Landmark;
+  distance: number | null;
+  selectedLanguage: string;
+  userRegion: string;
+  isInTour: boolean;
+  onSelect: (landmark: Landmark) => void;
   onToggleTour: (landmark: Landmark) => void;
 }) => {
   return (
@@ -384,6 +391,7 @@ export function UnifiedFloatingCard({
   const translatedDetail = useLiveTranslation(detailFallback, selectedLanguage);
   const [showDetailDialog, setShowDetailDialog] = useState(false);
   const [tourAddedInDialog, setTourAddedInDialog] = useState(false);
+  const [showRouteModeDialog, setShowRouteModeDialog] = useState(false);
 
   const itemsPerPage = 5;
   const transportItemsPerPage = 3;
@@ -908,46 +916,81 @@ export function UnifiedFloatingCard({
                 <div className="flex items-center justify-between">
                   <h5 className="font-bold text-sm">{t('myTour', selectedLanguage) || 'My Tour'} ({tourStops.length})</h5>
 
-                  {/* [적요] GPS 모드 선택기 - 실시간 vs 시뮬레이션 */}
-                  <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-full border border-slate-200 shadow-inner">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={`h-7 px-3 rounded-full text-[9px] font-black uppercase tracking-tighter transition-all ${gpsMode === 'real' ? 'bg-white text-emerald-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
-                      onClick={() => onGpsModeChange?.('real')}
-                    >
-                      <Navigation className="w-3 h-3 mr-1" />
-                      Real GPS
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={`h-7 px-3 rounded-full text-[9px] font-black uppercase tracking-tighter transition-all ${gpsMode === 'simulation' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
-                      onClick={() => onGpsModeChange?.('simulation')}
-                    >
-                      <Car className="w-3 h-3 mr-1" />
-                      Sim
-                    </Button>
-                  </div>
+                  {/* [Designer Kim] GPS 모드 선택기 제거하고 Start Route 클릭 시 팝업으로 노출 */}
+
+                  <Dialog open={showRouteModeDialog} onOpenChange={setShowRouteModeDialog}>
+                    <DialogContent className="sm:max-w-md bg-white border-white overflow-hidden p-0 shadow-2xl rounded-3xl w-[90vw]">
+                      <DialogHeader className="bg-slate-50 border-b border-slate-100 p-6 pt-8 text-center pb-5">
+                        <DialogTitle className="text-xl font-extrabold text-slate-800 tracking-tight">
+                          {t('selectRouteMode', selectedLanguage) || 'Select Route Mode'}
+                        </DialogTitle>
+                        <DialogDescription className="text-slate-500 text-xs mt-2 break-keep leading-relaxed">
+                          {selectedLanguage === 'ko' ? '초고속 가상 주행(Sim)으로 편하게 투어할까요, 아니면 지금 바로 걷는(GPS) 실시간 길안내를 받을까요?' : 'How would you like to start your tour today?'}
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="flex bg-white p-6 gap-3 pt-5">
+                        <Button
+                          variant="outline"
+                          className="flex-[1] flex flex-col h-32 gap-3 border-2 border-indigo-100 hover:border-indigo-500 hover:bg-indigo-50 text-indigo-700 transition-all rounded-2xl shadow-sm bg-white"
+                          onClick={() => {
+                            setShowRouteModeDialog(false);
+                            onGpsModeChange?.('simulation');
+                            setTimeout(() => {
+                              onToggleSimulation?.();
+                            }, 300);
+                          }}
+                        >
+                          <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
+                            <Car className="w-6 h-6 text-indigo-600" />
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <span className="font-black text-xs tracking-wider">SIMULATION</span>
+                            <span className="text-[9px] text-indigo-500/80 font-bold tracking-tight mt-0.5">{selectedLanguage === 'ko' ? '자동 가상 투어' : 'Virtual Tour'}</span>
+                          </div>
+                        </Button>
+
+                        <Button
+                          variant="outline"
+                          className="flex-[1] flex flex-col h-32 gap-3 border-2 border-emerald-100 hover:border-emerald-500 hover:bg-emerald-50 text-emerald-700 transition-all rounded-2xl shadow-sm bg-white"
+                          onClick={() => {
+                            setShowRouteModeDialog(false);
+                            onGpsModeChange?.('real');
+                            setTimeout(() => {
+                              if (tourStops.length > 0) onNavigate(tourStops[0]);
+                            }, 300);
+                          }}
+                        >
+                          <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
+                            <Navigation className="w-6 h-6 text-emerald-600 ml-[-2px]" />
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <span className="font-black text-xs tracking-wider">REAL GPS</span>
+                            <span className="text-[9px] text-emerald-500/80 font-bold tracking-tight mt-0.5">{selectedLanguage === 'ko' ? '실제 보행 안내' : 'Walking Navi'}</span>
+                          </div>
+                        </Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
 
                   <Button
                     size="sm"
-                    className={`rounded-full h-8 px-4 text-[10px] font-black tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 ${(isSimulationMode || (gpsMode === 'real' && activeRoute)) ? 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 ring-2 ring-red-100' : 'bg-gradient-to-r from-[#E9633F] to-[#FF8A65] text-white shadow-xl shadow-orange-100 ring-2 ring-orange-100'}`}
+                    className={`ml-auto rounded-full h-8 px-4 text-[10px] font-black tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 ${(isSimulationMode || activeRoute) ? 'bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 ring-2 ring-red-100' : 'bg-gradient-to-r from-[#E9633F] to-[#FF8A65] text-white shadow-xl shadow-orange-100 ring-2 ring-orange-100'}`}
                     onClick={() => {
-                      if (gpsMode === 'simulation') {
-                        onToggleSimulation?.();
-                      } else {
-                        // Real mode start logic (navigate to first stop or active route)
-                        if (activeRoute) {
+                      if (isSimulationMode || activeRoute) {
+                        if (isSimulationMode) {
+                          onToggleSimulation?.();
+                        } else {
                           handleClearRoute?.();
                           onLandmarkClose?.();
-                        } else if (tourStops.length > 0) {
-                          onNavigate(tourStops[0]);
+                        }
+                      } else {
+                        if (tourStops.length > 0) {
+                          setShowRouteModeDialog(true);
                         }
                       }
                     }}
                   >
-                    {(isSimulationMode || (gpsMode === 'real' && activeRoute)) ? (
+                    {(isSimulationMode || activeRoute) ? (
                       <div className="flex items-center gap-1.5 uppercase">
                         <Square className="w-3 h-3 fill-current" />
                         <span>{t('stop', selectedLanguage) || 'Stop'}</span>

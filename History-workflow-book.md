@@ -303,3 +303,21 @@
 - **Task**: LandmarkDetailDialog.tsx의 플레이어를 컴팩트하게 축소하여 팝업 최하단(MYTOUR 위)으로 고정
 - **Result**: 성공 반영 및 UI 렌더링 즉각 최적화
 - **Next**: 저장소 업데이트 대기
+
+
+## 🚀 2026-03-27 09:58 신규 UI 라이브 배포 (deploy)
+
+- **Order**: deploy
+- **Plan**: 직전 단계에서 개선한 하단 미니 플레이어 구조를 운영 환경에 배포
+- **Task**: npm run deploy 명령어 수행 (Vite + Cloudflare)
+- **Result**: 빌드 및 배포 파이프라인 가동 중...
+- **Next**: 웹앱 라이브 환경(URL)에서 나레이션/플레이어 중첩 현상 해결 확인
+
+
+## 🚘 2026-03-27 10:45 GPS/Simulation 모드 선택 UI 개선
+
+- **Order**: when user play startroute ask real gps or simulation pupup, and remove real gps and sim icon on floating card
+- **Plan**: 상단 토글 버튼 제거를 통한 UI 클린업 및 Start Route 액션 후 팝업(Dialog) 연결
+- **Task**: UnifiedFloatingCard.tsx의 모드 토글 마크업 삭제 및 Start Route 클릭 이벤트에 사용자 선택 팝업을 뜨게끔 재설계
+- **Result**: 공간 활용도 100% 향상 및 직관적인 경로 추적 UX 설계 완료
+- **Next**: 로컬 테스트 및 커밋
