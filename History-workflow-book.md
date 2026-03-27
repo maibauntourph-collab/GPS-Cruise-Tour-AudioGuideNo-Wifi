@@ -339,3 +339,12 @@
 - **Task**: UnifiedFloatingCard.tsx 헤더 영역에 onClick 삽입 후 onToggleMinimized 호출
 - **Result**: 작은 아이콘을 찾을 필요 없이 상단 바 터치만으로 쾌적한 화면 제어 가능
 - **Next**: 저장소 연동 및 배포 대기
+
+
+## 📊 2026-03-27 12:24 Google Analytics 트레이스 관리 설정
+
+- **Order**: 이것 html 모든 해더 부분에 반영해줘 트레이스 관리하려고 (gtag 스크립트 적용)
+- **Plan**: 프로젝트 내에 존재하는 모든 프론트엔드 html 엔트리의 <head> 공간에 배포된 애널리틱스 스크립트 일괄 심기
+- **Task**: frontend/index.html 내 태그 삽입 (client/index.html은 포함 완료 확인)
+- **Result**: GA4 라이브 트래픽 및 행동 추적 로깅 활성화
+- **Next**: 로컬 커밋 및 지속적인 최적화 관리
