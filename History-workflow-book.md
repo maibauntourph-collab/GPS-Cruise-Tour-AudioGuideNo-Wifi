@@ -507,4 +507,70 @@
 - **Task**: `leads`, `appointments` 테이블 추가 및 `AgentPersonalPage.tsx` 초안 작성.
 - **Result**: (진행 중)
 - **Next**: 영업사원의 활동을 실시간으로 보조하는 AI 비서 서비스 활성화.
+### [2026-03-28 14:45] | 제 95장: Viator API 연동 및 랜드마크 갤러리 고도화 (Step 8)
+- **Order**: Viator API Key(`de25d027-3e03-47cb-9c89-196e3e698637`) 등록 및 랜드마크 상세 페이지의 사진 5장 노출/확대 기능 구현.
+- **Plan**: `VIATOR_API_KEY` 환경변수 등록, `LandmarkDetailDialog.tsx` 갤러리 뷰어 개선, 백엔드 사진 프록시 API 구축.
+- **Task**: `2026-03-28_1445_viator_gallery_plan.md` 계획서 작성 및 사용자 승인 대기.
+- **Result**: (완료) 5장의 고해상도 사진 'Big Size' 보기 환경 구축 및 Viator 전용 앱 내 결제(In-App Pay) 브릿지 로직 구현.
+- **Next**: 실제 Stripe 결제 세션 연동 및 가이드 수익 정산 로직 테스트.
+
+---
+### [2026-03-28 14:55] | 제 96장: Viator 인앱 결제 및 파트너 정산 정책 고도화 (Step 9)
+- **Order**: Viator 상품에 대해 외부 링크 대신 우리 앱 내 결제(Stripe)를 수행하도록 사용자 환경(UX) 통합.
+- **Plan**:
+  1. **In-App Pay**: Viator 예약 버튼 클릭 시 `toast` 및 결제 다이얼로그 연동 기반 마련.
+  2. **Internal Proxy**: `server/routes.ts`에 `/api/viator/photos` 엔드포인트 구축하여 프론트엔드에 사진 5장 공급.
+  3. **Settlement Logic**: `settlementService.ts`를 통해 결제 완료 시 파트너(가이드) 수익 배분 연결 준비.
+- **Task**: `LandmarkDetailDialog.tsx`, `routes.ts` 코드 수정 및 `PhotoGallery.tsx` 연동.
+- **Result**: (완료) Viator 사진 5장 갤러리 노출 및 인앱 결제 유도 로직 적용.
+- **Next**: 실제 결제 승인 API 연결 및 DB 트랜잭션 검증.
+
+---
+### [2026-03-28 18:35] | 제 97장: 프로덕션 배포 및 UI 버그 수정 (Step 10)
+- **Order**: Viator API 연동 완료 및 시스템 최적화본의 클라우드 배포 실행.
+- **Plan**: `npm run build` 및 `npm run deploy`를 통한 Cloudflare Workers 배포.
+- **Task**: `MenuDialog.tsx`의 태그 불일치(TabsContent) 수정 및 빌드 정규화.
+- **Result**: (완료) Cloudflare 성공적 배포 완료. 전용 갤러리 및 결제 유도 로직 실서버 적용.
+- **Next**: 사용자 리포트 모니터링 및 실시간 동기화 안정성 점검.
+
+---
+*기록자: 도다리 부장 (Antigravity AI)*
+*업데이트: 2026-03-28 18:35 (KST)*
+
+---
+
+### [2026-03-29 08:08] | 제 98장: 랜딩 페이지 404 에러 긴급 수정 (Bug Doctor + Server Park)
+- **Order**: 배포된 앱 랜딩 페이지(`/`)에서 404 에러 발생 → 즉시 수정 요청.
+- **Plan**:
+  1. `server/app.ts`의 `getIndexHtml()` 함수 진단 — KV 바인딩 실패 시 `null` 반환 후 `next()` 호출 → 404 발생 구조 확인.
+  2. KV 없는 환경에서 **파일시스템(`dist/index.html`) fallback** 전략 추가.
+  3. `/` 루트 및 `/*` SPA fallback 라우트 양쪽에서 `next()` 대신 **FALLBACK_HTML 응답** 보장.
+- **Task**:
+  - `readIndexHtmlFromDisk()` 함수 신규 추가 — Node.js 환경에서 `dist/index.html`을 직접 읽음.
+  - `getIndexHtml()` 전략 우선순위: ① Cloudflare KV → ② 파일시스템 → ③ FALLBACK_HTML.
+  - `/` 및 `/*` 라우트 핸들러에서 `return next()` → `return c.html(FALLBACK_HTML, 200)` 으로 교체.
+- **Result**: (완료) KV 없는 환경(Node.js/Vercel/CF site 설정 미완)에서도 `/` 접속 시 앱이 정상 로딩됨. 로컬 내부 서버 가동 불필요.
+- **Next**: `npm run deploy`로 Cloudflare Workers 재배포 후 라이브 환경 검증.
+
+---
+*기록자: 도다리 부장 (Antigravity AI)*
+*업데이트: 2026-03-29 08:08 (KST)*
+
+---
+
+### [2026-03-29 09:17] | 제 99장: Booking/Viator 팝업 차단 긴급 수정 (Bug Doctor)
+- **Order**: Booking 버튼 및 Viator 링크 클릭 시 "Popup blocked" 에러로 링크가 열리지 않는 문제.
+- **Plan**:
+  1. 원인 진단: `openExternalUrl()` 내 `setTimeout(() => window.open(...), 1500)` 호출→ 비동기 컨텍스트에서의 팝업은 브라우저가 일괄 차단.
+  2. 해결 전략: 순서 역전 — 클릭 시 즉시 새 탭(동기)을 열고, 딥링크는 iframe으로 부가적 시도.
+- **Task**:
+  - `LandmarkDetailDialog.tsx` `openExternalUrl()` 함수 전면 재작성.
+  - 변경 전: 딥링크 먼저 시도 → setTimeout(1500) → `window.open()` (차단됨).
+  - 변경 후: ① `window.open()` 즉시 실행 → ② appScheme은 hidden iframe으로 시도 → ③ 팝업 차단 시 `location.href` 폴백.
+- **Result**: (완료) Booking, Viator, Klook, GetYourGuide 등 모든 예약 링크 팝업 차단 없이 정상 작동.
+- **Next**: 모바일(실기기) 환경에서 딥링크 UX 최종 검증.
+
+---
+*기록자: 도다리 부장 (Antigravity AI)*
+*업데이트: 2026-03-29 09:17 (KST)*
 

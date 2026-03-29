@@ -9,7 +9,7 @@ import { setupAuthRoutes, Variables } from "./auth";
 
 // [적요: 로깅 함수 분리]
 // server/vite.ts의 log 함수가 Node.js 전용일 수 있으므로 간단한 대체 구현 사용
-const log = (message: string, source = "APP") => {
+export const log = (message: string, source = "APP") => {
     const time = new Date().toLocaleTimeString();
     console.log(`[${time}] [${source}] ${message}`);
 };
@@ -43,7 +43,7 @@ app.use("*", async (c, next) => {
         "frame-ancestors *",
         "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com",
         "media-src 'self' data:",
-        "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com",
+        "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com api.viator.com",
         "font-src 'self' data: https:",
         "style-src 'self' 'unsafe-inline' https: unpkg.com",
         "style-src-elem 'self' 'unsafe-inline' https: unpkg.com",
@@ -88,48 +88,104 @@ app.use("*", async (c: Context, next: Next) => {
 setupAuthRoutes(app);
 registerRoutes(app as any);
 
-// [적요: Cloudflare Workers를 위한 정수 파일 서빙 및 SPA 폴백]
-// 1. 공통 index.html 로더 함수
-async function getIndexHtml(c: Context) {
-    const workerEnv = c.env as any;
-    if (!workerEnv?.__STATIC_CONTENT) return null;
+// [적요: Cloudflare Workers + Node.js 공용 index.html 로더]
+// [Bug Doctor | 2026-03-29] KV가 없는 환경에서도 dist/index.html을 파일시스템에서 직접 읽어
+// 404 없이 SPA를 서빙합니다. 환경에 따라 자동으로 전략을 선택합니다.
 
+// Node.js 환경에서 fs/path를 동적으로 import (Cloudflare Workers에서는 사용 불가)
+async function readIndexHtmlFromDisk(url: string): Promise<string | null> {
     try {
-        let manifest: any = {};
+        // [적요] Cloudflare Workers 환경에서는 이 import 자체가 실패하므로 catch에서 null 반환
+        const { default: fs } = await import("node:fs/promises");
+        const { default: path } = await import("node:path");
+        const { fileURLToPath } = await import("node:url");
+        const __dirname = path.dirname(fileURLToPath(import.meta.url));
+        // [적요] 로컬 dev: server/../dist/index.html, 프로덕션 빌드: dist-server/../dist/index.html
+        const distPath = path.resolve(__dirname, "..", "dist", "index.html");
+        const html = await fs.readFile(distPath, "utf-8");
+        // OG 메타태그 주입 시도 (실패해도 html 그대로 반환)
         try {
-            // @ts-ignore - Wrangler가 주입하는 매니페스트
-            const m = await import("__STATIC_CONTENT_MANIFEST");
-            const manifestStr = m.default || m;
-            manifest = typeof manifestStr === 'string' ? JSON.parse(manifestStr) : manifestStr;
-        } catch (e) {
-            console.warn("[Worker] Manifest not found/invalid");
-        }
-
-        const physicalKey = manifest["index.html"] || "index.html";
-        const asset = await workerEnv.__STATIC_CONTENT.get(physicalKey, { type: "text" });
-
-        if (asset) {
-            let html: string = asset;
-            try {
-                const { ogService } = await import("./services/ogService");
-                html = await ogService.injectMetaTags(html, c.req.url);
-            } catch (ogError) {
-                console.error("[Worker] OG injection failed:", ogError);
-            }
+            const { ogService } = await import("./services/ogService");
+            return await ogService.injectMetaTags(html, url);
+        } catch {
             return html;
         }
-    } catch (e) {
-        console.error("[Worker] Failed to load index.html from KV:", e);
+    } catch {
+        return null;
     }
+}
+
+// 1. 공통 index.html 로더 함수
+// [School Note] 전략 우선순위: ① Cloudflare KV → ② 파일시스템(Node.js) → ③ null
+async function getIndexHtml(c: Context) {
+    const workerEnv = c.env as any;
+
+    // ① Cloudflare Workers KV 전략
+    if (workerEnv?.__STATIC_CONTENT) {
+        try {
+            let manifest: any = {};
+            try {
+                // @ts-ignore - Wrangler가 주입하는 매니페스트
+                const m = await import("__STATIC_CONTENT_MANIFEST");
+                const manifestStr = m.default || m;
+                manifest = typeof manifestStr === 'string' ? JSON.parse(manifestStr) : manifestStr;
+            } catch (e) {
+                console.warn("[Worker] Manifest not found/invalid");
+            }
+
+            const physicalKey = manifest["index.html"] || "index.html";
+            const asset = await workerEnv.__STATIC_CONTENT.get(physicalKey, { type: "text" });
+
+            if (asset) {
+                let html: string = asset;
+                try {
+                    const { ogService } = await import("./services/ogService");
+                    html = await ogService.injectMetaTags(html, c.req.url);
+                } catch (ogError) {
+                    console.error("[Worker] OG injection failed:", ogError);
+                }
+                return html;
+            }
+        } catch (e) {
+            console.error("[Worker] Failed to load index.html from KV:", e);
+        }
+    }
+
+    // ② 파일시스템 전략 (Node.js 로컬/프로덕션 빌드 환경)
+    const fsHtml = await readIndexHtmlFromDisk(c.req.url);
+    if (fsHtml) {
+        console.log("[App] Serving index.html from filesystem");
+        return fsHtml;
+    }
+
     return null;
 }
 
+// [Server Park | 2026-03-29] 최소 HTML 셸 - KV가 없는 환경에서도 SPA가 기동되도록 보장
+// 학생들에게: Cloudflare Workers Sites가 __STATIC_CONTENT를 자동 주입하지 못하면
+// 이 fallback HTML이 React 앱을 로드합니다.
+const FALLBACK_HTML = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPS 오디오 가이드</title>
+  <script>window.__SPA_FALLBACK__=true;<\/script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/assets/index.js"><\/script>
+</body>
+</html>`;
+
 // 2. 루트 및 SPA 라우팅 (API가 아닌 모든 경로는 index.html 서빙)
 app.get("/", async (c, next) => {
-    // [Fix] root URL should serve index.html directly
+    // [Fix | 2026-03-29] root URL → KV에서 읽고, 실패하면 Hono에게 패스 (Wrangler Sites가 처리)
     const html = await getIndexHtml(c);
     if (html) return c.html(html);
-    return next();
+    // [Bug Doctor] KV 없는 환경: fallback으로 next() 대신 응답 보장
+    console.warn("[App] / : getIndexHtml null → fallback response");
+    return c.html(FALLBACK_HTML, 200);
 });
 
 // 3. 정적 자산 서빙 및 SPA 폴백 (assets/*, *.js, *.css 등)
@@ -180,15 +236,16 @@ app.get("/*", async (c, next) => {
         }
     }
 
-    // [SPA Fallback] 
-    // 파일이 없거나 자산이 아닌 일반 경로(예: /home, /admin 등)는 index.html 서빙
-    // [Fix] Ensure /home etc. always returns index.html for React Router to handle
+    // [SPA Fallback | 2026-03-29]
+    // 자산이 아닌 일반 경로(예: /home, /admin 등)는 index.html 서빙
+    // 학생들: React Router(wouter)가 클라이언트 사이드에서 실제 경로를 처리합니다.
     console.log(`[Worker] SPA Fallback requested for: ${path}. workerEnv: ${!!workerEnv}`);
     const html = await getIndexHtml(c);
     if (html) return c.html(html);
 
-    console.log(`[Worker] FALLBACK NEXT() for: ${path}`);
-    return next();
+    // [Bug Doctor | 2026-03-29] KV 없는 환경: next() 대신 fallback HTML 반환으로 404 차단
+    console.warn(`[App] SPA fallback for ${path}: getIndexHtml null → fallback response`);
+    return c.html(FALLBACK_HTML, 200);
 });
 
 export default app;

@@ -845,11 +845,10 @@ export default function MenuDialog({
                   }}
                 />
               </TabsContent>
-            </TabsContent>
-          </div>
-        </Tabs>
-      </DialogContent>
-    </Dialog >
+            </div>
+          </Tabs>
+        </DialogContent>
+      </Dialog>
 
       <OfflineDataDialog
         isOpen={showOfflineDialog}

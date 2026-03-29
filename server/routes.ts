@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { type Server } from "node:http";
+import crypto from "node:crypto";
 import { storage } from "./storage";
 import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats, insertLikeSchema, insertFollowSchema, commissions, leads, appointments } from "@shared/schema";
 import { zValidator } from "@hono/zod-validator";
@@ -13,16 +14,9 @@ import { automationService } from "./services/automationService";
 import { autoTranslateLandmark } from "./lib/autoTranslate";
 import { dbCheckService } from "./services/dbCheckService";
 import { settlementService } from "./services/settlementService";
-import crypto from "node:crypto";
-import { nanoid } from "nanoid";
-
-// Hono does not use 'express' imports.
-// We remove multer and use Hono's body parsing.
 import { env } from "./env";
+import { log } from "./app";
 import { runSalesAutomation } from "./services/automation/salesGraph";
-
-// ...
-// We remove Stripe import here if not used in this block (it is used later).
 import Stripe from "stripe";
 
 // Initialize Stripe lazily
@@ -259,8 +253,9 @@ export function registerRoutes(app: Hono<any>) {
 
     if (!query) return c.json({ error: "주석: 검색어가 필요합니다." }, 400);
 
-    // 환경 변수에서 구글 맵스 API 키를 가져옵니다.
-    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    // 환경 변수에서 구글 맵스 API 키를 가져옵니다. (DB 설정 우선)
+    const dbApiKey = await storage.getSiteSetting("api_google_maps_key");
+    const apiKey = dbApiKey || env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) {
       console.error("[Geocoding] GOOGLE_MAPS_API_KEY가 설정되지 않았습니다.");
       return c.json({ error: "지오코딩 서비스를 일시적으로 사용할 수 없습니다." }, 503);
@@ -309,7 +304,8 @@ export function registerRoutes(app: Hono<any>) {
     const query = c.req.query("q");
     if (!query) return c.json({ error: "검색어가 필요합니다." }, 400);
 
-    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    const dbApiKey = await storage.getSiteSetting("api_google_maps_key");
+    const apiKey = dbApiKey || env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) {
       console.error("[Places] API 키가 설정되지 않았습니다.");
       return c.json({ error: "장소 검색 서비스를 일시적으로 사용할 수 없습니다." }, 503);
@@ -353,7 +349,8 @@ export function registerRoutes(app: Hono<any>) {
     const { placeId, cityId, category } = await c.req.json();
     if (!placeId || !cityId) return c.json({ error: "placeId와 cityId가 누락되었습니다." }, 400);
 
-    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    const dbApiKey = await storage.getSiteSetting("api_google_maps_key");
+    const apiKey = dbApiKey || env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) return c.json({ error: "API 키가 없습니다." }, 503);
 
     try {
@@ -407,6 +404,158 @@ export function registerRoutes(app: Hono<any>) {
     } catch (error) {
       console.error("[Landmark Sync Error]", error);
       return c.json({ error: "데이터 동기화 중 오류가 발생했습니다." }, 500);
+    }
+  });
+
+  // [Server Park | 2026-03-28] Viator 상품 사진 프록시 API
+  // 학생들에게: Viator API를 통해 해당 명소의 고화질 '실제' 상품 사진들을 5장 가져옵니다.
+  // API 키는 서버에서만 안전하게 관리합니다.
+  app.get("/api/viator/photos", async (c) => {
+    const query = c.req.query("q");
+    if (!query) return c.json({ error: "검색어가 필요합니다." }, 400);
+
+    // [Server Park] Cloudflare Workers 환경(c.env)과 로컬(env) 모두 지원
+    // [Bug Doctor] DB에 저장된 API 키를 우선 사용합니다 (Admin에서 수정 가능)
+    const dbApiKey = await storage.getSiteSetting("api_viator_key");
+    const apiKey = dbApiKey || c.env?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
+
+    // 보안을 위해 키의 일부만 출력 (마스킹 복구)
+    const maskedKey = apiKey ? `${apiKey.substring(0, 4)}***${apiKey.substring(apiKey.length - 4)}` : "MISSING";
+    log(`[Viator Proxy] API Key: ${maskedKey}, Query: ${query}`, "VIATOR");
+
+    try {
+      log(`[Viator Proxy] Searching photos for: ${query}`, "VIATOR");
+      // v2.0 official structure for search/products
+      const v2RequestBody = {
+        filtering: {
+          searchText: query
+        },
+        pagination: {
+          start: 1,
+          count: 5
+        },
+        currency: "USD"
+      };
+
+      console.log(`[Viator Proxy] Requesting v2.0: ${JSON.stringify(v2RequestBody)}`);
+
+      // [Professor Note] Viator v2.0 requires very specific headers.
+      // https://docs.viator.com/partner-api/technical-guides/search-v2/
+      const searchRes = await fetch(`https://api.viator.com/partner/products/search`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json;version=2.0',
+          'Content-Type': 'application/json',
+          'exp-api-key': apiKey,
+          'Accept-Language': 'en-US'
+        },
+        body: JSON.stringify({
+          filtering: {
+            searchText: query
+          },
+          pagination: {
+            start: 1,
+            count: 5
+          },
+          currency: "USD"
+        })
+      });
+
+      if (!searchRes.ok) {
+        let errorBody = "";
+        try { errorBody = await searchRes.text(); } catch (e) { }
+        console.error(`[Viator API Error] Status: ${searchRes.status}, Body: ${errorBody}`);
+
+        // [Plan B] Viator API 실패 시 Mock 고화질 이미지 전송 (Unsplash 활용)
+        const mockPhotos = [
+          `https://images.unsplash.com/photo-1541343672885-9be56236302a?q=80&w=1000&auto=format&fit=crop`,
+          `https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1000&auto=format&fit=crop`,
+          `https://images.unsplash.com/photo-1527004013197-933c4bb611b3?q=80&w=1000&auto=format&fit=crop`,
+          `https://images.unsplash.com/photo-1559139225-303036894977?q=80&w=1000&auto=format&fit=crop`,
+          `https://images.unsplash.com/photo-1526481280693-3bfa7561693f?q=80&w=1000&auto=format&fit=crop`
+        ];
+        return c.json({ photos: mockPhotos, isMock: true });
+      }
+
+      const searchData: any = await searchRes.json();
+
+      const photos: string[] = [];
+      if (searchData.products && searchData.products.length > 0) {
+        searchData.products.forEach((product: any) => {
+          if (product.images && product.images.length > 0) {
+            const img = product.images[0].variants.find((v: any) => v.width >= 1000) || product.images[0].variants[product.images[0].variants.length - 1];
+            if (img && photos.length < 5) {
+              photos.push(img.url);
+            }
+          }
+        });
+      }
+
+      return c.json({ photos: photos.length > 0 ? photos : [] });
+
+    } catch (error: any) {
+      console.error("[Viator Proxy Error]", error);
+      // 에러 발생 시에도 500이 아닌 빈 목록 반환하여 프론트엔드 중단 방지
+      return c.json({ photos: [], error: error.message }, 200);
+    }
+  });
+
+  // [Server Park | 2026-03-29] Viator 상품 리스트 프록시 API (예약 시스템용)
+  // 학생들: 사진뿐만 아니라 상품의 이름, 가격, 상세 링크 등을 리스트로 가져와 직접 앱에서 보여줍니다.
+  app.get("/api/viator/products", async (c) => {
+    const query = c.req.query("q");
+    if (!query) return c.json({ error: "검색어가 필요합니다." }, 400);
+
+    const dbApiKey = await storage.getSiteSetting("api_viator_key");
+    const apiKey = dbApiKey || c.env?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
+
+    try {
+      log(`[Viator Products] Searching products for: ${query}`, "VIATOR");
+
+      const searchRes = await fetch(`https://api.viator.com/partner/products/search`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json;version=2.0',
+          'Content-Type': 'application/json',
+          'exp-api-key': apiKey,
+          'Accept-Language': 'en-US'
+        },
+        body: JSON.stringify({
+          filtering: {
+            searchText: query
+          },
+          pagination: {
+            start: 1,
+            count: 10
+          },
+          currency: "USD"
+        })
+      });
+
+      if (!searchRes.ok) {
+        let errorBody = "";
+        try { errorBody = await searchRes.text(); } catch (e) { }
+        console.error(`[Viator Products API Error] Status: ${searchRes.status}, Body: ${errorBody}`);
+        return c.json({ products: [] });
+      }
+
+      const data: any = await searchRes.json();
+
+      // 필요한 정보만 추출하여 가벼운 객체로 변환
+      const products = (data.products || []).map((p: any) => ({
+        id: p.productCode,
+        title: p.title,
+        description: p.description,
+        image: p.images?.[0]?.variants?.find((v: any) => v.width >= 400)?.url || p.images?.[0]?.variants?.[0]?.url,
+        price: p.pricing?.summary?.lowPrice,
+        rating: p.reviews?.combinedAverageRating,
+        url: p.productUrl
+      }));
+
+      return c.json({ products });
+    } catch (error: any) {
+      console.error("[Viator Products Error]", error);
+      return c.json({ products: [], error: error.message }, 200);
     }
   });
 

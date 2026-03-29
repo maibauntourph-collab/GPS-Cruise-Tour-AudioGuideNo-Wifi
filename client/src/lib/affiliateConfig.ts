@@ -4,13 +4,20 @@
  */
 
 export const AFFILIATE_IDS = {
-    getYourGuide: 'YOUR_GYG_PARTNER_ID', // Replace with actual ID
-    viator: 'YOUR_VIATOR_PARTNER_ID',     // Replace with actual ID
-    klook: 'YOUR_KLOOK_AID',             // Replace with actual ID
-    trip: 'YOUR_TRIP_DOT_COM_ID',         // Replace with actual ID
-    // [적요] MyRealTrip 제휴 파트너 ID (이메일 기반 식별자)
-    myrealtrip: 'https://myrealt.rip/Vc3P12'
+    getYourGuide: 'YOUR_GYG_PARTNER_ID',
+    viator: 'de25d027-3e03-47cb-9c89-196e3e698637',
+    klook: 'YOUR_KLOOK_AID',
+    trip: 'YOUR_TRIP_DOT_COM_ID',
+    myrealtrip: 'cheongnyangnamja@gmail.com'
 };
+
+export interface AffiliateSettings {
+    viatorId?: string;
+    klookId?: string;
+    gygId?: string;
+    tripId?: string;
+    myrealtripId?: string;
+}
 
 export const AFFILIATE_PARAMS = {
     getYourGuide: 'partner_id',
@@ -66,13 +73,15 @@ export const getKlookLang = (selectedLanguage: string): string => {
 /**
  * Generates an affiliate-link for GetYourGuide
  */
-export const getGYGUrl = (searchQuery: string, lang: string = 'en') => {
+export const getGYGUrl = (searchQuery: string, lang: string = 'en', settings?: AffiliateSettings) => {
     const gygLang = getGYGLang(lang);
     const base = `https://www.getyourguide.com/${gygLang}/s/`;
     const url = new URL(base);
     url.searchParams.set('q', searchQuery);
-    if (AFFILIATE_IDS.getYourGuide !== 'YOUR_GYG_PARTNER_ID') {
-        url.searchParams.set(AFFILIATE_PARAMS.getYourGuide, AFFILIATE_IDS.getYourGuide);
+
+    const partnerId = settings?.gygId || AFFILIATE_IDS.getYourGuide;
+    if (partnerId && partnerId !== 'YOUR_GYG_PARTNER_ID') {
+        url.searchParams.set(AFFILIATE_PARAMS.getYourGuide, partnerId);
     }
     return url.toString();
 };
@@ -80,13 +89,15 @@ export const getGYGUrl = (searchQuery: string, lang: string = 'en') => {
 /**
  * Generates an affiliate-link for Viator
  */
-export const getViatorUrl = (searchQuery: string, lang: string = 'en-US') => {
+export const getViatorUrl = (searchQuery: string, lang: string = 'en-US', settings?: AffiliateSettings) => {
     const viatorLang = getViatorLang(lang);
     const base = `https://www.viator.com/${viatorLang}/search`;
     const url = new URL(base);
     url.searchParams.set('q', searchQuery);
-    if (AFFILIATE_IDS.viator !== 'YOUR_VIATOR_PARTNER_ID') {
-        url.searchParams.set(AFFILIATE_PARAMS.viator, AFFILIATE_IDS.viator);
+
+    const partnerId = settings?.viatorId || AFFILIATE_IDS.viator;
+    if (partnerId && partnerId !== 'YOUR_VIATOR_PARTNER_ID') {
+        url.searchParams.set(AFFILIATE_PARAMS.viator, partnerId);
     }
     return url.toString();
 };
@@ -96,13 +107,15 @@ export const getViatorUrl = (searchQuery: string, lang: string = 'en-US') => {
  * [Bug Doctor] 수정: 파라미터 `q` → `keyword` 로 변경 (Klook 실제 검색 스펙)
  * 실제 URL 예시: https://www.klook.com/en-US/search/?keyword=colosseum
  */
-export const getKlookUrl = (searchQuery: string, lang: string = 'en-US') => {
+export const getKlookUrl = (searchQuery: string, lang: string = 'en-US', settings?: AffiliateSettings) => {
     const klookLang = getKlookLang(lang);
     // [적요] Klook 검색페이지는 `keyword` 파라미터를 사용. `q`는 미작동.
     const url = new URL(`https://www.klook.com/${klookLang}/search/`);
     url.searchParams.set('keyword', searchQuery);
-    if (AFFILIATE_IDS.klook !== 'YOUR_KLOOK_AID') {
-        url.searchParams.set(AFFILIATE_PARAMS.klook, AFFILIATE_IDS.klook);
+
+    const partnerId = settings?.klookId || AFFILIATE_IDS.klook;
+    if (partnerId && partnerId !== 'YOUR_KLOOK_AID') {
+        url.searchParams.set(AFFILIATE_PARAMS.klook, partnerId);
     }
     return url.toString();
 };
@@ -112,12 +125,14 @@ export const getKlookUrl = (searchQuery: string, lang: string = 'en-US') => {
  * [Bug Doctor] 수정: cn.trip.com(중국 도메인) → www.trip.com 글로벌 URL로 변경
  * 형식: https://www.trip.com/search/?query=지명
  */
-export const getTripUrl = (searchQuery: string) => {
+export const getTripUrl = (searchQuery: string, settings?: AffiliateSettings) => {
     // [적요] Trip.com의 글로벌 검색 URL 패턴. /search/?query= 로 지명 검색 결과 직행
     const url = new URL('https://www.trip.com/search/');
     url.searchParams.set('query', searchQuery);
-    if (AFFILIATE_IDS.trip !== 'YOUR_TRIP_DOT_COM_ID') {
-        url.searchParams.set(AFFILIATE_PARAMS.trip, AFFILIATE_IDS.trip);
+
+    const partnerId = settings?.tripId || AFFILIATE_IDS.trip;
+    if (partnerId && partnerId !== 'YOUR_TRIP_DOT_COM_ID') {
+        url.searchParams.set(AFFILIATE_PARAMS.trip, partnerId);
     }
     return url.toString();
 };
@@ -154,12 +169,14 @@ export const getGoogleMapsUrl = (query: string) => {
  * - URL 형식: https://www.myrealtrip.com/search?q=검색어&partner_id=이메일
  * - partner_id가 기본값이 아닌 경우에만 추가 (다른 플랫폼과 동일 패턴)
  */
-export const getMyRealTripUrl = (query: string) => {
+export const getMyRealTripUrl = (query: string, settings?: AffiliateSettings) => {
     const url = new URL('https://www.myrealtrip.com/search');
     url.searchParams.set('q', query);
+
+    const partnerId = settings?.myrealtripId || AFFILIATE_IDS.myrealtrip;
     // [적요] 파트너 ID가 설정된 경우 URL에 자동 추가
-    if (AFFILIATE_IDS.myrealtrip && AFFILIATE_IDS.myrealtrip !== 'YOUR_MYREALTRIP_PARTNER_ID') {
-        url.searchParams.set(AFFILIATE_PARAMS.myrealtrip, AFFILIATE_IDS.myrealtrip);
+    if (partnerId && partnerId !== 'YOUR_MYREALTRIP_PARTNER_ID') {
+        url.searchParams.set(AFFILIATE_PARAMS.myrealtrip, partnerId);
     }
     return url.toString();
 };

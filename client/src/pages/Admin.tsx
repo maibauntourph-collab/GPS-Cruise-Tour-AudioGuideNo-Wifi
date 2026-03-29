@@ -160,6 +160,17 @@ export default function Admin() {
   const [watermarkOpacity, setWatermarkOpacity] = useState(0.1);
   const [activeLayout, setActiveLayout] = useState('modern');
 
+  // [적요: 제휴사 별 파트너 ID 및 API 설정 상태]
+  const [affiliateSettings, setAffiliateSettings] = useState({
+    viatorId: '',
+    viatorApiKey: '',
+    klookId: '',
+    gygId: '',
+    tripId: '',
+    myrealtripId: '',
+    googleMapsKey: ''
+  });
+
   // Fetch initial branding settings
   useQuery({
     queryKey: ['/api/settings/landing_watermark_url'],
@@ -183,6 +194,44 @@ export default function Admin() {
     if (opacityData?.value) setWatermarkOpacity(parseFloat(opacityData.value));
     if (layoutData?.value) setActiveLayout(layoutData.value);
   }, [opacityData, layoutData]);
+
+  // Fetch Affiliate Settings
+  const { data: vIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_viator_id'], enabled: !!authData?.user });
+  const { data: vKeyData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/api_viator_key'], enabled: !!authData?.user });
+  const { data: kIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_klook_id'], enabled: !!authData?.user });
+  const { data: gIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_gyg_id'], enabled: !!authData?.user });
+  const { data: tIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_trip_id'], enabled: !!authData?.user });
+  const { data: mIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_myrealtrip_id'], enabled: !!authData?.user });
+  const { data: gMapsData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/api_google_maps_key'], enabled: !!authData?.user });
+
+  useEffect(() => {
+    setAffiliateSettings({
+      viatorId: vIdData?.value || '',
+      viatorApiKey: vKeyData?.value || '',
+      klookId: kIdData?.value || '',
+      gygId: gIdData?.value || '',
+      tripId: tIdData?.value || '',
+      myrealtripId: mIdData?.value || '',
+      googleMapsKey: gMapsData?.value || ''
+    });
+  }, [vIdData, vKeyData, kIdData, gIdData, tIdData, mIdData, gMapsData]);
+
+  const saveAffiliateSettings = useMutation({
+    mutationFn: async () => {
+      await apiRequest('PATCH', '/api/settings/affiliate_viator_id', { value: affiliateSettings.viatorId });
+      await apiRequest('PATCH', '/api/settings/api_viator_key', { value: affiliateSettings.viatorApiKey });
+      await apiRequest('PATCH', '/api/settings/affiliate_klook_id', { value: affiliateSettings.klookId });
+      await apiRequest('PATCH', '/api/settings/affiliate_gyg_id', { value: affiliateSettings.gygId });
+      await apiRequest('PATCH', '/api/settings/affiliate_trip_id', { value: affiliateSettings.tripId });
+      await apiRequest('PATCH', '/api/settings/affiliate_myrealtrip_id', { value: affiliateSettings.myrealtripId });
+      await apiRequest('PATCH', '/api/settings/api_google_maps_key', { value: affiliateSettings.googleMapsKey });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [/^\/api\/settings\//] });
+      toast({ title: '제휴 설정 저장 완료', description: '모든 파트너 ID와 API 키가 안전하게 저장되었습니다. 🚀' });
+    },
+    onError: () => toast({ title: '저장 실패', variant: 'destructive' })
+  });
 
   const saveBrandingSettings = useMutation({
     mutationFn: async () => {
@@ -1167,7 +1216,96 @@ export default function Admin() {
               </CardContent>
             </Card>
 
-            <Card className="max-w-2xl">
+            <Card className="max-w-2xl mb-6">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <ExternalLink className="w-5 h-5 text-blue-500" />
+                  제휴사 및 API 설정 (Affiliate & API)
+                </CardTitle>
+                <CardDescription>각 예약 플랫폼의 파트너 ID와 API 키를 통합 관리합니다.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Viator Partner ID (PID)</Label>
+                    <Input
+                      value={affiliateSettings.viatorId}
+                      onChange={(e) => setAffiliateSettings(prev => ({ ...prev, viatorId: e.target.value }))}
+                      placeholder="de25d027..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Viator API Key (exp-api-key)</Label>
+                    <Input
+                      type="password"
+                      value={affiliateSettings.viatorApiKey}
+                      onChange={(e) => setAffiliateSettings(prev => ({ ...prev, viatorApiKey: e.target.value }))}
+                      placeholder="API Key for Photos"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Klook AID</Label>
+                    <Input
+                      value={affiliateSettings.klookId}
+                      onChange={(e) => setAffiliateSettings(prev => ({ ...prev, klookId: e.target.value }))}
+                      placeholder="Klook Affiliate ID"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>GetYourGuide Partner ID</Label>
+                    <Input
+                      value={affiliateSettings.gygId}
+                      onChange={(e) => setAffiliateSettings(prev => ({ ...prev, gygId: e.target.value }))}
+                      placeholder="GYG Partner ID"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Trip.com Alliance ID</Label>
+                    <Input
+                      value={affiliateSettings.tripId}
+                      onChange={(e) => setAffiliateSettings(prev => ({ ...prev, tripId: e.target.value }))}
+                      placeholder="Alliance ID"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>MyRealTrip Partner ID (Email)</Label>
+                    <Input
+                      value={affiliateSettings.myrealtripId}
+                      onChange={(e) => setAffiliateSettings(prev => ({ ...prev, myrealtripId: e.target.value }))}
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Google Maps API Key (Server Side Search)</Label>
+                  <Input
+                    type="password"
+                    value={affiliateSettings.googleMapsKey}
+                    onChange={(e) => setAffiliateSettings(prev => ({ ...prev, googleMapsKey: e.target.value }))}
+                    placeholder="AIza..."
+                  />
+                  <p className="text-[10px] text-muted-foreground italic">* 지오코딩 및 장소 검색 기능에 사용됩니다. (DB 우선 적용)</p>
+                </div>
+
+                <Button
+                  onClick={() => saveAffiliateSettings.mutate()}
+                  disabled={saveAffiliateSettings.isPending}
+                  className="w-full h-11 bg-blue-600 hover:bg-blue-700 mt-2"
+                >
+                  {saveAffiliateSettings.isPending ? "저장 중..." : "제휴사 설정 일괄 저장"}
+                  <Save className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="max-w-2xl mb-6">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Settings className="h-5 w-5" />

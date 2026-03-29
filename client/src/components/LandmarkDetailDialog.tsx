@@ -9,46 +9,13 @@ import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, External
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
-import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl } from '@/lib/affiliateConfig';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, AffiliateSettings } from '@/lib/affiliateConfig';
 import { useToast } from '@/hooks/use-toast';
 
-/**
- * [Professor Optimization | 2026-03-27] 📱 모바일 최적화 연결 브릿지
- * 학생 여러분, 이 함수는 사용자의 환경에 따라 가장 쾌적한 '모바일 경험'을 선사하는 마법사입니다.
- * 앱이 설치되어 있다면 앱을 먼저 깨우고, 없다면 모바일 전용 웹페이지로 안내하죠!
- */
-function getMobileFriendlyUrl(url: string): { webUrl: string; appScheme?: string } {
-  const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
-  const isAndroid = /Android/i.test(ua);
-  const isIOS = /iPhone|iPad|iPod/i.test(ua);
-  
-  let webUrl = url;
-  let appScheme: string | undefined;
-
-  // 1. 도메인별 모바일 웹 최적화 및 앱 스킴 추출
-  if (url.includes('klook.com')) {
-    webUrl = url.replace('www.klook.com', 'm.klook.com');
-    // Klook 앱 스킴 예시: klook://item/12345 (실제로는 ID 추출이 필요하지만, 여기서는 기본 스킴 시도)
-    appScheme = 'klook://'; 
-  } else if (url.includes('getyourguide.com')) {
-    webUrl = url.replace('www.getyourguide.com', 'm.getyourguide.com');
-    appScheme = 'getyourguide://';
-  } else if (url.includes('viator.com')) {
-    // Viator는 쿼리 파라미터로 모바일 최적화 유도가 가능함
-    const separator = url.includes('?') ? '&' : '?';
-    webUrl = `${url}${separator}m=1&utm_medium=mobile_app`;
-    appScheme = 'viator://';
-  } else if (url.includes('myrealtrip.com')) {
-    webUrl = url.replace('www.myrealtrip.com', 'm.myrealtrip.com');
-    appScheme = 'myrealtrip://';
-  }
-
-  // 2. 모바일 기기라면 www -> m 강제 전환 (범용 로직)
-  if (isAndroid || isIOS) {
-    webUrl = webUrl.replace('://www.', '://m.');
-  }
-
-  return { webUrl, appScheme };
+// [Bug Doctor | 2026-03-29] URL 변환 없이 원본 링크 그대로 새 탭 오픈
+// 사용자 요구: "just web link" - 모바일/앱 변환 없이 원본 URL 사용
+function getBookingUrl(url: string): string {
+  return url; // URL 변환 없음 - 그대로 반환
 }
 
 import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
@@ -91,6 +58,21 @@ export default function LandmarkDetailDialog({
   const [manualTranslationSource, setManualTranslationSource] = useState<'original' | 'live'>('live');
   const [manualTtsVoice, setManualTtsVoice] = useState<'auto' | 'google' | 'native'>('auto');
 
+  // [Bug Doctor | 2026-03-29] DB에서 동적 제휴 설정을 가져옵니다.
+  const { data: vIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_viator_id'], enabled: isOpen });
+  const { data: kIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_klook_id'], enabled: isOpen });
+  const { data: gIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_gyg_id'], enabled: isOpen });
+  const { data: tIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_trip_id'], enabled: isOpen });
+  const { data: mIdData } = useQuery<{ value: string }>({ queryKey: ['/api/settings/affiliate_myrealtrip_id'], enabled: isOpen });
+
+  const dynamicAffiliateSettings: AffiliateSettings = useMemo(() => ({
+    viatorId: vIdData?.value,
+    klookId: kIdData?.value,
+    gygId: gIdData?.value,
+    tripId: tIdData?.value,
+    myrealtripId: mIdData?.value
+  }), [vIdData, kIdData, gIdData, tIdData, mIdData]);
+
   const nameFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'name') : '';
   const descFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'description') : '';
   const narrationFallback = landmark ? getTranslatedContent(landmark as any, selectedLanguage, 'narration') : '';
@@ -107,6 +89,18 @@ export default function LandmarkDetailDialog({
     enabled: !!landmark,
   });
 
+  // [Designer Kim | 2026-03-28] Viator 전용 고해상도 사진 5장 가져오기
+  const landmarkNameForPhotos = landmark?.name || '';
+  const { data: viatorPhotosData = { photos: [] } } = useQuery<{ photos: string[] }>({
+    queryKey: [`/api/viator/photos?q=${encodeURIComponent(landmarkNameForPhotos)}`],
+    enabled: !!landmarkNameForPhotos && isOpen,
+  });
+
+  const allPhotos = useMemo(() => {
+    const combined = [...(landmark?.photos || []), ...(viatorPhotosData.photos || [])];
+    return combined.slice(0, 5); // 최대 5장만 노출
+  }, [landmark?.photos, viatorPhotosData.photos]);
+
   // [Bug Doctor] Shopify 제품 정보를 위한 쿼리를 최상위로 이동 (Error #310 해결)
   const landmarkNameForShopify = landmark ? getTranslatedContent(landmark as any, 'en', 'name') : '';
   const { data: shopifyProducts = [] } = useQuery<ShopifyProduct[]>({
@@ -114,6 +108,13 @@ export default function LandmarkDetailDialog({
     queryFn: () => getShopifyProducts(landmarkNameForShopify),
     enabled: !!landmarkNameForShopify && isOpen, // 다이얼로그가 열려 있을 때만 활성화
   });
+
+  // [Kodari Middle Manager | 2026-03-29] Viator 상품 리스트 정보
+  const { data: viatorProductsData = { products: [] }, isLoading: isViatorLoading } = useQuery<{ products: any[] }>({
+    queryKey: [`/api/viator/products?q=${encodeURIComponent(landmarkNameForPhotos)}`],
+    enabled: !!landmarkNameForPhotos && isOpen && activeTab === 'tickets',
+  });
+  const viatorProducts = viatorProductsData.products || [];
 
   // Reset selected guide when landmark changes
   useEffect(() => {
@@ -270,37 +271,24 @@ export default function LandmarkDetailDialog({
 
   const openExternalUrl = (url: string, target: string = '_blank') => {
     markShowReturnToApp();
-    
-    // [Professor Strategy] 모바일 환경 최적화 브릿지 적용
-    const { webUrl, appScheme } = getMobileFriendlyUrl(url);
-    
-    // 1. 앱 스킴(Deep Link)이 있는 경우 먼저 시도
-    if (appScheme) {
-      console.log(`📱 [App Bridge] Attempting to open App: ${appScheme}`);
-      
-      // 앱 실행 시도 (현재 페이지에서 실행)
-      window.location.href = appScheme;
-      
-      // 앱이 열리지 않았을 경우를 대비해 약간의 지연 후 웹 페이지 오픈
-      // 학생 여러분, 1.5초 정도 기다려보고 반응이 없으면 웹으로 보내주는 것이 사용자 경험(UX)에 좋습니다!
-      setTimeout(() => {
-        // 포커스가 여전히 브라우저에 있다면 앱이 열리지 않은 것으로 판단
-        if (document.hasFocus()) {
-          console.log(`🌐 [App Bridge] App not responding. Falling back to Web: ${webUrl}`);
-          window.open(webUrl, target, 'noopener,noreferrer');
-        }
-      }, 1500);
-      
-      return null;
+
+    // [Bug Doctor | 2026-03-29] URL 변환 없이 원본 링크 그대로 새 탭 오픈
+    // 사용자 요구: "just web link" - m.klook.com 등 변환 없음
+    // 학생들에게: window.open()은 클릭 이벤트 핸들러 안에서 동기적으로 호출해야
+    //            브라우저 팝업 차단을 피할 수 있습니다!
+    const bookingUrl = getBookingUrl(url);
+
+    // [적요] 클릭과 동기적으로 새 탭 열기 → 팝업 차단 없음
+    const win = window.open(bookingUrl, target, 'noopener,noreferrer');
+
+    // [적요] 새 탭이 차단된 경우 현재 탭에서 이동 (폴백)
+    if (!win) {
+      window.location.href = bookingUrl;
     }
 
-    // 2. 앱 스킴이 없거나 일반 연결인 경우 즉시 웹 오픈
-    const win = window.open(webUrl, target, 'noopener,noreferrer');
-    if (!win) {
-      window.location.href = webUrl;
-    }
     return win;
   };
+
 
   if (!landmark) return null;
 
@@ -388,19 +376,17 @@ export default function LandmarkDetailDialog({
                     <span className="text-[10px] text-[#A8A294] font-bold bg-[#EFEBE6] px-2 py-0.5 rounded-full uppercase">Premium View</span>
                   </div>
 
-                  <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide snap-marker">
-                    {(landmark.photos && landmark.photos.length > 0) ? (
-                      landmark.photos.map((photo, idx) => (
-                        <div key={idx} className="w-32 h-32 rounded-[24px] bg-[#EFEBE6] flex-shrink-0 overflow-hidden border-2 border-white shadow-md transition-all hover:scale-105 active:scale-95 duration-300 group">
-                          <img src={photo} alt={`Photo ${idx}`} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-700" />
-                        </div>
-                      ))
+                  <div className="w-full">
+                    {allPhotos.length > 0 ? (
+                      <PhotoGallery photos={allPhotos} title={translatedName} />
                     ) : (
-                      [1, 2, 3].map((i) => (
-                        <div key={i} className="w-32 h-32 rounded-[24px] bg-[#EFEBE6] flex-shrink-0 flex items-center justify-center border-2 border-dashed border-[#A8A294]/30">
-                          <ImageIcon className="w-10 h-10 text-[#A8A294]/40" />
-                        </div>
-                      ))
+                      <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide">
+                        {[1, 2, 3].map((i) => (
+                          <div key={i} className="w-32 h-32 rounded-[24px] bg-[#EFEBE6] flex-shrink-0 flex items-center justify-center border-2 border-dashed border-[#A8A294]/30">
+                            <ImageIcon className="w-10 h-10 text-[#A8A294]/40" />
+                          </div>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -802,7 +788,15 @@ export default function LandmarkDetailDialog({
                     </p>
                     <Button
                       className="w-full bg-white text-indigo-700 hover:bg-slate-50 font-black h-12 rounded-xl shadow-lg border-none"
-                      onClick={() => openExternalUrl(landmark.reservationUrl!, '_blank')}
+                      onClick={() => {
+                        const searchName = getTranslatedContent(landmark, 'en', 'name') ||
+                          getTranslatedContent(landmark, selectedLanguage, 'name');
+                        // [적요] 최저가 보장 예약은 기본적으로 Viator 검색(글로벌 파트너)으로 연결하거나 고정 URL이 있다면 이를 활용
+                        const targetUrl = landmark.reservationUrl && landmark.reservationUrl !== '#'
+                          ? landmark.reservationUrl
+                          : getViatorUrl(searchName, selectedLanguage);
+                        openExternalUrl(targetUrl, '_blank');
+                      }}
                     >
                       {selectedLanguage === 'ko' ? '지금 바로 예약하기' : 'Book Now'}
                     </Button>
@@ -834,7 +828,7 @@ export default function LandmarkDetailDialog({
                         id: 'myrealtrip',
                         name: 'MyRealTrip (마이리얼트립)',
                         icon: <ExternalLink className="w-4 h-4 text-[#2B96ED]" />,
-                        url: getMyRealTripUrl(getTranslatedContent(landmark, 'ko', 'name') || searchName),
+                        url: getMyRealTripUrl(getTranslatedContent(landmark, 'ko', 'name') || searchName, dynamicAffiliateSettings),
                         tip: '🇰🇷 한국 결제 특화 · 취소 정책 상품별 상이',
                         tipEn: '🇰🇷 Korean card required · Cancellation varies',
                         color: 'text-[#2B96ED]',
@@ -844,7 +838,7 @@ export default function LandmarkDetailDialog({
                         id: 'klook',
                         name: 'Klook (클룩)',
                         icon: <ExternalLink className="w-4 h-4 text-[#E9633F]" />,
-                        url: getKlookUrl(searchName, selectedLanguage),
+                        url: getKlookUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
                         tip: '📱 아시아 특화 · 모바일 바우처 즉시 발급',
                         tipEn: '📱 Asia-focused · Instant mobile voucher',
                         color: 'text-[#E9633F]',
@@ -854,7 +848,7 @@ export default function LandmarkDetailDialog({
                         id: 'getyourguide',
                         name: 'GetYourGuide',
                         icon: <ExternalLink className="w-4 h-4 text-red-400" />,
-                        url: getGYGUrl(searchName, selectedLanguage),
+                        url: getGYGUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
                         tip: '✅ 유럽 특화 · 48시간 전 무료취소',
                         tipEn: '✅ Europe-focused · Free cancel 48h before',
                         color: 'text-red-400',
@@ -864,7 +858,7 @@ export default function LandmarkDetailDialog({
                         id: 'trip',
                         name: 'Trip.com (트립닷컴)',
                         icon: <ExternalLink className="w-4 h-4 text-blue-600" />,
-                        url: getTripUrl(searchName),
+                        url: getTripUrl(searchName, dynamicAffiliateSettings),
                         tip: '💰 중화권 특화 · 포인트 적립',
                         tipEn: '💰 Asia-focused · Points rewards',
                         color: 'text-blue-600',
@@ -874,7 +868,7 @@ export default function LandmarkDetailDialog({
                         id: 'viator',
                         name: 'Viator Inc',
                         icon: <ExternalLink className="w-4 h-4 text-blue-400" />,
-                        url: getViatorUrl(searchName, selectedLanguage),
+                        url: getViatorUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
                         tip: '🌍 미주 특화 · TripAdvisor 파트너',
                         tipEn: '🌍 Americas-focused · TripAdvisor company',
                         color: 'text-blue-400',
@@ -912,47 +906,133 @@ export default function LandmarkDetailDialog({
                     // 우선순위에 따라 플랫폼을 선별하고 정렬
                     const recommendedPlatforms = recommendedIds.map(
                       id => allPlatforms.find(p => p.id === id)!
-                    );
+                    ).filter(Boolean);
 
-                    return recommendedPlatforms.map((option, i) => (
-                      <Button
-                        key={option.id}
-                        variant="outline"
-                        className={`w-full justify-between items-center h-auto py-3 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group ${i === 0 ? 'border-[#2B96ED] bg-blue-50/10' : ''}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          const mobileUrl = getMobileFriendlyUrl(option.url);
-                          console.log(`🔗 [Link Diagnostic] Opening: ${option.name}, URL: ${option.url}, Mobile URL: ${mobileUrl}`);
-                          const win = openExternalUrl(mobileUrl, '_blank');
-                          if (!win) {
-                            console.error("🚑 [Bug Doctor] Popup blocked for " + option.name);
-                            alert(selectedLanguage === 'ko' ? '팝업 차단이 감지되었습니다. 허용 후 다시 시도해주세요.' : 'Popup blocked. Please allow popups and try again.');
-                          }
-                        }}
-                      >
-                        <div className="flex items-center gap-3 flex-1 min-w-0">
-                          <div className="w-10 h-10 rounded-xl bg-[#FCF9F6] flex items-center justify-center shrink-0 group-hover:bg-orange-50">
-                            {option.icon}
-                          </div>
-                          {/* [적요] 1순위 항목은 추천 뱃지 표시 */}
-                          <div className="flex flex-col items-start gap-0.5 min-w-0">
-                            <div className="flex items-center gap-1.5">
-                              <span className="font-bold text-xs sm:text-sm">{option.name}</span>
-                              {i === 0 && (
-                                <span className="text-[8px] bg-[#E67E22] text-white px-1.5 py-0.5 rounded-sm font-black tracking-wide uppercase">
-                                  {selectedLanguage === 'ko' ? '추천' : 'Best'}
-                                </span>
-                              )}
+                    return (
+                      <div className="space-y-4">
+                        {/* [Kodari Middle Manager | 2026-03-29] Viator 실시간 상품 리스트 렌더링 섹션 */}
+                        {activeTab === 'tickets' && (
+                          <div className="space-y-4 mb-8">
+                            <div className="flex items-center justify-between px-1">
+                              <div className="flex items-center gap-2">
+                                <Ticket className="w-4 h-4 text-blue-600" />
+                                <h4 className="font-black text-sm text-blue-900">
+                                  {selectedLanguage === 'ko' ? '실시간 예약 가능 상품' : 'Live Booking Available'}
+                                </h4>
+                              </div>
+                              {isViatorLoading && <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>}
                             </div>
-                            <span className={`text-[9px] font-medium leading-tight ${option.color} opacity-80 truncate max-w-[200px]`}>
-                              {selectedLanguage === 'ko' ? option.tip : option.tipEn}
-                            </span>
+
+                            {viatorProducts.length > 0 ? (
+                              <div className="grid grid-cols-1 gap-3">
+                                {viatorProducts.map((product: any) => (
+                                  <div key={product.id} className="bg-white rounded-2xl p-3 border border-blue-100 shadow-sm flex gap-3 group hover:border-blue-400 transition-all active:scale-[0.98]">
+                                    <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50 shrink-0">
+                                      {product.image ? (
+                                        <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
+                                      ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-gray-300">
+                                          <ImageIcon className="w-6 h-6" />
+                                        </div>
+                                      )}
+                                    </div>
+                                    <div className="flex-1 flex flex-col justify-between min-w-0">
+                                      <div>
+                                        <h5 className="font-bold text-[13px] text-blue-900 line-clamp-2 leading-tight">{product.title}</h5>
+                                        <div className="flex items-center gap-2 mt-1">
+                                          {product.rating && (
+                                            <span className="text-[10px] text-orange-500 font-bold">★ {product.rating.toFixed(1)}</span>
+                                          )}
+                                          <span className="text-[10px] font-black text-blue-600">USD {product.price}</span>
+                                        </div>
+                                      </div>
+                                      <Button
+                                        size="sm"
+                                        className="h-7 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-[10px] font-bold gap-1 self-end"
+                                        onClick={() => openExternalUrl(product.url || getViatorUrl(searchName, selectedLanguage, dynamicAffiliateSettings), '_blank')}
+                                      >
+                                        {selectedLanguage === 'ko' ? '예약' : 'Book'}
+                                        <ChevronRight className="w-3 h-3" />
+                                      </Button>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : !isViatorLoading && (
+                              <div className="p-8 text-center bg-gray-50 rounded-2xl border border-dashed border-gray-200">
+                                <Search className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                                <p className="text-[11px] text-gray-400 font-medium">
+                                  {selectedLanguage === 'ko' ? '현재 검색된 상품이 없습니다.' : 'No items found for this landmark.'}
+                                </p>
+                              </div>
+                            )}
+
+                            <div className="h-px bg-gray-100 w-full my-6"></div>
+                            <h4 className="font-black text-xs text-gray-400 px-1 mb-2 uppercase tracking-wider">
+                              {selectedLanguage === 'ko' ? '기타 예약 채널' : 'Other Platforms'}
+                            </h4>
                           </div>
+                        )}
+
+                        <div className="grid grid-cols-1 gap-3">
+                          {recommendedPlatforms.map((option, i) => (
+                            <Button
+                              key={option.id}
+                              variant="outline"
+                              className={`w-full justify-between items-center h-auto py-3 bg-white border-[#EFEBE6] text-[#5D574D] rounded-2xl hover:bg-white hover:border-[#E67E22] hover:shadow-md transition-all group ${i === 0 ? 'border-[#2B96ED] bg-blue-50/10' : ''}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                // [Professor Policy | 2026-03-28] Viator 전용 앱 내 쇼핑/티켓 경험
+                                if (option.id === 'viator') {
+                                  setActiveTab('tickets'); // 예약 탭으로 즉시 이동 (목록 상단 노출)
+                                  toast({
+                                    title: selectedLanguage === 'ko' ? "Viator 실시간 상품 조회" : "Searching Viator Products",
+                                    description: selectedLanguage === 'ko'
+                                      ? "현재 명소의 실시간 예약 상품 리스트를 가져오고 있습니다."
+                                      : "Fetching live booking items for this landmark.",
+                                  });
+                                  return;
+                                }
+
+                                console.log(`🔗 [Link Diagnostic] Opening: ${option.name}, URL: ${option.url}`);
+                                const win = openExternalUrl(option.url, '_blank');
+                                if (!win) {
+                                  console.error("🚑 [Bug Doctor] Popup blocked for " + option.name);
+                                  alert(selectedLanguage === 'ko' ? '팝업 차단이 감지되었습니다. 허용 후 다시 시도해주세요.' : 'Popup blocked. Please allow popups and try again.');
+                                }
+                              }}
+                            >
+                              <div className="flex items-center gap-3 flex-1 min-w-0">
+                                <div className="w-10 h-10 rounded-xl bg-[#FCF9F6] flex items-center justify-center shrink-0 group-hover:bg-orange-50">
+                                  {option.icon}
+                                </div>
+                                {/* [적요] 1순위 항목은 추천 뱃지 표시 */}
+                                <div className="flex flex-col items-start gap-0.5 min-w-0">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="font-bold text-xs sm:text-sm">{option.name}</span>
+                                    {(i === 0 || option.id === 'viator') && (
+                                      <span className={`text-[8px] px-1.5 py-0.5 rounded-sm font-black tracking-wide uppercase ${option.id === 'viator' ? 'bg-blue-600 text-white' : 'bg-[#E67E22] text-white'}`}>
+                                        {option.id === 'viator'
+                                          ? (selectedLanguage === 'ko' ? '최적가' : 'Live')
+                                          : (selectedLanguage === 'ko' ? '추천' : 'Best')}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <span className={`text-[9px] font-medium leading-tight ${option.color} opacity-80 truncate max-w-[200px]`}>
+                                    {selectedLanguage === 'ko' ? option.tip : option.tipEn}
+                                  </span>
+                                </div>
+                              </div>
+                              <div className={`px-3 py-1 rounded-full text-[10px] font-bold shrink-0 ml-1 ${option.badge}`}>
+                                {option.id === 'viator' ? 'Pay' : 'Book'}
+                              </div>
+                            </Button>
+                          ))}
                         </div>
-                        <div className={`px-3 py-1 rounded-full text-[10px] font-bold shrink-0 ml-1 ${option.badge}`}>Book</div>
-                      </Button>
-                    ));
+                      </div>
+                    );
                   })()}
 
                 </div>

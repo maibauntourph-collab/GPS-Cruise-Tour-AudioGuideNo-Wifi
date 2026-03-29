@@ -18,7 +18,8 @@ import { format } from 'date-fns';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import PartnerCRM from './PartnerCRM';
 import PartnerSite from './PartnerSite';
-import { LayoutDashboard, Users2, Globe2 } from 'lucide-react';
+import { LayoutDashboard, Users2, Globe2, Check } from 'lucide-react';
+import { Label } from '@/components/ui/label';
 
 
 interface PartnerDashboardProps {
@@ -304,9 +305,4 @@ export default function PartnerDashboard({ user, selectedLanguage }: PartnerDash
             </div>
         </div>
     );
-
 }
-
-// Helper types if needed
-import { Check } from 'lucide-react';
-import { Label } from '@/components/ui/label';

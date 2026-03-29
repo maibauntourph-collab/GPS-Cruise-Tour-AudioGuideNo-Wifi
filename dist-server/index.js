@@ -12,10 +12,13 @@ var __export = (target, all) => {
 var schema_exports = {};
 __export(schema_exports, {
   appSettings: () => appSettings,
+  appointments: () => appointments,
   cities: () => cities,
   citiesBackup: () => citiesBackup,
   citiesRelations: () => citiesRelations,
   citySchema: () => citySchema,
+  commissions: () => commissions,
+  commissionsRelations: () => commissionsRelations,
   creatorEarnings: () => creatorEarnings,
   creatorEarningsRelations: () => creatorEarningsRelations,
   cruisePortSchema: () => cruisePortSchema,
@@ -25,6 +28,7 @@ __export(schema_exports, {
   gpsPositionSchema: () => gpsPositionSchema,
   groupMembers: () => groupMembers,
   insertCitySchema: () => insertCitySchema,
+  insertCommissionSchema: () => insertCommissionSchema,
   insertCreatorEarningsSchema: () => insertCreatorEarningsSchema,
   insertFollowSchema: () => insertFollowSchema,
   insertGroupMemberSchema: () => insertGroupMemberSchema,
@@ -52,6 +56,7 @@ __export(schema_exports, {
   landmarksBackup: () => landmarksBackup,
   landmarksRelations: () => landmarksRelations,
   languageSchema: () => languageSchema,
+  leads: () => leads,
   likes: () => likes,
   likesRelations: () => likesRelations,
   marketingContents: () => marketingContents,
@@ -83,7 +88,7 @@ import { z } from "zod";
 import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, json, unique, serial } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
-var transportOptionSchema, cruisePortSchema, citySchema, languageSchema, translationContentSchema, translationsSchema, landmarkSchema, gpsPositionSchema, waypointSchema, follows, likes, cities, landmarks, citiesBackup, landmarksBackup, landmarkGuides, dataVersions, visitedLandmarks, landmarkAudio, users, userIdentities, tourSchedules, citiesRelations, landmarksRelations, visitedLandmarksRelations, usersRelations, userIdentitiesRelations, landmarkAudioRelations, groupMembers, savedRoutes, routePhotos, creatorEarnings, transactions, settlements, marketingContents, updateStats, insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, insertLandmarkAudioSchema, insertTourScheduleSchema, siteSettings, insertSiteSettingSchema, insertGroupMemberSchema, insertUserSchema, insertUserIdentitySchema, insertSavedRouteSchema, insertRoutePhotoSchema, insertCreatorEarningsSchema, insertTransactionSchema, insertSettlementSchema, insertMarketingContentSchema, insertLandmarkGuideSchema, insertUpdateStatsSchema, creatorEarningsRelations, transactionsRelations, settlementsRelations, marketingContentsRelations, landmarkGuidesRelations, savedRoutesRelations, routePhotosRelations, routeStopSchema, insertLikeSchema, insertFollowSchema, likesRelations, followsRelations, appSettings, spots;
+var transportOptionSchema, cruisePortSchema, citySchema, languageSchema, translationContentSchema, translationsSchema, landmarkSchema, gpsPositionSchema, waypointSchema, follows, likes, cities, landmarks, citiesBackup, landmarksBackup, landmarkGuides, dataVersions, visitedLandmarks, landmarkAudio, users, userIdentities, tourSchedules, citiesRelations, landmarksRelations, visitedLandmarksRelations, usersRelations, userIdentitiesRelations, landmarkAudioRelations, groupMembers, savedRoutes, routePhotos, creatorEarnings, transactions, settlements, marketingContents, commissions, updateStats, leads, appointments, insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, insertLandmarkAudioSchema, insertTourScheduleSchema, siteSettings, insertSiteSettingSchema, insertGroupMemberSchema, insertUserSchema, insertUserIdentitySchema, insertSavedRouteSchema, insertRoutePhotoSchema, insertCreatorEarningsSchema, insertTransactionSchema, insertSettlementSchema, insertMarketingContentSchema, insertLandmarkGuideSchema, insertUpdateStatsSchema, insertCommissionSchema, creatorEarningsRelations, transactionsRelations, settlementsRelations, marketingContentsRelations, landmarkGuidesRelations, commissionsRelations, savedRoutesRelations, routePhotosRelations, routeStopSchema, insertLikeSchema, insertFollowSchema, likesRelations, followsRelations, appSettings, spots;
 var init_schema = __esm({
   "shared/schema.ts"() {
     "use strict";
@@ -432,6 +437,13 @@ var init_schema = __esm({
       // User's preferred language
       role: varchar("role", { length: 20 }).default("user"),
       // 'user', 'guide', 'tour_leader', 'admin'
+      // [Kodari | 2026-03-27] 5단계 영업 관리 필드 추가
+      agentLevel: varchar("agent_level", { length: 10 }).default("L0"),
+      // 'L0'~'L5'
+      inviterId: varchar("inviter_id"),
+      // The person who invited this user (upline)
+      referralCode: varchar("referral_code", { length: 50 }).unique(),
+      // Unique code for inviting others
       lastLoginAt: timestamp("last_login_at"),
       createdAt: timestamp("created_at").notNull().defaultNow(),
       updatedAt: timestamp("updated_at").notNull().defaultNow()
@@ -599,6 +611,20 @@ var init_schema = __esm({
       createdAt: timestamp("created_at").notNull().defaultNow(),
       updatedAt: timestamp("updated_at").notNull().defaultNow()
     });
+    commissions = pgTable("commissions", {
+      id: serial("id").primaryKey(),
+      // 어떤 결제 건으로 인해 발생한 수당인지 연결합니다.
+      transactionId: varchar("transaction_id").references(() => transactions.id, { onDelete: "cascade" }),
+      // 이 수당을 받을 어드바이저(영업자)의 ID입니다.
+      userId: varchar("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+      // 몇 단계 위 추천인으로서 받은 수당인지 표시합니다. (1 = 직접 추천, 2 = 간접 등)
+      level: integer("level").notNull(),
+      // 실제 지급될 금액입니다.
+      amount: doublePrecision("amount").notNull(),
+      // 수당의 진행 상태입니다. ('pending': 대기, 'confirmed': 확정, 'payout_requested': 출금신청)
+      status: varchar("status", { length: 20 }).notNull().default("pending"),
+      createdAt: timestamp("created_at").notNull().defaultNow()
+    });
     updateStats = pgTable("update_stats", {
       id: serial("id").primaryKey(),
       date: varchar("date", { length: 20 }).notNull().unique(),
@@ -612,6 +638,37 @@ var init_schema = __esm({
       exoticEatsCount: integer("exotic_eats_count").notNull().default(0),
       exoticSpotsCount: integer("exotic_spots_count").notNull().default(0),
       exoticShopsCount: integer("exotic_shops_count").notNull().default(0),
+      createdAt: timestamp("created_at").notNull().defaultNow()
+    });
+    leads = pgTable("leads", {
+      id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+      // 담당 영업사원(어드바이저) ID 입니다.
+      agentId: varchar("agent_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+      name: varchar("name").notNull(),
+      phone: varchar("phone"),
+      email: varchar("email"),
+      // 유입 경로 (웹, 카카오톡, 수동 입력 등)
+      source: varchar("source").default("web"),
+      // 현재 상태 (신규, 상담중, 미팅예약, 계약완료 등)
+      status: varchar("status").default("new"),
+      notes: text("notes"),
+      // [NEW] 카카오톡 상담 내용 및 요약 정보 (문서화 용도)
+      kakaoSyncData: json("kakao_sync_data"),
+      createdAt: timestamp("created_at").notNull().defaultNow(),
+      updatedAt: timestamp("updated_at").notNull().defaultNow()
+    });
+    appointments = pgTable("appointments", {
+      id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+      agentId: varchar("agent_id").notNull().references(() => users.id),
+      leadId: varchar("lead_id").references(() => leads.id, { onDelete: "cascade" }),
+      title: varchar("title").notNull(),
+      startTime: timestamp("start_time").notNull(),
+      endTime: timestamp("end_time").notNull(),
+      location: varchar("location"),
+      status: varchar("status").default("scheduled"),
+      // 'scheduled', 'completed', 'cancelled'
+      // AI가 분석한 상담 맥락 및 특이사항
+      aiNotes: text("ai_notes"),
       createdAt: timestamp("created_at").notNull().defaultNow()
     });
     insertCitySchema = createInsertSchema(cities).omit({
@@ -672,6 +729,7 @@ var init_schema = __esm({
     insertMarketingContentSchema = createInsertSchema(marketingContents).omit({ id: true, createdAt: true, updatedAt: true });
     insertLandmarkGuideSchema = createInsertSchema(landmarkGuides).omit({ id: true, createdAt: true, updatedAt: true });
     insertUpdateStatsSchema = createInsertSchema(updateStats).omit({ id: true, createdAt: true });
+    insertCommissionSchema = createInsertSchema(commissions).omit({ id: true, createdAt: true });
     creatorEarningsRelations = relations(creatorEarnings, ({ one }) => ({
       // 각 수익 레코드는 하나의 유저(크리에이터)에게 귀속됩니다.
       user: one(users, {
@@ -708,6 +766,16 @@ var init_schema = __esm({
       user: one(users, {
         fields: [landmarkGuides.userId],
         references: [users.id]
+      })
+    }));
+    commissionsRelations = relations(commissions, ({ one }) => ({
+      user: one(users, {
+        fields: [commissions.userId],
+        references: [users.id]
+      }),
+      transaction: one(transactions, {
+        fields: [commissions.transactionId],
+        references: [transactions.id]
       })
     }));
     savedRoutesRelations = relations(savedRoutes, ({ one, many }) => ({
@@ -911,7 +979,7 @@ __export(openai_exports, {
   recommendTourItinerary: () => recommendTourItinerary2
 });
 import OpenAI from "openai";
-import * as crypto2 from "node:crypto";
+import * as crypto3 from "node:crypto";
 function getOpenAI() {
   if (openaiInstance) return openaiInstance;
   const apiKey = env.OPENAI_API_KEY;
@@ -941,7 +1009,7 @@ async function generateLandmarkAudio(landmarkId, text2, language = "en", preferr
       });
       buffer = Buffer.from(await mp3Response.arrayBuffer());
     }
-    const checksum = crypto2.createHash("md5").update(buffer).digest("hex");
+    const checksum = crypto3.createHash("md5").update(buffer).digest("hex");
     const base64Audio = buffer.toString("base64");
     const dataUri = `data:audio/mp3;base64,${base64Audio}`;
     const fileName = `${landmarkId}-${language}-${checksum.slice(0, 8)}.mp3`;
@@ -24628,7 +24696,7 @@ import { z as z2 } from "zod";
 
 // server/auth.ts
 init_env();
-import crypto from "node:crypto";
+import crypto2 from "node:crypto";
 import Stripe from "stripe";
 var providers = /* @__PURE__ */ new Map();
 function getProvider(name) {
@@ -24638,7 +24706,7 @@ function getEnabledProviders() {
   return Array.from(providers.keys());
 }
 function generateState() {
-  return crypto.randomBytes(16).toString("hex");
+  return crypto2.randomBytes(16).toString("hex");
 }
 function setupAuthRoutes(app2) {
   if (env.NODE_ENV === "production") {
@@ -24800,7 +24868,7 @@ function requireRole(...roles) {
 
 // server/routes.ts
 init_db();
-import { eq as eq6, desc as desc2, sql as sql5 } from "drizzle-orm";
+import { eq as eq7, desc as desc3, sql as sql5, and as and4, inArray } from "drizzle-orm";
 
 // server/lib/gemini.ts
 init_env();
@@ -25228,6 +25296,50 @@ var SettlementService = class {
     console.log(`\u2705 \uD30C\uD2B8\uB108 \uC9C0\uAC11\uC5D0 ${partnerReward}\uC6D0\uC774 \uC131\uACF5\uC801\uC73C\uB85C \uC801\uB9BD\uB418\uC5C8\uC2B5\uB2C8\uB2E4.`);
   }
   /**
+   * [도다리 부장 2026-03-28] 💸 5단계 MLM 수당 자동 배분 로직
+   * 결제 완료 시 해당 사용자의 추천인 체인(Up-line)을 따라 5단계까지 수당을 지급합니다.
+   */
+  static async processMLMCommissions(transactionId) {
+    console.log(`\u{1F680} [MLM Engine] 5\uB2E8\uACC4 \uC218\uB2F9 \uBC30\uBD84\uC744 \uC2DC\uC791\uD569\uB2C8\uB2E4: ${transactionId}`);
+    const tx = await db.query.transactions.findFirst({
+      where: eq5(transactions.id, transactionId)
+    });
+    if (!tx || tx.status !== "completed") {
+      console.error("\u274C \uC815\uC0B0 \uB300\uC0C1 \uD2B8\uB79C\uC7AD\uC158\uC774 \uC5C6\uAC70\uB098 \uC644\uB8CC\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.");
+      return;
+    }
+    const payer = await db.query.users.findFirst({
+      where: eq5(users.id, tx.userId)
+    });
+    if (!payer || !payer.inviterId) {
+      console.log("\u2139\uFE0F [MLM Engine] \uCD94\uCC9C\uC778\uC774 \uC5C6\uB294 \uC0AC\uC6A9\uC790\uC785\uB2C8\uB2E4. \uD68C\uC0AC \uC218\uC775\uC73C\uB85C \uADC0\uC18D\uB429\uB2C8\uB2E4.");
+      return;
+    }
+    const rates = [0.1, 0.05, 0.03, 0.02, 0.01];
+    let currentInviterId = payer.inviterId;
+    const results = [];
+    for (let i = 0; i < 5; i++) {
+      if (!currentInviterId) break;
+      const inviter = await db.query.users.findFirst({
+        where: eq5(users.id, currentInviterId)
+      });
+      if (!inviter) break;
+      const commissionAmount = tx.amount * rates[i];
+      await db.insert(commissions).values({
+        transactionId: tx.id,
+        userId: inviter.id,
+        level: i + 1,
+        amount: commissionAmount,
+        status: "confirmed"
+        // 실시간 확정 정책
+      });
+      console.log(`\u2705 [MLM L${i + 1}] ${inviter.displayName}\uB2D8\uC5D0\uAC8C ${commissionAmount.toLocaleString()}\uC6D0 \uC801\uB9BD \uC644\uB8CC`);
+      results.push({ id: inviter.id, amount: commissionAmount });
+      currentInviterId = inviter.inviterId;
+    }
+    return results;
+  }
+  /**
    * [적요] 결제 처리 래퍼 메서드
    * Stripe Webhook에서 결제 완료 시 호출됩니다.
    * 사용자ID, 랜드마크ID, 결제금액, 메타데이터를 받아 파트너 수익 분배를 실행합니다.
@@ -25252,12 +25364,82 @@ var SettlementService = class {
 var settlementService = {
   processPayment: SettlementService.processPayment.bind(SettlementService),
   processPartnerReward: SettlementService.processPartnerReward.bind(SettlementService),
+  processMLMCommissions: SettlementService.processMLMCommissions.bind(SettlementService),
   expireCredits: SettlementService.expireCredits.bind(SettlementService)
 };
 
 // server/routes.ts
 init_env();
-import crypto3 from "node:crypto";
+
+// server/services/automation/salesGraph.ts
+init_db();
+init_schema();
+import { Annotation, StateGraph, START, END } from "@langchain/langgraph";
+import { eq as eq6, and as and3 } from "drizzle-orm";
+var CRMStateAnnotation = Annotation.Root({
+  leadId: Annotation(),
+  agentId: Annotation(),
+  rawText: Annotation(),
+  analysis: Annotation(),
+  documentation: Annotation(),
+  nextSteps: Annotation({
+    reducer: (a, b) => (a || []).concat(b || []),
+    default: () => []
+  })
+});
+var analystNode = async (state) => {
+  console.log(`[Analyst] ${state.leadId} \uACE0\uAC1D \uC0C1\uB2F4 \uBD84\uC11D \uC911...`);
+  const analysis = {
+    need: "\uC0C1\uC870 \uD3EC\uC778\uD2B8 \uC5F0\uB3D9 \uBC0F \uC624\uB514\uC624 \uAC00\uC774\uB4DC \uB3C4\uC785",
+    level: "L2 Potential",
+    urgency: "High"
+  };
+  return { analysis };
+};
+var secretaryNode = async (state) => {
+  console.log("[Secretary] \uBB38\uC11C\uD654 \uBC0F \uC54C\uB9BC \uC0DD\uC131 \uC911...");
+  const report = `### [AI \uBBF8\uD305 \uB9AC\uD3EC\uD2B8]
+- \uD544\uC694\uC0AC\uD56D: ${state.analysis?.need}
+- \uB2E8\uACC4: ${state.analysis?.level}`;
+  const slack = `\u{1F6A8} \uC2E0\uADDC \uBB38\uC758 \uBD84\uC11D \uC644\uB8CC: ${state.leadId}`;
+  return {
+    documentation: { notionReport: report, slackMessage: slack }
+  };
+};
+var schedulerNode = async (state) => {
+  console.log("[Scheduler] \uC77C\uC815 \uD655\uC778 \uC911...");
+  return {
+    nextSteps: ["\uC218\uC694\uC77C \uC624\uC804 10\uC2DC \uBBF8\uD305 \uD76C\uB9DD"]
+  };
+};
+var workflow = new StateGraph(CRMStateAnnotation).addNode("analyst", analystNode).addNode("secretary", secretaryNode).addNode("scheduler", schedulerNode).addEdge(START, "analyst").addEdge("analyst", "secretary").addEdge("secretary", "scheduler").addEdge("scheduler", END);
+var salesSecretary = workflow.compile();
+async function runSalesAutomation(leadId, agentId, text2) {
+  try {
+    const result = await salesSecretary.invoke({
+      leadId,
+      agentId,
+      rawText: text2,
+      nextSteps: []
+    });
+    await db.update(leads).set({
+      kakaoSyncData: {
+        summary: result.documentation?.notionReport,
+        syncedAt: (/* @__PURE__ */ new Date()).toISOString(),
+        platform: "kakao",
+        aiSteps: result.nextSteps
+      },
+      status: "meeting",
+      updatedAt: /* @__PURE__ */ new Date()
+    }).where(and3(eq6(leads.id, leadId), eq6(leads.agentId, agentId)));
+    return result;
+  } catch (error) {
+    console.error("LangGraph Engine Error:", error);
+    throw error;
+  }
+}
+
+// server/routes.ts
 import Stripe2 from "stripe";
 var stripeInstance = null;
 function getStripe() {
@@ -25275,6 +25457,48 @@ function registerRoutes(app2) {
   app2.get("/api/health", async (c) => {
     const health = await dbCheckService.checkConnection();
     return c.json(health, health.status === "healthy" ? 200 : 503);
+  });
+  app2.get("/api/partner/stats", requireAuth, async (c) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+      const user = await storage.getUserById(userId);
+      if (!user) return c.json({ error: "User not found" }, 404);
+      const sumResult = await db.select({
+        total: sql5`SUM(${commissions.amount})`
+      }).from(commissions).where(and4(
+        eq7(commissions.userId, userId),
+        eq7(commissions.status, "confirmed")
+      ));
+      const totalEarnedResult = await db.select({
+        total: sql5`SUM(${commissions.amount})`
+      }).from(commissions).where(eq7(commissions.userId, userId));
+      const team = await db.select().from(users).where(eq7(users.inviterId, userId));
+      return c.json({
+        level: user.agentLevel || "L0",
+        referralCode: user.referralCode,
+        balance: Number(sumResult[0]?.total || 0),
+        totalEarned: Number(totalEarnedResult[0]?.total || 0),
+        teamSize: team.length,
+        nextLevelProgress: team.length >= 3 ? 100 : Math.round(team.length / 3 * 100)
+        // 가상의 승격 로직
+      });
+    } catch (error) {
+      console.error("[Partner Stats API Error]", error);
+      return c.json({ error: "Failed to fetch partner stats" }, 500);
+    }
+  });
+  app2.get("/api/partner/commissions", requireAuth, async (c) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+      const history = await db.select().from(commissions).where(eq7(commissions.userId, userId)).orderBy(desc3(commissions.createdAt)).limit(10);
+      return c.json(history);
+    } catch (error) {
+      return c.json({ error: "Failed to fetch commission history" }, 500);
+    }
   });
   app2.get("/api/settings/:key", async (c) => {
     const key = c.req.param("key");
@@ -25351,7 +25575,7 @@ function registerRoutes(app2) {
   app2.get("/api/debug/db-landmark/:id", async (c) => {
     const id = c.req.param("id");
     try {
-      const result = await db.select().from(landmarks).where(eq6(landmarks.id, id));
+      const result = await db.select().from(landmarks).where(eq7(landmarks.id, id));
       return c.json(result);
     } catch (error) {
       return c.json({ error: error.message }, 500);
@@ -25369,7 +25593,7 @@ function registerRoutes(app2) {
     try {
       const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
       const [stats] = await db.select().from(dataVersions).limit(1);
-      const result = await db.select().from(updateStats).orderBy(desc2(updateStats.id)).limit(1);
+      const result = await db.select().from(updateStats).orderBy(desc3(updateStats.id)).limit(1);
       if (result.length === 0) {
         return c.json({ hasUpdates: false });
       }
@@ -25519,6 +25743,130 @@ function registerRoutes(app2) {
       return c.json({ error: "\uB370\uC774\uD130 \uB3D9\uAE30\uD654 \uC911 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4." }, 500);
     }
   });
+  app2.get("/api/viator/photos", async (c) => {
+    const query = c.req.query("q");
+    if (!query) return c.json({ error: "\uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
+    const workerEnv = c.env;
+    const apiKey = workerEnv?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
+    const maskedKey = apiKey ? `${apiKey.substring(0, 4)}***${apiKey.substring(apiKey.length - 4)}` : "MISSING";
+    log2(`[Viator Proxy] API Key: ${maskedKey}, Query: ${query}`, "VIATOR");
+    try {
+      log2(`[Viator Proxy] Searching photos for: ${query}`, "VIATOR");
+      const v2RequestBody = {
+        filtering: {
+          searchText: query
+        },
+        pagination: {
+          start: 1,
+          count: 5
+        },
+        currency: "USD"
+      };
+      console.log(`[Viator Proxy] Requesting v2.0: ${JSON.stringify(v2RequestBody)}`);
+      const searchRes = await fetch(`https://api.viator.com/partner/products/search`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json;version=2.0",
+          "Content-Type": "application/json",
+          "exp-api-key": apiKey,
+          "Accept-Language": "en-US"
+        },
+        body: JSON.stringify({
+          filtering: {
+            searchText: query
+          },
+          pagination: {
+            start: 1,
+            count: 5
+          },
+          currency: "USD"
+        })
+      });
+      if (!searchRes.ok) {
+        let errorBody = "";
+        try {
+          errorBody = await searchRes.text();
+        } catch (e) {
+        }
+        console.error(`[Viator API Error] Status: ${searchRes.status}, Body: ${errorBody}`);
+        const mockPhotos = [
+          `https://images.unsplash.com/photo-1541343672885-9be56236302a?q=80&w=1000&auto=format&fit=crop`,
+          `https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1000&auto=format&fit=crop`,
+          `https://images.unsplash.com/photo-1527004013197-933c4bb611b3?q=80&w=1000&auto=format&fit=crop`,
+          `https://images.unsplash.com/photo-1559139225-303036894977?q=80&w=1000&auto=format&fit=crop`,
+          `https://images.unsplash.com/photo-1526481280693-3bfa7561693f?q=80&w=1000&auto=format&fit=crop`
+        ];
+        return c.json({ photos: mockPhotos, isMock: true });
+      }
+      const searchData = await searchRes.json();
+      const photos = [];
+      if (searchData.products && searchData.products.length > 0) {
+        searchData.products.forEach((product) => {
+          if (product.images && product.images.length > 0) {
+            const img = product.images[0].variants.find((v) => v.width >= 1e3) || product.images[0].variants[product.images[0].variants.length - 1];
+            if (img && photos.length < 5) {
+              photos.push(img.url);
+            }
+          }
+        });
+      }
+      return c.json({ photos: photos.length > 0 ? photos : [] });
+    } catch (error) {
+      console.error("[Viator Proxy Error]", error);
+      return c.json({ photos: [], error: error.message }, 200);
+    }
+  });
+  app2.get("/api/viator/products", async (c) => {
+    const query = c.req.query("q");
+    if (!query) return c.json({ error: "\uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
+    const workerEnv = c.env;
+    const apiKey = workerEnv?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
+    try {
+      log2(`[Viator Products] Searching products for: ${query}`, "VIATOR");
+      const searchRes = await fetch(`https://api.viator.com/partner/products/search`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json;version=2.0",
+          "Content-Type": "application/json",
+          "exp-api-key": apiKey,
+          "Accept-Language": "en-US"
+        },
+        body: JSON.stringify({
+          filtering: {
+            searchText: query
+          },
+          pagination: {
+            start: 1,
+            count: 10
+          },
+          currency: "USD"
+        })
+      });
+      if (!searchRes.ok) {
+        let errorBody = "";
+        try {
+          errorBody = await searchRes.text();
+        } catch (e) {
+        }
+        console.error(`[Viator Products API Error] Status: ${searchRes.status}, Body: ${errorBody}`);
+        return c.json({ products: [] });
+      }
+      const data = await searchRes.json();
+      const products = (data.products || []).map((p) => ({
+        id: p.productCode,
+        title: p.title,
+        description: p.description,
+        image: p.images?.[0]?.variants?.find((v) => v.width >= 400)?.url || p.images?.[0]?.variants?.[0]?.url,
+        price: p.pricing?.summary?.lowPrice,
+        rating: p.reviews?.combinedAverageRating,
+        url: p.productUrl
+      }));
+      return c.json({ products });
+    } catch (error) {
+      console.error("[Viator Products Error]", error);
+      return c.json({ products: [], error: error.message }, 200);
+    }
+  });
   app2.get("/api/cities/:id", async (c) => {
     try {
       const city = await storage.getCity(c.req.param("id"));
@@ -25533,13 +25881,13 @@ function registerRoutes(app2) {
   app2.get("/api/users", async (c) => {
     try {
       const role = c.req.query("role");
-      let users3;
+      let users2;
       if (role) {
-        users3 = await storage.getUsersByRole(role);
+        users2 = await storage.getUsersByRole(role);
       } else {
-        users3 = await storage.getAllUsers();
+        users2 = await storage.getAllUsers();
       }
-      return c.json(users3);
+      return c.json(users2);
     } catch (error) {
       console.error("[User API Error]", error);
       return c.json({ error: "Failed to fetch users" }, 500);
@@ -25648,12 +25996,12 @@ function registerRoutes(app2) {
     try {
       const cityId = c.req.param("cityId");
       const clientEtag = c.req.header("if-none-match");
-      const [cityData] = await db.select().from(cities).where(eq6(cities.id, cityId));
+      const [cityData] = await db.select().from(cities).where(eq7(cities.id, cityId));
       if (!cityData) {
         return c.json({ error: "City not found" }, 404);
       }
-      const cityLandmarks = await db.select().from(landmarks).where(eq6(landmarks.cityId, cityId));
-      const [versionRecord] = await db.select().from(dataVersions).where(eq6(dataVersions.entityType, "all"));
+      const cityLandmarks = await db.select().from(landmarks).where(eq7(landmarks.cityId, cityId));
+      const [versionRecord] = await db.select().from(dataVersions).where(eq7(dataVersions.entityType, "all"));
       const version = versionRecord?.version || 1;
       const packageData = {
         city: {
@@ -25697,7 +26045,7 @@ function registerRoutes(app2) {
         version,
         downloadedAt: (/* @__PURE__ */ new Date()).toISOString()
       };
-      const contentHash = crypto3.createHash("md5").update(JSON.stringify({ version, cityId, count: cityLandmarks.length })).digest("hex");
+      const contentHash = crypto.createHash("md5").update(JSON.stringify({ version, cityId, count: cityLandmarks.length })).digest("hex");
       const etag = `"${contentHash}"`;
       if (clientEtag === etag) {
         return c.body(null, 304);
@@ -25719,7 +26067,7 @@ function registerRoutes(app2) {
       }).from(cities);
       const citiesWithStats = await Promise.all(
         allCities.map(async (city) => {
-          const cityLandmarks = await db.select().from(landmarks).where(eq6(landmarks.cityId, city.id));
+          const cityLandmarks = await db.select().from(landmarks).where(eq7(landmarks.cityId, city.id));
           return {
             ...city,
             landmarkCount: cityLandmarks.length
@@ -25786,7 +26134,7 @@ function registerRoutes(app2) {
       const [updated] = await db.update(cities).set({
         ...body,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq6(cities.id, id)).returning();
+      }).where(eq7(cities.id, id)).returning();
       if (!updated) return c.json({ error: "City not found" }, 404);
       return c.json(updated);
     } catch (e) {
@@ -25796,9 +26144,9 @@ function registerRoutes(app2) {
   adminCallback.delete("/cities/:id", async (c) => {
     try {
       const id = c.req.param("id");
-      const marks = await db.select().from(landmarks).where(eq6(landmarks.cityId, id));
+      const marks = await db.select().from(landmarks).where(eq7(landmarks.cityId, id));
       if (marks.length > 0) return c.json({ error: "Cannot delete city with landmarks" }, 400);
-      const [deleted] = await db.delete(cities).where(eq6(cities.id, id)).returning();
+      const [deleted] = await db.delete(cities).where(eq7(cities.id, id)).returning();
       if (!deleted) return c.json({ error: "City not found" }, 404);
       return c.json({ success: true });
     } catch (e) {
@@ -25868,7 +26216,7 @@ function registerRoutes(app2) {
       const [updated] = await db.update(landmarks).set({
         ...body,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq6(landmarks.id, id)).returning();
+      }).where(eq7(landmarks.id, id)).returning();
       if (!updated) return c.json({ error: "Landmark not found" }, 404);
       return c.json(updated);
     } catch (e) {
@@ -25878,7 +26226,7 @@ function registerRoutes(app2) {
   adminCallback.delete("/landmarks/:id", async (c) => {
     try {
       const id = c.req.param("id");
-      const [deleted] = await db.delete(landmarks).where(eq6(landmarks.id, id)).returning();
+      const [deleted] = await db.delete(landmarks).where(eq7(landmarks.id, id)).returning();
       if (!deleted) return c.json({ error: "Landmark not found" }, 404);
       return c.json({ success: true });
     } catch (e) {
@@ -25889,7 +26237,7 @@ function registerRoutes(app2) {
     try {
       const id = c.req.param("id");
       const { apiKey } = await c.req.json();
-      const [landmark] = await db.select().from(landmarks).where(eq6(landmarks.id, id));
+      const [landmark] = await db.select().from(landmarks).where(eq7(landmarks.id, id));
       if (!landmark) return c.json({ error: "Landmark not found" }, 404);
       if (!apiKey) return c.json({ error: "API Key is required" }, 400);
       const { GoogleGenAI } = await import("@google/genai");
@@ -25916,7 +26264,7 @@ function registerRoutes(app2) {
       const [updated] = await db.update(landmarks).set({
         narration: text2,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq6(landmarks.id, id)).returning();
+      }).where(eq7(landmarks.id, id)).returning();
       return c.json(updated);
     } catch (e) {
       console.error("[Generate Narration Error]", e);
@@ -25948,7 +26296,7 @@ function registerRoutes(app2) {
   tourLeader.get("/schedules", async (c) => {
     try {
       const tourId = c.req.query("tourId") || "default";
-      const schedules = await db.select().from(tourSchedules).where(eq6(tourSchedules.tourId, tourId)).orderBy(tourSchedules.orderIndex);
+      const schedules = await db.select().from(tourSchedules).where(eq7(tourSchedules.tourId, tourId)).orderBy(tourSchedules.orderIndex);
       return c.json(schedules);
     } catch (e) {
       return c.json({ error: "Failed to fetch schedules" }, 500);
@@ -25979,7 +26327,7 @@ function registerRoutes(app2) {
       const [updated] = await db.update(tourSchedules).set({
         ...body,
         updatedAt: /* @__PURE__ */ new Date()
-      }).where(eq6(tourSchedules.id, id)).returning();
+      }).where(eq7(tourSchedules.id, id)).returning();
       if (!updated) return c.json({ error: "Schedule not found" }, 404);
       return c.json(updated);
     } catch (e) {
@@ -25989,7 +26337,7 @@ function registerRoutes(app2) {
   tourLeader.delete("/schedules/:id", async (c) => {
     try {
       const id = c.req.param("id");
-      const [deleted] = await db.delete(tourSchedules).where(eq6(tourSchedules.id, id)).returning();
+      const [deleted] = await db.delete(tourSchedules).where(eq7(tourSchedules.id, id)).returning();
       if (!deleted) return c.json({ error: "Schedule not found" }, 404);
       return c.json({ success: true });
     } catch (e) {
@@ -26096,7 +26444,7 @@ function registerRoutes(app2) {
   adminCallback.patch("/users/:id/role", async (c) => {
     const id = c.req.param("id");
     const { role } = await c.req.json();
-    const [updated] = await db.update(users).set({ role }).where(eq6(users.id, id)).returning();
+    const [updated] = await db.update(users).set({ role }).where(eq7(users.id, id)).returning();
     return c.json(updated || { error: "Not found" }, updated ? 200 : 404);
   });
   adminCallback.get("/marketing-contents", async (c) => {
@@ -26107,7 +26455,7 @@ function registerRoutes(app2) {
         landmarkName: landmarks.name,
         content: marketingContents.content,
         updatedAt: marketingContents.updatedAt
-      }).from(marketingContents).innerJoin(landmarks, eq6(marketingContents.landmarkId, landmarks.id)).orderBy(desc2(marketingContents.updatedAt));
+      }).from(marketingContents).innerJoin(landmarks, eq7(marketingContents.landmarkId, landmarks.id)).orderBy(desc3(marketingContents.updatedAt));
       return c.json(results);
     } catch (e) {
       return c.json({ error: "Failed" }, 500);
@@ -26288,6 +26636,113 @@ function registerRoutes(app2) {
     }
   });
   app2.route("/api/follows", followsRoute);
+  app2.get("/api/partner/stats", requireAuth, async (c) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+      const user = await storage.getUserById(userId);
+      if (!user) return c.json({ error: "User not found" }, 404);
+      const sumResult = await db.select({
+        total: sql5`SUM(${commissions.amount})`
+      }).from(commissions).where(and4(
+        eq7(commissions.userId, userId),
+        eq7(commissions.status, "confirmed")
+      ));
+      const totalEarnedResult = await db.select({
+        total: sql5`SUM(${commissions.amount})`
+      }).from(commissions).where(eq7(commissions.userId, userId));
+      const team = await db.select().from(users).where(eq7(users.inviterId, userId));
+      return c.json({
+        level: user.agentLevel || "L0",
+        referralCode: user.referralCode,
+        balance: Number(sumResult[0]?.total || 0),
+        totalEarned: Number(totalEarnedResult[0]?.total || 0),
+        teamSize: team.length,
+        nextLevelProgress: team.length >= 3 ? 100 : Math.round(team.length / 3 * 100)
+        // 가상의 승격 로직
+      });
+    } catch (error) {
+      console.error("[Partner Stats API Error]", error);
+      return c.json({ error: "Failed to fetch partner stats" }, 500);
+    }
+  });
+  app2.get("/api/partner/commissions", requireAuth, async (c) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+      const history = await db.select().from(commissions).where(eq7(commissions.userId, userId)).orderBy(desc3(commissions.createdAt)).limit(10);
+      return c.json(history);
+    } catch (error) {
+      return c.json({ error: "Failed to fetch commission history" }, 500);
+    }
+  });
+  app2.get("/api/partner/tree", requireAuth, async (c) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+      const statsByLevel = [0, 0, 0, 0, 0];
+      const l1 = await db.select({
+        id: users.id,
+        displayName: users.displayName,
+        role: users.role,
+        agentLevel: users.agentLevel
+      }).from(users).where(eq7(users.inviterId, userId));
+      statsByLevel[0] = l1.length;
+      let currentParents = l1.map((m) => m.id);
+      for (let level = 1; level < 5; level++) {
+        if (currentParents.length === 0) break;
+        const nextLevel = await db.select({
+          id: users.id,
+          inviterId: users.inviterId
+        }).from(users).where(inArray(users.inviterId, currentParents));
+        statsByLevel[level] = nextLevel.length;
+        currentParents = nextLevel.map((m) => m.id);
+      }
+      return c.json({ statsByLevel, totalTeamSize: statsByLevel.reduce((a, b) => a + b, 0) });
+    } catch (error) {
+      return c.json({ error: "Failed to fetch partner tree" }, 500);
+    }
+  });
+  app2.get("/api/partner/leads", requireAuth, async (c) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+      let result = await db.select().from(leads).where(eq7(leads.agentId, userId));
+      if (result.length === 0) {
+        const demoLeads = [
+          { agentId: userId, name: "\uAE40\uCCA0\uC218 (\uC0C1\uC870 \uAC00\uC785\uC790)", phone: "010-1234-5678", source: "kakao", status: "new" },
+          { agentId: userId, name: "\uC774\uC601\uD76C (\uC608\uBE44 \uD06C\uB8E8\uC988 \uC778\uC194\uC790)", phone: "010-9876-5432", source: "web", status: "contacted" },
+          { agentId: userId, name: "\uBC15\uC9C0\uBBFC (\uC77C\uBCF8 \uAC00\uC774\uB4DC \uC9C0\uC6D0)", phone: "010-1111-2222", source: "manual", status: "meeting" }
+        ];
+        await db.insert(leads).values(demoLeads).execute();
+        result = await db.select().from(leads).where(eq7(leads.agentId, userId));
+      }
+      return c.json(result);
+    } catch (error) {
+      console.error("Lead fetch error:", error);
+      return c.json({ error: "Failed to fetch leads" }, 500);
+    }
+  });
+  app2.post("/api/partner/leads/:id/sync", requireAuth, async (c) => {
+    const session = c.get("session");
+    const userId = session.get("userId");
+    const leadId = c.req.param("id");
+    try {
+      if (!userId) return c.json({ error: "Unauthorized" }, 401);
+      const [lead] = await db.select().from(leads).where(eq7(leads.id, leadId));
+      if (!lead) return c.json({ error: "Lead not found" }, 404);
+      const text2 = `${lead.name} \uACE0\uAC1D\uB2D8\uC758 \uC0C1\uB2F4 \uBA54\uC2DC\uC9C0: "5\uC6D4 \uC11C\uC720\uB7FD \uD06C\uB8E8\uC988 10\uC778 \uB2E8\uCCB4 \uC624\uB514\uC624 \uAC00\uC774\uB4DC \uB3C4\uC785 \uD76C\uB9DD, \uC0C1\uC870 \uD3EC\uC778\uD2B8 \uACB0\uC81C \uBB38\uC758, \uC218\uC694\uC77C \uC624\uC804 \uBBF8\uD305 \uC694\uCCAD"`;
+      const result = await runSalesAutomation(leadId, userId, text2);
+      return c.json({ success: true, analysis: result });
+    } catch (error) {
+      console.error("CRM Automation error:", error);
+      return c.json({ error: "Failed to sync lead with AI" }, 500);
+    }
+  });
 }
 
 // server/app.ts
@@ -26319,7 +26774,7 @@ app.use("*", async (c, next) => {
     "frame-ancestors *",
     "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com",
     "media-src 'self' data:",
-    "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com",
+    "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com api.viator.com",
     "font-src 'self' data: https:",
     "style-src 'self' 'unsafe-inline' https: unpkg.com",
     "style-src-elem 'self' 'unsafe-inline' https: unpkg.com",
@@ -26356,39 +26811,77 @@ app.use("*", async (c, next) => {
 });
 setupAuthRoutes(app);
 registerRoutes(app);
-async function getIndexHtml(c) {
-  const workerEnv = c.env;
-  if (!workerEnv?.__STATIC_CONTENT) return null;
+async function readIndexHtmlFromDisk(url) {
   try {
-    let manifest = {};
+    const { default: fs2 } = await import("node:fs/promises");
+    const { default: path3 } = await import("node:path");
+    const { fileURLToPath: fileURLToPath3 } = await import("node:url");
+    const __dirname3 = path3.dirname(fileURLToPath3(import.meta.url));
+    const distPath = path3.resolve(__dirname3, "..", "dist", "index.html");
+    const html = await fs2.readFile(distPath, "utf-8");
     try {
-      const m = await import("__STATIC_CONTENT_MANIFEST");
-      const manifestStr = m.default || m;
-      manifest = typeof manifestStr === "string" ? JSON.parse(manifestStr) : manifestStr;
-    } catch (e) {
-      console.warn("[Worker] Manifest not found/invalid");
-    }
-    const physicalKey = manifest["index.html"] || "index.html";
-    const asset = await workerEnv.__STATIC_CONTENT.get(physicalKey, { type: "text" });
-    if (asset) {
-      let html = asset;
-      try {
-        const { ogService: ogService2 } = await Promise.resolve().then(() => (init_ogService(), ogService_exports));
-        html = await ogService2.injectMetaTags(html, c.req.url);
-      } catch (ogError) {
-        console.error("[Worker] OG injection failed:", ogError);
-      }
+      const { ogService: ogService2 } = await Promise.resolve().then(() => (init_ogService(), ogService_exports));
+      return await ogService2.injectMetaTags(html, url);
+    } catch {
       return html;
     }
-  } catch (e) {
-    console.error("[Worker] Failed to load index.html from KV:", e);
+  } catch {
+    return null;
+  }
+}
+async function getIndexHtml(c) {
+  const workerEnv = c.env;
+  if (workerEnv?.__STATIC_CONTENT) {
+    try {
+      let manifest = {};
+      try {
+        const m = await import("__STATIC_CONTENT_MANIFEST");
+        const manifestStr = m.default || m;
+        manifest = typeof manifestStr === "string" ? JSON.parse(manifestStr) : manifestStr;
+      } catch (e) {
+        console.warn("[Worker] Manifest not found/invalid");
+      }
+      const physicalKey = manifest["index.html"] || "index.html";
+      const asset = await workerEnv.__STATIC_CONTENT.get(physicalKey, { type: "text" });
+      if (asset) {
+        let html = asset;
+        try {
+          const { ogService: ogService2 } = await Promise.resolve().then(() => (init_ogService(), ogService_exports));
+          html = await ogService2.injectMetaTags(html, c.req.url);
+        } catch (ogError) {
+          console.error("[Worker] OG injection failed:", ogError);
+        }
+        return html;
+      }
+    } catch (e) {
+      console.error("[Worker] Failed to load index.html from KV:", e);
+    }
+  }
+  const fsHtml = await readIndexHtmlFromDisk(c.req.url);
+  if (fsHtml) {
+    console.log("[App] Serving index.html from filesystem");
+    return fsHtml;
   }
   return null;
 }
+var FALLBACK_HTML = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPS \uC624\uB514\uC624 \uAC00\uC774\uB4DC</title>
+  <script>window.__SPA_FALLBACK__=true;</script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/assets/index.js"></script>
+</body>
+</html>`;
 app.get("/", async (c, next) => {
   const html = await getIndexHtml(c);
   if (html) return c.html(html);
-  return next();
+  console.warn("[App] / : getIndexHtml null \u2192 fallback response");
+  return c.html(FALLBACK_HTML, 200);
 });
 app.get("/*", async (c, next) => {
   const path3 = c.req.path;
@@ -26424,8 +26917,8 @@ app.get("/*", async (c, next) => {
   console.log(`[Worker] SPA Fallback requested for: ${path3}. workerEnv: ${!!workerEnv}`);
   const html = await getIndexHtml(c);
   if (html) return c.html(html);
-  console.log(`[Worker] FALLBACK NEXT() for: ${path3}`);
-  return next();
+  console.warn(`[App] SPA fallback for ${path3}: getIndexHtml null \u2192 fallback response`);
+  return c.html(FALLBACK_HTML, 200);
 });
 var app_default = app;
 
