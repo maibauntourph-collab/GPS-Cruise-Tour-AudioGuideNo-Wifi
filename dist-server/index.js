@@ -25751,23 +25751,15 @@ function registerRoutes(app2) {
     const query = c.req.query("q");
     if (!query) return c.json({ error: "\uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
     const dbApiKey = await storage.getSiteSetting("api_viator_key");
-    const apiKey = dbApiKey || c.env?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
-    const maskedKey = apiKey ? `${apiKey.substring(0, 4)}***${apiKey.substring(apiKey.length - 4)}` : "MISSING";
-    log2(`[Viator Proxy] API Key: ${maskedKey}, Query: ${query}`, "VIATOR");
+    const apiKey = dbApiKey || "de25d027-3e03-47cb-9c89-196e3e698637";
     try {
       log2(`[Viator Proxy] Searching photos for: ${query}`, "VIATOR");
       const v2RequestBody = {
-        filtering: {
-          searchText: query
-        },
-        pagination: {
-          start: 1,
-          count: 5
-        },
+        filtering: { searchText: query },
+        pagination: { start: 1, count: 5 },
         currency: "USD"
       };
-      console.log(`[Viator Proxy] Requesting v2.0: ${JSON.stringify(v2RequestBody)}`);
-      const searchRes = await fetch(`https://api.viator.com/partner/products/search`, {
+      const searchRes = await fetch("https://api.viator.com/partner/products/search", {
         method: "POST",
         headers: {
           "Accept": "application/json;version=2.0",
@@ -25775,42 +25767,20 @@ function registerRoutes(app2) {
           "exp-api-key": apiKey,
           "Accept-Language": "en-US"
         },
-        body: JSON.stringify({
-          filtering: {
-            searchText: query
-          },
-          pagination: {
-            start: 1,
-            count: 5
-          },
-          currency: "USD"
-        })
+        body: JSON.stringify(v2RequestBody)
       });
       if (!searchRes.ok) {
-        let errorBody = "";
-        try {
-          errorBody = await searchRes.text();
-        } catch (e) {
-        }
+        const errorBody = await searchRes.text();
         console.error(`[Viator API Error] Status: ${searchRes.status}, Body: ${errorBody}`);
-        const mockPhotos = [
-          `https://images.unsplash.com/photo-1541343672885-9be56236302a?q=80&w=1000&auto=format&fit=crop`,
-          `https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1000&auto=format&fit=crop`,
-          `https://images.unsplash.com/photo-1527004013197-933c4bb611b3?q=80&w=1000&auto=format&fit=crop`,
-          `https://images.unsplash.com/photo-1559139225-303036894977?q=80&w=1000&auto=format&fit=crop`,
-          `https://images.unsplash.com/photo-1526481280693-3bfa7561693f?q=80&w=1000&auto=format&fit=crop`
-        ];
-        return c.json({ photos: mockPhotos, isMock: true });
+        throw new Error(`Viator API returned ${searchRes.status}`);
       }
-      const searchData = await searchRes.json();
+      const data = await searchRes.json();
       const photos = [];
-      if (searchData.products && searchData.products.length > 0) {
-        searchData.products.forEach((product) => {
-          if (product.images && product.images.length > 0) {
-            const img = product.images[0].variants.find((v) => v.width >= 1e3) || product.images[0].variants[product.images[0].variants.length - 1];
-            if (img && photos.length < 5) {
-              photos.push(img.url);
-            }
+      if (data.products && Array.isArray(data.products)) {
+        data.products.forEach((p) => {
+          if (p.images && p.images.length > 0) {
+            const img = p.images[0].variants?.find((v) => v.width >= 800) || p.images[0].variants?.[0];
+            if (img && img.url) photos.push(img.url);
           }
         });
       }
@@ -25824,10 +25794,10 @@ function registerRoutes(app2) {
     const query = c.req.query("q");
     if (!query) return c.json({ error: "\uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
     const dbApiKey = await storage.getSiteSetting("api_viator_key");
-    const apiKey = dbApiKey || c.env?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
+    const apiKey = dbApiKey || "de25d027-3e03-47cb-9c89-196e3e698637";
     try {
       log2(`[Viator Products] Searching products for: ${query}`, "VIATOR");
-      const searchRes = await fetch(`https://api.viator.com/partner/products/search`, {
+      const searchRes = await fetch("https://api.viator.com/partner/products/search", {
         method: "POST",
         headers: {
           "Accept": "application/json;version=2.0",
@@ -25836,32 +25806,23 @@ function registerRoutes(app2) {
           "Accept-Language": "en-US"
         },
         body: JSON.stringify({
-          filtering: {
-            searchText: query
-          },
-          pagination: {
-            start: 1,
-            count: 10
-          },
+          filtering: { searchText: query },
+          pagination: { start: 1, count: 5 },
           currency: "USD"
         })
       });
       if (!searchRes.ok) {
-        let errorBody = "";
-        try {
-          errorBody = await searchRes.text();
-        } catch (e) {
-        }
+        const errorBody = await searchRes.text();
         console.error(`[Viator Products API Error] Status: ${searchRes.status}, Body: ${errorBody}`);
-        return c.json({ products: [] });
+        throw new Error(`Viator API returned ${searchRes.status}`);
       }
       const data = await searchRes.json();
       const products = (data.products || []).map((p) => ({
         id: p.productCode,
         title: p.title,
         description: p.description,
-        image: p.images?.[0]?.variants?.find((v) => v.width >= 400)?.url || p.images?.[0]?.variants?.[0]?.url,
-        price: p.pricing?.summary?.lowPrice,
+        price: p.pricing?.summary?.fromPrice,
+        image: p.images?.[0]?.variants?.[0]?.url,
         rating: p.reviews?.combinedAverageRating,
         url: p.productUrl
       }));
@@ -25869,6 +25830,46 @@ function registerRoutes(app2) {
     } catch (error) {
       console.error("[Viator Products Error]", error);
       return c.json({ products: [], error: error.message }, 200);
+    }
+  });
+  app2.post("/api/viator/attractions/search", async (c) => {
+    try {
+      const body = await c.req.json();
+      const dbApiKey = await storage.getSiteSetting("api_viator_key");
+      const apiKey = dbApiKey || "de25d027-3e03-47cb-9c89-196e3e698637";
+      const response = await fetch("https://api.viator.com/partner/attractions/search", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json;version=2.0",
+          "Content-Type": "application/json",
+          "exp-api-key": apiKey
+        },
+        body: JSON.stringify(body)
+      });
+      const data = await response.json();
+      return c.json(data);
+    } catch (error) {
+      return c.json({ error: error.message }, 500);
+    }
+  });
+  app2.post("/api/viator/recommendations", async (c) => {
+    try {
+      const body = await c.req.json();
+      const dbApiKey = await storage.getSiteSetting("api_viator_key");
+      const apiKey = dbApiKey || "de25d027-3e03-47cb-9c89-196e3e698637";
+      const response = await fetch("https://api.viator.com/partner/products/recommendations", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json;version=2.0",
+          "Content-Type": "application/json",
+          "exp-api-key": apiKey
+        },
+        body: JSON.stringify(body)
+      });
+      const data = await response.json();
+      return c.json(data);
+    } catch (error) {
+      return c.json({ error: error.message }, 500);
     }
   });
   app2.get("/api/cities/:id", async (c) => {
@@ -26776,9 +26777,9 @@ app.use("*", async (c, next) => {
   const csp = [
     "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https:",
     "frame-ancestors *",
-    "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com *.getyourguide.com *.viator.com *.klook.com *.trip.com",
+    "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com *.getyourguide.com *.viator.com *.klook.com *.trip.com *.booking.com",
     "media-src 'self' data:",
-    "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com api.viator.com *.getyourguide.com *.viator.com *.klook.com *.trip.com",
+    "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com api.viator.com *.getyourguide.com *.viator.com *.klook.com *.trip.com *.booking.com",
     "font-src 'self' data: https:",
     "style-src 'self' 'unsafe-inline' https: unpkg.com",
     "style-src-elem 'self' 'unsafe-inline' https: unpkg.com",

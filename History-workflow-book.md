@@ -688,3 +688,49 @@
   - client/index.html의 <head> 영역에 아고다 파트너 사이트 인증 메타태그(meta tag) 추가
 - **Result**: 성공적으로 아고다 인증 파일 생성 및 메타 태그 적용 완료.
 - **Next**: 빌드 및 배포, 그리고 Agoda 측 대시보드에서 인증 확인 클릭.
+
+
+### 📅 Date & Time: 2026-04-01 12:03:35
+
+- **Order**: 승인 (add, com, dep 배포 실행)
+- **Plan**: 코드 변경사항 커밋 및 빌드/배포를 통한 라이브 서버 반영
+- **Task**:
+  - `git add .` 및 `git commit -m "chore: add agoda partner site verification"` 적용
+  - `git push origin main` 으로 원격 저장소 전송
+  - `npm run build` & `npm run deploy` 실행을 통한 클라우드 배포 진행
+- **Result**: 성공적으로 변경사항 병합 및 제품 서버 배포 완료 (배포 성공)
+- **Next**: Agoda 파트너 시스템에 접속하여 소유권 인증 확인 버튼 탭 및 결과 확인
+
+
+### 📅 Date & Time: 2026-04-01 13:01:18
+
+- **Order**: Viator 예약 링크 클릭 시, Cloudflare Worker Proxy 및 Sandbox API 경로로 변경
+- **Plan**: `client/src/lib/affiliateConfig.ts`의 `getViatorUrl` 함수 내부 로직 업데이트
+- **Task**:
+  - `getViatorUrl` 의 반환 URL 구조를 기존 Viator 검색 URL에서 Proxy된 Sandbox API endpoint (`modified-since?count=500`) 로 교체.
+- **Result**: Viator "Booking" 버튼 클릭 시 지정된 Cloudflare Worker 모델 URL로 GET 접근하도록 수정.
+- **Next**: 실제 앱에서 Viator 버튼 클릭 시 Worker 프록시가 Sandbox 응답을 성공적으로 주는지 파악 후 관련 데이터 파싱 기획.
+
+
+### 📅 Date & Time: 2026-04-01 13:05:01
+
+- **Order**: 마케터 송(Marketer Song) 호출 및 SEO 메타 설명 점검 방법 안내 요청
+- **Plan**: 현재 `client/index.html`에 적용된 SEO 설정 평가 후 검색엔진 검증 방법(How to check) 전달
+- **Task**:
+  - `<title>` 및 `<meta name="description">` 평가 수행
+  - 누락된 OG 태그(Open Graph) 점검 및 보완 계획 수립
+  - 검증 방법(Google Lighthouse, Facebook Debugger, Google Search Console 등) 교육용 정리
+- **Result**: Marketer Song의 AI 분석 리포트 성공적으로 송출.
+- **Next**: 제안된 OG 메타 태그와 Twitter 카드를 `index.html`에 추가하는 최적화 작업 승인 대기.
+
+
+### 📅 Date & Time: 2026-04-01 13:20:21
+
+- **Order**: 메타(OG) 태그 및 트위터 카드 최적화, 고화질 배너 이미지 생성 건
+- **Plan**: 앱 로고 배너 이미지를 고화질로 생성(`generate_image`)한 뒤, `client/index.html`에 비어있던 소셜 공유용 메타 태그(Open Graph, Twitter Cards)를 주입
+- **Task**:
+  - `generate_image` 툴을 사용하여 GPS 오디오 가이드용 프리미엄 유리질감 3D 고해상도 배너 생성
+  - 해당 결과 이미지를 `client/public/images/og-banner.png` 경로로 이동 및 저장
+  - `client/index.html`의 `<!-- OG_TAGS_PLACEHOLDER -->` 영역을 파싱하여 `og:image`, `twitter:image` 등 필수 메타 태그 10종 추가 삽입
+- **Result**: 공유 기능(카카오, 인스타, 페이스북, 트위터 등) 사용 시 최적화된 고퀄리티 배너 카드와 함께 제목/설명이 노출되게 개선됨
+- **Next**: 빌드 및 배포 후 최종 운영망에서 카카오/페이스북 디버깅 툴을 이용해 썸네일 캐시 갱신 및 정상 노출 검증

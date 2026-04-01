@@ -98,14 +98,14 @@ export const getBookingUrl = (searchQuery: string, lang: string = 'en-US', setti
     // ss: 검색어 (search string), aid: 제휴 ID
     const url = new URL('https://www.booking.com/searchresults.html');
     url.searchParams.set('ss', searchQuery);
-    
+
     // 기본 파트너 ID (없으면 기본값 사용)
     const aid = '862954987108816'; // 사용자 로그에서 발견된 ID
     url.searchParams.set('aid', aid);
-    
+
     // [적요] channel 파라미터 추가 (로그에서 발견된 'search_landing' 대응)
     url.searchParams.set('channel', 'search_landing');
-    
+
     return url.toString();
 };
 
@@ -113,11 +113,15 @@ export const getBookingUrl = (searchQuery: string, lang: string = 'en-US', setti
  * Generates an affiliate-link for Viator
  */
 export const getViatorUrl = (searchQuery: string, lang: string = 'en-US', settings?: AffiliateSettings) => {
-    const viatorLang = getViatorLang(lang);
-    const base = `https://www.viator.com/${viatorLang}/search`;
-    const url = new URL(base);
-    url.searchParams.set('q', searchQuery);
+    // [적요] Viator 예약(Booking) 클릭 시 CORS 이슈 해결 및 API 직접 테스트를 위해 Cloudflare Worker 프록시 사용
+    // 프록시 뒤에 Viator Sandbox API의 modified-since endpoint 호출
+    const proxy = 'https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/';
+    const targetApi = 'https://api.sandbox.viator.com/partner/products/modified-since?count=500';
 
+    // Cloudflare Worker가 뒤쪽 URL을 받아 GET 요청을 대리 수행 (proxy fetch)
+    const url = new URL(`${proxy}${targetApi}`);
+
+    // 기존 파트너 ID 파라미터(옵션)가 있다면 함께 넘겨줍니다.
     const partnerId = settings?.viatorId || AFFILIATE_IDS.viator;
     if (partnerId && partnerId !== 'YOUR_VIATOR_PARTNER_ID') {
         url.searchParams.set(AFFILIATE_PARAMS.viator, partnerId);
