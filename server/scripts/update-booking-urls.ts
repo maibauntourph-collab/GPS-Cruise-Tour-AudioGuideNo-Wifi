@@ -34,12 +34,15 @@ function generateBookingUrl(cityId: string, name: string, category: string): str
                 return `https://www.google.com/search?q=${query}+reservations`;
         }
     } else {
-        // [어벤져스 팀] 랜드마크용 제휴 플랫폼 (GetYourGuide, Klook, Trip.com)
-        // 한국 지역은 Klook/Trip.com이 강세, 유럽/미국은 GetYourGuide가 강세
+        // [어벤져스 팀 | 2026-03-29] 랜드마크용 제휴 플랫폼 최신 스펙 적용
+        // 한국/아시아 지역은 Klook/Trip.com이 강세
         if (['seoul', 'busan', 'jeju', 'tokyo', 'singapore'].includes(cityId)) {
-            return `https://www.klook.com/en-US/search?query=${query}`;
+            // [Bug Doctor] Klook 최신 스펙: keyword= 파라미터 사용
+            return `https://www.klook.com/en-US/search/?keyword=${query}`;
         } else {
-            return `https://www.getyourguide.com/s?q=${query}`;
+            // [Bug Doctor] GYG 최신 스펙: /search/ 경로 사용 (리다이렉트 방지)
+            // 유럽/미국/기타 지역은 GetYourGuide와 Booking.com이 기본
+            return `https://www.getyourguide.com/search/?q=${query}`;
         }
     }
 }

@@ -9,14 +9,8 @@ import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, External
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
-import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, AffiliateSettings } from '@/lib/affiliateConfig';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, getBookingUrl, AffiliateSettings } from '@/lib/affiliateConfig';
 import { useToast } from '@/hooks/use-toast';
-
-// [Bug Doctor | 2026-03-29] URL 변환 없이 원본 링크 그대로 새 탭 오픈
-// 사용자 요구: "just web link" - 모바일/앱 변환 없이 원본 URL 사용
-function getBookingUrl(url: string): string {
-  return url; // URL 변환 없음 - 그대로 반환
-}
 
 import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
 import { useQuery } from '@tanstack/react-query';
@@ -89,11 +83,11 @@ export default function LandmarkDetailDialog({
     enabled: !!landmark,
   });
 
-  // [Designer Kim | 2026-03-28] Viator 전용 고해상도 사진 5장 가져오기
+  // [Designer Kim | 2026-03-29] Viator API 복구 (enabled: true)
   const landmarkNameForPhotos = landmark?.name || '';
   const { data: viatorPhotosData = { photos: [] } } = useQuery<{ photos: string[] }>({
     queryKey: [`/api/viator/photos?q=${encodeURIComponent(landmarkNameForPhotos)}`],
-    enabled: !!landmarkNameForPhotos && isOpen,
+    enabled: !!landmarkNameForPhotos && isOpen, // [Kodari] Viator API 호출 복구
   });
 
   const allPhotos = useMemo(() => {
@@ -109,10 +103,10 @@ export default function LandmarkDetailDialog({
     enabled: !!landmarkNameForShopify && isOpen, // 다이얼로그가 열려 있을 때만 활성화
   });
 
-  // [Kodari Middle Manager | 2026-03-29] Viator 상품 리스트 정보
+  // [Kodari Middle Manager | 2026-03-29] Viator 상품 리스트 정보 복구
   const { data: viatorProductsData = { products: [] }, isLoading: isViatorLoading } = useQuery<{ products: any[] }>({
     queryKey: [`/api/viator/products?q=${encodeURIComponent(landmarkNameForPhotos)}`],
-    enabled: !!landmarkNameForPhotos && isOpen && activeTab === 'tickets',
+    enabled: !!landmarkNameForPhotos && isOpen, // [Kodari] Viator API 호출 복구
   });
   const viatorProducts = viatorProductsData.products || [];
 
@@ -279,7 +273,8 @@ export default function LandmarkDetailDialog({
     const bookingUrl = getBookingUrl(url);
 
     // [적요] 클릭과 동기적으로 새 탭 열기 → 팝업 차단 없음
-    const win = window.open(bookingUrl, target, 'noopener,noreferrer');
+    // [Bug Doctor] 제휴 추적 및 플랫폼 호환성을 위해 'noreferrer' 제거
+    const win = window.open(bookingUrl, target, 'noopener');
 
     // [적요] 새 탭이 차단된 경우 현재 탭에서 이동 (폴백)
     if (!win) {
@@ -825,6 +820,16 @@ export default function LandmarkDetailDialog({
                     // [Bug Doctor] 모든 제휴 플랫폼 정의
                     const allPlatforms = [
                       {
+                        id: 'booking',
+                        name: 'Booking.com',
+                        icon: <Globe className="w-4 h-4 text-[#003580]" />,
+                        url: getBookingUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
+                        tip: '🏨 전 세계 1위 숙소 및 액티비티 · 최저가 보장',
+                        tipEn: '🏨 World #1 Booking · Best Price Guarantee',
+                        color: 'text-[#003580]',
+                        badge: 'bg-blue-50 text-[#003580]',
+                      },
+                      {
                         id: 'myrealtrip',
                         name: 'MyRealTrip (마이리얼트립)',
                         icon: <ExternalLink className="w-4 h-4 text-[#2B96ED]" />,
@@ -876,21 +881,21 @@ export default function LandmarkDetailDialog({
                       },
                     ];
 
-                    // [적요] 언어별 노출 우선순위 결정
+                    // [적요] 언어별 노출 우선순위 결정 (Viator API 중단에 따라 순서 조정)
                     let recommendedIds: string[] = [];
 
                     switch (selectedLanguage) {
                       case 'ko':
-                        // 한국어: 마이리얼트립, 클룩, 트립닷컴, 겟유어가이드
-                        recommendedIds = ['myrealtrip', 'klook', 'trip', 'getyourguide'];
+                        // 한국어: Booking.com, 마이리얼트립, 클룩, 겟유어가이드
+                        recommendedIds = ['booking', 'myrealtrip', 'klook', 'getyourguide'];
                         break;
                       case 'ja':
                       case 'zh':
                       case 'th':
                       case 'vi':
                       case 'id':
-                        // 아시아권: 클룩, 트립닷컴, 겟유어가이드
-                        recommendedIds = ['klook', 'trip', 'getyourguide'];
+                        // 아시아권: Booking.com, 클룩, 트립닷컴, 겟유어가이드
+                        recommendedIds = ['booking', 'klook', 'trip', 'getyourguide'];
                         break;
                       case 'en':
                       case 'es':
@@ -898,8 +903,8 @@ export default function LandmarkDetailDialog({
                       case 'de':
                       case 'it':
                       default:
-                        // 영미권/유럽 등: 겟유어가이드, 비아터, 클룩
-                        recommendedIds = ['getyourguide', 'viator', 'klook'];
+                        // 영미권/유럽 등: Booking.com, 겟유어가이드, 클룩 (Viator API 대체)
+                        recommendedIds = ['booking', 'getyourguide', 'klook'];
                         break;
                     }
 
@@ -910,67 +915,25 @@ export default function LandmarkDetailDialog({
 
                     return (
                       <div className="space-y-4">
-                        {/* [Kodari Middle Manager | 2026-03-29] Viator 실시간 상품 리스트 렌더링 섹션 */}
+                        {/* [Kodari Middle Manager | 2026-03-29] 실시간 상품 리스트 섹션 정리 */}
                         {activeTab === 'tickets' && (
-                          <div className="space-y-4 mb-8">
+                          <div className="space-y-4 mb-4">
                             <div className="flex items-center justify-between px-1">
                               <div className="flex items-center gap-2">
-                                <Ticket className="w-4 h-4 text-blue-600" />
-                                <h4 className="font-black text-sm text-blue-900">
-                                  {selectedLanguage === 'ko' ? '실시간 예약 가능 상품' : 'Live Booking Available'}
+                                <Ticket className="w-4 h-4 text-orange-600" />
+                                <h4 className="font-black text-sm text-orange-900">
+                                  {selectedLanguage === 'ko' ? '추천 예약 플랫폼' : 'Recommended Booking'}
                                 </h4>
                               </div>
-                              {isViatorLoading && <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>}
                             </div>
-
-                            {viatorProducts.length > 0 ? (
-                              <div className="grid grid-cols-1 gap-3">
-                                {viatorProducts.map((product: any) => (
-                                  <div key={product.id} className="bg-white rounded-2xl p-3 border border-blue-100 shadow-sm flex gap-3 group hover:border-blue-400 transition-all active:scale-[0.98]">
-                                    <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50 shrink-0">
-                                      {product.image ? (
-                                        <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
-                                      ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-gray-300">
-                                          <ImageIcon className="w-6 h-6" />
-                                        </div>
-                                      )}
-                                    </div>
-                                    <div className="flex-1 flex flex-col justify-between min-w-0">
-                                      <div>
-                                        <h5 className="font-bold text-[13px] text-blue-900 line-clamp-2 leading-tight">{product.title}</h5>
-                                        <div className="flex items-center gap-2 mt-1">
-                                          {product.rating && (
-                                            <span className="text-[10px] text-orange-500 font-bold">★ {product.rating.toFixed(1)}</span>
-                                          )}
-                                          <span className="text-[10px] font-black text-blue-600">USD {product.price}</span>
-                                        </div>
-                                      </div>
-                                      <Button
-                                        size="sm"
-                                        className="h-7 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-[10px] font-bold gap-1 self-end"
-                                        onClick={() => openExternalUrl(product.url || getViatorUrl(searchName, selectedLanguage, dynamicAffiliateSettings), '_blank')}
-                                      >
-                                        {selectedLanguage === 'ko' ? '예약' : 'Book'}
-                                        <ChevronRight className="w-3 h-3" />
-                                      </Button>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            ) : !isViatorLoading && (
-                              <div className="p-8 text-center bg-gray-50 rounded-2xl border border-dashed border-gray-200">
-                                <Search className="w-8 h-8 text-gray-300 mx-auto mb-2" />
-                                <p className="text-[11px] text-gray-400 font-medium">
-                                  {selectedLanguage === 'ko' ? '현재 검색된 상품이 없습니다.' : 'No items found for this landmark.'}
-                                </p>
-                              </div>
-                            )}
-
-                            <div className="h-px bg-gray-100 w-full my-6"></div>
-                            <h4 className="font-black text-xs text-gray-400 px-1 mb-2 uppercase tracking-wider">
-                              {selectedLanguage === 'ko' ? '기타 예약 채널' : 'Other Platforms'}
-                            </h4>
+                            
+                            <div className="p-4 bg-orange-50/50 rounded-2xl border border-dashed border-orange-200 text-center">
+                              <p className="text-[11px] text-orange-600 font-bold leading-relaxed">
+                                {selectedLanguage === 'ko' 
+                                  ? '현재 위치에서 가장 인기 있는 티켓/액티비티 플랫폼입니다.\n아래 버튼을 눌러 실시간 가격을 확인하세요.' 
+                                  : 'Most popular platforms at this location.\nClick below to check real-time availability.'}
+                              </p>
+                            </div>
                           </div>
                         )}
 
@@ -983,18 +946,6 @@ export default function LandmarkDetailDialog({
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-
-                                // [Professor Policy | 2026-03-28] Viator 전용 앱 내 쇼핑/티켓 경험
-                                if (option.id === 'viator') {
-                                  setActiveTab('tickets'); // 예약 탭으로 즉시 이동 (목록 상단 노출)
-                                  toast({
-                                    title: selectedLanguage === 'ko' ? "Viator 실시간 상품 조회" : "Searching Viator Products",
-                                    description: selectedLanguage === 'ko'
-                                      ? "현재 명소의 실시간 예약 상품 리스트를 가져오고 있습니다."
-                                      : "Fetching live booking items for this landmark.",
-                                  });
-                                  return;
-                                }
 
                                 console.log(`🔗 [Link Diagnostic] Opening: ${option.name}, URL: ${option.url}`);
                                 const win = openExternalUrl(option.url, '_blank');

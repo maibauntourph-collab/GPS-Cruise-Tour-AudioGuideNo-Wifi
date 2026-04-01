@@ -36,7 +36,7 @@ export async function updateDbPhotos() {
                 await db
                     .update(landmarksTable)
                     .set({
-                        photos: localSource.photos,
+                        // photos: localSource.photos, // [Kodari | 2026-03-29] Viator API 사진이 덮어씌워지는 것을 방지하기 위해 임시 비활성화
                         updatedAt: new Date()
                     })
                     .where(eq(landmarksTable.id, dbLandmark.id));

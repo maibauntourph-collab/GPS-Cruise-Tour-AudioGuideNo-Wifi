@@ -330,13 +330,14 @@ export default function LandmarkPanel({
         <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
           <SectionHeader title="추천 투어 (Recommended Tours)" icon={Ticket} />
 
-          {/* 예약 플랫폼 버튼 그룹 (마이리얼트립, 트립닷컴, 클룩, 겟유어투어, Viator) */}
+          {/* 예약 플랫폼 버튼 그룹 (Booking.com, 클룩, 마이리얼트립, 트립닷컴, 비아터) */}
           <div className="grid grid-cols-1 gap-2 mt-2">
             {[
+              { name: 'Booking.com', query: 'Booking.com' },
+              { name: 'Klook (클룩)', query: '클룩' },
               { name: '마이리얼트립', query: '마이리얼트립' },
               { name: '트립닷컴', query: '트립닷컴' },
-              { name: 'Klook (클룩)', query: '클룩' },
-              { name: 'GetYourTour (겟유어투어)', query: 'GetYourGuide' },
+              { name: 'GetYourGuide', query: 'GetYourGuide' },
               { name: 'Viator (비아터)', query: 'Viator' }
             ].map((platform) => (
               <button

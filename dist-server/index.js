@@ -979,7 +979,7 @@ __export(openai_exports, {
   recommendTourItinerary: () => recommendTourItinerary2
 });
 import OpenAI from "openai";
-import * as crypto3 from "node:crypto";
+import * as crypto2 from "node:crypto";
 function getOpenAI() {
   if (openaiInstance) return openaiInstance;
   const apiKey = env.OPENAI_API_KEY;
@@ -1009,7 +1009,7 @@ async function generateLandmarkAudio(landmarkId, text2, language = "en", preferr
       });
       buffer = Buffer.from(await mp3Response.arrayBuffer());
     }
-    const checksum = crypto3.createHash("md5").update(buffer).digest("hex");
+    const checksum = crypto2.createHash("md5").update(buffer).digest("hex");
     const base64Audio = buffer.toString("base64");
     const dataUri = `data:audio/mp3;base64,${base64Audio}`;
     const fileName = `${landmarkId}-${language}-${checksum.slice(0, 8)}.mp3`;
@@ -1424,6 +1424,7 @@ import { sessionMiddleware, CookieStore } from "hono-sessions";
 
 // server/routes.ts
 import { Hono } from "hono";
+import crypto3 from "node:crypto";
 
 // server/storage.ts
 init_db();
@@ -24696,7 +24697,7 @@ import { z as z2 } from "zod";
 
 // server/auth.ts
 init_env();
-import crypto2 from "node:crypto";
+import crypto from "node:crypto";
 import Stripe from "stripe";
 var providers = /* @__PURE__ */ new Map();
 function getProvider(name) {
@@ -24706,7 +24707,7 @@ function getEnabledProviders() {
   return Array.from(providers.keys());
 }
 function generateState() {
-  return crypto2.randomBytes(16).toString("hex");
+  return crypto.randomBytes(16).toString("hex");
 }
 function setupAuthRoutes(app2) {
   if (env.NODE_ENV === "production") {
@@ -25618,7 +25619,8 @@ function registerRoutes(app2) {
     const query = c.req.query("q");
     const lang = c.req.query("lang") || "ko";
     if (!query) return c.json({ error: "\uC8FC\uC11D: \uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
-    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    const dbApiKey = await storage.getSiteSetting("api_google_maps_key");
+    const apiKey = dbApiKey || env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) {
       console.error("[Geocoding] GOOGLE_MAPS_API_KEY\uAC00 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.");
       return c.json({ error: "\uC9C0\uC624\uCF54\uB529 \uC11C\uBE44\uC2A4\uB97C \uC77C\uC2DC\uC801\uC73C\uB85C \uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4." }, 503);
@@ -25655,7 +25657,8 @@ function registerRoutes(app2) {
   app2.get("/api/places/search", async (c) => {
     const query = c.req.query("q");
     if (!query) return c.json({ error: "\uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
-    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    const dbApiKey = await storage.getSiteSetting("api_google_maps_key");
+    const apiKey = dbApiKey || env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) {
       console.error("[Places] API \uD0A4\uAC00 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.");
       return c.json({ error: "\uC7A5\uC18C \uAC80\uC0C9 \uC11C\uBE44\uC2A4\uB97C \uC77C\uC2DC\uC801\uC73C\uB85C \uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4." }, 503);
@@ -25690,7 +25693,8 @@ function registerRoutes(app2) {
   app2.post("/api/landmarks/sync", async (c) => {
     const { placeId, cityId, category } = await c.req.json();
     if (!placeId || !cityId) return c.json({ error: "placeId\uC640 cityId\uAC00 \uB204\uB77D\uB418\uC5C8\uC2B5\uB2C8\uB2E4." }, 400);
-    const apiKey = env.GOOGLE_MAPS_API_KEY;
+    const dbApiKey = await storage.getSiteSetting("api_google_maps_key");
+    const apiKey = dbApiKey || env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) return c.json({ error: "API \uD0A4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4." }, 503);
     try {
       const detailRes = await fetch(`https://places.googleapis.com/v1/places/${placeId}`, {
@@ -25746,8 +25750,8 @@ function registerRoutes(app2) {
   app2.get("/api/viator/photos", async (c) => {
     const query = c.req.query("q");
     if (!query) return c.json({ error: "\uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
-    const workerEnv = c.env;
-    const apiKey = workerEnv?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
+    const dbApiKey = await storage.getSiteSetting("api_viator_key");
+    const apiKey = dbApiKey || c.env?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
     const maskedKey = apiKey ? `${apiKey.substring(0, 4)}***${apiKey.substring(apiKey.length - 4)}` : "MISSING";
     log2(`[Viator Proxy] API Key: ${maskedKey}, Query: ${query}`, "VIATOR");
     try {
@@ -25819,8 +25823,8 @@ function registerRoutes(app2) {
   app2.get("/api/viator/products", async (c) => {
     const query = c.req.query("q");
     if (!query) return c.json({ error: "\uAC80\uC0C9\uC5B4\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4." }, 400);
-    const workerEnv = c.env;
-    const apiKey = workerEnv?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
+    const dbApiKey = await storage.getSiteSetting("api_viator_key");
+    const apiKey = dbApiKey || c.env?.VIATOR_API_KEY || env.VIATOR_API_KEY || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
     try {
       log2(`[Viator Products] Searching products for: ${query}`, "VIATOR");
       const searchRes = await fetch(`https://api.viator.com/partner/products/search`, {
@@ -26045,7 +26049,7 @@ function registerRoutes(app2) {
         version,
         downloadedAt: (/* @__PURE__ */ new Date()).toISOString()
       };
-      const contentHash = crypto.createHash("md5").update(JSON.stringify({ version, cityId, count: cityLandmarks.length })).digest("hex");
+      const contentHash = crypto3.createHash("md5").update(JSON.stringify({ version, cityId, count: cityLandmarks.length })).digest("hex");
       const etag = `"${contentHash}"`;
       if (clientEtag === etag) {
         return c.body(null, 304);
@@ -26772,9 +26776,9 @@ app.use("*", async (c, next) => {
   const csp = [
     "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https:",
     "frame-ancestors *",
-    "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com",
+    "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com *.getyourguide.com *.viator.com *.klook.com *.trip.com",
     "media-src 'self' data:",
-    "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com api.viator.com",
+    "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com api.viator.com *.getyourguide.com *.viator.com *.klook.com *.trip.com",
     "font-src 'self' data: https:",
     "style-src 'self' 'unsafe-inline' https: unpkg.com",
     "style-src-elem 'self' 'unsafe-inline' https: unpkg.com",

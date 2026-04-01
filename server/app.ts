@@ -37,13 +37,13 @@ app.use("*", cors({
 // [UX Fix] 모든 응답에 대해 프레임 임베딩 및 로컬 리소스 로드 허용
 app.use("*", async (c, next) => {
     await next();
-    // [적요] CSP 설정을 강화하여 localhost 환경 및 지도 데이터(OSM, Amap), 외부 리소스(Leaflet, Unsplash)를 허용합니다.
+    // [적요] CSP 설정을 강화하여 localhost 환경 및 지도 데이터(OSM, Amap), 외부 리소스(Leaflet, Unsplash), 제휴사 도메인을 허용합니다.
     const csp = [
         "default-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* ws://localhost:* https:",
         "frame-ancestors *",
-        "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com",
+        "img-src 'self' data: https: http: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com *.is.autonavi.com *.amap.com unpkg.com *.getyourguide.com *.viator.com *.klook.com *.trip.com *.booking.com",
         "media-src 'self' data:",
-        "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com api.viator.com",
+        "connect-src 'self' http://localhost:* ws://localhost:* https: *.tile.openstreetmap.org *.tile.openstreetmap.de *.openstreetmap.org images.unsplash.com unpkg.com *.is.autonavi.com *.amap.com api.viator.com *.getyourguide.com *.viator.com *.klook.com *.trip.com *.booking.com",
         "font-src 'self' data: https:",
         "style-src 'self' 'unsafe-inline' https: unpkg.com",
         "style-src-elem 'self' 'unsafe-inline' https: unpkg.com",

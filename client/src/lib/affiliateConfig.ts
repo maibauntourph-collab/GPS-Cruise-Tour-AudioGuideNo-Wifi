@@ -5,7 +5,7 @@
 
 export const AFFILIATE_IDS = {
     getYourGuide: 'YOUR_GYG_PARTNER_ID',
-    viator: 'de25d027-3e03-47cb-9c89-196e3e698637',
+    viator: '', // [Security | 2026-03-29] 하드코딩된 키 제거 (Admin에서 관리 권장)
     klook: 'YOUR_KLOOK_AID',
     trip: 'YOUR_TRIP_DOT_COM_ID',
     myrealtrip: 'cheongnyangnamja@gmail.com'
@@ -72,17 +72,40 @@ export const getKlookLang = (selectedLanguage: string): string => {
 
 /**
  * Generates an affiliate-link for GetYourGuide
+ * [Bug Doctor] 수정: /s/ (legacy) -> /search/ (modern) 경로로 변경하여 리다이렉트 방지
  */
 export const getGYGUrl = (searchQuery: string, lang: string = 'en', settings?: AffiliateSettings) => {
     const gygLang = getGYGLang(lang);
-    const base = `https://www.getyourguide.com/${gygLang}/s/`;
-    const url = new URL(base);
+    // [적요] GYG 최신 검색 URL 패턴: https://www.getyourguide.com/search/?q=검색어
+    // /s? 로 보내면 검색어가 유실되거나 리다이렉션 지연이 발생할 수 있습니다.
+    const url = new URL(`https://www.getyourguide.com/search/`);
     url.searchParams.set('q', searchQuery);
 
     const partnerId = settings?.gygId || AFFILIATE_IDS.getYourGuide;
     if (partnerId && partnerId !== 'YOUR_GYG_PARTNER_ID') {
         url.searchParams.set(AFFILIATE_PARAMS.getYourGuide, partnerId);
     }
+    return url.toString();
+};
+
+/**
+ * Generates an affiliate-link for Booking.com
+ * [Bug Doctor | 2026-03-29] 신규 추가
+ * 형식: https://www.booking.com/searchresults.html?ss=검색어&aid=파트너ID
+ */
+export const getBookingUrl = (searchQuery: string, lang: string = 'en-US', settings?: AffiliateSettings) => {
+    // [적요] Booking.com 검색 결과 페이지 직행 URL
+    // ss: 검색어 (search string), aid: 제휴 ID
+    const url = new URL('https://www.booking.com/searchresults.html');
+    url.searchParams.set('ss', searchQuery);
+    
+    // 기본 파트너 ID (없으면 기본값 사용)
+    const aid = '862954987108816'; // 사용자 로그에서 발견된 ID
+    url.searchParams.set('aid', aid);
+    
+    // [적요] channel 파라미터 추가 (로그에서 발견된 'search_landing' 대응)
+    url.searchParams.set('channel', 'search_landing');
+    
     return url.toString();
 };
 

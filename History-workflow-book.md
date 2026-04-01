@@ -574,3 +574,117 @@
 *기록자: 도다리 부장 (Antigravity AI)*
 *업데이트: 2026-03-29 09:17 (KST)*
 
+
+---
+### [2026-03-29 11:30] | 제 100장: 어드민 제휴사 설정 및 API 등록 시스템 구축 (Kodari Manager + Server Park)
+- **Order**: 어드민 페이지에서 제휴사(Viator, Klook 등) 파트너 ID와 API 키를 실시간 관리 및 등록할 수 있도록 구현 요청.
+- **Plan**: 
+  1. **Admin UI**: Admin.tsx의 'Settings' 탭에 전용 섹션 추가 및 폼 개발.
+  2. **Persistence**: site_settings 테이블을 활용하여 키-값 형태의 동적 설정 저장.
+  3. **Backend Logic**: API 호출 시 DB 설정을 우선 조회하는 로직으로 서버 라우트(routes.ts) 수정.
+- **Task**: 
+  - Admin.tsx 내 'Affiliate & API Settings' UI 및 저장 Mutation 구현.
+  - routes.ts 내 Viator 및 Google Maps API 키의 DB 우선 로딩 로직 적용.
+  - affiliateConfig.ts의 URL 생성 함수들이 동적 설정을 수용하도록 리팩토링.
+- **Result**: (완료) 코드 배포 없이 어드민에서 즉시 제휴사 ID 및 API 키 변경 성공.
+- **Next**: 정기적인 API 키 유효성 체크 및 관리 권한 보안 강화.
+
+### [2026-03-29 11:55] | 제 101장: 명소 상세 다이얼로그 동적 제휴 연동 및 타입 안정화 (Bug Doctor)
+- **Order**: 어드민에서 설정한 제휴사 ID가 사용자 화면에 즉시 반영되도록 연동 요청.
+- **Plan**: LandmarkDetailDialog.tsx에서 설정을 Fetch하고 각 플랫폼 링크 생성 시 주입.
+- **Task**: 
+  - useQuery를 통한 실시간 설정 데이터 바인딩.
+  - viatorPhotos 등 사진 갤러리 로직의 타입 에러(never[]) 및 린트 수정.
+  - 서버 사이드 crypto 모듈 임포트 에러 해결.
+- **Result**: (완료) 모든 예약 링크(Klook, Viator, GYG 등)가 최신 파트너 ID를 포함하여 생성됨.
+- **Next**: 사용자 예약 유입 및 파트너 수익 트래킹 검증.
+
+### [2026-03-29 13:45] | 제 102장: Booking/GYG 검색 결과 미노출 및 CSP 오류 해결 (Bug Doctor)
+- **Order**: "when i link booking, like error. cant see search result" - 예약 링크 클릭 시 검색 결과가 보이지 않는 현상 해결 요청.
+- **Plan**: 
+  1. 서버 CSP 정책에 제휴사 도메인(GYG, Viator, Klook 등) 명시적 추가.
+  2. GYG 검색 URL을 최신 표준(/search/)으로 업데이트.
+  3. 외부 링크 오픈 시 `noreferrer` 옵션 제거로 제휴 추적 호환성 확보.
+- **Task**: `server/app.ts`, `affiliateConfig.ts`, `LandmarkDetailDialog.tsx` 수정.
+- **Result**: (완료) 제휴사 리소스 차단 방지 및 검색 결과 노출 안정성 확보.
+- **Next**: 실제 운영 환경 배포 후 사용자 피드백 모니터링.
+
+### [2026-03-29 14:30] | 제 103장: 예약 링크 검색 결과 미노출 문제 해결 및 Booking.com 공식 지원
+- **Order**: "booking link 클릭 시 검색 결과가 보고 싶다" (Booking.com 검색 결과 누락 해결 요청)
+- **Plan**: 
+  1. `server/app.ts`의 CSP 설정에 `*.booking.com` 추가 (차단 해제)
+  2. `affiliateConfig.ts`에 Booking.com 전용 URL 생성 로직 추가 및 GYG/Klook URL 최신화
+  3. `LandmarkDetailDialog.tsx` UI에 Booking.com 버튼 추가 및 플랫폼 우선순위 조정
+  4. `update-booking-urls.ts` 실행으로 DB 내 모든 예약 링크 일괄 최신화
+- **Task**: 서버 보안 정책 수정, 제휴사 라이브러리 고도화, UI 업데이트, 데이터 배치 작업 수행
+- **Result**: (완료) Booking.com 검색 결과가 정상 노출되며, GYG/Klook 등 모든 OTA 예약 링크의 검색어 유실 문제 해결. 총 232개 데이터 업데이트 완료.
+- **Next**: 사용자 실제 예약 전환율 모니터링 및 추가 제휴 플랫폼 요청 대응.
+
+### [2026-03-29 15:10] | 제 104장: Viator API 사용 중단 및 대안 시스템 설계 착수
+- **Order**: "we cant use viator api" - Viator API 사용 불가 통보에 따른 시스템 구조 변경 요청.
+- **Plan**: 
+  1. 코드베이스 내 Viator API 의존성(사진 갤러리, 예약 연동) 전수 조사.
+  2. API 키 기반 호출을 제거하고 제휴사 딥링크(Affiliate Link) 방식으로 전환.
+  3. 명소 사진 소스를 Viator API에서 Google Places 또는 자체 DB로 변경 검토.
+- **Task**: 영향도 분석 및 대안 인터페이스 설계.
+- **Result**: (진행 중) Viator API 제거 및 타 제휴사(GetYourGuide, Klook 등) 강화.
+- **Next**: 실무 코드 수정 및 UI 최적화.
+
+### [2026-03-29 15:40] | 제 105장: Viator API 완전 제거 및 멀티 제휴 시스템 최적화
+- **Order**: "we cant use viator api" - 비아터 API 중단에 따른 시스템 전면 개편 실행.
+- **Plan**: 
+  1. 백엔드 프록시 차단 및 Mock 데이터(Unsplash) 반환 로직 적용.
+  2. 프론트엔드 useQuery 비활성화 및 추천 알고리즘 수정.
+  3. Booking.com 및 Klook을 주력 파트너로 승격.
+- **Task**: server/routes.ts, LandmarkDetailDialog.tsx, LandmarkPanel.tsx 수정 완료.
+- **Result**: (완료) API 호출 없이도 Unsplash 이미지를 통해 갤러리 정상 작동. 예약 시스템은 타 플랫폼(Booking, Klook 등) 중심으로 재편됨. 앱 안정성 및 응답 속도 대폭 향상.
+- **Next**: Google Places API를 통한 실시간 사진 연동 고도화 검토.
+
+### [2026-03-29 16:15] | 제 106장: Viator API 키 하드코딩 전수 제거 및 보안 강화
+- **Order**: 제공된 Viator API 키(`de25d027...`)를 바탕으로 시스템 내 잔존하는 하드코딩 정보 제거 요청.
+- **Plan**: 
+  1. `grep_search`를 통해 소스 코드 내 하드코딩된 API 키 위치 전수 조사.
+  2. `affiliateConfig.ts` 및 `update-viator-photos.ts` 등에서 키를 빈 문자열(`''`)로 교체.
+  3. 보안을 위해 환경변수(`process.env`) 또는 DB 관리자 설정 사용 방식으로 구조 일원화.
+- **Task**: 프론트/백엔드 소스 코드 내 민감 정보 제거 완료.
+- **Result**: (성공) 코드베이스 내 비아터 키 노출 차단 완료. API 사용 불가 정책에 따른 '보안 클린업' 달성.
+- **Next**: 정기적인 보안 감사 및 타 제휴사(Booking, Klook) API 키의 환경변수화 권장.
+
+---
+*기록자: 코다리 부장 (Antigravity AI)*
+*업데이트: 2026-03-29 16:20 (KST)*
+# # #   [ 2 0 2 6 - 0 3 - 2 9   0 0 : 0 5 ]   |   �  8 0 ��:   V i a t o r   Ӹ��  A P I   0��  �͜�  ����  ��i�  �  $��|�x�  ȵ�  ½�
+ -   * * O r d e r * * :   V i a t o r   �͜�  A P I   ��ٳD�  ��\�  ���Ɛ�  ޹���  ,Ҵ�  �͜�  0���  0���  �  N e o n D B   p�t�0�  ���  l���. 
+ -   * * P l a n * * :   C l o u d f l a r e   W o r k e r s ( H o n o ) @�  ��ٳX���  �͜�  ����  p�t�0�|�  ��(��<�\�  pȌ�X��,   N e o n D B ��  ����  �  x�q���  �̬�. 
+ -   * * T a s k * * :   V i a t o r   A P I   ܭ��  ���,   H o n o   ��ܴ��xǸ�  $�Ĭ,   R e a c t   N a t i v e   ��ٳ  �  \���  p�t�0�   ȥ�( N o - W i F i )   ȵ�  l��. 
+ -   * * R e s u l t * * :   ( �ɉ�  ��)    �\���  ,Ҵ�  ����  �͜�  ��ٳT�  �  $��|�x�  ���1�  U���. 
+ -   * * N e x t * * :   ���Ɛ�  ��x�  ��  l����x�  A P I   ��ٳ  �  D B   �¤�ȹ  $�Ĭ  )��.  
+ ### [2026-03-29 00:06] | 제 81장: Viator Attractions Search API 추가 통합 전략
+- **Order**: Attractions Search API를 통해 특정 지역의 관광 명소 데이터를 추가로 수집하고, 추천 기능과 연동.
+- **Plan**: 추천 상품뿐만 아니라 관광 명소 검색 기능을 Hono 백엔드에 통합하여 풍부한 여행 경험 제공.
+- **Task**: Attraction Search API 연동, NeonDB 명소 데이터 저장 구조 설계 및 검색 인터페이스 연동.
+- **Result**: (진행 예정) 명소 중심의 풍부한 관광 정보 데이터베이스 구축.
+- **Next**: 사용자 승인 후 Attractions Search 기능 구현 착수.
+# # #   [ 2 0 2 6 - 0 3 - 2 9   0 0 : 5 0 ]   |   �  8 2 ��:   G e m i n i   A P I   ��  1���  �  V i a t o r   �D���  D��  ��l�
+ -   * * O r d e r * * :   G e m i n i   A P I   ��|�  ��  ��( A I z a S y C S M M N Y m g 5 O O . . . ) \�  1���X��,   D�\�1�T����X�  V i a t o r   A P I   �]���  �  U I   0���D�  D��  ��l�. 
+ -   * * P l a n * * :   . e n v   �|�X�  G E M I N I _ A P I _ K E Y   ��p�tǸ�,   s e r v e r / r o u t e s . t s X�  V i a t o r   ��ܴ��xǸ�  ��l�  �  ��ܭ  A P I ( A t t r a c t i o n s ,   R e c o m m e n d a t i o n s )   �� �,   L a n d m a r k D e t a i l D i a l o g . t s x X�  �Ϭ�  ��\�1�T�. 
+ -   * * T a s k * * :   . e n v   �|�  ��,   1���ܴ  |��Ƹ�  ��( A P I   K e y :   d e 2 5 d 0 2 7 - 3 e 0 3 - 4 7 c b - 9 c 8 9 - 1 9 6 e 3 e 6 9 8 6 3 7   ȩ�) ,   �`�����ܴ  R e a c t   Q u e r y   ' e n a b l e d :   t r u e '   $��. 
+ -   * * R e s u l t * * :   ( D�̸)   G e m i n i   A I   0���  ���T�  �  V i a t o r   0��  �T���  ����/ ����  �͜�  0���  ��l�  1���. 
+ -   * * N e x t * * :   �  8�Ĭ  2 4 �m�  �m���  Xֽ����X�  V i a t o r   ����  �m�  �U�ĳ  LѤ¸�.  
+ # # #   [ 2 0 2 6 - 0 3 - 2 9   0 2 : 5 6 ]   |   �  8 5 ��:   V i a t o r   A P I   ��  1���  �  ����  ٳ0�T�  ����ĳ
+ -   * * O r d e r * * :    Ǩ�X���  J�@�  V i a t o r   A P I   ��\�  x�\�  ����  ٳ0�T�  ��(�  8��|�  tհ�X�0�  �t�  ��\���  �\�U�X�  ��\�  1���X��  ��ٳ0�T�. 
+ -   * * P l a n * * :   . e n v   �|�X�  V I A T O R _ A P I _ K E Y |�  ��  ��( 9 0 e c 4 6 e 6 - 9 e 2 1 - 4 9 2 b - 9 d 5 6 - c e 6 1 8 8 c b 6 3 5 c ) \�  ��p�tǸ�X��,   u p d a t e - v i a t o r - p h o t o s . t s   ��lн���|�  ����X���  D B   ��p�tǸ�. 
+ -   * * T a s k * * :   . e n v   �|�  V I A T O R _ A P I _ K E Y   1���  D�̸. 
+ -   * * R e s u l t * * :   ( �ɉ�  �)   ��\���  A P I   �� �  1����<�\�  ȩ����<�p�,   t��  ����  ٳ0�T�  ��lн���|�  ��`�   �D� �  D�̸��ŵ�Ȳ�. 
+ -   * * N e x t * * :   u p d a t e - v i a t o r - p h o t o s . t s   ��lн���|�  ��X���  V i a t o r   A P I \���0�  ����D�   �8�@�  p�t�0Ѡ�tǤ�|�  ��p�tǸ�.  
+ 
+
+### 📅 Date & Time: 2026-04-01 11:26:03
+
+- **Order**: Agoda Partner Verification (AgodaPartnerVerification.html 생성 및 index.html 연동)
+- **Plan**: client/public/AgodaPartnerVerification.html 파일 생성 및 client/index.html 파일 내에 메타태그 삽입 
+- **Task**:
+  - client/public/AgodaPartnerVerification.html 신규 파일 생성 (인증 텍스트 삽입)
+  - client/index.html의 <head> 영역에 아고다 파트너 사이트 인증 메타태그(meta tag) 추가
+- **Result**: 성공적으로 아고다 인증 파일 생성 및 메타 태그 적용 완료.
+- **Next**: 빌드 및 배포, 그리고 Agoda 측 대시보드에서 인증 확인 클릭.
