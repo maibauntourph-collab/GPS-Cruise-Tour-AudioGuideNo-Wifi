@@ -734,3 +734,16 @@
   - `client/index.html`의 `<!-- OG_TAGS_PLACEHOLDER -->` 영역을 파싱하여 `og:image`, `twitter:image` 등 필수 메타 태그 10종 추가 삽입
 - **Result**: 공유 기능(카카오, 인스타, 페이스북, 트위터 등) 사용 시 최적화된 고퀄리티 배너 카드와 함께 제목/설명이 노출되게 개선됨
 - **Next**: 빌드 및 배포 후 최종 운영망에서 카카오/페이스북 디버깅 툴을 이용해 썸네일 캐시 갱신 및 정상 노출 검증
+
+
+### 📅 Date & Time: 2026-04-01 15:38:43
+
+- **Order**: Agoda 파트너 2차 수동 인증 (Manual Verification) 태그 추가 및 운영 배포
+- **Plan**: `client/index.html` <head>에 `<meta name="agd-partner-manual-verification" />` 추가 한 뒤, 로컬 브랜치 커밋(commit) 및 리모트 푸시(push), Vercel 배포(deploy)까지 논스톱 수행
+- **Task**:
+  - `client/index.html` 내부 기존 인증 태그 인접 라인에 신규 meta 태그 주입 완료
+  - `git add .` 및 `git commit -m "feat: add agd-partner-manual-verification meta tag"` 생성
+  - `git push origin main` 완료
+  - `npm run build` 와 `npm run deploy` 병렬 구동하여 클라우드 서버 최종 릴리즈(Exit Code 0)
+- **Result**: Agoda 봇 서버가 수동 인증 값을 제대로 식별할 수 있도록 운영 환경 100% 반영 성공
+- **Next**: 사용자 측에서 Agoda 포털 로그인 후 검증 수동 확인(verify) 버튼 클릭 시도 요망

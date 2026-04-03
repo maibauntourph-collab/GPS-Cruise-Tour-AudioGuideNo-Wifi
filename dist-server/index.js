@@ -26883,6 +26883,7 @@ var FALLBACK_HTML = `<!DOCTYPE html>
 </body>
 </html>`;
 app.get("/", async (c, next) => {
+  if (process.env.NODE_ENV === "development") return next();
   const html = await getIndexHtml(c);
   if (html) return c.html(html);
   console.warn("[App] / : getIndexHtml null \u2192 fallback response");
@@ -26918,6 +26919,9 @@ app.get("/*", async (c, next) => {
       console.error(`[Worker] ASSET NOT FOUND: ${path3}`);
       return c.text("Asset not found", 404);
     }
+  }
+  if (process.env.NODE_ENV === "development") {
+    return next();
   }
   console.log(`[Worker] SPA Fallback requested for: ${path3}. workerEnv: ${!!workerEnv}`);
   const html = await getIndexHtml(c);

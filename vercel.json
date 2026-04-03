@@ -7,6 +7,40 @@
             "source": "/api/:path*",
             "destination": "/api/index.ts"
         },
+        // 정적 파일(assets, js, css 등)은 index.html로 리다이렉트하지 않도록 예외 처리
+        {
+            "source": "/assets/:match*",
+            "destination": "/assets/:match*"
+        },
+        {
+            "source": "/icon.svg",
+            "destination": "/icon.svg"
+        },
+        {
+            "source": "/manifest.json",
+            "destination": "/manifest.json"
+        },
+        {
+            "source": "/manifest.webmanifest",
+            "destination": "/manifest.webmanifest"
+        },
+        {
+            "source": "/service-worker.js",
+            "destination": "/service-worker.js"
+        },
+        {
+            "source": "/registerSW.js",
+            "destination": "/registerSW.js"
+        },
+        {
+            "source": "/sw.js",
+            "destination": "/sw.js"
+        },
+        {
+            "source": "/workbox-d4f8be5c.js",
+            "destination": "/workbox-d4f8be5c.js"
+        },
+        // 그 외 모든 경로는 SPA 라우팅
         {
             "source": "/:path*",
             "destination": "/index.html"

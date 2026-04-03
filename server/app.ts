@@ -180,6 +180,8 @@ const FALLBACK_HTML = `<!DOCTYPE html>
 
 // 2. 루트 및 SPA 라우팅 (API가 아닌 모든 경로는 index.html 서빙)
 app.get("/", async (c, next) => {
+    // dev 모드: Vite가 처리하도록 위임
+    if (process.env.NODE_ENV === "development") return next();
     // [Fix | 2026-03-29] root URL → KV에서 읽고, 실패하면 Hono에게 패스 (Wrangler Sites가 처리)
     const html = await getIndexHtml(c);
     if (html) return c.html(html);
@@ -234,6 +236,11 @@ app.get("/*", async (c, next) => {
             console.error(`[Worker] ASSET NOT FOUND: ${path}`);
             return c.text("Asset not found", 404);
         }
+    }
+
+    // 로컬 dev 환경(__STATIC_CONTENT 없음): Vite 미들웨어로 위임
+    if (process.env.NODE_ENV === "development") {
+        return next();
     }
 
     // [SPA Fallback | 2026-03-29]
