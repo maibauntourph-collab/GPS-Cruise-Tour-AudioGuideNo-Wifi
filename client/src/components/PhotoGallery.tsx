@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, X, ImageOff } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { OfflineImg } from './OfflineImg';
 
 interface PhotoGalleryProps {
   photos: string[];
@@ -134,12 +135,10 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
               <ImageFallback className="h-full w-full" />
             ) : (
               <div className="h-full w-full">
-                <img
+                <OfflineImg
                   src={photo}
                   alt={`${title} - Photo ${index + 1}`}
                   className={`h-full w-full object-cover transition-opacity duration-700 ${loadedIndices.has(index) ? 'opacity-100' : 'opacity-0'}`}
-                  loading="lazy"
-                  decoding="async"
                   onLoad={() => handleImageLoad(index)}
                   onError={() => handleImageError(index)}
                 />
@@ -196,13 +195,12 @@ export default function PhotoGallery({ photos, title }: PhotoGalleryProps) {
                         <ImageFallback className="p-10 scale-150" />
                       </div>
                     ) : (
-                      <motion.img
+                      <OfflineImg
                         src={photos[selectedIndex]}
                         alt={`${title} - Photo ${selectedIndex + 1}`}
                         className="w-full max-w-4xl h-auto max-h-[75vh] object-contain rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 bg-black/20"
                         data-testid="img-photo-viewer"
                         onError={() => handleImageError(selectedIndex)}
-                        layoutId={`photo-${selectedIndex}`}
                       />
                     )}
                   </motion.div>

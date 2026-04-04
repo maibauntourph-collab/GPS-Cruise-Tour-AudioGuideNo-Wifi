@@ -53,13 +53,14 @@ export default defineConfig({
             },
           },
           {
-            // 🖼️ [Designer Kim | 2026-03-24] 외부 이미지 (Unsplash 등) 캐싱
-            urlPattern: /^https:\/\/(images\.unsplash\.com|source\.unsplash\.com)\/.*/,
+            // 🖼️ [Designer Kim | 2026-04-04] 오프라인 사진 전략 통합 캐싱
+            // Google, Viator, Unsplash, Wikipedia 등 모든 이미지 소스 캐싱
+            urlPattern: /^https:\/\/(images\.unsplash\.com|source\.unsplash\.com|lh[0-9]\.googleusercontent.com|maps\.googleapis\.com|upload\.wikimedia\.org|.*\.viator\.com)\/.*/,
             handler: 'CacheFirst',
             options: {
-              cacheName: 'external-images',
+              cacheName: 'landmark-images',
               expiration: {
-                maxEntries: 200,
+                maxEntries: 1000,
                 maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
               },
               cacheableResponse: {

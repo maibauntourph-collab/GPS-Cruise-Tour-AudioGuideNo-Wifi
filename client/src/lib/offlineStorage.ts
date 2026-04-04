@@ -1,7 +1,7 @@
 import type { City, Landmark } from "@shared/schema";
 
 const DB_NAME = 'gps-audio-guide-offline';
-const DB_VERSION = 3; // Bumped version for audio files store
+const DB_VERSION = 4; // Bumped version for imageFiles store
 
 interface OfflinePackage {
   city: City;
@@ -30,6 +30,13 @@ interface CachedAudio {
   sizeBytes: number;
   checksum?: string;
   voiceId?: string;
+  cachedAt: string;
+}
+
+interface CachedImage {
+  url: string;
+  blob: Blob;
+  landmarkId?: string;
   cachedAt: string;
 }
 
@@ -82,6 +89,12 @@ class OfflineStorage {
           const audioStore = db.createObjectStore('audioFiles', { keyPath: 'id' });
           audioStore.createIndex('landmarkId', 'landmarkId', { unique: false });
           audioStore.createIndex('language', 'language', { unique: false });
+        }
+
+        if (!db.objectStoreNames.contains('imageFiles')) {
+          const imageStore = db.createObjectStore('imageFiles', { keyPath: 'url' });
+          imageStore.createIndex('landmarkId', 'landmarkId', { unique: false });
+          imageStore.createIndex('cachedAt', 'cachedAt', { unique: false });
         }
 
         console.log('IndexedDB schema created');
@@ -391,11 +404,79 @@ class OfflineStorage {
       transaction.objectStore('visitedQueue').clear();
       transaction.objectStore('audioFiles').clear();
 
+      transaction.objectStore('imageFiles').clear();
+
       transaction.onerror = () => reject(transaction.error);
       transaction.oncomplete = () => {
         console.log('All offline data cleared');
         resolve();
       };
+    });
+  }
+
+  // --- Image Cache Methods ---
+
+  async saveImage(url: string, blob: Blob, landmarkId?: string): Promise<void> {
+    const db = await this.ensureDb();
+    return new Promise<void>((resolve, reject) => {
+      const transaction = db.transaction(['imageFiles'], 'readwrite');
+      const store = transaction.objectStore('imageFiles');
+      const data: CachedImage = {
+        url,
+        blob,
+        landmarkId,
+        cachedAt: new Date().toISOString()
+      };
+      const request = store.put(data);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve();
+    }).catch(error => {
+      if (error.name === 'QuotaExceededError') throw new Error('STORAGE_QUOTA_EXCEEDED');
+      throw error;
+    });
+  }
+
+  async getImage(url: string): Promise<CachedImage | null> {
+    const db = await this.ensureDb();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['imageFiles'], 'readonly');
+      const store = transaction.objectStore('imageFiles');
+      const request = store.get(url);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve(request.result || null);
+    });
+  }
+
+  async isImageStale(url: string): Promise<boolean> {
+    const cached = await this.getImage(url);
+    if (!cached) return true;
+    const REFRESH_DAYS = 30;
+    const diff = Date.now() - new Date(cached.cachedAt).getTime();
+    return diff > 1000 * 60 * 60 * 24 * REFRESH_DAYS;
+  }
+
+  async getImageStorageStats(): Promise<{ count: number; totalSizeBytes: number }> {
+    const db = await this.ensureDb();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['imageFiles'], 'readonly');
+      const store = transaction.objectStore('imageFiles');
+      const request = store.getAll();
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        const images = request.result as CachedImage[];
+        const totalSizeBytes = images.reduce((sum, img) => sum + (img.blob.size || 0), 0);
+        resolve({ count: images.length, totalSizeBytes });
+      };
+    });
+  }
+
+  async clearAllImages(): Promise<void> {
+    const db = await this.ensureDb();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['imageFiles'], 'readwrite');
+      transaction.objectStore('imageFiles').clear();
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error);
     });
   }
 

@@ -13,12 +13,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Welcome to Penang",
         "subTitle": "The Pearl of the Orient: Heritage and Gastronomy",
-        "heroImage": "/images/cities/penang.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1596422846543-75c6fc18a5cf?w=1200&q=80"
       },
       "ko": {
         "title": "동양의 진주, 페낭에 오신 것을 환영합니다",
         "subTitle": "유네스코 유산과 식도락의 천국",
-        "heroImage": "/images/cities/penang.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1596422846543-75c6fc18a5cf?w=1200&q=80"
       }
     },
     "defaultGuideId": null,
@@ -215,12 +215,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Welcome to the Eternal City, Rome",
         "subTitle": "Your Offline Guide to Rome's History and Art",
-        "heroImage": "/images/cities/rome.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&q=80"
       },
       "ko": {
         "title": "영원한 도시, 로마에 오신 것을 환영합니다",
         "subTitle": "인터넷 없이도 즐기는 로마의 역사와 예술 가이드",
-        "heroImage": "/images/cities/rome.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&q=80"
       }
     },
     "defaultGuideId": null,
@@ -239,12 +239,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Bienvenue à Paris",
         "subTitle": "The City of Light and Art",
-        "heroImage": "/images/cities/brussels.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80"
       },
       "ko": {
         "title": "빛의 도시, 파리에 오신 것을 환영합니다",
         "subTitle": "예술과 낭만이 가득한 시간",
-        "heroImage": "/images/cities/brussels.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80"
       }
     },
     "defaultGuideId": null,
@@ -289,12 +289,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Welcome to Amsterdam",
         "subTitle": "Canals, Culture, and Charms of the Netherlands",
-        "heroImage": "/images/cities/amsterdam.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=1200&q=80"
       },
       "ko": {
         "title": "암스테르담에 오신 것을 환영합니다",
         "subTitle": "운하와 예술, 네덜란드의 낭만이 가득한 도시",
-        "heroImage": "/images/cities/amsterdam.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=1200&q=80"
       }
     },
     "defaultGuideId": null,
@@ -539,12 +539,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Discover Budapest",
         "subTitle": "Pearl of the Danube and Radiant Architecture",
-        "heroImage": "/images/cities/budapest.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1517713982677-4b66332f98de?w=1200&q=80"
       },
       "ko": {
         "title": "부다페스트를 발견하세요",
         "subTitle": "다뉴브의 진주, 빛나는 야경과 건축의 도시",
-        "heroImage": "/images/cities/budapest.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1517713982677-4b66332f98de?w=1200&q=80"
       }
     },
     "defaultGuideId": null,
@@ -563,12 +563,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Warsaw: Phoenix City",
         "subTitle": "Beautiful Reconstructed Old Town",
-        "heroImage": "/images/cities/warsaw.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=1200&q=80"
       },
       "ko": {
         "title": "바르샤바: 불사조의 도시",
         "subTitle": "아름답게 재건된 구시가지의 매력",
-        "heroImage": "/images/cities/warsaw.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=1200&q=80"
       }
     },
     "defaultGuideId": null,
@@ -637,12 +637,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Paradise Found: Cebu City",
         "subTitle": "Beautiful Island of Beaches and Heritage Sites",
-        "heroImage": "/images/cities/cebu.png"
+        "heroImage": "https://images.unsplash.com/photo-1542614391-447547535b91?w=1200&q=80"
       },
       "ko": {
         "title": "에메랄드빛 낙원, 세부",
         "subTitle": "해변과 역사적 유산이 공존하는 아름다운 섬",
-        "heroImage": "/images/cities/cebu.png"
+        "heroImage": "https://images.unsplash.com/photo-1542614391-447547535b91?w=1200&q=80"
       }
     },
     "defaultGuideId": null,
@@ -687,12 +687,12 @@ export const CITIES: City[] = [
       "en": {
         "title": "Singapore: The Future City",
         "subTitle": "Unparalleled Gardens and High-Tech Luxury",
-        "heroImage": "/images/cities/singapore.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1525625239514-75b4cdc5d61e?w=1200&q=80"
       },
       "ko": {
         "title": "미래 도시, 싱가포르",
         "subTitle": "차원이 다른 정원과 하이테크 럭셔리",
-        "heroImage": "/images/cities/singapore.jpg"
+        "heroImage": "https://images.unsplash.com/photo-1525625239514-75b4cdc5d61e?w=1200&q=80"
       }
     },
     "defaultGuideId": null,
