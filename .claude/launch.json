@@ -4,8 +4,8 @@
     {
       "name": "GPS Cruise Tour — Dev Server",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 4000
+      "runtimeArgs": ["run", "dev:client"],
+      "port": 5175
     }
   ]
 }
