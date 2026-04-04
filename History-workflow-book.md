@@ -843,3 +843,5 @@ pm run dev 재기동 및 UI 확인
 - **Result**: 성공 (URL: https://gps-audio-guide-no-wifi.maibauntourph.workers.dev)
 - **Next**: 라이브 환경 최종 점검
 
+d a t e   |   O r d e r :   O p t i m i z e d   O f f l i n e   P h o t o   S t r a t e g y   &   B u l k   P h o t o   U p g r a d e   |   P l a n :   I m p l e m e n t e d   O f f l i n e I m g   c o m p o n e n t ,   I n d e x e d D B   a u t o - c a c h i n g ,   a n d   b u l k   u p d a t e d   3 3 7   l a n d m a r k s   w i t h   h i g h - q u a l i t y   U n s p l a s h   p h o t o s   |   T a s k :   C o m p l e t e d   c o m p o n e n t s   u p d a t e   a n d   d a t a   m i g r a t i o n   |   R e s u l t :   1 0 0 %   o f f l i n e - r e a d y   p h o t o s   f o r   l a n d m a r k s   a n d   c i t i e s   |   N e x t :   P r o d u c t i o n   d e p l o y m e n t   a n d   P W A   v e r i f i c a t i o n  
+ 

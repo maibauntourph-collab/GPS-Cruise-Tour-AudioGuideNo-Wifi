@@ -17,6 +17,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useLiveTranslation } from '@/hooks/useLiveTranslation';
 import { User, DbLandmarkGuide } from '@shared/schema';
 import { Users, Headphones, Check, User as UserIcon } from 'lucide-react';
+import { OfflineImg } from './OfflineImg';
 
 interface LandmarkDetailDialogProps {
   landmark: Landmark | null;
@@ -1198,7 +1199,7 @@ export default function LandmarkDetailDialog({
                       return sampleProducts.map((product) => (
                         <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
                           <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
-                            <img src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
+                            <OfflineImg src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
                           </div>
                           <div className="flex-1 flex flex-col justify-between min-w-0">
                             <div>
@@ -1220,7 +1221,7 @@ export default function LandmarkDetailDialog({
                     return shopifyProducts.map((product) => (
                       <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
                         <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
-                          <img src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
+                          <OfflineImg src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
                         </div>
                         <div className="flex-1 flex flex-col justify-between min-w-0">
                           <div>
