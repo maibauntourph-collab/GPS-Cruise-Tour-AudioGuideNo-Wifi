@@ -1601,89 +1601,90 @@ export default function Home() {
         {/* ✅ [마스터 모드 | Designer Kim] UnifiedFloatingCard 통합UI
              학생들: 이제 모든 모드(map, list, detail, tour)를 이 하나의 카드에서 처리합니다.
              웰컴 카드를 위해 항상 렌더링하도록 설정했습니다. */}
-        {isCardVisible && (
-        <UnifiedFloatingCard
-          forceShowList={appMode === 'list'}
-          isCardVisible={isCardVisible}
-          isCardMinimized={isCardMinimized}
-          onToggleMinimized={() => {
-            setIsCardMinimized(!isCardMinimized);
-            // [적요] list 모드에서 minimize 시 map 모드로 전환 (forceShowList를 false로 만들기)
-            if (appMode === 'list') {
+        {/* [Bug Doctor 수정] isCardMinimized가 true이면 appMode 상관없이 카드 DOM 유지
+             학생들에게: minimize 시 카드가 unmount되면 슬라이드 애니메이션을 보여줄 DOM이 없어집니다! */}
+        {(isCardVisible || isCardMinimized) && (
+          <UnifiedFloatingCard
+            forceShowList={appMode === 'list'}
+            isCardVisible={isCardVisible}
+            isCardMinimized={isCardMinimized}
+            onToggleMinimized={() => {
+              // [Bug Doctor 수정] transitionTo('map') 제거!
+              // 이전에는 appMode를 'map'으로 바꿔서 isCardVisible=false → 카드 DOM 사라지는 버그 발생
+              // 학생들에게: setState는 단순 toggle만 — 부작용(transitionTo)을 섞지 마세요!
+              setIsCardMinimized(prev => !prev);
+            }}
+            selectedLandmark={selectedLandmark}
+            onLandmarkSelect={(l: Landmark) => {
+              // [적요] 리스트에서 랜드마크 선택 → detail 모드 진입
+              prevAppModeRef.current = appMode;
+              setSelectedLandmark(l);
+              setAppMode('detail');
+              setIsCardMinimized(false);
+            }}
+            onLandmarkClose={closeFloatingCard}
+            onMinimizeToMenu={() => {
+              // [적요] 메뉴로 최소화: 명소 선택 해제 후 국가/도시 선택 메뉴 노출
+              setSelectedLandmark(null);
+              setIsCardMinimized(false);
               transitionTo('map');
-            }
-          }}
-          selectedLandmark={selectedLandmark}
-          onLandmarkSelect={(l: Landmark) => {
-            // [적요] 리스트에서 랜드마크 선택 → detail 모드 진입
-            prevAppModeRef.current = appMode;
-            setSelectedLandmark(l);
-            setAppMode('detail');
-            setIsCardMinimized(false);
-          }}
-          onLandmarkClose={closeFloatingCard}
-          onMinimizeToMenu={() => {
-            // [적요] 메뉴로 최소화: 명소 선택 해제 후 국가/도시 선택 메뉴 노출
-            setSelectedLandmark(null);
-            setIsCardMinimized(false);
-            transitionTo('map');
-            setShowCountrySelector(true);
-          }}
-          landmarks={landmarks}
-          tourStops={tourStops}
-          onAddToTour={handleAddToTour}
-          isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
-          onRemoveTourStop={(id) => {
-            setTourStops(tourStops.filter(s => s.id !== id));
-            setTourStopDurations(prev => {
-              const updated = { ...prev };
-              delete updated[id];
-              return updated;
-            });
-          }}
-          userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
-          selectedLanguage={selectedLanguage}
-          onNavigate={(landmark) => {
-            setActiveRoute(landmark);
-            transitionTo('nav');
-          }}
-          onLandmarkRoute={handleLandmarkRoute}
-          city={selectedCity || null}
-          showCruisePort={showCruisePort}
-          onToggleCruisePort={() => setShowCruisePort(!showCruisePort)}
-          onCruisePortClose={() => setShowCruisePort(false)}
-          isSimulationMode={isSimulationMode}
-          simulationSpeed={simulationSpeed}
-          onSimulationSpeedChange={setSimulationSpeed}
-          onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
-          onSimulationPauseToggle={() => setIsSimulationPaused(!isSimulationPaused)}
-          isSimulationPaused={isSimulationPaused}
-          onOpenAIRecommend={() => setShowAIRecommend(true)}
-          spokenLandmarks={spokenLandmarks}
-          showLandmarks={showLandmarks}
-          showActivities={showActivities}
-          showRestaurants={showRestaurants}
-          showGiftShops={showGiftShops}
-          onToggleLandmarks={() => setShowLandmarks(!showLandmarks)}
-          onToggleActivities={() => setShowActivities(!showActivities)}
-          onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
-          onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
-          userRegion={userRegion}
-          activeLayout={activeLayout}
-          gpsMode={gpsMode}
-          onGpsModeChange={setGpsMode}
-          activeRoute={activeRoute}
-          handleClearRoute={handleClearRoute}
-          tourRouteInfo={tourRouteInfo}
-          tourTimePerStop={tourTimePerStop}
-          tourStopDurations={tourStopDurations}
-          onUpdateStopDuration={handleUpdateStopDuration}
-          onSaveRoute={() => setShowSaveRouteDialog(true)}
-          startingPoint={startingPoint}
-          endPoint={endPoint}
-          onOpenStartEndPointDialog={() => setIsStartingPointPopoverOpen(true)}
-          capturedRouteImage={capturedRouteImage}
-        />
+              setShowCountrySelector(true);
+            }}
+            landmarks={landmarks}
+            tourStops={tourStops}
+            onAddToTour={handleAddToTour}
+            isInTour={selectedLandmark ? tourStops.some(stop => stop.id === selectedLandmark.id) : false}
+            onRemoveTourStop={(id) => {
+              setTourStops(tourStops.filter(s => s.id !== id));
+              setTourStopDurations(prev => {
+                const updated = { ...prev };
+                delete updated[id];
+                return updated;
+              });
+            }}
+            userPosition={effectivePosition ? { latitude: effectivePosition.latitude, longitude: effectivePosition.longitude } : null}
+            selectedLanguage={selectedLanguage}
+            onNavigate={(landmark) => {
+              setActiveRoute(landmark);
+              transitionTo('nav');
+            }}
+            onLandmarkRoute={handleLandmarkRoute}
+            city={selectedCity || null}
+            showCruisePort={showCruisePort}
+            onToggleCruisePort={() => setShowCruisePort(!showCruisePort)}
+            onCruisePortClose={() => setShowCruisePort(false)}
+            isSimulationMode={isSimulationMode}
+            simulationSpeed={simulationSpeed}
+            onSimulationSpeedChange={setSimulationSpeed}
+            onToggleSimulation={() => setIsSimulationMode(!isSimulationMode)}
+            onSimulationPauseToggle={() => setIsSimulationPaused(!isSimulationPaused)}
+            isSimulationPaused={isSimulationPaused}
+            onOpenAIRecommend={() => setShowAIRecommend(true)}
+            spokenLandmarks={spokenLandmarks}
+            showLandmarks={showLandmarks}
+            showActivities={showActivities}
+            showRestaurants={showRestaurants}
+            showGiftShops={showGiftShops}
+            onToggleLandmarks={() => setShowLandmarks(!showLandmarks)}
+            onToggleActivities={() => setShowActivities(!showActivities)}
+            onToggleRestaurants={() => setShowRestaurants(!showRestaurants)}
+            onToggleGiftShops={() => setShowGiftShops(!showGiftShops)}
+            userRegion={userRegion}
+            activeLayout={activeLayout}
+            gpsMode={gpsMode}
+            onGpsModeChange={setGpsMode}
+            activeRoute={activeRoute}
+            handleClearRoute={handleClearRoute}
+            tourRouteInfo={tourRouteInfo}
+            tourTimePerStop={tourTimePerStop}
+            tourStopDurations={tourStopDurations}
+            onUpdateStopDuration={handleUpdateStopDuration}
+            onSaveRoute={() => setShowSaveRouteDialog(true)}
+            startingPoint={startingPoint}
+            endPoint={endPoint}
+            onOpenStartEndPointDialog={() => setIsStartingPointPopoverOpen(true)}
+            capturedRouteImage={capturedRouteImage}
+          />
         )}
 
         {/* Other Overlays */}

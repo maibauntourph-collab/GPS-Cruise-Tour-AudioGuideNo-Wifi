@@ -9,7 +9,7 @@ import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, External
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
-import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, getBookingUrl, AffiliateSettings } from '@/lib/affiliateConfig';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, getBookingUrl, getAgodaUrl, AffiliateSettings } from '@/lib/affiliateConfig';
 import { useToast } from '@/hooks/use-toast';
 
 import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
@@ -755,13 +755,146 @@ export default function LandmarkDetailDialog({
 
               {/* Booking & Ticket Tab */}
               <TabsContent value="booking" className="p-0 m-0 space-y-6 pb-32">
-                <div className="px-4 pt-6 text-center space-y-2">
+
+                {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  [Designer Kim + Bug Doctor | 2026-04-04]
+                  🔗 예약화면 진입 전 "사이트 직접 링크" 빠른 접근 바
+                  - 각 버튼 클릭 → 새 탭(_blank)으로 해당 사이트 오픈
+                  - 우리 앱(GPS Tour)은 그대로 유지 (stay)
+                  - window.open()을 클릭 핸들러 안에서 동기적으로 호출 → 팝업 차단 없음
+                  학생들에게: 외부 링크는 항상 target='_blank' + rel='noopener'로!
+                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+                {(() => {
+                  // 검색어: 영어 이름 우선 (글로벌 플랫폼 검색 최적화)
+                  const searchName = getTranslatedContent(landmark, 'en', 'name') ||
+                    getTranslatedContent(landmark, selectedLanguage, 'name');
+
+                  // 각 사이트별 직접 링크 정의
+                  const quickLinks = [
+                    {
+                      id: 'booking',
+                      name: 'Booking.com',
+                      emoji: '🏨',
+                      color: 'bg-[#003580] text-white',
+                      hoverColor: 'hover:bg-[#00266b]',
+                      url: getBookingUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
+                    },
+                    {
+                      id: 'agoda',
+                      name: 'Agoda',
+                      emoji: '🏨',
+                      color: 'bg-rose-600 text-white',
+                      hoverColor: 'hover:bg-rose-700',
+                      url: getAgodaUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
+                    },
+                    {
+                      id: 'klook',
+                      name: 'Klook',
+                      emoji: '📱',
+                      color: 'bg-[#E9633F] text-white',
+                      hoverColor: 'hover:bg-[#d05535]',
+                      url: getKlookUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
+                    },
+                    {
+                      id: 'getyourguide',
+                      name: 'GetYourGuide',
+                      emoji: '✅',
+                      color: 'bg-red-500 text-white',
+                      hoverColor: 'hover:bg-red-600',
+                      url: getGYGUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
+                    },
+                    {
+                      id: 'viator',
+                      name: 'Viator',
+                      emoji: '🌍',
+                      color: 'bg-blue-500 text-white',
+                      hoverColor: 'hover:bg-blue-600',
+                      url: getViatorUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
+                    },
+                    {
+                      id: 'trip',
+                      name: 'Trip.com',
+                      emoji: '💰',
+                      color: 'bg-blue-700 text-white',
+                      hoverColor: 'hover:bg-blue-800',
+                      url: getTripUrl(searchName, dynamicAffiliateSettings),
+                    },
+                    ...(selectedLanguage === 'ko' ? [{
+                      id: 'myrealtrip',
+                      name: 'MyRealTrip',
+                      emoji: '🇰🇷',
+                      color: 'bg-[#2B96ED] text-white',
+                      hoverColor: 'hover:bg-[#1a7fd4]',
+                      url: getMyRealTripUrl(
+                        getTranslatedContent(landmark, 'ko', 'name') || searchName,
+                        dynamicAffiliateSettings
+                      ),
+                    }] : []),
+                  ];
+
+                  return (
+                    <div className="px-4 pt-5 space-y-2">
+                      {/* 섹션 헤더 */}
+                      <div className="flex items-center gap-2">
+                        <ExternalLink className="w-3.5 h-3.5 text-[#E67E22]" />
+                        <span className="text-[11px] font-black text-[#E67E22] uppercase tracking-wider">
+                          {selectedLanguage === 'ko' ? '예약사이트 직접 연결 (새창)' : 'Book Direct — Opens New Tab'}
+                        </span>
+                        <span className="ml-auto text-[9px] text-[#A8A294] font-bold bg-green-50 border border-green-200 text-green-600 px-1.5 py-0.5 rounded-full">
+                          APP STAYS OPEN
+                        </span>
+                      </div>
+
+                      {/* 가로 스크롤 버튼 바 */}
+                      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x">
+                        {quickLinks.map((link) => (
+                          <button
+                            key={link.id}
+                            className={`
+                              flex-shrink-0 snap-start flex flex-col items-center gap-1
+                              px-4 py-3 rounded-2xl font-bold text-[11px]
+                              shadow-sm active:scale-95 transition-all duration-150
+                              ${link.color} ${link.hoverColor}
+                            `}
+                            onClick={(e) => {
+                              // [Bug Doctor] 동기적 window.open → 팝업 차단 방지
+                              e.preventDefault();
+                              e.stopPropagation();
+                              const win = window.open(link.url, '_blank', 'noopener');
+                              // 앱은 그대로 유지 (navigate 없음)
+                              if (!win) {
+                                alert(selectedLanguage === 'ko'
+                                  ? `팝업 차단됨. 브라우저에서 ${link.name} 허용 후 재시도하세요.`
+                                  : `Popup blocked for ${link.name}. Please allow popups.`
+                                );
+                              }
+                            }}
+                          >
+                            <span className="text-lg leading-none">{link.emoji}</span>
+                            <span className="whitespace-nowrap">{link.name}</span>
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* 안내 메시지 */}
+                      <p className="text-[9px] text-[#A8A294] text-center">
+                        {selectedLanguage === 'ko'
+                          ? '각 버튼을 누르면 새 창에서 해당 사이트가 열리고, 이 앱은 그대로 유지됩니다.'
+                          : 'Each button opens the site in a new tab. This app stays open in the background.'}
+                      </p>
+                      <div className="border-b border-[#EFEBE6] mt-2" />
+                    </div>
+                  );
+                })()}
+
+                <div className="px-4 pt-2 text-center space-y-2">
                   <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#E67E22] shadow-sm">
                     <Ticket className="w-8 h-8" />
                   </div>
                   <h4 className="font-bold text-lg text-[#5D574D]">{selectedLanguage === 'ko' ? '티켓 및 액티비티' : 'Tickets & Activities'}</h4>
                   <p className="text-xs text-[#A8A294] px-4 whitespace-nowrap">{selectedLanguage === 'ko' ? '플랫폼 파트너를 통한 최저가 예약' : 'Best deals via our platform partners'}</p>
                 </div>
+
 
                 {/* [어벤져스 팀 | 2026-03-20] 실시간 동기화된 최저가 예약 버튼 활성화 */}
                 {landmark.reservationUrl && (
@@ -926,11 +1059,11 @@ export default function LandmarkDetailDialog({
                                 </h4>
                               </div>
                             </div>
-                            
+
                             <div className="p-4 bg-orange-50/50 rounded-2xl border border-dashed border-orange-200 text-center">
                               <p className="text-[11px] text-orange-600 font-bold leading-relaxed">
-                                {selectedLanguage === 'ko' 
-                                  ? '현재 위치에서 가장 인기 있는 티켓/액티비티 플랫폼입니다.\n아래 버튼을 눌러 실시간 가격을 확인하세요.' 
+                                {selectedLanguage === 'ko'
+                                  ? '현재 위치에서 가장 인기 있는 티켓/액티비티 플랫폼입니다.\n아래 버튼을 눌러 실시간 가격을 확인하세요.'
                                   : 'Most popular platforms at this location.\nClick below to check real-time availability.'}
                               </p>
                             </div>

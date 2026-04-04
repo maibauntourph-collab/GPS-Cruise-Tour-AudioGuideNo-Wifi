@@ -1,4 +1,4 @@
-import { type Landmark } from "../../shared/schema";
+﻿import { type Landmark } from "../../shared/schema";
 
 export const LANDMARKS: Landmark[] = [
   {
@@ -163,44 +163,7 @@ export const LANDMARKS: Landmark[] = [
     "createdAt": new Date("2026-02-12T12:11:24.691Z"),
     "updatedAt": new Date("2026-02-28T12:00:16.013Z")
   },
-  {
-    "id": "seoul_item_98",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Activity 98",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 지금 여러분은 서울의 숨겨진 보석 같은 장소, SEOUL Premium Activity 98에 와 있습니다. 따스한 햇살이 얼굴을 간지럽히고, 코끝에는 은은한 꽃향기가 스치는 듯하죠? 이곳은 단순한 관광지가 아니에요. 마치 시간이 멈춘 듯한 아름다운 풍경과, 사진작가들의 영감을 자극하는 빛깔들이 살아 숨 쉬는 곳이죠. \n\n발 아래 깔린 돌길을 따라 천천히 걸어보세요. 오래된 나무들이 만들어내는 그늘은 마치 자연이 만들어준 시원한 에어컨 같아요. 저 멀리 보이는 전통 가옥의 기와지붕은 햇빛에 반짝이며, 마치 과거로 시간 여행을 떠나온 듯한 기분을 선사하죠. \n\n귓가에는 새들의 지저귐과 나뭇잎이 바람에 흔들리는 소리가 들려옵니다. 잠시 걸음을 멈추고 깊게 숨을 들이마셔 보세요. 서울 도심에서는 쉽게 느낄 수 없는, 맑고 깨끗한 공기가 폐 속 깊숙이 스며드는 것을 느낄 수 있을 거예요. \n\n이곳에서는 다채로운 전시와 체험 공간도 만나볼 수 있어요. 아이들의 웃음소리가 끊이지 않는 활기찬 공간이죠. 가족과 함께 특별한 추억을 만들기에 더없이 좋은 곳이에요. 상상해보세요! 아이들이 신기한 듯 전시물을 바라보고, 체험활동에 몰두하는 모습을요. 그 모습은 분명 여러분의 마음속에 오랫동안 간직될 행복한 기억으로 남을 거예요. \n\nSEOUL Premium Activity 98은 단순한 관광지를 넘어, 여러분의 오감을 만족시키고 마음속 깊은 곳까지 힐링해주는 특별한 공간입니다. 지금 바로, 이 아름다운 경험 속으로 빠져보세요!",
-    "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-    "category": "Activity",
-    "detailedDescription": "SEOUL Premium Activity 98은 서울의 숨겨진 명소로, 사진작가들 사이에서 '꼭 가봐야 할 곳'으로 손꼽히는 곳입니다. 아름다운 자연 풍경과 한국 전통 건축물이 조화롭게 어우러져, 마치 한 폭의 그림 같은 풍경을 자랑하죠. 이곳은 원래 조선 시대 왕족의 별궁이었으나, 일제강점기를 거치면서 훼손되었다가 최근 복원되어 시민들에게 개방되었습니다. \n\n이곳의 가장 큰 매력은 사계절 각기 다른 아름다움을 뽐낸다는 점입니다. 봄에는 벚꽃이 만개하여 핑크빛으로 물들고, 여름에는 푸르른 녹음이 우거져 시원한 그늘을 만들어줍니다. 가을에는 단풍이 붉게 물들어 장관을 이루고, 겨울에는 눈 덮인 풍경이 고즈넉한 분위기를 자아냅니다. \n\n**현지인 꿀팁**: 이곳의 숨겨진 포토 스팟은 연못 뒤편에 있는 작은 정자입니다. 정자에 앉아 연못을 바라보면, 주변 풍경이 마치 액자 속에 담긴 그림처럼 펼쳐집니다. 특히 해 질 녘에는 노을이 연못에 비쳐 더욱 아름다운 풍경을 감상할 수 있습니다. 그리고 매주 주말에는 전통 공연이나 체험 프로그램이 운영되니, 방문 전에 홈페이지를 확인하는 것이 좋습니다. **숨겨진 비화**: 복원 과정에서 조선 시대 왕족들이 즐겨 마시던 특별한 차 레시피가 발견되었다고 합니다. 지금은 그 레시피를 바탕으로 만든 차를 판매하고 있으니, 꼭 한번 맛보시길 바랍니다.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Activity 98",
-        "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-        "narration": "SEOUL Premium Activity 98 명소 가이드! 절대로 놓치지 마세요(DON'T MISS)! 심장을 뛰게 할 짜릿한 액티비티와 인생샷을 위한 최고의 스팟이 바로 여기 있습니다. 지금 이 순간, 당신만의 특별한 체험을 시작해보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:08.171Z"),
-    "updatedAt": new Date("2026-02-22T18:28:04.544Z")
-  },
+
   {
     "id": "new-york_item_65",
     "cityId": "new-york",
@@ -238,44 +201,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": new Date("2026-02-12T13:05:06.017Z"),
     "updatedAt": new Date("2026-02-28T12:00:15.272Z")
-  },
-  {
-    "id": "seoul_item_58",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Activity 58",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 여러분은 지금 서울의 숨겨진 보석 같은 장소, SEOUL Premium Activity 58에 와 있습니다. 귓가에는 아이들의 웃음소리가 맴돌고, 코끝에는 싱그러운 풀 내음이 스칩니다. 따스한 햇살이 여러분의 얼굴을 부드럽게 감싸 안으며, 마치 오랜 친구처럼 포근함을 선사하죠. 지금 여러분의 발 아래에는 수백 년의 역사를 간직한 돌길이 놓여 있습니다. 이 길을 따라 천천히 걸으며, 과거와 현재가 공존하는 특별한 시간을 느껴보세요. 저 멀리 보이는 푸른 숲은 마치 비밀스러운 이야기를 속삭이는 듯합니다. 숲 속에서는 어떤 모험이 여러분을 기다리고 있을까요? 잠시 숨을 고르고, 깊게 숨을 들이마셔 보세요. 서울의 활기찬 에너지와 자연의 평온함이 여러분의 온몸에 스며드는 것을 느낄 수 있을 겁니다. 아이들과 함께 뛰어놀며 웃음꽃을 피우고, 사랑하는 사람과 손을 잡고 아름다운 풍경을 감상하세요. SEOUL Premium Activity 58은 단순한 관광지가 아닌, 여러분의 마음속 깊은 곳에 따뜻한 추억을 심어줄 특별한 공간입니다. 이곳에서 잊지 못할 순간들을 만들어 가세요. 자, 이제 눈을 뜨고, 여러분만의 이야기를 시작해 보세요!",
-    "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-    "category": "Activity",
-    "detailedDescription": "SEOUL Premium Activity 58은 서울 시민들조차 잘 모르는 숨겨진 명소입니다. 울창한 숲과 아름다운 정원이 어우러져 있어 마치 도심 속 오아시스 같은 분위기를 자아냅니다. 본래 이곳은 조선 시대 왕족의 별장이었던 곳으로, 역사적인 가치 또한 매우 높습니다. 특히 봄에는 벚꽃이 만개하여 환상적인 풍경을 연출하며, 가을에는 단풍이 붉게 물들어 아름다움을 더합니다. 현지인들만 아는 꿀팁을 하나 알려드리자면, 해 질 무렵 정자에 앉아 석양을 감상하는 것을 추천합니다. 붉게 물든 하늘과 고즈넉한 정원의 풍경이 어우러져 잊지 못할 감동을 선사할 것입니다. 또한, 아이들을 위한 다양한 체험 프로그램도 운영하고 있으니, 가족 여행객에게는 더할 나위 없이 좋은 선택이 될 것입니다. 숨겨진 비화를 하나 더 말씀드리자면, 과거 왕족들은 이곳에서 시를 읊고 풍류를 즐겼다고 합니다. 지금도 그 흔적을 찾아볼 수 있으며, 곳곳에 숨겨진 시비(詩碑)를 발견하는 재미도 쏠쏠합니다. SEOUL Premium Activity 58은 단순한 관광지를 넘어, 역사와 문화, 그리고 자연이 조화롭게 어우러진 특별한 공간입니다.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Activity 58",
-        "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-        "narration": "SEOUL Premium Activity 58 명소 가이드! 절대로 놓치지 마세요(DON'T MISS)! 심장을 뛰게 할 짜릿한 액티비티와 인생샷을 위한 최고의 스팟이 바로 여기 있습니다. 지금 이 순간, 당신만의 특별한 체험을 시작해보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:05.448Z"),
-    "updatedAt": new Date("2026-02-22T18:23:42.115Z")
   },
   {
     "id": "바르셀로나-demo-2",
@@ -429,44 +354,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": new Date("2026-02-12T13:05:03.977Z"),
     "updatedAt": new Date("2026-02-22T18:05:58.046Z")
-  },
-  {
-    "id": "seoul_item_108",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Landmark 108",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 지금 여러분은 서울의 심장, SEOUL Premium Landmark 108에 서 있습니다. 해질녘, 황금빛 노을이 빌딩 전체를 감싸 안으며 숨 막힐 듯 아름다운 광경이 펼쳐지죠. 발 아래로는 서울의 젖줄, 한강이 유유히 흐르고, 저 멀리 남산 타워의 실루엣이 아련하게 다가옵니다. 시원한 강바람이 여러분의 뺨을 스치고, 도시의 활기찬 소리가 귓가에 맴돌 거예요. \n\n지금 여러분의 발 아래에는, 수백 년의 역사가 잠들어 있습니다. 과거 조선 시대에는 왕족들의 별궁이 있었고, 일제강점기에는 아픔의 역사가 서려있는 곳이었죠. 그리고 지금, 대한민국 경제 성장의 상징이자 미래를 향해 뻗어 나가는 랜드마크가 되어 여러분을 맞이하고 있습니다. Landmark 108에 올라 서울의 파노라마 뷰를 감상하며, 잠시 시간을 멈추고 깊은 숨을 쉬어보세요. 여러분은 지금, 서울의 과거와 현재, 그리고 미래를 한눈에 담고 있는 겁니다. \n\n랜드마크 내부에서는 다양한 예술 작품 전시가 진행 중입니다. 유명 작가들의 그림과 조각 작품들을 감상하며 예술적인 영감을 얻어보세요. 특히, 108층 전망대에서 바라보는 야경은 그 어떤 화려한 전시보다 웅장하고 아름다운 예술 작품과 같답니다. 연인과 함께라면 잊지 못할 로맨틱한 추억을, 가족과 함께라면 소중한 시간을 선물해 줄 거예요. 자, 이제 카메라를 꺼내세요. 여러분의 인생샷을 남길 시간입니다. 서울의 아름다움을 배경으로 멋진 포즈를 취해보세요. 찰칵! 바로 이거예요! 여러분의 미소가 서울의 야경만큼이나 눈부시네요. SEOUL Premium Landmark 108, 여러분의 기억 속에 영원히 남을 특별한 장소가 될 거예요.",
-    "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-    "category": "Landmark",
-    "detailedDescription": "SEOUL Premium Landmark 108은 단순한 건물을 넘어, 서울의 역사와 문화를 담은 살아있는 박물관과 같습니다. 108층이라는 압도적인 높이에서 서울 시내 전체를 조망할 수 있다는 점은 익히 알려진 사실이지만, 현지인들만 아는 숨겨진 이야기가 숨어있죠. 바로 랜드마크 건설 당시, 풍수지리학적으로 완벽한 위치를 찾기 위해 수많은 전문가들이 참여했다는 사실입니다. 랜드마크의 위치는 한강의 흐름과 주변 산세의 기운을 고려하여 결정되었으며, 이 때문에 랜드마크 자체가 서울의 번영을 기원하는 상징적인 의미를 지니게 되었다고 합니다. 또한, 랜드마크 내부에는 '소망의 벽'이라는 특별한 공간이 마련되어 있습니다. 이곳에 소원을 적어 붙이면, 108층 높이에서 하늘에 닿아 소원이 이루어진다는 전설이 전해져 내려오고 있습니다. 꿀팁 하나 더! 랜드마크 주변에는 맛집들이 즐비합니다. 특히, 랜드마크 지하에 위치한 푸드 코트는 서울의 유명 맛집들을 한자리에서 만나볼 수 있는 기회이니 놓치지 마세요. 역사적인 의미와 아름다운 야경, 그리고 맛있는 음식까지, SEOUL Premium Landmark 108은 오감을 만족시키는 특별한 경험을 선사할 것입니다.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Landmark 108",
-        "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-        "narration": "SEOUL Premium Landmark 108 명소 가이드! 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:08.835Z"),
-    "updatedAt": new Date("2026-02-28T12:00:16.773Z")
   },
   {
     "id": "london_item_30",
@@ -773,44 +660,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": new Date("2026-02-23T02:01:03.068Z")
   },
   {
-    "id": "seoul_item_68",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Landmark 68",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 상상해보세요. 지금 여러분은 서울의 심장부, 그 빛나는 랜드마크 68 앞에 서 있습니다. 눈을 들어 하늘을 향해 뻗은 건축물을 올려다보세요. 그 웅장함에 숨이 멎을 듯하죠? 햇살이 건물 표면에 부딪혀 다채로운 빛깔을 뿜어내고, 마치 살아있는 예술 작품 같아요. 발 아래 펼쳐진 서울의 풍경은 또 어떻고요. 고층 빌딩들이 옹기종기 모여 있는 모습이 마치 거대한 레고 도시 같습니다. \n\n숨을 깊게 들이쉬어 보세요. 서울의 활기찬 공기가 느껴지나요? 랜드마크 주변을 거니는 사람들의 웃음소리, 자동차의 경적 소리, 멀리서 들려오는 음악 소리까지, 모든 것이 조화롭게 어우러져 서울만의 독특한 분위기를 만들어내고 있어요. 마치 영화 속 한 장면처럼 말이죠. \n\n이제 랜드마크 안으로 들어가 볼까요? 문을 열고 들어서는 순간, 여러분은 완전히 다른 세계에 발을 들여놓게 될 거예요. 화려한 조명 아래 전시된 예술 작품들이 여러분을 맞이하고, 곳곳에서 펼쳐지는 다양한 체험 행사들이 여러분의 호기심을 자극할 겁니다. 아이들의 웃음소리가 끊이지 않는 이곳은, 가족 여행객들에게 최고의 장소라고 할 수 있죠. 잠시 시간을 내어 랜드마크 곳곳을 탐험하며 숨겨진 아름다움을 발견해보세요. 분명 잊지 못할 추억을 만들 수 있을 거예요. \n\n밤이 되면 랜드마크는 더욱 아름다운 모습으로 변신합니다. 건물 전체가 화려한 조명으로 물들고, 서울의 야경과 어우러져 환상적인 분위기를 연출하죠. 사랑하는 사람과 함께 이곳에서 밤하늘을 바라보며 낭만적인 시간을 보내는 것도 정말 좋을 거예요. 랜드마크 68, 이곳은 단순한 건물이 아닌, 서울의 역사와 문화, 그리고 아름다움을 담고 있는 특별한 공간입니다. 지금 바로 여러분의 서울 여행에 랜드마크 68을 추가해보세요. 후회하지 않으실 거예요!",
-    "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-    "category": "Landmark",
-    "detailedDescription": "SEOUL Premium Landmark 68은 서울을 대표하는 랜드마크로, 단순한 고층 건물을 넘어 서울의 역사와 문화를 담고 있는 상징적인 존재입니다. 이곳은 과거와 현재가 공존하는 공간으로, 전통적인 한국 건축 양식과 현대적인 디자인이 조화롭게 어우러져 독특한 아름다움을 뽐냅니다. 랜드마크 내부에는 다양한 전시 공간과 체험 시설이 마련되어 있어 방문객들에게 다채로운 경험을 제공합니다. 특히, 사진작가들 사이에서는 아름다운 서울의 풍경을 담을 수 있는 최고의 장소로 손꼽히며, 가족 여행객들에게는 교육과 재미를 동시에 제공하는 이상적인 공간으로 사랑받고 있습니다.\n\n랜드마크 68에 숨겨진 비화 하나를 말씀드릴까요? 사실 이 건물은 건설 당시 여러 가지 어려움에 직면했었습니다. 특히, 건물의 높이 제한 문제와 주변 환경과의 조화 문제가 가장 큰 걸림돌이었죠. 하지만 건축가와 엔지니어들은 끊임없는 연구와 혁신적인 기술을 통해 이러한 난관을 극복하고, 마침내 서울의 새로운 랜드마크를 탄생시킬 수 있었습니다. 랜드마크 68은 단순히 높고 아름다운 건물이 아닌, 한국인의 끈기와 창의력을 보여주는 살아있는 증거인 셈입니다. 또한, 현지인들 사이에서는 랜드마크 꼭대기 층에 숨겨진 행운의 명당이 있다는 이야기가 전해져 내려오고 있습니다. 이곳에서 소원을 빌면 이루어진다는 속설 때문에 많은 사람들이 몰래 방문하여 소원을 빈다고 하네요.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Landmark 68",
-        "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-        "narration": "SEOUL Premium Landmark 68 명소 가이드! 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:06.216Z"),
-    "updatedAt": new Date("2026-02-22T18:24:12.459Z")
-  },
-  {
     "id": "rome_item_71",
     "cityId": "rome",
     "name": "로마 프리미엄 Shopping 추천 72",
@@ -885,44 +734,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": new Date("2026-02-12T13:05:04.670Z"),
     "updatedAt": new Date("2026-02-22T18:06:02.759Z")
-  },
-  {
-    "id": "seoul_item_18",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Activity 18",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "상상해보세요. 여러분은 지금 서울의 숨겨진 보석 같은 곳에 서 있습니다. 따스한 햇살이 뺨을 간지럽히고, 코끝에는 은은한 풀 향기가 스쳐 지나가네요. 이곳은 단순한 관광지가 아니에요. 오랜 역사와 아름다운 자연이 어우러져 만들어낸 특별한 공간이죠. \n\n여러분 주변을 둘러보세요. 마치 시간이 멈춘 듯 고즈넉한 풍경이 펼쳐집니다. 옛 선조들의 숨결이 느껴지는 건축물과 푸르른 나무들이 조화롭게 어우러져 한 폭의 그림 같은 풍경을 만들어내고 있어요. 지금 여러분의 발 아래에는 수백 년의 역사가 잠들어 있습니다. 이 땅을 밟고 지나간 수많은 사람들의 이야기가 여러분의 마음속에 속삭이는 듯하죠. \n\n살짝 눈을 감고 이곳의 소리에 귀 기울여 보세요. 바람에 흔들리는 나뭇잎 소리, 졸졸 흐르는 시냇물 소리, 그리고 저 멀리서 들려오는 새들의 노랫소리가 여러분의 마음을 평온하게 만들어 줄 거예요. 이곳은 복잡한 도시의 소음에서 벗어나 진정한 휴식을 취할 수 있는 완벽한 장소랍니다. \n\n특히 가족 여행객들에게 이곳은 더없이 좋은 선택이 될 거예요. 아이들은 넓은 공간에서 자유롭게 뛰어놀 수 있고, 어른들은 아름다운 풍경을 감상하며 여유로운 시간을 보낼 수 있죠. 온 가족이 함께 역사와 문화를 체험하고 자연을 만끽하며 소중한 추억을 만들어갈 수 있습니다. \n\n이곳은 사진작가들에게도 사랑받는 명소랍니다. 어디를 찍어도 예술 작품이 되는 아름다운 풍경 덕분이죠. 여러분도 카메라를 들고 이곳의 매력을 담아보세요. 분명 잊지 못할 멋진 사진들을 남길 수 있을 거예요. 자, 이제 숨겨진 서울의 보석 같은 이곳에서 특별한 체험을 만끽하며 잊지 못할 추억을 만들어보세요!",
-    "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-    "category": "Activity",
-    "detailedDescription": "SEOUL Premium Activity 18은 단순한 관광 명소를 넘어, 서울의 숨겨진 아름다움과 역사를 만끽할 수 있는 특별한 공간입니다. 이곳은 조선 시대 왕족의 별궁이었던 곳으로, 수백 년의 역사를 간직하고 있습니다. 아름다운 정원과 전통 건축물은 방문객들에게 깊은 인상을 남기죠. \n\n현지인들만 아는 꿀팁을 하나 알려드릴까요? 이곳은 특히 가을에 방문하면 더욱 아름답습니다. 단풍으로 물든 풍경은 그야말로 장관을 이루죠. 또한, 주말에는 전통 공연이나 체험 프로그램이 진행되기도 하니, 방문 전에 미리 확인해보는 것이 좋습니다. 숨겨진 비화로는, 과거 왕족들이 이곳에서 시를 짓고 풍류를 즐겼다고 합니다. 그들의 예술혼이 아직까지도 이곳에 남아있는 듯한 느낌을 받을 수 있죠. \n\n가족 여행객에게 추천하는 이유는 아이들이 뛰어놀 수 있는 넓은 잔디밭과 다양한 볼거리가 있기 때문입니다. 또한, 역사 교육에도 도움이 되어 아이들에게 유익한 경험을 선사할 수 있습니다. 사진작가들에게 인기 있는 이유는 어디를 찍어도 아름다운 배경이 되어주기 때문입니다. 특히 아침 햇살이 비칠 때나 저녁 노을이 질 때 찍으면 환상적인 사진을 얻을 수 있습니다. 서울의 숨겨진 보석 같은 이곳에서 잊지 못할 추억을 만들어보세요.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Activity 18",
-        "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-        "narration": "SEOUL Premium Activity 18 명소 가이드! 절대로 놓치지 마세요(DON'T MISS)! 심장을 뛰게 할 짜릿한 액티비티와 인생샷을 위한 최고의 스팟이 바로 여기 있습니다. 지금 이 순간, 당신만의 특별한 체험을 시작해보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:02.747Z"),
-    "updatedAt": new Date("2026-02-22T18:25:45.244Z")
   },
   {
     "id": "paris_item_52",
@@ -3164,44 +2975,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": new Date("2026-02-22T18:06:01.518Z")
   },
   {
-    "id": "seoul_item_28",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Landmark 28",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 서울의 숨결을 느껴보세요. 지금 여러분은 SEOUL Premium Landmark 28, 그 웅장한 자태 앞에 서 있습니다. 상상해보세요. 따스한 햇살이 부드럽게 감싸 안고, 코끝을 간지럽히는 은은한 꽃향기가 당신을 맞이합니다. 저 멀리 남산 타워가 서울의 하늘을 향해 손짓하고, 발 아래로는 도시의 활기찬 움직임이 느껴집니다. SEOUL Premium Landmark 28은 단순한 랜드마크가 아니에요. 서울의 역사와 문화, 그리고 미래를 담은 살아있는 심장과 같습니다. 이곳에 서면 마치 시간 여행자가 된 듯한 기분을 느낄 수 있죠. 수백 년 전, 왕족들이 거닐던 바로 그 길을 따라 걷고 있다고 상상해보세요. 어쩌면 그들의 속삭임이 아직도 이곳에 남아 당신의 귓가에 맴돌고 있을지도 모릅니다. 랜드마크 내부로 발걸음을 옮기면, 화려한 전시물들이 여러분을 맞이할 겁니다. 섬세하게 조각된 예술품, 빛나는 보석, 그리고 역사의 숨결이 느껴지는 유물들… 하나하나가 서울의 이야기를 담고 있는 소중한 보물들이죠. 잠시 시간을 내어 창밖을 바라보세요. 서울의 아름다운 스카이라인이 한눈에 들어옵니다. 특히 해 질 녘, 붉게 물든 노을이 도시를 감싸는 모습은 그야말로 장관입니다. 사랑하는 사람과 함께라면 더욱 잊지 못할 추억을 만들 수 있을 거예요. 그리고 밤이 되면 SEOUL Premium Landmark 28은 또 다른 매력을 뽐냅니다. 화려한 조명이 랜드마크를 비추고, 주변은 낭만적인 분위기로 가득 차죠. 연인과 함께 손을 잡고 밤거리를 거닐며 서울의 아름다운 야경을 감상해보세요. 분명 황홀한 경험이 될 겁니다. 자, 이제 SEOUL Premium Landmark 28에서 서울의 모든 것을 느껴보세요. 이곳은 여러분의 여행을 더욱 특별하고 풍성하게 만들어줄 것입니다.",
-    "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-    "category": "Landmark",
-    "detailedDescription": "SEOUL Premium Landmark 28은 단순한 관광 명소를 넘어, 서울의 역사, 문화, 그리고 현대적인 아름다움을 완벽하게 조화시킨 상징적인 공간입니다. 조선 시대부터 현대에 이르기까지, 이 장소는 수많은 역사적 사건과 인물들의 발자취를 간직하고 있습니다. 원래 왕족의 별궁으로 사용되었던 이곳은, 일제강점기에는 일본군 사령부로, 해방 후에는 정부 청사로 사용되는 등 파란만장한 역사를 거쳐왔습니다. 랜드마크 내부에 전시된 유물과 예술품들은 서울의 다채로운 역사를 생생하게 보여줍니다. 특히, 조선 시대 왕실의 유물들은 섬세한 아름다움과 역사적 가치를 동시에 지니고 있어 감탄을 자아냅니다. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 랜드마크 뒤편에 숨겨진 작은 정원은, 바쁜 도시 생활에서 벗어나 잠시 휴식을 취하기에 완벽한 장소입니다. 특히 봄에는 벚꽃이 만개하여 아름다운 풍경을 연출하며, 가을에는 단풍으로 물들어 낭만적인 분위기를 자아냅니다. 그리고 밤에는 랜드마크 주변에 위치한 맛집에서 서울의 다양한 음식을 맛보는 것을 추천합니다. 특히, 랜드마크 근처에 있는 숨겨진 골목길에는 오랜 역사를 자랑하는 노포들이 즐비해 있습니다. 이곳에서 진정한 서울의 맛을 경험해보세요. SEOUL Premium Landmark 28은 단순한 관광을 넘어, 서울의 역사와 문화를 깊이 있게 체험하고, 현지인들의 삶을 엿볼 수 있는 특별한 공간입니다.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Landmark 28",
-        "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-        "narration": "SEOUL Premium Landmark 28 명소 가이드! 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:03.456Z"),
-    "updatedAt": new Date("2026-02-28T12:00:17.509Z")
-  },
-  {
     "id": "서울특별시-demo-2",
     "cityId": "seoul",
     "name": "서울특별시의 맛집 골목",
@@ -3658,44 +3431,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": new Date("2026-02-13T13:51:19.221Z"),
     "updatedAt": new Date("2026-02-28T12:00:25.140Z")
-  },
-  {
-    "id": "seoul_item_78",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Activity 78",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "숨을 크게 들이쉬고, 서울의 활기찬 공기를 느껴보세요. 지금 여러분은 SEOUL Premium Activity 78, 서울의 숨겨진 보석 같은 장소에 와 있습니다. 상상해보세요. 눈앞에 펼쳐진 아름다운 풍경, 마치 한 폭의 그림 같아요. 햇살이 부드럽게 쏟아지고, 바람은 살랑살랑 불어와 기분을 좋게 만들죠. 여기저기서 들려오는 아이들의 웃음소리, 연인들의 속삭임, 그리고 사진작가들의 셔터 소리가 아름다운 선율처럼 귓가에 맴돌 거예요. 발 아래에는 푸르른 잔디가 깔려 있고, 시선을 조금만 돌리면 다채로운 전시와 체험 공간이 펼쳐져 있어요. 마치 다른 세계에 온 듯한 착각이 들 정도라니까요. \n\n이곳은 단순히 눈으로 보는 풍경만이 아니에요. 마음으로 느끼고, 온몸으로 체험하는 공간이죠. 아이들은 신나는 액티비티를 즐기고, 어른들은 잠시나마 일상에서 벗어나 여유를 만끽할 수 있어요. 특히 가족 여행객들에게는 최고의 선택이 될 거예요. 아이들과 함께 뛰어놀고, 맛있는 음식을 나눠 먹으며, 잊지 못할 추억을 만들어보세요. 밤이 되면 또 다른 매력이 펼쳐져요. 은은한 조명이 켜지고, 로맨틱한 분위기가 감돌죠. 사랑하는 사람과 함께 밤하늘을 바라보며, 소중한 시간을 보내는 건 어때요? SEOUL Premium Activity 78은 여러분에게 특별한 경험과 감동을 선사할 거예요. 자, 이제 카메라를 들고, 이 아름다운 순간을 영원히 간직하세요!",
-    "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-    "category": "Activity",
-    "detailedDescription": "SEOUL Premium Activity 78은 서울의 숨겨진 명소 중 하나로, 아름다운 자연경관과 다채로운 액티비티를 동시에 즐길 수 있는 특별한 공간입니다. 이곳은 특히 사진작가들에게 인기가 많은데, 그 이유는 바로 눈부신 풍경 때문이죠. 계절마다 다른 매력을 뽐내는 자연과 현대적인 건축물이 조화롭게 어우러져, 셔터를 누르는 순간마다 예술 작품이 탄생합니다. 단순히 아름다운 풍경만 있는 것이 아니라, 다양한 전시와 체험 공간도 마련되어 있어 지루할 틈이 없어요. 아이들을 위한 놀이터, 어른들을 위한 휴식 공간, 그리고 모두가 함께 즐길 수 있는 액티비티까지, 남녀노소 누구나 만족할 수 있는 곳이죠. 현지인들만 아는 꿀팁을 하나 알려드릴까요? 주말에는 사람이 많으니, 평일에 방문하는 것이 좋아요. 그리고 해 질 녘 노을이 정말 아름다우니, 늦은 오후에 방문해서 멋진 사진을 남겨보세요. 숨겨진 비화로는, 과거 이곳은 왕족의 별장이었다고 합니다. 오랜 시간이 흘러 지금은 시민들을 위한 공간으로 탈바꿈했지만, 여전히 그 흔적을 찾아볼 수 있어요. 자세히 살펴보면, 곳곳에 숨겨진 역사적인 이야기를 발견할 수 있을 거예요.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Activity 78",
-        "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-        "narration": "SEOUL Premium Activity 78 명소 가이드! 절대로 놓치지 마세요(DON'T MISS)! 심장을 뛰게 할 짜릿한 액티비티와 인생샷을 위한 최고의 스팟이 바로 여기 있습니다. 지금 이 순간, 당신만의 특별한 체험을 시작해보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:06.858Z"),
-    "updatedAt": new Date("2026-02-28T12:00:27.038Z")
   },
   {
     "id": "busan_f1963_복합문화공간_f1963",
@@ -10897,44 +10632,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": new Date("2026-02-22T20:00:57.942Z")
   },
   {
-    "id": "seoul_item_48",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Landmark 48",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 지금 여러분은 서울의 심장, SEOUL Premium Landmark 48에 서 있습니다. 발 아래로는 서울의 역사가 살아 숨 쉬는 듯하고, 눈 앞에는 숨 막힐 듯 아름다운 파노라마가 펼쳐집니다. (숨을 크게 들이쉬며) 코 끝을 간지럽히는 은은한 꽃 향기와 함께, 저 멀리 남산의 푸르름이 눈에 들어오네요. 마치 한 폭의 그림 같아요. 이곳은 단순한 랜드마크가 아니에요. 시간을 거슬러 올라가는 특별한 경험, 서울의 과거와 현재, 그리고 미래를 연결하는 통로와 같아요. 가족들과 함께 이곳을 거닐며, 아이들의 웃음소리가 서울 하늘 아래 울려 퍼지는 모습을 상상해보세요. 얼마나 행복할까요? 저기, 정겹게 손을 잡고 걸어가는 연인들의 모습도 보이네요. 그들의 사랑처럼, 이곳 SEOUL Premium Landmark 48은 언제나 따뜻하고 아름다운 추억을 선물해 줄 거예요. 잠시 발걸음을 멈추고, 주변을 둘러보세요. 오래된 돌담길 옆으로 흐드러지게 핀 꽃들, 그리고 그 위를 자유롭게 날아다니는 나비들… 모든 것이 완벽하게 조화를 이루고 있죠. 지금 여러분이 서 있는 이곳이 바로 서울의 아름다움을 가장 잘 보여주는 곳, SEOUL Premium Landmark 48입니다. 자, 이제 함께 이 특별한 공간을 더욱 깊이 탐험해 볼까요?",
-    "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-    "category": "Landmark",
-    "detailedDescription": "SEOUL Premium Landmark 48은 서울의 역사와 아름다움을 동시에 느낄 수 있는 특별한 장소입니다. 조선 시대 왕족의 별궁 터에 자리 잡고 있어, 곳곳에서 역사의 흔적을 발견할 수 있죠. 하지만 이곳의 매력은 역사적인 가치에만 머무르지 않습니다. Landmark 48 주변은 아름다운 정원과 현대적인 조형물, 그리고 서울 시내를 한눈에 조망할 수 있는 전망대가 어우러져 있어, 방문객들에게 다채로운 경험을 선사합니다. 특히, 저녁 노을이 질 때 Landmark 48에서 바라보는 서울의 야경은 그 어떤 풍경보다 아름답다고 현지인들은 입을 모아 말합니다. Landmark 48을 방문할 때는 편안한 신발을 신고 오시는 것을 추천합니다. 넓은 정원을 거닐며 숨겨진 명소를 찾아보는 재미가 쏠쏠하거든요. 그리고 Landmark 48 내부에 위치한 전통찻집에서 향긋한 차 한 잔을 즐기며 여유로운 시간을 보내는 것도 잊지 마세요. Landmark 48 근처에는 맛집과 카페가 즐비하니, Landmark 48 탐방 후 맛있는 식사를 하거나 분위기 좋은 카페에서 휴식을 취하는 것도 좋은 선택입니다. 가족 여행객이라면 Landmark 48에서 서울의 역사와 문화를 배우고, 아름다운 자연 속에서 힐링하는 특별한 시간을 보내실 수 있을 겁니다.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Landmark 48",
-        "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-        "narration": "SEOUL Premium Landmark 48 명소 가이드! 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:04.803Z"),
-    "updatedAt": new Date("2026-02-22T18:29:11.347Z")
-  },
-  {
     "id": "paris_item_22",
     "cityId": "paris",
     "name": "파리 프리미엄 Activity 추천 23",
@@ -11909,44 +11606,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": new Date("2026-02-12T12:11:24.081Z"),
     "updatedAt": new Date("2026-02-22T18:21:58.411Z")
-  },
-  {
-    "id": "seoul_item_8",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Landmark 8",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 여러분은 지금 서울의 심장, 그 특별한 랜드마크 8에 서 있습니다. 발 아래로는 수백 년의 역사가 흐르고, 눈 앞에는 찬란한 현재가 펼쳐지는 곳이죠. 바람결에 실려 오는 도시의 속삭임은 마치 오래된 친구의 이야기 같습니다. 느껴지시나요? \n\n랜드마크 8은 단순한 관광지가 아니에요. 이곳은 서울의 숨결, 서울 사람들의 삶이 녹아있는 살아있는 공간입니다. 햇살이 따스하게 쏟아지는 오후, 가족들은 웃음꽃을 피우며 거닐고, 연인들은 서로의 어깨에 기대앉아 속삭입니다. 상상해보세요. 여러분도 그 행복한 풍경의 일부가 되는 거예요. \n\n저 멀리 보이는 웅장한 건물들은 과거와 현재를 잇는 다리 같아요. 그 건축물 하나하나에는 수많은 이야기와 전설이 깃들어 있습니다. 밤이 되면 랜드마크 8은 또 다른 모습으로 변신합니다. 화려한 조명이 켜지고, 도시의 야경이 한눈에 들어오는 순간, 여러분은 마치 영화 속 주인공이 된 듯한 기분을 느끼게 될 거예요. \n\n자, 이제 천천히 눈을 떠보세요. 그리고 랜드마크 8의 모든 것을 마음껏 느껴보세요. 이곳은 단순한 여행지가 아닌, 여러분의 기억 속에 영원히 남을 특별한 장소가 될 겁니다. 랜드마크 8에서 여러분만의 이야기를 만들어보세요!",
-    "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-    "category": "Landmark",
-    "detailedDescription": "서울 프리미엄 랜드마크 8은 단순히 '좋은 곳'을 넘어, 특별한 경험을 선사하는 곳입니다. 아름다운 풍경은 기본이고, 다채로운 전시와 체험 공간은 여러분의 오감을 만족시킬 겁니다. 가족 여행객에게 특히 추천하지만, 혼자만의 시간을 즐기기에도 더할 나위 없이 좋은 장소죠. 랜드마크 8에는 숨겨진 비화가 하나 있습니다. 원래 이 자리에는 조선 시대 왕족의 별궁이 있었다고 해요. 일제강점기를 거치면서 그 흔적은 사라졌지만, 땅 속 깊은 곳에는 여전히 그 기운이 남아있다는 이야기가 전해집니다. 현지인들은 밤에 이곳을 방문하면 궁궐의 흔적을 느낄 수 있다고 믿고 있죠. 꿀팁 하나 더! 랜드마크 8 주변에는 맛집과 카페가 즐비합니다. 특히, 랜드마크 8에서 도보 5분 거리에 있는 '미슐랭 가이드' 선정 맛집은 꼭 방문해보세요. 후회하지 않으실 겁니다.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Landmark 8",
-        "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-        "narration": "SEOUL Premium Landmark 8 명소 가이드! 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:02.040Z"),
-    "updatedAt": new Date("2026-02-22T18:11:59.025Z")
   },
   {
     "id": "piazza-navona-crafts-rome",
@@ -16968,44 +16627,6 @@ export const LANDMARKS: Landmark[] = [
     "updatedAt": new Date("2026-02-22T18:06:00.750Z")
   },
   {
-    "id": "seoul_item_38",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Activity 38",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 서울의 숨겨진 보석, SEOUL Premium Activity 38에 도착한 여러분을요. 발 아래 느껴지는 부드러운 흙길, 코끝을 간지럽히는 은은한 풀 내음, 그리고 저 멀리서 들려오는 새들의 노랫소리까지… 마치 시간이 멈춘 듯한 평화로운 풍경이 여러분을 감싸 안을 거예요. 이곳은 단순한 관광지가 아니에요. 서울의 역사와 전통, 예술과 액티비티가 조화롭게 어우러진 특별한 공간이죠. \n\n지금 여러분의 발길이 닿는 곳은 수백 년의 역사를 간직한 고즈넉한 정원이에요. 돌담길을 따라 천천히 걸으며 옛 선조들의 숨결을 느껴보세요. 정원 한켠에는 아름다운 연못이 자리하고 있는데, 연못 위에 떠 있는 정자는 마치 한 폭의 그림 같아요. 잠시 정자에 앉아 물소리를 들으며 마음의 평화를 찾아보는 건 어때요? \n\n정원을 지나면 현대적인 감각이 돋보이는 예술 공간이 나타날 거예요. 이곳에서는 다양한 전시와 공연이 펼쳐지는데, 서울의 젊은 예술가들의 열정과 창의성을 느낄 수 있죠. 전시 작품들을 감상하며 예술적인 영감을 얻어보는 것도 좋을 거예요. \n\nSEOUL Premium Activity 38에서는 액티비티도 즐길 수 있어요. 활쏘기 체험장에서 과녁을 향해 활을 쏘며 스트레스를 날려버리거나, 전통 공예 체험장에서 나만의 기념품을 만들어보는 건 어때요? 분명 잊지 못할 추억이 될 거예요. \n\n저녁이 되면 SEOUL Premium Activity 38은 더욱 아름다운 모습으로 변신해요. 정원에 은은한 조명이 켜지고, 밤하늘에는 별들이 쏟아질 듯 반짝이죠. 사랑하는 사람과 함께 밤하늘을 바라보며 낭만적인 시간을 보내는 것도 좋을 거예요. 자, 이제 눈을 떠보세요. SEOUL Premium Activity 38에서 여러분만의 특별한 이야기를 만들어갈 준비가 되셨나요?",
-    "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-    "category": "Activity",
-    "detailedDescription": "SEOUL Premium Activity 38은 서울 도심 속에서 자연과 문화를 만끽할 수 있는 특별한 공간입니다. 조선시대 양반가의 별장이었던 이곳은, 일제강점기와 한국전쟁을 거치면서 폐허가 되었지만, 최근 몇 년간의 복원 작업을 통해 아름다운 모습으로 재탄생했습니다. 이곳의 숨겨진 비화 하나를 알려드릴까요? 복원 과정에서 옛 별장의 주인이 숨겨놓았던 보물 상자가 발견되었다고 해요! 물론 지금은 박물관에 전시되어 있지만요. \n\nSEOUL Premium Activity 38은 단순히 눈으로 보는 관광지를 넘어, 다양한 체험을 통해 오감을 만족시키는 곳입니다. 전통 활쏘기 체험은 외국인 관광객들에게 특히 인기가 높으며, 직접 만든 도자기에 그림을 그려 넣는 공예 체험은 가족 단위 방문객들에게 좋은 추억을 선사합니다. 현지인들 사이에서는 '숨겨진 데이트 명소'로도 유명한데요, 특히 가을 단풍 시즌에는 연인들의 발길이 끊이지 않는다고 합니다. SEOUL Premium Activity 38 방문 꿀팁 하나! 주말에는 방문객이 많으니, 평일에 방문하거나 온라인으로 사전 예약을 하는 것이 좋습니다. 또한, 한국어, 영어, 중국어 해설 서비스가 제공되니, 외국인 관광객들도 불편함 없이 즐길 수 있습니다. SEOUL Premium Activity 38에서 서울의 숨겨진 매력을 발견해보세요!",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Activity 38",
-        "description": "이곳은 seoul에서 가장 추천하는 Activity 명소입니다.",
-        "narration": "SEOUL Premium Activity 38 명소 가이드! 절대로 놓치지 마세요(DON'T MISS)! 심장을 뛰게 할 짜릿한 액티비티와 인생샷을 위한 최고의 스팟이 바로 여기 있습니다. 지금 이 순간, 당신만의 특별한 체험을 시작해보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:04.124Z"),
-    "updatedAt": new Date("2026-02-22T18:23:35.598Z")
-  },
-  {
     "id": "paris_restaurant_le_comptoir",
     "cityId": "paris",
     "name": "Le Comptoir du Relais",
@@ -17994,44 +17615,6 @@ export const LANDMARKS: Landmark[] = [
     "price": null,
     "createdAt": new Date("2026-02-12T13:05:07.382Z"),
     "updatedAt": new Date("2026-02-22T18:06:03.061Z")
-  },
-  {
-    "id": "seoul_item_88",
-    "cityId": "seoul",
-    "name": "SEOUL Premium Landmark 88",
-    "lat": 0,
-    "lng": 0,
-    "radius": 50,
-    "narration": "자, 눈을 감고 상상해보세요. 여러분은 지금, 서울의 심장부에 우뚝 솟은 SEOUL Premium Landmark 88 앞에 서 있습니다. 귓가에는 도시의 활기찬 소리가 속삭이고, 코 끝에는 맛있는 음식 냄새가 살짝 스치는 듯하죠? 발 아래를 보세요. 수많은 사람들의 발자취가 쌓여 만들어진 이 길은, 서울의 역사와 현재, 그리고 미래를 잇는 통로와 같아요. Landmark 88은 단순한 건물이 아니랍니다. 서울 시민들의 자부심이자, 꿈을 향해 나아가는 에너지의 상징이죠. 햇살이 Landmark 88의 유리 외벽에 부딪혀 눈부시게 쏟아지는 모습은 정말 장관이에요. 마치 하늘에서 내려온 빛줄기가 서울을 축복하는 듯한 느낌이랄까요? Landmark 88 안으로 들어가 볼까요? 와, 웅장한 로비에 들어서는 순간, 탄성이 절로 나오네요! 세련된 인테리어와 은은하게 흐르는 음악은 여러분을 편안하게 감싸 안아줄 거예요. 고개를 들어 천장을 올려다보세요. 마치 우주를 담아놓은 듯한 아름다운 조명이 여러분의 시선을 사로잡을 겁니다. Landmark 88에는 다양한 전시 공간과 체험 시설이 마련되어 있어요. 아이들과 함께라면 신나는 시간을 보낼 수 있고, 연인과 함께라면 잊지 못할 추억을 만들 수 있죠. 자, 이제 엘리베이터를 타고 Landmark 88의 최상층으로 올라가 볼까요? 드디어 도착! 문이 열리는 순간, 여러분은 숨 막힐 듯 아름다운 서울의 파노라마 뷰에 넋을 잃게 될 겁니다. 한강을 따라 굽이치는 도시의 불빛, 저 멀리 보이는 북한산의 웅장한 자태… 이 모든 풍경이 여러분의 눈 앞에 펼쳐지는 거죠. Landmark 88은 단순한 전망대가 아니에요. 서울의 과거와 현재, 미래를 연결하는 타임머신이자, 여러분의 꿈을 응원하는 희망의 메시지랍니다. 오늘, Landmark 88에서 특별한 경험을 만끽하고, 서울의 아름다움을 가슴 속에 담아 가세요!",
-    "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-    "category": "Landmark",
-    "detailedDescription": "SEOUL Premium Landmark 88은 서울의 대표적인 랜드마크로, 단순한 고층 건물을 넘어 서울 시민들의 자부심과 꿈을 상징하는 공간입니다. 이곳은 과거부터 현재까지 서울의 역사와 문화를 담고 있으며, 현대적인 건축 기술과 디자인으로 도시의 스카이라인을 아름답게 장식하고 있습니다. Landmark 88은 원래 **[숨겨진 비화: 과거에는 이 자리에 작은 정원이 있었는데, 시민들의 휴식처였답니다. 하지만 도시 개발 계획에 따라 Landmark 88이 건설되면서 정원은 사라지고, 그 자리에 새로운 랜드마크가 들어서게 되었죠. 하지만 Landmark 88은 정원의 의미를 기억하며, 시민들에게 새로운 휴식 공간과 문화 체험 기회를 제공하고 있습니다.]** 서울의 경제 성장을 상징하는 건물로 계획되었으며, 건설 당시 최첨단 기술이 집약된 건축물로 주목받았습니다. 내부에는 다양한 전시 공간, 레스토랑, 쇼핑 시설 등이 입점해 있어 방문객들에게 다채로운 경험을 제공합니다. 특히 최상층에 위치한 전망대에서는 서울 시내 전경을 한눈에 조망할 수 있어 많은 관광객들이 찾고 있습니다. **[현지인 꿀팁: Landmark 88 전망대는 낮에도 아름답지만, 해 질 녘 노을이 질 때 방문하면 더욱 환상적인 풍경을 감상할 수 있습니다. 또한, 주말에는 다양한 문화 행사와 공연이 열리니, 방문 전에 일정을 확인해 보세요!]** Landmark 88은 서울의 과거와 현재, 미래를 잇는 중요한 연결고리이며, 서울을 방문하는 모든 이들에게 잊지 못할 추억을 선사하는 특별한 장소입니다.",
-    "photos": [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/960px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg"
-    ],
-    "historicalInfo": "유서 깊은 역사를 자랑합니다.",
-    "yearBuilt": null,
-    "architect": null,
-    "translations": {
-      "ko": {
-        "name": "SEOUL Premium Landmark 88",
-        "description": "이곳은 seoul에서 가장 추천하는 Landmark 명소입니다.",
-        "narration": "SEOUL Premium Landmark 88 명소 가이드! 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 유구한 세월을 머금은 이곳에는 우리가 미처 알지 못했던 놀라운 비하인드 스토리와 역사가 숨겨져 있습니다. 과거의 영광과 현재의 활기가 교차하는 이곳의 역사적 깊이를 직접 느껴보세요. 상세한 역사와 팁을 만나보세요."
-      }
-    },
-    "openingHours": null,
-    "priceRange": null,
-    "cuisine": null,
-    "reservationUrl": null,
-    "phoneNumber": null,
-    "menuHighlights": null,
-    "restaurantPhotos": null,
-    "paymentMethods": null,
-    "searchKeywords": ["명소", "관광지", "필수코스", "인생샷"],
-    "isPremium": false,
-    "price": null,
-    "createdAt": new Date("2026-02-12T13:05:07.513Z"),
-    "updatedAt": new Date("2026-02-22T18:26:14.497Z")
   },
   {
     "id": "paris_item_92",

@@ -605,8 +605,14 @@ export function UnifiedFloatingCard({
         bottom: 24 - dragOffset.y,
         cursor: isDraggingCard ? 'grabbing' : 'grab',
         display: !isCardVisible ? 'none' : 'flex',
+        // [Bug Doctor 수정] 'calc(100%-60px)' → 공백 필수 → 'calc(100% - 60px)'
+        // 학생들에게: Tailwind JIT에서 calc() 안 공백이 없으면 브라우저가 무효로 처리!
+        transform: isCardMinimized
+          ? 'translateY(calc(100% - 60px))'
+          : `translateY(${-dragOffset.y}px)`,
+        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
-      className={`fixed left-0 right-0 bottom-0 z-[100] ${selectedLandmark ? 'w-full' : 'w-full'} max-h-[85vh] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-t-3xl overflow-hidden transition-all duration-500 ${isCardMinimized ? 'translate-y-[calc(100%-60px)]' : 'translate-y-0'}`}
+      className={`fixed left-0 right-0 bottom-0 z-[100] w-full max-h-[85vh] flex flex-col glass-premium aurora-border-premium shadow-2xl rounded-t-3xl overflow-hidden`}
     >
       {/* [Avengers Team] GLOBAL CONTROL TOWER (Merged from Top Bar) */}
       {activeLayout !== 'classic' && (
