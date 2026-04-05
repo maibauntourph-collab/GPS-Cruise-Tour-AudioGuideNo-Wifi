@@ -894,7 +894,8 @@ export function registerRoutes(app: Hono<any>) {
   // ─── 인증 없이 접근 가능한 Admin GET 라우트 (adminCallback 보다 먼저 등록) ───
   app.get("/api/admin/cities", async (c) => {
     try {
-      const result = await db.select().from(cities).orderBy(cities.name);
+      // storage.getCities() = static data (26 cities), DB cities table may be empty
+      const result = await storage.getCities();
       return c.json(result);
     } catch (e) { return c.json([]); }
   });

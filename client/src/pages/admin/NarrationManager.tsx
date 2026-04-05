@@ -3,15 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import AdminLayout from "./AdminLayout";
 
 const LANGS = ["EN", "KO", "JA", "ZH"];
-
-const DUMMY_LANDMARKS = [
-  { id:1, city:"Rome", name:"Colosseum", category:"landmark", narrationStatus:{EN:true,KO:true,JA:false,ZH:false}, hasAudio:true },
-  { id:2, city:"Rome", name:"Ristorante Aroma", category:"restaurant", narrationStatus:{EN:true,KO:false,JA:false,ZH:false}, hasAudio:false },
-  { id:3, city:"Rome", name:"Gladiator Tour", category:"activity", narrationStatus:{EN:true,KO:false,JA:false,ZH:false}, hasAudio:false },
-  { id:4, city:"Venice", name:"St. Mark's Basilica", category:"landmark", narrationStatus:{EN:true,KO:true,JA:true,ZH:false}, hasAudio:true },
-  { id:5, city:"Paris", name:"Eiffel Tower", category:"landmark", narrationStatus:{EN:true,KO:true,JA:false,ZH:false}, hasAudio:true },
-  { id:6, city:"Tokyo", name:"Senso-ji Temple", category:"landmark", narrationStatus:{EN:false,KO:false,JA:false,ZH:false}, hasAudio:false },
-];
+const safeArr = (v: any) => Array.isArray(v) ? v : [];
 
 export default function NarrationManager() {
   const [selected, setSelected] = useState<any>(null);
@@ -20,6 +12,11 @@ export default function NarrationManager() {
   const [genDone, setGenDone] = useState(false);
   const [toast, setToast] = useState("");
 
+  const { data: landmarks = [] } = useQuery({
+    queryKey: ["/api/admin/landmarks"],
+    queryFn: () => fetch("/api/admin/landmarks").then(r => r.ok ? r.json() : []).then(safeArr).catch(() => []),
+  });
+
   const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(""), 2500); };
 
   const handleGenerate = () => {
@@ -27,9 +24,19 @@ export default function NarrationManager() {
     setTimeout(() => { setGenerating(false); setGenDone(true); showToast("🤖 AI 나레이션 생성 완료!"); }, 1800);
   };
 
+  // 나레이션 완료 여부: narrationEn, narrationKo 등 필드 확인
+  const hasNarration = (lm: any, lang: string) => {
+    const key = `narration${lang.charAt(0).toUpperCase()}${lang.slice(1).toLowerCase()}`;
+    return !!(lm[key] || lm.narration);
+  };
+  const hasAudio = (lm: any) => !!(lm.landmarkAudio?.length > 0 || lm.audioUrl);
+
   const statusBadge = (ok: boolean) => ok
     ? <span className="text-emerald-400">✅</span>
     : <span className="text-red-400">❌</span>;
+
+  const completed = landmarks.filter((l: any) => hasNarration(l, "en")).length;
+  const incomplete = landmarks.length - completed;
 
   return (
     <AdminLayout>
@@ -41,7 +48,12 @@ export default function NarrationManager() {
 
         {/* Stats */}
         <div className="grid grid-cols-4 gap-3 mb-5">
-          {[{l:"전체",v:248,c:"text-indigo-400"},{l:"완료",v:89,c:"text-emerald-400"},{l:"미완료",v:159,c:"text-red-400"},{l:"번역 필요",v:12,c:"text-amber-400"}].map(s=>(
+          {[
+            { l:"전체", v:landmarks.length, c:"text-indigo-400" },
+            { l:"완료", v:completed, c:"text-emerald-400" },
+            { l:"미완료", v:incomplete, c:"text-red-400" },
+            { l:"번역 필요", v:Math.max(0, completed - landmarks.filter((l:any)=>hasNarration(l,"ko")).length), c:"text-amber-400" },
+          ].map(s=>(
             <div key={s.l} className="bg-[#1a1d2e] border border-[#2d3148] rounded-xl p-3 text-center">
               <div className={`text-2xl font-bold ${s.c}`}>{s.v}</div>
               <div className="text-xs text-slate-500">{s.l}</div>
@@ -53,32 +65,36 @@ export default function NarrationManager() {
           {/* 목록 */}
           <div className="bg-[#1a1d2e] border border-[#2d3148] rounded-xl p-4">
             <div className="flex justify-between items-center mb-3">
-              <div className="text-sm font-semibold">장소 목록</div>
+              <div className="text-sm font-semibold">장소 목록 ({landmarks.length})</div>
               <button className="text-xs bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1.5 rounded-lg">🤖 미완료 일괄 생성</button>
             </div>
-            <table className="w-full text-xs border-collapse">
-              <thead>
-                <tr className="text-slate-500 border-b border-[#2d3148]">
-                  <th className="text-left py-2">장소</th>
-                  <th className="text-center">EN</th><th className="text-center">KO</th><th className="text-center">오디오</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {DUMMY_LANDMARKS.map(l => (
-                  <tr key={l.id} className="border-b border-[#1a1d2e] cursor-pointer hover:bg-white/[0.02]" onClick={() => { setSelected(l); setGenDone(false); }}>
-                    <td className="py-2">
-                      <div className="font-medium">{l.name}</div>
-                      <div className="text-slate-500 text-[10px]">{l.city}</div>
-                    </td>
-                    <td className="text-center">{statusBadge(l.narrationStatus.EN)}</td>
-                    <td className="text-center">{statusBadge(l.narrationStatus.KO)}</td>
-                    <td className="text-center">{l.hasAudio ? "✅" : "❌"}</td>
-                    <td><button className="text-[10px] border border-[#2d3148] rounded px-2 py-1 text-slate-400">편집</button></td>
+            <div className="overflow-auto max-h-[500px]">
+              <table className="w-full text-xs border-collapse">
+                <thead className="sticky top-0 bg-[#1a1d2e]">
+                  <tr className="text-slate-500 border-b border-[#2d3148]">
+                    <th className="text-left py-2">장소</th>
+                    <th className="text-center">EN</th>
+                    <th className="text-center">KO</th>
+                    <th className="text-center">오디오</th>
+                    <th></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {(landmarks as any[]).map(l => (
+                    <tr key={l.id} className="border-b border-[#1a1d2e] cursor-pointer hover:bg-white/[0.02]" onClick={() => { setSelected(l); setGenDone(false); }}>
+                      <td className="py-2">
+                        <div className="font-medium">{l.name}</div>
+                        <div className="text-slate-500 text-[10px]">{l.cityId || l.city}</div>
+                      </td>
+                      <td className="text-center">{statusBadge(hasNarration(l, "en"))}</td>
+                      <td className="text-center">{statusBadge(hasNarration(l, "ko"))}</td>
+                      <td className="text-center">{hasAudio(l) ? "✅" : "❌"}</td>
+                      <td><button className="text-[10px] border border-[#2d3148] rounded px-2 py-1 text-slate-400">편집</button></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* 편집 */}
@@ -93,7 +109,7 @@ export default function NarrationManager() {
                 <div className="flex justify-between mb-3">
                   <div>
                     <div className="text-sm font-semibold">{selected.name}</div>
-                    <div className="text-xs text-slate-500">{selected.city}</div>
+                    <div className="text-xs text-slate-500">{selected.cityId || selected.city}</div>
                   </div>
                   <button className="text-xs border border-[#2d3148] rounded px-2 py-1 text-slate-400" onClick={() => setSelected(null)}>✕</button>
                 </div>
@@ -111,13 +127,17 @@ export default function NarrationManager() {
                 <div className="mb-3">
                   <div className="text-xs text-slate-400 mb-1">📝 나레이션 텍스트 (TTS용)</div>
                   <textarea className="w-full bg-[#0f1117] border border-[#2d3148] rounded-lg p-2.5 text-xs text-[#e2e8f0] outline-none focus:border-indigo-500 resize-none h-24"
-                    defaultValue={langTab === "EN" ? `Welcome to ${selected.name}. This remarkable landmark...` : langTab === "KO" ? `${selected.name}에 오신 것을 환영합니다...` : ""}
+                    defaultValue={
+                      langTab === "EN" ? (selected.narration || selected.descriptionEn || `Welcome to ${selected.name}.`) :
+                      langTab === "KO" ? (selected.narrationKo || selected.descriptionKo || `${selected.name}에 오신 것을 환영합니다.`) : ""
+                    }
                     placeholder={`${langTab} 나레이션 없음 — AI로 생성하세요`} />
                 </div>
 
                 <div className="mb-3">
                   <div className="text-xs text-slate-400 mb-1">📄 짧은 설명 (앱 카드용)</div>
                   <input className="w-full bg-[#0f1117] border border-[#2d3148] rounded-lg px-3 py-2 text-xs text-[#e2e8f0] outline-none focus:border-indigo-500"
+                    defaultValue={selected.shortDescription || selected.description?.slice(0, 80) || ""}
                     placeholder="80자 이내 짧은 설명" />
                 </div>
 
