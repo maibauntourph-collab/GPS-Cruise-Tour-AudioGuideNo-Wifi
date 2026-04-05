@@ -18,16 +18,15 @@ const TourLeaderView = lazy(() => import("@/pages/TourLeaderView"));
 const MyRoutes = lazy(() => import("./pages/MyRoutes"));
 const ProductList = lazy(() => import("./pages/ProductList"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
-import DesignPreview from "@/pages/DesignPreview";
-import AdminDashboard from "@/pages/admin/AdminDashboard";
-import PhotoManager from "@/pages/admin/PhotoManager";
-import NarrationManager from "@/pages/admin/NarrationManager";
-import PlacesManager from "@/pages/admin/PlacesManager";
-import AIKeyManager from "@/pages/admin/AIKeyManager";
-import WorkflowView from "@/pages/admin/WorkflowView";
-
-import Likes from "@/pages/Likes";
-import Follows from "@/pages/Follows";
+const DesignPreview = lazy(() => import("@/pages/DesignPreview"));
+const AdminDashboard = lazy(() => import("@/pages/admin/AdminDashboard"));
+const PhotoManager = lazy(() => import("@/pages/admin/PhotoManager"));
+const NarrationManager = lazy(() => import("@/pages/admin/NarrationManager"));
+const PlacesManager = lazy(() => import("@/pages/admin/PlacesManager"));
+const AIKeyManager = lazy(() => import("@/pages/admin/AIKeyManager"));
+const WorkflowView = lazy(() => import("@/pages/admin/WorkflowView"));
+const Likes = lazy(() => import("@/pages/Likes"));
+const Follows = lazy(() => import("@/pages/Follows"));
 
 // Loading fallback component
 function PageLoader() {

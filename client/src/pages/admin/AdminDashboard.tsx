@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import AdminLayout from "./AdminLayout";
 
 export default function AdminDashboard() {
-  const { data: cities = [] } = useQuery({ queryKey: ["/api/admin/cities"], queryFn: () => fetch("/api/admin/cities").then(r => r.json()).catch(() => []) });
-  const { data: landmarks = [] } = useQuery({ queryKey: ["/api/admin/landmarks"], queryFn: () => fetch("/api/admin/landmarks").then(r => r.json()).catch(() => []) });
-  const { data: aiAccounts = [] } = useQuery({ queryKey: ["/api/admin/ai-accounts"], queryFn: () => fetch("/api/admin/ai-accounts").then(r => r.json()).catch(() => []) });
-  const { data: recommends = [] } = useQuery({ queryKey: ["/api/admin/recommend-places"], queryFn: () => fetch("/api/admin/recommend-places").then(r => r.json()).catch(() => []) });
+  const safeArr = (v: any) => (Array.isArray(v) ? v : []);
+  const { data: cities = [] } = useQuery({ queryKey: ["/api/admin/cities"], queryFn: () => fetch("/api/admin/cities").then(r => r.json()).then(safeArr).catch(() => []) });
+  const { data: landmarks = [] } = useQuery({ queryKey: ["/api/admin/landmarks"], queryFn: () => fetch("/api/admin/landmarks").then(r => r.json()).then(safeArr).catch(() => []) });
+  const { data: aiAccounts = [] } = useQuery({ queryKey: ["/api/admin/ai-accounts"], queryFn: () => fetch("/api/admin/ai-accounts").then(r => r.json()).then(safeArr).catch(() => []) });
+  const { data: recommends = [] } = useQuery({ queryKey: ["/api/admin/recommend-places"], queryFn: () => fetch("/api/admin/recommend-places").then(r => r.json()).then(safeArr).catch(() => []) });
 
   const pendingRecommends = recommends.filter((r: any) => r.status === "pending").length;
   const audioCount = landmarks.filter((l: any) => l.landmarkAudio?.length > 0).length;

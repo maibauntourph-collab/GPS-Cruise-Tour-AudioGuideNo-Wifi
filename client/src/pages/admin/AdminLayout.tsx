@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useLocation, Redirect } from "wouter";
 
 const navItems = [
   { id: "dashboard", icon: "🏠", label: "대시보드", path: "/admin/dashboard" },
@@ -12,6 +11,11 @@ const navItems = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
+
+  // /admin 진입 시 대시보드로 리다이렉트
+  if (location === "/admin" || location === "/admin/") {
+    return <Redirect to="/admin/dashboard" />;
+  }
 
   return (
     <div className="flex min-h-screen bg-[#0f1117] text-[#e2e8f0]">
