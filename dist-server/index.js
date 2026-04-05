@@ -11,6 +11,7 @@ var __export = (target, all) => {
 // shared/schema.ts
 var schema_exports = {};
 __export(schema_exports, {
+  aiAccounts: () => aiAccounts,
   appSettings: () => appSettings,
   appointments: () => appointments,
   cities: () => cities,
@@ -27,6 +28,7 @@ __export(schema_exports, {
   followsRelations: () => followsRelations,
   gpsPositionSchema: () => gpsPositionSchema,
   groupMembers: () => groupMembers,
+  insertAiAccountSchema: () => insertAiAccountSchema,
   insertCitySchema: () => insertCitySchema,
   insertCommissionSchema: () => insertCommissionSchema,
   insertCreatorEarningsSchema: () => insertCreatorEarningsSchema,
@@ -37,6 +39,7 @@ __export(schema_exports, {
   insertLandmarkSchema: () => insertLandmarkSchema,
   insertLikeSchema: () => insertLikeSchema,
   insertMarketingContentSchema: () => insertMarketingContentSchema,
+  insertRecommendPlaceSchema: () => insertRecommendPlaceSchema,
   insertRoutePhotoSchema: () => insertRoutePhotoSchema,
   insertSavedRouteSchema: () => insertSavedRouteSchema,
   insertSettlementSchema: () => insertSettlementSchema,
@@ -61,6 +64,7 @@ __export(schema_exports, {
   likesRelations: () => likesRelations,
   marketingContents: () => marketingContents,
   marketingContentsRelations: () => marketingContentsRelations,
+  recommendPlaces: () => recommendPlaces,
   routePhotos: () => routePhotos,
   routePhotosRelations: () => routePhotosRelations,
   routeStopSchema: () => routeStopSchema,
@@ -88,7 +92,7 @@ import { z } from "zod";
 import { pgTable, varchar, timestamp, boolean, doublePrecision, integer, text, json, unique, serial } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
-var transportOptionSchema, cruisePortSchema, citySchema, languageSchema, translationContentSchema, translationsSchema, landmarkSchema, gpsPositionSchema, waypointSchema, follows, likes, cities, landmarks, citiesBackup, landmarksBackup, landmarkGuides, dataVersions, visitedLandmarks, landmarkAudio, users, userIdentities, tourSchedules, citiesRelations, landmarksRelations, visitedLandmarksRelations, usersRelations, userIdentitiesRelations, landmarkAudioRelations, groupMembers, savedRoutes, routePhotos, creatorEarnings, transactions, settlements, marketingContents, commissions, updateStats, leads, appointments, insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, insertLandmarkAudioSchema, insertTourScheduleSchema, siteSettings, insertSiteSettingSchema, insertGroupMemberSchema, insertUserSchema, insertUserIdentitySchema, insertSavedRouteSchema, insertRoutePhotoSchema, insertCreatorEarningsSchema, insertTransactionSchema, insertSettlementSchema, insertMarketingContentSchema, insertLandmarkGuideSchema, insertUpdateStatsSchema, insertCommissionSchema, creatorEarningsRelations, transactionsRelations, settlementsRelations, marketingContentsRelations, landmarkGuidesRelations, commissionsRelations, savedRoutesRelations, routePhotosRelations, routeStopSchema, insertLikeSchema, insertFollowSchema, likesRelations, followsRelations, appSettings, spots;
+var transportOptionSchema, cruisePortSchema, citySchema, languageSchema, translationContentSchema, translationsSchema, landmarkSchema, gpsPositionSchema, waypointSchema, follows, likes, cities, landmarks, citiesBackup, landmarksBackup, landmarkGuides, dataVersions, visitedLandmarks, landmarkAudio, users, userIdentities, tourSchedules, citiesRelations, landmarksRelations, visitedLandmarksRelations, usersRelations, userIdentitiesRelations, landmarkAudioRelations, groupMembers, savedRoutes, routePhotos, creatorEarnings, transactions, settlements, marketingContents, commissions, updateStats, leads, appointments, insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, insertLandmarkAudioSchema, insertTourScheduleSchema, siteSettings, insertSiteSettingSchema, insertGroupMemberSchema, insertUserSchema, insertUserIdentitySchema, insertSavedRouteSchema, insertRoutePhotoSchema, insertCreatorEarningsSchema, insertTransactionSchema, insertSettlementSchema, insertMarketingContentSchema, insertLandmarkGuideSchema, insertUpdateStatsSchema, insertCommissionSchema, creatorEarningsRelations, transactionsRelations, settlementsRelations, marketingContentsRelations, landmarkGuidesRelations, commissionsRelations, savedRoutesRelations, routePhotosRelations, routeStopSchema, insertLikeSchema, insertFollowSchema, likesRelations, followsRelations, appSettings, spots, aiAccounts, insertAiAccountSchema, recommendPlaces, insertRecommendPlaceSchema;
 var init_schema = __esm({
   "shared/schema.ts"() {
     "use strict";
@@ -838,6 +842,50 @@ var init_schema = __esm({
       id: varchar("id").primaryKey(),
       name: varchar("name")
     });
+    aiAccounts = pgTable("ai_accounts", {
+      id: serial("id").primaryKey(),
+      engineName: varchar("engine_name", { length: 50 }).notNull(),
+      // claude/gemini/chatgpt/custom
+      displayName: varchar("display_name", { length: 100 }),
+      emailMemo: varchar("email_memo", { length: 255 }),
+      apiKey: text("api_key").notNull(),
+      // AES-256 암호화
+      apiBaseUrl: text("api_base_url"),
+      // 커스텀 AI용
+      modelName: varchar("model_name", { length: 100 }),
+      status: varchar("status", { length: 20 }).default("standby"),
+      // active/standby/disabled
+      switchMode: varchar("switch_mode", { length: 20 }).default("manual"),
+      // manual/auto/round_robin
+      sortOrder: integer("sort_order").default(1),
+      usageCount: integer("usage_count").default(0),
+      usageLimit: integer("usage_limit").default(1e4),
+      lastUsedAt: timestamp("last_used_at"),
+      createdAt: timestamp("created_at").defaultNow()
+    });
+    insertAiAccountSchema = createInsertSchema(aiAccounts);
+    recommendPlaces = pgTable("recommend_places", {
+      id: serial("id").primaryKey(),
+      sourceId: integer("source_id").notNull(),
+      // landmarks.id 또는 cities.id
+      sourceType: varchar("source_type", { length: 20 }).notNull(),
+      // 'city' | 'landmark'
+      placeName: varchar("place_name", { length: 255 }).notNull(),
+      placeNameKo: varchar("place_name_ko", { length: 255 }),
+      category: varchar("category", { length: 50 }).notNull(),
+      // landmark/restaurant/activity/giftshop
+      description: text("description"),
+      descriptionKo: text("description_ko"),
+      distanceText: varchar("distance_text", { length: 100 }),
+      gpsLat: doublePrecision("gps_lat"),
+      gpsLng: doublePrecision("gps_lng"),
+      aiAccountId: integer("ai_account_id").references(() => aiAccounts.id),
+      status: varchar("status", { length: 20 }).default("pending"),
+      // pending/approved/rejected
+      createdAt: timestamp("created_at").defaultNow(),
+      approvedAt: timestamp("approved_at")
+    });
+    insertRecommendPlaceSchema = createInsertSchema(recommendPlaces);
   }
 });
 
@@ -26221,6 +26269,99 @@ function registerRoutes(app2) {
     } catch (error) {
       console.error("CRM Automation error:", error);
       return c.json({ error: "Failed to sync lead with AI" }, 500);
+    }
+  });
+  app2.get("/api/admin/cities", async (c) => {
+    try {
+      const result = await db.select().from(cities).orderBy(cities.name);
+      return c.json(result);
+    } catch (e) {
+      return c.json({ error: "DB error" }, 500);
+    }
+  });
+  app2.get("/api/admin/landmarks", async (c) => {
+    try {
+      const result = await db.select().from(landmarks).orderBy(landmarks.name);
+      return c.json(result);
+    } catch (e) {
+      return c.json({ error: "DB error" }, 500);
+    }
+  });
+  app2.get("/api/admin/ai-accounts", async (c) => {
+    try {
+      const result = await db.select({
+        id: aiAccounts.id,
+        engineName: aiAccounts.engineName,
+        displayName: aiAccounts.displayName,
+        emailMemo: aiAccounts.emailMemo,
+        modelName: aiAccounts.modelName,
+        status: aiAccounts.status,
+        switchMode: aiAccounts.switchMode,
+        sortOrder: aiAccounts.sortOrder,
+        usageCount: aiAccounts.usageCount,
+        usageLimit: aiAccounts.usageLimit,
+        lastUsedAt: aiAccounts.lastUsedAt
+      }).from(aiAccounts).orderBy(aiAccounts.sortOrder);
+      return c.json(result);
+    } catch (e) {
+      return c.json([]);
+    }
+  });
+  app2.post("/api/admin/ai-accounts", async (c) => {
+    try {
+      const body = await c.req.json();
+      const result = await db.insert(aiAccounts).values(body).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Insert error" }, 500);
+    }
+  });
+  app2.patch("/api/admin/ai-accounts/:id", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const body = await c.req.json();
+      const result = await db.update(aiAccounts).set(body).where(eq7(aiAccounts.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+  app2.get("/api/admin/recommend-places", async (c) => {
+    try {
+      const result = await db.select().from(recommendPlaces).orderBy(recommendPlaces.createdAt);
+      return c.json(result);
+    } catch (e) {
+      return c.json([]);
+    }
+  });
+  app2.patch("/api/admin/recommend-places/:id", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { status } = await c.req.json();
+      const result = await db.update(recommendPlaces).set({ status, approvedAt: status === "approved" ? /* @__PURE__ */ new Date() : null }).where(eq7(recommendPlaces.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+  app2.patch("/api/admin/landmarks/:id/photos", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { photos } = await c.req.json();
+      const result = await db.update(landmarks).set({ photos }).where(eq7(landmarks.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+  app2.patch("/api/admin/cities/:id/photos", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { photos } = await c.req.json();
+      const result = await db.update(cities).set({ photos }).where(eq7(cities.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
     }
   });
 }

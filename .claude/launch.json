@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev:client"],
       "port": 5175
+    },
+    {
+      "name": "GPS Admin UI Preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "5199", "C:/Users/jitne/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/c281109f-3525-4101-a41f-afd3c6119204/5e54c908-8acf-417b-82b3-9074927770cd/skills/web-artifacts-builder/gps-admin-ui"],
+      "port": 5199
     }
   ]
 }
