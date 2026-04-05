@@ -901,7 +901,8 @@ export function registerRoutes(app: Hono<any>) {
   });
   app.get("/api/admin/landmarks", async (c) => {
     try {
-      const result = await db.select().from(landmarks).orderBy(landmarks.name);
+      // storage.getLandmarks() = static LANDMARKS + DB (전체 반환)
+      const result = await storage.getLandmarks();
       return c.json(result);
     } catch (e) { return c.json([]); }
   });
