@@ -948,3 +948,48 @@ export const spots = pgTable("spots", {
   id: varchar("id").primaryKey(),
   name: varchar("name"),
 });
+
+// ── AI 멀티 계정 관리 ─────────────────────────────
+export const aiAccounts = pgTable("ai_accounts", {
+  id: serial("id").primaryKey(),
+  engineName: varchar("engine_name", { length: 50 }).notNull(), // claude/gemini/chatgpt/custom
+  displayName: varchar("display_name", { length: 100 }),
+  emailMemo: varchar("email_memo", { length: 255 }),
+  apiKey: text("api_key").notNull(), // AES-256 암호화
+  apiBaseUrl: text("api_base_url"),  // 커스텀 AI용
+  modelName: varchar("model_name", { length: 100 }),
+  status: varchar("status", { length: 20 }).default("standby"), // active/standby/disabled
+  switchMode: varchar("switch_mode", { length: 20 }).default("manual"), // manual/auto/round_robin
+  sortOrder: integer("sort_order").default(1),
+  usageCount: integer("usage_count").default(0),
+  usageLimit: integer("usage_limit").default(10000),
+  lastUsedAt: timestamp("last_used_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertAiAccountSchema = createInsertSchema(aiAccounts);
+export type AiAccount = typeof aiAccounts.$inferSelect;
+export type InsertAiAccount = typeof aiAccounts.$inferInsert;
+
+// ── AI 추천 관광지 ────────────────────────────────
+export const recommendPlaces = pgTable("recommend_places", {
+  id: serial("id").primaryKey(),
+  sourceId: integer("source_id").notNull(), // landmarks.id 또는 cities.id
+  sourceType: varchar("source_type", { length: 20 }).notNull(), // 'city' | 'landmark'
+  placeName: varchar("place_name", { length: 255 }).notNull(),
+  placeNameKo: varchar("place_name_ko", { length: 255 }),
+  category: varchar("category", { length: 50 }).notNull(), // landmark/restaurant/activity/giftshop
+  description: text("description"),
+  descriptionKo: text("description_ko"),
+  distanceText: varchar("distance_text", { length: 100 }),
+  gpsLat: doublePrecision("gps_lat"),
+  gpsLng: doublePrecision("gps_lng"),
+  aiAccountId: integer("ai_account_id").references(() => aiAccounts.id),
+  status: varchar("status", { length: 20 }).default("pending"), // pending/approved/rejected
+  createdAt: timestamp("created_at").defaultNow(),
+  approvedAt: timestamp("approved_at"),
+});
+
+export const insertRecommendPlaceSchema = createInsertSchema(recommendPlaces);
+export type RecommendPlace = typeof recommendPlaces.$inferSelect;
+export type InsertRecommendPlace = typeof recommendPlaces.$inferInsert;

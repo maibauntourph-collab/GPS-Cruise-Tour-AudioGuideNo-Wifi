@@ -19,6 +19,12 @@ const MyRoutes = lazy(() => import("./pages/MyRoutes"));
 const ProductList = lazy(() => import("./pages/ProductList"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 import DesignPreview from "@/pages/DesignPreview";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
+import PhotoManager from "@/pages/admin/PhotoManager";
+import NarrationManager from "@/pages/admin/NarrationManager";
+import PlacesManager from "@/pages/admin/PlacesManager";
+import AIKeyManager from "@/pages/admin/AIKeyManager";
+import WorkflowView from "@/pages/admin/WorkflowView";
 
 import Likes from "@/pages/Likes";
 import Follows from "@/pages/Follows";
@@ -43,10 +49,15 @@ function Router() {
         <Route path="/home" component={Home} />
         <Route path="/guide" component={GuideView} />
         <Route path="/tour-leader" component={TourLeaderView} />
-        <Route path="/admin" component={AdminLanding} />
-        <Route path="/admin/" component={AdminLanding} />
-        <Route path="/admin/dashboard" component={Admin} />
-        <Route path="/admin/dashboard/" component={Admin} />
+        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/admin/" component={AdminDashboard} />
+        <Route path="/admin/dashboard" component={AdminDashboard} />
+        <Route path="/admin/dashboard/" component={AdminDashboard} />
+        <Route path="/admin/photos" component={PhotoManager} />
+        <Route path="/admin/narration" component={NarrationManager} />
+        <Route path="/admin/places" component={PlacesManager} />
+        <Route path="/admin/ai-keys" component={AIKeyManager} />
+        <Route path="/admin/workflow" component={WorkflowView} />
         <Route path="/my-routes" component={MyRoutes} />
         <Route path="/products" component={ProductList} />
         <Route path="/product/:id" component={ProductDetail} />

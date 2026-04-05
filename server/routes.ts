@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { type Server } from "node:http";
 import crypto from "node:crypto";
 import { storage } from "./storage";
-import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats, insertLikeSchema, insertFollowSchema, commissions, leads, appointments } from "@shared/schema";
+import { insertCitySchema, insertLandmarkSchema, insertVisitedLandmarkSchema, Landmark, cities, landmarks, dataVersions, userIdentities, users, marketingContents, tourSchedules, groupMembers, updateStats, insertLikeSchema, insertFollowSchema, commissions, leads, appointments, aiAccounts, recommendPlaces } from "@shared/schema";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { requireAuth, requireRole } from "./auth";
@@ -1671,6 +1671,121 @@ export function registerRoutes(app: Hono<any>) {
     } catch (error) {
       console.error("CRM Automation error:", error);
       return c.json({ error: "Failed to sync lead with AI" }, 500);
+    }
+  });
+
+  // ─── ADMIN API ──────────────────────────────────────────
+  // Admin: 도시 목록
+  app.get("/api/admin/cities", async (c) => {
+    try {
+      const result = await db.select().from(cities).orderBy(cities.name);
+      return c.json(result);
+    } catch (e) {
+      return c.json({ error: "DB error" }, 500);
+    }
+  });
+
+  // Admin: 랜드마크 목록
+  app.get("/api/admin/landmarks", async (c) => {
+    try {
+      const result = await db.select().from(landmarks).orderBy(landmarks.name);
+      return c.json(result);
+    } catch (e) {
+      return c.json({ error: "DB error" }, 500);
+    }
+  });
+
+  // Admin: AI 계정 목록
+  app.get("/api/admin/ai-accounts", async (c) => {
+    try {
+      const result = await db.select({
+        id: aiAccounts.id,
+        engineName: aiAccounts.engineName,
+        displayName: aiAccounts.displayName,
+        emailMemo: aiAccounts.emailMemo,
+        modelName: aiAccounts.modelName,
+        status: aiAccounts.status,
+        switchMode: aiAccounts.switchMode,
+        sortOrder: aiAccounts.sortOrder,
+        usageCount: aiAccounts.usageCount,
+        usageLimit: aiAccounts.usageLimit,
+        lastUsedAt: aiAccounts.lastUsedAt,
+      }).from(aiAccounts).orderBy(aiAccounts.sortOrder);
+      return c.json(result);
+    } catch (e) {
+      return c.json([]);
+    }
+  });
+
+  // Admin: AI 계정 추가
+  app.post("/api/admin/ai-accounts", async (c) => {
+    try {
+      const body = await c.req.json();
+      const result = await db.insert(aiAccounts).values(body).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Insert error" }, 500);
+    }
+  });
+
+  // Admin: AI 계정 상태 변경
+  app.patch("/api/admin/ai-accounts/:id", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const body = await c.req.json();
+      const result = await db.update(aiAccounts).set(body).where(eq(aiAccounts.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+
+  // Admin: 추천 장소 목록
+  app.get("/api/admin/recommend-places", async (c) => {
+    try {
+      const result = await db.select().from(recommendPlaces).orderBy(recommendPlaces.createdAt);
+      return c.json(result);
+    } catch (e) {
+      return c.json([]);
+    }
+  });
+
+  // Admin: 추천 장소 상태 변경 (승인/거절)
+  app.patch("/api/admin/recommend-places/:id", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { status } = await c.req.json();
+      const result = await db.update(recommendPlaces)
+        .set({ status, approvedAt: status === "approved" ? new Date() : null })
+        .where(eq(recommendPlaces.id, id))
+        .returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+
+  // Admin: 랜드마크 사진 업데이트
+  app.patch("/api/admin/landmarks/:id/photos", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { photos } = await c.req.json();
+      const result = await db.update(landmarks).set({ photos }).where(eq(landmarks.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+
+  // Admin: 도시 사진 업데이트
+  app.patch("/api/admin/cities/:id/photos", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { photos } = await c.req.json();
+      const result = await db.update(cities).set({ photos }).where(eq(cities.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
     }
   });
 }

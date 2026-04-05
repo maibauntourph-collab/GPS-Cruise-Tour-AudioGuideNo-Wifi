@@ -106,18 +106,18 @@ function getCityCategory(city: City): 'asia' | 'europe' | 'recommended' {
 // - 기존: italy.png / italy_luxury.png (중복 상단 라인 삭제)
 // - 유지: 실제 도시 사진 rome.jpg / venice.jpg (하단 라인)
 const CITY_IMAGES: Record<string, string> = {
-    'rome': '/images/cities/rome.jpg',
-    'venice': '/images/cities/venice.jpg',
-    'paris': '/images/countries/france.png',
-    'london': '/images/landmarks/big_ben_nanobanana.png', // 실제 런던 랜드마크 활용
-    'barcelona': '/images/cities/barcelona.jpg', // 고정 매핑
+    'rome': 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&q=90', // ✅ 업데이트 2026-04-05 콜로세움 고퀄리티
+    'venice': 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1200&q=90', // ✅ 업데이트 2026-04-05 대운하 고퀄리티
+    'paris': 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=90', // ✅ 업데이트 2026-04-05 에펠탑 야경 고퀄리티
+    'london': 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1200&q=90', // ✅ 업데이트 2026-04-05 타워브릿지 일몰 고퀄리티
+    'barcelona': 'https://images.unsplash.com/photo-1562883676-8c7feb83f09b?w=1200&q=90', // ✅ 업데이트 2026-04-05 티비다보 스카이라인 고퀄리티
     'naples': '/images/countries/italy_luxury.png',
     'shanghai': '/images/countries/china.png',
     'seoul': '/images/countries/south_korea.png',
-    'singapore': '/images/cities/singapore.jpg',
-    'penang': '/images/cities/penang.jpg',
-    'phuket': '/images/countries/thailand.png',
-    'cebu': '/images/cities/cebu.jpg',
+    'singapore': 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1200&q=90', // ✅ 업데이트 2026-04-05 마리나베이샌즈 야경 고퀄리티
+    'penang': 'https://images.pexels.com/photos/33985416/pexels-photo-33985416.jpeg?auto=compress&cs=tinysrgb&w=1200', // ✅ 업데이트 2026-04-05 조지타운 황금일출 Pexels
+    'phuket': 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1200&photo_reference=AU_ZVEEKAnmoYDogQsvcepe3r-jqJsFVdOeuvy-sJn7XyVkLD0N6kJlOVuyxmlrZ-eHmpST0y5FnQA7pasJsA86flqPwKouC9XpnL0IWGbEVQx-CtOe5gYW0dB7C8nSEv35YSeWbf46mmg-B8dN0mcfgxHImfGDkBwVDy8KVpE4_8sJgpK84uYCj_6k_GYR-wAp3lOj31fJvk81e_kV_sVPl3AV9-c6keU5hE4PWsOqE-ggz6j6yQqbnwBF9yiVW6R-IiJsAhboFWsR1G9TUc9Gel8VqcuUuRirBzcITt44oktYaGAnd5-nNQyafHQ8UIwSgMAKUXQ4ZiFalt3Oc5y6Y0_3RTGD9Mr4PMcl4E_Vx0IYE3G1Uwqog2o3DMPI-ADUY0ULm2-eaSqC4eCb9KT2qlfyZf_mHI2_VDencZQ-3koJoig&key=AIzaSyDB0QOHd5OEyqJgO5LL0n3ZKCcL0vnZoEI', // ✅ 업데이트 2026-04-05 Google Maps 고퀄리티
+    'cebu': 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1200&photo_reference=AU_ZVEGxrpIvG87AyGtI4UOOhcpifK3DNTCS0FFfJhSn6IoEuSnpNJ8EyEaPgYi7Lbta1Rkeo51VGG6vV9GHhwdHNCVN2jFi1aqcVk63--7gn31rmYTtJk7t3fSzdHyqSv_rJbmGJePvm0h1ZBQMNC8nZao1vFsaFFtKEYxldTsQWgCKqY1m04zDy_sNB8PpyQfRabn4XzjtVDHiDzcwD_vHn4vR3ASSCXPzKrjaHETCuE7WWmGATG-DnMNr5EqAL0kbbJ1nlPxw0PvYToxU_1ZcRl54pxBIcHfyMFbpqg3InM2u--qZhVsRH3PVaf-L-5vLocEmtPqJeonYX0JbuznRuJ4RftisL7s0Txu9qhwlXmhQuAxh2m4hRlgI2J3jkP8jJauYkVEuqmU1wJ0mVOtBFW9S3Yy2QXR8gkD56EdVlunjEMeVlPwSLepF4fq12M9gBWMlANpym5xmk7uKKusKawhvAX7TGov1ZG74IcTV8_LLoTyaK5mA2Qkvf6yBnKPpUFUW0fWNOHtJXOA0mSy90vSDBaor6BLn__2-0PkKt5XQKrvjHc-Ak4aj2EBIZm-emgnEH9FYEqVk_E61fqsSPNtgDOlAYw&key=AIzaSyDB0QOHd5OEyqJgO5LL0n3ZKCcL0vnZoEI', // ✅ 업데이트 2026-04-05 Magellan's Cross Google Maps
     'kuala-lumpur': '/images/countries/malaysia_luxury.png',
     'anchorage': '/images/cities/anchorage.jpg',
     'amsterdam': '/images/countries/netherlands.png',
