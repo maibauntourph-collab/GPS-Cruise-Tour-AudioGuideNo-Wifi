@@ -25681,6 +25681,99 @@ function registerRoutes(app2) {
       return c.json({ error: "Failed to delete city" }, 500);
     }
   });
+  app2.get("/api/admin/cities", async (c) => {
+    try {
+      const result = await storage.getCities();
+      return c.json(result);
+    } catch (e) {
+      return c.json([]);
+    }
+  });
+  app2.get("/api/admin/landmarks", async (c) => {
+    try {
+      const result = await storage.getLandmarks();
+      return c.json(result);
+    } catch (e) {
+      return c.json([]);
+    }
+  });
+  app2.get("/api/admin/ai-accounts", async (c) => {
+    try {
+      const result = await db.select({
+        id: aiAccounts.id,
+        engineName: aiAccounts.engineName,
+        displayName: aiAccounts.displayName,
+        emailMemo: aiAccounts.emailMemo,
+        modelName: aiAccounts.modelName,
+        status: aiAccounts.status,
+        switchMode: aiAccounts.switchMode,
+        sortOrder: aiAccounts.sortOrder,
+        usageCount: aiAccounts.usageCount,
+        usageLimit: aiAccounts.usageLimit,
+        lastUsedAt: aiAccounts.lastUsedAt
+      }).from(aiAccounts).orderBy(aiAccounts.sortOrder);
+      return c.json(result);
+    } catch (e) {
+      return c.json([]);
+    }
+  });
+  app2.get("/api/admin/recommend-places", async (c) => {
+    try {
+      const result = await db.select().from(recommendPlaces).orderBy(recommendPlaces.createdAt);
+      return c.json(result);
+    } catch (e) {
+      return c.json([]);
+    }
+  });
+  app2.post("/api/admin/ai-accounts", async (c) => {
+    try {
+      const body = await c.req.json();
+      const result = await db.insert(aiAccounts).values(body).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Insert error" }, 500);
+    }
+  });
+  app2.patch("/api/admin/ai-accounts/:id", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const body = await c.req.json();
+      const result = await db.update(aiAccounts).set(body).where(eq7(aiAccounts.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+  app2.patch("/api/admin/recommend-places/:id", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { status } = await c.req.json();
+      const result = await db.update(recommendPlaces).set({ status, approvedAt: status === "approved" ? /* @__PURE__ */ new Date() : null }).where(eq7(recommendPlaces.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+  app2.patch("/api/admin/landmarks/:id/photos", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { photos } = await c.req.json();
+      const result = await db.update(landmarks).set({ photos }).where(eq7(landmarks.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
+  app2.patch("/api/admin/cities/:id/photos", async (c) => {
+    try {
+      const id = Number(c.req.param("id"));
+      const { photos } = await c.req.json();
+      const result = await db.update(cities).set({ photos }).where(eq7(cities.id, id)).returning();
+      return c.json(result[0]);
+    } catch (e) {
+      return c.json({ error: "Update error" }, 500);
+    }
+  });
   app2.route("/api/admin", adminCallback);
   app2.post("/api/payments/create-checkout-session", async (c) => {
     try {
@@ -26269,99 +26362,6 @@ function registerRoutes(app2) {
     } catch (error) {
       console.error("CRM Automation error:", error);
       return c.json({ error: "Failed to sync lead with AI" }, 500);
-    }
-  });
-  app2.get("/api/admin/cities", async (c) => {
-    try {
-      const result = await db.select().from(cities).orderBy(cities.name);
-      return c.json(result);
-    } catch (e) {
-      return c.json({ error: "DB error" }, 500);
-    }
-  });
-  app2.get("/api/admin/landmarks", async (c) => {
-    try {
-      const result = await db.select().from(landmarks).orderBy(landmarks.name);
-      return c.json(result);
-    } catch (e) {
-      return c.json({ error: "DB error" }, 500);
-    }
-  });
-  app2.get("/api/admin/ai-accounts", async (c) => {
-    try {
-      const result = await db.select({
-        id: aiAccounts.id,
-        engineName: aiAccounts.engineName,
-        displayName: aiAccounts.displayName,
-        emailMemo: aiAccounts.emailMemo,
-        modelName: aiAccounts.modelName,
-        status: aiAccounts.status,
-        switchMode: aiAccounts.switchMode,
-        sortOrder: aiAccounts.sortOrder,
-        usageCount: aiAccounts.usageCount,
-        usageLimit: aiAccounts.usageLimit,
-        lastUsedAt: aiAccounts.lastUsedAt
-      }).from(aiAccounts).orderBy(aiAccounts.sortOrder);
-      return c.json(result);
-    } catch (e) {
-      return c.json([]);
-    }
-  });
-  app2.post("/api/admin/ai-accounts", async (c) => {
-    try {
-      const body = await c.req.json();
-      const result = await db.insert(aiAccounts).values(body).returning();
-      return c.json(result[0]);
-    } catch (e) {
-      return c.json({ error: "Insert error" }, 500);
-    }
-  });
-  app2.patch("/api/admin/ai-accounts/:id", async (c) => {
-    try {
-      const id = Number(c.req.param("id"));
-      const body = await c.req.json();
-      const result = await db.update(aiAccounts).set(body).where(eq7(aiAccounts.id, id)).returning();
-      return c.json(result[0]);
-    } catch (e) {
-      return c.json({ error: "Update error" }, 500);
-    }
-  });
-  app2.get("/api/admin/recommend-places", async (c) => {
-    try {
-      const result = await db.select().from(recommendPlaces).orderBy(recommendPlaces.createdAt);
-      return c.json(result);
-    } catch (e) {
-      return c.json([]);
-    }
-  });
-  app2.patch("/api/admin/recommend-places/:id", async (c) => {
-    try {
-      const id = Number(c.req.param("id"));
-      const { status } = await c.req.json();
-      const result = await db.update(recommendPlaces).set({ status, approvedAt: status === "approved" ? /* @__PURE__ */ new Date() : null }).where(eq7(recommendPlaces.id, id)).returning();
-      return c.json(result[0]);
-    } catch (e) {
-      return c.json({ error: "Update error" }, 500);
-    }
-  });
-  app2.patch("/api/admin/landmarks/:id/photos", async (c) => {
-    try {
-      const id = Number(c.req.param("id"));
-      const { photos } = await c.req.json();
-      const result = await db.update(landmarks).set({ photos }).where(eq7(landmarks.id, id)).returning();
-      return c.json(result[0]);
-    } catch (e) {
-      return c.json({ error: "Update error" }, 500);
-    }
-  });
-  app2.patch("/api/admin/cities/:id/photos", async (c) => {
-    try {
-      const id = Number(c.req.param("id"));
-      const { photos } = await c.req.json();
-      const result = await db.update(cities).set({ photos }).where(eq7(cities.id, id)).returning();
-      return c.json(result[0]);
-    } catch (e) {
-      return c.json({ error: "Update error" }, 500);
     }
   });
 }
