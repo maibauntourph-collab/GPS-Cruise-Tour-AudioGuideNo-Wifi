@@ -133,3 +133,30 @@
 - **result**: [진행중...]
 - **next**: 브라우저에서 앱 확인
 ---
+## 작업 기록 #6 | 백엔드 로직 점검 및 어드민 사이트 배포
+
+- **date-time**: 2026-04-07 15:44:00 KST
+- **order**: `백엔드 다시 확인좀 하자`, `어드민 사이트 배포`
+- **plan**: 
+  1. 백엔드 사진 및 나레이션 관리 로직(Drizzle ORM, script) 점검
+  2. `npm run deploy` 명령어로 어드민 사이트 및 Workers 배포
+- **task**:
+  - `server/scripts/update-db-photos.ts` 스캔: Viator 이미지 보호 주석 확인
+  - `server/routes.ts` API 엔드포인트 검증: 사진/나레이션 싱크 로직 확인
+  - `npm run deploy` 실행 (Vite Build + Wrangler Deploy)
+- **result**: [배포 진행 중...] 백엔드 로직 분석 완료
+- **next**: 배포 완료 확인 및 /api/health 테스트
+
+### 코드 변경 적요
+
+| 파일 | 변경 유형 | 적요 |
+|------|---------|------|
+| `docs/2026-04-07_1544_명령.md` | 신규 생성 | 금일 배포 및 점검 명령 기록 |
+| `history-workflow-book.md` | 업데이트 | 작업 기록 #6 추가 |
+
+### 에이전트/도구 사용 현황
+- 🤖 에이전트: server_park, deploy_jang
+- ⚙️  MCP: 없음
+- 🎯 스킬: `cloudflare-neon-hono-skill`, `history-workflow-logger-skill`
+- 💰 토큰: 입/출력 합계 약 25,000 tokens (누적)
+---
