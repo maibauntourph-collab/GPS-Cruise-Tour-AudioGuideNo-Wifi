@@ -264,3 +264,58 @@
 **Agent:** Antigravity (Gemini 2.5 Pro)
 **Tokens:** ~20k
 ---
+
+---
+
+## 작업 기록 #2 | 빌드 및 Staging 배포 - feat/country-images 브랜치
+
+- **date-time**: 2026-04-23 21:20:00 KST
+- **order**: `빌드 및 배포`
+- **plan**:
+  1. ✅ 현재 `feat/country-images` 브랜치 (EU boost + Caribbean landmarks) 빌드
+  2. ✅ Cloudflare Staging 환경에 배포
+  3. ⏳ 배포 후 기능 테스트 및 Production 배포 준비
+
+- **task**:
+  - ✅ `git add -A && git commit` - 변경사항 커밋
+  - ✅ `npm run build` - 클라이언트 + 서버 빌드 (18.68s)
+  - ❌ `npm run deploy:staging` - 첫 시도 실패
+    - **문제**: `ReferenceError: process is not defined at viatorService.ts:16`
+    - **원인**: Cloudflare Workers 환경에서 모듈 레벨 `process.env` 접근 불가
+  - ✅ `server/lib/viatorService.ts` 수정
+    - `process.env` 접근을 `getConfig()` 함수로 변경
+    - `getEnv()` 헬퍼 함수 사용으로 호환성 확보
+  - ✅ `npm run deploy:staging` - 재시도 성공
+
+- **result**: 
+  ```
+  ✅ Staging 환경 배포 완료
+  📍 URL: https://gps-audio-guide-staging.maibauntourph.workers.dev
+  🔖 Version ID: e940ebf2-0163-40b4-bf4b-a3bfe463d0d1
+  ⏱️ 배포 시간: 13.51초
+  
+  📊 Asset 통계:
+    • 새 업로드: 22개
+    • 기존 재사용: 129개
+    • 총 용량: 2190.46 KiB (gzip)
+  ```
+
+- **next**:
+  - Staging 환경에서 EU boost + Caribbean landmarks 기능 검증
+  - 가능하면 Production 환경에도 배포 진행
+  - `main` 브랜치로 PR 생성 및 병합
+
+- **code-changes**:
+  | 파일 | 변경 유형 | 적요 |
+  |------|---------|------|
+  | `server/lib/viatorService.ts` | 수정 | process.env 접근 → getConfig() 지연 로딩으로 변경 |
+  | `.env` | 변경 없음 | wrangler.toml에서 관리 |
+
+- **agents-used**:
+  - 🤖 에이전트: dev-workflow-assistant
+  - ⚙️  MCP: 없음
+  - 🎯 스킬: `dev-workflow-assistant`
+  - 💰 토큰: ~5,000
+
+---
+
