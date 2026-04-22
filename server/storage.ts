@@ -5,6 +5,11 @@ import { eq, count, and, sql, notInArray, desc } from "drizzle-orm";
 import { RESTAURANTS } from "./data/restaurants";
 import { CITIES } from './data/cities';
 import { LANDMARKS } from './data/landmarks';
+import { LANDMARKS_AEGEAN } from './data/landmarks_aegean';
+import { LANDMARKS_ALASKA } from './data/landmarks_alaska';
+import { LANDMARKS_ASIA_PLUS } from './data/landmarks_asia_plus';
+import { LANDMARKS_EU_BOOST } from './data/landmarks_eu_boost';
+import { LANDMARKS_CARIBBEAN } from './data/landmarks_caribbean';
 import { env } from "./env";
 
 // [AI 데이터베이스 총괄의 'No-Wifi' 데이터 철학]
@@ -123,7 +128,7 @@ export class MemStorage implements IStorage {
 
   async getLandmarks(cityId?: string, search?: string): Promise<Landmark[]> {
     // [연구소장 디버그] 명소 데이터 취득 경로 추적
-    const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
+    const hardcodedLandmarks = [...LANDMARKS, ...LANDMARKS_AEGEAN, ...LANDMARKS_ALASKA, ...LANDMARKS_ASIA_PLUS, ...LANDMARKS_EU_BOOST, ...LANDMARKS_CARIBBEAN, ...RESTAURANTS];
     const hardcodedIds = hardcodedLandmarks.map(l => l.id);
     console.log(`[Storage Debug] Hardcoded landmarks found: ${hardcodedLandmarks.length}`);
 
@@ -180,7 +185,7 @@ export class MemStorage implements IStorage {
 
   async getLandmark(id: string): Promise<Landmark | undefined> {
     // First check hardcoded data
-    const hardcodedLandmarks = [...LANDMARKS, ...RESTAURANTS];
+    const hardcodedLandmarks = [...LANDMARKS, ...LANDMARKS_AEGEAN, ...LANDMARKS_ALASKA, ...LANDMARKS_ASIA_PLUS, ...LANDMARKS_EU_BOOST, ...LANDMARKS_CARIBBEAN, ...RESTAURANTS];
     const found = hardcodedLandmarks.find(landmark => landmark.id === id) || this.landmarksMap.get(id);
     if (found) return found;
 
