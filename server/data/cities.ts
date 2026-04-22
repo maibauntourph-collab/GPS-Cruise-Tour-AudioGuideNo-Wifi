@@ -715,7 +715,7 @@ export const CITIES: City[] = [
   {
     "id": "seoul",
     "name": "서울특별시",
-    "country": "대한민국",
+    "country": "South Korea",
     "lat": 37.5665,
     "lng": 126.978,
     "zoom": 11,
@@ -728,7 +728,7 @@ export const CITIES: City[] = [
   {
     "id": "tokyo",
     "name": "도쿄",
-    "country": "일본",
+    "country": "Japan",
     "lat": 35.6762,
     "lng": 139.6503,
     "zoom": 11,
@@ -759,7 +759,7 @@ export const CITIES: City[] = [
   {
     "id": "busan",
     "name": "부산광역시",
-    "country": "대한민국",
+    "country": "South Korea",
     "lat": 35.1796,
     "lng": 129.0756,
     "zoom": 11,
@@ -838,7 +838,7 @@ export const CITIES: City[] = [
   {
     "id": "jeju",
     "name": "제주특별자치도",
-    "country": "대한민국",
+    "country": "South Korea",
     "lat": 33.4996,
     "lng": 126.5312,
     "zoom": 10,
@@ -869,7 +869,7 @@ export const CITIES: City[] = [
   {
     "id": "new-york",
     "name": "뉴욕",
-    "country": "미국",
+    "country": "USA",
     "lat": 40.7128,
     "lng": -74.006,
     "zoom": 11,
@@ -900,7 +900,7 @@ export const CITIES: City[] = [
   {
     "id": "bangkok",
     "name": "방콕",
-    "country": "태국",
+    "country": "Thailand",
     "lat": 13.7563,
     "lng": 100.5018,
     "zoom": 11,
