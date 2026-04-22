@@ -124,6 +124,7 @@ export function registerRoutes(app: Hono<any>) {
 
   // [Vercel Debug] Routes check - Hono specific
   app.get("/api/debug-routes", (c) => {
+    if (env.NODE_ENV === 'production') return c.json({ error: "Not Found" }, 404);
     // Hono exposes routes via app.routes
     const routes = app.routes.map(r => ({
       path: r.path,
@@ -138,6 +139,7 @@ export function registerRoutes(app: Hono<any>) {
 
   // [적요: Vercel 환경변수 확인 디버그 엔드포인트]
   app.get('/api/debug/env', (c) => {
+    if (env.NODE_ENV === 'production') return c.json({ error: "Not Found" }, 404);
     return c.json({
       NOWIFIGPSTOURS_exists: !!env.NOWIFIGPSTOURS,
       NOWIFIGPSTOURS_preview: env.NOWIFIGPSTOURS
@@ -150,6 +152,7 @@ export function registerRoutes(app: Hono<any>) {
 
   // [Vercel Debug] DB 연결 상세 진단 엔드포인트
   app.get("/api/debug/db-connection", async (c) => {
+    if (env.NODE_ENV === 'production') return c.json({ error: "Not Found" }, 404);
     try {
       const dbUrl = env.NOWIFIGPSTOURS;
       const hasDbUrl = !!dbUrl;
@@ -194,9 +197,9 @@ export function registerRoutes(app: Hono<any>) {
     }
   });
 
-  // [적요: 도시 목록 조회 API]
   // [DEBUG] Temporary route to verify Neon DB data for synchronization
   app.get("/api/debug/db-landmark/:id", async (c) => {
+    if (env.NODE_ENV === 'production') return c.json({ error: "Not Found" }, 404);
     const id = c.req.param("id");
     try {
       const result = await db.select().from(landmarks).where(eq(landmarks.id, id));
@@ -413,7 +416,7 @@ export function registerRoutes(app: Hono<any>) {
     if (!query) return c.json({ error: "검색어가 필요합니다." }, 400);
 
     const dbApiKey = await storage.getSiteSetting("api_viator_key");
-    const apiKey = dbApiKey || "de25d027-3e03-47cb-9c89-196e3e698637";
+    const apiKey = dbApiKey || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
 
     try {
       log(`[Viator Proxy] Searching photos for: ${query}`, "VIATOR");
@@ -462,7 +465,7 @@ export function registerRoutes(app: Hono<any>) {
     if (!query) return c.json({ error: "검색어가 필요합니다." }, 400);
 
     const dbApiKey = await storage.getSiteSetting("api_viator_key");
-    const apiKey = dbApiKey || "de25d027-3e03-47cb-9c89-196e3e698637";
+    const apiKey = dbApiKey || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
 
     try {
       log(`[Viator Products] Searching products for: ${query}`, "VIATOR");
@@ -510,7 +513,7 @@ export function registerRoutes(app: Hono<any>) {
     try {
       const body = await c.req.json();
       const dbApiKey = await storage.getSiteSetting("api_viator_key");
-      const apiKey = dbApiKey || "de25d027-3e03-47cb-9c89-196e3e698637";
+      const apiKey = dbApiKey || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
 
       const response = await fetch("https://api.viator.com/partner/attractions/search", {
         method: "POST",
@@ -534,7 +537,7 @@ export function registerRoutes(app: Hono<any>) {
     try {
       const body = await c.req.json();
       const dbApiKey = await storage.getSiteSetting("api_viator_key");
-      const apiKey = dbApiKey || "de25d027-3e03-47cb-9c89-196e3e698637";
+      const apiKey = dbApiKey || process.env.VIATOR_API_KEY || "de25d027-3e03-47cb-9c89-196e3e698637";
 
       const response = await fetch("https://api.viator.com/partner/products/recommendations", {
         method: "POST",
@@ -1117,33 +1120,33 @@ export function registerRoutes(app: Hono<any>) {
     }
   });
 
-  // OpenAI TTS Routes (Streaming)
+  // OpenAI TTS Routes
   app.post("/api/tts/openai/generate", async (c) => {
     try {
       const { generateLandmarkAudio } = await import("./lib/openai");
-      const { text, voice, language } = await c.req.json();
+      const { text, voice, language, landmarkId } = await c.req.json();
       if (!text) return c.json({ error: "Text is required" }, 400);
 
-      const result = await generateLandmarkAudio("streaming-tts", text, language || 'en', voice);
+      const result = await generateLandmarkAudio(landmarkId || "streaming-tts", text, language || 'en', voice);
 
-      // result.audioUrl is a path probably?
-      // Read file and stream
-      // We need 'fs' and 'path' which we didn't import in this file?
-      // Assuming imports are available or use dynamic import/require 
-      const fs = await import("node:fs");
-      const path = await import("node:path");
+      // audioUrl은 data:audio/mp3;base64,... 형식 — base64 디코딩 후 반환
+      if (result.audioUrl.startsWith('data:')) {
+        const base64Data = result.audioUrl.split(',')[1];
+        const audioBuffer = Buffer.from(base64Data, 'base64');
+        const uint8 = new Uint8Array(audioBuffer);
+        return new Response(uint8, {
+          headers: {
+            'Content-Type': 'audio/mpeg',
+            'X-Voice-Id': result.voiceId,
+            'X-Duration': String(result.duration),
+            'X-Size-Bytes': String(result.sizeBytes),
+            'X-Checksum': result.checksum,
+          }
+        });
+      }
 
-      const filePath = path.join(process.cwd(), result.audioUrl.startsWith('/') ? result.audioUrl.slice(1) : result.audioUrl);
-      const audioBuffer = fs.readFileSync(filePath);
-
-      // [연구소장 노트: Node.js Buffer → Uint8Array → Web Response 변환]
-      const uint8 = new Uint8Array(audioBuffer);
-      return new Response(uint8, {
-        headers: {
-          'Content-Type': 'audio/mpeg',
-          'X-Voice-Id': result.voiceId,
-        }
-      });
+      // fallback: JSON 응답 (dataUri 직접 사용 가능)
+      return c.json({ audioUrl: result.audioUrl, voiceId: result.voiceId, duration: result.duration });
     } catch (e: any) {
       return c.json({ error: e.message || "OpenAI TTS Failed" }, 500);
     }

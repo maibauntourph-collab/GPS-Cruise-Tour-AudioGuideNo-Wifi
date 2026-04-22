@@ -9,7 +9,7 @@ import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, External
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
-import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, getBookingUrl, getAgodaUrl, AffiliateSettings } from '@/lib/affiliateConfig';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, getBookingUrl, getAgodaUrl, injectAffiliateParam, AffiliateSettings } from '@/lib/affiliateConfig';
 import { useToast } from '@/hooks/use-toast';
 
 import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
@@ -888,6 +888,70 @@ export default function LandmarkDetailDialog({
                   );
                 })()}
 
+                {/* Live Viator Tours — rendered from /api/viator/products */}
+                {(isViatorLoading || viatorProducts.length > 0) && (
+                  <div className="px-4 space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Ticket className="w-4 h-4 text-blue-500" />
+                      <span className="text-xs font-black text-blue-600 uppercase tracking-wider">
+                        {selectedLanguage === 'ko' ? '실시간 투어 상품' : 'Live Tours & Activities'}
+                      </span>
+                      {isViatorLoading && <span className="text-[10px] text-slate-400 animate-pulse ml-1">loading…</span>}
+                      <span className="ml-auto text-[9px] bg-blue-100 text-blue-600 font-bold px-2 py-0.5 rounded-full">Viator</span>
+                    </div>
+                    {isViatorLoading ? (
+                      <div className="space-y-2">
+                        {[1, 2, 3].map(i => (
+                          <div key={i} className="h-20 bg-slate-100 rounded-2xl animate-pulse" />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {viatorProducts.slice(0, 5).map((product: any) => (
+                          <div key={product.id} className="bg-white rounded-2xl border border-blue-100 overflow-hidden flex gap-3 p-3 shadow-sm hover:shadow-md transition-all active:scale-[0.99]">
+                            {product.image && (
+                              <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-slate-100">
+                                <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0 flex flex-col justify-between">
+                              <div>
+                                <p className="text-xs font-bold text-[#5D574D] line-clamp-2 leading-snug">{product.title}</p>
+                                {product.rating && (
+                                  <div className="flex items-center gap-1 mt-0.5">
+                                    <span className="text-yellow-400 text-[10px]">★</span>
+                                    <span className="text-[10px] font-bold text-slate-600">{Number(product.rating).toFixed(1)}</span>
+                                  </div>
+                                )}
+                              </div>
+                              <div className="flex items-center justify-between mt-1">
+                                {product.price != null && (
+                                  <span className="text-sm font-extrabold text-blue-600">
+                                    {selectedLanguage === 'ko' ? '부터 ' : 'From '}
+                                    ${typeof product.price === 'number' ? product.price.toFixed(2) : product.price}
+                                  </span>
+                                )}
+                                <button
+                                  onClick={() => {
+                                    const pid = vIdData?.value || 'P00101022';
+                                    const bookUrl = product.url
+                                      ? `${product.url}${product.url.includes('?') ? '&' : '?'}partner-id=${pid}`
+                                      : getViatorUrl(product.title, selectedLanguage, dynamicAffiliateSettings);
+                                    openExternalUrl(bookUrl, '_blank');
+                                  }}
+                                  className="text-[10px] bg-blue-500 hover:bg-blue-600 text-white font-bold px-3 py-1.5 rounded-xl transition-all active:scale-95"
+                                >
+                                  {selectedLanguage === 'ko' ? '예약' : 'Book'}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 <div className="px-4 pt-2 text-center space-y-2">
                   <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-[#E67E22] shadow-sm">
                     <Ticket className="w-8 h-8" />
@@ -922,8 +986,8 @@ export default function LandmarkDetailDialog({
                           getTranslatedContent(landmark, selectedLanguage, 'name');
                         // [적요] 최저가 보장 예약은 기본적으로 Viator 검색(글로벌 파트너)으로 연결하거나 고정 URL이 있다면 이를 활용
                         const targetUrl = landmark.reservationUrl && landmark.reservationUrl !== '#'
-                          ? landmark.reservationUrl
-                          : getViatorUrl(searchName, selectedLanguage);
+                          ? injectAffiliateParam(landmark.reservationUrl, dynamicAffiliateSettings)
+                          : getViatorUrl(searchName, selectedLanguage, dynamicAffiliateSettings);
                         openExternalUrl(targetUrl, '_blank');
                       }}
                     >

@@ -106,31 +106,59 @@ function getCityCategory(city: City): 'asia' | 'europe' | 'recommended' {
 // - 기존: italy.png / italy_luxury.png (중복 상단 라인 삭제)
 // - 유지: 실제 도시 사진 rome.jpg / venice.jpg (하단 라인)
 const CITY_IMAGES: Record<string, string> = {
-    'rome': 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&q=90', // ✅ 업데이트 2026-04-05 콜로세움 고퀄리티
-    'venice': 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1200&q=90', // ✅ 업데이트 2026-04-05 대운하 고퀄리티
-    'paris': 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=90', // ✅ 업데이트 2026-04-05 에펠탑 야경 고퀄리티
-    'london': 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1200&q=90', // ✅ 업데이트 2026-04-05 타워브릿지 일몰 고퀄리티
-    'barcelona': 'https://images.unsplash.com/photo-1562883676-8c7feb83f09b?w=1200&q=90', // ✅ 업데이트 2026-04-05 티비다보 스카이라인 고퀄리티
-    'naples': '/images/countries/italy_luxury.png',
-    'shanghai': '/images/countries/china.png',
-    'seoul': '/images/countries/south_korea.png',
-    'singapore': 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1200&q=90', // ✅ 업데이트 2026-04-05 마리나베이샌즈 야경 고퀄리티
-    'penang': 'https://images.pexels.com/photos/33985416/pexels-photo-33985416.jpeg?auto=compress&cs=tinysrgb&w=1200', // ✅ 업데이트 2026-04-05 조지타운 황금일출 Pexels
-    'phuket': 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1200&photo_reference=AU_ZVEEKAnmoYDogQsvcepe3r-jqJsFVdOeuvy-sJn7XyVkLD0N6kJlOVuyxmlrZ-eHmpST0y5FnQA7pasJsA86flqPwKouC9XpnL0IWGbEVQx-CtOe5gYW0dB7C8nSEv35YSeWbf46mmg-B8dN0mcfgxHImfGDkBwVDy8KVpE4_8sJgpK84uYCj_6k_GYR-wAp3lOj31fJvk81e_kV_sVPl3AV9-c6keU5hE4PWsOqE-ggz6j6yQqbnwBF9yiVW6R-IiJsAhboFWsR1G9TUc9Gel8VqcuUuRirBzcITt44oktYaGAnd5-nNQyafHQ8UIwSgMAKUXQ4ZiFalt3Oc5y6Y0_3RTGD9Mr4PMcl4E_Vx0IYE3G1Uwqog2o3DMPI-ADUY0ULm2-eaSqC4eCb9KT2qlfyZf_mHI2_VDencZQ-3koJoig&key=AIzaSyDB0QOHd5OEyqJgO5LL0n3ZKCcL0vnZoEI', // ✅ 업데이트 2026-04-05 Google Maps 고퀄리티
-    'cebu': 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=1200&photo_reference=AU_ZVEGxrpIvG87AyGtI4UOOhcpifK3DNTCS0FFfJhSn6IoEuSnpNJ8EyEaPgYi7Lbta1Rkeo51VGG6vV9GHhwdHNCVN2jFi1aqcVk63--7gn31rmYTtJk7t3fSzdHyqSv_rJbmGJePvm0h1ZBQMNC8nZao1vFsaFFtKEYxldTsQWgCKqY1m04zDy_sNB8PpyQfRabn4XzjtVDHiDzcwD_vHn4vR3ASSCXPzKrjaHETCuE7WWmGATG-DnMNr5EqAL0kbbJ1nlPxw0PvYToxU_1ZcRl54pxBIcHfyMFbpqg3InM2u--qZhVsRH3PVaf-L-5vLocEmtPqJeonYX0JbuznRuJ4RftisL7s0Txu9qhwlXmhQuAxh2m4hRlgI2J3jkP8jJauYkVEuqmU1wJ0mVOtBFW9S3Yy2QXR8gkD56EdVlunjEMeVlPwSLepF4fq12M9gBWMlANpym5xmk7uKKusKawhvAX7TGov1ZG74IcTV8_LLoTyaK5mA2Qkvf6yBnKPpUFUW0fWNOHtJXOA0mSy90vSDBaor6BLn__2-0PkKt5XQKrvjHc-Ak4aj2EBIZm-emgnEH9FYEqVk_E61fqsSPNtgDOlAYw&key=AIzaSyDB0QOHd5OEyqJgO5LL0n3ZKCcL0vnZoEI', // ✅ 업데이트 2026-04-05 Magellan's Cross Google Maps
-    'kuala-lumpur': '/images/countries/malaysia_luxury.png',
-    'anchorage': '/images/cities/anchorage.jpg',
-    'amsterdam': '/images/countries/netherlands.png',
-    'budapest': '/images/cities/budapest.jpg',
-    'warsaw': '/images/cities/warsaw.jpg',
-    'copenhagen': '/images/cities/copenhagen.jpg',
-    'oslo': '/images/cities/oslo.jpg',
-    'busan': '/images/countries/south_korea.png',
-    'jeju': '/images/countries/south_korea.png',
-    'brussels': '/images/cities/brussels.jpg',
-    'prague': '/images/cities/prague.jpg',
-    'stockholm': '/images/countries/sweden.png',
-    'philippines': '/images/countries/philippines.png',
+    // ── 유럽 ──────────────────────────────────────────────────────────────
+    'rome':      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&q=90',
+    'venice':    'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1200&q=90',
+    'paris':     'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=90',
+    'london':    'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1200&q=90',
+    'barcelona': 'https://images.unsplash.com/photo-1562883676-8c7feb83f09b?w=1200&q=90',
+    'naples':    '/images/cities/naples.jpg',
+    'amsterdam': '/images/cities/amsterdam.jpg',
+    'budapest':  '/images/cities/budapest.jpg',
+    'warsaw':    '/images/cities/warsaw.jpg',
+    'copenhagen':'/images/cities/copenhagen.jpg',
+    'oslo':      '/images/cities/oslo.jpg',
+    'brussels':  '/images/cities/brussels.jpg',
+    'prague':    '/images/cities/prague.jpg',
+    'stockholm': '/images/cities/stockholm.jpg',
+    // 에게해·아드리아해 (신규)
+    'santorini': 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=90',
+    'mykonos':   'https://images.unsplash.com/photo-1601581875309-fdb56a0e2e9a?w=1200&q=90',
+    'dubrovnik': 'https://images.unsplash.com/photo-1555990793-da11153b2473?w=1200&q=90',
+    'kotor':     'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=90',
+    'kusadasi':  'https://images.unsplash.com/photo-1597074866923-dc0589150358?w=1200&q=90',
+    // ── 아시아 ────────────────────────────────────────────────────────────
+    'singapore':    'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1200&q=90',
+    'penang':       'https://images.pexels.com/photos/33985416/pexels-photo-33985416.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    'phuket':       '/images/cities/phuket.jpg',
+    'cebu':         '/images/cities/cebu.jpg',
+    'kuala-lumpur': '/images/cities/kuala-lumpur.jpg',
+    'seoul':        '/images/cities/seoul.jpg',
+    'busan':        '/images/cities/busan.jpg',
+    'jeju':         '/images/cities/jeju.jpg',
+    'shanghai':     '/images/cities/shanghai.jpg',
+    'anchorage':    '/images/cities/anchorage.jpg',
+    // 아시아 확장 (신규)
+    'tokyo':        'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&q=90',
+    'yokohama':     'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=1200&q=90',
+    'fukuoka':      'https://images.unsplash.com/photo-1624601573012-efb68931cc8f?w=1200&q=90',
+    'keelung':      'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=1200&q=90',
+    'hong-kong':    'https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=1200&q=90',
+    'halong-bay':   'https://images.unsplash.com/photo-1528127269322-539801943592?w=1200&q=90',
+    'bali':         'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=90',
+    // ── 카리브해 (신규) ───────────────────────────────────────────────────
+    'cozumel':      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=90',
+    'nassau':       'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=90',
+    'san-juan':     'https://images.unsplash.com/photo-1579709251698-c94c6e64f875?w=1200&q=90',
+    'grand-cayman': 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=1200&q=90',
+    'st-thomas':    'https://images.unsplash.com/photo-1580137189272-c9379f8864fd?w=1200&q=90',
+    // ── 알래스카 (신규) ───────────────────────────────────────────────────
+    'juneau':    'https://images.unsplash.com/photo-1531168556467-80aace0d0144?w=1200&q=90',
+    'ketchikan': 'https://images.unsplash.com/photo-1601999009209-c4b37e6b7a3b?w=1200&q=90',
+    'skagway':   'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=90',
+    'sitka':     'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=90',
+    // ── 미주 ──────────────────────────────────────────────────────────────
+    'new-york': 'https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?w=1200&q=90',
 };
 
 function getCityImage(city: City): string {

@@ -51,6 +51,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // [Vercel Debug] 등록된 라우트 확인용 엔드포인트
   app.get("/api/debug-routes", (req, res) => {
+    if (process.env.NODE_ENV === 'production') { res.status(404).json({ error: "Not Found" }); return; }
     const routes: any[] = [];
     app._router.stack.forEach((middleware: any) => {
       if (middleware.route) { // routes registered directly on the app
@@ -71,6 +72,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // 배포 환경에서 환경변수가 올바르게 설정되어 있는지 확인하기 위한 진단용 라우트입니다.
   // NOWIFIGPSTOURS(DB URL)와 NODE_ENV의 존재 여부 및 미리보기를 반환합니다.
   app.get('/api/debug/env', (_req, res) => {
+    if (process.env.NODE_ENV === 'production') { res.status(404).json({ error: "Not Found" }); return; }
     res.json({
       NOWIFIGPSTOURS_exists: !!process.env.NOWIFIGPSTOURS,
       NOWIFIGPSTOURS_preview: process.env.NOWIFIGPSTOURS
@@ -84,6 +86,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // [Vercel Debug] DB 연결 상세 진단 엔드포인트
   // 로컬에서는 되는데 배포 환경에서만 안 될 때, 정확한 에러 원인(DNS, Auth, Timeout 등)을 파악하기 위함입니다.
   app.get("/api/debug/db-connection", async (_req, res) => {
+    if (process.env.NODE_ENV === 'production') { res.status(404).json({ error: "Not Found" }); return; }
     try {
       const dbUrl = process.env.NOWIFIGPSTOURS;
       const hasDbUrl = !!dbUrl;
