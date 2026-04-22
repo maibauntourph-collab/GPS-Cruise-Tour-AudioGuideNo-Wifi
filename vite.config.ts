@@ -69,15 +69,15 @@ export default defineConfig({
             },
           },
           {
-            // 📡 [Server Park | 2026-03-24] API 데이터 오프라인 캐싱 (StaleWhileRevalidate)
-            // No-WiFi 환경에서 즉시 로딩을 위해 SWR 전략을 사용합니다.
+            // 📡 API 데이터: NetworkFirst (네트워크 우선, 오프라인 fallback 1시간)
             urlPattern: /\/api\/(landmarks|cities).*/,
-            handler: 'StaleWhileRevalidate',
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'api-data',
+              networkTimeoutSeconds: 5,
               expiration: {
                 maxEntries: 200,
-                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+                maxAgeSeconds: 60 * 60, // 1 hour fallback only
               },
               cacheableResponse: {
                 statuses: [0, 200],

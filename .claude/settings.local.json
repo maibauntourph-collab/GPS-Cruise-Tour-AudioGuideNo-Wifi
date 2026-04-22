@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsx *)",
+      "Bash(npx ts-node *)",
+      "Read(//tmp/**)",
+      "Bash(node -e ' *)",
+      "Bash(node --input-type=module)",
+      "Bash(2>&1)",
+      "Bash(xargs grep *)",
+      "Bash(wrangler deploy *)",
+      "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/landmarks?cityId=amsterdam\")",
+      "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/cities\")",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\([x['id'] for x in data]\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/landmarks?cityId=copenhagen\")",
+      "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/landmarks?cityId=copenhagen\")",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f'Count: {len\\(data\\)}'\\); print\\([x['id'] for x in data[:5]]\\)\")",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f'Amsterdam: {len\\(data\\)}개'\\)\")",
+      "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/landmarks?cityId=rome\")",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f'Rome: {len\\(data\\)}개'\\)\")",
+      "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/landmarks?cityId=paris\")",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f'Paris: {len\\(data\\)}개'\\)\")",
+      "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/landmarks?cityId=singapore\")",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f'Singapore: {len\\(data\\)}개'\\)\")",
+      "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/\")",
+      "Bash(curl -s -I \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/landmarks\")",
+      "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/sw.js\")",
+      "WebFetch(domain:cruiseportiq.com)",
+      "WebFetch(domain:docs.viator.com)"
+    ]
+  }
+}

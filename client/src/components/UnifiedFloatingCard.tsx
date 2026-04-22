@@ -76,6 +76,7 @@ import { Landmark, GpsPosition, City, CruisePort, TransportOption } from '@share
 import { getTranslatedContent, t } from '@/lib/translations';
 import { audioService, AudioService } from '@/lib/audioService';
 import LandmarkDetailDialog from './LandmarkDetailDialog';
+import { OfflineImg } from './OfflineImg';
 
 interface UnifiedFloatingCardProps {
   // Landmark Panel props
@@ -235,7 +236,7 @@ const LandmarkListItem = React.memo(({
     >
       <div className="flex items-center gap-3 min-w-0 flex-1">
         <div className="w-10 h-10 rounded-lg bg-muted overflow-hidden flex-shrink-0 border border-slate-100">
-          {landmark.photos?.[0] && <img src={landmark.photos[0]} alt="" className="w-full h-full object-cover transition-transform group-hover:scale-110" />}
+          {landmark.photos?.[0] && <OfflineImg src={landmark.photos[0]} alt="" className="w-full h-full object-cover transition-transform group-hover:scale-110" />}
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">

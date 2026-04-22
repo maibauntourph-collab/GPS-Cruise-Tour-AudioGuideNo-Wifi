@@ -181,3 +181,34 @@ export const getTheForkUrl = (query: string, lang: string = 'en') => {
 export const getAirbnbUrl = (locationName: string) => {
     return `https://www.airbnb.com/s/${encodeURIComponent(locationName)}/homes`;
 };
+
+/**
+ * 기존 reservationUrl에 플랫폼 감지 후 제휴 파라미터를 자동 삽입합니다.
+ * Viator / Klook / GetYourGuide / Trip.com / MyRealTrip 지원.
+ */
+export const injectAffiliateParam = (url: string, settings?: AffiliateSettings): string => {
+    if (!url || url === '#') return url;
+    try {
+        const u = new URL(url);
+        const h = u.hostname.toLowerCase();
+        if (h.includes('viator.com')) {
+            const pid = settings?.viatorId || AFFILIATE_IDS.viator;
+            if (pid) u.searchParams.set('pid', pid);
+        } else if (h.includes('klook.com')) {
+            const aid = settings?.klookId || AFFILIATE_IDS.klook;
+            if (aid && aid !== 'YOUR_KLOOK_AID') u.searchParams.set('aid', aid);
+        } else if (h.includes('getyourguide.com')) {
+            const pid = settings?.gygId || AFFILIATE_IDS.getYourGuide;
+            if (pid && pid !== 'YOUR_GYG_PARTNER_ID') u.searchParams.set('partner_id', pid);
+        } else if (h.includes('trip.com')) {
+            const aid = settings?.tripId || AFFILIATE_IDS.trip;
+            if (aid && aid !== 'YOUR_TRIP_DOT_COM_ID') u.searchParams.set('allianceid', aid);
+        } else if (h.includes('myrealtrip.com')) {
+            const pid = settings?.myrealtripId || AFFILIATE_IDS.myrealtrip;
+            if (pid) u.searchParams.set('partner_id', pid);
+        }
+        return u.toString();
+    } catch {
+        return url;
+    }
+};

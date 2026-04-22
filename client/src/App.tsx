@@ -18,10 +18,15 @@ const TourLeaderView = lazy(() => import("@/pages/TourLeaderView"));
 const MyRoutes = lazy(() => import("./pages/MyRoutes"));
 const ProductList = lazy(() => import("./pages/ProductList"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
-import DesignPreview from "@/pages/DesignPreview";
-
-import Likes from "@/pages/Likes";
-import Follows from "@/pages/Follows";
+const DesignPreview = lazy(() => import("@/pages/DesignPreview"));
+const AdminDashboard = lazy(() => import("@/pages/admin/AdminDashboard"));
+const PhotoManager = lazy(() => import("@/pages/admin/PhotoManager"));
+const NarrationManager = lazy(() => import("@/pages/admin/NarrationManager"));
+const PlacesManager = lazy(() => import("@/pages/admin/PlacesManager"));
+const AIKeyManager = lazy(() => import("@/pages/admin/AIKeyManager"));
+const WorkflowView = lazy(() => import("@/pages/admin/WorkflowView"));
+const Likes = lazy(() => import("@/pages/Likes"));
+const Follows = lazy(() => import("@/pages/Follows"));
 
 // Loading fallback component
 function PageLoader() {
@@ -43,10 +48,15 @@ function Router() {
         <Route path="/home" component={Home} />
         <Route path="/guide" component={GuideView} />
         <Route path="/tour-leader" component={TourLeaderView} />
-        <Route path="/admin" component={AdminLanding} />
-        <Route path="/admin/" component={AdminLanding} />
-        <Route path="/admin/dashboard" component={Admin} />
-        <Route path="/admin/dashboard/" component={Admin} />
+        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/admin/" component={AdminDashboard} />
+        <Route path="/admin/dashboard" component={AdminDashboard} />
+        <Route path="/admin/dashboard/" component={AdminDashboard} />
+        <Route path="/admin/photos" component={PhotoManager} />
+        <Route path="/admin/narration" component={NarrationManager} />
+        <Route path="/admin/places" component={PlacesManager} />
+        <Route path="/admin/ai-keys" component={AIKeyManager} />
+        <Route path="/admin/workflow" component={WorkflowView} />
         <Route path="/my-routes" component={MyRoutes} />
         <Route path="/products" component={ProductList} />
         <Route path="/product/:id" component={ProductDetail} />
