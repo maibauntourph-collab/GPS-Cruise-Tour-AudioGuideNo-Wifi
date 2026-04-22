@@ -8,15 +8,22 @@
  * Dashboard: https://partners.viator.com/dashboard
  */
 
+import { getEnv } from '../env';
+
 const VIATOR_SANDBOX_KEY = 'de25d027-3e03-47cb-9c89-196e3e698637';
 const VIATOR_PROD_KEY = '90ec46e6-9e21-492b-9d56-ce6188cb635c';
 
-// 환경에 따라 자동 전환
-const isProduction = process.env.NODE_ENV === 'production';
-const API_KEY = process.env.VIATOR_API_KEY || (isProduction ? VIATOR_PROD_KEY : VIATOR_SANDBOX_KEY);
-const BASE_URL = isProduction
-  ? 'https://api.viator.com/partner'
-  : 'https://api.sandbox.viator.com/partner';
+// 환경에 따라 자동 전환 (Cloudflare Workers 호환)
+function getConfig() {
+  const nodeEnv = getEnv('NODE_ENV') || 'development';
+  const isProduction = nodeEnv === 'production';
+  const apiKey = getEnv('VIATOR_API_KEY') || (isProduction ? VIATOR_PROD_KEY : VIATOR_SANDBOX_KEY);
+  const baseUrl = isProduction
+    ? 'https://api.viator.com/partner'
+    : 'https://api.sandbox.viator.com/partner';
+
+  return { apiKey, baseUrl, isProduction };
+}
 
 // 우리 앱의 크루즈 기항지 → Viator destination ID 매핑
 export const CITY_TO_VIATOR_DEST: Record<string, string> = {
@@ -73,10 +80,12 @@ export interface ViatorSearchResult {
  * Viator API 요청 헬퍼
  */
 async function viatorFetch(endpoint: string, body?: any): Promise<any> {
+  const { apiKey, baseUrl } = getConfig();
+
   const options: RequestInit = {
     method: body ? 'POST' : 'GET',
     headers: {
-      'exp-api-key': API_KEY,
+      'exp-api-key': apiKey,
       'Content-Type': 'application/json',
       'Accept': 'application/json;version=2.0',
       'Accept-Language': 'en-US',
@@ -87,7 +96,7 @@ async function viatorFetch(endpoint: string, body?: any): Promise<any> {
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, options);
+  const response = await fetch(`${baseUrl}${endpoint}`, options);
 
   if (!response.ok) {
     const errorText = await response.text();
