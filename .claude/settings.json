@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"satellite\" /e/GPS-Cruise-Tour-AudioGuideNo-Wifi-1 --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" ! -path \"*/node_modules/*\" ! -path \"*/.claude/worktrees/*\" ! -path \"*/dist/*\" -l)",
+      "Bash(ls -la /e/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/server/data/*.ts)",
+      "Read(//e/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/**)",
+      "Bash(grep -o \"country: ''''[^'''']*''''\" server/data/landmarks.ts)",
+      "Bash(done)",
+      "Bash(wc -l \"e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/docs/개발가이드북_v2/\"*.md)",
+      "Bash(curl -s https://api.openai.com/v1/chat/completions -H \"Authorization: Bearer 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\" -H \"Content-Type: application/json\" -d '{\"\"\"\"model\"\"\"\":\"\"\"\"gpt-4o-mini\"\"\"\",\"\"\"\"messages\"\"\"\":[{\"\"\"\"role\"\"\"\":\"\"\"\"user\"\"\"\",\"\"\"\"content\"\"\"\":\"\"\"\"Translate to Japanese: 안녕하세요\"\"\"\"}],\"\"\"\"max_tokens\"\"\"\":50}')"
+    ]
+  }
+}

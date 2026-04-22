@@ -271,23 +271,23 @@ async function handleAPIRequest(request) {
       
       const fallbackLandmarks = {
         rome: [
-          { id: 'colosseum', cityId: 'rome', name: 'Colosseum', lat: 41.8902, lng: 12.4922, radius: 70, category: 'Historical', description: 'The largest amphitheater ever built', narration: 'You are near the Colosseum, the largest amphitheater ever built.' },
-          { id: 'roman-forum', cityId: 'rome', name: 'Roman Forum', lat: 41.8925, lng: 12.4853, radius: 60, category: 'Historical', description: 'The center of ancient Roman public life', narration: 'You are near the Roman Forum.' },
-          { id: 'trevi-fountain', cityId: 'rome', name: 'Trevi Fountain', lat: 41.9009, lng: 12.4833, radius: 50, category: 'Monument', description: 'A stunning 18th-century Baroque fountain', narration: 'You are near the Trevi Fountain.' },
-          { id: 'pantheon', cityId: 'rome', name: 'Pantheon', lat: 41.8986, lng: 12.4768, radius: 50, category: 'Historical', description: 'A former Roman temple, now a church', narration: 'You are near the Pantheon.' },
-          { id: 'spanish-steps', cityId: 'rome', name: 'Spanish Steps', lat: 41.9059, lng: 12.4823, radius: 50, category: 'Monument', description: 'A monumental stairway of 135 steps', narration: 'You are near the Spanish Steps.' }
+          { id: 'colosseum', cityId: 'rome', name: 'Colosseum', lat: 41.8902, lng: 12.4922, radius: 70, category: 'Historical', description: 'The largest amphitheater ever built', narration: 'You are near the Colosseum, the largest amphitheater ever built.', narrationI18n: { en: 'You are near the Colosseum, the largest amphitheater ever built.', ko: '콜로세움 근처에 계십니다. 역사상 가장 큰 원형 경기장입니다.' } },
+          { id: 'roman-forum', cityId: 'rome', name: 'Roman Forum', lat: 41.8925, lng: 12.4853, radius: 60, category: 'Historical', description: 'The center of ancient Roman public life', narration: 'You are near the Roman Forum.', narrationI18n: { en: 'You are near the Roman Forum.', ko: '로마 포럼 근처에 계십니다.' } },
+          { id: 'trevi-fountain', cityId: 'rome', name: 'Trevi Fountain', lat: 41.9009, lng: 12.4833, radius: 50, category: 'Monument', description: 'A stunning 18th-century Baroque fountain', narration: 'You are near the Trevi Fountain.', narrationI18n: { en: 'You are near the Trevi Fountain.', ko: '트레비 분수 근처에 계십니다.' } },
+          { id: 'pantheon', cityId: 'rome', name: 'Pantheon', lat: 41.8986, lng: 12.4768, radius: 50, category: 'Historical', description: 'A former Roman temple, now a church', narration: 'You are near the Pantheon.', narrationI18n: { en: 'You are near the Pantheon.', ko: '판테온 근처에 계십니다.' } },
+          { id: 'spanish-steps', cityId: 'rome', name: 'Spanish Steps', lat: 41.9059, lng: 12.4823, radius: 50, category: 'Monument', description: 'A monumental stairway of 135 steps', narration: 'You are near the Spanish Steps.', narrationI18n: { en: 'You are near the Spanish Steps.', ko: '스페인 계단 근처에 계십니다.' } }
         ],
         paris: [
-          { id: 'eiffel-tower', cityId: 'paris', name: 'Eiffel Tower', lat: 48.8584, lng: 2.2945, radius: 70, category: 'Monument', description: 'The iconic iron lattice tower', narration: 'You are near the Eiffel Tower.' },
-          { id: 'louvre', cityId: 'paris', name: 'Louvre Museum', lat: 48.8606, lng: 2.3376, radius: 60, category: 'Museum', description: 'The world\'s largest art museum', narration: 'You are near the Louvre Museum.' },
-          { id: 'notre-dame', cityId: 'paris', name: 'Notre-Dame Cathedral', lat: 48.8530, lng: 2.3499, radius: 50, category: 'Historical', description: 'A medieval Catholic cathedral', narration: 'You are near Notre-Dame Cathedral.' },
-          { id: 'arc-de-triomphe', cityId: 'paris', name: 'Arc de Triomphe', lat: 48.8738, lng: 2.2950, radius: 50, category: 'Monument', description: 'A monumental arch', narration: 'You are near the Arc de Triomphe.' }
+          { id: 'eiffel-tower', cityId: 'paris', name: 'Eiffel Tower', lat: 48.8584, lng: 2.2945, radius: 70, category: 'Monument', description: 'The iconic iron lattice tower', narration: 'You are near the Eiffel Tower.', narrationI18n: { en: 'You are near the Eiffel Tower.', ko: '에펠탑 근처에 계십니다.' } },
+          { id: 'louvre', cityId: 'paris', name: 'Louvre Museum', lat: 48.8606, lng: 2.3376, radius: 60, category: 'Museum', description: 'The world\'s largest art museum', narration: 'You are near the Louvre Museum.', narrationI18n: { en: 'You are near the Louvre Museum.', ko: '루브르 박물관 근처에 계십니다.' } },
+          { id: 'notre-dame', cityId: 'paris', name: 'Notre-Dame Cathedral', lat: 48.8530, lng: 2.3499, radius: 50, category: 'Historical', description: 'A medieval Catholic cathedral', narration: 'You are near Notre-Dame Cathedral.', narrationI18n: { en: 'You are near Notre-Dame Cathedral.', ko: '노트르담 대성당 근처에 계십니다.' } },
+          { id: 'arc-de-triomphe', cityId: 'paris', name: 'Arc de Triomphe', lat: 48.8738, lng: 2.2950, radius: 50, category: 'Monument', description: 'A monumental arch', narration: 'You are near the Arc de Triomphe.', narrationI18n: { en: 'You are near the Arc de Triomphe.', ko: '개선문 근처에 계십니다.' } }
         ],
         london: [
-          { id: 'big-ben', cityId: 'london', name: 'Big Ben', lat: 51.5007, lng: -0.1246, radius: 50, category: 'Monument', description: 'The iconic clock tower', narration: 'You are near Big Ben.' },
-          { id: 'tower-bridge', cityId: 'london', name: 'Tower Bridge', lat: 51.5055, lng: -0.0754, radius: 60, category: 'Historical', description: 'A combined bascule and suspension bridge', narration: 'You are near Tower Bridge.' },
-          { id: 'buckingham-palace', cityId: 'london', name: 'Buckingham Palace', lat: 51.5014, lng: -0.1419, radius: 70, category: 'Historical', description: 'The official residence of the British monarch', narration: 'You are near Buckingham Palace.' },
-          { id: 'london-eye', cityId: 'london', name: 'London Eye', lat: 51.5033, lng: -0.1196, radius: 50, category: 'Monument', description: 'A giant Ferris wheel', narration: 'You are near the London Eye.' }
+          { id: 'big-ben', cityId: 'london', name: 'Big Ben', lat: 51.5007, lng: -0.1246, radius: 50, category: 'Monument', description: 'The iconic clock tower', narration: 'You are near Big Ben.', narrationI18n: { en: 'You are near Big Ben.', ko: '빅벤 근처에 계십니다.' } },
+          { id: 'tower-bridge', cityId: 'london', name: 'Tower Bridge', lat: 51.5055, lng: -0.0754, radius: 60, category: 'Historical', description: 'A combined bascule and suspension bridge', narration: 'You are near Tower Bridge.', narrationI18n: { en: 'You are near Tower Bridge.', ko: '타워 브리지 근처에 계십니다.' } },
+          { id: 'buckingham-palace', cityId: 'london', name: 'Buckingham Palace', lat: 51.5014, lng: -0.1419, radius: 70, category: 'Historical', description: 'The official residence of the British monarch', narration: 'You are near Buckingham Palace.', narrationI18n: { en: 'You are near Buckingham Palace.', ko: '버킹엄 궁전 근처에 계십니다.' } },
+          { id: 'london-eye', cityId: 'london', name: 'London Eye', lat: 51.5033, lng: -0.1196, radius: 50, category: 'Monument', description: 'A giant Ferris wheel', narration: 'You are near the London Eye.', narrationI18n: { en: 'You are near the London Eye.', ko: '런던 아이 근처에 계십니다.' } }
         ]
       };
       

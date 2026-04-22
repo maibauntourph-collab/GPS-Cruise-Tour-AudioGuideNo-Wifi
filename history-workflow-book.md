@@ -160,3 +160,107 @@
 - 🎯 스킬: `cloudflare-neon-hono-skill`, `history-workflow-logger-skill`
 - 💰 토큰: 입/출력 합계 약 25,000 tokens (누적)
 ---
+
+---
+## [2026-04-23 00:54] Order: 85
+
+**Plan:** 개발자 커뮤니티 타겟의 가이드북 초안 완성 및 마무리
+**Task:** docs/DEV_GUIDEBOOK_COMMUNITY.md 파일 생성 (Part 1 ~ Part 6 전체 포함)
+**Result:** 60일간의 AI 8인 에이전트 협업 내용을 요약한 개발기 완성
+**Next:** 사용자와 리뷰 및 배포 준비
+**Agent:** Antigravity (Gemini 2.5 Pro)
+**Tokens:** ~18k
+---
+
+---
+## [2026-04-23 01:20] Order: 86
+
+**Plan:** BMAD 입각 프롬프트 라이브러리 생성
+**Task:** docs/BMAD_PROMPT_COLLECTION.md 파일 생성 (Business, Marketer, Architect, Developer 역할 및 8인 에이전트 분류별 특화 프롬프트 모음)
+**Result:** 향후 팀 및 커뮤니티가 곧바로 실무에 복사해 사용할 수 있는 프롬프트 컬렉션 완성
+**Next:** 추가 가이드 문서 작성 또는 배포
+**Agent:** Antigravity (Gemini 2.5 Pro)
+**Tokens:** ~18k
+---
+
+---
+## [2026-04-23 01:31] Order: 87
+
+**Plan:** BMAD 프롬프트 컬렉션 업데이트
+**Task:** docs/BMAD_PROMPT_COLLECTION.md 내 각 프롬프트 챕터 하단에 참고 MD 파일 참조 데이터(Reference links) 추가
+**Result:** 사용자가 원본 프롬프트 지시 내용을 파악하기 쉽게 참조 경로 추가 완료
+**Next:** 추가 파일 병합 및 퍼블리싱 준비
+**Agent:** Antigravity (Gemini 2.5 Pro)
+**Tokens:** ~18k
+---
+
+---
+## [2026-04-23 01:37] Order: 88
+
+**Plan:** docs/ 폴더 내 MD 파일들의 카테고리별 아카이브 구조화
+**Task:** docs/가이드북/ 하위에 7개의 특징별 서브디렉토리를 생성하고, 538건의 MD 파일들을 정규식 분류에 따라 7개 폴더로 모두 Move 처리함.
+**Result:** 
+- 01_History_Report
+- 02_Tech
+- 03_Business
+- 04_Agent_Prompt
+- 05_Step_Workflow
+- 06_Command
+- 07_Noise
+로 파일 완전 이관 및 정리 완료.
+**Next:** 사용자에게 정리된 폴더 구조 활용 안내
+**Agent:** Antigravity (Gemini 2.5 Pro)
+**Tokens:** ~18k
+---
+
+---
+## [2026-04-23 01:58] Order: 89
+
+**Plan:** docs/ 내 잔여 172개 MD 파일들의 2차 아카이브 구조화
+**Task:** 1차 정리에서 포함되지 않은 디자인 가이드, 프레임워크 코어, 노이즈 API 문서를 구분하여 추가 4개 폴더로 모두 Move 처리함.
+**Result:** 
+- 08_UI_UX_Design
+- 09_Framework_Core
+- 10_API_Docs_Noise
+- 11_Unclassified
+로 172개 잔여 파일까지 완전 이관 완료.
+**Next:** 사용자 피드백 대기
+**Agent:** Antigravity (Gemini 2.5 Pro)
+**Tokens:** ~20k
+---
+
+---
+## [2026-04-23 02:15] Order: 90
+
+**Plan:** eadme.md 위치 원상 복구
+**Task:** 아카이브된 docs/가이드북/07_Noise/readme.md 파일을 리포지토리 최상위 경로(e:\GPS-Cruise-Tour-AudioGuideNo-Wifi-1\readme.md)로 이동시킴.
+**Result:** 최상위에 README.md 배치 완료.
+**Next:** 사용자 추가 요청 대기
+**Agent:** Antigravity (Gemini 2.5 Pro)
+**Tokens:** ~20k
+---
+
+---
+## [2026-04-23 02:29] Order: 91
+
+**Plan:** 최상위 디렉토리 MD 파일 분류 및 이관
+**Task:** eadme.md 및 시스템 핵심 로깅 파일(history-workflow-book.md, 명령.md)을 제외한 나머지 최상단 MD 파일 3개를 docs/가이드북/ 내부의 카테고리 폴더로 이동 조치함.
+**Result:** 
+- 2026-04-05_GPS_TOURS_ADMIN_PLAN.md -> 02_Tech
+- 백엔드_리범프.md -> 02_Tech
+- 작업히스토리_2026-04-22.md -> 01_History_Report
+**Next:** 사용자에게 예외 처리된 시스템 파일 안내 및 추가 지시 대기
+**Agent:** Antigravity (Gemini 2.5 Pro)
+**Tokens:** ~20k
+---
+
+---
+## [2026-04-23 04:19] Order: 92
+
+**Plan:** 새 README 문서에 기존 핵심 정보 병합
+**Task:** docs/readme.md 하단에 원본 eadme.md에 있던 Github/DB 접근 정보 및 BMAD 작업 통제 지시 문구를 성공적으로 추가하고, 루트의 낡은 readme.md를 정리함.
+**Result:** 통합 README.md 갱신 완료
+**Next:** 사용자 피드백 대기
+**Agent:** Antigravity (Gemini 2.5 Pro)
+**Tokens:** ~20k
+---

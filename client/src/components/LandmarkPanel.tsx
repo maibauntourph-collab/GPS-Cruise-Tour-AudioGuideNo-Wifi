@@ -328,7 +328,7 @@ export default function LandmarkPanel({
              - 플랫폼 레이블에 한글 명칭(예: 클룩, 비아터)을 병기하여 사용자 직관성을 높였습니다.
         */}
         <section className="bg-white p-5 rounded-[24px] border border-orange-100/50 shadow-[0_4px_12px_rgba(233,99,63,0.05)] mt-4">
-          <SectionHeader title="추천 투어 (Recommended Tours)" icon={Ticket} />
+          <SectionHeader title="즐길거리 (Things to Do)" icon={Ticket} />
 
           {/* 예약 플랫폼 버튼 그룹 (Booking.com, 클룩, 마이리얼트립, 트립닷컴, 비아터) */}
           <div className="grid grid-cols-1 gap-2 mt-2">
@@ -359,7 +359,7 @@ export default function LandmarkPanel({
                   <span className="text-[13px] font-bold text-gray-700">{platform.name}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold text-[#E9633F] opacity-0 group-hover:opacity-100 transition-opacity">Book Now</span>
+                  <span className="text-[10px] font-bold text-[#E9633F] opacity-0 group-hover:opacity-100 transition-opacity">View</span>
                   <ExternalLink className="w-3.5 h-3.5 text-gray-300 group-hover:text-[#E9633F] transition-colors" />
                 </div>
               </button>

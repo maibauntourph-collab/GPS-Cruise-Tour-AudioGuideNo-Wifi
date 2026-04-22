@@ -18,6 +18,7 @@ import { useLiveTranslation } from '@/hooks/useLiveTranslation';
 import { User, DbLandmarkGuide } from '@shared/schema';
 import { Users, Headphones, Check, User as UserIcon } from 'lucide-react';
 import { OfflineImg } from './OfflineImg';
+import ThingsToDoSection from './ThingsToDoSection';
 
 interface LandmarkDetailDialogProps {
   landmark: Landmark | null;
@@ -339,8 +340,8 @@ export default function LandmarkDetailDialog({
                 <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '역사/나레이션' : 'History/Narration'}
                 </TabsTrigger>
-                <TabsTrigger value="booking" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
-                  {selectedLanguage === 'ko' ? '티켓/예약' : 'Book/Ticket'}
+                <TabsTrigger value="booking" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E85D36] data-[state=active]:text-white transition-all duration-200">
+                  {selectedLanguage === 'ko' ? '즐길거리' : 'Things to Do'}
                 </TabsTrigger>
                 <TabsTrigger value="details" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
                   {selectedLanguage === 'ko' ? '지도/정보' : 'Map/Info'}
@@ -754,8 +755,25 @@ export default function LandmarkDetailDialog({
                 </div>
               </TabsContent>
 
-              {/* Booking & Ticket Tab */}
+              {/* Things to Do Tab (formerly Booking & Ticket) */}
               <TabsContent value="booking" className="p-0 m-0 space-y-6 pb-32">
+
+                {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  [2026-04-22] Viator API 실시간 투어 카드 — Things to Do
+                  랜드마크 키워드로 관련 투어를 자동 검색하여 카드 캐루셀로 표시
+                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+                <div className="px-4 pt-4">
+                  <ThingsToDoSection
+                    landmark={{
+                      id: landmark.id,
+                      name: getTranslatedContent(landmark, 'en', 'name') || landmark.name,
+                      cityId: landmark.cityId || '',
+                      translations: landmark.translations,
+                    }}
+                    selectedLanguage={selectedLanguage}
+                    isOnline={navigator.onLine}
+                  />
+                </div>
 
                 {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
                   [Designer Kim + Bug Doctor | 2026-04-04]
@@ -957,7 +975,7 @@ export default function LandmarkDetailDialog({
                     <Ticket className="w-8 h-8" />
                   </div>
                   <h4 className="font-bold text-lg text-[#5D574D]">{selectedLanguage === 'ko' ? '티켓 및 액티비티' : 'Tickets & Activities'}</h4>
-                  <p className="text-xs text-[#A8A294] px-4 whitespace-nowrap">{selectedLanguage === 'ko' ? '플랫폼 파트너를 통한 최저가 예약' : 'Best deals via our platform partners'}</p>
+                  <p className="text-xs text-[#A8A294] px-4 whitespace-nowrap">{selectedLanguage === 'ko' ? '이 장소 근처에서 즐길 수 있는 체험' : 'Experiences you can enjoy near this place'}</p>
                 </div>
 
 
@@ -972,12 +990,12 @@ export default function LandmarkDetailDialog({
                       <TrendingUp className="w-4 h-4 opacity-50" />
                     </div>
                     <h3 className="text-lg font-black mb-1">
-                      {selectedLanguage === 'ko' ? '최저가 보장 예약' : 'Lowest Price Guaranteed'}
+                      {selectedLanguage === 'ko' ? '이 장소 추천 체험' : 'Top Experience Here'}
                     </h3>
                     <p className="text-xs opacity-70 mb-4 leading-relaxed">
                       {selectedLanguage === 'ko'
-                        ? '글로벌 플랫폼을 통한 공식 예약 링크입니다. 수수료 없이 안전하게 예약하세요.'
-                        : 'Official link through global platforms. Book safely with no hidden fees.'}
+                        ? '크루즈 승객들이 가장 많이 선택한 체험입니다. 무료 취소 가능!'
+                        : 'Most popular experience among cruise passengers. Free cancellation!'}
                     </p>
                     <Button
                       className="w-full bg-white text-indigo-700 hover:bg-slate-50 font-black h-12 rounded-xl shadow-lg border-none"
@@ -991,7 +1009,7 @@ export default function LandmarkDetailDialog({
                         openExternalUrl(targetUrl, '_blank');
                       }}
                     >
-                      {selectedLanguage === 'ko' ? '지금 바로 예약하기' : 'Book Now'}
+                      {selectedLanguage === 'ko' ? '체험 보기' : 'View Experience'}
                     </Button>
                   </div>
                 )}
@@ -1001,8 +1019,8 @@ export default function LandmarkDetailDialog({
                   <div className="p-4 bg-orange-50/30 rounded-2xl border border-orange-100 text-sm text-[#5D574D] leading-relaxed">
                     <p className="font-medium">
                       {selectedLanguage === 'ko'
-                        ? '기항지에서의 특별한 경험을 놓치지 마세요. 아래 제휴 플랫폼을 통해 현지 티켓 및 액티비티를 손쉽게 예약하실 수 있습니다.'
-                        : 'Don\'t miss out on special experiences. Best deals via our platform partners.'}
+                        ? '기항지에서 꼭 해봐야 할 체험들! 현지인이 추천하는 투어와 액티비티를 확인하세요.'
+                        : 'Must-do experiences at this port! Discover tours and activities recommended by locals.'}
                     </p>
                   </div>
 

@@ -58,7 +58,7 @@ export function useOfflineMode() {
     }
   };
 
-  const downloadCity = useCallback(async (cityId: string): Promise<boolean> => {
+  const downloadCity = useCallback(async (cityId: string, languages?: string[]): Promise<boolean> => {
     setDownloadProgress({ cityId, status: 'downloading', message: 'Downloading...' });
 
     try {
@@ -89,15 +89,22 @@ export function useOfflineMode() {
       // --- Bulk OpenAI Audio Pre-download ---
       setDownloadProgress({ cityId, status: 'downloading', message: 'Downloading audio matches...' });
       const currentLanguage = localStorage.getItem('selected-language') || 'ko';
+      const languagesToDownload = languages && languages.length > 0 ? languages : [currentLanguage];
 
       try {
-        await preDownloadOpenAIAudio(packageData.landmarks, currentLanguage, (progress) => {
-          setDownloadProgress({
-            cityId,
-            status: 'downloading',
-            message: `Downloading audio: ${progress}%`
+        for (let langIdx = 0; langIdx < languagesToDownload.length; langIdx++) {
+          const lang = languagesToDownload[langIdx];
+          await preDownloadOpenAIAudio(packageData.landmarks, lang, (progress) => {
+            const overallProgress = languagesToDownload.length > 1
+              ? Math.round(((langIdx * 100 + progress) / (languagesToDownload.length * 100)) * 100)
+              : progress;
+            setDownloadProgress({
+              cityId,
+              status: 'downloading',
+              message: `Downloading audio (${lang}): ${overallProgress}%`
+            });
           });
-        });
+        }
       } catch (audioError) {
         console.warn('Audio pre-download failed, but city data is saved:', audioError);
       }
@@ -261,7 +268,7 @@ export function useOfflineMode() {
     let completed = 0;
 
     for (const landmark of landmarks) {
-      const text = landmark.detailedDescription || landmark.description || landmark.narration;
+      const text = landmark.narrationI18n?.[language] || landmark.detailedDescription || landmark.description || landmark.narration;
       if (!text) {
         completed++;
         continue;

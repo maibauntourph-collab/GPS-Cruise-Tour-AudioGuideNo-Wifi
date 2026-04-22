@@ -9,7 +9,13 @@ export function getTranslatedContent(
 
   // 1순위: 전용 I18n 컬럼 확인 (narrationI18n, descriptionI18n)
   if (field === 'narration' && landmark.narrationI18n && landmark.narrationI18n[language]) {
-    return landmark.narrationI18n[language];
+    // Quality gate: if i18n entry is too short but base narration is rich, prefer base
+    const i18nValue = landmark.narrationI18n[language];
+    const baseNarration = landmark.narration || '';
+    if (i18nValue.length < 50 && baseNarration.length > 200) {
+      return baseNarration;
+    }
+    return i18nValue;
   }
   if (field === 'description' && landmark.descriptionI18n && landmark.descriptionI18n[language]) {
     return landmark.descriptionI18n[language];
@@ -20,6 +26,16 @@ export function getTranslatedContent(
     const translation = landmark.translations[language];
     if (translation && translation[field]) {
       return translation[field] as string;
+    }
+  }
+
+  // 2.5순위: Korean narration fallback - base narration이 한글 콘텐츠일 때 영어 슬로건 대신 사용
+  if (field === 'narration' && language === 'ko') {
+    const baseNarration = landmark.narration || '';
+    const hasKorean = /[가-힣]/.test(baseNarration);
+    const englishFallback = landmark.narrationI18n?.['en'] || '';
+    if (hasKorean && baseNarration.length > englishFallback.length) {
+      return baseNarration;
     }
   }
 

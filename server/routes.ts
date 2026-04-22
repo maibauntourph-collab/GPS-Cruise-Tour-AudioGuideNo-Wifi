@@ -18,6 +18,7 @@ import { env } from "./env";
 import { log } from "./app";
 import { runSalesAutomation } from "./services/automation/salesGraph";
 import Stripe from "stripe";
+import { searchToursByCity, searchToursByKeyword, toOfflineFormat, CITY_TO_VIATOR_DEST } from "./lib/viatorService";
 
 // Initialize Stripe lazily
 let stripeInstance: Stripe | null = null;
@@ -38,6 +39,53 @@ function getStripe() {
 
 export function registerRoutes(app: Hono<any>) {
 
+
+  // ============================================================
+  // [Viator Partner API] 크루즈 기항지 투어 자동 검색
+  // ============================================================
+
+  // 도시별 인기 투어 목록
+  app.get("/api/viator/tours/:cityId", async (c) => {
+    const cityId = c.req.param("cityId");
+    const count = Number(c.req.query("count") || "10");
+    const sort = (c.req.query("sort") as any) || "TOP_SELLERS";
+
+    try {
+      const result = await searchToursByCity(cityId, { count, sort });
+      // 오프라인용 경량 포맷 옵션
+      if (c.req.query("format") === "offline") {
+        return c.json({ tours: toOfflineFormat(result.products), totalCount: result.totalCount });
+      }
+      return c.json(result);
+    } catch (error: any) {
+      console.error(`[Viator] Search failed for ${cityId}:`, error.message);
+      return c.json({ error: "Failed to fetch tours", products: [], totalCount: 0 }, 500);
+    }
+  });
+
+  // 랜드마크 키워드로 관련 투어 검색
+  app.get("/api/viator/search", async (c) => {
+    const keyword = c.req.query("q") || "";
+    const cityId = c.req.query("city") || "";
+    const count = Number(c.req.query("count") || "5");
+
+    if (!keyword || !cityId) {
+      return c.json({ error: "q and city parameters required" }, 400);
+    }
+
+    try {
+      const tours = await searchToursByKeyword(keyword, cityId, count);
+      return c.json({ tours, keyword, cityId });
+    } catch (error: any) {
+      console.error(`[Viator] Keyword search failed:`, error.message);
+      return c.json({ error: "Search failed", tours: [] }, 500);
+    }
+  });
+
+  // 지원 도시 목록 (Viator destination ID 매핑)
+  app.get("/api/viator/cities", (c) => {
+    return c.json(CITY_TO_VIATOR_DEST);
+  });
 
   // [연구소장 노트: 시스템 헬스체크]
   app.get("/api/health", async (c) => {
@@ -1046,6 +1094,16 @@ export function registerRoutes(app: Hono<any>) {
     try {
       const id = c.req.param("id");
       const body = await c.req.json();
+
+      // Auto-sync narrationI18n when narration is updated
+      if (body.narration != null) {
+        const [existing] = await db.select({ narrationI18n: landmarks.narrationI18n }).from(landmarks).where(eq(landmarks.id, id));
+        const currentI18n = (existing?.narrationI18n as Record<string, string>) || {};
+        const isKorean = /[가-힣]/.test(body.narration);
+        const langKey = isKorean ? "ko" : "en";
+        body.narrationI18n = { ...currentI18n, [langKey]: body.narration };
+      }
+
       const [updated] = await db.update(landmarks).set({
         ...body,
         updatedAt: new Date()

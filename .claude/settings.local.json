@@ -27,7 +27,12 @@
       "Bash(curl -s -I \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/api/landmarks\")",
       "Bash(curl -s \"https://gps-audio-guide-no-wifi.maibauntourph.workers.dev/sw.js\")",
       "WebFetch(domain:cruiseportiq.com)",
-      "WebFetch(domain:docs.viator.com)"
+      "WebFetch(domain:docs.viator.com)",
+      "Bash(xargs -I{} basename {})",
+      "Read(//dev/**)",
+      "Bash(ls e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/server/data/landmarks*.ts)",
+      "Bash(curl -s -X GET https://viatorapi.viator.com/service/taxonomy/destinations -H 'exp-api-key: de25d027-3e03-47cb-9c89-196e3e698637' -H 'Accept: application/json')",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(f{d.get\\(''''destinationId''''\\)}: {d.get\\(''''destinationName''''\\)} \\({d.get\\(''''destinationType''''\\)}\\)\\) for d in data.get\\(''''data'''',[]\\)[0:30]]\")"
     ]
   }
 }

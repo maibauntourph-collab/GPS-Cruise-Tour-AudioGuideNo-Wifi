@@ -1,13 +1,114 @@
-# 🧪 AI 기술 연구 및 지식 아카이브 (AI Research Archive)
+# GPS Cruise Tour AudioGuide (No WiFi)
 
-학생 여러분, 반갑습니다! 👨‍🏫 
-우리 투어 가이드 서비스는 최첨단 AI 기술의 집합체입니다. 이 공간은 Claude, ChatGPT, Gemini, NotebookLM 등 다양한 AI 모델들로부터 얻은 통찰력과 고도화된 프롬프트, 그리고 연구 데이터를 체계적으로 기록하기 위해 마련되었습니다.
+Offline-capable PWA that delivers GPS-triggered audio narration at cruise port destinations worldwide -- no internet required after initial download.
 
-## 📁 연구 폴더 구조 (Structure)
-- [Claude (클로드)](./claude.md): 코딩 아키텍처 및 논리적 추론 데이터
-- [ChatGPT (챗지피티)](./chatgpt.md): 콘텐츠 생성 및 마케팅 전략 데이터
-- [Gemini (제미나이)](./gemini.md): 구글 생태계 연동 및 실시간 정보 처리 데이터
-- [NotebookLM (노트북LM)](./notebooklm.md): 방대한 소스 코드 및 문서 분석 통합 데이터
+## Features
+
+- GPS-based proximity detection triggers automatic audio narration at landmarks
+- 34 cities and 550+ landmarks across Europe, Asia, and the Americas
+- 24 languages supported via OpenAI TTS with Web Speech API fallback
+- Full offline support through IndexedDB caching and Service Worker
+- Multi-language narration system (narrationI18n) with Korean-first content and auto-translation
+- Interactive maps powered by Leaflet with routing support
+- Stripe-integrated payment for premium content
+- QR code sharing for tours
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18, Vite 5, Tailwind CSS, Radix UI, Zustand |
+| Backend | Hono (runs on Cloudflare Workers and Node) |
+| Database | NeonDB (serverless PostgreSQL), Drizzle ORM |
+| Maps | Leaflet + React-Leaflet, Leaflet Routing Machine |
+| TTS | OpenAI TTS API, Web Speech API (fallback) |
+| AI | OpenAI, Anthropic, Google Generative AI, LangChain / LangGraph |
+| PWA | vite-plugin-pwa, Service Worker, IndexedDB |
+| Deployment | Cloudflare Workers (via Wrangler) |
+| Payments | Stripe |
+| Testing | Playwright |
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start the development server (backend + frontend)
+npm run dev
+
+# Start only the frontend dev server
+npm run dev:client
+
+# Type-check the project
+npm run check
+```
+
+Create a `.env` file in the project root with the required environment variables (database URL, OpenAI API key, Stripe keys, etc.) before running the dev server.
+
+## Project Structure
+
+```
+client/          # React frontend source (pages, components, hooks)
+server/          # Hono backend (API routes, services, scripts)
+shared/          # Shared types and schemas (Drizzle models, Zod schemas)
+api/             # Cloudflare Workers entry point
+public/          # Static assets and PWA manifest
+migrations/      # Drizzle database migrations
+scripts/         # Build and utility scripts
+docs/            # Documentation and guides
+```
+
+## Key Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start full-stack dev server |
+| `npm run build` | Build frontend (Vite) and backend (esbuild) |
+| `npm run deploy` | Build and deploy to Cloudflare Workers |
+| `npm run deploy:prod` | Deploy to production environment |
+| `npm run deploy:staging` | Deploy to staging environment |
+| `npm run db:push` | Push Drizzle schema changes to the database |
+| `npm run translate:all` | Run batch translation for all landmarks |
+
+## Deployment
+
+The project deploys to **Cloudflare Workers** using Wrangler.
+
+```bash
+# Dry-run build for Workers
+npm run build:worker
+
+# Deploy (default environment)
+npm run deploy
+
+# Deploy to production
+npm run deploy:prod
+```
+
+Configure `wrangler.toml` (or `wrangler.jsonc`) with your Cloudflare account ID, database bindings, and environment variables before deploying.
+
+## License
+
+MIT
 
 ---
-**"지속적인 연구가 최고의 서비스를 만듭니다."** - Story Teller Lee 🎙️💎
+
+## 🔒 관리자 정보 (Admin Info)
+
+### github
+# maibauntourph@gmail.com
+https://github.com/maibauntourph-collab/GPS-Cruise-Tour-AudioGuideNo-Wifi
+
+### neon db 
+```typescript
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon('postgresql://neondb_owner:npg_RxOvMV2BQ4Lo@ep-summer-smoke-a1ly2y42-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require');
+```
+
+## 🛠️ 작업지시 방법
+동시에 작업을 나눠서 병렬로 작업을 진행하고 BMAD의 기획과 LANGGRAPH의 통제하에 작업 진행 승인
+
+### 어려운문제
+요청 @advisor
