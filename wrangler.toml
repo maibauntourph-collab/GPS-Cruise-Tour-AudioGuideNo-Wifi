@@ -2,6 +2,7 @@ name = "gps-audio-guide-no-wifi"
 compatibility_date = "2024-02-19"
 compatibility_flags = ["nodejs_compat"]
 main = "server/worker.ts"
+minify = true
 
 [vars]
 NODE_ENV = "production"
