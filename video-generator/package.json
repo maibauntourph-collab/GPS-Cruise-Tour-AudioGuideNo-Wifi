@@ -1,0 +1,27 @@
+{
+  "name": "nowifi-video-generator",
+  "version": "1.0.0",
+  "description": "Auto video generation pipeline for NoWiFi GPS Tours",
+  "type": "module",
+  "scripts": {
+    "generate": "tsx src/index.ts",
+    "generate:full": "tsx src/generate-full.ts",
+    "generate:rome": "tsx src/index.ts --city rome --lang ko",
+    "generate:barcelona": "tsx src/index.ts --city barcelona --lang en",
+    "test:quick": "tsx src/test-quick.ts",
+    "test:render": "tsx src/renderers/test-render.ts"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.53",
+    "fluent-ffmpeg": "^2.1.3",
+    "openai": "^4.52.0",
+    "qrcode": "^1.5.3",
+    "sharp": "^0.33.2"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/qrcode": "^1.5.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}

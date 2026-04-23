@@ -1,7 +1,14 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowLeft, Check, Heart } from 'lucide-react';
+import { ArrowLeft, Check, Heart, ExternalLink, Crown, Sparkles } from 'lucide-react';
+
+// Stripe Payment Links (test mode)
+const STRIPE_LINKS = {
+  dayPass: 'https://buy.stripe.com/test_3cI6oIa9L3i46RB83F7bW00',
+  monthly: 'https://buy.stripe.com/test_6oU6oI3Ln9Gsfo72Jl7bW01',
+  annual: 'https://buy.stripe.com/test_14A8wQ2Hj3i4fo72Jl7bW02',
+};
 
 interface SubscriptionPlanProps {
     onBack: () => void;
@@ -25,9 +32,12 @@ export function SubscriptionPlan({ onBack, selectedLanguage }: SubscriptionPlanP
 
             <div className="p-4 space-y-4 max-w-lg mx-auto">
                 {/* $1.99 Day Pass Card */}
-                <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4 flex gap-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer active:scale-[0.98]">
+                <div
+                    className="bg-orange-50 border border-orange-200 rounded-2xl p-4 flex gap-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer active:scale-[0.98]"
+                    onClick={() => window.open(STRIPE_LINKS.dayPass, '_blank')}
+                >
                     <Heart className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
-                    <div>
+                    <div className="flex-1">
                         <div className="text-sm font-bold text-slate-800">
                             {isKo ? '오늘 하루만 필요하다면?' : 'Need it just for today?'}
                         </div>
@@ -38,6 +48,7 @@ export function SubscriptionPlan({ onBack, selectedLanguage }: SubscriptionPlanP
                             {isKo ? '구독 없이 1개 도시만 잠금 해제' : 'Unlock 1 city without subscription'}
                         </div>
                     </div>
+                    <ExternalLink className="w-4 h-4 text-orange-400 shrink-0 mt-1" />
                 </div>
 
                 {/* FREE Plan Card */}
@@ -117,6 +128,27 @@ export function SubscriptionPlan({ onBack, selectedLanguage }: SubscriptionPlanP
                             <span className="text-sm font-bold text-slate-800">{isKo ? '오디오 오프라인 저장' : 'Audio Offline Save'}</span>
                         </div>
                     </div>
+
+                    {/* 결제 버튼 */}
+                    <div className="mt-5 space-y-2">
+                        <button
+                            className="w-full h-12 rounded-xl bg-[#E85D36] hover:bg-[#d04e2c] text-white font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-lg shadow-orange-200"
+                            onClick={() => window.open(STRIPE_LINKS.monthly, '_blank')}
+                        >
+                            <Crown className="w-4 h-4" />
+                            {isKo ? '월간 구독 시작 — $4.99/월' : 'Start Monthly — $4.99/mo'}
+                        </button>
+                        <button
+                            className="w-full h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
+                            onClick={() => window.open(STRIPE_LINKS.annual, '_blank')}
+                        >
+                            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                            {isKo ? '연간 구독 $39.99/년 (33% 할인!)' : 'Annual $39.99/yr (Save 33%!)'}
+                        </button>
+                    </div>
+                    <p className="text-[10px] text-slate-400 text-center mt-2">
+                        {isKo ? '🔒 Stripe 안전 결제 · 언제든 취소 가능' : '🔒 Secure payment via Stripe · Cancel anytime'}
+                    </p>
                 </div>
             </div>
         </div>

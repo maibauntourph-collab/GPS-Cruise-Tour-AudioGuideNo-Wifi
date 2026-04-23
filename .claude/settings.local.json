@@ -34,7 +34,21 @@
       "Bash(curl -s -X GET https://viatorapi.viator.com/service/taxonomy/destinations -H 'exp-api-key: de25d027-3e03-47cb-9c89-196e3e698637' -H 'Accept: application/json')",
       "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(f{d.get\\(''''destinationId''''\\)}: {d.get\\(''''destinationName''''\\)} \\({d.get\\(''''destinationType''''\\)}\\)\\) for d in data.get\\(''''data'''',[]\\)[0:30]]\")",
       "Bash(git add *)",
-      "Bash(git commit -m 'fix: resolve Cloudflare Workers compatibility issue with process.env in viatorService *)"
+      "Bash(git commit -m 'fix: resolve Cloudflare Workers compatibility issue with process.env in viatorService *)",
+      "Bash(git commit *)",
+      "Bash(wrangler tail *)",
+      "Bash(wrangler deployments *)",
+      "Bash(node -e \":*)",
+      "Bash(cat)",
+      "Bash(chmod +x /tmp/health-check.sh)",
+      "Bash(bash /tmp/health-check.sh)",
+      "Bash(pkill -f \"npm run dev\")",
+      "Bash(ffmpeg -i \"e:/GPS-Cruise-Tour-AudioGuideNo-Wifi-1/video-generator/output/rome_ko_shorts.mp4\")",
+      "Bash(cmd //c \"npx tsx -e \"\"console.log\\(''test OK''\\)\"\"\")",
+      "Bash(NODE_OPTIONS=\"--max-old-space-size=512\" npx tsx src/test-quick.ts)",
+      "Bash(curl -s \"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=AIzaSyA5iFlV4YusgTvS1LUifuORXXNACkMgztk\" -H \"Content-Type: application/json\" -d '{\"\"\"\"contents\"\"\"\":[{\"\"\"\"parts\"\"\"\":[{\"\"\"\"text\"\"\"\":\"\"\"\"Say hi in Japanese\"\"\"\"}]}]}')",
+      "Bash(curl -s \"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=AIzaSyCSMMNYmg5OO_7Vp-4Aze-_OrBcGTgDhpo\" -H \"Content-Type: application/json\" -d '{\"\"\"\"contents\"\"\"\":[{\"\"\"\"parts\"\"\"\":[{\"\"\"\"text\"\"\"\":\"\"\"\"Say hi in Japanese\"\"\"\"}]}]}')",
+      "Bash(curl -s https://api.openai.com/v1/chat/completions -H \"Authorization: Bearer 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\" -H \"Content-Type: application/json\" -d '{\"\"\"\"model\"\"\"\":\"\"\"\"gpt-4o-mini\"\"\"\",\"\"\"\"messages\"\"\"\":[{\"\"\"\"role\"\"\"\":\"\"\"\"user\"\"\"\",\"\"\"\"content\"\"\"\":\"\"\"\"hi\"\"\"\"}],\"\"\"\"max_tokens\"\"\"\":5}')"
     ]
   }
 }

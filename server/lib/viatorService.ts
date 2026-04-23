@@ -36,8 +36,8 @@ export const CITY_TO_VIATOR_DEST: Record<string, string> = {
   'venice': '522',             // 1,921 tours
   'lisbon': '538',             // 4,123 tours
   'dubrovnik': '4146',         // 337 tours
-  'santorini': '5765',         // sandbox 미지원 — prod에서 확인 필요
-  'mykonos': '5459',           // sandbox 미지원
+  'santorini': '684',          // sandbox에서 확인됨 (1,287 tours)
+  'mykonos': '5459',           // sandbox 미지원 — prod 확인 필요
   'paris': '508',              // 3,174 tours
   'amsterdam': '525',          // 2,068 tours
   'stockholm': '907',          // 545 tours

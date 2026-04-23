@@ -19,6 +19,11 @@ import { log } from "./app";
 import { runSalesAutomation } from "./services/automation/salesGraph";
 import Stripe from "stripe";
 import { searchToursByCity, searchToursByKeyword, toOfflineFormat, CITY_TO_VIATOR_DEST } from "./lib/viatorService";
+import { searchRestaurants, CITY_TO_YELP_LOCATION } from './lib/yelpService';
+import { searchTravelProducts, TRAVEL_KEYWORDS } from './lib/amazonPAService';
+import { getWeatherByCity } from './lib/weatherService';
+import { searchCruiseVideos } from './lib/youtubeService';
+import { getEssentialsByCity } from './lib/essentialsService';
 
 // Initialize Stripe lazily
 let stripeInstance: Stripe | null = null;
@@ -85,6 +90,91 @@ export function registerRoutes(app: Hono<any>) {
   // 지원 도시 목록 (Viator destination ID 매핑)
   app.get("/api/viator/cities", (c) => {
     return c.json(CITY_TO_VIATOR_DEST);
+  });
+
+  // ============================================================
+  // [Weather] Open-Meteo 날씨 (무료, API 키 불필요)
+  // ============================================================
+  app.get('/api/weather/:city', async (c) => {
+    const city = c.req.param('city');
+    try {
+      const data = await getWeatherByCity(city);
+      return c.json(data);
+    } catch (error: any) {
+      console.error('[Weather] Failed:', error.message);
+      return c.json({ error: 'Weather unavailable' }, 500);
+    }
+  });
+
+  // ============================================================
+  // [YouTube] 크루즈 기항지 관련 영상 검색
+  // ============================================================
+  app.get('/api/youtube/search', async (c) => {
+    const city  = c.req.query('city') || '';
+    const query = c.req.query('q') || '';
+    if (!city) return c.json({ error: 'city parameter required' }, 400);
+    try {
+      const videos = await searchCruiseVideos(city, query || undefined);
+      const isFallback = !c.env?.YOUTUBE_API_KEY && !(globalThis as any).__env__?.YOUTUBE_API_KEY;
+      return c.json({ videos, isFallback });
+    } catch (error: any) {
+      console.error('[YouTube] Search failed:', error.message);
+      return c.json({ videos: [], isFallback: true }, 500);
+    }
+  });
+
+  // ============================================================
+  // [Essentials] OpenStreetMap Overpass — ATM/약국/병원 등
+  // ============================================================
+  app.get('/api/essentials/:city', async (c) => {
+    const city = c.req.param('city');
+    try {
+      const essentials = await getEssentialsByCity(city);
+      return c.json(essentials);
+    } catch (error: any) {
+      console.error('[Essentials] Failed:', error.message);
+      return c.json([], 500);
+    }
+  });
+
+  // ============================================================
+  // [Yelp Fusion API] 크루즈 기항지 근처 레스토랑 검색
+  // ============================================================
+  app.get('/api/yelp/search', async (c) => {
+    const keyword = c.req.query('q') || '';
+    const cityId  = c.req.query('city') || '';
+    const count   = Number(c.req.query('count') || '5');
+
+    if (!keyword || !cityId) {
+      return c.json({ error: 'q and city parameters required' }, 400);
+    }
+
+    try {
+      const result = await searchRestaurants(keyword, cityId, count);
+      return c.json(result);
+    } catch (error: any) {
+      console.error('[Yelp] Search failed:', error.message);
+      return c.json({ error: 'Yelp search failed', restaurants: [], totalCount: 0 }, 500);
+    }
+  });
+
+  app.get('/api/yelp/cities', (c) => c.json(CITY_TO_YELP_LOCATION));
+
+  // ============================================================
+  // [Amazon PA API 5.0] 여행 상품 검색
+  // ============================================================
+  app.get('/api/amazon/search', async (c) => {
+    const rawKeyword = c.req.query('q') || '';
+    const count = Number(c.req.query('count') || '6');
+    const keyword = rawKeyword || TRAVEL_KEYWORDS[Math.floor(Math.random() * TRAVEL_KEYWORDS.length)];
+
+    try {
+      const products = await searchTravelProducts(keyword, count);
+      return c.json({ products, keyword });
+    } catch (error: any) {
+      console.error('[Amazon PA] Search failed:', error.message);
+      return c.json({ error: 'Amazon search failed', products: [] }, 500);
+    }
   });
 
   // [연구소장 노트: 시스템 헬스체크]

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoWiFi GPS Audio Tour</title>
+  <meta name="description" content="크루즈 기항지 GPS 오디오 가이드 — WiFi 없이도 완벽한 여행" />
+
+  <!-- OG Tags for social sharing -->
+  <meta property="og:title" content="NoWiFi GPS Audio Tour" />
+  <meta property="og:description" content="WiFi 없이 즐기는 크루즈 기항지 오디오 가이드" />
+  <meta property="og:image" content="https://nowifigps.tours/og-image.jpg" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1A1A2E;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 24px;
+      border-radius: 16px;
+      font-size: 17px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.15s, opacity 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:active { transform: scale(0.97); opacity: 0.85; }
+
+    .btn-android {
+      background: #01875F;
+      color: #fff;
+    }
+
+    .btn-ios {
+      background: #0071E3;
+      color: #fff;
+    }
+
+    .btn-web {
+      background: #E85D36;
+      color: #fff;
+    }
+
+    .btn-disabled {
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.45);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .badge {
+      font-size: 11px;
+      background: rgba(255,255,255,0.2);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .divider {
+      width: 100%;
+      max-width: 360px;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 8px 0;
+    }
+
+    .features {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 360px;
+      width: 100%;
+    }
+
+    .feature {
+      text-align: center;
+    }
+
+    .feature .icon { font-size: 28px; margin-bottom: 6px; }
+    .feature .label { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+    footer {
+      margin-top: 48px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">🎧</div>
+  <h1>NoWiFi GPS Audio Tour</h1>
+  <p class="tagline">크루즈 기항지 오디오 가이드<br>WiFi 없이도 완벽한 여행</p>
+
+  <div class="btn-group" id="btn-group">
+    <!-- JS로 플랫폼 감지 후 동적 렌더링 -->
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="icon">📡</div>
+      <div class="label">WiFi 불필요</div>
+    </div>
+    <div class="feature">
+      <div class="icon">🌍</div>
+      <div class="label">40+ 도시</div>
+    </div>
+    <div class="feature">
+      <div class="icon">🆓</div>
+      <div class="label">무료 시작</div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 NoWiFi GPS Tours · nowifigps.tours
+  </footer>
+
+  <script>
+    // ── 설정: 앱스토어 URL ────────────────────────────
+    const CONFIG = {
+      // Task B 완료 후 Play Store URL로 교체
+      android: 'https://play.google.com/store/apps/details?id=com.nowifigps.tours',
+      // Task B-iOS 완료 후 App Store URL로 교체
+      ios: null,
+      // 현재 배포된 PWA
+      web: 'https://gps-audio-guide-no-wifi.maibauntourph.workers.dev',
+    };
+    // ────────────────────────────────────────────────
+
+    function detectPlatform() {
+      const ua = navigator.userAgent || '';
+      if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+      if (/Android/i.test(ua)) return 'android';
+      return 'other';
+    }
+
+    function render() {
+      const platform = detectPlatform();
+      const group = document.getElementById('btn-group');
+
+      // 안드로이드: Play Store 버튼 우선
+      if (platform === 'android' && CONFIG.android) {
+        group.innerHTML = `
+          <a class="btn btn-android" href="${CONFIG.android}">
+            <span>▶</span> Google Play에서 다운로드
+          </a>
+          <div class="divider"></div>
+          <a class="btn btn-web" href="${CONFIG.web}">
+            🌐 웹에서 바로 시작
+          </a>`;
+        // 자동 리다이렉트 (1초 후)
+        setTimeout(() => { window.location.href = CONFIG.android; }, 1200);
+        return;
+      }
+
+      // iOS: App Store 버튼 우선
+      if (platform === 'ios') {
+        if (CONFIG.ios) {
+          group.innerHTML = `
+            <a class="btn btn-ios" href="${CONFIG.ios}">
+              🍎 App Store에서 다운로드
+            </a>
+            <div class="divider"></div>
+            <a class="btn btn-web" href="${CONFIG.web}">
+              🌐 웹에서 바로 시작
+            </a>`;
+          setTimeout(() => { window.location.href = CONFIG.ios; }, 1200);
+        } else {
+          group.innerHTML = `
+            <div class="btn btn-ios btn-disabled">
+              🍎 App Store (출시 예정) <span class="badge">SOON</span>
+            </div>
+            <a class="btn btn-web" href="${CONFIG.web}">
+              🌐 웹에서 바로 시작
+            </a>`;
+        }
+        return;
+      }
+
+      // 데스크탑 / 기타
+      group.innerHTML = `
+        <a class="btn btn-web" href="${CONFIG.web}">
+          🌐 웹에서 바로 시작
+        </a>
+        ${CONFIG.android ? `<a class="btn btn-android" href="${CONFIG.android}">▶ Google Play</a>` : ''}
+        ${CONFIG.ios ? `<a class="btn btn-ios" href="${CONFIG.ios}">🍎 App Store</a>` : ''}`;
+    }
+
+    render();
+  </script>
+</body>
+</html>

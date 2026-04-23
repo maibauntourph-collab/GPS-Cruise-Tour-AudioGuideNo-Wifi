@@ -85,7 +85,7 @@ export type Language = z.infer<typeof languageSchema>;
 // Translation content schema (used for each language)
 const translationContentSchema = z.object({
   name: z.string(),
-  narration: z.string(),
+  narration: z.string().nullable().optional(),
   description: z.string().nullable().optional(),
   detailedDescription: z.string().nullable().optional(), // Long 5-minute reading content
   historicalInfo: z.string().nullable().optional(), // Extended historical information

@@ -9,7 +9,7 @@ import { Navigation, MapPinned, MapPin, Play, Pause, RotateCcw, Ticket, External
 import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { audioService, AudioService } from '@/lib/audioService';
-import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, getBookingUrl, getAgodaUrl, injectAffiliateParam, AffiliateSettings } from '@/lib/affiliateConfig';
+import { getGYGUrl, getViatorUrl, getKlookUrl, getTripUrl, getGoogleSearchUrl, getWikiUrl, getMyRealTripUrl, getGoogleMapsUrl, getCatchTableUrl, getTheForkUrl, getBookingUrl, getAgodaUrl, injectAffiliateParam, AffiliateSettings, getRentalcarsUrl, getBookingCarsUrl, getKayakCarsUrl, getAmazonUrl, getIHerbUrl, getDFSUrl } from '@/lib/affiliateConfig';
 import { useToast } from '@/hooks/use-toast';
 
 import { getShopifyProducts, ShopifyProduct } from '@/lib/shopifyConfig';
@@ -19,6 +19,12 @@ import { User, DbLandmarkGuide } from '@shared/schema';
 import { Users, Headphones, Check, User as UserIcon } from 'lucide-react';
 import { OfflineImg } from './OfflineImg';
 import ThingsToDoSection from './ThingsToDoSection';
+import FoodSection from './FoodSection';
+import AmazonSection from './AmazonSection';
+import WeatherWidget from './WeatherWidget';
+import VideoTab from './VideoTab';
+import EssentialsSection from './EssentialsSection';
+import NotesTab from './NotesTab';
 
 interface LandmarkDetailDialogProps {
   landmark: Landmark | null;
@@ -335,20 +341,30 @@ export default function LandmarkDetailDialog({
 
           {/* Navigation Tabs - Always visible */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col overflow-hidden min-h-0">
-            <div className="px-4 pt-4 bg-[#FCF9F6] border-b shrink-0">
-              <TabsList className="grid w-full grid-cols-4 bg-[#EFEBE6] rounded-xl p-1 h-11">
-                <TabsTrigger value="history" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
-                  {selectedLanguage === 'ko' ? '역사/나레이션' : 'History/Narration'}
-                </TabsTrigger>
-                <TabsTrigger value="booking" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E85D36] data-[state=active]:text-white transition-all duration-200">
-                  {selectedLanguage === 'ko' ? '즐길거리' : 'Things to Do'}
-                </TabsTrigger>
-                <TabsTrigger value="details" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
-                  {selectedLanguage === 'ko' ? '지도/정보' : 'Map/Info'}
-                </TabsTrigger>
-                <TabsTrigger value="shopping" className="rounded-lg text-xs font-bold data-[state=active]:bg-[#E67E22] data-[state=active]:text-white transition-all duration-200">
-                  {selectedLanguage === 'ko' ? '기념품' : 'Shopping'}
-                </TabsTrigger>
+            {/* 스크롤 가능한 6탭 바 */}
+            <div className="bg-[#FCF9F6] border-b shrink-0">
+              <TabsList className="flex gap-1.5 overflow-x-auto px-3 pt-3 pb-2 bg-transparent h-auto scrollbar-hide w-full justify-start">
+                {[
+                  { value: 'history',   icon: '🎵', ko: '나레이션', en: 'Narration',   color: 'data-[state=active]:bg-[#E67E22]' },
+                  { value: 'booking',   icon: '🎫', ko: '즐길거리', en: 'Activities',  color: 'data-[state=active]:bg-[#E85D36]' },
+                  { value: 'weather',   icon: '🌤️', ko: '날씨',     en: 'Weather',     color: 'data-[state=active]:bg-sky-500' },
+                  { value: 'videos',    icon: '▶️', ko: '영상',     en: 'Videos',      color: 'data-[state=active]:bg-red-600' },
+                  { value: 'essentials',icon: '🏦', ko: '필수시설', en: 'Essentials',  color: 'data-[state=active]:bg-emerald-600' },
+                  { value: 'notes',     icon: '📝', ko: '메모',     en: 'Notes',       color: 'data-[state=active]:bg-violet-600' },
+                  { value: 'food',      icon: '🍽️', ko: '음식/음료', en: 'Food & Drink', color: 'data-[state=active]:bg-amber-500' },
+                  { value: 'car',       icon: '🚗', ko: '차량',     en: 'Car Rental',  color: 'data-[state=active]:bg-blue-600' },
+                  { value: 'shopping',  icon: '🛍️', ko: '쇼핑',    en: 'Shopping',    color: 'data-[state=active]:bg-purple-600' },
+                  { value: 'details',   icon: '🗺️', ko: '지도/정보', en: 'Map/Info',   color: 'data-[state=active]:bg-[#E67E22]' },
+                ].map(tab => (
+                  <TabsTrigger
+                    key={tab.value}
+                    value={tab.value}
+                    className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-bold bg-[#EFEBE6] text-gray-600 data-[state=active]:text-white transition-all duration-200 ${tab.color} border-0`}
+                  >
+                    <span className="text-sm leading-none">{tab.icon}</span>
+                    <span>{selectedLanguage === 'ko' ? tab.ko : tab.en}</span>
+                  </TabsTrigger>
+                ))}
               </TabsList>
             </div>
 
@@ -783,128 +799,8 @@ export default function LandmarkDetailDialog({
                   - window.open()을 클릭 핸들러 안에서 동기적으로 호출 → 팝업 차단 없음
                   학생들에게: 외부 링크는 항상 target='_blank' + rel='noopener'로!
                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-                {(() => {
-                  // 검색어: 영어 이름 우선 (글로벌 플랫폼 검색 최적화)
-                  const searchName = getTranslatedContent(landmark, 'en', 'name') ||
-                    getTranslatedContent(landmark, selectedLanguage, 'name');
-
-                  // 각 사이트별 직접 링크 정의
-                  const quickLinks = [
-                    {
-                      id: 'booking',
-                      name: 'Booking.com',
-                      emoji: '🏨',
-                      color: 'bg-[#003580] text-white',
-                      hoverColor: 'hover:bg-[#00266b]',
-                      url: getBookingUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
-                    },
-                    {
-                      id: 'agoda',
-                      name: 'Agoda',
-                      emoji: '🏨',
-                      color: 'bg-rose-600 text-white',
-                      hoverColor: 'hover:bg-rose-700',
-                      url: getAgodaUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
-                    },
-                    {
-                      id: 'klook',
-                      name: 'Klook',
-                      emoji: '📱',
-                      color: 'bg-[#E9633F] text-white',
-                      hoverColor: 'hover:bg-[#d05535]',
-                      url: getKlookUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
-                    },
-                    {
-                      id: 'getyourguide',
-                      name: 'GetYourGuide',
-                      emoji: '✅',
-                      color: 'bg-red-500 text-white',
-                      hoverColor: 'hover:bg-red-600',
-                      url: getGYGUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
-                    },
-                    {
-                      id: 'viator',
-                      name: 'Viator',
-                      emoji: '🌍',
-                      color: 'bg-blue-500 text-white',
-                      hoverColor: 'hover:bg-blue-600',
-                      url: getViatorUrl(searchName, selectedLanguage, dynamicAffiliateSettings),
-                    },
-                    {
-                      id: 'trip',
-                      name: 'Trip.com',
-                      emoji: '💰',
-                      color: 'bg-blue-700 text-white',
-                      hoverColor: 'hover:bg-blue-800',
-                      url: getTripUrl(searchName, dynamicAffiliateSettings),
-                    },
-                    ...(selectedLanguage === 'ko' ? [{
-                      id: 'myrealtrip',
-                      name: 'MyRealTrip',
-                      emoji: '🇰🇷',
-                      color: 'bg-[#2B96ED] text-white',
-                      hoverColor: 'hover:bg-[#1a7fd4]',
-                      url: getMyRealTripUrl(
-                        getTranslatedContent(landmark, 'ko', 'name') || searchName,
-                        dynamicAffiliateSettings
-                      ),
-                    }] : []),
-                  ];
-
-                  return (
-                    <div className="px-4 pt-5 space-y-2">
-                      {/* 섹션 헤더 */}
-                      <div className="flex items-center gap-2">
-                        <ExternalLink className="w-3.5 h-3.5 text-[#E67E22]" />
-                        <span className="text-[11px] font-black text-[#E67E22] uppercase tracking-wider">
-                          {selectedLanguage === 'ko' ? '예약사이트 직접 연결 (새창)' : 'Book Direct — Opens New Tab'}
-                        </span>
-                        <span className="ml-auto text-[9px] text-[#A8A294] font-bold bg-green-50 border border-green-200 text-green-600 px-1.5 py-0.5 rounded-full">
-                          APP STAYS OPEN
-                        </span>
-                      </div>
-
-                      {/* 가로 스크롤 버튼 바 */}
-                      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x">
-                        {quickLinks.map((link) => (
-                          <button
-                            key={link.id}
-                            className={`
-                              flex-shrink-0 snap-start flex flex-col items-center gap-1
-                              px-4 py-3 rounded-2xl font-bold text-[11px]
-                              shadow-sm active:scale-95 transition-all duration-150
-                              ${link.color} ${link.hoverColor}
-                            `}
-                            onClick={(e) => {
-                              // [Bug Doctor] 동기적 window.open → 팝업 차단 방지
-                              e.preventDefault();
-                              e.stopPropagation();
-                              const win = window.open(link.url, '_blank', 'noopener');
-                              // 앱은 그대로 유지 (navigate 없음)
-                              if (!win) {
-                                alert(selectedLanguage === 'ko'
-                                  ? `팝업 차단됨. 브라우저에서 ${link.name} 허용 후 재시도하세요.`
-                                  : `Popup blocked for ${link.name}. Please allow popups.`
-                                );
-                              }
-                            }}
-                          >
-                            <span className="text-lg leading-none">{link.emoji}</span>
-                            <span className="whitespace-nowrap">{link.name}</span>
-                          </button>
-                        ))}
-                      </div>
-
-                      {/* 안내 메시지 */}
-                      <p className="text-[9px] text-[#A8A294] text-center">
-                        {selectedLanguage === 'ko'
-                          ? '각 버튼을 누르면 새 창에서 해당 사이트가 열리고, 이 앱은 그대로 유지됩니다.'
-                          : 'Each button opens the site in a new tab. This app stays open in the background.'}
-                      </p>
-                      <div className="border-b border-[#EFEBE6] mt-2" />
-                    </div>
-                  );
-                })()}
+                {/* [2026-04-23] quickLinks 섹션 제거 — API 없는 플랫폼(GYG/Trip/MRT) 제외 결정
+                    Viator는 ThingsToDoSection과 Live Viator Tours로 이미 노출됨 */}
 
                 {/* Live Viator Tours — rendered from /api/viator/products */}
                 {(isViatorLoading || viatorProducts.length > 0) && (
@@ -1226,116 +1122,302 @@ export default function LandmarkDetailDialog({
                   <p className="text-xs text-[#A8A294] px-4">{selectedLanguage === 'ko' ? '장인의 정신이 깃든 엄선된 기념품을 만나보세요' : 'Discover curated souvenirs from local artisans'}</p>
                 </div>
 
-                <div className="px-4 grid grid-cols-1 gap-4">
-                  {(() => {
-                    if (shopifyProducts.length === 0) {
-                      // ✅ [Bug Doctor | 2026-02-27] Shopify API가 없을 때 여행 관련 샘플 상품 표시
-                      // 학생들에게: 실제 Shopify 연동 전 여행 상품 카테고리로 UI/UX를 시연합니다.
-                      const sampleProducts = [
-                        {
-                          id: 'travel-1',
-                          title: selectedLanguage === 'ko' ? '🎧 크루즈 오디오 가이드 이어폰 세트' : '🎧 Cruise Audio Guide Earphone Set',
-                          description: selectedLanguage === 'ko' ? '노이즈 캔슬링 내장 고품질 여행용 이어폰 - 오디오 투어 전용' : 'Premium noise-cancelling earphones for audio tour experiences',
-                          price: '34.99',
-                          currencyCode: 'USD',
-                          image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop',
-                          checkoutUrl: 'https://shopify.com',
-                        },
-                        {
-                          id: 'travel-2',
-                          title: selectedLanguage === 'ko' ? '🗺️ 유럽 기항지 여행 가이드북 (한·영)' : '🗺️ European Port City Travel Guidebook (EN/KO)',
-                          description: selectedLanguage === 'ko' ? '크루즈 기항지 30개 도시 수록 · 오프라인 지도 포함' : '30 cruise port cities covered · Offline maps included',
-                          price: '19.90',
-                          currencyCode: 'USD',
-                          image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=200&h=200&fit=crop',
-                          checkoutUrl: 'https://shopify.com',
-                        },
-                        {
-                          id: 'travel-3',
-                          title: selectedLanguage === 'ko' ? '🧳 프리미엄 여행용 짐표 세트 (10개)' : '🧳 Premium Luggage Tag Set (Pack of 10)',
-                          description: selectedLanguage === 'ko' ? '크루즈 여행 필수품 · 방수 · RFID 차단 기능' : 'Cruise travel essential · Waterproof · RFID blocking',
-                          price: '14.50',
-                          currencyCode: 'USD',
-                          image: 'https://images.unsplash.com/photo-1553531889-e6cf4d692b1b?w=200&h=200&fit=crop',
-                          checkoutUrl: 'https://shopify.com',
-                        },
-                        {
-                          id: 'travel-4',
-                          title: selectedLanguage === 'ko' ? '📡 글로벌 여행용 eSIM (15일, 유럽 30국)' : '📡 Global Travel eSIM (15 Days, 30 EU Countries)',
-                          description: selectedLanguage === 'ko' ? '크루즈 기항지 전 지역 데이터 지원 · 즉시 개통' : 'Works at all cruise ports in Europe · Instant activation',
-                          price: '29.00',
-                          currencyCode: 'USD',
-                          image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=200&h=200&fit=crop',
-                          checkoutUrl: 'https://shopify.com',
-                        },
-                        {
-                          id: 'travel-5',
-                          title: selectedLanguage === 'ko' ? '☂️ 크루즈 여행자 보험 (7일)' : '☂️ Cruise Traveler Insurance (7 Days)',
-                          description: selectedLanguage === 'ko' ? '기항지 액티비티 및 응급처치 포함 · 실시간 지원' : 'Covers port excursions & emergencies · 24/7 support',
-                          price: '18.00',
-                          currencyCode: 'USD',
-                          image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=200&h=200&fit=crop',
-                          checkoutUrl: 'https://shopify.com',
-                        },
-                      ];
-                      return sampleProducts.map((product) => (
-                        <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
-                          <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
-                            <OfflineImg src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
-                          </div>
-                          <div className="flex-1 flex flex-col justify-between min-w-0">
-                            <div>
-                              <div className="flex items-center gap-1 mb-1">
-                                <span className="text-[9px] bg-blue-100 text-blue-600 font-black px-2 py-0.5 rounded-full">✈️ TRAVEL</span>
+                <div className="px-4">
+                  <AmazonSection
+                    selectedLanguage={selectedLanguage}
+                    isOnline={navigator.onLine}
+                    count={6}
+                    fallback={
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-1 gap-4">
+                          {(() => {
+                            if (shopifyProducts.length === 0) {
+                              const sampleProducts = [
+                                { id: 'travel-1', title: selectedLanguage === 'ko' ? '🎧 크루즈 오디오 가이드 이어폰 세트' : '🎧 Cruise Audio Guide Earphone Set', description: selectedLanguage === 'ko' ? '노이즈 캔슬링 내장 고품질 여행용 이어폰 - 오디오 투어 전용' : 'Premium noise-cancelling earphones for audio tour experiences', price: '34.99', currencyCode: 'USD', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop', checkoutUrl: 'https://shopify.com' },
+                                { id: 'travel-2', title: selectedLanguage === 'ko' ? '🗺️ 유럽 기항지 여행 가이드북 (한·영)' : '🗺️ European Port City Travel Guidebook (EN/KO)', description: selectedLanguage === 'ko' ? '크루즈 기항지 30개 도시 수록 · 오프라인 지도 포함' : '30 cruise port cities covered · Offline maps included', price: '19.90', currencyCode: 'USD', image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=200&h=200&fit=crop', checkoutUrl: 'https://shopify.com' },
+                                { id: 'travel-3', title: selectedLanguage === 'ko' ? '🧳 프리미엄 여행용 짐표 세트 (10개)' : '🧳 Premium Luggage Tag Set (Pack of 10)', description: selectedLanguage === 'ko' ? '크루즈 여행 필수품 · 방수 · RFID 차단 기능' : 'Cruise travel essential · Waterproof · RFID blocking', price: '14.50', currencyCode: 'USD', image: 'https://images.unsplash.com/photo-1553531889-e6cf4d692b1b?w=200&h=200&fit=crop', checkoutUrl: 'https://shopify.com' },
+                                { id: 'travel-4', title: selectedLanguage === 'ko' ? '📡 글로벌 여행용 eSIM (15일, 유럽 30국)' : '📡 Global Travel eSIM (15 Days, 30 EU Countries)', description: selectedLanguage === 'ko' ? '크루즈 기항지 전 지역 데이터 지원 · 즉시 개통' : 'Works at all cruise ports in Europe · Instant activation', price: '29.00', currencyCode: 'USD', image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=200&h=200&fit=crop', checkoutUrl: 'https://shopify.com' },
+                                { id: 'travel-5', title: selectedLanguage === 'ko' ? '☂️ 크루즈 여행자 보험 (7일)' : '☂️ Cruise Traveler Insurance (7 Days)', description: selectedLanguage === 'ko' ? '기항지 액티비티 및 응급처치 포함 · 실시간 지원' : 'Covers port excursions & emergencies · 24/7 support', price: '18.00', currencyCode: 'USD', image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=200&h=200&fit=crop', checkoutUrl: 'https://shopify.com' },
+                              ];
+                              return sampleProducts.map((product) => (
+                                <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
+                                  <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
+                                    <OfflineImg src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
+                                  </div>
+                                  <div className="flex-1 flex flex-col justify-between min-w-0">
+                                    <div>
+                                      <div className="flex items-center gap-1 mb-1"><span className="text-[9px] bg-blue-100 text-blue-600 font-black px-2 py-0.5 rounded-full">✈️ TRAVEL</span></div>
+                                      <h5 className="font-bold text-sm text-[#5D574D] line-clamp-2">{product.title}</h5>
+                                      <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
+                                    </div>
+                                    <div className="flex items-center justify-between mt-2">
+                                      <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
+                                      <span className="text-[9px] text-gray-400 italic">{selectedLanguage === 'ko' ? '샘플 여행상품' : 'Sample'}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              ));
+                            }
+                            return shopifyProducts.map((product) => (
+                              <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
+                                <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
+                                  <OfflineImg src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
+                                </div>
+                                <div className="flex-1 flex flex-col justify-between min-w-0">
+                                  <div>
+                                    <h5 className="font-bold text-sm text-[#5D574D] line-clamp-1">{product.title}</h5>
+                                    <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
+                                  </div>
+                                  <div className="flex items-center justify-between mt-2">
+                                    <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
+                                    <Button size="sm" className="h-8 px-4 bg-[#5D574D] hover:bg-[#433E37] text-white rounded-xl text-[10px] font-bold gap-1.5 transition-all" onClick={() => openExternalUrl(product.checkoutUrl, '_blank')}>
+                                      <CreditCard className="w-3 h-3" />
+                                      {selectedLanguage === 'ko' ? '지금 구매' : 'Buy Now'}
+                                    </Button>
+                                  </div>
+                                </div>
                               </div>
-                              <h5 className="font-bold text-sm text-[#5D574D] line-clamp-2">{product.title}</h5>
-                              <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
-                            </div>
-                            <div className="flex items-center justify-between mt-2">
-                              <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
-                              <span className="text-[9px] text-gray-400 italic">{selectedLanguage === 'ko' ? '샘플 여행상품' : 'Sample'}</span>
-                            </div>
-                          </div>
+                            ));
+                          })()}
                         </div>
-                      ));
-                    }
-
-                    return shopifyProducts.map((product) => (
-                      <div key={product.id} className="bg-white rounded-3xl p-4 border border-[#EFEBE6] shadow-sm flex gap-4 group transition-all hover:shadow-md active:scale-[0.98]">
-                        <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FCF9F6] shrink-0 border border-white shadow-inner">
-                          <OfflineImg src={product.image} alt={product.title} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" />
-                        </div>
-                        <div className="flex-1 flex flex-col justify-between min-w-0">
-                          <div>
-                            <h5 className="font-bold text-sm text-[#5D574D] line-clamp-1">{product.title}</h5>
-                            <p className="text-[10px] text-[#A8A294] line-clamp-2 mt-1 leading-relaxed">{product.description}</p>
-                          </div>
-                          <div className="flex items-center justify-between mt-2">
-                            <span className="font-extrabold text-[#E67E22] text-sm">{product.currencyCode} {product.price}</span>
-                            <Button
-                              size="sm"
-                              className="h-8 px-4 bg-[#5D574D] hover:bg-[#433E37] text-white rounded-xl text-[10px] font-bold gap-1.5 transition-all"
-                              onClick={() => openExternalUrl(product.checkoutUrl, '_blank')}
-                            >
-                              <CreditCard className="w-3 h-3" />
-                              {selectedLanguage === 'ko' ? '지금 구매' : 'Buy Now'}
-                            </Button>
+                        <div className="px-2 py-2">
+                          <div className="p-4 rounded-2xl border border-gray-100 bg-[#FCF9F6] flex gap-3">
+                            <Globe className="w-5 h-5 text-[#A8A294] shrink-0 mt-0.5" />
+                            <p className="text-[9px] text-[#A8A294] leading-normal uppercase font-black">Powered by Shopify Storefront</p>
                           </div>
                         </div>
                       </div>
-                    ));
-                  })()}
+                    }
+                  />
                 </div>
 
-                <div className="px-6 py-4">
-                  <div className="p-4 rounded-2xl border border-gray-100 bg-[#FCF9F6] flex gap-3">
-                    <Globe className="w-5 h-5 text-[#A8A294] shrink-0 mt-0.5" />
-                    <p className="text-[9px] text-[#A8A294] leading-normal uppercase font-black">
-                      Powered by Shopify Storefront
-                    </p>
-                  </div>
+                {/* 쇼핑 제휴 플랫폼 (API 없는 affiliate 링크) */}
+                {(() => {
+                  const searchName = getTranslatedContent(landmark, 'en', 'name') || landmark.name;
+                  const shopPlatforms = [
+                    {
+                      icon: '📦', name: 'Amazon',
+                      desc: selectedLanguage === 'ko' ? '글로벌 최대 쇼핑몰' : 'World\'s largest store',
+                      color: 'bg-amber-50 border-amber-200', textColor: 'text-amber-700',
+                      url: getAmazonUrl(searchName),
+                    },
+                    {
+                      icon: '💊', name: 'iHerb',
+                      desc: selectedLanguage === 'ko' ? '건강·뷰티·영양제' : 'Health & Beauty',
+                      color: 'bg-green-50 border-green-200', textColor: 'text-green-700',
+                      url: getIHerbUrl(searchName),
+                    },
+                    {
+                      icon: '🆓', name: 'DFS 면세점',
+                      desc: selectedLanguage === 'ko' ? '공항·항구 면세 쇼핑' : 'Duty-Free Shopping',
+                      color: 'bg-blue-50 border-blue-200', textColor: 'text-blue-700',
+                      url: getDFSUrl(searchName),
+                    },
+                  ];
+                  return (
+                    <div className="px-4 pb-4 space-y-2">
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-wider">
+                        {selectedLanguage === 'ko' ? '제휴 쇼핑 플랫폼' : 'Affiliate Platforms'}
+                      </p>
+                      {shopPlatforms.map(p => (
+                        <button key={p.name}
+                          className={`w-full flex items-center gap-3 p-3 rounded-2xl border ${p.color} active:scale-[0.98] transition-all text-left`}
+                          onClick={() => window.open(p.url, '_blank', 'noopener')}
+                        >
+                          <span className="text-2xl">{p.icon}</span>
+                          <div className="flex-1">
+                            <p className={`text-[13px] font-bold ${p.textColor}`}>{p.name}</p>
+                            <p className="text-[11px] text-gray-500">{p.desc}</p>
+                          </div>
+                          <ExternalLink className={`w-4 h-4 ${p.textColor} opacity-60`} />
+                        </button>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </TabsContent>
+
+              {/* ── FOOD & DRINK 탭 ─────────────────────────────────── */}
+              {/* Weather Tab */}
+              <TabsContent value="weather" className="p-0 m-0 pb-32">
+                <div className="p-4">
+                  <WeatherWidget
+                    city={(landmark?.city || '').toLowerCase()}
+                    language={selectedLanguage}
+                  />
                 </div>
               </TabsContent>
+
+              {/* YouTube Videos Tab */}
+              <TabsContent value="videos" className="p-0 m-0 pb-32">
+                <div className="p-4">
+                  <VideoTab
+                    city={(landmark?.city || '').toLowerCase()}
+                    language={selectedLanguage}
+                  />
+                </div>
+              </TabsContent>
+
+              {/* Essentials Tab */}
+              <TabsContent value="essentials" className="p-0 m-0 pb-32">
+                <div className="p-4">
+                  <EssentialsSection
+                    city={(landmark?.city || '').toLowerCase()}
+                    language={selectedLanguage}
+                  />
+                </div>
+              </TabsContent>
+
+              {/* Notes & Checklist Tab */}
+              <TabsContent value="notes" className="p-0 m-0 pb-32">
+                <div className="p-4">
+                  {landmark && (
+                    <NotesTab
+                      landmarkId={landmark.id}
+                      landmarkName={landmark.name || ''}
+                      city={(landmark.city || '').toLowerCase()}
+                      language={selectedLanguage}
+                    />
+                  )}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="food" className="p-0 m-0 pb-32">
+                {(() => {
+                  const searchName = getTranslatedContent(landmark, 'en', 'name') || landmark.name;
+                  const foodPlatforms = [
+                    { icon: '🍴', name: 'TheFork', desc: selectedLanguage === 'ko' ? '유럽 파인다이닝 예약' : 'European Fine Dining', gradient: 'from-[#00A26B] to-[#008557]', url: getTheForkUrl(searchName, selectedLanguage) },
+                    { icon: '📱', name: 'CatchTable', desc: selectedLanguage === 'ko' ? '한국 인기 맛집 예약' : 'Korea Restaurant Booking', gradient: 'from-[#FF5500] to-[#E04400]', url: getCatchTableUrl(searchName) },
+                    { icon: '⭐', name: 'Yelp', desc: selectedLanguage === 'ko' ? '현지 맛집 & 리뷰' : 'Local Food & Reviews', gradient: 'from-[#D32323] to-[#B01C1C]', url: `https://www.yelp.com/search?find_desc=food&find_loc=${encodeURIComponent(searchName)}` },
+                    { icon: '🌍', name: 'TripAdvisor', desc: selectedLanguage === 'ko' ? '여행자 추천 레스토랑' : 'Traveler-Rated Restaurants', gradient: 'from-[#00AA6C] to-[#008A57]', url: `https://www.tripadvisor.com/Search?q=${encodeURIComponent(searchName + ' restaurant')}` },
+                    { icon: '🔵', name: 'OpenTable', desc: selectedLanguage === 'ko' ? '레스토랑 즉시 예약' : 'Restaurant Reservations', gradient: 'from-[#DA3743] to-[#C02030]', url: `https://www.opentable.com/s?term=${encodeURIComponent(searchName)}` },
+                  ];
+                  const foodFallback = (
+                    <div className="px-4 pt-5 space-y-3">
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="text-2xl">🍽️</span>
+                        <div>
+                          <h4 className="text-sm font-bold text-gray-900">Food &amp; Drink</h4>
+                          <p className="text-[11px] text-gray-400">{selectedLanguage === 'ko' ? `${searchName} 근처 레스토랑 · 카페 · 바` : `Restaurants & Bars near ${searchName}`}</p>
+                        </div>
+                      </div>
+                      {foodPlatforms.map(p => (
+                        <button key={p.name}
+                          className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-gradient-to-r ${p.gradient} text-white shadow-sm active:scale-[0.97] transition-all text-left`}
+                          onClick={() => window.open(p.url, '_blank', 'noopener')}
+                        >
+                          <span className="text-2xl">{p.icon}</span>
+                          <div className="flex-1">
+                            <p className="text-[13px] font-bold leading-none">{p.name}</p>
+                            <p className="text-[11px] opacity-80 mt-0.5">{p.desc}</p>
+                          </div>
+                          <ExternalLink className="w-4 h-4 opacity-70" />
+                        </button>
+                      ))}
+                      <p className="text-[9px] text-gray-400 text-center pt-2">{selectedLanguage === 'ko' ? '버튼을 누르면 새 창에서 해당 사이트가 열립니다.' : 'Opens in a new tab. This app stays open.'}</p>
+                    </div>
+                  );
+                  return (
+                    <div className="px-4 pt-4">
+                      <FoodSection
+                        landmark={{ id: String(landmark.id), name: landmark.name, cityId: landmark.cityId ?? '' }}
+                        selectedLanguage={selectedLanguage}
+                        isOnline={navigator.onLine}
+                        fallback={foodFallback}
+                      />
+                    </div>
+                  );
+                })()}
+              </TabsContent>
+
+              {/* ── 차량/렌터카 탭 ─────────────────────────────────── */}
+              <TabsContent value="car" className="p-0 m-0 pb-32">
+                {(() => {
+                  const cityName = getTranslatedContent(landmark, 'en', 'name') || landmark.cityId || '';
+
+                  const carPlatforms = [
+                    {
+                      icon: '🚗', name: 'Rentalcars.com',
+                      desc: selectedLanguage === 'ko' ? '글로벌 렌터카 최저가 비교' : 'Global Car Rental Comparison',
+                      gradient: 'from-[#E85D36] to-[#cf4f2d]',
+                      url: getRentalcarsUrl(cityName),
+                      badge: selectedLanguage === 'ko' ? '최저가 보장' : 'Best Price',
+                    },
+                    {
+                      icon: '🏨', name: 'Booking.com 렌터카',
+                      desc: selectedLanguage === 'ko' ? '호텔 예약과 함께 렌터카 할인' : 'Bundle with Hotel & Save',
+                      gradient: 'from-[#003580] to-[#00266b]',
+                      url: getBookingCarsUrl(cityName),
+                      badge: null,
+                    },
+                    {
+                      icon: '✈️', name: 'KAYAK Cars',
+                      desc: selectedLanguage === 'ko' ? '항공·렌터카 통합 검색' : 'Flights + Cars Search',
+                      gradient: 'from-[#FF690F] to-[#e0580c]',
+                      url: getKayakCarsUrl(cityName),
+                      badge: null,
+                    },
+                  ];
+
+                  return (
+                    <div className="px-4 pt-5 space-y-3">
+                      {/* 헤더 */}
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="text-2xl">🚗</span>
+                        <div>
+                          <h4 className="text-sm font-bold text-gray-900">
+                            {selectedLanguage === 'ko' ? '차량 렌탈' : 'Car Rental'}
+                          </h4>
+                          <p className="text-[11px] text-gray-400">
+                            {selectedLanguage === 'ko'
+                              ? `${cityName} 기항지 렌터카 비교`
+                              : `Compare car rentals in ${cityName}`}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 안내 박스 */}
+                      <div className="flex items-start gap-2 p-3 bg-blue-50 rounded-2xl border border-blue-100">
+                        <span className="text-lg">💡</span>
+                        <p className="text-[11px] text-blue-700 leading-relaxed">
+                          {selectedLanguage === 'ko'
+                            ? '크루즈 기항지에서 렌터카로 자유롭게 이동하세요. 항구에서 픽업 가능한 차량을 비교해보세요.'
+                            : 'Explore the cruise port freely with a rental car. Compare vehicles available at the pier.'}
+                        </p>
+                      </div>
+
+                      {/* 플랫폼 카드 */}
+                      {carPlatforms.map(p => (
+                        <button key={p.name}
+                          className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-gradient-to-r ${p.gradient} text-white shadow-sm active:scale-[0.97] transition-all text-left`}
+                          onClick={() => window.open(p.url, '_blank', 'noopener')}
+                        >
+                          <span className="text-2xl">{p.icon}</span>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-1.5">
+                              <p className="text-[13px] font-bold leading-none">{p.name}</p>
+                              {p.badge && (
+                                <span className="text-[9px] font-bold bg-white/20 px-1.5 py-0.5 rounded-full">
+                                  {p.badge}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] opacity-80 mt-0.5">{p.desc}</p>
+                          </div>
+                          <ExternalLink className="w-4 h-4 opacity-70" />
+                        </button>
+                      ))}
+
+                      <p className="text-[9px] text-gray-400 text-center pt-2">
+                        {selectedLanguage === 'ko'
+                          ? '버튼을 누르면 새 창에서 해당 사이트가 열립니다.'
+                          : 'Opens in a new tab. This app stays open.'}
+                      </p>
+                    </div>
+                  );
+                })()}
+              </TabsContent>
+
             </div>
           </Tabs>
 

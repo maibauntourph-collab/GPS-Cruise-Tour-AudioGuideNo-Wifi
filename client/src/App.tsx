@@ -8,6 +8,16 @@ import { useServiceWorker } from "@/hooks/useServiceWorker";
 import { Loader2, ArrowLeft, Minimize2 } from "lucide-react";
 import NotFound from "@/pages/not-found";
 import { LanguageProvider } from "@/context/LanguageContext";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 
 // Lazy load heavy components for code splitting
 const Home = lazy(() => import("@/pages/Home"));
@@ -27,6 +37,7 @@ const AIKeyManager = lazy(() => import("@/pages/admin/AIKeyManager"));
 const WorkflowView = lazy(() => import("@/pages/admin/WorkflowView"));
 const Likes = lazy(() => import("@/pages/Likes"));
 const Follows = lazy(() => import("@/pages/Follows"));
+const MyCruise = lazy(() => import("@/pages/MyCruise"));
 
 // Loading fallback component
 function PageLoader() {
@@ -63,6 +74,7 @@ function Router() {
         <Route path="/design-preview" component={DesignPreview} />
         <Route path="/likes" component={Likes} />
         <Route path="/follows" component={Follows} />
+        <Route path="/my-cruise" component={MyCruise} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
@@ -75,6 +87,38 @@ function App() {
 
   const [showReturnToApp, setShowReturnToApp] = useState(false);
   const [showOpenInBrowserTip, setShowOpenInBrowserTip] = useState(false);
+  const [showExitDialog, setShowExitDialog] = useState(false);
+  const [permitExit, setPermitExit] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!permitExit) {
+        e.preventDefault();
+        e.returnValue = '';
+        setShowExitDialog(true);
+        return '';
+      }
+    };
+
+    const handlePopstate = () => {
+      if (!permitExit) {
+        setShowExitDialog(true);
+        history.pushState(null, '', window.location.href);
+        return false;
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopstate);
+    history.pushState(null, '', window.location.href);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopstate);
+    };
+  }, [permitExit]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -137,6 +181,18 @@ function App() {
     window.focus();
   };
 
+  const handleConfirmExit = () => {
+    setPermitExit(true);
+    setShowExitDialog(false);
+    setTimeout(() => {
+      window.history.back();
+    }, 100);
+  };
+
+  const handleCancelExit = () => {
+    setShowExitDialog(false);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -172,6 +228,24 @@ function App() {
             )}
           </div>
           <Toaster />
+          <AlertDialog open={showExitDialog} onOpenChange={setShowExitDialog}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>앱을 종료하시겠습니까?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  지금 나가면 진행 중인 작업이 저장되지 않을 수 있습니다.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={handleCancelExit}>
+                  취소
+                </AlertDialogCancel>
+                <AlertDialogAction onClick={handleConfirmExit}>
+                  나가기
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>

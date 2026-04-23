@@ -182,6 +182,47 @@ export const getAirbnbUrl = (locationName: string) => {
     return `https://www.airbnb.com/s/${encodeURIComponent(locationName)}/homes`;
 };
 
+// ── 차량 렌탈 ─────────────────────────────────────────────────
+
+/** Rentalcars.com — 글로벌 최대 렌터카 비교 플랫폼 */
+export const getRentalcarsUrl = (city: string) => {
+    return `https://www.rentalcars.com/SearchResults.do?pickup=${encodeURIComponent(city)}`;
+};
+
+/** Booking.com 렌터카 — Booking.com 제휴 ID 활용 */
+export const getBookingCarsUrl = (city: string) => {
+    const url = new URL('https://www.booking.com/cars/');
+    url.searchParams.set('aid', '862954987108816');
+    url.searchParams.set('label', 'cars-search');
+    url.searchParams.set('city', city);
+    return url.toString();
+};
+
+/** KAYAK 렌터카 검색 */
+export const getKayakCarsUrl = (city: string) => {
+    return `https://www.kayak.com/cars/${encodeURIComponent(city)}`;
+};
+
+// ── 쇼핑 ──────────────────────────────────────────────────────
+
+/** Amazon 쇼핑 검색 (어소시에이트 태그 삽입 가능) */
+export const getAmazonUrl = (keyword: string, affiliateTag = '') => {
+    const url = new URL('https://www.amazon.com/s');
+    url.searchParams.set('k', keyword);
+    if (affiliateTag) url.searchParams.set('tag', affiliateTag);
+    return url.toString();
+};
+
+/** iHerb — 건강·뷰티 제품 (강력한 제휴 프로그램) */
+export const getIHerbUrl = (keyword: string) => {
+    return `https://www.iherb.com/search?query=${encodeURIComponent(keyword)}`;
+};
+
+/** DFS 면세점 검색 */
+export const getDFSUrl = (keyword: string) => {
+    return `https://www.dfs.com/b2c/en/search#text=${encodeURIComponent(keyword)}`;
+};
+
 /**
  * 기존 reservationUrl에 플랫폼 감지 후 제휴 파라미터를 자동 삽입합니다.
  * Viator / Klook / GetYourGuide / Trip.com / MyRealTrip 지원.

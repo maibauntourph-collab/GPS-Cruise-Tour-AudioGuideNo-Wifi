@@ -5443,7 +5443,7 @@ var CITIES = [
   {
     "id": "seoul",
     "name": "\uC11C\uC6B8\uD2B9\uBCC4\uC2DC",
-    "country": "\uB300\uD55C\uBBFC\uAD6D",
+    "country": "South Korea",
     "lat": 37.5665,
     "lng": 126.978,
     "zoom": 11,
@@ -5456,7 +5456,7 @@ var CITIES = [
   {
     "id": "tokyo",
     "name": "\uB3C4\uCFC4",
-    "country": "\uC77C\uBCF8",
+    "country": "Japan",
     "lat": 35.6762,
     "lng": 139.6503,
     "zoom": 11,
@@ -5487,7 +5487,7 @@ var CITIES = [
   {
     "id": "busan",
     "name": "\uBD80\uC0B0\uAD11\uC5ED\uC2DC",
-    "country": "\uB300\uD55C\uBBFC\uAD6D",
+    "country": "South Korea",
     "lat": 35.1796,
     "lng": 129.0756,
     "zoom": 11,
@@ -5566,7 +5566,7 @@ var CITIES = [
   {
     "id": "jeju",
     "name": "\uC81C\uC8FC\uD2B9\uBCC4\uC790\uCE58\uB3C4",
-    "country": "\uB300\uD55C\uBBFC\uAD6D",
+    "country": "South Korea",
     "lat": 33.4996,
     "lng": 126.5312,
     "zoom": 10,
@@ -5597,7 +5597,7 @@ var CITIES = [
   {
     "id": "new-york",
     "name": "\uB274\uC695",
-    "country": "\uBBF8\uAD6D",
+    "country": "USA",
     "lat": 40.7128,
     "lng": -74.006,
     "zoom": 11,
@@ -5628,7 +5628,7 @@ var CITIES = [
   {
     "id": "bangkok",
     "name": "\uBC29\uCF55",
-    "country": "\uD0DC\uAD6D",
+    "country": "Thailand",
     "lat": 13.7563,
     "lng": 100.5018,
     "zoom": 11,
@@ -35715,10 +35715,10 @@ var CITY_TO_VIATOR_DEST = {
   // 4,123 tours
   "dubrovnik": "4146",
   // 337 tours
-  "santorini": "5765",
-  // sandbox 미지원 — prod에서 확인 필요
+  "santorini": "684",
+  // sandbox에서 확인됨 (1,287 tours)
   "mykonos": "5459",
-  // sandbox 미지원
+  // sandbox 미지원 — prod 확인 필요
   "paris": "508",
   // 3,174 tours
   "amsterdam": "525",

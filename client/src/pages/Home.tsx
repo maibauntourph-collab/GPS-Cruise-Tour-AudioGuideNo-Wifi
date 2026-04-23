@@ -115,6 +115,7 @@ import UpdatePrompt from '@/components/UpdatePrompt';
 import AchievementToast from '@/components/AchievementToast';
 import CreatorDashboard from '@/components/CreatorDashboard';
 import BottomSheet from '@/components/BottomSheet';
+import CountdownWidget from '@/components/CountdownWidget';
 
 import { useLanguage } from '@/context/LanguageContext';
 import { t, getTranslatedContent } from '@/lib/translations';
@@ -1805,6 +1806,12 @@ export default function Home() {
         </Dialog>
 
         <LoginDialog isOpen={showLoginDialog} onClose={() => setShowLoginDialog(false)} language={selectedLanguage} />
+
+        {/* [MyCruise] D-day 카운트다운 위젯 — 우상단 고정 */}
+        <div className="fixed top-3 right-3 z-[1200]">
+          <CountdownWidget />
+        </div>
+
         <OfflineIndicator />
         {/* [Dodari | 🎖️] PWA 온보딩 처리 전까지만 InstallPrompt를 보여줍니다. */}
         {
